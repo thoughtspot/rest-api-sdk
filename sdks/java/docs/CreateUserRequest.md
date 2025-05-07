@@ -87,6 +87,13 @@
 | IT_IT | &quot;it-IT&quot; |
 | RU_RU | &quot;ru-RU&quot; |
 | EN_IN | &quot;en-IN&quot; |
+| DE_CH | &quot;de-CH&quot; |
+| EN_NZ | &quot;en-NZ&quot; |
+| ES_MX | &quot;es-MX&quot; |
+| EN_AU | &quot;en-AU&quot; |
+| ZH_HANT | &quot;zh-Hant&quot; |
+| KO_KR | &quot;ko-KR&quot; |
+| EN_DE | &quot;en-DE&quot; |
 
 
 

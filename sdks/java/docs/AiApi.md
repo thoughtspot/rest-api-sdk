@@ -5,6 +5,7 @@ All URIs are relative to *https://localhost:443*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createConversation**](AiApi.md#createConversation) | **POST** /api/rest/2.0/ai/conversation/create |  |
+| [**queryGetDecomposedQuery**](AiApi.md#queryGetDecomposedQuery) | **POST** /api/rest/2.0/ai/analytical-questions |  |
 | [**sendMessage**](AiApi.md#sendMessage) | **POST** /api/rest/2.0/ai/conversation/{conversation_identifier}/converse |  |
 | [**singleAnswer**](AiApi.md#singleAnswer) | **POST** /api/rest/2.0/ai/answer/create |  |
 
@@ -61,6 +62,76 @@ public class Example {
 ### Return type
 
 [**Conversation**](Conversation.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **500** | Operation failed |  -  |
+
+<a id="queryGetDecomposedQuery"></a>
+# **queryGetDecomposedQuery**
+> EurekaDecomposeQueryResponse queryGetDecomposedQuery(queryGetDecomposedQueryRequest)
+
+
+
+Version: 10.7.0.cl or later 
+
+### Example
+```java
+// Import classes:
+import org.thoughtspot.client.ApiClient;
+import org.thoughtspot.client.ApiException;
+import org.thoughtspot.client.Configuration;
+import org.thoughtspot.client.auth.*;
+import org.thoughtspot.client.models.*;
+import org.thoughtspot.client.api.AiApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://localhost:443");
+    
+    // Configure HTTP bearer authorization: bearerAuth
+    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
+    bearerAuth.setBearerToken("BEARER TOKEN");
+
+    AiApi apiInstance = new AiApi(defaultClient);
+    QueryGetDecomposedQueryRequest queryGetDecomposedQueryRequest = new QueryGetDecomposedQueryRequest(); // QueryGetDecomposedQueryRequest | 
+    try {
+      EurekaDecomposeQueryResponse result = apiInstance.queryGetDecomposedQuery(queryGetDecomposedQueryRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling AiApi#queryGetDecomposedQuery");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **queryGetDecomposedQueryRequest** | [**QueryGetDecomposedQueryRequest**](QueryGetDecomposedQueryRequest.md)|  | |
+
+### Return type
+
+[**EurekaDecomposeQueryResponse**](EurekaDecomposeQueryResponse.md)
 
 ### Authorization
 

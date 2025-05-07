@@ -7,8 +7,8 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**query** | **String** | User natural language query. |  |
-|**metadataIdentifier** | **String** | Data model id to answer the query on. |  |
+|**query** | **String** | A natural language query string to generate the Answer. |  |
+|**metadataIdentifier** | **String** | ID of the metadata object, such as a Worksheet or Model, to use as a data source for the query. |  |
 
 
 

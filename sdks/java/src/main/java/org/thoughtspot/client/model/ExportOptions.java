@@ -49,42 +49,47 @@ import org.thoughtspot.client.JSON;
 /**
  * Flags to specify additional options for export. This will only be active when UserDefinedId in TML is enabled.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-05-06T05:59:13.263928365Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class ExportOptions {
-  public static final String SERIALIZED_NAME_EXPORT_WITH_REFERENCE_OBJECT_ID = "export_with_reference_object_id";
-  @SerializedName(SERIALIZED_NAME_EXPORT_WITH_REFERENCE_OBJECT_ID)
+  public static final String SERIALIZED_NAME_INCLUDE_OBJ_ID_REF = "include_obj_id_ref";
+  @SerializedName(SERIALIZED_NAME_INCLUDE_OBJ_ID_REF)
   @javax.annotation.Nullable
-  private Boolean exportWithReferenceObjectId = false;
+  private Boolean includeObjIdRef = false;
 
   public static final String SERIALIZED_NAME_INCLUDE_GUID = "include_guid";
   @SerializedName(SERIALIZED_NAME_INCLUDE_GUID)
   @javax.annotation.Nullable
   private Boolean includeGuid = true;
 
-  public static final String SERIALIZED_NAME_INCLUDE_OBJECT_ID = "include_object_id";
-  @SerializedName(SERIALIZED_NAME_INCLUDE_OBJECT_ID)
+  public static final String SERIALIZED_NAME_INCLUDE_OBJ_ID = "include_obj_id";
+  @SerializedName(SERIALIZED_NAME_INCLUDE_OBJ_ID)
   @javax.annotation.Nullable
-  private Boolean includeObjectId = false;
+  private Boolean includeObjId = false;
+
+  public static final String SERIALIZED_NAME_EXPORT_WITH_ASSOCIATED_FEEDBACKS = "export_with_associated_feedbacks";
+  @SerializedName(SERIALIZED_NAME_EXPORT_WITH_ASSOCIATED_FEEDBACKS)
+  @javax.annotation.Nullable
+  private Boolean exportWithAssociatedFeedbacks = false;
 
   public ExportOptions() {
   }
 
-  public ExportOptions exportWithReferenceObjectId(@javax.annotation.Nullable Boolean exportWithReferenceObjectId) {
-    this.exportWithReferenceObjectId = exportWithReferenceObjectId;
+  public ExportOptions includeObjIdRef(@javax.annotation.Nullable Boolean includeObjIdRef) {
+    this.includeObjIdRef = includeObjIdRef;
     return this;
   }
 
   /**
-   * Boolean Flag to whether to export user_defined_id of referenced object. This will only be respected when UserDefinedId in TML is enabled.
-   * @return exportWithReferenceObjectId
+   * Boolean Flag to export Object ID of referenced object. This flag will work only after the Object ID feature has been enabled. Please contact support to enable the feature.
+   * @return includeObjIdRef
    */
   @javax.annotation.Nullable
-  public Boolean getExportWithReferenceObjectId() {
-    return exportWithReferenceObjectId;
+  public Boolean getIncludeObjIdRef() {
+    return includeObjIdRef;
   }
 
-  public void setExportWithReferenceObjectId(@javax.annotation.Nullable Boolean exportWithReferenceObjectId) {
-    this.exportWithReferenceObjectId = exportWithReferenceObjectId;
+  public void setIncludeObjIdRef(@javax.annotation.Nullable Boolean includeObjIdRef) {
+    this.includeObjIdRef = includeObjIdRef;
   }
 
 
@@ -94,7 +99,7 @@ public class ExportOptions {
   }
 
   /**
-   * Boolean flag to whether to export guid of the object. This will only be respected when UserDefinedId in TML is enabled.
+   * Boolean flag to export guid of the object. This flag will work only after the Object ID feature has been enabled. Please contact support to enable the feature.
    * @return includeGuid
    */
   @javax.annotation.Nullable
@@ -107,22 +112,41 @@ public class ExportOptions {
   }
 
 
-  public ExportOptions includeObjectId(@javax.annotation.Nullable Boolean includeObjectId) {
-    this.includeObjectId = includeObjectId;
+  public ExportOptions includeObjId(@javax.annotation.Nullable Boolean includeObjId) {
+    this.includeObjId = includeObjId;
     return this;
   }
 
   /**
-   * Boolean flag to whether to export user_defined_id of the object. This will only be respected when UserDefinedId in TML is enabled.
-   * @return includeObjectId
+   * Boolean flag to export Object ID of the object. This flag will work only after the Object ID feature has been enabled. Please contact support to enable the feature.
+   * @return includeObjId
    */
   @javax.annotation.Nullable
-  public Boolean getIncludeObjectId() {
-    return includeObjectId;
+  public Boolean getIncludeObjId() {
+    return includeObjId;
   }
 
-  public void setIncludeObjectId(@javax.annotation.Nullable Boolean includeObjectId) {
-    this.includeObjectId = includeObjectId;
+  public void setIncludeObjId(@javax.annotation.Nullable Boolean includeObjId) {
+    this.includeObjId = includeObjId;
+  }
+
+
+  public ExportOptions exportWithAssociatedFeedbacks(@javax.annotation.Nullable Boolean exportWithAssociatedFeedbacks) {
+    this.exportWithAssociatedFeedbacks = exportWithAssociatedFeedbacks;
+    return this;
+  }
+
+  /**
+   * Boolean flag indicating whether to export associated feedbacks of the object. This will only be respected when the object can have feedbacks.    Version: 10.7.0.cl or later 
+   * @return exportWithAssociatedFeedbacks
+   */
+  @javax.annotation.Nullable
+  public Boolean getExportWithAssociatedFeedbacks() {
+    return exportWithAssociatedFeedbacks;
+  }
+
+  public void setExportWithAssociatedFeedbacks(@javax.annotation.Nullable Boolean exportWithAssociatedFeedbacks) {
+    this.exportWithAssociatedFeedbacks = exportWithAssociatedFeedbacks;
   }
 
 
@@ -136,9 +160,10 @@ public class ExportOptions {
       return false;
     }
     ExportOptions exportOptions = (ExportOptions) o;
-    return Objects.equals(this.exportWithReferenceObjectId, exportOptions.exportWithReferenceObjectId) &&
+    return Objects.equals(this.includeObjIdRef, exportOptions.includeObjIdRef) &&
         Objects.equals(this.includeGuid, exportOptions.includeGuid) &&
-        Objects.equals(this.includeObjectId, exportOptions.includeObjectId);
+        Objects.equals(this.includeObjId, exportOptions.includeObjId) &&
+        Objects.equals(this.exportWithAssociatedFeedbacks, exportOptions.exportWithAssociatedFeedbacks);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -147,7 +172,7 @@ public class ExportOptions {
 
   @Override
   public int hashCode() {
-    return Objects.hash(exportWithReferenceObjectId, includeGuid, includeObjectId);
+    return Objects.hash(includeObjIdRef, includeGuid, includeObjId, exportWithAssociatedFeedbacks);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -161,9 +186,10 @@ public class ExportOptions {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class ExportOptions {\n");
-    sb.append("    exportWithReferenceObjectId: ").append(toIndentedString(exportWithReferenceObjectId)).append("\n");
+    sb.append("    includeObjIdRef: ").append(toIndentedString(includeObjIdRef)).append("\n");
     sb.append("    includeGuid: ").append(toIndentedString(includeGuid)).append("\n");
-    sb.append("    includeObjectId: ").append(toIndentedString(includeObjectId)).append("\n");
+    sb.append("    includeObjId: ").append(toIndentedString(includeObjId)).append("\n");
+    sb.append("    exportWithAssociatedFeedbacks: ").append(toIndentedString(exportWithAssociatedFeedbacks)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -186,9 +212,10 @@ public class ExportOptions {
   static {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
-    openapiFields.add("export_with_reference_object_id");
+    openapiFields.add("include_obj_id_ref");
     openapiFields.add("include_guid");
-    openapiFields.add("include_object_id");
+    openapiFields.add("include_obj_id");
+    openapiFields.add("export_with_associated_feedbacks");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();

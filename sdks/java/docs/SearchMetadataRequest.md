@@ -24,10 +24,11 @@
 |**includeWorksheetSearchAssistData** | **Boolean** | If search assistance lessons are configured on a worksheet, the API returns the search assist data for Worksheet objects. |  [optional] |
 |**modifiedByUserIdentifiers** | **List&lt;String&gt;** | Includes ID or names of the users who modified the metadata object. |  [optional] |
 |**recordOffset** | **Integer** | The starting record number from where the records should be included. |  [optional] |
-|**recordSize** | **Integer** | The number of records that should be included. |  [optional] |
+|**recordSize** | **Integer** | The number of records that should be included. It is recommended to use a smaller &#x60;record_size&#x60; when fetching dependent objects or any of the additional metadata detail options. |  [optional] |
 |**sortOptions** | [**MetadataSearchSortOptions**](MetadataSearchSortOptions.md) | Sort options to filter metadata details. |  [optional] |
 |**tagIdentifiers** | **List&lt;String&gt;** | Tags to filter metadata objects by |  [optional] |
 |**includeStats** | **Boolean** | Indicates whether to include stats of the metadata objects. |  [optional] |
+|**includeDiscoverableObjects** | **Boolean** | Indicates whether to include discoverable metadata objects. If lenient OSM is not enabled, then even though the includeDiscoverableObjects is set to True, we won&#39;t see discoverable objects. |  [optional] |
 
 
 

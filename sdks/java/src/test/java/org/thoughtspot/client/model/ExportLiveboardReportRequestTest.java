@@ -24,6 +24,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.thoughtspot.client.model.PdfOptionsInput;
 import org.thoughtspot.client.model.PngOptionsInput;
+import org.thoughtspot.client.model.RegionalSettingsInput;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -82,6 +83,14 @@ public class ExportLiveboardReportRequestTest {
     }
 
     /**
+     * Test the property 'overrideFilters'
+     */
+    @Test
+    public void overrideFiltersTest() {
+        // TODO: test overrideFilters
+    }
+
+    /**
      * Test the property 'runtimeSort'
      */
     @Test
@@ -111,6 +120,14 @@ public class ExportLiveboardReportRequestTest {
     @Test
     public void runtimeParamOverrideTest() {
         // TODO: test runtimeParamOverride
+    }
+
+    /**
+     * Test the property 'regionalSettings'
+     */
+    @Test
+    public void regionalSettingsTest() {
+        // TODO: test regionalSettings
     }
 
 }

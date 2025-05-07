@@ -48,7 +48,7 @@ import org.thoughtspot.client.JSON;
 /**
  * ActivateUserRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-05-06T05:59:13.263928365Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class ActivateUserRequest {
   public static final String SERIALIZED_NAME_USER_IDENTIFIER = "user_identifier";
   @SerializedName(SERIALIZED_NAME_USER_IDENTIFIER)
@@ -64,6 +64,11 @@ public class ActivateUserRequest {
   @SerializedName(SERIALIZED_NAME_PASSWORD)
   @javax.annotation.Nonnull
   private String password;
+
+  public static final String SERIALIZED_NAME_PROPERTIES = "properties";
+  @SerializedName(SERIALIZED_NAME_PROPERTIES)
+  @javax.annotation.Nullable
+  private String properties;
 
   public ActivateUserRequest() {
   }
@@ -125,6 +130,25 @@ public class ActivateUserRequest {
   }
 
 
+  public ActivateUserRequest properties(@javax.annotation.Nullable String properties) {
+    this.properties = properties;
+    return this;
+  }
+
+  /**
+   * Properties of the user.
+   * @return properties
+   */
+  @javax.annotation.Nullable
+  public String getProperties() {
+    return properties;
+  }
+
+  public void setProperties(@javax.annotation.Nullable String properties) {
+    this.properties = properties;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -137,12 +161,13 @@ public class ActivateUserRequest {
     ActivateUserRequest activateUserRequest = (ActivateUserRequest) o;
     return Objects.equals(this.userIdentifier, activateUserRequest.userIdentifier) &&
         Objects.equals(this.authToken, activateUserRequest.authToken) &&
-        Objects.equals(this.password, activateUserRequest.password);
+        Objects.equals(this.password, activateUserRequest.password) &&
+        Objects.equals(this.properties, activateUserRequest.properties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(userIdentifier, authToken, password);
+    return Objects.hash(userIdentifier, authToken, password, properties);
   }
 
   @Override
@@ -152,6 +177,7 @@ public class ActivateUserRequest {
     sb.append("    userIdentifier: ").append(toIndentedString(userIdentifier)).append("\n");
     sb.append("    authToken: ").append(toIndentedString(authToken)).append("\n");
     sb.append("    password: ").append(toIndentedString(password)).append("\n");
+    sb.append("    properties: ").append(toIndentedString(properties)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -177,6 +203,7 @@ public class ActivateUserRequest {
     openapiFields.add("user_identifier");
     openapiFields.add("auth_token");
     openapiFields.add("password");
+    openapiFields.add("properties");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -221,6 +248,9 @@ public class ActivateUserRequest {
       }
       if (!jsonObj.get("password").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `password` to be a primitive type in the JSON string but got `%s`", jsonObj.get("password").toString()));
+      }
+      if ((jsonObj.get("properties") != null && !jsonObj.get("properties").isJsonNull()) && !jsonObj.get("properties").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `properties` to be a primitive type in the JSON string but got `%s`", jsonObj.get("properties").toString()));
       }
   }
 

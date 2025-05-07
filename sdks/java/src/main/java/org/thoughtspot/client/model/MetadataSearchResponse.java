@@ -51,7 +51,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Metadata Search Response Object.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-05-06T05:59:13.263928365Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class MetadataSearchResponse {
   public static final String SERIALIZED_NAME_METADATA_ID = "metadata_id";
   @SerializedName(SERIALIZED_NAME_METADATA_ID)
@@ -135,6 +135,11 @@ public class MetadataSearchResponse {
   @SerializedName(SERIALIZED_NAME_METADATA_TYPE)
   @javax.annotation.Nonnull
   private MetadataTypeEnum metadataType;
+
+  public static final String SERIALIZED_NAME_METADATA_OBJ_ID = "metadata_obj_id";
+  @SerializedName(SERIALIZED_NAME_METADATA_OBJ_ID)
+  @javax.annotation.Nullable
+  private String metadataObjId;
 
   public static final String SERIALIZED_NAME_DEPENDENT_OBJECTS = "dependent_objects";
   @SerializedName(SERIALIZED_NAME_DEPENDENT_OBJECTS)
@@ -223,6 +228,25 @@ public class MetadataSearchResponse {
 
   public void setMetadataType(@javax.annotation.Nonnull MetadataTypeEnum metadataType) {
     this.metadataType = metadataType;
+  }
+
+
+  public MetadataSearchResponse metadataObjId(@javax.annotation.Nullable String metadataObjId) {
+    this.metadataObjId = metadataObjId;
+    return this;
+  }
+
+  /**
+   * Custom identifier of the metadata. (Available from 10.8.0.cl onwards)
+   * @return metadataObjId
+   */
+  @javax.annotation.Nullable
+  public String getMetadataObjId() {
+    return metadataObjId;
+  }
+
+  public void setMetadataObjId(@javax.annotation.Nullable String metadataObjId) {
+    this.metadataObjId = metadataObjId;
   }
 
 
@@ -369,6 +393,7 @@ public class MetadataSearchResponse {
     return Objects.equals(this.metadataId, metadataSearchResponse.metadataId) &&
         Objects.equals(this.metadataName, metadataSearchResponse.metadataName) &&
         Objects.equals(this.metadataType, metadataSearchResponse.metadataType) &&
+        Objects.equals(this.metadataObjId, metadataSearchResponse.metadataObjId) &&
         Objects.equals(this.dependentObjects, metadataSearchResponse.dependentObjects) &&
         Objects.equals(this.incompleteObjects, metadataSearchResponse.incompleteObjects) &&
         Objects.equals(this.metadataDetail, metadataSearchResponse.metadataDetail) &&
@@ -383,7 +408,7 @@ public class MetadataSearchResponse {
 
   @Override
   public int hashCode() {
-    return Objects.hash(metadataId, metadataName, metadataType, dependentObjects, incompleteObjects, metadataDetail, metadataHeader, visualizationHeaders, stats);
+    return Objects.hash(metadataId, metadataName, metadataType, metadataObjId, dependentObjects, incompleteObjects, metadataDetail, metadataHeader, visualizationHeaders, stats);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -400,6 +425,7 @@ public class MetadataSearchResponse {
     sb.append("    metadataId: ").append(toIndentedString(metadataId)).append("\n");
     sb.append("    metadataName: ").append(toIndentedString(metadataName)).append("\n");
     sb.append("    metadataType: ").append(toIndentedString(metadataType)).append("\n");
+    sb.append("    metadataObjId: ").append(toIndentedString(metadataObjId)).append("\n");
     sb.append("    dependentObjects: ").append(toIndentedString(dependentObjects)).append("\n");
     sb.append("    incompleteObjects: ").append(toIndentedString(incompleteObjects)).append("\n");
     sb.append("    metadataDetail: ").append(toIndentedString(metadataDetail)).append("\n");
@@ -431,6 +457,7 @@ public class MetadataSearchResponse {
     openapiFields.add("metadata_id");
     openapiFields.add("metadata_name");
     openapiFields.add("metadata_type");
+    openapiFields.add("metadata_obj_id");
     openapiFields.add("dependent_objects");
     openapiFields.add("incomplete_objects");
     openapiFields.add("metadata_detail");
@@ -482,6 +509,9 @@ public class MetadataSearchResponse {
       }
       // validate the required field `metadata_type`
       MetadataTypeEnum.validateJsonElement(jsonObj.get("metadata_type"));
+      if ((jsonObj.get("metadata_obj_id") != null && !jsonObj.get("metadata_obj_id").isJsonNull()) && !jsonObj.get("metadata_obj_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `metadata_obj_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("metadata_obj_id").toString()));
+      }
       // ensure the optional json data is an array if present
       if (jsonObj.get("incomplete_objects") != null && !jsonObj.get("incomplete_objects").isJsonNull() && !jsonObj.get("incomplete_objects").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `incomplete_objects` to be an array in the JSON string but got `%s`", jsonObj.get("incomplete_objects").toString()));

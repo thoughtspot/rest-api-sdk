@@ -10,6 +10,7 @@
 |**name** | **String** | Unique name of the Role. |  |
 |**description** | **String** | Description of the Role. |  [optional] |
 |**privileges** | [**List&lt;PrivilegesEnum&gt;**](#List&lt;PrivilegesEnum&gt;) | Privileges granted to the Role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges. |  [optional] |
+|**readOnly** | **Boolean** | &lt;div&gt;Version: 10.5.0.cl or later &lt;/div&gt;  Indicates whether the role is read only. A readonly role can neither be updated nor deleted. |  [optional] |
 
 
 
@@ -23,7 +24,6 @@
 | SHAREWITHALL | &quot;SHAREWITHALL&quot; |
 | JOBSCHEDULING | &quot;JOBSCHEDULING&quot; |
 | A3_ANALYSIS | &quot;A3ANALYSIS&quot; |
-| EXPERIMENTALFEATUREPRIVILEGE | &quot;EXPERIMENTALFEATUREPRIVILEGE&quot; |
 | BYPASSRLS | &quot;BYPASSRLS&quot; |
 | DISABLE_PINBOARD_CREATION | &quot;DISABLE_PINBOARD_CREATION&quot; |
 | DEVELOPER | &quot;DEVELOPER&quot; |
@@ -50,6 +50,7 @@
 | CAN_MANAGE_ANALYST_STUDIO | &quot;CAN_MANAGE_ANALYST_STUDIO&quot; |
 | PREVIEW_DOCUMENT_SEARCH | &quot;PREVIEW_DOCUMENT_SEARCH&quot; |
 | CAN_SETUP_VERSION_CONTROL | &quot;CAN_SETUP_VERSION_CONTROL&quot; |
+| PREVIEW_THOUGHTSPOT_SAGE | &quot;PREVIEW_THOUGHTSPOT_SAGE&quot; |
 
 
 

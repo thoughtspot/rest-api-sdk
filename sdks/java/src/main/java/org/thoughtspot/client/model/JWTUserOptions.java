@@ -25,7 +25,6 @@ import java.util.Arrays;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.JWTMetadataObject;
-import org.thoughtspot.client.model.JWTUserOptionsParametersInner;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -53,12 +52,12 @@ import org.thoughtspot.client.JSON;
 /**
  * JWT user options to create a JWT token given the payload.   *Deprecated in 9.12.0.cl. Use user_parameters instead.*
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-05-06T05:59:13.263928365Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class JWTUserOptions {
   public static final String SERIALIZED_NAME_PARAMETERS = "parameters";
   @SerializedName(SERIALIZED_NAME_PARAMETERS)
   @javax.annotation.Nullable
-  private List<JWTUserOptionsParametersInner> parameters = new ArrayList<>();
+  private List<Object> parameters = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_METADATA = "metadata";
   @SerializedName(SERIALIZED_NAME_METADATA)
@@ -68,12 +67,12 @@ public class JWTUserOptions {
   public JWTUserOptions() {
   }
 
-  public JWTUserOptions parameters(@javax.annotation.Nullable List<JWTUserOptionsParametersInner> parameters) {
+  public JWTUserOptions parameters(@javax.annotation.Nullable List<Object> parameters) {
     this.parameters = parameters;
     return this;
   }
 
-  public JWTUserOptions addParametersItem(JWTUserOptionsParametersInner parametersItem) {
+  public JWTUserOptions addParametersItem(Object parametersItem) {
     if (this.parameters == null) {
       this.parameters = new ArrayList<>();
     }
@@ -86,11 +85,11 @@ public class JWTUserOptions {
    * @return parameters
    */
   @javax.annotation.Nullable
-  public List<JWTUserOptionsParametersInner> getParameters() {
+  public List<Object> getParameters() {
     return parameters;
   }
 
-  public void setParameters(@javax.annotation.Nullable List<JWTUserOptionsParametersInner> parameters) {
+  public void setParameters(@javax.annotation.Nullable List<Object> parameters) {
     this.parameters = parameters;
   }
 
@@ -208,19 +207,9 @@ public class JWTUserOptions {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (jsonObj.get("parameters") != null && !jsonObj.get("parameters").isJsonNull()) {
-        JsonArray jsonArrayparameters = jsonObj.getAsJsonArray("parameters");
-        if (jsonArrayparameters != null) {
-          // ensure the json data is an array
-          if (!jsonObj.get("parameters").isJsonArray()) {
-            throw new IllegalArgumentException(String.format("Expected the field `parameters` to be an array in the JSON string but got `%s`", jsonObj.get("parameters").toString()));
-          }
-
-          // validate the optional field `parameters` (array)
-          for (int i = 0; i < jsonArrayparameters.size(); i++) {
-            JWTUserOptionsParametersInner.validateJsonElement(jsonArrayparameters.get(i));
-          };
-        }
+      // ensure the optional json data is an array if present
+      if (jsonObj.get("parameters") != null && !jsonObj.get("parameters").isJsonNull() && !jsonObj.get("parameters").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `parameters` to be an array in the JSON string but got `%s`", jsonObj.get("parameters").toString()));
       }
       if (jsonObj.get("metadata") != null && !jsonObj.get("metadata").isJsonNull()) {
         JsonArray jsonArraymetadata = jsonObj.getAsJsonArray("metadata");

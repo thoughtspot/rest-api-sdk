@@ -10,7 +10,7 @@ Filter Rules to be applied on Objects.
 |------------ | ------------- | ------------- | -------------|
 |**columnName** | **String** | The name of the column to apply the filter on. |  |
 |**operator** | [**OperatorEnum**](#OperatorEnum) | The operator to use for filtering. Example: EQ (equals), GT(greater than), etc. |  |
-|**values** | **List&lt;String&gt;** | The values to filter on. To get all records, use TS_WILDCARD_ALL as values. |  |
+|**values** | **List&lt;Object&gt;** | The values to filter on. To get all records, use TS_WILDCARD_ALL as values. |  |
 
 
 

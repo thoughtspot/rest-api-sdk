@@ -11,6 +11,7 @@ Metadata Search Response Object.
 |**metadataId** | **String** | Unique identifier of the metadata. |  [optional] |
 |**metadataName** | **String** | Name of the metadata. |  [optional] |
 |**metadataType** | [**MetadataTypeEnum**](#MetadataTypeEnum) | Type of the metadata. |  |
+|**metadataObjId** | **String** | Custom identifier of the metadata. (Available from 10.8.0.cl onwards) |  [optional] |
 |**dependentObjects** | **Object** | Details of dependent objects of the metadata objects. |  [optional] |
 |**incompleteObjects** | **List&lt;Object&gt;** | Details of incomplete information of the metadata objects if any. |  [optional] |
 |**metadataDetail** | **Object** | Complete details of the metadata objects. |  [optional] |

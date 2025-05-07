@@ -25,6 +25,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.thoughtspot.client.model.PdfOptionsInput;
 import org.thoughtspot.client.model.PngOptionsInput;
+import org.thoughtspot.client.model.RegionalSettingsInput;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -52,7 +53,7 @@ import org.thoughtspot.client.JSON;
 /**
  * ExportLiveboardReportRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-05-06T05:59:13.263928365Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class ExportLiveboardReportRequest {
   public static final String SERIALIZED_NAME_METADATA_IDENTIFIER = "metadata_identifier";
   @SerializedName(SERIALIZED_NAME_METADATA_IDENTIFIER)
@@ -74,11 +75,7 @@ public class ExportLiveboardReportRequest {
    */
   @JsonAdapter(FileFormatEnum.Adapter.class)
   public enum FileFormatEnum {
-    CSV("CSV"),
-    
     PDF("PDF"),
-    
-    XLSX("XLSX"),
     
     PNG("PNG");
 
@@ -128,12 +125,17 @@ public class ExportLiveboardReportRequest {
   public static final String SERIALIZED_NAME_FILE_FORMAT = "file_format";
   @SerializedName(SERIALIZED_NAME_FILE_FORMAT)
   @javax.annotation.Nullable
-  private FileFormatEnum fileFormat = FileFormatEnum.CSV;
+  private FileFormatEnum fileFormat = FileFormatEnum.PDF;
 
   public static final String SERIALIZED_NAME_RUNTIME_FILTER = "runtime_filter";
   @SerializedName(SERIALIZED_NAME_RUNTIME_FILTER)
   @javax.annotation.Nullable
   private Object runtimeFilter;
+
+  public static final String SERIALIZED_NAME_OVERRIDE_FILTERS = "override_filters";
+  @SerializedName(SERIALIZED_NAME_OVERRIDE_FILTERS)
+  @javax.annotation.Nullable
+  private Object overrideFilters;
 
   public static final String SERIALIZED_NAME_RUNTIME_SORT = "runtime_sort";
   @SerializedName(SERIALIZED_NAME_RUNTIME_SORT)
@@ -154,6 +156,11 @@ public class ExportLiveboardReportRequest {
   @SerializedName(SERIALIZED_NAME_RUNTIME_PARAM_OVERRIDE)
   @javax.annotation.Nullable
   private Object runtimeParamOverride;
+
+  public static final String SERIALIZED_NAME_REGIONAL_SETTINGS = "regional_settings";
+  @SerializedName(SERIALIZED_NAME_REGIONAL_SETTINGS)
+  @javax.annotation.Nullable
+  private RegionalSettingsInput regionalSettings;
 
   public ExportLiveboardReportRequest() {
   }
@@ -261,6 +268,25 @@ public class ExportLiveboardReportRequest {
   }
 
 
+  public ExportLiveboardReportRequest overrideFilters(@javax.annotation.Nullable Object overrideFilters) {
+    this.overrideFilters = overrideFilters;
+    return this;
+  }
+
+  /**
+   * Applied to the liveboard and overrides any filters already applied on the same columns in liveboard. Following example illustrate different kinds of filters: {   \&quot;override_filters\&quot;: [     {       \&quot;column_name\&quot;: \&quot;Color\&quot;,       \&quot;generic_filter\&quot;: {         \&quot;op\&quot;: \&quot;IN\&quot;,         \&quot;values\&quot;: [           \&quot;almond\&quot;,           \&quot;turquoise\&quot;         ]       },       \&quot;negate\&quot;: false     },     {       \&quot;column_name\&quot;: \&quot;Commit Date\&quot;,       \&quot;date_filter\&quot;: {         \&quot;datePeriod\&quot;: \&quot;HOUR\&quot;,         \&quot;number\&quot;: 3,         \&quot;type\&quot;: \&quot;LAST_N_PERIOD\&quot;,         \&quot;op\&quot;: \&quot;EQ\&quot;       }     },     {       \&quot;column_name\&quot;: \&quot;Sales\&quot;,       \&quot;generic_filter\&quot;: {         \&quot;op\&quot;: \&quot;BW_INC\&quot;,         \&quot;values\&quot;: [           \&quot;100000\&quot;,           \&quot;70000\&quot;         ]       },       \&quot;negate\&quot;: true     }   ] }
+   * @return overrideFilters
+   */
+  @javax.annotation.Nullable
+  public Object getOverrideFilters() {
+    return overrideFilters;
+  }
+
+  public void setOverrideFilters(@javax.annotation.Nullable Object overrideFilters) {
+    this.overrideFilters = overrideFilters;
+  }
+
+
   public ExportLiveboardReportRequest runtimeSort(@javax.annotation.Nullable Object runtimeSort) {
     this.runtimeSort = runtimeSort;
     return this;
@@ -337,6 +363,25 @@ public class ExportLiveboardReportRequest {
   }
 
 
+  public ExportLiveboardReportRequest regionalSettings(@javax.annotation.Nullable RegionalSettingsInput regionalSettings) {
+    this.regionalSettings = regionalSettings;
+    return this;
+  }
+
+  /**
+   * Options for specific region specific overrides to support date/number/string/currency formatting.
+   * @return regionalSettings
+   */
+  @javax.annotation.Nullable
+  public RegionalSettingsInput getRegionalSettings() {
+    return regionalSettings;
+  }
+
+  public void setRegionalSettings(@javax.annotation.Nullable RegionalSettingsInput regionalSettings) {
+    this.regionalSettings = regionalSettings;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -352,15 +397,17 @@ public class ExportLiveboardReportRequest {
         Objects.equals(this.transientContent, exportLiveboardReportRequest.transientContent) &&
         Objects.equals(this.fileFormat, exportLiveboardReportRequest.fileFormat) &&
         Objects.equals(this.runtimeFilter, exportLiveboardReportRequest.runtimeFilter) &&
+        Objects.equals(this.overrideFilters, exportLiveboardReportRequest.overrideFilters) &&
         Objects.equals(this.runtimeSort, exportLiveboardReportRequest.runtimeSort) &&
         Objects.equals(this.pdfOptions, exportLiveboardReportRequest.pdfOptions) &&
         Objects.equals(this.pngOptions, exportLiveboardReportRequest.pngOptions) &&
-        Objects.equals(this.runtimeParamOverride, exportLiveboardReportRequest.runtimeParamOverride);
+        Objects.equals(this.runtimeParamOverride, exportLiveboardReportRequest.runtimeParamOverride) &&
+        Objects.equals(this.regionalSettings, exportLiveboardReportRequest.regionalSettings);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(metadataIdentifier, visualizationIdentifiers, transientContent, fileFormat, runtimeFilter, runtimeSort, pdfOptions, pngOptions, runtimeParamOverride);
+    return Objects.hash(metadataIdentifier, visualizationIdentifiers, transientContent, fileFormat, runtimeFilter, overrideFilters, runtimeSort, pdfOptions, pngOptions, runtimeParamOverride, regionalSettings);
   }
 
   @Override
@@ -372,10 +419,12 @@ public class ExportLiveboardReportRequest {
     sb.append("    transientContent: ").append(toIndentedString(transientContent)).append("\n");
     sb.append("    fileFormat: ").append(toIndentedString(fileFormat)).append("\n");
     sb.append("    runtimeFilter: ").append(toIndentedString(runtimeFilter)).append("\n");
+    sb.append("    overrideFilters: ").append(toIndentedString(overrideFilters)).append("\n");
     sb.append("    runtimeSort: ").append(toIndentedString(runtimeSort)).append("\n");
     sb.append("    pdfOptions: ").append(toIndentedString(pdfOptions)).append("\n");
     sb.append("    pngOptions: ").append(toIndentedString(pngOptions)).append("\n");
     sb.append("    runtimeParamOverride: ").append(toIndentedString(runtimeParamOverride)).append("\n");
+    sb.append("    regionalSettings: ").append(toIndentedString(regionalSettings)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -403,10 +452,12 @@ public class ExportLiveboardReportRequest {
     openapiFields.add("transient_content");
     openapiFields.add("file_format");
     openapiFields.add("runtime_filter");
+    openapiFields.add("override_filters");
     openapiFields.add("runtime_sort");
     openapiFields.add("pdf_options");
     openapiFields.add("png_options");
     openapiFields.add("runtime_param_override");
+    openapiFields.add("regional_settings");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -465,6 +516,10 @@ public class ExportLiveboardReportRequest {
       // validate the optional field `png_options`
       if (jsonObj.get("png_options") != null && !jsonObj.get("png_options").isJsonNull()) {
         PngOptionsInput.validateJsonElement(jsonObj.get("png_options"));
+      }
+      // validate the optional field `regional_settings`
+      if (jsonObj.get("regional_settings") != null && !jsonObj.get("regional_settings").isJsonNull()) {
+        RegionalSettingsInput.validateJsonElement(jsonObj.get("regional_settings"));
       }
   }
 

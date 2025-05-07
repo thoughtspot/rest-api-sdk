@@ -65,6 +65,14 @@ public class MetadataSearchResponseTest {
     }
 
     /**
+     * Test the property 'metadataObjId'
+     */
+    @Test
+    public void metadataObjIdTest() {
+        // TODO: test metadataObjId
+    }
+
+    /**
      * Test the property 'dependentObjects'
      */
     @Test

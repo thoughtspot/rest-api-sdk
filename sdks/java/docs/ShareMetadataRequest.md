@@ -28,6 +28,7 @@
 | ANSWER | &quot;ANSWER&quot; |
 | LOGICAL_TABLE | &quot;LOGICAL_TABLE&quot; |
 | LOGICAL_COLUMN | &quot;LOGICAL_COLUMN&quot; |
+| CONNECTION | &quot;CONNECTION&quot; |
 
 
 

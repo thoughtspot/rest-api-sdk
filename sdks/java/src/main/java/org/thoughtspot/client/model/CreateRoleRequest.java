@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -50,7 +51,7 @@ import org.thoughtspot.client.JSON;
 /**
  * CreateRoleRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-05-06T05:59:13.263928365Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class CreateRoleRequest {
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
@@ -78,8 +79,6 @@ public class CreateRoleRequest {
     JOBSCHEDULING("JOBSCHEDULING"),
     
     A3_ANALYSIS("A3ANALYSIS"),
-    
-    EXPERIMENTALFEATUREPRIVILEGE("EXPERIMENTALFEATUREPRIVILEGE"),
     
     BYPASSRLS("BYPASSRLS"),
     
@@ -131,7 +130,9 @@ public class CreateRoleRequest {
     
     PREVIEW_DOCUMENT_SEARCH("PREVIEW_DOCUMENT_SEARCH"),
     
-    CAN_SETUP_VERSION_CONTROL("CAN_SETUP_VERSION_CONTROL");
+    CAN_SETUP_VERSION_CONTROL("CAN_SETUP_VERSION_CONTROL"),
+    
+    PREVIEW_THOUGHTSPOT_SAGE("PREVIEW_THOUGHTSPOT_SAGE");
 
     private String value;
 
@@ -180,6 +181,11 @@ public class CreateRoleRequest {
   @SerializedName(SERIALIZED_NAME_PRIVILEGES)
   @javax.annotation.Nullable
   private List<PrivilegesEnum> privileges = new ArrayList<>();
+
+  public static final String SERIALIZED_NAME_READ_ONLY = "read_only";
+  @SerializedName(SERIALIZED_NAME_READ_ONLY)
+  @javax.annotation.Nullable
+  private Boolean readOnly = false;
 
   public CreateRoleRequest() {
   }
@@ -249,6 +255,25 @@ public class CreateRoleRequest {
   }
 
 
+  public CreateRoleRequest readOnly(@javax.annotation.Nullable Boolean readOnly) {
+    this.readOnly = readOnly;
+    return this;
+  }
+
+  /**
+   * &lt;div&gt;Version: 10.5.0.cl or later &lt;/div&gt;  Indicates whether the role is read only. A readonly role can neither be updated nor deleted.
+   * @return readOnly
+   */
+  @javax.annotation.Nullable
+  public Boolean getReadOnly() {
+    return readOnly;
+  }
+
+  public void setReadOnly(@javax.annotation.Nullable Boolean readOnly) {
+    this.readOnly = readOnly;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -261,12 +286,24 @@ public class CreateRoleRequest {
     CreateRoleRequest createRoleRequest = (CreateRoleRequest) o;
     return Objects.equals(this.name, createRoleRequest.name) &&
         Objects.equals(this.description, createRoleRequest.description) &&
-        Objects.equals(this.privileges, createRoleRequest.privileges);
+        Objects.equals(this.privileges, createRoleRequest.privileges) &&
+        Objects.equals(this.readOnly, createRoleRequest.readOnly);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, description, privileges);
+    return Objects.hash(name, description, privileges, readOnly);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -276,6 +313,7 @@ public class CreateRoleRequest {
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    privileges: ").append(toIndentedString(privileges)).append("\n");
+    sb.append("    readOnly: ").append(toIndentedString(readOnly)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -301,6 +339,7 @@ public class CreateRoleRequest {
     openapiFields.add("name");
     openapiFields.add("description");
     openapiFields.add("privileges");
+    openapiFields.add("read_only");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();

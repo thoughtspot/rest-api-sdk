@@ -213,4 +213,12 @@ public class SearchMetadataRequestTest {
         // TODO: test includeStats
     }
 
+    /**
+     * Test the property 'includeDiscoverableObjects'
+     */
+    @Test
+    public void includeDiscoverableObjectsTest() {
+        // TODO: test includeDiscoverableObjects
+    }
+
 }

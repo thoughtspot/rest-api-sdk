@@ -61,4 +61,12 @@ public class ActivateUserRequestTest {
         // TODO: test password
     }
 
+    /**
+     * Test the property 'properties'
+     */
+    @Test
+    public void propertiesTest() {
+        // TODO: test properties
+    }
+
 }

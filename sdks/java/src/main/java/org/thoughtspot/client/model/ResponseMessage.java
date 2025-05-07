@@ -49,7 +49,7 @@ import org.thoughtspot.client.JSON;
 /**
  * ResponseMessage
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-05-06T05:59:13.263928365Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class ResponseMessage {
   public static final String SERIALIZED_NAME_SESSION_IDENTIFIER = "session_identifier";
   @SerializedName(SERIALIZED_NAME_SESSION_IDENTIFIER)
@@ -180,6 +180,11 @@ public class ResponseMessage {
   @javax.annotation.Nullable
   private String tokens;
 
+  public static final String SERIALIZED_NAME_DISPLAY_TOKENS = "display_tokens";
+  @SerializedName(SERIALIZED_NAME_DISPLAY_TOKENS)
+  @javax.annotation.Nullable
+  private String displayTokens;
+
   public ResponseMessage() {
   }
 
@@ -278,6 +283,25 @@ public class ResponseMessage {
   }
 
 
+  public ResponseMessage displayTokens(@javax.annotation.Nullable String displayTokens) {
+    this.displayTokens = displayTokens;
+    return this;
+  }
+
+  /**
+   * User friendly tokens for the response.
+   * @return displayTokens
+   */
+  @javax.annotation.Nullable
+  public String getDisplayTokens() {
+    return displayTokens;
+  }
+
+  public void setDisplayTokens(@javax.annotation.Nullable String displayTokens) {
+    this.displayTokens = displayTokens;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -292,7 +316,8 @@ public class ResponseMessage {
         Objects.equals(this.generationNumber, responseMessage.generationNumber) &&
         Objects.equals(this.messageType, responseMessage.messageType) &&
         Objects.equals(this.visualizationType, responseMessage.visualizationType) &&
-        Objects.equals(this.tokens, responseMessage.tokens);
+        Objects.equals(this.tokens, responseMessage.tokens) &&
+        Objects.equals(this.displayTokens, responseMessage.displayTokens);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -301,7 +326,7 @@ public class ResponseMessage {
 
   @Override
   public int hashCode() {
-    return Objects.hash(sessionIdentifier, generationNumber, messageType, visualizationType, tokens);
+    return Objects.hash(sessionIdentifier, generationNumber, messageType, visualizationType, tokens, displayTokens);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -320,6 +345,7 @@ public class ResponseMessage {
     sb.append("    messageType: ").append(toIndentedString(messageType)).append("\n");
     sb.append("    visualizationType: ").append(toIndentedString(visualizationType)).append("\n");
     sb.append("    tokens: ").append(toIndentedString(tokens)).append("\n");
+    sb.append("    displayTokens: ").append(toIndentedString(displayTokens)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -347,6 +373,7 @@ public class ResponseMessage {
     openapiFields.add("message_type");
     openapiFields.add("visualization_type");
     openapiFields.add("tokens");
+    openapiFields.add("display_tokens");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -398,6 +425,9 @@ public class ResponseMessage {
       }
       if ((jsonObj.get("tokens") != null && !jsonObj.get("tokens").isJsonNull()) && !jsonObj.get("tokens").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `tokens` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tokens").toString()));
+      }
+      if ((jsonObj.get("display_tokens") != null && !jsonObj.get("display_tokens").isJsonNull()) && !jsonObj.get("display_tokens").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `display_tokens` to be a primitive type in the JSON string but got `%s`", jsonObj.get("display_tokens").toString()));
       }
   }
 

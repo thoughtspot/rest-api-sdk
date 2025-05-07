@@ -21,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.Arrays;
+import org.thoughtspot.client.model.RegionalSettingsInput;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -48,7 +49,7 @@ import org.thoughtspot.client.JSON;
 /**
  * ExportAnswerReportRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-05-06T05:59:13.263928365Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class ExportAnswerReportRequest {
   public static final String SERIALIZED_NAME_METADATA_IDENTIFIER = "metadata_identifier";
   @SerializedName(SERIALIZED_NAME_METADATA_IDENTIFIER)
@@ -140,6 +141,11 @@ public class ExportAnswerReportRequest {
   @SerializedName(SERIALIZED_NAME_RUNTIME_PARAM_OVERRIDE)
   @javax.annotation.Nullable
   private Object runtimeParamOverride;
+
+  public static final String SERIALIZED_NAME_REGIONAL_SETTINGS = "regional_settings";
+  @SerializedName(SERIALIZED_NAME_REGIONAL_SETTINGS)
+  @javax.annotation.Nullable
+  private RegionalSettingsInput regionalSettings;
 
   public ExportAnswerReportRequest() {
   }
@@ -277,6 +283,25 @@ public class ExportAnswerReportRequest {
   }
 
 
+  public ExportAnswerReportRequest regionalSettings(@javax.annotation.Nullable RegionalSettingsInput regionalSettings) {
+    this.regionalSettings = regionalSettings;
+    return this;
+  }
+
+  /**
+   * Options for specific region specific overrides to support date/number/string/currency formatting.
+   * @return regionalSettings
+   */
+  @javax.annotation.Nullable
+  public RegionalSettingsInput getRegionalSettings() {
+    return regionalSettings;
+  }
+
+  public void setRegionalSettings(@javax.annotation.Nullable RegionalSettingsInput regionalSettings) {
+    this.regionalSettings = regionalSettings;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -293,12 +318,13 @@ public class ExportAnswerReportRequest {
         Objects.equals(this.fileFormat, exportAnswerReportRequest.fileFormat) &&
         Objects.equals(this.runtimeFilter, exportAnswerReportRequest.runtimeFilter) &&
         Objects.equals(this.runtimeSort, exportAnswerReportRequest.runtimeSort) &&
-        Objects.equals(this.runtimeParamOverride, exportAnswerReportRequest.runtimeParamOverride);
+        Objects.equals(this.runtimeParamOverride, exportAnswerReportRequest.runtimeParamOverride) &&
+        Objects.equals(this.regionalSettings, exportAnswerReportRequest.regionalSettings);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(metadataIdentifier, sessionIdentifier, generationNumber, fileFormat, runtimeFilter, runtimeSort, runtimeParamOverride);
+    return Objects.hash(metadataIdentifier, sessionIdentifier, generationNumber, fileFormat, runtimeFilter, runtimeSort, runtimeParamOverride, regionalSettings);
   }
 
   @Override
@@ -312,6 +338,7 @@ public class ExportAnswerReportRequest {
     sb.append("    runtimeFilter: ").append(toIndentedString(runtimeFilter)).append("\n");
     sb.append("    runtimeSort: ").append(toIndentedString(runtimeSort)).append("\n");
     sb.append("    runtimeParamOverride: ").append(toIndentedString(runtimeParamOverride)).append("\n");
+    sb.append("    regionalSettings: ").append(toIndentedString(regionalSettings)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -341,6 +368,7 @@ public class ExportAnswerReportRequest {
     openapiFields.add("runtime_filter");
     openapiFields.add("runtime_sort");
     openapiFields.add("runtime_param_override");
+    openapiFields.add("regional_settings");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -379,6 +407,10 @@ public class ExportAnswerReportRequest {
       // validate the optional field `file_format`
       if (jsonObj.get("file_format") != null && !jsonObj.get("file_format").isJsonNull()) {
         FileFormatEnum.validateJsonElement(jsonObj.get("file_format"));
+      }
+      // validate the optional field `regional_settings`
+      if (jsonObj.get("regional_settings") != null && !jsonObj.get("regional_settings").isJsonNull()) {
+        RegionalSettingsInput.validateJsonElement(jsonObj.get("regional_settings"));
       }
   }
 

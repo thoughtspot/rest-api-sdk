@@ -56,7 +56,7 @@ import org.thoughtspot.client.JSON;
 /**
  * SearchMetadataRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-05-06T05:59:13.263928365Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class SearchMetadataRequest {
   public static final String SERIALIZED_NAME_METADATA = "metadata";
   @SerializedName(SERIALIZED_NAME_METADATA)
@@ -214,6 +214,11 @@ public class SearchMetadataRequest {
   @SerializedName(SERIALIZED_NAME_INCLUDE_STATS)
   @javax.annotation.Nullable
   private Boolean includeStats = false;
+
+  public static final String SERIALIZED_NAME_INCLUDE_DISCOVERABLE_OBJECTS = "include_discoverable_objects";
+  @SerializedName(SERIALIZED_NAME_INCLUDE_DISCOVERABLE_OBJECTS)
+  @javax.annotation.Nullable
+  private Boolean includeDiscoverableObjects = true;
 
   public SearchMetadataRequest() {
   }
@@ -587,7 +592,7 @@ public class SearchMetadataRequest {
   }
 
   /**
-   * The number of records that should be included.
+   * The number of records that should be included. It is recommended to use a smaller &#x60;record_size&#x60; when fetching dependent objects or any of the additional metadata detail options.
    * @return recordSize
    */
   @javax.annotation.Nullable
@@ -665,6 +670,25 @@ public class SearchMetadataRequest {
   }
 
 
+  public SearchMetadataRequest includeDiscoverableObjects(@javax.annotation.Nullable Boolean includeDiscoverableObjects) {
+    this.includeDiscoverableObjects = includeDiscoverableObjects;
+    return this;
+  }
+
+  /**
+   * Indicates whether to include discoverable metadata objects. If lenient OSM is not enabled, then even though the includeDiscoverableObjects is set to True, we won&#39;t see discoverable objects.
+   * @return includeDiscoverableObjects
+   */
+  @javax.annotation.Nullable
+  public Boolean getIncludeDiscoverableObjects() {
+    return includeDiscoverableObjects;
+  }
+
+  public void setIncludeDiscoverableObjects(@javax.annotation.Nullable Boolean includeDiscoverableObjects) {
+    this.includeDiscoverableObjects = includeDiscoverableObjects;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -695,7 +719,8 @@ public class SearchMetadataRequest {
         Objects.equals(this.recordSize, searchMetadataRequest.recordSize) &&
         Objects.equals(this.sortOptions, searchMetadataRequest.sortOptions) &&
         Objects.equals(this.tagIdentifiers, searchMetadataRequest.tagIdentifiers) &&
-        Objects.equals(this.includeStats, searchMetadataRequest.includeStats);
+        Objects.equals(this.includeStats, searchMetadataRequest.includeStats) &&
+        Objects.equals(this.includeDiscoverableObjects, searchMetadataRequest.includeDiscoverableObjects);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -704,7 +729,7 @@ public class SearchMetadataRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(metadata, permissions, createdByUserIdentifiers, dependentObjectVersion, excludeObjects, favoriteObjectOptions, includeAutoCreatedObjects, includeDependentObjects, dependentObjectsRecordSize, includeDetails, includeHeaders, includeHiddenObjects, includeIncompleteObjects, includeVisualizationHeaders, includeWorksheetSearchAssistData, modifiedByUserIdentifiers, recordOffset, recordSize, sortOptions, tagIdentifiers, includeStats);
+    return Objects.hash(metadata, permissions, createdByUserIdentifiers, dependentObjectVersion, excludeObjects, favoriteObjectOptions, includeAutoCreatedObjects, includeDependentObjects, dependentObjectsRecordSize, includeDetails, includeHeaders, includeHiddenObjects, includeIncompleteObjects, includeVisualizationHeaders, includeWorksheetSearchAssistData, modifiedByUserIdentifiers, recordOffset, recordSize, sortOptions, tagIdentifiers, includeStats, includeDiscoverableObjects);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -739,6 +764,7 @@ public class SearchMetadataRequest {
     sb.append("    sortOptions: ").append(toIndentedString(sortOptions)).append("\n");
     sb.append("    tagIdentifiers: ").append(toIndentedString(tagIdentifiers)).append("\n");
     sb.append("    includeStats: ").append(toIndentedString(includeStats)).append("\n");
+    sb.append("    includeDiscoverableObjects: ").append(toIndentedString(includeDiscoverableObjects)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -782,6 +808,7 @@ public class SearchMetadataRequest {
     openapiFields.add("sort_options");
     openapiFields.add("tag_identifiers");
     openapiFields.add("include_stats");
+    openapiFields.add("include_discoverable_objects");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();

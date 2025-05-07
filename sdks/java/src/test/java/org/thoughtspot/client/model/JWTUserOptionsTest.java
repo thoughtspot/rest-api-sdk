@@ -24,7 +24,6 @@ import java.util.Arrays;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.thoughtspot.client.model.JWTMetadataObject;
-import org.thoughtspot.client.model.JWTUserOptionsParametersInner;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 

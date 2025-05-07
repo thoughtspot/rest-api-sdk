@@ -49,7 +49,7 @@ import org.thoughtspot.client.JSON;
 /**
  * PngOptionsInput
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-05-06T05:59:13.263928365Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class PngOptionsInput {
   public static final String SERIALIZED_NAME_INCLUDE_COVER_PAGE = "include_cover_page";
   @SerializedName(SERIALIZED_NAME_INCLUDE_COVER_PAGE)
@@ -60,6 +60,11 @@ public class PngOptionsInput {
   @SerializedName(SERIALIZED_NAME_INCLUDE_FILTER_PAGE)
   @javax.annotation.Nullable
   private Boolean includeFilterPage = false;
+
+  public static final String SERIALIZED_NAME_PERSONALISED_VIEW_ID = "personalised_view_id";
+  @SerializedName(SERIALIZED_NAME_PERSONALISED_VIEW_ID)
+  @javax.annotation.Nullable
+  private String personalisedViewId;
 
   public PngOptionsInput() {
   }
@@ -102,6 +107,25 @@ public class PngOptionsInput {
   }
 
 
+  public PngOptionsInput personalisedViewId(@javax.annotation.Nullable String personalisedViewId) {
+    this.personalisedViewId = personalisedViewId;
+    return this;
+  }
+
+  /**
+   * Indicates personalised view of the Liveboard in case of png
+   * @return personalisedViewId
+   */
+  @javax.annotation.Nullable
+  public String getPersonalisedViewId() {
+    return personalisedViewId;
+  }
+
+  public void setPersonalisedViewId(@javax.annotation.Nullable String personalisedViewId) {
+    this.personalisedViewId = personalisedViewId;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -113,7 +137,8 @@ public class PngOptionsInput {
     }
     PngOptionsInput pngOptionsInput = (PngOptionsInput) o;
     return Objects.equals(this.includeCoverPage, pngOptionsInput.includeCoverPage) &&
-        Objects.equals(this.includeFilterPage, pngOptionsInput.includeFilterPage);
+        Objects.equals(this.includeFilterPage, pngOptionsInput.includeFilterPage) &&
+        Objects.equals(this.personalisedViewId, pngOptionsInput.personalisedViewId);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -122,7 +147,7 @@ public class PngOptionsInput {
 
   @Override
   public int hashCode() {
-    return Objects.hash(includeCoverPage, includeFilterPage);
+    return Objects.hash(includeCoverPage, includeFilterPage, personalisedViewId);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -138,6 +163,7 @@ public class PngOptionsInput {
     sb.append("class PngOptionsInput {\n");
     sb.append("    includeCoverPage: ").append(toIndentedString(includeCoverPage)).append("\n");
     sb.append("    includeFilterPage: ").append(toIndentedString(includeFilterPage)).append("\n");
+    sb.append("    personalisedViewId: ").append(toIndentedString(personalisedViewId)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -162,6 +188,7 @@ public class PngOptionsInput {
     openapiFields = new HashSet<String>();
     openapiFields.add("include_cover_page");
     openapiFields.add("include_filter_page");
+    openapiFields.add("personalised_view_id");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -188,6 +215,9 @@ public class PngOptionsInput {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
+      if ((jsonObj.get("personalised_view_id") != null && !jsonObj.get("personalised_view_id").isJsonNull()) && !jsonObj.get("personalised_view_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `personalised_view_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("personalised_view_id").toString()));
+      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

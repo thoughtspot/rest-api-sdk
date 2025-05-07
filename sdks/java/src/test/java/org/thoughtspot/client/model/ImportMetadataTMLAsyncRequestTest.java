@@ -57,19 +57,11 @@ public class ImportMetadataTMLAsyncRequestTest {
     }
 
     /**
-     * Test the property 'allOrgsContext'
+     * Test the property 'allOrgsOverride'
      */
     @Test
-    public void allOrgsContextTest() {
-        // TODO: test allOrgsContext
-    }
-
-    /**
-     * Test the property 'skipCdwValidationForTables'
-     */
-    @Test
-    public void skipCdwValidationForTablesTest() {
-        // TODO: test skipCdwValidationForTables
+    public void allOrgsOverrideTest() {
+        // TODO: test allOrgsOverride
     }
 
     /**
@@ -78,6 +70,14 @@ public class ImportMetadataTMLAsyncRequestTest {
     @Test
     public void importPolicyTest() {
         // TODO: test importPolicy
+    }
+
+    /**
+     * Test the property 'skipDiffCheck'
+     */
+    @Test
+    public void skipDiffCheckTest() {
+        // TODO: test skipDiffCheck
     }
 
     /**

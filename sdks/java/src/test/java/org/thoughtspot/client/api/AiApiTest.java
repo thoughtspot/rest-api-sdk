@@ -17,6 +17,8 @@ import org.thoughtspot.client.ApiException;
 import org.thoughtspot.client.model.Conversation;
 import org.thoughtspot.client.model.CreateConversationRequest;
 import org.thoughtspot.client.model.ErrorResponse;
+import org.thoughtspot.client.model.EurekaDecomposeQueryResponse;
+import org.thoughtspot.client.model.QueryGetDecomposedQueryRequest;
 import org.thoughtspot.client.model.ResponseMessage;
 import org.thoughtspot.client.model.SendMessageRequest;
 import org.thoughtspot.client.model.SingleAnswerRequest;
@@ -45,6 +47,18 @@ public class AiApiTest {
     public void createConversationTest() throws ApiException {
         CreateConversationRequest createConversationRequest = null;
         Conversation response = api.createConversation(createConversationRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 10.7.0.cl or later 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void queryGetDecomposedQueryTest() throws ApiException {
+        QueryGetDecomposedQueryRequest queryGetDecomposedQueryRequest = null;
+        EurekaDecomposeQueryResponse response = api.queryGetDecomposedQuery(queryGetDecomposedQueryRequest);
         // TODO: test validations
     }
 

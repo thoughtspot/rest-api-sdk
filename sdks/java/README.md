@@ -4,7 +4,7 @@ ThoughtSpot Public REST API
 
 - API version: 2.0
 
-    - Build date: 2025-04-28T13:38:56.834546210Z[Etc/UTC]
+    - Build date: 2025-05-06T05:59:13.263928365Z[Etc/UTC]
 
 - Generator version: 7.12.0
 
@@ -122,6 +122,7 @@ All URIs are relative to *https://localhost:443*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AiApi* | [**createConversation**](docs/AiApi.md#createConversation) | **POST** /api/rest/2.0/ai/conversation/create | 
+*AiApi* | [**queryGetDecomposedQuery**](docs/AiApi.md#queryGetDecomposedQuery) | **POST** /api/rest/2.0/ai/analytical-questions | 
 *AiApi* | [**sendMessage**](docs/AiApi.md#sendMessage) | **POST** /api/rest/2.0/ai/conversation/{conversation_identifier}/converse | 
 *AiApi* | [**singleAnswer**](docs/AiApi.md#singleAnswer) | **POST** /api/rest/2.0/ai/answer/create | 
 *AuthenticationApi* | [**getCurrentUserInfo**](docs/AuthenticationApi.md#getCurrentUserInfo) | **GET** /api/rest/2.0/auth/session/user | 
@@ -160,6 +161,7 @@ Class | Method | HTTP request | Description
 *GroupsApi* | [**searchUserGroups**](docs/GroupsApi.md#searchUserGroups) | **POST** /api/rest/2.0/groups/search | 
 *GroupsApi* | [**updateUserGroup**](docs/GroupsApi.md#updateUserGroup) | **POST** /api/rest/2.0/groups/{group_identifier}/update | 
 *LogApi* | [**fetchLogs**](docs/LogApi.md#fetchLogs) | **POST** /api/rest/2.0/logs/fetch | 
+*MetadataApi* | [**convertWorksheetToModel**](docs/MetadataApi.md#convertWorksheetToModel) | **POST** /api/rest/2.0/metadata/worksheets/convert | 
 *MetadataApi* | [**copyObject**](docs/MetadataApi.md#copyObject) | **POST** /api/rest/2.0/metadata/copyobject | 
 *MetadataApi* | [**deleteMetadata**](docs/MetadataApi.md#deleteMetadata) | **POST** /api/rest/2.0/metadata/delete | 
 *MetadataApi* | [**exportMetadataTML**](docs/MetadataApi.md#exportMetadataTML) | **POST** /api/rest/2.0/metadata/tml/export | 
@@ -170,6 +172,8 @@ Class | Method | HTTP request | Description
 *MetadataApi* | [**importMetadataTML**](docs/MetadataApi.md#importMetadataTML) | **POST** /api/rest/2.0/metadata/tml/import | 
 *MetadataApi* | [**importMetadataTMLAsync**](docs/MetadataApi.md#importMetadataTMLAsync) | **POST** /api/rest/2.0/metadata/tml/async/import | 
 *MetadataApi* | [**searchMetadata**](docs/MetadataApi.md#searchMetadata) | **POST** /api/rest/2.0/metadata/search | 
+*MetadataApi* | [**updateMetadataHeader**](docs/MetadataApi.md#updateMetadataHeader) | **POST** /api/rest/2.0/metadata/headers/update | 
+*MetadataApi* | [**updateMetadataObjId**](docs/MetadataApi.md#updateMetadataObjId) | **POST** /api/rest/2.0/metadata/update-obj-id | 
 *OrgsApi* | [**createOrg**](docs/OrgsApi.md#createOrg) | **POST** /api/rest/2.0/orgs/create | 
 *OrgsApi* | [**deleteOrg**](docs/OrgsApi.md#deleteOrg) | **POST** /api/rest/2.0/orgs/{org_identifier}/delete | 
 *OrgsApi* | [**searchOrgs**](docs/OrgsApi.md#searchOrgs) | **POST** /api/rest/2.0/orgs/search | 
@@ -203,6 +207,7 @@ Class | Method | HTTP request | Description
 *ThoughtSpotRestApi* | [**assignTag**](docs/ThoughtSpotRestApi.md#assignTag) | **POST** /api/rest/2.0/tags/assign | 
 *ThoughtSpotRestApi* | [**changeUserPassword**](docs/ThoughtSpotRestApi.md#changeUserPassword) | **POST** /api/rest/2.0/users/change-password | 
 *ThoughtSpotRestApi* | [**commitBranch**](docs/ThoughtSpotRestApi.md#commitBranch) | **POST** /api/rest/2.0/vcs/git/branches/commit | 
+*ThoughtSpotRestApi* | [**convertWorksheetToModel**](docs/ThoughtSpotRestApi.md#convertWorksheetToModel) | **POST** /api/rest/2.0/metadata/worksheets/convert | 
 *ThoughtSpotRestApi* | [**copyObject**](docs/ThoughtSpotRestApi.md#copyObject) | **POST** /api/rest/2.0/metadata/copyobject | 
 *ThoughtSpotRestApi* | [**createConfig**](docs/ThoughtSpotRestApi.md#createConfig) | **POST** /api/rest/2.0/vcs/git/config/create | 
 *ThoughtSpotRestApi* | [**createConnection**](docs/ThoughtSpotRestApi.md#createConnection) | **POST** /api/rest/2.0/connection/create | 
@@ -261,6 +266,7 @@ Class | Method | HTTP request | Description
 *ThoughtSpotRestApi* | [**importUsers**](docs/ThoughtSpotRestApi.md#importUsers) | **POST** /api/rest/2.0/users/import | 
 *ThoughtSpotRestApi* | [**login**](docs/ThoughtSpotRestApi.md#login) | **POST** /api/rest/2.0/auth/session/login | 
 *ThoughtSpotRestApi* | [**logout**](docs/ThoughtSpotRestApi.md#logout) | **POST** /api/rest/2.0/auth/session/logout | 
+*ThoughtSpotRestApi* | [**queryGetDecomposedQuery**](docs/ThoughtSpotRestApi.md#queryGetDecomposedQuery) | **POST** /api/rest/2.0/ai/analytical-questions | 
 *ThoughtSpotRestApi* | [**resetUserPassword**](docs/ThoughtSpotRestApi.md#resetUserPassword) | **POST** /api/rest/2.0/users/reset-password | 
 *ThoughtSpotRestApi* | [**revertCommit**](docs/ThoughtSpotRestApi.md#revertCommit) | **POST** /api/rest/2.0/vcs/git/commits/{commit_id}/revert | 
 *ThoughtSpotRestApi* | [**revokeToken**](docs/ThoughtSpotRestApi.md#revokeToken) | **POST** /api/rest/2.0/auth/token/revoke | 
@@ -285,6 +291,8 @@ Class | Method | HTTP request | Description
 *ThoughtSpotRestApi* | [**updateConnectionV2**](docs/ThoughtSpotRestApi.md#updateConnectionV2) | **POST** /api/rest/2.0/connections/{connection_identifier}/update | 
 *ThoughtSpotRestApi* | [**updateCustomAction**](docs/ThoughtSpotRestApi.md#updateCustomAction) | **POST** /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/update | 
 *ThoughtSpotRestApi* | [**updateDbtConnection**](docs/ThoughtSpotRestApi.md#updateDbtConnection) | **POST** /api/rest/2.0/dbt/update-dbt-connection | 
+*ThoughtSpotRestApi* | [**updateMetadataHeader**](docs/ThoughtSpotRestApi.md#updateMetadataHeader) | **POST** /api/rest/2.0/metadata/headers/update | 
+*ThoughtSpotRestApi* | [**updateMetadataObjId**](docs/ThoughtSpotRestApi.md#updateMetadataObjId) | **POST** /api/rest/2.0/metadata/update-obj-id | 
 *ThoughtSpotRestApi* | [**updateOrg**](docs/ThoughtSpotRestApi.md#updateOrg) | **POST** /api/rest/2.0/orgs/{org_identifier}/update | 
 *ThoughtSpotRestApi* | [**updateRole**](docs/ThoughtSpotRestApi.md#updateRole) | **POST** /api/rest/2.0/roles/{role_identifier}/update | 
 *ThoughtSpotRestApi* | [**updateSchedule**](docs/ThoughtSpotRestApi.md#updateSchedule) | **POST** /api/rest/2.0/schedules/{schedule_identifier}/update | 
@@ -352,6 +360,7 @@ Class | Method | HTTP request | Description
  - [CommiterType](docs/CommiterType.md)
  - [ConnectionInput](docs/ConnectionInput.md)
  - [Conversation](docs/Conversation.md)
+ - [ConvertWorksheetToModelRequest](docs/ConvertWorksheetToModelRequest.md)
  - [CopyObjectRequest](docs/CopyObjectRequest.md)
  - [CreateConfigRequest](docs/CreateConfigRequest.md)
  - [CreateConnectionRequest](docs/CreateConnectionRequest.md)
@@ -386,6 +395,9 @@ Class | Method | HTTP request | Description
  - [DeployCommitRequest](docs/DeployCommitRequest.md)
  - [DeployResponse](docs/DeployResponse.md)
  - [ErrorResponse](docs/ErrorResponse.md)
+ - [EurekaDecomposeQueryResponse](docs/EurekaDecomposeQueryResponse.md)
+ - [EurekaLLMDecomposeQueryResponse](docs/EurekaLLMDecomposeQueryResponse.md)
+ - [EurekaLLMSuggestedQuery](docs/EurekaLLMSuggestedQuery.md)
  - [ExcludeMetadataListItemInput](docs/ExcludeMetadataListItemInput.md)
  - [ExportAnswerReportRequest](docs/ExportAnswerReportRequest.md)
  - [ExportLiveboardReportRequest](docs/ExportLiveboardReportRequest.md)
@@ -417,6 +429,8 @@ Class | Method | HTTP request | Description
  - [GetTokenResponse](docs/GetTokenResponse.md)
  - [GroupObject](docs/GroupObject.md)
  - [GroupsImportListInput](docs/GroupsImportListInput.md)
+ - [HeaderAttributeInput](docs/HeaderAttributeInput.md)
+ - [HeaderUpdateInput](docs/HeaderUpdateInput.md)
  - [ImportEPackAsyncTaskStatus](docs/ImportEPackAsyncTaskStatus.md)
  - [ImportMetadataTMLAsyncRequest](docs/ImportMetadataTMLAsyncRequest.md)
  - [ImportMetadataTMLRequest](docs/ImportMetadataTMLRequest.md)
@@ -426,11 +440,11 @@ Class | Method | HTTP request | Description
  - [ImportUserType](docs/ImportUserType.md)
  - [ImportUsersRequest](docs/ImportUsersRequest.md)
  - [ImportUsersResponse](docs/ImportUsersResponse.md)
+ - [InputEurekaNLSRequest](docs/InputEurekaNLSRequest.md)
  - [JWTMetadataObject](docs/JWTMetadataObject.md)
  - [JWTParameter](docs/JWTParameter.md)
  - [JWTUserOptions](docs/JWTUserOptions.md)
  - [JWTUserOptionsFull](docs/JWTUserOptionsFull.md)
- - [JWTUserOptionsParametersInner](docs/JWTUserOptionsParametersInner.md)
  - [LiveboardContent](docs/LiveboardContent.md)
  - [LiveboardDataResponse](docs/LiveboardDataResponse.md)
  - [LiveboardOptions](docs/LiveboardOptions.md)
@@ -462,20 +476,32 @@ Class | Method | HTTP request | Description
  - [PrincipalsInput](docs/PrincipalsInput.md)
  - [PrincipalsListItem](docs/PrincipalsListItem.md)
  - [PrincipalsListItemInput](docs/PrincipalsListItemInput.md)
+ - [QueryGetDecomposedQueryRequest](docs/QueryGetDecomposedQueryRequest.md)
  - [RecipientDetails](docs/RecipientDetails.md)
  - [RecipientDetailsInput](docs/RecipientDetailsInput.md)
+ - [RegionalSettingsInput](docs/RegionalSettingsInput.md)
  - [RepoConfigObject](docs/RepoConfigObject.md)
  - [ResetUserPasswordRequest](docs/ResetUserPasswordRequest.md)
  - [ResponseActivationURL](docs/ResponseActivationURL.md)
  - [ResponseCopyObject](docs/ResponseCopyObject.md)
  - [ResponseCustomAction](docs/ResponseCustomAction.md)
+ - [ResponseFailedEntities](docs/ResponseFailedEntities.md)
+ - [ResponseFailedEntity](docs/ResponseFailedEntity.md)
+ - [ResponseIncompleteEntities](docs/ResponseIncompleteEntities.md)
+ - [ResponseIncompleteEntity](docs/ResponseIncompleteEntity.md)
  - [ResponseMessage](docs/ResponseMessage.md)
+ - [ResponsePostUpgradeFailedEntities](docs/ResponsePostUpgradeFailedEntities.md)
+ - [ResponsePostUpgradeFailedEntity](docs/ResponsePostUpgradeFailedEntity.md)
  - [ResponseSchedule](docs/ResponseSchedule.md)
  - [ResponseScheduleRun](docs/ResponseScheduleRun.md)
+ - [ResponseSuccessfulEntities](docs/ResponseSuccessfulEntities.md)
+ - [ResponseSuccessfulEntity](docs/ResponseSuccessfulEntity.md)
+ - [ResponseWorksheetToModelConversion](docs/ResponseWorksheetToModelConversion.md)
  - [RevertCommitRequest](docs/RevertCommitRequest.md)
  - [RevertResponse](docs/RevertResponse.md)
  - [RevertedMetadata](docs/RevertedMetadata.md)
  - [RevokeTokenRequest](docs/RevokeTokenRequest.md)
+ - [RiseGQLArgWrapper](docs/RiseGQLArgWrapper.md)
  - [RiseSetter](docs/RiseSetter.md)
  - [Role](docs/Role.md)
  - [RoleResponse](docs/RoleResponse.md)
@@ -530,6 +556,9 @@ Class | Method | HTTP request | Description
  - [UpdateConnectionV2Request](docs/UpdateConnectionV2Request.md)
  - [UpdateCustomActionRequest](docs/UpdateCustomActionRequest.md)
  - [UpdateDbtConnectionRequest](docs/UpdateDbtConnectionRequest.md)
+ - [UpdateMetadataHeaderRequest](docs/UpdateMetadataHeaderRequest.md)
+ - [UpdateMetadataObjIdRequest](docs/UpdateMetadataObjIdRequest.md)
+ - [UpdateObjIdInput](docs/UpdateObjIdInput.md)
  - [UpdateOrgRequest](docs/UpdateOrgRequest.md)
  - [UpdateRoleRequest](docs/UpdateRoleRequest.md)
  - [UpdateScheduleRequest](docs/UpdateScheduleRequest.md)

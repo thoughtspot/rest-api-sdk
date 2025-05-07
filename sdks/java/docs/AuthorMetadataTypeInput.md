@@ -20,6 +20,7 @@ MetadataType InputType used in Author API's
 | LIVEBOARD | &quot;LIVEBOARD&quot; |
 | ANSWER | &quot;ANSWER&quot; |
 | LOGICAL_TABLE | &quot;LOGICAL_TABLE&quot; |
+| CONNECTION | &quot;CONNECTION&quot; |
 
 
 

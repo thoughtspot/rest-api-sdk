@@ -20,6 +20,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.Arrays;
+import org.thoughtspot.client.model.RegionalSettingsInput;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -91,6 +92,14 @@ public class ExportAnswerReportRequestTest {
     @Test
     public void runtimeParamOverrideTest() {
         // TODO: test runtimeParamOverride
+    }
+
+    /**
+     * Test the property 'regionalSettings'
+     */
+    @Test
+    public void regionalSettingsTest() {
+        // TODO: test regionalSettings
     }
 
 }

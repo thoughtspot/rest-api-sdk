@@ -15,7 +15,7 @@
 |**exportDependent** | **Boolean** | Indicates whether to export table while exporting connection. |  [optional] |
 |**exportConnectionAsDependent** | **Boolean** | Indicates whether to export connection as dependent while exporting table/worksheet/answer/liveboard. This will only be active when export_associated is true. |  [optional] |
 |**allOrgsOverride** | **Boolean** | Indicates whether to export is happening from all orgs context. |  [optional] |
-|**exportOptions** | [**ExportOptions**](ExportOptions.md) | Flags to specify additional options for export.    Version: 10.5.0.cl or later  |  [optional] |
+|**exportOptions** | [**ExportOptions**](ExportOptions.md) | Flags to specify additional options for export.    Version: 10.6.0.cl or later  |  [optional] |
 
 
 

@@ -52,7 +52,7 @@ import org.thoughtspot.client.JSON;
 /**
  * CreateUserRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-28T13:38:56.834546210Z[Etc/UTC]", comments = "Generator version: 7.12.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-05-06T05:59:13.263928365Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class CreateUserRequest {
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
@@ -337,7 +337,21 @@ public class CreateUserRequest {
     
     RU_RU("ru-RU"),
     
-    EN_IN("en-IN");
+    EN_IN("en-IN"),
+    
+    DE_CH("de-CH"),
+    
+    EN_NZ("en-NZ"),
+    
+    ES_MX("es-MX"),
+    
+    EN_AU("en-AU"),
+    
+    ZH_HANT("zh-Hant"),
+    
+    KO_KR("ko-KR"),
+    
+    EN_DE("en-DE");
 
     private String value;
 
