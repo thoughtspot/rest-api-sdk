@@ -15,6 +15,7 @@ package org.thoughtspot.client.api;
 
 import org.thoughtspot.client.ApiCallback;
 import org.thoughtspot.client.ApiClient;
+import org.thoughtspot.client.ApiClientConfiguration;
 import org.thoughtspot.client.ApiException;
 import org.thoughtspot.client.ApiResponse;
 import org.thoughtspot.client.Configuration;
@@ -44,6 +45,7 @@ import java.util.Map;
 
 public class AiApi {
     private ApiClient localVarApiClient;
+    private ApiClientConfiguration localVarApiClientConfiguration;
     private int localHostIndex;
     private String localCustomBaseUrl;
 
@@ -55,12 +57,30 @@ public class AiApi {
         this.localVarApiClient = apiClient;
     }
 
+    public AiApi(ApiClientConfiguration apiClientConfiguration) {
+        this.localVarApiClientConfiguration = apiClientConfiguration;
+        this.localVarApiClient = new ApiClient(apiClientConfiguration);
+    }
+
     public ApiClient getApiClient() {
         return localVarApiClient;
     }
 
     public void setApiClient(ApiClient apiClient) {
         this.localVarApiClient = apiClient;
+    }
+
+    public ApiClientConfiguration getApiClientConfiguration() {
+        return localVarApiClientConfiguration;
+    }
+
+    public void applyApiClientConfiguration(ApiClientConfiguration apiClientConfiguration) {
+        this.localVarApiClientConfiguration = apiClientConfiguration;
+        if (localVarApiClient != null) {
+            localVarApiClient.applyApiClientConfiguration(apiClientConfiguration);
+        } else {
+            localVarApiClient = new ApiClient(apiClientConfiguration);
+        }
     }
 
     public int getHostIndex() {

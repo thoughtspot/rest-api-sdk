@@ -49,7 +49,7 @@ import org.thoughtspot.client.JSON;
 /**
  * ParametersListItemInput
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-05-06T05:59:13.263928365Z[Etc/UTC]", comments = "Generator version: 7.12.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-05-07T11:24:19.244730329Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class ParametersListItemInput {
   public static final String SERIALIZED_NAME_KEY = "key";
   @SerializedName(SERIALIZED_NAME_KEY)

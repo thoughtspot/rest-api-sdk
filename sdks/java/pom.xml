@@ -219,7 +219,7 @@
 
                   <!-- apply a specific flavor of google-java-format and reflow long strings -->
                   <googleJavaFormat>
-                    <version>1.8</version>
+                    <version>1.7</version>
                     <style>AOSP</style>
                     <reflowLongStrings>true</reflowLongStrings>
                   </googleJavaFormat>

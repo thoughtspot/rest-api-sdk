@@ -103,13 +103,7 @@ public class ApiClient {
      * Basic constructor for ApiClient
      */
     public ApiClient() {
-        init();
-        initHttpClient();
-
-        // Setup authentications (key: authentication name, value: authentication).
-        authentications.put("bearerAuth", new HttpBearerAuth("bearer"));
-        // Prevent the authentications from being modified.
-        authentications = Collections.unmodifiableMap(authentications);
+        this((ApiClientConfiguration) null, (OkHttpClient) null);
     }
 
     /**
@@ -118,14 +112,56 @@ public class ApiClient {
      * @param client a {@link okhttp3.OkHttpClient} object
      */
     public ApiClient(OkHttpClient client) {
+        this((ApiClientConfiguration) null, client);
+    }
+
+    /**
+     * Basic constructor with custom ApiClientConfiguration
+     *
+     * @param apiClientConfiguration a {@link org.thoughtspot.client.ApiClientConfiguration} object
+     */
+    public ApiClient(ApiClientConfiguration apiClientConfiguration) {
+        this(apiClientConfiguration, (OkHttpClient) null);
+    }
+
+    /**
+     * Basic constructor with custom ApiClientConfiguration and OkHttpClient
+     *
+     * @param apiClientConfiguration a {@link org.thoughtspot.client.ApiClientConfiguration} object
+     * @param client a {@link okhttp3.OkHttpClient} object
+     */
+    public ApiClient(ApiClientConfiguration apiClientConfiguration, OkHttpClient client) {
         init();
 
-        httpClient = client;
+        if (client != null) {
+            httpClient = client;
+        } else {
+            initHttpClient();
+        }
 
         // Setup authentications (key: authentication name, value: authentication).
         authentications.put("bearerAuth", new HttpBearerAuth("bearer"));
         // Prevent the authentications from being modified.
         authentications = Collections.unmodifiableMap(authentications);
+
+        applyApiClientConfiguration(apiClientConfiguration);
+    }
+
+    /**
+     * Apply the ApiClientConfiguration to the ApiClient
+     *
+     * @param apiClientConfiguration a {@link org.thoughtspot.client.ApiClientConfiguration} object
+     */
+    public void applyApiClientConfiguration(ApiClientConfiguration apiClientConfiguration) {
+        if (apiClientConfiguration != null) {
+            setBasePath(apiClientConfiguration.getBasePath());
+            setBearerToken(apiClientConfiguration.getBearerTokenSupplier());
+            apiClientConfiguration.getDefaultHeaderMap().forEach(this::addDefaultHeader);
+            apiClientConfiguration.getDefaultCookieMap().forEach(this::addDefaultCookie);
+            setVerifyingSsl(apiClientConfiguration.isVerifyingSsl());
+            setSslCaCert(apiClientConfiguration.getSslCaCert());
+            setKeyManagers(apiClientConfiguration.getKeyManagers().toArray(new KeyManager[0]));
+        }
     }
 
     private void initHttpClient() {
