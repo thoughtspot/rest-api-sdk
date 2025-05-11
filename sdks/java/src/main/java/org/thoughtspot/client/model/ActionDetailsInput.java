@@ -50,7 +50,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Action details includes &#x60;Type&#x60; and configuration details of Custom Actions. Either Callback or URL is required.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-05-07T11:24:19.244730329Z[Etc/UTC]", comments = "Generator version: 7.12.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-05-08T06:38:48.062310242Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class ActionDetailsInput {
   public static final String SERIALIZED_NAME_C_A_L_L_B_A_C_K = "CALLBACK";
   @SerializedName(SERIALIZED_NAME_C_A_L_L_B_A_C_K)

@@ -49,7 +49,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Basic Auth: Basic authentication involves sending a verified username and password with your request.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-05-07T11:24:19.244730329Z[Etc/UTC]", comments = "Generator version: 7.12.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-05-08T06:38:48.062310242Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class BasicAuthInput {
   public static final String SERIALIZED_NAME_PASSWORD = "password";
   @SerializedName(SERIALIZED_NAME_PASSWORD)

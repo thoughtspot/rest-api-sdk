@@ -49,7 +49,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Specify that the association is enabled for the metadata object Default
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-05-07T11:24:19.244730329Z[Etc/UTC]", comments = "Generator version: 7.12.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-05-08T06:38:48.062310242Z[Etc/UTC]", comments = "Generator version: 7.12.0")
 public class ActionConfigInputCreate {
   /**
    * Position of the Custom action on the Metadata object. Earlier naming convention: context.
