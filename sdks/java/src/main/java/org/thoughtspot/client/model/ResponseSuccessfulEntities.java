@@ -50,7 +50,7 @@ public class ResponseSuccessfulEntities implements Serializable {
   public static final String SERIALIZED_NAME_DATA = "data";
   @SerializedName(SERIALIZED_NAME_DATA)
   @javax.annotation.Nonnull
-  private List<ResponseSuccessfulEntity> data = new ArrayList<>();
+  private List<ResponseSuccessfulEntity> data;
 
   public ResponseSuccessfulEntities() {
   }

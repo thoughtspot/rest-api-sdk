@@ -56,7 +56,7 @@ public class RuntimeFilters implements Serializable {
   public static final String SERIALIZED_NAME_VALUES = "values";
   @SerializedName(SERIALIZED_NAME_VALUES)
   @javax.annotation.Nonnull
-  private List<String> values = new ArrayList<>();
+  private List<String> values;
 
   /**
    * Operator value. Example: EQ

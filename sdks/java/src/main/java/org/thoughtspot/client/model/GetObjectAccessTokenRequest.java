@@ -96,7 +96,7 @@ public class GetObjectAccessTokenRequest implements Serializable {
   public static final String SERIALIZED_NAME_GROUP_IDENTIFIERS = "group_identifiers";
   @SerializedName(SERIALIZED_NAME_GROUP_IDENTIFIERS)
   @javax.annotation.Nullable
-  private List<String> groupIdentifiers = new ArrayList<>();
+  private List<String> groupIdentifiers;
 
   public static final String SERIALIZED_NAME_USER_PARAMETERS = "user_parameters";
   @SerializedName(SERIALIZED_NAME_USER_PARAMETERS)

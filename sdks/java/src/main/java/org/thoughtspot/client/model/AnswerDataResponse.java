@@ -60,7 +60,7 @@ public class AnswerDataResponse implements Serializable {
   public static final String SERIALIZED_NAME_CONTENTS = "contents";
   @SerializedName(SERIALIZED_NAME_CONTENTS)
   @javax.annotation.Nonnull
-  private List<AnswerContent> contents = new ArrayList<>();
+  private List<AnswerContent> contents;
 
   public AnswerDataResponse() {
   }

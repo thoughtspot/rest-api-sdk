@@ -51,7 +51,7 @@ public class ImportUserGroupsRequest implements Serializable {
   public static final String SERIALIZED_NAME_GROUPS = "groups";
   @SerializedName(SERIALIZED_NAME_GROUPS)
   @javax.annotation.Nullable
-  private List<GroupsImportListInput> groups = new ArrayList<>();
+  private List<GroupsImportListInput> groups;
 
   public static final String SERIALIZED_NAME_DELETE_UNSPECIFIED_GROUPS = "delete_unspecified_groups";
   @SerializedName(SERIALIZED_NAME_DELETE_UNSPECIFIED_GROUPS)

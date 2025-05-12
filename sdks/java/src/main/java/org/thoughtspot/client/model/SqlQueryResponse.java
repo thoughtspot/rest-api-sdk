@@ -131,7 +131,7 @@ public class SqlQueryResponse implements Serializable {
   public static final String SERIALIZED_NAME_SQL_QUERIES = "sql_queries";
   @SerializedName(SERIALIZED_NAME_SQL_QUERIES)
   @javax.annotation.Nonnull
-  private List<SqlQuery> sqlQueries = new ArrayList<>();
+  private List<SqlQuery> sqlQueries;
 
   public SqlQueryResponse() {
   }

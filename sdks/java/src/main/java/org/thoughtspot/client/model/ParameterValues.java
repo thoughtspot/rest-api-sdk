@@ -54,7 +54,7 @@ public class ParameterValues implements Serializable {
   public static final String SERIALIZED_NAME_VALUES = "values";
   @SerializedName(SERIALIZED_NAME_VALUES)
   @javax.annotation.Nonnull
-  private List<Object> values = new ArrayList<>();
+  private List<Object> values;
 
   public ParameterValues() {
   }

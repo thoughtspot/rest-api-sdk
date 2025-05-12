@@ -50,17 +50,17 @@ public class SearchRolesRequest implements Serializable {
   public static final String SERIALIZED_NAME_ROLE_IDENTIFIERS = "role_identifiers";
   @SerializedName(SERIALIZED_NAME_ROLE_IDENTIFIERS)
   @javax.annotation.Nullable
-  private List<String> roleIdentifiers = new ArrayList<>();
+  private List<String> roleIdentifiers;
 
   public static final String SERIALIZED_NAME_ORG_IDENTIFIERS = "org_identifiers";
   @SerializedName(SERIALIZED_NAME_ORG_IDENTIFIERS)
   @javax.annotation.Nullable
-  private List<String> orgIdentifiers = new ArrayList<>();
+  private List<String> orgIdentifiers;
 
   public static final String SERIALIZED_NAME_GROUP_IDENTIFIERS = "group_identifiers";
   @SerializedName(SERIALIZED_NAME_GROUP_IDENTIFIERS)
   @javax.annotation.Nullable
-  private List<String> groupIdentifiers = new ArrayList<>();
+  private List<String> groupIdentifiers;
 
   /**
    * Gets or Sets privileges
@@ -203,7 +203,7 @@ public class SearchRolesRequest implements Serializable {
   public static final String SERIALIZED_NAME_PRIVILEGES = "privileges";
   @SerializedName(SERIALIZED_NAME_PRIVILEGES)
   @javax.annotation.Nullable
-  private List<PrivilegesEnum> privileges = new ArrayList<>();
+  private List<PrivilegesEnum> privileges;
 
   public static final String SERIALIZED_NAME_DEPRECATED = "deprecated";
   @Deprecated
@@ -281,7 +281,7 @@ public class SearchRolesRequest implements Serializable {
   @Deprecated
   @SerializedName(SERIALIZED_NAME_PERMISSIONS)
   @javax.annotation.Nullable
-  private List<PermissionsEnum> permissions = new ArrayList<>();
+  private List<PermissionsEnum> permissions;
 
   public SearchRolesRequest() {
   }

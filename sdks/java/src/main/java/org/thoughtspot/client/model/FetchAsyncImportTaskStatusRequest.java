@@ -50,7 +50,7 @@ public class FetchAsyncImportTaskStatusRequest implements Serializable {
   public static final String SERIALIZED_NAME_TASK_IDS = "task_ids";
   @SerializedName(SERIALIZED_NAME_TASK_IDS)
   @javax.annotation.Nullable
-  private List<String> taskIds = new ArrayList<>();
+  private List<String> taskIds;
 
   /**
    * Gets or Sets taskStatus
@@ -111,7 +111,7 @@ public class FetchAsyncImportTaskStatusRequest implements Serializable {
   public static final String SERIALIZED_NAME_TASK_STATUS = "task_status";
   @SerializedName(SERIALIZED_NAME_TASK_STATUS)
   @javax.annotation.Nullable
-  private List<TaskStatusEnum> taskStatus = new ArrayList<>();
+  private List<TaskStatusEnum> taskStatus;
 
   public static final String SERIALIZED_NAME_AUTHOR_IDENTIFIER = "author_identifier";
   @SerializedName(SERIALIZED_NAME_AUTHOR_IDENTIFIER)

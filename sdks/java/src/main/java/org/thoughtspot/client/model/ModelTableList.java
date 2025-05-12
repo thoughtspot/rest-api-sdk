@@ -60,7 +60,7 @@ public class ModelTableList implements Serializable {
   public static final String SERIALIZED_NAME_TABLES = "tables";
   @SerializedName(SERIALIZED_NAME_TABLES)
   @javax.annotation.Nonnull
-  private List<String> tables = new ArrayList<>();
+  private List<String> tables;
 
   public ModelTableList() {
   }

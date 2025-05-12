@@ -49,7 +49,7 @@ public class ForceLogoutUsersRequest implements Serializable {
   public static final String SERIALIZED_NAME_USER_IDENTIFIERS = "user_identifiers";
   @SerializedName(SERIALIZED_NAME_USER_IDENTIFIERS)
   @javax.annotation.Nullable
-  private List<String> userIdentifiers = new ArrayList<>();
+  private List<String> userIdentifiers;
 
   public ForceLogoutUsersRequest() {
   }

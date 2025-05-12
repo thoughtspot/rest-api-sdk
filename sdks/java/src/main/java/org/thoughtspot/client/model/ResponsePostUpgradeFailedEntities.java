@@ -50,7 +50,7 @@ public class ResponsePostUpgradeFailedEntities implements Serializable {
   public static final String SERIALIZED_NAME_DATA = "data";
   @SerializedName(SERIALIZED_NAME_DATA)
   @javax.annotation.Nonnull
-  private List<ResponsePostUpgradeFailedEntity> data = new ArrayList<>();
+  private List<ResponsePostUpgradeFailedEntity> data;
 
   public ResponsePostUpgradeFailedEntities() {
   }

@@ -50,7 +50,7 @@ public class UpdateMetadataObjIdRequest implements Serializable {
   public static final String SERIALIZED_NAME_METADATA = "metadata";
   @SerializedName(SERIALIZED_NAME_METADATA)
   @javax.annotation.Nonnull
-  private List<UpdateObjIdInput> metadata = new ArrayList<>();
+  private List<UpdateObjIdInput> metadata;
 
   public UpdateMetadataObjIdRequest() {
   }

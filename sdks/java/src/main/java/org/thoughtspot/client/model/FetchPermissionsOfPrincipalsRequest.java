@@ -51,12 +51,12 @@ public class FetchPermissionsOfPrincipalsRequest implements Serializable {
   public static final String SERIALIZED_NAME_PRINCIPALS = "principals";
   @SerializedName(SERIALIZED_NAME_PRINCIPALS)
   @javax.annotation.Nonnull
-  private List<PrincipalsInput> principals = new ArrayList<>();
+  private List<PrincipalsInput> principals;
 
   public static final String SERIALIZED_NAME_METADATA = "metadata";
   @SerializedName(SERIALIZED_NAME_METADATA)
   @javax.annotation.Nullable
-  private List<PermissionsMetadataTypeInput> metadata = new ArrayList<>();
+  private List<PermissionsMetadataTypeInput> metadata;
 
   public static final String SERIALIZED_NAME_RECORD_OFFSET = "record_offset";
   @SerializedName(SERIALIZED_NAME_RECORD_OFFSET)

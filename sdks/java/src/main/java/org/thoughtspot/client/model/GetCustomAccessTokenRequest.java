@@ -140,17 +140,17 @@ public class GetCustomAccessTokenRequest implements Serializable {
   public static final String SERIALIZED_NAME_FILTER_RULES = "filter_rules";
   @SerializedName(SERIALIZED_NAME_FILTER_RULES)
   @javax.annotation.Nullable
-  private List<FilterRules> filterRules = new ArrayList<>();
+  private List<FilterRules> filterRules;
 
   public static final String SERIALIZED_NAME_PARAMETER_VALUES = "parameter_values";
   @SerializedName(SERIALIZED_NAME_PARAMETER_VALUES)
   @javax.annotation.Nullable
-  private List<ParameterValues> parameterValues = new ArrayList<>();
+  private List<ParameterValues> parameterValues;
 
   public static final String SERIALIZED_NAME_OBJECTS = "objects";
   @SerializedName(SERIALIZED_NAME_OBJECTS)
   @javax.annotation.Nullable
-  private List<TokenAccessScopeObject> objects = new ArrayList<>();
+  private List<TokenAccessScopeObject> objects;
 
   public static final String SERIALIZED_NAME_EMAIL = "email";
   @SerializedName(SERIALIZED_NAME_EMAIL)
@@ -165,7 +165,7 @@ public class GetCustomAccessTokenRequest implements Serializable {
   public static final String SERIALIZED_NAME_GROUPS = "groups";
   @SerializedName(SERIALIZED_NAME_GROUPS)
   @javax.annotation.Nullable
-  private List<GroupObject> groups = new ArrayList<>();
+  private List<GroupObject> groups;
 
   public static final String SERIALIZED_NAME_AUTO_CREATE = "auto_create";
   @SerializedName(SERIALIZED_NAME_AUTO_CREATE)

@@ -50,7 +50,7 @@ public class AssignChangeAuthorRequest implements Serializable {
   public static final String SERIALIZED_NAME_METADATA = "metadata";
   @SerializedName(SERIALIZED_NAME_METADATA)
   @javax.annotation.Nonnull
-  private List<AuthorMetadataTypeInput> metadata = new ArrayList<>();
+  private List<AuthorMetadataTypeInput> metadata;
 
   public static final String SERIALIZED_NAME_USER_IDENTIFIER = "user_identifier";
   @SerializedName(SERIALIZED_NAME_USER_IDENTIFIER)

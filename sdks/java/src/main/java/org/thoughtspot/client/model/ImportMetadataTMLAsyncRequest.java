@@ -50,7 +50,7 @@ public class ImportMetadataTMLAsyncRequest implements Serializable {
   public static final String SERIALIZED_NAME_METADATA_TMLS = "metadata_tmls";
   @SerializedName(SERIALIZED_NAME_METADATA_TMLS)
   @javax.annotation.Nonnull
-  private List<String> metadataTmls = new ArrayList<>();
+  private List<String> metadataTmls;
 
   public static final String SERIALIZED_NAME_CREATE_NEW = "create_new";
   @SerializedName(SERIALIZED_NAME_CREATE_NEW)

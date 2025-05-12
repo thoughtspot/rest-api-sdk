@@ -130,7 +130,7 @@ public class HeaderUpdateInput implements Serializable {
   public static final String SERIALIZED_NAME_ATTRIBUTES = "attributes";
   @SerializedName(SERIALIZED_NAME_ATTRIBUTES)
   @javax.annotation.Nonnull
-  private List<HeaderAttributeInput> attributes = new ArrayList<>();
+  private List<HeaderAttributeInput> attributes;
 
   public HeaderUpdateInput() {
   }

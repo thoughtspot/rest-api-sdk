@@ -51,7 +51,7 @@ public class DeleteMetadataRequest implements Serializable {
   public static final String SERIALIZED_NAME_METADATA = "metadata";
   @SerializedName(SERIALIZED_NAME_METADATA)
   @javax.annotation.Nonnull
-  private List<DeleteMetadataTypeInput> metadata = new ArrayList<>();
+  private List<DeleteMetadataTypeInput> metadata;
 
   public static final String SERIALIZED_NAME_DELETE_DISABLED_OBJECTS = "delete_disabled_objects";
   @SerializedName(SERIALIZED_NAME_DELETE_DISABLED_OBJECTS)

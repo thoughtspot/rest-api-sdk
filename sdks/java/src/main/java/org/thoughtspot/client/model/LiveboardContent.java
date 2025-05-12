@@ -55,12 +55,12 @@ public class LiveboardContent implements Serializable {
   public static final String SERIALIZED_NAME_COLUMN_NAMES = "column_names";
   @SerializedName(SERIALIZED_NAME_COLUMN_NAMES)
   @javax.annotation.Nonnull
-  private List<String> columnNames = new ArrayList<>();
+  private List<String> columnNames;
 
   public static final String SERIALIZED_NAME_DATA_ROWS = "data_rows";
   @SerializedName(SERIALIZED_NAME_DATA_ROWS)
   @javax.annotation.Nonnull
-  private List<Object> dataRows = new ArrayList<>();
+  private List<Object> dataRows;
 
   public static final String SERIALIZED_NAME_RECORD_OFFSET = "record_offset";
   @SerializedName(SERIALIZED_NAME_RECORD_OFFSET)

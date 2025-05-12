@@ -52,7 +52,7 @@ public class SearchConnectionRequest implements Serializable {
   public static final String SERIALIZED_NAME_CONNECTIONS = "connections";
   @SerializedName(SERIALIZED_NAME_CONNECTIONS)
   @javax.annotation.Nullable
-  private List<ConnectionInput> connections = new ArrayList<>();
+  private List<ConnectionInput> connections;
 
   /**
    * Gets or Sets dataWarehouseTypes
@@ -171,7 +171,7 @@ public class SearchConnectionRequest implements Serializable {
   public static final String SERIALIZED_NAME_DATA_WAREHOUSE_TYPES = "data_warehouse_types";
   @SerializedName(SERIALIZED_NAME_DATA_WAREHOUSE_TYPES)
   @javax.annotation.Nullable
-  private List<DataWarehouseTypesEnum> dataWarehouseTypes = new ArrayList<>();
+  private List<DataWarehouseTypesEnum> dataWarehouseTypes;
 
   public static final String SERIALIZED_NAME_RECORD_OFFSET = "record_offset";
   @SerializedName(SERIALIZED_NAME_RECORD_OFFSET)
@@ -186,7 +186,7 @@ public class SearchConnectionRequest implements Serializable {
   public static final String SERIALIZED_NAME_TAG_IDENTIFIERS = "tag_identifiers";
   @SerializedName(SERIALIZED_NAME_TAG_IDENTIFIERS)
   @javax.annotation.Nullable
-  private List<String> tagIdentifiers = new ArrayList<>();
+  private List<String> tagIdentifiers;
 
   /**
    * Data warehouse object type.

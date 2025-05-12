@@ -50,12 +50,12 @@ public class AssignTagRequest implements Serializable {
   public static final String SERIALIZED_NAME_METADATA = "metadata";
   @SerializedName(SERIALIZED_NAME_METADATA)
   @javax.annotation.Nonnull
-  private List<TagMetadataTypeInput> metadata = new ArrayList<>();
+  private List<TagMetadataTypeInput> metadata;
 
   public static final String SERIALIZED_NAME_TAG_IDENTIFIERS = "tag_identifiers";
   @SerializedName(SERIALIZED_NAME_TAG_IDENTIFIERS)
   @javax.annotation.Nonnull
-  private List<String> tagIdentifiers = new ArrayList<>();
+  private List<String> tagIdentifiers;
 
   public AssignTagRequest() {
   }

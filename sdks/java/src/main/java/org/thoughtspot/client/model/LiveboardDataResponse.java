@@ -60,7 +60,7 @@ public class LiveboardDataResponse implements Serializable {
   public static final String SERIALIZED_NAME_CONTENTS = "contents";
   @SerializedName(SERIALIZED_NAME_CONTENTS)
   @javax.annotation.Nonnull
-  private List<LiveboardContent> contents = new ArrayList<>();
+  private List<LiveboardContent> contents;
 
   public LiveboardDataResponse() {
   }

@@ -50,7 +50,7 @@ public class UpdateMetadataHeaderRequest implements Serializable {
   public static final String SERIALIZED_NAME_HEADERS_UPDATE = "headers_update";
   @SerializedName(SERIALIZED_NAME_HEADERS_UPDATE)
   @javax.annotation.Nonnull
-  private List<HeaderUpdateInput> headersUpdate = new ArrayList<>();
+  private List<HeaderUpdateInput> headersUpdate;
 
   public static final String SERIALIZED_NAME_ORG_IDENTIFIER = "org_identifier";
   @SerializedName(SERIALIZED_NAME_ORG_IDENTIFIER)

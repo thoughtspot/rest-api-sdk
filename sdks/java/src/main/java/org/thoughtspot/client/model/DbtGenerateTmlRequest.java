@@ -56,7 +56,7 @@ public class DbtGenerateTmlRequest implements Serializable {
   public static final String SERIALIZED_NAME_MODEL_TABLES = "model_tables";
   @SerializedName(SERIALIZED_NAME_MODEL_TABLES)
   @javax.annotation.Nullable
-  private List<ModelTableList> modelTables = new ArrayList<>();
+  private List<ModelTableList> modelTables;
 
   /**
    * Mention the worksheet tmls to import
@@ -120,7 +120,7 @@ public class DbtGenerateTmlRequest implements Serializable {
   public static final String SERIALIZED_NAME_WORKSHEETS = "worksheets";
   @SerializedName(SERIALIZED_NAME_WORKSHEETS)
   @javax.annotation.Nullable
-  private List<String> worksheets = new ArrayList<>();
+  private List<String> worksheets;
 
   public static final String SERIALIZED_NAME_FILE_CONTENT = "file_content";
   @SerializedName(SERIALIZED_NAME_FILE_CONTENT)

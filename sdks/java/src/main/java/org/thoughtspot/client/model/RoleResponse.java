@@ -195,7 +195,7 @@ public class RoleResponse implements Serializable {
   public static final String SERIALIZED_NAME_PRIVILEGES = "privileges";
   @SerializedName(SERIALIZED_NAME_PRIVILEGES)
   @javax.annotation.Nonnull
-  private List<PrivilegesEnum> privileges = new ArrayList<>();
+  private List<PrivilegesEnum> privileges;
 
   /**
    * Permission details of the Role

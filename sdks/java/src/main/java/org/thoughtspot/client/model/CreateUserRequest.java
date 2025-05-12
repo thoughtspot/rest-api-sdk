@@ -199,12 +199,12 @@ public class CreateUserRequest implements Serializable {
   public static final String SERIALIZED_NAME_ORG_IDENTIFIERS = "org_identifiers";
   @SerializedName(SERIALIZED_NAME_ORG_IDENTIFIERS)
   @javax.annotation.Nullable
-  private List<String> orgIdentifiers = new ArrayList<>();
+  private List<String> orgIdentifiers;
 
   public static final String SERIALIZED_NAME_GROUP_IDENTIFIERS = "group_identifiers";
   @SerializedName(SERIALIZED_NAME_GROUP_IDENTIFIERS)
   @javax.annotation.Nullable
-  private List<String> groupIdentifiers = new ArrayList<>();
+  private List<String> groupIdentifiers;
 
   /**
    * Visibility of the users. When set to SHARABLE, the user is visible to other users and groups when they try to share an object.
@@ -286,7 +286,7 @@ public class CreateUserRequest implements Serializable {
   public static final String SERIALIZED_NAME_FAVORITE_METADATA = "favorite_metadata";
   @SerializedName(SERIALIZED_NAME_FAVORITE_METADATA)
   @javax.annotation.Nullable
-  private List<FavoriteMetadataInput> favoriteMetadata = new ArrayList<>();
+  private List<FavoriteMetadataInput> favoriteMetadata;
 
   /**
    * Locale for the user.

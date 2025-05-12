@@ -129,7 +129,7 @@ public class SearchUsersRequest implements Serializable {
   public static final String SERIALIZED_NAME_GROUP_IDENTIFIERS = "group_identifiers";
   @SerializedName(SERIALIZED_NAME_GROUP_IDENTIFIERS)
   @javax.annotation.Nullable
-  private List<String> groupIdentifiers = new ArrayList<>();
+  private List<String> groupIdentifiers;
 
   /**
    * Gets or Sets privileges
@@ -254,7 +254,7 @@ public class SearchUsersRequest implements Serializable {
   public static final String SERIALIZED_NAME_PRIVILEGES = "privileges";
   @SerializedName(SERIALIZED_NAME_PRIVILEGES)
   @javax.annotation.Nullable
-  private List<PrivilegesEnum> privileges = new ArrayList<>();
+  private List<PrivilegesEnum> privileges;
 
   /**
    * Type of the account
@@ -402,7 +402,7 @@ public class SearchUsersRequest implements Serializable {
   public static final String SERIALIZED_NAME_ORG_IDENTIFIERS = "org_identifiers";
   @SerializedName(SERIALIZED_NAME_ORG_IDENTIFIERS)
   @javax.annotation.Nullable
-  private List<String> orgIdentifiers = new ArrayList<>();
+  private List<String> orgIdentifiers;
 
   public static final String SERIALIZED_NAME_HOME_LIVEBOARD_IDENTIFIER = "home_liveboard_identifier";
   @SerializedName(SERIALIZED_NAME_HOME_LIVEBOARD_IDENTIFIER)
@@ -412,7 +412,7 @@ public class SearchUsersRequest implements Serializable {
   public static final String SERIALIZED_NAME_FAVORITE_METADATA = "favorite_metadata";
   @SerializedName(SERIALIZED_NAME_FAVORITE_METADATA)
   @javax.annotation.Nullable
-  private List<FavoriteMetadataInput> favoriteMetadata = new ArrayList<>();
+  private List<FavoriteMetadataInput> favoriteMetadata;
 
   public static final String SERIALIZED_NAME_RECORD_OFFSET = "record_offset";
   @SerializedName(SERIALIZED_NAME_RECORD_OFFSET)
@@ -432,7 +432,7 @@ public class SearchUsersRequest implements Serializable {
   public static final String SERIALIZED_NAME_ROLE_IDENTIFIERS = "role_identifiers";
   @SerializedName(SERIALIZED_NAME_ROLE_IDENTIFIERS)
   @javax.annotation.Nullable
-  private List<String> roleIdentifiers = new ArrayList<>();
+  private List<String> roleIdentifiers;
 
   public static final String SERIALIZED_NAME_INCLUDE_FAVORITE_METADATA = "include_favorite_metadata";
   @SerializedName(SERIALIZED_NAME_INCLUDE_FAVORITE_METADATA)

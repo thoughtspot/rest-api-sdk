@@ -50,7 +50,7 @@ public class DataWarehouseObjects implements Serializable {
   public static final String SERIALIZED_NAME_DATABASES = "databases";
   @SerializedName(SERIALIZED_NAME_DATABASES)
   @javax.annotation.Nonnull
-  private List<Database> databases = new ArrayList<>();
+  private List<Database> databases;
 
   public DataWarehouseObjects() {
   }

@@ -50,12 +50,12 @@ public class QueryGetDecomposedQueryRequest implements Serializable {
   public static final String SERIALIZED_NAME_ANSWER_IDS = "answerIds";
   @SerializedName(SERIALIZED_NAME_ANSWER_IDS)
   @javax.annotation.Nullable
-  private List<String> answerIds = new ArrayList<>();
+  private List<String> answerIds;
 
   public static final String SERIALIZED_NAME_CONTENT = "content";
   @SerializedName(SERIALIZED_NAME_CONTENT)
   @javax.annotation.Nullable
-  private List<String> content = new ArrayList<>();
+  private List<String> content;
 
   public static final String SERIALIZED_NAME_CONVERSATION_ID = "conversationId";
   @SerializedName(SERIALIZED_NAME_CONVERSATION_ID)
@@ -65,7 +65,7 @@ public class QueryGetDecomposedQueryRequest implements Serializable {
   public static final String SERIALIZED_NAME_LIVEBOARD_IDS = "liveboardIds";
   @SerializedName(SERIALIZED_NAME_LIVEBOARD_IDS)
   @javax.annotation.Nullable
-  private List<String> liveboardIds = new ArrayList<>();
+  private List<String> liveboardIds;
 
   public static final String SERIALIZED_NAME_MAX_DECOMPOSED_QUERIES = "maxDecomposedQueries";
   @SerializedName(SERIALIZED_NAME_MAX_DECOMPOSED_QUERIES)
@@ -80,7 +80,7 @@ public class QueryGetDecomposedQueryRequest implements Serializable {
   public static final String SERIALIZED_NAME_WORKSHEET_IDS = "worksheetIds";
   @SerializedName(SERIALIZED_NAME_WORKSHEET_IDS)
   @javax.annotation.Nullable
-  private List<String> worksheetIds = new ArrayList<>();
+  private List<String> worksheetIds;
 
   public QueryGetDecomposedQueryRequest() {
   }

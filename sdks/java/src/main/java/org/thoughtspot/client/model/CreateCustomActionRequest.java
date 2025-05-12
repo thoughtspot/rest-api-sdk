@@ -62,7 +62,7 @@ public class CreateCustomActionRequest implements Serializable {
   public static final String SERIALIZED_NAME_ASSOCIATE_METADATA = "associate_metadata";
   @SerializedName(SERIALIZED_NAME_ASSOCIATE_METADATA)
   @javax.annotation.Nullable
-  private List<AssociateMetadataInputCreate> associateMetadata = new ArrayList<>();
+  private List<AssociateMetadataInputCreate> associateMetadata;
 
   public static final String SERIALIZED_NAME_DEFAULT_ACTION_CONFIG = "default_action_config";
   @SerializedName(SERIALIZED_NAME_DEFAULT_ACTION_CONFIG)
@@ -72,7 +72,7 @@ public class CreateCustomActionRequest implements Serializable {
   public static final String SERIALIZED_NAME_GROUP_IDENTIFIERS = "group_identifiers";
   @SerializedName(SERIALIZED_NAME_GROUP_IDENTIFIERS)
   @javax.annotation.Nullable
-  private List<String> groupIdentifiers = new ArrayList<>();
+  private List<String> groupIdentifiers;
 
   public CreateCustomActionRequest() {
   }

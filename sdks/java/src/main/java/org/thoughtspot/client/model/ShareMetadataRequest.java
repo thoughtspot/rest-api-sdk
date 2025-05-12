@@ -115,22 +115,22 @@ public class ShareMetadataRequest implements Serializable {
   public static final String SERIALIZED_NAME_METADATA_IDENTIFIERS = "metadata_identifiers";
   @SerializedName(SERIALIZED_NAME_METADATA_IDENTIFIERS)
   @javax.annotation.Nullable
-  private List<String> metadataIdentifiers = new ArrayList<>();
+  private List<String> metadataIdentifiers;
 
   public static final String SERIALIZED_NAME_METADATA = "metadata";
   @SerializedName(SERIALIZED_NAME_METADATA)
   @javax.annotation.Nullable
-  private List<ShareMetadataTypeInput> metadata = new ArrayList<>();
+  private List<ShareMetadataTypeInput> metadata;
 
   public static final String SERIALIZED_NAME_PERMISSIONS = "permissions";
   @SerializedName(SERIALIZED_NAME_PERMISSIONS)
   @javax.annotation.Nonnull
-  private List<SharePermissionsInput> permissions = new ArrayList<>();
+  private List<SharePermissionsInput> permissions;
 
   public static final String SERIALIZED_NAME_VISUALIZATION_IDENTIFIERS = "visualization_identifiers";
   @SerializedName(SERIALIZED_NAME_VISUALIZATION_IDENTIFIERS)
   @javax.annotation.Nullable
-  private List<String> visualizationIdentifiers = new ArrayList<>();
+  private List<String> visualizationIdentifiers;
 
   public static final String SERIALIZED_NAME_EMAILS = "emails";
   @SerializedName(SERIALIZED_NAME_EMAILS)

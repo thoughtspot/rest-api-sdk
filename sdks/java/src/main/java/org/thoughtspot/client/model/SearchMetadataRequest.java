@@ -55,17 +55,17 @@ public class SearchMetadataRequest implements Serializable {
   public static final String SERIALIZED_NAME_METADATA = "metadata";
   @SerializedName(SERIALIZED_NAME_METADATA)
   @javax.annotation.Nullable
-  private List<MetadataListItemInput> metadata = new ArrayList<>();
+  private List<MetadataListItemInput> metadata;
 
   public static final String SERIALIZED_NAME_PERMISSIONS = "permissions";
   @SerializedName(SERIALIZED_NAME_PERMISSIONS)
   @javax.annotation.Nullable
-  private List<PermissionInput> permissions = new ArrayList<>();
+  private List<PermissionInput> permissions;
 
   public static final String SERIALIZED_NAME_CREATED_BY_USER_IDENTIFIERS = "created_by_user_identifiers";
   @SerializedName(SERIALIZED_NAME_CREATED_BY_USER_IDENTIFIERS)
   @javax.annotation.Nullable
-  private List<String> createdByUserIdentifiers = new ArrayList<>();
+  private List<String> createdByUserIdentifiers;
 
   /**
    * Version of the dependent table of the metadata objects like Worksheets.
@@ -127,7 +127,7 @@ public class SearchMetadataRequest implements Serializable {
   public static final String SERIALIZED_NAME_EXCLUDE_OBJECTS = "exclude_objects";
   @SerializedName(SERIALIZED_NAME_EXCLUDE_OBJECTS)
   @javax.annotation.Nullable
-  private List<ExcludeMetadataListItemInput> excludeObjects = new ArrayList<>();
+  private List<ExcludeMetadataListItemInput> excludeObjects;
 
   public static final String SERIALIZED_NAME_FAVORITE_OBJECT_OPTIONS = "favorite_object_options";
   @SerializedName(SERIALIZED_NAME_FAVORITE_OBJECT_OPTIONS)
@@ -182,7 +182,7 @@ public class SearchMetadataRequest implements Serializable {
   public static final String SERIALIZED_NAME_MODIFIED_BY_USER_IDENTIFIERS = "modified_by_user_identifiers";
   @SerializedName(SERIALIZED_NAME_MODIFIED_BY_USER_IDENTIFIERS)
   @javax.annotation.Nullable
-  private List<String> modifiedByUserIdentifiers = new ArrayList<>();
+  private List<String> modifiedByUserIdentifiers;
 
   public static final String SERIALIZED_NAME_RECORD_OFFSET = "record_offset";
   @SerializedName(SERIALIZED_NAME_RECORD_OFFSET)
@@ -202,7 +202,7 @@ public class SearchMetadataRequest implements Serializable {
   public static final String SERIALIZED_NAME_TAG_IDENTIFIERS = "tag_identifiers";
   @SerializedName(SERIALIZED_NAME_TAG_IDENTIFIERS)
   @javax.annotation.Nullable
-  private List<String> tagIdentifiers = new ArrayList<>();
+  private List<String> tagIdentifiers;
 
   public static final String SERIALIZED_NAME_INCLUDE_STATS = "include_stats";
   @SerializedName(SERIALIZED_NAME_INCLUDE_STATS)

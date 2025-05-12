@@ -51,7 +51,7 @@ public class JWTUserOptions implements Serializable {
   public static final String SERIALIZED_NAME_PARAMETERS = "parameters";
   @SerializedName(SERIALIZED_NAME_PARAMETERS)
   @javax.annotation.Nullable
-  private List<Object> parameters = new ArrayList<>();
+  private List<Object> parameters;
 
   public static final String SERIALIZED_NAME_METADATA = "metadata";
   @SerializedName(SERIALIZED_NAME_METADATA)

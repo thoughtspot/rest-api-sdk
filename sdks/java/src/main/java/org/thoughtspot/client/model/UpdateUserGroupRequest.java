@@ -54,7 +54,7 @@ public class UpdateUserGroupRequest implements Serializable {
   public static final String SERIALIZED_NAME_DEFAULT_LIVEBOARD_IDENTIFIERS = "default_liveboard_identifiers";
   @SerializedName(SERIALIZED_NAME_DEFAULT_LIVEBOARD_IDENTIFIERS)
   @javax.annotation.Nullable
-  private List<String> defaultLiveboardIdentifiers = new ArrayList<>();
+  private List<String> defaultLiveboardIdentifiers;
 
   public static final String SERIALIZED_NAME_DESCRIPTION = "description";
   @SerializedName(SERIALIZED_NAME_DESCRIPTION)
@@ -169,12 +169,12 @@ public class UpdateUserGroupRequest implements Serializable {
   public static final String SERIALIZED_NAME_PRIVILEGES = "privileges";
   @SerializedName(SERIALIZED_NAME_PRIVILEGES)
   @javax.annotation.Nullable
-  private List<PrivilegesEnum> privileges = new ArrayList<>();
+  private List<PrivilegesEnum> privileges;
 
   public static final String SERIALIZED_NAME_SUB_GROUP_IDENTIFIERS = "sub_group_identifiers";
   @SerializedName(SERIALIZED_NAME_SUB_GROUP_IDENTIFIERS)
   @javax.annotation.Nullable
-  private List<String> subGroupIdentifiers = new ArrayList<>();
+  private List<String> subGroupIdentifiers;
 
   /**
    * Type of the group
@@ -236,7 +236,7 @@ public class UpdateUserGroupRequest implements Serializable {
   public static final String SERIALIZED_NAME_USER_IDENTIFIERS = "user_identifiers";
   @SerializedName(SERIALIZED_NAME_USER_IDENTIFIERS)
   @javax.annotation.Nullable
-  private List<String> userIdentifiers = new ArrayList<>();
+  private List<String> userIdentifiers;
 
   /**
    * Visibility of the group. To make a group visible to other users and groups, set the visibility to SHAREABLE.
@@ -298,7 +298,7 @@ public class UpdateUserGroupRequest implements Serializable {
   public static final String SERIALIZED_NAME_ROLE_IDENTIFIERS = "role_identifiers";
   @SerializedName(SERIALIZED_NAME_ROLE_IDENTIFIERS)
   @javax.annotation.Nullable
-  private List<String> roleIdentifiers = new ArrayList<>();
+  private List<String> roleIdentifiers;
 
   /**
    * Type of update operation. Default operation type is REPLACE

@@ -57,7 +57,7 @@ public class ExportLiveboardReportRequest implements Serializable {
   public static final String SERIALIZED_NAME_VISUALIZATION_IDENTIFIERS = "visualization_identifiers";
   @SerializedName(SERIALIZED_NAME_VISUALIZATION_IDENTIFIERS)
   @javax.annotation.Nullable
-  private List<String> visualizationIdentifiers = new ArrayList<>();
+  private List<String> visualizationIdentifiers;
 
   public static final String SERIALIZED_NAME_TRANSIENT_CONTENT = "transient_content";
   @SerializedName(SERIALIZED_NAME_TRANSIENT_CONTENT)

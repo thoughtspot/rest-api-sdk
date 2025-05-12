@@ -51,7 +51,7 @@ public class ImportUsersRequest implements Serializable {
   public static final String SERIALIZED_NAME_USERS = "users";
   @SerializedName(SERIALIZED_NAME_USERS)
   @javax.annotation.Nonnull
-  private List<ImportUser> users = new ArrayList<>();
+  private List<ImportUser> users;
 
   public static final String SERIALIZED_NAME_DEFAULT_PASSWORD = "default_password";
   @SerializedName(SERIALIZED_NAME_DEFAULT_PASSWORD)

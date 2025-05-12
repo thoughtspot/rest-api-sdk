@@ -52,12 +52,12 @@ public class FetchPermissionsOnMetadataRequest implements Serializable {
   public static final String SERIALIZED_NAME_METADATA = "metadata";
   @SerializedName(SERIALIZED_NAME_METADATA)
   @javax.annotation.Nonnull
-  private List<PermissionsMetadataTypeInput> metadata = new ArrayList<>();
+  private List<PermissionsMetadataTypeInput> metadata;
 
   public static final String SERIALIZED_NAME_PRINCIPALS = "principals";
   @SerializedName(SERIALIZED_NAME_PRINCIPALS)
   @javax.annotation.Nullable
-  private List<PrincipalsInput> principals = new ArrayList<>();
+  private List<PrincipalsInput> principals;
 
   public static final String SERIALIZED_NAME_INCLUDE_DEPENDENT_OBJECTS = "include_dependent_objects";
   @SerializedName(SERIALIZED_NAME_INCLUDE_DEPENDENT_OBJECTS)

@@ -174,7 +174,7 @@ public class CreateRoleRequest implements Serializable {
   public static final String SERIALIZED_NAME_PRIVILEGES = "privileges";
   @SerializedName(SERIALIZED_NAME_PRIVILEGES)
   @javax.annotation.Nullable
-  private List<PrivilegesEnum> privileges = new ArrayList<>();
+  private List<PrivilegesEnum> privileges;
 
   public static final String SERIALIZED_NAME_READ_ONLY = "read_only";
   @SerializedName(SERIALIZED_NAME_READ_ONLY)

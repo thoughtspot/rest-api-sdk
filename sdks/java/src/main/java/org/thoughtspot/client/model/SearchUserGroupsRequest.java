@@ -50,7 +50,7 @@ public class SearchUserGroupsRequest implements Serializable {
   public static final String SERIALIZED_NAME_DEFAULT_LIVEBOARD_IDENTIFIERS = "default_liveboard_identifiers";
   @SerializedName(SERIALIZED_NAME_DEFAULT_LIVEBOARD_IDENTIFIERS)
   @javax.annotation.Nullable
-  private List<String> defaultLiveboardIdentifiers = new ArrayList<>();
+  private List<String> defaultLiveboardIdentifiers;
 
   public static final String SERIALIZED_NAME_DESCRIPTION = "description";
   @SerializedName(SERIALIZED_NAME_DESCRIPTION)
@@ -75,7 +75,7 @@ public class SearchUserGroupsRequest implements Serializable {
   public static final String SERIALIZED_NAME_ORG_IDENTIFIERS = "org_identifiers";
   @SerializedName(SERIALIZED_NAME_ORG_IDENTIFIERS)
   @javax.annotation.Nullable
-  private List<String> orgIdentifiers = new ArrayList<>();
+  private List<String> orgIdentifiers;
 
   /**
    * Gets or Sets privileges
@@ -200,12 +200,12 @@ public class SearchUserGroupsRequest implements Serializable {
   public static final String SERIALIZED_NAME_PRIVILEGES = "privileges";
   @SerializedName(SERIALIZED_NAME_PRIVILEGES)
   @javax.annotation.Nullable
-  private List<PrivilegesEnum> privileges = new ArrayList<>();
+  private List<PrivilegesEnum> privileges;
 
   public static final String SERIALIZED_NAME_SUB_GROUP_IDENTIFIERS = "sub_group_identifiers";
   @SerializedName(SERIALIZED_NAME_SUB_GROUP_IDENTIFIERS)
   @javax.annotation.Nullable
-  private List<String> subGroupIdentifiers = new ArrayList<>();
+  private List<String> subGroupIdentifiers;
 
   /**
    * Group type.
@@ -267,7 +267,7 @@ public class SearchUserGroupsRequest implements Serializable {
   public static final String SERIALIZED_NAME_USER_IDENTIFIERS = "user_identifiers";
   @SerializedName(SERIALIZED_NAME_USER_IDENTIFIERS)
   @javax.annotation.Nullable
-  private List<String> userIdentifiers = new ArrayList<>();
+  private List<String> userIdentifiers;
 
   /**
    * Visibility of the group. To make a group visible to other users and groups, set the visibility to SHAREABLE.
@@ -329,7 +329,7 @@ public class SearchUserGroupsRequest implements Serializable {
   public static final String SERIALIZED_NAME_ROLE_IDENTIFIERS = "role_identifiers";
   @SerializedName(SERIALIZED_NAME_ROLE_IDENTIFIERS)
   @javax.annotation.Nullable
-  private List<String> roleIdentifiers = new ArrayList<>();
+  private List<String> roleIdentifiers;
 
   public static final String SERIALIZED_NAME_RECORD_OFFSET = "record_offset";
   @SerializedName(SERIALIZED_NAME_RECORD_OFFSET)

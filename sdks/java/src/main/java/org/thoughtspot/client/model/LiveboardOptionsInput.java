@@ -49,7 +49,7 @@ public class LiveboardOptionsInput implements Serializable {
   public static final String SERIALIZED_NAME_VISUALIZATION_IDENTIFIERS = "visualization_identifiers";
   @SerializedName(SERIALIZED_NAME_VISUALIZATION_IDENTIFIERS)
   @javax.annotation.Nonnull
-  private List<String> visualizationIdentifiers = new ArrayList<>();
+  private List<String> visualizationIdentifiers;
 
   public LiveboardOptionsInput() {
   }

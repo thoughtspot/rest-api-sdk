@@ -65,7 +65,7 @@ public class UpdateConfigRequest implements Serializable {
   public static final String SERIALIZED_NAME_BRANCH_NAMES = "branch_names";
   @SerializedName(SERIALIZED_NAME_BRANCH_NAMES)
   @javax.annotation.Nullable
-  private List<String> branchNames = new ArrayList<>();
+  private List<String> branchNames;
 
   public static final String SERIALIZED_NAME_COMMIT_BRANCH_NAME = "commit_branch_name";
   @SerializedName(SERIALIZED_NAME_COMMIT_BRANCH_NAME)

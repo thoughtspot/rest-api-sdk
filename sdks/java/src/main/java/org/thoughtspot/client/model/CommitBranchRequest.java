@@ -51,7 +51,7 @@ public class CommitBranchRequest implements Serializable {
   public static final String SERIALIZED_NAME_METADATA = "metadata";
   @SerializedName(SERIALIZED_NAME_METADATA)
   @javax.annotation.Nonnull
-  private List<MetadataObject> metadata = new ArrayList<>();
+  private List<MetadataObject> metadata;
 
   public static final String SERIALIZED_NAME_DELETE_AWARE = "delete_aware";
   @SerializedName(SERIALIZED_NAME_DELETE_AWARE)

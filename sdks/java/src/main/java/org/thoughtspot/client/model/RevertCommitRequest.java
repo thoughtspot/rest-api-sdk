@@ -50,7 +50,7 @@ public class RevertCommitRequest implements Serializable {
   public static final String SERIALIZED_NAME_METADATA = "metadata";
   @SerializedName(SERIALIZED_NAME_METADATA)
   @javax.annotation.Nullable
-  private List<MetadataObject> metadata = new ArrayList<>();
+  private List<MetadataObject> metadata;
 
   public static final String SERIALIZED_NAME_BRANCH_NAME = "branch_name";
   @SerializedName(SERIALIZED_NAME_BRANCH_NAME)

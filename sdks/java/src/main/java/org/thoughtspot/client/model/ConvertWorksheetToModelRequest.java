@@ -50,12 +50,12 @@ public class ConvertWorksheetToModelRequest implements Serializable {
   public static final String SERIALIZED_NAME_WORKSHEET_IDS = "worksheet_ids";
   @SerializedName(SERIALIZED_NAME_WORKSHEET_IDS)
   @javax.annotation.Nullable
-  private List<String> worksheetIds = new ArrayList<>();
+  private List<String> worksheetIds;
 
   public static final String SERIALIZED_NAME_EXCLUDE_WORKSHEET_IDS = "exclude_worksheet_ids";
   @SerializedName(SERIALIZED_NAME_EXCLUDE_WORKSHEET_IDS)
   @javax.annotation.Nullable
-  private List<String> excludeWorksheetIds = new ArrayList<>();
+  private List<String> excludeWorksheetIds;
 
   public static final String SERIALIZED_NAME_CONVERT_ALL = "convert_all";
   @SerializedName(SERIALIZED_NAME_CONVERT_ALL)

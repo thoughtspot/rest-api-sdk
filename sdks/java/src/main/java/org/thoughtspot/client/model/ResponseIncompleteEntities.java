@@ -50,7 +50,7 @@ public class ResponseIncompleteEntities implements Serializable {
   public static final String SERIALIZED_NAME_DATA = "data";
   @SerializedName(SERIALIZED_NAME_DATA)
   @javax.annotation.Nonnull
-  private List<ResponseIncompleteEntity> data = new ArrayList<>();
+  private List<ResponseIncompleteEntity> data;
 
   public ResponseIncompleteEntities() {
   }

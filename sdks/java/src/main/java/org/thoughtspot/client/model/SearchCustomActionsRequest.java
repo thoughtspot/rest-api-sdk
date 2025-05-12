@@ -77,7 +77,7 @@ public class SearchCustomActionsRequest implements Serializable {
   public static final String SERIALIZED_NAME_METADATA = "metadata";
   @SerializedName(SERIALIZED_NAME_METADATA)
   @javax.annotation.Nullable
-  private List<CustomActionMetadataTypeInput> metadata = new ArrayList<>();
+  private List<CustomActionMetadataTypeInput> metadata;
 
   /**
    * Filter the action objects based on type

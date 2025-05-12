@@ -266,7 +266,7 @@ public class UpdateUserRequest implements Serializable {
   public static final String SERIALIZED_NAME_GROUP_IDENTIFIERS = "group_identifiers";
   @SerializedName(SERIALIZED_NAME_GROUP_IDENTIFIERS)
   @javax.annotation.Nullable
-  private List<String> groupIdentifiers = new ArrayList<>();
+  private List<String> groupIdentifiers;
 
   public static final String SERIALIZED_NAME_HOME_LIVEBOARD_IDENTIFIER = "home_liveboard_identifier";
   @SerializedName(SERIALIZED_NAME_HOME_LIVEBOARD_IDENTIFIER)
@@ -276,12 +276,12 @@ public class UpdateUserRequest implements Serializable {
   public static final String SERIALIZED_NAME_FAVORITE_METADATA = "favorite_metadata";
   @SerializedName(SERIALIZED_NAME_FAVORITE_METADATA)
   @javax.annotation.Nullable
-  private List<FavoriteMetadataInput> favoriteMetadata = new ArrayList<>();
+  private List<FavoriteMetadataInput> favoriteMetadata;
 
   public static final String SERIALIZED_NAME_ORG_IDENTIFIERS = "org_identifiers";
   @SerializedName(SERIALIZED_NAME_ORG_IDENTIFIERS)
   @javax.annotation.Nullable
-  private List<String> orgIdentifiers = new ArrayList<>();
+  private List<String> orgIdentifiers;
 
   /**
    * Type of update operation. Default operation type is REPLACE

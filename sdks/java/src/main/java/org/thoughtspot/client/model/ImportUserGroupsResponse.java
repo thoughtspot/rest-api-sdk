@@ -50,17 +50,17 @@ public class ImportUserGroupsResponse implements Serializable {
   public static final String SERIALIZED_NAME_GROUPS_ADDED = "groups_added";
   @SerializedName(SERIALIZED_NAME_GROUPS_ADDED)
   @javax.annotation.Nonnull
-  private List<UserGroup> groupsAdded = new ArrayList<>();
+  private List<UserGroup> groupsAdded;
 
   public static final String SERIALIZED_NAME_GROUPS_DELETED = "groups_deleted";
   @SerializedName(SERIALIZED_NAME_GROUPS_DELETED)
   @javax.annotation.Nonnull
-  private List<UserGroup> groupsDeleted = new ArrayList<>();
+  private List<UserGroup> groupsDeleted;
 
   public static final String SERIALIZED_NAME_GROUPS_UPDATED = "groups_updated";
   @SerializedName(SERIALIZED_NAME_GROUPS_UPDATED)
   @javax.annotation.Nonnull
-  private List<UserGroup> groupsUpdated = new ArrayList<>();
+  private List<UserGroup> groupsUpdated;
 
   public ImportUserGroupsResponse() {
   }

@@ -52,7 +52,7 @@ public class SearchSchedulesRequest implements Serializable {
   public static final String SERIALIZED_NAME_METADATA = "metadata";
   @SerializedName(SERIALIZED_NAME_METADATA)
   @javax.annotation.Nullable
-  private List<MetadataInput> metadata = new ArrayList<>();
+  private List<MetadataInput> metadata;
 
   public static final String SERIALIZED_NAME_RECORD_OFFSET = "record_offset";
   @SerializedName(SERIALIZED_NAME_RECORD_OFFSET)
@@ -77,7 +77,7 @@ public class SearchSchedulesRequest implements Serializable {
   public static final String SERIALIZED_NAME_SCHEDULE_IDENTIFIERS = "schedule_identifiers";
   @SerializedName(SERIALIZED_NAME_SCHEDULE_IDENTIFIERS)
   @javax.annotation.Nullable
-  private List<String> scheduleIdentifiers = new ArrayList<>();
+  private List<String> scheduleIdentifiers;
 
   public SearchSchedulesRequest() {
   }
