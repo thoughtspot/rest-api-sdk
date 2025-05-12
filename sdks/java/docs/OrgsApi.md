@@ -1,13 +1,13 @@
 # OrgsApi
 
-All URIs are relative to *https://localhost:443*
+All URIs are relative to *CLUSTER_URL*
 
-| Method | HTTP request | Description |
-|------------- | ------------- | -------------|
-| [**createOrg**](OrgsApi.md#createOrg) | **POST** /api/rest/2.0/orgs/create |  |
-| [**deleteOrg**](OrgsApi.md#deleteOrg) | **POST** /api/rest/2.0/orgs/{org_identifier}/delete |  |
-| [**searchOrgs**](OrgsApi.md#searchOrgs) | **POST** /api/rest/2.0/orgs/search |  |
-| [**updateOrg**](OrgsApi.md#updateOrg) | **POST** /api/rest/2.0/orgs/{org_identifier}/update |  |
+| Method | HTTP request |
+|------------- | ------------- |
+| [**createOrg**](OrgsApi.md#createOrg) | **POST** /api/rest/2.0/orgs/create |
+| [**deleteOrg**](OrgsApi.md#deleteOrg) | **POST** /api/rest/2.0/orgs/{org_identifier}/delete |
+| [**searchOrgs**](OrgsApi.md#searchOrgs) | **POST** /api/rest/2.0/orgs/search |
+| [**updateOrg**](OrgsApi.md#updateOrg) | **POST** /api/rest/2.0/orgs/{org_identifier}/update |
 
 
 <a id="createOrg"></a>
@@ -18,46 +18,11 @@ All URIs are relative to *https://localhost:443*
 
   Version: 9.0.0.cl or later   Creates an Org object.  To use this API, the [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview) feature must be enabled in your cluster.  Requires cluster administration (**Can administer Org**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ORG_ADMINISTRATION&#x60; (**Can manage Orgs**) privilege is required.      
 
-### Example
-```java
-// Import classes:
-import org.thoughtspot.client.ApiClient;
-import org.thoughtspot.client.ApiException;
-import org.thoughtspot.client.Configuration;
-import org.thoughtspot.client.auth.*;
-import org.thoughtspot.client.models.*;
-import org.thoughtspot.client.api.OrgsApi;
-
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://localhost:443");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
-
-    OrgsApi apiInstance = new OrgsApi(defaultClient);
-    CreateOrgRequest createOrgRequest = new CreateOrgRequest(); // CreateOrgRequest | 
-    try {
-      OrgResponse result = apiInstance.createOrg(createOrgRequest);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling OrgsApi#createOrg");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-```
-
 ### Parameters
 
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **createOrgRequest** | [**CreateOrgRequest**](CreateOrgRequest.md)|  | |
+| Name | Type |
+|------------- | ------------- |
+| **createOrgRequest** | [**CreateOrgRequest**](CreateOrgRequest.md)
 
 ### Return type
 
@@ -89,45 +54,11 @@ public class Example {
 
   Version: 9.0.0.cl or later   Deletes an Org object from the ThoughtSpot system.  Requires cluster administration (**Can administer Org**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ORG_ADMINISTRATION&#x60; (**Can manage Orgs**) privilege is required.  When you delete an Org, all its users and objects created in that Org context are removed. However, if the users in the deleted Org also exists in other Orgs, they are removed only from the deleted Org.      
 
-### Example
-```java
-// Import classes:
-import org.thoughtspot.client.ApiClient;
-import org.thoughtspot.client.ApiException;
-import org.thoughtspot.client.Configuration;
-import org.thoughtspot.client.auth.*;
-import org.thoughtspot.client.models.*;
-import org.thoughtspot.client.api.OrgsApi;
-
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://localhost:443");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
-
-    OrgsApi apiInstance = new OrgsApi(defaultClient);
-    String orgIdentifier = "orgIdentifier_example"; // String | ID or name of the Org
-    try {
-      apiInstance.deleteOrg(orgIdentifier);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling OrgsApi#deleteOrg");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-```
-
 ### Parameters
 
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **orgIdentifier** | **String**| ID or name of the Org | |
+| Name | Type |
+|------------- | ------------- |
+| **orgIdentifier** | **String**
 
 ### Return type
 
@@ -159,46 +90,11 @@ null (empty response body)
 
   Version: 9.0.0.cl or later   Gets a list of Orgs configured on the ThoughtSpot system. To get details of a specific Org, specify the Org ID or name. You can also pass parameters such as status, visibility, and user identifiers to get a specific list of Orgs.  Requires cluster administration (**Can administer Org**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ORG_ADMINISTRATION&#x60; (**Can manage Orgs**) privilege is required.      
 
-### Example
-```java
-// Import classes:
-import org.thoughtspot.client.ApiClient;
-import org.thoughtspot.client.ApiException;
-import org.thoughtspot.client.Configuration;
-import org.thoughtspot.client.auth.*;
-import org.thoughtspot.client.models.*;
-import org.thoughtspot.client.api.OrgsApi;
-
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://localhost:443");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
-
-    OrgsApi apiInstance = new OrgsApi(defaultClient);
-    SearchOrgsRequest searchOrgsRequest = new SearchOrgsRequest(); // SearchOrgsRequest | 
-    try {
-      List<OrgResponse> result = apiInstance.searchOrgs(searchOrgsRequest);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling OrgsApi#searchOrgs");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-```
-
 ### Parameters
 
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **searchOrgsRequest** | [**SearchOrgsRequest**](SearchOrgsRequest.md)|  | |
+| Name | Type |
+|------------- | ------------- |
+| **searchOrgsRequest** | [**SearchOrgsRequest**](SearchOrgsRequest.md)
 
 ### Return type
 
@@ -230,47 +126,12 @@ public class Example {
 
   Version: 9.0.0.cl or later   Updates an Org object. You can modify Org properties such as name, description, and user associations.  Requires cluster administration (**Can administer Org**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ORG_ADMINISTRATION&#x60; (**Can manage Orgs**) privilege is required.      
 
-### Example
-```java
-// Import classes:
-import org.thoughtspot.client.ApiClient;
-import org.thoughtspot.client.ApiException;
-import org.thoughtspot.client.Configuration;
-import org.thoughtspot.client.auth.*;
-import org.thoughtspot.client.models.*;
-import org.thoughtspot.client.api.OrgsApi;
-
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://localhost:443");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
-
-    OrgsApi apiInstance = new OrgsApi(defaultClient);
-    String orgIdentifier = "orgIdentifier_example"; // String | ID or name of the Org
-    UpdateOrgRequest updateOrgRequest = new UpdateOrgRequest(); // UpdateOrgRequest | 
-    try {
-      apiInstance.updateOrg(orgIdentifier, updateOrgRequest);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling OrgsApi#updateOrg");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-```
-
 ### Parameters
 
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **orgIdentifier** | **String**| ID or name of the Org | |
-| **updateOrgRequest** | [**UpdateOrgRequest**](UpdateOrgRequest.md)|  | |
+| Name | Type |
+|------------- | ------------- |
+| **orgIdentifier** | **String**
+| **updateOrgRequest** | [**UpdateOrgRequest**](UpdateOrgRequest.md)
 
 ### Return type
 

@@ -75,7 +75,7 @@ public class Example {
         tsRestApi.applyApiClientConfiguration(apiClientConfiguration);
 
         // Current user information
-        User currentUser = tsRestApi.getCurrentUserInfo();  // Optionally, use .{REQUEST}WithHttpInfo() (eg: .getFullAccessTokenWithHttpInfo()) if you want the response details
+        User currentUser = tsRestApi.getCurrentUserInfo();  // Optionally, use .{REQUEST}WithHttpInfo() (eg: .getCurrentUserInfoWithHttpInfo()) if you want the response details
         System.out.println("Current User: " + currentUser.toJson());
     } catch (ApiException e) {
         System.err.println("Exception when calling ThoughtSpot API");

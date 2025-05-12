@@ -1,13 +1,13 @@
 # SchedulesApi
 
-All URIs are relative to *https://localhost:443*
+All URIs are relative to *CLUSTER_URL*
 
-| Method | HTTP request | Description |
-|------------- | ------------- | -------------|
-| [**createSchedule**](SchedulesApi.md#createSchedule) | **POST** /api/rest/2.0/schedules/create |  |
-| [**deleteSchedule**](SchedulesApi.md#deleteSchedule) | **POST** /api/rest/2.0/schedules/{schedule_identifier}/delete |  |
-| [**searchSchedules**](SchedulesApi.md#searchSchedules) | **POST** /api/rest/2.0/schedules/search |  |
-| [**updateSchedule**](SchedulesApi.md#updateSchedule) | **POST** /api/rest/2.0/schedules/{schedule_identifier}/update |  |
+| Method | HTTP request |
+|------------- | ------------- |
+| [**createSchedule**](SchedulesApi.md#createSchedule) | **POST** /api/rest/2.0/schedules/create |
+| [**deleteSchedule**](SchedulesApi.md#deleteSchedule) | **POST** /api/rest/2.0/schedules/{schedule_identifier}/delete |
+| [**searchSchedules**](SchedulesApi.md#searchSchedules) | **POST** /api/rest/2.0/schedules/search |
+| [**updateSchedule**](SchedulesApi.md#updateSchedule) | **POST** /api/rest/2.0/schedules/{schedule_identifier}/update |
 
 
 <a id="createSchedule"></a>
@@ -18,46 +18,11 @@ All URIs are relative to *https://localhost:443*
 
  Create schedule.    Version: 9.4.0.cl or later   Creates a Liveboard schedule job.  Requires at least edit access to Liveboards. To create a schedule on behalf of another user, you need  &#x60;ADMINISTRATION&#x60; (**Can administer Org**) or &#x60;JOBSCHEDULING&#x60; (**Can schedule for others**) privilege and edit access to the Liveboard. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;JOBSCHEDULING&#x60; (**Can schedule for others**) privilege is required.  #### Usage guidelines  * The description text is mandatory.  The description text appears as **Description: &lt;your content&gt;** in the Liveboard schedule email notifications. * For Liveboards with both charts and tables, schedule creation is only supported in PDF and XLS formats. Schedules created in CSV formats for such Liveboards will fail to run. If &#x60;PDF&#x60; is set as the &#x60;file_format&#x60;, enable &#x60;pdf_options&#x60; to get the correct attachment. Not doing so may cause the attachment to be rendered empty. * To include only specific visualizations, specify the visualization GUIDs in the &#x60;visualization_identifiers&#x60; array. * You can schedule a Liveboard job to run periodically by setting frequency parameters. You can set the schedule to run daily, weekly, monthly or every n minutes or hours. The scheduled job can also be configured to run at a specific time of the day or on specific days of the week or month. Please ensure that when setting the schedule frequency for _minute of the object_, only values that are multiples of 5 are included. * If the &#x60;frequency&#x60; parameters are defined, you can set the time zone to a value that matches your server&#39;s time zone. For example, &#x60;US/Central&#x60;, &#x60;Etc/UTC&#x60;, &#x60;CET&#x60;. The default time zone is &#x60;America/Los_Angeles&#x60;.  For more information about Liveboard jobs, see [ThoughtSpot Product Documentation](https://docs.thoughtspot.com/cloud/latest/liveboard-schedule).     
 
-### Example
-```java
-// Import classes:
-import org.thoughtspot.client.ApiClient;
-import org.thoughtspot.client.ApiException;
-import org.thoughtspot.client.Configuration;
-import org.thoughtspot.client.auth.*;
-import org.thoughtspot.client.models.*;
-import org.thoughtspot.client.api.SchedulesApi;
-
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://localhost:443");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
-
-    SchedulesApi apiInstance = new SchedulesApi(defaultClient);
-    CreateScheduleRequest createScheduleRequest = new CreateScheduleRequest(); // CreateScheduleRequest | 
-    try {
-      ResponseSchedule result = apiInstance.createSchedule(createScheduleRequest);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling SchedulesApi#createSchedule");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-```
-
 ### Parameters
 
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **createScheduleRequest** | [**CreateScheduleRequest**](CreateScheduleRequest.md)|  | |
+| Name | Type |
+|------------- | ------------- |
+| **createScheduleRequest** | [**CreateScheduleRequest**](CreateScheduleRequest.md)
 
 ### Return type
 
@@ -89,45 +54,11 @@ public class Example {
 
  Deletes a scheduled job.    Version: 9.4.0.cl or later   Deletes a scheduled Liveboard job.  Requires at least edit access to Liveboard or &#x60;ADMINISTRATION&#x60; (**Can administer Org**) privilege.    If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;JOBSCHEDULING&#x60; (**Can schedule for others**) privilege is required.      
 
-### Example
-```java
-// Import classes:
-import org.thoughtspot.client.ApiClient;
-import org.thoughtspot.client.ApiException;
-import org.thoughtspot.client.Configuration;
-import org.thoughtspot.client.auth.*;
-import org.thoughtspot.client.models.*;
-import org.thoughtspot.client.api.SchedulesApi;
-
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://localhost:443");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
-
-    SchedulesApi apiInstance = new SchedulesApi(defaultClient);
-    String scheduleIdentifier = "scheduleIdentifier_example"; // String | Unique ID or name of the scheduled job.
-    try {
-      apiInstance.deleteSchedule(scheduleIdentifier);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling SchedulesApi#deleteSchedule");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-```
-
 ### Parameters
 
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **scheduleIdentifier** | **String**| Unique ID or name of the scheduled job. | |
+| Name | Type |
+|------------- | ------------- |
+| **scheduleIdentifier** | **String**
 
 ### Return type
 
@@ -159,46 +90,11 @@ null (empty response body)
 
  Search Schedules    Version: 9.4.0.cl or later   Gets a list of scheduled jobs configured for a Liveboard.  To get details of a specific scheduled job, specify the name or GUID of the scheduled job.  Requires at least view access to Liveboards.  **NOTE**: When filtering schedules by parameters other than &#x60;metadata&#x60;, set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60; for accurate results.      
 
-### Example
-```java
-// Import classes:
-import org.thoughtspot.client.ApiClient;
-import org.thoughtspot.client.ApiException;
-import org.thoughtspot.client.Configuration;
-import org.thoughtspot.client.auth.*;
-import org.thoughtspot.client.models.*;
-import org.thoughtspot.client.api.SchedulesApi;
-
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://localhost:443");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
-
-    SchedulesApi apiInstance = new SchedulesApi(defaultClient);
-    SearchSchedulesRequest searchSchedulesRequest = new SearchSchedulesRequest(); // SearchSchedulesRequest | 
-    try {
-      List<ResponseSchedule> result = apiInstance.searchSchedules(searchSchedulesRequest);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling SchedulesApi#searchSchedules");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-```
-
 ### Parameters
 
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **searchSchedulesRequest** | [**SearchSchedulesRequest**](SearchSchedulesRequest.md)|  | |
+| Name | Type |
+|------------- | ------------- |
+| **searchSchedulesRequest** | [**SearchSchedulesRequest**](SearchSchedulesRequest.md)
 
 ### Return type
 
@@ -230,47 +126,12 @@ public class Example {
 
  Update schedule.    Version: 9.4.0.cl or later   Updates a scheduled Liveboard job.  Requires at least edit access to Liveboards. To update a schedule on behalf of another user, you need &#x60;ADMINISTRATION&#x60; (**Can administer Org**) or &#x60;JOBSCHEDULING&#x60; (**Can schedule for others**) privilege and edit access to the Liveboard. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;JOBSCHEDULING&#x60; (**Can schedule for others**) privilege is required.  The API endpoint allows you to pause a scheduled job, change the status of a paused job. You can also edit the recipients list, frequency of the job, format of the file to send to the recipients in email notifications, PDF options, and time zone setting.      
 
-### Example
-```java
-// Import classes:
-import org.thoughtspot.client.ApiClient;
-import org.thoughtspot.client.ApiException;
-import org.thoughtspot.client.Configuration;
-import org.thoughtspot.client.auth.*;
-import org.thoughtspot.client.models.*;
-import org.thoughtspot.client.api.SchedulesApi;
-
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://localhost:443");
-    
-    // Configure HTTP bearer authorization: bearerAuth
-    HttpBearerAuth bearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("bearerAuth");
-    bearerAuth.setBearerToken("BEARER TOKEN");
-
-    SchedulesApi apiInstance = new SchedulesApi(defaultClient);
-    String scheduleIdentifier = "scheduleIdentifier_example"; // String | Unique ID or name of the schedule.
-    UpdateScheduleRequest updateScheduleRequest = new UpdateScheduleRequest(); // UpdateScheduleRequest | 
-    try {
-      apiInstance.updateSchedule(scheduleIdentifier, updateScheduleRequest);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling SchedulesApi#updateSchedule");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-```
-
 ### Parameters
 
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **scheduleIdentifier** | **String**| Unique ID or name of the schedule. | |
-| **updateScheduleRequest** | [**UpdateScheduleRequest**](UpdateScheduleRequest.md)|  | |
+| Name | Type |
+|------------- | ------------- |
+| **scheduleIdentifier** | **String**
+| **updateScheduleRequest** | [**UpdateScheduleRequest**](UpdateScheduleRequest.md)
 
 ### Return type
 
