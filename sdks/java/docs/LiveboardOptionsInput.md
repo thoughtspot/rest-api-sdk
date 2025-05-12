@@ -11,4 +11,8 @@ Options to specify details of Liveboard.
 |**visualizationIdentifiers** | **List&lt;String&gt;** | Unique ID or name of visualizations. |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

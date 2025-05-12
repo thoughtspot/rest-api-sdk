@@ -11,4 +11,8 @@
 |**targetBranchName** | **String** | Name of the branch where files will be merged |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

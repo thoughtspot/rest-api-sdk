@@ -49,4 +49,8 @@
 | PREVIEW_DOCUMENT_SEARCH | &quot;PREVIEW_DOCUMENT_SEARCH&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

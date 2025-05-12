@@ -89,4 +89,8 @@ Response for search role api should handle hidden privileges as well.
 | NO_ACCESS | &quot;NO_ACCESS&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

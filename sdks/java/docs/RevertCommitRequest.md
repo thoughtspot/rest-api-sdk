@@ -21,4 +21,8 @@
 | PARTIAL | &quot;PARTIAL&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

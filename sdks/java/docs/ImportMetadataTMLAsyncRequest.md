@@ -26,4 +26,8 @@
 | PARTIAL_OBJECT | &quot;PARTIAL_OBJECT&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

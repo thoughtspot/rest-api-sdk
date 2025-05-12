@@ -14,4 +14,8 @@ Define attributes such as Runtime filters and Runtime parameters to send securit
 |**parameters** | [**List&lt;RuntimeParameters&gt;**](RuntimeParameters.md) | Objects to apply the Runtime_Parameters.  Examples to set the &#x60;parameters&#x60; : &#x60;&#x60;&#x60;json { \&quot;name\&quot;: \&quot;Color\&quot;, \&quot;values\&quot;: [\&quot;Blue\&quot;], \&quot;persist\&quot;: false } &#x60;&#x60;&#x60; |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

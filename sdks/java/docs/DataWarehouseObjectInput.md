@@ -13,4 +13,8 @@
 |**column** | **String** | Name of the column within the table. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

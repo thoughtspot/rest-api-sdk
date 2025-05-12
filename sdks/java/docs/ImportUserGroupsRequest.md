@@ -12,4 +12,8 @@
 |**dryRun** | **Boolean** | If true, the API performs a test operation and returns user IDs whose data will be edited after the import. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

@@ -10,4 +10,8 @@
 |**databases** | [**List&lt;Database&gt;**](Database.md) | Databases of the connection. |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

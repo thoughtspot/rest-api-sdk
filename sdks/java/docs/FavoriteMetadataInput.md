@@ -20,4 +20,8 @@
 | ANSWER | &quot;ANSWER&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

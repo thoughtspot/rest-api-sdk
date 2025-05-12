@@ -37,4 +37,8 @@
 | V2 | &quot;V2&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

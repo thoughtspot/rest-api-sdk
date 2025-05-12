@@ -12,4 +12,8 @@ Specify that the association is enabled for the metadata object
 |**visibility** | **Boolean** | Visibility of the metadata association with custom action. Earlier naming convention: enabled |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

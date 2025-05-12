@@ -14,4 +14,8 @@ Flags to specify additional options for export. This will only be active when Us
 |**exportWithAssociatedFeedbacks** | **Boolean** | Boolean flag indicating whether to export associated feedbacks of the object. This will only be respected when the object can have feedbacks.    Version: 10.7.0.cl or later  |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

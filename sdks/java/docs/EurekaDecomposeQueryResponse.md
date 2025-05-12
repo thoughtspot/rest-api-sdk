@@ -10,4 +10,8 @@
 |**decomposedQueryResponse** | [**EurekaLLMDecomposeQueryResponse**](EurekaLLMDecomposeQueryResponse.md) |  |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

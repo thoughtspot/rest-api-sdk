@@ -34,4 +34,8 @@
 | YAML | &quot;YAML&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

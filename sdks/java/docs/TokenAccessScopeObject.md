@@ -20,4 +20,8 @@ Objects on which the filter rules and parameters values should be applied to
 | LOGICAL_TABLE | &quot;LOGICAL_TABLE&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

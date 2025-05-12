@@ -12,4 +12,8 @@
 |**usersDeleted** | [**List&lt;ImportUserType&gt;**](ImportUserType.md) |  |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

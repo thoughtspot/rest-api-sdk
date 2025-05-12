@@ -12,4 +12,8 @@
 |**currentOwnerIdentifier** | **String** | GUID or name of the current author.  When defined, the metadata objects authored by the specified owner are filtered for the API operation. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

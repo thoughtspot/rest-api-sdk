@@ -12,4 +12,8 @@ Action details includes Type and Configuration for Custom Actions, either Callba
 |**URL** | [**URLInputMandatory**](URLInputMandatory.md) |  |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

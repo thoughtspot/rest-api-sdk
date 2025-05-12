@@ -10,4 +10,8 @@
 |**conversationIdentifier** | **String** | Unique identifier of the conversation. |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

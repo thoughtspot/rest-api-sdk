@@ -13,4 +13,8 @@
 |**validate** | **Boolean** | Indicates whether to validate the connection details. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

@@ -32,4 +32,8 @@
 | HIDDEN | &quot;HIDDEN&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

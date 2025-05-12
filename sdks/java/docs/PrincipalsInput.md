@@ -20,4 +20,8 @@
 | USER_GROUP | &quot;USER_GROUP&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

@@ -36,4 +36,8 @@ Filter Rules to be applied on Objects.
 | NOT_IN | &quot;NOT_IN&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

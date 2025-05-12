@@ -11,4 +11,8 @@
 |**tokens** | **String** | Token string to set the context for the conversation. For example,&#x60;[sales],[item type],[state]&#x60;. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

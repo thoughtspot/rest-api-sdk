@@ -11,4 +11,8 @@
 |**message** | **String** | A message string with the follow-up question to continue the conversation. |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

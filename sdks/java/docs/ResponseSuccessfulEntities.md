@@ -11,4 +11,8 @@ Wrapper for the successful entities, as they are inside a 'data' field in the re
 |**data** | [**List&lt;ResponseSuccessfulEntity&gt;**](ResponseSuccessfulEntity.md) |  |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

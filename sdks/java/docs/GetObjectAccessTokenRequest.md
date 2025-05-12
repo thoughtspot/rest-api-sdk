@@ -20,4 +20,8 @@
 |**userParameters** | [**UserParameterOptions**](UserParameterOptions.md) | &lt;div&gt;Deprecated: 10.4.0.cl and later &lt;/div&gt;  Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters). |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

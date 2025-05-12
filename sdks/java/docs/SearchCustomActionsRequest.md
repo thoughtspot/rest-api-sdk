@@ -25,4 +25,8 @@
 | URL | &quot;URL&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

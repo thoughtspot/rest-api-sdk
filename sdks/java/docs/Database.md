@@ -12,4 +12,8 @@
 |**autoCreated** | **Boolean** | Determines if the object is auto created. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

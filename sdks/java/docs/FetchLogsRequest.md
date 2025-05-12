@@ -21,4 +21,8 @@
 | SECURITY_AUDIT | &quot;SECURITY_AUDIT&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

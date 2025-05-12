@@ -10,4 +10,8 @@
 |**token** | **String** |  |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

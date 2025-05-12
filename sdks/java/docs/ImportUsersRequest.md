@@ -13,4 +13,8 @@
 |**deleteUnspecifiedUsers** | **Boolean** | If set to true, removes the users that are not specified in the API request. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

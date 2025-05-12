@@ -21,4 +21,8 @@
 | NO_ACCESS | &quot;NO_ACCESS&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

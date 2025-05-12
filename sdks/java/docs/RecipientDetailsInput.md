@@ -12,4 +12,8 @@ Recipients of the scheduled job notification.
 |**principals** | [**List&lt;PrincipalsListItemInput&gt;**](PrincipalsListItemInput.md) | User or groups to be set as recipients of the schedule notifications. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

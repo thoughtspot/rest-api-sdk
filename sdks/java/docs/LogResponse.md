@@ -11,4 +11,8 @@
 |**log** | **String** | Log data |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

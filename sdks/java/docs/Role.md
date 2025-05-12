@@ -11,4 +11,8 @@
 |**name** | **String** | name of the role |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

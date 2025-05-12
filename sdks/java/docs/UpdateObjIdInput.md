@@ -29,4 +29,8 @@ Input for updating object ID of a metadata object.
 | USER_GROUP | &quot;USER_GROUP&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

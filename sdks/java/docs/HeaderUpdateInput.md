@@ -29,4 +29,8 @@ Favorite object options.
 | USER_GROUP | &quot;USER_GROUP&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

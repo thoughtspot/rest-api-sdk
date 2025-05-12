@@ -11,4 +11,8 @@
 |**type** | **String** | Principal type. |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

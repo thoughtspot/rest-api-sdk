@@ -13,4 +13,8 @@ Unique ID of the incomplete worksheet.
 |**error** | **String** | Error details related to the incomplete conversion. |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

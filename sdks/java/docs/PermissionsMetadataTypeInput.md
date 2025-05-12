@@ -24,4 +24,8 @@ MetadataType InputType used in Permission API's
 | CONNECTION | &quot;CONNECTION&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

@@ -16,4 +16,8 @@
 |**samplingRatio** | **Float** | Sampling ratio (0 to 1). If the query was sampled, it is the ratio of keys returned in the data set to the total number of keys expected in the query. If the value is 1.0, this means that the complete result is returned. |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

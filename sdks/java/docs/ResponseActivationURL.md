@@ -11,4 +11,8 @@ The object representation with activation link.
 |**activationLink** | **String** | Activation link to activate the user. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

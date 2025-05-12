@@ -14,4 +14,8 @@
 |**tokenType** | **String** | Type of token. |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

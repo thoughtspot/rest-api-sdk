@@ -22,4 +22,8 @@
 | WORKSHEET | &quot;WORKSHEET&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

@@ -24,4 +24,8 @@
 | REMOVE | &quot;REMOVE&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

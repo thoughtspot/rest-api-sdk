@@ -14,4 +14,8 @@
 |**groupIdentifiers** | **List&lt;String&gt;** | Unique ID or name of the groups that can view and access the custom action. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

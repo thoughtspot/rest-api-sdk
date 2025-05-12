@@ -11,4 +11,8 @@ Default Custom action configuration. This includes the custom action's visibilit
 |**visibility** | **Boolean** | Custom action is available on all visualizations. Earlier naming convention: LOCAL/GLOBAL. TRUE signifies GLOBAL for backward compatibility. Default: true |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

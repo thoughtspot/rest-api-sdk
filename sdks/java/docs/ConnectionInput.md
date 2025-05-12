@@ -12,4 +12,8 @@
 |**dataWarehouseObjects** | [**List&lt;DataWarehouseObjectInput&gt;**](DataWarehouseObjectInput.md) | Filter options for databases, schemas, tables and columns. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

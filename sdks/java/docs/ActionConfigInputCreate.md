@@ -22,4 +22,8 @@ Specify that the association is enabled for the metadata object Default
 | CONTEXT_MENU | &quot;CONTEXT_MENU&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

@@ -16,4 +16,8 @@
 |**authorName** | **String** |  |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

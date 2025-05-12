@@ -53,4 +53,8 @@
 | PREVIEW_THOUGHTSPOT_SAGE | &quot;PREVIEW_THOUGHTSPOT_SAGE&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

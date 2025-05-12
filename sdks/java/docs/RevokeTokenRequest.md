@@ -11,4 +11,8 @@
 |**token** | **String** |  |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

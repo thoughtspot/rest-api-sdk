@@ -12,4 +12,8 @@ Unique ID of the worksheet.
 |**name** | **String** | Name of the worksheet. |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

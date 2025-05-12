@@ -11,4 +11,8 @@ List of runtime parameters need to set during the session.
 |**runtimeParamOverride** | **Object** | Runtime param override type in JWT. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

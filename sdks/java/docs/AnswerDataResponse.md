@@ -13,4 +13,8 @@ Response format associated with fetch data api
 |**contents** | [**List&lt;AnswerContent&gt;**](AnswerContent.md) | Data content of metadata objects |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

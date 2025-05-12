@@ -12,4 +12,8 @@
 |**personalisedViewId** | **String** | Indicates personalised view of the Liveboard in case of png |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

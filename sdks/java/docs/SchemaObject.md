@@ -11,4 +11,8 @@
 |**tables** | [**List&lt;Table&gt;**](Table.md) | Tables in the schema. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

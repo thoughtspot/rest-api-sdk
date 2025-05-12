@@ -32,4 +32,8 @@
 |**logicalModelVersion** | **Integer** | The version number of logical model of the cluster. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

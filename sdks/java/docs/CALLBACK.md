@@ -11,4 +11,8 @@ CALLBACK Custom Action Type
 |**reference** | **String** | Reference name of the SDK. By default, the value will be set to action name. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

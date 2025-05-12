@@ -16,4 +16,8 @@ Custom action details
 |**userGroups** | [**List&lt;ObjectIDAndName&gt;**](ObjectIDAndName.md) | Unique ID or name of the User groups which are associated with the custom action. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

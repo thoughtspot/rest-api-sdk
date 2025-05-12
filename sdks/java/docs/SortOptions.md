@@ -33,4 +33,8 @@ Sort options.
 | DESC | &quot;DESC&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

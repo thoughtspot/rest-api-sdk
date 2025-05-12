@@ -24,4 +24,8 @@
 | SELECTED | &quot;SELECTED&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

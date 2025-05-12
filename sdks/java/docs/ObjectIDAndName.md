@@ -12,4 +12,8 @@ The object representation with ID and Name.
 |**name** | **String** | Name of the object. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

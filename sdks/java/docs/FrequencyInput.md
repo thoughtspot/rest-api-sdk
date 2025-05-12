@@ -11,4 +11,8 @@ Configuration of schedule with cron expression
 |**cronExpression** | [**CronExpressionInput**](CronExpressionInput.md) |  |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

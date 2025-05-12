@@ -11,4 +11,8 @@ Wrapper for the post-upgrade failed entities, as they are inside a 'data' field 
 |**data** | [**List&lt;ResponsePostUpgradeFailedEntity&gt;**](ResponsePostUpgradeFailedEntity.md) |  |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

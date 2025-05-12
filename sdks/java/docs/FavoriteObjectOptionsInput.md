@@ -12,4 +12,8 @@ Favorite object options.
 |**userIdentifiers** | **List&lt;String&gt;** | Unique ID or name of the users. If not specified, the favorite objects of current logged in user are returned. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

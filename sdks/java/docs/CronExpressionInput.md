@@ -16,4 +16,8 @@ Schedule selected cron expression.
 |**second** | **String** | Second of the object. |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

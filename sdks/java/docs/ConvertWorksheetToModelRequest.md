@@ -13,4 +13,8 @@
 |**applyChanges** | **Boolean** | Indicates whether the changes should be applied to database. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

@@ -12,4 +12,8 @@
 |**worksheetName** | **String** | Display name of the worksheet on which this query can be run on. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

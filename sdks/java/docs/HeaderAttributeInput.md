@@ -12,4 +12,8 @@ Attribute to update in a header.
 |**value** | **String** | Attribute&#39;s new value. |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

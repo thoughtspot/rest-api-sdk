@@ -11,4 +11,8 @@ List of runtime parameters need to set during the session.
 |**runtimeFilter** | **Object** | Runtime filter parameter type in JWT. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

@@ -12,4 +12,8 @@ Type and Configuration for Custom Actions
 |**url** | [**URL**](URL.md) |  |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

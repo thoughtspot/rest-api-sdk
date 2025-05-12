@@ -37,4 +37,8 @@ Metadata Search Response Object.
 | INSIGHT_SPEC | &quot;INSIGHT_SPEC&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

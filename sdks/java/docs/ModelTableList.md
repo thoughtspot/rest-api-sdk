@@ -12,4 +12,8 @@
 |**tables** | **List&lt;String&gt;** | List of Tables. |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

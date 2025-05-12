@@ -83,4 +83,8 @@
 | PERSONAL_ACCESS_TOKEN | &quot;PERSONAL_ACCESS_TOKEN&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

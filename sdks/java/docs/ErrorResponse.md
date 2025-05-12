@@ -10,4 +10,8 @@
 |**error** | **Object** |  |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

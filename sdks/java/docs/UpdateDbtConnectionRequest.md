@@ -29,4 +29,8 @@
 | ZIP_FILE | &quot;ZIP_FILE&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

@@ -33,4 +33,8 @@
 | RESET | &quot;RESET&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

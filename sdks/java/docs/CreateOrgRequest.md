@@ -11,4 +11,8 @@
 |**description** | **String** | Description of the Org. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

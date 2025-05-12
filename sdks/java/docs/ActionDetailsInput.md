@@ -12,4 +12,8 @@ Action details includes `Type` and configuration details of Custom Actions. Eith
 |**URL** | [**URLInput**](URLInput.md) |  |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

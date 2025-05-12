@@ -15,4 +15,8 @@ Schedule run response object
 |**detail** | **String** | Message details related to the schedule run. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

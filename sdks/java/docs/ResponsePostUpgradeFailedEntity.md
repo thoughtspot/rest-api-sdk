@@ -13,4 +13,8 @@ Unique ID of the worksheet that failed post-upgrade.
 |**error** | **String** | Error details related to the post-upgrade failure. |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

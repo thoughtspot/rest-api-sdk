@@ -29,4 +29,8 @@
 | LOGICAL_RELATIONSHIP | &quot;LOGICAL_RELATIONSHIP&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

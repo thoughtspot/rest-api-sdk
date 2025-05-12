@@ -12,4 +12,8 @@ The current Org context of the user.
 |**name** | **String** | Name of the object. |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

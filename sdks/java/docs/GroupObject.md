@@ -11,4 +11,8 @@ Groups objects.
 |**identifier** | **String** |  |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

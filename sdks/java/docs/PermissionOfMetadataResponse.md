@@ -10,4 +10,8 @@
 |**metadataPermissionDetails** | **Object** |  |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

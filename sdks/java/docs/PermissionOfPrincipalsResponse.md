@@ -10,4 +10,8 @@
 |**principalPermissionDetails** | **Object** |  |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

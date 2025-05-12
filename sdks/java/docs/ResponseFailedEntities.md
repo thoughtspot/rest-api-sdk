@@ -11,4 +11,8 @@ Wrapper for the failed entities, as they are inside a 'data' field in the respon
 |**data** | [**List&lt;ResponseFailedEntity&gt;**](ResponseFailedEntity.md) |  |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

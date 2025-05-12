@@ -21,4 +21,8 @@
 |**ownerId** | **String** |  |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

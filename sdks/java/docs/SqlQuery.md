@@ -13,4 +13,8 @@ Response format associated with fetch SQL query api
 |**sqlQuery** | **String** | SQL query of a metadata object. |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

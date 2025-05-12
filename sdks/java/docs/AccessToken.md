@@ -15,4 +15,8 @@
 |**expirationTimeInMillis** | **Float** | Token expiration time in milliseconds. |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

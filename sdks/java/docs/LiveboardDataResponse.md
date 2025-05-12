@@ -12,4 +12,8 @@
 |**contents** | [**List&lt;LiveboardContent&gt;**](LiveboardContent.md) | Data content of metadata objects |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

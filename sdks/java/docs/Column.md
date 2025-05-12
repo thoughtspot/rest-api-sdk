@@ -15,4 +15,8 @@
 |**isLinkedActive** | **Boolean** | Determines if the table is linked |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

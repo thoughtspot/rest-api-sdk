@@ -15,4 +15,8 @@
 |**validForUsername** | **String** | Unique identifier of the user to whom the token is issued. |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

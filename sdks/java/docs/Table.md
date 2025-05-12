@@ -16,4 +16,8 @@
 |**relationships** | **List&lt;Object&gt;** | List of relationships for the table |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

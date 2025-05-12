@@ -12,4 +12,8 @@
 |**recordOffset** | **Integer** | Indicates the starting record number from where history runs records should be fetched. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

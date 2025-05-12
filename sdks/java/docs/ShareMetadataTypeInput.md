@@ -23,4 +23,8 @@
 | CONNECTION | &quot;CONNECTION&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

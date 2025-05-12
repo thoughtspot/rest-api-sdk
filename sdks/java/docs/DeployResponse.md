@@ -14,4 +14,8 @@
 |**statusMessage** | **String** | Any error or warning with the deployment |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

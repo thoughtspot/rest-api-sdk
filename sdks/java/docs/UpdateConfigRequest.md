@@ -16,4 +16,8 @@
 |**configurationBranchName** | **String** | Name of the branch where the configuration files related to operations between Thoughtspot and version control repo should be maintained.    Version: 9.7.0.cl or later  |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

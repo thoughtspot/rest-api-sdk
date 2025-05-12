@@ -69,4 +69,8 @@
 | NON_SHARABLE | &quot;NON_SHARABLE&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

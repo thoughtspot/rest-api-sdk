@@ -23,4 +23,8 @@ MetadataType InputType used in Author API's
 | CONNECTION | &quot;CONNECTION&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

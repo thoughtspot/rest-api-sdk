@@ -12,4 +12,8 @@ Recipient configuration which includes email address, ID or name of the users an
 |**principals** | [**List&lt;PrincipalsListItem&gt;**](PrincipalsListItem.md) | List of user or groups to subscribe for the scheduled job notifications. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

@@ -18,4 +18,8 @@
 |**visualizationName** | **String** | Name of the visualization. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

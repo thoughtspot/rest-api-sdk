@@ -13,4 +13,8 @@ Unique ID of the failed worksheet.
 |**error** | **String** | Error details related to the failed conversion. |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

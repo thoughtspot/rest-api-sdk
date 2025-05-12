@@ -24,4 +24,8 @@ MetadataType InputType used in Delete MetadataType API
 | LOGICAL_RELATIONSHIP | &quot;LOGICAL_RELATIONSHIP&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

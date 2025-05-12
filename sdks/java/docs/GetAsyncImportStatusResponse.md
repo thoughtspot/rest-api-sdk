@@ -11,4 +11,8 @@
 |**lastBatch** | **Boolean** | Indicates whether there are more task statuses to fetch. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

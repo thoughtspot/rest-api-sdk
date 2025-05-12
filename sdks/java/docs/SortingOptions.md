@@ -12,4 +12,8 @@ Sort options.
 |**order** | **String** | Sort order : ASC(Ascending) or DESC(Descending). |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

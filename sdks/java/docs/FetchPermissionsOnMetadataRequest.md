@@ -15,4 +15,8 @@
 |**permissionType** | **String** | &lt;div&gt;Version: 10.3.0.cl or later &lt;/div&gt;  Specifies the type of permission. Valid values are:     EFFECTIVE - If the user permission to the metadata objects is granted by the privileges assigned to the groups to which they belong.     DEFINED - If a user or user group received access to metadata objects via object sharing by another user. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

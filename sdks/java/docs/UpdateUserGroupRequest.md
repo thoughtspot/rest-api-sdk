@@ -81,4 +81,8 @@
 | REPLACE | &quot;REPLACE&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

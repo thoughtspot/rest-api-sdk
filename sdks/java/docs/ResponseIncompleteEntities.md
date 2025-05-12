@@ -11,4 +11,8 @@ Wrapper for the incomplete entities, as they are inside a 'data' field in the re
 |**data** | [**List&lt;ResponseIncompleteEntity&gt;**](ResponseIncompleteEntity.md) |  |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

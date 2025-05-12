@@ -11,4 +11,8 @@
 |**baseUrl** | **String** | Base url of the cluster. |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

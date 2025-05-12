@@ -13,4 +13,8 @@
 |**properties** | **String** | Properties of the user. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

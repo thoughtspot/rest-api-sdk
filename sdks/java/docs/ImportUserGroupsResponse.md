@@ -12,4 +12,8 @@
 |**groupsUpdated** | [**List&lt;UserGroup&gt;**](UserGroup.md) | The groups which are updated in the system. |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

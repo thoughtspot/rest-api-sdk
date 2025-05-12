@@ -1,17 +1,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>io.github.thoughtspot</groupId>
-    <artifactId>thoughtspot-java-client</artifactId>
+    <groupId>io.github.pallavts</groupId>
+    <artifactId>rest-api-sdk-temp</artifactId>
     <packaging>jar</packaging>
-    <name>thoughtspot-java-client</name>
-    <version>2.4</version>
+    <name>rest-api-sdk-temp</name>
+    <version>0.0.1</version>
     <url>https://github.com/thoughtspot/rest-api-sdk</url>
-    <description>OpenAPI Java</description>
+    <description>ThoughtSpot Java Rest API SDK</description>
     <scm>
         <connection>scm:git:git://github.com/thoughtspot/rest-api-sdk.git</connection>
         <developerConnection>scm:git:ssh://github.com/thoughtspot/rest-api-sdk</developerConnection>
-        <url>http://github.com/thoughtspot/rest-api-sdk/main</url>
+        <url>https://github.com/thoughtspot/rest-api-sdk</url>
     </scm>
 
     <licenses>
@@ -24,9 +24,9 @@
 
     <developers>
         <developer>
-            <name>Thoughtspot</name>
+            <name>ThoughtSpot</name>
             <email>support@thoughtspot.com</email>
-            <organization>ThoughtSpot, Inc. 2024</organization>
+            <organization>ThoughtSpot, Inc. 2025</organization>
             <organizationUrl>https://www.thoughtspot.com/</organizationUrl>
         </developer>
     </developers>

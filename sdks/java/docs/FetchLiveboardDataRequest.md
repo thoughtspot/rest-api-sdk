@@ -27,4 +27,8 @@
 | COMPACT | &quot;COMPACT&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

@@ -11,4 +11,8 @@
 |**username** | **String** | Username of the committer |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

@@ -16,4 +16,8 @@
 |**org** | [**Org**](Org.md) |  |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

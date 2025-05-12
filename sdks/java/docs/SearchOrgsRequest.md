@@ -32,4 +32,8 @@
 | IN_ACTIVE | &quot;IN_ACTIVE&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

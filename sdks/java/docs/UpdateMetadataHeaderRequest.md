@@ -11,4 +11,8 @@
 |**orgIdentifier** | **String** | Unique ID or name of the organization. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

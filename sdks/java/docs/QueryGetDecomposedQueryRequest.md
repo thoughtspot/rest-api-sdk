@@ -16,4 +16,8 @@
 |**worksheetIds** | **List&lt;String&gt;** | List of worksheetIds to provide context for decomposing user query into analytical queries that can be run on them. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

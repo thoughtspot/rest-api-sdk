@@ -17,4 +17,8 @@
 |**revertedMetadata** | [**List&lt;RevertedMetadata&gt;**](RevertedMetadata.md) | Metadata of reverted file of this commit |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

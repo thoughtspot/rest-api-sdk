@@ -20,4 +20,8 @@ Name of the conversion process, which involves converting worksheets to models.
 |**postUpgradeFailedEntities** | [**ResponsePostUpgradeFailedEntities**](ResponsePostUpgradeFailedEntities.md) |  |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

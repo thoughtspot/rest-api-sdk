@@ -15,4 +15,8 @@
 |**branch** | **String** | Branch where changes were committed |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

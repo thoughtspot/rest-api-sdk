@@ -12,4 +12,8 @@ Filter Rules to be applied on Objects.
 |**values** | **List&lt;Object&gt;** | The values to filter on. Only single value is supported currently. |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

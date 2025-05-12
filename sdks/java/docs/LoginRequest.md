@@ -13,4 +13,8 @@
 |**rememberMe** | **Boolean** | A flag to remember the user session. When set to true, a session cookie is created and used in subsequent API requests. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

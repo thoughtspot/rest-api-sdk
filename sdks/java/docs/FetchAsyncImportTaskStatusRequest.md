@@ -26,4 +26,8 @@
 | FAILED | &quot;FAILED&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

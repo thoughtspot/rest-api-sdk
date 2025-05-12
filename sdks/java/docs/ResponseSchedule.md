@@ -23,4 +23,8 @@
 |**historyRuns** | [**List&lt;ResponseScheduleRun&gt;**](ResponseScheduleRun.md) | Schedule runs history records. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

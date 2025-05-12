@@ -32,4 +32,8 @@
 | VALIDATE_ONLY | &quot;VALIDATE_ONLY&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

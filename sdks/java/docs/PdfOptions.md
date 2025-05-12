@@ -27,4 +27,8 @@ Options for PDF export.
 | A4 | &quot;A4&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

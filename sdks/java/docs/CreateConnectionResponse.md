@@ -53,4 +53,8 @@
 | CLICKHOUSE | &quot;CLICKHOUSE&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

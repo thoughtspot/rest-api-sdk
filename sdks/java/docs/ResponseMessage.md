@@ -33,4 +33,8 @@
 | UNDEFINED | &quot;Undefined&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

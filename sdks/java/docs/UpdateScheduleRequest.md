@@ -684,4 +684,8 @@
 | PAUSE | &quot;PAUSE&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

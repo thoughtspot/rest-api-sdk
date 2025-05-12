@@ -22,4 +22,8 @@
 | CUSTOM_ACTION | &quot;CUSTOM_ACTION&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

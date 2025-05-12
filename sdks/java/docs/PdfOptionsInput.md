@@ -25,4 +25,8 @@
 | LANDSCAPE | &quot;LANDSCAPE&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

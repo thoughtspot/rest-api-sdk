@@ -11,4 +11,8 @@
 |**type** | **String** | Principal type. Valid values are |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

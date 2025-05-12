@@ -106,4 +106,8 @@
 | SUSPENDED | &quot;SUSPENDED&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

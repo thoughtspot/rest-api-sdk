@@ -30,4 +30,8 @@
 | INSIGHT_SPEC | &quot;INSIGHT_SPEC&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

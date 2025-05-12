@@ -14,4 +14,8 @@ Objects to apply the Runtime_Parameters.
 |**objects** | [**List&lt;UserObject&gt;**](UserObject.md) | Object to apply the runtime parameter. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

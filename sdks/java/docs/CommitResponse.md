@@ -16,4 +16,8 @@
 |**committedFiles** | [**List&lt;CommitFileType&gt;**](CommitFileType.md) | Files that were pushed as part of this commit |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

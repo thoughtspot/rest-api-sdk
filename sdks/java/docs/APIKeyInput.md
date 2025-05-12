@@ -12,4 +12,8 @@ With API key auth, you send a key-value pair to the API either in the request he
 |**value** | **String** | Enter you key value |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

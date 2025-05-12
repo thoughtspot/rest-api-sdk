@@ -10,4 +10,8 @@
 |**metadataId** | **String** | The unique identifier of the object. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

@@ -13,4 +13,8 @@
 |**query** | **String** | User query which is a topical/goal oriented question that needs to be broken down into smaller simple analytical questions. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

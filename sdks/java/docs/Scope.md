@@ -12,4 +12,8 @@
 |**metadataId** | **String** | Unique identifier of the Org. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

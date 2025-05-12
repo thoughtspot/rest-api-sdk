@@ -12,4 +12,8 @@
 |**color** | **String** | Color of the tag. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

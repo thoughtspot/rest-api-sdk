@@ -12,4 +12,8 @@ Author of the schedule.
 |**name** | **String** | Name of the object. |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

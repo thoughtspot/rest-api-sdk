@@ -1,10 +1,10 @@
-# thoughtspot-java-client
+# rest-api-sdk-temp
 
 ThoughtSpot Public REST API
 
 - API version: 2.0
 
-    - Build date: 2025-05-08T06:38:48.062310242Z[Etc/UTC]
+    - Build date: 2025-05-11T16:22:24.518721584Z[Etc/UTC]
 
 - Generator version: 7.12.0
 
@@ -42,9 +42,9 @@ Add this dependency to your project's POM:
 
 ```xml
 <dependency>
-    <groupId>io.github.thoughtspot</groupId>
-    <artifactId>thoughtspot-java-client</artifactId>
-    <version>2.4</version>
+    <groupId>io.github.pallavts</groupId>
+    <artifactId>rest-api-sdk-temp</artifactId>
+    <version>0.0.1</version>
     <scope>compile</scope>
 </dependency>
 ```
@@ -55,12 +55,12 @@ Add this dependency to your project's build file:
 
 ```groovy
 repositories {
-mavenCentral()     // Needed if the 'thoughtspot-java-client' jar has been published to maven central.
-mavenLocal()       // Needed if the 'thoughtspot-java-client' jar has been published to the local maven repo.
+mavenCentral()     // Needed if the 'rest-api-sdk-temp' jar has been published to maven central.
+mavenLocal()       // Needed if the 'rest-api-sdk-temp' jar has been published to the local maven repo.
 }
 
 dependencies {
-implementation "io.github.thoughtspot:thoughtspot-java-client:2.4"
+implementation "io.github.pallavts:rest-api-sdk-temp:0.0.1"
 }
 ```
 
@@ -74,7 +74,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/thoughtspot-java-client-2.4.jar`
+- `target/rest-api-sdk-temp-0.0.1.jar`
 - `target/lib/*.jar`
 
 ## Getting Started

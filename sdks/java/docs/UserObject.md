@@ -20,4 +20,8 @@ Objects to apply the User_Object.
 | LOGICAL_TABLE | &quot;LOGICAL_TABLE&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

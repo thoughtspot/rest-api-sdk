@@ -12,4 +12,8 @@ JWT user options to create a JWT token given the payload.   *Deprecated in 9.12.
 |**metadata** | [**List&lt;JWTMetadataObject&gt;**](JWTMetadataObject.md) |  |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

@@ -22,4 +22,8 @@ MetadataType InputType used in Custom Action API's
 | WORKSHEET | &quot;WORKSHEET&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

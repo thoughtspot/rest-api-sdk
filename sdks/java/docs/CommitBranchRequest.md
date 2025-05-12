@@ -13,4 +13,8 @@
 |**comment** | **String** | Comment to be added to the commit |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

@@ -97,4 +97,8 @@
 | GROUP | &quot;GROUP&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

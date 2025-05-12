@@ -28,4 +28,8 @@ MetadataType InputType used in Export MetadataType API
 | FEEDBACK | &quot;FEEDBACK&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

@@ -11,4 +11,8 @@
 |**name** | **String** | Name of the user. |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

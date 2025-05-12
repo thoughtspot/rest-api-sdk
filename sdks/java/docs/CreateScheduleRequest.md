@@ -674,4 +674,8 @@
 | VST | &quot;VST&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

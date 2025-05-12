@@ -356,4 +356,8 @@
 | EN_DE | &quot;en-DE&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

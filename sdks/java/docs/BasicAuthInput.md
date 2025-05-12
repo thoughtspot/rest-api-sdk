@@ -12,4 +12,8 @@ Basic Auth: Basic authentication involves sending a verified username and passwo
 |**username** | **String** | Username for the basic authentication |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

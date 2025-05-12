@@ -12,4 +12,8 @@ Metadata objects.
 |**type** | **String** |  |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

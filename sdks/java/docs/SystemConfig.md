@@ -10,4 +10,8 @@
 |**onboardingContentUrl** | **String** |  |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

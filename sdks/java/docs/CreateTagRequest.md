@@ -11,4 +11,8 @@
 |**color** | **String** | Hex color code to be assigned to the tag. For example, #ff78a9. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

@@ -15,4 +15,8 @@
 |**scheduleIdentifiers** | **List&lt;String&gt;** | unique ID or name of the Schedule |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

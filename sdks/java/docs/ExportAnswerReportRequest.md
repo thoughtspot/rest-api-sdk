@@ -28,4 +28,8 @@
 | PNG | &quot;PNG&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

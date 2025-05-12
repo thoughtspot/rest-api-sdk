@@ -23,4 +23,8 @@ Objects to apply the Runtime_Sorts.
 | DESC | &quot;DESC&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

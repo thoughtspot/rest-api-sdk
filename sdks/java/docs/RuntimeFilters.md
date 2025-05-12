@@ -38,4 +38,8 @@ Objects to apply the Runtime_Filters.
 | NOT_IN | &quot;NOT_IN&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

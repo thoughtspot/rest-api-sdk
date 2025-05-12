@@ -17,4 +17,8 @@
 |**configurationBranchName** | **String** |    Name of the branch where the configuration files related to operations between Thoughtspot and version control repo should be maintained.      Note: If no branch name is specified, then by default, ts_config_files branch is considered. Ensure this branch exists before configuration.    Version: 9.7.0.cl or later  |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

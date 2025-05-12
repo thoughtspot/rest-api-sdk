@@ -12,4 +12,8 @@
 |**userIdentifier** | **String** | GUID or name of the user. |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

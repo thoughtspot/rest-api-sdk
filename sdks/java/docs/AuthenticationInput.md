@@ -14,4 +14,8 @@ Authorization type for the custom action.
 |**noAuth** | **String** | No authorization. If your request doesn&#39;t require authorization. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

@@ -11,4 +11,8 @@
 |**deleteDisabledObjects** | **Boolean** | Indicates whether to delete disabled metadata objects. |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

@@ -10,4 +10,8 @@
 |**metadataIdentifier** | **String** | ID or name of an Answer. |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

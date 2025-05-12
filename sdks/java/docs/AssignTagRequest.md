@@ -11,4 +11,8 @@
 |**tagIdentifiers** | **List&lt;String&gt;** | GUID or name of the tag. |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

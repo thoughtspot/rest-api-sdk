@@ -20,4 +20,8 @@
 | LIVEBOARD | &quot;LIVEBOARD&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

@@ -10,4 +10,8 @@
 |**metadata** | [**List&lt;UpdateObjIdInput&gt;**](UpdateObjIdInput.md) | List of metadata objects to update their object IDs. |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 
