@@ -16,8 +16,7 @@
 
     <licenses>
         <license>
-            <name>Unlicense</name>
-            <url>http://unlicense.org</url>
+            <url>https://github.com/thoughtspot/rest-api-sdk/blob/release/LICENSE.md</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
