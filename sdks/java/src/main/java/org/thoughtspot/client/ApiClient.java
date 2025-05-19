@@ -153,6 +153,10 @@ public class ApiClient {
             setVerifyingSsl(apiClientConfiguration.isVerifyingSsl());
             setSslCaCert(apiClientConfiguration.getSslCaCert());
             setKeyManagers(apiClientConfiguration.getKeyManagers().toArray(new KeyManager[0]));
+            setTempFolderPath(apiClientConfiguration.getDownloadPath());
+            setConnectTimeout(apiClientConfiguration.getConnectTimeoutMillis());
+            setReadTimeout(apiClientConfiguration.getReadTimeoutMillis());
+            setWriteTimeout(apiClientConfiguration.getWriteTimeoutMillis());
         }
     }
 

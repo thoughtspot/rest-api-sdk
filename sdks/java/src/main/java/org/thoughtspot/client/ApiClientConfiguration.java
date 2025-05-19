@@ -21,6 +21,9 @@ import javax.net.ssl.KeyManager;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class ApiClientConfiguration {
+    private static final String DEFAULT_BASE_PATH = "https://localhost:443";
+    private static final int DEFAULT_TIMEOUT_MILLIS = 10000;
+
     private final String basePath;
     private final Supplier<String> bearerTokenSupplier;
     private final Map<String, String> defaultHeaderMap;
@@ -28,21 +31,27 @@ public class ApiClientConfiguration {
     private final boolean verifyingSsl;
     private final InputStream sslCaCert;
     private final List<KeyManager> keyManagers;
+    private final String downloadPath;
+    private final int connectTimeoutMillis;
+    private final int readTimeoutMillis;
+    private final int writeTimeoutMillis;
 
     /**
      * Default constructor that initializes the configuration with default values.
+     * Sets base path to {@link #DEFAULT_BASE_PATH} and all timeouts to {@link #DEFAULT_TIMEOUT_MILLIS}.
      */
     public ApiClientConfiguration() {
-        this("https://localhost:443");
+        this(DEFAULT_BASE_PATH);
     }
 
     /**
      * Constructor that initializes the configuration with a specified base path.
+     * Sets all timeouts to {@link #DEFAULT_TIMEOUT_MILLIS}.
      *
      * @param basePath The base path for the API.
      */
     public ApiClientConfiguration(String basePath) {
-        this(basePath, (String) null, Collections.emptyMap(), Collections.emptyMap(), true, null, Collections.emptyList());
+        this(basePath, (String) null, Collections.emptyMap(), Collections.emptyMap(), true, null, Collections.emptyList(), null, DEFAULT_TIMEOUT_MILLIS, DEFAULT_TIMEOUT_MILLIS, DEFAULT_TIMEOUT_MILLIS);
     }
 
     /**
@@ -55,6 +64,10 @@ public class ApiClientConfiguration {
      * @param verifyingSsl Whether to verify SSL certificates.
      * @param sslCaCert The SSL CA certificate input stream.
      * @param keyManagers List of key managers for SSL configuration.
+     * @param downloadPath The path for downloading files. If null, system's default temporary folder will be used.
+     * @param connectTimeoutMillis Connection timeout in milliseconds. Must be between 1 and {@link Integer#MAX_VALUE}.
+     * @param readTimeoutMillis Read timeout in milliseconds. Must be between 1 and {@link Integer#MAX_VALUE}.
+     * @param writeTimeoutMillis Write timeout in milliseconds. Must be between 1 and {@link Integer#MAX_VALUE}.
      */
     public ApiClientConfiguration(
             final String basePath,
@@ -63,9 +76,13 @@ public class ApiClientConfiguration {
             final Map<String, String> defaultCookieMap,
             final boolean verifyingSsl,
             final InputStream sslCaCert,
-            final List<KeyManager> keyManagers
+            final List<KeyManager> keyManagers,
+            final String downloadPath,
+            final int connectTimeoutMillis,
+            final int readTimeoutMillis,
+            final int writeTimeoutMillis
     ) {
-        this(basePath, () -> bearerToken, defaultHeaderMap, defaultCookieMap, verifyingSsl, sslCaCert, keyManagers);
+        this(basePath, () -> bearerToken, defaultHeaderMap, defaultCookieMap, verifyingSsl, sslCaCert, keyManagers, downloadPath, connectTimeoutMillis, readTimeoutMillis, writeTimeoutMillis);
     }
 
     /**
@@ -78,6 +95,10 @@ public class ApiClientConfiguration {
      * @param verifyingSsl Whether to verify SSL certificates.
      * @param sslCaCert The SSL CA certificate input stream.
      * @param keyManagers List of key managers for SSL configuration.
+     * @param downloadPath The path for downloading files. If null, system's default temporary folder will be used.
+     * @param connectTimeoutMillis Connection timeout in milliseconds. Must be between 1 and {@link Integer#MAX_VALUE}.
+     * @param readTimeoutMillis Read timeout in milliseconds. Must be between 1 and {@link Integer#MAX_VALUE}.
+     * @param writeTimeoutMillis Write timeout in milliseconds. Must be between 1 and {@link Integer#MAX_VALUE}.
      */
     public ApiClientConfiguration(
             final String basePath,
@@ -86,7 +107,11 @@ public class ApiClientConfiguration {
             final Map<String, String> defaultCookieMap,
             final boolean verifyingSsl,
             final InputStream sslCaCert,
-            final List<KeyManager> keyManagers
+            final List<KeyManager> keyManagers,
+            final String downloadPath,
+            final int connectTimeoutMillis,
+            final int readTimeoutMillis,
+            final int writeTimeoutMillis
     ) {
         this.basePath = basePath;
         this.bearerTokenSupplier = bearerTokenSupplier;
@@ -101,6 +126,10 @@ public class ApiClientConfiguration {
         this.keyManagers = keyManagers != null
                 ? Collections.unmodifiableList(new ArrayList<>(keyManagers))
                 : Collections.emptyList();
+        this.downloadPath = downloadPath;
+        this.connectTimeoutMillis = connectTimeoutMillis;
+        this.readTimeoutMillis = readTimeoutMillis;
+        this.writeTimeoutMillis = writeTimeoutMillis;
     }
 
     /**
@@ -160,6 +189,34 @@ public class ApiClientConfiguration {
     }
 
     /**
+     * @return The download path for files. If null, system's default temporary folder will be used.
+     */
+    public String getDownloadPath() {
+        return downloadPath;
+    }
+
+    /**
+     * @return The connection timeout in milliseconds.
+     */
+    public int getConnectTimeoutMillis() {
+        return connectTimeoutMillis;
+    }
+
+    /**
+     * @return The read timeout in milliseconds.
+     */
+    public int getReadTimeoutMillis() {
+        return readTimeoutMillis;
+    }
+
+    /**
+     * @return The write timeout in milliseconds.
+     */
+    public int getWriteTimeoutMillis() {
+        return writeTimeoutMillis;
+    }
+
+    /**
      * @return A string representation of the client configuration.
      */
     @Override
@@ -171,6 +228,10 @@ public class ApiClientConfiguration {
                 ", verifyingSsl=" + verifyingSsl +
                 ", sslCaCert=" + sslCaCert +
                 ", keyManagers=" + keyManagers +
+                ", downloadPath='" + downloadPath + '\'' +
+                ", connectTimeoutMillis=" + connectTimeoutMillis +
+                ", readTimeoutMillis=" + readTimeoutMillis +
+                ", writeTimeoutMillis=" + writeTimeoutMillis +
                 '}';
     }
 
@@ -194,17 +255,26 @@ public class ApiClientConfiguration {
         private boolean verifyingSsl;
         private InputStream sslCaCert;
         private List<KeyManager> keyManagers;
+        private String downloadPath;
+        private int connectTimeoutMillis;
+        private int readTimeoutMillis;
+        private int writeTimeoutMillis;
 
         /**
          * Default constructor that initializes the builder with default values.
+         * Sets base path to {@link #DEFAULT_BASE_PATH} and all timeouts to {@link #DEFAULT_TIMEOUT_MILLIS}.
          */
         public Builder() {
-            this.basePath = "https://localhost:443";
+            this.basePath = DEFAULT_BASE_PATH;
             this.bearerTokenSupplier = () -> null;
             this.defaultHeaderMap = new HashMap<>();
             this.defaultCookieMap = new HashMap<>();
             this.verifyingSsl = true;
             this.keyManagers = new ArrayList<>();
+            this.downloadPath = null;
+            this.connectTimeoutMillis = DEFAULT_TIMEOUT_MILLIS;
+            this.readTimeoutMillis = DEFAULT_TIMEOUT_MILLIS;
+            this.writeTimeoutMillis = DEFAULT_TIMEOUT_MILLIS;
         }
 
         /**
@@ -220,6 +290,10 @@ public class ApiClientConfiguration {
             this.verifyingSsl = config.isVerifyingSsl();
             this.sslCaCert = config.getSslCaCert();
             this.keyManagers = new ArrayList<>(config.getKeyManagers());
+            this.downloadPath = config.getDownloadPath();
+            this.connectTimeoutMillis = config.getConnectTimeoutMillis();
+            this.readTimeoutMillis = config.getReadTimeoutMillis();
+            this.writeTimeoutMillis = config.getWriteTimeoutMillis();
         }
 
         /**
@@ -346,6 +420,50 @@ public class ApiClientConfiguration {
         }
 
         /**
+         * Sets the download path for files.
+         *
+         * @param downloadPath The path for downloading files. If null, system's default temporary folder will be used.
+         * @return The builder instance.
+         */
+        public Builder downloadPath(String downloadPath) {
+            this.downloadPath = downloadPath;
+            return this;
+        }
+
+        /**
+         * Sets the connection timeout.
+         *
+         * @param connectTimeoutMillis Connection timeout in milliseconds. Must be between 1 and {@link Integer#MAX_VALUE}.
+         * @return The builder instance.
+         */
+        public Builder connectTimeoutMillis(int connectTimeoutMillis) {
+            this.connectTimeoutMillis = connectTimeoutMillis;
+            return this;
+        }
+
+        /**
+         * Sets the read timeout.
+         *
+         * @param readTimeoutMillis Read timeout in milliseconds. Must be between 1 and {@link Integer#MAX_VALUE}.
+         * @return The builder instance.
+         */
+        public Builder readTimeoutMillis(int readTimeoutMillis) {
+            this.readTimeoutMillis = readTimeoutMillis;
+            return this;
+        }
+
+        /**
+         * Sets the write timeout.
+         *
+         * @param writeTimeoutMillis Write timeout in milliseconds. Must be between 1 and {@link Integer#MAX_VALUE}.
+         * @return The builder instance.
+         */
+        public Builder writeTimeoutMillis(int writeTimeoutMillis) {
+            this.writeTimeoutMillis = writeTimeoutMillis;
+            return this;
+        }
+
+        /**
          * Builds a {@link ApiClientConfiguration} instance with the current builder values.
          *
          * @return A new {@link ApiClientConfiguration} instance.
@@ -358,7 +476,11 @@ public class ApiClientConfiguration {
                     defaultCookieMap,
                     verifyingSsl,
                     sslCaCert,
-                    keyManagers
+                    keyManagers,
+                    downloadPath,
+                    connectTimeoutMillis,
+                    readTimeoutMillis,
+                    writeTimeoutMillis
             );
         }
     }
