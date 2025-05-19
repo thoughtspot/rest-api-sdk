@@ -6,22 +6,6 @@
   },
   "x-roles": [
     {
-      "name": "9.0.0.cl",
-      "id": "9.0.0.cl",
-      "tags": [
-        "9.0.0.cl"
-      ],
-      "description": "Roles for version 9.0.0.cl"
-    },
-    {
-      "name": "9.12.0.cl",
-      "id": "9.12.0.cl",
-      "tags": [
-        "9.12.0.cl"
-      ],
-      "description": "Roles for version 9.12.0.cl"
-    },
-    {
       "name": "10.4.0.cl",
       "id": "10.4.0.cl",
       "tags": [
@@ -30,76 +14,20 @@
       "description": "Roles for version 10.4.0.cl"
     },
     {
-      "name": "9.7.0.cl",
-      "id": "9.7.0.cl",
+      "name": "10.7.0.cl",
+      "id": "10.7.0.cl",
       "tags": [
-        "9.7.0.cl"
+        "10.7.0.cl"
       ],
-      "description": "Roles for version 9.7.0.cl"
+      "description": "Roles for version 10.7.0.cl"
     },
     {
-      "name": "9.2.0.cl",
-      "id": "9.2.0.cl",
+      "name": "9.0.0.cl",
+      "id": "9.0.0.cl",
       "tags": [
-        "9.2.0.cl"
+        "9.0.0.cl"
       ],
-      "description": "Roles for version 9.2.0.cl"
-    },
-    {
-      "name": "10.1.0.cl",
-      "id": "10.1.0.cl",
-      "tags": [
-        "10.1.0.cl"
-      ],
-      "description": "Roles for version 10.1.0.cl"
-    },
-    {
-      "name": "10.3.0.cl",
-      "id": "10.3.0.cl",
-      "tags": [
-        "10.3.0.cl"
-      ],
-      "description": "Roles for version 10.3.0.cl"
-    },
-    {
-      "name": "10.6.0.cl",
-      "id": "10.6.0.cl",
-      "tags": [
-        "10.6.0.cl"
-      ],
-      "description": "Roles for version 10.6.0.cl"
-    },
-    {
-      "name": "10.8.0.cl",
-      "id": "10.8.0.cl",
-      "tags": [
-        "10.8.0.cl"
-      ],
-      "description": "Roles for version 10.8.0.cl"
-    },
-    {
-      "name": "10.9.0.cl",
-      "id": "10.9.0.cl",
-      "tags": [
-        "10.9.0.cl"
-      ],
-      "description": "Roles for version 10.9.0.cl"
-    },
-    {
-      "name": "9.9.0.cl",
-      "id": "9.9.0.cl",
-      "tags": [
-        "9.9.0.cl"
-      ],
-      "description": "Roles for version 9.9.0.cl"
-    },
-    {
-      "name": "9.5.0.cl",
-      "id": "9.5.0.cl",
-      "tags": [
-        "9.5.0.cl"
-      ],
-      "description": "Roles for version 9.5.0.cl"
+      "description": "Roles for version 9.0.0.cl"
     },
     {
       "name": "9.4.0.cl",
@@ -110,6 +38,30 @@
       "description": "Roles for version 9.4.0.cl"
     },
     {
+      "name": "9.12.0.cl",
+      "id": "9.12.0.cl",
+      "tags": [
+        "9.12.0.cl"
+      ],
+      "description": "Roles for version 9.12.0.cl"
+    },
+    {
+      "name": "9.2.0.cl",
+      "id": "9.2.0.cl",
+      "tags": [
+        "9.2.0.cl"
+      ],
+      "description": "Roles for version 9.2.0.cl"
+    },
+    {
+      "name": "9.9.0.cl",
+      "id": "9.9.0.cl",
+      "tags": [
+        "9.9.0.cl"
+      ],
+      "description": "Roles for version 9.9.0.cl"
+    },
+    {
       "name": "9.6.0.cl",
       "id": "9.6.0.cl",
       "tags": [
@@ -118,12 +70,60 @@
       "description": "Roles for version 9.6.0.cl"
     },
     {
-      "name": "10.10.0.cl",
-      "id": "10.10.0.cl",
+      "name": "10.6.0.cl",
+      "id": "10.6.0.cl",
       "tags": [
-        "10.10.0.cl"
+        "10.6.0.cl"
       ],
-      "description": "Roles for version 10.10.0.cl"
+      "description": "Roles for version 10.6.0.cl"
+    },
+    {
+      "name": "10.3.0.cl",
+      "id": "10.3.0.cl",
+      "tags": [
+        "10.3.0.cl"
+      ],
+      "description": "Roles for version 10.3.0.cl"
+    },
+    {
+      "name": "10.1.0.cl",
+      "id": "10.1.0.cl",
+      "tags": [
+        "10.1.0.cl"
+      ],
+      "description": "Roles for version 10.1.0.cl"
+    },
+    {
+      "name": "10.9.0.cl",
+      "id": "10.9.0.cl",
+      "tags": [
+        "10.9.0.cl"
+      ],
+      "description": "Roles for version 10.9.0.cl"
+    },
+    {
+      "name": "10.8.0.cl",
+      "id": "10.8.0.cl",
+      "tags": [
+        "10.8.0.cl"
+      ],
+      "description": "Roles for version 10.8.0.cl"
+    },
+    {
+      "name": "9.5.0.cl",
+      "id": "9.5.0.cl",
+      "tags": [
+        "9.5.0.cl"
+      ],
+      "description": "Roles for version 9.5.0.cl"
+    },
+    {
+      "name": "9.7.0.cl",
+      "id": "9.7.0.cl",
+      "tags": [
+        "9.7.0.cl"
+      ],
+      "description": "Roles for version 9.7.0.cl"
     }
   ],
   "tags": [],
@@ -613,7 +613,7 @@
     "/api/rest/2.0/auth/token/custom": {
       "post": {
         "operationId": "getCustomAccessToken",
-        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nGets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.\n\nTo add a new user and assign privileges during auto creation, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.\n\nTo assign security attributes with filter rules and Parameters to the JWT token, you'll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.\n\n#### Usage guidelines\n\nYou can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key`.\n\nTo generate a `secret_key` on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable) in the **Develop** > **Customizations** > **Security Settings** page.\n\n**Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.\n\n##### Attribute-Based Access Control (ABAC) with tokens\n\nTo implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the `filter_rules` and `parameter_values` array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user's `access_control_properties` object, after which all sessions will use the persisted values.\n\nSpecify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.\n\nFor more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).\n\n##### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, define the following attributes:\n\n* `auto_create`\n* `username`\n* `display_name`\n* `email`\n* `groups`\n\nSet `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true` in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values.\n\nFor more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).\n\n##### Important point to note\nAll options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Persist options such as  `APPEND`, `REPLACE`, `RESET` will persist security parameters on the user profile when the token is created, while Persist option `NONE` will not persist anything but will be honoured in the session.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nGets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.\n\nTo add a new user and assign privileges during auto creation, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.\n\nTo assign security attributes with filter rules and Parameters to the JWT token, you'll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.\n\n#### Usage guidelines\n\nYou can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key`.\n\nTo generate a `secret_key` on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable) in the **Develop** > **Customizations** > **Security Settings** page.\n\n**Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.\n\nIf Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.\n\n##### Attribute-Based Access Control (ABAC) with tokens\n\nTo implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the `filter_rules` and `parameter_values` array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user's `access_control_properties` object, after which all sessions will use the persisted values.\n\nSpecify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.\n\nFor more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).\n\n##### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, define the following attributes:\n\n* `auto_create`\n* `username`\n* `display_name`\n* `email`\n* `groups`\n\nSet `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true` in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values.\n\nFor more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).\n\n##### Important point to note\nAll options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Persist options such as  `APPEND`, `REPLACE`, `RESET` will persist security parameters on the user profile when the token is created, while Persist option `NONE` will not persist anything but will be honoured in the session.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Authentication",
           "10.4.0.cl"
@@ -769,7 +769,7 @@
     "/api/rest/2.0/auth/token/full": {
       "post": {
         "operationId": "getFullAccessToken",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets an authentication token and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.\n\nYou can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)).\n\nTo generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page. For more information, see [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable).\n\n**Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.\n\n#### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, define the following attributes:\n\n* `auto_create`\n* `username`\n* `display_name`\n* `email`\n* `group_identifiers`\n\nSet `auto_create` to `True` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true`, the API call will update user properties like display name, email and group assignment.\n\nFor more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).\n\nTo add a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege is required.\n\n#### Attribute-Based Access Control (ABAC) with tokens\n\nYou can define Attribute-Based Access Control (ABAC) parameters to assign security entitlements to users during session creation. For more information, see [ABAC via token](https://developers.thoughtspot.com/docs/abac-user-parameters).\n\nSpecify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.\n\n#### Important point to note\nAll options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Similarly, using `user_parameters` with `persist: true` persists security parameters on the user profile when the token is created and not during authentication.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets an authentication token and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.\n\nYou can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)).\n\nTo generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page. For more information, see [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable).\n\n**Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.\n\nIf Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.\n\n#### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, define the following attributes:\n\n* `auto_create`\n* `username`\n* `display_name`\n* `email`\n* `group_identifiers`\n\nSet `auto_create` to `True` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true`, the API call will update user properties like display name, email and group assignment.\n\nFor more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).\n\nTo add a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege is required.\n\n#### Important point to note\nAll options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Authentication",
           "9.0.0.cl"
@@ -894,7 +894,7 @@
     "/api/rest/2.0/auth/token/object": {
       "post": {
         "operationId": "getObjectAccessToken",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets an authentication token that provides access to a specific metadata object. By default, the token obtained from ThoughtSpot remains valid for 5 mins.\n\nYou can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)).\n\nTo generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page.\n\n**Note**: When both `password` and `secret_key` are included in the API request,  `password` takes precedence.\n\n#### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, define the following attributes:\n\n* `auto_create`\n* `username`\n* `display_name`\n* `email`\n* `group_identifiers`\n\nSet `auto_create` to `True` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true`, the API call will update user properties like display name, email and group assignment.\n\nFor more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).\n\nTo add a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege is required.\n\n#### Attribute-Based Access Control (ABAC) with tokens\n\nYou can define Attribute-Based Access Control (ABAC) parameters to assign security entitlements to users during session creation. For more information, see [ABAC via token](https://developers.thoughtspot.com/docs/abac-user-parameters).\n\n#### Important point to note\nAll options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Similarly, using `user_parameters` with `persist: true` persists security parameters on the user profile when the token is created and not during authentication.\n\nSpecify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets an authentication token that provides access to a specific metadata object. By default, the token obtained from ThoughtSpot remains valid for 5 mins.\n\nYou can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)).\n\nTo generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page.\n\n**Note**: When both `password` and `secret_key` are included in the API request,  `password` takes precedence.\n\nIf Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.\n\n#### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, define the following attributes:\n\n* `auto_create`\n* `username`\n* `display_name`\n* `email`\n* `group_identifiers`\n\nSet `auto_create` to `True` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true`, the API call will update user properties like display name, email and group assignment.\n\nFor more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).\n\nTo add a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege is required.\n\n#### Important point to note\nAll options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Authentication",
           "9.0.0.cl"
@@ -1023,7 +1023,7 @@
     "/api/rest/2.0/auth/session/login": {
       "post": {
         "operationId": "login",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\n\nCreates a login session for a ThoughtSpot user with Basic authentication.\n\nIn Basic authentication method, REST clients log in to ThoughtSpot using `username` and `password` attributes. On a multi-tenant cluster with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org context.\n\nA successful login returns a session cookie that can be used in your subsequent API requests.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nCreates a login session for a ThoughtSpot user with Basic authentication.\n\nIn Basic authentication method, REST clients log in to ThoughtSpot using `username` and `password` attributes. On a multi-tenant cluster with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org context.\n\n**Note**: If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. Contact ThoughtSpot Support for assistance.\n\nA successful login returns a session cookie that can be used in your subsequent API requests.\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Authentication",
           "9.0.0.cl"
@@ -2577,168 +2577,6 @@
         }
       }
     },
-    "/api/rest/2.0/calendars": {
-      "post": {
-        "operationId": "createCalendar",
-        "description": "\n <span class=\"since-beta-tag\">Version: 10.10.0.cl or later</span>\n\n# Calendar API Documentation\n\n## Overview\nThe `Calendar_createCalendar` API allows users to create custom calendars with various configurations. This document outlines the API design, usage, and comparison with other similar APIs in the system.\n\n## API Structure\n\n### GraphQL Schema\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Custom Calendars",
-          "10.10.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "description": "Name of the custom calendar.",
-                    "type": "string"
-                  },
-                  "table_reference": {
-                    "description": "Table reference containing connection identifier and table details in format = {\"connection_identifier\":\"conn1\", \"database_name\":\"db1\", \"schema_name\":\"sc1\", \"table_name\":\"tb1\"}. The given table will be created if creation_method is FROM_INPUT_PARAMS",
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/ExternalTableInput"
-                      }
-                    ]
-                  },
-                  "creation_method": {
-                    "description": "Mention type of create.",
-                    "type": "string",
-                    "enum": [
-                      "FROM_INPUT_PARAMS",
-                      "FROM_EXISTING_TABLE"
-                    ]
-                  },
-                  "start_date": {
-                    "description": "Start date for the calendar in MM/dd/yyyy format. This field is mandatory when creation_method is FROM_INPUT_PARAMS.",
-                    "type": "string"
-                  },
-                  "end_date": {
-                    "description": "End date for the calendar in MM/dd/yyyy format. This field is mandatory when creation_method is FROM_INPUT_PARAMS.",
-                    "type": "string"
-                  },
-                  "calendar_type": {
-                    "description": "Type of the calendar.",
-                    "default": "MONTH_OFFSET",
-                    "type": "string",
-                    "enum": [
-                      "MONTH_OFFSET",
-                      "FOUR_FOUR_FIVE",
-                      "FOUR_FIVE_FOUR",
-                      "FIVE_FOUR_FOUR"
-                    ]
-                  },
-                  "month_offset": {
-                    "description": "Month offset to start calendar from January.",
-                    "default": "January",
-                    "type": "string",
-                    "enum": [
-                      "January",
-                      "February",
-                      "March",
-                      "April",
-                      "May",
-                      "June",
-                      "July",
-                      "August",
-                      "September",
-                      "October",
-                      "November",
-                      "December"
-                    ]
-                  },
-                  "start_day_of_week": {
-                    "description": "Start day of the week.",
-                    "default": "Sunday",
-                    "type": "string",
-                    "enum": [
-                      "Sunday",
-                      "Monday",
-                      "Tuesday",
-                      "Wednesday",
-                      "Thursday",
-                      "Friday",
-                      "Saturday"
-                    ]
-                  },
-                  "quarter_name_prefix": {
-                    "description": "Prefix to add before the quarter.",
-                    "default": "",
-                    "type": "string"
-                  },
-                  "year_name_prefix": {
-                    "description": "Prefix to add before the year.",
-                    "default": "",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "name",
-                  "table_reference",
-                  "creation_method"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Custom calendar created successfully.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CalendarResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/rest/2.0/metadata/answer/data": {
       "post": {
         "operationId": "fetchAnswerData",
@@ -4161,6 +3999,18 @@
                         "$ref": "#/components/schemas/SortOptions"
                       }
                     ]
+                  },
+                  "include_users": {
+                    "description": "<div><span class=\"since-beta-tag\">Version: 10.10.0.cl or later</span></div>\n\nDefine Parameter to consider if the users should be included in group search response.",
+                    "default": true,
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "include_sub_groups": {
+                    "description": "<div><span class=\"since-beta-tag\">Version: 10.10.0.cl or later</span></div>\n\nDefine Parameter to consider if the sub groups should be included in group search response.",
+                    "default": true,
+                    "type": "boolean",
+                    "nullable": true
                   }
                 }
               }
@@ -7298,7 +7148,8 @@
                         "CAN_CREATE_CATALOG",
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
-                        "PREVIEW_DOCUMENT_SEARCH"
+                        "PREVIEW_DOCUMENT_SEARCH",
+                        "PREVIEW_THOUGHTSPOT_SAGE"
                       ]
                     }
                   }
@@ -8087,6 +7938,10 @@
                         "$ref": "#/components/schemas/RecipientDetailsInput"
                       }
                     ]
+                  },
+                  "personalised_view_id": {
+                    "description": "Personalised view id of the liveboard to be scheduled.",
+                    "type": "string"
                   }
                 },
                 "required": [
@@ -9058,6 +8913,10 @@
                       "ACTIVE",
                       "PAUSE"
                     ]
+                  },
+                  "personalised_view_id": {
+                    "description": "Personalised view id of the liveboard to be scheduled.",
+                    "type": "string"
                   }
                 }
               }
@@ -18368,6 +18227,11 @@
             },
             "description": "Schedule runs history records.",
             "nullable": true
+          },
+          "personalised_view_id": {
+            "type": "string",
+            "description": "Personalised view id of the liveboard to be scheduled.",
+            "nullable": true
           }
         }
       },
@@ -19142,75 +19006,6 @@
           }
         },
         "description": "Input for variable value update"
-      },
-      "ExternalTableInput": {
-        "type": "object",
-        "required": [
-          "connection_identifier",
-          "table_name"
-        ],
-        "properties": {
-          "connection_identifier": {
-            "type": "string",
-            "description": "Unique ID or name of the connection."
-          },
-          "database_name": {
-            "type": "string",
-            "default": "",
-            "description": "Name of the database.",
-            "nullable": true
-          },
-          "schema_name": {
-            "type": "string",
-            "default": "",
-            "description": "Name of the schema.",
-            "nullable": true
-          },
-          "table_name": {
-            "type": "string",
-            "description": "Name of the table."
-          }
-        }
-      },
-      "CalendarResponse": {
-        "type": "object",
-        "properties": {
-          "calendar_name": {
-            "type": "string",
-            "description": "Name of the calendar",
-            "nullable": true
-          },
-          "connection_name": {
-            "type": "string",
-            "description": "Name of the connection",
-            "nullable": true
-          },
-          "data_warehouse_type": {
-            "type": "string",
-            "description": "Type of data warehouse",
-            "nullable": true
-          },
-          "modification_time_in_millis": {
-            "type": "string",
-            "description": "Last modification time in milliseconds",
-            "nullable": true
-          },
-          "author_name": {
-            "type": "string",
-            "description": "Name of the author who created the calendar",
-            "nullable": true
-          },
-          "connection_id": {
-            "type": "string",
-            "description": "Unique identifier of the connection",
-            "nullable": true
-          },
-          "calendar_id": {
-            "type": "string",
-            "description": "Unique identifier of the calendar",
-            "nullable": true
-          }
-        }
       },
       "Runtime_Filter": {
         "type": "object",
