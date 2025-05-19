@@ -176,7 +176,7 @@ public class ApiClient {
         json = new JSON();
 
         // Set default User-Agent.
-        setUserAgent("ThoughtSpot-Client/2.0.0-beta/java");
+        setUserAgent("ThoughtSpot-Client/2.0.0-SNAPSHOT/java");
 
         authentications = new HashMap<String, Authentication>();
     }
@@ -890,11 +890,6 @@ public class ApiClient {
     public String selectHeaderAccept(String[] accepts) {
         if (accepts.length == 0) {
             return null;
-        }
-        for (String accept : accepts) {
-            if (isJsonMime(accept)) {
-                return accept;
-            }
         }
         return StringUtil.join(accepts, ",");
     }
