@@ -41,7 +41,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Configuration of schedule with cron expression
  */
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class Frequency implements Serializable {
   private static final long serialVersionUID = 1L;
 

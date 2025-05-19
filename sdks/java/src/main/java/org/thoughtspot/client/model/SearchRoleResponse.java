@@ -44,7 +44,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Response for search role api should handle hidden privileges as well.
  */
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class SearchRoleResponse implements Serializable {
   private static final long serialVersionUID = 1L;
 

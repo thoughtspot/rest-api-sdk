@@ -42,7 +42,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Action details includes &#x60;Type&#x60; and configuration details of Custom Actions. Either Callback or URL is required.
  */
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class ActionDetailsInput implements Serializable {
   private static final long serialVersionUID = 1L;
 

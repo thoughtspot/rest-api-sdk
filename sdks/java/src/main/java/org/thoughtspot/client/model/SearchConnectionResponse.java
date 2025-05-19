@@ -42,7 +42,7 @@ import org.thoughtspot.client.JSON;
 /**
  * SearchConnectionResponse
  */
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class SearchConnectionResponse implements Serializable {
   private static final long serialVersionUID = 1L;
 

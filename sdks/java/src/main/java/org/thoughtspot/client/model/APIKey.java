@@ -41,7 +41,7 @@ import org.thoughtspot.client.JSON;
 /**
  * With API key auth, you send a key-value pair to the API either in the request headers or query parameters.
  */
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class APIKey implements Serializable {
   private static final long serialVersionUID = 1L;
 

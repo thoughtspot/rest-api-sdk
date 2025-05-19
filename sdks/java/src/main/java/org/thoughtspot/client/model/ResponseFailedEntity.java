@@ -40,7 +40,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Unique ID of the failed worksheet.
  */
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class ResponseFailedEntity implements Serializable {
   private static final long serialVersionUID = 1L;
 

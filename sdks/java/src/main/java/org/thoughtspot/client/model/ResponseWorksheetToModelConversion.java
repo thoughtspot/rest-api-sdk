@@ -44,7 +44,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Name of the conversion process, which involves converting worksheets to models.
  */
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class ResponseWorksheetToModelConversion implements Serializable {
   private static final long serialVersionUID = 1L;
 

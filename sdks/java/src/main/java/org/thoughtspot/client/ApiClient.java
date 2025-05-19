@@ -50,6 +50,7 @@ import org.thoughtspot.client.auth.ApiKeyAuth;
 /**
  * <p>ApiClient class.</p>
  */
+ @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class ApiClient {
 
     private String basePath = "https://localhost:443";
@@ -175,7 +176,7 @@ public class ApiClient {
         json = new JSON();
 
         // Set default User-Agent.
-        setUserAgent("ThoughtSpot-Client/0.0.1/java");
+        setUserAgent("ThoughtSpot-Client/2.0.0-beta/java");
 
         authentications = new HashMap<String, Authentication>();
     }

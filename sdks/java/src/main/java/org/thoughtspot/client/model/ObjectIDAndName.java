@@ -41,7 +41,7 @@ import org.thoughtspot.client.JSON;
 /**
  * The object representation with ID and Name.
  */
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class ObjectIDAndName implements Serializable {
   private static final long serialVersionUID = 1L;
 

@@ -41,7 +41,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Objects to apply the User_Object.
  */
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class UserObject implements Serializable {
   private static final long serialVersionUID = 1L;
 

@@ -41,7 +41,7 @@ import org.thoughtspot.client.JSON;
 /**
  * UpdateDbtConnectionRequest
  */
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class UpdateDbtConnectionRequest implements Serializable {
   private static final long serialVersionUID = 1L;
 

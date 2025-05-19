@@ -44,7 +44,7 @@ import org.thoughtspot.client.JSON;
 /**
  * GetAsyncImportStatusResponse
  */
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class GetAsyncImportStatusResponse implements Serializable {
   private static final long serialVersionUID = 1L;
 

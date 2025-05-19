@@ -47,7 +47,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters). 
  */
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class UserParameterOptions implements Serializable {
   private static final long serialVersionUID = 1L;
 

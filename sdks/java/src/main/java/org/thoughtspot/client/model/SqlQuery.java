@@ -40,7 +40,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Response format associated with fetch SQL query api
  */
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class SqlQuery implements Serializable {
   private static final long serialVersionUID = 1L;
 

@@ -41,7 +41,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Basic Auth: Basic authentication involves sending a verified username and password with your request.
  */
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class BasicAuth implements Serializable {
   private static final long serialVersionUID = 1L;
 

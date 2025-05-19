@@ -41,7 +41,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Flags to specify additional options for export. This will only be active when UserDefinedId in TML is enabled.
  */
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class ExportOptions implements Serializable {
   private static final long serialVersionUID = 1L;
 

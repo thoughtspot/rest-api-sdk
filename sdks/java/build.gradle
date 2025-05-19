@@ -3,8 +3,8 @@ apply plugin: 'eclipse'
 apply plugin: 'java'
 apply plugin: 'com.diffplug.spotless'
 
-group = 'io.github.pallavts'
-version = '0.0.1'
+group = 'io.github.thoughtspot'
+version = '2.0.0-beta'
 
 buildscript {
     repositories {
@@ -24,8 +24,7 @@ sourceSets {
     main.java.srcDirs = ['src/main/java']
 }
 
-if(hasProperty('target') && target == 'android') {
-
+if (hasProperty('target') && target == 'android') {
     apply plugin: 'com.android.library'
     apply plugin: 'com.github.dcendents.android-maven'
 
@@ -77,22 +76,85 @@ if(hasProperty('target') && target == 'android') {
     artifacts {
         archives sourcesJar
     }
-
 } else {
-
     apply plugin: 'java'
     apply plugin: 'maven-publish'
+    apply plugin: 'signing'
 
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
 
+    java {
+        withJavadocJar()
+        withSourcesJar()
+    }
+
     publishing {
         publications {
-            maven(MavenPublication) {
-               artifactId = 'rest-api-sdk-temp'
-               from components.java
+            mavenJava(MavenPublication) {
+                artifactId = 'rest-api-sdk-lib'
+                from components.java
+
+                pom {
+                    name = 'rest-api-sdk-lib'
+                    description = 'ThoughtSpot Java Rest API SDK'
+                    url = 'https://github.com/thoughtspot/rest-api-sdk'
+
+                    scm {
+                        connection = 'scm:git:git://github.com/thoughtspot/rest-api-sdk.git'
+                        developerConnection = 'scm:git:ssh://github.com/thoughtspot/rest-api-sdk'
+                        url = 'https://github.com/thoughtspot/rest-api-sdk'
+                    }
+
+                    licenses {
+                        license {
+                            name = 'ThoughtSpot Development Tools End User License Agreement'
+                            url = 'https://github.com/thoughtspot/rest-api-sdk/blob/release/LICENSE.md'
+                            distribution = 'repo'
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            name = 'ThoughtSpot'
+                            email = 'support@thoughtspot.com'
+                            organization = 'ThoughtSpot, Inc. 2025'
+                            organizationUrl = 'https://www.thoughtspot.com/'
+                        }
+                    }
+                }
             }
         }
+
+        repositories {
+            maven {
+                name = "OSSRH"
+                url = version.endsWith("-SNAPSHOT") ?
+                        uri("https://s01.oss.sonatype.org/content/repositories/snapshots/") :
+                        uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+
+                def ossrhUsernameFile = project.findProperty("ossrhUsernameFile") ?: System.getenv("OSSRH_USERNAME_FILE")
+                def ossrhPasswordFile = project.findProperty("ossrhPasswordFile") ?: System.getenv("OSSRH_PASSWORD_FILE")
+
+                credentials {
+                    username = ossrhUsernameFile && file(ossrhUsernameFile).exists() ? file(ossrhUsernameFile).text.trim() : null
+                    password = ossrhPasswordFile && file(ossrhPasswordFile).exists() ? file(ossrhPasswordFile).text.trim() : null
+                }
+            }
+        }
+    }
+
+    signing {
+        def signingKeyIdFile = project.findProperty('signing.keyIdFile') ?: System.getenv("SIGNING_KEY_ID_FILE")
+        def signingSecretKeyFile = project.findProperty('signing.secretKeyFile') ?: System.getenv("SIGNING_KEY_FILE")
+        def signingPasswordFile = project.findProperty('signing.passwordFile') ?: System.getenv("SIGNING_PASSWORD_FILE")
+
+        def signingKeyId = signingKeyIdFile && file(signingKeyIdFile).exists() ? file(signingKeyIdFile).text.trim() : null
+        def signingSecretKey = signingSecretKeyFile && file(signingSecretKeyFile).exists() ? file(signingSecretKeyFile).text : null
+        def signingPassword = signingPasswordFile && file(signingPasswordFile).exists() ? file(signingPasswordFile).text.trim() : null
+
+        useInMemoryPgpKeys(signingKeyId, signingSecretKey, signingPassword)
+        sign publishing.publications.mavenJava
     }
 
     task execute(type:JavaExec) {

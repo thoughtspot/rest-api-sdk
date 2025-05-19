@@ -41,7 +41,7 @@ import org.thoughtspot.client.JSON;
 /**
  * DeleteConfigRequest
  */
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class DeleteConfigRequest implements Serializable {
   private static final long serialVersionUID = 1L;
 

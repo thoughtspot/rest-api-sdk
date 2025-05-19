@@ -44,7 +44,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Recipient configuration which includes email address, ID or name of the users and groups.
  */
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class RecipientDetails implements Serializable {
   private static final long serialVersionUID = 1L;
 

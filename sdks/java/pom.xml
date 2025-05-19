@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>io.github.pallavts</groupId>
-    <artifactId>rest-api-sdk-temp</artifactId>
+    <groupId>io.github.thoughtspot</groupId>
+    <artifactId>rest-api-sdk-lib</artifactId>
     <packaging>jar</packaging>
-    <name>rest-api-sdk-temp</name>
-    <version>0.0.1</version>
+    <name>rest-api-sdk-lib</name>
+    <version>2.0.0-beta</version>
     <url>https://github.com/thoughtspot/rest-api-sdk</url>
     <description>ThoughtSpot Java Rest API SDK</description>
     <scm>
@@ -16,6 +16,7 @@
 
     <licenses>
         <license>
+            <name>ThoughtSpot Development Tools End User License Agreement</name>
             <url>https://github.com/thoughtspot/rest-api-sdk/blob/release/LICENSE.md</url>
             <distribution>repo</distribution>
         </license>

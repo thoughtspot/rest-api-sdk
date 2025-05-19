@@ -150,6 +150,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class ThoughtSpotRestApi {
     private ApiClient localVarApiClient;
     private ApiClientConfiguration localVarApiClientConfiguration;

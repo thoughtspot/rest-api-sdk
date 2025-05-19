@@ -41,7 +41,7 @@ import org.thoughtspot.client.JSON;
 /**
  * FavoriteMetadataInput
  */
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class FavoriteMetadataInput implements Serializable {
   private static final long serialVersionUID = 1L;
 

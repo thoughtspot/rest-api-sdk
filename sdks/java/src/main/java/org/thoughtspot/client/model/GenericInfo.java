@@ -41,7 +41,7 @@ import org.thoughtspot.client.JSON;
 /**
  * GenericInfo
  */
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class GenericInfo implements Serializable {
   private static final long serialVersionUID = 1L;
 

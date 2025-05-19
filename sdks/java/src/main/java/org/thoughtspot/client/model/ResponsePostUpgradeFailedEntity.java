@@ -40,7 +40,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Unique ID of the worksheet that failed post-upgrade.
  */
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class ResponsePostUpgradeFailedEntity implements Serializable {
   private static final long serialVersionUID = 1L;
 

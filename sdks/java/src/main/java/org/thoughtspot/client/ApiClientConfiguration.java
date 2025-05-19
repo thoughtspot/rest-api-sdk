@@ -1,3 +1,7 @@
+/*
+ * NOTE: This class is auto generated. Do not edit the class manually.
+ */
+
 package org.thoughtspot.client;
 
 import java.io.InputStream;
@@ -15,6 +19,7 @@ import javax.net.ssl.KeyManager;
  * This class holds various configuration options such as base path, bearer token,
  * default headers, cookies, SSL verification, and key managers.
  */
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class ApiClientConfiguration {
     private final String basePath;
     private final Supplier<String> bearerTokenSupplier;

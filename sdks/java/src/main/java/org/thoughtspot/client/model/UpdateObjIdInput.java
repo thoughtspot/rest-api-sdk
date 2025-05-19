@@ -41,7 +41,7 @@ import org.thoughtspot.client.JSON;
 /**
  * Input for updating object ID of a metadata object.
  */
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class UpdateObjIdInput implements Serializable {
   private static final long serialVersionUID = 1L;
 

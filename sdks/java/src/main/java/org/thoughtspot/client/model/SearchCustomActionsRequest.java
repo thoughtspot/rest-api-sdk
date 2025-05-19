@@ -45,7 +45,7 @@ import org.thoughtspot.client.JSON;
 /**
  * SearchCustomActionsRequest
  */
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class SearchCustomActionsRequest implements Serializable {
   private static final long serialVersionUID = 1L;
 
