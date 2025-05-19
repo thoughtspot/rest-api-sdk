@@ -46,6 +46,14 @@
       "description": "Roles for version 9.12.0.cl"
     },
     {
+      "name": "10.11.0.cl",
+      "id": "10.11.0.cl",
+      "tags": [
+        "10.11.0.cl"
+      ],
+      "description": "Roles for version 10.11.0.cl"
+    },
+    {
       "name": "9.2.0.cl",
       "id": "9.2.0.cl",
       "tags": [
@@ -1273,6 +1281,407 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/connection-configurations/search": {
+      "post": {
+        "operationId": "connectionConfigurationSearch",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.11.0.cl or later</span>\n\n# Connection Configuration Search API\n\n## Description\nThe `connectionConfigurationSearch` API is used to retrieve a connection configuration by its ID.\n\n## Parameters\n- **connection_identifier** (String!): The identifier for the connection.\n- **configuration_identifier** (String): The identifier for the configuration to be retrieved.\n\n## Endpoint\n- **Path**: `/connection-configurations/search`\n- **Method**: `POST`\n\n## Version\n- **Minimum Version**: `10.11.0.cl`\n\n## Notes\nThis API supports searching for connection configurations using the connection and configuration identifiers. \n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Connection Configurations",
+          "10.11.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "connection_identifier": {
+                    "description": "Connection identifier.",
+                    "type": "string"
+                  },
+                  "configuration_identifier": {
+                    "description": "Configuration identifier.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "connection_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Configuration fetched successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ConnectionConfigurationSearch"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/connection-configurations": {
+      "post": {
+        "operationId": "createConnectionConfiguration",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.11.0.cl or later</span>\n\n# Create Connection Configuration API\n\n## Description\nThe `createConnectionConfiguration` API is used to create a new connection configuration. This configuration includes details such as the name, description, connection identifier, configuration content, policy configuration, and authentication type.\n\n## Parameters\n- **name** (String!): The unique name of the connection configuration.\n- **description** (String): A brief description of the connection configuration.\n- **connection_identifier** (String!): The identifier for the connection.\n- **configuration** (JSON!): The configuration content in JSON format.\n- **policy_configuration** (JSON!): The policy configuration detailing access and processes.\n- **authentication_type** (AuthenticationTypeForCreate!): The type of authentication used for the connection.\n\n## Endpoint\n- **Path**: `/connection-configurations`\n- **Method**: `POST`\n\n## Version\n- **Minimum Version**: `10.11.0.cl`\n\n## Notes\nThis API requires the connection configuration name to be unique and supports various authentication types as defined in the `AuthenticationTypeForCreate` enum.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Connection Configurations",
+          "10.11.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "Name of the connection configuration. This must be unique.",
+                    "type": "string"
+                  },
+                  "description": {
+                    "description": "Description of the connection configuration.",
+                    "type": "string"
+                  },
+                  "connection_identifier": {
+                    "description": "Connection identifier.",
+                    "type": "string"
+                  },
+                  "configuration": {
+                    "description": "Configuration content as JSON.",
+                    "type": "object"
+                  },
+                  "policy_configuration": {
+                    "description": "Policy configuration detailing access and processes.",
+                    "type": "object"
+                  },
+                  "authentication_type": {
+                    "description": "Type of authentication used for the connection.",
+                    "type": "string",
+                    "enum": [
+                      "SERVICE_ACCOUNT",
+                      "KEY_PAIR"
+                    ]
+                  }
+                },
+                "required": [
+                  "name",
+                  "connection_identifier",
+                  "configuration",
+                  "policy_configuration",
+                  "authentication_type"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Connection configuration successfully created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConnectionConfigurationSearch"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/connection-configurations/delete": {
+      "post": {
+        "operationId": "deleteConnectionConfiguration",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.11.0.cl or later</span>\n\n# Delete Connection Configuration API\n\n## Description\nThe `deleteConnectionConfiguration` API is used to delete one or more connection configurations identified by their IDs.\n\n## Parameters\n- **configuration_identifiers** ([String!]): A list of configuration identifiers to be deleted.\n- **connection_identifier** (String!): The identifier for the connection.\n\n## Endpoint\n- **Path**: `/connection-configurations/delete`\n- **Method**: `POST`\n\n## Version\n- **Minimum Version**: `10.11.0.cl`\n\n## Notes\nThis API allows batch deletion of connection configurations. \n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Connection Configurations",
+          "10.11.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "configuration_identifiers": {
+                    "description": "Configuration identifier.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "connection_identifier": {
+                    "description": "Connection identifier.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "connection_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Connection Configurations successfully deleted."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/connection-configurations/{configuration_identifier}": {
+      "put": {
+        "operationId": "updateConnectionConfiguration",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.11.0.cl or later</span>\n\n# Update Connection Configuration API\n\n## Description\nThe `updateConnectionConfiguration` API is used to update an existing connection configuration identified by its ID. It allows updating details such as the name, description, configuration content, policy configuration, authentication type, and a flag to disable the configuration.\n\n## Parameters\n- **connection_identifier** (String!): The identifier for the connection.\n- **configuration_identifier** (String!): The identifier for the configuration to be updated.\n- **name** (String): The new name for the connection configuration.\n- **description** (String): The new description for the connection configuration.\n- **configuration** (JSON): The updated configuration content in JSON format.\n- **policy_configuration** (JSON): The updated policy configuration.\n- **authentication_type** (AuthenticationType): The updated type of authentication used for the connection.\n- **disabled** (Boolean): Indicates if the configuration should be disabled.\n\n## Endpoint\n- **Path**: `/connection-configurations/{configuration_identifier}`\n- **Method**: `PUT`\n\n## Version\n- **Minimum Version**: `10.11.0.cl`\n\n## Notes\nThis API allows partial updates to the connection configuration and supports various authentication types as defined in the `AuthenticationType` enum. \n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Connection Configurations",
+          "10.11.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "connection_identifier": {
+                    "description": "Connection identifier.",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "New name for the connection configuration.",
+                    "type": "string"
+                  },
+                  "description": {
+                    "description": "New description for the connection configuration.",
+                    "type": "string"
+                  },
+                  "configuration": {
+                    "description": "Updated configuration content as JSON.",
+                    "type": "object"
+                  },
+                  "policy_configuration": {
+                    "description": "Updated policy configuration.",
+                    "type": "object"
+                  },
+                  "authentication_type": {
+                    "description": "Updated authentication type for the connection.",
+                    "type": "string",
+                    "enum": [
+                      "OAUTH",
+                      "SERVICE_ACCOUNT",
+                      "IAM",
+                      "EXTOAUTH",
+                      "KEY_PAIR",
+                      "OAUTH_WITH_PKCE",
+                      "OAUTH_WITH_SERVICE_PRINCIPAL",
+                      "PERSONAL_ACCESS_TOKEN"
+                    ]
+                  },
+                  "disabled": {
+                    "description": "Indicates if the configuration should be disabled.",
+                    "type": "boolean",
+                    "nullable": true
+                  }
+                },
+                "required": [
+                  "connection_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configuration_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration identifier."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Connection configuration successfully updated."
           },
           "400": {
             "description": "Invalid request.",
@@ -19006,6 +19415,51 @@
           }
         },
         "description": "Input for variable value update"
+      },
+      "ConnectionConfigurationSearch": {
+        "type": "object",
+        "properties": {
+          "configuration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "data_warehouse_type": {
+            "type": "string",
+            "nullable": true
+          },
+          "principals": {
+            "type": "object",
+            "nullable": true
+          },
+          "policy_type": {
+            "type": "string",
+            "nullable": true
+          },
+          "disabled": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "processes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "SAGE_INDEXING",
+                "SAGE_SAMPLING",
+                "ROW_COUNT_STATS"
+              ]
+            },
+            "nullable": true
+          },
+          "configuration": {
+            "type": "object",
+            "nullable": true
+          }
+        }
       },
       "Runtime_Filter": {
         "type": "object",
