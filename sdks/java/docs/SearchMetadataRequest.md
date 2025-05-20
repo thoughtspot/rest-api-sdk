@@ -28,7 +28,7 @@
 |**sortOptions** | [**MetadataSearchSortOptions**](MetadataSearchSortOptions.md) | Sort options to filter metadata details. |  [optional] |
 |**tagIdentifiers** | **List&lt;String&gt;** | Tags to filter metadata objects by |  [optional] |
 |**includeStats** | **Boolean** | Indicates whether to include stats of the metadata objects. |  [optional] |
-|**includeDiscoverableObjects** | **Boolean** | Indicates whether to include discoverable metadata objects. If lenient OSM is not enabled, then even though the includeDiscoverableObjects is set to True, we won&#39;t see discoverable objects. |  [optional] |
+|**includeDiscoverableObjects** | **Boolean** | &lt;div&gt;Version: 10.7.0.cl or later &lt;/div&gt;  Boolean to indicate whether to include discoverable metadata objects. |  [optional] |
 
 
 

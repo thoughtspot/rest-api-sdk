@@ -367,6 +367,8 @@ paths:
 
         **Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.
 
+        If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.
+
         ##### Attribute-Based Access Control (ABAC) with tokens
 
         To implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the `filter_rules` and `parameter_values` array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user's `access_control_properties` object, after which all sessions will use the persisted values.
@@ -459,6 +461,8 @@ paths:
 
         **Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.
 
+        If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.
+
         #### Just-in-time provisioning
 
         For just-in-time user creation and provisioning, define the following attributes:
@@ -475,14 +479,8 @@ paths:
 
         To add a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege is required.
 
-        #### Attribute-Based Access Control (ABAC) with tokens
-
-        You can define Attribute-Based Access Control (ABAC) parameters to assign security entitlements to users during session creation. For more information, see [ABAC via token](https://developers.thoughtspot.com/docs/abac-user-parameters).
-
-        Specify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.
-
         #### Important point to note
-        All options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Similarly, using `user_parameters` with `persist: true` persists security parameters on the user profile when the token is created and not during authentication.
+        All options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created.
 
 
 
@@ -549,6 +547,8 @@ paths:
 
         **Note**: When both `password` and `secret_key` are included in the API request,  `password` takes precedence.
 
+        If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.
+
         #### Just-in-time provisioning
 
         For just-in-time user creation and provisioning, define the following attributes:
@@ -565,14 +565,8 @@ paths:
 
         To add a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege is required.
 
-        #### Attribute-Based Access Control (ABAC) with tokens
-
-        You can define Attribute-Based Access Control (ABAC) parameters to assign security entitlements to users during session creation. For more information, see [ABAC via token](https://developers.thoughtspot.com/docs/abac-user-parameters).
-
         #### Important point to note
-        All options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Similarly, using `user_parameters` with `persist: true` persists security parameters on the user profile when the token is created and not during authentication.
-
-        Specify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.
+        All options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created.
 
 
 
@@ -631,13 +625,13 @@ paths:
          Version: 9.0.0.cl or later
 
 
-
         Creates a login session for a ThoughtSpot user with Basic authentication.
 
         In Basic authentication method, REST clients log in to ThoughtSpot using `username` and `password` attributes. On a multi-tenant cluster with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org context.
 
-        A successful login returns a session cookie that can be used in your subsequent API requests.
+        **Note**: If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. Contact ThoughtSpot Support for assistance.
 
+        A successful login returns a session cookie that can be used in your subsequent API requests.
 
 
 
@@ -1368,7 +1362,80 @@ paths:
         2. If you are updating tables or database schema of a connection object:
            a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.
            b. Set `validate` to `true`.
+           * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:
+
+           ```
+           {
+              "configuration":{
+                 "accountName":"thoughtspot_partner",
+                 "user":"tsadmin",
+                 "password":"TestConn123",
+                 "role":"sysadmin",
+                 "warehouse":"MEDIUM_WH"
+              },
+              "externalDatabases":[
+                 {
+                    "name":"AllDatatypes",
+                    "isAutoCreated":false,
+                    "schemas":[
+                       {
+                          "name":"alldatatypes",
+                          "tables":[
+                             {
+                                "name":"allDatatypes",
+                                "type":"TABLE",
+                                "description":"",
+                                "selected":true,
+                                "linked":true,
+                                "columns":[
+                                   {
+                                      "name":"CNUMBER",
+                                      "type":"INT64",
+                                      "canImport":true,
+                                      "selected":true,
+                                      "isLinkedActive":true,
+                                      "isImported":false,
+                                      "tableName":"allDatatypes",
+                                      "schemaName":"alldatatypes",
+                                      "dbName":"AllDatatypes"
+                                   },
+                                   {
+                                      "name":"CDECIMAL",
+                                      "type":"INT64",
+                                      "canImport":true,
+                                      "selected":true,
+                                      "isLinkedActive":true,
+                                      "isImported":false,
+                                      "tableName":"allDatatypes",
+                                      "schemaName":"alldatatypes",
+                                      "dbName":"AllDatatypes"
+                                   }
+                                ]
+                             }
+                          ]
+                       }
+                    ]
+                 }
+              ]
+           }
+           ```
+
         3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.
+        * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a Snowflake connection:
+         ```
+         {
+            "configuration":{
+               "accountName":"thoughtspot_partner",
+               "user":"tsadmin",
+               "password":"TestConn123",
+               "role":"sysadmin",
+               "warehouse":"MEDIUM_WH"
+            },
+            "externalDatabases":[
+
+            ]
+         }
+         ```
 
 
 
@@ -6146,7 +6213,7 @@ paths:
 
         Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
 
-        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_MANAGE_VERSION_CONTROL` (**Can toggle version control for objects**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_SETUP_VERSION_CONTROL` (**Can set up version control**) privilege.
 
         You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.
 
@@ -6159,7 +6226,7 @@ paths:
 
         For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).
 
-        **Note**: ThoughtSpot supports only GitHub / GitHub Enterprise for CI/CD.
+        **Note**: ThoughtSpot supports only GitHub / itHub Enterprise for CI/CD.
 
 
 
@@ -6221,7 +6288,7 @@ paths:
 
         Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
 
-        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_MANAGE_VERSION_CONTROL` (**Can toggle version control for objects**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_SETUP_VERSION_CONTROL` (**Can set up version control**) privilege.
 
 
 
@@ -6483,7 +6550,7 @@ paths:
 
         Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
 
-        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_MANAGE_VERSION_CONTROL` (**Can toggle version control for objects**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_SETUP_VERSION_CONTROL` (**Can set up version control**) privilege.
 
 
 
@@ -6547,7 +6614,7 @@ paths:
 
         Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
 
-        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_MANAGE_VERSION_CONTROL` (**Can toggle version control for objects**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_SETUP_VERSION_CONTROL` (**Can set up version control**) privilege.
 
 
 
@@ -12854,14 +12921,6 @@ components:
           items:
             type: string
           type: array
-        user_parameters:
-          allOf:
-          - $ref: '#/components/schemas/User_Parameter_Options'
-          description: |-
-            <div>Deprecated: 10.4.0.cl and later
-            </div>
-
-            Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).
       required:
       - username
       type: object
@@ -12920,14 +12979,6 @@ components:
           items:
             type: string
           type: array
-        user_parameters:
-          allOf:
-          - $ref: '#/components/schemas/User_Parameter_Options'
-          description: |-
-            <div>Deprecated: 10.4.0.cl and later
-            </div>
-
-            Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).
       required:
       - username
       type: object
@@ -14348,8 +14399,10 @@ components:
         include_discoverable_objects:
           default: true
           description: |-
-            Indicates whether to include discoverable metadata objects.
-            If lenient OSM is not enabled, then even though the includeDiscoverableObjects is set to True, we won't see discoverable objects.
+            <div>Version: 10.7.0.cl or later
+            </div>
+
+            Boolean to indicate whether to include discoverable metadata objects.
           nullable: true
           type: boolean
       type: object

@@ -4,53 +4,34 @@
 
 package org.thoughtspot.client.model;
 
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-import java.util.Arrays;
-import org.openapitools.jackson.nullable.JsonNullable;
-import org.junit.jupiter.api.Disabled;
+
 import org.junit.jupiter.api.Test;
 
-/**
- * Model tests for EurekaLLMSuggestedQuery
- */
+/** Model tests for EurekaLLMSuggestedQuery */
 public class EurekaLLMSuggestedQueryTest {
     private final EurekaLLMSuggestedQuery model = new EurekaLLMSuggestedQuery();
 
-    /**
-     * Model tests for EurekaLLMSuggestedQuery
-     */
+    /** Model tests for EurekaLLMSuggestedQuery */
     @Test
     public void testEurekaLLMSuggestedQuery() {
         // TODO: test EurekaLLMSuggestedQuery
     }
 
-    /**
-     * Test the property 'query'
-     */
+    /** Test the property 'query' */
     @Test
     public void queryTest() {
         // TODO: test query
     }
 
-    /**
-     * Test the property 'worksheetId'
-     */
+    /** Test the property 'worksheetId' */
     @Test
     public void worksheetIdTest() {
         // TODO: test worksheetId
     }
 
-    /**
-     * Test the property 'worksheetName'
-     */
+    /** Test the property 'worksheetName' */
     @Test
     public void worksheetNameTest() {
         // TODO: test worksheetName
     }
-
 }

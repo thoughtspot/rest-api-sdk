@@ -4,235 +4,246 @@
 
 package org.thoughtspot.client.model;
 
-import java.util.Objects;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-import java.util.Arrays;
-import java.io.Serializable;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
 import com.google.gson.TypeAdapter;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
-
-import java.util.HashMap;
+import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
-
 import org.thoughtspot.client.JSON;
 
-/**
- * CreateConversationRequest
- */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
+/** CreateConversationRequest */
+@javax.annotation.Generated(
+        value = "org.openapitools.codegen.languages.JavaClientCodegen",
+        comments = "Generator version: 7.12.0")
 public class CreateConversationRequest implements Serializable {
-  private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-  public static final String SERIALIZED_NAME_METADATA_IDENTIFIER = "metadata_identifier";
-  @SerializedName(SERIALIZED_NAME_METADATA_IDENTIFIER)
-  @javax.annotation.Nonnull
-  private String metadataIdentifier;
+    public static final String SERIALIZED_NAME_METADATA_IDENTIFIER = "metadata_identifier";
 
-  public static final String SERIALIZED_NAME_TOKENS = "tokens";
-  @SerializedName(SERIALIZED_NAME_TOKENS)
-  @javax.annotation.Nullable
-  private String tokens;
+    @SerializedName(SERIALIZED_NAME_METADATA_IDENTIFIER)
+    @javax.annotation.Nonnull
+    private String metadataIdentifier;
 
-  public CreateConversationRequest() {
-  }
+    public static final String SERIALIZED_NAME_TOKENS = "tokens";
 
-  public CreateConversationRequest metadataIdentifier(@javax.annotation.Nonnull String metadataIdentifier) {
-    this.metadataIdentifier = metadataIdentifier;
-    return this;
-  }
+    @SerializedName(SERIALIZED_NAME_TOKENS)
+    @javax.annotation.Nullable
+    private String tokens;
 
-  /**
-   * ID of the metadata object, such as a Worksheet or Model, to use as a data source for the conversation.
-   * @return metadataIdentifier
-   */
-  @javax.annotation.Nonnull
-  public String getMetadataIdentifier() {
-    return metadataIdentifier;
-  }
+    public CreateConversationRequest() {}
 
-  public void setMetadataIdentifier(@javax.annotation.Nonnull String metadataIdentifier) {
-    this.metadataIdentifier = metadataIdentifier;
-  }
-
-
-  public CreateConversationRequest tokens(@javax.annotation.Nullable String tokens) {
-    this.tokens = tokens;
-    return this;
-  }
-
-  /**
-   * Token string to set the context for the conversation. For example,&#x60;[sales],[item type],[state]&#x60;.
-   * @return tokens
-   */
-  @javax.annotation.Nullable
-  public String getTokens() {
-    return tokens;
-  }
-
-  public void setTokens(@javax.annotation.Nullable String tokens) {
-    this.tokens = tokens;
-  }
-
-
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
+    public CreateConversationRequest metadataIdentifier(
+            @javax.annotation.Nonnull String metadataIdentifier) {
+        this.metadataIdentifier = metadataIdentifier;
+        return this;
     }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
+
+    /**
+     * ID of the metadata object, such as a Worksheet or Model, to use as a data source for the
+     * conversation.
+     *
+     * @return metadataIdentifier
+     */
+    @javax.annotation.Nonnull
+    public String getMetadataIdentifier() {
+        return metadataIdentifier;
     }
-    CreateConversationRequest createConversationRequest = (CreateConversationRequest) o;
-    return Objects.equals(this.metadataIdentifier, createConversationRequest.metadataIdentifier) &&
-        Objects.equals(this.tokens, createConversationRequest.tokens);
-  }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(metadataIdentifier, tokens);
-  }
-
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class CreateConversationRequest {\n");
-    sb.append("    metadataIdentifier: ").append(toIndentedString(metadataIdentifier)).append("\n");
-    sb.append("    tokens: ").append(toIndentedString(tokens)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
+    public void setMetadataIdentifier(@javax.annotation.Nonnull String metadataIdentifier) {
+        this.metadataIdentifier = metadataIdentifier;
     }
-    return o.toString().replace("\n", "\n    ");
-  }
 
+    public CreateConversationRequest tokens(@javax.annotation.Nullable String tokens) {
+        this.tokens = tokens;
+        return this;
+    }
 
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
+    /**
+     * Token string to set the context for the conversation. For example,&#x60;[sales],[item
+     * type],[state]&#x60;.
+     *
+     * @return tokens
+     */
+    @javax.annotation.Nullable
+    public String getTokens() {
+        return tokens;
+    }
 
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("metadata_identifier");
-    openapiFields.add("tokens");
+    public void setTokens(@javax.annotation.Nullable String tokens) {
+        this.tokens = tokens;
+    }
 
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("metadata_identifier");
-  }
-
-  /**
-   * Validates the JSON Element and throws an exception if issues found
-   *
-   * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to CreateConversationRequest
-   */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!CreateConversationRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in CreateConversationRequest is not found in the empty JSON string", CreateConversationRequest.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!CreateConversationRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `CreateConversationRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : CreateConversationRequest.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("metadata_identifier").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `metadata_identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("metadata_identifier").toString()));
-      }
-      if ((jsonObj.get("tokens") != null && !jsonObj.get("tokens").isJsonNull()) && !jsonObj.get("tokens").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `tokens` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tokens").toString()));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
     @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!CreateConversationRequest.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'CreateConversationRequest' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<CreateConversationRequest> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(CreateConversationRequest.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<CreateConversationRequest>() {
-           @Override
-           public void write(JsonWriter out, CreateConversationRequest value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public CreateConversationRequest read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        CreateConversationRequest createConversationRequest = (CreateConversationRequest) o;
+        return Objects.equals(this.metadataIdentifier, createConversationRequest.metadataIdentifier)
+                && Objects.equals(this.tokens, createConversationRequest.tokens);
     }
-  }
 
-  /**
-   * Create an instance of CreateConversationRequest given an JSON string
-   *
-   * @param jsonString JSON string
-   * @return An instance of CreateConversationRequest
-   * @throws IOException if the JSON string is invalid with respect to CreateConversationRequest
-   */
-  public static CreateConversationRequest fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, CreateConversationRequest.class);
-  }
+    @Override
+    public int hashCode() {
+        return Objects.hash(metadataIdentifier, tokens);
+    }
 
-  /**
-   * Convert an instance of CreateConversationRequest to an JSON string
-   *
-   * @return JSON string
-   */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("class CreateConversationRequest {\n");
+        sb.append("    metadataIdentifier: ")
+                .append(toIndentedString(metadataIdentifier))
+                .append("\n");
+        sb.append("    tokens: ").append(toIndentedString(tokens)).append("\n");
+        sb.append("}");
+        return sb.toString();
+    }
+
+    /**
+     * Convert the given object to string with each line indented by 4 spaces (except the first
+     * line).
+     */
+    private String toIndentedString(Object o) {
+        if (o == null) {
+            return "null";
+        }
+        return o.toString().replace("\n", "\n    ");
+    }
+
+    public static HashSet<String> openapiFields;
+    public static HashSet<String> openapiRequiredFields;
+
+    static {
+        // a set of all properties/fields (JSON key names)
+        openapiFields = new HashSet<String>();
+        openapiFields.add("metadata_identifier");
+        openapiFields.add("tokens");
+
+        // a set of required properties/fields (JSON key names)
+        openapiRequiredFields = new HashSet<String>();
+        openapiRequiredFields.add("metadata_identifier");
+    }
+
+    /**
+     * Validates the JSON Element and throws an exception if issues found
+     *
+     * @param jsonElement JSON Element
+     * @throws IOException if the JSON Element is invalid with respect to CreateConversationRequest
+     */
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+        if (jsonElement == null) {
+            if (!CreateConversationRequest.openapiRequiredFields
+                    .isEmpty()) { // has required fields but JSON element is null
+                throw new IllegalArgumentException(
+                        String.format(
+                                "The required field(s) %s in CreateConversationRequest is not"
+                                        + " found in the empty JSON string",
+                                CreateConversationRequest.openapiRequiredFields.toString()));
+            }
+        }
+
+        Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
+        // check to see if the JSON string contains additional fields
+        for (Map.Entry<String, JsonElement> entry : entries) {
+            if (!CreateConversationRequest.openapiFields.contains(entry.getKey())) {
+                throw new IllegalArgumentException(
+                        String.format(
+                                "The field `%s` in the JSON string is not defined in the"
+                                        + " `CreateConversationRequest` properties. JSON: %s",
+                                entry.getKey(), jsonElement.toString()));
+            }
+        }
+
+        // check to make sure all required properties/fields are present in the JSON string
+        for (String requiredField : CreateConversationRequest.openapiRequiredFields) {
+            if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+                throw new IllegalArgumentException(
+                        String.format(
+                                "The required field `%s` is not found in the JSON string: %s",
+                                requiredField, jsonElement.toString()));
+            }
+        }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
+        if (!jsonObj.get("metadata_identifier").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `metadata_identifier` to be a primitive type in"
+                                    + " the JSON string but got `%s`",
+                            jsonObj.get("metadata_identifier").toString()));
+        }
+        if ((jsonObj.get("tokens") != null && !jsonObj.get("tokens").isJsonNull())
+                && !jsonObj.get("tokens").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `tokens` to be a primitive type in the JSON string"
+                                    + " but got `%s`",
+                            jsonObj.get("tokens").toString()));
+        }
+    }
+
+    public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+        @SuppressWarnings("unchecked")
+        @Override
+        public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+            if (!CreateConversationRequest.class.isAssignableFrom(type.getRawType())) {
+                return null; // this class only serializes 'CreateConversationRequest' and its
+                // subtypes
+            }
+            final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+            final TypeAdapter<CreateConversationRequest> thisAdapter =
+                    gson.getDelegateAdapter(this, TypeToken.get(CreateConversationRequest.class));
+
+            return (TypeAdapter<T>)
+                    new TypeAdapter<CreateConversationRequest>() {
+                        @Override
+                        public void write(JsonWriter out, CreateConversationRequest value)
+                                throws IOException {
+                            JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+                            elementAdapter.write(out, obj);
+                        }
+
+                        @Override
+                        public CreateConversationRequest read(JsonReader in) throws IOException {
+                            JsonElement jsonElement = elementAdapter.read(in);
+                            validateJsonElement(jsonElement);
+                            return thisAdapter.fromJsonTree(jsonElement);
+                        }
+                    }.nullSafe();
+        }
+    }
+
+    /**
+     * Create an instance of CreateConversationRequest given an JSON string
+     *
+     * @param jsonString JSON string
+     * @return An instance of CreateConversationRequest
+     * @throws IOException if the JSON string is invalid with respect to CreateConversationRequest
+     */
+    public static CreateConversationRequest fromJson(String jsonString) throws IOException {
+        return JSON.getGson().fromJson(jsonString, CreateConversationRequest.class);
+    }
+
+    /**
+     * Convert an instance of CreateConversationRequest to an JSON string
+     *
+     * @return JSON string
+     */
+    public String toJson() {
+        return JSON.getGson().toJson(this);
+    }
 }
-

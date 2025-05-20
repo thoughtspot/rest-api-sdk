@@ -4,78 +4,52 @@
 
 package org.thoughtspot.client.model;
 
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-import java.util.Arrays;
-import org.thoughtspot.client.model.AuthorType;
-import org.thoughtspot.client.model.CommiterType;
-import org.junit.jupiter.api.Disabled;
+
 import org.junit.jupiter.api.Test;
 
-/**
- * Model tests for CommitHistoryResponse
- */
+/** Model tests for CommitHistoryResponse */
 public class CommitHistoryResponseTest {
     private final CommitHistoryResponse model = new CommitHistoryResponse();
 
-    /**
-     * Model tests for CommitHistoryResponse
-     */
+    /** Model tests for CommitHistoryResponse */
     @Test
     public void testCommitHistoryResponse() {
         // TODO: test CommitHistoryResponse
     }
 
-    /**
-     * Test the property 'committer'
-     */
+    /** Test the property 'committer' */
     @Test
     public void committerTest() {
         // TODO: test committer
     }
 
-    /**
-     * Test the property 'author'
-     */
+    /** Test the property 'author' */
     @Test
     public void authorTest() {
         // TODO: test author
     }
 
-    /**
-     * Test the property 'comment'
-     */
+    /** Test the property 'comment' */
     @Test
     public void commentTest() {
         // TODO: test comment
     }
 
-    /**
-     * Test the property 'commitTime'
-     */
+    /** Test the property 'commitTime' */
     @Test
     public void commitTimeTest() {
         // TODO: test commitTime
     }
 
-    /**
-     * Test the property 'commitId'
-     */
+    /** Test the property 'commitId' */
     @Test
     public void commitIdTest() {
         // TODO: test commitId
     }
 
-    /**
-     * Test the property 'branch'
-     */
+    /** Test the property 'branch' */
     @Test
     public void branchTest() {
         // TODO: test branch
     }
-
 }

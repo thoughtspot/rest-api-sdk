@@ -4,168 +4,118 @@
 
 package org.thoughtspot.client.model;
 
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import org.openapitools.jackson.nullable.JsonNullable;
-import org.thoughtspot.client.model.GenericInfo;
-import org.junit.jupiter.api.Disabled;
+
 import org.junit.jupiter.api.Test;
 
-/**
- * Model tests for RoleResponse
- */
+/** Model tests for RoleResponse */
 public class RoleResponseTest {
     private final RoleResponse model = new RoleResponse();
 
-    /**
-     * Model tests for RoleResponse
-     */
+    /** Model tests for RoleResponse */
     @Test
     public void testRoleResponse() {
         // TODO: test RoleResponse
     }
 
-    /**
-     * Test the property 'id'
-     */
+    /** Test the property 'id' */
     @Test
     public void idTest() {
         // TODO: test id
     }
 
-    /**
-     * Test the property 'name'
-     */
+    /** Test the property 'name' */
     @Test
     public void nameTest() {
         // TODO: test name
     }
 
-    /**
-     * Test the property 'description'
-     */
+    /** Test the property 'description' */
     @Test
     public void descriptionTest() {
         // TODO: test description
     }
 
-    /**
-     * Test the property 'groupsAssignedCount'
-     */
+    /** Test the property 'groupsAssignedCount' */
     @Test
     public void groupsAssignedCountTest() {
         // TODO: test groupsAssignedCount
     }
 
-    /**
-     * Test the property 'orgs'
-     */
+    /** Test the property 'orgs' */
     @Test
     public void orgsTest() {
         // TODO: test orgs
     }
 
-    /**
-     * Test the property 'groups'
-     */
+    /** Test the property 'groups' */
     @Test
     public void groupsTest() {
         // TODO: test groups
     }
 
-    /**
-     * Test the property 'privileges'
-     */
+    /** Test the property 'privileges' */
     @Test
     public void privilegesTest() {
         // TODO: test privileges
     }
 
-    /**
-     * Test the property 'permission'
-     */
+    /** Test the property 'permission' */
     @Test
     public void permissionTest() {
         // TODO: test permission
     }
 
-    /**
-     * Test the property 'authorId'
-     */
+    /** Test the property 'authorId' */
     @Test
     public void authorIdTest() {
         // TODO: test authorId
     }
 
-    /**
-     * Test the property 'modifierId'
-     */
+    /** Test the property 'modifierId' */
     @Test
     public void modifierIdTest() {
         // TODO: test modifierId
     }
 
-    /**
-     * Test the property 'creationTimeInMillis'
-     */
+    /** Test the property 'creationTimeInMillis' */
     @Test
     public void creationTimeInMillisTest() {
         // TODO: test creationTimeInMillis
     }
 
-    /**
-     * Test the property 'modificationTimeInMillis'
-     */
+    /** Test the property 'modificationTimeInMillis' */
     @Test
     public void modificationTimeInMillisTest() {
         // TODO: test modificationTimeInMillis
     }
 
-    /**
-     * Test the property 'deleted'
-     */
+    /** Test the property 'deleted' */
     @Test
     public void deletedTest() {
         // TODO: test deleted
     }
 
-    /**
-     * Test the property 'deprecated'
-     */
+    /** Test the property 'deprecated' */
     @Test
     public void deprecatedTest() {
         // TODO: test deprecated
     }
 
-    /**
-     * Test the property 'external'
-     */
+    /** Test the property 'external' */
     @Test
     public void externalTest() {
         // TODO: test external
     }
 
-    /**
-     * Test the property 'hidden'
-     */
+    /** Test the property 'hidden' */
     @Test
     public void hiddenTest() {
         // TODO: test hidden
     }
 
-    /**
-     * Test the property 'sharedViaConnection'
-     */
+    /** Test the property 'sharedViaConnection' */
     @Test
     public void sharedViaConnectionTest() {
         // TODO: test sharedViaConnection
     }
-
 }

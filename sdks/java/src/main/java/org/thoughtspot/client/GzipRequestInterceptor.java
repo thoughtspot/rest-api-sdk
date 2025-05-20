@@ -4,18 +4,18 @@
 
 package org.thoughtspot.client;
 
+
+import java.io.IOException;
 import okhttp3.*;
 import okio.Buffer;
 import okio.BufferedSink;
 import okio.GzipSink;
 import okio.Okio;
 
-import java.io.IOException;
-
 /**
  * Encodes request bodies using gzip.
  *
- * Taken from https://github.com/square/okhttp/issues/350
+ * <p>Taken from https://github.com/square/okhttp/issues/350
  */
 class GzipRequestInterceptor implements Interceptor {
     @Override
@@ -25,10 +25,14 @@ class GzipRequestInterceptor implements Interceptor {
             return chain.proceed(originalRequest);
         }
 
-        Request compressedRequest = originalRequest.newBuilder()
-                                                   .header("Content-Encoding", "gzip")
-                                                   .method(originalRequest.method(), forceContentLength(gzip(originalRequest.body())))
-                                                   .build();
+        Request compressedRequest =
+                originalRequest
+                        .newBuilder()
+                        .header("Content-Encoding", "gzip")
+                        .method(
+                                originalRequest.method(),
+                                forceContentLength(gzip(originalRequest.body())))
+                        .build();
         return chain.proceed(compressedRequest);
     }
 
