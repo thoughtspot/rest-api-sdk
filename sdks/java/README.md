@@ -55,6 +55,7 @@ public class Example {
         ApiClientConfiguration apiClientConfiguration = new ApiClientConfiguration.Builder()
                 .basePath(BASE_PATH)
                 .verifyingSsl(false) // Disable SSL verification for testing purposes
+                .readTimeoutMillis(30000) // Extended read timeout to 30 seconds
                 .build();
 
         // Create an instance of the ThoughtSpot API client
