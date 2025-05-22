@@ -4,9 +4,10 @@
 
 package org.thoughtspot.client;
 
+import java.io.IOException;
 
-import java.util.List;
 import java.util.Map;
+import java.util.List;
 
 /**
  * Callback for asynchronous API call.

@@ -4,34 +4,55 @@
 
 package org.thoughtspot.client.model;
 
-
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import org.thoughtspot.client.model.UserGroup;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for ImportUserGroupsResponse */
+/**
+ * Model tests for ImportUserGroupsResponse
+ */
 public class ImportUserGroupsResponseTest {
     private final ImportUserGroupsResponse model = new ImportUserGroupsResponse();
 
-    /** Model tests for ImportUserGroupsResponse */
+    /**
+     * Model tests for ImportUserGroupsResponse
+     */
     @Test
     public void testImportUserGroupsResponse() {
         // TODO: test ImportUserGroupsResponse
     }
 
-    /** Test the property 'groupsAdded' */
+    /**
+     * Test the property 'groupsAdded'
+     */
     @Test
     public void groupsAddedTest() {
         // TODO: test groupsAdded
     }
 
-    /** Test the property 'groupsDeleted' */
+    /**
+     * Test the property 'groupsDeleted'
+     */
     @Test
     public void groupsDeletedTest() {
         // TODO: test groupsDeleted
     }
 
-    /** Test the property 'groupsUpdated' */
+    /**
+     * Test the property 'groupsUpdated'
+     */
     @Test
     public void groupsUpdatedTest() {
         // TODO: test groupsUpdated
     }
+
 }

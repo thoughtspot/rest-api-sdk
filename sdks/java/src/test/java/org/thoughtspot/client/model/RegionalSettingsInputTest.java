@@ -4,40 +4,61 @@
 
 package org.thoughtspot.client.model;
 
-
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for RegionalSettingsInput */
+/**
+ * Model tests for RegionalSettingsInput
+ */
 public class RegionalSettingsInputTest {
     private final RegionalSettingsInput model = new RegionalSettingsInput();
 
-    /** Model tests for RegionalSettingsInput */
+    /**
+     * Model tests for RegionalSettingsInput
+     */
     @Test
     public void testRegionalSettingsInput() {
         // TODO: test RegionalSettingsInput
     }
 
-    /** Test the property 'currencyFormat' */
+    /**
+     * Test the property 'currencyFormat'
+     */
     @Test
     public void currencyFormatTest() {
         // TODO: test currencyFormat
     }
 
-    /** Test the property 'userLocale' */
+    /**
+     * Test the property 'userLocale'
+     */
     @Test
     public void userLocaleTest() {
         // TODO: test userLocale
     }
 
-    /** Test the property 'numberFormatLocale' */
+    /**
+     * Test the property 'numberFormatLocale'
+     */
     @Test
     public void numberFormatLocaleTest() {
         // TODO: test numberFormatLocale
     }
 
-    /** Test the property 'dateFormatLocale' */
+    /**
+     * Test the property 'dateFormatLocale'
+     */
     @Test
     public void dateFormatLocaleTest() {
         // TODO: test dateFormatLocale
     }
+
 }

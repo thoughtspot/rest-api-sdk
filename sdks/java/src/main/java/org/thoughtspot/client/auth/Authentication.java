@@ -4,12 +4,12 @@
 
 package org.thoughtspot.client.auth;
 
+import org.thoughtspot.client.Pair;
+import org.thoughtspot.client.ApiException;
 
 import java.net.URI;
-import java.util.List;
 import java.util.Map;
-import org.thoughtspot.client.ApiException;
-import org.thoughtspot.client.Pair;
+import java.util.List;
 
 public interface Authentication {
     /**
@@ -23,12 +23,5 @@ public interface Authentication {
      * @param uri URI
      * @throws ApiException if failed to update the parameters
      */
-    void applyToParams(
-            List<Pair> queryParams,
-            Map<String, String> headerParams,
-            Map<String, String> cookieParams,
-            String payload,
-            String method,
-            URI uri)
-            throws ApiException;
+    void applyToParams(List<Pair> queryParams, Map<String, String> headerParams, Map<String, String> cookieParams, String payload, String method, URI uri) throws ApiException;
 }

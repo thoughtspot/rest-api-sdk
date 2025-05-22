@@ -97,7 +97,7 @@ export class SearchMetadataRequest {
     */
     'include_stats'?: boolean | null;
     /**
-    * Indicates whether to include discoverable metadata objects. If lenient OSM is not enabled, then even though the includeDiscoverableObjects is set to True, we won\'t see discoverable objects.
+    * <div>Version: 10.7.0.cl or later </div>  Boolean to indicate whether to include discoverable metadata objects.
     */
     'include_discoverable_objects'?: boolean | null;
 

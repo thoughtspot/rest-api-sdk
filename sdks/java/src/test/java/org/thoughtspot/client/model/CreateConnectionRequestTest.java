@@ -4,46 +4,69 @@
 
 package org.thoughtspot.client.model;
 
-
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for CreateConnectionRequest */
+/**
+ * Model tests for CreateConnectionRequest
+ */
 public class CreateConnectionRequestTest {
     private final CreateConnectionRequest model = new CreateConnectionRequest();
 
-    /** Model tests for CreateConnectionRequest */
+    /**
+     * Model tests for CreateConnectionRequest
+     */
     @Test
     public void testCreateConnectionRequest() {
         // TODO: test CreateConnectionRequest
     }
 
-    /** Test the property 'name' */
+    /**
+     * Test the property 'name'
+     */
     @Test
     public void nameTest() {
         // TODO: test name
     }
 
-    /** Test the property 'description' */
+    /**
+     * Test the property 'description'
+     */
     @Test
     public void descriptionTest() {
         // TODO: test description
     }
 
-    /** Test the property 'dataWarehouseType' */
+    /**
+     * Test the property 'dataWarehouseType'
+     */
     @Test
     public void dataWarehouseTypeTest() {
         // TODO: test dataWarehouseType
     }
 
-    /** Test the property 'dataWarehouseConfig' */
+    /**
+     * Test the property 'dataWarehouseConfig'
+     */
     @Test
     public void dataWarehouseConfigTest() {
         // TODO: test dataWarehouseConfig
     }
 
-    /** Test the property 'validate' */
+    /**
+     * Test the property 'validate'
+     */
     @Test
     public void validateTest() {
         // TODO: test validate
     }
+
 }

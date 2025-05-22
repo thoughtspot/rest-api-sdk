@@ -4,34 +4,53 @@
 
 package org.thoughtspot.client.model;
 
-
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for ScheduleHistoryRunsOptionsInput */
+/**
+ * Model tests for ScheduleHistoryRunsOptionsInput
+ */
 public class ScheduleHistoryRunsOptionsInputTest {
     private final ScheduleHistoryRunsOptionsInput model = new ScheduleHistoryRunsOptionsInput();
 
-    /** Model tests for ScheduleHistoryRunsOptionsInput */
+    /**
+     * Model tests for ScheduleHistoryRunsOptionsInput
+     */
     @Test
     public void testScheduleHistoryRunsOptionsInput() {
         // TODO: test ScheduleHistoryRunsOptionsInput
     }
 
-    /** Test the property 'includeHistoryRuns' */
+    /**
+     * Test the property 'includeHistoryRuns'
+     */
     @Test
     public void includeHistoryRunsTest() {
         // TODO: test includeHistoryRuns
     }
 
-    /** Test the property 'recordSize' */
+    /**
+     * Test the property 'recordSize'
+     */
     @Test
     public void recordSizeTest() {
         // TODO: test recordSize
     }
 
-    /** Test the property 'recordOffset' */
+    /**
+     * Test the property 'recordOffset'
+     */
     @Test
     public void recordOffsetTest() {
         // TODO: test recordOffset
     }
+
 }

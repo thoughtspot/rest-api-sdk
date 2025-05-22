@@ -4,13 +4,14 @@
 
 package org.thoughtspot.client.auth;
 
+import org.thoughtspot.client.Pair;
+import org.thoughtspot.client.ApiException;
+
+import okhttp3.Credentials;
 
 import java.net.URI;
-import java.util.List;
 import java.util.Map;
-import okhttp3.Credentials;
-import org.thoughtspot.client.ApiException;
-import org.thoughtspot.client.Pair;
+import java.util.List;
 
 public class HttpBasicAuth implements Authentication {
     private String username;
@@ -33,20 +34,13 @@ public class HttpBasicAuth implements Authentication {
     }
 
     @Override
-    public void applyToParams(
-            List<Pair> queryParams,
-            Map<String, String> headerParams,
-            Map<String, String> cookieParams,
-            String payload,
-            String method,
-            URI uri)
-            throws ApiException {
+    public void applyToParams(List<Pair> queryParams, Map<String, String> headerParams, Map<String, String> cookieParams,
+                              String payload, String method, URI uri) throws ApiException {
         if (username == null && password == null) {
             return;
         }
-        headerParams.put(
-                "Authorization",
-                Credentials.basic(
-                        username == null ? "" : username, password == null ? "" : password));
+        headerParams.put("Authorization", Credentials.basic(
+            username == null ? "" : username,
+            password == null ? "" : password));
     }
 }
