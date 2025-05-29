@@ -1,0 +1,75 @@
+/*
+ * NOTE: This class is auto generated. Do not edit the class manually.
+ */
+
+package com.thoughtspot.client.model;
+
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import com.thoughtspot.client.model.ModelTableList;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+
+/**
+ * Model tests for DbtGenerateTmlRequest
+ */
+public class DbtGenerateTmlRequestTest {
+    private final DbtGenerateTmlRequest model = new DbtGenerateTmlRequest();
+
+    /**
+     * Model tests for DbtGenerateTmlRequest
+     */
+    @Test
+    public void testDbtGenerateTmlRequest() {
+        // TODO: test DbtGenerateTmlRequest
+    }
+
+    /**
+     * Test the property 'dbtConnectionIdentifier'
+     */
+    @Test
+    public void dbtConnectionIdentifierTest() {
+        // TODO: test dbtConnectionIdentifier
+    }
+
+    /**
+     * Test the property 'modelTables'
+     */
+    @Test
+    public void modelTablesTest() {
+        // TODO: test modelTables
+    }
+
+    /**
+     * Test the property 'importWorksheets'
+     */
+    @Test
+    public void importWorksheetsTest() {
+        // TODO: test importWorksheets
+    }
+
+    /**
+     * Test the property 'worksheets'
+     */
+    @Test
+    public void worksheetsTest() {
+        // TODO: test worksheets
+    }
+
+    /**
+     * Test the property 'fileContent'
+     */
+    @Test
+    public void fileContentTest() {
+        // TODO: test fileContent
+    }
+
+}

@@ -1,0 +1,81 @@
+/*
+ * NOTE: This class is auto generated. Do not edit the class manually.
+ */
+
+package com.thoughtspot.client.model;
+
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import com.thoughtspot.client.model.DataWarehouseObjects;
+import java.io.IOException;
+import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+
+/**
+ * Model tests for SearchConnectionResponse
+ */
+public class SearchConnectionResponseTest {
+    private final SearchConnectionResponse model = new SearchConnectionResponse();
+
+    /**
+     * Model tests for SearchConnectionResponse
+     */
+    @Test
+    public void testSearchConnectionResponse() {
+        // TODO: test SearchConnectionResponse
+    }
+
+    /**
+     * Test the property 'id'
+     */
+    @Test
+    public void idTest() {
+        // TODO: test id
+    }
+
+    /**
+     * Test the property 'name'
+     */
+    @Test
+    public void nameTest() {
+        // TODO: test name
+    }
+
+    /**
+     * Test the property 'description'
+     */
+    @Test
+    public void descriptionTest() {
+        // TODO: test description
+    }
+
+    /**
+     * Test the property 'dataWarehouseType'
+     */
+    @Test
+    public void dataWarehouseTypeTest() {
+        // TODO: test dataWarehouseType
+    }
+
+    /**
+     * Test the property 'dataWarehouseObjects'
+     */
+    @Test
+    public void dataWarehouseObjectsTest() {
+        // TODO: test dataWarehouseObjects
+    }
+
+    /**
+     * Test the property 'details'
+     */
+    @Test
+    public void detailsTest() {
+        // TODO: test details
+    }
+
+}

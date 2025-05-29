@@ -39,12 +39,12 @@ Below code snippet shows how to create a simple config and use it to call get th
 package org.example;
 
 // Import classes:
-import org.thoughtspot.client.ApiClientConfiguration;
-import org.thoughtspot.client.ApiException;
-import org.thoughtspot.client.api.ThoughtSpotRestApi;
-import org.thoughtspot.client.model.GetFullAccessTokenRequest;
-import org.thoughtspot.client.model.Token;
-import org.thoughtspot.client.model.User;
+import com.thoughtspot.client.ApiClientConfiguration;
+import com.thoughtspot.client.ApiException;
+import com.thoughtspot.client.api.ThoughtSpotRestApi;
+import com.thoughtspot.client.model.GetFullAccessTokenRequest;
+import com.thoughtspot.client.model.Token;
+import com.thoughtspot.client.model.User;
 
 public class Example {
   private static final String BASE_PATH = *CLUSTER_URL*;
@@ -76,8 +76,14 @@ public class Example {
         tsRestApi.applyApiClientConfiguration(apiClientConfiguration);
 
         // Current user information
-        User currentUser = tsRestApi.getCurrentUserInfo();  // Optionally, use .{REQUEST}WithHttpInfo() (eg: .getCurrentUserInfoWithHttpInfo()) if you want the response details
+        User currentUser = tsRestApi.getCurrentUserInfo();
         System.out.println("Current User: " + currentUser.toJson());
+
+        // Optionally, use .{REQUEST}WithHttpInfo() to get response details
+        ApiResponse<User> currentUserResponse = tsRestApi.getCurrentUserInfoWithHttpInfo();
+        System.out.println("Current User: " + currentUserResponse.getData().toString());
+        System.out.println("Status code: " + currentUserResponse.getStatusCode());
+        System.out.println("Response headers: " + currentUserResponse.getHeaders().toString());
     } catch (ApiException e) {
         System.err.println("Exception when calling ThoughtSpot API");
         System.err.println("Status code: " + e.getCode());
