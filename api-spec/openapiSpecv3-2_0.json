@@ -14661,6 +14661,11 @@
             "format": "float",
             "description": "Last time the task status was updated (in ms since epoch).",
             "nullable": true
+          },
+          "author_display_name": {
+            "type": "string",
+            "description": "Display name of the user who initiated the task.",
+            "nullable": true
           }
         }
       },
