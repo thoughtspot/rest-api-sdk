@@ -14,7 +14,9 @@ import { FetchPermissionsOfPrincipalsRequest } from '../models/FetchPermissionsO
 import { FetchPermissionsOnMetadataRequest } from '../models/FetchPermissionsOnMetadataRequest';
 import { PermissionOfMetadataResponse } from '../models/PermissionOfMetadataResponse';
 import { PermissionOfPrincipalsResponse } from '../models/PermissionOfPrincipalsResponse';
+import { PublishMetadataRequest } from '../models/PublishMetadataRequest';
 import { ShareMetadataRequest } from '../models/ShareMetadataRequest';
+import { UnpublishMetadataRequest } from '../models/UnpublishMetadataRequest';
 
 /**
  * no description
@@ -39,8 +41,8 @@ export class SecurityApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -89,8 +91,8 @@ export class SecurityApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -139,8 +141,8 @@ export class SecurityApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -152,6 +154,56 @@ export class SecurityApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
             ObjectSerializer.serialize(fetchPermissionsOnMetadataRequest, "FetchPermissionsOnMetadataRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["bearerAuth"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     *  Version: 10.9.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
+     * @param publishMetadataRequest 
+     */
+    public async publishMetadata(publishMetadataRequest: PublishMetadataRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'publishMetadataRequest' is not null or undefined
+        if (publishMetadataRequest === null || publishMetadataRequest === undefined) {
+            throw new RequiredError("SecurityApi", "publishMetadata", "publishMetadataRequest");
+        }
+
+
+        // Path Params
+        const localVarPath = '/api/rest/2.0/security/metadata/publish';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
+      
+
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(publishMetadataRequest, "PublishMetadataRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -189,8 +241,8 @@ export class SecurityApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -202,6 +254,56 @@ export class SecurityApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
             ObjectSerializer.serialize(shareMetadataRequest, "ShareMetadataRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["bearerAuth"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     *  Version: 10.9.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
+     * @param unpublishMetadataRequest 
+     */
+    public async unpublishMetadata(unpublishMetadataRequest: UnpublishMetadataRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'unpublishMetadataRequest' is not null or undefined
+        if (unpublishMetadataRequest === null || unpublishMetadataRequest === undefined) {
+            throw new RequiredError("SecurityApi", "unpublishMetadata", "unpublishMetadataRequest");
+        }
+
+
+        // Path Params
+        const localVarPath = '/api/rest/2.0/security/metadata/unpublish';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
+      
+
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(unpublishMetadataRequest, "UnpublishMetadataRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -396,10 +498,116 @@ export class SecurityApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
+     * @params response Response returned by the server for a request to publishMetadata
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async publishMetadata(response: ResponseContext): Promise<void > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Invalid request.", body, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
+        }
+        if (isCodeInRange("500", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
+            return body;
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
      * @params response Response returned by the server for a request to shareMetadata
      * @throws ApiException if the response code was not in [200, 299]
      */
      public async shareMetadata(response: ResponseContext): Promise<void > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Invalid request.", body, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
+        }
+        if (isCodeInRange("500", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
+            return body;
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to unpublishMetadata
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async unpublishMetadata(response: ResponseContext): Promise<void > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
             return;

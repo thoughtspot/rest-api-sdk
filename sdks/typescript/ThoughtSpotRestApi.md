@@ -21,6 +21,7 @@ Method | HTTP request | Description
 [**createTag**](ThoughtSpotRestApi.md#createTag) | **POST** /api/rest/2.0/tags/create | 
 [**createUser**](ThoughtSpotRestApi.md#createUser) | **POST** /api/rest/2.0/users/create | 
 [**createUserGroup**](ThoughtSpotRestApi.md#createUserGroup) | **POST** /api/rest/2.0/groups/create | 
+[**createVariable**](ThoughtSpotRestApi.md#createVariable) | **POST** /api/rest/2.0/template/variables/create | 
 [**dbtConnection**](ThoughtSpotRestApi.md#dbtConnection) | **POST** /api/rest/2.0/dbt/dbt-connection | 
 [**dbtGenerateSyncTml**](ThoughtSpotRestApi.md#dbtGenerateSyncTml) | **POST** /api/rest/2.0/dbt/generate-sync-tml | 
 [**dbtGenerateTml**](ThoughtSpotRestApi.md#dbtGenerateTml) | **POST** /api/rest/2.0/dbt/generate-tml | 
@@ -38,6 +39,7 @@ Method | HTTP request | Description
 [**deleteTag**](ThoughtSpotRestApi.md#deleteTag) | **POST** /api/rest/2.0/tags/{tag_identifier}/delete | 
 [**deleteUser**](ThoughtSpotRestApi.md#deleteUser) | **POST** /api/rest/2.0/users/{user_identifier}/delete | 
 [**deleteUserGroup**](ThoughtSpotRestApi.md#deleteUserGroup) | **POST** /api/rest/2.0/groups/{group_identifier}/delete | 
+[**deleteVariable**](ThoughtSpotRestApi.md#deleteVariable) | **POST** /api/rest/2.0/template/variables/{identifier}/delete | 
 [**deployCommit**](ThoughtSpotRestApi.md#deployCommit) | **POST** /api/rest/2.0/vcs/git/commits/deploy | 
 [**downloadConnectionMetadataChanges**](ThoughtSpotRestApi.md#downloadConnectionMetadataChanges) | **POST** /api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier} | 
 [**exportAnswerReport**](ThoughtSpotRestApi.md#exportAnswerReport) | **POST** /api/rest/2.0/report/answer | 
@@ -68,6 +70,8 @@ Method | HTTP request | Description
 [**importUsers**](ThoughtSpotRestApi.md#importUsers) | **POST** /api/rest/2.0/users/import | 
 [**login**](ThoughtSpotRestApi.md#login) | **POST** /api/rest/2.0/auth/session/login | 
 [**logout**](ThoughtSpotRestApi.md#logout) | **POST** /api/rest/2.0/auth/session/logout | 
+[**parameterizeMetadata**](ThoughtSpotRestApi.md#parameterizeMetadata) | **POST** /api/rest/2.0/metadata/parameterize | 
+[**publishMetadata**](ThoughtSpotRestApi.md#publishMetadata) | **POST** /api/rest/2.0/security/metadata/publish | 
 [**queryGetDecomposedQuery**](ThoughtSpotRestApi.md#queryGetDecomposedQuery) | **POST** /api/rest/2.0/ai/analytical-questions | 
 [**resetUserPassword**](ThoughtSpotRestApi.md#resetUserPassword) | **POST** /api/rest/2.0/users/reset-password | 
 [**revertCommit**](ThoughtSpotRestApi.md#revertCommit) | **POST** /api/rest/2.0/vcs/git/commits/{commit_id}/revert | 
@@ -84,10 +88,13 @@ Method | HTTP request | Description
 [**searchTags**](ThoughtSpotRestApi.md#searchTags) | **POST** /api/rest/2.0/tags/search | 
 [**searchUserGroups**](ThoughtSpotRestApi.md#searchUserGroups) | **POST** /api/rest/2.0/groups/search | 
 [**searchUsers**](ThoughtSpotRestApi.md#searchUsers) | **POST** /api/rest/2.0/users/search | 
+[**searchVariables**](ThoughtSpotRestApi.md#searchVariables) | **POST** /api/rest/2.0/template/variables/search | 
 [**sendMessage**](ThoughtSpotRestApi.md#sendMessage) | **POST** /api/rest/2.0/ai/conversation/{conversation_identifier}/converse | 
 [**shareMetadata**](ThoughtSpotRestApi.md#shareMetadata) | **POST** /api/rest/2.0/security/metadata/share | 
 [**singleAnswer**](ThoughtSpotRestApi.md#singleAnswer) | **POST** /api/rest/2.0/ai/answer/create | 
 [**unassignTag**](ThoughtSpotRestApi.md#unassignTag) | **POST** /api/rest/2.0/tags/unassign | 
+[**unparameterizeMetadata**](ThoughtSpotRestApi.md#unparameterizeMetadata) | **POST** /api/rest/2.0/metadata/unparameterize | 
+[**unpublishMetadata**](ThoughtSpotRestApi.md#unpublishMetadata) | **POST** /api/rest/2.0/security/metadata/unpublish | 
 [**updateConfig**](ThoughtSpotRestApi.md#updateConfig) | **POST** /api/rest/2.0/vcs/git/config/update | 
 [**updateConnection**](ThoughtSpotRestApi.md#updateConnection) | **POST** /api/rest/2.0/connection/update | 
 [**updateConnectionV2**](ThoughtSpotRestApi.md#updateConnectionV2) | **POST** /api/rest/2.0/connections/{connection_identifier}/update | 
@@ -102,6 +109,8 @@ Method | HTTP request | Description
 [**updateTag**](ThoughtSpotRestApi.md#updateTag) | **POST** /api/rest/2.0/tags/{tag_identifier}/update | 
 [**updateUser**](ThoughtSpotRestApi.md#updateUser) | **POST** /api/rest/2.0/users/{user_identifier}/update | 
 [**updateUserGroup**](ThoughtSpotRestApi.md#updateUserGroup) | **POST** /api/rest/2.0/groups/{group_identifier}/update | 
+[**updateVariable**](ThoughtSpotRestApi.md#updateVariable) | **POST** /api/rest/2.0/template/variables/{identifier}/update | 
+[**updateVariableValues**](ThoughtSpotRestApi.md#updateVariableValues) | **POST** /api/rest/2.0/template/variables/update | 
 [**validateMerge**](ThoughtSpotRestApi.md#validateMerge) | **POST** /api/rest/2.0/vcs/git/branches/validate | 
 [**validateToken**](ThoughtSpotRestApi.md#validateToken) | **POST** /api/rest/2.0/auth/token/validate | 
 
@@ -1289,6 +1298,79 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
+# **createVariable**
+> Variable createVariable(createVariableRequest)
+
+ Create a variable which can be used for parameterizing metadata objects   Version: 10.9.0.cl or later   Allows creating a variable which can be used for parameterizing metadata objects in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint supports the following types of variables: * CONNECTION_PROPERTY - For connection properties * TABLE_MAPPING - For table mappings * CONNECTION_PROPERTY_PER_PRINCIPAL - For connection properties per principal. In order to use this please contact support to enable this.  When creating a variable, you need to specify: * The variable type * A unique name for the variable * Whether the variable contains sensitive values (defaults to false) * The variable values (optional)  The operation will fail if: * The user lacks required permissions * The variable name already exists * The variable type is invalid * The variable values are invalid for the specified type       
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, CreateVariableRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.createVariable(
+  // CreateVariableRequest
+  {
+    type: "CONNECTION_PROPERTY",
+    name: "name_example",
+    sensitive: false,
+    values: [
+      {
+        value: "value_example",
+        org_identifier: "org_identifier_example",
+        principal_type: "USER",
+        principal_identifier: "principal_identifier_example",
+        priority: 1,
+      },
+    ],
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **createVariableRequest** | **CreateVariableRequest**|  |
+
+
+### Return type
+
+**Variable**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Create variable is successful. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
 # **dbtConnection**
 > any dbtConnection(dbtConnectionRequest)
 
@@ -2348,6 +2430,66 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
+# **deleteVariable**
+> void deleteVariable()
+
+ Delete a variable   Version: 10.9.0.cl or later   Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn\'t exist * The variable is being used by other objects      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, DeleteVariableRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.deleteVariable(
+  // string | Unique id or name of the variable
+  "identifier_example" 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **identifier** | [**string**] | Unique id or name of the variable | defaults to undefined
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Deleting the variable is successful. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
 # **deployCommit**
 > Array<DeployResponse> deployCommit(deployCommitRequest)
 
@@ -2563,6 +2705,10 @@ apiInstance.exportLiveboardReport(
   // ExportLiveboardReportRequest
   {
     metadata_identifier: "metadata_identifier_example",
+    tab_identifiers: [
+      "tab_identifiers_example",
+    ],
+    personalised_view_identifier: "personalised_view_identifier_example",
     visualization_identifiers: [
       "visualization_identifiers_example",
     ],
@@ -3549,7 +3695,7 @@ This endpoint does not need any parameter.
 # **getCustomAccessToken**
 > AccessToken getCustomAccessToken(getCustomAccessTokenRequest)
 
-  Version: 10.4.0.cl or later   Gets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  To add a new user and assign privileges during auto creation, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  To assign security attributes with filter rules and Parameters to the JWT token, you\'ll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  #### Usage guidelines  You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key`.  To generate a `secret_key` on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable) in the **Develop** > **Customizations** > **Security Settings** page.  **Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.  ##### Attribute-Based Access Control (ABAC) with tokens  To implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the `filter_rules` and `parameter_values` array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user\'s `access_control_properties` object, after which all sessions will use the persisted values.  Specify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.  For more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).  ##### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * `auto_create` * `username` * `display_name` * `email` * `groups`  Set `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true` in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  ##### Important point to note All options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Persist options such as  `APPEND`, `REPLACE`, `RESET` will persist security parameters on the user profile when the token is created, while Persist option `NONE` will not persist anything but will be honoured in the session.      
+  Version: 10.4.0.cl or later   Gets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  To add a new user and assign privileges during auto creation, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  To assign security attributes with filter rules and Parameters to the JWT token, you\'ll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  #### Usage guidelines  You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key`.  To generate a `secret_key` on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable) in the **Develop** > **Customizations** > **Security Settings** page.  **Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.  If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.  ##### Attribute-Based Access Control (ABAC) with tokens  To implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the `filter_rules` and `parameter_values` array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user\'s `access_control_properties` object, after which all sessions will use the persisted values.  Specify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.  For more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).  ##### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * `auto_create` * `username` * `display_name` * `email` * `groups`  Set `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true` in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  ##### Important point to note All options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Persist options such as  `APPEND`, `REPLACE`, `RESET` will persist security parameters on the user profile when the token is created, while Persist option `NONE` will not persist anything but will be honoured in the session.      
 
 ### Example
 
@@ -3577,7 +3723,7 @@ apiInstance.getCustomAccessToken(
         column_name: "column_name_example",
         operator: "EQ",
         values: [
-          null,
+          {},
         ],
       },
     ],
@@ -3585,7 +3731,7 @@ apiInstance.getCustomAccessToken(
       {
         name: "name_example",
         values: [
-          null,
+          {},
         ],
       },
     ],
@@ -3647,7 +3793,7 @@ No authorization required
 # **getFullAccessToken**
 > Token getFullAccessToken(getFullAccessTokenRequest)
 
-  Version: 9.0.0.cl or later   Gets an authentication token and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)).  To generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page. For more information, see [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable).  **Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.  #### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * `auto_create` * `username` * `display_name` * `email` * `group_identifiers`  Set `auto_create` to `True` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true`, the API call will update user properties like display name, email and group assignment.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  To add a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege is required.  #### Attribute-Based Access Control (ABAC) with tokens  You can define Attribute-Based Access Control (ABAC) parameters to assign security entitlements to users during session creation. For more information, see [ABAC via token](https://developers.thoughtspot.com/docs/abac-user-parameters).  Specify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.  #### Important point to note All options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Similarly, using `user_parameters` with `persist: true` persists security parameters on the user profile when the token is created and not during authentication.      
+  Version: 9.0.0.cl or later   Gets an authentication token and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)).  To generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page. For more information, see [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable).  **Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.  If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.  #### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * `auto_create` * `username` * `display_name` * `email` * `group_identifiers`  Set `auto_create` to `True` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true`, the API call will update user properties like display name, email and group assignment.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  To add a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege is required.  #### Important point to note All options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created.      
 
 ### Example
 
@@ -3675,6 +3821,7 @@ apiInstance.getFullAccessToken(
     group_identifiers: [
       "group_identifiers_example",
     ],
+    user_parameters: null,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -3719,7 +3866,7 @@ No authorization required
 # **getObjectAccessToken**
 > Token getObjectAccessToken(getObjectAccessTokenRequest)
 
-  Version: 9.0.0.cl or later   Gets an authentication token that provides access to a specific metadata object. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)).  To generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page.  **Note**: When both `password` and `secret_key` are included in the API request,  `password` takes precedence.  #### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * `auto_create` * `username` * `display_name` * `email` * `group_identifiers`  Set `auto_create` to `True` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true`, the API call will update user properties like display name, email and group assignment.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  To add a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege is required.  #### Attribute-Based Access Control (ABAC) with tokens  You can define Attribute-Based Access Control (ABAC) parameters to assign security entitlements to users during session creation. For more information, see [ABAC via token](https://developers.thoughtspot.com/docs/abac-user-parameters).  #### Important point to note All options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Similarly, using `user_parameters` with `persist: true` persists security parameters on the user profile when the token is created and not during authentication.  Specify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.      
+  Version: 9.0.0.cl or later   Gets an authentication token that provides access to a specific metadata object. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)).  To generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page.  **Note**: When both `password` and `secret_key` are included in the API request,  `password` takes precedence.  If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.  #### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * `auto_create` * `username` * `display_name` * `email` * `group_identifiers`  Set `auto_create` to `True` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true`, the API call will update user properties like display name, email and group assignment.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  To add a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege is required.  #### Important point to note All options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created.      
 
 ### Example
 
@@ -3748,6 +3895,7 @@ apiInstance.getObjectAccessToken(
     group_identifiers: [
       "group_identifiers_example",
     ],
+    user_parameters: null,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -4267,7 +4415,7 @@ Name | Type | Description  | Notes
 # **login**
 > void login(loginRequest)
 
-  Version: 9.0.0.cl or later    Creates a login session for a ThoughtSpot user with Basic authentication.  In Basic authentication method, REST clients log in to ThoughtSpot using `username` and `password` attributes. On a multi-tenant cluster with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org context.  A successful login returns a session cookie that can be used in your subsequent API requests.      
+  Version: 9.0.0.cl or later   Creates a login session for a ThoughtSpot user with Basic authentication.  In Basic authentication method, REST clients log in to ThoughtSpot using `username` and `password` attributes. On a multi-tenant cluster with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org context.  **Note**: If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. Contact ThoughtSpot Support for assistance.  A successful login returns a session cookie that can be used in your subsequent API requests.     
 
 ### Example
 
@@ -4376,6 +4524,143 @@ This endpoint does not need any parameter.
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **204** | User logout successful. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **parameterizeMetadata**
+> void parameterizeMetadata(parameterizeMetadataRequest)
+
+ Parameterize fields in metadata objects.   Version: 10.9.0.cl or later   Allows parameterizing fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection the field type is always `CONNECTION_PROPERTY`. We use the field_name in this case to specify the exact property of a connection which needs to be parameterized.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, ParameterizeMetadataRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.parameterizeMetadata(
+  // ParameterizeMetadataRequest
+  {
+    metadata_type: "LOGICAL_TABLE",
+    metadata_identifier: "metadata_identifier_example",
+    field_type: "ATTRIBUTE",
+    field_name: "field_name_example",
+    variable_identifier: "variable_identifier_example",
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **parameterizeMetadataRequest** | **ParameterizeMetadataRequest**|  |
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Parameterize successful. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **publishMetadata**
+> void publishMetadata(publishMetadataRequest)
+
+ Version: 10.9.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, PublishMetadataRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.publishMetadata(
+  // PublishMetadataRequest
+  {
+    metadata: [
+      {
+        identifier: "identifier_example",
+        type: "LIVEBOARD",
+      },
+    ],
+    org_identifiers: [
+      "org_identifiers_example",
+    ],
+    skip_validation: true,
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **publishMetadataRequest** | **PublishMetadataRequest**|  |
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Publishing metadata objects is successful. |  -  |
 **400** | Invalid request. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Forbidden access. |  -  |
@@ -4833,6 +5118,7 @@ apiInstance.searchConnection(
     include_details: true,
     configuration: {},
     authentication_type: "SERVICE_ACCOUNT",
+    show_resolved_parameters: false,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -5019,7 +5305,7 @@ Name | Type | Description  | Notes
 # **searchMetadata**
 > Array<MetadataSearchResponse> searchMetadata(searchMetadataRequest)
 
-  Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.   You can also define sorting options to sort the data retrieved in the API response. - To get discoverable objects when linientmodel is enabled you can use `include_discoverable_objects` as true else false. Default value is true.  **NOTE**: The following parameters support pagination of metadata records:  - `tag_identifiers` - `type` - `created_by_user_identifiers` - `modified_by_user_identifiers` - `owned_by_user_identifiers` - `exclude_objects` - `include_auto_created_objects` - `favorite_object_options` If you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.      
+  Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.   You can also define sorting options to sort the data retrieved in the API response. - To get discoverable objects when linientmodel is enabled you can use `include_discoverable_objects` as true else false. Default value is true. - For liveboard metadata type, to get the newer format, set the `liveboard_response_format` as V2. Default value is V1.  **NOTE**: The following parameters support pagination of metadata records:  - `tag_identifiers` - `type` - `created_by_user_identifiers` - `modified_by_user_identifiers` - `owned_by_user_identifiers` - `exclude_objects` - `include_auto_created_objects` - `favorite_object_options` If you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.      
 
 ### Example
 
@@ -5084,6 +5370,7 @@ apiInstance.searchMetadata(
     ],
     include_stats: false,
     include_discoverable_objects: true,
+    show_resolved_parameters: false,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -5592,6 +5879,77 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
+# **searchVariables**
+> Array<Variable> searchVariables(searchVariablesRequest)
+
+ Search variables   Version: 10.9.0.cl or later   Allows searching for variables in ThoughtSpot.  Requires ADMINISTRATION role.  The API endpoint supports searching variables by: * Variable identifier (ID or name) * Variable type * Name pattern (case-insensitive, supports % for wildcard)  The search results can be formatted in three ways: * METADATA_ONLY - Returns only variable metadata (default) * METADATA_AND_VALUES - Returns variable metadata and values * EDITABLE_METADATA_AND_VALUES - Returns only editable variable metadata and values       
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, SearchVariablesRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.searchVariables(
+  // SearchVariablesRequest
+  {
+    variable_details: [
+      {
+        identifier: "identifier_example",
+        type: "CONNECTION_PROPERTY",
+        name_pattern: "name_pattern_example",
+      },
+    ],
+    record_offset: 0,
+    record_size: 10,
+    output_format: "METADATA_ONLY",
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **searchVariablesRequest** | **SearchVariablesRequest**|  |
+
+
+### Return type
+
+**Array<Variable>**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | List of variables is successful. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
 # **sendMessage**
 > Array<ResponseMessage> sendMessage(sendMessageRequest)
 
@@ -5870,6 +6228,144 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **204** | Tags successfully unassigned. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **unparameterizeMetadata**
+> void unparameterizeMetadata(unparameterizeMetadataRequest)
+
+ Remove parameterization from fields in metadata objects.   Version: 10.9.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection the field type is always `CONNECTION_PROPERTY`. We use the field_name in this case to specify the exact property of a connection which needs to be unparameterized.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, UnparameterizeMetadataRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.unparameterizeMetadata(
+  // UnparameterizeMetadataRequest
+  {
+    metadata_type: "LOGICAL_TABLE",
+    metadata_identifier: "metadata_identifier_example",
+    field_type: "ATTRIBUTE",
+    field_name: "field_name_example",
+    value: "value_example",
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **unparameterizeMetadataRequest** | **UnparameterizeMetadataRequest**|  |
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successfuly removed parameters. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **unpublishMetadata**
+> void unpublishMetadata(unpublishMetadataRequest)
+
+ Version: 10.9.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, UnpublishMetadataRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.unpublishMetadata(
+  // UnpublishMetadataRequest
+  {
+    force: true,
+    include_dependencies: true,
+    metadata: [
+      {
+        identifier: "identifier_example",
+        type: "LIVEBOARD",
+      },
+    ],
+    org_identifiers: [
+      "org_identifiers_example",
+    ],
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **unpublishMetadataRequest** | **UnpublishMetadataRequest**|  |
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Unpublishing metadata objects is successful. |  -  |
 **400** | Invalid request. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Forbidden access. |  -  |
@@ -6891,6 +7387,157 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **204** | User group successfully updated. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **updateVariable**
+> void updateVariable(updateVariableRequest)
+
+ Update a variable\'s properties   Version: 10.9.0.cl or later   Allows updating a variable\'s properties in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows updating: * The variable name * The variable values  When updating variable values, you need to specify: * The operation to perform (ADD, REPLACE, REMOVE) * The new values to add/replace/remove  When the operation is ADD, a value any pre-existing value with the same set of constraints will be replaced. When the operation is REPLACE, all values of the variable are replaced with the values specified. When the operation is REMOVE, all values with the given set of conditions are removed.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, UpdateVariableRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.updateVariable(
+  // string | Unique id or name of the variable to update.
+  "identifier_example" , 
+  // UpdateVariableRequest
+  {
+    name: "name_example",
+    operation: "REPLACE",
+    values: [
+      {
+        value: "value_example",
+        org_identifier: "org_identifier_example",
+        principal_type: "USER",
+        principal_identifier: "principal_identifier_example",
+        priority: 1,
+      },
+    ],
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **updateVariableRequest** | **UpdateVariableRequest**|  |
+ **identifier** | [**string**] | Unique id or name of the variable to update. | defaults to undefined
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Updating the variable is successful. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **updateVariableValues**
+> void updateVariableValues(updateVariableValuesRequest)
+
+ Update values for multiple variables   Version: 10.9.0.cl or later   Allows updating values for multiple variables in ThoughtSpot.  Requires ADMINISTRATION role.  The API endpoint allows: * Adding new values to variables * Replacing existing values * Deleting values from variables  When updating variable values, you need to specify: * The variable identifiers * The values to add/replace/remove for each variable * The operation to perform (ADD, REPLACE, REMOVE)  Behaviour based on operation type: * ADD - Adds values to the variable. Any pre-existing values with the same conditions are replaced. * REPLACE - Replaces all values of a given org with the current set of values. * REMOVE - Removes any values which match the set of conditions of the variables.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, UpdateVariableValuesRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.updateVariableValues(
+  // UpdateVariableValuesRequest
+  {
+    variable_updates: [
+      {
+        variable_identifier: "variable_identifier_example",
+        variable_values: [
+          {
+            value: "value_example",
+            org_identifier: "org_identifier_example",
+            principal_type: "USER",
+            principal_identifier: "principal_identifier_example",
+            priority: 1,
+          },
+        ],
+      },
+    ],
+    operation: "ADD",
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **updateVariableValuesRequest** | **UpdateVariableValuesRequest**|  |
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Updating variable values is successful. |  -  |
 **400** | Invalid request. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Forbidden access. |  -  |

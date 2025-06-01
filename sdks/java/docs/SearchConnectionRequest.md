@@ -17,6 +17,7 @@
 |**includeDetails** | **Boolean** | Indicates whether to include complete details of the connection objects. |  [optional] |
 |**_configuration** | **Object** | Configuration values. If empty we are fetching configuration from datasource based on given connection id. If required you can provide config details to fetch specific details. Example input: {}, {\&quot;warehouse\&quot;:\&quot;SMALL_WH\&quot;,\&quot;database\&quot;:\&quot;DEVELOPMENT\&quot;}. This is only applicable when data_warehouse_object_type is selected. |  [optional] |
 |**authenticationType** | [**AuthenticationTypeEnum**](#AuthenticationTypeEnum) | List of authentication types to fetch data_ware_house_objects from external Data warehouse. This is only applicable when data_warehouse_object_type is selected. |  [optional] |
+|**showResolvedParameters** | **Boolean** | &lt;div&gt;Version: 10.9.0.cl or later &lt;/div&gt;  Indicates whether to show resolved parameterised values. |  [optional] |
 
 
 

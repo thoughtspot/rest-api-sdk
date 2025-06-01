@@ -1,6 +1,6 @@
 {
   "name": "@thoughtspot/rest-api-sdk",
-  "version": "2.13.0",
+  "version": "2.14",
   "description": "Api sdk for thoughtspot's public v2 rest api",
   "keywords": [
     "fetch",

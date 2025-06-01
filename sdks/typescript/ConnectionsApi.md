@@ -369,6 +369,7 @@ apiInstance.searchConnection(
     include_details: true,
     configuration: {},
     authentication_type: "SERVICE_ACCOUNT",
+    show_resolved_parameters: false,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);

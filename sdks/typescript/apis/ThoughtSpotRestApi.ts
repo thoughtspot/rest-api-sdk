@@ -31,6 +31,7 @@ import { CreateScheduleRequest } from '../models/CreateScheduleRequest';
 import { CreateTagRequest } from '../models/CreateTagRequest';
 import { CreateUserGroupRequest } from '../models/CreateUserGroupRequest';
 import { CreateUserRequest } from '../models/CreateUserRequest';
+import { CreateVariableRequest } from '../models/CreateVariableRequest';
 import { DbtConnectionRequest } from '../models/DbtConnectionRequest';
 import { DbtGenerateSyncTmlRequest } from '../models/DbtGenerateSyncTmlRequest';
 import { DbtGenerateTmlRequest } from '../models/DbtGenerateTmlRequest';
@@ -74,8 +75,10 @@ import { LogResponse } from '../models/LogResponse';
 import { LoginRequest } from '../models/LoginRequest';
 import { MetadataSearchResponse } from '../models/MetadataSearchResponse';
 import { OrgResponse } from '../models/OrgResponse';
+import { ParameterizeMetadataRequest } from '../models/ParameterizeMetadataRequest';
 import { PermissionOfMetadataResponse } from '../models/PermissionOfMetadataResponse';
 import { PermissionOfPrincipalsResponse } from '../models/PermissionOfPrincipalsResponse';
+import { PublishMetadataRequest } from '../models/PublishMetadataRequest';
 import { QueryGetDecomposedQueryRequest } from '../models/QueryGetDecomposedQueryRequest';
 import { RepoConfigObject } from '../models/RepoConfigObject';
 import { ResetUserPasswordRequest } from '../models/ResetUserPasswordRequest';
@@ -104,6 +107,7 @@ import { SearchSchedulesRequest } from '../models/SearchSchedulesRequest';
 import { SearchTagsRequest } from '../models/SearchTagsRequest';
 import { SearchUserGroupsRequest } from '../models/SearchUserGroupsRequest';
 import { SearchUsersRequest } from '../models/SearchUsersRequest';
+import { SearchVariablesRequest } from '../models/SearchVariablesRequest';
 import { SendMessageRequest } from '../models/SendMessageRequest';
 import { ShareMetadataRequest } from '../models/ShareMetadataRequest';
 import { SingleAnswerRequest } from '../models/SingleAnswerRequest';
@@ -113,6 +117,8 @@ import { SystemInfo } from '../models/SystemInfo';
 import { Tag } from '../models/Tag';
 import { Token } from '../models/Token';
 import { TokenValidationResponse } from '../models/TokenValidationResponse';
+import { UnparameterizeMetadataRequest } from '../models/UnparameterizeMetadataRequest';
+import { UnpublishMetadataRequest } from '../models/UnpublishMetadataRequest';
 import { UpdateConfigRequest } from '../models/UpdateConfigRequest';
 import { UpdateConnectionRequest } from '../models/UpdateConnectionRequest';
 import { UpdateConnectionV2Request } from '../models/UpdateConnectionV2Request';
@@ -127,10 +133,13 @@ import { UpdateSystemConfigRequest } from '../models/UpdateSystemConfigRequest';
 import { UpdateTagRequest } from '../models/UpdateTagRequest';
 import { UpdateUserGroupRequest } from '../models/UpdateUserGroupRequest';
 import { UpdateUserRequest } from '../models/UpdateUserRequest';
+import { UpdateVariableRequest } from '../models/UpdateVariableRequest';
+import { UpdateVariableValuesRequest } from '../models/UpdateVariableValuesRequest';
 import { User } from '../models/User';
 import { UserGroupResponse } from '../models/UserGroupResponse';
 import { ValidateMergeRequest } from '../models/ValidateMergeRequest';
 import { ValidateTokenRequest } from '../models/ValidateTokenRequest';
+import { Variable } from '../models/Variable';
 
 /**
  * no description
@@ -155,8 +164,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -205,8 +214,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -255,8 +264,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -305,8 +314,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -355,8 +364,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -405,8 +414,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -455,8 +464,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -505,8 +514,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -555,8 +564,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -605,8 +614,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -655,8 +664,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -705,8 +714,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -755,8 +764,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -805,8 +814,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -855,8 +864,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -905,8 +914,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -955,8 +964,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -968,6 +977,56 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
             ObjectSerializer.serialize(createUserGroupRequest, "CreateUserGroupRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["bearerAuth"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     *  Create a variable which can be used for parameterizing metadata objects   Version: 10.9.0.cl or later   Allows creating a variable which can be used for parameterizing metadata objects in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint supports the following types of variables: * CONNECTION_PROPERTY - For connection properties * TABLE_MAPPING - For table mappings * CONNECTION_PROPERTY_PER_PRINCIPAL - For connection properties per principal. In order to use this please contact support to enable this.  When creating a variable, you need to specify: * The variable type * A unique name for the variable * Whether the variable contains sensitive values (defaults to false) * The variable values (optional)  The operation will fail if: * The user lacks required permissions * The variable name already exists * The variable type is invalid * The variable values are invalid for the specified type       
+     * @param createVariableRequest 
+     */
+    public async createVariable(createVariableRequest: CreateVariableRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'createVariableRequest' is not null or undefined
+        if (createVariableRequest === null || createVariableRequest === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "createVariable", "createVariableRequest");
+        }
+
+
+        // Path Params
+        const localVarPath = '/api/rest/2.0/template/variables/create';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
+      
+
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(createVariableRequest, "CreateVariableRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -1005,8 +1064,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -1055,8 +1114,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -1105,8 +1164,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -1148,8 +1207,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -1187,8 +1246,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -1237,8 +1296,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -1287,8 +1346,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -1338,8 +1397,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -1378,8 +1437,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -1418,8 +1477,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -1457,8 +1516,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -1508,8 +1567,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -1548,8 +1607,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -1588,8 +1647,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -1628,8 +1687,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -1668,8 +1727,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -1708,8 +1767,48 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
+      
+
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["bearerAuth"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     *  Delete a variable   Version: 10.9.0.cl or later   Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn\'t exist * The variable is being used by other objects      
+     * @param identifier Unique id or name of the variable
+     */
+    public async deleteVariable(identifier: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'identifier' is not null or undefined
+        if (identifier === null || identifier === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "deleteVariable", "identifier");
+        }
+
+
+        // Path Params
+        const localVarPath = '/api/rest/2.0/template/variables/{identifier}/delete'
+            .replace('{' + 'identifier' + '}', encodeURIComponent(String(identifier)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -1747,8 +1846,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -1798,8 +1897,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -1837,8 +1936,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -1887,8 +1986,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -1937,8 +2036,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -1987,8 +2086,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -2037,8 +2136,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -2087,8 +2186,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -2137,8 +2236,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -2188,8 +2287,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -2227,8 +2326,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -2277,8 +2376,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -2327,8 +2426,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -2377,8 +2476,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -2427,8 +2526,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -2477,8 +2576,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -2520,8 +2619,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -2552,8 +2651,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -2574,7 +2673,7 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   Version: 10.4.0.cl or later   Gets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  To add a new user and assign privileges during auto creation, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  To assign security attributes with filter rules and Parameters to the JWT token, you\'ll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  #### Usage guidelines  You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key`.  To generate a `secret_key` on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable) in the **Develop** > **Customizations** > **Security Settings** page.  **Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.  ##### Attribute-Based Access Control (ABAC) with tokens  To implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the `filter_rules` and `parameter_values` array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user\'s `access_control_properties` object, after which all sessions will use the persisted values.  Specify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.  For more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).  ##### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * `auto_create` * `username` * `display_name` * `email` * `groups`  Set `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true` in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  ##### Important point to note All options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Persist options such as  `APPEND`, `REPLACE`, `RESET` will persist security parameters on the user profile when the token is created, while Persist option `NONE` will not persist anything but will be honoured in the session.      
+     *   Version: 10.4.0.cl or later   Gets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  To add a new user and assign privileges during auto creation, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  To assign security attributes with filter rules and Parameters to the JWT token, you\'ll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  #### Usage guidelines  You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key`.  To generate a `secret_key` on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable) in the **Develop** > **Customizations** > **Security Settings** page.  **Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.  If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.  ##### Attribute-Based Access Control (ABAC) with tokens  To implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the `filter_rules` and `parameter_values` array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user\'s `access_control_properties` object, after which all sessions will use the persisted values.  Specify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.  For more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).  ##### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * `auto_create` * `username` * `display_name` * `email` * `groups`  Set `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true` in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  ##### Important point to note All options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Persist options such as  `APPEND`, `REPLACE`, `RESET` will persist security parameters on the user profile when the token is created, while Persist option `NONE` will not persist anything but will be honoured in the session.      
      * @param getCustomAccessTokenRequest 
      */
     public async getCustomAccessToken(getCustomAccessTokenRequest: GetCustomAccessTokenRequest, _options?: Configuration): Promise<RequestContext> {
@@ -2591,8 +2690,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -2618,7 +2717,7 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   Version: 9.0.0.cl or later   Gets an authentication token and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)).  To generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page. For more information, see [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable).  **Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.  #### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * `auto_create` * `username` * `display_name` * `email` * `group_identifiers`  Set `auto_create` to `True` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true`, the API call will update user properties like display name, email and group assignment.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  To add a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege is required.  #### Attribute-Based Access Control (ABAC) with tokens  You can define Attribute-Based Access Control (ABAC) parameters to assign security entitlements to users during session creation. For more information, see [ABAC via token](https://developers.thoughtspot.com/docs/abac-user-parameters).  Specify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.  #### Important point to note All options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Similarly, using `user_parameters` with `persist: true` persists security parameters on the user profile when the token is created and not during authentication.      
+     *   Version: 9.0.0.cl or later   Gets an authentication token and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)).  To generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page. For more information, see [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable).  **Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.  If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.  #### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * `auto_create` * `username` * `display_name` * `email` * `group_identifiers`  Set `auto_create` to `True` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true`, the API call will update user properties like display name, email and group assignment.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  To add a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege is required.  #### Important point to note All options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created.      
      * @param getFullAccessTokenRequest 
      */
     public async getFullAccessToken(getFullAccessTokenRequest: GetFullAccessTokenRequest, _options?: Configuration): Promise<RequestContext> {
@@ -2635,8 +2734,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -2662,7 +2761,7 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   Version: 9.0.0.cl or later   Gets an authentication token that provides access to a specific metadata object. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)).  To generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page.  **Note**: When both `password` and `secret_key` are included in the API request,  `password` takes precedence.  #### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * `auto_create` * `username` * `display_name` * `email` * `group_identifiers`  Set `auto_create` to `True` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true`, the API call will update user properties like display name, email and group assignment.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  To add a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege is required.  #### Attribute-Based Access Control (ABAC) with tokens  You can define Attribute-Based Access Control (ABAC) parameters to assign security entitlements to users during session creation. For more information, see [ABAC via token](https://developers.thoughtspot.com/docs/abac-user-parameters).  #### Important point to note All options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Similarly, using `user_parameters` with `persist: true` persists security parameters on the user profile when the token is created and not during authentication.  Specify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.      
+     *   Version: 9.0.0.cl or later   Gets an authentication token that provides access to a specific metadata object. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)).  To generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page.  **Note**: When both `password` and `secret_key` are included in the API request,  `password` takes precedence.  If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.  #### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * `auto_create` * `username` * `display_name` * `email` * `group_identifiers`  Set `auto_create` to `True` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true`, the API call will update user properties like display name, email and group assignment.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  To add a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege is required.  #### Important point to note All options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created.      
      * @param getObjectAccessTokenRequest 
      */
     public async getObjectAccessToken(getObjectAccessTokenRequest: GetObjectAccessTokenRequest, _options?: Configuration): Promise<RequestContext> {
@@ -2679,8 +2778,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -2716,8 +2815,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -2748,8 +2847,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -2780,8 +2879,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -2819,8 +2918,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -2869,8 +2968,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -2919,8 +3018,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -2969,8 +3068,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -3002,7 +3101,7 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   Version: 9.0.0.cl or later    Creates a login session for a ThoughtSpot user with Basic authentication.  In Basic authentication method, REST clients log in to ThoughtSpot using `username` and `password` attributes. On a multi-tenant cluster with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org context.  A successful login returns a session cookie that can be used in your subsequent API requests.      
+     *   Version: 9.0.0.cl or later   Creates a login session for a ThoughtSpot user with Basic authentication.  In Basic authentication method, REST clients log in to ThoughtSpot using `username` and `password` attributes. On a multi-tenant cluster with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org context.  **Note**: If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. Contact ThoughtSpot Support for assistance.  A successful login returns a session cookie that can be used in your subsequent API requests.     
      * @param loginRequest 
      */
     public async login(loginRequest: LoginRequest, _options?: Configuration): Promise<RequestContext> {
@@ -3019,8 +3118,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -3062,11 +3161,111 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["bearerAuth"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     *  Parameterize fields in metadata objects.   Version: 10.9.0.cl or later   Allows parameterizing fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection the field type is always `CONNECTION_PROPERTY`. We use the field_name in this case to specify the exact property of a connection which needs to be parameterized.      
+     * @param parameterizeMetadataRequest 
+     */
+    public async parameterizeMetadata(parameterizeMetadataRequest: ParameterizeMetadataRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'parameterizeMetadataRequest' is not null or undefined
+        if (parameterizeMetadataRequest === null || parameterizeMetadataRequest === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "parameterizeMetadata", "parameterizeMetadataRequest");
+        }
+
+
+        // Path Params
+        const localVarPath = '/api/rest/2.0/metadata/parameterize';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
+      
+
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(parameterizeMetadataRequest, "ParameterizeMetadataRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["bearerAuth"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     *  Version: 10.9.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
+     * @param publishMetadataRequest 
+     */
+    public async publishMetadata(publishMetadataRequest: PublishMetadataRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'publishMetadataRequest' is not null or undefined
+        if (publishMetadataRequest === null || publishMetadataRequest === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "publishMetadata", "publishMetadataRequest");
+        }
+
+
+        // Path Params
+        const localVarPath = '/api/rest/2.0/security/metadata/publish';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
+      
+
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(publishMetadataRequest, "PublishMetadataRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
@@ -3101,8 +3300,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -3151,8 +3350,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -3209,8 +3408,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -3259,8 +3458,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -3309,8 +3508,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -3359,8 +3558,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -3409,8 +3608,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -3459,8 +3658,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -3509,8 +3708,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -3542,7 +3741,7 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.   You can also define sorting options to sort the data retrieved in the API response. - To get discoverable objects when linientmodel is enabled you can use `include_discoverable_objects` as true else false. Default value is true.  **NOTE**: The following parameters support pagination of metadata records:  - `tag_identifiers` - `type` - `created_by_user_identifiers` - `modified_by_user_identifiers` - `owned_by_user_identifiers` - `exclude_objects` - `include_auto_created_objects` - `favorite_object_options` If you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.      
+     *   Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.   You can also define sorting options to sort the data retrieved in the API response. - To get discoverable objects when linientmodel is enabled you can use `include_discoverable_objects` as true else false. Default value is true. - For liveboard metadata type, to get the newer format, set the `liveboard_response_format` as V2. Default value is V1.  **NOTE**: The following parameters support pagination of metadata records:  - `tag_identifiers` - `type` - `created_by_user_identifiers` - `modified_by_user_identifiers` - `owned_by_user_identifiers` - `exclude_objects` - `include_auto_created_objects` - `favorite_object_options` If you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.      
      * @param searchMetadataRequest 
      */
     public async searchMetadata(searchMetadataRequest: SearchMetadataRequest, _options?: Configuration): Promise<RequestContext> {
@@ -3559,8 +3758,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -3609,8 +3808,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -3659,8 +3858,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -3709,8 +3908,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -3759,8 +3958,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -3809,8 +4008,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -3859,8 +4058,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -3872,6 +4071,56 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
             ObjectSerializer.serialize(searchUsersRequest, "SearchUsersRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["bearerAuth"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     *  Search variables   Version: 10.9.0.cl or later   Allows searching for variables in ThoughtSpot.  Requires ADMINISTRATION role.  The API endpoint supports searching variables by: * Variable identifier (ID or name) * Variable type * Name pattern (case-insensitive, supports % for wildcard)  The search results can be formatted in three ways: * METADATA_ONLY - Returns only variable metadata (default) * METADATA_AND_VALUES - Returns variable metadata and values * EDITABLE_METADATA_AND_VALUES - Returns only editable variable metadata and values       
+     * @param searchVariablesRequest 
+     */
+    public async searchVariables(searchVariablesRequest: SearchVariablesRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'searchVariablesRequest' is not null or undefined
+        if (searchVariablesRequest === null || searchVariablesRequest === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "searchVariables", "searchVariablesRequest");
+        }
+
+
+        // Path Params
+        const localVarPath = '/api/rest/2.0/template/variables/search';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
+      
+
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(searchVariablesRequest, "SearchVariablesRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -3917,8 +4166,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -3967,8 +4216,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -4017,8 +4266,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -4067,8 +4316,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -4080,6 +4329,106 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
             ObjectSerializer.serialize(assignTagRequest, "AssignTagRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["bearerAuth"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     *  Remove parameterization from fields in metadata objects.   Version: 10.9.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection the field type is always `CONNECTION_PROPERTY`. We use the field_name in this case to specify the exact property of a connection which needs to be unparameterized.      
+     * @param unparameterizeMetadataRequest 
+     */
+    public async unparameterizeMetadata(unparameterizeMetadataRequest: UnparameterizeMetadataRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'unparameterizeMetadataRequest' is not null or undefined
+        if (unparameterizeMetadataRequest === null || unparameterizeMetadataRequest === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "unparameterizeMetadata", "unparameterizeMetadataRequest");
+        }
+
+
+        // Path Params
+        const localVarPath = '/api/rest/2.0/metadata/unparameterize';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
+      
+
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(unparameterizeMetadataRequest, "UnparameterizeMetadataRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["bearerAuth"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     *  Version: 10.9.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
+     * @param unpublishMetadataRequest 
+     */
+    public async unpublishMetadata(unpublishMetadataRequest: UnpublishMetadataRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'unpublishMetadataRequest' is not null or undefined
+        if (unpublishMetadataRequest === null || unpublishMetadataRequest === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "unpublishMetadata", "unpublishMetadataRequest");
+        }
+
+
+        // Path Params
+        const localVarPath = '/api/rest/2.0/security/metadata/unpublish';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
+      
+
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(unpublishMetadataRequest, "UnpublishMetadataRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -4117,8 +4466,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -4167,8 +4516,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -4225,8 +4574,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -4283,8 +4632,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -4333,8 +4682,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -4383,8 +4732,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -4433,8 +4782,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -4491,8 +4840,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -4549,8 +4898,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -4607,8 +4956,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -4657,8 +5006,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -4715,8 +5064,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -4773,8 +5122,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -4831,8 +5180,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -4844,6 +5193,114 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
             ObjectSerializer.serialize(updateUserGroupRequest, "UpdateUserGroupRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["bearerAuth"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     *  Update a variable\'s properties   Version: 10.9.0.cl or later   Allows updating a variable\'s properties in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows updating: * The variable name * The variable values  When updating variable values, you need to specify: * The operation to perform (ADD, REPLACE, REMOVE) * The new values to add/replace/remove  When the operation is ADD, a value any pre-existing value with the same set of constraints will be replaced. When the operation is REPLACE, all values of the variable are replaced with the values specified. When the operation is REMOVE, all values with the given set of conditions are removed.      
+     * @param identifier Unique id or name of the variable to update.
+     * @param updateVariableRequest 
+     */
+    public async updateVariable(identifier: string, updateVariableRequest: UpdateVariableRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'identifier' is not null or undefined
+        if (identifier === null || identifier === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "updateVariable", "identifier");
+        }
+
+
+        // verify required parameter 'updateVariableRequest' is not null or undefined
+        if (updateVariableRequest === null || updateVariableRequest === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "updateVariable", "updateVariableRequest");
+        }
+
+
+        // Path Params
+        const localVarPath = '/api/rest/2.0/template/variables/{identifier}/update'
+            .replace('{' + 'identifier' + '}', encodeURIComponent(String(identifier)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
+      
+
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(updateVariableRequest, "UpdateVariableRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["bearerAuth"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     *  Update values for multiple variables   Version: 10.9.0.cl or later   Allows updating values for multiple variables in ThoughtSpot.  Requires ADMINISTRATION role.  The API endpoint allows: * Adding new values to variables * Replacing existing values * Deleting values from variables  When updating variable values, you need to specify: * The variable identifiers * The values to add/replace/remove for each variable * The operation to perform (ADD, REPLACE, REMOVE)  Behaviour based on operation type: * ADD - Adds values to the variable. Any pre-existing values with the same conditions are replaced. * REPLACE - Replaces all values of a given org with the current set of values. * REMOVE - Removes any values which match the set of conditions of the variables.      
+     * @param updateVariableValuesRequest 
+     */
+    public async updateVariableValues(updateVariableValuesRequest: UpdateVariableValuesRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'updateVariableValuesRequest' is not null or undefined
+        if (updateVariableValuesRequest === null || updateVariableValuesRequest === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "updateVariableValues", "updateVariableValuesRequest");
+        }
+
+
+        // Path Params
+        const localVarPath = '/api/rest/2.0/template/variables/update';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
+      
+
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(updateVariableValuesRequest, "UpdateVariableValuesRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -4881,8 +5338,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -4931,8 +5388,8 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-ts-client")
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
       
 
 
@@ -5928,6 +6385,63 @@ export class ThoughtSpotRestApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
+     * @params response Response returned by the server for a request to createVariable
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async createVariable(response: ResponseContext): Promise<Variable > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: Variable = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Variable", ""
+            ) as Variable;
+            return body;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Invalid request.", body, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
+        }
+        if (isCodeInRange("500", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: Variable = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Variable", ""
+            ) as Variable;
+            return body;
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
      * @params response Response returned by the server for a request to dbtConnection
      * @throws ApiException if the response code was not in [200, 299]
      */
@@ -6800,6 +7314,59 @@ export class ThoughtSpotRestApiResponseProcessor {
      * @throws ApiException if the response code was not in [200, 299]
      */
      public async deleteUserGroup(response: ResponseContext): Promise<void > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Invalid request.", body, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
+        }
+        if (isCodeInRange("500", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
+            return body;
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to deleteVariable
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async deleteVariable(response: ResponseContext): Promise<void > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
             return;
@@ -8538,6 +9105,112 @@ export class ThoughtSpotRestApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
+     * @params response Response returned by the server for a request to parameterizeMetadata
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async parameterizeMetadata(response: ResponseContext): Promise<void > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Invalid request.", body, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
+        }
+        if (isCodeInRange("500", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
+            return body;
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to publishMetadata
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async publishMetadata(response: ResponseContext): Promise<void > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Invalid request.", body, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
+        }
+        if (isCodeInRange("500", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
+            return body;
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
      * @params response Response returned by the server for a request to queryGetDecomposedQuery
      * @throws ApiException if the response code was not in [200, 299]
      */
@@ -9435,6 +10108,63 @@ export class ThoughtSpotRestApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
+     * @params response Response returned by the server for a request to searchVariables
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async searchVariables(response: ResponseContext): Promise<Array<Variable> > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: Array<Variable> = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Array<Variable>", ""
+            ) as Array<Variable>;
+            return body;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Invalid request.", body, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
+        }
+        if (isCodeInRange("500", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: Array<Variable> = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Array<Variable>", ""
+            ) as Array<Variable>;
+            return body;
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
      * @params response Response returned by the server for a request to sendMessage
      * @throws ApiException if the response code was not in [200, 299]
      */
@@ -9592,6 +10322,112 @@ export class ThoughtSpotRestApiResponseProcessor {
      * @throws ApiException if the response code was not in [200, 299]
      */
      public async unassignTag(response: ResponseContext): Promise<void > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Invalid request.", body, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
+        }
+        if (isCodeInRange("500", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
+            return body;
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to unparameterizeMetadata
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async unparameterizeMetadata(response: ResponseContext): Promise<void > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Invalid request.", body, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
+        }
+        if (isCodeInRange("500", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
+            return body;
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to unpublishMetadata
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async unpublishMetadata(response: ResponseContext): Promise<void > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
             return;
@@ -10346,6 +11182,112 @@ export class ThoughtSpotRestApiResponseProcessor {
      * @throws ApiException if the response code was not in [200, 299]
      */
      public async updateUserGroup(response: ResponseContext): Promise<void > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Invalid request.", body, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
+        }
+        if (isCodeInRange("500", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
+            return body;
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to updateVariable
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async updateVariable(response: ResponseContext): Promise<void > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Invalid request.", body, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
+        }
+        if (isCodeInRange("500", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
+            return body;
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to updateVariableValues
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async updateVariableValues(response: ResponseContext): Promise<void > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
             return;
