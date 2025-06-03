@@ -34,4 +34,22 @@ public class PngOptionsInputTest {
     public void personalisedViewIdTest() {
         // TODO: test personalisedViewId
     }
+
+    /** Test the property 'imageResolution' */
+    @Test
+    public void imageResolutionTest() {
+        // TODO: test imageResolution
+    }
+
+    /** Test the property 'imageScale' */
+    @Test
+    public void imageScaleTest() {
+        // TODO: test imageScale
+    }
+
+    /** Test the property 'includeHeader' */
+    @Test
+    public void includeHeaderTest() {
+        // TODO: test includeHeader
+    }
 }

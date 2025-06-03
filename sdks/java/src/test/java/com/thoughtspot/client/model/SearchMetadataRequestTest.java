@@ -148,4 +148,10 @@ public class SearchMetadataRequestTest {
     public void includeDiscoverableObjectsTest() {
         // TODO: test includeDiscoverableObjects
     }
+
+    /** Test the property 'showResolvedParameters' */
+    @Test
+    public void showResolvedParametersTest() {
+        // TODO: test showResolvedParameters
+    }
 }

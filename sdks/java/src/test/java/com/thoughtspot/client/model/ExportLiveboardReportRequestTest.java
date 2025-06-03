@@ -23,6 +23,18 @@ public class ExportLiveboardReportRequestTest {
         // TODO: test metadataIdentifier
     }
 
+    /** Test the property 'tabIdentifiers' */
+    @Test
+    public void tabIdentifiersTest() {
+        // TODO: test tabIdentifiers
+    }
+
+    /** Test the property 'personalisedViewIdentifier' */
+    @Test
+    public void personalisedViewIdentifierTest() {
+        // TODO: test personalisedViewIdentifier
+    }
+
     /** Test the property 'visualizationIdentifiers' */
     @Test
     public void visualizationIdentifiersTest() {
