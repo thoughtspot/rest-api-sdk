@@ -22,7 +22,8 @@ import javax.net.ssl.KeyManager;
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class ApiClientConfiguration {
     private static final String DEFAULT_BASE_PATH = "https://localhost:443";
-    private static final int DEFAULT_TIMEOUT_MILLIS = 10000;
+    private static final int DEFAULT_CONNECT_TIMEOUT_MILLIS = 60000;  // 1 minute
+    private static final int DEFAULT_READ_WRITE_TIMEOUT_MILLIS = 300000;  // 5 minutes
 
     private final String basePath;
     private final Supplier<String> bearerTokenSupplier;
@@ -38,20 +39,22 @@ public class ApiClientConfiguration {
 
     /**
      * Default constructor that initializes the configuration with default values.
-     * Sets base path to {@link #DEFAULT_BASE_PATH} and all timeouts to {@link #DEFAULT_TIMEOUT_MILLIS}.
+     * Sets base path to {@link #DEFAULT_BASE_PATH}, connect timeout to {@link #DEFAULT_CONNECT_TIMEOUT_MILLIS},
+     * and read/write timeouts to {@link #DEFAULT_READ_WRITE_TIMEOUT_MILLIS}.
      */
     public ApiClientConfiguration() {
-        this(DEFAULT_BASE_PATH);
+        this(DEFAULT_BASE_PATH, () -> (String) null, Collections.emptyMap(), Collections.emptyMap(), true, null, Collections.emptyList(), null, DEFAULT_CONNECT_TIMEOUT_MILLIS, DEFAULT_READ_WRITE_TIMEOUT_MILLIS, DEFAULT_READ_WRITE_TIMEOUT_MILLIS);
     }
 
     /**
      * Constructor that initializes the configuration with a specified base path.
-     * Sets all timeouts to {@link #DEFAULT_TIMEOUT_MILLIS}.
+     * Sets connect timeout to {@link #DEFAULT_CONNECT_TIMEOUT_MILLIS},
+     * and read/write timeouts to {@link #DEFAULT_READ_WRITE_TIMEOUT_MILLIS}.
      *
      * @param basePath The base path for the API.
      */
     public ApiClientConfiguration(String basePath) {
-        this(basePath, (String) null, Collections.emptyMap(), Collections.emptyMap(), true, null, Collections.emptyList(), null, DEFAULT_TIMEOUT_MILLIS, DEFAULT_TIMEOUT_MILLIS, DEFAULT_TIMEOUT_MILLIS);
+        this(basePath, () -> (String) null, Collections.emptyMap(), Collections.emptyMap(), true, null, Collections.emptyList(), null, DEFAULT_CONNECT_TIMEOUT_MILLIS, DEFAULT_READ_WRITE_TIMEOUT_MILLIS, DEFAULT_READ_WRITE_TIMEOUT_MILLIS);
     }
 
     /**
@@ -113,7 +116,7 @@ public class ApiClientConfiguration {
             final int readTimeoutMillis,
             final int writeTimeoutMillis
     ) {
-        this.basePath = basePath;
+        this.basePath = normalizeBasePath(basePath);
         this.bearerTokenSupplier = bearerTokenSupplier;
         this.defaultHeaderMap = defaultHeaderMap != null
                 ? Collections.unmodifiableMap(new HashMap<>(defaultHeaderMap))
@@ -130,6 +133,19 @@ public class ApiClientConfiguration {
         this.connectTimeoutMillis = connectTimeoutMillis;
         this.readTimeoutMillis = readTimeoutMillis;
         this.writeTimeoutMillis = writeTimeoutMillis;
+    }
+
+    /**
+     * Normalizes the base path by removing any trailing slashes.
+     *
+     * @param basePath The base path to normalize
+     * @return The normalized base path
+     */
+    private static String normalizeBasePath(String basePath) {
+        if (basePath == null) {
+            return DEFAULT_BASE_PATH;
+        }
+        return basePath.replaceAll("/+$", "");
     }
 
     /**
@@ -262,7 +278,8 @@ public class ApiClientConfiguration {
 
         /**
          * Default constructor that initializes the builder with default values.
-         * Sets base path to {@link #DEFAULT_BASE_PATH} and all timeouts to {@link #DEFAULT_TIMEOUT_MILLIS}.
+         * Sets base path to {@link #DEFAULT_BASE_PATH}, connect timeout to {@link #DEFAULT_CONNECT_TIMEOUT_MILLIS},
+         * and read/write timeouts to {@link #DEFAULT_READ_WRITE_TIMEOUT_MILLIS}.
          */
         public Builder() {
             this.basePath = DEFAULT_BASE_PATH;
@@ -272,9 +289,9 @@ public class ApiClientConfiguration {
             this.verifyingSsl = true;
             this.keyManagers = new ArrayList<>();
             this.downloadPath = null;
-            this.connectTimeoutMillis = DEFAULT_TIMEOUT_MILLIS;
-            this.readTimeoutMillis = DEFAULT_TIMEOUT_MILLIS;
-            this.writeTimeoutMillis = DEFAULT_TIMEOUT_MILLIS;
+            this.connectTimeoutMillis = DEFAULT_CONNECT_TIMEOUT_MILLIS;
+            this.readTimeoutMillis = DEFAULT_READ_WRITE_TIMEOUT_MILLIS;
+            this.writeTimeoutMillis = DEFAULT_READ_WRITE_TIMEOUT_MILLIS;
         }
 
         /**

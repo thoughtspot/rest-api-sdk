@@ -2,6 +2,8 @@
 
 Java client for ThoughtSpot's [v2 Rest APIs](https://developers.thoughtspot.com/docs/rest-api-v2).
 
+This SDK is compatible with Java 8 and above.
+
 ## Consuming
 
 ### Maven users
@@ -12,7 +14,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>io.github.thoughtspot</groupId>
   <artifactId>rest-api-sdk-lib</artifactId>
-  <version>2.13.0-beta</version>
+  <version>2.13.0-SNAPSHOT</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -27,7 +29,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "io.github.thoughtspot:rest-api-sdk-lib:2.13.0-beta"
+     implementation "io.github.thoughtspot:rest-api-sdk-lib:2.13.0-SNAPSHOT"
   }
 ```
 
@@ -47,15 +49,17 @@ import com.thoughtspot.client.model.Token;
 import com.thoughtspot.client.model.User;
 
 public class Example {
-  private static final String BASE_PATH = *CLUSTER_URL*;
+  private static final String BASE_PATH = *CLUSTER_URL*;  // https://your-cluster-url.thoughtspot.cloud
+  private static final String DOWNLOAD_PATH = "."  // path to download files
 
   public static void main(String[] args) {
     try {
         // Create configuration for the ThoughtSpot API client
         ApiClientConfiguration apiClientConfiguration = new ApiClientConfiguration.Builder()
                 .basePath(BASE_PATH)
-                .verifyingSsl(false) // Disable SSL verification for testing purposes
-                .readTimeoutMillis(30000) // Extended read timeout to 30 seconds
+                .verifyingSsl(false)  // Disable SSL verification for testing purposes
+                .readTimeoutMillis(600000)  // Extend read timeout to 10 minutes
+                .downloadPath(DOWNLOAD_PATH)  // Defaults to system download path if not specified
                 .build();
 
         // Create an instance of the ThoughtSpot API client
@@ -69,7 +73,7 @@ public class Example {
 
         // Update the API client configuration with the access token
         apiClientConfiguration = apiClientConfiguration.toBuilder()
-                .bearerTokenSupplier(response::getToken) // You can pass your own token supplier here
+                .bearerTokenSupplier(response::getToken)  // You can pass your own token supplier here
                 .build();
 
         // Apply the updated configuration to the ThoughtSpot API client
@@ -102,16 +106,6 @@ We recommend that you browse through the [api playground](https://try-everywhere
 ## Documentation for API Endpoints
 
 You can find the full documentation for all available API endpoints in the [ThoughtSpotRestApi](docs/ThoughtSpotRestApi.md) file.
-
-<a id="documentation-for-authorization"></a>
-## Authorization
-
-Authentication schemes defined for the APIs:
-<a id="bearerAuth"></a>
-### bearerAuth
-
-- **Type**: HTTP Bearer Token authentication
-
 
 ## Author
 

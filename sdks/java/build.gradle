@@ -4,7 +4,7 @@ apply plugin: 'java'
 apply plugin: 'com.diffplug.spotless'
 
 group = 'io.github.thoughtspot'
-version = '2.13.0-beta'
+version = '2.13.0-SNAPSHOT'
 
 buildscript {
     repositories {
@@ -98,11 +98,11 @@ if (hasProperty('target') && target == 'android') {
                 pom {
                     name = 'rest-api-sdk-lib'
                     description = 'ThoughtSpot Java Rest API SDK'
-                    url = 'https://github.com/thoughtspot/rest-api-sdk'
+                    url = 'https://github.com/thoughtspot/rest-api-sdk/tree/release/sdks/java'
 
                     scm {
                         connection = 'scm:git:git://github.com/thoughtspot/rest-api-sdk.git'
-                        developerConnection = 'scm:git:ssh://github.com/thoughtspot/rest-api-sdk'
+                        developerConnection = 'scm:git:ssh://git@github.com/thoughtspot/rest-api-sdk.git'
                         url = 'https://github.com/thoughtspot/rest-api-sdk'
                     }
 
