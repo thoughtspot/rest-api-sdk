@@ -21,6 +21,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**createTag**](ThoughtSpotRestApi.md#createTag) | **POST** /api/rest/2.0/tags/create |
 | [**createUser**](ThoughtSpotRestApi.md#createUser) | **POST** /api/rest/2.0/users/create |
 | [**createUserGroup**](ThoughtSpotRestApi.md#createUserGroup) | **POST** /api/rest/2.0/groups/create |
+| [**createVariable**](ThoughtSpotRestApi.md#createVariable) | **POST** /api/rest/2.0/template/variables/create |
 | [**dbtConnection**](ThoughtSpotRestApi.md#dbtConnection) | **POST** /api/rest/2.0/dbt/dbt-connection |
 | [**dbtGenerateSyncTml**](ThoughtSpotRestApi.md#dbtGenerateSyncTml) | **POST** /api/rest/2.0/dbt/generate-sync-tml |
 | [**dbtGenerateTml**](ThoughtSpotRestApi.md#dbtGenerateTml) | **POST** /api/rest/2.0/dbt/generate-tml |
@@ -38,6 +39,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**deleteTag**](ThoughtSpotRestApi.md#deleteTag) | **POST** /api/rest/2.0/tags/{tag_identifier}/delete |
 | [**deleteUser**](ThoughtSpotRestApi.md#deleteUser) | **POST** /api/rest/2.0/users/{user_identifier}/delete |
 | [**deleteUserGroup**](ThoughtSpotRestApi.md#deleteUserGroup) | **POST** /api/rest/2.0/groups/{group_identifier}/delete |
+| [**deleteVariable**](ThoughtSpotRestApi.md#deleteVariable) | **POST** /api/rest/2.0/template/variables/{identifier}/delete |
 | [**deployCommit**](ThoughtSpotRestApi.md#deployCommit) | **POST** /api/rest/2.0/vcs/git/commits/deploy |
 | [**downloadConnectionMetadataChanges**](ThoughtSpotRestApi.md#downloadConnectionMetadataChanges) | **POST** /api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier} |
 | [**exportAnswerReport**](ThoughtSpotRestApi.md#exportAnswerReport) | **POST** /api/rest/2.0/report/answer |
@@ -68,6 +70,8 @@ All URIs are relative to *CLUSTER_URL*
 | [**importUsers**](ThoughtSpotRestApi.md#importUsers) | **POST** /api/rest/2.0/users/import |
 | [**login**](ThoughtSpotRestApi.md#login) | **POST** /api/rest/2.0/auth/session/login |
 | [**logout**](ThoughtSpotRestApi.md#logout) | **POST** /api/rest/2.0/auth/session/logout |
+| [**parameterizeMetadata**](ThoughtSpotRestApi.md#parameterizeMetadata) | **POST** /api/rest/2.0/metadata/parameterize |
+| [**publishMetadata**](ThoughtSpotRestApi.md#publishMetadata) | **POST** /api/rest/2.0/security/metadata/publish |
 | [**queryGetDecomposedQuery**](ThoughtSpotRestApi.md#queryGetDecomposedQuery) | **POST** /api/rest/2.0/ai/analytical-questions |
 | [**resetUserPassword**](ThoughtSpotRestApi.md#resetUserPassword) | **POST** /api/rest/2.0/users/reset-password |
 | [**revertCommit**](ThoughtSpotRestApi.md#revertCommit) | **POST** /api/rest/2.0/vcs/git/commits/{commit_id}/revert |
@@ -84,10 +88,13 @@ All URIs are relative to *CLUSTER_URL*
 | [**searchTags**](ThoughtSpotRestApi.md#searchTags) | **POST** /api/rest/2.0/tags/search |
 | [**searchUserGroups**](ThoughtSpotRestApi.md#searchUserGroups) | **POST** /api/rest/2.0/groups/search |
 | [**searchUsers**](ThoughtSpotRestApi.md#searchUsers) | **POST** /api/rest/2.0/users/search |
+| [**searchVariables**](ThoughtSpotRestApi.md#searchVariables) | **POST** /api/rest/2.0/template/variables/search |
 | [**sendMessage**](ThoughtSpotRestApi.md#sendMessage) | **POST** /api/rest/2.0/ai/conversation/{conversation_identifier}/converse |
 | [**shareMetadata**](ThoughtSpotRestApi.md#shareMetadata) | **POST** /api/rest/2.0/security/metadata/share |
 | [**singleAnswer**](ThoughtSpotRestApi.md#singleAnswer) | **POST** /api/rest/2.0/ai/answer/create |
 | [**unassignTag**](ThoughtSpotRestApi.md#unassignTag) | **POST** /api/rest/2.0/tags/unassign |
+| [**unparameterizeMetadata**](ThoughtSpotRestApi.md#unparameterizeMetadata) | **POST** /api/rest/2.0/metadata/unparameterize |
+| [**unpublishMetadata**](ThoughtSpotRestApi.md#unpublishMetadata) | **POST** /api/rest/2.0/security/metadata/unpublish |
 | [**updateConfig**](ThoughtSpotRestApi.md#updateConfig) | **POST** /api/rest/2.0/vcs/git/config/update |
 | [**updateConnection**](ThoughtSpotRestApi.md#updateConnection) | **POST** /api/rest/2.0/connection/update |
 | [**updateConnectionV2**](ThoughtSpotRestApi.md#updateConnectionV2) | **POST** /api/rest/2.0/connections/{connection_identifier}/update |
@@ -102,6 +109,8 @@ All URIs are relative to *CLUSTER_URL*
 | [**updateTag**](ThoughtSpotRestApi.md#updateTag) | **POST** /api/rest/2.0/tags/{tag_identifier}/update |
 | [**updateUser**](ThoughtSpotRestApi.md#updateUser) | **POST** /api/rest/2.0/users/{user_identifier}/update |
 | [**updateUserGroup**](ThoughtSpotRestApi.md#updateUserGroup) | **POST** /api/rest/2.0/groups/{group_identifier}/update |
+| [**updateVariable**](ThoughtSpotRestApi.md#updateVariable) | **POST** /api/rest/2.0/template/variables/{identifier}/update |
+| [**updateVariableValues**](ThoughtSpotRestApi.md#updateVariableValues) | **POST** /api/rest/2.0/template/variables/update |
 | [**validateMerge**](ThoughtSpotRestApi.md#validateMerge) | **POST** /api/rest/2.0/vcs/git/branches/validate |
 | [**validateToken**](ThoughtSpotRestApi.md#validateToken) | **POST** /api/rest/2.0/auth/token/validate |
 
@@ -365,7 +374,7 @@ null (empty response body)
 
 
 
-  Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the &#x60;CAN_SETUP_VERSION_CONTROL&#x60; (**Can set up version control**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has &#x60;repo&#x60; scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid&#x3D;git-integration).  **Note**: ThoughtSpot supports only GitHub / itHub Enterprise for CI/CD.      
+  Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the &#x60;CAN_MANAGE_VERSION_CONTROL&#x60; (**Can toggle version control for objects**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has &#x60;repo&#x60; scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid&#x3D;git-integration).  **Note**: ThoughtSpot supports only GitHub / GitHub Enterprise for CI/CD.      
 
 ### Parameters
 
@@ -718,6 +727,42 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
+<a id="createVariable"></a>
+# **createVariable**
+> Variable createVariable(createVariableRequest)
+
+
+
+ Create a variable which can be used for parameterizing metadata objects   Version: 10.9.0.cl or later   Allows creating a variable which can be used for parameterizing metadata objects in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint supports the following types of variables: * CONNECTION_PROPERTY - For connection properties * TABLE_MAPPING - For table mappings * CONNECTION_PROPERTY_PER_PRINCIPAL - For connection properties per principal. In order to use this please contact support to enable this.  When creating a variable, you need to specify: * The variable type * A unique name for the variable * Whether the variable contains sensitive values (defaults to false) * The variable values (optional)  The operation will fail if: * The user lacks required permissions * The variable name already exists * The variable type is invalid * The variable values are invalid for the specified type       
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **createVariableRequest** | [**CreateVariableRequest**](CreateVariableRequest.md)
+
+### Return type
+
+[**Variable**](Variable.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Create variable is successful. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
 <a id="dbtConnection"></a>
 # **dbtConnection**
 > Object dbtConnection(dbtConnectionRequest)
@@ -901,7 +946,7 @@ This endpoint does not need any parameter.
 
 
 
-  Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the &#x60;CAN_SETUP_VERSION_CONTROL&#x60; (**Can set up version control**) privilege.      
+  Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the &#x60;CAN_MANAGE_VERSION_CONTROL&#x60; (**Can toggle version control for objects**) privilege.      
 
 ### Parameters
 
@@ -1322,6 +1367,42 @@ null (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | User group successfully deleted. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="deleteVariable"></a>
+# **deleteVariable**
+> deleteVariable(identifier)
+
+
+
+ Delete a variable   Version: 10.9.0.cl or later   Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn&#39;t exist * The variable is being used by other objects      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **identifier** | **String**
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Deleting the variable is successful. |  -  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
@@ -2389,6 +2470,78 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
+<a id="parameterizeMetadata"></a>
+# **parameterizeMetadata**
+> parameterizeMetadata(parameterizeMetadataRequest)
+
+
+
+ Parameterize fields in metadata objects.   Version: 10.9.0.cl or later   Allows parameterizing fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections  For a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName * tableName  For a Connection the field type is always &#x60;CONNECTION_PROPERTY&#x60;. We use the field_name in this case to specify the exact property of a connection which needs to be parameterized.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **parameterizeMetadataRequest** | [**ParameterizeMetadataRequest**](ParameterizeMetadataRequest.md)
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Parameterize successful. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="publishMetadata"></a>
+# **publishMetadata**
+> publishMetadata(publishMetadataRequest)
+
+
+
+ Version: 10.9.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it&#39;s dependencies to the org admins of the orgs to which it is being published.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **publishMetadataRequest** | [**PublishMetadataRequest**](PublishMetadataRequest.md)
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Publishing metadata objects is successful. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
 <a id="queryGetDecomposedQuery"></a>
 # **queryGetDecomposedQuery**
 > EurekaDecomposeQueryResponse queryGetDecomposedQuery(queryGetDecomposedQueryRequest)
@@ -2575,7 +2728,7 @@ null (empty response body)
 
 
 
-  Version: 9.2.0.cl or later   Gets Git repository connections configured on the ThoughtSpot instance.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the &#x60;CAN_SETUP_VERSION_CONTROL&#x60; (**Can set up version control**) privilege.      
+  Version: 9.2.0.cl or later   Gets Git repository connections configured on the ThoughtSpot instance.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the &#x60;CAN_MANAGE_VERSION_CONTROL&#x60; (**Can toggle version control for objects**) privilege.      
 
 ### Parameters
 
@@ -2719,7 +2872,7 @@ null (empty response body)
 
 
 
-  Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the &#x60;type&#x60; attribute. For example, to fetch a Worksheet, set the type as &#x60;LOGICAL_TABLE&#x60;. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like &#x60;include_auto_created_objects&#x60;, &#x60;include_dependent_objects&#x60;, &#x60;include_headers&#x60;, &#x60;include_incomplete_objects&#x60;, and so on.   You can also define sorting options to sort the data retrieved in the API response. - To get discoverable objects when linientmodel is enabled you can use &#x60;include_discoverable_objects&#x60; as true else false. Default value is true.  **NOTE**: The following parameters support pagination of metadata records:  - &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;created_by_user_identifiers&#x60; - &#x60;modified_by_user_identifiers&#x60; - &#x60;owned_by_user_identifiers&#x60; - &#x60;exclude_objects&#x60; - &#x60;include_auto_created_objects&#x60; - &#x60;favorite_object_options&#x60; If you are using other parameters to search metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60;.      
+  Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the &#x60;type&#x60; attribute. For example, to fetch a Worksheet, set the type as &#x60;LOGICAL_TABLE&#x60;. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like &#x60;include_auto_created_objects&#x60;, &#x60;include_dependent_objects&#x60;, &#x60;include_headers&#x60;, &#x60;include_incomplete_objects&#x60;, and so on.   You can also define sorting options to sort the data retrieved in the API response. - To get discoverable objects when linientmodel is enabled you can use &#x60;include_discoverable_objects&#x60; as true else false. Default value is true. - For liveboard metadata type, to get the newer format, set the &#x60;liveboard_response_format&#x60; as V2. Default value is V1.  **NOTE**: The following parameters support pagination of metadata records:  - &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;created_by_user_identifiers&#x60; - &#x60;modified_by_user_identifiers&#x60; - &#x60;owned_by_user_identifiers&#x60; - &#x60;exclude_objects&#x60; - &#x60;include_auto_created_objects&#x60; - &#x60;favorite_object_options&#x60; If you are using other parameters to search metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60;.      
 
 ### Parameters
 
@@ -2965,6 +3118,42 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
+<a id="searchVariables"></a>
+# **searchVariables**
+> List&lt;Variable&gt; searchVariables(searchVariablesRequest)
+
+
+
+ Search variables   Version: 10.9.0.cl or later   Allows searching for variables in ThoughtSpot.  Requires ADMINISTRATION role.  The API endpoint supports searching variables by: * Variable identifier (ID or name) * Variable type * Name pattern (case-insensitive, supports % for wildcard)  The search results can be formatted in three ways: * METADATA_ONLY - Returns only variable metadata (default) * METADATA_AND_VALUES - Returns variable metadata and values * EDITABLE_METADATA_AND_VALUES - Returns only editable variable metadata and values       
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **searchVariablesRequest** | [**SearchVariablesRequest**](SearchVariablesRequest.md)
+
+### Return type
+
+[**List&lt;Variable&gt;**](Variable.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | List of variables is successful. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
 <a id="sendMessage"></a>
 # **sendMessage**
 > List&lt;ResponseMessage&gt; sendMessage(conversationIdentifier, sendMessageRequest)
@@ -3108,13 +3297,85 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
+<a id="unparameterizeMetadata"></a>
+# **unparameterizeMetadata**
+> unparameterizeMetadata(unparameterizeMetadataRequest)
+
+
+
+ Remove parameterization from fields in metadata objects.   Version: 10.9.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections  For a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName * tableName  For a Connection the field type is always &#x60;CONNECTION_PROPERTY&#x60;. We use the field_name in this case to specify the exact property of a connection which needs to be unparameterized.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **unparameterizeMetadataRequest** | [**UnparameterizeMetadataRequest**](UnparameterizeMetadataRequest.md)
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Successfuly removed parameters. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="unpublishMetadata"></a>
+# **unpublishMetadata**
+> unpublishMetadata(unpublishMetadataRequest)
+
+
+
+ Version: 10.9.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting &#x60;force&#x60; to true - this will break all dependent objects in the unpublished organizations      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **unpublishMetadataRequest** | [**UnpublishMetadataRequest**](UnpublishMetadataRequest.md)
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Unpublishing metadata objects is successful. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
 <a id="updateConfig"></a>
 # **updateConfig**
 > RepoConfigObject updateConfig(updateConfigRequest)
 
 
 
-  Version: 9.2.0.cl or later   Updates Git repository configuration settings.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the &#x60;CAN_SETUP_VERSION_CONTROL&#x60; (**Can set up version control**) privilege.      
+  Version: 9.2.0.cl or later   Updates Git repository configuration settings.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the &#x60;CAN_MANAGE_VERSION_CONTROL&#x60; (**Can toggle version control for objects**) privilege.      
 
 ### Parameters
 
@@ -3186,7 +3447,7 @@ null (empty response body)
 
 
 
-  Version: 10.4.0.cl or later   Updates a connection object.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is required.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in &#x60;data_warehouse_config&#x60;.    b. Set &#x60;validate&#x60; to &#x60;true&#x60;.    * A JSON map of configuration attributes, database details, and table properties in &#x60;data_warehouse_config&#x60; as shown in the following example:     &#x60;&#x60;&#x60;    {       \&quot;configuration\&quot;:{          \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,          \&quot;user\&quot;:\&quot;tsadmin\&quot;,          \&quot;password\&quot;:\&quot;TestConn123\&quot;,          \&quot;role\&quot;:\&quot;sysadmin\&quot;,          \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot;       },       \&quot;externalDatabases\&quot;:[          {             \&quot;name\&quot;:\&quot;AllDatatypes\&quot;,             \&quot;isAutoCreated\&quot;:false,             \&quot;schemas\&quot;:[                {                   \&quot;name\&quot;:\&quot;alldatatypes\&quot;,                   \&quot;tables\&quot;:[                      {                         \&quot;name\&quot;:\&quot;allDatatypes\&quot;,                         \&quot;type\&quot;:\&quot;TABLE\&quot;,                         \&quot;description\&quot;:\&quot;\&quot;,                         \&quot;selected\&quot;:true,                         \&quot;linked\&quot;:true,                         \&quot;columns\&quot;:[                            {                               \&quot;name\&quot;:\&quot;CNUMBER\&quot;,                               \&quot;type\&quot;:\&quot;INT64\&quot;,                               \&quot;canImport\&quot;:true,                               \&quot;selected\&quot;:true,                               \&quot;isLinkedActive\&quot;:true,                               \&quot;isImported\&quot;:false,                               \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,                               \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,                               \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot;                            },                            {                               \&quot;name\&quot;:\&quot;CDECIMAL\&quot;,                               \&quot;type\&quot;:\&quot;INT64\&quot;,                               \&quot;canImport\&quot;:true,                               \&quot;selected\&quot;:true,                               \&quot;isLinkedActive\&quot;:true,                               \&quot;isImported\&quot;:false,                               \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,                               \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,                               \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot;                            }                         ]                      }                   ]                }             ]          }       ]    }    &#x60;&#x60;&#x60;  3. If you are updating a configuration attribute, connection name, or description, you can set &#x60;validate&#x60; to &#x60;false&#x60;. * A JSON map of configuration attributes in &#x60;data_warehouse_config&#x60;. The following example shows the configuration attributes for a Snowflake connection:  &#x60;&#x60;&#x60;  {     \&quot;configuration\&quot;:{        \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,        \&quot;user\&quot;:\&quot;tsadmin\&quot;,        \&quot;password\&quot;:\&quot;TestConn123\&quot;,        \&quot;role\&quot;:\&quot;sysadmin\&quot;,        \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot;     },     \&quot;externalDatabases\&quot;:[      ]  }  &#x60;&#x60;&#x60;      
+  Version: 10.4.0.cl or later   Updates a connection object.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is required.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in &#x60;data_warehouse_config&#x60;.    b. Set &#x60;validate&#x60; to &#x60;true&#x60;. 3. If you are updating a configuration attribute, connection name, or description, you can set &#x60;validate&#x60; to &#x60;false&#x60;.      
 
 ### Parameters
 
@@ -3615,6 +3876,79 @@ null (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | User group successfully updated. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="updateVariable"></a>
+# **updateVariable**
+> updateVariable(identifier, updateVariableRequest)
+
+
+
+ Update a variable&#39;s properties   Version: 10.9.0.cl or later   Allows updating a variable&#39;s properties in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows updating: * The variable name * The variable values  When updating variable values, you need to specify: * The operation to perform (ADD, REPLACE, REMOVE) * The new values to add/replace/remove  When the operation is ADD, a value any pre-existing value with the same set of constraints will be replaced. When the operation is REPLACE, all values of the variable are replaced with the values specified. When the operation is REMOVE, all values with the given set of conditions are removed.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **identifier** | **String**
+| **updateVariableRequest** | [**UpdateVariableRequest**](UpdateVariableRequest.md)
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Updating the variable is successful. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="updateVariableValues"></a>
+# **updateVariableValues**
+> updateVariableValues(updateVariableValuesRequest)
+
+
+
+ Update values for multiple variables   Version: 10.9.0.cl or later   Allows updating values for multiple variables in ThoughtSpot.  Requires ADMINISTRATION role.  The API endpoint allows: * Adding new values to variables * Replacing existing values * Deleting values from variables  When updating variable values, you need to specify: * The variable identifiers * The values to add/replace/remove for each variable * The operation to perform (ADD, REPLACE, REMOVE)  Behaviour based on operation type: * ADD - Adds values to the variable. Any pre-existing values with the same conditions are replaced. * REPLACE - Replaces all values of a given org with the current set of values. * REMOVE - Removes any values which match the set of conditions of the variables.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **updateVariableValuesRequest** | [**UpdateVariableValuesRequest**](UpdateVariableValuesRequest.md)
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Updating variable values is successful. |  -  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
