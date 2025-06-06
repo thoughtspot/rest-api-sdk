@@ -10143,7 +10143,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "$ref": "#/components/schemas/SystemOverrideInfo"
                 }
               }
             }
@@ -14026,6 +14026,15 @@
         "properties": {
           "onboarding_content_url": {
             "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "SystemOverrideInfo": {
+        "type": "object",
+        "properties": {
+          "config_override_info": {
+            "type": "object",
             "nullable": true
           }
         }
