@@ -755,7 +755,7 @@ type Mutation {
   ): Void
 
   """
-  To programmatically create an org in the ThoughtSpot system use this API endpoint.
+  To programmatically create a tag in the ThoughtSpot system, use this API endpoint.
   """
   createTag(
     """Name of the tag."""
