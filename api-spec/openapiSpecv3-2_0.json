@@ -16436,13 +16436,13 @@
       "VariableValue": {
         "type": "object",
         "required": [
-          "value",
           "org_identifier"
         ],
         "properties": {
           "value": {
             "type": "string",
-            "description": "The value of the variable"
+            "description": "The value of the variable",
+            "nullable": true
           },
           "org_identifier": {
             "type": "string",
