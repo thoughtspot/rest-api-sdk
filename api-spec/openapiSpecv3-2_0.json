@@ -70,6 +70,14 @@
       "description": "Roles for version 9.6.0.cl"
     },
     {
+      "name": "10.10.0.cl",
+      "id": "10.10.0.cl",
+      "tags": [
+        "10.10.0.cl"
+      ],
+      "description": "Roles for version 10.10.0.cl"
+    },
+    {
       "name": "10.6.0.cl",
       "id": "10.6.0.cl",
       "tags": [
@@ -3521,6 +3529,236 @@
         }
       }
     },
+    "/api/rest/2.0/customization/email": {
+      "post": {
+        "operationId": "createEmailCustomization",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.10.0.cl or later</span>\n\nCreates a custom configuration for the email customization\n\n#### Pre-requisites\n\nRequires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `_Has developer privilege` privilege is required.\nComs should be enabled on the cluster.\n\n#### Usage guidelines\n\nTo create a custom confuguration:\n\n1. Pass these parameters in your API request.\n\n- A JSON map of configuration attributes `template_properties`. The following example shows the configuration attribures for a csutom configuration:\n\n```\n{\n    {\n    \"logoUrl\": \"<logo_url>\",\n    \"homeUrl\": \"<home_url>\",\n    \"productName\": \"<Company Name in the Mail>\",\n    \"footerAddress\": \"<address to be visible in the footer>\",\n    \"ctaButtonBgColor\": \"#444DEA\",\n    \"ctaTextFontColor\": \"#FFFFFF\",\n    \"primaryBgColor\": \"#D3DEF0\",\n    \"hideMobileAppNudge\": <true/false>,\n    \"hideTsVocabularyDefinitions\": <true/false>e,\n    \"hideProductName\": <true/false>,\n    \"hideFooterPhone\": <true/false>,\n    \"hideFooterAddress\": <true/false>,\n    \"hidePrivacyPolicy\": <true/false>,\n    \"hideManageNotification\": <true/false>,\n    \"fontfamily\": \"<to maintain a single font in the entire email>\"\n  }\n}\n```\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Email Customisation",
+          "10.10.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "template_properties": {
+                    "description": "Email customization configuration as key value pair",
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "template_properties"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateEmailCustomizationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/customization/email/{template_identifier}/delete": {
+      "post": {
+        "operationId": "deleteEmailCustomization",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.10.0.cl or later</span>\n\nDeletes the configuration for the email customization.\n\n#### Pre-requisites\n\nRequires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `_Has developer privilege` privilege is required.\nComs should be enabled on the cluster.\n\n#### Usage guidelines\n\nDeletes the configuration available for the cluster/org. Pass the `template_identifier` in the API request.\n\nNote: `template_identifier` can be fetched from search API request.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Email Customisation",
+          "10.10.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "template_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the email customization."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Email Customization configuration successfully deleted."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/customization/email/search": {
+      "post": {
+        "operationId": "searchEmailCustomization",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.10.0.cl or later</span>\n\nSearch the email customization configuration if any set for the ThoughtSpot system.\n\n#### Pre-requisites\n\nRequires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `_Has developer privilege` privilege is required.\nComs should be enabled on the cluster.\n\n#### Usage guidelines\n\nTo get the list of configurations set in the cluster/org.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Email Customisation",
+          "10.10.0.cl"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CreateEmailCustomizationResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/customization/email/validate": {
+      "post": {
+        "operationId": "validateEmailCustomization",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.10.0.cl or later</span>\n\nValidates the email customization configuration if any set for the ThoughtSpot system.\n\n#### Pre-requisites\n\nRequires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `_Has developer privilege` privilege is required.\nComs should be enabled on the cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Email Customisation",
+          "10.10.0.cl"
+        ],
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Triggered test email for customization configuration"
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/groups/create": {
       "post": {
         "operationId": "createUserGroup",
@@ -5554,7 +5792,7 @@
     "/api/rest/2.0/metadata/search": {
       "post": {
         "operationId": "searchMetadata",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets a list of metadata objects available on the ThoughtSpot system.\n\nThis API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.\n\n#### Usage guidelines\n\n- To get all metadata objects, send the API request without any attributes.\n- To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`.\n- To get a specific metadata object, specify the GUID.\n- To customize your search and filter the API response, you can use several parameters.\n  You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.\n  You can also define sorting options to sort the data retrieved in the API response.\n- To get discoverable objects when linientmodel is enabled you can use `include_discoverable_objects` as true else false. Default value is true.\n\n**NOTE**: The following parameters support pagination of metadata records:\n\n- `tag_identifiers`\n- `type`\n- `created_by_user_identifiers`\n- `modified_by_user_identifiers`\n- `owned_by_user_identifiers`\n- `exclude_objects`\n- `include_auto_created_objects`\n- `favorite_object_options`\nIf you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets a list of metadata objects available on the ThoughtSpot system.\n\nThis API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.\n\n#### Usage guidelines\n\n- To get all metadata objects, send the API request without any attributes.\n- To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`.\n- To filter metadata objects within type `LOGICAL_TABLE`, set the `subtypes` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE` & subtypes as `[WORKSHEET]`.\n- To get a specific metadata object, specify the GUID.\n- To customize your search and filter the API response, you can use several parameters.\n  You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.\n  You can also define sorting options to sort the data retrieved in the API response.\n- To get discoverable objects when linientmodel is enabled you can use `include_discoverable_objects` as true else false. Default value is true.\n- For liveboard metadata type, to get the newer format, set the `liveboard_response_format` as V2. Default value is V1.\n\n**NOTE**: The following parameters support pagination of metadata records:\n\n- `tag_identifiers`\n- `type`\n- `subtypes`\n- `created_by_user_identifiers`\n- `modified_by_user_identifiers`\n- `owned_by_user_identifiers`\n- `exclude_objects`\n- `include_auto_created_objects`\n- `favorite_object_options`\nIf you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Metadata",
           "9.0.0.cl"
@@ -5714,6 +5952,15 @@
                     "default": false,
                     "type": "boolean",
                     "nullable": true
+                  },
+                  "liveboard_response_version": {
+                    "description": "Indicates the model version of Liveboard to be attached in metadata detail.",
+                    "default": "V1",
+                    "type": "string",
+                    "enum": [
+                      "V1",
+                      "V2"
+                    ]
                   }
                 }
               }
@@ -9896,7 +10143,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "$ref": "#/components/schemas/SystemOverrideInfo"
                 }
               }
             }
@@ -13783,6 +14030,15 @@
           }
         }
       },
+      "SystemOverrideInfo": {
+        "type": "object",
+        "properties": {
+          "config_override_info": {
+            "type": "object",
+            "nullable": true
+          }
+        }
+      },
       "OrgResponse": {
         "type": "object",
         "properties": {
@@ -14124,6 +14380,22 @@
             ],
             "description": "Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view.\n5. CONNECTION for creating or modify data connections.\n6. TAG for tag objects.\n7. USER for user objects.\n8. USER_GROUP for group objects.\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values\n10. INSIGHT_SPEC for SpotIQ objects",
             "nullable": true
+          },
+          "subtypes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ONE_TO_ONE_LOGICAL",
+                "WORKSHEET",
+                "PRIVATE_WORKSHEET",
+                "USER_DEFINED",
+                "AGGR_WORKSHEET",
+                "SQL_VIEW"
+              ]
+            },
+            "description": "List of subtype of metadata. Applies for LOGICAL_TABLE type with the following valid values.\n1. ONE_TO_ONE_LOGICAL\n2. WORKSHEET\n3. PRIVATE_WORKSHEET.\n4. USER_DEFINED.\n5. AGGR_WORKSHEET.\n6. SQL_VIEW <br/>  <span class=\"since-beta-tag\">Version: 10.11.0.cl or later</span>",
+            "nullable": true
           }
         }
       },
@@ -14413,6 +14685,11 @@
             "type": "number",
             "format": "float",
             "description": "Last time the task status was updated (in ms since epoch).",
+            "nullable": true
+          },
+          "author_display_name": {
+            "type": "string",
+            "description": "Display name of the user who initiated the task.",
             "nullable": true
           }
         }
@@ -16159,13 +16436,13 @@
       "VariableValue": {
         "type": "object",
         "required": [
-          "value",
           "org_identifier"
         ],
         "properties": {
           "value": {
             "type": "string",
-            "description": "The value of the variable"
+            "description": "The value of the variable",
+            "nullable": true
           },
           "org_identifier": {
             "type": "string",
@@ -19006,6 +19283,47 @@
           }
         },
         "description": "Input for variable value update"
+      },
+      "CreateEmailCustomizationResponse": {
+        "type": "object",
+        "required": [
+          "tenant_id",
+          "org",
+          "name",
+          "template_properties"
+        ],
+        "properties": {
+          "tenant_id": {
+            "type": "string",
+            "description": "Tenant ID"
+          },
+          "org": {
+            "$ref": "#/components/schemas/OrgType",
+            "description": "Email customization org"
+          },
+          "name": {
+            "type": "string",
+            "description": "Email customization name."
+          },
+          "template_properties": {
+            "type": "object",
+            "description": "Customization configuration for the email"
+          }
+        }
+      },
+      "OrgType": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
       },
       "Runtime_Filter": {
         "type": "object",
