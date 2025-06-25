@@ -94,14 +94,6 @@
       "description": "Roles for version 10.1.0.cl"
     },
     {
-      "name": "10.9.0.cl",
-      "id": "10.9.0.cl",
-      "tags": [
-        "10.9.0.cl"
-      ],
-      "description": "Roles for version 10.9.0.cl"
-    },
-    {
       "name": "10.8.0.cl",
       "id": "10.8.0.cl",
       "tags": [
@@ -1859,12 +1851,6 @@
                       "OAUTH_WITH_SERVICE_PRINCIPAL",
                       "PERSONAL_ACCESS_TOKEN"
                     ]
-                  },
-                  "show_resolved_parameters": {
-                    "description": "<div><span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span></div>\n\nIndicates whether to show resolved parameterised values.",
-                    "default": false,
-                    "type": "boolean",
-                    "nullable": true
                   }
                 }
               }
@@ -2027,7 +2013,7 @@
     "/api/rest/2.0/connections/{connection_identifier}/update": {
       "post": {
         "operationId": "updateConnectionV2",
-        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nUpdates a connection object.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.\n\nTo update a connection object, pass these parameters in your API request:\n\n1. GUID of the connection object.\n2. If you are updating tables or database schema of a connection object:\n   a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.\n   b. Set `validate` to `true`.\n3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nUpdates a connection object.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.\n\nTo update a connection object, pass these parameters in your API request:\n\n1. GUID of the connection object.\n2. If you are updating tables or database schema of a connection object:\n   a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.\n   b. Set `validate` to `true`.\n   * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:\n\n   ```\n   {\n      \"configuration\":{\n         \"accountName\":\"thoughtspot_partner\",\n         \"user\":\"tsadmin\",\n         \"password\":\"TestConn123\",\n         \"role\":\"sysadmin\",\n         \"warehouse\":\"MEDIUM_WH\"\n      },\n      \"externalDatabases\":[\n         {\n            \"name\":\"AllDatatypes\",\n            \"isAutoCreated\":false,\n            \"schemas\":[\n               {\n                  \"name\":\"alldatatypes\",\n                  \"tables\":[\n                     {\n                        \"name\":\"allDatatypes\",\n                        \"type\":\"TABLE\",\n                        \"description\":\"\",\n                        \"selected\":true,\n                        \"linked\":true,\n                        \"columns\":[\n                           {\n                              \"name\":\"CNUMBER\",\n                              \"type\":\"INT64\",\n                              \"canImport\":true,\n                              \"selected\":true,\n                              \"isLinkedActive\":true,\n                              \"isImported\":false,\n                              \"tableName\":\"allDatatypes\",\n                              \"schemaName\":\"alldatatypes\",\n                              \"dbName\":\"AllDatatypes\"\n                           },\n                           {\n                              \"name\":\"CDECIMAL\",\n                              \"type\":\"INT64\",\n                              \"canImport\":true,\n                              \"selected\":true,\n                              \"isLinkedActive\":true,\n                              \"isImported\":false,\n                              \"tableName\":\"allDatatypes\",\n                              \"schemaName\":\"alldatatypes\",\n                              \"dbName\":\"AllDatatypes\"\n                           }\n                        ]\n                     }\n                  ]\n               }\n            ]\n         }\n      ]\n   }\n   ```\n\n3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.\n* A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a Snowflake connection:\n ```\n {\n    \"configuration\":{\n       \"accountName\":\"thoughtspot_partner\",\n       \"user\":\"tsadmin\",\n       \"password\":\"TestConn123\",\n       \"role\":\"sysadmin\",\n       \"warehouse\":\"MEDIUM_WH\"\n    },\n    \"externalDatabases\":[\n\n    ]\n }\n ```\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Connections",
           "10.4.0.cl"
@@ -5435,108 +5421,6 @@
         }
       }
     },
-    "/api/rest/2.0/metadata/parameterize": {
-      "post": {
-        "operationId": "parameterizeMetadata",
-        "description": "\nParameterize fields in metadata objects. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows parameterizing fields in metadata objects in ThoughtSpot.\n\nRequires appropriate permissions to modify the metadata object.\n\nThe API endpoint allows parameterizing the following types of metadata objects:\n* Logical Tables\n* Connections\n\nFor a Logical Table the field type must be `ATTRIBUTE` and field name can be one of:\n* databaseName\n* schemaName\n* tableName\n\nFor a Connection the field type is always `CONNECTION_PROPERTY`. We use the field_name in this\ncase to specify the exact property of a connection which needs to be parameterized.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Metadata",
-          "10.9.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "metadata_type": {
-                    "description": "Type of metadata object to parameterize.",
-                    "type": "string",
-                    "enum": [
-                      "LOGICAL_TABLE",
-                      "CONNECTION"
-                    ]
-                  },
-                  "metadata_identifier": {
-                    "description": "Unique ID or name of the metadata object to parameterize.",
-                    "type": "string"
-                  },
-                  "field_type": {
-                    "description": "Type of field in the metadata to parameterize.",
-                    "type": "string",
-                    "enum": [
-                      "ATTRIBUTE",
-                      "CONNECTION_PROPERTY"
-                    ]
-                  },
-                  "field_name": {
-                    "description": "Name of the field which needs to be parameterized.",
-                    "type": "string"
-                  },
-                  "variable_identifier": {
-                    "description": "Unique ID or name of the variable to use for parameterization",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "metadata_identifier",
-                  "field_type",
-                  "field_name",
-                  "variable_identifier"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "204": {
-            "description": "Parameterize successful."
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/rest/2.0/metadata/search": {
       "post": {
         "operationId": "searchMetadata",
@@ -5694,12 +5578,6 @@
                     "default": true,
                     "type": "boolean",
                     "nullable": true
-                  },
-                  "show_resolved_parameters": {
-                    "description": "<div><span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span></div>\n\nIndicates whether to show resolved parameterised values.",
-                    "default": false,
-                    "type": "boolean",
-                    "nullable": true
                   }
                 }
               }
@@ -5721,108 +5599,6 @@
                 }
               }
             }
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/metadata/unparameterize": {
-      "post": {
-        "operationId": "unparameterizeMetadata",
-        "description": "\nRemove parameterization from fields in metadata objects. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows removing parameterization from fields in metadata objects in ThoughtSpot.\n\nRequires appropriate permissions to modify the metadata object.\n\nThe API endpoint allows unparameterizing the following types of metadata objects:\n* Logical Tables\n* Connections\n\nFor a Logical Table the field type must be `ATTRIBUTE` and field name can be one of:\n* databaseName\n* schemaName\n* tableName\n\nFor a Connection the field type is always `CONNECTION_PROPERTY`. We use the field_name in this\ncase to specify the exact property of a connection which needs to be unparameterized.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Metadata",
-          "10.9.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "metadata_type": {
-                    "description": "Type of metadata object to unparameterize.",
-                    "type": "string",
-                    "enum": [
-                      "LOGICAL_TABLE",
-                      "CONNECTION"
-                    ]
-                  },
-                  "metadata_identifier": {
-                    "description": "Unique ID or name of the metadata object to unparameterize.",
-                    "type": "string"
-                  },
-                  "field_type": {
-                    "description": "Type of field in the metadata to unparameterize.",
-                    "type": "string",
-                    "enum": [
-                      "ATTRIBUTE",
-                      "CONNECTION_PROPERTY"
-                    ]
-                  },
-                  "field_name": {
-                    "description": "Name of the field which needs to be unparameterized.",
-                    "type": "string"
-                  },
-                  "value": {
-                    "description": "The value to use in place of the variable for the field",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "metadata_identifier",
-                  "field_type",
-                  "field_name",
-                  "value"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "204": {
-            "description": "Successfuly removed parameters."
           },
           "400": {
             "description": "Invalid request.",
@@ -6560,17 +6336,6 @@
                 "properties": {
                   "metadata_identifier": {
                     "description": "GUID or name of the Liveboard object.",
-                    "type": "string"
-                  },
-                  "tab_identifiers": {
-                    "description": "GUID or name of the tab of the Liveboard object. <br/>  <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "personalised_view_identifier": {
-                    "description": "GUID or name of the personalised view of the Liveboard object. <br/>  <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>",
                     "type": "string"
                   },
                   "visualization_identifiers": {
@@ -9368,97 +9133,6 @@
         }
       }
     },
-    "/api/rest/2.0/security/metadata/publish": {
-      "post": {
-        "operationId": "publishMetadata",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows publishing metadata objects across organizations in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\n\nThe API endpoint allows publishing the following types of metadata objects:\n* Liveboards\n* Answers\n* Logical Tables\n\nThis API will essentially share the objects along with it's dependencies to\nthe org admins of the orgs to which it is being published.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Security",
-          "10.9.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "metadata": {
-                    "description": "Metadata objects to be published.",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/PublishMetadataListItem"
-                    }
-                  },
-                  "org_identifiers": {
-                    "description": "Unique ID or name of orgs to which metadata objects should be published.",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "skip_validation": {
-                    "description": "Skip validations of objects to be published.",
-                    "type": "boolean",
-                    "nullable": true
-                  }
-                },
-                "required": [
-                  "metadata",
-                  "org_identifiers"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "204": {
-            "description": "Publishing metadata objects is successful."
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/rest/2.0/security/metadata/share": {
       "post": {
         "operationId": "shareMetadata",
@@ -9474,7 +9148,7 @@
                 "type": "object",
                 "properties": {
                   "metadata_type": {
-                    "description": "Type of metadata. Required if identifier in metadata_identifies is a name.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN\n5. Connection",
+                    "description": "Type of metadata. Required if identifier in metadata_identifies is a name.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN",
                     "type": "string",
                     "enum": [
                       "LIVEBOARD",
@@ -9556,102 +9230,6 @@
         "responses": {
           "204": {
             "description": "Sharing metadata objects is successful."
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/security/metadata/unpublish": {
-      "post": {
-        "operationId": "unpublishMetadata",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows unpublishing metadata objects from organizations in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\n\nThe API endpoint allows unpublishing the following types of metadata objects:\n* Liveboards\n* Answers\n* Logical Tables\n\nWhen unpublishing objects, you can:\n* Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them\n* Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Security",
-          "10.9.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "force": {
-                    "description": "Force unpublishes the object. This will break all the dependent objects in the unpublished orgs.",
-                    "type": "boolean",
-                    "nullable": true
-                  },
-                  "include_dependencies": {
-                    "description": "Should we unpublish all the dependencies for the objects specified.\nThe dependencies will be unpublished if no other published object is using it.",
-                    "type": "boolean"
-                  },
-                  "metadata": {
-                    "description": "Metadata objects.",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/PublishMetadataListItem"
-                    }
-                  },
-                  "org_identifiers": {
-                    "description": "Unique ID or name of orgs.",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "required": [
-                  "include_dependencies",
-                  "metadata",
-                  "org_identifiers"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "204": {
-            "description": "Unpublishing metadata objects is successful."
           },
           "400": {
             "description": "Invalid request.",
@@ -11817,471 +11395,6 @@
         }
       }
     },
-    "/api/rest/2.0/template/variables/create": {
-      "post": {
-        "operationId": "createVariable",
-        "description": "\nCreate a variable which can be used for parameterizing metadata objects <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows creating a variable which can be used for parameterizing metadata objects in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\n\nThe API endpoint supports the following types of variables:\n* CONNECTION_PROPERTY - For connection properties\n* TABLE_MAPPING - For table mappings\n* CONNECTION_PROPERTY_PER_PRINCIPAL - For connection properties per principal. In order to use this please contact support to enable this.\n\nWhen creating a variable, you need to specify:\n* The variable type\n* A unique name for the variable\n* Whether the variable contains sensitive values (defaults to false)\n* The variable values (optional)\n\nThe operation will fail if:\n* The user lacks required permissions\n* The variable name already exists\n* The variable type is invalid\n* The variable values are invalid for the specified type \n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Variable",
-          "10.9.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "description": "Type of variable",
-                    "type": "string",
-                    "enum": [
-                      "CONNECTION_PROPERTY",
-                      "TABLE_MAPPING",
-                      "CONNECTION_PROPERTY_PER_PRINCIPAL"
-                    ]
-                  },
-                  "name": {
-                    "description": "Name of the variable. This is unique across the cluster.",
-                    "type": "string"
-                  },
-                  "sensitive": {
-                    "description": "If the variable contains sensitive values like passwords",
-                    "default": false,
-                    "type": "boolean",
-                    "nullable": true
-                  },
-                  "values": {
-                    "description": "Values of variable",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/InputVariableValue"
-                    }
-                  }
-                },
-                "required": [
-                  "type",
-                  "name"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Create variable is successful.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Variable"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/template/variables/{identifier}/delete": {
-      "post": {
-        "operationId": "deleteVariable",
-        "description": "\nDelete a variable <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows deleting a variable from ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\n\nThe API endpoint requires:\n* The variable identifier (ID or name)\n\nThe operation will fail if:\n* The user lacks required permissions\n* The variable doesn't exist\n* The variable is being used by other objects \n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Variable",
-          "10.9.0.cl"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unique id or name of the variable"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Deleting the variable is successful."
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/template/variables/search": {
-      "post": {
-        "operationId": "searchVariables",
-        "description": "\nSearch variables <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows searching for variables in ThoughtSpot.\n\nRequires ADMINISTRATION role.\n\nThe API endpoint supports searching variables by:\n* Variable identifier (ID or name)\n* Variable type\n* Name pattern (case-insensitive, supports % for wildcard)\n\nThe search results can be formatted in three ways:\n* METADATA_ONLY - Returns only variable metadata (default)\n* METADATA_AND_VALUES - Returns variable metadata and values\n* EDITABLE_METADATA_AND_VALUES - Returns only editable variable metadata and values\n\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Variable",
-          "10.9.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "variable_details": {
-                    "description": "Variable details",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/VariableDetailInput"
-                    }
-                  },
-                  "record_offset": {
-                    "description": "The starting record number from where the records should be included",
-                    "default": 0,
-                    "type": "integer",
-                    "format": "int32"
-                  },
-                  "record_size": {
-                    "description": "The number of records that should be included",
-                    "default": 10,
-                    "type": "integer",
-                    "format": "int32"
-                  },
-                  "output_format": {
-                    "description": "Format in which we want the output",
-                    "default": "METADATA_ONLY",
-                    "type": "string",
-                    "enum": [
-                      "METADATA_ONLY",
-                      "METADATA_AND_VALUES",
-                      "EDITABLE_METADATA_AND_VALUES"
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "List of variables is successful.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Variable"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/template/variables/{identifier}/update": {
-      "post": {
-        "operationId": "updateVariable",
-        "description": "\nUpdate a variable's properties <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows updating a variable's properties in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\n\nThe API endpoint allows updating:\n* The variable name\n* The variable values\n\nWhen updating variable values, you need to specify:\n* The operation to perform (ADD, REPLACE, REMOVE)\n* The new values to add/replace/remove\n\nWhen the operation is ADD, a value any pre-existing value with the same set of constraints will be replaced.\nWhen the operation is REPLACE, all values of the variable are replaced with the values specified.\nWhen the operation is REMOVE, all values with the given set of conditions are removed.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Variable",
-          "10.9.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "description": "New name of the variable if we want to rename.",
-                    "type": "string"
-                  },
-                  "operation": {
-                    "description": "Operation to perform on the values.",
-                    "default": "REPLACE",
-                    "type": "string",
-                    "enum": [
-                      "ADD",
-                      "REMOVE",
-                      "REPLACE"
-                    ]
-                  },
-                  "values": {
-                    "description": "Values of variable to be updated.",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/InputVariableValue"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unique id or name of the variable to update."
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Updating the variable is successful."
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/template/variables/update": {
-      "post": {
-        "operationId": "updateVariableValues",
-        "description": "\nUpdate values for multiple variables <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows updating values for multiple variables in ThoughtSpot.\n\nRequires ADMINISTRATION role.\n\nThe API endpoint allows:\n* Adding new values to variables\n* Replacing existing values\n* Deleting values from variables\n\nWhen updating variable values, you need to specify:\n* The variable identifiers\n* The values to add/replace/remove for each variable\n* The operation to perform (ADD, REPLACE, REMOVE)\n\nBehaviour based on operation type:\n* ADD - Adds values to the variable. Any pre-existing values with the same conditions are replaced.\n* REPLACE - Replaces all values of a given org with the current set of values.\n* REMOVE - Removes any values which match the set of conditions of the variables.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Variable",
-          "10.9.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "variable_updates": {
-                    "description": "Variables and values",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/VariableValueInput"
-                    }
-                  },
-                  "operation": {
-                    "description": "Type of update operation",
-                    "type": "string",
-                    "enum": [
-                      "ADD",
-                      "REMOVE",
-                      "REPLACE"
-                    ]
-                  }
-                },
-                "required": [
-                  "variable_updates",
-                  "operation"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "204": {
-            "description": "Updating variable values is successful."
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/rest/2.0/vcs/git/branches/commit": {
       "post": {
         "operationId": "commitBranch",
@@ -12385,7 +11498,7 @@
     "/api/rest/2.0/vcs/git/config/create": {
       "post": {
         "operationId": "createConfig",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nAllows you to connect a ThoughtSpot instance to a Git repository.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_MANAGE_VERSION_CONTROL` (**Can toggle version control for objects**) privilege.\n\nYou can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.\n\nBefore using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:\n\n* You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).\n\n* Your access token has `repo` scope that grants full access to public and private repositories.\n* Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).\n\n**Note**: ThoughtSpot supports only GitHub / GitHub Enterprise for CI/CD.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nAllows you to connect a ThoughtSpot instance to a Git repository.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_SETUP_VERSION_CONTROL` (**Can set up version control**) privilege.\n\nYou can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.\n\nBefore using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:\n\n* You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).\n\n* Your access token has `repo` scope that grants full access to public and private repositories.\n* Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.\n\nFor more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).\n\n**Note**: ThoughtSpot supports only GitHub / itHub Enterprise for CI/CD.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -12502,7 +11615,7 @@
     "/api/rest/2.0/vcs/git/config/delete": {
       "post": {
         "operationId": "deleteConfig",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nDeletes Git repository configuration from your ThoughtSpot instance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_MANAGE_VERSION_CONTROL` (**Can toggle version control for objects**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nDeletes Git repository configuration from your ThoughtSpot instance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_SETUP_VERSION_CONTROL` (**Can set up version control**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -12897,7 +12010,7 @@
     "/api/rest/2.0/vcs/git/config/search": {
       "post": {
         "operationId": "searchConfig",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nGets Git repository connections configured on the ThoughtSpot instance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_MANAGE_VERSION_CONTROL` (**Can toggle version control for objects**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nGets Git repository connections configured on the ThoughtSpot instance.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_SETUP_VERSION_CONTROL` (**Can set up version control**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -12982,7 +12095,7 @@
     "/api/rest/2.0/vcs/git/config/update": {
       "post": {
         "operationId": "updateConfig",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nUpdates Git repository configuration settings.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_MANAGE_VERSION_CONTROL` (**Can toggle version control for objects**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nUpdates Git repository configuration settings.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_SETUP_VERSION_CONTROL` (**Can set up version control**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control",
           "9.2.0.cl"
@@ -14527,24 +13640,6 @@
             "type": "string",
             "description": "Indicates personalised view of the Liveboard in case of png",
             "nullable": true
-          },
-          "image_resolution": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Desired width of the Liveboard image in pixels. Ex. 1920 for Full HD image <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>",
-            "nullable": true
-          },
-          "image_scale": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The scale of the image in percentage. Ex. 100 for 100% scale. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>",
-            "nullable": true
-          },
-          "include_header": {
-            "type": "boolean",
-            "default": false,
-            "description": "Indicates whether to include the header of the liveboard. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>",
-            "nullable": true
           }
         }
       },
@@ -16066,110 +15161,6 @@
           }
         }
       },
-      "VariableDetailInput": {
-        "type": "object",
-        "properties": {
-          "identifier": {
-            "type": "string",
-            "description": "Unique ID or name of the variable",
-            "nullable": true
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "CONNECTION_PROPERTY",
-              "TABLE_MAPPING",
-              "CONNECTION_PROPERTY_PER_PRINCIPAL"
-            ],
-            "description": "Type of variable",
-            "nullable": true
-          },
-          "name_pattern": {
-            "type": "string",
-            "description": "A pattern to match case-insensitive name of the variable. User % for a wildcard match",
-            "nullable": true
-          }
-        },
-        "description": "Input for variable details in search"
-      },
-      "Variable": {
-        "type": "object",
-        "required": [
-          "id",
-          "name"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Unique identifier of the variable"
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the variable"
-          },
-          "variable_type": {
-            "type": "string",
-            "enum": [
-              "CONNECTION_PROPERTY",
-              "TABLE_MAPPING",
-              "CONNECTION_PROPERTY_PER_PRINCIPAL"
-            ],
-            "description": "Type of the variable",
-            "nullable": true
-          },
-          "sensitive": {
-            "type": "boolean",
-            "description": "If the variable is sensitive",
-            "nullable": true
-          },
-          "values": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/VariableValue"
-            },
-            "description": "Values of the variable",
-            "nullable": true
-          }
-        },
-        "description": "Variable object"
-      },
-      "VariableValue": {
-        "type": "object",
-        "required": [
-          "value",
-          "org_identifier"
-        ],
-        "properties": {
-          "value": {
-            "type": "string",
-            "description": "The value of the variable"
-          },
-          "org_identifier": {
-            "type": "string",
-            "description": "The unique name of the org"
-          },
-          "principal_type": {
-            "type": "string",
-            "enum": [
-              "USER",
-              "USER_GROUP"
-            ],
-            "description": "Principal type",
-            "nullable": true
-          },
-          "principal_identifier": {
-            "type": "string",
-            "description": "Unique ID or name of the principal",
-            "nullable": true
-          },
-          "priority": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The priority assigned to this value. If there are 2 matching values, the one with the higher priority will be picked.",
-            "nullable": true
-          }
-        }
-      },
       "GenericInfo": {
         "type": "object",
         "properties": {
@@ -16254,9 +15245,7 @@
           },
           "type": {
             "type": "string",
-            "enum": [
-              "LOGICAL_TABLE"
-            ],
+            "enum": [],
             "nullable": true
           }
         },
@@ -17458,28 +16447,6 @@
           }
         },
         "description": "MetadataType InputType used in Delete MetadataType API"
-      },
-      "PublishMetadataListItem": {
-        "type": "object",
-        "required": [
-          "identifier"
-        ],
-        "properties": {
-          "identifier": {
-            "type": "string",
-            "description": "Unique ID or name of the metadata."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "LIVEBOARD",
-              "ANSWER",
-              "LOGICAL_TABLE"
-            ],
-            "description": "Type of metadata. Required if identifier is name.",
-            "nullable": true
-          }
-        }
       },
       "AuthorMetadataTypeInput": {
         "type": "object",
@@ -18919,64 +17886,6 @@
             "nullable": true
           }
         }
-      },
-      "InputVariableValue": {
-        "type": "object",
-        "required": [
-          "value",
-          "org_identifier"
-        ],
-        "properties": {
-          "value": {
-            "type": "string",
-            "description": "The connection property value"
-          },
-          "org_identifier": {
-            "type": "string",
-            "description": "The unique name of the org"
-          },
-          "principal_type": {
-            "type": "string",
-            "enum": [
-              "USER",
-              "USER_GROUP"
-            ],
-            "description": "Principal type",
-            "nullable": true
-          },
-          "principal_identifier": {
-            "type": "string",
-            "description": "Unique ID or name of the principal",
-            "nullable": true
-          },
-          "priority": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The priority assigned to this value. If there are 2 matching values, the one with the higher priority will be picked.",
-            "nullable": true
-          }
-        }
-      },
-      "VariableValueInput": {
-        "type": "object",
-        "required": [
-          "variable_identifier",
-          "variable_values"
-        ],
-        "properties": {
-          "variable_identifier": {
-            "type": "string",
-            "description": "ID or Name of the variable"
-          },
-          "variable_values": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/InputVariableValue"
-            },
-            "description": "Values of the variable"
-          }
-        },
-        "description": "Input for variable value update"
       },
       "Runtime_Filter": {
         "type": "object",
