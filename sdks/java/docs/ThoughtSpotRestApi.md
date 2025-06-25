@@ -15,6 +15,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**createConnection**](ThoughtSpotRestApi.md#createConnection) | **POST** /api/rest/2.0/connection/create |
 | [**createConversation**](ThoughtSpotRestApi.md#createConversation) | **POST** /api/rest/2.0/ai/conversation/create |
 | [**createCustomAction**](ThoughtSpotRestApi.md#createCustomAction) | **POST** /api/rest/2.0/customization/custom-actions |
+| [**createEmailCustomisation**](ThoughtSpotRestApi.md#createEmailCustomisation) | **POST** /api/rest/2.0/customization/email |
 | [**createOrg**](ThoughtSpotRestApi.md#createOrg) | **POST** /api/rest/2.0/orgs/create |
 | [**createRole**](ThoughtSpotRestApi.md#createRole) | **POST** /api/rest/2.0/roles/create |
 | [**createSchedule**](ThoughtSpotRestApi.md#createSchedule) | **POST** /api/rest/2.0/schedules/create |
@@ -32,6 +33,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**deleteConnectionV2**](ThoughtSpotRestApi.md#deleteConnectionV2) | **POST** /api/rest/2.0/connections/{connection_identifier}/delete |
 | [**deleteCustomAction**](ThoughtSpotRestApi.md#deleteCustomAction) | **POST** /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/delete |
 | [**deleteDbtConnection**](ThoughtSpotRestApi.md#deleteDbtConnection) | **POST** /api/rest/2.0/dbt/{dbt_connection_identifier}/delete |
+| [**deleteEmailCustomisation**](ThoughtSpotRestApi.md#deleteEmailCustomisation) | **POST** /api/rest/2.0/customization/email/{template_identifier}/delete |
 | [**deleteMetadata**](ThoughtSpotRestApi.md#deleteMetadata) | **POST** /api/rest/2.0/metadata/delete |
 | [**deleteOrg**](ThoughtSpotRestApi.md#deleteOrg) | **POST** /api/rest/2.0/orgs/{org_identifier}/delete |
 | [**deleteRole**](ThoughtSpotRestApi.md#deleteRole) | **POST** /api/rest/2.0/roles/{role_identifier}/delete |
@@ -81,6 +83,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**searchConnection**](ThoughtSpotRestApi.md#searchConnection) | **POST** /api/rest/2.0/connection/search |
 | [**searchCustomActions**](ThoughtSpotRestApi.md#searchCustomActions) | **POST** /api/rest/2.0/customization/custom-actions/search |
 | [**searchData**](ThoughtSpotRestApi.md#searchData) | **POST** /api/rest/2.0/searchdata |
+| [**searchEmailCustomisation**](ThoughtSpotRestApi.md#searchEmailCustomisation) | **POST** /api/rest/2.0/customization/email/search |
 | [**searchMetadata**](ThoughtSpotRestApi.md#searchMetadata) | **POST** /api/rest/2.0/metadata/search |
 | [**searchOrgs**](ThoughtSpotRestApi.md#searchOrgs) | **POST** /api/rest/2.0/orgs/search |
 | [**searchRoles**](ThoughtSpotRestApi.md#searchRoles) | **POST** /api/rest/2.0/roles/search |
@@ -111,6 +114,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**updateUserGroup**](ThoughtSpotRestApi.md#updateUserGroup) | **POST** /api/rest/2.0/groups/{group_identifier}/update |
 | [**updateVariable**](ThoughtSpotRestApi.md#updateVariable) | **POST** /api/rest/2.0/template/variables/{identifier}/update |
 | [**updateVariableValues**](ThoughtSpotRestApi.md#updateVariableValues) | **POST** /api/rest/2.0/template/variables/update |
+| [**validateEmailCustomisation**](ThoughtSpotRestApi.md#validateEmailCustomisation) | **POST** /api/rest/2.0/customization/email/validate |
 | [**validateMerge**](ThoughtSpotRestApi.md#validateMerge) | **POST** /api/rest/2.0/vcs/git/branches/validate |
 | [**validateToken**](ThoughtSpotRestApi.md#validateToken) | **POST** /api/rest/2.0/auth/token/validate |
 
@@ -509,6 +513,41 @@ null (empty response body)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="createEmailCustomisation"></a>
+# **createEmailCustomisation**
+> CreateEmailCustomisationResponse createEmailCustomisation(createEmailCustomisationRequest)
+
+
+
+ Version: 10.10.0.cl or later   Creates a custom configuration for the email customisation  #### Pre-requisites  Requires &#x60;DEVELOPER&#x60; (**has developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;_Has developer privilege&#x60; privilege is required. Coms should be enabled on the cluster.  #### Usage guidelines  To create a custom confuguration:  1. Pass these parameters in your API request.  - A JSON map of configuration attributes &#x60;template_properties&#x60;. The following example shows the configuration attribures for a csutom configuration:  &#x60;&#x60;&#x60; {     {     \&quot;logoUrl\&quot;: \&quot;&lt;logo_url&gt;\&quot;,     \&quot;homeUrl\&quot;: \&quot;&lt;home_url&gt;\&quot;,     \&quot;productName\&quot;: \&quot;&lt;Company Name in the Mail&gt;\&quot;,     \&quot;footerAddress\&quot;: \&quot;&lt;address to be visible in the footer&gt;\&quot;,     \&quot;ctaButtonBgColor\&quot;: \&quot;#444DEA\&quot;,     \&quot;ctaTextFontColor\&quot;: \&quot;#FFFFFF\&quot;,     \&quot;primaryBgColor\&quot;: \&quot;#D3DEF0\&quot;,     \&quot;hideMobileAppNudge\&quot;: &lt;true/false&gt;,     \&quot;hideTsVocabularyDefinitions\&quot;: &lt;true/false&gt;e,     \&quot;hideProductName\&quot;: &lt;true/false&gt;,     \&quot;hideFooterPhone\&quot;: &lt;true/false&gt;,     \&quot;hideFooterAddress\&quot;: &lt;true/false&gt;,     \&quot;hidePrivacyPolicy\&quot;: &lt;true/false&gt;,     \&quot;hideManageNotification\&quot;: &lt;true/false&gt;,     \&quot;fontfamily\&quot;: \&quot;&lt;to maintain a single font in the entire email&gt;\&quot;   } } &#x60;&#x60;&#x60;      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **createEmailCustomisationRequest** | [**CreateEmailCustomisationRequest**](CreateEmailCustomisationRequest.md)
+
+### Return type
+
+[**CreateEmailCustomisationResponse**](CreateEmailCustomisationResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | Invalid request. |  -  |
+| **403** | Unauthorized access. |  -  |
 | **500** | Unexpected error |  -  |
 
 <a id="createOrg"></a>
@@ -1118,6 +1157,41 @@ null (empty response body)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="deleteEmailCustomisation"></a>
+# **deleteEmailCustomisation**
+> deleteEmailCustomisation(templateIdentifier)
+
+
+
+ Version: 10.10.0.cl or later   Deletes the configuration for the email customisation.  #### Pre-requisites  Requires &#x60;DEVELOPER&#x60; (**has developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;_Has developer privilege&#x60; privilege is required. Coms should be enabled on the cluster.  #### Usage guidelines  Deletes the configuration available for the cluster/org. Pass the &#x60;template_identifier&#x60; in the API request.  Note: &#x60;template_identifier&#x60; can be fetched from search API request.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **templateIdentifier** | **String**
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Email Customization configuration successfully deleted. |  -  |
+| **400** | Invalid request. |  -  |
+| **403** | Unauthorized access. |  -  |
 | **500** | Unexpected error |  -  |
 
 <a id="deleteMetadata"></a>
@@ -2866,13 +2940,45 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
+<a id="searchEmailCustomisation"></a>
+# **searchEmailCustomisation**
+> List&lt;CreateEmailCustomisationResponse&gt; searchEmailCustomisation()
+
+
+
+ Version: 10.10.0.cl or later   Search the email customisation configuration if any set for the ThoughtSpot system.  #### Pre-requisites  Requires &#x60;DEVELOPER&#x60; (**has developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;_Has developer privilege&#x60; privilege is required. Coms should be enabled on the cluster.  #### Usage guidelines  To get the list of configurations set in the cluster/org.      
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**List&lt;CreateEmailCustomisationResponse&gt;**](CreateEmailCustomisationResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | Invalid request. |  -  |
+| **403** | Unauthorized access. |  -  |
+| **500** | Unexpected error |  -  |
+
 <a id="searchMetadata"></a>
 # **searchMetadata**
 > List&lt;MetadataSearchResponse&gt; searchMetadata(searchMetadataRequest)
 
 
 
-  Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the &#x60;type&#x60; attribute. For example, to fetch a Worksheet, set the type as &#x60;LOGICAL_TABLE&#x60;. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like &#x60;include_auto_created_objects&#x60;, &#x60;include_dependent_objects&#x60;, &#x60;include_headers&#x60;, &#x60;include_incomplete_objects&#x60;, and so on.   You can also define sorting options to sort the data retrieved in the API response. - To get discoverable objects when linientmodel is enabled you can use &#x60;include_discoverable_objects&#x60; as true else false. Default value is true. - For liveboard metadata type, to get the newer format, set the &#x60;liveboard_response_format&#x60; as V2. Default value is V1.  **NOTE**: The following parameters support pagination of metadata records:  - &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;created_by_user_identifiers&#x60; - &#x60;modified_by_user_identifiers&#x60; - &#x60;owned_by_user_identifiers&#x60; - &#x60;exclude_objects&#x60; - &#x60;include_auto_created_objects&#x60; - &#x60;favorite_object_options&#x60; If you are using other parameters to search metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60;.      
+  Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the &#x60;type&#x60; attribute. For example, to fetch a Worksheet, set the type as &#x60;LOGICAL_TABLE&#x60;. - To filter metadata objects within type &#x60;LOGICAL_TABLE&#x60;, set the &#x60;subtypes&#x60; attribute. For example, to fetch a Worksheet, set the type as &#x60;LOGICAL_TABLE&#x60; &amp; subtypes as &#x60;[WORKSHEET]&#x60;. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like &#x60;include_auto_created_objects&#x60;, &#x60;include_dependent_objects&#x60;, &#x60;include_headers&#x60;, &#x60;include_incomplete_objects&#x60;, and so on.   You can also define sorting options to sort the data retrieved in the API response. - To get discoverable objects when linientmodel is enabled you can use &#x60;include_discoverable_objects&#x60; as true else false. Default value is true. - For liveboard metadata type, to get the newer format, set the &#x60;liveboard_response_format&#x60; as V2. Default value is V1.  **NOTE**: The following parameters support pagination of metadata records:  - &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;subtypes&#x60; - &#x60;created_by_user_identifiers&#x60; - &#x60;modified_by_user_identifiers&#x60; - &#x60;owned_by_user_identifiers&#x60; - &#x60;exclude_objects&#x60; - &#x60;include_auto_created_objects&#x60; - &#x60;favorite_object_options&#x60; If you are using other parameters to search metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60;.      
 
 ### Parameters
 
@@ -3952,6 +4058,38 @@ null (empty response body)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="validateEmailCustomisation"></a>
+# **validateEmailCustomisation**
+> validateEmailCustomisation()
+
+
+
+ Version: 10.10.0.cl or later   Validates the email customisation configuration if any set for the ThoughtSpot system.  #### Pre-requisites  Requires &#x60;DEVELOPER&#x60; (**has developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;_Has developer privilege&#x60; privilege is required. Coms should be enabled on the cluster.      
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Triggered test email for customization configuration |  -  |
+| **400** | Invalid request. |  -  |
+| **403** | Unauthorized access. |  -  |
 | **500** | Unexpected error |  -  |
 
 <a id="validateMerge"></a>

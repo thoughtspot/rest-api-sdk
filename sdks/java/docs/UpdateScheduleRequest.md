@@ -18,6 +18,7 @@
 |**frequency** | [**FrequencyInput**](FrequencyInput.md) | Frequency of the scheduled job run. |  [optional] |
 |**recipientDetails** | [**RecipientDetailsInput**](RecipientDetailsInput.md) | Recipients of the scheduled job notifications. You can add the ID or name of the ThoughtSpot users or groups as recipients in the &#x60;principals&#x60; array. If a recipient is not a ThoughtSpot user, specify email address. |  [optional] |
 |**status** | [**StatusEnum**](#StatusEnum) | Status of the schedule |  [optional] |
+|**personalisedViewId** | **String** | Personalised view id of the liveboard to be scheduled. |  [optional] |
 
 
 

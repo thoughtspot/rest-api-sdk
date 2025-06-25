@@ -4,28 +4,46 @@
 
 package com.thoughtspot.client.model;
 
-
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for ParameterValues */
+/**
+ * Model tests for ParameterValues
+ */
 public class ParameterValuesTest {
     private final ParameterValues model = new ParameterValues();
 
-    /** Model tests for ParameterValues */
+    /**
+     * Model tests for ParameterValues
+     */
     @Test
     public void testParameterValues() {
         // TODO: test ParameterValues
     }
 
-    /** Test the property 'name' */
+    /**
+     * Test the property 'name'
+     */
     @Test
     public void nameTest() {
         // TODO: test name
     }
 
-    /** Test the property 'values' */
+    /**
+     * Test the property 'values'
+     */
     @Test
     public void valuesTest() {
         // TODO: test values
     }
+
 }

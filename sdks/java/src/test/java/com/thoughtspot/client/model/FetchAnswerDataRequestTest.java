@@ -4,58 +4,84 @@
 
 package com.thoughtspot.client.model;
 
-
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+import java.util.Arrays;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for FetchAnswerDataRequest */
+/**
+ * Model tests for FetchAnswerDataRequest
+ */
 public class FetchAnswerDataRequestTest {
     private final FetchAnswerDataRequest model = new FetchAnswerDataRequest();
 
-    /** Model tests for FetchAnswerDataRequest */
+    /**
+     * Model tests for FetchAnswerDataRequest
+     */
     @Test
     public void testFetchAnswerDataRequest() {
         // TODO: test FetchAnswerDataRequest
     }
 
-    /** Test the property 'metadataIdentifier' */
+    /**
+     * Test the property 'metadataIdentifier'
+     */
     @Test
     public void metadataIdentifierTest() {
         // TODO: test metadataIdentifier
     }
 
-    /** Test the property 'dataFormat' */
+    /**
+     * Test the property 'dataFormat'
+     */
     @Test
     public void dataFormatTest() {
         // TODO: test dataFormat
     }
 
-    /** Test the property 'recordOffset' */
+    /**
+     * Test the property 'recordOffset'
+     */
     @Test
     public void recordOffsetTest() {
         // TODO: test recordOffset
     }
 
-    /** Test the property 'recordSize' */
+    /**
+     * Test the property 'recordSize'
+     */
     @Test
     public void recordSizeTest() {
         // TODO: test recordSize
     }
 
-    /** Test the property 'runtimeFilter' */
+    /**
+     * Test the property 'runtimeFilter'
+     */
     @Test
     public void runtimeFilterTest() {
         // TODO: test runtimeFilter
     }
 
-    /** Test the property 'runtimeSort' */
+    /**
+     * Test the property 'runtimeSort'
+     */
     @Test
     public void runtimeSortTest() {
         // TODO: test runtimeSort
     }
 
-    /** Test the property 'runtimeParamOverride' */
+    /**
+     * Test the property 'runtimeParamOverride'
+     */
     @Test
     public void runtimeParamOverrideTest() {
         // TODO: test runtimeParamOverride
     }
+
 }
