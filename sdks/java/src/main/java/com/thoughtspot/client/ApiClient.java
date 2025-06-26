@@ -4,11 +4,11 @@
 
 package com.thoughtspot.client;
 
-
 import com.thoughtspot.client.auth.ApiKeyAuth;
 import com.thoughtspot.client.auth.Authentication;
 import com.thoughtspot.client.auth.HttpBasicAuth;
 import com.thoughtspot.client.auth.HttpBearerAuth;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -82,8 +82,9 @@ public class ApiClient {
     private boolean lenientDatetimeFormat;
     private int dateLength;
 
-    private InputStream sslCaCert;
     private boolean verifyingSsl;
+    private byte[] sslCaCert;
+    private boolean hostnameVerification;
     private KeyManager[] keyManagers;
 
     private OkHttpClient httpClient;
@@ -150,6 +151,7 @@ public class ApiClient {
             apiClientConfiguration.getDefaultCookieMap().forEach(this::addDefaultCookie);
             setVerifyingSsl(apiClientConfiguration.isVerifyingSsl());
             setSslCaCert(apiClientConfiguration.getSslCaCert());
+            setHostnameVerification(apiClientConfiguration.isHostnameVerification());
             setKeyManagers(apiClientConfiguration.getKeyManagers().toArray(new KeyManager[0]));
             setTempFolderPath(apiClientConfiguration.getDownloadPath());
             setConnectTimeout(apiClientConfiguration.getConnectTimeoutMillis());
@@ -175,10 +177,12 @@ public class ApiClient {
     private void init() {
         verifyingSsl = true;
 
+        hostnameVerification = true;
+
         json = new JSON();
 
         // Set default User-Agent.
-        setUserAgent("ThoughtSpot-Client/java/2.14.0");
+        setUserAgent("ThoughtSpot-Client/java/2.15.0");
 
         authentications = new HashMap<String, Authentication>();
     }
@@ -301,7 +305,7 @@ public class ApiClient {
      * @return Input stream to the SSL CA cert
      */
     public InputStream getSslCaCert() {
-        return sslCaCert;
+        return sslCaCert != null ? new ByteArrayInputStream(sslCaCert) : null;
     }
 
     /**
@@ -312,7 +316,36 @@ public class ApiClient {
      * @return ApiClient
      */
     public ApiClient setSslCaCert(InputStream sslCaCert) {
-        this.sslCaCert = sslCaCert;
+        if (sslCaCert == null) {
+            this.sslCaCert = null;
+        } else {
+            try {
+                this.sslCaCert = sslCaCert.readAllBytes();
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to read SSL CA certificate input stream", e);
+            }
+        }
+        applySslSettings();
+        return this;
+    }
+
+    /**
+     * True if host name verification is enabled
+     *
+     * @return True if host name verification is enabled
+     */
+    public boolean isHostnameVerification() {
+        return hostnameVerification;
+    }
+
+    /**
+     * Configure whether to verify hostname when making https requests. Default to true.
+     *
+     * @param hostnameVerification True to verify hostname
+     * @return ApiClient
+     */
+    public ApiClient setHostnameVerification(boolean hostnameVerification) {
+        this.hostnameVerification = hostnameVerification;
         applySslSettings();
         return this;
     }
@@ -1654,24 +1687,19 @@ public class ApiClient {
                                 }
                             }
                         };
-                hostnameVerifier =
-                        new HostnameVerifier() {
-                            @Override
-                            public boolean verify(String hostname, SSLSession session) {
-                                return true;
-                            }
-                        };
+                hostnameVerifier = getHostnameVerifier(false);
             } else {
                 TrustManagerFactory trustManagerFactory =
                         TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
 
-                if (sslCaCert == null) {
+                InputStream sslCaCertStream = getSslCaCert();
+                if (sslCaCertStream == null) {
                     trustManagerFactory.init((KeyStore) null);
                 } else {
                     char[] password = null; // Any password will work.
                     CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
                     Collection<? extends Certificate> certificates =
-                            certificateFactory.generateCertificates(sslCaCert);
+                            certificateFactory.generateCertificates(sslCaCertStream);
                     if (certificates.isEmpty()) {
                         throw new IllegalArgumentException(
                                 "expected non-empty set of trusted certificates");
@@ -1685,7 +1713,7 @@ public class ApiClient {
                     trustManagerFactory.init(caKeyStore);
                 }
                 trustManagers = trustManagerFactory.getTrustManagers();
-                hostnameVerifier = OkHostnameVerifier.INSTANCE;
+                hostnameVerifier = getHostnameVerifier(hostnameVerification);
             }
 
             SSLContext sslContext = SSLContext.getInstance("TLS");
@@ -1710,6 +1738,26 @@ public class ApiClient {
             return keyStore;
         } catch (IOException e) {
             throw new AssertionError(e);
+        }
+    }
+
+    /**
+     * Returns the appropriate hostname verifier based on verification setting.
+     *
+     * @param enableVerification whether to enable hostname verification
+     * @return OkHostnameVerifier.INSTANCE if verification is enabled, anonymous HostnameVerifier
+     *     that accepts all hostnames if disabled
+     */
+    private static HostnameVerifier getHostnameVerifier(boolean enableVerification) {
+        if (enableVerification) {
+            return OkHostnameVerifier.INSTANCE;
+        } else {
+            return new HostnameVerifier() {
+                @Override
+                public boolean verify(String hostname, SSLSession session) {
+                    return true;
+                }
+            };
         }
     }
 

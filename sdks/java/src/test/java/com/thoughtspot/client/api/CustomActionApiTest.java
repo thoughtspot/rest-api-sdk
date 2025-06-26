@@ -4,7 +4,6 @@
 
 package com.thoughtspot.client.api;
 
-
 import com.thoughtspot.client.ApiException;
 import com.thoughtspot.client.model.CreateCustomActionRequest;
 import com.thoughtspot.client.model.ResponseCustomAction;

@@ -4,7 +4,6 @@
 
 package com.thoughtspot.client.api;
 
-
 import com.google.gson.reflect.TypeToken;
 import com.thoughtspot.client.ApiCallback;
 import com.thoughtspot.client.ApiClient;

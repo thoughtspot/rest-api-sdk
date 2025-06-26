@@ -4,7 +4,6 @@
 
 package com.thoughtspot.client.model;
 
-
 import org.junit.jupiter.api.Test;
 
 /** Model tests for CreateScheduleRequest */
@@ -75,5 +74,11 @@ public class CreateScheduleRequestTest {
     @Test
     public void recipientDetailsTest() {
         // TODO: test recipientDetails
+    }
+
+    /** Test the property 'personalisedViewId' */
+    @Test
+    public void personalisedViewIdTest() {
+        // TODO: test personalisedViewId
     }
 }

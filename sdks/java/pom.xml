@@ -1,13 +1,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>io.github.thoughtspot</groupId>
     <artifactId>rest-api-sdk-lib</artifactId>
+    <version>2.15.0</version>
     <packaging>jar</packaging>
+
     <name>rest-api-sdk-lib</name>
-    <version>2.14.0</version>
-    <url>https://github.com/thoughtspot/rest-api-sdk/tree/release/sdks/java</url>
     <description>ThoughtSpot Java Rest API SDK</description>
+    <url>https://github.com/thoughtspot/rest-api-sdk/tree/release/sdks/java</url>
+
     <scm>
         <connection>scm:git:git://github.com/thoughtspot/rest-api-sdk.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/thoughtspot/rest-api-sdk.git</developerConnection>
@@ -33,7 +36,7 @@
 
     <build>
         <plugins>
-           <plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
@@ -43,7 +46,7 @@
                     <maxmem>512m</maxmem>
                     <compilerArgs>
                         <arg>-Xlint:all</arg>
-                        <arg>-J-Xss4m</arg><!-- Compiling the generated JSON.java file may require larger stack size. -->
+                        <arg>-J-Xss4m</arg> <!-- Compiling the generated JSON.java file may require larger stack size. -->
                     </compilerArgs>
                 </configuration>
             </plugin>
@@ -106,7 +109,8 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- attach test jar -->
+            <!-- Uncomment the plugin below if you want to create test JAR for local use -->
+            <!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -121,6 +125,7 @@
                 <configuration>
                 </configuration>
             </plugin>
+            -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
@@ -193,42 +198,56 @@
                  Ref: https://github.com/diffplug/spotless/tree/main/plugin-maven
             -->
             <plugin>
-              <groupId>com.diffplug.spotless</groupId>
-              <artifactId>spotless-maven-plugin</artifactId>
-              <version>${spotless.version}</version>
-              <configuration>
-                <formats>
-                  <!-- you can define as many formats as you want, each is independent -->
-                  <format>
-                    <!-- define the files to apply to -->
-                    <includes>
-                      <include>.gitignore</include>
-                    </includes>
-                    <!-- define the steps to apply to those files -->
-                    <trimTrailingWhitespace/>
-                    <endWithNewline/>
-                    <indent>
-                      <spaces>true</spaces> <!-- or <tabs>true</tabs> -->
-                      <spacesPerTab>4</spacesPerTab> <!-- optional, default is 4 -->
-                    </indent>
-                  </format>
-                </formats>
-                <!-- define a language-specific format -->
-                <java>
-                  <!-- no need to specify files, inferred automatically, but you can if you want -->
+                <groupId>com.diffplug.spotless</groupId>
+                <artifactId>spotless-maven-plugin</artifactId>
+                <version>${spotless.version}</version>
+                <configuration>
+                    <formats>
+                        <!-- you can define as many formats as you want, each is independent -->
+                        <format>
+                            <!-- define the files to apply to -->
+                            <includes>
+                                <include>.gitignore</include>
+                            </includes>
+                            <!-- define the steps to apply to those files -->
+                            <trimTrailingWhitespace/>
+                            <endWithNewline/>
+                            <indent>
+                                <spaces>true</spaces> <!-- or <tabs>true</tabs> -->
+                                <spacesPerTab>4</spacesPerTab> <!-- optional, default is 4 -->
+                            </indent>
+                        </format>
+                    </formats>
+                    <!-- define a language-specific format -->
+                    <java>
+                        <!-- no need to specify files, inferred automatically, but you can if you want -->
 
-                  <!-- apply a specific flavor of google-java-format and reflow long strings -->
-                  <googleJavaFormat>
-                    <version>1.8</version>
-                    <style>AOSP</style>
-                    <reflowLongStrings>true</reflowLongStrings>
-                  </googleJavaFormat>
+                        <!-- apply a specific flavor of google-java-format and reflow long strings -->
+                        <googleJavaFormat>
+                            <version>1.8</version>
+                            <style>AOSP</style>
+                            <reflowLongStrings>true</reflowLongStrings>
+                        </googleJavaFormat>
 
-                  <removeUnusedImports/>
-                  <importOrder/>
-
-                </java>
-              </configuration>
+                        <removeUnusedImports/>
+                        <importOrder/>
+                    </java>
+                </configuration>
+            </plugin>
+            <!-- Central Publishing Plugin for Maven Central deployment
+                Ref: https://central.sonatype.org/publish/publish-portal-maven
+            -->
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.8.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <autoPublish>false</autoPublish>
+                    <deploymentName>ThoughtSpot Java Rest API SDK</deploymentName>
+                    <publishingServerId>central</publishingServerId>
+                    <waitUntil>published</waitUntil>
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -249,6 +268,10 @@
                                 <goals>
                                     <goal>sign</goal>
                                 </goals>
+                                <configuration>
+                                    <keyname>${gpg.keyname}</keyname>
+                                    <passphraseServerId>${gpg.keyname}</passphraseServerId>
+                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
@@ -319,6 +342,7 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
     <properties>
         <java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>

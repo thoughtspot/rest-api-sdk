@@ -4,7 +4,6 @@
 
 package com.thoughtspot.client.model;
 
-
 import org.junit.jupiter.api.Test;
 
 /** Model tests for UpdateScheduleRequest */
@@ -81,5 +80,11 @@ public class UpdateScheduleRequestTest {
     @Test
     public void statusTest() {
         // TODO: test status
+    }
+
+    /** Test the property 'personalisedViewId' */
+    @Test
+    public void personalisedViewIdTest() {
+        // TODO: test personalisedViewId
     }
 }

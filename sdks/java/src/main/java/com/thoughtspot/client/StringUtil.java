@@ -4,7 +4,6 @@
 
 package com.thoughtspot.client;
 
-
 import java.util.Collection;
 import java.util.Iterator;
 

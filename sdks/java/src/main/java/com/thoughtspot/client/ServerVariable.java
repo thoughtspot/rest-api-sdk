@@ -4,7 +4,6 @@
 
 package com.thoughtspot.client;
 
-
 import java.util.HashSet;
 
 /** Representing a Server Variable for server URL template substitution. */

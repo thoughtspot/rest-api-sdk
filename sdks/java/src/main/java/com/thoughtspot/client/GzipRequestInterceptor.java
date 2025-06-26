@@ -4,7 +4,6 @@
 
 package com.thoughtspot.client;
 
-
 import java.io.IOException;
 import okhttp3.*;
 import okio.Buffer;

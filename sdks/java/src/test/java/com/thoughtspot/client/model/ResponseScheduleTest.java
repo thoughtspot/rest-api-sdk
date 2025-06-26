@@ -4,7 +4,6 @@
 
 package com.thoughtspot.client.model;
 
-
 import org.junit.jupiter.api.Test;
 
 /** Model tests for ResponseSchedule */
@@ -99,5 +98,11 @@ public class ResponseScheduleTest {
     @Test
     public void historyRunsTest() {
         // TODO: test historyRuns
+    }
+
+    /** Test the property 'personalisedViewId' */
+    @Test
+    public void personalisedViewIdTest() {
+        // TODO: test personalisedViewId
     }
 }
