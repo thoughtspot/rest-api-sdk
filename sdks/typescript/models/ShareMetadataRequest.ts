@@ -16,7 +16,7 @@ import { HttpFile } from '../http/http';
 
 export class ShareMetadataRequest {
     /**
-    * Type of metadata. Required if identifier in metadata_identifies is a name. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN
+    * Type of metadata. Required if identifier in metadata_identifies is a name. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN 5. Connection
     */
     'metadata_type'?: ShareMetadataRequestMetadataTypeEnum;
     /**

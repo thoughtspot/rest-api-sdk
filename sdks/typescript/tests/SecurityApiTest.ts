@@ -118,6 +118,38 @@ describe('SecurityApi', function() {
         });     
       });
 
+      describe('publishMetadata', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "publishMetadata"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.publishMetadata(
+                    // publishMetadataRequest PublishMetadataRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.publishMetadata(
+                    // publishMetadataRequest PublishMetadataRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('shareMetadata', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -141,6 +173,38 @@ describe('SecurityApi', function() {
                 await expect(
                   instance.shareMetadata(
                     // shareMetadataRequest ShareMetadataRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('unpublishMetadata', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "unpublishMetadata"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.unpublishMetadata(
+                    // unpublishMetadataRequest UnpublishMetadataRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.unpublishMetadata(
+                    // unpublishMetadataRequest UnpublishMetadataRequest
                      test.Body   
                   )
                 ).to.be.rejectedWith(Error);

@@ -19,7 +19,7 @@ import { HttpFile } from '../http/http';
 /**
 * <div>Deprecated: 10.4.0.cl and later </div>  Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).
 */
-export class GetObjectAccessTokenRequestUserParameters {
+export class GetFullAccessTokenRequestUserParameters {
     'objects'?: Array<UserObject> | null;
     /**
     * Objects to apply the User_Runtime_Filters.  Examples to set the `runtime_filters` : ```json { \"column_name\": \"Color\", \"operator\": \"EQ\", \"values\": [\"red\"], \"persist\": false } ```
@@ -63,7 +63,7 @@ export class GetObjectAccessTokenRequestUserParameters {
         }    ];
 
     static getAttributeTypeMap() {
-        return GetObjectAccessTokenRequestUserParameters.attributeTypeMap;
+        return GetFullAccessTokenRequestUserParameters.attributeTypeMap;
     }
 
     public constructor() {

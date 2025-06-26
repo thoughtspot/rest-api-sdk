@@ -12,15 +12,28 @@
 
 import { HttpFile } from '../http/http';
 
-export class FilterRulesValuesInner {
+export class OrgType {
+    'name'?: string | null;
+    'id'?: number | null;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-    ];
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "number",
+            "format": "int32"
+        }    ];
 
     static getAttributeTypeMap() {
-        return FilterRulesValuesInner.attributeTypeMap;
+        return OrgType.attributeTypeMap;
     }
 
     public constructor() {
