@@ -54,16 +54,6 @@ public class ExportLiveboardReportRequest implements Serializable {
   @javax.annotation.Nonnull
   private String metadataIdentifier;
 
-  public static final String SERIALIZED_NAME_TAB_IDENTIFIERS = "tab_identifiers";
-  @SerializedName(SERIALIZED_NAME_TAB_IDENTIFIERS)
-  @javax.annotation.Nullable
-  private List<String> tabIdentifiers;
-
-  public static final String SERIALIZED_NAME_PERSONALISED_VIEW_IDENTIFIER = "personalised_view_identifier";
-  @SerializedName(SERIALIZED_NAME_PERSONALISED_VIEW_IDENTIFIER)
-  @javax.annotation.Nullable
-  private String personalisedViewIdentifier;
-
   public static final String SERIALIZED_NAME_VISUALIZATION_IDENTIFIERS = "visualization_identifiers";
   @SerializedName(SERIALIZED_NAME_VISUALIZATION_IDENTIFIERS)
   @javax.annotation.Nullable
@@ -185,52 +175,6 @@ public class ExportLiveboardReportRequest implements Serializable {
 
   public void setMetadataIdentifier(@javax.annotation.Nonnull String metadataIdentifier) {
     this.metadataIdentifier = metadataIdentifier;
-  }
-
-
-  public ExportLiveboardReportRequest tabIdentifiers(@javax.annotation.Nullable List<String> tabIdentifiers) {
-    this.tabIdentifiers = tabIdentifiers;
-    return this;
-  }
-
-  public ExportLiveboardReportRequest addTabIdentifiersItem(String tabIdentifiersItem) {
-    if (this.tabIdentifiers == null) {
-      this.tabIdentifiers = new ArrayList<>();
-    }
-    this.tabIdentifiers.add(tabIdentifiersItem);
-    return this;
-  }
-
-  /**
-   * GUID or name of the tab of the Liveboard object.    Version: 10.9.0.cl or later 
-   * @return tabIdentifiers
-   */
-  @javax.annotation.Nullable
-  public List<String> getTabIdentifiers() {
-    return tabIdentifiers;
-  }
-
-  public void setTabIdentifiers(@javax.annotation.Nullable List<String> tabIdentifiers) {
-    this.tabIdentifiers = tabIdentifiers;
-  }
-
-
-  public ExportLiveboardReportRequest personalisedViewIdentifier(@javax.annotation.Nullable String personalisedViewIdentifier) {
-    this.personalisedViewIdentifier = personalisedViewIdentifier;
-    return this;
-  }
-
-  /**
-   * GUID or name of the personalised view of the Liveboard object.    Version: 10.9.0.cl or later 
-   * @return personalisedViewIdentifier
-   */
-  @javax.annotation.Nullable
-  public String getPersonalisedViewIdentifier() {
-    return personalisedViewIdentifier;
-  }
-
-  public void setPersonalisedViewIdentifier(@javax.annotation.Nullable String personalisedViewIdentifier) {
-    this.personalisedViewIdentifier = personalisedViewIdentifier;
   }
 
 
@@ -443,8 +387,6 @@ public class ExportLiveboardReportRequest implements Serializable {
     }
     ExportLiveboardReportRequest exportLiveboardReportRequest = (ExportLiveboardReportRequest) o;
     return Objects.equals(this.metadataIdentifier, exportLiveboardReportRequest.metadataIdentifier) &&
-        Objects.equals(this.tabIdentifiers, exportLiveboardReportRequest.tabIdentifiers) &&
-        Objects.equals(this.personalisedViewIdentifier, exportLiveboardReportRequest.personalisedViewIdentifier) &&
         Objects.equals(this.visualizationIdentifiers, exportLiveboardReportRequest.visualizationIdentifiers) &&
         Objects.equals(this.transientContent, exportLiveboardReportRequest.transientContent) &&
         Objects.equals(this.fileFormat, exportLiveboardReportRequest.fileFormat) &&
@@ -459,7 +401,7 @@ public class ExportLiveboardReportRequest implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(metadataIdentifier, tabIdentifiers, personalisedViewIdentifier, visualizationIdentifiers, transientContent, fileFormat, runtimeFilter, overrideFilters, runtimeSort, pdfOptions, pngOptions, runtimeParamOverride, regionalSettings);
+    return Objects.hash(metadataIdentifier, visualizationIdentifiers, transientContent, fileFormat, runtimeFilter, overrideFilters, runtimeSort, pdfOptions, pngOptions, runtimeParamOverride, regionalSettings);
   }
 
   @Override
@@ -467,8 +409,6 @@ public class ExportLiveboardReportRequest implements Serializable {
     StringBuilder sb = new StringBuilder();
     sb.append("class ExportLiveboardReportRequest {\n");
     sb.append("    metadataIdentifier: ").append(toIndentedString(metadataIdentifier)).append("\n");
-    sb.append("    tabIdentifiers: ").append(toIndentedString(tabIdentifiers)).append("\n");
-    sb.append("    personalisedViewIdentifier: ").append(toIndentedString(personalisedViewIdentifier)).append("\n");
     sb.append("    visualizationIdentifiers: ").append(toIndentedString(visualizationIdentifiers)).append("\n");
     sb.append("    transientContent: ").append(toIndentedString(transientContent)).append("\n");
     sb.append("    fileFormat: ").append(toIndentedString(fileFormat)).append("\n");
@@ -502,8 +442,6 @@ public class ExportLiveboardReportRequest implements Serializable {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
     openapiFields.add("metadata_identifier");
-    openapiFields.add("tab_identifiers");
-    openapiFields.add("personalised_view_identifier");
     openapiFields.add("visualization_identifiers");
     openapiFields.add("transient_content");
     openapiFields.add("file_format");
@@ -550,13 +488,6 @@ public class ExportLiveboardReportRequest implements Serializable {
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (!jsonObj.get("metadata_identifier").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `metadata_identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("metadata_identifier").toString()));
-      }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("tab_identifiers") != null && !jsonObj.get("tab_identifiers").isJsonNull() && !jsonObj.get("tab_identifiers").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `tab_identifiers` to be an array in the JSON string but got `%s`", jsonObj.get("tab_identifiers").toString()));
-      }
-      if ((jsonObj.get("personalised_view_identifier") != null && !jsonObj.get("personalised_view_identifier").isJsonNull()) && !jsonObj.get("personalised_view_identifier").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `personalised_view_identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("personalised_view_identifier").toString()));
       }
       // ensure the optional json data is an array if present
       if (jsonObj.get("visualization_identifiers") != null && !jsonObj.get("visualization_identifiers").isJsonNull() && !jsonObj.get("visualization_identifiers").isJsonArray()) {

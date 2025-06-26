@@ -90,8 +90,6 @@ public class GroupsImportListInput implements Serializable {
     
     A3_ANALYSIS("A3ANALYSIS"),
     
-    EXPERIMENTALFEATUREPRIVILEGE("EXPERIMENTALFEATUREPRIVILEGE"),
-    
     BYPASSRLS("BYPASSRLS"),
     
     RANALYSIS("RANALYSIS"),

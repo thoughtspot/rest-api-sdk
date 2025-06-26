@@ -6,7 +6,7 @@ package com.thoughtspot.client;
 
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class Configuration {
-    public static final String VERSION = "2.14.0";
+    public static final String VERSION = "2.13.0-SNAPSHOT";
 
     private static volatile ApiClient defaultApiClient = new ApiClient();
 

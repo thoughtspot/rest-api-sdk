@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.openapitools.jackson.nullable.JsonNullable;
 import java.io.Serializable;
 
 import com.google.gson.Gson;
@@ -346,16 +345,6 @@ public class SearchUserGroupsRequest implements Serializable {
   @SerializedName(SERIALIZED_NAME_SORT_OPTIONS)
   @javax.annotation.Nullable
   private SortOptions sortOptions;
-
-  public static final String SERIALIZED_NAME_INCLUDE_USERS = "include_users";
-  @SerializedName(SERIALIZED_NAME_INCLUDE_USERS)
-  @javax.annotation.Nullable
-  private Boolean includeUsers = true;
-
-  public static final String SERIALIZED_NAME_INCLUDE_SUB_GROUPS = "include_sub_groups";
-  @SerializedName(SERIALIZED_NAME_INCLUDE_SUB_GROUPS)
-  @javax.annotation.Nullable
-  private Boolean includeSubGroups = true;
 
   public SearchUserGroupsRequest() {
   }
@@ -693,44 +682,6 @@ public class SearchUserGroupsRequest implements Serializable {
   }
 
 
-  public SearchUserGroupsRequest includeUsers(@javax.annotation.Nullable Boolean includeUsers) {
-    this.includeUsers = includeUsers;
-    return this;
-  }
-
-  /**
-   * &lt;div&gt;Version: 10.10.0.cl or later &lt;/div&gt;  Define Parameter to consider if the users should be included in group search response.
-   * @return includeUsers
-   */
-  @javax.annotation.Nullable
-  public Boolean getIncludeUsers() {
-    return includeUsers;
-  }
-
-  public void setIncludeUsers(@javax.annotation.Nullable Boolean includeUsers) {
-    this.includeUsers = includeUsers;
-  }
-
-
-  public SearchUserGroupsRequest includeSubGroups(@javax.annotation.Nullable Boolean includeSubGroups) {
-    this.includeSubGroups = includeSubGroups;
-    return this;
-  }
-
-  /**
-   * &lt;div&gt;Version: 10.10.0.cl or later &lt;/div&gt;  Define Parameter to consider if the sub groups should be included in group search response.
-   * @return includeSubGroups
-   */
-  @javax.annotation.Nullable
-  public Boolean getIncludeSubGroups() {
-    return includeSubGroups;
-  }
-
-  public void setIncludeSubGroups(@javax.annotation.Nullable Boolean includeSubGroups) {
-    this.includeSubGroups = includeSubGroups;
-  }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -755,25 +706,12 @@ public class SearchUserGroupsRequest implements Serializable {
         Objects.equals(this.roleIdentifiers, searchUserGroupsRequest.roleIdentifiers) &&
         Objects.equals(this.recordOffset, searchUserGroupsRequest.recordOffset) &&
         Objects.equals(this.recordSize, searchUserGroupsRequest.recordSize) &&
-        Objects.equals(this.sortOptions, searchUserGroupsRequest.sortOptions) &&
-        Objects.equals(this.includeUsers, searchUserGroupsRequest.includeUsers) &&
-        Objects.equals(this.includeSubGroups, searchUserGroupsRequest.includeSubGroups);
-  }
-
-  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+        Objects.equals(this.sortOptions, searchUserGroupsRequest.sortOptions);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(defaultLiveboardIdentifiers, description, displayName, namePattern, groupIdentifier, orgIdentifiers, privileges, subGroupIdentifiers, type, userIdentifiers, visibility, roleIdentifiers, recordOffset, recordSize, sortOptions, includeUsers, includeSubGroups);
-  }
-
-  private static <T> int hashCodeNullable(JsonNullable<T> a) {
-    if (a == null) {
-      return 1;
-    }
-    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
+    return Objects.hash(defaultLiveboardIdentifiers, description, displayName, namePattern, groupIdentifier, orgIdentifiers, privileges, subGroupIdentifiers, type, userIdentifiers, visibility, roleIdentifiers, recordOffset, recordSize, sortOptions);
   }
 
   @Override
@@ -795,8 +733,6 @@ public class SearchUserGroupsRequest implements Serializable {
     sb.append("    recordOffset: ").append(toIndentedString(recordOffset)).append("\n");
     sb.append("    recordSize: ").append(toIndentedString(recordSize)).append("\n");
     sb.append("    sortOptions: ").append(toIndentedString(sortOptions)).append("\n");
-    sb.append("    includeUsers: ").append(toIndentedString(includeUsers)).append("\n");
-    sb.append("    includeSubGroups: ").append(toIndentedString(includeSubGroups)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -834,8 +770,6 @@ public class SearchUserGroupsRequest implements Serializable {
     openapiFields.add("record_offset");
     openapiFields.add("record_size");
     openapiFields.add("sort_options");
-    openapiFields.add("include_users");
-    openapiFields.add("include_sub_groups");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();

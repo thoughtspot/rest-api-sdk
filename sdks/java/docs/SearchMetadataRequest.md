@@ -29,7 +29,6 @@
 |**tagIdentifiers** | **List&lt;String&gt;** | Tags to filter metadata objects by |  [optional] |
 |**includeStats** | **Boolean** | Indicates whether to include stats of the metadata objects. |  [optional] |
 |**includeDiscoverableObjects** | **Boolean** | &lt;div&gt;Version: 10.7.0.cl or later &lt;/div&gt;  Boolean to indicate whether to include discoverable metadata objects. |  [optional] |
-|**showResolvedParameters** | **Boolean** | &lt;div&gt;Version: 10.9.0.cl or later &lt;/div&gt;  Indicates whether to show resolved parameterised values. |  [optional] |
 
 
 

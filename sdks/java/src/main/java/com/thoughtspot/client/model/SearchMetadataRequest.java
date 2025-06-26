@@ -214,11 +214,6 @@ public class SearchMetadataRequest implements Serializable {
   @javax.annotation.Nullable
   private Boolean includeDiscoverableObjects = true;
 
-  public static final String SERIALIZED_NAME_SHOW_RESOLVED_PARAMETERS = "show_resolved_parameters";
-  @SerializedName(SERIALIZED_NAME_SHOW_RESOLVED_PARAMETERS)
-  @javax.annotation.Nullable
-  private Boolean showResolvedParameters = false;
-
   public SearchMetadataRequest() {
   }
 
@@ -688,25 +683,6 @@ public class SearchMetadataRequest implements Serializable {
   }
 
 
-  public SearchMetadataRequest showResolvedParameters(@javax.annotation.Nullable Boolean showResolvedParameters) {
-    this.showResolvedParameters = showResolvedParameters;
-    return this;
-  }
-
-  /**
-   * &lt;div&gt;Version: 10.9.0.cl or later &lt;/div&gt;  Indicates whether to show resolved parameterised values.
-   * @return showResolvedParameters
-   */
-  @javax.annotation.Nullable
-  public Boolean getShowResolvedParameters() {
-    return showResolvedParameters;
-  }
-
-  public void setShowResolvedParameters(@javax.annotation.Nullable Boolean showResolvedParameters) {
-    this.showResolvedParameters = showResolvedParameters;
-  }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -738,8 +714,7 @@ public class SearchMetadataRequest implements Serializable {
         Objects.equals(this.sortOptions, searchMetadataRequest.sortOptions) &&
         Objects.equals(this.tagIdentifiers, searchMetadataRequest.tagIdentifiers) &&
         Objects.equals(this.includeStats, searchMetadataRequest.includeStats) &&
-        Objects.equals(this.includeDiscoverableObjects, searchMetadataRequest.includeDiscoverableObjects) &&
-        Objects.equals(this.showResolvedParameters, searchMetadataRequest.showResolvedParameters);
+        Objects.equals(this.includeDiscoverableObjects, searchMetadataRequest.includeDiscoverableObjects);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -748,7 +723,7 @@ public class SearchMetadataRequest implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(metadata, permissions, createdByUserIdentifiers, dependentObjectVersion, excludeObjects, favoriteObjectOptions, includeAutoCreatedObjects, includeDependentObjects, dependentObjectsRecordSize, includeDetails, includeHeaders, includeHiddenObjects, includeIncompleteObjects, includeVisualizationHeaders, includeWorksheetSearchAssistData, modifiedByUserIdentifiers, recordOffset, recordSize, sortOptions, tagIdentifiers, includeStats, includeDiscoverableObjects, showResolvedParameters);
+    return Objects.hash(metadata, permissions, createdByUserIdentifiers, dependentObjectVersion, excludeObjects, favoriteObjectOptions, includeAutoCreatedObjects, includeDependentObjects, dependentObjectsRecordSize, includeDetails, includeHeaders, includeHiddenObjects, includeIncompleteObjects, includeVisualizationHeaders, includeWorksheetSearchAssistData, modifiedByUserIdentifiers, recordOffset, recordSize, sortOptions, tagIdentifiers, includeStats, includeDiscoverableObjects);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -784,7 +759,6 @@ public class SearchMetadataRequest implements Serializable {
     sb.append("    tagIdentifiers: ").append(toIndentedString(tagIdentifiers)).append("\n");
     sb.append("    includeStats: ").append(toIndentedString(includeStats)).append("\n");
     sb.append("    includeDiscoverableObjects: ").append(toIndentedString(includeDiscoverableObjects)).append("\n");
-    sb.append("    showResolvedParameters: ").append(toIndentedString(showResolvedParameters)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -829,7 +803,6 @@ public class SearchMetadataRequest implements Serializable {
     openapiFields.add("tag_identifiers");
     openapiFields.add("include_stats");
     openapiFields.add("include_discoverable_objects");
-    openapiFields.add("show_resolved_parameters");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();

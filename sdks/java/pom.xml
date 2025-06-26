@@ -5,8 +5,8 @@
     <artifactId>rest-api-sdk-lib</artifactId>
     <packaging>jar</packaging>
     <name>rest-api-sdk-lib</name>
-    <version>2.14.0</version>
-    <url>https://github.com/thoughtspot/rest-api-sdk/tree/release/sdks/java</url>
+    <version>2.13.0-SNAPSHOT</version>
+    <url>https://github.com/thoughtspot/rest-api-sdk/tree/10.9.0.cl/sdks/java</url>
     <description>ThoughtSpot Java Rest API SDK</description>
     <scm>
         <connection>scm:git:git://github.com/thoughtspot/rest-api-sdk.git</connection>
