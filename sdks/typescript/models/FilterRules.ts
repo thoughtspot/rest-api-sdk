@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { FilterRulesValuesInner } from '../models/FilterRulesValuesInner';
 import { HttpFile } from '../http/http';
 
 /**
@@ -28,7 +27,7 @@ export class FilterRules {
     /**
     * The values to filter on. To get all records, use TS_WILDCARD_ALL as values.
     */
-    'values': Array<FilterRulesValuesInner>;
+    'values': Array<any>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -48,7 +47,7 @@ export class FilterRules {
         {
             "name": "values",
             "baseName": "values",
-            "type": "Array<FilterRulesValuesInner>",
+            "type": "Array<any>",
             "format": ""
         }    ];
 

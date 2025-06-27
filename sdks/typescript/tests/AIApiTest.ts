@@ -54,6 +54,38 @@ describe('AIApi', function() {
         });     
       });
 
+      describe('queryGetDecomposedQuery', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "queryGetDecomposedQuery"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.queryGetDecomposedQuery(
+                    // queryGetDecomposedQueryRequest QueryGetDecomposedQueryRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.queryGetDecomposedQuery(
+                    // queryGetDecomposedQueryRequest QueryGetDecomposedQueryRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('sendMessage', function() {
 
         const testReqBodies = requestBodies.filter(

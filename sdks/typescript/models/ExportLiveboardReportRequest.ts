@@ -21,6 +21,14 @@ export class ExportLiveboardReportRequest {
     */
     'metadata_identifier': string;
     /**
+    * GUID or name of the tab of the Liveboard object.    Version: 10.9.0.cl or later 
+    */
+    'tab_identifiers'?: Array<string>;
+    /**
+    * GUID or name of the personalised view of the Liveboard object.    Version: 10.9.0.cl or later 
+    */
+    'personalised_view_identifier'?: string;
+    /**
     * GUID or name of visualizations on the Liveboard. If this parameter is not defined, the API returns a report with all visualizations saved on a Liveboard.
     */
     'visualization_identifiers'?: Array<string>;
@@ -58,6 +66,18 @@ export class ExportLiveboardReportRequest {
         {
             "name": "metadata_identifier",
             "baseName": "metadata_identifier",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "tab_identifiers",
+            "baseName": "tab_identifiers",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "personalised_view_identifier",
+            "baseName": "personalised_view_identifier",
             "type": "string",
             "format": ""
         },

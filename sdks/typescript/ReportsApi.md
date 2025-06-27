@@ -98,6 +98,10 @@ apiInstance.exportLiveboardReport(
   // ExportLiveboardReportRequest
   {
     metadata_identifier: "metadata_identifier_example",
+    tab_identifiers: [
+      "tab_identifiers_example",
+    ],
+    personalised_view_identifier: "personalised_view_identifier_example",
     visualization_identifiers: [
       "visualization_identifiers_example",
     ],

@@ -97,9 +97,13 @@ export class SearchMetadataRequest {
     */
     'include_stats'?: boolean | null;
     /**
-    * Indicates whether to include discoverable metadata objects. If lenient OSM is not enabled, then even though the includeDiscoverableObjects is set to True, we won\'t see discoverable objects.
+    * <div>Version: 10.7.0.cl or later </div>  Boolean to indicate whether to include discoverable metadata objects.
     */
     'include_discoverable_objects'?: boolean | null;
+    /**
+    * <div>Version: 10.9.0.cl or later </div>  Indicates whether to show resolved parameterised values.
+    */
+    'show_resolved_parameters'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -233,6 +237,12 @@ export class SearchMetadataRequest {
         {
             "name": "include_discoverable_objects",
             "baseName": "include_discoverable_objects",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "show_resolved_parameters",
+            "baseName": "show_resolved_parameters",
             "type": "boolean",
             "format": ""
         }    ];

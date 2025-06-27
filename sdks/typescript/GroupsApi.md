@@ -283,6 +283,8 @@ apiInstance.searchUserGroups(
     record_offset: 0,
     record_size: 10,
     sort_options: null,
+    include_users: true,
+    include_sub_groups: true,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);

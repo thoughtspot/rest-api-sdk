@@ -10,52 +10,53 @@
  * Do not edit the class manually.
  */
 
-import { RuntimeFilter } from '../models/RuntimeFilter';
-import { RuntimeParamOverride } from '../models/RuntimeParamOverride';
-import { RuntimeSort } from '../models/RuntimeSort';
+import { InputVariableValue } from '../models/InputVariableValue';
 import { HttpFile } from '../http/http';
 
-export class JWTUserOptionsParametersInner {
+export class UpdateVariableRequest {
     /**
-    * Runtime filter parameter type in JWT.
+    * New name of the variable if we want to rename.
     */
-    'runtime_filter'?: any;
+    'name'?: string;
     /**
-    * Runtime sort parameter type in JWT.
+    * Operation to perform on the values.
     */
-    'runtime_sort'?: any;
+    'operation'?: UpdateVariableRequestOperationEnum;
     /**
-    * Runtime param override type in JWT.
+    * Values of variable to be updated.
     */
-    'runtime_param_override'?: any;
+    'values'?: Array<InputVariableValue>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "runtime_filter",
-            "baseName": "runtime_filter",
-            "type": "any",
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "runtime_sort",
-            "baseName": "runtime_sort",
-            "type": "any",
+            "name": "operation",
+            "baseName": "operation",
+            "type": "UpdateVariableRequestOperationEnum",
             "format": ""
         },
         {
-            "name": "runtime_param_override",
-            "baseName": "runtime_param_override",
-            "type": "any",
+            "name": "values",
+            "baseName": "values",
+            "type": "Array<InputVariableValue>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return JWTUserOptionsParametersInner.attributeTypeMap;
+        return UpdateVariableRequest.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
+
+
+export type UpdateVariableRequestOperationEnum = "ADD" | "REMOVE" | "REPLACE" ;
 
