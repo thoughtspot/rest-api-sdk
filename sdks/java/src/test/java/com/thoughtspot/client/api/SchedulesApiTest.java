@@ -4,7 +4,6 @@
 
 package com.thoughtspot.client.api;
 
-
 import com.thoughtspot.client.ApiException;
 import com.thoughtspot.client.model.CreateScheduleRequest;
 import com.thoughtspot.client.model.ResponseSchedule;

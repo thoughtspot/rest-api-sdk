@@ -4,7 +4,6 @@
 
 package com.thoughtspot.client.auth;
 
-
 import com.thoughtspot.client.ApiException;
 import com.thoughtspot.client.Pair;
 import java.net.URI;

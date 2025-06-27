@@ -4,7 +4,6 @@
 
 package com.thoughtspot.client.model;
 
-
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -77,6 +76,8 @@ public class UpdateUserGroupRequest implements Serializable {
         JOBSCHEDULING("JOBSCHEDULING"),
 
         A3_ANALYSIS("A3ANALYSIS"),
+
+        EXPERIMENTALFEATUREPRIVILEGE("EXPERIMENTALFEATUREPRIVILEGE"),
 
         BYPASSRLS("BYPASSRLS"),
 

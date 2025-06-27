@@ -4,7 +4,6 @@
 
 package com.thoughtspot.client;
 
-
 import java.util.Map;
 
 /** Representing a Server configuration. */

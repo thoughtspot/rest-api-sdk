@@ -4,7 +4,6 @@
 
 package com.thoughtspot.client.api;
 
-
 import com.thoughtspot.client.ApiException;
 import com.thoughtspot.client.model.ConvertWorksheetToModelRequest;
 import com.thoughtspot.client.model.CopyObjectRequest;
@@ -350,7 +349,10 @@ public class MetadataApiTest {
      * all metadata objects, including users and groups. #### Usage guidelines - To get all metadata
      * objects, send the API request without any attributes. - To get metadata objects of a specific
      * type, set the &#x60;type&#x60; attribute. For example, to fetch a Worksheet, set the type as
-     * &#x60;LOGICAL_TABLE&#x60;. - To get a specific metadata object, specify the GUID. - To
+     * &#x60;LOGICAL_TABLE&#x60;. - To filter metadata objects within type
+     * &#x60;LOGICAL_TABLE&#x60;, set the &#x60;subtypes&#x60; attribute. For example, to fetch a
+     * Worksheet, set the type as &#x60;LOGICAL_TABLE&#x60; &amp; subtypes as
+     * &#x60;[WORKSHEET]&#x60;. - To get a specific metadata object, specify the GUID. - To
      * customize your search and filter the API response, you can use several parameters. You can
      * search for objects created or modified by specific users, by tags applied to the objects, or
      * by using the include parameters like &#x60;include_auto_created_objects&#x60;,
@@ -361,7 +363,7 @@ public class MetadataApiTest {
      * value is true. - For liveboard metadata type, to get the newer format, set the
      * &#x60;liveboard_response_format&#x60; as V2. Default value is V1. **NOTE**: The following
      * parameters support pagination of metadata records: - &#x60;tag_identifiers&#x60; -
-     * &#x60;type&#x60; - &#x60;created_by_user_identifiers&#x60; -
+     * &#x60;type&#x60; - &#x60;subtypes&#x60; - &#x60;created_by_user_identifiers&#x60; -
      * &#x60;modified_by_user_identifiers&#x60; - &#x60;owned_by_user_identifiers&#x60; -
      * &#x60;exclude_objects&#x60; - &#x60;include_auto_created_objects&#x60; -
      * &#x60;favorite_object_options&#x60; If you are using other parameters to search metadata, set

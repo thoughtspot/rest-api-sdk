@@ -4,7 +4,6 @@
 
 package com.thoughtspot.client.model;
 
-
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -105,7 +104,9 @@ public class UpdateRoleRequest implements Serializable {
 
         CAN_MANAGE_ANALYST_STUDIO("CAN_MANAGE_ANALYST_STUDIO"),
 
-        PREVIEW_DOCUMENT_SEARCH("PREVIEW_DOCUMENT_SEARCH");
+        PREVIEW_DOCUMENT_SEARCH("PREVIEW_DOCUMENT_SEARCH"),
+
+        PREVIEW_THOUGHTSPOT_SAGE("PREVIEW_THOUGHTSPOT_SAGE");
 
         private String value;
 

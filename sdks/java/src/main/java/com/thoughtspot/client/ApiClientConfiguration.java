@@ -4,7 +4,6 @@
 
 package com.thoughtspot.client;
 
-
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,7 +15,8 @@ import javax.net.ssl.KeyManager;
 
 /**
  * Configuration class for the ThoughtSpot client. This class holds various configuration options
- * such as base path, bearer token, default headers, cookies, SSL verification, and key managers.
+ * such as base path, bearer token, default headers, cookies, SSL verification, hostname
+ * verification, and key managers.
  */
 @javax.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
@@ -32,6 +32,7 @@ public class ApiClientConfiguration {
     private final Map<String, String> defaultCookieMap;
     private final boolean verifyingSsl;
     private final InputStream sslCaCert;
+    private final boolean hostnameVerification;
     private final List<KeyManager> keyManagers;
     private final String downloadPath;
     private final int connectTimeoutMillis;
@@ -51,6 +52,7 @@ public class ApiClientConfiguration {
                 Collections.emptyMap(),
                 true,
                 null,
+                true,
                 Collections.emptyList(),
                 null,
                 DEFAULT_CONNECT_TIMEOUT_MILLIS,
@@ -73,6 +75,7 @@ public class ApiClientConfiguration {
                 Collections.emptyMap(),
                 true,
                 null,
+                true,
                 Collections.emptyList(),
                 null,
                 DEFAULT_CONNECT_TIMEOUT_MILLIS,
@@ -89,6 +92,7 @@ public class ApiClientConfiguration {
      * @param defaultCookieMap Default cookies to include in requests.
      * @param verifyingSsl Whether to verify SSL certificates.
      * @param sslCaCert The SSL CA certificate input stream.
+     * @param hostnameVerification Whether to verify hostname when making https requests.
      * @param keyManagers List of key managers for SSL configuration.
      * @param downloadPath The path for downloading files. If null, system's default temporary
      *     folder will be used.
@@ -106,6 +110,7 @@ public class ApiClientConfiguration {
             final Map<String, String> defaultCookieMap,
             final boolean verifyingSsl,
             final InputStream sslCaCert,
+            final boolean hostnameVerification,
             final List<KeyManager> keyManagers,
             final String downloadPath,
             final int connectTimeoutMillis,
@@ -118,6 +123,7 @@ public class ApiClientConfiguration {
                 defaultCookieMap,
                 verifyingSsl,
                 sslCaCert,
+                hostnameVerification,
                 keyManagers,
                 downloadPath,
                 connectTimeoutMillis,
@@ -134,6 +140,7 @@ public class ApiClientConfiguration {
      * @param defaultCookieMap Default cookies to include in requests.
      * @param verifyingSsl Whether to verify SSL certificates.
      * @param sslCaCert The SSL CA certificate input stream.
+     * @param hostnameVerification Whether to verify hostname when making https requests.
      * @param keyManagers List of key managers for SSL configuration.
      * @param downloadPath The path for downloading files. If null, system's default temporary
      *     folder will be used.
@@ -151,6 +158,7 @@ public class ApiClientConfiguration {
             final Map<String, String> defaultCookieMap,
             final boolean verifyingSsl,
             final InputStream sslCaCert,
+            final boolean hostnameVerification,
             final List<KeyManager> keyManagers,
             final String downloadPath,
             final int connectTimeoutMillis,
@@ -168,6 +176,7 @@ public class ApiClientConfiguration {
                         : Collections.emptyMap();
         this.verifyingSsl = verifyingSsl;
         this.sslCaCert = sslCaCert;
+        this.hostnameVerification = hostnameVerification;
         this.keyManagers =
                 keyManagers != null
                         ? Collections.unmodifiableList(new ArrayList<>(keyManagers))
@@ -226,6 +235,11 @@ public class ApiClientConfiguration {
         return sslCaCert;
     }
 
+    /** @return Whether hostname verification is enabled. */
+    public boolean isHostnameVerification() {
+        return hostnameVerification;
+    }
+
     /** @return An unmodifiable list of key managers. */
     public List<KeyManager> getKeyManagers() {
         return keyManagers;
@@ -268,6 +282,8 @@ public class ApiClientConfiguration {
                 + verifyingSsl
                 + ", sslCaCert="
                 + sslCaCert
+                + ", hostnameVerification="
+                + hostnameVerification
                 + ", keyManagers="
                 + keyManagers
                 + ", downloadPath='"
@@ -299,6 +315,7 @@ public class ApiClientConfiguration {
         private Map<String, String> defaultCookieMap;
         private boolean verifyingSsl;
         private InputStream sslCaCert;
+        private boolean hostnameVerification;
         private List<KeyManager> keyManagers;
         private String downloadPath;
         private int connectTimeoutMillis;
@@ -316,6 +333,7 @@ public class ApiClientConfiguration {
             this.defaultHeaderMap = new HashMap<>();
             this.defaultCookieMap = new HashMap<>();
             this.verifyingSsl = true;
+            this.hostnameVerification = true;
             this.keyManagers = new ArrayList<>();
             this.downloadPath = null;
             this.connectTimeoutMillis = DEFAULT_CONNECT_TIMEOUT_MILLIS;
@@ -335,6 +353,7 @@ public class ApiClientConfiguration {
             this.defaultCookieMap = new HashMap<>(config.getDefaultCookieMap());
             this.verifyingSsl = config.isVerifyingSsl();
             this.sslCaCert = config.getSslCaCert();
+            this.hostnameVerification = config.isHostnameVerification();
             this.keyManagers = new ArrayList<>(config.getKeyManagers());
             this.downloadPath = config.getDownloadPath();
             this.connectTimeoutMillis = config.getConnectTimeoutMillis();
@@ -444,6 +463,17 @@ public class ApiClientConfiguration {
         }
 
         /**
+         * Sets whether hostname verification is enabled.
+         *
+         * @param hostnameVerification True to enable hostname verification, false otherwise.
+         * @return The builder instance.
+         */
+        public Builder hostnameVerification(boolean hostnameVerification) {
+            this.hostnameVerification = hostnameVerification;
+            return this;
+        }
+
+        /**
          * Adds a key manager to the configuration.
          *
          * @param keyManager The key manager.
@@ -527,6 +557,7 @@ public class ApiClientConfiguration {
                     defaultCookieMap,
                     verifyingSsl,
                     sslCaCert,
+                    hostnameVerification,
                     keyManagers,
                     downloadPath,
                     connectTimeoutMillis,

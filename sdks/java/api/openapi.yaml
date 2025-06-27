@@ -2276,6 +2276,259 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
+  /api/rest/2.0/customization/email:
+    post:
+      description: |2+
+
+        Version: 10.10.0.cl or later
+
+
+        Creates a custom configuration for the email customisation
+
+        #### Pre-requisites
+
+        Requires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `_Has developer privilege` privilege is required.
+        Coms should be enabled on the cluster.
+
+        #### Usage guidelines
+
+        To create a custom confuguration:
+
+        1. Pass these parameters in your API request.
+
+        - A JSON map of configuration attributes `template_properties`. The following example shows the configuration attribures for a csutom configuration:
+
+        ```
+        {
+            {
+            "logoUrl": "<logo_url>",
+            "homeUrl": "<home_url>",
+            "productName": "<Company Name in the Mail>",
+            "footerAddress": "<address to be visible in the footer>",
+            "ctaButtonBgColor": "#444DEA",
+            "ctaTextFontColor": "#FFFFFF",
+            "primaryBgColor": "#D3DEF0",
+            "hideMobileAppNudge": <true/false>,
+            "hideTsVocabularyDefinitions": <true/false>e,
+            "hideProductName": <true/false>,
+            "hideFooterPhone": <true/false>,
+            "hideFooterAddress": <true/false>,
+            "hidePrivacyPolicy": <true/false>,
+            "hideManageNotification": <true/false>,
+            "fontfamily": "<to maintain a single font in the entire email>"
+          }
+        }
+        ```
+
+
+
+
+
+      operationId: createEmailCustomisation
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createEmailCustomisation_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateEmailCustomisationResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Email Customisation
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/rest/2.0/customization/email/{template_identifier}/delete:
+    post:
+      description: |2+
+
+        Version: 10.10.0.cl or later
+
+
+        Deletes the configuration for the email customisation.
+
+        #### Pre-requisites
+
+        Requires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `_Has developer privilege` privilege is required.
+        Coms should be enabled on the cluster.
+
+        #### Usage guidelines
+
+        Deletes the configuration available for the cluster/org. Pass the `template_identifier` in the API request.
+
+        Note: `template_identifier` can be fetched from search API request.
+
+
+
+
+
+      operationId: deleteEmailCustomisation
+      parameters:
+      - description: Unique ID or name of the email customization.
+        explode: false
+        in: path
+        name: template_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Email Customization configuration successfully deleted.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Email Customisation
+      - ThoughtSpotRest
+      x-accepts:
+      - application/json
+  /api/rest/2.0/customization/email/search:
+    post:
+      description: |2+
+
+        Version: 10.10.0.cl or later
+
+
+        Search the email customisation configuration if any set for the ThoughtSpot system.
+
+        #### Pre-requisites
+
+        Requires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `_Has developer privilege` privilege is required.
+        Coms should be enabled on the cluster.
+
+        #### Usage guidelines
+
+        To get the list of configurations set in the cluster/org.
+
+
+
+
+
+      operationId: searchEmailCustomisation
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CreateEmailCustomisationResponse'
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Email Customisation
+      - ThoughtSpotRest
+      x-accepts:
+      - application/json
+  /api/rest/2.0/customization/email/validate:
+    post:
+      description: |2+
+
+        Version: 10.10.0.cl or later
+
+
+        Validates the email customisation configuration if any set for the ThoughtSpot system.
+
+        #### Pre-requisites
+
+        Requires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `_Has developer privilege` privilege is required.
+        Coms should be enabled on the cluster.
+
+
+
+
+
+      operationId: validateEmailCustomisation
+      parameters: []
+      responses:
+        "204":
+          description: Triggered test email for customization configuration
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Email Customisation
+      - ThoughtSpotRest
+      x-accepts:
+      - application/json
   /api/rest/2.0/groups/create:
     post:
       description: |2+
@@ -3439,6 +3692,7 @@ paths:
 
         - To get all metadata objects, send the API request without any attributes.
         - To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`.
+        - To filter metadata objects within type `LOGICAL_TABLE`, set the `subtypes` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE` & subtypes as `[WORKSHEET]`.
         - To get a specific metadata object, specify the GUID.
         - To customize your search and filter the API response, you can use several parameters.
           You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.
@@ -3450,6 +3704,7 @@ paths:
 
         - `tag_identifiers`
         - `type`
+        - `subtypes`
         - `created_by_user_identifiers`
         - `modified_by_user_identifiers`
         - `owned_by_user_identifiers`
@@ -11443,6 +11698,7 @@ components:
             - SHAREWITHALL
             - JOBSCHEDULING
             - A3ANALYSIS
+            - EXPERIMENTALFEATUREPRIVILEGE
             - BYPASSRLS
             - RANALYSIS
             - DEVELOPER
@@ -12571,6 +12827,7 @@ components:
           include_custom_logo: true
           page_size: A4
         time_zone: time_zone
+        personalised_view_id: personalised_view_id
         frequency:
           cron_expression:
             hour: hour
@@ -12645,6 +12902,10 @@ components:
             $ref: '#/components/schemas/ResponseScheduleRun'
           nullable: true
           type: array
+        personalised_view_id:
+          description: Personalised view id of the liveboard to be scheduled.
+          nullable: true
+          type: string
       required:
       - author
       - creation_time_in_millis
@@ -13317,6 +13578,45 @@ components:
       required:
       - variable_identifier
       - variable_values
+      type: object
+    CreateEmailCustomisationResponse:
+      example:
+        tenant_id: tenant_id
+        org:
+          name: name
+          id: 0
+        name: name
+        template_properties: "{}"
+      properties:
+        tenant_id:
+          description: Tenant ID
+          type: string
+        org:
+          $ref: '#/components/schemas/OrgType'
+        name:
+          description: Email customization name.
+          type: string
+        template_properties:
+          description: Customization configuration for the email
+          type: object
+      required:
+      - name
+      - org
+      - template_properties
+      - tenant_id
+      type: object
+    OrgType:
+      example:
+        name: name
+        id: 0
+      properties:
+        name:
+          nullable: true
+          type: string
+        id:
+          format: int32
+          nullable: true
+          type: integer
       type: object
     Runtime_Filter:
       description: List of runtime parameters need to set during the session.
@@ -14268,6 +14568,14 @@ components:
       required:
       - dbt_connection_identifier
       type: object
+    createEmailCustomisation_request:
+      properties:
+        template_properties:
+          description: Email customization configuration as key value pair
+          type: object
+      required:
+      - template_properties
+      type: object
     createUserGroup_request:
       properties:
         name:
@@ -14298,6 +14606,7 @@ components:
             - SHAREWITHALL
             - JOBSCHEDULING
             - A3ANALYSIS
+            - EXPERIMENTALFEATUREPRIVILEGE
             - BYPASSRLS
             - RANALYSIS
             - DEVELOPER
@@ -14487,6 +14796,24 @@ components:
           allOf:
           - $ref: '#/components/schemas/SortOptions'
           description: Sort options to filter group details.
+        include_users:
+          default: true
+          description: |-
+            <div>Version: 10.10.0.cl or later
+            </div>
+
+            Define Parameter to consider if the users should be included in group search response.
+          nullable: true
+          type: boolean
+        include_sub_groups:
+          default: true
+          description: |-
+            <div>Version: 10.10.0.cl or later
+            </div>
+
+            Define Parameter to consider if the sub groups should be included in group search response.
+          nullable: true
+          type: boolean
       type: object
     updateUserGroup_request:
       properties:
@@ -14518,6 +14845,7 @@ components:
             - SHAREWITHALL
             - JOBSCHEDULING
             - A3ANALYSIS
+            - EXPERIMENTALFEATUREPRIVILEGE
             - BYPASSRLS
             - RANALYSIS
             - DEVELOPER
@@ -15556,6 +15884,7 @@ components:
             - CAN_ACCESS_ANALYST_STUDIO
             - CAN_MANAGE_ANALYST_STUDIO
             - PREVIEW_DOCUMENT_SEARCH
+            - PREVIEW_THOUGHTSPOT_SAGE
             type: string
           type: array
       required:
@@ -16239,6 +16568,9 @@ components:
           description: "Recipients of the scheduled job notifications. Add the GUID\
             \ or name of the ThoughtSpot users or groups as recipients in the `principals`\
             \ array. If a recipient is not a ThoughtSpot user, specify email address."
+        personalised_view_id:
+          description: Personalised view id of the liveboard to be scheduled.
+          type: string
       required:
       - description
       - metadata_identifier
@@ -16958,6 +17290,9 @@ components:
           enum:
           - ACTIVE
           - PAUSE
+          type: string
+        personalised_view_id:
+          description: Personalised view id of the liveboard to be scheduled.
           type: string
       type: object
     assignChangeAuthor_request:
@@ -18095,6 +18430,11 @@ x-roles:
   tags:
   - 9.6.0.cl
   description: Roles for version 9.6.0.cl
+- name: 10.10.0.cl
+  id: 10.10.0.cl
+  tags:
+  - 10.10.0.cl
+  description: Roles for version 10.10.0.cl
 - name: 10.6.0.cl
   id: 10.6.0.cl
   tags:

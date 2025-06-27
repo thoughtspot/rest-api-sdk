@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- template for settings.xml file -->
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <servers>
+        <server>
+            <id>central</id>
+            <username>$MVN_USERNAME</username>
+            <password>$MVN_PASSWORD</password>
+        </server>
+       <server>
+           <id>$GPG_KEY_ID</id>
+           <passphrase>$GPG_PASSPHRASE</passphrase>
+       </server>
+    </servers>
+   <profiles>
+       <profile>
+           <id>gpg.signing</id>
+           <activation>
+               <activeByDefault>true</activeByDefault>
+           </activation>
+           <properties>
+               <gpg.keyname>$GPG_KEY_ID</gpg.keyname>
+           </properties>
+       </profile>
+   </profiles>
+</settings>

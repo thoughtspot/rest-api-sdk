@@ -4,7 +4,6 @@
 
 package com.thoughtspot.client.model;
 
-
 import org.junit.jupiter.api.Test;
 
 /** Model tests for GetAsyncImportStatusResponse */

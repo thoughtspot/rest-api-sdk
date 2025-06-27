@@ -4,7 +4,6 @@
 
 package com.thoughtspot.client.model;
 
-
 import java.util.Map;
 import java.util.Objects;
 
