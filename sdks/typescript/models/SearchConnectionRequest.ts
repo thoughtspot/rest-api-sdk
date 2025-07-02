@@ -52,6 +52,10 @@ export class SearchConnectionRequest {
     * List of authentication types to fetch data_ware_house_objects from external Data warehouse. This is only applicable when data_warehouse_object_type is selected.
     */
     'authentication_type'?: SearchConnectionRequestAuthenticationTypeEnum;
+    /**
+    * <div>Version: 10.9.0.cl or later </div>  Indicates whether to show resolved parameterised values.
+    */
+    'show_resolved_parameters'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -114,6 +118,12 @@ export class SearchConnectionRequest {
             "name": "authentication_type",
             "baseName": "authentication_type",
             "type": "SearchConnectionRequestAuthenticationTypeEnum",
+            "format": ""
+        },
+        {
+            "name": "show_resolved_parameters",
+            "baseName": "show_resolved_parameters",
+            "type": "boolean",
             "format": ""
         }    ];
 

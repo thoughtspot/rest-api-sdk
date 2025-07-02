@@ -11,14 +11,13 @@
  */
 
 import { JWTMetadataObject } from '../models/JWTMetadataObject';
-import { JWTUserOptionsParametersInner } from '../models/JWTUserOptionsParametersInner';
 import { HttpFile } from '../http/http';
 
 /**
 * JWT user options to create a JWT token given the payload.   *Deprecated in 9.12.0.cl. Use user_parameters instead.*
 */
 export class JWTUserOptions {
-    'parameters'?: Array<JWTUserOptionsParametersInner>;
+    'parameters'?: Array<any>;
     'metadata'?: Array<JWTMetadataObject> | null;
 
     static readonly discriminator: string | undefined = undefined;
@@ -27,7 +26,7 @@ export class JWTUserOptions {
         {
             "name": "parameters",
             "baseName": "parameters",
-            "type": "Array<JWTUserOptionsParametersInner>",
+            "type": "Array<any>",
             "format": ""
         },
         {
