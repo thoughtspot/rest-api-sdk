@@ -339,7 +339,7 @@ import { CreateEmailCustomisationRequest } from '../models/CreateEmailCustomisat
 import { CreateEmailCustomisationResponse } from '../models/CreateEmailCustomisationResponse';
 import { CreateOrgRequest } from '../models/CreateOrgRequest';
 import { CreateRoleRequest  , CreateRoleRequestPrivilegesEnum    } from '../models/CreateRoleRequest';
-import { CreateScheduleRequest  , CreateScheduleRequestMetadataTypeEnum   , CreateScheduleRequestFileFormatEnum    , CreateScheduleRequestTimeZoneEnum      } from '../models/CreateScheduleRequest';
+import { CreateScheduleRequest  , CreateScheduleRequestMetadataTypeEnum   , CreateScheduleRequestFileFormatEnum    , CreateScheduleRequestTimeZoneEnum     } from '../models/CreateScheduleRequest';
 import { CreateScheduleRequestFrequency } from '../models/CreateScheduleRequestFrequency';
 import { CreateScheduleRequestLiveboardOptions } from '../models/CreateScheduleRequestLiveboardOptions';
 import { CreateScheduleRequestPdfOptions       , CreateScheduleRequestPdfOptionsPageSizeEnum    } from '../models/CreateScheduleRequestPdfOptions';
@@ -560,7 +560,7 @@ import { UpdateMetadataObjIdRequest } from '../models/UpdateMetadataObjIdRequest
 import { UpdateObjIdInput , UpdateObjIdInputTypeEnum     } from '../models/UpdateObjIdInput';
 import { UpdateOrgRequest    , UpdateOrgRequestOperationEnum   } from '../models/UpdateOrgRequest';
 import { UpdateRoleRequest  , UpdateRoleRequestPrivilegesEnum   } from '../models/UpdateRoleRequest';
-import { UpdateScheduleRequest  , UpdateScheduleRequestMetadataTypeEnum   , UpdateScheduleRequestFileFormatEnum    , UpdateScheduleRequestTimeZoneEnum    , UpdateScheduleRequestStatusEnum    } from '../models/UpdateScheduleRequest';
+import { UpdateScheduleRequest  , UpdateScheduleRequestMetadataTypeEnum   , UpdateScheduleRequestFileFormatEnum    , UpdateScheduleRequestTimeZoneEnum    , UpdateScheduleRequestStatusEnum   } from '../models/UpdateScheduleRequest';
 import { UpdateScheduleRequestFrequency } from '../models/UpdateScheduleRequestFrequency';
 import { UpdateScheduleRequestLiveboardOptions } from '../models/UpdateScheduleRequestLiveboardOptions';
 import { UpdateScheduleRequestPdfOptions       , UpdateScheduleRequestPdfOptionsPageSizeEnum    } from '../models/UpdateScheduleRequestPdfOptions';

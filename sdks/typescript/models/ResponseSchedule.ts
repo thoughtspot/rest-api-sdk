@@ -58,10 +58,6 @@ export class ResponseSchedule {
     * Schedule runs history records.
     */
     'history_runs'?: Array<ResponseScheduleRun> | null;
-    /**
-    * Personalised view id of the liveboard to be scheduled.
-    */
-    'personalised_view_id'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -148,12 +144,6 @@ export class ResponseSchedule {
             "name": "history_runs",
             "baseName": "history_runs",
             "type": "Array<ResponseScheduleRun>",
-            "format": ""
-        },
-        {
-            "name": "personalised_view_id",
-            "baseName": "personalised_view_id",
-            "type": "string",
             "format": ""
         }    ];
 

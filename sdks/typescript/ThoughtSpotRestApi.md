@@ -1089,7 +1089,6 @@ apiInstance.createSchedule(
     time_zone: "America/Los_Angeles",
     frequency: null,
     recipient_details: null,
-    personalised_view_id: "personalised_view_id_example",
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -7229,7 +7228,6 @@ apiInstance.updateSchedule(
     frequency: null,
     recipient_details: null,
     status: "ACTIVE",
-    personalised_view_id: "personalised_view_id_example",
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);

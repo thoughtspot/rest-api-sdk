@@ -2874,10 +2874,6 @@ declare class CreateScheduleRequest {
     'time_zone': CreateScheduleRequestTimeZoneEnum;
     'frequency'?: CreateScheduleRequestFrequency;
     'recipient_details': CreateScheduleRequestRecipientDetails;
-    /**
-    * Personalised view id of the liveboard to be scheduled.
-    */
-    'personalised_view_id'?: string;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -9009,10 +9005,6 @@ declare class ResponseSchedule {
     * Schedule runs history records.
     */
     'history_runs'?: Array<ResponseScheduleRun> | null;
-    /**
-    * Personalised view id of the liveboard to be scheduled.
-    */
-    'personalised_view_id'?: string | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -12738,10 +12730,6 @@ declare class UpdateScheduleRequest {
     * Status of the schedule
     */
     'status'?: UpdateScheduleRequestStatusEnum;
-    /**
-    * Personalised view id of the liveboard to be scheduled.
-    */
-    'personalised_view_id'?: string;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
