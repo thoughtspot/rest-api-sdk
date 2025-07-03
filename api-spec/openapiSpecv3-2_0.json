@@ -18100,6 +18100,12 @@
             "default": false,
             "description": "Boolean flag indicating whether to export associated feedbacks of the object. This will only be respected when the object can have feedbacks. <br/>  <span class=\"since-beta-tag\">Version: 10.7.0.cl or later</span>",
             "nullable": true
+          },
+          "export_column_security_rules": {
+            "type": "boolean",
+            "default": false,
+            "description": "Boolean flag indicating whether to export column security rules of the object. This will only be respected when the object can have column security rules and export_associated is true. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.12.0.cl or later</span>",
+            "nullable": true
           }
         },
         "description": "Flags to specify additional options for export. This will only be active when UserDefinedId in TML is enabled."
