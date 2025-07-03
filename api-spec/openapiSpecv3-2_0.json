@@ -8192,10 +8192,6 @@
                         "$ref": "#/components/schemas/RecipientDetailsInput"
                       }
                     ]
-                  },
-                  "personalised_view_id": {
-                    "description": "Personalised view id of the liveboard to be scheduled.",
-                    "type": "string"
                   }
                 },
                 "required": [
@@ -9167,10 +9163,6 @@
                       "ACTIVE",
                       "PAUSE"
                     ]
-                  },
-                  "personalised_view_id": {
-                    "description": "Personalised view id of the liveboard to be scheduled.",
-                    "type": "string"
                   }
                 }
               }
@@ -18480,11 +18472,6 @@
               "$ref": "#/components/schemas/ResponseScheduleRun"
             },
             "description": "Schedule runs history records.",
-            "nullable": true
-          },
-          "personalised_view_id": {
-            "type": "string",
-            "description": "Personalised view id of the liveboard to be scheduled.",
             "nullable": true
           }
         }
