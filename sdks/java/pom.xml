@@ -4,7 +4,7 @@
 
     <groupId>io.github.thoughtspot</groupId>
     <artifactId>rest-api-sdk-lib</artifactId>
-    <version>2.15.0</version>
+    <version>2.15.1</version>
     <packaging>jar</packaging>
 
     <name>rest-api-sdk-lib</name>

@@ -1555,12 +1555,6 @@ public class UpdateScheduleRequest implements Serializable {
     @javax.annotation.Nullable
     private StatusEnum status;
 
-    public static final String SERIALIZED_NAME_PERSONALISED_VIEW_ID = "personalised_view_id";
-
-    @SerializedName(SERIALIZED_NAME_PERSONALISED_VIEW_ID)
-    @javax.annotation.Nullable
-    private String personalisedViewId;
-
     public UpdateScheduleRequest() {}
 
     public UpdateScheduleRequest name(@javax.annotation.Nullable String name) {
@@ -1781,26 +1775,6 @@ public class UpdateScheduleRequest implements Serializable {
         this.status = status;
     }
 
-    public UpdateScheduleRequest personalisedViewId(
-            @javax.annotation.Nullable String personalisedViewId) {
-        this.personalisedViewId = personalisedViewId;
-        return this;
-    }
-
-    /**
-     * Personalised view id of the liveboard to be scheduled.
-     *
-     * @return personalisedViewId
-     */
-    @javax.annotation.Nullable
-    public String getPersonalisedViewId() {
-        return personalisedViewId;
-    }
-
-    public void setPersonalisedViewId(@javax.annotation.Nullable String personalisedViewId) {
-        this.personalisedViewId = personalisedViewId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -1820,9 +1794,7 @@ public class UpdateScheduleRequest implements Serializable {
                 && Objects.equals(this.timeZone, updateScheduleRequest.timeZone)
                 && Objects.equals(this.frequency, updateScheduleRequest.frequency)
                 && Objects.equals(this.recipientDetails, updateScheduleRequest.recipientDetails)
-                && Objects.equals(this.status, updateScheduleRequest.status)
-                && Objects.equals(
-                        this.personalisedViewId, updateScheduleRequest.personalisedViewId);
+                && Objects.equals(this.status, updateScheduleRequest.status);
     }
 
     @Override
@@ -1838,8 +1810,7 @@ public class UpdateScheduleRequest implements Serializable {
                 timeZone,
                 frequency,
                 recipientDetails,
-                status,
-                personalisedViewId);
+                status);
     }
 
     @Override
@@ -1859,9 +1830,6 @@ public class UpdateScheduleRequest implements Serializable {
         sb.append("    frequency: ").append(toIndentedString(frequency)).append("\n");
         sb.append("    recipientDetails: ").append(toIndentedString(recipientDetails)).append("\n");
         sb.append("    status: ").append(toIndentedString(status)).append("\n");
-        sb.append("    personalisedViewId: ")
-                .append(toIndentedString(personalisedViewId))
-                .append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -1894,7 +1862,6 @@ public class UpdateScheduleRequest implements Serializable {
         openapiFields.add("frequency");
         openapiFields.add("recipient_details");
         openapiFields.add("status");
-        openapiFields.add("personalised_view_id");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -2020,15 +1987,6 @@ public class UpdateScheduleRequest implements Serializable {
         // validate the optional field `status`
         if (jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) {
             StatusEnum.validateJsonElement(jsonObj.get("status"));
-        }
-        if ((jsonObj.get("personalised_view_id") != null
-                        && !jsonObj.get("personalised_view_id").isJsonNull())
-                && !jsonObj.get("personalised_view_id").isJsonPrimitive()) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            "Expected the field `personalised_view_id` to be a primitive type in"
-                                    + " the JSON string but got `%s`",
-                            jsonObj.get("personalised_view_id").toString()));
         }
     }
 
