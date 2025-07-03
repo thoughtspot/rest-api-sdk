@@ -182,7 +182,7 @@ public class ApiClient {
         json = new JSON();
 
         // Set default User-Agent.
-        setUserAgent("ThoughtSpot-Client/java/2.15.0");
+        setUserAgent("ThoughtSpot-Client/java/2.15.1");
 
         authentications = new HashMap<String, Authentication>();
     }

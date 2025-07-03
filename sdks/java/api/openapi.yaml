@@ -12827,7 +12827,6 @@ components:
           include_custom_logo: true
           page_size: A4
         time_zone: time_zone
-        personalised_view_id: personalised_view_id
         frequency:
           cron_expression:
             hour: hour
@@ -12902,10 +12901,6 @@ components:
             $ref: '#/components/schemas/ResponseScheduleRun'
           nullable: true
           type: array
-        personalised_view_id:
-          description: Personalised view id of the liveboard to be scheduled.
-          nullable: true
-          type: string
       required:
       - author
       - creation_time_in_millis
@@ -16568,9 +16563,6 @@ components:
           description: "Recipients of the scheduled job notifications. Add the GUID\
             \ or name of the ThoughtSpot users or groups as recipients in the `principals`\
             \ array. If a recipient is not a ThoughtSpot user, specify email address."
-        personalised_view_id:
-          description: Personalised view id of the liveboard to be scheduled.
-          type: string
       required:
       - description
       - metadata_identifier
@@ -17290,9 +17282,6 @@ components:
           enum:
           - ACTIVE
           - PAUSE
-          type: string
-        personalised_view_id:
-          description: Personalised view id of the liveboard to be scheduled.
           type: string
       type: object
     assignChangeAuthor_request:
