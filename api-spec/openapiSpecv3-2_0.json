@@ -220,6 +220,111 @@
         }
       }
     },
+    "/api/rest/2.0/ai/analytical-questions/v2/": {
+      "post": {
+        "operationId": "getRelevantQuestions",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.7.0.cl or later</span>\n\nBreaks down a user-submitted query into a series of analytical sub-questions using relevant contextual metadata.\n\nTo use this API, the user must have at least view-level access to the referenced metadata objects.\n\n#### Usage guidelines\n\nTo enable accurate query decomposition, the request must include at least one of the following metadata identifiers within `context_metadata`: `answer_ids`, `liveboard_ids`, or `worksheet_ids`.\n\nYou can further enhance the quality and precision of decomposition by providing additional context such as:\n- `content`: user-supplied data like CSV or text\n- `instructions`: specific user directions for tailoring the decomposition\n- `conversation_id`: unique identifier to preserve context across interactions\n\nIf the API request is successful, ThoughtSpot returns a list of decomposed analytical queries, each aligned with the user's original question.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "10.7.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "content": {
+                    "description": "User provided content like text data, csv data as a string message to provide context & potentially improve the quality of the response.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "context_metadata": {
+                    "description": "Context metadata to provide context for decomposing user query into analytical queries that can be run on them.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/ContextMetadata"
+                      }
+                    ]
+                  },
+                  "max_decomposed_queries": {
+                    "description": "Maximum number of decomposed queries that is allowed in the response, default = 5.",
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "bypass_cache": {
+                    "description": "List of worksheetIds to provide context for decomposing user query into analytical queries that can be run on them.",
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "instructions": {
+                    "description": "User specific instructions for processing the @query.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "query": {
+                    "description": "User query which is a topical/goal oriented question that needs to be broken down into smaller simple analytical questions.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "context_metadata",
+                  "query"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_GetRelevantQuestionsResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_GetRelevantQuestionsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/ai/analytical-questions": {
       "post": {
         "operationId": "queryGetDecomposedQuery",
@@ -16929,6 +17034,73 @@
           }
         },
         "description": "MetadataType InputType used in Custom Action API's"
+      },
+      "ContextMetadata": {
+        "type": "object",
+        "properties": {
+          "data_source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of data_source_ids to provide context for decomposing user query into analytical queries that can be run on them.",
+            "nullable": true
+          },
+          "answer_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of answer unique identifiers (GUIDs) whose data will be used to guide the response.",
+            "nullable": true
+          },
+          "conversation_id": {
+            "type": "string",
+            "description": "Unique identifier to denote current conversation.",
+            "nullable": true
+          },
+          "liveboard_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of liveboard unique identifiers (GUIDs) whose data will be used to guide the response.",
+            "nullable": true
+          }
+        }
+      },
+      "eureka_GetRelevantQuestionsResponse": {
+        "type": "object",
+        "properties": {
+          "relevant_questions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/eureka_RelevantQuestion"
+            },
+            "description": "List of relevant questions that can be run on their respective worksheet/data sources.",
+            "nullable": true
+          }
+        }
+      },
+      "eureka_RelevantQuestion": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "NL query that can be run using spotter aka natural language search to get an AI generated answer.",
+            "nullable": true
+          },
+          "worksheet_id": {
+            "type": "string",
+            "description": "Unique identifier of the worksheet on which this query can be run on.",
+            "nullable": true
+          },
+          "worksheet_name": {
+            "type": "string",
+            "description": "Display name of the worksheet on which this query can be run on.",
+            "nullable": true
+          }
+        }
       },
       "Input_eureka_NLSRequest": {
         "type": "object",
