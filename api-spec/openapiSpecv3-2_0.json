@@ -10072,6 +10072,94 @@
         }
       }
     },
+    "/api/rest/2.0/security/column/rules/fetch": {
+      "post": {
+        "operationId": "fetchColumnSecurityRules",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.12.0.cl or later</span>\n\nFetches column security rules for specified tables.\n\nThis API endpoint retrieves column-level security rules configured for tables. It returns information about which columns are secured and which groups have access to those columns.\n\n#### Usage guidelines\n\n- Provide an array of table identifiers using either `identifier` (GUID or name) or `obj_identifier` (object ID)\n- At least one of `identifier` or `obj_identifier` must be provided for each table\n- The API returns column security rules for all specified tables\n- Users must have appropriate permissions to access security rules for the specified tables\n\n#### Required permissions\n\n- `ADMINISTRATION` - Can administer ThoughtSpot\n- `DATAMANAGEMENT` - Can manage data\n- `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` - Can manage worksheet views and tables\n\n#### Example request\n\n```json\n{\n  \"tables\": [\n    {\n      \"identifier\": \"table-guid\",\n      \"obj_identifier\": \"table-object-id\"\n    }\n  ]\n}\n```\n\n#### Response format\n\nThe API returns an array of `ColumnSecurityRuleResponse` objects wrapped in a `data` field. Each `ColumnSecurityRuleResponse` object contains:\n- Table information (GUID and object ID)  \n- Array of column security rules with column details, group access, and source table information\n\n#### Example response\n\n```json\n{\n  \"data\": [\n    {\n      \"guid\": \"table-guid\",\n      \"objId\": \"table-object-id\",\n      \"columnSecurityRules\": [\n        {\n          \"column\": {\n            \"id\": \"col_123\",\n            \"name\": \"Salary\"\n          },\n          \"groups\": [\n            {\n              \"id\": \"group_1\",\n              \"name\": \"HR Department\"\n            }\n          ],\n          \"sourceTableDetails\": {\n            \"id\": \"source-table-guid\",\n            \"name\": \"Employee_Data\"\n          }\n        }\n      ]\n    }\n  ]\n}\n```\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Security",
+          "10.12.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tables": {
+                    "description": "Array of table identifier objects for which to fetch column security rules",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ColumnSecurityRuleTableInput"
+                    }
+                  }
+                },
+                "required": [
+                  "tables"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successfully fetched column security rules",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ColumnSecurityRuleResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - Table not found or invalid parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - User doesn't have permission to access security rules for this table",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/security/principals/fetch-permissions": {
       "post": {
         "operationId": "fetchPermissionsOfPrincipals",
@@ -10711,6 +10799,97 @@
           },
           "500": {
             "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/security/column/rules/update": {
+      "post": {
+        "operationId": "updateColumnSecurityRules",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.12.0.cl or later</span>\n\nCreates, updates, or deletes column security rules for specified tables.\n\nThis API endpoint allows you to create, update, or delete column-level security rules on columns of a table. The operation follows an \"all or none\" policy: if defining security rules for any of the provided columns fails, the entire operation will be rolled back, and no rules will be created.\n\n#### Usage guidelines\n\n- Provide table identifier using either `identifier` (GUID or name) or `obj_identifier` (object ID)\n- Use `clear_csr: true` to remove all column security rules from the table\n- For each column, specify the security rule using `column_security_rules` array\n- Use `is_unsecured: true` to mark a specific column as unprotected\n- Use `group_access` operations to manage group associations:\n  - `ADD`: Add groups to the column's access list\n  - `REMOVE`: Remove groups from the column's access list\n  - `REPLACE`: Replace all existing groups with the specified groups\n\n#### Required permissions\n\n- `ADMINISTRATION` - Can administer ThoughtSpot\n- `DATAMANAGEMENT` - Can manage data (if RBAC is disabled)\n- `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` - Can manage worksheet views and tables (if RBAC is enabled)\n\n#### Example request\n\n```json\n{\n  \"identifier\": \"table-guid\",\n  \"obj_identifier\": \"table-object-id\",\n  \"clear_csr\": false,\n  \"column_security_rules\": [\n    {\n      \"column_identifier\": \"col id or col name\",\n      \"is_unsecured\": false,\n      \"group_access\": [\n        {\n          \"operation\": \"ADD\",\n          \"group_identifiers\": [\"hr_group_id\", \"hr_group_name\", \"finance_group_id\"]\n        }\n      ]\n    },\n    {\n      \"column_identifier\": \"col id or col name\",\n      \"is_unsecured\": true\n    },\n    {\n      \"column_identifier\": \"col id or col name\",\n      \"is_unsecured\": false,\n      \"group_access\": [\n        {\n          \"operation\": \"REPLACE\",\n          \"group_identifiers\": [\"management_group_id\", \"management_group_name\"]\n        }\n      ]\n    }\n  ]\n}\n```\n\n#### Request Body Schema\n\n- `identifier` (string, optional): GUID or name of the table for which we want to create column security rules\n- `obj_identifier` (string, optional): The object ID of the table\n- `clear_csr` (boolean, optional): If true, then all the secured columns will be marked as unprotected, and all the group associations will be removed\n- `column_security_rules` (array of objects, required): An array where each object defines the security rule for a specific column\n\nEach column security rule object contains:\n- `column_identifier` (string, required): Column identifier (col_id or name)\n- `is_unsecured` (boolean, optional): If true, the column will be marked as unprotected and all groups associated with it will be removed\n- `group_access` (array of objects, optional): Array of group operation objects\n\nEach group operation object contains:\n- `operation` (string, required): Operation type - ADD, REMOVE, or REPLACE\n- `group_identifiers` (array of strings, required): Array of group identifiers (name or GUID) on which the operation will be performed\n\n#### Response\n\nThis API does not return any response body. A successful operation returns HTTP 200 status code.\n\n#### Operation Types\n\n- **ADD**: Adds the specified groups to the column's access list\n- **REMOVE**: Removes the specified groups from the column's access list  \n- **REPLACE**: Replaces all existing groups with the specified groups \n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Security",
+          "10.12.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "identifier": {
+                    "description": "GUID or name of the table for which we want to create column security rules",
+                    "type": "string"
+                  },
+                  "obj_identifier": {
+                    "description": "The object ID of the table",
+                    "type": "string"
+                  },
+                  "clear_csr": {
+                    "description": "If true, then all the secured columns will be marked as unprotected, and all the group associations will be removed",
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "column_security_rules": {
+                    "description": "Array where each object defines the security rule for a specific column",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ColumnSecurityRuleUpdate"
+                    }
+                  }
+                },
+                "required": [
+                  "column_security_rules"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Successfully updated column security rules"
+          },
+          "400": {
+            "description": "Bad request - Invalid parameters or table not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - User doesn't have permission to modify security rules for this table",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
@@ -16016,6 +16195,120 @@
         },
         "description": "MetadataType InputType used in Permission API's"
       },
+      "ColumnSecurityRuleTableInput": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "Name or GUID of the table",
+            "nullable": true
+          },
+          "obj_identifier": {
+            "type": "string",
+            "description": "Object ID of the table",
+            "nullable": true
+          }
+        }
+      },
+      "ColumnSecurityRuleResponse": {
+        "type": "object",
+        "properties": {
+          "guid": {
+            "type": "string",
+            "description": "GUID of the table for which the column security rules are fetched",
+            "nullable": true
+          },
+          "objId": {
+            "type": "string",
+            "description": "Object ID of the table for which the column security rules are fetched",
+            "nullable": true
+          },
+          "columnSecurityRules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ColumnSecurityRule"
+            },
+            "description": "Array containing column security rule objects",
+            "nullable": true
+          }
+        }
+      },
+      "ColumnSecurityRule": {
+        "type": "object",
+        "required": [
+          "column"
+        ],
+        "properties": {
+          "column": {
+            "$ref": "#/components/schemas/ColumnSecurityRuleColumn",
+            "description": "Information about the column"
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ColumnSecurityRuleGroup"
+            },
+            "description": "Array of groups that have access to this column",
+            "nullable": true
+          },
+          "sourceTableDetails": {
+            "$ref": "#/components/schemas/ColumnSecurityRuleSourceTable",
+            "description": "Information about the source table",
+            "nullable": true
+          }
+        }
+      },
+      "ColumnSecurityRuleColumn": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the column"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the column"
+          }
+        }
+      },
+      "ColumnSecurityRuleGroup": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the group"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the group"
+          }
+        }
+      },
+      "ColumnSecurityRuleSourceTable": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the source table"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the source table"
+          }
+        }
+      },
       "SearchDataResponse": {
         "type": "object",
         "required": [
@@ -18747,6 +19040,56 @@
               "NO_ACCESS"
             ],
             "description": "Type of access to the shared object"
+          }
+        }
+      },
+      "ColumnSecurityRuleUpdate": {
+        "type": "object",
+        "required": [
+          "column_identifier"
+        ],
+        "properties": {
+          "column_identifier": {
+            "type": "string",
+            "description": "Column identifier (col_id or name)"
+          },
+          "is_unsecured": {
+            "type": "boolean",
+            "description": "If true, the column will be marked as unprotected and all groups associated with it will be removed",
+            "nullable": true
+          },
+          "group_access": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ColumnSecurityRuleGroupOperation"
+            },
+            "description": "Array of group operation objects that specifies the actions for groups to be associated with a column",
+            "nullable": true
+          }
+        }
+      },
+      "ColumnSecurityRuleGroupOperation": {
+        "type": "object",
+        "required": [
+          "operation",
+          "group_identifiers"
+        ],
+        "properties": {
+          "operation": {
+            "type": "string",
+            "enum": [
+              "ADD",
+              "REMOVE",
+              "REPLACE"
+            ],
+            "description": "Type of operation to be performed on the groups"
+          },
+          "group_identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Array of group identifiers (name or GUID) on which the operation will be performed"
           }
         }
       },
