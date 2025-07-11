@@ -18899,9 +18899,6 @@
       },
       "ExportMetadataTypeInput": {
         "type": "object",
-        "required": [
-          "identifier"
-        ],
         "properties": {
           "type": {
             "type": "string",
@@ -18921,7 +18918,19 @@
           },
           "identifier": {
             "type": "string",
-            "description": "Unique ID or name of the metadata object."
+            "description": "Unique ID or name of the metadata object. Not required if the metadata type is ANSWER when session_id and generation_number is set.",
+            "nullable": true
+          },
+          "session_identifier": {
+            "type": "string",
+            "description": "Unique ID of the Answer session. Required if the metadata type is ANSWER and identifier is not set.",
+            "nullable": true
+          },
+          "generation_number": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Generation Number of the Answer session. Required if the metadata type is ANSWER and identifier is not set.",
+            "nullable": true
           }
         },
         "description": "MetadataType InputType used in Export MetadataType API"
