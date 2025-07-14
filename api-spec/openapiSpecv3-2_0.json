@@ -773,9 +773,9 @@
                     "description": "Indicates whether the specified attributes should be persisted or not.",
                     "type": "string",
                     "enum": [
+                      "REPLACE",
                       "APPEND",
                       "NONE",
-                      "REPLACE",
                       "RESET"
                     ]
                   },
