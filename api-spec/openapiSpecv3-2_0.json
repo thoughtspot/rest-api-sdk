@@ -4753,6 +4753,10 @@
                   "template_properties": {
                     "description": "Email customization configuration as key value pair",
                     "type": "object"
+                  },
+                  "org_identifier": {
+                    "description": "Unique ID or name of org",
+                    "type": "string"
                   }
                 },
                 "required": [
@@ -4812,6 +4816,7 @@
       "post": {
         "operationId": "deleteEmailCustomization",
         "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.10.0.cl or later</span>\n\nDeletes the configuration for the email customization.\n\n#### Pre-requisites\n\nRequires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.\n\n**NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.\n\n#### Usage guidelines\n\n- Call the search API endpoint to get the `template_identifier` from the response.\n- Use that `template_identifier` as a parameter in this API request.\n\n\n\n\n#### Endpoint URL\n",
+        "deprecated": true,
         "tags": [
           "Email Customization",
           "10.10.0.cl"
@@ -4864,6 +4869,81 @@
         }
       }
     },
+    "/api/rest/2.0/customization/email/delete": {
+      "post": {
+        "operationId": "deleteOrgEmailCustomization",
+        "description": "<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.12.0.cl or later</span>",
+        "tags": [
+          "Email Customization",
+          "10.12.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "org_identifiers": {
+                    "description": "Unique identifier of the organization.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Email Customization configuration successfully deleted."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/customization/email/search": {
       "post": {
         "operationId": "searchEmailCustomization",
@@ -4872,6 +4952,25 @@
           "Email Customization",
           "10.10.0.cl"
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "org_identifiers": {
+                    "description": "Unique ID or name of org",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
         "parameters": [],
         "responses": {
           "200": {
@@ -4889,6 +4988,85 @@
           },
           "400": {
             "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/customization/email/update": {
+      "post": {
+        "operationId": "updateEmailCustomization",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.12.0.cl or later</span>\n\nUpdates a customization configuration for the notification email.\n\n#### Pre-requisites\n\nRequires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.\n\n**NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.\n\n#### Usage guidelines\n\nTo update a custom configuration pass these parameters in your API request:\n\n- A JSON map of configuration attributes `template_properties`. The following example shows a sample set of customization configuration:\n\n```\n{\n  {\n    \"ctaButtonBgColor\": \"#444DEA\",\n    \"ctaTextFontColor\": \"#FFFFFF\",\n    \"primaryBgColor\": \"#D3DEF0\",\n    \"hideMobileAppNudge\": false,\n    \"fontFamily\" : \"\",\n    \"hideProductName\" : false,\n    \"hideFooterPhone\" : false,\n    \"hideFooterAddress\" : false,\n    \"hidePrivacyPolicy\" : false,\n    \"hideManageNotification\" : false,\n    \"hideTsVocabularyDefinitions\": false,\n    \"hideNotificationStatus\" : false,\n    \"hideErrorMessage\": false,\n    \"hideUnsubscribeLink\" : false,\n    \"hideModifyAlert\": false,\n    \"textTransform\": \"\",\n    \"replacementValueForLiveboard\": \"LB dashboard\",\n    \"replacementValueForAnswer\": \"Answer dashboard\",\n    \"replacementValueForSpotIQ\": \"SpotIQ dashboard\",\n    \"logoUrl\":\"\",\n    \"productName\":\"ThoughtSpot\",\n    \"footerPhone\":\"(800) 508-7008\",\n    \"footerAddress\":\"444 Castro St, Suite 1000 Mountain View, CA 94041\"\n  }\n}\n```\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Email Customization",
+          "10.12.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "template_properties": {
+                    "description": "Email customization configuration as key value pair",
+                    "type": "object"
+                  },
+                  "org_identifier": {
+                    "description": "Unique ID or name of org",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "template_properties"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Email Customization configuration successfully updated."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
             "content": {
               "application/json": {
                 "schema": {
