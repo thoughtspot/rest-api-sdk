@@ -14,6 +14,14 @@
       "description": "Roles for version 10.4.0.cl"
     },
     {
+      "name": "10.11.0.cl",
+      "id": "10.11.0.cl",
+      "tags": [
+        "10.11.0.cl"
+      ],
+      "description": "Roles for version 10.11.0.cl"
+    },
+    {
       "name": "10.7.0.cl",
       "id": "10.7.0.cl",
       "tags": [
@@ -223,10 +231,10 @@
     "/api/rest/2.0/ai/analytical-questions/v2/": {
       "post": {
         "operationId": "getRelevantQuestions",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.7.0.cl or later</span>\n\nBreaks down a user-submitted query into a series of analytical sub-questions using relevant contextual metadata.\n\nTo use this API, the user must have at least view-level access to the referenced metadata objects.\n\n#### Usage guidelines\n\nTo enable accurate query decomposition, the request must include at least one of the following metadata identifiers within `context_metadata`: `answer_ids`, `liveboard_ids`, or `worksheet_ids`.\n\nYou can further enhance the quality and precision of decomposition by providing additional context such as:\n- `content`: user-supplied data like CSV or text\n- `instructions`: specific user directions for tailoring the decomposition\n- `conversation_id`: unique identifier to preserve context across interactions\n\nIf the API request is successful, ThoughtSpot returns a list of decomposed analytical queries, each aligned with the user's original question.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.11.0.cl or later</span>\n\nBreaks down a user-submitted query into a series of analytical sub-questions using relevant contextual metadata.\n\nTo use this API, the user must have at least view-level access to the referenced metadata objects.\n\n#### Usage guidelines\n\nTo enable accurate query decomposition, the request must include at least one of the following metadata identifiers within `context_metadata`: `answer_ids`, `liveboard_ids`, or `worksheet_ids`.\n\nYou can further enhance the quality and precision of decomposition by providing additional context such as:\n- `content`: user-supplied data like CSV or text\n- `instructions`: specific user directions for tailoring the decomposition\n- `conversation_id`: unique identifier to preserve context across interactions\n\nIf the API request is successful, ThoughtSpot returns a list of decomposed analytical queries, each aligned with the user's original question.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
-          "10.7.0.cl"
+          "10.11.0.cl"
         ],
         "requestBody": {
           "content": {
