@@ -4884,7 +4884,7 @@
     "/api/rest/2.0/customization/email/delete": {
       "post": {
         "operationId": "deleteOrgEmailCustomization",
-        "description": "<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.12.0.cl or later</span>",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.12.0.cl or later</span>\n\nDeletes the configuration for the email customization.\n\n#### Pre-requisites\n\nRequires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.\n\n**NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.\n\n#### Usage guidelines\n\n- Call the search API endpoint to get the `org_identifier` from the response.\n- Use that `org_identifier` as a parameter in this API request.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Email Customization",
           "10.12.0.cl"
