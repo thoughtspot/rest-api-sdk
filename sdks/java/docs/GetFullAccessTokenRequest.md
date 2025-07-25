@@ -16,7 +16,6 @@
 |**displayName** | **String** | Indicates display name of the user. Use this parameter to provision a user just-in-time (JIT). |  [optional] |
 |**autoCreate** | **Boolean** |    Creates a new user if the specified username does not already exist in ThoughtSpot. To provision a user just-in-time (JIT), set this attribute to true.      Note: For JIT provisioning of a user, the secret_key is required.  |  [optional] |
 |**groupIdentifiers** | **List&lt;String&gt;** | ID or name of the groups to which the newly created user belongs. Use this parameter to provision a user just-in-time (JIT). |  [optional] |
-|**userParameters** | [**UserParameterOptions**](UserParameterOptions.md) | &lt;div&gt;Deprecated: 10.4.0.cl and later &lt;/div&gt;  Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters). |  [optional] |
 
 
 ## Implemented Interfaces

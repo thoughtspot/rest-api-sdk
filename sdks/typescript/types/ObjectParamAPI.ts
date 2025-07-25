@@ -45,8 +45,6 @@ import { CreateConversationRequest } from '../models/CreateConversationRequest';
 import { CreateCustomActionRequest } from '../models/CreateCustomActionRequest';
 import { CreateCustomActionRequestActionDetails } from '../models/CreateCustomActionRequestActionDetails';
 import { CreateCustomActionRequestDefaultActionConfig } from '../models/CreateCustomActionRequestDefaultActionConfig';
-import { CreateEmailCustomisationRequest } from '../models/CreateEmailCustomisationRequest';
-import { CreateEmailCustomisationResponse } from '../models/CreateEmailCustomisationResponse';
 import { CreateOrgRequest } from '../models/CreateOrgRequest';
 import { CreateRoleRequest } from '../models/CreateRoleRequest';
 import { CreateScheduleRequest } from '../models/CreateScheduleRequest';
@@ -57,7 +55,6 @@ import { CreateScheduleRequestRecipientDetails } from '../models/CreateScheduleR
 import { CreateTagRequest } from '../models/CreateTagRequest';
 import { CreateUserGroupRequest } from '../models/CreateUserGroupRequest';
 import { CreateUserRequest } from '../models/CreateUserRequest';
-import { CreateVariableRequest } from '../models/CreateVariableRequest';
 import { CronExpression } from '../models/CronExpression';
 import { CronExpressionInput } from '../models/CronExpressionInput';
 import { CustomActionMetadataTypeInput } from '../models/CustomActionMetadataTypeInput';
@@ -114,7 +111,6 @@ import { GenericInfo } from '../models/GenericInfo';
 import { GetAsyncImportStatusResponse } from '../models/GetAsyncImportStatusResponse';
 import { GetCustomAccessTokenRequest } from '../models/GetCustomAccessTokenRequest';
 import { GetFullAccessTokenRequest } from '../models/GetFullAccessTokenRequest';
-import { GetFullAccessTokenRequestUserParameters } from '../models/GetFullAccessTokenRequestUserParameters';
 import { GetObjectAccessTokenRequest } from '../models/GetObjectAccessTokenRequest';
 import { GetTokenResponse } from '../models/GetTokenResponse';
 import { GroupObject } from '../models/GroupObject';
@@ -131,7 +127,6 @@ import { ImportUserType } from '../models/ImportUserType';
 import { ImportUsersRequest } from '../models/ImportUsersRequest';
 import { ImportUsersResponse } from '../models/ImportUsersResponse';
 import { InputEurekaNLSRequest } from '../models/InputEurekaNLSRequest';
-import { InputVariableValue } from '../models/InputVariableValue';
 import { JWTMetadataObject } from '../models/JWTMetadataObject';
 import { JWTParameter } from '../models/JWTParameter';
 import { JWTUserOptions } from '../models/JWTUserOptions';
@@ -154,9 +149,7 @@ import { ObjectIDAndName } from '../models/ObjectIDAndName';
 import { Org } from '../models/Org';
 import { OrgInfo } from '../models/OrgInfo';
 import { OrgResponse } from '../models/OrgResponse';
-import { OrgType } from '../models/OrgType';
 import { ParameterValues } from '../models/ParameterValues';
-import { ParameterizeMetadataRequest } from '../models/ParameterizeMetadataRequest';
 import { ParametersListItem } from '../models/ParametersListItem';
 import { ParametersListItemInput } from '../models/ParametersListItemInput';
 import { PdfOptions } from '../models/PdfOptions';
@@ -169,8 +162,6 @@ import { PngOptionsInput } from '../models/PngOptionsInput';
 import { PrincipalsInput } from '../models/PrincipalsInput';
 import { PrincipalsListItem } from '../models/PrincipalsListItem';
 import { PrincipalsListItemInput } from '../models/PrincipalsListItemInput';
-import { PublishMetadataListItem } from '../models/PublishMetadataListItem';
-import { PublishMetadataRequest } from '../models/PublishMetadataRequest';
 import { QueryGetDecomposedQueryRequest } from '../models/QueryGetDecomposedQueryRequest';
 import { QueryGetDecomposedQueryRequestNlsRequest } from '../models/QueryGetDecomposedQueryRequestNlsRequest';
 import { RecipientDetails } from '../models/RecipientDetails';
@@ -234,7 +225,6 @@ import { SearchUserGroupsRequest } from '../models/SearchUserGroupsRequest';
 import { SearchUserGroupsRequestSortOptions } from '../models/SearchUserGroupsRequestSortOptions';
 import { SearchUsersRequest } from '../models/SearchUsersRequest';
 import { SearchUsersRequestSortOptions } from '../models/SearchUsersRequestSortOptions';
-import { SearchVariablesRequest } from '../models/SearchVariablesRequest';
 import { SendMessageRequest } from '../models/SendMessageRequest';
 import { ShareMetadataRequest } from '../models/ShareMetadataRequest';
 import { ShareMetadataTypeInput } from '../models/ShareMetadataTypeInput';
@@ -256,8 +246,6 @@ import { TokenValidationResponse } from '../models/TokenValidationResponse';
 import { URL } from '../models/URL';
 import { URLInput } from '../models/URLInput';
 import { URLInputMandatory } from '../models/URLInputMandatory';
-import { UnparameterizeMetadataRequest } from '../models/UnparameterizeMetadataRequest';
-import { UnpublishMetadataRequest } from '../models/UnpublishMetadataRequest';
 import { UpdateConfigRequest } from '../models/UpdateConfigRequest';
 import { UpdateConnectionRequest } from '../models/UpdateConnectionRequest';
 import { UpdateConnectionV2Request } from '../models/UpdateConnectionV2Request';
@@ -279,8 +267,6 @@ import { UpdateSystemConfigRequest } from '../models/UpdateSystemConfigRequest';
 import { UpdateTagRequest } from '../models/UpdateTagRequest';
 import { UpdateUserGroupRequest } from '../models/UpdateUserGroupRequest';
 import { UpdateUserRequest } from '../models/UpdateUserRequest';
-import { UpdateVariableRequest } from '../models/UpdateVariableRequest';
-import { UpdateVariableValuesRequest } from '../models/UpdateVariableValuesRequest';
 import { User } from '../models/User';
 import { UserGroup } from '../models/UserGroup';
 import { UserGroupResponse } from '../models/UserGroupResponse';
@@ -289,10 +275,6 @@ import { UserObject } from '../models/UserObject';
 import { UserParameterOptions } from '../models/UserParameterOptions';
 import { ValidateMergeRequest } from '../models/ValidateMergeRequest';
 import { ValidateTokenRequest } from '../models/ValidateTokenRequest';
-import { Variable } from '../models/Variable';
-import { VariableDetailInput } from '../models/VariableDetailInput';
-import { VariableValue } from '../models/VariableValue';
-import { VariableValueInput } from '../models/VariableValueInput';
 
 import { ObservableAIApi } from "./ObservableAPI";
 import { AIApiRequestFactory, AIApiResponseProcessor} from "../apis/AIApi";
@@ -672,7 +654,7 @@ export class ObjectConnectionsApi {
     }
 
     /**
-     *   Version: 10.4.0.cl or later   Updates a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`. 3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.      
+     *   Version: 10.4.0.cl or later   Updates a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`.    * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:     ```    {       \"configuration\":{          \"accountName\":\"thoughtspot_partner\",          \"user\":\"tsadmin\",          \"password\":\"TestConn123\",          \"role\":\"sysadmin\",          \"warehouse\":\"MEDIUM_WH\"       },       \"externalDatabases\":[          {             \"name\":\"AllDatatypes\",             \"isAutoCreated\":false,             \"schemas\":[                {                   \"name\":\"alldatatypes\",                   \"tables\":[                      {                         \"name\":\"allDatatypes\",                         \"type\":\"TABLE\",                         \"description\":\"\",                         \"selected\":true,                         \"linked\":true,                         \"columns\":[                            {                               \"name\":\"CNUMBER\",                               \"type\":\"INT64\",                               \"canImport\":true,                               \"selected\":true,                               \"isLinkedActive\":true,                               \"isImported\":false,                               \"tableName\":\"allDatatypes\",                               \"schemaName\":\"alldatatypes\",                               \"dbName\":\"AllDatatypes\"                            },                            {                               \"name\":\"CDECIMAL\",                               \"type\":\"INT64\",                               \"canImport\":true,                               \"selected\":true,                               \"isLinkedActive\":true,                               \"isImported\":false,                               \"tableName\":\"allDatatypes\",                               \"schemaName\":\"alldatatypes\",                               \"dbName\":\"AllDatatypes\"                            }                         ]                      }                   ]                }             ]          }       ]    }    ```  3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`. * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a Snowflake connection:  ```  {     \"configuration\":{        \"accountName\":\"thoughtspot_partner\",        \"user\":\"tsadmin\",        \"password\":\"TestConn123\",        \"role\":\"sysadmin\",        \"warehouse\":\"MEDIUM_WH\"     },     \"externalDatabases\":[      ]  }  ```      
      * @param param the request object
      */
     public updateConnectionV2(param: ConnectionsApiUpdateConnectionV2Request, options?: Configuration): Promise<void> {
@@ -938,74 +920,6 @@ export class ObjectDataApi {
 
 }
 
-import { ObservableEmailCustomisationApi } from "./ObservableAPI";
-import { EmailCustomisationApiRequestFactory, EmailCustomisationApiResponseProcessor} from "../apis/EmailCustomisationApi";
-
-export interface EmailCustomisationApiCreateEmailCustomisationRequest {
-    /**
-     * 
-     * @type CreateEmailCustomisationRequest
-     * @memberof EmailCustomisationApicreateEmailCustomisation
-     */
-    createEmailCustomisationRequest: CreateEmailCustomisationRequest
-}
-
-export interface EmailCustomisationApiDeleteEmailCustomisationRequest {
-    /**
-     * Unique ID or name of the email customization.
-     * @type string
-     * @memberof EmailCustomisationApideleteEmailCustomisation
-     */
-    templateIdentifier: string
-}
-
-export interface EmailCustomisationApiSearchEmailCustomisationRequest {
-}
-
-export interface EmailCustomisationApiValidateEmailCustomisationRequest {
-}
-
-export class ObjectEmailCustomisationApi {
-    private api: ObservableEmailCustomisationApi
-
-    public constructor(configuration: Configuration, requestFactory?: EmailCustomisationApiRequestFactory, responseProcessor?: EmailCustomisationApiResponseProcessor) {
-        this.api = new ObservableEmailCustomisationApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     *  Version: 10.10.0.cl or later   Creates a custom configuration for the email customisation  #### Pre-requisites  Requires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `_Has developer privilege` privilege is required. Coms should be enabled on the cluster.  #### Usage guidelines  To create a custom confuguration:  1. Pass these parameters in your API request.  - A JSON map of configuration attributes `template_properties`. The following example shows the configuration attribures for a csutom configuration:  ``` {     {     \"logoUrl\": \"<logo_url>\",     \"homeUrl\": \"<home_url>\",     \"productName\": \"<Company Name in the Mail>\",     \"footerAddress\": \"<address to be visible in the footer>\",     \"ctaButtonBgColor\": \"#444DEA\",     \"ctaTextFontColor\": \"#FFFFFF\",     \"primaryBgColor\": \"#D3DEF0\",     \"hideMobileAppNudge\": <true/false>,     \"hideTsVocabularyDefinitions\": <true/false>e,     \"hideProductName\": <true/false>,     \"hideFooterPhone\": <true/false>,     \"hideFooterAddress\": <true/false>,     \"hidePrivacyPolicy\": <true/false>,     \"hideManageNotification\": <true/false>,     \"fontfamily\": \"<to maintain a single font in the entire email>\"   } } ```      
-     * @param param the request object
-     */
-    public createEmailCustomisation(param: EmailCustomisationApiCreateEmailCustomisationRequest, options?: Configuration): Promise<CreateEmailCustomisationResponse> {
-        return this.api.createEmailCustomisation(param.createEmailCustomisationRequest,  options).toPromise();
-    }
-
-    /**
-     *  Version: 10.10.0.cl or later   Deletes the configuration for the email customisation.  #### Pre-requisites  Requires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `_Has developer privilege` privilege is required. Coms should be enabled on the cluster.  #### Usage guidelines  Deletes the configuration available for the cluster/org. Pass the `template_identifier` in the API request.  Note: `template_identifier` can be fetched from search API request.      
-     * @param param the request object
-     */
-    public deleteEmailCustomisation(param: EmailCustomisationApiDeleteEmailCustomisationRequest, options?: Configuration): Promise<void> {
-        return this.api.deleteEmailCustomisation(param.templateIdentifier,  options).toPromise();
-    }
-
-    /**
-     *  Version: 10.10.0.cl or later   Search the email customisation configuration if any set for the ThoughtSpot system.  #### Pre-requisites  Requires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `_Has developer privilege` privilege is required. Coms should be enabled on the cluster.  #### Usage guidelines  To get the list of configurations set in the cluster/org.      
-     * @param param the request object
-     */
-    public searchEmailCustomisation(param: EmailCustomisationApiSearchEmailCustomisationRequest = {}, options?: Configuration): Promise<Array<CreateEmailCustomisationResponse>> {
-        return this.api.searchEmailCustomisation( options).toPromise();
-    }
-
-    /**
-     *  Version: 10.10.0.cl or later   Validates the email customisation configuration if any set for the ThoughtSpot system.  #### Pre-requisites  Requires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `_Has developer privilege` privilege is required. Coms should be enabled on the cluster.      
-     * @param param the request object
-     */
-    public validateEmailCustomisation(param: EmailCustomisationApiValidateEmailCustomisationRequest = {}, options?: Configuration): Promise<void> {
-        return this.api.validateEmailCustomisation( options).toPromise();
-    }
-
-}
-
 import { ObservableGroupsApi } from "./ObservableAPI";
 import { GroupsApiRequestFactory, GroupsApiResponseProcessor} from "../apis/GroupsApi";
 
@@ -1231,15 +1145,6 @@ export interface MetadataApiImportMetadataTMLAsyncRequest {
     importMetadataTMLAsyncRequest: ImportMetadataTMLAsyncRequest
 }
 
-export interface MetadataApiParameterizeMetadataRequest {
-    /**
-     * 
-     * @type ParameterizeMetadataRequest
-     * @memberof MetadataApiparameterizeMetadata
-     */
-    parameterizeMetadataRequest: ParameterizeMetadataRequest
-}
-
 export interface MetadataApiSearchMetadataRequest {
     /**
      * 
@@ -1247,15 +1152,6 @@ export interface MetadataApiSearchMetadataRequest {
      * @memberof MetadataApisearchMetadata
      */
     searchMetadataRequest: SearchMetadataRequest
-}
-
-export interface MetadataApiUnparameterizeMetadataRequest {
-    /**
-     * 
-     * @type UnparameterizeMetadataRequest
-     * @memberof MetadataApiunparameterizeMetadata
-     */
-    unparameterizeMetadataRequest: UnparameterizeMetadataRequest
 }
 
 export interface MetadataApiUpdateMetadataHeaderRequest {
@@ -1364,27 +1260,11 @@ export class ObjectMetadataApi {
     }
 
     /**
-     *  Parameterize fields in metadata objects.   Version: 10.9.0.cl or later   Allows parameterizing fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection the field type is always `CONNECTION_PROPERTY`. We use the field_name in this case to specify the exact property of a connection which needs to be parameterized.      
-     * @param param the request object
-     */
-    public parameterizeMetadata(param: MetadataApiParameterizeMetadataRequest, options?: Configuration): Promise<void> {
-        return this.api.parameterizeMetadata(param.parameterizeMetadataRequest,  options).toPromise();
-    }
-
-    /**
-     *   Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`. - To filter metadata objects within type `LOGICAL_TABLE`, set the `subtypes` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE` & subtypes as `[WORKSHEET]`. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.   You can also define sorting options to sort the data retrieved in the API response. - To get discoverable objects when linientmodel is enabled you can use `include_discoverable_objects` as true else false. Default value is true. - For liveboard metadata type, to get the newer format, set the `liveboard_response_format` as V2. Default value is V1.  **NOTE**: The following parameters support pagination of metadata records:  - `tag_identifiers` - `type` - `subtypes` - `created_by_user_identifiers` - `modified_by_user_identifiers` - `owned_by_user_identifiers` - `exclude_objects` - `include_auto_created_objects` - `favorite_object_options` If you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.      
+     *   Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.   You can also define sorting options to sort the data retrieved in the API response. - To get discoverable objects when linientmodel is enabled you can use `include_discoverable_objects` as true else false. Default value is true.  **NOTE**: The following parameters support pagination of metadata records:  - `tag_identifiers` - `type` - `created_by_user_identifiers` - `modified_by_user_identifiers` - `owned_by_user_identifiers` - `exclude_objects` - `include_auto_created_objects` - `favorite_object_options` If you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.      
      * @param param the request object
      */
     public searchMetadata(param: MetadataApiSearchMetadataRequest, options?: Configuration): Promise<Array<MetadataSearchResponse>> {
         return this.api.searchMetadata(param.searchMetadataRequest,  options).toPromise();
-    }
-
-    /**
-     *  Remove parameterization from fields in metadata objects.   Version: 10.9.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection the field type is always `CONNECTION_PROPERTY`. We use the field_name in this case to specify the exact property of a connection which needs to be unparameterized.      
-     * @param param the request object
-     */
-    public unparameterizeMetadata(param: MetadataApiUnparameterizeMetadataRequest, options?: Configuration): Promise<void> {
-        return this.api.unparameterizeMetadata(param.unparameterizeMetadataRequest,  options).toPromise();
     }
 
     /**
@@ -1739,15 +1619,6 @@ export interface SecurityApiFetchPermissionsOnMetadataRequest {
     fetchPermissionsOnMetadataRequest: FetchPermissionsOnMetadataRequest
 }
 
-export interface SecurityApiPublishMetadataRequest {
-    /**
-     * 
-     * @type PublishMetadataRequest
-     * @memberof SecurityApipublishMetadata
-     */
-    publishMetadataRequest: PublishMetadataRequest
-}
-
 export interface SecurityApiShareMetadataRequest {
     /**
      * 
@@ -1755,15 +1626,6 @@ export interface SecurityApiShareMetadataRequest {
      * @memberof SecurityApishareMetadata
      */
     shareMetadataRequest: ShareMetadataRequest
-}
-
-export interface SecurityApiUnpublishMetadataRequest {
-    /**
-     * 
-     * @type UnpublishMetadataRequest
-     * @memberof SecurityApiunpublishMetadata
-     */
-    unpublishMetadataRequest: UnpublishMetadataRequest
 }
 
 export class ObjectSecurityApi {
@@ -1798,27 +1660,11 @@ export class ObjectSecurityApi {
     }
 
     /**
-     *  Version: 10.9.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
-     * @param param the request object
-     */
-    public publishMetadata(param: SecurityApiPublishMetadataRequest, options?: Configuration): Promise<void> {
-        return this.api.publishMetadata(param.publishMetadataRequest,  options).toPromise();
-    }
-
-    /**
      *   Version: 9.0.0.cl or later   Allows sharing one or several metadata objects with users and groups in ThoughtSpot.  Requires edit access to the metadata object.  The API endpoint allows sharing only the following types of metadata objects: * Liveboards * Visualizations * Answers * Worksheets * Views * Connections  You can provide `READ_ONLY` or `MODIFY` access when sharing an object with another user or group. With `READ_ONLY` access grants view access to the shared object, whereas `MODIFY` provides edit access.  To prevent a user or group from accessing the shared object, specify the GUID or name of the principal and set `shareMode` to `NO_ACCESS`.      
      * @param param the request object
      */
     public shareMetadata(param: SecurityApiShareMetadataRequest, options?: Configuration): Promise<void> {
         return this.api.shareMetadata(param.shareMetadataRequest,  options).toPromise();
-    }
-
-    /**
-     *  Version: 10.9.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
-     * @param param the request object
-     */
-    public unpublishMetadata(param: SecurityApiUnpublishMetadataRequest, options?: Configuration): Promise<void> {
-        return this.api.unpublishMetadata(param.unpublishMetadataRequest,  options).toPromise();
     }
 
 }
@@ -2107,15 +1953,6 @@ export interface ThoughtSpotRestApiCreateCustomActionRequest {
     createCustomActionRequest: CreateCustomActionRequest
 }
 
-export interface ThoughtSpotRestApiCreateEmailCustomisationRequest {
-    /**
-     * 
-     * @type CreateEmailCustomisationRequest
-     * @memberof ThoughtSpotRestApicreateEmailCustomisation
-     */
-    createEmailCustomisationRequest: CreateEmailCustomisationRequest
-}
-
 export interface ThoughtSpotRestApiCreateOrgRequest {
     /**
      * 
@@ -2168,15 +2005,6 @@ export interface ThoughtSpotRestApiCreateUserGroupRequest {
      * @memberof ThoughtSpotRestApicreateUserGroup
      */
     createUserGroupRequest: CreateUserGroupRequest
-}
-
-export interface ThoughtSpotRestApiCreateVariableRequest {
-    /**
-     * 
-     * @type CreateVariableRequest
-     * @memberof ThoughtSpotRestApicreateVariable
-     */
-    createVariableRequest: CreateVariableRequest
 }
 
 export interface ThoughtSpotRestApiDbtConnectionRequest {
@@ -2263,15 +2091,6 @@ export interface ThoughtSpotRestApiDeleteDbtConnectionRequest {
     dbtConnectionIdentifier: string
 }
 
-export interface ThoughtSpotRestApiDeleteEmailCustomisationRequest {
-    /**
-     * Unique ID or name of the email customization.
-     * @type string
-     * @memberof ThoughtSpotRestApideleteEmailCustomisation
-     */
-    templateIdentifier: string
-}
-
 export interface ThoughtSpotRestApiDeleteMetadataRequest {
     /**
      * 
@@ -2333,15 +2152,6 @@ export interface ThoughtSpotRestApiDeleteUserGroupRequest {
      * @memberof ThoughtSpotRestApideleteUserGroup
      */
     groupIdentifier: string
-}
-
-export interface ThoughtSpotRestApiDeleteVariableRequest {
-    /**
-     * Unique id or name of the variable
-     * @type string
-     * @memberof ThoughtSpotRestApideleteVariable
-     */
-    identifier: string
 }
 
 export interface ThoughtSpotRestApiDeployCommitRequest {
@@ -2578,24 +2388,6 @@ export interface ThoughtSpotRestApiLoginRequest {
 export interface ThoughtSpotRestApiLogoutRequest {
 }
 
-export interface ThoughtSpotRestApiParameterizeMetadataRequest {
-    /**
-     * 
-     * @type ParameterizeMetadataRequest
-     * @memberof ThoughtSpotRestApiparameterizeMetadata
-     */
-    parameterizeMetadataRequest: ParameterizeMetadataRequest
-}
-
-export interface ThoughtSpotRestApiPublishMetadataRequest {
-    /**
-     * 
-     * @type PublishMetadataRequest
-     * @memberof ThoughtSpotRestApipublishMetadata
-     */
-    publishMetadataRequest: PublishMetadataRequest
-}
-
 export interface ThoughtSpotRestApiQueryGetDecomposedQueryRequest {
     /**
      * 
@@ -2683,9 +2475,6 @@ export interface ThoughtSpotRestApiSearchDataRequest {
     searchDataRequest: SearchDataRequest
 }
 
-export interface ThoughtSpotRestApiSearchEmailCustomisationRequest {
-}
-
 export interface ThoughtSpotRestApiSearchMetadataRequest {
     /**
      * 
@@ -2749,15 +2538,6 @@ export interface ThoughtSpotRestApiSearchUsersRequest {
     searchUsersRequest: SearchUsersRequest
 }
 
-export interface ThoughtSpotRestApiSearchVariablesRequest {
-    /**
-     * 
-     * @type SearchVariablesRequest
-     * @memberof ThoughtSpotRestApisearchVariables
-     */
-    searchVariablesRequest: SearchVariablesRequest
-}
-
 export interface ThoughtSpotRestApiSendMessageRequest {
     /**
      * Unique identifier of the conversation.
@@ -2798,24 +2578,6 @@ export interface ThoughtSpotRestApiUnassignTagRequest {
      * @memberof ThoughtSpotRestApiunassignTag
      */
     assignTagRequest: AssignTagRequest
-}
-
-export interface ThoughtSpotRestApiUnparameterizeMetadataRequest {
-    /**
-     * 
-     * @type UnparameterizeMetadataRequest
-     * @memberof ThoughtSpotRestApiunparameterizeMetadata
-     */
-    unparameterizeMetadataRequest: UnparameterizeMetadataRequest
-}
-
-export interface ThoughtSpotRestApiUnpublishMetadataRequest {
-    /**
-     * 
-     * @type UnpublishMetadataRequest
-     * @memberof ThoughtSpotRestApiunpublishMetadata
-     */
-    unpublishMetadataRequest: UnpublishMetadataRequest
 }
 
 export interface ThoughtSpotRestApiUpdateConfigRequest {
@@ -2992,33 +2754,6 @@ export interface ThoughtSpotRestApiUpdateUserGroupRequest {
     updateUserGroupRequest: UpdateUserGroupRequest
 }
 
-export interface ThoughtSpotRestApiUpdateVariableRequest {
-    /**
-     * Unique id or name of the variable to update.
-     * @type string
-     * @memberof ThoughtSpotRestApiupdateVariable
-     */
-    identifier: string
-    /**
-     * 
-     * @type UpdateVariableRequest
-     * @memberof ThoughtSpotRestApiupdateVariable
-     */
-    updateVariableRequest: UpdateVariableRequest
-}
-
-export interface ThoughtSpotRestApiUpdateVariableValuesRequest {
-    /**
-     * 
-     * @type UpdateVariableValuesRequest
-     * @memberof ThoughtSpotRestApiupdateVariableValues
-     */
-    updateVariableValuesRequest: UpdateVariableValuesRequest
-}
-
-export interface ThoughtSpotRestApiValidateEmailCustomisationRequest {
-}
-
 export interface ThoughtSpotRestApiValidateMergeRequest {
     /**
      * 
@@ -3101,7 +2836,7 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *   Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_MANAGE_VERSION_CONTROL` (**Can toggle version control for objects**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).  **Note**: ThoughtSpot supports only GitHub / GitHub Enterprise for CI/CD.      
+     *   Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_SETUP_VERSION_CONTROL` (**Can set up version control**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).  **Note**: ThoughtSpot supports only GitHub / itHub Enterprise for CI/CD.      
      * @param param the request object
      */
     public createConfig(param: ThoughtSpotRestApiCreateConfigRequest, options?: Configuration): Promise<RepoConfigObject> {
@@ -3130,14 +2865,6 @@ export class ObjectThoughtSpotRestApi {
      */
     public createCustomAction(param: ThoughtSpotRestApiCreateCustomActionRequest, options?: Configuration): Promise<ResponseCustomAction> {
         return this.api.createCustomAction(param.createCustomActionRequest,  options).toPromise();
-    }
-
-    /**
-     *  Version: 10.10.0.cl or later   Creates a custom configuration for the email customisation  #### Pre-requisites  Requires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `_Has developer privilege` privilege is required. Coms should be enabled on the cluster.  #### Usage guidelines  To create a custom confuguration:  1. Pass these parameters in your API request.  - A JSON map of configuration attributes `template_properties`. The following example shows the configuration attribures for a csutom configuration:  ``` {     {     \"logoUrl\": \"<logo_url>\",     \"homeUrl\": \"<home_url>\",     \"productName\": \"<Company Name in the Mail>\",     \"footerAddress\": \"<address to be visible in the footer>\",     \"ctaButtonBgColor\": \"#444DEA\",     \"ctaTextFontColor\": \"#FFFFFF\",     \"primaryBgColor\": \"#D3DEF0\",     \"hideMobileAppNudge\": <true/false>,     \"hideTsVocabularyDefinitions\": <true/false>e,     \"hideProductName\": <true/false>,     \"hideFooterPhone\": <true/false>,     \"hideFooterAddress\": <true/false>,     \"hidePrivacyPolicy\": <true/false>,     \"hideManageNotification\": <true/false>,     \"fontfamily\": \"<to maintain a single font in the entire email>\"   } } ```      
-     * @param param the request object
-     */
-    public createEmailCustomisation(param: ThoughtSpotRestApiCreateEmailCustomisationRequest, options?: Configuration): Promise<CreateEmailCustomisationResponse> {
-        return this.api.createEmailCustomisation(param.createEmailCustomisationRequest,  options).toPromise();
     }
 
     /**
@@ -3189,14 +2916,6 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *  Create a variable which can be used for parameterizing metadata objects   Version: 10.9.0.cl or later   Allows creating a variable which can be used for parameterizing metadata objects in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint supports the following types of variables: * CONNECTION_PROPERTY - For connection properties * TABLE_MAPPING - For table mappings * CONNECTION_PROPERTY_PER_PRINCIPAL - For connection properties per principal. In order to use this please contact support to enable this.  When creating a variable, you need to specify: * The variable type * A unique name for the variable * Whether the variable contains sensitive values (defaults to false) * The variable values (optional)  The operation will fail if: * The user lacks required permissions * The variable name already exists * The variable type is invalid * The variable values are invalid for the specified type       
-     * @param param the request object
-     */
-    public createVariable(param: ThoughtSpotRestApiCreateVariableRequest, options?: Configuration): Promise<Variable> {
-        return this.api.createVariable(param.createVariableRequest,  options).toPromise();
-    }
-
-    /**
      *   Version: 9.9.0.cl or later   Creates a DBT connection object in ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### About create DBT connection DBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.      
      * @param param the request object
      */
@@ -3237,7 +2956,7 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *   Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_MANAGE_VERSION_CONTROL` (**Can toggle version control for objects**) privilege.      
+     *   Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_SETUP_VERSION_CONTROL` (**Can set up version control**) privilege.      
      * @param param the request object
      */
     public deleteConfig(param: ThoughtSpotRestApiDeleteConfigRequest, options?: Configuration): Promise<void> {
@@ -3274,14 +2993,6 @@ export class ObjectThoughtSpotRestApi {
      */
     public deleteDbtConnection(param: ThoughtSpotRestApiDeleteDbtConnectionRequest, options?: Configuration): Promise<void> {
         return this.api.deleteDbtConnection(param.dbtConnectionIdentifier,  options).toPromise();
-    }
-
-    /**
-     *  Version: 10.10.0.cl or later   Deletes the configuration for the email customisation.  #### Pre-requisites  Requires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `_Has developer privilege` privilege is required. Coms should be enabled on the cluster.  #### Usage guidelines  Deletes the configuration available for the cluster/org. Pass the `template_identifier` in the API request.  Note: `template_identifier` can be fetched from search API request.      
-     * @param param the request object
-     */
-    public deleteEmailCustomisation(param: ThoughtSpotRestApiDeleteEmailCustomisationRequest, options?: Configuration): Promise<void> {
-        return this.api.deleteEmailCustomisation(param.templateIdentifier,  options).toPromise();
     }
 
     /**
@@ -3338,14 +3049,6 @@ export class ObjectThoughtSpotRestApi {
      */
     public deleteUserGroup(param: ThoughtSpotRestApiDeleteUserGroupRequest, options?: Configuration): Promise<void> {
         return this.api.deleteUserGroup(param.groupIdentifier,  options).toPromise();
-    }
-
-    /**
-     *  Delete a variable   Version: 10.9.0.cl or later   Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn\'t exist * The variable is being used by other objects      
-     * @param param the request object
-     */
-    public deleteVariable(param: ThoughtSpotRestApiDeleteVariableRequest, options?: Configuration): Promise<void> {
-        return this.api.deleteVariable(param.identifier,  options).toPromise();
     }
 
     /**
@@ -3589,22 +3292,6 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *  Parameterize fields in metadata objects.   Version: 10.9.0.cl or later   Allows parameterizing fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection the field type is always `CONNECTION_PROPERTY`. We use the field_name in this case to specify the exact property of a connection which needs to be parameterized.      
-     * @param param the request object
-     */
-    public parameterizeMetadata(param: ThoughtSpotRestApiParameterizeMetadataRequest, options?: Configuration): Promise<void> {
-        return this.api.parameterizeMetadata(param.parameterizeMetadataRequest,  options).toPromise();
-    }
-
-    /**
-     *  Version: 10.9.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
-     * @param param the request object
-     */
-    public publishMetadata(param: ThoughtSpotRestApiPublishMetadataRequest, options?: Configuration): Promise<void> {
-        return this.api.publishMetadata(param.publishMetadataRequest,  options).toPromise();
-    }
-
-    /**
      * Version: 10.7.0.cl or later 
      * @param param the request object
      */
@@ -3645,7 +3332,7 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *   Version: 9.2.0.cl or later   Gets Git repository connections configured on the ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_MANAGE_VERSION_CONTROL` (**Can toggle version control for objects**) privilege.      
+     *   Version: 9.2.0.cl or later   Gets Git repository connections configured on the ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_SETUP_VERSION_CONTROL` (**Can set up version control**) privilege.      
      * @param param the request object
      */
     public searchConfig(param: ThoughtSpotRestApiSearchConfigRequest, options?: Configuration): Promise<Array<RepoConfigObject>> {
@@ -3677,15 +3364,7 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *  Version: 10.10.0.cl or later   Search the email customisation configuration if any set for the ThoughtSpot system.  #### Pre-requisites  Requires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `_Has developer privilege` privilege is required. Coms should be enabled on the cluster.  #### Usage guidelines  To get the list of configurations set in the cluster/org.      
-     * @param param the request object
-     */
-    public searchEmailCustomisation(param: ThoughtSpotRestApiSearchEmailCustomisationRequest = {}, options?: Configuration): Promise<Array<CreateEmailCustomisationResponse>> {
-        return this.api.searchEmailCustomisation( options).toPromise();
-    }
-
-    /**
-     *   Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`. - To filter metadata objects within type `LOGICAL_TABLE`, set the `subtypes` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE` & subtypes as `[WORKSHEET]`. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.   You can also define sorting options to sort the data retrieved in the API response. - To get discoverable objects when linientmodel is enabled you can use `include_discoverable_objects` as true else false. Default value is true. - For liveboard metadata type, to get the newer format, set the `liveboard_response_format` as V2. Default value is V1.  **NOTE**: The following parameters support pagination of metadata records:  - `tag_identifiers` - `type` - `subtypes` - `created_by_user_identifiers` - `modified_by_user_identifiers` - `owned_by_user_identifiers` - `exclude_objects` - `include_auto_created_objects` - `favorite_object_options` If you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.      
+     *   Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.   You can also define sorting options to sort the data retrieved in the API response. - To get discoverable objects when linientmodel is enabled you can use `include_discoverable_objects` as true else false. Default value is true.  **NOTE**: The following parameters support pagination of metadata records:  - `tag_identifiers` - `type` - `created_by_user_identifiers` - `modified_by_user_identifiers` - `owned_by_user_identifiers` - `exclude_objects` - `include_auto_created_objects` - `favorite_object_options` If you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.      
      * @param param the request object
      */
     public searchMetadata(param: ThoughtSpotRestApiSearchMetadataRequest, options?: Configuration): Promise<Array<MetadataSearchResponse>> {
@@ -3741,14 +3420,6 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *  Search variables   Version: 10.9.0.cl or later   Allows searching for variables in ThoughtSpot.  Requires ADMINISTRATION role.  The API endpoint supports searching variables by: * Variable identifier (ID or name) * Variable type * Name pattern (case-insensitive, supports % for wildcard)  The search results can be formatted in three ways: * METADATA_ONLY - Returns only variable metadata (default) * METADATA_AND_VALUES - Returns variable metadata and values * EDITABLE_METADATA_AND_VALUES - Returns only editable variable metadata and values       
-     * @param param the request object
-     */
-    public searchVariables(param: ThoughtSpotRestApiSearchVariablesRequest, options?: Configuration): Promise<Array<Variable>> {
-        return this.api.searchVariables(param.searchVariablesRequest,  options).toPromise();
-    }
-
-    /**
      *  Version: 10.4.0.cl or later   Allows sending a follow-up message to an ongoing conversation within the context of the metadata model.  Requires at least view access to the metadata object specified in the request.  #### Usage guidelines  The API requires you to specify the `conversation_identifier` in the request path, and a `metadata_identifier` and `message` string in the request body.  If the API request is successful, ThoughtSpot returns the session ID, tokens used in the conversation, and visualization type.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
      * @param param the request object
      */
@@ -3781,23 +3452,7 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *  Remove parameterization from fields in metadata objects.   Version: 10.9.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection the field type is always `CONNECTION_PROPERTY`. We use the field_name in this case to specify the exact property of a connection which needs to be unparameterized.      
-     * @param param the request object
-     */
-    public unparameterizeMetadata(param: ThoughtSpotRestApiUnparameterizeMetadataRequest, options?: Configuration): Promise<void> {
-        return this.api.unparameterizeMetadata(param.unparameterizeMetadataRequest,  options).toPromise();
-    }
-
-    /**
-     *  Version: 10.9.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
-     * @param param the request object
-     */
-    public unpublishMetadata(param: ThoughtSpotRestApiUnpublishMetadataRequest, options?: Configuration): Promise<void> {
-        return this.api.unpublishMetadata(param.unpublishMetadataRequest,  options).toPromise();
-    }
-
-    /**
-     *   Version: 9.2.0.cl or later   Updates Git repository configuration settings.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_MANAGE_VERSION_CONTROL` (**Can toggle version control for objects**) privilege.      
+     *   Version: 9.2.0.cl or later   Updates Git repository configuration settings.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_SETUP_VERSION_CONTROL` (**Can set up version control**) privilege.      
      * @param param the request object
      */
     public updateConfig(param: ThoughtSpotRestApiUpdateConfigRequest, options?: Configuration): Promise<RepoConfigObject> {
@@ -3813,7 +3468,7 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *   Version: 10.4.0.cl or later   Updates a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`. 3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.      
+     *   Version: 10.4.0.cl or later   Updates a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`.    * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:     ```    {       \"configuration\":{          \"accountName\":\"thoughtspot_partner\",          \"user\":\"tsadmin\",          \"password\":\"TestConn123\",          \"role\":\"sysadmin\",          \"warehouse\":\"MEDIUM_WH\"       },       \"externalDatabases\":[          {             \"name\":\"AllDatatypes\",             \"isAutoCreated\":false,             \"schemas\":[                {                   \"name\":\"alldatatypes\",                   \"tables\":[                      {                         \"name\":\"allDatatypes\",                         \"type\":\"TABLE\",                         \"description\":\"\",                         \"selected\":true,                         \"linked\":true,                         \"columns\":[                            {                               \"name\":\"CNUMBER\",                               \"type\":\"INT64\",                               \"canImport\":true,                               \"selected\":true,                               \"isLinkedActive\":true,                               \"isImported\":false,                               \"tableName\":\"allDatatypes\",                               \"schemaName\":\"alldatatypes\",                               \"dbName\":\"AllDatatypes\"                            },                            {                               \"name\":\"CDECIMAL\",                               \"type\":\"INT64\",                               \"canImport\":true,                               \"selected\":true,                               \"isLinkedActive\":true,                               \"isImported\":false,                               \"tableName\":\"allDatatypes\",                               \"schemaName\":\"alldatatypes\",                               \"dbName\":\"AllDatatypes\"                            }                         ]                      }                   ]                }             ]          }       ]    }    ```  3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`. * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a Snowflake connection:  ```  {     \"configuration\":{        \"accountName\":\"thoughtspot_partner\",        \"user\":\"tsadmin\",        \"password\":\"TestConn123\",        \"role\":\"sysadmin\",        \"warehouse\":\"MEDIUM_WH\"     },     \"externalDatabases\":[      ]  }  ```      
      * @param param the request object
      */
     public updateConnectionV2(param: ThoughtSpotRestApiUpdateConnectionV2Request, options?: Configuration): Promise<void> {
@@ -3906,30 +3561,6 @@ export class ObjectThoughtSpotRestApi {
      */
     public updateUserGroup(param: ThoughtSpotRestApiUpdateUserGroupRequest, options?: Configuration): Promise<void> {
         return this.api.updateUserGroup(param.groupIdentifier, param.updateUserGroupRequest,  options).toPromise();
-    }
-
-    /**
-     *  Update a variable\'s properties   Version: 10.9.0.cl or later   Allows updating a variable\'s properties in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows updating: * The variable name * The variable values  When updating variable values, you need to specify: * The operation to perform (ADD, REPLACE, REMOVE) * The new values to add/replace/remove  When the operation is ADD, a value any pre-existing value with the same set of constraints will be replaced. When the operation is REPLACE, all values of the variable are replaced with the values specified. When the operation is REMOVE, all values with the given set of conditions are removed.      
-     * @param param the request object
-     */
-    public updateVariable(param: ThoughtSpotRestApiUpdateVariableRequest, options?: Configuration): Promise<void> {
-        return this.api.updateVariable(param.identifier, param.updateVariableRequest,  options).toPromise();
-    }
-
-    /**
-     *  Update values for multiple variables   Version: 10.9.0.cl or later   Allows updating values for multiple variables in ThoughtSpot.  Requires ADMINISTRATION role.  The API endpoint allows: * Adding new values to variables * Replacing existing values * Deleting values from variables  When updating variable values, you need to specify: * The variable identifiers * The values to add/replace/remove for each variable * The operation to perform (ADD, REPLACE, REMOVE)  Behaviour based on operation type: * ADD - Adds values to the variable. Any pre-existing values with the same conditions are replaced. * REPLACE - Replaces all values of a given org with the current set of values. * REMOVE - Removes any values which match the set of conditions of the variables.      
-     * @param param the request object
-     */
-    public updateVariableValues(param: ThoughtSpotRestApiUpdateVariableValuesRequest, options?: Configuration): Promise<void> {
-        return this.api.updateVariableValues(param.updateVariableValuesRequest,  options).toPromise();
-    }
-
-    /**
-     *  Version: 10.10.0.cl or later   Validates the email customisation configuration if any set for the ThoughtSpot system.  #### Pre-requisites  Requires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `_Has developer privilege` privilege is required. Coms should be enabled on the cluster.      
-     * @param param the request object
-     */
-    public validateEmailCustomisation(param: ThoughtSpotRestApiValidateEmailCustomisationRequest = {}, options?: Configuration): Promise<void> {
-        return this.api.validateEmailCustomisation( options).toPromise();
     }
 
     /**
@@ -4138,109 +3769,6 @@ export class ObjectUsersApi {
 
 }
 
-import { ObservableVariableApi } from "./ObservableAPI";
-import { VariableApiRequestFactory, VariableApiResponseProcessor} from "../apis/VariableApi";
-
-export interface VariableApiCreateVariableRequest {
-    /**
-     * 
-     * @type CreateVariableRequest
-     * @memberof VariableApicreateVariable
-     */
-    createVariableRequest: CreateVariableRequest
-}
-
-export interface VariableApiDeleteVariableRequest {
-    /**
-     * Unique id or name of the variable
-     * @type string
-     * @memberof VariableApideleteVariable
-     */
-    identifier: string
-}
-
-export interface VariableApiSearchVariablesRequest {
-    /**
-     * 
-     * @type SearchVariablesRequest
-     * @memberof VariableApisearchVariables
-     */
-    searchVariablesRequest: SearchVariablesRequest
-}
-
-export interface VariableApiUpdateVariableRequest {
-    /**
-     * Unique id or name of the variable to update.
-     * @type string
-     * @memberof VariableApiupdateVariable
-     */
-    identifier: string
-    /**
-     * 
-     * @type UpdateVariableRequest
-     * @memberof VariableApiupdateVariable
-     */
-    updateVariableRequest: UpdateVariableRequest
-}
-
-export interface VariableApiUpdateVariableValuesRequest {
-    /**
-     * 
-     * @type UpdateVariableValuesRequest
-     * @memberof VariableApiupdateVariableValues
-     */
-    updateVariableValuesRequest: UpdateVariableValuesRequest
-}
-
-export class ObjectVariableApi {
-    private api: ObservableVariableApi
-
-    public constructor(configuration: Configuration, requestFactory?: VariableApiRequestFactory, responseProcessor?: VariableApiResponseProcessor) {
-        this.api = new ObservableVariableApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     *  Create a variable which can be used for parameterizing metadata objects   Version: 10.9.0.cl or later   Allows creating a variable which can be used for parameterizing metadata objects in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint supports the following types of variables: * CONNECTION_PROPERTY - For connection properties * TABLE_MAPPING - For table mappings * CONNECTION_PROPERTY_PER_PRINCIPAL - For connection properties per principal. In order to use this please contact support to enable this.  When creating a variable, you need to specify: * The variable type * A unique name for the variable * Whether the variable contains sensitive values (defaults to false) * The variable values (optional)  The operation will fail if: * The user lacks required permissions * The variable name already exists * The variable type is invalid * The variable values are invalid for the specified type       
-     * @param param the request object
-     */
-    public createVariable(param: VariableApiCreateVariableRequest, options?: Configuration): Promise<Variable> {
-        return this.api.createVariable(param.createVariableRequest,  options).toPromise();
-    }
-
-    /**
-     *  Delete a variable   Version: 10.9.0.cl or later   Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn\'t exist * The variable is being used by other objects      
-     * @param param the request object
-     */
-    public deleteVariable(param: VariableApiDeleteVariableRequest, options?: Configuration): Promise<void> {
-        return this.api.deleteVariable(param.identifier,  options).toPromise();
-    }
-
-    /**
-     *  Search variables   Version: 10.9.0.cl or later   Allows searching for variables in ThoughtSpot.  Requires ADMINISTRATION role.  The API endpoint supports searching variables by: * Variable identifier (ID or name) * Variable type * Name pattern (case-insensitive, supports % for wildcard)  The search results can be formatted in three ways: * METADATA_ONLY - Returns only variable metadata (default) * METADATA_AND_VALUES - Returns variable metadata and values * EDITABLE_METADATA_AND_VALUES - Returns only editable variable metadata and values       
-     * @param param the request object
-     */
-    public searchVariables(param: VariableApiSearchVariablesRequest, options?: Configuration): Promise<Array<Variable>> {
-        return this.api.searchVariables(param.searchVariablesRequest,  options).toPromise();
-    }
-
-    /**
-     *  Update a variable\'s properties   Version: 10.9.0.cl or later   Allows updating a variable\'s properties in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows updating: * The variable name * The variable values  When updating variable values, you need to specify: * The operation to perform (ADD, REPLACE, REMOVE) * The new values to add/replace/remove  When the operation is ADD, a value any pre-existing value with the same set of constraints will be replaced. When the operation is REPLACE, all values of the variable are replaced with the values specified. When the operation is REMOVE, all values with the given set of conditions are removed.      
-     * @param param the request object
-     */
-    public updateVariable(param: VariableApiUpdateVariableRequest, options?: Configuration): Promise<void> {
-        return this.api.updateVariable(param.identifier, param.updateVariableRequest,  options).toPromise();
-    }
-
-    /**
-     *  Update values for multiple variables   Version: 10.9.0.cl or later   Allows updating values for multiple variables in ThoughtSpot.  Requires ADMINISTRATION role.  The API endpoint allows: * Adding new values to variables * Replacing existing values * Deleting values from variables  When updating variable values, you need to specify: * The variable identifiers * The values to add/replace/remove for each variable * The operation to perform (ADD, REPLACE, REMOVE)  Behaviour based on operation type: * ADD - Adds values to the variable. Any pre-existing values with the same conditions are replaced. * REPLACE - Replaces all values of a given org with the current set of values. * REMOVE - Removes any values which match the set of conditions of the variables.      
-     * @param param the request object
-     */
-    public updateVariableValues(param: VariableApiUpdateVariableValuesRequest, options?: Configuration): Promise<void> {
-        return this.api.updateVariableValues(param.updateVariableValuesRequest,  options).toPromise();
-    }
-
-}
-
 import { ObservableVersionControlApi } from "./ObservableAPI";
 import { VersionControlApiRequestFactory, VersionControlApiResponseProcessor} from "../apis/VersionControlApi";
 
@@ -4347,7 +3875,7 @@ export class ObjectVersionControlApi {
     }
 
     /**
-     *   Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_MANAGE_VERSION_CONTROL` (**Can toggle version control for objects**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).  **Note**: ThoughtSpot supports only GitHub / GitHub Enterprise for CI/CD.      
+     *   Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_SETUP_VERSION_CONTROL` (**Can set up version control**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).  **Note**: ThoughtSpot supports only GitHub / itHub Enterprise for CI/CD.      
      * @param param the request object
      */
     public createConfig(param: VersionControlApiCreateConfigRequest, options?: Configuration): Promise<RepoConfigObject> {
@@ -4355,7 +3883,7 @@ export class ObjectVersionControlApi {
     }
 
     /**
-     *   Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_MANAGE_VERSION_CONTROL` (**Can toggle version control for objects**) privilege.      
+     *   Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_SETUP_VERSION_CONTROL` (**Can set up version control**) privilege.      
      * @param param the request object
      */
     public deleteConfig(param: VersionControlApiDeleteConfigRequest, options?: Configuration): Promise<void> {
@@ -4387,7 +3915,7 @@ export class ObjectVersionControlApi {
     }
 
     /**
-     *   Version: 9.2.0.cl or later   Gets Git repository connections configured on the ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_MANAGE_VERSION_CONTROL` (**Can toggle version control for objects**) privilege.      
+     *   Version: 9.2.0.cl or later   Gets Git repository connections configured on the ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_SETUP_VERSION_CONTROL` (**Can set up version control**) privilege.      
      * @param param the request object
      */
     public searchConfig(param: VersionControlApiSearchConfigRequest, options?: Configuration): Promise<Array<RepoConfigObject>> {
@@ -4395,7 +3923,7 @@ export class ObjectVersionControlApi {
     }
 
     /**
-     *   Version: 9.2.0.cl or later   Updates Git repository configuration settings.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_MANAGE_VERSION_CONTROL` (**Can toggle version control for objects**) privilege.      
+     *   Version: 9.2.0.cl or later   Updates Git repository configuration settings.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_SETUP_VERSION_CONTROL` (**Can set up version control**) privilege.      
      * @param param the request object
      */
     public updateConfig(param: VersionControlApiUpdateConfigRequest, options?: Configuration): Promise<RepoConfigObject> {

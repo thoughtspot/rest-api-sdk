@@ -4,153 +4,212 @@
 
 package com.thoughtspot.client.model;
 
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import com.thoughtspot.client.model.ExcludeMetadataListItemInput;
+import com.thoughtspot.client.model.FavoriteObjectOptionsInput;
+import com.thoughtspot.client.model.MetadataListItemInput;
+import com.thoughtspot.client.model.MetadataSearchSortOptions;
+import com.thoughtspot.client.model.PermissionInput;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for SearchMetadataRequest */
+/**
+ * Model tests for SearchMetadataRequest
+ */
 public class SearchMetadataRequestTest {
     private final SearchMetadataRequest model = new SearchMetadataRequest();
 
-    /** Model tests for SearchMetadataRequest */
+    /**
+     * Model tests for SearchMetadataRequest
+     */
     @Test
     public void testSearchMetadataRequest() {
         // TODO: test SearchMetadataRequest
     }
 
-    /** Test the property 'metadata' */
+    /**
+     * Test the property 'metadata'
+     */
     @Test
     public void metadataTest() {
         // TODO: test metadata
     }
 
-    /** Test the property 'permissions' */
+    /**
+     * Test the property 'permissions'
+     */
     @Test
     public void permissionsTest() {
         // TODO: test permissions
     }
 
-    /** Test the property 'createdByUserIdentifiers' */
+    /**
+     * Test the property 'createdByUserIdentifiers'
+     */
     @Test
     public void createdByUserIdentifiersTest() {
         // TODO: test createdByUserIdentifiers
     }
 
-    /** Test the property 'dependentObjectVersion' */
+    /**
+     * Test the property 'dependentObjectVersion'
+     */
     @Test
     public void dependentObjectVersionTest() {
         // TODO: test dependentObjectVersion
     }
 
-    /** Test the property 'excludeObjects' */
+    /**
+     * Test the property 'excludeObjects'
+     */
     @Test
     public void excludeObjectsTest() {
         // TODO: test excludeObjects
     }
 
-    /** Test the property 'favoriteObjectOptions' */
+    /**
+     * Test the property 'favoriteObjectOptions'
+     */
     @Test
     public void favoriteObjectOptionsTest() {
         // TODO: test favoriteObjectOptions
     }
 
-    /** Test the property 'includeAutoCreatedObjects' */
+    /**
+     * Test the property 'includeAutoCreatedObjects'
+     */
     @Test
     public void includeAutoCreatedObjectsTest() {
         // TODO: test includeAutoCreatedObjects
     }
 
-    /** Test the property 'includeDependentObjects' */
+    /**
+     * Test the property 'includeDependentObjects'
+     */
     @Test
     public void includeDependentObjectsTest() {
         // TODO: test includeDependentObjects
     }
 
-    /** Test the property 'dependentObjectsRecordSize' */
+    /**
+     * Test the property 'dependentObjectsRecordSize'
+     */
     @Test
     public void dependentObjectsRecordSizeTest() {
         // TODO: test dependentObjectsRecordSize
     }
 
-    /** Test the property 'includeDetails' */
+    /**
+     * Test the property 'includeDetails'
+     */
     @Test
     public void includeDetailsTest() {
         // TODO: test includeDetails
     }
 
-    /** Test the property 'includeHeaders' */
+    /**
+     * Test the property 'includeHeaders'
+     */
     @Test
     public void includeHeadersTest() {
         // TODO: test includeHeaders
     }
 
-    /** Test the property 'includeHiddenObjects' */
+    /**
+     * Test the property 'includeHiddenObjects'
+     */
     @Test
     public void includeHiddenObjectsTest() {
         // TODO: test includeHiddenObjects
     }
 
-    /** Test the property 'includeIncompleteObjects' */
+    /**
+     * Test the property 'includeIncompleteObjects'
+     */
     @Test
     public void includeIncompleteObjectsTest() {
         // TODO: test includeIncompleteObjects
     }
 
-    /** Test the property 'includeVisualizationHeaders' */
+    /**
+     * Test the property 'includeVisualizationHeaders'
+     */
     @Test
     public void includeVisualizationHeadersTest() {
         // TODO: test includeVisualizationHeaders
     }
 
-    /** Test the property 'includeWorksheetSearchAssistData' */
+    /**
+     * Test the property 'includeWorksheetSearchAssistData'
+     */
     @Test
     public void includeWorksheetSearchAssistDataTest() {
         // TODO: test includeWorksheetSearchAssistData
     }
 
-    /** Test the property 'modifiedByUserIdentifiers' */
+    /**
+     * Test the property 'modifiedByUserIdentifiers'
+     */
     @Test
     public void modifiedByUserIdentifiersTest() {
         // TODO: test modifiedByUserIdentifiers
     }
 
-    /** Test the property 'recordOffset' */
+    /**
+     * Test the property 'recordOffset'
+     */
     @Test
     public void recordOffsetTest() {
         // TODO: test recordOffset
     }
 
-    /** Test the property 'recordSize' */
+    /**
+     * Test the property 'recordSize'
+     */
     @Test
     public void recordSizeTest() {
         // TODO: test recordSize
     }
 
-    /** Test the property 'sortOptions' */
+    /**
+     * Test the property 'sortOptions'
+     */
     @Test
     public void sortOptionsTest() {
         // TODO: test sortOptions
     }
 
-    /** Test the property 'tagIdentifiers' */
+    /**
+     * Test the property 'tagIdentifiers'
+     */
     @Test
     public void tagIdentifiersTest() {
         // TODO: test tagIdentifiers
     }
 
-    /** Test the property 'includeStats' */
+    /**
+     * Test the property 'includeStats'
+     */
     @Test
     public void includeStatsTest() {
         // TODO: test includeStats
     }
 
-    /** Test the property 'includeDiscoverableObjects' */
+    /**
+     * Test the property 'includeDiscoverableObjects'
+     */
     @Test
     public void includeDiscoverableObjectsTest() {
         // TODO: test includeDiscoverableObjects
     }
 
-    /** Test the property 'showResolvedParameters' */
-    @Test
-    public void showResolvedParametersTest() {
-        // TODO: test showResolvedParameters
-    }
 }
