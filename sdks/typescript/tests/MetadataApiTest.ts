@@ -342,38 +342,6 @@ describe('MetadataApi', function() {
         });     
       });
 
-      describe('parameterizeMetadata', function() {
-
-        const testReqBodies = requestBodies.filter(
-          (body: any) => body.Metadata.operationId === "parameterizeMetadata"
-        );
-        testReqBodies.forEach(async (test: any) => {
-          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
-            
-            if (test.Metadata.scenario === "positive") {         
-              var data;
-              try {
-                data = await instance.parameterizeMetadata(
-                    // parameterizeMetadataRequest ParameterizeMetadataRequest
-                     test.Body   
-                )
-              } catch (er) {
-                console.error(er, "Response", data)
-                expect(er).to.be.undefined
-              }
-            } else {
-                await expect(
-                  instance.parameterizeMetadata(
-                    // parameterizeMetadataRequest ParameterizeMetadataRequest
-                     test.Body   
-                  )
-                ).to.be.rejectedWith(Error);
-            }
-
-          });
-        });     
-      });
-
       describe('searchMetadata', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -397,38 +365,6 @@ describe('MetadataApi', function() {
                 await expect(
                   instance.searchMetadata(
                     // searchMetadataRequest SearchMetadataRequest
-                     test.Body   
-                  )
-                ).to.be.rejectedWith(Error);
-            }
-
-          });
-        });     
-      });
-
-      describe('unparameterizeMetadata', function() {
-
-        const testReqBodies = requestBodies.filter(
-          (body: any) => body.Metadata.operationId === "unparameterizeMetadata"
-        );
-        testReqBodies.forEach(async (test: any) => {
-          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
-            
-            if (test.Metadata.scenario === "positive") {         
-              var data;
-              try {
-                data = await instance.unparameterizeMetadata(
-                    // unparameterizeMetadataRequest UnparameterizeMetadataRequest
-                     test.Body   
-                )
-              } catch (er) {
-                console.error(er, "Response", data)
-                expect(er).to.be.undefined
-              }
-            } else {
-                await expect(
-                  instance.unparameterizeMetadata(
-                    // unparameterizeMetadataRequest UnparameterizeMetadataRequest
                      test.Body   
                   )
                 ).to.be.rejectedWith(Error);
