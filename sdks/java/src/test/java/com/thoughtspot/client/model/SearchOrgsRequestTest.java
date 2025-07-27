@@ -4,70 +4,45 @@
 
 package com.thoughtspot.client.model;
 
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/**
- * Model tests for SearchOrgsRequest
- */
+/** Model tests for SearchOrgsRequest */
 public class SearchOrgsRequestTest {
     private final SearchOrgsRequest model = new SearchOrgsRequest();
 
-    /**
-     * Model tests for SearchOrgsRequest
-     */
+    /** Model tests for SearchOrgsRequest */
     @Test
     public void testSearchOrgsRequest() {
         // TODO: test SearchOrgsRequest
     }
 
-    /**
-     * Test the property 'orgIdentifier'
-     */
+    /** Test the property 'orgIdentifier' */
     @Test
     public void orgIdentifierTest() {
         // TODO: test orgIdentifier
     }
 
-    /**
-     * Test the property 'description'
-     */
+    /** Test the property 'description' */
     @Test
     public void descriptionTest() {
         // TODO: test description
     }
 
-    /**
-     * Test the property 'visibility'
-     */
+    /** Test the property 'visibility' */
     @Test
     public void visibilityTest() {
         // TODO: test visibility
     }
 
-    /**
-     * Test the property 'status'
-     */
+    /** Test the property 'status' */
     @Test
     public void statusTest() {
         // TODO: test status
     }
 
-    /**
-     * Test the property 'userIdentifiers'
-     */
+    /** Test the property 'userIdentifiers' */
     @Test
     public void userIdentifiersTest() {
         // TODO: test userIdentifiers
     }
-
 }

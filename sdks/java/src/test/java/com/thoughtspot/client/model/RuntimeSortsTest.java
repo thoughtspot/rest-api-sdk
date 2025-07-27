@@ -4,64 +4,39 @@
 
 package com.thoughtspot.client.model;
 
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import com.thoughtspot.client.model.UserObject;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import org.openapitools.jackson.nullable.JsonNullable;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/**
- * Model tests for RuntimeSorts
- */
+/** Model tests for RuntimeSorts */
 public class RuntimeSortsTest {
     private final RuntimeSorts model = new RuntimeSorts();
 
-    /**
-     * Model tests for RuntimeSorts
-     */
+    /** Model tests for RuntimeSorts */
     @Test
     public void testRuntimeSorts() {
         // TODO: test RuntimeSorts
     }
 
-    /**
-     * Test the property 'columnName'
-     */
+    /** Test the property 'columnName' */
     @Test
     public void columnNameTest() {
         // TODO: test columnName
     }
 
-    /**
-     * Test the property 'order'
-     */
+    /** Test the property 'order' */
     @Test
     public void orderTest() {
         // TODO: test order
     }
 
-    /**
-     * Test the property 'persist'
-     */
+    /** Test the property 'persist' */
     @Test
     public void persistTest() {
         // TODO: test persist
     }
 
-    /**
-     * Test the property 'objects'
-     */
+    /** Test the property 'objects' */
     @Test
     public void objectsTest() {
         // TODO: test objects
     }
-
 }

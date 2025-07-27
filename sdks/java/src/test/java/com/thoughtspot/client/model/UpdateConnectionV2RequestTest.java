@@ -4,61 +4,39 @@
 
 package com.thoughtspot.client.model;
 
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-import java.util.Arrays;
-import org.openapitools.jackson.nullable.JsonNullable;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/**
- * Model tests for UpdateConnectionV2Request
- */
+/** Model tests for UpdateConnectionV2Request */
 public class UpdateConnectionV2RequestTest {
     private final UpdateConnectionV2Request model = new UpdateConnectionV2Request();
 
-    /**
-     * Model tests for UpdateConnectionV2Request
-     */
+    /** Model tests for UpdateConnectionV2Request */
     @Test
     public void testUpdateConnectionV2Request() {
         // TODO: test UpdateConnectionV2Request
     }
 
-    /**
-     * Test the property 'name'
-     */
+    /** Test the property 'name' */
     @Test
     public void nameTest() {
         // TODO: test name
     }
 
-    /**
-     * Test the property 'description'
-     */
+    /** Test the property 'description' */
     @Test
     public void descriptionTest() {
         // TODO: test description
     }
 
-    /**
-     * Test the property 'dataWarehouseConfig'
-     */
+    /** Test the property 'dataWarehouseConfig' */
     @Test
     public void dataWarehouseConfigTest() {
         // TODO: test dataWarehouseConfig
     }
 
-    /**
-     * Test the property 'validate'
-     */
+    /** Test the property 'validate' */
     @Test
     public void validateTest() {
         // TODO: test validate
     }
-
 }
