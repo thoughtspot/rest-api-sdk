@@ -98,7 +98,7 @@ if (hasProperty('target') && target == 'android') {
                 pom {
                     name = 'rest-api-sdk-lib'
                     description = 'ThoughtSpot Java Rest API SDK'
-                    url = 'https://github.com/thoughtspot/rest-api-sdk/tree/release/sdks/java'
+                    url = 'https://github.com/thoughtspot/rest-api-sdk/tree/10.9.0.cl/sdks/java'
 
                     scm {
                         connection = 'scm:git:git://github.com/thoughtspot/rest-api-sdk.git'
