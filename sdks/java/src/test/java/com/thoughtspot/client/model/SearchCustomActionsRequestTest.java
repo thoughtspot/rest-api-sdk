@@ -4,89 +4,57 @@
 
 package com.thoughtspot.client.model;
 
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import com.thoughtspot.client.model.CustomActionMetadataTypeInput;
-import com.thoughtspot.client.model.DefaultActionConfigSearchInput;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import org.openapitools.jackson.nullable.JsonNullable;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/**
- * Model tests for SearchCustomActionsRequest
- */
+/** Model tests for SearchCustomActionsRequest */
 public class SearchCustomActionsRequestTest {
     private final SearchCustomActionsRequest model = new SearchCustomActionsRequest();
 
-    /**
-     * Model tests for SearchCustomActionsRequest
-     */
+    /** Model tests for SearchCustomActionsRequest */
     @Test
     public void testSearchCustomActionsRequest() {
         // TODO: test SearchCustomActionsRequest
     }
 
-    /**
-     * Test the property 'customActionIdentifier'
-     */
+    /** Test the property 'customActionIdentifier' */
     @Test
     public void customActionIdentifierTest() {
         // TODO: test customActionIdentifier
     }
 
-    /**
-     * Test the property 'namePattern'
-     */
+    /** Test the property 'namePattern' */
     @Test
     public void namePatternTest() {
         // TODO: test namePattern
     }
 
-    /**
-     * Test the property 'defaultActionConfig'
-     */
+    /** Test the property 'defaultActionConfig' */
     @Test
     public void defaultActionConfigTest() {
         // TODO: test defaultActionConfig
     }
 
-    /**
-     * Test the property 'includeGroupAssociations'
-     */
+    /** Test the property 'includeGroupAssociations' */
     @Test
     public void includeGroupAssociationsTest() {
         // TODO: test includeGroupAssociations
     }
 
-    /**
-     * Test the property 'includeMetadataAssociations'
-     */
+    /** Test the property 'includeMetadataAssociations' */
     @Test
     public void includeMetadataAssociationsTest() {
         // TODO: test includeMetadataAssociations
     }
 
-    /**
-     * Test the property 'metadata'
-     */
+    /** Test the property 'metadata' */
     @Test
     public void metadataTest() {
         // TODO: test metadata
     }
 
-    /**
-     * Test the property 'type'
-     */
+    /** Test the property 'type' */
     @Test
     public void typeTest() {
         // TODO: test type
     }
-
 }

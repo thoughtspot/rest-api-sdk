@@ -4,6 +4,7 @@
 
 package com.thoughtspot.client.api;
 
+import com.google.gson.reflect.TypeToken;
 import com.thoughtspot.client.ApiCallback;
 import com.thoughtspot.client.ApiClient;
 import com.thoughtspot.client.ApiClientConfiguration;
@@ -11,16 +12,7 @@ import com.thoughtspot.client.ApiException;
 import com.thoughtspot.client.ApiResponse;
 import com.thoughtspot.client.Configuration;
 import com.thoughtspot.client.Pair;
-import com.thoughtspot.client.ProgressRequestBody;
-import com.thoughtspot.client.ProgressResponseBody;
-
-import com.google.gson.reflect.TypeToken;
-
-import java.io.IOException;
-
-
 import com.thoughtspot.client.model.AccessToken;
-import com.thoughtspot.client.model.ErrorResponse;
 import com.thoughtspot.client.model.GetCustomAccessTokenRequest;
 import com.thoughtspot.client.model.GetFullAccessTokenRequest;
 import com.thoughtspot.client.model.GetObjectAccessTokenRequest;
@@ -31,14 +23,15 @@ import com.thoughtspot.client.model.Token;
 import com.thoughtspot.client.model.TokenValidationResponse;
 import com.thoughtspot.client.model.User;
 import com.thoughtspot.client.model.ValidateTokenRequest;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
+@javax.annotation.Generated(
+        value = "org.openapitools.codegen.languages.JavaClientCodegen",
+        comments = "Generator version: 7.12.0")
 public class AuthenticationApi {
     private ApiClient localVarApiClient;
     private ApiClientConfiguration localVarApiClientConfiguration;
@@ -97,29 +90,30 @@ public class AuthenticationApi {
 
     /**
      * Build call for getCurrentUserInfo
+     *
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Fetch current session user detail successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Fetch current session user detail successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
     public okhttp3.Call getCurrentUserInfoCall(final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
-        String[] localBasePaths = new String[] {  };
+        String[] localBasePaths = new String[] {};
 
         // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
+        if (localCustomBaseUrl != null) {
             basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
+        } else if (localBasePaths.length > 0) {
             basePath = localBasePaths[localHostIndex];
         } else {
             basePath = null;
@@ -136,46 +130,59 @@ public class AuthenticationApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-        final String[] localVarAccepts = {
-            "application/json"
-        };
+        final String[] localVarAccepts = {"application/json"};
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
             localVarHeaderParams.put("Accept", localVarAccept);
         }
 
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        final String[] localVarContentTypes = {};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] { "bearerAuth" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "GET",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getCurrentUserInfoValidateBeforeCall(final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getCurrentUserInfoValidateBeforeCall(final ApiCallback _callback)
+            throws ApiException {
         return getCurrentUserInfoCall(_callback);
-
     }
 
     /**
-     * 
-     *   Version: 9.0.0.cl or later    Gets session information for the currently logged-in user.  This API does not require any parameters to be passed in the request.    Any ThoughtSpot user can access this endpoint and send an API request. The data returned in the API response varies according to user&#39;s privilege and object access permissions.      
+     * Version: 9.0.0.cl or later Gets session information for the currently logged-in user. This
+     * API does not require any parameters to be passed in the request. Any ThoughtSpot user can
+     * access this endpoint and send an API request. The data returned in the API response varies
+     * according to user&#39;s privilege and object access permissions.
+     *
      * @return User
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Fetch current session user detail successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Fetch current session user detail successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
     public User getCurrentUserInfo() throws ApiException {
         ApiResponse<User> localVarResp = getCurrentUserInfoWithHttpInfo();
@@ -183,76 +190,86 @@ public class AuthenticationApi {
     }
 
     /**
-     * 
-     *   Version: 9.0.0.cl or later    Gets session information for the currently logged-in user.  This API does not require any parameters to be passed in the request.    Any ThoughtSpot user can access this endpoint and send an API request. The data returned in the API response varies according to user&#39;s privilege and object access permissions.      
+     * Version: 9.0.0.cl or later Gets session information for the currently logged-in user. This
+     * API does not require any parameters to be passed in the request. Any ThoughtSpot user can
+     * access this endpoint and send an API request. The data returned in the API response varies
+     * according to user&#39;s privilege and object access permissions.
+     *
      * @return ApiResponse&lt;User&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Fetch current session user detail successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Fetch current session user detail successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
     public ApiResponse<User> getCurrentUserInfoWithHttpInfo() throws ApiException {
         okhttp3.Call localVarCall = getCurrentUserInfoValidateBeforeCall(null);
-        Type localVarReturnType = new TypeToken<User>(){}.getType();
+        Type localVarReturnType = new TypeToken<User>() {}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     *  (asynchronously)
-     *   Version: 9.0.0.cl or later    Gets session information for the currently logged-in user.  This API does not require any parameters to be passed in the request.    Any ThoughtSpot user can access this endpoint and send an API request. The data returned in the API response varies according to user&#39;s privilege and object access permissions.      
+     * (asynchronously) Version: 9.0.0.cl or later Gets session information for the currently
+     * logged-in user. This API does not require any parameters to be passed in the request. Any
+     * ThoughtSpot user can access this endpoint and send an API request. The data returned in the
+     * API response varies according to user&#39;s privilege and object access permissions.
+     *
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Fetch current session user detail successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Fetch current session user detail successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
-    public okhttp3.Call getCurrentUserInfoAsync(final ApiCallback<User> _callback) throws ApiException {
+    public okhttp3.Call getCurrentUserInfoAsync(final ApiCallback<User> _callback)
+            throws ApiException {
 
         okhttp3.Call localVarCall = getCurrentUserInfoValidateBeforeCall(_callback);
-        Type localVarReturnType = new TypeToken<User>(){}.getType();
+        Type localVarReturnType = new TypeToken<User>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for getCurrentUserToken
+     *
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Fetching token for current user successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Fetching token for current user successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
     public okhttp3.Call getCurrentUserTokenCall(final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
-        String[] localBasePaths = new String[] {  };
+        String[] localBasePaths = new String[] {};
 
         // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
+        if (localCustomBaseUrl != null) {
             basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
+        } else if (localBasePaths.length > 0) {
             basePath = localBasePaths[localHostIndex];
         } else {
             basePath = null;
@@ -269,46 +286,59 @@ public class AuthenticationApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-        final String[] localVarAccepts = {
-            "application/json"
-        };
+        final String[] localVarAccepts = {"application/json"};
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
             localVarHeaderParams.put("Accept", localVarAccept);
         }
 
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        final String[] localVarContentTypes = {};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] { "bearerAuth" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "GET",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getCurrentUserTokenValidateBeforeCall(final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getCurrentUserTokenValidateBeforeCall(final ApiCallback _callback)
+            throws ApiException {
         return getCurrentUserTokenCall(_callback);
-
     }
 
     /**
-     * 
-     *  Get token for the currently logged-in user.    Version: 9.4.0.cl or later   Gets token details for the currently logged-in user.  You can use this endpoint to obtain the token associated with the user&#39;s session.  This API does not require any parameters to be passed in the request.    Any ThoughtSpot user can access this endpoint and send an API request.      
+     * Get token for the currently logged-in user. Version: 9.4.0.cl or later Gets token details for
+     * the currently logged-in user. You can use this endpoint to obtain the token associated with
+     * the user&#39;s session. This API does not require any parameters to be passed in the request.
+     * Any ThoughtSpot user can access this endpoint and send an API request.
+     *
      * @return GetTokenResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Fetching token for current user successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Fetching token for current user successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
     public GetTokenResponse getCurrentUserToken() throws ApiException {
         ApiResponse<GetTokenResponse> localVarResp = getCurrentUserTokenWithHttpInfo();
@@ -316,77 +346,89 @@ public class AuthenticationApi {
     }
 
     /**
-     * 
-     *  Get token for the currently logged-in user.    Version: 9.4.0.cl or later   Gets token details for the currently logged-in user.  You can use this endpoint to obtain the token associated with the user&#39;s session.  This API does not require any parameters to be passed in the request.    Any ThoughtSpot user can access this endpoint and send an API request.      
+     * Get token for the currently logged-in user. Version: 9.4.0.cl or later Gets token details for
+     * the currently logged-in user. You can use this endpoint to obtain the token associated with
+     * the user&#39;s session. This API does not require any parameters to be passed in the request.
+     * Any ThoughtSpot user can access this endpoint and send an API request.
+     *
      * @return ApiResponse&lt;GetTokenResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Fetching token for current user successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Fetching token for current user successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
     public ApiResponse<GetTokenResponse> getCurrentUserTokenWithHttpInfo() throws ApiException {
         okhttp3.Call localVarCall = getCurrentUserTokenValidateBeforeCall(null);
-        Type localVarReturnType = new TypeToken<GetTokenResponse>(){}.getType();
+        Type localVarReturnType = new TypeToken<GetTokenResponse>() {}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     *  (asynchronously)
-     *  Get token for the currently logged-in user.    Version: 9.4.0.cl or later   Gets token details for the currently logged-in user.  You can use this endpoint to obtain the token associated with the user&#39;s session.  This API does not require any parameters to be passed in the request.    Any ThoughtSpot user can access this endpoint and send an API request.      
+     * (asynchronously) Get token for the currently logged-in user. Version: 9.4.0.cl or later Gets
+     * token details for the currently logged-in user. You can use this endpoint to obtain the token
+     * associated with the user&#39;s session. This API does not require any parameters to be passed
+     * in the request. Any ThoughtSpot user can access this endpoint and send an API request.
+     *
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Fetching token for current user successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Fetching token for current user successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
-    public okhttp3.Call getCurrentUserTokenAsync(final ApiCallback<GetTokenResponse> _callback) throws ApiException {
+    public okhttp3.Call getCurrentUserTokenAsync(final ApiCallback<GetTokenResponse> _callback)
+            throws ApiException {
 
         okhttp3.Call localVarCall = getCurrentUserTokenValidateBeforeCall(_callback);
-        Type localVarReturnType = new TypeToken<GetTokenResponse>(){}.getType();
+        Type localVarReturnType = new TypeToken<GetTokenResponse>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for getCustomAccessToken
-     * @param getCustomAccessTokenRequest  (required)
+     *
+     * @param getCustomAccessTokenRequest (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> ABAC token creation was successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. This could be due to missing or incorrect parameters. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. The request could not be authenticated. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. The user does not have permission to access this resource. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> An unexpected error occurred on the server. </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> ABAC token creation was successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. This could be due to missing or incorrect parameters. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. The request could not be authenticated. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. The user does not have permission to access this resource. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> An unexpected error occurred on the server. </td><td>  -  </td></tr>
+     * </table>
      */
-    public okhttp3.Call getCustomAccessTokenCall(GetCustomAccessTokenRequest getCustomAccessTokenRequest, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getCustomAccessTokenCall(
+            GetCustomAccessTokenRequest getCustomAccessTokenRequest, final ApiCallback _callback)
+            throws ApiException {
         String basePath = null;
         // Operation Servers
-        String[] localBasePaths = new String[] {  };
+        String[] localBasePaths = new String[] {};
 
         // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
+        if (localCustomBaseUrl != null) {
             basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
+        } else if (localBasePaths.length > 0) {
             basePath = localBasePaths[localHostIndex];
         } else {
             basePath = null;
@@ -403,133 +445,299 @@ public class AuthenticationApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-        final String[] localVarAccepts = {
-            "application/json"
-        };
+        final String[] localVarAccepts = {"application/json"};
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
             localVarHeaderParams.put("Accept", localVarAccept);
         }
 
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] {  };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        String[] localVarAuthNames = new String[] {};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getCustomAccessTokenValidateBeforeCall(GetCustomAccessTokenRequest getCustomAccessTokenRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getCustomAccessTokenValidateBeforeCall(
+            GetCustomAccessTokenRequest getCustomAccessTokenRequest, final ApiCallback _callback)
+            throws ApiException {
         // verify the required parameter 'getCustomAccessTokenRequest' is set
         if (getCustomAccessTokenRequest == null) {
-            throw new ApiException("Missing the required parameter 'getCustomAccessTokenRequest' when calling getCustomAccessToken(Async)");
+            throw new ApiException(
+                    "Missing the required parameter 'getCustomAccessTokenRequest' when calling"
+                            + " getCustomAccessToken(Async)");
         }
 
         return getCustomAccessTokenCall(getCustomAccessTokenRequest, _callback);
-
     }
 
     /**
-     * 
-     *   Version: 10.4.0.cl or later   Gets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  To add a new user and assign privileges during auto creation, you need &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  To assign security attributes with filter rules and Parameters to the JWT token, you&#39;ll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  #### Usage guidelines  You can generate the token for a user by providing a &#x60;username&#x60; and &#x60;password&#x60;, or by using the cluster’s &#x60;secret_key&#x60;.  To generate a &#x60;secret_key&#x60; on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable) in the **Develop** &gt; **Customizations** &gt; **Security Settings** page.  **Note**: When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request, &#x60;password&#x60; takes precedence.  If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (&#x60;username&#x60;  and &#x60;password&#x60; ) returns an error. You can switch to token-based authentication with  &#x60;secret_key&#x60;  or contact ThoughtSpot Support for assistance.  ##### Attribute-Based Access Control (ABAC) with tokens  To implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the &#x60;filter_rules&#x60; and &#x60;parameter_values&#x60; array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user&#39;s &#x60;access_control_properties&#x60; object, after which all sessions will use the persisted values.  Specify the object type as &#x60;LOGICAL_TABLE&#x60;.  The &#x60;LIVEBOARD&#x60; and &#x60;ANSWER&#x60; object types are not supported.  For more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).  ##### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * &#x60;auto_create&#x60; * &#x60;username&#x60; * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;groups&#x60;  Set &#x60;auto_create&#x60; to &#x60;true&#x60; if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60; in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  ##### Important point to note All options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when the authentication token is created. Persist options such as  &#x60;APPEND&#x60;, &#x60;REPLACE&#x60;, &#x60;RESET&#x60; will persist security parameters on the user profile when the token is created, while Persist option &#x60;NONE&#x60; will not persist anything but will be honoured in the session.      
-     * @param getCustomAccessTokenRequest  (required)
+     * Version: 10.4.0.cl or later Gets an authentication token with custom rules and security
+     * attributes and creates a full session in ThoughtSpot for a given user. By default, the token
+     * obtained from ThoughtSpot remains valid for 5 mins. To add a new user and assign privileges
+     * during auto creation, you need &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**)
+     * privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
+     * and edit access to the data source is required. To assign security attributes with filter
+     * rules and Parameters to the JWT token, you&#39;ll need administrator privileges and edit
+     * access to the data source (Worksheet or Model). If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
+     * and edit access to the data source is required. #### Usage guidelines You can generate the
+     * token for a user by providing a &#x60;username&#x60; and &#x60;password&#x60;, or by using
+     * the cluster’s &#x60;secret_key&#x60;. To generate a &#x60;secret_key&#x60; on your cluster,
+     * the administrator must enable [Trusted
+     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable)
+     * in the **Develop** &gt; **Customizations** &gt; **Security Settings** page. **Note**: When
+     * both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,
+     * &#x60;password&#x60; takes precedence. If Multi-Factor Authentication (MFA) is enabled on
+     * your instance, the API login request with basic authentication (&#x60;username&#x60; and
+     * &#x60;password&#x60; ) returns an error. You can switch to token-based authentication with
+     * &#x60;secret_key&#x60; or contact ThoughtSpot Support for assistance. ##### Attribute-Based
+     * Access Control (ABAC) with tokens To implement Attribute-Based Access Control (ABAC) and
+     * assign security entitlements to users during session creation, you can generate a token with
+     * custom filtering rules and Parameters in the &#x60;filter_rules&#x60; and
+     * &#x60;parameter_values&#x60; array respectively. These attributes can be configured to
+     * persist on a specific set of objects for user sessions initiated using the token. Once
+     * defined, the rules are added to the user&#39;s &#x60;access_control_properties&#x60; object,
+     * after which all sessions will use the persisted values. Specify the object type as
+     * &#x60;LOGICAL_TABLE&#x60;. The &#x60;LIVEBOARD&#x60; and &#x60;ANSWER&#x60; object types are
+     * not supported. For more information, see [ABAC via tokens
+     * Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).
+     * ##### Just-in-time provisioning For just-in-time user creation and provisioning, define the
+     * following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
+     * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;groups&#x60; Set &#x60;auto_create&#x60;
+     * to &#x60;true&#x60; if the user is not available in ThoughtSpot. If the user already exists
+     * in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60; in the
+     * API request, the user properties such as the display name, email, Org and group assignment
+     * will not be updated with new values. For more information, see [Just-in-time
+     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). #####
+     * Important point to note All options in the token creation APIs that define access to the
+     * content in ThoughtSpot will do so during the token creation and not when the token is being
+     * used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when
+     * the authentication token is created. Persist options such as &#x60;APPEND&#x60;,
+     * &#x60;REPLACE&#x60;, &#x60;RESET&#x60; will persist security parameters on the user profile
+     * when the token is created, while Persist option &#x60;NONE&#x60; will not persist anything
+     * but will be honoured in the session.
+     *
+     * @param getCustomAccessTokenRequest (required)
      * @return AccessToken
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> ABAC token creation was successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. This could be due to missing or incorrect parameters. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. The request could not be authenticated. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. The user does not have permission to access this resource. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> An unexpected error occurred on the server. </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> ABAC token creation was successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. This could be due to missing or incorrect parameters. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. The request could not be authenticated. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. The user does not have permission to access this resource. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> An unexpected error occurred on the server. </td><td>  -  </td></tr>
+     * </table>
      */
-    public AccessToken getCustomAccessToken(GetCustomAccessTokenRequest getCustomAccessTokenRequest) throws ApiException {
-        ApiResponse<AccessToken> localVarResp = getCustomAccessTokenWithHttpInfo(getCustomAccessTokenRequest);
+    public AccessToken getCustomAccessToken(GetCustomAccessTokenRequest getCustomAccessTokenRequest)
+            throws ApiException {
+        ApiResponse<AccessToken> localVarResp =
+                getCustomAccessTokenWithHttpInfo(getCustomAccessTokenRequest);
         return localVarResp.getData();
     }
 
     /**
-     * 
-     *   Version: 10.4.0.cl or later   Gets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  To add a new user and assign privileges during auto creation, you need &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  To assign security attributes with filter rules and Parameters to the JWT token, you&#39;ll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  #### Usage guidelines  You can generate the token for a user by providing a &#x60;username&#x60; and &#x60;password&#x60;, or by using the cluster’s &#x60;secret_key&#x60;.  To generate a &#x60;secret_key&#x60; on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable) in the **Develop** &gt; **Customizations** &gt; **Security Settings** page.  **Note**: When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request, &#x60;password&#x60; takes precedence.  If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (&#x60;username&#x60;  and &#x60;password&#x60; ) returns an error. You can switch to token-based authentication with  &#x60;secret_key&#x60;  or contact ThoughtSpot Support for assistance.  ##### Attribute-Based Access Control (ABAC) with tokens  To implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the &#x60;filter_rules&#x60; and &#x60;parameter_values&#x60; array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user&#39;s &#x60;access_control_properties&#x60; object, after which all sessions will use the persisted values.  Specify the object type as &#x60;LOGICAL_TABLE&#x60;.  The &#x60;LIVEBOARD&#x60; and &#x60;ANSWER&#x60; object types are not supported.  For more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).  ##### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * &#x60;auto_create&#x60; * &#x60;username&#x60; * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;groups&#x60;  Set &#x60;auto_create&#x60; to &#x60;true&#x60; if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60; in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  ##### Important point to note All options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when the authentication token is created. Persist options such as  &#x60;APPEND&#x60;, &#x60;REPLACE&#x60;, &#x60;RESET&#x60; will persist security parameters on the user profile when the token is created, while Persist option &#x60;NONE&#x60; will not persist anything but will be honoured in the session.      
-     * @param getCustomAccessTokenRequest  (required)
+     * Version: 10.4.0.cl or later Gets an authentication token with custom rules and security
+     * attributes and creates a full session in ThoughtSpot for a given user. By default, the token
+     * obtained from ThoughtSpot remains valid for 5 mins. To add a new user and assign privileges
+     * during auto creation, you need &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**)
+     * privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
+     * and edit access to the data source is required. To assign security attributes with filter
+     * rules and Parameters to the JWT token, you&#39;ll need administrator privileges and edit
+     * access to the data source (Worksheet or Model). If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
+     * and edit access to the data source is required. #### Usage guidelines You can generate the
+     * token for a user by providing a &#x60;username&#x60; and &#x60;password&#x60;, or by using
+     * the cluster’s &#x60;secret_key&#x60;. To generate a &#x60;secret_key&#x60; on your cluster,
+     * the administrator must enable [Trusted
+     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable)
+     * in the **Develop** &gt; **Customizations** &gt; **Security Settings** page. **Note**: When
+     * both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,
+     * &#x60;password&#x60; takes precedence. If Multi-Factor Authentication (MFA) is enabled on
+     * your instance, the API login request with basic authentication (&#x60;username&#x60; and
+     * &#x60;password&#x60; ) returns an error. You can switch to token-based authentication with
+     * &#x60;secret_key&#x60; or contact ThoughtSpot Support for assistance. ##### Attribute-Based
+     * Access Control (ABAC) with tokens To implement Attribute-Based Access Control (ABAC) and
+     * assign security entitlements to users during session creation, you can generate a token with
+     * custom filtering rules and Parameters in the &#x60;filter_rules&#x60; and
+     * &#x60;parameter_values&#x60; array respectively. These attributes can be configured to
+     * persist on a specific set of objects for user sessions initiated using the token. Once
+     * defined, the rules are added to the user&#39;s &#x60;access_control_properties&#x60; object,
+     * after which all sessions will use the persisted values. Specify the object type as
+     * &#x60;LOGICAL_TABLE&#x60;. The &#x60;LIVEBOARD&#x60; and &#x60;ANSWER&#x60; object types are
+     * not supported. For more information, see [ABAC via tokens
+     * Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).
+     * ##### Just-in-time provisioning For just-in-time user creation and provisioning, define the
+     * following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
+     * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;groups&#x60; Set &#x60;auto_create&#x60;
+     * to &#x60;true&#x60; if the user is not available in ThoughtSpot. If the user already exists
+     * in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60; in the
+     * API request, the user properties such as the display name, email, Org and group assignment
+     * will not be updated with new values. For more information, see [Just-in-time
+     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). #####
+     * Important point to note All options in the token creation APIs that define access to the
+     * content in ThoughtSpot will do so during the token creation and not when the token is being
+     * used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when
+     * the authentication token is created. Persist options such as &#x60;APPEND&#x60;,
+     * &#x60;REPLACE&#x60;, &#x60;RESET&#x60; will persist security parameters on the user profile
+     * when the token is created, while Persist option &#x60;NONE&#x60; will not persist anything
+     * but will be honoured in the session.
+     *
+     * @param getCustomAccessTokenRequest (required)
      * @return ApiResponse&lt;AccessToken&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> ABAC token creation was successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. This could be due to missing or incorrect parameters. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. The request could not be authenticated. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. The user does not have permission to access this resource. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> An unexpected error occurred on the server. </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> ABAC token creation was successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. This could be due to missing or incorrect parameters. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. The request could not be authenticated. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. The user does not have permission to access this resource. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> An unexpected error occurred on the server. </td><td>  -  </td></tr>
+     * </table>
      */
-    public ApiResponse<AccessToken> getCustomAccessTokenWithHttpInfo(GetCustomAccessTokenRequest getCustomAccessTokenRequest) throws ApiException {
-        okhttp3.Call localVarCall = getCustomAccessTokenValidateBeforeCall(getCustomAccessTokenRequest, null);
-        Type localVarReturnType = new TypeToken<AccessToken>(){}.getType();
+    public ApiResponse<AccessToken> getCustomAccessTokenWithHttpInfo(
+            GetCustomAccessTokenRequest getCustomAccessTokenRequest) throws ApiException {
+        okhttp3.Call localVarCall =
+                getCustomAccessTokenValidateBeforeCall(getCustomAccessTokenRequest, null);
+        Type localVarReturnType = new TypeToken<AccessToken>() {}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     *  (asynchronously)
-     *   Version: 10.4.0.cl or later   Gets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  To add a new user and assign privileges during auto creation, you need &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  To assign security attributes with filter rules and Parameters to the JWT token, you&#39;ll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  #### Usage guidelines  You can generate the token for a user by providing a &#x60;username&#x60; and &#x60;password&#x60;, or by using the cluster’s &#x60;secret_key&#x60;.  To generate a &#x60;secret_key&#x60; on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable) in the **Develop** &gt; **Customizations** &gt; **Security Settings** page.  **Note**: When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request, &#x60;password&#x60; takes precedence.  If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (&#x60;username&#x60;  and &#x60;password&#x60; ) returns an error. You can switch to token-based authentication with  &#x60;secret_key&#x60;  or contact ThoughtSpot Support for assistance.  ##### Attribute-Based Access Control (ABAC) with tokens  To implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the &#x60;filter_rules&#x60; and &#x60;parameter_values&#x60; array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user&#39;s &#x60;access_control_properties&#x60; object, after which all sessions will use the persisted values.  Specify the object type as &#x60;LOGICAL_TABLE&#x60;.  The &#x60;LIVEBOARD&#x60; and &#x60;ANSWER&#x60; object types are not supported.  For more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).  ##### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * &#x60;auto_create&#x60; * &#x60;username&#x60; * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;groups&#x60;  Set &#x60;auto_create&#x60; to &#x60;true&#x60; if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60; in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  ##### Important point to note All options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when the authentication token is created. Persist options such as  &#x60;APPEND&#x60;, &#x60;REPLACE&#x60;, &#x60;RESET&#x60; will persist security parameters on the user profile when the token is created, while Persist option &#x60;NONE&#x60; will not persist anything but will be honoured in the session.      
-     * @param getCustomAccessTokenRequest  (required)
+     * (asynchronously) Version: 10.4.0.cl or later Gets an authentication token with custom rules
+     * and security attributes and creates a full session in ThoughtSpot for a given user. By
+     * default, the token obtained from ThoughtSpot remains valid for 5 mins. To add a new user and
+     * assign privileges during auto creation, you need &#x60;ADMINISTRATION&#x60; (**Can administer
+     * ThoughtSpot**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
+     * and edit access to the data source is required. To assign security attributes with filter
+     * rules and Parameters to the JWT token, you&#39;ll need administrator privileges and edit
+     * access to the data source (Worksheet or Model). If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
+     * and edit access to the data source is required. #### Usage guidelines You can generate the
+     * token for a user by providing a &#x60;username&#x60; and &#x60;password&#x60;, or by using
+     * the cluster’s &#x60;secret_key&#x60;. To generate a &#x60;secret_key&#x60; on your cluster,
+     * the administrator must enable [Trusted
+     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable)
+     * in the **Develop** &gt; **Customizations** &gt; **Security Settings** page. **Note**: When
+     * both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,
+     * &#x60;password&#x60; takes precedence. If Multi-Factor Authentication (MFA) is enabled on
+     * your instance, the API login request with basic authentication (&#x60;username&#x60; and
+     * &#x60;password&#x60; ) returns an error. You can switch to token-based authentication with
+     * &#x60;secret_key&#x60; or contact ThoughtSpot Support for assistance. ##### Attribute-Based
+     * Access Control (ABAC) with tokens To implement Attribute-Based Access Control (ABAC) and
+     * assign security entitlements to users during session creation, you can generate a token with
+     * custom filtering rules and Parameters in the &#x60;filter_rules&#x60; and
+     * &#x60;parameter_values&#x60; array respectively. These attributes can be configured to
+     * persist on a specific set of objects for user sessions initiated using the token. Once
+     * defined, the rules are added to the user&#39;s &#x60;access_control_properties&#x60; object,
+     * after which all sessions will use the persisted values. Specify the object type as
+     * &#x60;LOGICAL_TABLE&#x60;. The &#x60;LIVEBOARD&#x60; and &#x60;ANSWER&#x60; object types are
+     * not supported. For more information, see [ABAC via tokens
+     * Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).
+     * ##### Just-in-time provisioning For just-in-time user creation and provisioning, define the
+     * following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
+     * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;groups&#x60; Set &#x60;auto_create&#x60;
+     * to &#x60;true&#x60; if the user is not available in ThoughtSpot. If the user already exists
+     * in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60; in the
+     * API request, the user properties such as the display name, email, Org and group assignment
+     * will not be updated with new values. For more information, see [Just-in-time
+     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). #####
+     * Important point to note All options in the token creation APIs that define access to the
+     * content in ThoughtSpot will do so during the token creation and not when the token is being
+     * used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when
+     * the authentication token is created. Persist options such as &#x60;APPEND&#x60;,
+     * &#x60;REPLACE&#x60;, &#x60;RESET&#x60; will persist security parameters on the user profile
+     * when the token is created, while Persist option &#x60;NONE&#x60; will not persist anything
+     * but will be honoured in the session.
+     *
+     * @param getCustomAccessTokenRequest (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> ABAC token creation was successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. This could be due to missing or incorrect parameters. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. The request could not be authenticated. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. The user does not have permission to access this resource. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> An unexpected error occurred on the server. </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> ABAC token creation was successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. This could be due to missing or incorrect parameters. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. The request could not be authenticated. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. The user does not have permission to access this resource. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> An unexpected error occurred on the server. </td><td>  -  </td></tr>
+     * </table>
      */
-    public okhttp3.Call getCustomAccessTokenAsync(GetCustomAccessTokenRequest getCustomAccessTokenRequest, final ApiCallback<AccessToken> _callback) throws ApiException {
+    public okhttp3.Call getCustomAccessTokenAsync(
+            GetCustomAccessTokenRequest getCustomAccessTokenRequest,
+            final ApiCallback<AccessToken> _callback)
+            throws ApiException {
 
-        okhttp3.Call localVarCall = getCustomAccessTokenValidateBeforeCall(getCustomAccessTokenRequest, _callback);
-        Type localVarReturnType = new TypeToken<AccessToken>(){}.getType();
+        okhttp3.Call localVarCall =
+                getCustomAccessTokenValidateBeforeCall(getCustomAccessTokenRequest, _callback);
+        Type localVarReturnType = new TypeToken<AccessToken>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for getFullAccessToken
-     * @param getFullAccessTokenRequest  (required)
+     *
+     * @param getFullAccessTokenRequest (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Bearer auth token creation successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Bearer auth token creation successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
-    public okhttp3.Call getFullAccessTokenCall(GetFullAccessTokenRequest getFullAccessTokenRequest, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getFullAccessTokenCall(
+            GetFullAccessTokenRequest getFullAccessTokenRequest, final ApiCallback _callback)
+            throws ApiException {
         String basePath = null;
         // Operation Servers
-        String[] localBasePaths = new String[] {  };
+        String[] localBasePaths = new String[] {};
 
         // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
+        if (localCustomBaseUrl != null) {
             basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
+        } else if (localBasePaths.length > 0) {
             basePath = localBasePaths[localHostIndex];
         } else {
             basePath = null;
@@ -546,133 +754,244 @@ public class AuthenticationApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-        final String[] localVarAccepts = {
-            "application/json"
-        };
+        final String[] localVarAccepts = {"application/json"};
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
             localVarHeaderParams.put("Accept", localVarAccept);
         }
 
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] {  };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        String[] localVarAuthNames = new String[] {};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getFullAccessTokenValidateBeforeCall(GetFullAccessTokenRequest getFullAccessTokenRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getFullAccessTokenValidateBeforeCall(
+            GetFullAccessTokenRequest getFullAccessTokenRequest, final ApiCallback _callback)
+            throws ApiException {
         // verify the required parameter 'getFullAccessTokenRequest' is set
         if (getFullAccessTokenRequest == null) {
-            throw new ApiException("Missing the required parameter 'getFullAccessTokenRequest' when calling getFullAccessToken(Async)");
+            throw new ApiException(
+                    "Missing the required parameter 'getFullAccessTokenRequest' when calling"
+                            + " getFullAccessToken(Async)");
         }
 
         return getFullAccessTokenCall(getFullAccessTokenRequest, _callback);
-
     }
 
     /**
-     * 
-     *   Version: 9.0.0.cl or later   Gets an authentication token and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  You can generate the token for a user by providing a &#x60;username&#x60; and &#x60;password&#x60;, or by using the cluster’s &#x60;secret_key&#x60; (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable)).  To generate a &#x60;secret_key&#x60; on your cluster, the administrator must enable **Trusted authentication** in the **Develop** &gt; **Customizations** &gt; **Security Settings** page. For more information, see [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable).  **Note**: When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request, &#x60;password&#x60; takes precedence.  If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (&#x60;username&#x60;  and &#x60;password&#x60; ) returns an error. You can switch to token-based authentication with  &#x60;secret_key&#x60;  or contact ThoughtSpot Support for assistance.  #### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * &#x60;auto_create&#x60; * &#x60;username&#x60; * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;group_identifiers&#x60;  Set &#x60;auto_create&#x60; to &#x60;True&#x60; if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60;, the API call will update user properties like display name, email and group assignment.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  To add a new user and assign privileges, you need &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege is required.  #### Important point to note All options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when the authentication token is created.      
-     * @param getFullAccessTokenRequest  (required)
+     * Version: 9.0.0.cl or later Gets an authentication token and creates a full session in
+     * ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid
+     * for 5 mins. You can generate the token for a user by providing a &#x60;username&#x60; and
+     * &#x60;password&#x60;, or by using the cluster’s &#x60;secret_key&#x60; (for [Trusted
+     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable)).
+     * To generate a &#x60;secret_key&#x60; on your cluster, the administrator must enable **Trusted
+     * authentication** in the **Develop** &gt; **Customizations** &gt; **Security Settings** page.
+     * For more information, see [Trusted
+     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable).
+     * **Note**: When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API
+     * request, &#x60;password&#x60; takes precedence. If Multi-Factor Authentication (MFA) is
+     * enabled on your instance, the API login request with basic authentication
+     * (&#x60;username&#x60; and &#x60;password&#x60; ) returns an error. You can switch to
+     * token-based authentication with &#x60;secret_key&#x60; or contact ThoughtSpot Support for
+     * assistance. #### Just-in-time provisioning For just-in-time user creation and provisioning,
+     * define the following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
+     * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;group_identifiers&#x60; Set
+     * &#x60;auto_create&#x60; to &#x60;True&#x60; if the user is not available in ThoughtSpot. If
+     * the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to
+     * &#x60;true&#x60;, the API call will update user properties like display name, email and group
+     * assignment. For more information, see [Just-in-time
+     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). To add a
+     * new user and assign privileges, you need &#x60;ADMINISTRATION&#x60; (**Can administer
+     * ThoughtSpot**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
+     * is required. #### Important point to note All options in the token creation APIs changing the
+     * content in ThoughtSpot will do so during the token creation and not when the token is being
+     * used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when
+     * the authentication token is created.
+     *
+     * @param getFullAccessTokenRequest (required)
      * @return Token
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Bearer auth token creation successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Bearer auth token creation successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
-    public Token getFullAccessToken(GetFullAccessTokenRequest getFullAccessTokenRequest) throws ApiException {
+    public Token getFullAccessToken(GetFullAccessTokenRequest getFullAccessTokenRequest)
+            throws ApiException {
         ApiResponse<Token> localVarResp = getFullAccessTokenWithHttpInfo(getFullAccessTokenRequest);
         return localVarResp.getData();
     }
 
     /**
-     * 
-     *   Version: 9.0.0.cl or later   Gets an authentication token and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  You can generate the token for a user by providing a &#x60;username&#x60; and &#x60;password&#x60;, or by using the cluster’s &#x60;secret_key&#x60; (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable)).  To generate a &#x60;secret_key&#x60; on your cluster, the administrator must enable **Trusted authentication** in the **Develop** &gt; **Customizations** &gt; **Security Settings** page. For more information, see [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable).  **Note**: When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request, &#x60;password&#x60; takes precedence.  If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (&#x60;username&#x60;  and &#x60;password&#x60; ) returns an error. You can switch to token-based authentication with  &#x60;secret_key&#x60;  or contact ThoughtSpot Support for assistance.  #### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * &#x60;auto_create&#x60; * &#x60;username&#x60; * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;group_identifiers&#x60;  Set &#x60;auto_create&#x60; to &#x60;True&#x60; if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60;, the API call will update user properties like display name, email and group assignment.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  To add a new user and assign privileges, you need &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege is required.  #### Important point to note All options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when the authentication token is created.      
-     * @param getFullAccessTokenRequest  (required)
+     * Version: 9.0.0.cl or later Gets an authentication token and creates a full session in
+     * ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid
+     * for 5 mins. You can generate the token for a user by providing a &#x60;username&#x60; and
+     * &#x60;password&#x60;, or by using the cluster’s &#x60;secret_key&#x60; (for [Trusted
+     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable)).
+     * To generate a &#x60;secret_key&#x60; on your cluster, the administrator must enable **Trusted
+     * authentication** in the **Develop** &gt; **Customizations** &gt; **Security Settings** page.
+     * For more information, see [Trusted
+     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable).
+     * **Note**: When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API
+     * request, &#x60;password&#x60; takes precedence. If Multi-Factor Authentication (MFA) is
+     * enabled on your instance, the API login request with basic authentication
+     * (&#x60;username&#x60; and &#x60;password&#x60; ) returns an error. You can switch to
+     * token-based authentication with &#x60;secret_key&#x60; or contact ThoughtSpot Support for
+     * assistance. #### Just-in-time provisioning For just-in-time user creation and provisioning,
+     * define the following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
+     * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;group_identifiers&#x60; Set
+     * &#x60;auto_create&#x60; to &#x60;True&#x60; if the user is not available in ThoughtSpot. If
+     * the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to
+     * &#x60;true&#x60;, the API call will update user properties like display name, email and group
+     * assignment. For more information, see [Just-in-time
+     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). To add a
+     * new user and assign privileges, you need &#x60;ADMINISTRATION&#x60; (**Can administer
+     * ThoughtSpot**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
+     * is required. #### Important point to note All options in the token creation APIs changing the
+     * content in ThoughtSpot will do so during the token creation and not when the token is being
+     * used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when
+     * the authentication token is created.
+     *
+     * @param getFullAccessTokenRequest (required)
      * @return ApiResponse&lt;Token&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Bearer auth token creation successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Bearer auth token creation successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
-    public ApiResponse<Token> getFullAccessTokenWithHttpInfo(GetFullAccessTokenRequest getFullAccessTokenRequest) throws ApiException {
-        okhttp3.Call localVarCall = getFullAccessTokenValidateBeforeCall(getFullAccessTokenRequest, null);
-        Type localVarReturnType = new TypeToken<Token>(){}.getType();
+    public ApiResponse<Token> getFullAccessTokenWithHttpInfo(
+            GetFullAccessTokenRequest getFullAccessTokenRequest) throws ApiException {
+        okhttp3.Call localVarCall =
+                getFullAccessTokenValidateBeforeCall(getFullAccessTokenRequest, null);
+        Type localVarReturnType = new TypeToken<Token>() {}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     *  (asynchronously)
-     *   Version: 9.0.0.cl or later   Gets an authentication token and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  You can generate the token for a user by providing a &#x60;username&#x60; and &#x60;password&#x60;, or by using the cluster’s &#x60;secret_key&#x60; (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable)).  To generate a &#x60;secret_key&#x60; on your cluster, the administrator must enable **Trusted authentication** in the **Develop** &gt; **Customizations** &gt; **Security Settings** page. For more information, see [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable).  **Note**: When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request, &#x60;password&#x60; takes precedence.  If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (&#x60;username&#x60;  and &#x60;password&#x60; ) returns an error. You can switch to token-based authentication with  &#x60;secret_key&#x60;  or contact ThoughtSpot Support for assistance.  #### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * &#x60;auto_create&#x60; * &#x60;username&#x60; * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;group_identifiers&#x60;  Set &#x60;auto_create&#x60; to &#x60;True&#x60; if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60;, the API call will update user properties like display name, email and group assignment.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  To add a new user and assign privileges, you need &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege is required.  #### Important point to note All options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when the authentication token is created.      
-     * @param getFullAccessTokenRequest  (required)
+     * (asynchronously) Version: 9.0.0.cl or later Gets an authentication token and creates a full
+     * session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot
+     * remains valid for 5 mins. You can generate the token for a user by providing a
+     * &#x60;username&#x60; and &#x60;password&#x60;, or by using the cluster’s
+     * &#x60;secret_key&#x60; (for [Trusted
+     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable)).
+     * To generate a &#x60;secret_key&#x60; on your cluster, the administrator must enable **Trusted
+     * authentication** in the **Develop** &gt; **Customizations** &gt; **Security Settings** page.
+     * For more information, see [Trusted
+     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable).
+     * **Note**: When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API
+     * request, &#x60;password&#x60; takes precedence. If Multi-Factor Authentication (MFA) is
+     * enabled on your instance, the API login request with basic authentication
+     * (&#x60;username&#x60; and &#x60;password&#x60; ) returns an error. You can switch to
+     * token-based authentication with &#x60;secret_key&#x60; or contact ThoughtSpot Support for
+     * assistance. #### Just-in-time provisioning For just-in-time user creation and provisioning,
+     * define the following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
+     * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;group_identifiers&#x60; Set
+     * &#x60;auto_create&#x60; to &#x60;True&#x60; if the user is not available in ThoughtSpot. If
+     * the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to
+     * &#x60;true&#x60;, the API call will update user properties like display name, email and group
+     * assignment. For more information, see [Just-in-time
+     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). To add a
+     * new user and assign privileges, you need &#x60;ADMINISTRATION&#x60; (**Can administer
+     * ThoughtSpot**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
+     * is required. #### Important point to note All options in the token creation APIs changing the
+     * content in ThoughtSpot will do so during the token creation and not when the token is being
+     * used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when
+     * the authentication token is created.
+     *
+     * @param getFullAccessTokenRequest (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Bearer auth token creation successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Bearer auth token creation successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
-    public okhttp3.Call getFullAccessTokenAsync(GetFullAccessTokenRequest getFullAccessTokenRequest, final ApiCallback<Token> _callback) throws ApiException {
+    public okhttp3.Call getFullAccessTokenAsync(
+            GetFullAccessTokenRequest getFullAccessTokenRequest, final ApiCallback<Token> _callback)
+            throws ApiException {
 
-        okhttp3.Call localVarCall = getFullAccessTokenValidateBeforeCall(getFullAccessTokenRequest, _callback);
-        Type localVarReturnType = new TypeToken<Token>(){}.getType();
+        okhttp3.Call localVarCall =
+                getFullAccessTokenValidateBeforeCall(getFullAccessTokenRequest, _callback);
+        Type localVarReturnType = new TypeToken<Token>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for getObjectAccessToken
-     * @param getObjectAccessTokenRequest  (required)
+     *
+     * @param getObjectAccessTokenRequest (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Bearer auth token creation successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Bearer auth token creation successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
-    public okhttp3.Call getObjectAccessTokenCall(GetObjectAccessTokenRequest getObjectAccessTokenRequest, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getObjectAccessTokenCall(
+            GetObjectAccessTokenRequest getObjectAccessTokenRequest, final ApiCallback _callback)
+            throws ApiException {
         String basePath = null;
         // Operation Servers
-        String[] localBasePaths = new String[] {  };
+        String[] localBasePaths = new String[] {};
 
         // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
+        if (localCustomBaseUrl != null) {
             basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
+        } else if (localBasePaths.length > 0) {
             basePath = localBasePaths[localHostIndex];
         } else {
             basePath = null;
@@ -689,133 +1008,238 @@ public class AuthenticationApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-        final String[] localVarAccepts = {
-            "application/json"
-        };
+        final String[] localVarAccepts = {"application/json"};
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
             localVarHeaderParams.put("Accept", localVarAccept);
         }
 
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] {  };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        String[] localVarAuthNames = new String[] {};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getObjectAccessTokenValidateBeforeCall(GetObjectAccessTokenRequest getObjectAccessTokenRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getObjectAccessTokenValidateBeforeCall(
+            GetObjectAccessTokenRequest getObjectAccessTokenRequest, final ApiCallback _callback)
+            throws ApiException {
         // verify the required parameter 'getObjectAccessTokenRequest' is set
         if (getObjectAccessTokenRequest == null) {
-            throw new ApiException("Missing the required parameter 'getObjectAccessTokenRequest' when calling getObjectAccessToken(Async)");
+            throw new ApiException(
+                    "Missing the required parameter 'getObjectAccessTokenRequest' when calling"
+                            + " getObjectAccessToken(Async)");
         }
 
         return getObjectAccessTokenCall(getObjectAccessTokenRequest, _callback);
-
     }
 
     /**
-     * 
-     *   Version: 9.0.0.cl or later   Gets an authentication token that provides access to a specific metadata object. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  You can generate the token for a user by providing a &#x60;username&#x60; and &#x60;password&#x60;, or by using the cluster’s &#x60;secret key&#x60; (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable)).  To generate a &#x60;secret_key&#x60; on your cluster, the administrator must enable **Trusted authentication** in the **Develop** &gt; **Customizations** &gt; **Security Settings** page.  **Note**: When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,  &#x60;password&#x60; takes precedence.  If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (&#x60;username&#x60;  and &#x60;password&#x60; ) returns an error. You can switch to token-based authentication with  &#x60;secret_key&#x60;  or contact ThoughtSpot Support for assistance.  #### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * &#x60;auto_create&#x60; * &#x60;username&#x60; * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;group_identifiers&#x60;  Set &#x60;auto_create&#x60; to &#x60;True&#x60; if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60;, the API call will update user properties like display name, email and group assignment.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  To add a new user and assign privileges, you need &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege is required.  #### Important point to note All options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when the authentication token is created.      
-     * @param getObjectAccessTokenRequest  (required)
+     * Version: 9.0.0.cl or later Gets an authentication token that provides access to a specific
+     * metadata object. By default, the token obtained from ThoughtSpot remains valid for 5 mins.
+     * You can generate the token for a user by providing a &#x60;username&#x60; and
+     * &#x60;password&#x60;, or by using the cluster’s &#x60;secret key&#x60; (for [Trusted
+     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable)).
+     * To generate a &#x60;secret_key&#x60; on your cluster, the administrator must enable **Trusted
+     * authentication** in the **Develop** &gt; **Customizations** &gt; **Security Settings** page.
+     * **Note**: When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API
+     * request, &#x60;password&#x60; takes precedence. If Multi-Factor Authentication (MFA) is
+     * enabled on your instance, the API login request with basic authentication
+     * (&#x60;username&#x60; and &#x60;password&#x60; ) returns an error. You can switch to
+     * token-based authentication with &#x60;secret_key&#x60; or contact ThoughtSpot Support for
+     * assistance. #### Just-in-time provisioning For just-in-time user creation and provisioning,
+     * define the following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
+     * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;group_identifiers&#x60; Set
+     * &#x60;auto_create&#x60; to &#x60;True&#x60; if the user is not available in ThoughtSpot. If
+     * the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to
+     * &#x60;true&#x60;, the API call will update user properties like display name, email and group
+     * assignment. For more information, see [Just-in-time
+     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). To add a
+     * new user and assign privileges, you need &#x60;ADMINISTRATION&#x60; (**Can administer
+     * ThoughtSpot**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
+     * is required. #### Important point to note All options in the token creation APIs changing the
+     * content in ThoughtSpot will do so during the token creation and not when the token is being
+     * used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when
+     * the authentication token is created.
+     *
+     * @param getObjectAccessTokenRequest (required)
      * @return Token
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Bearer auth token creation successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Bearer auth token creation successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
-    public Token getObjectAccessToken(GetObjectAccessTokenRequest getObjectAccessTokenRequest) throws ApiException {
-        ApiResponse<Token> localVarResp = getObjectAccessTokenWithHttpInfo(getObjectAccessTokenRequest);
+    public Token getObjectAccessToken(GetObjectAccessTokenRequest getObjectAccessTokenRequest)
+            throws ApiException {
+        ApiResponse<Token> localVarResp =
+                getObjectAccessTokenWithHttpInfo(getObjectAccessTokenRequest);
         return localVarResp.getData();
     }
 
     /**
-     * 
-     *   Version: 9.0.0.cl or later   Gets an authentication token that provides access to a specific metadata object. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  You can generate the token for a user by providing a &#x60;username&#x60; and &#x60;password&#x60;, or by using the cluster’s &#x60;secret key&#x60; (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable)).  To generate a &#x60;secret_key&#x60; on your cluster, the administrator must enable **Trusted authentication** in the **Develop** &gt; **Customizations** &gt; **Security Settings** page.  **Note**: When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,  &#x60;password&#x60; takes precedence.  If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (&#x60;username&#x60;  and &#x60;password&#x60; ) returns an error. You can switch to token-based authentication with  &#x60;secret_key&#x60;  or contact ThoughtSpot Support for assistance.  #### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * &#x60;auto_create&#x60; * &#x60;username&#x60; * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;group_identifiers&#x60;  Set &#x60;auto_create&#x60; to &#x60;True&#x60; if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60;, the API call will update user properties like display name, email and group assignment.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  To add a new user and assign privileges, you need &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege is required.  #### Important point to note All options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when the authentication token is created.      
-     * @param getObjectAccessTokenRequest  (required)
+     * Version: 9.0.0.cl or later Gets an authentication token that provides access to a specific
+     * metadata object. By default, the token obtained from ThoughtSpot remains valid for 5 mins.
+     * You can generate the token for a user by providing a &#x60;username&#x60; and
+     * &#x60;password&#x60;, or by using the cluster’s &#x60;secret key&#x60; (for [Trusted
+     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable)).
+     * To generate a &#x60;secret_key&#x60; on your cluster, the administrator must enable **Trusted
+     * authentication** in the **Develop** &gt; **Customizations** &gt; **Security Settings** page.
+     * **Note**: When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API
+     * request, &#x60;password&#x60; takes precedence. If Multi-Factor Authentication (MFA) is
+     * enabled on your instance, the API login request with basic authentication
+     * (&#x60;username&#x60; and &#x60;password&#x60; ) returns an error. You can switch to
+     * token-based authentication with &#x60;secret_key&#x60; or contact ThoughtSpot Support for
+     * assistance. #### Just-in-time provisioning For just-in-time user creation and provisioning,
+     * define the following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
+     * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;group_identifiers&#x60; Set
+     * &#x60;auto_create&#x60; to &#x60;True&#x60; if the user is not available in ThoughtSpot. If
+     * the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to
+     * &#x60;true&#x60;, the API call will update user properties like display name, email and group
+     * assignment. For more information, see [Just-in-time
+     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). To add a
+     * new user and assign privileges, you need &#x60;ADMINISTRATION&#x60; (**Can administer
+     * ThoughtSpot**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
+     * is required. #### Important point to note All options in the token creation APIs changing the
+     * content in ThoughtSpot will do so during the token creation and not when the token is being
+     * used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when
+     * the authentication token is created.
+     *
+     * @param getObjectAccessTokenRequest (required)
      * @return ApiResponse&lt;Token&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Bearer auth token creation successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Bearer auth token creation successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
-    public ApiResponse<Token> getObjectAccessTokenWithHttpInfo(GetObjectAccessTokenRequest getObjectAccessTokenRequest) throws ApiException {
-        okhttp3.Call localVarCall = getObjectAccessTokenValidateBeforeCall(getObjectAccessTokenRequest, null);
-        Type localVarReturnType = new TypeToken<Token>(){}.getType();
+    public ApiResponse<Token> getObjectAccessTokenWithHttpInfo(
+            GetObjectAccessTokenRequest getObjectAccessTokenRequest) throws ApiException {
+        okhttp3.Call localVarCall =
+                getObjectAccessTokenValidateBeforeCall(getObjectAccessTokenRequest, null);
+        Type localVarReturnType = new TypeToken<Token>() {}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     *  (asynchronously)
-     *   Version: 9.0.0.cl or later   Gets an authentication token that provides access to a specific metadata object. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  You can generate the token for a user by providing a &#x60;username&#x60; and &#x60;password&#x60;, or by using the cluster’s &#x60;secret key&#x60; (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable)).  To generate a &#x60;secret_key&#x60; on your cluster, the administrator must enable **Trusted authentication** in the **Develop** &gt; **Customizations** &gt; **Security Settings** page.  **Note**: When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,  &#x60;password&#x60; takes precedence.  If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (&#x60;username&#x60;  and &#x60;password&#x60; ) returns an error. You can switch to token-based authentication with  &#x60;secret_key&#x60;  or contact ThoughtSpot Support for assistance.  #### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * &#x60;auto_create&#x60; * &#x60;username&#x60; * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;group_identifiers&#x60;  Set &#x60;auto_create&#x60; to &#x60;True&#x60; if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60;, the API call will update user properties like display name, email and group assignment.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  To add a new user and assign privileges, you need &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege is required.  #### Important point to note All options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when the authentication token is created.      
-     * @param getObjectAccessTokenRequest  (required)
+     * (asynchronously) Version: 9.0.0.cl or later Gets an authentication token that provides access
+     * to a specific metadata object. By default, the token obtained from ThoughtSpot remains valid
+     * for 5 mins. You can generate the token for a user by providing a &#x60;username&#x60; and
+     * &#x60;password&#x60;, or by using the cluster’s &#x60;secret key&#x60; (for [Trusted
+     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable)).
+     * To generate a &#x60;secret_key&#x60; on your cluster, the administrator must enable **Trusted
+     * authentication** in the **Develop** &gt; **Customizations** &gt; **Security Settings** page.
+     * **Note**: When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API
+     * request, &#x60;password&#x60; takes precedence. If Multi-Factor Authentication (MFA) is
+     * enabled on your instance, the API login request with basic authentication
+     * (&#x60;username&#x60; and &#x60;password&#x60; ) returns an error. You can switch to
+     * token-based authentication with &#x60;secret_key&#x60; or contact ThoughtSpot Support for
+     * assistance. #### Just-in-time provisioning For just-in-time user creation and provisioning,
+     * define the following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
+     * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;group_identifiers&#x60; Set
+     * &#x60;auto_create&#x60; to &#x60;True&#x60; if the user is not available in ThoughtSpot. If
+     * the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to
+     * &#x60;true&#x60;, the API call will update user properties like display name, email and group
+     * assignment. For more information, see [Just-in-time
+     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). To add a
+     * new user and assign privileges, you need &#x60;ADMINISTRATION&#x60; (**Can administer
+     * ThoughtSpot**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
+     * is required. #### Important point to note All options in the token creation APIs changing the
+     * content in ThoughtSpot will do so during the token creation and not when the token is being
+     * used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when
+     * the authentication token is created.
+     *
+     * @param getObjectAccessTokenRequest (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Bearer auth token creation successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Bearer auth token creation successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
-    public okhttp3.Call getObjectAccessTokenAsync(GetObjectAccessTokenRequest getObjectAccessTokenRequest, final ApiCallback<Token> _callback) throws ApiException {
+    public okhttp3.Call getObjectAccessTokenAsync(
+            GetObjectAccessTokenRequest getObjectAccessTokenRequest,
+            final ApiCallback<Token> _callback)
+            throws ApiException {
 
-        okhttp3.Call localVarCall = getObjectAccessTokenValidateBeforeCall(getObjectAccessTokenRequest, _callback);
-        Type localVarReturnType = new TypeToken<Token>(){}.getType();
+        okhttp3.Call localVarCall =
+                getObjectAccessTokenValidateBeforeCall(getObjectAccessTokenRequest, _callback);
+        Type localVarReturnType = new TypeToken<Token>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for login
-     * @param loginRequest  (required)
+     *
+     * @param loginRequest (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> User login successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> User login successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
-    public okhttp3.Call loginCall(LoginRequest loginRequest, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call loginCall(LoginRequest loginRequest, final ApiCallback _callback)
+            throws ApiException {
         String basePath = null;
         // Operation Servers
-        String[] localBasePaths = new String[] {  };
+        String[] localBasePaths = new String[] {};
 
         // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
+        if (localCustomBaseUrl != null) {
             basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
+        } else if (localBasePaths.length > 0) {
             basePath = localBasePaths[localHostIndex];
         } else {
             basePath = null;
@@ -832,73 +1256,98 @@ public class AuthenticationApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-        final String[] localVarAccepts = {
-            "application/json"
-        };
+        final String[] localVarAccepts = {"application/json"};
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
             localVarHeaderParams.put("Accept", localVarAccept);
         }
 
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] { "bearerAuth" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call loginValidateBeforeCall(LoginRequest loginRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call loginValidateBeforeCall(
+            LoginRequest loginRequest, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'loginRequest' is set
         if (loginRequest == null) {
-            throw new ApiException("Missing the required parameter 'loginRequest' when calling login(Async)");
+            throw new ApiException(
+                    "Missing the required parameter 'loginRequest' when calling login(Async)");
         }
 
         return loginCall(loginRequest, _callback);
-
     }
 
     /**
-     * 
-     *   Version: 9.0.0.cl or later   Creates a login session for a ThoughtSpot user with Basic authentication.  In Basic authentication method, REST clients log in to ThoughtSpot using &#x60;username&#x60; and &#x60;password&#x60; attributes. On a multi-tenant cluster with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org context.  **Note**: If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (&#x60;username&#x60;  and &#x60;password&#x60; ) returns an error. Contact ThoughtSpot Support for assistance.  A successful login returns a session cookie that can be used in your subsequent API requests.     
-     * @param loginRequest  (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * Version: 9.0.0.cl or later Creates a login session for a ThoughtSpot user with Basic
+     * authentication. In Basic authentication method, REST clients log in to ThoughtSpot using
+     * &#x60;username&#x60; and &#x60;password&#x60; attributes. On a multi-tenant cluster with
+     * Orgs, users can pass the ID of the Org in the API request to log in to a specific Org
+     * context. **Note**: If Multi-Factor Authentication (MFA) is enabled on your instance, the API
+     * login request with basic authentication (&#x60;username&#x60; and &#x60;password&#x60; )
+     * returns an error. Contact ThoughtSpot Support for assistance. A successful login returns a
+     * session cookie that can be used in your subsequent API requests.
+     *
+     * @param loginRequest (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> User login successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> User login successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
     public void login(LoginRequest loginRequest) throws ApiException {
         loginWithHttpInfo(loginRequest);
     }
 
     /**
-     * 
-     *   Version: 9.0.0.cl or later   Creates a login session for a ThoughtSpot user with Basic authentication.  In Basic authentication method, REST clients log in to ThoughtSpot using &#x60;username&#x60; and &#x60;password&#x60; attributes. On a multi-tenant cluster with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org context.  **Note**: If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (&#x60;username&#x60;  and &#x60;password&#x60; ) returns an error. Contact ThoughtSpot Support for assistance.  A successful login returns a session cookie that can be used in your subsequent API requests.     
-     * @param loginRequest  (required)
+     * Version: 9.0.0.cl or later Creates a login session for a ThoughtSpot user with Basic
+     * authentication. In Basic authentication method, REST clients log in to ThoughtSpot using
+     * &#x60;username&#x60; and &#x60;password&#x60; attributes. On a multi-tenant cluster with
+     * Orgs, users can pass the ID of the Org in the API request to log in to a specific Org
+     * context. **Note**: If Multi-Factor Authentication (MFA) is enabled on your instance, the API
+     * login request with basic authentication (&#x60;username&#x60; and &#x60;password&#x60; )
+     * returns an error. Contact ThoughtSpot Support for assistance. A successful login returns a
+     * session cookie that can be used in your subsequent API requests.
+     *
+     * @param loginRequest (required)
      * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> User login successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> User login successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
     public ApiResponse<Void> loginWithHttpInfo(LoginRequest loginRequest) throws ApiException {
         okhttp3.Call localVarCall = loginValidateBeforeCall(loginRequest, null);
@@ -906,24 +1355,33 @@ public class AuthenticationApi {
     }
 
     /**
-     *  (asynchronously)
-     *   Version: 9.0.0.cl or later   Creates a login session for a ThoughtSpot user with Basic authentication.  In Basic authentication method, REST clients log in to ThoughtSpot using &#x60;username&#x60; and &#x60;password&#x60; attributes. On a multi-tenant cluster with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org context.  **Note**: If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (&#x60;username&#x60;  and &#x60;password&#x60; ) returns an error. Contact ThoughtSpot Support for assistance.  A successful login returns a session cookie that can be used in your subsequent API requests.     
-     * @param loginRequest  (required)
+     * (asynchronously) Version: 9.0.0.cl or later Creates a login session for a ThoughtSpot user
+     * with Basic authentication. In Basic authentication method, REST clients log in to ThoughtSpot
+     * using &#x60;username&#x60; and &#x60;password&#x60; attributes. On a multi-tenant cluster
+     * with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org
+     * context. **Note**: If Multi-Factor Authentication (MFA) is enabled on your instance, the API
+     * login request with basic authentication (&#x60;username&#x60; and &#x60;password&#x60; )
+     * returns an error. Contact ThoughtSpot Support for assistance. A successful login returns a
+     * session cookie that can be used in your subsequent API requests.
+     *
+     * @param loginRequest (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> User login successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> User login successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
-    public okhttp3.Call loginAsync(LoginRequest loginRequest, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call loginAsync(LoginRequest loginRequest, final ApiCallback<Void> _callback)
+            throws ApiException {
 
         okhttp3.Call localVarCall = loginValidateBeforeCall(loginRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
@@ -931,29 +1389,30 @@ public class AuthenticationApi {
     }
     /**
      * Build call for logout
+     *
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> User logout successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> User logout successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
     public okhttp3.Call logoutCall(final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
-        String[] localBasePaths = new String[] {  };
+        String[] localBasePaths = new String[] {};
 
         // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
+        if (localCustomBaseUrl != null) {
             basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
+        } else if (localBasePaths.length > 0) {
             basePath = localBasePaths[localHostIndex];
         } else {
             basePath = null;
@@ -970,65 +1429,75 @@ public class AuthenticationApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-        final String[] localVarAccepts = {
-            "application/json"
-        };
+        final String[] localVarAccepts = {"application/json"};
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
             localVarHeaderParams.put("Accept", localVarAccept);
         }
 
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        final String[] localVarContentTypes = {};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] { "bearerAuth" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call logoutValidateBeforeCall(final ApiCallback _callback) throws ApiException {
         return logoutCall(_callback);
-
     }
 
     /**
-     * 
-     *   Version: 9.0.0.cl or later    Logs out a user from their current session.      
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * Version: 9.0.0.cl or later Logs out a user from their current session.
+     *
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> User logout successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> User logout successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
     public void logout() throws ApiException {
         logoutWithHttpInfo();
     }
 
     /**
-     * 
-     *   Version: 9.0.0.cl or later    Logs out a user from their current session.      
+     * Version: 9.0.0.cl or later Logs out a user from their current session.
+     *
      * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> User logout successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> User logout successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
     public ApiResponse<Void> logoutWithHttpInfo() throws ApiException {
         okhttp3.Call localVarCall = logoutValidateBeforeCall(null);
@@ -1036,21 +1505,22 @@ public class AuthenticationApi {
     }
 
     /**
-     *  (asynchronously)
-     *   Version: 9.0.0.cl or later    Logs out a user from their current session.      
+     * (asynchronously) Version: 9.0.0.cl or later Logs out a user from their current session.
+     *
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> User logout successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> User logout successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
     public okhttp3.Call logoutAsync(final ApiCallback<Void> _callback) throws ApiException {
 
@@ -1060,30 +1530,33 @@ public class AuthenticationApi {
     }
     /**
      * Build call for revokeToken
-     * @param revokeTokenRequest  (required)
+     *
+     * @param revokeTokenRequest (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> Token successfully revoked. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Token successfully revoked. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
-    public okhttp3.Call revokeTokenCall(RevokeTokenRequest revokeTokenRequest, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call revokeTokenCall(
+            RevokeTokenRequest revokeTokenRequest, final ApiCallback _callback)
+            throws ApiException {
         String basePath = null;
         // Operation Servers
-        String[] localBasePaths = new String[] {  };
+        String[] localBasePaths = new String[] {};
 
         // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
+        if (localCustomBaseUrl != null) {
             basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
+        } else if (localBasePaths.length > 0) {
             basePath = localBasePaths[localHostIndex];
         } else {
             basePath = null;
@@ -1100,98 +1573,130 @@ public class AuthenticationApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-        final String[] localVarAccepts = {
-            "application/json"
-        };
+        final String[] localVarAccepts = {"application/json"};
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
             localVarHeaderParams.put("Accept", localVarAccept);
         }
 
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] { "bearerAuth" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call revokeTokenValidateBeforeCall(RevokeTokenRequest revokeTokenRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call revokeTokenValidateBeforeCall(
+            RevokeTokenRequest revokeTokenRequest, final ApiCallback _callback)
+            throws ApiException {
         // verify the required parameter 'revokeTokenRequest' is set
         if (revokeTokenRequest == null) {
-            throw new ApiException("Missing the required parameter 'revokeTokenRequest' when calling revokeToken(Async)");
+            throw new ApiException(
+                    "Missing the required parameter 'revokeTokenRequest' when calling"
+                            + " revokeToken(Async)");
         }
 
         return revokeTokenCall(revokeTokenRequest, _callback);
-
     }
 
     /**
-     * 
-     *   Version: 9.0.0.cl or later    Revokes the authentication token issued for current user session.  The token of your current session expires when you make a call to the &#x60;/api/rest/2.0/auth/token/revoke&#x60; endpoint. the users will not be able to access ThoughtSpot objects until a new token is obtained.  To restart your session, request for a new token from ThoughtSpot. See [Get Full Access Token](#/http/api-endpoints/authentication/get-full-access-token).      
-     * @param revokeTokenRequest  (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * Version: 9.0.0.cl or later Revokes the authentication token issued for current user session.
+     * The token of your current session expires when you make a call to the
+     * &#x60;/api/rest/2.0/auth/token/revoke&#x60; endpoint. the users will not be able to access
+     * ThoughtSpot objects until a new token is obtained. To restart your session, request for a new
+     * token from ThoughtSpot. See [Get Full Access
+     * Token](#/http/api-endpoints/authentication/get-full-access-token).
+     *
+     * @param revokeTokenRequest (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> Token successfully revoked. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Token successfully revoked. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
     public void revokeToken(RevokeTokenRequest revokeTokenRequest) throws ApiException {
         revokeTokenWithHttpInfo(revokeTokenRequest);
     }
 
     /**
-     * 
-     *   Version: 9.0.0.cl or later    Revokes the authentication token issued for current user session.  The token of your current session expires when you make a call to the &#x60;/api/rest/2.0/auth/token/revoke&#x60; endpoint. the users will not be able to access ThoughtSpot objects until a new token is obtained.  To restart your session, request for a new token from ThoughtSpot. See [Get Full Access Token](#/http/api-endpoints/authentication/get-full-access-token).      
-     * @param revokeTokenRequest  (required)
+     * Version: 9.0.0.cl or later Revokes the authentication token issued for current user session.
+     * The token of your current session expires when you make a call to the
+     * &#x60;/api/rest/2.0/auth/token/revoke&#x60; endpoint. the users will not be able to access
+     * ThoughtSpot objects until a new token is obtained. To restart your session, request for a new
+     * token from ThoughtSpot. See [Get Full Access
+     * Token](#/http/api-endpoints/authentication/get-full-access-token).
+     *
+     * @param revokeTokenRequest (required)
      * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> Token successfully revoked. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Token successfully revoked. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
-    public ApiResponse<Void> revokeTokenWithHttpInfo(RevokeTokenRequest revokeTokenRequest) throws ApiException {
+    public ApiResponse<Void> revokeTokenWithHttpInfo(RevokeTokenRequest revokeTokenRequest)
+            throws ApiException {
         okhttp3.Call localVarCall = revokeTokenValidateBeforeCall(revokeTokenRequest, null);
         return localVarApiClient.execute(localVarCall);
     }
 
     /**
-     *  (asynchronously)
-     *   Version: 9.0.0.cl or later    Revokes the authentication token issued for current user session.  The token of your current session expires when you make a call to the &#x60;/api/rest/2.0/auth/token/revoke&#x60; endpoint. the users will not be able to access ThoughtSpot objects until a new token is obtained.  To restart your session, request for a new token from ThoughtSpot. See [Get Full Access Token](#/http/api-endpoints/authentication/get-full-access-token).      
-     * @param revokeTokenRequest  (required)
+     * (asynchronously) Version: 9.0.0.cl or later Revokes the authentication token issued for
+     * current user session. The token of your current session expires when you make a call to the
+     * &#x60;/api/rest/2.0/auth/token/revoke&#x60; endpoint. the users will not be able to access
+     * ThoughtSpot objects until a new token is obtained. To restart your session, request for a new
+     * token from ThoughtSpot. See [Get Full Access
+     * Token](#/http/api-endpoints/authentication/get-full-access-token).
+     *
+     * @param revokeTokenRequest (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> Token successfully revoked. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Token successfully revoked. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
-    public okhttp3.Call revokeTokenAsync(RevokeTokenRequest revokeTokenRequest, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call revokeTokenAsync(
+            RevokeTokenRequest revokeTokenRequest, final ApiCallback<Void> _callback)
+            throws ApiException {
 
         okhttp3.Call localVarCall = revokeTokenValidateBeforeCall(revokeTokenRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
@@ -1199,30 +1704,33 @@ public class AuthenticationApi {
     }
     /**
      * Build call for validateToken
-     * @param validateTokenRequest  (required)
+     *
+     * @param validateTokenRequest (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Token validation successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Token validation successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
-    public okhttp3.Call validateTokenCall(ValidateTokenRequest validateTokenRequest, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call validateTokenCall(
+            ValidateTokenRequest validateTokenRequest, final ApiCallback _callback)
+            throws ApiException {
         String basePath = null;
         // Operation Servers
-        String[] localBasePaths = new String[] {  };
+        String[] localBasePaths = new String[] {};
 
         // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
+        if (localCustomBaseUrl != null) {
             basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
+        } else if (localBasePaths.length > 0) {
             basePath = localBasePaths[localHostIndex];
         } else {
             basePath = null;
@@ -1239,104 +1747,131 @@ public class AuthenticationApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-        final String[] localVarAccepts = {
-            "application/json"
-        };
+        final String[] localVarAccepts = {"application/json"};
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
             localVarHeaderParams.put("Accept", localVarAccept);
         }
 
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] { "bearerAuth" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call validateTokenValidateBeforeCall(ValidateTokenRequest validateTokenRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call validateTokenValidateBeforeCall(
+            ValidateTokenRequest validateTokenRequest, final ApiCallback _callback)
+            throws ApiException {
         // verify the required parameter 'validateTokenRequest' is set
         if (validateTokenRequest == null) {
-            throw new ApiException("Missing the required parameter 'validateTokenRequest' when calling validateToken(Async)");
+            throw new ApiException(
+                    "Missing the required parameter 'validateTokenRequest' when calling"
+                            + " validateToken(Async)");
         }
 
         return validateTokenCall(validateTokenRequest, _callback);
-
     }
 
     /**
-     * 
-     *   Version: 9.12.0.cl or later    Validates the authentication token specified in the API request.  If your token is not valid, [Get a new token](#/http/api-endpoints/authentication/get-full-access-token).      
-     * @param validateTokenRequest  (required)
+     * Version: 9.12.0.cl or later Validates the authentication token specified in the API request.
+     * If your token is not valid, [Get a new
+     * token](#/http/api-endpoints/authentication/get-full-access-token).
+     *
+     * @param validateTokenRequest (required)
      * @return TokenValidationResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Token validation successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Token validation successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
-    public TokenValidationResponse validateToken(ValidateTokenRequest validateTokenRequest) throws ApiException {
-        ApiResponse<TokenValidationResponse> localVarResp = validateTokenWithHttpInfo(validateTokenRequest);
+    public TokenValidationResponse validateToken(ValidateTokenRequest validateTokenRequest)
+            throws ApiException {
+        ApiResponse<TokenValidationResponse> localVarResp =
+                validateTokenWithHttpInfo(validateTokenRequest);
         return localVarResp.getData();
     }
 
     /**
-     * 
-     *   Version: 9.12.0.cl or later    Validates the authentication token specified in the API request.  If your token is not valid, [Get a new token](#/http/api-endpoints/authentication/get-full-access-token).      
-     * @param validateTokenRequest  (required)
+     * Version: 9.12.0.cl or later Validates the authentication token specified in the API request.
+     * If your token is not valid, [Get a new
+     * token](#/http/api-endpoints/authentication/get-full-access-token).
+     *
+     * @param validateTokenRequest (required)
      * @return ApiResponse&lt;TokenValidationResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Token validation successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Token validation successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
-    public ApiResponse<TokenValidationResponse> validateTokenWithHttpInfo(ValidateTokenRequest validateTokenRequest) throws ApiException {
+    public ApiResponse<TokenValidationResponse> validateTokenWithHttpInfo(
+            ValidateTokenRequest validateTokenRequest) throws ApiException {
         okhttp3.Call localVarCall = validateTokenValidateBeforeCall(validateTokenRequest, null);
-        Type localVarReturnType = new TypeToken<TokenValidationResponse>(){}.getType();
+        Type localVarReturnType = new TypeToken<TokenValidationResponse>() {}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     *  (asynchronously)
-     *   Version: 9.12.0.cl or later    Validates the authentication token specified in the API request.  If your token is not valid, [Get a new token](#/http/api-endpoints/authentication/get-full-access-token).      
-     * @param validateTokenRequest  (required)
+     * (asynchronously) Version: 9.12.0.cl or later Validates the authentication token specified in
+     * the API request. If your token is not valid, [Get a new
+     * token](#/http/api-endpoints/authentication/get-full-access-token).
+     *
+     * @param validateTokenRequest (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Token validation successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Token validation successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
-    public okhttp3.Call validateTokenAsync(ValidateTokenRequest validateTokenRequest, final ApiCallback<TokenValidationResponse> _callback) throws ApiException {
+    public okhttp3.Call validateTokenAsync(
+            ValidateTokenRequest validateTokenRequest,
+            final ApiCallback<TokenValidationResponse> _callback)
+            throws ApiException {
 
-        okhttp3.Call localVarCall = validateTokenValidateBeforeCall(validateTokenRequest, _callback);
-        Type localVarReturnType = new TypeToken<TokenValidationResponse>(){}.getType();
+        okhttp3.Call localVarCall =
+                validateTokenValidateBeforeCall(validateTokenRequest, _callback);
+        Type localVarReturnType = new TypeToken<TokenValidationResponse>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
