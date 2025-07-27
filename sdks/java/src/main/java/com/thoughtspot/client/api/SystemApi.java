@@ -14,6 +14,7 @@ import com.thoughtspot.client.Configuration;
 import com.thoughtspot.client.Pair;
 import com.thoughtspot.client.model.SystemConfig;
 import com.thoughtspot.client.model.SystemInfo;
+import com.thoughtspot.client.model.SystemOverrideInfo;
 import com.thoughtspot.client.model.UpdateSystemConfigRequest;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -491,7 +492,7 @@ public class SystemApi {
      * settings**) privilege is required. This API does not require any parameters to be passed in
      * the request.
      *
-     * @return Object
+     * @return SystemOverrideInfo
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
      * @http.response.details
@@ -505,8 +506,8 @@ public class SystemApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public Object getSystemOverrideInfo() throws ApiException {
-        ApiResponse<Object> localVarResp = getSystemOverrideInfoWithHttpInfo();
+    public SystemOverrideInfo getSystemOverrideInfo() throws ApiException {
+        ApiResponse<SystemOverrideInfo> localVarResp = getSystemOverrideInfoWithHttpInfo();
         return localVarResp.getData();
     }
 
@@ -518,7 +519,7 @@ public class SystemApi {
      * settings**) privilege is required. This API does not require any parameters to be passed in
      * the request.
      *
-     * @return ApiResponse&lt;Object&gt;
+     * @return ApiResponse&lt;SystemOverrideInfo&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
      * @http.response.details
@@ -532,9 +533,9 @@ public class SystemApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public ApiResponse<Object> getSystemOverrideInfoWithHttpInfo() throws ApiException {
+    public ApiResponse<SystemOverrideInfo> getSystemOverrideInfoWithHttpInfo() throws ApiException {
         okhttp3.Call localVarCall = getSystemOverrideInfoValidateBeforeCall(null);
-        Type localVarReturnType = new TypeToken<Object>() {}.getType();
+        Type localVarReturnType = new TypeToken<SystemOverrideInfo>() {}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -561,11 +562,11 @@ public class SystemApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public okhttp3.Call getSystemOverrideInfoAsync(final ApiCallback<Object> _callback)
+    public okhttp3.Call getSystemOverrideInfoAsync(final ApiCallback<SystemOverrideInfo> _callback)
             throws ApiException {
 
         okhttp3.Call localVarCall = getSystemOverrideInfoValidateBeforeCall(_callback);
-        Type localVarReturnType = new TypeToken<Object>() {}.getType();
+        Type localVarReturnType = new TypeToken<SystemOverrideInfo>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

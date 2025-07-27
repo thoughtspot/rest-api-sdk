@@ -964,7 +964,7 @@ public class CreateScheduleRequest implements Serializable {
 
         ETC_GMT_11("Etc/GMT+11"),
 
-        ETC_GMT_121("Etc/GMT+12"),
+        ETC_GMT_122("Etc/GMT+12"),
 
         ETC_GMT_2("Etc/GMT+2"),
 
@@ -1498,6 +1498,12 @@ public class CreateScheduleRequest implements Serializable {
     @javax.annotation.Nonnull
     private RecipientDetailsInput recipientDetails;
 
+    public static final String SERIALIZED_NAME_PERSONALISED_VIEW_ID = "personalised_view_id";
+
+    @SerializedName(SERIALIZED_NAME_PERSONALISED_VIEW_ID)
+    @javax.annotation.Nullable
+    private String personalisedViewId;
+
     public CreateScheduleRequest() {}
 
     public CreateScheduleRequest name(@javax.annotation.Nonnull String name) {
@@ -1700,6 +1706,26 @@ public class CreateScheduleRequest implements Serializable {
         this.recipientDetails = recipientDetails;
     }
 
+    public CreateScheduleRequest personalisedViewId(
+            @javax.annotation.Nullable String personalisedViewId) {
+        this.personalisedViewId = personalisedViewId;
+        return this;
+    }
+
+    /**
+     * Personalised view id of the liveboard to be scheduled.
+     *
+     * @return personalisedViewId
+     */
+    @javax.annotation.Nullable
+    public String getPersonalisedViewId() {
+        return personalisedViewId;
+    }
+
+    public void setPersonalisedViewId(@javax.annotation.Nullable String personalisedViewId) {
+        this.personalisedViewId = personalisedViewId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -1718,7 +1744,9 @@ public class CreateScheduleRequest implements Serializable {
                 && Objects.equals(this.pdfOptions, createScheduleRequest.pdfOptions)
                 && Objects.equals(this.timeZone, createScheduleRequest.timeZone)
                 && Objects.equals(this.frequency, createScheduleRequest.frequency)
-                && Objects.equals(this.recipientDetails, createScheduleRequest.recipientDetails);
+                && Objects.equals(this.recipientDetails, createScheduleRequest.recipientDetails)
+                && Objects.equals(
+                        this.personalisedViewId, createScheduleRequest.personalisedViewId);
     }
 
     @Override
@@ -1733,7 +1761,8 @@ public class CreateScheduleRequest implements Serializable {
                 pdfOptions,
                 timeZone,
                 frequency,
-                recipientDetails);
+                recipientDetails,
+                personalisedViewId);
     }
 
     @Override
@@ -1752,6 +1781,9 @@ public class CreateScheduleRequest implements Serializable {
         sb.append("    timeZone: ").append(toIndentedString(timeZone)).append("\n");
         sb.append("    frequency: ").append(toIndentedString(frequency)).append("\n");
         sb.append("    recipientDetails: ").append(toIndentedString(recipientDetails)).append("\n");
+        sb.append("    personalisedViewId: ")
+                .append(toIndentedString(personalisedViewId))
+                .append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -1783,6 +1815,7 @@ public class CreateScheduleRequest implements Serializable {
         openapiFields.add("time_zone");
         openapiFields.add("frequency");
         openapiFields.add("recipient_details");
+        openapiFields.add("personalised_view_id");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -1900,6 +1933,15 @@ public class CreateScheduleRequest implements Serializable {
         }
         // validate the required field `recipient_details`
         RecipientDetailsInput.validateJsonElement(jsonObj.get("recipient_details"));
+        if ((jsonObj.get("personalised_view_id") != null
+                        && !jsonObj.get("personalised_view_id").isJsonNull())
+                && !jsonObj.get("personalised_view_id").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `personalised_view_id` to be a primitive type in"
+                                    + " the JSON string but got `%s`",
+                            jsonObj.get("personalised_view_id").toString()));
+        }
     }
 
     public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
