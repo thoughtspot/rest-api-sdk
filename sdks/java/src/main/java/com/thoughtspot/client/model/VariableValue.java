@@ -34,7 +34,7 @@ public class VariableValue implements Serializable {
     public static final String SERIALIZED_NAME_VALUE = "value";
 
     @SerializedName(SERIALIZED_NAME_VALUE)
-    @javax.annotation.Nonnull
+    @javax.annotation.Nullable
     private String value;
 
     public static final String SERIALIZED_NAME_ORG_IDENTIFIER = "org_identifier";
@@ -114,7 +114,7 @@ public class VariableValue implements Serializable {
 
     public VariableValue() {}
 
-    public VariableValue value(@javax.annotation.Nonnull String value) {
+    public VariableValue value(@javax.annotation.Nullable String value) {
         this.value = value;
         return this;
     }
@@ -124,12 +124,12 @@ public class VariableValue implements Serializable {
      *
      * @return value
      */
-    @javax.annotation.Nonnull
+    @javax.annotation.Nullable
     public String getValue() {
         return value;
     }
 
-    public void setValue(@javax.annotation.Nonnull String value) {
+    public void setValue(@javax.annotation.Nullable String value) {
         this.value = value;
     }
 
@@ -288,7 +288,6 @@ public class VariableValue implements Serializable {
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
-        openapiRequiredFields.add("value");
         openapiRequiredFields.add("org_identifier");
     }
 
@@ -332,7 +331,8 @@ public class VariableValue implements Serializable {
             }
         }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-        if (!jsonObj.get("value").isJsonPrimitive()) {
+        if ((jsonObj.get("value") != null && !jsonObj.get("value").isJsonNull())
+                && !jsonObj.get("value").isJsonPrimitive()) {
             throw new IllegalArgumentException(
                     String.format(
                             "Expected the field `value` to be a primitive type in the JSON string"

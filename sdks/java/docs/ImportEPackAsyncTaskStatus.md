@@ -21,6 +21,7 @@
 |**totalObjectCount** | **Integer** | Total number of objects to process. |  [optional] |
 |**objectProcessedCount** | **Integer** | Number of objects processed so far. |  [optional] |
 |**modifiedAt** | **Float** | Last time the task status was updated (in ms since epoch). |  [optional] |
+|**authorDisplayName** | **String** | Display name of the user who initiated the task. |  [optional] |
 
 
 

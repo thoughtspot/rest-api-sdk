@@ -257,11 +257,18 @@ paths:
       - application/json
   /api/rest/2.0/auth/session/user:
     get:
-      description: "\n Version: 9.0.0.cl or later\n\n\n\nGets session information\
-        \ for the currently logged-in user.\n\nThis API does not require any parameters\
-        \ to be passed in the request.  \n\nAny ThoughtSpot user can access this endpoint\
-        \ and send an API request. The data returned in the API response varies according\
-        \ to user's privilege and object access permissions.\n\n\n\n\n\n"
+      description: |2+
+
+         Version: 9.0.0.cl or later
+
+
+        Retrieves details of the current user session for the token provided in the request header.
+
+        Any ThoughtSpot user can access this endpoint and send an API request. The data returned in the API response varies according to user's privilege and object access permissions.
+
+
+
+
       operationId: getCurrentUserInfo
       parameters: []
       responses:
@@ -303,11 +310,14 @@ paths:
   /api/rest/2.0/auth/session/token:
     get:
       description: "\nGet token for the currently logged-in user. \n  Version: 9.4.0.cl\
-        \ or later\n\n\nGets token details for the currently logged-in user.  You\
-        \ can use this endpoint to obtain the token associated with the user's session.\n\
-        \nThis API does not require any parameters to be passed in the request.  \n\
-        \nAny ThoughtSpot user can access this endpoint and send an API request.\n\
-        \n\n\n\n\n"
+        \ or later\n\n\nRetrieves details of the current session token for the bearer\
+        \ token provided in the request header.\n\nThis API endpoint does not create\
+        \ a new token. Instead, it returns details about the token, including the\
+        \ token string, creation time, expiration time, and the associated user.\n\
+        \nUse this endpoint to introspect your current session token, debug authentication\
+        \ issues, or when a frontend application needs session token details.\n\n\
+        Any ThoughtSpot user with a valid bearer token can access this endpoint and\
+        \ send an API request\n\n\n\n\n\n"
       operationId: getCurrentUserToken
       parameters: []
       responses:
@@ -1227,7 +1237,13 @@ paths:
           - `SERVICE_ACCOUNT`: For connections that require service account credentials to authenticate to the Cloud Data Warehouse and fetch data.
           - `OAUTH`: For connections that require OAuth credentials to authenticate to the Cloud Data Warehouse and fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth authentication type.
           - `IAM`: For connections that have the IAM OAuth set up. This authentication type is supported on Amazon Redshift connections only.
-          - `EXTOAUTH`: For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/ connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth).
+          - `EXTOAUTH`: For connections that have External OAuth set up. ThoughtSpot supports external [OAuth with Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/ connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth).
+          - `KEY_PAIR`: For connections that require Key Pair account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only.
+          - `OAUTH_WITH_PKCE`: For connections that require OAuth with PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake, Starburst, Databricks, Denodo  connections only.
+          - `EXTOAUTH_WITH_PKCE`: For connections that require External OAuth With PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only.
+          - `OAUTH_WITH_PEZ`: For connections that require OAuth With PEZ account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Amazon Redshift connections only.
+          - `OAUTH_WITH_SERVICE_PRINCIPAL`: For connections that require OAuth With Service Principal account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Databricks connections only.
+          - `PERSONAL_ACCESS_TOKEN`: For connections that require Personal Access Token account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Databricks connections only.
         - To include more details about connection objects in the API response, set `include_details` to `true`.
         - You can also sort the output by field names and filter connections by tags.
 
@@ -1362,7 +1378,80 @@ paths:
         2. If you are updating tables or database schema of a connection object:
            a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.
            b. Set `validate` to `true`.
+           * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:
+
+           ```
+           {
+              "configuration":{
+                 "accountName":"thoughtspot_partner",
+                 "user":"tsadmin",
+                 "password":"TestConn123",
+                 "role":"sysadmin",
+                 "warehouse":"MEDIUM_WH"
+              },
+              "externalDatabases":[
+                 {
+                    "name":"AllDatatypes",
+                    "isAutoCreated":false,
+                    "schemas":[
+                       {
+                          "name":"alldatatypes",
+                          "tables":[
+                             {
+                                "name":"allDatatypes",
+                                "type":"TABLE",
+                                "description":"",
+                                "selected":true,
+                                "linked":true,
+                                "columns":[
+                                   {
+                                      "name":"CNUMBER",
+                                      "type":"INT64",
+                                      "canImport":true,
+                                      "selected":true,
+                                      "isLinkedActive":true,
+                                      "isImported":false,
+                                      "tableName":"allDatatypes",
+                                      "schemaName":"alldatatypes",
+                                      "dbName":"AllDatatypes"
+                                   },
+                                   {
+                                      "name":"CDECIMAL",
+                                      "type":"INT64",
+                                      "canImport":true,
+                                      "selected":true,
+                                      "isLinkedActive":true,
+                                      "isImported":false,
+                                      "tableName":"allDatatypes",
+                                      "schemaName":"alldatatypes",
+                                      "dbName":"AllDatatypes"
+                                   }
+                                ]
+                             }
+                          ]
+                       }
+                    ]
+                 }
+              ]
+           }
+           ```
+
         3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.
+        * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a Snowflake connection:
+         ```
+         {
+            "configuration":{
+               "accountName":"thoughtspot_partner",
+               "user":"tsadmin",
+               "password":"TestConn123",
+               "role":"sysadmin",
+               "warehouse":"MEDIUM_WH"
+            },
+            "externalDatabases":[
+
+            ]
+         }
+         ```
 
 
 
@@ -3699,6 +3788,7 @@ paths:
           You can also define sorting options to sort the data retrieved in the API response.
         - To get discoverable objects when linientmodel is enabled you can use `include_discoverable_objects` as true else false. Default value is true.
         - For liveboard metadata type, to get the newer format, set the `liveboard_response_format` as V2. Default value is V1.
+        - To retrieve only objects that are published, set the `include_only_published_objects` as true. Default value is false.
 
         **NOTE**: The following parameters support pagination of metadata records:
 
@@ -3711,6 +3801,7 @@ paths:
         - `exclude_objects`
         - `include_auto_created_objects`
         - `favorite_object_options`
+        - `include_only_published_objects`
         If you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.
 
 
@@ -4256,11 +4347,7 @@ paths:
         \ by typing in the relevant extension.\n* HTML rendering is not supported\
         \ for PDF exports of Answers with tables.\n\nOptionally, you can define [runtime\
         \ overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)\
-        \ to apply to the Answer data.\n\nThe `record_size` attribute determines the\
-        \ number of records to retrieve in an API call. For more information about\
-        \ pagination, record size, and maximum row limit, see [Pagination and record\
-        \ size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).\
-        \  \n\n\n\n\n"
+        \ to apply to the Answer data.  \n\n\n\n\n"
       operationId: exportAnswerReport
       parameters: []
       requestBody:
@@ -5447,7 +5534,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
+                $ref: '#/components/schemas/SystemOverrideInfo'
           description: Cluster configuration which can be overridden.
         "400":
           content:
@@ -6912,7 +6999,7 @@ paths:
 
         Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
 
-        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_MANAGE_VERSION_CONTROL` (**Can toggle version control for objects**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_SETUP_VERSION_CONTROL` (**Can set up version control**) privilege.
 
         You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.
 
@@ -6925,7 +7012,7 @@ paths:
 
         For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).
 
-        **Note**: ThoughtSpot supports only GitHub / GitHub Enterprise for CI/CD.
+        **Note**: ThoughtSpot supports only GitHub / itHub Enterprise for CI/CD.
 
 
 
@@ -6987,7 +7074,7 @@ paths:
 
         Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
 
-        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_MANAGE_VERSION_CONTROL` (**Can toggle version control for objects**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_SETUP_VERSION_CONTROL` (**Can set up version control**) privilege.
 
 
 
@@ -7249,7 +7336,7 @@ paths:
 
         Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
 
-        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_MANAGE_VERSION_CONTROL` (**Can toggle version control for objects**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_SETUP_VERSION_CONTROL` (**Can set up version control**) privilege.
 
 
 
@@ -7313,7 +7400,7 @@ paths:
 
         Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
 
-        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_MANAGE_VERSION_CONTROL` (**Can toggle version control for objects**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_SETUP_VERSION_CONTROL` (**Can set up version control**) privilege.
 
 
 
@@ -8005,6 +8092,14 @@ components:
           nullable: true
           type: string
       type: object
+    SystemOverrideInfo:
+      example:
+        config_override_info: "{}"
+      properties:
+        config_override_info:
+          nullable: true
+          type: object
+      type: object
     OrgResponse:
       example:
         visibility: SHOW
@@ -8362,6 +8457,22 @@ components:
           - INSIGHT_SPEC
           nullable: true
           type: string
+        subtypes:
+          description: "List of subtype of metadata. Applies for LOGICAL_TABLE type\
+            \ with the following valid values.\n1. ONE_TO_ONE_LOGICAL\n2. WORKSHEET\n\
+            3. PRIVATE_WORKSHEET.\n4. USER_DEFINED.\n5. AGGR_WORKSHEET.\n6. SQL_VIEW\
+            \ \n  Version: 10.11.0.cl or later\n"
+          items:
+            enum:
+            - ONE_TO_ONE_LOGICAL
+            - WORKSHEET
+            - PRIVATE_WORKSHEET
+            - USER_DEFINED
+            - AGGR_WORKSHEET
+            - SQL_VIEW
+            type: string
+          nullable: true
+          type: array
       type: object
     PermissionInput:
       description: Details of users or groups.
@@ -8548,6 +8659,7 @@ components:
           import_response: "{}"
           author_id: author_id
           modified_at: 7.0614014
+          author_display_name: author_display_name
           total_object_count: 5
         - tenant_id: tenant_id
           task_name: task_name
@@ -8562,6 +8674,7 @@ components:
           import_response: "{}"
           author_id: author_id
           modified_at: 7.0614014
+          author_display_name: author_display_name
           total_object_count: 5
       properties:
         status_list:
@@ -8590,6 +8703,7 @@ components:
         import_response: "{}"
         author_id: author_id
         modified_at: 7.0614014
+        author_display_name: author_display_name
         total_object_count: 5
       properties:
         tenant_id:
@@ -8665,6 +8779,10 @@ components:
           format: float
           nullable: true
           type: number
+        author_display_name:
+          description: Display name of the user who initiated the task.
+          nullable: true
+          type: string
       type: object
     SqlQueryResponse:
       example:
@@ -10979,6 +11097,7 @@ components:
       properties:
         value:
           description: The value of the variable
+          nullable: true
           type: string
         org_identifier:
           description: The unique name of the org
@@ -11002,7 +11121,6 @@ components:
           type: integer
       required:
       - org_identifier
-      - value
       type: object
     GenericInfo:
       example:
@@ -12827,6 +12945,7 @@ components:
           include_custom_logo: true
           page_size: A4
         time_zone: time_zone
+        personalised_view_id: personalised_view_id
         frequency:
           cron_expression:
             hour: hour
@@ -12901,6 +13020,10 @@ components:
             $ref: '#/components/schemas/ResponseScheduleRun'
           nullable: true
           type: array
+        personalised_view_id:
+          description: Personalised view id of the liveboard to be scheduled.
+          nullable: true
+          type: string
       required:
       - author
       - creation_time_in_millis
@@ -15418,6 +15541,14 @@ components:
             Indicates whether to show resolved parameterised values.
           nullable: true
           type: boolean
+        liveboard_response_version:
+          default: V1
+          description: Indicates the model version of Liveboard to be attached in
+            metadata detail.
+          enum:
+          - V1
+          - V2
+          type: string
       type: object
     unparameterizeMetadata_request:
       properties:
@@ -16563,6 +16694,9 @@ components:
           description: "Recipients of the scheduled job notifications. Add the GUID\
             \ or name of the ThoughtSpot users or groups as recipients in the `principals`\
             \ array. If a recipient is not a ThoughtSpot user, specify email address."
+        personalised_view_id:
+          description: Personalised view id of the liveboard to be scheduled.
+          type: string
       required:
       - description
       - metadata_identifier
@@ -17282,6 +17416,9 @@ components:
           enum:
           - ACTIVE
           - PAUSE
+          type: string
+        personalised_view_id:
+          description: Personalised view id of the liveboard to be scheduled.
           type: string
       type: object
     assignChangeAuthor_request:

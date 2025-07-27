@@ -119,6 +119,7 @@ import com.thoughtspot.client.model.SingleAnswerRequest;
 import com.thoughtspot.client.model.SqlQueryResponse;
 import com.thoughtspot.client.model.SystemConfig;
 import com.thoughtspot.client.model.SystemInfo;
+import com.thoughtspot.client.model.SystemOverrideInfo;
 import com.thoughtspot.client.model.Tag;
 import com.thoughtspot.client.model.Token;
 import com.thoughtspot.client.model.TokenValidationResponse;
@@ -1617,19 +1618,19 @@ public class ThoughtSpotRestApi {
      * Version: 9.2.0.cl or later Allows you to connect a ThoughtSpot instance to a Git repository.
      * Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
      * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance on your instance, the &#x60;CAN_MANAGE_VERSION_CONTROL&#x60; (**Can toggle
-     * version control for objects**) privilege. You can use this API endpoint to connect your
-     * ThoughtSpot development and production environments to the development and production
-     * branches of a Git repository. Before using this endpoint to connect your ThoughtSpot instance
-     * to a Git repository, check the following prerequisites: * You have a Git repository. If you
-     * are using GitHub, make sure you have a valid account and an access token to connect
-     * ThoughtSpot to GitHub. For information about generating a token, see [GitHub
+     * on your instance on your instance, the &#x60;CAN_SETUP_VERSION_CONTROL&#x60; (**Can set up
+     * version control**) privilege. You can use this API endpoint to connect your ThoughtSpot
+     * development and production environments to the development and production branches of a Git
+     * repository. Before using this endpoint to connect your ThoughtSpot instance to a Git
+     * repository, check the following prerequisites: * You have a Git repository. If you are using
+     * GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to
+     * GitHub. For information about generating a token, see [GitHub
      * Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
      * * Your access token has &#x60;repo&#x60; scope that grants full access to public and private
      * repositories. * Your Git repository has a branch that can be configured as a default branch
      * in ThoughtSpot. For more information, see [Git integration
      * documentation](https://developers.thoughtspot.com/docs/?pageid&#x3D;git-integration).
-     * **Note**: ThoughtSpot supports only GitHub / GitHub Enterprise for CI/CD.
+     * **Note**: ThoughtSpot supports only GitHub / itHub Enterprise for CI/CD.
      *
      * @param createConfigRequest (required)
      * @return RepoConfigObject
@@ -1656,19 +1657,19 @@ public class ThoughtSpotRestApi {
      * Version: 9.2.0.cl or later Allows you to connect a ThoughtSpot instance to a Git repository.
      * Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
      * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance on your instance, the &#x60;CAN_MANAGE_VERSION_CONTROL&#x60; (**Can toggle
-     * version control for objects**) privilege. You can use this API endpoint to connect your
-     * ThoughtSpot development and production environments to the development and production
-     * branches of a Git repository. Before using this endpoint to connect your ThoughtSpot instance
-     * to a Git repository, check the following prerequisites: * You have a Git repository. If you
-     * are using GitHub, make sure you have a valid account and an access token to connect
-     * ThoughtSpot to GitHub. For information about generating a token, see [GitHub
+     * on your instance on your instance, the &#x60;CAN_SETUP_VERSION_CONTROL&#x60; (**Can set up
+     * version control**) privilege. You can use this API endpoint to connect your ThoughtSpot
+     * development and production environments to the development and production branches of a Git
+     * repository. Before using this endpoint to connect your ThoughtSpot instance to a Git
+     * repository, check the following prerequisites: * You have a Git repository. If you are using
+     * GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to
+     * GitHub. For information about generating a token, see [GitHub
      * Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
      * * Your access token has &#x60;repo&#x60; scope that grants full access to public and private
      * repositories. * Your Git repository has a branch that can be configured as a default branch
      * in ThoughtSpot. For more information, see [Git integration
      * documentation](https://developers.thoughtspot.com/docs/?pageid&#x3D;git-integration).
-     * **Note**: ThoughtSpot supports only GitHub / GitHub Enterprise for CI/CD.
+     * **Note**: ThoughtSpot supports only GitHub / itHub Enterprise for CI/CD.
      *
      * @param createConfigRequest (required)
      * @return ApiResponse&lt;RepoConfigObject&gt;
@@ -1697,9 +1698,9 @@ public class ThoughtSpotRestApi {
      * Git repository. Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**)
      * privilege. If [Role-Based Access Control
      * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your
-     * instance, the &#x60;CAN_MANAGE_VERSION_CONTROL&#x60; (**Can toggle version control for
-     * objects**) privilege. You can use this API endpoint to connect your ThoughtSpot development
-     * and production environments to the development and production branches of a Git repository.
+     * instance, the &#x60;CAN_SETUP_VERSION_CONTROL&#x60; (**Can set up version control**)
+     * privilege. You can use this API endpoint to connect your ThoughtSpot development and
+     * production environments to the development and production branches of a Git repository.
      * Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check
      * the following prerequisites: * You have a Git repository. If you are using GitHub, make sure
      * you have a valid account and an access token to connect ThoughtSpot to GitHub. For
@@ -1709,7 +1710,7 @@ public class ThoughtSpotRestApi {
      * repositories. * Your Git repository has a branch that can be configured as a default branch
      * in ThoughtSpot. For more information, see [Git integration
      * documentation](https://developers.thoughtspot.com/docs/?pageid&#x3D;git-integration).
-     * **Note**: ThoughtSpot supports only GitHub / GitHub Enterprise for CI/CD.
+     * **Note**: ThoughtSpot supports only GitHub / itHub Enterprise for CI/CD.
      *
      * @param createConfigRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -5033,8 +5034,8 @@ public class ThoughtSpotRestApi {
      * Version: 9.2.0.cl or later Deletes Git repository configuration from your ThoughtSpot
      * instance. Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
      * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance on your instance, the &#x60;CAN_MANAGE_VERSION_CONTROL&#x60; (**Can toggle
-     * version control for objects**) privilege.
+     * on your instance on your instance, the &#x60;CAN_SETUP_VERSION_CONTROL&#x60; (**Can set up
+     * version control**) privilege.
      *
      * @param deleteConfigRequest (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -5058,8 +5059,8 @@ public class ThoughtSpotRestApi {
      * Version: 9.2.0.cl or later Deletes Git repository configuration from your ThoughtSpot
      * instance. Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
      * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance on your instance, the &#x60;CAN_MANAGE_VERSION_CONTROL&#x60; (**Can toggle
-     * version control for objects**) privilege.
+     * on your instance on your instance, the &#x60;CAN_SETUP_VERSION_CONTROL&#x60; (**Can set up
+     * version control**) privilege.
      *
      * @param deleteConfigRequest (required)
      * @return ApiResponse&lt;Void&gt;
@@ -5087,8 +5088,8 @@ public class ThoughtSpotRestApi {
      * ThoughtSpot instance. Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**)
      * privilege. If [Role-Based Access Control
      * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your
-     * instance, the &#x60;CAN_MANAGE_VERSION_CONTROL&#x60; (**Can toggle version control for
-     * objects**) privilege.
+     * instance, the &#x60;CAN_SETUP_VERSION_CONTROL&#x60; (**Can set up version control**)
+     * privilege.
      *
      * @param deleteConfigRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -7876,10 +7877,7 @@ public class ThoughtSpotRestApi {
      * in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with
      * tables. Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
-     * to apply to the Answer data. The &#x60;record_size&#x60; attribute determines the number of
-     * records to retrieve in an API call. For more information about pagination, record size, and
-     * maximum row limit, see [Pagination and record size
-     * settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
+     * to apply to the Answer data.
      *
      * @param exportAnswerReportRequest (required)
      * @return File
@@ -7911,10 +7909,7 @@ public class ThoughtSpotRestApi {
      * in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with
      * tables. Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
-     * to apply to the Answer data. The &#x60;record_size&#x60; attribute determines the number of
-     * records to retrieve in an API call. For more information about pagination, record size, and
-     * maximum row limit, see [Pagination and record size
-     * settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
+     * to apply to the Answer data.
      *
      * @param exportAnswerReportRequest (required)
      * @return ApiResponse&lt;File&gt;
@@ -7948,10 +7943,7 @@ public class ThoughtSpotRestApi {
      * typing in the relevant extension. * HTML rendering is not supported for PDF exports of
      * Answers with tables. Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
-     * to apply to the Answer data. The &#x60;record_size&#x60; attribute determines the number of
-     * records to retrieve in an API call. For more information about pagination, record size, and
-     * maximum row limit, see [Pagination and record size
-     * settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
+     * to apply to the Answer data.
      *
      * @param exportAnswerReportRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -10725,10 +10717,10 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 9.0.0.cl or later Gets session information for the currently logged-in user. This
-     * API does not require any parameters to be passed in the request. Any ThoughtSpot user can
-     * access this endpoint and send an API request. The data returned in the API response varies
-     * according to user&#39;s privilege and object access permissions.
+     * Version: 9.0.0.cl or later Retrieves details of the current user session for the token
+     * provided in the request header. Any ThoughtSpot user can access this endpoint and send an API
+     * request. The data returned in the API response varies according to user&#39;s privilege and
+     * object access permissions.
      *
      * @return User
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -10750,10 +10742,10 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 9.0.0.cl or later Gets session information for the currently logged-in user. This
-     * API does not require any parameters to be passed in the request. Any ThoughtSpot user can
-     * access this endpoint and send an API request. The data returned in the API response varies
-     * according to user&#39;s privilege and object access permissions.
+     * Version: 9.0.0.cl or later Retrieves details of the current user session for the token
+     * provided in the request header. Any ThoughtSpot user can access this endpoint and send an API
+     * request. The data returned in the API response varies according to user&#39;s privilege and
+     * object access permissions.
      *
      * @return ApiResponse&lt;User&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -10776,10 +10768,10 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 9.0.0.cl or later Gets session information for the currently
-     * logged-in user. This API does not require any parameters to be passed in the request. Any
-     * ThoughtSpot user can access this endpoint and send an API request. The data returned in the
-     * API response varies according to user&#39;s privilege and object access permissions.
+     * (asynchronously) Version: 9.0.0.cl or later Retrieves details of the current user session for
+     * the token provided in the request header. Any ThoughtSpot user can access this endpoint and
+     * send an API request. The data returned in the API response varies according to user&#39;s
+     * privilege and object access permissions.
      *
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -10881,10 +10873,13 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Get token for the currently logged-in user. Version: 9.4.0.cl or later Gets token details for
-     * the currently logged-in user. You can use this endpoint to obtain the token associated with
-     * the user&#39;s session. This API does not require any parameters to be passed in the request.
-     * Any ThoughtSpot user can access this endpoint and send an API request.
+     * Get token for the currently logged-in user. Version: 9.4.0.cl or later Retrieves details of
+     * the current session token for the bearer token provided in the request header. This API
+     * endpoint does not create a new token. Instead, it returns details about the token, including
+     * the token string, creation time, expiration time, and the associated user. Use this endpoint
+     * to introspect your current session token, debug authentication issues, or when a frontend
+     * application needs session token details. Any ThoughtSpot user with a valid bearer token can
+     * access this endpoint and send an API request
      *
      * @return GetTokenResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -10906,10 +10901,13 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Get token for the currently logged-in user. Version: 9.4.0.cl or later Gets token details for
-     * the currently logged-in user. You can use this endpoint to obtain the token associated with
-     * the user&#39;s session. This API does not require any parameters to be passed in the request.
-     * Any ThoughtSpot user can access this endpoint and send an API request.
+     * Get token for the currently logged-in user. Version: 9.4.0.cl or later Retrieves details of
+     * the current session token for the bearer token provided in the request header. This API
+     * endpoint does not create a new token. Instead, it returns details about the token, including
+     * the token string, creation time, expiration time, and the associated user. Use this endpoint
+     * to introspect your current session token, debug authentication issues, or when a frontend
+     * application needs session token details. Any ThoughtSpot user with a valid bearer token can
+     * access this endpoint and send an API request
      *
      * @return ApiResponse&lt;GetTokenResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -10932,10 +10930,13 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Get token for the currently logged-in user. Version: 9.4.0.cl or later Gets
-     * token details for the currently logged-in user. You can use this endpoint to obtain the token
-     * associated with the user&#39;s session. This API does not require any parameters to be passed
-     * in the request. Any ThoughtSpot user can access this endpoint and send an API request.
+     * (asynchronously) Get token for the currently logged-in user. Version: 9.4.0.cl or later
+     * Retrieves details of the current session token for the bearer token provided in the request
+     * header. This API endpoint does not create a new token. Instead, it returns details about the
+     * token, including the token string, creation time, expiration time, and the associated user.
+     * Use this endpoint to introspect your current session token, debug authentication issues, or
+     * when a frontend application needs session token details. Any ThoughtSpot user with a valid
+     * bearer token can access this endpoint and send an API request
      *
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -12183,7 +12184,7 @@ public class ThoughtSpotRestApi {
      * settings**) privilege is required. This API does not require any parameters to be passed in
      * the request.
      *
-     * @return Object
+     * @return SystemOverrideInfo
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
      * @http.response.details
@@ -12197,8 +12198,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public Object getSystemOverrideInfo() throws ApiException {
-        ApiResponse<Object> localVarResp = getSystemOverrideInfoWithHttpInfo();
+    public SystemOverrideInfo getSystemOverrideInfo() throws ApiException {
+        ApiResponse<SystemOverrideInfo> localVarResp = getSystemOverrideInfoWithHttpInfo();
         return localVarResp.getData();
     }
 
@@ -12210,7 +12211,7 @@ public class ThoughtSpotRestApi {
      * settings**) privilege is required. This API does not require any parameters to be passed in
      * the request.
      *
-     * @return ApiResponse&lt;Object&gt;
+     * @return ApiResponse&lt;SystemOverrideInfo&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
      * @http.response.details
@@ -12224,9 +12225,9 @@ public class ThoughtSpotRestApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public ApiResponse<Object> getSystemOverrideInfoWithHttpInfo() throws ApiException {
+    public ApiResponse<SystemOverrideInfo> getSystemOverrideInfoWithHttpInfo() throws ApiException {
         okhttp3.Call localVarCall = getSystemOverrideInfoValidateBeforeCall(null);
-        Type localVarReturnType = new TypeToken<Object>() {}.getType();
+        Type localVarReturnType = new TypeToken<SystemOverrideInfo>() {}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -12253,11 +12254,11 @@ public class ThoughtSpotRestApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public okhttp3.Call getSystemOverrideInfoAsync(final ApiCallback<Object> _callback)
+    public okhttp3.Call getSystemOverrideInfoAsync(final ApiCallback<SystemOverrideInfo> _callback)
             throws ApiException {
 
         okhttp3.Call localVarCall = getSystemOverrideInfoValidateBeforeCall(_callback);
-        Type localVarReturnType = new TypeToken<Object>() {}.getType();
+        Type localVarReturnType = new TypeToken<SystemOverrideInfo>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -14765,8 +14766,8 @@ public class ThoughtSpotRestApi {
      * Version: 9.2.0.cl or later Gets Git repository connections configured on the ThoughtSpot
      * instance. Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
      * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance on your instance, the &#x60;CAN_MANAGE_VERSION_CONTROL&#x60; (**Can toggle
-     * version control for objects**) privilege.
+     * on your instance on your instance, the &#x60;CAN_SETUP_VERSION_CONTROL&#x60; (**Can set up
+     * version control**) privilege.
      *
      * @param searchConfigRequest (required)
      * @return List&lt;RepoConfigObject&gt;
@@ -14794,8 +14795,8 @@ public class ThoughtSpotRestApi {
      * Version: 9.2.0.cl or later Gets Git repository connections configured on the ThoughtSpot
      * instance. Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
      * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance on your instance, the &#x60;CAN_MANAGE_VERSION_CONTROL&#x60; (**Can toggle
-     * version control for objects**) privilege.
+     * on your instance on your instance, the &#x60;CAN_SETUP_VERSION_CONTROL&#x60; (**Can set up
+     * version control**) privilege.
      *
      * @param searchConfigRequest (required)
      * @return ApiResponse&lt;List&lt;RepoConfigObject&gt;&gt;
@@ -14824,8 +14825,8 @@ public class ThoughtSpotRestApi {
      * ThoughtSpot instance. Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**)
      * privilege. If [Role-Based Access Control
      * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your
-     * instance, the &#x60;CAN_MANAGE_VERSION_CONTROL&#x60; (**Can toggle version control for
-     * objects**) privilege.
+     * instance, the &#x60;CAN_SETUP_VERSION_CONTROL&#x60; (**Can set up version control**)
+     * privilege.
      *
      * @param searchConfigRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -14980,11 +14981,27 @@ public class ThoughtSpotRestApi {
      * fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth
      * authentication type. - &#x60;IAM&#x60;: For connections that have the IAM OAuth set up. This
      * authentication type is supported on Amazon Redshift connections only. - &#x60;EXTOAUTH&#x60;:
-     * For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with
+     * For connections that have External OAuth set up. ThoughtSpot supports external [OAuth with
      * Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/
      * connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data
      * connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). -
-     * To include more details about connection objects in the API response, set
+     * &#x60;KEY_PAIR&#x60;: For connections that require Key Pair account credentials to
+     * authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
+     * supported on Snowflake connections only. - &#x60;OAUTH_WITH_PKCE&#x60;: For connections that
+     * require OAuth with PKCE account credentials to authenticate to the Cloud Data Warehouse and
+     * fetch data. This authentication type is supported on Snowflake, Starburst, Databricks, Denodo
+     * connections only. - &#x60;EXTOAUTH_WITH_PKCE&#x60;: For connections that require External
+     * OAuth With PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch
+     * data. This authentication type is supported on Snowflake connections only. -
+     * &#x60;OAUTH_WITH_PEZ&#x60;: For connections that require OAuth With PEZ account credentials
+     * to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
+     * supported on Amazon Redshift connections only. - &#x60;OAUTH_WITH_SERVICE_PRINCIPAL&#x60;:
+     * For connections that require OAuth With Service Principal account credentials to authenticate
+     * to the Cloud Data Warehouse and fetch data. This authentication type is supported on
+     * Databricks connections only. - &#x60;PERSONAL_ACCESS_TOKEN&#x60;: For connections that
+     * require Personal Access Token account credentials to authenticate to the Cloud Data Warehouse
+     * and fetch data. This authentication type is supported on Databricks connections only. - To
+     * include more details about connection objects in the API response, set
      * &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort the output by field
      * names and filter connections by tags. **NOTE**: When filtering connection records by
      * parameters other than &#x60;data_warehouse_types&#x60; or &#x60;tag_identifiers&#x60;, ensure
@@ -15053,11 +15070,27 @@ public class ThoughtSpotRestApi {
      * fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth
      * authentication type. - &#x60;IAM&#x60;: For connections that have the IAM OAuth set up. This
      * authentication type is supported on Amazon Redshift connections only. - &#x60;EXTOAUTH&#x60;:
-     * For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with
+     * For connections that have External OAuth set up. ThoughtSpot supports external [OAuth with
      * Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/
      * connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data
      * connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). -
-     * To include more details about connection objects in the API response, set
+     * &#x60;KEY_PAIR&#x60;: For connections that require Key Pair account credentials to
+     * authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
+     * supported on Snowflake connections only. - &#x60;OAUTH_WITH_PKCE&#x60;: For connections that
+     * require OAuth with PKCE account credentials to authenticate to the Cloud Data Warehouse and
+     * fetch data. This authentication type is supported on Snowflake, Starburst, Databricks, Denodo
+     * connections only. - &#x60;EXTOAUTH_WITH_PKCE&#x60;: For connections that require External
+     * OAuth With PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch
+     * data. This authentication type is supported on Snowflake connections only. -
+     * &#x60;OAUTH_WITH_PEZ&#x60;: For connections that require OAuth With PEZ account credentials
+     * to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
+     * supported on Amazon Redshift connections only. - &#x60;OAUTH_WITH_SERVICE_PRINCIPAL&#x60;:
+     * For connections that require OAuth With Service Principal account credentials to authenticate
+     * to the Cloud Data Warehouse and fetch data. This authentication type is supported on
+     * Databricks connections only. - &#x60;PERSONAL_ACCESS_TOKEN&#x60;: For connections that
+     * require Personal Access Token account credentials to authenticate to the Cloud Data Warehouse
+     * and fetch data. This authentication type is supported on Databricks connections only. - To
+     * include more details about connection objects in the API response, set
      * &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort the output by field
      * names and filter connections by tags. **NOTE**: When filtering connection records by
      * parameters other than &#x60;data_warehouse_types&#x60; or &#x60;tag_identifiers&#x60;, ensure
@@ -15127,11 +15160,27 @@ public class ThoughtSpotRestApi {
      * fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth
      * authentication type. - &#x60;IAM&#x60;: For connections that have the IAM OAuth set up. This
      * authentication type is supported on Amazon Redshift connections only. - &#x60;EXTOAUTH&#x60;:
-     * For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with
+     * For connections that have External OAuth set up. ThoughtSpot supports external [OAuth with
      * Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/
      * connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data
      * connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). -
-     * To include more details about connection objects in the API response, set
+     * &#x60;KEY_PAIR&#x60;: For connections that require Key Pair account credentials to
+     * authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
+     * supported on Snowflake connections only. - &#x60;OAUTH_WITH_PKCE&#x60;: For connections that
+     * require OAuth with PKCE account credentials to authenticate to the Cloud Data Warehouse and
+     * fetch data. This authentication type is supported on Snowflake, Starburst, Databricks, Denodo
+     * connections only. - &#x60;EXTOAUTH_WITH_PKCE&#x60;: For connections that require External
+     * OAuth With PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch
+     * data. This authentication type is supported on Snowflake connections only. -
+     * &#x60;OAUTH_WITH_PEZ&#x60;: For connections that require OAuth With PEZ account credentials
+     * to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
+     * supported on Amazon Redshift connections only. - &#x60;OAUTH_WITH_SERVICE_PRINCIPAL&#x60;:
+     * For connections that require OAuth With Service Principal account credentials to authenticate
+     * to the Cloud Data Warehouse and fetch data. This authentication type is supported on
+     * Databricks connections only. - &#x60;PERSONAL_ACCESS_TOKEN&#x60;: For connections that
+     * require Personal Access Token account credentials to authenticate to the Cloud Data Warehouse
+     * and fetch data. This authentication type is supported on Databricks connections only. - To
+     * include more details about connection objects in the API response, set
      * &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort the output by field
      * names and filter connections by tags. **NOTE**: When filtering connection records by
      * parameters other than &#x60;data_warehouse_types&#x60; or &#x60;tag_identifiers&#x60;, ensure
@@ -15818,13 +15867,16 @@ public class ThoughtSpotRestApi {
      * sort the data retrieved in the API response. - To get discoverable objects when linientmodel
      * is enabled you can use &#x60;include_discoverable_objects&#x60; as true else false. Default
      * value is true. - For liveboard metadata type, to get the newer format, set the
-     * &#x60;liveboard_response_format&#x60; as V2. Default value is V1. **NOTE**: The following
-     * parameters support pagination of metadata records: - &#x60;tag_identifiers&#x60; -
-     * &#x60;type&#x60; - &#x60;subtypes&#x60; - &#x60;created_by_user_identifiers&#x60; -
-     * &#x60;modified_by_user_identifiers&#x60; - &#x60;owned_by_user_identifiers&#x60; -
-     * &#x60;exclude_objects&#x60; - &#x60;include_auto_created_objects&#x60; -
-     * &#x60;favorite_object_options&#x60; If you are using other parameters to search metadata, set
-     * &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60;.
+     * &#x60;liveboard_response_format&#x60; as V2. Default value is V1. - To retrieve only objects
+     * that are published, set the &#x60;include_only_published_objects&#x60; as true. Default value
+     * is false. **NOTE**: The following parameters support pagination of metadata records: -
+     * &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;subtypes&#x60; -
+     * &#x60;created_by_user_identifiers&#x60; - &#x60;modified_by_user_identifiers&#x60; -
+     * &#x60;owned_by_user_identifiers&#x60; - &#x60;exclude_objects&#x60; -
+     * &#x60;include_auto_created_objects&#x60; - &#x60;favorite_object_options&#x60; -
+     * &#x60;include_only_published_objects&#x60; If you are using other parameters to search
+     * metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to
+     * &#x60;0&#x60;.
      *
      * @param searchMetadataRequest (required)
      * @return List&lt;MetadataSearchResponse&gt;
@@ -15867,13 +15919,16 @@ public class ThoughtSpotRestApi {
      * sort the data retrieved in the API response. - To get discoverable objects when linientmodel
      * is enabled you can use &#x60;include_discoverable_objects&#x60; as true else false. Default
      * value is true. - For liveboard metadata type, to get the newer format, set the
-     * &#x60;liveboard_response_format&#x60; as V2. Default value is V1. **NOTE**: The following
-     * parameters support pagination of metadata records: - &#x60;tag_identifiers&#x60; -
-     * &#x60;type&#x60; - &#x60;subtypes&#x60; - &#x60;created_by_user_identifiers&#x60; -
-     * &#x60;modified_by_user_identifiers&#x60; - &#x60;owned_by_user_identifiers&#x60; -
-     * &#x60;exclude_objects&#x60; - &#x60;include_auto_created_objects&#x60; -
-     * &#x60;favorite_object_options&#x60; If you are using other parameters to search metadata, set
-     * &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60;.
+     * &#x60;liveboard_response_format&#x60; as V2. Default value is V1. - To retrieve only objects
+     * that are published, set the &#x60;include_only_published_objects&#x60; as true. Default value
+     * is false. **NOTE**: The following parameters support pagination of metadata records: -
+     * &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;subtypes&#x60; -
+     * &#x60;created_by_user_identifiers&#x60; - &#x60;modified_by_user_identifiers&#x60; -
+     * &#x60;owned_by_user_identifiers&#x60; - &#x60;exclude_objects&#x60; -
+     * &#x60;include_auto_created_objects&#x60; - &#x60;favorite_object_options&#x60; -
+     * &#x60;include_only_published_objects&#x60; If you are using other parameters to search
+     * metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to
+     * &#x60;0&#x60;.
      *
      * @param searchMetadataRequest (required)
      * @return ApiResponse&lt;List&lt;MetadataSearchResponse&gt;&gt;
@@ -15916,13 +15971,16 @@ public class ThoughtSpotRestApi {
      * sort the data retrieved in the API response. - To get discoverable objects when linientmodel
      * is enabled you can use &#x60;include_discoverable_objects&#x60; as true else false. Default
      * value is true. - For liveboard metadata type, to get the newer format, set the
-     * &#x60;liveboard_response_format&#x60; as V2. Default value is V1. **NOTE**: The following
-     * parameters support pagination of metadata records: - &#x60;tag_identifiers&#x60; -
-     * &#x60;type&#x60; - &#x60;subtypes&#x60; - &#x60;created_by_user_identifiers&#x60; -
-     * &#x60;modified_by_user_identifiers&#x60; - &#x60;owned_by_user_identifiers&#x60; -
-     * &#x60;exclude_objects&#x60; - &#x60;include_auto_created_objects&#x60; -
-     * &#x60;favorite_object_options&#x60; If you are using other parameters to search metadata, set
-     * &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60;.
+     * &#x60;liveboard_response_format&#x60; as V2. Default value is V1. - To retrieve only objects
+     * that are published, set the &#x60;include_only_published_objects&#x60; as true. Default value
+     * is false. **NOTE**: The following parameters support pagination of metadata records: -
+     * &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;subtypes&#x60; -
+     * &#x60;created_by_user_identifiers&#x60; - &#x60;modified_by_user_identifiers&#x60; -
+     * &#x60;owned_by_user_identifiers&#x60; - &#x60;exclude_objects&#x60; -
+     * &#x60;include_auto_created_objects&#x60; - &#x60;favorite_object_options&#x60; -
+     * &#x60;include_only_published_objects&#x60; If you are using other parameters to search
+     * metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to
+     * &#x60;0&#x60;.
      *
      * @param searchMetadataRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -18417,8 +18475,8 @@ public class ThoughtSpotRestApi {
      * Version: 9.2.0.cl or later Updates Git repository configuration settings. Requires
      * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access
      * Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on
-     * your instance, the &#x60;CAN_MANAGE_VERSION_CONTROL&#x60; (**Can toggle version control for
-     * objects**) privilege.
+     * your instance, the &#x60;CAN_SETUP_VERSION_CONTROL&#x60; (**Can set up version control**)
+     * privilege.
      *
      * @param updateConfigRequest (required)
      * @return RepoConfigObject
@@ -18445,8 +18503,8 @@ public class ThoughtSpotRestApi {
      * Version: 9.2.0.cl or later Updates Git repository configuration settings. Requires
      * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access
      * Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on
-     * your instance, the &#x60;CAN_MANAGE_VERSION_CONTROL&#x60; (**Can toggle version control for
-     * objects**) privilege.
+     * your instance, the &#x60;CAN_SETUP_VERSION_CONTROL&#x60; (**Can set up version control**)
+     * privilege.
      *
      * @param updateConfigRequest (required)
      * @return ApiResponse&lt;RepoConfigObject&gt;
@@ -18474,8 +18532,8 @@ public class ThoughtSpotRestApi {
      * (asynchronously) Version: 9.2.0.cl or later Updates Git repository configuration settings.
      * Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
      * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance on your instance, the &#x60;CAN_MANAGE_VERSION_CONTROL&#x60; (**Can toggle
-     * version control for objects**) privilege.
+     * on your instance on your instance, the &#x60;CAN_SETUP_VERSION_CONTROL&#x60; (**Can set up
+     * version control**) privilege.
      *
      * @param updateConfigRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -18828,9 +18886,36 @@ public class ThoughtSpotRestApi {
      * required. To update a connection object, pass these parameters in your API request: 1. GUID
      * of the connection object. 2. If you are updating tables or database schema of a connection
      * object: a. Add the updated JSON map of metadata with database, schema, and tables in
-     * &#x60;data_warehouse_config&#x60;. b. Set &#x60;validate&#x60; to &#x60;true&#x60;. 3. If you
-     * are updating a configuration attribute, connection name, or description, you can set
-     * &#x60;validate&#x60; to &#x60;false&#x60;.
+     * &#x60;data_warehouse_config&#x60;. b. Set &#x60;validate&#x60; to &#x60;true&#x60;. * A JSON
+     * map of configuration attributes, database details, and table properties in
+     * &#x60;data_warehouse_config&#x60; as shown in the following example: &#x60;&#x60;&#x60; {
+     * \&quot;configuration\&quot;:{ \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
+     * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
+     * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
+     * \&quot;externalDatabases\&quot;:[ { \&quot;name\&quot;:\&quot;AllDatatypes\&quot;,
+     * \&quot;isAutoCreated\&quot;:false, \&quot;schemas\&quot;:[ {
+     * \&quot;name\&quot;:\&quot;alldatatypes\&quot;, \&quot;tables\&quot;:[ {
+     * \&quot;name\&quot;:\&quot;allDatatypes\&quot;, \&quot;type\&quot;:\&quot;TABLE\&quot;,
+     * \&quot;description\&quot;:\&quot;\&quot;, \&quot;selected\&quot;:true,
+     * \&quot;linked\&quot;:true, \&quot;columns\&quot;:[ {
+     * \&quot;name\&quot;:\&quot;CNUMBER\&quot;, \&quot;type\&quot;:\&quot;INT64\&quot;,
+     * \&quot;canImport\&quot;:true, \&quot;selected\&quot;:true, \&quot;isLinkedActive\&quot;:true,
+     * \&quot;isImported\&quot;:false, \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,
+     * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
+     * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; }, {
+     * \&quot;name\&quot;:\&quot;CDECIMAL\&quot;, \&quot;type\&quot;:\&quot;INT64\&quot;,
+     * \&quot;canImport\&quot;:true, \&quot;selected\&quot;:true, \&quot;isLinkedActive\&quot;:true,
+     * \&quot;isImported\&quot;:false, \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,
+     * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
+     * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; } ] } ] } ] } ] } &#x60;&#x60;&#x60; 3. If
+     * you are updating a configuration attribute, connection name, or description, you can set
+     * &#x60;validate&#x60; to &#x60;false&#x60;. * A JSON map of configuration attributes in
+     * &#x60;data_warehouse_config&#x60;. The following example shows the configuration attributes
+     * for a Snowflake connection: &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
+     * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
+     * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
+     * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
+     * \&quot;externalDatabases\&quot;:[ ] } &#x60;&#x60;&#x60;
      *
      * @param connectionIdentifier Unique ID or name of the connection. (required)
      * @param updateConnectionV2Request (required)
@@ -18862,9 +18947,36 @@ public class ThoughtSpotRestApi {
      * required. To update a connection object, pass these parameters in your API request: 1. GUID
      * of the connection object. 2. If you are updating tables or database schema of a connection
      * object: a. Add the updated JSON map of metadata with database, schema, and tables in
-     * &#x60;data_warehouse_config&#x60;. b. Set &#x60;validate&#x60; to &#x60;true&#x60;. 3. If you
-     * are updating a configuration attribute, connection name, or description, you can set
-     * &#x60;validate&#x60; to &#x60;false&#x60;.
+     * &#x60;data_warehouse_config&#x60;. b. Set &#x60;validate&#x60; to &#x60;true&#x60;. * A JSON
+     * map of configuration attributes, database details, and table properties in
+     * &#x60;data_warehouse_config&#x60; as shown in the following example: &#x60;&#x60;&#x60; {
+     * \&quot;configuration\&quot;:{ \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
+     * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
+     * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
+     * \&quot;externalDatabases\&quot;:[ { \&quot;name\&quot;:\&quot;AllDatatypes\&quot;,
+     * \&quot;isAutoCreated\&quot;:false, \&quot;schemas\&quot;:[ {
+     * \&quot;name\&quot;:\&quot;alldatatypes\&quot;, \&quot;tables\&quot;:[ {
+     * \&quot;name\&quot;:\&quot;allDatatypes\&quot;, \&quot;type\&quot;:\&quot;TABLE\&quot;,
+     * \&quot;description\&quot;:\&quot;\&quot;, \&quot;selected\&quot;:true,
+     * \&quot;linked\&quot;:true, \&quot;columns\&quot;:[ {
+     * \&quot;name\&quot;:\&quot;CNUMBER\&quot;, \&quot;type\&quot;:\&quot;INT64\&quot;,
+     * \&quot;canImport\&quot;:true, \&quot;selected\&quot;:true, \&quot;isLinkedActive\&quot;:true,
+     * \&quot;isImported\&quot;:false, \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,
+     * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
+     * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; }, {
+     * \&quot;name\&quot;:\&quot;CDECIMAL\&quot;, \&quot;type\&quot;:\&quot;INT64\&quot;,
+     * \&quot;canImport\&quot;:true, \&quot;selected\&quot;:true, \&quot;isLinkedActive\&quot;:true,
+     * \&quot;isImported\&quot;:false, \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,
+     * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
+     * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; } ] } ] } ] } ] } &#x60;&#x60;&#x60; 3. If
+     * you are updating a configuration attribute, connection name, or description, you can set
+     * &#x60;validate&#x60; to &#x60;false&#x60;. * A JSON map of configuration attributes in
+     * &#x60;data_warehouse_config&#x60;. The following example shows the configuration attributes
+     * for a Snowflake connection: &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
+     * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
+     * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
+     * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
+     * \&quot;externalDatabases\&quot;:[ ] } &#x60;&#x60;&#x60;
      *
      * @param connectionIdentifier Unique ID or name of the connection. (required)
      * @param updateConnectionV2Request (required)
@@ -18901,8 +19013,36 @@ public class ThoughtSpotRestApi {
      * your API request: 1. GUID of the connection object. 2. If you are updating tables or database
      * schema of a connection object: a. Add the updated JSON map of metadata with database, schema,
      * and tables in &#x60;data_warehouse_config&#x60;. b. Set &#x60;validate&#x60; to
-     * &#x60;true&#x60;. 3. If you are updating a configuration attribute, connection name, or
-     * description, you can set &#x60;validate&#x60; to &#x60;false&#x60;.
+     * &#x60;true&#x60;. * A JSON map of configuration attributes, database details, and table
+     * properties in &#x60;data_warehouse_config&#x60; as shown in the following example:
+     * &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
+     * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
+     * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
+     * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
+     * \&quot;externalDatabases\&quot;:[ { \&quot;name\&quot;:\&quot;AllDatatypes\&quot;,
+     * \&quot;isAutoCreated\&quot;:false, \&quot;schemas\&quot;:[ {
+     * \&quot;name\&quot;:\&quot;alldatatypes\&quot;, \&quot;tables\&quot;:[ {
+     * \&quot;name\&quot;:\&quot;allDatatypes\&quot;, \&quot;type\&quot;:\&quot;TABLE\&quot;,
+     * \&quot;description\&quot;:\&quot;\&quot;, \&quot;selected\&quot;:true,
+     * \&quot;linked\&quot;:true, \&quot;columns\&quot;:[ {
+     * \&quot;name\&quot;:\&quot;CNUMBER\&quot;, \&quot;type\&quot;:\&quot;INT64\&quot;,
+     * \&quot;canImport\&quot;:true, \&quot;selected\&quot;:true, \&quot;isLinkedActive\&quot;:true,
+     * \&quot;isImported\&quot;:false, \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,
+     * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
+     * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; }, {
+     * \&quot;name\&quot;:\&quot;CDECIMAL\&quot;, \&quot;type\&quot;:\&quot;INT64\&quot;,
+     * \&quot;canImport\&quot;:true, \&quot;selected\&quot;:true, \&quot;isLinkedActive\&quot;:true,
+     * \&quot;isImported\&quot;:false, \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,
+     * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
+     * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; } ] } ] } ] } ] } &#x60;&#x60;&#x60; 3. If
+     * you are updating a configuration attribute, connection name, or description, you can set
+     * &#x60;validate&#x60; to &#x60;false&#x60;. * A JSON map of configuration attributes in
+     * &#x60;data_warehouse_config&#x60;. The following example shows the configuration attributes
+     * for a Snowflake connection: &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
+     * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
+     * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
+     * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
+     * \&quot;externalDatabases\&quot;:[ ] } &#x60;&#x60;&#x60;
      *
      * @param connectionIdentifier Unique ID or name of the connection. (required)
      * @param updateConnectionV2Request (required)

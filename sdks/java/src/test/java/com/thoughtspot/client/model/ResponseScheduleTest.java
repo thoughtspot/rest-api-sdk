@@ -99,4 +99,10 @@ public class ResponseScheduleTest {
     public void historyRunsTest() {
         // TODO: test historyRuns
     }
+
+    /** Test the property 'personalisedViewId' */
+    @Test
+    public void personalisedViewIdTest() {
+        // TODO: test personalisedViewId
+    }
 }

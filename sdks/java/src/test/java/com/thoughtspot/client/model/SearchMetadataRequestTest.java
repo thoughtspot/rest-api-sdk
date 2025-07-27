@@ -153,4 +153,10 @@ public class SearchMetadataRequestTest {
     public void showResolvedParametersTest() {
         // TODO: test showResolvedParameters
     }
+
+    /** Test the property 'liveboardResponseVersion' */
+    @Test
+    public void liveboardResponseVersionTest() {
+        // TODO: test liveboardResponseVersion
+    }
 }

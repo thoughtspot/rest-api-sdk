@@ -176,10 +176,7 @@ public class ReportsApi {
      * in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with
      * tables. Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
-     * to apply to the Answer data. The &#x60;record_size&#x60; attribute determines the number of
-     * records to retrieve in an API call. For more information about pagination, record size, and
-     * maximum row limit, see [Pagination and record size
-     * settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
+     * to apply to the Answer data.
      *
      * @param exportAnswerReportRequest (required)
      * @return File
@@ -211,10 +208,7 @@ public class ReportsApi {
      * in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with
      * tables. Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
-     * to apply to the Answer data. The &#x60;record_size&#x60; attribute determines the number of
-     * records to retrieve in an API call. For more information about pagination, record size, and
-     * maximum row limit, see [Pagination and record size
-     * settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
+     * to apply to the Answer data.
      *
      * @param exportAnswerReportRequest (required)
      * @return ApiResponse&lt;File&gt;
@@ -248,10 +242,7 @@ public class ReportsApi {
      * typing in the relevant extension. * HTML rendering is not supported for PDF exports of
      * Answers with tables. Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
-     * to apply to the Answer data. The &#x60;record_size&#x60; attribute determines the number of
-     * records to retrieve in an API call. For more information about pagination, record size, and
-     * maximum row limit, see [Pagination and record size
-     * settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
+     * to apply to the Answer data.
      *
      * @param exportAnswerReportRequest (required)
      * @param _callback The callback to be executed when the API call finishes
