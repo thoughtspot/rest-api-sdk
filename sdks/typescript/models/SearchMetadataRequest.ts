@@ -100,6 +100,14 @@ export class SearchMetadataRequest {
     * <div>Version: 10.7.0.cl or later </div>  Boolean to indicate whether to include discoverable metadata objects.
     */
     'include_discoverable_objects'?: boolean | null;
+    /**
+    * <div>Version: 10.9.0.cl or later </div>  Indicates whether to show resolved parameterised values.
+    */
+    'show_resolved_parameters'?: boolean | null;
+    /**
+    * Indicates the model version of Liveboard to be attached in metadata detail.
+    */
+    'liveboard_response_version'?: SearchMetadataRequestLiveboardResponseVersionEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -235,6 +243,18 @@ export class SearchMetadataRequest {
             "baseName": "include_discoverable_objects",
             "type": "boolean",
             "format": ""
+        },
+        {
+            "name": "show_resolved_parameters",
+            "baseName": "show_resolved_parameters",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "liveboard_response_version",
+            "baseName": "liveboard_response_version",
+            "type": "SearchMetadataRequestLiveboardResponseVersionEnum",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -247,4 +267,5 @@ export class SearchMetadataRequest {
 
 
 export type SearchMetadataRequestDependentObjectVersionEnum = "V1" | "V2" ;
+export type SearchMetadataRequestLiveboardResponseVersionEnum = "V1" | "V2" ;
 

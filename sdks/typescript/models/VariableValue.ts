@@ -16,7 +16,7 @@ export class VariableValue {
     /**
     * The value of the variable
     */
-    'value': string;
+    'value'?: string | null;
     /**
     * The unique name of the org
     */

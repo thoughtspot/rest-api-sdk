@@ -48,6 +48,24 @@ public class PngOptionsInput implements Serializable {
     @javax.annotation.Nullable
     private String personalisedViewId;
 
+    public static final String SERIALIZED_NAME_IMAGE_RESOLUTION = "image_resolution";
+
+    @SerializedName(SERIALIZED_NAME_IMAGE_RESOLUTION)
+    @javax.annotation.Nullable
+    private Integer imageResolution;
+
+    public static final String SERIALIZED_NAME_IMAGE_SCALE = "image_scale";
+
+    @SerializedName(SERIALIZED_NAME_IMAGE_SCALE)
+    @javax.annotation.Nullable
+    private Integer imageScale;
+
+    public static final String SERIALIZED_NAME_INCLUDE_HEADER = "include_header";
+
+    @SerializedName(SERIALIZED_NAME_INCLUDE_HEADER)
+    @javax.annotation.Nullable
+    private Boolean includeHeader = false;
+
     public PngOptionsInput() {}
 
     public PngOptionsInput includeCoverPage(@javax.annotation.Nullable Boolean includeCoverPage) {
@@ -108,6 +126,64 @@ public class PngOptionsInput implements Serializable {
         this.personalisedViewId = personalisedViewId;
     }
 
+    public PngOptionsInput imageResolution(@javax.annotation.Nullable Integer imageResolution) {
+        this.imageResolution = imageResolution;
+        return this;
+    }
+
+    /**
+     * Desired width of the Liveboard image in pixels. Ex. 1920 for Full HD image Version: 10.9.0.cl
+     * or later
+     *
+     * @return imageResolution
+     */
+    @javax.annotation.Nullable
+    public Integer getImageResolution() {
+        return imageResolution;
+    }
+
+    public void setImageResolution(@javax.annotation.Nullable Integer imageResolution) {
+        this.imageResolution = imageResolution;
+    }
+
+    public PngOptionsInput imageScale(@javax.annotation.Nullable Integer imageScale) {
+        this.imageScale = imageScale;
+        return this;
+    }
+
+    /**
+     * The scale of the image in percentage. Ex. 100 for 100% scale. Version: 10.9.0.cl or later
+     *
+     * @return imageScale
+     */
+    @javax.annotation.Nullable
+    public Integer getImageScale() {
+        return imageScale;
+    }
+
+    public void setImageScale(@javax.annotation.Nullable Integer imageScale) {
+        this.imageScale = imageScale;
+    }
+
+    public PngOptionsInput includeHeader(@javax.annotation.Nullable Boolean includeHeader) {
+        this.includeHeader = includeHeader;
+        return this;
+    }
+
+    /**
+     * Indicates whether to include the header of the liveboard. Version: 10.9.0.cl or later
+     *
+     * @return includeHeader
+     */
+    @javax.annotation.Nullable
+    public Boolean getIncludeHeader() {
+        return includeHeader;
+    }
+
+    public void setIncludeHeader(@javax.annotation.Nullable Boolean includeHeader) {
+        this.includeHeader = includeHeader;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -119,7 +195,10 @@ public class PngOptionsInput implements Serializable {
         PngOptionsInput pngOptionsInput = (PngOptionsInput) o;
         return Objects.equals(this.includeCoverPage, pngOptionsInput.includeCoverPage)
                 && Objects.equals(this.includeFilterPage, pngOptionsInput.includeFilterPage)
-                && Objects.equals(this.personalisedViewId, pngOptionsInput.personalisedViewId);
+                && Objects.equals(this.personalisedViewId, pngOptionsInput.personalisedViewId)
+                && Objects.equals(this.imageResolution, pngOptionsInput.imageResolution)
+                && Objects.equals(this.imageScale, pngOptionsInput.imageScale)
+                && Objects.equals(this.includeHeader, pngOptionsInput.includeHeader);
     }
 
     private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -133,7 +212,13 @@ public class PngOptionsInput implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(includeCoverPage, includeFilterPage, personalisedViewId);
+        return Objects.hash(
+                includeCoverPage,
+                includeFilterPage,
+                personalisedViewId,
+                imageResolution,
+                imageScale,
+                includeHeader);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -154,6 +239,9 @@ public class PngOptionsInput implements Serializable {
         sb.append("    personalisedViewId: ")
                 .append(toIndentedString(personalisedViewId))
                 .append("\n");
+        sb.append("    imageResolution: ").append(toIndentedString(imageResolution)).append("\n");
+        sb.append("    imageScale: ").append(toIndentedString(imageScale)).append("\n");
+        sb.append("    includeHeader: ").append(toIndentedString(includeHeader)).append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -178,6 +266,9 @@ public class PngOptionsInput implements Serializable {
         openapiFields.add("include_cover_page");
         openapiFields.add("include_filter_page");
         openapiFields.add("personalised_view_id");
+        openapiFields.add("image_resolution");
+        openapiFields.add("image_scale");
+        openapiFields.add("include_header");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();

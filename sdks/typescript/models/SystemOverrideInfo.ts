@@ -12,37 +12,24 @@
 
 import { HttpFile } from '../http/http';
 
-/**
-* Metadata objects.
-*/
-export class JWTMetadataObject {
-    'identifier'?: string | null;
-    'type'?: JWTMetadataObjectTypeEnum | null;
+export class SystemOverrideInfo {
+    'config_override_info'?: any | null;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "identifier",
-            "baseName": "identifier",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "JWTMetadataObjectTypeEnum",
+            "name": "config_override_info",
+            "baseName": "config_override_info",
+            "type": "any",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return JWTMetadataObject.attributeTypeMap;
+        return SystemOverrideInfo.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
-
-
-export type JWTMetadataObjectTypeEnum = "LOGICAL_TABLE" ;
 

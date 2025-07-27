@@ -81,4 +81,10 @@ public class UpdateScheduleRequestTest {
     public void statusTest() {
         // TODO: test status
     }
+
+    /** Test the property 'personalisedViewId' */
+    @Test
+    public void personalisedViewIdTest() {
+        // TODO: test personalisedViewId
+    }
 }

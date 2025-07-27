@@ -147,4 +147,16 @@ public class SearchMetadataRequestTest {
     public void includeDiscoverableObjectsTest() {
         // TODO: test includeDiscoverableObjects
     }
+
+    /** Test the property 'showResolvedParameters' */
+    @Test
+    public void showResolvedParametersTest() {
+        // TODO: test showResolvedParameters
+    }
+
+    /** Test the property 'liveboardResponseVersion' */
+    @Test
+    public void liveboardResponseVersionTest() {
+        // TODO: test liveboardResponseVersion
+    }
 }

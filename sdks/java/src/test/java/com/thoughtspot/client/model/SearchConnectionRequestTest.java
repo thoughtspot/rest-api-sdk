@@ -75,4 +75,10 @@ public class SearchConnectionRequestTest {
     public void authenticationTypeTest() {
         // TODO: test authenticationType
     }
+
+    /** Test the property 'showResolvedParameters' */
+    @Test
+    public void showResolvedParametersTest() {
+        // TODO: test showResolvedParameters
+    }
 }

@@ -22,12 +22,15 @@ import com.thoughtspot.client.model.CreateConnectionRequest;
 import com.thoughtspot.client.model.CreateConnectionResponse;
 import com.thoughtspot.client.model.CreateConversationRequest;
 import com.thoughtspot.client.model.CreateCustomActionRequest;
+import com.thoughtspot.client.model.CreateEmailCustomisationRequest;
+import com.thoughtspot.client.model.CreateEmailCustomisationResponse;
 import com.thoughtspot.client.model.CreateOrgRequest;
 import com.thoughtspot.client.model.CreateRoleRequest;
 import com.thoughtspot.client.model.CreateScheduleRequest;
 import com.thoughtspot.client.model.CreateTagRequest;
 import com.thoughtspot.client.model.CreateUserGroupRequest;
 import com.thoughtspot.client.model.CreateUserRequest;
+import com.thoughtspot.client.model.CreateVariableRequest;
 import com.thoughtspot.client.model.DbtConnectionRequest;
 import com.thoughtspot.client.model.DbtGenerateSyncTmlRequest;
 import com.thoughtspot.client.model.DbtGenerateTmlRequest;
@@ -70,8 +73,10 @@ import com.thoughtspot.client.model.LogResponse;
 import com.thoughtspot.client.model.LoginRequest;
 import com.thoughtspot.client.model.MetadataSearchResponse;
 import com.thoughtspot.client.model.OrgResponse;
+import com.thoughtspot.client.model.ParameterizeMetadataRequest;
 import com.thoughtspot.client.model.PermissionOfMetadataResponse;
 import com.thoughtspot.client.model.PermissionOfPrincipalsResponse;
+import com.thoughtspot.client.model.PublishMetadataRequest;
 import com.thoughtspot.client.model.QueryGetDecomposedQueryRequest;
 import com.thoughtspot.client.model.RepoConfigObject;
 import com.thoughtspot.client.model.ResetUserPasswordRequest;
@@ -100,15 +105,19 @@ import com.thoughtspot.client.model.SearchSchedulesRequest;
 import com.thoughtspot.client.model.SearchTagsRequest;
 import com.thoughtspot.client.model.SearchUserGroupsRequest;
 import com.thoughtspot.client.model.SearchUsersRequest;
+import com.thoughtspot.client.model.SearchVariablesRequest;
 import com.thoughtspot.client.model.SendMessageRequest;
 import com.thoughtspot.client.model.ShareMetadataRequest;
 import com.thoughtspot.client.model.SingleAnswerRequest;
 import com.thoughtspot.client.model.SqlQueryResponse;
 import com.thoughtspot.client.model.SystemConfig;
 import com.thoughtspot.client.model.SystemInfo;
+import com.thoughtspot.client.model.SystemOverrideInfo;
 import com.thoughtspot.client.model.Tag;
 import com.thoughtspot.client.model.Token;
 import com.thoughtspot.client.model.TokenValidationResponse;
+import com.thoughtspot.client.model.UnparameterizeMetadataRequest;
+import com.thoughtspot.client.model.UnpublishMetadataRequest;
 import com.thoughtspot.client.model.UpdateConfigRequest;
 import com.thoughtspot.client.model.UpdateConnectionRequest;
 import com.thoughtspot.client.model.UpdateConnectionV2Request;
@@ -123,10 +132,13 @@ import com.thoughtspot.client.model.UpdateSystemConfigRequest;
 import com.thoughtspot.client.model.UpdateTagRequest;
 import com.thoughtspot.client.model.UpdateUserGroupRequest;
 import com.thoughtspot.client.model.UpdateUserRequest;
+import com.thoughtspot.client.model.UpdateVariableRequest;
+import com.thoughtspot.client.model.UpdateVariableValuesRequest;
 import com.thoughtspot.client.model.User;
 import com.thoughtspot.client.model.UserGroupResponse;
 import com.thoughtspot.client.model.ValidateMergeRequest;
 import com.thoughtspot.client.model.ValidateTokenRequest;
+import com.thoughtspot.client.model.Variable;
 import java.io.File;
 import java.util.List;
 import org.junit.jupiter.api.Disabled;
@@ -405,6 +417,38 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     * Version: 10.10.0.cl or later Creates a custom configuration for the email customisation ####
+     * Pre-requisites Requires &#x60;DEVELOPER&#x60; (**has developer privilege**) or
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access
+     * Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance,
+     * the &#x60;_Has developer privilege&#x60; privilege is required. Coms should be enabled on the
+     * cluster. #### Usage guidelines To create a custom confuguration: 1. Pass these parameters in
+     * your API request. - A JSON map of configuration attributes &#x60;template_properties&#x60;.
+     * The following example shows the configuration attribures for a csutom configuration:
+     * &#x60;&#x60;&#x60; { { \&quot;logoUrl\&quot;: \&quot;&lt;logo_url&gt;\&quot;,
+     * \&quot;homeUrl\&quot;: \&quot;&lt;home_url&gt;\&quot;, \&quot;productName\&quot;:
+     * \&quot;&lt;Company Name in the Mail&gt;\&quot;, \&quot;footerAddress\&quot;:
+     * \&quot;&lt;address to be visible in the footer&gt;\&quot;, \&quot;ctaButtonBgColor\&quot;:
+     * \&quot;#444DEA\&quot;, \&quot;ctaTextFontColor\&quot;: \&quot;#FFFFFF\&quot;,
+     * \&quot;primaryBgColor\&quot;: \&quot;#D3DEF0\&quot;, \&quot;hideMobileAppNudge\&quot;:
+     * &lt;true/false&gt;, \&quot;hideTsVocabularyDefinitions\&quot;: &lt;true/false&gt;e,
+     * \&quot;hideProductName\&quot;: &lt;true/false&gt;, \&quot;hideFooterPhone\&quot;:
+     * &lt;true/false&gt;, \&quot;hideFooterAddress\&quot;: &lt;true/false&gt;,
+     * \&quot;hidePrivacyPolicy\&quot;: &lt;true/false&gt;, \&quot;hideManageNotification\&quot;:
+     * &lt;true/false&gt;, \&quot;fontfamily\&quot;: \&quot;&lt;to maintain a single font in the
+     * entire email&gt;\&quot; } } &#x60;&#x60;&#x60;
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void createEmailCustomisationTest() throws ApiException {
+        CreateEmailCustomisationRequest createEmailCustomisationRequest = null;
+        CreateEmailCustomisationResponse response =
+                api.createEmailCustomisation(createEmailCustomisationRequest);
+        // TODO: test validations
+    }
+
+    /**
      * Version: 9.0.0.cl or later Creates an Org object. To use this API, the
      * [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview) feature must be enabled in
      * your cluster. Requires cluster administration (**Can administer Org**) privileges. If
@@ -527,6 +571,28 @@ public class ThoughtSpotRestApiTest {
     public void createUserGroupTest() throws ApiException {
         CreateUserGroupRequest createUserGroupRequest = null;
         UserGroupResponse response = api.createUserGroup(createUserGroupRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Create a variable which can be used for parameterizing metadata objects Version: 10.9.0.cl or
+     * later Allows creating a variable which can be used for parameterizing metadata objects in
+     * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint supports the
+     * following types of variables: * CONNECTION_PROPERTY - For connection properties *
+     * TABLE_MAPPING - For table mappings * CONNECTION_PROPERTY_PER_PRINCIPAL - For connection
+     * properties per principal. In order to use this please contact support to enable this. When
+     * creating a variable, you need to specify: * The variable type * A unique name for the
+     * variable * Whether the variable contains sensitive values (defaults to false) * The variable
+     * values (optional) The operation will fail if: * The user lacks required permissions * The
+     * variable name already exists * The variable type is invalid * The variable values are invalid
+     * for the specified type
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void createVariableTest() throws ApiException {
+        CreateVariableRequest createVariableRequest = null;
+        Variable response = api.createVariable(createVariableRequest);
         // TODO: test validations
     }
 
@@ -729,6 +795,25 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     * Version: 10.10.0.cl or later Deletes the configuration for the email customisation. ####
+     * Pre-requisites Requires &#x60;DEVELOPER&#x60; (**has developer privilege**) or
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access
+     * Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance,
+     * the &#x60;_Has developer privilege&#x60; privilege is required. Coms should be enabled on the
+     * cluster. #### Usage guidelines Deletes the configuration available for the cluster/org. Pass
+     * the &#x60;template_identifier&#x60; in the API request. Note: &#x60;template_identifier&#x60;
+     * can be fetched from search API request.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void deleteEmailCustomisationTest() throws ApiException {
+        String templateIdentifier = null;
+        api.deleteEmailCustomisation(templateIdentifier);
+        // TODO: test validations
+    }
+
+    /**
      * Version: 9.0.0.cl or later Removes the specified metadata object from the ThoughtSpot system.
      * Requires edit access to the metadata object.
      *
@@ -842,6 +927,21 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     * Delete a variable Version: 10.9.0.cl or later Allows deleting a variable from ThoughtSpot.
+     * Requires ADMINISTRATION role and TENANT scope. The API endpoint requires: * The variable
+     * identifier (ID or name) The operation will fail if: * The user lacks required permissions *
+     * The variable doesn&#39;t exist * The variable is being used by other objects
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void deleteVariableTest() throws ApiException {
+        String identifier = null;
+        api.deleteVariable(identifier);
+        // TODO: test validations
+    }
+
+    /**
      * Version: 9.2.0.cl or later Allows you to deploy a commit and publish TML content to your
      * ThoughtSpot instance. Requires at least edit access to the objects used in the deploy
      * operation. The API deploys the head of the branch unless a &#x60;commit_id&#x60; is specified
@@ -887,10 +987,7 @@ public class ThoughtSpotRestApiTest {
      * in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with
      * tables. Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
-     * to apply to the Answer data. The &#x60;record_size&#x60; attribute determines the number of
-     * records to retrieve in an API call. For more information about pagination, record size, and
-     * maximum row limit, see [Pagination and record size
-     * settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
+     * to apply to the Answer data.
      *
      * @throws ApiException if the Api call fails
      */
@@ -1219,10 +1316,10 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Version: 9.0.0.cl or later Gets session information for the currently logged-in user. This
-     * API does not require any parameters to be passed in the request. Any ThoughtSpot user can
-     * access this endpoint and send an API request. The data returned in the API response varies
-     * according to user&#39;s privilege and object access permissions.
+     * Version: 9.0.0.cl or later Retrieves details of the current user session for the token
+     * provided in the request header. Any ThoughtSpot user can access this endpoint and send an API
+     * request. The data returned in the API response varies according to user&#39;s privilege and
+     * object access permissions.
      *
      * @throws ApiException if the Api call fails
      */
@@ -1233,10 +1330,13 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Get token for the currently logged-in user. Version: 9.4.0.cl or later Gets token details for
-     * the currently logged-in user. You can use this endpoint to obtain the token associated with
-     * the user&#39;s session. This API does not require any parameters to be passed in the request.
-     * Any ThoughtSpot user can access this endpoint and send an API request.
+     * Get token for the currently logged-in user. Version: 9.4.0.cl or later Retrieves details of
+     * the current session token for the bearer token provided in the request header. This API
+     * endpoint does not create a new token. Instead, it returns details about the token, including
+     * the token string, creation time, expiration time, and the associated user. Use this endpoint
+     * to introspect your current session token, debug authentication issues, or when a frontend
+     * application needs session token details. Any ThoughtSpot user with a valid bearer token can
+     * access this endpoint and send an API request
      *
      * @throws ApiException if the Api call fails
      */
@@ -1430,7 +1530,7 @@ public class ThoughtSpotRestApiTest {
      */
     @Test
     public void getSystemOverrideInfoTest() throws ApiException {
-        Object response = api.getSystemOverrideInfo();
+        SystemOverrideInfo response = api.getSystemOverrideInfo();
         // TODO: test validations
     }
 
@@ -1572,6 +1672,41 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     * Parameterize fields in metadata objects. Version: 10.9.0.cl or later Allows parameterizing
+     * fields in metadata objects in ThoughtSpot. Requires appropriate permissions to modify the
+     * metadata object. The API endpoint allows parameterizing the following types of metadata
+     * objects: * Logical Tables * Connections For a Logical Table the field type must be
+     * &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName * tableName
+     * For a Connection the field type is always &#x60;CONNECTION_PROPERTY&#x60;. We use the
+     * field_name in this case to specify the exact property of a connection which needs to be
+     * parameterized.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void parameterizeMetadataTest() throws ApiException {
+        ParameterizeMetadataRequest parameterizeMetadataRequest = null;
+        api.parameterizeMetadata(parameterizeMetadataRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 10.9.0.cl or later Allows publishing metadata objects across organizations in
+     * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
+     * publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
+     * This API will essentially share the objects along with it&#39;s dependencies to the org
+     * admins of the orgs to which it is being published.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void publishMetadataTest() throws ApiException {
+        PublishMetadataRequest publishMetadataRequest = null;
+        api.publishMetadata(publishMetadataRequest);
+        // TODO: test validations
+    }
+
+    /**
      * Version: 10.7.0.cl or later
      *
      * @throws ApiException if the Api call fails
@@ -1708,11 +1843,27 @@ public class ThoughtSpotRestApiTest {
      * fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth
      * authentication type. - &#x60;IAM&#x60;: For connections that have the IAM OAuth set up. This
      * authentication type is supported on Amazon Redshift connections only. - &#x60;EXTOAUTH&#x60;:
-     * For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with
+     * For connections that have External OAuth set up. ThoughtSpot supports external [OAuth with
      * Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/
      * connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data
      * connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). -
-     * To include more details about connection objects in the API response, set
+     * &#x60;KEY_PAIR&#x60;: For connections that require Key Pair account credentials to
+     * authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
+     * supported on Snowflake connections only. - &#x60;OAUTH_WITH_PKCE&#x60;: For connections that
+     * require OAuth with PKCE account credentials to authenticate to the Cloud Data Warehouse and
+     * fetch data. This authentication type is supported on Snowflake, Starburst, Databricks, Denodo
+     * connections only. - &#x60;EXTOAUTH_WITH_PKCE&#x60;: For connections that require External
+     * OAuth With PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch
+     * data. This authentication type is supported on Snowflake connections only. -
+     * &#x60;OAUTH_WITH_PEZ&#x60;: For connections that require OAuth With PEZ account credentials
+     * to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
+     * supported on Amazon Redshift connections only. - &#x60;OAUTH_WITH_SERVICE_PRINCIPAL&#x60;:
+     * For connections that require OAuth With Service Principal account credentials to authenticate
+     * to the Cloud Data Warehouse and fetch data. This authentication type is supported on
+     * Databricks connections only. - &#x60;PERSONAL_ACCESS_TOKEN&#x60;: For connections that
+     * require Personal Access Token account credentials to authenticate to the Cloud Data Warehouse
+     * and fetch data. This authentication type is supported on Databricks connections only. - To
+     * include more details about connection objects in the API response, set
      * &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort the output by field
      * names and filter connections by tags. **NOTE**: When filtering connection records by
      * parameters other than &#x60;data_warehouse_types&#x60; or &#x60;tag_identifiers&#x60;, ensure
@@ -1770,13 +1921,33 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     * Version: 10.10.0.cl or later Search the email customisation configuration if any set for the
+     * ThoughtSpot system. #### Pre-requisites Requires &#x60;DEVELOPER&#x60; (**has developer
+     * privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
+     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
+     * on your instance, the &#x60;_Has developer privilege&#x60; privilege is required. Coms should
+     * be enabled on the cluster. #### Usage guidelines To get the list of configurations set in the
+     * cluster/org.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void searchEmailCustomisationTest() throws ApiException {
+        List<CreateEmailCustomisationResponse> response = api.searchEmailCustomisation();
+        // TODO: test validations
+    }
+
+    /**
      * Version: 9.0.0.cl or later Gets a list of metadata objects available on the ThoughtSpot
      * system. This API endpoint is available to all users who have view access to the object. Users
      * with &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privileges can view data for
      * all metadata objects, including users and groups. #### Usage guidelines - To get all metadata
      * objects, send the API request without any attributes. - To get metadata objects of a specific
      * type, set the &#x60;type&#x60; attribute. For example, to fetch a Worksheet, set the type as
-     * &#x60;LOGICAL_TABLE&#x60;. - To get a specific metadata object, specify the GUID. - To
+     * &#x60;LOGICAL_TABLE&#x60;. - To filter metadata objects within type
+     * &#x60;LOGICAL_TABLE&#x60;, set the &#x60;subtypes&#x60; attribute. For example, to fetch a
+     * Worksheet, set the type as &#x60;LOGICAL_TABLE&#x60; &amp; subtypes as
+     * &#x60;[WORKSHEET]&#x60;. - To get a specific metadata object, specify the GUID. - To
      * customize your search and filter the API response, you can use several parameters. You can
      * search for objects created or modified by specific users, by tags applied to the objects, or
      * by using the include parameters like &#x60;include_auto_created_objects&#x60;,
@@ -1784,12 +1955,17 @@ public class ThoughtSpotRestApiTest {
      * &#x60;include_incomplete_objects&#x60;, and so on. You can also define sorting options to
      * sort the data retrieved in the API response. - To get discoverable objects when linientmodel
      * is enabled you can use &#x60;include_discoverable_objects&#x60; as true else false. Default
-     * value is true. **NOTE**: The following parameters support pagination of metadata records: -
-     * &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;created_by_user_identifiers&#x60; -
-     * &#x60;modified_by_user_identifiers&#x60; - &#x60;owned_by_user_identifiers&#x60; -
-     * &#x60;exclude_objects&#x60; - &#x60;include_auto_created_objects&#x60; -
-     * &#x60;favorite_object_options&#x60; If you are using other parameters to search metadata, set
-     * &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60;.
+     * value is true. - For liveboard metadata type, to get the newer format, set the
+     * &#x60;liveboard_response_format&#x60; as V2. Default value is V1. - To retrieve only objects
+     * that are published, set the &#x60;include_only_published_objects&#x60; as true. Default value
+     * is false. **NOTE**: The following parameters support pagination of metadata records: -
+     * &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;subtypes&#x60; -
+     * &#x60;created_by_user_identifiers&#x60; - &#x60;modified_by_user_identifiers&#x60; -
+     * &#x60;owned_by_user_identifiers&#x60; - &#x60;exclude_objects&#x60; -
+     * &#x60;include_auto_created_objects&#x60; - &#x60;favorite_object_options&#x60; -
+     * &#x60;include_only_published_objects&#x60; If you are using other parameters to search
+     * metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to
+     * &#x60;0&#x60;.
      *
      * @throws ApiException if the Api call fails
      */
@@ -1908,6 +2084,23 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     * Search variables Version: 10.9.0.cl or later Allows searching for variables in ThoughtSpot.
+     * Requires ADMINISTRATION role. The API endpoint supports searching variables by: * Variable
+     * identifier (ID or name) * Variable type * Name pattern (case-insensitive, supports % for
+     * wildcard) The search results can be formatted in three ways: * METADATA_ONLY - Returns only
+     * variable metadata (default) * METADATA_AND_VALUES - Returns variable metadata and values *
+     * EDITABLE_METADATA_AND_VALUES - Returns only editable variable metadata and values
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void searchVariablesTest() throws ApiException {
+        SearchVariablesRequest searchVariablesRequest = null;
+        List<Variable> response = api.searchVariables(searchVariablesRequest);
+        // TODO: test validations
+    }
+
+    /**
      * Version: 10.4.0.cl or later Allows sending a follow-up message to an ongoing conversation
      * within the context of the metadata model. Requires at least view access to the metadata
      * object specified in the request. #### Usage guidelines The API requires you to specify the
@@ -1977,6 +2170,43 @@ public class ThoughtSpotRestApiTest {
     public void unassignTagTest() throws ApiException {
         AssignTagRequest assignTagRequest = null;
         api.unassignTag(assignTagRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Remove parameterization from fields in metadata objects. Version: 10.9.0.cl or later Allows
+     * removing parameterization from fields in metadata objects in ThoughtSpot. Requires
+     * appropriate permissions to modify the metadata object. The API endpoint allows
+     * unparameterizing the following types of metadata objects: * Logical Tables * Connections For
+     * a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: *
+     * databaseName * schemaName * tableName For a Connection the field type is always
+     * &#x60;CONNECTION_PROPERTY&#x60;. We use the field_name in this case to specify the exact
+     * property of a connection which needs to be unparameterized.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void unparameterizeMetadataTest() throws ApiException {
+        UnparameterizeMetadataRequest unparameterizeMetadataRequest = null;
+        api.unparameterizeMetadata(unparameterizeMetadataRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 10.9.0.cl or later Allows unpublishing metadata objects from organizations in
+     * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
+     * unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
+     * When unpublishing objects, you can: * Include dependencies by setting
+     * &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no
+     * other published object is using them * Force unpublish by setting &#x60;force&#x60; to true -
+     * this will break all dependent objects in the unpublished organizations
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void unpublishMetadataTest() throws ApiException {
+        UnpublishMetadataRequest unpublishMetadataRequest = null;
+        api.unpublishMetadata(unpublishMetadataRequest);
         // TODO: test validations
     }
 
@@ -2331,6 +2561,62 @@ public class ThoughtSpotRestApiTest {
         String groupIdentifier = null;
         UpdateUserGroupRequest updateUserGroupRequest = null;
         api.updateUserGroup(groupIdentifier, updateUserGroupRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Update a variable&#39;s properties Version: 10.9.0.cl or later Allows updating a
+     * variable&#39;s properties in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The
+     * API endpoint allows updating: * The variable name * The variable values When updating
+     * variable values, you need to specify: * The operation to perform (ADD, REPLACE, REMOVE) * The
+     * new values to add/replace/remove When the operation is ADD, a value any pre-existing value
+     * with the same set of constraints will be replaced. When the operation is REPLACE, all values
+     * of the variable are replaced with the values specified. When the operation is REMOVE, all
+     * values with the given set of conditions are removed.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void updateVariableTest() throws ApiException {
+        String identifier = null;
+        UpdateVariableRequest updateVariableRequest = null;
+        api.updateVariable(identifier, updateVariableRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Update values for multiple variables Version: 10.9.0.cl or later Allows updating values for
+     * multiple variables in ThoughtSpot. Requires ADMINISTRATION role. The API endpoint allows: *
+     * Adding new values to variables * Replacing existing values * Deleting values from variables
+     * When updating variable values, you need to specify: * The variable identifiers * The values
+     * to add/replace/remove for each variable * The operation to perform (ADD, REPLACE, REMOVE)
+     * Behaviour based on operation type: * ADD - Adds values to the variable. Any pre-existing
+     * values with the same conditions are replaced. * REPLACE - Replaces all values of a given org
+     * with the current set of values. * REMOVE - Removes any values which match the set of
+     * conditions of the variables.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void updateVariableValuesTest() throws ApiException {
+        UpdateVariableValuesRequest updateVariableValuesRequest = null;
+        api.updateVariableValues(updateVariableValuesRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 10.10.0.cl or later Validates the email customisation configuration if any set for
+     * the ThoughtSpot system. #### Pre-requisites Requires &#x60;DEVELOPER&#x60; (**has developer
+     * privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
+     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
+     * on your instance, the &#x60;_Has developer privilege&#x60; privilege is required. Coms should
+     * be enabled on the cluster.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void validateEmailCustomisationTest() throws ApiException {
+        api.validateEmailCustomisation();
         // TODO: test validations
     }
 
