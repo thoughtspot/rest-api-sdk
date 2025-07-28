@@ -3,8 +3,8 @@ apply plugin: 'eclipse'
 apply plugin: 'java'
 apply plugin: 'com.diffplug.spotless'
 
-group = 'io.github.thoughtspot'
-version = '2.15.1'
+group = 'com.thoughtspot'
+version = '2.16.0'
 
 buildscript {
     repositories {
@@ -92,11 +92,11 @@ if (hasProperty('target') && target == 'android') {
     publishing {
         publications {
             mavenJava(MavenPublication) {
-                artifactId = 'rest-api-sdk-lib'
+                artifactId = 'rest-api-sdk'
                 from components.java
 
                 pom {
-                    name = 'rest-api-sdk-lib'
+                    name = 'rest-api-sdk'
                     description = 'ThoughtSpot Java Rest API SDK'
                     url = 'https://github.com/thoughtspot/rest-api-sdk/tree/release/sdks/java'
 

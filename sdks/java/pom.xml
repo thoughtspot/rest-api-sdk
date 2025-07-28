@@ -2,12 +2,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.github.thoughtspot</groupId>
-    <artifactId>rest-api-sdk-lib</artifactId>
-    <version>2.15.1</version>
+    <groupId>com.thoughtspot</groupId>
+    <artifactId>rest-api-sdk</artifactId>
+    <version>2.16.0</version>
     <packaging>jar</packaging>
 
-    <name>rest-api-sdk-lib</name>
+    <name>rest-api-sdk</name>
     <description>ThoughtSpot Java Rest API SDK</description>
     <url>https://github.com/thoughtspot/rest-api-sdk/tree/release/sdks/java</url>
 

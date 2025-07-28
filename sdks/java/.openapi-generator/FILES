@@ -50,6 +50,8 @@ docs/CreateConnectionRequest.md
 docs/CreateConnectionResponse.md
 docs/CreateConversationRequest.md
 docs/CreateCustomActionRequest.md
+docs/CreateEmailCustomisationRequest.md
+docs/CreateEmailCustomisationResponse.md
 docs/CreateOrgRequest.md
 docs/CreateRoleRequest.md
 docs/CreateScheduleRequest.md
@@ -81,6 +83,7 @@ docs/DeleteMetadataRequest.md
 docs/DeleteMetadataTypeInput.md
 docs/DeployCommitRequest.md
 docs/DeployResponse.md
+docs/EmailCustomisationApi.md
 docs/ErrorResponse.md
 docs/EurekaDecomposeQueryResponse.md
 docs/EurekaLLMDecomposeQueryResponse.md
@@ -154,6 +157,7 @@ docs/ObjectIDAndName.md
 docs/Org.md
 docs/OrgInfo.md
 docs/OrgResponse.md
+docs/OrgType.md
 docs/OrgsApi.md
 docs/ParameterValues.md
 docs/ParameterizeMetadataRequest.md
@@ -243,6 +247,7 @@ docs/SqlQueryResponse.md
 docs/SystemApi.md
 docs/SystemConfig.md
 docs/SystemInfo.md
+docs/SystemOverrideInfo.md
 docs/Table.md
 docs/Tag.md
 docs/TagMetadataTypeInput.md
@@ -322,6 +327,7 @@ src/main/java/com/thoughtspot/client/api/ConnectionsApi.java
 src/main/java/com/thoughtspot/client/api/CustomActionApi.java
 src/main/java/com/thoughtspot/client/api/DataApi.java
 src/main/java/com/thoughtspot/client/api/DbtApi.java
+src/main/java/com/thoughtspot/client/api/EmailCustomisationApi.java
 src/main/java/com/thoughtspot/client/api/GroupsApi.java
 src/main/java/com/thoughtspot/client/api/LogApi.java
 src/main/java/com/thoughtspot/client/api/MetadataApi.java
@@ -383,6 +389,8 @@ src/main/java/com/thoughtspot/client/model/CreateConnectionRequest.java
 src/main/java/com/thoughtspot/client/model/CreateConnectionResponse.java
 src/main/java/com/thoughtspot/client/model/CreateConversationRequest.java
 src/main/java/com/thoughtspot/client/model/CreateCustomActionRequest.java
+src/main/java/com/thoughtspot/client/model/CreateEmailCustomisationRequest.java
+src/main/java/com/thoughtspot/client/model/CreateEmailCustomisationResponse.java
 src/main/java/com/thoughtspot/client/model/CreateOrgRequest.java
 src/main/java/com/thoughtspot/client/model/CreateRoleRequest.java
 src/main/java/com/thoughtspot/client/model/CreateScheduleRequest.java
@@ -481,6 +489,7 @@ src/main/java/com/thoughtspot/client/model/ObjectIDAndName.java
 src/main/java/com/thoughtspot/client/model/Org.java
 src/main/java/com/thoughtspot/client/model/OrgInfo.java
 src/main/java/com/thoughtspot/client/model/OrgResponse.java
+src/main/java/com/thoughtspot/client/model/OrgType.java
 src/main/java/com/thoughtspot/client/model/ParameterValues.java
 src/main/java/com/thoughtspot/client/model/ParameterizeMetadataRequest.java
 src/main/java/com/thoughtspot/client/model/ParametersListItem.java
@@ -564,6 +573,7 @@ src/main/java/com/thoughtspot/client/model/SqlQuery.java
 src/main/java/com/thoughtspot/client/model/SqlQueryResponse.java
 src/main/java/com/thoughtspot/client/model/SystemConfig.java
 src/main/java/com/thoughtspot/client/model/SystemInfo.java
+src/main/java/com/thoughtspot/client/model/SystemOverrideInfo.java
 src/main/java/com/thoughtspot/client/model/Table.java
 src/main/java/com/thoughtspot/client/model/Tag.java
 src/main/java/com/thoughtspot/client/model/TagMetadataTypeInput.java
@@ -610,6 +620,7 @@ src/test/java/com/thoughtspot/client/api/ConnectionsApiTest.java
 src/test/java/com/thoughtspot/client/api/CustomActionApiTest.java
 src/test/java/com/thoughtspot/client/api/DataApiTest.java
 src/test/java/com/thoughtspot/client/api/DbtApiTest.java
+src/test/java/com/thoughtspot/client/api/EmailCustomisationApiTest.java
 src/test/java/com/thoughtspot/client/api/GroupsApiTest.java
 src/test/java/com/thoughtspot/client/api/LogApiTest.java
 src/test/java/com/thoughtspot/client/api/MetadataApiTest.java
@@ -666,6 +677,8 @@ src/test/java/com/thoughtspot/client/model/CreateConnectionRequestTest.java
 src/test/java/com/thoughtspot/client/model/CreateConnectionResponseTest.java
 src/test/java/com/thoughtspot/client/model/CreateConversationRequestTest.java
 src/test/java/com/thoughtspot/client/model/CreateCustomActionRequestTest.java
+src/test/java/com/thoughtspot/client/model/CreateEmailCustomisationRequestTest.java
+src/test/java/com/thoughtspot/client/model/CreateEmailCustomisationResponseTest.java
 src/test/java/com/thoughtspot/client/model/CreateOrgRequestTest.java
 src/test/java/com/thoughtspot/client/model/CreateRoleRequestTest.java
 src/test/java/com/thoughtspot/client/model/CreateScheduleRequestTest.java
@@ -764,6 +777,7 @@ src/test/java/com/thoughtspot/client/model/ObjectIDAndNameTest.java
 src/test/java/com/thoughtspot/client/model/OrgInfoTest.java
 src/test/java/com/thoughtspot/client/model/OrgResponseTest.java
 src/test/java/com/thoughtspot/client/model/OrgTest.java
+src/test/java/com/thoughtspot/client/model/OrgTypeTest.java
 src/test/java/com/thoughtspot/client/model/ParameterValuesTest.java
 src/test/java/com/thoughtspot/client/model/ParameterizeMetadataRequestTest.java
 src/test/java/com/thoughtspot/client/model/ParametersListItemInputTest.java
@@ -847,6 +861,7 @@ src/test/java/com/thoughtspot/client/model/SqlQueryResponseTest.java
 src/test/java/com/thoughtspot/client/model/SqlQueryTest.java
 src/test/java/com/thoughtspot/client/model/SystemConfigTest.java
 src/test/java/com/thoughtspot/client/model/SystemInfoTest.java
+src/test/java/com/thoughtspot/client/model/SystemOverrideInfoTest.java
 src/test/java/com/thoughtspot/client/model/TableTest.java
 src/test/java/com/thoughtspot/client/model/TagMetadataTypeInputTest.java
 src/test/java/com/thoughtspot/client/model/TagTest.java
@@ -887,3 +902,4 @@ src/test/java/com/thoughtspot/client/model/VariableDetailInputTest.java
 src/test/java/com/thoughtspot/client/model/VariableTest.java
 src/test/java/com/thoughtspot/client/model/VariableValueInputTest.java
 src/test/java/com/thoughtspot/client/model/VariableValueTest.java
+utils/settings.xml

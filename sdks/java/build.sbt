@@ -1,8 +1,8 @@
 lazy val root = (project in file(".")).
   settings(
-    organization := "io.github.thoughtspot",
-    name := "rest-api-sdk-lib",
-    version := "2.15.1",
+    organization := "com.thoughtspot",
+    name := "rest-api-sdk",
+    version := "2.16.0",
     scalaVersion := "2.11.4",
     scalacOptions ++= Seq("-feature"),
     javacOptions in compile ++= Seq("-Xlint:deprecation"),
