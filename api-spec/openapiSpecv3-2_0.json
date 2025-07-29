@@ -5578,7 +5578,8 @@
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
-                        "CAN_SETUP_VERSION_CONTROL"
+                        "CAN_SETUP_VERSION_CONTROL",
+                        "CAN_MANAGE_WEBHOOKS"
                       ]
                     }
                   },
@@ -8421,7 +8422,8 @@
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
                         "CAN_SETUP_VERSION_CONTROL",
-                        "PREVIEW_THOUGHTSPOT_SAGE"
+                        "PREVIEW_THOUGHTSPOT_SAGE",
+                        "CAN_MANAGE_WEBHOOKS"
                       ]
                     }
                   },
@@ -8646,7 +8648,8 @@
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
-                        "CAN_SETUP_VERSION_CONTROL"
+                        "CAN_SETUP_VERSION_CONTROL",
+                        "CAN_MANAGE_WEBHOOKS"
                       ]
                     }
                   },
@@ -8803,7 +8806,8 @@
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
-                        "PREVIEW_THOUGHTSPOT_SAGE"
+                        "PREVIEW_THOUGHTSPOT_SAGE",
+                        "CAN_MANAGE_WEBHOOKS"
                       ]
                     }
                   }
@@ -13304,7 +13308,8 @@
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
-                        "CAN_SETUP_VERSION_CONTROL"
+                        "CAN_SETUP_VERSION_CONTROL",
+                        "CAN_MANAGE_WEBHOOKS"
                       ]
                     }
                   },
@@ -17658,7 +17663,8 @@
                 "CAN_ACCESS_ANALYST_STUDIO",
                 "CAN_MANAGE_ANALYST_STUDIO",
                 "PREVIEW_DOCUMENT_SEARCH",
-                "CAN_SETUP_VERSION_CONTROL"
+                "CAN_SETUP_VERSION_CONTROL",
+                "CAN_MANAGE_WEBHOOKS"
               ]
             },
             "description": "Privileges granted to the role."
@@ -20214,7 +20220,8 @@
                 "CAN_MANAGE_ANALYST_STUDIO",
                 "PREVIEW_DOCUMENT_SEARCH",
                 "CAN_SETUP_VERSION_CONTROL",
-                "PREVIEW_THOUGHTSPOT_SAGE"
+                "PREVIEW_THOUGHTSPOT_SAGE",
+                "CAN_MANAGE_WEBHOOKS"
               ]
             },
             "description": "Privileges granted to the role."
