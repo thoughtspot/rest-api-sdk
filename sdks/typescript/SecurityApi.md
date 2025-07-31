@@ -7,9 +7,7 @@ Method | HTTP request | Description
 [**assignChangeAuthor**](SecurityApi.md#assignChangeAuthor) | **POST** /api/rest/2.0/security/metadata/assign | 
 [**fetchPermissionsOfPrincipals**](SecurityApi.md#fetchPermissionsOfPrincipals) | **POST** /api/rest/2.0/security/principals/fetch-permissions | 
 [**fetchPermissionsOnMetadata**](SecurityApi.md#fetchPermissionsOnMetadata) | **POST** /api/rest/2.0/security/metadata/fetch-permissions | 
-[**publishMetadata**](SecurityApi.md#publishMetadata) | **POST** /api/rest/2.0/security/metadata/publish | 
 [**shareMetadata**](SecurityApi.md#shareMetadata) | **POST** /api/rest/2.0/security/metadata/share | 
-[**unpublishMetadata**](SecurityApi.md#unpublishMetadata) | **POST** /api/rest/2.0/security/metadata/unpublish | 
 
 
 # **assignChangeAuthor**
@@ -234,77 +232,6 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-# **publishMetadata**
-> void publishMetadata(publishMetadataRequest)
-
- Version: 10.9.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
-
-### Example
-
-
-```typescript
-import { createBearerAuthenticationConfig, SecurityApi, PublishMetadataRequest } from '@thoughtspot/rest-api-sdk';
-
-const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
-    username: "YOUR_USERNAME",
-    password: "YOUR_PASSWORD",
-});
-const apiInstance = new SecurityApi(configuration);
-
-apiInstance.publishMetadata(
-  // PublishMetadataRequest
-  {
-    metadata: [
-      {
-        identifier: "identifier_example",
-        type: "LIVEBOARD",
-      },
-    ],
-    org_identifiers: [
-      "org_identifiers_example",
-    ],
-    skip_validation: true,
-  } 
-).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
-
-
-```
-
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **publishMetadataRequest** | **PublishMetadataRequest**|  |
-
-
-### Return type
-
-**void**
-
-### Authorization
-
-[bearerAuth](README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**204** | Publishing metadata objects is successful. |  -  |
-**400** | Invalid request. |  -  |
-**401** | Unauthorized access. |  -  |
-**403** | Forbidden access. |  -  |
-**500** | Unexpected error |  -  |
-
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
-
 # **shareMetadata**
 > void shareMetadata(shareMetadataRequest)
 
@@ -386,78 +313,6 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **204** | Sharing metadata objects is successful. |  -  |
-**400** | Invalid request. |  -  |
-**401** | Unauthorized access. |  -  |
-**403** | Forbidden access. |  -  |
-**500** | Unexpected error |  -  |
-
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
-
-# **unpublishMetadata**
-> void unpublishMetadata(unpublishMetadataRequest)
-
- Version: 10.9.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
-
-### Example
-
-
-```typescript
-import { createBearerAuthenticationConfig, SecurityApi, UnpublishMetadataRequest } from '@thoughtspot/rest-api-sdk';
-
-const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
-    username: "YOUR_USERNAME",
-    password: "YOUR_PASSWORD",
-});
-const apiInstance = new SecurityApi(configuration);
-
-apiInstance.unpublishMetadata(
-  // UnpublishMetadataRequest
-  {
-    force: true,
-    include_dependencies: true,
-    metadata: [
-      {
-        identifier: "identifier_example",
-        type: "LIVEBOARD",
-      },
-    ],
-    org_identifiers: [
-      "org_identifiers_example",
-    ],
-  } 
-).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
-
-
-```
-
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **unpublishMetadataRequest** | **UnpublishMetadataRequest**|  |
-
-
-### Return type
-
-**void**
-
-### Authorization
-
-[bearerAuth](README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**204** | Unpublishing metadata objects is successful. |  -  |
 **400** | Invalid request. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Forbidden access. |  -  |

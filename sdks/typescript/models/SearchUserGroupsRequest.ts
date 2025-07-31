@@ -71,14 +71,6 @@ export class SearchUserGroupsRequest {
     */
     'record_size'?: number;
     'sort_options'?: SearchUserGroupsRequestSortOptions;
-    /**
-    * <div>Version: 10.10.0.cl or later </div>  Define Parameter to consider if the users should be included in group search response.
-    */
-    'include_users'?: boolean | null;
-    /**
-    * <div>Version: 10.10.0.cl or later </div>  Define Parameter to consider if the sub groups should be included in group search response.
-    */
-    'include_sub_groups'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -171,18 +163,6 @@ export class SearchUserGroupsRequest {
             "name": "sort_options",
             "baseName": "sort_options",
             "type": "SearchUserGroupsRequestSortOptions",
-            "format": ""
-        },
-        {
-            "name": "include_users",
-            "baseName": "include_users",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "include_sub_groups",
-            "baseName": "include_sub_groups",
-            "type": "boolean",
             "format": ""
         }    ];
 
