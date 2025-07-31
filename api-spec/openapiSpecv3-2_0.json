@@ -2447,7 +2447,8 @@
                       "KEY_PAIR",
                       "OAUTH_WITH_PKCE",
                       "EXTOAUTH_WITH_PKCE",
-                      "OAUTH_WITH_PEZ"
+                      "OAUTH_WITH_PEZ",
+                      "OAUTH_CLIENT_CREDENTIALS"
                     ]
                   },
                   "show_resolved_parameters": {
