@@ -5243,7 +5243,9 @@
                     "type": "string",
                     "enum": [
                       "LOCAL_GROUP",
-                      "LDAP_GROUP"
+                      "LDAP_GROUP",
+                      "TEAM_GROUP",
+                      "TENANT_GROUP"
                     ]
                   },
                   "user_identifiers": {
@@ -5596,7 +5598,9 @@
                     "type": "string",
                     "enum": [
                       "LOCAL_GROUP",
-                      "LDAP_GROUP"
+                      "LDAP_GROUP",
+                      "TEAM_GROUP",
+                      "TENANT_GROUP"
                     ]
                   },
                   "user_identifiers": {
@@ -5798,7 +5802,9 @@
                     "type": "string",
                     "enum": [
                       "LOCAL_GROUP",
-                      "LDAP_GROUP"
+                      "LDAP_GROUP",
+                      "TEAM_GROUP",
+                      "TENANT_GROUP"
                     ]
                   },
                   "user_identifiers": {
@@ -15892,7 +15898,9 @@
             "type": "string",
             "enum": [
               "LOCAL_GROUP",
-              "LDAP_GROUP"
+              "LDAP_GROUP",
+              "TEAM_GROUP",
+              "TENANT_GROUP"
             ],
             "description": "Type of the group.",
             "nullable": true
@@ -19260,7 +19268,9 @@
             "type": "string",
             "enum": [
               "LOCAL_GROUP",
-              "LDAP_GROUP"
+              "LDAP_GROUP",
+              "TEAM_GROUP",
+              "TENANT_GROUP"
             ],
             "description": "Type of the group.",
             "nullable": true
