@@ -228,10 +228,10 @@
         }
       }
     },
-    "/api/rest/2.0/ai/analytical-questions/v2/": {
+    "/api/rest/2.0/ai/relevant-questions/": {
       "post": {
         "operationId": "getRelevantQuestions",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.11.0.cl or later</span>\n\nBreaks down a user-submitted query into a series of analytical sub-questions using relevant contextual metadata.\n\nTo use this API, the user must have at least view-level access to the referenced metadata objects.\n\n#### Usage guidelines\n\nTo enable accurate query decomposition, the request must include at least one of the following metadata identifiers within `context_metadata`: `answer_ids`, `liveboard_ids`, or `worksheet_ids`.\n\nYou can further enhance the quality and precision of decomposition by providing additional context such as:\n- `content`: user-supplied data like CSV or text\n- `instructions`: specific user directions for tailoring the decomposition\n- `conversation_id`: unique identifier to preserve context across interactions\n\nIf the API request is successful, ThoughtSpot returns a list of decomposed analytical queries, each aligned with the user's original question.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.11.0.cl or later</span>\n\nBreaks down a user-submitted query into a series of analytical sub-questions using relevant contextual metadata.\n\nTo use this API, the user must have at least view-level access to the referenced metadata objects.\n\n#### Usage guidelines\n\nTo accurately generate relevant questions, the request must include at least one of the following metadata identifiers within `metadata` : `conversation_identifier`, `answer_identifiers`, `liveboard_identifiers`, or `data_source_identifiers`.\n\nYou can further enhance the quality and precision of breakdown by providing additional `context` such as:\n\n- `content`: User provided content like text data, csv data as a string message to provide context & potentially improve the quality of the response.\n- `instructions`: User specific text instructions sent to AI system for processing the query.\n\nAdditional optional parameters include:\n\n- `limit_relevant_questions`: Controls the maximum number of relevant questions returned. Defaults to 5 if not specified.\n- `bypass_cache`: If set to true, forces fresh computation instead of returning cached results.\n\nIf the API request is successful, ThoughtSpot returns a list of relevant analytical queries, each aligned with the user's original question. Each returned question includes the query string, along with the identifier and name of the corresponding data source.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "10.11.0.cl"
@@ -242,46 +242,41 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "content": {
-                    "description": "User provided content like text data, csv data as a string message to provide context & potentially improve the quality of the response.",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "context_metadata": {
-                    "description": "Context metadata to provide context for decomposing user query into analytical queries that can be run on them.",
+                  "metadata": {
+                    "description": "metadata for the query to enable generation of relevant sub-questions; at least one context identifier is required.",
                     "allOf": [
                       {
-                        "$ref": "#/components/schemas/ContextMetadata"
+                        "$ref": "#/components/schemas/Metadata"
                       }
                     ]
                   },
-                  "max_decomposed_queries": {
-                    "description": "Maximum number of decomposed queries that is allowed in the response, default = 5.",
+                  "limit_relevant_questions": {
+                    "description": "Maximum number of relevant questions that is allowed in the response, default = 5.",
                     "type": "integer",
                     "format": "int32"
                   },
                   "bypass_cache": {
-                    "description": "List of worksheetIds to provide context for decomposing user query into analytical queries that can be run on them.",
+                    "description": "If true, results are not returned from cache & calculated every time.",
                     "type": "boolean",
                     "nullable": true
                   },
-                  "instructions": {
-                    "description": "User specific instructions for processing the @query.",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
                   "query": {
-                    "description": "User query which is a topical/goal oriented question that needs to be broken down into smaller simple analytical questions.",
+                    "description": "A user query that requires breaking down into smaller, more manageable analytical questions to facilitate better understanding and analysis.",
                     "type": "string"
+                  },
+                  "context": {
+                    "description": "Additional context to guide the response.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/Context"
+                      }
+                    ]
                   }
                 },
                 "required": [
-                  "context_metadata",
-                  "query"
+                  "metadata",
+                  "query",
+                  "context"
                 ]
               }
             }
@@ -17996,18 +17991,23 @@
         },
         "description": "MetadataType InputType used in Custom Action API's"
       },
-      "ContextMetadata": {
+      "Metadata": {
         "type": "object",
+        "required": [
+          "id",
+          "name",
+          "type"
+        ],
         "properties": {
-          "data_source_ids": {
+          "data_source_identifiers": {
             "type": "array",
             "items": {
               "type": "string"
             },
-            "description": "List of data_source_ids to provide context for decomposing user query into analytical queries that can be run on them.",
+            "description": "List of data_source_identifiers to provide context for breaking down user query into analytical queries that can be run on them.",
             "nullable": true
           },
-          "answer_ids": {
+          "answer_identifiers": {
             "type": "array",
             "items": {
               "type": "string"
@@ -18015,17 +18015,51 @@
             "description": "List of answer unique identifiers (GUIDs) whose data will be used to guide the response.",
             "nullable": true
           },
-          "conversation_id": {
+          "conversation_identifier": {
             "type": "string",
             "description": "Unique identifier to denote current conversation.",
             "nullable": true
           },
-          "liveboard_ids": {
+          "liveboard_identifiers": {
             "type": "array",
             "items": {
               "type": "string"
             },
             "description": "List of liveboard unique identifiers (GUIDs) whose data will be used to guide the response.",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "description": "Unique ID of the metadata."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the metadata."
+          },
+          "type": {
+            "type": "string",
+            "description": "  Type of metadata.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier."
+          }
+        },
+        "description": "Unique ID or name of the metadata."
+      },
+      "Context": {
+        "type": "object",
+        "properties": {
+          "instructions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "User specific text instructions sent to AI system for processing the query.",
+            "nullable": true
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "User provided content like text data, csv data as a string message to provide context & potentially improve the quality of the response.",
             "nullable": true
           }
         }
@@ -18038,7 +18072,7 @@
             "items": {
               "$ref": "#/components/schemas/eureka_RelevantQuestion"
             },
-            "description": "List of relevant questions that can be run on their respective worksheet/data sources.",
+            "description": "List of relevant questions that can be run on their respective data sources.",
             "nullable": true
           }
         }
@@ -18051,14 +18085,14 @@
             "description": "NL query that can be run using spotter aka natural language search to get an AI generated answer.",
             "nullable": true
           },
-          "worksheet_id": {
+          "data_source_identifier": {
             "type": "string",
-            "description": "Unique identifier of the worksheet on which this query can be run on.",
+            "description": "Unique identifier of the data source on which this query can be run on.",
             "nullable": true
           },
-          "worksheet_name": {
+          "data_source_name": {
             "type": "string",
-            "description": "Display name of the worksheet on which this query can be run on.",
+            "description": "Display name of the data source on which this query can be run on.",
             "nullable": true
           }
         }
