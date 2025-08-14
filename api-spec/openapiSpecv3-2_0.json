@@ -14,6 +14,14 @@
       "description": "Roles for version 10.4.0.cl"
     },
     {
+      "name": "10.13.0.cl",
+      "id": "10.13.0.cl",
+      "tags": [
+        "10.13.0.cl"
+      ],
+      "description": "Roles for version 10.13.0.cl"
+    },
+    {
       "name": "10.11.0.cl",
       "id": "10.11.0.cl",
       "tags": [
@@ -201,6 +209,78 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Conversation"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/data-source-suggestions": {
+      "post": {
+        "operationId": "getDataSourceSuggestions",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.13.0.cl or later</span>\n\nProvides relevant data source recommendations for a user-submitted natural language query.\n\nTo use this API, the user must have at least view-level access to the underlying metadata entities referenced in the response.\n\n#### Usage guidelines\n\nThe request must include a `query` string via the request body.\n\nThe returned results include metadata such as:\n- `confidence`: a float indicating the model's confidence in the relevance of each recommendation\n- `details`: includes `data_source_identifier`, `data_source_name`, and `description` of each recommended data source\n- `reasoning`: rationale provided by the LLM to explain why each data source was recommended\n\nIf the API request is successful, ThoughtSpot returns a ranked list of data sources, each annotated with relevant reasoning.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before it is made Generally Available.\n> * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "10.13.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "description": "User query used to suggest data sources.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "query"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_DataSourceSuggestionResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_DataSourceSuggestionResponse"
                 }
               }
             }
@@ -18165,6 +18245,60 @@
           "worksheetName": {
             "type": "string",
             "description": "Display name of the worksheet on which this query can be run on.",
+            "nullable": true
+          }
+        }
+      },
+      "eureka_DataSourceSuggestionResponse": {
+        "type": "object",
+        "properties": {
+          "data_sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataSource"
+            },
+            "description": "List of data sources suggested.",
+            "nullable": true
+          }
+        }
+      },
+      "DataSource": {
+        "type": "object",
+        "properties": {
+          "confidence": {
+            "type": "number",
+            "format": "float",
+            "description": "Confidence score for the data source suggestion.",
+            "nullable": true
+          },
+          "details": {
+            "$ref": "#/components/schemas/EntityHeader",
+            "description": "Details of the data source.",
+            "nullable": true
+          },
+          "reasoning": {
+            "type": "string",
+            "description": "LLM reasoning for the data source.",
+            "nullable": true
+          }
+        }
+      },
+      "EntityHeader": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Description of the data source.",
+            "nullable": true
+          },
+          "data_source_name": {
+            "type": "string",
+            "description": "Display name of the data source.",
+            "nullable": true
+          },
+          "data_source_identifier": {
+            "type": "string",
+            "description": "Unique identifier of the data source.",
             "nullable": true
           }
         }
