@@ -215,10 +215,10 @@
     "/api/rest/2.0/ai/analytical-questions": {
       "post": {
         "operationId": "queryGetDecomposedQuery",
-        "description": "<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.7.0.cl or later</span>",
+        "description": "<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.11.0.cl or later</span>",
         "tags": [
           "AI",
-          "10.7.0.cl"
+          "10.11.0.cl"
         ],
         "requestBody": {
           "content": {
