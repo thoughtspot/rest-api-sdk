@@ -6,20 +6,20 @@
   },
   "x-roles": [
     {
-      "name": "10.4.0.cl",
-      "id": "10.4.0.cl",
-      "tags": [
-        "10.4.0.cl"
-      ],
-      "description": "Roles for version 10.4.0.cl"
-    },
-    {
       "name": "10.13.0.cl",
       "id": "10.13.0.cl",
       "tags": [
         "10.13.0.cl"
       ],
       "description": "Roles for version 10.13.0.cl"
+    },
+    {
+      "name": "10.4.0.cl",
+      "id": "10.4.0.cl",
+      "tags": [
+        "10.4.0.cl"
+      ],
+      "description": "Roles for version 10.4.0.cl"
     },
     {
       "name": "10.11.0.cl",
@@ -160,6 +160,91 @@
   ],
   "tags": [],
   "paths": {
+    "/api/rest/2.0/ai/agent/conversation/create": {
+      "post": {
+        "operationId": "createAgentConversation",
+        "description": "<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.13.0.cl or later</span>",
+        "tags": [
+          "AI",
+          "10.13.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "context": {
+                    "description": "Context for the conversation.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/ContextPayloadV2Input"
+                      }
+                    ]
+                  },
+                  "conversation_settings": {
+                    "description": "Conversation settings.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/ConversationSettingsInput"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "context",
+                  "conversation_settings"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentConversation"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentConversation"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/ai/conversation/create": {
       "post": {
         "operationId": "createConversation",
@@ -21420,6 +21505,118 @@
             "type": "string",
             "description": "User friendly tokens for the response.",
             "nullable": true
+          }
+        }
+      },
+      "ContextPayloadV2Input": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "answer",
+              "liveboard",
+              "data_source"
+            ],
+            "description": "Type of the context.",
+            "nullable": true
+          },
+          "answer_context": {
+            "$ref": "#/components/schemas/AnswerContextInput",
+            "description": "Answer context.",
+            "nullable": true
+          },
+          "liveboard_context": {
+            "$ref": "#/components/schemas/LBContextInput",
+            "description": "Liveboard context.",
+            "nullable": true
+          },
+          "data_source_context": {
+            "$ref": "#/components/schemas/DataSourceContextInput",
+            "description": "Data source context.",
+            "nullable": true
+          }
+        }
+      },
+      "AnswerContextInput": {
+        "type": "object",
+        "required": [
+          "session_identifier",
+          "generation_number"
+        ],
+        "properties": {
+          "session_identifier": {
+            "type": "string",
+            "description": "Unique identifier of the answer session."
+          },
+          "generation_number": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Generation number of the answer."
+          }
+        }
+      },
+      "LBContextInput": {
+        "type": "object",
+        "required": [
+          "liveboard_identifier",
+          "visualization_identifier"
+        ],
+        "properties": {
+          "liveboard_identifier": {
+            "type": "string",
+            "description": "Unique identifier of the liveboard."
+          },
+          "visualization_identifier": {
+            "type": "string",
+            "description": "Unique identifier of the visualization."
+          }
+        }
+      },
+      "DataSourceContextInput": {
+        "type": "object",
+        "required": [
+          "guid"
+        ],
+        "properties": {
+          "guid": {
+            "type": "string",
+            "description": "Unique identifier of the data source."
+          }
+        }
+      },
+      "ConversationSettingsInput": {
+        "type": "object",
+        "properties": {
+          "enable_contextual_change_analysis": {
+            "type": "boolean",
+            "default": false,
+            "description": "Enable contextual change analysis.",
+            "nullable": true
+          },
+          "enable_natural_language_answer_generation": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable natural language answer generation.",
+            "nullable": true
+          },
+          "enable_reasoning": {
+            "type": "boolean",
+            "default": false,
+            "description": "Enable reasoning.",
+            "nullable": true
+          }
+        }
+      },
+      "AgentConversation": {
+        "type": "object",
+        "required": [
+          "conversation_id"
+        ],
+        "properties": {
+          "conversation_id": {
+            "type": "string",
+            "description": "Unique identifier of the conversation."
           }
         }
       },
