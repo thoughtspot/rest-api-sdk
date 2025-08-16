@@ -603,6 +603,81 @@
         }
       }
     },
+    "/api/rest/2.0/ai/agent/conversation/converse": {
+      "post": {
+        "operationId": "sendAgentMessage",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.13.0.cl or later</span>\n\nThis API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages. \nTo use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.\n\n\n#### Usage guidelines\n\nTo initiate or continue a conversation, the request must include:\n- `conversation_identifier`: a unique session ID for continuity and message tracking\n- `messages`: an array of one or more text messages, each with a value and type\n\nAdditionally, user can specify what tool can be included `conversation_settings` parameter, which supports:\n- `enable_contextual_change_analysis` (default: false)\n- `enable_natural_language_answer_generation` (default: true)\n- `enable_reasoning` (default: false)\n\nIf the request is valid, the API returns a stream of messages in real time, including:\n- `ack`: confirms receipt of the request\n- `text / text-chunk`: content chunks, optionally formatted (e.g., markdown)\n- `answer`: the final structured response with metadata and analytics\n- `error`: if a failure occurs\n- `notification`: notification messages for operation being performed\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n> * The streaming protocol uses Server-Sent Events (SSE)\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "10.13.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "input": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/SendAgentMessageInput"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "input"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendAgentMessageResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendAgentMessageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/ai/conversation/{conversation_identifier}/converse": {
       "post": {
         "operationId": "sendMessage",
@@ -21617,6 +21692,85 @@
           "conversation_id": {
             "type": "string",
             "description": "Unique identifier of the conversation."
+          }
+        }
+      },
+      "SendAgentMessageInput": {
+        "type": "object",
+        "required": [
+          "conversation_identifier",
+          "messages",
+          "settings"
+        ],
+        "properties": {
+          "conversation_identifier": {
+            "type": "string",
+            "description": "Unique identifier for the conversation (used to track context)"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentMessageInput"
+            },
+            "description": "messages to be sent to the agent"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/AgentSettingsInput",
+            "description": "Settings that determine how the agent processes the message(s)"
+          }
+        }
+      },
+      "AgentMessageInput": {
+        "type": "object",
+        "required": [
+          "value",
+          "type"
+        ],
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "The message content"
+          },
+          "type": {
+            "type": "string",
+            "description": "The message type (e.g., \"text\", \"image\")"
+          }
+        }
+      },
+      "AgentSettingsInput": {
+        "type": "object",
+        "required": [
+          "enable_contextual_change_analysis",
+          "enable_natural_language_answer_generation",
+          "enable_reasoning"
+        ],
+        "properties": {
+          "enable_contextual_change_analysis": {
+            "type": "boolean",
+            "description": "Should the agent detect contextual shifts?"
+          },
+          "enable_natural_language_answer_generation": {
+            "type": "boolean",
+            "description": "Should the agent respond in natural language?"
+          },
+          "enable_reasoning": {
+            "type": "boolean",
+            "description": "Should reasoning be applied in responses?"
+          }
+        }
+      },
+      "SendAgentMessageResponse": {
+        "type": "object",
+        "required": [
+          "success"
+        ],
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
