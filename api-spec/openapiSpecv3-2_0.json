@@ -174,7 +174,7 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "context": {
+                  "metadata_context": {
                     "description": "Context for the conversation.",
                     "allOf": [
                       {
@@ -192,7 +192,7 @@
                   }
                 },
                 "required": [
-                  "context",
+                  "metadata_context",
                   "conversation_settings"
                 ]
               }
@@ -249,6 +249,7 @@
       "post": {
         "operationId": "createConversation",
         "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nCreates a Conversation object to start an AI-driven conversation based on a specific data model.\n\nRequires at least view access to the metadata object specified in the request.\n\n#### Usage guidelines\n\nThis API requires the `metadata_identifier` parameter to define the context for the conversation.\n\nYou can also specify the tokens to initiate the conversation as shown in this example:\n\n`\"tokens\": \"[tea],[sales],[type]\"`\n\nIf the API request is successful, ThoughtSpot returns the ID of the conversation.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "deprecated": true,
         "tags": [
           "AI",
           "10.4.0.cl"
@@ -497,6 +498,7 @@
       "post": {
         "operationId": "queryGetDecomposedQuery",
         "description": "<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.7.0.cl or later</span>",
+        "deprecated": true,
         "tags": [
           "AI",
           "10.7.0.cl"
@@ -682,6 +684,7 @@
       "post": {
         "operationId": "sendMessage",
         "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nAllows sending a follow-up message to an ongoing conversation within the context of the metadata model.\n\nRequires at least view access to the metadata object specified in the request.\n\n#### Usage guidelines\n\nThe API requires you to specify the `conversation_identifier` in the request path, and a `metadata_identifier` and `message` string in the request body.\n\nIf the API request is successful, ThoughtSpot returns the session ID, tokens used in the conversation, and visualization type.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "deprecated": true,
         "tags": [
           "AI",
           "10.4.0.cl"
@@ -5463,7 +5466,9 @@
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
-                        "CAN_SETUP_VERSION_CONTROL"
+                        "CAN_SETUP_VERSION_CONTROL",
+                        "CAN_DOWNLOAD_VISUALS",
+                        "CAN_DOWNLOAD_DETAILED_DATA"
                       ]
                     }
                   },
@@ -5819,7 +5824,9 @@
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
                         "CAN_SETUP_VERSION_CONTROL",
-                        "CAN_MANAGE_WEBHOOKS"
+                        "CAN_MANAGE_WEBHOOKS",
+                        "CAN_DOWNLOAD_VISUALS",
+                        "CAN_DOWNLOAD_DETAILED_DATA"
                       ]
                     }
                   },
@@ -6023,7 +6030,9 @@
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
-                        "CAN_SETUP_VERSION_CONTROL"
+                        "CAN_SETUP_VERSION_CONTROL",
+                        "CAN_DOWNLOAD_VISUALS",
+                        "CAN_DOWNLOAD_DETAILED_DATA"
                       ]
                     }
                   },
@@ -8667,7 +8676,9 @@
                         "PREVIEW_DOCUMENT_SEARCH",
                         "CAN_SETUP_VERSION_CONTROL",
                         "PREVIEW_THOUGHTSPOT_SAGE",
-                        "CAN_MANAGE_WEBHOOKS"
+                        "CAN_MANAGE_WEBHOOKS",
+                        "CAN_DOWNLOAD_VISUALS",
+                        "CAN_DOWNLOAD_DETAILED_DATA"
                       ]
                     }
                   },
@@ -8893,7 +8904,9 @@
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
                         "CAN_SETUP_VERSION_CONTROL",
-                        "CAN_MANAGE_WEBHOOKS"
+                        "CAN_MANAGE_WEBHOOKS",
+                        "CAN_DOWNLOAD_VISUALS",
+                        "CAN_DOWNLOAD_DETAILED_DATA"
                       ]
                     }
                   },
@@ -9051,7 +9064,9 @@
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
                         "PREVIEW_THOUGHTSPOT_SAGE",
-                        "CAN_MANAGE_WEBHOOKS"
+                        "CAN_MANAGE_WEBHOOKS",
+                        "CAN_DOWNLOAD_VISUALS",
+                        "CAN_DOWNLOAD_DETAILED_DATA"
                       ]
                     }
                   }
@@ -13553,7 +13568,9 @@
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
                         "CAN_SETUP_VERSION_CONTROL",
-                        "CAN_MANAGE_WEBHOOKS"
+                        "CAN_MANAGE_WEBHOOKS",
+                        "CAN_DOWNLOAD_VISUALS",
+                        "CAN_DOWNLOAD_DETAILED_DATA"
                       ]
                     }
                   },
@@ -17910,7 +17927,9 @@
                 "CAN_MANAGE_ANALYST_STUDIO",
                 "PREVIEW_DOCUMENT_SEARCH",
                 "CAN_SETUP_VERSION_CONTROL",
-                "CAN_MANAGE_WEBHOOKS"
+                "CAN_MANAGE_WEBHOOKS",
+                "CAN_DOWNLOAD_VISUALS",
+                "CAN_DOWNLOAD_DETAILED_DATA"
               ]
             },
             "description": "Privileges granted to the role."
@@ -19580,7 +19599,9 @@
                 "CAN_ACCESS_ANALYST_STUDIO",
                 "CAN_MANAGE_ANALYST_STUDIO",
                 "PREVIEW_DOCUMENT_SEARCH",
-                "CAN_SETUP_VERSION_CONTROL"
+                "CAN_SETUP_VERSION_CONTROL",
+                "CAN_DOWNLOAD_VISUALS",
+                "CAN_DOWNLOAD_DETAILED_DATA"
               ]
             },
             "description": "Privileges that will be assigned to the group.",
@@ -20562,7 +20583,9 @@
                 "PREVIEW_DOCUMENT_SEARCH",
                 "CAN_SETUP_VERSION_CONTROL",
                 "PREVIEW_THOUGHTSPOT_SAGE",
-                "CAN_MANAGE_WEBHOOKS"
+                "CAN_MANAGE_WEBHOOKS",
+                "CAN_DOWNLOAD_VISUALS",
+                "CAN_DOWNLOAD_DETAILED_DATA"
               ]
             },
             "description": "Privileges granted to the role."
