@@ -6,20 +6,20 @@
   },
   "x-roles": [
     {
-      "name": "10.13.0.cl",
-      "id": "10.13.0.cl",
-      "tags": [
-        "10.13.0.cl"
-      ],
-      "description": "Roles for version 10.13.0.cl"
-    },
-    {
       "name": "10.4.0.cl",
       "id": "10.4.0.cl",
       "tags": [
         "10.4.0.cl"
       ],
       "description": "Roles for version 10.4.0.cl"
+    },
+    {
+      "name": "10.13.0.cl",
+      "id": "10.13.0.cl",
+      "tags": [
+        "10.13.0.cl"
+      ],
+      "description": "Roles for version 10.13.0.cl"
     },
     {
       "name": "10.11.0.cl",
@@ -160,96 +160,10 @@
   ],
   "tags": [],
   "paths": {
-    "/api/rest/2.0/ai/agent/conversation/create": {
-      "post": {
-        "operationId": "createAgentConversation",
-        "description": "<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.13.0.cl or later</span>",
-        "tags": [
-          "AI",
-          "10.13.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "metadata_context": {
-                    "description": "Context for the conversation.",
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/ContextPayloadV2Input"
-                      }
-                    ]
-                  },
-                  "conversation_settings": {
-                    "description": "Conversation settings.",
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/ConversationSettingsInput"
-                      }
-                    ]
-                  }
-                },
-                "required": [
-                  "metadata_context",
-                  "conversation_settings"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentConversation"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentConversation"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/rest/2.0/ai/conversation/create": {
       "post": {
         "operationId": "createConversation",
         "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nCreates a Conversation object to start an AI-driven conversation based on a specific data model.\n\nRequires at least view access to the metadata object specified in the request.\n\n#### Usage guidelines\n\nThis API requires the `metadata_identifier` parameter to define the context for the conversation.\n\nYou can also specify the tokens to initiate the conversation as shown in this example:\n\n`\"tokens\": \"[tea],[sales],[type]\"`\n\nIf the API request is successful, ThoughtSpot returns the ID of the conversation.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
-        "deprecated": true,
         "tags": [
           "AI",
           "10.4.0.cl"
@@ -397,7 +311,7 @@
     "/api/rest/2.0/ai/relevant-questions/": {
       "post": {
         "operationId": "getRelevantQuestions",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.11.0.cl or later</span>\n\nBreaks down a user-submitted query into a series of analytical sub-questions using relevant contextual metadata.\n\nTo use this API, the user must have at least view-level access to the referenced metadata objects.\n\n#### Usage guidelines\n\nTo accurately generate relevant questions, the request must include at least one of the following metadata identifiers within `metadata_context` : `conversation_identifier`, `answer_identifiers`, `liveboard_identifiers`, or `data_source_identifiers`.\n\nYou can further enhance the quality and precision of breakdown by providing additional `ai_context` such as:\n\n- `content`: User provided content like text data, csv data as a string message to provide context & potentially improve the quality of the response.\n- `instructions`: User specific text instructions sent to AI system for processing the query.\n\nAdditional optional parameters include:\n\n- `limit_relevant_questions`: Controls the maximum number of relevant questions returned. Defaults to 5 if not specified.\n- `bypass_cache`: If set to true, forces fresh computation instead of returning cached results.\n\nIf the API request is successful, ThoughtSpot returns a list of relevant analytical queries, each aligned with the user's original question. Each returned question includes the query string, along with the identifier and name of the corresponding data source.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.11.0.cl or later</span>\n\nBreaks down a user-submitted query into a series of analytical sub-questions using relevant contextual metadata.\n\nTo use this API, the user must have at least view-level access to the referenced metadata objects.\n\n#### Usage guidelines\n\nTo accurately generate relevant questions, the request must include at least one of the following metadata identifiers within `metadata` : `conversation_identifier`, `answer_identifiers`, `liveboard_identifiers`, or `data_source_identifiers`.\n\nYou can further enhance the quality and precision of breakdown by providing additional `context` such as:\n\n- `content`: User provided content like text data, csv data as a string message to provide context & potentially improve the quality of the response.\n- `instructions`: User specific text instructions sent to AI system for processing the query.\n\nAdditional optional parameters include:\n\n- `limit_relevant_questions`: Controls the maximum number of relevant questions returned. Defaults to 5 if not specified.\n- `bypass_cache`: If set to true, forces fresh computation instead of returning cached results.\n\nIf the API request is successful, ThoughtSpot returns a list of relevant analytical queries, each aligned with the user's original question. Each returned question includes the query string, along with the identifier and name of the corresponding data source.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "10.11.0.cl"
@@ -408,11 +322,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "metadata_context": {
+                  "metadata": {
                     "description": "metadata for the query to enable generation of relevant sub-questions; at least one context identifier is required.",
                     "allOf": [
                       {
-                        "$ref": "#/components/schemas/MetadataContext"
+                        "$ref": "#/components/schemas/Metadata"
                       }
                     ]
                   },
@@ -430,18 +344,19 @@
                     "description": "A user query that requires breaking down into smaller, more manageable analytical questions to facilitate better understanding and analysis.",
                     "type": "string"
                   },
-                  "ai_context": {
+                  "context": {
                     "description": "Additional context to guide the response.",
                     "allOf": [
                       {
-                        "$ref": "#/components/schemas/AIContext"
+                        "$ref": "#/components/schemas/Context"
                       }
                     ]
                   }
                 },
                 "required": [
-                  "metadata_context",
-                  "query"
+                  "metadata",
+                  "query",
+                  "context"
                 ]
               }
             }
@@ -497,7 +412,6 @@
       "post": {
         "operationId": "queryGetDecomposedQuery",
         "description": "<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.7.0.cl or later</span>",
-        "deprecated": true,
         "tags": [
           "AI",
           "10.7.0.cl"
@@ -604,86 +518,10 @@
         }
       }
     },
-    "/api/rest/2.0/ai/agent/conversation/converse": {
-      "post": {
-        "operationId": "sendAgentMessage",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.13.0.cl or later</span>\n\nThis API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages. \nTo use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.\n\n\n#### Usage guidelines\n\nTo initiate or continue a conversation, the request must include:\n- `conversation_identifier`: a unique session ID for continuity and message tracking\n- `messages`: an array of one or more text messages, each with a value and type\n\nAdditionally, user can specify what tool can be included `conversation_settings` parameter, which supports:\n- `enable_contextual_change_analysis` (default: false)\n- `enable_natural_language_answer_generation` (default: true)\n- `enable_reasoning` (default: false)\n\nIf the request is valid, the API returns a stream of messages in real time, including:\n- `ack`: confirms receipt of the request\n- `text / text-chunk`: content chunks, optionally formatted (e.g., markdown)\n- `answer`: the final structured response with metadata and analytics\n- `error`: if a failure occurs\n- `notification`: notification messages for operation being performed\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n> * The streaming protocol uses Server-Sent Events (SSE)\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "AI",
-          "10.13.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "input": {
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/SendAgentMessageInput"
-                      }
-                    ]
-                  }
-                },
-                "required": [
-                  "input"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SendAgentMessageResponse"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SendAgentMessageResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/rest/2.0/ai/conversation/{conversation_identifier}/converse": {
       "post": {
         "operationId": "sendMessage",
         "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nAllows sending a follow-up message to an ongoing conversation within the context of the metadata model.\n\nRequires at least view access to the metadata object specified in the request.\n\n#### Usage guidelines\n\nThe API requires you to specify the `conversation_identifier` in the request path, and a `metadata_identifier` and `message` string in the request body.\n\nIf the API request is successful, ThoughtSpot returns the session ID, tokens used in the conversation, and visualization type.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
-        "deprecated": true,
         "tags": [
           "AI",
           "10.4.0.cl"
@@ -5465,9 +5303,7 @@
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
-                        "CAN_SETUP_VERSION_CONTROL",
-                        "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "CAN_SETUP_VERSION_CONTROL"
                       ]
                     }
                   },
@@ -5823,9 +5659,7 @@
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
                         "CAN_SETUP_VERSION_CONTROL",
-                        "CAN_MANAGE_WEBHOOKS",
-                        "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "CAN_MANAGE_WEBHOOKS"
                       ]
                     }
                   },
@@ -6029,9 +5863,7 @@
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
-                        "CAN_SETUP_VERSION_CONTROL",
-                        "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "CAN_SETUP_VERSION_CONTROL"
                       ]
                     }
                   },
@@ -8675,9 +8507,7 @@
                         "PREVIEW_DOCUMENT_SEARCH",
                         "CAN_SETUP_VERSION_CONTROL",
                         "PREVIEW_THOUGHTSPOT_SAGE",
-                        "CAN_MANAGE_WEBHOOKS",
-                        "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "CAN_MANAGE_WEBHOOKS"
                       ]
                     }
                   },
@@ -8903,9 +8733,7 @@
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
                         "CAN_SETUP_VERSION_CONTROL",
-                        "CAN_MANAGE_WEBHOOKS",
-                        "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "CAN_MANAGE_WEBHOOKS"
                       ]
                     }
                   },
@@ -9063,9 +8891,7 @@
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
                         "PREVIEW_THOUGHTSPOT_SAGE",
-                        "CAN_MANAGE_WEBHOOKS",
-                        "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "CAN_MANAGE_WEBHOOKS"
                       ]
                     }
                   }
@@ -13567,9 +13393,7 @@
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
                         "CAN_SETUP_VERSION_CONTROL",
-                        "CAN_MANAGE_WEBHOOKS",
-                        "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "CAN_MANAGE_WEBHOOKS"
                       ]
                     }
                   },
@@ -17926,9 +17750,7 @@
                 "CAN_MANAGE_ANALYST_STUDIO",
                 "PREVIEW_DOCUMENT_SEARCH",
                 "CAN_SETUP_VERSION_CONTROL",
-                "CAN_MANAGE_WEBHOOKS",
-                "CAN_DOWNLOAD_VISUALS",
-                "CAN_DOWNLOAD_DETAILED_DATA"
+                "CAN_MANAGE_WEBHOOKS"
               ]
             },
             "description": "Privileges granted to the role."
@@ -18249,8 +18071,13 @@
         },
         "description": "MetadataType InputType used in Custom Action API's"
       },
-      "MetadataContext": {
+      "Metadata": {
         "type": "object",
+        "required": [
+          "id",
+          "name",
+          "type"
+        ],
         "properties": {
           "data_source_identifiers": {
             "type": "array",
@@ -18280,10 +18107,23 @@
             },
             "description": "List of liveboard unique identifiers (GUIDs) whose data will be used to guide the response.",
             "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "description": "Unique ID of the metadata."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the metadata."
+          },
+          "type": {
+            "type": "string",
+            "description": "  Type of metadata.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier."
           }
-        }
+        },
+        "description": "Unique ID or name of the metadata."
       },
-      "AIContext": {
+      "Context": {
         "type": "object",
         "properties": {
           "instructions": {
@@ -19580,9 +19420,7 @@
                 "CAN_ACCESS_ANALYST_STUDIO",
                 "CAN_MANAGE_ANALYST_STUDIO",
                 "PREVIEW_DOCUMENT_SEARCH",
-                "CAN_SETUP_VERSION_CONTROL",
-                "CAN_DOWNLOAD_VISUALS",
-                "CAN_DOWNLOAD_DETAILED_DATA"
+                "CAN_SETUP_VERSION_CONTROL"
               ]
             },
             "description": "Privileges that will be assigned to the group.",
@@ -20564,9 +20402,7 @@
                 "PREVIEW_DOCUMENT_SEARCH",
                 "CAN_SETUP_VERSION_CONTROL",
                 "PREVIEW_THOUGHTSPOT_SAGE",
-                "CAN_MANAGE_WEBHOOKS",
-                "CAN_DOWNLOAD_VISUALS",
-                "CAN_DOWNLOAD_DETAILED_DATA"
+                "CAN_MANAGE_WEBHOOKS"
               ]
             },
             "description": "Privileges granted to the role."
@@ -21583,197 +21419,6 @@
           "display_tokens": {
             "type": "string",
             "description": "User friendly tokens for the response.",
-            "nullable": true
-          }
-        }
-      },
-      "ContextPayloadV2Input": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "answer",
-              "liveboard",
-              "data_source"
-            ],
-            "description": "Type of the context.",
-            "nullable": true
-          },
-          "answer_context": {
-            "$ref": "#/components/schemas/AnswerContextInput",
-            "description": "Answer context.",
-            "nullable": true
-          },
-          "liveboard_context": {
-            "$ref": "#/components/schemas/LBContextInput",
-            "description": "Liveboard context.",
-            "nullable": true
-          },
-          "data_source_context": {
-            "$ref": "#/components/schemas/DataSourceContextInput",
-            "description": "Data source context.",
-            "nullable": true
-          }
-        }
-      },
-      "AnswerContextInput": {
-        "type": "object",
-        "required": [
-          "session_identifier",
-          "generation_number"
-        ],
-        "properties": {
-          "session_identifier": {
-            "type": "string",
-            "description": "Unique identifier of the answer session."
-          },
-          "generation_number": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Generation number of the answer."
-          }
-        }
-      },
-      "LBContextInput": {
-        "type": "object",
-        "required": [
-          "liveboard_identifier",
-          "visualization_identifier"
-        ],
-        "properties": {
-          "liveboard_identifier": {
-            "type": "string",
-            "description": "Unique identifier of the liveboard."
-          },
-          "visualization_identifier": {
-            "type": "string",
-            "description": "Unique identifier of the visualization."
-          }
-        }
-      },
-      "DataSourceContextInput": {
-        "type": "object",
-        "required": [
-          "guid"
-        ],
-        "properties": {
-          "guid": {
-            "type": "string",
-            "description": "Unique identifier of the data source."
-          }
-        }
-      },
-      "ConversationSettingsInput": {
-        "type": "object",
-        "properties": {
-          "enable_contextual_change_analysis": {
-            "type": "boolean",
-            "default": false,
-            "description": "Enable contextual change analysis.",
-            "nullable": true
-          },
-          "enable_natural_language_answer_generation": {
-            "type": "boolean",
-            "default": true,
-            "description": "Enable natural language answer generation.",
-            "nullable": true
-          },
-          "enable_reasoning": {
-            "type": "boolean",
-            "default": false,
-            "description": "Enable reasoning.",
-            "nullable": true
-          }
-        }
-      },
-      "AgentConversation": {
-        "type": "object",
-        "required": [
-          "conversation_id"
-        ],
-        "properties": {
-          "conversation_id": {
-            "type": "string",
-            "description": "Unique identifier of the conversation."
-          }
-        }
-      },
-      "SendAgentMessageInput": {
-        "type": "object",
-        "required": [
-          "conversation_identifier",
-          "messages",
-          "settings"
-        ],
-        "properties": {
-          "conversation_identifier": {
-            "type": "string",
-            "description": "Unique identifier for the conversation (used to track context)"
-          },
-          "messages": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AgentMessageInput"
-            },
-            "description": "messages to be sent to the agent"
-          },
-          "settings": {
-            "$ref": "#/components/schemas/AgentSettingsInput",
-            "description": "Settings that determine how the agent processes the message(s)"
-          }
-        }
-      },
-      "AgentMessageInput": {
-        "type": "object",
-        "required": [
-          "value",
-          "type"
-        ],
-        "properties": {
-          "value": {
-            "type": "string",
-            "description": "The message content"
-          },
-          "type": {
-            "type": "string",
-            "description": "The message type (e.g., \"text\", \"image\")"
-          }
-        }
-      },
-      "AgentSettingsInput": {
-        "type": "object",
-        "required": [
-          "enable_contextual_change_analysis",
-          "enable_natural_language_answer_generation",
-          "enable_reasoning"
-        ],
-        "properties": {
-          "enable_contextual_change_analysis": {
-            "type": "boolean",
-            "description": "Should the agent detect contextual shifts?"
-          },
-          "enable_natural_language_answer_generation": {
-            "type": "boolean",
-            "description": "Should the agent respond in natural language?"
-          },
-          "enable_reasoning": {
-            "type": "boolean",
-            "description": "Should reasoning be applied in responses?"
-          }
-        }
-      },
-      "SendAgentMessageResponse": {
-        "type": "object",
-        "required": [
-          "success"
-        ],
-        "properties": {
-          "success": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
             "nullable": true
           }
         }
