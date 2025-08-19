@@ -606,7 +606,7 @@
     },
     "/api/rest/2.0/ai/agent/conversation/converse": {
       "post": {
-        "operationId": "sendAgentMessageStreaming",
+        "operationId": "sendAgentMessage",
         "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.13.0.cl or later</span>\n\nThis API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages. \nTo use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.\n\n\n#### Usage guidelines\n\nTo initiate or continue a conversation, the request must include:\n- `conversation_identifier`: a unique session ID for continuity and message tracking\n- `messages`: an array of one or more text messages, each with a value and type\n\nAdditionally, user can specify what tool can be included `conversation_settings` parameter, which supports:\n- `enable_contextual_change_analysis` (default: false)\n- `enable_natural_language_answer_generation` (default: true)\n- `enable_reasoning` (default: false)\n\nIf the request is valid, the API returns a stream of messages in real time, including:\n- `ack`: confirms receipt of the request\n- `text / text-chunk`: content chunks, optionally formatted (e.g., markdown)\n- `answer`: the final structured response with metadata and analytics\n- `error`: if a failure occurs\n- `notification`: notification messages for operation being performed\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n> * The streaming protocol uses Server-Sent Events (SSE)\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
@@ -21676,7 +21676,7 @@
           "enable_natural_language_answer_generation": {
             "type": "boolean",
             "default": true,
-            "description": "Enable natural language to answer generation.",
+            "description": "Enable natural language answer generation.",
             "nullable": true
           },
           "enable_reasoning": {
@@ -21751,15 +21751,15 @@
         "properties": {
           "enable_contextual_change_analysis": {
             "type": "boolean",
-            "description": "Enable contextual change analysis."
+            "description": "Should the agent detect contextual shifts?"
           },
           "enable_natural_language_answer_generation": {
             "type": "boolean",
-            "description": "Enable natural language to answer generation."
+            "description": "Should the agent respond in natural language?"
           },
           "enable_reasoning": {
             "type": "boolean",
-            "description": "Enable reasoning."
+            "description": "Should reasoning be applied in responses?"
           }
         }
       },
