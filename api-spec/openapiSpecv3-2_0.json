@@ -150,6 +150,14 @@
       "description": "Roles for version 9.5.0.cl"
     },
     {
+      "name": "10.14.0.cl",
+      "id": "10.14.0.cl",
+      "tags": [
+        "10.14.0.cl"
+      ],
+      "description": "Roles for version 10.14.0.cl"
+    },
+    {
       "name": "9.7.0.cl",
       "id": "9.7.0.cl",
       "tags": [
@@ -11814,6 +11822,88 @@
         }
       }
     },
+    "/api/rest/2.0/system/preferences/communication-channels/configure": {
+      "post": {
+        "operationId": "configureCommunicationChannelPreferences",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nConfigures communication channel preferences for the cluster or orgs. You can configure cluster-level preferences, org-specific preferences, or both. Cluster-level preferences serve as defaults, while org-specific preferences can override these defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**), `DEVELOPER` (**Has developer privilege**), or `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privileges.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "System",
+          "10.14.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cluster_preferences": {
+                    "description": "Cluster-level default configurations.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/EventChannelConfigInput"
+                    }
+                  },
+                  "org_preferences": {
+                    "description": "Org-specific configurations.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/OrgChannelConfigInput"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Communication channel preferences successfully updated."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/system/config": {
       "get": {
         "operationId": "getSystemConfig",
@@ -11992,6 +12082,129 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SystemOverrideInfo"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/system/preferences/communication-channels/search": {
+      "post": {
+        "operationId": "searchCommunicationChannelPreferences",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nSearches and retrieves communication channel preferences for the cluster or orgs. You can search for cluster-level preferences, org-specific preferences, or both. Cluster-level preferences serve as defaults, while org-specific preferences can override these defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**), `DEVELOPER` (**Has developer privilege**), or `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privileges.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "System",
+          "10.14.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cluster_preferences": {
+                    "description": "Event types to search for in cluster-level preferences.",
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "LIVEBOARD_SCHEDULE"
+                      ]
+                    }
+                  },
+                  "org_preferences": {
+                    "description": "Org-specific search criteria.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/OrgPreferenceSearchCriteriaInput"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Communication channel preferences retrieved successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommunicationChannelPreferencesResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "value": {
+                      "cluster_preferences": [
+                        {
+                          "event_type": "LIVEBOARD_SCHEDULE",
+                          "channels": [
+                            "EMAIL",
+                            "WEBHOOK"
+                          ]
+                        }
+                      ],
+                      "org_preferences": [
+                        {
+                          "org": {
+                            "id": "583464508",
+                            "name": "test_org"
+                          },
+                          "preferences": [
+                            {
+                              "event_type": "LIVEBOARD_SCHEDULE",
+                              "channels": [
+                                "EMAIL"
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             }
@@ -15890,6 +16103,114 @@
           }
         }
       },
+      "OrgPreferenceSearchCriteriaInput": {
+        "type": "object",
+        "required": [
+          "org_identifier"
+        ],
+        "properties": {
+          "org_identifier": {
+            "type": "string",
+            "description": "Unique identifier or name of the org"
+          },
+          "event_types": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "LIVEBOARD_SCHEDULE"
+              ]
+            },
+            "description": "Event types to search for. If not provided, all event types for this org are returned.",
+            "nullable": true
+          }
+        }
+      },
+      "CommunicationChannelPreferencesResponse": {
+        "type": "object",
+        "properties": {
+          "cluster_preferences": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EventChannelConfig"
+            },
+            "description": "Cluster-level default configurations.",
+            "nullable": true
+          },
+          "org_preferences": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrgChannelConfigResponse"
+            },
+            "description": "Org-specific configurations.",
+            "nullable": true
+          }
+        }
+      },
+      "EventChannelConfig": {
+        "type": "object",
+        "required": [
+          "event_type",
+          "channels"
+        ],
+        "properties": {
+          "event_type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD_SCHEDULE"
+            ],
+            "description": "Type of event for which communication channels are configured"
+          },
+          "channels": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "EMAIL",
+                "WEBHOOK"
+              ]
+            },
+            "description": "Communication channels enabled for this event type. Empty array indicates no channels are enabled."
+          }
+        }
+      },
+      "OrgChannelConfigResponse": {
+        "type": "object",
+        "required": [
+          "org",
+          "preferences"
+        ],
+        "properties": {
+          "org": {
+            "$ref": "#/components/schemas/OrgDetails",
+            "description": "Org details"
+          },
+          "preferences": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EventChannelConfig"
+            },
+            "description": "Event-specific communication channel configurations for this org"
+          }
+        }
+      },
+      "OrgDetails": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique id of the org"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the org"
+          }
+        }
+      },
       "OrgResponse": {
         "type": "object",
         "properties": {
@@ -19494,6 +19815,74 @@
           "name": {
             "type": "string",
             "description": "Name of the user."
+          }
+        }
+      },
+      "EventChannelConfigInput": {
+        "type": "object",
+        "required": [
+          "event_type",
+          "channels"
+        ],
+        "properties": {
+          "event_type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD_SCHEDULE"
+            ],
+            "description": "Type of event for which communication channels are configured"
+          },
+          "channels": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "EMAIL",
+                "WEBHOOK"
+              ]
+            },
+            "description": "Communication channels enabled for this event type. Empty array disables all channels for this event."
+          }
+        }
+      },
+      "OrgChannelConfigInput": {
+        "type": "object",
+        "required": [
+          "org_identifier"
+        ],
+        "properties": {
+          "org_identifier": {
+            "type": "string",
+            "description": "Unique identifier or name of the org"
+          },
+          "operation": {
+            "type": "string",
+            "enum": [
+              "REPLACE",
+              "RESET"
+            ],
+            "default": "REPLACE",
+            "description": "Operation to perform. REPLACE: Update preferences (default). RESET: Remove org-specific configurations, causing fallback to cluster-level preferences.",
+            "nullable": true
+          },
+          "preferences": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EventChannelConfigInput"
+            },
+            "description": "Event-specific configurations. Required for REPLACE operation.",
+            "nullable": true
+          },
+          "reset_events": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "LIVEBOARD_SCHEDULE"
+              ]
+            },
+            "description": "Event types to reset. Required for RESET operation. Org-specific configurations for these events will be removed, causing fallback to cluster-level preferences.",
+            "nullable": true
           }
         }
       },
