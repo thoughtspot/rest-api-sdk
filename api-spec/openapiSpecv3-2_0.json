@@ -150,14 +150,6 @@
       "description": "Roles for version 9.5.0.cl"
     },
     {
-      "name": "10.14.0.cl",
-      "id": "10.14.0.cl",
-      "tags": [
-        "10.14.0.cl"
-      ],
-      "description": "Roles for version 10.14.0.cl"
-    },
-    {
       "name": "9.7.0.cl",
       "id": "9.7.0.cl",
       "tags": [
@@ -2865,7 +2857,7 @@
     "/api/rest/2.0/connections/{connection_identifier}/update": {
       "post": {
         "operationId": "updateConnectionV2",
-        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nUpdates a connection object.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.\n\nTo update a connection object, pass these parameters in your API request:\n\n1. GUID of the connection object.\n2. If you are updating tables or database schema of a connection object:\n   a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.\n   b. Set `validate` to `true`.\n   \n   **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.\n\n   * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:\n\n   ```\n   {\n      \"configuration\":{\n         \"accountName\":\"thoughtspot_partner\",\n         \"user\":\"tsadmin\",\n         \"password\":\"TestConn123\",\n         \"role\":\"sysadmin\",\n         \"warehouse\":\"MEDIUM_WH\"\n      },\n      \"externalDatabases\":[\n         {\n            \"name\":\"AllDatatypes\",\n            \"isAutoCreated\":false,\n            \"schemas\":[\n               {\n                  \"name\":\"alldatatypes\",\n                  \"tables\":[\n                     {\n                        \"name\":\"allDatatypes\",\n                        \"type\":\"TABLE\",\n                        \"description\":\"\",\n                        \"selected\":true,\n                        \"linked\":true,\n                        \"columns\":[\n                           {\n                              \"name\":\"CNUMBER\",\n                              \"type\":\"INT64\",\n                              \"canImport\":true,\n                              \"selected\":true,\n                              \"isLinkedActive\":true,\n                              \"isImported\":false,\n                              \"tableName\":\"allDatatypes\",\n                              \"schemaName\":\"alldatatypes\",\n                              \"dbName\":\"AllDatatypes\"\n                           },\n                           {\n                              \"name\":\"CDECIMAL\",\n                              \"type\":\"INT64\",\n                              \"canImport\":true,\n                              \"selected\":true,\n                              \"isLinkedActive\":true,\n                              \"isImported\":false,\n                              \"tableName\":\"allDatatypes\",\n                              \"schemaName\":\"alldatatypes\",\n                              \"dbName\":\"AllDatatypes\"\n                           }\n                        ]\n                     }\n                  ]\n               }\n            ]\n         }\n      ]\n   }\n   ```\n\n3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.\n\n  **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not  specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.\n\n  * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a Snowflake connection:\n   ```\n   {\n      \"configuration\":{\n         \"accountName\":\"thoughtspot_partner\",\n         \"user\":\"tsadmin\",\n         \"password\":\"TestConn123\",\n         \"role\":\"sysadmin\",\n         \"warehouse\":\"MEDIUM_WH\"\n      },\n      \"externalDatabases\":[\n\n      ]\n   }\n   ```\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nUpdates a connection object.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.\n\nTo update a connection object, pass these parameters in your API request:\n\n1. GUID of the connection object.\n2. If you are updating tables or database schema of a connection object:\n   a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.\n   b. Set `validate` to `true`.\n   * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:\n\n   ```\n   {\n      \"configuration\":{\n         \"accountName\":\"thoughtspot_partner\",\n         \"user\":\"tsadmin\",\n         \"password\":\"TestConn123\",\n         \"role\":\"sysadmin\",\n         \"warehouse\":\"MEDIUM_WH\"\n      },\n      \"externalDatabases\":[\n         {\n            \"name\":\"AllDatatypes\",\n            \"isAutoCreated\":false,\n            \"schemas\":[\n               {\n                  \"name\":\"alldatatypes\",\n                  \"tables\":[\n                     {\n                        \"name\":\"allDatatypes\",\n                        \"type\":\"TABLE\",\n                        \"description\":\"\",\n                        \"selected\":true,\n                        \"linked\":true,\n                        \"columns\":[\n                           {\n                              \"name\":\"CNUMBER\",\n                              \"type\":\"INT64\",\n                              \"canImport\":true,\n                              \"selected\":true,\n                              \"isLinkedActive\":true,\n                              \"isImported\":false,\n                              \"tableName\":\"allDatatypes\",\n                              \"schemaName\":\"alldatatypes\",\n                              \"dbName\":\"AllDatatypes\"\n                           },\n                           {\n                              \"name\":\"CDECIMAL\",\n                              \"type\":\"INT64\",\n                              \"canImport\":true,\n                              \"selected\":true,\n                              \"isLinkedActive\":true,\n                              \"isImported\":false,\n                              \"tableName\":\"allDatatypes\",\n                              \"schemaName\":\"alldatatypes\",\n                              \"dbName\":\"AllDatatypes\"\n                           }\n                        ]\n                     }\n                  ]\n               }\n            ]\n         }\n      ]\n   }\n   ```\n\n3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.\n* A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a Snowflake connection:\n ```\n {\n    \"configuration\":{\n       \"accountName\":\"thoughtspot_partner\",\n       \"user\":\"tsadmin\",\n       \"password\":\"TestConn123\",\n       \"role\":\"sysadmin\",\n       \"warehouse\":\"MEDIUM_WH\"\n    },\n    \"externalDatabases\":[\n\n    ]\n }\n ```\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Connections",
           "10.4.0.cl"
@@ -4419,7 +4411,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -4544,7 +4536,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -4874,7 +4866,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -8476,7 +8468,7 @@
     "/api/rest/2.0/report/liveboard": {
       "post": {
         "operationId": "exportLiveboardReport",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports a Liveboard and its visualizations in PDF or PNG file format.\n\nRequires at least view access to the Liveboard.\n\n#### Usage guidelines\n\nIn the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.\n\nThe default `file_format` is PDF. For PDF downloads, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.\n\n**NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.\n\nOptionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.\n\nTo include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).  \n\n**NOTE**: Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in the PNG format in the resolution of your choice. To enable this on your instance, contact ThoughtSpot support. When this feature is enabled, the options `include_cover_page`,`include_filter_page` within the `png_options` will not be available for PNG exports.\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports a Liveboard and its visualizations in PDF or PNG file format.\n\nRequires at least view access to the Liveboard.\n\n#### Usage guidelines\n\nIn the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.\n\nThe default `file_format` is PDF. For PDF downloads, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.\n\n**NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.\n\nOptionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.\n\nTo include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).  \n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Reports",
           "9.0.0.cl"
@@ -11822,88 +11814,6 @@
         }
       }
     },
-    "/api/rest/2.0/system/preferences/communication-channels/configure": {
-      "post": {
-        "operationId": "configureCommunicationChannelPreferences",
-        "description": "\n <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nConfigures communication channel preferences for the cluster or orgs. You can configure cluster-level preferences, org-specific preferences, or both. Cluster-level preferences serve as defaults, while org-specific preferences can override these defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**), `DEVELOPER` (**Has developer privilege**), or `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privileges.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "System",
-          "10.14.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "cluster_preferences": {
-                    "description": "Cluster-level default configurations.",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/EventChannelConfigInput"
-                    }
-                  },
-                  "org_preferences": {
-                    "description": "Org-specific configurations.",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/OrgChannelConfigInput"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "204": {
-            "description": "Communication channel preferences successfully updated."
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/rest/2.0/system/config": {
       "get": {
         "operationId": "getSystemConfig",
@@ -12082,129 +11992,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SystemOverrideInfo"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/system/preferences/communication-channels/search": {
-      "post": {
-        "operationId": "searchCommunicationChannelPreferences",
-        "description": "\n <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nSearches and retrieves communication channel preferences for the cluster or orgs. You can search for cluster-level preferences, org-specific preferences, or both. Cluster-level preferences serve as defaults, while org-specific preferences can override these defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**), `DEVELOPER` (**Has developer privilege**), or `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privileges.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "System",
-          "10.14.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "cluster_preferences": {
-                    "description": "Event types to search for in cluster-level preferences.",
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "enum": [
-                        "LIVEBOARD_SCHEDULE"
-                      ]
-                    }
-                  },
-                  "org_preferences": {
-                    "description": "Org-specific search criteria.",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/OrgPreferenceSearchCriteriaInput"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Communication channel preferences retrieved successfully.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommunicationChannelPreferencesResponse"
-                },
-                "examples": {
-                  "example_1": {
-                    "value": {
-                      "cluster_preferences": [
-                        {
-                          "event_type": "LIVEBOARD_SCHEDULE",
-                          "channels": [
-                            "EMAIL",
-                            "WEBHOOK"
-                          ]
-                        }
-                      ],
-                      "org_preferences": [
-                        {
-                          "org": {
-                            "id": "583464508",
-                            "name": "test_org"
-                          },
-                          "preferences": [
-                            {
-                              "event_type": "LIVEBOARD_SCHEDULE",
-                              "channels": [
-                                "EMAIL"
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  }
                 }
               }
             }
@@ -16103,114 +15890,6 @@
           }
         }
       },
-      "OrgPreferenceSearchCriteriaInput": {
-        "type": "object",
-        "required": [
-          "org_identifier"
-        ],
-        "properties": {
-          "org_identifier": {
-            "type": "string",
-            "description": "Unique identifier or name of the org"
-          },
-          "event_types": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "LIVEBOARD_SCHEDULE"
-              ]
-            },
-            "description": "Event types to search for. If not provided, all event types for this org are returned.",
-            "nullable": true
-          }
-        }
-      },
-      "CommunicationChannelPreferencesResponse": {
-        "type": "object",
-        "properties": {
-          "cluster_preferences": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EventChannelConfig"
-            },
-            "description": "Cluster-level default configurations.",
-            "nullable": true
-          },
-          "org_preferences": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OrgChannelConfigResponse"
-            },
-            "description": "Org-specific configurations.",
-            "nullable": true
-          }
-        }
-      },
-      "EventChannelConfig": {
-        "type": "object",
-        "required": [
-          "event_type",
-          "channels"
-        ],
-        "properties": {
-          "event_type": {
-            "type": "string",
-            "enum": [
-              "LIVEBOARD_SCHEDULE"
-            ],
-            "description": "Type of event for which communication channels are configured"
-          },
-          "channels": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "EMAIL",
-                "WEBHOOK"
-              ]
-            },
-            "description": "Communication channels enabled for this event type. Empty array indicates no channels are enabled."
-          }
-        }
-      },
-      "OrgChannelConfigResponse": {
-        "type": "object",
-        "required": [
-          "org",
-          "preferences"
-        ],
-        "properties": {
-          "org": {
-            "$ref": "#/components/schemas/OrgDetails",
-            "description": "Org details"
-          },
-          "preferences": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EventChannelConfig"
-            },
-            "description": "Event-specific communication channel configurations for this org"
-          }
-        }
-      },
-      "OrgDetails": {
-        "type": "object",
-        "required": [
-          "id",
-          "name"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Unique id of the org"
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the org"
-          }
-        }
-      },
       "OrgResponse": {
         "type": "object",
         "properties": {
@@ -19818,74 +19497,6 @@
           }
         }
       },
-      "EventChannelConfigInput": {
-        "type": "object",
-        "required": [
-          "event_type",
-          "channels"
-        ],
-        "properties": {
-          "event_type": {
-            "type": "string",
-            "enum": [
-              "LIVEBOARD_SCHEDULE"
-            ],
-            "description": "Type of event for which communication channels are configured"
-          },
-          "channels": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "EMAIL",
-                "WEBHOOK"
-              ]
-            },
-            "description": "Communication channels enabled for this event type. Empty array disables all channels for this event."
-          }
-        }
-      },
-      "OrgChannelConfigInput": {
-        "type": "object",
-        "required": [
-          "org_identifier"
-        ],
-        "properties": {
-          "org_identifier": {
-            "type": "string",
-            "description": "Unique identifier or name of the org"
-          },
-          "operation": {
-            "type": "string",
-            "enum": [
-              "REPLACE",
-              "RESET"
-            ],
-            "default": "REPLACE",
-            "description": "Operation to perform. REPLACE: Update preferences (default). RESET: Remove org-specific configurations, causing fallback to cluster-level preferences.",
-            "nullable": true
-          },
-          "preferences": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EventChannelConfigInput"
-            },
-            "description": "Event-specific configurations. Required for REPLACE operation.",
-            "nullable": true
-          },
-          "reset_events": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "LIVEBOARD_SCHEDULE"
-              ]
-            },
-            "description": "Event types to reset. Required for RESET operation. Org-specific configurations for these events will be removed, causing fallback to cluster-level preferences.",
-            "nullable": true
-          }
-        }
-      },
       "TagMetadataTypeInput": {
         "type": "object",
         "required": [
@@ -20077,12 +19688,6 @@
             "type": "boolean",
             "default": false,
             "description": "Boolean flag indicating whether to export column security rules of the object. This will only be respected when the object can have column security rules and export_associated is true. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "export_with_column_aliases": {
-            "type": "boolean",
-            "default": false,
-            "description": "Boolean flag indicating whether to export column aliases of the model. This will only be respected when the object can have column aliases. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.13.0.cl or later</span>",
             "nullable": true
           }
         },
@@ -22109,13 +21714,30 @@
           "messages": {
             "type": "array",
             "items": {
-              "type": "string"
+              "$ref": "#/components/schemas/AgentMessageInput"
             },
             "description": "messages to be sent to the agent"
           },
           "settings": {
             "$ref": "#/components/schemas/AgentSettingsInput",
             "description": "Settings that determine how the agent processes the message(s)"
+          }
+        }
+      },
+      "AgentMessageInput": {
+        "type": "object",
+        "required": [
+          "value",
+          "type"
+        ],
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "The message content"
+          },
+          "type": {
+            "type": "string",
+            "description": "The message type (e.g., \"text\", \"image\")"
           }
         }
       },
