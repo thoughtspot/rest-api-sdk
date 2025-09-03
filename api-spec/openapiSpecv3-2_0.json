@@ -11832,7 +11832,7 @@
     "/api/rest/2.0/system/preferences/communication-channels/configure": {
       "post": {
         "operationId": "configureCommunicationChannelPreferences",
-        "description": "\n <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nConfigures communication channel preferences for the cluster or orgs. You can configure cluster-level preferences, org-specific preferences, or both. Cluster-level preferences serve as defaults, while org-specific preferences can override these defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**), `DEVELOPER` (**Has developer privilege**), or `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privileges.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nConfigure communication channel preferences.\n- Use `cluster_preferences` to update the default preferences for your ThoughtSpot application instance.\n- If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), use `org_preferences` to specify Org-specific preferences that override the defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege are also authorized to perform this action.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "System",
           "10.14.0.cl"
@@ -12139,7 +12139,7 @@
     "/api/rest/2.0/system/preferences/communication-channels/search": {
       "post": {
         "operationId": "searchCommunicationChannelPreferences",
-        "description": "\n <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nSearches and retrieves communication channel preferences for the cluster or orgs. You can search for cluster-level preferences, org-specific preferences, or both. Cluster-level preferences serve as defaults, while org-specific preferences can override these defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**), `DEVELOPER` (**Has developer privilege**), or `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privileges.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nFetch communication channel preferences.\n- Use `cluster_preferences` to fetch the default preferences for your ThoughtSpot application instance.\n- If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), use `org_preferences` to fetch any Org-specific preferences that override the defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege are also authorized to perform this action.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "System",
           "10.14.0.cl"
@@ -12189,7 +12189,6 @@
                         {
                           "event_type": "LIVEBOARD_SCHEDULE",
                           "channels": [
-                            "EMAIL",
                             "WEBHOOK"
                           ]
                         }
@@ -15473,6 +15472,696 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/webhooks/create": {
+      "post": {
+        "operationId": "createWebhookConfiguration",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nCreates a new webhook configuration to receive notifications for specified events. The webhook will be triggered when the configured events occur in the system.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Webhooks",
+          "10.14.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "Name of the webhook configuration.",
+                    "type": "string"
+                  },
+                  "description": {
+                    "description": "Description of the webhook configuration.",
+                    "type": "string"
+                  },
+                  "url": {
+                    "description": "The webhook endpoint URL.",
+                    "type": "string"
+                  },
+                  "url_params": {
+                    "description": "Additional URL parameters as key-value pairs.",
+                    "type": "object"
+                  },
+                  "events": {
+                    "description": "List of events to subscribe to.",
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "LIVEBOARD_SCHEDULE"
+                      ]
+                    }
+                  },
+                  "authentication": {
+                    "description": "Authorization configuration for the webhook.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/WebhookAuthenticationInput"
+                      }
+                    ]
+                  },
+                  "signature_verification": {
+                    "description": "Configuration for webhook signature verification.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/WebhookSignatureVerificationInput"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "name",
+                  "url"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Webhook configuration created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Basic webhook with Bearer token authentication",
+                    "value": {
+                      "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+                      "name": "My Liveboard Webhook",
+                      "description": "Webhook to notify external system about liveboard schedules",
+                      "org": {
+                        "id": "0",
+                        "name": "Primary"
+                      },
+                      "url": "https://myapp.example.com/webhooks/thoughtspot",
+                      "url_params": {
+                        "api_key": "abc123",
+                        "version": "v1"
+                      },
+                      "events": [
+                        "LIVEBOARD_SCHEDULE"
+                      ],
+                      "authentication": {
+                        "BEARER_TOKEN": "***"
+                      },
+                      "signature_verification": {
+                        "type": "HMAC_SHA256",
+                        "header": "X-Webhook-Signature",
+                        "algorithm": "SHA256",
+                        "secret": "***"
+                      },
+                      "created_at": "2025-08-21T21:57:10.243089030Z",
+                      "last_modified_at": "2025-08-21T21:57:10.243089030Z",
+                      "created_by": {
+                        "id": "8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b",
+                        "name": "sarah_chen"
+                      },
+                      "last_modified_by": {
+                        "id": "8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b",
+                        "name": "sarah_chen"
+                      }
+                    }
+                  },
+                  "example_2": {
+                    "description": "Webhook with OAuth2 authentication",
+                    "value": {
+                      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                      "name": "OAuth2 Webhook",
+                      "description": "Webhook with OAuth2 client credentials",
+                      "org": {
+                        "id": "0",
+                        "name": "Primary"
+                      },
+                      "url": "https://api.example.com/webhooks",
+                      "events": [
+                        "LIVEBOARD_SCHEDULE"
+                      ],
+                      "authentication": {
+                        "OAUTH2": {
+                          "authorization_url": "https://auth.example.com/oauth2/authorize",
+                          "client_id": "client_123",
+                          "client_secret": "***"
+                        }
+                      },
+                      "created_at": "2025-08-21T22:15:30.123456789Z",
+                      "last_modified_at": "2025-08-21T22:15:30.123456789Z",
+                      "created_by": {
+                        "id": "7d5e9f2a-4b8c-4d6e-9a3b-5c7e1f4a8b2d",
+                        "name": "mike_rodriguez"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/webhooks/delete": {
+      "post": {
+        "operationId": "deleteWebhookConfigurations",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nDeletes one or more webhook configurations by their unique id or name. Returns status of each deletion operation, including successfully deleted webhooks and any failures with error details.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Webhooks",
+          "10.14.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "webhook_identifiers": {
+                    "description": "List of webhook identifiers to delete.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "webhook_identifiers"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Webhook configurations deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookDeleteResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Successful deletion of multiple webhooks",
+                    "value": {
+                      "deleted_count": 2,
+                      "failed_count": 0,
+                      "deleted_webhooks": [
+                        {
+                          "id": "b9e3d8f2-4c7a-4e1b-8d3c-5f9a2b7e4c6d",
+                          "name": "Old Webhook 1",
+                          "description": "First webhook to be deleted",
+                          "org": {
+                            "id": "0",
+                            "name": "Primary"
+                          },
+                          "url": "https://old-service.example.com/webhook1",
+                          "events": [
+                            "LIVEBOARD_SCHEDULE"
+                          ],
+                          "authentication": {
+                            "BEARER_TOKEN": "***"
+                          },
+                          "created_at": "2025-08-21T15:30:00.000000000Z",
+                          "last_modified_at": "2025-08-21T15:30:00.000000000Z",
+                          "created_by": {
+                            "id": "1f4e7b2d-9c3a-4e6f-8b1d-3e7c5a9b2f4e",
+                            "name": "jennifer_patel"
+                          }
+                        },
+                        {
+                          "id": "e7c4a1f8-2b5d-4a9e-7c3f-8b1e5d4a7c9b",
+                          "name": "Old Webhook 2",
+                          "description": "Second webhook to be deleted",
+                          "org": {
+                            "id": "0",
+                            "name": "Primary"
+                          },
+                          "url": "https://old-service.example.com/webhook2",
+                          "events": [
+                            "LIVEBOARD_SCHEDULE"
+                          ],
+                          "authentication": {
+                            "API_KEY": {
+                              "key": "X-API-Key",
+                              "value": "***"
+                            }
+                          },
+                          "created_at": "2025-08-21T16:45:30.123456789Z",
+                          "last_modified_at": "2025-08-21T16:45:30.123456789Z",
+                          "created_by": {
+                            "id": "9a5c2e8f-4b7d-4c1e-9f2a-6c8e3b5d7a4c",
+                            "name": "david_thompson"
+                          }
+                        }
+                      ],
+                      "failed_webhooks": []
+                    }
+                  },
+                  "example_2": {
+                    "description": "Partial failure during deletion",
+                    "value": {
+                      "deleted_count": 1,
+                      "failed_count": 1,
+                      "deleted_webhooks": [
+                        {
+                          "id": "c8f2a5e9-3d6b-4f1e-a8c2-7e4b1d9f5a3c",
+                          "name": "Successfully Deleted Webhook",
+                          "description": "This webhook was deleted successfully",
+                          "org": {
+                            "id": "0",
+                            "name": "Primary"
+                          },
+                          "url": "https://service.example.com/webhook",
+                          "events": [
+                            "LIVEBOARD_SCHEDULE"
+                          ],
+                          "authentication": {
+                            "NO_AUTH": ""
+                          },
+                          "created_at": "2025-08-21T18:20:15.456789012Z",
+                          "last_modified_at": "2025-08-21T18:20:15.456789012Z",
+                          "created_by": {
+                            "id": "6e9c4f2a-8b5d-4e1f-9c3a-5f8b2e7d4a6c",
+                            "name": "emma_wang"
+                          }
+                        }
+                      ],
+                      "failed_webhooks": [
+                        {
+                          "id": "a3f7c1e4-9b2d-4a6e-8f3c-1e5b7a9c4f2e",
+                          "name": "Non-existent Webhook",
+                          "error_message": "Webhook not found or access denied"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/webhooks/search": {
+      "post": {
+        "operationId": "searchWebhookConfigurations",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nSearches for webhook configurations based on various criteria such as Org, webhook identifier, event type, with support for pagination and sorting. Returns matching webhook configurations with their complete details.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Webhooks",
+          "10.14.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "org_identifier": {
+                    "description": "Unique ID or name of the org.",
+                    "type": "string"
+                  },
+                  "webhook_identifier": {
+                    "description": "Unique ID or name of the webhook.",
+                    "type": "string"
+                  },
+                  "event_type": {
+                    "description": "Type of webhook event to filter by.",
+                    "type": "string",
+                    "enum": [
+                      "LIVEBOARD_SCHEDULE"
+                    ]
+                  },
+                  "record_offset": {
+                    "description": "The offset point, starting from where the webhooks should be included in the response.",
+                    "default": 0,
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "record_size": {
+                    "description": "The number of webhooks that should be included in the response starting from offset position.",
+                    "default": 50,
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "sort_options": {
+                    "description": "Sort option includes sort field and sort order.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/WebhookSortOptionsInput"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Webhook configurations retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookSearchResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Search results with multiple webhooks",
+                    "value": {
+                      "webhooks": [
+                        {
+                          "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+                          "name": "Liveboard Schedule Webhook",
+                          "description": "Webhook for liveboard schedule notifications",
+                          "org": {
+                            "id": "0",
+                            "name": "Primary"
+                          },
+                          "url": "https://myapp.example.com/webhooks",
+                          "url_params": {
+                            "api_key": "abc123"
+                          },
+                          "events": [
+                            "LIVEBOARD_SCHEDULE"
+                          ],
+                          "authentication": {
+                            "BEARER_TOKEN": "***"
+                          },
+                          "signature_verification": {
+                            "type": "HMAC_SHA256",
+                            "header": "X-Webhook-Signature",
+                            "algorithm": "SHA256",
+                            "secret": "***"
+                          },
+                          "created_at": "2025-08-21T21:57:10.243089030Z",
+                          "last_modified_at": "2025-08-21T22:10:15.123456789Z",
+                          "created_by": {
+                            "id": "8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b",
+                            "name": "sarah_chen"
+                          },
+                          "last_modified_by": {
+                            "id": "2c9a7e4f-6b3d-4a8e-9f1c-5e7a3b9c2d6f",
+                            "name": "alex_kim"
+                          }
+                        },
+                        {
+                          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "name": "API Key Webhook",
+                          "description": "Webhook with API key authentication",
+                          "org": {
+                            "id": "0",
+                            "name": "Primary"
+                          },
+                          "url": "https://api.example.com/notifications",
+                          "events": [
+                            "LIVEBOARD_SCHEDULE"
+                          ],
+                          "authentication": {
+                            "API_KEY": {
+                              "key": "X-API-Key",
+                              "value": "***"
+                            }
+                          },
+                          "created_at": "2025-08-21T20:30:45.987654321Z",
+                          "last_modified_at": "2025-08-21T20:30:45.987654321Z",
+                          "created_by": {
+                            "id": "7d5e9f2a-4b8c-4d6e-9a3b-5c7e1f4a8b2d",
+                            "name": "mike_rodriguez"
+                          }
+                        }
+                      ],
+                      "pagination": {
+                        "record_offset": 0,
+                        "record_size": 50,
+                        "total_count": 2,
+                        "has_more": false
+                      }
+                    }
+                  },
+                  "example_2": {
+                    "description": "Empty search results",
+                    "value": {
+                      "webhooks": [],
+                      "pagination": {
+                        "record_offset": 0,
+                        "record_size": 50,
+                        "total_count": 0,
+                        "has_more": false
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/webhooks/{webhook_identifier}/update": {
+      "post": {
+        "operationId": "updateWebhookConfiguration",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nUpdates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Webhooks",
+          "10.14.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "Name of the webhook configuration.",
+                    "type": "string"
+                  },
+                  "description": {
+                    "description": "Description of the webhook configuration.",
+                    "type": "string"
+                  },
+                  "url": {
+                    "description": "The webhook endpoint URL.",
+                    "type": "string"
+                  },
+                  "url_params": {
+                    "description": "Additional URL parameters as key-value pairs.",
+                    "type": "object"
+                  },
+                  "events": {
+                    "description": "List of events to subscribe to.",
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "LIVEBOARD_SCHEDULE"
+                      ]
+                    }
+                  },
+                  "authentication": {
+                    "description": "Authorization configuration for the webhook.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/WebhookAuthenticationInput"
+                      }
+                    ]
+                  },
+                  "signature_verification": {
+                    "description": "Configuration for webhook signature verification.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/WebhookSignatureVerificationInput"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "webhook_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the webhook configuration."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Webhook configuration updated successfully"
           },
           "400": {
             "description": "Invalid request.",
@@ -19087,6 +19776,313 @@
           }
         }
       },
+      "WebhookSortOptionsInput": {
+        "type": "object",
+        "properties": {
+          "field_name": {
+            "type": "string",
+            "enum": [
+              "CREATED_AT",
+              "LAST_MODIFIED_AT",
+              "NAME"
+            ],
+            "default": "CREATED_AT",
+            "description": "Name of the field to apply the sort on.",
+            "nullable": true
+          },
+          "order": {
+            "type": "string",
+            "enum": [
+              "ASC",
+              "DESC"
+            ],
+            "default": "DESC",
+            "description": "Sort order: ASC (Ascending) or DESC (Descending).",
+            "nullable": true
+          }
+        }
+      },
+      "WebhookSearchResponse": {
+        "type": "object",
+        "required": [
+          "webhooks",
+          "pagination"
+        ],
+        "properties": {
+          "webhooks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WebhookResponse"
+            },
+            "description": "List of webhook configurations matching the search criteria."
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/WebhookPagination",
+            "description": "Pagination information."
+          }
+        }
+      },
+      "WebhookResponse": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "org",
+          "url",
+          "created_at",
+          "last_modified_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the webhook configuration."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the webhook configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the webhook configuration.",
+            "nullable": true
+          },
+          "org": {
+            "$ref": "#/components/schemas/WebhookOrg",
+            "description": "Org details."
+          },
+          "url": {
+            "type": "string",
+            "description": "The webhook endpoint URL."
+          },
+          "url_params": {
+            "type": "object",
+            "description": "Additional URL parameters as key-value pairs.",
+            "nullable": true
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "LIVEBOARD_SCHEDULE"
+              ]
+            },
+            "description": "List of events this webhook subscribes to.",
+            "nullable": true
+          },
+          "authentication": {
+            "$ref": "#/components/schemas/WebhookAuthentication",
+            "description": "Redacted authorization configuration for the webhook.",
+            "nullable": true
+          },
+          "signature_verification": {
+            "$ref": "#/components/schemas/WebhookSignatureVerification",
+            "description": "Redacted configuration for webhook signature verification.",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string",
+            "description": "Timestamp when the webhook was created."
+          },
+          "last_modified_at": {
+            "type": "string",
+            "description": "Timestamp when the webhook was last updated."
+          },
+          "created_by": {
+            "$ref": "#/components/schemas/WebhookUser",
+            "description": "User who created the webhook.",
+            "nullable": true
+          },
+          "last_modified_by": {
+            "$ref": "#/components/schemas/WebhookUser",
+            "description": "User who last modified the webhook.",
+            "nullable": true
+          }
+        }
+      },
+      "WebhookOrg": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the org."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the org."
+          }
+        }
+      },
+      "WebhookAuthentication": {
+        "type": "object",
+        "properties": {
+          "NO_AUTH": {
+            "type": "string",
+            "description": "No authentication required.",
+            "nullable": true
+          },
+          "API_KEY": {
+            "$ref": "#/components/schemas/WebhookAuthApiKey",
+            "description": "Redacted API key authentication configuration.",
+            "nullable": true
+          },
+          "BASIC_AUTH": {
+            "$ref": "#/components/schemas/WebhookAuthBasicAuth",
+            "description": "Redacted Basic authentication configuration.",
+            "nullable": true
+          },
+          "BEARER_TOKEN": {
+            "type": "string",
+            "description": "Redacted Bearer token authentication configuration.",
+            "nullable": true
+          },
+          "OAUTH2": {
+            "$ref": "#/components/schemas/WebhookAuthOAuth2",
+            "description": "Redacted OAuth2 authentication configuration.",
+            "nullable": true
+          }
+        }
+      },
+      "WebhookAuthApiKey": {
+        "type": "object",
+        "required": [
+          "key",
+          "value"
+        ],
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "The header or query parameter name for the API key."
+          },
+          "value": {
+            "type": "string",
+            "description": "The API key value."
+          }
+        }
+      },
+      "WebhookAuthBasicAuth": {
+        "type": "object",
+        "required": [
+          "username",
+          "password"
+        ],
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "Username for basic authentication."
+          },
+          "password": {
+            "type": "string",
+            "description": "Password for basic authentication."
+          }
+        }
+      },
+      "WebhookAuthOAuth2": {
+        "type": "object",
+        "required": [
+          "authorization_url",
+          "client_id",
+          "client_secret"
+        ],
+        "properties": {
+          "authorization_url": {
+            "type": "string",
+            "description": "OAuth2 authorization server URL."
+          },
+          "client_id": {
+            "type": "string",
+            "description": "OAuth2 client identifier."
+          },
+          "client_secret": {
+            "type": "string",
+            "description": "OAuth2 client secret key."
+          }
+        }
+      },
+      "WebhookSignatureVerification": {
+        "type": "object",
+        "required": [
+          "type",
+          "header",
+          "algorithm",
+          "secret"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "HMAC_SHA256"
+            ],
+            "description": "Signature verification method type."
+          },
+          "header": {
+            "type": "string",
+            "description": "HTTP header where the signature is sent."
+          },
+          "algorithm": {
+            "type": "string",
+            "enum": [
+              "SHA256"
+            ],
+            "description": "Hash algorithm used for signature verification."
+          },
+          "secret": {
+            "type": "string",
+            "description": "Shared secret used for HMAC signature generation."
+          }
+        }
+      },
+      "WebhookUser": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the user."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the user."
+          }
+        }
+      },
+      "WebhookPagination": {
+        "type": "object",
+        "required": [
+          "record_offset",
+          "record_size",
+          "total_count",
+          "has_more"
+        ],
+        "properties": {
+          "record_offset": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The starting record number from where the records are included."
+          },
+          "record_size": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of records included in the response."
+          },
+          "total_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Total number of webhook configurations available."
+          },
+          "has_more": {
+            "type": "boolean",
+            "description": "Indicates whether more records are available beyond the current response."
+          }
+        }
+      },
       "GenericInfo": {
         "type": "object",
         "properties": {
@@ -22450,6 +23446,182 @@
           "table_name": {
             "type": "string",
             "description": "Name of the table. Table names may be case-sensitive depending on the database system."
+          }
+        }
+      },
+      "WebhookAuthenticationInput": {
+        "type": "object",
+        "properties": {
+          "NO_AUTH": {
+            "type": "string",
+            "description": "No authentication required.",
+            "nullable": true
+          },
+          "API_KEY": {
+            "$ref": "#/components/schemas/WebhookAuthApiKeyInput",
+            "description": "API key authentication configuration.",
+            "nullable": true
+          },
+          "BASIC_AUTH": {
+            "$ref": "#/components/schemas/WebhookAuthBasicAuthInput",
+            "description": "Basic authentication configuration.",
+            "nullable": true
+          },
+          "BEARER_TOKEN": {
+            "type": "string",
+            "description": "Bearer token authentication configuration.",
+            "nullable": true
+          },
+          "OAUTH2": {
+            "$ref": "#/components/schemas/WebhookAuthOAuth2Input",
+            "description": "OAuth2 authentication configuration.",
+            "nullable": true
+          }
+        }
+      },
+      "WebhookAuthApiKeyInput": {
+        "type": "object",
+        "required": [
+          "key",
+          "value"
+        ],
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "The header or query parameter name for the API key."
+          },
+          "value": {
+            "type": "string",
+            "description": "The API key value."
+          }
+        }
+      },
+      "WebhookAuthBasicAuthInput": {
+        "type": "object",
+        "required": [
+          "username",
+          "password"
+        ],
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "Username for basic authentication."
+          },
+          "password": {
+            "type": "string",
+            "description": "Password for basic authentication."
+          }
+        }
+      },
+      "WebhookAuthOAuth2Input": {
+        "type": "object",
+        "required": [
+          "authorization_url",
+          "client_id",
+          "client_secret"
+        ],
+        "properties": {
+          "authorization_url": {
+            "type": "string",
+            "description": "OAuth2 authorization server URL."
+          },
+          "client_id": {
+            "type": "string",
+            "description": "OAuth2 client identifier."
+          },
+          "client_secret": {
+            "type": "string",
+            "description": "OAuth2 client secret key."
+          }
+        }
+      },
+      "WebhookSignatureVerificationInput": {
+        "type": "object",
+        "required": [
+          "type",
+          "header",
+          "algorithm",
+          "secret"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "HMAC_SHA256"
+            ],
+            "description": "Signature verification method type."
+          },
+          "header": {
+            "type": "string",
+            "description": "HTTP header where the signature is sent."
+          },
+          "algorithm": {
+            "type": "string",
+            "enum": [
+              "SHA256"
+            ],
+            "description": "Hash algorithm used for signature verification."
+          },
+          "secret": {
+            "type": "string",
+            "description": "Shared secret used for HMAC signature generation."
+          }
+        }
+      },
+      "WebhookDeleteResponse": {
+        "type": "object",
+        "required": [
+          "deleted_count",
+          "failed_count",
+          "deleted_webhooks",
+          "failed_webhooks"
+        ],
+        "properties": {
+          "deleted_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of webhooks successfully deleted."
+          },
+          "failed_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of webhooks that failed to delete."
+          },
+          "deleted_webhooks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WebhookResponse"
+            },
+            "description": "List of successfully deleted webhooks."
+          },
+          "failed_webhooks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WebhookDeleteFailure"
+            },
+            "description": "List of webhooks that failed to delete with error details."
+          }
+        }
+      },
+      "WebhookDeleteFailure": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "error"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the webhook that failed to delete."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the webhook that failed to delete."
+          },
+          "error": {
+            "type": "string",
+            "description": "Error message describing why the deletion failed."
           }
         }
       },
