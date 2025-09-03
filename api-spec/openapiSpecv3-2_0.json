@@ -6,12 +6,28 @@
   },
   "x-roles": [
     {
+      "name": "10.13.0.cl",
+      "id": "10.13.0.cl",
+      "tags": [
+        "10.13.0.cl"
+      ],
+      "description": "Roles for version 10.13.0.cl"
+    },
+    {
       "name": "10.4.0.cl",
       "id": "10.4.0.cl",
       "tags": [
         "10.4.0.cl"
       ],
       "description": "Roles for version 10.4.0.cl"
+    },
+    {
+      "name": "10.11.0.cl",
+      "id": "10.11.0.cl",
+      "tags": [
+        "10.11.0.cl"
+      ],
+      "description": "Roles for version 10.11.0.cl"
     },
     {
       "name": "10.7.0.cl",
@@ -144,10 +160,96 @@
   ],
   "tags": [],
   "paths": {
+    "/api/rest/2.0/ai/agent/conversation/create": {
+      "post": {
+        "operationId": "createAgentConversation",
+        "description": "<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.13.0.cl or later</span>",
+        "tags": [
+          "AI",
+          "10.13.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata_context": {
+                    "description": "Context for the conversation.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/ContextPayloadV2Input"
+                      }
+                    ]
+                  },
+                  "conversation_settings": {
+                    "description": "Conversation settings.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/ConversationSettingsInput"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "metadata_context",
+                  "conversation_settings"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentConversation"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentConversation"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/ai/conversation/create": {
       "post": {
         "operationId": "createConversation",
         "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nCreates a Conversation object to start an AI-driven conversation based on a specific data model.\n\nRequires at least view access to the metadata object specified in the request.\n\n#### Usage guidelines\n\nThis API requires the `metadata_identifier` parameter to define the context for the conversation.\n\nYou can also specify the tokens to initiate the conversation as shown in this example:\n\n`\"tokens\": \"[tea],[sales],[type]\"`\n\nIf the API request is successful, ThoughtSpot returns the ID of the conversation.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "deprecated": true,
         "tags": [
           "AI",
           "10.4.0.cl"
@@ -220,10 +322,182 @@
         }
       }
     },
+    "/api/rest/2.0/ai/data-source-suggestions": {
+      "post": {
+        "operationId": "getDataSourceSuggestions",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.13.0.cl or later</span>\n\nProvides relevant data source recommendations for a user-submitted natural language query.\n\nTo use this API, the user must have at least view-level access to the underlying metadata entities referenced in the response.\n\n#### Usage guidelines\n\nThe request must include a `query` string via the request body.\n\nThe returned results include metadata such as:\n- `confidence`: a float indicating the model's confidence in the relevance of each recommendation\n- `details`: includes `data_source_identifier`, `data_source_name`, and `description` of each recommended data source\n- `reasoning`: rationale provided by the LLM to explain why each data source was recommended\n\nIf the API request is successful, ThoughtSpot returns a ranked list of data sources, each annotated with relevant reasoning.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before it is made Generally Available.\n> * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "10.13.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "description": "User query used to suggest data sources.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "query"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_DataSourceSuggestionResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_DataSourceSuggestionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/relevant-questions/": {
+      "post": {
+        "operationId": "getRelevantQuestions",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.11.0.cl or later</span>\n\nBreaks down a user-submitted query into a series of analytical sub-questions using relevant contextual metadata.\n\nTo use this API, the user must have at least view-level access to the referenced metadata objects.\n\n#### Usage guidelines\n\nTo accurately generate relevant questions, the request must include at least one of the following metadata identifiers within `metadata_context` : `conversation_identifier`, `answer_identifiers`, `liveboard_identifiers`, or `data_source_identifiers`.\n\nYou can further enhance the quality and precision of breakdown by providing additional `ai_context` such as:\n\n- `content`: User provided content like text data, csv data as a string message to provide context & potentially improve the quality of the response.\n- `instructions`: User specific text instructions sent to AI system for processing the query.\n\nAdditional optional parameters include:\n\n- `limit_relevant_questions`: Controls the maximum number of relevant questions returned. Defaults to 5 if not specified.\n- `bypass_cache`: If set to true, forces fresh computation instead of returning cached results.\n\nIf the API request is successful, ThoughtSpot returns a list of relevant analytical queries, each aligned with the user's original question. Each returned question includes the query string, along with the identifier and name of the corresponding data source.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "10.11.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata_context": {
+                    "description": "metadata for the query to enable generation of relevant sub-questions; at least one context identifier is required.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/MetadataContext"
+                      }
+                    ]
+                  },
+                  "limit_relevant_questions": {
+                    "description": "Maximum number of relevant questions that is allowed in the response, default = 5.",
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "bypass_cache": {
+                    "description": "If true, results are not returned from cache & calculated every time.",
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "query": {
+                    "description": "A user query that requires breaking down into smaller, more manageable analytical questions to facilitate better understanding and analysis.",
+                    "type": "string"
+                  },
+                  "ai_context": {
+                    "description": "Additional context to guide the response.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/AIContext"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "metadata_context",
+                  "query"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_GetRelevantQuestionsResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_GetRelevantQuestionsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/ai/analytical-questions": {
       "post": {
         "operationId": "queryGetDecomposedQuery",
         "description": "<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.7.0.cl or later</span>",
+        "deprecated": true,
         "tags": [
           "AI",
           "10.7.0.cl"
@@ -330,10 +604,86 @@
         }
       }
     },
+    "/api/rest/2.0/ai/agent/conversation/converse": {
+      "post": {
+        "operationId": "sendAgentMessageStreaming",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.13.0.cl or later</span>\n\nThis API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages. \nTo use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.\n\n\n#### Usage guidelines\n\nTo initiate or continue a conversation, the request must include:\n- `conversation_identifier`: a unique session ID for continuity and message tracking\n- `messages`: an array of one or more text messages, each with a value and type\n\nAdditionally, user can specify what tool can be included `conversation_settings` parameter, which supports:\n- `enable_contextual_change_analysis` (default: false)\n- `enable_natural_language_answer_generation` (default: true)\n- `enable_reasoning` (default: false)\n\nIf the request is valid, the API returns a stream of messages in real time, including:\n- `ack`: confirms receipt of the request\n- `text / text-chunk`: content chunks, optionally formatted (e.g., markdown)\n- `answer`: the final structured response with metadata and analytics\n- `error`: if a failure occurs\n- `notification`: notification messages for operation being performed\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n> * The streaming protocol uses Server-Sent Events (SSE)\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "10.13.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "input": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/SendAgentMessageInput"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "input"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendAgentMessageResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendAgentMessageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/ai/conversation/{conversation_identifier}/converse": {
       "post": {
         "operationId": "sendMessage",
         "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nAllows sending a follow-up message to an ongoing conversation within the context of the metadata model.\n\nRequires at least view access to the metadata object specified in the request.\n\n#### Usage guidelines\n\nThe API requires you to specify the `conversation_identifier` in the request path, and a `metadata_identifier` and `message` string in the request body.\n\nIf the API request is successful, ThoughtSpot returns the session ID, tokens used in the conversation, and visualization type.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "deprecated": true,
         "tags": [
           "AI",
           "10.4.0.cl"
@@ -1465,7 +1815,8 @@
                       "SERVICE_ACCOUNT",
                       "KEY_PAIR",
                       "PERSONAL_ACCESS_TOKEN",
-                      "OAUTH_WITH_SERVICE_PRINCIPAL"
+                      "OAUTH_WITH_SERVICE_PRINCIPAL",
+                      "OAUTH_CLIENT_CREDENTIALS"
                     ]
                   },
                   "configuration": {
@@ -1683,7 +2034,8 @@
                       "KEY_PAIR",
                       "EXTOAUTH_WITH_PKCE",
                       "OAUTH_WITH_PKCE",
-                      "PERSONAL_ACCESS_TOKEN"
+                      "PERSONAL_ACCESS_TOKEN",
+                      "OAUTH_CLIENT_CREDENTIALS"
                     ]
                   },
                   "configuration": {
@@ -2334,7 +2686,8 @@
                       "KEY_PAIR",
                       "OAUTH_WITH_PKCE",
                       "EXTOAUTH_WITH_PKCE",
-                      "OAUTH_WITH_PEZ"
+                      "OAUTH_WITH_PEZ",
+                      "OAUTH_CLIENT_CREDENTIALS"
                     ]
                   },
                   "show_resolved_parameters": {
@@ -2504,7 +2857,7 @@
     "/api/rest/2.0/connections/{connection_identifier}/update": {
       "post": {
         "operationId": "updateConnectionV2",
-        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nUpdates a connection object.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.\n\nTo update a connection object, pass these parameters in your API request:\n\n1. GUID of the connection object.\n2. If you are updating tables or database schema of a connection object:\n   a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.\n   b. Set `validate` to `true`.\n   \n   **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.\n\n   * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:\n\n   ```\n   {\n      \"configuration\":{\n         \"accountName\":\"thoughtspot_partner\",\n         \"user\":\"tsadmin\",\n         \"password\":\"TestConn123\",\n         \"role\":\"sysadmin\",\n         \"warehouse\":\"MEDIUM_WH\"\n      },\n      \"externalDatabases\":[\n         {\n            \"name\":\"AllDatatypes\",\n            \"isAutoCreated\":false,\n            \"schemas\":[\n               {\n                  \"name\":\"alldatatypes\",\n                  \"tables\":[\n                     {\n                        \"name\":\"allDatatypes\",\n                        \"type\":\"TABLE\",\n                        \"description\":\"\",\n                        \"selected\":true,\n                        \"linked\":true,\n                        \"columns\":[\n                           {\n                              \"name\":\"CNUMBER\",\n                              \"type\":\"INT64\",\n                              \"canImport\":true,\n                              \"selected\":true,\n                              \"isLinkedActive\":true,\n                              \"isImported\":false,\n                              \"tableName\":\"allDatatypes\",\n                              \"schemaName\":\"alldatatypes\",\n                              \"dbName\":\"AllDatatypes\"\n                           },\n                           {\n                              \"name\":\"CDECIMAL\",\n                              \"type\":\"INT64\",\n                              \"canImport\":true,\n                              \"selected\":true,\n                              \"isLinkedActive\":true,\n                              \"isImported\":false,\n                              \"tableName\":\"allDatatypes\",\n                              \"schemaName\":\"alldatatypes\",\n                              \"dbName\":\"AllDatatypes\"\n                           }\n                        ]\n                     }\n                  ]\n               }\n            ]\n         }\n      ]\n   }\n   ```\n\n3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.\n\n  **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not  specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.\n\n  * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a Snowflake connection:\n   ```\n   {\n      \"configuration\":{\n         \"accountName\":\"thoughtspot_partner\",\n         \"user\":\"tsadmin\",\n         \"password\":\"TestConn123\",\n         \"role\":\"sysadmin\",\n         \"warehouse\":\"MEDIUM_WH\"\n      },\n      \"externalDatabases\":[\n\n      ]\n   }\n   ```\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nUpdates a connection object.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.\n\nTo update a connection object, pass these parameters in your API request:\n\n1. GUID of the connection object.\n2. If you are updating tables or database schema of a connection object:\n   a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.\n   b. Set `validate` to `true`.\n   * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:\n\n   ```\n   {\n      \"configuration\":{\n         \"accountName\":\"thoughtspot_partner\",\n         \"user\":\"tsadmin\",\n         \"password\":\"TestConn123\",\n         \"role\":\"sysadmin\",\n         \"warehouse\":\"MEDIUM_WH\"\n      },\n      \"externalDatabases\":[\n         {\n            \"name\":\"AllDatatypes\",\n            \"isAutoCreated\":false,\n            \"schemas\":[\n               {\n                  \"name\":\"alldatatypes\",\n                  \"tables\":[\n                     {\n                        \"name\":\"allDatatypes\",\n                        \"type\":\"TABLE\",\n                        \"description\":\"\",\n                        \"selected\":true,\n                        \"linked\":true,\n                        \"columns\":[\n                           {\n                              \"name\":\"CNUMBER\",\n                              \"type\":\"INT64\",\n                              \"canImport\":true,\n                              \"selected\":true,\n                              \"isLinkedActive\":true,\n                              \"isImported\":false,\n                              \"tableName\":\"allDatatypes\",\n                              \"schemaName\":\"alldatatypes\",\n                              \"dbName\":\"AllDatatypes\"\n                           },\n                           {\n                              \"name\":\"CDECIMAL\",\n                              \"type\":\"INT64\",\n                              \"canImport\":true,\n                              \"selected\":true,\n                              \"isLinkedActive\":true,\n                              \"isImported\":false,\n                              \"tableName\":\"allDatatypes\",\n                              \"schemaName\":\"alldatatypes\",\n                              \"dbName\":\"AllDatatypes\"\n                           }\n                        ]\n                     }\n                  ]\n               }\n            ]\n         }\n      ]\n   }\n   ```\n\n3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.\n* A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a Snowflake connection:\n ```\n {\n    \"configuration\":{\n       \"accountName\":\"thoughtspot_partner\",\n       \"user\":\"tsadmin\",\n       \"password\":\"TestConn123\",\n       \"role\":\"sysadmin\",\n       \"warehouse\":\"MEDIUM_WH\"\n    },\n    \"externalDatabases\":[\n\n    ]\n }\n ```\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Connections",
           "10.4.0.cl"
@@ -4058,7 +4411,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -4183,7 +4536,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -4270,7 +4623,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -4279,11 +4632,9 @@
                     "type": "string"
                   },
                   "model_tables": {
-                    "description": "List of Models and their respective Tables",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/ModelTableList"
-                    }
+                    "description": "List of Models and their respective Tables\n\nFor multipart/form-data, send this as a JSON string. Example: '[{\"key\": \"value\"}]'",
+                    "type": "string",
+                    "format": "json"
                   },
                   "import_worksheets": {
                     "description": "Mention the worksheet tmls to import",
@@ -4309,6 +4660,7 @@
                 },
                 "required": [
                   "dbt_connection_identifier",
+                  "model_tables",
                   "import_worksheets"
                 ]
               }
@@ -4513,7 +4865,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -5112,7 +5464,9 @@
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
-                        "CAN_SETUP_VERSION_CONTROL"
+                        "CAN_SETUP_VERSION_CONTROL",
+                        "CAN_DOWNLOAD_VISUALS",
+                        "CAN_DOWNLOAD_DETAILED_DATA"
                       ]
                     }
                   },
@@ -5129,7 +5483,9 @@
                     "type": "string",
                     "enum": [
                       "LOCAL_GROUP",
-                      "LDAP_GROUP"
+                      "LDAP_GROUP",
+                      "TEAM_GROUP",
+                      "TENANT_GROUP"
                     ]
                   },
                   "user_identifiers": {
@@ -5465,7 +5821,10 @@
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
-                        "CAN_SETUP_VERSION_CONTROL"
+                        "CAN_SETUP_VERSION_CONTROL",
+                        "CAN_MANAGE_WEBHOOKS",
+                        "CAN_DOWNLOAD_VISUALS",
+                        "CAN_DOWNLOAD_DETAILED_DATA"
                       ]
                     }
                   },
@@ -5481,7 +5840,9 @@
                     "type": "string",
                     "enum": [
                       "LOCAL_GROUP",
-                      "LDAP_GROUP"
+                      "LDAP_GROUP",
+                      "TEAM_GROUP",
+                      "TENANT_GROUP"
                     ]
                   },
                   "user_identifiers": {
@@ -5667,7 +6028,9 @@
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
-                        "CAN_SETUP_VERSION_CONTROL"
+                        "CAN_SETUP_VERSION_CONTROL",
+                        "CAN_DOWNLOAD_VISUALS",
+                        "CAN_DOWNLOAD_DETAILED_DATA"
                       ]
                     }
                   },
@@ -5683,7 +6046,9 @@
                     "type": "string",
                     "enum": [
                       "LOCAL_GROUP",
-                      "LDAP_GROUP"
+                      "LDAP_GROUP",
+                      "TEAM_GROUP",
+                      "TENANT_GROUP"
                     ]
                   },
                   "user_identifiers": {
@@ -8102,7 +8467,7 @@
     "/api/rest/2.0/report/liveboard": {
       "post": {
         "operationId": "exportLiveboardReport",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports a Liveboard and its visualizations in PDF or PNG file format.\n\nRequires at least view access to the Liveboard.\n\n#### Usage guidelines\n\nIn the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.\n\nThe default `file_format` is PDF. For PDF downloads, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.\n\n**NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.\n\nOptionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.\n\nTo include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).  \n\n**NOTE**: Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in the PNG format in the resolution of your choice. To enable this on your instance, contact ThoughtSpot support. When this feature is enabled, the options `include_cover_page`,`include_filter_page` within the `png_options` will not be available for PNG exports.\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports a Liveboard and its visualizations in PDF or PNG file format.\n\nRequires at least view access to the Liveboard.\n\n#### Usage guidelines\n\nIn the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.\n\nThe default `file_format` is PDF. For PDF downloads, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.\n\n**NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.\n\nOptionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.\n\nTo include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).  \n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Reports",
           "9.0.0.cl"
@@ -8308,7 +8673,10 @@
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
                         "CAN_SETUP_VERSION_CONTROL",
-                        "PREVIEW_THOUGHTSPOT_SAGE"
+                        "PREVIEW_THOUGHTSPOT_SAGE",
+                        "CAN_MANAGE_WEBHOOKS",
+                        "CAN_DOWNLOAD_VISUALS",
+                        "CAN_DOWNLOAD_DETAILED_DATA"
                       ]
                     }
                   },
@@ -8533,7 +8901,10 @@
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
-                        "CAN_SETUP_VERSION_CONTROL"
+                        "CAN_SETUP_VERSION_CONTROL",
+                        "CAN_MANAGE_WEBHOOKS",
+                        "CAN_DOWNLOAD_VISUALS",
+                        "CAN_DOWNLOAD_DETAILED_DATA"
                       ]
                     }
                   },
@@ -8690,7 +9061,10 @@
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
-                        "PREVIEW_THOUGHTSPOT_SAGE"
+                        "PREVIEW_THOUGHTSPOT_SAGE",
+                        "CAN_MANAGE_WEBHOOKS",
+                        "CAN_DOWNLOAD_VISUALS",
+                        "CAN_DOWNLOAD_DETAILED_DATA"
                       ]
                     }
                   }
@@ -13191,7 +13565,10 @@
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
-                        "CAN_SETUP_VERSION_CONTROL"
+                        "CAN_SETUP_VERSION_CONTROL",
+                        "CAN_MANAGE_WEBHOOKS",
+                        "CAN_DOWNLOAD_VISUALS",
+                        "CAN_DOWNLOAD_DETAILED_DATA"
                       ]
                     }
                   },
@@ -15773,7 +16150,9 @@
             "type": "string",
             "enum": [
               "LOCAL_GROUP",
-              "LDAP_GROUP"
+              "LDAP_GROUP",
+              "TEAM_GROUP",
+              "TENANT_GROUP"
             ],
             "description": "Type of the group.",
             "nullable": true
@@ -17545,7 +17924,10 @@
                 "CAN_ACCESS_ANALYST_STUDIO",
                 "CAN_MANAGE_ANALYST_STUDIO",
                 "PREVIEW_DOCUMENT_SEARCH",
-                "CAN_SETUP_VERSION_CONTROL"
+                "CAN_SETUP_VERSION_CONTROL",
+                "CAN_MANAGE_WEBHOOKS",
+                "CAN_DOWNLOAD_VISUALS",
+                "CAN_DOWNLOAD_DETAILED_DATA"
               ]
             },
             "description": "Privileges granted to the role."
@@ -17866,6 +18248,94 @@
         },
         "description": "MetadataType InputType used in Custom Action API's"
       },
+      "MetadataContext": {
+        "type": "object",
+        "properties": {
+          "data_source_identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of data_source_identifiers to provide context for breaking down user query into analytical queries that can be run on them.",
+            "nullable": true
+          },
+          "answer_identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of answer unique identifiers (GUIDs) whose data will be used to guide the response.",
+            "nullable": true
+          },
+          "conversation_identifier": {
+            "type": "string",
+            "description": "Unique identifier to denote current conversation.",
+            "nullable": true
+          },
+          "liveboard_identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of liveboard unique identifiers (GUIDs) whose data will be used to guide the response.",
+            "nullable": true
+          }
+        }
+      },
+      "AIContext": {
+        "type": "object",
+        "properties": {
+          "instructions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "User specific text instructions sent to AI system for processing the query.",
+            "nullable": true
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "User provided content like text data, csv data as a string message to provide context & potentially improve the quality of the response.",
+            "nullable": true
+          }
+        }
+      },
+      "eureka_GetRelevantQuestionsResponse": {
+        "type": "object",
+        "properties": {
+          "relevant_questions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/eureka_RelevantQuestion"
+            },
+            "description": "List of relevant questions that can be run on their respective data sources.",
+            "nullable": true
+          }
+        }
+      },
+      "eureka_RelevantQuestion": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "NL query that can be run using spotter aka natural language search to get an AI generated answer.",
+            "nullable": true
+          },
+          "data_source_identifier": {
+            "type": "string",
+            "description": "Unique identifier of the data source on which this query can be run on.",
+            "nullable": true
+          },
+          "data_source_name": {
+            "type": "string",
+            "description": "Display name of the data source on which this query can be run on.",
+            "nullable": true
+          }
+        }
+      },
       "Input_eureka_NLSRequest": {
         "type": "object",
         "properties": {
@@ -17934,6 +18404,60 @@
           "worksheetName": {
             "type": "string",
             "description": "Display name of the worksheet on which this query can be run on.",
+            "nullable": true
+          }
+        }
+      },
+      "eureka_DataSourceSuggestionResponse": {
+        "type": "object",
+        "properties": {
+          "data_sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataSource"
+            },
+            "description": "List of data sources suggested.",
+            "nullable": true
+          }
+        }
+      },
+      "DataSource": {
+        "type": "object",
+        "properties": {
+          "confidence": {
+            "type": "number",
+            "format": "float",
+            "description": "Confidence score for the data source suggestion.",
+            "nullable": true
+          },
+          "details": {
+            "$ref": "#/components/schemas/EntityHeader",
+            "description": "Details of the data source.",
+            "nullable": true
+          },
+          "reasoning": {
+            "type": "string",
+            "description": "LLM reasoning for the data source.",
+            "nullable": true
+          }
+        }
+      },
+      "EntityHeader": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Description of the data source.",
+            "nullable": true
+          },
+          "data_source_name": {
+            "type": "string",
+            "description": "Display name of the data source.",
+            "nullable": true
+          },
+          "data_source_identifier": {
+            "type": "string",
+            "description": "Unique identifier of the data source.",
             "nullable": true
           }
         }
@@ -19055,7 +19579,9 @@
                 "CAN_ACCESS_ANALYST_STUDIO",
                 "CAN_MANAGE_ANALYST_STUDIO",
                 "PREVIEW_DOCUMENT_SEARCH",
-                "CAN_SETUP_VERSION_CONTROL"
+                "CAN_SETUP_VERSION_CONTROL",
+                "CAN_DOWNLOAD_VISUALS",
+                "CAN_DOWNLOAD_DETAILED_DATA"
               ]
             },
             "description": "Privileges that will be assigned to the group.",
@@ -19073,7 +19599,9 @@
             "type": "string",
             "enum": [
               "LOCAL_GROUP",
-              "LDAP_GROUP"
+              "LDAP_GROUP",
+              "TEAM_GROUP",
+              "TENANT_GROUP"
             ],
             "description": "Type of the group.",
             "nullable": true
@@ -20034,7 +20562,10 @@
                 "CAN_MANAGE_ANALYST_STUDIO",
                 "PREVIEW_DOCUMENT_SEARCH",
                 "CAN_SETUP_VERSION_CONTROL",
-                "PREVIEW_THOUGHTSPOT_SAGE"
+                "PREVIEW_THOUGHTSPOT_SAGE",
+                "CAN_MANAGE_WEBHOOKS",
+                "CAN_DOWNLOAD_VISUALS",
+                "CAN_DOWNLOAD_DETAILED_DATA"
               ]
             },
             "description": "Privileges granted to the role."
@@ -21051,6 +21582,197 @@
           "display_tokens": {
             "type": "string",
             "description": "User friendly tokens for the response.",
+            "nullable": true
+          }
+        }
+      },
+      "ContextPayloadV2Input": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "answer",
+              "liveboard",
+              "data_source"
+            ],
+            "description": "Type of the context.",
+            "nullable": true
+          },
+          "answer_context": {
+            "$ref": "#/components/schemas/AnswerContextInput",
+            "description": "Answer context.",
+            "nullable": true
+          },
+          "liveboard_context": {
+            "$ref": "#/components/schemas/LBContextInput",
+            "description": "Liveboard context.",
+            "nullable": true
+          },
+          "data_source_context": {
+            "$ref": "#/components/schemas/DataSourceContextInput",
+            "description": "Data source context.",
+            "nullable": true
+          }
+        }
+      },
+      "AnswerContextInput": {
+        "type": "object",
+        "required": [
+          "session_identifier",
+          "generation_number"
+        ],
+        "properties": {
+          "session_identifier": {
+            "type": "string",
+            "description": "Unique identifier of the answer session."
+          },
+          "generation_number": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Generation number of the answer."
+          }
+        }
+      },
+      "LBContextInput": {
+        "type": "object",
+        "required": [
+          "liveboard_identifier",
+          "visualization_identifier"
+        ],
+        "properties": {
+          "liveboard_identifier": {
+            "type": "string",
+            "description": "Unique identifier of the liveboard."
+          },
+          "visualization_identifier": {
+            "type": "string",
+            "description": "Unique identifier of the visualization."
+          }
+        }
+      },
+      "DataSourceContextInput": {
+        "type": "object",
+        "required": [
+          "guid"
+        ],
+        "properties": {
+          "guid": {
+            "type": "string",
+            "description": "Unique identifier of the data source."
+          }
+        }
+      },
+      "ConversationSettingsInput": {
+        "type": "object",
+        "properties": {
+          "enable_contextual_change_analysis": {
+            "type": "boolean",
+            "default": false,
+            "description": "Enable contextual change analysis.",
+            "nullable": true
+          },
+          "enable_natural_language_answer_generation": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable natural language to answer generation.",
+            "nullable": true
+          },
+          "enable_reasoning": {
+            "type": "boolean",
+            "default": false,
+            "description": "Enable reasoning.",
+            "nullable": true
+          }
+        }
+      },
+      "AgentConversation": {
+        "type": "object",
+        "required": [
+          "conversation_id"
+        ],
+        "properties": {
+          "conversation_id": {
+            "type": "string",
+            "description": "Unique identifier of the conversation."
+          }
+        }
+      },
+      "SendAgentMessageInput": {
+        "type": "object",
+        "required": [
+          "conversation_identifier",
+          "messages",
+          "settings"
+        ],
+        "properties": {
+          "conversation_identifier": {
+            "type": "string",
+            "description": "Unique identifier for the conversation (used to track context)"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentMessageInput"
+            },
+            "description": "messages to be sent to the agent"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/AgentSettingsInput",
+            "description": "Settings that determine how the agent processes the message(s)"
+          }
+        }
+      },
+      "AgentMessageInput": {
+        "type": "object",
+        "required": [
+          "value",
+          "type"
+        ],
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "The message content"
+          },
+          "type": {
+            "type": "string",
+            "description": "The message type (e.g., \"text\", \"image\")"
+          }
+        }
+      },
+      "AgentSettingsInput": {
+        "type": "object",
+        "required": [
+          "enable_contextual_change_analysis",
+          "enable_natural_language_answer_generation",
+          "enable_reasoning"
+        ],
+        "properties": {
+          "enable_contextual_change_analysis": {
+            "type": "boolean",
+            "description": "Enable contextual change analysis."
+          },
+          "enable_natural_language_answer_generation": {
+            "type": "boolean",
+            "description": "Enable natural language to answer generation."
+          },
+          "enable_reasoning": {
+            "type": "boolean",
+            "description": "Enable reasoning."
+          }
+        }
+      },
+      "SendAgentMessageResponse": {
+        "type": "object",
+        "required": [
+          "success"
+        ],
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
             "nullable": true
           }
         }
