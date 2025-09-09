@@ -99,10 +99,4 @@ public class ImportEPackAsyncTaskStatusTest {
     public void modifiedAtTest() {
         // TODO: test modifiedAt
     }
-
-    /** Test the property 'authorDisplayName' */
-    @Test
-    public void authorDisplayNameTest() {
-        // TODO: test authorDisplayName
-    }
 }

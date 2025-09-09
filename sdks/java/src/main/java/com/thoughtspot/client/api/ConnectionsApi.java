@@ -1269,27 +1269,11 @@ public class ConnectionsApi {
      * fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth
      * authentication type. - &#x60;IAM&#x60;: For connections that have the IAM OAuth set up. This
      * authentication type is supported on Amazon Redshift connections only. - &#x60;EXTOAUTH&#x60;:
-     * For connections that have External OAuth set up. ThoughtSpot supports external [OAuth with
+     * For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with
      * Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/
      * connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data
      * connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). -
-     * &#x60;KEY_PAIR&#x60;: For connections that require Key Pair account credentials to
-     * authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
-     * supported on Snowflake connections only. - &#x60;OAUTH_WITH_PKCE&#x60;: For connections that
-     * require OAuth with PKCE account credentials to authenticate to the Cloud Data Warehouse and
-     * fetch data. This authentication type is supported on Snowflake, Starburst, Databricks, Denodo
-     * connections only. - &#x60;EXTOAUTH_WITH_PKCE&#x60;: For connections that require External
-     * OAuth With PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch
-     * data. This authentication type is supported on Snowflake connections only. -
-     * &#x60;OAUTH_WITH_PEZ&#x60;: For connections that require OAuth With PEZ account credentials
-     * to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
-     * supported on Amazon Redshift connections only. - &#x60;OAUTH_WITH_SERVICE_PRINCIPAL&#x60;:
-     * For connections that require OAuth With Service Principal account credentials to authenticate
-     * to the Cloud Data Warehouse and fetch data. This authentication type is supported on
-     * Databricks connections only. - &#x60;PERSONAL_ACCESS_TOKEN&#x60;: For connections that
-     * require Personal Access Token account credentials to authenticate to the Cloud Data Warehouse
-     * and fetch data. This authentication type is supported on Databricks connections only. - To
-     * include more details about connection objects in the API response, set
+     * To include more details about connection objects in the API response, set
      * &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort the output by field
      * names and filter connections by tags. **NOTE**: When filtering connection records by
      * parameters other than &#x60;data_warehouse_types&#x60; or &#x60;tag_identifiers&#x60;, ensure
@@ -1358,27 +1342,11 @@ public class ConnectionsApi {
      * fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth
      * authentication type. - &#x60;IAM&#x60;: For connections that have the IAM OAuth set up. This
      * authentication type is supported on Amazon Redshift connections only. - &#x60;EXTOAUTH&#x60;:
-     * For connections that have External OAuth set up. ThoughtSpot supports external [OAuth with
+     * For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with
      * Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/
      * connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data
      * connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). -
-     * &#x60;KEY_PAIR&#x60;: For connections that require Key Pair account credentials to
-     * authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
-     * supported on Snowflake connections only. - &#x60;OAUTH_WITH_PKCE&#x60;: For connections that
-     * require OAuth with PKCE account credentials to authenticate to the Cloud Data Warehouse and
-     * fetch data. This authentication type is supported on Snowflake, Starburst, Databricks, Denodo
-     * connections only. - &#x60;EXTOAUTH_WITH_PKCE&#x60;: For connections that require External
-     * OAuth With PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch
-     * data. This authentication type is supported on Snowflake connections only. -
-     * &#x60;OAUTH_WITH_PEZ&#x60;: For connections that require OAuth With PEZ account credentials
-     * to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
-     * supported on Amazon Redshift connections only. - &#x60;OAUTH_WITH_SERVICE_PRINCIPAL&#x60;:
-     * For connections that require OAuth With Service Principal account credentials to authenticate
-     * to the Cloud Data Warehouse and fetch data. This authentication type is supported on
-     * Databricks connections only. - &#x60;PERSONAL_ACCESS_TOKEN&#x60;: For connections that
-     * require Personal Access Token account credentials to authenticate to the Cloud Data Warehouse
-     * and fetch data. This authentication type is supported on Databricks connections only. - To
-     * include more details about connection objects in the API response, set
+     * To include more details about connection objects in the API response, set
      * &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort the output by field
      * names and filter connections by tags. **NOTE**: When filtering connection records by
      * parameters other than &#x60;data_warehouse_types&#x60; or &#x60;tag_identifiers&#x60;, ensure
@@ -1448,27 +1416,11 @@ public class ConnectionsApi {
      * fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth
      * authentication type. - &#x60;IAM&#x60;: For connections that have the IAM OAuth set up. This
      * authentication type is supported on Amazon Redshift connections only. - &#x60;EXTOAUTH&#x60;:
-     * For connections that have External OAuth set up. ThoughtSpot supports external [OAuth with
+     * For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with
      * Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/
      * connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data
      * connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). -
-     * &#x60;KEY_PAIR&#x60;: For connections that require Key Pair account credentials to
-     * authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
-     * supported on Snowflake connections only. - &#x60;OAUTH_WITH_PKCE&#x60;: For connections that
-     * require OAuth with PKCE account credentials to authenticate to the Cloud Data Warehouse and
-     * fetch data. This authentication type is supported on Snowflake, Starburst, Databricks, Denodo
-     * connections only. - &#x60;EXTOAUTH_WITH_PKCE&#x60;: For connections that require External
-     * OAuth With PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch
-     * data. This authentication type is supported on Snowflake connections only. -
-     * &#x60;OAUTH_WITH_PEZ&#x60;: For connections that require OAuth With PEZ account credentials
-     * to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
-     * supported on Amazon Redshift connections only. - &#x60;OAUTH_WITH_SERVICE_PRINCIPAL&#x60;:
-     * For connections that require OAuth With Service Principal account credentials to authenticate
-     * to the Cloud Data Warehouse and fetch data. This authentication type is supported on
-     * Databricks connections only. - &#x60;PERSONAL_ACCESS_TOKEN&#x60;: For connections that
-     * require Personal Access Token account credentials to authenticate to the Cloud Data Warehouse
-     * and fetch data. This authentication type is supported on Databricks connections only. - To
-     * include more details about connection objects in the API response, set
+     * To include more details about connection objects in the API response, set
      * &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort the output by field
      * names and filter connections by tags. **NOTE**: When filtering connection records by
      * parameters other than &#x60;data_warehouse_types&#x60; or &#x60;tag_identifiers&#x60;, ensure

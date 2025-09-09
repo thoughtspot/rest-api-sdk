@@ -10,9 +10,7 @@ import com.thoughtspot.client.model.FetchPermissionsOfPrincipalsRequest;
 import com.thoughtspot.client.model.FetchPermissionsOnMetadataRequest;
 import com.thoughtspot.client.model.PermissionOfMetadataResponse;
 import com.thoughtspot.client.model.PermissionOfPrincipalsResponse;
-import com.thoughtspot.client.model.PublishMetadataRequest;
 import com.thoughtspot.client.model.ShareMetadataRequest;
-import com.thoughtspot.client.model.UnpublishMetadataRequest;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -77,22 +75,6 @@ public class SecurityApiTest {
     }
 
     /**
-     * Version: 10.9.0.cl or later Allows publishing metadata objects across organizations in
-     * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
-     * publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
-     * This API will essentially share the objects along with it&#39;s dependencies to the org
-     * admins of the orgs to which it is being published.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void publishMetadataTest() throws ApiException {
-        PublishMetadataRequest publishMetadataRequest = null;
-        api.publishMetadata(publishMetadataRequest);
-        // TODO: test validations
-    }
-
-    /**
      * Version: 9.0.0.cl or later Allows sharing one or several metadata objects with users and
      * groups in ThoughtSpot. Requires edit access to the metadata object. The API endpoint allows
      * sharing only the following types of metadata objects: * Liveboards * Visualizations * Answers
@@ -109,24 +91,6 @@ public class SecurityApiTest {
     public void shareMetadataTest() throws ApiException {
         ShareMetadataRequest shareMetadataRequest = null;
         api.shareMetadata(shareMetadataRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Version: 10.9.0.cl or later Allows unpublishing metadata objects from organizations in
-     * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
-     * unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
-     * When unpublishing objects, you can: * Include dependencies by setting
-     * &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no
-     * other published object is using them * Force unpublish by setting &#x60;force&#x60; to true -
-     * this will break all dependent objects in the unpublished organizations
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void unpublishMetadataTest() throws ApiException {
-        UnpublishMetadataRequest unpublishMetadataRequest = null;
-        api.unpublishMetadata(unpublishMetadataRequest);
         // TODO: test validations
     }
 }

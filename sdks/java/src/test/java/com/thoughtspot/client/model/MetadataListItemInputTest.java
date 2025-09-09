@@ -39,10 +39,4 @@ public class MetadataListItemInputTest {
     public void typeTest() {
         // TODO: test type
     }
-
-    /** Test the property 'subtypes' */
-    @Test
-    public void subtypesTest() {
-        // TODO: test subtypes
-    }
 }

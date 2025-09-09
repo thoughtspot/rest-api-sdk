@@ -78,7 +78,7 @@ This endpoint does not need any parameter.
 
 <a id="getSystemOverrideInfo"></a>
 # **getSystemOverrideInfo**
-> SystemOverrideInfo getSystemOverrideInfo()
+> Object getSystemOverrideInfo()
 
 
 
@@ -89,7 +89,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SystemOverrideInfo**](SystemOverrideInfo.md)
+**Object**
 
 ### Authorization
 

@@ -21,9 +21,17 @@ export class ExportMetadataTypeInput {
     */
     'type'?: ExportMetadataTypeInputTypeEnum | null;
     /**
-    * Unique ID or name of the metadata object.
+    * Unique ID or name of the metadata object. Not required if the metadata type is ANSWER when session_id and generation_number is set.
     */
-    'identifier': string;
+    'identifier'?: string | null;
+    /**
+    * Unique ID of the Answer session. Required if the metadata type is ANSWER and identifier is not set.
+    */
+    'session_identifier'?: string | null;
+    /**
+    * Generation Number of the Answer session. Required if the metadata type is ANSWER and identifier is not set.
+    */
+    'generation_number'?: number | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -39,6 +47,18 @@ export class ExportMetadataTypeInput {
             "baseName": "identifier",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "session_identifier",
+            "baseName": "session_identifier",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "generation_number",
+            "baseName": "generation_number",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {

@@ -228,73 +228,6 @@ public class SearchMetadataRequest implements Serializable {
     @javax.annotation.Nullable
     private Boolean includeDiscoverableObjects = true;
 
-    public static final String SERIALIZED_NAME_SHOW_RESOLVED_PARAMETERS =
-            "show_resolved_parameters";
-
-    @SerializedName(SERIALIZED_NAME_SHOW_RESOLVED_PARAMETERS)
-    @javax.annotation.Nullable
-    private Boolean showResolvedParameters = false;
-
-    /** Indicates the model version of Liveboard to be attached in metadata detail. */
-    @JsonAdapter(LiveboardResponseVersionEnum.Adapter.class)
-    public enum LiveboardResponseVersionEnum {
-        V1("V1"),
-
-        V2("V2");
-
-        private String value;
-
-        LiveboardResponseVersionEnum(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        public static LiveboardResponseVersionEnum fromValue(String value) {
-            for (LiveboardResponseVersionEnum b : LiveboardResponseVersionEnum.values()) {
-                if (b.value.equals(value)) {
-                    return b;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected value '" + value + "'");
-        }
-
-        public static class Adapter extends TypeAdapter<LiveboardResponseVersionEnum> {
-            @Override
-            public void write(
-                    final JsonWriter jsonWriter, final LiveboardResponseVersionEnum enumeration)
-                    throws IOException {
-                jsonWriter.value(enumeration.getValue());
-            }
-
-            @Override
-            public LiveboardResponseVersionEnum read(final JsonReader jsonReader)
-                    throws IOException {
-                String value = jsonReader.nextString();
-                return LiveboardResponseVersionEnum.fromValue(value);
-            }
-        }
-
-        public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-            String value = jsonElement.getAsString();
-            LiveboardResponseVersionEnum.fromValue(value);
-        }
-    }
-
-    public static final String SERIALIZED_NAME_LIVEBOARD_RESPONSE_VERSION =
-            "liveboard_response_version";
-
-    @SerializedName(SERIALIZED_NAME_LIVEBOARD_RESPONSE_VERSION)
-    @javax.annotation.Nullable
-    private LiveboardResponseVersionEnum liveboardResponseVersion = LiveboardResponseVersionEnum.V1;
-
     public SearchMetadataRequest() {}
 
     public SearchMetadataRequest metadata(
@@ -801,49 +734,6 @@ public class SearchMetadataRequest implements Serializable {
         this.includeDiscoverableObjects = includeDiscoverableObjects;
     }
 
-    public SearchMetadataRequest showResolvedParameters(
-            @javax.annotation.Nullable Boolean showResolvedParameters) {
-        this.showResolvedParameters = showResolvedParameters;
-        return this;
-    }
-
-    /**
-     * &lt;div&gt;Version: 10.9.0.cl or later &lt;/div&gt; Indicates whether to show resolved
-     * parameterised values.
-     *
-     * @return showResolvedParameters
-     */
-    @javax.annotation.Nullable
-    public Boolean getShowResolvedParameters() {
-        return showResolvedParameters;
-    }
-
-    public void setShowResolvedParameters(
-            @javax.annotation.Nullable Boolean showResolvedParameters) {
-        this.showResolvedParameters = showResolvedParameters;
-    }
-
-    public SearchMetadataRequest liveboardResponseVersion(
-            @javax.annotation.Nullable LiveboardResponseVersionEnum liveboardResponseVersion) {
-        this.liveboardResponseVersion = liveboardResponseVersion;
-        return this;
-    }
-
-    /**
-     * Indicates the model version of Liveboard to be attached in metadata detail.
-     *
-     * @return liveboardResponseVersion
-     */
-    @javax.annotation.Nullable
-    public LiveboardResponseVersionEnum getLiveboardResponseVersion() {
-        return liveboardResponseVersion;
-    }
-
-    public void setLiveboardResponseVersion(
-            @javax.annotation.Nullable LiveboardResponseVersionEnum liveboardResponseVersion) {
-        this.liveboardResponseVersion = liveboardResponseVersion;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -894,12 +784,7 @@ public class SearchMetadataRequest implements Serializable {
                 && Objects.equals(this.includeStats, searchMetadataRequest.includeStats)
                 && Objects.equals(
                         this.includeDiscoverableObjects,
-                        searchMetadataRequest.includeDiscoverableObjects)
-                && Objects.equals(
-                        this.showResolvedParameters, searchMetadataRequest.showResolvedParameters)
-                && Objects.equals(
-                        this.liveboardResponseVersion,
-                        searchMetadataRequest.liveboardResponseVersion);
+                        searchMetadataRequest.includeDiscoverableObjects);
     }
 
     private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -935,9 +820,7 @@ public class SearchMetadataRequest implements Serializable {
                 sortOptions,
                 tagIdentifiers,
                 includeStats,
-                includeDiscoverableObjects,
-                showResolvedParameters,
-                liveboardResponseVersion);
+                includeDiscoverableObjects);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -997,12 +880,6 @@ public class SearchMetadataRequest implements Serializable {
         sb.append("    includeDiscoverableObjects: ")
                 .append(toIndentedString(includeDiscoverableObjects))
                 .append("\n");
-        sb.append("    showResolvedParameters: ")
-                .append(toIndentedString(showResolvedParameters))
-                .append("\n");
-        sb.append("    liveboardResponseVersion: ")
-                .append(toIndentedString(liveboardResponseVersion))
-                .append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -1046,8 +923,6 @@ public class SearchMetadataRequest implements Serializable {
         openapiFields.add("tag_identifiers");
         openapiFields.add("include_stats");
         openapiFields.add("include_discoverable_objects");
-        openapiFields.add("show_resolved_parameters");
-        openapiFields.add("liveboard_response_version");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -1194,21 +1069,6 @@ public class SearchMetadataRequest implements Serializable {
                             "Expected the field `tag_identifiers` to be an array in the JSON"
                                     + " string but got `%s`",
                             jsonObj.get("tag_identifiers").toString()));
-        }
-        if ((jsonObj.get("liveboard_response_version") != null
-                        && !jsonObj.get("liveboard_response_version").isJsonNull())
-                && !jsonObj.get("liveboard_response_version").isJsonPrimitive()) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            "Expected the field `liveboard_response_version` to be a primitive"
-                                    + " type in the JSON string but got `%s`",
-                            jsonObj.get("liveboard_response_version").toString()));
-        }
-        // validate the optional field `liveboard_response_version`
-        if (jsonObj.get("liveboard_response_version") != null
-                && !jsonObj.get("liveboard_response_version").isJsonNull()) {
-            LiveboardResponseVersionEnum.validateJsonElement(
-                    jsonObj.get("liveboard_response_version"));
         }
     }
 

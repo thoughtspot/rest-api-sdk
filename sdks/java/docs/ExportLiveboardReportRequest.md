@@ -8,8 +8,6 @@
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**metadataIdentifier** | **String** | GUID or name of the Liveboard object. |  |
-|**tabIdentifiers** | **List&lt;String&gt;** | GUID or name of the tab of the Liveboard object.    Version: 10.9.0.cl or later  |  [optional] |
-|**personalisedViewIdentifier** | **String** | GUID or name of the personalised view of the Liveboard object.    Version: 10.9.0.cl or later  |  [optional] |
 |**visualizationIdentifiers** | **List&lt;String&gt;** | GUID or name of visualizations on the Liveboard. If this parameter is not defined, the API returns a report with all visualizations saved on a Liveboard. |  [optional] |
 |**transientContent** | **String** | Transient content of the Liveboard. |  [optional] |
 |**fileFormat** | [**FileFormatEnum**](#FileFormatEnum) | Export file format. |  [optional] |

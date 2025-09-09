@@ -105,16 +105,4 @@ public class SearchUserGroupsRequestTest {
     public void sortOptionsTest() {
         // TODO: test sortOptions
     }
-
-    /** Test the property 'includeUsers' */
-    @Test
-    public void includeUsersTest() {
-        // TODO: test includeUsers
-    }
-
-    /** Test the property 'includeSubGroups' */
-    @Test
-    public void includeSubGroupsTest() {
-        // TODO: test includeSubGroups
-    }
 }
