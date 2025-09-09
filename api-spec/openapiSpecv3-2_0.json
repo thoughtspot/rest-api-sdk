@@ -4426,7 +4426,7 @@
         ],
         "requestBody": {
           "content": {
-            "multipart/form-data": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -4551,7 +4551,7 @@
         ],
         "requestBody": {
           "content": {
-            "multipart/form-data": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -4638,7 +4638,7 @@
         ],
         "requestBody": {
           "content": {
-            "multipart/form-data": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -4647,9 +4647,11 @@
                     "type": "string"
                   },
                   "model_tables": {
-                    "description": "List of Models and their respective Tables\nExample: '[{\"model_name\": \"model_name\", \"tables\": [\"table_name\"]}]'",
-                    "type": "string",
-                    "format": "json"
+                    "description": "List of Models and their respective Tables",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ModelTableList"
+                    }
                   },
                   "import_worksheets": {
                     "description": "Mention the worksheet tmls to import",
@@ -4661,9 +4663,11 @@
                     ]
                   },
                   "worksheets": {
-                    "description": "List of worksheets is mandatory when import_Worksheets is type SELECTED\nExample: [\"worksheet_name\"]",
-                    "type": "string",
-                    "format": "json"
+                    "description": "List of worksheets is mandatory when import_Worksheets is type SELECTED",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
                   },
                   "file_content": {
                     "description": "Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’",
@@ -4673,7 +4677,6 @@
                 },
                 "required": [
                   "dbt_connection_identifier",
-                  "model_tables",
                   "import_worksheets"
                 ]
               }
@@ -4878,7 +4881,7 @@
         ],
         "requestBody": {
           "content": {
-            "multipart/form-data": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -14171,10 +14174,10 @@
     "/api/rest/2.0/template/variables/create": {
       "post": {
         "operationId": "createVariable",
-        "description": "\nCreate a variable which can be used for parameterizing metadata objects <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows creating a variable which can be used for parameterizing metadata objects in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\n\nThe API endpoint supports the following types of variables:\n* CONNECTION_PROPERTY - For connection properties\n* TABLE_MAPPING - For table mappings\n* CONNECTION_PROPERTY_PER_PRINCIPAL - For connection properties per principal. In order to use this please contact support to enable this.\n\nWhen creating a variable, you need to specify:\n* The variable type\n* A unique name for the variable\n* Whether the variable contains sensitive values (defaults to false)\n* The variable values (optional)\n\nThe operation will fail if:\n* The user lacks required permissions\n* The variable name already exists\n* The variable type is invalid\n* The variable values are invalid for the specified type \n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nCreate a variable which can be used for parameterizing metadata objects <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nAllows creating a variable which can be used for parameterizing metadata objects in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\n\nThe API endpoint supports the following types of variables:\n* CONNECTION_PROPERTY - For connection properties\n* TABLE_MAPPING - For table mappings\n* CONNECTION_PROPERTY_PER_PRINCIPAL - For connection properties per principal. In order to use this please contact support to enable this.\n\nWhen creating a variable, you need to specify:\n* The variable type\n* A unique name for the variable\n* Whether the variable contains sensitive values (defaults to false)\n\nThe operation will fail if:\n* The user lacks required permissions\n* The variable name already exists\n* The variable type is invalid\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Variable",
-          "10.9.0.cl"
+          "10.14.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -14195,18 +14198,11 @@
                     "description": "Name of the variable. This is unique across the cluster.",
                     "type": "string"
                   },
-                  "sensitive": {
+                  "is_sensitive": {
                     "description": "If the variable contains sensitive values like passwords",
                     "default": false,
                     "type": "boolean",
                     "nullable": true
-                  },
-                  "values": {
-                    "description": "Values of variable",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/InputVariableValue"
-                    }
                   }
                 },
                 "required": [
@@ -14276,10 +14272,10 @@
     "/api/rest/2.0/template/variables/{identifier}/delete": {
       "post": {
         "operationId": "deleteVariable",
-        "description": "\nDelete a variable <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows deleting a variable from ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\n\nThe API endpoint requires:\n* The variable identifier (ID or name)\n\nThe operation will fail if:\n* The user lacks required permissions\n* The variable doesn't exist\n* The variable is being used by other objects \n\n\n\n#### Endpoint URL\n",
+        "description": "\nDelete a variable <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nAllows deleting a variable from ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\n\nThe API endpoint requires:\n* The variable identifier (ID or name)\n\nThe operation will fail if:\n* The user lacks required permissions\n* The variable doesn't exist\n* The variable is being used by other objects \n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Variable",
-          "10.9.0.cl"
+          "10.14.0.cl"
         ],
         "parameters": [
           {
@@ -14342,10 +14338,10 @@
     "/api/rest/2.0/template/variables/search": {
       "post": {
         "operationId": "searchVariables",
-        "description": "\nSearch variables <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows searching for variables in ThoughtSpot.\n\nRequires ADMINISTRATION role.\n\nThe API endpoint supports searching variables by:\n* Variable identifier (ID or name)\n* Variable type\n* Name pattern (case-insensitive, supports % for wildcard)\n\nThe search results can be formatted in three ways:\n* METADATA_ONLY - Returns only variable metadata (default)\n* METADATA_AND_VALUES - Returns variable metadata and values\n* EDITABLE_METADATA_AND_VALUES - Returns only editable variable metadata and values\n\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nSearch variables <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nAllows searching for variables in ThoughtSpot.\n\nRequires ADMINISTRATION role.\n\nThe API endpoint supports searching variables by:\n* Variable identifier (ID or name)\n* Variable type\n* Name pattern (case-insensitive, supports % for wildcard)\n\nThe search results can be formatted in three ways:\n* METADATA_ONLY - Returns only variable metadata (default)\n* METADATA_AND_VALUES - Returns variable metadata and values\n* EDITABLE_METADATA_AND_VALUES - Returns only editable variable metadata and values\n\nThe values can be filtered by scope:\n* org_identifier\n* principal_identifier\n* model_identifier\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Variable",
-          "10.9.0.cl"
+          "10.14.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -14358,6 +14354,13 @@
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/VariableDetailInput"
+                    }
+                  },
+                  "value_scope": {
+                    "description": "Array of scope filters",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ValueScopeInput"
                     }
                   },
                   "record_offset": {
@@ -14449,10 +14452,10 @@
     "/api/rest/2.0/template/variables/{identifier}/update": {
       "post": {
         "operationId": "updateVariable",
-        "description": "\nUpdate a variable's properties <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows updating a variable's properties in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\n\nThe API endpoint allows updating:\n* The variable name\n* The variable values\n\nWhen updating variable values, you need to specify:\n* The operation to perform (ADD, REPLACE, REMOVE)\n* The new values to add/replace/remove\n\nWhen the operation is ADD, a value any pre-existing value with the same set of constraints will be replaced.\nWhen the operation is REPLACE, all values of the variable are replaced with the values specified.\nWhen the operation is REMOVE, all values with the given set of conditions are removed.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nUpdate a variable's name <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nAllows updating a variable's properties in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\n\nThe API endpoint allows updating:\n* The variable name\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Variable",
-          "10.9.0.cl"
+          "10.14.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -14461,27 +14464,13 @@
                 "type": "object",
                 "properties": {
                   "name": {
-                    "description": "New name of the variable if we want to rename.",
+                    "description": "New name of the variable.",
                     "type": "string"
-                  },
-                  "operation": {
-                    "description": "Operation to perform on the values.",
-                    "default": "REPLACE",
-                    "type": "string",
-                    "enum": [
-                      "ADD",
-                      "REMOVE",
-                      "REPLACE"
-                    ]
-                  },
-                  "values": {
-                    "description": "Values of variable to be updated.",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/InputVariableValue"
-                    }
                   }
-                }
+                },
+                "required": [
+                  "name"
+                ]
               }
             }
           },
@@ -14500,7 +14489,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Updating the variable is successful."
+            "description": "Variable name updated successfully."
           },
           "400": {
             "description": "Invalid request.",
@@ -14545,13 +14534,13 @@
         }
       }
     },
-    "/api/rest/2.0/template/variables/update": {
+    "/api/rest/2.0/template/variables/update-values": {
       "post": {
         "operationId": "updateVariableValues",
-        "description": "\nUpdate values for multiple variables <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows updating values for multiple variables in ThoughtSpot.\n\nRequires ADMINISTRATION role.\n\nThe API endpoint allows:\n* Adding new values to variables\n* Replacing existing values\n* Deleting values from variables\n\nWhen updating variable values, you need to specify:\n* The variable identifiers\n* The values to add/replace/remove for each variable\n* The operation to perform (ADD, REPLACE, REMOVE)\n\nBehaviour based on operation type:\n* ADD - Adds values to the variable. Any pre-existing values with the same conditions are replaced.\n* REPLACE - Replaces all values of a given org with the current set of values.\n* REMOVE - Removes any values which match the set of conditions of the variables.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nUpdate values for multiple variables <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nAllows updating values for multiple variables in ThoughtSpot.\n\nRequires ADMINISTRATION role.\n\nThe API endpoint allows:\n* Adding new values to variables\n* Replacing existing values\n* Deleting values from variables\n\nWhen updating variable values, you need to specify:\n* The variable identifiers\n* The values to add/replace/remove for each variable\n* The operation to perform (ADD, REPLACE, REMOVE, CLEAR)\n\nBehaviour based on operation type:\n* ADD - Adds values to the variable if this is a list type variable, else same as replace.\n* REPLACE - Replaces all values of a given set of constraints with the current set of values.\n* REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value.\n* CLEAR - Removes all constrains for a given variable, scope is ignored\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Variable",
-          "10.9.0.cl"
+          "10.14.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -14559,26 +14548,24 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "variable_updates": {
-                    "description": "Variables and values",
+                  "variable_assignment": {
+                    "description": "Variables and values to update",
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/VariableValueInput"
+                      "$ref": "#/components/schemas/VariableUpdateAssignmentInput"
                     }
                   },
-                  "operation": {
-                    "description": "Type of update operation",
-                    "type": "string",
-                    "enum": [
-                      "ADD",
-                      "REMOVE",
-                      "REPLACE"
-                    ]
+                  "variable_value_scope": {
+                    "description": "Variables and values to update",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/VariableUpdateScopeInput"
+                    }
                   }
                 },
                 "required": [
-                  "variable_updates",
-                  "operation"
+                  "variable_assignment",
+                  "variable_value_scope"
                 ]
               }
             }
@@ -14588,7 +14575,7 @@
         "parameters": [],
         "responses": {
           "204": {
-            "description": "Updating variable values is successful."
+            "description": "Variable values updated successfully."
           },
           "400": {
             "description": "Invalid request.",
@@ -19534,6 +19521,36 @@
         },
         "description": "Input for variable details in search"
       },
+      "ValueScopeInput": {
+        "type": "object",
+        "properties": {
+          "org_identifier": {
+            "type": "string",
+            "description": "The unique name of the org",
+            "nullable": true
+          },
+          "principal_type": {
+            "type": "string",
+            "enum": [
+              "USER",
+              "USER_GROUP"
+            ],
+            "description": "Principal type",
+            "nullable": true
+          },
+          "principal_identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the principal",
+            "nullable": true
+          },
+          "model_identifier": {
+            "type": "string",
+            "description": "Model Identifier",
+            "nullable": true
+          }
+        },
+        "description": "Input for variable scope in search"
+      },
       "Variable": {
         "type": "object",
         "required": [
@@ -23207,17 +23224,44 @@
           }
         }
       },
-      "InputVariableValue": {
+      "VariableUpdateAssignmentInput": {
         "type": "object",
         "required": [
-          "value",
+          "variable_identifier",
+          "variable_values",
+          "operation"
+        ],
+        "properties": {
+          "variable_identifier": {
+            "type": "string",
+            "description": "ID or Name of the variable"
+          },
+          "variable_values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Values of the variable"
+          },
+          "operation": {
+            "type": "string",
+            "enum": [
+              "ADD",
+              "REMOVE",
+              "REPLACE",
+              "CLEAR"
+            ],
+            "description": "Operation to perform"
+          }
+        },
+        "description": "Input for variable value update in batch operations"
+      },
+      "VariableUpdateScopeInput": {
+        "type": "object",
+        "required": [
           "org_identifier"
         ],
         "properties": {
-          "value": {
-            "type": "string",
-            "description": "The connection property value"
-          },
           "org_identifier": {
             "type": "string",
             "description": "The unique name of the org"
@@ -23236,34 +23280,19 @@
             "description": "Unique ID or name of the principal",
             "nullable": true
           },
+          "model_identifier": {
+            "type": "string",
+            "description": "Unique ID of the model",
+            "nullable": true
+          },
           "priority": {
             "type": "integer",
             "format": "int32",
-            "description": "The priority assigned to this value. If there are 2 matching values, the one with the higher priority will be picked.",
+            "description": "Priority level",
             "nullable": true
           }
-        }
-      },
-      "VariableValueInput": {
-        "type": "object",
-        "required": [
-          "variable_identifier",
-          "variable_values"
-        ],
-        "properties": {
-          "variable_identifier": {
-            "type": "string",
-            "description": "ID or Name of the variable"
-          },
-          "variable_values": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/InputVariableValue"
-            },
-            "description": "Values of the variable"
-          }
         },
-        "description": "Input for variable value update"
+        "description": "Input for variable value update in batch operations"
       },
       "CreateEmailCustomizationResponse": {
         "type": "object",
