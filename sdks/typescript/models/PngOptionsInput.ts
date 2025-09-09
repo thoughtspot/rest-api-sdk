@@ -25,18 +25,6 @@ export class PngOptionsInput {
     * Indicates personalised view of the Liveboard in case of png
     */
     'personalised_view_id'?: string | null;
-    /**
-    * Desired width of the Liveboard image in pixels. Ex. 1920 for Full HD image   Version: 10.9.0.cl or later 
-    */
-    'image_resolution'?: number | null;
-    /**
-    * The scale of the image in percentage. Ex. 100 for 100% scale.   Version: 10.9.0.cl or later 
-    */
-    'image_scale'?: number | null;
-    /**
-    * Indicates whether to include the header of the liveboard.   Version: 10.9.0.cl or later 
-    */
-    'include_header'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -57,24 +45,6 @@ export class PngOptionsInput {
             "name": "personalised_view_id",
             "baseName": "personalised_view_id",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "image_resolution",
-            "baseName": "image_resolution",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "image_scale",
-            "baseName": "image_scale",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "include_header",
-            "baseName": "include_header",
-            "type": "boolean",
             "format": ""
         }    ];
 

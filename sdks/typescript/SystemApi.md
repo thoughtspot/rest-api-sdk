@@ -119,7 +119,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **getSystemOverrideInfo**
-> SystemOverrideInfo getSystemOverrideInfo()
+> any getSystemOverrideInfo()
 
   Version: 9.2.0.cl or later   Gets a list of configuration overrides applied on the cluster.    Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege is required.  This API does not require any parameters to be passed in the request.        
 
@@ -149,7 +149,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**SystemOverrideInfo**
+**any**
 
 ### Authorization
 
