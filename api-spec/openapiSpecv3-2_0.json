@@ -6374,7 +6374,7 @@
     "/api/rest/2.0/metadata/copyobject": {
       "post": {
         "operationId": "copyObject",
-        "description": "\nMakes a copy of an Answer or Liveboard saved in Atlas <br/>  <span class=\"since-beta-tag\">Version: 10.3.0.cl or later</span>\n\nCreates a copy of a metadata object.\n\nRequires at least view access to the metadata object being copied.\n\nUpon successful execution, the API creates a copy of the metadata object specified in the API request and returns the ID of the new object.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nMakes a copy of an Answer or Liveboard <br/>  <span class=\"since-beta-tag\">Version: 10.3.0.cl or later</span>\n\nCreates a copy of a metadata object.\n\nRequires at least view access to the metadata object being copied.\n\nUpon successful execution, the API creates a copy of the metadata object specified in the API request and returns the ID of the new object.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Metadata",
           "10.3.0.cl"
@@ -19858,8 +19858,8 @@
           "org",
           "url",
           "events",
-          "created_at",
-          "last_modified_at"
+          "creation_time_in_millis",
+          "modification_time_in_millis"
         ],
         "properties": {
           "id": {
@@ -19908,13 +19908,15 @@
             "description": "Redacted configuration for webhook signature verification.",
             "nullable": true
           },
-          "created_at": {
-            "type": "string",
-            "description": "Timestamp when the webhook was created."
+          "creation_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Creation time of the webhook configuration in milliseconds."
           },
-          "last_modified_at": {
-            "type": "string",
-            "description": "Timestamp when the webhook was last updated."
+          "modification_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Last modified time of the webhook configuration in milliseconds."
           },
           "created_by": {
             "$ref": "#/components/schemas/WebhookUser",
