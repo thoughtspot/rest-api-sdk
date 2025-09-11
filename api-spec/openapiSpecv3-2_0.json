@@ -19810,11 +19810,11 @@
           "field_name": {
             "type": "string",
             "enum": [
-              "CREATED_AT",
-              "LAST_MODIFIED_AT",
+              "CREATED",
+              "MODIFIED",
               "NAME"
             ],
-            "default": "CREATED_AT",
+            "default": "CREATED",
             "description": "Name of the field to apply the sort on.",
             "nullable": true
           },
@@ -19950,6 +19950,11 @@
       "WebhookAuthentication": {
         "type": "object",
         "properties": {
+          "NO_AUTH": {
+            "type": "string",
+            "description": "No authentication required.",
+            "nullable": true
+          },
           "API_KEY": {
             "$ref": "#/components/schemas/WebhookAuthApiKey",
             "description": "Redacted API key authentication configuration.",
@@ -23493,6 +23498,11 @@
       "WebhookAuthenticationInput": {
         "type": "object",
         "properties": {
+          "NO_AUTH": {
+            "type": "string",
+            "description": "No authentication required.",
+            "nullable": true
+          },
           "API_KEY": {
             "$ref": "#/components/schemas/WebhookAuthApiKeyInput",
             "description": "API key authentication configuration.",
