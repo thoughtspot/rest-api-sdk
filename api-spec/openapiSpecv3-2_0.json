@@ -19950,11 +19950,6 @@
       "WebhookAuthentication": {
         "type": "object",
         "properties": {
-          "NO_AUTH": {
-            "type": "string",
-            "description": "No authentication required.",
-            "nullable": true
-          },
           "API_KEY": {
             "$ref": "#/components/schemas/WebhookAuthApiKey",
             "description": "Redacted API key authentication configuration.",
@@ -23498,11 +23493,6 @@
       "WebhookAuthenticationInput": {
         "type": "object",
         "properties": {
-          "NO_AUTH": {
-            "type": "string",
-            "description": "No authentication required.",
-            "nullable": true
-          },
           "API_KEY": {
             "$ref": "#/components/schemas/WebhookAuthApiKeyInput",
             "description": "API key authentication configuration.",
