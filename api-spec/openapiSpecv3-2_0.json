@@ -16538,6 +16538,11 @@
             "type": "object",
             "description": "Access Control Properties which are specified for the user via JWToken",
             "nullable": true
+          },
+          "variable_values": {
+            "type": "object",
+            "description": "Formula Variables which are specified for the user via JWToken",
+            "nullable": true
           }
         }
       },
@@ -19950,11 +19955,6 @@
       "WebhookAuthentication": {
         "type": "object",
         "properties": {
-          "NO_AUTH": {
-            "type": "string",
-            "description": "No authentication required.",
-            "nullable": true
-          },
           "API_KEY": {
             "$ref": "#/components/schemas/WebhookAuthApiKey",
             "description": "Redacted API key authentication configuration.",
@@ -23498,11 +23498,6 @@
       "WebhookAuthenticationInput": {
         "type": "object",
         "properties": {
-          "NO_AUTH": {
-            "type": "string",
-            "description": "No authentication required.",
-            "nullable": true
-          },
           "API_KEY": {
             "$ref": "#/components/schemas/WebhookAuthApiKeyInput",
             "description": "API key authentication configuration.",
