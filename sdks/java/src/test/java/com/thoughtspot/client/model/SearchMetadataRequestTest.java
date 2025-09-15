@@ -159,4 +159,10 @@ public class SearchMetadataRequestTest {
     public void liveboardResponseVersionTest() {
         // TODO: test liveboardResponseVersion
     }
+
+    /** Test the property 'includeOnlyPublishedObjects' */
+    @Test
+    public void includeOnlyPublishedObjectsTest() {
+        // TODO: test includeOnlyPublishedObjects
+    }
 }

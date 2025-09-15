@@ -275,7 +275,15 @@ public class SearchConnectionRequest implements Serializable {
 
         OAUTH_WITH_SERVICE_PRINCIPAL("OAUTH_WITH_SERVICE_PRINCIPAL"),
 
-        PERSONAL_ACCESS_TOKEN("PERSONAL_ACCESS_TOKEN");
+        PERSONAL_ACCESS_TOKEN("PERSONAL_ACCESS_TOKEN"),
+
+        KEY_PAIR("KEY_PAIR"),
+
+        OAUTH_WITH_PKCE("OAUTH_WITH_PKCE"),
+
+        EXTOAUTH_WITH_PKCE("EXTOAUTH_WITH_PKCE"),
+
+        OAUTH_WITH_PEZ("OAUTH_WITH_PEZ");
 
         private String value;
 

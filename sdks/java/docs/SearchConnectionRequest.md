@@ -82,6 +82,10 @@
 | EXTOAUTH | &quot;EXTOAUTH&quot; |
 | OAUTH_WITH_SERVICE_PRINCIPAL | &quot;OAUTH_WITH_SERVICE_PRINCIPAL&quot; |
 | PERSONAL_ACCESS_TOKEN | &quot;PERSONAL_ACCESS_TOKEN&quot; |
+| KEY_PAIR | &quot;KEY_PAIR&quot; |
+| OAUTH_WITH_PKCE | &quot;OAUTH_WITH_PKCE&quot; |
+| EXTOAUTH_WITH_PKCE | &quot;EXTOAUTH_WITH_PKCE&quot; |
+| OAUTH_WITH_PEZ | &quot;OAUTH_WITH_PEZ&quot; |
 
 
 ## Implemented Interfaces

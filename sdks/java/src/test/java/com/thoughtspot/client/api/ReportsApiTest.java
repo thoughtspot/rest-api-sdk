@@ -54,6 +54,11 @@ public class ReportsApiTest {
      * successful execution, the API returns the report with unsaved changes, including ad hoc
      * changes to visualizations. For more information, see [Liveboard Report
      * API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
+     * **NOTE**: Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in
+     * the PNG format in the resolution of your choice. To enable this on your instance, contact
+     * ThoughtSpot support. When this feature is enabled, the options
+     * &#x60;include_cover_page&#x60;,&#x60;include_filter_page&#x60; within the
+     * &#x60;png_options&#x60; will not be available for PNG exports.
      *
      * @throws ApiException if the Api call fails
      */
