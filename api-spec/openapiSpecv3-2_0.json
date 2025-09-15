@@ -14171,7 +14171,7 @@
     "/api/rest/2.0/template/variables/create": {
       "post": {
         "operationId": "createVariable",
-        "description": "\nCreate a variable which can be used for parameterizing metadata objects <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nAllows creating a variable which can be used for parameterizing metadata objects in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\n\nThe API endpoint supports the following types of variables:\n* CONNECTION_PROPERTY - For connection properties\n* TABLE_MAPPING - For table mappings\n* CONNECTION_PROPERTY_PER_PRINCIPAL - For connection properties per principal. In order to use this please contact support to enable this.\n* FORMULA_VARIABLE - For Formula variables\n\nWhen creating a variable, you need to specify:\n* The variable type\n* A unique name for the variable\n* Whether the variable contains sensitive values (defaults to false)\n* The data type of the variable, only specify for fomula variables (defaults to null)\n\nThe operation will fail if:\n* The user lacks required permissions\n* The variable name already exists\n* The variable type is invalid\n\n\n\n#### Endpoint URL\n",
+        "description": "\nCreate a variable which can be used for parameterizing metadata objects <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nAllows creating a variable which can be used for parameterizing metadata objects in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\n\nThe API endpoint supports the following types of variables:\n* CONNECTION_PROPERTY - For connection properties\n* TABLE_MAPPING - For table mappings\n* CONNECTION_PROPERTY_PER_PRINCIPAL - For connection properties per principal. In order to use this please contact support to enable this.\n\nWhen creating a variable, you need to specify:\n* The variable type\n* A unique name for the variable\n* Whether the variable contains sensitive values (defaults to false)\n\nThe operation will fail if:\n* The user lacks required permissions\n* The variable name already exists\n* The variable type is invalid\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Variable",
           "10.14.0.cl"
@@ -14188,8 +14188,7 @@
                     "enum": [
                       "CONNECTION_PROPERTY",
                       "TABLE_MAPPING",
-                      "CONNECTION_PROPERTY_PER_PRINCIPAL",
-                      "FORMULA_VARIABLE"
+                      "CONNECTION_PROPERTY_PER_PRINCIPAL"
                     ]
                   },
                   "name": {
@@ -14201,24 +14200,11 @@
                     "default": false,
                     "type": "boolean",
                     "nullable": true
-                  },
-                  "data_type": {
-                    "description": "",
-                    "type": "string",
-                    "enum": [
-                      "VARCHAR",
-                      "INT32",
-                      "INT64",
-                      "DOUBLE",
-                      "DATE",
-                      "DATE_TIME"
-                    ]
                   }
                 },
                 "required": [
                   "type",
-                  "name",
-                  "data_type"
+                  "name"
                 ]
               }
             }
@@ -18158,17 +18144,17 @@
       "ColumnSecurityRuleResponse": {
         "type": "object",
         "properties": {
-          "guid": {
+          "table_guid": {
             "type": "string",
             "description": "GUID of the table for which the column security rules are fetched",
             "nullable": true
           },
-          "objId": {
+          "obj_id": {
             "type": "string",
             "description": "Object ID of the table for which the column security rules are fetched",
             "nullable": true
           },
-          "columnSecurityRules": {
+          "column_security_rules": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ColumnSecurityRule"
@@ -18196,7 +18182,7 @@
             "description": "Array of groups that have access to this column",
             "nullable": true
           },
-          "sourceTableDetails": {
+          "source_table_details": {
             "$ref": "#/components/schemas/ColumnSecurityRuleSourceTable",
             "description": "Information about the source table",
             "nullable": true
@@ -19520,8 +19506,7 @@
             "enum": [
               "CONNECTION_PROPERTY",
               "TABLE_MAPPING",
-              "CONNECTION_PROPERTY_PER_PRINCIPAL",
-              "FORMULA_VARIABLE"
+              "CONNECTION_PROPERTY_PER_PRINCIPAL"
             ],
             "description": "Type of variable",
             "nullable": true
@@ -19584,8 +19569,7 @@
             "enum": [
               "CONNECTION_PROPERTY",
               "TABLE_MAPPING",
-              "CONNECTION_PROPERTY_PER_PRINCIPAL",
-              "FORMULA_VARIABLE"
+              "CONNECTION_PROPERTY_PER_PRINCIPAL"
             ],
             "description": "Type of the variable",
             "nullable": true
@@ -19874,8 +19858,8 @@
           "org",
           "url",
           "events",
-          "creation_time_in_millis",
-          "modification_time_in_millis"
+          "created_at",
+          "last_modified_at"
         ],
         "properties": {
           "id": {
@@ -19924,15 +19908,13 @@
             "description": "Redacted configuration for webhook signature verification.",
             "nullable": true
           },
-          "creation_time_in_millis": {
-            "type": "number",
-            "format": "float",
-            "description": "Creation time of the webhook configuration in milliseconds."
+          "created_at": {
+            "type": "string",
+            "description": "Timestamp when the webhook was created."
           },
-          "modification_time_in_millis": {
-            "type": "number",
-            "format": "float",
-            "description": "Last modified time of the webhook configuration in milliseconds."
+          "last_modified_at": {
+            "type": "string",
+            "description": "Timestamp when the webhook was last updated."
           },
           "created_by": {
             "$ref": "#/components/schemas/WebhookUser",
@@ -19966,6 +19948,11 @@
       "WebhookAuthentication": {
         "type": "object",
         "properties": {
+          "NO_AUTH": {
+            "type": "string",
+            "description": "No authentication required.",
+            "nullable": true
+          },
           "API_KEY": {
             "$ref": "#/components/schemas/WebhookAuthApiKey",
             "description": "Redacted API key authentication configuration.",
@@ -23509,6 +23496,11 @@
       "WebhookAuthenticationInput": {
         "type": "object",
         "properties": {
+          "NO_AUTH": {
+            "type": "string",
+            "description": "No authentication required.",
+            "nullable": true
+          },
           "API_KEY": {
             "$ref": "#/components/schemas/WebhookAuthApiKeyInput",
             "description": "API key authentication configuration.",
