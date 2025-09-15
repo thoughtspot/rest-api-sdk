@@ -17,6 +17,7 @@
 |**timeZone** | [**TimeZoneEnum**](#TimeZoneEnum) | Time zone |  |
 |**frequency** | [**FrequencyInput**](FrequencyInput.md) | Frequency settings for the scheduled job. |  [optional] |
 |**recipientDetails** | [**RecipientDetailsInput**](RecipientDetailsInput.md) | Recipients of the scheduled job notifications. Add the GUID or name of the ThoughtSpot users or groups as recipients in the &#x60;principals&#x60; array. If a recipient is not a ThoughtSpot user, specify email address. |  |
+|**personalisedViewId** | **String** | Personalised view id of the liveboard to be scheduled. |  [optional] |
 
 
 

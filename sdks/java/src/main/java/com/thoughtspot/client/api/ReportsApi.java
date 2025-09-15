@@ -176,10 +176,7 @@ public class ReportsApi {
      * in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with
      * tables. Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
-     * to apply to the Answer data. The &#x60;record_size&#x60; attribute determines the number of
-     * records to retrieve in an API call. For more information about pagination, record size, and
-     * maximum row limit, see [Pagination and record size
-     * settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
+     * to apply to the Answer data.
      *
      * @param exportAnswerReportRequest (required)
      * @return File
@@ -211,10 +208,7 @@ public class ReportsApi {
      * in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with
      * tables. Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
-     * to apply to the Answer data. The &#x60;record_size&#x60; attribute determines the number of
-     * records to retrieve in an API call. For more information about pagination, record size, and
-     * maximum row limit, see [Pagination and record size
-     * settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
+     * to apply to the Answer data.
      *
      * @param exportAnswerReportRequest (required)
      * @return ApiResponse&lt;File&gt;
@@ -248,10 +242,7 @@ public class ReportsApi {
      * typing in the relevant extension. * HTML rendering is not supported for PDF exports of
      * Answers with tables. Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
-     * to apply to the Answer data. The &#x60;record_size&#x60; attribute determines the number of
-     * records to retrieve in an API call. For more information about pagination, record size, and
-     * maximum row limit, see [Pagination and record size
-     * settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
+     * to apply to the Answer data.
      *
      * @param exportAnswerReportRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -383,6 +374,11 @@ public class ReportsApi {
      * successful execution, the API returns the report with unsaved changes, including ad hoc
      * changes to visualizations. For more information, see [Liveboard Report
      * API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
+     * **NOTE**: Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in
+     * the PNG format in the resolution of your choice. To enable this on your instance, contact
+     * ThoughtSpot support. When this feature is enabled, the options
+     * &#x60;include_cover_page&#x60;,&#x60;include_filter_page&#x60; within the
+     * &#x60;png_options&#x60; will not be available for PNG exports.
      *
      * @param exportLiveboardReportRequest (required)
      * @return File
@@ -423,6 +419,11 @@ public class ReportsApi {
      * successful execution, the API returns the report with unsaved changes, including ad hoc
      * changes to visualizations. For more information, see [Liveboard Report
      * API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
+     * **NOTE**: Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in
+     * the PNG format in the resolution of your choice. To enable this on your instance, contact
+     * ThoughtSpot support. When this feature is enabled, the options
+     * &#x60;include_cover_page&#x60;,&#x60;include_filter_page&#x60; within the
+     * &#x60;png_options&#x60; will not be available for PNG exports.
      *
      * @param exportLiveboardReportRequest (required)
      * @return ApiResponse&lt;File&gt;
@@ -464,6 +465,11 @@ public class ReportsApi {
      * successful execution, the API returns the report with unsaved changes, including ad hoc
      * changes to visualizations. For more information, see [Liveboard Report
      * API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
+     * **NOTE**: Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in
+     * the PNG format in the resolution of your choice. To enable this on your instance, contact
+     * ThoughtSpot support. When this feature is enabled, the options
+     * &#x60;include_cover_page&#x60;,&#x60;include_filter_page&#x60; within the
+     * &#x60;png_options&#x60; will not be available for PNG exports.
      *
      * @param exportLiveboardReportRequest (required)
      * @param _callback The callback to be executed when the API call finishes

@@ -14,7 +14,7 @@ All URIs are relative to *CLUSTER_URL*
 
 <a id="dbtConnection"></a>
 # **dbtConnection**
-> Object dbtConnection(dbtConnectionRequest)
+> Object dbtConnection(connectionName, databaseName, importType, accessToken, dbtUrl, accountId, projectId, dbtEnvId, projectName, fileContent)
 
 
 
@@ -24,7 +24,16 @@ All URIs are relative to *CLUSTER_URL*
 
 | Name | Type |
 |------------- | ------------- |
-| **dbtConnectionRequest** | [**DbtConnectionRequest**](DbtConnectionRequest.md)
+| **connectionName** | **String**
+| **databaseName** | **String**
+| **importType** | **String**
+| **accessToken** | **String**
+| **dbtUrl** | **String**
+| **accountId** | **String**
+| **projectId** | **String**
+| **dbtEnvId** | **String**
+| **projectName** | **String**
+| **fileContent** | **File**
 
 ### Return type
 
@@ -36,7 +45,7 @@ All URIs are relative to *CLUSTER_URL*
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details
@@ -50,7 +59,7 @@ All URIs are relative to *CLUSTER_URL*
 
 <a id="dbtGenerateSyncTml"></a>
 # **dbtGenerateSyncTml**
-> Object dbtGenerateSyncTml(dbtGenerateSyncTmlRequest)
+> Object dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent)
 
 
 
@@ -60,7 +69,8 @@ All URIs are relative to *CLUSTER_URL*
 
 | Name | Type |
 |------------- | ------------- |
-| **dbtGenerateSyncTmlRequest** | [**DbtGenerateSyncTmlRequest**](DbtGenerateSyncTmlRequest.md)
+| **dbtConnectionIdentifier** | **String**
+| **fileContent** | **File**
 
 ### Return type
 
@@ -72,7 +82,7 @@ All URIs are relative to *CLUSTER_URL*
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details
@@ -86,7 +96,7 @@ All URIs are relative to *CLUSTER_URL*
 
 <a id="dbtGenerateTml"></a>
 # **dbtGenerateTml**
-> Object dbtGenerateTml(dbtGenerateTmlRequest)
+> Object dbtGenerateTml(dbtConnectionIdentifier, importWorksheets, modelTables, worksheets, fileContent)
 
 
 
@@ -96,7 +106,11 @@ All URIs are relative to *CLUSTER_URL*
 
 | Name | Type |
 |------------- | ------------- |
-| **dbtGenerateTmlRequest** | [**DbtGenerateTmlRequest**](DbtGenerateTmlRequest.md)
+| **dbtConnectionIdentifier** | **String**
+| **importWorksheets** | **String**
+| **modelTables** | **String**
+| **worksheets** | **String**
+| **fileContent** | **File**
 
 ### Return type
 
@@ -108,7 +122,7 @@ All URIs are relative to *CLUSTER_URL*
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details
@@ -191,7 +205,7 @@ null (empty response body)
 
 <a id="updateDbtConnection"></a>
 # **updateDbtConnection**
-> Object updateDbtConnection(updateDbtConnectionRequest)
+> Object updateDbtConnection(dbtConnectionIdentifier, connectionName, databaseName, importType, accessToken, dbtUrl, accountId, projectId, dbtEnvId, projectName, fileContent)
 
 
 
@@ -201,7 +215,17 @@ null (empty response body)
 
 | Name | Type |
 |------------- | ------------- |
-| **updateDbtConnectionRequest** | [**UpdateDbtConnectionRequest**](UpdateDbtConnectionRequest.md)
+| **dbtConnectionIdentifier** | **String**
+| **connectionName** | **String**
+| **databaseName** | **String**
+| **importType** | **String**
+| **accessToken** | **String**
+| **dbtUrl** | **String**
+| **accountId** | **String**
+| **projectId** | **String**
+| **dbtEnvId** | **String**
+| **projectName** | **String**
+| **fileContent** | **File**
 
 ### Return type
 
@@ -213,7 +237,7 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details

@@ -17,7 +17,7 @@ import { HttpFile } from '../http/http';
 */
 export class JWTMetadataObject {
     'identifier'?: string | null;
-    'type'?: string | null;
+    'type'?: JWTMetadataObjectTypeEnum | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -31,7 +31,7 @@ export class JWTMetadataObject {
         {
             "name": "type",
             "baseName": "type",
-            "type": "string",
+            "type": "JWTMetadataObjectTypeEnum",
             "format": ""
         }    ];
 
@@ -42,4 +42,7 @@ export class JWTMetadataObject {
     public constructor() {
     }
 }
+
+
+export type JWTMetadataObjectTypeEnum = "LOGICAL_TABLE" ;
 

@@ -275,7 +275,15 @@ public class SearchConnectionRequest implements Serializable {
 
         OAUTH_WITH_SERVICE_PRINCIPAL("OAUTH_WITH_SERVICE_PRINCIPAL"),
 
-        PERSONAL_ACCESS_TOKEN("PERSONAL_ACCESS_TOKEN");
+        PERSONAL_ACCESS_TOKEN("PERSONAL_ACCESS_TOKEN"),
+
+        KEY_PAIR("KEY_PAIR"),
+
+        OAUTH_WITH_PKCE("OAUTH_WITH_PKCE"),
+
+        EXTOAUTH_WITH_PKCE("EXTOAUTH_WITH_PKCE"),
+
+        OAUTH_WITH_PEZ("OAUTH_WITH_PEZ");
 
         private String value;
 
@@ -326,6 +334,13 @@ public class SearchConnectionRequest implements Serializable {
     @SerializedName(SERIALIZED_NAME_AUTHENTICATION_TYPE)
     @javax.annotation.Nullable
     private AuthenticationTypeEnum authenticationType = AuthenticationTypeEnum.SERVICE_ACCOUNT;
+
+    public static final String SERIALIZED_NAME_SHOW_RESOLVED_PARAMETERS =
+            "show_resolved_parameters";
+
+    @SerializedName(SERIALIZED_NAME_SHOW_RESOLVED_PARAMETERS)
+    @javax.annotation.Nullable
+    private Boolean showResolvedParameters = false;
 
     public SearchConnectionRequest() {}
 
@@ -560,6 +575,28 @@ public class SearchConnectionRequest implements Serializable {
         this.authenticationType = authenticationType;
     }
 
+    public SearchConnectionRequest showResolvedParameters(
+            @javax.annotation.Nullable Boolean showResolvedParameters) {
+        this.showResolvedParameters = showResolvedParameters;
+        return this;
+    }
+
+    /**
+     * &lt;div&gt;Version: 10.9.0.cl or later &lt;/div&gt; Indicates whether to show resolved
+     * parameterised values.
+     *
+     * @return showResolvedParameters
+     */
+    @javax.annotation.Nullable
+    public Boolean getShowResolvedParameters() {
+        return showResolvedParameters;
+    }
+
+    public void setShowResolvedParameters(
+            @javax.annotation.Nullable Boolean showResolvedParameters) {
+        this.showResolvedParameters = showResolvedParameters;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -582,7 +619,10 @@ public class SearchConnectionRequest implements Serializable {
                 && Objects.equals(this.includeDetails, searchConnectionRequest.includeDetails)
                 && Objects.equals(this._configuration, searchConnectionRequest._configuration)
                 && Objects.equals(
-                        this.authenticationType, searchConnectionRequest.authenticationType);
+                        this.authenticationType, searchConnectionRequest.authenticationType)
+                && Objects.equals(
+                        this.showResolvedParameters,
+                        searchConnectionRequest.showResolvedParameters);
     }
 
     private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -606,7 +646,8 @@ public class SearchConnectionRequest implements Serializable {
                 sortOptions,
                 includeDetails,
                 _configuration,
-                authenticationType);
+                authenticationType,
+                showResolvedParameters);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -635,6 +676,9 @@ public class SearchConnectionRequest implements Serializable {
         sb.append("    _configuration: ").append(toIndentedString(_configuration)).append("\n");
         sb.append("    authenticationType: ")
                 .append(toIndentedString(authenticationType))
+                .append("\n");
+        sb.append("    showResolvedParameters: ")
+                .append(toIndentedString(showResolvedParameters))
                 .append("\n");
         sb.append("}");
         return sb.toString();
@@ -667,6 +711,7 @@ public class SearchConnectionRequest implements Serializable {
         openapiFields.add("include_details");
         openapiFields.add("configuration");
         openapiFields.add("authentication_type");
+        openapiFields.add("show_resolved_parameters");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();

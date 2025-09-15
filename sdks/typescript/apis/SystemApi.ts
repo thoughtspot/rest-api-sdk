@@ -11,6 +11,7 @@ import {SecurityAuthentication} from '../auth/auth';
 import { ErrorResponse } from '../models/ErrorResponse';
 import { SystemConfig } from '../models/SystemConfig';
 import { SystemInfo } from '../models/SystemInfo';
+import { SystemOverrideInfo } from '../models/SystemOverrideInfo';
 import { UpdateSystemConfigRequest } from '../models/UpdateSystemConfigRequest';
 
 /**
@@ -30,7 +31,7 @@ export class SystemApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.17.0")
       
 
 
@@ -62,7 +63,7 @@ export class SystemApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.17.0")
       
 
 
@@ -94,7 +95,7 @@ export class SystemApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.17.0")
       
 
 
@@ -133,7 +134,7 @@ export class SystemApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.17.0")
       
 
 
@@ -289,13 +290,13 @@ export class SystemApiResponseProcessor {
      * @params response Response returned by the server for a request to getSystemOverrideInfo
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getSystemOverrideInfo(response: ResponseContext): Promise<any > {
+     public async getSystemOverrideInfo(response: ResponseContext): Promise<SystemOverrideInfo > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
+            const body: SystemOverrideInfo = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
+                "SystemOverrideInfo", ""
+            ) as SystemOverrideInfo;
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
@@ -329,10 +330,10 @@ export class SystemApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: any = ObjectSerializer.deserialize(
+            const body: SystemOverrideInfo = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
+                "SystemOverrideInfo", ""
+            ) as SystemOverrideInfo;
             return body;
         }
 

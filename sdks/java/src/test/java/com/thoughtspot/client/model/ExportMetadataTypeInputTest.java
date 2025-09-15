@@ -27,4 +27,16 @@ public class ExportMetadataTypeInputTest {
     public void identifierTest() {
         // TODO: test identifier
     }
+
+    /** Test the property 'sessionIdentifier' */
+    @Test
+    public void sessionIdentifierTest() {
+        // TODO: test sessionIdentifier
+    }
+
+    /** Test the property 'generationNumber' */
+    @Test
+    public void generationNumberTest() {
+        // TODO: test generationNumber
+    }
 }
