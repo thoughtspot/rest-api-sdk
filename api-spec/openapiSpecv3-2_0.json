@@ -22,14 +22,6 @@
       "description": "Roles for version 10.4.0.cl"
     },
     {
-      "name": "10.11.0.cl",
-      "id": "10.11.0.cl",
-      "tags": [
-        "10.11.0.cl"
-      ],
-      "description": "Roles for version 10.11.0.cl"
-    },
-    {
       "name": "10.7.0.cl",
       "id": "10.7.0.cl",
       "tags": [
@@ -257,7 +249,6 @@
       "post": {
         "operationId": "createConversation",
         "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nCreates a Conversation object to start an AI-driven conversation based on a specific data model.\n\nRequires at least view access to the metadata object specified in the request.\n\n#### Usage guidelines\n\nThis API requires the `metadata_identifier` parameter to define the context for the conversation.\n\nYou can also specify the tokens to initiate the conversation as shown in this example:\n\n`\"tokens\": \"[tea],[sales],[type]\"`\n\nIf the API request is successful, ThoughtSpot returns the ID of the conversation.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
-        "deprecated": true,
         "tags": [
           "AI",
           "10.4.0.cl"
@@ -405,10 +396,10 @@
     "/api/rest/2.0/ai/relevant-questions/": {
       "post": {
         "operationId": "getRelevantQuestions",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.11.0.cl or later</span>\n\nBreaks down a user-submitted query into a series of analytical sub-questions using relevant contextual metadata.\n\nTo use this API, the user must have at least view-level access to the referenced metadata objects.\n\n#### Usage guidelines\n\nTo accurately generate relevant questions, the request must include at least one of the following metadata identifiers within `metadata_context` : `conversation_identifier`, `answer_identifiers`, `liveboard_identifiers`, or `data_source_identifiers`.\n\nYou can further enhance the quality and precision of breakdown by providing additional `ai_context` such as:\n\n- `content`: User provided content like text data, csv data as a string message to provide context & potentially improve the quality of the response.\n- `instructions`: User specific text instructions sent to AI system for processing the query.\n\nAdditional optional parameters include:\n\n- `limit_relevant_questions`: Controls the maximum number of relevant questions returned. Defaults to 5 if not specified.\n- `bypass_cache`: If set to true, forces fresh computation instead of returning cached results.\n\nIf the API request is successful, ThoughtSpot returns a list of relevant analytical queries, each aligned with the user's original question. Each returned question includes the query string, along with the identifier and name of the corresponding data source.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.13.0.cl or later</span>\n\nBreaks down a user-submitted query into a series of analytical sub-questions using relevant contextual metadata.\n\nTo use this API, the user must have at least view-level access to the referenced metadata objects.\n\n#### Usage guidelines\n\nTo accurately generate relevant questions, the request must include at least one of the following metadata identifiers within `metadata_context` : `conversation_identifier`, `answer_identifiers`, `liveboard_identifiers`, or `data_source_identifiers`.\n\nYou can further enhance the quality and precision of breakdown by providing additional `ai_context` such as:\n\n- `content`: User provided content like text data, csv data as a string message to provide context & potentially improve the quality of the response.\n- `instructions`: User specific text instructions sent to AI system for processing the query.\n\nAdditional optional parameters include:\n\n- `limit_relevant_questions`: Controls the maximum number of relevant questions returned. Defaults to 5 if not specified.\n- `bypass_cache`: If set to true, forces fresh computation instead of returning cached results.\n\nIf the API request is successful, ThoughtSpot returns a list of relevant analytical queries, each aligned with the user's original question. Each returned question includes the query string, along with the identifier and name of the corresponding data source.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
-          "10.11.0.cl"
+          "10.13.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -612,7 +603,7 @@
         }
       }
     },
-    "/api/rest/2.0/ai/agent/conversation/converse": {
+    "/api/rest/2.0/ai/agent/converse/sse": {
       "post": {
         "operationId": "sendAgentMessageStreaming",
         "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.13.0.cl or later</span>\n\nThis API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages. \nTo use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.\n\n\n#### Usage guidelines\n\nTo initiate or continue a conversation, the request must include:\n- `conversation_identifier`: a unique session ID for continuity and message tracking\n- `messages`: an array of one or more text messages, each with a value and type\n\nAdditionally, user can specify what tool can be included `conversation_settings` parameter, which supports:\n- `enable_contextual_change_analysis` (default: false)\n- `enable_natural_language_answer_generation` (default: true)\n- `enable_reasoning` (default: false)\n\nIf the request is valid, the API returns a stream of messages in real time, including:\n- `ack`: confirms receipt of the request\n- `text / text-chunk`: content chunks, optionally formatted (e.g., markdown)\n- `answer`: the final structured response with metadata and analytics\n- `error`: if a failure occurs\n- `notification`: notification messages for operation being performed\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n> * The streaming protocol uses Server-Sent Events (SSE)\n\n\n\n#### Endpoint URL\n",
@@ -626,16 +617,21 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "input": {
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/SendAgentMessageInput"
-                      }
-                    ]
+                  "conversation_identifier": {
+                    "description": "Unique identifier for the conversation (used to track context)",
+                    "type": "string"
+                  },
+                  "messages": {
+                    "description": "messages to be sent to the agent",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
                   }
                 },
                 "required": [
-                  "input"
+                  "conversation_identifier",
+                  "messages"
                 ]
               }
             }
@@ -691,7 +687,6 @@
       "post": {
         "operationId": "sendMessage",
         "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nAllows sending a follow-up message to an ongoing conversation within the context of the metadata model.\n\nRequires at least view access to the metadata object specified in the request.\n\n#### Usage guidelines\n\nThe API requires you to specify the `conversation_identifier` in the request path, and a `metadata_identifier` and `message` string in the request body.\n\nIf the API request is successful, ThoughtSpot returns the session ID, tokens used in the conversation, and visualization type.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
-        "deprecated": true,
         "tags": [
           "AI",
           "10.4.0.cl"
@@ -6374,7 +6369,7 @@
     "/api/rest/2.0/metadata/copyobject": {
       "post": {
         "operationId": "copyObject",
-        "description": "\nMakes a copy of an Answer or Liveboard <br/>  <span class=\"since-beta-tag\">Version: 10.3.0.cl or later</span>\n\nCreates a copy of a metadata object.\n\nRequires at least view access to the metadata object being copied.\n\nUpon successful execution, the API creates a copy of the metadata object specified in the API request and returns the ID of the new object.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nMakes a copy of an Answer or Liveboard saved in Atlas <br/>  <span class=\"since-beta-tag\">Version: 10.3.0.cl or later</span>\n\nCreates a copy of a metadata object.\n\nRequires at least view access to the metadata object being copied.\n\nUpon successful execution, the API creates a copy of the metadata object specified in the API request and returns the ID of the new object.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Metadata",
           "10.3.0.cl"
@@ -14171,7 +14166,7 @@
     "/api/rest/2.0/template/variables/create": {
       "post": {
         "operationId": "createVariable",
-        "description": "\nCreate a variable which can be used for parameterizing metadata objects <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nAllows creating a variable which can be used for parameterizing metadata objects in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\n\nThe API endpoint supports the following types of variables:\n* CONNECTION_PROPERTY - For connection properties\n* TABLE_MAPPING - For table mappings\n* CONNECTION_PROPERTY_PER_PRINCIPAL - For connection properties per principal. In order to use this please contact support to enable this.\n* FORMULA_VARIABLE - For Formula variables\n\nWhen creating a variable, you need to specify:\n* The variable type\n* A unique name for the variable\n* Whether the variable contains sensitive values (defaults to false)\n* The data type of the variable, only specify for fomula variables (defaults to null)\n\nThe operation will fail if:\n* The user lacks required permissions\n* The variable name already exists\n* The variable type is invalid\n\n\n\n#### Endpoint URL\n",
+        "description": "\nCreate a variable which can be used for parameterizing metadata objects <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nAllows creating a variable which can be used for parameterizing metadata objects in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\n\nThe API endpoint supports the following types of variables:\n* CONNECTION_PROPERTY - For connection properties\n* TABLE_MAPPING - For table mappings\n* CONNECTION_PROPERTY_PER_PRINCIPAL - For connection properties per principal. In order to use this please contact support to enable this.\n\nWhen creating a variable, you need to specify:\n* The variable type\n* A unique name for the variable\n* Whether the variable contains sensitive values (defaults to false)\n\nThe operation will fail if:\n* The user lacks required permissions\n* The variable name already exists\n* The variable type is invalid\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Variable",
           "10.14.0.cl"
@@ -14188,8 +14183,7 @@
                     "enum": [
                       "CONNECTION_PROPERTY",
                       "TABLE_MAPPING",
-                      "CONNECTION_PROPERTY_PER_PRINCIPAL",
-                      "FORMULA_VARIABLE"
+                      "CONNECTION_PROPERTY_PER_PRINCIPAL"
                     ]
                   },
                   "name": {
@@ -14201,24 +14195,11 @@
                     "default": false,
                     "type": "boolean",
                     "nullable": true
-                  },
-                  "data_type": {
-                    "description": "",
-                    "type": "string",
-                    "enum": [
-                      "VARCHAR",
-                      "INT32",
-                      "INT64",
-                      "DOUBLE",
-                      "DATE",
-                      "DATE_TIME"
-                    ]
                   }
                 },
                 "required": [
                   "type",
-                  "name",
-                  "data_type"
+                  "name"
                 ]
               }
             }
@@ -15584,8 +15565,7 @@
                 },
                 "required": [
                   "name",
-                  "url",
-                  "events"
+                  "url"
                 ]
               }
             }
@@ -16551,11 +16531,6 @@
           "access_control_properties": {
             "type": "object",
             "description": "Access Control Properties which are specified for the user via JWToken",
-            "nullable": true
-          },
-          "variable_values": {
-            "type": "object",
-            "description": "Formula Variables which are specified for the user via JWToken",
             "nullable": true
           }
         }
@@ -18163,17 +18138,17 @@
       "ColumnSecurityRuleResponse": {
         "type": "object",
         "properties": {
-          "table_guid": {
+          "guid": {
             "type": "string",
             "description": "GUID of the table for which the column security rules are fetched",
             "nullable": true
           },
-          "obj_id": {
+          "objId": {
             "type": "string",
             "description": "Object ID of the table for which the column security rules are fetched",
             "nullable": true
           },
-          "column_security_rules": {
+          "columnSecurityRules": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ColumnSecurityRule"
@@ -18201,7 +18176,7 @@
             "description": "Array of groups that have access to this column",
             "nullable": true
           },
-          "source_table_details": {
+          "sourceTableDetails": {
             "$ref": "#/components/schemas/ColumnSecurityRuleSourceTable",
             "description": "Information about the source table",
             "nullable": true
@@ -19525,8 +19500,7 @@
             "enum": [
               "CONNECTION_PROPERTY",
               "TABLE_MAPPING",
-              "CONNECTION_PROPERTY_PER_PRINCIPAL",
-              "FORMULA_VARIABLE"
+              "CONNECTION_PROPERTY_PER_PRINCIPAL"
             ],
             "description": "Type of variable",
             "nullable": true
@@ -19589,8 +19563,7 @@
             "enum": [
               "CONNECTION_PROPERTY",
               "TABLE_MAPPING",
-              "CONNECTION_PROPERTY_PER_PRINCIPAL",
-              "FORMULA_VARIABLE"
+              "CONNECTION_PROPERTY_PER_PRINCIPAL"
             ],
             "description": "Type of the variable",
             "nullable": true
@@ -19831,11 +19804,11 @@
           "field_name": {
             "type": "string",
             "enum": [
-              "CREATED",
-              "MODIFIED",
+              "CREATED_AT",
+              "LAST_MODIFIED_AT",
               "NAME"
             ],
-            "default": "CREATED",
+            "default": "CREATED_AT",
             "description": "Name of the field to apply the sort on.",
             "nullable": true
           },
@@ -19876,10 +19849,10 @@
         "required": [
           "id",
           "name",
+          "org",
           "url",
-          "events",
-          "creation_time_in_millis",
-          "modification_time_in_millis"
+          "created_at",
+          "last_modified_at"
         ],
         "properties": {
           "id": {
@@ -19897,8 +19870,7 @@
           },
           "org": {
             "$ref": "#/components/schemas/WebhookOrg",
-            "description": "Org details.",
-            "nullable": true
+            "description": "Org details."
           },
           "url": {
             "type": "string",
@@ -19917,7 +19889,8 @@
                 "LIVEBOARD_SCHEDULE"
               ]
             },
-            "description": "List of events this webhook subscribes to."
+            "description": "List of events this webhook subscribes to.",
+            "nullable": true
           },
           "authentication": {
             "$ref": "#/components/schemas/WebhookAuthentication",
@@ -19929,15 +19902,13 @@
             "description": "Redacted configuration for webhook signature verification.",
             "nullable": true
           },
-          "creation_time_in_millis": {
-            "type": "number",
-            "format": "float",
-            "description": "Creation time of the webhook configuration in milliseconds."
+          "created_at": {
+            "type": "string",
+            "description": "Timestamp when the webhook was created."
           },
-          "modification_time_in_millis": {
-            "type": "number",
-            "format": "float",
-            "description": "Last modified time of the webhook configuration in milliseconds."
+          "last_modified_at": {
+            "type": "string",
+            "description": "Timestamp when the webhook was last updated."
           },
           "created_by": {
             "$ref": "#/components/schemas/WebhookUser",
@@ -19971,6 +19942,11 @@
       "WebhookAuthentication": {
         "type": "object",
         "properties": {
+          "NO_AUTH": {
+            "type": "string",
+            "description": "No authentication required.",
+            "nullable": true
+          },
           "API_KEY": {
             "$ref": "#/components/schemas/WebhookAuthApiKey",
             "description": "Redacted API key authentication configuration.",
@@ -23178,53 +23154,6 @@
           }
         }
       },
-      "SendAgentMessageInput": {
-        "type": "object",
-        "required": [
-          "conversation_identifier",
-          "messages",
-          "settings"
-        ],
-        "properties": {
-          "conversation_identifier": {
-            "type": "string",
-            "description": "Unique identifier for the conversation (used to track context)"
-          },
-          "messages": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "messages to be sent to the agent"
-          },
-          "settings": {
-            "$ref": "#/components/schemas/AgentSettingsInput",
-            "description": "Settings that determine how the agent processes the message(s)"
-          }
-        }
-      },
-      "AgentSettingsInput": {
-        "type": "object",
-        "required": [
-          "enable_contextual_change_analysis",
-          "enable_natural_language_answer_generation",
-          "enable_reasoning"
-        ],
-        "properties": {
-          "enable_contextual_change_analysis": {
-            "type": "boolean",
-            "description": "Enable contextual change analysis."
-          },
-          "enable_natural_language_answer_generation": {
-            "type": "boolean",
-            "description": "Enable natural language to answer generation."
-          },
-          "enable_reasoning": {
-            "type": "boolean",
-            "description": "Enable reasoning."
-          }
-        }
-      },
       "SendAgentMessageResponse": {
         "type": "object",
         "required": [
@@ -23514,6 +23443,11 @@
       "WebhookAuthenticationInput": {
         "type": "object",
         "properties": {
+          "NO_AUTH": {
+            "type": "string",
+            "description": "No authentication required.",
+            "nullable": true
+          },
           "API_KEY": {
             "$ref": "#/components/schemas/WebhookAuthApiKeyInput",
             "description": "API key authentication configuration.",
