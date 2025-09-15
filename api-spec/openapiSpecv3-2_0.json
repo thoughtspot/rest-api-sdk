@@ -14171,7 +14171,7 @@
     "/api/rest/2.0/template/variables/create": {
       "post": {
         "operationId": "createVariable",
-        "description": "\nCreate a variable which can be used for parameterizing metadata objects <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nAllows creating a variable which can be used for parameterizing metadata objects in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\n\nThe API endpoint supports the following types of variables:\n* CONNECTION_PROPERTY - For connection properties\n* TABLE_MAPPING - For table mappings\n* CONNECTION_PROPERTY_PER_PRINCIPAL - For connection properties per principal. In order to use this please contact support to enable this.\n\nWhen creating a variable, you need to specify:\n* The variable type\n* A unique name for the variable\n* Whether the variable contains sensitive values (defaults to false)\n\nThe operation will fail if:\n* The user lacks required permissions\n* The variable name already exists\n* The variable type is invalid\n\n\n\n#### Endpoint URL\n",
+        "description": "\nCreate a variable which can be used for parameterizing metadata objects <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nAllows creating a variable which can be used for parameterizing metadata objects in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\n\nThe API endpoint supports the following types of variables:\n* CONNECTION_PROPERTY - For connection properties\n* TABLE_MAPPING - For table mappings\n* CONNECTION_PROPERTY_PER_PRINCIPAL - For connection properties per principal. In order to use this please contact support to enable this.\n* FORMULA_VARIABLE - For Formula variables\n\nWhen creating a variable, you need to specify:\n* The variable type\n* A unique name for the variable\n* Whether the variable contains sensitive values (defaults to false)\n* The data type of the variable, only specify for fomula variables (defaults to null)\n\nThe operation will fail if:\n* The user lacks required permissions\n* The variable name already exists\n* The variable type is invalid\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Variable",
           "10.14.0.cl"
@@ -14188,7 +14188,8 @@
                     "enum": [
                       "CONNECTION_PROPERTY",
                       "TABLE_MAPPING",
-                      "CONNECTION_PROPERTY_PER_PRINCIPAL"
+                      "CONNECTION_PROPERTY_PER_PRINCIPAL",
+                      "FORMULA_VARIABLE"
                     ]
                   },
                   "name": {
@@ -14200,11 +14201,24 @@
                     "default": false,
                     "type": "boolean",
                     "nullable": true
+                  },
+                  "data_type": {
+                    "description": "",
+                    "type": "string",
+                    "enum": [
+                      "VARCHAR",
+                      "INT32",
+                      "INT64",
+                      "DOUBLE",
+                      "DATE",
+                      "DATE_TIME"
+                    ]
                   }
                 },
                 "required": [
                   "type",
-                  "name"
+                  "name",
+                  "data_type"
                 ]
               }
             }
@@ -16537,11 +16551,6 @@
           "access_control_properties": {
             "type": "object",
             "description": "Access Control Properties which are specified for the user via JWToken",
-            "nullable": true
-          },
-          "variable_values": {
-            "type": "object",
-            "description": "Formula Variables which are specified for the user via JWToken",
             "nullable": true
           }
         }
@@ -19511,7 +19520,8 @@
             "enum": [
               "CONNECTION_PROPERTY",
               "TABLE_MAPPING",
-              "CONNECTION_PROPERTY_PER_PRINCIPAL"
+              "CONNECTION_PROPERTY_PER_PRINCIPAL",
+              "FORMULA_VARIABLE"
             ],
             "description": "Type of variable",
             "nullable": true
@@ -19574,7 +19584,8 @@
             "enum": [
               "CONNECTION_PROPERTY",
               "TABLE_MAPPING",
-              "CONNECTION_PROPERTY_PER_PRINCIPAL"
+              "CONNECTION_PROPERTY_PER_PRINCIPAL",
+              "FORMULA_VARIABLE"
             ],
             "description": "Type of the variable",
             "nullable": true
@@ -19815,11 +19826,11 @@
           "field_name": {
             "type": "string",
             "enum": [
-              "CREATED",
-              "MODIFIED",
+              "CREATED_AT",
+              "LAST_MODIFIED_AT",
               "NAME"
             ],
-            "default": "CREATED",
+            "default": "CREATED_AT",
             "description": "Name of the field to apply the sort on.",
             "nullable": true
           },
