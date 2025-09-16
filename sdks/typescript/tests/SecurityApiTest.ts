@@ -54,6 +54,38 @@ describe('SecurityApi', function() {
         });     
       });
 
+      describe('fetchColumnSecurityRules', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "fetchColumnSecurityRules"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.fetchColumnSecurityRules(
+                    // fetchColumnSecurityRulesRequest FetchColumnSecurityRulesRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.fetchColumnSecurityRules(
+                    // fetchColumnSecurityRulesRequest FetchColumnSecurityRulesRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('fetchPermissionsOfPrincipals', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -205,6 +237,38 @@ describe('SecurityApi', function() {
                 await expect(
                   instance.unpublishMetadata(
                     // unpublishMetadataRequest UnpublishMetadataRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('updateColumnSecurityRules', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "updateColumnSecurityRules"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.updateColumnSecurityRules(
+                    // updateColumnSecurityRulesRequest UpdateColumnSecurityRulesRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.updateColumnSecurityRules(
+                    // updateColumnSecurityRulesRequest UpdateColumnSecurityRulesRequest
                      test.Body   
                   )
                 ).to.be.rejectedWith(Error);

@@ -34,8 +34,26 @@ describe('DBTApi', function() {
               var data;
               try {
                 data = await instance.dbtConnection(
-                    // dbtConnectionRequest DbtConnectionRequest
-                     test.Body   
+                    // connectionName connection_name
+                        , 
+                    // databaseName database_name
+                        , 
+                    // importType import_type
+                        , 
+                    // accessToken access_token
+                        , 
+                    // dbtUrl dbt_url
+                        , 
+                    // accountId account_id
+                        , 
+                    // projectId project_id
+                        , 
+                    // dbtEnvId dbt_env_id
+                        , 
+                    // projectName project_name
+                        , 
+                    // fileContent file_content
+                       
                 )
               } catch (er) {
                 console.error(er, "Response", data)
@@ -44,8 +62,26 @@ describe('DBTApi', function() {
             } else {
                 await expect(
                   instance.dbtConnection(
-                    // dbtConnectionRequest DbtConnectionRequest
-                     test.Body   
+                    // connectionName connection_name
+                        , 
+                    // databaseName database_name
+                        , 
+                    // importType import_type
+                        , 
+                    // accessToken access_token
+                        , 
+                    // dbtUrl dbt_url
+                        , 
+                    // accountId account_id
+                        , 
+                    // projectId project_id
+                        , 
+                    // dbtEnvId dbt_env_id
+                        , 
+                    // projectName project_name
+                        , 
+                    // fileContent file_content
+                       
                   )
                 ).to.be.rejectedWith(Error);
             }
@@ -66,8 +102,10 @@ describe('DBTApi', function() {
               var data;
               try {
                 data = await instance.dbtGenerateSyncTml(
-                    // dbtGenerateSyncTmlRequest DbtGenerateSyncTmlRequest
-                     test.Body   
+                    // dbtConnectionIdentifier dbt_connection_identifier
+                        , 
+                    // fileContent file_content
+                       
                 )
               } catch (er) {
                 console.error(er, "Response", data)
@@ -76,8 +114,10 @@ describe('DBTApi', function() {
             } else {
                 await expect(
                   instance.dbtGenerateSyncTml(
-                    // dbtGenerateSyncTmlRequest DbtGenerateSyncTmlRequest
-                     test.Body   
+                    // dbtConnectionIdentifier dbt_connection_identifier
+                        , 
+                    // fileContent file_content
+                       
                   )
                 ).to.be.rejectedWith(Error);
             }
@@ -98,8 +138,16 @@ describe('DBTApi', function() {
               var data;
               try {
                 data = await instance.dbtGenerateTml(
-                    // dbtGenerateTmlRequest DbtGenerateTmlRequest
-                     test.Body   
+                    // dbtConnectionIdentifier dbt_connection_identifier
+                        , 
+                    // importWorksheets import_worksheets
+                        , 
+                    // modelTables model_tables
+                        , 
+                    // worksheets worksheets
+                        , 
+                    // fileContent file_content
+                       
                 )
               } catch (er) {
                 console.error(er, "Response", data)
@@ -108,8 +156,16 @@ describe('DBTApi', function() {
             } else {
                 await expect(
                   instance.dbtGenerateTml(
-                    // dbtGenerateTmlRequest DbtGenerateTmlRequest
-                     test.Body   
+                    // dbtConnectionIdentifier dbt_connection_identifier
+                        , 
+                    // importWorksheets import_worksheets
+                        , 
+                    // modelTables model_tables
+                        , 
+                    // worksheets worksheets
+                        , 
+                    // fileContent file_content
+                       
                   )
                 ).to.be.rejectedWith(Error);
             }
@@ -190,8 +246,28 @@ describe('DBTApi', function() {
               var data;
               try {
                 data = await instance.updateDbtConnection(
-                    // updateDbtConnectionRequest UpdateDbtConnectionRequest
-                     test.Body   
+                    // dbtConnectionIdentifier dbt_connection_identifier
+                        , 
+                    // connectionName connection_name
+                        , 
+                    // databaseName database_name
+                        , 
+                    // importType import_type
+                        , 
+                    // accessToken access_token
+                        , 
+                    // dbtUrl dbt_url
+                        , 
+                    // accountId account_id
+                        , 
+                    // projectId project_id
+                        , 
+                    // dbtEnvId dbt_env_id
+                        , 
+                    // projectName project_name
+                        , 
+                    // fileContent file_content
+                       
                 )
               } catch (er) {
                 console.error(er, "Response", data)
@@ -200,8 +276,28 @@ describe('DBTApi', function() {
             } else {
                 await expect(
                   instance.updateDbtConnection(
-                    // updateDbtConnectionRequest UpdateDbtConnectionRequest
-                     test.Body   
+                    // dbtConnectionIdentifier dbt_connection_identifier
+                        , 
+                    // connectionName connection_name
+                        , 
+                    // databaseName database_name
+                        , 
+                    // importType import_type
+                        , 
+                    // accessToken access_token
+                        , 
+                    // dbtUrl dbt_url
+                        , 
+                    // accountId account_id
+                        , 
+                    // projectId project_id
+                        , 
+                    // dbtEnvId dbt_env_id
+                        , 
+                    // projectName project_name
+                        , 
+                    // fileContent file_content
+                       
                   )
                 ).to.be.rejectedWith(Error);
             }
