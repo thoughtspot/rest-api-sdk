@@ -14203,7 +14203,7 @@
                     "nullable": true
                   },
                   "data_type": {
-                    "description": "",
+                    "description": "Variable Data Type",
                     "type": "string",
                     "enum": [
                       "VARCHAR",
@@ -14217,8 +14217,7 @@
                 },
                 "required": [
                   "type",
-                  "name",
-                  "data_type"
+                  "name"
                 ]
               }
             }
@@ -19622,6 +19621,14 @@
             "description": "The value of the variable",
             "nullable": true
           },
+          "value_list": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The value of the variable if it is a list type",
+            "nullable": true
+          },
           "org_identifier": {
             "type": "string",
             "description": "The unique name of the org"
@@ -19876,6 +19883,7 @@
         "required": [
           "id",
           "name",
+          "org",
           "url",
           "events",
           "creation_time_in_millis",
@@ -19897,8 +19905,7 @@
           },
           "org": {
             "$ref": "#/components/schemas/WebhookOrg",
-            "description": "Org details.",
-            "nullable": true
+            "description": "Org details."
           },
           "url": {
             "type": "string",
