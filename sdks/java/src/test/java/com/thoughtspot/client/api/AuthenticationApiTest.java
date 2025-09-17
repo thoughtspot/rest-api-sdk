@@ -40,13 +40,12 @@ public class AuthenticationApiTest {
     }
 
     /**
-     * Get token for the currently logged-in user. Version: 9.4.0.cl or later Retrieves details of
-     * the current session token for the bearer token provided in the request header. This API
-     * endpoint does not create a new token. Instead, it returns details about the token, including
-     * the token string, creation time, expiration time, and the associated user. Use this endpoint
-     * to introspect your current session token, debug authentication issues, or when a frontend
-     * application needs session token details. Any ThoughtSpot user with a valid bearer token can
-     * access this endpoint and send an API request
+     * Version: 9.4.0.cl or later Retrieves details of the current session token for the bearer
+     * token provided in the request header. This API endpoint does not create a new token. Instead,
+     * it returns details about the token, including the token string, creation time, expiration
+     * time, and the associated user. Use this endpoint to introspect your current session token,
+     * debug authentication issues, or when a frontend application needs session token details. Any
+     * ThoughtSpot user with a valid bearer token can access this endpoint and send an API request
      *
      * @throws ApiException if the Api call fails
      */

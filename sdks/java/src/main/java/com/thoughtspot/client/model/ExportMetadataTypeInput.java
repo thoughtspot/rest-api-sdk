@@ -108,8 +108,20 @@ public class ExportMetadataTypeInput implements Serializable {
     public static final String SERIALIZED_NAME_IDENTIFIER = "identifier";
 
     @SerializedName(SERIALIZED_NAME_IDENTIFIER)
-    @javax.annotation.Nonnull
+    @javax.annotation.Nullable
     private String identifier;
+
+    public static final String SERIALIZED_NAME_SESSION_IDENTIFIER = "session_identifier";
+
+    @SerializedName(SERIALIZED_NAME_SESSION_IDENTIFIER)
+    @javax.annotation.Nullable
+    private String sessionIdentifier;
+
+    public static final String SERIALIZED_NAME_GENERATION_NUMBER = "generation_number";
+
+    @SerializedName(SERIALIZED_NAME_GENERATION_NUMBER)
+    @javax.annotation.Nullable
+    private Integer generationNumber;
 
     public ExportMetadataTypeInput() {}
 
@@ -133,23 +145,66 @@ public class ExportMetadataTypeInput implements Serializable {
         this.type = type;
     }
 
-    public ExportMetadataTypeInput identifier(@javax.annotation.Nonnull String identifier) {
+    public ExportMetadataTypeInput identifier(@javax.annotation.Nullable String identifier) {
         this.identifier = identifier;
         return this;
     }
 
     /**
-     * Unique ID or name of the metadata object.
+     * Unique ID or name of the metadata object. Not required if the metadata type is ANSWER when
+     * session_id and generation_number is set.
      *
      * @return identifier
      */
-    @javax.annotation.Nonnull
+    @javax.annotation.Nullable
     public String getIdentifier() {
         return identifier;
     }
 
-    public void setIdentifier(@javax.annotation.Nonnull String identifier) {
+    public void setIdentifier(@javax.annotation.Nullable String identifier) {
         this.identifier = identifier;
+    }
+
+    public ExportMetadataTypeInput sessionIdentifier(
+            @javax.annotation.Nullable String sessionIdentifier) {
+        this.sessionIdentifier = sessionIdentifier;
+        return this;
+    }
+
+    /**
+     * Unique ID of the Answer session. Required if the metadata type is ANSWER and identifier is
+     * not set.
+     *
+     * @return sessionIdentifier
+     */
+    @javax.annotation.Nullable
+    public String getSessionIdentifier() {
+        return sessionIdentifier;
+    }
+
+    public void setSessionIdentifier(@javax.annotation.Nullable String sessionIdentifier) {
+        this.sessionIdentifier = sessionIdentifier;
+    }
+
+    public ExportMetadataTypeInput generationNumber(
+            @javax.annotation.Nullable Integer generationNumber) {
+        this.generationNumber = generationNumber;
+        return this;
+    }
+
+    /**
+     * Generation Number of the Answer session. Required if the metadata type is ANSWER and
+     * identifier is not set.
+     *
+     * @return generationNumber
+     */
+    @javax.annotation.Nullable
+    public Integer getGenerationNumber() {
+        return generationNumber;
+    }
+
+    public void setGenerationNumber(@javax.annotation.Nullable Integer generationNumber) {
+        this.generationNumber = generationNumber;
     }
 
     @Override
@@ -162,7 +217,9 @@ public class ExportMetadataTypeInput implements Serializable {
         }
         ExportMetadataTypeInput exportMetadataTypeInput = (ExportMetadataTypeInput) o;
         return Objects.equals(this.type, exportMetadataTypeInput.type)
-                && Objects.equals(this.identifier, exportMetadataTypeInput.identifier);
+                && Objects.equals(this.identifier, exportMetadataTypeInput.identifier)
+                && Objects.equals(this.sessionIdentifier, exportMetadataTypeInput.sessionIdentifier)
+                && Objects.equals(this.generationNumber, exportMetadataTypeInput.generationNumber);
     }
 
     private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -176,7 +233,7 @@ public class ExportMetadataTypeInput implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(type, identifier);
+        return Objects.hash(type, identifier, sessionIdentifier, generationNumber);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -192,6 +249,10 @@ public class ExportMetadataTypeInput implements Serializable {
         sb.append("class ExportMetadataTypeInput {\n");
         sb.append("    type: ").append(toIndentedString(type)).append("\n");
         sb.append("    identifier: ").append(toIndentedString(identifier)).append("\n");
+        sb.append("    sessionIdentifier: ")
+                .append(toIndentedString(sessionIdentifier))
+                .append("\n");
+        sb.append("    generationNumber: ").append(toIndentedString(generationNumber)).append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -215,10 +276,11 @@ public class ExportMetadataTypeInput implements Serializable {
         openapiFields = new HashSet<String>();
         openapiFields.add("type");
         openapiFields.add("identifier");
+        openapiFields.add("session_identifier");
+        openapiFields.add("generation_number");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
-        openapiRequiredFields.add("identifier");
     }
 
     /**
@@ -250,16 +312,6 @@ public class ExportMetadataTypeInput implements Serializable {
                                 entry.getKey(), jsonElement.toString()));
             }
         }
-
-        // check to make sure all required properties/fields are present in the JSON string
-        for (String requiredField : ExportMetadataTypeInput.openapiRequiredFields) {
-            if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-                throw new IllegalArgumentException(
-                        String.format(
-                                "The required field `%s` is not found in the JSON string: %s",
-                                requiredField, jsonElement.toString()));
-            }
-        }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
         if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull())
                 && !jsonObj.get("type").isJsonPrimitive()) {
@@ -273,12 +325,22 @@ public class ExportMetadataTypeInput implements Serializable {
         if (jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) {
             TypeEnum.validateJsonElement(jsonObj.get("type"));
         }
-        if (!jsonObj.get("identifier").isJsonPrimitive()) {
+        if ((jsonObj.get("identifier") != null && !jsonObj.get("identifier").isJsonNull())
+                && !jsonObj.get("identifier").isJsonPrimitive()) {
             throw new IllegalArgumentException(
                     String.format(
                             "Expected the field `identifier` to be a primitive type in the JSON"
                                     + " string but got `%s`",
                             jsonObj.get("identifier").toString()));
+        }
+        if ((jsonObj.get("session_identifier") != null
+                        && !jsonObj.get("session_identifier").isJsonNull())
+                && !jsonObj.get("session_identifier").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `session_identifier` to be a primitive type in the"
+                                    + " JSON string but got `%s`",
+                            jsonObj.get("session_identifier").toString()));
         }
     }
 

@@ -295,6 +295,13 @@ public class SearchMetadataRequest implements Serializable {
     @javax.annotation.Nullable
     private LiveboardResponseVersionEnum liveboardResponseVersion = LiveboardResponseVersionEnum.V1;
 
+    public static final String SERIALIZED_NAME_INCLUDE_ONLY_PUBLISHED_OBJECTS =
+            "include_only_published_objects";
+
+    @SerializedName(SERIALIZED_NAME_INCLUDE_ONLY_PUBLISHED_OBJECTS)
+    @javax.annotation.Nullable
+    private Boolean includeOnlyPublishedObjects = false;
+
     public SearchMetadataRequest() {}
 
     public SearchMetadataRequest metadata(
@@ -844,6 +851,28 @@ public class SearchMetadataRequest implements Serializable {
         this.liveboardResponseVersion = liveboardResponseVersion;
     }
 
+    public SearchMetadataRequest includeOnlyPublishedObjects(
+            @javax.annotation.Nullable Boolean includeOnlyPublishedObjects) {
+        this.includeOnlyPublishedObjects = includeOnlyPublishedObjects;
+        return this;
+    }
+
+    /**
+     * &lt;div&gt;Version: 10.11.0.cl or later &lt;/div&gt; If only published objects should be
+     * returned
+     *
+     * @return includeOnlyPublishedObjects
+     */
+    @javax.annotation.Nullable
+    public Boolean getIncludeOnlyPublishedObjects() {
+        return includeOnlyPublishedObjects;
+    }
+
+    public void setIncludeOnlyPublishedObjects(
+            @javax.annotation.Nullable Boolean includeOnlyPublishedObjects) {
+        this.includeOnlyPublishedObjects = includeOnlyPublishedObjects;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -899,7 +928,10 @@ public class SearchMetadataRequest implements Serializable {
                         this.showResolvedParameters, searchMetadataRequest.showResolvedParameters)
                 && Objects.equals(
                         this.liveboardResponseVersion,
-                        searchMetadataRequest.liveboardResponseVersion);
+                        searchMetadataRequest.liveboardResponseVersion)
+                && Objects.equals(
+                        this.includeOnlyPublishedObjects,
+                        searchMetadataRequest.includeOnlyPublishedObjects);
     }
 
     private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -937,7 +969,8 @@ public class SearchMetadataRequest implements Serializable {
                 includeStats,
                 includeDiscoverableObjects,
                 showResolvedParameters,
-                liveboardResponseVersion);
+                liveboardResponseVersion,
+                includeOnlyPublishedObjects);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -1003,6 +1036,9 @@ public class SearchMetadataRequest implements Serializable {
         sb.append("    liveboardResponseVersion: ")
                 .append(toIndentedString(liveboardResponseVersion))
                 .append("\n");
+        sb.append("    includeOnlyPublishedObjects: ")
+                .append(toIndentedString(includeOnlyPublishedObjects))
+                .append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -1048,6 +1084,7 @@ public class SearchMetadataRequest implements Serializable {
         openapiFields.add("include_discoverable_objects");
         openapiFields.add("show_resolved_parameters");
         openapiFields.add("liveboard_response_version");
+        openapiFields.add("include_only_published_objects");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();

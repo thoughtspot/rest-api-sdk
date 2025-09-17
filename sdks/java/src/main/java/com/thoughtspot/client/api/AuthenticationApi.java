@@ -321,13 +321,12 @@ public class AuthenticationApi {
     }
 
     /**
-     * Get token for the currently logged-in user. Version: 9.4.0.cl or later Retrieves details of
-     * the current session token for the bearer token provided in the request header. This API
-     * endpoint does not create a new token. Instead, it returns details about the token, including
-     * the token string, creation time, expiration time, and the associated user. Use this endpoint
-     * to introspect your current session token, debug authentication issues, or when a frontend
-     * application needs session token details. Any ThoughtSpot user with a valid bearer token can
-     * access this endpoint and send an API request
+     * Version: 9.4.0.cl or later Retrieves details of the current session token for the bearer
+     * token provided in the request header. This API endpoint does not create a new token. Instead,
+     * it returns details about the token, including the token string, creation time, expiration
+     * time, and the associated user. Use this endpoint to introspect your current session token,
+     * debug authentication issues, or when a frontend application needs session token details. Any
+     * ThoughtSpot user with a valid bearer token can access this endpoint and send an API request
      *
      * @return GetTokenResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -349,13 +348,12 @@ public class AuthenticationApi {
     }
 
     /**
-     * Get token for the currently logged-in user. Version: 9.4.0.cl or later Retrieves details of
-     * the current session token for the bearer token provided in the request header. This API
-     * endpoint does not create a new token. Instead, it returns details about the token, including
-     * the token string, creation time, expiration time, and the associated user. Use this endpoint
-     * to introspect your current session token, debug authentication issues, or when a frontend
-     * application needs session token details. Any ThoughtSpot user with a valid bearer token can
-     * access this endpoint and send an API request
+     * Version: 9.4.0.cl or later Retrieves details of the current session token for the bearer
+     * token provided in the request header. This API endpoint does not create a new token. Instead,
+     * it returns details about the token, including the token string, creation time, expiration
+     * time, and the associated user. Use this endpoint to introspect your current session token,
+     * debug authentication issues, or when a frontend application needs session token details. Any
+     * ThoughtSpot user with a valid bearer token can access this endpoint and send an API request
      *
      * @return ApiResponse&lt;GetTokenResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -378,13 +376,13 @@ public class AuthenticationApi {
     }
 
     /**
-     * (asynchronously) Get token for the currently logged-in user. Version: 9.4.0.cl or later
-     * Retrieves details of the current session token for the bearer token provided in the request
-     * header. This API endpoint does not create a new token. Instead, it returns details about the
-     * token, including the token string, creation time, expiration time, and the associated user.
-     * Use this endpoint to introspect your current session token, debug authentication issues, or
-     * when a frontend application needs session token details. Any ThoughtSpot user with a valid
-     * bearer token can access this endpoint and send an API request
+     * (asynchronously) Version: 9.4.0.cl or later Retrieves details of the current session token
+     * for the bearer token provided in the request header. This API endpoint does not create a new
+     * token. Instead, it returns details about the token, including the token string, creation
+     * time, expiration time, and the associated user. Use this endpoint to introspect your current
+     * session token, debug authentication issues, or when a frontend application needs session
+     * token details. Any ThoughtSpot user with a valid bearer token can access this endpoint and
+     * send an API request
      *
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
