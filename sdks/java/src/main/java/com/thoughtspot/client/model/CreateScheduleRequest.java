@@ -964,7 +964,7 @@ public class CreateScheduleRequest implements Serializable {
 
         ETC_GMT_11("Etc/GMT+11"),
 
-        ETC_GMT_122("Etc/GMT+12"),
+        ETC_GMT_121("Etc/GMT+12"),
 
         ETC_GMT_2("Etc/GMT+2"),
 
