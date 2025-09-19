@@ -34,9 +34,12 @@ const createAdditionalHeadersMiddleware = (additionalHeaders: Record<string, str
        * @param requestContext - The request context to modify
        */
       pre: (requestContext: any) => {
-        Object.entries(additionalHeaders).forEach(([headerName, headerValue]) => {
-          requestContext.setHeaderParam(headerName, headerValue);
-        });
+        Object.keys(additionalHeaders).forEach(
+          (headerName: string) => {
+            const headerValue = additionalHeaders[headerName];
+            requestContext.setHeaderParam(headerName, headerValue);
+          }
+        );
         return Promise.resolve(requestContext);
       },
       /**
