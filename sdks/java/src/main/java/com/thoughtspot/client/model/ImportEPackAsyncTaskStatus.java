@@ -225,12 +225,6 @@ public class ImportEPackAsyncTaskStatus implements Serializable {
     @javax.annotation.Nullable
     private Float modifiedAt;
 
-    public static final String SERIALIZED_NAME_AUTHOR_DISPLAY_NAME = "author_display_name";
-
-    @SerializedName(SERIALIZED_NAME_AUTHOR_DISPLAY_NAME)
-    @javax.annotation.Nullable
-    private String authorDisplayName;
-
     public ImportEPackAsyncTaskStatus() {}
 
     public ImportEPackAsyncTaskStatus tenantId(@javax.annotation.Nullable String tenantId) {
@@ -504,26 +498,6 @@ public class ImportEPackAsyncTaskStatus implements Serializable {
         this.modifiedAt = modifiedAt;
     }
 
-    public ImportEPackAsyncTaskStatus authorDisplayName(
-            @javax.annotation.Nullable String authorDisplayName) {
-        this.authorDisplayName = authorDisplayName;
-        return this;
-    }
-
-    /**
-     * Display name of the user who initiated the task.
-     *
-     * @return authorDisplayName
-     */
-    @javax.annotation.Nullable
-    public String getAuthorDisplayName() {
-        return authorDisplayName;
-    }
-
-    public void setAuthorDisplayName(@javax.annotation.Nullable String authorDisplayName) {
-        this.authorDisplayName = authorDisplayName;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -548,9 +522,7 @@ public class ImportEPackAsyncTaskStatus implements Serializable {
                         this.totalObjectCount, importEPackAsyncTaskStatus.totalObjectCount)
                 && Objects.equals(
                         this.objectProcessedCount, importEPackAsyncTaskStatus.objectProcessedCount)
-                && Objects.equals(this.modifiedAt, importEPackAsyncTaskStatus.modifiedAt)
-                && Objects.equals(
-                        this.authorDisplayName, importEPackAsyncTaskStatus.authorDisplayName);
+                && Objects.equals(this.modifiedAt, importEPackAsyncTaskStatus.modifiedAt);
     }
 
     private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -578,8 +550,7 @@ public class ImportEPackAsyncTaskStatus implements Serializable {
                 completedAt,
                 totalObjectCount,
                 objectProcessedCount,
-                modifiedAt,
-                authorDisplayName);
+                modifiedAt);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -609,9 +580,6 @@ public class ImportEPackAsyncTaskStatus implements Serializable {
                 .append(toIndentedString(objectProcessedCount))
                 .append("\n");
         sb.append("    modifiedAt: ").append(toIndentedString(modifiedAt)).append("\n");
-        sb.append("    authorDisplayName: ")
-                .append(toIndentedString(authorDisplayName))
-                .append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -647,7 +615,6 @@ public class ImportEPackAsyncTaskStatus implements Serializable {
         openapiFields.add("total_object_count");
         openapiFields.add("object_processed_count");
         openapiFields.add("modified_at");
-        openapiFields.add("author_display_name");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -738,15 +705,6 @@ public class ImportEPackAsyncTaskStatus implements Serializable {
         // validate the optional field `import_policy`
         if (jsonObj.get("import_policy") != null && !jsonObj.get("import_policy").isJsonNull()) {
             ImportPolicyEnum.validateJsonElement(jsonObj.get("import_policy"));
-        }
-        if ((jsonObj.get("author_display_name") != null
-                        && !jsonObj.get("author_display_name").isJsonNull())
-                && !jsonObj.get("author_display_name").isJsonPrimitive()) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            "Expected the field `author_display_name` to be a primitive type in"
-                                    + " the JSON string but got `%s`",
-                            jsonObj.get("author_display_name").toString()));
         }
     }
 

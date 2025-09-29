@@ -9,45 +9,35 @@ All URIs are relative to *CLUSTER_URL*
 | [**assignTag**](ThoughtSpotRestApi.md#assignTag) | **POST** /api/rest/2.0/tags/assign |
 | [**changeUserPassword**](ThoughtSpotRestApi.md#changeUserPassword) | **POST** /api/rest/2.0/users/change-password |
 | [**commitBranch**](ThoughtSpotRestApi.md#commitBranch) | **POST** /api/rest/2.0/vcs/git/branches/commit |
-| [**connectionConfigurationSearch**](ThoughtSpotRestApi.md#connectionConfigurationSearch) | **POST** /api/rest/2.0/connection-configurations/search |
 | [**convertWorksheetToModel**](ThoughtSpotRestApi.md#convertWorksheetToModel) | **POST** /api/rest/2.0/metadata/worksheets/convert |
 | [**copyObject**](ThoughtSpotRestApi.md#copyObject) | **POST** /api/rest/2.0/metadata/copyobject |
-| [**createCalendar**](ThoughtSpotRestApi.md#createCalendar) | **POST** /api/rest/2.0/calendars/create |
 | [**createConfig**](ThoughtSpotRestApi.md#createConfig) | **POST** /api/rest/2.0/vcs/git/config/create |
 | [**createConnection**](ThoughtSpotRestApi.md#createConnection) | **POST** /api/rest/2.0/connection/create |
-| [**createConnectionConfiguration**](ThoughtSpotRestApi.md#createConnectionConfiguration) | **POST** /api/rest/2.0/connection-configurations/create |
 | [**createConversation**](ThoughtSpotRestApi.md#createConversation) | **POST** /api/rest/2.0/ai/conversation/create |
 | [**createCustomAction**](ThoughtSpotRestApi.md#createCustomAction) | **POST** /api/rest/2.0/customization/custom-actions |
-| [**createEmailCustomization**](ThoughtSpotRestApi.md#createEmailCustomization) | **POST** /api/rest/2.0/customization/email |
 | [**createOrg**](ThoughtSpotRestApi.md#createOrg) | **POST** /api/rest/2.0/orgs/create |
 | [**createRole**](ThoughtSpotRestApi.md#createRole) | **POST** /api/rest/2.0/roles/create |
 | [**createSchedule**](ThoughtSpotRestApi.md#createSchedule) | **POST** /api/rest/2.0/schedules/create |
 | [**createTag**](ThoughtSpotRestApi.md#createTag) | **POST** /api/rest/2.0/tags/create |
 | [**createUser**](ThoughtSpotRestApi.md#createUser) | **POST** /api/rest/2.0/users/create |
 | [**createUserGroup**](ThoughtSpotRestApi.md#createUserGroup) | **POST** /api/rest/2.0/groups/create |
-| [**createVariable**](ThoughtSpotRestApi.md#createVariable) | **POST** /api/rest/2.0/template/variables/create |
 | [**dbtConnection**](ThoughtSpotRestApi.md#dbtConnection) | **POST** /api/rest/2.0/dbt/dbt-connection |
 | [**dbtGenerateSyncTml**](ThoughtSpotRestApi.md#dbtGenerateSyncTml) | **POST** /api/rest/2.0/dbt/generate-sync-tml |
 | [**dbtGenerateTml**](ThoughtSpotRestApi.md#dbtGenerateTml) | **POST** /api/rest/2.0/dbt/generate-tml |
 | [**dbtSearch**](ThoughtSpotRestApi.md#dbtSearch) | **POST** /api/rest/2.0/dbt/search |
 | [**deactivateUser**](ThoughtSpotRestApi.md#deactivateUser) | **POST** /api/rest/2.0/users/deactivate |
-| [**deleteCalendar**](ThoughtSpotRestApi.md#deleteCalendar) | **POST** /api/rest/2.0/calendars/{calendar_identifier}/delete |
 | [**deleteConfig**](ThoughtSpotRestApi.md#deleteConfig) | **POST** /api/rest/2.0/vcs/git/config/delete |
 | [**deleteConnection**](ThoughtSpotRestApi.md#deleteConnection) | **POST** /api/rest/2.0/connection/delete |
-| [**deleteConnectionConfiguration**](ThoughtSpotRestApi.md#deleteConnectionConfiguration) | **POST** /api/rest/2.0/connection-configurations/delete |
 | [**deleteConnectionV2**](ThoughtSpotRestApi.md#deleteConnectionV2) | **POST** /api/rest/2.0/connections/{connection_identifier}/delete |
 | [**deleteCustomAction**](ThoughtSpotRestApi.md#deleteCustomAction) | **POST** /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/delete |
 | [**deleteDbtConnection**](ThoughtSpotRestApi.md#deleteDbtConnection) | **POST** /api/rest/2.0/dbt/{dbt_connection_identifier}/delete |
-| [**deleteEmailCustomization**](ThoughtSpotRestApi.md#deleteEmailCustomization) | **POST** /api/rest/2.0/customization/email/{template_identifier}/delete |
 | [**deleteMetadata**](ThoughtSpotRestApi.md#deleteMetadata) | **POST** /api/rest/2.0/metadata/delete |
 | [**deleteOrg**](ThoughtSpotRestApi.md#deleteOrg) | **POST** /api/rest/2.0/orgs/{org_identifier}/delete |
-| [**deleteOrgEmailCustomization**](ThoughtSpotRestApi.md#deleteOrgEmailCustomization) | **POST** /api/rest/2.0/customization/email/delete |
 | [**deleteRole**](ThoughtSpotRestApi.md#deleteRole) | **POST** /api/rest/2.0/roles/{role_identifier}/delete |
 | [**deleteSchedule**](ThoughtSpotRestApi.md#deleteSchedule) | **POST** /api/rest/2.0/schedules/{schedule_identifier}/delete |
 | [**deleteTag**](ThoughtSpotRestApi.md#deleteTag) | **POST** /api/rest/2.0/tags/{tag_identifier}/delete |
 | [**deleteUser**](ThoughtSpotRestApi.md#deleteUser) | **POST** /api/rest/2.0/users/{user_identifier}/delete |
 | [**deleteUserGroup**](ThoughtSpotRestApi.md#deleteUserGroup) | **POST** /api/rest/2.0/groups/{group_identifier}/delete |
-| [**deleteVariable**](ThoughtSpotRestApi.md#deleteVariable) | **POST** /api/rest/2.0/template/variables/{identifier}/delete |
 | [**deployCommit**](ThoughtSpotRestApi.md#deployCommit) | **POST** /api/rest/2.0/vcs/git/commits/deploy |
 | [**downloadConnectionMetadataChanges**](ThoughtSpotRestApi.md#downloadConnectionMetadataChanges) | **POST** /api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier} |
 | [**exportAnswerReport**](ThoughtSpotRestApi.md#exportAnswerReport) | **POST** /api/rest/2.0/report/answer |
@@ -57,7 +47,6 @@ All URIs are relative to *CLUSTER_URL*
 | [**fetchAnswerData**](ThoughtSpotRestApi.md#fetchAnswerData) | **POST** /api/rest/2.0/metadata/answer/data |
 | [**fetchAnswerSqlQuery**](ThoughtSpotRestApi.md#fetchAnswerSqlQuery) | **POST** /api/rest/2.0/metadata/answer/sql |
 | [**fetchAsyncImportTaskStatus**](ThoughtSpotRestApi.md#fetchAsyncImportTaskStatus) | **POST** /api/rest/2.0/metadata/tml/async/status |
-| [**fetchColumnSecurityRules**](ThoughtSpotRestApi.md#fetchColumnSecurityRules) | **POST** /api/rest/2.0/security/column/rules/fetch |
 | [**fetchConnectionDiffStatus**](ThoughtSpotRestApi.md#fetchConnectionDiffStatus) | **POST** /api/rest/2.0/connections/fetch-connection-diff-status/{connection_identifier} |
 | [**fetchLiveboardData**](ThoughtSpotRestApi.md#fetchLiveboardData) | **POST** /api/rest/2.0/metadata/liveboard/data |
 | [**fetchLiveboardSqlQuery**](ThoughtSpotRestApi.md#fetchLiveboardSqlQuery) | **POST** /api/rest/2.0/metadata/liveboard/sql |
@@ -65,7 +54,6 @@ All URIs are relative to *CLUSTER_URL*
 | [**fetchPermissionsOfPrincipals**](ThoughtSpotRestApi.md#fetchPermissionsOfPrincipals) | **POST** /api/rest/2.0/security/principals/fetch-permissions |
 | [**fetchPermissionsOnMetadata**](ThoughtSpotRestApi.md#fetchPermissionsOnMetadata) | **POST** /api/rest/2.0/security/metadata/fetch-permissions |
 | [**forceLogoutUsers**](ThoughtSpotRestApi.md#forceLogoutUsers) | **POST** /api/rest/2.0/users/force-logout |
-| [**generateCSV**](ThoughtSpotRestApi.md#generateCSV) | **POST** /api/rest/2.0/calendars/generate-csv |
 | [**getCurrentUserInfo**](ThoughtSpotRestApi.md#getCurrentUserInfo) | **GET** /api/rest/2.0/auth/session/user |
 | [**getCurrentUserToken**](ThoughtSpotRestApi.md#getCurrentUserToken) | **GET** /api/rest/2.0/auth/session/token |
 | [**getCustomAccessToken**](ThoughtSpotRestApi.md#getCustomAccessToken) | **POST** /api/rest/2.0/auth/token/custom |
@@ -80,19 +68,15 @@ All URIs are relative to *CLUSTER_URL*
 | [**importUsers**](ThoughtSpotRestApi.md#importUsers) | **POST** /api/rest/2.0/users/import |
 | [**login**](ThoughtSpotRestApi.md#login) | **POST** /api/rest/2.0/auth/session/login |
 | [**logout**](ThoughtSpotRestApi.md#logout) | **POST** /api/rest/2.0/auth/session/logout |
-| [**parameterizeMetadata**](ThoughtSpotRestApi.md#parameterizeMetadata) | **POST** /api/rest/2.0/metadata/parameterize |
-| [**publishMetadata**](ThoughtSpotRestApi.md#publishMetadata) | **POST** /api/rest/2.0/security/metadata/publish |
 | [**queryGetDecomposedQuery**](ThoughtSpotRestApi.md#queryGetDecomposedQuery) | **POST** /api/rest/2.0/ai/analytical-questions |
 | [**resetUserPassword**](ThoughtSpotRestApi.md#resetUserPassword) | **POST** /api/rest/2.0/users/reset-password |
 | [**revertCommit**](ThoughtSpotRestApi.md#revertCommit) | **POST** /api/rest/2.0/vcs/git/commits/{commit_id}/revert |
 | [**revokeToken**](ThoughtSpotRestApi.md#revokeToken) | **POST** /api/rest/2.0/auth/token/revoke |
-| [**searchCalendars**](ThoughtSpotRestApi.md#searchCalendars) | **POST** /api/rest/2.0/calendars/search |
 | [**searchCommits**](ThoughtSpotRestApi.md#searchCommits) | **POST** /api/rest/2.0/vcs/git/commits/search |
 | [**searchConfig**](ThoughtSpotRestApi.md#searchConfig) | **POST** /api/rest/2.0/vcs/git/config/search |
 | [**searchConnection**](ThoughtSpotRestApi.md#searchConnection) | **POST** /api/rest/2.0/connection/search |
 | [**searchCustomActions**](ThoughtSpotRestApi.md#searchCustomActions) | **POST** /api/rest/2.0/customization/custom-actions/search |
 | [**searchData**](ThoughtSpotRestApi.md#searchData) | **POST** /api/rest/2.0/searchdata |
-| [**searchEmailCustomization**](ThoughtSpotRestApi.md#searchEmailCustomization) | **POST** /api/rest/2.0/customization/email/search |
 | [**searchMetadata**](ThoughtSpotRestApi.md#searchMetadata) | **POST** /api/rest/2.0/metadata/search |
 | [**searchOrgs**](ThoughtSpotRestApi.md#searchOrgs) | **POST** /api/rest/2.0/orgs/search |
 | [**searchRoles**](ThoughtSpotRestApi.md#searchRoles) | **POST** /api/rest/2.0/roles/search |
@@ -100,22 +84,15 @@ All URIs are relative to *CLUSTER_URL*
 | [**searchTags**](ThoughtSpotRestApi.md#searchTags) | **POST** /api/rest/2.0/tags/search |
 | [**searchUserGroups**](ThoughtSpotRestApi.md#searchUserGroups) | **POST** /api/rest/2.0/groups/search |
 | [**searchUsers**](ThoughtSpotRestApi.md#searchUsers) | **POST** /api/rest/2.0/users/search |
-| [**searchVariables**](ThoughtSpotRestApi.md#searchVariables) | **POST** /api/rest/2.0/template/variables/search |
 | [**sendMessage**](ThoughtSpotRestApi.md#sendMessage) | **POST** /api/rest/2.0/ai/conversation/{conversation_identifier}/converse |
 | [**shareMetadata**](ThoughtSpotRestApi.md#shareMetadata) | **POST** /api/rest/2.0/security/metadata/share |
 | [**singleAnswer**](ThoughtSpotRestApi.md#singleAnswer) | **POST** /api/rest/2.0/ai/answer/create |
 | [**unassignTag**](ThoughtSpotRestApi.md#unassignTag) | **POST** /api/rest/2.0/tags/unassign |
-| [**unparameterizeMetadata**](ThoughtSpotRestApi.md#unparameterizeMetadata) | **POST** /api/rest/2.0/metadata/unparameterize |
-| [**unpublishMetadata**](ThoughtSpotRestApi.md#unpublishMetadata) | **POST** /api/rest/2.0/security/metadata/unpublish |
-| [**updateCalendar**](ThoughtSpotRestApi.md#updateCalendar) | **POST** /api/rest/2.0/calendars/{calendar_identifier}/update |
-| [**updateColumnSecurityRules**](ThoughtSpotRestApi.md#updateColumnSecurityRules) | **POST** /api/rest/2.0/security/column/rules/update |
 | [**updateConfig**](ThoughtSpotRestApi.md#updateConfig) | **POST** /api/rest/2.0/vcs/git/config/update |
 | [**updateConnection**](ThoughtSpotRestApi.md#updateConnection) | **POST** /api/rest/2.0/connection/update |
-| [**updateConnectionConfiguration**](ThoughtSpotRestApi.md#updateConnectionConfiguration) | **POST** /api/rest/2.0/connection-configurations/{configuration_identifier}/update |
 | [**updateConnectionV2**](ThoughtSpotRestApi.md#updateConnectionV2) | **POST** /api/rest/2.0/connections/{connection_identifier}/update |
 | [**updateCustomAction**](ThoughtSpotRestApi.md#updateCustomAction) | **POST** /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/update |
 | [**updateDbtConnection**](ThoughtSpotRestApi.md#updateDbtConnection) | **POST** /api/rest/2.0/dbt/update-dbt-connection |
-| [**updateEmailCustomization**](ThoughtSpotRestApi.md#updateEmailCustomization) | **POST** /api/rest/2.0/customization/email/update |
 | [**updateMetadataHeader**](ThoughtSpotRestApi.md#updateMetadataHeader) | **POST** /api/rest/2.0/metadata/headers/update |
 | [**updateMetadataObjId**](ThoughtSpotRestApi.md#updateMetadataObjId) | **POST** /api/rest/2.0/metadata/update-obj-id |
 | [**updateOrg**](ThoughtSpotRestApi.md#updateOrg) | **POST** /api/rest/2.0/orgs/{org_identifier}/update |
@@ -125,9 +102,6 @@ All URIs are relative to *CLUSTER_URL*
 | [**updateTag**](ThoughtSpotRestApi.md#updateTag) | **POST** /api/rest/2.0/tags/{tag_identifier}/update |
 | [**updateUser**](ThoughtSpotRestApi.md#updateUser) | **POST** /api/rest/2.0/users/{user_identifier}/update |
 | [**updateUserGroup**](ThoughtSpotRestApi.md#updateUserGroup) | **POST** /api/rest/2.0/groups/{group_identifier}/update |
-| [**updateVariable**](ThoughtSpotRestApi.md#updateVariable) | **POST** /api/rest/2.0/template/variables/{identifier}/update |
-| [**updateVariableValues**](ThoughtSpotRestApi.md#updateVariableValues) | **POST** /api/rest/2.0/template/variables/update |
-| [**validateEmailCustomization**](ThoughtSpotRestApi.md#validateEmailCustomization) | **POST** /api/rest/2.0/customization/email/validate |
 | [**validateMerge**](ThoughtSpotRestApi.md#validateMerge) | **POST** /api/rest/2.0/vcs/git/branches/validate |
 | [**validateToken**](ThoughtSpotRestApi.md#validateToken) | **POST** /api/rest/2.0/auth/token/validate |
 
@@ -312,42 +286,6 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
-<a id="connectionConfigurationSearch"></a>
-# **connectionConfigurationSearch**
-> List&lt;ConnectionConfigurationResponse&gt; connectionConfigurationSearch(connectionConfigurationSearchRequest)
-
-
-
-  Version: 10.12.0.cl or later   Gets connection configuration objects.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is required.  #### Usage guidelines * To get a list of all configurations available in the ThoughtSpot system, send the API request with only the connection name or GUID in the request body. * To fetch details of a configuration object, specify the configuration object name or GUID.      
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **connectionConfigurationSearchRequest** | [**ConnectionConfigurationSearchRequest**](ConnectionConfigurationSearchRequest.md)
-
-### Return type
-
-[**List&lt;ConnectionConfigurationResponse&gt;**](ConnectionConfigurationResponse.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Configuration fetched successfully. |  -  |
-| **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
 <a id="convertWorksheetToModel"></a>
 # **convertWorksheetToModel**
 > ResponseWorksheetToModelConversion convertWorksheetToModel(convertWorksheetToModelRequest)
@@ -419,42 +357,6 @@ null (empty response body)
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
 | **404** | Object not found |  -  |
-| **500** | Unexpected error |  -  |
-
-<a id="createCalendar"></a>
-# **createCalendar**
-> CalendarResponse createCalendar(createCalendarRequest)
-
-
-
-  Version: 10.12.0.cl or later   Creates a new [custom calendar](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal).  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60; (**Can manage custom calendars**) privilege is required.   #### Usage guidelines  You can create a custom calendar from scratch or an existing Table in ThoughtSpot. For both methods of calendar creation, the following parameters are required:  * Name of the custom calendar. * Calendar creation method. To create a calendar from an existing table, specify the method:   - &#x60;FROM_EXISTING_TABLE&#x60; - Creates calendar from the table reference provided in the API request.  - &#x60;FROM_INPUT_PARAMS&#x60; - Creates a calendar from the parameters defined in the API request.  * Connection ID and Table name * Database and schema name attributes:   For most Cloud Data Warehouse (CDW) connectors, both &#x60;database_name&#x60; and &#x60;schema_name&#x60; attributes are required.     However, the attribute requirements are conditional and vary based on the connector type and its metadata structure. For example, for connectors such as Teradata, MySQL, SingleSore, Amazon Aurora MySQL, Amazon RDS MySQL, Oracle, and GCP_MYSQL, the &#x60;schema_name&#x60; is required, whereas the &#x60;database_name&#x60; attribute is not.   Similarly, connectors such as ClickHouse require you to specify the &#x60;database_name&#x60; and the schema specification in such cases is optional.  **NOTE**: If you are creating a calendar from an existing table, ensure that the referenced table matches the required DDL for custom calendars. If the schema does not match, the API returns an error.  ##### Calendar type The API allows you to create the following types of calendars:  * &#x60;MONTH_OFFSET&#x60;. The default calendar type. A &#x60;MONTH_OFFSET&#x60; calendar is offset by a few months from the standard calendar months (January to December) and the year begins with the month defined in the request. For example, if the &#x60;month_offset&#x60; value is set as &#x60;April&#x60;, the calendar year begins in April.  * &#x60;4-4-5&#x60;. Each quarter in the calendar will include two 4-week months followed by one 5-week month. * &#x60;4-5-4&#x60;. Each quarter in the calendar will include two 4-week months with a 5-week month between. * &#x60;5-4-4&#x60;. Each quarter begins with a 5-week month, followed by two 4-week months.  To start and end the calendar on a specific date, specify the dates in the &#x60;MM/DD/YYYY&#x60; format. For &#x60;MONTH_OFFSET&#x60; calendars, ensure that the &#x60;start_date&#x60; matches the month specified in the &#x60;month_offset&#x60; attribute.  You can also set the starting day of the week and customize the prefixes for year and quarter labels.  #### Examples  To create a calendar from an existing table:  &#x60;&#x60;&#x60; {   \&quot;name\&quot;: \&quot;MyCustomCalendar1\&quot;,   \&quot;table_reference\&quot;: {     \&quot;connection_identifier\&quot;: \&quot;4db8ea22-2ff4-4224-b05a-26674717e468\&quot;,     \&quot;table_name\&quot;: \&quot;MyCalendarTable\&quot;,     \&quot;database_name\&quot;: \&quot;RETAILAPPAREL\&quot;,     \&quot;schema_name\&quot;: \&quot;PUBLIC\&quot;   },   \&quot;creation_method\&quot;: \&quot;FROM_EXISTING_TABLE\&quot;, } &#x60;&#x60;&#x60;  To create a calendar from scratch:  &#x60;&#x60;&#x60; {   \&quot;name\&quot;: \&quot;MyCustomCalendar1\&quot;,   \&quot;table_reference\&quot;: {     \&quot;connection_identifier\&quot;: \&quot;4db8ea22-2ff4-4224-b05a-26674717e468\&quot;,     \&quot;table_name\&quot;: \&quot;MyCalendarTable\&quot;,     \&quot;database_name\&quot;: \&quot;RETAILAPPAREL\&quot;,     \&quot;schema_name\&quot;: \&quot;PUBLIC\&quot;   },   \&quot;creation_method\&quot;: \&quot;FROM_INPUT_PARAMS\&quot;,   \&quot;calendar_type\&quot;: \&quot;MONTH_OFFSET\&quot;,   \&quot;month_offset\&quot;: \&quot;April\&quot;,   \&quot;start_day_of_week\&quot;: \&quot;Monday\&quot;,   \&quot;quarter_name_prefix\&quot;: \&quot;Q\&quot;,   \&quot;year_name_prefix\&quot;: \&quot;FY\&quot;,   \&quot;start_date\&quot;: \&quot;04/01/2025\&quot;,   \&quot;end_date\&quot;: \&quot;04/31/2025\&quot; } &#x60;&#x60;&#x60;      
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **createCalendarRequest** | [**CreateCalendarRequest**](CreateCalendarRequest.md)
-
-### Return type
-
-[**CalendarResponse**](CalendarResponse.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Custom calendar created successfully. |  -  |
-| **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
 <a id="createConfig"></a>
@@ -529,42 +431,6 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
-<a id="createConnectionConfiguration"></a>
-# **createConnectionConfiguration**
-> ConnectionConfigurationResponse createConnectionConfiguration(createConnectionConfigurationRequest)
-
-
-
-  Version: 10.12.0.cl or later   Creates an additional configuration to an existing connection to a data warehouse.    Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is required.  #### Usage guidelines   * A JSON map of configuration attributes in &#x60;configuration&#x60;. The following example shows the configuration attributes:   &#x60;&#x60;&#x60;    {      \&quot;user\&quot;:\&quot;DEV_USER\&quot;,      \&quot;password\&quot;:\&quot;TestConn123\&quot;,      \&quot;role\&quot;:\&quot;DEV\&quot;,      \&quot;warehouse\&quot;:\&quot;DEV_WH\&quot;     }   &#x60;&#x60;&#x60;  * If the &#x60;policy_type&#x60; is &#x60;PRINCIPALS&#x60;, then &#x60;policy_principals&#x60; is a required field. * If the &#x60;policy_type&#x60; is &#x60;PROCESSES&#x60;, then &#x60;policy_processes&#x60; is a required field. * If the &#x60;policy_type&#x60; is &#x60;NO_POLICY&#x60;, then &#x60;policy_principals&#x60; and &#x60;policy_processes&#x60; are not required fields.      
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **createConnectionConfigurationRequest** | [**CreateConnectionConfigurationRequest**](CreateConnectionConfigurationRequest.md)
-
-### Return type
-
-[**ConnectionConfigurationResponse**](ConnectionConfigurationResponse.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Connection configuration successfully created. |  -  |
-| **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
 <a id="createConversation"></a>
 # **createConversation**
 > Conversation createConversation(createConversationRequest)
@@ -634,41 +500,6 @@ null (empty response body)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
-<a id="createEmailCustomization"></a>
-# **createEmailCustomization**
-> CreateEmailCustomizationResponse createEmailCustomization(createEmailCustomizationRequest)
-
-
-
- Version: 10.10.0.cl or later   Creates a customization configuration for the notification email.  #### Pre-requisites  Requires &#x60;DEVELOPER&#x60; (**has developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.  **NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.  #### Usage guidelines  To create a custom configuration pass these parameters in your API request:  - A JSON map of configuration attributes &#x60;template_properties&#x60;. The following example shows a sample set of customization configuration:  &#x60;&#x60;&#x60; {   {     \&quot;ctaButtonBgColor\&quot;: \&quot;#444DEA\&quot;,     \&quot;ctaTextFontColor\&quot;: \&quot;#FFFFFF\&quot;,     \&quot;primaryBgColor\&quot;: \&quot;#D3DEF0\&quot;,     \&quot;hideMobileAppNudge\&quot;: false,     \&quot;fontFamily\&quot; : \&quot;\&quot;,     \&quot;hideProductName\&quot; : false,     \&quot;hideFooterPhone\&quot; : false,     \&quot;hideFooterAddress\&quot; : false,     \&quot;hidePrivacyPolicy\&quot; : false,     \&quot;hideManageNotification\&quot; : false,     \&quot;hideTsVocabularyDefinitions\&quot;: false,     \&quot;hideNotificationStatus\&quot; : false,     \&quot;hideErrorMessage\&quot;: false,     \&quot;hideUnsubscribeLink\&quot; : false,     \&quot;hideModifyAlert\&quot;: false,     \&quot;textTransform\&quot;: \&quot;\&quot;,     \&quot;replacementValueForLiveboard\&quot;: \&quot;LB dashboard\&quot;,     \&quot;replacementValueForAnswer\&quot;: \&quot;Answer dashboard\&quot;,     \&quot;replacementValueForSpotIQ\&quot;: \&quot;SpotIQ dashboard\&quot;,     \&quot;logoUrl\&quot;:\&quot;\&quot;,     \&quot;productName\&quot;:\&quot;ThoughtSpot\&quot;,     \&quot;footerPhone\&quot;:\&quot;(800) 508-7008\&quot;,     \&quot;footerAddress\&quot;:\&quot;444 Castro St, Suite 1000 Mountain View, CA 94041\&quot;,     \&quot;companyWebsiteUrl\&quot;:\&quot;\&quot;,     \&quot;companyPrivacyPolicyUrl\&quot;:\&quot;\&quot;   } } &#x60;&#x60;&#x60;      
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **createEmailCustomizationRequest** | [**CreateEmailCustomizationRequest**](CreateEmailCustomizationRequest.md)
-
-### Return type
-
-[**CreateEmailCustomizationResponse**](CreateEmailCustomizationResponse.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | OK |  -  |
-| **400** | Invalid request. |  -  |
-| **403** | Unauthorized access. |  -  |
 | **500** | Unexpected error |  -  |
 
 <a id="createOrg"></a>
@@ -887,23 +718,23 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
-<a id="createVariable"></a>
-# **createVariable**
-> Variable createVariable(createVariableRequest)
+<a id="dbtConnection"></a>
+# **dbtConnection**
+> Object dbtConnection(dbtConnectionRequest)
 
 
 
- Create a variable which can be used for parameterizing metadata objects   Version: 10.9.0.cl or later   Allows creating a variable which can be used for parameterizing metadata objects in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint supports the following types of variables: * CONNECTION_PROPERTY - For connection properties * TABLE_MAPPING - For table mappings * CONNECTION_PROPERTY_PER_PRINCIPAL - For connection properties per principal. In order to use this please contact support to enable this.  When creating a variable, you need to specify: * The variable type * A unique name for the variable * Whether the variable contains sensitive values (defaults to false)  The operation will fail if: * The user lacks required permissions * The variable name already exists * The variable type is invalid     
+  Version: 9.9.0.cl or later   Creates a DBT connection object in ThoughtSpot.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60;(**Can manage custom calendars**) - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**)  #### About create DBT connection DBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.      
 
 ### Parameters
 
 | Name | Type |
 |------------- | ------------- |
-| **createVariableRequest** | [**CreateVariableRequest**](CreateVariableRequest.md)
+| **dbtConnectionRequest** | [**DbtConnectionRequest**](DbtConnectionRequest.md)
 
 ### Return type
 
-[**Variable**](Variable.md)
+**Object**
 
 ### Authorization
 
@@ -917,51 +748,6 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Create variable is successful. |  -  |
-| **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
-<a id="dbtConnection"></a>
-# **dbtConnection**
-> Object dbtConnection(connectionName, databaseName, importType, accessToken, dbtUrl, accountId, projectId, dbtEnvId, projectName, fileContent)
-
-
-
-  Version: 9.9.0.cl or later   Creates a DBT connection object in ThoughtSpot.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60;(**Can manage custom calendars**) - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**)  #### About create DBT connection DBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.      
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **connectionName** | **String**
-| **databaseName** | **String**
-| **importType** | **String**
-| **accessToken** | **String**
-| **dbtUrl** | **String**
-| **accountId** | **String**
-| **projectId** | **String**
-| **dbtEnvId** | **String**
-| **projectName** | **String**
-| **fileContent** | **File**
-
-### Return type
-
-**Object**
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
 | **200** | Succesfully created DBT Connection. |  -  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
@@ -970,7 +756,7 @@ null (empty response body)
 
 <a id="dbtGenerateSyncTml"></a>
 # **dbtGenerateSyncTml**
-> Object dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent)
+> Object dbtGenerateSyncTml(dbtGenerateSyncTmlRequest)
 
 
 
@@ -980,8 +766,7 @@ null (empty response body)
 
 | Name | Type |
 |------------- | ------------- |
-| **dbtConnectionIdentifier** | **String**
-| **fileContent** | **File**
+| **dbtGenerateSyncTmlRequest** | [**DbtGenerateSyncTmlRequest**](DbtGenerateSyncTmlRequest.md)
 
 ### Return type
 
@@ -993,7 +778,7 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: multipart/form-data
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 ### HTTP response details
@@ -1007,7 +792,7 @@ null (empty response body)
 
 <a id="dbtGenerateTml"></a>
 # **dbtGenerateTml**
-> Object dbtGenerateTml(dbtConnectionIdentifier, importWorksheets, modelTables, worksheets, fileContent)
+> Object dbtGenerateTml(dbtGenerateTmlRequest)
 
 
 
@@ -1017,11 +802,7 @@ null (empty response body)
 
 | Name | Type |
 |------------- | ------------- |
-| **dbtConnectionIdentifier** | **String**
-| **importWorksheets** | **String**
-| **modelTables** | **String**
-| **worksheets** | **String**
-| **fileContent** | **File**
+| **dbtGenerateTmlRequest** | [**DbtGenerateTmlRequest**](DbtGenerateTmlRequest.md)
 
 ### Return type
 
@@ -1033,7 +814,7 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: multipart/form-data
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 ### HTTP response details
@@ -1114,42 +895,6 @@ This endpoint does not need any parameter.
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
-<a id="deleteCalendar"></a>
-# **deleteCalendar**
-> deleteCalendar(calendarIdentifier)
-
-
-
-  Version: 10.12.0.cl or later   Deletes a [custom calendar](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal).  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60; (**Can manage custom calendars**) privilege is required.  #### Usage guidelines To delete a custom calendar, specify the calendar ID as a path parameter in the request URL.        
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **calendarIdentifier** | **String**
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **204** | Custom calendar successfully deleted. |  -  |
-| **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
 <a id="deleteConfig"></a>
 # **deleteConfig**
 > deleteConfig(deleteConfigRequest)
@@ -1217,42 +962,6 @@ null (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | Connection successfully deleted. |  -  |
-| **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
-<a id="deleteConnectionConfiguration"></a>
-# **deleteConnectionConfiguration**
-> deleteConnectionConfiguration(deleteConnectionConfigurationRequest)
-
-
-
-  Version: 10.12.0.cl or later   Deletes connection configuration objects.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is required.      
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **deleteConnectionConfigurationRequest** | [**DeleteConnectionConfigurationRequest**](DeleteConnectionConfigurationRequest.md)
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **204** | Connection Configurations successfully deleted. |  -  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
@@ -1366,41 +1075,6 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
-<a id="deleteEmailCustomization"></a>
-# **deleteEmailCustomization**
-> deleteEmailCustomization(templateIdentifier)
-
-
-
- Version: 10.10.0.cl or later   Deletes the configuration for the email customization.  #### Pre-requisites  Requires &#x60;DEVELOPER&#x60; (**has developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.  **NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.  #### Usage guidelines  - Call the search API endpoint to get the &#x60;template_identifier&#x60; from the response. - Use that &#x60;template_identifier&#x60; as a parameter in this API request.      
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **templateIdentifier** | **String**
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **204** | Email Customization configuration successfully deleted. |  -  |
-| **400** | Invalid request. |  -  |
-| **403** | Unauthorized access. |  -  |
-| **500** | Unexpected error |  -  |
-
 <a id="deleteMetadata"></a>
 # **deleteMetadata**
 > deleteMetadata(deleteMetadataRequest)
@@ -1471,42 +1145,6 @@ null (empty response body)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
-<a id="deleteOrgEmailCustomization"></a>
-# **deleteOrgEmailCustomization**
-> deleteOrgEmailCustomization(deleteOrgEmailCustomizationRequest)
-
-
-
- Version: 10.12.0.cl or later   Deletes the configuration for the email customization.  #### Pre-requisites  Requires &#x60;DEVELOPER&#x60; (**has developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.  **NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.  #### Usage guidelines  - Call the search API endpoint to get the &#x60;org_identifier&#x60; from the response. - Use that &#x60;org_identifier&#x60; as a parameter in this API request.      
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **deleteOrgEmailCustomizationRequest** | [**DeleteOrgEmailCustomizationRequest**](DeleteOrgEmailCustomizationRequest.md)
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **204** | Email Customization configuration successfully deleted. |  -  |
-| **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Unauthorized access. |  -  |
 | **500** | Unexpected error |  -  |
 
 <a id="deleteRole"></a>
@@ -1689,42 +1327,6 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
-<a id="deleteVariable"></a>
-# **deleteVariable**
-> deleteVariable(identifier)
-
-
-
- Delete a variable   Version: 10.9.0.cl or later   Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn&#39;t exist * The variable is being used by other objects      
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **identifier** | **String**
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **204** | Deleting the variable is successful. |  -  |
-| **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
 <a id="deployCommit"></a>
 # **deployCommit**
 > List&lt;DeployResponse&gt; deployCommit(deployCommitRequest)
@@ -1803,7 +1405,7 @@ null (empty response body)
 
 
 
-  Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires at least view access to the Answer.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set &#x60;file_format&#x60;. The default file format is CSV.  **NOTE**: * The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with tables.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.       
+  Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires at least view access to the Answer.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set &#x60;file_format&#x60;. The default file format is CSV.  **NOTE**: * The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with tables.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The &#x60;record_size&#x60; attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).       
 
 ### Parameters
 
@@ -1839,7 +1441,7 @@ null (empty response body)
 
 
 
-  Version: 9.0.0.cl or later   Exports a Liveboard and its visualizations in PDF or PNG file format.  Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default &#x60;file_format&#x60; is PDF. For PDF downloads, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  **NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the &#x60;transient_pinboard_content&#x60; script generated from the &#x60;getExportRequestForCurrentPinboard&#x60; method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).    **NOTE**: Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in the PNG format in the resolution of your choice. To enable this on your instance, contact ThoughtSpot support. When this feature is enabled, the options &#x60;include_cover_page&#x60;,&#x60;include_filter_page&#x60; within the &#x60;png_options&#x60; will not be available for PNG exports.     
+  Version: 9.0.0.cl or later   Exports a Liveboard and its visualizations in PDF or PNG file format.  Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default &#x60;file_format&#x60; is PDF. For PDF downloads, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  **NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the &#x60;transient_pinboard_content&#x60; script generated from the &#x60;getExportRequestForCurrentPinboard&#x60; method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).       
 
 ### Parameters
 
@@ -2048,42 +1650,6 @@ null (empty response body)
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
-
-<a id="fetchColumnSecurityRules"></a>
-# **fetchColumnSecurityRules**
-> List&lt;ColumnSecurityRuleResponse&gt; fetchColumnSecurityRules(fetchColumnSecurityRulesRequest)
-
-
-
- Version: 10.12.0.cl or later   Fetches column security rules for specified tables.  This API endpoint retrieves column-level security rules configured for tables. It returns information about which columns are secured and which groups have access to those columns.  #### Usage guidelines  - Provide an array of table identifiers using either &#x60;identifier&#x60; (GUID or name) or &#x60;obj_identifier&#x60; (object ID) - At least one of &#x60;identifier&#x60; or &#x60;obj_identifier&#x60; must be provided for each table - The API returns column security rules for all specified tables - Users must have appropriate permissions to access security rules for the specified tables  #### Required permissions  - &#x60;ADMINISTRATION&#x60; - Can administer ThoughtSpot - &#x60;DATAMANAGEMENT&#x60; - Can manage data - &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; - Can manage worksheet views and tables  #### Example request  &#x60;&#x60;&#x60;json {   \&quot;tables\&quot;: [     {       \&quot;identifier\&quot;: \&quot;table-guid\&quot;,       \&quot;obj_identifier\&quot;: \&quot;table-object-id\&quot;     }   ] } &#x60;&#x60;&#x60;  #### Response format  The API returns an array of &#x60;ColumnSecurityRuleResponse&#x60; objects wrapped in a &#x60;data&#x60; field. Each &#x60;ColumnSecurityRuleResponse&#x60; object contains: - Table information (GUID and object ID)   - Array of column security rules with column details, group access, and source table information  #### Example response  &#x60;&#x60;&#x60;json {   \&quot;data\&quot;: [     {       \&quot;guid\&quot;: \&quot;table-guid\&quot;,       \&quot;objId\&quot;: \&quot;table-object-id\&quot;,       \&quot;columnSecurityRules\&quot;: [         {           \&quot;column\&quot;: {             \&quot;id\&quot;: \&quot;col_123\&quot;,             \&quot;name\&quot;: \&quot;Salary\&quot;           },           \&quot;groups\&quot;: [             {               \&quot;id\&quot;: \&quot;group_1\&quot;,               \&quot;name\&quot;: \&quot;HR Department\&quot;             }           ],           \&quot;sourceTableDetails\&quot;: {             \&quot;id\&quot;: \&quot;source-table-guid\&quot;,             \&quot;name\&quot;: \&quot;Employee_Data\&quot;           }         }       ]     }   ] } &#x60;&#x60;&#x60;     
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **fetchColumnSecurityRulesRequest** | [**FetchColumnSecurityRulesRequest**](FetchColumnSecurityRulesRequest.md)
-
-### Return type
-
-[**List&lt;ColumnSecurityRuleResponse&gt;**](ColumnSecurityRuleResponse.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Successfully fetched column security rules |  -  |
-| **400** | Bad request - Table not found or invalid parameters |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden - User doesn&#39;t have permission to access security rules for this table |  -  |
-| **500** | Internal server error |  -  |
 
 <a id="fetchConnectionDiffStatus"></a>
 # **fetchConnectionDiffStatus**
@@ -2337,49 +1903,13 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
-<a id="generateCSV"></a>
-# **generateCSV**
-> Object generateCSV(generateCSVRequest)
-
-
-
-  Version: 10.12.0.cl or later   Exports a [custom calendar](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal) in the CSV format.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60; (**Can manage custom calendars**) privilege is required.  #### Usage guidelines  Use this API to download a custom calendar in the CSV file format. In your API request, specify the following parameters.  * Start and end date of the calendar. For \&quot;month offset\&quot; calendars, the start date must match the month defined in the &#x60;month_offset&#x60; attribute.  You can also specify optional parameters such as the starting day of the week and prefixes for the quarter and year labels.      
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **generateCSVRequest** | [**GenerateCSVRequest**](GenerateCSVRequest.md)
-
-### Return type
-
-**Object**
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Generate custom calendar data based on specifications, as a CSV file. |  -  |
-| **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
 <a id="getCurrentUserInfo"></a>
 # **getCurrentUserInfo**
 > User getCurrentUserInfo()
 
 
 
-  Version: 9.0.0.cl or later   Retrieves details of the current user session for the token provided in the request header.  Any ThoughtSpot user can access this endpoint and send an API request. The data returned in the API response varies according to user&#39;s privilege and object access permissions.     
+  Version: 9.0.0.cl or later    Gets session information for the currently logged-in user.  This API does not require any parameters to be passed in the request.    Any ThoughtSpot user can access this endpoint and send an API request. The data returned in the API response varies according to user&#39;s privilege and object access permissions.      
 
 ### Parameters
 This endpoint does not need any parameter.
@@ -2412,7 +1942,7 @@ This endpoint does not need any parameter.
 
 
 
-  Version: 9.4.0.cl or later   Retrieves details of the current session token for the bearer token provided in the request header.  This API endpoint does not create a new token. Instead, it returns details about the token, including the token string, creation time, expiration time, and the associated user.  Use this endpoint to introspect your current session token, debug authentication issues, or when a frontend application needs session token details.  Any ThoughtSpot user with a valid bearer token can access this endpoint and send an API request      
+ Get token for the currently logged-in user.    Version: 9.4.0.cl or later   Gets token details for the currently logged-in user.  You can use this endpoint to obtain the token associated with the user&#39;s session.  This API does not require any parameters to be passed in the request.    Any ThoughtSpot user can access this endpoint and send an API request.      
 
 ### Parameters
 This endpoint does not need any parameter.
@@ -2615,7 +2145,7 @@ This endpoint does not need any parameter.
 
 <a id="getSystemOverrideInfo"></a>
 # **getSystemOverrideInfo**
-> SystemOverrideInfo getSystemOverrideInfo()
+> Object getSystemOverrideInfo()
 
 
 
@@ -2626,7 +2156,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SystemOverrideInfo**](SystemOverrideInfo.md)
+**Object**
 
 ### Authorization
 
@@ -2859,78 +2389,6 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
-<a id="parameterizeMetadata"></a>
-# **parameterizeMetadata**
-> parameterizeMetadata(parameterizeMetadataRequest)
-
-
-
- Parameterize fields in metadata objects.   Version: 10.9.0.cl or later   Allows parameterizing fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections  For a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName * tableName  For a Connection the field type is always &#x60;CONNECTION_PROPERTY&#x60;. We use the field_name in this case to specify the exact property of a connection which needs to be parameterized.      
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **parameterizeMetadataRequest** | [**ParameterizeMetadataRequest**](ParameterizeMetadataRequest.md)
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **204** | Parameterize successful. |  -  |
-| **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
-<a id="publishMetadata"></a>
-# **publishMetadata**
-> publishMetadata(publishMetadataRequest)
-
-
-
- Version: 10.9.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it&#39;s dependencies to the org admins of the orgs to which it is being published.      
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **publishMetadataRequest** | [**PublishMetadataRequest**](PublishMetadataRequest.md)
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **204** | Publishing metadata objects is successful. |  -  |
-| **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
 <a id="queryGetDecomposedQuery"></a>
 # **queryGetDecomposedQuery**
 > EurekaDecomposeQueryResponse queryGetDecomposedQuery(queryGetDecomposedQueryRequest)
@@ -3075,42 +2533,6 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
-<a id="searchCalendars"></a>
-# **searchCalendars**
-> List&lt;CalendarResponse&gt; searchCalendars(searchCalendarsRequest)
-
-
-
-  Version: 10.12.0.cl or later   Gets a list of [custom calendars](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal).  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60; (**Can manage custom calendars**) privilege is required.  #### Usage guidelines  By default, the API returns a list of custom calendars for all connection objects. To retrieve custom calendar details for a particular connection, specify the connection ID. You can also use other search parameters such as &#x60;name_pattern&#x60; and &#x60;sort_options&#x60; as search filters.  The &#x60;name_pattern&#x60; parameter filters and returns only those objects that match the specified pattern. Use &#x60;%&#x60; as a wildcard for pattern matching.      
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **searchCalendarsRequest** | [**SearchCalendarsRequest**](SearchCalendarsRequest.md)
-
-### Return type
-
-[**List&lt;CalendarResponse&gt;**](CalendarResponse.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Custom calendar fetched successfully. |  -  |
-| **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
 <a id="searchCommits"></a>
 # **searchCommits**
 > List&lt;CommitHistoryResponse&gt; searchCommits(searchCommitsRequest)
@@ -3189,7 +2611,7 @@ null (empty response body)
 
 
 
-  Version: 9.2.0.cl or later   Gets connection objects. Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is required.  - To get a list of all connections available in the ThoughtSpot system, send the API request without any attributes in the request body. - To get the connection objects for a specific type of data warehouse, specify the type in &#x60;data_warehouse_types&#x60;. - To fetch details of a connection object, specify the connection object GUID or name. The &#x60;name_pattern&#x60; attribute allows passing partial text with &#x60;%&#x60; for a wildcard match. - To get details of the database, schemas, tables, or columns from a data connection object, specify &#x60;data_warehouse_object_type&#x60;. - To get a specific database, schema, table, or column from a connection object, define the object type in &#x60;data_warehouse_object_type&#x60; and object properties in the &#x60;data_warehouse_objects&#x60; array. For example, to search for a column, you must pass the database, schema, and table names in the API request.   Note that in the following example, object properties are set in a hierarchical order (&#x60;database&#x60; &gt; &#x60;schema&#x60; &gt; &#x60;table&#x60; &gt; &#x60;column&#x60;).  &#x60;&#x60;&#x60; {   \&quot;connections\&quot;: [     {       \&quot;identifier\&quot;: \&quot;b9d1f2ef-fa65-4a4b-994e-30fa2d57b0c2\&quot;,       \&quot;data_warehouse_objects\&quot;: [         {           \&quot;database\&quot;: \&quot;NEBULADEV\&quot;,           \&quot;schema\&quot;: \&quot;INFORMATION_SCHEMA\&quot;,           \&quot;table\&quot;: \&quot;APPLICABLE_ROLES\&quot;,           \&quot;column\&quot;: \&quot;ROLE_NAME\&quot;         }       ]     }   ],   \&quot;data_warehouse_object_type\&quot;: \&quot;COLUMN\&quot; } &#x60;&#x60;&#x60;  - To fetch data by &#x60;configuration&#x60;, specify &#x60;data_warehouse_object_type&#x60;. For example, to fetch columns from the &#x60;DEVELOPMENT&#x60; database, specify the &#x60;data_warehouse_object_type&#x60; as &#x60;DATABASE&#x60; and define the &#x60;configuration&#x60; string as &#x60;{\&quot;database\&quot;:\&quot;DEVELOPMENT\&quot;}&#x60;. To get column data for a specific table, specify the table, for example,&#x60;{\&quot;database\&quot;:\&quot;RETAILAPPAREL\&quot;,\&quot;table\&quot;:\&quot;PIPES\&quot;}&#x60;. - To query connections by &#x60;authentication_type&#x60;, specify &#x60;data_warehouse_object_type&#x60;. Supported values for &#x60;authentication_type&#x60; are:   - &#x60;SERVICE_ACCOUNT&#x60;: For connections that require service account credentials to authenticate to the Cloud Data Warehouse and fetch data.   - &#x60;OAUTH&#x60;: For connections that require OAuth credentials to authenticate to the Cloud Data Warehouse and fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth authentication type.   - &#x60;IAM&#x60;: For connections that have the IAM OAuth set up. This authentication type is supported on Amazon Redshift connections only.   - &#x60;EXTOAUTH&#x60;: For connections that have External OAuth set up. ThoughtSpot supports external [OAuth with Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/ connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth).   - &#x60;KEY_PAIR&#x60;: For connections that require Key Pair account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only.   - &#x60;OAUTH_WITH_PKCE&#x60;: For connections that require OAuth with PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake, Starburst, Databricks, Denodo  connections only.   - &#x60;EXTOAUTH_WITH_PKCE&#x60;: For connections that require External OAuth With PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only.   - &#x60;OAUTH_WITH_PEZ&#x60;: For connections that require OAuth With PEZ account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Amazon Redshift connections only.   - &#x60;OAUTH_WITH_SERVICE_PRINCIPAL&#x60;: For connections that require OAuth With Service Principal account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Databricks connections only.   - &#x60;PERSONAL_ACCESS_TOKEN&#x60;: For connections that require Personal Access Token account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Databricks connections only.   - &#x60;OAUTH_CLIENT_CREDENTIALS&#x60;: For connections that require OAuth Client Credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only. - To include more details about connection objects in the API response, set &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort the output by field names and filter connections by tags.  **NOTE**: When filtering connection records by parameters other than &#x60;data_warehouse_types&#x60; or &#x60;tag_identifiers&#x60;, ensure that you set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60; for precise results.      
+  Version: 9.2.0.cl or later   Gets connection objects. Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is required.  - To get a list of all connections available in the ThoughtSpot system, send the API request without any attributes in the request body. - To get the connection objects for a specific type of data warehouse, specify the type in &#x60;data_warehouse_types&#x60;. - To fetch details of a connection object, specify the connection object GUID or name. The &#x60;name_pattern&#x60; attribute allows passing partial text with &#x60;%&#x60; for a wildcard match. - To get details of the database, schemas, tables, or columns from a data connection object, specify &#x60;data_warehouse_object_type&#x60;. - To get a specific database, schema, table, or column from a connection object, define the object type in &#x60;data_warehouse_object_type&#x60; and object properties in the &#x60;data_warehouse_objects&#x60; array. For example, to search for a column, you must pass the database, schema, and table names in the API request.   Note that in the following example, object properties are set in a hierarchical order (&#x60;database&#x60; &gt; &#x60;schema&#x60; &gt; &#x60;table&#x60; &gt; &#x60;column&#x60;).  &#x60;&#x60;&#x60; {   \&quot;connections\&quot;: [     {       \&quot;identifier\&quot;: \&quot;b9d1f2ef-fa65-4a4b-994e-30fa2d57b0c2\&quot;,       \&quot;data_warehouse_objects\&quot;: [         {           \&quot;database\&quot;: \&quot;NEBULADEV\&quot;,           \&quot;schema\&quot;: \&quot;INFORMATION_SCHEMA\&quot;,           \&quot;table\&quot;: \&quot;APPLICABLE_ROLES\&quot;,           \&quot;column\&quot;: \&quot;ROLE_NAME\&quot;         }       ]     }   ],   \&quot;data_warehouse_object_type\&quot;: \&quot;COLUMN\&quot; } &#x60;&#x60;&#x60;  - To fetch data by &#x60;configuration&#x60;, specify &#x60;data_warehouse_object_type&#x60;. For example, to fetch columns from the &#x60;DEVELOPMENT&#x60; database, specify the &#x60;data_warehouse_object_type&#x60; as &#x60;DATABASE&#x60; and define the &#x60;configuration&#x60; string as &#x60;{\&quot;database\&quot;:\&quot;DEVELOPMENT\&quot;}&#x60;. To get column data for a specific table, specify the table, for example,&#x60;{\&quot;database\&quot;:\&quot;RETAILAPPAREL\&quot;,\&quot;table\&quot;:\&quot;PIPES\&quot;}&#x60;. - To query connections by &#x60;authentication_type&#x60;, specify &#x60;data_warehouse_object_type&#x60;. Supported values for &#x60;authentication_type&#x60; are:   - &#x60;SERVICE_ACCOUNT&#x60;: For connections that require service account credentials to authenticate to the Cloud Data Warehouse and fetch data.   - &#x60;OAUTH&#x60;: For connections that require OAuth credentials to authenticate to the Cloud Data Warehouse and fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth authentication type.   - &#x60;IAM&#x60;: For connections that have the IAM OAuth set up. This authentication type is supported on Amazon Redshift connections only.   - &#x60;EXTOAUTH&#x60;: For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/ connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). - To include more details about connection objects in the API response, set &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort the output by field names and filter connections by tags.  **NOTE**: When filtering connection records by parameters other than &#x60;data_warehouse_types&#x60; or &#x60;tag_identifiers&#x60;, ensure that you set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60; for precise results.      
 
 ### Parameters
 
@@ -3291,48 +2713,13 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
-<a id="searchEmailCustomization"></a>
-# **searchEmailCustomization**
-> List&lt;CreateEmailCustomizationResponse&gt; searchEmailCustomization(searchEmailCustomizationRequest)
-
-
-
- Version: 10.10.0.cl or later   Search the email customization configuration if any set for the ThoughtSpot system.  #### Pre-requisites  Requires &#x60;DEVELOPER&#x60; (**has developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.  **NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.      
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **searchEmailCustomizationRequest** | [**SearchEmailCustomizationRequest**](SearchEmailCustomizationRequest.md)
-
-### Return type
-
-[**List&lt;CreateEmailCustomizationResponse&gt;**](CreateEmailCustomizationResponse.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | OK |  -  |
-| **400** | Invalid request. |  -  |
-| **403** | Unauthorized access. |  -  |
-| **500** | Unexpected error |  -  |
-
 <a id="searchMetadata"></a>
 # **searchMetadata**
 > List&lt;MetadataSearchResponse&gt; searchMetadata(searchMetadataRequest)
 
 
 
-  Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the &#x60;type&#x60; attribute. For example, to fetch a Worksheet, set the type as &#x60;LOGICAL_TABLE&#x60;. - To filter metadata objects within type &#x60;LOGICAL_TABLE&#x60;, set the &#x60;subtypes&#x60; attribute. For example, to fetch a Worksheet, set the type as &#x60;LOGICAL_TABLE&#x60; &amp; subtypes as &#x60;[WORKSHEET]&#x60;. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like &#x60;include_auto_created_objects&#x60;, &#x60;include_dependent_objects&#x60;, &#x60;include_headers&#x60;, &#x60;include_incomplete_objects&#x60;, and so on.   You can also define sorting options to sort the data retrieved in the API response. - To get discoverable objects when linientmodel is enabled you can use &#x60;include_discoverable_objects&#x60; as true else false. Default value is true. - For liveboard metadata type, to get the newer format, set the &#x60;liveboard_response_format&#x60; as V2. Default value is V1. - To retrieve only objects that are published, set the &#x60;include_only_published_objects&#x60; as true. Default value is false.  **NOTE**: The following parameters support pagination of metadata records:  - &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;subtypes&#x60; - &#x60;created_by_user_identifiers&#x60; - &#x60;modified_by_user_identifiers&#x60; - &#x60;owned_by_user_identifiers&#x60; - &#x60;exclude_objects&#x60; - &#x60;include_auto_created_objects&#x60; - &#x60;favorite_object_options&#x60; - &#x60;include_only_published_objects&#x60; If you are using other parameters to search metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60;.      
+  Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the &#x60;type&#x60; attribute. For example, to fetch a Worksheet, set the type as &#x60;LOGICAL_TABLE&#x60;. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like &#x60;include_auto_created_objects&#x60;, &#x60;include_dependent_objects&#x60;, &#x60;include_headers&#x60;, &#x60;include_incomplete_objects&#x60;, and so on.   You can also define sorting options to sort the data retrieved in the API response. - To get discoverable objects when linientmodel is enabled you can use &#x60;include_discoverable_objects&#x60; as true else false. Default value is true.  **NOTE**: The following parameters support pagination of metadata records:  - &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;created_by_user_identifiers&#x60; - &#x60;modified_by_user_identifiers&#x60; - &#x60;owned_by_user_identifiers&#x60; - &#x60;exclude_objects&#x60; - &#x60;include_auto_created_objects&#x60; - &#x60;favorite_object_options&#x60; If you are using other parameters to search metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60;.      
 
 ### Parameters
 
@@ -3578,42 +2965,6 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
-<a id="searchVariables"></a>
-# **searchVariables**
-> List&lt;Variable&gt; searchVariables(searchVariablesRequest)
-
-
-
- Search variables   Version: 10.9.0.cl or later   Allows searching for variables in ThoughtSpot.  Requires ADMINISTRATION role.  The API endpoint supports searching variables by: * Variable identifier (ID or name) * Variable type * Name pattern (case-insensitive, supports % for wildcard)  The search results can be formatted in three ways: * METADATA_ONLY - Returns only variable metadata (default) * METADATA_AND_VALUES - Returns variable metadata and values * EDITABLE_METADATA_AND_VALUES - Returns only editable variable metadata and values  The values can be filtered by scope: * org_identifier * principal_identifier * model_identifier      
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **searchVariablesRequest** | [**SearchVariablesRequest**](SearchVariablesRequest.md)
-
-### Return type
-
-[**List&lt;Variable&gt;**](Variable.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | List of variables is successful. |  -  |
-| **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
 <a id="sendMessage"></a>
 # **sendMessage**
 > List&lt;ResponseMessage&gt; sendMessage(conversationIdentifier, sendMessageRequest)
@@ -3757,151 +3108,6 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
-<a id="unparameterizeMetadata"></a>
-# **unparameterizeMetadata**
-> unparameterizeMetadata(unparameterizeMetadataRequest)
-
-
-
- Remove parameterization from fields in metadata objects.   Version: 10.9.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections  For a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName * tableName  For a Connection the field type is always &#x60;CONNECTION_PROPERTY&#x60;. We use the field_name in this case to specify the exact property of a connection which needs to be unparameterized.      
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **unparameterizeMetadataRequest** | [**UnparameterizeMetadataRequest**](UnparameterizeMetadataRequest.md)
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **204** | Successfuly removed parameters. |  -  |
-| **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
-<a id="unpublishMetadata"></a>
-# **unpublishMetadata**
-> unpublishMetadata(unpublishMetadataRequest)
-
-
-
- Version: 10.9.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting &#x60;force&#x60; to true - this will break all dependent objects in the unpublished organizations      
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **unpublishMetadataRequest** | [**UnpublishMetadataRequest**](UnpublishMetadataRequest.md)
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **204** | Unpublishing metadata objects is successful. |  -  |
-| **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
-<a id="updateCalendar"></a>
-# **updateCalendar**
-> updateCalendar(calendarIdentifier, updateCalendarRequest)
-
-
-
-  Version: 10.12.0.cl or later   Updates the properties of a [custom calendar](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal).  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60; (**Can manage custom calendars**) privilege is required.  #### Usage guidelines  You can update the properties of a calendar using one of the following methods: * &#x60;FROM_INPUT_PARAMS&#x60; to update the calendar properties with the values defined in the API request. * &#x60;FROM_EXISTING_TABLE&#x60; Creates a calendar from the parameters defined in the API request.  To update a custom calendar, specify the calendar ID as a path parameter in the request URL and the following parameters in the request body:    * Connection ID and Table name * Database and schema name attributes:   For most Cloud Data Warehouse (CDW) connectors, both &#x60;database_name&#x60; and &#x60;schema_name&#x60; attributes are required.     However, the attribute requirements are conditional and vary based on the connector type and its metadata structure. For example, for connectors such as Teradata, MySQL, SingleSore, Amazon Aurora MySQL, Amazon RDS MySQL, Oracle, and GCP_MYSQL, the &#x60;schema_name&#x60; is required, whereas the &#x60;database_name&#x60; attribute is not.   Similarly, connectors such as ClickHouse require you to specify the &#x60;database_name&#x60; and the schema specification in such cases is optional.  The API allows you to modify the calendar type, month offset value, start and end date, starting day of the week, and prefixes assigned to the year and quarter labels.     #### Examples  Update a custom calendar using an existing Table in ThoughtSpot:  &#x60;&#x60;&#x60; {   \&quot;update_method\&quot;: \&quot;FROM_EXISTING_TABLE\&quot;,   \&quot;table_reference\&quot;: {     \&quot;connection_identifier\&quot;: \&quot;Connection1\&quot;,     \&quot;database_name\&quot;: \&quot;db1\&quot;,     \&quot;table_name\&quot;: \&quot;custom_calendar_2025\&quot;,     \&quot;schame_name\&quot;: \&quot;schemaVar\&quot;   } } &#x60;&#x60;&#x60;  Update a custom calendar with the attributes defined in the API request:  &#x60;&#x60;&#x60; {   \&quot;update_method\&quot;: \&quot;FROM_INPUT_PARAMS\&quot;,   \&quot;table_reference\&quot;: {     \&quot;connection_identifier\&quot;: \&quot;Connection1\&quot;,     \&quot;database_name\&quot;: \&quot;db1\&quot;,     \&quot;table_name\&quot;: \&quot;custom_calendar_2025\&quot;,     \&quot;schame_name\&quot;: \&quot;schemaVar\&quot;   },   \&quot;month_offset\&quot;: \&quot;August\&quot;,   \&quot;start_day_of_week\&quot;: \&quot;Monday\&quot;,   \&quot;start_date\&quot;: \&quot;08/01/2025\&quot;,   \&quot;end_date\&quot;: \&quot;07/31/2026\&quot; } &#x60;&#x60;&#x60;      
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **calendarIdentifier** | **String**
-| **updateCalendarRequest** | [**UpdateCalendarRequest**](UpdateCalendarRequest.md)
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **204** | Custom calendar updated successfully. |  -  |
-| **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
-<a id="updateColumnSecurityRules"></a>
-# **updateColumnSecurityRules**
-> updateColumnSecurityRules(updateColumnSecurityRulesRequest)
-
-
-
- Version: 10.12.0.cl or later   Creates, updates, or deletes column security rules for specified tables.  This API endpoint allows you to create, update, or delete column-level security rules on columns of a table. The operation follows an \&quot;all or none\&quot; policy: if defining security rules for any of the provided columns fails, the entire operation will be rolled back, and no rules will be created.  #### Usage guidelines  - Provide table identifier using either &#x60;identifier&#x60; (GUID or name) or &#x60;obj_identifier&#x60; (object ID) - Use &#x60;clear_csr: true&#x60; to remove all column security rules from the table - For each column, specify the security rule using &#x60;column_security_rules&#x60; array - Use &#x60;is_unsecured: true&#x60; to mark a specific column as unprotected - Use &#x60;group_access&#x60; operations to manage group associations:   - &#x60;ADD&#x60;: Add groups to the column&#39;s access list   - &#x60;REMOVE&#x60;: Remove groups from the column&#39;s access list   - &#x60;REPLACE&#x60;: Replace all existing groups with the specified groups  #### Required permissions  - &#x60;ADMINISTRATION&#x60; - Can administer ThoughtSpot - &#x60;DATAMANAGEMENT&#x60; - Can manage data (if RBAC is disabled) - &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; - Can manage worksheet views and tables (if RBAC is enabled)  #### Example request  &#x60;&#x60;&#x60;json {   \&quot;identifier\&quot;: \&quot;table-guid\&quot;,   \&quot;obj_identifier\&quot;: \&quot;table-object-id\&quot;,   \&quot;clear_csr\&quot;: false,   \&quot;column_security_rules\&quot;: [     {       \&quot;column_identifier\&quot;: \&quot;col id or col name\&quot;,       \&quot;is_unsecured\&quot;: false,       \&quot;group_access\&quot;: [         {           \&quot;operation\&quot;: \&quot;ADD\&quot;,           \&quot;group_identifiers\&quot;: [\&quot;hr_group_id\&quot;, \&quot;hr_group_name\&quot;, \&quot;finance_group_id\&quot;]         }       ]     },     {       \&quot;column_identifier\&quot;: \&quot;col id or col name\&quot;,       \&quot;is_unsecured\&quot;: true     },     {       \&quot;column_identifier\&quot;: \&quot;col id or col name\&quot;,       \&quot;is_unsecured\&quot;: false,       \&quot;group_access\&quot;: [         {           \&quot;operation\&quot;: \&quot;REPLACE\&quot;,           \&quot;group_identifiers\&quot;: [\&quot;management_group_id\&quot;, \&quot;management_group_name\&quot;]         }       ]     }   ] } &#x60;&#x60;&#x60;  #### Request Body Schema  - &#x60;identifier&#x60; (string, optional): GUID or name of the table for which we want to create column security rules - &#x60;obj_identifier&#x60; (string, optional): The object ID of the table - &#x60;clear_csr&#x60; (boolean, optional): If true, then all the secured columns will be marked as unprotected, and all the group associations will be removed - &#x60;column_security_rules&#x60; (array of objects, required): An array where each object defines the security rule for a specific column  Each column security rule object contains: - &#x60;column_identifier&#x60; (string, required): Column identifier (col_id or name) - &#x60;is_unsecured&#x60; (boolean, optional): If true, the column will be marked as unprotected and all groups associated with it will be removed - &#x60;group_access&#x60; (array of objects, optional): Array of group operation objects  Each group operation object contains: - &#x60;operation&#x60; (string, required): Operation type - ADD, REMOVE, or REPLACE - &#x60;group_identifiers&#x60; (array of strings, required): Array of group identifiers (name or GUID) on which the operation will be performed  #### Response  This API does not return any response body. A successful operation returns HTTP 200 status code.  #### Operation Types  - **ADD**: Adds the specified groups to the column&#39;s access list - **REMOVE**: Removes the specified groups from the column&#39;s access list   - **REPLACE**: Replaces all existing groups with the specified groups      
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **updateColumnSecurityRulesRequest** | [**UpdateColumnSecurityRulesRequest**](UpdateColumnSecurityRulesRequest.md)
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **204** | Successfully updated column security rules |  -  |
-| **400** | Bad request - Invalid parameters or table not found |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden - User doesn&#39;t have permission to modify security rules for this table |  -  |
-| **500** | Internal server error |  -  |
-
 <a id="updateConfig"></a>
 # **updateConfig**
 > RepoConfigObject updateConfig(updateConfigRequest)
@@ -3974,50 +3180,13 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
-<a id="updateConnectionConfiguration"></a>
-# **updateConnectionConfiguration**
-> updateConnectionConfiguration(configurationIdentifier, updateConnectionConfigurationRequest)
-
-
-
-  Version: 10.12.0.cl or later   Updates a connection configuration object.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is required.  #### Supported operations This API endpoint lets you perform the following operations in a single API request:   * Edit the name or description of the configuration  * Edit the configuration properties  * Edit the &#x60;policy_type&#x60;  * Edit the type of authentication  * Enable or disable a configuration   **NOTE**: When updating a configuration where &#x60;disabled&#x60; is &#x60;true&#x60;, you must reset &#x60;disabled&#x60; to &#x60;true&#x60; in your update request payload. If not explicitly set again, the API will default &#x60;disabled&#x60; to &#x60;false&#x60;.       
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **configurationIdentifier** | **String**
-| **updateConnectionConfigurationRequest** | [**UpdateConnectionConfigurationRequest**](UpdateConnectionConfigurationRequest.md)
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **204** | Connection configuration successfully updated. |  -  |
-| **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
 <a id="updateConnectionV2"></a>
 # **updateConnectionV2**
 > updateConnectionV2(connectionIdentifier, updateConnectionV2Request)
 
 
 
-  Version: 10.4.0.cl or later   Updates a connection object.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is required.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in &#x60;data_warehouse_config&#x60;.    b. Set &#x60;validate&#x60; to &#x60;true&#x60;.        **NOTE:** If the &#x60;authentication_type&#x60; is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.     * A JSON map of configuration attributes, database details, and table properties in &#x60;data_warehouse_config&#x60; as shown in the following example:     &#x60;&#x60;&#x60;    {       \&quot;configuration\&quot;:{          \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,          \&quot;user\&quot;:\&quot;tsadmin\&quot;,          \&quot;password\&quot;:\&quot;TestConn123\&quot;,          \&quot;role\&quot;:\&quot;sysadmin\&quot;,          \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot;       },       \&quot;externalDatabases\&quot;:[          {             \&quot;name\&quot;:\&quot;AllDatatypes\&quot;,             \&quot;isAutoCreated\&quot;:false,             \&quot;schemas\&quot;:[                {                   \&quot;name\&quot;:\&quot;alldatatypes\&quot;,                   \&quot;tables\&quot;:[                      {                         \&quot;name\&quot;:\&quot;allDatatypes\&quot;,                         \&quot;type\&quot;:\&quot;TABLE\&quot;,                         \&quot;description\&quot;:\&quot;\&quot;,                         \&quot;selected\&quot;:true,                         \&quot;linked\&quot;:true,                         \&quot;columns\&quot;:[                            {                               \&quot;name\&quot;:\&quot;CNUMBER\&quot;,                               \&quot;type\&quot;:\&quot;INT64\&quot;,                               \&quot;canImport\&quot;:true,                               \&quot;selected\&quot;:true,                               \&quot;isLinkedActive\&quot;:true,                               \&quot;isImported\&quot;:false,                               \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,                               \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,                               \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot;                            },                            {                               \&quot;name\&quot;:\&quot;CDECIMAL\&quot;,                               \&quot;type\&quot;:\&quot;INT64\&quot;,                               \&quot;canImport\&quot;:true,                               \&quot;selected\&quot;:true,                               \&quot;isLinkedActive\&quot;:true,                               \&quot;isImported\&quot;:false,                               \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,                               \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,                               \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot;                            }                         ]                      }                   ]                }             ]          }       ]    }    &#x60;&#x60;&#x60;  3. If you are updating a configuration attribute, connection name, or description, you can set &#x60;validate&#x60; to &#x60;false&#x60;.    **NOTE:** If the &#x60;authentication_type&#x60; is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not  specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.    * A JSON map of configuration attributes in &#x60;data_warehouse_config&#x60;. The following example shows the configuration attributes for a Snowflake connection:    &#x60;&#x60;&#x60;    {       \&quot;configuration\&quot;:{          \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,          \&quot;user\&quot;:\&quot;tsadmin\&quot;,          \&quot;password\&quot;:\&quot;TestConn123\&quot;,          \&quot;role\&quot;:\&quot;sysadmin\&quot;,          \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot;       },       \&quot;externalDatabases\&quot;:[        ]    }    &#x60;&#x60;&#x60;      
+  Version: 10.4.0.cl or later   Updates a connection object.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is required.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in &#x60;data_warehouse_config&#x60;.    b. Set &#x60;validate&#x60; to &#x60;true&#x60;.    * A JSON map of configuration attributes, database details, and table properties in &#x60;data_warehouse_config&#x60; as shown in the following example:     &#x60;&#x60;&#x60;    {       \&quot;configuration\&quot;:{          \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,          \&quot;user\&quot;:\&quot;tsadmin\&quot;,          \&quot;password\&quot;:\&quot;TestConn123\&quot;,          \&quot;role\&quot;:\&quot;sysadmin\&quot;,          \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot;       },       \&quot;externalDatabases\&quot;:[          {             \&quot;name\&quot;:\&quot;AllDatatypes\&quot;,             \&quot;isAutoCreated\&quot;:false,             \&quot;schemas\&quot;:[                {                   \&quot;name\&quot;:\&quot;alldatatypes\&quot;,                   \&quot;tables\&quot;:[                      {                         \&quot;name\&quot;:\&quot;allDatatypes\&quot;,                         \&quot;type\&quot;:\&quot;TABLE\&quot;,                         \&quot;description\&quot;:\&quot;\&quot;,                         \&quot;selected\&quot;:true,                         \&quot;linked\&quot;:true,                         \&quot;columns\&quot;:[                            {                               \&quot;name\&quot;:\&quot;CNUMBER\&quot;,                               \&quot;type\&quot;:\&quot;INT64\&quot;,                               \&quot;canImport\&quot;:true,                               \&quot;selected\&quot;:true,                               \&quot;isLinkedActive\&quot;:true,                               \&quot;isImported\&quot;:false,                               \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,                               \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,                               \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot;                            },                            {                               \&quot;name\&quot;:\&quot;CDECIMAL\&quot;,                               \&quot;type\&quot;:\&quot;INT64\&quot;,                               \&quot;canImport\&quot;:true,                               \&quot;selected\&quot;:true,                               \&quot;isLinkedActive\&quot;:true,                               \&quot;isImported\&quot;:false,                               \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,                               \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,                               \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot;                            }                         ]                      }                   ]                }             ]          }       ]    }    &#x60;&#x60;&#x60;  3. If you are updating a configuration attribute, connection name, or description, you can set &#x60;validate&#x60; to &#x60;false&#x60;. * A JSON map of configuration attributes in &#x60;data_warehouse_config&#x60;. The following example shows the configuration attributes for a Snowflake connection:  &#x60;&#x60;&#x60;  {     \&quot;configuration\&quot;:{        \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,        \&quot;user\&quot;:\&quot;tsadmin\&quot;,        \&quot;password\&quot;:\&quot;TestConn123\&quot;,        \&quot;role\&quot;:\&quot;sysadmin\&quot;,        \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot;     },     \&quot;externalDatabases\&quot;:[      ]  }  &#x60;&#x60;&#x60;      
 
 ### Parameters
 
@@ -4087,7 +3256,7 @@ null (empty response body)
 
 <a id="updateDbtConnection"></a>
 # **updateDbtConnection**
-> Object updateDbtConnection(dbtConnectionIdentifier, connectionName, databaseName, importType, accessToken, dbtUrl, accountId, projectId, dbtEnvId, projectName, fileContent)
+> Object updateDbtConnection(updateDbtConnectionRequest)
 
 
 
@@ -4097,57 +3266,11 @@ null (empty response body)
 
 | Name | Type |
 |------------- | ------------- |
-| **dbtConnectionIdentifier** | **String**
-| **connectionName** | **String**
-| **databaseName** | **String**
-| **importType** | **String**
-| **accessToken** | **String**
-| **dbtUrl** | **String**
-| **accountId** | **String**
-| **projectId** | **String**
-| **dbtEnvId** | **String**
-| **projectName** | **String**
-| **fileContent** | **File**
+| **updateDbtConnectionRequest** | [**UpdateDbtConnectionRequest**](UpdateDbtConnectionRequest.md)
 
 ### Return type
 
 **Object**
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | DBT Connection successfully updated. |  -  |
-| **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
-<a id="updateEmailCustomization"></a>
-# **updateEmailCustomization**
-> updateEmailCustomization(updateEmailCustomizationRequest)
-
-
-
- Version: 10.12.0.cl or later   Updates a customization configuration for the notification email.  #### Pre-requisites  Requires &#x60;DEVELOPER&#x60; (**has developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.  **NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.  #### Usage guidelines  To update a custom configuration pass these parameters in your API request:  - A JSON map of configuration attributes &#x60;template_properties&#x60;. The following example shows a sample set of customization configuration:  &#x60;&#x60;&#x60; {   {     \&quot;ctaButtonBgColor\&quot;: \&quot;#444DEA\&quot;,     \&quot;ctaTextFontColor\&quot;: \&quot;#FFFFFF\&quot;,     \&quot;primaryBgColor\&quot;: \&quot;#D3DEF0\&quot;,     \&quot;hideMobileAppNudge\&quot;: false,     \&quot;fontFamily\&quot; : \&quot;\&quot;,     \&quot;hideProductName\&quot; : false,     \&quot;hideFooterPhone\&quot; : false,     \&quot;hideFooterAddress\&quot; : false,     \&quot;hidePrivacyPolicy\&quot; : false,     \&quot;hideManageNotification\&quot; : false,     \&quot;hideTsVocabularyDefinitions\&quot;: false,     \&quot;hideNotificationStatus\&quot; : false,     \&quot;hideErrorMessage\&quot;: false,     \&quot;hideUnsubscribeLink\&quot; : false,     \&quot;hideModifyAlert\&quot;: false,     \&quot;textTransform\&quot;: \&quot;\&quot;,     \&quot;replacementValueForLiveboard\&quot;: \&quot;LB dashboard\&quot;,     \&quot;replacementValueForAnswer\&quot;: \&quot;Answer dashboard\&quot;,     \&quot;replacementValueForSpotIQ\&quot;: \&quot;SpotIQ dashboard\&quot;,     \&quot;logoUrl\&quot;:\&quot;\&quot;,     \&quot;productName\&quot;:\&quot;ThoughtSpot\&quot;,     \&quot;footerPhone\&quot;:\&quot;(800) 508-7008\&quot;,     \&quot;footerAddress\&quot;:\&quot;444 Castro St, Suite 1000 Mountain View, CA 94041\&quot;,     \&quot;companyWebsiteUrl\&quot;:\&quot;\&quot;,     \&quot;companyPrivacyPolicyUrl\&quot;:\&quot;\&quot;   } } &#x60;&#x60;&#x60;      
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **updateEmailCustomizationRequest** | [**UpdateEmailCustomizationRequest**](UpdateEmailCustomizationRequest.md)
-
-### Return type
-
-null (empty response body)
 
 ### Authorization
 
@@ -4161,10 +3284,10 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **204** | Email Customization configuration successfully updated. |  -  |
+| **200** | DBT Connection successfully updated. |  -  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
-| **403** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
 <a id="updateMetadataHeader"></a>
@@ -4495,111 +3618,6 @@ null (empty response body)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
-<a id="updateVariable"></a>
-# **updateVariable**
-> updateVariable(identifier, updateVariableRequest)
-
-
-
- Update a variable&#39;s properties   Version: 10.9.0.cl or later   Allows updating a variable&#39;s properties in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows updating: * The variable name     
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **identifier** | **String**
-| **updateVariableRequest** | [**UpdateVariableRequest**](UpdateVariableRequest.md)
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **204** | Updating the variable is successful. |  -  |
-| **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
-<a id="updateVariableValues"></a>
-# **updateVariableValues**
-> updateVariableValues(updateVariableValuesRequest)
-
-
-
- Update values for multiple variables   Version: 10.9.0.cl or later   Allows updating values for multiple variables in ThoughtSpot.  Requires ADMINISTRATION role.  The API endpoint allows: * Adding new values to variables * Replacing existing values * Deleting values from variables  When updating variable values, you need to specify: * The variable identifiers * The values to add/replace/remove for each variable * The operation to perform (ADD, REPLACE, REMOVE, CLEAR)  Behaviour based on operation type: * ADD - Adds values to the variable if this is a list type variable, else same as replace. * REPLACE - Replaces all values of a given set of constraints with the current set of values. * REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value. * CLEAR - Removes all constrains for a given variable, scope is ignored      
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **updateVariableValuesRequest** | [**UpdateVariableValuesRequest**](UpdateVariableValuesRequest.md)
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **204** | Updating variable values is successful. |  -  |
-| **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
-<a id="validateEmailCustomization"></a>
-# **validateEmailCustomization**
-> validateEmailCustomization()
-
-
-
- Version: 10.10.0.cl or later   Validates the email customization configuration if any set for the ThoughtSpot system.  #### Pre-requisites  Requires &#x60;DEVELOPER&#x60; (**has developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.  **NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.      
-
-### Parameters
-This endpoint does not need any parameter.
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **204** | Triggered test email for customization configuration |  -  |
-| **400** | Invalid request. |  -  |
-| **403** | Unauthorized access. |  -  |
 | **500** | Unexpected error |  -  |
 
 <a id="validateMerge"></a>

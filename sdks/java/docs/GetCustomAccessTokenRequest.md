@@ -11,7 +11,7 @@
 |**password** | **String** | Password of the user account |  [optional] |
 |**secretKey** | **String** | The secret key string provided by the ThoughtSpot application server. ThoughtSpot generates a secret key when Trusted authentication is enabled. |  [optional] |
 |**validityTimeInSec** | **Integer** | Token validity duration in seconds |  [optional] |
-|**orgIdentifier** | **String** | ID or name of the Org context to log in to. If the Org ID or name is not specified but a secret key is provided, the user will be logged into the Org associated with the secret key. If neither the Org ID/name nor the secret key is provided, the user will be logged into the Org context from their previous login session. |  [optional] |
+|**orgIdentifier** | **String** | ID of the Org context to log in to. If the Org ID is not specified and secret key is provided then user will be logged into the org corresponding to the secret key, and if secret key is not provided then user will be logged in to the Org context of their previous login session. |  [optional] |
 |**persistOption** | [**PersistOptionEnum**](#PersistOptionEnum) | Indicates whether the specified attributes should be persisted or not. |  |
 |**filterRules** | [**List&lt;FilterRules&gt;**](FilterRules.md) | Filter rules. |  [optional] |
 |**parameterValues** | [**List&lt;ParameterValues&gt;**](ParameterValues.md) | Parameter values. |  [optional] |
@@ -27,9 +27,9 @@
 
 | Name | Value |
 |---- | -----|
-| REPLACE | &quot;REPLACE&quot; |
 | APPEND | &quot;APPEND&quot; |
 | NONE | &quot;NONE&quot; |
+| REPLACE | &quot;REPLACE&quot; |
 | RESET | &quot;RESET&quot; |
 
 

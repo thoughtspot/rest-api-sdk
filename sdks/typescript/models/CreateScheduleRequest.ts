@@ -45,10 +45,6 @@ export class CreateScheduleRequest {
     'time_zone': CreateScheduleRequestTimeZoneEnum;
     'frequency'?: CreateScheduleRequestFrequency;
     'recipient_details': CreateScheduleRequestRecipientDetails;
-    /**
-    * Personalised view id of the liveboard to be scheduled.
-    */
-    'personalised_view_id'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -111,12 +107,6 @@ export class CreateScheduleRequest {
             "name": "recipient_details",
             "baseName": "recipient_details",
             "type": "CreateScheduleRequestRecipientDetails",
-            "format": ""
-        },
-        {
-            "name": "personalised_view_id",
-            "baseName": "personalised_view_id",
-            "type": "string",
             "format": ""
         }    ];
 

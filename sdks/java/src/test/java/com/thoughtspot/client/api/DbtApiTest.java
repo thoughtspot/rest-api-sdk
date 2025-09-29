@@ -5,8 +5,11 @@
 package com.thoughtspot.client.api;
 
 import com.thoughtspot.client.ApiException;
+import com.thoughtspot.client.model.DbtConnectionRequest;
+import com.thoughtspot.client.model.DbtGenerateSyncTmlRequest;
+import com.thoughtspot.client.model.DbtGenerateTmlRequest;
 import com.thoughtspot.client.model.DbtSearchResponse;
-import java.io.File;
+import com.thoughtspot.client.model.UpdateDbtConnectionRequest;
 import java.util.List;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -36,28 +39,8 @@ public class DbtApiTest {
      */
     @Test
     public void dbtConnectionTest() throws ApiException {
-        String connectionName = null;
-        String databaseName = null;
-        String importType = null;
-        String accessToken = null;
-        String dbtUrl = null;
-        String accountId = null;
-        String projectId = null;
-        String dbtEnvId = null;
-        String projectName = null;
-        File fileContent = null;
-        Object response =
-                api.dbtConnection(
-                        connectionName,
-                        databaseName,
-                        importType,
-                        accessToken,
-                        dbtUrl,
-                        accountId,
-                        projectId,
-                        dbtEnvId,
-                        projectName,
-                        fileContent);
+        DbtConnectionRequest dbtConnectionRequest = null;
+        Object response = api.dbtConnection(dbtConnectionRequest);
         // TODO: test validations
     }
 
@@ -77,9 +60,8 @@ public class DbtApiTest {
      */
     @Test
     public void dbtGenerateSyncTmlTest() throws ApiException {
-        String dbtConnectionIdentifier = null;
-        File fileContent = null;
-        Object response = api.dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent);
+        DbtGenerateSyncTmlRequest dbtGenerateSyncTmlRequest = null;
+        Object response = api.dbtGenerateSyncTml(dbtGenerateSyncTmlRequest);
         // TODO: test validations
     }
 
@@ -100,18 +82,8 @@ public class DbtApiTest {
      */
     @Test
     public void dbtGenerateTmlTest() throws ApiException {
-        String dbtConnectionIdentifier = null;
-        String importWorksheets = null;
-        String modelTables = null;
-        String worksheets = null;
-        File fileContent = null;
-        Object response =
-                api.dbtGenerateTml(
-                        dbtConnectionIdentifier,
-                        importWorksheets,
-                        modelTables,
-                        worksheets,
-                        fileContent);
+        DbtGenerateTmlRequest dbtGenerateTmlRequest = null;
+        Object response = api.dbtGenerateTml(dbtGenerateTmlRequest);
         // TODO: test validations
     }
 
@@ -174,30 +146,8 @@ public class DbtApiTest {
      */
     @Test
     public void updateDbtConnectionTest() throws ApiException {
-        String dbtConnectionIdentifier = null;
-        String connectionName = null;
-        String databaseName = null;
-        String importType = null;
-        String accessToken = null;
-        String dbtUrl = null;
-        String accountId = null;
-        String projectId = null;
-        String dbtEnvId = null;
-        String projectName = null;
-        File fileContent = null;
-        Object response =
-                api.updateDbtConnection(
-                        dbtConnectionIdentifier,
-                        connectionName,
-                        databaseName,
-                        importType,
-                        accessToken,
-                        dbtUrl,
-                        accountId,
-                        projectId,
-                        dbtEnvId,
-                        projectName,
-                        fileContent);
+        UpdateDbtConnectionRequest updateDbtConnectionRequest = null;
+        Object response = api.updateDbtConnection(updateDbtConnectionRequest);
         // TODO: test validations
     }
 }

@@ -25,12 +25,10 @@ import com.thoughtspot.client.model.ImportEPackAsyncTaskStatus;
 import com.thoughtspot.client.model.ImportMetadataTMLAsyncRequest;
 import com.thoughtspot.client.model.ImportMetadataTMLRequest;
 import com.thoughtspot.client.model.MetadataSearchResponse;
-import com.thoughtspot.client.model.ParameterizeMetadataRequest;
 import com.thoughtspot.client.model.ResponseCopyObject;
 import com.thoughtspot.client.model.ResponseWorksheetToModelConversion;
 import com.thoughtspot.client.model.SearchMetadataRequest;
 import com.thoughtspot.client.model.SqlQueryResponse;
-import com.thoughtspot.client.model.UnparameterizeMetadataRequest;
 import com.thoughtspot.client.model.UpdateMetadataHeaderRequest;
 import com.thoughtspot.client.model.UpdateMetadataObjIdRequest;
 import java.lang.reflect.Type;
@@ -2280,190 +2278,6 @@ public class MetadataApi {
         return localVarCall;
     }
     /**
-     * Build call for parameterizeMetadata
-     *
-     * @param parameterizeMetadataRequest (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Parameterize successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call parameterizeMetadataCall(
-            ParameterizeMetadataRequest parameterizeMetadataRequest, final ApiCallback _callback)
-            throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {};
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
-            basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = parameterizeMetadataRequest;
-
-        // create path and map variables
-        String localVarPath = "/api/rest/2.0/metadata/parameterize";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {"application/json"};
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {"application/json"};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call parameterizeMetadataValidateBeforeCall(
-            ParameterizeMetadataRequest parameterizeMetadataRequest, final ApiCallback _callback)
-            throws ApiException {
-        // verify the required parameter 'parameterizeMetadataRequest' is set
-        if (parameterizeMetadataRequest == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'parameterizeMetadataRequest' when calling"
-                            + " parameterizeMetadata(Async)");
-        }
-
-        return parameterizeMetadataCall(parameterizeMetadataRequest, _callback);
-    }
-
-    /**
-     * Parameterize fields in metadata objects. Version: 10.9.0.cl or later Allows parameterizing
-     * fields in metadata objects in ThoughtSpot. Requires appropriate permissions to modify the
-     * metadata object. The API endpoint allows parameterizing the following types of metadata
-     * objects: * Logical Tables * Connections For a Logical Table the field type must be
-     * &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName * tableName
-     * For a Connection the field type is always &#x60;CONNECTION_PROPERTY&#x60;. We use the
-     * field_name in this case to specify the exact property of a connection which needs to be
-     * parameterized.
-     *
-     * @param parameterizeMetadataRequest (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Parameterize successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public void parameterizeMetadata(ParameterizeMetadataRequest parameterizeMetadataRequest)
-            throws ApiException {
-        parameterizeMetadataWithHttpInfo(parameterizeMetadataRequest);
-    }
-
-    /**
-     * Parameterize fields in metadata objects. Version: 10.9.0.cl or later Allows parameterizing
-     * fields in metadata objects in ThoughtSpot. Requires appropriate permissions to modify the
-     * metadata object. The API endpoint allows parameterizing the following types of metadata
-     * objects: * Logical Tables * Connections For a Logical Table the field type must be
-     * &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName * tableName
-     * For a Connection the field type is always &#x60;CONNECTION_PROPERTY&#x60;. We use the
-     * field_name in this case to specify the exact property of a connection which needs to be
-     * parameterized.
-     *
-     * @param parameterizeMetadataRequest (required)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Parameterize successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public ApiResponse<Void> parameterizeMetadataWithHttpInfo(
-            ParameterizeMetadataRequest parameterizeMetadataRequest) throws ApiException {
-        okhttp3.Call localVarCall =
-                parameterizeMetadataValidateBeforeCall(parameterizeMetadataRequest, null);
-        return localVarApiClient.execute(localVarCall);
-    }
-
-    /**
-     * (asynchronously) Parameterize fields in metadata objects. Version: 10.9.0.cl or later Allows
-     * parameterizing fields in metadata objects in ThoughtSpot. Requires appropriate permissions to
-     * modify the metadata object. The API endpoint allows parameterizing the following types of
-     * metadata objects: * Logical Tables * Connections For a Logical Table the field type must be
-     * &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName * tableName
-     * For a Connection the field type is always &#x60;CONNECTION_PROPERTY&#x60;. We use the
-     * field_name in this case to specify the exact property of a connection which needs to be
-     * parameterized.
-     *
-     * @param parameterizeMetadataRequest (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Parameterize successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call parameterizeMetadataAsync(
-            ParameterizeMetadataRequest parameterizeMetadataRequest,
-            final ApiCallback<Void> _callback)
-            throws ApiException {
-
-        okhttp3.Call localVarCall =
-                parameterizeMetadataValidateBeforeCall(parameterizeMetadataRequest, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
-        return localVarCall;
-    }
-    /**
      * Build call for searchMetadata
      *
      * @param searchMetadataRequest (required)
@@ -2557,10 +2371,7 @@ public class MetadataApi {
      * all metadata objects, including users and groups. #### Usage guidelines - To get all metadata
      * objects, send the API request without any attributes. - To get metadata objects of a specific
      * type, set the &#x60;type&#x60; attribute. For example, to fetch a Worksheet, set the type as
-     * &#x60;LOGICAL_TABLE&#x60;. - To filter metadata objects within type
-     * &#x60;LOGICAL_TABLE&#x60;, set the &#x60;subtypes&#x60; attribute. For example, to fetch a
-     * Worksheet, set the type as &#x60;LOGICAL_TABLE&#x60; &amp; subtypes as
-     * &#x60;[WORKSHEET]&#x60;. - To get a specific metadata object, specify the GUID. - To
+     * &#x60;LOGICAL_TABLE&#x60;. - To get a specific metadata object, specify the GUID. - To
      * customize your search and filter the API response, you can use several parameters. You can
      * search for objects created or modified by specific users, by tags applied to the objects, or
      * by using the include parameters like &#x60;include_auto_created_objects&#x60;,
@@ -2568,17 +2379,12 @@ public class MetadataApi {
      * &#x60;include_incomplete_objects&#x60;, and so on. You can also define sorting options to
      * sort the data retrieved in the API response. - To get discoverable objects when linientmodel
      * is enabled you can use &#x60;include_discoverable_objects&#x60; as true else false. Default
-     * value is true. - For liveboard metadata type, to get the newer format, set the
-     * &#x60;liveboard_response_format&#x60; as V2. Default value is V1. - To retrieve only objects
-     * that are published, set the &#x60;include_only_published_objects&#x60; as true. Default value
-     * is false. **NOTE**: The following parameters support pagination of metadata records: -
-     * &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;subtypes&#x60; -
-     * &#x60;created_by_user_identifiers&#x60; - &#x60;modified_by_user_identifiers&#x60; -
-     * &#x60;owned_by_user_identifiers&#x60; - &#x60;exclude_objects&#x60; -
-     * &#x60;include_auto_created_objects&#x60; - &#x60;favorite_object_options&#x60; -
-     * &#x60;include_only_published_objects&#x60; If you are using other parameters to search
-     * metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to
-     * &#x60;0&#x60;.
+     * value is true. **NOTE**: The following parameters support pagination of metadata records: -
+     * &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;created_by_user_identifiers&#x60; -
+     * &#x60;modified_by_user_identifiers&#x60; - &#x60;owned_by_user_identifiers&#x60; -
+     * &#x60;exclude_objects&#x60; - &#x60;include_auto_created_objects&#x60; -
+     * &#x60;favorite_object_options&#x60; If you are using other parameters to search metadata, set
+     * &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60;.
      *
      * @param searchMetadataRequest (required)
      * @return List&lt;MetadataSearchResponse&gt;
@@ -2609,10 +2415,7 @@ public class MetadataApi {
      * all metadata objects, including users and groups. #### Usage guidelines - To get all metadata
      * objects, send the API request without any attributes. - To get metadata objects of a specific
      * type, set the &#x60;type&#x60; attribute. For example, to fetch a Worksheet, set the type as
-     * &#x60;LOGICAL_TABLE&#x60;. - To filter metadata objects within type
-     * &#x60;LOGICAL_TABLE&#x60;, set the &#x60;subtypes&#x60; attribute. For example, to fetch a
-     * Worksheet, set the type as &#x60;LOGICAL_TABLE&#x60; &amp; subtypes as
-     * &#x60;[WORKSHEET]&#x60;. - To get a specific metadata object, specify the GUID. - To
+     * &#x60;LOGICAL_TABLE&#x60;. - To get a specific metadata object, specify the GUID. - To
      * customize your search and filter the API response, you can use several parameters. You can
      * search for objects created or modified by specific users, by tags applied to the objects, or
      * by using the include parameters like &#x60;include_auto_created_objects&#x60;,
@@ -2620,17 +2423,12 @@ public class MetadataApi {
      * &#x60;include_incomplete_objects&#x60;, and so on. You can also define sorting options to
      * sort the data retrieved in the API response. - To get discoverable objects when linientmodel
      * is enabled you can use &#x60;include_discoverable_objects&#x60; as true else false. Default
-     * value is true. - For liveboard metadata type, to get the newer format, set the
-     * &#x60;liveboard_response_format&#x60; as V2. Default value is V1. - To retrieve only objects
-     * that are published, set the &#x60;include_only_published_objects&#x60; as true. Default value
-     * is false. **NOTE**: The following parameters support pagination of metadata records: -
-     * &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;subtypes&#x60; -
-     * &#x60;created_by_user_identifiers&#x60; - &#x60;modified_by_user_identifiers&#x60; -
-     * &#x60;owned_by_user_identifiers&#x60; - &#x60;exclude_objects&#x60; -
-     * &#x60;include_auto_created_objects&#x60; - &#x60;favorite_object_options&#x60; -
-     * &#x60;include_only_published_objects&#x60; If you are using other parameters to search
-     * metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to
-     * &#x60;0&#x60;.
+     * value is true. **NOTE**: The following parameters support pagination of metadata records: -
+     * &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;created_by_user_identifiers&#x60; -
+     * &#x60;modified_by_user_identifiers&#x60; - &#x60;owned_by_user_identifiers&#x60; -
+     * &#x60;exclude_objects&#x60; - &#x60;include_auto_created_objects&#x60; -
+     * &#x60;favorite_object_options&#x60; If you are using other parameters to search metadata, set
+     * &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60;.
      *
      * @param searchMetadataRequest (required)
      * @return ApiResponse&lt;List&lt;MetadataSearchResponse&gt;&gt;
@@ -2661,28 +2459,21 @@ public class MetadataApi {
      * view data for all metadata objects, including users and groups. #### Usage guidelines - To
      * get all metadata objects, send the API request without any attributes. - To get metadata
      * objects of a specific type, set the &#x60;type&#x60; attribute. For example, to fetch a
-     * Worksheet, set the type as &#x60;LOGICAL_TABLE&#x60;. - To filter metadata objects within
-     * type &#x60;LOGICAL_TABLE&#x60;, set the &#x60;subtypes&#x60; attribute. For example, to fetch
-     * a Worksheet, set the type as &#x60;LOGICAL_TABLE&#x60; &amp; subtypes as
-     * &#x60;[WORKSHEET]&#x60;. - To get a specific metadata object, specify the GUID. - To
-     * customize your search and filter the API response, you can use several parameters. You can
-     * search for objects created or modified by specific users, by tags applied to the objects, or
-     * by using the include parameters like &#x60;include_auto_created_objects&#x60;,
-     * &#x60;include_dependent_objects&#x60;, &#x60;include_headers&#x60;,
-     * &#x60;include_incomplete_objects&#x60;, and so on. You can also define sorting options to
-     * sort the data retrieved in the API response. - To get discoverable objects when linientmodel
-     * is enabled you can use &#x60;include_discoverable_objects&#x60; as true else false. Default
-     * value is true. - For liveboard metadata type, to get the newer format, set the
-     * &#x60;liveboard_response_format&#x60; as V2. Default value is V1. - To retrieve only objects
-     * that are published, set the &#x60;include_only_published_objects&#x60; as true. Default value
-     * is false. **NOTE**: The following parameters support pagination of metadata records: -
-     * &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;subtypes&#x60; -
+     * Worksheet, set the type as &#x60;LOGICAL_TABLE&#x60;. - To get a specific metadata object,
+     * specify the GUID. - To customize your search and filter the API response, you can use several
+     * parameters. You can search for objects created or modified by specific users, by tags applied
+     * to the objects, or by using the include parameters like
+     * &#x60;include_auto_created_objects&#x60;, &#x60;include_dependent_objects&#x60;,
+     * &#x60;include_headers&#x60;, &#x60;include_incomplete_objects&#x60;, and so on. You can also
+     * define sorting options to sort the data retrieved in the API response. - To get discoverable
+     * objects when linientmodel is enabled you can use &#x60;include_discoverable_objects&#x60; as
+     * true else false. Default value is true. **NOTE**: The following parameters support pagination
+     * of metadata records: - &#x60;tag_identifiers&#x60; - &#x60;type&#x60; -
      * &#x60;created_by_user_identifiers&#x60; - &#x60;modified_by_user_identifiers&#x60; -
      * &#x60;owned_by_user_identifiers&#x60; - &#x60;exclude_objects&#x60; -
-     * &#x60;include_auto_created_objects&#x60; - &#x60;favorite_object_options&#x60; -
-     * &#x60;include_only_published_objects&#x60; If you are using other parameters to search
-     * metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to
-     * &#x60;0&#x60;.
+     * &#x60;include_auto_created_objects&#x60; - &#x60;favorite_object_options&#x60; If you are
+     * using other parameters to search metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and
+     * &#x60;record_offset&#x60; to &#x60;0&#x60;.
      *
      * @param searchMetadataRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -2709,192 +2500,6 @@ public class MetadataApi {
                 searchMetadataValidateBeforeCall(searchMetadataRequest, _callback);
         Type localVarReturnType = new TypeToken<List<MetadataSearchResponse>>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for unparameterizeMetadata
-     *
-     * @param unparameterizeMetadataRequest (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Successfuly removed parameters. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call unparameterizeMetadataCall(
-            UnparameterizeMetadataRequest unparameterizeMetadataRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {};
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
-            basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = unparameterizeMetadataRequest;
-
-        // create path and map variables
-        String localVarPath = "/api/rest/2.0/metadata/unparameterize";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {"application/json"};
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {"application/json"};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call unparameterizeMetadataValidateBeforeCall(
-            UnparameterizeMetadataRequest unparameterizeMetadataRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        // verify the required parameter 'unparameterizeMetadataRequest' is set
-        if (unparameterizeMetadataRequest == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'unparameterizeMetadataRequest' when calling"
-                            + " unparameterizeMetadata(Async)");
-        }
-
-        return unparameterizeMetadataCall(unparameterizeMetadataRequest, _callback);
-    }
-
-    /**
-     * Remove parameterization from fields in metadata objects. Version: 10.9.0.cl or later Allows
-     * removing parameterization from fields in metadata objects in ThoughtSpot. Requires
-     * appropriate permissions to modify the metadata object. The API endpoint allows
-     * unparameterizing the following types of metadata objects: * Logical Tables * Connections For
-     * a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: *
-     * databaseName * schemaName * tableName For a Connection the field type is always
-     * &#x60;CONNECTION_PROPERTY&#x60;. We use the field_name in this case to specify the exact
-     * property of a connection which needs to be unparameterized.
-     *
-     * @param unparameterizeMetadataRequest (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Successfuly removed parameters. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public void unparameterizeMetadata(UnparameterizeMetadataRequest unparameterizeMetadataRequest)
-            throws ApiException {
-        unparameterizeMetadataWithHttpInfo(unparameterizeMetadataRequest);
-    }
-
-    /**
-     * Remove parameterization from fields in metadata objects. Version: 10.9.0.cl or later Allows
-     * removing parameterization from fields in metadata objects in ThoughtSpot. Requires
-     * appropriate permissions to modify the metadata object. The API endpoint allows
-     * unparameterizing the following types of metadata objects: * Logical Tables * Connections For
-     * a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: *
-     * databaseName * schemaName * tableName For a Connection the field type is always
-     * &#x60;CONNECTION_PROPERTY&#x60;. We use the field_name in this case to specify the exact
-     * property of a connection which needs to be unparameterized.
-     *
-     * @param unparameterizeMetadataRequest (required)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Successfuly removed parameters. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public ApiResponse<Void> unparameterizeMetadataWithHttpInfo(
-            UnparameterizeMetadataRequest unparameterizeMetadataRequest) throws ApiException {
-        okhttp3.Call localVarCall =
-                unparameterizeMetadataValidateBeforeCall(unparameterizeMetadataRequest, null);
-        return localVarApiClient.execute(localVarCall);
-    }
-
-    /**
-     * (asynchronously) Remove parameterization from fields in metadata objects. Version: 10.9.0.cl
-     * or later Allows removing parameterization from fields in metadata objects in ThoughtSpot.
-     * Requires appropriate permissions to modify the metadata object. The API endpoint allows
-     * unparameterizing the following types of metadata objects: * Logical Tables * Connections For
-     * a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: *
-     * databaseName * schemaName * tableName For a Connection the field type is always
-     * &#x60;CONNECTION_PROPERTY&#x60;. We use the field_name in this case to specify the exact
-     * property of a connection which needs to be unparameterized.
-     *
-     * @param unparameterizeMetadataRequest (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Successfuly removed parameters. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call unparameterizeMetadataAsync(
-            UnparameterizeMetadataRequest unparameterizeMetadataRequest,
-            final ApiCallback<Void> _callback)
-            throws ApiException {
-
-        okhttp3.Call localVarCall =
-                unparameterizeMetadataValidateBeforeCall(unparameterizeMetadataRequest, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
     /**

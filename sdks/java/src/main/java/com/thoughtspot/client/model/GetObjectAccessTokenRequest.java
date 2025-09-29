@@ -92,12 +92,6 @@ public class GetObjectAccessTokenRequest implements Serializable {
     @javax.annotation.Nullable
     private List<String> groupIdentifiers;
 
-    public static final String SERIALIZED_NAME_USER_PARAMETERS = "user_parameters";
-
-    @SerializedName(SERIALIZED_NAME_USER_PARAMETERS)
-    @javax.annotation.Nullable
-    private UserParameterOptions userParameters;
-
     public GetObjectAccessTokenRequest() {}
 
     public GetObjectAccessTokenRequest username(@javax.annotation.Nonnull String username) {
@@ -310,29 +304,6 @@ public class GetObjectAccessTokenRequest implements Serializable {
         this.groupIdentifiers = groupIdentifiers;
     }
 
-    public GetObjectAccessTokenRequest userParameters(
-            @javax.annotation.Nullable UserParameterOptions userParameters) {
-        this.userParameters = userParameters;
-        return this;
-    }
-
-    /**
-     * &lt;div&gt;Deprecated: 10.4.0.cl and later &lt;/div&gt; Define attributes such as Runtime
-     * filters and Runtime parameters to send security entitlements to a user session. For more
-     * information, see
-     * [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).
-     *
-     * @return userParameters
-     */
-    @javax.annotation.Nullable
-    public UserParameterOptions getUserParameters() {
-        return userParameters;
-    }
-
-    public void setUserParameters(@javax.annotation.Nullable UserParameterOptions userParameters) {
-        this.userParameters = userParameters;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -353,8 +324,7 @@ public class GetObjectAccessTokenRequest implements Serializable {
                 && Objects.equals(this.displayName, getObjectAccessTokenRequest.displayName)
                 && Objects.equals(this.autoCreate, getObjectAccessTokenRequest.autoCreate)
                 && Objects.equals(
-                        this.groupIdentifiers, getObjectAccessTokenRequest.groupIdentifiers)
-                && Objects.equals(this.userParameters, getObjectAccessTokenRequest.userParameters);
+                        this.groupIdentifiers, getObjectAccessTokenRequest.groupIdentifiers);
     }
 
     private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -378,8 +348,7 @@ public class GetObjectAccessTokenRequest implements Serializable {
                 email,
                 displayName,
                 autoCreate,
-                groupIdentifiers,
-                userParameters);
+                groupIdentifiers);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -405,7 +374,6 @@ public class GetObjectAccessTokenRequest implements Serializable {
         sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
         sb.append("    autoCreate: ").append(toIndentedString(autoCreate)).append("\n");
         sb.append("    groupIdentifiers: ").append(toIndentedString(groupIdentifiers)).append("\n");
-        sb.append("    userParameters: ").append(toIndentedString(userParameters)).append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -437,7 +405,6 @@ public class GetObjectAccessTokenRequest implements Serializable {
         openapiFields.add("display_name");
         openapiFields.add("auto_create");
         openapiFields.add("group_identifiers");
-        openapiFields.add("user_parameters");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -541,11 +508,6 @@ public class GetObjectAccessTokenRequest implements Serializable {
                             "Expected the field `group_identifiers` to be an array in the JSON"
                                     + " string but got `%s`",
                             jsonObj.get("group_identifiers").toString()));
-        }
-        // validate the optional field `user_parameters`
-        if (jsonObj.get("user_parameters") != null
-                && !jsonObj.get("user_parameters").isJsonNull()) {
-            UserParameterOptions.validateJsonElement(jsonObj.get("user_parameters"));
         }
     }
 

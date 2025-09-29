@@ -69,10 +69,6 @@ export class ImportEPackAsyncTaskStatus {
     * Last time the task status was updated (in ms since epoch).
     */
     'modified_at'?: number | null;
-    /**
-    * Display name of the user who initiated the task.
-    */
-    'author_display_name'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -160,12 +156,6 @@ export class ImportEPackAsyncTaskStatus {
             "baseName": "modified_at",
             "type": "number",
             "format": "float"
-        },
-        {
-            "name": "author_display_name",
-            "baseName": "author_display_name",
-            "type": "string",
-            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

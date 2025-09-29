@@ -39,10 +39,4 @@ public class ExportOptionsTest {
     public void exportWithAssociatedFeedbacksTest() {
         // TODO: test exportWithAssociatedFeedbacks
     }
-
-    /** Test the property 'exportColumnSecurityRules' */
-    @Test
-    public void exportColumnSecurityRulesTest() {
-        // TODO: test exportColumnSecurityRules
-    }
 }

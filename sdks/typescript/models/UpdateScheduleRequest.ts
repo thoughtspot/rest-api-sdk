@@ -49,10 +49,6 @@ export class UpdateScheduleRequest {
     * Status of the schedule
     */
     'status'?: UpdateScheduleRequestStatusEnum;
-    /**
-    * Personalised view id of the liveboard to be scheduled.
-    */
-    'personalised_view_id'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -121,12 +117,6 @@ export class UpdateScheduleRequest {
             "name": "status",
             "baseName": "status",
             "type": "UpdateScheduleRequestStatusEnum",
-            "format": ""
-        },
-        {
-            "name": "personalised_view_id",
-            "baseName": "personalised_view_id",
-            "type": "string",
             "format": ""
         }    ];
 
