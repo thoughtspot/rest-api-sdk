@@ -6,6 +6,14 @@
   },
   "x-roles": [
     {
+      "name": "10.13.0.cl",
+      "id": "10.13.0.cl",
+      "tags": [
+        "10.13.0.cl"
+      ],
+      "description": "Roles for version 10.13.0.cl"
+    },
+    {
       "name": "10.4.0.cl",
       "id": "10.4.0.cl",
       "tags": [
@@ -144,6 +152,91 @@
   ],
   "tags": [],
   "paths": {
+    "/api/rest/2.0/ai/agent/conversation/create": {
+      "post": {
+        "operationId": "createAgentConversation",
+        "description": "<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.13.0.cl or later</span>",
+        "tags": [
+          "AI",
+          "10.13.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata_context": {
+                    "description": "Context for the conversation.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/ContextPayloadV2Input"
+                      }
+                    ]
+                  },
+                  "conversation_settings": {
+                    "description": "Conversation settings.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/ConversationSettingsInput"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "metadata_context",
+                  "conversation_settings"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentConversation"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentConversation"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/ai/conversation/create": {
       "post": {
         "operationId": "createConversation",
@@ -220,10 +313,182 @@
         }
       }
     },
+    "/api/rest/2.0/ai/data-source-suggestions": {
+      "post": {
+        "operationId": "getDataSourceSuggestions",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.13.0.cl or later</span>\n\nProvides relevant data source recommendations for a user-submitted natural language query.\n\nTo use this API, the user must have at least view-level access to the underlying metadata entities referenced in the response.\n\n#### Usage guidelines\n\nThe request must include a `query` string via the request body.\n\nThe returned results include metadata such as:\n- `confidence`: a float indicating the model's confidence in the relevance of each recommendation\n- `details`: includes `data_source_identifier`, `data_source_name`, and `description` of each recommended data source\n- `reasoning`: rationale provided by the LLM to explain why each data source was recommended\n\nIf the API request is successful, ThoughtSpot returns a ranked list of data sources, each annotated with relevant reasoning.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before it is made Generally Available.\n> * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "10.13.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "description": "User query used to suggest data sources.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "query"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_DataSourceSuggestionResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_DataSourceSuggestionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/relevant-questions/": {
+      "post": {
+        "operationId": "getRelevantQuestions",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.13.0.cl or later</span>\n\nBreaks down a user-submitted query into a series of analytical sub-questions using relevant contextual metadata.\n\nTo use this API, the user must have at least view-level access to the referenced metadata objects.\n\n#### Usage guidelines\n\nTo accurately generate relevant questions, the request must include at least one of the following metadata identifiers within `metadata_context` : `conversation_identifier`, `answer_identifiers`, `liveboard_identifiers`, or `data_source_identifiers`.\n\nYou can further enhance the quality and precision of breakdown by providing additional `ai_context` such as:\n\n- `content`: User provided content like text data, csv data as a string message to provide context & potentially improve the quality of the response.\n- `instructions`: User specific text instructions sent to AI system for processing the query.\n\nAdditional optional parameters include:\n\n- `limit_relevant_questions`: Controls the maximum number of relevant questions returned. Defaults to 5 if not specified.\n- `bypass_cache`: If set to true, forces fresh computation instead of returning cached results.\n\nIf the API request is successful, ThoughtSpot returns a list of relevant analytical queries, each aligned with the user's original question. Each returned question includes the query string, along with the identifier and name of the corresponding data source.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "10.13.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata_context": {
+                    "description": "metadata for the query to enable generation of relevant sub-questions; at least one context identifier is required.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/MetadataContext"
+                      }
+                    ]
+                  },
+                  "limit_relevant_questions": {
+                    "description": "Maximum number of relevant questions that is allowed in the response, default = 5.",
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "bypass_cache": {
+                    "description": "If true, results are not returned from cache & calculated every time.",
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "query": {
+                    "description": "A user query that requires breaking down into smaller, more manageable analytical questions to facilitate better understanding and analysis.",
+                    "type": "string"
+                  },
+                  "ai_context": {
+                    "description": "Additional context to guide the response.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/AIContext"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "metadata_context",
+                  "query"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_GetRelevantQuestionsResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_GetRelevantQuestionsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/ai/analytical-questions": {
       "post": {
         "operationId": "queryGetDecomposedQuery",
         "description": "<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.7.0.cl or later</span>",
+        "deprecated": true,
         "tags": [
           "AI",
           "10.7.0.cl"
@@ -303,6 +568,86 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/eureka_DecomposeQueryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/agent/converse/sse": {
+      "post": {
+        "operationId": "sendAgentMessageStreaming",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.13.0.cl or later</span>\n\nThis API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages. \nTo use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.\n\n\n#### Usage guidelines\n\nTo initiate or continue a conversation, the request must include:\n- `conversation_identifier`: a unique session ID for continuity and message tracking\n- `messages`: an array of one or more text messages, each with a value and type\n\nAdditionally, user can specify what tool can be included `conversation_settings` parameter, which supports:\n- `enable_contextual_change_analysis` (default: false)\n- `enable_natural_language_answer_generation` (default: true)\n- `enable_reasoning` (default: false)\n\nIf the request is valid, the API returns a stream of messages in real time, including:\n- `ack`: confirms receipt of the request\n- `text / text-chunk`: content chunks, optionally formatted (e.g., markdown)\n- `answer`: the final structured response with metadata and analytics\n- `error`: if a failure occurs\n- `notification`: notification messages for operation being performed\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n> * The streaming protocol uses Server-Sent Events (SSE)\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "10.13.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "conversation_identifier": {
+                    "description": "Unique identifier for the conversation (used to track context)",
+                    "type": "string"
+                  },
+                  "messages": {
+                    "description": "messages to be sent to the agent",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "conversation_identifier",
+                  "messages"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendAgentMessageResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendAgentMessageResponse"
                 }
               }
             }
@@ -1465,7 +1810,8 @@
                       "SERVICE_ACCOUNT",
                       "KEY_PAIR",
                       "PERSONAL_ACCESS_TOKEN",
-                      "OAUTH_WITH_SERVICE_PRINCIPAL"
+                      "OAUTH_WITH_SERVICE_PRINCIPAL",
+                      "OAUTH_CLIENT_CREDENTIALS"
                     ]
                   },
                   "configuration": {
@@ -1683,7 +2029,8 @@
                       "KEY_PAIR",
                       "EXTOAUTH_WITH_PKCE",
                       "OAUTH_WITH_PKCE",
-                      "PERSONAL_ACCESS_TOKEN"
+                      "PERSONAL_ACCESS_TOKEN",
+                      "OAUTH_CLIENT_CREDENTIALS"
                     ]
                   },
                   "configuration": {
@@ -2334,7 +2681,8 @@
                       "KEY_PAIR",
                       "OAUTH_WITH_PKCE",
                       "EXTOAUTH_WITH_PKCE",
-                      "OAUTH_WITH_PEZ"
+                      "OAUTH_WITH_PEZ",
+                      "OAUTH_CLIENT_CREDENTIALS"
                     ]
                   },
                   "show_resolved_parameters": {
@@ -4058,7 +4406,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -4183,7 +4531,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -4270,7 +4618,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -4280,10 +4628,8 @@
                   },
                   "model_tables": {
                     "description": "List of Models and their respective Tables",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/ModelTableList"
-                    }
+                    "type": "string",
+                    "format": "json"
                   },
                   "import_worksheets": {
                     "description": "Mention the worksheet tmls to import",
@@ -4296,10 +4642,8 @@
                   },
                   "worksheets": {
                     "description": "List of worksheets is mandatory when import_Worksheets is type SELECTED",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
+                    "type": "string",
+                    "format": "json"
                   },
                   "file_content": {
                     "description": "Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’",
@@ -4513,7 +4857,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -4634,7 +4978,7 @@
     "/api/rest/2.0/customization/email": {
       "post": {
         "operationId": "createEmailCustomization",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.10.0.cl or later</span>\n\nCreates a customization configuration for the notification email.\n\n#### Pre-requisites\n\nRequires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.\n\n**NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.\n\n#### Usage guidelines\n\nTo create a custom configuration pass these parameters in your API request:\n\n- A JSON map of configuration attributes `template_properties`. The following example shows a sample set of customization configuration:\n\n```\n{\n  {\n    \"ctaButtonBgColor\": \"#444DEA\",\n    \"ctaTextFontColor\": \"#FFFFFF\",\n    \"primaryBgColor\": \"#D3DEF0\",\n    \"hideMobileAppNudge\": false,\n    \"fontFamily\" : \"\",\n    \"hideProductName\" : false,\n    \"hideFooterPhone\" : false,\n    \"hideFooterAddress\" : false,\n    \"hidePrivacyPolicy\" : false,\n    \"hideManageNotification\" : false,\n    \"hideTsVocabularyDefinitions\": false,\n    \"hideNotificationStatus\" : false,\n    \"hideErrorMessage\": false,\n    \"hideUnsubscribeLink\" : false,\n    \"hideModifyAlert\": false,\n    \"textTransform\": \"\",\n    \"replacementValueForLiveboard\": \"LB dashboard\",\n    \"replacementValueForAnswer\": \"Answer dashboard\",\n    \"replacementValueForSpotIQ\": \"SpotIQ dashboard\",\n    \"logoUrl\":\"\",\n    \"productName\":\"ThoughtSpot\",\n    \"footerPhone\":\"(800) 508-7008\",\n    \"footerAddress\":\"444 Castro St, Suite 1000 Mountain View, CA 94041\"\n  }\n}\n```\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.10.0.cl or later</span>\n\nCreates a customization configuration for the notification email.\n\n#### Pre-requisites\n\nRequires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.\n\n**NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.\n\n#### Usage guidelines\n\nTo create a custom configuration pass these parameters in your API request:\n\n- A JSON map of configuration attributes `template_properties`. The following example shows a sample set of customization configuration:\n\n```\n{\n  {\n    \"ctaButtonBgColor\": \"#444DEA\",\n    \"ctaTextFontColor\": \"#FFFFFF\",\n    \"primaryBgColor\": \"#D3DEF0\",\n    \"hideMobileAppNudge\": false,\n    \"fontFamily\" : \"\",\n    \"hideProductName\" : false,\n    \"hideFooterPhone\" : false,\n    \"hideFooterAddress\" : false,\n    \"hidePrivacyPolicy\" : false,\n    \"hideManageNotification\" : false,\n    \"hideTsVocabularyDefinitions\": false,\n    \"hideNotificationStatus\" : false,\n    \"hideErrorMessage\": false,\n    \"hideUnsubscribeLink\" : false,\n    \"hideModifyAlert\": false,\n    \"textTransform\": \"\",\n    \"replacementValueForLiveboard\": \"LB dashboard\",\n    \"replacementValueForAnswer\": \"Answer dashboard\",\n    \"replacementValueForSpotIQ\": \"SpotIQ dashboard\",\n    \"logoUrl\":\"\",\n    \"productName\":\"ThoughtSpot\",\n    \"footerPhone\":\"(800) 508-7008\",\n    \"footerAddress\":\"444 Castro St, Suite 1000 Mountain View, CA 94041\",\n    \"companyWebsiteUrl\":\"\",\n    \"companyPrivacyPolicyUrl\":\"\"\n  }\n}\n```\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Email Customization",
           "10.10.0.cl"
@@ -4921,7 +5265,7 @@
     "/api/rest/2.0/customization/email/update": {
       "post": {
         "operationId": "updateEmailCustomization",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.12.0.cl or later</span>\n\nUpdates a customization configuration for the notification email.\n\n#### Pre-requisites\n\nRequires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.\n\n**NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.\n\n#### Usage guidelines\n\nTo update a custom configuration pass these parameters in your API request:\n\n- A JSON map of configuration attributes `template_properties`. The following example shows a sample set of customization configuration:\n\n```\n{\n  {\n    \"ctaButtonBgColor\": \"#444DEA\",\n    \"ctaTextFontColor\": \"#FFFFFF\",\n    \"primaryBgColor\": \"#D3DEF0\",\n    \"hideMobileAppNudge\": false,\n    \"fontFamily\" : \"\",\n    \"hideProductName\" : false,\n    \"hideFooterPhone\" : false,\n    \"hideFooterAddress\" : false,\n    \"hidePrivacyPolicy\" : false,\n    \"hideManageNotification\" : false,\n    \"hideTsVocabularyDefinitions\": false,\n    \"hideNotificationStatus\" : false,\n    \"hideErrorMessage\": false,\n    \"hideUnsubscribeLink\" : false,\n    \"hideModifyAlert\": false,\n    \"textTransform\": \"\",\n    \"replacementValueForLiveboard\": \"LB dashboard\",\n    \"replacementValueForAnswer\": \"Answer dashboard\",\n    \"replacementValueForSpotIQ\": \"SpotIQ dashboard\",\n    \"logoUrl\":\"\",\n    \"productName\":\"ThoughtSpot\",\n    \"footerPhone\":\"(800) 508-7008\",\n    \"footerAddress\":\"444 Castro St, Suite 1000 Mountain View, CA 94041\"\n  }\n}\n```\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.12.0.cl or later</span>\n\nUpdates a customization configuration for the notification email.\n\n#### Pre-requisites\n\nRequires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.\n\n**NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.\n\n#### Usage guidelines\n\nTo update a custom configuration pass these parameters in your API request:\n\n- A JSON map of configuration attributes `template_properties`. The following example shows a sample set of customization configuration:\n\n```\n{\n  {\n    \"ctaButtonBgColor\": \"#444DEA\",\n    \"ctaTextFontColor\": \"#FFFFFF\",\n    \"primaryBgColor\": \"#D3DEF0\",\n    \"hideMobileAppNudge\": false,\n    \"fontFamily\" : \"\",\n    \"hideProductName\" : false,\n    \"hideFooterPhone\" : false,\n    \"hideFooterAddress\" : false,\n    \"hidePrivacyPolicy\" : false,\n    \"hideManageNotification\" : false,\n    \"hideTsVocabularyDefinitions\": false,\n    \"hideNotificationStatus\" : false,\n    \"hideErrorMessage\": false,\n    \"hideUnsubscribeLink\" : false,\n    \"hideModifyAlert\": false,\n    \"textTransform\": \"\",\n    \"replacementValueForLiveboard\": \"LB dashboard\",\n    \"replacementValueForAnswer\": \"Answer dashboard\",\n    \"replacementValueForSpotIQ\": \"SpotIQ dashboard\",\n    \"logoUrl\":\"\",\n    \"productName\":\"ThoughtSpot\",\n    \"footerPhone\":\"(800) 508-7008\",\n    \"footerAddress\":\"444 Castro St, Suite 1000 Mountain View, CA 94041\",\n    \"companyWebsiteUrl\":\"\",\n    \"companyPrivacyPolicyUrl\":\"\"\n  }\n}\n```\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Email Customization",
           "10.12.0.cl"
@@ -5112,7 +5456,9 @@
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
-                        "CAN_SETUP_VERSION_CONTROL"
+                        "CAN_SETUP_VERSION_CONTROL",
+                        "CAN_DOWNLOAD_VISUALS",
+                        "CAN_DOWNLOAD_DETAILED_DATA"
                       ]
                     }
                   },
@@ -5129,7 +5475,9 @@
                     "type": "string",
                     "enum": [
                       "LOCAL_GROUP",
-                      "LDAP_GROUP"
+                      "LDAP_GROUP",
+                      "TEAM_GROUP",
+                      "TENANT_GROUP"
                     ]
                   },
                   "user_identifiers": {
@@ -5465,7 +5813,10 @@
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
-                        "CAN_SETUP_VERSION_CONTROL"
+                        "CAN_SETUP_VERSION_CONTROL",
+                        "CAN_MANAGE_WEBHOOKS",
+                        "CAN_DOWNLOAD_VISUALS",
+                        "CAN_DOWNLOAD_DETAILED_DATA"
                       ]
                     }
                   },
@@ -5481,7 +5832,9 @@
                     "type": "string",
                     "enum": [
                       "LOCAL_GROUP",
-                      "LDAP_GROUP"
+                      "LDAP_GROUP",
+                      "TEAM_GROUP",
+                      "TENANT_GROUP"
                     ]
                   },
                   "user_identifiers": {
@@ -5667,7 +6020,9 @@
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
-                        "CAN_SETUP_VERSION_CONTROL"
+                        "CAN_SETUP_VERSION_CONTROL",
+                        "CAN_DOWNLOAD_VISUALS",
+                        "CAN_DOWNLOAD_DETAILED_DATA"
                       ]
                     }
                   },
@@ -5683,7 +6038,9 @@
                     "type": "string",
                     "enum": [
                       "LOCAL_GROUP",
-                      "LDAP_GROUP"
+                      "LDAP_GROUP",
+                      "TEAM_GROUP",
+                      "TENANT_GROUP"
                     ]
                   },
                   "user_identifiers": {
@@ -8308,7 +8665,10 @@
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
                         "CAN_SETUP_VERSION_CONTROL",
-                        "PREVIEW_THOUGHTSPOT_SAGE"
+                        "PREVIEW_THOUGHTSPOT_SAGE",
+                        "CAN_MANAGE_WEBHOOKS",
+                        "CAN_DOWNLOAD_VISUALS",
+                        "CAN_DOWNLOAD_DETAILED_DATA"
                       ]
                     }
                   },
@@ -8533,7 +8893,10 @@
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
-                        "CAN_SETUP_VERSION_CONTROL"
+                        "CAN_SETUP_VERSION_CONTROL",
+                        "CAN_MANAGE_WEBHOOKS",
+                        "CAN_DOWNLOAD_VISUALS",
+                        "CAN_DOWNLOAD_DETAILED_DATA"
                       ]
                     }
                   },
@@ -8690,7 +9053,10 @@
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
-                        "PREVIEW_THOUGHTSPOT_SAGE"
+                        "PREVIEW_THOUGHTSPOT_SAGE",
+                        "CAN_MANAGE_WEBHOOKS",
+                        "CAN_DOWNLOAD_VISUALS",
+                        "CAN_DOWNLOAD_DETAILED_DATA"
                       ]
                     }
                   }
@@ -13191,7 +13557,10 @@
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
-                        "CAN_SETUP_VERSION_CONTROL"
+                        "CAN_SETUP_VERSION_CONTROL",
+                        "CAN_MANAGE_WEBHOOKS",
+                        "CAN_DOWNLOAD_VISUALS",
+                        "CAN_DOWNLOAD_DETAILED_DATA"
                       ]
                     }
                   },
@@ -13563,7 +13932,7 @@
     "/api/rest/2.0/template/variables/create": {
       "post": {
         "operationId": "createVariable",
-        "description": "\nCreate a variable which can be used for parameterizing metadata objects <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows creating a variable which can be used for parameterizing metadata objects in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\n\nThe API endpoint supports the following types of variables:\n* CONNECTION_PROPERTY - For connection properties\n* TABLE_MAPPING - For table mappings\n* CONNECTION_PROPERTY_PER_PRINCIPAL - For connection properties per principal. In order to use this please contact support to enable this.\n\nWhen creating a variable, you need to specify:\n* The variable type\n* A unique name for the variable\n* Whether the variable contains sensitive values (defaults to false)\n* The variable values (optional)\n\nThe operation will fail if:\n* The user lacks required permissions\n* The variable name already exists\n* The variable type is invalid\n* The variable values are invalid for the specified type \n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nCreate a variable which can be used for parameterizing metadata objects <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows creating a variable which can be used for parameterizing metadata objects in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\n\nThe API endpoint supports the following types of variables:\n* CONNECTION_PROPERTY - For connection properties\n* TABLE_MAPPING - For table mappings\n* CONNECTION_PROPERTY_PER_PRINCIPAL - For connection properties per principal. In order to use this please contact support to enable this.\n* FORMULA_VARIABLE - For Formula variables\n\nWhen creating a variable, you need to specify:\n* The variable type\n* A unique name for the variable\n* Whether the variable contains sensitive values (defaults to false)\n* The data type of the variable, only specify for fomula variables (defaults to null)\n\nThe operation will fail if:\n* The user lacks required permissions\n* The variable name already exists\n* The variable type is invalid\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Variable",
           "10.9.0.cl"
@@ -13734,7 +14103,7 @@
     "/api/rest/2.0/template/variables/search": {
       "post": {
         "operationId": "searchVariables",
-        "description": "\nSearch variables <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows searching for variables in ThoughtSpot.\n\nRequires ADMINISTRATION role.\n\nThe API endpoint supports searching variables by:\n* Variable identifier (ID or name)\n* Variable type\n* Name pattern (case-insensitive, supports % for wildcard)\n\nThe search results can be formatted in three ways:\n* METADATA_ONLY - Returns only variable metadata (default)\n* METADATA_AND_VALUES - Returns variable metadata and values\n* EDITABLE_METADATA_AND_VALUES - Returns only editable variable metadata and values\n\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nSearch variables <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows searching for variables in ThoughtSpot.\n\nRequires ADMINISTRATION role.\n\nThe API endpoint supports searching variables by:\n* Variable identifier (ID or name)\n* Variable type\n* Name pattern (case-insensitive, supports % for wildcard)\n\nThe search results can be formatted in three ways:\n* METADATA_ONLY - Returns only variable metadata (default)\n* METADATA_AND_VALUES - Returns variable metadata and values\n* EDITABLE_METADATA_AND_VALUES - Returns only editable variable metadata and values\n\nThe values can be filtered by scope:\n* org_identifier\n* principal_identifier\n* model_identifier\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Variable",
           "10.9.0.cl"
@@ -13841,7 +14210,7 @@
     "/api/rest/2.0/template/variables/{identifier}/update": {
       "post": {
         "operationId": "updateVariable",
-        "description": "\nUpdate a variable's properties <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows updating a variable's properties in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\n\nThe API endpoint allows updating:\n* The variable name\n* The variable values\n\nWhen updating variable values, you need to specify:\n* The operation to perform (ADD, REPLACE, REMOVE)\n* The new values to add/replace/remove\n\nWhen the operation is ADD, a value any pre-existing value with the same set of constraints will be replaced.\nWhen the operation is REPLACE, all values of the variable are replaced with the values specified.\nWhen the operation is REMOVE, all values with the given set of conditions are removed.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nUpdate a variable's properties <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows updating a variable's properties in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\n\nThe API endpoint allows updating:\n* The variable name\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Variable",
           "10.9.0.cl"
@@ -13940,7 +14309,7 @@
     "/api/rest/2.0/template/variables/update": {
       "post": {
         "operationId": "updateVariableValues",
-        "description": "\nUpdate values for multiple variables <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows updating values for multiple variables in ThoughtSpot.\n\nRequires ADMINISTRATION role.\n\nThe API endpoint allows:\n* Adding new values to variables\n* Replacing existing values\n* Deleting values from variables\n\nWhen updating variable values, you need to specify:\n* The variable identifiers\n* The values to add/replace/remove for each variable\n* The operation to perform (ADD, REPLACE, REMOVE)\n\nBehaviour based on operation type:\n* ADD - Adds values to the variable. Any pre-existing values with the same conditions are replaced.\n* REPLACE - Replaces all values of a given org with the current set of values.\n* REMOVE - Removes any values which match the set of conditions of the variables.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nUpdate values for multiple variables <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows updating values for multiple variables in ThoughtSpot.\n\nRequires ADMINISTRATION role.\n\nThe API endpoint allows:\n* Adding new values to variables\n* Replacing existing values\n* Deleting values from variables\n\nWhen updating variable values, you need to specify:\n* The variable identifiers\n* The values to add/replace/remove for each variable\n* The operation to perform (ADD, REPLACE, REMOVE, CLEAR)\n\nBehaviour based on operation type:\n* ADD - Adds values to the variable if this is a list type variable, else same as replace.\n* REPLACE - Replaces all values of a given set of constraints with the current set of values.\n* REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value.\n* CLEAR - Removes all constrains for a given variable, scope is ignored\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Variable",
           "10.9.0.cl"
@@ -15773,7 +16142,9 @@
             "type": "string",
             "enum": [
               "LOCAL_GROUP",
-              "LDAP_GROUP"
+              "LDAP_GROUP",
+              "TEAM_GROUP",
+              "TENANT_GROUP"
             ],
             "description": "Type of the group.",
             "nullable": true
@@ -17545,7 +17916,10 @@
                 "CAN_ACCESS_ANALYST_STUDIO",
                 "CAN_MANAGE_ANALYST_STUDIO",
                 "PREVIEW_DOCUMENT_SEARCH",
-                "CAN_SETUP_VERSION_CONTROL"
+                "CAN_SETUP_VERSION_CONTROL",
+                "CAN_MANAGE_WEBHOOKS",
+                "CAN_DOWNLOAD_VISUALS",
+                "CAN_DOWNLOAD_DETAILED_DATA"
               ]
             },
             "description": "Privileges granted to the role."
@@ -17866,6 +18240,94 @@
         },
         "description": "MetadataType InputType used in Custom Action API's"
       },
+      "MetadataContext": {
+        "type": "object",
+        "properties": {
+          "data_source_identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of data_source_identifiers to provide context for breaking down user query into analytical queries that can be run on them.",
+            "nullable": true
+          },
+          "answer_identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of answer unique identifiers (GUIDs) whose data will be used to guide the response.",
+            "nullable": true
+          },
+          "conversation_identifier": {
+            "type": "string",
+            "description": "Unique identifier to denote current conversation.",
+            "nullable": true
+          },
+          "liveboard_identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of liveboard unique identifiers (GUIDs) whose data will be used to guide the response.",
+            "nullable": true
+          }
+        }
+      },
+      "AIContext": {
+        "type": "object",
+        "properties": {
+          "instructions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "User specific text instructions sent to AI system for processing the query.",
+            "nullable": true
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "User provided content like text data, csv data as a string message to provide context & potentially improve the quality of the response.",
+            "nullable": true
+          }
+        }
+      },
+      "eureka_GetRelevantQuestionsResponse": {
+        "type": "object",
+        "properties": {
+          "relevant_questions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/eureka_RelevantQuestion"
+            },
+            "description": "List of relevant questions that can be run on their respective data sources.",
+            "nullable": true
+          }
+        }
+      },
+      "eureka_RelevantQuestion": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "NL query that can be run using spotter aka natural language search to get an AI generated answer.",
+            "nullable": true
+          },
+          "data_source_identifier": {
+            "type": "string",
+            "description": "Unique identifier of the data source on which this query can be run on.",
+            "nullable": true
+          },
+          "data_source_name": {
+            "type": "string",
+            "description": "Display name of the data source on which this query can be run on.",
+            "nullable": true
+          }
+        }
+      },
       "Input_eureka_NLSRequest": {
         "type": "object",
         "properties": {
@@ -17934,6 +18396,60 @@
           "worksheetName": {
             "type": "string",
             "description": "Display name of the worksheet on which this query can be run on.",
+            "nullable": true
+          }
+        }
+      },
+      "eureka_DataSourceSuggestionResponse": {
+        "type": "object",
+        "properties": {
+          "data_sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataSource"
+            },
+            "description": "List of data sources suggested.",
+            "nullable": true
+          }
+        }
+      },
+      "DataSource": {
+        "type": "object",
+        "properties": {
+          "confidence": {
+            "type": "number",
+            "format": "float",
+            "description": "Confidence score for the data source suggestion.",
+            "nullable": true
+          },
+          "details": {
+            "$ref": "#/components/schemas/EntityHeader",
+            "description": "Details of the data source.",
+            "nullable": true
+          },
+          "reasoning": {
+            "type": "string",
+            "description": "LLM reasoning for the data source.",
+            "nullable": true
+          }
+        }
+      },
+      "EntityHeader": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Description of the data source.",
+            "nullable": true
+          },
+          "data_source_name": {
+            "type": "string",
+            "description": "Display name of the data source.",
+            "nullable": true
+          },
+          "data_source_identifier": {
+            "type": "string",
+            "description": "Unique identifier of the data source.",
             "nullable": true
           }
         }
@@ -19055,7 +19571,9 @@
                 "CAN_ACCESS_ANALYST_STUDIO",
                 "CAN_MANAGE_ANALYST_STUDIO",
                 "PREVIEW_DOCUMENT_SEARCH",
-                "CAN_SETUP_VERSION_CONTROL"
+                "CAN_SETUP_VERSION_CONTROL",
+                "CAN_DOWNLOAD_VISUALS",
+                "CAN_DOWNLOAD_DETAILED_DATA"
               ]
             },
             "description": "Privileges that will be assigned to the group.",
@@ -19073,7 +19591,9 @@
             "type": "string",
             "enum": [
               "LOCAL_GROUP",
-              "LDAP_GROUP"
+              "LDAP_GROUP",
+              "TEAM_GROUP",
+              "TENANT_GROUP"
             ],
             "description": "Type of the group.",
             "nullable": true
@@ -20034,7 +20554,10 @@
                 "CAN_MANAGE_ANALYST_STUDIO",
                 "PREVIEW_DOCUMENT_SEARCH",
                 "CAN_SETUP_VERSION_CONTROL",
-                "PREVIEW_THOUGHTSPOT_SAGE"
+                "PREVIEW_THOUGHTSPOT_SAGE",
+                "CAN_MANAGE_WEBHOOKS",
+                "CAN_DOWNLOAD_VISUALS",
+                "CAN_DOWNLOAD_DETAILED_DATA"
               ]
             },
             "description": "Privileges granted to the role."
@@ -21055,6 +21578,133 @@
           }
         }
       },
+      "ContextPayloadV2Input": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "answer",
+              "liveboard",
+              "data_source"
+            ],
+            "description": "Type of the context.",
+            "nullable": true
+          },
+          "answer_context": {
+            "$ref": "#/components/schemas/AnswerContextInput",
+            "description": "Answer context.",
+            "nullable": true
+          },
+          "liveboard_context": {
+            "$ref": "#/components/schemas/LBContextInput",
+            "description": "Liveboard context.",
+            "nullable": true
+          },
+          "data_source_context": {
+            "$ref": "#/components/schemas/DataSourceContextInput",
+            "description": "Data source context.",
+            "nullable": true
+          }
+        }
+      },
+      "AnswerContextInput": {
+        "type": "object",
+        "required": [
+          "session_identifier",
+          "generation_number"
+        ],
+        "properties": {
+          "session_identifier": {
+            "type": "string",
+            "description": "Unique identifier of the answer session."
+          },
+          "generation_number": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Generation number of the answer."
+          }
+        }
+      },
+      "LBContextInput": {
+        "type": "object",
+        "required": [
+          "liveboard_identifier",
+          "visualization_identifier"
+        ],
+        "properties": {
+          "liveboard_identifier": {
+            "type": "string",
+            "description": "Unique identifier of the liveboard."
+          },
+          "visualization_identifier": {
+            "type": "string",
+            "description": "Unique identifier of the visualization."
+          }
+        }
+      },
+      "DataSourceContextInput": {
+        "type": "object",
+        "required": [
+          "guid"
+        ],
+        "properties": {
+          "guid": {
+            "type": "string",
+            "description": "Unique identifier of the data source."
+          }
+        }
+      },
+      "ConversationSettingsInput": {
+        "type": "object",
+        "properties": {
+          "enable_contextual_change_analysis": {
+            "type": "boolean",
+            "default": false,
+            "description": "Enable contextual change analysis.",
+            "nullable": true
+          },
+          "enable_natural_language_answer_generation": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable natural language to answer generation.",
+            "nullable": true
+          },
+          "enable_reasoning": {
+            "type": "boolean",
+            "default": false,
+            "description": "Enable reasoning.",
+            "nullable": true
+          }
+        }
+      },
+      "AgentConversation": {
+        "type": "object",
+        "required": [
+          "conversation_id"
+        ],
+        "properties": {
+          "conversation_id": {
+            "type": "string",
+            "description": "Unique identifier of the conversation."
+          }
+        }
+      },
+      "SendAgentMessageResponse": {
+        "type": "object",
+        "required": [
+          "success"
+        ],
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
       "InputVariableValue": {
         "type": "object",
         "required": [
@@ -21270,6 +21920,16 @@
           "hide_modify_alert": {
             "type": "boolean",
             "description": "Whether to hide modify alert",
+            "nullable": true
+          },
+          "company_privacy_policy_url": {
+            "type": "string",
+            "description": "Company privacy policy URL (HTTP/HTTPS only)",
+            "nullable": true
+          },
+          "company_website_url": {
+            "type": "string",
+            "description": "Company website URL (HTTP/HTTPS only)",
             "nullable": true
           }
         },
