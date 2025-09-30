@@ -8,12 +8,8 @@ import {canConsumeForm, isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
-import { DbtConnectionRequest } from '../models/DbtConnectionRequest';
-import { DbtGenerateSyncTmlRequest } from '../models/DbtGenerateSyncTmlRequest';
-import { DbtGenerateTmlRequest } from '../models/DbtGenerateTmlRequest';
 import { DbtSearchResponse } from '../models/DbtSearchResponse';
 import { ErrorResponse } from '../models/ErrorResponse';
-import { UpdateDbtConnectionRequest } from '../models/UpdateDbtConnectionRequest';
 
 /**
  * no description
@@ -22,15 +18,38 @@ export class DBTApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      *   Version: 9.9.0.cl or later   Creates a DBT connection object in ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### About create DBT connection DBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.      
-     * @param dbtConnectionRequest 
+     * @param connectionName Name of the connection.
+     * @param databaseName Name of the Database.
+     * @param importType Mention type of Import
+     * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD.
+     * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD.
+     * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD
+     * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD
+     * @param dbtEnvId DBT Environment ID\\\&quot;
+     * @param projectName Name of the project
+     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is Mandatory when Import Type is \\\&#39;ZIP_FILE\\\&#39;
      */
-    public async dbtConnection(dbtConnectionRequest: DbtConnectionRequest, _options?: Configuration): Promise<RequestContext> {
+    public async dbtConnection(connectionName: string, databaseName: string, importType?: string, accessToken?: string, dbtUrl?: string, accountId?: string, projectId?: string, dbtEnvId?: string, projectName?: string, fileContent?: HttpFile, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
-        // verify required parameter 'dbtConnectionRequest' is not null or undefined
-        if (dbtConnectionRequest === null || dbtConnectionRequest === undefined) {
-            throw new RequiredError("DBTApi", "dbtConnection", "dbtConnectionRequest");
+        // verify required parameter 'connectionName' is not null or undefined
+        if (connectionName === null || connectionName === undefined) {
+            throw new RequiredError("DBTApi", "dbtConnection", "connectionName");
         }
+
+
+        // verify required parameter 'databaseName' is not null or undefined
+        if (databaseName === null || databaseName === undefined) {
+            throw new RequiredError("DBTApi", "dbtConnection", "databaseName");
+        }
+
+
+
+
+
+
+
+
 
 
         // Path Params
@@ -39,21 +58,73 @@ export class DBTApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.18.0")
       
 
 
-
-        // Body Params
-        const contentType = ObjectSerializer.getPreferredMediaType([
-            "application/json"
+        // Form Params
+        const useForm = canConsumeForm([
+            'multipart/form-data',
         ]);
-        requestContext.setHeaderParam("Content-Type", contentType);
-        const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(dbtConnectionRequest, "DbtConnectionRequest", ""),
-            contentType
-        );
-        requestContext.setBody(serializedBody);
+
+        let localVarFormParams
+        if (useForm) {
+            localVarFormParams = new FormData();
+        } else {
+            localVarFormParams = new URLSearchParams();
+        }
+
+        if (connectionName !== undefined) {
+             // TODO: replace .append with .set
+             localVarFormParams.append('connection_name', connectionName as any);
+        }
+        if (databaseName !== undefined) {
+             // TODO: replace .append with .set
+             localVarFormParams.append('database_name', databaseName as any);
+        }
+        if (importType !== undefined) {
+             // TODO: replace .append with .set
+             localVarFormParams.append('import_type', importType as any);
+        }
+        if (accessToken !== undefined) {
+             // TODO: replace .append with .set
+             localVarFormParams.append('access_token', accessToken as any);
+        }
+        if (dbtUrl !== undefined) {
+             // TODO: replace .append with .set
+             localVarFormParams.append('dbt_url', dbtUrl as any);
+        }
+        if (accountId !== undefined) {
+             // TODO: replace .append with .set
+             localVarFormParams.append('account_id', accountId as any);
+        }
+        if (projectId !== undefined) {
+             // TODO: replace .append with .set
+             localVarFormParams.append('project_id', projectId as any);
+        }
+        if (dbtEnvId !== undefined) {
+             // TODO: replace .append with .set
+             localVarFormParams.append('dbt_env_id', dbtEnvId as any);
+        }
+        if (projectName !== undefined) {
+             // TODO: replace .append with .set
+             localVarFormParams.append('project_name', projectName as any);
+        }
+        if (fileContent !== undefined) {
+             // TODO: replace .append with .set
+             if (localVarFormParams instanceof FormData) {
+                 localVarFormParams.append('file_content', fileContent, fileContent.name);
+             }
+        }
+
+        requestContext.setBody(localVarFormParams);
+
+        if(!useForm) {
+            const contentType = ObjectSerializer.getPreferredMediaType([
+                "multipart/form-data"
+            ]);
+            requestContext.setHeaderParam("Content-Type", contentType);
+        }
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
@@ -72,15 +143,17 @@ export class DBTApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      *   Version: 9.9.0.cl or later   Resynchronize the existing list of models, tables, worksheet tml’s and import them to Thoughtspot based on the DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)      
-     * @param dbtGenerateSyncTmlRequest 
+     * @param dbtConnectionIdentifier Unique ID of the DBT connection.
+     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
      */
-    public async dbtGenerateSyncTml(dbtGenerateSyncTmlRequest: DbtGenerateSyncTmlRequest, _options?: Configuration): Promise<RequestContext> {
+    public async dbtGenerateSyncTml(dbtConnectionIdentifier: string, fileContent?: HttpFile, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
-        // verify required parameter 'dbtGenerateSyncTmlRequest' is not null or undefined
-        if (dbtGenerateSyncTmlRequest === null || dbtGenerateSyncTmlRequest === undefined) {
-            throw new RequiredError("DBTApi", "dbtGenerateSyncTml", "dbtGenerateSyncTmlRequest");
+        // verify required parameter 'dbtConnectionIdentifier' is not null or undefined
+        if (dbtConnectionIdentifier === null || dbtConnectionIdentifier === undefined) {
+            throw new RequiredError("DBTApi", "dbtGenerateSyncTml", "dbtConnectionIdentifier");
         }
+
 
 
         // Path Params
@@ -89,21 +162,41 @@ export class DBTApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.18.0")
       
 
 
-
-        // Body Params
-        const contentType = ObjectSerializer.getPreferredMediaType([
-            "application/json"
+        // Form Params
+        const useForm = canConsumeForm([
+            'multipart/form-data',
         ]);
-        requestContext.setHeaderParam("Content-Type", contentType);
-        const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(dbtGenerateSyncTmlRequest, "DbtGenerateSyncTmlRequest", ""),
-            contentType
-        );
-        requestContext.setBody(serializedBody);
+
+        let localVarFormParams
+        if (useForm) {
+            localVarFormParams = new FormData();
+        } else {
+            localVarFormParams = new URLSearchParams();
+        }
+
+        if (dbtConnectionIdentifier !== undefined) {
+             // TODO: replace .append with .set
+             localVarFormParams.append('dbt_connection_identifier', dbtConnectionIdentifier as any);
+        }
+        if (fileContent !== undefined) {
+             // TODO: replace .append with .set
+             if (localVarFormParams instanceof FormData) {
+                 localVarFormParams.append('file_content', fileContent, fileContent.name);
+             }
+        }
+
+        requestContext.setBody(localVarFormParams);
+
+        if(!useForm) {
+            const contentType = ObjectSerializer.getPreferredMediaType([
+                "multipart/form-data"
+            ]);
+            requestContext.setHeaderParam("Content-Type", contentType);
+        }
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
@@ -122,15 +215,28 @@ export class DBTApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      *   Version: 9.9.0.cl or later   Generate required table and worksheet and import them.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### About generate TML Models and Worksheets to be imported can be selected by the user as part of the API.      
-     * @param dbtGenerateTmlRequest 
+     * @param dbtConnectionIdentifier Unique ID of the DBT connection.
+     * @param importWorksheets Mention the worksheet tmls to import
+     * @param modelTables List of Models and their respective Tables
+     * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED
+     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
      */
-    public async dbtGenerateTml(dbtGenerateTmlRequest: DbtGenerateTmlRequest, _options?: Configuration): Promise<RequestContext> {
+    public async dbtGenerateTml(dbtConnectionIdentifier: string, importWorksheets: string, modelTables?: string, worksheets?: string, fileContent?: HttpFile, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
-        // verify required parameter 'dbtGenerateTmlRequest' is not null or undefined
-        if (dbtGenerateTmlRequest === null || dbtGenerateTmlRequest === undefined) {
-            throw new RequiredError("DBTApi", "dbtGenerateTml", "dbtGenerateTmlRequest");
+        // verify required parameter 'dbtConnectionIdentifier' is not null or undefined
+        if (dbtConnectionIdentifier === null || dbtConnectionIdentifier === undefined) {
+            throw new RequiredError("DBTApi", "dbtGenerateTml", "dbtConnectionIdentifier");
         }
+
+
+        // verify required parameter 'importWorksheets' is not null or undefined
+        if (importWorksheets === null || importWorksheets === undefined) {
+            throw new RequiredError("DBTApi", "dbtGenerateTml", "importWorksheets");
+        }
+
+
+
 
 
         // Path Params
@@ -139,21 +245,53 @@ export class DBTApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.18.0")
       
 
 
-
-        // Body Params
-        const contentType = ObjectSerializer.getPreferredMediaType([
-            "application/json"
+        // Form Params
+        const useForm = canConsumeForm([
+            'multipart/form-data',
         ]);
-        requestContext.setHeaderParam("Content-Type", contentType);
-        const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(dbtGenerateTmlRequest, "DbtGenerateTmlRequest", ""),
-            contentType
-        );
-        requestContext.setBody(serializedBody);
+
+        let localVarFormParams
+        if (useForm) {
+            localVarFormParams = new FormData();
+        } else {
+            localVarFormParams = new URLSearchParams();
+        }
+
+        if (dbtConnectionIdentifier !== undefined) {
+             // TODO: replace .append with .set
+             localVarFormParams.append('dbt_connection_identifier', dbtConnectionIdentifier as any);
+        }
+        if (modelTables !== undefined) {
+             // TODO: replace .append with .set
+             localVarFormParams.append('model_tables', modelTables as any);
+        }
+        if (importWorksheets !== undefined) {
+             // TODO: replace .append with .set
+             localVarFormParams.append('import_worksheets', importWorksheets as any);
+        }
+        if (worksheets !== undefined) {
+             // TODO: replace .append with .set
+             localVarFormParams.append('worksheets', worksheets as any);
+        }
+        if (fileContent !== undefined) {
+             // TODO: replace .append with .set
+             if (localVarFormParams instanceof FormData) {
+                 localVarFormParams.append('file_content', fileContent, fileContent.name);
+             }
+        }
+
+        requestContext.setBody(localVarFormParams);
+
+        if(!useForm) {
+            const contentType = ObjectSerializer.getPreferredMediaType([
+                "multipart/form-data"
+            ]);
+            requestContext.setHeaderParam("Content-Type", contentType);
+        }
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
@@ -182,7 +320,7 @@ export class DBTApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.18.0")
       
 
 
@@ -222,7 +360,7 @@ export class DBTApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.18.0")
       
 
 
@@ -244,15 +382,35 @@ export class DBTApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      *   Version: 9.9.0.cl or later   Updates a DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### About update DBT connection You can modify DBT connection object properties such as embrace connection name, embrace database name, import type, account identifier, access token, project identifier and environment (or) embrace connection, embrace database name, import type, file_content settings.      
-     * @param updateDbtConnectionRequest 
+     * @param dbtConnectionIdentifier Unique ID of the DBT Connection.
+     * @param connectionName Name of the connection.
+     * @param databaseName Name of the Database.
+     * @param importType Mention type of Import
+     * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD.
+     * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD.
+     * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD
+     * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD
+     * @param dbtEnvId DBT Environment ID\\\&quot;
+     * @param projectName Name of the project
+     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is Mandatory when Import Type is \\\&#39;ZIP_FILE\\\&#39;
      */
-    public async updateDbtConnection(updateDbtConnectionRequest: UpdateDbtConnectionRequest, _options?: Configuration): Promise<RequestContext> {
+    public async updateDbtConnection(dbtConnectionIdentifier: string, connectionName?: string, databaseName?: string, importType?: string, accessToken?: string, dbtUrl?: string, accountId?: string, projectId?: string, dbtEnvId?: string, projectName?: string, fileContent?: HttpFile, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
-        // verify required parameter 'updateDbtConnectionRequest' is not null or undefined
-        if (updateDbtConnectionRequest === null || updateDbtConnectionRequest === undefined) {
-            throw new RequiredError("DBTApi", "updateDbtConnection", "updateDbtConnectionRequest");
+        // verify required parameter 'dbtConnectionIdentifier' is not null or undefined
+        if (dbtConnectionIdentifier === null || dbtConnectionIdentifier === undefined) {
+            throw new RequiredError("DBTApi", "updateDbtConnection", "dbtConnectionIdentifier");
         }
+
+
+
+
+
+
+
+
+
+
 
 
         // Path Params
@@ -261,21 +419,77 @@ export class DBTApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.18.0")
       
 
 
-
-        // Body Params
-        const contentType = ObjectSerializer.getPreferredMediaType([
-            "application/json"
+        // Form Params
+        const useForm = canConsumeForm([
+            'multipart/form-data',
         ]);
-        requestContext.setHeaderParam("Content-Type", contentType);
-        const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(updateDbtConnectionRequest, "UpdateDbtConnectionRequest", ""),
-            contentType
-        );
-        requestContext.setBody(serializedBody);
+
+        let localVarFormParams
+        if (useForm) {
+            localVarFormParams = new FormData();
+        } else {
+            localVarFormParams = new URLSearchParams();
+        }
+
+        if (dbtConnectionIdentifier !== undefined) {
+             // TODO: replace .append with .set
+             localVarFormParams.append('dbt_connection_identifier', dbtConnectionIdentifier as any);
+        }
+        if (connectionName !== undefined) {
+             // TODO: replace .append with .set
+             localVarFormParams.append('connection_name', connectionName as any);
+        }
+        if (databaseName !== undefined) {
+             // TODO: replace .append with .set
+             localVarFormParams.append('database_name', databaseName as any);
+        }
+        if (importType !== undefined) {
+             // TODO: replace .append with .set
+             localVarFormParams.append('import_type', importType as any);
+        }
+        if (accessToken !== undefined) {
+             // TODO: replace .append with .set
+             localVarFormParams.append('access_token', accessToken as any);
+        }
+        if (dbtUrl !== undefined) {
+             // TODO: replace .append with .set
+             localVarFormParams.append('dbt_url', dbtUrl as any);
+        }
+        if (accountId !== undefined) {
+             // TODO: replace .append with .set
+             localVarFormParams.append('account_id', accountId as any);
+        }
+        if (projectId !== undefined) {
+             // TODO: replace .append with .set
+             localVarFormParams.append('project_id', projectId as any);
+        }
+        if (dbtEnvId !== undefined) {
+             // TODO: replace .append with .set
+             localVarFormParams.append('dbt_env_id', dbtEnvId as any);
+        }
+        if (projectName !== undefined) {
+             // TODO: replace .append with .set
+             localVarFormParams.append('project_name', projectName as any);
+        }
+        if (fileContent !== undefined) {
+             // TODO: replace .append with .set
+             if (localVarFormParams instanceof FormData) {
+                 localVarFormParams.append('file_content', fileContent, fileContent.name);
+             }
+        }
+
+        requestContext.setBody(localVarFormParams);
+
+        if(!useForm) {
+            const contentType = ObjectSerializer.getPreferredMediaType([
+                "multipart/form-data"
+            ]);
+            requestContext.setHeaderParam("Content-Type", contentType);
+        }
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods

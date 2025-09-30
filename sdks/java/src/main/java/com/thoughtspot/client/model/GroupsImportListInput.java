@@ -79,6 +79,8 @@ public class GroupsImportListInput implements Serializable {
 
         A3_ANALYSIS("A3ANALYSIS"),
 
+        EXPERIMENTALFEATUREPRIVILEGE("EXPERIMENTALFEATUREPRIVILEGE"),
+
         BYPASSRLS("BYPASSRLS"),
 
         RANALYSIS("RANALYSIS"),
@@ -111,7 +113,11 @@ public class GroupsImportListInput implements Serializable {
 
         PREVIEW_DOCUMENT_SEARCH("PREVIEW_DOCUMENT_SEARCH"),
 
-        CAN_SETUP_VERSION_CONTROL("CAN_SETUP_VERSION_CONTROL");
+        CAN_SETUP_VERSION_CONTROL("CAN_SETUP_VERSION_CONTROL"),
+
+        CAN_DOWNLOAD_VISUALS("CAN_DOWNLOAD_VISUALS"),
+
+        CAN_DOWNLOAD_DETAILED_DATA("CAN_DOWNLOAD_DETAILED_DATA");
 
         private String value;
 
@@ -174,7 +180,11 @@ public class GroupsImportListInput implements Serializable {
     public enum TypeEnum {
         LOCAL_GROUP("LOCAL_GROUP"),
 
-        LDAP_GROUP("LDAP_GROUP");
+        LDAP_GROUP("LDAP_GROUP"),
+
+        TEAM_GROUP("TEAM_GROUP"),
+
+        TENANT_GROUP("TENANT_GROUP");
 
         private String value;
 

@@ -7,6 +7,7 @@ package com.thoughtspot.client.api;
 import com.thoughtspot.client.ApiException;
 import com.thoughtspot.client.model.SystemConfig;
 import com.thoughtspot.client.model.SystemInfo;
+import com.thoughtspot.client.model.SystemOverrideInfo;
 import com.thoughtspot.client.model.UpdateSystemConfigRequest;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -62,7 +63,7 @@ public class SystemApiTest {
      */
     @Test
     public void getSystemOverrideInfoTest() throws ApiException {
-        Object response = api.getSystemOverrideInfo();
+        SystemOverrideInfo response = api.getSystemOverrideInfo();
         // TODO: test validations
     }
 

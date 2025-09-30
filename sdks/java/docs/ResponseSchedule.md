@@ -21,6 +21,7 @@
 |**status** | **String** | Status of the job |  [optional] |
 |**timeZone** | **String** | Time zone |  |
 |**historyRuns** | [**List&lt;ResponseScheduleRun&gt;**](ResponseScheduleRun.md) | Schedule runs history records. |  [optional] |
+|**personalisedViewId** | **String** | Personalised view id of the liveboard to be scheduled. |  [optional] |
 
 
 ## Implemented Interfaces

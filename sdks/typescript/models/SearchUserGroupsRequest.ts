@@ -71,6 +71,14 @@ export class SearchUserGroupsRequest {
     */
     'record_size'?: number;
     'sort_options'?: SearchUserGroupsRequestSortOptions;
+    /**
+    * <div>Version: 10.10.0.cl or later </div>  Define Parameter to consider if the users should be included in group search response.
+    */
+    'include_users'?: boolean | null;
+    /**
+    * <div>Version: 10.10.0.cl or later </div>  Define Parameter to consider if the sub groups should be included in group search response.
+    */
+    'include_sub_groups'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -164,6 +172,18 @@ export class SearchUserGroupsRequest {
             "baseName": "sort_options",
             "type": "SearchUserGroupsRequestSortOptions",
             "format": ""
+        },
+        {
+            "name": "include_users",
+            "baseName": "include_users",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "include_sub_groups",
+            "baseName": "include_sub_groups",
+            "type": "boolean",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -175,7 +195,7 @@ export class SearchUserGroupsRequest {
 }
 
 
-export type SearchUserGroupsRequestPrivilegesEnum = "ADMINISTRATION" | "AUTHORING" | "USERDATAUPLOADING" | "DATADOWNLOADING" | "USERMANAGEMENT" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "RANALYSIS" | "DEVELOPER" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYNCMANAGEMENT" | "CAN_CREATE_CATALOG" | "DISABLE_PINBOARD_CREATION" | "LIVEBOARD_VERIFIER" | "PREVIEW_THOUGHTSPOT_SAGE" | "APPLICATION_ADMINISTRATION" | "SYSTEM_INFO_ADMINISTRATION" | "ORG_ADMINISTRATION" | "ROLE_ADMINISTRATION" | "AUTHENTICATION_ADMINISTRATION" | "BILLING_INFO_ADMINISTRATION" | "CAN_MANAGE_CUSTOM_CALENDAR" | "CAN_CREATE_OR_EDIT_CONNECTIONS" | "CAN_MANAGE_WORKSHEET_VIEWS_TABLES" | "CAN_MANAGE_VERSION_CONTROL" | "THIRDPARTY_ANALYSIS" | "ALLOW_NON_EMBED_FULL_APP_ACCESS" | "CAN_ACCESS_ANALYST_STUDIO" | "CAN_MANAGE_ANALYST_STUDIO" | "PREVIEW_DOCUMENT_SEARCH" | "CAN_SETUP_VERSION_CONTROL" ;
-export type SearchUserGroupsRequestTypeEnum = "LOCAL_GROUP" | "LDAP_GROUP" ;
+export type SearchUserGroupsRequestPrivilegesEnum = "ADMINISTRATION" | "AUTHORING" | "USERDATAUPLOADING" | "DATADOWNLOADING" | "USERMANAGEMENT" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "RANALYSIS" | "DEVELOPER" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYNCMANAGEMENT" | "CAN_CREATE_CATALOG" | "DISABLE_PINBOARD_CREATION" | "LIVEBOARD_VERIFIER" | "PREVIEW_THOUGHTSPOT_SAGE" | "APPLICATION_ADMINISTRATION" | "SYSTEM_INFO_ADMINISTRATION" | "ORG_ADMINISTRATION" | "ROLE_ADMINISTRATION" | "AUTHENTICATION_ADMINISTRATION" | "BILLING_INFO_ADMINISTRATION" | "CAN_MANAGE_CUSTOM_CALENDAR" | "CAN_CREATE_OR_EDIT_CONNECTIONS" | "CAN_MANAGE_WORKSHEET_VIEWS_TABLES" | "CAN_MANAGE_VERSION_CONTROL" | "THIRDPARTY_ANALYSIS" | "ALLOW_NON_EMBED_FULL_APP_ACCESS" | "CAN_ACCESS_ANALYST_STUDIO" | "CAN_MANAGE_ANALYST_STUDIO" | "PREVIEW_DOCUMENT_SEARCH" | "CAN_SETUP_VERSION_CONTROL" | "CAN_MANAGE_WEBHOOKS" | "CAN_DOWNLOAD_VISUALS" | "CAN_DOWNLOAD_DETAILED_DATA" ;
+export type SearchUserGroupsRequestTypeEnum = "LOCAL_GROUP" | "LDAP_GROUP" | "TEAM_GROUP" | "TENANT_GROUP" ;
 export type SearchUserGroupsRequestVisibilityEnum = "SHARABLE" | "NON_SHARABLE" ;
 

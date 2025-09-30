@@ -1269,16 +1269,34 @@ public class ConnectionsApi {
      * fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth
      * authentication type. - &#x60;IAM&#x60;: For connections that have the IAM OAuth set up. This
      * authentication type is supported on Amazon Redshift connections only. - &#x60;EXTOAUTH&#x60;:
-     * For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with
+     * For connections that have External OAuth set up. ThoughtSpot supports external [OAuth with
      * Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/
      * connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data
      * connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). -
-     * To include more details about connection objects in the API response, set
-     * &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort the output by field
-     * names and filter connections by tags. **NOTE**: When filtering connection records by
-     * parameters other than &#x60;data_warehouse_types&#x60; or &#x60;tag_identifiers&#x60;, ensure
-     * that you set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to
-     * &#x60;0&#x60; for precise results.
+     * &#x60;KEY_PAIR&#x60;: For connections that require Key Pair account credentials to
+     * authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
+     * supported on Snowflake connections only. - &#x60;OAUTH_WITH_PKCE&#x60;: For connections that
+     * require OAuth with PKCE account credentials to authenticate to the Cloud Data Warehouse and
+     * fetch data. This authentication type is supported on Snowflake, Starburst, Databricks, Denodo
+     * connections only. - &#x60;EXTOAUTH_WITH_PKCE&#x60;: For connections that require External
+     * OAuth With PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch
+     * data. This authentication type is supported on Snowflake connections only. -
+     * &#x60;OAUTH_WITH_PEZ&#x60;: For connections that require OAuth With PEZ account credentials
+     * to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
+     * supported on Amazon Redshift connections only. - &#x60;OAUTH_WITH_SERVICE_PRINCIPAL&#x60;:
+     * For connections that require OAuth With Service Principal account credentials to authenticate
+     * to the Cloud Data Warehouse and fetch data. This authentication type is supported on
+     * Databricks connections only. - &#x60;PERSONAL_ACCESS_TOKEN&#x60;: For connections that
+     * require Personal Access Token account credentials to authenticate to the Cloud Data Warehouse
+     * and fetch data. This authentication type is supported on Databricks connections only. -
+     * &#x60;OAUTH_CLIENT_CREDENTIALS&#x60;: For connections that require OAuth Client Credentials
+     * to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
+     * supported on Snowflake connections only. - To include more details about connection objects
+     * in the API response, set &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort
+     * the output by field names and filter connections by tags. **NOTE**: When filtering connection
+     * records by parameters other than &#x60;data_warehouse_types&#x60; or
+     * &#x60;tag_identifiers&#x60;, ensure that you set &#x60;record_size&#x60; to &#x60;-1&#x60;
+     * and &#x60;record_offset&#x60; to &#x60;0&#x60; for precise results.
      *
      * @param searchConnectionRequest (required)
      * @return List&lt;SearchConnectionResponse&gt;
@@ -1342,16 +1360,34 @@ public class ConnectionsApi {
      * fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth
      * authentication type. - &#x60;IAM&#x60;: For connections that have the IAM OAuth set up. This
      * authentication type is supported on Amazon Redshift connections only. - &#x60;EXTOAUTH&#x60;:
-     * For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with
+     * For connections that have External OAuth set up. ThoughtSpot supports external [OAuth with
      * Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/
      * connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data
      * connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). -
-     * To include more details about connection objects in the API response, set
-     * &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort the output by field
-     * names and filter connections by tags. **NOTE**: When filtering connection records by
-     * parameters other than &#x60;data_warehouse_types&#x60; or &#x60;tag_identifiers&#x60;, ensure
-     * that you set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to
-     * &#x60;0&#x60; for precise results.
+     * &#x60;KEY_PAIR&#x60;: For connections that require Key Pair account credentials to
+     * authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
+     * supported on Snowflake connections only. - &#x60;OAUTH_WITH_PKCE&#x60;: For connections that
+     * require OAuth with PKCE account credentials to authenticate to the Cloud Data Warehouse and
+     * fetch data. This authentication type is supported on Snowflake, Starburst, Databricks, Denodo
+     * connections only. - &#x60;EXTOAUTH_WITH_PKCE&#x60;: For connections that require External
+     * OAuth With PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch
+     * data. This authentication type is supported on Snowflake connections only. -
+     * &#x60;OAUTH_WITH_PEZ&#x60;: For connections that require OAuth With PEZ account credentials
+     * to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
+     * supported on Amazon Redshift connections only. - &#x60;OAUTH_WITH_SERVICE_PRINCIPAL&#x60;:
+     * For connections that require OAuth With Service Principal account credentials to authenticate
+     * to the Cloud Data Warehouse and fetch data. This authentication type is supported on
+     * Databricks connections only. - &#x60;PERSONAL_ACCESS_TOKEN&#x60;: For connections that
+     * require Personal Access Token account credentials to authenticate to the Cloud Data Warehouse
+     * and fetch data. This authentication type is supported on Databricks connections only. -
+     * &#x60;OAUTH_CLIENT_CREDENTIALS&#x60;: For connections that require OAuth Client Credentials
+     * to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
+     * supported on Snowflake connections only. - To include more details about connection objects
+     * in the API response, set &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort
+     * the output by field names and filter connections by tags. **NOTE**: When filtering connection
+     * records by parameters other than &#x60;data_warehouse_types&#x60; or
+     * &#x60;tag_identifiers&#x60;, ensure that you set &#x60;record_size&#x60; to &#x60;-1&#x60;
+     * and &#x60;record_offset&#x60; to &#x60;0&#x60; for precise results.
      *
      * @param searchConnectionRequest (required)
      * @return ApiResponse&lt;List&lt;SearchConnectionResponse&gt;&gt;
@@ -1416,16 +1452,34 @@ public class ConnectionsApi {
      * fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth
      * authentication type. - &#x60;IAM&#x60;: For connections that have the IAM OAuth set up. This
      * authentication type is supported on Amazon Redshift connections only. - &#x60;EXTOAUTH&#x60;:
-     * For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with
+     * For connections that have External OAuth set up. ThoughtSpot supports external [OAuth with
      * Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/
      * connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data
      * connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). -
-     * To include more details about connection objects in the API response, set
-     * &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort the output by field
-     * names and filter connections by tags. **NOTE**: When filtering connection records by
-     * parameters other than &#x60;data_warehouse_types&#x60; or &#x60;tag_identifiers&#x60;, ensure
-     * that you set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to
-     * &#x60;0&#x60; for precise results.
+     * &#x60;KEY_PAIR&#x60;: For connections that require Key Pair account credentials to
+     * authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
+     * supported on Snowflake connections only. - &#x60;OAUTH_WITH_PKCE&#x60;: For connections that
+     * require OAuth with PKCE account credentials to authenticate to the Cloud Data Warehouse and
+     * fetch data. This authentication type is supported on Snowflake, Starburst, Databricks, Denodo
+     * connections only. - &#x60;EXTOAUTH_WITH_PKCE&#x60;: For connections that require External
+     * OAuth With PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch
+     * data. This authentication type is supported on Snowflake connections only. -
+     * &#x60;OAUTH_WITH_PEZ&#x60;: For connections that require OAuth With PEZ account credentials
+     * to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
+     * supported on Amazon Redshift connections only. - &#x60;OAUTH_WITH_SERVICE_PRINCIPAL&#x60;:
+     * For connections that require OAuth With Service Principal account credentials to authenticate
+     * to the Cloud Data Warehouse and fetch data. This authentication type is supported on
+     * Databricks connections only. - &#x60;PERSONAL_ACCESS_TOKEN&#x60;: For connections that
+     * require Personal Access Token account credentials to authenticate to the Cloud Data Warehouse
+     * and fetch data. This authentication type is supported on Databricks connections only. -
+     * &#x60;OAUTH_CLIENT_CREDENTIALS&#x60;: For connections that require OAuth Client Credentials
+     * to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
+     * supported on Snowflake connections only. - To include more details about connection objects
+     * in the API response, set &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort
+     * the output by field names and filter connections by tags. **NOTE**: When filtering connection
+     * records by parameters other than &#x60;data_warehouse_types&#x60; or
+     * &#x60;tag_identifiers&#x60;, ensure that you set &#x60;record_size&#x60; to &#x60;-1&#x60;
+     * and &#x60;record_offset&#x60; to &#x60;0&#x60; for precise results.
      *
      * @param searchConnectionRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -1780,8 +1834,11 @@ public class ConnectionsApi {
      * required. To update a connection object, pass these parameters in your API request: 1. GUID
      * of the connection object. 2. If you are updating tables or database schema of a connection
      * object: a. Add the updated JSON map of metadata with database, schema, and tables in
-     * &#x60;data_warehouse_config&#x60;. b. Set &#x60;validate&#x60; to &#x60;true&#x60;. * A JSON
-     * map of configuration attributes, database details, and table properties in
+     * &#x60;data_warehouse_config&#x60;. b. Set &#x60;validate&#x60; to &#x60;true&#x60;. **NOTE:**
+     * If the &#x60;authentication_type&#x60; is anything other than SERVICE_ACCOUNT, you must
+     * explicitly provide the authenticationType property in the payload. If you do not specify
+     * authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type. * A
+     * JSON map of configuration attributes, database details, and table properties in
      * &#x60;data_warehouse_config&#x60; as shown in the following example: &#x60;&#x60;&#x60; {
      * \&quot;configuration\&quot;:{ \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
@@ -1803,7 +1860,10 @@ public class ConnectionsApi {
      * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
      * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; } ] } ] } ] } ] } &#x60;&#x60;&#x60; 3. If
      * you are updating a configuration attribute, connection name, or description, you can set
-     * &#x60;validate&#x60; to &#x60;false&#x60;. * A JSON map of configuration attributes in
+     * &#x60;validate&#x60; to &#x60;false&#x60;. **NOTE:** If the &#x60;authentication_type&#x60;
+     * is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType
+     * property in the payload. If you do not specify authenticationType, the API will default to
+     * SERVICE_ACCOUNT as the authentication type. * A JSON map of configuration attributes in
      * &#x60;data_warehouse_config&#x60;. The following example shows the configuration attributes
      * for a Snowflake connection: &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
      * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
@@ -1841,8 +1901,11 @@ public class ConnectionsApi {
      * required. To update a connection object, pass these parameters in your API request: 1. GUID
      * of the connection object. 2. If you are updating tables or database schema of a connection
      * object: a. Add the updated JSON map of metadata with database, schema, and tables in
-     * &#x60;data_warehouse_config&#x60;. b. Set &#x60;validate&#x60; to &#x60;true&#x60;. * A JSON
-     * map of configuration attributes, database details, and table properties in
+     * &#x60;data_warehouse_config&#x60;. b. Set &#x60;validate&#x60; to &#x60;true&#x60;. **NOTE:**
+     * If the &#x60;authentication_type&#x60; is anything other than SERVICE_ACCOUNT, you must
+     * explicitly provide the authenticationType property in the payload. If you do not specify
+     * authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type. * A
+     * JSON map of configuration attributes, database details, and table properties in
      * &#x60;data_warehouse_config&#x60; as shown in the following example: &#x60;&#x60;&#x60; {
      * \&quot;configuration\&quot;:{ \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
@@ -1864,7 +1927,10 @@ public class ConnectionsApi {
      * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
      * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; } ] } ] } ] } ] } &#x60;&#x60;&#x60; 3. If
      * you are updating a configuration attribute, connection name, or description, you can set
-     * &#x60;validate&#x60; to &#x60;false&#x60;. * A JSON map of configuration attributes in
+     * &#x60;validate&#x60; to &#x60;false&#x60;. **NOTE:** If the &#x60;authentication_type&#x60;
+     * is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType
+     * property in the payload. If you do not specify authenticationType, the API will default to
+     * SERVICE_ACCOUNT as the authentication type. * A JSON map of configuration attributes in
      * &#x60;data_warehouse_config&#x60;. The following example shows the configuration attributes
      * for a Snowflake connection: &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
      * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
@@ -1907,7 +1973,10 @@ public class ConnectionsApi {
      * your API request: 1. GUID of the connection object. 2. If you are updating tables or database
      * schema of a connection object: a. Add the updated JSON map of metadata with database, schema,
      * and tables in &#x60;data_warehouse_config&#x60;. b. Set &#x60;validate&#x60; to
-     * &#x60;true&#x60;. * A JSON map of configuration attributes, database details, and table
+     * &#x60;true&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is anything other than
+     * SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload.
+     * If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the
+     * authentication type. * A JSON map of configuration attributes, database details, and table
      * properties in &#x60;data_warehouse_config&#x60; as shown in the following example:
      * &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
      * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
@@ -1930,7 +1999,10 @@ public class ConnectionsApi {
      * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
      * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; } ] } ] } ] } ] } &#x60;&#x60;&#x60; 3. If
      * you are updating a configuration attribute, connection name, or description, you can set
-     * &#x60;validate&#x60; to &#x60;false&#x60;. * A JSON map of configuration attributes in
+     * &#x60;validate&#x60; to &#x60;false&#x60;. **NOTE:** If the &#x60;authentication_type&#x60;
+     * is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType
+     * property in the payload. If you do not specify authenticationType, the API will default to
+     * SERVICE_ACCOUNT as the authentication type. * A JSON map of configuration attributes in
      * &#x60;data_warehouse_config&#x60;. The following example shows the configuration attributes
      * for a Snowflake connection: &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
      * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,

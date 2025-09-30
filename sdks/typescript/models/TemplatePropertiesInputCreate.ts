@@ -108,6 +108,14 @@ export class TemplatePropertiesInputCreate {
     * Whether to hide modify alert
     */
     'hide_modify_alert'?: boolean | null;
+    /**
+    * Company privacy policy URL (HTTP/HTTPS only)
+    */
+    'company_privacy_policy_url'?: string | null;
+    /**
+    * Company website URL (HTTP/HTTPS only)
+    */
+    'company_website_url'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -248,6 +256,18 @@ export class TemplatePropertiesInputCreate {
             "name": "hide_modify_alert",
             "baseName": "hide_modify_alert",
             "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "company_privacy_policy_url",
+            "baseName": "company_privacy_policy_url",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "company_website_url",
+            "baseName": "company_website_url",
+            "type": "string",
             "format": ""
         }    ];
 

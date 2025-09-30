@@ -153,4 +153,16 @@ public class TemplatePropertiesInputCreateTest {
     public void hideModifyAlertTest() {
         // TODO: test hideModifyAlert
     }
+
+    /** Test the property 'companyPrivacyPolicyUrl' */
+    @Test
+    public void companyPrivacyPolicyUrlTest() {
+        // TODO: test companyPrivacyPolicyUrl
+    }
+
+    /** Test the property 'companyWebsiteUrl' */
+    @Test
+    public void companyWebsiteUrlTest() {
+        // TODO: test companyWebsiteUrl
+    }
 }

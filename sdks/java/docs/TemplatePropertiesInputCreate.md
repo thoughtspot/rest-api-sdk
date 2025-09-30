@@ -31,6 +31,8 @@ Email customization configuration properties
 |**hideErrorMessage** | **Boolean** | Whether to hide error message |  [optional] |
 |**hideUnsubscribeLink** | **Boolean** | Whether to hide unsubscribe link |  [optional] |
 |**hideModifyAlert** | **Boolean** | Whether to hide modify alert |  [optional] |
+|**companyPrivacyPolicyUrl** | **String** | Company privacy policy URL (HTTP/HTTPS only) |  [optional] |
+|**companyWebsiteUrl** | **String** | Company website URL (HTTP/HTTPS only) |  [optional] |
 
 
 ## Implemented Interfaces
