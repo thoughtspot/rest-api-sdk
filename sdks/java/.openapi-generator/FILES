@@ -5,6 +5,7 @@ README.md
 api/openapi.yaml
 build.gradle
 build.sbt
+docs/AIContext.md
 docs/APIKey.md
 docs/APIKeyInput.md
 docs/AccessToken.md
@@ -15,8 +16,10 @@ docs/ActionDetails.md
 docs/ActionDetailsInput.md
 docs/ActionDetailsInputCreate.md
 docs/ActivateUserRequest.md
+docs/AgentConversation.md
 docs/AiApi.md
 docs/AnswerContent.md
+docs/AnswerContextInput.md
 docs/AnswerDataResponse.md
 docs/AssignChangeAuthorRequest.md
 docs/AssignTagRequest.md
@@ -54,9 +57,12 @@ docs/ConnectionConfigurationSearchRequest.md
 docs/ConnectionConfigurationsApi.md
 docs/ConnectionInput.md
 docs/ConnectionsApi.md
+docs/ContextPayloadV2Input.md
 docs/Conversation.md
+docs/ConversationSettingsInput.md
 docs/ConvertWorksheetToModelRequest.md
 docs/CopyObjectRequest.md
+docs/CreateAgentConversationRequest.md
 docs/CreateCalendarRequest.md
 docs/CreateConfigRequest.md
 docs/CreateConnectionConfigurationRequest.md
@@ -79,6 +85,8 @@ docs/CustomActionApi.md
 docs/CustomActionMetadataTypeInput.md
 docs/CustomCalendarsApi.md
 docs/DataApi.md
+docs/DataSource.md
+docs/DataSourceContextInput.md
 docs/DataWarehouseObjectInput.md
 docs/DataWarehouseObjects.md
 docs/Database.md
@@ -98,10 +106,14 @@ docs/DeleteOrgEmailCustomizationRequest.md
 docs/DeployCommitRequest.md
 docs/DeployResponse.md
 docs/EmailCustomizationApi.md
+docs/EntityHeader.md
 docs/ErrorResponse.md
+docs/EurekaDataSourceSuggestionResponse.md
 docs/EurekaDecomposeQueryResponse.md
+docs/EurekaGetRelevantQuestionsResponse.md
 docs/EurekaLLMDecomposeQueryResponse.md
 docs/EurekaLLMSuggestedQuery.md
+docs/EurekaRelevantQuestion.md
 docs/ExcludeMetadataListItemInput.md
 docs/ExportAnswerReportRequest.md
 docs/ExportLiveboardReportRequest.md
@@ -131,8 +143,10 @@ docs/GenerateCSVRequest.md
 docs/GenericInfo.md
 docs/GetAsyncImportStatusResponse.md
 docs/GetCustomAccessTokenRequest.md
+docs/GetDataSourceSuggestionsRequest.md
 docs/GetFullAccessTokenRequest.md
 docs/GetObjectAccessTokenRequest.md
+docs/GetRelevantQuestionsRequest.md
 docs/GetTokenResponse.md
 docs/GroupObject.md
 docs/GroupsApi.md
@@ -154,6 +168,7 @@ docs/JWTMetadataObject.md
 docs/JWTParameter.md
 docs/JWTUserOptions.md
 docs/JWTUserOptionsFull.md
+docs/LBContextInput.md
 docs/LiveboardContent.md
 docs/LiveboardDataResponse.md
 docs/LiveboardOptions.md
@@ -163,6 +178,7 @@ docs/LogResponse.md
 docs/LoginRequest.md
 docs/MetadataApi.md
 docs/MetadataAssociationItem.md
+docs/MetadataContext.md
 docs/MetadataInput.md
 docs/MetadataListItemInput.md
 docs/MetadataObject.md
@@ -253,6 +269,8 @@ docs/SearchUserGroupsRequest.md
 docs/SearchUsersRequest.md
 docs/SearchVariablesRequest.md
 docs/SecurityApi.md
+docs/SendAgentMessageResponse.md
+docs/SendAgentMessageStreamingRequest.md
 docs/SendMessageRequest.md
 docs/ShareMetadataRequest.md
 docs/ShareMetadataTypeInput.md
@@ -373,6 +391,7 @@ src/main/java/com/thoughtspot/client/auth/ApiKeyAuth.java
 src/main/java/com/thoughtspot/client/auth/Authentication.java
 src/main/java/com/thoughtspot/client/auth/HttpBasicAuth.java
 src/main/java/com/thoughtspot/client/auth/HttpBearerAuth.java
+src/main/java/com/thoughtspot/client/model/AIContext.java
 src/main/java/com/thoughtspot/client/model/APIKey.java
 src/main/java/com/thoughtspot/client/model/APIKeyInput.java
 src/main/java/com/thoughtspot/client/model/AbstractOpenApiSchema.java
@@ -384,7 +403,9 @@ src/main/java/com/thoughtspot/client/model/ActionDetails.java
 src/main/java/com/thoughtspot/client/model/ActionDetailsInput.java
 src/main/java/com/thoughtspot/client/model/ActionDetailsInputCreate.java
 src/main/java/com/thoughtspot/client/model/ActivateUserRequest.java
+src/main/java/com/thoughtspot/client/model/AgentConversation.java
 src/main/java/com/thoughtspot/client/model/AnswerContent.java
+src/main/java/com/thoughtspot/client/model/AnswerContextInput.java
 src/main/java/com/thoughtspot/client/model/AnswerDataResponse.java
 src/main/java/com/thoughtspot/client/model/AssignChangeAuthorRequest.java
 src/main/java/com/thoughtspot/client/model/AssignTagRequest.java
@@ -419,9 +440,12 @@ src/main/java/com/thoughtspot/client/model/CommiterType.java
 src/main/java/com/thoughtspot/client/model/ConnectionConfigurationResponse.java
 src/main/java/com/thoughtspot/client/model/ConnectionConfigurationSearchRequest.java
 src/main/java/com/thoughtspot/client/model/ConnectionInput.java
+src/main/java/com/thoughtspot/client/model/ContextPayloadV2Input.java
 src/main/java/com/thoughtspot/client/model/Conversation.java
+src/main/java/com/thoughtspot/client/model/ConversationSettingsInput.java
 src/main/java/com/thoughtspot/client/model/ConvertWorksheetToModelRequest.java
 src/main/java/com/thoughtspot/client/model/CopyObjectRequest.java
+src/main/java/com/thoughtspot/client/model/CreateAgentConversationRequest.java
 src/main/java/com/thoughtspot/client/model/CreateCalendarRequest.java
 src/main/java/com/thoughtspot/client/model/CreateConfigRequest.java
 src/main/java/com/thoughtspot/client/model/CreateConnectionConfigurationRequest.java
@@ -441,6 +465,8 @@ src/main/java/com/thoughtspot/client/model/CreateVariableRequest.java
 src/main/java/com/thoughtspot/client/model/CronExpression.java
 src/main/java/com/thoughtspot/client/model/CronExpressionInput.java
 src/main/java/com/thoughtspot/client/model/CustomActionMetadataTypeInput.java
+src/main/java/com/thoughtspot/client/model/DataSource.java
+src/main/java/com/thoughtspot/client/model/DataSourceContextInput.java
 src/main/java/com/thoughtspot/client/model/DataWarehouseObjectInput.java
 src/main/java/com/thoughtspot/client/model/DataWarehouseObjects.java
 src/main/java/com/thoughtspot/client/model/Database.java
@@ -458,10 +484,14 @@ src/main/java/com/thoughtspot/client/model/DeleteMetadataTypeInput.java
 src/main/java/com/thoughtspot/client/model/DeleteOrgEmailCustomizationRequest.java
 src/main/java/com/thoughtspot/client/model/DeployCommitRequest.java
 src/main/java/com/thoughtspot/client/model/DeployResponse.java
+src/main/java/com/thoughtspot/client/model/EntityHeader.java
 src/main/java/com/thoughtspot/client/model/ErrorResponse.java
+src/main/java/com/thoughtspot/client/model/EurekaDataSourceSuggestionResponse.java
 src/main/java/com/thoughtspot/client/model/EurekaDecomposeQueryResponse.java
+src/main/java/com/thoughtspot/client/model/EurekaGetRelevantQuestionsResponse.java
 src/main/java/com/thoughtspot/client/model/EurekaLLMDecomposeQueryResponse.java
 src/main/java/com/thoughtspot/client/model/EurekaLLMSuggestedQuery.java
+src/main/java/com/thoughtspot/client/model/EurekaRelevantQuestion.java
 src/main/java/com/thoughtspot/client/model/ExcludeMetadataListItemInput.java
 src/main/java/com/thoughtspot/client/model/ExportAnswerReportRequest.java
 src/main/java/com/thoughtspot/client/model/ExportLiveboardReportRequest.java
@@ -491,8 +521,10 @@ src/main/java/com/thoughtspot/client/model/GenerateCSVRequest.java
 src/main/java/com/thoughtspot/client/model/GenericInfo.java
 src/main/java/com/thoughtspot/client/model/GetAsyncImportStatusResponse.java
 src/main/java/com/thoughtspot/client/model/GetCustomAccessTokenRequest.java
+src/main/java/com/thoughtspot/client/model/GetDataSourceSuggestionsRequest.java
 src/main/java/com/thoughtspot/client/model/GetFullAccessTokenRequest.java
 src/main/java/com/thoughtspot/client/model/GetObjectAccessTokenRequest.java
+src/main/java/com/thoughtspot/client/model/GetRelevantQuestionsRequest.java
 src/main/java/com/thoughtspot/client/model/GetTokenResponse.java
 src/main/java/com/thoughtspot/client/model/GroupObject.java
 src/main/java/com/thoughtspot/client/model/GroupsImportListInput.java
@@ -513,6 +545,7 @@ src/main/java/com/thoughtspot/client/model/JWTMetadataObject.java
 src/main/java/com/thoughtspot/client/model/JWTParameter.java
 src/main/java/com/thoughtspot/client/model/JWTUserOptions.java
 src/main/java/com/thoughtspot/client/model/JWTUserOptionsFull.java
+src/main/java/com/thoughtspot/client/model/LBContextInput.java
 src/main/java/com/thoughtspot/client/model/LiveboardContent.java
 src/main/java/com/thoughtspot/client/model/LiveboardDataResponse.java
 src/main/java/com/thoughtspot/client/model/LiveboardOptions.java
@@ -520,6 +553,7 @@ src/main/java/com/thoughtspot/client/model/LiveboardOptionsInput.java
 src/main/java/com/thoughtspot/client/model/LogResponse.java
 src/main/java/com/thoughtspot/client/model/LoginRequest.java
 src/main/java/com/thoughtspot/client/model/MetadataAssociationItem.java
+src/main/java/com/thoughtspot/client/model/MetadataContext.java
 src/main/java/com/thoughtspot/client/model/MetadataInput.java
 src/main/java/com/thoughtspot/client/model/MetadataListItemInput.java
 src/main/java/com/thoughtspot/client/model/MetadataObject.java
@@ -605,6 +639,8 @@ src/main/java/com/thoughtspot/client/model/SearchTagsRequest.java
 src/main/java/com/thoughtspot/client/model/SearchUserGroupsRequest.java
 src/main/java/com/thoughtspot/client/model/SearchUsersRequest.java
 src/main/java/com/thoughtspot/client/model/SearchVariablesRequest.java
+src/main/java/com/thoughtspot/client/model/SendAgentMessageResponse.java
+src/main/java/com/thoughtspot/client/model/SendAgentMessageStreamingRequest.java
 src/main/java/com/thoughtspot/client/model/SendMessageRequest.java
 src/main/java/com/thoughtspot/client/model/ShareMetadataRequest.java
 src/main/java/com/thoughtspot/client/model/ShareMetadataTypeInput.java
@@ -687,6 +723,7 @@ src/test/java/com/thoughtspot/client/api/ThoughtSpotRestApiTest.java
 src/test/java/com/thoughtspot/client/api/UsersApiTest.java
 src/test/java/com/thoughtspot/client/api/VariableApiTest.java
 src/test/java/com/thoughtspot/client/api/VersionControlApiTest.java
+src/test/java/com/thoughtspot/client/model/AIContextTest.java
 src/test/java/com/thoughtspot/client/model/APIKeyInputTest.java
 src/test/java/com/thoughtspot/client/model/APIKeyTest.java
 src/test/java/com/thoughtspot/client/model/AccessTokenTest.java
@@ -697,7 +734,9 @@ src/test/java/com/thoughtspot/client/model/ActionDetailsInputCreateTest.java
 src/test/java/com/thoughtspot/client/model/ActionDetailsInputTest.java
 src/test/java/com/thoughtspot/client/model/ActionDetailsTest.java
 src/test/java/com/thoughtspot/client/model/ActivateUserRequestTest.java
+src/test/java/com/thoughtspot/client/model/AgentConversationTest.java
 src/test/java/com/thoughtspot/client/model/AnswerContentTest.java
+src/test/java/com/thoughtspot/client/model/AnswerContextInputTest.java
 src/test/java/com/thoughtspot/client/model/AnswerDataResponseTest.java
 src/test/java/com/thoughtspot/client/model/AssignChangeAuthorRequestTest.java
 src/test/java/com/thoughtspot/client/model/AssignTagRequestTest.java
@@ -732,9 +771,12 @@ src/test/java/com/thoughtspot/client/model/CommiterTypeTest.java
 src/test/java/com/thoughtspot/client/model/ConnectionConfigurationResponseTest.java
 src/test/java/com/thoughtspot/client/model/ConnectionConfigurationSearchRequestTest.java
 src/test/java/com/thoughtspot/client/model/ConnectionInputTest.java
+src/test/java/com/thoughtspot/client/model/ContextPayloadV2InputTest.java
+src/test/java/com/thoughtspot/client/model/ConversationSettingsInputTest.java
 src/test/java/com/thoughtspot/client/model/ConversationTest.java
 src/test/java/com/thoughtspot/client/model/ConvertWorksheetToModelRequestTest.java
 src/test/java/com/thoughtspot/client/model/CopyObjectRequestTest.java
+src/test/java/com/thoughtspot/client/model/CreateAgentConversationRequestTest.java
 src/test/java/com/thoughtspot/client/model/CreateCalendarRequestTest.java
 src/test/java/com/thoughtspot/client/model/CreateConfigRequestTest.java
 src/test/java/com/thoughtspot/client/model/CreateConnectionConfigurationRequestTest.java
@@ -754,6 +796,8 @@ src/test/java/com/thoughtspot/client/model/CreateVariableRequestTest.java
 src/test/java/com/thoughtspot/client/model/CronExpressionInputTest.java
 src/test/java/com/thoughtspot/client/model/CronExpressionTest.java
 src/test/java/com/thoughtspot/client/model/CustomActionMetadataTypeInputTest.java
+src/test/java/com/thoughtspot/client/model/DataSourceContextInputTest.java
+src/test/java/com/thoughtspot/client/model/DataSourceTest.java
 src/test/java/com/thoughtspot/client/model/DataWarehouseObjectInputTest.java
 src/test/java/com/thoughtspot/client/model/DataWarehouseObjectsTest.java
 src/test/java/com/thoughtspot/client/model/DatabaseTest.java
@@ -771,10 +815,14 @@ src/test/java/com/thoughtspot/client/model/DeleteMetadataTypeInputTest.java
 src/test/java/com/thoughtspot/client/model/DeleteOrgEmailCustomizationRequestTest.java
 src/test/java/com/thoughtspot/client/model/DeployCommitRequestTest.java
 src/test/java/com/thoughtspot/client/model/DeployResponseTest.java
+src/test/java/com/thoughtspot/client/model/EntityHeaderTest.java
 src/test/java/com/thoughtspot/client/model/ErrorResponseTest.java
+src/test/java/com/thoughtspot/client/model/EurekaDataSourceSuggestionResponseTest.java
 src/test/java/com/thoughtspot/client/model/EurekaDecomposeQueryResponseTest.java
+src/test/java/com/thoughtspot/client/model/EurekaGetRelevantQuestionsResponseTest.java
 src/test/java/com/thoughtspot/client/model/EurekaLLMDecomposeQueryResponseTest.java
 src/test/java/com/thoughtspot/client/model/EurekaLLMSuggestedQueryTest.java
+src/test/java/com/thoughtspot/client/model/EurekaRelevantQuestionTest.java
 src/test/java/com/thoughtspot/client/model/ExcludeMetadataListItemInputTest.java
 src/test/java/com/thoughtspot/client/model/ExportAnswerReportRequestTest.java
 src/test/java/com/thoughtspot/client/model/ExportLiveboardReportRequestTest.java
@@ -804,8 +852,10 @@ src/test/java/com/thoughtspot/client/model/GenerateCSVRequestTest.java
 src/test/java/com/thoughtspot/client/model/GenericInfoTest.java
 src/test/java/com/thoughtspot/client/model/GetAsyncImportStatusResponseTest.java
 src/test/java/com/thoughtspot/client/model/GetCustomAccessTokenRequestTest.java
+src/test/java/com/thoughtspot/client/model/GetDataSourceSuggestionsRequestTest.java
 src/test/java/com/thoughtspot/client/model/GetFullAccessTokenRequestTest.java
 src/test/java/com/thoughtspot/client/model/GetObjectAccessTokenRequestTest.java
+src/test/java/com/thoughtspot/client/model/GetRelevantQuestionsRequestTest.java
 src/test/java/com/thoughtspot/client/model/GetTokenResponseTest.java
 src/test/java/com/thoughtspot/client/model/GroupObjectTest.java
 src/test/java/com/thoughtspot/client/model/GroupsImportListInputTest.java
@@ -826,6 +876,7 @@ src/test/java/com/thoughtspot/client/model/JWTMetadataObjectTest.java
 src/test/java/com/thoughtspot/client/model/JWTParameterTest.java
 src/test/java/com/thoughtspot/client/model/JWTUserOptionsFullTest.java
 src/test/java/com/thoughtspot/client/model/JWTUserOptionsTest.java
+src/test/java/com/thoughtspot/client/model/LBContextInputTest.java
 src/test/java/com/thoughtspot/client/model/LiveboardContentTest.java
 src/test/java/com/thoughtspot/client/model/LiveboardDataResponseTest.java
 src/test/java/com/thoughtspot/client/model/LiveboardOptionsInputTest.java
@@ -833,6 +884,7 @@ src/test/java/com/thoughtspot/client/model/LiveboardOptionsTest.java
 src/test/java/com/thoughtspot/client/model/LogResponseTest.java
 src/test/java/com/thoughtspot/client/model/LoginRequestTest.java
 src/test/java/com/thoughtspot/client/model/MetadataAssociationItemTest.java
+src/test/java/com/thoughtspot/client/model/MetadataContextTest.java
 src/test/java/com/thoughtspot/client/model/MetadataInputTest.java
 src/test/java/com/thoughtspot/client/model/MetadataListItemInputTest.java
 src/test/java/com/thoughtspot/client/model/MetadataObjectTest.java
@@ -918,6 +970,8 @@ src/test/java/com/thoughtspot/client/model/SearchTagsRequestTest.java
 src/test/java/com/thoughtspot/client/model/SearchUserGroupsRequestTest.java
 src/test/java/com/thoughtspot/client/model/SearchUsersRequestTest.java
 src/test/java/com/thoughtspot/client/model/SearchVariablesRequestTest.java
+src/test/java/com/thoughtspot/client/model/SendAgentMessageResponseTest.java
+src/test/java/com/thoughtspot/client/model/SendAgentMessageStreamingRequestTest.java
 src/test/java/com/thoughtspot/client/model/SendMessageRequestTest.java
 src/test/java/com/thoughtspot/client/model/ShareMetadataRequestTest.java
 src/test/java/com/thoughtspot/client/model/ShareMetadataTypeInputTest.java

@@ -247,7 +247,11 @@ public class UserGroupResponse implements Serializable {
     public enum TypeEnum {
         LOCAL_GROUP("LOCAL_GROUP"),
 
-        LDAP_GROUP("LDAP_GROUP");
+        LDAP_GROUP("LDAP_GROUP"),
+
+        TEAM_GROUP("TEAM_GROUP"),
+
+        TENANT_GROUP("TENANT_GROUP");
 
         private String value;
 

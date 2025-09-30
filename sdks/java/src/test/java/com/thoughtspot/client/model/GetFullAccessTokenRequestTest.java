@@ -69,10 +69,4 @@ public class GetFullAccessTokenRequestTest {
     public void groupIdentifiersTest() {
         // TODO: test groupIdentifiers
     }
-
-    /** Test the property 'userParameters' */
-    @Test
-    public void userParametersTest() {
-        // TODO: test userParameters
-    }
 }

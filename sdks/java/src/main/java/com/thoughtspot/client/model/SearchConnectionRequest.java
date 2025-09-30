@@ -283,7 +283,9 @@ public class SearchConnectionRequest implements Serializable {
 
         EXTOAUTH_WITH_PKCE("EXTOAUTH_WITH_PKCE"),
 
-        OAUTH_WITH_PEZ("OAUTH_WITH_PEZ");
+        OAUTH_WITH_PEZ("OAUTH_WITH_PEZ"),
+
+        OAUTH_CLIENT_CREDENTIALS("OAUTH_CLIENT_CREDENTIALS");
 
         private String value;
 

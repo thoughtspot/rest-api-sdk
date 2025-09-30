@@ -10,6 +10,49 @@ servers:
 security:
 - bearerAuth: []
 paths:
+  /api/rest/2.0/ai/agent/conversation/create:
+    post:
+      description: |
+        Version: 10.13.0.cl or later
+      operationId: createAgentConversation
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createAgentConversation_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentConversation'
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentConversation'
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/ai/conversation/create:
     post:
       description: |2+
@@ -78,8 +121,151 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
+  /api/rest/2.0/ai/data-source-suggestions:
+    post:
+      description: |2+
+
+        Version: 10.13.0.cl or later
+
+
+        Provides relevant data source recommendations for a user-submitted natural language query.
+
+        To use this API, the user must have at least view-level access to the underlying metadata entities referenced in the response.
+
+        #### Usage guidelines
+
+        The request must include a `query` string via the request body.
+
+        The returned results include metadata such as:
+        - `confidence`: a float indicating the model's confidence in the relevance of each recommendation
+        - `details`: includes `data_source_identifier`, `data_source_name`, and `description` of each recommended data source
+        - `reasoning`: rationale provided by the LLM to explain why each data source was recommended
+
+        If the API request is successful, ThoughtSpot returns a ranked list of data sources, each annotated with relevant reasoning.
+
+        > ###### Note:
+        > * This endpoint is currently in Beta. Breaking changes may be introduced before it is made Generally Available.
+        > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.
+
+
+
+
+
+      operationId: getDataSourceSuggestions
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/getDataSourceSuggestions_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eureka_DataSourceSuggestionResponse'
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eureka_DataSourceSuggestionResponse'
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/rest/2.0/ai/relevant-questions/:
+    post:
+      description: |2+
+
+        Version: 10.13.0.cl or later
+
+
+        Breaks down a user-submitted query into a series of analytical sub-questions using relevant contextual metadata.
+
+        To use this API, the user must have at least view-level access to the referenced metadata objects.
+
+        #### Usage guidelines
+
+        To accurately generate relevant questions, the request must include at least one of the following metadata identifiers within `metadata_context` : `conversation_identifier`, `answer_identifiers`, `liveboard_identifiers`, or `data_source_identifiers`.
+
+        You can further enhance the quality and precision of breakdown by providing additional `ai_context` such as:
+
+        - `content`: User provided content like text data, csv data as a string message to provide context & potentially improve the quality of the response.
+        - `instructions`: User specific text instructions sent to AI system for processing the query.
+
+        Additional optional parameters include:
+
+        - `limit_relevant_questions`: Controls the maximum number of relevant questions returned. Defaults to 5 if not specified.
+        - `bypass_cache`: If set to true, forces fresh computation instead of returning cached results.
+
+        If the API request is successful, ThoughtSpot returns a list of relevant analytical queries, each aligned with the user's original question. Each returned question includes the query string, along with the identifier and name of the corresponding data source.
+
+        > ###### Note:
+        > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.
+        > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
+
+
+
+
+      operationId: getRelevantQuestions
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/getRelevantQuestions_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eureka_GetRelevantQuestionsResponse'
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eureka_GetRelevantQuestionsResponse'
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/ai/analytical-questions:
     post:
+      deprecated: true
       description: |
         Version: 10.7.0.cl or later
       operationId: queryGetDecomposedQuery
@@ -102,6 +288,68 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/eureka_DecomposeQueryResponse'
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/rest/2.0/ai/agent/converse/sse:
+    post:
+      description: "\nVersion: 10.13.0.cl or later\n\n\nThis API allows users to initiate\
+        \ or continue an agent (Spotter) conversation by submitting one or more natural\
+        \ language messages. \nTo use this API, the user must have access to the relevant\
+        \ conversational session (via conversation_identifier) and submit at least\
+        \ one message.\n\n\n#### Usage guidelines\n\nTo initiate or continue a conversation,\
+        \ the request must include:\n- `conversation_identifier`: a unique session\
+        \ ID for continuity and message tracking\n- `messages`: an array of one or\
+        \ more text messages, each with a value and type\n\nAdditionally, user can\
+        \ specify what tool can be included `conversation_settings` parameter, which\
+        \ supports:\n- `enable_contextual_change_analysis` (default: false)\n- `enable_natural_language_answer_generation`\
+        \ (default: true)\n- `enable_reasoning` (default: false)\n\nIf the request\
+        \ is valid, the API returns a stream of messages in real time, including:\n\
+        - `ack`: confirms receipt of the request\n- `text / text-chunk`: content chunks,\
+        \ optionally formatted (e.g., markdown)\n- `answer`: the final structured\
+        \ response with metadata and analytics\n- `error`: if a failure occurs\n-\
+        \ `notification`: notification messages for operation being performed\n\n\
+        > ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may\
+        \ be introduced before the endpoint is made Generally Available.\n> * This\
+        \ endpoint requires Spotter - please contact ThoughtSpot support to enable\
+        \ Spotter on your cluster.\n> * The streaming protocol uses Server-Sent Events\
+        \ (SSE)\n\n\n\n\n"
+      operationId: sendAgentMessageStreaming
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/sendAgentMessageStreaming_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendAgentMessageResponse'
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendAgentMessageResponse'
           description: Common error response
         "400":
           content:
@@ -7590,11 +7838,13 @@ paths:
         \ types of variables:\n* CONNECTION_PROPERTY - For connection properties\n\
         * TABLE_MAPPING - For table mappings\n* CONNECTION_PROPERTY_PER_PRINCIPAL\
         \ - For connection properties per principal. In order to use this please contact\
-        \ support to enable this.\n\nWhen creating a variable, you need to specify:\n\
-        * The variable type\n* A unique name for the variable\n* Whether the variable\
-        \ contains sensitive values (defaults to false)\n\nThe operation will fail\
-        \ if:\n* The user lacks required permissions\n* The variable name already\
-        \ exists\n* The variable type is invalid\n\n\n\n\n"
+        \ support to enable this.\n* FORMULA_VARIABLE - For Formula variables\n\n\
+        When creating a variable, you need to specify:\n* The variable type\n* A unique\
+        \ name for the variable\n* Whether the variable contains sensitive values\
+        \ (defaults to false)\n* The data type of the variable, only specify for fomula\
+        \ variables (defaults to null)\n\nThe operation will fail if:\n* The user\
+        \ lacks required permissions\n* The variable name already exists\n* The variable\
+        \ type is invalid\n\n\n\n\n"
       operationId: createVariable
       parameters: []
       requestBody:
@@ -9314,6 +9564,8 @@ components:
           enum:
           - LOCAL_GROUP
           - LDAP_GROUP
+          - TEAM_GROUP
+          - TENANT_GROUP
           nullable: true
           type: string
         users:
@@ -11637,6 +11889,9 @@ components:
             - CAN_MANAGE_ANALYST_STUDIO
             - PREVIEW_DOCUMENT_SEARCH
             - CAN_SETUP_VERSION_CONTROL
+            - CAN_MANAGE_WEBHOOKS
+            - CAN_DOWNLOAD_VISUALS
+            - CAN_DOWNLOAD_DETAILED_DATA
             type: string
           type: array
         permission:
@@ -11997,6 +12252,92 @@ components:
       required:
       - identifier
       type: object
+    MetadataContext:
+      properties:
+        data_source_identifiers:
+          description: List of data_source_identifiers to provide context for breaking
+            down user query into analytical queries that can be run on them.
+          items:
+            type: string
+          nullable: true
+          type: array
+        answer_identifiers:
+          description: List of answer unique identifiers (GUIDs) whose data will be
+            used to guide the response.
+          items:
+            type: string
+          nullable: true
+          type: array
+        conversation_identifier:
+          description: Unique identifier to denote current conversation.
+          nullable: true
+          type: string
+        liveboard_identifiers:
+          description: List of liveboard unique identifiers (GUIDs) whose data will
+            be used to guide the response.
+          items:
+            type: string
+          nullable: true
+          type: array
+      type: object
+    AIContext:
+      properties:
+        instructions:
+          description: User specific text instructions sent to AI system for processing
+            the query.
+          items:
+            type: string
+          nullable: true
+          type: array
+        content:
+          description: "User provided content like text data, csv data as a string\
+            \ message to provide context & potentially improve the quality of the\
+            \ response."
+          items:
+            type: string
+          nullable: true
+          type: array
+      type: object
+    eureka_GetRelevantQuestionsResponse:
+      example:
+        relevant_questions:
+        - data_source_identifier: data_source_identifier
+          query: query
+          data_source_name: data_source_name
+        - data_source_identifier: data_source_identifier
+          query: query
+          data_source_name: data_source_name
+      properties:
+        relevant_questions:
+          description: List of relevant questions that can be run on their respective
+            data sources.
+          items:
+            $ref: '#/components/schemas/eureka_RelevantQuestion'
+          nullable: true
+          type: array
+      type: object
+    eureka_RelevantQuestion:
+      example:
+        data_source_identifier: data_source_identifier
+        query: query
+        data_source_name: data_source_name
+      properties:
+        query:
+          description: NL query that can be run using spotter aka natural language
+            search to get an AI generated answer.
+          nullable: true
+          type: string
+        data_source_identifier:
+          description: Unique identifier of the data source on which this query can
+            be run on.
+          nullable: true
+          type: string
+        data_source_name:
+          description: Display name of the data source on which this query can be
+            run on.
+          nullable: true
+          type: string
+      type: object
     Input_eureka_NLSRequest:
       properties:
         agentVersion:
@@ -12072,6 +12413,69 @@ components:
         worksheetName:
           description: Display name of the worksheet on which this query can be run
             on.
+          nullable: true
+          type: string
+      type: object
+    eureka_DataSourceSuggestionResponse:
+      example:
+        data_sources:
+        - confidence: 0.8008282
+          reasoning: reasoning
+          details:
+            data_source_identifier: data_source_identifier
+            description: description
+            data_source_name: data_source_name
+        - confidence: 0.8008282
+          reasoning: reasoning
+          details:
+            data_source_identifier: data_source_identifier
+            description: description
+            data_source_name: data_source_name
+      properties:
+        data_sources:
+          description: List of data sources suggested.
+          items:
+            $ref: '#/components/schemas/DataSource'
+          nullable: true
+          type: array
+      type: object
+    DataSource:
+      example:
+        confidence: 0.8008282
+        reasoning: reasoning
+        details:
+          data_source_identifier: data_source_identifier
+          description: description
+          data_source_name: data_source_name
+      properties:
+        confidence:
+          description: Confidence score for the data source suggestion.
+          format: float
+          nullable: true
+          type: number
+        details:
+          $ref: '#/components/schemas/EntityHeader'
+        reasoning:
+          description: LLM reasoning for the data source.
+          nullable: true
+          type: string
+      type: object
+    EntityHeader:
+      example:
+        data_source_identifier: data_source_identifier
+        description: description
+        data_source_name: data_source_name
+      properties:
+        description:
+          description: Description of the data source.
+          nullable: true
+          type: string
+        data_source_name:
+          description: Display name of the data source.
+          nullable: true
+          type: string
+        data_source_identifier:
+          description: Unique identifier of the data source.
           nullable: true
           type: string
       type: object
@@ -13071,6 +13475,8 @@ components:
             - CAN_MANAGE_ANALYST_STUDIO
             - PREVIEW_DOCUMENT_SEARCH
             - CAN_SETUP_VERSION_CONTROL
+            - CAN_DOWNLOAD_VISUALS
+            - CAN_DOWNLOAD_DETAILED_DATA
             type: string
           nullable: true
           type: array
@@ -13085,6 +13491,8 @@ components:
           enum:
           - LOCAL_GROUP
           - LDAP_GROUP
+          - TEAM_GROUP
+          - TENANT_GROUP
           nullable: true
           type: string
         user_identifiers:
@@ -14041,6 +14449,9 @@ components:
             - PREVIEW_DOCUMENT_SEARCH
             - CAN_SETUP_VERSION_CONTROL
             - PREVIEW_THOUGHTSPOT_SAGE
+            - CAN_MANAGE_WEBHOOKS
+            - CAN_DOWNLOAD_VISUALS
+            - CAN_DOWNLOAD_DETAILED_DATA
             type: string
           type: array
         permission:
@@ -14948,6 +15359,97 @@ components:
       required:
       - message_type
       type: object
+    ContextPayloadV2Input:
+      properties:
+        type:
+          description: Type of the context.
+          enum:
+          - answer
+          - liveboard
+          - data_source
+          nullable: true
+          type: string
+        answer_context:
+          $ref: '#/components/schemas/AnswerContextInput'
+        liveboard_context:
+          $ref: '#/components/schemas/LBContextInput'
+        data_source_context:
+          $ref: '#/components/schemas/DataSourceContextInput'
+      type: object
+    AnswerContextInput:
+      properties:
+        session_identifier:
+          description: Unique identifier of the answer session.
+          type: string
+        generation_number:
+          description: Generation number of the answer.
+          format: int32
+          type: integer
+      required:
+      - generation_number
+      - session_identifier
+      type: object
+    LBContextInput:
+      properties:
+        liveboard_identifier:
+          description: Unique identifier of the liveboard.
+          type: string
+        visualization_identifier:
+          description: Unique identifier of the visualization.
+          type: string
+      required:
+      - liveboard_identifier
+      - visualization_identifier
+      type: object
+    DataSourceContextInput:
+      properties:
+        guid:
+          description: Unique identifier of the data source.
+          type: string
+      required:
+      - guid
+      type: object
+    ConversationSettingsInput:
+      properties:
+        enable_contextual_change_analysis:
+          default: false
+          description: Enable contextual change analysis.
+          nullable: true
+          type: boolean
+        enable_natural_language_answer_generation:
+          default: true
+          description: Enable natural language to answer generation.
+          nullable: true
+          type: boolean
+        enable_reasoning:
+          default: false
+          description: Enable reasoning.
+          nullable: true
+          type: boolean
+      type: object
+    AgentConversation:
+      example:
+        conversation_id: conversation_id
+      properties:
+        conversation_id:
+          description: Unique identifier of the conversation.
+          type: string
+      required:
+      - conversation_id
+      type: object
+    SendAgentMessageResponse:
+      example:
+        success: true
+        message: message
+      properties:
+        success:
+          type: boolean
+        message:
+          nullable: true
+          type: string
+      required:
+      - success
+      type: object
     InputVariableValue:
       properties:
         value:
@@ -15126,6 +15628,14 @@ components:
           description: Whether to hide modify alert
           nullable: true
           type: boolean
+        company_privacy_policy_url:
+          description: Company privacy policy URL (HTTP/HTTPS only)
+          nullable: true
+          type: string
+        company_website_url:
+          description: Company website URL (HTTP/HTTPS only)
+          nullable: true
+          type: string
       type: object
     ExternalTableInput:
       properties:
@@ -15171,6 +15681,20 @@ components:
           description: Runtime param override type in JWT.
           type: object
       type: object
+    createAgentConversation_request:
+      properties:
+        metadata_context:
+          allOf:
+          - $ref: '#/components/schemas/ContextPayloadV2Input'
+          description: Context for the conversation.
+        conversation_settings:
+          allOf:
+          - $ref: '#/components/schemas/ConversationSettingsInput'
+          description: Conversation settings.
+      required:
+      - conversation_settings
+      - metadata_context
+      type: object
     createConversation_request:
       properties:
         metadata_identifier:
@@ -15183,6 +15707,44 @@ components:
           type: string
       required:
       - metadata_identifier
+      type: object
+    getDataSourceSuggestions_request:
+      properties:
+        query:
+          description: User query used to suggest data sources.
+          type: string
+      required:
+      - query
+      type: object
+    getRelevantQuestions_request:
+      properties:
+        metadata_context:
+          allOf:
+          - $ref: '#/components/schemas/MetadataContext'
+          description: metadata for the query to enable generation of relevant sub-questions;
+            at least one context identifier is required.
+        limit_relevant_questions:
+          description: "Maximum number of relevant questions that is allowed in the\
+            \ response, default = 5."
+          format: int32
+          type: integer
+        bypass_cache:
+          description: "If true, results are not returned from cache & calculated\
+            \ every time."
+          nullable: true
+          type: boolean
+        query:
+          description: "A user query that requires breaking down into smaller, more\
+            \ manageable analytical questions to facilitate better understanding and\
+            \ analysis."
+          type: string
+        ai_context:
+          allOf:
+          - $ref: '#/components/schemas/AIContext'
+          description: Additional context to guide the response.
+      required:
+      - metadata_context
+      - query
       type: object
     queryGetDecomposedQuery_request:
       properties:
@@ -15223,6 +15785,20 @@ components:
           items:
             type: string
           type: array
+      type: object
+    sendAgentMessageStreaming_request:
+      properties:
+        conversation_identifier:
+          description: Unique identifier for the conversation (used to track context)
+          type: string
+        messages:
+          description: messages to be sent to the agent
+          items:
+            type: string
+          type: array
+      required:
+      - conversation_identifier
+      - messages
       type: object
     sendMessage_request:
       properties:
@@ -15381,14 +15957,6 @@ components:
           items:
             type: string
           type: array
-        user_parameters:
-          allOf:
-          - $ref: '#/components/schemas/User_Parameter_Options'
-          description: |-
-            <div>Deprecated: 10.4.0.cl and later
-            </div>
-
-            Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).
       required:
       - username
       type: object
@@ -15447,14 +16015,6 @@ components:
           items:
             type: string
           type: array
-        user_parameters:
-          allOf:
-          - $ref: '#/components/schemas/User_Parameter_Options'
-          description: |-
-            <div>Deprecated: 10.4.0.cl and later
-            </div>
-
-            Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).
       required:
       - username
       type: object
@@ -15529,6 +16089,7 @@ components:
           - KEY_PAIR
           - PERSONAL_ACCESS_TOKEN
           - OAUTH_WITH_SERVICE_PRINCIPAL
+          - OAUTH_CLIENT_CREDENTIALS
           type: string
         configuration:
           description: Configuration properties in JSON.
@@ -15594,6 +16155,7 @@ components:
           - EXTOAUTH_WITH_PKCE
           - OAUTH_WITH_PKCE
           - PERSONAL_ACCESS_TOKEN
+          - OAUTH_CLIENT_CREDENTIALS
           type: string
         configuration:
           description: Configuration properties in JSON.
@@ -15798,6 +16360,7 @@ components:
           - OAUTH_WITH_PKCE
           - EXTOAUTH_WITH_PKCE
           - OAUTH_WITH_PEZ
+          - OAUTH_CLIENT_CREDENTIALS
           type: string
         show_resolved_parameters:
           default: false
@@ -16565,6 +17128,8 @@ components:
             - CAN_MANAGE_ANALYST_STUDIO
             - PREVIEW_DOCUMENT_SEARCH
             - CAN_SETUP_VERSION_CONTROL
+            - CAN_DOWNLOAD_VISUALS
+            - CAN_DOWNLOAD_DETAILED_DATA
             type: string
           type: array
         sub_group_identifiers:
@@ -16579,6 +17144,8 @@ components:
           enum:
           - LOCAL_GROUP
           - LDAP_GROUP
+          - TEAM_GROUP
+          - TENANT_GROUP
           type: string
         user_identifiers:
           description: GUID or name of the users to assign to the group.
@@ -16690,6 +17257,9 @@ components:
             - CAN_MANAGE_ANALYST_STUDIO
             - PREVIEW_DOCUMENT_SEARCH
             - CAN_SETUP_VERSION_CONTROL
+            - CAN_MANAGE_WEBHOOKS
+            - CAN_DOWNLOAD_VISUALS
+            - CAN_DOWNLOAD_DETAILED_DATA
             type: string
           type: array
         sub_group_identifiers:
@@ -16703,6 +17273,8 @@ components:
           enum:
           - LOCAL_GROUP
           - LDAP_GROUP
+          - TEAM_GROUP
+          - TENANT_GROUP
           type: string
         user_identifiers:
           description: GUID or name of the users assigned to the group.
@@ -16804,6 +17376,8 @@ components:
             - CAN_MANAGE_ANALYST_STUDIO
             - PREVIEW_DOCUMENT_SEARCH
             - CAN_SETUP_VERSION_CONTROL
+            - CAN_DOWNLOAD_VISUALS
+            - CAN_DOWNLOAD_DETAILED_DATA
             type: string
           type: array
         sub_group_identifiers:
@@ -16817,6 +17391,8 @@ components:
           enum:
           - LOCAL_GROUP
           - LDAP_GROUP
+          - TEAM_GROUP
+          - TENANT_GROUP
           type: string
         user_identifiers:
           description: GUID or name of the users to assign to the group.
@@ -17690,6 +18266,9 @@ components:
             - PREVIEW_DOCUMENT_SEARCH
             - CAN_SETUP_VERSION_CONTROL
             - PREVIEW_THOUGHTSPOT_SAGE
+            - CAN_MANAGE_WEBHOOKS
+            - CAN_DOWNLOAD_VISUALS
+            - CAN_DOWNLOAD_DETAILED_DATA
             type: string
           type: array
         read_only:
@@ -17771,6 +18350,9 @@ components:
             - CAN_MANAGE_ANALYST_STUDIO
             - PREVIEW_DOCUMENT_SEARCH
             - CAN_SETUP_VERSION_CONTROL
+            - CAN_MANAGE_WEBHOOKS
+            - CAN_DOWNLOAD_VISUALS
+            - CAN_DOWNLOAD_DETAILED_DATA
             type: string
           type: array
         deprecated:
@@ -17843,6 +18425,9 @@ components:
             - CAN_MANAGE_ANALYST_STUDIO
             - PREVIEW_DOCUMENT_SEARCH
             - PREVIEW_THOUGHTSPOT_SAGE
+            - CAN_MANAGE_WEBHOOKS
+            - CAN_DOWNLOAD_VISUALS
+            - CAN_DOWNLOAD_DETAILED_DATA
             type: string
           type: array
       required:
@@ -19861,6 +20446,9 @@ components:
             - CAN_MANAGE_ANALYST_STUDIO
             - PREVIEW_DOCUMENT_SEARCH
             - CAN_SETUP_VERSION_CONTROL
+            - CAN_MANAGE_WEBHOOKS
+            - CAN_DOWNLOAD_VISUALS
+            - CAN_DOWNLOAD_DETAILED_DATA
             type: string
           type: array
         account_type:
@@ -20382,6 +20970,11 @@ components:
       scheme: bearer
       type: http
 x-roles:
+- name: 10.13.0.cl
+  id: 10.13.0.cl
+  tags:
+  - 10.13.0.cl
+  description: Roles for version 10.13.0.cl
 - name: 10.4.0.cl
   id: 10.4.0.cl
   tags:
