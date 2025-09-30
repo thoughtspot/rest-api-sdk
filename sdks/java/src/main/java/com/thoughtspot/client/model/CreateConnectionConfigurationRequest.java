@@ -58,7 +58,9 @@ public class CreateConnectionConfigurationRequest implements Serializable {
 
         PERSONAL_ACCESS_TOKEN("PERSONAL_ACCESS_TOKEN"),
 
-        OAUTH_WITH_SERVICE_PRINCIPAL("OAUTH_WITH_SERVICE_PRINCIPAL");
+        OAUTH_WITH_SERVICE_PRINCIPAL("OAUTH_WITH_SERVICE_PRINCIPAL"),
+
+        OAUTH_CLIENT_CREDENTIALS("OAUTH_CLIENT_CREDENTIALS");
 
         private String value;
 

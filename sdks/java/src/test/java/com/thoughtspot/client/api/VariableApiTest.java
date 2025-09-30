@@ -26,11 +26,12 @@ public class VariableApiTest {
      * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint supports the
      * following types of variables: * CONNECTION_PROPERTY - For connection properties *
      * TABLE_MAPPING - For table mappings * CONNECTION_PROPERTY_PER_PRINCIPAL - For connection
-     * properties per principal. In order to use this please contact support to enable this. When
-     * creating a variable, you need to specify: * The variable type * A unique name for the
-     * variable * Whether the variable contains sensitive values (defaults to false) The operation
-     * will fail if: * The user lacks required permissions * The variable name already exists * The
-     * variable type is invalid
+     * properties per principal. In order to use this please contact support to enable this. *
+     * FORMULA_VARIABLE - For Formula variables When creating a variable, you need to specify: * The
+     * variable type * A unique name for the variable * Whether the variable contains sensitive
+     * values (defaults to false) * The data type of the variable, only specify for fomula variables
+     * (defaults to null) The operation will fail if: * The user lacks required permissions * The
+     * variable name already exists * The variable type is invalid
      *
      * @throws ApiException if the Api call fails
      */

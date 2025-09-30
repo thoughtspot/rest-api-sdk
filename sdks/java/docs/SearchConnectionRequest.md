@@ -86,6 +86,7 @@
 | OAUTH_WITH_PKCE | &quot;OAUTH_WITH_PKCE&quot; |
 | EXTOAUTH_WITH_PKCE | &quot;EXTOAUTH_WITH_PKCE&quot; |
 | OAUTH_WITH_PEZ | &quot;OAUTH_WITH_PEZ&quot; |
+| OAUTH_CLIENT_CREDENTIALS | &quot;OAUTH_CLIENT_CREDENTIALS&quot; |
 
 
 ## Implemented Interfaces

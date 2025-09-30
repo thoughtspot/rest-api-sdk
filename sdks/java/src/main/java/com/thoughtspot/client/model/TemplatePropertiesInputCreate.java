@@ -174,6 +174,19 @@ public class TemplatePropertiesInputCreate implements Serializable {
     @javax.annotation.Nullable
     private Boolean hideModifyAlert;
 
+    public static final String SERIALIZED_NAME_COMPANY_PRIVACY_POLICY_URL =
+            "company_privacy_policy_url";
+
+    @SerializedName(SERIALIZED_NAME_COMPANY_PRIVACY_POLICY_URL)
+    @javax.annotation.Nullable
+    private String companyPrivacyPolicyUrl;
+
+    public static final String SERIALIZED_NAME_COMPANY_WEBSITE_URL = "company_website_url";
+
+    @SerializedName(SERIALIZED_NAME_COMPANY_WEBSITE_URL)
+    @javax.annotation.Nullable
+    private String companyWebsiteUrl;
+
     public TemplatePropertiesInputCreate() {}
 
     public TemplatePropertiesInputCreate ctaButtonBgColor(
@@ -639,6 +652,47 @@ public class TemplatePropertiesInputCreate implements Serializable {
         this.hideModifyAlert = hideModifyAlert;
     }
 
+    public TemplatePropertiesInputCreate companyPrivacyPolicyUrl(
+            @javax.annotation.Nullable String companyPrivacyPolicyUrl) {
+        this.companyPrivacyPolicyUrl = companyPrivacyPolicyUrl;
+        return this;
+    }
+
+    /**
+     * Company privacy policy URL (HTTP/HTTPS only)
+     *
+     * @return companyPrivacyPolicyUrl
+     */
+    @javax.annotation.Nullable
+    public String getCompanyPrivacyPolicyUrl() {
+        return companyPrivacyPolicyUrl;
+    }
+
+    public void setCompanyPrivacyPolicyUrl(
+            @javax.annotation.Nullable String companyPrivacyPolicyUrl) {
+        this.companyPrivacyPolicyUrl = companyPrivacyPolicyUrl;
+    }
+
+    public TemplatePropertiesInputCreate companyWebsiteUrl(
+            @javax.annotation.Nullable String companyWebsiteUrl) {
+        this.companyWebsiteUrl = companyWebsiteUrl;
+        return this;
+    }
+
+    /**
+     * Company website URL (HTTP/HTTPS only)
+     *
+     * @return companyWebsiteUrl
+     */
+    @javax.annotation.Nullable
+    public String getCompanyWebsiteUrl() {
+        return companyWebsiteUrl;
+    }
+
+    public void setCompanyWebsiteUrl(@javax.annotation.Nullable String companyWebsiteUrl) {
+        this.companyWebsiteUrl = companyWebsiteUrl;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -692,7 +746,12 @@ public class TemplatePropertiesInputCreate implements Serializable {
                 && Objects.equals(
                         this.hideUnsubscribeLink, templatePropertiesInputCreate.hideUnsubscribeLink)
                 && Objects.equals(
-                        this.hideModifyAlert, templatePropertiesInputCreate.hideModifyAlert);
+                        this.hideModifyAlert, templatePropertiesInputCreate.hideModifyAlert)
+                && Objects.equals(
+                        this.companyPrivacyPolicyUrl,
+                        templatePropertiesInputCreate.companyPrivacyPolicyUrl)
+                && Objects.equals(
+                        this.companyWebsiteUrl, templatePropertiesInputCreate.companyWebsiteUrl);
     }
 
     private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -729,7 +788,9 @@ public class TemplatePropertiesInputCreate implements Serializable {
                 hideNotificationStatus,
                 hideErrorMessage,
                 hideUnsubscribeLink,
-                hideModifyAlert);
+                hideModifyAlert,
+                companyPrivacyPolicyUrl,
+                companyWebsiteUrl);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -786,6 +847,12 @@ public class TemplatePropertiesInputCreate implements Serializable {
                 .append(toIndentedString(hideUnsubscribeLink))
                 .append("\n");
         sb.append("    hideModifyAlert: ").append(toIndentedString(hideModifyAlert)).append("\n");
+        sb.append("    companyPrivacyPolicyUrl: ")
+                .append(toIndentedString(companyPrivacyPolicyUrl))
+                .append("\n");
+        sb.append("    companyWebsiteUrl: ")
+                .append(toIndentedString(companyWebsiteUrl))
+                .append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -830,6 +897,8 @@ public class TemplatePropertiesInputCreate implements Serializable {
         openapiFields.add("hide_error_message");
         openapiFields.add("hide_unsubscribe_link");
         openapiFields.add("hide_modify_alert");
+        openapiFields.add("company_privacy_policy_url");
+        openapiFields.add("company_website_url");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -967,6 +1036,24 @@ public class TemplatePropertiesInputCreate implements Serializable {
                             "Expected the field `replacement_value_for_spot_iq` to be a primitive"
                                     + " type in the JSON string but got `%s`",
                             jsonObj.get("replacement_value_for_spot_iq").toString()));
+        }
+        if ((jsonObj.get("company_privacy_policy_url") != null
+                        && !jsonObj.get("company_privacy_policy_url").isJsonNull())
+                && !jsonObj.get("company_privacy_policy_url").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `company_privacy_policy_url` to be a primitive"
+                                    + " type in the JSON string but got `%s`",
+                            jsonObj.get("company_privacy_policy_url").toString()));
+        }
+        if ((jsonObj.get("company_website_url") != null
+                        && !jsonObj.get("company_website_url").isJsonNull())
+                && !jsonObj.get("company_website_url").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `company_website_url` to be a primitive type in"
+                                    + " the JSON string but got `%s`",
+                            jsonObj.get("company_website_url").toString()));
         }
     }
 

@@ -68,7 +68,9 @@ public class UpdateConnectionConfigurationRequest implements Serializable {
 
         OAUTH_WITH_PKCE("OAUTH_WITH_PKCE"),
 
-        PERSONAL_ACCESS_TOKEN("PERSONAL_ACCESS_TOKEN");
+        PERSONAL_ACCESS_TOKEN("PERSONAL_ACCESS_TOKEN"),
+
+        OAUTH_CLIENT_CREDENTIALS("OAUTH_CLIENT_CREDENTIALS");
 
         private String value;
 

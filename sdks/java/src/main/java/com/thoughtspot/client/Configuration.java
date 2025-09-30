@@ -8,7 +8,7 @@ package com.thoughtspot.client;
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         comments = "Generator version: 7.12.0")
 public class Configuration {
-    public static final String VERSION = "2.17.1";
+    public static final String VERSION = "2.18.0";
 
     private static volatile ApiClient defaultApiClient = new ApiClient();
 
