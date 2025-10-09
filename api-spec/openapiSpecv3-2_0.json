@@ -160,6 +160,9 @@
           "AI",
           "10.13.0.cl"
         ],
+        "security":
+          - "bearerAuth": []
+          - "requiredPrivilege": ["AI_CONVERSATION_CREATE"]
         "requestBody": {
           "content": {
             "application/json": {
