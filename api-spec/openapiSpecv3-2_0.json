@@ -22,6 +22,14 @@
       "description": "Roles for version 10.4.0.cl"
     },
     {
+      "name": "10.15.0.cl",
+      "id": "10.15.0.cl",
+      "tags": [
+        "10.15.0.cl"
+      ],
+      "description": "Roles for version 10.15.0.cl"
+    },
+    {
       "name": "10.7.0.cl",
       "id": "10.7.0.cl",
       "tags": [
@@ -366,6 +374,78 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/eureka_DataSourceSuggestionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/instructions/get": {
+      "post": {
+        "operationId": "getNLInstructions",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.15.0.cl or later</span>\n\nThis API allows users to retrieve existing natural language (NL) instructions for a specific data-model. These instructions guide the AI system in understanding data context and generating more accurate responses when processing natural language queries.\n\nTo use this API, the user needs atleast view access on the data-model and they must use corresponding org related bearerToken where the data-model exists.\n\n#### Usage guidelines\n\nTo retrieve NL instructions for a data-model, the request must include:\n- `data_source_identifier`: The unique ID or name of the data-model to retrieve NL instructions\n\nThe API returns a response object with:\n- `nl_instructions_info`: An array of instruction objects, each containing:\n  - `instructions`: Array of text instructions for natural language processing\n  - `scope`: The scope of the instruction (`GLOBAL` or `WORKSHEET_USER`)\n\n#### Instructions Scope\n\n- **GLOBAL**: Instructions that apply globally across the system on the given data-model (currently only global instructions are supported)\n- **WORKSHEET_USER**: Instructions that apply only to the specific user context\n\n\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * Available from version 10.15.0.cl and later.\n> * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n> * Use this API to view currently configured instructions before modifying them with `setNLInstructions`.\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "10.15.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data_source_identifier": {
+                    "description": "Unique ID or name of the data-model for which to retrieve NL instructions.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "data_source_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_GetNLInstructionsResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_GetNLInstructionsResponse"
                 }
               }
             }
@@ -834,6 +914,86 @@
                   "items": {
                     "$ref": "#/components/schemas/ResponseMessage"
                   }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/instructions/set": {
+      "post": {
+        "operationId": "setNLInstructions",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.15.0.cl or later</span>\n\nThis API allows users to set natural language (NL) instructions for a specific data-model to improve AI-generated answers and query processing. These instructions help guide the AI system to better understand the data context and provide more accurate responses.\n\nTo use this API, the user needs either edit access or SPOTTER_COACHING_PRIVILEGE on the data-model and they must use corresponding org related bearerToken where the data-model exists.\n\n#### Usage guidelines\n\nTo set NL instructions for a data-model, the request must include:\n- `data_source_identifier`: The unique ID or name of the data-model for which to set NL instructions\n- `nl_instructions_info`: An array of instruction objects, each containing:\n  - `instructions`: Array of text instructions for the LLM\n  - `scope`: The scope of the instruction (`GLOBAL` or `WORKSHEET_USER`). Currently only `GLOBAL` is supported.\n\nThe API returns a response object with:\n- `success`: Boolean indicating whether the operation was successful\n\n#### Instructions Scope\n\n- **GLOBAL**: Instructions that apply globally for that data-model across the system\n- **WORKSHEET_USER**: Instructions that apply only to the specific user context for that data-model\n\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * Available from version 10.15.0.cl and later.\n> * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n> * Instructions help improve the accuracy and relevance of AI-generated responses for the specified data-model.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "10.15.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data_source_identifier": {
+                    "description": "Unique ID or name of the data-model for which to set NL instructions.",
+                    "type": "string"
+                  },
+                  "nl_instructions_info": {
+                    "description": "List of NL instructions to set for the data-model.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/NLInstructionsInfoInput"
+                    }
+                  }
+                },
+                "required": [
+                  "data_source_identifier",
+                  "nl_instructions_info"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_SetNLInstructionsResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_SetNLInstructionsResponse"
                 }
               }
             }
@@ -19576,6 +19736,45 @@
           }
         }
       },
+      "eureka_GetNLInstructionsResponse": {
+        "type": "object",
+        "required": [
+          "nl_instructions_info"
+        ],
+        "properties": {
+          "nl_instructions_info": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NLInstructionsInfo"
+            },
+            "description": "List of NL instructions with their scopes."
+          }
+        }
+      },
+      "NLInstructionsInfo": {
+        "type": "object",
+        "required": [
+          "instructions",
+          "scope"
+        ],
+        "properties": {
+          "instructions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "User instructions for natural language processing."
+          },
+          "scope": {
+            "type": "string",
+            "enum": [
+              "WORKSHEET_USER",
+              "GLOBAL"
+            ],
+            "description": "Scope of the instruction."
+          }
+        }
+      },
       "RiseGQLArgWrapper": {
         "type": "object",
         "required": [
@@ -23277,6 +23476,42 @@
           "message": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "NLInstructionsInfoInput": {
+        "type": "object",
+        "required": [
+          "instructions",
+          "scope"
+        ],
+        "properties": {
+          "instructions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "User instructions for natural language processing."
+          },
+          "scope": {
+            "type": "string",
+            "enum": [
+              "WORKSHEET_USER",
+              "GLOBAL"
+            ],
+            "description": "Scope of the instruction (USER or GLOBAL). Defaults to GLOBAL."
+          }
+        }
+      },
+      "eureka_SetNLInstructionsResponse": {
+        "type": "object",
+        "required": [
+          "success"
+        ],
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Success status of the operation."
           }
         }
       },
