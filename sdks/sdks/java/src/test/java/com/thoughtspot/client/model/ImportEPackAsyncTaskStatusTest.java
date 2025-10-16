@@ -4,149 +4,105 @@
 
 package com.thoughtspot.client.model;
 
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-import java.util.Arrays;
-import org.openapitools.jackson.nullable.JsonNullable;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/**
- * Model tests for ImportEPackAsyncTaskStatus
- */
+/** Model tests for ImportEPackAsyncTaskStatus */
 public class ImportEPackAsyncTaskStatusTest {
     private final ImportEPackAsyncTaskStatus model = new ImportEPackAsyncTaskStatus();
 
-    /**
-     * Model tests for ImportEPackAsyncTaskStatus
-     */
+    /** Model tests for ImportEPackAsyncTaskStatus */
     @Test
     public void testImportEPackAsyncTaskStatus() {
         // TODO: test ImportEPackAsyncTaskStatus
     }
 
-    /**
-     * Test the property 'tenantId'
-     */
+    /** Test the property 'tenantId' */
     @Test
     public void tenantIdTest() {
         // TODO: test tenantId
     }
 
-    /**
-     * Test the property 'orgId'
-     */
+    /** Test the property 'orgId' */
     @Test
     public void orgIdTest() {
         // TODO: test orgId
     }
 
-    /**
-     * Test the property 'taskId'
-     */
+    /** Test the property 'taskId' */
     @Test
     public void taskIdTest() {
         // TODO: test taskId
     }
 
-    /**
-     * Test the property 'taskName'
-     */
+    /** Test the property 'taskName' */
     @Test
     public void taskNameTest() {
         // TODO: test taskName
     }
 
-    /**
-     * Test the property 'importResponse'
-     */
+    /** Test the property 'importResponse' */
     @Test
     public void importResponseTest() {
         // TODO: test importResponse
     }
 
-    /**
-     * Test the property 'taskStatus'
-     */
+    /** Test the property 'taskStatus' */
     @Test
     public void taskStatusTest() {
         // TODO: test taskStatus
     }
 
-    /**
-     * Test the property 'authorId'
-     */
+    /** Test the property 'authorId' */
     @Test
     public void authorIdTest() {
         // TODO: test authorId
     }
 
-    /**
-     * Test the property 'importPolicy'
-     */
+    /** Test the property 'importPolicy' */
     @Test
     public void importPolicyTest() {
         // TODO: test importPolicy
     }
 
-    /**
-     * Test the property 'createdAt'
-     */
+    /** Test the property 'createdAt' */
     @Test
     public void createdAtTest() {
         // TODO: test createdAt
     }
 
-    /**
-     * Test the property 'inProgressAt'
-     */
+    /** Test the property 'inProgressAt' */
     @Test
     public void inProgressAtTest() {
         // TODO: test inProgressAt
     }
 
-    /**
-     * Test the property 'completedAt'
-     */
+    /** Test the property 'completedAt' */
     @Test
     public void completedAtTest() {
         // TODO: test completedAt
     }
 
-    /**
-     * Test the property 'totalObjectCount'
-     */
+    /** Test the property 'totalObjectCount' */
     @Test
     public void totalObjectCountTest() {
         // TODO: test totalObjectCount
     }
 
-    /**
-     * Test the property 'objectProcessedCount'
-     */
+    /** Test the property 'objectProcessedCount' */
     @Test
     public void objectProcessedCountTest() {
         // TODO: test objectProcessedCount
     }
 
-    /**
-     * Test the property 'modifiedAt'
-     */
+    /** Test the property 'modifiedAt' */
     @Test
     public void modifiedAtTest() {
         // TODO: test modifiedAt
     }
 
-    /**
-     * Test the property 'authorDisplayName'
-     */
+    /** Test the property 'authorDisplayName' */
     @Test
     public void authorDisplayNameTest() {
         // TODO: test authorDisplayName
     }
-
 }

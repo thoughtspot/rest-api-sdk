@@ -8,7 +8,7 @@ Variable values.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**name** | **String** | The name of the column to apply the variable on. |  |
+|**name** | **String** | The name of the existing formula variable. |  |
 |**values** | **List&lt;Object&gt;** | The values to filter on. |  |
 
 

@@ -39,7 +39,7 @@ export class GetCustomAccessTokenRequest {
     */
     'org_identifier'?: string;
     /**
-    * Indicates whether the specified attributes should be persisted or not.
+    * Indicates whether the specified attributes should be persisted or not. RESET and NONE are not applicable if you are setting variable_values.
     */
     'persist_option': GetCustomAccessTokenRequestPersistOptionEnum;
     /**
@@ -51,7 +51,7 @@ export class GetCustomAccessTokenRequest {
     */
     'parameter_values'?: Array<ParameterValues>;
     /**
-    * Variable values.
+    * List of variable values where `name` references an existing formula variable and `values` is any value from the corresponding column.    Version: 10.14.0.cl or later 
     */
     'variable_values'?: Array<VariableValues>;
     /**
@@ -71,7 +71,7 @@ export class GetCustomAccessTokenRequest {
     */
     'groups'?: Array<GroupObject>;
     /**
-    *    Creates a new user if the specified username does not exist in ThoughtSpot. To provision a user just-in-time (JIT), set this attribute to true.      Note: For JIT provisioning of a user, the secret_key is required.     Version: 10.5.0.cl or later 
+    *    Creates a new user if the specified username does not exist in ThoughtSpot. To provision a user just-in-time (JIT), set this attribute to true.      Note: For JIT provisioning of a user, the secret_key is required. New formula variables won\'t be created.     Version: 10.5.0.cl or later 
     */
     'auto_create'?: boolean | null;
 

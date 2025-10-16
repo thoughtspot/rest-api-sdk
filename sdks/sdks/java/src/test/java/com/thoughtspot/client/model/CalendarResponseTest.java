@@ -4,85 +4,57 @@
 
 package com.thoughtspot.client.model;
 
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-import java.util.Arrays;
-import org.openapitools.jackson.nullable.JsonNullable;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/**
- * Model tests for CalendarResponse
- */
+/** Model tests for CalendarResponse */
 public class CalendarResponseTest {
     private final CalendarResponse model = new CalendarResponse();
 
-    /**
-     * Model tests for CalendarResponse
-     */
+    /** Model tests for CalendarResponse */
     @Test
     public void testCalendarResponse() {
         // TODO: test CalendarResponse
     }
 
-    /**
-     * Test the property 'calendarName'
-     */
+    /** Test the property 'calendarName' */
     @Test
     public void calendarNameTest() {
         // TODO: test calendarName
     }
 
-    /**
-     * Test the property 'connectionName'
-     */
+    /** Test the property 'connectionName' */
     @Test
     public void connectionNameTest() {
         // TODO: test connectionName
     }
 
-    /**
-     * Test the property 'dataWarehouseType'
-     */
+    /** Test the property 'dataWarehouseType' */
     @Test
     public void dataWarehouseTypeTest() {
         // TODO: test dataWarehouseType
     }
 
-    /**
-     * Test the property 'modificationTimeInMillis'
-     */
+    /** Test the property 'modificationTimeInMillis' */
     @Test
     public void modificationTimeInMillisTest() {
         // TODO: test modificationTimeInMillis
     }
 
-    /**
-     * Test the property 'authorName'
-     */
+    /** Test the property 'authorName' */
     @Test
     public void authorNameTest() {
         // TODO: test authorName
     }
 
-    /**
-     * Test the property 'connectionId'
-     */
+    /** Test the property 'connectionId' */
     @Test
     public void connectionIdTest() {
         // TODO: test connectionId
     }
 
-    /**
-     * Test the property 'calendarId'
-     */
+    /** Test the property 'calendarId' */
     @Test
     public void calendarIdTest() {
         // TODO: test calendarId
     }
-
 }

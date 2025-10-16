@@ -4,79 +4,51 @@
 
 package com.thoughtspot.client.model;
 
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import com.thoughtspot.client.model.OrgInfo;
-import com.thoughtspot.client.model.UserInfo;
-import java.io.IOException;
-import java.util.Arrays;
-import org.openapitools.jackson.nullable.JsonNullable;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/**
- * Model tests for AccessToken
- */
+/** Model tests for AccessToken */
 public class AccessTokenTest {
     private final AccessToken model = new AccessToken();
 
-    /**
-     * Model tests for AccessToken
-     */
+    /** Model tests for AccessToken */
     @Test
     public void testAccessToken() {
         // TODO: test AccessToken
     }
 
-    /**
-     * Test the property 'id'
-     */
+    /** Test the property 'id' */
     @Test
     public void idTest() {
         // TODO: test id
     }
 
-    /**
-     * Test the property 'token'
-     */
+    /** Test the property 'token' */
     @Test
     public void tokenTest() {
         // TODO: test token
     }
 
-    /**
-     * Test the property 'org'
-     */
+    /** Test the property 'org' */
     @Test
     public void orgTest() {
         // TODO: test org
     }
 
-    /**
-     * Test the property 'user'
-     */
+    /** Test the property 'user' */
     @Test
     public void userTest() {
         // TODO: test user
     }
 
-    /**
-     * Test the property 'creationTimeInMillis'
-     */
+    /** Test the property 'creationTimeInMillis' */
     @Test
     public void creationTimeInMillisTest() {
         // TODO: test creationTimeInMillis
     }
 
-    /**
-     * Test the property 'expirationTimeInMillis'
-     */
+    /** Test the property 'expirationTimeInMillis' */
     @Test
     public void expirationTimeInMillisTest() {
         // TODO: test expirationTimeInMillis
     }
-
 }

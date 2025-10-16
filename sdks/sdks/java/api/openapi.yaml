@@ -367,56 +367,62 @@ paths:
       - application/json
   /api/rest/2.0/auth/token/custom:
     post:
-      description: |2+
-
-         Version: 10.4.0.cl or later
-
-
-        Gets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.
-
-        To add a new user and assign privileges during auto creation, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.
-
-        To assign security attributes with filter rules and Parameters to the JWT token, you'll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.
-
-        #### Usage guidelines
-
-        You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key`.
-
-        To generate a `secret_key` on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable) in the **Develop** > **Customizations** > **Security Settings** page.
-
-        **Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.
-
-        If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.
-
-        ##### Attribute-Based Access Control (ABAC) with tokens
-
-        To implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the `filter_rules` and `parameter_values` array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user's `access_control_properties` object, after which all sessions will use the persisted values.
-
-        Specify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.
-
-        For more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).
-
-        ##### Just-in-time provisioning
-
-        For just-in-time user creation and provisioning, define the following attributes:
-
-        * `auto_create`
-        * `username`
-        * `display_name`
-        * `email`
-        * `groups`
-
-        Set `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true` in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values.
-
-        For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).
-
-        ##### Important point to note
-        All options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Persist options such as  `APPEND`, `REPLACE`, `RESET` will persist security parameters on the user profile when the token is created, while Persist option `NONE` will not persist anything but will be honoured in the session.
-
-
-
-
-
+      description: "\n Version: 10.4.0.cl or later\n\n\nGets an authentication token\
+        \ with custom rules and security attributes and creates a full session in\
+        \ ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot\
+        \ remains valid for 5 mins.\n\nTo add a new user and assign privileges during\
+        \ auto creation, you need `ADMINISTRATION` (**Can administer ThoughtSpot**)\
+        \ privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
+        \ is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**)\
+        \ privilege and edit access to the data source is required.\n\nTo assign security\
+        \ attributes with filter rules and Parameters to the JWT token, you'll need\
+        \ administrator privileges and edit access to the data source (Worksheet or\
+        \ Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
+        \ is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**)\
+        \ privilege and edit access to the data source is required.\n\n#### Usage\
+        \ guidelines\n\nYou can generate the token for a user by providing a `username`\
+        \ and `password`, or by using the cluster’s `secret_key`.\n\nTo generate a\
+        \ `secret_key` on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)\
+        \ in the **Develop** > **Customizations** > **Security Settings** page.\n\n\
+        **Note**: When both `password` and `secret_key` are included in the API request,\
+        \ `password` takes precedence.\n\nIf Multi-Factor Authentication (MFA) is\
+        \ enabled on your instance, the API login request with basic authentication\
+        \ (`username`  and `password` ) returns an error. You can switch to token-based\
+        \ authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.\n\
+        \n##### Attribute-Based Access Control (ABAC) with tokens\n\nTo implement\
+        \ Attribute-Based Access Control (ABAC) and assign security entitlements to\
+        \ users during session creation, you can generate a token with custom filtering\
+        \ rules and Parameters in the `filter_rules` and `parameter_values` array\
+        \ respectively. These attributes can be configured to persist on a specific\
+        \ set of objects for user sessions initiated using the token. Once defined,\
+        \ the rules are added to the user's `access_control_properties` object, after\
+        \ which all sessions will use the persisted values.\n\nSpecify the object\
+        \ type as `LOGICAL_TABLE`. \n\nFor more information, see [ABAC via tokens\
+        \ Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).\n\
+        \n##### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning,\
+        \ define the following attributes:\n\n* `auto_create`\n* `username`\n* `display_name`\n\
+        * `email`\n* `groups`\n\nSet `auto_create` to `true` if the user is not available\
+        \ in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create`\
+        \ parameter is set to `true` in the API request, the user properties such\
+        \ as the display name, email, Org and group assignment will not be updated\
+        \ with new values. If `auto_create` is set to `true`, it won't create formula\
+        \ variables and hence won't be applicable for `variable_values`.\n\nFor more\
+        \ information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).\n\
+        \n##### Important point to note\nAll options in the token creation APIs that\
+        \ define access to the content in ThoughtSpot will do so during the token\
+        \ creation and not when the token is being used for authentication. For example,\
+        \ `auto_create:true` will create the user when the authentication token is\
+        \ created. Persist options such as  `APPEND`, `REPLACE`, `RESET` will persist\
+        \ security parameters on the user profile when the token is created, while\
+        \ Persist option `NONE` will not persist anything but will be honoured in\
+        \ the session.\n\n##### Formula Variables\nBefore using variables_values,\
+        \ variables must be created using Create Variable API with type as Formula_Variable\
+        \ (/api/rest/2.0/template/variables/create)\nThe persist_option RESET and\
+        \ NONE cannot be used when variable_values are provided in the request.\n\
+        If you are working with variable_values, you must use other (APPEND, REPLACE)\
+        \ supported modes.\nIf you want to use RESET or NONE, do not pass any variable_values.\
+        \ In such cases, variable_values will remain unaffected.\nWhen using object_id\
+        \ with variable_values, models are supported. \n\n\n\n\n"
       operationId: getCustomAccessToken
       parameters: []
       requestBody:
@@ -11091,8 +11097,7 @@ components:
           description: "  Type of object.\n  \n\nRequired if the name of the object\
             \ is set as the identifier. This attribute is optional when the object\
             \ GUID is specified as the identifier.\n  \n\n Specify the object type\
-            \ as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not\
-            \ supported."
+            \ as `LOGICAL_TABLE`."
           enum:
           - LOGICAL_TABLE
           nullable: true
@@ -11369,7 +11374,7 @@ components:
       description: Variable values.
       properties:
         name:
-          description: The name of the column to apply the variable on.
+          description: The name of the existing formula variable.
           type: string
         values:
           description: The values to filter on.
@@ -11388,8 +11393,7 @@ components:
           description: "  Type of object.\n  \n\nRequired if the name of the object\
             \ is set as the identifier. This attribute is optional when the object\
             \ GUID is specified as the identifier.\n  \n\n Specify the object type\
-            \ as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not\
-            \ supported."
+            \ as `LOGICAL_TABLE`."
           enum:
           - LOGICAL_TABLE
           nullable: true
@@ -14190,7 +14194,7 @@ components:
           type: string
         persist_option:
           description: Indicates whether the specified attributes should be persisted
-            or not.
+            or not. RESET and NONE are not applicable if you are setting variable_values.
           enum:
           - REPLACE
           - APPEND
@@ -14208,7 +14212,9 @@ components:
             $ref: '#/components/schemas/ParameterValues'
           type: array
         variable_values:
-          description: Variable values.
+          description: "List of variable values where `name` references an existing\
+            \ formula variable and `values` is any value from the corresponding column.\
+            \ \n  Version: 10.14.0.cl or later\n"
           items:
             $ref: '#/components/schemas/VariableValues'
           type: array
@@ -14238,7 +14244,8 @@ components:
           description: "   Creates a new user if the specified username does not exist\
             \ in ThoughtSpot. To provision a user just-in-time (JIT), set this attribute\
             \ to true.\n   \n\nNote: For JIT provisioning of a user, the secret_key\
-            \ is required.  \n  Version: 10.5.0.cl or later\n"
+            \ is required. New formula variables won't be created.  \n  Version: 10.5.0.cl\
+            \ or later\n"
           nullable: true
           type: boolean
       required:

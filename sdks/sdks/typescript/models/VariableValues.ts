@@ -17,7 +17,7 @@ import { HttpFile } from '../http/http';
 */
 export class VariableValues {
     /**
-    * The name of the column to apply the variable on.
+    * The name of the existing formula variable.
     */
     'name': string;
     /**
