@@ -22,6 +22,14 @@
       "description": "Roles for version 10.4.0.cl"
     },
     {
+      "name": "10.15.0.cl",
+      "id": "10.15.0.cl",
+      "tags": [
+        "10.15.0.cl"
+      ],
+      "description": "Roles for version 10.15.0.cl"
+    },
+    {
       "name": "10.7.0.cl",
       "id": "10.7.0.cl",
       "tags": [
@@ -366,6 +374,78 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/eureka_DataSourceSuggestionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/instructions/get": {
+      "post": {
+        "operationId": "getNLInstructions",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.15.0.cl or later</span>\n\nThis API allows users to retrieve existing natural language (NL) instructions for a specific data-model. These instructions guide the AI system in understanding data context and generating more accurate responses when processing natural language queries.\n\n#### Usage guidelines\n\nTo retrieve NL instructions for a data-model, the request must include:\n- `data_source_identifier`: The unique ID or name of the data-model to retrieve NL instructions\n\nThe API returns a response object with:\n- `nl_instructions_info`: An array of instruction objects, each containing:\n  - `instructions`: Array of text instructions for natural language processing\n  - `scope`: The scope of the instruction (`GLOBAL`). It can be extended to data-model-user scope in future.\n\n#### Instructions Scope\n\n- **GLOBAL**: Instructions that apply globally across the system on the given data-model (currently only global instructions are supported)\n\n> ###### Note:\n> * To use this API, the user needs atleast view access on the data-model and they must use corresponding org related bearerToken where the data-model exists.\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * Available from version 10.15.0.cl and later.\n> * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n> * Use this API to view currently configured instructions before modifying them with `setNLInstructions`.\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "10.15.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data_source_identifier": {
+                    "description": "Unique ID or name of the data-model for which to retrieve NL instructions.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "data_source_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_GetNLInstructionsResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_GetNLInstructionsResponse"
                 }
               }
             }
@@ -834,6 +914,86 @@
                   "items": {
                     "$ref": "#/components/schemas/ResponseMessage"
                   }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/instructions/set": {
+      "post": {
+        "operationId": "setNLInstructions",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.15.0.cl or later</span>\n\nThis API allows users to set natural language (NL) instructions for a specific data-model to improve AI-generated answers and query processing. These instructions help guide the AI system to better understand the data context and provide more accurate responses.\n\n#### Usage guidelines\n\nTo set NL instructions for a data-model, the request must include:\n- `data_source_identifier`: The unique ID or name of the data-model for which to set NL instructions\n- `nl_instructions_info`: An array of instruction objects, each containing:\n  - `instructions`: Array of text instructions for the LLM\n  - `scope`: The scope of the instruction (`GLOBAL`). Currently only `GLOBAL` is supported. It can be extended to data-model-user scope in future.\n\nThe API returns a response object with:\n- `success`: Boolean indicating whether the operation was successful\n\n#### Instructions Scope\n\n- **GLOBAL**: Instructions that apply globally for that data-model across the system\n\n> ###### Note:\n> * To use this API, the user needs either edit access or SPOTTER_COACHING_PRIVILEGE on the data-model and they must use corresponding org related bearerToken where the data-model exists.\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * Available from version 10.15.0.cl and later.\n> * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n> * Instructions help improve the accuracy and relevance of AI-generated responses for the specified data-model.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "10.15.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data_source_identifier": {
+                    "description": "Unique ID or name of the data-model for which to set NL instructions.",
+                    "type": "string"
+                  },
+                  "nl_instructions_info": {
+                    "description": "List of NL instructions to set for the data-model.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/NLInstructionsInfoInput"
+                    }
+                  }
+                },
+                "required": [
+                  "data_source_identifier",
+                  "nl_instructions_info"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_SetNLInstructionsResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_SetNLInstructionsResponse"
                 }
               }
             }
@@ -2952,7 +3112,7 @@
     "/api/rest/2.0/connections/{connection_identifier}/update": {
       "post": {
         "operationId": "updateConnectionV2",
-        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nUpdates a connection object.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.\n\nTo update a connection object, pass these parameters in your API request:\n\n1. GUID of the connection object.\n2. If you are updating tables or database schema of a connection object:\n   a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.\n   b. Set `validate` to `true`.\n   \n   **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.\n\n   * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:\n\n   ```\n   {\n      \"configuration\":{\n         \"accountName\":\"thoughtspot_partner\",\n         \"user\":\"tsadmin\",\n         \"password\":\"TestConn123\",\n         \"role\":\"sysadmin\",\n         \"warehouse\":\"MEDIUM_WH\"\n      },\n      \"externalDatabases\":[\n         {\n            \"name\":\"AllDatatypes\",\n            \"isAutoCreated\":false,\n            \"schemas\":[\n               {\n                  \"name\":\"alldatatypes\",\n                  \"tables\":[\n                     {\n                        \"name\":\"allDatatypes\",\n                        \"type\":\"TABLE\",\n                        \"description\":\"\",\n                        \"selected\":true,\n                        \"linked\":true,\n                        \"columns\":[\n                           {\n                              \"name\":\"CNUMBER\",\n                              \"type\":\"INT64\",\n                              \"canImport\":true,\n                              \"selected\":true,\n                              \"isLinkedActive\":true,\n                              \"isImported\":false,\n                              \"tableName\":\"allDatatypes\",\n                              \"schemaName\":\"alldatatypes\",\n                              \"dbName\":\"AllDatatypes\"\n                           },\n                           {\n                              \"name\":\"CDECIMAL\",\n                              \"type\":\"INT64\",\n                              \"canImport\":true,\n                              \"selected\":true,\n                              \"isLinkedActive\":true,\n                              \"isImported\":false,\n                              \"tableName\":\"allDatatypes\",\n                              \"schemaName\":\"alldatatypes\",\n                              \"dbName\":\"AllDatatypes\"\n                           }\n                        ]\n                     }\n                  ]\n               }\n            ]\n         }\n      ]\n   }\n   ```\n\n3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.\n\n  **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not  specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.\n\n  * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a Snowflake connection:\n   ```\n   {\n      \"configuration\":{\n         \"accountName\":\"thoughtspot_partner\",\n         \"user\":\"tsadmin\",\n         \"password\":\"TestConn123\",\n         \"role\":\"sysadmin\",\n         \"warehouse\":\"MEDIUM_WH\"\n      },\n      \"externalDatabases\":[\n\n      ]\n   }\n   ```\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nUpdates a connection object.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.\n\nTo update a connection object, pass these parameters in your API request:\n\n1. GUID of the connection object.\n2. If you are updating tables or database schema of a connection object:\n   a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.\n   b. Set `validate` to `true`.\n   \n   **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.\n\n   * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:\n   * This is an example of updating a single table in a empty connection:\n   \n      ```\n      {\n        \"authenticationType\": \"SERVICE_ACCOUNT\",\n        \"externalDatabases\": [\n          {\n            \"name\": \"DEVELOPMENT\",\n            \"isAutoCreated\": false,\n            \"schemas\": [\n              {\n                \"name\": \"TS_dataset\",\n                \"tables\": [\n                  {\n                    \"name\": \"DEMORENAME\",\n                    \"type\": \"TABLE\",\n                    \"description\": \"\",\n                    \"selected\": true,\n                    \"linked\": true,\n                    \"gid\": 0,\n                    \"datasetId\": \"-1\",\n                    \"subType\": \"\",\n                    \"reportId\": \"\",\n                    \"viewId\": \"\",\n                    \"columns\": [\n                      {\n                        \"name\": \"Col1\",\n                        \"type\": \"VARCHAR\",\n                        \"canImport\": true,\n                        \"selected\": true,\n                        \"description\": \"\",\n                        \"isLinkedActive\": true,\n                        \"isAggregate\": false\n                      },\n                      {\n                        \"name\": \"Col2\",\n                        \"type\": \"VARCHAR\",\n                        \"canImport\": true,\n                        \"selected\": true,\n                        \"description\": \"\",\n                        \"isLinkedActive\": true,\n                        \"isAggregate\": false\n                      },\n                      {\n                        \"name\": \"Col3\",\n                        \"type\": \"VARCHAR\",\n                        \"canImport\": true,\n                        \"selected\": true,\n                        \"description\": \"\",\n                        \"isLinkedActive\": true,\n                        \"isAggregate\": false\n                      },\n                      {\n                        \"name\": \"Col312\",\n                        \"type\": \"VARCHAR\",\n                        \"canImport\": true,\n                        \"selected\": true,\n                        \"description\": \"\",\n                        \"isLinkedActive\": true,\n                        \"isAggregate\": false\n                      },\n                      {\n                        \"name\": \"Col4\",\n                        \"type\": \"VARCHAR\",\n                        \"canImport\": true,\n                        \"selected\": true,\n                        \"description\": \"\",\n                        \"isLinkedActive\": true,\n                        \"isAggregate\": false\n                      }\n                    ],\n                    \"relationships\": []\n                  }\n                ]\n              }\n            ]\n          }\n        ],\n        \"configuration\": {\n          \"password\": \"\",\n          \"database\": \"DEVELOPMENT\",\n          \"role\": \"DEV\",\n          \"accountName\": \"thoughtspot_partner\",\n          \"warehouse\": \"DEMO_WH\",\n          \"user\": \"DEV_USER\"\n        }\n      }\n      ```\n      \n* This is an example of updating a single table in an existing connection with tables:\n    \n      ```\n      {\n        \"authenticationType\": \"SERVICE_ACCOUNT\",\n        \"externalDatabases\": [\n          {\n            \"name\": \"DEVELOPMENT\",\n            \"isAutoCreated\": false,\n            \"schemas\": [\n              {\n                \"name\": \"TS_dataset\",\n                \"tables\": [\n                  {\n                    \"name\": \"CUSTOMER\",\n                    \"type\": \"TABLE\",\n                    \"description\": \"\",\n                    \"selected\": true,\n                    \"linked\": true,\n                    \"gid\": 0,\n                    \"datasetId\": \"-1\",\n                    \"subType\": \"\",\n                    \"reportId\": \"\",\n                    \"viewId\": \"\",\n                    \"columns\": [],\n                    \"relationships\": []\n                  },\n                  {\n                    \"name\": \"tpch5k_falcon_default_schema_users\",\n                    \"type\": \"TABLE\",\n                    \"description\": \"\",\n                    \"selected\": true,\n                    \"linked\": true,\n                    \"gid\": 0,\n                    \"datasetId\": \"-1\",\n                    \"subType\": \"\",\n                    \"reportId\": \"\",\n                    \"viewId\": \"\",\n                    \"columns\": [\n                      {\n                        \"name\": \"user_id\",\n                        \"type\": \"INT64\",\n                        \"canImport\": true,\n                        \"selected\": true,\n                        \"description\": \"\",\n                        \"isLinkedActive\": true,\n                        \"isAggregate\": false\n                      },\n                      {\n                        \"name\": \"product_id\",\n                        \"type\": \"INT64\",\n                        \"canImport\": true,\n                        \"selected\": true,\n                        \"description\": \"\",\n                        \"isLinkedActive\": true,\n                        \"isAggregate\": false\n                      },\n                      {\n                        \"name\": \"user_cost\",\n                        \"type\": \"INT64\",\n                        \"canImport\": true,\n                        \"selected\": true,\n                        \"description\": \"\",\n                        \"isLinkedActive\": true,\n                        \"isAggregate\": false\n                      }\n                    ],\n                    \"relationships\": []\n                  }\n                ]\n              }\n            ]\n          }\n        ],\n        \"configuration\": {\n          \"password\": \"\",\n          \"database\": \"DEVELOPMENT\",\n          \"role\": \"DEV\",\n          \"accountName\": \"thoughtspot_partner\",\n          \"warehouse\": \"DEMO_WH\",\n          \"user\": \"DEV_USER\"\n        }\n      }\n      ```\n\n3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.\n\n  **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not  specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.\n\n  * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a Snowflake connection:\n   ```\n   {\n      \"configuration\":{\n         \"accountName\":\"thoughtspot_partner\",\n         \"user\":\"tsadmin\",\n         \"password\":\"TestConn123\",\n         \"role\":\"sysadmin\",\n         \"warehouse\":\"MEDIUM_WH\"\n      },\n      \"externalDatabases\":[\n\n      ]\n   }\n   ```\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Connections",
           "10.4.0.cl"
@@ -14428,7 +14588,7 @@
     "/api/rest/2.0/template/variables/search": {
       "post": {
         "operationId": "searchVariables",
-        "description": "\nSearch variables <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nAllows searching for variables in ThoughtSpot.\n\nRequires ADMINISTRATION role.\n\nThe API endpoint supports searching variables by:\n* Variable identifier (ID or name)\n* Variable type\n* Name pattern (case-insensitive, supports % for wildcard)\n\nThe search results can be formatted in three ways:\n* METADATA_ONLY - Returns only variable metadata (default)\n* METADATA_AND_VALUES - Returns variable metadata and values\n* EDITABLE_METADATA_AND_VALUES - Returns only editable variable metadata and values\n\nThe values can be filtered by scope:\n* org_identifier\n* principal_identifier\n* model_identifier\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nSearch variables <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nAllows searching for variables in ThoughtSpot.\n\nRequires ADMINISTRATION role.\n\nThe API endpoint supports searching variables by:\n* Variable identifier (ID or name)\n* Variable type\n* Name pattern (case-insensitive, supports % for wildcard)\n\nThe search results can be formatted in three ways:\n* METADATA - Returns only variable metadata (default)\n* METADATA_AND_VALUES - Returns variable metadata and values\n\nThe values can be filtered by scope:\n* org_identifier\n* principal_identifier\n* model_identifier\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Variable",
           "10.14.0.cl"
@@ -14465,14 +14625,13 @@
                     "type": "integer",
                     "format": "int32"
                   },
-                  "output_format": {
+                  "response_content": {
                     "description": "Format in which we want the output",
-                    "default": "METADATA_ONLY",
+                    "default": "METADATA",
                     "type": "string",
                     "enum": [
-                      "METADATA_ONLY",
-                      "METADATA_AND_VALUES",
-                      "EDITABLE_METADATA_AND_VALUES"
+                      "METADATA",
+                      "METADATA_AND_VALUES"
                     ]
                   }
                 }
@@ -19576,6 +19735,44 @@
           }
         }
       },
+      "eureka_GetNLInstructionsResponse": {
+        "type": "object",
+        "required": [
+          "nl_instructions_info"
+        ],
+        "properties": {
+          "nl_instructions_info": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NLInstructionsInfo"
+            },
+            "description": "List of NL instructions with their scopes."
+          }
+        }
+      },
+      "NLInstructionsInfo": {
+        "type": "object",
+        "required": [
+          "instructions",
+          "scope"
+        ],
+        "properties": {
+          "instructions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "User instructions for natural language processing."
+          },
+          "scope": {
+            "type": "string",
+            "enum": [
+              "GLOBAL"
+            ],
+            "description": "Scope of the instruction."
+          }
+        }
+      },
       "RiseGQLArgWrapper": {
         "type": "object",
         "required": [
@@ -23280,6 +23477,41 @@
           }
         }
       },
+      "NLInstructionsInfoInput": {
+        "type": "object",
+        "required": [
+          "instructions",
+          "scope"
+        ],
+        "properties": {
+          "instructions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "User instructions for natural language processing."
+          },
+          "scope": {
+            "type": "string",
+            "enum": [
+              "GLOBAL"
+            ],
+            "description": "Scope of the instruction (USER or GLOBAL). Defaults to GLOBAL."
+          }
+        }
+      },
+      "eureka_SetNLInstructionsResponse": {
+        "type": "object",
+        "required": [
+          "success"
+        ],
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Success status of the operation."
+          }
+        }
+      },
       "VariableUpdateAssignmentInput": {
         "type": "object",
         "required": [
@@ -23305,7 +23537,7 @@
               "ADD",
               "REMOVE",
               "REPLACE",
-              "CLEAR"
+              "RESET"
             ],
             "description": "Operation to perform"
           }
