@@ -52,6 +52,10 @@ export class SearchConnectionRequest {
     * List of authentication types to fetch data_ware_house_objects from external Data warehouse. This is only applicable when data_warehouse_object_type is selected.
     */
     'authentication_type'?: SearchConnectionRequestAuthenticationTypeEnum;
+    /**
+    * <div>Version: 10.9.0.cl or later </div>  Indicates whether to show resolved parameterised values.
+    */
+    'show_resolved_parameters'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -115,6 +119,12 @@ export class SearchConnectionRequest {
             "baseName": "authentication_type",
             "type": "SearchConnectionRequestAuthenticationTypeEnum",
             "format": ""
+        },
+        {
+            "name": "show_resolved_parameters",
+            "baseName": "show_resolved_parameters",
+            "type": "boolean",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -128,5 +138,5 @@ export class SearchConnectionRequest {
 
 export type SearchConnectionRequestDataWarehouseTypesEnum = "SNOWFLAKE" | "AMAZON_REDSHIFT" | "GOOGLE_BIGQUERY" | "AZURE_SYNAPSE" | "TERADATA" | "SAP_HANA" | "STARBURST" | "ORACLE_ADW" | "DATABRICKS" | "DENODO" | "DREMIO" | "TRINO" | "PRESTO" | "POSTGRES" | "SQLSERVER" | "MYSQL" | "GENERIC_JDBC" | "AMAZON_RDS_POSTGRESQL" | "AMAZON_AURORA_POSTGRESQL" | "AMAZON_RDS_MYSQL" | "AMAZON_AURORA_MYSQL" | "LOOKER" | "AMAZON_ATHENA" | "SINGLESTORE" | "GCP_SQLSERVER" | "GCP_ALLOYDB_POSTGRESQL" | "GCP_POSTGRESQL" | "GCP_MYSQL" | "MODE" | "GOOGLE_SHEETS" | "FALCON" | "FALCON_ONPREM" | "CLICKHOUSE" ;
 export type SearchConnectionRequestDataWarehouseObjectTypeEnum = "DATABASE" | "SCHEMA" | "TABLE" | "COLUMN" ;
-export type SearchConnectionRequestAuthenticationTypeEnum = "SERVICE_ACCOUNT" | "OAUTH" | "IAM" | "EXTOAUTH" | "OAUTH_WITH_SERVICE_PRINCIPAL" | "PERSONAL_ACCESS_TOKEN" ;
+export type SearchConnectionRequestAuthenticationTypeEnum = "SERVICE_ACCOUNT" | "OAUTH" | "IAM" | "EXTOAUTH" | "OAUTH_WITH_SERVICE_PRINCIPAL" | "PERSONAL_ACCESS_TOKEN" | "KEY_PAIR" | "OAUTH_WITH_PKCE" | "EXTOAUTH_WITH_PKCE" | "OAUTH_WITH_PEZ" | "OAUTH_CLIENT_CREDENTIALS" ;
 

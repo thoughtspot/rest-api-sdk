@@ -41,6 +41,7 @@ var __async = (__this, __arguments, generator) => {
 var typescript_exports = {};
 __export(typescript_exports, {
   AIApi: () => PromiseAIApi,
+  AIContext: () => AIContext,
   APIKey: () => APIKey,
   APIKeyInput: () => APIKeyInput,
   AccessToken: () => AccessToken,
@@ -51,7 +52,9 @@ __export(typescript_exports, {
   ActionDetailsInput: () => ActionDetailsInput,
   ActionDetailsInputCreate: () => ActionDetailsInputCreate,
   ActivateUserRequest: () => ActivateUserRequest,
+  AgentConversation: () => AgentConversation,
   AnswerContent: () => AnswerContent,
+  AnswerContextInput: () => AnswerContextInput,
   AnswerDataResponse: () => AnswerDataResponse,
   ApiException: () => ApiException,
   AssignChangeAuthorRequest: () => AssignChangeAuthorRequest,
@@ -70,16 +73,29 @@ __export(typescript_exports, {
   CALLBACK: () => CALLBACK,
   CALLBACKInput: () => CALLBACKInput,
   CALLBACKInputMandatory: () => CALLBACKInputMandatory,
+  CalendarResponse: () => CalendarResponse,
   ChangeUserPasswordRequest: () => ChangeUserPasswordRequest,
   Column: () => Column,
+  ColumnSecurityRule: () => ColumnSecurityRule,
+  ColumnSecurityRuleColumn: () => ColumnSecurityRuleColumn,
+  ColumnSecurityRuleGroup: () => ColumnSecurityRuleGroup,
+  ColumnSecurityRuleGroupOperation: () => ColumnSecurityRuleGroupOperation,
+  ColumnSecurityRuleResponse: () => ColumnSecurityRuleResponse,
+  ColumnSecurityRuleSourceTable: () => ColumnSecurityRuleSourceTable,
+  ColumnSecurityRuleTableInput: () => ColumnSecurityRuleTableInput,
+  ColumnSecurityRuleUpdate: () => ColumnSecurityRuleUpdate,
   CommitBranchRequest: () => CommitBranchRequest,
   CommitFileType: () => CommitFileType,
   CommitHistoryResponse: () => CommitHistoryResponse,
   CommitResponse: () => CommitResponse,
   CommiterType: () => CommiterType,
+  CommunicationChannelPreferencesResponse: () => CommunicationChannelPreferencesResponse,
+  ConnectionConfigurationResponse: () => ConnectionConfigurationResponse,
   ConnectionInput: () => ConnectionInput,
   ConnectionsApi: () => PromiseConnectionsApi,
+  ContextPayloadV2Input: () => ContextPayloadV2Input,
   Conversation: () => Conversation,
+  ConversationSettingsInput: () => ConversationSettingsInput,
   ConvertWorksheetToModelRequest: () => ConvertWorksheetToModelRequest,
   CopyObjectRequest: () => CopyObjectRequest,
   CreateConfigRequest: () => CreateConfigRequest,
@@ -89,6 +105,7 @@ __export(typescript_exports, {
   CreateCustomActionRequest: () => CreateCustomActionRequest,
   CreateCustomActionRequestActionDetails: () => CreateCustomActionRequestActionDetails,
   CreateCustomActionRequestDefaultActionConfig: () => CreateCustomActionRequestDefaultActionConfig,
+  CreateEmailCustomizationResponse: () => CreateEmailCustomizationResponse,
   CreateOrgRequest: () => CreateOrgRequest,
   CreateRoleRequest: () => CreateRoleRequest,
   CreateScheduleRequest: () => CreateScheduleRequest,
@@ -105,12 +122,11 @@ __export(typescript_exports, {
   CustomActionMetadataTypeInput: () => CustomActionMetadataTypeInput,
   DBTApi: () => PromiseDBTApi,
   DataApi: () => PromiseDataApi,
+  DataSource: () => DataSource,
+  DataSourceContextInput: () => DataSourceContextInput,
   DataWarehouseObjectInput: () => DataWarehouseObjectInput,
   DataWarehouseObjects: () => DataWarehouseObjects,
   Database: () => Database,
-  DbtConnectionRequest: () => DbtConnectionRequest,
-  DbtGenerateSyncTmlRequest: () => DbtGenerateSyncTmlRequest,
-  DbtGenerateTmlRequest: () => DbtGenerateTmlRequest,
   DbtSearchResponse: () => DbtSearchResponse,
   DeactivateUserRequest: () => DeactivateUserRequest,
   DefaultActionConfig: () => DefaultActionConfig,
@@ -123,10 +139,18 @@ __export(typescript_exports, {
   DeleteMetadataTypeInput: () => DeleteMetadataTypeInput,
   DeployCommitRequest: () => DeployCommitRequest,
   DeployResponse: () => DeployResponse,
+  EntityHeader: () => EntityHeader,
   ErrorResponse: () => ErrorResponse,
+  EurekaDataSourceSuggestionResponse: () => EurekaDataSourceSuggestionResponse,
   EurekaDecomposeQueryResponse: () => EurekaDecomposeQueryResponse,
+  EurekaGetNLInstructionsResponse: () => EurekaGetNLInstructionsResponse,
+  EurekaGetRelevantQuestionsResponse: () => EurekaGetRelevantQuestionsResponse,
   EurekaLLMDecomposeQueryResponse: () => EurekaLLMDecomposeQueryResponse,
   EurekaLLMSuggestedQuery: () => EurekaLLMSuggestedQuery,
+  EurekaRelevantQuestion: () => EurekaRelevantQuestion,
+  EurekaSetNLInstructionsResponse: () => EurekaSetNLInstructionsResponse,
+  EventChannelConfig: () => EventChannelConfig,
+  EventChannelConfigInput: () => EventChannelConfigInput,
   ExcludeMetadataListItemInput: () => ExcludeMetadataListItemInput,
   ExportAnswerReportRequest: () => ExportAnswerReportRequest,
   ExportAnswerReportRequestRegionalSettings: () => ExportAnswerReportRequestRegionalSettings,
@@ -138,6 +162,7 @@ __export(typescript_exports, {
   ExportMetadataTMLRequestExportOptions: () => ExportMetadataTMLRequestExportOptions,
   ExportMetadataTypeInput: () => ExportMetadataTypeInput,
   ExportOptions: () => ExportOptions,
+  ExternalTableInput: () => ExternalTableInput,
   FavoriteMetadataInput: () => FavoriteMetadataInput,
   FavoriteMetadataItem: () => FavoriteMetadataItem,
   FavoriteObjectOptionsInput: () => FavoriteObjectOptionsInput,
@@ -182,6 +207,7 @@ __export(typescript_exports, {
   JWTParameter: () => JWTParameter,
   JWTUserOptions: () => JWTUserOptions,
   JWTUserOptionsFull: () => JWTUserOptionsFull,
+  LBContextInput: () => LBContextInput,
   LiveboardContent: () => LiveboardContent,
   LiveboardDataResponse: () => LiveboardDataResponse,
   LiveboardOptions: () => LiveboardOptions,
@@ -191,6 +217,7 @@ __export(typescript_exports, {
   LoginRequest: () => LoginRequest,
   MetadataApi: () => PromiseMetadataApi,
   MetadataAssociationItem: () => MetadataAssociationItem,
+  MetadataContext: () => MetadataContext,
   MetadataInput: () => MetadataInput,
   MetadataListItemInput: () => MetadataListItemInput,
   MetadataObject: () => MetadataObject,
@@ -198,10 +225,17 @@ __export(typescript_exports, {
   MetadataSearchResponse: () => MetadataSearchResponse,
   MetadataSearchSortOptions: () => MetadataSearchSortOptions,
   ModelTableList: () => ModelTableList,
+  NLInstructionsInfo: () => NLInstructionsInfo,
+  NLInstructionsInfoInput: () => NLInstructionsInfoInput,
   ObjectIDAndName: () => ObjectIDAndName,
   Org: () => Org,
+  OrgChannelConfigInput: () => OrgChannelConfigInput,
+  OrgChannelConfigResponse: () => OrgChannelConfigResponse,
+  OrgDetails: () => OrgDetails,
   OrgInfo: () => OrgInfo,
+  OrgPreferenceSearchCriteriaInput: () => OrgPreferenceSearchCriteriaInput,
   OrgResponse: () => OrgResponse,
+  OrgType: () => OrgType,
   OrgsApi: () => PromiseOrgsApi,
   ParameterValues: () => ParameterValues,
   ParametersListItem: () => ParametersListItem,
@@ -216,6 +250,7 @@ __export(typescript_exports, {
   PrincipalsInput: () => PrincipalsInput,
   PrincipalsListItem: () => PrincipalsListItem,
   PrincipalsListItemInput: () => PrincipalsListItemInput,
+  PublishMetadataListItem: () => PublishMetadataListItem,
   QueryGetDecomposedQueryRequest: () => QueryGetDecomposedQueryRequest,
   QueryGetDecomposedQueryRequestNlsRequest: () => QueryGetDecomposedQueryRequestNlsRequest,
   RecipientDetails: () => RecipientDetails,
@@ -287,12 +322,14 @@ __export(typescript_exports, {
   SearchUsersRequestSortOptions: () => SearchUsersRequestSortOptions,
   SecurityApi: () => PromiseSecurityApi,
   SelfDecodingBody: () => SelfDecodingBody,
+  SendAgentMessageResponse: () => SendAgentMessageResponse,
   SendMessageRequest: () => SendMessageRequest,
   ServerConfiguration: () => ServerConfiguration,
   ShareMetadataRequest: () => ShareMetadataRequest,
   ShareMetadataTypeInput: () => ShareMetadataTypeInput,
   SharePermissionsInput: () => SharePermissionsInput,
   SingleAnswerRequest: () => SingleAnswerRequest,
+  SortOption: () => SortOption,
   SortOptionInput: () => SortOptionInput,
   SortOptions: () => SortOptions,
   SortingOptions: () => SortingOptions,
@@ -301,10 +338,12 @@ __export(typescript_exports, {
   SystemApi: () => PromiseSystemApi,
   SystemConfig: () => SystemConfig,
   SystemInfo: () => SystemInfo,
+  SystemOverrideInfo: () => SystemOverrideInfo,
   Table: () => Table,
   Tag: () => Tag,
   TagMetadataTypeInput: () => TagMetadataTypeInput,
   TagsApi: () => PromiseTagsApi,
+  TemplatePropertiesInputCreate: () => TemplatePropertiesInputCreate,
   ThoughtSpotRestApi: () => PromiseThoughtSpotRestApi,
   Token: () => Token,
   TokenAccessScopeObject: () => TokenAccessScopeObject,
@@ -318,7 +357,6 @@ __export(typescript_exports, {
   UpdateCustomActionRequest: () => UpdateCustomActionRequest,
   UpdateCustomActionRequestActionDetails: () => UpdateCustomActionRequestActionDetails,
   UpdateCustomActionRequestDefaultActionConfig: () => UpdateCustomActionRequestDefaultActionConfig,
-  UpdateDbtConnectionRequest: () => UpdateDbtConnectionRequest,
   UpdateMetadataHeaderRequest: () => UpdateMetadataHeaderRequest,
   UpdateMetadataObjIdRequest: () => UpdateMetadataObjIdRequest,
   UpdateObjIdInput: () => UpdateObjIdInput,
@@ -339,10 +377,36 @@ __export(typescript_exports, {
   UserInfo: () => UserInfo,
   UserObject: () => UserObject,
   UserParameterOptions: () => UserParameterOptions,
+  UserPrincipal: () => UserPrincipal,
   UsersApi: () => PromiseUsersApi,
   ValidateMergeRequest: () => ValidateMergeRequest,
   ValidateTokenRequest: () => ValidateTokenRequest,
+  ValueScopeInput: () => ValueScopeInput,
+  Variable: () => Variable,
+  VariableDetailInput: () => VariableDetailInput,
+  VariableUpdateAssignmentInput: () => VariableUpdateAssignmentInput,
+  VariableUpdateScopeInput: () => VariableUpdateScopeInput,
+  VariableValue: () => VariableValue,
+  VariableValues: () => VariableValues,
   VersionControlApi: () => PromiseVersionControlApi,
+  WebhookAuthApiKey: () => WebhookAuthApiKey,
+  WebhookAuthApiKeyInput: () => WebhookAuthApiKeyInput,
+  WebhookAuthBasicAuth: () => WebhookAuthBasicAuth,
+  WebhookAuthBasicAuthInput: () => WebhookAuthBasicAuthInput,
+  WebhookAuthOAuth2: () => WebhookAuthOAuth2,
+  WebhookAuthOAuth2Input: () => WebhookAuthOAuth2Input,
+  WebhookAuthentication: () => WebhookAuthentication,
+  WebhookAuthenticationInput: () => WebhookAuthenticationInput,
+  WebhookDeleteFailure: () => WebhookDeleteFailure,
+  WebhookDeleteResponse: () => WebhookDeleteResponse,
+  WebhookOrg: () => WebhookOrg,
+  WebhookPagination: () => WebhookPagination,
+  WebhookResponse: () => WebhookResponse,
+  WebhookSearchResponse: () => WebhookSearchResponse,
+  WebhookSignatureVerification: () => WebhookSignatureVerification,
+  WebhookSignatureVerificationInput: () => WebhookSignatureVerificationInput,
+  WebhookSortOptionsInput: () => WebhookSortOptionsInput,
+  WebhookUser: () => WebhookUser,
   configureAuthMethods: () => configureAuthMethods,
   createBasicConfig: () => createBasicConfig,
   createBearerAuthenticationConfig: () => createBearerAuthenticationConfig,
@@ -614,6 +678,31 @@ function configureAuthMethods(config) {
   }
   return authMethods;
 }
+
+// models/AIContext.ts
+var _AIContext = class _AIContext {
+  static getAttributeTypeMap() {
+    return _AIContext.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AIContext.discriminator = void 0;
+_AIContext.attributeTypeMap = [
+  {
+    "name": "instructions",
+    "baseName": "instructions",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "content",
+    "baseName": "content",
+    "type": "Array<string>",
+    "format": ""
+  }
+];
+var AIContext = _AIContext;
 
 // models/APIKey.ts
 var _APIKey = class _APIKey {
@@ -901,6 +990,25 @@ _ActivateUserRequest.attributeTypeMap = [
 ];
 var ActivateUserRequest = _ActivateUserRequest;
 
+// models/AgentConversation.ts
+var _AgentConversation = class _AgentConversation {
+  static getAttributeTypeMap() {
+    return _AgentConversation.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AgentConversation.discriminator = void 0;
+_AgentConversation.attributeTypeMap = [
+  {
+    "name": "conversation_id",
+    "baseName": "conversation_id",
+    "type": "string",
+    "format": ""
+  }
+];
+var AgentConversation = _AgentConversation;
+
 // models/AnswerContent.ts
 var _AnswerContent = class _AnswerContent {
   static getAttributeTypeMap() {
@@ -955,6 +1063,31 @@ _AnswerContent.attributeTypeMap = [
   }
 ];
 var AnswerContent = _AnswerContent;
+
+// models/AnswerContextInput.ts
+var _AnswerContextInput = class _AnswerContextInput {
+  static getAttributeTypeMap() {
+    return _AnswerContextInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AnswerContextInput.discriminator = void 0;
+_AnswerContextInput.attributeTypeMap = [
+  {
+    "name": "session_identifier",
+    "baseName": "session_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "generation_number",
+    "baseName": "generation_number",
+    "type": "number",
+    "format": "int32"
+  }
+];
+var AnswerContextInput = _AnswerContextInput;
 
 // models/AnswerDataResponse.ts
 var _AnswerDataResponse = class _AnswerDataResponse {
@@ -1361,6 +1494,61 @@ _CALLBACKInputMandatory.attributeTypeMap = [
 ];
 var CALLBACKInputMandatory = _CALLBACKInputMandatory;
 
+// models/CalendarResponse.ts
+var _CalendarResponse = class _CalendarResponse {
+  static getAttributeTypeMap() {
+    return _CalendarResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CalendarResponse.discriminator = void 0;
+_CalendarResponse.attributeTypeMap = [
+  {
+    "name": "calendar_name",
+    "baseName": "calendar_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "connection_name",
+    "baseName": "connection_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "data_warehouse_type",
+    "baseName": "data_warehouse_type",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "modification_time_in_millis",
+    "baseName": "modification_time_in_millis",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "author_name",
+    "baseName": "author_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "connection_id",
+    "baseName": "connection_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "calendar_id",
+    "baseName": "calendar_id",
+    "type": "string",
+    "format": ""
+  }
+];
+var CalendarResponse = _CalendarResponse;
+
 // models/ChangeUserPasswordRequest.ts
 var _ChangeUserPasswordRequest = class _ChangeUserPasswordRequest {
   static getAttributeTypeMap() {
@@ -1440,6 +1628,224 @@ _Column.attributeTypeMap = [
   }
 ];
 var Column = _Column;
+
+// models/ColumnSecurityRule.ts
+var _ColumnSecurityRule = class _ColumnSecurityRule {
+  static getAttributeTypeMap() {
+    return _ColumnSecurityRule.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ColumnSecurityRule.discriminator = void 0;
+_ColumnSecurityRule.attributeTypeMap = [
+  {
+    "name": "column",
+    "baseName": "column",
+    "type": "ColumnSecurityRuleColumn",
+    "format": ""
+  },
+  {
+    "name": "groups",
+    "baseName": "groups",
+    "type": "Array<ColumnSecurityRuleGroup>",
+    "format": ""
+  },
+  {
+    "name": "source_table_details",
+    "baseName": "source_table_details",
+    "type": "ColumnSecurityRuleSourceTable",
+    "format": ""
+  }
+];
+var ColumnSecurityRule = _ColumnSecurityRule;
+
+// models/ColumnSecurityRuleColumn.ts
+var _ColumnSecurityRuleColumn = class _ColumnSecurityRuleColumn {
+  static getAttributeTypeMap() {
+    return _ColumnSecurityRuleColumn.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ColumnSecurityRuleColumn.discriminator = void 0;
+_ColumnSecurityRuleColumn.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  }
+];
+var ColumnSecurityRuleColumn = _ColumnSecurityRuleColumn;
+
+// models/ColumnSecurityRuleGroup.ts
+var _ColumnSecurityRuleGroup = class _ColumnSecurityRuleGroup {
+  static getAttributeTypeMap() {
+    return _ColumnSecurityRuleGroup.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ColumnSecurityRuleGroup.discriminator = void 0;
+_ColumnSecurityRuleGroup.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  }
+];
+var ColumnSecurityRuleGroup = _ColumnSecurityRuleGroup;
+
+// models/ColumnSecurityRuleGroupOperation.ts
+var _ColumnSecurityRuleGroupOperation = class _ColumnSecurityRuleGroupOperation {
+  static getAttributeTypeMap() {
+    return _ColumnSecurityRuleGroupOperation.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ColumnSecurityRuleGroupOperation.discriminator = void 0;
+_ColumnSecurityRuleGroupOperation.attributeTypeMap = [
+  {
+    "name": "operation",
+    "baseName": "operation",
+    "type": "ColumnSecurityRuleGroupOperationOperationEnum",
+    "format": ""
+  },
+  {
+    "name": "group_identifiers",
+    "baseName": "group_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  }
+];
+var ColumnSecurityRuleGroupOperation = _ColumnSecurityRuleGroupOperation;
+
+// models/ColumnSecurityRuleResponse.ts
+var _ColumnSecurityRuleResponse = class _ColumnSecurityRuleResponse {
+  static getAttributeTypeMap() {
+    return _ColumnSecurityRuleResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ColumnSecurityRuleResponse.discriminator = void 0;
+_ColumnSecurityRuleResponse.attributeTypeMap = [
+  {
+    "name": "table_guid",
+    "baseName": "table_guid",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "obj_id",
+    "baseName": "obj_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "column_security_rules",
+    "baseName": "column_security_rules",
+    "type": "Array<ColumnSecurityRule>",
+    "format": ""
+  }
+];
+var ColumnSecurityRuleResponse = _ColumnSecurityRuleResponse;
+
+// models/ColumnSecurityRuleSourceTable.ts
+var _ColumnSecurityRuleSourceTable = class _ColumnSecurityRuleSourceTable {
+  static getAttributeTypeMap() {
+    return _ColumnSecurityRuleSourceTable.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ColumnSecurityRuleSourceTable.discriminator = void 0;
+_ColumnSecurityRuleSourceTable.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  }
+];
+var ColumnSecurityRuleSourceTable = _ColumnSecurityRuleSourceTable;
+
+// models/ColumnSecurityRuleTableInput.ts
+var _ColumnSecurityRuleTableInput = class _ColumnSecurityRuleTableInput {
+  static getAttributeTypeMap() {
+    return _ColumnSecurityRuleTableInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ColumnSecurityRuleTableInput.discriminator = void 0;
+_ColumnSecurityRuleTableInput.attributeTypeMap = [
+  {
+    "name": "identifier",
+    "baseName": "identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "obj_identifier",
+    "baseName": "obj_identifier",
+    "type": "string",
+    "format": ""
+  }
+];
+var ColumnSecurityRuleTableInput = _ColumnSecurityRuleTableInput;
+
+// models/ColumnSecurityRuleUpdate.ts
+var _ColumnSecurityRuleUpdate = class _ColumnSecurityRuleUpdate {
+  static getAttributeTypeMap() {
+    return _ColumnSecurityRuleUpdate.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ColumnSecurityRuleUpdate.discriminator = void 0;
+_ColumnSecurityRuleUpdate.attributeTypeMap = [
+  {
+    "name": "column_identifier",
+    "baseName": "column_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "is_unsecured",
+    "baseName": "is_unsecured",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "group_access",
+    "baseName": "group_access",
+    "type": "Array<ColumnSecurityRuleGroupOperation>",
+    "format": ""
+  }
+];
+var ColumnSecurityRuleUpdate = _ColumnSecurityRuleUpdate;
 
 // models/CommitBranchRequest.ts
 var _CommitBranchRequest = class _CommitBranchRequest {
@@ -1638,6 +2044,98 @@ _CommiterType.attributeTypeMap = [
 ];
 var CommiterType = _CommiterType;
 
+// models/CommunicationChannelPreferencesResponse.ts
+var _CommunicationChannelPreferencesResponse = class _CommunicationChannelPreferencesResponse {
+  static getAttributeTypeMap() {
+    return _CommunicationChannelPreferencesResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CommunicationChannelPreferencesResponse.discriminator = void 0;
+_CommunicationChannelPreferencesResponse.attributeTypeMap = [
+  {
+    "name": "cluster_preferences",
+    "baseName": "cluster_preferences",
+    "type": "Array<EventChannelConfig>",
+    "format": ""
+  },
+  {
+    "name": "org_preferences",
+    "baseName": "org_preferences",
+    "type": "Array<OrgChannelConfigResponse>",
+    "format": ""
+  }
+];
+var CommunicationChannelPreferencesResponse = _CommunicationChannelPreferencesResponse;
+
+// models/ConnectionConfigurationResponse.ts
+var _ConnectionConfigurationResponse = class _ConnectionConfigurationResponse {
+  static getAttributeTypeMap() {
+    return _ConnectionConfigurationResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ConnectionConfigurationResponse.discriminator = void 0;
+_ConnectionConfigurationResponse.attributeTypeMap = [
+  {
+    "name": "configuration_identifier",
+    "baseName": "configuration_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "description",
+    "baseName": "description",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "configuration",
+    "baseName": "configuration",
+    "type": "any",
+    "format": ""
+  },
+  {
+    "name": "policy_principals",
+    "baseName": "policy_principals",
+    "type": "Array<UserPrincipal>",
+    "format": ""
+  },
+  {
+    "name": "policy_processes",
+    "baseName": "policy_processes",
+    "type": "Array<ConnectionConfigurationResponsePolicyProcessesEnum>",
+    "format": ""
+  },
+  {
+    "name": "disabled",
+    "baseName": "disabled",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "data_warehouse_type",
+    "baseName": "data_warehouse_type",
+    "type": "ConnectionConfigurationResponseDataWarehouseTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "policy_type",
+    "baseName": "policy_type",
+    "type": "ConnectionConfigurationResponsePolicyTypeEnum",
+    "format": ""
+  }
+];
+var ConnectionConfigurationResponse = _ConnectionConfigurationResponse;
+
 // models/ConnectionInput.ts
 var _ConnectionInput = class _ConnectionInput {
   static getAttributeTypeMap() {
@@ -1669,6 +2167,43 @@ _ConnectionInput.attributeTypeMap = [
 ];
 var ConnectionInput = _ConnectionInput;
 
+// models/ContextPayloadV2Input.ts
+var _ContextPayloadV2Input = class _ContextPayloadV2Input {
+  static getAttributeTypeMap() {
+    return _ContextPayloadV2Input.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ContextPayloadV2Input.discriminator = void 0;
+_ContextPayloadV2Input.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "ContextPayloadV2InputTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "answer_context",
+    "baseName": "answer_context",
+    "type": "AnswerContextInput",
+    "format": ""
+  },
+  {
+    "name": "liveboard_context",
+    "baseName": "liveboard_context",
+    "type": "LBContextInput",
+    "format": ""
+  },
+  {
+    "name": "data_source_context",
+    "baseName": "data_source_context",
+    "type": "DataSourceContextInput",
+    "format": ""
+  }
+];
+var ContextPayloadV2Input = _ContextPayloadV2Input;
+
 // models/Conversation.ts
 var _Conversation = class _Conversation {
   static getAttributeTypeMap() {
@@ -1687,6 +2222,37 @@ _Conversation.attributeTypeMap = [
   }
 ];
 var Conversation = _Conversation;
+
+// models/ConversationSettingsInput.ts
+var _ConversationSettingsInput = class _ConversationSettingsInput {
+  static getAttributeTypeMap() {
+    return _ConversationSettingsInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ConversationSettingsInput.discriminator = void 0;
+_ConversationSettingsInput.attributeTypeMap = [
+  {
+    "name": "enable_contextual_change_analysis",
+    "baseName": "enable_contextual_change_analysis",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "enable_natural_language_answer_generation",
+    "baseName": "enable_natural_language_answer_generation",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "enable_reasoning",
+    "baseName": "enable_reasoning",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var ConversationSettingsInput = _ConversationSettingsInput;
 
 // models/ConvertWorksheetToModelRequest.ts
 var _ConvertWorksheetToModelRequest = class _ConvertWorksheetToModelRequest {
@@ -2015,6 +2581,43 @@ _CreateCustomActionRequestDefaultActionConfig.attributeTypeMap = [
 ];
 var CreateCustomActionRequestDefaultActionConfig = _CreateCustomActionRequestDefaultActionConfig;
 
+// models/CreateEmailCustomizationResponse.ts
+var _CreateEmailCustomizationResponse = class _CreateEmailCustomizationResponse {
+  static getAttributeTypeMap() {
+    return _CreateEmailCustomizationResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CreateEmailCustomizationResponse.discriminator = void 0;
+_CreateEmailCustomizationResponse.attributeTypeMap = [
+  {
+    "name": "tenant_id",
+    "baseName": "tenant_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "org",
+    "baseName": "org",
+    "type": "OrgType",
+    "format": ""
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "template_properties",
+    "baseName": "template_properties",
+    "type": "any",
+    "format": ""
+  }
+];
+var CreateEmailCustomizationResponse = _CreateEmailCustomizationResponse;
+
 // models/CreateOrgRequest.ts
 var _CreateOrgRequest = class _CreateOrgRequest {
   static getAttributeTypeMap() {
@@ -2145,6 +2748,12 @@ _CreateScheduleRequest.attributeTypeMap = [
     "name": "recipient_details",
     "baseName": "recipient_details",
     "type": "CreateScheduleRequestRecipientDetails",
+    "format": ""
+  },
+  {
+    "name": "personalised_view_id",
+    "baseName": "personalised_view_id",
+    "type": "string",
     "format": ""
   }
 ];
@@ -2628,6 +3237,56 @@ _CustomActionMetadataTypeInput.attributeTypeMap = [
 ];
 var CustomActionMetadataTypeInput = _CustomActionMetadataTypeInput;
 
+// models/DataSource.ts
+var _DataSource = class _DataSource {
+  static getAttributeTypeMap() {
+    return _DataSource.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_DataSource.discriminator = void 0;
+_DataSource.attributeTypeMap = [
+  {
+    "name": "confidence",
+    "baseName": "confidence",
+    "type": "number",
+    "format": "float"
+  },
+  {
+    "name": "details",
+    "baseName": "details",
+    "type": "EntityHeader",
+    "format": ""
+  },
+  {
+    "name": "reasoning",
+    "baseName": "reasoning",
+    "type": "string",
+    "format": ""
+  }
+];
+var DataSource = _DataSource;
+
+// models/DataSourceContextInput.ts
+var _DataSourceContextInput = class _DataSourceContextInput {
+  static getAttributeTypeMap() {
+    return _DataSourceContextInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_DataSourceContextInput.discriminator = void 0;
+_DataSourceContextInput.attributeTypeMap = [
+  {
+    "name": "guid",
+    "baseName": "guid",
+    "type": "string",
+    "format": ""
+  }
+];
+var DataSourceContextInput = _DataSourceContextInput;
+
 // models/DataWarehouseObjectInput.ts
 var _DataWarehouseObjectInput = class _DataWarehouseObjectInput {
   static getAttributeTypeMap() {
@@ -2714,147 +3373,6 @@ _Database.attributeTypeMap = [
   }
 ];
 var Database = _Database;
-
-// models/DbtConnectionRequest.ts
-var _DbtConnectionRequest = class _DbtConnectionRequest {
-  static getAttributeTypeMap() {
-    return _DbtConnectionRequest.attributeTypeMap;
-  }
-  constructor() {
-  }
-};
-_DbtConnectionRequest.discriminator = void 0;
-_DbtConnectionRequest.attributeTypeMap = [
-  {
-    "name": "connection_name",
-    "baseName": "connection_name",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "database_name",
-    "baseName": "database_name",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "import_type",
-    "baseName": "import_type",
-    "type": "DbtConnectionRequestImportTypeEnum",
-    "format": ""
-  },
-  {
-    "name": "access_token",
-    "baseName": "access_token",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "dbt_url",
-    "baseName": "dbt_url",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "account_id",
-    "baseName": "account_id",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "project_id",
-    "baseName": "project_id",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "dbt_env_id",
-    "baseName": "dbt_env_id",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "project_name",
-    "baseName": "project_name",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "file_content",
-    "baseName": "file_content",
-    "type": "HttpFile",
-    "format": "binary"
-  }
-];
-var DbtConnectionRequest = _DbtConnectionRequest;
-
-// models/DbtGenerateSyncTmlRequest.ts
-var _DbtGenerateSyncTmlRequest = class _DbtGenerateSyncTmlRequest {
-  static getAttributeTypeMap() {
-    return _DbtGenerateSyncTmlRequest.attributeTypeMap;
-  }
-  constructor() {
-  }
-};
-_DbtGenerateSyncTmlRequest.discriminator = void 0;
-_DbtGenerateSyncTmlRequest.attributeTypeMap = [
-  {
-    "name": "dbt_connection_identifier",
-    "baseName": "dbt_connection_identifier",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "file_content",
-    "baseName": "file_content",
-    "type": "HttpFile",
-    "format": "binary"
-  }
-];
-var DbtGenerateSyncTmlRequest = _DbtGenerateSyncTmlRequest;
-
-// models/DbtGenerateTmlRequest.ts
-var _DbtGenerateTmlRequest = class _DbtGenerateTmlRequest {
-  static getAttributeTypeMap() {
-    return _DbtGenerateTmlRequest.attributeTypeMap;
-  }
-  constructor() {
-  }
-};
-_DbtGenerateTmlRequest.discriminator = void 0;
-_DbtGenerateTmlRequest.attributeTypeMap = [
-  {
-    "name": "dbt_connection_identifier",
-    "baseName": "dbt_connection_identifier",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "model_tables",
-    "baseName": "model_tables",
-    "type": "Array<ModelTableList>",
-    "format": ""
-  },
-  {
-    "name": "import_worksheets",
-    "baseName": "import_worksheets",
-    "type": "DbtGenerateTmlRequestImportWorksheetsEnum",
-    "format": ""
-  },
-  {
-    "name": "worksheets",
-    "baseName": "worksheets",
-    "type": "Array<string>",
-    "format": ""
-  },
-  {
-    "name": "file_content",
-    "baseName": "file_content",
-    "type": "HttpFile",
-    "format": "binary"
-  }
-];
-var DbtGenerateTmlRequest = _DbtGenerateTmlRequest;
 
 // models/DbtSearchResponse.ts
 var _DbtSearchResponse = class _DbtSearchResponse {
@@ -3180,6 +3698,37 @@ _DeployResponse.attributeTypeMap = [
 ];
 var DeployResponse = _DeployResponse;
 
+// models/EntityHeader.ts
+var _EntityHeader = class _EntityHeader {
+  static getAttributeTypeMap() {
+    return _EntityHeader.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_EntityHeader.discriminator = void 0;
+_EntityHeader.attributeTypeMap = [
+  {
+    "name": "description",
+    "baseName": "description",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "data_source_name",
+    "baseName": "data_source_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "data_source_identifier",
+    "baseName": "data_source_identifier",
+    "type": "string",
+    "format": ""
+  }
+];
+var EntityHeader = _EntityHeader;
+
 // models/ErrorResponse.ts
 var _ErrorResponse = class _ErrorResponse {
   static getAttributeTypeMap() {
@@ -3199,6 +3748,25 @@ _ErrorResponse.attributeTypeMap = [
 ];
 var ErrorResponse = _ErrorResponse;
 
+// models/EurekaDataSourceSuggestionResponse.ts
+var _EurekaDataSourceSuggestionResponse = class _EurekaDataSourceSuggestionResponse {
+  static getAttributeTypeMap() {
+    return _EurekaDataSourceSuggestionResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_EurekaDataSourceSuggestionResponse.discriminator = void 0;
+_EurekaDataSourceSuggestionResponse.attributeTypeMap = [
+  {
+    "name": "data_sources",
+    "baseName": "data_sources",
+    "type": "Array<DataSource>",
+    "format": ""
+  }
+];
+var EurekaDataSourceSuggestionResponse = _EurekaDataSourceSuggestionResponse;
+
 // models/EurekaDecomposeQueryResponse.ts
 var _EurekaDecomposeQueryResponse = class _EurekaDecomposeQueryResponse {
   static getAttributeTypeMap() {
@@ -3217,6 +3785,44 @@ _EurekaDecomposeQueryResponse.attributeTypeMap = [
   }
 ];
 var EurekaDecomposeQueryResponse = _EurekaDecomposeQueryResponse;
+
+// models/EurekaGetNLInstructionsResponse.ts
+var _EurekaGetNLInstructionsResponse = class _EurekaGetNLInstructionsResponse {
+  static getAttributeTypeMap() {
+    return _EurekaGetNLInstructionsResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_EurekaGetNLInstructionsResponse.discriminator = void 0;
+_EurekaGetNLInstructionsResponse.attributeTypeMap = [
+  {
+    "name": "nl_instructions_info",
+    "baseName": "nl_instructions_info",
+    "type": "Array<NLInstructionsInfo>",
+    "format": ""
+  }
+];
+var EurekaGetNLInstructionsResponse = _EurekaGetNLInstructionsResponse;
+
+// models/EurekaGetRelevantQuestionsResponse.ts
+var _EurekaGetRelevantQuestionsResponse = class _EurekaGetRelevantQuestionsResponse {
+  static getAttributeTypeMap() {
+    return _EurekaGetRelevantQuestionsResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_EurekaGetRelevantQuestionsResponse.discriminator = void 0;
+_EurekaGetRelevantQuestionsResponse.attributeTypeMap = [
+  {
+    "name": "relevant_questions",
+    "baseName": "relevant_questions",
+    "type": "Array<EurekaRelevantQuestion>",
+    "format": ""
+  }
+];
+var EurekaGetRelevantQuestionsResponse = _EurekaGetRelevantQuestionsResponse;
 
 // models/EurekaLLMDecomposeQueryResponse.ts
 var _EurekaLLMDecomposeQueryResponse = class _EurekaLLMDecomposeQueryResponse {
@@ -3267,6 +3873,106 @@ _EurekaLLMSuggestedQuery.attributeTypeMap = [
   }
 ];
 var EurekaLLMSuggestedQuery = _EurekaLLMSuggestedQuery;
+
+// models/EurekaRelevantQuestion.ts
+var _EurekaRelevantQuestion = class _EurekaRelevantQuestion {
+  static getAttributeTypeMap() {
+    return _EurekaRelevantQuestion.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_EurekaRelevantQuestion.discriminator = void 0;
+_EurekaRelevantQuestion.attributeTypeMap = [
+  {
+    "name": "query",
+    "baseName": "query",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "data_source_identifier",
+    "baseName": "data_source_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "data_source_name",
+    "baseName": "data_source_name",
+    "type": "string",
+    "format": ""
+  }
+];
+var EurekaRelevantQuestion = _EurekaRelevantQuestion;
+
+// models/EurekaSetNLInstructionsResponse.ts
+var _EurekaSetNLInstructionsResponse = class _EurekaSetNLInstructionsResponse {
+  static getAttributeTypeMap() {
+    return _EurekaSetNLInstructionsResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_EurekaSetNLInstructionsResponse.discriminator = void 0;
+_EurekaSetNLInstructionsResponse.attributeTypeMap = [
+  {
+    "name": "success",
+    "baseName": "success",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var EurekaSetNLInstructionsResponse = _EurekaSetNLInstructionsResponse;
+
+// models/EventChannelConfig.ts
+var _EventChannelConfig = class _EventChannelConfig {
+  static getAttributeTypeMap() {
+    return _EventChannelConfig.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_EventChannelConfig.discriminator = void 0;
+_EventChannelConfig.attributeTypeMap = [
+  {
+    "name": "event_type",
+    "baseName": "event_type",
+    "type": "EventChannelConfigEventTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "channels",
+    "baseName": "channels",
+    "type": "Array<EventChannelConfigChannelsEnum>",
+    "format": ""
+  }
+];
+var EventChannelConfig = _EventChannelConfig;
+
+// models/EventChannelConfigInput.ts
+var _EventChannelConfigInput = class _EventChannelConfigInput {
+  static getAttributeTypeMap() {
+    return _EventChannelConfigInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_EventChannelConfigInput.discriminator = void 0;
+_EventChannelConfigInput.attributeTypeMap = [
+  {
+    "name": "event_type",
+    "baseName": "event_type",
+    "type": "EventChannelConfigInputEventTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "channels",
+    "baseName": "channels",
+    "type": "Array<EventChannelConfigInputChannelsEnum>",
+    "format": ""
+  }
+];
+var EventChannelConfigInput = _EventChannelConfigInput;
 
 // models/ExcludeMetadataListItemInput.ts
 var _ExcludeMetadataListItemInput = class _ExcludeMetadataListItemInput {
@@ -3404,6 +4110,18 @@ _ExportLiveboardReportRequest.attributeTypeMap = [
   {
     "name": "metadata_identifier",
     "baseName": "metadata_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "tab_identifiers",
+    "baseName": "tab_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "personalised_view_identifier",
+    "baseName": "personalised_view_identifier",
     "type": "string",
     "format": ""
   },
@@ -3551,6 +4269,24 @@ _ExportLiveboardReportRequestPngOptions.attributeTypeMap = [
     "name": "personalised_view_id",
     "baseName": "personalised_view_id",
     "type": "string",
+    "format": ""
+  },
+  {
+    "name": "image_resolution",
+    "baseName": "image_resolution",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "image_scale",
+    "baseName": "image_scale",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "include_header",
+    "baseName": "include_header",
+    "type": "boolean",
     "format": ""
   }
 ];
@@ -3705,6 +4441,18 @@ _ExportMetadataTMLRequestExportOptions.attributeTypeMap = [
     "baseName": "export_with_associated_feedbacks",
     "type": "boolean",
     "format": ""
+  },
+  {
+    "name": "export_column_security_rules",
+    "baseName": "export_column_security_rules",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "export_with_column_aliases",
+    "baseName": "export_with_column_aliases",
+    "type": "boolean",
+    "format": ""
   }
 ];
 var ExportMetadataTMLRequestExportOptions = _ExportMetadataTMLRequestExportOptions;
@@ -3730,6 +4478,18 @@ _ExportMetadataTypeInput.attributeTypeMap = [
     "baseName": "identifier",
     "type": "string",
     "format": ""
+  },
+  {
+    "name": "session_identifier",
+    "baseName": "session_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "generation_number",
+    "baseName": "generation_number",
+    "type": "number",
+    "format": "int32"
   }
 ];
 var ExportMetadataTypeInput = _ExportMetadataTypeInput;
@@ -3767,9 +4527,58 @@ _ExportOptions.attributeTypeMap = [
     "baseName": "export_with_associated_feedbacks",
     "type": "boolean",
     "format": ""
+  },
+  {
+    "name": "export_column_security_rules",
+    "baseName": "export_column_security_rules",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "export_with_column_aliases",
+    "baseName": "export_with_column_aliases",
+    "type": "boolean",
+    "format": ""
   }
 ];
 var ExportOptions = _ExportOptions;
+
+// models/ExternalTableInput.ts
+var _ExternalTableInput = class _ExternalTableInput {
+  static getAttributeTypeMap() {
+    return _ExternalTableInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ExternalTableInput.discriminator = void 0;
+_ExternalTableInput.attributeTypeMap = [
+  {
+    "name": "connection_identifier",
+    "baseName": "connection_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "database_name",
+    "baseName": "database_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "schema_name",
+    "baseName": "schema_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "table_name",
+    "baseName": "table_name",
+    "type": "string",
+    "format": ""
+  }
+];
+var ExternalTableInput = _ExternalTableInput;
 
 // models/FavoriteMetadataInput.ts
 var _FavoriteMetadataInput = class _FavoriteMetadataInput {
@@ -4412,6 +5221,12 @@ _GetCustomAccessTokenRequest.attributeTypeMap = [
     "format": ""
   },
   {
+    "name": "variable_values",
+    "baseName": "variable_values",
+    "type": "Array<VariableValues>",
+    "format": ""
+  },
+  {
     "name": "objects",
     "baseName": "objects",
     "type": "Array<TokenAccessScopeObject>",
@@ -4868,6 +5683,12 @@ _ImportEPackAsyncTaskStatus.attributeTypeMap = [
     "baseName": "modified_at",
     "type": "number",
     "format": "float"
+  },
+  {
+    "name": "author_display_name",
+    "baseName": "author_display_name",
+    "type": "string",
+    "format": ""
   }
 ];
 var ImportEPackAsyncTaskStatus = _ImportEPackAsyncTaskStatus;
@@ -5278,7 +6099,7 @@ _JWTMetadataObject.attributeTypeMap = [
   {
     "name": "type",
     "baseName": "type",
-    "type": "string",
+    "type": "JWTMetadataObjectTypeEnum",
     "format": ""
   }
 ];
@@ -5358,6 +6179,31 @@ _JWTUserOptionsFull.attributeTypeMap = [
   }
 ];
 var JWTUserOptionsFull = _JWTUserOptionsFull;
+
+// models/LBContextInput.ts
+var _LBContextInput = class _LBContextInput {
+  static getAttributeTypeMap() {
+    return _LBContextInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_LBContextInput.discriminator = void 0;
+_LBContextInput.attributeTypeMap = [
+  {
+    "name": "liveboard_identifier",
+    "baseName": "liveboard_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "visualization_identifier",
+    "baseName": "visualization_identifier",
+    "type": "string",
+    "format": ""
+  }
+];
+var LBContextInput = _LBContextInput;
 
 // models/LiveboardContent.ts
 var _LiveboardContent = class _LiveboardContent {
@@ -5588,6 +6434,43 @@ _MetadataAssociationItem.attributeTypeMap = [
 ];
 var MetadataAssociationItem = _MetadataAssociationItem;
 
+// models/MetadataContext.ts
+var _MetadataContext = class _MetadataContext {
+  static getAttributeTypeMap() {
+    return _MetadataContext.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_MetadataContext.discriminator = void 0;
+_MetadataContext.attributeTypeMap = [
+  {
+    "name": "data_source_identifiers",
+    "baseName": "data_source_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "answer_identifiers",
+    "baseName": "answer_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "conversation_identifier",
+    "baseName": "conversation_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "liveboard_identifiers",
+    "baseName": "liveboard_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  }
+];
+var MetadataContext = _MetadataContext;
+
 // models/MetadataInput.ts
 var _MetadataInput = class _MetadataInput {
   static getAttributeTypeMap() {
@@ -5645,6 +6528,12 @@ _MetadataListItemInput.attributeTypeMap = [
     "name": "type",
     "baseName": "type",
     "type": "MetadataListItemInputTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "subtypes",
+    "baseName": "subtypes",
+    "type": "Array<MetadataListItemInputSubtypesEnum>",
     "format": ""
   }
 ];
@@ -5835,6 +6724,56 @@ _ModelTableList.attributeTypeMap = [
 ];
 var ModelTableList = _ModelTableList;
 
+// models/NLInstructionsInfo.ts
+var _NLInstructionsInfo = class _NLInstructionsInfo {
+  static getAttributeTypeMap() {
+    return _NLInstructionsInfo.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_NLInstructionsInfo.discriminator = void 0;
+_NLInstructionsInfo.attributeTypeMap = [
+  {
+    "name": "instructions",
+    "baseName": "instructions",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "scope",
+    "baseName": "scope",
+    "type": "NLInstructionsInfoScopeEnum",
+    "format": ""
+  }
+];
+var NLInstructionsInfo = _NLInstructionsInfo;
+
+// models/NLInstructionsInfoInput.ts
+var _NLInstructionsInfoInput = class _NLInstructionsInfoInput {
+  static getAttributeTypeMap() {
+    return _NLInstructionsInfoInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_NLInstructionsInfoInput.discriminator = void 0;
+_NLInstructionsInfoInput.attributeTypeMap = [
+  {
+    "name": "instructions",
+    "baseName": "instructions",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "scope",
+    "baseName": "scope",
+    "type": "NLInstructionsInfoInputScopeEnum",
+    "format": ""
+  }
+];
+var NLInstructionsInfoInput = _NLInstructionsInfoInput;
+
 // models/ObjectIDAndName.ts
 var _ObjectIDAndName = class _ObjectIDAndName {
   static getAttributeTypeMap() {
@@ -5885,6 +6824,93 @@ _Org.attributeTypeMap = [
 ];
 var Org = _Org;
 
+// models/OrgChannelConfigInput.ts
+var _OrgChannelConfigInput = class _OrgChannelConfigInput {
+  static getAttributeTypeMap() {
+    return _OrgChannelConfigInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_OrgChannelConfigInput.discriminator = void 0;
+_OrgChannelConfigInput.attributeTypeMap = [
+  {
+    "name": "org_identifier",
+    "baseName": "org_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "operation",
+    "baseName": "operation",
+    "type": "OrgChannelConfigInputOperationEnum",
+    "format": ""
+  },
+  {
+    "name": "preferences",
+    "baseName": "preferences",
+    "type": "Array<EventChannelConfigInput>",
+    "format": ""
+  },
+  {
+    "name": "reset_events",
+    "baseName": "reset_events",
+    "type": "Array<OrgChannelConfigInputResetEventsEnum>",
+    "format": ""
+  }
+];
+var OrgChannelConfigInput = _OrgChannelConfigInput;
+
+// models/OrgChannelConfigResponse.ts
+var _OrgChannelConfigResponse = class _OrgChannelConfigResponse {
+  static getAttributeTypeMap() {
+    return _OrgChannelConfigResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_OrgChannelConfigResponse.discriminator = void 0;
+_OrgChannelConfigResponse.attributeTypeMap = [
+  {
+    "name": "org",
+    "baseName": "org",
+    "type": "OrgDetails",
+    "format": ""
+  },
+  {
+    "name": "preferences",
+    "baseName": "preferences",
+    "type": "Array<EventChannelConfig>",
+    "format": ""
+  }
+];
+var OrgChannelConfigResponse = _OrgChannelConfigResponse;
+
+// models/OrgDetails.ts
+var _OrgDetails = class _OrgDetails {
+  static getAttributeTypeMap() {
+    return _OrgDetails.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_OrgDetails.discriminator = void 0;
+_OrgDetails.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  }
+];
+var OrgDetails = _OrgDetails;
+
 // models/OrgInfo.ts
 var _OrgInfo = class _OrgInfo {
   static getAttributeTypeMap() {
@@ -5909,6 +6935,31 @@ _OrgInfo.attributeTypeMap = [
   }
 ];
 var OrgInfo = _OrgInfo;
+
+// models/OrgPreferenceSearchCriteriaInput.ts
+var _OrgPreferenceSearchCriteriaInput = class _OrgPreferenceSearchCriteriaInput {
+  static getAttributeTypeMap() {
+    return _OrgPreferenceSearchCriteriaInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_OrgPreferenceSearchCriteriaInput.discriminator = void 0;
+_OrgPreferenceSearchCriteriaInput.attributeTypeMap = [
+  {
+    "name": "org_identifier",
+    "baseName": "org_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "event_types",
+    "baseName": "event_types",
+    "type": "Array<OrgPreferenceSearchCriteriaInputEventTypesEnum>",
+    "format": ""
+  }
+];
+var OrgPreferenceSearchCriteriaInput = _OrgPreferenceSearchCriteriaInput;
 
 // models/OrgResponse.ts
 var _OrgResponse = class _OrgResponse {
@@ -5952,6 +7003,31 @@ _OrgResponse.attributeTypeMap = [
   }
 ];
 var OrgResponse = _OrgResponse;
+
+// models/OrgType.ts
+var _OrgType = class _OrgType {
+  static getAttributeTypeMap() {
+    return _OrgType.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_OrgType.discriminator = void 0;
+_OrgType.attributeTypeMap = [
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "number",
+    "format": "int32"
+  }
+];
+var OrgType = _OrgType;
 
 // models/ParameterValues.ts
 var _ParameterValues = class _ParameterValues {
@@ -6265,6 +7341,24 @@ _PngOptionsInput.attributeTypeMap = [
     "baseName": "personalised_view_id",
     "type": "string",
     "format": ""
+  },
+  {
+    "name": "image_resolution",
+    "baseName": "image_resolution",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "image_scale",
+    "baseName": "image_scale",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "include_header",
+    "baseName": "include_header",
+    "type": "boolean",
+    "format": ""
   }
 ];
 var PngOptionsInput = _PngOptionsInput;
@@ -6343,6 +7437,31 @@ _PrincipalsListItemInput.attributeTypeMap = [
   }
 ];
 var PrincipalsListItemInput = _PrincipalsListItemInput;
+
+// models/PublishMetadataListItem.ts
+var _PublishMetadataListItem = class _PublishMetadataListItem {
+  static getAttributeTypeMap() {
+    return _PublishMetadataListItem.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_PublishMetadataListItem.discriminator = void 0;
+_PublishMetadataListItem.attributeTypeMap = [
+  {
+    "name": "identifier",
+    "baseName": "identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "PublishMetadataListItemTypeEnum",
+    "format": ""
+  }
+];
+var PublishMetadataListItem = _PublishMetadataListItem;
 
 // models/QueryGetDecomposedQueryRequest.ts
 var _QueryGetDecomposedQueryRequest = class _QueryGetDecomposedQueryRequest {
@@ -6981,6 +8100,12 @@ _ResponseSchedule.attributeTypeMap = [
     "name": "history_runs",
     "baseName": "history_runs",
     "type": "Array<ResponseScheduleRun>",
+    "format": ""
+  },
+  {
+    "name": "personalised_view_id",
+    "baseName": "personalised_view_id",
+    "type": "string",
     "format": ""
   }
 ];
@@ -7955,6 +9080,12 @@ _SearchConnectionRequest.attributeTypeMap = [
     "baseName": "authentication_type",
     "type": "SearchConnectionRequestAuthenticationTypeEnum",
     "format": ""
+  },
+  {
+    "name": "show_resolved_parameters",
+    "baseName": "show_resolved_parameters",
+    "type": "boolean",
+    "format": ""
   }
 ];
 var SearchConnectionRequest = _SearchConnectionRequest;
@@ -8326,6 +9457,24 @@ _SearchMetadataRequest.attributeTypeMap = [
   {
     "name": "include_discoverable_objects",
     "baseName": "include_discoverable_objects",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "show_resolved_parameters",
+    "baseName": "show_resolved_parameters",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "liveboard_response_version",
+    "baseName": "liveboard_response_version",
+    "type": "SearchMetadataRequestLiveboardResponseVersionEnum",
+    "format": ""
+  },
+  {
+    "name": "include_only_published_objects",
+    "baseName": "include_only_published_objects",
     "type": "boolean",
     "format": ""
   }
@@ -8836,6 +9985,18 @@ _SearchUserGroupsRequest.attributeTypeMap = [
     "baseName": "sort_options",
     "type": "SearchUserGroupsRequestSortOptions",
     "format": ""
+  },
+  {
+    "name": "include_users",
+    "baseName": "include_users",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "include_sub_groups",
+    "baseName": "include_sub_groups",
+    "type": "boolean",
+    "format": ""
   }
 ];
 var SearchUserGroupsRequest = _SearchUserGroupsRequest;
@@ -9023,6 +10184,31 @@ _SearchUsersRequestSortOptions.attributeTypeMap = [
 ];
 var SearchUsersRequestSortOptions = _SearchUsersRequestSortOptions;
 
+// models/SendAgentMessageResponse.ts
+var _SendAgentMessageResponse = class _SendAgentMessageResponse {
+  static getAttributeTypeMap() {
+    return _SendAgentMessageResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SendAgentMessageResponse.discriminator = void 0;
+_SendAgentMessageResponse.attributeTypeMap = [
+  {
+    "name": "success",
+    "baseName": "success",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "message",
+    "baseName": "message",
+    "type": "string",
+    "format": ""
+  }
+];
+var SendAgentMessageResponse = _SendAgentMessageResponse;
+
 // models/SendMessageRequest.ts
 var _SendMessageRequest = class _SendMessageRequest {
   static getAttributeTypeMap() {
@@ -9195,6 +10381,31 @@ _SingleAnswerRequest.attributeTypeMap = [
   }
 ];
 var SingleAnswerRequest = _SingleAnswerRequest;
+
+// models/SortOption.ts
+var _SortOption = class _SortOption {
+  static getAttributeTypeMap() {
+    return _SortOption.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SortOption.discriminator = void 0;
+_SortOption.attributeTypeMap = [
+  {
+    "name": "field_name",
+    "baseName": "field_name",
+    "type": "SortOptionFieldNameEnum",
+    "format": ""
+  },
+  {
+    "name": "order",
+    "baseName": "order",
+    "type": "SortOptionOrderEnum",
+    "format": ""
+  }
+];
+var SortOption = _SortOption;
 
 // models/SortOptionInput.ts
 var _SortOptionInput = class _SortOptionInput {
@@ -9509,6 +10720,25 @@ _SystemInfo.attributeTypeMap = [
 ];
 var SystemInfo = _SystemInfo;
 
+// models/SystemOverrideInfo.ts
+var _SystemOverrideInfo = class _SystemOverrideInfo {
+  static getAttributeTypeMap() {
+    return _SystemOverrideInfo.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SystemOverrideInfo.discriminator = void 0;
+_SystemOverrideInfo.attributeTypeMap = [
+  {
+    "name": "config_override_info",
+    "baseName": "config_override_info",
+    "type": "any",
+    "format": ""
+  }
+];
+var SystemOverrideInfo = _SystemOverrideInfo;
+
 // models/Table.ts
 var _Table = class _Table {
   static getAttributeTypeMap() {
@@ -9673,6 +10903,169 @@ _TagMetadataTypeInput.attributeTypeMap = [
   }
 ];
 var TagMetadataTypeInput = _TagMetadataTypeInput;
+
+// models/TemplatePropertiesInputCreate.ts
+var _TemplatePropertiesInputCreate = class _TemplatePropertiesInputCreate {
+  static getAttributeTypeMap() {
+    return _TemplatePropertiesInputCreate.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_TemplatePropertiesInputCreate.discriminator = void 0;
+_TemplatePropertiesInputCreate.attributeTypeMap = [
+  {
+    "name": "cta_button_bg_color",
+    "baseName": "cta_button_bg_color",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "cta_text_font_color",
+    "baseName": "cta_text_font_color",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "primary_bg_color",
+    "baseName": "primary_bg_color",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "home_url",
+    "baseName": "home_url",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "logo_url",
+    "baseName": "logo_url",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "font_family",
+    "baseName": "font_family",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "product_name",
+    "baseName": "product_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "footer_address",
+    "baseName": "footer_address",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "footer_phone",
+    "baseName": "footer_phone",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "replacement_value_for_liveboard",
+    "baseName": "replacement_value_for_liveboard",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "replacement_value_for_answer",
+    "baseName": "replacement_value_for_answer",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "replacement_value_for_spot_iq",
+    "baseName": "replacement_value_for_spot_iq",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "hide_footer_address",
+    "baseName": "hide_footer_address",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "hide_footer_phone",
+    "baseName": "hide_footer_phone",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "hide_manage_notification",
+    "baseName": "hide_manage_notification",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "hide_mobile_app_nudge",
+    "baseName": "hide_mobile_app_nudge",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "hide_privacy_policy",
+    "baseName": "hide_privacy_policy",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "hide_product_name",
+    "baseName": "hide_product_name",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "hide_ts_vocabulary_definitions",
+    "baseName": "hide_ts_vocabulary_definitions",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "hide_notification_status",
+    "baseName": "hide_notification_status",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "hide_error_message",
+    "baseName": "hide_error_message",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "hide_unsubscribe_link",
+    "baseName": "hide_unsubscribe_link",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "hide_modify_alert",
+    "baseName": "hide_modify_alert",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "company_privacy_policy_url",
+    "baseName": "company_privacy_policy_url",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "company_website_url",
+    "baseName": "company_website_url",
+    "type": "string",
+    "format": ""
+  }
+];
+var TemplatePropertiesInputCreate = _TemplatePropertiesInputCreate;
 
 // models/Token.ts
 var _Token = class _Token {
@@ -10130,85 +11523,6 @@ _UpdateCustomActionRequestDefaultActionConfig.attributeTypeMap = [
 ];
 var UpdateCustomActionRequestDefaultActionConfig = _UpdateCustomActionRequestDefaultActionConfig;
 
-// models/UpdateDbtConnectionRequest.ts
-var _UpdateDbtConnectionRequest = class _UpdateDbtConnectionRequest {
-  static getAttributeTypeMap() {
-    return _UpdateDbtConnectionRequest.attributeTypeMap;
-  }
-  constructor() {
-  }
-};
-_UpdateDbtConnectionRequest.discriminator = void 0;
-_UpdateDbtConnectionRequest.attributeTypeMap = [
-  {
-    "name": "dbt_connection_identifier",
-    "baseName": "dbt_connection_identifier",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "connection_name",
-    "baseName": "connection_name",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "database_name",
-    "baseName": "database_name",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "import_type",
-    "baseName": "import_type",
-    "type": "UpdateDbtConnectionRequestImportTypeEnum",
-    "format": ""
-  },
-  {
-    "name": "access_token",
-    "baseName": "access_token",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "dbt_url",
-    "baseName": "dbt_url",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "account_id",
-    "baseName": "account_id",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "project_id",
-    "baseName": "project_id",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "dbt_env_id",
-    "baseName": "dbt_env_id",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "project_name",
-    "baseName": "project_name",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "file_content",
-    "baseName": "file_content",
-    "type": "HttpFile",
-    "format": "binary"
-  }
-];
-var UpdateDbtConnectionRequest = _UpdateDbtConnectionRequest;
-
 // models/UpdateMetadataHeaderRequest.ts
 var _UpdateMetadataHeaderRequest = class _UpdateMetadataHeaderRequest {
   static getAttributeTypeMap() {
@@ -10438,6 +11752,12 @@ _UpdateScheduleRequest.attributeTypeMap = [
     "name": "status",
     "baseName": "status",
     "type": "UpdateScheduleRequestStatusEnum",
+    "format": ""
+  },
+  {
+    "name": "personalised_view_id",
+    "baseName": "personalised_view_id",
+    "type": "string",
     "format": ""
   }
 ];
@@ -11090,6 +12410,12 @@ _User.attributeTypeMap = [
     "baseName": "access_control_properties",
     "type": "any",
     "format": ""
+  },
+  {
+    "name": "variable_values",
+    "baseName": "variable_values",
+    "type": "any",
+    "format": ""
   }
 ];
 var User = _User;
@@ -11399,6 +12725,37 @@ _UserParameterOptions.attributeTypeMap = [
 ];
 var UserParameterOptions = _UserParameterOptions;
 
+// models/UserPrincipal.ts
+var _UserPrincipal = class _UserPrincipal {
+  static getAttributeTypeMap() {
+    return _UserPrincipal.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UserPrincipal.discriminator = void 0;
+_UserPrincipal.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "string",
+    "format": ""
+  }
+];
+var UserPrincipal = _UserPrincipal;
+
 // models/ValidateMergeRequest.ts
 var _ValidateMergeRequest = class _ValidateMergeRequest {
   static getAttributeTypeMap() {
@@ -11442,6 +12799,871 @@ _ValidateTokenRequest.attributeTypeMap = [
   }
 ];
 var ValidateTokenRequest = _ValidateTokenRequest;
+
+// models/ValueScopeInput.ts
+var _ValueScopeInput = class _ValueScopeInput {
+  static getAttributeTypeMap() {
+    return _ValueScopeInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ValueScopeInput.discriminator = void 0;
+_ValueScopeInput.attributeTypeMap = [
+  {
+    "name": "org_identifier",
+    "baseName": "org_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "principal_type",
+    "baseName": "principal_type",
+    "type": "ValueScopeInputPrincipalTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "principal_identifier",
+    "baseName": "principal_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "model_identifier",
+    "baseName": "model_identifier",
+    "type": "string",
+    "format": ""
+  }
+];
+var ValueScopeInput = _ValueScopeInput;
+
+// models/Variable.ts
+var _Variable = class _Variable {
+  static getAttributeTypeMap() {
+    return _Variable.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_Variable.discriminator = void 0;
+_Variable.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "variable_type",
+    "baseName": "variable_type",
+    "type": "VariableVariableTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "sensitive",
+    "baseName": "sensitive",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "values",
+    "baseName": "values",
+    "type": "Array<VariableValue>",
+    "format": ""
+  }
+];
+var Variable = _Variable;
+
+// models/VariableDetailInput.ts
+var _VariableDetailInput = class _VariableDetailInput {
+  static getAttributeTypeMap() {
+    return _VariableDetailInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_VariableDetailInput.discriminator = void 0;
+_VariableDetailInput.attributeTypeMap = [
+  {
+    "name": "identifier",
+    "baseName": "identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "VariableDetailInputTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "name_pattern",
+    "baseName": "name_pattern",
+    "type": "string",
+    "format": ""
+  }
+];
+var VariableDetailInput = _VariableDetailInput;
+
+// models/VariableUpdateAssignmentInput.ts
+var _VariableUpdateAssignmentInput = class _VariableUpdateAssignmentInput {
+  static getAttributeTypeMap() {
+    return _VariableUpdateAssignmentInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_VariableUpdateAssignmentInput.discriminator = void 0;
+_VariableUpdateAssignmentInput.attributeTypeMap = [
+  {
+    "name": "variable_identifier",
+    "baseName": "variable_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "variable_values",
+    "baseName": "variable_values",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "operation",
+    "baseName": "operation",
+    "type": "VariableUpdateAssignmentInputOperationEnum",
+    "format": ""
+  }
+];
+var VariableUpdateAssignmentInput = _VariableUpdateAssignmentInput;
+
+// models/VariableUpdateScopeInput.ts
+var _VariableUpdateScopeInput = class _VariableUpdateScopeInput {
+  static getAttributeTypeMap() {
+    return _VariableUpdateScopeInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_VariableUpdateScopeInput.discriminator = void 0;
+_VariableUpdateScopeInput.attributeTypeMap = [
+  {
+    "name": "org_identifier",
+    "baseName": "org_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "principal_type",
+    "baseName": "principal_type",
+    "type": "VariableUpdateScopeInputPrincipalTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "principal_identifier",
+    "baseName": "principal_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "model_identifier",
+    "baseName": "model_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "priority",
+    "baseName": "priority",
+    "type": "number",
+    "format": "int32"
+  }
+];
+var VariableUpdateScopeInput = _VariableUpdateScopeInput;
+
+// models/VariableValue.ts
+var _VariableValue = class _VariableValue {
+  static getAttributeTypeMap() {
+    return _VariableValue.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_VariableValue.discriminator = void 0;
+_VariableValue.attributeTypeMap = [
+  {
+    "name": "value",
+    "baseName": "value",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "value_list",
+    "baseName": "value_list",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "org_identifier",
+    "baseName": "org_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "principal_type",
+    "baseName": "principal_type",
+    "type": "VariableValuePrincipalTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "principal_identifier",
+    "baseName": "principal_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "priority",
+    "baseName": "priority",
+    "type": "number",
+    "format": "int32"
+  }
+];
+var VariableValue = _VariableValue;
+
+// models/VariableValues.ts
+var _VariableValues = class _VariableValues {
+  static getAttributeTypeMap() {
+    return _VariableValues.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_VariableValues.discriminator = void 0;
+_VariableValues.attributeTypeMap = [
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "values",
+    "baseName": "values",
+    "type": "Array<any>",
+    "format": ""
+  }
+];
+var VariableValues = _VariableValues;
+
+// models/WebhookAuthApiKey.ts
+var _WebhookAuthApiKey = class _WebhookAuthApiKey {
+  static getAttributeTypeMap() {
+    return _WebhookAuthApiKey.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_WebhookAuthApiKey.discriminator = void 0;
+_WebhookAuthApiKey.attributeTypeMap = [
+  {
+    "name": "key",
+    "baseName": "key",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "value",
+    "baseName": "value",
+    "type": "string",
+    "format": ""
+  }
+];
+var WebhookAuthApiKey = _WebhookAuthApiKey;
+
+// models/WebhookAuthApiKeyInput.ts
+var _WebhookAuthApiKeyInput = class _WebhookAuthApiKeyInput {
+  static getAttributeTypeMap() {
+    return _WebhookAuthApiKeyInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_WebhookAuthApiKeyInput.discriminator = void 0;
+_WebhookAuthApiKeyInput.attributeTypeMap = [
+  {
+    "name": "key",
+    "baseName": "key",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "value",
+    "baseName": "value",
+    "type": "string",
+    "format": ""
+  }
+];
+var WebhookAuthApiKeyInput = _WebhookAuthApiKeyInput;
+
+// models/WebhookAuthBasicAuth.ts
+var _WebhookAuthBasicAuth = class _WebhookAuthBasicAuth {
+  static getAttributeTypeMap() {
+    return _WebhookAuthBasicAuth.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_WebhookAuthBasicAuth.discriminator = void 0;
+_WebhookAuthBasicAuth.attributeTypeMap = [
+  {
+    "name": "username",
+    "baseName": "username",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "password",
+    "baseName": "password",
+    "type": "string",
+    "format": ""
+  }
+];
+var WebhookAuthBasicAuth = _WebhookAuthBasicAuth;
+
+// models/WebhookAuthBasicAuthInput.ts
+var _WebhookAuthBasicAuthInput = class _WebhookAuthBasicAuthInput {
+  static getAttributeTypeMap() {
+    return _WebhookAuthBasicAuthInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_WebhookAuthBasicAuthInput.discriminator = void 0;
+_WebhookAuthBasicAuthInput.attributeTypeMap = [
+  {
+    "name": "username",
+    "baseName": "username",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "password",
+    "baseName": "password",
+    "type": "string",
+    "format": ""
+  }
+];
+var WebhookAuthBasicAuthInput = _WebhookAuthBasicAuthInput;
+
+// models/WebhookAuthOAuth2.ts
+var _WebhookAuthOAuth2 = class _WebhookAuthOAuth2 {
+  static getAttributeTypeMap() {
+    return _WebhookAuthOAuth2.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_WebhookAuthOAuth2.discriminator = void 0;
+_WebhookAuthOAuth2.attributeTypeMap = [
+  {
+    "name": "authorization_url",
+    "baseName": "authorization_url",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "client_id",
+    "baseName": "client_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "client_secret",
+    "baseName": "client_secret",
+    "type": "string",
+    "format": ""
+  }
+];
+var WebhookAuthOAuth2 = _WebhookAuthOAuth2;
+
+// models/WebhookAuthOAuth2Input.ts
+var _WebhookAuthOAuth2Input = class _WebhookAuthOAuth2Input {
+  static getAttributeTypeMap() {
+    return _WebhookAuthOAuth2Input.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_WebhookAuthOAuth2Input.discriminator = void 0;
+_WebhookAuthOAuth2Input.attributeTypeMap = [
+  {
+    "name": "authorization_url",
+    "baseName": "authorization_url",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "client_id",
+    "baseName": "client_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "client_secret",
+    "baseName": "client_secret",
+    "type": "string",
+    "format": ""
+  }
+];
+var WebhookAuthOAuth2Input = _WebhookAuthOAuth2Input;
+
+// models/WebhookAuthentication.ts
+var _WebhookAuthentication = class _WebhookAuthentication {
+  static getAttributeTypeMap() {
+    return _WebhookAuthentication.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_WebhookAuthentication.discriminator = void 0;
+_WebhookAuthentication.attributeTypeMap = [
+  {
+    "name": "API_KEY",
+    "baseName": "API_KEY",
+    "type": "WebhookAuthApiKey",
+    "format": ""
+  },
+  {
+    "name": "BASIC_AUTH",
+    "baseName": "BASIC_AUTH",
+    "type": "WebhookAuthBasicAuth",
+    "format": ""
+  },
+  {
+    "name": "BEARER_TOKEN",
+    "baseName": "BEARER_TOKEN",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "OAUTH2",
+    "baseName": "OAUTH2",
+    "type": "WebhookAuthOAuth2",
+    "format": ""
+  }
+];
+var WebhookAuthentication = _WebhookAuthentication;
+
+// models/WebhookAuthenticationInput.ts
+var _WebhookAuthenticationInput = class _WebhookAuthenticationInput {
+  static getAttributeTypeMap() {
+    return _WebhookAuthenticationInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_WebhookAuthenticationInput.discriminator = void 0;
+_WebhookAuthenticationInput.attributeTypeMap = [
+  {
+    "name": "API_KEY",
+    "baseName": "API_KEY",
+    "type": "WebhookAuthApiKeyInput",
+    "format": ""
+  },
+  {
+    "name": "BASIC_AUTH",
+    "baseName": "BASIC_AUTH",
+    "type": "WebhookAuthBasicAuthInput",
+    "format": ""
+  },
+  {
+    "name": "BEARER_TOKEN",
+    "baseName": "BEARER_TOKEN",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "OAUTH2",
+    "baseName": "OAUTH2",
+    "type": "WebhookAuthOAuth2Input",
+    "format": ""
+  }
+];
+var WebhookAuthenticationInput = _WebhookAuthenticationInput;
+
+// models/WebhookDeleteFailure.ts
+var _WebhookDeleteFailure = class _WebhookDeleteFailure {
+  static getAttributeTypeMap() {
+    return _WebhookDeleteFailure.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_WebhookDeleteFailure.discriminator = void 0;
+_WebhookDeleteFailure.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "error",
+    "baseName": "error",
+    "type": "string",
+    "format": ""
+  }
+];
+var WebhookDeleteFailure = _WebhookDeleteFailure;
+
+// models/WebhookDeleteResponse.ts
+var _WebhookDeleteResponse = class _WebhookDeleteResponse {
+  static getAttributeTypeMap() {
+    return _WebhookDeleteResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_WebhookDeleteResponse.discriminator = void 0;
+_WebhookDeleteResponse.attributeTypeMap = [
+  {
+    "name": "deleted_count",
+    "baseName": "deleted_count",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "failed_count",
+    "baseName": "failed_count",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "deleted_webhooks",
+    "baseName": "deleted_webhooks",
+    "type": "Array<WebhookResponse>",
+    "format": ""
+  },
+  {
+    "name": "failed_webhooks",
+    "baseName": "failed_webhooks",
+    "type": "Array<WebhookDeleteFailure>",
+    "format": ""
+  }
+];
+var WebhookDeleteResponse = _WebhookDeleteResponse;
+
+// models/WebhookOrg.ts
+var _WebhookOrg = class _WebhookOrg {
+  static getAttributeTypeMap() {
+    return _WebhookOrg.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_WebhookOrg.discriminator = void 0;
+_WebhookOrg.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  }
+];
+var WebhookOrg = _WebhookOrg;
+
+// models/WebhookPagination.ts
+var _WebhookPagination = class _WebhookPagination {
+  static getAttributeTypeMap() {
+    return _WebhookPagination.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_WebhookPagination.discriminator = void 0;
+_WebhookPagination.attributeTypeMap = [
+  {
+    "name": "record_offset",
+    "baseName": "record_offset",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "record_size",
+    "baseName": "record_size",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "total_count",
+    "baseName": "total_count",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "has_more",
+    "baseName": "has_more",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var WebhookPagination = _WebhookPagination;
+
+// models/WebhookResponse.ts
+var _WebhookResponse = class _WebhookResponse {
+  static getAttributeTypeMap() {
+    return _WebhookResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_WebhookResponse.discriminator = void 0;
+_WebhookResponse.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "description",
+    "baseName": "description",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "org",
+    "baseName": "org",
+    "type": "WebhookOrg",
+    "format": ""
+  },
+  {
+    "name": "url",
+    "baseName": "url",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "url_params",
+    "baseName": "url_params",
+    "type": "any",
+    "format": ""
+  },
+  {
+    "name": "events",
+    "baseName": "events",
+    "type": "Array<WebhookResponseEventsEnum>",
+    "format": ""
+  },
+  {
+    "name": "authentication",
+    "baseName": "authentication",
+    "type": "WebhookAuthentication",
+    "format": ""
+  },
+  {
+    "name": "signature_verification",
+    "baseName": "signature_verification",
+    "type": "WebhookSignatureVerification",
+    "format": ""
+  },
+  {
+    "name": "creation_time_in_millis",
+    "baseName": "creation_time_in_millis",
+    "type": "number",
+    "format": "float"
+  },
+  {
+    "name": "modification_time_in_millis",
+    "baseName": "modification_time_in_millis",
+    "type": "number",
+    "format": "float"
+  },
+  {
+    "name": "created_by",
+    "baseName": "created_by",
+    "type": "WebhookUser",
+    "format": ""
+  },
+  {
+    "name": "last_modified_by",
+    "baseName": "last_modified_by",
+    "type": "WebhookUser",
+    "format": ""
+  }
+];
+var WebhookResponse = _WebhookResponse;
+
+// models/WebhookSearchResponse.ts
+var _WebhookSearchResponse = class _WebhookSearchResponse {
+  static getAttributeTypeMap() {
+    return _WebhookSearchResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_WebhookSearchResponse.discriminator = void 0;
+_WebhookSearchResponse.attributeTypeMap = [
+  {
+    "name": "webhooks",
+    "baseName": "webhooks",
+    "type": "Array<WebhookResponse>",
+    "format": ""
+  },
+  {
+    "name": "pagination",
+    "baseName": "pagination",
+    "type": "WebhookPagination",
+    "format": ""
+  }
+];
+var WebhookSearchResponse = _WebhookSearchResponse;
+
+// models/WebhookSignatureVerification.ts
+var _WebhookSignatureVerification = class _WebhookSignatureVerification {
+  static getAttributeTypeMap() {
+    return _WebhookSignatureVerification.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_WebhookSignatureVerification.discriminator = void 0;
+_WebhookSignatureVerification.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "WebhookSignatureVerificationTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "header",
+    "baseName": "header",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "algorithm",
+    "baseName": "algorithm",
+    "type": "WebhookSignatureVerificationAlgorithmEnum",
+    "format": ""
+  },
+  {
+    "name": "secret",
+    "baseName": "secret",
+    "type": "string",
+    "format": ""
+  }
+];
+var WebhookSignatureVerification = _WebhookSignatureVerification;
+
+// models/WebhookSignatureVerificationInput.ts
+var _WebhookSignatureVerificationInput = class _WebhookSignatureVerificationInput {
+  static getAttributeTypeMap() {
+    return _WebhookSignatureVerificationInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_WebhookSignatureVerificationInput.discriminator = void 0;
+_WebhookSignatureVerificationInput.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "WebhookSignatureVerificationInputTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "header",
+    "baseName": "header",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "algorithm",
+    "baseName": "algorithm",
+    "type": "WebhookSignatureVerificationInputAlgorithmEnum",
+    "format": ""
+  },
+  {
+    "name": "secret",
+    "baseName": "secret",
+    "type": "string",
+    "format": ""
+  }
+];
+var WebhookSignatureVerificationInput = _WebhookSignatureVerificationInput;
+
+// models/WebhookSortOptionsInput.ts
+var _WebhookSortOptionsInput = class _WebhookSortOptionsInput {
+  static getAttributeTypeMap() {
+    return _WebhookSortOptionsInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_WebhookSortOptionsInput.discriminator = void 0;
+_WebhookSortOptionsInput.attributeTypeMap = [
+  {
+    "name": "field_name",
+    "baseName": "field_name",
+    "type": "WebhookSortOptionsInputFieldNameEnum",
+    "format": ""
+  },
+  {
+    "name": "order",
+    "baseName": "order",
+    "type": "WebhookSortOptionsInputOrderEnum",
+    "format": ""
+  }
+];
+var WebhookSortOptionsInput = _WebhookSortOptionsInput;
+
+// models/WebhookUser.ts
+var _WebhookUser = class _WebhookUser {
+  static getAttributeTypeMap() {
+    return _WebhookUser.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_WebhookUser.discriminator = void 0;
+_WebhookUser.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  }
+];
+var WebhookUser = _WebhookUser;
 
 // middleware.ts
 var PromiseMiddlewareWrapper = class {
@@ -11562,6 +13784,11 @@ var enumsMap = /* @__PURE__ */ new Set([
   "AssociateMetadataInputTypeEnum",
   "AssociateMetadataInputCreateTypeEnum",
   "AuthorMetadataTypeInputTypeEnum",
+  "ColumnSecurityRuleGroupOperationOperationEnum",
+  "ConnectionConfigurationResponsePolicyProcessesEnum",
+  "ConnectionConfigurationResponseDataWarehouseTypeEnum",
+  "ConnectionConfigurationResponsePolicyTypeEnum",
+  "ContextPayloadV2InputTypeEnum",
   "CopyObjectRequestTypeEnum",
   "CreateConnectionRequestDataWarehouseTypeEnum",
   "CreateConnectionResponseDataWarehouseTypeEnum",
@@ -11578,11 +13805,13 @@ var enumsMap = /* @__PURE__ */ new Set([
   "CreateUserRequestVisibilityEnum",
   "CreateUserRequestPreferredLocaleEnum",
   "CustomActionMetadataTypeInputTypeEnum",
-  "DbtConnectionRequestImportTypeEnum",
-  "DbtGenerateTmlRequestImportWorksheetsEnum",
   "DeleteMetadataTypeInputTypeEnum",
   "DeployCommitRequestDeployTypeEnum",
   "DeployCommitRequestDeployPolicyEnum",
+  "EventChannelConfigEventTypeEnum",
+  "EventChannelConfigChannelsEnum",
+  "EventChannelConfigInputEventTypeEnum",
+  "EventChannelConfigInputChannelsEnum",
   "ExcludeMetadataListItemInputTypeEnum",
   "ExportAnswerReportRequestFileFormatEnum",
   "ExportAnswerReportRequestRegionalSettingsCurrencyFormatEnum",
@@ -11616,13 +13845,20 @@ var enumsMap = /* @__PURE__ */ new Set([
   "ImportUserAccountTypeEnum",
   "ImportUserAccountStatusEnum",
   "ImportUserVisibilityEnum",
+  "JWTMetadataObjectTypeEnum",
   "MetadataInputTypeEnum",
   "MetadataListItemInputTypeEnum",
+  "MetadataListItemInputSubtypesEnum",
   "MetadataObjectTypeEnum",
   "MetadataResponseTypeEnum",
   "MetadataSearchResponseMetadataTypeEnum",
   "MetadataSearchSortOptionsFieldNameEnum",
   "MetadataSearchSortOptionsOrderEnum",
+  "NLInstructionsInfoScopeEnum",
+  "NLInstructionsInfoInputScopeEnum",
+  "OrgChannelConfigInputOperationEnum",
+  "OrgChannelConfigInputResetEventsEnum",
+  "OrgPreferenceSearchCriteriaInputEventTypesEnum",
   "OrgResponseStatusEnum",
   "OrgResponseVisibilityEnum",
   "PdfOptionsPageSizeEnum",
@@ -11630,6 +13866,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "PermissionInputShareModeEnum",
   "PermissionsMetadataTypeInputTypeEnum",
   "PrincipalsInputTypeEnum",
+  "PublishMetadataListItemTypeEnum",
   "RegionalSettingsInputCurrencyFormatEnum",
   "RegionalSettingsInputUserLocaleEnum",
   "RegionalSettingsInputNumberFormatLocaleEnum",
@@ -11652,6 +13889,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "SearchCustomActionsRequestTypeEnum",
   "SearchDataRequestDataFormatEnum",
   "SearchMetadataRequestDependentObjectVersionEnum",
+  "SearchMetadataRequestLiveboardResponseVersionEnum",
   "SearchMetadataRequestSortOptionsFieldNameEnum",
   "SearchMetadataRequestSortOptionsOrderEnum",
   "SearchOrgsRequestVisibilityEnum",
@@ -11674,6 +13912,8 @@ var enumsMap = /* @__PURE__ */ new Set([
   "ShareMetadataRequestMetadataTypeEnum",
   "ShareMetadataTypeInputTypeEnum",
   "SharePermissionsInputShareModeEnum",
+  "SortOptionFieldNameEnum",
+  "SortOptionOrderEnum",
   "SortOptionInputFieldNameEnum",
   "SortOptionInputOrderEnum",
   "SortOptionsFieldNameEnum",
@@ -11682,7 +13922,6 @@ var enumsMap = /* @__PURE__ */ new Set([
   "TagMetadataTypeInputTypeEnum",
   "TokenAccessScopeObjectTypeEnum",
   "UpdateCustomActionRequestOperationEnum",
-  "UpdateDbtConnectionRequestImportTypeEnum",
   "UpdateObjIdInputTypeEnum",
   "UpdateOrgRequestOperationEnum",
   "UpdateRoleRequestPrivilegesEnum",
@@ -11707,9 +13946,23 @@ var enumsMap = /* @__PURE__ */ new Set([
   "UserGroupResponseParentTypeEnum",
   "UserGroupResponseTypeEnum",
   "UserGroupResponseVisibilityEnum",
-  "UserObjectTypeEnum"
+  "UserObjectTypeEnum",
+  "ValueScopeInputPrincipalTypeEnum",
+  "VariableVariableTypeEnum",
+  "VariableDetailInputTypeEnum",
+  "VariableUpdateAssignmentInputOperationEnum",
+  "VariableUpdateScopeInputPrincipalTypeEnum",
+  "VariableValuePrincipalTypeEnum",
+  "WebhookResponseEventsEnum",
+  "WebhookSignatureVerificationTypeEnum",
+  "WebhookSignatureVerificationAlgorithmEnum",
+  "WebhookSignatureVerificationInputTypeEnum",
+  "WebhookSignatureVerificationInputAlgorithmEnum",
+  "WebhookSortOptionsInputFieldNameEnum",
+  "WebhookSortOptionsInputOrderEnum"
 ]);
 var typeMap = {
+  "AIContext": AIContext,
   "APIKey": APIKey,
   "APIKeyInput": APIKeyInput,
   "AccessToken": AccessToken,
@@ -11720,7 +13973,9 @@ var typeMap = {
   "ActionDetailsInput": ActionDetailsInput,
   "ActionDetailsInputCreate": ActionDetailsInputCreate,
   "ActivateUserRequest": ActivateUserRequest,
+  "AgentConversation": AgentConversation,
   "AnswerContent": AnswerContent,
+  "AnswerContextInput": AnswerContextInput,
   "AnswerDataResponse": AnswerDataResponse,
   "AssignChangeAuthorRequest": AssignChangeAuthorRequest,
   "AssignTagRequest": AssignTagRequest,
@@ -11736,15 +13991,28 @@ var typeMap = {
   "CALLBACK": CALLBACK,
   "CALLBACKInput": CALLBACKInput,
   "CALLBACKInputMandatory": CALLBACKInputMandatory,
+  "CalendarResponse": CalendarResponse,
   "ChangeUserPasswordRequest": ChangeUserPasswordRequest,
   "Column": Column,
+  "ColumnSecurityRule": ColumnSecurityRule,
+  "ColumnSecurityRuleColumn": ColumnSecurityRuleColumn,
+  "ColumnSecurityRuleGroup": ColumnSecurityRuleGroup,
+  "ColumnSecurityRuleGroupOperation": ColumnSecurityRuleGroupOperation,
+  "ColumnSecurityRuleResponse": ColumnSecurityRuleResponse,
+  "ColumnSecurityRuleSourceTable": ColumnSecurityRuleSourceTable,
+  "ColumnSecurityRuleTableInput": ColumnSecurityRuleTableInput,
+  "ColumnSecurityRuleUpdate": ColumnSecurityRuleUpdate,
   "CommitBranchRequest": CommitBranchRequest,
   "CommitFileType": CommitFileType,
   "CommitHistoryResponse": CommitHistoryResponse,
   "CommitResponse": CommitResponse,
   "CommiterType": CommiterType,
+  "CommunicationChannelPreferencesResponse": CommunicationChannelPreferencesResponse,
+  "ConnectionConfigurationResponse": ConnectionConfigurationResponse,
   "ConnectionInput": ConnectionInput,
+  "ContextPayloadV2Input": ContextPayloadV2Input,
   "Conversation": Conversation,
+  "ConversationSettingsInput": ConversationSettingsInput,
   "ConvertWorksheetToModelRequest": ConvertWorksheetToModelRequest,
   "CopyObjectRequest": CopyObjectRequest,
   "CreateConfigRequest": CreateConfigRequest,
@@ -11754,6 +14022,7 @@ var typeMap = {
   "CreateCustomActionRequest": CreateCustomActionRequest,
   "CreateCustomActionRequestActionDetails": CreateCustomActionRequestActionDetails,
   "CreateCustomActionRequestDefaultActionConfig": CreateCustomActionRequestDefaultActionConfig,
+  "CreateEmailCustomizationResponse": CreateEmailCustomizationResponse,
   "CreateOrgRequest": CreateOrgRequest,
   "CreateRoleRequest": CreateRoleRequest,
   "CreateScheduleRequest": CreateScheduleRequest,
@@ -11767,12 +14036,11 @@ var typeMap = {
   "CronExpression": CronExpression,
   "CronExpressionInput": CronExpressionInput,
   "CustomActionMetadataTypeInput": CustomActionMetadataTypeInput,
+  "DataSource": DataSource,
+  "DataSourceContextInput": DataSourceContextInput,
   "DataWarehouseObjectInput": DataWarehouseObjectInput,
   "DataWarehouseObjects": DataWarehouseObjects,
   "Database": Database,
-  "DbtConnectionRequest": DbtConnectionRequest,
-  "DbtGenerateSyncTmlRequest": DbtGenerateSyncTmlRequest,
-  "DbtGenerateTmlRequest": DbtGenerateTmlRequest,
   "DbtSearchResponse": DbtSearchResponse,
   "DeactivateUserRequest": DeactivateUserRequest,
   "DefaultActionConfig": DefaultActionConfig,
@@ -11785,10 +14053,18 @@ var typeMap = {
   "DeleteMetadataTypeInput": DeleteMetadataTypeInput,
   "DeployCommitRequest": DeployCommitRequest,
   "DeployResponse": DeployResponse,
+  "EntityHeader": EntityHeader,
   "ErrorResponse": ErrorResponse,
+  "EurekaDataSourceSuggestionResponse": EurekaDataSourceSuggestionResponse,
   "EurekaDecomposeQueryResponse": EurekaDecomposeQueryResponse,
+  "EurekaGetNLInstructionsResponse": EurekaGetNLInstructionsResponse,
+  "EurekaGetRelevantQuestionsResponse": EurekaGetRelevantQuestionsResponse,
   "EurekaLLMDecomposeQueryResponse": EurekaLLMDecomposeQueryResponse,
   "EurekaLLMSuggestedQuery": EurekaLLMSuggestedQuery,
+  "EurekaRelevantQuestion": EurekaRelevantQuestion,
+  "EurekaSetNLInstructionsResponse": EurekaSetNLInstructionsResponse,
+  "EventChannelConfig": EventChannelConfig,
+  "EventChannelConfigInput": EventChannelConfigInput,
   "ExcludeMetadataListItemInput": ExcludeMetadataListItemInput,
   "ExportAnswerReportRequest": ExportAnswerReportRequest,
   "ExportAnswerReportRequestRegionalSettings": ExportAnswerReportRequestRegionalSettings,
@@ -11800,6 +14076,7 @@ var typeMap = {
   "ExportMetadataTMLRequestExportOptions": ExportMetadataTMLRequestExportOptions,
   "ExportMetadataTypeInput": ExportMetadataTypeInput,
   "ExportOptions": ExportOptions,
+  "ExternalTableInput": ExternalTableInput,
   "FavoriteMetadataInput": FavoriteMetadataInput,
   "FavoriteMetadataItem": FavoriteMetadataItem,
   "FavoriteObjectOptionsInput": FavoriteObjectOptionsInput,
@@ -11840,6 +14117,7 @@ var typeMap = {
   "JWTParameter": JWTParameter,
   "JWTUserOptions": JWTUserOptions,
   "JWTUserOptionsFull": JWTUserOptionsFull,
+  "LBContextInput": LBContextInput,
   "LiveboardContent": LiveboardContent,
   "LiveboardDataResponse": LiveboardDataResponse,
   "LiveboardOptions": LiveboardOptions,
@@ -11847,6 +14125,7 @@ var typeMap = {
   "LogResponse": LogResponse,
   "LoginRequest": LoginRequest,
   "MetadataAssociationItem": MetadataAssociationItem,
+  "MetadataContext": MetadataContext,
   "MetadataInput": MetadataInput,
   "MetadataListItemInput": MetadataListItemInput,
   "MetadataObject": MetadataObject,
@@ -11854,10 +14133,17 @@ var typeMap = {
   "MetadataSearchResponse": MetadataSearchResponse,
   "MetadataSearchSortOptions": MetadataSearchSortOptions,
   "ModelTableList": ModelTableList,
+  "NLInstructionsInfo": NLInstructionsInfo,
+  "NLInstructionsInfoInput": NLInstructionsInfoInput,
   "ObjectIDAndName": ObjectIDAndName,
   "Org": Org,
+  "OrgChannelConfigInput": OrgChannelConfigInput,
+  "OrgChannelConfigResponse": OrgChannelConfigResponse,
+  "OrgDetails": OrgDetails,
   "OrgInfo": OrgInfo,
+  "OrgPreferenceSearchCriteriaInput": OrgPreferenceSearchCriteriaInput,
   "OrgResponse": OrgResponse,
+  "OrgType": OrgType,
   "ParameterValues": ParameterValues,
   "ParametersListItem": ParametersListItem,
   "ParametersListItemInput": ParametersListItemInput,
@@ -11871,6 +14157,7 @@ var typeMap = {
   "PrincipalsInput": PrincipalsInput,
   "PrincipalsListItem": PrincipalsListItem,
   "PrincipalsListItemInput": PrincipalsListItemInput,
+  "PublishMetadataListItem": PublishMetadataListItem,
   "QueryGetDecomposedQueryRequest": QueryGetDecomposedQueryRequest,
   "QueryGetDecomposedQueryRequestNlsRequest": QueryGetDecomposedQueryRequestNlsRequest,
   "RecipientDetails": RecipientDetails,
@@ -11934,11 +14221,13 @@ var typeMap = {
   "SearchUserGroupsRequestSortOptions": SearchUserGroupsRequestSortOptions,
   "SearchUsersRequest": SearchUsersRequest,
   "SearchUsersRequestSortOptions": SearchUsersRequestSortOptions,
+  "SendAgentMessageResponse": SendAgentMessageResponse,
   "SendMessageRequest": SendMessageRequest,
   "ShareMetadataRequest": ShareMetadataRequest,
   "ShareMetadataTypeInput": ShareMetadataTypeInput,
   "SharePermissionsInput": SharePermissionsInput,
   "SingleAnswerRequest": SingleAnswerRequest,
+  "SortOption": SortOption,
   "SortOptionInput": SortOptionInput,
   "SortOptions": SortOptions,
   "SortingOptions": SortingOptions,
@@ -11946,9 +14235,11 @@ var typeMap = {
   "SqlQueryResponse": SqlQueryResponse,
   "SystemConfig": SystemConfig,
   "SystemInfo": SystemInfo,
+  "SystemOverrideInfo": SystemOverrideInfo,
   "Table": Table,
   "Tag": Tag,
   "TagMetadataTypeInput": TagMetadataTypeInput,
+  "TemplatePropertiesInputCreate": TemplatePropertiesInputCreate,
   "Token": Token,
   "TokenAccessScopeObject": TokenAccessScopeObject,
   "TokenValidationResponse": TokenValidationResponse,
@@ -11961,7 +14252,6 @@ var typeMap = {
   "UpdateCustomActionRequest": UpdateCustomActionRequest,
   "UpdateCustomActionRequestActionDetails": UpdateCustomActionRequestActionDetails,
   "UpdateCustomActionRequestDefaultActionConfig": UpdateCustomActionRequestDefaultActionConfig,
-  "UpdateDbtConnectionRequest": UpdateDbtConnectionRequest,
   "UpdateMetadataHeaderRequest": UpdateMetadataHeaderRequest,
   "UpdateMetadataObjIdRequest": UpdateMetadataObjIdRequest,
   "UpdateObjIdInput": UpdateObjIdInput,
@@ -11982,8 +14272,34 @@ var typeMap = {
   "UserInfo": UserInfo,
   "UserObject": UserObject,
   "UserParameterOptions": UserParameterOptions,
+  "UserPrincipal": UserPrincipal,
   "ValidateMergeRequest": ValidateMergeRequest,
-  "ValidateTokenRequest": ValidateTokenRequest
+  "ValidateTokenRequest": ValidateTokenRequest,
+  "ValueScopeInput": ValueScopeInput,
+  "Variable": Variable,
+  "VariableDetailInput": VariableDetailInput,
+  "VariableUpdateAssignmentInput": VariableUpdateAssignmentInput,
+  "VariableUpdateScopeInput": VariableUpdateScopeInput,
+  "VariableValue": VariableValue,
+  "VariableValues": VariableValues,
+  "WebhookAuthApiKey": WebhookAuthApiKey,
+  "WebhookAuthApiKeyInput": WebhookAuthApiKeyInput,
+  "WebhookAuthBasicAuth": WebhookAuthBasicAuth,
+  "WebhookAuthBasicAuthInput": WebhookAuthBasicAuthInput,
+  "WebhookAuthOAuth2": WebhookAuthOAuth2,
+  "WebhookAuthOAuth2Input": WebhookAuthOAuth2Input,
+  "WebhookAuthentication": WebhookAuthentication,
+  "WebhookAuthenticationInput": WebhookAuthenticationInput,
+  "WebhookDeleteFailure": WebhookDeleteFailure,
+  "WebhookDeleteResponse": WebhookDeleteResponse,
+  "WebhookOrg": WebhookOrg,
+  "WebhookPagination": WebhookPagination,
+  "WebhookResponse": WebhookResponse,
+  "WebhookSearchResponse": WebhookSearchResponse,
+  "WebhookSignatureVerification": WebhookSignatureVerification,
+  "WebhookSignatureVerificationInput": WebhookSignatureVerificationInput,
+  "WebhookSortOptionsInput": WebhookSortOptionsInput,
+  "WebhookUser": WebhookUser
 };
 var ObjectSerializer = class _ObjectSerializer {
   static findCorrectType(data, expectedType) {
@@ -12177,6 +14493,9 @@ function isCodeInRange(codeRange, code) {
     }
     return true;
   }
+}
+function canConsumeForm(contentTypes) {
+  return contentTypes.indexOf("multipart/form-data") !== -1;
 }
 
 // apis/AIApi.ts
@@ -12548,7 +14867,7 @@ var AIApiResponseProcessor = class {
 // apis/AuthenticationApi.ts
 var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
   /**
-   *   Version: 9.0.0.cl or later    Gets session information for the currently logged-in user.  This API does not require any parameters to be passed in the request.    Any ThoughtSpot user can access this endpoint and send an API request. The data returned in the API response varies according to user\'s privilege and object access permissions.      
+   *   Version: 9.0.0.cl or later   Retrieves details of the current user session for the token provided in the request header.  Any ThoughtSpot user can access this endpoint and send an API request. The data returned in the API response varies according to user\'s privilege and object access permissions.     
    */
   getCurrentUserInfo(_options) {
     return __async(this, null, function* () {
@@ -12571,7 +14890,7 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *  Get token for the currently logged-in user.    Version: 9.4.0.cl or later   Gets token details for the currently logged-in user.  You can use this endpoint to obtain the token associated with the user\'s session.  This API does not require any parameters to be passed in the request.    Any ThoughtSpot user can access this endpoint and send an API request.      
+   *   Version: 9.4.0.cl or later   Retrieves details of the current session token for the bearer token provided in the request header.  This API endpoint does not create a new token. Instead, it returns details about the token, including the token string, creation time, expiration time, and the associated user.  Use this endpoint to introspect your current session token, debug authentication issues, or when a frontend application needs session token details.  Any ThoughtSpot user with a valid bearer token can access this endpoint and send an API request      
    */
   getCurrentUserToken(_options) {
     return __async(this, null, function* () {
@@ -12594,7 +14913,7 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 10.4.0.cl or later   Gets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  To add a new user and assign privileges during auto creation, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  To assign security attributes with filter rules and Parameters to the JWT token, you\'ll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  #### Usage guidelines  You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key`.  To generate a `secret_key` on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable) in the **Develop** > **Customizations** > **Security Settings** page.  **Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.  If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.  ##### Attribute-Based Access Control (ABAC) with tokens  To implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the `filter_rules` and `parameter_values` array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user\'s `access_control_properties` object, after which all sessions will use the persisted values.  Specify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.  For more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).  ##### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * `auto_create` * `username` * `display_name` * `email` * `groups`  Set `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true` in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  ##### Important point to note All options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Persist options such as  `APPEND`, `REPLACE`, `RESET` will persist security parameters on the user profile when the token is created, while Persist option `NONE` will not persist anything but will be honoured in the session.      
+   *   Version: 10.4.0.cl or later   Gets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  To add a new user and assign privileges during auto creation, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  To assign security attributes with filter rules and Parameters to the JWT token, you\'ll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  #### Usage guidelines  You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key`.  To generate a `secret_key` on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable) in the **Develop** > **Customizations** > **Security Settings** page.  **Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.  If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.  ##### Attribute-Based Access Control (ABAC) with tokens  To implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the `filter_rules` and `parameter_values` array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user\'s `access_control_properties` object, after which all sessions will use the persisted values.  Specify the object type as `LOGICAL_TABLE`.   For more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).  ##### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * `auto_create` * `username` * `display_name` * `email` * `groups`  Set `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true` in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values. If `auto_create` is set to `true`, it won\'t create formula variables and hence won\'t be applicable for `variable_values`.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  ##### Important point to note All options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Persist options such as  `APPEND`, `REPLACE`, `RESET` will persist security parameters on the user profile when the token is created, while Persist option `NONE` will not persist anything but will be honoured in the session.  ##### Formula Variables Before using variables_values, variables must be created using Create Variable API with type as Formula_Variable (/api/rest/2.0/template/variables/create) The persist_option RESET and NONE cannot be used when variable_values are provided in the request. If you are working with variable_values, you must use other (APPEND, REPLACE) supported modes. If you want to use RESET or NONE, do not pass any variable_values. In such cases, variable_values will remain unaffected. When using object_id with variable_values, models are supported.      
    * @param getCustomAccessTokenRequest 
    */
   getCustomAccessToken(getCustomAccessTokenRequest, _options) {
@@ -13511,7 +15830,7 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.2.0.cl or later   Gets connection objects. Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  - To get a list of all connections available in the ThoughtSpot system, send the API request without any attributes in the request body. - To get the connection objects for a specific type of data warehouse, specify the type in `data_warehouse_types`. - To fetch details of a connection object, specify the connection object GUID or name. The `name_pattern` attribute allows passing partial text with `%` for a wildcard match. - To get details of the database, schemas, tables, or columns from a data connection object, specify `data_warehouse_object_type`. - To get a specific database, schema, table, or column from a connection object, define the object type in `data_warehouse_object_type` and object properties in the `data_warehouse_objects` array. For example, to search for a column, you must pass the database, schema, and table names in the API request.   Note that in the following example, object properties are set in a hierarchical order (`database` > `schema` > `table` > `column`).  ``` {   \"connections\": [     {       \"identifier\": \"b9d1f2ef-fa65-4a4b-994e-30fa2d57b0c2\",       \"data_warehouse_objects\": [         {           \"database\": \"NEBULADEV\",           \"schema\": \"INFORMATION_SCHEMA\",           \"table\": \"APPLICABLE_ROLES\",           \"column\": \"ROLE_NAME\"         }       ]     }   ],   \"data_warehouse_object_type\": \"COLUMN\" } ```  - To fetch data by `configuration`, specify `data_warehouse_object_type`. For example, to fetch columns from the `DEVELOPMENT` database, specify the `data_warehouse_object_type` as `DATABASE` and define the `configuration` string as `{\"database\":\"DEVELOPMENT\"}`. To get column data for a specific table, specify the table, for example,`{\"database\":\"RETAILAPPAREL\",\"table\":\"PIPES\"}`. - To query connections by `authentication_type`, specify `data_warehouse_object_type`. Supported values for `authentication_type` are:   - `SERVICE_ACCOUNT`: For connections that require service account credentials to authenticate to the Cloud Data Warehouse and fetch data.   - `OAUTH`: For connections that require OAuth credentials to authenticate to the Cloud Data Warehouse and fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth authentication type.   - `IAM`: For connections that have the IAM OAuth set up. This authentication type is supported on Amazon Redshift connections only.   - `EXTOAUTH`: For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/ connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). - To include more details about connection objects in the API response, set `include_details` to `true`. - You can also sort the output by field names and filter connections by tags.  **NOTE**: When filtering connection records by parameters other than `data_warehouse_types` or `tag_identifiers`, ensure that you set `record_size` to `-1` and `record_offset` to `0` for precise results.      
+   *   Version: 9.2.0.cl or later   Gets connection objects. Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  - To get a list of all connections available in the ThoughtSpot system, send the API request without any attributes in the request body. - To get the connection objects for a specific type of data warehouse, specify the type in `data_warehouse_types`. - To fetch details of a connection object, specify the connection object GUID or name. The `name_pattern` attribute allows passing partial text with `%` for a wildcard match. - To get details of the database, schemas, tables, or columns from a data connection object, specify `data_warehouse_object_type`. - To get a specific database, schema, table, or column from a connection object, define the object type in `data_warehouse_object_type` and object properties in the `data_warehouse_objects` array. For example, to search for a column, you must pass the database, schema, and table names in the API request.   Note that in the following example, object properties are set in a hierarchical order (`database` > `schema` > `table` > `column`).  ``` {   \"connections\": [     {       \"identifier\": \"b9d1f2ef-fa65-4a4b-994e-30fa2d57b0c2\",       \"data_warehouse_objects\": [         {           \"database\": \"NEBULADEV\",           \"schema\": \"INFORMATION_SCHEMA\",           \"table\": \"APPLICABLE_ROLES\",           \"column\": \"ROLE_NAME\"         }       ]     }   ],   \"data_warehouse_object_type\": \"COLUMN\" } ```  - To fetch data by `configuration`, specify `data_warehouse_object_type`. For example, to fetch columns from the `DEVELOPMENT` database, specify the `data_warehouse_object_type` as `DATABASE` and define the `configuration` string as `{\"database\":\"DEVELOPMENT\"}`. To get column data for a specific table, specify the table, for example,`{\"database\":\"RETAILAPPAREL\",\"table\":\"PIPES\"}`. - To query connections by `authentication_type`, specify `data_warehouse_object_type`. Supported values for `authentication_type` are:   - `SERVICE_ACCOUNT`: For connections that require service account credentials to authenticate to the Cloud Data Warehouse and fetch data.   - `OAUTH`: For connections that require OAuth credentials to authenticate to the Cloud Data Warehouse and fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth authentication type.   - `IAM`: For connections that have the IAM OAuth set up. This authentication type is supported on Amazon Redshift connections only.   - `EXTOAUTH`: For connections that have External OAuth set up. ThoughtSpot supports external [OAuth with Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/ connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth).   - `KEY_PAIR`: For connections that require Key Pair account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only.   - `OAUTH_WITH_PKCE`: For connections that require OAuth with PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake, Starburst, Databricks, Denodo  connections only.   - `EXTOAUTH_WITH_PKCE`: For connections that require External OAuth With PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only.   - `OAUTH_WITH_PEZ`: For connections that require OAuth With PEZ account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Amazon Redshift connections only.   - `OAUTH_WITH_SERVICE_PRINCIPAL`: For connections that require OAuth With Service Principal account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Databricks connections only.   - `PERSONAL_ACCESS_TOKEN`: For connections that require Personal Access Token account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Databricks connections only.   - `OAUTH_CLIENT_CREDENTIALS`: For connections that require OAuth Client Credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only. - To include more details about connection objects in the API response, set `include_details` to `true`. - You can also sort the output by field names and filter connections by tags.  **NOTE**: When filtering connection records by parameters other than `data_warehouse_types` or `tag_identifiers`, ensure that you set `record_size` to `-1` and `record_offset` to `0` for precise results.      
    * @param searchConnectionRequest 
    */
   searchConnection(searchConnectionRequest, _options) {
@@ -13583,7 +15902,7 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 10.4.0.cl or later   Updates a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`.    * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:     ```    {       \"configuration\":{          \"accountName\":\"thoughtspot_partner\",          \"user\":\"tsadmin\",          \"password\":\"TestConn123\",          \"role\":\"sysadmin\",          \"warehouse\":\"MEDIUM_WH\"       },       \"externalDatabases\":[          {             \"name\":\"AllDatatypes\",             \"isAutoCreated\":false,             \"schemas\":[                {                   \"name\":\"alldatatypes\",                   \"tables\":[                      {                         \"name\":\"allDatatypes\",                         \"type\":\"TABLE\",                         \"description\":\"\",                         \"selected\":true,                         \"linked\":true,                         \"columns\":[                            {                               \"name\":\"CNUMBER\",                               \"type\":\"INT64\",                               \"canImport\":true,                               \"selected\":true,                               \"isLinkedActive\":true,                               \"isImported\":false,                               \"tableName\":\"allDatatypes\",                               \"schemaName\":\"alldatatypes\",                               \"dbName\":\"AllDatatypes\"                            },                            {                               \"name\":\"CDECIMAL\",                               \"type\":\"INT64\",                               \"canImport\":true,                               \"selected\":true,                               \"isLinkedActive\":true,                               \"isImported\":false,                               \"tableName\":\"allDatatypes\",                               \"schemaName\":\"alldatatypes\",                               \"dbName\":\"AllDatatypes\"                            }                         ]                      }                   ]                }             ]          }       ]    }    ```  3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`. * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a Snowflake connection:  ```  {     \"configuration\":{        \"accountName\":\"thoughtspot_partner\",        \"user\":\"tsadmin\",        \"password\":\"TestConn123\",        \"role\":\"sysadmin\",        \"warehouse\":\"MEDIUM_WH\"     },     \"externalDatabases\":[      ]  }  ```      
+   *   Version: 10.4.0.cl or later   Updates a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`.        **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.     * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:    * This is an example of updating a single table in a empty connection:           ```       {         \"authenticationType\": \"SERVICE_ACCOUNT\",         \"externalDatabases\": [           {             \"name\": \"DEVELOPMENT\",             \"isAutoCreated\": false,             \"schemas\": [               {                 \"name\": \"TS_dataset\",                 \"tables\": [                   {                     \"name\": \"DEMORENAME\",                     \"type\": \"TABLE\",                     \"description\": \"\",                     \"selected\": true,                     \"linked\": true,                     \"gid\": 0,                     \"datasetId\": \"-1\",                     \"subType\": \"\",                     \"reportId\": \"\",                     \"viewId\": \"\",                     \"columns\": [                       {                         \"name\": \"Col1\",                         \"type\": \"VARCHAR\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"Col2\",                         \"type\": \"VARCHAR\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"Col3\",                         \"type\": \"VARCHAR\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"Col312\",                         \"type\": \"VARCHAR\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"Col4\",                         \"type\": \"VARCHAR\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       }                     ],                     \"relationships\": []                   }                 ]               }             ]           }         ],         \"configuration\": {           \"password\": \"\",           \"database\": \"DEVELOPMENT\",           \"role\": \"DEV\",           \"accountName\": \"thoughtspot_partner\",           \"warehouse\": \"DEMO_WH\",           \"user\": \"DEV_USER\"         }       }       ```        * This is an example of updating a single table in an existing connection with tables:            ```       {         \"authenticationType\": \"SERVICE_ACCOUNT\",         \"externalDatabases\": [           {             \"name\": \"DEVELOPMENT\",             \"isAutoCreated\": false,             \"schemas\": [               {                 \"name\": \"TS_dataset\",                 \"tables\": [                   {                     \"name\": \"CUSTOMER\",                     \"type\": \"TABLE\",                     \"description\": \"\",                     \"selected\": true,                     \"linked\": true,                     \"gid\": 0,                     \"datasetId\": \"-1\",                     \"subType\": \"\",                     \"reportId\": \"\",                     \"viewId\": \"\",                     \"columns\": [],                     \"relationships\": []                   },                   {                     \"name\": \"tpch5k_falcon_default_schema_users\",                     \"type\": \"TABLE\",                     \"description\": \"\",                     \"selected\": true,                     \"linked\": true,                     \"gid\": 0,                     \"datasetId\": \"-1\",                     \"subType\": \"\",                     \"reportId\": \"\",                     \"viewId\": \"\",                     \"columns\": [                       {                         \"name\": \"user_id\",                         \"type\": \"INT64\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"product_id\",                         \"type\": \"INT64\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"user_cost\",                         \"type\": \"INT64\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       }                     ],                     \"relationships\": []                   }                 ]               }             ]           }         ],         \"configuration\": {           \"password\": \"\",           \"database\": \"DEVELOPMENT\",           \"role\": \"DEV\",           \"accountName\": \"thoughtspot_partner\",           \"warehouse\": \"DEMO_WH\",           \"user\": \"DEV_USER\"         }       }       ```  3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.    **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not  specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.    * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a Snowflake connection:    ```    {       \"configuration\":{          \"accountName\":\"thoughtspot_partner\",          \"user\":\"tsadmin\",          \"password\":\"TestConn123\",          \"role\":\"sysadmin\",          \"warehouse\":\"MEDIUM_WH\"       },       \"externalDatabases\":[        ]    }    ```      
    * @param connectionIdentifier Unique ID or name of the connection.
    * @param updateConnectionV2Request 
    */
@@ -14473,28 +16792,79 @@ var CustomActionApiResponseProcessor = class {
 var DBTApiRequestFactory = class extends BaseAPIRequestFactory {
   /**
    *   Version: 9.9.0.cl or later   Creates a DBT connection object in ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### About create DBT connection DBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.      
-   * @param dbtConnectionRequest 
+   * @param connectionName Name of the connection.
+   * @param databaseName Name of the Database.
+   * @param importType Mention type of Import
+   * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD.
+   * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD.
+   * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD
+   * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD
+   * @param dbtEnvId DBT Environment ID\\\&quot;
+   * @param projectName Name of the project
+   * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is Mandatory when Import Type is \\\&#39;ZIP_FILE\\\&#39;
    */
-  dbtConnection(dbtConnectionRequest, _options) {
+  dbtConnection(connectionName, databaseName, importType, accessToken, dbtUrl, accountId, projectId, dbtEnvId, projectName, fileContent, _options) {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
-      if (dbtConnectionRequest === null || dbtConnectionRequest === void 0) {
-        throw new RequiredError("DBTApi", "dbtConnection", "dbtConnectionRequest");
+      if (connectionName === null || connectionName === void 0) {
+        throw new RequiredError("DBTApi", "dbtConnection", "connectionName");
+      }
+      if (databaseName === null || databaseName === void 0) {
+        throw new RequiredError("DBTApi", "dbtConnection", "databaseName");
       }
       const localVarPath = "/api/rest/2.0/dbt/dbt-connection";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2");
-      const contentType = ObjectSerializer.getPreferredMediaType([
-        "application/json"
+      const useForm = canConsumeForm([
+        "multipart/form-data"
       ]);
-      requestContext.setHeaderParam("Content-Type", contentType);
-      const serializedBody = ObjectSerializer.stringify(
-        ObjectSerializer.serialize(dbtConnectionRequest, "DbtConnectionRequest", ""),
-        contentType
-      );
-      requestContext.setBody(serializedBody);
+      let localVarFormParams;
+      if (useForm) {
+        localVarFormParams = new FormData();
+      } else {
+        localVarFormParams = new URLSearchParams();
+      }
+      if (connectionName !== void 0) {
+        localVarFormParams.append("connection_name", connectionName);
+      }
+      if (databaseName !== void 0) {
+        localVarFormParams.append("database_name", databaseName);
+      }
+      if (importType !== void 0) {
+        localVarFormParams.append("import_type", importType);
+      }
+      if (accessToken !== void 0) {
+        localVarFormParams.append("access_token", accessToken);
+      }
+      if (dbtUrl !== void 0) {
+        localVarFormParams.append("dbt_url", dbtUrl);
+      }
+      if (accountId !== void 0) {
+        localVarFormParams.append("account_id", accountId);
+      }
+      if (projectId !== void 0) {
+        localVarFormParams.append("project_id", projectId);
+      }
+      if (dbtEnvId !== void 0) {
+        localVarFormParams.append("dbt_env_id", dbtEnvId);
+      }
+      if (projectName !== void 0) {
+        localVarFormParams.append("project_name", projectName);
+      }
+      if (fileContent !== void 0) {
+        if (localVarFormParams instanceof FormData) {
+          localVarFormParams.append("file_content", fileContent, fileContent.name);
+        }
+      }
+      requestContext.setBody(localVarFormParams);
+      if (!useForm) {
+        const contentType = ObjectSerializer.getPreferredMediaType([
+          "multipart/form-data"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+      }
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -14509,28 +16879,44 @@ var DBTApiRequestFactory = class extends BaseAPIRequestFactory {
   }
   /**
    *   Version: 9.9.0.cl or later   Resynchronize the existing list of models, tables, worksheet tml’s and import them to Thoughtspot based on the DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)      
-   * @param dbtGenerateSyncTmlRequest 
+   * @param dbtConnectionIdentifier Unique ID of the DBT connection.
+   * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
    */
-  dbtGenerateSyncTml(dbtGenerateSyncTmlRequest, _options) {
+  dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, _options) {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
-      if (dbtGenerateSyncTmlRequest === null || dbtGenerateSyncTmlRequest === void 0) {
-        throw new RequiredError("DBTApi", "dbtGenerateSyncTml", "dbtGenerateSyncTmlRequest");
+      if (dbtConnectionIdentifier === null || dbtConnectionIdentifier === void 0) {
+        throw new RequiredError("DBTApi", "dbtGenerateSyncTml", "dbtConnectionIdentifier");
       }
       const localVarPath = "/api/rest/2.0/dbt/generate-sync-tml";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2");
-      const contentType = ObjectSerializer.getPreferredMediaType([
-        "application/json"
+      const useForm = canConsumeForm([
+        "multipart/form-data"
       ]);
-      requestContext.setHeaderParam("Content-Type", contentType);
-      const serializedBody = ObjectSerializer.stringify(
-        ObjectSerializer.serialize(dbtGenerateSyncTmlRequest, "DbtGenerateSyncTmlRequest", ""),
-        contentType
-      );
-      requestContext.setBody(serializedBody);
+      let localVarFormParams;
+      if (useForm) {
+        localVarFormParams = new FormData();
+      } else {
+        localVarFormParams = new URLSearchParams();
+      }
+      if (dbtConnectionIdentifier !== void 0) {
+        localVarFormParams.append("dbt_connection_identifier", dbtConnectionIdentifier);
+      }
+      if (fileContent !== void 0) {
+        if (localVarFormParams instanceof FormData) {
+          localVarFormParams.append("file_content", fileContent, fileContent.name);
+        }
+      }
+      requestContext.setBody(localVarFormParams);
+      if (!useForm) {
+        const contentType = ObjectSerializer.getPreferredMediaType([
+          "multipart/form-data"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+      }
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -14545,28 +16931,62 @@ var DBTApiRequestFactory = class extends BaseAPIRequestFactory {
   }
   /**
    *   Version: 9.9.0.cl or later   Generate required table and worksheet and import them.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### About generate TML Models and Worksheets to be imported can be selected by the user as part of the API.      
-   * @param dbtGenerateTmlRequest 
+   * @param dbtConnectionIdentifier Unique ID of the DBT connection.
+   * @param modelTables List of Models and their respective Tables Example: \\\&#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;, \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]\\\&#39;
+   * @param importWorksheets Mention the worksheet tmls to import
+   * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED Example: [\\\&quot;worksheet_name\\\&quot;]
+   * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
    */
-  dbtGenerateTml(dbtGenerateTmlRequest, _options) {
+  dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent, _options) {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
-      if (dbtGenerateTmlRequest === null || dbtGenerateTmlRequest === void 0) {
-        throw new RequiredError("DBTApi", "dbtGenerateTml", "dbtGenerateTmlRequest");
+      if (dbtConnectionIdentifier === null || dbtConnectionIdentifier === void 0) {
+        throw new RequiredError("DBTApi", "dbtGenerateTml", "dbtConnectionIdentifier");
+      }
+      if (modelTables === null || modelTables === void 0) {
+        throw new RequiredError("DBTApi", "dbtGenerateTml", "modelTables");
+      }
+      if (importWorksheets === null || importWorksheets === void 0) {
+        throw new RequiredError("DBTApi", "dbtGenerateTml", "importWorksheets");
       }
       const localVarPath = "/api/rest/2.0/dbt/generate-tml";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2");
-      const contentType = ObjectSerializer.getPreferredMediaType([
-        "application/json"
+      const useForm = canConsumeForm([
+        "multipart/form-data"
       ]);
-      requestContext.setHeaderParam("Content-Type", contentType);
-      const serializedBody = ObjectSerializer.stringify(
-        ObjectSerializer.serialize(dbtGenerateTmlRequest, "DbtGenerateTmlRequest", ""),
-        contentType
-      );
-      requestContext.setBody(serializedBody);
+      let localVarFormParams;
+      if (useForm) {
+        localVarFormParams = new FormData();
+      } else {
+        localVarFormParams = new URLSearchParams();
+      }
+      if (dbtConnectionIdentifier !== void 0) {
+        localVarFormParams.append("dbt_connection_identifier", dbtConnectionIdentifier);
+      }
+      if (modelTables !== void 0) {
+        localVarFormParams.append("model_tables", modelTables);
+      }
+      if (importWorksheets !== void 0) {
+        localVarFormParams.append("import_worksheets", importWorksheets);
+      }
+      if (worksheets !== void 0) {
+        localVarFormParams.append("worksheets", worksheets);
+      }
+      if (fileContent !== void 0) {
+        if (localVarFormParams instanceof FormData) {
+          localVarFormParams.append("file_content", fileContent, fileContent.name);
+        }
+      }
+      requestContext.setBody(localVarFormParams);
+      if (!useForm) {
+        const contentType = ObjectSerializer.getPreferredMediaType([
+          "multipart/form-data"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+      }
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -14631,28 +17051,80 @@ var DBTApiRequestFactory = class extends BaseAPIRequestFactory {
   }
   /**
    *   Version: 9.9.0.cl or later   Updates a DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### About update DBT connection You can modify DBT connection object properties such as embrace connection name, embrace database name, import type, account identifier, access token, project identifier and environment (or) embrace connection, embrace database name, import type, file_content settings.      
-   * @param updateDbtConnectionRequest 
+   * @param dbtConnectionIdentifier Unique ID of the DBT Connection.
+   * @param connectionName Name of the connection.
+   * @param databaseName Name of the Database.
+   * @param importType Mention type of Import
+   * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD.
+   * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD.
+   * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD
+   * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD
+   * @param dbtEnvId DBT Environment ID\\\&quot;
+   * @param projectName Name of the project
+   * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is Mandatory when Import Type is \\\&#39;ZIP_FILE\\\&#39;
    */
-  updateDbtConnection(updateDbtConnectionRequest, _options) {
+  updateDbtConnection(dbtConnectionIdentifier, connectionName, databaseName, importType, accessToken, dbtUrl, accountId, projectId, dbtEnvId, projectName, fileContent, _options) {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
-      if (updateDbtConnectionRequest === null || updateDbtConnectionRequest === void 0) {
-        throw new RequiredError("DBTApi", "updateDbtConnection", "updateDbtConnectionRequest");
+      if (dbtConnectionIdentifier === null || dbtConnectionIdentifier === void 0) {
+        throw new RequiredError("DBTApi", "updateDbtConnection", "dbtConnectionIdentifier");
       }
       const localVarPath = "/api/rest/2.0/dbt/update-dbt-connection";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2");
-      const contentType = ObjectSerializer.getPreferredMediaType([
-        "application/json"
+      const useForm = canConsumeForm([
+        "multipart/form-data"
       ]);
-      requestContext.setHeaderParam("Content-Type", contentType);
-      const serializedBody = ObjectSerializer.stringify(
-        ObjectSerializer.serialize(updateDbtConnectionRequest, "UpdateDbtConnectionRequest", ""),
-        contentType
-      );
-      requestContext.setBody(serializedBody);
+      let localVarFormParams;
+      if (useForm) {
+        localVarFormParams = new FormData();
+      } else {
+        localVarFormParams = new URLSearchParams();
+      }
+      if (dbtConnectionIdentifier !== void 0) {
+        localVarFormParams.append("dbt_connection_identifier", dbtConnectionIdentifier);
+      }
+      if (connectionName !== void 0) {
+        localVarFormParams.append("connection_name", connectionName);
+      }
+      if (databaseName !== void 0) {
+        localVarFormParams.append("database_name", databaseName);
+      }
+      if (importType !== void 0) {
+        localVarFormParams.append("import_type", importType);
+      }
+      if (accessToken !== void 0) {
+        localVarFormParams.append("access_token", accessToken);
+      }
+      if (dbtUrl !== void 0) {
+        localVarFormParams.append("dbt_url", dbtUrl);
+      }
+      if (accountId !== void 0) {
+        localVarFormParams.append("account_id", accountId);
+      }
+      if (projectId !== void 0) {
+        localVarFormParams.append("project_id", projectId);
+      }
+      if (dbtEnvId !== void 0) {
+        localVarFormParams.append("dbt_env_id", dbtEnvId);
+      }
+      if (projectName !== void 0) {
+        localVarFormParams.append("project_name", projectName);
+      }
+      if (fileContent !== void 0) {
+        if (localVarFormParams instanceof FormData) {
+          localVarFormParams.append("file_content", fileContent, fileContent.name);
+        }
+      }
+      requestContext.setBody(localVarFormParams);
+      if (!useForm) {
+        const contentType = ObjectSerializer.getPreferredMediaType([
+          "multipart/form-data"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+      }
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -15945,7 +18417,7 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *  Makes a copy of an Answer or Liveboard saved in Atlas    Version: 10.3.0.cl or later   Creates a copy of a metadata object.  Requires at least view access to the metadata object being copied.  Upon successful execution, the API creates a copy of the metadata object specified in the API request and returns the ID of the new object.      
+   *  Makes a copy of an Answer or Liveboard    Version: 10.3.0.cl or later   Creates a copy of a metadata object.  Requires at least view access to the metadata object being copied.  Upon successful execution, the API creates a copy of the metadata object specified in the API request and returns the ID of the new object.      
    * @param copyObjectRequest 
    */
   copyObject(copyObjectRequest, _options) {
@@ -16269,7 +18741,7 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.   You can also define sorting options to sort the data retrieved in the API response. - To get discoverable objects when linientmodel is enabled you can use `include_discoverable_objects` as true else false. Default value is true.  **NOTE**: The following parameters support pagination of metadata records:  - `tag_identifiers` - `type` - `created_by_user_identifiers` - `modified_by_user_identifiers` - `owned_by_user_identifiers` - `exclude_objects` - `include_auto_created_objects` - `favorite_object_options` If you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.      
+   *   Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`. - To filter metadata objects within type `LOGICAL_TABLE`, set the `subtypes` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE` & subtypes as `[WORKSHEET]`. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.   You can also define sorting options to sort the data retrieved in the API response. - To get discoverable objects when linientmodel is enabled you can use `include_discoverable_objects` as true else false. Default value is true. - For liveboard metadata type, to get the newer format, set the `liveboard_response_format` as V2. Default value is V1. - To retrieve only objects that are published, set the `include_only_published_objects` as true. Default value is false.  **NOTE**: The following parameters support pagination of metadata records:  - `tag_identifiers` - `type` - `subtypes` - `created_by_user_identifiers` - `modified_by_user_identifiers` - `owned_by_user_identifiers` - `exclude_objects` - `include_auto_created_objects` - `favorite_object_options` - `include_only_published_objects` If you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.      
    * @param searchMetadataRequest 
    */
   searchMetadata(searchMetadataRequest, _options) {
@@ -17548,7 +20020,7 @@ var OrgsApiResponseProcessor = class {
 // apis/ReportsApi.ts
 var ReportsApiRequestFactory = class extends BaseAPIRequestFactory {
   /**
-   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires at least view access to the Answer.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  **NOTE**: * The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with tables.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).       
+   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires at least view access to the Answer.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  **NOTE**: * The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with tables.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.       
    * @param exportAnswerReportRequest 
    */
   exportAnswerReport(exportAnswerReportRequest, _options) {
@@ -17584,7 +20056,7 @@ var ReportsApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.0.0.cl or later   Exports a Liveboard and its visualizations in PDF or PNG file format.  Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is PDF. For PDF downloads, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  **NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).       
+   *   Version: 9.0.0.cl or later   Exports a Liveboard and its visualizations in PDF or PNG file format.  Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is PDF. For PDF downloads, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  **NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).    **NOTE**: Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in the PNG format in the resolution of your choice. To enable this on your instance, contact ThoughtSpot support. When this feature is enabled, the options `include_cover_page`,`include_filter_page` within the `png_options` will not be available for PNG exports.     
    * @param exportLiveboardReportRequest 
    */
   exportLiveboardReport(exportLiveboardReportRequest, _options) {
@@ -19128,7 +21600,7 @@ var SystemApiResponseProcessor = class {
       if (isCodeInRange("200", response.httpStatusCode)) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "any",
+          "SystemOverrideInfo",
           ""
         );
         return body;
@@ -19168,7 +21640,7 @@ var SystemApiResponseProcessor = class {
       if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "any",
+          "SystemOverrideInfo",
           ""
         );
         return body;
@@ -20016,7 +22488,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *  Makes a copy of an Answer or Liveboard saved in Atlas    Version: 10.3.0.cl or later   Creates a copy of a metadata object.  Requires at least view access to the metadata object being copied.  Upon successful execution, the API creates a copy of the metadata object specified in the API request and returns the ID of the new object.      
+   *  Makes a copy of an Answer or Liveboard    Version: 10.3.0.cl or later   Creates a copy of a metadata object.  Requires at least view access to the metadata object being copied.  Upon successful execution, the API creates a copy of the metadata object specified in the API request and returns the ID of the new object.      
    * @param copyObjectRequest 
    */
   copyObject(copyObjectRequest, _options) {
@@ -20413,28 +22885,79 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
   }
   /**
    *   Version: 9.9.0.cl or later   Creates a DBT connection object in ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### About create DBT connection DBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.      
-   * @param dbtConnectionRequest 
+   * @param connectionName Name of the connection.
+   * @param databaseName Name of the Database.
+   * @param importType Mention type of Import
+   * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD.
+   * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD.
+   * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD
+   * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD
+   * @param dbtEnvId DBT Environment ID\\\&quot;
+   * @param projectName Name of the project
+   * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is Mandatory when Import Type is \\\&#39;ZIP_FILE\\\&#39;
    */
-  dbtConnection(dbtConnectionRequest, _options) {
+  dbtConnection(connectionName, databaseName, importType, accessToken, dbtUrl, accountId, projectId, dbtEnvId, projectName, fileContent, _options) {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
-      if (dbtConnectionRequest === null || dbtConnectionRequest === void 0) {
-        throw new RequiredError("ThoughtSpotRestApi", "dbtConnection", "dbtConnectionRequest");
+      if (connectionName === null || connectionName === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "dbtConnection", "connectionName");
+      }
+      if (databaseName === null || databaseName === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "dbtConnection", "databaseName");
       }
       const localVarPath = "/api/rest/2.0/dbt/dbt-connection";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2");
-      const contentType = ObjectSerializer.getPreferredMediaType([
-        "application/json"
+      const useForm = canConsumeForm([
+        "multipart/form-data"
       ]);
-      requestContext.setHeaderParam("Content-Type", contentType);
-      const serializedBody = ObjectSerializer.stringify(
-        ObjectSerializer.serialize(dbtConnectionRequest, "DbtConnectionRequest", ""),
-        contentType
-      );
-      requestContext.setBody(serializedBody);
+      let localVarFormParams;
+      if (useForm) {
+        localVarFormParams = new FormData();
+      } else {
+        localVarFormParams = new URLSearchParams();
+      }
+      if (connectionName !== void 0) {
+        localVarFormParams.append("connection_name", connectionName);
+      }
+      if (databaseName !== void 0) {
+        localVarFormParams.append("database_name", databaseName);
+      }
+      if (importType !== void 0) {
+        localVarFormParams.append("import_type", importType);
+      }
+      if (accessToken !== void 0) {
+        localVarFormParams.append("access_token", accessToken);
+      }
+      if (dbtUrl !== void 0) {
+        localVarFormParams.append("dbt_url", dbtUrl);
+      }
+      if (accountId !== void 0) {
+        localVarFormParams.append("account_id", accountId);
+      }
+      if (projectId !== void 0) {
+        localVarFormParams.append("project_id", projectId);
+      }
+      if (dbtEnvId !== void 0) {
+        localVarFormParams.append("dbt_env_id", dbtEnvId);
+      }
+      if (projectName !== void 0) {
+        localVarFormParams.append("project_name", projectName);
+      }
+      if (fileContent !== void 0) {
+        if (localVarFormParams instanceof FormData) {
+          localVarFormParams.append("file_content", fileContent, fileContent.name);
+        }
+      }
+      requestContext.setBody(localVarFormParams);
+      if (!useForm) {
+        const contentType = ObjectSerializer.getPreferredMediaType([
+          "multipart/form-data"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+      }
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -20449,28 +22972,44 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
   }
   /**
    *   Version: 9.9.0.cl or later   Resynchronize the existing list of models, tables, worksheet tml’s and import them to Thoughtspot based on the DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)      
-   * @param dbtGenerateSyncTmlRequest 
+   * @param dbtConnectionIdentifier Unique ID of the DBT connection.
+   * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
    */
-  dbtGenerateSyncTml(dbtGenerateSyncTmlRequest, _options) {
+  dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, _options) {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
-      if (dbtGenerateSyncTmlRequest === null || dbtGenerateSyncTmlRequest === void 0) {
-        throw new RequiredError("ThoughtSpotRestApi", "dbtGenerateSyncTml", "dbtGenerateSyncTmlRequest");
+      if (dbtConnectionIdentifier === null || dbtConnectionIdentifier === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "dbtGenerateSyncTml", "dbtConnectionIdentifier");
       }
       const localVarPath = "/api/rest/2.0/dbt/generate-sync-tml";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2");
-      const contentType = ObjectSerializer.getPreferredMediaType([
-        "application/json"
+      const useForm = canConsumeForm([
+        "multipart/form-data"
       ]);
-      requestContext.setHeaderParam("Content-Type", contentType);
-      const serializedBody = ObjectSerializer.stringify(
-        ObjectSerializer.serialize(dbtGenerateSyncTmlRequest, "DbtGenerateSyncTmlRequest", ""),
-        contentType
-      );
-      requestContext.setBody(serializedBody);
+      let localVarFormParams;
+      if (useForm) {
+        localVarFormParams = new FormData();
+      } else {
+        localVarFormParams = new URLSearchParams();
+      }
+      if (dbtConnectionIdentifier !== void 0) {
+        localVarFormParams.append("dbt_connection_identifier", dbtConnectionIdentifier);
+      }
+      if (fileContent !== void 0) {
+        if (localVarFormParams instanceof FormData) {
+          localVarFormParams.append("file_content", fileContent, fileContent.name);
+        }
+      }
+      requestContext.setBody(localVarFormParams);
+      if (!useForm) {
+        const contentType = ObjectSerializer.getPreferredMediaType([
+          "multipart/form-data"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+      }
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -20485,28 +23024,62 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
   }
   /**
    *   Version: 9.9.0.cl or later   Generate required table and worksheet and import them.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### About generate TML Models and Worksheets to be imported can be selected by the user as part of the API.      
-   * @param dbtGenerateTmlRequest 
+   * @param dbtConnectionIdentifier Unique ID of the DBT connection.
+   * @param modelTables List of Models and their respective Tables Example: \\\&#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;, \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]\\\&#39;
+   * @param importWorksheets Mention the worksheet tmls to import
+   * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED Example: [\\\&quot;worksheet_name\\\&quot;]
+   * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
    */
-  dbtGenerateTml(dbtGenerateTmlRequest, _options) {
+  dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent, _options) {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
-      if (dbtGenerateTmlRequest === null || dbtGenerateTmlRequest === void 0) {
-        throw new RequiredError("ThoughtSpotRestApi", "dbtGenerateTml", "dbtGenerateTmlRequest");
+      if (dbtConnectionIdentifier === null || dbtConnectionIdentifier === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "dbtGenerateTml", "dbtConnectionIdentifier");
+      }
+      if (modelTables === null || modelTables === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "dbtGenerateTml", "modelTables");
+      }
+      if (importWorksheets === null || importWorksheets === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "dbtGenerateTml", "importWorksheets");
       }
       const localVarPath = "/api/rest/2.0/dbt/generate-tml";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2");
-      const contentType = ObjectSerializer.getPreferredMediaType([
-        "application/json"
+      const useForm = canConsumeForm([
+        "multipart/form-data"
       ]);
-      requestContext.setHeaderParam("Content-Type", contentType);
-      const serializedBody = ObjectSerializer.stringify(
-        ObjectSerializer.serialize(dbtGenerateTmlRequest, "DbtGenerateTmlRequest", ""),
-        contentType
-      );
-      requestContext.setBody(serializedBody);
+      let localVarFormParams;
+      if (useForm) {
+        localVarFormParams = new FormData();
+      } else {
+        localVarFormParams = new URLSearchParams();
+      }
+      if (dbtConnectionIdentifier !== void 0) {
+        localVarFormParams.append("dbt_connection_identifier", dbtConnectionIdentifier);
+      }
+      if (modelTables !== void 0) {
+        localVarFormParams.append("model_tables", modelTables);
+      }
+      if (importWorksheets !== void 0) {
+        localVarFormParams.append("import_worksheets", importWorksheets);
+      }
+      if (worksheets !== void 0) {
+        localVarFormParams.append("worksheets", worksheets);
+      }
+      if (fileContent !== void 0) {
+        if (localVarFormParams instanceof FormData) {
+          localVarFormParams.append("file_content", fileContent, fileContent.name);
+        }
+      }
+      requestContext.setBody(localVarFormParams);
+      if (!useForm) {
+        const contentType = ObjectSerializer.getPreferredMediaType([
+          "multipart/form-data"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+      }
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -20993,7 +23566,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires at least view access to the Answer.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  **NOTE**: * The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with tables.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).       
+   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires at least view access to the Answer.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  **NOTE**: * The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with tables.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.       
    * @param exportAnswerReportRequest 
    */
   exportAnswerReport(exportAnswerReportRequest, _options) {
@@ -21029,7 +23602,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.0.0.cl or later   Exports a Liveboard and its visualizations in PDF or PNG file format.  Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is PDF. For PDF downloads, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  **NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).       
+   *   Version: 9.0.0.cl or later   Exports a Liveboard and its visualizations in PDF or PNG file format.  Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is PDF. For PDF downloads, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  **NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).    **NOTE**: Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in the PNG format in the resolution of your choice. To enable this on your instance, contact ThoughtSpot support. When this feature is enabled, the options `include_cover_page`,`include_filter_page` within the `png_options` will not be available for PNG exports.     
    * @param exportLiveboardReportRequest 
    */
   exportLiveboardReport(exportLiveboardReportRequest, _options) {
@@ -21488,7 +24061,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.0.0.cl or later    Gets session information for the currently logged-in user.  This API does not require any parameters to be passed in the request.    Any ThoughtSpot user can access this endpoint and send an API request. The data returned in the API response varies according to user\'s privilege and object access permissions.      
+   *   Version: 9.0.0.cl or later   Retrieves details of the current user session for the token provided in the request header.  Any ThoughtSpot user can access this endpoint and send an API request. The data returned in the API response varies according to user\'s privilege and object access permissions.     
    */
   getCurrentUserInfo(_options) {
     return __async(this, null, function* () {
@@ -21511,7 +24084,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *  Get token for the currently logged-in user.    Version: 9.4.0.cl or later   Gets token details for the currently logged-in user.  You can use this endpoint to obtain the token associated with the user\'s session.  This API does not require any parameters to be passed in the request.    Any ThoughtSpot user can access this endpoint and send an API request.      
+   *   Version: 9.4.0.cl or later   Retrieves details of the current session token for the bearer token provided in the request header.  This API endpoint does not create a new token. Instead, it returns details about the token, including the token string, creation time, expiration time, and the associated user.  Use this endpoint to introspect your current session token, debug authentication issues, or when a frontend application needs session token details.  Any ThoughtSpot user with a valid bearer token can access this endpoint and send an API request      
    */
   getCurrentUserToken(_options) {
     return __async(this, null, function* () {
@@ -21534,7 +24107,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 10.4.0.cl or later   Gets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  To add a new user and assign privileges during auto creation, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  To assign security attributes with filter rules and Parameters to the JWT token, you\'ll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  #### Usage guidelines  You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key`.  To generate a `secret_key` on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable) in the **Develop** > **Customizations** > **Security Settings** page.  **Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.  If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.  ##### Attribute-Based Access Control (ABAC) with tokens  To implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the `filter_rules` and `parameter_values` array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user\'s `access_control_properties` object, after which all sessions will use the persisted values.  Specify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.  For more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).  ##### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * `auto_create` * `username` * `display_name` * `email` * `groups`  Set `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true` in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  ##### Important point to note All options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Persist options such as  `APPEND`, `REPLACE`, `RESET` will persist security parameters on the user profile when the token is created, while Persist option `NONE` will not persist anything but will be honoured in the session.      
+   *   Version: 10.4.0.cl or later   Gets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  To add a new user and assign privileges during auto creation, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  To assign security attributes with filter rules and Parameters to the JWT token, you\'ll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  #### Usage guidelines  You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key`.  To generate a `secret_key` on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable) in the **Develop** > **Customizations** > **Security Settings** page.  **Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.  If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.  ##### Attribute-Based Access Control (ABAC) with tokens  To implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the `filter_rules` and `parameter_values` array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user\'s `access_control_properties` object, after which all sessions will use the persisted values.  Specify the object type as `LOGICAL_TABLE`.   For more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).  ##### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * `auto_create` * `username` * `display_name` * `email` * `groups`  Set `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true` in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values. If `auto_create` is set to `true`, it won\'t create formula variables and hence won\'t be applicable for `variable_values`.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  ##### Important point to note All options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Persist options such as  `APPEND`, `REPLACE`, `RESET` will persist security parameters on the user profile when the token is created, while Persist option `NONE` will not persist anything but will be honoured in the session.  ##### Formula Variables Before using variables_values, variables must be created using Create Variable API with type as Formula_Variable (/api/rest/2.0/template/variables/create) The persist_option RESET and NONE cannot be used when variable_values are provided in the request. If you are working with variable_values, you must use other (APPEND, REPLACE) supported modes. If you want to use RESET or NONE, do not pass any variable_values. In such cases, variable_values will remain unaffected. When using object_id with variable_values, models are supported.      
    * @param getCustomAccessTokenRequest 
    */
   getCustomAccessToken(getCustomAccessTokenRequest, _options) {
@@ -22119,7 +24692,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.2.0.cl or later   Gets connection objects. Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  - To get a list of all connections available in the ThoughtSpot system, send the API request without any attributes in the request body. - To get the connection objects for a specific type of data warehouse, specify the type in `data_warehouse_types`. - To fetch details of a connection object, specify the connection object GUID or name. The `name_pattern` attribute allows passing partial text with `%` for a wildcard match. - To get details of the database, schemas, tables, or columns from a data connection object, specify `data_warehouse_object_type`. - To get a specific database, schema, table, or column from a connection object, define the object type in `data_warehouse_object_type` and object properties in the `data_warehouse_objects` array. For example, to search for a column, you must pass the database, schema, and table names in the API request.   Note that in the following example, object properties are set in a hierarchical order (`database` > `schema` > `table` > `column`).  ``` {   \"connections\": [     {       \"identifier\": \"b9d1f2ef-fa65-4a4b-994e-30fa2d57b0c2\",       \"data_warehouse_objects\": [         {           \"database\": \"NEBULADEV\",           \"schema\": \"INFORMATION_SCHEMA\",           \"table\": \"APPLICABLE_ROLES\",           \"column\": \"ROLE_NAME\"         }       ]     }   ],   \"data_warehouse_object_type\": \"COLUMN\" } ```  - To fetch data by `configuration`, specify `data_warehouse_object_type`. For example, to fetch columns from the `DEVELOPMENT` database, specify the `data_warehouse_object_type` as `DATABASE` and define the `configuration` string as `{\"database\":\"DEVELOPMENT\"}`. To get column data for a specific table, specify the table, for example,`{\"database\":\"RETAILAPPAREL\",\"table\":\"PIPES\"}`. - To query connections by `authentication_type`, specify `data_warehouse_object_type`. Supported values for `authentication_type` are:   - `SERVICE_ACCOUNT`: For connections that require service account credentials to authenticate to the Cloud Data Warehouse and fetch data.   - `OAUTH`: For connections that require OAuth credentials to authenticate to the Cloud Data Warehouse and fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth authentication type.   - `IAM`: For connections that have the IAM OAuth set up. This authentication type is supported on Amazon Redshift connections only.   - `EXTOAUTH`: For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/ connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). - To include more details about connection objects in the API response, set `include_details` to `true`. - You can also sort the output by field names and filter connections by tags.  **NOTE**: When filtering connection records by parameters other than `data_warehouse_types` or `tag_identifiers`, ensure that you set `record_size` to `-1` and `record_offset` to `0` for precise results.      
+   *   Version: 9.2.0.cl or later   Gets connection objects. Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  - To get a list of all connections available in the ThoughtSpot system, send the API request without any attributes in the request body. - To get the connection objects for a specific type of data warehouse, specify the type in `data_warehouse_types`. - To fetch details of a connection object, specify the connection object GUID or name. The `name_pattern` attribute allows passing partial text with `%` for a wildcard match. - To get details of the database, schemas, tables, or columns from a data connection object, specify `data_warehouse_object_type`. - To get a specific database, schema, table, or column from a connection object, define the object type in `data_warehouse_object_type` and object properties in the `data_warehouse_objects` array. For example, to search for a column, you must pass the database, schema, and table names in the API request.   Note that in the following example, object properties are set in a hierarchical order (`database` > `schema` > `table` > `column`).  ``` {   \"connections\": [     {       \"identifier\": \"b9d1f2ef-fa65-4a4b-994e-30fa2d57b0c2\",       \"data_warehouse_objects\": [         {           \"database\": \"NEBULADEV\",           \"schema\": \"INFORMATION_SCHEMA\",           \"table\": \"APPLICABLE_ROLES\",           \"column\": \"ROLE_NAME\"         }       ]     }   ],   \"data_warehouse_object_type\": \"COLUMN\" } ```  - To fetch data by `configuration`, specify `data_warehouse_object_type`. For example, to fetch columns from the `DEVELOPMENT` database, specify the `data_warehouse_object_type` as `DATABASE` and define the `configuration` string as `{\"database\":\"DEVELOPMENT\"}`. To get column data for a specific table, specify the table, for example,`{\"database\":\"RETAILAPPAREL\",\"table\":\"PIPES\"}`. - To query connections by `authentication_type`, specify `data_warehouse_object_type`. Supported values for `authentication_type` are:   - `SERVICE_ACCOUNT`: For connections that require service account credentials to authenticate to the Cloud Data Warehouse and fetch data.   - `OAUTH`: For connections that require OAuth credentials to authenticate to the Cloud Data Warehouse and fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth authentication type.   - `IAM`: For connections that have the IAM OAuth set up. This authentication type is supported on Amazon Redshift connections only.   - `EXTOAUTH`: For connections that have External OAuth set up. ThoughtSpot supports external [OAuth with Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/ connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth).   - `KEY_PAIR`: For connections that require Key Pair account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only.   - `OAUTH_WITH_PKCE`: For connections that require OAuth with PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake, Starburst, Databricks, Denodo  connections only.   - `EXTOAUTH_WITH_PKCE`: For connections that require External OAuth With PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only.   - `OAUTH_WITH_PEZ`: For connections that require OAuth With PEZ account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Amazon Redshift connections only.   - `OAUTH_WITH_SERVICE_PRINCIPAL`: For connections that require OAuth With Service Principal account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Databricks connections only.   - `PERSONAL_ACCESS_TOKEN`: For connections that require Personal Access Token account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Databricks connections only.   - `OAUTH_CLIENT_CREDENTIALS`: For connections that require OAuth Client Credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only. - To include more details about connection objects in the API response, set `include_details` to `true`. - You can also sort the output by field names and filter connections by tags.  **NOTE**: When filtering connection records by parameters other than `data_warehouse_types` or `tag_identifiers`, ensure that you set `record_size` to `-1` and `record_offset` to `0` for precise results.      
    * @param searchConnectionRequest 
    */
   searchConnection(searchConnectionRequest, _options) {
@@ -22227,7 +24800,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.   You can also define sorting options to sort the data retrieved in the API response. - To get discoverable objects when linientmodel is enabled you can use `include_discoverable_objects` as true else false. Default value is true.  **NOTE**: The following parameters support pagination of metadata records:  - `tag_identifiers` - `type` - `created_by_user_identifiers` - `modified_by_user_identifiers` - `owned_by_user_identifiers` - `exclude_objects` - `include_auto_created_objects` - `favorite_object_options` If you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.      
+   *   Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`. - To filter metadata objects within type `LOGICAL_TABLE`, set the `subtypes` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE` & subtypes as `[WORKSHEET]`. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.   You can also define sorting options to sort the data retrieved in the API response. - To get discoverable objects when linientmodel is enabled you can use `include_discoverable_objects` as true else false. Default value is true. - For liveboard metadata type, to get the newer format, set the `liveboard_response_format` as V2. Default value is V1. - To retrieve only objects that are published, set the `include_only_published_objects` as true. Default value is false.  **NOTE**: The following parameters support pagination of metadata records:  - `tag_identifiers` - `type` - `subtypes` - `created_by_user_identifiers` - `modified_by_user_identifiers` - `owned_by_user_identifiers` - `exclude_objects` - `include_auto_created_objects` - `favorite_object_options` - `include_only_published_objects` If you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.      
    * @param searchMetadataRequest 
    */
   searchMetadata(searchMetadataRequest, _options) {
@@ -22699,7 +25272,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 10.4.0.cl or later   Updates a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`.    * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:     ```    {       \"configuration\":{          \"accountName\":\"thoughtspot_partner\",          \"user\":\"tsadmin\",          \"password\":\"TestConn123\",          \"role\":\"sysadmin\",          \"warehouse\":\"MEDIUM_WH\"       },       \"externalDatabases\":[          {             \"name\":\"AllDatatypes\",             \"isAutoCreated\":false,             \"schemas\":[                {                   \"name\":\"alldatatypes\",                   \"tables\":[                      {                         \"name\":\"allDatatypes\",                         \"type\":\"TABLE\",                         \"description\":\"\",                         \"selected\":true,                         \"linked\":true,                         \"columns\":[                            {                               \"name\":\"CNUMBER\",                               \"type\":\"INT64\",                               \"canImport\":true,                               \"selected\":true,                               \"isLinkedActive\":true,                               \"isImported\":false,                               \"tableName\":\"allDatatypes\",                               \"schemaName\":\"alldatatypes\",                               \"dbName\":\"AllDatatypes\"                            },                            {                               \"name\":\"CDECIMAL\",                               \"type\":\"INT64\",                               \"canImport\":true,                               \"selected\":true,                               \"isLinkedActive\":true,                               \"isImported\":false,                               \"tableName\":\"allDatatypes\",                               \"schemaName\":\"alldatatypes\",                               \"dbName\":\"AllDatatypes\"                            }                         ]                      }                   ]                }             ]          }       ]    }    ```  3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`. * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a Snowflake connection:  ```  {     \"configuration\":{        \"accountName\":\"thoughtspot_partner\",        \"user\":\"tsadmin\",        \"password\":\"TestConn123\",        \"role\":\"sysadmin\",        \"warehouse\":\"MEDIUM_WH\"     },     \"externalDatabases\":[      ]  }  ```      
+   *   Version: 10.4.0.cl or later   Updates a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`.        **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.     * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:    * This is an example of updating a single table in a empty connection:           ```       {         \"authenticationType\": \"SERVICE_ACCOUNT\",         \"externalDatabases\": [           {             \"name\": \"DEVELOPMENT\",             \"isAutoCreated\": false,             \"schemas\": [               {                 \"name\": \"TS_dataset\",                 \"tables\": [                   {                     \"name\": \"DEMORENAME\",                     \"type\": \"TABLE\",                     \"description\": \"\",                     \"selected\": true,                     \"linked\": true,                     \"gid\": 0,                     \"datasetId\": \"-1\",                     \"subType\": \"\",                     \"reportId\": \"\",                     \"viewId\": \"\",                     \"columns\": [                       {                         \"name\": \"Col1\",                         \"type\": \"VARCHAR\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"Col2\",                         \"type\": \"VARCHAR\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"Col3\",                         \"type\": \"VARCHAR\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"Col312\",                         \"type\": \"VARCHAR\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"Col4\",                         \"type\": \"VARCHAR\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       }                     ],                     \"relationships\": []                   }                 ]               }             ]           }         ],         \"configuration\": {           \"password\": \"\",           \"database\": \"DEVELOPMENT\",           \"role\": \"DEV\",           \"accountName\": \"thoughtspot_partner\",           \"warehouse\": \"DEMO_WH\",           \"user\": \"DEV_USER\"         }       }       ```        * This is an example of updating a single table in an existing connection with tables:            ```       {         \"authenticationType\": \"SERVICE_ACCOUNT\",         \"externalDatabases\": [           {             \"name\": \"DEVELOPMENT\",             \"isAutoCreated\": false,             \"schemas\": [               {                 \"name\": \"TS_dataset\",                 \"tables\": [                   {                     \"name\": \"CUSTOMER\",                     \"type\": \"TABLE\",                     \"description\": \"\",                     \"selected\": true,                     \"linked\": true,                     \"gid\": 0,                     \"datasetId\": \"-1\",                     \"subType\": \"\",                     \"reportId\": \"\",                     \"viewId\": \"\",                     \"columns\": [],                     \"relationships\": []                   },                   {                     \"name\": \"tpch5k_falcon_default_schema_users\",                     \"type\": \"TABLE\",                     \"description\": \"\",                     \"selected\": true,                     \"linked\": true,                     \"gid\": 0,                     \"datasetId\": \"-1\",                     \"subType\": \"\",                     \"reportId\": \"\",                     \"viewId\": \"\",                     \"columns\": [                       {                         \"name\": \"user_id\",                         \"type\": \"INT64\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"product_id\",                         \"type\": \"INT64\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"user_cost\",                         \"type\": \"INT64\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       }                     ],                     \"relationships\": []                   }                 ]               }             ]           }         ],         \"configuration\": {           \"password\": \"\",           \"database\": \"DEVELOPMENT\",           \"role\": \"DEV\",           \"accountName\": \"thoughtspot_partner\",           \"warehouse\": \"DEMO_WH\",           \"user\": \"DEV_USER\"         }       }       ```  3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.    **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not  specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.    * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a Snowflake connection:    ```    {       \"configuration\":{          \"accountName\":\"thoughtspot_partner\",          \"user\":\"tsadmin\",          \"password\":\"TestConn123\",          \"role\":\"sysadmin\",          \"warehouse\":\"MEDIUM_WH\"       },       \"externalDatabases\":[        ]    }    ```      
    * @param connectionIdentifier Unique ID or name of the connection.
    * @param updateConnectionV2Request 
    */
@@ -22780,28 +25353,80 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
   }
   /**
    *   Version: 9.9.0.cl or later   Updates a DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### About update DBT connection You can modify DBT connection object properties such as embrace connection name, embrace database name, import type, account identifier, access token, project identifier and environment (or) embrace connection, embrace database name, import type, file_content settings.      
-   * @param updateDbtConnectionRequest 
+   * @param dbtConnectionIdentifier Unique ID of the DBT Connection.
+   * @param connectionName Name of the connection.
+   * @param databaseName Name of the Database.
+   * @param importType Mention type of Import
+   * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD.
+   * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD.
+   * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD
+   * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD
+   * @param dbtEnvId DBT Environment ID\\\&quot;
+   * @param projectName Name of the project
+   * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is Mandatory when Import Type is \\\&#39;ZIP_FILE\\\&#39;
    */
-  updateDbtConnection(updateDbtConnectionRequest, _options) {
+  updateDbtConnection(dbtConnectionIdentifier, connectionName, databaseName, importType, accessToken, dbtUrl, accountId, projectId, dbtEnvId, projectName, fileContent, _options) {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
-      if (updateDbtConnectionRequest === null || updateDbtConnectionRequest === void 0) {
-        throw new RequiredError("ThoughtSpotRestApi", "updateDbtConnection", "updateDbtConnectionRequest");
+      if (dbtConnectionIdentifier === null || dbtConnectionIdentifier === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "updateDbtConnection", "dbtConnectionIdentifier");
       }
       const localVarPath = "/api/rest/2.0/dbt/update-dbt-connection";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.13.2");
-      const contentType = ObjectSerializer.getPreferredMediaType([
-        "application/json"
+      const useForm = canConsumeForm([
+        "multipart/form-data"
       ]);
-      requestContext.setHeaderParam("Content-Type", contentType);
-      const serializedBody = ObjectSerializer.stringify(
-        ObjectSerializer.serialize(updateDbtConnectionRequest, "UpdateDbtConnectionRequest", ""),
-        contentType
-      );
-      requestContext.setBody(serializedBody);
+      let localVarFormParams;
+      if (useForm) {
+        localVarFormParams = new FormData();
+      } else {
+        localVarFormParams = new URLSearchParams();
+      }
+      if (dbtConnectionIdentifier !== void 0) {
+        localVarFormParams.append("dbt_connection_identifier", dbtConnectionIdentifier);
+      }
+      if (connectionName !== void 0) {
+        localVarFormParams.append("connection_name", connectionName);
+      }
+      if (databaseName !== void 0) {
+        localVarFormParams.append("database_name", databaseName);
+      }
+      if (importType !== void 0) {
+        localVarFormParams.append("import_type", importType);
+      }
+      if (accessToken !== void 0) {
+        localVarFormParams.append("access_token", accessToken);
+      }
+      if (dbtUrl !== void 0) {
+        localVarFormParams.append("dbt_url", dbtUrl);
+      }
+      if (accountId !== void 0) {
+        localVarFormParams.append("account_id", accountId);
+      }
+      if (projectId !== void 0) {
+        localVarFormParams.append("project_id", projectId);
+      }
+      if (dbtEnvId !== void 0) {
+        localVarFormParams.append("dbt_env_id", dbtEnvId);
+      }
+      if (projectName !== void 0) {
+        localVarFormParams.append("project_name", projectName);
+      }
+      if (fileContent !== void 0) {
+        if (localVarFormParams instanceof FormData) {
+          localVarFormParams.append("file_content", fileContent, fileContent.name);
+        }
+      }
+      requestContext.setBody(localVarFormParams);
+      if (!useForm) {
+        const contentType = ObjectSerializer.getPreferredMediaType([
+          "multipart/form-data"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+      }
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -26634,7 +29259,7 @@ var ThoughtSpotRestApiResponseProcessor = class {
       if (isCodeInRange("200", response.httpStatusCode)) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "any",
+          "SystemOverrideInfo",
           ""
         );
         return body;
@@ -26674,7 +29299,7 @@ var ThoughtSpotRestApiResponseProcessor = class {
       if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "any",
+          "SystemOverrideInfo",
           ""
         );
         return body;
@@ -31049,7 +33674,7 @@ var ObservableAuthenticationApi = class {
     this.responseProcessor = responseProcessor || new AuthenticationApiResponseProcessor();
   }
   /**
-   *   Version: 9.0.0.cl or later    Gets session information for the currently logged-in user.  This API does not require any parameters to be passed in the request.    Any ThoughtSpot user can access this endpoint and send an API request. The data returned in the API response varies according to user\'s privilege and object access permissions.      
+   *   Version: 9.0.0.cl or later   Retrieves details of the current user session for the token provided in the request header.  Any ThoughtSpot user can access this endpoint and send an API request. The data returned in the API response varies according to user\'s privilege and object access permissions.     
    */
   getCurrentUserInfo(_options) {
     const requestContextPromise = this.requestFactory.getCurrentUserInfo(_options);
@@ -31066,7 +33691,7 @@ var ObservableAuthenticationApi = class {
     }));
   }
   /**
-   *  Get token for the currently logged-in user.    Version: 9.4.0.cl or later   Gets token details for the currently logged-in user.  You can use this endpoint to obtain the token associated with the user\'s session.  This API does not require any parameters to be passed in the request.    Any ThoughtSpot user can access this endpoint and send an API request.      
+   *   Version: 9.4.0.cl or later   Retrieves details of the current session token for the bearer token provided in the request header.  This API endpoint does not create a new token. Instead, it returns details about the token, including the token string, creation time, expiration time, and the associated user.  Use this endpoint to introspect your current session token, debug authentication issues, or when a frontend application needs session token details.  Any ThoughtSpot user with a valid bearer token can access this endpoint and send an API request      
    */
   getCurrentUserToken(_options) {
     const requestContextPromise = this.requestFactory.getCurrentUserToken(_options);
@@ -31083,7 +33708,7 @@ var ObservableAuthenticationApi = class {
     }));
   }
   /**
-   *   Version: 10.4.0.cl or later   Gets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  To add a new user and assign privileges during auto creation, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  To assign security attributes with filter rules and Parameters to the JWT token, you\'ll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  #### Usage guidelines  You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key`.  To generate a `secret_key` on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable) in the **Develop** > **Customizations** > **Security Settings** page.  **Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.  If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.  ##### Attribute-Based Access Control (ABAC) with tokens  To implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the `filter_rules` and `parameter_values` array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user\'s `access_control_properties` object, after which all sessions will use the persisted values.  Specify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.  For more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).  ##### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * `auto_create` * `username` * `display_name` * `email` * `groups`  Set `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true` in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  ##### Important point to note All options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Persist options such as  `APPEND`, `REPLACE`, `RESET` will persist security parameters on the user profile when the token is created, while Persist option `NONE` will not persist anything but will be honoured in the session.      
+   *   Version: 10.4.0.cl or later   Gets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  To add a new user and assign privileges during auto creation, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  To assign security attributes with filter rules and Parameters to the JWT token, you\'ll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  #### Usage guidelines  You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key`.  To generate a `secret_key` on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable) in the **Develop** > **Customizations** > **Security Settings** page.  **Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.  If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.  ##### Attribute-Based Access Control (ABAC) with tokens  To implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the `filter_rules` and `parameter_values` array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user\'s `access_control_properties` object, after which all sessions will use the persisted values.  Specify the object type as `LOGICAL_TABLE`.   For more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).  ##### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * `auto_create` * `username` * `display_name` * `email` * `groups`  Set `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true` in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values. If `auto_create` is set to `true`, it won\'t create formula variables and hence won\'t be applicable for `variable_values`.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  ##### Important point to note All options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Persist options such as  `APPEND`, `REPLACE`, `RESET` will persist security parameters on the user profile when the token is created, while Persist option `NONE` will not persist anything but will be honoured in the session.  ##### Formula Variables Before using variables_values, variables must be created using Create Variable API with type as Formula_Variable (/api/rest/2.0/template/variables/create) The persist_option RESET and NONE cannot be used when variable_values are provided in the request. If you are working with variable_values, you must use other (APPEND, REPLACE) supported modes. If you want to use RESET or NONE, do not pass any variable_values. In such cases, variable_values will remain unaffected. When using object_id with variable_values, models are supported.      
    * @param getCustomAccessTokenRequest 
    */
   getCustomAccessToken(getCustomAccessTokenRequest, _options) {
@@ -31305,7 +33930,7 @@ var ObservableConnectionsApi = class {
     }));
   }
   /**
-   *   Version: 9.2.0.cl or later   Gets connection objects. Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  - To get a list of all connections available in the ThoughtSpot system, send the API request without any attributes in the request body. - To get the connection objects for a specific type of data warehouse, specify the type in `data_warehouse_types`. - To fetch details of a connection object, specify the connection object GUID or name. The `name_pattern` attribute allows passing partial text with `%` for a wildcard match. - To get details of the database, schemas, tables, or columns from a data connection object, specify `data_warehouse_object_type`. - To get a specific database, schema, table, or column from a connection object, define the object type in `data_warehouse_object_type` and object properties in the `data_warehouse_objects` array. For example, to search for a column, you must pass the database, schema, and table names in the API request.   Note that in the following example, object properties are set in a hierarchical order (`database` > `schema` > `table` > `column`).  ``` {   \"connections\": [     {       \"identifier\": \"b9d1f2ef-fa65-4a4b-994e-30fa2d57b0c2\",       \"data_warehouse_objects\": [         {           \"database\": \"NEBULADEV\",           \"schema\": \"INFORMATION_SCHEMA\",           \"table\": \"APPLICABLE_ROLES\",           \"column\": \"ROLE_NAME\"         }       ]     }   ],   \"data_warehouse_object_type\": \"COLUMN\" } ```  - To fetch data by `configuration`, specify `data_warehouse_object_type`. For example, to fetch columns from the `DEVELOPMENT` database, specify the `data_warehouse_object_type` as `DATABASE` and define the `configuration` string as `{\"database\":\"DEVELOPMENT\"}`. To get column data for a specific table, specify the table, for example,`{\"database\":\"RETAILAPPAREL\",\"table\":\"PIPES\"}`. - To query connections by `authentication_type`, specify `data_warehouse_object_type`. Supported values for `authentication_type` are:   - `SERVICE_ACCOUNT`: For connections that require service account credentials to authenticate to the Cloud Data Warehouse and fetch data.   - `OAUTH`: For connections that require OAuth credentials to authenticate to the Cloud Data Warehouse and fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth authentication type.   - `IAM`: For connections that have the IAM OAuth set up. This authentication type is supported on Amazon Redshift connections only.   - `EXTOAUTH`: For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/ connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). - To include more details about connection objects in the API response, set `include_details` to `true`. - You can also sort the output by field names and filter connections by tags.  **NOTE**: When filtering connection records by parameters other than `data_warehouse_types` or `tag_identifiers`, ensure that you set `record_size` to `-1` and `record_offset` to `0` for precise results.      
+   *   Version: 9.2.0.cl or later   Gets connection objects. Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  - To get a list of all connections available in the ThoughtSpot system, send the API request without any attributes in the request body. - To get the connection objects for a specific type of data warehouse, specify the type in `data_warehouse_types`. - To fetch details of a connection object, specify the connection object GUID or name. The `name_pattern` attribute allows passing partial text with `%` for a wildcard match. - To get details of the database, schemas, tables, or columns from a data connection object, specify `data_warehouse_object_type`. - To get a specific database, schema, table, or column from a connection object, define the object type in `data_warehouse_object_type` and object properties in the `data_warehouse_objects` array. For example, to search for a column, you must pass the database, schema, and table names in the API request.   Note that in the following example, object properties are set in a hierarchical order (`database` > `schema` > `table` > `column`).  ``` {   \"connections\": [     {       \"identifier\": \"b9d1f2ef-fa65-4a4b-994e-30fa2d57b0c2\",       \"data_warehouse_objects\": [         {           \"database\": \"NEBULADEV\",           \"schema\": \"INFORMATION_SCHEMA\",           \"table\": \"APPLICABLE_ROLES\",           \"column\": \"ROLE_NAME\"         }       ]     }   ],   \"data_warehouse_object_type\": \"COLUMN\" } ```  - To fetch data by `configuration`, specify `data_warehouse_object_type`. For example, to fetch columns from the `DEVELOPMENT` database, specify the `data_warehouse_object_type` as `DATABASE` and define the `configuration` string as `{\"database\":\"DEVELOPMENT\"}`. To get column data for a specific table, specify the table, for example,`{\"database\":\"RETAILAPPAREL\",\"table\":\"PIPES\"}`. - To query connections by `authentication_type`, specify `data_warehouse_object_type`. Supported values for `authentication_type` are:   - `SERVICE_ACCOUNT`: For connections that require service account credentials to authenticate to the Cloud Data Warehouse and fetch data.   - `OAUTH`: For connections that require OAuth credentials to authenticate to the Cloud Data Warehouse and fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth authentication type.   - `IAM`: For connections that have the IAM OAuth set up. This authentication type is supported on Amazon Redshift connections only.   - `EXTOAUTH`: For connections that have External OAuth set up. ThoughtSpot supports external [OAuth with Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/ connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth).   - `KEY_PAIR`: For connections that require Key Pair account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only.   - `OAUTH_WITH_PKCE`: For connections that require OAuth with PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake, Starburst, Databricks, Denodo  connections only.   - `EXTOAUTH_WITH_PKCE`: For connections that require External OAuth With PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only.   - `OAUTH_WITH_PEZ`: For connections that require OAuth With PEZ account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Amazon Redshift connections only.   - `OAUTH_WITH_SERVICE_PRINCIPAL`: For connections that require OAuth With Service Principal account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Databricks connections only.   - `PERSONAL_ACCESS_TOKEN`: For connections that require Personal Access Token account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Databricks connections only.   - `OAUTH_CLIENT_CREDENTIALS`: For connections that require OAuth Client Credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only. - To include more details about connection objects in the API response, set `include_details` to `true`. - You can also sort the output by field names and filter connections by tags.  **NOTE**: When filtering connection records by parameters other than `data_warehouse_types` or `tag_identifiers`, ensure that you set `record_size` to `-1` and `record_offset` to `0` for precise results.      
    * @param searchConnectionRequest 
    */
   searchConnection(searchConnectionRequest, _options) {
@@ -31341,7 +33966,7 @@ var ObservableConnectionsApi = class {
     }));
   }
   /**
-   *   Version: 10.4.0.cl or later   Updates a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`.    * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:     ```    {       \"configuration\":{          \"accountName\":\"thoughtspot_partner\",          \"user\":\"tsadmin\",          \"password\":\"TestConn123\",          \"role\":\"sysadmin\",          \"warehouse\":\"MEDIUM_WH\"       },       \"externalDatabases\":[          {             \"name\":\"AllDatatypes\",             \"isAutoCreated\":false,             \"schemas\":[                {                   \"name\":\"alldatatypes\",                   \"tables\":[                      {                         \"name\":\"allDatatypes\",                         \"type\":\"TABLE\",                         \"description\":\"\",                         \"selected\":true,                         \"linked\":true,                         \"columns\":[                            {                               \"name\":\"CNUMBER\",                               \"type\":\"INT64\",                               \"canImport\":true,                               \"selected\":true,                               \"isLinkedActive\":true,                               \"isImported\":false,                               \"tableName\":\"allDatatypes\",                               \"schemaName\":\"alldatatypes\",                               \"dbName\":\"AllDatatypes\"                            },                            {                               \"name\":\"CDECIMAL\",                               \"type\":\"INT64\",                               \"canImport\":true,                               \"selected\":true,                               \"isLinkedActive\":true,                               \"isImported\":false,                               \"tableName\":\"allDatatypes\",                               \"schemaName\":\"alldatatypes\",                               \"dbName\":\"AllDatatypes\"                            }                         ]                      }                   ]                }             ]          }       ]    }    ```  3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`. * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a Snowflake connection:  ```  {     \"configuration\":{        \"accountName\":\"thoughtspot_partner\",        \"user\":\"tsadmin\",        \"password\":\"TestConn123\",        \"role\":\"sysadmin\",        \"warehouse\":\"MEDIUM_WH\"     },     \"externalDatabases\":[      ]  }  ```      
+   *   Version: 10.4.0.cl or later   Updates a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`.        **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.     * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:    * This is an example of updating a single table in a empty connection:           ```       {         \"authenticationType\": \"SERVICE_ACCOUNT\",         \"externalDatabases\": [           {             \"name\": \"DEVELOPMENT\",             \"isAutoCreated\": false,             \"schemas\": [               {                 \"name\": \"TS_dataset\",                 \"tables\": [                   {                     \"name\": \"DEMORENAME\",                     \"type\": \"TABLE\",                     \"description\": \"\",                     \"selected\": true,                     \"linked\": true,                     \"gid\": 0,                     \"datasetId\": \"-1\",                     \"subType\": \"\",                     \"reportId\": \"\",                     \"viewId\": \"\",                     \"columns\": [                       {                         \"name\": \"Col1\",                         \"type\": \"VARCHAR\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"Col2\",                         \"type\": \"VARCHAR\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"Col3\",                         \"type\": \"VARCHAR\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"Col312\",                         \"type\": \"VARCHAR\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"Col4\",                         \"type\": \"VARCHAR\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       }                     ],                     \"relationships\": []                   }                 ]               }             ]           }         ],         \"configuration\": {           \"password\": \"\",           \"database\": \"DEVELOPMENT\",           \"role\": \"DEV\",           \"accountName\": \"thoughtspot_partner\",           \"warehouse\": \"DEMO_WH\",           \"user\": \"DEV_USER\"         }       }       ```        * This is an example of updating a single table in an existing connection with tables:            ```       {         \"authenticationType\": \"SERVICE_ACCOUNT\",         \"externalDatabases\": [           {             \"name\": \"DEVELOPMENT\",             \"isAutoCreated\": false,             \"schemas\": [               {                 \"name\": \"TS_dataset\",                 \"tables\": [                   {                     \"name\": \"CUSTOMER\",                     \"type\": \"TABLE\",                     \"description\": \"\",                     \"selected\": true,                     \"linked\": true,                     \"gid\": 0,                     \"datasetId\": \"-1\",                     \"subType\": \"\",                     \"reportId\": \"\",                     \"viewId\": \"\",                     \"columns\": [],                     \"relationships\": []                   },                   {                     \"name\": \"tpch5k_falcon_default_schema_users\",                     \"type\": \"TABLE\",                     \"description\": \"\",                     \"selected\": true,                     \"linked\": true,                     \"gid\": 0,                     \"datasetId\": \"-1\",                     \"subType\": \"\",                     \"reportId\": \"\",                     \"viewId\": \"\",                     \"columns\": [                       {                         \"name\": \"user_id\",                         \"type\": \"INT64\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"product_id\",                         \"type\": \"INT64\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"user_cost\",                         \"type\": \"INT64\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       }                     ],                     \"relationships\": []                   }                 ]               }             ]           }         ],         \"configuration\": {           \"password\": \"\",           \"database\": \"DEVELOPMENT\",           \"role\": \"DEV\",           \"accountName\": \"thoughtspot_partner\",           \"warehouse\": \"DEMO_WH\",           \"user\": \"DEV_USER\"         }       }       ```  3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.    **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not  specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.    * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a Snowflake connection:    ```    {       \"configuration\":{          \"accountName\":\"thoughtspot_partner\",          \"user\":\"tsadmin\",          \"password\":\"TestConn123\",          \"role\":\"sysadmin\",          \"warehouse\":\"MEDIUM_WH\"       },       \"externalDatabases\":[        ]    }    ```      
    * @param connectionIdentifier Unique ID or name of the connection.
    * @param updateConnectionV2Request 
    */
@@ -31448,10 +34073,19 @@ var ObservableDBTApi = class {
   }
   /**
    *   Version: 9.9.0.cl or later   Creates a DBT connection object in ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### About create DBT connection DBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.      
-   * @param dbtConnectionRequest 
+   * @param connectionName Name of the connection.
+   * @param databaseName Name of the Database.
+   * @param importType Mention type of Import
+   * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD.
+   * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD.
+   * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD
+   * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD
+   * @param dbtEnvId DBT Environment ID\\\&quot;
+   * @param projectName Name of the project
+   * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is Mandatory when Import Type is \\\&#39;ZIP_FILE\\\&#39;
    */
-  dbtConnection(dbtConnectionRequest, _options) {
-    const requestContextPromise = this.requestFactory.dbtConnection(dbtConnectionRequest, _options);
+  dbtConnection(connectionName, databaseName, importType, accessToken, dbtUrl, accountId, projectId, dbtEnvId, projectName, fileContent, _options) {
+    const requestContextPromise = this.requestFactory.dbtConnection(connectionName, databaseName, importType, accessToken, dbtUrl, accountId, projectId, dbtEnvId, projectName, fileContent, _options);
     let middlewarePreObservable = from(requestContextPromise);
     for (let middleware of this.configuration.middleware) {
       middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
@@ -31466,10 +34100,11 @@ var ObservableDBTApi = class {
   }
   /**
    *   Version: 9.9.0.cl or later   Resynchronize the existing list of models, tables, worksheet tml’s and import them to Thoughtspot based on the DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)      
-   * @param dbtGenerateSyncTmlRequest 
+   * @param dbtConnectionIdentifier Unique ID of the DBT connection.
+   * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
    */
-  dbtGenerateSyncTml(dbtGenerateSyncTmlRequest, _options) {
-    const requestContextPromise = this.requestFactory.dbtGenerateSyncTml(dbtGenerateSyncTmlRequest, _options);
+  dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, _options) {
+    const requestContextPromise = this.requestFactory.dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, _options);
     let middlewarePreObservable = from(requestContextPromise);
     for (let middleware of this.configuration.middleware) {
       middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
@@ -31484,10 +34119,14 @@ var ObservableDBTApi = class {
   }
   /**
    *   Version: 9.9.0.cl or later   Generate required table and worksheet and import them.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### About generate TML Models and Worksheets to be imported can be selected by the user as part of the API.      
-   * @param dbtGenerateTmlRequest 
+   * @param dbtConnectionIdentifier Unique ID of the DBT connection.
+   * @param modelTables List of Models and their respective Tables Example: \\\&#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;, \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]\\\&#39;
+   * @param importWorksheets Mention the worksheet tmls to import
+   * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED Example: [\\\&quot;worksheet_name\\\&quot;]
+   * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
    */
-  dbtGenerateTml(dbtGenerateTmlRequest, _options) {
-    const requestContextPromise = this.requestFactory.dbtGenerateTml(dbtGenerateTmlRequest, _options);
+  dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent, _options) {
+    const requestContextPromise = this.requestFactory.dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent, _options);
     let middlewarePreObservable = from(requestContextPromise);
     for (let middleware of this.configuration.middleware) {
       middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
@@ -31537,10 +34176,20 @@ var ObservableDBTApi = class {
   }
   /**
    *   Version: 9.9.0.cl or later   Updates a DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### About update DBT connection You can modify DBT connection object properties such as embrace connection name, embrace database name, import type, account identifier, access token, project identifier and environment (or) embrace connection, embrace database name, import type, file_content settings.      
-   * @param updateDbtConnectionRequest 
+   * @param dbtConnectionIdentifier Unique ID of the DBT Connection.
+   * @param connectionName Name of the connection.
+   * @param databaseName Name of the Database.
+   * @param importType Mention type of Import
+   * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD.
+   * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD.
+   * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD
+   * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD
+   * @param dbtEnvId DBT Environment ID\\\&quot;
+   * @param projectName Name of the project
+   * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is Mandatory when Import Type is \\\&#39;ZIP_FILE\\\&#39;
    */
-  updateDbtConnection(updateDbtConnectionRequest, _options) {
-    const requestContextPromise = this.requestFactory.updateDbtConnection(updateDbtConnectionRequest, _options);
+  updateDbtConnection(dbtConnectionIdentifier, connectionName, databaseName, importType, accessToken, dbtUrl, accountId, projectId, dbtEnvId, projectName, fileContent, _options) {
+    const requestContextPromise = this.requestFactory.updateDbtConnection(dbtConnectionIdentifier, connectionName, databaseName, importType, accessToken, dbtUrl, accountId, projectId, dbtEnvId, projectName, fileContent, _options);
     let middlewarePreObservable = from(requestContextPromise);
     for (let middleware of this.configuration.middleware) {
       middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
@@ -31763,7 +34412,7 @@ var ObservableMetadataApi = class {
     }));
   }
   /**
-   *  Makes a copy of an Answer or Liveboard saved in Atlas    Version: 10.3.0.cl or later   Creates a copy of a metadata object.  Requires at least view access to the metadata object being copied.  Upon successful execution, the API creates a copy of the metadata object specified in the API request and returns the ID of the new object.      
+   *  Makes a copy of an Answer or Liveboard    Version: 10.3.0.cl or later   Creates a copy of a metadata object.  Requires at least view access to the metadata object being copied.  Upon successful execution, the API creates a copy of the metadata object specified in the API request and returns the ID of the new object.      
    * @param copyObjectRequest 
    */
   copyObject(copyObjectRequest, _options) {
@@ -31925,7 +34574,7 @@ var ObservableMetadataApi = class {
     }));
   }
   /**
-   *   Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.   You can also define sorting options to sort the data retrieved in the API response. - To get discoverable objects when linientmodel is enabled you can use `include_discoverable_objects` as true else false. Default value is true.  **NOTE**: The following parameters support pagination of metadata records:  - `tag_identifiers` - `type` - `created_by_user_identifiers` - `modified_by_user_identifiers` - `owned_by_user_identifiers` - `exclude_objects` - `include_auto_created_objects` - `favorite_object_options` If you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.      
+   *   Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`. - To filter metadata objects within type `LOGICAL_TABLE`, set the `subtypes` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE` & subtypes as `[WORKSHEET]`. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.   You can also define sorting options to sort the data retrieved in the API response. - To get discoverable objects when linientmodel is enabled you can use `include_discoverable_objects` as true else false. Default value is true. - For liveboard metadata type, to get the newer format, set the `liveboard_response_format` as V2. Default value is V1. - To retrieve only objects that are published, set the `include_only_published_objects` as true. Default value is false.  **NOTE**: The following parameters support pagination of metadata records:  - `tag_identifiers` - `type` - `subtypes` - `created_by_user_identifiers` - `modified_by_user_identifiers` - `owned_by_user_identifiers` - `exclude_objects` - `include_auto_created_objects` - `favorite_object_options` - `include_only_published_objects` If you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.      
    * @param searchMetadataRequest 
    */
   searchMetadata(searchMetadataRequest, _options) {
@@ -32066,7 +34715,7 @@ var ObservableReportsApi = class {
     this.responseProcessor = responseProcessor || new ReportsApiResponseProcessor();
   }
   /**
-   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires at least view access to the Answer.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  **NOTE**: * The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with tables.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).       
+   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires at least view access to the Answer.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  **NOTE**: * The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with tables.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.       
    * @param exportAnswerReportRequest 
    */
   exportAnswerReport(exportAnswerReportRequest, _options) {
@@ -32084,7 +34733,7 @@ var ObservableReportsApi = class {
     }));
   }
   /**
-   *   Version: 9.0.0.cl or later   Exports a Liveboard and its visualizations in PDF or PNG file format.  Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is PDF. For PDF downloads, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  **NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).       
+   *   Version: 9.0.0.cl or later   Exports a Liveboard and its visualizations in PDF or PNG file format.  Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is PDF. For PDF downloads, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  **NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).    **NOTE**: Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in the PNG format in the resolution of your choice. To enable this on your instance, contact ThoughtSpot support. When this feature is enabled, the options `include_cover_page`,`include_filter_page` within the `png_options` will not be available for PNG exports.     
    * @param exportLiveboardReportRequest 
    */
   exportLiveboardReport(exportLiveboardReportRequest, _options) {
@@ -32648,7 +35297,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *  Makes a copy of an Answer or Liveboard saved in Atlas    Version: 10.3.0.cl or later   Creates a copy of a metadata object.  Requires at least view access to the metadata object being copied.  Upon successful execution, the API creates a copy of the metadata object specified in the API request and returns the ID of the new object.      
+   *  Makes a copy of an Answer or Liveboard    Version: 10.3.0.cl or later   Creates a copy of a metadata object.  Requires at least view access to the metadata object being copied.  Upon successful execution, the API creates a copy of the metadata object specified in the API request and returns the ID of the new object.      
    * @param copyObjectRequest 
    */
   copyObject(copyObjectRequest, _options) {
@@ -32847,10 +35496,19 @@ var ObservableThoughtSpotRestApi = class {
   }
   /**
    *   Version: 9.9.0.cl or later   Creates a DBT connection object in ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### About create DBT connection DBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.      
-   * @param dbtConnectionRequest 
+   * @param connectionName Name of the connection.
+   * @param databaseName Name of the Database.
+   * @param importType Mention type of Import
+   * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD.
+   * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD.
+   * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD
+   * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD
+   * @param dbtEnvId DBT Environment ID\\\&quot;
+   * @param projectName Name of the project
+   * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is Mandatory when Import Type is \\\&#39;ZIP_FILE\\\&#39;
    */
-  dbtConnection(dbtConnectionRequest, _options) {
-    const requestContextPromise = this.requestFactory.dbtConnection(dbtConnectionRequest, _options);
+  dbtConnection(connectionName, databaseName, importType, accessToken, dbtUrl, accountId, projectId, dbtEnvId, projectName, fileContent, _options) {
+    const requestContextPromise = this.requestFactory.dbtConnection(connectionName, databaseName, importType, accessToken, dbtUrl, accountId, projectId, dbtEnvId, projectName, fileContent, _options);
     let middlewarePreObservable = from(requestContextPromise);
     for (let middleware of this.configuration.middleware) {
       middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
@@ -32865,10 +35523,11 @@ var ObservableThoughtSpotRestApi = class {
   }
   /**
    *   Version: 9.9.0.cl or later   Resynchronize the existing list of models, tables, worksheet tml’s and import them to Thoughtspot based on the DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)      
-   * @param dbtGenerateSyncTmlRequest 
+   * @param dbtConnectionIdentifier Unique ID of the DBT connection.
+   * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
    */
-  dbtGenerateSyncTml(dbtGenerateSyncTmlRequest, _options) {
-    const requestContextPromise = this.requestFactory.dbtGenerateSyncTml(dbtGenerateSyncTmlRequest, _options);
+  dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, _options) {
+    const requestContextPromise = this.requestFactory.dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, _options);
     let middlewarePreObservable = from(requestContextPromise);
     for (let middleware of this.configuration.middleware) {
       middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
@@ -32883,10 +35542,14 @@ var ObservableThoughtSpotRestApi = class {
   }
   /**
    *   Version: 9.9.0.cl or later   Generate required table and worksheet and import them.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### About generate TML Models and Worksheets to be imported can be selected by the user as part of the API.      
-   * @param dbtGenerateTmlRequest 
+   * @param dbtConnectionIdentifier Unique ID of the DBT connection.
+   * @param modelTables List of Models and their respective Tables Example: \\\&#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;, \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]\\\&#39;
+   * @param importWorksheets Mention the worksheet tmls to import
+   * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED Example: [\\\&quot;worksheet_name\\\&quot;]
+   * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
    */
-  dbtGenerateTml(dbtGenerateTmlRequest, _options) {
-    const requestContextPromise = this.requestFactory.dbtGenerateTml(dbtGenerateTmlRequest, _options);
+  dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent, _options) {
+    const requestContextPromise = this.requestFactory.dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent, _options);
     let middlewarePreObservable = from(requestContextPromise);
     for (let middleware of this.configuration.middleware) {
       middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
@@ -33187,7 +35850,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires at least view access to the Answer.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  **NOTE**: * The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with tables.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).       
+   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires at least view access to the Answer.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  **NOTE**: * The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with tables.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.       
    * @param exportAnswerReportRequest 
    */
   exportAnswerReport(exportAnswerReportRequest, _options) {
@@ -33205,7 +35868,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 9.0.0.cl or later   Exports a Liveboard and its visualizations in PDF or PNG file format.  Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is PDF. For PDF downloads, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  **NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).       
+   *   Version: 9.0.0.cl or later   Exports a Liveboard and its visualizations in PDF or PNG file format.  Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is PDF. For PDF downloads, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  **NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).    **NOTE**: Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in the PNG format in the resolution of your choice. To enable this on your instance, contact ThoughtSpot support. When this feature is enabled, the options `include_cover_page`,`include_filter_page` within the `png_options` will not be available for PNG exports.     
    * @param exportLiveboardReportRequest 
    */
   exportLiveboardReport(exportLiveboardReportRequest, _options) {
@@ -33439,7 +36102,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 9.0.0.cl or later    Gets session information for the currently logged-in user.  This API does not require any parameters to be passed in the request.    Any ThoughtSpot user can access this endpoint and send an API request. The data returned in the API response varies according to user\'s privilege and object access permissions.      
+   *   Version: 9.0.0.cl or later   Retrieves details of the current user session for the token provided in the request header.  Any ThoughtSpot user can access this endpoint and send an API request. The data returned in the API response varies according to user\'s privilege and object access permissions.     
    */
   getCurrentUserInfo(_options) {
     const requestContextPromise = this.requestFactory.getCurrentUserInfo(_options);
@@ -33456,7 +36119,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *  Get token for the currently logged-in user.    Version: 9.4.0.cl or later   Gets token details for the currently logged-in user.  You can use this endpoint to obtain the token associated with the user\'s session.  This API does not require any parameters to be passed in the request.    Any ThoughtSpot user can access this endpoint and send an API request.      
+   *   Version: 9.4.0.cl or later   Retrieves details of the current session token for the bearer token provided in the request header.  This API endpoint does not create a new token. Instead, it returns details about the token, including the token string, creation time, expiration time, and the associated user.  Use this endpoint to introspect your current session token, debug authentication issues, or when a frontend application needs session token details.  Any ThoughtSpot user with a valid bearer token can access this endpoint and send an API request      
    */
   getCurrentUserToken(_options) {
     const requestContextPromise = this.requestFactory.getCurrentUserToken(_options);
@@ -33473,7 +36136,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 10.4.0.cl or later   Gets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  To add a new user and assign privileges during auto creation, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  To assign security attributes with filter rules and Parameters to the JWT token, you\'ll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  #### Usage guidelines  You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key`.  To generate a `secret_key` on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable) in the **Develop** > **Customizations** > **Security Settings** page.  **Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.  If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.  ##### Attribute-Based Access Control (ABAC) with tokens  To implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the `filter_rules` and `parameter_values` array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user\'s `access_control_properties` object, after which all sessions will use the persisted values.  Specify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.  For more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).  ##### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * `auto_create` * `username` * `display_name` * `email` * `groups`  Set `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true` in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  ##### Important point to note All options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Persist options such as  `APPEND`, `REPLACE`, `RESET` will persist security parameters on the user profile when the token is created, while Persist option `NONE` will not persist anything but will be honoured in the session.      
+   *   Version: 10.4.0.cl or later   Gets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  To add a new user and assign privileges during auto creation, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  To assign security attributes with filter rules and Parameters to the JWT token, you\'ll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  #### Usage guidelines  You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key`.  To generate a `secret_key` on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable) in the **Develop** > **Customizations** > **Security Settings** page.  **Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.  If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.  ##### Attribute-Based Access Control (ABAC) with tokens  To implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the `filter_rules` and `parameter_values` array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user\'s `access_control_properties` object, after which all sessions will use the persisted values.  Specify the object type as `LOGICAL_TABLE`.   For more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).  ##### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * `auto_create` * `username` * `display_name` * `email` * `groups`  Set `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true` in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values. If `auto_create` is set to `true`, it won\'t create formula variables and hence won\'t be applicable for `variable_values`.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  ##### Important point to note All options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Persist options such as  `APPEND`, `REPLACE`, `RESET` will persist security parameters on the user profile when the token is created, while Persist option `NONE` will not persist anything but will be honoured in the session.  ##### Formula Variables Before using variables_values, variables must be created using Create Variable API with type as Formula_Variable (/api/rest/2.0/template/variables/create) The persist_option RESET and NONE cannot be used when variable_values are provided in the request. If you are working with variable_values, you must use other (APPEND, REPLACE) supported modes. If you want to use RESET or NONE, do not pass any variable_values. In such cases, variable_values will remain unaffected. When using object_id with variable_values, models are supported.      
    * @param getCustomAccessTokenRequest 
    */
   getCustomAccessToken(getCustomAccessTokenRequest, _options) {
@@ -33794,7 +36457,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 9.2.0.cl or later   Gets connection objects. Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  - To get a list of all connections available in the ThoughtSpot system, send the API request without any attributes in the request body. - To get the connection objects for a specific type of data warehouse, specify the type in `data_warehouse_types`. - To fetch details of a connection object, specify the connection object GUID or name. The `name_pattern` attribute allows passing partial text with `%` for a wildcard match. - To get details of the database, schemas, tables, or columns from a data connection object, specify `data_warehouse_object_type`. - To get a specific database, schema, table, or column from a connection object, define the object type in `data_warehouse_object_type` and object properties in the `data_warehouse_objects` array. For example, to search for a column, you must pass the database, schema, and table names in the API request.   Note that in the following example, object properties are set in a hierarchical order (`database` > `schema` > `table` > `column`).  ``` {   \"connections\": [     {       \"identifier\": \"b9d1f2ef-fa65-4a4b-994e-30fa2d57b0c2\",       \"data_warehouse_objects\": [         {           \"database\": \"NEBULADEV\",           \"schema\": \"INFORMATION_SCHEMA\",           \"table\": \"APPLICABLE_ROLES\",           \"column\": \"ROLE_NAME\"         }       ]     }   ],   \"data_warehouse_object_type\": \"COLUMN\" } ```  - To fetch data by `configuration`, specify `data_warehouse_object_type`. For example, to fetch columns from the `DEVELOPMENT` database, specify the `data_warehouse_object_type` as `DATABASE` and define the `configuration` string as `{\"database\":\"DEVELOPMENT\"}`. To get column data for a specific table, specify the table, for example,`{\"database\":\"RETAILAPPAREL\",\"table\":\"PIPES\"}`. - To query connections by `authentication_type`, specify `data_warehouse_object_type`. Supported values for `authentication_type` are:   - `SERVICE_ACCOUNT`: For connections that require service account credentials to authenticate to the Cloud Data Warehouse and fetch data.   - `OAUTH`: For connections that require OAuth credentials to authenticate to the Cloud Data Warehouse and fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth authentication type.   - `IAM`: For connections that have the IAM OAuth set up. This authentication type is supported on Amazon Redshift connections only.   - `EXTOAUTH`: For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/ connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). - To include more details about connection objects in the API response, set `include_details` to `true`. - You can also sort the output by field names and filter connections by tags.  **NOTE**: When filtering connection records by parameters other than `data_warehouse_types` or `tag_identifiers`, ensure that you set `record_size` to `-1` and `record_offset` to `0` for precise results.      
+   *   Version: 9.2.0.cl or later   Gets connection objects. Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  - To get a list of all connections available in the ThoughtSpot system, send the API request without any attributes in the request body. - To get the connection objects for a specific type of data warehouse, specify the type in `data_warehouse_types`. - To fetch details of a connection object, specify the connection object GUID or name. The `name_pattern` attribute allows passing partial text with `%` for a wildcard match. - To get details of the database, schemas, tables, or columns from a data connection object, specify `data_warehouse_object_type`. - To get a specific database, schema, table, or column from a connection object, define the object type in `data_warehouse_object_type` and object properties in the `data_warehouse_objects` array. For example, to search for a column, you must pass the database, schema, and table names in the API request.   Note that in the following example, object properties are set in a hierarchical order (`database` > `schema` > `table` > `column`).  ``` {   \"connections\": [     {       \"identifier\": \"b9d1f2ef-fa65-4a4b-994e-30fa2d57b0c2\",       \"data_warehouse_objects\": [         {           \"database\": \"NEBULADEV\",           \"schema\": \"INFORMATION_SCHEMA\",           \"table\": \"APPLICABLE_ROLES\",           \"column\": \"ROLE_NAME\"         }       ]     }   ],   \"data_warehouse_object_type\": \"COLUMN\" } ```  - To fetch data by `configuration`, specify `data_warehouse_object_type`. For example, to fetch columns from the `DEVELOPMENT` database, specify the `data_warehouse_object_type` as `DATABASE` and define the `configuration` string as `{\"database\":\"DEVELOPMENT\"}`. To get column data for a specific table, specify the table, for example,`{\"database\":\"RETAILAPPAREL\",\"table\":\"PIPES\"}`. - To query connections by `authentication_type`, specify `data_warehouse_object_type`. Supported values for `authentication_type` are:   - `SERVICE_ACCOUNT`: For connections that require service account credentials to authenticate to the Cloud Data Warehouse and fetch data.   - `OAUTH`: For connections that require OAuth credentials to authenticate to the Cloud Data Warehouse and fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth authentication type.   - `IAM`: For connections that have the IAM OAuth set up. This authentication type is supported on Amazon Redshift connections only.   - `EXTOAUTH`: For connections that have External OAuth set up. ThoughtSpot supports external [OAuth with Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/ connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth).   - `KEY_PAIR`: For connections that require Key Pair account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only.   - `OAUTH_WITH_PKCE`: For connections that require OAuth with PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake, Starburst, Databricks, Denodo  connections only.   - `EXTOAUTH_WITH_PKCE`: For connections that require External OAuth With PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only.   - `OAUTH_WITH_PEZ`: For connections that require OAuth With PEZ account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Amazon Redshift connections only.   - `OAUTH_WITH_SERVICE_PRINCIPAL`: For connections that require OAuth With Service Principal account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Databricks connections only.   - `PERSONAL_ACCESS_TOKEN`: For connections that require Personal Access Token account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Databricks connections only.   - `OAUTH_CLIENT_CREDENTIALS`: For connections that require OAuth Client Credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only. - To include more details about connection objects in the API response, set `include_details` to `true`. - You can also sort the output by field names and filter connections by tags.  **NOTE**: When filtering connection records by parameters other than `data_warehouse_types` or `tag_identifiers`, ensure that you set `record_size` to `-1` and `record_offset` to `0` for precise results.      
    * @param searchConnectionRequest 
    */
   searchConnection(searchConnectionRequest, _options) {
@@ -33848,7 +36511,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.   You can also define sorting options to sort the data retrieved in the API response. - To get discoverable objects when linientmodel is enabled you can use `include_discoverable_objects` as true else false. Default value is true.  **NOTE**: The following parameters support pagination of metadata records:  - `tag_identifiers` - `type` - `created_by_user_identifiers` - `modified_by_user_identifiers` - `owned_by_user_identifiers` - `exclude_objects` - `include_auto_created_objects` - `favorite_object_options` If you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.      
+   *   Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`. - To filter metadata objects within type `LOGICAL_TABLE`, set the `subtypes` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE` & subtypes as `[WORKSHEET]`. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.   You can also define sorting options to sort the data retrieved in the API response. - To get discoverable objects when linientmodel is enabled you can use `include_discoverable_objects` as true else false. Default value is true. - For liveboard metadata type, to get the newer format, set the `liveboard_response_format` as V2. Default value is V1. - To retrieve only objects that are published, set the `include_only_published_objects` as true. Default value is false.  **NOTE**: The following parameters support pagination of metadata records:  - `tag_identifiers` - `type` - `subtypes` - `created_by_user_identifiers` - `modified_by_user_identifiers` - `owned_by_user_identifiers` - `exclude_objects` - `include_auto_created_objects` - `favorite_object_options` - `include_only_published_objects` If you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.      
    * @param searchMetadataRequest 
    */
   searchMetadata(searchMetadataRequest, _options) {
@@ -34083,7 +36746,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 10.4.0.cl or later   Updates a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`.    * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:     ```    {       \"configuration\":{          \"accountName\":\"thoughtspot_partner\",          \"user\":\"tsadmin\",          \"password\":\"TestConn123\",          \"role\":\"sysadmin\",          \"warehouse\":\"MEDIUM_WH\"       },       \"externalDatabases\":[          {             \"name\":\"AllDatatypes\",             \"isAutoCreated\":false,             \"schemas\":[                {                   \"name\":\"alldatatypes\",                   \"tables\":[                      {                         \"name\":\"allDatatypes\",                         \"type\":\"TABLE\",                         \"description\":\"\",                         \"selected\":true,                         \"linked\":true,                         \"columns\":[                            {                               \"name\":\"CNUMBER\",                               \"type\":\"INT64\",                               \"canImport\":true,                               \"selected\":true,                               \"isLinkedActive\":true,                               \"isImported\":false,                               \"tableName\":\"allDatatypes\",                               \"schemaName\":\"alldatatypes\",                               \"dbName\":\"AllDatatypes\"                            },                            {                               \"name\":\"CDECIMAL\",                               \"type\":\"INT64\",                               \"canImport\":true,                               \"selected\":true,                               \"isLinkedActive\":true,                               \"isImported\":false,                               \"tableName\":\"allDatatypes\",                               \"schemaName\":\"alldatatypes\",                               \"dbName\":\"AllDatatypes\"                            }                         ]                      }                   ]                }             ]          }       ]    }    ```  3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`. * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a Snowflake connection:  ```  {     \"configuration\":{        \"accountName\":\"thoughtspot_partner\",        \"user\":\"tsadmin\",        \"password\":\"TestConn123\",        \"role\":\"sysadmin\",        \"warehouse\":\"MEDIUM_WH\"     },     \"externalDatabases\":[      ]  }  ```      
+   *   Version: 10.4.0.cl or later   Updates a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`.        **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.     * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:    * This is an example of updating a single table in a empty connection:           ```       {         \"authenticationType\": \"SERVICE_ACCOUNT\",         \"externalDatabases\": [           {             \"name\": \"DEVELOPMENT\",             \"isAutoCreated\": false,             \"schemas\": [               {                 \"name\": \"TS_dataset\",                 \"tables\": [                   {                     \"name\": \"DEMORENAME\",                     \"type\": \"TABLE\",                     \"description\": \"\",                     \"selected\": true,                     \"linked\": true,                     \"gid\": 0,                     \"datasetId\": \"-1\",                     \"subType\": \"\",                     \"reportId\": \"\",                     \"viewId\": \"\",                     \"columns\": [                       {                         \"name\": \"Col1\",                         \"type\": \"VARCHAR\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"Col2\",                         \"type\": \"VARCHAR\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"Col3\",                         \"type\": \"VARCHAR\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"Col312\",                         \"type\": \"VARCHAR\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"Col4\",                         \"type\": \"VARCHAR\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       }                     ],                     \"relationships\": []                   }                 ]               }             ]           }         ],         \"configuration\": {           \"password\": \"\",           \"database\": \"DEVELOPMENT\",           \"role\": \"DEV\",           \"accountName\": \"thoughtspot_partner\",           \"warehouse\": \"DEMO_WH\",           \"user\": \"DEV_USER\"         }       }       ```        * This is an example of updating a single table in an existing connection with tables:            ```       {         \"authenticationType\": \"SERVICE_ACCOUNT\",         \"externalDatabases\": [           {             \"name\": \"DEVELOPMENT\",             \"isAutoCreated\": false,             \"schemas\": [               {                 \"name\": \"TS_dataset\",                 \"tables\": [                   {                     \"name\": \"CUSTOMER\",                     \"type\": \"TABLE\",                     \"description\": \"\",                     \"selected\": true,                     \"linked\": true,                     \"gid\": 0,                     \"datasetId\": \"-1\",                     \"subType\": \"\",                     \"reportId\": \"\",                     \"viewId\": \"\",                     \"columns\": [],                     \"relationships\": []                   },                   {                     \"name\": \"tpch5k_falcon_default_schema_users\",                     \"type\": \"TABLE\",                     \"description\": \"\",                     \"selected\": true,                     \"linked\": true,                     \"gid\": 0,                     \"datasetId\": \"-1\",                     \"subType\": \"\",                     \"reportId\": \"\",                     \"viewId\": \"\",                     \"columns\": [                       {                         \"name\": \"user_id\",                         \"type\": \"INT64\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"product_id\",                         \"type\": \"INT64\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"user_cost\",                         \"type\": \"INT64\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       }                     ],                     \"relationships\": []                   }                 ]               }             ]           }         ],         \"configuration\": {           \"password\": \"\",           \"database\": \"DEVELOPMENT\",           \"role\": \"DEV\",           \"accountName\": \"thoughtspot_partner\",           \"warehouse\": \"DEMO_WH\",           \"user\": \"DEV_USER\"         }       }       ```  3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.    **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not  specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.    * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a Snowflake connection:    ```    {       \"configuration\":{          \"accountName\":\"thoughtspot_partner\",          \"user\":\"tsadmin\",          \"password\":\"TestConn123\",          \"role\":\"sysadmin\",          \"warehouse\":\"MEDIUM_WH\"       },       \"externalDatabases\":[        ]    }    ```      
    * @param connectionIdentifier Unique ID or name of the connection.
    * @param updateConnectionV2Request 
    */
@@ -34122,10 +36785,20 @@ var ObservableThoughtSpotRestApi = class {
   }
   /**
    *   Version: 9.9.0.cl or later   Updates a DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### About update DBT connection You can modify DBT connection object properties such as embrace connection name, embrace database name, import type, account identifier, access token, project identifier and environment (or) embrace connection, embrace database name, import type, file_content settings.      
-   * @param updateDbtConnectionRequest 
+   * @param dbtConnectionIdentifier Unique ID of the DBT Connection.
+   * @param connectionName Name of the connection.
+   * @param databaseName Name of the Database.
+   * @param importType Mention type of Import
+   * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD.
+   * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD.
+   * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD
+   * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD
+   * @param dbtEnvId DBT Environment ID\\\&quot;
+   * @param projectName Name of the project
+   * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is Mandatory when Import Type is \\\&#39;ZIP_FILE\\\&#39;
    */
-  updateDbtConnection(updateDbtConnectionRequest, _options) {
-    const requestContextPromise = this.requestFactory.updateDbtConnection(updateDbtConnectionRequest, _options);
+  updateDbtConnection(dbtConnectionIdentifier, connectionName, databaseName, importType, accessToken, dbtUrl, accountId, projectId, dbtEnvId, projectName, fileContent, _options) {
+    const requestContextPromise = this.requestFactory.updateDbtConnection(dbtConnectionIdentifier, connectionName, databaseName, importType, accessToken, dbtUrl, accountId, projectId, dbtEnvId, projectName, fileContent, _options);
     let middlewarePreObservable = from(requestContextPromise);
     for (let middleware of this.configuration.middleware) {
       middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
@@ -34746,21 +37419,21 @@ var PromiseAuthenticationApi = class {
     this.api = new ObservableAuthenticationApi(configuration, requestFactory, responseProcessor);
   }
   /**
-   *   Version: 9.0.0.cl or later    Gets session information for the currently logged-in user.  This API does not require any parameters to be passed in the request.    Any ThoughtSpot user can access this endpoint and send an API request. The data returned in the API response varies according to user\'s privilege and object access permissions.      
+   *   Version: 9.0.0.cl or later   Retrieves details of the current user session for the token provided in the request header.  Any ThoughtSpot user can access this endpoint and send an API request. The data returned in the API response varies according to user\'s privilege and object access permissions.     
    */
   getCurrentUserInfo(_options) {
     const result = this.api.getCurrentUserInfo(_options);
     return result.toPromise();
   }
   /**
-   *  Get token for the currently logged-in user.    Version: 9.4.0.cl or later   Gets token details for the currently logged-in user.  You can use this endpoint to obtain the token associated with the user\'s session.  This API does not require any parameters to be passed in the request.    Any ThoughtSpot user can access this endpoint and send an API request.      
+   *   Version: 9.4.0.cl or later   Retrieves details of the current session token for the bearer token provided in the request header.  This API endpoint does not create a new token. Instead, it returns details about the token, including the token string, creation time, expiration time, and the associated user.  Use this endpoint to introspect your current session token, debug authentication issues, or when a frontend application needs session token details.  Any ThoughtSpot user with a valid bearer token can access this endpoint and send an API request      
    */
   getCurrentUserToken(_options) {
     const result = this.api.getCurrentUserToken(_options);
     return result.toPromise();
   }
   /**
-   *   Version: 10.4.0.cl or later   Gets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  To add a new user and assign privileges during auto creation, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  To assign security attributes with filter rules and Parameters to the JWT token, you\'ll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  #### Usage guidelines  You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key`.  To generate a `secret_key` on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable) in the **Develop** > **Customizations** > **Security Settings** page.  **Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.  If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.  ##### Attribute-Based Access Control (ABAC) with tokens  To implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the `filter_rules` and `parameter_values` array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user\'s `access_control_properties` object, after which all sessions will use the persisted values.  Specify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.  For more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).  ##### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * `auto_create` * `username` * `display_name` * `email` * `groups`  Set `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true` in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  ##### Important point to note All options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Persist options such as  `APPEND`, `REPLACE`, `RESET` will persist security parameters on the user profile when the token is created, while Persist option `NONE` will not persist anything but will be honoured in the session.      
+   *   Version: 10.4.0.cl or later   Gets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  To add a new user and assign privileges during auto creation, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  To assign security attributes with filter rules and Parameters to the JWT token, you\'ll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  #### Usage guidelines  You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key`.  To generate a `secret_key` on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable) in the **Develop** > **Customizations** > **Security Settings** page.  **Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.  If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.  ##### Attribute-Based Access Control (ABAC) with tokens  To implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the `filter_rules` and `parameter_values` array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user\'s `access_control_properties` object, after which all sessions will use the persisted values.  Specify the object type as `LOGICAL_TABLE`.   For more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).  ##### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * `auto_create` * `username` * `display_name` * `email` * `groups`  Set `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true` in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values. If `auto_create` is set to `true`, it won\'t create formula variables and hence won\'t be applicable for `variable_values`.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  ##### Important point to note All options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Persist options such as  `APPEND`, `REPLACE`, `RESET` will persist security parameters on the user profile when the token is created, while Persist option `NONE` will not persist anything but will be honoured in the session.  ##### Formula Variables Before using variables_values, variables must be created using Create Variable API with type as Formula_Variable (/api/rest/2.0/template/variables/create) The persist_option RESET and NONE cannot be used when variable_values are provided in the request. If you are working with variable_values, you must use other (APPEND, REPLACE) supported modes. If you want to use RESET or NONE, do not pass any variable_values. In such cases, variable_values will remain unaffected. When using object_id with variable_values, models are supported.      
    * @param getCustomAccessTokenRequest 
    */
   getCustomAccessToken(getCustomAccessTokenRequest, _options) {
@@ -34860,7 +37533,7 @@ var PromiseConnectionsApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.2.0.cl or later   Gets connection objects. Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  - To get a list of all connections available in the ThoughtSpot system, send the API request without any attributes in the request body. - To get the connection objects for a specific type of data warehouse, specify the type in `data_warehouse_types`. - To fetch details of a connection object, specify the connection object GUID or name. The `name_pattern` attribute allows passing partial text with `%` for a wildcard match. - To get details of the database, schemas, tables, or columns from a data connection object, specify `data_warehouse_object_type`. - To get a specific database, schema, table, or column from a connection object, define the object type in `data_warehouse_object_type` and object properties in the `data_warehouse_objects` array. For example, to search for a column, you must pass the database, schema, and table names in the API request.   Note that in the following example, object properties are set in a hierarchical order (`database` > `schema` > `table` > `column`).  ``` {   \"connections\": [     {       \"identifier\": \"b9d1f2ef-fa65-4a4b-994e-30fa2d57b0c2\",       \"data_warehouse_objects\": [         {           \"database\": \"NEBULADEV\",           \"schema\": \"INFORMATION_SCHEMA\",           \"table\": \"APPLICABLE_ROLES\",           \"column\": \"ROLE_NAME\"         }       ]     }   ],   \"data_warehouse_object_type\": \"COLUMN\" } ```  - To fetch data by `configuration`, specify `data_warehouse_object_type`. For example, to fetch columns from the `DEVELOPMENT` database, specify the `data_warehouse_object_type` as `DATABASE` and define the `configuration` string as `{\"database\":\"DEVELOPMENT\"}`. To get column data for a specific table, specify the table, for example,`{\"database\":\"RETAILAPPAREL\",\"table\":\"PIPES\"}`. - To query connections by `authentication_type`, specify `data_warehouse_object_type`. Supported values for `authentication_type` are:   - `SERVICE_ACCOUNT`: For connections that require service account credentials to authenticate to the Cloud Data Warehouse and fetch data.   - `OAUTH`: For connections that require OAuth credentials to authenticate to the Cloud Data Warehouse and fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth authentication type.   - `IAM`: For connections that have the IAM OAuth set up. This authentication type is supported on Amazon Redshift connections only.   - `EXTOAUTH`: For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/ connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). - To include more details about connection objects in the API response, set `include_details` to `true`. - You can also sort the output by field names and filter connections by tags.  **NOTE**: When filtering connection records by parameters other than `data_warehouse_types` or `tag_identifiers`, ensure that you set `record_size` to `-1` and `record_offset` to `0` for precise results.      
+   *   Version: 9.2.0.cl or later   Gets connection objects. Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  - To get a list of all connections available in the ThoughtSpot system, send the API request without any attributes in the request body. - To get the connection objects for a specific type of data warehouse, specify the type in `data_warehouse_types`. - To fetch details of a connection object, specify the connection object GUID or name. The `name_pattern` attribute allows passing partial text with `%` for a wildcard match. - To get details of the database, schemas, tables, or columns from a data connection object, specify `data_warehouse_object_type`. - To get a specific database, schema, table, or column from a connection object, define the object type in `data_warehouse_object_type` and object properties in the `data_warehouse_objects` array. For example, to search for a column, you must pass the database, schema, and table names in the API request.   Note that in the following example, object properties are set in a hierarchical order (`database` > `schema` > `table` > `column`).  ``` {   \"connections\": [     {       \"identifier\": \"b9d1f2ef-fa65-4a4b-994e-30fa2d57b0c2\",       \"data_warehouse_objects\": [         {           \"database\": \"NEBULADEV\",           \"schema\": \"INFORMATION_SCHEMA\",           \"table\": \"APPLICABLE_ROLES\",           \"column\": \"ROLE_NAME\"         }       ]     }   ],   \"data_warehouse_object_type\": \"COLUMN\" } ```  - To fetch data by `configuration`, specify `data_warehouse_object_type`. For example, to fetch columns from the `DEVELOPMENT` database, specify the `data_warehouse_object_type` as `DATABASE` and define the `configuration` string as `{\"database\":\"DEVELOPMENT\"}`. To get column data for a specific table, specify the table, for example,`{\"database\":\"RETAILAPPAREL\",\"table\":\"PIPES\"}`. - To query connections by `authentication_type`, specify `data_warehouse_object_type`. Supported values for `authentication_type` are:   - `SERVICE_ACCOUNT`: For connections that require service account credentials to authenticate to the Cloud Data Warehouse and fetch data.   - `OAUTH`: For connections that require OAuth credentials to authenticate to the Cloud Data Warehouse and fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth authentication type.   - `IAM`: For connections that have the IAM OAuth set up. This authentication type is supported on Amazon Redshift connections only.   - `EXTOAUTH`: For connections that have External OAuth set up. ThoughtSpot supports external [OAuth with Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/ connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth).   - `KEY_PAIR`: For connections that require Key Pair account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only.   - `OAUTH_WITH_PKCE`: For connections that require OAuth with PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake, Starburst, Databricks, Denodo  connections only.   - `EXTOAUTH_WITH_PKCE`: For connections that require External OAuth With PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only.   - `OAUTH_WITH_PEZ`: For connections that require OAuth With PEZ account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Amazon Redshift connections only.   - `OAUTH_WITH_SERVICE_PRINCIPAL`: For connections that require OAuth With Service Principal account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Databricks connections only.   - `PERSONAL_ACCESS_TOKEN`: For connections that require Personal Access Token account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Databricks connections only.   - `OAUTH_CLIENT_CREDENTIALS`: For connections that require OAuth Client Credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only. - To include more details about connection objects in the API response, set `include_details` to `true`. - You can also sort the output by field names and filter connections by tags.  **NOTE**: When filtering connection records by parameters other than `data_warehouse_types` or `tag_identifiers`, ensure that you set `record_size` to `-1` and `record_offset` to `0` for precise results.      
    * @param searchConnectionRequest 
    */
   searchConnection(searchConnectionRequest, _options) {
@@ -34876,7 +37549,7 @@ var PromiseConnectionsApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 10.4.0.cl or later   Updates a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`.    * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:     ```    {       \"configuration\":{          \"accountName\":\"thoughtspot_partner\",          \"user\":\"tsadmin\",          \"password\":\"TestConn123\",          \"role\":\"sysadmin\",          \"warehouse\":\"MEDIUM_WH\"       },       \"externalDatabases\":[          {             \"name\":\"AllDatatypes\",             \"isAutoCreated\":false,             \"schemas\":[                {                   \"name\":\"alldatatypes\",                   \"tables\":[                      {                         \"name\":\"allDatatypes\",                         \"type\":\"TABLE\",                         \"description\":\"\",                         \"selected\":true,                         \"linked\":true,                         \"columns\":[                            {                               \"name\":\"CNUMBER\",                               \"type\":\"INT64\",                               \"canImport\":true,                               \"selected\":true,                               \"isLinkedActive\":true,                               \"isImported\":false,                               \"tableName\":\"allDatatypes\",                               \"schemaName\":\"alldatatypes\",                               \"dbName\":\"AllDatatypes\"                            },                            {                               \"name\":\"CDECIMAL\",                               \"type\":\"INT64\",                               \"canImport\":true,                               \"selected\":true,                               \"isLinkedActive\":true,                               \"isImported\":false,                               \"tableName\":\"allDatatypes\",                               \"schemaName\":\"alldatatypes\",                               \"dbName\":\"AllDatatypes\"                            }                         ]                      }                   ]                }             ]          }       ]    }    ```  3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`. * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a Snowflake connection:  ```  {     \"configuration\":{        \"accountName\":\"thoughtspot_partner\",        \"user\":\"tsadmin\",        \"password\":\"TestConn123\",        \"role\":\"sysadmin\",        \"warehouse\":\"MEDIUM_WH\"     },     \"externalDatabases\":[      ]  }  ```      
+   *   Version: 10.4.0.cl or later   Updates a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`.        **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.     * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:    * This is an example of updating a single table in a empty connection:           ```       {         \"authenticationType\": \"SERVICE_ACCOUNT\",         \"externalDatabases\": [           {             \"name\": \"DEVELOPMENT\",             \"isAutoCreated\": false,             \"schemas\": [               {                 \"name\": \"TS_dataset\",                 \"tables\": [                   {                     \"name\": \"DEMORENAME\",                     \"type\": \"TABLE\",                     \"description\": \"\",                     \"selected\": true,                     \"linked\": true,                     \"gid\": 0,                     \"datasetId\": \"-1\",                     \"subType\": \"\",                     \"reportId\": \"\",                     \"viewId\": \"\",                     \"columns\": [                       {                         \"name\": \"Col1\",                         \"type\": \"VARCHAR\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"Col2\",                         \"type\": \"VARCHAR\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"Col3\",                         \"type\": \"VARCHAR\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"Col312\",                         \"type\": \"VARCHAR\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"Col4\",                         \"type\": \"VARCHAR\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       }                     ],                     \"relationships\": []                   }                 ]               }             ]           }         ],         \"configuration\": {           \"password\": \"\",           \"database\": \"DEVELOPMENT\",           \"role\": \"DEV\",           \"accountName\": \"thoughtspot_partner\",           \"warehouse\": \"DEMO_WH\",           \"user\": \"DEV_USER\"         }       }       ```        * This is an example of updating a single table in an existing connection with tables:            ```       {         \"authenticationType\": \"SERVICE_ACCOUNT\",         \"externalDatabases\": [           {             \"name\": \"DEVELOPMENT\",             \"isAutoCreated\": false,             \"schemas\": [               {                 \"name\": \"TS_dataset\",                 \"tables\": [                   {                     \"name\": \"CUSTOMER\",                     \"type\": \"TABLE\",                     \"description\": \"\",                     \"selected\": true,                     \"linked\": true,                     \"gid\": 0,                     \"datasetId\": \"-1\",                     \"subType\": \"\",                     \"reportId\": \"\",                     \"viewId\": \"\",                     \"columns\": [],                     \"relationships\": []                   },                   {                     \"name\": \"tpch5k_falcon_default_schema_users\",                     \"type\": \"TABLE\",                     \"description\": \"\",                     \"selected\": true,                     \"linked\": true,                     \"gid\": 0,                     \"datasetId\": \"-1\",                     \"subType\": \"\",                     \"reportId\": \"\",                     \"viewId\": \"\",                     \"columns\": [                       {                         \"name\": \"user_id\",                         \"type\": \"INT64\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"product_id\",                         \"type\": \"INT64\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"user_cost\",                         \"type\": \"INT64\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       }                     ],                     \"relationships\": []                   }                 ]               }             ]           }         ],         \"configuration\": {           \"password\": \"\",           \"database\": \"DEVELOPMENT\",           \"role\": \"DEV\",           \"accountName\": \"thoughtspot_partner\",           \"warehouse\": \"DEMO_WH\",           \"user\": \"DEV_USER\"         }       }       ```  3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.    **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not  specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.    * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a Snowflake connection:    ```    {       \"configuration\":{          \"accountName\":\"thoughtspot_partner\",          \"user\":\"tsadmin\",          \"password\":\"TestConn123\",          \"role\":\"sysadmin\",          \"warehouse\":\"MEDIUM_WH\"       },       \"externalDatabases\":[        ]    }    ```      
    * @param connectionIdentifier Unique ID or name of the connection.
    * @param updateConnectionV2Request 
    */
@@ -34929,26 +37602,40 @@ var PromiseDBTApi = class {
   }
   /**
    *   Version: 9.9.0.cl or later   Creates a DBT connection object in ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### About create DBT connection DBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.      
-   * @param dbtConnectionRequest 
+   * @param connectionName Name of the connection.
+   * @param databaseName Name of the Database.
+   * @param importType Mention type of Import
+   * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD.
+   * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD.
+   * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD
+   * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD
+   * @param dbtEnvId DBT Environment ID\\\&quot;
+   * @param projectName Name of the project
+   * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is Mandatory when Import Type is \\\&#39;ZIP_FILE\\\&#39;
    */
-  dbtConnection(dbtConnectionRequest, _options) {
-    const result = this.api.dbtConnection(dbtConnectionRequest, _options);
+  dbtConnection(connectionName, databaseName, importType, accessToken, dbtUrl, accountId, projectId, dbtEnvId, projectName, fileContent, _options) {
+    const result = this.api.dbtConnection(connectionName, databaseName, importType, accessToken, dbtUrl, accountId, projectId, dbtEnvId, projectName, fileContent, _options);
     return result.toPromise();
   }
   /**
    *   Version: 9.9.0.cl or later   Resynchronize the existing list of models, tables, worksheet tml’s and import them to Thoughtspot based on the DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)      
-   * @param dbtGenerateSyncTmlRequest 
+   * @param dbtConnectionIdentifier Unique ID of the DBT connection.
+   * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
    */
-  dbtGenerateSyncTml(dbtGenerateSyncTmlRequest, _options) {
-    const result = this.api.dbtGenerateSyncTml(dbtGenerateSyncTmlRequest, _options);
+  dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, _options) {
+    const result = this.api.dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, _options);
     return result.toPromise();
   }
   /**
    *   Version: 9.9.0.cl or later   Generate required table and worksheet and import them.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### About generate TML Models and Worksheets to be imported can be selected by the user as part of the API.      
-   * @param dbtGenerateTmlRequest 
+   * @param dbtConnectionIdentifier Unique ID of the DBT connection.
+   * @param modelTables List of Models and their respective Tables Example: \\\&#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;, \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]\\\&#39;
+   * @param importWorksheets Mention the worksheet tmls to import
+   * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED Example: [\\\&quot;worksheet_name\\\&quot;]
+   * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
    */
-  dbtGenerateTml(dbtGenerateTmlRequest, _options) {
-    const result = this.api.dbtGenerateTml(dbtGenerateTmlRequest, _options);
+  dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent, _options) {
+    const result = this.api.dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent, _options);
     return result.toPromise();
   }
   /**
@@ -34968,10 +37655,20 @@ var PromiseDBTApi = class {
   }
   /**
    *   Version: 9.9.0.cl or later   Updates a DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### About update DBT connection You can modify DBT connection object properties such as embrace connection name, embrace database name, import type, account identifier, access token, project identifier and environment (or) embrace connection, embrace database name, import type, file_content settings.      
-   * @param updateDbtConnectionRequest 
+   * @param dbtConnectionIdentifier Unique ID of the DBT Connection.
+   * @param connectionName Name of the connection.
+   * @param databaseName Name of the Database.
+   * @param importType Mention type of Import
+   * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD.
+   * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD.
+   * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD
+   * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD
+   * @param dbtEnvId DBT Environment ID\\\&quot;
+   * @param projectName Name of the project
+   * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is Mandatory when Import Type is \\\&#39;ZIP_FILE\\\&#39;
    */
-  updateDbtConnection(updateDbtConnectionRequest, _options) {
-    const result = this.api.updateDbtConnection(updateDbtConnectionRequest, _options);
+  updateDbtConnection(dbtConnectionIdentifier, connectionName, databaseName, importType, accessToken, dbtUrl, accountId, projectId, dbtEnvId, projectName, fileContent, _options) {
+    const result = this.api.updateDbtConnection(dbtConnectionIdentifier, connectionName, databaseName, importType, accessToken, dbtUrl, accountId, projectId, dbtEnvId, projectName, fileContent, _options);
     return result.toPromise();
   }
 };
@@ -35076,7 +37773,7 @@ var PromiseMetadataApi = class {
     return result.toPromise();
   }
   /**
-   *  Makes a copy of an Answer or Liveboard saved in Atlas    Version: 10.3.0.cl or later   Creates a copy of a metadata object.  Requires at least view access to the metadata object being copied.  Upon successful execution, the API creates a copy of the metadata object specified in the API request and returns the ID of the new object.      
+   *  Makes a copy of an Answer or Liveboard    Version: 10.3.0.cl or later   Creates a copy of a metadata object.  Requires at least view access to the metadata object being copied.  Upon successful execution, the API creates a copy of the metadata object specified in the API request and returns the ID of the new object.      
    * @param copyObjectRequest 
    */
   copyObject(copyObjectRequest, _options) {
@@ -35148,7 +37845,7 @@ var PromiseMetadataApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.   You can also define sorting options to sort the data retrieved in the API response. - To get discoverable objects when linientmodel is enabled you can use `include_discoverable_objects` as true else false. Default value is true.  **NOTE**: The following parameters support pagination of metadata records:  - `tag_identifiers` - `type` - `created_by_user_identifiers` - `modified_by_user_identifiers` - `owned_by_user_identifiers` - `exclude_objects` - `include_auto_created_objects` - `favorite_object_options` If you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.      
+   *   Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`. - To filter metadata objects within type `LOGICAL_TABLE`, set the `subtypes` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE` & subtypes as `[WORKSHEET]`. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.   You can also define sorting options to sort the data retrieved in the API response. - To get discoverable objects when linientmodel is enabled you can use `include_discoverable_objects` as true else false. Default value is true. - For liveboard metadata type, to get the newer format, set the `liveboard_response_format` as V2. Default value is V1. - To retrieve only objects that are published, set the `include_only_published_objects` as true. Default value is false.  **NOTE**: The following parameters support pagination of metadata records:  - `tag_identifiers` - `type` - `subtypes` - `created_by_user_identifiers` - `modified_by_user_identifiers` - `owned_by_user_identifiers` - `exclude_objects` - `include_auto_created_objects` - `favorite_object_options` - `include_only_published_objects` If you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.      
    * @param searchMetadataRequest 
    */
   searchMetadata(searchMetadataRequest, _options) {
@@ -35215,7 +37912,7 @@ var PromiseReportsApi = class {
     this.api = new ObservableReportsApi(configuration, requestFactory, responseProcessor);
   }
   /**
-   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires at least view access to the Answer.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  **NOTE**: * The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with tables.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).       
+   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires at least view access to the Answer.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  **NOTE**: * The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with tables.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.       
    * @param exportAnswerReportRequest 
    */
   exportAnswerReport(exportAnswerReportRequest, _options) {
@@ -35223,7 +37920,7 @@ var PromiseReportsApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later   Exports a Liveboard and its visualizations in PDF or PNG file format.  Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is PDF. For PDF downloads, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  **NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).       
+   *   Version: 9.0.0.cl or later   Exports a Liveboard and its visualizations in PDF or PNG file format.  Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is PDF. For PDF downloads, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  **NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).    **NOTE**: Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in the PNG format in the resolution of your choice. To enable this on your instance, contact ThoughtSpot support. When this feature is enabled, the options `include_cover_page`,`include_filter_page` within the `png_options` will not be available for PNG exports.     
    * @param exportLiveboardReportRequest 
    */
   exportLiveboardReport(exportLiveboardReportRequest, _options) {
@@ -35485,7 +38182,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *  Makes a copy of an Answer or Liveboard saved in Atlas    Version: 10.3.0.cl or later   Creates a copy of a metadata object.  Requires at least view access to the metadata object being copied.  Upon successful execution, the API creates a copy of the metadata object specified in the API request and returns the ID of the new object.      
+   *  Makes a copy of an Answer or Liveboard    Version: 10.3.0.cl or later   Creates a copy of a metadata object.  Requires at least view access to the metadata object being copied.  Upon successful execution, the API creates a copy of the metadata object specified in the API request and returns the ID of the new object.      
    * @param copyObjectRequest 
    */
   copyObject(copyObjectRequest, _options) {
@@ -35574,26 +38271,40 @@ var PromiseThoughtSpotRestApi = class {
   }
   /**
    *   Version: 9.9.0.cl or later   Creates a DBT connection object in ThoughtSpot.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### About create DBT connection DBT connection in ThoughtSpot is used by the user to define DBT credentials for cloud . The API needs  embrace connection, embrace database name, DBT url, import type, DBT account identifier, DBT project identifier, DBT access token and environment details (or) embrace connection, embrace database name, import type, file_content to create a connection object. To know more about DBT, see ThoughtSpot Product Documentation.      
-   * @param dbtConnectionRequest 
+   * @param connectionName Name of the connection.
+   * @param databaseName Name of the Database.
+   * @param importType Mention type of Import
+   * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD.
+   * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD.
+   * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD
+   * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD
+   * @param dbtEnvId DBT Environment ID\\\&quot;
+   * @param projectName Name of the project
+   * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is Mandatory when Import Type is \\\&#39;ZIP_FILE\\\&#39;
    */
-  dbtConnection(dbtConnectionRequest, _options) {
-    const result = this.api.dbtConnection(dbtConnectionRequest, _options);
+  dbtConnection(connectionName, databaseName, importType, accessToken, dbtUrl, accountId, projectId, dbtEnvId, projectName, fileContent, _options) {
+    const result = this.api.dbtConnection(connectionName, databaseName, importType, accessToken, dbtUrl, accountId, projectId, dbtEnvId, projectName, fileContent, _options);
     return result.toPromise();
   }
   /**
    *   Version: 9.9.0.cl or later   Resynchronize the existing list of models, tables, worksheet tml’s and import them to Thoughtspot based on the DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)      
-   * @param dbtGenerateSyncTmlRequest 
+   * @param dbtConnectionIdentifier Unique ID of the DBT connection.
+   * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
    */
-  dbtGenerateSyncTml(dbtGenerateSyncTmlRequest, _options) {
-    const result = this.api.dbtGenerateSyncTml(dbtGenerateSyncTmlRequest, _options);
+  dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, _options) {
+    const result = this.api.dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, _options);
     return result.toPromise();
   }
   /**
    *   Version: 9.9.0.cl or later   Generate required table and worksheet and import them.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### About generate TML Models and Worksheets to be imported can be selected by the user as part of the API.      
-   * @param dbtGenerateTmlRequest 
+   * @param dbtConnectionIdentifier Unique ID of the DBT connection.
+   * @param modelTables List of Models and their respective Tables Example: \\\&#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;, \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]\\\&#39;
+   * @param importWorksheets Mention the worksheet tmls to import
+   * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED Example: [\\\&quot;worksheet_name\\\&quot;]
+   * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
    */
-  dbtGenerateTml(dbtGenerateTmlRequest, _options) {
-    const result = this.api.dbtGenerateTml(dbtGenerateTmlRequest, _options);
+  dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent, _options) {
+    const result = this.api.dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent, _options);
     return result.toPromise();
   }
   /**
@@ -35724,7 +38435,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires at least view access to the Answer.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  **NOTE**: * The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with tables.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).       
+   *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires at least view access to the Answer.  #### Usage guidelines  In the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.  **NOTE**: * The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with tables.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.       
    * @param exportAnswerReportRequest 
    */
   exportAnswerReport(exportAnswerReportRequest, _options) {
@@ -35732,7 +38443,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later   Exports a Liveboard and its visualizations in PDF or PNG file format.  Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is PDF. For PDF downloads, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  **NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).       
+   *   Version: 9.0.0.cl or later   Exports a Liveboard and its visualizations in PDF or PNG file format.  Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is PDF. For PDF downloads, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  **NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).    **NOTE**: Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in the PNG format in the resolution of your choice. To enable this on your instance, contact ThoughtSpot support. When this feature is enabled, the options `include_cover_page`,`include_filter_page` within the `png_options` will not be available for PNG exports.     
    * @param exportLiveboardReportRequest 
    */
   exportLiveboardReport(exportLiveboardReportRequest, _options) {
@@ -35836,21 +38547,21 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later    Gets session information for the currently logged-in user.  This API does not require any parameters to be passed in the request.    Any ThoughtSpot user can access this endpoint and send an API request. The data returned in the API response varies according to user\'s privilege and object access permissions.      
+   *   Version: 9.0.0.cl or later   Retrieves details of the current user session for the token provided in the request header.  Any ThoughtSpot user can access this endpoint and send an API request. The data returned in the API response varies according to user\'s privilege and object access permissions.     
    */
   getCurrentUserInfo(_options) {
     const result = this.api.getCurrentUserInfo(_options);
     return result.toPromise();
   }
   /**
-   *  Get token for the currently logged-in user.    Version: 9.4.0.cl or later   Gets token details for the currently logged-in user.  You can use this endpoint to obtain the token associated with the user\'s session.  This API does not require any parameters to be passed in the request.    Any ThoughtSpot user can access this endpoint and send an API request.      
+   *   Version: 9.4.0.cl or later   Retrieves details of the current session token for the bearer token provided in the request header.  This API endpoint does not create a new token. Instead, it returns details about the token, including the token string, creation time, expiration time, and the associated user.  Use this endpoint to introspect your current session token, debug authentication issues, or when a frontend application needs session token details.  Any ThoughtSpot user with a valid bearer token can access this endpoint and send an API request      
    */
   getCurrentUserToken(_options) {
     const result = this.api.getCurrentUserToken(_options);
     return result.toPromise();
   }
   /**
-   *   Version: 10.4.0.cl or later   Gets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  To add a new user and assign privileges during auto creation, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  To assign security attributes with filter rules and Parameters to the JWT token, you\'ll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  #### Usage guidelines  You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key`.  To generate a `secret_key` on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable) in the **Develop** > **Customizations** > **Security Settings** page.  **Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.  If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.  ##### Attribute-Based Access Control (ABAC) with tokens  To implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the `filter_rules` and `parameter_values` array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user\'s `access_control_properties` object, after which all sessions will use the persisted values.  Specify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.  For more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).  ##### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * `auto_create` * `username` * `display_name` * `email` * `groups`  Set `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true` in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  ##### Important point to note All options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Persist options such as  `APPEND`, `REPLACE`, `RESET` will persist security parameters on the user profile when the token is created, while Persist option `NONE` will not persist anything but will be honoured in the session.      
+   *   Version: 10.4.0.cl or later   Gets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  To add a new user and assign privileges during auto creation, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  To assign security attributes with filter rules and Parameters to the JWT token, you\'ll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  #### Usage guidelines  You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key`.  To generate a `secret_key` on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable) in the **Develop** > **Customizations** > **Security Settings** page.  **Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.  If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.  ##### Attribute-Based Access Control (ABAC) with tokens  To implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the `filter_rules` and `parameter_values` array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user\'s `access_control_properties` object, after which all sessions will use the persisted values.  Specify the object type as `LOGICAL_TABLE`.   For more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).  ##### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * `auto_create` * `username` * `display_name` * `email` * `groups`  Set `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true` in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values. If `auto_create` is set to `true`, it won\'t create formula variables and hence won\'t be applicable for `variable_values`.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  ##### Important point to note All options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Persist options such as  `APPEND`, `REPLACE`, `RESET` will persist security parameters on the user profile when the token is created, while Persist option `NONE` will not persist anything but will be honoured in the session.  ##### Formula Variables Before using variables_values, variables must be created using Create Variable API with type as Formula_Variable (/api/rest/2.0/template/variables/create) The persist_option RESET and NONE cannot be used when variable_values are provided in the request. If you are working with variable_values, you must use other (APPEND, REPLACE) supported modes. If you want to use RESET or NONE, do not pass any variable_values. In such cases, variable_values will remain unaffected. When using object_id with variable_values, models are supported.      
    * @param getCustomAccessTokenRequest 
    */
   getCustomAccessToken(getCustomAccessTokenRequest, _options) {
@@ -35991,7 +38702,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.2.0.cl or later   Gets connection objects. Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  - To get a list of all connections available in the ThoughtSpot system, send the API request without any attributes in the request body. - To get the connection objects for a specific type of data warehouse, specify the type in `data_warehouse_types`. - To fetch details of a connection object, specify the connection object GUID or name. The `name_pattern` attribute allows passing partial text with `%` for a wildcard match. - To get details of the database, schemas, tables, or columns from a data connection object, specify `data_warehouse_object_type`. - To get a specific database, schema, table, or column from a connection object, define the object type in `data_warehouse_object_type` and object properties in the `data_warehouse_objects` array. For example, to search for a column, you must pass the database, schema, and table names in the API request.   Note that in the following example, object properties are set in a hierarchical order (`database` > `schema` > `table` > `column`).  ``` {   \"connections\": [     {       \"identifier\": \"b9d1f2ef-fa65-4a4b-994e-30fa2d57b0c2\",       \"data_warehouse_objects\": [         {           \"database\": \"NEBULADEV\",           \"schema\": \"INFORMATION_SCHEMA\",           \"table\": \"APPLICABLE_ROLES\",           \"column\": \"ROLE_NAME\"         }       ]     }   ],   \"data_warehouse_object_type\": \"COLUMN\" } ```  - To fetch data by `configuration`, specify `data_warehouse_object_type`. For example, to fetch columns from the `DEVELOPMENT` database, specify the `data_warehouse_object_type` as `DATABASE` and define the `configuration` string as `{\"database\":\"DEVELOPMENT\"}`. To get column data for a specific table, specify the table, for example,`{\"database\":\"RETAILAPPAREL\",\"table\":\"PIPES\"}`. - To query connections by `authentication_type`, specify `data_warehouse_object_type`. Supported values for `authentication_type` are:   - `SERVICE_ACCOUNT`: For connections that require service account credentials to authenticate to the Cloud Data Warehouse and fetch data.   - `OAUTH`: For connections that require OAuth credentials to authenticate to the Cloud Data Warehouse and fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth authentication type.   - `IAM`: For connections that have the IAM OAuth set up. This authentication type is supported on Amazon Redshift connections only.   - `EXTOAUTH`: For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/ connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). - To include more details about connection objects in the API response, set `include_details` to `true`. - You can also sort the output by field names and filter connections by tags.  **NOTE**: When filtering connection records by parameters other than `data_warehouse_types` or `tag_identifiers`, ensure that you set `record_size` to `-1` and `record_offset` to `0` for precise results.      
+   *   Version: 9.2.0.cl or later   Gets connection objects. Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  - To get a list of all connections available in the ThoughtSpot system, send the API request without any attributes in the request body. - To get the connection objects for a specific type of data warehouse, specify the type in `data_warehouse_types`. - To fetch details of a connection object, specify the connection object GUID or name. The `name_pattern` attribute allows passing partial text with `%` for a wildcard match. - To get details of the database, schemas, tables, or columns from a data connection object, specify `data_warehouse_object_type`. - To get a specific database, schema, table, or column from a connection object, define the object type in `data_warehouse_object_type` and object properties in the `data_warehouse_objects` array. For example, to search for a column, you must pass the database, schema, and table names in the API request.   Note that in the following example, object properties are set in a hierarchical order (`database` > `schema` > `table` > `column`).  ``` {   \"connections\": [     {       \"identifier\": \"b9d1f2ef-fa65-4a4b-994e-30fa2d57b0c2\",       \"data_warehouse_objects\": [         {           \"database\": \"NEBULADEV\",           \"schema\": \"INFORMATION_SCHEMA\",           \"table\": \"APPLICABLE_ROLES\",           \"column\": \"ROLE_NAME\"         }       ]     }   ],   \"data_warehouse_object_type\": \"COLUMN\" } ```  - To fetch data by `configuration`, specify `data_warehouse_object_type`. For example, to fetch columns from the `DEVELOPMENT` database, specify the `data_warehouse_object_type` as `DATABASE` and define the `configuration` string as `{\"database\":\"DEVELOPMENT\"}`. To get column data for a specific table, specify the table, for example,`{\"database\":\"RETAILAPPAREL\",\"table\":\"PIPES\"}`. - To query connections by `authentication_type`, specify `data_warehouse_object_type`. Supported values for `authentication_type` are:   - `SERVICE_ACCOUNT`: For connections that require service account credentials to authenticate to the Cloud Data Warehouse and fetch data.   - `OAUTH`: For connections that require OAuth credentials to authenticate to the Cloud Data Warehouse and fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth authentication type.   - `IAM`: For connections that have the IAM OAuth set up. This authentication type is supported on Amazon Redshift connections only.   - `EXTOAUTH`: For connections that have External OAuth set up. ThoughtSpot supports external [OAuth with Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/ connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth).   - `KEY_PAIR`: For connections that require Key Pair account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only.   - `OAUTH_WITH_PKCE`: For connections that require OAuth with PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake, Starburst, Databricks, Denodo  connections only.   - `EXTOAUTH_WITH_PKCE`: For connections that require External OAuth With PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only.   - `OAUTH_WITH_PEZ`: For connections that require OAuth With PEZ account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Amazon Redshift connections only.   - `OAUTH_WITH_SERVICE_PRINCIPAL`: For connections that require OAuth With Service Principal account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Databricks connections only.   - `PERSONAL_ACCESS_TOKEN`: For connections that require Personal Access Token account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Databricks connections only.   - `OAUTH_CLIENT_CREDENTIALS`: For connections that require OAuth Client Credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only. - To include more details about connection objects in the API response, set `include_details` to `true`. - You can also sort the output by field names and filter connections by tags.  **NOTE**: When filtering connection records by parameters other than `data_warehouse_types` or `tag_identifiers`, ensure that you set `record_size` to `-1` and `record_offset` to `0` for precise results.      
    * @param searchConnectionRequest 
    */
   searchConnection(searchConnectionRequest, _options) {
@@ -36015,7 +38726,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.   You can also define sorting options to sort the data retrieved in the API response. - To get discoverable objects when linientmodel is enabled you can use `include_discoverable_objects` as true else false. Default value is true.  **NOTE**: The following parameters support pagination of metadata records:  - `tag_identifiers` - `type` - `created_by_user_identifiers` - `modified_by_user_identifiers` - `owned_by_user_identifiers` - `exclude_objects` - `include_auto_created_objects` - `favorite_object_options` If you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.      
+   *   Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`. - To filter metadata objects within type `LOGICAL_TABLE`, set the `subtypes` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE` & subtypes as `[WORKSHEET]`. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.   You can also define sorting options to sort the data retrieved in the API response. - To get discoverable objects when linientmodel is enabled you can use `include_discoverable_objects` as true else false. Default value is true. - For liveboard metadata type, to get the newer format, set the `liveboard_response_format` as V2. Default value is V1. - To retrieve only objects that are published, set the `include_only_published_objects` as true. Default value is false.  **NOTE**: The following parameters support pagination of metadata records:  - `tag_identifiers` - `type` - `subtypes` - `created_by_user_identifiers` - `modified_by_user_identifiers` - `owned_by_user_identifiers` - `exclude_objects` - `include_auto_created_objects` - `favorite_object_options` - `include_only_published_objects` If you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.      
    * @param searchMetadataRequest 
    */
   searchMetadata(searchMetadataRequest, _options) {
@@ -36120,7 +38831,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 10.4.0.cl or later   Updates a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`.    * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:     ```    {       \"configuration\":{          \"accountName\":\"thoughtspot_partner\",          \"user\":\"tsadmin\",          \"password\":\"TestConn123\",          \"role\":\"sysadmin\",          \"warehouse\":\"MEDIUM_WH\"       },       \"externalDatabases\":[          {             \"name\":\"AllDatatypes\",             \"isAutoCreated\":false,             \"schemas\":[                {                   \"name\":\"alldatatypes\",                   \"tables\":[                      {                         \"name\":\"allDatatypes\",                         \"type\":\"TABLE\",                         \"description\":\"\",                         \"selected\":true,                         \"linked\":true,                         \"columns\":[                            {                               \"name\":\"CNUMBER\",                               \"type\":\"INT64\",                               \"canImport\":true,                               \"selected\":true,                               \"isLinkedActive\":true,                               \"isImported\":false,                               \"tableName\":\"allDatatypes\",                               \"schemaName\":\"alldatatypes\",                               \"dbName\":\"AllDatatypes\"                            },                            {                               \"name\":\"CDECIMAL\",                               \"type\":\"INT64\",                               \"canImport\":true,                               \"selected\":true,                               \"isLinkedActive\":true,                               \"isImported\":false,                               \"tableName\":\"allDatatypes\",                               \"schemaName\":\"alldatatypes\",                               \"dbName\":\"AllDatatypes\"                            }                         ]                      }                   ]                }             ]          }       ]    }    ```  3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`. * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a Snowflake connection:  ```  {     \"configuration\":{        \"accountName\":\"thoughtspot_partner\",        \"user\":\"tsadmin\",        \"password\":\"TestConn123\",        \"role\":\"sysadmin\",        \"warehouse\":\"MEDIUM_WH\"     },     \"externalDatabases\":[      ]  }  ```      
+   *   Version: 10.4.0.cl or later   Updates a connection object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.    b. Set `validate` to `true`.        **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.     * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:    * This is an example of updating a single table in a empty connection:           ```       {         \"authenticationType\": \"SERVICE_ACCOUNT\",         \"externalDatabases\": [           {             \"name\": \"DEVELOPMENT\",             \"isAutoCreated\": false,             \"schemas\": [               {                 \"name\": \"TS_dataset\",                 \"tables\": [                   {                     \"name\": \"DEMORENAME\",                     \"type\": \"TABLE\",                     \"description\": \"\",                     \"selected\": true,                     \"linked\": true,                     \"gid\": 0,                     \"datasetId\": \"-1\",                     \"subType\": \"\",                     \"reportId\": \"\",                     \"viewId\": \"\",                     \"columns\": [                       {                         \"name\": \"Col1\",                         \"type\": \"VARCHAR\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"Col2\",                         \"type\": \"VARCHAR\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"Col3\",                         \"type\": \"VARCHAR\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"Col312\",                         \"type\": \"VARCHAR\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"Col4\",                         \"type\": \"VARCHAR\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       }                     ],                     \"relationships\": []                   }                 ]               }             ]           }         ],         \"configuration\": {           \"password\": \"\",           \"database\": \"DEVELOPMENT\",           \"role\": \"DEV\",           \"accountName\": \"thoughtspot_partner\",           \"warehouse\": \"DEMO_WH\",           \"user\": \"DEV_USER\"         }       }       ```        * This is an example of updating a single table in an existing connection with tables:            ```       {         \"authenticationType\": \"SERVICE_ACCOUNT\",         \"externalDatabases\": [           {             \"name\": \"DEVELOPMENT\",             \"isAutoCreated\": false,             \"schemas\": [               {                 \"name\": \"TS_dataset\",                 \"tables\": [                   {                     \"name\": \"CUSTOMER\",                     \"type\": \"TABLE\",                     \"description\": \"\",                     \"selected\": true,                     \"linked\": true,                     \"gid\": 0,                     \"datasetId\": \"-1\",                     \"subType\": \"\",                     \"reportId\": \"\",                     \"viewId\": \"\",                     \"columns\": [],                     \"relationships\": []                   },                   {                     \"name\": \"tpch5k_falcon_default_schema_users\",                     \"type\": \"TABLE\",                     \"description\": \"\",                     \"selected\": true,                     \"linked\": true,                     \"gid\": 0,                     \"datasetId\": \"-1\",                     \"subType\": \"\",                     \"reportId\": \"\",                     \"viewId\": \"\",                     \"columns\": [                       {                         \"name\": \"user_id\",                         \"type\": \"INT64\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"product_id\",                         \"type\": \"INT64\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       },                       {                         \"name\": \"user_cost\",                         \"type\": \"INT64\",                         \"canImport\": true,                         \"selected\": true,                         \"description\": \"\",                         \"isLinkedActive\": true,                         \"isAggregate\": false                       }                     ],                     \"relationships\": []                   }                 ]               }             ]           }         ],         \"configuration\": {           \"password\": \"\",           \"database\": \"DEVELOPMENT\",           \"role\": \"DEV\",           \"accountName\": \"thoughtspot_partner\",           \"warehouse\": \"DEMO_WH\",           \"user\": \"DEV_USER\"         }       }       ```  3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.    **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not  specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.    * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a Snowflake connection:    ```    {       \"configuration\":{          \"accountName\":\"thoughtspot_partner\",          \"user\":\"tsadmin\",          \"password\":\"TestConn123\",          \"role\":\"sysadmin\",          \"warehouse\":\"MEDIUM_WH\"       },       \"externalDatabases\":[        ]    }    ```      
    * @param connectionIdentifier Unique ID or name of the connection.
    * @param updateConnectionV2Request 
    */
@@ -36139,10 +38850,20 @@ var PromiseThoughtSpotRestApi = class {
   }
   /**
    *   Version: 9.9.0.cl or later   Updates a DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data ThoughtSpot**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### About update DBT connection You can modify DBT connection object properties such as embrace connection name, embrace database name, import type, account identifier, access token, project identifier and environment (or) embrace connection, embrace database name, import type, file_content settings.      
-   * @param updateDbtConnectionRequest 
+   * @param dbtConnectionIdentifier Unique ID of the DBT Connection.
+   * @param connectionName Name of the connection.
+   * @param databaseName Name of the Database.
+   * @param importType Mention type of Import
+   * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD.
+   * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD.
+   * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD
+   * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD
+   * @param dbtEnvId DBT Environment ID\\\&quot;
+   * @param projectName Name of the project
+   * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is Mandatory when Import Type is \\\&#39;ZIP_FILE\\\&#39;
    */
-  updateDbtConnection(updateDbtConnectionRequest, _options) {
-    const result = this.api.updateDbtConnection(updateDbtConnectionRequest, _options);
+  updateDbtConnection(dbtConnectionIdentifier, connectionName, databaseName, importType, accessToken, dbtUrl, accountId, projectId, dbtEnvId, projectName, fileContent, _options) {
+    const result = this.api.updateDbtConnection(dbtConnectionIdentifier, connectionName, databaseName, importType, accessToken, dbtUrl, accountId, projectId, dbtEnvId, projectName, fileContent, _options);
     return result.toPromise();
   }
   /**
@@ -36406,40 +39127,13 @@ var PromiseVersionControlApi = class {
 };
 
 // utils/config.ts
-var createAdditionalHeadersMiddleware = (additionalHeaders) => {
-  return {
-    /**
-     * Pre-request middleware to add custom headers to every API call
-     * @param requestContext - The request context to modify
-     */
-    pre: (requestContext) => {
-      Object.entries(additionalHeaders).forEach(([headerName, headerValue]) => {
-        requestContext.setHeaderParam(headerName, headerValue);
-      });
-      return Promise.resolve(requestContext);
-    },
-    /**
-     * Post-request middleware for response processing
-     * @param responseContext - The response context
-     */
-    post: (responseContext) => {
-      return Promise.resolve(responseContext);
-    }
-  };
-};
-var createBearerAuthenticationConfig = (thoughtSpotHost, paramOrTokenProvider, options) => {
+var createBearerAuthenticationConfig = (thoughtSpotHost, paramOrTokenProvider) => {
   const serverConfig = new ServerConfiguration(
     thoughtSpotHost,
     {}
   );
-  const optionsAdditionalHeaders = options == null ? void 0 : options.additionalHeaders;
-  let middleware = [];
-  if (optionsAdditionalHeaders && Object.keys(optionsAdditionalHeaders).length > 0) {
-    middleware.push(createAdditionalHeadersMiddleware(optionsAdditionalHeaders));
-  }
   const config = createConfiguration({
-    baseServer: serverConfig,
-    promiseMiddleware: middleware
+    baseServer: serverConfig
   });
   const authApiClient = new PromiseAuthenticationApi(config);
   let configTokenProvider;
@@ -36468,22 +39162,17 @@ var createBearerAuthenticationConfig = (thoughtSpotHost, paramOrTokenProvider, o
   });
   return globalConfig;
 };
-var createBasicConfig = (thoughtSpotHost, options) => {
+var createBasicConfig = (thoughtSpotHost) => {
   const thoughtSpotServer = new ServerConfiguration(thoughtSpotHost, {});
-  const optionsAdditionalHeaders = options == null ? void 0 : options.additionalHeaders;
-  let middleware = [];
-  if (optionsAdditionalHeaders && Object.keys(optionsAdditionalHeaders).length > 0) {
-    middleware.push(createAdditionalHeadersMiddleware(optionsAdditionalHeaders));
-  }
   const basicClientConfig = createConfiguration({
-    baseServer: thoughtSpotServer,
-    promiseMiddleware: middleware
+    baseServer: thoughtSpotServer
   });
   return basicClientConfig;
 };
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   AIApi,
+  AIContext,
   APIKey,
   APIKeyInput,
   AccessToken,
@@ -36494,7 +39183,9 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   ActionDetailsInput,
   ActionDetailsInputCreate,
   ActivateUserRequest,
+  AgentConversation,
   AnswerContent,
+  AnswerContextInput,
   AnswerDataResponse,
   ApiException,
   AssignChangeAuthorRequest,
@@ -36513,16 +39204,29 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   CALLBACK,
   CALLBACKInput,
   CALLBACKInputMandatory,
+  CalendarResponse,
   ChangeUserPasswordRequest,
   Column,
+  ColumnSecurityRule,
+  ColumnSecurityRuleColumn,
+  ColumnSecurityRuleGroup,
+  ColumnSecurityRuleGroupOperation,
+  ColumnSecurityRuleResponse,
+  ColumnSecurityRuleSourceTable,
+  ColumnSecurityRuleTableInput,
+  ColumnSecurityRuleUpdate,
   CommitBranchRequest,
   CommitFileType,
   CommitHistoryResponse,
   CommitResponse,
   CommiterType,
+  CommunicationChannelPreferencesResponse,
+  ConnectionConfigurationResponse,
   ConnectionInput,
   ConnectionsApi,
+  ContextPayloadV2Input,
   Conversation,
+  ConversationSettingsInput,
   ConvertWorksheetToModelRequest,
   CopyObjectRequest,
   CreateConfigRequest,
@@ -36532,6 +39236,7 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   CreateCustomActionRequest,
   CreateCustomActionRequestActionDetails,
   CreateCustomActionRequestDefaultActionConfig,
+  CreateEmailCustomizationResponse,
   CreateOrgRequest,
   CreateRoleRequest,
   CreateScheduleRequest,
@@ -36548,12 +39253,11 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   CustomActionMetadataTypeInput,
   DBTApi,
   DataApi,
+  DataSource,
+  DataSourceContextInput,
   DataWarehouseObjectInput,
   DataWarehouseObjects,
   Database,
-  DbtConnectionRequest,
-  DbtGenerateSyncTmlRequest,
-  DbtGenerateTmlRequest,
   DbtSearchResponse,
   DeactivateUserRequest,
   DefaultActionConfig,
@@ -36566,10 +39270,18 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   DeleteMetadataTypeInput,
   DeployCommitRequest,
   DeployResponse,
+  EntityHeader,
   ErrorResponse,
+  EurekaDataSourceSuggestionResponse,
   EurekaDecomposeQueryResponse,
+  EurekaGetNLInstructionsResponse,
+  EurekaGetRelevantQuestionsResponse,
   EurekaLLMDecomposeQueryResponse,
   EurekaLLMSuggestedQuery,
+  EurekaRelevantQuestion,
+  EurekaSetNLInstructionsResponse,
+  EventChannelConfig,
+  EventChannelConfigInput,
   ExcludeMetadataListItemInput,
   ExportAnswerReportRequest,
   ExportAnswerReportRequestRegionalSettings,
@@ -36581,6 +39293,7 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   ExportMetadataTMLRequestExportOptions,
   ExportMetadataTypeInput,
   ExportOptions,
+  ExternalTableInput,
   FavoriteMetadataInput,
   FavoriteMetadataItem,
   FavoriteObjectOptionsInput,
@@ -36625,6 +39338,7 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   JWTParameter,
   JWTUserOptions,
   JWTUserOptionsFull,
+  LBContextInput,
   LiveboardContent,
   LiveboardDataResponse,
   LiveboardOptions,
@@ -36634,6 +39348,7 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   LoginRequest,
   MetadataApi,
   MetadataAssociationItem,
+  MetadataContext,
   MetadataInput,
   MetadataListItemInput,
   MetadataObject,
@@ -36641,10 +39356,17 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   MetadataSearchResponse,
   MetadataSearchSortOptions,
   ModelTableList,
+  NLInstructionsInfo,
+  NLInstructionsInfoInput,
   ObjectIDAndName,
   Org,
+  OrgChannelConfigInput,
+  OrgChannelConfigResponse,
+  OrgDetails,
   OrgInfo,
+  OrgPreferenceSearchCriteriaInput,
   OrgResponse,
+  OrgType,
   OrgsApi,
   ParameterValues,
   ParametersListItem,
@@ -36659,6 +39381,7 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   PrincipalsInput,
   PrincipalsListItem,
   PrincipalsListItemInput,
+  PublishMetadataListItem,
   QueryGetDecomposedQueryRequest,
   QueryGetDecomposedQueryRequestNlsRequest,
   RecipientDetails,
@@ -36730,12 +39453,14 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   SearchUsersRequestSortOptions,
   SecurityApi,
   SelfDecodingBody,
+  SendAgentMessageResponse,
   SendMessageRequest,
   ServerConfiguration,
   ShareMetadataRequest,
   ShareMetadataTypeInput,
   SharePermissionsInput,
   SingleAnswerRequest,
+  SortOption,
   SortOptionInput,
   SortOptions,
   SortingOptions,
@@ -36744,10 +39469,12 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   SystemApi,
   SystemConfig,
   SystemInfo,
+  SystemOverrideInfo,
   Table,
   Tag,
   TagMetadataTypeInput,
   TagsApi,
+  TemplatePropertiesInputCreate,
   ThoughtSpotRestApi,
   Token,
   TokenAccessScopeObject,
@@ -36761,7 +39488,6 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   UpdateCustomActionRequest,
   UpdateCustomActionRequestActionDetails,
   UpdateCustomActionRequestDefaultActionConfig,
-  UpdateDbtConnectionRequest,
   UpdateMetadataHeaderRequest,
   UpdateMetadataObjIdRequest,
   UpdateObjIdInput,
@@ -36782,10 +39508,36 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   UserInfo,
   UserObject,
   UserParameterOptions,
+  UserPrincipal,
   UsersApi,
   ValidateMergeRequest,
   ValidateTokenRequest,
+  ValueScopeInput,
+  Variable,
+  VariableDetailInput,
+  VariableUpdateAssignmentInput,
+  VariableUpdateScopeInput,
+  VariableValue,
+  VariableValues,
   VersionControlApi,
+  WebhookAuthApiKey,
+  WebhookAuthApiKeyInput,
+  WebhookAuthBasicAuth,
+  WebhookAuthBasicAuthInput,
+  WebhookAuthOAuth2,
+  WebhookAuthOAuth2Input,
+  WebhookAuthentication,
+  WebhookAuthenticationInput,
+  WebhookDeleteFailure,
+  WebhookDeleteResponse,
+  WebhookOrg,
+  WebhookPagination,
+  WebhookResponse,
+  WebhookSearchResponse,
+  WebhookSignatureVerification,
+  WebhookSignatureVerificationInput,
+  WebhookSortOptionsInput,
+  WebhookUser,
   configureAuthMethods,
   createBasicConfig,
   createBearerAuthenticationConfig,

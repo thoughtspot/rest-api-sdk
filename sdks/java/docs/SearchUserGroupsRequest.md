@@ -22,6 +22,8 @@
 |**recordOffset** | **Integer** | The starting record number from where the records should be included. |  [optional] |
 |**recordSize** | **Integer** | The number of records that should be included. |  [optional] |
 |**sortOptions** | [**SortOptions**](SortOptions.md) | Sort options to filter group details. |  [optional] |
+|**includeUsers** | **Boolean** | &lt;div&gt;Version: 10.10.0.cl or later &lt;/div&gt;  Define Parameter to consider if the users should be included in group search response. |  [optional] |
+|**includeSubGroups** | **Boolean** | &lt;div&gt;Version: 10.10.0.cl or later &lt;/div&gt;  Define Parameter to consider if the sub groups should be included in group search response. |  [optional] |
 
 
 
@@ -64,7 +66,12 @@
 | CAN_ACCESS_ANALYST_STUDIO | &quot;CAN_ACCESS_ANALYST_STUDIO&quot; |
 | CAN_MANAGE_ANALYST_STUDIO | &quot;CAN_MANAGE_ANALYST_STUDIO&quot; |
 | PREVIEW_DOCUMENT_SEARCH | &quot;PREVIEW_DOCUMENT_SEARCH&quot; |
+| CAN_MODIFY_FOLDERS | &quot;CAN_MODIFY_FOLDERS&quot; |
+| CAN_VIEW_FOLDERS | &quot;CAN_VIEW_FOLDERS&quot; |
 | CAN_SETUP_VERSION_CONTROL | &quot;CAN_SETUP_VERSION_CONTROL&quot; |
+| CAN_MANAGE_WEBHOOKS | &quot;CAN_MANAGE_WEBHOOKS&quot; |
+| CAN_DOWNLOAD_VISUALS | &quot;CAN_DOWNLOAD_VISUALS&quot; |
+| CAN_DOWNLOAD_DETAILED_DATA | &quot;CAN_DOWNLOAD_DETAILED_DATA&quot; |
 
 
 
@@ -74,6 +81,8 @@
 |---- | -----|
 | LOCAL_GROUP | &quot;LOCAL_GROUP&quot; |
 | LDAP_GROUP | &quot;LDAP_GROUP&quot; |
+| TEAM_GROUP | &quot;TEAM_GROUP&quot; |
+| TENANT_GROUP | &quot;TENANT_GROUP&quot; |
 
 
 

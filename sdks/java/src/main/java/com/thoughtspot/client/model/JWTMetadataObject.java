@@ -9,6 +9,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
@@ -36,11 +37,60 @@ public class JWTMetadataObject implements Serializable {
     @javax.annotation.Nullable
     private String identifier;
 
+    /** Gets or Sets type */
+    @JsonAdapter(TypeEnum.Adapter.class)
+    public enum TypeEnum {
+        LOGICAL_TABLE("LOGICAL_TABLE");
+
+        private String value;
+
+        TypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        public static TypeEnum fromValue(String value) {
+            for (TypeEnum b : TypeEnum.values()) {
+                if (b.value.equals(value)) {
+                    return b;
+                }
+            }
+            return null;
+        }
+
+        public static class Adapter extends TypeAdapter<TypeEnum> {
+            @Override
+            public void write(final JsonWriter jsonWriter, final TypeEnum enumeration)
+                    throws IOException {
+                jsonWriter.value(enumeration.getValue());
+            }
+
+            @Override
+            public TypeEnum read(final JsonReader jsonReader) throws IOException {
+                String value = jsonReader.nextString();
+                return TypeEnum.fromValue(value);
+            }
+        }
+
+        public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+            String value = jsonElement.getAsString();
+            TypeEnum.fromValue(value);
+        }
+    }
+
     public static final String SERIALIZED_NAME_TYPE = "type";
 
     @SerializedName(SERIALIZED_NAME_TYPE)
     @javax.annotation.Nullable
-    private String type;
+    private TypeEnum type;
 
     public JWTMetadataObject() {}
 
@@ -63,7 +113,7 @@ public class JWTMetadataObject implements Serializable {
         this.identifier = identifier;
     }
 
-    public JWTMetadataObject type(@javax.annotation.Nullable String type) {
+    public JWTMetadataObject type(@javax.annotation.Nullable TypeEnum type) {
         this.type = type;
         return this;
     }
@@ -74,11 +124,11 @@ public class JWTMetadataObject implements Serializable {
      * @return type
      */
     @javax.annotation.Nullable
-    public String getType() {
+    public TypeEnum getType() {
         return type;
     }
 
-    public void setType(@javax.annotation.Nullable String type) {
+    public void setType(@javax.annotation.Nullable TypeEnum type) {
         this.type = type;
     }
 
@@ -195,6 +245,10 @@ public class JWTMetadataObject implements Serializable {
                             "Expected the field `type` to be a primitive type in the JSON string"
                                     + " but got `%s`",
                             jsonObj.get("type").toString()));
+        }
+        // validate the optional field `type`
+        if (jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) {
+            TypeEnum.validateJsonElement(jsonObj.get("type"));
         }
     }
 

@@ -1,3 +1,4 @@
+export * from '../models/AIContext';
 export * from '../models/APIKey';
 export * from '../models/APIKeyInput';
 export * from '../models/AccessToken';
@@ -8,7 +9,9 @@ export * from '../models/ActionDetails';
 export * from '../models/ActionDetailsInput';
 export * from '../models/ActionDetailsInputCreate';
 export * from '../models/ActivateUserRequest';
+export * from '../models/AgentConversation';
 export * from '../models/AnswerContent';
+export * from '../models/AnswerContextInput';
 export * from '../models/AnswerDataResponse';
 export * from '../models/AssignChangeAuthorRequest';
 export * from '../models/AssignTagRequest';
@@ -24,15 +27,28 @@ export * from '../models/BasicAuthInput';
 export * from '../models/CALLBACK';
 export * from '../models/CALLBACKInput';
 export * from '../models/CALLBACKInputMandatory';
+export * from '../models/CalendarResponse';
 export * from '../models/ChangeUserPasswordRequest';
 export * from '../models/Column';
+export * from '../models/ColumnSecurityRule';
+export * from '../models/ColumnSecurityRuleColumn';
+export * from '../models/ColumnSecurityRuleGroup';
+export * from '../models/ColumnSecurityRuleGroupOperation';
+export * from '../models/ColumnSecurityRuleResponse';
+export * from '../models/ColumnSecurityRuleSourceTable';
+export * from '../models/ColumnSecurityRuleTableInput';
+export * from '../models/ColumnSecurityRuleUpdate';
 export * from '../models/CommitBranchRequest';
 export * from '../models/CommitFileType';
 export * from '../models/CommitHistoryResponse';
 export * from '../models/CommitResponse';
 export * from '../models/CommiterType';
+export * from '../models/CommunicationChannelPreferencesResponse';
+export * from '../models/ConnectionConfigurationResponse';
 export * from '../models/ConnectionInput';
+export * from '../models/ContextPayloadV2Input';
 export * from '../models/Conversation';
+export * from '../models/ConversationSettingsInput';
 export * from '../models/ConvertWorksheetToModelRequest';
 export * from '../models/CopyObjectRequest';
 export * from '../models/CreateConfigRequest';
@@ -42,6 +58,7 @@ export * from '../models/CreateConversationRequest';
 export * from '../models/CreateCustomActionRequest';
 export * from '../models/CreateCustomActionRequestActionDetails';
 export * from '../models/CreateCustomActionRequestDefaultActionConfig';
+export * from '../models/CreateEmailCustomizationResponse';
 export * from '../models/CreateOrgRequest';
 export * from '../models/CreateRoleRequest';
 export * from '../models/CreateScheduleRequest';
@@ -55,12 +72,11 @@ export * from '../models/CreateUserRequest';
 export * from '../models/CronExpression';
 export * from '../models/CronExpressionInput';
 export * from '../models/CustomActionMetadataTypeInput';
+export * from '../models/DataSource';
+export * from '../models/DataSourceContextInput';
 export * from '../models/DataWarehouseObjectInput';
 export * from '../models/DataWarehouseObjects';
 export * from '../models/Database';
-export * from '../models/DbtConnectionRequest';
-export * from '../models/DbtGenerateSyncTmlRequest';
-export * from '../models/DbtGenerateTmlRequest';
 export * from '../models/DbtSearchResponse';
 export * from '../models/DeactivateUserRequest';
 export * from '../models/DefaultActionConfig';
@@ -73,10 +89,18 @@ export * from '../models/DeleteMetadataRequest';
 export * from '../models/DeleteMetadataTypeInput';
 export * from '../models/DeployCommitRequest';
 export * from '../models/DeployResponse';
+export * from '../models/EntityHeader';
 export * from '../models/ErrorResponse';
+export * from '../models/EurekaDataSourceSuggestionResponse';
 export * from '../models/EurekaDecomposeQueryResponse';
+export * from '../models/EurekaGetNLInstructionsResponse';
+export * from '../models/EurekaGetRelevantQuestionsResponse';
 export * from '../models/EurekaLLMDecomposeQueryResponse';
 export * from '../models/EurekaLLMSuggestedQuery';
+export * from '../models/EurekaRelevantQuestion';
+export * from '../models/EurekaSetNLInstructionsResponse';
+export * from '../models/EventChannelConfig';
+export * from '../models/EventChannelConfigInput';
 export * from '../models/ExcludeMetadataListItemInput';
 export * from '../models/ExportAnswerReportRequest';
 export * from '../models/ExportAnswerReportRequestRegionalSettings';
@@ -88,6 +112,7 @@ export * from '../models/ExportMetadataTMLRequest';
 export * from '../models/ExportMetadataTMLRequestExportOptions';
 export * from '../models/ExportMetadataTypeInput';
 export * from '../models/ExportOptions';
+export * from '../models/ExternalTableInput';
 export * from '../models/FavoriteMetadataInput';
 export * from '../models/FavoriteMetadataItem';
 export * from '../models/FavoriteObjectOptionsInput';
@@ -128,6 +153,7 @@ export * from '../models/JWTMetadataObject';
 export * from '../models/JWTParameter';
 export * from '../models/JWTUserOptions';
 export * from '../models/JWTUserOptionsFull';
+export * from '../models/LBContextInput';
 export * from '../models/LiveboardContent';
 export * from '../models/LiveboardDataResponse';
 export * from '../models/LiveboardOptions';
@@ -135,6 +161,7 @@ export * from '../models/LiveboardOptionsInput';
 export * from '../models/LogResponse';
 export * from '../models/LoginRequest';
 export * from '../models/MetadataAssociationItem';
+export * from '../models/MetadataContext';
 export * from '../models/MetadataInput';
 export * from '../models/MetadataListItemInput';
 export * from '../models/MetadataObject';
@@ -142,10 +169,17 @@ export * from '../models/MetadataResponse';
 export * from '../models/MetadataSearchResponse';
 export * from '../models/MetadataSearchSortOptions';
 export * from '../models/ModelTableList';
+export * from '../models/NLInstructionsInfo';
+export * from '../models/NLInstructionsInfoInput';
 export * from '../models/ObjectIDAndName';
 export * from '../models/Org';
+export * from '../models/OrgChannelConfigInput';
+export * from '../models/OrgChannelConfigResponse';
+export * from '../models/OrgDetails';
 export * from '../models/OrgInfo';
+export * from '../models/OrgPreferenceSearchCriteriaInput';
 export * from '../models/OrgResponse';
+export * from '../models/OrgType';
 export * from '../models/ParameterValues';
 export * from '../models/ParametersListItem';
 export * from '../models/ParametersListItemInput';
@@ -159,6 +193,7 @@ export * from '../models/PngOptionsInput';
 export * from '../models/PrincipalsInput';
 export * from '../models/PrincipalsListItem';
 export * from '../models/PrincipalsListItemInput';
+export * from '../models/PublishMetadataListItem';
 export * from '../models/QueryGetDecomposedQueryRequest';
 export * from '../models/QueryGetDecomposedQueryRequestNlsRequest';
 export * from '../models/RecipientDetails';
@@ -222,11 +257,13 @@ export * from '../models/SearchUserGroupsRequest';
 export * from '../models/SearchUserGroupsRequestSortOptions';
 export * from '../models/SearchUsersRequest';
 export * from '../models/SearchUsersRequestSortOptions';
+export * from '../models/SendAgentMessageResponse';
 export * from '../models/SendMessageRequest';
 export * from '../models/ShareMetadataRequest';
 export * from '../models/ShareMetadataTypeInput';
 export * from '../models/SharePermissionsInput';
 export * from '../models/SingleAnswerRequest';
+export * from '../models/SortOption';
 export * from '../models/SortOptionInput';
 export * from '../models/SortOptions';
 export * from '../models/SortingOptions';
@@ -234,9 +271,11 @@ export * from '../models/SqlQuery';
 export * from '../models/SqlQueryResponse';
 export * from '../models/SystemConfig';
 export * from '../models/SystemInfo';
+export * from '../models/SystemOverrideInfo';
 export * from '../models/Table';
 export * from '../models/Tag';
 export * from '../models/TagMetadataTypeInput';
+export * from '../models/TemplatePropertiesInputCreate';
 export * from '../models/Token';
 export * from '../models/TokenAccessScopeObject';
 export * from '../models/TokenValidationResponse';
@@ -249,7 +288,6 @@ export * from '../models/UpdateConnectionV2Request';
 export * from '../models/UpdateCustomActionRequest';
 export * from '../models/UpdateCustomActionRequestActionDetails';
 export * from '../models/UpdateCustomActionRequestDefaultActionConfig';
-export * from '../models/UpdateDbtConnectionRequest';
 export * from '../models/UpdateMetadataHeaderRequest';
 export * from '../models/UpdateMetadataObjIdRequest';
 export * from '../models/UpdateObjIdInput';
@@ -270,9 +308,36 @@ export * from '../models/UserGroupResponse';
 export * from '../models/UserInfo';
 export * from '../models/UserObject';
 export * from '../models/UserParameterOptions';
+export * from '../models/UserPrincipal';
 export * from '../models/ValidateMergeRequest';
 export * from '../models/ValidateTokenRequest';
+export * from '../models/ValueScopeInput';
+export * from '../models/Variable';
+export * from '../models/VariableDetailInput';
+export * from '../models/VariableUpdateAssignmentInput';
+export * from '../models/VariableUpdateScopeInput';
+export * from '../models/VariableValue';
+export * from '../models/VariableValues';
+export * from '../models/WebhookAuthApiKey';
+export * from '../models/WebhookAuthApiKeyInput';
+export * from '../models/WebhookAuthBasicAuth';
+export * from '../models/WebhookAuthBasicAuthInput';
+export * from '../models/WebhookAuthOAuth2';
+export * from '../models/WebhookAuthOAuth2Input';
+export * from '../models/WebhookAuthentication';
+export * from '../models/WebhookAuthenticationInput';
+export * from '../models/WebhookDeleteFailure';
+export * from '../models/WebhookDeleteResponse';
+export * from '../models/WebhookOrg';
+export * from '../models/WebhookPagination';
+export * from '../models/WebhookResponse';
+export * from '../models/WebhookSearchResponse';
+export * from '../models/WebhookSignatureVerification';
+export * from '../models/WebhookSignatureVerificationInput';
+export * from '../models/WebhookSortOptionsInput';
+export * from '../models/WebhookUser';
 
+import { AIContext } from '../models/AIContext';
 import { APIKey } from '../models/APIKey';
 import { APIKeyInput } from '../models/APIKeyInput';
 import { AccessToken } from '../models/AccessToken';
@@ -283,7 +348,9 @@ import { ActionDetails } from '../models/ActionDetails';
 import { ActionDetailsInput } from '../models/ActionDetailsInput';
 import { ActionDetailsInputCreate } from '../models/ActionDetailsInputCreate';
 import { ActivateUserRequest } from '../models/ActivateUserRequest';
+import { AgentConversation } from '../models/AgentConversation';
 import { AnswerContent } from '../models/AnswerContent';
+import { AnswerContextInput } from '../models/AnswerContextInput';
 import { AnswerDataResponse } from '../models/AnswerDataResponse';
 import { AssignChangeAuthorRequest } from '../models/AssignChangeAuthorRequest';
 import { AssignTagRequest } from '../models/AssignTagRequest';
@@ -299,15 +366,28 @@ import { BasicAuthInput } from '../models/BasicAuthInput';
 import { CALLBACK } from '../models/CALLBACK';
 import { CALLBACKInput } from '../models/CALLBACKInput';
 import { CALLBACKInputMandatory } from '../models/CALLBACKInputMandatory';
+import { CalendarResponse } from '../models/CalendarResponse';
 import { ChangeUserPasswordRequest } from '../models/ChangeUserPasswordRequest';
 import { Column } from '../models/Column';
+import { ColumnSecurityRule } from '../models/ColumnSecurityRule';
+import { ColumnSecurityRuleColumn } from '../models/ColumnSecurityRuleColumn';
+import { ColumnSecurityRuleGroup } from '../models/ColumnSecurityRuleGroup';
+import { ColumnSecurityRuleGroupOperation, ColumnSecurityRuleGroupOperationOperationEnum    } from '../models/ColumnSecurityRuleGroupOperation';
+import { ColumnSecurityRuleResponse } from '../models/ColumnSecurityRuleResponse';
+import { ColumnSecurityRuleSourceTable } from '../models/ColumnSecurityRuleSourceTable';
+import { ColumnSecurityRuleTableInput } from '../models/ColumnSecurityRuleTableInput';
+import { ColumnSecurityRuleUpdate } from '../models/ColumnSecurityRuleUpdate';
 import { CommitBranchRequest } from '../models/CommitBranchRequest';
 import { CommitFileType } from '../models/CommitFileType';
 import { CommitHistoryResponse } from '../models/CommitHistoryResponse';
 import { CommitResponse } from '../models/CommitResponse';
 import { CommiterType } from '../models/CommiterType';
+import { CommunicationChannelPreferencesResponse } from '../models/CommunicationChannelPreferencesResponse';
+import { ConnectionConfigurationResponse     , ConnectionConfigurationResponsePolicyProcessesEnum   , ConnectionConfigurationResponseDataWarehouseTypeEnum  , ConnectionConfigurationResponsePolicyTypeEnum   } from '../models/ConnectionConfigurationResponse';
 import { ConnectionInput } from '../models/ConnectionInput';
+import { ContextPayloadV2Input, ContextPayloadV2InputTypeEnum      } from '../models/ContextPayloadV2Input';
 import { Conversation } from '../models/Conversation';
+import { ConversationSettingsInput } from '../models/ConversationSettingsInput';
 import { ConvertWorksheetToModelRequest } from '../models/ConvertWorksheetToModelRequest';
 import { CopyObjectRequest  , CopyObjectRequestTypeEnum    } from '../models/CopyObjectRequest';
 import { CreateConfigRequest } from '../models/CreateConfigRequest';
@@ -317,9 +397,10 @@ import { CreateConversationRequest } from '../models/CreateConversationRequest';
 import { CreateCustomActionRequest } from '../models/CreateCustomActionRequest';
 import { CreateCustomActionRequestActionDetails } from '../models/CreateCustomActionRequestActionDetails';
 import { CreateCustomActionRequestDefaultActionConfig } from '../models/CreateCustomActionRequestDefaultActionConfig';
+import { CreateEmailCustomizationResponse } from '../models/CreateEmailCustomizationResponse';
 import { CreateOrgRequest } from '../models/CreateOrgRequest';
 import { CreateRoleRequest  , CreateRoleRequestPrivilegesEnum    } from '../models/CreateRoleRequest';
-import { CreateScheduleRequest  , CreateScheduleRequestMetadataTypeEnum   , CreateScheduleRequestFileFormatEnum    , CreateScheduleRequestTimeZoneEnum     } from '../models/CreateScheduleRequest';
+import { CreateScheduleRequest  , CreateScheduleRequestMetadataTypeEnum   , CreateScheduleRequestFileFormatEnum    , CreateScheduleRequestTimeZoneEnum      } from '../models/CreateScheduleRequest';
 import { CreateScheduleRequestFrequency } from '../models/CreateScheduleRequestFrequency';
 import { CreateScheduleRequestLiveboardOptions } from '../models/CreateScheduleRequestLiveboardOptions';
 import { CreateScheduleRequestPdfOptions       , CreateScheduleRequestPdfOptionsPageSizeEnum    } from '../models/CreateScheduleRequestPdfOptions';
@@ -330,12 +411,11 @@ import { CreateUserRequest    , CreateUserRequestAccountTypeEnum  , CreateUserRe
 import { CronExpression } from '../models/CronExpression';
 import { CronExpressionInput } from '../models/CronExpressionInput';
 import { CustomActionMetadataTypeInput, CustomActionMetadataTypeInputTypeEnum    } from '../models/CustomActionMetadataTypeInput';
+import { DataSource } from '../models/DataSource';
+import { DataSourceContextInput } from '../models/DataSourceContextInput';
 import { DataWarehouseObjectInput } from '../models/DataWarehouseObjectInput';
 import { DataWarehouseObjects } from '../models/DataWarehouseObjects';
 import { Database } from '../models/Database';
-import { DbtConnectionRequest  , DbtConnectionRequestImportTypeEnum          } from '../models/DbtConnectionRequest';
-import { DbtGenerateSyncTmlRequest } from '../models/DbtGenerateSyncTmlRequest';
-import { DbtGenerateTmlRequest  , DbtGenerateTmlRequestImportWorksheetsEnum     } from '../models/DbtGenerateTmlRequest';
 import { DbtSearchResponse } from '../models/DbtSearchResponse';
 import { DeactivateUserRequest } from '../models/DeactivateUserRequest';
 import { DefaultActionConfig } from '../models/DefaultActionConfig';
@@ -348,21 +428,30 @@ import { DeleteMetadataRequest } from '../models/DeleteMetadataRequest';
 import { DeleteMetadataTypeInput, DeleteMetadataTypeInputTypeEnum    } from '../models/DeleteMetadataTypeInput';
 import { DeployCommitRequest  , DeployCommitRequestDeployTypeEnum  , DeployCommitRequestDeployPolicyEnum   } from '../models/DeployCommitRequest';
 import { DeployResponse } from '../models/DeployResponse';
+import { EntityHeader } from '../models/EntityHeader';
 import { ErrorResponse } from '../models/ErrorResponse';
+import { EurekaDataSourceSuggestionResponse } from '../models/EurekaDataSourceSuggestionResponse';
 import { EurekaDecomposeQueryResponse } from '../models/EurekaDecomposeQueryResponse';
+import { EurekaGetNLInstructionsResponse } from '../models/EurekaGetNLInstructionsResponse';
+import { EurekaGetRelevantQuestionsResponse } from '../models/EurekaGetRelevantQuestionsResponse';
 import { EurekaLLMDecomposeQueryResponse } from '../models/EurekaLLMDecomposeQueryResponse';
 import { EurekaLLMSuggestedQuery } from '../models/EurekaLLMSuggestedQuery';
+import { EurekaRelevantQuestion } from '../models/EurekaRelevantQuestion';
+import { EurekaSetNLInstructionsResponse } from '../models/EurekaSetNLInstructionsResponse';
+import { EventChannelConfig, EventChannelConfigEventTypeEnum  , EventChannelConfigChannelsEnum   } from '../models/EventChannelConfig';
+import { EventChannelConfigInput, EventChannelConfigInputEventTypeEnum  , EventChannelConfigInputChannelsEnum   } from '../models/EventChannelConfigInput';
 import { ExcludeMetadataListItemInput , ExcludeMetadataListItemInputTypeEnum   } from '../models/ExcludeMetadataListItemInput';
 import { ExportAnswerReportRequest   , ExportAnswerReportRequestFileFormatEnum       } from '../models/ExportAnswerReportRequest';
 import { ExportAnswerReportRequestRegionalSettings, ExportAnswerReportRequestRegionalSettingsCurrencyFormatEnum  , ExportAnswerReportRequestRegionalSettingsUserLocaleEnum  , ExportAnswerReportRequestRegionalSettingsNumberFormatLocaleEnum  , ExportAnswerReportRequestRegionalSettingsDateFormatLocaleEnum   } from '../models/ExportAnswerReportRequestRegionalSettings';
-import { ExportLiveboardReportRequest   , ExportLiveboardReportRequestFileFormatEnum          } from '../models/ExportLiveboardReportRequest';
+import { ExportLiveboardReportRequest     , ExportLiveboardReportRequestFileFormatEnum          } from '../models/ExportLiveboardReportRequest';
 import { ExportLiveboardReportRequestPdfOptions    , ExportLiveboardReportRequestPdfOptionsPageOrientationEnum     } from '../models/ExportLiveboardReportRequestPdfOptions';
 import { ExportLiveboardReportRequestPngOptions } from '../models/ExportLiveboardReportRequestPngOptions';
 import { ExportMetadataTMLBatchedRequest, ExportMetadataTMLBatchedRequestMetadataTypeEnum    , ExportMetadataTMLBatchedRequestEdocFormatEnum     } from '../models/ExportMetadataTMLBatchedRequest';
 import { ExportMetadataTMLRequest   , ExportMetadataTMLRequestEdocFormatEnum  , ExportMetadataTMLRequestExportSchemaVersionEnum       } from '../models/ExportMetadataTMLRequest';
 import { ExportMetadataTMLRequestExportOptions } from '../models/ExportMetadataTMLRequestExportOptions';
-import { ExportMetadataTypeInput, ExportMetadataTypeInputTypeEnum    } from '../models/ExportMetadataTypeInput';
+import { ExportMetadataTypeInput, ExportMetadataTypeInputTypeEnum      } from '../models/ExportMetadataTypeInput';
 import { ExportOptions } from '../models/ExportOptions';
+import { ExternalTableInput } from '../models/ExternalTableInput';
 import { FavoriteMetadataInput , FavoriteMetadataInputTypeEnum   } from '../models/FavoriteMetadataInput';
 import { FavoriteMetadataItem  , FavoriteMetadataItemTypeEnum   } from '../models/FavoriteMetadataItem';
 import { FavoriteObjectOptionsInput } from '../models/FavoriteObjectOptionsInput';
@@ -381,7 +470,7 @@ import { Frequency } from '../models/Frequency';
 import { FrequencyInput } from '../models/FrequencyInput';
 import { GenericInfo } from '../models/GenericInfo';
 import { GetAsyncImportStatusResponse } from '../models/GetAsyncImportStatusResponse';
-import { GetCustomAccessTokenRequest     , GetCustomAccessTokenRequestPersistOptionEnum          } from '../models/GetCustomAccessTokenRequest';
+import { GetCustomAccessTokenRequest     , GetCustomAccessTokenRequestPersistOptionEnum           } from '../models/GetCustomAccessTokenRequest';
 import { GetFullAccessTokenRequest } from '../models/GetFullAccessTokenRequest';
 import { GetObjectAccessTokenRequest } from '../models/GetObjectAccessTokenRequest';
 import { GetTokenResponse } from '../models/GetTokenResponse';
@@ -389,7 +478,7 @@ import { GroupObject } from '../models/GroupObject';
 import { GroupsImportListInput    , GroupsImportListInputPrivilegesEnum   , GroupsImportListInputTypeEnum   , GroupsImportListInputVisibilityEnum   } from '../models/GroupsImportListInput';
 import { HeaderAttributeInput } from '../models/HeaderAttributeInput';
 import { HeaderUpdateInput  , HeaderUpdateInputTypeEnum    } from '../models/HeaderUpdateInput';
-import { ImportEPackAsyncTaskStatus     , ImportEPackAsyncTaskStatusTaskStatusEnum   , ImportEPackAsyncTaskStatusImportPolicyEnum         } from '../models/ImportEPackAsyncTaskStatus';
+import { ImportEPackAsyncTaskStatus     , ImportEPackAsyncTaskStatusTaskStatusEnum   , ImportEPackAsyncTaskStatusImportPolicyEnum          } from '../models/ImportEPackAsyncTaskStatus';
 import { ImportMetadataTMLAsyncRequest   , ImportMetadataTMLAsyncRequestImportPolicyEnum     } from '../models/ImportMetadataTMLAsyncRequest';
 import { ImportMetadataTMLRequest , ImportMetadataTMLRequestImportPolicyEnum       } from '../models/ImportMetadataTMLRequest';
 import { ImportUser   , ImportUserAccountTypeEnum  , ImportUserAccountStatusEnum     , ImportUserVisibilityEnum        } from '../models/ImportUser';
@@ -399,10 +488,11 @@ import { ImportUserType } from '../models/ImportUserType';
 import { ImportUsersRequest } from '../models/ImportUsersRequest';
 import { ImportUsersResponse } from '../models/ImportUsersResponse';
 import { InputEurekaNLSRequest } from '../models/InputEurekaNLSRequest';
-import { JWTMetadataObject } from '../models/JWTMetadataObject';
+import { JWTMetadataObject , JWTMetadataObjectTypeEnum   } from '../models/JWTMetadataObject';
 import { JWTParameter } from '../models/JWTParameter';
 import { JWTUserOptions } from '../models/JWTUserOptions';
 import { JWTUserOptionsFull } from '../models/JWTUserOptionsFull';
+import { LBContextInput } from '../models/LBContextInput';
 import { LiveboardContent } from '../models/LiveboardContent';
 import { LiveboardDataResponse } from '../models/LiveboardDataResponse';
 import { LiveboardOptions } from '../models/LiveboardOptions';
@@ -410,17 +500,25 @@ import { LiveboardOptionsInput } from '../models/LiveboardOptionsInput';
 import { LogResponse } from '../models/LogResponse';
 import { LoginRequest } from '../models/LoginRequest';
 import { MetadataAssociationItem } from '../models/MetadataAssociationItem';
+import { MetadataContext } from '../models/MetadataContext';
 import { MetadataInput , MetadataInputTypeEnum   } from '../models/MetadataInput';
-import { MetadataListItemInput   , MetadataListItemInputTypeEnum   } from '../models/MetadataListItemInput';
+import { MetadataListItemInput   , MetadataListItemInputTypeEnum  , MetadataListItemInputSubtypesEnum   } from '../models/MetadataListItemInput';
 import { MetadataObject , MetadataObjectTypeEnum   } from '../models/MetadataObject';
 import { MetadataResponse  , MetadataResponseTypeEnum   } from '../models/MetadataResponse';
 import { MetadataSearchResponse  , MetadataSearchResponseMetadataTypeEnum          } from '../models/MetadataSearchResponse';
 import { MetadataSearchSortOptions, MetadataSearchSortOptionsFieldNameEnum  , MetadataSearchSortOptionsOrderEnum   } from '../models/MetadataSearchSortOptions';
 import { ModelTableList } from '../models/ModelTableList';
+import { NLInstructionsInfo , NLInstructionsInfoScopeEnum   } from '../models/NLInstructionsInfo';
+import { NLInstructionsInfoInput , NLInstructionsInfoInputScopeEnum   } from '../models/NLInstructionsInfoInput';
 import { ObjectIDAndName } from '../models/ObjectIDAndName';
 import { Org } from '../models/Org';
+import { OrgChannelConfigInput , OrgChannelConfigInputOperationEnum   , OrgChannelConfigInputResetEventsEnum   } from '../models/OrgChannelConfigInput';
+import { OrgChannelConfigResponse } from '../models/OrgChannelConfigResponse';
+import { OrgDetails } from '../models/OrgDetails';
 import { OrgInfo } from '../models/OrgInfo';
+import { OrgPreferenceSearchCriteriaInput , OrgPreferenceSearchCriteriaInputEventTypesEnum   } from '../models/OrgPreferenceSearchCriteriaInput';
 import { OrgResponse  , OrgResponseStatusEnum   , OrgResponseVisibilityEnum   } from '../models/OrgResponse';
+import { OrgType } from '../models/OrgType';
 import { ParameterValues } from '../models/ParameterValues';
 import { ParametersListItem } from '../models/ParametersListItem';
 import { ParametersListItemInput } from '../models/ParametersListItemInput';
@@ -434,6 +532,7 @@ import { PngOptionsInput } from '../models/PngOptionsInput';
 import { PrincipalsInput , PrincipalsInputTypeEnum   } from '../models/PrincipalsInput';
 import { PrincipalsListItem } from '../models/PrincipalsListItem';
 import { PrincipalsListItemInput } from '../models/PrincipalsListItemInput';
+import { PublishMetadataListItem , PublishMetadataListItemTypeEnum   } from '../models/PublishMetadataListItem';
 import { QueryGetDecomposedQueryRequest } from '../models/QueryGetDecomposedQueryRequest';
 import { QueryGetDecomposedQueryRequestNlsRequest } from '../models/QueryGetDecomposedQueryRequestNlsRequest';
 import { RecipientDetails } from '../models/RecipientDetails';
@@ -476,14 +575,14 @@ import { SchemaObject } from '../models/SchemaObject';
 import { Scope } from '../models/Scope';
 import { SearchCommitsRequest , SearchCommitsRequestMetadataTypeEnum      } from '../models/SearchCommitsRequest';
 import { SearchConfigRequest } from '../models/SearchConfigRequest';
-import { SearchConnectionRequest , SearchConnectionRequestDataWarehouseTypesEnum     , SearchConnectionRequestDataWarehouseObjectTypeEnum     , SearchConnectionRequestAuthenticationTypeEnum   } from '../models/SearchConnectionRequest';
+import { SearchConnectionRequest , SearchConnectionRequestDataWarehouseTypesEnum     , SearchConnectionRequestDataWarehouseObjectTypeEnum     , SearchConnectionRequestAuthenticationTypeEnum    } from '../models/SearchConnectionRequest';
 import { SearchConnectionRequestSortOptions, SearchConnectionRequestSortOptionsFieldNameEnum  , SearchConnectionRequestSortOptionsOrderEnum   } from '../models/SearchConnectionRequestSortOptions';
 import { SearchConnectionResponse   , SearchConnectionResponseDataWarehouseTypeEnum     } from '../models/SearchConnectionResponse';
 import { SearchCustomActionsRequest      , SearchCustomActionsRequestTypeEnum   } from '../models/SearchCustomActionsRequest';
 import { SearchCustomActionsRequestDefaultActionConfig } from '../models/SearchCustomActionsRequestDefaultActionConfig';
 import { SearchDataRequest  , SearchDataRequestDataFormatEnum        } from '../models/SearchDataRequest';
 import { SearchDataResponse } from '../models/SearchDataResponse';
-import { SearchMetadataRequest   , SearchMetadataRequestDependentObjectVersionEnum                     } from '../models/SearchMetadataRequest';
+import { SearchMetadataRequest   , SearchMetadataRequestDependentObjectVersionEnum                     , SearchMetadataRequestLiveboardResponseVersionEnum    } from '../models/SearchMetadataRequest';
 import { SearchMetadataRequestFavoriteObjectOptions } from '../models/SearchMetadataRequestFavoriteObjectOptions';
 import { SearchMetadataRequestSortOptions, SearchMetadataRequestSortOptionsFieldNameEnum  , SearchMetadataRequestSortOptionsOrderEnum   } from '../models/SearchMetadataRequestSortOptions';
 import { SearchOrgsRequest  , SearchOrgsRequestVisibilityEnum  , SearchOrgsRequestStatusEnum    } from '../models/SearchOrgsRequest';
@@ -493,15 +592,17 @@ import { SearchSchedulesRequest } from '../models/SearchSchedulesRequest';
 import { SearchSchedulesRequestHistoryRunsOptions } from '../models/SearchSchedulesRequestHistoryRunsOptions';
 import { SearchSchedulesRequestSortOptions } from '../models/SearchSchedulesRequestSortOptions';
 import { SearchTagsRequest } from '../models/SearchTagsRequest';
-import { SearchUserGroupsRequest      , SearchUserGroupsRequestPrivilegesEnum   , SearchUserGroupsRequestTypeEnum   , SearchUserGroupsRequestVisibilityEnum       } from '../models/SearchUserGroupsRequest';
+import { SearchUserGroupsRequest      , SearchUserGroupsRequestPrivilegesEnum   , SearchUserGroupsRequestTypeEnum   , SearchUserGroupsRequestVisibilityEnum         } from '../models/SearchUserGroupsRequest';
 import { SearchUserGroupsRequestSortOptions, SearchUserGroupsRequestSortOptionsFieldNameEnum  , SearchUserGroupsRequestSortOptionsOrderEnum   } from '../models/SearchUserGroupsRequestSortOptions';
 import { SearchUsersRequest   , SearchUsersRequestVisibilityEnum    , SearchUsersRequestPrivilegesEnum  , SearchUsersRequestAccountTypeEnum  , SearchUsersRequestAccountStatusEnum              } from '../models/SearchUsersRequest';
 import { SearchUsersRequestSortOptions, SearchUsersRequestSortOptionsFieldNameEnum  , SearchUsersRequestSortOptionsOrderEnum   } from '../models/SearchUsersRequestSortOptions';
+import { SendAgentMessageResponse } from '../models/SendAgentMessageResponse';
 import { SendMessageRequest } from '../models/SendMessageRequest';
 import { ShareMetadataRequest, ShareMetadataRequestMetadataTypeEnum            } from '../models/ShareMetadataRequest';
 import { ShareMetadataTypeInput, ShareMetadataTypeInputTypeEnum    } from '../models/ShareMetadataTypeInput';
 import { SharePermissionsInput , SharePermissionsInputShareModeEnum   } from '../models/SharePermissionsInput';
 import { SingleAnswerRequest } from '../models/SingleAnswerRequest';
+import { SortOption, SortOptionFieldNameEnum  , SortOptionOrderEnum   } from '../models/SortOption';
 import { SortOptionInput, SortOptionInputFieldNameEnum  , SortOptionInputOrderEnum   } from '../models/SortOptionInput';
 import { SortOptions, SortOptionsFieldNameEnum  , SortOptionsOrderEnum   } from '../models/SortOptions';
 import { SortingOptions } from '../models/SortingOptions';
@@ -509,9 +610,11 @@ import { SqlQuery } from '../models/SqlQuery';
 import { SqlQueryResponse  , SqlQueryResponseMetadataTypeEnum    } from '../models/SqlQueryResponse';
 import { SystemConfig } from '../models/SystemConfig';
 import { SystemInfo } from '../models/SystemInfo';
+import { SystemOverrideInfo } from '../models/SystemOverrideInfo';
 import { Table } from '../models/Table';
 import { Tag } from '../models/Tag';
 import { TagMetadataTypeInput, TagMetadataTypeInputTypeEnum    } from '../models/TagMetadataTypeInput';
+import { TemplatePropertiesInputCreate } from '../models/TemplatePropertiesInputCreate';
 import { Token } from '../models/Token';
 import { TokenAccessScopeObject, TokenAccessScopeObjectTypeEnum    } from '../models/TokenAccessScopeObject';
 import { TokenValidationResponse } from '../models/TokenValidationResponse';
@@ -524,13 +627,12 @@ import { UpdateConnectionV2Request } from '../models/UpdateConnectionV2Request';
 import { UpdateCustomActionRequest     , UpdateCustomActionRequestOperationEnum   } from '../models/UpdateCustomActionRequest';
 import { UpdateCustomActionRequestActionDetails } from '../models/UpdateCustomActionRequestActionDetails';
 import { UpdateCustomActionRequestDefaultActionConfig } from '../models/UpdateCustomActionRequestDefaultActionConfig';
-import { UpdateDbtConnectionRequest   , UpdateDbtConnectionRequestImportTypeEnum          } from '../models/UpdateDbtConnectionRequest';
 import { UpdateMetadataHeaderRequest } from '../models/UpdateMetadataHeaderRequest';
 import { UpdateMetadataObjIdRequest } from '../models/UpdateMetadataObjIdRequest';
 import { UpdateObjIdInput , UpdateObjIdInputTypeEnum     } from '../models/UpdateObjIdInput';
 import { UpdateOrgRequest    , UpdateOrgRequestOperationEnum   } from '../models/UpdateOrgRequest';
 import { UpdateRoleRequest  , UpdateRoleRequestPrivilegesEnum   } from '../models/UpdateRoleRequest';
-import { UpdateScheduleRequest  , UpdateScheduleRequestMetadataTypeEnum   , UpdateScheduleRequestFileFormatEnum    , UpdateScheduleRequestTimeZoneEnum    , UpdateScheduleRequestStatusEnum   } from '../models/UpdateScheduleRequest';
+import { UpdateScheduleRequest  , UpdateScheduleRequestMetadataTypeEnum   , UpdateScheduleRequestFileFormatEnum    , UpdateScheduleRequestTimeZoneEnum    , UpdateScheduleRequestStatusEnum    } from '../models/UpdateScheduleRequest';
 import { UpdateScheduleRequestFrequency } from '../models/UpdateScheduleRequestFrequency';
 import { UpdateScheduleRequestLiveboardOptions } from '../models/UpdateScheduleRequestLiveboardOptions';
 import { UpdateScheduleRequestPdfOptions       , UpdateScheduleRequestPdfOptionsPageSizeEnum    } from '../models/UpdateScheduleRequestPdfOptions';
@@ -539,14 +641,40 @@ import { UpdateSystemConfigRequest } from '../models/UpdateSystemConfigRequest';
 import { UpdateTagRequest } from '../models/UpdateTagRequest';
 import { UpdateUserGroupRequest    , UpdateUserGroupRequestPrivilegesEnum   , UpdateUserGroupRequestTypeEnum   , UpdateUserGroupRequestVisibilityEnum   , UpdateUserGroupRequestOperationEnum   } from '../models/UpdateUserGroupRequest';
 import { UpdateUserRequest  , UpdateUserRequestVisibilityEnum   , UpdateUserRequestAccountStatusEnum     , UpdateUserRequestAccountTypeEnum      , UpdateUserRequestOperationEnum  , UpdateUserRequestPreferredLocaleEnum     } from '../models/UpdateUserRequest';
-import { User   , UserVisibilityEnum         , UserAccountTypeEnum  , UserAccountStatusEnum                  , UserParentTypeEnum                  } from '../models/User';
+import { User   , UserVisibilityEnum         , UserAccountTypeEnum  , UserAccountStatusEnum                  , UserParentTypeEnum                   } from '../models/User';
 import { UserGroup } from '../models/UserGroup';
 import { UserGroupResponse                     , UserGroupResponseParentTypeEnum      , UserGroupResponseTypeEnum   , UserGroupResponseVisibilityEnum    } from '../models/UserGroupResponse';
 import { UserInfo } from '../models/UserInfo';
 import { UserObject, UserObjectTypeEnum    } from '../models/UserObject';
 import { UserParameterOptions } from '../models/UserParameterOptions';
+import { UserPrincipal } from '../models/UserPrincipal';
 import { ValidateMergeRequest } from '../models/ValidateMergeRequest';
 import { ValidateTokenRequest } from '../models/ValidateTokenRequest';
+import { ValueScopeInput , ValueScopeInputPrincipalTypeEnum     } from '../models/ValueScopeInput';
+import { Variable  , VariableVariableTypeEnum     } from '../models/Variable';
+import { VariableDetailInput , VariableDetailInputTypeEnum    } from '../models/VariableDetailInput';
+import { VariableUpdateAssignmentInput  , VariableUpdateAssignmentInputOperationEnum   } from '../models/VariableUpdateAssignmentInput';
+import { VariableUpdateScopeInput , VariableUpdateScopeInputPrincipalTypeEnum      } from '../models/VariableUpdateScopeInput';
+import { VariableValue   , VariableValuePrincipalTypeEnum     } from '../models/VariableValue';
+import { VariableValues } from '../models/VariableValues';
+import { WebhookAuthApiKey } from '../models/WebhookAuthApiKey';
+import { WebhookAuthApiKeyInput } from '../models/WebhookAuthApiKeyInput';
+import { WebhookAuthBasicAuth } from '../models/WebhookAuthBasicAuth';
+import { WebhookAuthBasicAuthInput } from '../models/WebhookAuthBasicAuthInput';
+import { WebhookAuthOAuth2 } from '../models/WebhookAuthOAuth2';
+import { WebhookAuthOAuth2Input } from '../models/WebhookAuthOAuth2Input';
+import { WebhookAuthentication } from '../models/WebhookAuthentication';
+import { WebhookAuthenticationInput } from '../models/WebhookAuthenticationInput';
+import { WebhookDeleteFailure } from '../models/WebhookDeleteFailure';
+import { WebhookDeleteResponse } from '../models/WebhookDeleteResponse';
+import { WebhookOrg } from '../models/WebhookOrg';
+import { WebhookPagination } from '../models/WebhookPagination';
+import { WebhookResponse      , WebhookResponseEventsEnum         } from '../models/WebhookResponse';
+import { WebhookSearchResponse } from '../models/WebhookSearchResponse';
+import { WebhookSignatureVerification, WebhookSignatureVerificationTypeEnum   , WebhookSignatureVerificationAlgorithmEnum    } from '../models/WebhookSignatureVerification';
+import { WebhookSignatureVerificationInput, WebhookSignatureVerificationInputTypeEnum   , WebhookSignatureVerificationInputAlgorithmEnum    } from '../models/WebhookSignatureVerificationInput';
+import { WebhookSortOptionsInput, WebhookSortOptionsInputFieldNameEnum  , WebhookSortOptionsInputOrderEnum   } from '../models/WebhookSortOptionsInput';
+import { WebhookUser } from '../models/WebhookUser';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -573,6 +701,11 @@ let enumsMap: Set<string> = new Set<string>([
     "AssociateMetadataInputTypeEnum",
     "AssociateMetadataInputCreateTypeEnum",
     "AuthorMetadataTypeInputTypeEnum",
+    "ColumnSecurityRuleGroupOperationOperationEnum",
+    "ConnectionConfigurationResponsePolicyProcessesEnum",
+    "ConnectionConfigurationResponseDataWarehouseTypeEnum",
+    "ConnectionConfigurationResponsePolicyTypeEnum",
+    "ContextPayloadV2InputTypeEnum",
     "CopyObjectRequestTypeEnum",
     "CreateConnectionRequestDataWarehouseTypeEnum",
     "CreateConnectionResponseDataWarehouseTypeEnum",
@@ -589,11 +722,13 @@ let enumsMap: Set<string> = new Set<string>([
     "CreateUserRequestVisibilityEnum",
     "CreateUserRequestPreferredLocaleEnum",
     "CustomActionMetadataTypeInputTypeEnum",
-    "DbtConnectionRequestImportTypeEnum",
-    "DbtGenerateTmlRequestImportWorksheetsEnum",
     "DeleteMetadataTypeInputTypeEnum",
     "DeployCommitRequestDeployTypeEnum",
     "DeployCommitRequestDeployPolicyEnum",
+    "EventChannelConfigEventTypeEnum",
+    "EventChannelConfigChannelsEnum",
+    "EventChannelConfigInputEventTypeEnum",
+    "EventChannelConfigInputChannelsEnum",
     "ExcludeMetadataListItemInputTypeEnum",
     "ExportAnswerReportRequestFileFormatEnum",
     "ExportAnswerReportRequestRegionalSettingsCurrencyFormatEnum",
@@ -627,13 +762,20 @@ let enumsMap: Set<string> = new Set<string>([
     "ImportUserAccountTypeEnum",
     "ImportUserAccountStatusEnum",
     "ImportUserVisibilityEnum",
+    "JWTMetadataObjectTypeEnum",
     "MetadataInputTypeEnum",
     "MetadataListItemInputTypeEnum",
+    "MetadataListItemInputSubtypesEnum",
     "MetadataObjectTypeEnum",
     "MetadataResponseTypeEnum",
     "MetadataSearchResponseMetadataTypeEnum",
     "MetadataSearchSortOptionsFieldNameEnum",
     "MetadataSearchSortOptionsOrderEnum",
+    "NLInstructionsInfoScopeEnum",
+    "NLInstructionsInfoInputScopeEnum",
+    "OrgChannelConfigInputOperationEnum",
+    "OrgChannelConfigInputResetEventsEnum",
+    "OrgPreferenceSearchCriteriaInputEventTypesEnum",
     "OrgResponseStatusEnum",
     "OrgResponseVisibilityEnum",
     "PdfOptionsPageSizeEnum",
@@ -641,6 +783,7 @@ let enumsMap: Set<string> = new Set<string>([
     "PermissionInputShareModeEnum",
     "PermissionsMetadataTypeInputTypeEnum",
     "PrincipalsInputTypeEnum",
+    "PublishMetadataListItemTypeEnum",
     "RegionalSettingsInputCurrencyFormatEnum",
     "RegionalSettingsInputUserLocaleEnum",
     "RegionalSettingsInputNumberFormatLocaleEnum",
@@ -663,6 +806,7 @@ let enumsMap: Set<string> = new Set<string>([
     "SearchCustomActionsRequestTypeEnum",
     "SearchDataRequestDataFormatEnum",
     "SearchMetadataRequestDependentObjectVersionEnum",
+    "SearchMetadataRequestLiveboardResponseVersionEnum",
     "SearchMetadataRequestSortOptionsFieldNameEnum",
     "SearchMetadataRequestSortOptionsOrderEnum",
     "SearchOrgsRequestVisibilityEnum",
@@ -685,6 +829,8 @@ let enumsMap: Set<string> = new Set<string>([
     "ShareMetadataRequestMetadataTypeEnum",
     "ShareMetadataTypeInputTypeEnum",
     "SharePermissionsInputShareModeEnum",
+    "SortOptionFieldNameEnum",
+    "SortOptionOrderEnum",
     "SortOptionInputFieldNameEnum",
     "SortOptionInputOrderEnum",
     "SortOptionsFieldNameEnum",
@@ -693,7 +839,6 @@ let enumsMap: Set<string> = new Set<string>([
     "TagMetadataTypeInputTypeEnum",
     "TokenAccessScopeObjectTypeEnum",
     "UpdateCustomActionRequestOperationEnum",
-    "UpdateDbtConnectionRequestImportTypeEnum",
     "UpdateObjIdInputTypeEnum",
     "UpdateOrgRequestOperationEnum",
     "UpdateRoleRequestPrivilegesEnum",
@@ -719,9 +864,23 @@ let enumsMap: Set<string> = new Set<string>([
     "UserGroupResponseTypeEnum",
     "UserGroupResponseVisibilityEnum",
     "UserObjectTypeEnum",
+    "ValueScopeInputPrincipalTypeEnum",
+    "VariableVariableTypeEnum",
+    "VariableDetailInputTypeEnum",
+    "VariableUpdateAssignmentInputOperationEnum",
+    "VariableUpdateScopeInputPrincipalTypeEnum",
+    "VariableValuePrincipalTypeEnum",
+    "WebhookResponseEventsEnum",
+    "WebhookSignatureVerificationTypeEnum",
+    "WebhookSignatureVerificationAlgorithmEnum",
+    "WebhookSignatureVerificationInputTypeEnum",
+    "WebhookSignatureVerificationInputAlgorithmEnum",
+    "WebhookSortOptionsInputFieldNameEnum",
+    "WebhookSortOptionsInputOrderEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
+    "AIContext": AIContext,
     "APIKey": APIKey,
     "APIKeyInput": APIKeyInput,
     "AccessToken": AccessToken,
@@ -732,7 +891,9 @@ let typeMap: {[index: string]: any} = {
     "ActionDetailsInput": ActionDetailsInput,
     "ActionDetailsInputCreate": ActionDetailsInputCreate,
     "ActivateUserRequest": ActivateUserRequest,
+    "AgentConversation": AgentConversation,
     "AnswerContent": AnswerContent,
+    "AnswerContextInput": AnswerContextInput,
     "AnswerDataResponse": AnswerDataResponse,
     "AssignChangeAuthorRequest": AssignChangeAuthorRequest,
     "AssignTagRequest": AssignTagRequest,
@@ -748,15 +909,28 @@ let typeMap: {[index: string]: any} = {
     "CALLBACK": CALLBACK,
     "CALLBACKInput": CALLBACKInput,
     "CALLBACKInputMandatory": CALLBACKInputMandatory,
+    "CalendarResponse": CalendarResponse,
     "ChangeUserPasswordRequest": ChangeUserPasswordRequest,
     "Column": Column,
+    "ColumnSecurityRule": ColumnSecurityRule,
+    "ColumnSecurityRuleColumn": ColumnSecurityRuleColumn,
+    "ColumnSecurityRuleGroup": ColumnSecurityRuleGroup,
+    "ColumnSecurityRuleGroupOperation": ColumnSecurityRuleGroupOperation,
+    "ColumnSecurityRuleResponse": ColumnSecurityRuleResponse,
+    "ColumnSecurityRuleSourceTable": ColumnSecurityRuleSourceTable,
+    "ColumnSecurityRuleTableInput": ColumnSecurityRuleTableInput,
+    "ColumnSecurityRuleUpdate": ColumnSecurityRuleUpdate,
     "CommitBranchRequest": CommitBranchRequest,
     "CommitFileType": CommitFileType,
     "CommitHistoryResponse": CommitHistoryResponse,
     "CommitResponse": CommitResponse,
     "CommiterType": CommiterType,
+    "CommunicationChannelPreferencesResponse": CommunicationChannelPreferencesResponse,
+    "ConnectionConfigurationResponse": ConnectionConfigurationResponse,
     "ConnectionInput": ConnectionInput,
+    "ContextPayloadV2Input": ContextPayloadV2Input,
     "Conversation": Conversation,
+    "ConversationSettingsInput": ConversationSettingsInput,
     "ConvertWorksheetToModelRequest": ConvertWorksheetToModelRequest,
     "CopyObjectRequest": CopyObjectRequest,
     "CreateConfigRequest": CreateConfigRequest,
@@ -766,6 +940,7 @@ let typeMap: {[index: string]: any} = {
     "CreateCustomActionRequest": CreateCustomActionRequest,
     "CreateCustomActionRequestActionDetails": CreateCustomActionRequestActionDetails,
     "CreateCustomActionRequestDefaultActionConfig": CreateCustomActionRequestDefaultActionConfig,
+    "CreateEmailCustomizationResponse": CreateEmailCustomizationResponse,
     "CreateOrgRequest": CreateOrgRequest,
     "CreateRoleRequest": CreateRoleRequest,
     "CreateScheduleRequest": CreateScheduleRequest,
@@ -779,12 +954,11 @@ let typeMap: {[index: string]: any} = {
     "CronExpression": CronExpression,
     "CronExpressionInput": CronExpressionInput,
     "CustomActionMetadataTypeInput": CustomActionMetadataTypeInput,
+    "DataSource": DataSource,
+    "DataSourceContextInput": DataSourceContextInput,
     "DataWarehouseObjectInput": DataWarehouseObjectInput,
     "DataWarehouseObjects": DataWarehouseObjects,
     "Database": Database,
-    "DbtConnectionRequest": DbtConnectionRequest,
-    "DbtGenerateSyncTmlRequest": DbtGenerateSyncTmlRequest,
-    "DbtGenerateTmlRequest": DbtGenerateTmlRequest,
     "DbtSearchResponse": DbtSearchResponse,
     "DeactivateUserRequest": DeactivateUserRequest,
     "DefaultActionConfig": DefaultActionConfig,
@@ -797,10 +971,18 @@ let typeMap: {[index: string]: any} = {
     "DeleteMetadataTypeInput": DeleteMetadataTypeInput,
     "DeployCommitRequest": DeployCommitRequest,
     "DeployResponse": DeployResponse,
+    "EntityHeader": EntityHeader,
     "ErrorResponse": ErrorResponse,
+    "EurekaDataSourceSuggestionResponse": EurekaDataSourceSuggestionResponse,
     "EurekaDecomposeQueryResponse": EurekaDecomposeQueryResponse,
+    "EurekaGetNLInstructionsResponse": EurekaGetNLInstructionsResponse,
+    "EurekaGetRelevantQuestionsResponse": EurekaGetRelevantQuestionsResponse,
     "EurekaLLMDecomposeQueryResponse": EurekaLLMDecomposeQueryResponse,
     "EurekaLLMSuggestedQuery": EurekaLLMSuggestedQuery,
+    "EurekaRelevantQuestion": EurekaRelevantQuestion,
+    "EurekaSetNLInstructionsResponse": EurekaSetNLInstructionsResponse,
+    "EventChannelConfig": EventChannelConfig,
+    "EventChannelConfigInput": EventChannelConfigInput,
     "ExcludeMetadataListItemInput": ExcludeMetadataListItemInput,
     "ExportAnswerReportRequest": ExportAnswerReportRequest,
     "ExportAnswerReportRequestRegionalSettings": ExportAnswerReportRequestRegionalSettings,
@@ -812,6 +994,7 @@ let typeMap: {[index: string]: any} = {
     "ExportMetadataTMLRequestExportOptions": ExportMetadataTMLRequestExportOptions,
     "ExportMetadataTypeInput": ExportMetadataTypeInput,
     "ExportOptions": ExportOptions,
+    "ExternalTableInput": ExternalTableInput,
     "FavoriteMetadataInput": FavoriteMetadataInput,
     "FavoriteMetadataItem": FavoriteMetadataItem,
     "FavoriteObjectOptionsInput": FavoriteObjectOptionsInput,
@@ -852,6 +1035,7 @@ let typeMap: {[index: string]: any} = {
     "JWTParameter": JWTParameter,
     "JWTUserOptions": JWTUserOptions,
     "JWTUserOptionsFull": JWTUserOptionsFull,
+    "LBContextInput": LBContextInput,
     "LiveboardContent": LiveboardContent,
     "LiveboardDataResponse": LiveboardDataResponse,
     "LiveboardOptions": LiveboardOptions,
@@ -859,6 +1043,7 @@ let typeMap: {[index: string]: any} = {
     "LogResponse": LogResponse,
     "LoginRequest": LoginRequest,
     "MetadataAssociationItem": MetadataAssociationItem,
+    "MetadataContext": MetadataContext,
     "MetadataInput": MetadataInput,
     "MetadataListItemInput": MetadataListItemInput,
     "MetadataObject": MetadataObject,
@@ -866,10 +1051,17 @@ let typeMap: {[index: string]: any} = {
     "MetadataSearchResponse": MetadataSearchResponse,
     "MetadataSearchSortOptions": MetadataSearchSortOptions,
     "ModelTableList": ModelTableList,
+    "NLInstructionsInfo": NLInstructionsInfo,
+    "NLInstructionsInfoInput": NLInstructionsInfoInput,
     "ObjectIDAndName": ObjectIDAndName,
     "Org": Org,
+    "OrgChannelConfigInput": OrgChannelConfigInput,
+    "OrgChannelConfigResponse": OrgChannelConfigResponse,
+    "OrgDetails": OrgDetails,
     "OrgInfo": OrgInfo,
+    "OrgPreferenceSearchCriteriaInput": OrgPreferenceSearchCriteriaInput,
     "OrgResponse": OrgResponse,
+    "OrgType": OrgType,
     "ParameterValues": ParameterValues,
     "ParametersListItem": ParametersListItem,
     "ParametersListItemInput": ParametersListItemInput,
@@ -883,6 +1075,7 @@ let typeMap: {[index: string]: any} = {
     "PrincipalsInput": PrincipalsInput,
     "PrincipalsListItem": PrincipalsListItem,
     "PrincipalsListItemInput": PrincipalsListItemInput,
+    "PublishMetadataListItem": PublishMetadataListItem,
     "QueryGetDecomposedQueryRequest": QueryGetDecomposedQueryRequest,
     "QueryGetDecomposedQueryRequestNlsRequest": QueryGetDecomposedQueryRequestNlsRequest,
     "RecipientDetails": RecipientDetails,
@@ -946,11 +1139,13 @@ let typeMap: {[index: string]: any} = {
     "SearchUserGroupsRequestSortOptions": SearchUserGroupsRequestSortOptions,
     "SearchUsersRequest": SearchUsersRequest,
     "SearchUsersRequestSortOptions": SearchUsersRequestSortOptions,
+    "SendAgentMessageResponse": SendAgentMessageResponse,
     "SendMessageRequest": SendMessageRequest,
     "ShareMetadataRequest": ShareMetadataRequest,
     "ShareMetadataTypeInput": ShareMetadataTypeInput,
     "SharePermissionsInput": SharePermissionsInput,
     "SingleAnswerRequest": SingleAnswerRequest,
+    "SortOption": SortOption,
     "SortOptionInput": SortOptionInput,
     "SortOptions": SortOptions,
     "SortingOptions": SortingOptions,
@@ -958,9 +1153,11 @@ let typeMap: {[index: string]: any} = {
     "SqlQueryResponse": SqlQueryResponse,
     "SystemConfig": SystemConfig,
     "SystemInfo": SystemInfo,
+    "SystemOverrideInfo": SystemOverrideInfo,
     "Table": Table,
     "Tag": Tag,
     "TagMetadataTypeInput": TagMetadataTypeInput,
+    "TemplatePropertiesInputCreate": TemplatePropertiesInputCreate,
     "Token": Token,
     "TokenAccessScopeObject": TokenAccessScopeObject,
     "TokenValidationResponse": TokenValidationResponse,
@@ -973,7 +1170,6 @@ let typeMap: {[index: string]: any} = {
     "UpdateCustomActionRequest": UpdateCustomActionRequest,
     "UpdateCustomActionRequestActionDetails": UpdateCustomActionRequestActionDetails,
     "UpdateCustomActionRequestDefaultActionConfig": UpdateCustomActionRequestDefaultActionConfig,
-    "UpdateDbtConnectionRequest": UpdateDbtConnectionRequest,
     "UpdateMetadataHeaderRequest": UpdateMetadataHeaderRequest,
     "UpdateMetadataObjIdRequest": UpdateMetadataObjIdRequest,
     "UpdateObjIdInput": UpdateObjIdInput,
@@ -994,8 +1190,34 @@ let typeMap: {[index: string]: any} = {
     "UserInfo": UserInfo,
     "UserObject": UserObject,
     "UserParameterOptions": UserParameterOptions,
+    "UserPrincipal": UserPrincipal,
     "ValidateMergeRequest": ValidateMergeRequest,
     "ValidateTokenRequest": ValidateTokenRequest,
+    "ValueScopeInput": ValueScopeInput,
+    "Variable": Variable,
+    "VariableDetailInput": VariableDetailInput,
+    "VariableUpdateAssignmentInput": VariableUpdateAssignmentInput,
+    "VariableUpdateScopeInput": VariableUpdateScopeInput,
+    "VariableValue": VariableValue,
+    "VariableValues": VariableValues,
+    "WebhookAuthApiKey": WebhookAuthApiKey,
+    "WebhookAuthApiKeyInput": WebhookAuthApiKeyInput,
+    "WebhookAuthBasicAuth": WebhookAuthBasicAuth,
+    "WebhookAuthBasicAuthInput": WebhookAuthBasicAuthInput,
+    "WebhookAuthOAuth2": WebhookAuthOAuth2,
+    "WebhookAuthOAuth2Input": WebhookAuthOAuth2Input,
+    "WebhookAuthentication": WebhookAuthentication,
+    "WebhookAuthenticationInput": WebhookAuthenticationInput,
+    "WebhookDeleteFailure": WebhookDeleteFailure,
+    "WebhookDeleteResponse": WebhookDeleteResponse,
+    "WebhookOrg": WebhookOrg,
+    "WebhookPagination": WebhookPagination,
+    "WebhookResponse": WebhookResponse,
+    "WebhookSearchResponse": WebhookSearchResponse,
+    "WebhookSignatureVerification": WebhookSignatureVerification,
+    "WebhookSignatureVerificationInput": WebhookSignatureVerificationInput,
+    "WebhookSortOptionsInput": WebhookSortOptionsInput,
+    "WebhookUser": WebhookUser,
 }
 
 export class ObjectSerializer {

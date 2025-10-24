@@ -14,6 +14,7 @@ import { FilterRules } from '../models/FilterRules';
 import { GroupObject } from '../models/GroupObject';
 import { ParameterValues } from '../models/ParameterValues';
 import { TokenAccessScopeObject } from '../models/TokenAccessScopeObject';
+import { VariableValues } from '../models/VariableValues';
 import { HttpFile } from '../http/http';
 
 export class GetCustomAccessTokenRequest {
@@ -34,11 +35,11 @@ export class GetCustomAccessTokenRequest {
     */
     'validity_time_in_sec'?: number;
     /**
-    * ID of the Org context to log in to. If the Org ID is not specified and secret key is provided then user will be logged into the org corresponding to the secret key, and if secret key is not provided then user will be logged in to the Org context of their previous login session.
+    * ID or name of the Org context to log in to. If the Org ID or name is not specified but a secret key is provided, the user will be logged into the Org associated with the secret key. If neither the Org ID/name nor the secret key is provided, the user will be logged into the Org context from their previous login session.
     */
     'org_identifier'?: string;
     /**
-    * Indicates whether the specified attributes should be persisted or not.
+    * Indicates whether the specified attributes should be persisted or not. RESET and NONE are not applicable if you are setting variable_values.
     */
     'persist_option': GetCustomAccessTokenRequestPersistOptionEnum;
     /**
@@ -49,6 +50,10 @@ export class GetCustomAccessTokenRequest {
     * Parameter values.
     */
     'parameter_values'?: Array<ParameterValues>;
+    /**
+    * List of variable values where `name` references an existing formula variable and `values` is any value from the corresponding column.    Version: 10.14.0.cl or later 
+    */
+    'variable_values'?: Array<VariableValues>;
     /**
     * Objects on which the filter rules and parameters values should be applied to
     */
@@ -66,7 +71,7 @@ export class GetCustomAccessTokenRequest {
     */
     'groups'?: Array<GroupObject>;
     /**
-    *    Creates a new user if the specified username does not exist in ThoughtSpot. To provision a user just-in-time (JIT), set this attribute to true.      Note: For JIT provisioning of a user, the secret_key is required.     Version: 10.5.0.cl or later 
+    *    Creates a new user if the specified username does not exist in ThoughtSpot. To provision a user just-in-time (JIT), set this attribute to true.      Note: For JIT provisioning of a user, the secret_key is required. New formula variables won\'t be created.     Version: 10.5.0.cl or later 
     */
     'auto_create'?: boolean | null;
 
@@ -122,6 +127,12 @@ export class GetCustomAccessTokenRequest {
             "format": ""
         },
         {
+            "name": "variable_values",
+            "baseName": "variable_values",
+            "type": "Array<VariableValues>",
+            "format": ""
+        },
+        {
             "name": "objects",
             "baseName": "objects",
             "type": "Array<TokenAccessScopeObject>",
@@ -161,5 +172,5 @@ export class GetCustomAccessTokenRequest {
 }
 
 
-export type GetCustomAccessTokenRequestPersistOptionEnum = "APPEND" | "NONE" | "REPLACE" | "RESET" ;
+export type GetCustomAccessTokenRequestPersistOptionEnum = "REPLACE" | "APPEND" | "NONE" | "RESET" ;
 

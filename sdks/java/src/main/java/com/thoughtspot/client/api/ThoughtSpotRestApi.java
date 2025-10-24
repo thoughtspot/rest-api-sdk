@@ -35,9 +35,6 @@ import com.thoughtspot.client.model.CreateScheduleRequest;
 import com.thoughtspot.client.model.CreateTagRequest;
 import com.thoughtspot.client.model.CreateUserGroupRequest;
 import com.thoughtspot.client.model.CreateUserRequest;
-import com.thoughtspot.client.model.DbtConnectionRequest;
-import com.thoughtspot.client.model.DbtGenerateSyncTmlRequest;
-import com.thoughtspot.client.model.DbtGenerateTmlRequest;
 import com.thoughtspot.client.model.DbtSearchResponse;
 import com.thoughtspot.client.model.DeactivateUserRequest;
 import com.thoughtspot.client.model.DeleteConfigRequest;
@@ -113,6 +110,7 @@ import com.thoughtspot.client.model.SingleAnswerRequest;
 import com.thoughtspot.client.model.SqlQueryResponse;
 import com.thoughtspot.client.model.SystemConfig;
 import com.thoughtspot.client.model.SystemInfo;
+import com.thoughtspot.client.model.SystemOverrideInfo;
 import com.thoughtspot.client.model.Tag;
 import com.thoughtspot.client.model.Token;
 import com.thoughtspot.client.model.TokenValidationResponse;
@@ -120,7 +118,6 @@ import com.thoughtspot.client.model.UpdateConfigRequest;
 import com.thoughtspot.client.model.UpdateConnectionRequest;
 import com.thoughtspot.client.model.UpdateConnectionV2Request;
 import com.thoughtspot.client.model.UpdateCustomActionRequest;
-import com.thoughtspot.client.model.UpdateDbtConnectionRequest;
 import com.thoughtspot.client.model.UpdateMetadataHeaderRequest;
 import com.thoughtspot.client.model.UpdateMetadataObjIdRequest;
 import com.thoughtspot.client.model.UpdateOrgRequest;
@@ -1428,9 +1425,9 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Makes a copy of an Answer or Liveboard saved in Atlas Version: 10.3.0.cl or later Creates a
-     * copy of a metadata object. Requires at least view access to the metadata object being copied.
-     * Upon successful execution, the API creates a copy of the metadata object specified in the API
+     * Makes a copy of an Answer or Liveboard Version: 10.3.0.cl or later Creates a copy of a
+     * metadata object. Requires at least view access to the metadata object being copied. Upon
+     * successful execution, the API creates a copy of the metadata object specified in the API
      * request and returns the ID of the new object.
      *
      * @param copyObjectRequest (required)
@@ -1455,9 +1452,9 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Makes a copy of an Answer or Liveboard saved in Atlas Version: 10.3.0.cl or later Creates a
-     * copy of a metadata object. Requires at least view access to the metadata object being copied.
-     * Upon successful execution, the API creates a copy of the metadata object specified in the API
+     * Makes a copy of an Answer or Liveboard Version: 10.3.0.cl or later Creates a copy of a
+     * metadata object. Requires at least view access to the metadata object being copied. Upon
+     * successful execution, the API creates a copy of the metadata object specified in the API
      * request and returns the ID of the new object.
      *
      * @param copyObjectRequest (required)
@@ -1484,10 +1481,10 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Makes a copy of an Answer or Liveboard saved in Atlas Version: 10.3.0.cl or
-     * later Creates a copy of a metadata object. Requires at least view access to the metadata
-     * object being copied. Upon successful execution, the API creates a copy of the metadata object
-     * specified in the API request and returns the ID of the new object.
+     * (asynchronously) Makes a copy of an Answer or Liveboard Version: 10.3.0.cl or later Creates a
+     * copy of a metadata object. Requires at least view access to the metadata object being copied.
+     * Upon successful execution, the API creates a copy of the metadata object specified in the API
+     * request and returns the ID of the new object.
      *
      * @param copyObjectRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -3556,7 +3553,17 @@ public class ThoughtSpotRestApi {
     /**
      * Build call for dbtConnection
      *
-     * @param dbtConnectionRequest (required)
+     * @param connectionName Name of the connection. (required)
+     * @param databaseName Name of the Database. (required)
+     * @param importType Mention type of Import (optional, default to DBT_CLOUD)
+     * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD. (optional)
+     * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD. (optional)
+     * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD (optional)
+     * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD (optional)
+     * @param dbtEnvId DBT Environment ID\\\&quot; (optional)
+     * @param projectName Name of the project (optional)
+     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
+     *     is Mandatory when Import Type is &#39;ZIP_FILE&#39; (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -3572,7 +3579,17 @@ public class ThoughtSpotRestApi {
      * </table>
      */
     public okhttp3.Call dbtConnectionCall(
-            DbtConnectionRequest dbtConnectionRequest, final ApiCallback _callback)
+            String connectionName,
+            String databaseName,
+            String importType,
+            String accessToken,
+            String dbtUrl,
+            String accountId,
+            String projectId,
+            String dbtEnvId,
+            String projectName,
+            File fileContent,
+            final ApiCallback _callback)
             throws ApiException {
         String basePath = null;
         // Operation Servers
@@ -3587,7 +3604,7 @@ public class ThoughtSpotRestApi {
             basePath = null;
         }
 
-        Object localVarPostBody = dbtConnectionRequest;
+        Object localVarPostBody = null;
 
         // create path and map variables
         String localVarPath = "/api/rest/2.0/dbt/dbt-connection";
@@ -3598,13 +3615,53 @@ public class ThoughtSpotRestApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
+        if (connectionName != null) {
+            localVarFormParams.put("connection_name", connectionName);
+        }
+
+        if (databaseName != null) {
+            localVarFormParams.put("database_name", databaseName);
+        }
+
+        if (importType != null) {
+            localVarFormParams.put("import_type", importType);
+        }
+
+        if (accessToken != null) {
+            localVarFormParams.put("access_token", accessToken);
+        }
+
+        if (dbtUrl != null) {
+            localVarFormParams.put("dbt_url", dbtUrl);
+        }
+
+        if (accountId != null) {
+            localVarFormParams.put("account_id", accountId);
+        }
+
+        if (projectId != null) {
+            localVarFormParams.put("project_id", projectId);
+        }
+
+        if (dbtEnvId != null) {
+            localVarFormParams.put("dbt_env_id", dbtEnvId);
+        }
+
+        if (projectName != null) {
+            localVarFormParams.put("project_name", projectName);
+        }
+
+        if (fileContent != null) {
+            localVarFormParams.put("file_content", fileContent);
+        }
+
         final String[] localVarAccepts = {"application/json"};
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
             localVarHeaderParams.put("Accept", localVarAccept);
         }
 
-        final String[] localVarContentTypes = {"application/json"};
+        final String[] localVarContentTypes = {"multipart/form-data"};
         final String localVarContentType =
                 localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
@@ -3628,16 +3685,44 @@ public class ThoughtSpotRestApi {
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call dbtConnectionValidateBeforeCall(
-            DbtConnectionRequest dbtConnectionRequest, final ApiCallback _callback)
+            String connectionName,
+            String databaseName,
+            String importType,
+            String accessToken,
+            String dbtUrl,
+            String accountId,
+            String projectId,
+            String dbtEnvId,
+            String projectName,
+            File fileContent,
+            final ApiCallback _callback)
             throws ApiException {
-        // verify the required parameter 'dbtConnectionRequest' is set
-        if (dbtConnectionRequest == null) {
+        // verify the required parameter 'connectionName' is set
+        if (connectionName == null) {
             throw new ApiException(
-                    "Missing the required parameter 'dbtConnectionRequest' when calling"
+                    "Missing the required parameter 'connectionName' when calling"
                             + " dbtConnection(Async)");
         }
 
-        return dbtConnectionCall(dbtConnectionRequest, _callback);
+        // verify the required parameter 'databaseName' is set
+        if (databaseName == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'databaseName' when calling"
+                            + " dbtConnection(Async)");
+        }
+
+        return dbtConnectionCall(
+                connectionName,
+                databaseName,
+                importType,
+                accessToken,
+                dbtUrl,
+                accountId,
+                projectId,
+                dbtEnvId,
+                projectName,
+                fileContent,
+                _callback);
     }
 
     /**
@@ -3655,7 +3740,17 @@ public class ThoughtSpotRestApi {
      * embrace connection, embrace database name, import type, file_content to create a connection
      * object. To know more about DBT, see ThoughtSpot Product Documentation.
      *
-     * @param dbtConnectionRequest (required)
+     * @param connectionName Name of the connection. (required)
+     * @param databaseName Name of the Database. (required)
+     * @param importType Mention type of Import (optional, default to DBT_CLOUD)
+     * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD. (optional)
+     * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD. (optional)
+     * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD (optional)
+     * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD (optional)
+     * @param dbtEnvId DBT Environment ID\\\&quot; (optional)
+     * @param projectName Name of the project (optional)
+     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
+     *     is Mandatory when Import Type is &#39;ZIP_FILE&#39; (optional)
      * @return Object
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -3670,8 +3765,30 @@ public class ThoughtSpotRestApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public Object dbtConnection(DbtConnectionRequest dbtConnectionRequest) throws ApiException {
-        ApiResponse<Object> localVarResp = dbtConnectionWithHttpInfo(dbtConnectionRequest);
+    public Object dbtConnection(
+            String connectionName,
+            String databaseName,
+            String importType,
+            String accessToken,
+            String dbtUrl,
+            String accountId,
+            String projectId,
+            String dbtEnvId,
+            String projectName,
+            File fileContent)
+            throws ApiException {
+        ApiResponse<Object> localVarResp =
+                dbtConnectionWithHttpInfo(
+                        connectionName,
+                        databaseName,
+                        importType,
+                        accessToken,
+                        dbtUrl,
+                        accountId,
+                        projectId,
+                        dbtEnvId,
+                        projectName,
+                        fileContent);
         return localVarResp.getData();
     }
 
@@ -3690,7 +3807,17 @@ public class ThoughtSpotRestApi {
      * embrace connection, embrace database name, import type, file_content to create a connection
      * object. To know more about DBT, see ThoughtSpot Product Documentation.
      *
-     * @param dbtConnectionRequest (required)
+     * @param connectionName Name of the connection. (required)
+     * @param databaseName Name of the Database. (required)
+     * @param importType Mention type of Import (optional, default to DBT_CLOUD)
+     * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD. (optional)
+     * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD. (optional)
+     * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD (optional)
+     * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD (optional)
+     * @param dbtEnvId DBT Environment ID\\\&quot; (optional)
+     * @param projectName Name of the project (optional)
+     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
+     *     is Mandatory when Import Type is &#39;ZIP_FILE&#39; (optional)
      * @return ApiResponse&lt;Object&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -3705,9 +3832,31 @@ public class ThoughtSpotRestApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public ApiResponse<Object> dbtConnectionWithHttpInfo(DbtConnectionRequest dbtConnectionRequest)
+    public ApiResponse<Object> dbtConnectionWithHttpInfo(
+            String connectionName,
+            String databaseName,
+            String importType,
+            String accessToken,
+            String dbtUrl,
+            String accountId,
+            String projectId,
+            String dbtEnvId,
+            String projectName,
+            File fileContent)
             throws ApiException {
-        okhttp3.Call localVarCall = dbtConnectionValidateBeforeCall(dbtConnectionRequest, null);
+        okhttp3.Call localVarCall =
+                dbtConnectionValidateBeforeCall(
+                        connectionName,
+                        databaseName,
+                        importType,
+                        accessToken,
+                        dbtUrl,
+                        accountId,
+                        projectId,
+                        dbtEnvId,
+                        projectName,
+                        fileContent,
+                        null);
         Type localVarReturnType = new TypeToken<Object>() {}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -3727,7 +3876,17 @@ public class ThoughtSpotRestApi {
      * embrace connection, embrace database name, import type, file_content to create a connection
      * object. To know more about DBT, see ThoughtSpot Product Documentation.
      *
-     * @param dbtConnectionRequest (required)
+     * @param connectionName Name of the connection. (required)
+     * @param databaseName Name of the Database. (required)
+     * @param importType Mention type of Import (optional, default to DBT_CLOUD)
+     * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD. (optional)
+     * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD. (optional)
+     * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD (optional)
+     * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD (optional)
+     * @param dbtEnvId DBT Environment ID\\\&quot; (optional)
+     * @param projectName Name of the project (optional)
+     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
+     *     is Mandatory when Import Type is &#39;ZIP_FILE&#39; (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body
@@ -3744,11 +3903,32 @@ public class ThoughtSpotRestApi {
      * </table>
      */
     public okhttp3.Call dbtConnectionAsync(
-            DbtConnectionRequest dbtConnectionRequest, final ApiCallback<Object> _callback)
+            String connectionName,
+            String databaseName,
+            String importType,
+            String accessToken,
+            String dbtUrl,
+            String accountId,
+            String projectId,
+            String dbtEnvId,
+            String projectName,
+            File fileContent,
+            final ApiCallback<Object> _callback)
             throws ApiException {
 
         okhttp3.Call localVarCall =
-                dbtConnectionValidateBeforeCall(dbtConnectionRequest, _callback);
+                dbtConnectionValidateBeforeCall(
+                        connectionName,
+                        databaseName,
+                        importType,
+                        accessToken,
+                        dbtUrl,
+                        accountId,
+                        projectId,
+                        dbtEnvId,
+                        projectName,
+                        fileContent,
+                        _callback);
         Type localVarReturnType = new TypeToken<Object>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -3756,7 +3936,9 @@ public class ThoughtSpotRestApi {
     /**
      * Build call for dbtGenerateSyncTml
      *
-     * @param dbtGenerateSyncTmlRequest (required)
+     * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
+     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
+     *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -3772,7 +3954,7 @@ public class ThoughtSpotRestApi {
      * </table>
      */
     public okhttp3.Call dbtGenerateSyncTmlCall(
-            DbtGenerateSyncTmlRequest dbtGenerateSyncTmlRequest, final ApiCallback _callback)
+            String dbtConnectionIdentifier, File fileContent, final ApiCallback _callback)
             throws ApiException {
         String basePath = null;
         // Operation Servers
@@ -3787,7 +3969,7 @@ public class ThoughtSpotRestApi {
             basePath = null;
         }
 
-        Object localVarPostBody = dbtGenerateSyncTmlRequest;
+        Object localVarPostBody = null;
 
         // create path and map variables
         String localVarPath = "/api/rest/2.0/dbt/generate-sync-tml";
@@ -3798,13 +3980,21 @@ public class ThoughtSpotRestApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
+        if (dbtConnectionIdentifier != null) {
+            localVarFormParams.put("dbt_connection_identifier", dbtConnectionIdentifier);
+        }
+
+        if (fileContent != null) {
+            localVarFormParams.put("file_content", fileContent);
+        }
+
         final String[] localVarAccepts = {"application/json"};
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
             localVarHeaderParams.put("Accept", localVarAccept);
         }
 
-        final String[] localVarContentTypes = {"application/json"};
+        final String[] localVarContentTypes = {"multipart/form-data"};
         final String localVarContentType =
                 localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
@@ -3828,16 +4018,16 @@ public class ThoughtSpotRestApi {
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call dbtGenerateSyncTmlValidateBeforeCall(
-            DbtGenerateSyncTmlRequest dbtGenerateSyncTmlRequest, final ApiCallback _callback)
+            String dbtConnectionIdentifier, File fileContent, final ApiCallback _callback)
             throws ApiException {
-        // verify the required parameter 'dbtGenerateSyncTmlRequest' is set
-        if (dbtGenerateSyncTmlRequest == null) {
+        // verify the required parameter 'dbtConnectionIdentifier' is set
+        if (dbtConnectionIdentifier == null) {
             throw new ApiException(
-                    "Missing the required parameter 'dbtGenerateSyncTmlRequest' when calling"
+                    "Missing the required parameter 'dbtConnectionIdentifier' when calling"
                             + " dbtGenerateSyncTml(Async)");
         }
 
-        return dbtGenerateSyncTmlCall(dbtGenerateSyncTmlRequest, _callback);
+        return dbtGenerateSyncTmlCall(dbtConnectionIdentifier, fileContent, _callback);
     }
 
     /**
@@ -3852,7 +4042,9 @@ public class ThoughtSpotRestApi {
      * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) -
      * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**)
      *
-     * @param dbtGenerateSyncTmlRequest (required)
+     * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
+     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
+     *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
      * @return Object
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -3867,10 +4059,10 @@ public class ThoughtSpotRestApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public Object dbtGenerateSyncTml(DbtGenerateSyncTmlRequest dbtGenerateSyncTmlRequest)
+    public Object dbtGenerateSyncTml(String dbtConnectionIdentifier, File fileContent)
             throws ApiException {
         ApiResponse<Object> localVarResp =
-                dbtGenerateSyncTmlWithHttpInfo(dbtGenerateSyncTmlRequest);
+                dbtGenerateSyncTmlWithHttpInfo(dbtConnectionIdentifier, fileContent);
         return localVarResp.getData();
     }
 
@@ -3886,7 +4078,9 @@ public class ThoughtSpotRestApi {
      * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) -
      * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**)
      *
-     * @param dbtGenerateSyncTmlRequest (required)
+     * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
+     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
+     *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
      * @return ApiResponse&lt;Object&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -3902,9 +4096,9 @@ public class ThoughtSpotRestApi {
      * </table>
      */
     public ApiResponse<Object> dbtGenerateSyncTmlWithHttpInfo(
-            DbtGenerateSyncTmlRequest dbtGenerateSyncTmlRequest) throws ApiException {
+            String dbtConnectionIdentifier, File fileContent) throws ApiException {
         okhttp3.Call localVarCall =
-                dbtGenerateSyncTmlValidateBeforeCall(dbtGenerateSyncTmlRequest, null);
+                dbtGenerateSyncTmlValidateBeforeCall(dbtConnectionIdentifier, fileContent, null);
         Type localVarReturnType = new TypeToken<Object>() {}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -3921,7 +4115,9 @@ public class ThoughtSpotRestApi {
      * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) -
      * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**)
      *
-     * @param dbtGenerateSyncTmlRequest (required)
+     * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
+     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
+     *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body
@@ -3938,12 +4134,12 @@ public class ThoughtSpotRestApi {
      * </table>
      */
     public okhttp3.Call dbtGenerateSyncTmlAsync(
-            DbtGenerateSyncTmlRequest dbtGenerateSyncTmlRequest,
-            final ApiCallback<Object> _callback)
+            String dbtConnectionIdentifier, File fileContent, final ApiCallback<Object> _callback)
             throws ApiException {
 
         okhttp3.Call localVarCall =
-                dbtGenerateSyncTmlValidateBeforeCall(dbtGenerateSyncTmlRequest, _callback);
+                dbtGenerateSyncTmlValidateBeforeCall(
+                        dbtConnectionIdentifier, fileContent, _callback);
         Type localVarReturnType = new TypeToken<Object>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -3951,7 +4147,15 @@ public class ThoughtSpotRestApi {
     /**
      * Build call for dbtGenerateTml
      *
-     * @param dbtGenerateTmlRequest (required)
+     * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
+     * @param modelTables List of Models and their respective Tables Example:
+     *     &#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;,
+     *     \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]&#39; (required)
+     * @param importWorksheets Mention the worksheet tmls to import (required)
+     * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED
+     *     Example: [\\\&quot;worksheet_name\\\&quot;] (optional)
+     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
+     *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -3967,7 +4171,12 @@ public class ThoughtSpotRestApi {
      * </table>
      */
     public okhttp3.Call dbtGenerateTmlCall(
-            DbtGenerateTmlRequest dbtGenerateTmlRequest, final ApiCallback _callback)
+            String dbtConnectionIdentifier,
+            String modelTables,
+            String importWorksheets,
+            String worksheets,
+            File fileContent,
+            final ApiCallback _callback)
             throws ApiException {
         String basePath = null;
         // Operation Servers
@@ -3982,7 +4191,7 @@ public class ThoughtSpotRestApi {
             basePath = null;
         }
 
-        Object localVarPostBody = dbtGenerateTmlRequest;
+        Object localVarPostBody = null;
 
         // create path and map variables
         String localVarPath = "/api/rest/2.0/dbt/generate-tml";
@@ -3993,13 +4202,33 @@ public class ThoughtSpotRestApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
+        if (dbtConnectionIdentifier != null) {
+            localVarFormParams.put("dbt_connection_identifier", dbtConnectionIdentifier);
+        }
+
+        if (modelTables != null) {
+            localVarFormParams.put("model_tables", modelTables);
+        }
+
+        if (importWorksheets != null) {
+            localVarFormParams.put("import_worksheets", importWorksheets);
+        }
+
+        if (worksheets != null) {
+            localVarFormParams.put("worksheets", worksheets);
+        }
+
+        if (fileContent != null) {
+            localVarFormParams.put("file_content", fileContent);
+        }
+
         final String[] localVarAccepts = {"application/json"};
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
             localVarHeaderParams.put("Accept", localVarAccept);
         }
 
-        final String[] localVarContentTypes = {"application/json"};
+        final String[] localVarContentTypes = {"multipart/form-data"};
         final String localVarContentType =
                 localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
@@ -4023,16 +4252,41 @@ public class ThoughtSpotRestApi {
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call dbtGenerateTmlValidateBeforeCall(
-            DbtGenerateTmlRequest dbtGenerateTmlRequest, final ApiCallback _callback)
+            String dbtConnectionIdentifier,
+            String modelTables,
+            String importWorksheets,
+            String worksheets,
+            File fileContent,
+            final ApiCallback _callback)
             throws ApiException {
-        // verify the required parameter 'dbtGenerateTmlRequest' is set
-        if (dbtGenerateTmlRequest == null) {
+        // verify the required parameter 'dbtConnectionIdentifier' is set
+        if (dbtConnectionIdentifier == null) {
             throw new ApiException(
-                    "Missing the required parameter 'dbtGenerateTmlRequest' when calling"
+                    "Missing the required parameter 'dbtConnectionIdentifier' when calling"
                             + " dbtGenerateTml(Async)");
         }
 
-        return dbtGenerateTmlCall(dbtGenerateTmlRequest, _callback);
+        // verify the required parameter 'modelTables' is set
+        if (modelTables == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'modelTables' when calling"
+                            + " dbtGenerateTml(Async)");
+        }
+
+        // verify the required parameter 'importWorksheets' is set
+        if (importWorksheets == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'importWorksheets' when calling"
+                            + " dbtGenerateTml(Async)");
+        }
+
+        return dbtGenerateTmlCall(
+                dbtConnectionIdentifier,
+                modelTables,
+                importWorksheets,
+                worksheets,
+                fileContent,
+                _callback);
     }
 
     /**
@@ -4048,7 +4302,15 @@ public class ThoughtSpotRestApi {
      * generate TML Models and Worksheets to be imported can be selected by the user as part of the
      * API.
      *
-     * @param dbtGenerateTmlRequest (required)
+     * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
+     * @param modelTables List of Models and their respective Tables Example:
+     *     &#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;,
+     *     \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]&#39; (required)
+     * @param importWorksheets Mention the worksheet tmls to import (required)
+     * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED
+     *     Example: [\\\&quot;worksheet_name\\\&quot;] (optional)
+     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
+     *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
      * @return Object
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -4063,8 +4325,20 @@ public class ThoughtSpotRestApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public Object dbtGenerateTml(DbtGenerateTmlRequest dbtGenerateTmlRequest) throws ApiException {
-        ApiResponse<Object> localVarResp = dbtGenerateTmlWithHttpInfo(dbtGenerateTmlRequest);
+    public Object dbtGenerateTml(
+            String dbtConnectionIdentifier,
+            String modelTables,
+            String importWorksheets,
+            String worksheets,
+            File fileContent)
+            throws ApiException {
+        ApiResponse<Object> localVarResp =
+                dbtGenerateTmlWithHttpInfo(
+                        dbtConnectionIdentifier,
+                        modelTables,
+                        importWorksheets,
+                        worksheets,
+                        fileContent);
         return localVarResp.getData();
     }
 
@@ -4081,7 +4355,15 @@ public class ThoughtSpotRestApi {
      * generate TML Models and Worksheets to be imported can be selected by the user as part of the
      * API.
      *
-     * @param dbtGenerateTmlRequest (required)
+     * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
+     * @param modelTables List of Models and their respective Tables Example:
+     *     &#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;,
+     *     \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]&#39; (required)
+     * @param importWorksheets Mention the worksheet tmls to import (required)
+     * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED
+     *     Example: [\\\&quot;worksheet_name\\\&quot;] (optional)
+     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
+     *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
      * @return ApiResponse&lt;Object&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -4097,8 +4379,20 @@ public class ThoughtSpotRestApi {
      * </table>
      */
     public ApiResponse<Object> dbtGenerateTmlWithHttpInfo(
-            DbtGenerateTmlRequest dbtGenerateTmlRequest) throws ApiException {
-        okhttp3.Call localVarCall = dbtGenerateTmlValidateBeforeCall(dbtGenerateTmlRequest, null);
+            String dbtConnectionIdentifier,
+            String modelTables,
+            String importWorksheets,
+            String worksheets,
+            File fileContent)
+            throws ApiException {
+        okhttp3.Call localVarCall =
+                dbtGenerateTmlValidateBeforeCall(
+                        dbtConnectionIdentifier,
+                        modelTables,
+                        importWorksheets,
+                        worksheets,
+                        fileContent,
+                        null);
         Type localVarReturnType = new TypeToken<Object>() {}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -4116,7 +4410,15 @@ public class ThoughtSpotRestApi {
      * generate TML Models and Worksheets to be imported can be selected by the user as part of the
      * API.
      *
-     * @param dbtGenerateTmlRequest (required)
+     * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
+     * @param modelTables List of Models and their respective Tables Example:
+     *     &#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;,
+     *     \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]&#39; (required)
+     * @param importWorksheets Mention the worksheet tmls to import (required)
+     * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED
+     *     Example: [\\\&quot;worksheet_name\\\&quot;] (optional)
+     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
+     *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body
@@ -4133,11 +4435,22 @@ public class ThoughtSpotRestApi {
      * </table>
      */
     public okhttp3.Call dbtGenerateTmlAsync(
-            DbtGenerateTmlRequest dbtGenerateTmlRequest, final ApiCallback<Object> _callback)
+            String dbtConnectionIdentifier,
+            String modelTables,
+            String importWorksheets,
+            String worksheets,
+            File fileContent,
+            final ApiCallback<Object> _callback)
             throws ApiException {
 
         okhttp3.Call localVarCall =
-                dbtGenerateTmlValidateBeforeCall(dbtGenerateTmlRequest, _callback);
+                dbtGenerateTmlValidateBeforeCall(
+                        dbtConnectionIdentifier,
+                        modelTables,
+                        importWorksheets,
+                        worksheets,
+                        fileContent,
+                        _callback);
         Type localVarReturnType = new TypeToken<Object>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -7098,10 +7411,7 @@ public class ThoughtSpotRestApi {
      * in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with
      * tables. Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
-     * to apply to the Answer data. The &#x60;record_size&#x60; attribute determines the number of
-     * records to retrieve in an API call. For more information about pagination, record size, and
-     * maximum row limit, see [Pagination and record size
-     * settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
+     * to apply to the Answer data.
      *
      * @param exportAnswerReportRequest (required)
      * @return File
@@ -7133,10 +7443,7 @@ public class ThoughtSpotRestApi {
      * in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with
      * tables. Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
-     * to apply to the Answer data. The &#x60;record_size&#x60; attribute determines the number of
-     * records to retrieve in an API call. For more information about pagination, record size, and
-     * maximum row limit, see [Pagination and record size
-     * settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
+     * to apply to the Answer data.
      *
      * @param exportAnswerReportRequest (required)
      * @return ApiResponse&lt;File&gt;
@@ -7170,10 +7477,7 @@ public class ThoughtSpotRestApi {
      * typing in the relevant extension. * HTML rendering is not supported for PDF exports of
      * Answers with tables. Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
-     * to apply to the Answer data. The &#x60;record_size&#x60; attribute determines the number of
-     * records to retrieve in an API call. For more information about pagination, record size, and
-     * maximum row limit, see [Pagination and record size
-     * settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
+     * to apply to the Answer data.
      *
      * @param exportAnswerReportRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -7305,6 +7609,11 @@ public class ThoughtSpotRestApi {
      * successful execution, the API returns the report with unsaved changes, including ad hoc
      * changes to visualizations. For more information, see [Liveboard Report
      * API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
+     * **NOTE**: Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in
+     * the PNG format in the resolution of your choice. To enable this on your instance, contact
+     * ThoughtSpot support. When this feature is enabled, the options
+     * &#x60;include_cover_page&#x60;,&#x60;include_filter_page&#x60; within the
+     * &#x60;png_options&#x60; will not be available for PNG exports.
      *
      * @param exportLiveboardReportRequest (required)
      * @return File
@@ -7345,6 +7654,11 @@ public class ThoughtSpotRestApi {
      * successful execution, the API returns the report with unsaved changes, including ad hoc
      * changes to visualizations. For more information, see [Liveboard Report
      * API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
+     * **NOTE**: Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in
+     * the PNG format in the resolution of your choice. To enable this on your instance, contact
+     * ThoughtSpot support. When this feature is enabled, the options
+     * &#x60;include_cover_page&#x60;,&#x60;include_filter_page&#x60; within the
+     * &#x60;png_options&#x60; will not be available for PNG exports.
      *
      * @param exportLiveboardReportRequest (required)
      * @return ApiResponse&lt;File&gt;
@@ -7386,6 +7700,11 @@ public class ThoughtSpotRestApi {
      * successful execution, the API returns the report with unsaved changes, including ad hoc
      * changes to visualizations. For more information, see [Liveboard Report
      * API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
+     * **NOTE**: Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in
+     * the PNG format in the resolution of your choice. To enable this on your instance, contact
+     * ThoughtSpot support. When this feature is enabled, the options
+     * &#x60;include_cover_page&#x60;,&#x60;include_filter_page&#x60; within the
+     * &#x60;png_options&#x60; will not be available for PNG exports.
      *
      * @param exportLiveboardReportRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -9947,10 +10266,10 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 9.0.0.cl or later Gets session information for the currently logged-in user. This
-     * API does not require any parameters to be passed in the request. Any ThoughtSpot user can
-     * access this endpoint and send an API request. The data returned in the API response varies
-     * according to user&#39;s privilege and object access permissions.
+     * Version: 9.0.0.cl or later Retrieves details of the current user session for the token
+     * provided in the request header. Any ThoughtSpot user can access this endpoint and send an API
+     * request. The data returned in the API response varies according to user&#39;s privilege and
+     * object access permissions.
      *
      * @return User
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -9972,10 +10291,10 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 9.0.0.cl or later Gets session information for the currently logged-in user. This
-     * API does not require any parameters to be passed in the request. Any ThoughtSpot user can
-     * access this endpoint and send an API request. The data returned in the API response varies
-     * according to user&#39;s privilege and object access permissions.
+     * Version: 9.0.0.cl or later Retrieves details of the current user session for the token
+     * provided in the request header. Any ThoughtSpot user can access this endpoint and send an API
+     * request. The data returned in the API response varies according to user&#39;s privilege and
+     * object access permissions.
      *
      * @return ApiResponse&lt;User&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -9998,10 +10317,10 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 9.0.0.cl or later Gets session information for the currently
-     * logged-in user. This API does not require any parameters to be passed in the request. Any
-     * ThoughtSpot user can access this endpoint and send an API request. The data returned in the
-     * API response varies according to user&#39;s privilege and object access permissions.
+     * (asynchronously) Version: 9.0.0.cl or later Retrieves details of the current user session for
+     * the token provided in the request header. Any ThoughtSpot user can access this endpoint and
+     * send an API request. The data returned in the API response varies according to user&#39;s
+     * privilege and object access permissions.
      *
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -10103,10 +10422,12 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Get token for the currently logged-in user. Version: 9.4.0.cl or later Gets token details for
-     * the currently logged-in user. You can use this endpoint to obtain the token associated with
-     * the user&#39;s session. This API does not require any parameters to be passed in the request.
-     * Any ThoughtSpot user can access this endpoint and send an API request.
+     * Version: 9.4.0.cl or later Retrieves details of the current session token for the bearer
+     * token provided in the request header. This API endpoint does not create a new token. Instead,
+     * it returns details about the token, including the token string, creation time, expiration
+     * time, and the associated user. Use this endpoint to introspect your current session token,
+     * debug authentication issues, or when a frontend application needs session token details. Any
+     * ThoughtSpot user with a valid bearer token can access this endpoint and send an API request
      *
      * @return GetTokenResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -10128,10 +10449,12 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Get token for the currently logged-in user. Version: 9.4.0.cl or later Gets token details for
-     * the currently logged-in user. You can use this endpoint to obtain the token associated with
-     * the user&#39;s session. This API does not require any parameters to be passed in the request.
-     * Any ThoughtSpot user can access this endpoint and send an API request.
+     * Version: 9.4.0.cl or later Retrieves details of the current session token for the bearer
+     * token provided in the request header. This API endpoint does not create a new token. Instead,
+     * it returns details about the token, including the token string, creation time, expiration
+     * time, and the associated user. Use this endpoint to introspect your current session token,
+     * debug authentication issues, or when a frontend application needs session token details. Any
+     * ThoughtSpot user with a valid bearer token can access this endpoint and send an API request
      *
      * @return ApiResponse&lt;GetTokenResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -10154,10 +10477,13 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Get token for the currently logged-in user. Version: 9.4.0.cl or later Gets
-     * token details for the currently logged-in user. You can use this endpoint to obtain the token
-     * associated with the user&#39;s session. This API does not require any parameters to be passed
-     * in the request. Any ThoughtSpot user can access this endpoint and send an API request.
+     * (asynchronously) Version: 9.4.0.cl or later Retrieves details of the current session token
+     * for the bearer token provided in the request header. This API endpoint does not create a new
+     * token. Instead, it returns details about the token, including the token string, creation
+     * time, expiration time, and the associated user. Use this endpoint to introspect your current
+     * session token, debug authentication issues, or when a frontend application needs session
+     * token details. Any ThoughtSpot user with a valid bearer token can access this endpoint and
+     * send an API request
      *
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -10300,8 +10626,7 @@ public class ThoughtSpotRestApi {
      * persist on a specific set of objects for user sessions initiated using the token. Once
      * defined, the rules are added to the user&#39;s &#x60;access_control_properties&#x60; object,
      * after which all sessions will use the persisted values. Specify the object type as
-     * &#x60;LOGICAL_TABLE&#x60;. The &#x60;LIVEBOARD&#x60; and &#x60;ANSWER&#x60; object types are
-     * not supported. For more information, see [ABAC via tokens
+     * &#x60;LOGICAL_TABLE&#x60;. For more information, see [ABAC via tokens
      * Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).
      * ##### Just-in-time provisioning For just-in-time user creation and provisioning, define the
      * following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
@@ -10309,7 +10634,9 @@ public class ThoughtSpotRestApi {
      * to &#x60;true&#x60; if the user is not available in ThoughtSpot. If the user already exists
      * in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60; in the
      * API request, the user properties such as the display name, email, Org and group assignment
-     * will not be updated with new values. For more information, see [Just-in-time
+     * will not be updated with new values. If &#x60;auto_create&#x60; is set to &#x60;true&#x60;,
+     * it won&#39;t create formula variables and hence won&#39;t be applicable for
+     * &#x60;variable_values&#x60;. For more information, see [Just-in-time
      * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). #####
      * Important point to note All options in the token creation APIs that define access to the
      * content in ThoughtSpot will do so during the token creation and not when the token is being
@@ -10317,7 +10644,13 @@ public class ThoughtSpotRestApi {
      * the authentication token is created. Persist options such as &#x60;APPEND&#x60;,
      * &#x60;REPLACE&#x60;, &#x60;RESET&#x60; will persist security parameters on the user profile
      * when the token is created, while Persist option &#x60;NONE&#x60; will not persist anything
-     * but will be honoured in the session.
+     * but will be honoured in the session. ##### Formula Variables Before using variables_values,
+     * variables must be created using Create Variable API with type as Formula_Variable
+     * (/api/rest/2.0/template/variables/create) The persist_option RESET and NONE cannot be used
+     * when variable_values are provided in the request. If you are working with variable_values,
+     * you must use other (APPEND, REPLACE) supported modes. If you want to use RESET or NONE, do
+     * not pass any variable_values. In such cases, variable_values will remain unaffected. When
+     * using object_id with variable_values, models are supported.
      *
      * @param getCustomAccessTokenRequest (required)
      * @return AccessToken
@@ -10372,8 +10705,7 @@ public class ThoughtSpotRestApi {
      * persist on a specific set of objects for user sessions initiated using the token. Once
      * defined, the rules are added to the user&#39;s &#x60;access_control_properties&#x60; object,
      * after which all sessions will use the persisted values. Specify the object type as
-     * &#x60;LOGICAL_TABLE&#x60;. The &#x60;LIVEBOARD&#x60; and &#x60;ANSWER&#x60; object types are
-     * not supported. For more information, see [ABAC via tokens
+     * &#x60;LOGICAL_TABLE&#x60;. For more information, see [ABAC via tokens
      * Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).
      * ##### Just-in-time provisioning For just-in-time user creation and provisioning, define the
      * following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
@@ -10381,7 +10713,9 @@ public class ThoughtSpotRestApi {
      * to &#x60;true&#x60; if the user is not available in ThoughtSpot. If the user already exists
      * in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60; in the
      * API request, the user properties such as the display name, email, Org and group assignment
-     * will not be updated with new values. For more information, see [Just-in-time
+     * will not be updated with new values. If &#x60;auto_create&#x60; is set to &#x60;true&#x60;,
+     * it won&#39;t create formula variables and hence won&#39;t be applicable for
+     * &#x60;variable_values&#x60;. For more information, see [Just-in-time
      * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). #####
      * Important point to note All options in the token creation APIs that define access to the
      * content in ThoughtSpot will do so during the token creation and not when the token is being
@@ -10389,7 +10723,13 @@ public class ThoughtSpotRestApi {
      * the authentication token is created. Persist options such as &#x60;APPEND&#x60;,
      * &#x60;REPLACE&#x60;, &#x60;RESET&#x60; will persist security parameters on the user profile
      * when the token is created, while Persist option &#x60;NONE&#x60; will not persist anything
-     * but will be honoured in the session.
+     * but will be honoured in the session. ##### Formula Variables Before using variables_values,
+     * variables must be created using Create Variable API with type as Formula_Variable
+     * (/api/rest/2.0/template/variables/create) The persist_option RESET and NONE cannot be used
+     * when variable_values are provided in the request. If you are working with variable_values,
+     * you must use other (APPEND, REPLACE) supported modes. If you want to use RESET or NONE, do
+     * not pass any variable_values. In such cases, variable_values will remain unaffected. When
+     * using object_id with variable_values, models are supported.
      *
      * @param getCustomAccessTokenRequest (required)
      * @return ApiResponse&lt;AccessToken&gt;
@@ -10445,8 +10785,7 @@ public class ThoughtSpotRestApi {
      * persist on a specific set of objects for user sessions initiated using the token. Once
      * defined, the rules are added to the user&#39;s &#x60;access_control_properties&#x60; object,
      * after which all sessions will use the persisted values. Specify the object type as
-     * &#x60;LOGICAL_TABLE&#x60;. The &#x60;LIVEBOARD&#x60; and &#x60;ANSWER&#x60; object types are
-     * not supported. For more information, see [ABAC via tokens
+     * &#x60;LOGICAL_TABLE&#x60;. For more information, see [ABAC via tokens
      * Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).
      * ##### Just-in-time provisioning For just-in-time user creation and provisioning, define the
      * following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
@@ -10454,7 +10793,9 @@ public class ThoughtSpotRestApi {
      * to &#x60;true&#x60; if the user is not available in ThoughtSpot. If the user already exists
      * in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60; in the
      * API request, the user properties such as the display name, email, Org and group assignment
-     * will not be updated with new values. For more information, see [Just-in-time
+     * will not be updated with new values. If &#x60;auto_create&#x60; is set to &#x60;true&#x60;,
+     * it won&#39;t create formula variables and hence won&#39;t be applicable for
+     * &#x60;variable_values&#x60;. For more information, see [Just-in-time
      * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). #####
      * Important point to note All options in the token creation APIs that define access to the
      * content in ThoughtSpot will do so during the token creation and not when the token is being
@@ -10462,7 +10803,13 @@ public class ThoughtSpotRestApi {
      * the authentication token is created. Persist options such as &#x60;APPEND&#x60;,
      * &#x60;REPLACE&#x60;, &#x60;RESET&#x60; will persist security parameters on the user profile
      * when the token is created, while Persist option &#x60;NONE&#x60; will not persist anything
-     * but will be honoured in the session.
+     * but will be honoured in the session. ##### Formula Variables Before using variables_values,
+     * variables must be created using Create Variable API with type as Formula_Variable
+     * (/api/rest/2.0/template/variables/create) The persist_option RESET and NONE cannot be used
+     * when variable_values are provided in the request. If you are working with variable_values,
+     * you must use other (APPEND, REPLACE) supported modes. If you want to use RESET or NONE, do
+     * not pass any variable_values. In such cases, variable_values will remain unaffected. When
+     * using object_id with variable_values, models are supported.
      *
      * @param getCustomAccessTokenRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -11405,7 +11752,7 @@ public class ThoughtSpotRestApi {
      * settings**) privilege is required. This API does not require any parameters to be passed in
      * the request.
      *
-     * @return Object
+     * @return SystemOverrideInfo
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
      * @http.response.details
@@ -11419,8 +11766,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public Object getSystemOverrideInfo() throws ApiException {
-        ApiResponse<Object> localVarResp = getSystemOverrideInfoWithHttpInfo();
+    public SystemOverrideInfo getSystemOverrideInfo() throws ApiException {
+        ApiResponse<SystemOverrideInfo> localVarResp = getSystemOverrideInfoWithHttpInfo();
         return localVarResp.getData();
     }
 
@@ -11432,7 +11779,7 @@ public class ThoughtSpotRestApi {
      * settings**) privilege is required. This API does not require any parameters to be passed in
      * the request.
      *
-     * @return ApiResponse&lt;Object&gt;
+     * @return ApiResponse&lt;SystemOverrideInfo&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
      * @http.response.details
@@ -11446,9 +11793,9 @@ public class ThoughtSpotRestApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public ApiResponse<Object> getSystemOverrideInfoWithHttpInfo() throws ApiException {
+    public ApiResponse<SystemOverrideInfo> getSystemOverrideInfoWithHttpInfo() throws ApiException {
         okhttp3.Call localVarCall = getSystemOverrideInfoValidateBeforeCall(null);
-        Type localVarReturnType = new TypeToken<Object>() {}.getType();
+        Type localVarReturnType = new TypeToken<SystemOverrideInfo>() {}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -11475,11 +11822,11 @@ public class ThoughtSpotRestApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public okhttp3.Call getSystemOverrideInfoAsync(final ApiCallback<Object> _callback)
+    public okhttp3.Call getSystemOverrideInfoAsync(final ApiCallback<SystemOverrideInfo> _callback)
             throws ApiException {
 
         okhttp3.Call localVarCall = getSystemOverrideInfoValidateBeforeCall(_callback);
-        Type localVarReturnType = new TypeToken<Object>() {}.getType();
+        Type localVarReturnType = new TypeToken<SystemOverrideInfo>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -12661,7 +13008,10 @@ public class ThoughtSpotRestApi {
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call queryGetDecomposedQueryCall(
             QueryGetDecomposedQueryRequest queryGetDecomposedQueryRequest,
             final ApiCallback _callback)
@@ -12718,6 +13068,7 @@ public class ThoughtSpotRestApi {
                 _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call queryGetDecomposedQueryValidateBeforeCall(
             QueryGetDecomposedQueryRequest queryGetDecomposedQueryRequest,
@@ -12749,7 +13100,10 @@ public class ThoughtSpotRestApi {
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public EurekaDecomposeQueryResponse queryGetDecomposedQuery(
             QueryGetDecomposedQueryRequest queryGetDecomposedQueryRequest) throws ApiException {
         ApiResponse<EurekaDecomposeQueryResponse> localVarResp =
@@ -12773,7 +13127,10 @@ public class ThoughtSpotRestApi {
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public ApiResponse<EurekaDecomposeQueryResponse> queryGetDecomposedQueryWithHttpInfo(
             QueryGetDecomposedQueryRequest queryGetDecomposedQueryRequest) throws ApiException {
         okhttp3.Call localVarCall =
@@ -12799,7 +13156,10 @@ public class ThoughtSpotRestApi {
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call queryGetDecomposedQueryAsync(
             QueryGetDecomposedQueryRequest queryGetDecomposedQueryRequest,
             final ApiCallback<EurekaDecomposeQueryResponse> _callback)
@@ -13846,16 +14206,34 @@ public class ThoughtSpotRestApi {
      * fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth
      * authentication type. - &#x60;IAM&#x60;: For connections that have the IAM OAuth set up. This
      * authentication type is supported on Amazon Redshift connections only. - &#x60;EXTOAUTH&#x60;:
-     * For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with
+     * For connections that have External OAuth set up. ThoughtSpot supports external [OAuth with
      * Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/
      * connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data
      * connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). -
-     * To include more details about connection objects in the API response, set
-     * &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort the output by field
-     * names and filter connections by tags. **NOTE**: When filtering connection records by
-     * parameters other than &#x60;data_warehouse_types&#x60; or &#x60;tag_identifiers&#x60;, ensure
-     * that you set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to
-     * &#x60;0&#x60; for precise results.
+     * &#x60;KEY_PAIR&#x60;: For connections that require Key Pair account credentials to
+     * authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
+     * supported on Snowflake connections only. - &#x60;OAUTH_WITH_PKCE&#x60;: For connections that
+     * require OAuth with PKCE account credentials to authenticate to the Cloud Data Warehouse and
+     * fetch data. This authentication type is supported on Snowflake, Starburst, Databricks, Denodo
+     * connections only. - &#x60;EXTOAUTH_WITH_PKCE&#x60;: For connections that require External
+     * OAuth With PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch
+     * data. This authentication type is supported on Snowflake connections only. -
+     * &#x60;OAUTH_WITH_PEZ&#x60;: For connections that require OAuth With PEZ account credentials
+     * to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
+     * supported on Amazon Redshift connections only. - &#x60;OAUTH_WITH_SERVICE_PRINCIPAL&#x60;:
+     * For connections that require OAuth With Service Principal account credentials to authenticate
+     * to the Cloud Data Warehouse and fetch data. This authentication type is supported on
+     * Databricks connections only. - &#x60;PERSONAL_ACCESS_TOKEN&#x60;: For connections that
+     * require Personal Access Token account credentials to authenticate to the Cloud Data Warehouse
+     * and fetch data. This authentication type is supported on Databricks connections only. -
+     * &#x60;OAUTH_CLIENT_CREDENTIALS&#x60;: For connections that require OAuth Client Credentials
+     * to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
+     * supported on Snowflake connections only. - To include more details about connection objects
+     * in the API response, set &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort
+     * the output by field names and filter connections by tags. **NOTE**: When filtering connection
+     * records by parameters other than &#x60;data_warehouse_types&#x60; or
+     * &#x60;tag_identifiers&#x60;, ensure that you set &#x60;record_size&#x60; to &#x60;-1&#x60;
+     * and &#x60;record_offset&#x60; to &#x60;0&#x60; for precise results.
      *
      * @param searchConnectionRequest (required)
      * @return List&lt;SearchConnectionResponse&gt;
@@ -13919,16 +14297,34 @@ public class ThoughtSpotRestApi {
      * fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth
      * authentication type. - &#x60;IAM&#x60;: For connections that have the IAM OAuth set up. This
      * authentication type is supported on Amazon Redshift connections only. - &#x60;EXTOAUTH&#x60;:
-     * For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with
+     * For connections that have External OAuth set up. ThoughtSpot supports external [OAuth with
      * Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/
      * connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data
      * connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). -
-     * To include more details about connection objects in the API response, set
-     * &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort the output by field
-     * names and filter connections by tags. **NOTE**: When filtering connection records by
-     * parameters other than &#x60;data_warehouse_types&#x60; or &#x60;tag_identifiers&#x60;, ensure
-     * that you set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to
-     * &#x60;0&#x60; for precise results.
+     * &#x60;KEY_PAIR&#x60;: For connections that require Key Pair account credentials to
+     * authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
+     * supported on Snowflake connections only. - &#x60;OAUTH_WITH_PKCE&#x60;: For connections that
+     * require OAuth with PKCE account credentials to authenticate to the Cloud Data Warehouse and
+     * fetch data. This authentication type is supported on Snowflake, Starburst, Databricks, Denodo
+     * connections only. - &#x60;EXTOAUTH_WITH_PKCE&#x60;: For connections that require External
+     * OAuth With PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch
+     * data. This authentication type is supported on Snowflake connections only. -
+     * &#x60;OAUTH_WITH_PEZ&#x60;: For connections that require OAuth With PEZ account credentials
+     * to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
+     * supported on Amazon Redshift connections only. - &#x60;OAUTH_WITH_SERVICE_PRINCIPAL&#x60;:
+     * For connections that require OAuth With Service Principal account credentials to authenticate
+     * to the Cloud Data Warehouse and fetch data. This authentication type is supported on
+     * Databricks connections only. - &#x60;PERSONAL_ACCESS_TOKEN&#x60;: For connections that
+     * require Personal Access Token account credentials to authenticate to the Cloud Data Warehouse
+     * and fetch data. This authentication type is supported on Databricks connections only. -
+     * &#x60;OAUTH_CLIENT_CREDENTIALS&#x60;: For connections that require OAuth Client Credentials
+     * to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
+     * supported on Snowflake connections only. - To include more details about connection objects
+     * in the API response, set &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort
+     * the output by field names and filter connections by tags. **NOTE**: When filtering connection
+     * records by parameters other than &#x60;data_warehouse_types&#x60; or
+     * &#x60;tag_identifiers&#x60;, ensure that you set &#x60;record_size&#x60; to &#x60;-1&#x60;
+     * and &#x60;record_offset&#x60; to &#x60;0&#x60; for precise results.
      *
      * @param searchConnectionRequest (required)
      * @return ApiResponse&lt;List&lt;SearchConnectionResponse&gt;&gt;
@@ -13993,16 +14389,34 @@ public class ThoughtSpotRestApi {
      * fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth
      * authentication type. - &#x60;IAM&#x60;: For connections that have the IAM OAuth set up. This
      * authentication type is supported on Amazon Redshift connections only. - &#x60;EXTOAUTH&#x60;:
-     * For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with
+     * For connections that have External OAuth set up. ThoughtSpot supports external [OAuth with
      * Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/
      * connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data
      * connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). -
-     * To include more details about connection objects in the API response, set
-     * &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort the output by field
-     * names and filter connections by tags. **NOTE**: When filtering connection records by
-     * parameters other than &#x60;data_warehouse_types&#x60; or &#x60;tag_identifiers&#x60;, ensure
-     * that you set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to
-     * &#x60;0&#x60; for precise results.
+     * &#x60;KEY_PAIR&#x60;: For connections that require Key Pair account credentials to
+     * authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
+     * supported on Snowflake connections only. - &#x60;OAUTH_WITH_PKCE&#x60;: For connections that
+     * require OAuth with PKCE account credentials to authenticate to the Cloud Data Warehouse and
+     * fetch data. This authentication type is supported on Snowflake, Starburst, Databricks, Denodo
+     * connections only. - &#x60;EXTOAUTH_WITH_PKCE&#x60;: For connections that require External
+     * OAuth With PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch
+     * data. This authentication type is supported on Snowflake connections only. -
+     * &#x60;OAUTH_WITH_PEZ&#x60;: For connections that require OAuth With PEZ account credentials
+     * to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
+     * supported on Amazon Redshift connections only. - &#x60;OAUTH_WITH_SERVICE_PRINCIPAL&#x60;:
+     * For connections that require OAuth With Service Principal account credentials to authenticate
+     * to the Cloud Data Warehouse and fetch data. This authentication type is supported on
+     * Databricks connections only. - &#x60;PERSONAL_ACCESS_TOKEN&#x60;: For connections that
+     * require Personal Access Token account credentials to authenticate to the Cloud Data Warehouse
+     * and fetch data. This authentication type is supported on Databricks connections only. -
+     * &#x60;OAUTH_CLIENT_CREDENTIALS&#x60;: For connections that require OAuth Client Credentials
+     * to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
+     * supported on Snowflake connections only. - To include more details about connection objects
+     * in the API response, set &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort
+     * the output by field names and filter connections by tags. **NOTE**: When filtering connection
+     * records by parameters other than &#x60;data_warehouse_types&#x60; or
+     * &#x60;tag_identifiers&#x60;, ensure that you set &#x60;record_size&#x60; to &#x60;-1&#x60;
+     * and &#x60;record_offset&#x60; to &#x60;0&#x60; for precise results.
      *
      * @param searchConnectionRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -14505,7 +14919,10 @@ public class ThoughtSpotRestApi {
      * all metadata objects, including users and groups. #### Usage guidelines - To get all metadata
      * objects, send the API request without any attributes. - To get metadata objects of a specific
      * type, set the &#x60;type&#x60; attribute. For example, to fetch a Worksheet, set the type as
-     * &#x60;LOGICAL_TABLE&#x60;. - To get a specific metadata object, specify the GUID. - To
+     * &#x60;LOGICAL_TABLE&#x60;. - To filter metadata objects within type
+     * &#x60;LOGICAL_TABLE&#x60;, set the &#x60;subtypes&#x60; attribute. For example, to fetch a
+     * Worksheet, set the type as &#x60;LOGICAL_TABLE&#x60; &amp; subtypes as
+     * &#x60;[WORKSHEET]&#x60;. - To get a specific metadata object, specify the GUID. - To
      * customize your search and filter the API response, you can use several parameters. You can
      * search for objects created or modified by specific users, by tags applied to the objects, or
      * by using the include parameters like &#x60;include_auto_created_objects&#x60;,
@@ -14513,12 +14930,17 @@ public class ThoughtSpotRestApi {
      * &#x60;include_incomplete_objects&#x60;, and so on. You can also define sorting options to
      * sort the data retrieved in the API response. - To get discoverable objects when linientmodel
      * is enabled you can use &#x60;include_discoverable_objects&#x60; as true else false. Default
-     * value is true. **NOTE**: The following parameters support pagination of metadata records: -
-     * &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;created_by_user_identifiers&#x60; -
-     * &#x60;modified_by_user_identifiers&#x60; - &#x60;owned_by_user_identifiers&#x60; -
-     * &#x60;exclude_objects&#x60; - &#x60;include_auto_created_objects&#x60; -
-     * &#x60;favorite_object_options&#x60; If you are using other parameters to search metadata, set
-     * &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60;.
+     * value is true. - For liveboard metadata type, to get the newer format, set the
+     * &#x60;liveboard_response_format&#x60; as V2. Default value is V1. - To retrieve only objects
+     * that are published, set the &#x60;include_only_published_objects&#x60; as true. Default value
+     * is false. **NOTE**: The following parameters support pagination of metadata records: -
+     * &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;subtypes&#x60; -
+     * &#x60;created_by_user_identifiers&#x60; - &#x60;modified_by_user_identifiers&#x60; -
+     * &#x60;owned_by_user_identifiers&#x60; - &#x60;exclude_objects&#x60; -
+     * &#x60;include_auto_created_objects&#x60; - &#x60;favorite_object_options&#x60; -
+     * &#x60;include_only_published_objects&#x60; If you are using other parameters to search
+     * metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to
+     * &#x60;0&#x60;.
      *
      * @param searchMetadataRequest (required)
      * @return List&lt;MetadataSearchResponse&gt;
@@ -14549,7 +14971,10 @@ public class ThoughtSpotRestApi {
      * all metadata objects, including users and groups. #### Usage guidelines - To get all metadata
      * objects, send the API request without any attributes. - To get metadata objects of a specific
      * type, set the &#x60;type&#x60; attribute. For example, to fetch a Worksheet, set the type as
-     * &#x60;LOGICAL_TABLE&#x60;. - To get a specific metadata object, specify the GUID. - To
+     * &#x60;LOGICAL_TABLE&#x60;. - To filter metadata objects within type
+     * &#x60;LOGICAL_TABLE&#x60;, set the &#x60;subtypes&#x60; attribute. For example, to fetch a
+     * Worksheet, set the type as &#x60;LOGICAL_TABLE&#x60; &amp; subtypes as
+     * &#x60;[WORKSHEET]&#x60;. - To get a specific metadata object, specify the GUID. - To
      * customize your search and filter the API response, you can use several parameters. You can
      * search for objects created or modified by specific users, by tags applied to the objects, or
      * by using the include parameters like &#x60;include_auto_created_objects&#x60;,
@@ -14557,12 +14982,17 @@ public class ThoughtSpotRestApi {
      * &#x60;include_incomplete_objects&#x60;, and so on. You can also define sorting options to
      * sort the data retrieved in the API response. - To get discoverable objects when linientmodel
      * is enabled you can use &#x60;include_discoverable_objects&#x60; as true else false. Default
-     * value is true. **NOTE**: The following parameters support pagination of metadata records: -
-     * &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;created_by_user_identifiers&#x60; -
-     * &#x60;modified_by_user_identifiers&#x60; - &#x60;owned_by_user_identifiers&#x60; -
-     * &#x60;exclude_objects&#x60; - &#x60;include_auto_created_objects&#x60; -
-     * &#x60;favorite_object_options&#x60; If you are using other parameters to search metadata, set
-     * &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60;.
+     * value is true. - For liveboard metadata type, to get the newer format, set the
+     * &#x60;liveboard_response_format&#x60; as V2. Default value is V1. - To retrieve only objects
+     * that are published, set the &#x60;include_only_published_objects&#x60; as true. Default value
+     * is false. **NOTE**: The following parameters support pagination of metadata records: -
+     * &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;subtypes&#x60; -
+     * &#x60;created_by_user_identifiers&#x60; - &#x60;modified_by_user_identifiers&#x60; -
+     * &#x60;owned_by_user_identifiers&#x60; - &#x60;exclude_objects&#x60; -
+     * &#x60;include_auto_created_objects&#x60; - &#x60;favorite_object_options&#x60; -
+     * &#x60;include_only_published_objects&#x60; If you are using other parameters to search
+     * metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to
+     * &#x60;0&#x60;.
      *
      * @param searchMetadataRequest (required)
      * @return ApiResponse&lt;List&lt;MetadataSearchResponse&gt;&gt;
@@ -14593,21 +15023,28 @@ public class ThoughtSpotRestApi {
      * view data for all metadata objects, including users and groups. #### Usage guidelines - To
      * get all metadata objects, send the API request without any attributes. - To get metadata
      * objects of a specific type, set the &#x60;type&#x60; attribute. For example, to fetch a
-     * Worksheet, set the type as &#x60;LOGICAL_TABLE&#x60;. - To get a specific metadata object,
-     * specify the GUID. - To customize your search and filter the API response, you can use several
-     * parameters. You can search for objects created or modified by specific users, by tags applied
-     * to the objects, or by using the include parameters like
-     * &#x60;include_auto_created_objects&#x60;, &#x60;include_dependent_objects&#x60;,
-     * &#x60;include_headers&#x60;, &#x60;include_incomplete_objects&#x60;, and so on. You can also
-     * define sorting options to sort the data retrieved in the API response. - To get discoverable
-     * objects when linientmodel is enabled you can use &#x60;include_discoverable_objects&#x60; as
-     * true else false. Default value is true. **NOTE**: The following parameters support pagination
-     * of metadata records: - &#x60;tag_identifiers&#x60; - &#x60;type&#x60; -
+     * Worksheet, set the type as &#x60;LOGICAL_TABLE&#x60;. - To filter metadata objects within
+     * type &#x60;LOGICAL_TABLE&#x60;, set the &#x60;subtypes&#x60; attribute. For example, to fetch
+     * a Worksheet, set the type as &#x60;LOGICAL_TABLE&#x60; &amp; subtypes as
+     * &#x60;[WORKSHEET]&#x60;. - To get a specific metadata object, specify the GUID. - To
+     * customize your search and filter the API response, you can use several parameters. You can
+     * search for objects created or modified by specific users, by tags applied to the objects, or
+     * by using the include parameters like &#x60;include_auto_created_objects&#x60;,
+     * &#x60;include_dependent_objects&#x60;, &#x60;include_headers&#x60;,
+     * &#x60;include_incomplete_objects&#x60;, and so on. You can also define sorting options to
+     * sort the data retrieved in the API response. - To get discoverable objects when linientmodel
+     * is enabled you can use &#x60;include_discoverable_objects&#x60; as true else false. Default
+     * value is true. - For liveboard metadata type, to get the newer format, set the
+     * &#x60;liveboard_response_format&#x60; as V2. Default value is V1. - To retrieve only objects
+     * that are published, set the &#x60;include_only_published_objects&#x60; as true. Default value
+     * is false. **NOTE**: The following parameters support pagination of metadata records: -
+     * &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;subtypes&#x60; -
      * &#x60;created_by_user_identifiers&#x60; - &#x60;modified_by_user_identifiers&#x60; -
      * &#x60;owned_by_user_identifiers&#x60; - &#x60;exclude_objects&#x60; -
-     * &#x60;include_auto_created_objects&#x60; - &#x60;favorite_object_options&#x60; If you are
-     * using other parameters to search metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and
-     * &#x60;record_offset&#x60; to &#x60;0&#x60;.
+     * &#x60;include_auto_created_objects&#x60; - &#x60;favorite_object_options&#x60; -
+     * &#x60;include_only_published_objects&#x60; If you are using other parameters to search
+     * metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to
+     * &#x60;0&#x60;.
      *
      * @param searchMetadataRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -16964,30 +17401,76 @@ public class ThoughtSpotRestApi {
      * required. To update a connection object, pass these parameters in your API request: 1. GUID
      * of the connection object. 2. If you are updating tables or database schema of a connection
      * object: a. Add the updated JSON map of metadata with database, schema, and tables in
-     * &#x60;data_warehouse_config&#x60;. b. Set &#x60;validate&#x60; to &#x60;true&#x60;. * A JSON
-     * map of configuration attributes, database details, and table properties in
-     * &#x60;data_warehouse_config&#x60; as shown in the following example: &#x60;&#x60;&#x60; {
-     * \&quot;configuration\&quot;:{ \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
-     * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
-     * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
-     * \&quot;externalDatabases\&quot;:[ { \&quot;name\&quot;:\&quot;AllDatatypes\&quot;,
-     * \&quot;isAutoCreated\&quot;:false, \&quot;schemas\&quot;:[ {
-     * \&quot;name\&quot;:\&quot;alldatatypes\&quot;, \&quot;tables\&quot;:[ {
-     * \&quot;name\&quot;:\&quot;allDatatypes\&quot;, \&quot;type\&quot;:\&quot;TABLE\&quot;,
-     * \&quot;description\&quot;:\&quot;\&quot;, \&quot;selected\&quot;:true,
-     * \&quot;linked\&quot;:true, \&quot;columns\&quot;:[ {
-     * \&quot;name\&quot;:\&quot;CNUMBER\&quot;, \&quot;type\&quot;:\&quot;INT64\&quot;,
-     * \&quot;canImport\&quot;:true, \&quot;selected\&quot;:true, \&quot;isLinkedActive\&quot;:true,
-     * \&quot;isImported\&quot;:false, \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,
-     * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
-     * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; }, {
-     * \&quot;name\&quot;:\&quot;CDECIMAL\&quot;, \&quot;type\&quot;:\&quot;INT64\&quot;,
-     * \&quot;canImport\&quot;:true, \&quot;selected\&quot;:true, \&quot;isLinkedActive\&quot;:true,
-     * \&quot;isImported\&quot;:false, \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,
-     * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
-     * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; } ] } ] } ] } ] } &#x60;&#x60;&#x60; 3. If
-     * you are updating a configuration attribute, connection name, or description, you can set
-     * &#x60;validate&#x60; to &#x60;false&#x60;. * A JSON map of configuration attributes in
+     * &#x60;data_warehouse_config&#x60;. b. Set &#x60;validate&#x60; to &#x60;true&#x60;. **NOTE:**
+     * If the &#x60;authentication_type&#x60; is anything other than SERVICE_ACCOUNT, you must
+     * explicitly provide the authenticationType property in the payload. If you do not specify
+     * authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type. * A
+     * JSON map of configuration attributes, database details, and table properties in
+     * &#x60;data_warehouse_config&#x60; as shown in the following example: * This is an example of
+     * updating a single table in a empty connection: &#x60;&#x60;&#x60; {
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
+     * \&quot;externalDatabases\&quot;: [ { \&quot;name\&quot;: \&quot;DEVELOPMENT\&quot;,
+     * \&quot;isAutoCreated\&quot;: false, \&quot;schemas\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;TS_dataset\&quot;, \&quot;tables\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;DEMORENAME\&quot;, \&quot;type\&quot;: \&quot;TABLE\&quot;, \&quot;description\&quot;:
+     * \&quot;\&quot;, \&quot;selected\&quot;: true, \&quot;linked\&quot;: true, \&quot;gid\&quot;:
+     * 0, \&quot;datasetId\&quot;: \&quot;-1\&quot;, \&quot;subType\&quot;: \&quot;\&quot;,
+     * \&quot;reportId\&quot;: \&quot;\&quot;, \&quot;viewId\&quot;: \&quot;\&quot;,
+     * \&quot;columns\&quot;: [ { \&quot;name\&quot;: \&quot;Col1\&quot;, \&quot;type\&quot;:
+     * \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;: true, \&quot;selected\&quot;: true,
+     * \&quot;description\&quot;: \&quot;\&quot;, \&quot;isLinkedActive\&quot;: true,
+     * \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;: \&quot;Col2\&quot;,
+     * \&quot;type\&quot;: \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;: true,
+     * \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;Col3\&quot;, \&quot;type\&quot;: \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;: true,
+     * \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;Col312\&quot;, \&quot;type\&quot;: \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;:
+     * true, \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;Col4\&quot;, \&quot;type\&quot;: \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;: true,
+     * \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false } ],
+     * \&quot;relationships\&quot;: [] } ] } ] } ], \&quot;configuration\&quot;: {
+     * \&quot;password\&quot;: \&quot;\&quot;, \&quot;database\&quot;: \&quot;DEVELOPMENT\&quot;,
+     * \&quot;role\&quot;: \&quot;DEV\&quot;, \&quot;accountName\&quot;:
+     * \&quot;thoughtspot_partner\&quot;, \&quot;warehouse\&quot;: \&quot;DEMO_WH\&quot;,
+     * \&quot;user\&quot;: \&quot;DEV_USER\&quot; } } &#x60;&#x60;&#x60; * This is an example of
+     * updating a single table in an existing connection with tables: &#x60;&#x60;&#x60; {
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
+     * \&quot;externalDatabases\&quot;: [ { \&quot;name\&quot;: \&quot;DEVELOPMENT\&quot;,
+     * \&quot;isAutoCreated\&quot;: false, \&quot;schemas\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;TS_dataset\&quot;, \&quot;tables\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;CUSTOMER\&quot;, \&quot;type\&quot;: \&quot;TABLE\&quot;, \&quot;description\&quot;:
+     * \&quot;\&quot;, \&quot;selected\&quot;: true, \&quot;linked\&quot;: true, \&quot;gid\&quot;:
+     * 0, \&quot;datasetId\&quot;: \&quot;-1\&quot;, \&quot;subType\&quot;: \&quot;\&quot;,
+     * \&quot;reportId\&quot;: \&quot;\&quot;, \&quot;viewId\&quot;: \&quot;\&quot;,
+     * \&quot;columns\&quot;: [], \&quot;relationships\&quot;: [] }, { \&quot;name\&quot;:
+     * \&quot;tpch5k_falcon_default_schema_users\&quot;, \&quot;type\&quot;: \&quot;TABLE\&quot;,
+     * \&quot;description\&quot;: \&quot;\&quot;, \&quot;selected\&quot;: true,
+     * \&quot;linked\&quot;: true, \&quot;gid\&quot;: 0, \&quot;datasetId\&quot;: \&quot;-1\&quot;,
+     * \&quot;subType\&quot;: \&quot;\&quot;, \&quot;reportId\&quot;: \&quot;\&quot;,
+     * \&quot;viewId\&quot;: \&quot;\&quot;, \&quot;columns\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;user_id\&quot;, \&quot;type\&quot;: \&quot;INT64\&quot;, \&quot;canImport\&quot;:
+     * true, \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;product_id\&quot;, \&quot;type\&quot;: \&quot;INT64\&quot;, \&quot;canImport\&quot;:
+     * true, \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;user_cost\&quot;, \&quot;type\&quot;: \&quot;INT64\&quot;, \&quot;canImport\&quot;:
+     * true, \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false } ],
+     * \&quot;relationships\&quot;: [] } ] } ] } ], \&quot;configuration\&quot;: {
+     * \&quot;password\&quot;: \&quot;\&quot;, \&quot;database\&quot;: \&quot;DEVELOPMENT\&quot;,
+     * \&quot;role\&quot;: \&quot;DEV\&quot;, \&quot;accountName\&quot;:
+     * \&quot;thoughtspot_partner\&quot;, \&quot;warehouse\&quot;: \&quot;DEMO_WH\&quot;,
+     * \&quot;user\&quot;: \&quot;DEV_USER\&quot; } } &#x60;&#x60;&#x60; 3. If you are updating a
+     * configuration attribute, connection name, or description, you can set &#x60;validate&#x60; to
+     * &#x60;false&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is anything other than
+     * SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload.
+     * If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the
+     * authentication type. * A JSON map of configuration attributes in
      * &#x60;data_warehouse_config&#x60;. The following example shows the configuration attributes
      * for a Snowflake connection: &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
      * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
@@ -17025,30 +17508,76 @@ public class ThoughtSpotRestApi {
      * required. To update a connection object, pass these parameters in your API request: 1. GUID
      * of the connection object. 2. If you are updating tables or database schema of a connection
      * object: a. Add the updated JSON map of metadata with database, schema, and tables in
-     * &#x60;data_warehouse_config&#x60;. b. Set &#x60;validate&#x60; to &#x60;true&#x60;. * A JSON
-     * map of configuration attributes, database details, and table properties in
-     * &#x60;data_warehouse_config&#x60; as shown in the following example: &#x60;&#x60;&#x60; {
-     * \&quot;configuration\&quot;:{ \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
-     * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
-     * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
-     * \&quot;externalDatabases\&quot;:[ { \&quot;name\&quot;:\&quot;AllDatatypes\&quot;,
-     * \&quot;isAutoCreated\&quot;:false, \&quot;schemas\&quot;:[ {
-     * \&quot;name\&quot;:\&quot;alldatatypes\&quot;, \&quot;tables\&quot;:[ {
-     * \&quot;name\&quot;:\&quot;allDatatypes\&quot;, \&quot;type\&quot;:\&quot;TABLE\&quot;,
-     * \&quot;description\&quot;:\&quot;\&quot;, \&quot;selected\&quot;:true,
-     * \&quot;linked\&quot;:true, \&quot;columns\&quot;:[ {
-     * \&quot;name\&quot;:\&quot;CNUMBER\&quot;, \&quot;type\&quot;:\&quot;INT64\&quot;,
-     * \&quot;canImport\&quot;:true, \&quot;selected\&quot;:true, \&quot;isLinkedActive\&quot;:true,
-     * \&quot;isImported\&quot;:false, \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,
-     * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
-     * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; }, {
-     * \&quot;name\&quot;:\&quot;CDECIMAL\&quot;, \&quot;type\&quot;:\&quot;INT64\&quot;,
-     * \&quot;canImport\&quot;:true, \&quot;selected\&quot;:true, \&quot;isLinkedActive\&quot;:true,
-     * \&quot;isImported\&quot;:false, \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,
-     * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
-     * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; } ] } ] } ] } ] } &#x60;&#x60;&#x60; 3. If
-     * you are updating a configuration attribute, connection name, or description, you can set
-     * &#x60;validate&#x60; to &#x60;false&#x60;. * A JSON map of configuration attributes in
+     * &#x60;data_warehouse_config&#x60;. b. Set &#x60;validate&#x60; to &#x60;true&#x60;. **NOTE:**
+     * If the &#x60;authentication_type&#x60; is anything other than SERVICE_ACCOUNT, you must
+     * explicitly provide the authenticationType property in the payload. If you do not specify
+     * authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type. * A
+     * JSON map of configuration attributes, database details, and table properties in
+     * &#x60;data_warehouse_config&#x60; as shown in the following example: * This is an example of
+     * updating a single table in a empty connection: &#x60;&#x60;&#x60; {
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
+     * \&quot;externalDatabases\&quot;: [ { \&quot;name\&quot;: \&quot;DEVELOPMENT\&quot;,
+     * \&quot;isAutoCreated\&quot;: false, \&quot;schemas\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;TS_dataset\&quot;, \&quot;tables\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;DEMORENAME\&quot;, \&quot;type\&quot;: \&quot;TABLE\&quot;, \&quot;description\&quot;:
+     * \&quot;\&quot;, \&quot;selected\&quot;: true, \&quot;linked\&quot;: true, \&quot;gid\&quot;:
+     * 0, \&quot;datasetId\&quot;: \&quot;-1\&quot;, \&quot;subType\&quot;: \&quot;\&quot;,
+     * \&quot;reportId\&quot;: \&quot;\&quot;, \&quot;viewId\&quot;: \&quot;\&quot;,
+     * \&quot;columns\&quot;: [ { \&quot;name\&quot;: \&quot;Col1\&quot;, \&quot;type\&quot;:
+     * \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;: true, \&quot;selected\&quot;: true,
+     * \&quot;description\&quot;: \&quot;\&quot;, \&quot;isLinkedActive\&quot;: true,
+     * \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;: \&quot;Col2\&quot;,
+     * \&quot;type\&quot;: \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;: true,
+     * \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;Col3\&quot;, \&quot;type\&quot;: \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;: true,
+     * \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;Col312\&quot;, \&quot;type\&quot;: \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;:
+     * true, \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;Col4\&quot;, \&quot;type\&quot;: \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;: true,
+     * \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false } ],
+     * \&quot;relationships\&quot;: [] } ] } ] } ], \&quot;configuration\&quot;: {
+     * \&quot;password\&quot;: \&quot;\&quot;, \&quot;database\&quot;: \&quot;DEVELOPMENT\&quot;,
+     * \&quot;role\&quot;: \&quot;DEV\&quot;, \&quot;accountName\&quot;:
+     * \&quot;thoughtspot_partner\&quot;, \&quot;warehouse\&quot;: \&quot;DEMO_WH\&quot;,
+     * \&quot;user\&quot;: \&quot;DEV_USER\&quot; } } &#x60;&#x60;&#x60; * This is an example of
+     * updating a single table in an existing connection with tables: &#x60;&#x60;&#x60; {
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
+     * \&quot;externalDatabases\&quot;: [ { \&quot;name\&quot;: \&quot;DEVELOPMENT\&quot;,
+     * \&quot;isAutoCreated\&quot;: false, \&quot;schemas\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;TS_dataset\&quot;, \&quot;tables\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;CUSTOMER\&quot;, \&quot;type\&quot;: \&quot;TABLE\&quot;, \&quot;description\&quot;:
+     * \&quot;\&quot;, \&quot;selected\&quot;: true, \&quot;linked\&quot;: true, \&quot;gid\&quot;:
+     * 0, \&quot;datasetId\&quot;: \&quot;-1\&quot;, \&quot;subType\&quot;: \&quot;\&quot;,
+     * \&quot;reportId\&quot;: \&quot;\&quot;, \&quot;viewId\&quot;: \&quot;\&quot;,
+     * \&quot;columns\&quot;: [], \&quot;relationships\&quot;: [] }, { \&quot;name\&quot;:
+     * \&quot;tpch5k_falcon_default_schema_users\&quot;, \&quot;type\&quot;: \&quot;TABLE\&quot;,
+     * \&quot;description\&quot;: \&quot;\&quot;, \&quot;selected\&quot;: true,
+     * \&quot;linked\&quot;: true, \&quot;gid\&quot;: 0, \&quot;datasetId\&quot;: \&quot;-1\&quot;,
+     * \&quot;subType\&quot;: \&quot;\&quot;, \&quot;reportId\&quot;: \&quot;\&quot;,
+     * \&quot;viewId\&quot;: \&quot;\&quot;, \&quot;columns\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;user_id\&quot;, \&quot;type\&quot;: \&quot;INT64\&quot;, \&quot;canImport\&quot;:
+     * true, \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;product_id\&quot;, \&quot;type\&quot;: \&quot;INT64\&quot;, \&quot;canImport\&quot;:
+     * true, \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;user_cost\&quot;, \&quot;type\&quot;: \&quot;INT64\&quot;, \&quot;canImport\&quot;:
+     * true, \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false } ],
+     * \&quot;relationships\&quot;: [] } ] } ] } ], \&quot;configuration\&quot;: {
+     * \&quot;password\&quot;: \&quot;\&quot;, \&quot;database\&quot;: \&quot;DEVELOPMENT\&quot;,
+     * \&quot;role\&quot;: \&quot;DEV\&quot;, \&quot;accountName\&quot;:
+     * \&quot;thoughtspot_partner\&quot;, \&quot;warehouse\&quot;: \&quot;DEMO_WH\&quot;,
+     * \&quot;user\&quot;: \&quot;DEV_USER\&quot; } } &#x60;&#x60;&#x60; 3. If you are updating a
+     * configuration attribute, connection name, or description, you can set &#x60;validate&#x60; to
+     * &#x60;false&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is anything other than
+     * SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload.
+     * If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the
+     * authentication type. * A JSON map of configuration attributes in
      * &#x60;data_warehouse_config&#x60;. The following example shows the configuration attributes
      * for a Snowflake connection: &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
      * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
@@ -17091,30 +17620,75 @@ public class ThoughtSpotRestApi {
      * your API request: 1. GUID of the connection object. 2. If you are updating tables or database
      * schema of a connection object: a. Add the updated JSON map of metadata with database, schema,
      * and tables in &#x60;data_warehouse_config&#x60;. b. Set &#x60;validate&#x60; to
-     * &#x60;true&#x60;. * A JSON map of configuration attributes, database details, and table
-     * properties in &#x60;data_warehouse_config&#x60; as shown in the following example:
-     * &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
-     * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
-     * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
-     * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
-     * \&quot;externalDatabases\&quot;:[ { \&quot;name\&quot;:\&quot;AllDatatypes\&quot;,
-     * \&quot;isAutoCreated\&quot;:false, \&quot;schemas\&quot;:[ {
-     * \&quot;name\&quot;:\&quot;alldatatypes\&quot;, \&quot;tables\&quot;:[ {
-     * \&quot;name\&quot;:\&quot;allDatatypes\&quot;, \&quot;type\&quot;:\&quot;TABLE\&quot;,
-     * \&quot;description\&quot;:\&quot;\&quot;, \&quot;selected\&quot;:true,
-     * \&quot;linked\&quot;:true, \&quot;columns\&quot;:[ {
-     * \&quot;name\&quot;:\&quot;CNUMBER\&quot;, \&quot;type\&quot;:\&quot;INT64\&quot;,
-     * \&quot;canImport\&quot;:true, \&quot;selected\&quot;:true, \&quot;isLinkedActive\&quot;:true,
-     * \&quot;isImported\&quot;:false, \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,
-     * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
-     * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; }, {
-     * \&quot;name\&quot;:\&quot;CDECIMAL\&quot;, \&quot;type\&quot;:\&quot;INT64\&quot;,
-     * \&quot;canImport\&quot;:true, \&quot;selected\&quot;:true, \&quot;isLinkedActive\&quot;:true,
-     * \&quot;isImported\&quot;:false, \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,
-     * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
-     * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; } ] } ] } ] } ] } &#x60;&#x60;&#x60; 3. If
-     * you are updating a configuration attribute, connection name, or description, you can set
-     * &#x60;validate&#x60; to &#x60;false&#x60;. * A JSON map of configuration attributes in
+     * &#x60;true&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is anything other than
+     * SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload.
+     * If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the
+     * authentication type. * A JSON map of configuration attributes, database details, and table
+     * properties in &#x60;data_warehouse_config&#x60; as shown in the following example: * This is
+     * an example of updating a single table in a empty connection: &#x60;&#x60;&#x60; {
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
+     * \&quot;externalDatabases\&quot;: [ { \&quot;name\&quot;: \&quot;DEVELOPMENT\&quot;,
+     * \&quot;isAutoCreated\&quot;: false, \&quot;schemas\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;TS_dataset\&quot;, \&quot;tables\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;DEMORENAME\&quot;, \&quot;type\&quot;: \&quot;TABLE\&quot;, \&quot;description\&quot;:
+     * \&quot;\&quot;, \&quot;selected\&quot;: true, \&quot;linked\&quot;: true, \&quot;gid\&quot;:
+     * 0, \&quot;datasetId\&quot;: \&quot;-1\&quot;, \&quot;subType\&quot;: \&quot;\&quot;,
+     * \&quot;reportId\&quot;: \&quot;\&quot;, \&quot;viewId\&quot;: \&quot;\&quot;,
+     * \&quot;columns\&quot;: [ { \&quot;name\&quot;: \&quot;Col1\&quot;, \&quot;type\&quot;:
+     * \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;: true, \&quot;selected\&quot;: true,
+     * \&quot;description\&quot;: \&quot;\&quot;, \&quot;isLinkedActive\&quot;: true,
+     * \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;: \&quot;Col2\&quot;,
+     * \&quot;type\&quot;: \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;: true,
+     * \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;Col3\&quot;, \&quot;type\&quot;: \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;: true,
+     * \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;Col312\&quot;, \&quot;type\&quot;: \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;:
+     * true, \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;Col4\&quot;, \&quot;type\&quot;: \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;: true,
+     * \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false } ],
+     * \&quot;relationships\&quot;: [] } ] } ] } ], \&quot;configuration\&quot;: {
+     * \&quot;password\&quot;: \&quot;\&quot;, \&quot;database\&quot;: \&quot;DEVELOPMENT\&quot;,
+     * \&quot;role\&quot;: \&quot;DEV\&quot;, \&quot;accountName\&quot;:
+     * \&quot;thoughtspot_partner\&quot;, \&quot;warehouse\&quot;: \&quot;DEMO_WH\&quot;,
+     * \&quot;user\&quot;: \&quot;DEV_USER\&quot; } } &#x60;&#x60;&#x60; * This is an example of
+     * updating a single table in an existing connection with tables: &#x60;&#x60;&#x60; {
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
+     * \&quot;externalDatabases\&quot;: [ { \&quot;name\&quot;: \&quot;DEVELOPMENT\&quot;,
+     * \&quot;isAutoCreated\&quot;: false, \&quot;schemas\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;TS_dataset\&quot;, \&quot;tables\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;CUSTOMER\&quot;, \&quot;type\&quot;: \&quot;TABLE\&quot;, \&quot;description\&quot;:
+     * \&quot;\&quot;, \&quot;selected\&quot;: true, \&quot;linked\&quot;: true, \&quot;gid\&quot;:
+     * 0, \&quot;datasetId\&quot;: \&quot;-1\&quot;, \&quot;subType\&quot;: \&quot;\&quot;,
+     * \&quot;reportId\&quot;: \&quot;\&quot;, \&quot;viewId\&quot;: \&quot;\&quot;,
+     * \&quot;columns\&quot;: [], \&quot;relationships\&quot;: [] }, { \&quot;name\&quot;:
+     * \&quot;tpch5k_falcon_default_schema_users\&quot;, \&quot;type\&quot;: \&quot;TABLE\&quot;,
+     * \&quot;description\&quot;: \&quot;\&quot;, \&quot;selected\&quot;: true,
+     * \&quot;linked\&quot;: true, \&quot;gid\&quot;: 0, \&quot;datasetId\&quot;: \&quot;-1\&quot;,
+     * \&quot;subType\&quot;: \&quot;\&quot;, \&quot;reportId\&quot;: \&quot;\&quot;,
+     * \&quot;viewId\&quot;: \&quot;\&quot;, \&quot;columns\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;user_id\&quot;, \&quot;type\&quot;: \&quot;INT64\&quot;, \&quot;canImport\&quot;:
+     * true, \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;product_id\&quot;, \&quot;type\&quot;: \&quot;INT64\&quot;, \&quot;canImport\&quot;:
+     * true, \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;user_cost\&quot;, \&quot;type\&quot;: \&quot;INT64\&quot;, \&quot;canImport\&quot;:
+     * true, \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false } ],
+     * \&quot;relationships\&quot;: [] } ] } ] } ], \&quot;configuration\&quot;: {
+     * \&quot;password\&quot;: \&quot;\&quot;, \&quot;database\&quot;: \&quot;DEVELOPMENT\&quot;,
+     * \&quot;role\&quot;: \&quot;DEV\&quot;, \&quot;accountName\&quot;:
+     * \&quot;thoughtspot_partner\&quot;, \&quot;warehouse\&quot;: \&quot;DEMO_WH\&quot;,
+     * \&quot;user\&quot;: \&quot;DEV_USER\&quot; } } &#x60;&#x60;&#x60; 3. If you are updating a
+     * configuration attribute, connection name, or description, you can set &#x60;validate&#x60; to
+     * &#x60;false&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is anything other than
+     * SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload.
+     * If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the
+     * authentication type. * A JSON map of configuration attributes in
      * &#x60;data_warehouse_config&#x60;. The following example shows the configuration attributes
      * for a Snowflake connection: &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
      * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
@@ -17365,7 +17939,18 @@ public class ThoughtSpotRestApi {
     /**
      * Build call for updateDbtConnection
      *
-     * @param updateDbtConnectionRequest (required)
+     * @param dbtConnectionIdentifier Unique ID of the DBT Connection. (required)
+     * @param connectionName Name of the connection. (optional)
+     * @param databaseName Name of the Database. (optional)
+     * @param importType Mention type of Import (optional, default to DBT_CLOUD)
+     * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD. (optional)
+     * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD. (optional)
+     * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD (optional)
+     * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD (optional)
+     * @param dbtEnvId DBT Environment ID\\\&quot; (optional)
+     * @param projectName Name of the project (optional)
+     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
+     *     is Mandatory when Import Type is &#39;ZIP_FILE&#39; (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -17381,7 +17966,18 @@ public class ThoughtSpotRestApi {
      * </table>
      */
     public okhttp3.Call updateDbtConnectionCall(
-            UpdateDbtConnectionRequest updateDbtConnectionRequest, final ApiCallback _callback)
+            String dbtConnectionIdentifier,
+            String connectionName,
+            String databaseName,
+            String importType,
+            String accessToken,
+            String dbtUrl,
+            String accountId,
+            String projectId,
+            String dbtEnvId,
+            String projectName,
+            File fileContent,
+            final ApiCallback _callback)
             throws ApiException {
         String basePath = null;
         // Operation Servers
@@ -17396,7 +17992,7 @@ public class ThoughtSpotRestApi {
             basePath = null;
         }
 
-        Object localVarPostBody = updateDbtConnectionRequest;
+        Object localVarPostBody = null;
 
         // create path and map variables
         String localVarPath = "/api/rest/2.0/dbt/update-dbt-connection";
@@ -17407,13 +18003,57 @@ public class ThoughtSpotRestApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
+        if (dbtConnectionIdentifier != null) {
+            localVarFormParams.put("dbt_connection_identifier", dbtConnectionIdentifier);
+        }
+
+        if (connectionName != null) {
+            localVarFormParams.put("connection_name", connectionName);
+        }
+
+        if (databaseName != null) {
+            localVarFormParams.put("database_name", databaseName);
+        }
+
+        if (importType != null) {
+            localVarFormParams.put("import_type", importType);
+        }
+
+        if (accessToken != null) {
+            localVarFormParams.put("access_token", accessToken);
+        }
+
+        if (dbtUrl != null) {
+            localVarFormParams.put("dbt_url", dbtUrl);
+        }
+
+        if (accountId != null) {
+            localVarFormParams.put("account_id", accountId);
+        }
+
+        if (projectId != null) {
+            localVarFormParams.put("project_id", projectId);
+        }
+
+        if (dbtEnvId != null) {
+            localVarFormParams.put("dbt_env_id", dbtEnvId);
+        }
+
+        if (projectName != null) {
+            localVarFormParams.put("project_name", projectName);
+        }
+
+        if (fileContent != null) {
+            localVarFormParams.put("file_content", fileContent);
+        }
+
         final String[] localVarAccepts = {"application/json"};
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
             localVarHeaderParams.put("Accept", localVarAccept);
         }
 
-        final String[] localVarContentTypes = {"application/json"};
+        final String[] localVarContentTypes = {"multipart/form-data"};
         final String localVarContentType =
                 localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
@@ -17437,16 +18077,39 @@ public class ThoughtSpotRestApi {
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call updateDbtConnectionValidateBeforeCall(
-            UpdateDbtConnectionRequest updateDbtConnectionRequest, final ApiCallback _callback)
+            String dbtConnectionIdentifier,
+            String connectionName,
+            String databaseName,
+            String importType,
+            String accessToken,
+            String dbtUrl,
+            String accountId,
+            String projectId,
+            String dbtEnvId,
+            String projectName,
+            File fileContent,
+            final ApiCallback _callback)
             throws ApiException {
-        // verify the required parameter 'updateDbtConnectionRequest' is set
-        if (updateDbtConnectionRequest == null) {
+        // verify the required parameter 'dbtConnectionIdentifier' is set
+        if (dbtConnectionIdentifier == null) {
             throw new ApiException(
-                    "Missing the required parameter 'updateDbtConnectionRequest' when calling"
+                    "Missing the required parameter 'dbtConnectionIdentifier' when calling"
                             + " updateDbtConnection(Async)");
         }
 
-        return updateDbtConnectionCall(updateDbtConnectionRequest, _callback);
+        return updateDbtConnectionCall(
+                dbtConnectionIdentifier,
+                connectionName,
+                databaseName,
+                importType,
+                accessToken,
+                dbtUrl,
+                accountId,
+                projectId,
+                dbtEnvId,
+                projectName,
+                fileContent,
+                _callback);
     }
 
     /**
@@ -17464,7 +18127,18 @@ public class ThoughtSpotRestApi {
      * identifier and environment (or) embrace connection, embrace database name, import type,
      * file_content settings.
      *
-     * @param updateDbtConnectionRequest (required)
+     * @param dbtConnectionIdentifier Unique ID of the DBT Connection. (required)
+     * @param connectionName Name of the connection. (optional)
+     * @param databaseName Name of the Database. (optional)
+     * @param importType Mention type of Import (optional, default to DBT_CLOUD)
+     * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD. (optional)
+     * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD. (optional)
+     * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD (optional)
+     * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD (optional)
+     * @param dbtEnvId DBT Environment ID\\\&quot; (optional)
+     * @param projectName Name of the project (optional)
+     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
+     *     is Mandatory when Import Type is &#39;ZIP_FILE&#39; (optional)
      * @return Object
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -17479,10 +18153,32 @@ public class ThoughtSpotRestApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public Object updateDbtConnection(UpdateDbtConnectionRequest updateDbtConnectionRequest)
+    public Object updateDbtConnection(
+            String dbtConnectionIdentifier,
+            String connectionName,
+            String databaseName,
+            String importType,
+            String accessToken,
+            String dbtUrl,
+            String accountId,
+            String projectId,
+            String dbtEnvId,
+            String projectName,
+            File fileContent)
             throws ApiException {
         ApiResponse<Object> localVarResp =
-                updateDbtConnectionWithHttpInfo(updateDbtConnectionRequest);
+                updateDbtConnectionWithHttpInfo(
+                        dbtConnectionIdentifier,
+                        connectionName,
+                        databaseName,
+                        importType,
+                        accessToken,
+                        dbtUrl,
+                        accountId,
+                        projectId,
+                        dbtEnvId,
+                        projectName,
+                        fileContent);
         return localVarResp.getData();
     }
 
@@ -17501,7 +18197,18 @@ public class ThoughtSpotRestApi {
      * identifier and environment (or) embrace connection, embrace database name, import type,
      * file_content settings.
      *
-     * @param updateDbtConnectionRequest (required)
+     * @param dbtConnectionIdentifier Unique ID of the DBT Connection. (required)
+     * @param connectionName Name of the connection. (optional)
+     * @param databaseName Name of the Database. (optional)
+     * @param importType Mention type of Import (optional, default to DBT_CLOUD)
+     * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD. (optional)
+     * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD. (optional)
+     * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD (optional)
+     * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD (optional)
+     * @param dbtEnvId DBT Environment ID\\\&quot; (optional)
+     * @param projectName Name of the project (optional)
+     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
+     *     is Mandatory when Import Type is &#39;ZIP_FILE&#39; (optional)
      * @return ApiResponse&lt;Object&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -17517,9 +18224,32 @@ public class ThoughtSpotRestApi {
      * </table>
      */
     public ApiResponse<Object> updateDbtConnectionWithHttpInfo(
-            UpdateDbtConnectionRequest updateDbtConnectionRequest) throws ApiException {
+            String dbtConnectionIdentifier,
+            String connectionName,
+            String databaseName,
+            String importType,
+            String accessToken,
+            String dbtUrl,
+            String accountId,
+            String projectId,
+            String dbtEnvId,
+            String projectName,
+            File fileContent)
+            throws ApiException {
         okhttp3.Call localVarCall =
-                updateDbtConnectionValidateBeforeCall(updateDbtConnectionRequest, null);
+                updateDbtConnectionValidateBeforeCall(
+                        dbtConnectionIdentifier,
+                        connectionName,
+                        databaseName,
+                        importType,
+                        accessToken,
+                        dbtUrl,
+                        accountId,
+                        projectId,
+                        dbtEnvId,
+                        projectName,
+                        fileContent,
+                        null);
         Type localVarReturnType = new TypeToken<Object>() {}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -17539,7 +18269,18 @@ public class ThoughtSpotRestApi {
      * identifier and environment (or) embrace connection, embrace database name, import type,
      * file_content settings.
      *
-     * @param updateDbtConnectionRequest (required)
+     * @param dbtConnectionIdentifier Unique ID of the DBT Connection. (required)
+     * @param connectionName Name of the connection. (optional)
+     * @param databaseName Name of the Database. (optional)
+     * @param importType Mention type of Import (optional, default to DBT_CLOUD)
+     * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD. (optional)
+     * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD. (optional)
+     * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD (optional)
+     * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD (optional)
+     * @param dbtEnvId DBT Environment ID\\\&quot; (optional)
+     * @param projectName Name of the project (optional)
+     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
+     *     is Mandatory when Import Type is &#39;ZIP_FILE&#39; (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body
@@ -17556,12 +18297,34 @@ public class ThoughtSpotRestApi {
      * </table>
      */
     public okhttp3.Call updateDbtConnectionAsync(
-            UpdateDbtConnectionRequest updateDbtConnectionRequest,
+            String dbtConnectionIdentifier,
+            String connectionName,
+            String databaseName,
+            String importType,
+            String accessToken,
+            String dbtUrl,
+            String accountId,
+            String projectId,
+            String dbtEnvId,
+            String projectName,
+            File fileContent,
             final ApiCallback<Object> _callback)
             throws ApiException {
 
         okhttp3.Call localVarCall =
-                updateDbtConnectionValidateBeforeCall(updateDbtConnectionRequest, _callback);
+                updateDbtConnectionValidateBeforeCall(
+                        dbtConnectionIdentifier,
+                        connectionName,
+                        databaseName,
+                        importType,
+                        accessToken,
+                        dbtUrl,
+                        accountId,
+                        projectId,
+                        dbtEnvId,
+                        projectName,
+                        fileContent,
+                        _callback);
         Type localVarReturnType = new TypeToken<Object>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

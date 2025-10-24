@@ -291,7 +291,10 @@ public class AiApi {
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call queryGetDecomposedQueryCall(
             QueryGetDecomposedQueryRequest queryGetDecomposedQueryRequest,
             final ApiCallback _callback)
@@ -348,6 +351,7 @@ public class AiApi {
                 _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call queryGetDecomposedQueryValidateBeforeCall(
             QueryGetDecomposedQueryRequest queryGetDecomposedQueryRequest,
@@ -379,7 +383,10 @@ public class AiApi {
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public EurekaDecomposeQueryResponse queryGetDecomposedQuery(
             QueryGetDecomposedQueryRequest queryGetDecomposedQueryRequest) throws ApiException {
         ApiResponse<EurekaDecomposeQueryResponse> localVarResp =
@@ -403,7 +410,10 @@ public class AiApi {
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public ApiResponse<EurekaDecomposeQueryResponse> queryGetDecomposedQueryWithHttpInfo(
             QueryGetDecomposedQueryRequest queryGetDecomposedQueryRequest) throws ApiException {
         okhttp3.Call localVarCall =
@@ -429,7 +439,10 @@ public class AiApi {
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call queryGetDecomposedQueryAsync(
             QueryGetDecomposedQueryRequest queryGetDecomposedQueryRequest,
             final ApiCallback<EurekaDecomposeQueryResponse> _callback)

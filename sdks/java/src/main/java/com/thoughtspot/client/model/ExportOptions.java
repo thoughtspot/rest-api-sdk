@@ -58,6 +58,20 @@ public class ExportOptions implements Serializable {
     @javax.annotation.Nullable
     private Boolean exportWithAssociatedFeedbacks = false;
 
+    public static final String SERIALIZED_NAME_EXPORT_COLUMN_SECURITY_RULES =
+            "export_column_security_rules";
+
+    @SerializedName(SERIALIZED_NAME_EXPORT_COLUMN_SECURITY_RULES)
+    @javax.annotation.Nullable
+    private Boolean exportColumnSecurityRules = false;
+
+    public static final String SERIALIZED_NAME_EXPORT_WITH_COLUMN_ALIASES =
+            "export_with_column_aliases";
+
+    @SerializedName(SERIALIZED_NAME_EXPORT_WITH_COLUMN_ALIASES)
+    @javax.annotation.Nullable
+    private Boolean exportWithColumnAliases = false;
+
     public ExportOptions() {}
 
     public ExportOptions includeObjIdRef(@javax.annotation.Nullable Boolean includeObjIdRef) {
@@ -142,6 +156,51 @@ public class ExportOptions implements Serializable {
         this.exportWithAssociatedFeedbacks = exportWithAssociatedFeedbacks;
     }
 
+    public ExportOptions exportColumnSecurityRules(
+            @javax.annotation.Nullable Boolean exportColumnSecurityRules) {
+        this.exportColumnSecurityRules = exportColumnSecurityRules;
+        return this;
+    }
+
+    /**
+     * Boolean flag indicating whether to export column security rules of the object. This will only
+     * be respected when the object can have column security rules and export_associated is true.
+     * Version: 10.12.0.cl or later
+     *
+     * @return exportColumnSecurityRules
+     */
+    @javax.annotation.Nullable
+    public Boolean getExportColumnSecurityRules() {
+        return exportColumnSecurityRules;
+    }
+
+    public void setExportColumnSecurityRules(
+            @javax.annotation.Nullable Boolean exportColumnSecurityRules) {
+        this.exportColumnSecurityRules = exportColumnSecurityRules;
+    }
+
+    public ExportOptions exportWithColumnAliases(
+            @javax.annotation.Nullable Boolean exportWithColumnAliases) {
+        this.exportWithColumnAliases = exportWithColumnAliases;
+        return this;
+    }
+
+    /**
+     * Boolean flag indicating whether to export column aliases of the model. This will only be
+     * respected when the object can have column aliases. Version: 10.13.0.cl or later
+     *
+     * @return exportWithColumnAliases
+     */
+    @javax.annotation.Nullable
+    public Boolean getExportWithColumnAliases() {
+        return exportWithColumnAliases;
+    }
+
+    public void setExportWithColumnAliases(
+            @javax.annotation.Nullable Boolean exportWithColumnAliases) {
+        this.exportWithColumnAliases = exportWithColumnAliases;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -156,7 +215,11 @@ public class ExportOptions implements Serializable {
                 && Objects.equals(this.includeObjId, exportOptions.includeObjId)
                 && Objects.equals(
                         this.exportWithAssociatedFeedbacks,
-                        exportOptions.exportWithAssociatedFeedbacks);
+                        exportOptions.exportWithAssociatedFeedbacks)
+                && Objects.equals(
+                        this.exportColumnSecurityRules, exportOptions.exportColumnSecurityRules)
+                && Objects.equals(
+                        this.exportWithColumnAliases, exportOptions.exportWithColumnAliases);
     }
 
     private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -171,7 +234,12 @@ public class ExportOptions implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(
-                includeObjIdRef, includeGuid, includeObjId, exportWithAssociatedFeedbacks);
+                includeObjIdRef,
+                includeGuid,
+                includeObjId,
+                exportWithAssociatedFeedbacks,
+                exportColumnSecurityRules,
+                exportWithColumnAliases);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -190,6 +258,12 @@ public class ExportOptions implements Serializable {
         sb.append("    includeObjId: ").append(toIndentedString(includeObjId)).append("\n");
         sb.append("    exportWithAssociatedFeedbacks: ")
                 .append(toIndentedString(exportWithAssociatedFeedbacks))
+                .append("\n");
+        sb.append("    exportColumnSecurityRules: ")
+                .append(toIndentedString(exportColumnSecurityRules))
+                .append("\n");
+        sb.append("    exportWithColumnAliases: ")
+                .append(toIndentedString(exportWithColumnAliases))
                 .append("\n");
         sb.append("}");
         return sb.toString();
@@ -216,6 +290,8 @@ public class ExportOptions implements Serializable {
         openapiFields.add("include_guid");
         openapiFields.add("include_obj_id");
         openapiFields.add("export_with_associated_feedbacks");
+        openapiFields.add("export_column_security_rules");
+        openapiFields.add("export_with_column_aliases");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
