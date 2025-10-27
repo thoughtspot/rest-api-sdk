@@ -188,10 +188,10 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.CommiterType.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.ConnectionConfigurationResponse
+                new com.thoughtspot.client.model.CommunicationChannelPreferencesResponse
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.ConnectionConfigurationSearchRequest
+                new com.thoughtspot.client.model.ConnectionConfigurationResponse
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.ConnectionInput.CustomTypeAdapterFactory());
@@ -208,15 +208,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.CopyObjectRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.CreateAgentConversationRequest
-                        .CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.CreateCalendarRequest.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.CreateConfigRequest.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.CreateConnectionConfigurationRequest
-                        .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.CreateConnectionRequest
                         .CustomTypeAdapterFactory());
@@ -228,9 +220,6 @@ public class JSON {
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.CreateCustomActionRequest
-                        .CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.CreateEmailCustomizationRequest
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.CreateEmailCustomizationResponse
@@ -247,8 +236,6 @@ public class JSON {
                 new com.thoughtspot.client.model.CreateUserGroupRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.CreateUserRequest.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.CreateVariableRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.CronExpression.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
@@ -285,18 +272,12 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.DeleteConfigRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.DeleteConnectionConfigurationRequest
-                        .CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.DeleteConnectionRequest
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.DeleteMetadataRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.DeleteMetadataTypeInput
-                        .CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.DeleteOrgEmailCustomizationRequest
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.DeployCommitRequest.CustomTypeAdapterFactory());
@@ -313,6 +294,9 @@ public class JSON {
                 new com.thoughtspot.client.model.EurekaDecomposeQueryResponse
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.EurekaGetNLInstructionsResponse
+                        .CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.EurekaGetRelevantQuestionsResponse
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
@@ -323,6 +307,14 @@ public class JSON {
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.EurekaRelevantQuestion.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.EurekaSetNLInstructionsResponse
+                        .CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.EventChannelConfig.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.EventChannelConfigInput
+                        .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.ExcludeMetadataListItemInput
                         .CustomTypeAdapterFactory());
@@ -361,9 +353,6 @@ public class JSON {
                 new com.thoughtspot.client.model.FetchAsyncImportTaskStatusRequest
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.FetchColumnSecurityRulesRequest
-                        .CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.FetchConnectionDiffStatusResponse
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
@@ -390,8 +379,6 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.FrequencyInput.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.GenerateCSVRequest.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.GenericInfo.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.GetAsyncImportStatusResponse
@@ -400,16 +387,10 @@ public class JSON {
                 new com.thoughtspot.client.model.GetCustomAccessTokenRequest
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.GetDataSourceSuggestionsRequest
-                        .CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.GetFullAccessTokenRequest
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.GetObjectAccessTokenRequest
-                        .CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.GetRelevantQuestionsRequest
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.GetTokenResponse.CustomTypeAdapterFactory());
@@ -446,8 +427,6 @@ public class JSON {
                 new com.thoughtspot.client.model.ImportUsersResponse.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.InputEurekaNLSRequest.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.InputVariableValue.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.JWTMetadataObject.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
@@ -491,20 +470,32 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.ModelTableList.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.NLInstructionsInfo.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.NLInstructionsInfoInput
+                        .CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.ObjectIDAndName.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.Org.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.OrgChannelConfigInput.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.OrgChannelConfigResponse
+                        .CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.OrgDetails.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.OrgInfo.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.OrgPreferenceSearchCriteriaInput
+                        .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.OrgResponse.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.OrgType.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.ParameterValues.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.ParameterizeMetadataRequest
-                        .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.ParametersListItem.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
@@ -537,8 +528,6 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.PublishMetadataListItem
                         .CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.PublishMetadataRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.QueryGetDecomposedQueryRequest
                         .CustomTypeAdapterFactory());
@@ -629,8 +618,6 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.Scope.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.SearchCalendarsRequest.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.SearchCommitsRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.SearchConfigRequest.CustomTypeAdapterFactory());
@@ -647,9 +634,6 @@ public class JSON {
                 new com.thoughtspot.client.model.SearchDataRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.SearchDataResponse.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.SearchEmailCustomizationRequest
-                        .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.SearchMetadataRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
@@ -668,12 +652,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.SearchUsersRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.SearchVariablesRequest.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.SendAgentMessageResponse
-                        .CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.SendAgentMessageStreamingRequest
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.SendMessageRequest.CustomTypeAdapterFactory());
@@ -726,21 +705,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.URLInputMandatory.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.UnparameterizeMetadataRequest
-                        .CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.UnpublishMetadataRequest
-                        .CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.UpdateCalendarRequest.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.UpdateColumnSecurityRulesRequest
-                        .CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.UpdateConfigRequest.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.UpdateConnectionConfigurationRequest
-                        .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.UpdateConnectionRequest
                         .CustomTypeAdapterFactory());
@@ -749,9 +714,6 @@ public class JSON {
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.UpdateCustomActionRequest
-                        .CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.UpdateEmailCustomizationRequest
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.UpdateMetadataHeaderRequest
@@ -777,11 +739,6 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.UpdateUserRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.UpdateVariableRequest.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.UpdateVariableValuesRequest
-                        .CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.User.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.UserGroup.CustomTypeAdapterFactory());
@@ -800,13 +757,62 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.ValidateTokenRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.ValueScopeInput.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.Variable.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.VariableDetailInput.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.VariableUpdateAssignmentInput
+                        .CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.VariableUpdateScopeInput
+                        .CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.VariableValue.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.VariableValueInput.CustomTypeAdapterFactory());
+                new com.thoughtspot.client.model.VariableValues.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.WebhookAuthApiKey.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.WebhookAuthApiKeyInput.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.WebhookAuthBasicAuth.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.WebhookAuthBasicAuthInput
+                        .CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.WebhookAuthOAuth2.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.WebhookAuthOAuth2Input.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.WebhookAuthentication.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.WebhookAuthenticationInput
+                        .CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.WebhookDeleteFailure.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.WebhookDeleteResponse.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.WebhookOrg.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.WebhookPagination.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.WebhookResponse.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.WebhookSearchResponse.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.WebhookSignatureVerification
+                        .CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.WebhookSignatureVerificationInput
+                        .CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.WebhookSortOptionsInput
+                        .CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.WebhookUser.CustomTypeAdapterFactory());
         gson = gsonBuilder.create();
     }
 

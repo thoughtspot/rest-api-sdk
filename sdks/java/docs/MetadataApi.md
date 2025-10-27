@@ -14,9 +14,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**fetchLiveboardSqlQuery**](MetadataApi.md#fetchLiveboardSqlQuery) | **POST** /api/rest/2.0/metadata/liveboard/sql |
 | [**importMetadataTML**](MetadataApi.md#importMetadataTML) | **POST** /api/rest/2.0/metadata/tml/import |
 | [**importMetadataTMLAsync**](MetadataApi.md#importMetadataTMLAsync) | **POST** /api/rest/2.0/metadata/tml/async/import |
-| [**parameterizeMetadata**](MetadataApi.md#parameterizeMetadata) | **POST** /api/rest/2.0/metadata/parameterize |
 | [**searchMetadata**](MetadataApi.md#searchMetadata) | **POST** /api/rest/2.0/metadata/search |
-| [**unparameterizeMetadata**](MetadataApi.md#unparameterizeMetadata) | **POST** /api/rest/2.0/metadata/unparameterize |
 | [**updateMetadataHeader**](MetadataApi.md#updateMetadataHeader) | **POST** /api/rest/2.0/metadata/headers/update |
 | [**updateMetadataObjId**](MetadataApi.md#updateMetadataObjId) | **POST** /api/rest/2.0/metadata/update-obj-id |
 
@@ -63,7 +61,7 @@ All URIs are relative to *CLUSTER_URL*
 
 
 
- Makes a copy of an Answer or Liveboard saved in Atlas    Version: 10.3.0.cl or later   Creates a copy of a metadata object.  Requires at least view access to the metadata object being copied.  Upon successful execution, the API creates a copy of the metadata object specified in the API request and returns the ID of the new object.      
+ Makes a copy of an Answer or Liveboard    Version: 10.3.0.cl or later   Creates a copy of a metadata object.  Requires at least view access to the metadata object being copied.  Upon successful execution, the API creates a copy of the metadata object specified in the API request and returns the ID of the new object.      
 
 ### Parameters
 
@@ -382,42 +380,6 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
-<a id="parameterizeMetadata"></a>
-# **parameterizeMetadata**
-> parameterizeMetadata(parameterizeMetadataRequest)
-
-
-
- Parameterize fields in metadata objects.   Version: 10.9.0.cl or later   Allows parameterizing fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections  For a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName * tableName  For a Connection the field type is always &#x60;CONNECTION_PROPERTY&#x60;. We use the field_name in this case to specify the exact property of a connection which needs to be parameterized.      
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **parameterizeMetadataRequest** | [**ParameterizeMetadataRequest**](ParameterizeMetadataRequest.md)
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **204** | Parameterize successful. |  -  |
-| **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
 <a id="searchMetadata"></a>
 # **searchMetadata**
 > List&lt;MetadataSearchResponse&gt; searchMetadata(searchMetadataRequest)
@@ -449,42 +411,6 @@ null (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Metadata objects search result. |  -  |
-| **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
-<a id="unparameterizeMetadata"></a>
-# **unparameterizeMetadata**
-> unparameterizeMetadata(unparameterizeMetadataRequest)
-
-
-
- Remove parameterization from fields in metadata objects.   Version: 10.9.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections  For a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName * tableName  For a Connection the field type is always &#x60;CONNECTION_PROPERTY&#x60;. We use the field_name in this case to specify the exact property of a connection which needs to be unparameterized.      
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **unparameterizeMetadataRequest** | [**UnparameterizeMetadataRequest**](UnparameterizeMetadataRequest.md)
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **204** | Successfuly removed parameters. |  -  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |

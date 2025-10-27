@@ -10,49 +10,6 @@ servers:
 security:
 - bearerAuth: []
 paths:
-  /api/rest/2.0/ai/agent/conversation/create:
-    post:
-      description: |
-        Version: 10.13.0.cl or later
-      operationId: createAgentConversation
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/createAgentConversation_request'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentConversation'
-          description: Common successful response
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentConversation'
-          description: Common error response
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Operation failed
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Operation failed
-      tags:
-      - AI
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
   /api/rest/2.0/ai/conversation/create:
     post:
       description: |2+
@@ -121,148 +78,6 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
-  /api/rest/2.0/ai/data-source-suggestions:
-    post:
-      description: |2+
-
-        Version: 10.13.0.cl or later
-
-
-        Provides relevant data source recommendations for a user-submitted natural language query.
-
-        To use this API, the user must have at least view-level access to the underlying metadata entities referenced in the response.
-
-        #### Usage guidelines
-
-        The request must include a `query` string via the request body.
-
-        The returned results include metadata such as:
-        - `confidence`: a float indicating the model's confidence in the relevance of each recommendation
-        - `details`: includes `data_source_identifier`, `data_source_name`, and `description` of each recommended data source
-        - `reasoning`: rationale provided by the LLM to explain why each data source was recommended
-
-        If the API request is successful, ThoughtSpot returns a ranked list of data sources, each annotated with relevant reasoning.
-
-        > ###### Note:
-        > * This endpoint is currently in Beta. Breaking changes may be introduced before it is made Generally Available.
-        > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.
-
-
-
-
-
-      operationId: getDataSourceSuggestions
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/getDataSourceSuggestions_request'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/eureka_DataSourceSuggestionResponse'
-          description: Common successful response
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/eureka_DataSourceSuggestionResponse'
-          description: Common error response
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Operation failed
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Operation failed
-      tags:
-      - AI
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/ai/relevant-questions/:
-    post:
-      description: |2+
-
-        Version: 10.13.0.cl or later
-
-
-        Breaks down a user-submitted query into a series of analytical sub-questions using relevant contextual metadata.
-
-        To use this API, the user must have at least view-level access to the referenced metadata objects.
-
-        #### Usage guidelines
-
-        To accurately generate relevant questions, the request must include at least one of the following metadata identifiers within `metadata_context` : `conversation_identifier`, `answer_identifiers`, `liveboard_identifiers`, or `data_source_identifiers`.
-
-        You can further enhance the quality and precision of breakdown by providing additional `ai_context` such as:
-
-        - `content`: User provided content like text data, csv data as a string message to provide context & potentially improve the quality of the response.
-        - `instructions`: User specific text instructions sent to AI system for processing the query.
-
-        Additional optional parameters include:
-
-        - `limit_relevant_questions`: Controls the maximum number of relevant questions returned. Defaults to 5 if not specified.
-        - `bypass_cache`: If set to true, forces fresh computation instead of returning cached results.
-
-        If the API request is successful, ThoughtSpot returns a list of relevant analytical queries, each aligned with the user's original question. Each returned question includes the query string, along with the identifier and name of the corresponding data source.
-
-        > ###### Note:
-        > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.
-        > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
-
-
-
-
-      operationId: getRelevantQuestions
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/getRelevantQuestions_request'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/eureka_GetRelevantQuestionsResponse'
-          description: Common successful response
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/eureka_GetRelevantQuestionsResponse'
-          description: Common error response
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Operation failed
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Operation failed
-      tags:
-      - AI
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
   /api/rest/2.0/ai/analytical-questions:
     post:
       deprecated: true
@@ -288,68 +103,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/eureka_DecomposeQueryResponse'
-          description: Common error response
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Operation failed
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Operation failed
-      tags:
-      - AI
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/ai/agent/converse/sse:
-    post:
-      description: "\nVersion: 10.13.0.cl or later\n\n\nThis API allows users to initiate\
-        \ or continue an agent (Spotter) conversation by submitting one or more natural\
-        \ language messages. \nTo use this API, the user must have access to the relevant\
-        \ conversational session (via conversation_identifier) and submit at least\
-        \ one message.\n\n\n#### Usage guidelines\n\nTo initiate or continue a conversation,\
-        \ the request must include:\n- `conversation_identifier`: a unique session\
-        \ ID for continuity and message tracking\n- `messages`: an array of one or\
-        \ more text messages, each with a value and type\n\nAdditionally, user can\
-        \ specify what tool can be included `conversation_settings` parameter, which\
-        \ supports:\n- `enable_contextual_change_analysis` (default: false)\n- `enable_natural_language_answer_generation`\
-        \ (default: true)\n- `enable_reasoning` (default: false)\n\nIf the request\
-        \ is valid, the API returns a stream of messages in real time, including:\n\
-        - `ack`: confirms receipt of the request\n- `text / text-chunk`: content chunks,\
-        \ optionally formatted (e.g., markdown)\n- `answer`: the final structured\
-        \ response with metadata and analytics\n- `error`: if a failure occurs\n-\
-        \ `notification`: notification messages for operation being performed\n\n\
-        > ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may\
-        \ be introduced before the endpoint is made Generally Available.\n> * This\
-        \ endpoint requires Spotter - please contact ThoughtSpot support to enable\
-        \ Spotter on your cluster.\n> * The streaming protocol uses Server-Sent Events\
-        \ (SSE)\n\n\n\n\n"
-      operationId: sendAgentMessageStreaming
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/sendAgentMessageStreaming_request'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SendAgentMessageResponse'
-          description: Common successful response
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SendAgentMessageResponse'
           description: Common error response
         "400":
           content:
@@ -614,56 +367,62 @@ paths:
       - application/json
   /api/rest/2.0/auth/token/custom:
     post:
-      description: |2+
-
-         Version: 10.4.0.cl or later
-
-
-        Gets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.
-
-        To add a new user and assign privileges during auto creation, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.
-
-        To assign security attributes with filter rules and Parameters to the JWT token, you'll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.
-
-        #### Usage guidelines
-
-        You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key`.
-
-        To generate a `secret_key` on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable) in the **Develop** > **Customizations** > **Security Settings** page.
-
-        **Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.
-
-        If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.
-
-        ##### Attribute-Based Access Control (ABAC) with tokens
-
-        To implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the `filter_rules` and `parameter_values` array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user's `access_control_properties` object, after which all sessions will use the persisted values.
-
-        Specify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.
-
-        For more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).
-
-        ##### Just-in-time provisioning
-
-        For just-in-time user creation and provisioning, define the following attributes:
-
-        * `auto_create`
-        * `username`
-        * `display_name`
-        * `email`
-        * `groups`
-
-        Set `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true` in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values.
-
-        For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).
-
-        ##### Important point to note
-        All options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Persist options such as  `APPEND`, `REPLACE`, `RESET` will persist security parameters on the user profile when the token is created, while Persist option `NONE` will not persist anything but will be honoured in the session.
-
-
-
-
-
+      description: "\n Version: 10.4.0.cl or later\n\n\nGets an authentication token\
+        \ with custom rules and security attributes and creates a full session in\
+        \ ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot\
+        \ remains valid for 5 mins.\n\nTo add a new user and assign privileges during\
+        \ auto creation, you need `ADMINISTRATION` (**Can administer ThoughtSpot**)\
+        \ privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
+        \ is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**)\
+        \ privilege and edit access to the data source is required.\n\nTo assign security\
+        \ attributes with filter rules and Parameters to the JWT token, you'll need\
+        \ administrator privileges and edit access to the data source (Worksheet or\
+        \ Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
+        \ is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**)\
+        \ privilege and edit access to the data source is required.\n\n#### Usage\
+        \ guidelines\n\nYou can generate the token for a user by providing a `username`\
+        \ and `password`, or by using the cluster’s `secret_key`.\n\nTo generate a\
+        \ `secret_key` on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)\
+        \ in the **Develop** > **Customizations** > **Security Settings** page.\n\n\
+        **Note**: When both `password` and `secret_key` are included in the API request,\
+        \ `password` takes precedence.\n\nIf Multi-Factor Authentication (MFA) is\
+        \ enabled on your instance, the API login request with basic authentication\
+        \ (`username`  and `password` ) returns an error. You can switch to token-based\
+        \ authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.\n\
+        \n##### Attribute-Based Access Control (ABAC) with tokens\n\nTo implement\
+        \ Attribute-Based Access Control (ABAC) and assign security entitlements to\
+        \ users during session creation, you can generate a token with custom filtering\
+        \ rules and Parameters in the `filter_rules` and `parameter_values` array\
+        \ respectively. These attributes can be configured to persist on a specific\
+        \ set of objects for user sessions initiated using the token. Once defined,\
+        \ the rules are added to the user's `access_control_properties` object, after\
+        \ which all sessions will use the persisted values.\n\nSpecify the object\
+        \ type as `LOGICAL_TABLE`. \n\nFor more information, see [ABAC via tokens\
+        \ Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).\n\
+        \n##### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning,\
+        \ define the following attributes:\n\n* `auto_create`\n* `username`\n* `display_name`\n\
+        * `email`\n* `groups`\n\nSet `auto_create` to `true` if the user is not available\
+        \ in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create`\
+        \ parameter is set to `true` in the API request, the user properties such\
+        \ as the display name, email, Org and group assignment will not be updated\
+        \ with new values. If `auto_create` is set to `true`, it won't create formula\
+        \ variables and hence won't be applicable for `variable_values`.\n\nFor more\
+        \ information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).\n\
+        \n##### Important point to note\nAll options in the token creation APIs that\
+        \ define access to the content in ThoughtSpot will do so during the token\
+        \ creation and not when the token is being used for authentication. For example,\
+        \ `auto_create:true` will create the user when the authentication token is\
+        \ created. Persist options such as  `APPEND`, `REPLACE`, `RESET` will persist\
+        \ security parameters on the user profile when the token is created, while\
+        \ Persist option `NONE` will not persist anything but will be honoured in\
+        \ the session.\n\n##### Formula Variables\nBefore using variables_values,\
+        \ variables must be created using Create Variable API with type as Formula_Variable\
+        \ (/api/rest/2.0/template/variables/create)\nThe persist_option RESET and\
+        \ NONE cannot be used when variable_values are provided in the request.\n\
+        If you are working with variable_values, you must use other (APPEND, REPLACE)\
+        \ supported modes.\nIf you want to use RESET or NONE, do not pass any variable_values.\
+        \ In such cases, variable_values will remain unaffected.\nWhen using object_id\
+        \ with variable_values, models are supported. \n\n\n\n\n"
       operationId: getCustomAccessToken
       parameters: []
       requestBody:
@@ -1108,257 +867,6 @@ paths:
           description: Unexpected error
       tags:
       - Authentication
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/connection-configurations/search:
-    post:
-      description: |2+
-
-         Version: 10.12.0.cl or later
-
-
-        Gets connection configuration objects.
-
-        Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
-
-        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.
-
-        #### Usage guidelines
-        * To get a list of all configurations available in the ThoughtSpot system, send the API request with only the connection name or GUID in the request body.
-        * To fetch details of a configuration object, specify the configuration object name or GUID.
-
-
-
-
-
-      operationId: connectionConfigurationSearch
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/connectionConfigurationSearch_request'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/ConnectionConfigurationResponse'
-                type: array
-          description: Configuration fetched successfully.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Connection Configurations
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/connection-configurations/create:
-    post:
-      description: "\n Version: 10.12.0.cl or later\n\n\nCreates an additional configuration\
-        \ to an existing connection to a data warehouse.  \n\nRequires `DATAMANAGEMENT`\
-        \ (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**)\
-        \ privilege.\n\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
-        \ is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can\
-        \ create/edit Connections**) privilege is required.\n\n#### Usage guidelines\n\
-        \n * A JSON map of configuration attributes in `configuration`. The following\
-        \ example shows the configuration attributes:\n  ```\n   {\n     \"user\"\
-        :\"DEV_USER\",\n     \"password\":\"TestConn123\",\n     \"role\":\"DEV\"\
-        ,\n     \"warehouse\":\"DEV_WH\"\n    }\n  ```\n\n* If the `policy_type` is\
-        \ `PRINCIPALS`, then `policy_principals` is a required field.\n* If the `policy_type`\
-        \ is `PROCESSES`, then `policy_processes` is a required field.\n* If the `policy_type`\
-        \ is `NO_POLICY`, then `policy_principals` and `policy_processes` are not\
-        \ required fields.\n\n\n\n\n\n"
-      operationId: createConnectionConfiguration
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/createConnectionConfiguration_request'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConnectionConfigurationResponse'
-          description: Connection configuration successfully created.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Connection Configurations
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/connection-configurations/delete:
-    post:
-      description: |2+
-
-         Version: 10.12.0.cl or later
-
-
-        Deletes connection configuration objects.
-
-        Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
-
-        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.
-
-
-
-
-
-      operationId: deleteConnectionConfiguration
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/deleteConnectionConfiguration_request'
-        required: true
-      responses:
-        "204":
-          description: Connection Configurations successfully deleted.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Connection Configurations
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/connection-configurations/{configuration_identifier}/update:
-    post:
-      description: "\n Version: 10.12.0.cl or later\n\n\nUpdates a connection configuration\
-        \ object.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions\
-        \ to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**)\
-        \ privilege.\n\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
-        \ is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can\
-        \ create/edit Connections**) privilege is required.\n\n#### Supported operations\n\
-        This API endpoint lets you perform the following operations in a single API\
-        \ request:\n\n * Edit the name or description of the configuration\n * Edit\
-        \ the configuration properties\n * Edit the `policy_type`\n * Edit the type\
-        \ of authentication\n * Enable or disable a configuration\n\n **NOTE**: When\
-        \ updating a configuration where `disabled` is `true`, you must reset `disabled`\
-        \ to `true` in your update request payload. If not explicitly set again, the\
-        \ API will default `disabled` to `false`.\n \n\n\n\n\n"
-      operationId: updateConnectionConfiguration
-      parameters:
-      - description: Unique ID or name of the configuration.
-        explode: false
-        in: path
-        name: configuration_identifier
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/updateConnectionConfiguration_request'
-        required: true
-      responses:
-        "204":
-          description: Connection configuration successfully updated.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Connection Configurations
       - ThoughtSpotRest
       x-content-type: application/json
       x-accepts:
@@ -1885,46 +1393,102 @@ paths:
         \ If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT\
         \ as the authentication type.\n\n   * A JSON map of configuration attributes,\
         \ database details, and table properties in `data_warehouse_config` as shown\
-        \ in the following example:\n\n   ```\n   {\n      \"configuration\":{\n \
-        \        \"accountName\":\"thoughtspot_partner\",\n         \"user\":\"tsadmin\"\
-        ,\n         \"password\":\"TestConn123\",\n         \"role\":\"sysadmin\"\
-        ,\n         \"warehouse\":\"MEDIUM_WH\"\n      },\n      \"externalDatabases\"\
-        :[\n         {\n            \"name\":\"AllDatatypes\",\n            \"isAutoCreated\"\
-        :false,\n            \"schemas\":[\n               {\n                  \"\
-        name\":\"alldatatypes\",\n                  \"tables\":[\n               \
-        \      {\n                        \"name\":\"allDatatypes\",\n           \
-        \             \"type\":\"TABLE\",\n                        \"description\"\
-        :\"\",\n                        \"selected\":true,\n                     \
-        \   \"linked\":true,\n                        \"columns\":[\n            \
-        \               {\n                              \"name\":\"CNUMBER\",\n \
-        \                             \"type\":\"INT64\",\n                      \
-        \        \"canImport\":true,\n                              \"selected\":true,\n\
-        \                              \"isLinkedActive\":true,\n                \
-        \              \"isImported\":false,\n                              \"tableName\"\
-        :\"allDatatypes\",\n                              \"schemaName\":\"alldatatypes\"\
-        ,\n                              \"dbName\":\"AllDatatypes\"\n           \
-        \                },\n                           {\n                      \
-        \        \"name\":\"CDECIMAL\",\n                              \"type\":\"\
-        INT64\",\n                              \"canImport\":true,\n            \
-        \                  \"selected\":true,\n                              \"isLinkedActive\"\
-        :true,\n                              \"isImported\":false,\n            \
-        \                  \"tableName\":\"allDatatypes\",\n                     \
-        \         \"schemaName\":\"alldatatypes\",\n                             \
-        \ \"dbName\":\"AllDatatypes\"\n                           }\n            \
-        \            ]\n                     }\n                  ]\n            \
-        \   }\n            ]\n         }\n      ]\n   }\n   ```\n\n3. If you are updating\
-        \ a configuration attribute, connection name, or description, you can set\
-        \ `validate` to `false`.\n\n  **NOTE:** If the `authentication_type` is anything\
-        \ other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType\
-        \ property in the payload. If you do not  specify authenticationType, the\
-        \ API will default to SERVICE_ACCOUNT as the authentication type.\n\n  * A\
-        \ JSON map of configuration attributes in `data_warehouse_config`. The following\
-        \ example shows the configuration attributes for a Snowflake connection:\n\
-        \   ```\n   {\n      \"configuration\":{\n         \"accountName\":\"thoughtspot_partner\"\
-        ,\n         \"user\":\"tsadmin\",\n         \"password\":\"TestConn123\",\n\
-        \         \"role\":\"sysadmin\",\n         \"warehouse\":\"MEDIUM_WH\"\n \
-        \     },\n      \"externalDatabases\":[\n\n      ]\n   }\n   ```\n\n\n\n\n\
-        \n"
+        \ in the following example:\n   * This is an example of updating a single\
+        \ table in a empty connection:\n   \n      ```\n      {\n        \"authenticationType\"\
+        : \"SERVICE_ACCOUNT\",\n        \"externalDatabases\": [\n          {\n  \
+        \          \"name\": \"DEVELOPMENT\",\n            \"isAutoCreated\": false,\n\
+        \            \"schemas\": [\n              {\n                \"name\": \"\
+        TS_dataset\",\n                \"tables\": [\n                  {\n      \
+        \              \"name\": \"DEMORENAME\",\n                    \"type\": \"\
+        TABLE\",\n                    \"description\": \"\",\n                   \
+        \ \"selected\": true,\n                    \"linked\": true,\n           \
+        \         \"gid\": 0,\n                    \"datasetId\": \"-1\",\n      \
+        \              \"subType\": \"\",\n                    \"reportId\": \"\"\
+        ,\n                    \"viewId\": \"\",\n                    \"columns\"\
+        : [\n                      {\n                        \"name\": \"Col1\",\n\
+        \                        \"type\": \"VARCHAR\",\n                        \"\
+        canImport\": true,\n                        \"selected\": true,\n        \
+        \                \"description\": \"\",\n                        \"isLinkedActive\"\
+        : true,\n                        \"isAggregate\": false\n                \
+        \      },\n                      {\n                        \"name\": \"Col2\"\
+        ,\n                        \"type\": \"VARCHAR\",\n                      \
+        \  \"canImport\": true,\n                        \"selected\": true,\n   \
+        \                     \"description\": \"\",\n                        \"isLinkedActive\"\
+        : true,\n                        \"isAggregate\": false\n                \
+        \      },\n                      {\n                        \"name\": \"Col3\"\
+        ,\n                        \"type\": \"VARCHAR\",\n                      \
+        \  \"canImport\": true,\n                        \"selected\": true,\n   \
+        \                     \"description\": \"\",\n                        \"isLinkedActive\"\
+        : true,\n                        \"isAggregate\": false\n                \
+        \      },\n                      {\n                        \"name\": \"Col312\"\
+        ,\n                        \"type\": \"VARCHAR\",\n                      \
+        \  \"canImport\": true,\n                        \"selected\": true,\n   \
+        \                     \"description\": \"\",\n                        \"isLinkedActive\"\
+        : true,\n                        \"isAggregate\": false\n                \
+        \      },\n                      {\n                        \"name\": \"Col4\"\
+        ,\n                        \"type\": \"VARCHAR\",\n                      \
+        \  \"canImport\": true,\n                        \"selected\": true,\n   \
+        \                     \"description\": \"\",\n                        \"isLinkedActive\"\
+        : true,\n                        \"isAggregate\": false\n                \
+        \      }\n                    ],\n                    \"relationships\": []\n\
+        \                  }\n                ]\n              }\n            ]\n\
+        \          }\n        ],\n        \"configuration\": {\n          \"password\"\
+        : \"\",\n          \"database\": \"DEVELOPMENT\",\n          \"role\": \"\
+        DEV\",\n          \"accountName\": \"thoughtspot_partner\",\n          \"\
+        warehouse\": \"DEMO_WH\",\n          \"user\": \"DEV_USER\"\n        }\n \
+        \     }\n      ```\n      \n* This is an example of updating a single table\
+        \ in an existing connection with tables:\n    \n      ```\n      {\n     \
+        \   \"authenticationType\": \"SERVICE_ACCOUNT\",\n        \"externalDatabases\"\
+        : [\n          {\n            \"name\": \"DEVELOPMENT\",\n            \"isAutoCreated\"\
+        : false,\n            \"schemas\": [\n              {\n                \"\
+        name\": \"TS_dataset\",\n                \"tables\": [\n                 \
+        \ {\n                    \"name\": \"CUSTOMER\",\n                    \"type\"\
+        : \"TABLE\",\n                    \"description\": \"\",\n               \
+        \     \"selected\": true,\n                    \"linked\": true,\n       \
+        \             \"gid\": 0,\n                    \"datasetId\": \"-1\",\n  \
+        \                  \"subType\": \"\",\n                    \"reportId\": \"\
+        \",\n                    \"viewId\": \"\",\n                    \"columns\"\
+        : [],\n                    \"relationships\": []\n                  },\n \
+        \                 {\n                    \"name\": \"tpch5k_falcon_default_schema_users\"\
+        ,\n                    \"type\": \"TABLE\",\n                    \"description\"\
+        : \"\",\n                    \"selected\": true,\n                    \"linked\"\
+        : true,\n                    \"gid\": 0,\n                    \"datasetId\"\
+        : \"-1\",\n                    \"subType\": \"\",\n                    \"\
+        reportId\": \"\",\n                    \"viewId\": \"\",\n               \
+        \     \"columns\": [\n                      {\n                        \"\
+        name\": \"user_id\",\n                        \"type\": \"INT64\",\n     \
+        \                   \"canImport\": true,\n                        \"selected\"\
+        : true,\n                        \"description\": \"\",\n                \
+        \        \"isLinkedActive\": true,\n                        \"isAggregate\"\
+        : false\n                      },\n                      {\n             \
+        \           \"name\": \"product_id\",\n                        \"type\": \"\
+        INT64\",\n                        \"canImport\": true,\n                 \
+        \       \"selected\": true,\n                        \"description\": \"\"\
+        ,\n                        \"isLinkedActive\": true,\n                   \
+        \     \"isAggregate\": false\n                      },\n                 \
+        \     {\n                        \"name\": \"user_cost\",\n              \
+        \          \"type\": \"INT64\",\n                        \"canImport\": true,\n\
+        \                        \"selected\": true,\n                        \"description\"\
+        : \"\",\n                        \"isLinkedActive\": true,\n             \
+        \           \"isAggregate\": false\n                      }\n            \
+        \        ],\n                    \"relationships\": []\n                 \
+        \ }\n                ]\n              }\n            ]\n          }\n    \
+        \    ],\n        \"configuration\": {\n          \"password\": \"\",\n   \
+        \       \"database\": \"DEVELOPMENT\",\n          \"role\": \"DEV\",\n   \
+        \       \"accountName\": \"thoughtspot_partner\",\n          \"warehouse\"\
+        : \"DEMO_WH\",\n          \"user\": \"DEV_USER\"\n        }\n      }\n   \
+        \   ```\n\n3. If you are updating a configuration attribute, connection name,\
+        \ or description, you can set `validate` to `false`.\n\n  **NOTE:** If the\
+        \ `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly\
+        \ provide the authenticationType property in the payload. If you do not  specify\
+        \ authenticationType, the API will default to SERVICE_ACCOUNT as the authentication\
+        \ type.\n\n  * A JSON map of configuration attributes in `data_warehouse_config`.\
+        \ The following example shows the configuration attributes for a Snowflake\
+        \ connection:\n   ```\n   {\n      \"configuration\":{\n         \"accountName\"\
+        :\"thoughtspot_partner\",\n         \"user\":\"tsadmin\",\n         \"password\"\
+        :\"TestConn123\",\n         \"role\":\"sysadmin\",\n         \"warehouse\"\
+        :\"MEDIUM_WH\"\n      },\n      \"externalDatabases\":[\n\n      ]\n   }\n\
+        \   ```\n\n\n\n\n\n"
       operationId: updateConnectionV2
       parameters:
       - description: Unique ID or name of the connection.
@@ -2254,377 +1818,6 @@ paths:
           description: Unexpected error
       tags:
       - Custom Action
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/calendars/create:
-    post:
-      description: "\n Version: 10.12.0.cl or later\n\n\nCreates a new [custom calendar](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal).\n\
-        \nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can\
-        \ administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
-        \ is enabled on your ThoughtSpot instance, the `CAN_MANAGE_CUSTOM_CALENDAR`\
-        \ (**Can manage custom calendars**) privilege is required.\n\n\n#### Usage\
-        \ guidelines\n\nYou can create a custom calendar from scratch or an existing\
-        \ Table in ThoughtSpot. For both methods of calendar creation, the following\
-        \ parameters are required:\n\n* Name of the custom calendar.\n* Calendar creation\
-        \ method. To create a calendar from an existing table, specify the method:\n\
-        \n - `FROM_EXISTING_TABLE` - Creates calendar from the table reference provided\
-        \ in the API request.\n - `FROM_INPUT_PARAMS` - Creates a calendar from the\
-        \ parameters defined in the API request.\n\n* Connection ID and Table name\n\
-        * Database and schema name attributes:\n  For most Cloud Data Warehouse (CDW)\
-        \ connectors, both `database_name` and `schema_name` attributes are required.\
-        \  \n  However, the attribute requirements are conditional and vary based\
-        \ on the connector type and its metadata structure. For example, for connectors\
-        \ such as Teradata, MySQL, SingleSore, Amazon Aurora MySQL, Amazon RDS MySQL,\
-        \ Oracle, and GCP_MYSQL, the `schema_name` is required, whereas the `database_name`\
-        \ attribute is not.\n  Similarly, connectors such as ClickHouse require you\
-        \ to specify the `database_name` and the schema specification in such cases\
-        \ is optional.\n\n**NOTE**: If you are creating a calendar from an existing\
-        \ table, ensure that the referenced table matches the required DDL for custom\
-        \ calendars. If the schema does not match, the API returns an error.\n\n#####\
-        \ Calendar type\nThe API allows you to create the following types of calendars:\n\
-        \n* `MONTH_OFFSET`. The default calendar type. A `MONTH_OFFSET` calendar is\
-        \ offset by a few months from the standard calendar months (January to December)\
-        \ and the year begins with the month defined in the request. For example,\
-        \ if the `month_offset` value is set as `April`, the calendar year begins\
-        \ in April.\n\n* `4-4-5`. Each quarter in the calendar will include two 4-week\
-        \ months followed by one 5-week month.\n* `4-5-4`. Each quarter in the calendar\
-        \ will include two 4-week months with a 5-week month between.\n* `5-4-4`.\
-        \ Each quarter begins with a 5-week month, followed by two 4-week months.\n\
-        \nTo start and end the calendar on a specific date, specify the dates in the\
-        \ `MM/DD/YYYY` format. For `MONTH_OFFSET` calendars, ensure that the `start_date`\
-        \ matches the month specified in the `month_offset` attribute.\n\nYou can\
-        \ also set the starting day of the week and customize the prefixes for year\
-        \ and quarter labels.\n\n#### Examples\n\nTo create a calendar from an existing\
-        \ table:\n\n```\n{\n  \"name\": \"MyCustomCalendar1\",\n  \"table_reference\"\
-        : {\n    \"connection_identifier\": \"4db8ea22-2ff4-4224-b05a-26674717e468\"\
-        ,\n    \"table_name\": \"MyCalendarTable\",\n    \"database_name\": \"RETAILAPPAREL\"\
-        ,\n    \"schema_name\": \"PUBLIC\"\n  },\n  \"creation_method\": \"FROM_EXISTING_TABLE\"\
-        ,\n}\n```\n\nTo create a calendar from scratch:\n\n```\n{\n  \"name\": \"\
-        MyCustomCalendar1\",\n  \"table_reference\": {\n    \"connection_identifier\"\
-        : \"4db8ea22-2ff4-4224-b05a-26674717e468\",\n    \"table_name\": \"MyCalendarTable\"\
-        ,\n    \"database_name\": \"RETAILAPPAREL\",\n    \"schema_name\": \"PUBLIC\"\
-        \n  },\n  \"creation_method\": \"FROM_INPUT_PARAMS\",\n  \"calendar_type\"\
-        : \"MONTH_OFFSET\",\n  \"month_offset\": \"April\",\n  \"start_day_of_week\"\
-        : \"Monday\",\n  \"quarter_name_prefix\": \"Q\",\n  \"year_name_prefix\":\
-        \ \"FY\",\n  \"start_date\": \"04/01/2025\",\n  \"end_date\": \"04/31/2025\"\
-        \n}\n```\n\n\n\n\n\n"
-      operationId: createCalendar
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/createCalendar_request'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CalendarResponse'
-          description: Custom calendar created successfully.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Custom Calendars
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/calendars/{calendar_identifier}/delete:
-    post:
-      description: "\n Version: 10.12.0.cl or later\n\n\nDeletes a [custom calendar](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal).\n\
-        \nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can\
-        \ administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
-        \ is enabled on your ThoughtSpot instance, the `CAN_MANAGE_CUSTOM_CALENDAR`\
-        \ (**Can manage custom calendars**) privilege is required.\n\n#### Usage guidelines\n\
-        To delete a custom calendar, specify the calendar ID as a path parameter in\
-        \ the request URL.  \n\n\n\n\n\n"
-      operationId: deleteCalendar
-      parameters:
-      - description: Unique ID or name of the Calendar.
-        explode: false
-        in: path
-        name: calendar_identifier
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "204":
-          description: Custom calendar successfully deleted.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Custom Calendars
-      - ThoughtSpotRest
-      x-accepts:
-      - application/json
-  /api/rest/2.0/calendars/generate-csv:
-    post:
-      description: |2+
-
-         Version: 10.12.0.cl or later
-
-
-        Exports a [custom calendar](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal) in the CSV format.
-
-        Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
-        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_CUSTOM_CALENDAR` (**Can manage custom calendars**) privilege is required.
-
-        #### Usage guidelines
-
-        Use this API to download a custom calendar in the CSV file format. In your API request, specify the following parameters.
-
-        * Start and end date of the calendar. For "month offset" calendars, the start date must match the month defined in the `month_offset` attribute.
-
-        You can also specify optional parameters such as the starting day of the week and prefixes for the quarter and year labels.
-
-
-
-
-
-      operationId: generateCSV
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/generateCSV_request'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                type: object
-          description: "Generate custom calendar data based on specifications, as\
-            \ a CSV file."
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Custom Calendars
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/calendars/search:
-    post:
-      description: |2+
-
-         Version: 10.12.0.cl or later
-
-
-        Gets a list of [custom calendars](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal).
-
-        Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
-        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_CUSTOM_CALENDAR` (**Can manage custom calendars**) privilege is required.
-
-        #### Usage guidelines
-
-        By default, the API returns a list of custom calendars for all connection objects. To retrieve custom calendar details for a particular connection, specify the connection ID. You can also use other search parameters such as `name_pattern` and `sort_options` as search filters.
-
-        The `name_pattern` parameter filters and returns only those objects that match the specified pattern. Use `%` as a wildcard for pattern matching.
-
-
-
-
-
-      operationId: searchCalendars
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/searchCalendars_request'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/CalendarResponse'
-                type: array
-          description: Custom calendar fetched successfully.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Custom Calendars
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/calendars/{calendar_identifier}/update:
-    post:
-      description: "\n Version: 10.12.0.cl or later\n\n\nUpdates the properties of\
-        \ a [custom calendar](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal).\n\
-        \nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can\
-        \ administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
-        \ is enabled on your ThoughtSpot instance, the `CAN_MANAGE_CUSTOM_CALENDAR`\
-        \ (**Can manage custom calendars**) privilege is required.\n\n#### Usage guidelines\n\
-        \nYou can update the properties of a calendar using one of the following methods:\n\
-        * `FROM_INPUT_PARAMS` to update the calendar properties with the values defined\
-        \ in the API request.\n* `FROM_EXISTING_TABLE` Creates a calendar from the\
-        \ parameters defined in the API request.\n\nTo update a custom calendar, specify\
-        \ the calendar ID as a path parameter in the request URL and the following\
-        \ parameters in the request body:  \n\n* Connection ID and Table name\n* Database\
-        \ and schema name attributes:\n  For most Cloud Data Warehouse (CDW) connectors,\
-        \ both `database_name` and `schema_name` attributes are required.  \n  However,\
-        \ the attribute requirements are conditional and vary based on the connector\
-        \ type and its metadata structure. For example, for connectors such as Teradata,\
-        \ MySQL, SingleSore, Amazon Aurora MySQL, Amazon RDS MySQL, Oracle, and GCP_MYSQL,\
-        \ the `schema_name` is required, whereas the `database_name` attribute is\
-        \ not.\n  Similarly, connectors such as ClickHouse require you to specify\
-        \ the `database_name` and the schema specification in such cases is optional.\n\
-        \nThe API allows you to modify the calendar type, month offset value, start\
-        \ and end date, starting day of the week, and prefixes assigned to the year\
-        \ and quarter labels.   \n\n#### Examples\n\nUpdate a custom calendar using\
-        \ an existing Table in ThoughtSpot:\n\n```\n{\n  \"update_method\": \"FROM_EXISTING_TABLE\"\
-        ,\n  \"table_reference\": {\n    \"connection_identifier\": \"Connection1\"\
-        ,\n    \"database_name\": \"db1\",\n    \"table_name\": \"custom_calendar_2025\"\
-        ,\n    \"schame_name\": \"schemaVar\"\n  }\n}\n```\n\nUpdate a custom calendar\
-        \ with the attributes defined in the API request:\n\n```\n{\n  \"update_method\"\
-        : \"FROM_INPUT_PARAMS\",\n  \"table_reference\": {\n    \"connection_identifier\"\
-        : \"Connection1\",\n    \"database_name\": \"db1\",\n    \"table_name\": \"\
-        custom_calendar_2025\",\n    \"schame_name\": \"schemaVar\"\n  },\n  \"month_offset\"\
-        : \"August\",\n  \"start_day_of_week\": \"Monday\",\n  \"start_date\": \"\
-        08/01/2025\",\n  \"end_date\": \"07/31/2026\"\n}\n```\n\n\n\n\n\n"
-      operationId: updateCalendar
-      parameters:
-      - description: Unique Id or name of the calendar.
-        explode: false
-        in: path
-        name: calendar_identifier
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/updateCalendar_request'
-        required: true
-      responses:
-        "204":
-          description: Custom calendar updated successfully.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Custom Calendars
       - ThoughtSpotRest
       x-content-type: application/json
       x-accepts:
@@ -3204,439 +2397,6 @@ paths:
       x-content-type: multipart/form-data
       x-accepts:
       - application/json
-  /api/rest/2.0/customization/email:
-    post:
-      description: |2+
-
-        Version: 10.10.0.cl or later
-
-
-        Creates a customization configuration for the notification email.
-
-        #### Pre-requisites
-
-        Requires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
-        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.
-
-        **NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.
-
-        #### Usage guidelines
-
-        To create a custom configuration pass these parameters in your API request:
-
-        - A JSON map of configuration attributes `template_properties`. The following example shows a sample set of customization configuration:
-
-        ```
-        {
-          {
-            "ctaButtonBgColor": "#444DEA",
-            "ctaTextFontColor": "#FFFFFF",
-            "primaryBgColor": "#D3DEF0",
-            "hideMobileAppNudge": false,
-            "fontFamily" : "",
-            "hideProductName" : false,
-            "hideFooterPhone" : false,
-            "hideFooterAddress" : false,
-            "hidePrivacyPolicy" : false,
-            "hideManageNotification" : false,
-            "hideTsVocabularyDefinitions": false,
-            "hideNotificationStatus" : false,
-            "hideErrorMessage": false,
-            "hideUnsubscribeLink" : false,
-            "hideModifyAlert": false,
-            "textTransform": "",
-            "replacementValueForLiveboard": "LB dashboard",
-            "replacementValueForAnswer": "Answer dashboard",
-            "replacementValueForSpotIQ": "SpotIQ dashboard",
-            "logoUrl":"",
-            "productName":"ThoughtSpot",
-            "footerPhone":"(800) 508-7008",
-            "footerAddress":"444 Castro St, Suite 1000 Mountain View, CA 94041",
-            "companyWebsiteUrl":"",
-            "companyPrivacyPolicyUrl":""
-          }
-        }
-        ```
-
-
-
-
-
-      operationId: createEmailCustomization
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/createEmailCustomization_request'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreateEmailCustomizationResponse'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Email Customization
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/customization/email/{template_identifier}/delete:
-    post:
-      deprecated: true
-      description: |2+
-
-        Version: 10.10.0.cl or later
-
-
-        Deletes the configuration for the email customization.
-
-        #### Pre-requisites
-
-        Requires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
-        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.
-
-        **NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.
-
-        #### Usage guidelines
-
-        - Call the search API endpoint to get the `template_identifier` from the response.
-        - Use that `template_identifier` as a parameter in this API request.
-
-
-
-
-
-      operationId: deleteEmailCustomization
-      parameters:
-      - description: Unique ID or name of the email customization.
-        explode: false
-        in: path
-        name: template_identifier
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "204":
-          description: Email Customization configuration successfully deleted.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Email Customization
-      - ThoughtSpotRest
-      x-accepts:
-      - application/json
-  /api/rest/2.0/customization/email/delete:
-    post:
-      description: |2+
-
-        Version: 10.12.0.cl or later
-
-
-        Deletes the configuration for the email customization.
-
-        #### Pre-requisites
-
-        Requires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
-        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.
-
-        **NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.
-
-        #### Usage guidelines
-
-        - Call the search API endpoint to get the `org_identifier` from the response.
-        - Use that `org_identifier` as a parameter in this API request.
-
-
-
-
-
-      operationId: deleteOrgEmailCustomization
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/deleteOrgEmailCustomization_request'
-        required: true
-      responses:
-        "204":
-          description: Email Customization configuration successfully deleted.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Email Customization
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/customization/email/search:
-    post:
-      description: |2+
-
-        Version: 10.10.0.cl or later
-
-
-        Search the email customization configuration if any set for the ThoughtSpot system.
-
-        #### Pre-requisites
-
-        Requires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
-        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.
-
-        **NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.
-
-
-
-
-
-      operationId: searchEmailCustomization
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/searchEmailCustomization_request'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/CreateEmailCustomizationResponse'
-                type: array
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Email Customization
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/customization/email/update:
-    post:
-      description: |2+
-
-        Version: 10.12.0.cl or later
-
-
-        Updates a customization configuration for the notification email.
-
-        #### Pre-requisites
-
-        Requires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
-        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.
-
-        **NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.
-
-        #### Usage guidelines
-
-        To update a custom configuration pass these parameters in your API request:
-
-        - A JSON map of configuration attributes `template_properties`. The following example shows a sample set of customization configuration:
-
-        ```
-        {
-          {
-            "ctaButtonBgColor": "#444DEA",
-            "ctaTextFontColor": "#FFFFFF",
-            "primaryBgColor": "#D3DEF0",
-            "hideMobileAppNudge": false,
-            "fontFamily" : "",
-            "hideProductName" : false,
-            "hideFooterPhone" : false,
-            "hideFooterAddress" : false,
-            "hidePrivacyPolicy" : false,
-            "hideManageNotification" : false,
-            "hideTsVocabularyDefinitions": false,
-            "hideNotificationStatus" : false,
-            "hideErrorMessage": false,
-            "hideUnsubscribeLink" : false,
-            "hideModifyAlert": false,
-            "textTransform": "",
-            "replacementValueForLiveboard": "LB dashboard",
-            "replacementValueForAnswer": "Answer dashboard",
-            "replacementValueForSpotIQ": "SpotIQ dashboard",
-            "logoUrl":"",
-            "productName":"ThoughtSpot",
-            "footerPhone":"(800) 508-7008",
-            "footerAddress":"444 Castro St, Suite 1000 Mountain View, CA 94041",
-            "companyWebsiteUrl":"",
-            "companyPrivacyPolicyUrl":""
-          }
-        }
-        ```
-
-
-
-
-
-      operationId: updateEmailCustomization
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/updateEmailCustomization_request'
-        required: true
-      responses:
-        "204":
-          description: Email Customization configuration successfully updated.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Email Customization
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/customization/email/validate:
-    post:
-      description: |2+
-
-        Version: 10.10.0.cl or later
-
-
-        Validates the email customization configuration if any set for the ThoughtSpot system.
-
-        #### Pre-requisites
-
-        Requires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
-        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.
-
-        **NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.
-
-
-
-
-
-      operationId: validateEmailCustomization
-      parameters: []
-      responses:
-        "204":
-          description: Triggered test email for customization configuration
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Email Customization
-      - ThoughtSpotRest
-      x-accepts:
-      - application/json
   /api/rest/2.0/groups/create:
     post:
       description: |2+
@@ -4129,11 +2889,11 @@ paths:
       - application/json
   /api/rest/2.0/metadata/copyobject:
     post:
-      description: "\nMakes a copy of an Answer or Liveboard saved in Atlas \n  Version:\
-        \ 10.3.0.cl or later\n\n\nCreates a copy of a metadata object.\n\nRequires\
-        \ at least view access to the metadata object being copied.\n\nUpon successful\
-        \ execution, the API creates a copy of the metadata object specified in the\
-        \ API request and returns the ID of the new object.\n\n\n\n\n\n"
+      description: "\nMakes a copy of an Answer or Liveboard \n  Version: 10.3.0.cl\
+        \ or later\n\n\nCreates a copy of a metadata object.\n\nRequires at least\
+        \ view access to the metadata object being copied.\n\nUpon successful execution,\
+        \ the API creates a copy of the metadata object specified in the API request\
+        \ and returns the ID of the new object.\n\n\n\n\n\n"
       operationId: copyObject
       parameters: []
       requestBody:
@@ -4733,58 +3493,6 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
-  /api/rest/2.0/metadata/parameterize:
-    post:
-      description: "\nParameterize fields in metadata objects. \n Version: 10.9.0.cl\
-        \ or later\n\n\nAllows parameterizing fields in metadata objects in ThoughtSpot.\n\
-        \nRequires appropriate permissions to modify the metadata object.\n\nThe API\
-        \ endpoint allows parameterizing the following types of metadata objects:\n\
-        * Logical Tables\n* Connections\n\nFor a Logical Table the field type must\
-        \ be `ATTRIBUTE` and field name can be one of:\n* databaseName\n* schemaName\n\
-        * tableName\n\nFor a Connection the field type is always `CONNECTION_PROPERTY`.\
-        \ We use the field_name in this\ncase to specify the exact property of a connection\
-        \ which needs to be parameterized.\n\n\n\n\n\n"
-      operationId: parameterizeMetadata
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/parameterizeMetadata_request'
-        required: true
-      responses:
-        "204":
-          description: Parameterize successful.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Metadata
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
   /api/rest/2.0/metadata/search:
     post:
       description: |2+
@@ -4844,59 +3552,6 @@ paths:
                   $ref: '#/components/schemas/MetadataSearchResponse'
                 type: array
           description: Metadata objects search result.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Metadata
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/metadata/unparameterize:
-    post:
-      description: "\nRemove parameterization from fields in metadata objects. \n\
-        \ Version: 10.9.0.cl or later\n\n\nAllows removing parameterization from fields\
-        \ in metadata objects in ThoughtSpot.\n\nRequires appropriate permissions\
-        \ to modify the metadata object.\n\nThe API endpoint allows unparameterizing\
-        \ the following types of metadata objects:\n* Logical Tables\n* Connections\n\
-        \nFor a Logical Table the field type must be `ATTRIBUTE` and field name can\
-        \ be one of:\n* databaseName\n* schemaName\n* tableName\n\nFor a Connection\
-        \ the field type is always `CONNECTION_PROPERTY`. We use the field_name in\
-        \ this\ncase to specify the exact property of a connection which needs to\
-        \ be unparameterized.\n\n\n\n\n\n"
-      operationId: unparameterizeMetadata
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/unparameterizeMetadata_request'
-        required: true
-      responses:
-        "204":
-          description: Successfuly removed parameters.
         "400":
           content:
             application/json:
@@ -6032,82 +4687,6 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
-  /api/rest/2.0/security/column/rules/fetch:
-    post:
-      description: "\nVersion: 10.12.0.cl or later\n\n\nFetches column security rules\
-        \ for specified tables.\n\nThis API endpoint retrieves column-level security\
-        \ rules configured for tables. It returns information about which columns\
-        \ are secured and which groups have access to those columns.\n\n#### Usage\
-        \ guidelines\n\n- Provide an array of table identifiers using either `identifier`\
-        \ (GUID or name) or `obj_identifier` (object ID)\n- At least one of `identifier`\
-        \ or `obj_identifier` must be provided for each table\n- The API returns column\
-        \ security rules for all specified tables\n- Users must have appropriate permissions\
-        \ to access security rules for the specified tables\n\n#### Required permissions\n\
-        \n- `ADMINISTRATION` - Can administer ThoughtSpot\n- `DATAMANAGEMENT` - Can\
-        \ manage data\n- `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` - Can manage worksheet\
-        \ views and tables\n\n#### Example request\n\n```json\n{\n  \"tables\": [\n\
-        \    {\n      \"identifier\": \"table-guid\",\n      \"obj_identifier\": \"\
-        table-object-id\"\n    }\n  ]\n}\n```\n\n#### Response format\n\nThe API returns\
-        \ an array of `ColumnSecurityRuleResponse` objects wrapped in a `data` field.\
-        \ Each `ColumnSecurityRuleResponse` object contains:\n- Table information\
-        \ (GUID and object ID)  \n- Array of column security rules with column details,\
-        \ group access, and source table information\n\n#### Example response\n\n\
-        ```json\n{\n  \"data\": [\n    {\n      \"guid\": \"table-guid\",\n      \"\
-        objId\": \"table-object-id\",\n      \"columnSecurityRules\": [\n        {\n\
-        \          \"column\": {\n            \"id\": \"col_123\",\n            \"\
-        name\": \"Salary\"\n          },\n          \"groups\": [\n            {\n\
-        \              \"id\": \"group_1\",\n              \"name\": \"HR Department\"\
-        \n            }\n          ],\n          \"sourceTableDetails\": {\n     \
-        \       \"id\": \"source-table-guid\",\n            \"name\": \"Employee_Data\"\
-        \n          }\n        }\n      ]\n    }\n  ]\n}\n```\n\n\n\n\n"
-      operationId: fetchColumnSecurityRules
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/fetchColumnSecurityRules_request'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/ColumnSecurityRuleResponse'
-                type: array
-          description: Successfully fetched column security rules
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Bad request - Table not found or invalid parameters
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden - User doesn't have permission to access security
-            rules for this table
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Internal server error
-      tags:
-      - Security
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
   /api/rest/2.0/security/principals/fetch-permissions:
     post:
       description: "\n Version: 9.0.0.cl or later\n\n\nFetches object permission details\
@@ -6287,70 +4866,6 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
-  /api/rest/2.0/security/metadata/publish:
-    post:
-      description: |2+
-
-        Version: 10.9.0.cl or later
-
-
-        Allows publishing metadata objects across organizations in ThoughtSpot.
-
-        Requires ADMINISTRATION role and TENANT scope.
-
-        The API endpoint allows publishing the following types of metadata objects:
-        * Liveboards
-        * Answers
-        * Logical Tables
-
-        This API will essentially share the objects along with it's dependencies to
-        the org admins of the orgs to which it is being published.
-
-
-
-
-
-      operationId: publishMetadata
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/publishMetadata_request'
-        required: true
-      responses:
-        "204":
-          description: Publishing metadata objects is successful.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Security
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
   /api/rest/2.0/security/metadata/share:
     post:
       description: |2+
@@ -6413,162 +4928,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Unexpected error
-      tags:
-      - Security
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/security/metadata/unpublish:
-    post:
-      description: |2+
-
-        Version: 10.9.0.cl or later
-
-
-        Allows unpublishing metadata objects from organizations in ThoughtSpot.
-
-        Requires ADMINISTRATION role and TENANT scope.
-
-        The API endpoint allows unpublishing the following types of metadata objects:
-        * Liveboards
-        * Answers
-        * Logical Tables
-
-        When unpublishing objects, you can:
-        * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them
-        * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations
-
-
-
-
-
-      operationId: unpublishMetadata
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/unpublishMetadata_request'
-        required: true
-      responses:
-        "204":
-          description: Unpublishing metadata objects is successful.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Security
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/security/column/rules/update:
-    post:
-      description: "\nVersion: 10.12.0.cl or later\n\n\nCreates, updates, or deletes\
-        \ column security rules for specified tables.\n\nThis API endpoint allows\
-        \ you to create, update, or delete column-level security rules on columns\
-        \ of a table. The operation follows an \"all or none\" policy: if defining\
-        \ security rules for any of the provided columns fails, the entire operation\
-        \ will be rolled back, and no rules will be created.\n\n#### Usage guidelines\n\
-        \n- Provide table identifier using either `identifier` (GUID or name) or `obj_identifier`\
-        \ (object ID)\n- Use `clear_csr: true` to remove all column security rules\
-        \ from the table\n- For each column, specify the security rule using `column_security_rules`\
-        \ array\n- Use `is_unsecured: true` to mark a specific column as unprotected\n\
-        - Use `group_access` operations to manage group associations:\n  - `ADD`:\
-        \ Add groups to the column's access list\n  - `REMOVE`: Remove groups from\
-        \ the column's access list\n  - `REPLACE`: Replace all existing groups with\
-        \ the specified groups\n\n#### Required permissions\n\n- `ADMINISTRATION`\
-        \ - Can administer ThoughtSpot\n- `DATAMANAGEMENT` - Can manage data (if RBAC\
-        \ is disabled)\n- `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` - Can manage worksheet\
-        \ views and tables (if RBAC is enabled)\n\n#### Example request\n\n```json\n\
-        {\n  \"identifier\": \"table-guid\",\n  \"obj_identifier\": \"table-object-id\"\
-        ,\n  \"clear_csr\": false,\n  \"column_security_rules\": [\n    {\n      \"\
-        column_identifier\": \"col id or col name\",\n      \"is_unsecured\": false,\n\
-        \      \"group_access\": [\n        {\n          \"operation\": \"ADD\",\n\
-        \          \"group_identifiers\": [\"hr_group_id\", \"hr_group_name\", \"\
-        finance_group_id\"]\n        }\n      ]\n    },\n    {\n      \"column_identifier\"\
-        : \"col id or col name\",\n      \"is_unsecured\": true\n    },\n    {\n \
-        \     \"column_identifier\": \"col id or col name\",\n      \"is_unsecured\"\
-        : false,\n      \"group_access\": [\n        {\n          \"operation\": \"\
-        REPLACE\",\n          \"group_identifiers\": [\"management_group_id\", \"\
-        management_group_name\"]\n        }\n      ]\n    }\n  ]\n}\n```\n\n#### Request\
-        \ Body Schema\n\n- `identifier` (string, optional): GUID or name of the table\
-        \ for which we want to create column security rules\n- `obj_identifier` (string,\
-        \ optional): The object ID of the table\n- `clear_csr` (boolean, optional):\
-        \ If true, then all the secured columns will be marked as unprotected, and\
-        \ all the group associations will be removed\n- `column_security_rules` (array\
-        \ of objects, required): An array where each object defines the security rule\
-        \ for a specific column\n\nEach column security rule object contains:\n- `column_identifier`\
-        \ (string, required): Column identifier (col_id or name)\n- `is_unsecured`\
-        \ (boolean, optional): If true, the column will be marked as unprotected and\
-        \ all groups associated with it will be removed\n- `group_access` (array of\
-        \ objects, optional): Array of group operation objects\n\nEach group operation\
-        \ object contains:\n- `operation` (string, required): Operation type - ADD,\
-        \ REMOVE, or REPLACE\n- `group_identifiers` (array of strings, required):\
-        \ Array of group identifiers (name or GUID) on which the operation will be\
-        \ performed\n\n#### Response\n\nThis API does not return any response body.\
-        \ A successful operation returns HTTP 200 status code.\n\n#### Operation Types\n\
-        \n- **ADD**: Adds the specified groups to the column's access list\n- **REMOVE**:\
-        \ Removes the specified groups from the column's access list  \n- **REPLACE**:\
-        \ Replaces all existing groups with the specified groups \n\n\n\n\n"
-      operationId: updateColumnSecurityRules
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/updateColumnSecurityRules_request'
-        required: true
-      responses:
-        "204":
-          description: Successfully updated column security rules
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Bad request - Invalid parameters or table not found
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden - User doesn't have permission to modify security
-            rules for this table
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Internal server error
       tags:
       - Security
       - ThoughtSpotRest
@@ -7829,287 +6188,6 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
-  /api/rest/2.0/template/variables/create:
-    post:
-      description: "\nCreate a variable which can be used for parameterizing metadata\
-        \ objects \n Version: 10.9.0.cl or later\n\n\nAllows creating a variable which\
-        \ can be used for parameterizing metadata objects in ThoughtSpot.\n\nRequires\
-        \ ADMINISTRATION role and TENANT scope.\n\nThe API endpoint supports the following\
-        \ types of variables:\n* CONNECTION_PROPERTY - For connection properties\n\
-        * TABLE_MAPPING - For table mappings\n* CONNECTION_PROPERTY_PER_PRINCIPAL\
-        \ - For connection properties per principal. In order to use this please contact\
-        \ support to enable this.\n* FORMULA_VARIABLE - For Formula variables\n\n\
-        When creating a variable, you need to specify:\n* The variable type\n* A unique\
-        \ name for the variable\n* Whether the variable contains sensitive values\
-        \ (defaults to false)\n* The data type of the variable, only specify for fomula\
-        \ variables (defaults to null)\n\nThe operation will fail if:\n* The user\
-        \ lacks required permissions\n* The variable name already exists\n* The variable\
-        \ type is invalid\n\n\n\n\n"
-      operationId: createVariable
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/createVariable_request'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Variable'
-          description: Create variable is successful.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Variable
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/template/variables/{identifier}/delete:
-    post:
-      description: "\nDelete a variable \n Version: 10.9.0.cl or later\n\n\nAllows\
-        \ deleting a variable from ThoughtSpot.\n\nRequires ADMINISTRATION role and\
-        \ TENANT scope.\n\nThe API endpoint requires:\n* The variable identifier (ID\
-        \ or name)\n\nThe operation will fail if:\n* The user lacks required permissions\n\
-        * The variable doesn't exist\n* The variable is being used by other objects\
-        \ \n\n\n\n\n"
-      operationId: deleteVariable
-      parameters:
-      - description: Unique id or name of the variable
-        explode: false
-        in: path
-        name: identifier
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "204":
-          description: Deleting the variable is successful.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Variable
-      - ThoughtSpotRest
-      x-accepts:
-      - application/json
-  /api/rest/2.0/template/variables/search:
-    post:
-      description: "\nSearch variables \n Version: 10.9.0.cl or later\n\n\nAllows\
-        \ searching for variables in ThoughtSpot.\n\nRequires ADMINISTRATION role.\n\
-        \nThe API endpoint supports searching variables by:\n* Variable identifier\
-        \ (ID or name)\n* Variable type\n* Name pattern (case-insensitive, supports\
-        \ % for wildcard)\n\nThe search results can be formatted in three ways:\n\
-        * METADATA_ONLY - Returns only variable metadata (default)\n* METADATA_AND_VALUES\
-        \ - Returns variable metadata and values\n* EDITABLE_METADATA_AND_VALUES -\
-        \ Returns only editable variable metadata and values\n\nThe values can be\
-        \ filtered by scope:\n* org_identifier\n* principal_identifier\n* model_identifier\n\
-        \n\n\n\n\n"
-      operationId: searchVariables
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/searchVariables_request'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/Variable'
-                type: array
-          description: List of variables is successful.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Variable
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/template/variables/{identifier}/update:
-    post:
-      description: "\nUpdate a variable's properties \n Version: 10.9.0.cl or later\n\
-        \n\nAllows updating a variable's properties in ThoughtSpot.\n\nRequires ADMINISTRATION\
-        \ role and TENANT scope.\n\nThe API endpoint allows updating:\n* The variable\
-        \ name\n\n\n\n\n"
-      operationId: updateVariable
-      parameters:
-      - description: Unique id or name of the variable to update.
-        explode: false
-        in: path
-        name: identifier
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/updateVariable_request'
-        required: true
-      responses:
-        "204":
-          description: Updating the variable is successful.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Variable
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/template/variables/update:
-    post:
-      description: "\nUpdate values for multiple variables \n Version: 10.9.0.cl or\
-        \ later\n\n\nAllows updating values for multiple variables in ThoughtSpot.\n\
-        \nRequires ADMINISTRATION role.\n\nThe API endpoint allows:\n* Adding new\
-        \ values to variables\n* Replacing existing values\n* Deleting values from\
-        \ variables\n\nWhen updating variable values, you need to specify:\n* The\
-        \ variable identifiers\n* The values to add/replace/remove for each variable\n\
-        * The operation to perform (ADD, REPLACE, REMOVE, CLEAR)\n\nBehaviour based\
-        \ on operation type:\n* ADD - Adds values to the variable if this is a list\
-        \ type variable, else same as replace.\n* REPLACE - Replaces all values of\
-        \ a given set of constraints with the current set of values.\n* REMOVE - Removes\
-        \ any values which match the set of conditions of the variables if this is\
-        \ a list type variable, else clears value.\n* CLEAR - Removes all constrains\
-        \ for a given variable, scope is ignored\n\n\n\n\n\n"
-      operationId: updateVariableValues
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/updateVariableValues_request'
-        required: true
-      responses:
-        "204":
-          description: Updating variable values is successful.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Variable
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
   /api/rest/2.0/vcs/git/branches/commit:
     post:
       description: |2+
@@ -8818,6 +6896,7 @@ components:
         user_parameters: "{}"
         deleted: true
         extended_properties: "{}"
+        variable_values: "{}"
         name: name
         modifier_id: modifier_id
         complete_detail: true
@@ -9043,6 +7122,10 @@ components:
         access_control_properties:
           description: Access Control Properties which are specified for the user
             via JWToken
+          nullable: true
+          type: object
+        variable_values:
+          description: Formula Variables which are specified for the user via JWToken
           nullable: true
           type: object
       required:
@@ -9288,6 +7371,84 @@ components:
         config_override_info:
           nullable: true
           type: object
+      type: object
+    OrgPreferenceSearchCriteriaInput:
+      properties:
+        org_identifier:
+          description: Unique identifier or name of the org
+          type: string
+        event_types:
+          description: "Event types to search for. If not provided, all event types\
+            \ for this org are returned."
+          items:
+            enum:
+            - LIVEBOARD_SCHEDULE
+            type: string
+          nullable: true
+          type: array
+      required:
+      - org_identifier
+      type: object
+    CommunicationChannelPreferencesResponse:
+      properties:
+        cluster_preferences:
+          description: Cluster-level default configurations.
+          items:
+            $ref: '#/components/schemas/EventChannelConfig'
+          nullable: true
+          type: array
+        org_preferences:
+          description: Org-specific configurations.
+          items:
+            $ref: '#/components/schemas/OrgChannelConfigResponse'
+          nullable: true
+          type: array
+      type: object
+    EventChannelConfig:
+      properties:
+        event_type:
+          description: Type of event for which communication channels are configured
+          enum:
+          - LIVEBOARD_SCHEDULE
+          type: string
+        channels:
+          description: Communication channels enabled for this event type. Empty array
+            indicates no channels are enabled.
+          items:
+            enum:
+            - EMAIL
+            - WEBHOOK
+            type: string
+          type: array
+      required:
+      - channels
+      - event_type
+      type: object
+    OrgChannelConfigResponse:
+      properties:
+        org:
+          $ref: '#/components/schemas/OrgDetails'
+        preferences:
+          description: Event-specific communication channel configurations for this
+            org
+          items:
+            $ref: '#/components/schemas/EventChannelConfig'
+          type: array
+      required:
+      - org
+      - preferences
+      type: object
+    OrgDetails:
+      properties:
+        id:
+          description: Unique id of the org
+          type: string
+        name:
+          description: Name of the org
+          type: string
+      required:
+      - id
+      - name
       type: object
     OrgResponse:
       example:
@@ -10521,43 +8682,17 @@ components:
           type: string
       type: object
     ColumnSecurityRuleResponse:
-      example:
-        columnSecurityRules:
-        - sourceTableDetails:
-            name: name
-            id: id
-          column:
-            name: name
-            id: id
-          groups:
-          - name: name
-            id: id
-          - name: name
-            id: id
-        - sourceTableDetails:
-            name: name
-            id: id
-          column:
-            name: name
-            id: id
-          groups:
-          - name: name
-            id: id
-          - name: name
-            id: id
-        objId: objId
-        guid: guid
       properties:
-        guid:
+        table_guid:
           description: GUID of the table for which the column security rules are fetched
           nullable: true
           type: string
-        objId:
+        obj_id:
           description: Object ID of the table for which the column security rules
             are fetched
           nullable: true
           type: string
-        columnSecurityRules:
+        column_security_rules:
           description: Array containing column security rule objects
           items:
             $ref: '#/components/schemas/ColumnSecurityRule'
@@ -10565,18 +8700,6 @@ components:
           type: array
       type: object
     ColumnSecurityRule:
-      example:
-        sourceTableDetails:
-          name: name
-          id: id
-        column:
-          name: name
-          id: id
-        groups:
-        - name: name
-          id: id
-        - name: name
-          id: id
       properties:
         column:
           $ref: '#/components/schemas/ColumnSecurityRuleColumn'
@@ -10586,15 +8709,12 @@ components:
             $ref: '#/components/schemas/ColumnSecurityRuleGroup'
           nullable: true
           type: array
-        sourceTableDetails:
+        source_table_details:
           $ref: '#/components/schemas/ColumnSecurityRuleSourceTable'
       required:
       - column
       type: object
     ColumnSecurityRuleColumn:
-      example:
-        name: name
-        id: id
       properties:
         id:
           description: The unique identifier of the column
@@ -10607,9 +8727,6 @@ components:
       - name
       type: object
     ColumnSecurityRuleGroup:
-      example:
-        name: name
-        id: id
       properties:
         id:
           description: The unique identifier of the group
@@ -10622,9 +8739,6 @@ components:
       - name
       type: object
     ColumnSecurityRuleSourceTable:
-      example:
-        name: name
-        id: id
       properties:
         id:
           description: The unique identifier of the source table
@@ -11887,6 +10001,8 @@ components:
             - ALLOW_NON_EMBED_FULL_APP_ACCESS
             - CAN_ACCESS_ANALYST_STUDIO
             - CAN_MANAGE_ANALYST_STUDIO
+            - CAN_VIEW_FOLDERS
+            - CAN_MODIDY_FOLDERS
             - PREVIEW_DOCUMENT_SEARCH
             - CAN_SETUP_VERSION_CONTROL
             - CAN_MANAGE_WEBHOOKS
@@ -12299,14 +10415,6 @@ components:
           type: array
       type: object
     eureka_GetRelevantQuestionsResponse:
-      example:
-        relevant_questions:
-        - data_source_identifier: data_source_identifier
-          query: query
-          data_source_name: data_source_name
-        - data_source_identifier: data_source_identifier
-          query: query
-          data_source_name: data_source_name
       properties:
         relevant_questions:
           description: List of relevant questions that can be run on their respective
@@ -12317,10 +10425,6 @@ components:
           type: array
       type: object
     eureka_RelevantQuestion:
-      example:
-        data_source_identifier: data_source_identifier
-        query: query
-        data_source_name: data_source_name
       properties:
         query:
           description: NL query that can be run using spotter aka natural language
@@ -12417,20 +10521,6 @@ components:
           type: string
       type: object
     eureka_DataSourceSuggestionResponse:
-      example:
-        data_sources:
-        - confidence: 0.8008282
-          reasoning: reasoning
-          details:
-            data_source_identifier: data_source_identifier
-            description: description
-            data_source_name: data_source_name
-        - confidence: 0.8008282
-          reasoning: reasoning
-          details:
-            data_source_identifier: data_source_identifier
-            description: description
-            data_source_name: data_source_name
       properties:
         data_sources:
           description: List of data sources suggested.
@@ -12440,13 +10530,6 @@ components:
           type: array
       type: object
     DataSource:
-      example:
-        confidence: 0.8008282
-        reasoning: reasoning
-        details:
-          data_source_identifier: data_source_identifier
-          description: description
-          data_source_name: data_source_name
       properties:
         confidence:
           description: Confidence score for the data source suggestion.
@@ -12461,10 +10544,6 @@ components:
           type: string
       type: object
     EntityHeader:
-      example:
-        data_source_identifier: data_source_identifier
-        description: description
-        data_source_name: data_source_name
       properties:
         description:
           description: Description of the data source.
@@ -12478,6 +10557,32 @@ components:
           description: Unique identifier of the data source.
           nullable: true
           type: string
+      type: object
+    eureka_GetNLInstructionsResponse:
+      properties:
+        nl_instructions_info:
+          description: List of NL instructions with their scopes.
+          items:
+            $ref: '#/components/schemas/NLInstructionsInfo'
+          type: array
+      required:
+      - nl_instructions_info
+      type: object
+    NLInstructionsInfo:
+      properties:
+        instructions:
+          description: User instructions for natural language processing.
+          items:
+            type: string
+          type: array
+        scope:
+          description: Scope of the instruction.
+          enum:
+          - GLOBAL
+          type: string
+      required:
+      - instructions
+      - scope
       type: object
     RiseGQLArgWrapper:
       properties:
@@ -12502,6 +10607,7 @@ components:
           - CONNECTION_PROPERTY
           - TABLE_MAPPING
           - CONNECTION_PROPERTY_PER_PRINCIPAL
+          - FORMULA_VARIABLE
           nullable: true
           type: string
         name_pattern:
@@ -12510,24 +10616,31 @@ components:
           nullable: true
           type: string
       type: object
+    ValueScopeInput:
+      description: Input for variable scope in search
+      properties:
+        org_identifier:
+          description: The unique name of the org
+          nullable: true
+          type: string
+        principal_type:
+          description: Principal type
+          enum:
+          - USER
+          - USER_GROUP
+          nullable: true
+          type: string
+        principal_identifier:
+          description: Unique ID or name of the principal
+          nullable: true
+          type: string
+        model_identifier:
+          description: Model Identifier
+          nullable: true
+          type: string
+      type: object
     Variable:
       description: Variable object
-      example:
-        variable_type: CONNECTION_PROPERTY
-        values:
-        - principal_identifier: principal_identifier
-          org_identifier: org_identifier
-          principal_type: USER
-          priority: 0
-          value: value
-        - principal_identifier: principal_identifier
-          org_identifier: org_identifier
-          principal_type: USER
-          priority: 0
-          value: value
-        name: name
-        id: id
-        sensitive: true
       properties:
         id:
           description: Unique identifier of the variable
@@ -12541,6 +10654,7 @@ components:
           - CONNECTION_PROPERTY
           - TABLE_MAPPING
           - CONNECTION_PROPERTY_PER_PRINCIPAL
+          - FORMULA_VARIABLE
           nullable: true
           type: string
         sensitive:
@@ -12558,17 +10672,17 @@ components:
       - name
       type: object
     VariableValue:
-      example:
-        principal_identifier: principal_identifier
-        org_identifier: org_identifier
-        principal_type: USER
-        priority: 0
-        value: value
       properties:
         value:
           description: The value of the variable
           nullable: true
           type: string
+        value_list:
+          description: The value of the variable if it is a list type
+          items:
+            type: string
+          nullable: true
+          type: array
         org_identifier:
           description: The unique name of the org
           type: string
@@ -12616,14 +10730,6 @@ components:
           type: string
       type: object
     CalendarResponse:
-      example:
-        connection_name: connection_name
-        author_name: author_name
-        calendar_id: calendar_id
-        connection_id: connection_id
-        modification_time_in_millis: modification_time_in_millis
-        calendar_name: calendar_name
-        data_warehouse_type: data_warehouse_type
       properties:
         calendar_name:
           description: Name of the calendar
@@ -12655,24 +10761,6 @@ components:
           type: string
       type: object
     ConnectionConfigurationResponse:
-      example:
-        policy_type: NO_POLICY
-        configuration_identifier: configuration_identifier
-        configuration: "{}"
-        name: name
-        description: description
-        disabled: true
-        policy_principals:
-        - name: name
-          id: id
-          type: type
-        - name: name
-          id: id
-          type: type
-        data_warehouse_type: SNOWFLAKE
-        policy_processes:
-        - SAGE_INDEXING
-        - SAGE_INDEXING
       properties:
         configuration_identifier:
           nullable: true
@@ -12748,10 +10836,6 @@ components:
           type: string
       type: object
     UserPrincipal:
-      example:
-        name: name
-        id: id
-        type: type
       properties:
         id:
           nullable: true
@@ -12762,6 +10846,216 @@ components:
         type:
           nullable: true
           type: string
+      type: object
+    WebhookSortOptionsInput:
+      properties:
+        field_name:
+          default: CREATED
+          description: Name of the field to apply the sort on.
+          enum:
+          - CREATED
+          - MODIFIED
+          - NAME
+          nullable: true
+          type: string
+        order:
+          default: DESC
+          description: "Sort order: ASC (Ascending) or DESC (Descending)."
+          enum:
+          - ASC
+          - DESC
+          nullable: true
+          type: string
+      type: object
+    WebhookSearchResponse:
+      properties:
+        webhooks:
+          description: List of webhook configurations matching the search criteria.
+          items:
+            $ref: '#/components/schemas/WebhookResponse'
+          type: array
+        pagination:
+          $ref: '#/components/schemas/WebhookPagination'
+      required:
+      - pagination
+      - webhooks
+      type: object
+    WebhookResponse:
+      properties:
+        id:
+          description: Unique identifier of the webhook configuration.
+          type: string
+        name:
+          description: Name of the webhook configuration.
+          type: string
+        description:
+          description: Description of the webhook configuration.
+          nullable: true
+          type: string
+        org:
+          $ref: '#/components/schemas/WebhookOrg'
+        url:
+          description: The webhook endpoint URL.
+          type: string
+        url_params:
+          description: Additional URL parameters as key-value pairs.
+          nullable: true
+          type: object
+        events:
+          description: List of events this webhook subscribes to.
+          items:
+            enum:
+            - LIVEBOARD_SCHEDULE
+            type: string
+          type: array
+        authentication:
+          $ref: '#/components/schemas/WebhookAuthentication'
+        signature_verification:
+          $ref: '#/components/schemas/WebhookSignatureVerification'
+        creation_time_in_millis:
+          description: Creation time of the webhook configuration in milliseconds.
+          format: float
+          type: number
+        modification_time_in_millis:
+          description: Last modified time of the webhook configuration in milliseconds.
+          format: float
+          type: number
+        created_by:
+          $ref: '#/components/schemas/WebhookUser'
+        last_modified_by:
+          $ref: '#/components/schemas/WebhookUser'
+      required:
+      - creation_time_in_millis
+      - events
+      - id
+      - modification_time_in_millis
+      - name
+      - url
+      type: object
+    WebhookOrg:
+      properties:
+        id:
+          description: Unique identifier of the org.
+          type: string
+        name:
+          description: Name of the org.
+          type: string
+      required:
+      - id
+      - name
+      type: object
+    WebhookAuthentication:
+      properties:
+        API_KEY:
+          $ref: '#/components/schemas/WebhookAuthApiKey'
+        BASIC_AUTH:
+          $ref: '#/components/schemas/WebhookAuthBasicAuth'
+        BEARER_TOKEN:
+          description: Redacted Bearer token authentication configuration.
+          nullable: true
+          type: string
+        OAUTH2:
+          $ref: '#/components/schemas/WebhookAuthOAuth2'
+      type: object
+    WebhookAuthApiKey:
+      properties:
+        key:
+          description: The header or query parameter name for the API key.
+          type: string
+        value:
+          description: The API key value.
+          type: string
+      required:
+      - key
+      - value
+      type: object
+    WebhookAuthBasicAuth:
+      properties:
+        username:
+          description: Username for basic authentication.
+          type: string
+        password:
+          description: Password for basic authentication.
+          type: string
+      required:
+      - password
+      - username
+      type: object
+    WebhookAuthOAuth2:
+      properties:
+        authorization_url:
+          description: OAuth2 authorization server URL.
+          type: string
+        client_id:
+          description: OAuth2 client identifier.
+          type: string
+        client_secret:
+          description: OAuth2 client secret key.
+          type: string
+      required:
+      - authorization_url
+      - client_id
+      - client_secret
+      type: object
+    WebhookSignatureVerification:
+      properties:
+        type:
+          description: Signature verification method type.
+          enum:
+          - HMAC_SHA256
+          type: string
+        header:
+          description: HTTP header where the signature is sent.
+          type: string
+        algorithm:
+          description: Hash algorithm used for signature verification.
+          enum:
+          - SHA256
+          type: string
+        secret:
+          description: Shared secret used for HMAC signature generation.
+          type: string
+      required:
+      - algorithm
+      - header
+      - secret
+      - type
+      type: object
+    WebhookUser:
+      properties:
+        id:
+          description: Unique identifier of the user.
+          type: string
+        name:
+          description: Name of the user.
+          type: string
+      required:
+      - id
+      - name
+      type: object
+    WebhookPagination:
+      properties:
+        record_offset:
+          description: The starting record number from where the records are included.
+          format: int32
+          type: integer
+        record_size:
+          description: The number of records included in the response.
+          format: int32
+          type: integer
+        total_count:
+          description: Total number of webhook configurations available.
+          format: int32
+          type: integer
+        has_more:
+          description: Indicates whether more records are available beyond the current
+            response.
+          type: boolean
+      required:
+      - has_more
+      - record_offset
+      - record_size
+      - total_count
       type: object
     GenericInfo:
       example:
@@ -12885,8 +11179,7 @@ components:
           description: "  Type of object.\n  \n\nRequired if the name of the object\
             \ is set as the identifier. This attribute is optional when the object\
             \ GUID is specified as the identifier.\n  \n\n Specify the object type\
-            \ as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not\
-            \ supported."
+            \ as `LOGICAL_TABLE`."
           enum:
           - LOGICAL_TABLE
           nullable: true
@@ -13159,6 +11452,21 @@ components:
       - name
       - values
       type: object
+    VariableValues:
+      description: Variable values.
+      properties:
+        name:
+          description: The name of the existing formula variable.
+          type: string
+        values:
+          description: The values to filter on.
+          items:
+            type: object
+          type: array
+      required:
+      - name
+      - values
+      type: object
     TokenAccessScopeObject:
       description: Objects on which the filter rules and parameters values should
         be applied to
@@ -13167,8 +11475,7 @@ components:
           description: "  Type of object.\n  \n\nRequired if the name of the object\
             \ is set as the identifier. This attribute is optional when the object\
             \ GUID is specified as the identifier.\n  \n\n Specify the object type\
-            \ as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not\
-            \ supported."
+            \ as `LOGICAL_TABLE`."
           enum:
           - LOGICAL_TABLE
           nullable: true
@@ -13402,6 +11709,60 @@ components:
       required:
       - name
       type: object
+    EventChannelConfigInput:
+      properties:
+        event_type:
+          description: Type of event for which communication channels are configured
+          enum:
+          - LIVEBOARD_SCHEDULE
+          type: string
+        channels:
+          description: Communication channels enabled for this event type. Empty array
+            disables all channels for this event.
+          items:
+            enum:
+            - EMAIL
+            - WEBHOOK
+            type: string
+          type: array
+      required:
+      - channels
+      - event_type
+      type: object
+    OrgChannelConfigInput:
+      properties:
+        org_identifier:
+          description: Unique identifier or name of the org
+          type: string
+        operation:
+          default: REPLACE
+          description: "Operation to perform. REPLACE: Update preferences (default).\
+            \ RESET: Remove org-specific configurations, causing fallback to cluster-level\
+            \ preferences."
+          enum:
+          - REPLACE
+          - RESET
+          nullable: true
+          type: string
+        preferences:
+          description: Event-specific configurations. Required for REPLACE operation.
+          items:
+            $ref: '#/components/schemas/EventChannelConfigInput'
+          nullable: true
+          type: array
+        reset_events:
+          description: "Event types to reset. Required for RESET operation. Org-specific\
+            \ configurations for these events will be removed, causing fallback to\
+            \ cluster-level preferences."
+          items:
+            enum:
+            - LIVEBOARD_SCHEDULE
+            type: string
+          nullable: true
+          type: array
+      required:
+      - org_identifier
+      type: object
     TagMetadataTypeInput:
       properties:
         type:
@@ -13473,6 +11834,8 @@ components:
             - ALLOW_NON_EMBED_FULL_APP_ACCESS
             - CAN_ACCESS_ANALYST_STUDIO
             - CAN_MANAGE_ANALYST_STUDIO
+            - CAN_MODIFY_FOLDERS
+            - CAN_VIEW_FOLDERS
             - PREVIEW_DOCUMENT_SEARCH
             - CAN_SETUP_VERSION_CONTROL
             - CAN_DOWNLOAD_VISUALS
@@ -13589,6 +11952,13 @@ components:
             \ rules of the object. This will only be respected when the object can\
             \ have column security rules and export_associated is true. \n Version:\
             \ 10.12.0.cl or later\n"
+          nullable: true
+          type: boolean
+        export_with_column_aliases:
+          default: false
+          description: "Boolean flag indicating whether to export column aliases of\
+            \ the model. This will only be respected when the object can have column\
+            \ aliases. \n Version: 10.13.0.cl or later\n"
           nullable: true
           type: boolean
       type: object
@@ -14447,6 +12817,8 @@ components:
             - CAN_ACCESS_ANALYST_STUDIO
             - CAN_MANAGE_ANALYST_STUDIO
             - PREVIEW_DOCUMENT_SEARCH
+            - CAN_MODIFY_FOLDERS
+            - CAN_VIEW_FOLDERS
             - CAN_SETUP_VERSION_CONTROL
             - PREVIEW_THOUGHTSPOT_SAGE
             - CAN_MANAGE_WEBHOOKS
@@ -15428,8 +13800,6 @@ components:
           type: boolean
       type: object
     AgentConversation:
-      example:
-        conversation_id: conversation_id
       properties:
         conversation_id:
           description: Unique identifier of the conversation.
@@ -15438,9 +13808,6 @@ components:
       - conversation_id
       type: object
     SendAgentMessageResponse:
-      example:
-        success: true
-        message: message
       properties:
         success:
           type: boolean
@@ -15450,11 +13817,57 @@ components:
       required:
       - success
       type: object
-    InputVariableValue:
+    NLInstructionsInfoInput:
       properties:
-        value:
-          description: The connection property value
+        instructions:
+          description: User instructions for natural language processing.
+          items:
+            type: string
+          type: array
+        scope:
+          description: Scope of the instruction (USER or GLOBAL). Defaults to GLOBAL.
+          enum:
+          - GLOBAL
           type: string
+      required:
+      - instructions
+      - scope
+      type: object
+    eureka_SetNLInstructionsResponse:
+      properties:
+        success:
+          description: Success status of the operation.
+          type: boolean
+      required:
+      - success
+      type: object
+    VariableUpdateAssignmentInput:
+      description: Input for variable value update in batch operations
+      properties:
+        variable_identifier:
+          description: ID or Name of the variable
+          type: string
+        variable_values:
+          description: Values of the variable
+          items:
+            type: string
+          type: array
+        operation:
+          description: Operation to perform
+          enum:
+          - ADD
+          - REMOVE
+          - REPLACE
+          - RESET
+          type: string
+      required:
+      - operation
+      - variable_identifier
+      - variable_values
+      type: object
+    VariableUpdateScopeInput:
+      description: Input for variable value update in batch operations
+      properties:
         org_identifier:
           description: The unique name of the org
           type: string
@@ -15469,39 +13882,19 @@ components:
           description: Unique ID or name of the principal
           nullable: true
           type: string
+        model_identifier:
+          description: Unique ID of the model
+          nullable: true
+          type: string
         priority:
-          description: "The priority assigned to this value. If there are 2 matching\
-            \ values, the one with the higher priority will be picked."
+          description: Priority level
           format: int32
           nullable: true
           type: integer
       required:
       - org_identifier
-      - value
-      type: object
-    VariableValueInput:
-      description: Input for variable value update
-      properties:
-        variable_identifier:
-          description: ID or Name of the variable
-          type: string
-        variable_values:
-          description: Values of the variable
-          items:
-            $ref: '#/components/schemas/InputVariableValue'
-          type: array
-      required:
-      - variable_identifier
-      - variable_values
       type: object
     CreateEmailCustomizationResponse:
-      example:
-        tenant_id: tenant_id
-        org:
-          name: name
-          id: 0
-        name: name
-        template_properties: "{}"
       properties:
         tenant_id:
           description: Tenant ID
@@ -15521,9 +13914,6 @@ components:
       - tenant_id
       type: object
     OrgType:
-      example:
-        name: name
-        id: 0
       properties:
         name:
           nullable: true
@@ -15660,6 +14050,125 @@ components:
       - connection_identifier
       - table_name
       type: object
+    WebhookAuthenticationInput:
+      properties:
+        API_KEY:
+          $ref: '#/components/schemas/WebhookAuthApiKeyInput'
+        BASIC_AUTH:
+          $ref: '#/components/schemas/WebhookAuthBasicAuthInput'
+        BEARER_TOKEN:
+          description: Bearer token authentication configuration.
+          nullable: true
+          type: string
+        OAUTH2:
+          $ref: '#/components/schemas/WebhookAuthOAuth2Input'
+      type: object
+    WebhookAuthApiKeyInput:
+      properties:
+        key:
+          description: The header or query parameter name for the API key.
+          type: string
+        value:
+          description: The API key value.
+          type: string
+      required:
+      - key
+      - value
+      type: object
+    WebhookAuthBasicAuthInput:
+      properties:
+        username:
+          description: Username for basic authentication.
+          type: string
+        password:
+          description: Password for basic authentication.
+          type: string
+      required:
+      - password
+      - username
+      type: object
+    WebhookAuthOAuth2Input:
+      properties:
+        authorization_url:
+          description: OAuth2 authorization server URL.
+          type: string
+        client_id:
+          description: OAuth2 client identifier.
+          type: string
+        client_secret:
+          description: OAuth2 client secret key.
+          type: string
+      required:
+      - authorization_url
+      - client_id
+      - client_secret
+      type: object
+    WebhookSignatureVerificationInput:
+      properties:
+        type:
+          description: Signature verification method type.
+          enum:
+          - HMAC_SHA256
+          type: string
+        header:
+          description: HTTP header where the signature is sent.
+          type: string
+        algorithm:
+          description: Hash algorithm used for signature verification.
+          enum:
+          - SHA256
+          type: string
+        secret:
+          description: Shared secret used for HMAC signature generation.
+          type: string
+      required:
+      - algorithm
+      - header
+      - secret
+      - type
+      type: object
+    WebhookDeleteResponse:
+      properties:
+        deleted_count:
+          description: Number of webhooks successfully deleted.
+          format: int32
+          type: integer
+        failed_count:
+          description: Number of webhooks that failed to delete.
+          format: int32
+          type: integer
+        deleted_webhooks:
+          description: List of successfully deleted webhooks.
+          items:
+            $ref: '#/components/schemas/WebhookResponse'
+          type: array
+        failed_webhooks:
+          description: List of webhooks that failed to delete with error details.
+          items:
+            $ref: '#/components/schemas/WebhookDeleteFailure'
+          type: array
+      required:
+      - deleted_count
+      - deleted_webhooks
+      - failed_count
+      - failed_webhooks
+      type: object
+    WebhookDeleteFailure:
+      properties:
+        id:
+          description: Unique identifier of the webhook that failed to delete.
+          type: string
+        name:
+          description: Name of the webhook that failed to delete.
+          type: string
+        error:
+          description: Error message describing why the deletion failed.
+          type: string
+      required:
+      - error
+      - id
+      - name
+      type: object
     Runtime_Filter:
       description: List of runtime parameters need to set during the session.
       properties:
@@ -15681,20 +14190,6 @@ components:
           description: Runtime param override type in JWT.
           type: object
       type: object
-    createAgentConversation_request:
-      properties:
-        metadata_context:
-          allOf:
-          - $ref: '#/components/schemas/ContextPayloadV2Input'
-          description: Context for the conversation.
-        conversation_settings:
-          allOf:
-          - $ref: '#/components/schemas/ConversationSettingsInput'
-          description: Conversation settings.
-      required:
-      - conversation_settings
-      - metadata_context
-      type: object
     createConversation_request:
       properties:
         metadata_identifier:
@@ -15707,44 +14202,6 @@ components:
           type: string
       required:
       - metadata_identifier
-      type: object
-    getDataSourceSuggestions_request:
-      properties:
-        query:
-          description: User query used to suggest data sources.
-          type: string
-      required:
-      - query
-      type: object
-    getRelevantQuestions_request:
-      properties:
-        metadata_context:
-          allOf:
-          - $ref: '#/components/schemas/MetadataContext'
-          description: metadata for the query to enable generation of relevant sub-questions;
-            at least one context identifier is required.
-        limit_relevant_questions:
-          description: "Maximum number of relevant questions that is allowed in the\
-            \ response, default = 5."
-          format: int32
-          type: integer
-        bypass_cache:
-          description: "If true, results are not returned from cache & calculated\
-            \ every time."
-          nullable: true
-          type: boolean
-        query:
-          description: "A user query that requires breaking down into smaller, more\
-            \ manageable analytical questions to facilitate better understanding and\
-            \ analysis."
-          type: string
-        ai_context:
-          allOf:
-          - $ref: '#/components/schemas/AIContext'
-          description: Additional context to guide the response.
-      required:
-      - metadata_context
-      - query
       type: object
     queryGetDecomposedQuery_request:
       properties:
@@ -15785,20 +14242,6 @@ components:
           items:
             type: string
           type: array
-      type: object
-    sendAgentMessageStreaming_request:
-      properties:
-        conversation_identifier:
-          description: Unique identifier for the conversation (used to track context)
-          type: string
-        messages:
-          description: messages to be sent to the agent
-          items:
-            type: string
-          type: array
-      required:
-      - conversation_identifier
-      - messages
       type: object
     sendMessage_request:
       properties:
@@ -15857,7 +14300,7 @@ components:
           type: string
         persist_option:
           description: Indicates whether the specified attributes should be persisted
-            or not.
+            or not. RESET and NONE are not applicable if you are setting variable_values.
           enum:
           - REPLACE
           - APPEND
@@ -15873,6 +14316,13 @@ components:
           description: Parameter values.
           items:
             $ref: '#/components/schemas/ParameterValues'
+          type: array
+        variable_values:
+          description: "List of variable values where `name` references an existing\
+            \ formula variable and `values` is any value from the corresponding column.\
+            \ \n  Version: 10.14.0.cl or later\n"
+          items:
+            $ref: '#/components/schemas/VariableValues'
           type: array
         objects:
           description: Objects on which the filter rules and parameters values should
@@ -15900,7 +14350,8 @@ components:
           description: "   Creates a new user if the specified username does not exist\
             \ in ThoughtSpot. To provision a user just-in-time (JIT), set this attribute\
             \ to true.\n   \n\nNote: For JIT provisioning of a user, the secret_key\
-            \ is required.  \n  Version: 10.5.0.cl or later\n"
+            \ is required. New formula variables won't be created.  \n  Version: 10.5.0.cl\
+            \ or later\n"
           nullable: true
           type: boolean
       required:
@@ -16051,143 +14502,6 @@ components:
           type: string
       required:
       - token
-      type: object
-    connectionConfigurationSearch_request:
-      properties:
-        connection_identifier:
-          description: Unique ID or name of the connection.
-          type: string
-        configuration_identifier:
-          description: Unique ID or name of the configuration.
-          type: string
-        policy_type:
-          description: Type of policy.
-          enum:
-          - NO_POLICY
-          - PRINCIPALS
-          - PROCESSES
-          type: string
-      required:
-      - connection_identifier
-      type: object
-    createConnectionConfiguration_request:
-      properties:
-        name:
-          description: Unique name for the configuration.
-          type: string
-        description:
-          description: Description of the configuration.
-          type: string
-        connection_identifier:
-          description: Unique ID or name of the connection.
-          type: string
-        authentication_type:
-          default: SERVICE_ACCOUNT
-          description: Type of authentication used for the connection.
-          enum:
-          - SERVICE_ACCOUNT
-          - KEY_PAIR
-          - PERSONAL_ACCESS_TOKEN
-          - OAUTH_WITH_SERVICE_PRINCIPAL
-          - OAUTH_CLIENT_CREDENTIALS
-          type: string
-        configuration:
-          description: Configuration properties in JSON.
-          type: object
-        policy_type:
-          default: NO_POLICY
-          description: Type of policy.
-          enum:
-          - NO_POLICY
-          - PRINCIPALS
-          - PROCESSES
-          type: string
-        policy_principals:
-          description: Unique ID or name of the User and User Groups.
-          items:
-            type: string
-          type: array
-        policy_processes:
-          description: "Action that the query performed on the data warehouse, such\
-            \ as SAGE_INDEXING and ROW_COUNT_STATS."
-          items:
-            enum:
-            - SAGE_INDEXING
-            - ROW_COUNT_STATS
-            type: string
-          type: array
-      required:
-      - configuration
-      - connection_identifier
-      - name
-      type: object
-    deleteConnectionConfiguration_request:
-      properties:
-        configuration_identifier:
-          description: Unique ID or name of the configuration.
-          type: string
-        connection_identifier:
-          description: Unique ID or name of the connection.
-          type: string
-      required:
-      - configuration_identifier
-      - connection_identifier
-      type: object
-    updateConnectionConfiguration_request:
-      properties:
-        connection_identifier:
-          description: Unique ID or name of the connection.
-          type: string
-        name:
-          description: Name of the configuration to update.
-          type: string
-        description:
-          description: Description of the configuration.
-          type: string
-        authentication_type:
-          description: Type of authentication.
-          enum:
-          - SERVICE_ACCOUNT
-          - OAUTH
-          - OAUTH_WITH_SERVICE_PRINCIPAL
-          - EXTOAUTH
-          - KEY_PAIR
-          - EXTOAUTH_WITH_PKCE
-          - OAUTH_WITH_PKCE
-          - PERSONAL_ACCESS_TOKEN
-          - OAUTH_CLIENT_CREDENTIALS
-          type: string
-        configuration:
-          description: Configuration properties in JSON.
-          type: object
-        policy_type:
-          description: Type of policy.
-          enum:
-          - NO_POLICY
-          - PRINCIPALS
-          - PROCESSES
-          type: string
-        policy_principals:
-          description: Unique ID or name of the User and User Groups.
-          items:
-            type: string
-          type: array
-        policy_processes:
-          description: "Action that the query performed on the data warehouse, such\
-            \ as SAGE_INDEXING and ROW_COUNT_STATS."
-          items:
-            enum:
-            - SAGE_INDEXING
-            - ROW_COUNT_STATS
-            type: string
-          type: array
-        disable:
-          default: false
-          description: Indicates whether the configuration enable/disable.
-          nullable: true
-          type: boolean
-      required:
-      - connection_identifier
       type: object
     createConnection_request:
       properties:
@@ -16516,245 +14830,6 @@ components:
           - REMOVE
           type: string
       type: object
-    createCalendar_request:
-      properties:
-        name:
-          description: Name of the custom calendar.
-          type: string
-        creation_method:
-          description: Type of create operation.
-          enum:
-          - FROM_INPUT_PARAMS
-          - FROM_EXISTING_TABLE
-          type: string
-        table_reference:
-          allOf:
-          - $ref: '#/components/schemas/ExternalTableInput'
-          description: "Table reference containing connection identifier and table\
-            \ details in this format: `{\"connection_identifier\":\"conn1\", \"database_name\"\
-            :\"db1\", \"schema_name\":\"sc1\", \"table_name\":\"tb1\"}`. The given\
-            \ table will be created if `creation_method` is set as `FROM_INPUT_PARAMS`."
-        start_date:
-          description: Start date for the calendar in `MM/dd/yyyy` format. This parameter
-            is mandatory if `creation_method` is set as `FROM_INPUT_PARAMS`.
-          type: string
-        end_date:
-          description: End date for the calendar in `MM/dd/yyyy` format. This parameter
-            is mandatory if `creation_method` is set as `FROM_INPUT_PARAMS`.
-          type: string
-        calendar_type:
-          default: MONTH_OFFSET
-          description: Type of the calendar.
-          enum:
-          - MONTH_OFFSET
-          - FOUR_FOUR_FIVE
-          - FOUR_FIVE_FOUR
-          - FIVE_FOUR_FOUR
-          type: string
-        month_offset:
-          default: January
-          description: "Specify the month in which the fiscal or custom calendar year\
-            \ should start. For example, if you set `month_offset` to \"April\", the\
-            \ custom calendar will treat \"April\" as the first month of the year,\
-            \ and the related attributes such as quarters and start date will be based\
-            \ on this offset. The default value is `January`, which represents the\
-            \ standard calendar year (January to December)."
-          enum:
-          - January
-          - February
-          - March
-          - April
-          - May
-          - June
-          - July
-          - August
-          - September
-          - October
-          - November
-          - December
-          type: string
-        start_day_of_week:
-          default: Sunday
-          description: Specify the starting day of the week.
-          enum:
-          - Sunday
-          - Monday
-          - Tuesday
-          - Wednesday
-          - Thursday
-          - Friday
-          - Saturday
-          type: string
-        quarter_name_prefix:
-          default: ""
-          description: Prefix to add before the quarter.
-          type: string
-        year_name_prefix:
-          default: ""
-          description: Prefix to add before the year.
-          type: string
-      required:
-      - creation_method
-      - name
-      - table_reference
-      type: object
-    generateCSV_request:
-      properties:
-        start_date:
-          description: Start date for the calendar in `MM/dd/yyyy` format.
-          type: string
-        end_date:
-          description: End date for the calendar in `MM/dd/yyyy` format.
-          type: string
-        calendar_type:
-          default: MONTH_OFFSET
-          description: Type of the calendar.
-          enum:
-          - MONTH_OFFSET
-          - FOUR_FOUR_FIVE
-          - FOUR_FIVE_FOUR
-          - FIVE_FOUR_FOUR
-          type: string
-        month_offset:
-          default: January
-          description: Month offset to start calendar from `January`.
-          enum:
-          - January
-          - February
-          - March
-          - April
-          - May
-          - June
-          - July
-          - August
-          - September
-          - October
-          - November
-          - December
-          type: string
-        start_day_of_week:
-          default: Sunday
-          description: Specify the starting day of the week.
-          enum:
-          - Sunday
-          - Monday
-          - Tuesday
-          - Wednesday
-          - Thursday
-          - Friday
-          - Saturday
-          type: string
-        quarter_name_prefix:
-          description: Prefix to add before the quarter.
-          type: string
-        year_name_prefix:
-          description: Prefix to add before the year.
-          type: string
-      required:
-      - end_date
-      - start_date
-      type: object
-    searchCalendars_request:
-      properties:
-        connection_identifier:
-          description: Unique ID or name of the connection.
-          type: string
-        name_pattern:
-          description: Pattern to match for calendar names (use '%' for wildcard match).
-          type: string
-        record_offset:
-          default: 0
-          description: The starting record number from where the records should be
-            included.
-          format: int32
-          type: integer
-        record_size:
-          default: 10
-          description: The number of records that should be included.
-          format: int32
-          type: integer
-        sort_options:
-          allOf:
-          - $ref: '#/components/schemas/SortOption'
-          description: Sort options.
-      type: object
-    updateCalendar_request:
-      properties:
-        update_method:
-          default: FROM_INPUT_PARAMS
-          description: Type of update operation.
-          enum:
-          - FROM_INPUT_PARAMS
-          - FROM_EXISTING_TABLE
-          type: string
-        table_reference:
-          allOf:
-          - $ref: '#/components/schemas/ExternalTableInput'
-          description: "Table reference containing connection identifier and table\
-            \ details in this format: `{\"connection_identifier\":\"conn1\", \"database_name\"\
-            :\"db1\", \"schema_name\":\"sc1\", \"table_name\":\"tb1\"}`."
-        start_date:
-          description: Start date for the calendar in `MM/dd/yyyy` format. This parameter
-            is mandatory if `update_method` is set as `FROM_INPUT_PARAMS`.
-          type: string
-        end_date:
-          description: End date for the calendar in `MM/dd/yyyy` format. This parameter
-            is mandatory if `update_method` is set as `FROM_INPUT_PARAMS`.
-          type: string
-        calendar_type:
-          default: MONTH_OFFSET
-          description: Type of the calendar.
-          enum:
-          - MONTH_OFFSET
-          - FOUR_FOUR_FIVE
-          - FOUR_FIVE_FOUR
-          - FIVE_FOUR_FOUR
-          type: string
-        month_offset:
-          default: January
-          description: "Specify the month in which the fiscal or custom calendar year\
-            \ should start. For example, if you set `month_offset` to \"April\", the\
-            \ custom calendar will treat \"April\" as the first month of the year,\
-            \ and the related attributes such as quarters and start date will be based\
-            \ on this offset. The default value is `January`, which represents the\
-            \ standard calendar year (January to December)."
-          enum:
-          - January
-          - February
-          - March
-          - April
-          - May
-          - June
-          - July
-          - August
-          - September
-          - October
-          - November
-          - December
-          type: string
-        start_day_of_week:
-          default: Sunday
-          description: Specify the starting day of the week
-          enum:
-          - Sunday
-          - Monday
-          - Tuesday
-          - Wednesday
-          - Thursday
-          - Friday
-          - Saturday
-          type: string
-        quarter_name_prefix:
-          default: ""
-          description: Prefix to add before the quarter.
-          type: string
-        year_name_prefix:
-          default: ""
-          description: Prefix to add before the year.
-          type: string
-      required:
-      - table_reference
-      type: object
     fetchAnswerData_request:
       properties:
         metadata_identifier:
@@ -16971,7 +15046,9 @@ components:
           description: Unique ID of the DBT connection.
           type: string
         model_tables:
-          description: List of Models and their respective Tables
+          description: |-
+            List of Models and their respective Tables
+            Example: '[{"model_name": "model_name", "tables": ["table_name"]}]'
           format: json
           type: string
         import_worksheets:
@@ -16982,8 +15059,9 @@ components:
           - SELECTED
           type: string
         worksheets:
-          description: List of worksheets is mandatory when import_Worksheets is type
-            SELECTED
+          description: |-
+            List of worksheets is mandatory when import_Worksheets is type SELECTED
+            Example: ["worksheet_name"]
           format: json
           type: string
         file_content:
@@ -16995,6 +15073,7 @@ components:
       required:
       - dbt_connection_identifier
       - import_worksheets
+      - model_tables
       type: object
     updateDbtConnection_request:
       properties:
@@ -17039,46 +15118,6 @@ components:
           type: string
       required:
       - dbt_connection_identifier
-      type: object
-    createEmailCustomization_request:
-      properties:
-        template_properties:
-          allOf:
-          - $ref: '#/components/schemas/Template_Properties_Input_Create'
-          description: Email customization configuration as key value pair
-        org_identifier:
-          description: "Unique ID or name of org \n  Version: 10.12.0.cl or later\n"
-          type: string
-      required:
-      - template_properties
-      type: object
-    deleteOrgEmailCustomization_request:
-      properties:
-        org_identifiers:
-          description: Unique identifier of the organization.
-          items:
-            type: string
-          type: array
-      type: object
-    searchEmailCustomization_request:
-      properties:
-        org_identifiers:
-          description: "Unique ID or name of org \n  Version: 10.12.0.cl or later\n"
-          items:
-            type: string
-          type: array
-      type: object
-    updateEmailCustomization_request:
-      properties:
-        template_properties:
-          allOf:
-          - $ref: '#/components/schemas/Template_Properties_Input_Create'
-          description: Email customization configuration as key value pair
-        org_identifier:
-          description: Unique ID or name of org
-          type: string
-      required:
-      - template_properties
       type: object
     createUserGroup_request:
       properties:
@@ -17126,6 +15165,8 @@ components:
             - ALLOW_NON_EMBED_FULL_APP_ACCESS
             - CAN_ACCESS_ANALYST_STUDIO
             - CAN_MANAGE_ANALYST_STUDIO
+            - CAN_MODIFY_FOLDERS
+            - CAN_VIEW_FOLDERS
             - PREVIEW_DOCUMENT_SEARCH
             - CAN_SETUP_VERSION_CONTROL
             - CAN_DOWNLOAD_VISUALS
@@ -17256,6 +15297,8 @@ components:
             - CAN_ACCESS_ANALYST_STUDIO
             - CAN_MANAGE_ANALYST_STUDIO
             - PREVIEW_DOCUMENT_SEARCH
+            - CAN_MODIFY_FOLDERS
+            - CAN_VIEW_FOLDERS
             - CAN_SETUP_VERSION_CONTROL
             - CAN_MANAGE_WEBHOOKS
             - CAN_DOWNLOAD_VISUALS
@@ -17374,6 +15417,8 @@ components:
             - ALLOW_NON_EMBED_FULL_APP_ACCESS
             - CAN_ACCESS_ANALYST_STUDIO
             - CAN_MANAGE_ANALYST_STUDIO
+            - CAN_MODIFY_FOLDERS
+            - CAN_VIEW_FOLDERS
             - PREVIEW_DOCUMENT_SEARCH
             - CAN_SETUP_VERSION_CONTROL
             - CAN_DOWNLOAD_VISUALS
@@ -17775,35 +15820,6 @@ components:
       required:
       - metadata_tmls
       type: object
-    parameterizeMetadata_request:
-      properties:
-        metadata_type:
-          description: Type of metadata object to parameterize.
-          enum:
-          - LOGICAL_TABLE
-          - CONNECTION
-          type: string
-        metadata_identifier:
-          description: Unique ID or name of the metadata object to parameterize.
-          type: string
-        field_type:
-          description: Type of field in the metadata to parameterize.
-          enum:
-          - ATTRIBUTE
-          - CONNECTION_PROPERTY
-          type: string
-        field_name:
-          description: Name of the field which needs to be parameterized.
-          type: string
-        variable_identifier:
-          description: Unique ID or name of the variable to use for parameterization
-          type: string
-      required:
-      - field_name
-      - field_type
-      - metadata_identifier
-      - variable_identifier
-      type: object
     searchMetadata_request:
       properties:
         metadata:
@@ -17957,35 +15973,6 @@ components:
             If only published objects should be returned
           nullable: true
           type: boolean
-      type: object
-    unparameterizeMetadata_request:
-      properties:
-        metadata_type:
-          description: Type of metadata object to unparameterize.
-          enum:
-          - LOGICAL_TABLE
-          - CONNECTION
-          type: string
-        metadata_identifier:
-          description: Unique ID or name of the metadata object to unparameterize.
-          type: string
-        field_type:
-          description: Type of field in the metadata to unparameterize.
-          enum:
-          - ATTRIBUTE
-          - CONNECTION_PROPERTY
-          type: string
-        field_name:
-          description: Name of the field which needs to be unparameterized.
-          type: string
-        value:
-          description: The value to use in place of the variable for the field
-          type: string
-      required:
-      - field_name
-      - field_type
-      - metadata_identifier
-      - value
       type: object
     updateMetadataHeader_request:
       properties:
@@ -18264,6 +16251,8 @@ components:
             - CAN_ACCESS_ANALYST_STUDIO
             - CAN_MANAGE_ANALYST_STUDIO
             - PREVIEW_DOCUMENT_SEARCH
+            - CAN_MODIFY_FOLDERS
+            - CAN_VIEW_FOLDERS
             - CAN_SETUP_VERSION_CONTROL
             - PREVIEW_THOUGHTSPOT_SAGE
             - CAN_MANAGE_WEBHOOKS
@@ -18348,6 +16337,8 @@ components:
             - ALLOW_NON_EMBED_FULL_APP_ACCESS
             - CAN_ACCESS_ANALYST_STUDIO
             - CAN_MANAGE_ANALYST_STUDIO
+            - CAN_VIEW_FOLDERS
+            - CAN_MODIDY_FOLDERS
             - PREVIEW_DOCUMENT_SEARCH
             - CAN_SETUP_VERSION_CONTROL
             - CAN_MANAGE_WEBHOOKS
@@ -18423,6 +16414,8 @@ components:
             - CAN_CREATE_CATALOG
             - CAN_ACCESS_ANALYST_STUDIO
             - CAN_MANAGE_ANALYST_STUDIO
+            - CAN_MODIFY_FOLDERS
+            - CAN_VIEW_FOLDERS
             - PREVIEW_DOCUMENT_SEARCH
             - PREVIEW_THOUGHTSPOT_SAGE
             - CAN_MANAGE_WEBHOOKS
@@ -19857,17 +17850,6 @@ components:
       - metadata
       - user_identifier
       type: object
-    fetchColumnSecurityRules_request:
-      properties:
-        tables:
-          description: Array of table identifier objects for which to fetch column
-            security rules
-          items:
-            $ref: '#/components/schemas/ColumnSecurityRuleTableInput'
-          type: array
-      required:
-      - tables
-      type: object
     fetchPermissionsOfPrincipals_request:
       properties:
         principals:
@@ -19954,27 +17936,6 @@ components:
       required:
       - metadata
       type: object
-    publishMetadata_request:
-      properties:
-        metadata:
-          description: Metadata objects to be published.
-          items:
-            $ref: '#/components/schemas/PublishMetadataListItem'
-          type: array
-        org_identifiers:
-          description: Unique ID or name of orgs to which metadata objects should
-            be published.
-          items:
-            type: string
-          type: array
-        skip_validation:
-          description: Skip validations of objects to be published.
-          nullable: true
-          type: boolean
-      required:
-      - metadata
-      - org_identifiers
-      type: object
     shareMetadata_request:
       properties:
         metadata_type:
@@ -20041,56 +18002,6 @@ components:
       required:
       - message
       - permissions
-      type: object
-    unpublishMetadata_request:
-      properties:
-        force:
-          description: Force unpublishes the object. This will break all the dependent
-            objects in the unpublished orgs.
-          nullable: true
-          type: boolean
-        include_dependencies:
-          description: |-
-            Should we unpublish all the dependencies for the objects specified.
-            The dependencies will be unpublished if no other published object is using it.
-          type: boolean
-        metadata:
-          description: Metadata objects.
-          items:
-            $ref: '#/components/schemas/PublishMetadataListItem'
-          type: array
-        org_identifiers:
-          description: Unique ID or name of orgs.
-          items:
-            type: string
-          type: array
-      required:
-      - include_dependencies
-      - metadata
-      - org_identifiers
-      type: object
-    updateColumnSecurityRules_request:
-      properties:
-        identifier:
-          description: GUID or name of the table for which we want to create column
-            security rules
-          type: string
-        obj_identifier:
-          description: The object ID of the table
-          type: string
-        clear_csr:
-          description: "If true, then all the secured columns will be marked as unprotected,\
-            \ and all the group associations will be removed"
-          nullable: true
-          type: boolean
-        column_security_rules:
-          description: Array where each object defines the security rule for a specific
-            column
-          items:
-            $ref: '#/components/schemas/ColumnSecurityRuleUpdate'
-          type: array
-      required:
-      - column_security_rules
       type: object
     updateSystemConfig_request:
       properties:
@@ -20445,6 +18356,8 @@ components:
             - CAN_ACCESS_ANALYST_STUDIO
             - CAN_MANAGE_ANALYST_STUDIO
             - PREVIEW_DOCUMENT_SEARCH
+            - CAN_MODIFY_FOLDERS
+            - CAN_VIEW_FOLDERS
             - CAN_SETUP_VERSION_CONTROL
             - CAN_MANAGE_WEBHOOKS
             - CAN_DOWNLOAD_VISUALS
@@ -20642,96 +18555,6 @@ components:
         extended_preferences:
           description: Preferences for the user
           type: object
-      type: object
-    createVariable_request:
-      properties:
-        type:
-          description: Type of variable
-          enum:
-          - CONNECTION_PROPERTY
-          - TABLE_MAPPING
-          - CONNECTION_PROPERTY_PER_PRINCIPAL
-          type: string
-        name:
-          description: Name of the variable. This is unique across the cluster.
-          type: string
-        sensitive:
-          default: false
-          description: If the variable contains sensitive values like passwords
-          nullable: true
-          type: boolean
-        values:
-          description: Values of variable
-          items:
-            $ref: '#/components/schemas/InputVariableValue'
-          type: array
-      required:
-      - name
-      - type
-      type: object
-    searchVariables_request:
-      properties:
-        variable_details:
-          description: Variable details
-          items:
-            $ref: '#/components/schemas/VariableDetailInput'
-          type: array
-        record_offset:
-          default: 0
-          description: The starting record number from where the records should be
-            included
-          format: int32
-          type: integer
-        record_size:
-          default: 10
-          description: The number of records that should be included
-          format: int32
-          type: integer
-        output_format:
-          default: METADATA_ONLY
-          description: Format in which we want the output
-          enum:
-          - METADATA_ONLY
-          - METADATA_AND_VALUES
-          - EDITABLE_METADATA_AND_VALUES
-          type: string
-      type: object
-    updateVariable_request:
-      properties:
-        name:
-          description: New name of the variable if we want to rename.
-          type: string
-        operation:
-          default: REPLACE
-          description: Operation to perform on the values.
-          enum:
-          - ADD
-          - REMOVE
-          - REPLACE
-          type: string
-        values:
-          description: Values of variable to be updated.
-          items:
-            $ref: '#/components/schemas/InputVariableValue'
-          type: array
-      type: object
-    updateVariableValues_request:
-      properties:
-        variable_updates:
-          description: Variables and values
-          items:
-            $ref: '#/components/schemas/VariableValueInput'
-          type: array
-        operation:
-          description: Type of update operation
-          enum:
-          - ADD
-          - REMOVE
-          - REPLACE
-          type: string
-      required:
-      - operation
-      - variable_updates
       type: object
     commitBranch_request:
       properties:
@@ -20980,6 +18803,11 @@ x-roles:
   tags:
   - 10.4.0.cl
   description: Roles for version 10.4.0.cl
+- name: 10.15.0.cl
+  id: 10.15.0.cl
+  tags:
+  - 10.15.0.cl
+  description: Roles for version 10.15.0.cl
 - name: 10.7.0.cl
   id: 10.7.0.cl
   tags:
@@ -21055,6 +18883,11 @@ x-roles:
   tags:
   - 9.5.0.cl
   description: Roles for version 9.5.0.cl
+- name: 10.14.0.cl
+  id: 10.14.0.cl
+  tags:
+  - 10.14.0.cl
+  description: Roles for version 10.14.0.cl
 - name: 9.7.0.cl
   id: 9.7.0.cl
   tags:

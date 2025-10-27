@@ -16,10 +16,10 @@ public class ColumnSecurityRuleResponseTest {
         // TODO: test ColumnSecurityRuleResponse
     }
 
-    /** Test the property 'guid' */
+    /** Test the property 'tableGuid' */
     @Test
-    public void guidTest() {
-        // TODO: test guid
+    public void tableGuidTest() {
+        // TODO: test tableGuid
     }
 
     /** Test the property 'objId' */

@@ -96,7 +96,7 @@ All URIs are relative to *CLUSTER_URL*
 
 <a id="dbtGenerateTml"></a>
 # **dbtGenerateTml**
-> Object dbtGenerateTml(dbtConnectionIdentifier, importWorksheets, modelTables, worksheets, fileContent)
+> Object dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent)
 
 
 
@@ -107,8 +107,8 @@ All URIs are relative to *CLUSTER_URL*
 | Name | Type |
 |------------- | ------------- |
 | **dbtConnectionIdentifier** | **String**
-| **importWorksheets** | **String**
 | **modelTables** | **String**
+| **importWorksheets** | **String**
 | **worksheets** | **String**
 | **fileContent** | **File**
 
