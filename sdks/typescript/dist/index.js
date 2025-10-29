@@ -38729,13 +38729,38 @@ var PromiseVersionControlApi = class {
 };
 
 // utils/config.ts
-var createBearerAuthenticationConfig = (thoughtSpotHost, paramOrTokenProvider) => {
+var createAdditionalHeadersMiddleware = (additionalHeaders) => {
+  return {
+    /**
+     * Pre-request middleware to add custom headers to every API call
+     * @param requestContext - The request context to modify
+     */
+    pre: (requestContext) => {
+      Object.entries(additionalHeaders).forEach(([headerName, headerValue]) => {
+        requestContext.setHeaderParam(headerName, headerValue);
+      });
+      return Promise.resolve(requestContext);
+    },
+    /**
+     * Post-request middleware for response processing
+     * @param responseContext - The response context
+     */
+    post: (responseContext) => Promise.resolve(responseContext)
+  };
+};
+var createBearerAuthenticationConfig = (thoughtSpotHost, paramOrTokenProvider, options) => {
   const serverConfig = new ServerConfiguration(
     thoughtSpotHost,
     {}
   );
+  const additionalHeaders = options == null ? void 0 : options.additionalHeaders;
+  let middleware = [];
+  if (additionalHeaders && Object.keys(additionalHeaders).length > 0) {
+    middleware.push(createAdditionalHeadersMiddleware(additionalHeaders));
+  }
   const config = createConfiguration({
-    baseServer: serverConfig
+    baseServer: serverConfig,
+    promiseMiddleware: middleware
   });
   const authApiClient = new PromiseAuthenticationApi(config);
   let configTokenProvider;
@@ -38760,14 +38785,21 @@ var createBearerAuthenticationConfig = (thoughtSpotHost, paramOrTokenProvider) =
   };
   const globalConfig = createConfiguration({
     authMethods: authConfig,
-    baseServer: serverConfig
+    baseServer: serverConfig,
+    promiseMiddleware: middleware
   });
   return globalConfig;
 };
-var createBasicConfig = (thoughtSpotHost) => {
+var createBasicConfig = (thoughtSpotHost, options) => {
   const thoughtSpotServer = new ServerConfiguration(thoughtSpotHost, {});
+  const additionalHeaders = options == null ? void 0 : options.additionalHeaders;
+  let middleware = [];
+  if (additionalHeaders && Object.keys(additionalHeaders).length > 0) {
+    middleware.push(createAdditionalHeadersMiddleware(additionalHeaders));
+  }
   const basicClientConfig = createConfiguration({
-    baseServer: thoughtSpotServer
+    baseServer: thoughtSpotServer,
+    promiseMiddleware: middleware
   });
   return basicClientConfig;
 };
