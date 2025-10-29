@@ -515,7 +515,8 @@
                   },
                   "conversationId": {
                     "description": "Unique identifier to denote current conversation.",
-                    "type": "string"
+                    "type": "string",
+                    "hidden": true
                   },
                   "liveboardIds": {
                     "description": "List of liveboard unique identifiers (GUIDs) whose data will be used to guide the response.",
