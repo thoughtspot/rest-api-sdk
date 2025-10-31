@@ -7,6 +7,8 @@ mkdir $PWD/build $PWD/spec
 # prepare spec
 cp ../api-spec/* spec/
 
+npx node processOpenApiSpec.js
+
 # native zip and unzip unavailable
 npx bestzip $PWD/build/portal-input.zip .
 
