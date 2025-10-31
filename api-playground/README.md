@@ -9,7 +9,7 @@ Add configuration to `api-playground-config.json`:
 ```json
 {
   "hideApiFields": [
-    { "operationId": "createCustomAction", "fields": ["action_details.CALLBACK.reference"] }
+    { "operationId": "APIOperantionId", "fields": ["field.refSchemaField"] }
   ]
 }
 ```

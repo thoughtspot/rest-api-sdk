@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const SPEC_PATH = '../api-spec/openapiSpecv3-2_0.json';
+const SPEC_PATH = './spec/openapiSpecv3-2_0.json';
 const CONFIG_PATH = './api-playground-config.json';
 
 function isObject(value) {
