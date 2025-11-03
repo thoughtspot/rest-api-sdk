@@ -128,6 +128,11 @@ function hideFieldsInOperation(spec, op, fields) {
 
 async function processOpenApiSpec() {
   try {
+    if (!fs.existsSync(CONFIG_PATH)) {
+      console.error(`Config file not found: ${CONFIG_PATH}`);
+      process.exit(1);
+    }
+
     const specContent = fs.readFileSync(SPEC_PATH, 'utf8');
     const spec = JSON.parse(specContent);
 
