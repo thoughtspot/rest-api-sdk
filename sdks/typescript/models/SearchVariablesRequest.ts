@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+import { ValueScopeInput } from '../models/ValueScopeInput';
 import { VariableDetailInput } from '../models/VariableDetailInput';
 import { HttpFile } from '../http/http';
 
@@ -18,6 +19,10 @@ export class SearchVariablesRequest {
     * Variable details
     */
     'variable_details'?: Array<VariableDetailInput>;
+    /**
+    * Array of scope filters
+    */
+    'value_scope'?: Array<ValueScopeInput>;
     /**
     * The starting record number from where the records should be included
     */
@@ -38,6 +43,12 @@ export class SearchVariablesRequest {
             "name": "variable_details",
             "baseName": "variable_details",
             "type": "Array<VariableDetailInput>",
+            "format": ""
+        },
+        {
+            "name": "value_scope",
+            "baseName": "value_scope",
+            "type": "Array<ValueScopeInput>",
             "format": ""
         },
         {
@@ -68,5 +79,5 @@ export class SearchVariablesRequest {
 }
 
 
-export type SearchVariablesRequestOutputFormatEnum = "METADATA_ONLY" | "METADATA_AND_VALUES" | "EDITABLE_METADATA_AND_VALUES" ;
+export type SearchVariablesRequestOutputFormatEnum = "METADATA_ONLY" | "METADATA_AND_VALUES" ;
 

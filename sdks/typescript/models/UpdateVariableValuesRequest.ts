@@ -10,32 +10,33 @@
  * Do not edit the class manually.
  */
 
-import { VariableValueInput } from '../models/VariableValueInput';
+import { VariableUpdateAssignmentInput } from '../models/VariableUpdateAssignmentInput';
+import { VariableUpdateScopeInput } from '../models/VariableUpdateScopeInput';
 import { HttpFile } from '../http/http';
 
 export class UpdateVariableValuesRequest {
     /**
-    * Variables and values
+    * Variables and values to update
     */
-    'variable_updates': Array<VariableValueInput>;
+    'variable_assignment': Array<VariableUpdateAssignmentInput>;
     /**
-    * Type of update operation
+    * Variables and values to update
     */
-    'operation': UpdateVariableValuesRequestOperationEnum;
+    'variable_value_scope': Array<VariableUpdateScopeInput>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "variable_updates",
-            "baseName": "variable_updates",
-            "type": "Array<VariableValueInput>",
+            "name": "variable_assignment",
+            "baseName": "variable_assignment",
+            "type": "Array<VariableUpdateAssignmentInput>",
             "format": ""
         },
         {
-            "name": "operation",
-            "baseName": "operation",
-            "type": "UpdateVariableValuesRequestOperationEnum",
+            "name": "variable_value_scope",
+            "baseName": "variable_value_scope",
+            "type": "Array<VariableUpdateScopeInput>",
             "format": ""
         }    ];
 
@@ -46,7 +47,4 @@ export class UpdateVariableValuesRequest {
     public constructor() {
     }
 }
-
-
-export type UpdateVariableValuesRequestOperationEnum = "ADD" | "REMOVE" | "REPLACE" ;
 

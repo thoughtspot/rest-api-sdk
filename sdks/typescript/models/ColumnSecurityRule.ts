@@ -21,7 +21,7 @@ export class ColumnSecurityRule {
     * Array of groups that have access to this column
     */
     'groups'?: Array<ColumnSecurityRuleGroup> | null;
-    'sourceTableDetails'?: ColumnSecurityRuleSourceTable;
+    'source_table_details'?: ColumnSecurityRuleSourceTable;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -39,8 +39,8 @@ export class ColumnSecurityRule {
             "format": ""
         },
         {
-            "name": "sourceTableDetails",
-            "baseName": "sourceTableDetails",
+            "name": "source_table_details",
+            "baseName": "source_table_details",
             "type": "ColumnSecurityRuleSourceTable",
             "format": ""
         }    ];

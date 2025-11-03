@@ -12,8 +12,11 @@ import com.thoughtspot.client.ApiException;
 import com.thoughtspot.client.ApiResponse;
 import com.thoughtspot.client.Configuration;
 import com.thoughtspot.client.Pair;
+import com.thoughtspot.client.model.DbtConnectionRequest;
+import com.thoughtspot.client.model.DbtGenerateSyncTmlRequest;
+import com.thoughtspot.client.model.DbtGenerateTmlRequest;
 import com.thoughtspot.client.model.DbtSearchResponse;
-import java.io.File;
+import com.thoughtspot.client.model.UpdateDbtConnectionRequest;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -82,17 +85,7 @@ public class DbtApi {
     /**
      * Build call for dbtConnection
      *
-     * @param connectionName Name of the connection. (required)
-     * @param databaseName Name of the Database. (required)
-     * @param importType Mention type of Import (optional, default to DBT_CLOUD)
-     * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD. (optional)
-     * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD. (optional)
-     * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD (optional)
-     * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD (optional)
-     * @param dbtEnvId DBT Environment ID\\\&quot; (optional)
-     * @param projectName Name of the project (optional)
-     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
-     *     is Mandatory when Import Type is &#39;ZIP_FILE&#39; (optional)
+     * @param dbtConnectionRequest (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -108,17 +101,7 @@ public class DbtApi {
      * </table>
      */
     public okhttp3.Call dbtConnectionCall(
-            String connectionName,
-            String databaseName,
-            String importType,
-            String accessToken,
-            String dbtUrl,
-            String accountId,
-            String projectId,
-            String dbtEnvId,
-            String projectName,
-            File fileContent,
-            final ApiCallback _callback)
+            DbtConnectionRequest dbtConnectionRequest, final ApiCallback _callback)
             throws ApiException {
         String basePath = null;
         // Operation Servers
@@ -133,7 +116,7 @@ public class DbtApi {
             basePath = null;
         }
 
-        Object localVarPostBody = null;
+        Object localVarPostBody = dbtConnectionRequest;
 
         // create path and map variables
         String localVarPath = "/api/rest/2.0/dbt/dbt-connection";
@@ -144,53 +127,13 @@ public class DbtApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-        if (connectionName != null) {
-            localVarFormParams.put("connection_name", connectionName);
-        }
-
-        if (databaseName != null) {
-            localVarFormParams.put("database_name", databaseName);
-        }
-
-        if (importType != null) {
-            localVarFormParams.put("import_type", importType);
-        }
-
-        if (accessToken != null) {
-            localVarFormParams.put("access_token", accessToken);
-        }
-
-        if (dbtUrl != null) {
-            localVarFormParams.put("dbt_url", dbtUrl);
-        }
-
-        if (accountId != null) {
-            localVarFormParams.put("account_id", accountId);
-        }
-
-        if (projectId != null) {
-            localVarFormParams.put("project_id", projectId);
-        }
-
-        if (dbtEnvId != null) {
-            localVarFormParams.put("dbt_env_id", dbtEnvId);
-        }
-
-        if (projectName != null) {
-            localVarFormParams.put("project_name", projectName);
-        }
-
-        if (fileContent != null) {
-            localVarFormParams.put("file_content", fileContent);
-        }
-
         final String[] localVarAccepts = {"application/json"};
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
             localVarHeaderParams.put("Accept", localVarAccept);
         }
 
-        final String[] localVarContentTypes = {"multipart/form-data"};
+        final String[] localVarContentTypes = {"application/json"};
         final String localVarContentType =
                 localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
@@ -214,44 +157,16 @@ public class DbtApi {
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call dbtConnectionValidateBeforeCall(
-            String connectionName,
-            String databaseName,
-            String importType,
-            String accessToken,
-            String dbtUrl,
-            String accountId,
-            String projectId,
-            String dbtEnvId,
-            String projectName,
-            File fileContent,
-            final ApiCallback _callback)
+            DbtConnectionRequest dbtConnectionRequest, final ApiCallback _callback)
             throws ApiException {
-        // verify the required parameter 'connectionName' is set
-        if (connectionName == null) {
+        // verify the required parameter 'dbtConnectionRequest' is set
+        if (dbtConnectionRequest == null) {
             throw new ApiException(
-                    "Missing the required parameter 'connectionName' when calling"
+                    "Missing the required parameter 'dbtConnectionRequest' when calling"
                             + " dbtConnection(Async)");
         }
 
-        // verify the required parameter 'databaseName' is set
-        if (databaseName == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'databaseName' when calling"
-                            + " dbtConnection(Async)");
-        }
-
-        return dbtConnectionCall(
-                connectionName,
-                databaseName,
-                importType,
-                accessToken,
-                dbtUrl,
-                accountId,
-                projectId,
-                dbtEnvId,
-                projectName,
-                fileContent,
-                _callback);
+        return dbtConnectionCall(dbtConnectionRequest, _callback);
     }
 
     /**
@@ -269,17 +184,7 @@ public class DbtApi {
      * embrace connection, embrace database name, import type, file_content to create a connection
      * object. To know more about DBT, see ThoughtSpot Product Documentation.
      *
-     * @param connectionName Name of the connection. (required)
-     * @param databaseName Name of the Database. (required)
-     * @param importType Mention type of Import (optional, default to DBT_CLOUD)
-     * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD. (optional)
-     * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD. (optional)
-     * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD (optional)
-     * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD (optional)
-     * @param dbtEnvId DBT Environment ID\\\&quot; (optional)
-     * @param projectName Name of the project (optional)
-     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
-     *     is Mandatory when Import Type is &#39;ZIP_FILE&#39; (optional)
+     * @param dbtConnectionRequest (required)
      * @return Object
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -294,30 +199,8 @@ public class DbtApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public Object dbtConnection(
-            String connectionName,
-            String databaseName,
-            String importType,
-            String accessToken,
-            String dbtUrl,
-            String accountId,
-            String projectId,
-            String dbtEnvId,
-            String projectName,
-            File fileContent)
-            throws ApiException {
-        ApiResponse<Object> localVarResp =
-                dbtConnectionWithHttpInfo(
-                        connectionName,
-                        databaseName,
-                        importType,
-                        accessToken,
-                        dbtUrl,
-                        accountId,
-                        projectId,
-                        dbtEnvId,
-                        projectName,
-                        fileContent);
+    public Object dbtConnection(DbtConnectionRequest dbtConnectionRequest) throws ApiException {
+        ApiResponse<Object> localVarResp = dbtConnectionWithHttpInfo(dbtConnectionRequest);
         return localVarResp.getData();
     }
 
@@ -336,17 +219,7 @@ public class DbtApi {
      * embrace connection, embrace database name, import type, file_content to create a connection
      * object. To know more about DBT, see ThoughtSpot Product Documentation.
      *
-     * @param connectionName Name of the connection. (required)
-     * @param databaseName Name of the Database. (required)
-     * @param importType Mention type of Import (optional, default to DBT_CLOUD)
-     * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD. (optional)
-     * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD. (optional)
-     * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD (optional)
-     * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD (optional)
-     * @param dbtEnvId DBT Environment ID\\\&quot; (optional)
-     * @param projectName Name of the project (optional)
-     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
-     *     is Mandatory when Import Type is &#39;ZIP_FILE&#39; (optional)
+     * @param dbtConnectionRequest (required)
      * @return ApiResponse&lt;Object&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -361,31 +234,9 @@ public class DbtApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public ApiResponse<Object> dbtConnectionWithHttpInfo(
-            String connectionName,
-            String databaseName,
-            String importType,
-            String accessToken,
-            String dbtUrl,
-            String accountId,
-            String projectId,
-            String dbtEnvId,
-            String projectName,
-            File fileContent)
+    public ApiResponse<Object> dbtConnectionWithHttpInfo(DbtConnectionRequest dbtConnectionRequest)
             throws ApiException {
-        okhttp3.Call localVarCall =
-                dbtConnectionValidateBeforeCall(
-                        connectionName,
-                        databaseName,
-                        importType,
-                        accessToken,
-                        dbtUrl,
-                        accountId,
-                        projectId,
-                        dbtEnvId,
-                        projectName,
-                        fileContent,
-                        null);
+        okhttp3.Call localVarCall = dbtConnectionValidateBeforeCall(dbtConnectionRequest, null);
         Type localVarReturnType = new TypeToken<Object>() {}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -405,17 +256,7 @@ public class DbtApi {
      * embrace connection, embrace database name, import type, file_content to create a connection
      * object. To know more about DBT, see ThoughtSpot Product Documentation.
      *
-     * @param connectionName Name of the connection. (required)
-     * @param databaseName Name of the Database. (required)
-     * @param importType Mention type of Import (optional, default to DBT_CLOUD)
-     * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD. (optional)
-     * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD. (optional)
-     * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD (optional)
-     * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD (optional)
-     * @param dbtEnvId DBT Environment ID\\\&quot; (optional)
-     * @param projectName Name of the project (optional)
-     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
-     *     is Mandatory when Import Type is &#39;ZIP_FILE&#39; (optional)
+     * @param dbtConnectionRequest (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body
@@ -432,32 +273,11 @@ public class DbtApi {
      * </table>
      */
     public okhttp3.Call dbtConnectionAsync(
-            String connectionName,
-            String databaseName,
-            String importType,
-            String accessToken,
-            String dbtUrl,
-            String accountId,
-            String projectId,
-            String dbtEnvId,
-            String projectName,
-            File fileContent,
-            final ApiCallback<Object> _callback)
+            DbtConnectionRequest dbtConnectionRequest, final ApiCallback<Object> _callback)
             throws ApiException {
 
         okhttp3.Call localVarCall =
-                dbtConnectionValidateBeforeCall(
-                        connectionName,
-                        databaseName,
-                        importType,
-                        accessToken,
-                        dbtUrl,
-                        accountId,
-                        projectId,
-                        dbtEnvId,
-                        projectName,
-                        fileContent,
-                        _callback);
+                dbtConnectionValidateBeforeCall(dbtConnectionRequest, _callback);
         Type localVarReturnType = new TypeToken<Object>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -465,9 +285,7 @@ public class DbtApi {
     /**
      * Build call for dbtGenerateSyncTml
      *
-     * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
-     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
-     *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
+     * @param dbtGenerateSyncTmlRequest (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -483,7 +301,7 @@ public class DbtApi {
      * </table>
      */
     public okhttp3.Call dbtGenerateSyncTmlCall(
-            String dbtConnectionIdentifier, File fileContent, final ApiCallback _callback)
+            DbtGenerateSyncTmlRequest dbtGenerateSyncTmlRequest, final ApiCallback _callback)
             throws ApiException {
         String basePath = null;
         // Operation Servers
@@ -498,7 +316,7 @@ public class DbtApi {
             basePath = null;
         }
 
-        Object localVarPostBody = null;
+        Object localVarPostBody = dbtGenerateSyncTmlRequest;
 
         // create path and map variables
         String localVarPath = "/api/rest/2.0/dbt/generate-sync-tml";
@@ -509,21 +327,13 @@ public class DbtApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-        if (dbtConnectionIdentifier != null) {
-            localVarFormParams.put("dbt_connection_identifier", dbtConnectionIdentifier);
-        }
-
-        if (fileContent != null) {
-            localVarFormParams.put("file_content", fileContent);
-        }
-
         final String[] localVarAccepts = {"application/json"};
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
             localVarHeaderParams.put("Accept", localVarAccept);
         }
 
-        final String[] localVarContentTypes = {"multipart/form-data"};
+        final String[] localVarContentTypes = {"application/json"};
         final String localVarContentType =
                 localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
@@ -547,16 +357,16 @@ public class DbtApi {
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call dbtGenerateSyncTmlValidateBeforeCall(
-            String dbtConnectionIdentifier, File fileContent, final ApiCallback _callback)
+            DbtGenerateSyncTmlRequest dbtGenerateSyncTmlRequest, final ApiCallback _callback)
             throws ApiException {
-        // verify the required parameter 'dbtConnectionIdentifier' is set
-        if (dbtConnectionIdentifier == null) {
+        // verify the required parameter 'dbtGenerateSyncTmlRequest' is set
+        if (dbtGenerateSyncTmlRequest == null) {
             throw new ApiException(
-                    "Missing the required parameter 'dbtConnectionIdentifier' when calling"
+                    "Missing the required parameter 'dbtGenerateSyncTmlRequest' when calling"
                             + " dbtGenerateSyncTml(Async)");
         }
 
-        return dbtGenerateSyncTmlCall(dbtConnectionIdentifier, fileContent, _callback);
+        return dbtGenerateSyncTmlCall(dbtGenerateSyncTmlRequest, _callback);
     }
 
     /**
@@ -571,9 +381,7 @@ public class DbtApi {
      * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) -
      * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**)
      *
-     * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
-     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
-     *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
+     * @param dbtGenerateSyncTmlRequest (required)
      * @return Object
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -588,10 +396,10 @@ public class DbtApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public Object dbtGenerateSyncTml(String dbtConnectionIdentifier, File fileContent)
+    public Object dbtGenerateSyncTml(DbtGenerateSyncTmlRequest dbtGenerateSyncTmlRequest)
             throws ApiException {
         ApiResponse<Object> localVarResp =
-                dbtGenerateSyncTmlWithHttpInfo(dbtConnectionIdentifier, fileContent);
+                dbtGenerateSyncTmlWithHttpInfo(dbtGenerateSyncTmlRequest);
         return localVarResp.getData();
     }
 
@@ -607,9 +415,7 @@ public class DbtApi {
      * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) -
      * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**)
      *
-     * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
-     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
-     *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
+     * @param dbtGenerateSyncTmlRequest (required)
      * @return ApiResponse&lt;Object&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -625,9 +431,9 @@ public class DbtApi {
      * </table>
      */
     public ApiResponse<Object> dbtGenerateSyncTmlWithHttpInfo(
-            String dbtConnectionIdentifier, File fileContent) throws ApiException {
+            DbtGenerateSyncTmlRequest dbtGenerateSyncTmlRequest) throws ApiException {
         okhttp3.Call localVarCall =
-                dbtGenerateSyncTmlValidateBeforeCall(dbtConnectionIdentifier, fileContent, null);
+                dbtGenerateSyncTmlValidateBeforeCall(dbtGenerateSyncTmlRequest, null);
         Type localVarReturnType = new TypeToken<Object>() {}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -644,9 +450,7 @@ public class DbtApi {
      * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) -
      * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**)
      *
-     * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
-     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
-     *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
+     * @param dbtGenerateSyncTmlRequest (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body
@@ -663,12 +467,12 @@ public class DbtApi {
      * </table>
      */
     public okhttp3.Call dbtGenerateSyncTmlAsync(
-            String dbtConnectionIdentifier, File fileContent, final ApiCallback<Object> _callback)
+            DbtGenerateSyncTmlRequest dbtGenerateSyncTmlRequest,
+            final ApiCallback<Object> _callback)
             throws ApiException {
 
         okhttp3.Call localVarCall =
-                dbtGenerateSyncTmlValidateBeforeCall(
-                        dbtConnectionIdentifier, fileContent, _callback);
+                dbtGenerateSyncTmlValidateBeforeCall(dbtGenerateSyncTmlRequest, _callback);
         Type localVarReturnType = new TypeToken<Object>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -676,13 +480,7 @@ public class DbtApi {
     /**
      * Build call for dbtGenerateTml
      *
-     * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
-     * @param importWorksheets Mention the worksheet tmls to import (required)
-     * @param modelTables List of Models and their respective Tables (optional)
-     * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED
-     *     (optional)
-     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
-     *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
+     * @param dbtGenerateTmlRequest (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -698,12 +496,7 @@ public class DbtApi {
      * </table>
      */
     public okhttp3.Call dbtGenerateTmlCall(
-            String dbtConnectionIdentifier,
-            String importWorksheets,
-            String modelTables,
-            String worksheets,
-            File fileContent,
-            final ApiCallback _callback)
+            DbtGenerateTmlRequest dbtGenerateTmlRequest, final ApiCallback _callback)
             throws ApiException {
         String basePath = null;
         // Operation Servers
@@ -718,7 +511,7 @@ public class DbtApi {
             basePath = null;
         }
 
-        Object localVarPostBody = null;
+        Object localVarPostBody = dbtGenerateTmlRequest;
 
         // create path and map variables
         String localVarPath = "/api/rest/2.0/dbt/generate-tml";
@@ -729,33 +522,13 @@ public class DbtApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-        if (dbtConnectionIdentifier != null) {
-            localVarFormParams.put("dbt_connection_identifier", dbtConnectionIdentifier);
-        }
-
-        if (modelTables != null) {
-            localVarFormParams.put("model_tables", modelTables);
-        }
-
-        if (importWorksheets != null) {
-            localVarFormParams.put("import_worksheets", importWorksheets);
-        }
-
-        if (worksheets != null) {
-            localVarFormParams.put("worksheets", worksheets);
-        }
-
-        if (fileContent != null) {
-            localVarFormParams.put("file_content", fileContent);
-        }
-
         final String[] localVarAccepts = {"application/json"};
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
             localVarHeaderParams.put("Accept", localVarAccept);
         }
 
-        final String[] localVarContentTypes = {"multipart/form-data"};
+        final String[] localVarContentTypes = {"application/json"};
         final String localVarContentType =
                 localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
@@ -779,34 +552,16 @@ public class DbtApi {
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call dbtGenerateTmlValidateBeforeCall(
-            String dbtConnectionIdentifier,
-            String importWorksheets,
-            String modelTables,
-            String worksheets,
-            File fileContent,
-            final ApiCallback _callback)
+            DbtGenerateTmlRequest dbtGenerateTmlRequest, final ApiCallback _callback)
             throws ApiException {
-        // verify the required parameter 'dbtConnectionIdentifier' is set
-        if (dbtConnectionIdentifier == null) {
+        // verify the required parameter 'dbtGenerateTmlRequest' is set
+        if (dbtGenerateTmlRequest == null) {
             throw new ApiException(
-                    "Missing the required parameter 'dbtConnectionIdentifier' when calling"
+                    "Missing the required parameter 'dbtGenerateTmlRequest' when calling"
                             + " dbtGenerateTml(Async)");
         }
 
-        // verify the required parameter 'importWorksheets' is set
-        if (importWorksheets == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'importWorksheets' when calling"
-                            + " dbtGenerateTml(Async)");
-        }
-
-        return dbtGenerateTmlCall(
-                dbtConnectionIdentifier,
-                importWorksheets,
-                modelTables,
-                worksheets,
-                fileContent,
-                _callback);
+        return dbtGenerateTmlCall(dbtGenerateTmlRequest, _callback);
     }
 
     /**
@@ -822,13 +577,7 @@ public class DbtApi {
      * generate TML Models and Worksheets to be imported can be selected by the user as part of the
      * API.
      *
-     * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
-     * @param importWorksheets Mention the worksheet tmls to import (required)
-     * @param modelTables List of Models and their respective Tables (optional)
-     * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED
-     *     (optional)
-     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
-     *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
+     * @param dbtGenerateTmlRequest (required)
      * @return Object
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -843,20 +592,8 @@ public class DbtApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public Object dbtGenerateTml(
-            String dbtConnectionIdentifier,
-            String importWorksheets,
-            String modelTables,
-            String worksheets,
-            File fileContent)
-            throws ApiException {
-        ApiResponse<Object> localVarResp =
-                dbtGenerateTmlWithHttpInfo(
-                        dbtConnectionIdentifier,
-                        importWorksheets,
-                        modelTables,
-                        worksheets,
-                        fileContent);
+    public Object dbtGenerateTml(DbtGenerateTmlRequest dbtGenerateTmlRequest) throws ApiException {
+        ApiResponse<Object> localVarResp = dbtGenerateTmlWithHttpInfo(dbtGenerateTmlRequest);
         return localVarResp.getData();
     }
 
@@ -873,13 +610,7 @@ public class DbtApi {
      * generate TML Models and Worksheets to be imported can be selected by the user as part of the
      * API.
      *
-     * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
-     * @param importWorksheets Mention the worksheet tmls to import (required)
-     * @param modelTables List of Models and their respective Tables (optional)
-     * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED
-     *     (optional)
-     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
-     *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
+     * @param dbtGenerateTmlRequest (required)
      * @return ApiResponse&lt;Object&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -895,20 +626,8 @@ public class DbtApi {
      * </table>
      */
     public ApiResponse<Object> dbtGenerateTmlWithHttpInfo(
-            String dbtConnectionIdentifier,
-            String importWorksheets,
-            String modelTables,
-            String worksheets,
-            File fileContent)
-            throws ApiException {
-        okhttp3.Call localVarCall =
-                dbtGenerateTmlValidateBeforeCall(
-                        dbtConnectionIdentifier,
-                        importWorksheets,
-                        modelTables,
-                        worksheets,
-                        fileContent,
-                        null);
+            DbtGenerateTmlRequest dbtGenerateTmlRequest) throws ApiException {
+        okhttp3.Call localVarCall = dbtGenerateTmlValidateBeforeCall(dbtGenerateTmlRequest, null);
         Type localVarReturnType = new TypeToken<Object>() {}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -926,13 +645,7 @@ public class DbtApi {
      * generate TML Models and Worksheets to be imported can be selected by the user as part of the
      * API.
      *
-     * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
-     * @param importWorksheets Mention the worksheet tmls to import (required)
-     * @param modelTables List of Models and their respective Tables (optional)
-     * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED
-     *     (optional)
-     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
-     *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
+     * @param dbtGenerateTmlRequest (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body
@@ -949,22 +662,11 @@ public class DbtApi {
      * </table>
      */
     public okhttp3.Call dbtGenerateTmlAsync(
-            String dbtConnectionIdentifier,
-            String importWorksheets,
-            String modelTables,
-            String worksheets,
-            File fileContent,
-            final ApiCallback<Object> _callback)
+            DbtGenerateTmlRequest dbtGenerateTmlRequest, final ApiCallback<Object> _callback)
             throws ApiException {
 
         okhttp3.Call localVarCall =
-                dbtGenerateTmlValidateBeforeCall(
-                        dbtConnectionIdentifier,
-                        importWorksheets,
-                        modelTables,
-                        worksheets,
-                        fileContent,
-                        _callback);
+                dbtGenerateTmlValidateBeforeCall(dbtGenerateTmlRequest, _callback);
         Type localVarReturnType = new TypeToken<Object>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -1333,18 +1035,7 @@ public class DbtApi {
     /**
      * Build call for updateDbtConnection
      *
-     * @param dbtConnectionIdentifier Unique ID of the DBT Connection. (required)
-     * @param connectionName Name of the connection. (optional)
-     * @param databaseName Name of the Database. (optional)
-     * @param importType Mention type of Import (optional, default to DBT_CLOUD)
-     * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD. (optional)
-     * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD. (optional)
-     * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD (optional)
-     * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD (optional)
-     * @param dbtEnvId DBT Environment ID\\\&quot; (optional)
-     * @param projectName Name of the project (optional)
-     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
-     *     is Mandatory when Import Type is &#39;ZIP_FILE&#39; (optional)
+     * @param updateDbtConnectionRequest (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1360,18 +1051,7 @@ public class DbtApi {
      * </table>
      */
     public okhttp3.Call updateDbtConnectionCall(
-            String dbtConnectionIdentifier,
-            String connectionName,
-            String databaseName,
-            String importType,
-            String accessToken,
-            String dbtUrl,
-            String accountId,
-            String projectId,
-            String dbtEnvId,
-            String projectName,
-            File fileContent,
-            final ApiCallback _callback)
+            UpdateDbtConnectionRequest updateDbtConnectionRequest, final ApiCallback _callback)
             throws ApiException {
         String basePath = null;
         // Operation Servers
@@ -1386,7 +1066,7 @@ public class DbtApi {
             basePath = null;
         }
 
-        Object localVarPostBody = null;
+        Object localVarPostBody = updateDbtConnectionRequest;
 
         // create path and map variables
         String localVarPath = "/api/rest/2.0/dbt/update-dbt-connection";
@@ -1397,57 +1077,13 @@ public class DbtApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-        if (dbtConnectionIdentifier != null) {
-            localVarFormParams.put("dbt_connection_identifier", dbtConnectionIdentifier);
-        }
-
-        if (connectionName != null) {
-            localVarFormParams.put("connection_name", connectionName);
-        }
-
-        if (databaseName != null) {
-            localVarFormParams.put("database_name", databaseName);
-        }
-
-        if (importType != null) {
-            localVarFormParams.put("import_type", importType);
-        }
-
-        if (accessToken != null) {
-            localVarFormParams.put("access_token", accessToken);
-        }
-
-        if (dbtUrl != null) {
-            localVarFormParams.put("dbt_url", dbtUrl);
-        }
-
-        if (accountId != null) {
-            localVarFormParams.put("account_id", accountId);
-        }
-
-        if (projectId != null) {
-            localVarFormParams.put("project_id", projectId);
-        }
-
-        if (dbtEnvId != null) {
-            localVarFormParams.put("dbt_env_id", dbtEnvId);
-        }
-
-        if (projectName != null) {
-            localVarFormParams.put("project_name", projectName);
-        }
-
-        if (fileContent != null) {
-            localVarFormParams.put("file_content", fileContent);
-        }
-
         final String[] localVarAccepts = {"application/json"};
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
             localVarHeaderParams.put("Accept", localVarAccept);
         }
 
-        final String[] localVarContentTypes = {"multipart/form-data"};
+        final String[] localVarContentTypes = {"application/json"};
         final String localVarContentType =
                 localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
@@ -1471,39 +1107,16 @@ public class DbtApi {
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call updateDbtConnectionValidateBeforeCall(
-            String dbtConnectionIdentifier,
-            String connectionName,
-            String databaseName,
-            String importType,
-            String accessToken,
-            String dbtUrl,
-            String accountId,
-            String projectId,
-            String dbtEnvId,
-            String projectName,
-            File fileContent,
-            final ApiCallback _callback)
+            UpdateDbtConnectionRequest updateDbtConnectionRequest, final ApiCallback _callback)
             throws ApiException {
-        // verify the required parameter 'dbtConnectionIdentifier' is set
-        if (dbtConnectionIdentifier == null) {
+        // verify the required parameter 'updateDbtConnectionRequest' is set
+        if (updateDbtConnectionRequest == null) {
             throw new ApiException(
-                    "Missing the required parameter 'dbtConnectionIdentifier' when calling"
+                    "Missing the required parameter 'updateDbtConnectionRequest' when calling"
                             + " updateDbtConnection(Async)");
         }
 
-        return updateDbtConnectionCall(
-                dbtConnectionIdentifier,
-                connectionName,
-                databaseName,
-                importType,
-                accessToken,
-                dbtUrl,
-                accountId,
-                projectId,
-                dbtEnvId,
-                projectName,
-                fileContent,
-                _callback);
+        return updateDbtConnectionCall(updateDbtConnectionRequest, _callback);
     }
 
     /**
@@ -1521,18 +1134,7 @@ public class DbtApi {
      * identifier and environment (or) embrace connection, embrace database name, import type,
      * file_content settings.
      *
-     * @param dbtConnectionIdentifier Unique ID of the DBT Connection. (required)
-     * @param connectionName Name of the connection. (optional)
-     * @param databaseName Name of the Database. (optional)
-     * @param importType Mention type of Import (optional, default to DBT_CLOUD)
-     * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD. (optional)
-     * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD. (optional)
-     * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD (optional)
-     * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD (optional)
-     * @param dbtEnvId DBT Environment ID\\\&quot; (optional)
-     * @param projectName Name of the project (optional)
-     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
-     *     is Mandatory when Import Type is &#39;ZIP_FILE&#39; (optional)
+     * @param updateDbtConnectionRequest (required)
      * @return Object
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -1547,32 +1149,10 @@ public class DbtApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public Object updateDbtConnection(
-            String dbtConnectionIdentifier,
-            String connectionName,
-            String databaseName,
-            String importType,
-            String accessToken,
-            String dbtUrl,
-            String accountId,
-            String projectId,
-            String dbtEnvId,
-            String projectName,
-            File fileContent)
+    public Object updateDbtConnection(UpdateDbtConnectionRequest updateDbtConnectionRequest)
             throws ApiException {
         ApiResponse<Object> localVarResp =
-                updateDbtConnectionWithHttpInfo(
-                        dbtConnectionIdentifier,
-                        connectionName,
-                        databaseName,
-                        importType,
-                        accessToken,
-                        dbtUrl,
-                        accountId,
-                        projectId,
-                        dbtEnvId,
-                        projectName,
-                        fileContent);
+                updateDbtConnectionWithHttpInfo(updateDbtConnectionRequest);
         return localVarResp.getData();
     }
 
@@ -1591,18 +1171,7 @@ public class DbtApi {
      * identifier and environment (or) embrace connection, embrace database name, import type,
      * file_content settings.
      *
-     * @param dbtConnectionIdentifier Unique ID of the DBT Connection. (required)
-     * @param connectionName Name of the connection. (optional)
-     * @param databaseName Name of the Database. (optional)
-     * @param importType Mention type of Import (optional, default to DBT_CLOUD)
-     * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD. (optional)
-     * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD. (optional)
-     * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD (optional)
-     * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD (optional)
-     * @param dbtEnvId DBT Environment ID\\\&quot; (optional)
-     * @param projectName Name of the project (optional)
-     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
-     *     is Mandatory when Import Type is &#39;ZIP_FILE&#39; (optional)
+     * @param updateDbtConnectionRequest (required)
      * @return ApiResponse&lt;Object&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -1618,32 +1187,9 @@ public class DbtApi {
      * </table>
      */
     public ApiResponse<Object> updateDbtConnectionWithHttpInfo(
-            String dbtConnectionIdentifier,
-            String connectionName,
-            String databaseName,
-            String importType,
-            String accessToken,
-            String dbtUrl,
-            String accountId,
-            String projectId,
-            String dbtEnvId,
-            String projectName,
-            File fileContent)
-            throws ApiException {
+            UpdateDbtConnectionRequest updateDbtConnectionRequest) throws ApiException {
         okhttp3.Call localVarCall =
-                updateDbtConnectionValidateBeforeCall(
-                        dbtConnectionIdentifier,
-                        connectionName,
-                        databaseName,
-                        importType,
-                        accessToken,
-                        dbtUrl,
-                        accountId,
-                        projectId,
-                        dbtEnvId,
-                        projectName,
-                        fileContent,
-                        null);
+                updateDbtConnectionValidateBeforeCall(updateDbtConnectionRequest, null);
         Type localVarReturnType = new TypeToken<Object>() {}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1663,18 +1209,7 @@ public class DbtApi {
      * identifier and environment (or) embrace connection, embrace database name, import type,
      * file_content settings.
      *
-     * @param dbtConnectionIdentifier Unique ID of the DBT Connection. (required)
-     * @param connectionName Name of the connection. (optional)
-     * @param databaseName Name of the Database. (optional)
-     * @param importType Mention type of Import (optional, default to DBT_CLOUD)
-     * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD. (optional)
-     * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD. (optional)
-     * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD (optional)
-     * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD (optional)
-     * @param dbtEnvId DBT Environment ID\\\&quot; (optional)
-     * @param projectName Name of the project (optional)
-     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
-     *     is Mandatory when Import Type is &#39;ZIP_FILE&#39; (optional)
+     * @param updateDbtConnectionRequest (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body
@@ -1691,34 +1226,12 @@ public class DbtApi {
      * </table>
      */
     public okhttp3.Call updateDbtConnectionAsync(
-            String dbtConnectionIdentifier,
-            String connectionName,
-            String databaseName,
-            String importType,
-            String accessToken,
-            String dbtUrl,
-            String accountId,
-            String projectId,
-            String dbtEnvId,
-            String projectName,
-            File fileContent,
+            UpdateDbtConnectionRequest updateDbtConnectionRequest,
             final ApiCallback<Object> _callback)
             throws ApiException {
 
         okhttp3.Call localVarCall =
-                updateDbtConnectionValidateBeforeCall(
-                        dbtConnectionIdentifier,
-                        connectionName,
-                        databaseName,
-                        importType,
-                        accessToken,
-                        dbtUrl,
-                        accountId,
-                        projectId,
-                        dbtEnvId,
-                        projectName,
-                        fileContent,
-                        _callback);
+                updateDbtConnectionValidateBeforeCall(updateDbtConnectionRequest, _callback);
         Type localVarReturnType = new TypeToken<Object>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

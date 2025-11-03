@@ -55,8 +55,6 @@
 |---- | -----|
 | LOCAL_GROUP | &quot;LOCAL_GROUP&quot; |
 | LDAP_GROUP | &quot;LDAP_GROUP&quot; |
-| TEAM_GROUP | &quot;TEAM_GROUP&quot; |
-| TENANT_GROUP | &quot;TENANT_GROUP&quot; |
 
 
 

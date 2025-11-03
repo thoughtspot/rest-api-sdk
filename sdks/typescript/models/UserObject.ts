@@ -17,7 +17,7 @@ import { HttpFile } from '../http/http';
 */
 export class UserObject {
     /**
-    *   Type of object.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.      Specify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.
+    *   Type of object.     Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.      Specify the object type as `LOGICAL_TABLE`.
     */
     'type'?: UserObjectTypeEnum | null;
     /**

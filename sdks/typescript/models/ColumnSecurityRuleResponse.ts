@@ -17,34 +17,34 @@ export class ColumnSecurityRuleResponse {
     /**
     * GUID of the table for which the column security rules are fetched
     */
-    'guid'?: string | null;
+    'table_guid'?: string | null;
     /**
     * Object ID of the table for which the column security rules are fetched
     */
-    'objId'?: string | null;
+    'obj_id'?: string | null;
     /**
     * Array containing column security rule objects
     */
-    'columnSecurityRules'?: Array<ColumnSecurityRule> | null;
+    'column_security_rules'?: Array<ColumnSecurityRule> | null;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "guid",
-            "baseName": "guid",
+            "name": "table_guid",
+            "baseName": "table_guid",
             "type": "string",
             "format": ""
         },
         {
-            "name": "objId",
-            "baseName": "objId",
+            "name": "obj_id",
+            "baseName": "obj_id",
             "type": "string",
             "format": ""
         },
         {
-            "name": "columnSecurityRules",
-            "baseName": "columnSecurityRules",
+            "name": "column_security_rules",
+            "baseName": "column_security_rules",
             "type": "Array<ColumnSecurityRule>",
             "format": ""
         }    ];

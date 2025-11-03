@@ -14,50 +14,38 @@ import com.thoughtspot.client.Configuration;
 import com.thoughtspot.client.Pair;
 import com.thoughtspot.client.model.AccessToken;
 import com.thoughtspot.client.model.ActivateUserRequest;
-import com.thoughtspot.client.model.AgentConversation;
 import com.thoughtspot.client.model.AnswerDataResponse;
 import com.thoughtspot.client.model.AssignChangeAuthorRequest;
 import com.thoughtspot.client.model.AssignTagRequest;
-import com.thoughtspot.client.model.CalendarResponse;
 import com.thoughtspot.client.model.ChangeUserPasswordRequest;
-import com.thoughtspot.client.model.ColumnSecurityRuleResponse;
 import com.thoughtspot.client.model.CommitBranchRequest;
 import com.thoughtspot.client.model.CommitHistoryResponse;
 import com.thoughtspot.client.model.CommitResponse;
-import com.thoughtspot.client.model.ConnectionConfigurationResponse;
-import com.thoughtspot.client.model.ConnectionConfigurationSearchRequest;
 import com.thoughtspot.client.model.Conversation;
 import com.thoughtspot.client.model.ConvertWorksheetToModelRequest;
 import com.thoughtspot.client.model.CopyObjectRequest;
-import com.thoughtspot.client.model.CreateAgentConversationRequest;
-import com.thoughtspot.client.model.CreateCalendarRequest;
 import com.thoughtspot.client.model.CreateConfigRequest;
-import com.thoughtspot.client.model.CreateConnectionConfigurationRequest;
 import com.thoughtspot.client.model.CreateConnectionRequest;
 import com.thoughtspot.client.model.CreateConnectionResponse;
 import com.thoughtspot.client.model.CreateConversationRequest;
 import com.thoughtspot.client.model.CreateCustomActionRequest;
-import com.thoughtspot.client.model.CreateEmailCustomizationRequest;
-import com.thoughtspot.client.model.CreateEmailCustomizationResponse;
 import com.thoughtspot.client.model.CreateOrgRequest;
 import com.thoughtspot.client.model.CreateRoleRequest;
 import com.thoughtspot.client.model.CreateScheduleRequest;
 import com.thoughtspot.client.model.CreateTagRequest;
 import com.thoughtspot.client.model.CreateUserGroupRequest;
 import com.thoughtspot.client.model.CreateUserRequest;
-import com.thoughtspot.client.model.CreateVariableRequest;
+import com.thoughtspot.client.model.DbtConnectionRequest;
+import com.thoughtspot.client.model.DbtGenerateSyncTmlRequest;
+import com.thoughtspot.client.model.DbtGenerateTmlRequest;
 import com.thoughtspot.client.model.DbtSearchResponse;
 import com.thoughtspot.client.model.DeactivateUserRequest;
 import com.thoughtspot.client.model.DeleteConfigRequest;
-import com.thoughtspot.client.model.DeleteConnectionConfigurationRequest;
 import com.thoughtspot.client.model.DeleteConnectionRequest;
 import com.thoughtspot.client.model.DeleteMetadataRequest;
-import com.thoughtspot.client.model.DeleteOrgEmailCustomizationRequest;
 import com.thoughtspot.client.model.DeployCommitRequest;
 import com.thoughtspot.client.model.DeployResponse;
-import com.thoughtspot.client.model.EurekaDataSourceSuggestionResponse;
 import com.thoughtspot.client.model.EurekaDecomposeQueryResponse;
-import com.thoughtspot.client.model.EurekaGetRelevantQuestionsResponse;
 import com.thoughtspot.client.model.ExportAnswerReportRequest;
 import com.thoughtspot.client.model.ExportLiveboardReportRequest;
 import com.thoughtspot.client.model.ExportMetadataTMLBatchedRequest;
@@ -65,7 +53,6 @@ import com.thoughtspot.client.model.ExportMetadataTMLRequest;
 import com.thoughtspot.client.model.FetchAnswerDataRequest;
 import com.thoughtspot.client.model.FetchAnswerSqlQueryRequest;
 import com.thoughtspot.client.model.FetchAsyncImportTaskStatusRequest;
-import com.thoughtspot.client.model.FetchColumnSecurityRulesRequest;
 import com.thoughtspot.client.model.FetchConnectionDiffStatusResponse;
 import com.thoughtspot.client.model.FetchLiveboardDataRequest;
 import com.thoughtspot.client.model.FetchLiveboardSqlQueryRequest;
@@ -73,13 +60,10 @@ import com.thoughtspot.client.model.FetchLogsRequest;
 import com.thoughtspot.client.model.FetchPermissionsOfPrincipalsRequest;
 import com.thoughtspot.client.model.FetchPermissionsOnMetadataRequest;
 import com.thoughtspot.client.model.ForceLogoutUsersRequest;
-import com.thoughtspot.client.model.GenerateCSVRequest;
 import com.thoughtspot.client.model.GetAsyncImportStatusResponse;
 import com.thoughtspot.client.model.GetCustomAccessTokenRequest;
-import com.thoughtspot.client.model.GetDataSourceSuggestionsRequest;
 import com.thoughtspot.client.model.GetFullAccessTokenRequest;
 import com.thoughtspot.client.model.GetObjectAccessTokenRequest;
-import com.thoughtspot.client.model.GetRelevantQuestionsRequest;
 import com.thoughtspot.client.model.GetTokenResponse;
 import com.thoughtspot.client.model.ImportEPackAsyncTaskStatus;
 import com.thoughtspot.client.model.ImportMetadataTMLAsyncRequest;
@@ -93,10 +77,8 @@ import com.thoughtspot.client.model.LogResponse;
 import com.thoughtspot.client.model.LoginRequest;
 import com.thoughtspot.client.model.MetadataSearchResponse;
 import com.thoughtspot.client.model.OrgResponse;
-import com.thoughtspot.client.model.ParameterizeMetadataRequest;
 import com.thoughtspot.client.model.PermissionOfMetadataResponse;
 import com.thoughtspot.client.model.PermissionOfPrincipalsResponse;
-import com.thoughtspot.client.model.PublishMetadataRequest;
 import com.thoughtspot.client.model.QueryGetDecomposedQueryRequest;
 import com.thoughtspot.client.model.RepoConfigObject;
 import com.thoughtspot.client.model.ResetUserPasswordRequest;
@@ -110,7 +92,6 @@ import com.thoughtspot.client.model.RevertCommitRequest;
 import com.thoughtspot.client.model.RevertResponse;
 import com.thoughtspot.client.model.RevokeTokenRequest;
 import com.thoughtspot.client.model.RoleResponse;
-import com.thoughtspot.client.model.SearchCalendarsRequest;
 import com.thoughtspot.client.model.SearchCommitsRequest;
 import com.thoughtspot.client.model.SearchConfigRequest;
 import com.thoughtspot.client.model.SearchConnectionRequest;
@@ -118,7 +99,6 @@ import com.thoughtspot.client.model.SearchConnectionResponse;
 import com.thoughtspot.client.model.SearchCustomActionsRequest;
 import com.thoughtspot.client.model.SearchDataRequest;
 import com.thoughtspot.client.model.SearchDataResponse;
-import com.thoughtspot.client.model.SearchEmailCustomizationRequest;
 import com.thoughtspot.client.model.SearchMetadataRequest;
 import com.thoughtspot.client.model.SearchOrgsRequest;
 import com.thoughtspot.client.model.SearchRoleResponse;
@@ -127,29 +107,20 @@ import com.thoughtspot.client.model.SearchSchedulesRequest;
 import com.thoughtspot.client.model.SearchTagsRequest;
 import com.thoughtspot.client.model.SearchUserGroupsRequest;
 import com.thoughtspot.client.model.SearchUsersRequest;
-import com.thoughtspot.client.model.SearchVariablesRequest;
-import com.thoughtspot.client.model.SendAgentMessageResponse;
-import com.thoughtspot.client.model.SendAgentMessageStreamingRequest;
 import com.thoughtspot.client.model.SendMessageRequest;
 import com.thoughtspot.client.model.ShareMetadataRequest;
 import com.thoughtspot.client.model.SingleAnswerRequest;
 import com.thoughtspot.client.model.SqlQueryResponse;
 import com.thoughtspot.client.model.SystemConfig;
 import com.thoughtspot.client.model.SystemInfo;
-import com.thoughtspot.client.model.SystemOverrideInfo;
 import com.thoughtspot.client.model.Tag;
 import com.thoughtspot.client.model.Token;
 import com.thoughtspot.client.model.TokenValidationResponse;
-import com.thoughtspot.client.model.UnparameterizeMetadataRequest;
-import com.thoughtspot.client.model.UnpublishMetadataRequest;
-import com.thoughtspot.client.model.UpdateCalendarRequest;
-import com.thoughtspot.client.model.UpdateColumnSecurityRulesRequest;
 import com.thoughtspot.client.model.UpdateConfigRequest;
-import com.thoughtspot.client.model.UpdateConnectionConfigurationRequest;
 import com.thoughtspot.client.model.UpdateConnectionRequest;
 import com.thoughtspot.client.model.UpdateConnectionV2Request;
 import com.thoughtspot.client.model.UpdateCustomActionRequest;
-import com.thoughtspot.client.model.UpdateEmailCustomizationRequest;
+import com.thoughtspot.client.model.UpdateDbtConnectionRequest;
 import com.thoughtspot.client.model.UpdateMetadataHeaderRequest;
 import com.thoughtspot.client.model.UpdateMetadataObjIdRequest;
 import com.thoughtspot.client.model.UpdateOrgRequest;
@@ -159,13 +130,10 @@ import com.thoughtspot.client.model.UpdateSystemConfigRequest;
 import com.thoughtspot.client.model.UpdateTagRequest;
 import com.thoughtspot.client.model.UpdateUserGroupRequest;
 import com.thoughtspot.client.model.UpdateUserRequest;
-import com.thoughtspot.client.model.UpdateVariableRequest;
-import com.thoughtspot.client.model.UpdateVariableValuesRequest;
 import com.thoughtspot.client.model.User;
 import com.thoughtspot.client.model.UserGroupResponse;
 import com.thoughtspot.client.model.ValidateMergeRequest;
 import com.thoughtspot.client.model.ValidateTokenRequest;
-import com.thoughtspot.client.model.Variable;
 import java.io.File;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -1103,207 +1071,6 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
-     * Build call for connectionConfigurationSearch
-     *
-     * @param connectionConfigurationSearchRequest (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Configuration fetched successfully. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call connectionConfigurationSearchCall(
-            ConnectionConfigurationSearchRequest connectionConfigurationSearchRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {};
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
-            basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = connectionConfigurationSearchRequest;
-
-        // create path and map variables
-        String localVarPath = "/api/rest/2.0/connection-configurations/search";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {"application/json"};
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {"application/json"};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call connectionConfigurationSearchValidateBeforeCall(
-            ConnectionConfigurationSearchRequest connectionConfigurationSearchRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        // verify the required parameter 'connectionConfigurationSearchRequest' is set
-        if (connectionConfigurationSearchRequest == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'connectionConfigurationSearchRequest' when"
-                            + " calling connectionConfigurationSearch(Async)");
-        }
-
-        return connectionConfigurationSearchCall(connectionConfigurationSearchRequest, _callback);
-    }
-
-    /**
-     * Version: 10.12.0.cl or later Gets connection configuration objects. Requires
-     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection
-     * object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
-     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit
-     * Connections**) privilege is required. #### Usage guidelines * To get a list of all
-     * configurations available in the ThoughtSpot system, send the API request with only the
-     * connection name or GUID in the request body. * To fetch details of a configuration object,
-     * specify the configuration object name or GUID.
-     *
-     * @param connectionConfigurationSearchRequest (required)
-     * @return List&lt;ConnectionConfigurationResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Configuration fetched successfully. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public List<ConnectionConfigurationResponse> connectionConfigurationSearch(
-            ConnectionConfigurationSearchRequest connectionConfigurationSearchRequest)
-            throws ApiException {
-        ApiResponse<List<ConnectionConfigurationResponse>> localVarResp =
-                connectionConfigurationSearchWithHttpInfo(connectionConfigurationSearchRequest);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Version: 10.12.0.cl or later Gets connection configuration objects. Requires
-     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection
-     * object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
-     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit
-     * Connections**) privilege is required. #### Usage guidelines * To get a list of all
-     * configurations available in the ThoughtSpot system, send the API request with only the
-     * connection name or GUID in the request body. * To fetch details of a configuration object,
-     * specify the configuration object name or GUID.
-     *
-     * @param connectionConfigurationSearchRequest (required)
-     * @return ApiResponse&lt;List&lt;ConnectionConfigurationResponse&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Configuration fetched successfully. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public ApiResponse<List<ConnectionConfigurationResponse>>
-            connectionConfigurationSearchWithHttpInfo(
-                    ConnectionConfigurationSearchRequest connectionConfigurationSearchRequest)
-                    throws ApiException {
-        okhttp3.Call localVarCall =
-                connectionConfigurationSearchValidateBeforeCall(
-                        connectionConfigurationSearchRequest, null);
-        Type localVarReturnType =
-                new TypeToken<List<ConnectionConfigurationResponse>>() {}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * (asynchronously) Version: 10.12.0.cl or later Gets connection configuration objects. Requires
-     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection
-     * object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
-     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit
-     * Connections**) privilege is required. #### Usage guidelines * To get a list of all
-     * configurations available in the ThoughtSpot system, send the API request with only the
-     * connection name or GUID in the request body. * To fetch details of a configuration object,
-     * specify the configuration object name or GUID.
-     *
-     * @param connectionConfigurationSearchRequest (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Configuration fetched successfully. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call connectionConfigurationSearchAsync(
-            ConnectionConfigurationSearchRequest connectionConfigurationSearchRequest,
-            final ApiCallback<List<ConnectionConfigurationResponse>> _callback)
-            throws ApiException {
-
-        okhttp3.Call localVarCall =
-                connectionConfigurationSearchValidateBeforeCall(
-                        connectionConfigurationSearchRequest, _callback);
-        Type localVarReturnType =
-                new TypeToken<List<ConnectionConfigurationResponse>>() {}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
      * Build call for convertWorksheetToModel
      *
      * @param convertWorksheetToModelRequest (required)
@@ -1745,490 +1512,6 @@ public class ThoughtSpotRestApi {
 
         okhttp3.Call localVarCall = copyObjectValidateBeforeCall(copyObjectRequest, _callback);
         Type localVarReturnType = new TypeToken<ResponseCopyObject>() {}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for createAgentConversation
-     *
-     * @param createAgentConversationRequest (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
-     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call createAgentConversationCall(
-            CreateAgentConversationRequest createAgentConversationRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {};
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
-            basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = createAgentConversationRequest;
-
-        // create path and map variables
-        String localVarPath = "/api/rest/2.0/ai/agent/conversation/create";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {"application/json"};
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {"application/json"};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call createAgentConversationValidateBeforeCall(
-            CreateAgentConversationRequest createAgentConversationRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        // verify the required parameter 'createAgentConversationRequest' is set
-        if (createAgentConversationRequest == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'createAgentConversationRequest' when calling"
-                            + " createAgentConversation(Async)");
-        }
-
-        return createAgentConversationCall(createAgentConversationRequest, _callback);
-    }
-
-    /**
-     * Version: 10.13.0.cl or later
-     *
-     * @param createAgentConversationRequest (required)
-     * @return AgentConversation
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
-     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
-     * </table>
-     */
-    public AgentConversation createAgentConversation(
-            CreateAgentConversationRequest createAgentConversationRequest) throws ApiException {
-        ApiResponse<AgentConversation> localVarResp =
-                createAgentConversationWithHttpInfo(createAgentConversationRequest);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Version: 10.13.0.cl or later
-     *
-     * @param createAgentConversationRequest (required)
-     * @return ApiResponse&lt;AgentConversation&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
-     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
-     * </table>
-     */
-    public ApiResponse<AgentConversation> createAgentConversationWithHttpInfo(
-            CreateAgentConversationRequest createAgentConversationRequest) throws ApiException {
-        okhttp3.Call localVarCall =
-                createAgentConversationValidateBeforeCall(createAgentConversationRequest, null);
-        Type localVarReturnType = new TypeToken<AgentConversation>() {}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * (asynchronously) Version: 10.13.0.cl or later
-     *
-     * @param createAgentConversationRequest (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
-     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call createAgentConversationAsync(
-            CreateAgentConversationRequest createAgentConversationRequest,
-            final ApiCallback<AgentConversation> _callback)
-            throws ApiException {
-
-        okhttp3.Call localVarCall =
-                createAgentConversationValidateBeforeCall(
-                        createAgentConversationRequest, _callback);
-        Type localVarReturnType = new TypeToken<AgentConversation>() {}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for createCalendar
-     *
-     * @param createCalendarRequest (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Custom calendar created successfully. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call createCalendarCall(
-            CreateCalendarRequest createCalendarRequest, final ApiCallback _callback)
-            throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {};
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
-            basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = createCalendarRequest;
-
-        // create path and map variables
-        String localVarPath = "/api/rest/2.0/calendars/create";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {"application/json"};
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {"application/json"};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call createCalendarValidateBeforeCall(
-            CreateCalendarRequest createCalendarRequest, final ApiCallback _callback)
-            throws ApiException {
-        // verify the required parameter 'createCalendarRequest' is set
-        if (createCalendarRequest == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'createCalendarRequest' when calling"
-                            + " createCalendar(Async)");
-        }
-
-        return createCalendarCall(createCalendarRequest, _callback);
-    }
-
-    /**
-     * Version: 10.12.0.cl or later Creates a new [custom
-     * calendar](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal). Requires
-     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can
-     * administer ThoughtSpot**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot
-     * instance, the &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60; (**Can manage custom calendars**)
-     * privilege is required. #### Usage guidelines You can create a custom calendar from scratch or
-     * an existing Table in ThoughtSpot. For both methods of calendar creation, the following
-     * parameters are required: * Name of the custom calendar. * Calendar creation method. To create
-     * a calendar from an existing table, specify the method: - &#x60;FROM_EXISTING_TABLE&#x60; -
-     * Creates calendar from the table reference provided in the API request. -
-     * &#x60;FROM_INPUT_PARAMS&#x60; - Creates a calendar from the parameters defined in the API
-     * request. * Connection ID and Table name * Database and schema name attributes: For most Cloud
-     * Data Warehouse (CDW) connectors, both &#x60;database_name&#x60; and &#x60;schema_name&#x60;
-     * attributes are required. However, the attribute requirements are conditional and vary based
-     * on the connector type and its metadata structure. For example, for connectors such as
-     * Teradata, MySQL, SingleSore, Amazon Aurora MySQL, Amazon RDS MySQL, Oracle, and GCP_MYSQL,
-     * the &#x60;schema_name&#x60; is required, whereas the &#x60;database_name&#x60; attribute is
-     * not. Similarly, connectors such as ClickHouse require you to specify the
-     * &#x60;database_name&#x60; and the schema specification in such cases is optional. **NOTE**:
-     * If you are creating a calendar from an existing table, ensure that the referenced table
-     * matches the required DDL for custom calendars. If the schema does not match, the API returns
-     * an error. ##### Calendar type The API allows you to create the following types of calendars:
-     * * &#x60;MONTH_OFFSET&#x60;. The default calendar type. A &#x60;MONTH_OFFSET&#x60; calendar is
-     * offset by a few months from the standard calendar months (January to December) and the year
-     * begins with the month defined in the request. For example, if the &#x60;month_offset&#x60;
-     * value is set as &#x60;April&#x60;, the calendar year begins in April. * &#x60;4-4-5&#x60;.
-     * Each quarter in the calendar will include two 4-week months followed by one 5-week month. *
-     * &#x60;4-5-4&#x60;. Each quarter in the calendar will include two 4-week months with a 5-week
-     * month between. * &#x60;5-4-4&#x60;. Each quarter begins with a 5-week month, followed by two
-     * 4-week months. To start and end the calendar on a specific date, specify the dates in the
-     * &#x60;MM/DD/YYYY&#x60; format. For &#x60;MONTH_OFFSET&#x60; calendars, ensure that the
-     * &#x60;start_date&#x60; matches the month specified in the &#x60;month_offset&#x60; attribute.
-     * You can also set the starting day of the week and customize the prefixes for year and quarter
-     * labels. #### Examples To create a calendar from an existing table: &#x60;&#x60;&#x60; {
-     * \&quot;name\&quot;: \&quot;MyCustomCalendar1\&quot;, \&quot;table_reference\&quot;: {
-     * \&quot;connection_identifier\&quot;: \&quot;4db8ea22-2ff4-4224-b05a-26674717e468\&quot;,
-     * \&quot;table_name\&quot;: \&quot;MyCalendarTable\&quot;, \&quot;database_name\&quot;:
-     * \&quot;RETAILAPPAREL\&quot;, \&quot;schema_name\&quot;: \&quot;PUBLIC\&quot; },
-     * \&quot;creation_method\&quot;: \&quot;FROM_EXISTING_TABLE\&quot;, } &#x60;&#x60;&#x60; To
-     * create a calendar from scratch: &#x60;&#x60;&#x60; { \&quot;name\&quot;:
-     * \&quot;MyCustomCalendar1\&quot;, \&quot;table_reference\&quot;: {
-     * \&quot;connection_identifier\&quot;: \&quot;4db8ea22-2ff4-4224-b05a-26674717e468\&quot;,
-     * \&quot;table_name\&quot;: \&quot;MyCalendarTable\&quot;, \&quot;database_name\&quot;:
-     * \&quot;RETAILAPPAREL\&quot;, \&quot;schema_name\&quot;: \&quot;PUBLIC\&quot; },
-     * \&quot;creation_method\&quot;: \&quot;FROM_INPUT_PARAMS\&quot;, \&quot;calendar_type\&quot;:
-     * \&quot;MONTH_OFFSET\&quot;, \&quot;month_offset\&quot;: \&quot;April\&quot;,
-     * \&quot;start_day_of_week\&quot;: \&quot;Monday\&quot;, \&quot;quarter_name_prefix\&quot;:
-     * \&quot;Q\&quot;, \&quot;year_name_prefix\&quot;: \&quot;FY\&quot;, \&quot;start_date\&quot;:
-     * \&quot;04/01/2025\&quot;, \&quot;end_date\&quot;: \&quot;04/31/2025\&quot; }
-     * &#x60;&#x60;&#x60;
-     *
-     * @param createCalendarRequest (required)
-     * @return CalendarResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Custom calendar created successfully. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public CalendarResponse createCalendar(CreateCalendarRequest createCalendarRequest)
-            throws ApiException {
-        ApiResponse<CalendarResponse> localVarResp =
-                createCalendarWithHttpInfo(createCalendarRequest);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Version: 10.12.0.cl or later Creates a new [custom
-     * calendar](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal). Requires
-     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can
-     * administer ThoughtSpot**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot
-     * instance, the &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60; (**Can manage custom calendars**)
-     * privilege is required. #### Usage guidelines You can create a custom calendar from scratch or
-     * an existing Table in ThoughtSpot. For both methods of calendar creation, the following
-     * parameters are required: * Name of the custom calendar. * Calendar creation method. To create
-     * a calendar from an existing table, specify the method: - &#x60;FROM_EXISTING_TABLE&#x60; -
-     * Creates calendar from the table reference provided in the API request. -
-     * &#x60;FROM_INPUT_PARAMS&#x60; - Creates a calendar from the parameters defined in the API
-     * request. * Connection ID and Table name * Database and schema name attributes: For most Cloud
-     * Data Warehouse (CDW) connectors, both &#x60;database_name&#x60; and &#x60;schema_name&#x60;
-     * attributes are required. However, the attribute requirements are conditional and vary based
-     * on the connector type and its metadata structure. For example, for connectors such as
-     * Teradata, MySQL, SingleSore, Amazon Aurora MySQL, Amazon RDS MySQL, Oracle, and GCP_MYSQL,
-     * the &#x60;schema_name&#x60; is required, whereas the &#x60;database_name&#x60; attribute is
-     * not. Similarly, connectors such as ClickHouse require you to specify the
-     * &#x60;database_name&#x60; and the schema specification in such cases is optional. **NOTE**:
-     * If you are creating a calendar from an existing table, ensure that the referenced table
-     * matches the required DDL for custom calendars. If the schema does not match, the API returns
-     * an error. ##### Calendar type The API allows you to create the following types of calendars:
-     * * &#x60;MONTH_OFFSET&#x60;. The default calendar type. A &#x60;MONTH_OFFSET&#x60; calendar is
-     * offset by a few months from the standard calendar months (January to December) and the year
-     * begins with the month defined in the request. For example, if the &#x60;month_offset&#x60;
-     * value is set as &#x60;April&#x60;, the calendar year begins in April. * &#x60;4-4-5&#x60;.
-     * Each quarter in the calendar will include two 4-week months followed by one 5-week month. *
-     * &#x60;4-5-4&#x60;. Each quarter in the calendar will include two 4-week months with a 5-week
-     * month between. * &#x60;5-4-4&#x60;. Each quarter begins with a 5-week month, followed by two
-     * 4-week months. To start and end the calendar on a specific date, specify the dates in the
-     * &#x60;MM/DD/YYYY&#x60; format. For &#x60;MONTH_OFFSET&#x60; calendars, ensure that the
-     * &#x60;start_date&#x60; matches the month specified in the &#x60;month_offset&#x60; attribute.
-     * You can also set the starting day of the week and customize the prefixes for year and quarter
-     * labels. #### Examples To create a calendar from an existing table: &#x60;&#x60;&#x60; {
-     * \&quot;name\&quot;: \&quot;MyCustomCalendar1\&quot;, \&quot;table_reference\&quot;: {
-     * \&quot;connection_identifier\&quot;: \&quot;4db8ea22-2ff4-4224-b05a-26674717e468\&quot;,
-     * \&quot;table_name\&quot;: \&quot;MyCalendarTable\&quot;, \&quot;database_name\&quot;:
-     * \&quot;RETAILAPPAREL\&quot;, \&quot;schema_name\&quot;: \&quot;PUBLIC\&quot; },
-     * \&quot;creation_method\&quot;: \&quot;FROM_EXISTING_TABLE\&quot;, } &#x60;&#x60;&#x60; To
-     * create a calendar from scratch: &#x60;&#x60;&#x60; { \&quot;name\&quot;:
-     * \&quot;MyCustomCalendar1\&quot;, \&quot;table_reference\&quot;: {
-     * \&quot;connection_identifier\&quot;: \&quot;4db8ea22-2ff4-4224-b05a-26674717e468\&quot;,
-     * \&quot;table_name\&quot;: \&quot;MyCalendarTable\&quot;, \&quot;database_name\&quot;:
-     * \&quot;RETAILAPPAREL\&quot;, \&quot;schema_name\&quot;: \&quot;PUBLIC\&quot; },
-     * \&quot;creation_method\&quot;: \&quot;FROM_INPUT_PARAMS\&quot;, \&quot;calendar_type\&quot;:
-     * \&quot;MONTH_OFFSET\&quot;, \&quot;month_offset\&quot;: \&quot;April\&quot;,
-     * \&quot;start_day_of_week\&quot;: \&quot;Monday\&quot;, \&quot;quarter_name_prefix\&quot;:
-     * \&quot;Q\&quot;, \&quot;year_name_prefix\&quot;: \&quot;FY\&quot;, \&quot;start_date\&quot;:
-     * \&quot;04/01/2025\&quot;, \&quot;end_date\&quot;: \&quot;04/31/2025\&quot; }
-     * &#x60;&#x60;&#x60;
-     *
-     * @param createCalendarRequest (required)
-     * @return ApiResponse&lt;CalendarResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Custom calendar created successfully. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public ApiResponse<CalendarResponse> createCalendarWithHttpInfo(
-            CreateCalendarRequest createCalendarRequest) throws ApiException {
-        okhttp3.Call localVarCall = createCalendarValidateBeforeCall(createCalendarRequest, null);
-        Type localVarReturnType = new TypeToken<CalendarResponse>() {}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * (asynchronously) Version: 10.12.0.cl or later Creates a new [custom
-     * calendar](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal). Requires
-     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can
-     * administer ThoughtSpot**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot
-     * instance, the &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60; (**Can manage custom calendars**)
-     * privilege is required. #### Usage guidelines You can create a custom calendar from scratch or
-     * an existing Table in ThoughtSpot. For both methods of calendar creation, the following
-     * parameters are required: * Name of the custom calendar. * Calendar creation method. To create
-     * a calendar from an existing table, specify the method: - &#x60;FROM_EXISTING_TABLE&#x60; -
-     * Creates calendar from the table reference provided in the API request. -
-     * &#x60;FROM_INPUT_PARAMS&#x60; - Creates a calendar from the parameters defined in the API
-     * request. * Connection ID and Table name * Database and schema name attributes: For most Cloud
-     * Data Warehouse (CDW) connectors, both &#x60;database_name&#x60; and &#x60;schema_name&#x60;
-     * attributes are required. However, the attribute requirements are conditional and vary based
-     * on the connector type and its metadata structure. For example, for connectors such as
-     * Teradata, MySQL, SingleSore, Amazon Aurora MySQL, Amazon RDS MySQL, Oracle, and GCP_MYSQL,
-     * the &#x60;schema_name&#x60; is required, whereas the &#x60;database_name&#x60; attribute is
-     * not. Similarly, connectors such as ClickHouse require you to specify the
-     * &#x60;database_name&#x60; and the schema specification in such cases is optional. **NOTE**:
-     * If you are creating a calendar from an existing table, ensure that the referenced table
-     * matches the required DDL for custom calendars. If the schema does not match, the API returns
-     * an error. ##### Calendar type The API allows you to create the following types of calendars:
-     * * &#x60;MONTH_OFFSET&#x60;. The default calendar type. A &#x60;MONTH_OFFSET&#x60; calendar is
-     * offset by a few months from the standard calendar months (January to December) and the year
-     * begins with the month defined in the request. For example, if the &#x60;month_offset&#x60;
-     * value is set as &#x60;April&#x60;, the calendar year begins in April. * &#x60;4-4-5&#x60;.
-     * Each quarter in the calendar will include two 4-week months followed by one 5-week month. *
-     * &#x60;4-5-4&#x60;. Each quarter in the calendar will include two 4-week months with a 5-week
-     * month between. * &#x60;5-4-4&#x60;. Each quarter begins with a 5-week month, followed by two
-     * 4-week months. To start and end the calendar on a specific date, specify the dates in the
-     * &#x60;MM/DD/YYYY&#x60; format. For &#x60;MONTH_OFFSET&#x60; calendars, ensure that the
-     * &#x60;start_date&#x60; matches the month specified in the &#x60;month_offset&#x60; attribute.
-     * You can also set the starting day of the week and customize the prefixes for year and quarter
-     * labels. #### Examples To create a calendar from an existing table: &#x60;&#x60;&#x60; {
-     * \&quot;name\&quot;: \&quot;MyCustomCalendar1\&quot;, \&quot;table_reference\&quot;: {
-     * \&quot;connection_identifier\&quot;: \&quot;4db8ea22-2ff4-4224-b05a-26674717e468\&quot;,
-     * \&quot;table_name\&quot;: \&quot;MyCalendarTable\&quot;, \&quot;database_name\&quot;:
-     * \&quot;RETAILAPPAREL\&quot;, \&quot;schema_name\&quot;: \&quot;PUBLIC\&quot; },
-     * \&quot;creation_method\&quot;: \&quot;FROM_EXISTING_TABLE\&quot;, } &#x60;&#x60;&#x60; To
-     * create a calendar from scratch: &#x60;&#x60;&#x60; { \&quot;name\&quot;:
-     * \&quot;MyCustomCalendar1\&quot;, \&quot;table_reference\&quot;: {
-     * \&quot;connection_identifier\&quot;: \&quot;4db8ea22-2ff4-4224-b05a-26674717e468\&quot;,
-     * \&quot;table_name\&quot;: \&quot;MyCalendarTable\&quot;, \&quot;database_name\&quot;:
-     * \&quot;RETAILAPPAREL\&quot;, \&quot;schema_name\&quot;: \&quot;PUBLIC\&quot; },
-     * \&quot;creation_method\&quot;: \&quot;FROM_INPUT_PARAMS\&quot;, \&quot;calendar_type\&quot;:
-     * \&quot;MONTH_OFFSET\&quot;, \&quot;month_offset\&quot;: \&quot;April\&quot;,
-     * \&quot;start_day_of_week\&quot;: \&quot;Monday\&quot;, \&quot;quarter_name_prefix\&quot;:
-     * \&quot;Q\&quot;, \&quot;year_name_prefix\&quot;: \&quot;FY\&quot;, \&quot;start_date\&quot;:
-     * \&quot;04/01/2025\&quot;, \&quot;end_date\&quot;: \&quot;04/31/2025\&quot; }
-     * &#x60;&#x60;&#x60;
-     *
-     * @param createCalendarRequest (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Custom calendar created successfully. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call createCalendarAsync(
-            CreateCalendarRequest createCalendarRequest,
-            final ApiCallback<CalendarResponse> _callback)
-            throws ApiException {
-
-        okhttp3.Call localVarCall =
-                createCalendarValidateBeforeCall(createCalendarRequest, _callback);
-        Type localVarReturnType = new TypeToken<CalendarResponse>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -2725,222 +2008,6 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
-     * Build call for createConnectionConfiguration
-     *
-     * @param createConnectionConfigurationRequest (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Connection configuration successfully created. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call createConnectionConfigurationCall(
-            CreateConnectionConfigurationRequest createConnectionConfigurationRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {};
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
-            basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = createConnectionConfigurationRequest;
-
-        // create path and map variables
-        String localVarPath = "/api/rest/2.0/connection-configurations/create";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {"application/json"};
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {"application/json"};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call createConnectionConfigurationValidateBeforeCall(
-            CreateConnectionConfigurationRequest createConnectionConfigurationRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        // verify the required parameter 'createConnectionConfigurationRequest' is set
-        if (createConnectionConfigurationRequest == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'createConnectionConfigurationRequest' when"
-                            + " calling createConnectionConfiguration(Async)");
-        }
-
-        return createConnectionConfigurationCall(createConnectionConfigurationRequest, _callback);
-    }
-
-    /**
-     * Version: 10.12.0.cl or later Creates an additional configuration to an existing connection to
-     * a data warehouse. Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or
-     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access
-     * Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance,
-     * the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is
-     * required. #### Usage guidelines * A JSON map of configuration attributes in
-     * &#x60;configuration&#x60;. The following example shows the configuration attributes:
-     * &#x60;&#x60;&#x60; { \&quot;user\&quot;:\&quot;DEV_USER\&quot;,
-     * \&quot;password\&quot;:\&quot;TestConn123\&quot;, \&quot;role\&quot;:\&quot;DEV\&quot;,
-     * \&quot;warehouse\&quot;:\&quot;DEV_WH\&quot; } &#x60;&#x60;&#x60; * If the
-     * &#x60;policy_type&#x60; is &#x60;PRINCIPALS&#x60;, then &#x60;policy_principals&#x60; is a
-     * required field. * If the &#x60;policy_type&#x60; is &#x60;PROCESSES&#x60;, then
-     * &#x60;policy_processes&#x60; is a required field. * If the &#x60;policy_type&#x60; is
-     * &#x60;NO_POLICY&#x60;, then &#x60;policy_principals&#x60; and &#x60;policy_processes&#x60;
-     * are not required fields.
-     *
-     * @param createConnectionConfigurationRequest (required)
-     * @return ConnectionConfigurationResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Connection configuration successfully created. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public ConnectionConfigurationResponse createConnectionConfiguration(
-            CreateConnectionConfigurationRequest createConnectionConfigurationRequest)
-            throws ApiException {
-        ApiResponse<ConnectionConfigurationResponse> localVarResp =
-                createConnectionConfigurationWithHttpInfo(createConnectionConfigurationRequest);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Version: 10.12.0.cl or later Creates an additional configuration to an existing connection to
-     * a data warehouse. Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or
-     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access
-     * Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance,
-     * the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is
-     * required. #### Usage guidelines * A JSON map of configuration attributes in
-     * &#x60;configuration&#x60;. The following example shows the configuration attributes:
-     * &#x60;&#x60;&#x60; { \&quot;user\&quot;:\&quot;DEV_USER\&quot;,
-     * \&quot;password\&quot;:\&quot;TestConn123\&quot;, \&quot;role\&quot;:\&quot;DEV\&quot;,
-     * \&quot;warehouse\&quot;:\&quot;DEV_WH\&quot; } &#x60;&#x60;&#x60; * If the
-     * &#x60;policy_type&#x60; is &#x60;PRINCIPALS&#x60;, then &#x60;policy_principals&#x60; is a
-     * required field. * If the &#x60;policy_type&#x60; is &#x60;PROCESSES&#x60;, then
-     * &#x60;policy_processes&#x60; is a required field. * If the &#x60;policy_type&#x60; is
-     * &#x60;NO_POLICY&#x60;, then &#x60;policy_principals&#x60; and &#x60;policy_processes&#x60;
-     * are not required fields.
-     *
-     * @param createConnectionConfigurationRequest (required)
-     * @return ApiResponse&lt;ConnectionConfigurationResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Connection configuration successfully created. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public ApiResponse<ConnectionConfigurationResponse> createConnectionConfigurationWithHttpInfo(
-            CreateConnectionConfigurationRequest createConnectionConfigurationRequest)
-            throws ApiException {
-        okhttp3.Call localVarCall =
-                createConnectionConfigurationValidateBeforeCall(
-                        createConnectionConfigurationRequest, null);
-        Type localVarReturnType = new TypeToken<ConnectionConfigurationResponse>() {}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * (asynchronously) Version: 10.12.0.cl or later Creates an additional configuration to an
-     * existing connection to a data warehouse. Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage
-     * data**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
-     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit
-     * Connections**) privilege is required. #### Usage guidelines * A JSON map of configuration
-     * attributes in &#x60;configuration&#x60;. The following example shows the configuration
-     * attributes: &#x60;&#x60;&#x60; { \&quot;user\&quot;:\&quot;DEV_USER\&quot;,
-     * \&quot;password\&quot;:\&quot;TestConn123\&quot;, \&quot;role\&quot;:\&quot;DEV\&quot;,
-     * \&quot;warehouse\&quot;:\&quot;DEV_WH\&quot; } &#x60;&#x60;&#x60; * If the
-     * &#x60;policy_type&#x60; is &#x60;PRINCIPALS&#x60;, then &#x60;policy_principals&#x60; is a
-     * required field. * If the &#x60;policy_type&#x60; is &#x60;PROCESSES&#x60;, then
-     * &#x60;policy_processes&#x60; is a required field. * If the &#x60;policy_type&#x60; is
-     * &#x60;NO_POLICY&#x60;, then &#x60;policy_principals&#x60; and &#x60;policy_processes&#x60;
-     * are not required fields.
-     *
-     * @param createConnectionConfigurationRequest (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Connection configuration successfully created. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call createConnectionConfigurationAsync(
-            CreateConnectionConfigurationRequest createConnectionConfigurationRequest,
-            final ApiCallback<ConnectionConfigurationResponse> _callback)
-            throws ApiException {
-
-        okhttp3.Call localVarCall =
-                createConnectionConfigurationValidateBeforeCall(
-                        createConnectionConfigurationRequest, _callback);
-        Type localVarReturnType = new TypeToken<ConnectionConfigurationResponse>() {}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
      * Build call for createConversation
      *
      * @param createConversationRequest (required)
@@ -3342,245 +2409,6 @@ public class ThoughtSpotRestApi {
         okhttp3.Call localVarCall =
                 createCustomActionValidateBeforeCall(createCustomActionRequest, _callback);
         Type localVarReturnType = new TypeToken<ResponseCustomAction>() {}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for createEmailCustomization
-     *
-     * @param createEmailCustomizationRequest (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call createEmailCustomizationCall(
-            CreateEmailCustomizationRequest createEmailCustomizationRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {};
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
-            basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = createEmailCustomizationRequest;
-
-        // create path and map variables
-        String localVarPath = "/api/rest/2.0/customization/email";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {"application/json"};
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {"application/json"};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call createEmailCustomizationValidateBeforeCall(
-            CreateEmailCustomizationRequest createEmailCustomizationRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        // verify the required parameter 'createEmailCustomizationRequest' is set
-        if (createEmailCustomizationRequest == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'createEmailCustomizationRequest' when calling"
-                            + " createEmailCustomization(Async)");
-        }
-
-        return createEmailCustomizationCall(createEmailCustomizationRequest, _callback);
-    }
-
-    /**
-     * Version: 10.10.0.cl or later Creates a customization configuration for the notification
-     * email. #### Pre-requisites Requires &#x60;DEVELOPER&#x60; (**has developer privilege**) or
-     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access
-     * Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance,
-     * the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required. **NOTE**:This
-     * endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.
-     * #### Usage guidelines To create a custom configuration pass these parameters in your API
-     * request: - A JSON map of configuration attributes &#x60;template_properties&#x60;. The
-     * following example shows a sample set of customization configuration: &#x60;&#x60;&#x60; { {
-     * \&quot;ctaButtonBgColor\&quot;: \&quot;#444DEA\&quot;, \&quot;ctaTextFontColor\&quot;:
-     * \&quot;#FFFFFF\&quot;, \&quot;primaryBgColor\&quot;: \&quot;#D3DEF0\&quot;,
-     * \&quot;hideMobileAppNudge\&quot;: false, \&quot;fontFamily\&quot; : \&quot;\&quot;,
-     * \&quot;hideProductName\&quot; : false, \&quot;hideFooterPhone\&quot; : false,
-     * \&quot;hideFooterAddress\&quot; : false, \&quot;hidePrivacyPolicy\&quot; : false,
-     * \&quot;hideManageNotification\&quot; : false, \&quot;hideTsVocabularyDefinitions\&quot;:
-     * false, \&quot;hideNotificationStatus\&quot; : false, \&quot;hideErrorMessage\&quot;: false,
-     * \&quot;hideUnsubscribeLink\&quot; : false, \&quot;hideModifyAlert\&quot;: false,
-     * \&quot;textTransform\&quot;: \&quot;\&quot;, \&quot;replacementValueForLiveboard\&quot;:
-     * \&quot;LB dashboard\&quot;, \&quot;replacementValueForAnswer\&quot;: \&quot;Answer
-     * dashboard\&quot;, \&quot;replacementValueForSpotIQ\&quot;: \&quot;SpotIQ dashboard\&quot;,
-     * \&quot;logoUrl\&quot;:\&quot;\&quot;, \&quot;productName\&quot;:\&quot;ThoughtSpot\&quot;,
-     * \&quot;footerPhone\&quot;:\&quot;(800) 508-7008\&quot;,
-     * \&quot;footerAddress\&quot;:\&quot;444 Castro St, Suite 1000 Mountain View, CA 94041\&quot;,
-     * \&quot;companyWebsiteUrl\&quot;:\&quot;\&quot;,
-     * \&quot;companyPrivacyPolicyUrl\&quot;:\&quot;\&quot; } } &#x60;&#x60;&#x60;
-     *
-     * @param createEmailCustomizationRequest (required)
-     * @return CreateEmailCustomizationResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public CreateEmailCustomizationResponse createEmailCustomization(
-            CreateEmailCustomizationRequest createEmailCustomizationRequest) throws ApiException {
-        ApiResponse<CreateEmailCustomizationResponse> localVarResp =
-                createEmailCustomizationWithHttpInfo(createEmailCustomizationRequest);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Version: 10.10.0.cl or later Creates a customization configuration for the notification
-     * email. #### Pre-requisites Requires &#x60;DEVELOPER&#x60; (**has developer privilege**) or
-     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access
-     * Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance,
-     * the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required. **NOTE**:This
-     * endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.
-     * #### Usage guidelines To create a custom configuration pass these parameters in your API
-     * request: - A JSON map of configuration attributes &#x60;template_properties&#x60;. The
-     * following example shows a sample set of customization configuration: &#x60;&#x60;&#x60; { {
-     * \&quot;ctaButtonBgColor\&quot;: \&quot;#444DEA\&quot;, \&quot;ctaTextFontColor\&quot;:
-     * \&quot;#FFFFFF\&quot;, \&quot;primaryBgColor\&quot;: \&quot;#D3DEF0\&quot;,
-     * \&quot;hideMobileAppNudge\&quot;: false, \&quot;fontFamily\&quot; : \&quot;\&quot;,
-     * \&quot;hideProductName\&quot; : false, \&quot;hideFooterPhone\&quot; : false,
-     * \&quot;hideFooterAddress\&quot; : false, \&quot;hidePrivacyPolicy\&quot; : false,
-     * \&quot;hideManageNotification\&quot; : false, \&quot;hideTsVocabularyDefinitions\&quot;:
-     * false, \&quot;hideNotificationStatus\&quot; : false, \&quot;hideErrorMessage\&quot;: false,
-     * \&quot;hideUnsubscribeLink\&quot; : false, \&quot;hideModifyAlert\&quot;: false,
-     * \&quot;textTransform\&quot;: \&quot;\&quot;, \&quot;replacementValueForLiveboard\&quot;:
-     * \&quot;LB dashboard\&quot;, \&quot;replacementValueForAnswer\&quot;: \&quot;Answer
-     * dashboard\&quot;, \&quot;replacementValueForSpotIQ\&quot;: \&quot;SpotIQ dashboard\&quot;,
-     * \&quot;logoUrl\&quot;:\&quot;\&quot;, \&quot;productName\&quot;:\&quot;ThoughtSpot\&quot;,
-     * \&quot;footerPhone\&quot;:\&quot;(800) 508-7008\&quot;,
-     * \&quot;footerAddress\&quot;:\&quot;444 Castro St, Suite 1000 Mountain View, CA 94041\&quot;,
-     * \&quot;companyWebsiteUrl\&quot;:\&quot;\&quot;,
-     * \&quot;companyPrivacyPolicyUrl\&quot;:\&quot;\&quot; } } &#x60;&#x60;&#x60;
-     *
-     * @param createEmailCustomizationRequest (required)
-     * @return ApiResponse&lt;CreateEmailCustomizationResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public ApiResponse<CreateEmailCustomizationResponse> createEmailCustomizationWithHttpInfo(
-            CreateEmailCustomizationRequest createEmailCustomizationRequest) throws ApiException {
-        okhttp3.Call localVarCall =
-                createEmailCustomizationValidateBeforeCall(createEmailCustomizationRequest, null);
-        Type localVarReturnType = new TypeToken<CreateEmailCustomizationResponse>() {}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * (asynchronously) Version: 10.10.0.cl or later Creates a customization configuration for the
-     * notification email. #### Pre-requisites Requires &#x60;DEVELOPER&#x60; (**has developer
-     * privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
-     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is
-     * required. **NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable
-     * this on your instance. #### Usage guidelines To create a custom configuration pass these
-     * parameters in your API request: - A JSON map of configuration attributes
-     * &#x60;template_properties&#x60;. The following example shows a sample set of customization
-     * configuration: &#x60;&#x60;&#x60; { { \&quot;ctaButtonBgColor\&quot;: \&quot;#444DEA\&quot;,
-     * \&quot;ctaTextFontColor\&quot;: \&quot;#FFFFFF\&quot;, \&quot;primaryBgColor\&quot;:
-     * \&quot;#D3DEF0\&quot;, \&quot;hideMobileAppNudge\&quot;: false, \&quot;fontFamily\&quot; :
-     * \&quot;\&quot;, \&quot;hideProductName\&quot; : false, \&quot;hideFooterPhone\&quot; : false,
-     * \&quot;hideFooterAddress\&quot; : false, \&quot;hidePrivacyPolicy\&quot; : false,
-     * \&quot;hideManageNotification\&quot; : false, \&quot;hideTsVocabularyDefinitions\&quot;:
-     * false, \&quot;hideNotificationStatus\&quot; : false, \&quot;hideErrorMessage\&quot;: false,
-     * \&quot;hideUnsubscribeLink\&quot; : false, \&quot;hideModifyAlert\&quot;: false,
-     * \&quot;textTransform\&quot;: \&quot;\&quot;, \&quot;replacementValueForLiveboard\&quot;:
-     * \&quot;LB dashboard\&quot;, \&quot;replacementValueForAnswer\&quot;: \&quot;Answer
-     * dashboard\&quot;, \&quot;replacementValueForSpotIQ\&quot;: \&quot;SpotIQ dashboard\&quot;,
-     * \&quot;logoUrl\&quot;:\&quot;\&quot;, \&quot;productName\&quot;:\&quot;ThoughtSpot\&quot;,
-     * \&quot;footerPhone\&quot;:\&quot;(800) 508-7008\&quot;,
-     * \&quot;footerAddress\&quot;:\&quot;444 Castro St, Suite 1000 Mountain View, CA 94041\&quot;,
-     * \&quot;companyWebsiteUrl\&quot;:\&quot;\&quot;,
-     * \&quot;companyPrivacyPolicyUrl\&quot;:\&quot;\&quot; } } &#x60;&#x60;&#x60;
-     *
-     * @param createEmailCustomizationRequest (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call createEmailCustomizationAsync(
-            CreateEmailCustomizationRequest createEmailCustomizationRequest,
-            final ApiCallback<CreateEmailCustomizationResponse> _callback)
-            throws ApiException {
-
-        okhttp3.Call localVarCall =
-                createEmailCustomizationValidateBeforeCall(
-                        createEmailCustomizationRequest, _callback);
-        Type localVarReturnType = new TypeToken<CreateEmailCustomizationResponse>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -4726,9 +3554,9 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
-     * Build call for createVariable
+     * Build call for dbtConnection
      *
-     * @param createVariableRequest (required)
+     * @param dbtConnectionRequest (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -4736,15 +3564,15 @@ public class ThoughtSpotRestApi {
      *     <table border="1">
      * <caption>Response Details</caption>
      * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Create variable is successful. </td><td>  -  </td></tr>
+     * <tr><td> 200 </td><td> Succesfully created DBT Connection. </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
      * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public okhttp3.Call createVariableCall(
-            CreateVariableRequest createVariableRequest, final ApiCallback _callback)
+    public okhttp3.Call dbtConnectionCall(
+            DbtConnectionRequest dbtConnectionRequest, final ApiCallback _callback)
             throws ApiException {
         String basePath = null;
         // Operation Servers
@@ -4759,10 +3587,10 @@ public class ThoughtSpotRestApi {
             basePath = null;
         }
 
-        Object localVarPostBody = createVariableRequest;
+        Object localVarPostBody = dbtConnectionRequest;
 
         // create path and map variables
-        String localVarPath = "/api/rest/2.0/template/variables/create";
+        String localVarPath = "/api/rest/2.0/dbt/dbt-connection";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -4799,300 +3627,17 @@ public class ThoughtSpotRestApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call createVariableValidateBeforeCall(
-            CreateVariableRequest createVariableRequest, final ApiCallback _callback)
-            throws ApiException {
-        // verify the required parameter 'createVariableRequest' is set
-        if (createVariableRequest == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'createVariableRequest' when calling"
-                            + " createVariable(Async)");
-        }
-
-        return createVariableCall(createVariableRequest, _callback);
-    }
-
-    /**
-     * Create a variable which can be used for parameterizing metadata objects Version: 10.9.0.cl or
-     * later Allows creating a variable which can be used for parameterizing metadata objects in
-     * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint supports the
-     * following types of variables: * CONNECTION_PROPERTY - For connection properties *
-     * TABLE_MAPPING - For table mappings * CONNECTION_PROPERTY_PER_PRINCIPAL - For connection
-     * properties per principal. In order to use this please contact support to enable this. *
-     * FORMULA_VARIABLE - For Formula variables When creating a variable, you need to specify: * The
-     * variable type * A unique name for the variable * Whether the variable contains sensitive
-     * values (defaults to false) * The data type of the variable, only specify for fomula variables
-     * (defaults to null) The operation will fail if: * The user lacks required permissions * The
-     * variable name already exists * The variable type is invalid
-     *
-     * @param createVariableRequest (required)
-     * @return Variable
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Create variable is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public Variable createVariable(CreateVariableRequest createVariableRequest)
-            throws ApiException {
-        ApiResponse<Variable> localVarResp = createVariableWithHttpInfo(createVariableRequest);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Create a variable which can be used for parameterizing metadata objects Version: 10.9.0.cl or
-     * later Allows creating a variable which can be used for parameterizing metadata objects in
-     * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint supports the
-     * following types of variables: * CONNECTION_PROPERTY - For connection properties *
-     * TABLE_MAPPING - For table mappings * CONNECTION_PROPERTY_PER_PRINCIPAL - For connection
-     * properties per principal. In order to use this please contact support to enable this. *
-     * FORMULA_VARIABLE - For Formula variables When creating a variable, you need to specify: * The
-     * variable type * A unique name for the variable * Whether the variable contains sensitive
-     * values (defaults to false) * The data type of the variable, only specify for fomula variables
-     * (defaults to null) The operation will fail if: * The user lacks required permissions * The
-     * variable name already exists * The variable type is invalid
-     *
-     * @param createVariableRequest (required)
-     * @return ApiResponse&lt;Variable&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Create variable is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public ApiResponse<Variable> createVariableWithHttpInfo(
-            CreateVariableRequest createVariableRequest) throws ApiException {
-        okhttp3.Call localVarCall = createVariableValidateBeforeCall(createVariableRequest, null);
-        Type localVarReturnType = new TypeToken<Variable>() {}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * (asynchronously) Create a variable which can be used for parameterizing metadata objects
-     * Version: 10.9.0.cl or later Allows creating a variable which can be used for parameterizing
-     * metadata objects in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API
-     * endpoint supports the following types of variables: * CONNECTION_PROPERTY - For connection
-     * properties * TABLE_MAPPING - For table mappings * CONNECTION_PROPERTY_PER_PRINCIPAL - For
-     * connection properties per principal. In order to use this please contact support to enable
-     * this. * FORMULA_VARIABLE - For Formula variables When creating a variable, you need to
-     * specify: * The variable type * A unique name for the variable * Whether the variable contains
-     * sensitive values (defaults to false) * The data type of the variable, only specify for fomula
-     * variables (defaults to null) The operation will fail if: * The user lacks required
-     * permissions * The variable name already exists * The variable type is invalid
-     *
-     * @param createVariableRequest (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Create variable is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call createVariableAsync(
-            CreateVariableRequest createVariableRequest, final ApiCallback<Variable> _callback)
-            throws ApiException {
-
-        okhttp3.Call localVarCall =
-                createVariableValidateBeforeCall(createVariableRequest, _callback);
-        Type localVarReturnType = new TypeToken<Variable>() {}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for dbtConnection
-     *
-     * @param connectionName Name of the connection. (required)
-     * @param databaseName Name of the Database. (required)
-     * @param importType Mention type of Import (optional, default to DBT_CLOUD)
-     * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD. (optional)
-     * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD. (optional)
-     * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD (optional)
-     * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD (optional)
-     * @param dbtEnvId DBT Environment ID\\\&quot; (optional)
-     * @param projectName Name of the project (optional)
-     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
-     *     is Mandatory when Import Type is &#39;ZIP_FILE&#39; (optional)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Succesfully created DBT Connection. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call dbtConnectionCall(
-            String connectionName,
-            String databaseName,
-            String importType,
-            String accessToken,
-            String dbtUrl,
-            String accountId,
-            String projectId,
-            String dbtEnvId,
-            String projectName,
-            File fileContent,
-            final ApiCallback _callback)
-            throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {};
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
-            basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/api/rest/2.0/dbt/dbt-connection";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        if (connectionName != null) {
-            localVarFormParams.put("connection_name", connectionName);
-        }
-
-        if (databaseName != null) {
-            localVarFormParams.put("database_name", databaseName);
-        }
-
-        if (importType != null) {
-            localVarFormParams.put("import_type", importType);
-        }
-
-        if (accessToken != null) {
-            localVarFormParams.put("access_token", accessToken);
-        }
-
-        if (dbtUrl != null) {
-            localVarFormParams.put("dbt_url", dbtUrl);
-        }
-
-        if (accountId != null) {
-            localVarFormParams.put("account_id", accountId);
-        }
-
-        if (projectId != null) {
-            localVarFormParams.put("project_id", projectId);
-        }
-
-        if (dbtEnvId != null) {
-            localVarFormParams.put("dbt_env_id", dbtEnvId);
-        }
-
-        if (projectName != null) {
-            localVarFormParams.put("project_name", projectName);
-        }
-
-        if (fileContent != null) {
-            localVarFormParams.put("file_content", fileContent);
-        }
-
-        final String[] localVarAccepts = {"application/json"};
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {"multipart/form-data"};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
     private okhttp3.Call dbtConnectionValidateBeforeCall(
-            String connectionName,
-            String databaseName,
-            String importType,
-            String accessToken,
-            String dbtUrl,
-            String accountId,
-            String projectId,
-            String dbtEnvId,
-            String projectName,
-            File fileContent,
-            final ApiCallback _callback)
+            DbtConnectionRequest dbtConnectionRequest, final ApiCallback _callback)
             throws ApiException {
-        // verify the required parameter 'connectionName' is set
-        if (connectionName == null) {
+        // verify the required parameter 'dbtConnectionRequest' is set
+        if (dbtConnectionRequest == null) {
             throw new ApiException(
-                    "Missing the required parameter 'connectionName' when calling"
+                    "Missing the required parameter 'dbtConnectionRequest' when calling"
                             + " dbtConnection(Async)");
         }
 
-        // verify the required parameter 'databaseName' is set
-        if (databaseName == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'databaseName' when calling"
-                            + " dbtConnection(Async)");
-        }
-
-        return dbtConnectionCall(
-                connectionName,
-                databaseName,
-                importType,
-                accessToken,
-                dbtUrl,
-                accountId,
-                projectId,
-                dbtEnvId,
-                projectName,
-                fileContent,
-                _callback);
+        return dbtConnectionCall(dbtConnectionRequest, _callback);
     }
 
     /**
@@ -5110,17 +3655,7 @@ public class ThoughtSpotRestApi {
      * embrace connection, embrace database name, import type, file_content to create a connection
      * object. To know more about DBT, see ThoughtSpot Product Documentation.
      *
-     * @param connectionName Name of the connection. (required)
-     * @param databaseName Name of the Database. (required)
-     * @param importType Mention type of Import (optional, default to DBT_CLOUD)
-     * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD. (optional)
-     * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD. (optional)
-     * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD (optional)
-     * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD (optional)
-     * @param dbtEnvId DBT Environment ID\\\&quot; (optional)
-     * @param projectName Name of the project (optional)
-     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
-     *     is Mandatory when Import Type is &#39;ZIP_FILE&#39; (optional)
+     * @param dbtConnectionRequest (required)
      * @return Object
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -5135,30 +3670,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public Object dbtConnection(
-            String connectionName,
-            String databaseName,
-            String importType,
-            String accessToken,
-            String dbtUrl,
-            String accountId,
-            String projectId,
-            String dbtEnvId,
-            String projectName,
-            File fileContent)
-            throws ApiException {
-        ApiResponse<Object> localVarResp =
-                dbtConnectionWithHttpInfo(
-                        connectionName,
-                        databaseName,
-                        importType,
-                        accessToken,
-                        dbtUrl,
-                        accountId,
-                        projectId,
-                        dbtEnvId,
-                        projectName,
-                        fileContent);
+    public Object dbtConnection(DbtConnectionRequest dbtConnectionRequest) throws ApiException {
+        ApiResponse<Object> localVarResp = dbtConnectionWithHttpInfo(dbtConnectionRequest);
         return localVarResp.getData();
     }
 
@@ -5177,17 +3690,7 @@ public class ThoughtSpotRestApi {
      * embrace connection, embrace database name, import type, file_content to create a connection
      * object. To know more about DBT, see ThoughtSpot Product Documentation.
      *
-     * @param connectionName Name of the connection. (required)
-     * @param databaseName Name of the Database. (required)
-     * @param importType Mention type of Import (optional, default to DBT_CLOUD)
-     * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD. (optional)
-     * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD. (optional)
-     * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD (optional)
-     * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD (optional)
-     * @param dbtEnvId DBT Environment ID\\\&quot; (optional)
-     * @param projectName Name of the project (optional)
-     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
-     *     is Mandatory when Import Type is &#39;ZIP_FILE&#39; (optional)
+     * @param dbtConnectionRequest (required)
      * @return ApiResponse&lt;Object&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -5202,31 +3705,9 @@ public class ThoughtSpotRestApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public ApiResponse<Object> dbtConnectionWithHttpInfo(
-            String connectionName,
-            String databaseName,
-            String importType,
-            String accessToken,
-            String dbtUrl,
-            String accountId,
-            String projectId,
-            String dbtEnvId,
-            String projectName,
-            File fileContent)
+    public ApiResponse<Object> dbtConnectionWithHttpInfo(DbtConnectionRequest dbtConnectionRequest)
             throws ApiException {
-        okhttp3.Call localVarCall =
-                dbtConnectionValidateBeforeCall(
-                        connectionName,
-                        databaseName,
-                        importType,
-                        accessToken,
-                        dbtUrl,
-                        accountId,
-                        projectId,
-                        dbtEnvId,
-                        projectName,
-                        fileContent,
-                        null);
+        okhttp3.Call localVarCall = dbtConnectionValidateBeforeCall(dbtConnectionRequest, null);
         Type localVarReturnType = new TypeToken<Object>() {}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -5246,17 +3727,7 @@ public class ThoughtSpotRestApi {
      * embrace connection, embrace database name, import type, file_content to create a connection
      * object. To know more about DBT, see ThoughtSpot Product Documentation.
      *
-     * @param connectionName Name of the connection. (required)
-     * @param databaseName Name of the Database. (required)
-     * @param importType Mention type of Import (optional, default to DBT_CLOUD)
-     * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD. (optional)
-     * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD. (optional)
-     * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD (optional)
-     * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD (optional)
-     * @param dbtEnvId DBT Environment ID\\\&quot; (optional)
-     * @param projectName Name of the project (optional)
-     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
-     *     is Mandatory when Import Type is &#39;ZIP_FILE&#39; (optional)
+     * @param dbtConnectionRequest (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body
@@ -5273,32 +3744,11 @@ public class ThoughtSpotRestApi {
      * </table>
      */
     public okhttp3.Call dbtConnectionAsync(
-            String connectionName,
-            String databaseName,
-            String importType,
-            String accessToken,
-            String dbtUrl,
-            String accountId,
-            String projectId,
-            String dbtEnvId,
-            String projectName,
-            File fileContent,
-            final ApiCallback<Object> _callback)
+            DbtConnectionRequest dbtConnectionRequest, final ApiCallback<Object> _callback)
             throws ApiException {
 
         okhttp3.Call localVarCall =
-                dbtConnectionValidateBeforeCall(
-                        connectionName,
-                        databaseName,
-                        importType,
-                        accessToken,
-                        dbtUrl,
-                        accountId,
-                        projectId,
-                        dbtEnvId,
-                        projectName,
-                        fileContent,
-                        _callback);
+                dbtConnectionValidateBeforeCall(dbtConnectionRequest, _callback);
         Type localVarReturnType = new TypeToken<Object>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -5306,9 +3756,7 @@ public class ThoughtSpotRestApi {
     /**
      * Build call for dbtGenerateSyncTml
      *
-     * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
-     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
-     *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
+     * @param dbtGenerateSyncTmlRequest (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -5324,7 +3772,7 @@ public class ThoughtSpotRestApi {
      * </table>
      */
     public okhttp3.Call dbtGenerateSyncTmlCall(
-            String dbtConnectionIdentifier, File fileContent, final ApiCallback _callback)
+            DbtGenerateSyncTmlRequest dbtGenerateSyncTmlRequest, final ApiCallback _callback)
             throws ApiException {
         String basePath = null;
         // Operation Servers
@@ -5339,7 +3787,7 @@ public class ThoughtSpotRestApi {
             basePath = null;
         }
 
-        Object localVarPostBody = null;
+        Object localVarPostBody = dbtGenerateSyncTmlRequest;
 
         // create path and map variables
         String localVarPath = "/api/rest/2.0/dbt/generate-sync-tml";
@@ -5350,21 +3798,13 @@ public class ThoughtSpotRestApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-        if (dbtConnectionIdentifier != null) {
-            localVarFormParams.put("dbt_connection_identifier", dbtConnectionIdentifier);
-        }
-
-        if (fileContent != null) {
-            localVarFormParams.put("file_content", fileContent);
-        }
-
         final String[] localVarAccepts = {"application/json"};
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
             localVarHeaderParams.put("Accept", localVarAccept);
         }
 
-        final String[] localVarContentTypes = {"multipart/form-data"};
+        final String[] localVarContentTypes = {"application/json"};
         final String localVarContentType =
                 localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
@@ -5388,16 +3828,16 @@ public class ThoughtSpotRestApi {
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call dbtGenerateSyncTmlValidateBeforeCall(
-            String dbtConnectionIdentifier, File fileContent, final ApiCallback _callback)
+            DbtGenerateSyncTmlRequest dbtGenerateSyncTmlRequest, final ApiCallback _callback)
             throws ApiException {
-        // verify the required parameter 'dbtConnectionIdentifier' is set
-        if (dbtConnectionIdentifier == null) {
+        // verify the required parameter 'dbtGenerateSyncTmlRequest' is set
+        if (dbtGenerateSyncTmlRequest == null) {
             throw new ApiException(
-                    "Missing the required parameter 'dbtConnectionIdentifier' when calling"
+                    "Missing the required parameter 'dbtGenerateSyncTmlRequest' when calling"
                             + " dbtGenerateSyncTml(Async)");
         }
 
-        return dbtGenerateSyncTmlCall(dbtConnectionIdentifier, fileContent, _callback);
+        return dbtGenerateSyncTmlCall(dbtGenerateSyncTmlRequest, _callback);
     }
 
     /**
@@ -5412,9 +3852,7 @@ public class ThoughtSpotRestApi {
      * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) -
      * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**)
      *
-     * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
-     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
-     *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
+     * @param dbtGenerateSyncTmlRequest (required)
      * @return Object
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -5429,10 +3867,10 @@ public class ThoughtSpotRestApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public Object dbtGenerateSyncTml(String dbtConnectionIdentifier, File fileContent)
+    public Object dbtGenerateSyncTml(DbtGenerateSyncTmlRequest dbtGenerateSyncTmlRequest)
             throws ApiException {
         ApiResponse<Object> localVarResp =
-                dbtGenerateSyncTmlWithHttpInfo(dbtConnectionIdentifier, fileContent);
+                dbtGenerateSyncTmlWithHttpInfo(dbtGenerateSyncTmlRequest);
         return localVarResp.getData();
     }
 
@@ -5448,9 +3886,7 @@ public class ThoughtSpotRestApi {
      * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) -
      * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**)
      *
-     * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
-     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
-     *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
+     * @param dbtGenerateSyncTmlRequest (required)
      * @return ApiResponse&lt;Object&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -5466,9 +3902,9 @@ public class ThoughtSpotRestApi {
      * </table>
      */
     public ApiResponse<Object> dbtGenerateSyncTmlWithHttpInfo(
-            String dbtConnectionIdentifier, File fileContent) throws ApiException {
+            DbtGenerateSyncTmlRequest dbtGenerateSyncTmlRequest) throws ApiException {
         okhttp3.Call localVarCall =
-                dbtGenerateSyncTmlValidateBeforeCall(dbtConnectionIdentifier, fileContent, null);
+                dbtGenerateSyncTmlValidateBeforeCall(dbtGenerateSyncTmlRequest, null);
         Type localVarReturnType = new TypeToken<Object>() {}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -5485,9 +3921,7 @@ public class ThoughtSpotRestApi {
      * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) -
      * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**)
      *
-     * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
-     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
-     *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
+     * @param dbtGenerateSyncTmlRequest (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body
@@ -5504,12 +3938,12 @@ public class ThoughtSpotRestApi {
      * </table>
      */
     public okhttp3.Call dbtGenerateSyncTmlAsync(
-            String dbtConnectionIdentifier, File fileContent, final ApiCallback<Object> _callback)
+            DbtGenerateSyncTmlRequest dbtGenerateSyncTmlRequest,
+            final ApiCallback<Object> _callback)
             throws ApiException {
 
         okhttp3.Call localVarCall =
-                dbtGenerateSyncTmlValidateBeforeCall(
-                        dbtConnectionIdentifier, fileContent, _callback);
+                dbtGenerateSyncTmlValidateBeforeCall(dbtGenerateSyncTmlRequest, _callback);
         Type localVarReturnType = new TypeToken<Object>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -5517,13 +3951,7 @@ public class ThoughtSpotRestApi {
     /**
      * Build call for dbtGenerateTml
      *
-     * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
-     * @param importWorksheets Mention the worksheet tmls to import (required)
-     * @param modelTables List of Models and their respective Tables (optional)
-     * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED
-     *     (optional)
-     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
-     *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
+     * @param dbtGenerateTmlRequest (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -5539,12 +3967,7 @@ public class ThoughtSpotRestApi {
      * </table>
      */
     public okhttp3.Call dbtGenerateTmlCall(
-            String dbtConnectionIdentifier,
-            String importWorksheets,
-            String modelTables,
-            String worksheets,
-            File fileContent,
-            final ApiCallback _callback)
+            DbtGenerateTmlRequest dbtGenerateTmlRequest, final ApiCallback _callback)
             throws ApiException {
         String basePath = null;
         // Operation Servers
@@ -5559,7 +3982,7 @@ public class ThoughtSpotRestApi {
             basePath = null;
         }
 
-        Object localVarPostBody = null;
+        Object localVarPostBody = dbtGenerateTmlRequest;
 
         // create path and map variables
         String localVarPath = "/api/rest/2.0/dbt/generate-tml";
@@ -5570,33 +3993,13 @@ public class ThoughtSpotRestApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-        if (dbtConnectionIdentifier != null) {
-            localVarFormParams.put("dbt_connection_identifier", dbtConnectionIdentifier);
-        }
-
-        if (modelTables != null) {
-            localVarFormParams.put("model_tables", modelTables);
-        }
-
-        if (importWorksheets != null) {
-            localVarFormParams.put("import_worksheets", importWorksheets);
-        }
-
-        if (worksheets != null) {
-            localVarFormParams.put("worksheets", worksheets);
-        }
-
-        if (fileContent != null) {
-            localVarFormParams.put("file_content", fileContent);
-        }
-
         final String[] localVarAccepts = {"application/json"};
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
             localVarHeaderParams.put("Accept", localVarAccept);
         }
 
-        final String[] localVarContentTypes = {"multipart/form-data"};
+        final String[] localVarContentTypes = {"application/json"};
         final String localVarContentType =
                 localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
@@ -5620,34 +4023,16 @@ public class ThoughtSpotRestApi {
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call dbtGenerateTmlValidateBeforeCall(
-            String dbtConnectionIdentifier,
-            String importWorksheets,
-            String modelTables,
-            String worksheets,
-            File fileContent,
-            final ApiCallback _callback)
+            DbtGenerateTmlRequest dbtGenerateTmlRequest, final ApiCallback _callback)
             throws ApiException {
-        // verify the required parameter 'dbtConnectionIdentifier' is set
-        if (dbtConnectionIdentifier == null) {
+        // verify the required parameter 'dbtGenerateTmlRequest' is set
+        if (dbtGenerateTmlRequest == null) {
             throw new ApiException(
-                    "Missing the required parameter 'dbtConnectionIdentifier' when calling"
+                    "Missing the required parameter 'dbtGenerateTmlRequest' when calling"
                             + " dbtGenerateTml(Async)");
         }
 
-        // verify the required parameter 'importWorksheets' is set
-        if (importWorksheets == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'importWorksheets' when calling"
-                            + " dbtGenerateTml(Async)");
-        }
-
-        return dbtGenerateTmlCall(
-                dbtConnectionIdentifier,
-                importWorksheets,
-                modelTables,
-                worksheets,
-                fileContent,
-                _callback);
+        return dbtGenerateTmlCall(dbtGenerateTmlRequest, _callback);
     }
 
     /**
@@ -5663,13 +4048,7 @@ public class ThoughtSpotRestApi {
      * generate TML Models and Worksheets to be imported can be selected by the user as part of the
      * API.
      *
-     * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
-     * @param importWorksheets Mention the worksheet tmls to import (required)
-     * @param modelTables List of Models and their respective Tables (optional)
-     * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED
-     *     (optional)
-     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
-     *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
+     * @param dbtGenerateTmlRequest (required)
      * @return Object
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -5684,20 +4063,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public Object dbtGenerateTml(
-            String dbtConnectionIdentifier,
-            String importWorksheets,
-            String modelTables,
-            String worksheets,
-            File fileContent)
-            throws ApiException {
-        ApiResponse<Object> localVarResp =
-                dbtGenerateTmlWithHttpInfo(
-                        dbtConnectionIdentifier,
-                        importWorksheets,
-                        modelTables,
-                        worksheets,
-                        fileContent);
+    public Object dbtGenerateTml(DbtGenerateTmlRequest dbtGenerateTmlRequest) throws ApiException {
+        ApiResponse<Object> localVarResp = dbtGenerateTmlWithHttpInfo(dbtGenerateTmlRequest);
         return localVarResp.getData();
     }
 
@@ -5714,13 +4081,7 @@ public class ThoughtSpotRestApi {
      * generate TML Models and Worksheets to be imported can be selected by the user as part of the
      * API.
      *
-     * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
-     * @param importWorksheets Mention the worksheet tmls to import (required)
-     * @param modelTables List of Models and their respective Tables (optional)
-     * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED
-     *     (optional)
-     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
-     *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
+     * @param dbtGenerateTmlRequest (required)
      * @return ApiResponse&lt;Object&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -5736,20 +4097,8 @@ public class ThoughtSpotRestApi {
      * </table>
      */
     public ApiResponse<Object> dbtGenerateTmlWithHttpInfo(
-            String dbtConnectionIdentifier,
-            String importWorksheets,
-            String modelTables,
-            String worksheets,
-            File fileContent)
-            throws ApiException {
-        okhttp3.Call localVarCall =
-                dbtGenerateTmlValidateBeforeCall(
-                        dbtConnectionIdentifier,
-                        importWorksheets,
-                        modelTables,
-                        worksheets,
-                        fileContent,
-                        null);
+            DbtGenerateTmlRequest dbtGenerateTmlRequest) throws ApiException {
+        okhttp3.Call localVarCall = dbtGenerateTmlValidateBeforeCall(dbtGenerateTmlRequest, null);
         Type localVarReturnType = new TypeToken<Object>() {}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -5767,13 +4116,7 @@ public class ThoughtSpotRestApi {
      * generate TML Models and Worksheets to be imported can be selected by the user as part of the
      * API.
      *
-     * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
-     * @param importWorksheets Mention the worksheet tmls to import (required)
-     * @param modelTables List of Models and their respective Tables (optional)
-     * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED
-     *     (optional)
-     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
-     *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
+     * @param dbtGenerateTmlRequest (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body
@@ -5790,22 +4133,11 @@ public class ThoughtSpotRestApi {
      * </table>
      */
     public okhttp3.Call dbtGenerateTmlAsync(
-            String dbtConnectionIdentifier,
-            String importWorksheets,
-            String modelTables,
-            String worksheets,
-            File fileContent,
-            final ApiCallback<Object> _callback)
+            DbtGenerateTmlRequest dbtGenerateTmlRequest, final ApiCallback<Object> _callback)
             throws ApiException {
 
         okhttp3.Call localVarCall =
-                dbtGenerateTmlValidateBeforeCall(
-                        dbtConnectionIdentifier,
-                        importWorksheets,
-                        modelTables,
-                        worksheets,
-                        fileContent,
-                        _callback);
+                dbtGenerateTmlValidateBeforeCall(dbtGenerateTmlRequest, _callback);
         Type localVarReturnType = new TypeToken<Object>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -6180,187 +4512,6 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
-     * Build call for deleteCalendar
-     *
-     * @param calendarIdentifier Unique ID or name of the Calendar. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Custom calendar successfully deleted. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call deleteCalendarCall(String calendarIdentifier, final ApiCallback _callback)
-            throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {};
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
-            basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath =
-                "/api/rest/2.0/calendars/{calendar_identifier}/delete"
-                        .replace(
-                                "{" + "calendar_identifier" + "}",
-                                localVarApiClient.escapeString(calendarIdentifier.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {"application/json"};
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call deleteCalendarValidateBeforeCall(
-            String calendarIdentifier, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'calendarIdentifier' is set
-        if (calendarIdentifier == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'calendarIdentifier' when calling"
-                            + " deleteCalendar(Async)");
-        }
-
-        return deleteCalendarCall(calendarIdentifier, _callback);
-    }
-
-    /**
-     * Version: 10.12.0.cl or later Deletes a [custom
-     * calendar](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal). Requires
-     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can
-     * administer ThoughtSpot**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot
-     * instance, the &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60; (**Can manage custom calendars**)
-     * privilege is required. #### Usage guidelines To delete a custom calendar, specify the
-     * calendar ID as a path parameter in the request URL.
-     *
-     * @param calendarIdentifier Unique ID or name of the Calendar. (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Custom calendar successfully deleted. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public void deleteCalendar(String calendarIdentifier) throws ApiException {
-        deleteCalendarWithHttpInfo(calendarIdentifier);
-    }
-
-    /**
-     * Version: 10.12.0.cl or later Deletes a [custom
-     * calendar](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal). Requires
-     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can
-     * administer ThoughtSpot**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot
-     * instance, the &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60; (**Can manage custom calendars**)
-     * privilege is required. #### Usage guidelines To delete a custom calendar, specify the
-     * calendar ID as a path parameter in the request URL.
-     *
-     * @param calendarIdentifier Unique ID or name of the Calendar. (required)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Custom calendar successfully deleted. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public ApiResponse<Void> deleteCalendarWithHttpInfo(String calendarIdentifier)
-            throws ApiException {
-        okhttp3.Call localVarCall = deleteCalendarValidateBeforeCall(calendarIdentifier, null);
-        return localVarApiClient.execute(localVarCall);
-    }
-
-    /**
-     * (asynchronously) Version: 10.12.0.cl or later Deletes a [custom
-     * calendar](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal). Requires
-     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can
-     * administer ThoughtSpot**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot
-     * instance, the &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60; (**Can manage custom calendars**)
-     * privilege is required. #### Usage guidelines To delete a custom calendar, specify the
-     * calendar ID as a path parameter in the request URL.
-     *
-     * @param calendarIdentifier Unique ID or name of the Calendar. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Custom calendar successfully deleted. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call deleteCalendarAsync(
-            String calendarIdentifier, final ApiCallback<Void> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = deleteCalendarValidateBeforeCall(calendarIdentifier, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
-        return localVarCall;
-    }
-    /**
      * Build call for deleteConfig
      *
      * @param deleteConfigRequest (required)
@@ -6731,190 +4882,6 @@ public class ThoughtSpotRestApi {
 
         okhttp3.Call localVarCall =
                 deleteConnectionValidateBeforeCall(deleteConnectionRequest, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for deleteConnectionConfiguration
-     *
-     * @param deleteConnectionConfigurationRequest (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Connection Configurations successfully deleted. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call deleteConnectionConfigurationCall(
-            DeleteConnectionConfigurationRequest deleteConnectionConfigurationRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {};
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
-            basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = deleteConnectionConfigurationRequest;
-
-        // create path and map variables
-        String localVarPath = "/api/rest/2.0/connection-configurations/delete";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {"application/json"};
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {"application/json"};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call deleteConnectionConfigurationValidateBeforeCall(
-            DeleteConnectionConfigurationRequest deleteConnectionConfigurationRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        // verify the required parameter 'deleteConnectionConfigurationRequest' is set
-        if (deleteConnectionConfigurationRequest == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'deleteConnectionConfigurationRequest' when"
-                            + " calling deleteConnectionConfiguration(Async)");
-        }
-
-        return deleteConnectionConfigurationCall(deleteConnectionConfigurationRequest, _callback);
-    }
-
-    /**
-     * Version: 10.12.0.cl or later Deletes connection configuration objects. Requires
-     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection
-     * object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
-     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit
-     * Connections**) privilege is required.
-     *
-     * @param deleteConnectionConfigurationRequest (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Connection Configurations successfully deleted. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public void deleteConnectionConfiguration(
-            DeleteConnectionConfigurationRequest deleteConnectionConfigurationRequest)
-            throws ApiException {
-        deleteConnectionConfigurationWithHttpInfo(deleteConnectionConfigurationRequest);
-    }
-
-    /**
-     * Version: 10.12.0.cl or later Deletes connection configuration objects. Requires
-     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection
-     * object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
-     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit
-     * Connections**) privilege is required.
-     *
-     * @param deleteConnectionConfigurationRequest (required)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Connection Configurations successfully deleted. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public ApiResponse<Void> deleteConnectionConfigurationWithHttpInfo(
-            DeleteConnectionConfigurationRequest deleteConnectionConfigurationRequest)
-            throws ApiException {
-        okhttp3.Call localVarCall =
-                deleteConnectionConfigurationValidateBeforeCall(
-                        deleteConnectionConfigurationRequest, null);
-        return localVarApiClient.execute(localVarCall);
-    }
-
-    /**
-     * (asynchronously) Version: 10.12.0.cl or later Deletes connection configuration objects.
-     * Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the
-     * connection object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.
-     * If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is
-     * enabled on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit
-     * Connections**) privilege is required.
-     *
-     * @param deleteConnectionConfigurationRequest (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Connection Configurations successfully deleted. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call deleteConnectionConfigurationAsync(
-            DeleteConnectionConfigurationRequest deleteConnectionConfigurationRequest,
-            final ApiCallback<Void> _callback)
-            throws ApiException {
-
-        okhttp3.Call localVarCall =
-                deleteConnectionConfigurationValidateBeforeCall(
-                        deleteConnectionConfigurationRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -7457,201 +5424,6 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
-     * Build call for deleteEmailCustomization
-     *
-     * @param templateIdentifier Unique ID or name of the email customization. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Email Customization configuration successfully deleted. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     *
-     * @deprecated
-     */
-    @Deprecated
-    public okhttp3.Call deleteEmailCustomizationCall(
-            String templateIdentifier, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {};
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
-            basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath =
-                "/api/rest/2.0/customization/email/{template_identifier}/delete"
-                        .replace(
-                                "{" + "template_identifier" + "}",
-                                localVarApiClient.escapeString(templateIdentifier.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {"application/json"};
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
-    }
-
-    @Deprecated
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call deleteEmailCustomizationValidateBeforeCall(
-            String templateIdentifier, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'templateIdentifier' is set
-        if (templateIdentifier == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'templateIdentifier' when calling"
-                            + " deleteEmailCustomization(Async)");
-        }
-
-        return deleteEmailCustomizationCall(templateIdentifier, _callback);
-    }
-
-    /**
-     * Version: 10.10.0.cl or later Deletes the configuration for the email customization. ####
-     * Pre-requisites Requires &#x60;DEVELOPER&#x60; (**has developer privilege**) or
-     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access
-     * Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance,
-     * the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required. **NOTE**:This
-     * endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.
-     * #### Usage guidelines - Call the search API endpoint to get the
-     * &#x60;template_identifier&#x60; from the response. - Use that &#x60;template_identifier&#x60;
-     * as a parameter in this API request.
-     *
-     * @param templateIdentifier Unique ID or name of the email customization. (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Email Customization configuration successfully deleted. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     *
-     * @deprecated
-     */
-    @Deprecated
-    public void deleteEmailCustomization(String templateIdentifier) throws ApiException {
-        deleteEmailCustomizationWithHttpInfo(templateIdentifier);
-    }
-
-    /**
-     * Version: 10.10.0.cl or later Deletes the configuration for the email customization. ####
-     * Pre-requisites Requires &#x60;DEVELOPER&#x60; (**has developer privilege**) or
-     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access
-     * Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance,
-     * the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required. **NOTE**:This
-     * endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.
-     * #### Usage guidelines - Call the search API endpoint to get the
-     * &#x60;template_identifier&#x60; from the response. - Use that &#x60;template_identifier&#x60;
-     * as a parameter in this API request.
-     *
-     * @param templateIdentifier Unique ID or name of the email customization. (required)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Email Customization configuration successfully deleted. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     *
-     * @deprecated
-     */
-    @Deprecated
-    public ApiResponse<Void> deleteEmailCustomizationWithHttpInfo(String templateIdentifier)
-            throws ApiException {
-        okhttp3.Call localVarCall =
-                deleteEmailCustomizationValidateBeforeCall(templateIdentifier, null);
-        return localVarApiClient.execute(localVarCall);
-    }
-
-    /**
-     * (asynchronously) Version: 10.10.0.cl or later Deletes the configuration for the email
-     * customization. #### Pre-requisites Requires &#x60;DEVELOPER&#x60; (**has developer
-     * privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
-     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is
-     * required. **NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable
-     * this on your instance. #### Usage guidelines - Call the search API endpoint to get the
-     * &#x60;template_identifier&#x60; from the response. - Use that &#x60;template_identifier&#x60;
-     * as a parameter in this API request.
-     *
-     * @param templateIdentifier Unique ID or name of the email customization. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Email Customization configuration successfully deleted. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     *
-     * @deprecated
-     */
-    @Deprecated
-    public okhttp3.Call deleteEmailCustomizationAsync(
-            String templateIdentifier, final ApiCallback<Void> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall =
-                deleteEmailCustomizationValidateBeforeCall(templateIdentifier, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
-        return localVarCall;
-    }
-    /**
      * Build call for deleteMetadata
      *
      * @param deleteMetadataRequest (required)
@@ -7987,197 +5759,6 @@ public class ThoughtSpotRestApi {
             throws ApiException {
 
         okhttp3.Call localVarCall = deleteOrgValidateBeforeCall(orgIdentifier, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for deleteOrgEmailCustomization
-     *
-     * @param deleteOrgEmailCustomizationRequest (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Email Customization configuration successfully deleted. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call deleteOrgEmailCustomizationCall(
-            DeleteOrgEmailCustomizationRequest deleteOrgEmailCustomizationRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {};
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
-            basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = deleteOrgEmailCustomizationRequest;
-
-        // create path and map variables
-        String localVarPath = "/api/rest/2.0/customization/email/delete";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {"application/json"};
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {"application/json"};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call deleteOrgEmailCustomizationValidateBeforeCall(
-            DeleteOrgEmailCustomizationRequest deleteOrgEmailCustomizationRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        // verify the required parameter 'deleteOrgEmailCustomizationRequest' is set
-        if (deleteOrgEmailCustomizationRequest == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'deleteOrgEmailCustomizationRequest' when"
-                            + " calling deleteOrgEmailCustomization(Async)");
-        }
-
-        return deleteOrgEmailCustomizationCall(deleteOrgEmailCustomizationRequest, _callback);
-    }
-
-    /**
-     * Version: 10.12.0.cl or later Deletes the configuration for the email customization. ####
-     * Pre-requisites Requires &#x60;DEVELOPER&#x60; (**has developer privilege**) or
-     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access
-     * Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance,
-     * the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required. **NOTE**:This
-     * endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.
-     * #### Usage guidelines - Call the search API endpoint to get the &#x60;org_identifier&#x60;
-     * from the response. - Use that &#x60;org_identifier&#x60; as a parameter in this API request.
-     *
-     * @param deleteOrgEmailCustomizationRequest (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Email Customization configuration successfully deleted. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public void deleteOrgEmailCustomization(
-            DeleteOrgEmailCustomizationRequest deleteOrgEmailCustomizationRequest)
-            throws ApiException {
-        deleteOrgEmailCustomizationWithHttpInfo(deleteOrgEmailCustomizationRequest);
-    }
-
-    /**
-     * Version: 10.12.0.cl or later Deletes the configuration for the email customization. ####
-     * Pre-requisites Requires &#x60;DEVELOPER&#x60; (**has developer privilege**) or
-     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access
-     * Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance,
-     * the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required. **NOTE**:This
-     * endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.
-     * #### Usage guidelines - Call the search API endpoint to get the &#x60;org_identifier&#x60;
-     * from the response. - Use that &#x60;org_identifier&#x60; as a parameter in this API request.
-     *
-     * @param deleteOrgEmailCustomizationRequest (required)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Email Customization configuration successfully deleted. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public ApiResponse<Void> deleteOrgEmailCustomizationWithHttpInfo(
-            DeleteOrgEmailCustomizationRequest deleteOrgEmailCustomizationRequest)
-            throws ApiException {
-        okhttp3.Call localVarCall =
-                deleteOrgEmailCustomizationValidateBeforeCall(
-                        deleteOrgEmailCustomizationRequest, null);
-        return localVarApiClient.execute(localVarCall);
-    }
-
-    /**
-     * (asynchronously) Version: 10.12.0.cl or later Deletes the configuration for the email
-     * customization. #### Pre-requisites Requires &#x60;DEVELOPER&#x60; (**has developer
-     * privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
-     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is
-     * required. **NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable
-     * this on your instance. #### Usage guidelines - Call the search API endpoint to get the
-     * &#x60;org_identifier&#x60; from the response. - Use that &#x60;org_identifier&#x60; as a
-     * parameter in this API request.
-     *
-     * @param deleteOrgEmailCustomizationRequest (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Email Customization configuration successfully deleted. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call deleteOrgEmailCustomizationAsync(
-            DeleteOrgEmailCustomizationRequest deleteOrgEmailCustomizationRequest,
-            final ApiCallback<Void> _callback)
-            throws ApiException {
-
-        okhttp3.Call localVarCall =
-                deleteOrgEmailCustomizationValidateBeforeCall(
-                        deleteOrgEmailCustomizationRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -9048,174 +6629,6 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
-     * Build call for deleteVariable
-     *
-     * @param identifier Unique id or name of the variable (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Deleting the variable is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call deleteVariableCall(String identifier, final ApiCallback _callback)
-            throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {};
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
-            basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath =
-                "/api/rest/2.0/template/variables/{identifier}/delete"
-                        .replace(
-                                "{" + "identifier" + "}",
-                                localVarApiClient.escapeString(identifier.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {"application/json"};
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call deleteVariableValidateBeforeCall(
-            String identifier, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'identifier' is set
-        if (identifier == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'identifier' when calling"
-                            + " deleteVariable(Async)");
-        }
-
-        return deleteVariableCall(identifier, _callback);
-    }
-
-    /**
-     * Delete a variable Version: 10.9.0.cl or later Allows deleting a variable from ThoughtSpot.
-     * Requires ADMINISTRATION role and TENANT scope. The API endpoint requires: * The variable
-     * identifier (ID or name) The operation will fail if: * The user lacks required permissions *
-     * The variable doesn&#39;t exist * The variable is being used by other objects
-     *
-     * @param identifier Unique id or name of the variable (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Deleting the variable is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public void deleteVariable(String identifier) throws ApiException {
-        deleteVariableWithHttpInfo(identifier);
-    }
-
-    /**
-     * Delete a variable Version: 10.9.0.cl or later Allows deleting a variable from ThoughtSpot.
-     * Requires ADMINISTRATION role and TENANT scope. The API endpoint requires: * The variable
-     * identifier (ID or name) The operation will fail if: * The user lacks required permissions *
-     * The variable doesn&#39;t exist * The variable is being used by other objects
-     *
-     * @param identifier Unique id or name of the variable (required)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Deleting the variable is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public ApiResponse<Void> deleteVariableWithHttpInfo(String identifier) throws ApiException {
-        okhttp3.Call localVarCall = deleteVariableValidateBeforeCall(identifier, null);
-        return localVarApiClient.execute(localVarCall);
-    }
-
-    /**
-     * (asynchronously) Delete a variable Version: 10.9.0.cl or later Allows deleting a variable
-     * from ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint requires: *
-     * The variable identifier (ID or name) The operation will fail if: * The user lacks required
-     * permissions * The variable doesn&#39;t exist * The variable is being used by other objects
-     *
-     * @param identifier Unique id or name of the variable (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Deleting the variable is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call deleteVariableAsync(String identifier, final ApiCallback<Void> _callback)
-            throws ApiException {
-
-        okhttp3.Call localVarCall = deleteVariableValidateBeforeCall(identifier, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
-        return localVarCall;
-    }
-    /**
      * Build call for deployCommit
      *
      * @param deployCommitRequest (required)
@@ -9685,7 +7098,10 @@ public class ThoughtSpotRestApi {
      * in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with
      * tables. Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
-     * to apply to the Answer data.
+     * to apply to the Answer data. The &#x60;record_size&#x60; attribute determines the number of
+     * records to retrieve in an API call. For more information about pagination, record size, and
+     * maximum row limit, see [Pagination and record size
+     * settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
      *
      * @param exportAnswerReportRequest (required)
      * @return File
@@ -9717,7 +7133,10 @@ public class ThoughtSpotRestApi {
      * in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with
      * tables. Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
-     * to apply to the Answer data.
+     * to apply to the Answer data. The &#x60;record_size&#x60; attribute determines the number of
+     * records to retrieve in an API call. For more information about pagination, record size, and
+     * maximum row limit, see [Pagination and record size
+     * settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
      *
      * @param exportAnswerReportRequest (required)
      * @return ApiResponse&lt;File&gt;
@@ -9751,7 +7170,10 @@ public class ThoughtSpotRestApi {
      * typing in the relevant extension. * HTML rendering is not supported for PDF exports of
      * Answers with tables. Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
-     * to apply to the Answer data.
+     * to apply to the Answer data. The &#x60;record_size&#x60; attribute determines the number of
+     * records to retrieve in an API call. For more information about pagination, record size, and
+     * maximum row limit, see [Pagination and record size
+     * settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
      *
      * @param exportAnswerReportRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -9883,11 +7305,6 @@ public class ThoughtSpotRestApi {
      * successful execution, the API returns the report with unsaved changes, including ad hoc
      * changes to visualizations. For more information, see [Liveboard Report
      * API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
-     * **NOTE**: Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in
-     * the PNG format in the resolution of your choice. To enable this on your instance, contact
-     * ThoughtSpot support. When this feature is enabled, the options
-     * &#x60;include_cover_page&#x60;,&#x60;include_filter_page&#x60; within the
-     * &#x60;png_options&#x60; will not be available for PNG exports.
      *
      * @param exportLiveboardReportRequest (required)
      * @return File
@@ -9928,11 +7345,6 @@ public class ThoughtSpotRestApi {
      * successful execution, the API returns the report with unsaved changes, including ad hoc
      * changes to visualizations. For more information, see [Liveboard Report
      * API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
-     * **NOTE**: Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in
-     * the PNG format in the resolution of your choice. To enable this on your instance, contact
-     * ThoughtSpot support. When this feature is enabled, the options
-     * &#x60;include_cover_page&#x60;,&#x60;include_filter_page&#x60; within the
-     * &#x60;png_options&#x60; will not be available for PNG exports.
      *
      * @param exportLiveboardReportRequest (required)
      * @return ApiResponse&lt;File&gt;
@@ -9974,11 +7386,6 @@ public class ThoughtSpotRestApi {
      * successful execution, the API returns the report with unsaved changes, including ad hoc
      * changes to visualizations. For more information, see [Liveboard Report
      * API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
-     * **NOTE**: Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in
-     * the PNG format in the resolution of your choice. To enable this on your instance, contact
-     * ThoughtSpot support. When this feature is enabled, the options
-     * &#x60;include_cover_page&#x60;,&#x60;include_filter_page&#x60; within the
-     * &#x60;png_options&#x60; will not be available for PNG exports.
      *
      * @param exportLiveboardReportRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -11073,246 +8480,6 @@ public class ThoughtSpotRestApi {
                 fetchAsyncImportTaskStatusValidateBeforeCall(
                         fetchAsyncImportTaskStatusRequest, _callback);
         Type localVarReturnType = new TypeToken<GetAsyncImportStatusResponse>() {}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for fetchColumnSecurityRules
-     *
-     * @param fetchColumnSecurityRulesRequest (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Successfully fetched column security rules </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Bad request - Table not found or invalid parameters </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden - User doesn&#39;t have permission to access security rules for this table </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call fetchColumnSecurityRulesCall(
-            FetchColumnSecurityRulesRequest fetchColumnSecurityRulesRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {};
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
-            basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = fetchColumnSecurityRulesRequest;
-
-        // create path and map variables
-        String localVarPath = "/api/rest/2.0/security/column/rules/fetch";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {"application/json"};
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {"application/json"};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call fetchColumnSecurityRulesValidateBeforeCall(
-            FetchColumnSecurityRulesRequest fetchColumnSecurityRulesRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        // verify the required parameter 'fetchColumnSecurityRulesRequest' is set
-        if (fetchColumnSecurityRulesRequest == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'fetchColumnSecurityRulesRequest' when calling"
-                            + " fetchColumnSecurityRules(Async)");
-        }
-
-        return fetchColumnSecurityRulesCall(fetchColumnSecurityRulesRequest, _callback);
-    }
-
-    /**
-     * Version: 10.12.0.cl or later Fetches column security rules for specified tables. This API
-     * endpoint retrieves column-level security rules configured for tables. It returns information
-     * about which columns are secured and which groups have access to those columns. #### Usage
-     * guidelines - Provide an array of table identifiers using either &#x60;identifier&#x60; (GUID
-     * or name) or &#x60;obj_identifier&#x60; (object ID) - At least one of &#x60;identifier&#x60;
-     * or &#x60;obj_identifier&#x60; must be provided for each table - The API returns column
-     * security rules for all specified tables - Users must have appropriate permissions to access
-     * security rules for the specified tables #### Required permissions -
-     * &#x60;ADMINISTRATION&#x60; - Can administer ThoughtSpot - &#x60;DATAMANAGEMENT&#x60; - Can
-     * manage data - &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; - Can manage worksheet views and
-     * tables #### Example request &#x60;&#x60;&#x60;json { \&quot;tables\&quot;: [ {
-     * \&quot;identifier\&quot;: \&quot;table-guid\&quot;, \&quot;obj_identifier\&quot;:
-     * \&quot;table-object-id\&quot; } ] } &#x60;&#x60;&#x60; #### Response format The API returns
-     * an array of &#x60;ColumnSecurityRuleResponse&#x60; objects wrapped in a &#x60;data&#x60;
-     * field. Each &#x60;ColumnSecurityRuleResponse&#x60; object contains: - Table information (GUID
-     * and object ID) - Array of column security rules with column details, group access, and source
-     * table information #### Example response &#x60;&#x60;&#x60;json { \&quot;data\&quot;: [ {
-     * \&quot;guid\&quot;: \&quot;table-guid\&quot;, \&quot;objId\&quot;:
-     * \&quot;table-object-id\&quot;, \&quot;columnSecurityRules\&quot;: [ { \&quot;column\&quot;: {
-     * \&quot;id\&quot;: \&quot;col_123\&quot;, \&quot;name\&quot;: \&quot;Salary\&quot; },
-     * \&quot;groups\&quot;: [ { \&quot;id\&quot;: \&quot;group_1\&quot;, \&quot;name\&quot;:
-     * \&quot;HR Department\&quot; } ], \&quot;sourceTableDetails\&quot;: { \&quot;id\&quot;:
-     * \&quot;source-table-guid\&quot;, \&quot;name\&quot;: \&quot;Employee_Data\&quot; } } ] } ] }
-     * &#x60;&#x60;&#x60;
-     *
-     * @param fetchColumnSecurityRulesRequest (required)
-     * @return List&lt;ColumnSecurityRuleResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Successfully fetched column security rules </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Bad request - Table not found or invalid parameters </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden - User doesn&#39;t have permission to access security rules for this table </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public List<ColumnSecurityRuleResponse> fetchColumnSecurityRules(
-            FetchColumnSecurityRulesRequest fetchColumnSecurityRulesRequest) throws ApiException {
-        ApiResponse<List<ColumnSecurityRuleResponse>> localVarResp =
-                fetchColumnSecurityRulesWithHttpInfo(fetchColumnSecurityRulesRequest);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Version: 10.12.0.cl or later Fetches column security rules for specified tables. This API
-     * endpoint retrieves column-level security rules configured for tables. It returns information
-     * about which columns are secured and which groups have access to those columns. #### Usage
-     * guidelines - Provide an array of table identifiers using either &#x60;identifier&#x60; (GUID
-     * or name) or &#x60;obj_identifier&#x60; (object ID) - At least one of &#x60;identifier&#x60;
-     * or &#x60;obj_identifier&#x60; must be provided for each table - The API returns column
-     * security rules for all specified tables - Users must have appropriate permissions to access
-     * security rules for the specified tables #### Required permissions -
-     * &#x60;ADMINISTRATION&#x60; - Can administer ThoughtSpot - &#x60;DATAMANAGEMENT&#x60; - Can
-     * manage data - &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; - Can manage worksheet views and
-     * tables #### Example request &#x60;&#x60;&#x60;json { \&quot;tables\&quot;: [ {
-     * \&quot;identifier\&quot;: \&quot;table-guid\&quot;, \&quot;obj_identifier\&quot;:
-     * \&quot;table-object-id\&quot; } ] } &#x60;&#x60;&#x60; #### Response format The API returns
-     * an array of &#x60;ColumnSecurityRuleResponse&#x60; objects wrapped in a &#x60;data&#x60;
-     * field. Each &#x60;ColumnSecurityRuleResponse&#x60; object contains: - Table information (GUID
-     * and object ID) - Array of column security rules with column details, group access, and source
-     * table information #### Example response &#x60;&#x60;&#x60;json { \&quot;data\&quot;: [ {
-     * \&quot;guid\&quot;: \&quot;table-guid\&quot;, \&quot;objId\&quot;:
-     * \&quot;table-object-id\&quot;, \&quot;columnSecurityRules\&quot;: [ { \&quot;column\&quot;: {
-     * \&quot;id\&quot;: \&quot;col_123\&quot;, \&quot;name\&quot;: \&quot;Salary\&quot; },
-     * \&quot;groups\&quot;: [ { \&quot;id\&quot;: \&quot;group_1\&quot;, \&quot;name\&quot;:
-     * \&quot;HR Department\&quot; } ], \&quot;sourceTableDetails\&quot;: { \&quot;id\&quot;:
-     * \&quot;source-table-guid\&quot;, \&quot;name\&quot;: \&quot;Employee_Data\&quot; } } ] } ] }
-     * &#x60;&#x60;&#x60;
-     *
-     * @param fetchColumnSecurityRulesRequest (required)
-     * @return ApiResponse&lt;List&lt;ColumnSecurityRuleResponse&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Successfully fetched column security rules </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Bad request - Table not found or invalid parameters </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden - User doesn&#39;t have permission to access security rules for this table </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public ApiResponse<List<ColumnSecurityRuleResponse>> fetchColumnSecurityRulesWithHttpInfo(
-            FetchColumnSecurityRulesRequest fetchColumnSecurityRulesRequest) throws ApiException {
-        okhttp3.Call localVarCall =
-                fetchColumnSecurityRulesValidateBeforeCall(fetchColumnSecurityRulesRequest, null);
-        Type localVarReturnType = new TypeToken<List<ColumnSecurityRuleResponse>>() {}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * (asynchronously) Version: 10.12.0.cl or later Fetches column security rules for specified
-     * tables. This API endpoint retrieves column-level security rules configured for tables. It
-     * returns information about which columns are secured and which groups have access to those
-     * columns. #### Usage guidelines - Provide an array of table identifiers using either
-     * &#x60;identifier&#x60; (GUID or name) or &#x60;obj_identifier&#x60; (object ID) - At least
-     * one of &#x60;identifier&#x60; or &#x60;obj_identifier&#x60; must be provided for each table -
-     * The API returns column security rules for all specified tables - Users must have appropriate
-     * permissions to access security rules for the specified tables #### Required permissions -
-     * &#x60;ADMINISTRATION&#x60; - Can administer ThoughtSpot - &#x60;DATAMANAGEMENT&#x60; - Can
-     * manage data - &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; - Can manage worksheet views and
-     * tables #### Example request &#x60;&#x60;&#x60;json { \&quot;tables\&quot;: [ {
-     * \&quot;identifier\&quot;: \&quot;table-guid\&quot;, \&quot;obj_identifier\&quot;:
-     * \&quot;table-object-id\&quot; } ] } &#x60;&#x60;&#x60; #### Response format The API returns
-     * an array of &#x60;ColumnSecurityRuleResponse&#x60; objects wrapped in a &#x60;data&#x60;
-     * field. Each &#x60;ColumnSecurityRuleResponse&#x60; object contains: - Table information (GUID
-     * and object ID) - Array of column security rules with column details, group access, and source
-     * table information #### Example response &#x60;&#x60;&#x60;json { \&quot;data\&quot;: [ {
-     * \&quot;guid\&quot;: \&quot;table-guid\&quot;, \&quot;objId\&quot;:
-     * \&quot;table-object-id\&quot;, \&quot;columnSecurityRules\&quot;: [ { \&quot;column\&quot;: {
-     * \&quot;id\&quot;: \&quot;col_123\&quot;, \&quot;name\&quot;: \&quot;Salary\&quot; },
-     * \&quot;groups\&quot;: [ { \&quot;id\&quot;: \&quot;group_1\&quot;, \&quot;name\&quot;:
-     * \&quot;HR Department\&quot; } ], \&quot;sourceTableDetails\&quot;: { \&quot;id\&quot;:
-     * \&quot;source-table-guid\&quot;, \&quot;name\&quot;: \&quot;Employee_Data\&quot; } } ] } ] }
-     * &#x60;&#x60;&#x60;
-     *
-     * @param fetchColumnSecurityRulesRequest (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Successfully fetched column security rules </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Bad request - Table not found or invalid parameters </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden - User doesn&#39;t have permission to access security rules for this table </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call fetchColumnSecurityRulesAsync(
-            FetchColumnSecurityRulesRequest fetchColumnSecurityRulesRequest,
-            final ApiCallback<List<ColumnSecurityRuleResponse>> _callback)
-            throws ApiException {
-
-        okhttp3.Call localVarCall =
-                fetchColumnSecurityRulesValidateBeforeCall(
-                        fetchColumnSecurityRulesRequest, _callback);
-        Type localVarReturnType = new TypeToken<List<ColumnSecurityRuleResponse>>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -12704,199 +9871,6 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
-     * Build call for generateCSV
-     *
-     * @param generateCSVRequest (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Generate custom calendar data based on specifications, as a CSV file. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call generateCSVCall(
-            GenerateCSVRequest generateCSVRequest, final ApiCallback _callback)
-            throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {};
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
-            basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = generateCSVRequest;
-
-        // create path and map variables
-        String localVarPath = "/api/rest/2.0/calendars/generate-csv";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {"application/json"};
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {"application/json"};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call generateCSVValidateBeforeCall(
-            GenerateCSVRequest generateCSVRequest, final ApiCallback _callback)
-            throws ApiException {
-        // verify the required parameter 'generateCSVRequest' is set
-        if (generateCSVRequest == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'generateCSVRequest' when calling"
-                            + " generateCSV(Async)");
-        }
-
-        return generateCSVCall(generateCSVRequest, _callback);
-    }
-
-    /**
-     * Version: 10.12.0.cl or later Exports a [custom
-     * calendar](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal) in the CSV format.
-     * Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60;
-     * (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot
-     * instance, the &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60; (**Can manage custom calendars**)
-     * privilege is required. #### Usage guidelines Use this API to download a custom calendar in
-     * the CSV file format. In your API request, specify the following parameters. * Start and end
-     * date of the calendar. For \&quot;month offset\&quot; calendars, the start date must match the
-     * month defined in the &#x60;month_offset&#x60; attribute. You can also specify optional
-     * parameters such as the starting day of the week and prefixes for the quarter and year labels.
-     *
-     * @param generateCSVRequest (required)
-     * @return Object
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Generate custom calendar data based on specifications, as a CSV file. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public Object generateCSV(GenerateCSVRequest generateCSVRequest) throws ApiException {
-        ApiResponse<Object> localVarResp = generateCSVWithHttpInfo(generateCSVRequest);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Version: 10.12.0.cl or later Exports a [custom
-     * calendar](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal) in the CSV format.
-     * Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60;
-     * (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot
-     * instance, the &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60; (**Can manage custom calendars**)
-     * privilege is required. #### Usage guidelines Use this API to download a custom calendar in
-     * the CSV file format. In your API request, specify the following parameters. * Start and end
-     * date of the calendar. For \&quot;month offset\&quot; calendars, the start date must match the
-     * month defined in the &#x60;month_offset&#x60; attribute. You can also specify optional
-     * parameters such as the starting day of the week and prefixes for the quarter and year labels.
-     *
-     * @param generateCSVRequest (required)
-     * @return ApiResponse&lt;Object&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Generate custom calendar data based on specifications, as a CSV file. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public ApiResponse<Object> generateCSVWithHttpInfo(GenerateCSVRequest generateCSVRequest)
-            throws ApiException {
-        okhttp3.Call localVarCall = generateCSVValidateBeforeCall(generateCSVRequest, null);
-        Type localVarReturnType = new TypeToken<Object>() {}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * (asynchronously) Version: 10.12.0.cl or later Exports a [custom
-     * calendar](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal) in the CSV format.
-     * Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60;
-     * (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot
-     * instance, the &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60; (**Can manage custom calendars**)
-     * privilege is required. #### Usage guidelines Use this API to download a custom calendar in
-     * the CSV file format. In your API request, specify the following parameters. * Start and end
-     * date of the calendar. For \&quot;month offset\&quot; calendars, the start date must match the
-     * month defined in the &#x60;month_offset&#x60; attribute. You can also specify optional
-     * parameters such as the starting day of the week and prefixes for the quarter and year labels.
-     *
-     * @param generateCSVRequest (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Generate custom calendar data based on specifications, as a CSV file. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call generateCSVAsync(
-            GenerateCSVRequest generateCSVRequest, final ApiCallback<Object> _callback)
-            throws ApiException {
-
-        okhttp3.Call localVarCall = generateCSVValidateBeforeCall(generateCSVRequest, _callback);
-        Type localVarReturnType = new TypeToken<Object>() {}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
      * Build call for getCurrentUserInfo
      *
      * @param _callback Callback for upload/download progress
@@ -12973,10 +9947,10 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 9.0.0.cl or later Retrieves details of the current user session for the token
-     * provided in the request header. Any ThoughtSpot user can access this endpoint and send an API
-     * request. The data returned in the API response varies according to user&#39;s privilege and
-     * object access permissions.
+     * Version: 9.0.0.cl or later Gets session information for the currently logged-in user. This
+     * API does not require any parameters to be passed in the request. Any ThoughtSpot user can
+     * access this endpoint and send an API request. The data returned in the API response varies
+     * according to user&#39;s privilege and object access permissions.
      *
      * @return User
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -12998,10 +9972,10 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 9.0.0.cl or later Retrieves details of the current user session for the token
-     * provided in the request header. Any ThoughtSpot user can access this endpoint and send an API
-     * request. The data returned in the API response varies according to user&#39;s privilege and
-     * object access permissions.
+     * Version: 9.0.0.cl or later Gets session information for the currently logged-in user. This
+     * API does not require any parameters to be passed in the request. Any ThoughtSpot user can
+     * access this endpoint and send an API request. The data returned in the API response varies
+     * according to user&#39;s privilege and object access permissions.
      *
      * @return ApiResponse&lt;User&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -13024,10 +9998,10 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 9.0.0.cl or later Retrieves details of the current user session for
-     * the token provided in the request header. Any ThoughtSpot user can access this endpoint and
-     * send an API request. The data returned in the API response varies according to user&#39;s
-     * privilege and object access permissions.
+     * (asynchronously) Version: 9.0.0.cl or later Gets session information for the currently
+     * logged-in user. This API does not require any parameters to be passed in the request. Any
+     * ThoughtSpot user can access this endpoint and send an API request. The data returned in the
+     * API response varies according to user&#39;s privilege and object access permissions.
      *
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -13129,12 +10103,10 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 9.4.0.cl or later Retrieves details of the current session token for the bearer
-     * token provided in the request header. This API endpoint does not create a new token. Instead,
-     * it returns details about the token, including the token string, creation time, expiration
-     * time, and the associated user. Use this endpoint to introspect your current session token,
-     * debug authentication issues, or when a frontend application needs session token details. Any
-     * ThoughtSpot user with a valid bearer token can access this endpoint and send an API request
+     * Get token for the currently logged-in user. Version: 9.4.0.cl or later Gets token details for
+     * the currently logged-in user. You can use this endpoint to obtain the token associated with
+     * the user&#39;s session. This API does not require any parameters to be passed in the request.
+     * Any ThoughtSpot user can access this endpoint and send an API request.
      *
      * @return GetTokenResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -13156,12 +10128,10 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 9.4.0.cl or later Retrieves details of the current session token for the bearer
-     * token provided in the request header. This API endpoint does not create a new token. Instead,
-     * it returns details about the token, including the token string, creation time, expiration
-     * time, and the associated user. Use this endpoint to introspect your current session token,
-     * debug authentication issues, or when a frontend application needs session token details. Any
-     * ThoughtSpot user with a valid bearer token can access this endpoint and send an API request
+     * Get token for the currently logged-in user. Version: 9.4.0.cl or later Gets token details for
+     * the currently logged-in user. You can use this endpoint to obtain the token associated with
+     * the user&#39;s session. This API does not require any parameters to be passed in the request.
+     * Any ThoughtSpot user can access this endpoint and send an API request.
      *
      * @return ApiResponse&lt;GetTokenResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -13184,13 +10154,10 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 9.4.0.cl or later Retrieves details of the current session token
-     * for the bearer token provided in the request header. This API endpoint does not create a new
-     * token. Instead, it returns details about the token, including the token string, creation
-     * time, expiration time, and the associated user. Use this endpoint to introspect your current
-     * session token, debug authentication issues, or when a frontend application needs session
-     * token details. Any ThoughtSpot user with a valid bearer token can access this endpoint and
-     * send an API request
+     * (asynchronously) Get token for the currently logged-in user. Version: 9.4.0.cl or later Gets
+     * token details for the currently logged-in user. You can use this endpoint to obtain the token
+     * associated with the user&#39;s session. This API does not require any parameters to be passed
+     * in the request. Any ThoughtSpot user can access this endpoint and send an API request.
      *
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -13521,209 +10488,6 @@ public class ThoughtSpotRestApi {
         okhttp3.Call localVarCall =
                 getCustomAccessTokenValidateBeforeCall(getCustomAccessTokenRequest, _callback);
         Type localVarReturnType = new TypeToken<AccessToken>() {}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for getDataSourceSuggestions
-     *
-     * @param getDataSourceSuggestionsRequest (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
-     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call getDataSourceSuggestionsCall(
-            GetDataSourceSuggestionsRequest getDataSourceSuggestionsRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {};
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
-            basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = getDataSourceSuggestionsRequest;
-
-        // create path and map variables
-        String localVarPath = "/api/rest/2.0/ai/data-source-suggestions";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {"application/json"};
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {"application/json"};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call getDataSourceSuggestionsValidateBeforeCall(
-            GetDataSourceSuggestionsRequest getDataSourceSuggestionsRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        // verify the required parameter 'getDataSourceSuggestionsRequest' is set
-        if (getDataSourceSuggestionsRequest == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'getDataSourceSuggestionsRequest' when calling"
-                            + " getDataSourceSuggestions(Async)");
-        }
-
-        return getDataSourceSuggestionsCall(getDataSourceSuggestionsRequest, _callback);
-    }
-
-    /**
-     * Version: 10.13.0.cl or later Provides relevant data source recommendations for a
-     * user-submitted natural language query. To use this API, the user must have at least
-     * view-level access to the underlying metadata entities referenced in the response. #### Usage
-     * guidelines The request must include a &#x60;query&#x60; string via the request body. The
-     * returned results include metadata such as: - &#x60;confidence&#x60;: a float indicating the
-     * model&#39;s confidence in the relevance of each recommendation - &#x60;details&#x60;:
-     * includes &#x60;data_source_identifier&#x60;, &#x60;data_source_name&#x60;, and
-     * &#x60;description&#x60; of each recommended data source - &#x60;reasoning&#x60;: rationale
-     * provided by the LLM to explain why each data source was recommended If the API request is
-     * successful, ThoughtSpot returns a ranked list of data sources, each annotated with relevant
-     * reasoning. &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes may
-     * be introduced before it is made Generally Available. &gt; * This endpoint requires Spotter —
-     * please contact ThoughtSpot Support to enable Spotter on your cluster.
-     *
-     * @param getDataSourceSuggestionsRequest (required)
-     * @return EurekaDataSourceSuggestionResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
-     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
-     * </table>
-     */
-    public EurekaDataSourceSuggestionResponse getDataSourceSuggestions(
-            GetDataSourceSuggestionsRequest getDataSourceSuggestionsRequest) throws ApiException {
-        ApiResponse<EurekaDataSourceSuggestionResponse> localVarResp =
-                getDataSourceSuggestionsWithHttpInfo(getDataSourceSuggestionsRequest);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Version: 10.13.0.cl or later Provides relevant data source recommendations for a
-     * user-submitted natural language query. To use this API, the user must have at least
-     * view-level access to the underlying metadata entities referenced in the response. #### Usage
-     * guidelines The request must include a &#x60;query&#x60; string via the request body. The
-     * returned results include metadata such as: - &#x60;confidence&#x60;: a float indicating the
-     * model&#39;s confidence in the relevance of each recommendation - &#x60;details&#x60;:
-     * includes &#x60;data_source_identifier&#x60;, &#x60;data_source_name&#x60;, and
-     * &#x60;description&#x60; of each recommended data source - &#x60;reasoning&#x60;: rationale
-     * provided by the LLM to explain why each data source was recommended If the API request is
-     * successful, ThoughtSpot returns a ranked list of data sources, each annotated with relevant
-     * reasoning. &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes may
-     * be introduced before it is made Generally Available. &gt; * This endpoint requires Spotter —
-     * please contact ThoughtSpot Support to enable Spotter on your cluster.
-     *
-     * @param getDataSourceSuggestionsRequest (required)
-     * @return ApiResponse&lt;EurekaDataSourceSuggestionResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
-     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
-     * </table>
-     */
-    public ApiResponse<EurekaDataSourceSuggestionResponse> getDataSourceSuggestionsWithHttpInfo(
-            GetDataSourceSuggestionsRequest getDataSourceSuggestionsRequest) throws ApiException {
-        okhttp3.Call localVarCall =
-                getDataSourceSuggestionsValidateBeforeCall(getDataSourceSuggestionsRequest, null);
-        Type localVarReturnType = new TypeToken<EurekaDataSourceSuggestionResponse>() {}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * (asynchronously) Version: 10.13.0.cl or later Provides relevant data source recommendations
-     * for a user-submitted natural language query. To use this API, the user must have at least
-     * view-level access to the underlying metadata entities referenced in the response. #### Usage
-     * guidelines The request must include a &#x60;query&#x60; string via the request body. The
-     * returned results include metadata such as: - &#x60;confidence&#x60;: a float indicating the
-     * model&#39;s confidence in the relevance of each recommendation - &#x60;details&#x60;:
-     * includes &#x60;data_source_identifier&#x60;, &#x60;data_source_name&#x60;, and
-     * &#x60;description&#x60; of each recommended data source - &#x60;reasoning&#x60;: rationale
-     * provided by the LLM to explain why each data source was recommended If the API request is
-     * successful, ThoughtSpot returns a ranked list of data sources, each annotated with relevant
-     * reasoning. &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes may
-     * be introduced before it is made Generally Available. &gt; * This endpoint requires Spotter —
-     * please contact ThoughtSpot Support to enable Spotter on your cluster.
-     *
-     * @param getDataSourceSuggestionsRequest (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
-     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call getDataSourceSuggestionsAsync(
-            GetDataSourceSuggestionsRequest getDataSourceSuggestionsRequest,
-            final ApiCallback<EurekaDataSourceSuggestionResponse> _callback)
-            throws ApiException {
-
-        okhttp3.Call localVarCall =
-                getDataSourceSuggestionsValidateBeforeCall(
-                        getDataSourceSuggestionsRequest, _callback);
-        Type localVarReturnType = new TypeToken<EurekaDataSourceSuggestionResponse>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -14231,227 +10995,6 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
-     * Build call for getRelevantQuestions
-     *
-     * @param getRelevantQuestionsRequest (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
-     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call getRelevantQuestionsCall(
-            GetRelevantQuestionsRequest getRelevantQuestionsRequest, final ApiCallback _callback)
-            throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {};
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
-            basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = getRelevantQuestionsRequest;
-
-        // create path and map variables
-        String localVarPath = "/api/rest/2.0/ai/relevant-questions/";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {"application/json"};
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {"application/json"};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call getRelevantQuestionsValidateBeforeCall(
-            GetRelevantQuestionsRequest getRelevantQuestionsRequest, final ApiCallback _callback)
-            throws ApiException {
-        // verify the required parameter 'getRelevantQuestionsRequest' is set
-        if (getRelevantQuestionsRequest == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'getRelevantQuestionsRequest' when calling"
-                            + " getRelevantQuestions(Async)");
-        }
-
-        return getRelevantQuestionsCall(getRelevantQuestionsRequest, _callback);
-    }
-
-    /**
-     * Version: 10.13.0.cl or later Breaks down a user-submitted query into a series of analytical
-     * sub-questions using relevant contextual metadata. To use this API, the user must have at
-     * least view-level access to the referenced metadata objects. #### Usage guidelines To
-     * accurately generate relevant questions, the request must include at least one of the
-     * following metadata identifiers within &#x60;metadata_context&#x60; :
-     * &#x60;conversation_identifier&#x60;, &#x60;answer_identifiers&#x60;,
-     * &#x60;liveboard_identifiers&#x60;, or &#x60;data_source_identifiers&#x60;. You can further
-     * enhance the quality and precision of breakdown by providing additional &#x60;ai_context&#x60;
-     * such as: - &#x60;content&#x60;: User provided content like text data, csv data as a string
-     * message to provide context &amp; potentially improve the quality of the response. -
-     * &#x60;instructions&#x60;: User specific text instructions sent to AI system for processing
-     * the query. Additional optional parameters include: - &#x60;limit_relevant_questions&#x60;:
-     * Controls the maximum number of relevant questions returned. Defaults to 5 if not specified. -
-     * &#x60;bypass_cache&#x60;: If set to true, forces fresh computation instead of returning
-     * cached results. If the API request is successful, ThoughtSpot returns a list of relevant
-     * analytical queries, each aligned with the user&#39;s original question. Each returned
-     * question includes the query string, along with the identifier and name of the corresponding
-     * data source. &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes
-     * may be introduced before the endpoint is made Generally Available. &gt; * This endpoint
-     * requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
-     *
-     * @param getRelevantQuestionsRequest (required)
-     * @return EurekaGetRelevantQuestionsResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
-     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
-     * </table>
-     */
-    public EurekaGetRelevantQuestionsResponse getRelevantQuestions(
-            GetRelevantQuestionsRequest getRelevantQuestionsRequest) throws ApiException {
-        ApiResponse<EurekaGetRelevantQuestionsResponse> localVarResp =
-                getRelevantQuestionsWithHttpInfo(getRelevantQuestionsRequest);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Version: 10.13.0.cl or later Breaks down a user-submitted query into a series of analytical
-     * sub-questions using relevant contextual metadata. To use this API, the user must have at
-     * least view-level access to the referenced metadata objects. #### Usage guidelines To
-     * accurately generate relevant questions, the request must include at least one of the
-     * following metadata identifiers within &#x60;metadata_context&#x60; :
-     * &#x60;conversation_identifier&#x60;, &#x60;answer_identifiers&#x60;,
-     * &#x60;liveboard_identifiers&#x60;, or &#x60;data_source_identifiers&#x60;. You can further
-     * enhance the quality and precision of breakdown by providing additional &#x60;ai_context&#x60;
-     * such as: - &#x60;content&#x60;: User provided content like text data, csv data as a string
-     * message to provide context &amp; potentially improve the quality of the response. -
-     * &#x60;instructions&#x60;: User specific text instructions sent to AI system for processing
-     * the query. Additional optional parameters include: - &#x60;limit_relevant_questions&#x60;:
-     * Controls the maximum number of relevant questions returned. Defaults to 5 if not specified. -
-     * &#x60;bypass_cache&#x60;: If set to true, forces fresh computation instead of returning
-     * cached results. If the API request is successful, ThoughtSpot returns a list of relevant
-     * analytical queries, each aligned with the user&#39;s original question. Each returned
-     * question includes the query string, along with the identifier and name of the corresponding
-     * data source. &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes
-     * may be introduced before the endpoint is made Generally Available. &gt; * This endpoint
-     * requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
-     *
-     * @param getRelevantQuestionsRequest (required)
-     * @return ApiResponse&lt;EurekaGetRelevantQuestionsResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
-     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
-     * </table>
-     */
-    public ApiResponse<EurekaGetRelevantQuestionsResponse> getRelevantQuestionsWithHttpInfo(
-            GetRelevantQuestionsRequest getRelevantQuestionsRequest) throws ApiException {
-        okhttp3.Call localVarCall =
-                getRelevantQuestionsValidateBeforeCall(getRelevantQuestionsRequest, null);
-        Type localVarReturnType = new TypeToken<EurekaGetRelevantQuestionsResponse>() {}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * (asynchronously) Version: 10.13.0.cl or later Breaks down a user-submitted query into a
-     * series of analytical sub-questions using relevant contextual metadata. To use this API, the
-     * user must have at least view-level access to the referenced metadata objects. #### Usage
-     * guidelines To accurately generate relevant questions, the request must include at least one
-     * of the following metadata identifiers within &#x60;metadata_context&#x60; :
-     * &#x60;conversation_identifier&#x60;, &#x60;answer_identifiers&#x60;,
-     * &#x60;liveboard_identifiers&#x60;, or &#x60;data_source_identifiers&#x60;. You can further
-     * enhance the quality and precision of breakdown by providing additional &#x60;ai_context&#x60;
-     * such as: - &#x60;content&#x60;: User provided content like text data, csv data as a string
-     * message to provide context &amp; potentially improve the quality of the response. -
-     * &#x60;instructions&#x60;: User specific text instructions sent to AI system for processing
-     * the query. Additional optional parameters include: - &#x60;limit_relevant_questions&#x60;:
-     * Controls the maximum number of relevant questions returned. Defaults to 5 if not specified. -
-     * &#x60;bypass_cache&#x60;: If set to true, forces fresh computation instead of returning
-     * cached results. If the API request is successful, ThoughtSpot returns a list of relevant
-     * analytical queries, each aligned with the user&#39;s original question. Each returned
-     * question includes the query string, along with the identifier and name of the corresponding
-     * data source. &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes
-     * may be introduced before the endpoint is made Generally Available. &gt; * This endpoint
-     * requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
-     *
-     * @param getRelevantQuestionsRequest (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
-     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call getRelevantQuestionsAsync(
-            GetRelevantQuestionsRequest getRelevantQuestionsRequest,
-            final ApiCallback<EurekaGetRelevantQuestionsResponse> _callback)
-            throws ApiException {
-
-        okhttp3.Call localVarCall =
-                getRelevantQuestionsValidateBeforeCall(getRelevantQuestionsRequest, _callback);
-        Type localVarReturnType = new TypeToken<EurekaGetRelevantQuestionsResponse>() {}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
      * Build call for getSystemConfig
      *
      * @param _callback Callback for upload/download progress
@@ -14862,7 +11405,7 @@ public class ThoughtSpotRestApi {
      * settings**) privilege is required. This API does not require any parameters to be passed in
      * the request.
      *
-     * @return SystemOverrideInfo
+     * @return Object
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
      * @http.response.details
@@ -14876,8 +11419,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public SystemOverrideInfo getSystemOverrideInfo() throws ApiException {
-        ApiResponse<SystemOverrideInfo> localVarResp = getSystemOverrideInfoWithHttpInfo();
+    public Object getSystemOverrideInfo() throws ApiException {
+        ApiResponse<Object> localVarResp = getSystemOverrideInfoWithHttpInfo();
         return localVarResp.getData();
     }
 
@@ -14889,7 +11432,7 @@ public class ThoughtSpotRestApi {
      * settings**) privilege is required. This API does not require any parameters to be passed in
      * the request.
      *
-     * @return ApiResponse&lt;SystemOverrideInfo&gt;
+     * @return ApiResponse&lt;Object&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
      * @http.response.details
@@ -14903,9 +11446,9 @@ public class ThoughtSpotRestApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public ApiResponse<SystemOverrideInfo> getSystemOverrideInfoWithHttpInfo() throws ApiException {
+    public ApiResponse<Object> getSystemOverrideInfoWithHttpInfo() throws ApiException {
         okhttp3.Call localVarCall = getSystemOverrideInfoValidateBeforeCall(null);
-        Type localVarReturnType = new TypeToken<SystemOverrideInfo>() {}.getType();
+        Type localVarReturnType = new TypeToken<Object>() {}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -14932,11 +11475,11 @@ public class ThoughtSpotRestApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public okhttp3.Call getSystemOverrideInfoAsync(final ApiCallback<SystemOverrideInfo> _callback)
+    public okhttp3.Call getSystemOverrideInfoAsync(final ApiCallback<Object> _callback)
             throws ApiException {
 
         okhttp3.Call localVarCall = getSystemOverrideInfoValidateBeforeCall(_callback);
-        Type localVarReturnType = new TypeToken<SystemOverrideInfo>() {}.getType();
+        Type localVarReturnType = new TypeToken<Object>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -16103,362 +12646,6 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
-     * Build call for parameterizeMetadata
-     *
-     * @param parameterizeMetadataRequest (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Parameterize successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call parameterizeMetadataCall(
-            ParameterizeMetadataRequest parameterizeMetadataRequest, final ApiCallback _callback)
-            throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {};
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
-            basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = parameterizeMetadataRequest;
-
-        // create path and map variables
-        String localVarPath = "/api/rest/2.0/metadata/parameterize";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {"application/json"};
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {"application/json"};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call parameterizeMetadataValidateBeforeCall(
-            ParameterizeMetadataRequest parameterizeMetadataRequest, final ApiCallback _callback)
-            throws ApiException {
-        // verify the required parameter 'parameterizeMetadataRequest' is set
-        if (parameterizeMetadataRequest == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'parameterizeMetadataRequest' when calling"
-                            + " parameterizeMetadata(Async)");
-        }
-
-        return parameterizeMetadataCall(parameterizeMetadataRequest, _callback);
-    }
-
-    /**
-     * Parameterize fields in metadata objects. Version: 10.9.0.cl or later Allows parameterizing
-     * fields in metadata objects in ThoughtSpot. Requires appropriate permissions to modify the
-     * metadata object. The API endpoint allows parameterizing the following types of metadata
-     * objects: * Logical Tables * Connections For a Logical Table the field type must be
-     * &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName * tableName
-     * For a Connection the field type is always &#x60;CONNECTION_PROPERTY&#x60;. We use the
-     * field_name in this case to specify the exact property of a connection which needs to be
-     * parameterized.
-     *
-     * @param parameterizeMetadataRequest (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Parameterize successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public void parameterizeMetadata(ParameterizeMetadataRequest parameterizeMetadataRequest)
-            throws ApiException {
-        parameterizeMetadataWithHttpInfo(parameterizeMetadataRequest);
-    }
-
-    /**
-     * Parameterize fields in metadata objects. Version: 10.9.0.cl or later Allows parameterizing
-     * fields in metadata objects in ThoughtSpot. Requires appropriate permissions to modify the
-     * metadata object. The API endpoint allows parameterizing the following types of metadata
-     * objects: * Logical Tables * Connections For a Logical Table the field type must be
-     * &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName * tableName
-     * For a Connection the field type is always &#x60;CONNECTION_PROPERTY&#x60;. We use the
-     * field_name in this case to specify the exact property of a connection which needs to be
-     * parameterized.
-     *
-     * @param parameterizeMetadataRequest (required)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Parameterize successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public ApiResponse<Void> parameterizeMetadataWithHttpInfo(
-            ParameterizeMetadataRequest parameterizeMetadataRequest) throws ApiException {
-        okhttp3.Call localVarCall =
-                parameterizeMetadataValidateBeforeCall(parameterizeMetadataRequest, null);
-        return localVarApiClient.execute(localVarCall);
-    }
-
-    /**
-     * (asynchronously) Parameterize fields in metadata objects. Version: 10.9.0.cl or later Allows
-     * parameterizing fields in metadata objects in ThoughtSpot. Requires appropriate permissions to
-     * modify the metadata object. The API endpoint allows parameterizing the following types of
-     * metadata objects: * Logical Tables * Connections For a Logical Table the field type must be
-     * &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName * tableName
-     * For a Connection the field type is always &#x60;CONNECTION_PROPERTY&#x60;. We use the
-     * field_name in this case to specify the exact property of a connection which needs to be
-     * parameterized.
-     *
-     * @param parameterizeMetadataRequest (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Parameterize successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call parameterizeMetadataAsync(
-            ParameterizeMetadataRequest parameterizeMetadataRequest,
-            final ApiCallback<Void> _callback)
-            throws ApiException {
-
-        okhttp3.Call localVarCall =
-                parameterizeMetadataValidateBeforeCall(parameterizeMetadataRequest, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for publishMetadata
-     *
-     * @param publishMetadataRequest (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Publishing metadata objects is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call publishMetadataCall(
-            PublishMetadataRequest publishMetadataRequest, final ApiCallback _callback)
-            throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {};
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
-            basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = publishMetadataRequest;
-
-        // create path and map variables
-        String localVarPath = "/api/rest/2.0/security/metadata/publish";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {"application/json"};
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {"application/json"};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call publishMetadataValidateBeforeCall(
-            PublishMetadataRequest publishMetadataRequest, final ApiCallback _callback)
-            throws ApiException {
-        // verify the required parameter 'publishMetadataRequest' is set
-        if (publishMetadataRequest == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'publishMetadataRequest' when calling"
-                            + " publishMetadata(Async)");
-        }
-
-        return publishMetadataCall(publishMetadataRequest, _callback);
-    }
-
-    /**
-     * Version: 10.9.0.cl or later Allows publishing metadata objects across organizations in
-     * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
-     * publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
-     * This API will essentially share the objects along with it&#39;s dependencies to the org
-     * admins of the orgs to which it is being published.
-     *
-     * @param publishMetadataRequest (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Publishing metadata objects is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public void publishMetadata(PublishMetadataRequest publishMetadataRequest) throws ApiException {
-        publishMetadataWithHttpInfo(publishMetadataRequest);
-    }
-
-    /**
-     * Version: 10.9.0.cl or later Allows publishing metadata objects across organizations in
-     * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
-     * publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
-     * This API will essentially share the objects along with it&#39;s dependencies to the org
-     * admins of the orgs to which it is being published.
-     *
-     * @param publishMetadataRequest (required)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Publishing metadata objects is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public ApiResponse<Void> publishMetadataWithHttpInfo(
-            PublishMetadataRequest publishMetadataRequest) throws ApiException {
-        okhttp3.Call localVarCall = publishMetadataValidateBeforeCall(publishMetadataRequest, null);
-        return localVarApiClient.execute(localVarCall);
-    }
-
-    /**
-     * (asynchronously) Version: 10.9.0.cl or later Allows publishing metadata objects across
-     * organizations in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint
-     * allows publishing the following types of metadata objects: * Liveboards * Answers * Logical
-     * Tables This API will essentially share the objects along with it&#39;s dependencies to the
-     * org admins of the orgs to which it is being published.
-     *
-     * @param publishMetadataRequest (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Publishing metadata objects is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call publishMetadataAsync(
-            PublishMetadataRequest publishMetadataRequest, final ApiCallback<Void> _callback)
-            throws ApiException {
-
-        okhttp3.Call localVarCall =
-                publishMetadataValidateBeforeCall(publishMetadataRequest, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
-        return localVarCall;
-    }
-    /**
      * Build call for queryGetDecomposedQuery
      *
      * @param queryGetDecomposedQueryRequest (required)
@@ -16474,10 +12661,7 @@ public class ThoughtSpotRestApi {
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
-     *
-     * @deprecated
      */
-    @Deprecated
     public okhttp3.Call queryGetDecomposedQueryCall(
             QueryGetDecomposedQueryRequest queryGetDecomposedQueryRequest,
             final ApiCallback _callback)
@@ -16534,7 +12718,6 @@ public class ThoughtSpotRestApi {
                 _callback);
     }
 
-    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call queryGetDecomposedQueryValidateBeforeCall(
             QueryGetDecomposedQueryRequest queryGetDecomposedQueryRequest,
@@ -16566,10 +12749,7 @@ public class ThoughtSpotRestApi {
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
-     *
-     * @deprecated
      */
-    @Deprecated
     public EurekaDecomposeQueryResponse queryGetDecomposedQuery(
             QueryGetDecomposedQueryRequest queryGetDecomposedQueryRequest) throws ApiException {
         ApiResponse<EurekaDecomposeQueryResponse> localVarResp =
@@ -16593,10 +12773,7 @@ public class ThoughtSpotRestApi {
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
-     *
-     * @deprecated
      */
-    @Deprecated
     public ApiResponse<EurekaDecomposeQueryResponse> queryGetDecomposedQueryWithHttpInfo(
             QueryGetDecomposedQueryRequest queryGetDecomposedQueryRequest) throws ApiException {
         okhttp3.Call localVarCall =
@@ -16622,10 +12799,7 @@ public class ThoughtSpotRestApi {
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
-     *
-     * @deprecated
      */
-    @Deprecated
     public okhttp3.Call queryGetDecomposedQueryAsync(
             QueryGetDecomposedQueryRequest queryGetDecomposedQueryRequest,
             final ApiCallback<EurekaDecomposeQueryResponse> _callback)
@@ -17188,206 +13362,6 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
-     * Build call for searchCalendars
-     *
-     * @param searchCalendarsRequest (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Custom calendar fetched successfully. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call searchCalendarsCall(
-            SearchCalendarsRequest searchCalendarsRequest, final ApiCallback _callback)
-            throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {};
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
-            basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = searchCalendarsRequest;
-
-        // create path and map variables
-        String localVarPath = "/api/rest/2.0/calendars/search";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {"application/json"};
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {"application/json"};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call searchCalendarsValidateBeforeCall(
-            SearchCalendarsRequest searchCalendarsRequest, final ApiCallback _callback)
-            throws ApiException {
-        // verify the required parameter 'searchCalendarsRequest' is set
-        if (searchCalendarsRequest == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'searchCalendarsRequest' when calling"
-                            + " searchCalendars(Async)");
-        }
-
-        return searchCalendarsCall(searchCalendarsRequest, _callback);
-    }
-
-    /**
-     * Version: 10.12.0.cl or later Gets a list of [custom
-     * calendars](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal). Requires
-     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can
-     * administer ThoughtSpot**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot
-     * instance, the &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60; (**Can manage custom calendars**)
-     * privilege is required. #### Usage guidelines By default, the API returns a list of custom
-     * calendars for all connection objects. To retrieve custom calendar details for a particular
-     * connection, specify the connection ID. You can also use other search parameters such as
-     * &#x60;name_pattern&#x60; and &#x60;sort_options&#x60; as search filters. The
-     * &#x60;name_pattern&#x60; parameter filters and returns only those objects that match the
-     * specified pattern. Use &#x60;%&#x60; as a wildcard for pattern matching.
-     *
-     * @param searchCalendarsRequest (required)
-     * @return List&lt;CalendarResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Custom calendar fetched successfully. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public List<CalendarResponse> searchCalendars(SearchCalendarsRequest searchCalendarsRequest)
-            throws ApiException {
-        ApiResponse<List<CalendarResponse>> localVarResp =
-                searchCalendarsWithHttpInfo(searchCalendarsRequest);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Version: 10.12.0.cl or later Gets a list of [custom
-     * calendars](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal). Requires
-     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can
-     * administer ThoughtSpot**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot
-     * instance, the &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60; (**Can manage custom calendars**)
-     * privilege is required. #### Usage guidelines By default, the API returns a list of custom
-     * calendars for all connection objects. To retrieve custom calendar details for a particular
-     * connection, specify the connection ID. You can also use other search parameters such as
-     * &#x60;name_pattern&#x60; and &#x60;sort_options&#x60; as search filters. The
-     * &#x60;name_pattern&#x60; parameter filters and returns only those objects that match the
-     * specified pattern. Use &#x60;%&#x60; as a wildcard for pattern matching.
-     *
-     * @param searchCalendarsRequest (required)
-     * @return ApiResponse&lt;List&lt;CalendarResponse&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Custom calendar fetched successfully. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public ApiResponse<List<CalendarResponse>> searchCalendarsWithHttpInfo(
-            SearchCalendarsRequest searchCalendarsRequest) throws ApiException {
-        okhttp3.Call localVarCall = searchCalendarsValidateBeforeCall(searchCalendarsRequest, null);
-        Type localVarReturnType = new TypeToken<List<CalendarResponse>>() {}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * (asynchronously) Version: 10.12.0.cl or later Gets a list of [custom
-     * calendars](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal). Requires
-     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can
-     * administer ThoughtSpot**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot
-     * instance, the &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60; (**Can manage custom calendars**)
-     * privilege is required. #### Usage guidelines By default, the API returns a list of custom
-     * calendars for all connection objects. To retrieve custom calendar details for a particular
-     * connection, specify the connection ID. You can also use other search parameters such as
-     * &#x60;name_pattern&#x60; and &#x60;sort_options&#x60; as search filters. The
-     * &#x60;name_pattern&#x60; parameter filters and returns only those objects that match the
-     * specified pattern. Use &#x60;%&#x60; as a wildcard for pattern matching.
-     *
-     * @param searchCalendarsRequest (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Custom calendar fetched successfully. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call searchCalendarsAsync(
-            SearchCalendarsRequest searchCalendarsRequest,
-            final ApiCallback<List<CalendarResponse>> _callback)
-            throws ApiException {
-
-        okhttp3.Call localVarCall =
-                searchCalendarsValidateBeforeCall(searchCalendarsRequest, _callback);
-        Type localVarReturnType = new TypeToken<List<CalendarResponse>>() {}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
      * Build call for searchCommits
      *
      * @param searchCommitsRequest (required)
@@ -17872,34 +13846,16 @@ public class ThoughtSpotRestApi {
      * fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth
      * authentication type. - &#x60;IAM&#x60;: For connections that have the IAM OAuth set up. This
      * authentication type is supported on Amazon Redshift connections only. - &#x60;EXTOAUTH&#x60;:
-     * For connections that have External OAuth set up. ThoughtSpot supports external [OAuth with
+     * For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with
      * Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/
      * connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data
      * connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). -
-     * &#x60;KEY_PAIR&#x60;: For connections that require Key Pair account credentials to
-     * authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
-     * supported on Snowflake connections only. - &#x60;OAUTH_WITH_PKCE&#x60;: For connections that
-     * require OAuth with PKCE account credentials to authenticate to the Cloud Data Warehouse and
-     * fetch data. This authentication type is supported on Snowflake, Starburst, Databricks, Denodo
-     * connections only. - &#x60;EXTOAUTH_WITH_PKCE&#x60;: For connections that require External
-     * OAuth With PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch
-     * data. This authentication type is supported on Snowflake connections only. -
-     * &#x60;OAUTH_WITH_PEZ&#x60;: For connections that require OAuth With PEZ account credentials
-     * to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
-     * supported on Amazon Redshift connections only. - &#x60;OAUTH_WITH_SERVICE_PRINCIPAL&#x60;:
-     * For connections that require OAuth With Service Principal account credentials to authenticate
-     * to the Cloud Data Warehouse and fetch data. This authentication type is supported on
-     * Databricks connections only. - &#x60;PERSONAL_ACCESS_TOKEN&#x60;: For connections that
-     * require Personal Access Token account credentials to authenticate to the Cloud Data Warehouse
-     * and fetch data. This authentication type is supported on Databricks connections only. -
-     * &#x60;OAUTH_CLIENT_CREDENTIALS&#x60;: For connections that require OAuth Client Credentials
-     * to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
-     * supported on Snowflake connections only. - To include more details about connection objects
-     * in the API response, set &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort
-     * the output by field names and filter connections by tags. **NOTE**: When filtering connection
-     * records by parameters other than &#x60;data_warehouse_types&#x60; or
-     * &#x60;tag_identifiers&#x60;, ensure that you set &#x60;record_size&#x60; to &#x60;-1&#x60;
-     * and &#x60;record_offset&#x60; to &#x60;0&#x60; for precise results.
+     * To include more details about connection objects in the API response, set
+     * &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort the output by field
+     * names and filter connections by tags. **NOTE**: When filtering connection records by
+     * parameters other than &#x60;data_warehouse_types&#x60; or &#x60;tag_identifiers&#x60;, ensure
+     * that you set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to
+     * &#x60;0&#x60; for precise results.
      *
      * @param searchConnectionRequest (required)
      * @return List&lt;SearchConnectionResponse&gt;
@@ -17963,34 +13919,16 @@ public class ThoughtSpotRestApi {
      * fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth
      * authentication type. - &#x60;IAM&#x60;: For connections that have the IAM OAuth set up. This
      * authentication type is supported on Amazon Redshift connections only. - &#x60;EXTOAUTH&#x60;:
-     * For connections that have External OAuth set up. ThoughtSpot supports external [OAuth with
+     * For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with
      * Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/
      * connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data
      * connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). -
-     * &#x60;KEY_PAIR&#x60;: For connections that require Key Pair account credentials to
-     * authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
-     * supported on Snowflake connections only. - &#x60;OAUTH_WITH_PKCE&#x60;: For connections that
-     * require OAuth with PKCE account credentials to authenticate to the Cloud Data Warehouse and
-     * fetch data. This authentication type is supported on Snowflake, Starburst, Databricks, Denodo
-     * connections only. - &#x60;EXTOAUTH_WITH_PKCE&#x60;: For connections that require External
-     * OAuth With PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch
-     * data. This authentication type is supported on Snowflake connections only. -
-     * &#x60;OAUTH_WITH_PEZ&#x60;: For connections that require OAuth With PEZ account credentials
-     * to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
-     * supported on Amazon Redshift connections only. - &#x60;OAUTH_WITH_SERVICE_PRINCIPAL&#x60;:
-     * For connections that require OAuth With Service Principal account credentials to authenticate
-     * to the Cloud Data Warehouse and fetch data. This authentication type is supported on
-     * Databricks connections only. - &#x60;PERSONAL_ACCESS_TOKEN&#x60;: For connections that
-     * require Personal Access Token account credentials to authenticate to the Cloud Data Warehouse
-     * and fetch data. This authentication type is supported on Databricks connections only. -
-     * &#x60;OAUTH_CLIENT_CREDENTIALS&#x60;: For connections that require OAuth Client Credentials
-     * to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
-     * supported on Snowflake connections only. - To include more details about connection objects
-     * in the API response, set &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort
-     * the output by field names and filter connections by tags. **NOTE**: When filtering connection
-     * records by parameters other than &#x60;data_warehouse_types&#x60; or
-     * &#x60;tag_identifiers&#x60;, ensure that you set &#x60;record_size&#x60; to &#x60;-1&#x60;
-     * and &#x60;record_offset&#x60; to &#x60;0&#x60; for precise results.
+     * To include more details about connection objects in the API response, set
+     * &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort the output by field
+     * names and filter connections by tags. **NOTE**: When filtering connection records by
+     * parameters other than &#x60;data_warehouse_types&#x60; or &#x60;tag_identifiers&#x60;, ensure
+     * that you set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to
+     * &#x60;0&#x60; for precise results.
      *
      * @param searchConnectionRequest (required)
      * @return ApiResponse&lt;List&lt;SearchConnectionResponse&gt;&gt;
@@ -18055,34 +13993,16 @@ public class ThoughtSpotRestApi {
      * fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth
      * authentication type. - &#x60;IAM&#x60;: For connections that have the IAM OAuth set up. This
      * authentication type is supported on Amazon Redshift connections only. - &#x60;EXTOAUTH&#x60;:
-     * For connections that have External OAuth set up. ThoughtSpot supports external [OAuth with
+     * For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with
      * Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/
      * connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data
      * connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). -
-     * &#x60;KEY_PAIR&#x60;: For connections that require Key Pair account credentials to
-     * authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
-     * supported on Snowflake connections only. - &#x60;OAUTH_WITH_PKCE&#x60;: For connections that
-     * require OAuth with PKCE account credentials to authenticate to the Cloud Data Warehouse and
-     * fetch data. This authentication type is supported on Snowflake, Starburst, Databricks, Denodo
-     * connections only. - &#x60;EXTOAUTH_WITH_PKCE&#x60;: For connections that require External
-     * OAuth With PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch
-     * data. This authentication type is supported on Snowflake connections only. -
-     * &#x60;OAUTH_WITH_PEZ&#x60;: For connections that require OAuth With PEZ account credentials
-     * to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
-     * supported on Amazon Redshift connections only. - &#x60;OAUTH_WITH_SERVICE_PRINCIPAL&#x60;:
-     * For connections that require OAuth With Service Principal account credentials to authenticate
-     * to the Cloud Data Warehouse and fetch data. This authentication type is supported on
-     * Databricks connections only. - &#x60;PERSONAL_ACCESS_TOKEN&#x60;: For connections that
-     * require Personal Access Token account credentials to authenticate to the Cloud Data Warehouse
-     * and fetch data. This authentication type is supported on Databricks connections only. -
-     * &#x60;OAUTH_CLIENT_CREDENTIALS&#x60;: For connections that require OAuth Client Credentials
-     * to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
-     * supported on Snowflake connections only. - To include more details about connection objects
-     * in the API response, set &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort
-     * the output by field names and filter connections by tags. **NOTE**: When filtering connection
-     * records by parameters other than &#x60;data_warehouse_types&#x60; or
-     * &#x60;tag_identifiers&#x60;, ensure that you set &#x60;record_size&#x60; to &#x60;-1&#x60;
-     * and &#x60;record_offset&#x60; to &#x60;0&#x60; for precise results.
+     * To include more details about connection objects in the API response, set
+     * &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort the output by field
+     * names and filter connections by tags. **NOTE**: When filtering connection records by
+     * parameters other than &#x60;data_warehouse_types&#x60; or &#x60;tag_identifiers&#x60;, ensure
+     * that you set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to
+     * &#x60;0&#x60; for precise results.
      *
      * @param searchConnectionRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -18492,193 +14412,6 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
-     * Build call for searchEmailCustomization
-     *
-     * @param searchEmailCustomizationRequest (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call searchEmailCustomizationCall(
-            SearchEmailCustomizationRequest searchEmailCustomizationRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {};
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
-            basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = searchEmailCustomizationRequest;
-
-        // create path and map variables
-        String localVarPath = "/api/rest/2.0/customization/email/search";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {"application/json"};
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {"application/json"};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call searchEmailCustomizationValidateBeforeCall(
-            SearchEmailCustomizationRequest searchEmailCustomizationRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        // verify the required parameter 'searchEmailCustomizationRequest' is set
-        if (searchEmailCustomizationRequest == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'searchEmailCustomizationRequest' when calling"
-                            + " searchEmailCustomization(Async)");
-        }
-
-        return searchEmailCustomizationCall(searchEmailCustomizationRequest, _callback);
-    }
-
-    /**
-     * Version: 10.10.0.cl or later Search the email customization configuration if any set for the
-     * ThoughtSpot system. #### Pre-requisites Requires &#x60;DEVELOPER&#x60; (**has developer
-     * privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
-     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is
-     * required. **NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable
-     * this on your instance.
-     *
-     * @param searchEmailCustomizationRequest (required)
-     * @return List&lt;CreateEmailCustomizationResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public List<CreateEmailCustomizationResponse> searchEmailCustomization(
-            SearchEmailCustomizationRequest searchEmailCustomizationRequest) throws ApiException {
-        ApiResponse<List<CreateEmailCustomizationResponse>> localVarResp =
-                searchEmailCustomizationWithHttpInfo(searchEmailCustomizationRequest);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Version: 10.10.0.cl or later Search the email customization configuration if any set for the
-     * ThoughtSpot system. #### Pre-requisites Requires &#x60;DEVELOPER&#x60; (**has developer
-     * privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
-     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is
-     * required. **NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable
-     * this on your instance.
-     *
-     * @param searchEmailCustomizationRequest (required)
-     * @return ApiResponse&lt;List&lt;CreateEmailCustomizationResponse&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public ApiResponse<List<CreateEmailCustomizationResponse>> searchEmailCustomizationWithHttpInfo(
-            SearchEmailCustomizationRequest searchEmailCustomizationRequest) throws ApiException {
-        okhttp3.Call localVarCall =
-                searchEmailCustomizationValidateBeforeCall(searchEmailCustomizationRequest, null);
-        Type localVarReturnType =
-                new TypeToken<List<CreateEmailCustomizationResponse>>() {}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * (asynchronously) Version: 10.10.0.cl or later Search the email customization configuration if
-     * any set for the ThoughtSpot system. #### Pre-requisites Requires &#x60;DEVELOPER&#x60; (**has
-     * developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**)
-     * privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
-     * &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required. **NOTE**:This
-     * endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.
-     *
-     * @param searchEmailCustomizationRequest (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call searchEmailCustomizationAsync(
-            SearchEmailCustomizationRequest searchEmailCustomizationRequest,
-            final ApiCallback<List<CreateEmailCustomizationResponse>> _callback)
-            throws ApiException {
-
-        okhttp3.Call localVarCall =
-                searchEmailCustomizationValidateBeforeCall(
-                        searchEmailCustomizationRequest, _callback);
-        Type localVarReturnType =
-                new TypeToken<List<CreateEmailCustomizationResponse>>() {}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
      * Build call for searchMetadata
      *
      * @param searchMetadataRequest (required)
@@ -18772,10 +14505,7 @@ public class ThoughtSpotRestApi {
      * all metadata objects, including users and groups. #### Usage guidelines - To get all metadata
      * objects, send the API request without any attributes. - To get metadata objects of a specific
      * type, set the &#x60;type&#x60; attribute. For example, to fetch a Worksheet, set the type as
-     * &#x60;LOGICAL_TABLE&#x60;. - To filter metadata objects within type
-     * &#x60;LOGICAL_TABLE&#x60;, set the &#x60;subtypes&#x60; attribute. For example, to fetch a
-     * Worksheet, set the type as &#x60;LOGICAL_TABLE&#x60; &amp; subtypes as
-     * &#x60;[WORKSHEET]&#x60;. - To get a specific metadata object, specify the GUID. - To
+     * &#x60;LOGICAL_TABLE&#x60;. - To get a specific metadata object, specify the GUID. - To
      * customize your search and filter the API response, you can use several parameters. You can
      * search for objects created or modified by specific users, by tags applied to the objects, or
      * by using the include parameters like &#x60;include_auto_created_objects&#x60;,
@@ -18783,17 +14513,12 @@ public class ThoughtSpotRestApi {
      * &#x60;include_incomplete_objects&#x60;, and so on. You can also define sorting options to
      * sort the data retrieved in the API response. - To get discoverable objects when linientmodel
      * is enabled you can use &#x60;include_discoverable_objects&#x60; as true else false. Default
-     * value is true. - For liveboard metadata type, to get the newer format, set the
-     * &#x60;liveboard_response_format&#x60; as V2. Default value is V1. - To retrieve only objects
-     * that are published, set the &#x60;include_only_published_objects&#x60; as true. Default value
-     * is false. **NOTE**: The following parameters support pagination of metadata records: -
-     * &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;subtypes&#x60; -
-     * &#x60;created_by_user_identifiers&#x60; - &#x60;modified_by_user_identifiers&#x60; -
-     * &#x60;owned_by_user_identifiers&#x60; - &#x60;exclude_objects&#x60; -
-     * &#x60;include_auto_created_objects&#x60; - &#x60;favorite_object_options&#x60; -
-     * &#x60;include_only_published_objects&#x60; If you are using other parameters to search
-     * metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to
-     * &#x60;0&#x60;.
+     * value is true. **NOTE**: The following parameters support pagination of metadata records: -
+     * &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;created_by_user_identifiers&#x60; -
+     * &#x60;modified_by_user_identifiers&#x60; - &#x60;owned_by_user_identifiers&#x60; -
+     * &#x60;exclude_objects&#x60; - &#x60;include_auto_created_objects&#x60; -
+     * &#x60;favorite_object_options&#x60; If you are using other parameters to search metadata, set
+     * &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60;.
      *
      * @param searchMetadataRequest (required)
      * @return List&lt;MetadataSearchResponse&gt;
@@ -18824,10 +14549,7 @@ public class ThoughtSpotRestApi {
      * all metadata objects, including users and groups. #### Usage guidelines - To get all metadata
      * objects, send the API request without any attributes. - To get metadata objects of a specific
      * type, set the &#x60;type&#x60; attribute. For example, to fetch a Worksheet, set the type as
-     * &#x60;LOGICAL_TABLE&#x60;. - To filter metadata objects within type
-     * &#x60;LOGICAL_TABLE&#x60;, set the &#x60;subtypes&#x60; attribute. For example, to fetch a
-     * Worksheet, set the type as &#x60;LOGICAL_TABLE&#x60; &amp; subtypes as
-     * &#x60;[WORKSHEET]&#x60;. - To get a specific metadata object, specify the GUID. - To
+     * &#x60;LOGICAL_TABLE&#x60;. - To get a specific metadata object, specify the GUID. - To
      * customize your search and filter the API response, you can use several parameters. You can
      * search for objects created or modified by specific users, by tags applied to the objects, or
      * by using the include parameters like &#x60;include_auto_created_objects&#x60;,
@@ -18835,17 +14557,12 @@ public class ThoughtSpotRestApi {
      * &#x60;include_incomplete_objects&#x60;, and so on. You can also define sorting options to
      * sort the data retrieved in the API response. - To get discoverable objects when linientmodel
      * is enabled you can use &#x60;include_discoverable_objects&#x60; as true else false. Default
-     * value is true. - For liveboard metadata type, to get the newer format, set the
-     * &#x60;liveboard_response_format&#x60; as V2. Default value is V1. - To retrieve only objects
-     * that are published, set the &#x60;include_only_published_objects&#x60; as true. Default value
-     * is false. **NOTE**: The following parameters support pagination of metadata records: -
-     * &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;subtypes&#x60; -
-     * &#x60;created_by_user_identifiers&#x60; - &#x60;modified_by_user_identifiers&#x60; -
-     * &#x60;owned_by_user_identifiers&#x60; - &#x60;exclude_objects&#x60; -
-     * &#x60;include_auto_created_objects&#x60; - &#x60;favorite_object_options&#x60; -
-     * &#x60;include_only_published_objects&#x60; If you are using other parameters to search
-     * metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to
-     * &#x60;0&#x60;.
+     * value is true. **NOTE**: The following parameters support pagination of metadata records: -
+     * &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;created_by_user_identifiers&#x60; -
+     * &#x60;modified_by_user_identifiers&#x60; - &#x60;owned_by_user_identifiers&#x60; -
+     * &#x60;exclude_objects&#x60; - &#x60;include_auto_created_objects&#x60; -
+     * &#x60;favorite_object_options&#x60; If you are using other parameters to search metadata, set
+     * &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60;.
      *
      * @param searchMetadataRequest (required)
      * @return ApiResponse&lt;List&lt;MetadataSearchResponse&gt;&gt;
@@ -18876,28 +14593,21 @@ public class ThoughtSpotRestApi {
      * view data for all metadata objects, including users and groups. #### Usage guidelines - To
      * get all metadata objects, send the API request without any attributes. - To get metadata
      * objects of a specific type, set the &#x60;type&#x60; attribute. For example, to fetch a
-     * Worksheet, set the type as &#x60;LOGICAL_TABLE&#x60;. - To filter metadata objects within
-     * type &#x60;LOGICAL_TABLE&#x60;, set the &#x60;subtypes&#x60; attribute. For example, to fetch
-     * a Worksheet, set the type as &#x60;LOGICAL_TABLE&#x60; &amp; subtypes as
-     * &#x60;[WORKSHEET]&#x60;. - To get a specific metadata object, specify the GUID. - To
-     * customize your search and filter the API response, you can use several parameters. You can
-     * search for objects created or modified by specific users, by tags applied to the objects, or
-     * by using the include parameters like &#x60;include_auto_created_objects&#x60;,
-     * &#x60;include_dependent_objects&#x60;, &#x60;include_headers&#x60;,
-     * &#x60;include_incomplete_objects&#x60;, and so on. You can also define sorting options to
-     * sort the data retrieved in the API response. - To get discoverable objects when linientmodel
-     * is enabled you can use &#x60;include_discoverable_objects&#x60; as true else false. Default
-     * value is true. - For liveboard metadata type, to get the newer format, set the
-     * &#x60;liveboard_response_format&#x60; as V2. Default value is V1. - To retrieve only objects
-     * that are published, set the &#x60;include_only_published_objects&#x60; as true. Default value
-     * is false. **NOTE**: The following parameters support pagination of metadata records: -
-     * &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;subtypes&#x60; -
+     * Worksheet, set the type as &#x60;LOGICAL_TABLE&#x60;. - To get a specific metadata object,
+     * specify the GUID. - To customize your search and filter the API response, you can use several
+     * parameters. You can search for objects created or modified by specific users, by tags applied
+     * to the objects, or by using the include parameters like
+     * &#x60;include_auto_created_objects&#x60;, &#x60;include_dependent_objects&#x60;,
+     * &#x60;include_headers&#x60;, &#x60;include_incomplete_objects&#x60;, and so on. You can also
+     * define sorting options to sort the data retrieved in the API response. - To get discoverable
+     * objects when linientmodel is enabled you can use &#x60;include_discoverable_objects&#x60; as
+     * true else false. Default value is true. **NOTE**: The following parameters support pagination
+     * of metadata records: - &#x60;tag_identifiers&#x60; - &#x60;type&#x60; -
      * &#x60;created_by_user_identifiers&#x60; - &#x60;modified_by_user_identifiers&#x60; -
      * &#x60;owned_by_user_identifiers&#x60; - &#x60;exclude_objects&#x60; -
-     * &#x60;include_auto_created_objects&#x60; - &#x60;favorite_object_options&#x60; -
-     * &#x60;include_only_published_objects&#x60; If you are using other parameters to search
-     * metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to
-     * &#x60;0&#x60;.
+     * &#x60;include_auto_created_objects&#x60; - &#x60;favorite_object_options&#x60; If you are
+     * using other parameters to search metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and
+     * &#x60;record_offset&#x60; to &#x60;0&#x60;.
      *
      * @param searchMetadataRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -20020,413 +15730,6 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
-     * Build call for searchVariables
-     *
-     * @param searchVariablesRequest (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> List of variables is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call searchVariablesCall(
-            SearchVariablesRequest searchVariablesRequest, final ApiCallback _callback)
-            throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {};
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
-            basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = searchVariablesRequest;
-
-        // create path and map variables
-        String localVarPath = "/api/rest/2.0/template/variables/search";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {"application/json"};
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {"application/json"};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call searchVariablesValidateBeforeCall(
-            SearchVariablesRequest searchVariablesRequest, final ApiCallback _callback)
-            throws ApiException {
-        // verify the required parameter 'searchVariablesRequest' is set
-        if (searchVariablesRequest == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'searchVariablesRequest' when calling"
-                            + " searchVariables(Async)");
-        }
-
-        return searchVariablesCall(searchVariablesRequest, _callback);
-    }
-
-    /**
-     * Search variables Version: 10.9.0.cl or later Allows searching for variables in ThoughtSpot.
-     * Requires ADMINISTRATION role. The API endpoint supports searching variables by: * Variable
-     * identifier (ID or name) * Variable type * Name pattern (case-insensitive, supports % for
-     * wildcard) The search results can be formatted in three ways: * METADATA_ONLY - Returns only
-     * variable metadata (default) * METADATA_AND_VALUES - Returns variable metadata and values *
-     * EDITABLE_METADATA_AND_VALUES - Returns only editable variable metadata and values The values
-     * can be filtered by scope: * org_identifier * principal_identifier * model_identifier
-     *
-     * @param searchVariablesRequest (required)
-     * @return List&lt;Variable&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> List of variables is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public List<Variable> searchVariables(SearchVariablesRequest searchVariablesRequest)
-            throws ApiException {
-        ApiResponse<List<Variable>> localVarResp =
-                searchVariablesWithHttpInfo(searchVariablesRequest);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Search variables Version: 10.9.0.cl or later Allows searching for variables in ThoughtSpot.
-     * Requires ADMINISTRATION role. The API endpoint supports searching variables by: * Variable
-     * identifier (ID or name) * Variable type * Name pattern (case-insensitive, supports % for
-     * wildcard) The search results can be formatted in three ways: * METADATA_ONLY - Returns only
-     * variable metadata (default) * METADATA_AND_VALUES - Returns variable metadata and values *
-     * EDITABLE_METADATA_AND_VALUES - Returns only editable variable metadata and values The values
-     * can be filtered by scope: * org_identifier * principal_identifier * model_identifier
-     *
-     * @param searchVariablesRequest (required)
-     * @return ApiResponse&lt;List&lt;Variable&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> List of variables is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public ApiResponse<List<Variable>> searchVariablesWithHttpInfo(
-            SearchVariablesRequest searchVariablesRequest) throws ApiException {
-        okhttp3.Call localVarCall = searchVariablesValidateBeforeCall(searchVariablesRequest, null);
-        Type localVarReturnType = new TypeToken<List<Variable>>() {}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * (asynchronously) Search variables Version: 10.9.0.cl or later Allows searching for variables
-     * in ThoughtSpot. Requires ADMINISTRATION role. The API endpoint supports searching variables
-     * by: * Variable identifier (ID or name) * Variable type * Name pattern (case-insensitive,
-     * supports % for wildcard) The search results can be formatted in three ways: * METADATA_ONLY -
-     * Returns only variable metadata (default) * METADATA_AND_VALUES - Returns variable metadata
-     * and values * EDITABLE_METADATA_AND_VALUES - Returns only editable variable metadata and
-     * values The values can be filtered by scope: * org_identifier * principal_identifier *
-     * model_identifier
-     *
-     * @param searchVariablesRequest (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> List of variables is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call searchVariablesAsync(
-            SearchVariablesRequest searchVariablesRequest,
-            final ApiCallback<List<Variable>> _callback)
-            throws ApiException {
-
-        okhttp3.Call localVarCall =
-                searchVariablesValidateBeforeCall(searchVariablesRequest, _callback);
-        Type localVarReturnType = new TypeToken<List<Variable>>() {}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for sendAgentMessageStreaming
-     *
-     * @param sendAgentMessageStreamingRequest (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
-     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call sendAgentMessageStreamingCall(
-            SendAgentMessageStreamingRequest sendAgentMessageStreamingRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {};
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
-            basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = sendAgentMessageStreamingRequest;
-
-        // create path and map variables
-        String localVarPath = "/api/rest/2.0/ai/agent/converse/sse";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {"application/json"};
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {"application/json"};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call sendAgentMessageStreamingValidateBeforeCall(
-            SendAgentMessageStreamingRequest sendAgentMessageStreamingRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        // verify the required parameter 'sendAgentMessageStreamingRequest' is set
-        if (sendAgentMessageStreamingRequest == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'sendAgentMessageStreamingRequest' when"
-                            + " calling sendAgentMessageStreaming(Async)");
-        }
-
-        return sendAgentMessageStreamingCall(sendAgentMessageStreamingRequest, _callback);
-    }
-
-    /**
-     * Version: 10.13.0.cl or later This API allows users to initiate or continue an agent (Spotter)
-     * conversation by submitting one or more natural language messages. To use this API, the user
-     * must have access to the relevant conversational session (via conversation_identifier) and
-     * submit at least one message. #### Usage guidelines To initiate or continue a conversation,
-     * the request must include: - &#x60;conversation_identifier&#x60;: a unique session ID for
-     * continuity and message tracking - &#x60;messages&#x60;: an array of one or more text
-     * messages, each with a value and type Additionally, user can specify what tool can be included
-     * &#x60;conversation_settings&#x60; parameter, which supports: -
-     * &#x60;enable_contextual_change_analysis&#x60; (default: false) -
-     * &#x60;enable_natural_language_answer_generation&#x60; (default: true) -
-     * &#x60;enable_reasoning&#x60; (default: false) If the request is valid, the API returns a
-     * stream of messages in real time, including: - &#x60;ack&#x60;: confirms receipt of the
-     * request - &#x60;text / text-chunk&#x60;: content chunks, optionally formatted (e.g.,
-     * markdown) - &#x60;answer&#x60;: the final structured response with metadata and analytics -
-     * &#x60;error&#x60;: if a failure occurs - &#x60;notification&#x60;: notification messages for
-     * operation being performed &gt; ###### Note: &gt; * This endpoint is currently in Beta.
-     * Breaking changes may be introduced before the endpoint is made Generally Available. &gt; *
-     * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your
-     * cluster. &gt; * The streaming protocol uses Server-Sent Events (SSE)
-     *
-     * @param sendAgentMessageStreamingRequest (required)
-     * @return SendAgentMessageResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
-     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
-     * </table>
-     */
-    public SendAgentMessageResponse sendAgentMessageStreaming(
-            SendAgentMessageStreamingRequest sendAgentMessageStreamingRequest) throws ApiException {
-        ApiResponse<SendAgentMessageResponse> localVarResp =
-                sendAgentMessageStreamingWithHttpInfo(sendAgentMessageStreamingRequest);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Version: 10.13.0.cl or later This API allows users to initiate or continue an agent (Spotter)
-     * conversation by submitting one or more natural language messages. To use this API, the user
-     * must have access to the relevant conversational session (via conversation_identifier) and
-     * submit at least one message. #### Usage guidelines To initiate or continue a conversation,
-     * the request must include: - &#x60;conversation_identifier&#x60;: a unique session ID for
-     * continuity and message tracking - &#x60;messages&#x60;: an array of one or more text
-     * messages, each with a value and type Additionally, user can specify what tool can be included
-     * &#x60;conversation_settings&#x60; parameter, which supports: -
-     * &#x60;enable_contextual_change_analysis&#x60; (default: false) -
-     * &#x60;enable_natural_language_answer_generation&#x60; (default: true) -
-     * &#x60;enable_reasoning&#x60; (default: false) If the request is valid, the API returns a
-     * stream of messages in real time, including: - &#x60;ack&#x60;: confirms receipt of the
-     * request - &#x60;text / text-chunk&#x60;: content chunks, optionally formatted (e.g.,
-     * markdown) - &#x60;answer&#x60;: the final structured response with metadata and analytics -
-     * &#x60;error&#x60;: if a failure occurs - &#x60;notification&#x60;: notification messages for
-     * operation being performed &gt; ###### Note: &gt; * This endpoint is currently in Beta.
-     * Breaking changes may be introduced before the endpoint is made Generally Available. &gt; *
-     * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your
-     * cluster. &gt; * The streaming protocol uses Server-Sent Events (SSE)
-     *
-     * @param sendAgentMessageStreamingRequest (required)
-     * @return ApiResponse&lt;SendAgentMessageResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
-     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
-     * </table>
-     */
-    public ApiResponse<SendAgentMessageResponse> sendAgentMessageStreamingWithHttpInfo(
-            SendAgentMessageStreamingRequest sendAgentMessageStreamingRequest) throws ApiException {
-        okhttp3.Call localVarCall =
-                sendAgentMessageStreamingValidateBeforeCall(sendAgentMessageStreamingRequest, null);
-        Type localVarReturnType = new TypeToken<SendAgentMessageResponse>() {}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * (asynchronously) Version: 10.13.0.cl or later This API allows users to initiate or continue
-     * an agent (Spotter) conversation by submitting one or more natural language messages. To use
-     * this API, the user must have access to the relevant conversational session (via
-     * conversation_identifier) and submit at least one message. #### Usage guidelines To initiate
-     * or continue a conversation, the request must include: - &#x60;conversation_identifier&#x60;:
-     * a unique session ID for continuity and message tracking - &#x60;messages&#x60;: an array of
-     * one or more text messages, each with a value and type Additionally, user can specify what
-     * tool can be included &#x60;conversation_settings&#x60; parameter, which supports: -
-     * &#x60;enable_contextual_change_analysis&#x60; (default: false) -
-     * &#x60;enable_natural_language_answer_generation&#x60; (default: true) -
-     * &#x60;enable_reasoning&#x60; (default: false) If the request is valid, the API returns a
-     * stream of messages in real time, including: - &#x60;ack&#x60;: confirms receipt of the
-     * request - &#x60;text / text-chunk&#x60;: content chunks, optionally formatted (e.g.,
-     * markdown) - &#x60;answer&#x60;: the final structured response with metadata and analytics -
-     * &#x60;error&#x60;: if a failure occurs - &#x60;notification&#x60;: notification messages for
-     * operation being performed &gt; ###### Note: &gt; * This endpoint is currently in Beta.
-     * Breaking changes may be introduced before the endpoint is made Generally Available. &gt; *
-     * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your
-     * cluster. &gt; * The streaming protocol uses Server-Sent Events (SSE)
-     *
-     * @param sendAgentMessageStreamingRequest (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
-     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call sendAgentMessageStreamingAsync(
-            SendAgentMessageStreamingRequest sendAgentMessageStreamingRequest,
-            final ApiCallback<SendAgentMessageResponse> _callback)
-            throws ApiException {
-
-        okhttp3.Call localVarCall =
-                sendAgentMessageStreamingValidateBeforeCall(
-                        sendAgentMessageStreamingRequest, _callback);
-        Type localVarReturnType = new TypeToken<SendAgentMessageResponse>() {}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
      * Build call for sendMessage
      *
      * @param conversationIdentifier Unique identifier of the conversation. (required)
@@ -21160,958 +16463,6 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
-     * Build call for unparameterizeMetadata
-     *
-     * @param unparameterizeMetadataRequest (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Successfuly removed parameters. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call unparameterizeMetadataCall(
-            UnparameterizeMetadataRequest unparameterizeMetadataRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {};
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
-            basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = unparameterizeMetadataRequest;
-
-        // create path and map variables
-        String localVarPath = "/api/rest/2.0/metadata/unparameterize";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {"application/json"};
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {"application/json"};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call unparameterizeMetadataValidateBeforeCall(
-            UnparameterizeMetadataRequest unparameterizeMetadataRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        // verify the required parameter 'unparameterizeMetadataRequest' is set
-        if (unparameterizeMetadataRequest == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'unparameterizeMetadataRequest' when calling"
-                            + " unparameterizeMetadata(Async)");
-        }
-
-        return unparameterizeMetadataCall(unparameterizeMetadataRequest, _callback);
-    }
-
-    /**
-     * Remove parameterization from fields in metadata objects. Version: 10.9.0.cl or later Allows
-     * removing parameterization from fields in metadata objects in ThoughtSpot. Requires
-     * appropriate permissions to modify the metadata object. The API endpoint allows
-     * unparameterizing the following types of metadata objects: * Logical Tables * Connections For
-     * a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: *
-     * databaseName * schemaName * tableName For a Connection the field type is always
-     * &#x60;CONNECTION_PROPERTY&#x60;. We use the field_name in this case to specify the exact
-     * property of a connection which needs to be unparameterized.
-     *
-     * @param unparameterizeMetadataRequest (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Successfuly removed parameters. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public void unparameterizeMetadata(UnparameterizeMetadataRequest unparameterizeMetadataRequest)
-            throws ApiException {
-        unparameterizeMetadataWithHttpInfo(unparameterizeMetadataRequest);
-    }
-
-    /**
-     * Remove parameterization from fields in metadata objects. Version: 10.9.0.cl or later Allows
-     * removing parameterization from fields in metadata objects in ThoughtSpot. Requires
-     * appropriate permissions to modify the metadata object. The API endpoint allows
-     * unparameterizing the following types of metadata objects: * Logical Tables * Connections For
-     * a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: *
-     * databaseName * schemaName * tableName For a Connection the field type is always
-     * &#x60;CONNECTION_PROPERTY&#x60;. We use the field_name in this case to specify the exact
-     * property of a connection which needs to be unparameterized.
-     *
-     * @param unparameterizeMetadataRequest (required)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Successfuly removed parameters. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public ApiResponse<Void> unparameterizeMetadataWithHttpInfo(
-            UnparameterizeMetadataRequest unparameterizeMetadataRequest) throws ApiException {
-        okhttp3.Call localVarCall =
-                unparameterizeMetadataValidateBeforeCall(unparameterizeMetadataRequest, null);
-        return localVarApiClient.execute(localVarCall);
-    }
-
-    /**
-     * (asynchronously) Remove parameterization from fields in metadata objects. Version: 10.9.0.cl
-     * or later Allows removing parameterization from fields in metadata objects in ThoughtSpot.
-     * Requires appropriate permissions to modify the metadata object. The API endpoint allows
-     * unparameterizing the following types of metadata objects: * Logical Tables * Connections For
-     * a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: *
-     * databaseName * schemaName * tableName For a Connection the field type is always
-     * &#x60;CONNECTION_PROPERTY&#x60;. We use the field_name in this case to specify the exact
-     * property of a connection which needs to be unparameterized.
-     *
-     * @param unparameterizeMetadataRequest (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Successfuly removed parameters. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call unparameterizeMetadataAsync(
-            UnparameterizeMetadataRequest unparameterizeMetadataRequest,
-            final ApiCallback<Void> _callback)
-            throws ApiException {
-
-        okhttp3.Call localVarCall =
-                unparameterizeMetadataValidateBeforeCall(unparameterizeMetadataRequest, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for unpublishMetadata
-     *
-     * @param unpublishMetadataRequest (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Unpublishing metadata objects is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call unpublishMetadataCall(
-            UnpublishMetadataRequest unpublishMetadataRequest, final ApiCallback _callback)
-            throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {};
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
-            basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = unpublishMetadataRequest;
-
-        // create path and map variables
-        String localVarPath = "/api/rest/2.0/security/metadata/unpublish";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {"application/json"};
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {"application/json"};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call unpublishMetadataValidateBeforeCall(
-            UnpublishMetadataRequest unpublishMetadataRequest, final ApiCallback _callback)
-            throws ApiException {
-        // verify the required parameter 'unpublishMetadataRequest' is set
-        if (unpublishMetadataRequest == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'unpublishMetadataRequest' when calling"
-                            + " unpublishMetadata(Async)");
-        }
-
-        return unpublishMetadataCall(unpublishMetadataRequest, _callback);
-    }
-
-    /**
-     * Version: 10.9.0.cl or later Allows unpublishing metadata objects from organizations in
-     * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
-     * unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
-     * When unpublishing objects, you can: * Include dependencies by setting
-     * &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no
-     * other published object is using them * Force unpublish by setting &#x60;force&#x60; to true -
-     * this will break all dependent objects in the unpublished organizations
-     *
-     * @param unpublishMetadataRequest (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Unpublishing metadata objects is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public void unpublishMetadata(UnpublishMetadataRequest unpublishMetadataRequest)
-            throws ApiException {
-        unpublishMetadataWithHttpInfo(unpublishMetadataRequest);
-    }
-
-    /**
-     * Version: 10.9.0.cl or later Allows unpublishing metadata objects from organizations in
-     * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
-     * unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
-     * When unpublishing objects, you can: * Include dependencies by setting
-     * &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no
-     * other published object is using them * Force unpublish by setting &#x60;force&#x60; to true -
-     * this will break all dependent objects in the unpublished organizations
-     *
-     * @param unpublishMetadataRequest (required)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Unpublishing metadata objects is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public ApiResponse<Void> unpublishMetadataWithHttpInfo(
-            UnpublishMetadataRequest unpublishMetadataRequest) throws ApiException {
-        okhttp3.Call localVarCall =
-                unpublishMetadataValidateBeforeCall(unpublishMetadataRequest, null);
-        return localVarApiClient.execute(localVarCall);
-    }
-
-    /**
-     * (asynchronously) Version: 10.9.0.cl or later Allows unpublishing metadata objects from
-     * organizations in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint
-     * allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical
-     * Tables When unpublishing objects, you can: * Include dependencies by setting
-     * &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no
-     * other published object is using them * Force unpublish by setting &#x60;force&#x60; to true -
-     * this will break all dependent objects in the unpublished organizations
-     *
-     * @param unpublishMetadataRequest (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Unpublishing metadata objects is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call unpublishMetadataAsync(
-            UnpublishMetadataRequest unpublishMetadataRequest, final ApiCallback<Void> _callback)
-            throws ApiException {
-
-        okhttp3.Call localVarCall =
-                unpublishMetadataValidateBeforeCall(unpublishMetadataRequest, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for updateCalendar
-     *
-     * @param calendarIdentifier Unique Id or name of the calendar. (required)
-     * @param updateCalendarRequest (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Custom calendar updated successfully. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call updateCalendarCall(
-            String calendarIdentifier,
-            UpdateCalendarRequest updateCalendarRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {};
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
-            basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = updateCalendarRequest;
-
-        // create path and map variables
-        String localVarPath =
-                "/api/rest/2.0/calendars/{calendar_identifier}/update"
-                        .replace(
-                                "{" + "calendar_identifier" + "}",
-                                localVarApiClient.escapeString(calendarIdentifier.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {"application/json"};
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {"application/json"};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call updateCalendarValidateBeforeCall(
-            String calendarIdentifier,
-            UpdateCalendarRequest updateCalendarRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        // verify the required parameter 'calendarIdentifier' is set
-        if (calendarIdentifier == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'calendarIdentifier' when calling"
-                            + " updateCalendar(Async)");
-        }
-
-        // verify the required parameter 'updateCalendarRequest' is set
-        if (updateCalendarRequest == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'updateCalendarRequest' when calling"
-                            + " updateCalendar(Async)");
-        }
-
-        return updateCalendarCall(calendarIdentifier, updateCalendarRequest, _callback);
-    }
-
-    /**
-     * Version: 10.12.0.cl or later Updates the properties of a [custom
-     * calendar](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal). Requires
-     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can
-     * administer ThoughtSpot**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot
-     * instance, the &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60; (**Can manage custom calendars**)
-     * privilege is required. #### Usage guidelines You can update the properties of a calendar
-     * using one of the following methods: * &#x60;FROM_INPUT_PARAMS&#x60; to update the calendar
-     * properties with the values defined in the API request. * &#x60;FROM_EXISTING_TABLE&#x60;
-     * Creates a calendar from the parameters defined in the API request. To update a custom
-     * calendar, specify the calendar ID as a path parameter in the request URL and the following
-     * parameters in the request body: * Connection ID and Table name * Database and schema name
-     * attributes: For most Cloud Data Warehouse (CDW) connectors, both &#x60;database_name&#x60;
-     * and &#x60;schema_name&#x60; attributes are required. However, the attribute requirements are
-     * conditional and vary based on the connector type and its metadata structure. For example, for
-     * connectors such as Teradata, MySQL, SingleSore, Amazon Aurora MySQL, Amazon RDS MySQL,
-     * Oracle, and GCP_MYSQL, the &#x60;schema_name&#x60; is required, whereas the
-     * &#x60;database_name&#x60; attribute is not. Similarly, connectors such as ClickHouse require
-     * you to specify the &#x60;database_name&#x60; and the schema specification in such cases is
-     * optional. The API allows you to modify the calendar type, month offset value, start and end
-     * date, starting day of the week, and prefixes assigned to the year and quarter labels. ####
-     * Examples Update a custom calendar using an existing Table in ThoughtSpot: &#x60;&#x60;&#x60;
-     * { \&quot;update_method\&quot;: \&quot;FROM_EXISTING_TABLE\&quot;,
-     * \&quot;table_reference\&quot;: { \&quot;connection_identifier\&quot;:
-     * \&quot;Connection1\&quot;, \&quot;database_name\&quot;: \&quot;db1\&quot;,
-     * \&quot;table_name\&quot;: \&quot;custom_calendar_2025\&quot;, \&quot;schame_name\&quot;:
-     * \&quot;schemaVar\&quot; } } &#x60;&#x60;&#x60; Update a custom calendar with the attributes
-     * defined in the API request: &#x60;&#x60;&#x60; { \&quot;update_method\&quot;:
-     * \&quot;FROM_INPUT_PARAMS\&quot;, \&quot;table_reference\&quot;: {
-     * \&quot;connection_identifier\&quot;: \&quot;Connection1\&quot;, \&quot;database_name\&quot;:
-     * \&quot;db1\&quot;, \&quot;table_name\&quot;: \&quot;custom_calendar_2025\&quot;,
-     * \&quot;schame_name\&quot;: \&quot;schemaVar\&quot; }, \&quot;month_offset\&quot;:
-     * \&quot;August\&quot;, \&quot;start_day_of_week\&quot;: \&quot;Monday\&quot;,
-     * \&quot;start_date\&quot;: \&quot;08/01/2025\&quot;, \&quot;end_date\&quot;:
-     * \&quot;07/31/2026\&quot; } &#x60;&#x60;&#x60;
-     *
-     * @param calendarIdentifier Unique Id or name of the calendar. (required)
-     * @param updateCalendarRequest (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Custom calendar updated successfully. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public void updateCalendar(
-            String calendarIdentifier, UpdateCalendarRequest updateCalendarRequest)
-            throws ApiException {
-        updateCalendarWithHttpInfo(calendarIdentifier, updateCalendarRequest);
-    }
-
-    /**
-     * Version: 10.12.0.cl or later Updates the properties of a [custom
-     * calendar](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal). Requires
-     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can
-     * administer ThoughtSpot**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot
-     * instance, the &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60; (**Can manage custom calendars**)
-     * privilege is required. #### Usage guidelines You can update the properties of a calendar
-     * using one of the following methods: * &#x60;FROM_INPUT_PARAMS&#x60; to update the calendar
-     * properties with the values defined in the API request. * &#x60;FROM_EXISTING_TABLE&#x60;
-     * Creates a calendar from the parameters defined in the API request. To update a custom
-     * calendar, specify the calendar ID as a path parameter in the request URL and the following
-     * parameters in the request body: * Connection ID and Table name * Database and schema name
-     * attributes: For most Cloud Data Warehouse (CDW) connectors, both &#x60;database_name&#x60;
-     * and &#x60;schema_name&#x60; attributes are required. However, the attribute requirements are
-     * conditional and vary based on the connector type and its metadata structure. For example, for
-     * connectors such as Teradata, MySQL, SingleSore, Amazon Aurora MySQL, Amazon RDS MySQL,
-     * Oracle, and GCP_MYSQL, the &#x60;schema_name&#x60; is required, whereas the
-     * &#x60;database_name&#x60; attribute is not. Similarly, connectors such as ClickHouse require
-     * you to specify the &#x60;database_name&#x60; and the schema specification in such cases is
-     * optional. The API allows you to modify the calendar type, month offset value, start and end
-     * date, starting day of the week, and prefixes assigned to the year and quarter labels. ####
-     * Examples Update a custom calendar using an existing Table in ThoughtSpot: &#x60;&#x60;&#x60;
-     * { \&quot;update_method\&quot;: \&quot;FROM_EXISTING_TABLE\&quot;,
-     * \&quot;table_reference\&quot;: { \&quot;connection_identifier\&quot;:
-     * \&quot;Connection1\&quot;, \&quot;database_name\&quot;: \&quot;db1\&quot;,
-     * \&quot;table_name\&quot;: \&quot;custom_calendar_2025\&quot;, \&quot;schame_name\&quot;:
-     * \&quot;schemaVar\&quot; } } &#x60;&#x60;&#x60; Update a custom calendar with the attributes
-     * defined in the API request: &#x60;&#x60;&#x60; { \&quot;update_method\&quot;:
-     * \&quot;FROM_INPUT_PARAMS\&quot;, \&quot;table_reference\&quot;: {
-     * \&quot;connection_identifier\&quot;: \&quot;Connection1\&quot;, \&quot;database_name\&quot;:
-     * \&quot;db1\&quot;, \&quot;table_name\&quot;: \&quot;custom_calendar_2025\&quot;,
-     * \&quot;schame_name\&quot;: \&quot;schemaVar\&quot; }, \&quot;month_offset\&quot;:
-     * \&quot;August\&quot;, \&quot;start_day_of_week\&quot;: \&quot;Monday\&quot;,
-     * \&quot;start_date\&quot;: \&quot;08/01/2025\&quot;, \&quot;end_date\&quot;:
-     * \&quot;07/31/2026\&quot; } &#x60;&#x60;&#x60;
-     *
-     * @param calendarIdentifier Unique Id or name of the calendar. (required)
-     * @param updateCalendarRequest (required)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Custom calendar updated successfully. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public ApiResponse<Void> updateCalendarWithHttpInfo(
-            String calendarIdentifier, UpdateCalendarRequest updateCalendarRequest)
-            throws ApiException {
-        okhttp3.Call localVarCall =
-                updateCalendarValidateBeforeCall(calendarIdentifier, updateCalendarRequest, null);
-        return localVarApiClient.execute(localVarCall);
-    }
-
-    /**
-     * (asynchronously) Version: 10.12.0.cl or later Updates the properties of a [custom
-     * calendar](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal). Requires
-     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can
-     * administer ThoughtSpot**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot
-     * instance, the &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60; (**Can manage custom calendars**)
-     * privilege is required. #### Usage guidelines You can update the properties of a calendar
-     * using one of the following methods: * &#x60;FROM_INPUT_PARAMS&#x60; to update the calendar
-     * properties with the values defined in the API request. * &#x60;FROM_EXISTING_TABLE&#x60;
-     * Creates a calendar from the parameters defined in the API request. To update a custom
-     * calendar, specify the calendar ID as a path parameter in the request URL and the following
-     * parameters in the request body: * Connection ID and Table name * Database and schema name
-     * attributes: For most Cloud Data Warehouse (CDW) connectors, both &#x60;database_name&#x60;
-     * and &#x60;schema_name&#x60; attributes are required. However, the attribute requirements are
-     * conditional and vary based on the connector type and its metadata structure. For example, for
-     * connectors such as Teradata, MySQL, SingleSore, Amazon Aurora MySQL, Amazon RDS MySQL,
-     * Oracle, and GCP_MYSQL, the &#x60;schema_name&#x60; is required, whereas the
-     * &#x60;database_name&#x60; attribute is not. Similarly, connectors such as ClickHouse require
-     * you to specify the &#x60;database_name&#x60; and the schema specification in such cases is
-     * optional. The API allows you to modify the calendar type, month offset value, start and end
-     * date, starting day of the week, and prefixes assigned to the year and quarter labels. ####
-     * Examples Update a custom calendar using an existing Table in ThoughtSpot: &#x60;&#x60;&#x60;
-     * { \&quot;update_method\&quot;: \&quot;FROM_EXISTING_TABLE\&quot;,
-     * \&quot;table_reference\&quot;: { \&quot;connection_identifier\&quot;:
-     * \&quot;Connection1\&quot;, \&quot;database_name\&quot;: \&quot;db1\&quot;,
-     * \&quot;table_name\&quot;: \&quot;custom_calendar_2025\&quot;, \&quot;schame_name\&quot;:
-     * \&quot;schemaVar\&quot; } } &#x60;&#x60;&#x60; Update a custom calendar with the attributes
-     * defined in the API request: &#x60;&#x60;&#x60; { \&quot;update_method\&quot;:
-     * \&quot;FROM_INPUT_PARAMS\&quot;, \&quot;table_reference\&quot;: {
-     * \&quot;connection_identifier\&quot;: \&quot;Connection1\&quot;, \&quot;database_name\&quot;:
-     * \&quot;db1\&quot;, \&quot;table_name\&quot;: \&quot;custom_calendar_2025\&quot;,
-     * \&quot;schame_name\&quot;: \&quot;schemaVar\&quot; }, \&quot;month_offset\&quot;:
-     * \&quot;August\&quot;, \&quot;start_day_of_week\&quot;: \&quot;Monday\&quot;,
-     * \&quot;start_date\&quot;: \&quot;08/01/2025\&quot;, \&quot;end_date\&quot;:
-     * \&quot;07/31/2026\&quot; } &#x60;&#x60;&#x60;
-     *
-     * @param calendarIdentifier Unique Id or name of the calendar. (required)
-     * @param updateCalendarRequest (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Custom calendar updated successfully. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call updateCalendarAsync(
-            String calendarIdentifier,
-            UpdateCalendarRequest updateCalendarRequest,
-            final ApiCallback<Void> _callback)
-            throws ApiException {
-
-        okhttp3.Call localVarCall =
-                updateCalendarValidateBeforeCall(
-                        calendarIdentifier, updateCalendarRequest, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for updateColumnSecurityRules
-     *
-     * @param updateColumnSecurityRulesRequest (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Successfully updated column security rules </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Bad request - Invalid parameters or table not found </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden - User doesn&#39;t have permission to modify security rules for this table </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call updateColumnSecurityRulesCall(
-            UpdateColumnSecurityRulesRequest updateColumnSecurityRulesRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {};
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
-            basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = updateColumnSecurityRulesRequest;
-
-        // create path and map variables
-        String localVarPath = "/api/rest/2.0/security/column/rules/update";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {"application/json"};
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {"application/json"};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call updateColumnSecurityRulesValidateBeforeCall(
-            UpdateColumnSecurityRulesRequest updateColumnSecurityRulesRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        // verify the required parameter 'updateColumnSecurityRulesRequest' is set
-        if (updateColumnSecurityRulesRequest == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'updateColumnSecurityRulesRequest' when"
-                            + " calling updateColumnSecurityRules(Async)");
-        }
-
-        return updateColumnSecurityRulesCall(updateColumnSecurityRulesRequest, _callback);
-    }
-
-    /**
-     * Version: 10.12.0.cl or later Creates, updates, or deletes column security rules for specified
-     * tables. This API endpoint allows you to create, update, or delete column-level security rules
-     * on columns of a table. The operation follows an \&quot;all or none\&quot; policy: if defining
-     * security rules for any of the provided columns fails, the entire operation will be rolled
-     * back, and no rules will be created. #### Usage guidelines - Provide table identifier using
-     * either &#x60;identifier&#x60; (GUID or name) or &#x60;obj_identifier&#x60; (object ID) - Use
-     * &#x60;clear_csr: true&#x60; to remove all column security rules from the table - For each
-     * column, specify the security rule using &#x60;column_security_rules&#x60; array - Use
-     * &#x60;is_unsecured: true&#x60; to mark a specific column as unprotected - Use
-     * &#x60;group_access&#x60; operations to manage group associations: - &#x60;ADD&#x60;: Add
-     * groups to the column&#39;s access list - &#x60;REMOVE&#x60;: Remove groups from the
-     * column&#39;s access list - &#x60;REPLACE&#x60;: Replace all existing groups with the
-     * specified groups #### Required permissions - &#x60;ADMINISTRATION&#x60; - Can administer
-     * ThoughtSpot - &#x60;DATAMANAGEMENT&#x60; - Can manage data (if RBAC is disabled) -
-     * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; - Can manage worksheet views and tables (if
-     * RBAC is enabled) #### Example request &#x60;&#x60;&#x60;json { \&quot;identifier\&quot;:
-     * \&quot;table-guid\&quot;, \&quot;obj_identifier\&quot;: \&quot;table-object-id\&quot;,
-     * \&quot;clear_csr\&quot;: false, \&quot;column_security_rules\&quot;: [ {
-     * \&quot;column_identifier\&quot;: \&quot;col id or col name\&quot;,
-     * \&quot;is_unsecured\&quot;: false, \&quot;group_access\&quot;: [ { \&quot;operation\&quot;:
-     * \&quot;ADD\&quot;, \&quot;group_identifiers\&quot;: [\&quot;hr_group_id\&quot;,
-     * \&quot;hr_group_name\&quot;, \&quot;finance_group_id\&quot;] } ] }, {
-     * \&quot;column_identifier\&quot;: \&quot;col id or col name\&quot;,
-     * \&quot;is_unsecured\&quot;: true }, { \&quot;column_identifier\&quot;: \&quot;col id or col
-     * name\&quot;, \&quot;is_unsecured\&quot;: false, \&quot;group_access\&quot;: [ {
-     * \&quot;operation\&quot;: \&quot;REPLACE\&quot;, \&quot;group_identifiers\&quot;:
-     * [\&quot;management_group_id\&quot;, \&quot;management_group_name\&quot;] } ] } ] }
-     * &#x60;&#x60;&#x60; #### Request Body Schema - &#x60;identifier&#x60; (string, optional): GUID
-     * or name of the table for which we want to create column security rules -
-     * &#x60;obj_identifier&#x60; (string, optional): The object ID of the table -
-     * &#x60;clear_csr&#x60; (boolean, optional): If true, then all the secured columns will be
-     * marked as unprotected, and all the group associations will be removed -
-     * &#x60;column_security_rules&#x60; (array of objects, required): An array where each object
-     * defines the security rule for a specific column Each column security rule object contains: -
-     * &#x60;column_identifier&#x60; (string, required): Column identifier (col_id or name) -
-     * &#x60;is_unsecured&#x60; (boolean, optional): If true, the column will be marked as
-     * unprotected and all groups associated with it will be removed - &#x60;group_access&#x60;
-     * (array of objects, optional): Array of group operation objects Each group operation object
-     * contains: - &#x60;operation&#x60; (string, required): Operation type - ADD, REMOVE, or
-     * REPLACE - &#x60;group_identifiers&#x60; (array of strings, required): Array of group
-     * identifiers (name or GUID) on which the operation will be performed #### Response This API
-     * does not return any response body. A successful operation returns HTTP 200 status code. ####
-     * Operation Types - **ADD**: Adds the specified groups to the column&#39;s access list -
-     * **REMOVE**: Removes the specified groups from the column&#39;s access list - **REPLACE**:
-     * Replaces all existing groups with the specified groups
-     *
-     * @param updateColumnSecurityRulesRequest (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Successfully updated column security rules </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Bad request - Invalid parameters or table not found </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden - User doesn&#39;t have permission to modify security rules for this table </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public void updateColumnSecurityRules(
-            UpdateColumnSecurityRulesRequest updateColumnSecurityRulesRequest) throws ApiException {
-        updateColumnSecurityRulesWithHttpInfo(updateColumnSecurityRulesRequest);
-    }
-
-    /**
-     * Version: 10.12.0.cl or later Creates, updates, or deletes column security rules for specified
-     * tables. This API endpoint allows you to create, update, or delete column-level security rules
-     * on columns of a table. The operation follows an \&quot;all or none\&quot; policy: if defining
-     * security rules for any of the provided columns fails, the entire operation will be rolled
-     * back, and no rules will be created. #### Usage guidelines - Provide table identifier using
-     * either &#x60;identifier&#x60; (GUID or name) or &#x60;obj_identifier&#x60; (object ID) - Use
-     * &#x60;clear_csr: true&#x60; to remove all column security rules from the table - For each
-     * column, specify the security rule using &#x60;column_security_rules&#x60; array - Use
-     * &#x60;is_unsecured: true&#x60; to mark a specific column as unprotected - Use
-     * &#x60;group_access&#x60; operations to manage group associations: - &#x60;ADD&#x60;: Add
-     * groups to the column&#39;s access list - &#x60;REMOVE&#x60;: Remove groups from the
-     * column&#39;s access list - &#x60;REPLACE&#x60;: Replace all existing groups with the
-     * specified groups #### Required permissions - &#x60;ADMINISTRATION&#x60; - Can administer
-     * ThoughtSpot - &#x60;DATAMANAGEMENT&#x60; - Can manage data (if RBAC is disabled) -
-     * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; - Can manage worksheet views and tables (if
-     * RBAC is enabled) #### Example request &#x60;&#x60;&#x60;json { \&quot;identifier\&quot;:
-     * \&quot;table-guid\&quot;, \&quot;obj_identifier\&quot;: \&quot;table-object-id\&quot;,
-     * \&quot;clear_csr\&quot;: false, \&quot;column_security_rules\&quot;: [ {
-     * \&quot;column_identifier\&quot;: \&quot;col id or col name\&quot;,
-     * \&quot;is_unsecured\&quot;: false, \&quot;group_access\&quot;: [ { \&quot;operation\&quot;:
-     * \&quot;ADD\&quot;, \&quot;group_identifiers\&quot;: [\&quot;hr_group_id\&quot;,
-     * \&quot;hr_group_name\&quot;, \&quot;finance_group_id\&quot;] } ] }, {
-     * \&quot;column_identifier\&quot;: \&quot;col id or col name\&quot;,
-     * \&quot;is_unsecured\&quot;: true }, { \&quot;column_identifier\&quot;: \&quot;col id or col
-     * name\&quot;, \&quot;is_unsecured\&quot;: false, \&quot;group_access\&quot;: [ {
-     * \&quot;operation\&quot;: \&quot;REPLACE\&quot;, \&quot;group_identifiers\&quot;:
-     * [\&quot;management_group_id\&quot;, \&quot;management_group_name\&quot;] } ] } ] }
-     * &#x60;&#x60;&#x60; #### Request Body Schema - &#x60;identifier&#x60; (string, optional): GUID
-     * or name of the table for which we want to create column security rules -
-     * &#x60;obj_identifier&#x60; (string, optional): The object ID of the table -
-     * &#x60;clear_csr&#x60; (boolean, optional): If true, then all the secured columns will be
-     * marked as unprotected, and all the group associations will be removed -
-     * &#x60;column_security_rules&#x60; (array of objects, required): An array where each object
-     * defines the security rule for a specific column Each column security rule object contains: -
-     * &#x60;column_identifier&#x60; (string, required): Column identifier (col_id or name) -
-     * &#x60;is_unsecured&#x60; (boolean, optional): If true, the column will be marked as
-     * unprotected and all groups associated with it will be removed - &#x60;group_access&#x60;
-     * (array of objects, optional): Array of group operation objects Each group operation object
-     * contains: - &#x60;operation&#x60; (string, required): Operation type - ADD, REMOVE, or
-     * REPLACE - &#x60;group_identifiers&#x60; (array of strings, required): Array of group
-     * identifiers (name or GUID) on which the operation will be performed #### Response This API
-     * does not return any response body. A successful operation returns HTTP 200 status code. ####
-     * Operation Types - **ADD**: Adds the specified groups to the column&#39;s access list -
-     * **REMOVE**: Removes the specified groups from the column&#39;s access list - **REPLACE**:
-     * Replaces all existing groups with the specified groups
-     *
-     * @param updateColumnSecurityRulesRequest (required)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Successfully updated column security rules </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Bad request - Invalid parameters or table not found </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden - User doesn&#39;t have permission to modify security rules for this table </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public ApiResponse<Void> updateColumnSecurityRulesWithHttpInfo(
-            UpdateColumnSecurityRulesRequest updateColumnSecurityRulesRequest) throws ApiException {
-        okhttp3.Call localVarCall =
-                updateColumnSecurityRulesValidateBeforeCall(updateColumnSecurityRulesRequest, null);
-        return localVarApiClient.execute(localVarCall);
-    }
-
-    /**
-     * (asynchronously) Version: 10.12.0.cl or later Creates, updates, or deletes column security
-     * rules for specified tables. This API endpoint allows you to create, update, or delete
-     * column-level security rules on columns of a table. The operation follows an \&quot;all or
-     * none\&quot; policy: if defining security rules for any of the provided columns fails, the
-     * entire operation will be rolled back, and no rules will be created. #### Usage guidelines -
-     * Provide table identifier using either &#x60;identifier&#x60; (GUID or name) or
-     * &#x60;obj_identifier&#x60; (object ID) - Use &#x60;clear_csr: true&#x60; to remove all column
-     * security rules from the table - For each column, specify the security rule using
-     * &#x60;column_security_rules&#x60; array - Use &#x60;is_unsecured: true&#x60; to mark a
-     * specific column as unprotected - Use &#x60;group_access&#x60; operations to manage group
-     * associations: - &#x60;ADD&#x60;: Add groups to the column&#39;s access list -
-     * &#x60;REMOVE&#x60;: Remove groups from the column&#39;s access list - &#x60;REPLACE&#x60;:
-     * Replace all existing groups with the specified groups #### Required permissions -
-     * &#x60;ADMINISTRATION&#x60; - Can administer ThoughtSpot - &#x60;DATAMANAGEMENT&#x60; - Can
-     * manage data (if RBAC is disabled) - &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; - Can
-     * manage worksheet views and tables (if RBAC is enabled) #### Example request
-     * &#x60;&#x60;&#x60;json { \&quot;identifier\&quot;: \&quot;table-guid\&quot;,
-     * \&quot;obj_identifier\&quot;: \&quot;table-object-id\&quot;, \&quot;clear_csr\&quot;: false,
-     * \&quot;column_security_rules\&quot;: [ { \&quot;column_identifier\&quot;: \&quot;col id or
-     * col name\&quot;, \&quot;is_unsecured\&quot;: false, \&quot;group_access\&quot;: [ {
-     * \&quot;operation\&quot;: \&quot;ADD\&quot;, \&quot;group_identifiers\&quot;:
-     * [\&quot;hr_group_id\&quot;, \&quot;hr_group_name\&quot;, \&quot;finance_group_id\&quot;] } ]
-     * }, { \&quot;column_identifier\&quot;: \&quot;col id or col name\&quot;,
-     * \&quot;is_unsecured\&quot;: true }, { \&quot;column_identifier\&quot;: \&quot;col id or col
-     * name\&quot;, \&quot;is_unsecured\&quot;: false, \&quot;group_access\&quot;: [ {
-     * \&quot;operation\&quot;: \&quot;REPLACE\&quot;, \&quot;group_identifiers\&quot;:
-     * [\&quot;management_group_id\&quot;, \&quot;management_group_name\&quot;] } ] } ] }
-     * &#x60;&#x60;&#x60; #### Request Body Schema - &#x60;identifier&#x60; (string, optional): GUID
-     * or name of the table for which we want to create column security rules -
-     * &#x60;obj_identifier&#x60; (string, optional): The object ID of the table -
-     * &#x60;clear_csr&#x60; (boolean, optional): If true, then all the secured columns will be
-     * marked as unprotected, and all the group associations will be removed -
-     * &#x60;column_security_rules&#x60; (array of objects, required): An array where each object
-     * defines the security rule for a specific column Each column security rule object contains: -
-     * &#x60;column_identifier&#x60; (string, required): Column identifier (col_id or name) -
-     * &#x60;is_unsecured&#x60; (boolean, optional): If true, the column will be marked as
-     * unprotected and all groups associated with it will be removed - &#x60;group_access&#x60;
-     * (array of objects, optional): Array of group operation objects Each group operation object
-     * contains: - &#x60;operation&#x60; (string, required): Operation type - ADD, REMOVE, or
-     * REPLACE - &#x60;group_identifiers&#x60; (array of strings, required): Array of group
-     * identifiers (name or GUID) on which the operation will be performed #### Response This API
-     * does not return any response body. A successful operation returns HTTP 200 status code. ####
-     * Operation Types - **ADD**: Adds the specified groups to the column&#39;s access list -
-     * **REMOVE**: Removes the specified groups from the column&#39;s access list - **REPLACE**:
-     * Replaces all existing groups with the specified groups
-     *
-     * @param updateColumnSecurityRulesRequest (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Successfully updated column security rules </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Bad request - Invalid parameters or table not found </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden - User doesn&#39;t have permission to modify security rules for this table </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Internal server error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call updateColumnSecurityRulesAsync(
-            UpdateColumnSecurityRulesRequest updateColumnSecurityRulesRequest,
-            final ApiCallback<Void> _callback)
-            throws ApiException {
-
-        okhttp3.Call localVarCall =
-                updateColumnSecurityRulesValidateBeforeCall(
-                        updateColumnSecurityRulesRequest, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
-        return localVarCall;
-    }
-    /**
      * Build call for updateConfig
      *
      * @param updateConfigRequest (required)
@@ -22502,230 +16853,6 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
-     * Build call for updateConnectionConfiguration
-     *
-     * @param configurationIdentifier Unique ID or name of the configuration. (required)
-     * @param updateConnectionConfigurationRequest (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Connection configuration successfully updated. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call updateConnectionConfigurationCall(
-            String configurationIdentifier,
-            UpdateConnectionConfigurationRequest updateConnectionConfigurationRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {};
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
-            basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = updateConnectionConfigurationRequest;
-
-        // create path and map variables
-        String localVarPath =
-                "/api/rest/2.0/connection-configurations/{configuration_identifier}/update"
-                        .replace(
-                                "{" + "configuration_identifier" + "}",
-                                localVarApiClient.escapeString(configurationIdentifier.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {"application/json"};
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {"application/json"};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call updateConnectionConfigurationValidateBeforeCall(
-            String configurationIdentifier,
-            UpdateConnectionConfigurationRequest updateConnectionConfigurationRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        // verify the required parameter 'configurationIdentifier' is set
-        if (configurationIdentifier == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'configurationIdentifier' when calling"
-                            + " updateConnectionConfiguration(Async)");
-        }
-
-        // verify the required parameter 'updateConnectionConfigurationRequest' is set
-        if (updateConnectionConfigurationRequest == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'updateConnectionConfigurationRequest' when"
-                            + " calling updateConnectionConfiguration(Async)");
-        }
-
-        return updateConnectionConfigurationCall(
-                configurationIdentifier, updateConnectionConfigurationRequest, _callback);
-    }
-
-    /**
-     * Version: 10.12.0.cl or later Updates a connection configuration object. Requires
-     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection
-     * object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
-     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit
-     * Connections**) privilege is required. #### Supported operations This API endpoint lets you
-     * perform the following operations in a single API request: * Edit the name or description of
-     * the configuration * Edit the configuration properties * Edit the &#x60;policy_type&#x60; *
-     * Edit the type of authentication * Enable or disable a configuration **NOTE**: When updating a
-     * configuration where &#x60;disabled&#x60; is &#x60;true&#x60;, you must reset
-     * &#x60;disabled&#x60; to &#x60;true&#x60; in your update request payload. If not explicitly
-     * set again, the API will default &#x60;disabled&#x60; to &#x60;false&#x60;.
-     *
-     * @param configurationIdentifier Unique ID or name of the configuration. (required)
-     * @param updateConnectionConfigurationRequest (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Connection configuration successfully updated. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public void updateConnectionConfiguration(
-            String configurationIdentifier,
-            UpdateConnectionConfigurationRequest updateConnectionConfigurationRequest)
-            throws ApiException {
-        updateConnectionConfigurationWithHttpInfo(
-                configurationIdentifier, updateConnectionConfigurationRequest);
-    }
-
-    /**
-     * Version: 10.12.0.cl or later Updates a connection configuration object. Requires
-     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection
-     * object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
-     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit
-     * Connections**) privilege is required. #### Supported operations This API endpoint lets you
-     * perform the following operations in a single API request: * Edit the name or description of
-     * the configuration * Edit the configuration properties * Edit the &#x60;policy_type&#x60; *
-     * Edit the type of authentication * Enable or disable a configuration **NOTE**: When updating a
-     * configuration where &#x60;disabled&#x60; is &#x60;true&#x60;, you must reset
-     * &#x60;disabled&#x60; to &#x60;true&#x60; in your update request payload. If not explicitly
-     * set again, the API will default &#x60;disabled&#x60; to &#x60;false&#x60;.
-     *
-     * @param configurationIdentifier Unique ID or name of the configuration. (required)
-     * @param updateConnectionConfigurationRequest (required)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Connection configuration successfully updated. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public ApiResponse<Void> updateConnectionConfigurationWithHttpInfo(
-            String configurationIdentifier,
-            UpdateConnectionConfigurationRequest updateConnectionConfigurationRequest)
-            throws ApiException {
-        okhttp3.Call localVarCall =
-                updateConnectionConfigurationValidateBeforeCall(
-                        configurationIdentifier, updateConnectionConfigurationRequest, null);
-        return localVarApiClient.execute(localVarCall);
-    }
-
-    /**
-     * (asynchronously) Version: 10.12.0.cl or later Updates a connection configuration object.
-     * Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the
-     * connection object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.
-     * If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is
-     * enabled on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit
-     * Connections**) privilege is required. #### Supported operations This API endpoint lets you
-     * perform the following operations in a single API request: * Edit the name or description of
-     * the configuration * Edit the configuration properties * Edit the &#x60;policy_type&#x60; *
-     * Edit the type of authentication * Enable or disable a configuration **NOTE**: When updating a
-     * configuration where &#x60;disabled&#x60; is &#x60;true&#x60;, you must reset
-     * &#x60;disabled&#x60; to &#x60;true&#x60; in your update request payload. If not explicitly
-     * set again, the API will default &#x60;disabled&#x60; to &#x60;false&#x60;.
-     *
-     * @param configurationIdentifier Unique ID or name of the configuration. (required)
-     * @param updateConnectionConfigurationRequest (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Connection configuration successfully updated. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call updateConnectionConfigurationAsync(
-            String configurationIdentifier,
-            UpdateConnectionConfigurationRequest updateConnectionConfigurationRequest,
-            final ApiCallback<Void> _callback)
-            throws ApiException {
-
-        okhttp3.Call localVarCall =
-                updateConnectionConfigurationValidateBeforeCall(
-                        configurationIdentifier, updateConnectionConfigurationRequest, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
-        return localVarCall;
-    }
-    /**
      * Build call for updateConnectionV2
      *
      * @param connectionIdentifier Unique ID or name of the connection. (required)
@@ -22837,11 +16964,8 @@ public class ThoughtSpotRestApi {
      * required. To update a connection object, pass these parameters in your API request: 1. GUID
      * of the connection object. 2. If you are updating tables or database schema of a connection
      * object: a. Add the updated JSON map of metadata with database, schema, and tables in
-     * &#x60;data_warehouse_config&#x60;. b. Set &#x60;validate&#x60; to &#x60;true&#x60;. **NOTE:**
-     * If the &#x60;authentication_type&#x60; is anything other than SERVICE_ACCOUNT, you must
-     * explicitly provide the authenticationType property in the payload. If you do not specify
-     * authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type. * A
-     * JSON map of configuration attributes, database details, and table properties in
+     * &#x60;data_warehouse_config&#x60;. b. Set &#x60;validate&#x60; to &#x60;true&#x60;. * A JSON
+     * map of configuration attributes, database details, and table properties in
      * &#x60;data_warehouse_config&#x60; as shown in the following example: &#x60;&#x60;&#x60; {
      * \&quot;configuration\&quot;:{ \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
@@ -22863,10 +16987,7 @@ public class ThoughtSpotRestApi {
      * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
      * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; } ] } ] } ] } ] } &#x60;&#x60;&#x60; 3. If
      * you are updating a configuration attribute, connection name, or description, you can set
-     * &#x60;validate&#x60; to &#x60;false&#x60;. **NOTE:** If the &#x60;authentication_type&#x60;
-     * is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType
-     * property in the payload. If you do not specify authenticationType, the API will default to
-     * SERVICE_ACCOUNT as the authentication type. * A JSON map of configuration attributes in
+     * &#x60;validate&#x60; to &#x60;false&#x60;. * A JSON map of configuration attributes in
      * &#x60;data_warehouse_config&#x60;. The following example shows the configuration attributes
      * for a Snowflake connection: &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
      * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
@@ -22904,11 +17025,8 @@ public class ThoughtSpotRestApi {
      * required. To update a connection object, pass these parameters in your API request: 1. GUID
      * of the connection object. 2. If you are updating tables or database schema of a connection
      * object: a. Add the updated JSON map of metadata with database, schema, and tables in
-     * &#x60;data_warehouse_config&#x60;. b. Set &#x60;validate&#x60; to &#x60;true&#x60;. **NOTE:**
-     * If the &#x60;authentication_type&#x60; is anything other than SERVICE_ACCOUNT, you must
-     * explicitly provide the authenticationType property in the payload. If you do not specify
-     * authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type. * A
-     * JSON map of configuration attributes, database details, and table properties in
+     * &#x60;data_warehouse_config&#x60;. b. Set &#x60;validate&#x60; to &#x60;true&#x60;. * A JSON
+     * map of configuration attributes, database details, and table properties in
      * &#x60;data_warehouse_config&#x60; as shown in the following example: &#x60;&#x60;&#x60; {
      * \&quot;configuration\&quot;:{ \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
@@ -22930,10 +17048,7 @@ public class ThoughtSpotRestApi {
      * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
      * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; } ] } ] } ] } ] } &#x60;&#x60;&#x60; 3. If
      * you are updating a configuration attribute, connection name, or description, you can set
-     * &#x60;validate&#x60; to &#x60;false&#x60;. **NOTE:** If the &#x60;authentication_type&#x60;
-     * is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType
-     * property in the payload. If you do not specify authenticationType, the API will default to
-     * SERVICE_ACCOUNT as the authentication type. * A JSON map of configuration attributes in
+     * &#x60;validate&#x60; to &#x60;false&#x60;. * A JSON map of configuration attributes in
      * &#x60;data_warehouse_config&#x60;. The following example shows the configuration attributes
      * for a Snowflake connection: &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
      * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
@@ -22976,10 +17091,7 @@ public class ThoughtSpotRestApi {
      * your API request: 1. GUID of the connection object. 2. If you are updating tables or database
      * schema of a connection object: a. Add the updated JSON map of metadata with database, schema,
      * and tables in &#x60;data_warehouse_config&#x60;. b. Set &#x60;validate&#x60; to
-     * &#x60;true&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is anything other than
-     * SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload.
-     * If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the
-     * authentication type. * A JSON map of configuration attributes, database details, and table
+     * &#x60;true&#x60;. * A JSON map of configuration attributes, database details, and table
      * properties in &#x60;data_warehouse_config&#x60; as shown in the following example:
      * &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
      * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
@@ -23002,10 +17114,7 @@ public class ThoughtSpotRestApi {
      * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
      * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; } ] } ] } ] } ] } &#x60;&#x60;&#x60; 3. If
      * you are updating a configuration attribute, connection name, or description, you can set
-     * &#x60;validate&#x60; to &#x60;false&#x60;. **NOTE:** If the &#x60;authentication_type&#x60;
-     * is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType
-     * property in the payload. If you do not specify authenticationType, the API will default to
-     * SERVICE_ACCOUNT as the authentication type. * A JSON map of configuration attributes in
+     * &#x60;validate&#x60; to &#x60;false&#x60;. * A JSON map of configuration attributes in
      * &#x60;data_warehouse_config&#x60;. The following example shows the configuration attributes
      * for a Snowflake connection: &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
      * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
@@ -23256,18 +17365,7 @@ public class ThoughtSpotRestApi {
     /**
      * Build call for updateDbtConnection
      *
-     * @param dbtConnectionIdentifier Unique ID of the DBT Connection. (required)
-     * @param connectionName Name of the connection. (optional)
-     * @param databaseName Name of the Database. (optional)
-     * @param importType Mention type of Import (optional, default to DBT_CLOUD)
-     * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD. (optional)
-     * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD. (optional)
-     * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD (optional)
-     * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD (optional)
-     * @param dbtEnvId DBT Environment ID\\\&quot; (optional)
-     * @param projectName Name of the project (optional)
-     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
-     *     is Mandatory when Import Type is &#39;ZIP_FILE&#39; (optional)
+     * @param updateDbtConnectionRequest (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -23283,18 +17381,7 @@ public class ThoughtSpotRestApi {
      * </table>
      */
     public okhttp3.Call updateDbtConnectionCall(
-            String dbtConnectionIdentifier,
-            String connectionName,
-            String databaseName,
-            String importType,
-            String accessToken,
-            String dbtUrl,
-            String accountId,
-            String projectId,
-            String dbtEnvId,
-            String projectName,
-            File fileContent,
-            final ApiCallback _callback)
+            UpdateDbtConnectionRequest updateDbtConnectionRequest, final ApiCallback _callback)
             throws ApiException {
         String basePath = null;
         // Operation Servers
@@ -23309,382 +17396,10 @@ public class ThoughtSpotRestApi {
             basePath = null;
         }
 
-        Object localVarPostBody = null;
+        Object localVarPostBody = updateDbtConnectionRequest;
 
         // create path and map variables
         String localVarPath = "/api/rest/2.0/dbt/update-dbt-connection";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        if (dbtConnectionIdentifier != null) {
-            localVarFormParams.put("dbt_connection_identifier", dbtConnectionIdentifier);
-        }
-
-        if (connectionName != null) {
-            localVarFormParams.put("connection_name", connectionName);
-        }
-
-        if (databaseName != null) {
-            localVarFormParams.put("database_name", databaseName);
-        }
-
-        if (importType != null) {
-            localVarFormParams.put("import_type", importType);
-        }
-
-        if (accessToken != null) {
-            localVarFormParams.put("access_token", accessToken);
-        }
-
-        if (dbtUrl != null) {
-            localVarFormParams.put("dbt_url", dbtUrl);
-        }
-
-        if (accountId != null) {
-            localVarFormParams.put("account_id", accountId);
-        }
-
-        if (projectId != null) {
-            localVarFormParams.put("project_id", projectId);
-        }
-
-        if (dbtEnvId != null) {
-            localVarFormParams.put("dbt_env_id", dbtEnvId);
-        }
-
-        if (projectName != null) {
-            localVarFormParams.put("project_name", projectName);
-        }
-
-        if (fileContent != null) {
-            localVarFormParams.put("file_content", fileContent);
-        }
-
-        final String[] localVarAccepts = {"application/json"};
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {"multipart/form-data"};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call updateDbtConnectionValidateBeforeCall(
-            String dbtConnectionIdentifier,
-            String connectionName,
-            String databaseName,
-            String importType,
-            String accessToken,
-            String dbtUrl,
-            String accountId,
-            String projectId,
-            String dbtEnvId,
-            String projectName,
-            File fileContent,
-            final ApiCallback _callback)
-            throws ApiException {
-        // verify the required parameter 'dbtConnectionIdentifier' is set
-        if (dbtConnectionIdentifier == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'dbtConnectionIdentifier' when calling"
-                            + " updateDbtConnection(Async)");
-        }
-
-        return updateDbtConnectionCall(
-                dbtConnectionIdentifier,
-                connectionName,
-                databaseName,
-                importType,
-                accessToken,
-                dbtUrl,
-                accountId,
-                projectId,
-                dbtEnvId,
-                projectName,
-                fileContent,
-                _callback);
-    }
-
-    /**
-     * Version: 9.9.0.cl or later Updates a DBT connection object. Requires
-     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or
-     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data ThoughtSpot**) privilege, along with an
-     * existing DBT connection. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
-     * following data control privileges may be required: -
-     * &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60;(**Can manage custom calendars**) -
-     * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) -
-     * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) #### About update
-     * DBT connection You can modify DBT connection object properties such as embrace connection
-     * name, embrace database name, import type, account identifier, access token, project
-     * identifier and environment (or) embrace connection, embrace database name, import type,
-     * file_content settings.
-     *
-     * @param dbtConnectionIdentifier Unique ID of the DBT Connection. (required)
-     * @param connectionName Name of the connection. (optional)
-     * @param databaseName Name of the Database. (optional)
-     * @param importType Mention type of Import (optional, default to DBT_CLOUD)
-     * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD. (optional)
-     * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD. (optional)
-     * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD (optional)
-     * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD (optional)
-     * @param dbtEnvId DBT Environment ID\\\&quot; (optional)
-     * @param projectName Name of the project (optional)
-     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
-     *     is Mandatory when Import Type is &#39;ZIP_FILE&#39; (optional)
-     * @return Object
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> DBT Connection successfully updated. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public Object updateDbtConnection(
-            String dbtConnectionIdentifier,
-            String connectionName,
-            String databaseName,
-            String importType,
-            String accessToken,
-            String dbtUrl,
-            String accountId,
-            String projectId,
-            String dbtEnvId,
-            String projectName,
-            File fileContent)
-            throws ApiException {
-        ApiResponse<Object> localVarResp =
-                updateDbtConnectionWithHttpInfo(
-                        dbtConnectionIdentifier,
-                        connectionName,
-                        databaseName,
-                        importType,
-                        accessToken,
-                        dbtUrl,
-                        accountId,
-                        projectId,
-                        dbtEnvId,
-                        projectName,
-                        fileContent);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Version: 9.9.0.cl or later Updates a DBT connection object. Requires
-     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or
-     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data ThoughtSpot**) privilege, along with an
-     * existing DBT connection. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
-     * following data control privileges may be required: -
-     * &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60;(**Can manage custom calendars**) -
-     * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) -
-     * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) #### About update
-     * DBT connection You can modify DBT connection object properties such as embrace connection
-     * name, embrace database name, import type, account identifier, access token, project
-     * identifier and environment (or) embrace connection, embrace database name, import type,
-     * file_content settings.
-     *
-     * @param dbtConnectionIdentifier Unique ID of the DBT Connection. (required)
-     * @param connectionName Name of the connection. (optional)
-     * @param databaseName Name of the Database. (optional)
-     * @param importType Mention type of Import (optional, default to DBT_CLOUD)
-     * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD. (optional)
-     * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD. (optional)
-     * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD (optional)
-     * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD (optional)
-     * @param dbtEnvId DBT Environment ID\\\&quot; (optional)
-     * @param projectName Name of the project (optional)
-     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
-     *     is Mandatory when Import Type is &#39;ZIP_FILE&#39; (optional)
-     * @return ApiResponse&lt;Object&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> DBT Connection successfully updated. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public ApiResponse<Object> updateDbtConnectionWithHttpInfo(
-            String dbtConnectionIdentifier,
-            String connectionName,
-            String databaseName,
-            String importType,
-            String accessToken,
-            String dbtUrl,
-            String accountId,
-            String projectId,
-            String dbtEnvId,
-            String projectName,
-            File fileContent)
-            throws ApiException {
-        okhttp3.Call localVarCall =
-                updateDbtConnectionValidateBeforeCall(
-                        dbtConnectionIdentifier,
-                        connectionName,
-                        databaseName,
-                        importType,
-                        accessToken,
-                        dbtUrl,
-                        accountId,
-                        projectId,
-                        dbtEnvId,
-                        projectName,
-                        fileContent,
-                        null);
-        Type localVarReturnType = new TypeToken<Object>() {}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * (asynchronously) Version: 9.9.0.cl or later Updates a DBT connection object. Requires
-     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or
-     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data ThoughtSpot**) privilege, along with an
-     * existing DBT connection. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
-     * following data control privileges may be required: -
-     * &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60;(**Can manage custom calendars**) -
-     * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) -
-     * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) #### About update
-     * DBT connection You can modify DBT connection object properties such as embrace connection
-     * name, embrace database name, import type, account identifier, access token, project
-     * identifier and environment (or) embrace connection, embrace database name, import type,
-     * file_content settings.
-     *
-     * @param dbtConnectionIdentifier Unique ID of the DBT Connection. (required)
-     * @param connectionName Name of the connection. (optional)
-     * @param databaseName Name of the Database. (optional)
-     * @param importType Mention type of Import (optional, default to DBT_CLOUD)
-     * @param accessToken Access token is mandatory when Import_Type is DBT_CLOUD. (optional)
-     * @param dbtUrl DBT URL is mandatory when Import_Type is DBT_CLOUD. (optional)
-     * @param accountId Account ID is mandatory when Import_Type is DBT_CLOUD (optional)
-     * @param projectId Project ID is mandatory when Import_Type is DBT_CLOUD (optional)
-     * @param dbtEnvId DBT Environment ID\\\&quot; (optional)
-     * @param projectName Name of the project (optional)
-     * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
-     *     is Mandatory when Import Type is &#39;ZIP_FILE&#39; (optional)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> DBT Connection successfully updated. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call updateDbtConnectionAsync(
-            String dbtConnectionIdentifier,
-            String connectionName,
-            String databaseName,
-            String importType,
-            String accessToken,
-            String dbtUrl,
-            String accountId,
-            String projectId,
-            String dbtEnvId,
-            String projectName,
-            File fileContent,
-            final ApiCallback<Object> _callback)
-            throws ApiException {
-
-        okhttp3.Call localVarCall =
-                updateDbtConnectionValidateBeforeCall(
-                        dbtConnectionIdentifier,
-                        connectionName,
-                        databaseName,
-                        importType,
-                        accessToken,
-                        dbtUrl,
-                        accountId,
-                        projectId,
-                        dbtEnvId,
-                        projectName,
-                        fileContent,
-                        _callback);
-        Type localVarReturnType = new TypeToken<Object>() {}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for updateEmailCustomization
-     *
-     * @param updateEmailCustomizationRequest (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Email Customization configuration successfully updated. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call updateEmailCustomizationCall(
-            UpdateEmailCustomizationRequest updateEmailCustomizationRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {};
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
-            basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = updateEmailCustomizationRequest;
-
-        // create path and map variables
-        String localVarPath = "/api/rest/2.0/customization/email/update";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -23721,143 +17436,110 @@ public class ThoughtSpotRestApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call updateEmailCustomizationValidateBeforeCall(
-            UpdateEmailCustomizationRequest updateEmailCustomizationRequest,
-            final ApiCallback _callback)
+    private okhttp3.Call updateDbtConnectionValidateBeforeCall(
+            UpdateDbtConnectionRequest updateDbtConnectionRequest, final ApiCallback _callback)
             throws ApiException {
-        // verify the required parameter 'updateEmailCustomizationRequest' is set
-        if (updateEmailCustomizationRequest == null) {
+        // verify the required parameter 'updateDbtConnectionRequest' is set
+        if (updateDbtConnectionRequest == null) {
             throw new ApiException(
-                    "Missing the required parameter 'updateEmailCustomizationRequest' when calling"
-                            + " updateEmailCustomization(Async)");
+                    "Missing the required parameter 'updateDbtConnectionRequest' when calling"
+                            + " updateDbtConnection(Async)");
         }
 
-        return updateEmailCustomizationCall(updateEmailCustomizationRequest, _callback);
+        return updateDbtConnectionCall(updateDbtConnectionRequest, _callback);
     }
 
     /**
-     * Version: 10.12.0.cl or later Updates a customization configuration for the notification
-     * email. #### Pre-requisites Requires &#x60;DEVELOPER&#x60; (**has developer privilege**) or
-     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access
-     * Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance,
-     * the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required. **NOTE**:This
-     * endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.
-     * #### Usage guidelines To update a custom configuration pass these parameters in your API
-     * request: - A JSON map of configuration attributes &#x60;template_properties&#x60;. The
-     * following example shows a sample set of customization configuration: &#x60;&#x60;&#x60; { {
-     * \&quot;ctaButtonBgColor\&quot;: \&quot;#444DEA\&quot;, \&quot;ctaTextFontColor\&quot;:
-     * \&quot;#FFFFFF\&quot;, \&quot;primaryBgColor\&quot;: \&quot;#D3DEF0\&quot;,
-     * \&quot;hideMobileAppNudge\&quot;: false, \&quot;fontFamily\&quot; : \&quot;\&quot;,
-     * \&quot;hideProductName\&quot; : false, \&quot;hideFooterPhone\&quot; : false,
-     * \&quot;hideFooterAddress\&quot; : false, \&quot;hidePrivacyPolicy\&quot; : false,
-     * \&quot;hideManageNotification\&quot; : false, \&quot;hideTsVocabularyDefinitions\&quot;:
-     * false, \&quot;hideNotificationStatus\&quot; : false, \&quot;hideErrorMessage\&quot;: false,
-     * \&quot;hideUnsubscribeLink\&quot; : false, \&quot;hideModifyAlert\&quot;: false,
-     * \&quot;textTransform\&quot;: \&quot;\&quot;, \&quot;replacementValueForLiveboard\&quot;:
-     * \&quot;LB dashboard\&quot;, \&quot;replacementValueForAnswer\&quot;: \&quot;Answer
-     * dashboard\&quot;, \&quot;replacementValueForSpotIQ\&quot;: \&quot;SpotIQ dashboard\&quot;,
-     * \&quot;logoUrl\&quot;:\&quot;\&quot;, \&quot;productName\&quot;:\&quot;ThoughtSpot\&quot;,
-     * \&quot;footerPhone\&quot;:\&quot;(800) 508-7008\&quot;,
-     * \&quot;footerAddress\&quot;:\&quot;444 Castro St, Suite 1000 Mountain View, CA 94041\&quot;,
-     * \&quot;companyWebsiteUrl\&quot;:\&quot;\&quot;,
-     * \&quot;companyPrivacyPolicyUrl\&quot;:\&quot;\&quot; } } &#x60;&#x60;&#x60;
+     * Version: 9.9.0.cl or later Updates a DBT connection object. Requires
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or
+     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data ThoughtSpot**) privilege, along with an
+     * existing DBT connection. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * following data control privileges may be required: -
+     * &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60;(**Can manage custom calendars**) -
+     * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) -
+     * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) #### About update
+     * DBT connection You can modify DBT connection object properties such as embrace connection
+     * name, embrace database name, import type, account identifier, access token, project
+     * identifier and environment (or) embrace connection, embrace database name, import type,
+     * file_content settings.
      *
-     * @param updateEmailCustomizationRequest (required)
+     * @param updateDbtConnectionRequest (required)
+     * @return Object
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
      * @http.response.details
      *     <table border="1">
      * <caption>Response Details</caption>
      * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Email Customization configuration successfully updated. </td><td>  -  </td></tr>
+     * <tr><td> 200 </td><td> DBT Connection successfully updated. </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
      * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public void updateEmailCustomization(
-            UpdateEmailCustomizationRequest updateEmailCustomizationRequest) throws ApiException {
-        updateEmailCustomizationWithHttpInfo(updateEmailCustomizationRequest);
+    public Object updateDbtConnection(UpdateDbtConnectionRequest updateDbtConnectionRequest)
+            throws ApiException {
+        ApiResponse<Object> localVarResp =
+                updateDbtConnectionWithHttpInfo(updateDbtConnectionRequest);
+        return localVarResp.getData();
     }
 
     /**
-     * Version: 10.12.0.cl or later Updates a customization configuration for the notification
-     * email. #### Pre-requisites Requires &#x60;DEVELOPER&#x60; (**has developer privilege**) or
-     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access
-     * Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance,
-     * the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required. **NOTE**:This
-     * endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.
-     * #### Usage guidelines To update a custom configuration pass these parameters in your API
-     * request: - A JSON map of configuration attributes &#x60;template_properties&#x60;. The
-     * following example shows a sample set of customization configuration: &#x60;&#x60;&#x60; { {
-     * \&quot;ctaButtonBgColor\&quot;: \&quot;#444DEA\&quot;, \&quot;ctaTextFontColor\&quot;:
-     * \&quot;#FFFFFF\&quot;, \&quot;primaryBgColor\&quot;: \&quot;#D3DEF0\&quot;,
-     * \&quot;hideMobileAppNudge\&quot;: false, \&quot;fontFamily\&quot; : \&quot;\&quot;,
-     * \&quot;hideProductName\&quot; : false, \&quot;hideFooterPhone\&quot; : false,
-     * \&quot;hideFooterAddress\&quot; : false, \&quot;hidePrivacyPolicy\&quot; : false,
-     * \&quot;hideManageNotification\&quot; : false, \&quot;hideTsVocabularyDefinitions\&quot;:
-     * false, \&quot;hideNotificationStatus\&quot; : false, \&quot;hideErrorMessage\&quot;: false,
-     * \&quot;hideUnsubscribeLink\&quot; : false, \&quot;hideModifyAlert\&quot;: false,
-     * \&quot;textTransform\&quot;: \&quot;\&quot;, \&quot;replacementValueForLiveboard\&quot;:
-     * \&quot;LB dashboard\&quot;, \&quot;replacementValueForAnswer\&quot;: \&quot;Answer
-     * dashboard\&quot;, \&quot;replacementValueForSpotIQ\&quot;: \&quot;SpotIQ dashboard\&quot;,
-     * \&quot;logoUrl\&quot;:\&quot;\&quot;, \&quot;productName\&quot;:\&quot;ThoughtSpot\&quot;,
-     * \&quot;footerPhone\&quot;:\&quot;(800) 508-7008\&quot;,
-     * \&quot;footerAddress\&quot;:\&quot;444 Castro St, Suite 1000 Mountain View, CA 94041\&quot;,
-     * \&quot;companyWebsiteUrl\&quot;:\&quot;\&quot;,
-     * \&quot;companyPrivacyPolicyUrl\&quot;:\&quot;\&quot; } } &#x60;&#x60;&#x60;
+     * Version: 9.9.0.cl or later Updates a DBT connection object. Requires
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or
+     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data ThoughtSpot**) privilege, along with an
+     * existing DBT connection. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * following data control privileges may be required: -
+     * &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60;(**Can manage custom calendars**) -
+     * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) -
+     * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) #### About update
+     * DBT connection You can modify DBT connection object properties such as embrace connection
+     * name, embrace database name, import type, account identifier, access token, project
+     * identifier and environment (or) embrace connection, embrace database name, import type,
+     * file_content settings.
      *
-     * @param updateEmailCustomizationRequest (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @param updateDbtConnectionRequest (required)
+     * @return ApiResponse&lt;Object&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
      * @http.response.details
      *     <table border="1">
      * <caption>Response Details</caption>
      * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Email Customization configuration successfully updated. </td><td>  -  </td></tr>
+     * <tr><td> 200 </td><td> DBT Connection successfully updated. </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
      * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public ApiResponse<Void> updateEmailCustomizationWithHttpInfo(
-            UpdateEmailCustomizationRequest updateEmailCustomizationRequest) throws ApiException {
+    public ApiResponse<Object> updateDbtConnectionWithHttpInfo(
+            UpdateDbtConnectionRequest updateDbtConnectionRequest) throws ApiException {
         okhttp3.Call localVarCall =
-                updateEmailCustomizationValidateBeforeCall(updateEmailCustomizationRequest, null);
-        return localVarApiClient.execute(localVarCall);
+                updateDbtConnectionValidateBeforeCall(updateDbtConnectionRequest, null);
+        Type localVarReturnType = new TypeToken<Object>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * (asynchronously) Version: 10.12.0.cl or later Updates a customization configuration for the
-     * notification email. #### Pre-requisites Requires &#x60;DEVELOPER&#x60; (**has developer
-     * privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
-     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is
-     * required. **NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable
-     * this on your instance. #### Usage guidelines To update a custom configuration pass these
-     * parameters in your API request: - A JSON map of configuration attributes
-     * &#x60;template_properties&#x60;. The following example shows a sample set of customization
-     * configuration: &#x60;&#x60;&#x60; { { \&quot;ctaButtonBgColor\&quot;: \&quot;#444DEA\&quot;,
-     * \&quot;ctaTextFontColor\&quot;: \&quot;#FFFFFF\&quot;, \&quot;primaryBgColor\&quot;:
-     * \&quot;#D3DEF0\&quot;, \&quot;hideMobileAppNudge\&quot;: false, \&quot;fontFamily\&quot; :
-     * \&quot;\&quot;, \&quot;hideProductName\&quot; : false, \&quot;hideFooterPhone\&quot; : false,
-     * \&quot;hideFooterAddress\&quot; : false, \&quot;hidePrivacyPolicy\&quot; : false,
-     * \&quot;hideManageNotification\&quot; : false, \&quot;hideTsVocabularyDefinitions\&quot;:
-     * false, \&quot;hideNotificationStatus\&quot; : false, \&quot;hideErrorMessage\&quot;: false,
-     * \&quot;hideUnsubscribeLink\&quot; : false, \&quot;hideModifyAlert\&quot;: false,
-     * \&quot;textTransform\&quot;: \&quot;\&quot;, \&quot;replacementValueForLiveboard\&quot;:
-     * \&quot;LB dashboard\&quot;, \&quot;replacementValueForAnswer\&quot;: \&quot;Answer
-     * dashboard\&quot;, \&quot;replacementValueForSpotIQ\&quot;: \&quot;SpotIQ dashboard\&quot;,
-     * \&quot;logoUrl\&quot;:\&quot;\&quot;, \&quot;productName\&quot;:\&quot;ThoughtSpot\&quot;,
-     * \&quot;footerPhone\&quot;:\&quot;(800) 508-7008\&quot;,
-     * \&quot;footerAddress\&quot;:\&quot;444 Castro St, Suite 1000 Mountain View, CA 94041\&quot;,
-     * \&quot;companyWebsiteUrl\&quot;:\&quot;\&quot;,
-     * \&quot;companyPrivacyPolicyUrl\&quot;:\&quot;\&quot; } } &#x60;&#x60;&#x60;
+     * (asynchronously) Version: 9.9.0.cl or later Updates a DBT connection object. Requires
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or
+     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data ThoughtSpot**) privilege, along with an
+     * existing DBT connection. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * following data control privileges may be required: -
+     * &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60;(**Can manage custom calendars**) -
+     * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) -
+     * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) #### About update
+     * DBT connection You can modify DBT connection object properties such as embrace connection
+     * name, embrace database name, import type, account identifier, access token, project
+     * identifier and environment (or) embrace connection, embrace database name, import type,
+     * file_content settings.
      *
-     * @param updateEmailCustomizationRequest (required)
+     * @param updateDbtConnectionRequest (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body
@@ -23866,22 +17548,22 @@ public class ThoughtSpotRestApi {
      *     <table border="1">
      * <caption>Response Details</caption>
      * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Email Customization configuration successfully updated. </td><td>  -  </td></tr>
+     * <tr><td> 200 </td><td> DBT Connection successfully updated. </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
      * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public okhttp3.Call updateEmailCustomizationAsync(
-            UpdateEmailCustomizationRequest updateEmailCustomizationRequest,
-            final ApiCallback<Void> _callback)
+    public okhttp3.Call updateDbtConnectionAsync(
+            UpdateDbtConnectionRequest updateDbtConnectionRequest,
+            final ApiCallback<Object> _callback)
             throws ApiException {
 
         okhttp3.Call localVarCall =
-                updateEmailCustomizationValidateBeforeCall(
-                        updateEmailCustomizationRequest, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
+                updateDbtConnectionValidateBeforeCall(updateDbtConnectionRequest, _callback);
+        Type localVarReturnType = new TypeToken<Object>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
@@ -25773,543 +19455,6 @@ public class ThoughtSpotRestApi {
         okhttp3.Call localVarCall =
                 updateUserGroupValidateBeforeCall(
                         groupIdentifier, updateUserGroupRequest, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for updateVariable
-     *
-     * @param identifier Unique id or name of the variable to update. (required)
-     * @param updateVariableRequest (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Updating the variable is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call updateVariableCall(
-            String identifier,
-            UpdateVariableRequest updateVariableRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {};
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
-            basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = updateVariableRequest;
-
-        // create path and map variables
-        String localVarPath =
-                "/api/rest/2.0/template/variables/{identifier}/update"
-                        .replace(
-                                "{" + "identifier" + "}",
-                                localVarApiClient.escapeString(identifier.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {"application/json"};
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {"application/json"};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call updateVariableValidateBeforeCall(
-            String identifier,
-            UpdateVariableRequest updateVariableRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        // verify the required parameter 'identifier' is set
-        if (identifier == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'identifier' when calling"
-                            + " updateVariable(Async)");
-        }
-
-        // verify the required parameter 'updateVariableRequest' is set
-        if (updateVariableRequest == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'updateVariableRequest' when calling"
-                            + " updateVariable(Async)");
-        }
-
-        return updateVariableCall(identifier, updateVariableRequest, _callback);
-    }
-
-    /**
-     * Update a variable&#39;s properties Version: 10.9.0.cl or later Allows updating a
-     * variable&#39;s properties in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The
-     * API endpoint allows updating: * The variable name
-     *
-     * @param identifier Unique id or name of the variable to update. (required)
-     * @param updateVariableRequest (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Updating the variable is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public void updateVariable(String identifier, UpdateVariableRequest updateVariableRequest)
-            throws ApiException {
-        updateVariableWithHttpInfo(identifier, updateVariableRequest);
-    }
-
-    /**
-     * Update a variable&#39;s properties Version: 10.9.0.cl or later Allows updating a
-     * variable&#39;s properties in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The
-     * API endpoint allows updating: * The variable name
-     *
-     * @param identifier Unique id or name of the variable to update. (required)
-     * @param updateVariableRequest (required)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Updating the variable is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public ApiResponse<Void> updateVariableWithHttpInfo(
-            String identifier, UpdateVariableRequest updateVariableRequest) throws ApiException {
-        okhttp3.Call localVarCall =
-                updateVariableValidateBeforeCall(identifier, updateVariableRequest, null);
-        return localVarApiClient.execute(localVarCall);
-    }
-
-    /**
-     * (asynchronously) Update a variable&#39;s properties Version: 10.9.0.cl or later Allows
-     * updating a variable&#39;s properties in ThoughtSpot. Requires ADMINISTRATION role and TENANT
-     * scope. The API endpoint allows updating: * The variable name
-     *
-     * @param identifier Unique id or name of the variable to update. (required)
-     * @param updateVariableRequest (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Updating the variable is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call updateVariableAsync(
-            String identifier,
-            UpdateVariableRequest updateVariableRequest,
-            final ApiCallback<Void> _callback)
-            throws ApiException {
-
-        okhttp3.Call localVarCall =
-                updateVariableValidateBeforeCall(identifier, updateVariableRequest, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for updateVariableValues
-     *
-     * @param updateVariableValuesRequest (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Updating variable values is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call updateVariableValuesCall(
-            UpdateVariableValuesRequest updateVariableValuesRequest, final ApiCallback _callback)
-            throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {};
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
-            basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = updateVariableValuesRequest;
-
-        // create path and map variables
-        String localVarPath = "/api/rest/2.0/template/variables/update";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {"application/json"};
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {"application/json"};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call updateVariableValuesValidateBeforeCall(
-            UpdateVariableValuesRequest updateVariableValuesRequest, final ApiCallback _callback)
-            throws ApiException {
-        // verify the required parameter 'updateVariableValuesRequest' is set
-        if (updateVariableValuesRequest == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'updateVariableValuesRequest' when calling"
-                            + " updateVariableValues(Async)");
-        }
-
-        return updateVariableValuesCall(updateVariableValuesRequest, _callback);
-    }
-
-    /**
-     * Update values for multiple variables Version: 10.9.0.cl or later Allows updating values for
-     * multiple variables in ThoughtSpot. Requires ADMINISTRATION role. The API endpoint allows: *
-     * Adding new values to variables * Replacing existing values * Deleting values from variables
-     * When updating variable values, you need to specify: * The variable identifiers * The values
-     * to add/replace/remove for each variable * The operation to perform (ADD, REPLACE, REMOVE,
-     * CLEAR) Behaviour based on operation type: * ADD - Adds values to the variable if this is a
-     * list type variable, else same as replace. * REPLACE - Replaces all values of a given set of
-     * constraints with the current set of values. * REMOVE - Removes any values which match the set
-     * of conditions of the variables if this is a list type variable, else clears value. * CLEAR -
-     * Removes all constrains for a given variable, scope is ignored
-     *
-     * @param updateVariableValuesRequest (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Updating variable values is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public void updateVariableValues(UpdateVariableValuesRequest updateVariableValuesRequest)
-            throws ApiException {
-        updateVariableValuesWithHttpInfo(updateVariableValuesRequest);
-    }
-
-    /**
-     * Update values for multiple variables Version: 10.9.0.cl or later Allows updating values for
-     * multiple variables in ThoughtSpot. Requires ADMINISTRATION role. The API endpoint allows: *
-     * Adding new values to variables * Replacing existing values * Deleting values from variables
-     * When updating variable values, you need to specify: * The variable identifiers * The values
-     * to add/replace/remove for each variable * The operation to perform (ADD, REPLACE, REMOVE,
-     * CLEAR) Behaviour based on operation type: * ADD - Adds values to the variable if this is a
-     * list type variable, else same as replace. * REPLACE - Replaces all values of a given set of
-     * constraints with the current set of values. * REMOVE - Removes any values which match the set
-     * of conditions of the variables if this is a list type variable, else clears value. * CLEAR -
-     * Removes all constrains for a given variable, scope is ignored
-     *
-     * @param updateVariableValuesRequest (required)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Updating variable values is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public ApiResponse<Void> updateVariableValuesWithHttpInfo(
-            UpdateVariableValuesRequest updateVariableValuesRequest) throws ApiException {
-        okhttp3.Call localVarCall =
-                updateVariableValuesValidateBeforeCall(updateVariableValuesRequest, null);
-        return localVarApiClient.execute(localVarCall);
-    }
-
-    /**
-     * (asynchronously) Update values for multiple variables Version: 10.9.0.cl or later Allows
-     * updating values for multiple variables in ThoughtSpot. Requires ADMINISTRATION role. The API
-     * endpoint allows: * Adding new values to variables * Replacing existing values * Deleting
-     * values from variables When updating variable values, you need to specify: * The variable
-     * identifiers * The values to add/replace/remove for each variable * The operation to perform
-     * (ADD, REPLACE, REMOVE, CLEAR) Behaviour based on operation type: * ADD - Adds values to the
-     * variable if this is a list type variable, else same as replace. * REPLACE - Replaces all
-     * values of a given set of constraints with the current set of values. * REMOVE - Removes any
-     * values which match the set of conditions of the variables if this is a list type variable,
-     * else clears value. * CLEAR - Removes all constrains for a given variable, scope is ignored
-     *
-     * @param updateVariableValuesRequest (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Updating variable values is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call updateVariableValuesAsync(
-            UpdateVariableValuesRequest updateVariableValuesRequest,
-            final ApiCallback<Void> _callback)
-            throws ApiException {
-
-        okhttp3.Call localVarCall =
-                updateVariableValuesValidateBeforeCall(updateVariableValuesRequest, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for validateEmailCustomization
-     *
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Triggered test email for customization configuration </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call validateEmailCustomizationCall(final ApiCallback _callback)
-            throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {};
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
-            basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/api/rest/2.0/customization/email/validate";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {"application/json"};
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call validateEmailCustomizationValidateBeforeCall(final ApiCallback _callback)
-            throws ApiException {
-        return validateEmailCustomizationCall(_callback);
-    }
-
-    /**
-     * Version: 10.10.0.cl or later Validates the email customization configuration if any set for
-     * the ThoughtSpot system. #### Pre-requisites Requires &#x60;DEVELOPER&#x60; (**has developer
-     * privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
-     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is
-     * required. **NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable
-     * this on your instance.
-     *
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Triggered test email for customization configuration </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public void validateEmailCustomization() throws ApiException {
-        validateEmailCustomizationWithHttpInfo();
-    }
-
-    /**
-     * Version: 10.10.0.cl or later Validates the email customization configuration if any set for
-     * the ThoughtSpot system. #### Pre-requisites Requires &#x60;DEVELOPER&#x60; (**has developer
-     * privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
-     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is
-     * required. **NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable
-     * this on your instance.
-     *
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Triggered test email for customization configuration </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public ApiResponse<Void> validateEmailCustomizationWithHttpInfo() throws ApiException {
-        okhttp3.Call localVarCall = validateEmailCustomizationValidateBeforeCall(null);
-        return localVarApiClient.execute(localVarCall);
-    }
-
-    /**
-     * (asynchronously) Version: 10.10.0.cl or later Validates the email customization configuration
-     * if any set for the ThoughtSpot system. #### Pre-requisites Requires &#x60;DEVELOPER&#x60;
-     * (**has developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**)
-     * privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
-     * &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required. **NOTE**:This
-     * endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.
-     *
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Triggered test email for customization configuration </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call validateEmailCustomizationAsync(final ApiCallback<Void> _callback)
-            throws ApiException {
-
-        okhttp3.Call localVarCall = validateEmailCustomizationValidateBeforeCall(_callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }

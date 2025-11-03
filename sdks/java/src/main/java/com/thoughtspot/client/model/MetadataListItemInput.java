@@ -17,10 +17,8 @@ import com.google.gson.stream.JsonWriter;
 import com.thoughtspot.client.JSON;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -132,71 +130,6 @@ public class MetadataListItemInput implements Serializable {
     @javax.annotation.Nullable
     private TypeEnum type;
 
-    /** Gets or Sets subtypes */
-    @JsonAdapter(SubtypesEnum.Adapter.class)
-    public enum SubtypesEnum {
-        ONE_TO_ONE_LOGICAL("ONE_TO_ONE_LOGICAL"),
-
-        WORKSHEET("WORKSHEET"),
-
-        PRIVATE_WORKSHEET("PRIVATE_WORKSHEET"),
-
-        USER_DEFINED("USER_DEFINED"),
-
-        AGGR_WORKSHEET("AGGR_WORKSHEET"),
-
-        SQL_VIEW("SQL_VIEW");
-
-        private String value;
-
-        SubtypesEnum(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        public static SubtypesEnum fromValue(String value) {
-            for (SubtypesEnum b : SubtypesEnum.values()) {
-                if (b.value.equals(value)) {
-                    return b;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected value '" + value + "'");
-        }
-
-        public static class Adapter extends TypeAdapter<SubtypesEnum> {
-            @Override
-            public void write(final JsonWriter jsonWriter, final SubtypesEnum enumeration)
-                    throws IOException {
-                jsonWriter.value(enumeration.getValue());
-            }
-
-            @Override
-            public SubtypesEnum read(final JsonReader jsonReader) throws IOException {
-                String value = jsonReader.nextString();
-                return SubtypesEnum.fromValue(value);
-            }
-        }
-
-        public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-            String value = jsonElement.getAsString();
-            SubtypesEnum.fromValue(value);
-        }
-    }
-
-    public static final String SERIALIZED_NAME_SUBTYPES = "subtypes";
-
-    @SerializedName(SERIALIZED_NAME_SUBTYPES)
-    @javax.annotation.Nullable
-    private List<SubtypesEnum> subtypes;
-
     public MetadataListItemInput() {}
 
     public MetadataListItemInput identifier(@javax.annotation.Nullable String identifier) {
@@ -282,35 +215,6 @@ public class MetadataListItemInput implements Serializable {
         this.type = type;
     }
 
-    public MetadataListItemInput subtypes(@javax.annotation.Nullable List<SubtypesEnum> subtypes) {
-        this.subtypes = subtypes;
-        return this;
-    }
-
-    public MetadataListItemInput addSubtypesItem(SubtypesEnum subtypesItem) {
-        if (this.subtypes == null) {
-            this.subtypes = new ArrayList<>();
-        }
-        this.subtypes.add(subtypesItem);
-        return this;
-    }
-
-    /**
-     * List of subtype of metadata. Applies for LOGICAL_TABLE type with the following valid values.
-     * 1. ONE_TO_ONE_LOGICAL 2. WORKSHEET 3. PRIVATE_WORKSHEET. 4. USER_DEFINED. 5. AGGR_WORKSHEET.
-     * 6. SQL_VIEW Version: 10.11.0.cl or later
-     *
-     * @return subtypes
-     */
-    @javax.annotation.Nullable
-    public List<SubtypesEnum> getSubtypes() {
-        return subtypes;
-    }
-
-    public void setSubtypes(@javax.annotation.Nullable List<SubtypesEnum> subtypes) {
-        this.subtypes = subtypes;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -323,8 +227,7 @@ public class MetadataListItemInput implements Serializable {
         return Objects.equals(this.identifier, metadataListItemInput.identifier)
                 && Objects.equals(this.objIdentifier, metadataListItemInput.objIdentifier)
                 && Objects.equals(this.namePattern, metadataListItemInput.namePattern)
-                && Objects.equals(this.type, metadataListItemInput.type)
-                && Objects.equals(this.subtypes, metadataListItemInput.subtypes);
+                && Objects.equals(this.type, metadataListItemInput.type);
     }
 
     private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -338,7 +241,7 @@ public class MetadataListItemInput implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(identifier, objIdentifier, namePattern, type, subtypes);
+        return Objects.hash(identifier, objIdentifier, namePattern, type);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -356,7 +259,6 @@ public class MetadataListItemInput implements Serializable {
         sb.append("    objIdentifier: ").append(toIndentedString(objIdentifier)).append("\n");
         sb.append("    namePattern: ").append(toIndentedString(namePattern)).append("\n");
         sb.append("    type: ").append(toIndentedString(type)).append("\n");
-        sb.append("    subtypes: ").append(toIndentedString(subtypes)).append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -382,7 +284,6 @@ public class MetadataListItemInput implements Serializable {
         openapiFields.add("obj_identifier");
         openapiFields.add("name_pattern");
         openapiFields.add("type");
-        openapiFields.add("subtypes");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -453,16 +354,6 @@ public class MetadataListItemInput implements Serializable {
         // validate the optional field `type`
         if (jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) {
             TypeEnum.validateJsonElement(jsonObj.get("type"));
-        }
-        // ensure the optional json data is an array if present
-        if (jsonObj.get("subtypes") != null
-                && !jsonObj.get("subtypes").isJsonNull()
-                && !jsonObj.get("subtypes").isJsonArray()) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            "Expected the field `subtypes` to be an array in the JSON string but"
-                                    + " got `%s`",
-                            jsonObj.get("subtypes").toString()));
         }
     }
 

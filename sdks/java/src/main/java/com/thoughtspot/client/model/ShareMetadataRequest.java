@@ -37,7 +37,7 @@ public class ShareMetadataRequest implements Serializable {
     /**
      * Type of metadata. Required if identifier in metadata_identifies is a name. 1. Liveboard 2.
      * Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4.
-     * LOGICAL_COLUMN 5. Connection
+     * LOGICAL_COLUMN
      */
     @JsonAdapter(MetadataTypeEnum.Adapter.class)
     public enum MetadataTypeEnum {
@@ -168,7 +168,7 @@ public class ShareMetadataRequest implements Serializable {
     /**
      * Type of metadata. Required if identifier in metadata_identifies is a name. 1. Liveboard 2.
      * Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4.
-     * LOGICAL_COLUMN 5. Connection
+     * LOGICAL_COLUMN
      *
      * @return metadataType
      */

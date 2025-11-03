@@ -75,10 +75,4 @@ public class CreateScheduleRequestTest {
     public void recipientDetailsTest() {
         // TODO: test recipientDetails
     }
-
-    /** Test the property 'personalisedViewId' */
-    @Test
-    public void personalisedViewIdTest() {
-        // TODO: test personalisedViewId
-    }
 }

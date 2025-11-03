@@ -7,50 +7,38 @@ package com.thoughtspot.client.api;
 import com.thoughtspot.client.ApiException;
 import com.thoughtspot.client.model.AccessToken;
 import com.thoughtspot.client.model.ActivateUserRequest;
-import com.thoughtspot.client.model.AgentConversation;
 import com.thoughtspot.client.model.AnswerDataResponse;
 import com.thoughtspot.client.model.AssignChangeAuthorRequest;
 import com.thoughtspot.client.model.AssignTagRequest;
-import com.thoughtspot.client.model.CalendarResponse;
 import com.thoughtspot.client.model.ChangeUserPasswordRequest;
-import com.thoughtspot.client.model.ColumnSecurityRuleResponse;
 import com.thoughtspot.client.model.CommitBranchRequest;
 import com.thoughtspot.client.model.CommitHistoryResponse;
 import com.thoughtspot.client.model.CommitResponse;
-import com.thoughtspot.client.model.ConnectionConfigurationResponse;
-import com.thoughtspot.client.model.ConnectionConfigurationSearchRequest;
 import com.thoughtspot.client.model.Conversation;
 import com.thoughtspot.client.model.ConvertWorksheetToModelRequest;
 import com.thoughtspot.client.model.CopyObjectRequest;
-import com.thoughtspot.client.model.CreateAgentConversationRequest;
-import com.thoughtspot.client.model.CreateCalendarRequest;
 import com.thoughtspot.client.model.CreateConfigRequest;
-import com.thoughtspot.client.model.CreateConnectionConfigurationRequest;
 import com.thoughtspot.client.model.CreateConnectionRequest;
 import com.thoughtspot.client.model.CreateConnectionResponse;
 import com.thoughtspot.client.model.CreateConversationRequest;
 import com.thoughtspot.client.model.CreateCustomActionRequest;
-import com.thoughtspot.client.model.CreateEmailCustomizationRequest;
-import com.thoughtspot.client.model.CreateEmailCustomizationResponse;
 import com.thoughtspot.client.model.CreateOrgRequest;
 import com.thoughtspot.client.model.CreateRoleRequest;
 import com.thoughtspot.client.model.CreateScheduleRequest;
 import com.thoughtspot.client.model.CreateTagRequest;
 import com.thoughtspot.client.model.CreateUserGroupRequest;
 import com.thoughtspot.client.model.CreateUserRequest;
-import com.thoughtspot.client.model.CreateVariableRequest;
+import com.thoughtspot.client.model.DbtConnectionRequest;
+import com.thoughtspot.client.model.DbtGenerateSyncTmlRequest;
+import com.thoughtspot.client.model.DbtGenerateTmlRequest;
 import com.thoughtspot.client.model.DbtSearchResponse;
 import com.thoughtspot.client.model.DeactivateUserRequest;
 import com.thoughtspot.client.model.DeleteConfigRequest;
-import com.thoughtspot.client.model.DeleteConnectionConfigurationRequest;
 import com.thoughtspot.client.model.DeleteConnectionRequest;
 import com.thoughtspot.client.model.DeleteMetadataRequest;
-import com.thoughtspot.client.model.DeleteOrgEmailCustomizationRequest;
 import com.thoughtspot.client.model.DeployCommitRequest;
 import com.thoughtspot.client.model.DeployResponse;
-import com.thoughtspot.client.model.EurekaDataSourceSuggestionResponse;
 import com.thoughtspot.client.model.EurekaDecomposeQueryResponse;
-import com.thoughtspot.client.model.EurekaGetRelevantQuestionsResponse;
 import com.thoughtspot.client.model.ExportAnswerReportRequest;
 import com.thoughtspot.client.model.ExportLiveboardReportRequest;
 import com.thoughtspot.client.model.ExportMetadataTMLBatchedRequest;
@@ -58,7 +46,6 @@ import com.thoughtspot.client.model.ExportMetadataTMLRequest;
 import com.thoughtspot.client.model.FetchAnswerDataRequest;
 import com.thoughtspot.client.model.FetchAnswerSqlQueryRequest;
 import com.thoughtspot.client.model.FetchAsyncImportTaskStatusRequest;
-import com.thoughtspot.client.model.FetchColumnSecurityRulesRequest;
 import com.thoughtspot.client.model.FetchConnectionDiffStatusResponse;
 import com.thoughtspot.client.model.FetchLiveboardDataRequest;
 import com.thoughtspot.client.model.FetchLiveboardSqlQueryRequest;
@@ -66,13 +53,10 @@ import com.thoughtspot.client.model.FetchLogsRequest;
 import com.thoughtspot.client.model.FetchPermissionsOfPrincipalsRequest;
 import com.thoughtspot.client.model.FetchPermissionsOnMetadataRequest;
 import com.thoughtspot.client.model.ForceLogoutUsersRequest;
-import com.thoughtspot.client.model.GenerateCSVRequest;
 import com.thoughtspot.client.model.GetAsyncImportStatusResponse;
 import com.thoughtspot.client.model.GetCustomAccessTokenRequest;
-import com.thoughtspot.client.model.GetDataSourceSuggestionsRequest;
 import com.thoughtspot.client.model.GetFullAccessTokenRequest;
 import com.thoughtspot.client.model.GetObjectAccessTokenRequest;
-import com.thoughtspot.client.model.GetRelevantQuestionsRequest;
 import com.thoughtspot.client.model.GetTokenResponse;
 import com.thoughtspot.client.model.ImportEPackAsyncTaskStatus;
 import com.thoughtspot.client.model.ImportMetadataTMLAsyncRequest;
@@ -86,10 +70,8 @@ import com.thoughtspot.client.model.LogResponse;
 import com.thoughtspot.client.model.LoginRequest;
 import com.thoughtspot.client.model.MetadataSearchResponse;
 import com.thoughtspot.client.model.OrgResponse;
-import com.thoughtspot.client.model.ParameterizeMetadataRequest;
 import com.thoughtspot.client.model.PermissionOfMetadataResponse;
 import com.thoughtspot.client.model.PermissionOfPrincipalsResponse;
-import com.thoughtspot.client.model.PublishMetadataRequest;
 import com.thoughtspot.client.model.QueryGetDecomposedQueryRequest;
 import com.thoughtspot.client.model.RepoConfigObject;
 import com.thoughtspot.client.model.ResetUserPasswordRequest;
@@ -103,7 +85,6 @@ import com.thoughtspot.client.model.RevertCommitRequest;
 import com.thoughtspot.client.model.RevertResponse;
 import com.thoughtspot.client.model.RevokeTokenRequest;
 import com.thoughtspot.client.model.RoleResponse;
-import com.thoughtspot.client.model.SearchCalendarsRequest;
 import com.thoughtspot.client.model.SearchCommitsRequest;
 import com.thoughtspot.client.model.SearchConfigRequest;
 import com.thoughtspot.client.model.SearchConnectionRequest;
@@ -111,7 +92,6 @@ import com.thoughtspot.client.model.SearchConnectionResponse;
 import com.thoughtspot.client.model.SearchCustomActionsRequest;
 import com.thoughtspot.client.model.SearchDataRequest;
 import com.thoughtspot.client.model.SearchDataResponse;
-import com.thoughtspot.client.model.SearchEmailCustomizationRequest;
 import com.thoughtspot.client.model.SearchMetadataRequest;
 import com.thoughtspot.client.model.SearchOrgsRequest;
 import com.thoughtspot.client.model.SearchRoleResponse;
@@ -120,29 +100,20 @@ import com.thoughtspot.client.model.SearchSchedulesRequest;
 import com.thoughtspot.client.model.SearchTagsRequest;
 import com.thoughtspot.client.model.SearchUserGroupsRequest;
 import com.thoughtspot.client.model.SearchUsersRequest;
-import com.thoughtspot.client.model.SearchVariablesRequest;
-import com.thoughtspot.client.model.SendAgentMessageResponse;
-import com.thoughtspot.client.model.SendAgentMessageStreamingRequest;
 import com.thoughtspot.client.model.SendMessageRequest;
 import com.thoughtspot.client.model.ShareMetadataRequest;
 import com.thoughtspot.client.model.SingleAnswerRequest;
 import com.thoughtspot.client.model.SqlQueryResponse;
 import com.thoughtspot.client.model.SystemConfig;
 import com.thoughtspot.client.model.SystemInfo;
-import com.thoughtspot.client.model.SystemOverrideInfo;
 import com.thoughtspot.client.model.Tag;
 import com.thoughtspot.client.model.Token;
 import com.thoughtspot.client.model.TokenValidationResponse;
-import com.thoughtspot.client.model.UnparameterizeMetadataRequest;
-import com.thoughtspot.client.model.UnpublishMetadataRequest;
-import com.thoughtspot.client.model.UpdateCalendarRequest;
-import com.thoughtspot.client.model.UpdateColumnSecurityRulesRequest;
 import com.thoughtspot.client.model.UpdateConfigRequest;
-import com.thoughtspot.client.model.UpdateConnectionConfigurationRequest;
 import com.thoughtspot.client.model.UpdateConnectionRequest;
 import com.thoughtspot.client.model.UpdateConnectionV2Request;
 import com.thoughtspot.client.model.UpdateCustomActionRequest;
-import com.thoughtspot.client.model.UpdateEmailCustomizationRequest;
+import com.thoughtspot.client.model.UpdateDbtConnectionRequest;
 import com.thoughtspot.client.model.UpdateMetadataHeaderRequest;
 import com.thoughtspot.client.model.UpdateMetadataObjIdRequest;
 import com.thoughtspot.client.model.UpdateOrgRequest;
@@ -152,13 +123,10 @@ import com.thoughtspot.client.model.UpdateSystemConfigRequest;
 import com.thoughtspot.client.model.UpdateTagRequest;
 import com.thoughtspot.client.model.UpdateUserGroupRequest;
 import com.thoughtspot.client.model.UpdateUserRequest;
-import com.thoughtspot.client.model.UpdateVariableRequest;
-import com.thoughtspot.client.model.UpdateVariableValuesRequest;
 import com.thoughtspot.client.model.User;
 import com.thoughtspot.client.model.UserGroupResponse;
 import com.thoughtspot.client.model.ValidateMergeRequest;
 import com.thoughtspot.client.model.ValidateTokenRequest;
-import com.thoughtspot.client.model.Variable;
 import java.io.File;
 import java.util.List;
 import org.junit.jupiter.api.Disabled;
@@ -251,27 +219,6 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Version: 10.12.0.cl or later Gets connection configuration objects. Requires
-     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection
-     * object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
-     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit
-     * Connections**) privilege is required. #### Usage guidelines * To get a list of all
-     * configurations available in the ThoughtSpot system, send the API request with only the
-     * connection name or GUID in the request body. * To fetch details of a configuration object,
-     * specify the configuration object name or GUID.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void connectionConfigurationSearchTest() throws ApiException {
-        ConnectionConfigurationSearchRequest connectionConfigurationSearchRequest = null;
-        List<ConnectionConfigurationResponse> response =
-                api.connectionConfigurationSearch(connectionConfigurationSearchRequest);
-        // TODO: test validations
-    }
-
-    /**
      * Convert worksheets to models Version: 10.6.0.cl or later ## Prerequisites - **Privileges
      * Required:** - &#x60;DATAMANAGEMENT&#x60; (Can manage data) or &#x60;ADMINISTRATION&#x60; (Can
      * administer ThoughtSpot). - **Additional Privileges (if RBAC is enabled):** -
@@ -329,80 +276,6 @@ public class ThoughtSpotRestApiTest {
     public void copyObjectTest() throws ApiException {
         CopyObjectRequest copyObjectRequest = null;
         ResponseCopyObject response = api.copyObject(copyObjectRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Version: 10.13.0.cl or later
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void createAgentConversationTest() throws ApiException {
-        CreateAgentConversationRequest createAgentConversationRequest = null;
-        AgentConversation response = api.createAgentConversation(createAgentConversationRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Version: 10.12.0.cl or later Creates a new [custom
-     * calendar](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal). Requires
-     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can
-     * administer ThoughtSpot**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot
-     * instance, the &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60; (**Can manage custom calendars**)
-     * privilege is required. #### Usage guidelines You can create a custom calendar from scratch or
-     * an existing Table in ThoughtSpot. For both methods of calendar creation, the following
-     * parameters are required: * Name of the custom calendar. * Calendar creation method. To create
-     * a calendar from an existing table, specify the method: - &#x60;FROM_EXISTING_TABLE&#x60; -
-     * Creates calendar from the table reference provided in the API request. -
-     * &#x60;FROM_INPUT_PARAMS&#x60; - Creates a calendar from the parameters defined in the API
-     * request. * Connection ID and Table name * Database and schema name attributes: For most Cloud
-     * Data Warehouse (CDW) connectors, both &#x60;database_name&#x60; and &#x60;schema_name&#x60;
-     * attributes are required. However, the attribute requirements are conditional and vary based
-     * on the connector type and its metadata structure. For example, for connectors such as
-     * Teradata, MySQL, SingleSore, Amazon Aurora MySQL, Amazon RDS MySQL, Oracle, and GCP_MYSQL,
-     * the &#x60;schema_name&#x60; is required, whereas the &#x60;database_name&#x60; attribute is
-     * not. Similarly, connectors such as ClickHouse require you to specify the
-     * &#x60;database_name&#x60; and the schema specification in such cases is optional. **NOTE**:
-     * If you are creating a calendar from an existing table, ensure that the referenced table
-     * matches the required DDL for custom calendars. If the schema does not match, the API returns
-     * an error. ##### Calendar type The API allows you to create the following types of calendars:
-     * * &#x60;MONTH_OFFSET&#x60;. The default calendar type. A &#x60;MONTH_OFFSET&#x60; calendar is
-     * offset by a few months from the standard calendar months (January to December) and the year
-     * begins with the month defined in the request. For example, if the &#x60;month_offset&#x60;
-     * value is set as &#x60;April&#x60;, the calendar year begins in April. * &#x60;4-4-5&#x60;.
-     * Each quarter in the calendar will include two 4-week months followed by one 5-week month. *
-     * &#x60;4-5-4&#x60;. Each quarter in the calendar will include two 4-week months with a 5-week
-     * month between. * &#x60;5-4-4&#x60;. Each quarter begins with a 5-week month, followed by two
-     * 4-week months. To start and end the calendar on a specific date, specify the dates in the
-     * &#x60;MM/DD/YYYY&#x60; format. For &#x60;MONTH_OFFSET&#x60; calendars, ensure that the
-     * &#x60;start_date&#x60; matches the month specified in the &#x60;month_offset&#x60; attribute.
-     * You can also set the starting day of the week and customize the prefixes for year and quarter
-     * labels. #### Examples To create a calendar from an existing table: &#x60;&#x60;&#x60; {
-     * \&quot;name\&quot;: \&quot;MyCustomCalendar1\&quot;, \&quot;table_reference\&quot;: {
-     * \&quot;connection_identifier\&quot;: \&quot;4db8ea22-2ff4-4224-b05a-26674717e468\&quot;,
-     * \&quot;table_name\&quot;: \&quot;MyCalendarTable\&quot;, \&quot;database_name\&quot;:
-     * \&quot;RETAILAPPAREL\&quot;, \&quot;schema_name\&quot;: \&quot;PUBLIC\&quot; },
-     * \&quot;creation_method\&quot;: \&quot;FROM_EXISTING_TABLE\&quot;, } &#x60;&#x60;&#x60; To
-     * create a calendar from scratch: &#x60;&#x60;&#x60; { \&quot;name\&quot;:
-     * \&quot;MyCustomCalendar1\&quot;, \&quot;table_reference\&quot;: {
-     * \&quot;connection_identifier\&quot;: \&quot;4db8ea22-2ff4-4224-b05a-26674717e468\&quot;,
-     * \&quot;table_name\&quot;: \&quot;MyCalendarTable\&quot;, \&quot;database_name\&quot;:
-     * \&quot;RETAILAPPAREL\&quot;, \&quot;schema_name\&quot;: \&quot;PUBLIC\&quot; },
-     * \&quot;creation_method\&quot;: \&quot;FROM_INPUT_PARAMS\&quot;, \&quot;calendar_type\&quot;:
-     * \&quot;MONTH_OFFSET\&quot;, \&quot;month_offset\&quot;: \&quot;April\&quot;,
-     * \&quot;start_day_of_week\&quot;: \&quot;Monday\&quot;, \&quot;quarter_name_prefix\&quot;:
-     * \&quot;Q\&quot;, \&quot;year_name_prefix\&quot;: \&quot;FY\&quot;, \&quot;start_date\&quot;:
-     * \&quot;04/01/2025\&quot;, \&quot;end_date\&quot;: \&quot;04/31/2025\&quot; }
-     * &#x60;&#x60;&#x60;
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void createCalendarTest() throws ApiException {
-        CreateCalendarRequest createCalendarRequest = null;
-        CalendarResponse response = api.createCalendar(createCalendarRequest);
         // TODO: test validations
     }
 
@@ -484,33 +357,6 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Version: 10.12.0.cl or later Creates an additional configuration to an existing connection to
-     * a data warehouse. Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or
-     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access
-     * Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance,
-     * the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is
-     * required. #### Usage guidelines * A JSON map of configuration attributes in
-     * &#x60;configuration&#x60;. The following example shows the configuration attributes:
-     * &#x60;&#x60;&#x60; { \&quot;user\&quot;:\&quot;DEV_USER\&quot;,
-     * \&quot;password\&quot;:\&quot;TestConn123\&quot;, \&quot;role\&quot;:\&quot;DEV\&quot;,
-     * \&quot;warehouse\&quot;:\&quot;DEV_WH\&quot; } &#x60;&#x60;&#x60; * If the
-     * &#x60;policy_type&#x60; is &#x60;PRINCIPALS&#x60;, then &#x60;policy_principals&#x60; is a
-     * required field. * If the &#x60;policy_type&#x60; is &#x60;PROCESSES&#x60;, then
-     * &#x60;policy_processes&#x60; is a required field. * If the &#x60;policy_type&#x60; is
-     * &#x60;NO_POLICY&#x60;, then &#x60;policy_principals&#x60; and &#x60;policy_processes&#x60;
-     * are not required fields.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void createConnectionConfigurationTest() throws ApiException {
-        CreateConnectionConfigurationRequest createConnectionConfigurationRequest = null;
-        ConnectionConfigurationResponse response =
-                api.createConnectionConfiguration(createConnectionConfigurationRequest);
-        // TODO: test validations
-    }
-
-    /**
      * Version: 10.4.0.cl or later Creates a Conversation object to start an AI-driven conversation
      * based on a specific data model. Requires at least view access to the metadata object
      * specified in the request. #### Usage guidelines This API requires the
@@ -555,43 +401,6 @@ public class ThoughtSpotRestApiTest {
     public void createCustomActionTest() throws ApiException {
         CreateCustomActionRequest createCustomActionRequest = null;
         ResponseCustomAction response = api.createCustomAction(createCustomActionRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Version: 10.10.0.cl or later Creates a customization configuration for the notification
-     * email. #### Pre-requisites Requires &#x60;DEVELOPER&#x60; (**has developer privilege**) or
-     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access
-     * Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance,
-     * the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required. **NOTE**:This
-     * endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.
-     * #### Usage guidelines To create a custom configuration pass these parameters in your API
-     * request: - A JSON map of configuration attributes &#x60;template_properties&#x60;. The
-     * following example shows a sample set of customization configuration: &#x60;&#x60;&#x60; { {
-     * \&quot;ctaButtonBgColor\&quot;: \&quot;#444DEA\&quot;, \&quot;ctaTextFontColor\&quot;:
-     * \&quot;#FFFFFF\&quot;, \&quot;primaryBgColor\&quot;: \&quot;#D3DEF0\&quot;,
-     * \&quot;hideMobileAppNudge\&quot;: false, \&quot;fontFamily\&quot; : \&quot;\&quot;,
-     * \&quot;hideProductName\&quot; : false, \&quot;hideFooterPhone\&quot; : false,
-     * \&quot;hideFooterAddress\&quot; : false, \&quot;hidePrivacyPolicy\&quot; : false,
-     * \&quot;hideManageNotification\&quot; : false, \&quot;hideTsVocabularyDefinitions\&quot;:
-     * false, \&quot;hideNotificationStatus\&quot; : false, \&quot;hideErrorMessage\&quot;: false,
-     * \&quot;hideUnsubscribeLink\&quot; : false, \&quot;hideModifyAlert\&quot;: false,
-     * \&quot;textTransform\&quot;: \&quot;\&quot;, \&quot;replacementValueForLiveboard\&quot;:
-     * \&quot;LB dashboard\&quot;, \&quot;replacementValueForAnswer\&quot;: \&quot;Answer
-     * dashboard\&quot;, \&quot;replacementValueForSpotIQ\&quot;: \&quot;SpotIQ dashboard\&quot;,
-     * \&quot;logoUrl\&quot;:\&quot;\&quot;, \&quot;productName\&quot;:\&quot;ThoughtSpot\&quot;,
-     * \&quot;footerPhone\&quot;:\&quot;(800) 508-7008\&quot;,
-     * \&quot;footerAddress\&quot;:\&quot;444 Castro St, Suite 1000 Mountain View, CA 94041\&quot;,
-     * \&quot;companyWebsiteUrl\&quot;:\&quot;\&quot;,
-     * \&quot;companyPrivacyPolicyUrl\&quot;:\&quot;\&quot; } } &#x60;&#x60;&#x60;
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void createEmailCustomizationTest() throws ApiException {
-        CreateEmailCustomizationRequest createEmailCustomizationRequest = null;
-        CreateEmailCustomizationResponse response =
-                api.createEmailCustomization(createEmailCustomizationRequest);
         // TODO: test validations
     }
 
@@ -722,28 +531,6 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Create a variable which can be used for parameterizing metadata objects Version: 10.9.0.cl or
-     * later Allows creating a variable which can be used for parameterizing metadata objects in
-     * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint supports the
-     * following types of variables: * CONNECTION_PROPERTY - For connection properties *
-     * TABLE_MAPPING - For table mappings * CONNECTION_PROPERTY_PER_PRINCIPAL - For connection
-     * properties per principal. In order to use this please contact support to enable this. *
-     * FORMULA_VARIABLE - For Formula variables When creating a variable, you need to specify: * The
-     * variable type * A unique name for the variable * Whether the variable contains sensitive
-     * values (defaults to false) * The data type of the variable, only specify for fomula variables
-     * (defaults to null) The operation will fail if: * The user lacks required permissions * The
-     * variable name already exists * The variable type is invalid
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void createVariableTest() throws ApiException {
-        CreateVariableRequest createVariableRequest = null;
-        Variable response = api.createVariable(createVariableRequest);
-        // TODO: test validations
-    }
-
-    /**
      * Version: 9.9.0.cl or later Creates a DBT connection object in ThoughtSpot. Requires
      * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or
      * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control
@@ -762,28 +549,8 @@ public class ThoughtSpotRestApiTest {
      */
     @Test
     public void dbtConnectionTest() throws ApiException {
-        String connectionName = null;
-        String databaseName = null;
-        String importType = null;
-        String accessToken = null;
-        String dbtUrl = null;
-        String accountId = null;
-        String projectId = null;
-        String dbtEnvId = null;
-        String projectName = null;
-        File fileContent = null;
-        Object response =
-                api.dbtConnection(
-                        connectionName,
-                        databaseName,
-                        importType,
-                        accessToken,
-                        dbtUrl,
-                        accountId,
-                        projectId,
-                        dbtEnvId,
-                        projectName,
-                        fileContent);
+        DbtConnectionRequest dbtConnectionRequest = null;
+        Object response = api.dbtConnection(dbtConnectionRequest);
         // TODO: test validations
     }
 
@@ -803,9 +570,8 @@ public class ThoughtSpotRestApiTest {
      */
     @Test
     public void dbtGenerateSyncTmlTest() throws ApiException {
-        String dbtConnectionIdentifier = null;
-        File fileContent = null;
-        Object response = api.dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent);
+        DbtGenerateSyncTmlRequest dbtGenerateSyncTmlRequest = null;
+        Object response = api.dbtGenerateSyncTml(dbtGenerateSyncTmlRequest);
         // TODO: test validations
     }
 
@@ -826,18 +592,8 @@ public class ThoughtSpotRestApiTest {
      */
     @Test
     public void dbtGenerateTmlTest() throws ApiException {
-        String dbtConnectionIdentifier = null;
-        String importWorksheets = null;
-        String modelTables = null;
-        String worksheets = null;
-        File fileContent = null;
-        Object response =
-                api.dbtGenerateTml(
-                        dbtConnectionIdentifier,
-                        importWorksheets,
-                        modelTables,
-                        worksheets,
-                        fileContent);
+        DbtGenerateTmlRequest dbtGenerateTmlRequest = null;
+        Object response = api.dbtGenerateTml(dbtGenerateTmlRequest);
         // TODO: test validations
     }
 
@@ -883,25 +639,6 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Version: 10.12.0.cl or later Deletes a [custom
-     * calendar](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal). Requires
-     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can
-     * administer ThoughtSpot**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot
-     * instance, the &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60; (**Can manage custom calendars**)
-     * privilege is required. #### Usage guidelines To delete a custom calendar, specify the
-     * calendar ID as a path parameter in the request URL.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void deleteCalendarTest() throws ApiException {
-        String calendarIdentifier = null;
-        api.deleteCalendar(calendarIdentifier);
-        // TODO: test validations
-    }
-
-    /**
      * Version: 9.2.0.cl or later Deletes Git repository configuration from your ThoughtSpot
      * instance. Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
      * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
@@ -935,23 +672,6 @@ public class ThoughtSpotRestApiTest {
     public void deleteConnectionTest() throws ApiException {
         DeleteConnectionRequest deleteConnectionRequest = null;
         api.deleteConnection(deleteConnectionRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Version: 10.12.0.cl or later Deletes connection configuration objects. Requires
-     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection
-     * object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
-     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit
-     * Connections**) privilege is required.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void deleteConnectionConfigurationTest() throws ApiException {
-        DeleteConnectionConfigurationRequest deleteConnectionConfigurationRequest = null;
-        api.deleteConnectionConfiguration(deleteConnectionConfigurationRequest);
         // TODO: test validations
     }
 
@@ -1009,26 +729,6 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Version: 10.10.0.cl or later Deletes the configuration for the email customization. ####
-     * Pre-requisites Requires &#x60;DEVELOPER&#x60; (**has developer privilege**) or
-     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access
-     * Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance,
-     * the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required. **NOTE**:This
-     * endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.
-     * #### Usage guidelines - Call the search API endpoint to get the
-     * &#x60;template_identifier&#x60; from the response. - Use that &#x60;template_identifier&#x60;
-     * as a parameter in this API request.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void deleteEmailCustomizationTest() throws ApiException {
-        String templateIdentifier = null;
-        api.deleteEmailCustomization(templateIdentifier);
-        // TODO: test validations
-    }
-
-    /**
      * Version: 9.0.0.cl or later Removes the specified metadata object from the ThoughtSpot system.
      * Requires edit access to the metadata object.
      *
@@ -1056,25 +756,6 @@ public class ThoughtSpotRestApiTest {
     public void deleteOrgTest() throws ApiException {
         String orgIdentifier = null;
         api.deleteOrg(orgIdentifier);
-        // TODO: test validations
-    }
-
-    /**
-     * Version: 10.12.0.cl or later Deletes the configuration for the email customization. ####
-     * Pre-requisites Requires &#x60;DEVELOPER&#x60; (**has developer privilege**) or
-     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access
-     * Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance,
-     * the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required. **NOTE**:This
-     * endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.
-     * #### Usage guidelines - Call the search API endpoint to get the &#x60;org_identifier&#x60;
-     * from the response. - Use that &#x60;org_identifier&#x60; as a parameter in this API request.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void deleteOrgEmailCustomizationTest() throws ApiException {
-        DeleteOrgEmailCustomizationRequest deleteOrgEmailCustomizationRequest = null;
-        api.deleteOrgEmailCustomization(deleteOrgEmailCustomizationRequest);
         // TODO: test validations
     }
 
@@ -1161,21 +842,6 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Delete a variable Version: 10.9.0.cl or later Allows deleting a variable from ThoughtSpot.
-     * Requires ADMINISTRATION role and TENANT scope. The API endpoint requires: * The variable
-     * identifier (ID or name) The operation will fail if: * The user lacks required permissions *
-     * The variable doesn&#39;t exist * The variable is being used by other objects
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void deleteVariableTest() throws ApiException {
-        String identifier = null;
-        api.deleteVariable(identifier);
-        // TODO: test validations
-    }
-
-    /**
      * Version: 9.2.0.cl or later Allows you to deploy a commit and publish TML content to your
      * ThoughtSpot instance. Requires at least edit access to the objects used in the deploy
      * operation. The API deploys the head of the branch unless a &#x60;commit_id&#x60; is specified
@@ -1221,7 +887,10 @@ public class ThoughtSpotRestApiTest {
      * in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with
      * tables. Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
-     * to apply to the Answer data.
+     * to apply to the Answer data. The &#x60;record_size&#x60; attribute determines the number of
+     * records to retrieve in an API call. For more information about pagination, record size, and
+     * maximum row limit, see [Pagination and record size
+     * settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).
      *
      * @throws ApiException if the Api call fails
      */
@@ -1249,11 +918,6 @@ public class ThoughtSpotRestApiTest {
      * successful execution, the API returns the report with unsaved changes, including ad hoc
      * changes to visualizations. For more information, see [Liveboard Report
      * API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
-     * **NOTE**: Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in
-     * the PNG format in the resolution of your choice. To enable this on your instance, contact
-     * ThoughtSpot support. When this feature is enabled, the options
-     * &#x60;include_cover_page&#x60;,&#x60;include_filter_page&#x60; within the
-     * &#x60;png_options&#x60; will not be available for PNG exports.
      *
      * @throws ApiException if the Api call fails
      */
@@ -1395,42 +1059,6 @@ public class ThoughtSpotRestApiTest {
         FetchAsyncImportTaskStatusRequest fetchAsyncImportTaskStatusRequest = null;
         GetAsyncImportStatusResponse response =
                 api.fetchAsyncImportTaskStatus(fetchAsyncImportTaskStatusRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Version: 10.12.0.cl or later Fetches column security rules for specified tables. This API
-     * endpoint retrieves column-level security rules configured for tables. It returns information
-     * about which columns are secured and which groups have access to those columns. #### Usage
-     * guidelines - Provide an array of table identifiers using either &#x60;identifier&#x60; (GUID
-     * or name) or &#x60;obj_identifier&#x60; (object ID) - At least one of &#x60;identifier&#x60;
-     * or &#x60;obj_identifier&#x60; must be provided for each table - The API returns column
-     * security rules for all specified tables - Users must have appropriate permissions to access
-     * security rules for the specified tables #### Required permissions -
-     * &#x60;ADMINISTRATION&#x60; - Can administer ThoughtSpot - &#x60;DATAMANAGEMENT&#x60; - Can
-     * manage data - &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; - Can manage worksheet views and
-     * tables #### Example request &#x60;&#x60;&#x60;json { \&quot;tables\&quot;: [ {
-     * \&quot;identifier\&quot;: \&quot;table-guid\&quot;, \&quot;obj_identifier\&quot;:
-     * \&quot;table-object-id\&quot; } ] } &#x60;&#x60;&#x60; #### Response format The API returns
-     * an array of &#x60;ColumnSecurityRuleResponse&#x60; objects wrapped in a &#x60;data&#x60;
-     * field. Each &#x60;ColumnSecurityRuleResponse&#x60; object contains: - Table information (GUID
-     * and object ID) - Array of column security rules with column details, group access, and source
-     * table information #### Example response &#x60;&#x60;&#x60;json { \&quot;data\&quot;: [ {
-     * \&quot;guid\&quot;: \&quot;table-guid\&quot;, \&quot;objId\&quot;:
-     * \&quot;table-object-id\&quot;, \&quot;columnSecurityRules\&quot;: [ { \&quot;column\&quot;: {
-     * \&quot;id\&quot;: \&quot;col_123\&quot;, \&quot;name\&quot;: \&quot;Salary\&quot; },
-     * \&quot;groups\&quot;: [ { \&quot;id\&quot;: \&quot;group_1\&quot;, \&quot;name\&quot;:
-     * \&quot;HR Department\&quot; } ], \&quot;sourceTableDetails\&quot;: { \&quot;id\&quot;:
-     * \&quot;source-table-guid\&quot;, \&quot;name\&quot;: \&quot;Employee_Data\&quot; } } ] } ] }
-     * &#x60;&#x60;&#x60;
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void fetchColumnSecurityRulesTest() throws ApiException {
-        FetchColumnSecurityRulesRequest fetchColumnSecurityRulesRequest = null;
-        List<ColumnSecurityRuleResponse> response =
-                api.fetchColumnSecurityRules(fetchColumnSecurityRulesRequest);
         // TODO: test validations
     }
 
@@ -1591,32 +1219,10 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Version: 10.12.0.cl or later Exports a [custom
-     * calendar](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal) in the CSV format.
-     * Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60;
-     * (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot
-     * instance, the &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60; (**Can manage custom calendars**)
-     * privilege is required. #### Usage guidelines Use this API to download a custom calendar in
-     * the CSV file format. In your API request, specify the following parameters. * Start and end
-     * date of the calendar. For \&quot;month offset\&quot; calendars, the start date must match the
-     * month defined in the &#x60;month_offset&#x60; attribute. You can also specify optional
-     * parameters such as the starting day of the week and prefixes for the quarter and year labels.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void generateCSVTest() throws ApiException {
-        GenerateCSVRequest generateCSVRequest = null;
-        Object response = api.generateCSV(generateCSVRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Version: 9.0.0.cl or later Retrieves details of the current user session for the token
-     * provided in the request header. Any ThoughtSpot user can access this endpoint and send an API
-     * request. The data returned in the API response varies according to user&#39;s privilege and
-     * object access permissions.
+     * Version: 9.0.0.cl or later Gets session information for the currently logged-in user. This
+     * API does not require any parameters to be passed in the request. Any ThoughtSpot user can
+     * access this endpoint and send an API request. The data returned in the API response varies
+     * according to user&#39;s privilege and object access permissions.
      *
      * @throws ApiException if the Api call fails
      */
@@ -1627,12 +1233,10 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Version: 9.4.0.cl or later Retrieves details of the current session token for the bearer
-     * token provided in the request header. This API endpoint does not create a new token. Instead,
-     * it returns details about the token, including the token string, creation time, expiration
-     * time, and the associated user. Use this endpoint to introspect your current session token,
-     * debug authentication issues, or when a frontend application needs session token details. Any
-     * ThoughtSpot user with a valid bearer token can access this endpoint and send an API request
+     * Get token for the currently logged-in user. Version: 9.4.0.cl or later Gets token details for
+     * the currently logged-in user. You can use this endpoint to obtain the token associated with
+     * the user&#39;s session. This API does not require any parameters to be passed in the request.
+     * Any ThoughtSpot user can access this endpoint and send an API request.
      *
      * @throws ApiException if the Api call fails
      */
@@ -1698,31 +1302,6 @@ public class ThoughtSpotRestApiTest {
     public void getCustomAccessTokenTest() throws ApiException {
         GetCustomAccessTokenRequest getCustomAccessTokenRequest = null;
         AccessToken response = api.getCustomAccessToken(getCustomAccessTokenRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Version: 10.13.0.cl or later Provides relevant data source recommendations for a
-     * user-submitted natural language query. To use this API, the user must have at least
-     * view-level access to the underlying metadata entities referenced in the response. #### Usage
-     * guidelines The request must include a &#x60;query&#x60; string via the request body. The
-     * returned results include metadata such as: - &#x60;confidence&#x60;: a float indicating the
-     * model&#39;s confidence in the relevance of each recommendation - &#x60;details&#x60;:
-     * includes &#x60;data_source_identifier&#x60;, &#x60;data_source_name&#x60;, and
-     * &#x60;description&#x60; of each recommended data source - &#x60;reasoning&#x60;: rationale
-     * provided by the LLM to explain why each data source was recommended If the API request is
-     * successful, ThoughtSpot returns a ranked list of data sources, each annotated with relevant
-     * reasoning. &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes may
-     * be introduced before it is made Generally Available. &gt; * This endpoint requires Spotter —
-     * please contact ThoughtSpot Support to enable Spotter on your cluster.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void getDataSourceSuggestionsTest() throws ApiException {
-        GetDataSourceSuggestionsRequest getDataSourceSuggestionsRequest = null;
-        EurekaDataSourceSuggestionResponse response =
-                api.getDataSourceSuggestions(getDataSourceSuggestionsRequest);
         // TODO: test validations
     }
 
@@ -1807,38 +1386,6 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Version: 10.13.0.cl or later Breaks down a user-submitted query into a series of analytical
-     * sub-questions using relevant contextual metadata. To use this API, the user must have at
-     * least view-level access to the referenced metadata objects. #### Usage guidelines To
-     * accurately generate relevant questions, the request must include at least one of the
-     * following metadata identifiers within &#x60;metadata_context&#x60; :
-     * &#x60;conversation_identifier&#x60;, &#x60;answer_identifiers&#x60;,
-     * &#x60;liveboard_identifiers&#x60;, or &#x60;data_source_identifiers&#x60;. You can further
-     * enhance the quality and precision of breakdown by providing additional &#x60;ai_context&#x60;
-     * such as: - &#x60;content&#x60;: User provided content like text data, csv data as a string
-     * message to provide context &amp; potentially improve the quality of the response. -
-     * &#x60;instructions&#x60;: User specific text instructions sent to AI system for processing
-     * the query. Additional optional parameters include: - &#x60;limit_relevant_questions&#x60;:
-     * Controls the maximum number of relevant questions returned. Defaults to 5 if not specified. -
-     * &#x60;bypass_cache&#x60;: If set to true, forces fresh computation instead of returning
-     * cached results. If the API request is successful, ThoughtSpot returns a list of relevant
-     * analytical queries, each aligned with the user&#39;s original question. Each returned
-     * question includes the query string, along with the identifier and name of the corresponding
-     * data source. &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes
-     * may be introduced before the endpoint is made Generally Available. &gt; * This endpoint
-     * requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void getRelevantQuestionsTest() throws ApiException {
-        GetRelevantQuestionsRequest getRelevantQuestionsRequest = null;
-        EurekaGetRelevantQuestionsResponse response =
-                api.getRelevantQuestions(getRelevantQuestionsRequest);
-        // TODO: test validations
-    }
-
-    /**
      * Version: 9.0.0.cl or later Retrieves the current configuration details of the cluster. If the
      * request is successful, the API returns a list configuration settings applied on the cluster.
      * Requires &#x60;ADMINISTRATION&#x60;(**Can administer ThoughtSpot**) privilege to view these
@@ -1883,7 +1430,7 @@ public class ThoughtSpotRestApiTest {
      */
     @Test
     public void getSystemOverrideInfoTest() throws ApiException {
-        SystemOverrideInfo response = api.getSystemOverrideInfo();
+        Object response = api.getSystemOverrideInfo();
         // TODO: test validations
     }
 
@@ -2025,41 +1572,6 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Parameterize fields in metadata objects. Version: 10.9.0.cl or later Allows parameterizing
-     * fields in metadata objects in ThoughtSpot. Requires appropriate permissions to modify the
-     * metadata object. The API endpoint allows parameterizing the following types of metadata
-     * objects: * Logical Tables * Connections For a Logical Table the field type must be
-     * &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName * tableName
-     * For a Connection the field type is always &#x60;CONNECTION_PROPERTY&#x60;. We use the
-     * field_name in this case to specify the exact property of a connection which needs to be
-     * parameterized.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void parameterizeMetadataTest() throws ApiException {
-        ParameterizeMetadataRequest parameterizeMetadataRequest = null;
-        api.parameterizeMetadata(parameterizeMetadataRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Version: 10.9.0.cl or later Allows publishing metadata objects across organizations in
-     * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
-     * publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
-     * This API will essentially share the objects along with it&#39;s dependencies to the org
-     * admins of the orgs to which it is being published.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void publishMetadataTest() throws ApiException {
-        PublishMetadataRequest publishMetadataRequest = null;
-        api.publishMetadata(publishMetadataRequest);
-        // TODO: test validations
-    }
-
-    /**
      * Version: 10.7.0.cl or later
      *
      * @throws ApiException if the Api call fails
@@ -2121,29 +1633,6 @@ public class ThoughtSpotRestApiTest {
     public void revokeTokenTest() throws ApiException {
         RevokeTokenRequest revokeTokenRequest = null;
         api.revokeToken(revokeTokenRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Version: 10.12.0.cl or later Gets a list of [custom
-     * calendars](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal). Requires
-     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can
-     * administer ThoughtSpot**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot
-     * instance, the &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60; (**Can manage custom calendars**)
-     * privilege is required. #### Usage guidelines By default, the API returns a list of custom
-     * calendars for all connection objects. To retrieve custom calendar details for a particular
-     * connection, specify the connection ID. You can also use other search parameters such as
-     * &#x60;name_pattern&#x60; and &#x60;sort_options&#x60; as search filters. The
-     * &#x60;name_pattern&#x60; parameter filters and returns only those objects that match the
-     * specified pattern. Use &#x60;%&#x60; as a wildcard for pattern matching.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void searchCalendarsTest() throws ApiException {
-        SearchCalendarsRequest searchCalendarsRequest = null;
-        List<CalendarResponse> response = api.searchCalendars(searchCalendarsRequest);
         // TODO: test validations
     }
 
@@ -2219,34 +1708,16 @@ public class ThoughtSpotRestApiTest {
      * fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth
      * authentication type. - &#x60;IAM&#x60;: For connections that have the IAM OAuth set up. This
      * authentication type is supported on Amazon Redshift connections only. - &#x60;EXTOAUTH&#x60;:
-     * For connections that have External OAuth set up. ThoughtSpot supports external [OAuth with
+     * For connections that have external OAuth set up. ThoughtSpot supports external [OAuth with
      * Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/
      * connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data
      * connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). -
-     * &#x60;KEY_PAIR&#x60;: For connections that require Key Pair account credentials to
-     * authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
-     * supported on Snowflake connections only. - &#x60;OAUTH_WITH_PKCE&#x60;: For connections that
-     * require OAuth with PKCE account credentials to authenticate to the Cloud Data Warehouse and
-     * fetch data. This authentication type is supported on Snowflake, Starburst, Databricks, Denodo
-     * connections only. - &#x60;EXTOAUTH_WITH_PKCE&#x60;: For connections that require External
-     * OAuth With PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch
-     * data. This authentication type is supported on Snowflake connections only. -
-     * &#x60;OAUTH_WITH_PEZ&#x60;: For connections that require OAuth With PEZ account credentials
-     * to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
-     * supported on Amazon Redshift connections only. - &#x60;OAUTH_WITH_SERVICE_PRINCIPAL&#x60;:
-     * For connections that require OAuth With Service Principal account credentials to authenticate
-     * to the Cloud Data Warehouse and fetch data. This authentication type is supported on
-     * Databricks connections only. - &#x60;PERSONAL_ACCESS_TOKEN&#x60;: For connections that
-     * require Personal Access Token account credentials to authenticate to the Cloud Data Warehouse
-     * and fetch data. This authentication type is supported on Databricks connections only. -
-     * &#x60;OAUTH_CLIENT_CREDENTIALS&#x60;: For connections that require OAuth Client Credentials
-     * to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
-     * supported on Snowflake connections only. - To include more details about connection objects
-     * in the API response, set &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort
-     * the output by field names and filter connections by tags. **NOTE**: When filtering connection
-     * records by parameters other than &#x60;data_warehouse_types&#x60; or
-     * &#x60;tag_identifiers&#x60;, ensure that you set &#x60;record_size&#x60; to &#x60;-1&#x60;
-     * and &#x60;record_offset&#x60; to &#x60;0&#x60; for precise results.
+     * To include more details about connection objects in the API response, set
+     * &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort the output by field
+     * names and filter connections by tags. **NOTE**: When filtering connection records by
+     * parameters other than &#x60;data_warehouse_types&#x60; or &#x60;tag_identifiers&#x60;, ensure
+     * that you set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to
+     * &#x60;0&#x60; for precise results.
      *
      * @throws ApiException if the Api call fails
      */
@@ -2299,35 +1770,13 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Version: 10.10.0.cl or later Search the email customization configuration if any set for the
-     * ThoughtSpot system. #### Pre-requisites Requires &#x60;DEVELOPER&#x60; (**has developer
-     * privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
-     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is
-     * required. **NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable
-     * this on your instance.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void searchEmailCustomizationTest() throws ApiException {
-        SearchEmailCustomizationRequest searchEmailCustomizationRequest = null;
-        List<CreateEmailCustomizationResponse> response =
-                api.searchEmailCustomization(searchEmailCustomizationRequest);
-        // TODO: test validations
-    }
-
-    /**
      * Version: 9.0.0.cl or later Gets a list of metadata objects available on the ThoughtSpot
      * system. This API endpoint is available to all users who have view access to the object. Users
      * with &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privileges can view data for
      * all metadata objects, including users and groups. #### Usage guidelines - To get all metadata
      * objects, send the API request without any attributes. - To get metadata objects of a specific
      * type, set the &#x60;type&#x60; attribute. For example, to fetch a Worksheet, set the type as
-     * &#x60;LOGICAL_TABLE&#x60;. - To filter metadata objects within type
-     * &#x60;LOGICAL_TABLE&#x60;, set the &#x60;subtypes&#x60; attribute. For example, to fetch a
-     * Worksheet, set the type as &#x60;LOGICAL_TABLE&#x60; &amp; subtypes as
-     * &#x60;[WORKSHEET]&#x60;. - To get a specific metadata object, specify the GUID. - To
+     * &#x60;LOGICAL_TABLE&#x60;. - To get a specific metadata object, specify the GUID. - To
      * customize your search and filter the API response, you can use several parameters. You can
      * search for objects created or modified by specific users, by tags applied to the objects, or
      * by using the include parameters like &#x60;include_auto_created_objects&#x60;,
@@ -2335,17 +1784,12 @@ public class ThoughtSpotRestApiTest {
      * &#x60;include_incomplete_objects&#x60;, and so on. You can also define sorting options to
      * sort the data retrieved in the API response. - To get discoverable objects when linientmodel
      * is enabled you can use &#x60;include_discoverable_objects&#x60; as true else false. Default
-     * value is true. - For liveboard metadata type, to get the newer format, set the
-     * &#x60;liveboard_response_format&#x60; as V2. Default value is V1. - To retrieve only objects
-     * that are published, set the &#x60;include_only_published_objects&#x60; as true. Default value
-     * is false. **NOTE**: The following parameters support pagination of metadata records: -
-     * &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;subtypes&#x60; -
-     * &#x60;created_by_user_identifiers&#x60; - &#x60;modified_by_user_identifiers&#x60; -
-     * &#x60;owned_by_user_identifiers&#x60; - &#x60;exclude_objects&#x60; -
-     * &#x60;include_auto_created_objects&#x60; - &#x60;favorite_object_options&#x60; -
-     * &#x60;include_only_published_objects&#x60; If you are using other parameters to search
-     * metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to
-     * &#x60;0&#x60;.
+     * value is true. **NOTE**: The following parameters support pagination of metadata records: -
+     * &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;created_by_user_identifiers&#x60; -
+     * &#x60;modified_by_user_identifiers&#x60; - &#x60;owned_by_user_identifiers&#x60; -
+     * &#x60;exclude_objects&#x60; - &#x60;include_auto_created_objects&#x60; -
+     * &#x60;favorite_object_options&#x60; If you are using other parameters to search metadata, set
+     * &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60;.
      *
      * @throws ApiException if the Api call fails
      */
@@ -2464,55 +1908,6 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Search variables Version: 10.9.0.cl or later Allows searching for variables in ThoughtSpot.
-     * Requires ADMINISTRATION role. The API endpoint supports searching variables by: * Variable
-     * identifier (ID or name) * Variable type * Name pattern (case-insensitive, supports % for
-     * wildcard) The search results can be formatted in three ways: * METADATA_ONLY - Returns only
-     * variable metadata (default) * METADATA_AND_VALUES - Returns variable metadata and values *
-     * EDITABLE_METADATA_AND_VALUES - Returns only editable variable metadata and values The values
-     * can be filtered by scope: * org_identifier * principal_identifier * model_identifier
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void searchVariablesTest() throws ApiException {
-        SearchVariablesRequest searchVariablesRequest = null;
-        List<Variable> response = api.searchVariables(searchVariablesRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Version: 10.13.0.cl or later This API allows users to initiate or continue an agent (Spotter)
-     * conversation by submitting one or more natural language messages. To use this API, the user
-     * must have access to the relevant conversational session (via conversation_identifier) and
-     * submit at least one message. #### Usage guidelines To initiate or continue a conversation,
-     * the request must include: - &#x60;conversation_identifier&#x60;: a unique session ID for
-     * continuity and message tracking - &#x60;messages&#x60;: an array of one or more text
-     * messages, each with a value and type Additionally, user can specify what tool can be included
-     * &#x60;conversation_settings&#x60; parameter, which supports: -
-     * &#x60;enable_contextual_change_analysis&#x60; (default: false) -
-     * &#x60;enable_natural_language_answer_generation&#x60; (default: true) -
-     * &#x60;enable_reasoning&#x60; (default: false) If the request is valid, the API returns a
-     * stream of messages in real time, including: - &#x60;ack&#x60;: confirms receipt of the
-     * request - &#x60;text / text-chunk&#x60;: content chunks, optionally formatted (e.g.,
-     * markdown) - &#x60;answer&#x60;: the final structured response with metadata and analytics -
-     * &#x60;error&#x60;: if a failure occurs - &#x60;notification&#x60;: notification messages for
-     * operation being performed &gt; ###### Note: &gt; * This endpoint is currently in Beta.
-     * Breaking changes may be introduced before the endpoint is made Generally Available. &gt; *
-     * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your
-     * cluster. &gt; * The streaming protocol uses Server-Sent Events (SSE)
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void sendAgentMessageStreamingTest() throws ApiException {
-        SendAgentMessageStreamingRequest sendAgentMessageStreamingRequest = null;
-        SendAgentMessageResponse response =
-                api.sendAgentMessageStreaming(sendAgentMessageStreamingRequest);
-        // TODO: test validations
-    }
-
-    /**
      * Version: 10.4.0.cl or later Allows sending a follow-up message to an ongoing conversation
      * within the context of the metadata model. Requires at least view access to the metadata
      * object specified in the request. #### Usage guidelines The API requires you to specify the
@@ -2586,146 +1981,6 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Remove parameterization from fields in metadata objects. Version: 10.9.0.cl or later Allows
-     * removing parameterization from fields in metadata objects in ThoughtSpot. Requires
-     * appropriate permissions to modify the metadata object. The API endpoint allows
-     * unparameterizing the following types of metadata objects: * Logical Tables * Connections For
-     * a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: *
-     * databaseName * schemaName * tableName For a Connection the field type is always
-     * &#x60;CONNECTION_PROPERTY&#x60;. We use the field_name in this case to specify the exact
-     * property of a connection which needs to be unparameterized.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void unparameterizeMetadataTest() throws ApiException {
-        UnparameterizeMetadataRequest unparameterizeMetadataRequest = null;
-        api.unparameterizeMetadata(unparameterizeMetadataRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Version: 10.9.0.cl or later Allows unpublishing metadata objects from organizations in
-     * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
-     * unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
-     * When unpublishing objects, you can: * Include dependencies by setting
-     * &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no
-     * other published object is using them * Force unpublish by setting &#x60;force&#x60; to true -
-     * this will break all dependent objects in the unpublished organizations
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void unpublishMetadataTest() throws ApiException {
-        UnpublishMetadataRequest unpublishMetadataRequest = null;
-        api.unpublishMetadata(unpublishMetadataRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Version: 10.12.0.cl or later Updates the properties of a [custom
-     * calendar](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal). Requires
-     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can
-     * administer ThoughtSpot**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot
-     * instance, the &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60; (**Can manage custom calendars**)
-     * privilege is required. #### Usage guidelines You can update the properties of a calendar
-     * using one of the following methods: * &#x60;FROM_INPUT_PARAMS&#x60; to update the calendar
-     * properties with the values defined in the API request. * &#x60;FROM_EXISTING_TABLE&#x60;
-     * Creates a calendar from the parameters defined in the API request. To update a custom
-     * calendar, specify the calendar ID as a path parameter in the request URL and the following
-     * parameters in the request body: * Connection ID and Table name * Database and schema name
-     * attributes: For most Cloud Data Warehouse (CDW) connectors, both &#x60;database_name&#x60;
-     * and &#x60;schema_name&#x60; attributes are required. However, the attribute requirements are
-     * conditional and vary based on the connector type and its metadata structure. For example, for
-     * connectors such as Teradata, MySQL, SingleSore, Amazon Aurora MySQL, Amazon RDS MySQL,
-     * Oracle, and GCP_MYSQL, the &#x60;schema_name&#x60; is required, whereas the
-     * &#x60;database_name&#x60; attribute is not. Similarly, connectors such as ClickHouse require
-     * you to specify the &#x60;database_name&#x60; and the schema specification in such cases is
-     * optional. The API allows you to modify the calendar type, month offset value, start and end
-     * date, starting day of the week, and prefixes assigned to the year and quarter labels. ####
-     * Examples Update a custom calendar using an existing Table in ThoughtSpot: &#x60;&#x60;&#x60;
-     * { \&quot;update_method\&quot;: \&quot;FROM_EXISTING_TABLE\&quot;,
-     * \&quot;table_reference\&quot;: { \&quot;connection_identifier\&quot;:
-     * \&quot;Connection1\&quot;, \&quot;database_name\&quot;: \&quot;db1\&quot;,
-     * \&quot;table_name\&quot;: \&quot;custom_calendar_2025\&quot;, \&quot;schame_name\&quot;:
-     * \&quot;schemaVar\&quot; } } &#x60;&#x60;&#x60; Update a custom calendar with the attributes
-     * defined in the API request: &#x60;&#x60;&#x60; { \&quot;update_method\&quot;:
-     * \&quot;FROM_INPUT_PARAMS\&quot;, \&quot;table_reference\&quot;: {
-     * \&quot;connection_identifier\&quot;: \&quot;Connection1\&quot;, \&quot;database_name\&quot;:
-     * \&quot;db1\&quot;, \&quot;table_name\&quot;: \&quot;custom_calendar_2025\&quot;,
-     * \&quot;schame_name\&quot;: \&quot;schemaVar\&quot; }, \&quot;month_offset\&quot;:
-     * \&quot;August\&quot;, \&quot;start_day_of_week\&quot;: \&quot;Monday\&quot;,
-     * \&quot;start_date\&quot;: \&quot;08/01/2025\&quot;, \&quot;end_date\&quot;:
-     * \&quot;07/31/2026\&quot; } &#x60;&#x60;&#x60;
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void updateCalendarTest() throws ApiException {
-        String calendarIdentifier = null;
-        UpdateCalendarRequest updateCalendarRequest = null;
-        api.updateCalendar(calendarIdentifier, updateCalendarRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Version: 10.12.0.cl or later Creates, updates, or deletes column security rules for specified
-     * tables. This API endpoint allows you to create, update, or delete column-level security rules
-     * on columns of a table. The operation follows an \&quot;all or none\&quot; policy: if defining
-     * security rules for any of the provided columns fails, the entire operation will be rolled
-     * back, and no rules will be created. #### Usage guidelines - Provide table identifier using
-     * either &#x60;identifier&#x60; (GUID or name) or &#x60;obj_identifier&#x60; (object ID) - Use
-     * &#x60;clear_csr: true&#x60; to remove all column security rules from the table - For each
-     * column, specify the security rule using &#x60;column_security_rules&#x60; array - Use
-     * &#x60;is_unsecured: true&#x60; to mark a specific column as unprotected - Use
-     * &#x60;group_access&#x60; operations to manage group associations: - &#x60;ADD&#x60;: Add
-     * groups to the column&#39;s access list - &#x60;REMOVE&#x60;: Remove groups from the
-     * column&#39;s access list - &#x60;REPLACE&#x60;: Replace all existing groups with the
-     * specified groups #### Required permissions - &#x60;ADMINISTRATION&#x60; - Can administer
-     * ThoughtSpot - &#x60;DATAMANAGEMENT&#x60; - Can manage data (if RBAC is disabled) -
-     * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; - Can manage worksheet views and tables (if
-     * RBAC is enabled) #### Example request &#x60;&#x60;&#x60;json { \&quot;identifier\&quot;:
-     * \&quot;table-guid\&quot;, \&quot;obj_identifier\&quot;: \&quot;table-object-id\&quot;,
-     * \&quot;clear_csr\&quot;: false, \&quot;column_security_rules\&quot;: [ {
-     * \&quot;column_identifier\&quot;: \&quot;col id or col name\&quot;,
-     * \&quot;is_unsecured\&quot;: false, \&quot;group_access\&quot;: [ { \&quot;operation\&quot;:
-     * \&quot;ADD\&quot;, \&quot;group_identifiers\&quot;: [\&quot;hr_group_id\&quot;,
-     * \&quot;hr_group_name\&quot;, \&quot;finance_group_id\&quot;] } ] }, {
-     * \&quot;column_identifier\&quot;: \&quot;col id or col name\&quot;,
-     * \&quot;is_unsecured\&quot;: true }, { \&quot;column_identifier\&quot;: \&quot;col id or col
-     * name\&quot;, \&quot;is_unsecured\&quot;: false, \&quot;group_access\&quot;: [ {
-     * \&quot;operation\&quot;: \&quot;REPLACE\&quot;, \&quot;group_identifiers\&quot;:
-     * [\&quot;management_group_id\&quot;, \&quot;management_group_name\&quot;] } ] } ] }
-     * &#x60;&#x60;&#x60; #### Request Body Schema - &#x60;identifier&#x60; (string, optional): GUID
-     * or name of the table for which we want to create column security rules -
-     * &#x60;obj_identifier&#x60; (string, optional): The object ID of the table -
-     * &#x60;clear_csr&#x60; (boolean, optional): If true, then all the secured columns will be
-     * marked as unprotected, and all the group associations will be removed -
-     * &#x60;column_security_rules&#x60; (array of objects, required): An array where each object
-     * defines the security rule for a specific column Each column security rule object contains: -
-     * &#x60;column_identifier&#x60; (string, required): Column identifier (col_id or name) -
-     * &#x60;is_unsecured&#x60; (boolean, optional): If true, the column will be marked as
-     * unprotected and all groups associated with it will be removed - &#x60;group_access&#x60;
-     * (array of objects, optional): Array of group operation objects Each group operation object
-     * contains: - &#x60;operation&#x60; (string, required): Operation type - ADD, REMOVE, or
-     * REPLACE - &#x60;group_identifiers&#x60; (array of strings, required): Array of group
-     * identifiers (name or GUID) on which the operation will be performed #### Response This API
-     * does not return any response body. A successful operation returns HTTP 200 status code. ####
-     * Operation Types - **ADD**: Adds the specified groups to the column&#39;s access list -
-     * **REMOVE**: Removes the specified groups from the column&#39;s access list - **REPLACE**:
-     * Replaces all existing groups with the specified groups
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void updateColumnSecurityRulesTest() throws ApiException {
-        UpdateColumnSecurityRulesRequest updateColumnSecurityRulesRequest = null;
-        api.updateColumnSecurityRules(updateColumnSecurityRulesRequest);
-        // TODO: test validations
-    }
-
-    /**
      * Version: 9.2.0.cl or later Updates Git repository configuration settings. Requires
      * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access
      * Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on
@@ -2767,31 +2022,6 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Version: 10.12.0.cl or later Updates a connection configuration object. Requires
-     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection
-     * object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
-     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit
-     * Connections**) privilege is required. #### Supported operations This API endpoint lets you
-     * perform the following operations in a single API request: * Edit the name or description of
-     * the configuration * Edit the configuration properties * Edit the &#x60;policy_type&#x60; *
-     * Edit the type of authentication * Enable or disable a configuration **NOTE**: When updating a
-     * configuration where &#x60;disabled&#x60; is &#x60;true&#x60;, you must reset
-     * &#x60;disabled&#x60; to &#x60;true&#x60; in your update request payload. If not explicitly
-     * set again, the API will default &#x60;disabled&#x60; to &#x60;false&#x60;.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void updateConnectionConfigurationTest() throws ApiException {
-        String configurationIdentifier = null;
-        UpdateConnectionConfigurationRequest updateConnectionConfigurationRequest = null;
-        api.updateConnectionConfiguration(
-                configurationIdentifier, updateConnectionConfigurationRequest);
-        // TODO: test validations
-    }
-
-    /**
      * Version: 10.4.0.cl or later Updates a connection object. Requires &#x60;DATAMANAGEMENT&#x60;
      * (**Can manage data**) and edit permissions to the connection object, or
      * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access
@@ -2800,11 +2030,8 @@ public class ThoughtSpotRestApiTest {
      * required. To update a connection object, pass these parameters in your API request: 1. GUID
      * of the connection object. 2. If you are updating tables or database schema of a connection
      * object: a. Add the updated JSON map of metadata with database, schema, and tables in
-     * &#x60;data_warehouse_config&#x60;. b. Set &#x60;validate&#x60; to &#x60;true&#x60;. **NOTE:**
-     * If the &#x60;authentication_type&#x60; is anything other than SERVICE_ACCOUNT, you must
-     * explicitly provide the authenticationType property in the payload. If you do not specify
-     * authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type. * A
-     * JSON map of configuration attributes, database details, and table properties in
+     * &#x60;data_warehouse_config&#x60;. b. Set &#x60;validate&#x60; to &#x60;true&#x60;. * A JSON
+     * map of configuration attributes, database details, and table properties in
      * &#x60;data_warehouse_config&#x60; as shown in the following example: &#x60;&#x60;&#x60; {
      * \&quot;configuration\&quot;:{ \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
@@ -2826,10 +2053,7 @@ public class ThoughtSpotRestApiTest {
      * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
      * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; } ] } ] } ] } ] } &#x60;&#x60;&#x60; 3. If
      * you are updating a configuration attribute, connection name, or description, you can set
-     * &#x60;validate&#x60; to &#x60;false&#x60;. **NOTE:** If the &#x60;authentication_type&#x60;
-     * is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType
-     * property in the payload. If you do not specify authenticationType, the API will default to
-     * SERVICE_ACCOUNT as the authentication type. * A JSON map of configuration attributes in
+     * &#x60;validate&#x60; to &#x60;false&#x60;. * A JSON map of configuration attributes in
      * &#x60;data_warehouse_config&#x60;. The following example shows the configuration attributes
      * for a Snowflake connection: &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
      * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
@@ -2887,66 +2111,8 @@ public class ThoughtSpotRestApiTest {
      */
     @Test
     public void updateDbtConnectionTest() throws ApiException {
-        String dbtConnectionIdentifier = null;
-        String connectionName = null;
-        String databaseName = null;
-        String importType = null;
-        String accessToken = null;
-        String dbtUrl = null;
-        String accountId = null;
-        String projectId = null;
-        String dbtEnvId = null;
-        String projectName = null;
-        File fileContent = null;
-        Object response =
-                api.updateDbtConnection(
-                        dbtConnectionIdentifier,
-                        connectionName,
-                        databaseName,
-                        importType,
-                        accessToken,
-                        dbtUrl,
-                        accountId,
-                        projectId,
-                        dbtEnvId,
-                        projectName,
-                        fileContent);
-        // TODO: test validations
-    }
-
-    /**
-     * Version: 10.12.0.cl or later Updates a customization configuration for the notification
-     * email. #### Pre-requisites Requires &#x60;DEVELOPER&#x60; (**has developer privilege**) or
-     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access
-     * Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance,
-     * the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required. **NOTE**:This
-     * endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.
-     * #### Usage guidelines To update a custom configuration pass these parameters in your API
-     * request: - A JSON map of configuration attributes &#x60;template_properties&#x60;. The
-     * following example shows a sample set of customization configuration: &#x60;&#x60;&#x60; { {
-     * \&quot;ctaButtonBgColor\&quot;: \&quot;#444DEA\&quot;, \&quot;ctaTextFontColor\&quot;:
-     * \&quot;#FFFFFF\&quot;, \&quot;primaryBgColor\&quot;: \&quot;#D3DEF0\&quot;,
-     * \&quot;hideMobileAppNudge\&quot;: false, \&quot;fontFamily\&quot; : \&quot;\&quot;,
-     * \&quot;hideProductName\&quot; : false, \&quot;hideFooterPhone\&quot; : false,
-     * \&quot;hideFooterAddress\&quot; : false, \&quot;hidePrivacyPolicy\&quot; : false,
-     * \&quot;hideManageNotification\&quot; : false, \&quot;hideTsVocabularyDefinitions\&quot;:
-     * false, \&quot;hideNotificationStatus\&quot; : false, \&quot;hideErrorMessage\&quot;: false,
-     * \&quot;hideUnsubscribeLink\&quot; : false, \&quot;hideModifyAlert\&quot;: false,
-     * \&quot;textTransform\&quot;: \&quot;\&quot;, \&quot;replacementValueForLiveboard\&quot;:
-     * \&quot;LB dashboard\&quot;, \&quot;replacementValueForAnswer\&quot;: \&quot;Answer
-     * dashboard\&quot;, \&quot;replacementValueForSpotIQ\&quot;: \&quot;SpotIQ dashboard\&quot;,
-     * \&quot;logoUrl\&quot;:\&quot;\&quot;, \&quot;productName\&quot;:\&quot;ThoughtSpot\&quot;,
-     * \&quot;footerPhone\&quot;:\&quot;(800) 508-7008\&quot;,
-     * \&quot;footerAddress\&quot;:\&quot;444 Castro St, Suite 1000 Mountain View, CA 94041\&quot;,
-     * \&quot;companyWebsiteUrl\&quot;:\&quot;\&quot;,
-     * \&quot;companyPrivacyPolicyUrl\&quot;:\&quot;\&quot; } } &#x60;&#x60;&#x60;
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void updateEmailCustomizationTest() throws ApiException {
-        UpdateEmailCustomizationRequest updateEmailCustomizationRequest = null;
-        api.updateEmailCustomization(updateEmailCustomizationRequest);
+        UpdateDbtConnectionRequest updateDbtConnectionRequest = null;
+        Object response = api.updateDbtConnection(updateDbtConnectionRequest);
         // TODO: test validations
     }
 
@@ -3165,59 +2331,6 @@ public class ThoughtSpotRestApiTest {
         String groupIdentifier = null;
         UpdateUserGroupRequest updateUserGroupRequest = null;
         api.updateUserGroup(groupIdentifier, updateUserGroupRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Update a variable&#39;s properties Version: 10.9.0.cl or later Allows updating a
-     * variable&#39;s properties in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The
-     * API endpoint allows updating: * The variable name
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void updateVariableTest() throws ApiException {
-        String identifier = null;
-        UpdateVariableRequest updateVariableRequest = null;
-        api.updateVariable(identifier, updateVariableRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Update values for multiple variables Version: 10.9.0.cl or later Allows updating values for
-     * multiple variables in ThoughtSpot. Requires ADMINISTRATION role. The API endpoint allows: *
-     * Adding new values to variables * Replacing existing values * Deleting values from variables
-     * When updating variable values, you need to specify: * The variable identifiers * The values
-     * to add/replace/remove for each variable * The operation to perform (ADD, REPLACE, REMOVE,
-     * CLEAR) Behaviour based on operation type: * ADD - Adds values to the variable if this is a
-     * list type variable, else same as replace. * REPLACE - Replaces all values of a given set of
-     * constraints with the current set of values. * REMOVE - Removes any values which match the set
-     * of conditions of the variables if this is a list type variable, else clears value. * CLEAR -
-     * Removes all constrains for a given variable, scope is ignored
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void updateVariableValuesTest() throws ApiException {
-        UpdateVariableValuesRequest updateVariableValuesRequest = null;
-        api.updateVariableValues(updateVariableValuesRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Version: 10.10.0.cl or later Validates the email customization configuration if any set for
-     * the ThoughtSpot system. #### Pre-requisites Requires &#x60;DEVELOPER&#x60; (**has developer
-     * privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
-     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is
-     * required. **NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable
-     * this on your instance.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void validateEmailCustomizationTest() throws ApiException {
-        api.validateEmailCustomization();
         // TODO: test validations
     }
 

@@ -182,11 +182,11 @@ const apiInstance = new DBTApi(configuration);
 apiInstance.dbtGenerateTml(
   // string | Unique ID of the DBT connection.
   "dbtConnectionIdentifier_example" , 
+  // string | List of Models and their respective Tables Example: \\\'[{\\\"model_name\\\": \\\"model_name\\\", \\\"tables\\\": [\\\"table_name\\\"]}]\\\'
+  "modelTables_example" , 
   // string | Mention the worksheet tmls to import
   "ALL" , 
-  // string | List of Models and their respective Tables (optional)
-  "modelTables_example" , 
-  // string | List of worksheets is mandatory when import_Worksheets is type SELECTED (optional)
+  // string | List of worksheets is mandatory when import_Worksheets is type SELECTED Example: [\\\"worksheet_name\\\"] (optional)
   "worksheets_example" , 
   // HttpFile | Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
   { data: Buffer.from(fs.readFileSync('/path/to/file', 'utf-8')), name: '/path/to/file' } 
@@ -203,9 +203,9 @@ apiInstance.dbtGenerateTml(
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dbtConnectionIdentifier** | [**string**] | Unique ID of the DBT connection. | defaults to undefined
+ **modelTables** | [**string**] | List of Models and their respective Tables Example: \\\&#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;, \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]\\\&#39; | defaults to undefined
  **importWorksheets** | [**string**]**Array<&#39;ALL&#39; &#124; &#39;NONE&#39; &#124; &#39;SELECTED&#39;>** | Mention the worksheet tmls to import | defaults to undefined
- **modelTables** | [**string**] | List of Models and their respective Tables | (optional) defaults to undefined
- **worksheets** | [**string**] | List of worksheets is mandatory when import_Worksheets is type SELECTED | (optional) defaults to undefined
+ **worksheets** | [**string**] | List of worksheets is mandatory when import_Worksheets is type SELECTED Example: [\\\&quot;worksheet_name\\\&quot;] | (optional) defaults to undefined
  **fileContent** | [**HttpFile**] | Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’ | (optional) defaults to undefined
 
 

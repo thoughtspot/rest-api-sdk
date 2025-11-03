@@ -67,11 +67,11 @@ public class GetCustomAccessTokenRequest implements Serializable {
     /** Indicates whether the specified attributes should be persisted or not. */
     @JsonAdapter(PersistOptionEnum.Adapter.class)
     public enum PersistOptionEnum {
-        REPLACE("REPLACE"),
-
         APPEND("APPEND"),
 
         NONE("NONE"),
+
+        REPLACE("REPLACE"),
 
         RESET("RESET");
 
@@ -255,10 +255,9 @@ public class GetCustomAccessTokenRequest implements Serializable {
     }
 
     /**
-     * ID or name of the Org context to log in to. If the Org ID or name is not specified but a
-     * secret key is provided, the user will be logged into the Org associated with the secret key.
-     * If neither the Org ID/name nor the secret key is provided, the user will be logged into the
-     * Org context from their previous login session.
+     * ID of the Org context to log in to. If the Org ID is not specified and secret key is provided
+     * then user will be logged into the org corresponding to the secret key, and if secret key is
+     * not provided then user will be logged in to the Org context of their previous login session.
      *
      * @return orgIdentifier
      */

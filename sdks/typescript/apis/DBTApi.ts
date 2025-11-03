@@ -58,7 +58,7 @@ export class DBTApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.17.1")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.19.0")
       
 
 
@@ -162,7 +162,7 @@ export class DBTApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.17.1")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.19.0")
       
 
 
@@ -216,17 +216,23 @@ export class DBTApiRequestFactory extends BaseAPIRequestFactory {
     /**
      *   Version: 9.9.0.cl or later   Generate required table and worksheet and import them.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### About generate TML Models and Worksheets to be imported can be selected by the user as part of the API.      
      * @param dbtConnectionIdentifier Unique ID of the DBT connection.
+     * @param modelTables List of Models and their respective Tables Example: \\\&#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;, \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]\\\&#39;
      * @param importWorksheets Mention the worksheet tmls to import
-     * @param modelTables List of Models and their respective Tables
-     * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED
+     * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED Example: [\\\&quot;worksheet_name\\\&quot;]
      * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
      */
-    public async dbtGenerateTml(dbtConnectionIdentifier: string, importWorksheets: string, modelTables?: string, worksheets?: string, fileContent?: HttpFile, _options?: Configuration): Promise<RequestContext> {
+    public async dbtGenerateTml(dbtConnectionIdentifier: string, modelTables: string, importWorksheets: string, worksheets?: string, fileContent?: HttpFile, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'dbtConnectionIdentifier' is not null or undefined
         if (dbtConnectionIdentifier === null || dbtConnectionIdentifier === undefined) {
             throw new RequiredError("DBTApi", "dbtGenerateTml", "dbtConnectionIdentifier");
+        }
+
+
+        // verify required parameter 'modelTables' is not null or undefined
+        if (modelTables === null || modelTables === undefined) {
+            throw new RequiredError("DBTApi", "dbtGenerateTml", "modelTables");
         }
 
 
@@ -238,14 +244,13 @@ export class DBTApiRequestFactory extends BaseAPIRequestFactory {
 
 
 
-
         // Path Params
         const localVarPath = '/api/rest/2.0/dbt/generate-tml';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.17.1")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.19.0")
       
 
 
@@ -320,7 +325,7 @@ export class DBTApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.17.1")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.19.0")
       
 
 
@@ -360,7 +365,7 @@ export class DBTApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.17.1")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.19.0")
       
 
 
@@ -419,7 +424,7 @@ export class DBTApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.17.1")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.19.0")
       
 
 

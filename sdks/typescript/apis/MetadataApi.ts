@@ -55,7 +55,7 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.17.1")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.19.0")
       
 
 
@@ -87,7 +87,7 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *  Makes a copy of an Answer or Liveboard saved in Atlas    Version: 10.3.0.cl or later   Creates a copy of a metadata object.  Requires at least view access to the metadata object being copied.  Upon successful execution, the API creates a copy of the metadata object specified in the API request and returns the ID of the new object.      
+     *  Makes a copy of an Answer or Liveboard    Version: 10.3.0.cl or later   Creates a copy of a metadata object.  Requires at least view access to the metadata object being copied.  Upon successful execution, the API creates a copy of the metadata object specified in the API request and returns the ID of the new object.      
      * @param copyObjectRequest 
      */
     public async copyObject(copyObjectRequest: CopyObjectRequest, _options?: Configuration): Promise<RequestContext> {
@@ -105,7 +105,7 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.17.1")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.19.0")
       
 
 
@@ -155,7 +155,7 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.17.1")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.19.0")
       
 
 
@@ -205,7 +205,7 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.17.1")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.19.0")
       
 
 
@@ -255,7 +255,7 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.17.1")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.19.0")
       
 
 
@@ -305,7 +305,7 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.17.1")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.19.0")
       
 
 
@@ -355,7 +355,7 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.17.1")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.19.0")
       
 
 
@@ -405,7 +405,7 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.17.1")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.19.0")
       
 
 
@@ -455,7 +455,7 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.17.1")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.19.0")
       
 
 
@@ -505,7 +505,7 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.17.1")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.19.0")
       
 
 
@@ -555,7 +555,7 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.17.1")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.19.0")
       
 
 
@@ -605,7 +605,7 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.17.1")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.19.0")
       
 
 
@@ -655,7 +655,7 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.17.1")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.19.0")
       
 
 
@@ -705,7 +705,7 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.17.1")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.19.0")
       
 
 
@@ -755,7 +755,7 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.17.1")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.19.0")
       
 
 
