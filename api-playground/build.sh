@@ -7,7 +7,7 @@ mkdir $PWD/build $PWD/spec
 # prepare spec
 cp ../api-spec/* spec/
 
-if [ -f $PWD/api-playground-config.json ]; then
+if [ -f $PWD/processSpec.js ]; then
   npx node processSpec.js
 fi
 

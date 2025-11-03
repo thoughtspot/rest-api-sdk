@@ -7,6 +7,7 @@ function isObject(value) {
   return value !== null && typeof value === 'object' && !Array.isArray(value);
 }
 
+//Resolves a JSON reference pointer (e.g., "#/components/schemas/MySchema") to the actual object in the spec.
 function resolveRef(root, ref) {
   if (typeof ref !== 'string' || !ref.startsWith('#/')) return null;
   const parts = ref.slice(2).split('/').map((p) => p.replace(/~1/g, '/').replace(/~0/g, '~'));
@@ -18,6 +19,7 @@ function resolveRef(root, ref) {
   return node;
 }
 
+//Recursively traverses a schema and removes the specified field.
 function hideFieldInSchema(root, schemaNode, fieldPathParts) {
   if (!isObject(schemaNode)) return false;
 
@@ -60,6 +62,7 @@ function hideFieldInSchema(root, schemaNode, fieldPathParts) {
   return hideFieldInSchema(root, child, rest) || modified;
 }
 
+//Processes all operations in the spec and hides fields based on the configuration.
 function hideApiFields(spec, config) {
   const hideApiFieldsConfig = config.hideApiFields || [];
 
@@ -90,6 +93,7 @@ function hideApiFields(spec, config) {
   }
 }
 
+//Hides specified fields from a single operation's parameters and request body.
 function hideFieldsInOperation(spec, op, fields) {
   const hidden = { parameters: [], requestBody: [] };
 
