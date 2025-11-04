@@ -1,0 +1,6 @@
+{
+    "hideApiFields": [
+        { "operationId": "getFullAccessToken", "fields": ["user_parameters"] },
+        { "operationId": "getObjectAccessToken", "fields": ["user_parameters"] }
+    ]
+}

@@ -5,6 +5,19 @@ Please go [here](https://try-everywhere.thoughtspot.cloud/v2/#/everywhere/api/re
 ## Background
 The Rest API playground is generated using APIMatic's [portal generation API](https://portal-api-docs.apimatic.io/#/http/getting-started/overview-apimatic-portal-generation) and deployed directly on Vercel
 
+## Hiding Fields
+
+To hide specific fields from the API playground UI:
+
+Add configuration to `api-playground-config.json`:
+```json
+{
+  "hideApiFields": [
+    { "operationId": "APIOperantionId", "fields": ["field.refSchemaField"] }
+  ]
+}
+```
+
 ## Local development
 Prepare the build folder
 
