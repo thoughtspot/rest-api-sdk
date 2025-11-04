@@ -4,7 +4,7 @@
 
     <groupId>com.thoughtspot</groupId>
     <artifactId>rest-api-sdk</artifactId>
-    <version>${sdkVersionFromMap}</version>
+    <version>2.21.0</version>
     <packaging>jar</packaging>
 
     <name>rest-api-sdk</name>

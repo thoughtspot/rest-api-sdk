@@ -154,9 +154,7 @@ import { GenerateCSVRequest } from '../models/GenerateCSVRequest';
 import { GenericInfo } from '../models/GenericInfo';
 import { GetAsyncImportStatusResponse } from '../models/GetAsyncImportStatusResponse';
 import { GetCustomAccessTokenRequest } from '../models/GetCustomAccessTokenRequest';
-import { GetDataSourceSuggestionsRequest } from '../models/GetDataSourceSuggestionsRequest';
 import { GetFullAccessTokenRequest } from '../models/GetFullAccessTokenRequest';
-import { GetNLInstructionsRequest } from '../models/GetNLInstructionsRequest';
 import { GetObjectAccessTokenRequest } from '../models/GetObjectAccessTokenRequest';
 import { GetRelevantQuestionsRequest } from '../models/GetRelevantQuestionsRequest';
 import { GetRelevantQuestionsRequestAiContext } from '../models/GetRelevantQuestionsRequestAiContext';
@@ -293,11 +291,9 @@ import { SearchUsersRequestSortOptions } from '../models/SearchUsersRequestSortO
 import { SearchVariablesRequest } from '../models/SearchVariablesRequest';
 import { SearchWebhookConfigurationsRequest } from '../models/SearchWebhookConfigurationsRequest';
 import { SearchWebhookConfigurationsRequestSortOptions } from '../models/SearchWebhookConfigurationsRequestSortOptions';
-import { SendAgentMessageRequest } from '../models/SendAgentMessageRequest';
 import { SendAgentMessageResponse } from '../models/SendAgentMessageResponse';
 import { SendAgentMessageStreamingRequest } from '../models/SendAgentMessageStreamingRequest';
 import { SendMessageRequest } from '../models/SendMessageRequest';
-import { SetNLInstructionsRequest } from '../models/SetNLInstructionsRequest';
 import { ShareMetadataRequest } from '../models/ShareMetadataRequest';
 import { ShareMetadataTypeInput } from '../models/ShareMetadataTypeInput';
 import { SharePermissionsInput } from '../models/SharePermissionsInput';
@@ -407,24 +403,6 @@ export interface AIApiCreateConversationRequest {
     createConversationRequest: CreateConversationRequest
 }
 
-export interface AIApiGetDataSourceSuggestionsRequest {
-    /**
-     * 
-     * @type GetDataSourceSuggestionsRequest
-     * @memberof AIApigetDataSourceSuggestions
-     */
-    getDataSourceSuggestionsRequest: GetDataSourceSuggestionsRequest
-}
-
-export interface AIApiGetNLInstructionsRequest {
-    /**
-     * 
-     * @type GetNLInstructionsRequest
-     * @memberof AIApigetNLInstructions
-     */
-    getNLInstructionsRequest: GetNLInstructionsRequest
-}
-
 export interface AIApiGetRelevantQuestionsRequest {
     /**
      * 
@@ -441,21 +419,6 @@ export interface AIApiQueryGetDecomposedQueryRequest {
      * @memberof AIApiqueryGetDecomposedQuery
      */
     queryGetDecomposedQueryRequest: QueryGetDecomposedQueryRequest
-}
-
-export interface AIApiSendAgentMessageRequest {
-    /**
-     * Unique identifier for the conversation (used to track context)
-     * @type string
-     * @memberof AIApisendAgentMessage
-     */
-    conversationIdentifier: string
-    /**
-     * 
-     * @type SendAgentMessageRequest
-     * @memberof AIApisendAgentMessage
-     */
-    sendAgentMessageRequest: SendAgentMessageRequest
 }
 
 export interface AIApiSendAgentMessageStreamingRequest {
@@ -480,15 +443,6 @@ export interface AIApiSendMessageRequest {
      * @memberof AIApisendMessage
      */
     sendMessageRequest: SendMessageRequest
-}
-
-export interface AIApiSetNLInstructionsRequest {
-    /**
-     * 
-     * @type SetNLInstructionsRequest
-     * @memberof AIApisetNLInstructions
-     */
-    setNLInstructionsRequest: SetNLInstructionsRequest
 }
 
 export interface AIApiSingleAnswerRequest {
@@ -524,22 +478,6 @@ export class ObjectAIApi {
     }
 
     /**
-     *  Version: 10.15.0.cl or later   Provides relevant data source recommendations for a user-submitted natural language query.  To use this API, the user must have at least view-level access to the underlying metadata entities referenced in the response.  #### Usage guidelines  The request must include a `query` string via the request body.  The returned results include metadata such as: - `confidence`: a float indicating the model\'s confidence in the relevance of each recommendation - `details`: includes `data_source_identifier`, `data_source_name`, and `description` of each recommended data source - `reasoning`: rationale provided by the LLM to explain why each data source was recommended  If the API request is successful, ThoughtSpot returns a ranked list of data sources, each annotated with relevant reasoning.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before it is made Generally Available. > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
-     * @param param the request object
-     */
-    public getDataSourceSuggestions(param: AIApiGetDataSourceSuggestionsRequest, options?: Configuration): Promise<EurekaDataSourceSuggestionResponse> {
-        return this.api.getDataSourceSuggestions(param.getDataSourceSuggestionsRequest,  options).toPromise();
-    }
-
-    /**
-     *  Version: 10.15.0.cl or later   This API allows users to retrieve existing natural language (NL) instructions for a specific data-model. These instructions guide the AI system in understanding data context and generating more accurate responses when processing natural language queries.  #### Usage guidelines  To retrieve NL instructions for a data-model, the request must include: - `data_source_identifier`: The unique ID or name of the data-model to retrieve NL instructions  The API returns a response object with: - `nl_instructions_info`: An array of instruction objects, each containing:   - `instructions`: Array of text instructions for natural language processing   - `scope`: The scope of the instruction (`GLOBAL`). It can be extended to data-model-user scope in future.  #### Instructions Scope  - **GLOBAL**: Instructions that apply globally across the system on the given data-model (currently only global instructions are supported)  > ###### Note: > * To use this API, the user needs atleast view access on the data-model and they must use corresponding org related bearerToken where the data-model exists. > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * Available from version 10.15.0.cl and later. > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. > * Use this API to view currently configured instructions before modifying them with `setNLInstructions`.     
-     * @param param the request object
-     */
-    public getNLInstructions(param: AIApiGetNLInstructionsRequest, options?: Configuration): Promise<EurekaGetNLInstructionsResponse> {
-        return this.api.getNLInstructions(param.getNLInstructionsRequest,  options).toPromise();
-    }
-
-    /**
      *  Version: 10.13.0.cl or later   Breaks down a user-submitted query into a series of analytical sub-questions using relevant contextual metadata.  To use this API, the user must have at least view-level access to the referenced metadata objects.  #### Usage guidelines  To accurately generate relevant questions, the request must include at least one of the following metadata identifiers within `metadata_context` : `conversation_identifier`, `answer_identifiers`, `liveboard_identifiers`, or `data_source_identifiers`.  You can further enhance the quality and precision of breakdown by providing additional `ai_context` such as:  - `content`: User provided content like text data, csv data as a string message to provide context & potentially improve the quality of the response. - `instructions`: User specific text instructions sent to AI system for processing the query.  Additional optional parameters include:  - `limit_relevant_questions`: Controls the maximum number of relevant questions returned. Defaults to 5 if not specified. - `bypass_cache`: If set to true, forces fresh computation instead of returning cached results.  If the API request is successful, ThoughtSpot returns a list of relevant analytical queries, each aligned with the user\'s original question. Each returned question includes the query string, along with the identifier and name of the corresponding data source.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.     
      * @param param the request object
      */
@@ -556,14 +494,6 @@ export class ObjectAIApi {
     }
 
     /**
-     *  Version: 10.15.0.cl or later   This API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages.  To use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.   #### Usage guidelines  To initiate or continue a conversation, the request must include: - `conversation_identifier`: a unique session ID for continuity and message tracking - `messages`: an array of one or more text messages, each with a value and type  The API returns a array of object with a type, message, and metadata. - `type`: Type of the message — text, answer, or error. - `message`: Main content of the response. - `metadata`: Additional info depending on the message type.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.     
-     * @param param the request object
-     */
-    public sendAgentMessage(param: AIApiSendAgentMessageRequest, options?: Configuration): Promise<any> {
-        return this.api.sendAgentMessage(param.conversationIdentifier, param.sendAgentMessageRequest,  options).toPromise();
-    }
-
-    /**
      *  Version: 10.13.0.cl or later   This API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages.  To use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.   #### Usage guidelines  To initiate or continue a conversation, the request must include: - `conversation_identifier`: a unique session ID for continuity and message tracking - `messages`: an array of one or more text messages, each with a value and type  Additionally, user can specify what tool can be included `conversation_settings` parameter, which supports: - `enable_contextual_change_analysis` (default: false) - `enable_natural_language_answer_generation` (default: true) - `enable_reasoning` (default: false)  If the request is valid, the API returns a stream of messages in real time, including: - `ack`: confirms receipt of the request - `text / text-chunk`: content chunks, optionally formatted (e.g., markdown) - `answer`: the final structured response with metadata and analytics - `error`: if a failure occurs - `notification`: notification messages for operation being performed  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster. > * The streaming protocol uses Server-Sent Events (SSE)     
      * @param param the request object
      */
@@ -577,14 +507,6 @@ export class ObjectAIApi {
      */
     public sendMessage(param: AIApiSendMessageRequest, options?: Configuration): Promise<Array<ResponseMessage>> {
         return this.api.sendMessage(param.conversationIdentifier, param.sendMessageRequest,  options).toPromise();
-    }
-
-    /**
-     *  Version: 10.15.0.cl or later   This API allows users to set natural language (NL) instructions for a specific data-model to improve AI-generated answers and query processing. These instructions help guide the AI system to better understand the data context and provide more accurate responses.  #### Usage guidelines  To set NL instructions for a data-model, the request must include: - `data_source_identifier`: The unique ID or name of the data-model for which to set NL instructions - `nl_instructions_info`: An array of instruction objects, each containing:   - `instructions`: Array of text instructions for the LLM   - `scope`: The scope of the instruction (`GLOBAL`). Currently only `GLOBAL` is supported. It can be extended to data-model-user scope in future.  The API returns a response object with: - `success`: Boolean indicating whether the operation was successful  #### Instructions Scope  - **GLOBAL**: Instructions that apply globally for that data-model across the system  > ###### Note: > * To use this API, the user needs either edit access or SPOTTER_COACHING_PRIVILEGE on the data-model and they must use corresponding org related bearerToken where the data-model exists. > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * Available from version 10.15.0.cl and later. > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. > * Instructions help improve the accuracy and relevance of AI-generated responses for the specified data-model.      
-     * @param param the request object
-     */
-    public setNLInstructions(param: AIApiSetNLInstructionsRequest, options?: Configuration): Promise<EurekaSetNLInstructionsResponse> {
-        return this.api.setNLInstructions(param.setNLInstructionsRequest,  options).toPromise();
     }
 
     /**
@@ -3353,15 +3275,6 @@ export interface ThoughtSpotRestApiGetCustomAccessTokenRequest {
     getCustomAccessTokenRequest: GetCustomAccessTokenRequest
 }
 
-export interface ThoughtSpotRestApiGetDataSourceSuggestionsRequest {
-    /**
-     * 
-     * @type GetDataSourceSuggestionsRequest
-     * @memberof ThoughtSpotRestApigetDataSourceSuggestions
-     */
-    getDataSourceSuggestionsRequest: GetDataSourceSuggestionsRequest
-}
-
 export interface ThoughtSpotRestApiGetFullAccessTokenRequest {
     /**
      * 
@@ -3369,15 +3282,6 @@ export interface ThoughtSpotRestApiGetFullAccessTokenRequest {
      * @memberof ThoughtSpotRestApigetFullAccessToken
      */
     getFullAccessTokenRequest: GetFullAccessTokenRequest
-}
-
-export interface ThoughtSpotRestApiGetNLInstructionsRequest {
-    /**
-     * 
-     * @type GetNLInstructionsRequest
-     * @memberof ThoughtSpotRestApigetNLInstructions
-     */
-    getNLInstructionsRequest: GetNLInstructionsRequest
 }
 
 export interface ThoughtSpotRestApiGetObjectAccessTokenRequest {
@@ -3668,21 +3572,6 @@ export interface ThoughtSpotRestApiSearchWebhookConfigurationsRequest {
     searchWebhookConfigurationsRequest: SearchWebhookConfigurationsRequest
 }
 
-export interface ThoughtSpotRestApiSendAgentMessageRequest {
-    /**
-     * Unique identifier for the conversation (used to track context)
-     * @type string
-     * @memberof ThoughtSpotRestApisendAgentMessage
-     */
-    conversationIdentifier: string
-    /**
-     * 
-     * @type SendAgentMessageRequest
-     * @memberof ThoughtSpotRestApisendAgentMessage
-     */
-    sendAgentMessageRequest: SendAgentMessageRequest
-}
-
 export interface ThoughtSpotRestApiSendAgentMessageStreamingRequest {
     /**
      * 
@@ -3705,15 +3594,6 @@ export interface ThoughtSpotRestApiSendMessageRequest {
      * @memberof ThoughtSpotRestApisendMessage
      */
     sendMessageRequest: SendMessageRequest
-}
-
-export interface ThoughtSpotRestApiSetNLInstructionsRequest {
-    /**
-     * 
-     * @type SetNLInstructionsRequest
-     * @memberof ThoughtSpotRestApisetNLInstructions
-     */
-    setNLInstructionsRequest: SetNLInstructionsRequest
 }
 
 export interface ThoughtSpotRestApiShareMetadataRequest {
@@ -4663,27 +4543,11 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *  Version: 10.15.0.cl or later   Provides relevant data source recommendations for a user-submitted natural language query.  To use this API, the user must have at least view-level access to the underlying metadata entities referenced in the response.  #### Usage guidelines  The request must include a `query` string via the request body.  The returned results include metadata such as: - `confidence`: a float indicating the model\'s confidence in the relevance of each recommendation - `details`: includes `data_source_identifier`, `data_source_name`, and `description` of each recommended data source - `reasoning`: rationale provided by the LLM to explain why each data source was recommended  If the API request is successful, ThoughtSpot returns a ranked list of data sources, each annotated with relevant reasoning.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before it is made Generally Available. > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
-     * @param param the request object
-     */
-    public getDataSourceSuggestions(param: ThoughtSpotRestApiGetDataSourceSuggestionsRequest, options?: Configuration): Promise<EurekaDataSourceSuggestionResponse> {
-        return this.api.getDataSourceSuggestions(param.getDataSourceSuggestionsRequest,  options).toPromise();
-    }
-
-    /**
      *   Version: 9.0.0.cl or later   Gets an authentication token and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)).  To generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page. For more information, see [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable).  **Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.  If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.  #### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * `auto_create` * `username` * `display_name` * `email` * `group_identifiers`  Set `auto_create` to `True` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true`, the API call will update user properties like display name, email and group assignment.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  To add a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege is required.  #### Important point to note All options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created.      
      * @param param the request object
      */
     public getFullAccessToken(param: ThoughtSpotRestApiGetFullAccessTokenRequest, options?: Configuration): Promise<Token> {
         return this.api.getFullAccessToken(param.getFullAccessTokenRequest,  options).toPromise();
-    }
-
-    /**
-     *  Version: 10.15.0.cl or later   This API allows users to retrieve existing natural language (NL) instructions for a specific data-model. These instructions guide the AI system in understanding data context and generating more accurate responses when processing natural language queries.  #### Usage guidelines  To retrieve NL instructions for a data-model, the request must include: - `data_source_identifier`: The unique ID or name of the data-model to retrieve NL instructions  The API returns a response object with: - `nl_instructions_info`: An array of instruction objects, each containing:   - `instructions`: Array of text instructions for natural language processing   - `scope`: The scope of the instruction (`GLOBAL`). It can be extended to data-model-user scope in future.  #### Instructions Scope  - **GLOBAL**: Instructions that apply globally across the system on the given data-model (currently only global instructions are supported)  > ###### Note: > * To use this API, the user needs atleast view access on the data-model and they must use corresponding org related bearerToken where the data-model exists. > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * Available from version 10.15.0.cl and later. > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. > * Use this API to view currently configured instructions before modifying them with `setNLInstructions`.     
-     * @param param the request object
-     */
-    public getNLInstructions(param: ThoughtSpotRestApiGetNLInstructionsRequest, options?: Configuration): Promise<EurekaGetNLInstructionsResponse> {
-        return this.api.getNLInstructions(param.getNLInstructionsRequest,  options).toPromise();
     }
 
     /**
@@ -4959,14 +4823,6 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *  Version: 10.15.0.cl or later   This API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages.  To use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.   #### Usage guidelines  To initiate or continue a conversation, the request must include: - `conversation_identifier`: a unique session ID for continuity and message tracking - `messages`: an array of one or more text messages, each with a value and type  The API returns a array of object with a type, message, and metadata. - `type`: Type of the message — text, answer, or error. - `message`: Main content of the response. - `metadata`: Additional info depending on the message type.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.     
-     * @param param the request object
-     */
-    public sendAgentMessage(param: ThoughtSpotRestApiSendAgentMessageRequest, options?: Configuration): Promise<any> {
-        return this.api.sendAgentMessage(param.conversationIdentifier, param.sendAgentMessageRequest,  options).toPromise();
-    }
-
-    /**
      *  Version: 10.13.0.cl or later   This API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages.  To use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.   #### Usage guidelines  To initiate or continue a conversation, the request must include: - `conversation_identifier`: a unique session ID for continuity and message tracking - `messages`: an array of one or more text messages, each with a value and type  Additionally, user can specify what tool can be included `conversation_settings` parameter, which supports: - `enable_contextual_change_analysis` (default: false) - `enable_natural_language_answer_generation` (default: true) - `enable_reasoning` (default: false)  If the request is valid, the API returns a stream of messages in real time, including: - `ack`: confirms receipt of the request - `text / text-chunk`: content chunks, optionally formatted (e.g., markdown) - `answer`: the final structured response with metadata and analytics - `error`: if a failure occurs - `notification`: notification messages for operation being performed  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster. > * The streaming protocol uses Server-Sent Events (SSE)     
      * @param param the request object
      */
@@ -4980,14 +4836,6 @@ export class ObjectThoughtSpotRestApi {
      */
     public sendMessage(param: ThoughtSpotRestApiSendMessageRequest, options?: Configuration): Promise<Array<ResponseMessage>> {
         return this.api.sendMessage(param.conversationIdentifier, param.sendMessageRequest,  options).toPromise();
-    }
-
-    /**
-     *  Version: 10.15.0.cl or later   This API allows users to set natural language (NL) instructions for a specific data-model to improve AI-generated answers and query processing. These instructions help guide the AI system to better understand the data context and provide more accurate responses.  #### Usage guidelines  To set NL instructions for a data-model, the request must include: - `data_source_identifier`: The unique ID or name of the data-model for which to set NL instructions - `nl_instructions_info`: An array of instruction objects, each containing:   - `instructions`: Array of text instructions for the LLM   - `scope`: The scope of the instruction (`GLOBAL`). Currently only `GLOBAL` is supported. It can be extended to data-model-user scope in future.  The API returns a response object with: - `success`: Boolean indicating whether the operation was successful  #### Instructions Scope  - **GLOBAL**: Instructions that apply globally for that data-model across the system  > ###### Note: > * To use this API, the user needs either edit access or SPOTTER_COACHING_PRIVILEGE on the data-model and they must use corresponding org related bearerToken where the data-model exists. > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * Available from version 10.15.0.cl and later. > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. > * Instructions help improve the accuracy and relevance of AI-generated responses for the specified data-model.      
-     * @param param the request object
-     */
-    public setNLInstructions(param: ThoughtSpotRestApiSetNLInstructionsRequest, options?: Configuration): Promise<EurekaSetNLInstructionsResponse> {
-        return this.api.setNLInstructions(param.setNLInstructionsRequest,  options).toPromise();
     }
 
     /**

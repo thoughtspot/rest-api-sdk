@@ -151,9 +151,7 @@ export * from '../models/GenerateCSVRequest';
 export * from '../models/GenericInfo';
 export * from '../models/GetAsyncImportStatusResponse';
 export * from '../models/GetCustomAccessTokenRequest';
-export * from '../models/GetDataSourceSuggestionsRequest';
 export * from '../models/GetFullAccessTokenRequest';
-export * from '../models/GetNLInstructionsRequest';
 export * from '../models/GetObjectAccessTokenRequest';
 export * from '../models/GetRelevantQuestionsRequest';
 export * from '../models/GetRelevantQuestionsRequestAiContext';
@@ -290,11 +288,9 @@ export * from '../models/SearchUsersRequestSortOptions';
 export * from '../models/SearchVariablesRequest';
 export * from '../models/SearchWebhookConfigurationsRequest';
 export * from '../models/SearchWebhookConfigurationsRequestSortOptions';
-export * from '../models/SendAgentMessageRequest';
 export * from '../models/SendAgentMessageResponse';
 export * from '../models/SendAgentMessageStreamingRequest';
 export * from '../models/SendMessageRequest';
-export * from '../models/SetNLInstructionsRequest';
 export * from '../models/ShareMetadataRequest';
 export * from '../models/ShareMetadataTypeInput';
 export * from '../models/SharePermissionsInput';
@@ -536,9 +532,7 @@ import { GenerateCSVRequest  , GenerateCSVRequestCalendarTypeEnum  , GenerateCSV
 import { GenericInfo } from '../models/GenericInfo';
 import { GetAsyncImportStatusResponse } from '../models/GetAsyncImportStatusResponse';
 import { GetCustomAccessTokenRequest     , GetCustomAccessTokenRequestPersistOptionEnum           } from '../models/GetCustomAccessTokenRequest';
-import { GetDataSourceSuggestionsRequest } from '../models/GetDataSourceSuggestionsRequest';
 import { GetFullAccessTokenRequest } from '../models/GetFullAccessTokenRequest';
-import { GetNLInstructionsRequest } from '../models/GetNLInstructionsRequest';
 import { GetObjectAccessTokenRequest } from '../models/GetObjectAccessTokenRequest';
 import { GetRelevantQuestionsRequest } from '../models/GetRelevantQuestionsRequest';
 import { GetRelevantQuestionsRequestAiContext } from '../models/GetRelevantQuestionsRequestAiContext';
@@ -675,11 +669,9 @@ import { SearchUsersRequestSortOptions, SearchUsersRequestSortOptionsFieldNameEn
 import { SearchVariablesRequest    , SearchVariablesRequestResponseContentEnum   } from '../models/SearchVariablesRequest';
 import { SearchWebhookConfigurationsRequest  , SearchWebhookConfigurationsRequestEventTypeEnum      } from '../models/SearchWebhookConfigurationsRequest';
 import { SearchWebhookConfigurationsRequestSortOptions, SearchWebhookConfigurationsRequestSortOptionsFieldNameEnum  , SearchWebhookConfigurationsRequestSortOptionsOrderEnum   } from '../models/SearchWebhookConfigurationsRequestSortOptions';
-import { SendAgentMessageRequest } from '../models/SendAgentMessageRequest';
 import { SendAgentMessageResponse } from '../models/SendAgentMessageResponse';
 import { SendAgentMessageStreamingRequest } from '../models/SendAgentMessageStreamingRequest';
 import { SendMessageRequest } from '../models/SendMessageRequest';
-import { SetNLInstructionsRequest } from '../models/SetNLInstructionsRequest';
 import { ShareMetadataRequest, ShareMetadataRequestMetadataTypeEnum            } from '../models/ShareMetadataRequest';
 import { ShareMetadataTypeInput, ShareMetadataTypeInputTypeEnum    } from '../models/ShareMetadataTypeInput';
 import { SharePermissionsInput , SharePermissionsInputShareModeEnum   } from '../models/SharePermissionsInput';
@@ -1161,9 +1153,7 @@ let typeMap: {[index: string]: any} = {
     "GenericInfo": GenericInfo,
     "GetAsyncImportStatusResponse": GetAsyncImportStatusResponse,
     "GetCustomAccessTokenRequest": GetCustomAccessTokenRequest,
-    "GetDataSourceSuggestionsRequest": GetDataSourceSuggestionsRequest,
     "GetFullAccessTokenRequest": GetFullAccessTokenRequest,
-    "GetNLInstructionsRequest": GetNLInstructionsRequest,
     "GetObjectAccessTokenRequest": GetObjectAccessTokenRequest,
     "GetRelevantQuestionsRequest": GetRelevantQuestionsRequest,
     "GetRelevantQuestionsRequestAiContext": GetRelevantQuestionsRequestAiContext,
@@ -1300,11 +1290,9 @@ let typeMap: {[index: string]: any} = {
     "SearchVariablesRequest": SearchVariablesRequest,
     "SearchWebhookConfigurationsRequest": SearchWebhookConfigurationsRequest,
     "SearchWebhookConfigurationsRequestSortOptions": SearchWebhookConfigurationsRequestSortOptions,
-    "SendAgentMessageRequest": SendAgentMessageRequest,
     "SendAgentMessageResponse": SendAgentMessageResponse,
     "SendAgentMessageStreamingRequest": SendAgentMessageStreamingRequest,
     "SendMessageRequest": SendMessageRequest,
-    "SetNLInstructionsRequest": SetNLInstructionsRequest,
     "ShareMetadataRequest": ShareMetadataRequest,
     "ShareMetadataTypeInput": ShareMetadataTypeInput,
     "SharePermissionsInput": SharePermissionsInput,

@@ -73,9 +73,7 @@ Method | HTTP request | Description
 [**getCurrentUserInfo**](ThoughtSpotRestApi.md#getCurrentUserInfo) | **GET** /api/rest/2.0/auth/session/user | 
 [**getCurrentUserToken**](ThoughtSpotRestApi.md#getCurrentUserToken) | **GET** /api/rest/2.0/auth/session/token | 
 [**getCustomAccessToken**](ThoughtSpotRestApi.md#getCustomAccessToken) | **POST** /api/rest/2.0/auth/token/custom | 
-[**getDataSourceSuggestions**](ThoughtSpotRestApi.md#getDataSourceSuggestions) | **POST** /api/rest/2.0/ai/data-source-suggestions | 
 [**getFullAccessToken**](ThoughtSpotRestApi.md#getFullAccessToken) | **POST** /api/rest/2.0/auth/token/full | 
-[**getNLInstructions**](ThoughtSpotRestApi.md#getNLInstructions) | **POST** /api/rest/2.0/ai/instructions/get | 
 [**getObjectAccessToken**](ThoughtSpotRestApi.md#getObjectAccessToken) | **POST** /api/rest/2.0/auth/token/object | 
 [**getRelevantQuestions**](ThoughtSpotRestApi.md#getRelevantQuestions) | **POST** /api/rest/2.0/ai/relevant-questions/ | 
 [**getSystemConfig**](ThoughtSpotRestApi.md#getSystemConfig) | **GET** /api/rest/2.0/system/config | 
@@ -110,10 +108,8 @@ Method | HTTP request | Description
 [**searchUsers**](ThoughtSpotRestApi.md#searchUsers) | **POST** /api/rest/2.0/users/search | 
 [**searchVariables**](ThoughtSpotRestApi.md#searchVariables) | **POST** /api/rest/2.0/template/variables/search | 
 [**searchWebhookConfigurations**](ThoughtSpotRestApi.md#searchWebhookConfigurations) | **POST** /api/rest/2.0/webhooks/search | 
-[**sendAgentMessage**](ThoughtSpotRestApi.md#sendAgentMessage) | **POST** /api/rest/2.0/ai/agent/{conversation_identifier}/converse | 
 [**sendAgentMessageStreaming**](ThoughtSpotRestApi.md#sendAgentMessageStreaming) | **POST** /api/rest/2.0/ai/agent/converse/sse | 
 [**sendMessage**](ThoughtSpotRestApi.md#sendMessage) | **POST** /api/rest/2.0/ai/conversation/{conversation_identifier}/converse | 
-[**setNLInstructions**](ThoughtSpotRestApi.md#setNLInstructions) | **POST** /api/rest/2.0/ai/instructions/set | 
 [**shareMetadata**](ThoughtSpotRestApi.md#shareMetadata) | **POST** /api/rest/2.0/security/metadata/share | 
 [**singleAnswer**](ThoughtSpotRestApi.md#singleAnswer) | **POST** /api/rest/2.0/ai/answer/create | 
 [**unassignTag**](ThoughtSpotRestApi.md#unassignTag) | **POST** /api/rest/2.0/tags/unassign | 
@@ -4768,67 +4764,6 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-# **getDataSourceSuggestions**
-> EurekaDataSourceSuggestionResponse getDataSourceSuggestions(getDataSourceSuggestionsRequest)
-
- Version: 10.15.0.cl or later   Provides relevant data source recommendations for a user-submitted natural language query.  To use this API, the user must have at least view-level access to the underlying metadata entities referenced in the response.  #### Usage guidelines  The request must include a `query` string via the request body.  The returned results include metadata such as: - `confidence`: a float indicating the model\'s confidence in the relevance of each recommendation - `details`: includes `data_source_identifier`, `data_source_name`, and `description` of each recommended data source - `reasoning`: rationale provided by the LLM to explain why each data source was recommended  If the API request is successful, ThoughtSpot returns a ranked list of data sources, each annotated with relevant reasoning.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before it is made Generally Available. > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
-
-### Example
-
-
-```typescript
-import { createBearerAuthenticationConfig, ThoughtSpotRestApi, GetDataSourceSuggestionsRequest } from '@thoughtspot/rest-api-sdk';
-
-const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
-    username: "YOUR_USERNAME",
-    password: "YOUR_PASSWORD",
-});
-const apiInstance = new ThoughtSpotRestApi(configuration);
-
-apiInstance.getDataSourceSuggestions(
-  // GetDataSourceSuggestionsRequest
-  {
-    query: "query_example",
-  } 
-).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
-
-
-```
-
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **getDataSourceSuggestionsRequest** | **GetDataSourceSuggestionsRequest**|  |
-
-
-### Return type
-
-**EurekaDataSourceSuggestionResponse**
-
-### Authorization
-
-[bearerAuth](README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Common successful response |  -  |
-**201** | Common error response |  -  |
-**400** | Operation failed |  -  |
-**500** | Operation failed |  -  |
-
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
-
 # **getFullAccessToken**
 > Token getFullAccessToken(getFullAccessTokenRequest)
 
@@ -4898,67 +4833,6 @@ No authorization required
 **401** | Unauthorized access. |  -  |
 **403** | Forbidden access. |  -  |
 **500** | Unexpected error |  -  |
-
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
-
-# **getNLInstructions**
-> EurekaGetNLInstructionsResponse getNLInstructions(getNLInstructionsRequest)
-
- Version: 10.15.0.cl or later   This API allows users to retrieve existing natural language (NL) instructions for a specific data-model. These instructions guide the AI system in understanding data context and generating more accurate responses when processing natural language queries.  #### Usage guidelines  To retrieve NL instructions for a data-model, the request must include: - `data_source_identifier`: The unique ID or name of the data-model to retrieve NL instructions  The API returns a response object with: - `nl_instructions_info`: An array of instruction objects, each containing:   - `instructions`: Array of text instructions for natural language processing   - `scope`: The scope of the instruction (`GLOBAL`). It can be extended to data-model-user scope in future.  #### Instructions Scope  - **GLOBAL**: Instructions that apply globally across the system on the given data-model (currently only global instructions are supported)  > ###### Note: > * To use this API, the user needs atleast view access on the data-model and they must use corresponding org related bearerToken where the data-model exists. > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * Available from version 10.15.0.cl and later. > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. > * Use this API to view currently configured instructions before modifying them with `setNLInstructions`.     
-
-### Example
-
-
-```typescript
-import { createBearerAuthenticationConfig, ThoughtSpotRestApi, GetNLInstructionsRequest } from '@thoughtspot/rest-api-sdk';
-
-const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
-    username: "YOUR_USERNAME",
-    password: "YOUR_PASSWORD",
-});
-const apiInstance = new ThoughtSpotRestApi(configuration);
-
-apiInstance.getNLInstructions(
-  // GetNLInstructionsRequest
-  {
-    data_source_identifier: "data_source_identifier_example",
-  } 
-).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
-
-
-```
-
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **getNLInstructionsRequest** | **GetNLInstructionsRequest**|  |
-
-
-### Return type
-
-**EurekaGetNLInstructionsResponse**
-
-### Authorization
-
-[bearerAuth](README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Common successful response |  -  |
-**201** | Common error response |  -  |
-**400** | Operation failed |  -  |
-**500** | Operation failed |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
@@ -7396,72 +7270,6 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-# **sendAgentMessage**
-> any sendAgentMessage(sendAgentMessageRequest)
-
- Version: 10.15.0.cl or later   This API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages.  To use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.   #### Usage guidelines  To initiate or continue a conversation, the request must include: - `conversation_identifier`: a unique session ID for continuity and message tracking - `messages`: an array of one or more text messages, each with a value and type  The API returns a array of object with a type, message, and metadata. - `type`: Type of the message — text, answer, or error. - `message`: Main content of the response. - `metadata`: Additional info depending on the message type.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.     
-
-### Example
-
-
-```typescript
-import { createBearerAuthenticationConfig, ThoughtSpotRestApi, SendAgentMessageRequest } from '@thoughtspot/rest-api-sdk';
-
-const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
-    username: "YOUR_USERNAME",
-    password: "YOUR_PASSWORD",
-});
-const apiInstance = new ThoughtSpotRestApi(configuration);
-
-apiInstance.sendAgentMessage(
-  // string | Unique identifier for the conversation (used to track context)
-  "conversation_identifier_example" , 
-  // SendAgentMessageRequest
-  {
-    messages: [
-      "messages_example",
-    ],
-  } 
-).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
-
-
-```
-
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **sendAgentMessageRequest** | **SendAgentMessageRequest**|  |
- **conversationIdentifier** | [**string**] | Unique identifier for the conversation (used to track context) | defaults to undefined
-
-
-### Return type
-
-**any**
-
-### Authorization
-
-[bearerAuth](README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Common successful response |  -  |
-**201** | Common error response |  -  |
-**400** | Operation failed |  -  |
-**500** | Operation failed |  -  |
-
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
-
 # **sendAgentMessageStreaming**
 > SendAgentMessageResponse sendAgentMessageStreaming(sendAgentMessageStreamingRequest)
 
@@ -7570,75 +7378,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **Array<ResponseMessage>**
-
-### Authorization
-
-[bearerAuth](README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Common successful response |  -  |
-**201** | Common error response |  -  |
-**400** | Operation failed |  -  |
-**500** | Operation failed |  -  |
-
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
-
-# **setNLInstructions**
-> EurekaSetNLInstructionsResponse setNLInstructions(setNLInstructionsRequest)
-
- Version: 10.15.0.cl or later   This API allows users to set natural language (NL) instructions for a specific data-model to improve AI-generated answers and query processing. These instructions help guide the AI system to better understand the data context and provide more accurate responses.  #### Usage guidelines  To set NL instructions for a data-model, the request must include: - `data_source_identifier`: The unique ID or name of the data-model for which to set NL instructions - `nl_instructions_info`: An array of instruction objects, each containing:   - `instructions`: Array of text instructions for the LLM   - `scope`: The scope of the instruction (`GLOBAL`). Currently only `GLOBAL` is supported. It can be extended to data-model-user scope in future.  The API returns a response object with: - `success`: Boolean indicating whether the operation was successful  #### Instructions Scope  - **GLOBAL**: Instructions that apply globally for that data-model across the system  > ###### Note: > * To use this API, the user needs either edit access or SPOTTER_COACHING_PRIVILEGE on the data-model and they must use corresponding org related bearerToken where the data-model exists. > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * Available from version 10.15.0.cl and later. > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. > * Instructions help improve the accuracy and relevance of AI-generated responses for the specified data-model.      
-
-### Example
-
-
-```typescript
-import { createBearerAuthenticationConfig, ThoughtSpotRestApi, SetNLInstructionsRequest } from '@thoughtspot/rest-api-sdk';
-
-const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
-    username: "YOUR_USERNAME",
-    password: "YOUR_PASSWORD",
-});
-const apiInstance = new ThoughtSpotRestApi(configuration);
-
-apiInstance.setNLInstructions(
-  // SetNLInstructionsRequest
-  {
-    data_source_identifier: "data_source_identifier_example",
-    nl_instructions_info: [
-      {
-        instructions: [
-          "instructions_example",
-        ],
-        scope: "GLOBAL",
-      },
-    ],
-  } 
-).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
-
-
-```
-
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **setNLInstructionsRequest** | **SetNLInstructionsRequest**|  |
-
-
-### Return type
-
-**EurekaSetNLInstructionsResponse**
 
 ### Authorization
 

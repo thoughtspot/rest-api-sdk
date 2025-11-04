@@ -4,6 +4,7 @@
 
 package com.thoughtspot.client.api;
 
+import com.google.gson.reflect.TypeToken;
 import com.thoughtspot.client.ApiCallback;
 import com.thoughtspot.client.ApiClient;
 import com.thoughtspot.client.ApiClientConfiguration;
@@ -11,28 +12,20 @@ import com.thoughtspot.client.ApiException;
 import com.thoughtspot.client.ApiResponse;
 import com.thoughtspot.client.Configuration;
 import com.thoughtspot.client.Pair;
-import com.thoughtspot.client.ProgressRequestBody;
-import com.thoughtspot.client.ProgressResponseBody;
-
-import com.google.gson.reflect.TypeToken;
-
-import java.io.IOException;
-
-
 import com.thoughtspot.client.model.CreateRoleRequest;
-import com.thoughtspot.client.model.ErrorResponse;
 import com.thoughtspot.client.model.RoleResponse;
 import com.thoughtspot.client.model.SearchRoleResponse;
 import com.thoughtspot.client.model.SearchRolesRequest;
 import com.thoughtspot.client.model.UpdateRoleRequest;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
+@javax.annotation.Generated(
+        value = "org.openapitools.codegen.languages.JavaClientCodegen",
+        comments = "Generator version: 7.12.0")
 public class RolesApi {
     private ApiClient localVarApiClient;
     private ApiClientConfiguration localVarApiClientConfiguration;
@@ -91,30 +84,32 @@ public class RolesApi {
 
     /**
      * Build call for createRole
-     * @param createRoleRequest  (required)
+     *
+     * @param createRoleRequest (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Role successfully created. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid parameters. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Internal error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Role successfully created. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid parameters. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Internal error </td><td>  -  </td></tr>
+     * </table>
      */
-    public okhttp3.Call createRoleCall(CreateRoleRequest createRoleRequest, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call createRoleCall(
+            CreateRoleRequest createRoleRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
-        String[] localBasePaths = new String[] {  };
+        String[] localBasePaths = new String[] {};
 
         // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
+        if (localCustomBaseUrl != null) {
             basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
+        } else if (localBasePaths.length > 0) {
             basePath = localBasePaths[localHostIndex];
         } else {
             basePath = null;
@@ -131,53 +126,67 @@ public class RolesApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-        final String[] localVarAccepts = {
-            "application/json"
-        };
+        final String[] localVarAccepts = {"application/json"};
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
             localVarHeaderParams.put("Accept", localVarAccept);
         }
 
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] { "bearerAuth" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call createRoleValidateBeforeCall(CreateRoleRequest createRoleRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call createRoleValidateBeforeCall(
+            CreateRoleRequest createRoleRequest, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'createRoleRequest' is set
         if (createRoleRequest == null) {
-            throw new ApiException("Missing the required parameter 'createRoleRequest' when calling createRole(Async)");
+            throw new ApiException(
+                    "Missing the required parameter 'createRoleRequest' when calling"
+                            + " createRole(Async)");
         }
 
         return createRoleCall(createRoleRequest, _callback);
-
     }
 
     /**
-     * 
-     *   Version: 9.5.0.cl or later   Creates a Role object in ThoughtSpot.  Available only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To create a Role, the &#x60;ROLE_ADMINISTRATION&#x60; (**Can manage roles**) privilege is required.      
-     * @param createRoleRequest  (required)
+     * Version: 9.5.0.cl or later Creates a Role object in ThoughtSpot. Available only if
+     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
+     * on your instance. To create a Role, the &#x60;ROLE_ADMINISTRATION&#x60; (**Can manage
+     * roles**) privilege is required.
+     *
+     * @param createRoleRequest (required)
      * @return RoleResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Role successfully created. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid parameters. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Internal error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Role successfully created. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid parameters. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Internal error </td><td>  -  </td></tr>
+     * </table>
      */
     public RoleResponse createRole(CreateRoleRequest createRoleRequest) throws ApiException {
         ApiResponse<RoleResponse> localVarResp = createRoleWithHttpInfo(createRoleRequest);
@@ -185,79 +194,93 @@ public class RolesApi {
     }
 
     /**
-     * 
-     *   Version: 9.5.0.cl or later   Creates a Role object in ThoughtSpot.  Available only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To create a Role, the &#x60;ROLE_ADMINISTRATION&#x60; (**Can manage roles**) privilege is required.      
-     * @param createRoleRequest  (required)
+     * Version: 9.5.0.cl or later Creates a Role object in ThoughtSpot. Available only if
+     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
+     * on your instance. To create a Role, the &#x60;ROLE_ADMINISTRATION&#x60; (**Can manage
+     * roles**) privilege is required.
+     *
+     * @param createRoleRequest (required)
      * @return ApiResponse&lt;RoleResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Role successfully created. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid parameters. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Internal error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Role successfully created. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid parameters. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Internal error </td><td>  -  </td></tr>
+     * </table>
      */
-    public ApiResponse<RoleResponse> createRoleWithHttpInfo(CreateRoleRequest createRoleRequest) throws ApiException {
+    public ApiResponse<RoleResponse> createRoleWithHttpInfo(CreateRoleRequest createRoleRequest)
+            throws ApiException {
         okhttp3.Call localVarCall = createRoleValidateBeforeCall(createRoleRequest, null);
-        Type localVarReturnType = new TypeToken<RoleResponse>(){}.getType();
+        Type localVarReturnType = new TypeToken<RoleResponse>() {}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     *  (asynchronously)
-     *   Version: 9.5.0.cl or later   Creates a Role object in ThoughtSpot.  Available only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To create a Role, the &#x60;ROLE_ADMINISTRATION&#x60; (**Can manage roles**) privilege is required.      
-     * @param createRoleRequest  (required)
+     * (asynchronously) Version: 9.5.0.cl or later Creates a Role object in ThoughtSpot. Available
+     * only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is
+     * enabled on your instance. To create a Role, the &#x60;ROLE_ADMINISTRATION&#x60; (**Can manage
+     * roles**) privilege is required.
+     *
+     * @param createRoleRequest (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Role successfully created. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid parameters. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Internal error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Role successfully created. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid parameters. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Internal error </td><td>  -  </td></tr>
+     * </table>
      */
-    public okhttp3.Call createRoleAsync(CreateRoleRequest createRoleRequest, final ApiCallback<RoleResponse> _callback) throws ApiException {
+    public okhttp3.Call createRoleAsync(
+            CreateRoleRequest createRoleRequest, final ApiCallback<RoleResponse> _callback)
+            throws ApiException {
 
         okhttp3.Call localVarCall = createRoleValidateBeforeCall(createRoleRequest, _callback);
-        Type localVarReturnType = new TypeToken<RoleResponse>(){}.getType();
+        Type localVarReturnType = new TypeToken<RoleResponse>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for deleteRole
-     * @param roleIdentifier Unique ID or name of the Role. ReadOnly roles cannot be deleted. (required)
+     *
+     * @param roleIdentifier Unique ID or name of the Role. ReadOnly roles cannot be deleted.
+     *     (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> Role successfully deleted. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Internal error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Role successfully deleted. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Internal error </td><td>  -  </td></tr>
+     * </table>
      */
-    public okhttp3.Call deleteRoleCall(String roleIdentifier, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call deleteRoleCall(String roleIdentifier, final ApiCallback _callback)
+            throws ApiException {
         String basePath = null;
         // Operation Servers
-        String[] localBasePaths = new String[] {  };
+        String[] localBasePaths = new String[] {};
 
         // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
+        if (localCustomBaseUrl != null) {
             basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
+        } else if (localBasePaths.length > 0) {
             basePath = localBasePaths[localHostIndex];
         } else {
             basePath = null;
@@ -266,8 +289,11 @@ public class RolesApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/api/rest/2.0/roles/{role_identifier}/delete"
-            .replace("{" + "role_identifier" + "}", localVarApiClient.escapeString(roleIdentifier.toString()));
+        String localVarPath =
+                "/api/rest/2.0/roles/{role_identifier}/delete"
+                        .replace(
+                                "{" + "role_identifier" + "}",
+                                localVarApiClient.escapeString(roleIdentifier.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -275,72 +301,93 @@ public class RolesApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-        final String[] localVarAccepts = {
-            "application/json"
-        };
+        final String[] localVarAccepts = {"application/json"};
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
             localVarHeaderParams.put("Accept", localVarAccept);
         }
 
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        final String[] localVarContentTypes = {};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] { "bearerAuth" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call deleteRoleValidateBeforeCall(String roleIdentifier, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call deleteRoleValidateBeforeCall(
+            String roleIdentifier, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'roleIdentifier' is set
         if (roleIdentifier == null) {
-            throw new ApiException("Missing the required parameter 'roleIdentifier' when calling deleteRole(Async)");
+            throw new ApiException(
+                    "Missing the required parameter 'roleIdentifier' when calling"
+                            + " deleteRole(Async)");
         }
 
         return deleteRoleCall(roleIdentifier, _callback);
-
     }
 
     /**
-     * 
-     *   Version: 9.5.0.cl or later   Deletes a Role object from the ThoughtSpot system.  Available only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To delete a Role, the &#x60;ROLE_ADMINISTRATION&#x60; (**Can manage roles**) privilege is required.      
-     * @param roleIdentifier Unique ID or name of the Role. ReadOnly roles cannot be deleted. (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * Version: 9.5.0.cl or later Deletes a Role object from the ThoughtSpot system. Available only
+     * if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is
+     * enabled on your instance. To delete a Role, the &#x60;ROLE_ADMINISTRATION&#x60; (**Can manage
+     * roles**) privilege is required.
+     *
+     * @param roleIdentifier Unique ID or name of the Role. ReadOnly roles cannot be deleted.
+     *     (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> Role successfully deleted. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Internal error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Role successfully deleted. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Internal error </td><td>  -  </td></tr>
+     * </table>
      */
     public void deleteRole(String roleIdentifier) throws ApiException {
         deleteRoleWithHttpInfo(roleIdentifier);
     }
 
     /**
-     * 
-     *   Version: 9.5.0.cl or later   Deletes a Role object from the ThoughtSpot system.  Available only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To delete a Role, the &#x60;ROLE_ADMINISTRATION&#x60; (**Can manage roles**) privilege is required.      
-     * @param roleIdentifier Unique ID or name of the Role. ReadOnly roles cannot be deleted. (required)
+     * Version: 9.5.0.cl or later Deletes a Role object from the ThoughtSpot system. Available only
+     * if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is
+     * enabled on your instance. To delete a Role, the &#x60;ROLE_ADMINISTRATION&#x60; (**Can manage
+     * roles**) privilege is required.
+     *
+     * @param roleIdentifier Unique ID or name of the Role. ReadOnly roles cannot be deleted.
+     *     (required)
      * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> Role successfully deleted. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Internal error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Role successfully deleted. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Internal error </td><td>  -  </td></tr>
+     * </table>
      */
     public ApiResponse<Void> deleteRoleWithHttpInfo(String roleIdentifier) throws ApiException {
         okhttp3.Call localVarCall = deleteRoleValidateBeforeCall(roleIdentifier, null);
@@ -348,24 +395,30 @@ public class RolesApi {
     }
 
     /**
-     *  (asynchronously)
-     *   Version: 9.5.0.cl or later   Deletes a Role object from the ThoughtSpot system.  Available only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To delete a Role, the &#x60;ROLE_ADMINISTRATION&#x60; (**Can manage roles**) privilege is required.      
-     * @param roleIdentifier Unique ID or name of the Role. ReadOnly roles cannot be deleted. (required)
+     * (asynchronously) Version: 9.5.0.cl or later Deletes a Role object from the ThoughtSpot
+     * system. Available only if [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To delete
+     * a Role, the &#x60;ROLE_ADMINISTRATION&#x60; (**Can manage roles**) privilege is required.
+     *
+     * @param roleIdentifier Unique ID or name of the Role. ReadOnly roles cannot be deleted.
+     *     (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> Role successfully deleted. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Internal error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Role successfully deleted. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Internal error </td><td>  -  </td></tr>
+     * </table>
      */
-    public okhttp3.Call deleteRoleAsync(String roleIdentifier, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call deleteRoleAsync(String roleIdentifier, final ApiCallback<Void> _callback)
+            throws ApiException {
 
         okhttp3.Call localVarCall = deleteRoleValidateBeforeCall(roleIdentifier, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
@@ -373,30 +426,33 @@ public class RolesApi {
     }
     /**
      * Build call for searchRoles
-     * @param searchRolesRequest  (required)
+     *
+     * @param searchRolesRequest (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Roles search result. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Internal error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Roles search result. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Internal error </td><td>  -  </td></tr>
+     * </table>
      */
-    public okhttp3.Call searchRolesCall(SearchRolesRequest searchRolesRequest, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call searchRolesCall(
+            SearchRolesRequest searchRolesRequest, final ApiCallback _callback)
+            throws ApiException {
         String basePath = null;
         // Operation Servers
-        String[] localBasePaths = new String[] {  };
+        String[] localBasePaths = new String[] {};
 
         // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
+        if (localCustomBaseUrl != null) {
             basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
+        } else if (localBasePaths.length > 0) {
             basePath = localBasePaths[localHostIndex];
         } else {
             basePath = null;
@@ -413,134 +469,173 @@ public class RolesApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-        final String[] localVarAccepts = {
-            "application/json"
-        };
+        final String[] localVarAccepts = {"application/json"};
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
             localVarHeaderParams.put("Accept", localVarAccept);
         }
 
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] { "bearerAuth" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call searchRolesValidateBeforeCall(SearchRolesRequest searchRolesRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call searchRolesValidateBeforeCall(
+            SearchRolesRequest searchRolesRequest, final ApiCallback _callback)
+            throws ApiException {
         // verify the required parameter 'searchRolesRequest' is set
         if (searchRolesRequest == null) {
-            throw new ApiException("Missing the required parameter 'searchRolesRequest' when calling searchRoles(Async)");
+            throw new ApiException(
+                    "Missing the required parameter 'searchRolesRequest' when calling"
+                            + " searchRoles(Async)");
         }
 
         return searchRolesCall(searchRolesRequest, _callback);
-
     }
 
     /**
-     * 
-     *   Version: 9.5.0.cl or later   Gets a list of Role objects from the ThoughtSpot system.  Available if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To search for Roles, the &#x60;ROLE_ADMINISTRATION&#x60; (**Can manage roles**) privilege is required.  To get details of a specific Role object, specify the GUID or name. You can also filter the API response based on user group and Org identifiers, privileges assigned to the Role, and deprecation status.      
-     * @param searchRolesRequest  (required)
+     * Version: 9.5.0.cl or later Gets a list of Role objects from the ThoughtSpot system. Available
+     * if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is
+     * enabled on your instance. To search for Roles, the &#x60;ROLE_ADMINISTRATION&#x60; (**Can
+     * manage roles**) privilege is required. To get details of a specific Role object, specify the
+     * GUID or name. You can also filter the API response based on user group and Org identifiers,
+     * privileges assigned to the Role, and deprecation status.
+     *
+     * @param searchRolesRequest (required)
      * @return List&lt;SearchRoleResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Roles search result. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Internal error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Roles search result. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Internal error </td><td>  -  </td></tr>
+     * </table>
      */
-    public List<SearchRoleResponse> searchRoles(SearchRolesRequest searchRolesRequest) throws ApiException {
-        ApiResponse<List<SearchRoleResponse>> localVarResp = searchRolesWithHttpInfo(searchRolesRequest);
+    public List<SearchRoleResponse> searchRoles(SearchRolesRequest searchRolesRequest)
+            throws ApiException {
+        ApiResponse<List<SearchRoleResponse>> localVarResp =
+                searchRolesWithHttpInfo(searchRolesRequest);
         return localVarResp.getData();
     }
 
     /**
-     * 
-     *   Version: 9.5.0.cl or later   Gets a list of Role objects from the ThoughtSpot system.  Available if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To search for Roles, the &#x60;ROLE_ADMINISTRATION&#x60; (**Can manage roles**) privilege is required.  To get details of a specific Role object, specify the GUID or name. You can also filter the API response based on user group and Org identifiers, privileges assigned to the Role, and deprecation status.      
-     * @param searchRolesRequest  (required)
+     * Version: 9.5.0.cl or later Gets a list of Role objects from the ThoughtSpot system. Available
+     * if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is
+     * enabled on your instance. To search for Roles, the &#x60;ROLE_ADMINISTRATION&#x60; (**Can
+     * manage roles**) privilege is required. To get details of a specific Role object, specify the
+     * GUID or name. You can also filter the API response based on user group and Org identifiers,
+     * privileges assigned to the Role, and deprecation status.
+     *
+     * @param searchRolesRequest (required)
      * @return ApiResponse&lt;List&lt;SearchRoleResponse&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Roles search result. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Internal error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Roles search result. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Internal error </td><td>  -  </td></tr>
+     * </table>
      */
-    public ApiResponse<List<SearchRoleResponse>> searchRolesWithHttpInfo(SearchRolesRequest searchRolesRequest) throws ApiException {
+    public ApiResponse<List<SearchRoleResponse>> searchRolesWithHttpInfo(
+            SearchRolesRequest searchRolesRequest) throws ApiException {
         okhttp3.Call localVarCall = searchRolesValidateBeforeCall(searchRolesRequest, null);
-        Type localVarReturnType = new TypeToken<List<SearchRoleResponse>>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<SearchRoleResponse>>() {}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     *  (asynchronously)
-     *   Version: 9.5.0.cl or later   Gets a list of Role objects from the ThoughtSpot system.  Available if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To search for Roles, the &#x60;ROLE_ADMINISTRATION&#x60; (**Can manage roles**) privilege is required.  To get details of a specific Role object, specify the GUID or name. You can also filter the API response based on user group and Org identifiers, privileges assigned to the Role, and deprecation status.      
-     * @param searchRolesRequest  (required)
+     * (asynchronously) Version: 9.5.0.cl or later Gets a list of Role objects from the ThoughtSpot
+     * system. Available if [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To search
+     * for Roles, the &#x60;ROLE_ADMINISTRATION&#x60; (**Can manage roles**) privilege is required.
+     * To get details of a specific Role object, specify the GUID or name. You can also filter the
+     * API response based on user group and Org identifiers, privileges assigned to the Role, and
+     * deprecation status.
+     *
+     * @param searchRolesRequest (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Roles search result. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Internal error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Roles search result. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Internal error </td><td>  -  </td></tr>
+     * </table>
      */
-    public okhttp3.Call searchRolesAsync(SearchRolesRequest searchRolesRequest, final ApiCallback<List<SearchRoleResponse>> _callback) throws ApiException {
+    public okhttp3.Call searchRolesAsync(
+            SearchRolesRequest searchRolesRequest,
+            final ApiCallback<List<SearchRoleResponse>> _callback)
+            throws ApiException {
 
         okhttp3.Call localVarCall = searchRolesValidateBeforeCall(searchRolesRequest, _callback);
-        Type localVarReturnType = new TypeToken<List<SearchRoleResponse>>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<SearchRoleResponse>>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for updateRole
+     *
      * @param roleIdentifier Unique ID or name of the Role. (required)
-     * @param updateRoleRequest  (required)
+     * @param updateRoleRequest (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Role successfully updated. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Role successfully updated. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
-    public okhttp3.Call updateRoleCall(String roleIdentifier, UpdateRoleRequest updateRoleRequest, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call updateRoleCall(
+            String roleIdentifier, UpdateRoleRequest updateRoleRequest, final ApiCallback _callback)
+            throws ApiException {
         String basePath = null;
         // Operation Servers
-        String[] localBasePaths = new String[] {  };
+        String[] localBasePaths = new String[] {};
 
         // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
+        if (localCustomBaseUrl != null) {
             basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
+        } else if (localBasePaths.length > 0) {
             basePath = localBasePaths[localHostIndex];
         } else {
             basePath = null;
@@ -549,8 +644,11 @@ public class RolesApi {
         Object localVarPostBody = updateRoleRequest;
 
         // create path and map variables
-        String localVarPath = "/api/rest/2.0/roles/{role_identifier}/update"
-            .replace("{" + "role_identifier" + "}", localVarApiClient.escapeString(roleIdentifier.toString()));
+        String localVarPath =
+                "/api/rest/2.0/roles/{role_identifier}/update"
+                        .replace(
+                                "{" + "role_identifier" + "}",
+                                localVarApiClient.escapeString(roleIdentifier.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -558,112 +656,146 @@ public class RolesApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-        final String[] localVarAccepts = {
-            "application/json"
-        };
+        final String[] localVarAccepts = {"application/json"};
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
             localVarHeaderParams.put("Accept", localVarAccept);
         }
 
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] { "bearerAuth" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call updateRoleValidateBeforeCall(String roleIdentifier, UpdateRoleRequest updateRoleRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call updateRoleValidateBeforeCall(
+            String roleIdentifier, UpdateRoleRequest updateRoleRequest, final ApiCallback _callback)
+            throws ApiException {
         // verify the required parameter 'roleIdentifier' is set
         if (roleIdentifier == null) {
-            throw new ApiException("Missing the required parameter 'roleIdentifier' when calling updateRole(Async)");
+            throw new ApiException(
+                    "Missing the required parameter 'roleIdentifier' when calling"
+                            + " updateRole(Async)");
         }
 
         // verify the required parameter 'updateRoleRequest' is set
         if (updateRoleRequest == null) {
-            throw new ApiException("Missing the required parameter 'updateRoleRequest' when calling updateRole(Async)");
+            throw new ApiException(
+                    "Missing the required parameter 'updateRoleRequest' when calling"
+                            + " updateRole(Async)");
         }
 
         return updateRoleCall(roleIdentifier, updateRoleRequest, _callback);
-
     }
 
     /**
-     * 
-     *   Version: 9.5.0.cl or later   Updates the properties of a Role object.  Available only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To update a Role, the &#x60;ROLE_ADMINISTRATION&#x60; (**Can manage roles**) privilege is required.      
+     * Version: 9.5.0.cl or later Updates the properties of a Role object. Available only if
+     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
+     * on your instance. To update a Role, the &#x60;ROLE_ADMINISTRATION&#x60; (**Can manage
+     * roles**) privilege is required.
+     *
      * @param roleIdentifier Unique ID or name of the Role. (required)
-     * @param updateRoleRequest  (required)
+     * @param updateRoleRequest (required)
      * @return RoleResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Role successfully updated. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Role successfully updated. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
-    public RoleResponse updateRole(String roleIdentifier, UpdateRoleRequest updateRoleRequest) throws ApiException {
-        ApiResponse<RoleResponse> localVarResp = updateRoleWithHttpInfo(roleIdentifier, updateRoleRequest);
+    public RoleResponse updateRole(String roleIdentifier, UpdateRoleRequest updateRoleRequest)
+            throws ApiException {
+        ApiResponse<RoleResponse> localVarResp =
+                updateRoleWithHttpInfo(roleIdentifier, updateRoleRequest);
         return localVarResp.getData();
     }
 
     /**
-     * 
-     *   Version: 9.5.0.cl or later   Updates the properties of a Role object.  Available only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To update a Role, the &#x60;ROLE_ADMINISTRATION&#x60; (**Can manage roles**) privilege is required.      
+     * Version: 9.5.0.cl or later Updates the properties of a Role object. Available only if
+     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
+     * on your instance. To update a Role, the &#x60;ROLE_ADMINISTRATION&#x60; (**Can manage
+     * roles**) privilege is required.
+     *
      * @param roleIdentifier Unique ID or name of the Role. (required)
-     * @param updateRoleRequest  (required)
+     * @param updateRoleRequest (required)
      * @return ApiResponse&lt;RoleResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Role successfully updated. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Role successfully updated. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
-    public ApiResponse<RoleResponse> updateRoleWithHttpInfo(String roleIdentifier, UpdateRoleRequest updateRoleRequest) throws ApiException {
-        okhttp3.Call localVarCall = updateRoleValidateBeforeCall(roleIdentifier, updateRoleRequest, null);
-        Type localVarReturnType = new TypeToken<RoleResponse>(){}.getType();
+    public ApiResponse<RoleResponse> updateRoleWithHttpInfo(
+            String roleIdentifier, UpdateRoleRequest updateRoleRequest) throws ApiException {
+        okhttp3.Call localVarCall =
+                updateRoleValidateBeforeCall(roleIdentifier, updateRoleRequest, null);
+        Type localVarReturnType = new TypeToken<RoleResponse>() {}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     *  (asynchronously)
-     *   Version: 9.5.0.cl or later   Updates the properties of a Role object.  Available only if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To update a Role, the &#x60;ROLE_ADMINISTRATION&#x60; (**Can manage roles**) privilege is required.      
+     * (asynchronously) Version: 9.5.0.cl or later Updates the properties of a Role object.
+     * Available only if [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To update
+     * a Role, the &#x60;ROLE_ADMINISTRATION&#x60; (**Can manage roles**) privilege is required.
+     *
      * @param roleIdentifier Unique ID or name of the Role. (required)
-     * @param updateRoleRequest  (required)
+     * @param updateRoleRequest (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
      * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Role successfully updated. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Role successfully updated. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
      */
-    public okhttp3.Call updateRoleAsync(String roleIdentifier, UpdateRoleRequest updateRoleRequest, final ApiCallback<RoleResponse> _callback) throws ApiException {
+    public okhttp3.Call updateRoleAsync(
+            String roleIdentifier,
+            UpdateRoleRequest updateRoleRequest,
+            final ApiCallback<RoleResponse> _callback)
+            throws ApiException {
 
-        okhttp3.Call localVarCall = updateRoleValidateBeforeCall(roleIdentifier, updateRoleRequest, _callback);
-        Type localVarReturnType = new TypeToken<RoleResponse>(){}.getType();
+        okhttp3.Call localVarCall =
+                updateRoleValidateBeforeCall(roleIdentifier, updateRoleRequest, _callback);
+        Type localVarReturnType = new TypeToken<RoleResponse>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
