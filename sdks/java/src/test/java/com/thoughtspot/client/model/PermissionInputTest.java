@@ -4,27 +4,45 @@
 
 package com.thoughtspot.client.model;
 
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import com.thoughtspot.client.model.PrincipalsInput;
+import java.io.IOException;
+import java.util.Arrays;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for PermissionInput */
+/**
+ * Model tests for PermissionInput
+ */
 public class PermissionInputTest {
     private final PermissionInput model = new PermissionInput();
 
-    /** Model tests for PermissionInput */
+    /**
+     * Model tests for PermissionInput
+     */
     @Test
     public void testPermissionInput() {
         // TODO: test PermissionInput
     }
 
-    /** Test the property 'principal' */
+    /**
+     * Test the property 'principal'
+     */
     @Test
     public void principalTest() {
         // TODO: test principal
     }
 
-    /** Test the property 'shareMode' */
+    /**
+     * Test the property 'shareMode'
+     */
     @Test
     public void shareModeTest() {
         // TODO: test shareMode
     }
+
 }
