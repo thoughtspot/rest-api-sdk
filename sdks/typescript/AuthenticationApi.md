@@ -260,6 +260,7 @@ apiInstance.getFullAccessToken(
     group_identifiers: [
       "group_identifiers_example",
     ],
+    user_parameters: null,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -333,6 +334,7 @@ apiInstance.getObjectAccessToken(
     group_identifiers: [
       "group_identifiers_example",
     ],
+    user_parameters: null,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
