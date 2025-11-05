@@ -78,7 +78,8 @@
         }
       },
       "enableExport": false,
-      "enableConsoleCalls": true
+      "enableConsoleCalls": true,
+      "maskSensitiveValues": false
     }
   }
 }
