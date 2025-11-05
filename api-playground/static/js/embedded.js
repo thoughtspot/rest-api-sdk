@@ -5,75 +5,108 @@ const navigateEndpoint = (apiResourceId) => {
 let shouldPatch = false;
 let _setConfig = null;
 let isApiMaticPortalReady = false;
-let pendingConfig = null; // ✅ NEW: Queue config if received early
 
 const channel = new MessageChannel();
 let playgroundConfig = {};
 
-document.getElementsByClassName('portal-header')[0].style.display = 'none';
+const normalizeKey = (key = '') =>
+  key
+    .toString()
+    .trim()
+    .toLowerCase()
+    .replace(/[\s_-]/g, '');
 
-const setPlaygroundConfig = ({ baseUrl, accessToken }) => {
-  if (!isApiMaticPortalReady) {
-    // ✅ NEW: Queue config if not ready yet
-    console.log('APIMatic not ready yet, queueing config');
-    pendingConfig = { baseUrl, accessToken };
+const BASE_URL_KEY_CANDIDATE = 'baseurl';
+
+const applyBaseUrl = (configObject = {}, baseUrl) => {
+  if (!baseUrl) {
+    return configObject;
+  }
+
+  const updatedConfig = { ...configObject };
+  let didUpdateExistingKey = false;
+
+  Object.keys(updatedConfig).forEach((key) => {
+    if (normalizeKey(key) === BASE_URL_KEY_CANDIDATE) {
+      updatedConfig[key] = baseUrl;
+      didUpdateExistingKey = true;
+    }
+  });
+
+  if (!didUpdateExistingKey) {
+    updatedConfig['base-url'] = baseUrl;
+  }
+
+  return updatedConfig;
+};
+
+const hidePortalHeader = () => {
+  const headerElement = document.querySelector('.portal-header');
+  if (!headerElement) {
+    return false;
+  }
+  headerElement.style.display = 'none';
+  return true;
+};
+
+if (!hidePortalHeader()) {
+  const observer = new MutationObserver(() => {
+    if (hidePortalHeader()) {
+      observer.disconnect();
+    }
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
+}
+
+const setAPIMaticPortalConfig = () => {
+  APIMaticDevPortal.ready(({ setConfig }) => {
+    isApiMaticPortalReady = true;
+    _setConfig = setConfig;
+    window.parent.postMessage({ type: 'api-playground-ready' }, '*', [
+      channel.port2,
+    ]);
+  });
+};
+
+const setPlaygroundConfig = ({ baseUrl, accessToken, environment }) => {
+  if (!isApiMaticPortalReady || typeof _setConfig !== 'function') {
     return;
   }
-  
-  console.log('Setting playground config:', { baseUrl, accessToken: accessToken?.substring(0, 10) + '...' });
-  
-  _setConfig((defaultConfig) => {
-    const newConfig = {
-      ...defaultConfig,
-      showFullCode: true,  // ✅ CHANGED: Show full code
-      maskSensitiveValues: false, // ✅ NEW: Disable masking (try this key)
-      maskSensitiveFields: false, // ✅ NEW: Alternative key name
-      hideSensitiveData: false,   // ✅ NEW: Another possible key
-      auth: {
-        ...defaultConfig.auth,
+
+  _setConfig((defaultConfig = {}) => {
+    const updatedConfig = { ...defaultConfig };
+
+    updatedConfig.showFullCode = false;
+    updatedConfig.showCompleteCode = false;
+
+    if (baseUrl || defaultConfig.config) {
+      updatedConfig.config = applyBaseUrl(defaultConfig.config, baseUrl);
+    }
+
+    if (accessToken) {
+      updatedConfig.auth = {
+        ...(defaultConfig.auth ?? {}),
         bearerAuth: {
-          ...defaultConfig.auth?.bearerAuth,
+          ...(defaultConfig.auth?.bearerAuth ?? {}),
           AccessToken: accessToken,
         },
-      },
-      config: {
-        ...defaultConfig.config,
-        "base-url": baseUrl,
-      },
-      // ✅ NEW: Try alternative config structures
-      serverConfiguration: {
-        baseUrl: baseUrl,
-      },
-      authConfiguration: {
-        bearerToken: accessToken,
-      },
-    };
-    
-    console.log('New config:', newConfig);
-    return newConfig;
+      };
+    }
+
+    if (environment) {
+      if (Object.prototype.hasOwnProperty.call(defaultConfig, 'selectedEnvironment')) {
+        updatedConfig.selectedEnvironment = environment;
+      }
+      if (Object.prototype.hasOwnProperty.call(defaultConfig, 'selectedEnvironmentId')) {
+        updatedConfig.selectedEnvironmentId = environment;
+      }
+    }
+
+    return updatedConfig;
   });
 };
 
 /** setting APIMatic Portal */
-const setAPIMaticPortalConfig = () => {
-  APIMaticDevPortal.ready(({ setConfig }) => {
-    console.log('APIMatic Portal is ready!');
-    isApiMaticPortalReady = true;
-    _setConfig = setConfig;
-    
-    window.parent.postMessage({ type: 'api-playground-ready' }, '*', [
-      channel.port2,
-    ]);
-    
-    // ✅ NEW: Apply pending config if it was received early
-    if (pendingConfig) {
-      console.log('Applying pending config:', pendingConfig);
-      setPlaygroundConfig(pendingConfig);
-      pendingConfig = null;
-    }
-  });
-};
-
 setAPIMaticPortalConfig();
 
 window.addEventListener('hashchange', (e) => {
@@ -86,38 +119,111 @@ window.addEventListener('hashchange', (e) => {
 });
 
 window.addEventListener('message', (event) => {
-  console.log('Received message:', event.data); // ✅ NEW: Debug log
-  
   if (event.data?.type === 'api-playground-config') {
     shouldPatch = true;
     playgroundConfig = event.data;
-    
-    console.log('Received playground config:', {
-      baseUrl: event.data.baseUrl,
-      hasToken: !!event.data.accessToken,
-      tokenPreview: event.data.accessToken?.substring(0, 10) + '...'
-    });
-    
     setPlaygroundConfig(playgroundConfig);
-    
     if (playgroundConfig.apiResourceId) {
       navigateEndpoint(playgroundConfig.apiResourceId);
     }
   }
 });
 
-// ✅ NEW: Debug helper
 window.test = (config) => {
-  console.log('Manual test called');
-  setPlaygroundConfig(config || playgroundConfig);
+  setPlaygroundConfig(playgroundConfig);
 };
 
-// ✅ NEW: Expose debug info
-window.debug = () => {
-  console.log('Debug info:', {
-    isApiMaticPortalReady,
-    hasSetConfig: !!_setConfig,
-    playgroundConfig,
-    pendingConfig
+/**
+ * Custom script to hide user_parameters from API responses in the APImatic playground
+ */
+(function() {
+  // Function to intercept and modify fetch/XHR responses
+  function setupResponseInterceptor() {
+    // Create a proxy for the fetch function
+    const originalFetch = window.fetch;
+    window.fetch = async function(...args) {
+      const response = await originalFetch.apply(this, args);
+      
+      // Clone the response to create a new one
+      const clone = response.clone();
+      
+      // Check if this is a response from the auth token endpoints
+      const url = args[0].toString();
+      if (url.includes('/api/rest/2.0/auth/token/full') || url.includes('/api/rest/2.0/auth/token/object')) {
+        return clone.json().then(data => {
+          // Remove user_parameters if present
+          if (data && data.user_parameters !== undefined) {
+            delete data.user_parameters;
+          }
+          
+          // Create a modified response
+          const modifiedResponse = new Response(JSON.stringify(data), {
+            status: response.status,
+            statusText: response.statusText,
+            headers: response.headers
+          });
+          
+          return modifiedResponse;
+        }).catch(() => {
+          // If there's an error parsing JSON, return the original response
+          return clone;
+        });
+      }
+      
+      return response;
+    };
+    
+    // Also intercept XMLHttpRequest for older browsers/implementations
+    const originalXHROpen = XMLHttpRequest.prototype.open;
+    const originalXHRSend = XMLHttpRequest.prototype.send;
+    
+    XMLHttpRequest.prototype.open = function(method, url, ...rest) {
+      this._url = url;
+      return originalXHROpen.apply(this, [method, url, ...rest]);
+    };
+    
+    XMLHttpRequest.prototype.send = function(...args) {
+      const xhr = this;
+      const originalOnReadyStateChange = xhr.onreadystatechange;
+      
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+          const url = xhr._url.toString();
+          
+          if (url.includes('/api/rest/2.0/auth/token/full') || url.includes('/api/rest/2.0/auth/token/object')) {
+            try {
+              const response = JSON.parse(xhr.responseText);
+              
+              // Remove user_parameters if present
+              if (response && response.user_parameters !== undefined) {
+                delete response.user_parameters;
+                
+                // Override the response text with the modified JSON
+                Object.defineProperty(xhr, 'responseText', {
+                  get: function() {
+                    return JSON.stringify(response);
+                  }
+                });
+              }
+            } catch (e) {
+              // If error parsing JSON, leave the response as is
+              console.error('Error processing XHR response:', e);
+            }
+          }
+        }
+        
+        if (originalOnReadyStateChange) {
+          originalOnReadyStateChange.apply(xhr, arguments);
+        }
+      };
+      
+      return originalXHRSend.apply(xhr, args);
+    };
+  }
+  
+  // Wait for the page to be fully loaded
+  window.addEventListener('load', function() {
+    console.log('Setting up response interceptor to hide user_parameters in API responses');
+    setupResponseInterceptor();
   });
-};
+})();
