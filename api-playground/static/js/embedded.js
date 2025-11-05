@@ -92,6 +92,7 @@ const setPlaygroundConfig = ({ baseUrl, accessToken }) => {
           // ...defaultConfig.config,
           "base-url": baseUrl,
         },
+        environment: "production",
       };
     });
   }
