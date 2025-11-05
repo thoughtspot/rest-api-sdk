@@ -81,7 +81,7 @@ const setPlaygroundConfig = ({ baseUrl, accessToken }) => {
   if(isApiMaticPortalReady) {
     _setConfig((defaultConfig) => {
       return {
-        ...defaultConfig,
+        // ...defaultConfig,
         showFullCode: false,   
         auth: {
           bearerAuth: {
@@ -89,9 +89,10 @@ const setPlaygroundConfig = ({ baseUrl, accessToken }) => {
           },
         },
         config: {
-          ...defaultConfig.config,
+          // ...defaultConfig.config,
           "base-url": baseUrl,
         },
+        environment: "production",
       };
     });
   }
