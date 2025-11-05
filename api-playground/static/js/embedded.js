@@ -5,99 +5,75 @@ const navigateEndpoint = (apiResourceId) => {
 let shouldPatch = false;
 let _setConfig = null;
 let isApiMaticPortalReady = false;
-
-const patchURLAndPlayground = async ({ baseUrl, accessToken }) => {
-  // find the configure button element
-  const configButtonElement = await getElementByIdAsync('code-config-button');
-  if (!configButtonElement) return;
-  configButtonElement.click(); // programatically click on configure button
-  // Get all Form elements to control flickering the configuration form
-  const formElements = document.querySelectorAll('form');
-  const formElement = formElements[formElements.length - 1]?.parentElement;
-  if (!formElement) return;
-  formElement.style.display = 'none';
-  configButtonElement.style.display = 'block';
-  setTimeout(() => {
-    // find the input element for to update base_url
-    const inputElement = document.querySelector('input[label="base-url"]');
-    if (!inputElement) return;
-    const event = new Event('input', { bubbles: true }); // create an input event to update base_url
-    const previousValue = inputElement.value;
-    inputElement.value = baseUrl; // setup host and port url to input elment
-    // eslint-disable-next-line no-underscore-dangle
-    inputElement._valueTracker.setValue(previousValue);
-    inputElement.dispatchEvent(event); // dispatch input elment
-    inputElement.focus();
-    const accesTokenInputElement = document.querySelector(
-      'input[label="AccessToken"]'
-    );
-    if (!accesTokenInputElement) return;
-    const accessTokenEvent = new Event('input', { bubbles: true }); // create an input event to update accesstoken
-    const accessTokenPreviousValue = accesTokenInputElement.value;
-    accesTokenInputElement.value = accessToken; // set it up access token get from api
-    // eslint-disable-next-line no-underscore-dangle
-    accesTokenInputElement._valueTracker.setValue(accessTokenPreviousValue);
-    accesTokenInputElement.dispatchEvent(accessTokenEvent); // dispatch access token input elment
-    accesTokenInputElement.focus();
-    // to hide configure form finding titleElement and clicking programatically
-    const titleElement = document.getElementsByClassName('sc-kEjbQP');
-    if (!titleElement || titleElement.length === 0) return;
-    titleElement[0].click();
-    shouldPatch = false;
-  });
-};
+let pendingConfig = null; // ✅ NEW: Queue config if received early
 
 const channel = new MessageChannel();
 let playgroundConfig = {};
 
-function getElementByIdAsync(id) {
-  let maxTime = 2000;
-  const STEP = 16;
-  return new Promise((resolve) => {
-    const interval = setInterval(() => {
-      const element = document.getElementById(id);
-      maxTime -= STEP;
-      if (element || maxTime <= 0) {
-        clearInterval(interval);
-        resolve(element);
-      }
-    }, STEP);
-  });
-}
-
 document.getElementsByClassName('portal-header')[0].style.display = 'none';
 
-const setAPIMaticPortalConfig = () => {
-  APIMaticDevPortal.ready(({ setConfig }) => {
-    isApiMaticPortalReady = true;
-    _setConfig = setConfig;
-    window.parent.postMessage({ type: 'api-playground-ready' }, '*', [
-      channel.port2,
-    ]);
-  });
-};
-
 const setPlaygroundConfig = ({ baseUrl, accessToken }) => {
-  if(isApiMaticPortalReady) {
-    _setConfig((defaultConfig) => {
-      return {
-        ...defaultConfig,
-        showFullCode: false,   
-        auth: {
-          bearerAuth: {
-            AccessToken: accessToken,
-          },
-        },
-        config: {
-          ...defaultConfig.config,
-          "base-url": baseUrl,
-        },
-      };
-    });
+  if (!isApiMaticPortalReady) {
+    // ✅ NEW: Queue config if not ready yet
+    console.log('APIMatic not ready yet, queueing config');
+    pendingConfig = { baseUrl, accessToken };
+    return;
   }
+  
+  console.log('Setting playground config:', { baseUrl, accessToken: accessToken?.substring(0, 10) + '...' });
+  
+  _setConfig((defaultConfig) => {
+    const newConfig = {
+      ...defaultConfig,
+      showFullCode: true,  // ✅ CHANGED: Show full code
+      maskSensitiveValues: false, // ✅ NEW: Disable masking (try this key)
+      maskSensitiveFields: false, // ✅ NEW: Alternative key name
+      hideSensitiveData: false,   // ✅ NEW: Another possible key
+      auth: {
+        ...defaultConfig.auth,
+        bearerAuth: {
+          ...defaultConfig.auth?.bearerAuth,
+          AccessToken: accessToken,
+        },
+      },
+      config: {
+        ...defaultConfig.config,
+        "base-url": baseUrl,
+      },
+      // ✅ NEW: Try alternative config structures
+      serverConfiguration: {
+        baseUrl: baseUrl,
+      },
+      authConfiguration: {
+        bearerToken: accessToken,
+      },
+    };
+    
+    console.log('New config:', newConfig);
+    return newConfig;
+  });
 };
 
 /** setting APIMatic Portal */
+const setAPIMaticPortalConfig = () => {
+  APIMaticDevPortal.ready(({ setConfig }) => {
+    console.log('APIMatic Portal is ready!');
+    isApiMaticPortalReady = true;
+    _setConfig = setConfig;
+    
+    window.parent.postMessage({ type: 'api-playground-ready' }, '*', [
+      channel.port2,
+    ]);
+    
+    // ✅ NEW: Apply pending config if it was received early
+    if (pendingConfig) {
+      console.log('Applying pending config:', pendingConfig);
+      setPlaygroundConfig(pendingConfig);
+      pendingConfig = null;
+    }
+  });
+};
+
 setAPIMaticPortalConfig();
 
 window.addEventListener('hashchange', (e) => {
@@ -110,16 +86,38 @@ window.addEventListener('hashchange', (e) => {
 });
 
 window.addEventListener('message', (event) => {
+  console.log('Received message:', event.data); // ✅ NEW: Debug log
+  
   if (event.data?.type === 'api-playground-config') {
     shouldPatch = true;
     playgroundConfig = event.data;
+    
+    console.log('Received playground config:', {
+      baseUrl: event.data.baseUrl,
+      hasToken: !!event.data.accessToken,
+      tokenPreview: event.data.accessToken?.substring(0, 10) + '...'
+    });
+    
     setPlaygroundConfig(playgroundConfig);
+    
     if (playgroundConfig.apiResourceId) {
       navigateEndpoint(playgroundConfig.apiResourceId);
     }
   }
 });
 
+// ✅ NEW: Debug helper
 window.test = (config) => {
-  setPlaygroundConfig(playgroundConfig);
+  console.log('Manual test called');
+  setPlaygroundConfig(config || playgroundConfig);
+};
+
+// ✅ NEW: Expose debug info
+window.debug = () => {
+  console.log('Debug info:', {
+    isApiMaticPortalReady,
+    hasSetConfig: !!_setConfig,
+    playgroundConfig,
+    pendingConfig
+  });
 };
