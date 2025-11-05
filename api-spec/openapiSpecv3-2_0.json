@@ -6,14 +6,6 @@
   },
   "x-roles": [
     {
-      "name": "10.13.0.cl",
-      "id": "10.13.0.cl",
-      "tags": [
-        "10.13.0.cl"
-      ],
-      "description": "Roles for version 10.13.0.cl"
-    },
-    {
       "name": "10.4.0.cl",
       "id": "10.4.0.cl",
       "tags": [
@@ -142,14 +134,6 @@
       "description": "Roles for version 9.5.0.cl"
     },
     {
-      "name": "10.14.0.cl",
-      "id": "10.14.0.cl",
-      "tags": [
-        "10.14.0.cl"
-      ],
-      "description": "Roles for version 10.14.0.cl"
-    },
-    {
       "name": "9.7.0.cl",
       "id": "9.7.0.cl",
       "tags": [
@@ -160,91 +144,6 @@
   ],
   "tags": [],
   "paths": {
-    "/api/rest/2.0/ai/agent/conversation/create": {
-      "post": {
-        "operationId": "createAgentConversation",
-        "description": "<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.13.0.cl or later</span>",
-        "tags": [
-          "AI",
-          "10.13.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "metadata_context": {
-                    "description": "Context for the conversation.",
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/ContextPayloadV2Input"
-                      }
-                    ]
-                  },
-                  "conversation_settings": {
-                    "description": "Conversation settings.",
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/ConversationSettingsInput"
-                      }
-                    ]
-                  }
-                },
-                "required": [
-                  "metadata_context",
-                  "conversation_settings"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentConversation"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentConversation"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/rest/2.0/ai/conversation/create": {
       "post": {
         "operationId": "createConversation",
@@ -321,182 +220,10 @@
         }
       }
     },
-    "/api/rest/2.0/ai/data-source-suggestions": {
-      "post": {
-        "operationId": "getDataSourceSuggestions",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.13.0.cl or later</span>\n\nProvides relevant data source recommendations for a user-submitted natural language query.\n\nTo use this API, the user must have at least view-level access to the underlying metadata entities referenced in the response.\n\n#### Usage guidelines\n\nThe request must include a `query` string via the request body.\n\nThe returned results include metadata such as:\n- `confidence`: a float indicating the model's confidence in the relevance of each recommendation\n- `details`: includes `data_source_identifier`, `data_source_name`, and `description` of each recommended data source\n- `reasoning`: rationale provided by the LLM to explain why each data source was recommended\n\nIf the API request is successful, ThoughtSpot returns a ranked list of data sources, each annotated with relevant reasoning.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before it is made Generally Available.\n> * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "AI",
-          "10.13.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "query": {
-                    "description": "User query used to suggest data sources.",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "query"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/eureka_DataSourceSuggestionResponse"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/eureka_DataSourceSuggestionResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/ai/relevant-questions/": {
-      "post": {
-        "operationId": "getRelevantQuestions",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.13.0.cl or later</span>\n\nBreaks down a user-submitted query into a series of analytical sub-questions using relevant contextual metadata.\n\nTo use this API, the user must have at least view-level access to the referenced metadata objects.\n\n#### Usage guidelines\n\nTo accurately generate relevant questions, the request must include at least one of the following metadata identifiers within `metadata_context` : `conversation_identifier`, `answer_identifiers`, `liveboard_identifiers`, or `data_source_identifiers`.\n\nYou can further enhance the quality and precision of breakdown by providing additional `ai_context` such as:\n\n- `content`: User provided content like text data, csv data as a string message to provide context & potentially improve the quality of the response.\n- `instructions`: User specific text instructions sent to AI system for processing the query.\n\nAdditional optional parameters include:\n\n- `limit_relevant_questions`: Controls the maximum number of relevant questions returned. Defaults to 5 if not specified.\n- `bypass_cache`: If set to true, forces fresh computation instead of returning cached results.\n\nIf the API request is successful, ThoughtSpot returns a list of relevant analytical queries, each aligned with the user's original question. Each returned question includes the query string, along with the identifier and name of the corresponding data source.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "AI",
-          "10.13.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "metadata_context": {
-                    "description": "metadata for the query to enable generation of relevant sub-questions; at least one context identifier is required.",
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/MetadataContext"
-                      }
-                    ]
-                  },
-                  "limit_relevant_questions": {
-                    "description": "Maximum number of relevant questions that is allowed in the response, default = 5.",
-                    "type": "integer",
-                    "format": "int32"
-                  },
-                  "bypass_cache": {
-                    "description": "If true, results are not returned from cache & calculated every time.",
-                    "type": "boolean",
-                    "nullable": true
-                  },
-                  "query": {
-                    "description": "A user query that requires breaking down into smaller, more manageable analytical questions to facilitate better understanding and analysis.",
-                    "type": "string"
-                  },
-                  "ai_context": {
-                    "description": "Additional context to guide the response.",
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/AIContext"
-                      }
-                    ]
-                  }
-                },
-                "required": [
-                  "metadata_context",
-                  "query"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/eureka_GetRelevantQuestionsResponse"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/eureka_GetRelevantQuestionsResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/rest/2.0/ai/analytical-questions": {
       "post": {
         "operationId": "queryGetDecomposedQuery",
         "description": "<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.7.0.cl or later</span>",
-        "deprecated": true,
         "tags": [
           "AI",
           "10.7.0.cl"
@@ -576,171 +303,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/eureka_DecomposeQueryResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/ai/agent/{conversation_identifier}/converse": {
-      "post": {
-        "operationId": "sendAgentMessage",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.13.0.cl or later</span>\n\nThis API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages. \nTo use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.\n\n\n#### Usage guidelines\n\nTo initiate or continue a conversation, the request must include:\n- `conversation_identifier`: a unique session ID for continuity and message tracking\n- `messages`: an array of one or more text messages, each with a value and type\n\nThe API returns a array of object with a type, message, and metadata.\n- `type`: Type of the message — text, answer, or error.\n- `message`: Main content of the response.\n- `metadata`: Additional info depending on the message type.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "AI",
-          "10.13.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "messages": {
-                    "description": "messages to be sent to the agent",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "required": [
-                  "messages"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "conversation_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unique identifier for the conversation (used to track context)"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/ai/agent/converse/sse": {
-      "post": {
-        "operationId": "sendAgentMessageStreaming",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.13.0.cl or later</span>\n\nThis API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages. \nTo use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.\n\n\n#### Usage guidelines\n\nTo initiate or continue a conversation, the request must include:\n- `conversation_identifier`: a unique session ID for continuity and message tracking\n- `messages`: an array of one or more text messages, each with a value and type\n\nAdditionally, user can specify what tool can be included `conversation_settings` parameter, which supports:\n- `enable_contextual_change_analysis` (default: false)\n- `enable_natural_language_answer_generation` (default: true)\n- `enable_reasoning` (default: false)\n\nIf the request is valid, the API returns a stream of messages in real time, including:\n- `ack`: confirms receipt of the request\n- `text / text-chunk`: content chunks, optionally formatted (e.g., markdown)\n- `answer`: the final structured response with metadata and analytics\n- `error`: if a failure occurs\n- `notification`: notification messages for operation being performed\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n> * The streaming protocol uses Server-Sent Events (SSE)\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "AI",
-          "10.13.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "conversation_identifier": {
-                    "description": "Unique identifier for the conversation (used to track context)",
-                    "type": "string"
-                  },
-                  "messages": {
-                    "description": "messages to be sent to the agent",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "required": [
-                  "conversation_identifier",
-                  "messages"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SendAgentMessageResponse"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SendAgentMessageResponse"
                 }
               }
             }
@@ -1067,7 +629,7 @@
     "/api/rest/2.0/auth/token/custom": {
       "post": {
         "operationId": "getCustomAccessToken",
-        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nGets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.\n\nTo add a new user and assign privileges during auto creation, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.\n\nTo assign security attributes with filter rules and Parameters to the JWT token, you'll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.\n\n#### Usage guidelines\n\nYou can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key`.\n\nTo generate a `secret_key` on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable) in the **Develop** > **Customizations** > **Security Settings** page.\n\n**Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.\n\nIf Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.\n\n##### Attribute-Based Access Control (ABAC) with tokens\n\nTo implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the `filter_rules` and `parameter_values` array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user's `access_control_properties` object, after which all sessions will use the persisted values.\n\nSpecify the object type as `LOGICAL_TABLE`. \n\nFor more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).\n\n##### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, define the following attributes:\n\n* `auto_create`\n* `username`\n* `display_name`\n* `email`\n* `groups`\n\nSet `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true` in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values. If `auto_create` is set to `true`, it won't create formula variables and hence won't be applicable for `variable_values`.\n\nFor more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).\n\n##### Important point to note\nAll options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Persist options such as  `APPEND`, `REPLACE`, `RESET` will persist security parameters on the user profile when the token is created, while Persist option `NONE` will not persist anything but will be honoured in the session.\n\n##### Formula Variables\nBefore using variables_values, variables must be created using Create Variable API with type as Formula_Variable (/api/rest/2.0/template/variables/create)\nThe persist_option RESET and NONE cannot be used when variable_values are provided in the request.\nIf you are working with variable_values, you must use other (APPEND, REPLACE) supported modes.\nIf you want to use RESET or NONE, do not pass any variable_values. In such cases, variable_values will remain unaffected.\nWhen using object_id with variable_values, models are supported. \n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nGets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.\n\nTo add a new user and assign privileges during auto creation, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.\n\nTo assign security attributes with filter rules and Parameters to the JWT token, you'll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.\n\n#### Usage guidelines\n\nYou can generate the token for a user by providing a `username` and `password`, or by using the cluster's `secret_key`.\n\nTo generate a `secret_key` on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable) in the **Develop** > **Customizations** > **Security Settings** page.\n\n**Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.\n\nIf Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.\n\n##### Attribute-Based Access Control (ABAC) with tokens\n\nTo implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the `filter_rules` and `parameter_values` array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user's `access_control_properties` object, after which all sessions will use the persisted values.\n\nSpecify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.\n\nFor more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).\n\n##### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, define the following attributes:\n\n* `auto_create`\n* `username`\n* `display_name`\n* `email`\n* `groups`\n\nSet `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true` in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values.\n\nFor more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).\n\n##### Important point to note\nAll options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Persist options such as  `APPEND`, `REPLACE`, `RESET` will persist security parameters on the user profile when the token is created, while Persist option `NONE` will not persist anything but will be honoured in the session.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Authentication",
           "10.4.0.cl"
@@ -1223,7 +785,7 @@
     "/api/rest/2.0/auth/token/full": {
       "post": {
         "operationId": "getFullAccessToken",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets an authentication token and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.\n\nYou can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)).\n\nTo generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page. For more information, see [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable).\n\n**Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.\n\nIf Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.\n\n#### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, define the following attributes:\n\n* `auto_create`\n* `username`\n* `display_name`\n* `email`\n* `group_identifiers`\n\nSet `auto_create` to `True` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true`, the API call will update user properties like display name, email and group assignment.\n\nFor more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).\n\nTo add a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege is required.\n\n#### Important point to note\nAll options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets an authentication token and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.\n\nYou can generate the token for a user by providing a `username` and `password`, or by using the cluster's `secret_key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)).\n\nTo generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page. For more information, see [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable).\n\n**Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.\n\nIf Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.\n\n#### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, define the following attributes:\n\n* `auto_create`\n* `username`\n* `display_name`\n* `email`\n* `group_identifiers`\n\nSet `auto_create` to `True` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true`, the API call will update user properties like display name, email and group assignment.\n\nFor more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).\n\nTo add a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege is required.\n\n#### Important point to note\nAll options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Authentication",
           "9.0.0.cl"
@@ -1348,7 +910,7 @@
     "/api/rest/2.0/auth/token/object": {
       "post": {
         "operationId": "getObjectAccessToken",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets an authentication token that provides access to a specific metadata object. By default, the token obtained from ThoughtSpot remains valid for 5 mins.\n\nYou can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)).\n\nTo generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page.\n\n**Note**: When both `password` and `secret_key` are included in the API request,  `password` takes precedence.\n\nIf Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.\n\n#### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, define the following attributes:\n\n* `auto_create`\n* `username`\n* `display_name`\n* `email`\n* `group_identifiers`\n\nSet `auto_create` to `True` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true`, the API call will update user properties like display name, email and group assignment.\n\nFor more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).\n\nTo add a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege is required.\n\n#### Important point to note\nAll options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets an authentication token that provides access to a specific metadata object. By default, the token obtained from ThoughtSpot remains valid for 5 mins.\n\nYou can generate the token for a user by providing a `username` and `password`, or by using the cluster's `secret key` (for [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)).\n\nTo generate a `secret_key` on your cluster, the administrator must enable **Trusted authentication** in the **Develop** > **Customizations** > **Security Settings** page.\n\n**Note**: When both `password` and `secret_key` are included in the API request,  `password` takes precedence.\n\nIf Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.\n\n#### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning, define the following attributes:\n\n* `auto_create`\n* `username`\n* `display_name`\n* `email`\n* `group_identifiers`\n\nSet `auto_create` to `True` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true`, the API call will update user properties like display name, email and group assignment.\n\nFor more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).\n\nTo add a new user and assign privileges, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege is required.\n\n#### Important point to note\nAll options in the token creation APIs changing the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Authentication",
           "9.0.0.cl"
@@ -1903,8 +1465,7 @@
                       "SERVICE_ACCOUNT",
                       "KEY_PAIR",
                       "PERSONAL_ACCESS_TOKEN",
-                      "OAUTH_WITH_SERVICE_PRINCIPAL",
-                      "OAUTH_CLIENT_CREDENTIALS"
+                      "OAUTH_WITH_SERVICE_PRINCIPAL"
                     ]
                   },
                   "configuration": {
@@ -2122,8 +1683,7 @@
                       "KEY_PAIR",
                       "EXTOAUTH_WITH_PKCE",
                       "OAUTH_WITH_PKCE",
-                      "PERSONAL_ACCESS_TOKEN",
-                      "OAUTH_CLIENT_CREDENTIALS"
+                      "PERSONAL_ACCESS_TOKEN"
                     ]
                   },
                   "configuration": {
@@ -2774,8 +2334,7 @@
                       "KEY_PAIR",
                       "OAUTH_WITH_PKCE",
                       "EXTOAUTH_WITH_PKCE",
-                      "OAUTH_WITH_PEZ",
-                      "OAUTH_CLIENT_CREDENTIALS"
+                      "OAUTH_WITH_PEZ"
                     ]
                   },
                   "show_resolved_parameters": {
@@ -2945,7 +2504,7 @@
     "/api/rest/2.0/connections/{connection_identifier}/update": {
       "post": {
         "operationId": "updateConnectionV2",
-        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nUpdates a connection object.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.\n\nTo update a connection object, pass these parameters in your API request:\n\n1. GUID of the connection object.\n2. If you are updating tables or database schema of a connection object:\n   a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.\n   b. Set `validate` to `true`.\n   \n   **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.\n\n   * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:\n   * This is an example of updating a single table in a empty connection:\n   \n      ```\n      {\n        \"authenticationType\": \"SERVICE_ACCOUNT\",\n        \"externalDatabases\": [\n          {\n            \"name\": \"DEVELOPMENT\",\n            \"isAutoCreated\": false,\n            \"schemas\": [\n              {\n                \"name\": \"TS_dataset\",\n                \"tables\": [\n                  {\n                    \"name\": \"DEMORENAME\",\n                    \"type\": \"TABLE\",\n                    \"description\": \"\",\n                    \"selected\": true,\n                    \"linked\": true,\n                    \"gid\": 0,\n                    \"datasetId\": \"-1\",\n                    \"subType\": \"\",\n                    \"reportId\": \"\",\n                    \"viewId\": \"\",\n                    \"columns\": [\n                      {\n                        \"name\": \"Col1\",\n                        \"type\": \"VARCHAR\",\n                        \"canImport\": true,\n                        \"selected\": true,\n                        \"description\": \"\",\n                        \"isLinkedActive\": true,\n                        \"isAggregate\": false\n                      },\n                      {\n                        \"name\": \"Col2\",\n                        \"type\": \"VARCHAR\",\n                        \"canImport\": true,\n                        \"selected\": true,\n                        \"description\": \"\",\n                        \"isLinkedActive\": true,\n                        \"isAggregate\": false\n                      },\n                      {\n                        \"name\": \"Col3\",\n                        \"type\": \"VARCHAR\",\n                        \"canImport\": true,\n                        \"selected\": true,\n                        \"description\": \"\",\n                        \"isLinkedActive\": true,\n                        \"isAggregate\": false\n                      },\n                      {\n                        \"name\": \"Col312\",\n                        \"type\": \"VARCHAR\",\n                        \"canImport\": true,\n                        \"selected\": true,\n                        \"description\": \"\",\n                        \"isLinkedActive\": true,\n                        \"isAggregate\": false\n                      },\n                      {\n                        \"name\": \"Col4\",\n                        \"type\": \"VARCHAR\",\n                        \"canImport\": true,\n                        \"selected\": true,\n                        \"description\": \"\",\n                        \"isLinkedActive\": true,\n                        \"isAggregate\": false\n                      }\n                    ],\n                    \"relationships\": []\n                  }\n                ]\n              }\n            ]\n          }\n        ],\n        \"configuration\": {\n          \"password\": \"\",\n          \"database\": \"DEVELOPMENT\",\n          \"role\": \"DEV\",\n          \"accountName\": \"thoughtspot_partner\",\n          \"warehouse\": \"DEMO_WH\",\n          \"user\": \"DEV_USER\"\n        }\n      }\n      ```\n      \n* This is an example of updating a single table in an existing connection with tables:\n    \n      ```\n      {\n        \"authenticationType\": \"SERVICE_ACCOUNT\",\n        \"externalDatabases\": [\n          {\n            \"name\": \"DEVELOPMENT\",\n            \"isAutoCreated\": false,\n            \"schemas\": [\n              {\n                \"name\": \"TS_dataset\",\n                \"tables\": [\n                  {\n                    \"name\": \"CUSTOMER\",\n                    \"type\": \"TABLE\",\n                    \"description\": \"\",\n                    \"selected\": true,\n                    \"linked\": true,\n                    \"gid\": 0,\n                    \"datasetId\": \"-1\",\n                    \"subType\": \"\",\n                    \"reportId\": \"\",\n                    \"viewId\": \"\",\n                    \"columns\": [],\n                    \"relationships\": []\n                  },\n                  {\n                    \"name\": \"tpch5k_falcon_default_schema_users\",\n                    \"type\": \"TABLE\",\n                    \"description\": \"\",\n                    \"selected\": true,\n                    \"linked\": true,\n                    \"gid\": 0,\n                    \"datasetId\": \"-1\",\n                    \"subType\": \"\",\n                    \"reportId\": \"\",\n                    \"viewId\": \"\",\n                    \"columns\": [\n                      {\n                        \"name\": \"user_id\",\n                        \"type\": \"INT64\",\n                        \"canImport\": true,\n                        \"selected\": true,\n                        \"description\": \"\",\n                        \"isLinkedActive\": true,\n                        \"isAggregate\": false\n                      },\n                      {\n                        \"name\": \"product_id\",\n                        \"type\": \"INT64\",\n                        \"canImport\": true,\n                        \"selected\": true,\n                        \"description\": \"\",\n                        \"isLinkedActive\": true,\n                        \"isAggregate\": false\n                      },\n                      {\n                        \"name\": \"user_cost\",\n                        \"type\": \"INT64\",\n                        \"canImport\": true,\n                        \"selected\": true,\n                        \"description\": \"\",\n                        \"isLinkedActive\": true,\n                        \"isAggregate\": false\n                      }\n                    ],\n                    \"relationships\": []\n                  }\n                ]\n              }\n            ]\n          }\n        ],\n        \"configuration\": {\n          \"password\": \"\",\n          \"database\": \"DEVELOPMENT\",\n          \"role\": \"DEV\",\n          \"accountName\": \"thoughtspot_partner\",\n          \"warehouse\": \"DEMO_WH\",\n          \"user\": \"DEV_USER\"\n        }\n      }\n      ```\n\n3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.\n\n  **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not  specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.\n\n  * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a Snowflake connection:\n   ```\n   {\n      \"configuration\":{\n         \"accountName\":\"thoughtspot_partner\",\n         \"user\":\"tsadmin\",\n         \"password\":\"TestConn123\",\n         \"role\":\"sysadmin\",\n         \"warehouse\":\"MEDIUM_WH\"\n      },\n      \"externalDatabases\":[\n\n      ]\n   }\n   ```\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nUpdates a connection object.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.\n\nTo update a connection object, pass these parameters in your API request:\n\n1. GUID of the connection object.\n2. If you are updating tables or database schema of a connection object:\n   a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.\n   b. Set `validate` to `true`.\n   \n   **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.\n\n   * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:\n\n   ```\n   {\n      \"configuration\":{\n         \"accountName\":\"thoughtspot_partner\",\n         \"user\":\"tsadmin\",\n         \"password\":\"TestConn123\",\n         \"role\":\"sysadmin\",\n         \"warehouse\":\"MEDIUM_WH\"\n      },\n      \"externalDatabases\":[\n         {\n            \"name\":\"AllDatatypes\",\n            \"isAutoCreated\":false,\n            \"schemas\":[\n               {\n                  \"name\":\"alldatatypes\",\n                  \"tables\":[\n                     {\n                        \"name\":\"allDatatypes\",\n                        \"type\":\"TABLE\",\n                        \"description\":\"\",\n                        \"selected\":true,\n                        \"linked\":true,\n                        \"columns\":[\n                           {\n                              \"name\":\"CNUMBER\",\n                              \"type\":\"INT64\",\n                              \"canImport\":true,\n                              \"selected\":true,\n                              \"isLinkedActive\":true,\n                              \"isImported\":false,\n                              \"tableName\":\"allDatatypes\",\n                              \"schemaName\":\"alldatatypes\",\n                              \"dbName\":\"AllDatatypes\"\n                           },\n                           {\n                              \"name\":\"CDECIMAL\",\n                              \"type\":\"INT64\",\n                              \"canImport\":true,\n                              \"selected\":true,\n                              \"isLinkedActive\":true,\n                              \"isImported\":false,\n                              \"tableName\":\"allDatatypes\",\n                              \"schemaName\":\"alldatatypes\",\n                              \"dbName\":\"AllDatatypes\"\n                           }\n                        ]\n                     }\n                  ]\n               }\n            ]\n         }\n      ]\n   }\n   ```\n\n3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.\n\n  **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not  specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.\n\n  * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a Snowflake connection:\n   ```\n   {\n      \"configuration\":{\n         \"accountName\":\"thoughtspot_partner\",\n         \"user\":\"tsadmin\",\n         \"password\":\"TestConn123\",\n         \"role\":\"sysadmin\",\n         \"warehouse\":\"MEDIUM_WH\"\n      },\n      \"externalDatabases\":[\n\n      ]\n   }\n   ```\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Connections",
           "10.4.0.cl"
@@ -4499,7 +4058,7 @@
         ],
         "requestBody": {
           "content": {
-            "multipart/form-data": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -4617,14 +4176,14 @@
     "/api/rest/2.0/dbt/generate-sync-tml": {
       "post": {
         "operationId": "dbtGenerateSyncTml",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nResynchronize the existing list of models, tables, worksheet tml’s and import them to Thoughtspot based on the DBT connection object.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege, along with an existing DBT connection.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:\n\n- `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**)\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nResynchronize the existing list of models, tables, worksheet tml's and import them to Thoughtspot based on the DBT connection object.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege, along with an existing DBT connection.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:\n\n- `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**)\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "DBT",
           "9.9.0.cl"
         ],
         "requestBody": {
           "content": {
-            "multipart/form-data": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -4633,7 +4192,7 @@
                     "type": "string"
                   },
                   "file_content": {
-                    "description": "Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’",
+                    "description": "Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type 'ZIP_FILE'",
                     "type": "string",
                     "format": "binary"
                   }
@@ -4711,7 +4270,7 @@
         ],
         "requestBody": {
           "content": {
-            "multipart/form-data": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -4720,9 +4279,11 @@
                     "type": "string"
                   },
                   "model_tables": {
-                    "description": "List of Models and their respective Tables\nExample: '[{\"model_name\": \"model_name\", \"tables\": [\"table_name\"]}]'",
-                    "type": "string",
-                    "format": "json"
+                    "description": "List of Models and their respective Tables",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ModelTableList"
+                    }
                   },
                   "import_worksheets": {
                     "description": "Mention the worksheet tmls to import",
@@ -4734,19 +4295,20 @@
                     ]
                   },
                   "worksheets": {
-                    "description": "List of worksheets is mandatory when import_Worksheets is type SELECTED\nExample: [\"worksheet_name\"]",
-                    "type": "string",
-                    "format": "json"
+                    "description": "List of worksheets is mandatory when import_Worksheets is type SELECTED",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
                   },
                   "file_content": {
-                    "description": "Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’",
+                    "description": "Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type 'ZIP_FILE'",
                     "type": "string",
                     "format": "binary"
                   }
                 },
                 "required": [
                   "dbt_connection_identifier",
-                  "model_tables",
                   "import_worksheets"
                 ]
               }
@@ -4951,7 +4513,7 @@
         ],
         "requestBody": {
           "content": {
-            "multipart/form-data": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -5072,7 +4634,7 @@
     "/api/rest/2.0/customization/email": {
       "post": {
         "operationId": "createEmailCustomization",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.10.0.cl or later</span>\n\nCreates a customization configuration for the notification email.\n\n#### Pre-requisites\n\nRequires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.\n\n**NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.\n\n#### Usage guidelines\n\nTo create a custom configuration pass these parameters in your API request:\n\n- A JSON map of configuration attributes `template_properties`. The following example shows a sample set of customization configuration:\n\n```\n{\n  {\n    \"ctaButtonBgColor\": \"#444DEA\",\n    \"ctaTextFontColor\": \"#FFFFFF\",\n    \"primaryBgColor\": \"#D3DEF0\",\n    \"hideMobileAppNudge\": false,\n    \"fontFamily\" : \"\",\n    \"hideProductName\" : false,\n    \"hideFooterPhone\" : false,\n    \"hideFooterAddress\" : false,\n    \"hidePrivacyPolicy\" : false,\n    \"hideManageNotification\" : false,\n    \"hideTsVocabularyDefinitions\": false,\n    \"hideNotificationStatus\" : false,\n    \"hideErrorMessage\": false,\n    \"hideUnsubscribeLink\" : false,\n    \"hideModifyAlert\": false,\n    \"textTransform\": \"\",\n    \"replacementValueForLiveboard\": \"LB dashboard\",\n    \"replacementValueForAnswer\": \"Answer dashboard\",\n    \"replacementValueForSpotIQ\": \"SpotIQ dashboard\",\n    \"logoUrl\":\"\",\n    \"productName\":\"ThoughtSpot\",\n    \"footerPhone\":\"(800) 508-7008\",\n    \"footerAddress\":\"444 Castro St, Suite 1000 Mountain View, CA 94041\",\n    \"companyWebsiteUrl\":\"\",\n    \"companyPrivacyPolicyUrl\":\"\"\n  }\n}\n```\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.10.0.cl or later</span>\n\nCreates a customization configuration for the notification email.\n\n#### Pre-requisites\n\nRequires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.\n\n**NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.\n\n#### Usage guidelines\n\nTo create a custom configuration pass these parameters in your API request:\n\n- A JSON map of configuration attributes `template_properties`. The following example shows a sample set of customization configuration:\n\n```\n{\n  {\n    \"ctaButtonBgColor\": \"#444DEA\",\n    \"ctaTextFontColor\": \"#FFFFFF\",\n    \"primaryBgColor\": \"#D3DEF0\",\n    \"hideMobileAppNudge\": false,\n    \"fontFamily\" : \"\",\n    \"hideProductName\" : false,\n    \"hideFooterPhone\" : false,\n    \"hideFooterAddress\" : false,\n    \"hidePrivacyPolicy\" : false,\n    \"hideManageNotification\" : false,\n    \"hideTsVocabularyDefinitions\": false,\n    \"hideNotificationStatus\" : false,\n    \"hideErrorMessage\": false,\n    \"hideUnsubscribeLink\" : false,\n    \"hideModifyAlert\": false,\n    \"textTransform\": \"\",\n    \"replacementValueForLiveboard\": \"LB dashboard\",\n    \"replacementValueForAnswer\": \"Answer dashboard\",\n    \"replacementValueForSpotIQ\": \"SpotIQ dashboard\",\n    \"logoUrl\":\"\",\n    \"productName\":\"ThoughtSpot\",\n    \"footerPhone\":\"(800) 508-7008\",\n    \"footerAddress\":\"444 Castro St, Suite 1000 Mountain View, CA 94041\"\n  }\n}\n```\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Email Customization",
           "10.10.0.cl"
@@ -5359,7 +4921,7 @@
     "/api/rest/2.0/customization/email/update": {
       "post": {
         "operationId": "updateEmailCustomization",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.12.0.cl or later</span>\n\nUpdates a customization configuration for the notification email.\n\n#### Pre-requisites\n\nRequires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.\n\n**NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.\n\n#### Usage guidelines\n\nTo update a custom configuration pass these parameters in your API request:\n\n- A JSON map of configuration attributes `template_properties`. The following example shows a sample set of customization configuration:\n\n```\n{\n  {\n    \"ctaButtonBgColor\": \"#444DEA\",\n    \"ctaTextFontColor\": \"#FFFFFF\",\n    \"primaryBgColor\": \"#D3DEF0\",\n    \"hideMobileAppNudge\": false,\n    \"fontFamily\" : \"\",\n    \"hideProductName\" : false,\n    \"hideFooterPhone\" : false,\n    \"hideFooterAddress\" : false,\n    \"hidePrivacyPolicy\" : false,\n    \"hideManageNotification\" : false,\n    \"hideTsVocabularyDefinitions\": false,\n    \"hideNotificationStatus\" : false,\n    \"hideErrorMessage\": false,\n    \"hideUnsubscribeLink\" : false,\n    \"hideModifyAlert\": false,\n    \"textTransform\": \"\",\n    \"replacementValueForLiveboard\": \"LB dashboard\",\n    \"replacementValueForAnswer\": \"Answer dashboard\",\n    \"replacementValueForSpotIQ\": \"SpotIQ dashboard\",\n    \"logoUrl\":\"\",\n    \"productName\":\"ThoughtSpot\",\n    \"footerPhone\":\"(800) 508-7008\",\n    \"footerAddress\":\"444 Castro St, Suite 1000 Mountain View, CA 94041\",\n    \"companyWebsiteUrl\":\"\",\n    \"companyPrivacyPolicyUrl\":\"\"\n  }\n}\n```\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.12.0.cl or later</span>\n\nUpdates a customization configuration for the notification email.\n\n#### Pre-requisites\n\nRequires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.\n\n**NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.\n\n#### Usage guidelines\n\nTo update a custom configuration pass these parameters in your API request:\n\n- A JSON map of configuration attributes `template_properties`. The following example shows a sample set of customization configuration:\n\n```\n{\n  {\n    \"ctaButtonBgColor\": \"#444DEA\",\n    \"ctaTextFontColor\": \"#FFFFFF\",\n    \"primaryBgColor\": \"#D3DEF0\",\n    \"hideMobileAppNudge\": false,\n    \"fontFamily\" : \"\",\n    \"hideProductName\" : false,\n    \"hideFooterPhone\" : false,\n    \"hideFooterAddress\" : false,\n    \"hidePrivacyPolicy\" : false,\n    \"hideManageNotification\" : false,\n    \"hideTsVocabularyDefinitions\": false,\n    \"hideNotificationStatus\" : false,\n    \"hideErrorMessage\": false,\n    \"hideUnsubscribeLink\" : false,\n    \"hideModifyAlert\": false,\n    \"textTransform\": \"\",\n    \"replacementValueForLiveboard\": \"LB dashboard\",\n    \"replacementValueForAnswer\": \"Answer dashboard\",\n    \"replacementValueForSpotIQ\": \"SpotIQ dashboard\",\n    \"logoUrl\":\"\",\n    \"productName\":\"ThoughtSpot\",\n    \"footerPhone\":\"(800) 508-7008\",\n    \"footerAddress\":\"444 Castro St, Suite 1000 Mountain View, CA 94041\"\n  }\n}\n```\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Email Customization",
           "10.12.0.cl"
@@ -5549,12 +5111,8 @@
                         "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
-                        "CAN_MODIFY_FOLDERS",
-                        "CAN_VIEW_FOLDERS",
                         "PREVIEW_DOCUMENT_SEARCH",
-                        "CAN_SETUP_VERSION_CONTROL",
-                        "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "CAN_SETUP_VERSION_CONTROL"
                       ]
                     }
                   },
@@ -5571,9 +5129,7 @@
                     "type": "string",
                     "enum": [
                       "LOCAL_GROUP",
-                      "LDAP_GROUP",
-                      "TEAM_GROUP",
-                      "TENANT_GROUP"
+                      "LDAP_GROUP"
                     ]
                   },
                   "user_identifiers": {
@@ -5909,12 +5465,7 @@
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
-                        "CAN_MODIFY_FOLDERS",
-                        "CAN_VIEW_FOLDERS",
-                        "CAN_SETUP_VERSION_CONTROL",
-                        "CAN_MANAGE_WEBHOOKS",
-                        "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "CAN_SETUP_VERSION_CONTROL"
                       ]
                     }
                   },
@@ -5930,9 +5481,7 @@
                     "type": "string",
                     "enum": [
                       "LOCAL_GROUP",
-                      "LDAP_GROUP",
-                      "TEAM_GROUP",
-                      "TENANT_GROUP"
+                      "LDAP_GROUP"
                     ]
                   },
                   "user_identifiers": {
@@ -6117,12 +5666,8 @@
                         "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
-                        "CAN_MODIFY_FOLDERS",
-                        "CAN_VIEW_FOLDERS",
                         "PREVIEW_DOCUMENT_SEARCH",
-                        "CAN_SETUP_VERSION_CONTROL",
-                        "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "CAN_SETUP_VERSION_CONTROL"
                       ]
                     }
                   },
@@ -6138,9 +5683,7 @@
                     "type": "string",
                     "enum": [
                       "LOCAL_GROUP",
-                      "LDAP_GROUP",
-                      "TEAM_GROUP",
-                      "TENANT_GROUP"
+                      "LDAP_GROUP"
                     ]
                   },
                   "user_identifiers": {
@@ -6242,7 +5785,7 @@
     "/api/rest/2.0/logs/fetch": {
       "post": {
         "operationId": "fetchLogs",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nFetches security audit logs.  \n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the [Admin Control](https://developers.thoughtspot.com/docs/rbac#_admin_control) privileges are required.\n\n\n#### Usage guidelines\n\nBy default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn’t exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.\n\nUpon successful execution, the API returns logs with the following information:\n* timestamp of the event\n* event ID\n* event type\n* name and GUID of the user\n* IP address of ThoughtSpot instance\n\nFor more information see [Audit logs Documentation](https://developers.thoughtspot.com/docs/audit-logs).\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nFetches security audit logs.  \n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the [Admin Control](https://developers.thoughtspot.com/docs/rbac#_admin_control) privileges are required.\n\n\n#### Usage guidelines\n\nBy default, the API retrieves logs for the last 24 hours. You can set a custom duration in EPOCH time. Make sure the log duration specified in your API request doesn't exceed 24 hours. If you must fetch logs for a longer time range, modify the duration and make multiple sequential API requests.\n\nUpon successful execution, the API returns logs with the following information:\n* timestamp of the event\n* event ID\n* event type\n* name and GUID of the user\n* IP address of ThoughtSpot instance\n\nFor more information see [Audit logs Documentation](https://developers.thoughtspot.com/docs/audit-logs).\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Log",
           "9.0.0.cl"
@@ -6447,7 +5990,7 @@
     "/api/rest/2.0/metadata/copyobject": {
       "post": {
         "operationId": "copyObject",
-        "description": "\nMakes a copy of an Answer or Liveboard <br/>  <span class=\"since-beta-tag\">Version: 10.3.0.cl or later</span>\n\nCreates a copy of a metadata object.\n\nRequires at least view access to the metadata object being copied.\n\nUpon successful execution, the API creates a copy of the metadata object specified in the API request and returns the ID of the new object.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nMakes a copy of an Answer or Liveboard saved in Atlas <br/>  <span class=\"since-beta-tag\">Version: 10.3.0.cl or later</span>\n\nCreates a copy of a metadata object.\n\nRequires at least view access to the metadata object being copied.\n\nUpon successful execution, the API creates a copy of the metadata object specified in the API request and returns the ID of the new object.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Metadata",
           "10.3.0.cl"
@@ -8764,13 +8307,8 @@
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
-                        "CAN_MODIFY_FOLDERS",
-                        "CAN_VIEW_FOLDERS",
                         "CAN_SETUP_VERSION_CONTROL",
-                        "PREVIEW_THOUGHTSPOT_SAGE",
-                        "CAN_MANAGE_WEBHOOKS",
-                        "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "PREVIEW_THOUGHTSPOT_SAGE"
                       ]
                     }
                   },
@@ -8994,13 +8532,8 @@
                         "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
-                        "CAN_VIEW_FOLDERS",
-                        "CAN_MODIDY_FOLDERS",
                         "PREVIEW_DOCUMENT_SEARCH",
-                        "CAN_SETUP_VERSION_CONTROL",
-                        "CAN_MANAGE_WEBHOOKS",
-                        "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "CAN_SETUP_VERSION_CONTROL"
                       ]
                     }
                   },
@@ -9156,13 +8689,8 @@
                         "CAN_CREATE_CATALOG",
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
-                        "CAN_MODIFY_FOLDERS",
-                        "CAN_VIEW_FOLDERS",
                         "PREVIEW_DOCUMENT_SEARCH",
-                        "PREVIEW_THOUGHTSPOT_SAGE",
-                        "CAN_MANAGE_WEBHOOKS",
-                        "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "PREVIEW_THOUGHTSPOT_SAGE"
                       ]
                     }
                   }
@@ -11911,88 +11439,6 @@
         }
       }
     },
-    "/api/rest/2.0/system/preferences/communication-channels/configure": {
-      "post": {
-        "operationId": "configureCommunicationChannelPreferences",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nConfigure communication channel preferences.\n- Use `cluster_preferences` to update the default preferences for your ThoughtSpot application instance.\n- If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), use `org_preferences` to specify Org-specific preferences that override the defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege are also authorized to perform this action.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "System",
-          "10.14.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "cluster_preferences": {
-                    "description": "Cluster-level default configurations.",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/EventChannelConfigInput"
-                    }
-                  },
-                  "org_preferences": {
-                    "description": "Org-specific configurations.",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/OrgChannelConfigInput"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "204": {
-            "description": "Communication channel preferences successfully updated."
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/rest/2.0/system/config": {
       "get": {
         "operationId": "getSystemConfig",
@@ -12171,128 +11617,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SystemOverrideInfo"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/system/preferences/communication-channels/search": {
-      "post": {
-        "operationId": "searchCommunicationChannelPreferences",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nFetch communication channel preferences.\n- Use `cluster_preferences` to fetch the default preferences for your ThoughtSpot application instance.\n- If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), use `org_preferences` to fetch any Org-specific preferences that override the defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege are also authorized to perform this action.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "System",
-          "10.14.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "cluster_preferences": {
-                    "description": "Event types to search for in cluster-level preferences.",
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "enum": [
-                        "LIVEBOARD_SCHEDULE"
-                      ]
-                    }
-                  },
-                  "org_preferences": {
-                    "description": "Org-specific search criteria.",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/OrgPreferenceSearchCriteriaInput"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Communication channel preferences retrieved successfully.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CommunicationChannelPreferencesResponse"
-                },
-                "examples": {
-                  "example_1": {
-                    "value": {
-                      "cluster_preferences": [
-                        {
-                          "event_type": "LIVEBOARD_SCHEDULE",
-                          "channels": [
-                            "WEBHOOK"
-                          ]
-                        }
-                      ],
-                      "org_preferences": [
-                        {
-                          "org": {
-                            "id": "583464508",
-                            "name": "test_org"
-                          },
-                          "preferences": [
-                            {
-                              "event_type": "LIVEBOARD_SCHEDULE",
-                              "channels": [
-                                "EMAIL"
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  }
                 }
               }
             }
@@ -13151,7 +12475,7 @@
     "/api/rest/2.0/users/create": {
       "post": {
         "operationId": "createUser",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nCreates a user in ThoughtSpot.\n\nThe API endpoint allows you to configure several user properties such as email address, account status, share notification preferences, and sharing visibility. You can provision the user to [groups](https://docs.thoughtspot.com/cloud/latest/groups-privileges) and [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview). You can also add Liveboard, Answer, and Worksheet objects to the user’s favorites list, assign a default Liveboard for the user, and set user preferences.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nCreates a user in ThoughtSpot.\n\nThe API endpoint allows you to configure several user properties such as email address, account status, share notification preferences, and sharing visibility. You can provision the user to [groups](https://docs.thoughtspot.com/cloud/latest/groups-privileges) and [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview). You can also add Liveboard, Answer, and Worksheet objects to the user's favorites list, assign a default Liveboard for the user, and set user preferences.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Users",
           "9.0.0.cl"
@@ -13867,12 +13191,7 @@
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
-                        "CAN_MODIFY_FOLDERS",
-                        "CAN_VIEW_FOLDERS",
-                        "CAN_SETUP_VERSION_CONTROL",
-                        "CAN_MANAGE_WEBHOOKS",
-                        "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "CAN_SETUP_VERSION_CONTROL"
                       ]
                     }
                   },
@@ -14244,10 +13563,10 @@
     "/api/rest/2.0/template/variables/create": {
       "post": {
         "operationId": "createVariable",
-        "description": "\nCreate a variable which can be used for parameterizing metadata objects <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nAllows creating a variable which can be used for parameterizing metadata objects in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint supports the following types of variables:\n* CONNECTION_PROPERTY - For connection properties\n* TABLE_MAPPING - For table mappings\n* CONNECTION_PROPERTY_PER_PRINCIPAL - For connection properties per principal. In order to use this please contact support to enable this.\n* FORMULA_VARIABLE - For Formula variables\n\nWhen creating a variable, you need to specify:\n* The variable type\n* A unique name for the variable\n* Whether the variable contains sensitive values (defaults to false)\n* The data type of the variable, only specify for fomula variables (defaults to null)\n\nThe operation will fail if:\n* The user lacks required permissions\n* The variable name already exists\n* The variable type is invalid\n\n\n\n#### Endpoint URL\n",
+        "description": "\nCreate a variable which can be used for parameterizing metadata objects <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows creating a variable which can be used for parameterizing metadata objects in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\n\nThe API endpoint supports the following types of variables:\n* CONNECTION_PROPERTY - For connection properties\n* TABLE_MAPPING - For table mappings\n* CONNECTION_PROPERTY_PER_PRINCIPAL - For connection properties per principal. In order to use this please contact support to enable this.\n\nWhen creating a variable, you need to specify:\n* The variable type\n* A unique name for the variable\n* Whether the variable contains sensitive values (defaults to false)\n* The variable values (optional)\n\nThe operation will fail if:\n* The user lacks required permissions\n* The variable name already exists\n* The variable type is invalid\n* The variable values are invalid for the specified type \n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Variable",
-          "10.14.0.cl"
+          "10.9.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -14268,23 +13587,18 @@
                     "description": "Name of the variable. This is unique across the cluster.",
                     "type": "string"
                   },
-                  "is_sensitive": {
+                  "sensitive": {
                     "description": "If the variable contains sensitive values like passwords",
                     "default": false,
                     "type": "boolean",
                     "nullable": true
                   },
-                  "data_type": {
-                    "description": "Variable Data Type",
-                    "type": "string",
-                    "enum": [
-                      "VARCHAR",
-                      "INT32",
-                      "INT64",
-                      "DOUBLE",
-                      "DATE",
-                      "DATE_TIME"
-                    ]
+                  "values": {
+                    "description": "Values of variable",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/InputVariableValue"
+                    }
                   }
                 },
                 "required": [
@@ -14354,10 +13668,10 @@
     "/api/rest/2.0/template/variables/{identifier}/delete": {
       "post": {
         "operationId": "deleteVariable",
-        "description": "\nDelete a variable <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nAllows deleting a variable from ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint requires:\n* The variable identifier (ID or name)\n\nThe operation will fail if:\n* The user lacks required permissions\n* The variable doesn't exist\n* The variable is being used by other objects \n\n\n\n#### Endpoint URL\n",
+        "description": "\nDelete a variable <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows deleting a variable from ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\n\nThe API endpoint requires:\n* The variable identifier (ID or name)\n\nThe operation will fail if:\n* The user lacks required permissions\n* The variable doesn't exist\n* The variable is being used by other objects \n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Variable",
-          "10.14.0.cl"
+          "10.9.0.cl"
         ],
         "parameters": [
           {
@@ -14420,10 +13734,10 @@
     "/api/rest/2.0/template/variables/search": {
       "post": {
         "operationId": "searchVariables",
-        "description": "\nSearch variables <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nAllows searching for variables in ThoughtSpot.\n\nRequires ADMINISTRATION role.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint supports searching variables by:\n* Variable identifier (ID or name)\n* Variable type\n* Name pattern (case-insensitive, supports % for wildcard)\n\nThe search results can be formatted in three ways:\n* METADATA - Returns only variable metadata (default)\n* METADATA_AND_VALUES - Returns variable metadata and values\n\nThe values can be filtered by scope:\n* org_identifier\n* principal_identifier\n* model_identifier\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nSearch variables <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows searching for variables in ThoughtSpot.\n\nRequires ADMINISTRATION role.\n\nThe API endpoint supports searching variables by:\n* Variable identifier (ID or name)\n* Variable type\n* Name pattern (case-insensitive, supports % for wildcard)\n\nThe search results can be formatted in three ways:\n* METADATA_ONLY - Returns only variable metadata (default)\n* METADATA_AND_VALUES - Returns variable metadata and values\n* EDITABLE_METADATA_AND_VALUES - Returns only editable variable metadata and values\n\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Variable",
-          "10.14.0.cl"
+          "10.9.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -14436,13 +13750,6 @@
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/VariableDetailInput"
-                    }
-                  },
-                  "value_scope": {
-                    "description": "Array of scope filters",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/ValueScopeInput"
                     }
                   },
                   "record_offset": {
@@ -14463,7 +13770,8 @@
                     "type": "string",
                     "enum": [
                       "METADATA_ONLY",
-                      "METADATA_AND_VALUES"
+                      "METADATA_AND_VALUES",
+                      "EDITABLE_METADATA_AND_VALUES"
                     ]
                   }
                 }
@@ -14533,10 +13841,10 @@
     "/api/rest/2.0/template/variables/{identifier}/update": {
       "post": {
         "operationId": "updateVariable",
-        "description": "\nUpdate a variable's name <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nAllows updating a variable's properties in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint allows updating:\n* The variable name\n\n\n\n#### Endpoint URL\n",
+        "description": "\nUpdate a variable's properties <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows updating a variable's properties in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\n\nThe API endpoint allows updating:\n* The variable name\n* The variable values\n\nWhen updating variable values, you need to specify:\n* The operation to perform (ADD, REPLACE, REMOVE)\n* The new values to add/replace/remove\n\nWhen the operation is ADD, a value any pre-existing value with the same set of constraints will be replaced.\nWhen the operation is REPLACE, all values of the variable are replaced with the values specified.\nWhen the operation is REMOVE, all values with the given set of conditions are removed.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Variable",
-          "10.14.0.cl"
+          "10.9.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -14545,13 +13853,27 @@
                 "type": "object",
                 "properties": {
                   "name": {
-                    "description": "New name of the variable.",
+                    "description": "New name of the variable if we want to rename.",
                     "type": "string"
+                  },
+                  "operation": {
+                    "description": "Operation to perform on the values.",
+                    "default": "REPLACE",
+                    "type": "string",
+                    "enum": [
+                      "ADD",
+                      "REMOVE",
+                      "REPLACE"
+                    ]
+                  },
+                  "values": {
+                    "description": "Values of variable to be updated.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/InputVariableValue"
+                    }
                   }
-                },
-                "required": [
-                  "name"
-                ]
+                }
               }
             }
           },
@@ -14570,7 +13892,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Variable name updated successfully."
+            "description": "Updating the variable is successful."
           },
           "400": {
             "description": "Invalid request.",
@@ -14615,13 +13937,13 @@
         }
       }
     },
-    "/api/rest/2.0/template/variables/update-values": {
+    "/api/rest/2.0/template/variables/update": {
       "post": {
         "operationId": "updateVariableValues",
-        "description": "\nUpdate values for multiple variables <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nAllows updating values for multiple variables in ThoughtSpot.\n\nRequires ADMINISTRATION role.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint allows:\n* Adding new values to variables\n* Replacing existing values\n* Deleting values from variables\n\nWhen updating variable values, you need to specify:\n* The variable identifiers\n* The values to add/replace/remove for each variable\n* The operation to perform (ADD, REPLACE, REMOVE, CLEAR)\n\nBehaviour based on operation type:\n* ADD - Adds values to the variable if this is a list type variable, else same as replace.\n* REPLACE - Replaces all values of a given set of constraints with the current set of values.\n* REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value.\n* CLEAR - Removes all constrains for a given variable, scope is ignored\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nUpdate values for multiple variables <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows updating values for multiple variables in ThoughtSpot.\n\nRequires ADMINISTRATION role.\n\nThe API endpoint allows:\n* Adding new values to variables\n* Replacing existing values\n* Deleting values from variables\n\nWhen updating variable values, you need to specify:\n* The variable identifiers\n* The values to add/replace/remove for each variable\n* The operation to perform (ADD, REPLACE, REMOVE)\n\nBehaviour based on operation type:\n* ADD - Adds values to the variable. Any pre-existing values with the same conditions are replaced.\n* REPLACE - Replaces all values of a given org with the current set of values.\n* REMOVE - Removes any values which match the set of conditions of the variables.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Variable",
-          "10.14.0.cl"
+          "10.9.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -14629,24 +13951,26 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "variable_assignment": {
-                    "description": "Variables and values to update",
+                  "variable_updates": {
+                    "description": "Variables and values",
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/VariableUpdateAssignmentInput"
+                      "$ref": "#/components/schemas/VariableValueInput"
                     }
                   },
-                  "variable_value_scope": {
-                    "description": "Variables and values to update",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/VariableUpdateScopeInput"
-                    }
+                  "operation": {
+                    "description": "Type of update operation",
+                    "type": "string",
+                    "enum": [
+                      "ADD",
+                      "REMOVE",
+                      "REPLACE"
+                    ]
                   }
                 },
                 "required": [
-                  "variable_assignment",
-                  "variable_value_scope"
+                  "variable_updates",
+                  "operation"
                 ]
               }
             }
@@ -14656,7 +13980,7 @@
         "parameters": [],
         "responses": {
           "204": {
-            "description": "Variable values updated successfully."
+            "description": "Updating variable values is successful."
           },
           "400": {
             "description": "Invalid request.",
@@ -15023,7 +14347,7 @@
                     ]
                   },
                   "deploy_policy": {
-                    "description": "Define the policy to follow while importing TML in the ThoughtSpot environment. Use “ALL_OR_NONE” to cancel the deployment of all ThoughtSpot objects if at least one of them fails to import. Use “Partial” to import ThoughtSpot objects that validate successfully even if other objects in the same deploy operations fail to import.",
+                    "description": "Define the policy to follow while importing TML in the ThoughtSpot environment. Use "ALL_OR_NONE" to cancel the deployment of all ThoughtSpot objects if at least one of them fails to import. Use "Partial" to import ThoughtSpot objects that validate successfully even if other objects in the same deploy operations fail to import.",
                     "default": "ALL_OR_NONE",
                     "type": "string",
                     "enum": [
@@ -15594,697 +14918,6 @@
           }
         }
       }
-    },
-    "/api/rest/2.0/webhooks/create": {
-      "post": {
-        "operationId": "createWebhookConfiguration",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nCreates a new webhook configuration to receive notifications for specified events. The webhook will be triggered when the configured events occur in the system.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Webhooks",
-          "10.14.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "description": "Name of the webhook configuration.",
-                    "type": "string"
-                  },
-                  "description": {
-                    "description": "Description of the webhook configuration.",
-                    "type": "string"
-                  },
-                  "url": {
-                    "description": "The webhook endpoint URL.",
-                    "type": "string"
-                  },
-                  "url_params": {
-                    "description": "Additional URL parameters as key-value pairs.",
-                    "type": "object"
-                  },
-                  "events": {
-                    "description": "List of events to subscribe to.",
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "enum": [
-                        "LIVEBOARD_SCHEDULE"
-                      ]
-                    }
-                  },
-                  "authentication": {
-                    "description": "Authorization configuration for the webhook.",
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/WebhookAuthenticationInput"
-                      }
-                    ]
-                  },
-                  "signature_verification": {
-                    "description": "Configuration for webhook signature verification.",
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/WebhookSignatureVerificationInput"
-                      }
-                    ]
-                  }
-                },
-                "required": [
-                  "name",
-                  "url",
-                  "events"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Webhook configuration created successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/WebhookResponse"
-                },
-                "examples": {
-                  "example_1": {
-                    "description": "Basic webhook with Bearer token authentication",
-                    "value": {
-                      "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
-                      "name": "My Liveboard Webhook",
-                      "description": "Webhook to notify external system about liveboard schedules",
-                      "org": {
-                        "id": "0",
-                        "name": "Primary"
-                      },
-                      "url": "https://myapp.example.com/webhooks/thoughtspot",
-                      "url_params": {
-                        "api_key": "abc123",
-                        "version": "v1"
-                      },
-                      "events": [
-                        "LIVEBOARD_SCHEDULE"
-                      ],
-                      "authentication": {
-                        "BEARER_TOKEN": "***"
-                      },
-                      "signature_verification": {
-                        "type": "HMAC_SHA256",
-                        "header": "X-Webhook-Signature",
-                        "algorithm": "SHA256",
-                        "secret": "***"
-                      },
-                      "created_at": "2025-08-21T21:57:10.243089030Z",
-                      "last_modified_at": "2025-08-21T21:57:10.243089030Z",
-                      "created_by": {
-                        "id": "8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b",
-                        "name": "sarah_chen"
-                      },
-                      "last_modified_by": {
-                        "id": "8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b",
-                        "name": "sarah_chen"
-                      }
-                    }
-                  },
-                  "example_2": {
-                    "description": "Webhook with OAuth2 authentication",
-                    "value": {
-                      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-                      "name": "OAuth2 Webhook",
-                      "description": "Webhook with OAuth2 client credentials",
-                      "org": {
-                        "id": "0",
-                        "name": "Primary"
-                      },
-                      "url": "https://api.example.com/webhooks",
-                      "events": [
-                        "LIVEBOARD_SCHEDULE"
-                      ],
-                      "authentication": {
-                        "OAUTH2": {
-                          "authorization_url": "https://auth.example.com/oauth2/authorize",
-                          "client_id": "client_123",
-                          "client_secret": "***"
-                        }
-                      },
-                      "created_at": "2025-08-21T22:15:30.123456789Z",
-                      "last_modified_at": "2025-08-21T22:15:30.123456789Z",
-                      "created_by": {
-                        "id": "7d5e9f2a-4b8c-4d6e-9a3b-5c7e1f4a8b2d",
-                        "name": "mike_rodriguez"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/webhooks/delete": {
-      "post": {
-        "operationId": "deleteWebhookConfigurations",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nDeletes one or more webhook configurations by their unique id or name. Returns status of each deletion operation, including successfully deleted webhooks and any failures with error details.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Webhooks",
-          "10.14.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "webhook_identifiers": {
-                    "description": "List of webhook identifiers to delete.",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "required": [
-                  "webhook_identifiers"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Webhook configurations deleted successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/WebhookDeleteResponse"
-                },
-                "examples": {
-                  "example_1": {
-                    "description": "Successful deletion of multiple webhooks",
-                    "value": {
-                      "deleted_count": 2,
-                      "failed_count": 0,
-                      "deleted_webhooks": [
-                        {
-                          "id": "b9e3d8f2-4c7a-4e1b-8d3c-5f9a2b7e4c6d",
-                          "name": "Old Webhook 1",
-                          "description": "First webhook to be deleted",
-                          "org": {
-                            "id": "0",
-                            "name": "Primary"
-                          },
-                          "url": "https://old-service.example.com/webhook1",
-                          "events": [
-                            "LIVEBOARD_SCHEDULE"
-                          ],
-                          "authentication": {
-                            "BEARER_TOKEN": "***"
-                          },
-                          "created_at": "2025-08-21T15:30:00.000000000Z",
-                          "last_modified_at": "2025-08-21T15:30:00.000000000Z",
-                          "created_by": {
-                            "id": "1f4e7b2d-9c3a-4e6f-8b1d-3e7c5a9b2f4e",
-                            "name": "jennifer_patel"
-                          }
-                        },
-                        {
-                          "id": "e7c4a1f8-2b5d-4a9e-7c3f-8b1e5d4a7c9b",
-                          "name": "Old Webhook 2",
-                          "description": "Second webhook to be deleted",
-                          "org": {
-                            "id": "0",
-                            "name": "Primary"
-                          },
-                          "url": "https://old-service.example.com/webhook2",
-                          "events": [
-                            "LIVEBOARD_SCHEDULE"
-                          ],
-                          "authentication": {
-                            "API_KEY": {
-                              "key": "X-API-Key",
-                              "value": "***"
-                            }
-                          },
-                          "created_at": "2025-08-21T16:45:30.123456789Z",
-                          "last_modified_at": "2025-08-21T16:45:30.123456789Z",
-                          "created_by": {
-                            "id": "9a5c2e8f-4b7d-4c1e-9f2a-6c8e3b5d7a4c",
-                            "name": "david_thompson"
-                          }
-                        }
-                      ],
-                      "failed_webhooks": []
-                    }
-                  },
-                  "example_2": {
-                    "description": "Partial failure during deletion",
-                    "value": {
-                      "deleted_count": 1,
-                      "failed_count": 1,
-                      "deleted_webhooks": [
-                        {
-                          "id": "c8f2a5e9-3d6b-4f1e-a8c2-7e4b1d9f5a3c",
-                          "name": "Successfully Deleted Webhook",
-                          "description": "This webhook was deleted successfully",
-                          "org": {
-                            "id": "0",
-                            "name": "Primary"
-                          },
-                          "url": "https://service.example.com/webhook",
-                          "events": [
-                            "LIVEBOARD_SCHEDULE"
-                          ],
-                          "authentication": {
-                            "NO_AUTH": ""
-                          },
-                          "created_at": "2025-08-21T18:20:15.456789012Z",
-                          "last_modified_at": "2025-08-21T18:20:15.456789012Z",
-                          "created_by": {
-                            "id": "6e9c4f2a-8b5d-4e1f-9c3a-5f8b2e7d4a6c",
-                            "name": "emma_wang"
-                          }
-                        }
-                      ],
-                      "failed_webhooks": [
-                        {
-                          "id": "a3f7c1e4-9b2d-4a6e-8f3c-1e5b7a9c4f2e",
-                          "name": "Non-existent Webhook",
-                          "error_message": "Webhook not found or access denied"
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/webhooks/search": {
-      "post": {
-        "operationId": "searchWebhookConfigurations",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nSearches for webhook configurations based on various criteria such as Org, webhook identifier, event type, with support for pagination and sorting. Returns matching webhook configurations with their complete details.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Webhooks",
-          "10.14.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "org_identifier": {
-                    "description": "Unique ID or name of the org.",
-                    "type": "string"
-                  },
-                  "webhook_identifier": {
-                    "description": "Unique ID or name of the webhook.",
-                    "type": "string"
-                  },
-                  "event_type": {
-                    "description": "Type of webhook event to filter by.",
-                    "type": "string",
-                    "enum": [
-                      "LIVEBOARD_SCHEDULE"
-                    ]
-                  },
-                  "record_offset": {
-                    "description": "The offset point, starting from where the webhooks should be included in the response.",
-                    "default": 0,
-                    "type": "integer",
-                    "format": "int32"
-                  },
-                  "record_size": {
-                    "description": "The number of webhooks that should be included in the response starting from offset position.",
-                    "default": 50,
-                    "type": "integer",
-                    "format": "int32"
-                  },
-                  "sort_options": {
-                    "description": "Sort option includes sort field and sort order.",
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/WebhookSortOptionsInput"
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Webhook configurations retrieved successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/WebhookSearchResponse"
-                },
-                "examples": {
-                  "example_1": {
-                    "description": "Search results with multiple webhooks",
-                    "value": {
-                      "webhooks": [
-                        {
-                          "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
-                          "name": "Liveboard Schedule Webhook",
-                          "description": "Webhook for liveboard schedule notifications",
-                          "org": {
-                            "id": "0",
-                            "name": "Primary"
-                          },
-                          "url": "https://myapp.example.com/webhooks",
-                          "url_params": {
-                            "api_key": "abc123"
-                          },
-                          "events": [
-                            "LIVEBOARD_SCHEDULE"
-                          ],
-                          "authentication": {
-                            "BEARER_TOKEN": "***"
-                          },
-                          "signature_verification": {
-                            "type": "HMAC_SHA256",
-                            "header": "X-Webhook-Signature",
-                            "algorithm": "SHA256",
-                            "secret": "***"
-                          },
-                          "created_at": "2025-08-21T21:57:10.243089030Z",
-                          "last_modified_at": "2025-08-21T22:10:15.123456789Z",
-                          "created_by": {
-                            "id": "8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b",
-                            "name": "sarah_chen"
-                          },
-                          "last_modified_by": {
-                            "id": "2c9a7e4f-6b3d-4a8e-9f1c-5e7a3b9c2d6f",
-                            "name": "alex_kim"
-                          }
-                        },
-                        {
-                          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-                          "name": "API Key Webhook",
-                          "description": "Webhook with API key authentication",
-                          "org": {
-                            "id": "0",
-                            "name": "Primary"
-                          },
-                          "url": "https://api.example.com/notifications",
-                          "events": [
-                            "LIVEBOARD_SCHEDULE"
-                          ],
-                          "authentication": {
-                            "API_KEY": {
-                              "key": "X-API-Key",
-                              "value": "***"
-                            }
-                          },
-                          "created_at": "2025-08-21T20:30:45.987654321Z",
-                          "last_modified_at": "2025-08-21T20:30:45.987654321Z",
-                          "created_by": {
-                            "id": "7d5e9f2a-4b8c-4d6e-9a3b-5c7e1f4a8b2d",
-                            "name": "mike_rodriguez"
-                          }
-                        }
-                      ],
-                      "pagination": {
-                        "record_offset": 0,
-                        "record_size": 50,
-                        "total_count": 2,
-                        "has_more": false
-                      }
-                    }
-                  },
-                  "example_2": {
-                    "description": "Empty search results",
-                    "value": {
-                      "webhooks": [],
-                      "pagination": {
-                        "record_offset": 0,
-                        "record_size": 50,
-                        "total_count": 0,
-                        "has_more": false
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/webhooks/{webhook_identifier}/update": {
-      "post": {
-        "operationId": "updateWebhookConfiguration",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nUpdates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Webhooks",
-          "10.14.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "description": "Name of the webhook configuration.",
-                    "type": "string"
-                  },
-                  "description": {
-                    "description": "Description of the webhook configuration.",
-                    "type": "string"
-                  },
-                  "url": {
-                    "description": "The webhook endpoint URL.",
-                    "type": "string"
-                  },
-                  "url_params": {
-                    "description": "Additional URL parameters as key-value pairs.",
-                    "type": "object"
-                  },
-                  "events": {
-                    "description": "List of events to subscribe to.",
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "enum": [
-                        "LIVEBOARD_SCHEDULE"
-                      ]
-                    }
-                  },
-                  "authentication": {
-                    "description": "Authorization configuration for the webhook.",
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/WebhookAuthenticationInput"
-                      }
-                    ]
-                  },
-                  "signature_verification": {
-                    "description": "Configuration for webhook signature verification.",
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/WebhookSignatureVerificationInput"
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "webhook_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unique ID or name of the webhook configuration."
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Webhook configuration updated successfully"
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
     }
   },
   "components": {
@@ -16622,11 +15255,6 @@
             "type": "object",
             "description": "Access Control Properties which are specified for the user via JWToken",
             "nullable": true
-          },
-          "variable_values": {
-            "type": "object",
-            "description": "Formula Variables which are specified for the user via JWToken",
-            "nullable": true
           }
         }
       },
@@ -16881,114 +15509,6 @@
           "config_override_info": {
             "type": "object",
             "nullable": true
-          }
-        }
-      },
-      "OrgPreferenceSearchCriteriaInput": {
-        "type": "object",
-        "required": [
-          "org_identifier"
-        ],
-        "properties": {
-          "org_identifier": {
-            "type": "string",
-            "description": "Unique identifier or name of the org"
-          },
-          "event_types": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "LIVEBOARD_SCHEDULE"
-              ]
-            },
-            "description": "Event types to search for. If not provided, all event types for this org are returned.",
-            "nullable": true
-          }
-        }
-      },
-      "CommunicationChannelPreferencesResponse": {
-        "type": "object",
-        "properties": {
-          "cluster_preferences": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EventChannelConfig"
-            },
-            "description": "Cluster-level default configurations.",
-            "nullable": true
-          },
-          "org_preferences": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OrgChannelConfigResponse"
-            },
-            "description": "Org-specific configurations.",
-            "nullable": true
-          }
-        }
-      },
-      "EventChannelConfig": {
-        "type": "object",
-        "required": [
-          "event_type",
-          "channels"
-        ],
-        "properties": {
-          "event_type": {
-            "type": "string",
-            "enum": [
-              "LIVEBOARD_SCHEDULE"
-            ],
-            "description": "Type of event for which communication channels are configured"
-          },
-          "channels": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "EMAIL",
-                "WEBHOOK"
-              ]
-            },
-            "description": "Communication channels enabled for this event type. Empty array indicates no channels are enabled."
-          }
-        }
-      },
-      "OrgChannelConfigResponse": {
-        "type": "object",
-        "required": [
-          "org",
-          "preferences"
-        ],
-        "properties": {
-          "org": {
-            "$ref": "#/components/schemas/OrgDetails",
-            "description": "Org details"
-          },
-          "preferences": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EventChannelConfig"
-            },
-            "description": "Event-specific communication channel configurations for this org"
-          }
-        }
-      },
-      "OrgDetails": {
-        "type": "object",
-        "required": [
-          "id",
-          "name"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Unique id of the org"
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the org"
           }
         }
       },
@@ -17253,9 +15773,7 @@
             "type": "string",
             "enum": [
               "LOCAL_GROUP",
-              "LDAP_GROUP",
-              "TEAM_GROUP",
-              "TENANT_GROUP"
+              "LDAP_GROUP"
             ],
             "description": "Type of the group.",
             "nullable": true
@@ -18233,17 +16751,17 @@
       "ColumnSecurityRuleResponse": {
         "type": "object",
         "properties": {
-          "table_guid": {
+          "guid": {
             "type": "string",
             "description": "GUID of the table for which the column security rules are fetched",
             "nullable": true
           },
-          "obj_id": {
+          "objId": {
             "type": "string",
             "description": "Object ID of the table for which the column security rules are fetched",
             "nullable": true
           },
-          "column_security_rules": {
+          "columnSecurityRules": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ColumnSecurityRule"
@@ -18271,7 +16789,7 @@
             "description": "Array of groups that have access to this column",
             "nullable": true
           },
-          "source_table_details": {
+          "sourceTableDetails": {
             "$ref": "#/components/schemas/ColumnSecurityRuleSourceTable",
             "description": "Information about the source table",
             "nullable": true
@@ -19026,13 +17544,8 @@
                 "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                 "CAN_ACCESS_ANALYST_STUDIO",
                 "CAN_MANAGE_ANALYST_STUDIO",
-                "CAN_VIEW_FOLDERS",
-                "CAN_MODIDY_FOLDERS",
                 "PREVIEW_DOCUMENT_SEARCH",
-                "CAN_SETUP_VERSION_CONTROL",
-                "CAN_MANAGE_WEBHOOKS",
-                "CAN_DOWNLOAD_VISUALS",
-                "CAN_DOWNLOAD_DETAILED_DATA"
+                "CAN_SETUP_VERSION_CONTROL"
               ]
             },
             "description": "Privileges granted to the role."
@@ -19353,94 +17866,6 @@
         },
         "description": "MetadataType InputType used in Custom Action API's"
       },
-      "MetadataContext": {
-        "type": "object",
-        "properties": {
-          "data_source_identifiers": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "List of data_source_identifiers to provide context for breaking down user query into analytical queries that can be run on them.",
-            "nullable": true
-          },
-          "answer_identifiers": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "List of answer unique identifiers (GUIDs) whose data will be used to guide the response.",
-            "nullable": true
-          },
-          "conversation_identifier": {
-            "type": "string",
-            "description": "Unique identifier to denote current conversation.",
-            "nullable": true
-          },
-          "liveboard_identifiers": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "List of liveboard unique identifiers (GUIDs) whose data will be used to guide the response.",
-            "nullable": true
-          }
-        }
-      },
-      "AIContext": {
-        "type": "object",
-        "properties": {
-          "instructions": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "User specific text instructions sent to AI system for processing the query.",
-            "nullable": true
-          },
-          "content": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "User provided content like text data, csv data as a string message to provide context & potentially improve the quality of the response.",
-            "nullable": true
-          }
-        }
-      },
-      "eureka_GetRelevantQuestionsResponse": {
-        "type": "object",
-        "properties": {
-          "relevant_questions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/eureka_RelevantQuestion"
-            },
-            "description": "List of relevant questions that can be run on their respective data sources.",
-            "nullable": true
-          }
-        }
-      },
-      "eureka_RelevantQuestion": {
-        "type": "object",
-        "properties": {
-          "query": {
-            "type": "string",
-            "description": "NL query that can be run using spotter aka natural language search to get an AI generated answer.",
-            "nullable": true
-          },
-          "data_source_identifier": {
-            "type": "string",
-            "description": "Unique identifier of the data source on which this query can be run on.",
-            "nullable": true
-          },
-          "data_source_name": {
-            "type": "string",
-            "description": "Display name of the data source on which this query can be run on.",
-            "nullable": true
-          }
-        }
-      },
       "Input_eureka_NLSRequest": {
         "type": "object",
         "properties": {
@@ -19513,60 +17938,6 @@
           }
         }
       },
-      "eureka_DataSourceSuggestionResponse": {
-        "type": "object",
-        "properties": {
-          "data_sources": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DataSource"
-            },
-            "description": "List of data sources suggested.",
-            "nullable": true
-          }
-        }
-      },
-      "DataSource": {
-        "type": "object",
-        "properties": {
-          "confidence": {
-            "type": "number",
-            "format": "float",
-            "description": "Confidence score for the data source suggestion.",
-            "nullable": true
-          },
-          "details": {
-            "$ref": "#/components/schemas/EntityHeader",
-            "description": "Details of the data source.",
-            "nullable": true
-          },
-          "reasoning": {
-            "type": "string",
-            "description": "LLM reasoning for the data source.",
-            "nullable": true
-          }
-        }
-      },
-      "EntityHeader": {
-        "type": "object",
-        "properties": {
-          "description": {
-            "type": "string",
-            "description": "Description of the data source.",
-            "nullable": true
-          },
-          "data_source_name": {
-            "type": "string",
-            "description": "Display name of the data source.",
-            "nullable": true
-          },
-          "data_source_identifier": {
-            "type": "string",
-            "description": "Unique identifier of the data source.",
-            "nullable": true
-          }
-        }
-      },
       "RiseGQLArgWrapper": {
         "type": "object",
         "required": [
@@ -19607,36 +17978,6 @@
           }
         },
         "description": "Input for variable details in search"
-      },
-      "ValueScopeInput": {
-        "type": "object",
-        "properties": {
-          "org_identifier": {
-            "type": "string",
-            "description": "The unique name of the org",
-            "nullable": true
-          },
-          "principal_type": {
-            "type": "string",
-            "enum": [
-              "USER",
-              "USER_GROUP"
-            ],
-            "description": "Principal type",
-            "nullable": true
-          },
-          "principal_identifier": {
-            "type": "string",
-            "description": "Unique ID or name of the principal",
-            "nullable": true
-          },
-          "model_identifier": {
-            "type": "string",
-            "description": "Model Identifier",
-            "nullable": true
-          }
-        },
-        "description": "Input for variable scope in search"
       },
       "Variable": {
         "type": "object",
@@ -19688,14 +18029,6 @@
           "value": {
             "type": "string",
             "description": "The value of the variable",
-            "nullable": true
-          },
-          "value_list": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "The value of the variable if it is a list type",
             "nullable": true
           },
           "org_identifier": {
@@ -19901,310 +18234,6 @@
           }
         }
       },
-      "WebhookSortOptionsInput": {
-        "type": "object",
-        "properties": {
-          "field_name": {
-            "type": "string",
-            "enum": [
-              "CREATED",
-              "MODIFIED",
-              "NAME"
-            ],
-            "default": "CREATED",
-            "description": "Name of the field to apply the sort on.",
-            "nullable": true
-          },
-          "order": {
-            "type": "string",
-            "enum": [
-              "ASC",
-              "DESC"
-            ],
-            "default": "DESC",
-            "description": "Sort order: ASC (Ascending) or DESC (Descending).",
-            "nullable": true
-          }
-        }
-      },
-      "WebhookSearchResponse": {
-        "type": "object",
-        "required": [
-          "webhooks",
-          "pagination"
-        ],
-        "properties": {
-          "webhooks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/WebhookResponse"
-            },
-            "description": "List of webhook configurations matching the search criteria."
-          },
-          "pagination": {
-            "$ref": "#/components/schemas/WebhookPagination",
-            "description": "Pagination information."
-          }
-        }
-      },
-      "WebhookResponse": {
-        "type": "object",
-        "required": [
-          "id",
-          "name",
-          "url",
-          "events",
-          "creation_time_in_millis",
-          "modification_time_in_millis"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Unique identifier of the webhook configuration."
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the webhook configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Description of the webhook configuration.",
-            "nullable": true
-          },
-          "org": {
-            "$ref": "#/components/schemas/WebhookOrg",
-            "description": "Org details.",
-            "nullable": true
-          },
-          "url": {
-            "type": "string",
-            "description": "The webhook endpoint URL."
-          },
-          "url_params": {
-            "type": "object",
-            "description": "Additional URL parameters as key-value pairs.",
-            "nullable": true
-          },
-          "events": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "LIVEBOARD_SCHEDULE"
-              ]
-            },
-            "description": "List of events this webhook subscribes to."
-          },
-          "authentication": {
-            "$ref": "#/components/schemas/WebhookAuthentication",
-            "description": "Redacted authorization configuration for the webhook.",
-            "nullable": true
-          },
-          "signature_verification": {
-            "$ref": "#/components/schemas/WebhookSignatureVerification",
-            "description": "Redacted configuration for webhook signature verification.",
-            "nullable": true
-          },
-          "creation_time_in_millis": {
-            "type": "number",
-            "format": "float",
-            "description": "Creation time of the webhook configuration in milliseconds."
-          },
-          "modification_time_in_millis": {
-            "type": "number",
-            "format": "float",
-            "description": "Last modified time of the webhook configuration in milliseconds."
-          },
-          "created_by": {
-            "$ref": "#/components/schemas/WebhookUser",
-            "description": "User who created the webhook.",
-            "nullable": true
-          },
-          "last_modified_by": {
-            "$ref": "#/components/schemas/WebhookUser",
-            "description": "User who last modified the webhook.",
-            "nullable": true
-          }
-        }
-      },
-      "WebhookOrg": {
-        "type": "object",
-        "required": [
-          "id",
-          "name"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Unique identifier of the org."
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the org."
-          }
-        }
-      },
-      "WebhookAuthentication": {
-        "type": "object",
-        "properties": {
-          "API_KEY": {
-            "$ref": "#/components/schemas/WebhookAuthApiKey",
-            "description": "Redacted API key authentication configuration.",
-            "nullable": true
-          },
-          "BASIC_AUTH": {
-            "$ref": "#/components/schemas/WebhookAuthBasicAuth",
-            "description": "Redacted Basic authentication configuration.",
-            "nullable": true
-          },
-          "BEARER_TOKEN": {
-            "type": "string",
-            "description": "Redacted Bearer token authentication configuration.",
-            "nullable": true
-          },
-          "OAUTH2": {
-            "$ref": "#/components/schemas/WebhookAuthOAuth2",
-            "description": "Redacted OAuth2 authentication configuration.",
-            "nullable": true
-          }
-        }
-      },
-      "WebhookAuthApiKey": {
-        "type": "object",
-        "required": [
-          "key",
-          "value"
-        ],
-        "properties": {
-          "key": {
-            "type": "string",
-            "description": "The header or query parameter name for the API key."
-          },
-          "value": {
-            "type": "string",
-            "description": "The API key value."
-          }
-        }
-      },
-      "WebhookAuthBasicAuth": {
-        "type": "object",
-        "required": [
-          "username",
-          "password"
-        ],
-        "properties": {
-          "username": {
-            "type": "string",
-            "description": "Username for basic authentication."
-          },
-          "password": {
-            "type": "string",
-            "description": "Password for basic authentication."
-          }
-        }
-      },
-      "WebhookAuthOAuth2": {
-        "type": "object",
-        "required": [
-          "authorization_url",
-          "client_id",
-          "client_secret"
-        ],
-        "properties": {
-          "authorization_url": {
-            "type": "string",
-            "description": "OAuth2 authorization server URL."
-          },
-          "client_id": {
-            "type": "string",
-            "description": "OAuth2 client identifier."
-          },
-          "client_secret": {
-            "type": "string",
-            "description": "OAuth2 client secret key."
-          }
-        }
-      },
-      "WebhookSignatureVerification": {
-        "type": "object",
-        "required": [
-          "type",
-          "header",
-          "algorithm",
-          "secret"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "HMAC_SHA256"
-            ],
-            "description": "Signature verification method type."
-          },
-          "header": {
-            "type": "string",
-            "description": "HTTP header where the signature is sent."
-          },
-          "algorithm": {
-            "type": "string",
-            "enum": [
-              "SHA256"
-            ],
-            "description": "Hash algorithm used for signature verification."
-          },
-          "secret": {
-            "type": "string",
-            "description": "Shared secret used for HMAC signature generation."
-          }
-        }
-      },
-      "WebhookUser": {
-        "type": "object",
-        "required": [
-          "id",
-          "name"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Unique identifier of the user."
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the user."
-          }
-        }
-      },
-      "WebhookPagination": {
-        "type": "object",
-        "required": [
-          "record_offset",
-          "record_size",
-          "total_count",
-          "has_more"
-        ],
-        "properties": {
-          "record_offset": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The starting record number from where the records are included."
-          },
-          "record_size": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The number of records included in the response."
-          },
-          "total_count": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Total number of webhook configurations available."
-          },
-          "has_more": {
-            "type": "boolean",
-            "description": "Indicates whether more records are available beyond the current response."
-          }
-        }
-      },
       "GenericInfo": {
         "type": "object",
         "properties": {
@@ -20345,7 +18374,7 @@
             "enum": [
               "LOGICAL_TABLE"
             ],
-            "description": "  Type of object.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.\n  \n\n Specify the object type as `LOGICAL_TABLE`.",
+            "description": "  Type of object.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.\n  \n\n Specify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.",
             "nullable": true
           },
           "identifier": {
@@ -20687,7 +18716,7 @@
             "enum": [
               "LOGICAL_TABLE"
             ],
-            "description": "  Type of object.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.\n  \n\n Specify the object type as `LOGICAL_TABLE`.",
+            "description": "  Type of object.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.\n  \n\n Specify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.",
             "nullable": true
           },
           "identifier": {
@@ -20943,74 +18972,6 @@
           }
         }
       },
-      "EventChannelConfigInput": {
-        "type": "object",
-        "required": [
-          "event_type",
-          "channels"
-        ],
-        "properties": {
-          "event_type": {
-            "type": "string",
-            "enum": [
-              "LIVEBOARD_SCHEDULE"
-            ],
-            "description": "Type of event for which communication channels are configured"
-          },
-          "channels": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "EMAIL",
-                "WEBHOOK"
-              ]
-            },
-            "description": "Communication channels enabled for this event type. Empty array disables all channels for this event."
-          }
-        }
-      },
-      "OrgChannelConfigInput": {
-        "type": "object",
-        "required": [
-          "org_identifier"
-        ],
-        "properties": {
-          "org_identifier": {
-            "type": "string",
-            "description": "Unique identifier or name of the org"
-          },
-          "operation": {
-            "type": "string",
-            "enum": [
-              "REPLACE",
-              "RESET"
-            ],
-            "default": "REPLACE",
-            "description": "Operation to perform. REPLACE: Update preferences (default). RESET: Remove org-specific configurations, causing fallback to cluster-level preferences.",
-            "nullable": true
-          },
-          "preferences": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EventChannelConfigInput"
-            },
-            "description": "Event-specific configurations. Required for REPLACE operation.",
-            "nullable": true
-          },
-          "reset_events": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "LIVEBOARD_SCHEDULE"
-              ]
-            },
-            "description": "Event types to reset. Required for RESET operation. Org-specific configurations for these events will be removed, causing fallback to cluster-level preferences.",
-            "nullable": true
-          }
-        }
-      },
       "TagMetadataTypeInput": {
         "type": "object",
         "required": [
@@ -21093,12 +19054,8 @@
                 "ALLOW_NON_EMBED_FULL_APP_ACCESS",
                 "CAN_ACCESS_ANALYST_STUDIO",
                 "CAN_MANAGE_ANALYST_STUDIO",
-                "CAN_MODIFY_FOLDERS",
-                "CAN_VIEW_FOLDERS",
                 "PREVIEW_DOCUMENT_SEARCH",
-                "CAN_SETUP_VERSION_CONTROL",
-                "CAN_DOWNLOAD_VISUALS",
-                "CAN_DOWNLOAD_DETAILED_DATA"
+                "CAN_SETUP_VERSION_CONTROL"
               ]
             },
             "description": "Privileges that will be assigned to the group.",
@@ -21116,9 +19073,7 @@
             "type": "string",
             "enum": [
               "LOCAL_GROUP",
-              "LDAP_GROUP",
-              "TEAM_GROUP",
-              "TENANT_GROUP"
+              "LDAP_GROUP"
             ],
             "description": "Type of the group.",
             "nullable": true
@@ -21204,12 +19159,6 @@
             "type": "boolean",
             "default": false,
             "description": "Boolean flag indicating whether to export column security rules of the object. This will only be respected when the object can have column security rules and export_associated is true. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "export_with_column_aliases": {
-            "type": "boolean",
-            "default": false,
-            "description": "Boolean flag indicating whether to export column aliases of the model. This will only be respected when the object can have column aliases. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.13.0.cl or later</span>",
             "nullable": true
           }
         },
@@ -22084,13 +20033,8 @@
                 "CAN_ACCESS_ANALYST_STUDIO",
                 "CAN_MANAGE_ANALYST_STUDIO",
                 "PREVIEW_DOCUMENT_SEARCH",
-                "CAN_MODIFY_FOLDERS",
-                "CAN_VIEW_FOLDERS",
                 "CAN_SETUP_VERSION_CONTROL",
-                "PREVIEW_THOUGHTSPOT_SAGE",
-                "CAN_MANAGE_WEBHOOKS",
-                "CAN_DOWNLOAD_VISUALS",
-                "CAN_DOWNLOAD_DETAILED_DATA"
+                "PREVIEW_THOUGHTSPOT_SAGE"
               ]
             },
             "description": "Privileges granted to the role."
@@ -23111,171 +21055,17 @@
           }
         }
       },
-      "ContextPayloadV2Input": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "answer",
-              "liveboard",
-              "data_source"
-            ],
-            "description": "Type of the context.",
-            "nullable": true
-          },
-          "answer_context": {
-            "$ref": "#/components/schemas/AnswerContextInput",
-            "description": "Answer context.",
-            "nullable": true
-          },
-          "liveboard_context": {
-            "$ref": "#/components/schemas/LBContextInput",
-            "description": "Liveboard context.",
-            "nullable": true
-          },
-          "data_source_context": {
-            "$ref": "#/components/schemas/DataSourceContextInput",
-            "description": "Data source context.",
-            "nullable": true
-          }
-        }
-      },
-      "AnswerContextInput": {
+      "InputVariableValue": {
         "type": "object",
         "required": [
-          "session_identifier",
-          "generation_number"
-        ],
-        "properties": {
-          "session_identifier": {
-            "type": "string",
-            "description": "Unique identifier of the answer session."
-          },
-          "generation_number": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Generation number of the answer."
-          }
-        }
-      },
-      "LBContextInput": {
-        "type": "object",
-        "required": [
-          "liveboard_identifier",
-          "visualization_identifier"
-        ],
-        "properties": {
-          "liveboard_identifier": {
-            "type": "string",
-            "description": "Unique identifier of the liveboard."
-          },
-          "visualization_identifier": {
-            "type": "string",
-            "description": "Unique identifier of the visualization."
-          }
-        }
-      },
-      "DataSourceContextInput": {
-        "type": "object",
-        "required": [
-          "guid"
-        ],
-        "properties": {
-          "guid": {
-            "type": "string",
-            "description": "Unique identifier of the data source."
-          }
-        }
-      },
-      "ConversationSettingsInput": {
-        "type": "object",
-        "properties": {
-          "enable_contextual_change_analysis": {
-            "type": "boolean",
-            "default": false,
-            "description": "Enable contextual change analysis.",
-            "nullable": true
-          },
-          "enable_natural_language_answer_generation": {
-            "type": "boolean",
-            "default": true,
-            "description": "Enable natural language to answer generation.",
-            "nullable": true
-          },
-          "enable_reasoning": {
-            "type": "boolean",
-            "default": false,
-            "description": "Enable reasoning.",
-            "nullable": true
-          }
-        }
-      },
-      "AgentConversation": {
-        "type": "object",
-        "required": [
-          "conversation_id"
-        ],
-        "properties": {
-          "conversation_id": {
-            "type": "string",
-            "description": "Unique identifier of the conversation."
-          }
-        }
-      },
-      "SendAgentMessageResponse": {
-        "type": "object",
-        "required": [
-          "success"
-        ],
-        "properties": {
-          "success": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "VariableUpdateAssignmentInput": {
-        "type": "object",
-        "required": [
-          "variable_identifier",
-          "variable_values",
-          "operation"
-        ],
-        "properties": {
-          "variable_identifier": {
-            "type": "string",
-            "description": "ID or Name of the variable"
-          },
-          "variable_values": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Values of the variable"
-          },
-          "operation": {
-            "type": "string",
-            "enum": [
-              "ADD",
-              "REMOVE",
-              "REPLACE",
-              "CLEAR"
-            ],
-            "description": "Operation to perform"
-          }
-        },
-        "description": "Input for variable value update in batch operations"
-      },
-      "VariableUpdateScopeInput": {
-        "type": "object",
-        "required": [
+          "value",
           "org_identifier"
         ],
         "properties": {
+          "value": {
+            "type": "string",
+            "description": "The connection property value"
+          },
           "org_identifier": {
             "type": "string",
             "description": "The unique name of the org"
@@ -23294,19 +21084,34 @@
             "description": "Unique ID or name of the principal",
             "nullable": true
           },
-          "model_identifier": {
-            "type": "string",
-            "description": "Unique ID of the model",
-            "nullable": true
-          },
           "priority": {
             "type": "integer",
             "format": "int32",
-            "description": "Priority level",
+            "description": "The priority assigned to this value. If there are 2 matching values, the one with the higher priority will be picked.",
             "nullable": true
           }
+        }
+      },
+      "VariableValueInput": {
+        "type": "object",
+        "required": [
+          "variable_identifier",
+          "variable_values"
+        ],
+        "properties": {
+          "variable_identifier": {
+            "type": "string",
+            "description": "ID or Name of the variable"
+          },
+          "variable_values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InputVariableValue"
+            },
+            "description": "Values of the variable"
+          }
         },
-        "description": "Input for variable value update in batch operations"
+        "description": "Input for variable value update"
       },
       "CreateEmailCustomizationResponse": {
         "type": "object",
@@ -23466,16 +21271,6 @@
             "type": "boolean",
             "description": "Whether to hide modify alert",
             "nullable": true
-          },
-          "company_privacy_policy_url": {
-            "type": "string",
-            "description": "Company privacy policy URL (HTTP/HTTPS only)",
-            "nullable": true
-          },
-          "company_website_url": {
-            "type": "string",
-            "description": "Company website URL (HTTP/HTTPS only)",
-            "nullable": true
           }
         },
         "description": "Email customization configuration properties"
@@ -23506,177 +21301,6 @@
           "table_name": {
             "type": "string",
             "description": "Name of the table. Table names may be case-sensitive depending on the database system."
-          }
-        }
-      },
-      "WebhookAuthenticationInput": {
-        "type": "object",
-        "properties": {
-          "API_KEY": {
-            "$ref": "#/components/schemas/WebhookAuthApiKeyInput",
-            "description": "API key authentication configuration.",
-            "nullable": true
-          },
-          "BASIC_AUTH": {
-            "$ref": "#/components/schemas/WebhookAuthBasicAuthInput",
-            "description": "Basic authentication configuration.",
-            "nullable": true
-          },
-          "BEARER_TOKEN": {
-            "type": "string",
-            "description": "Bearer token authentication configuration.",
-            "nullable": true
-          },
-          "OAUTH2": {
-            "$ref": "#/components/schemas/WebhookAuthOAuth2Input",
-            "description": "OAuth2 authentication configuration.",
-            "nullable": true
-          }
-        }
-      },
-      "WebhookAuthApiKeyInput": {
-        "type": "object",
-        "required": [
-          "key",
-          "value"
-        ],
-        "properties": {
-          "key": {
-            "type": "string",
-            "description": "The header or query parameter name for the API key."
-          },
-          "value": {
-            "type": "string",
-            "description": "The API key value."
-          }
-        }
-      },
-      "WebhookAuthBasicAuthInput": {
-        "type": "object",
-        "required": [
-          "username",
-          "password"
-        ],
-        "properties": {
-          "username": {
-            "type": "string",
-            "description": "Username for basic authentication."
-          },
-          "password": {
-            "type": "string",
-            "description": "Password for basic authentication."
-          }
-        }
-      },
-      "WebhookAuthOAuth2Input": {
-        "type": "object",
-        "required": [
-          "authorization_url",
-          "client_id",
-          "client_secret"
-        ],
-        "properties": {
-          "authorization_url": {
-            "type": "string",
-            "description": "OAuth2 authorization server URL."
-          },
-          "client_id": {
-            "type": "string",
-            "description": "OAuth2 client identifier."
-          },
-          "client_secret": {
-            "type": "string",
-            "description": "OAuth2 client secret key."
-          }
-        }
-      },
-      "WebhookSignatureVerificationInput": {
-        "type": "object",
-        "required": [
-          "type",
-          "header",
-          "algorithm",
-          "secret"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "HMAC_SHA256"
-            ],
-            "description": "Signature verification method type."
-          },
-          "header": {
-            "type": "string",
-            "description": "HTTP header where the signature is sent."
-          },
-          "algorithm": {
-            "type": "string",
-            "enum": [
-              "SHA256"
-            ],
-            "description": "Hash algorithm used for signature verification."
-          },
-          "secret": {
-            "type": "string",
-            "description": "Shared secret used for HMAC signature generation."
-          }
-        }
-      },
-      "WebhookDeleteResponse": {
-        "type": "object",
-        "required": [
-          "deleted_count",
-          "failed_count",
-          "deleted_webhooks",
-          "failed_webhooks"
-        ],
-        "properties": {
-          "deleted_count": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of webhooks successfully deleted."
-          },
-          "failed_count": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of webhooks that failed to delete."
-          },
-          "deleted_webhooks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/WebhookResponse"
-            },
-            "description": "List of successfully deleted webhooks."
-          },
-          "failed_webhooks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/WebhookDeleteFailure"
-            },
-            "description": "List of webhooks that failed to delete with error details."
-          }
-        }
-      },
-      "WebhookDeleteFailure": {
-        "type": "object",
-        "required": [
-          "id",
-          "name",
-          "error"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Unique identifier of the webhook that failed to delete."
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the webhook that failed to delete."
-          },
-          "error": {
-            "type": "string",
-            "description": "Error message describing why the deletion failed."
           }
         }
       },
