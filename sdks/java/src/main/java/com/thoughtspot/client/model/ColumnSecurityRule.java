@@ -45,7 +45,7 @@ public class ColumnSecurityRule implements Serializable {
     @javax.annotation.Nullable
     private List<ColumnSecurityRuleGroup> groups;
 
-    public static final String SERIALIZED_NAME_SOURCE_TABLE_DETAILS = "sourceTableDetails";
+    public static final String SERIALIZED_NAME_SOURCE_TABLE_DETAILS = "source_table_details";
 
     @SerializedName(SERIALIZED_NAME_SOURCE_TABLE_DETAILS)
     @javax.annotation.Nullable
@@ -188,7 +188,7 @@ public class ColumnSecurityRule implements Serializable {
         openapiFields = new HashSet<String>();
         openapiFields.add("column");
         openapiFields.add("groups");
-        openapiFields.add("sourceTableDetails");
+        openapiFields.add("source_table_details");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -256,10 +256,10 @@ public class ColumnSecurityRule implements Serializable {
                 ;
             }
         }
-        // validate the optional field `sourceTableDetails`
-        if (jsonObj.get("sourceTableDetails") != null
-                && !jsonObj.get("sourceTableDetails").isJsonNull()) {
-            ColumnSecurityRuleSourceTable.validateJsonElement(jsonObj.get("sourceTableDetails"));
+        // validate the optional field `source_table_details`
+        if (jsonObj.get("source_table_details") != null
+                && !jsonObj.get("source_table_details").isJsonNull()) {
+            ColumnSecurityRuleSourceTable.validateJsonElement(jsonObj.get("source_table_details"));
         }
     }
 

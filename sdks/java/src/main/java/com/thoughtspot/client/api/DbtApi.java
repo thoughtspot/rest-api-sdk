@@ -677,10 +677,12 @@ public class DbtApi {
      * Build call for dbtGenerateTml
      *
      * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
+     * @param modelTables List of Models and their respective Tables Example:
+     *     &#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;,
+     *     \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]&#39; (required)
      * @param importWorksheets Mention the worksheet tmls to import (required)
-     * @param modelTables List of Models and their respective Tables (optional)
      * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED
-     *     (optional)
+     *     Example: [\\\&quot;worksheet_name\\\&quot;] (optional)
      * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
      *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
      * @param _callback Callback for upload/download progress
@@ -699,8 +701,8 @@ public class DbtApi {
      */
     public okhttp3.Call dbtGenerateTmlCall(
             String dbtConnectionIdentifier,
-            String importWorksheets,
             String modelTables,
+            String importWorksheets,
             String worksheets,
             File fileContent,
             final ApiCallback _callback)
@@ -780,8 +782,8 @@ public class DbtApi {
     @SuppressWarnings("rawtypes")
     private okhttp3.Call dbtGenerateTmlValidateBeforeCall(
             String dbtConnectionIdentifier,
-            String importWorksheets,
             String modelTables,
+            String importWorksheets,
             String worksheets,
             File fileContent,
             final ApiCallback _callback)
@@ -790,6 +792,13 @@ public class DbtApi {
         if (dbtConnectionIdentifier == null) {
             throw new ApiException(
                     "Missing the required parameter 'dbtConnectionIdentifier' when calling"
+                            + " dbtGenerateTml(Async)");
+        }
+
+        // verify the required parameter 'modelTables' is set
+        if (modelTables == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'modelTables' when calling"
                             + " dbtGenerateTml(Async)");
         }
 
@@ -802,8 +811,8 @@ public class DbtApi {
 
         return dbtGenerateTmlCall(
                 dbtConnectionIdentifier,
-                importWorksheets,
                 modelTables,
+                importWorksheets,
                 worksheets,
                 fileContent,
                 _callback);
@@ -823,10 +832,12 @@ public class DbtApi {
      * API.
      *
      * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
+     * @param modelTables List of Models and their respective Tables Example:
+     *     &#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;,
+     *     \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]&#39; (required)
      * @param importWorksheets Mention the worksheet tmls to import (required)
-     * @param modelTables List of Models and their respective Tables (optional)
      * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED
-     *     (optional)
+     *     Example: [\\\&quot;worksheet_name\\\&quot;] (optional)
      * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
      *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
      * @return Object
@@ -845,16 +856,16 @@ public class DbtApi {
      */
     public Object dbtGenerateTml(
             String dbtConnectionIdentifier,
-            String importWorksheets,
             String modelTables,
+            String importWorksheets,
             String worksheets,
             File fileContent)
             throws ApiException {
         ApiResponse<Object> localVarResp =
                 dbtGenerateTmlWithHttpInfo(
                         dbtConnectionIdentifier,
-                        importWorksheets,
                         modelTables,
+                        importWorksheets,
                         worksheets,
                         fileContent);
         return localVarResp.getData();
@@ -874,10 +885,12 @@ public class DbtApi {
      * API.
      *
      * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
+     * @param modelTables List of Models and their respective Tables Example:
+     *     &#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;,
+     *     \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]&#39; (required)
      * @param importWorksheets Mention the worksheet tmls to import (required)
-     * @param modelTables List of Models and their respective Tables (optional)
      * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED
-     *     (optional)
+     *     Example: [\\\&quot;worksheet_name\\\&quot;] (optional)
      * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
      *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
      * @return ApiResponse&lt;Object&gt;
@@ -896,16 +909,16 @@ public class DbtApi {
      */
     public ApiResponse<Object> dbtGenerateTmlWithHttpInfo(
             String dbtConnectionIdentifier,
-            String importWorksheets,
             String modelTables,
+            String importWorksheets,
             String worksheets,
             File fileContent)
             throws ApiException {
         okhttp3.Call localVarCall =
                 dbtGenerateTmlValidateBeforeCall(
                         dbtConnectionIdentifier,
-                        importWorksheets,
                         modelTables,
+                        importWorksheets,
                         worksheets,
                         fileContent,
                         null);
@@ -927,10 +940,12 @@ public class DbtApi {
      * API.
      *
      * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
+     * @param modelTables List of Models and their respective Tables Example:
+     *     &#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;,
+     *     \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]&#39; (required)
      * @param importWorksheets Mention the worksheet tmls to import (required)
-     * @param modelTables List of Models and their respective Tables (optional)
      * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED
-     *     (optional)
+     *     Example: [\\\&quot;worksheet_name\\\&quot;] (optional)
      * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
      *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
      * @param _callback The callback to be executed when the API call finishes
@@ -950,8 +965,8 @@ public class DbtApi {
      */
     public okhttp3.Call dbtGenerateTmlAsync(
             String dbtConnectionIdentifier,
-            String importWorksheets,
             String modelTables,
+            String importWorksheets,
             String worksheets,
             File fileContent,
             final ApiCallback<Object> _callback)
@@ -960,8 +975,8 @@ public class DbtApi {
         okhttp3.Call localVarCall =
                 dbtGenerateTmlValidateBeforeCall(
                         dbtConnectionIdentifier,
-                        importWorksheets,
                         modelTables,
+                        importWorksheets,
                         worksheets,
                         fileContent,
                         _callback);

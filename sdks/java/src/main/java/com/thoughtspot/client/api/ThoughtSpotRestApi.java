@@ -24,6 +24,8 @@ import com.thoughtspot.client.model.ColumnSecurityRuleResponse;
 import com.thoughtspot.client.model.CommitBranchRequest;
 import com.thoughtspot.client.model.CommitHistoryResponse;
 import com.thoughtspot.client.model.CommitResponse;
+import com.thoughtspot.client.model.CommunicationChannelPreferencesResponse;
+import com.thoughtspot.client.model.ConfigureCommunicationChannelPreferencesRequest;
 import com.thoughtspot.client.model.ConnectionConfigurationResponse;
 import com.thoughtspot.client.model.ConnectionConfigurationSearchRequest;
 import com.thoughtspot.client.model.Conversation;
@@ -46,6 +48,7 @@ import com.thoughtspot.client.model.CreateTagRequest;
 import com.thoughtspot.client.model.CreateUserGroupRequest;
 import com.thoughtspot.client.model.CreateUserRequest;
 import com.thoughtspot.client.model.CreateVariableRequest;
+import com.thoughtspot.client.model.CreateWebhookConfigurationRequest;
 import com.thoughtspot.client.model.DbtSearchResponse;
 import com.thoughtspot.client.model.DeactivateUserRequest;
 import com.thoughtspot.client.model.DeleteConfigRequest;
@@ -53,6 +56,7 @@ import com.thoughtspot.client.model.DeleteConnectionConfigurationRequest;
 import com.thoughtspot.client.model.DeleteConnectionRequest;
 import com.thoughtspot.client.model.DeleteMetadataRequest;
 import com.thoughtspot.client.model.DeleteOrgEmailCustomizationRequest;
+import com.thoughtspot.client.model.DeleteWebhookConfigurationsRequest;
 import com.thoughtspot.client.model.DeployCommitRequest;
 import com.thoughtspot.client.model.DeployResponse;
 import com.thoughtspot.client.model.EurekaDataSourceSuggestionResponse;
@@ -112,6 +116,7 @@ import com.thoughtspot.client.model.RevokeTokenRequest;
 import com.thoughtspot.client.model.RoleResponse;
 import com.thoughtspot.client.model.SearchCalendarsRequest;
 import com.thoughtspot.client.model.SearchCommitsRequest;
+import com.thoughtspot.client.model.SearchCommunicationChannelPreferencesRequest;
 import com.thoughtspot.client.model.SearchConfigRequest;
 import com.thoughtspot.client.model.SearchConnectionRequest;
 import com.thoughtspot.client.model.SearchConnectionResponse;
@@ -128,6 +133,8 @@ import com.thoughtspot.client.model.SearchTagsRequest;
 import com.thoughtspot.client.model.SearchUserGroupsRequest;
 import com.thoughtspot.client.model.SearchUsersRequest;
 import com.thoughtspot.client.model.SearchVariablesRequest;
+import com.thoughtspot.client.model.SearchWebhookConfigurationsRequest;
+import com.thoughtspot.client.model.SendAgentMessageRequest;
 import com.thoughtspot.client.model.SendAgentMessageResponse;
 import com.thoughtspot.client.model.SendAgentMessageStreamingRequest;
 import com.thoughtspot.client.model.SendMessageRequest;
@@ -161,11 +168,15 @@ import com.thoughtspot.client.model.UpdateUserGroupRequest;
 import com.thoughtspot.client.model.UpdateUserRequest;
 import com.thoughtspot.client.model.UpdateVariableRequest;
 import com.thoughtspot.client.model.UpdateVariableValuesRequest;
+import com.thoughtspot.client.model.UpdateWebhookConfigurationRequest;
 import com.thoughtspot.client.model.User;
 import com.thoughtspot.client.model.UserGroupResponse;
 import com.thoughtspot.client.model.ValidateMergeRequest;
 import com.thoughtspot.client.model.ValidateTokenRequest;
 import com.thoughtspot.client.model.Variable;
+import com.thoughtspot.client.model.WebhookDeleteResponse;
+import com.thoughtspot.client.model.WebhookResponse;
+import com.thoughtspot.client.model.WebhookSearchResponse;
 import java.io.File;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -1103,6 +1114,210 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
+     * Build call for configureCommunicationChannelPreferences
+     *
+     * @param configureCommunicationChannelPreferencesRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Communication channel preferences successfully updated. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call configureCommunicationChannelPreferencesCall(
+            ConfigureCommunicationChannelPreferencesRequest
+                    configureCommunicationChannelPreferencesRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = configureCommunicationChannelPreferencesRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/system/preferences/communication-channels/configure";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call configureCommunicationChannelPreferencesValidateBeforeCall(
+            ConfigureCommunicationChannelPreferencesRequest
+                    configureCommunicationChannelPreferencesRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'configureCommunicationChannelPreferencesRequest' is set
+        if (configureCommunicationChannelPreferencesRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter"
+                            + " 'configureCommunicationChannelPreferencesRequest' when calling"
+                            + " configureCommunicationChannelPreferences(Async)");
+        }
+
+        return configureCommunicationChannelPreferencesCall(
+                configureCommunicationChannelPreferencesRequest, _callback);
+    }
+
+    /**
+     * Version: 10.14.0.cl or later Configure communication channel preferences. - Use
+     * &#x60;cluster_preferences&#x60; to update the default preferences for your ThoughtSpot
+     * application instance. - If your instance has
+     * [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), use
+     * &#x60;org_preferences&#x60; to specify Org-specific preferences that override the defaults.
+     * Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60;
+     * (**Has developer privilege**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
+     * &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can manage application settings**) privilege are
+     * also authorized to perform this action.
+     *
+     * @param configureCommunicationChannelPreferencesRequest (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Communication channel preferences successfully updated. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public void configureCommunicationChannelPreferences(
+            ConfigureCommunicationChannelPreferencesRequest
+                    configureCommunicationChannelPreferencesRequest)
+            throws ApiException {
+        configureCommunicationChannelPreferencesWithHttpInfo(
+                configureCommunicationChannelPreferencesRequest);
+    }
+
+    /**
+     * Version: 10.14.0.cl or later Configure communication channel preferences. - Use
+     * &#x60;cluster_preferences&#x60; to update the default preferences for your ThoughtSpot
+     * application instance. - If your instance has
+     * [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), use
+     * &#x60;org_preferences&#x60; to specify Org-specific preferences that override the defaults.
+     * Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60;
+     * (**Has developer privilege**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
+     * &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can manage application settings**) privilege are
+     * also authorized to perform this action.
+     *
+     * @param configureCommunicationChannelPreferencesRequest (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Communication channel preferences successfully updated. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<Void> configureCommunicationChannelPreferencesWithHttpInfo(
+            ConfigureCommunicationChannelPreferencesRequest
+                    configureCommunicationChannelPreferencesRequest)
+            throws ApiException {
+        okhttp3.Call localVarCall =
+                configureCommunicationChannelPreferencesValidateBeforeCall(
+                        configureCommunicationChannelPreferencesRequest, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     * (asynchronously) Version: 10.14.0.cl or later Configure communication channel preferences. -
+     * Use &#x60;cluster_preferences&#x60; to update the default preferences for your ThoughtSpot
+     * application instance. - If your instance has
+     * [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), use
+     * &#x60;org_preferences&#x60; to specify Org-specific preferences that override the defaults.
+     * Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60;
+     * (**Has developer privilege**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
+     * &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can manage application settings**) privilege are
+     * also authorized to perform this action.
+     *
+     * @param configureCommunicationChannelPreferencesRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Communication channel preferences successfully updated. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call configureCommunicationChannelPreferencesAsync(
+            ConfigureCommunicationChannelPreferencesRequest
+                    configureCommunicationChannelPreferencesRequest,
+            final ApiCallback<Void> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                configureCommunicationChannelPreferencesValidateBeforeCall(
+                        configureCommunicationChannelPreferencesRequest, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for connectionConfigurationSearch
      *
      * @param connectionConfigurationSearchRequest (required)
@@ -1661,9 +1876,9 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Makes a copy of an Answer or Liveboard saved in Atlas Version: 10.3.0.cl or later Creates a
-     * copy of a metadata object. Requires at least view access to the metadata object being copied.
-     * Upon successful execution, the API creates a copy of the metadata object specified in the API
+     * Makes a copy of an Answer or Liveboard Version: 10.3.0.cl or later Creates a copy of a
+     * metadata object. Requires at least view access to the metadata object being copied. Upon
+     * successful execution, the API creates a copy of the metadata object specified in the API
      * request and returns the ID of the new object.
      *
      * @param copyObjectRequest (required)
@@ -1688,9 +1903,9 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Makes a copy of an Answer or Liveboard saved in Atlas Version: 10.3.0.cl or later Creates a
-     * copy of a metadata object. Requires at least view access to the metadata object being copied.
-     * Upon successful execution, the API creates a copy of the metadata object specified in the API
+     * Makes a copy of an Answer or Liveboard Version: 10.3.0.cl or later Creates a copy of a
+     * metadata object. Requires at least view access to the metadata object being copied. Upon
+     * successful execution, the API creates a copy of the metadata object specified in the API
      * request and returns the ID of the new object.
      *
      * @param copyObjectRequest (required)
@@ -1717,10 +1932,10 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Makes a copy of an Answer or Liveboard saved in Atlas Version: 10.3.0.cl or
-     * later Creates a copy of a metadata object. Requires at least view access to the metadata
-     * object being copied. Upon successful execution, the API creates a copy of the metadata object
-     * specified in the API request and returns the ID of the new object.
+     * (asynchronously) Makes a copy of an Answer or Liveboard Version: 10.3.0.cl or later Creates a
+     * copy of a metadata object. Requires at least view access to the metadata object being copied.
+     * Upon successful execution, the API creates a copy of the metadata object specified in the API
+     * request and returns the ID of the new object.
      *
      * @param copyObjectRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -4813,17 +5028,18 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Create a variable which can be used for parameterizing metadata objects Version: 10.9.0.cl or
-     * later Allows creating a variable which can be used for parameterizing metadata objects in
-     * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint supports the
-     * following types of variables: * CONNECTION_PROPERTY - For connection properties *
-     * TABLE_MAPPING - For table mappings * CONNECTION_PROPERTY_PER_PRINCIPAL - For connection
-     * properties per principal. In order to use this please contact support to enable this. *
-     * FORMULA_VARIABLE - For Formula variables When creating a variable, you need to specify: * The
-     * variable type * A unique name for the variable * Whether the variable contains sensitive
-     * values (defaults to false) * The data type of the variable, only specify for fomula variables
-     * (defaults to null) The operation will fail if: * The user lacks required permissions * The
-     * variable name already exists * The variable type is invalid
+     * Create a variable which can be used for parameterizing metadata objects Version: 10.14.0.cl
+     * or later Allows creating a variable which can be used for parameterizing metadata objects in
+     * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES
+     * permission allows you to manage Formula Variables in the current organization scope. The API
+     * endpoint supports the following types of variables: * CONNECTION_PROPERTY - For connection
+     * properties * TABLE_MAPPING - For table mappings * CONNECTION_PROPERTY_PER_PRINCIPAL - For
+     * connection properties per principal. In order to use this please contact support to enable
+     * this. * FORMULA_VARIABLE - For Formula variables When creating a variable, you need to
+     * specify: * The variable type * A unique name for the variable * Whether the variable contains
+     * sensitive values (defaults to false) * The data type of the variable, only specify for fomula
+     * variables (defaults to null) The operation will fail if: * The user lacks required
+     * permissions * The variable name already exists * The variable type is invalid
      *
      * @param createVariableRequest (required)
      * @return Variable
@@ -4847,17 +5063,18 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Create a variable which can be used for parameterizing metadata objects Version: 10.9.0.cl or
-     * later Allows creating a variable which can be used for parameterizing metadata objects in
-     * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint supports the
-     * following types of variables: * CONNECTION_PROPERTY - For connection properties *
-     * TABLE_MAPPING - For table mappings * CONNECTION_PROPERTY_PER_PRINCIPAL - For connection
-     * properties per principal. In order to use this please contact support to enable this. *
-     * FORMULA_VARIABLE - For Formula variables When creating a variable, you need to specify: * The
-     * variable type * A unique name for the variable * Whether the variable contains sensitive
-     * values (defaults to false) * The data type of the variable, only specify for fomula variables
-     * (defaults to null) The operation will fail if: * The user lacks required permissions * The
-     * variable name already exists * The variable type is invalid
+     * Create a variable which can be used for parameterizing metadata objects Version: 10.14.0.cl
+     * or later Allows creating a variable which can be used for parameterizing metadata objects in
+     * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES
+     * permission allows you to manage Formula Variables in the current organization scope. The API
+     * endpoint supports the following types of variables: * CONNECTION_PROPERTY - For connection
+     * properties * TABLE_MAPPING - For table mappings * CONNECTION_PROPERTY_PER_PRINCIPAL - For
+     * connection properties per principal. In order to use this please contact support to enable
+     * this. * FORMULA_VARIABLE - For Formula variables When creating a variable, you need to
+     * specify: * The variable type * A unique name for the variable * Whether the variable contains
+     * sensitive values (defaults to false) * The data type of the variable, only specify for fomula
+     * variables (defaults to null) The operation will fail if: * The user lacks required
+     * permissions * The variable name already exists * The variable type is invalid
      *
      * @param createVariableRequest (required)
      * @return ApiResponse&lt;Variable&gt;
@@ -4883,16 +5100,18 @@ public class ThoughtSpotRestApi {
 
     /**
      * (asynchronously) Create a variable which can be used for parameterizing metadata objects
-     * Version: 10.9.0.cl or later Allows creating a variable which can be used for parameterizing
-     * metadata objects in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API
-     * endpoint supports the following types of variables: * CONNECTION_PROPERTY - For connection
-     * properties * TABLE_MAPPING - For table mappings * CONNECTION_PROPERTY_PER_PRINCIPAL - For
-     * connection properties per principal. In order to use this please contact support to enable
-     * this. * FORMULA_VARIABLE - For Formula variables When creating a variable, you need to
-     * specify: * The variable type * A unique name for the variable * Whether the variable contains
-     * sensitive values (defaults to false) * The data type of the variable, only specify for fomula
-     * variables (defaults to null) The operation will fail if: * The user lacks required
-     * permissions * The variable name already exists * The variable type is invalid
+     * Version: 10.14.0.cl or later Allows creating a variable which can be used for parameterizing
+     * metadata objects in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The
+     * CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current
+     * organization scope. The API endpoint supports the following types of variables: *
+     * CONNECTION_PROPERTY - For connection properties * TABLE_MAPPING - For table mappings *
+     * CONNECTION_PROPERTY_PER_PRINCIPAL - For connection properties per principal. In order to use
+     * this please contact support to enable this. * FORMULA_VARIABLE - For Formula variables When
+     * creating a variable, you need to specify: * The variable type * A unique name for the
+     * variable * Whether the variable contains sensitive values (defaults to false) * The data type
+     * of the variable, only specify for fomula variables (defaults to null) The operation will fail
+     * if: * The user lacks required permissions * The variable name already exists * The variable
+     * type is invalid
      *
      * @param createVariableRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -4917,6 +5136,198 @@ public class ThoughtSpotRestApi {
         okhttp3.Call localVarCall =
                 createVariableValidateBeforeCall(createVariableRequest, _callback);
         Type localVarReturnType = new TypeToken<Variable>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for createWebhookConfiguration
+     *
+     * @param createWebhookConfigurationRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Webhook configuration created successfully </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call createWebhookConfigurationCall(
+            CreateWebhookConfigurationRequest createWebhookConfigurationRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = createWebhookConfigurationRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/webhooks/create";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call createWebhookConfigurationValidateBeforeCall(
+            CreateWebhookConfigurationRequest createWebhookConfigurationRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'createWebhookConfigurationRequest' is set
+        if (createWebhookConfigurationRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'createWebhookConfigurationRequest' when"
+                            + " calling createWebhookConfiguration(Async)");
+        }
+
+        return createWebhookConfigurationCall(createWebhookConfigurationRequest, _callback);
+    }
+
+    /**
+     * Version: 10.14.0.cl or later Creates a new webhook configuration to receive notifications for
+     * specified events. The webhook will be triggered when the configured events occur in the
+     * system. Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or
+     * &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
+     * &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to
+     * perform this action.
+     *
+     * @param createWebhookConfigurationRequest (required)
+     * @return WebhookResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Webhook configuration created successfully </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public WebhookResponse createWebhookConfiguration(
+            CreateWebhookConfigurationRequest createWebhookConfigurationRequest)
+            throws ApiException {
+        ApiResponse<WebhookResponse> localVarResp =
+                createWebhookConfigurationWithHttpInfo(createWebhookConfigurationRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Version: 10.14.0.cl or later Creates a new webhook configuration to receive notifications for
+     * specified events. The webhook will be triggered when the configured events occur in the
+     * system. Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or
+     * &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
+     * &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to
+     * perform this action.
+     *
+     * @param createWebhookConfigurationRequest (required)
+     * @return ApiResponse&lt;WebhookResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Webhook configuration created successfully </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<WebhookResponse> createWebhookConfigurationWithHttpInfo(
+            CreateWebhookConfigurationRequest createWebhookConfigurationRequest)
+            throws ApiException {
+        okhttp3.Call localVarCall =
+                createWebhookConfigurationValidateBeforeCall(
+                        createWebhookConfigurationRequest, null);
+        Type localVarReturnType = new TypeToken<WebhookResponse>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Version: 10.14.0.cl or later Creates a new webhook configuration to receive
+     * notifications for specified events. The webhook will be triggered when the configured events
+     * occur in the system. Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or
+     * &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
+     * &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to
+     * perform this action.
+     *
+     * @param createWebhookConfigurationRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Webhook configuration created successfully </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call createWebhookConfigurationAsync(
+            CreateWebhookConfigurationRequest createWebhookConfigurationRequest,
+            final ApiCallback<WebhookResponse> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                createWebhookConfigurationValidateBeforeCall(
+                        createWebhookConfigurationRequest, _callback);
+        Type localVarReturnType = new TypeToken<WebhookResponse>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -5518,10 +5929,12 @@ public class ThoughtSpotRestApi {
      * Build call for dbtGenerateTml
      *
      * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
+     * @param modelTables List of Models and their respective Tables Example:
+     *     &#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;,
+     *     \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]&#39; (required)
      * @param importWorksheets Mention the worksheet tmls to import (required)
-     * @param modelTables List of Models and their respective Tables (optional)
      * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED
-     *     (optional)
+     *     Example: [\\\&quot;worksheet_name\\\&quot;] (optional)
      * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
      *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
      * @param _callback Callback for upload/download progress
@@ -5540,8 +5953,8 @@ public class ThoughtSpotRestApi {
      */
     public okhttp3.Call dbtGenerateTmlCall(
             String dbtConnectionIdentifier,
-            String importWorksheets,
             String modelTables,
+            String importWorksheets,
             String worksheets,
             File fileContent,
             final ApiCallback _callback)
@@ -5621,8 +6034,8 @@ public class ThoughtSpotRestApi {
     @SuppressWarnings("rawtypes")
     private okhttp3.Call dbtGenerateTmlValidateBeforeCall(
             String dbtConnectionIdentifier,
-            String importWorksheets,
             String modelTables,
+            String importWorksheets,
             String worksheets,
             File fileContent,
             final ApiCallback _callback)
@@ -5631,6 +6044,13 @@ public class ThoughtSpotRestApi {
         if (dbtConnectionIdentifier == null) {
             throw new ApiException(
                     "Missing the required parameter 'dbtConnectionIdentifier' when calling"
+                            + " dbtGenerateTml(Async)");
+        }
+
+        // verify the required parameter 'modelTables' is set
+        if (modelTables == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'modelTables' when calling"
                             + " dbtGenerateTml(Async)");
         }
 
@@ -5643,8 +6063,8 @@ public class ThoughtSpotRestApi {
 
         return dbtGenerateTmlCall(
                 dbtConnectionIdentifier,
-                importWorksheets,
                 modelTables,
+                importWorksheets,
                 worksheets,
                 fileContent,
                 _callback);
@@ -5664,10 +6084,12 @@ public class ThoughtSpotRestApi {
      * API.
      *
      * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
+     * @param modelTables List of Models and their respective Tables Example:
+     *     &#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;,
+     *     \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]&#39; (required)
      * @param importWorksheets Mention the worksheet tmls to import (required)
-     * @param modelTables List of Models and their respective Tables (optional)
      * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED
-     *     (optional)
+     *     Example: [\\\&quot;worksheet_name\\\&quot;] (optional)
      * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
      *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
      * @return Object
@@ -5686,16 +6108,16 @@ public class ThoughtSpotRestApi {
      */
     public Object dbtGenerateTml(
             String dbtConnectionIdentifier,
-            String importWorksheets,
             String modelTables,
+            String importWorksheets,
             String worksheets,
             File fileContent)
             throws ApiException {
         ApiResponse<Object> localVarResp =
                 dbtGenerateTmlWithHttpInfo(
                         dbtConnectionIdentifier,
-                        importWorksheets,
                         modelTables,
+                        importWorksheets,
                         worksheets,
                         fileContent);
         return localVarResp.getData();
@@ -5715,10 +6137,12 @@ public class ThoughtSpotRestApi {
      * API.
      *
      * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
+     * @param modelTables List of Models and their respective Tables Example:
+     *     &#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;,
+     *     \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]&#39; (required)
      * @param importWorksheets Mention the worksheet tmls to import (required)
-     * @param modelTables List of Models and their respective Tables (optional)
      * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED
-     *     (optional)
+     *     Example: [\\\&quot;worksheet_name\\\&quot;] (optional)
      * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
      *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
      * @return ApiResponse&lt;Object&gt;
@@ -5737,16 +6161,16 @@ public class ThoughtSpotRestApi {
      */
     public ApiResponse<Object> dbtGenerateTmlWithHttpInfo(
             String dbtConnectionIdentifier,
-            String importWorksheets,
             String modelTables,
+            String importWorksheets,
             String worksheets,
             File fileContent)
             throws ApiException {
         okhttp3.Call localVarCall =
                 dbtGenerateTmlValidateBeforeCall(
                         dbtConnectionIdentifier,
-                        importWorksheets,
                         modelTables,
+                        importWorksheets,
                         worksheets,
                         fileContent,
                         null);
@@ -5768,10 +6192,12 @@ public class ThoughtSpotRestApi {
      * API.
      *
      * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
+     * @param modelTables List of Models and their respective Tables Example:
+     *     &#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;,
+     *     \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]&#39; (required)
      * @param importWorksheets Mention the worksheet tmls to import (required)
-     * @param modelTables List of Models and their respective Tables (optional)
      * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED
-     *     (optional)
+     *     Example: [\\\&quot;worksheet_name\\\&quot;] (optional)
      * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
      *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
      * @param _callback The callback to be executed when the API call finishes
@@ -5791,8 +6217,8 @@ public class ThoughtSpotRestApi {
      */
     public okhttp3.Call dbtGenerateTmlAsync(
             String dbtConnectionIdentifier,
-            String importWorksheets,
             String modelTables,
+            String importWorksheets,
             String worksheets,
             File fileContent,
             final ApiCallback<Object> _callback)
@@ -5801,8 +6227,8 @@ public class ThoughtSpotRestApi {
         okhttp3.Call localVarCall =
                 dbtGenerateTmlValidateBeforeCall(
                         dbtConnectionIdentifier,
-                        importWorksheets,
                         modelTables,
+                        importWorksheets,
                         worksheets,
                         fileContent,
                         _callback);
@@ -9137,10 +9563,11 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Delete a variable Version: 10.9.0.cl or later Allows deleting a variable from ThoughtSpot.
-     * Requires ADMINISTRATION role and TENANT scope. The API endpoint requires: * The variable
-     * identifier (ID or name) The operation will fail if: * The user lacks required permissions *
-     * The variable doesn&#39;t exist * The variable is being used by other objects
+     * Delete a variable Version: 10.14.0.cl or later Allows deleting a variable from ThoughtSpot.
+     * Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you
+     * to manage Formula Variables in the current organization scope. The API endpoint requires: *
+     * The variable identifier (ID or name) The operation will fail if: * The user lacks required
+     * permissions * The variable doesn&#39;t exist * The variable is being used by other objects
      *
      * @param identifier Unique id or name of the variable (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -9161,10 +9588,11 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Delete a variable Version: 10.9.0.cl or later Allows deleting a variable from ThoughtSpot.
-     * Requires ADMINISTRATION role and TENANT scope. The API endpoint requires: * The variable
-     * identifier (ID or name) The operation will fail if: * The user lacks required permissions *
-     * The variable doesn&#39;t exist * The variable is being used by other objects
+     * Delete a variable Version: 10.14.0.cl or later Allows deleting a variable from ThoughtSpot.
+     * Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you
+     * to manage Formula Variables in the current organization scope. The API endpoint requires: *
+     * The variable identifier (ID or name) The operation will fail if: * The user lacks required
+     * permissions * The variable doesn&#39;t exist * The variable is being used by other objects
      *
      * @param identifier Unique id or name of the variable (required)
      * @return ApiResponse&lt;Void&gt;
@@ -9187,10 +9615,12 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Delete a variable Version: 10.9.0.cl or later Allows deleting a variable
-     * from ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint requires: *
-     * The variable identifier (ID or name) The operation will fail if: * The user lacks required
-     * permissions * The variable doesn&#39;t exist * The variable is being used by other objects
+     * (asynchronously) Delete a variable Version: 10.14.0.cl or later Allows deleting a variable
+     * from ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES
+     * permission allows you to manage Formula Variables in the current organization scope. The API
+     * endpoint requires: * The variable identifier (ID or name) The operation will fail if: * The
+     * user lacks required permissions * The variable doesn&#39;t exist * The variable is being used
+     * by other objects
      *
      * @param identifier Unique id or name of the variable (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -9213,6 +9643,199 @@ public class ThoughtSpotRestApi {
 
         okhttp3.Call localVarCall = deleteVariableValidateBeforeCall(identifier, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for deleteWebhookConfigurations
+     *
+     * @param deleteWebhookConfigurationsRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Webhook configurations deleted successfully </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call deleteWebhookConfigurationsCall(
+            DeleteWebhookConfigurationsRequest deleteWebhookConfigurationsRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = deleteWebhookConfigurationsRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/webhooks/delete";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call deleteWebhookConfigurationsValidateBeforeCall(
+            DeleteWebhookConfigurationsRequest deleteWebhookConfigurationsRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'deleteWebhookConfigurationsRequest' is set
+        if (deleteWebhookConfigurationsRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'deleteWebhookConfigurationsRequest' when"
+                            + " calling deleteWebhookConfigurations(Async)");
+        }
+
+        return deleteWebhookConfigurationsCall(deleteWebhookConfigurationsRequest, _callback);
+    }
+
+    /**
+     * Version: 10.14.0.cl or later Deletes one or more webhook configurations by their unique id or
+     * name. Returns status of each deletion operation, including successfully deleted webhooks and
+     * any failures with error details. Requires &#x60;ADMINISTRATION&#x60; (**Can administer
+     * ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If
+     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
+     * on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**)
+     * privilege are also authorized to perform this action.
+     *
+     * @param deleteWebhookConfigurationsRequest (required)
+     * @return WebhookDeleteResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Webhook configurations deleted successfully </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public WebhookDeleteResponse deleteWebhookConfigurations(
+            DeleteWebhookConfigurationsRequest deleteWebhookConfigurationsRequest)
+            throws ApiException {
+        ApiResponse<WebhookDeleteResponse> localVarResp =
+                deleteWebhookConfigurationsWithHttpInfo(deleteWebhookConfigurationsRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Version: 10.14.0.cl or later Deletes one or more webhook configurations by their unique id or
+     * name. Returns status of each deletion operation, including successfully deleted webhooks and
+     * any failures with error details. Requires &#x60;ADMINISTRATION&#x60; (**Can administer
+     * ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If
+     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
+     * on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**)
+     * privilege are also authorized to perform this action.
+     *
+     * @param deleteWebhookConfigurationsRequest (required)
+     * @return ApiResponse&lt;WebhookDeleteResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Webhook configurations deleted successfully </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<WebhookDeleteResponse> deleteWebhookConfigurationsWithHttpInfo(
+            DeleteWebhookConfigurationsRequest deleteWebhookConfigurationsRequest)
+            throws ApiException {
+        okhttp3.Call localVarCall =
+                deleteWebhookConfigurationsValidateBeforeCall(
+                        deleteWebhookConfigurationsRequest, null);
+        Type localVarReturnType = new TypeToken<WebhookDeleteResponse>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Version: 10.14.0.cl or later Deletes one or more webhook configurations by
+     * their unique id or name. Returns status of each deletion operation, including successfully
+     * deleted webhooks and any failures with error details. Requires &#x60;ADMINISTRATION&#x60;
+     * (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**)
+     * privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
+     * &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to
+     * perform this action.
+     *
+     * @param deleteWebhookConfigurationsRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Webhook configurations deleted successfully </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call deleteWebhookConfigurationsAsync(
+            DeleteWebhookConfigurationsRequest deleteWebhookConfigurationsRequest,
+            final ApiCallback<WebhookDeleteResponse> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                deleteWebhookConfigurationsValidateBeforeCall(
+                        deleteWebhookConfigurationsRequest, _callback);
+        Type localVarReturnType = new TypeToken<WebhookDeleteResponse>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
@@ -13333,8 +13956,7 @@ public class ThoughtSpotRestApi {
      * persist on a specific set of objects for user sessions initiated using the token. Once
      * defined, the rules are added to the user&#39;s &#x60;access_control_properties&#x60; object,
      * after which all sessions will use the persisted values. Specify the object type as
-     * &#x60;LOGICAL_TABLE&#x60;. The &#x60;LIVEBOARD&#x60; and &#x60;ANSWER&#x60; object types are
-     * not supported. For more information, see [ABAC via tokens
+     * &#x60;LOGICAL_TABLE&#x60;. For more information, see [ABAC via tokens
      * Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).
      * ##### Just-in-time provisioning For just-in-time user creation and provisioning, define the
      * following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
@@ -13342,7 +13964,9 @@ public class ThoughtSpotRestApi {
      * to &#x60;true&#x60; if the user is not available in ThoughtSpot. If the user already exists
      * in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60; in the
      * API request, the user properties such as the display name, email, Org and group assignment
-     * will not be updated with new values. For more information, see [Just-in-time
+     * will not be updated with new values. If &#x60;auto_create&#x60; is set to &#x60;true&#x60;,
+     * it won&#39;t create formula variables and hence won&#39;t be applicable for
+     * &#x60;variable_values&#x60;. For more information, see [Just-in-time
      * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). #####
      * Important point to note All options in the token creation APIs that define access to the
      * content in ThoughtSpot will do so during the token creation and not when the token is being
@@ -13350,7 +13974,13 @@ public class ThoughtSpotRestApi {
      * the authentication token is created. Persist options such as &#x60;APPEND&#x60;,
      * &#x60;REPLACE&#x60;, &#x60;RESET&#x60; will persist security parameters on the user profile
      * when the token is created, while Persist option &#x60;NONE&#x60; will not persist anything
-     * but will be honoured in the session.
+     * but will be honoured in the session. ##### Formula Variables Before using variables_values,
+     * variables must be created using Create Variable API with type as Formula_Variable
+     * (/api/rest/2.0/template/variables/create) The persist_option RESET and NONE cannot be used
+     * when variable_values are provided in the request. If you are working with variable_values,
+     * you must use other (APPEND, REPLACE) supported modes. If you want to use RESET or NONE, do
+     * not pass any variable_values. In such cases, variable_values will remain unaffected. When
+     * using object_id with variable_values, models are supported.
      *
      * @param getCustomAccessTokenRequest (required)
      * @return AccessToken
@@ -13405,8 +14035,7 @@ public class ThoughtSpotRestApi {
      * persist on a specific set of objects for user sessions initiated using the token. Once
      * defined, the rules are added to the user&#39;s &#x60;access_control_properties&#x60; object,
      * after which all sessions will use the persisted values. Specify the object type as
-     * &#x60;LOGICAL_TABLE&#x60;. The &#x60;LIVEBOARD&#x60; and &#x60;ANSWER&#x60; object types are
-     * not supported. For more information, see [ABAC via tokens
+     * &#x60;LOGICAL_TABLE&#x60;. For more information, see [ABAC via tokens
      * Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).
      * ##### Just-in-time provisioning For just-in-time user creation and provisioning, define the
      * following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
@@ -13414,7 +14043,9 @@ public class ThoughtSpotRestApi {
      * to &#x60;true&#x60; if the user is not available in ThoughtSpot. If the user already exists
      * in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60; in the
      * API request, the user properties such as the display name, email, Org and group assignment
-     * will not be updated with new values. For more information, see [Just-in-time
+     * will not be updated with new values. If &#x60;auto_create&#x60; is set to &#x60;true&#x60;,
+     * it won&#39;t create formula variables and hence won&#39;t be applicable for
+     * &#x60;variable_values&#x60;. For more information, see [Just-in-time
      * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). #####
      * Important point to note All options in the token creation APIs that define access to the
      * content in ThoughtSpot will do so during the token creation and not when the token is being
@@ -13422,7 +14053,13 @@ public class ThoughtSpotRestApi {
      * the authentication token is created. Persist options such as &#x60;APPEND&#x60;,
      * &#x60;REPLACE&#x60;, &#x60;RESET&#x60; will persist security parameters on the user profile
      * when the token is created, while Persist option &#x60;NONE&#x60; will not persist anything
-     * but will be honoured in the session.
+     * but will be honoured in the session. ##### Formula Variables Before using variables_values,
+     * variables must be created using Create Variable API with type as Formula_Variable
+     * (/api/rest/2.0/template/variables/create) The persist_option RESET and NONE cannot be used
+     * when variable_values are provided in the request. If you are working with variable_values,
+     * you must use other (APPEND, REPLACE) supported modes. If you want to use RESET or NONE, do
+     * not pass any variable_values. In such cases, variable_values will remain unaffected. When
+     * using object_id with variable_values, models are supported.
      *
      * @param getCustomAccessTokenRequest (required)
      * @return ApiResponse&lt;AccessToken&gt;
@@ -13478,8 +14115,7 @@ public class ThoughtSpotRestApi {
      * persist on a specific set of objects for user sessions initiated using the token. Once
      * defined, the rules are added to the user&#39;s &#x60;access_control_properties&#x60; object,
      * after which all sessions will use the persisted values. Specify the object type as
-     * &#x60;LOGICAL_TABLE&#x60;. The &#x60;LIVEBOARD&#x60; and &#x60;ANSWER&#x60; object types are
-     * not supported. For more information, see [ABAC via tokens
+     * &#x60;LOGICAL_TABLE&#x60;. For more information, see [ABAC via tokens
      * Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).
      * ##### Just-in-time provisioning For just-in-time user creation and provisioning, define the
      * following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
@@ -13487,7 +14123,9 @@ public class ThoughtSpotRestApi {
      * to &#x60;true&#x60; if the user is not available in ThoughtSpot. If the user already exists
      * in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60; in the
      * API request, the user properties such as the display name, email, Org and group assignment
-     * will not be updated with new values. For more information, see [Just-in-time
+     * will not be updated with new values. If &#x60;auto_create&#x60; is set to &#x60;true&#x60;,
+     * it won&#39;t create formula variables and hence won&#39;t be applicable for
+     * &#x60;variable_values&#x60;. For more information, see [Just-in-time
      * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). #####
      * Important point to note All options in the token creation APIs that define access to the
      * content in ThoughtSpot will do so during the token creation and not when the token is being
@@ -13495,7 +14133,13 @@ public class ThoughtSpotRestApi {
      * the authentication token is created. Persist options such as &#x60;APPEND&#x60;,
      * &#x60;REPLACE&#x60;, &#x60;RESET&#x60; will persist security parameters on the user profile
      * when the token is created, while Persist option &#x60;NONE&#x60; will not persist anything
-     * but will be honoured in the session.
+     * but will be honoured in the session. ##### Formula Variables Before using variables_values,
+     * variables must be created using Create Variable API with type as Formula_Variable
+     * (/api/rest/2.0/template/variables/create) The persist_option RESET and NONE cannot be used
+     * when variable_values are provided in the request. If you are working with variable_values,
+     * you must use other (APPEND, REPLACE) supported modes. If you want to use RESET or NONE, do
+     * not pass any variable_values. In such cases, variable_values will remain unaffected. When
+     * using object_id with variable_values, models are supported.
      *
      * @param getCustomAccessTokenRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -17567,6 +18211,217 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
+     * Build call for searchCommunicationChannelPreferences
+     *
+     * @param searchCommunicationChannelPreferencesRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Communication channel preferences retrieved successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call searchCommunicationChannelPreferencesCall(
+            SearchCommunicationChannelPreferencesRequest
+                    searchCommunicationChannelPreferencesRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = searchCommunicationChannelPreferencesRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/system/preferences/communication-channels/search";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call searchCommunicationChannelPreferencesValidateBeforeCall(
+            SearchCommunicationChannelPreferencesRequest
+                    searchCommunicationChannelPreferencesRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'searchCommunicationChannelPreferencesRequest' is set
+        if (searchCommunicationChannelPreferencesRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'searchCommunicationChannelPreferencesRequest'"
+                            + " when calling searchCommunicationChannelPreferences(Async)");
+        }
+
+        return searchCommunicationChannelPreferencesCall(
+                searchCommunicationChannelPreferencesRequest, _callback);
+    }
+
+    /**
+     * Version: 10.14.0.cl or later Fetch communication channel preferences. - Use
+     * &#x60;cluster_preferences&#x60; to fetch the default preferences for your ThoughtSpot
+     * application instance. - If your instance has
+     * [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), use
+     * &#x60;org_preferences&#x60; to fetch any Org-specific preferences that override the defaults.
+     * Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60;
+     * (**Has developer privilege**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
+     * &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can manage application settings**) privilege are
+     * also authorized to perform this action.
+     *
+     * @param searchCommunicationChannelPreferencesRequest (required)
+     * @return CommunicationChannelPreferencesResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Communication channel preferences retrieved successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public CommunicationChannelPreferencesResponse searchCommunicationChannelPreferences(
+            SearchCommunicationChannelPreferencesRequest
+                    searchCommunicationChannelPreferencesRequest)
+            throws ApiException {
+        ApiResponse<CommunicationChannelPreferencesResponse> localVarResp =
+                searchCommunicationChannelPreferencesWithHttpInfo(
+                        searchCommunicationChannelPreferencesRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Version: 10.14.0.cl or later Fetch communication channel preferences. - Use
+     * &#x60;cluster_preferences&#x60; to fetch the default preferences for your ThoughtSpot
+     * application instance. - If your instance has
+     * [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), use
+     * &#x60;org_preferences&#x60; to fetch any Org-specific preferences that override the defaults.
+     * Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60;
+     * (**Has developer privilege**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
+     * &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can manage application settings**) privilege are
+     * also authorized to perform this action.
+     *
+     * @param searchCommunicationChannelPreferencesRequest (required)
+     * @return ApiResponse&lt;CommunicationChannelPreferencesResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Communication channel preferences retrieved successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<CommunicationChannelPreferencesResponse>
+            searchCommunicationChannelPreferencesWithHttpInfo(
+                    SearchCommunicationChannelPreferencesRequest
+                            searchCommunicationChannelPreferencesRequest)
+                    throws ApiException {
+        okhttp3.Call localVarCall =
+                searchCommunicationChannelPreferencesValidateBeforeCall(
+                        searchCommunicationChannelPreferencesRequest, null);
+        Type localVarReturnType =
+                new TypeToken<CommunicationChannelPreferencesResponse>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Version: 10.14.0.cl or later Fetch communication channel preferences. - Use
+     * &#x60;cluster_preferences&#x60; to fetch the default preferences for your ThoughtSpot
+     * application instance. - If your instance has
+     * [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), use
+     * &#x60;org_preferences&#x60; to fetch any Org-specific preferences that override the defaults.
+     * Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60;
+     * (**Has developer privilege**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
+     * &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can manage application settings**) privilege are
+     * also authorized to perform this action.
+     *
+     * @param searchCommunicationChannelPreferencesRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Communication channel preferences retrieved successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call searchCommunicationChannelPreferencesAsync(
+            SearchCommunicationChannelPreferencesRequest
+                    searchCommunicationChannelPreferencesRequest,
+            final ApiCallback<CommunicationChannelPreferencesResponse> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                searchCommunicationChannelPreferencesValidateBeforeCall(
+                        searchCommunicationChannelPreferencesRequest, _callback);
+        Type localVarReturnType =
+                new TypeToken<CommunicationChannelPreferencesResponse>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for searchConfig
      *
      * @param searchConfigRequest (required)
@@ -20107,13 +20962,14 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Search variables Version: 10.9.0.cl or later Allows searching for variables in ThoughtSpot.
-     * Requires ADMINISTRATION role. The API endpoint supports searching variables by: * Variable
-     * identifier (ID or name) * Variable type * Name pattern (case-insensitive, supports % for
-     * wildcard) The search results can be formatted in three ways: * METADATA_ONLY - Returns only
-     * variable metadata (default) * METADATA_AND_VALUES - Returns variable metadata and values *
-     * EDITABLE_METADATA_AND_VALUES - Returns only editable variable metadata and values The values
-     * can be filtered by scope: * org_identifier * principal_identifier * model_identifier
+     * Search variables Version: 10.14.0.cl or later Allows searching for variables in ThoughtSpot.
+     * Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage
+     * Formula Variables in the current organization scope. The API endpoint supports searching
+     * variables by: * Variable identifier (ID or name) * Variable type * Name pattern
+     * (case-insensitive, supports % for wildcard) The search results can be formatted in three
+     * ways: * METADATA - Returns only variable metadata (default) * METADATA_AND_VALUES - Returns
+     * variable metadata and values The values can be filtered by scope: * org_identifier *
+     * principal_identifier * model_identifier
      *
      * @param searchVariablesRequest (required)
      * @return List&lt;Variable&gt;
@@ -20138,13 +20994,14 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Search variables Version: 10.9.0.cl or later Allows searching for variables in ThoughtSpot.
-     * Requires ADMINISTRATION role. The API endpoint supports searching variables by: * Variable
-     * identifier (ID or name) * Variable type * Name pattern (case-insensitive, supports % for
-     * wildcard) The search results can be formatted in three ways: * METADATA_ONLY - Returns only
-     * variable metadata (default) * METADATA_AND_VALUES - Returns variable metadata and values *
-     * EDITABLE_METADATA_AND_VALUES - Returns only editable variable metadata and values The values
-     * can be filtered by scope: * org_identifier * principal_identifier * model_identifier
+     * Search variables Version: 10.14.0.cl or later Allows searching for variables in ThoughtSpot.
+     * Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage
+     * Formula Variables in the current organization scope. The API endpoint supports searching
+     * variables by: * Variable identifier (ID or name) * Variable type * Name pattern
+     * (case-insensitive, supports % for wildcard) The search results can be formatted in three
+     * ways: * METADATA - Returns only variable metadata (default) * METADATA_AND_VALUES - Returns
+     * variable metadata and values The values can be filtered by scope: * org_identifier *
+     * principal_identifier * model_identifier
      *
      * @param searchVariablesRequest (required)
      * @return ApiResponse&lt;List&lt;Variable&gt;&gt;
@@ -20169,14 +21026,14 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Search variables Version: 10.9.0.cl or later Allows searching for variables
-     * in ThoughtSpot. Requires ADMINISTRATION role. The API endpoint supports searching variables
-     * by: * Variable identifier (ID or name) * Variable type * Name pattern (case-insensitive,
-     * supports % for wildcard) The search results can be formatted in three ways: * METADATA_ONLY -
-     * Returns only variable metadata (default) * METADATA_AND_VALUES - Returns variable metadata
-     * and values * EDITABLE_METADATA_AND_VALUES - Returns only editable variable metadata and
-     * values The values can be filtered by scope: * org_identifier * principal_identifier *
-     * model_identifier
+     * (asynchronously) Search variables Version: 10.14.0.cl or later Allows searching for variables
+     * in ThoughtSpot. Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you
+     * to manage Formula Variables in the current organization scope. The API endpoint supports
+     * searching variables by: * Variable identifier (ID or name) * Variable type * Name pattern
+     * (case-insensitive, supports % for wildcard) The search results can be formatted in three
+     * ways: * METADATA - Returns only variable metadata (default) * METADATA_AND_VALUES - Returns
+     * variable metadata and values The values can be filtered by scope: * org_identifier *
+     * principal_identifier * model_identifier
      *
      * @param searchVariablesRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -20202,6 +21059,429 @@ public class ThoughtSpotRestApi {
         okhttp3.Call localVarCall =
                 searchVariablesValidateBeforeCall(searchVariablesRequest, _callback);
         Type localVarReturnType = new TypeToken<List<Variable>>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for searchWebhookConfigurations
+     *
+     * @param searchWebhookConfigurationsRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Webhook configurations retrieved successfully </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call searchWebhookConfigurationsCall(
+            SearchWebhookConfigurationsRequest searchWebhookConfigurationsRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = searchWebhookConfigurationsRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/webhooks/search";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call searchWebhookConfigurationsValidateBeforeCall(
+            SearchWebhookConfigurationsRequest searchWebhookConfigurationsRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'searchWebhookConfigurationsRequest' is set
+        if (searchWebhookConfigurationsRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'searchWebhookConfigurationsRequest' when"
+                            + " calling searchWebhookConfigurations(Async)");
+        }
+
+        return searchWebhookConfigurationsCall(searchWebhookConfigurationsRequest, _callback);
+    }
+
+    /**
+     * Version: 10.14.0.cl or later Searches for webhook configurations based on various criteria
+     * such as Org, webhook identifier, event type, with support for pagination and sorting. Returns
+     * matching webhook configurations with their complete details. Requires
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has
+     * developer privilege**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
+     * &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to
+     * perform this action.
+     *
+     * @param searchWebhookConfigurationsRequest (required)
+     * @return WebhookSearchResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Webhook configurations retrieved successfully </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public WebhookSearchResponse searchWebhookConfigurations(
+            SearchWebhookConfigurationsRequest searchWebhookConfigurationsRequest)
+            throws ApiException {
+        ApiResponse<WebhookSearchResponse> localVarResp =
+                searchWebhookConfigurationsWithHttpInfo(searchWebhookConfigurationsRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Version: 10.14.0.cl or later Searches for webhook configurations based on various criteria
+     * such as Org, webhook identifier, event type, with support for pagination and sorting. Returns
+     * matching webhook configurations with their complete details. Requires
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has
+     * developer privilege**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
+     * &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to
+     * perform this action.
+     *
+     * @param searchWebhookConfigurationsRequest (required)
+     * @return ApiResponse&lt;WebhookSearchResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Webhook configurations retrieved successfully </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<WebhookSearchResponse> searchWebhookConfigurationsWithHttpInfo(
+            SearchWebhookConfigurationsRequest searchWebhookConfigurationsRequest)
+            throws ApiException {
+        okhttp3.Call localVarCall =
+                searchWebhookConfigurationsValidateBeforeCall(
+                        searchWebhookConfigurationsRequest, null);
+        Type localVarReturnType = new TypeToken<WebhookSearchResponse>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Version: 10.14.0.cl or later Searches for webhook configurations based on
+     * various criteria such as Org, webhook identifier, event type, with support for pagination and
+     * sorting. Returns matching webhook configurations with their complete details. Requires
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has
+     * developer privilege**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
+     * &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to
+     * perform this action.
+     *
+     * @param searchWebhookConfigurationsRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Webhook configurations retrieved successfully </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call searchWebhookConfigurationsAsync(
+            SearchWebhookConfigurationsRequest searchWebhookConfigurationsRequest,
+            final ApiCallback<WebhookSearchResponse> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                searchWebhookConfigurationsValidateBeforeCall(
+                        searchWebhookConfigurationsRequest, _callback);
+        Type localVarReturnType = new TypeToken<WebhookSearchResponse>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for sendAgentMessage
+     *
+     * @param conversationIdentifier Unique identifier for the conversation (used to track context)
+     *     (required)
+     * @param sendAgentMessageRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call sendAgentMessageCall(
+            String conversationIdentifier,
+            SendAgentMessageRequest sendAgentMessageRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = sendAgentMessageRequest;
+
+        // create path and map variables
+        String localVarPath =
+                "/api/rest/2.0/ai/agent/{conversation_identifier}/converse"
+                        .replace(
+                                "{" + "conversation_identifier" + "}",
+                                localVarApiClient.escapeString(conversationIdentifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call sendAgentMessageValidateBeforeCall(
+            String conversationIdentifier,
+            SendAgentMessageRequest sendAgentMessageRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'conversationIdentifier' is set
+        if (conversationIdentifier == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'conversationIdentifier' when calling"
+                            + " sendAgentMessage(Async)");
+        }
+
+        // verify the required parameter 'sendAgentMessageRequest' is set
+        if (sendAgentMessageRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'sendAgentMessageRequest' when calling"
+                            + " sendAgentMessage(Async)");
+        }
+
+        return sendAgentMessageCall(conversationIdentifier, sendAgentMessageRequest, _callback);
+    }
+
+    /**
+     * Version: 10.13.0.cl or later This API allows users to initiate or continue an agent (Spotter)
+     * conversation by submitting one or more natural language messages. To use this API, the user
+     * must have access to the relevant conversational session (via conversation_identifier) and
+     * submit at least one message. #### Usage guidelines To initiate or continue a conversation,
+     * the request must include: - &#x60;conversation_identifier&#x60;: a unique session ID for
+     * continuity and message tracking - &#x60;messages&#x60;: an array of one or more text
+     * messages, each with a value and type The API returns a array of object with a type, message,
+     * and metadata. - &#x60;type&#x60;: Type of the message — text, answer, or error. -
+     * &#x60;message&#x60;: Main content of the response. - &#x60;metadata&#x60;: Additional info
+     * depending on the message type. &gt; ###### Note: &gt; * This endpoint is currently in Beta.
+     * Breaking changes may be introduced before the endpoint is made Generally Available. &gt; *
+     * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your
+     * cluster.
+     *
+     * @param conversationIdentifier Unique identifier for the conversation (used to track context)
+     *     (required)
+     * @param sendAgentMessageRequest (required)
+     * @return Object
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public Object sendAgentMessage(
+            String conversationIdentifier, SendAgentMessageRequest sendAgentMessageRequest)
+            throws ApiException {
+        ApiResponse<Object> localVarResp =
+                sendAgentMessageWithHttpInfo(conversationIdentifier, sendAgentMessageRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Version: 10.13.0.cl or later This API allows users to initiate or continue an agent (Spotter)
+     * conversation by submitting one or more natural language messages. To use this API, the user
+     * must have access to the relevant conversational session (via conversation_identifier) and
+     * submit at least one message. #### Usage guidelines To initiate or continue a conversation,
+     * the request must include: - &#x60;conversation_identifier&#x60;: a unique session ID for
+     * continuity and message tracking - &#x60;messages&#x60;: an array of one or more text
+     * messages, each with a value and type The API returns a array of object with a type, message,
+     * and metadata. - &#x60;type&#x60;: Type of the message — text, answer, or error. -
+     * &#x60;message&#x60;: Main content of the response. - &#x60;metadata&#x60;: Additional info
+     * depending on the message type. &gt; ###### Note: &gt; * This endpoint is currently in Beta.
+     * Breaking changes may be introduced before the endpoint is made Generally Available. &gt; *
+     * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your
+     * cluster.
+     *
+     * @param conversationIdentifier Unique identifier for the conversation (used to track context)
+     *     (required)
+     * @param sendAgentMessageRequest (required)
+     * @return ApiResponse&lt;Object&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<Object> sendAgentMessageWithHttpInfo(
+            String conversationIdentifier, SendAgentMessageRequest sendAgentMessageRequest)
+            throws ApiException {
+        okhttp3.Call localVarCall =
+                sendAgentMessageValidateBeforeCall(
+                        conversationIdentifier, sendAgentMessageRequest, null);
+        Type localVarReturnType = new TypeToken<Object>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Version: 10.13.0.cl or later This API allows users to initiate or continue
+     * an agent (Spotter) conversation by submitting one or more natural language messages. To use
+     * this API, the user must have access to the relevant conversational session (via
+     * conversation_identifier) and submit at least one message. #### Usage guidelines To initiate
+     * or continue a conversation, the request must include: - &#x60;conversation_identifier&#x60;:
+     * a unique session ID for continuity and message tracking - &#x60;messages&#x60;: an array of
+     * one or more text messages, each with a value and type The API returns a array of object with
+     * a type, message, and metadata. - &#x60;type&#x60;: Type of the message — text, answer, or
+     * error. - &#x60;message&#x60;: Main content of the response. - &#x60;metadata&#x60;:
+     * Additional info depending on the message type. &gt; ###### Note: &gt; * This endpoint is
+     * currently in Beta. Breaking changes may be introduced before the endpoint is made Generally
+     * Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to
+     * enable Spotter on your cluster.
+     *
+     * @param conversationIdentifier Unique identifier for the conversation (used to track context)
+     *     (required)
+     * @param sendAgentMessageRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call sendAgentMessageAsync(
+            String conversationIdentifier,
+            SendAgentMessageRequest sendAgentMessageRequest,
+            final ApiCallback<Object> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                sendAgentMessageValidateBeforeCall(
+                        conversationIdentifier, sendAgentMessageRequest, _callback);
+        Type localVarReturnType = new TypeToken<Object>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -22842,31 +24122,71 @@ public class ThoughtSpotRestApi {
      * explicitly provide the authenticationType property in the payload. If you do not specify
      * authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type. * A
      * JSON map of configuration attributes, database details, and table properties in
-     * &#x60;data_warehouse_config&#x60; as shown in the following example: &#x60;&#x60;&#x60; {
-     * \&quot;configuration\&quot;:{ \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
-     * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
-     * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
-     * \&quot;externalDatabases\&quot;:[ { \&quot;name\&quot;:\&quot;AllDatatypes\&quot;,
-     * \&quot;isAutoCreated\&quot;:false, \&quot;schemas\&quot;:[ {
-     * \&quot;name\&quot;:\&quot;alldatatypes\&quot;, \&quot;tables\&quot;:[ {
-     * \&quot;name\&quot;:\&quot;allDatatypes\&quot;, \&quot;type\&quot;:\&quot;TABLE\&quot;,
-     * \&quot;description\&quot;:\&quot;\&quot;, \&quot;selected\&quot;:true,
-     * \&quot;linked\&quot;:true, \&quot;columns\&quot;:[ {
-     * \&quot;name\&quot;:\&quot;CNUMBER\&quot;, \&quot;type\&quot;:\&quot;INT64\&quot;,
-     * \&quot;canImport\&quot;:true, \&quot;selected\&quot;:true, \&quot;isLinkedActive\&quot;:true,
-     * \&quot;isImported\&quot;:false, \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,
-     * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
-     * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; }, {
-     * \&quot;name\&quot;:\&quot;CDECIMAL\&quot;, \&quot;type\&quot;:\&quot;INT64\&quot;,
-     * \&quot;canImport\&quot;:true, \&quot;selected\&quot;:true, \&quot;isLinkedActive\&quot;:true,
-     * \&quot;isImported\&quot;:false, \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,
-     * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
-     * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; } ] } ] } ] } ] } &#x60;&#x60;&#x60; 3. If
-     * you are updating a configuration attribute, connection name, or description, you can set
-     * &#x60;validate&#x60; to &#x60;false&#x60;. **NOTE:** If the &#x60;authentication_type&#x60;
-     * is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType
-     * property in the payload. If you do not specify authenticationType, the API will default to
-     * SERVICE_ACCOUNT as the authentication type. * A JSON map of configuration attributes in
+     * &#x60;data_warehouse_config&#x60; as shown in the following example: * This is an example of
+     * updating a single table in a empty connection: &#x60;&#x60;&#x60; {
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
+     * \&quot;externalDatabases\&quot;: [ { \&quot;name\&quot;: \&quot;DEVELOPMENT\&quot;,
+     * \&quot;isAutoCreated\&quot;: false, \&quot;schemas\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;TS_dataset\&quot;, \&quot;tables\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;DEMORENAME\&quot;, \&quot;type\&quot;: \&quot;TABLE\&quot;, \&quot;description\&quot;:
+     * \&quot;\&quot;, \&quot;selected\&quot;: true, \&quot;linked\&quot;: true, \&quot;gid\&quot;:
+     * 0, \&quot;datasetId\&quot;: \&quot;-1\&quot;, \&quot;subType\&quot;: \&quot;\&quot;,
+     * \&quot;reportId\&quot;: \&quot;\&quot;, \&quot;viewId\&quot;: \&quot;\&quot;,
+     * \&quot;columns\&quot;: [ { \&quot;name\&quot;: \&quot;Col1\&quot;, \&quot;type\&quot;:
+     * \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;: true, \&quot;selected\&quot;: true,
+     * \&quot;description\&quot;: \&quot;\&quot;, \&quot;isLinkedActive\&quot;: true,
+     * \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;: \&quot;Col2\&quot;,
+     * \&quot;type\&quot;: \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;: true,
+     * \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;Col3\&quot;, \&quot;type\&quot;: \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;: true,
+     * \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;Col312\&quot;, \&quot;type\&quot;: \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;:
+     * true, \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;Col4\&quot;, \&quot;type\&quot;: \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;: true,
+     * \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false } ],
+     * \&quot;relationships\&quot;: [] } ] } ] } ], \&quot;configuration\&quot;: {
+     * \&quot;password\&quot;: \&quot;\&quot;, \&quot;database\&quot;: \&quot;DEVELOPMENT\&quot;,
+     * \&quot;role\&quot;: \&quot;DEV\&quot;, \&quot;accountName\&quot;:
+     * \&quot;thoughtspot_partner\&quot;, \&quot;warehouse\&quot;: \&quot;DEMO_WH\&quot;,
+     * \&quot;user\&quot;: \&quot;DEV_USER\&quot; } } &#x60;&#x60;&#x60; * This is an example of
+     * updating a single table in an existing connection with tables: &#x60;&#x60;&#x60; {
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
+     * \&quot;externalDatabases\&quot;: [ { \&quot;name\&quot;: \&quot;DEVELOPMENT\&quot;,
+     * \&quot;isAutoCreated\&quot;: false, \&quot;schemas\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;TS_dataset\&quot;, \&quot;tables\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;CUSTOMER\&quot;, \&quot;type\&quot;: \&quot;TABLE\&quot;, \&quot;description\&quot;:
+     * \&quot;\&quot;, \&quot;selected\&quot;: true, \&quot;linked\&quot;: true, \&quot;gid\&quot;:
+     * 0, \&quot;datasetId\&quot;: \&quot;-1\&quot;, \&quot;subType\&quot;: \&quot;\&quot;,
+     * \&quot;reportId\&quot;: \&quot;\&quot;, \&quot;viewId\&quot;: \&quot;\&quot;,
+     * \&quot;columns\&quot;: [], \&quot;relationships\&quot;: [] }, { \&quot;name\&quot;:
+     * \&quot;tpch5k_falcon_default_schema_users\&quot;, \&quot;type\&quot;: \&quot;TABLE\&quot;,
+     * \&quot;description\&quot;: \&quot;\&quot;, \&quot;selected\&quot;: true,
+     * \&quot;linked\&quot;: true, \&quot;gid\&quot;: 0, \&quot;datasetId\&quot;: \&quot;-1\&quot;,
+     * \&quot;subType\&quot;: \&quot;\&quot;, \&quot;reportId\&quot;: \&quot;\&quot;,
+     * \&quot;viewId\&quot;: \&quot;\&quot;, \&quot;columns\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;user_id\&quot;, \&quot;type\&quot;: \&quot;INT64\&quot;, \&quot;canImport\&quot;:
+     * true, \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;product_id\&quot;, \&quot;type\&quot;: \&quot;INT64\&quot;, \&quot;canImport\&quot;:
+     * true, \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;user_cost\&quot;, \&quot;type\&quot;: \&quot;INT64\&quot;, \&quot;canImport\&quot;:
+     * true, \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false } ],
+     * \&quot;relationships\&quot;: [] } ] } ] } ], \&quot;configuration\&quot;: {
+     * \&quot;password\&quot;: \&quot;\&quot;, \&quot;database\&quot;: \&quot;DEVELOPMENT\&quot;,
+     * \&quot;role\&quot;: \&quot;DEV\&quot;, \&quot;accountName\&quot;:
+     * \&quot;thoughtspot_partner\&quot;, \&quot;warehouse\&quot;: \&quot;DEMO_WH\&quot;,
+     * \&quot;user\&quot;: \&quot;DEV_USER\&quot; } } &#x60;&#x60;&#x60; 3. If you are updating a
+     * configuration attribute, connection name, or description, you can set &#x60;validate&#x60; to
+     * &#x60;false&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is anything other than
+     * SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload.
+     * If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the
+     * authentication type. * A JSON map of configuration attributes in
      * &#x60;data_warehouse_config&#x60;. The following example shows the configuration attributes
      * for a Snowflake connection: &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
      * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
@@ -22909,31 +24229,71 @@ public class ThoughtSpotRestApi {
      * explicitly provide the authenticationType property in the payload. If you do not specify
      * authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type. * A
      * JSON map of configuration attributes, database details, and table properties in
-     * &#x60;data_warehouse_config&#x60; as shown in the following example: &#x60;&#x60;&#x60; {
-     * \&quot;configuration\&quot;:{ \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
-     * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
-     * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
-     * \&quot;externalDatabases\&quot;:[ { \&quot;name\&quot;:\&quot;AllDatatypes\&quot;,
-     * \&quot;isAutoCreated\&quot;:false, \&quot;schemas\&quot;:[ {
-     * \&quot;name\&quot;:\&quot;alldatatypes\&quot;, \&quot;tables\&quot;:[ {
-     * \&quot;name\&quot;:\&quot;allDatatypes\&quot;, \&quot;type\&quot;:\&quot;TABLE\&quot;,
-     * \&quot;description\&quot;:\&quot;\&quot;, \&quot;selected\&quot;:true,
-     * \&quot;linked\&quot;:true, \&quot;columns\&quot;:[ {
-     * \&quot;name\&quot;:\&quot;CNUMBER\&quot;, \&quot;type\&quot;:\&quot;INT64\&quot;,
-     * \&quot;canImport\&quot;:true, \&quot;selected\&quot;:true, \&quot;isLinkedActive\&quot;:true,
-     * \&quot;isImported\&quot;:false, \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,
-     * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
-     * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; }, {
-     * \&quot;name\&quot;:\&quot;CDECIMAL\&quot;, \&quot;type\&quot;:\&quot;INT64\&quot;,
-     * \&quot;canImport\&quot;:true, \&quot;selected\&quot;:true, \&quot;isLinkedActive\&quot;:true,
-     * \&quot;isImported\&quot;:false, \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,
-     * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
-     * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; } ] } ] } ] } ] } &#x60;&#x60;&#x60; 3. If
-     * you are updating a configuration attribute, connection name, or description, you can set
-     * &#x60;validate&#x60; to &#x60;false&#x60;. **NOTE:** If the &#x60;authentication_type&#x60;
-     * is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType
-     * property in the payload. If you do not specify authenticationType, the API will default to
-     * SERVICE_ACCOUNT as the authentication type. * A JSON map of configuration attributes in
+     * &#x60;data_warehouse_config&#x60; as shown in the following example: * This is an example of
+     * updating a single table in a empty connection: &#x60;&#x60;&#x60; {
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
+     * \&quot;externalDatabases\&quot;: [ { \&quot;name\&quot;: \&quot;DEVELOPMENT\&quot;,
+     * \&quot;isAutoCreated\&quot;: false, \&quot;schemas\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;TS_dataset\&quot;, \&quot;tables\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;DEMORENAME\&quot;, \&quot;type\&quot;: \&quot;TABLE\&quot;, \&quot;description\&quot;:
+     * \&quot;\&quot;, \&quot;selected\&quot;: true, \&quot;linked\&quot;: true, \&quot;gid\&quot;:
+     * 0, \&quot;datasetId\&quot;: \&quot;-1\&quot;, \&quot;subType\&quot;: \&quot;\&quot;,
+     * \&quot;reportId\&quot;: \&quot;\&quot;, \&quot;viewId\&quot;: \&quot;\&quot;,
+     * \&quot;columns\&quot;: [ { \&quot;name\&quot;: \&quot;Col1\&quot;, \&quot;type\&quot;:
+     * \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;: true, \&quot;selected\&quot;: true,
+     * \&quot;description\&quot;: \&quot;\&quot;, \&quot;isLinkedActive\&quot;: true,
+     * \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;: \&quot;Col2\&quot;,
+     * \&quot;type\&quot;: \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;: true,
+     * \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;Col3\&quot;, \&quot;type\&quot;: \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;: true,
+     * \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;Col312\&quot;, \&quot;type\&quot;: \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;:
+     * true, \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;Col4\&quot;, \&quot;type\&quot;: \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;: true,
+     * \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false } ],
+     * \&quot;relationships\&quot;: [] } ] } ] } ], \&quot;configuration\&quot;: {
+     * \&quot;password\&quot;: \&quot;\&quot;, \&quot;database\&quot;: \&quot;DEVELOPMENT\&quot;,
+     * \&quot;role\&quot;: \&quot;DEV\&quot;, \&quot;accountName\&quot;:
+     * \&quot;thoughtspot_partner\&quot;, \&quot;warehouse\&quot;: \&quot;DEMO_WH\&quot;,
+     * \&quot;user\&quot;: \&quot;DEV_USER\&quot; } } &#x60;&#x60;&#x60; * This is an example of
+     * updating a single table in an existing connection with tables: &#x60;&#x60;&#x60; {
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
+     * \&quot;externalDatabases\&quot;: [ { \&quot;name\&quot;: \&quot;DEVELOPMENT\&quot;,
+     * \&quot;isAutoCreated\&quot;: false, \&quot;schemas\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;TS_dataset\&quot;, \&quot;tables\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;CUSTOMER\&quot;, \&quot;type\&quot;: \&quot;TABLE\&quot;, \&quot;description\&quot;:
+     * \&quot;\&quot;, \&quot;selected\&quot;: true, \&quot;linked\&quot;: true, \&quot;gid\&quot;:
+     * 0, \&quot;datasetId\&quot;: \&quot;-1\&quot;, \&quot;subType\&quot;: \&quot;\&quot;,
+     * \&quot;reportId\&quot;: \&quot;\&quot;, \&quot;viewId\&quot;: \&quot;\&quot;,
+     * \&quot;columns\&quot;: [], \&quot;relationships\&quot;: [] }, { \&quot;name\&quot;:
+     * \&quot;tpch5k_falcon_default_schema_users\&quot;, \&quot;type\&quot;: \&quot;TABLE\&quot;,
+     * \&quot;description\&quot;: \&quot;\&quot;, \&quot;selected\&quot;: true,
+     * \&quot;linked\&quot;: true, \&quot;gid\&quot;: 0, \&quot;datasetId\&quot;: \&quot;-1\&quot;,
+     * \&quot;subType\&quot;: \&quot;\&quot;, \&quot;reportId\&quot;: \&quot;\&quot;,
+     * \&quot;viewId\&quot;: \&quot;\&quot;, \&quot;columns\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;user_id\&quot;, \&quot;type\&quot;: \&quot;INT64\&quot;, \&quot;canImport\&quot;:
+     * true, \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;product_id\&quot;, \&quot;type\&quot;: \&quot;INT64\&quot;, \&quot;canImport\&quot;:
+     * true, \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;user_cost\&quot;, \&quot;type\&quot;: \&quot;INT64\&quot;, \&quot;canImport\&quot;:
+     * true, \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false } ],
+     * \&quot;relationships\&quot;: [] } ] } ] } ], \&quot;configuration\&quot;: {
+     * \&quot;password\&quot;: \&quot;\&quot;, \&quot;database\&quot;: \&quot;DEVELOPMENT\&quot;,
+     * \&quot;role\&quot;: \&quot;DEV\&quot;, \&quot;accountName\&quot;:
+     * \&quot;thoughtspot_partner\&quot;, \&quot;warehouse\&quot;: \&quot;DEMO_WH\&quot;,
+     * \&quot;user\&quot;: \&quot;DEV_USER\&quot; } } &#x60;&#x60;&#x60; 3. If you are updating a
+     * configuration attribute, connection name, or description, you can set &#x60;validate&#x60; to
+     * &#x60;false&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is anything other than
+     * SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload.
+     * If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the
+     * authentication type. * A JSON map of configuration attributes in
      * &#x60;data_warehouse_config&#x60;. The following example shows the configuration attributes
      * for a Snowflake connection: &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
      * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
@@ -22980,32 +24340,71 @@ public class ThoughtSpotRestApi {
      * SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload.
      * If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the
      * authentication type. * A JSON map of configuration attributes, database details, and table
-     * properties in &#x60;data_warehouse_config&#x60; as shown in the following example:
-     * &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
-     * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
-     * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
-     * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
-     * \&quot;externalDatabases\&quot;:[ { \&quot;name\&quot;:\&quot;AllDatatypes\&quot;,
-     * \&quot;isAutoCreated\&quot;:false, \&quot;schemas\&quot;:[ {
-     * \&quot;name\&quot;:\&quot;alldatatypes\&quot;, \&quot;tables\&quot;:[ {
-     * \&quot;name\&quot;:\&quot;allDatatypes\&quot;, \&quot;type\&quot;:\&quot;TABLE\&quot;,
-     * \&quot;description\&quot;:\&quot;\&quot;, \&quot;selected\&quot;:true,
-     * \&quot;linked\&quot;:true, \&quot;columns\&quot;:[ {
-     * \&quot;name\&quot;:\&quot;CNUMBER\&quot;, \&quot;type\&quot;:\&quot;INT64\&quot;,
-     * \&quot;canImport\&quot;:true, \&quot;selected\&quot;:true, \&quot;isLinkedActive\&quot;:true,
-     * \&quot;isImported\&quot;:false, \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,
-     * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
-     * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; }, {
-     * \&quot;name\&quot;:\&quot;CDECIMAL\&quot;, \&quot;type\&quot;:\&quot;INT64\&quot;,
-     * \&quot;canImport\&quot;:true, \&quot;selected\&quot;:true, \&quot;isLinkedActive\&quot;:true,
-     * \&quot;isImported\&quot;:false, \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,
-     * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
-     * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; } ] } ] } ] } ] } &#x60;&#x60;&#x60; 3. If
-     * you are updating a configuration attribute, connection name, or description, you can set
-     * &#x60;validate&#x60; to &#x60;false&#x60;. **NOTE:** If the &#x60;authentication_type&#x60;
-     * is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType
-     * property in the payload. If you do not specify authenticationType, the API will default to
-     * SERVICE_ACCOUNT as the authentication type. * A JSON map of configuration attributes in
+     * properties in &#x60;data_warehouse_config&#x60; as shown in the following example: * This is
+     * an example of updating a single table in a empty connection: &#x60;&#x60;&#x60; {
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
+     * \&quot;externalDatabases\&quot;: [ { \&quot;name\&quot;: \&quot;DEVELOPMENT\&quot;,
+     * \&quot;isAutoCreated\&quot;: false, \&quot;schemas\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;TS_dataset\&quot;, \&quot;tables\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;DEMORENAME\&quot;, \&quot;type\&quot;: \&quot;TABLE\&quot;, \&quot;description\&quot;:
+     * \&quot;\&quot;, \&quot;selected\&quot;: true, \&quot;linked\&quot;: true, \&quot;gid\&quot;:
+     * 0, \&quot;datasetId\&quot;: \&quot;-1\&quot;, \&quot;subType\&quot;: \&quot;\&quot;,
+     * \&quot;reportId\&quot;: \&quot;\&quot;, \&quot;viewId\&quot;: \&quot;\&quot;,
+     * \&quot;columns\&quot;: [ { \&quot;name\&quot;: \&quot;Col1\&quot;, \&quot;type\&quot;:
+     * \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;: true, \&quot;selected\&quot;: true,
+     * \&quot;description\&quot;: \&quot;\&quot;, \&quot;isLinkedActive\&quot;: true,
+     * \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;: \&quot;Col2\&quot;,
+     * \&quot;type\&quot;: \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;: true,
+     * \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;Col3\&quot;, \&quot;type\&quot;: \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;: true,
+     * \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;Col312\&quot;, \&quot;type\&quot;: \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;:
+     * true, \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;Col4\&quot;, \&quot;type\&quot;: \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;: true,
+     * \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false } ],
+     * \&quot;relationships\&quot;: [] } ] } ] } ], \&quot;configuration\&quot;: {
+     * \&quot;password\&quot;: \&quot;\&quot;, \&quot;database\&quot;: \&quot;DEVELOPMENT\&quot;,
+     * \&quot;role\&quot;: \&quot;DEV\&quot;, \&quot;accountName\&quot;:
+     * \&quot;thoughtspot_partner\&quot;, \&quot;warehouse\&quot;: \&quot;DEMO_WH\&quot;,
+     * \&quot;user\&quot;: \&quot;DEV_USER\&quot; } } &#x60;&#x60;&#x60; * This is an example of
+     * updating a single table in an existing connection with tables: &#x60;&#x60;&#x60; {
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
+     * \&quot;externalDatabases\&quot;: [ { \&quot;name\&quot;: \&quot;DEVELOPMENT\&quot;,
+     * \&quot;isAutoCreated\&quot;: false, \&quot;schemas\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;TS_dataset\&quot;, \&quot;tables\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;CUSTOMER\&quot;, \&quot;type\&quot;: \&quot;TABLE\&quot;, \&quot;description\&quot;:
+     * \&quot;\&quot;, \&quot;selected\&quot;: true, \&quot;linked\&quot;: true, \&quot;gid\&quot;:
+     * 0, \&quot;datasetId\&quot;: \&quot;-1\&quot;, \&quot;subType\&quot;: \&quot;\&quot;,
+     * \&quot;reportId\&quot;: \&quot;\&quot;, \&quot;viewId\&quot;: \&quot;\&quot;,
+     * \&quot;columns\&quot;: [], \&quot;relationships\&quot;: [] }, { \&quot;name\&quot;:
+     * \&quot;tpch5k_falcon_default_schema_users\&quot;, \&quot;type\&quot;: \&quot;TABLE\&quot;,
+     * \&quot;description\&quot;: \&quot;\&quot;, \&quot;selected\&quot;: true,
+     * \&quot;linked\&quot;: true, \&quot;gid\&quot;: 0, \&quot;datasetId\&quot;: \&quot;-1\&quot;,
+     * \&quot;subType\&quot;: \&quot;\&quot;, \&quot;reportId\&quot;: \&quot;\&quot;,
+     * \&quot;viewId\&quot;: \&quot;\&quot;, \&quot;columns\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;user_id\&quot;, \&quot;type\&quot;: \&quot;INT64\&quot;, \&quot;canImport\&quot;:
+     * true, \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;product_id\&quot;, \&quot;type\&quot;: \&quot;INT64\&quot;, \&quot;canImport\&quot;:
+     * true, \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;user_cost\&quot;, \&quot;type\&quot;: \&quot;INT64\&quot;, \&quot;canImport\&quot;:
+     * true, \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false } ],
+     * \&quot;relationships\&quot;: [] } ] } ] } ], \&quot;configuration\&quot;: {
+     * \&quot;password\&quot;: \&quot;\&quot;, \&quot;database\&quot;: \&quot;DEVELOPMENT\&quot;,
+     * \&quot;role\&quot;: \&quot;DEV\&quot;, \&quot;accountName\&quot;:
+     * \&quot;thoughtspot_partner\&quot;, \&quot;warehouse\&quot;: \&quot;DEMO_WH\&quot;,
+     * \&quot;user\&quot;: \&quot;DEV_USER\&quot; } } &#x60;&#x60;&#x60; 3. If you are updating a
+     * configuration attribute, connection name, or description, you can set &#x60;validate&#x60; to
+     * &#x60;false&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is anything other than
+     * SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload.
+     * If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the
+     * authentication type. * A JSON map of configuration attributes in
      * &#x60;data_warehouse_config&#x60;. The following example shows the configuration attributes
      * for a Snowflake connection: &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
      * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
@@ -25788,7 +27187,7 @@ public class ThoughtSpotRestApi {
      *     <table border="1">
      * <caption>Response Details</caption>
      * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Updating the variable is successful. </td><td>  -  </td></tr>
+     * <tr><td> 204 </td><td> Variable name updated successfully. </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
      * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -25880,9 +27279,10 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Update a variable&#39;s properties Version: 10.9.0.cl or later Allows updating a
-     * variable&#39;s properties in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The
-     * API endpoint allows updating: * The variable name
+     * Update a variable&#39;s name Version: 10.14.0.cl or later Allows updating a variable&#39;s
+     * properties in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The
+     * CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current
+     * organization scope. The API endpoint allows updating: * The variable name
      *
      * @param identifier Unique id or name of the variable to update. (required)
      * @param updateVariableRequest (required)
@@ -25892,7 +27292,7 @@ public class ThoughtSpotRestApi {
      *     <table border="1">
      * <caption>Response Details</caption>
      * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Updating the variable is successful. </td><td>  -  </td></tr>
+     * <tr><td> 204 </td><td> Variable name updated successfully. </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
      * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -25905,9 +27305,10 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Update a variable&#39;s properties Version: 10.9.0.cl or later Allows updating a
-     * variable&#39;s properties in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The
-     * API endpoint allows updating: * The variable name
+     * Update a variable&#39;s name Version: 10.14.0.cl or later Allows updating a variable&#39;s
+     * properties in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The
+     * CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current
+     * organization scope. The API endpoint allows updating: * The variable name
      *
      * @param identifier Unique id or name of the variable to update. (required)
      * @param updateVariableRequest (required)
@@ -25918,7 +27319,7 @@ public class ThoughtSpotRestApi {
      *     <table border="1">
      * <caption>Response Details</caption>
      * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Updating the variable is successful. </td><td>  -  </td></tr>
+     * <tr><td> 204 </td><td> Variable name updated successfully. </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
      * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -25933,9 +27334,10 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Update a variable&#39;s properties Version: 10.9.0.cl or later Allows
-     * updating a variable&#39;s properties in ThoughtSpot. Requires ADMINISTRATION role and TENANT
-     * scope. The API endpoint allows updating: * The variable name
+     * (asynchronously) Update a variable&#39;s name Version: 10.14.0.cl or later Allows updating a
+     * variable&#39;s properties in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The
+     * CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current
+     * organization scope. The API endpoint allows updating: * The variable name
      *
      * @param identifier Unique id or name of the variable to update. (required)
      * @param updateVariableRequest (required)
@@ -25947,7 +27349,7 @@ public class ThoughtSpotRestApi {
      *     <table border="1">
      * <caption>Response Details</caption>
      * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Updating the variable is successful. </td><td>  -  </td></tr>
+     * <tr><td> 204 </td><td> Variable name updated successfully. </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
      * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -25976,7 +27378,7 @@ public class ThoughtSpotRestApi {
      *     <table border="1">
      * <caption>Response Details</caption>
      * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Updating variable values is successful. </td><td>  -  </td></tr>
+     * <tr><td> 204 </td><td> Variable values updated successfully. </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
      * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -26002,7 +27404,7 @@ public class ThoughtSpotRestApi {
         Object localVarPostBody = updateVariableValuesRequest;
 
         // create path and map variables
-        String localVarPath = "/api/rest/2.0/template/variables/update";
+        String localVarPath = "/api/rest/2.0/template/variables/update-values";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -26053,16 +27455,17 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Update values for multiple variables Version: 10.9.0.cl or later Allows updating values for
-     * multiple variables in ThoughtSpot. Requires ADMINISTRATION role. The API endpoint allows: *
-     * Adding new values to variables * Replacing existing values * Deleting values from variables
-     * When updating variable values, you need to specify: * The variable identifiers * The values
-     * to add/replace/remove for each variable * The operation to perform (ADD, REPLACE, REMOVE,
-     * CLEAR) Behaviour based on operation type: * ADD - Adds values to the variable if this is a
-     * list type variable, else same as replace. * REPLACE - Replaces all values of a given set of
-     * constraints with the current set of values. * REMOVE - Removes any values which match the set
-     * of conditions of the variables if this is a list type variable, else clears value. * CLEAR -
-     * Removes all constrains for a given variable, scope is ignored
+     * Update values for multiple variables Version: 10.14.0.cl or later Allows updating values for
+     * multiple variables in ThoughtSpot. Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES
+     * permission allows you to manage Formula Variables in the current organization scope. The API
+     * endpoint allows: * Adding new values to variables * Replacing existing values * Deleting
+     * values from variables When updating variable values, you need to specify: * The variable
+     * identifiers * The values to add/replace/remove for each variable * The operation to perform
+     * (ADD, REPLACE, REMOVE, CLEAR) Behaviour based on operation type: * ADD - Adds values to the
+     * variable if this is a list type variable, else same as replace. * REPLACE - Replaces all
+     * values of a given set of constraints with the current set of values. * REMOVE - Removes any
+     * values which match the set of conditions of the variables if this is a list type variable,
+     * else clears value. * CLEAR - Removes all constrains for a given variable, scope is ignored
      *
      * @param updateVariableValuesRequest (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -26071,7 +27474,7 @@ public class ThoughtSpotRestApi {
      *     <table border="1">
      * <caption>Response Details</caption>
      * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Updating variable values is successful. </td><td>  -  </td></tr>
+     * <tr><td> 204 </td><td> Variable values updated successfully. </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
      * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -26084,16 +27487,17 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Update values for multiple variables Version: 10.9.0.cl or later Allows updating values for
-     * multiple variables in ThoughtSpot. Requires ADMINISTRATION role. The API endpoint allows: *
-     * Adding new values to variables * Replacing existing values * Deleting values from variables
-     * When updating variable values, you need to specify: * The variable identifiers * The values
-     * to add/replace/remove for each variable * The operation to perform (ADD, REPLACE, REMOVE,
-     * CLEAR) Behaviour based on operation type: * ADD - Adds values to the variable if this is a
-     * list type variable, else same as replace. * REPLACE - Replaces all values of a given set of
-     * constraints with the current set of values. * REMOVE - Removes any values which match the set
-     * of conditions of the variables if this is a list type variable, else clears value. * CLEAR -
-     * Removes all constrains for a given variable, scope is ignored
+     * Update values for multiple variables Version: 10.14.0.cl or later Allows updating values for
+     * multiple variables in ThoughtSpot. Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES
+     * permission allows you to manage Formula Variables in the current organization scope. The API
+     * endpoint allows: * Adding new values to variables * Replacing existing values * Deleting
+     * values from variables When updating variable values, you need to specify: * The variable
+     * identifiers * The values to add/replace/remove for each variable * The operation to perform
+     * (ADD, REPLACE, REMOVE, CLEAR) Behaviour based on operation type: * ADD - Adds values to the
+     * variable if this is a list type variable, else same as replace. * REPLACE - Replaces all
+     * values of a given set of constraints with the current set of values. * REMOVE - Removes any
+     * values which match the set of conditions of the variables if this is a list type variable,
+     * else clears value. * CLEAR - Removes all constrains for a given variable, scope is ignored
      *
      * @param updateVariableValuesRequest (required)
      * @return ApiResponse&lt;Void&gt;
@@ -26103,7 +27507,7 @@ public class ThoughtSpotRestApi {
      *     <table border="1">
      * <caption>Response Details</caption>
      * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Updating variable values is successful. </td><td>  -  </td></tr>
+     * <tr><td> 204 </td><td> Variable values updated successfully. </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
      * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -26118,16 +27522,18 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Update values for multiple variables Version: 10.9.0.cl or later Allows
-     * updating values for multiple variables in ThoughtSpot. Requires ADMINISTRATION role. The API
-     * endpoint allows: * Adding new values to variables * Replacing existing values * Deleting
-     * values from variables When updating variable values, you need to specify: * The variable
-     * identifiers * The values to add/replace/remove for each variable * The operation to perform
-     * (ADD, REPLACE, REMOVE, CLEAR) Behaviour based on operation type: * ADD - Adds values to the
-     * variable if this is a list type variable, else same as replace. * REPLACE - Replaces all
-     * values of a given set of constraints with the current set of values. * REMOVE - Removes any
-     * values which match the set of conditions of the variables if this is a list type variable,
-     * else clears value. * CLEAR - Removes all constrains for a given variable, scope is ignored
+     * (asynchronously) Update values for multiple variables Version: 10.14.0.cl or later Allows
+     * updating values for multiple variables in ThoughtSpot. Requires ADMINISTRATION role. The
+     * CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current
+     * organization scope. The API endpoint allows: * Adding new values to variables * Replacing
+     * existing values * Deleting values from variables When updating variable values, you need to
+     * specify: * The variable identifiers * The values to add/replace/remove for each variable *
+     * The operation to perform (ADD, REPLACE, REMOVE, CLEAR) Behaviour based on operation type: *
+     * ADD - Adds values to the variable if this is a list type variable, else same as replace. *
+     * REPLACE - Replaces all values of a given set of constraints with the current set of values. *
+     * REMOVE - Removes any values which match the set of conditions of the variables if this is a
+     * list type variable, else clears value. * CLEAR - Removes all constrains for a given variable,
+     * scope is ignored
      *
      * @param updateVariableValuesRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -26138,7 +27544,7 @@ public class ThoughtSpotRestApi {
      *     <table border="1">
      * <caption>Response Details</caption>
      * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Updating variable values is successful. </td><td>  -  </td></tr>
+     * <tr><td> 204 </td><td> Variable values updated successfully. </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
      * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -26152,6 +27558,213 @@ public class ThoughtSpotRestApi {
 
         okhttp3.Call localVarCall =
                 updateVariableValuesValidateBeforeCall(updateVariableValuesRequest, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for updateWebhookConfiguration
+     *
+     * @param webhookIdentifier Unique ID or name of the webhook configuration. (required)
+     * @param updateWebhookConfigurationRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Webhook configuration updated successfully </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call updateWebhookConfigurationCall(
+            String webhookIdentifier,
+            UpdateWebhookConfigurationRequest updateWebhookConfigurationRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = updateWebhookConfigurationRequest;
+
+        // create path and map variables
+        String localVarPath =
+                "/api/rest/2.0/webhooks/{webhook_identifier}/update"
+                        .replace(
+                                "{" + "webhook_identifier" + "}",
+                                localVarApiClient.escapeString(webhookIdentifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call updateWebhookConfigurationValidateBeforeCall(
+            String webhookIdentifier,
+            UpdateWebhookConfigurationRequest updateWebhookConfigurationRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'webhookIdentifier' is set
+        if (webhookIdentifier == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'webhookIdentifier' when calling"
+                            + " updateWebhookConfiguration(Async)");
+        }
+
+        // verify the required parameter 'updateWebhookConfigurationRequest' is set
+        if (updateWebhookConfigurationRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'updateWebhookConfigurationRequest' when"
+                            + " calling updateWebhookConfiguration(Async)");
+        }
+
+        return updateWebhookConfigurationCall(
+                webhookIdentifier, updateWebhookConfigurationRequest, _callback);
+    }
+
+    /**
+     * Version: 10.14.0.cl or later Updates an existing webhook configuration by its unique id or
+     * name. Only the provided fields will be updated. Requires &#x60;ADMINISTRATION&#x60; (**Can
+     * administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.
+     * If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is
+     * enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage
+     * webhooks**) privilege are also authorized to perform this action.
+     *
+     * @param webhookIdentifier Unique ID or name of the webhook configuration. (required)
+     * @param updateWebhookConfigurationRequest (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Webhook configuration updated successfully </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public void updateWebhookConfiguration(
+            String webhookIdentifier,
+            UpdateWebhookConfigurationRequest updateWebhookConfigurationRequest)
+            throws ApiException {
+        updateWebhookConfigurationWithHttpInfo(
+                webhookIdentifier, updateWebhookConfigurationRequest);
+    }
+
+    /**
+     * Version: 10.14.0.cl or later Updates an existing webhook configuration by its unique id or
+     * name. Only the provided fields will be updated. Requires &#x60;ADMINISTRATION&#x60; (**Can
+     * administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.
+     * If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is
+     * enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage
+     * webhooks**) privilege are also authorized to perform this action.
+     *
+     * @param webhookIdentifier Unique ID or name of the webhook configuration. (required)
+     * @param updateWebhookConfigurationRequest (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Webhook configuration updated successfully </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<Void> updateWebhookConfigurationWithHttpInfo(
+            String webhookIdentifier,
+            UpdateWebhookConfigurationRequest updateWebhookConfigurationRequest)
+            throws ApiException {
+        okhttp3.Call localVarCall =
+                updateWebhookConfigurationValidateBeforeCall(
+                        webhookIdentifier, updateWebhookConfigurationRequest, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     * (asynchronously) Version: 10.14.0.cl or later Updates an existing webhook configuration by
+     * its unique id or name. Only the provided fields will be updated. Requires
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has
+     * developer privilege**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
+     * &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to
+     * perform this action.
+     *
+     * @param webhookIdentifier Unique ID or name of the webhook configuration. (required)
+     * @param updateWebhookConfigurationRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Webhook configuration updated successfully </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call updateWebhookConfigurationAsync(
+            String webhookIdentifier,
+            UpdateWebhookConfigurationRequest updateWebhookConfigurationRequest,
+            final ApiCallback<Void> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                updateWebhookConfigurationValidateBeforeCall(
+                        webhookIdentifier, updateWebhookConfigurationRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }

@@ -17,8 +17,10 @@ import com.google.gson.stream.JsonWriter;
 import com.thoughtspot.client.JSON;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -36,6 +38,12 @@ public class VariableValue implements Serializable {
     @SerializedName(SERIALIZED_NAME_VALUE)
     @javax.annotation.Nullable
     private String value;
+
+    public static final String SERIALIZED_NAME_VALUE_LIST = "value_list";
+
+    @SerializedName(SERIALIZED_NAME_VALUE_LIST)
+    @javax.annotation.Nullable
+    private List<String> valueList;
 
     public static final String SERIALIZED_NAME_ORG_IDENTIFIER = "org_identifier";
 
@@ -133,6 +141,33 @@ public class VariableValue implements Serializable {
         this.value = value;
     }
 
+    public VariableValue valueList(@javax.annotation.Nullable List<String> valueList) {
+        this.valueList = valueList;
+        return this;
+    }
+
+    public VariableValue addValueListItem(String valueListItem) {
+        if (this.valueList == null) {
+            this.valueList = new ArrayList<>();
+        }
+        this.valueList.add(valueListItem);
+        return this;
+    }
+
+    /**
+     * The value of the variable if it is a list type
+     *
+     * @return valueList
+     */
+    @javax.annotation.Nullable
+    public List<String> getValueList() {
+        return valueList;
+    }
+
+    public void setValueList(@javax.annotation.Nullable List<String> valueList) {
+        this.valueList = valueList;
+    }
+
     public VariableValue orgIdentifier(@javax.annotation.Nonnull String orgIdentifier) {
         this.orgIdentifier = orgIdentifier;
         return this;
@@ -221,6 +256,7 @@ public class VariableValue implements Serializable {
         }
         VariableValue variableValue = (VariableValue) o;
         return Objects.equals(this.value, variableValue.value)
+                && Objects.equals(this.valueList, variableValue.valueList)
                 && Objects.equals(this.orgIdentifier, variableValue.orgIdentifier)
                 && Objects.equals(this.principalType, variableValue.principalType)
                 && Objects.equals(this.principalIdentifier, variableValue.principalIdentifier)
@@ -238,7 +274,8 @@ public class VariableValue implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(value, orgIdentifier, principalType, principalIdentifier, priority);
+        return Objects.hash(
+                value, valueList, orgIdentifier, principalType, principalIdentifier, priority);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -253,6 +290,7 @@ public class VariableValue implements Serializable {
         StringBuilder sb = new StringBuilder();
         sb.append("class VariableValue {\n");
         sb.append("    value: ").append(toIndentedString(value)).append("\n");
+        sb.append("    valueList: ").append(toIndentedString(valueList)).append("\n");
         sb.append("    orgIdentifier: ").append(toIndentedString(orgIdentifier)).append("\n");
         sb.append("    principalType: ").append(toIndentedString(principalType)).append("\n");
         sb.append("    principalIdentifier: ")
@@ -281,6 +319,7 @@ public class VariableValue implements Serializable {
         // a set of all properties/fields (JSON key names)
         openapiFields = new HashSet<String>();
         openapiFields.add("value");
+        openapiFields.add("value_list");
         openapiFields.add("org_identifier");
         openapiFields.add("principal_type");
         openapiFields.add("principal_identifier");
@@ -338,6 +377,16 @@ public class VariableValue implements Serializable {
                             "Expected the field `value` to be a primitive type in the JSON string"
                                     + " but got `%s`",
                             jsonObj.get("value").toString()));
+        }
+        // ensure the optional json data is an array if present
+        if (jsonObj.get("value_list") != null
+                && !jsonObj.get("value_list").isJsonNull()
+                && !jsonObj.get("value_list").isJsonArray()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `value_list` to be an array in the JSON string but"
+                                    + " got `%s`",
+                            jsonObj.get("value_list").toString()));
         }
         if (!jsonObj.get("org_identifier").isJsonPrimitive()) {
             throw new IllegalArgumentException(

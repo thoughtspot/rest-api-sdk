@@ -5,6 +5,9 @@
 package com.thoughtspot.client.api;
 
 import com.thoughtspot.client.ApiException;
+import com.thoughtspot.client.model.CommunicationChannelPreferencesResponse;
+import com.thoughtspot.client.model.ConfigureCommunicationChannelPreferencesRequest;
+import com.thoughtspot.client.model.SearchCommunicationChannelPreferencesRequest;
 import com.thoughtspot.client.model.SystemConfig;
 import com.thoughtspot.client.model.SystemInfo;
 import com.thoughtspot.client.model.SystemOverrideInfo;
@@ -17,6 +20,29 @@ import org.junit.jupiter.api.Test;
 public class SystemApiTest {
 
     private final SystemApi api = new SystemApi();
+
+    /**
+     * Version: 10.14.0.cl or later Configure communication channel preferences. - Use
+     * &#x60;cluster_preferences&#x60; to update the default preferences for your ThoughtSpot
+     * application instance. - If your instance has
+     * [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), use
+     * &#x60;org_preferences&#x60; to specify Org-specific preferences that override the defaults.
+     * Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60;
+     * (**Has developer privilege**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
+     * &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can manage application settings**) privilege are
+     * also authorized to perform this action.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void configureCommunicationChannelPreferencesTest() throws ApiException {
+        ConfigureCommunicationChannelPreferencesRequest
+                configureCommunicationChannelPreferencesRequest = null;
+        api.configureCommunicationChannelPreferences(
+                configureCommunicationChannelPreferencesRequest);
+        // TODO: test validations
+    }
 
     /**
      * Version: 9.0.0.cl or later Retrieves the current configuration details of the cluster. If the
@@ -64,6 +90,30 @@ public class SystemApiTest {
     @Test
     public void getSystemOverrideInfoTest() throws ApiException {
         SystemOverrideInfo response = api.getSystemOverrideInfo();
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 10.14.0.cl or later Fetch communication channel preferences. - Use
+     * &#x60;cluster_preferences&#x60; to fetch the default preferences for your ThoughtSpot
+     * application instance. - If your instance has
+     * [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), use
+     * &#x60;org_preferences&#x60; to fetch any Org-specific preferences that override the defaults.
+     * Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60;
+     * (**Has developer privilege**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
+     * &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can manage application settings**) privilege are
+     * also authorized to perform this action.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void searchCommunicationChannelPreferencesTest() throws ApiException {
+        SearchCommunicationChannelPreferencesRequest searchCommunicationChannelPreferencesRequest =
+                null;
+        CommunicationChannelPreferencesResponse response =
+                api.searchCommunicationChannelPreferences(
+                        searchCommunicationChannelPreferencesRequest);
         // TODO: test validations
     }
 

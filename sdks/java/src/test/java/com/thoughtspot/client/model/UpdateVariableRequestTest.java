@@ -21,16 +21,4 @@ public class UpdateVariableRequestTest {
     public void nameTest() {
         // TODO: test name
     }
-
-    /** Test the property 'operation' */
-    @Test
-    public void operationTest() {
-        // TODO: test operation
-    }
-
-    /** Test the property 'values' */
-    @Test
-    public void valuesTest() {
-        // TODO: test values
-    }
 }

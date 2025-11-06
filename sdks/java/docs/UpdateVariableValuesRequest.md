@@ -7,18 +7,8 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**variableUpdates** | [**List&lt;VariableValueInput&gt;**](VariableValueInput.md) | Variables and values |  |
-|**operation** | [**OperationEnum**](#OperationEnum) | Type of update operation |  |
-
-
-
-## Enum: OperationEnum
-
-| Name | Value |
-|---- | -----|
-| ADD | &quot;ADD&quot; |
-| REMOVE | &quot;REMOVE&quot; |
-| REPLACE | &quot;REPLACE&quot; |
+|**variableAssignment** | [**List&lt;VariableUpdateAssignmentInput&gt;**](VariableUpdateAssignmentInput.md) | Variables and values to update |  |
+|**variableValueScope** | [**List&lt;VariableUpdateScopeInput&gt;**](VariableUpdateScopeInput.md) | Variables and values to update |  |
 
 
 ## Implemented Interfaces

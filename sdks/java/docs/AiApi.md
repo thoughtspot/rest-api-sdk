@@ -9,6 +9,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**getDataSourceSuggestions**](AiApi.md#getDataSourceSuggestions) | **POST** /api/rest/2.0/ai/data-source-suggestions |
 | [**getRelevantQuestions**](AiApi.md#getRelevantQuestions) | **POST** /api/rest/2.0/ai/relevant-questions/ |
 | [**queryGetDecomposedQuery**](AiApi.md#queryGetDecomposedQuery) | **POST** /api/rest/2.0/ai/analytical-questions |
+| [**sendAgentMessage**](AiApi.md#sendAgentMessage) | **POST** /api/rest/2.0/ai/agent/{conversation_identifier}/converse |
 | [**sendAgentMessageStreaming**](AiApi.md#sendAgentMessageStreaming) | **POST** /api/rest/2.0/ai/agent/converse/sse |
 | [**sendMessage**](AiApi.md#sendMessage) | **POST** /api/rest/2.0/ai/conversation/{conversation_identifier}/converse |
 | [**singleAnswer**](AiApi.md#singleAnswer) | **POST** /api/rest/2.0/ai/answer/create |
@@ -171,6 +172,42 @@ Version: 10.7.0.cl or later
 ### Return type
 
 [**EurekaDecomposeQueryResponse**](EurekaDecomposeQueryResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **500** | Operation failed |  -  |
+
+<a id="sendAgentMessage"></a>
+# **sendAgentMessage**
+> Object sendAgentMessage(conversationIdentifier, sendAgentMessageRequest)
+
+
+
+ Version: 10.13.0.cl or later   This API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages.  To use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.   #### Usage guidelines  To initiate or continue a conversation, the request must include: - &#x60;conversation_identifier&#x60;: a unique session ID for continuity and message tracking - &#x60;messages&#x60;: an array of one or more text messages, each with a value and type  The API returns a array of object with a type, message, and metadata. - &#x60;type&#x60;: Type of the message — text, answer, or error. - &#x60;message&#x60;: Main content of the response. - &#x60;metadata&#x60;: Additional info depending on the message type.  &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.     
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **conversationIdentifier** | **String**
+| **sendAgentMessageRequest** | [**SendAgentMessageRequest**](SendAgentMessageRequest.md)
+
+### Return type
+
+**Object**
 
 ### Authorization
 

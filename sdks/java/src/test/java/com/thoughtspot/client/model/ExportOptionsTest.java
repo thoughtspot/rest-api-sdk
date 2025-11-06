@@ -45,4 +45,10 @@ public class ExportOptionsTest {
     public void exportColumnSecurityRulesTest() {
         // TODO: test exportColumnSecurityRules
     }
+
+    /** Test the property 'exportWithColumnAliases' */
+    @Test
+    public void exportWithColumnAliasesTest() {
+        // TODO: test exportWithColumnAliases
+    }
 }

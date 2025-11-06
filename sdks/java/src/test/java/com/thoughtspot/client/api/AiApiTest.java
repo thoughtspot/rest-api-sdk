@@ -16,6 +16,7 @@ import com.thoughtspot.client.model.GetDataSourceSuggestionsRequest;
 import com.thoughtspot.client.model.GetRelevantQuestionsRequest;
 import com.thoughtspot.client.model.QueryGetDecomposedQueryRequest;
 import com.thoughtspot.client.model.ResponseMessage;
+import com.thoughtspot.client.model.SendAgentMessageRequest;
 import com.thoughtspot.client.model.SendAgentMessageResponse;
 import com.thoughtspot.client.model.SendAgentMessageStreamingRequest;
 import com.thoughtspot.client.model.SendMessageRequest;
@@ -130,6 +131,31 @@ public class AiApiTest {
         QueryGetDecomposedQueryRequest queryGetDecomposedQueryRequest = null;
         EurekaDecomposeQueryResponse response =
                 api.queryGetDecomposedQuery(queryGetDecomposedQueryRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 10.13.0.cl or later This API allows users to initiate or continue an agent (Spotter)
+     * conversation by submitting one or more natural language messages. To use this API, the user
+     * must have access to the relevant conversational session (via conversation_identifier) and
+     * submit at least one message. #### Usage guidelines To initiate or continue a conversation,
+     * the request must include: - &#x60;conversation_identifier&#x60;: a unique session ID for
+     * continuity and message tracking - &#x60;messages&#x60;: an array of one or more text
+     * messages, each with a value and type The API returns a array of object with a type, message,
+     * and metadata. - &#x60;type&#x60;: Type of the message — text, answer, or error. -
+     * &#x60;message&#x60;: Main content of the response. - &#x60;metadata&#x60;: Additional info
+     * depending on the message type. &gt; ###### Note: &gt; * This endpoint is currently in Beta.
+     * Breaking changes may be introduced before the endpoint is made Generally Available. &gt; *
+     * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your
+     * cluster.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void sendAgentMessageTest() throws ApiException {
+        String conversationIdentifier = null;
+        SendAgentMessageRequest sendAgentMessageRequest = null;
+        Object response = api.sendAgentMessage(conversationIdentifier, sendAgentMessageRequest);
         // TODO: test validations
     }
 

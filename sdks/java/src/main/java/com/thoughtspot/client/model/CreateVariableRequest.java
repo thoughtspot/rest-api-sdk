@@ -5,7 +5,6 @@
 package com.thoughtspot.client.model;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.TypeAdapter;
@@ -18,10 +17,8 @@ import com.google.gson.stream.JsonWriter;
 import com.thoughtspot.client.JSON;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -99,17 +96,76 @@ public class CreateVariableRequest implements Serializable {
     @javax.annotation.Nonnull
     private String name;
 
-    public static final String SERIALIZED_NAME_SENSITIVE = "sensitive";
+    public static final String SERIALIZED_NAME_IS_SENSITIVE = "is_sensitive";
 
-    @SerializedName(SERIALIZED_NAME_SENSITIVE)
+    @SerializedName(SERIALIZED_NAME_IS_SENSITIVE)
     @javax.annotation.Nullable
-    private Boolean sensitive = false;
+    private Boolean isSensitive = false;
 
-    public static final String SERIALIZED_NAME_VALUES = "values";
+    /** Variable Data Type */
+    @JsonAdapter(DataTypeEnum.Adapter.class)
+    public enum DataTypeEnum {
+        VARCHAR("VARCHAR"),
 
-    @SerializedName(SERIALIZED_NAME_VALUES)
+        INT32("INT32"),
+
+        INT64("INT64"),
+
+        DOUBLE("DOUBLE"),
+
+        DATE("DATE"),
+
+        DATE_TIME("DATE_TIME");
+
+        private String value;
+
+        DataTypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        public static DataTypeEnum fromValue(String value) {
+            for (DataTypeEnum b : DataTypeEnum.values()) {
+                if (b.value.equals(value)) {
+                    return b;
+                }
+            }
+            throw new IllegalArgumentException("Unexpected value '" + value + "'");
+        }
+
+        public static class Adapter extends TypeAdapter<DataTypeEnum> {
+            @Override
+            public void write(final JsonWriter jsonWriter, final DataTypeEnum enumeration)
+                    throws IOException {
+                jsonWriter.value(enumeration.getValue());
+            }
+
+            @Override
+            public DataTypeEnum read(final JsonReader jsonReader) throws IOException {
+                String value = jsonReader.nextString();
+                return DataTypeEnum.fromValue(value);
+            }
+        }
+
+        public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+            String value = jsonElement.getAsString();
+            DataTypeEnum.fromValue(value);
+        }
+    }
+
+    public static final String SERIALIZED_NAME_DATA_TYPE = "data_type";
+
+    @SerializedName(SERIALIZED_NAME_DATA_TYPE)
     @javax.annotation.Nullable
-    private List<InputVariableValue> values;
+    private DataTypeEnum dataType;
 
     public CreateVariableRequest() {}
 
@@ -151,51 +207,42 @@ public class CreateVariableRequest implements Serializable {
         this.name = name;
     }
 
-    public CreateVariableRequest sensitive(@javax.annotation.Nullable Boolean sensitive) {
-        this.sensitive = sensitive;
+    public CreateVariableRequest isSensitive(@javax.annotation.Nullable Boolean isSensitive) {
+        this.isSensitive = isSensitive;
         return this;
     }
 
     /**
      * If the variable contains sensitive values like passwords
      *
-     * @return sensitive
+     * @return isSensitive
      */
     @javax.annotation.Nullable
-    public Boolean getSensitive() {
-        return sensitive;
+    public Boolean getIsSensitive() {
+        return isSensitive;
     }
 
-    public void setSensitive(@javax.annotation.Nullable Boolean sensitive) {
-        this.sensitive = sensitive;
+    public void setIsSensitive(@javax.annotation.Nullable Boolean isSensitive) {
+        this.isSensitive = isSensitive;
     }
 
-    public CreateVariableRequest values(
-            @javax.annotation.Nullable List<InputVariableValue> values) {
-        this.values = values;
-        return this;
-    }
-
-    public CreateVariableRequest addValuesItem(InputVariableValue valuesItem) {
-        if (this.values == null) {
-            this.values = new ArrayList<>();
-        }
-        this.values.add(valuesItem);
+    public CreateVariableRequest dataType(@javax.annotation.Nullable DataTypeEnum dataType) {
+        this.dataType = dataType;
         return this;
     }
 
     /**
-     * Values of variable
+     * Variable Data Type
      *
-     * @return values
+     * @return dataType
      */
     @javax.annotation.Nullable
-    public List<InputVariableValue> getValues() {
-        return values;
+    public DataTypeEnum getDataType() {
+        return dataType;
     }
 
-    public void setValues(@javax.annotation.Nullable List<InputVariableValue> values) {
-        this.values = values;
+    public void setDataType(@javax.annotation.Nullable DataTypeEnum dataType) {
+        this.dataType = dataType;
     }
 
     @Override
@@ -209,8 +256,8 @@ public class CreateVariableRequest implements Serializable {
         CreateVariableRequest createVariableRequest = (CreateVariableRequest) o;
         return Objects.equals(this.type, createVariableRequest.type)
                 && Objects.equals(this.name, createVariableRequest.name)
-                && Objects.equals(this.sensitive, createVariableRequest.sensitive)
-                && Objects.equals(this.values, createVariableRequest.values);
+                && Objects.equals(this.isSensitive, createVariableRequest.isSensitive)
+                && Objects.equals(this.dataType, createVariableRequest.dataType);
     }
 
     private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -224,7 +271,7 @@ public class CreateVariableRequest implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(type, name, sensitive, values);
+        return Objects.hash(type, name, isSensitive, dataType);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -240,8 +287,8 @@ public class CreateVariableRequest implements Serializable {
         sb.append("class CreateVariableRequest {\n");
         sb.append("    type: ").append(toIndentedString(type)).append("\n");
         sb.append("    name: ").append(toIndentedString(name)).append("\n");
-        sb.append("    sensitive: ").append(toIndentedString(sensitive)).append("\n");
-        sb.append("    values: ").append(toIndentedString(values)).append("\n");
+        sb.append("    isSensitive: ").append(toIndentedString(isSensitive)).append("\n");
+        sb.append("    dataType: ").append(toIndentedString(dataType)).append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -265,8 +312,8 @@ public class CreateVariableRequest implements Serializable {
         openapiFields = new HashSet<String>();
         openapiFields.add("type");
         openapiFields.add("name");
-        openapiFields.add("sensitive");
-        openapiFields.add("values");
+        openapiFields.add("is_sensitive");
+        openapiFields.add("data_type");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -330,24 +377,17 @@ public class CreateVariableRequest implements Serializable {
                                     + " but got `%s`",
                             jsonObj.get("name").toString()));
         }
-        if (jsonObj.get("values") != null && !jsonObj.get("values").isJsonNull()) {
-            JsonArray jsonArrayvalues = jsonObj.getAsJsonArray("values");
-            if (jsonArrayvalues != null) {
-                // ensure the json data is an array
-                if (!jsonObj.get("values").isJsonArray()) {
-                    throw new IllegalArgumentException(
-                            String.format(
-                                    "Expected the field `values` to be an array in the JSON string"
-                                            + " but got `%s`",
-                                    jsonObj.get("values").toString()));
-                }
-
-                // validate the optional field `values` (array)
-                for (int i = 0; i < jsonArrayvalues.size(); i++) {
-                    InputVariableValue.validateJsonElement(jsonArrayvalues.get(i));
-                }
-                ;
-            }
+        if ((jsonObj.get("data_type") != null && !jsonObj.get("data_type").isJsonNull())
+                && !jsonObj.get("data_type").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `data_type` to be a primitive type in the JSON"
+                                    + " string but got `%s`",
+                            jsonObj.get("data_type").toString()));
+        }
+        // validate the optional field `data_type`
+        if (jsonObj.get("data_type") != null && !jsonObj.get("data_type").isJsonNull()) {
+            DataTypeEnum.validateJsonElement(jsonObj.get("data_type"));
         }
     }
 

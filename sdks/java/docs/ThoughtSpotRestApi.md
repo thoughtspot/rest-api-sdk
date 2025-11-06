@@ -9,6 +9,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**assignTag**](ThoughtSpotRestApi.md#assignTag) | **POST** /api/rest/2.0/tags/assign |
 | [**changeUserPassword**](ThoughtSpotRestApi.md#changeUserPassword) | **POST** /api/rest/2.0/users/change-password |
 | [**commitBranch**](ThoughtSpotRestApi.md#commitBranch) | **POST** /api/rest/2.0/vcs/git/branches/commit |
+| [**configureCommunicationChannelPreferences**](ThoughtSpotRestApi.md#configureCommunicationChannelPreferences) | **POST** /api/rest/2.0/system/preferences/communication-channels/configure |
 | [**connectionConfigurationSearch**](ThoughtSpotRestApi.md#connectionConfigurationSearch) | **POST** /api/rest/2.0/connection-configurations/search |
 | [**convertWorksheetToModel**](ThoughtSpotRestApi.md#convertWorksheetToModel) | **POST** /api/rest/2.0/metadata/worksheets/convert |
 | [**copyObject**](ThoughtSpotRestApi.md#copyObject) | **POST** /api/rest/2.0/metadata/copyobject |
@@ -27,6 +28,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**createUser**](ThoughtSpotRestApi.md#createUser) | **POST** /api/rest/2.0/users/create |
 | [**createUserGroup**](ThoughtSpotRestApi.md#createUserGroup) | **POST** /api/rest/2.0/groups/create |
 | [**createVariable**](ThoughtSpotRestApi.md#createVariable) | **POST** /api/rest/2.0/template/variables/create |
+| [**createWebhookConfiguration**](ThoughtSpotRestApi.md#createWebhookConfiguration) | **POST** /api/rest/2.0/webhooks/create |
 | [**dbtConnection**](ThoughtSpotRestApi.md#dbtConnection) | **POST** /api/rest/2.0/dbt/dbt-connection |
 | [**dbtGenerateSyncTml**](ThoughtSpotRestApi.md#dbtGenerateSyncTml) | **POST** /api/rest/2.0/dbt/generate-sync-tml |
 | [**dbtGenerateTml**](ThoughtSpotRestApi.md#dbtGenerateTml) | **POST** /api/rest/2.0/dbt/generate-tml |
@@ -49,6 +51,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**deleteUser**](ThoughtSpotRestApi.md#deleteUser) | **POST** /api/rest/2.0/users/{user_identifier}/delete |
 | [**deleteUserGroup**](ThoughtSpotRestApi.md#deleteUserGroup) | **POST** /api/rest/2.0/groups/{group_identifier}/delete |
 | [**deleteVariable**](ThoughtSpotRestApi.md#deleteVariable) | **POST** /api/rest/2.0/template/variables/{identifier}/delete |
+| [**deleteWebhookConfigurations**](ThoughtSpotRestApi.md#deleteWebhookConfigurations) | **POST** /api/rest/2.0/webhooks/delete |
 | [**deployCommit**](ThoughtSpotRestApi.md#deployCommit) | **POST** /api/rest/2.0/vcs/git/commits/deploy |
 | [**downloadConnectionMetadataChanges**](ThoughtSpotRestApi.md#downloadConnectionMetadataChanges) | **POST** /api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier} |
 | [**exportAnswerReport**](ThoughtSpotRestApi.md#exportAnswerReport) | **POST** /api/rest/2.0/report/answer |
@@ -91,6 +94,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**revokeToken**](ThoughtSpotRestApi.md#revokeToken) | **POST** /api/rest/2.0/auth/token/revoke |
 | [**searchCalendars**](ThoughtSpotRestApi.md#searchCalendars) | **POST** /api/rest/2.0/calendars/search |
 | [**searchCommits**](ThoughtSpotRestApi.md#searchCommits) | **POST** /api/rest/2.0/vcs/git/commits/search |
+| [**searchCommunicationChannelPreferences**](ThoughtSpotRestApi.md#searchCommunicationChannelPreferences) | **POST** /api/rest/2.0/system/preferences/communication-channels/search |
 | [**searchConfig**](ThoughtSpotRestApi.md#searchConfig) | **POST** /api/rest/2.0/vcs/git/config/search |
 | [**searchConnection**](ThoughtSpotRestApi.md#searchConnection) | **POST** /api/rest/2.0/connection/search |
 | [**searchCustomActions**](ThoughtSpotRestApi.md#searchCustomActions) | **POST** /api/rest/2.0/customization/custom-actions/search |
@@ -104,6 +108,8 @@ All URIs are relative to *CLUSTER_URL*
 | [**searchUserGroups**](ThoughtSpotRestApi.md#searchUserGroups) | **POST** /api/rest/2.0/groups/search |
 | [**searchUsers**](ThoughtSpotRestApi.md#searchUsers) | **POST** /api/rest/2.0/users/search |
 | [**searchVariables**](ThoughtSpotRestApi.md#searchVariables) | **POST** /api/rest/2.0/template/variables/search |
+| [**searchWebhookConfigurations**](ThoughtSpotRestApi.md#searchWebhookConfigurations) | **POST** /api/rest/2.0/webhooks/search |
+| [**sendAgentMessage**](ThoughtSpotRestApi.md#sendAgentMessage) | **POST** /api/rest/2.0/ai/agent/{conversation_identifier}/converse |
 | [**sendAgentMessageStreaming**](ThoughtSpotRestApi.md#sendAgentMessageStreaming) | **POST** /api/rest/2.0/ai/agent/converse/sse |
 | [**sendMessage**](ThoughtSpotRestApi.md#sendMessage) | **POST** /api/rest/2.0/ai/conversation/{conversation_identifier}/converse |
 | [**shareMetadata**](ThoughtSpotRestApi.md#shareMetadata) | **POST** /api/rest/2.0/security/metadata/share |
@@ -130,7 +136,8 @@ All URIs are relative to *CLUSTER_URL*
 | [**updateUser**](ThoughtSpotRestApi.md#updateUser) | **POST** /api/rest/2.0/users/{user_identifier}/update |
 | [**updateUserGroup**](ThoughtSpotRestApi.md#updateUserGroup) | **POST** /api/rest/2.0/groups/{group_identifier}/update |
 | [**updateVariable**](ThoughtSpotRestApi.md#updateVariable) | **POST** /api/rest/2.0/template/variables/{identifier}/update |
-| [**updateVariableValues**](ThoughtSpotRestApi.md#updateVariableValues) | **POST** /api/rest/2.0/template/variables/update |
+| [**updateVariableValues**](ThoughtSpotRestApi.md#updateVariableValues) | **POST** /api/rest/2.0/template/variables/update-values |
+| [**updateWebhookConfiguration**](ThoughtSpotRestApi.md#updateWebhookConfiguration) | **POST** /api/rest/2.0/webhooks/{webhook_identifier}/update |
 | [**validateEmailCustomization**](ThoughtSpotRestApi.md#validateEmailCustomization) | **POST** /api/rest/2.0/customization/email/validate |
 | [**validateMerge**](ThoughtSpotRestApi.md#validateMerge) | **POST** /api/rest/2.0/vcs/git/branches/validate |
 | [**validateToken**](ThoughtSpotRestApi.md#validateToken) | **POST** /api/rest/2.0/auth/token/validate |
@@ -316,6 +323,42 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
+<a id="configureCommunicationChannelPreferences"></a>
+# **configureCommunicationChannelPreferences**
+> configureCommunicationChannelPreferences(configureCommunicationChannelPreferencesRequest)
+
+
+
+ Version: 10.14.0.cl or later   Configure communication channel preferences. - Use &#x60;cluster_preferences&#x60; to update the default preferences for your ThoughtSpot application instance. - If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), use &#x60;org_preferences&#x60; to specify Org-specific preferences that override the defaults.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can manage application settings**) privilege are also authorized to perform this action.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **configureCommunicationChannelPreferencesRequest** | [**ConfigureCommunicationChannelPreferencesRequest**](ConfigureCommunicationChannelPreferencesRequest.md)
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Communication channel preferences successfully updated. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
 <a id="connectionConfigurationSearch"></a>
 # **connectionConfigurationSearch**
 > List&lt;ConnectionConfigurationResponse&gt; connectionConfigurationSearch(connectionConfigurationSearchRequest)
@@ -394,7 +437,7 @@ null (empty response body)
 
 
 
- Makes a copy of an Answer or Liveboard saved in Atlas    Version: 10.3.0.cl or later   Creates a copy of a metadata object.  Requires at least view access to the metadata object being copied.  Upon successful execution, the API creates a copy of the metadata object specified in the API request and returns the ID of the new object.      
+ Makes a copy of an Answer or Liveboard    Version: 10.3.0.cl or later   Creates a copy of a metadata object.  Requires at least view access to the metadata object being copied.  Upon successful execution, the API creates a copy of the metadata object specified in the API request and returns the ID of the new object.      
 
 ### Parameters
 
@@ -932,7 +975,7 @@ Version: 10.13.0.cl or later
 
 
 
- Create a variable which can be used for parameterizing metadata objects   Version: 10.9.0.cl or later   Allows creating a variable which can be used for parameterizing metadata objects in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint supports the following types of variables: * CONNECTION_PROPERTY - For connection properties * TABLE_MAPPING - For table mappings * CONNECTION_PROPERTY_PER_PRINCIPAL - For connection properties per principal. In order to use this please contact support to enable this. * FORMULA_VARIABLE - For Formula variables  When creating a variable, you need to specify: * The variable type * A unique name for the variable * Whether the variable contains sensitive values (defaults to false) * The data type of the variable, only specify for fomula variables (defaults to null)  The operation will fail if: * The user lacks required permissions * The variable name already exists * The variable type is invalid     
+ Create a variable which can be used for parameterizing metadata objects   Version: 10.14.0.cl or later   Allows creating a variable which can be used for parameterizing metadata objects in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint supports the following types of variables: * CONNECTION_PROPERTY - For connection properties * TABLE_MAPPING - For table mappings * CONNECTION_PROPERTY_PER_PRINCIPAL - For connection properties per principal. In order to use this please contact support to enable this. * FORMULA_VARIABLE - For Formula variables  When creating a variable, you need to specify: * The variable type * A unique name for the variable * Whether the variable contains sensitive values (defaults to false) * The data type of the variable, only specify for fomula variables (defaults to null)  The operation will fail if: * The user lacks required permissions * The variable name already exists * The variable type is invalid     
 
 ### Parameters
 
@@ -957,6 +1000,42 @@ Version: 10.13.0.cl or later
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Create variable is successful. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="createWebhookConfiguration"></a>
+# **createWebhookConfiguration**
+> WebhookResponse createWebhookConfiguration(createWebhookConfigurationRequest)
+
+
+
+ Version: 10.14.0.cl or later   Creates a new webhook configuration to receive notifications for specified events. The webhook will be triggered when the configured events occur in the system.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to perform this action.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **createWebhookConfigurationRequest** | [**CreateWebhookConfigurationRequest**](CreateWebhookConfigurationRequest.md)
+
+### Return type
+
+[**WebhookResponse**](WebhookResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Webhook configuration created successfully |  -  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
@@ -1046,7 +1125,7 @@ Version: 10.13.0.cl or later
 
 <a id="dbtGenerateTml"></a>
 # **dbtGenerateTml**
-> Object dbtGenerateTml(dbtConnectionIdentifier, importWorksheets, modelTables, worksheets, fileContent)
+> Object dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent)
 
 
 
@@ -1057,8 +1136,8 @@ Version: 10.13.0.cl or later
 | Name | Type |
 |------------- | ------------- |
 | **dbtConnectionIdentifier** | **String**
-| **importWorksheets** | **String**
 | **modelTables** | **String**
+| **importWorksheets** | **String**
 | **worksheets** | **String**
 | **fileContent** | **File**
 
@@ -1734,7 +1813,7 @@ null (empty response body)
 
 
 
- Delete a variable   Version: 10.9.0.cl or later   Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn&#39;t exist * The variable is being used by other objects      
+ Delete a variable   Version: 10.14.0.cl or later   Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn&#39;t exist * The variable is being used by other objects      
 
 ### Parameters
 
@@ -1759,6 +1838,42 @@ null (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | Deleting the variable is successful. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="deleteWebhookConfigurations"></a>
+# **deleteWebhookConfigurations**
+> WebhookDeleteResponse deleteWebhookConfigurations(deleteWebhookConfigurationsRequest)
+
+
+
+ Version: 10.14.0.cl or later   Deletes one or more webhook configurations by their unique id or name. Returns status of each deletion operation, including successfully deleted webhooks and any failures with error details.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to perform this action.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **deleteWebhookConfigurationsRequest** | [**DeleteWebhookConfigurationsRequest**](DeleteWebhookConfigurationsRequest.md)
+
+### Return type
+
+[**WebhookDeleteResponse**](WebhookDeleteResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Webhook configurations deleted successfully |  -  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
@@ -2484,7 +2599,7 @@ This endpoint does not need any parameter.
 
 
 
-  Version: 10.4.0.cl or later   Gets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  To add a new user and assign privileges during auto creation, you need &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  To assign security attributes with filter rules and Parameters to the JWT token, you&#39;ll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  #### Usage guidelines  You can generate the token for a user by providing a &#x60;username&#x60; and &#x60;password&#x60;, or by using the cluster’s &#x60;secret_key&#x60;.  To generate a &#x60;secret_key&#x60; on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable) in the **Develop** &gt; **Customizations** &gt; **Security Settings** page.  **Note**: When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request, &#x60;password&#x60; takes precedence.  If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (&#x60;username&#x60;  and &#x60;password&#x60; ) returns an error. You can switch to token-based authentication with  &#x60;secret_key&#x60;  or contact ThoughtSpot Support for assistance.  ##### Attribute-Based Access Control (ABAC) with tokens  To implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the &#x60;filter_rules&#x60; and &#x60;parameter_values&#x60; array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user&#39;s &#x60;access_control_properties&#x60; object, after which all sessions will use the persisted values.  Specify the object type as &#x60;LOGICAL_TABLE&#x60;.  The &#x60;LIVEBOARD&#x60; and &#x60;ANSWER&#x60; object types are not supported.  For more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).  ##### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * &#x60;auto_create&#x60; * &#x60;username&#x60; * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;groups&#x60;  Set &#x60;auto_create&#x60; to &#x60;true&#x60; if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60; in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  ##### Important point to note All options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when the authentication token is created. Persist options such as  &#x60;APPEND&#x60;, &#x60;REPLACE&#x60;, &#x60;RESET&#x60; will persist security parameters on the user profile when the token is created, while Persist option &#x60;NONE&#x60; will not persist anything but will be honoured in the session.      
+  Version: 10.4.0.cl or later   Gets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.  To add a new user and assign privileges during auto creation, you need &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  To assign security attributes with filter rules and Parameters to the JWT token, you&#39;ll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.  #### Usage guidelines  You can generate the token for a user by providing a &#x60;username&#x60; and &#x60;password&#x60;, or by using the cluster’s &#x60;secret_key&#x60;.  To generate a &#x60;secret_key&#x60; on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable) in the **Develop** &gt; **Customizations** &gt; **Security Settings** page.  **Note**: When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request, &#x60;password&#x60; takes precedence.  If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (&#x60;username&#x60;  and &#x60;password&#x60; ) returns an error. You can switch to token-based authentication with  &#x60;secret_key&#x60;  or contact ThoughtSpot Support for assistance.  ##### Attribute-Based Access Control (ABAC) with tokens  To implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the &#x60;filter_rules&#x60; and &#x60;parameter_values&#x60; array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user&#39;s &#x60;access_control_properties&#x60; object, after which all sessions will use the persisted values.  Specify the object type as &#x60;LOGICAL_TABLE&#x60;.   For more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).  ##### Just-in-time provisioning  For just-in-time user creation and provisioning, define the following attributes:  * &#x60;auto_create&#x60; * &#x60;username&#x60; * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;groups&#x60;  Set &#x60;auto_create&#x60; to &#x60;true&#x60; if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60; in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values. If &#x60;auto_create&#x60; is set to &#x60;true&#x60;, it won&#39;t create formula variables and hence won&#39;t be applicable for &#x60;variable_values&#x60;.  For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).  ##### Important point to note All options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when the authentication token is created. Persist options such as  &#x60;APPEND&#x60;, &#x60;REPLACE&#x60;, &#x60;RESET&#x60; will persist security parameters on the user profile when the token is created, while Persist option &#x60;NONE&#x60; will not persist anything but will be honoured in the session.  ##### Formula Variables Before using variables_values, variables must be created using Create Variable API with type as Formula_Variable (/api/rest/2.0/template/variables/create) The persist_option RESET and NONE cannot be used when variable_values are provided in the request. If you are working with variable_values, you must use other (APPEND, REPLACE) supported modes. If you want to use RESET or NONE, do not pass any variable_values. In such cases, variable_values will remain unaffected. When using object_id with variable_values, models are supported.      
 
 ### Parameters
 
@@ -3256,6 +3371,42 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
+<a id="searchCommunicationChannelPreferences"></a>
+# **searchCommunicationChannelPreferences**
+> CommunicationChannelPreferencesResponse searchCommunicationChannelPreferences(searchCommunicationChannelPreferencesRequest)
+
+
+
+ Version: 10.14.0.cl or later   Fetch communication channel preferences. - Use &#x60;cluster_preferences&#x60; to fetch the default preferences for your ThoughtSpot application instance. - If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), use &#x60;org_preferences&#x60; to fetch any Org-specific preferences that override the defaults.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can manage application settings**) privilege are also authorized to perform this action.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **searchCommunicationChannelPreferencesRequest** | [**SearchCommunicationChannelPreferencesRequest**](SearchCommunicationChannelPreferencesRequest.md)
+
+### Return type
+
+[**CommunicationChannelPreferencesResponse**](CommunicationChannelPreferencesResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Communication channel preferences retrieved successfully. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
 <a id="searchConfig"></a>
 # **searchConfig**
 > List&lt;RepoConfigObject&gt; searchConfig(searchConfigRequest)
@@ -3693,7 +3844,7 @@ null (empty response body)
 
 
 
- Search variables   Version: 10.9.0.cl or later   Allows searching for variables in ThoughtSpot.  Requires ADMINISTRATION role.  The API endpoint supports searching variables by: * Variable identifier (ID or name) * Variable type * Name pattern (case-insensitive, supports % for wildcard)  The search results can be formatted in three ways: * METADATA_ONLY - Returns only variable metadata (default) * METADATA_AND_VALUES - Returns variable metadata and values * EDITABLE_METADATA_AND_VALUES - Returns only editable variable metadata and values  The values can be filtered by scope: * org_identifier * principal_identifier * model_identifier      
+ Search variables   Version: 10.14.0.cl or later   Allows searching for variables in ThoughtSpot.  Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint supports searching variables by: * Variable identifier (ID or name) * Variable type * Name pattern (case-insensitive, supports % for wildcard)  The search results can be formatted in three ways: * METADATA - Returns only variable metadata (default) * METADATA_AND_VALUES - Returns variable metadata and values  The values can be filtered by scope: * org_identifier * principal_identifier * model_identifier      
 
 ### Parameters
 
@@ -3722,6 +3873,78 @@ null (empty response body)
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
+
+<a id="searchWebhookConfigurations"></a>
+# **searchWebhookConfigurations**
+> WebhookSearchResponse searchWebhookConfigurations(searchWebhookConfigurationsRequest)
+
+
+
+ Version: 10.14.0.cl or later   Searches for webhook configurations based on various criteria such as Org, webhook identifier, event type, with support for pagination and sorting. Returns matching webhook configurations with their complete details.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to perform this action.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **searchWebhookConfigurationsRequest** | [**SearchWebhookConfigurationsRequest**](SearchWebhookConfigurationsRequest.md)
+
+### Return type
+
+[**WebhookSearchResponse**](WebhookSearchResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Webhook configurations retrieved successfully |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="sendAgentMessage"></a>
+# **sendAgentMessage**
+> Object sendAgentMessage(conversationIdentifier, sendAgentMessageRequest)
+
+
+
+ Version: 10.13.0.cl or later   This API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages.  To use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.   #### Usage guidelines  To initiate or continue a conversation, the request must include: - &#x60;conversation_identifier&#x60;: a unique session ID for continuity and message tracking - &#x60;messages&#x60;: an array of one or more text messages, each with a value and type  The API returns a array of object with a type, message, and metadata. - &#x60;type&#x60;: Type of the message — text, answer, or error. - &#x60;message&#x60;: Main content of the response. - &#x60;metadata&#x60;: Additional info depending on the message type.  &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.     
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **conversationIdentifier** | **String**
+| **sendAgentMessageRequest** | [**SendAgentMessageRequest**](SendAgentMessageRequest.md)
+
+### Return type
+
+**Object**
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **500** | Operation failed |  -  |
 
 <a id="sendAgentMessageStreaming"></a>
 # **sendAgentMessageStreaming**
@@ -4161,7 +4384,7 @@ null (empty response body)
 
 
 
-  Version: 10.4.0.cl or later   Updates a connection object.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is required.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in &#x60;data_warehouse_config&#x60;.    b. Set &#x60;validate&#x60; to &#x60;true&#x60;.        **NOTE:** If the &#x60;authentication_type&#x60; is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.     * A JSON map of configuration attributes, database details, and table properties in &#x60;data_warehouse_config&#x60; as shown in the following example:     &#x60;&#x60;&#x60;    {       \&quot;configuration\&quot;:{          \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,          \&quot;user\&quot;:\&quot;tsadmin\&quot;,          \&quot;password\&quot;:\&quot;TestConn123\&quot;,          \&quot;role\&quot;:\&quot;sysadmin\&quot;,          \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot;       },       \&quot;externalDatabases\&quot;:[          {             \&quot;name\&quot;:\&quot;AllDatatypes\&quot;,             \&quot;isAutoCreated\&quot;:false,             \&quot;schemas\&quot;:[                {                   \&quot;name\&quot;:\&quot;alldatatypes\&quot;,                   \&quot;tables\&quot;:[                      {                         \&quot;name\&quot;:\&quot;allDatatypes\&quot;,                         \&quot;type\&quot;:\&quot;TABLE\&quot;,                         \&quot;description\&quot;:\&quot;\&quot;,                         \&quot;selected\&quot;:true,                         \&quot;linked\&quot;:true,                         \&quot;columns\&quot;:[                            {                               \&quot;name\&quot;:\&quot;CNUMBER\&quot;,                               \&quot;type\&quot;:\&quot;INT64\&quot;,                               \&quot;canImport\&quot;:true,                               \&quot;selected\&quot;:true,                               \&quot;isLinkedActive\&quot;:true,                               \&quot;isImported\&quot;:false,                               \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,                               \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,                               \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot;                            },                            {                               \&quot;name\&quot;:\&quot;CDECIMAL\&quot;,                               \&quot;type\&quot;:\&quot;INT64\&quot;,                               \&quot;canImport\&quot;:true,                               \&quot;selected\&quot;:true,                               \&quot;isLinkedActive\&quot;:true,                               \&quot;isImported\&quot;:false,                               \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,                               \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,                               \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot;                            }                         ]                      }                   ]                }             ]          }       ]    }    &#x60;&#x60;&#x60;  3. If you are updating a configuration attribute, connection name, or description, you can set &#x60;validate&#x60; to &#x60;false&#x60;.    **NOTE:** If the &#x60;authentication_type&#x60; is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not  specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.    * A JSON map of configuration attributes in &#x60;data_warehouse_config&#x60;. The following example shows the configuration attributes for a Snowflake connection:    &#x60;&#x60;&#x60;    {       \&quot;configuration\&quot;:{          \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,          \&quot;user\&quot;:\&quot;tsadmin\&quot;,          \&quot;password\&quot;:\&quot;TestConn123\&quot;,          \&quot;role\&quot;:\&quot;sysadmin\&quot;,          \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot;       },       \&quot;externalDatabases\&quot;:[        ]    }    &#x60;&#x60;&#x60;      
+  Version: 10.4.0.cl or later   Updates a connection object.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is required.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in &#x60;data_warehouse_config&#x60;.    b. Set &#x60;validate&#x60; to &#x60;true&#x60;.        **NOTE:** If the &#x60;authentication_type&#x60; is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.     * A JSON map of configuration attributes, database details, and table properties in &#x60;data_warehouse_config&#x60; as shown in the following example:    * This is an example of updating a single table in a empty connection:           &#x60;&#x60;&#x60;       {         \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,         \&quot;externalDatabases\&quot;: [           {             \&quot;name\&quot;: \&quot;DEVELOPMENT\&quot;,             \&quot;isAutoCreated\&quot;: false,             \&quot;schemas\&quot;: [               {                 \&quot;name\&quot;: \&quot;TS_dataset\&quot;,                 \&quot;tables\&quot;: [                   {                     \&quot;name\&quot;: \&quot;DEMORENAME\&quot;,                     \&quot;type\&quot;: \&quot;TABLE\&quot;,                     \&quot;description\&quot;: \&quot;\&quot;,                     \&quot;selected\&quot;: true,                     \&quot;linked\&quot;: true,                     \&quot;gid\&quot;: 0,                     \&quot;datasetId\&quot;: \&quot;-1\&quot;,                     \&quot;subType\&quot;: \&quot;\&quot;,                     \&quot;reportId\&quot;: \&quot;\&quot;,                     \&quot;viewId\&quot;: \&quot;\&quot;,                     \&quot;columns\&quot;: [                       {                         \&quot;name\&quot;: \&quot;Col1\&quot;,                         \&quot;type\&quot;: \&quot;VARCHAR\&quot;,                         \&quot;canImport\&quot;: true,                         \&quot;selected\&quot;: true,                         \&quot;description\&quot;: \&quot;\&quot;,                         \&quot;isLinkedActive\&quot;: true,                         \&quot;isAggregate\&quot;: false                       },                       {                         \&quot;name\&quot;: \&quot;Col2\&quot;,                         \&quot;type\&quot;: \&quot;VARCHAR\&quot;,                         \&quot;canImport\&quot;: true,                         \&quot;selected\&quot;: true,                         \&quot;description\&quot;: \&quot;\&quot;,                         \&quot;isLinkedActive\&quot;: true,                         \&quot;isAggregate\&quot;: false                       },                       {                         \&quot;name\&quot;: \&quot;Col3\&quot;,                         \&quot;type\&quot;: \&quot;VARCHAR\&quot;,                         \&quot;canImport\&quot;: true,                         \&quot;selected\&quot;: true,                         \&quot;description\&quot;: \&quot;\&quot;,                         \&quot;isLinkedActive\&quot;: true,                         \&quot;isAggregate\&quot;: false                       },                       {                         \&quot;name\&quot;: \&quot;Col312\&quot;,                         \&quot;type\&quot;: \&quot;VARCHAR\&quot;,                         \&quot;canImport\&quot;: true,                         \&quot;selected\&quot;: true,                         \&quot;description\&quot;: \&quot;\&quot;,                         \&quot;isLinkedActive\&quot;: true,                         \&quot;isAggregate\&quot;: false                       },                       {                         \&quot;name\&quot;: \&quot;Col4\&quot;,                         \&quot;type\&quot;: \&quot;VARCHAR\&quot;,                         \&quot;canImport\&quot;: true,                         \&quot;selected\&quot;: true,                         \&quot;description\&quot;: \&quot;\&quot;,                         \&quot;isLinkedActive\&quot;: true,                         \&quot;isAggregate\&quot;: false                       }                     ],                     \&quot;relationships\&quot;: []                   }                 ]               }             ]           }         ],         \&quot;configuration\&quot;: {           \&quot;password\&quot;: \&quot;\&quot;,           \&quot;database\&quot;: \&quot;DEVELOPMENT\&quot;,           \&quot;role\&quot;: \&quot;DEV\&quot;,           \&quot;accountName\&quot;: \&quot;thoughtspot_partner\&quot;,           \&quot;warehouse\&quot;: \&quot;DEMO_WH\&quot;,           \&quot;user\&quot;: \&quot;DEV_USER\&quot;         }       }       &#x60;&#x60;&#x60;        * This is an example of updating a single table in an existing connection with tables:            &#x60;&#x60;&#x60;       {         \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,         \&quot;externalDatabases\&quot;: [           {             \&quot;name\&quot;: \&quot;DEVELOPMENT\&quot;,             \&quot;isAutoCreated\&quot;: false,             \&quot;schemas\&quot;: [               {                 \&quot;name\&quot;: \&quot;TS_dataset\&quot;,                 \&quot;tables\&quot;: [                   {                     \&quot;name\&quot;: \&quot;CUSTOMER\&quot;,                     \&quot;type\&quot;: \&quot;TABLE\&quot;,                     \&quot;description\&quot;: \&quot;\&quot;,                     \&quot;selected\&quot;: true,                     \&quot;linked\&quot;: true,                     \&quot;gid\&quot;: 0,                     \&quot;datasetId\&quot;: \&quot;-1\&quot;,                     \&quot;subType\&quot;: \&quot;\&quot;,                     \&quot;reportId\&quot;: \&quot;\&quot;,                     \&quot;viewId\&quot;: \&quot;\&quot;,                     \&quot;columns\&quot;: [],                     \&quot;relationships\&quot;: []                   },                   {                     \&quot;name\&quot;: \&quot;tpch5k_falcon_default_schema_users\&quot;,                     \&quot;type\&quot;: \&quot;TABLE\&quot;,                     \&quot;description\&quot;: \&quot;\&quot;,                     \&quot;selected\&quot;: true,                     \&quot;linked\&quot;: true,                     \&quot;gid\&quot;: 0,                     \&quot;datasetId\&quot;: \&quot;-1\&quot;,                     \&quot;subType\&quot;: \&quot;\&quot;,                     \&quot;reportId\&quot;: \&quot;\&quot;,                     \&quot;viewId\&quot;: \&quot;\&quot;,                     \&quot;columns\&quot;: [                       {                         \&quot;name\&quot;: \&quot;user_id\&quot;,                         \&quot;type\&quot;: \&quot;INT64\&quot;,                         \&quot;canImport\&quot;: true,                         \&quot;selected\&quot;: true,                         \&quot;description\&quot;: \&quot;\&quot;,                         \&quot;isLinkedActive\&quot;: true,                         \&quot;isAggregate\&quot;: false                       },                       {                         \&quot;name\&quot;: \&quot;product_id\&quot;,                         \&quot;type\&quot;: \&quot;INT64\&quot;,                         \&quot;canImport\&quot;: true,                         \&quot;selected\&quot;: true,                         \&quot;description\&quot;: \&quot;\&quot;,                         \&quot;isLinkedActive\&quot;: true,                         \&quot;isAggregate\&quot;: false                       },                       {                         \&quot;name\&quot;: \&quot;user_cost\&quot;,                         \&quot;type\&quot;: \&quot;INT64\&quot;,                         \&quot;canImport\&quot;: true,                         \&quot;selected\&quot;: true,                         \&quot;description\&quot;: \&quot;\&quot;,                         \&quot;isLinkedActive\&quot;: true,                         \&quot;isAggregate\&quot;: false                       }                     ],                     \&quot;relationships\&quot;: []                   }                 ]               }             ]           }         ],         \&quot;configuration\&quot;: {           \&quot;password\&quot;: \&quot;\&quot;,           \&quot;database\&quot;: \&quot;DEVELOPMENT\&quot;,           \&quot;role\&quot;: \&quot;DEV\&quot;,           \&quot;accountName\&quot;: \&quot;thoughtspot_partner\&quot;,           \&quot;warehouse\&quot;: \&quot;DEMO_WH\&quot;,           \&quot;user\&quot;: \&quot;DEV_USER\&quot;         }       }       &#x60;&#x60;&#x60;  3. If you are updating a configuration attribute, connection name, or description, you can set &#x60;validate&#x60; to &#x60;false&#x60;.    **NOTE:** If the &#x60;authentication_type&#x60; is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not  specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.    * A JSON map of configuration attributes in &#x60;data_warehouse_config&#x60;. The following example shows the configuration attributes for a Snowflake connection:    &#x60;&#x60;&#x60;    {       \&quot;configuration\&quot;:{          \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,          \&quot;user\&quot;:\&quot;tsadmin\&quot;,          \&quot;password\&quot;:\&quot;TestConn123\&quot;,          \&quot;role\&quot;:\&quot;sysadmin\&quot;,          \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot;       },       \&quot;externalDatabases\&quot;:[        ]    }    &#x60;&#x60;&#x60;      
 
 ### Parameters
 
@@ -4647,7 +4870,7 @@ null (empty response body)
 
 
 
- Update a variable&#39;s properties   Version: 10.9.0.cl or later   Allows updating a variable&#39;s properties in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows updating: * The variable name     
+ Update a variable&#39;s name   Version: 10.14.0.cl or later   Allows updating a variable&#39;s properties in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
 
 ### Parameters
 
@@ -4672,7 +4895,7 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **204** | Updating the variable is successful. |  -  |
+| **204** | Variable name updated successfully. |  -  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
@@ -4684,7 +4907,7 @@ null (empty response body)
 
 
 
- Update values for multiple variables   Version: 10.9.0.cl or later   Allows updating values for multiple variables in ThoughtSpot.  Requires ADMINISTRATION role.  The API endpoint allows: * Adding new values to variables * Replacing existing values * Deleting values from variables  When updating variable values, you need to specify: * The variable identifiers * The values to add/replace/remove for each variable * The operation to perform (ADD, REPLACE, REMOVE, CLEAR)  Behaviour based on operation type: * ADD - Adds values to the variable if this is a list type variable, else same as replace. * REPLACE - Replaces all values of a given set of constraints with the current set of values. * REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value. * CLEAR - Removes all constrains for a given variable, scope is ignored      
+ Update values for multiple variables   Version: 10.14.0.cl or later   Allows updating values for multiple variables in ThoughtSpot.  Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows: * Adding new values to variables * Replacing existing values * Deleting values from variables  When updating variable values, you need to specify: * The variable identifiers * The values to add/replace/remove for each variable * The operation to perform (ADD, REPLACE, REMOVE, CLEAR)  Behaviour based on operation type: * ADD - Adds values to the variable if this is a list type variable, else same as replace. * REPLACE - Replaces all values of a given set of constraints with the current set of values. * REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value. * CLEAR - Removes all constrains for a given variable, scope is ignored      
 
 ### Parameters
 
@@ -4708,7 +4931,44 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **204** | Updating variable values is successful. |  -  |
+| **204** | Variable values updated successfully. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="updateWebhookConfiguration"></a>
+# **updateWebhookConfiguration**
+> updateWebhookConfiguration(webhookIdentifier, updateWebhookConfigurationRequest)
+
+
+
+ Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to perform this action.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **webhookIdentifier** | **String**
+| **updateWebhookConfigurationRequest** | [**UpdateWebhookConfigurationRequest**](UpdateWebhookConfigurationRequest.md)
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Webhook configuration updated successfully |  -  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
