@@ -531,6 +531,12 @@ public class User implements Serializable {
     @javax.annotation.Nullable
     private Object accessControlProperties;
 
+    public static final String SERIALIZED_NAME_VARIABLE_VALUES = "variable_values";
+
+    @SerializedName(SERIALIZED_NAME_VARIABLE_VALUES)
+    @javax.annotation.Nullable
+    private Object variableValues;
+
     public User() {}
 
     public User id(@javax.annotation.Nonnull String id) {
@@ -1448,6 +1454,25 @@ public class User implements Serializable {
         this.accessControlProperties = accessControlProperties;
     }
 
+    public User variableValues(@javax.annotation.Nullable Object variableValues) {
+        this.variableValues = variableValues;
+        return this;
+    }
+
+    /**
+     * Formula Variables which are specified for the user via JWToken
+     *
+     * @return variableValues
+     */
+    @javax.annotation.Nullable
+    public Object getVariableValues() {
+        return variableValues;
+    }
+
+    public void setVariableValues(@javax.annotation.Nullable Object variableValues) {
+        this.variableValues = variableValues;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -1502,7 +1527,8 @@ public class User implements Serializable {
                 && Objects.equals(this.extendedProperties, user.extendedProperties)
                 && Objects.equals(this.extendedPreferences, user.extendedPreferences)
                 && Objects.equals(this.userParameters, user.userParameters)
-                && Objects.equals(this.accessControlProperties, user.accessControlProperties);
+                && Objects.equals(this.accessControlProperties, user.accessControlProperties)
+                && Objects.equals(this.variableValues, user.variableValues);
     }
 
     private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -1561,7 +1587,8 @@ public class User implements Serializable {
                 extendedProperties,
                 extendedPreferences,
                 userParameters,
-                accessControlProperties);
+                accessControlProperties,
+                variableValues);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -1644,6 +1671,7 @@ public class User implements Serializable {
         sb.append("    accessControlProperties: ")
                 .append(toIndentedString(accessControlProperties))
                 .append("\n");
+        sb.append("    variableValues: ").append(toIndentedString(variableValues)).append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -1710,6 +1738,7 @@ public class User implements Serializable {
         openapiFields.add("extended_preferences");
         openapiFields.add("user_parameters");
         openapiFields.add("access_control_properties");
+        openapiFields.add("variable_values");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();

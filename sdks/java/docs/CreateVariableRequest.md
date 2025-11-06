@@ -9,8 +9,8 @@
 |------------ | ------------- | ------------- | -------------|
 |**type** | [**TypeEnum**](#TypeEnum) | Type of variable |  |
 |**name** | **String** | Name of the variable. This is unique across the cluster. |  |
-|**sensitive** | **Boolean** | If the variable contains sensitive values like passwords |  [optional] |
-|**values** | [**List&lt;InputVariableValue&gt;**](InputVariableValue.md) | Values of variable |  [optional] |
+|**isSensitive** | **Boolean** | If the variable contains sensitive values like passwords |  [optional] |
+|**dataType** | [**DataTypeEnum**](#DataTypeEnum) | Variable Data Type |  [optional] |
 
 
 
@@ -21,6 +21,19 @@
 | CONNECTION_PROPERTY | &quot;CONNECTION_PROPERTY&quot; |
 | TABLE_MAPPING | &quot;TABLE_MAPPING&quot; |
 | CONNECTION_PROPERTY_PER_PRINCIPAL | &quot;CONNECTION_PROPERTY_PER_PRINCIPAL&quot; |
+
+
+
+## Enum: DataTypeEnum
+
+| Name | Value |
+|---- | -----|
+| VARCHAR | &quot;VARCHAR&quot; |
+| INT32 | &quot;INT32&quot; |
+| INT64 | &quot;INT64&quot; |
+| DOUBLE | &quot;DOUBLE&quot; |
+| DATE | &quot;DATE&quot; |
+| DATE_TIME | &quot;DATE_TIME&quot; |
 
 
 ## Implemented Interfaces

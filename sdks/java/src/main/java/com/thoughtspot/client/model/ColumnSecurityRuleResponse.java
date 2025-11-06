@@ -33,19 +33,19 @@ import org.openapitools.jackson.nullable.JsonNullable;
 public class ColumnSecurityRuleResponse implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public static final String SERIALIZED_NAME_GUID = "guid";
+    public static final String SERIALIZED_NAME_TABLE_GUID = "table_guid";
 
-    @SerializedName(SERIALIZED_NAME_GUID)
+    @SerializedName(SERIALIZED_NAME_TABLE_GUID)
     @javax.annotation.Nullable
-    private String guid;
+    private String tableGuid;
 
-    public static final String SERIALIZED_NAME_OBJ_ID = "objId";
+    public static final String SERIALIZED_NAME_OBJ_ID = "obj_id";
 
     @SerializedName(SERIALIZED_NAME_OBJ_ID)
     @javax.annotation.Nullable
     private String objId;
 
-    public static final String SERIALIZED_NAME_COLUMN_SECURITY_RULES = "columnSecurityRules";
+    public static final String SERIALIZED_NAME_COLUMN_SECURITY_RULES = "column_security_rules";
 
     @SerializedName(SERIALIZED_NAME_COLUMN_SECURITY_RULES)
     @javax.annotation.Nullable
@@ -53,23 +53,23 @@ public class ColumnSecurityRuleResponse implements Serializable {
 
     public ColumnSecurityRuleResponse() {}
 
-    public ColumnSecurityRuleResponse guid(@javax.annotation.Nullable String guid) {
-        this.guid = guid;
+    public ColumnSecurityRuleResponse tableGuid(@javax.annotation.Nullable String tableGuid) {
+        this.tableGuid = tableGuid;
         return this;
     }
 
     /**
      * GUID of the table for which the column security rules are fetched
      *
-     * @return guid
+     * @return tableGuid
      */
     @javax.annotation.Nullable
-    public String getGuid() {
-        return guid;
+    public String getTableGuid() {
+        return tableGuid;
     }
 
-    public void setGuid(@javax.annotation.Nullable String guid) {
-        this.guid = guid;
+    public void setTableGuid(@javax.annotation.Nullable String tableGuid) {
+        this.tableGuid = tableGuid;
     }
 
     public ColumnSecurityRuleResponse objId(@javax.annotation.Nullable String objId) {
@@ -130,7 +130,7 @@ public class ColumnSecurityRuleResponse implements Serializable {
             return false;
         }
         ColumnSecurityRuleResponse columnSecurityRuleResponse = (ColumnSecurityRuleResponse) o;
-        return Objects.equals(this.guid, columnSecurityRuleResponse.guid)
+        return Objects.equals(this.tableGuid, columnSecurityRuleResponse.tableGuid)
                 && Objects.equals(this.objId, columnSecurityRuleResponse.objId)
                 && Objects.equals(
                         this.columnSecurityRules, columnSecurityRuleResponse.columnSecurityRules);
@@ -147,7 +147,7 @@ public class ColumnSecurityRuleResponse implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(guid, objId, columnSecurityRules);
+        return Objects.hash(tableGuid, objId, columnSecurityRules);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -161,7 +161,7 @@ public class ColumnSecurityRuleResponse implements Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class ColumnSecurityRuleResponse {\n");
-        sb.append("    guid: ").append(toIndentedString(guid)).append("\n");
+        sb.append("    tableGuid: ").append(toIndentedString(tableGuid)).append("\n");
         sb.append("    objId: ").append(toIndentedString(objId)).append("\n");
         sb.append("    columnSecurityRules: ")
                 .append(toIndentedString(columnSecurityRules))
@@ -187,9 +187,9 @@ public class ColumnSecurityRuleResponse implements Serializable {
     static {
         // a set of all properties/fields (JSON key names)
         openapiFields = new HashSet<String>();
-        openapiFields.add("guid");
-        openapiFields.add("objId");
-        openapiFields.add("columnSecurityRules");
+        openapiFields.add("table_guid");
+        openapiFields.add("obj_id");
+        openapiFields.add("column_security_rules");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -225,36 +225,37 @@ public class ColumnSecurityRuleResponse implements Serializable {
             }
         }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-        if ((jsonObj.get("guid") != null && !jsonObj.get("guid").isJsonNull())
-                && !jsonObj.get("guid").isJsonPrimitive()) {
+        if ((jsonObj.get("table_guid") != null && !jsonObj.get("table_guid").isJsonNull())
+                && !jsonObj.get("table_guid").isJsonPrimitive()) {
             throw new IllegalArgumentException(
                     String.format(
-                            "Expected the field `guid` to be a primitive type in the JSON string"
-                                    + " but got `%s`",
-                            jsonObj.get("guid").toString()));
+                            "Expected the field `table_guid` to be a primitive type in the JSON"
+                                    + " string but got `%s`",
+                            jsonObj.get("table_guid").toString()));
         }
-        if ((jsonObj.get("objId") != null && !jsonObj.get("objId").isJsonNull())
-                && !jsonObj.get("objId").isJsonPrimitive()) {
+        if ((jsonObj.get("obj_id") != null && !jsonObj.get("obj_id").isJsonNull())
+                && !jsonObj.get("obj_id").isJsonPrimitive()) {
             throw new IllegalArgumentException(
                     String.format(
-                            "Expected the field `objId` to be a primitive type in the JSON string"
+                            "Expected the field `obj_id` to be a primitive type in the JSON string"
                                     + " but got `%s`",
-                            jsonObj.get("objId").toString()));
+                            jsonObj.get("obj_id").toString()));
         }
-        if (jsonObj.get("columnSecurityRules") != null
-                && !jsonObj.get("columnSecurityRules").isJsonNull()) {
-            JsonArray jsonArraycolumnSecurityRules = jsonObj.getAsJsonArray("columnSecurityRules");
+        if (jsonObj.get("column_security_rules") != null
+                && !jsonObj.get("column_security_rules").isJsonNull()) {
+            JsonArray jsonArraycolumnSecurityRules =
+                    jsonObj.getAsJsonArray("column_security_rules");
             if (jsonArraycolumnSecurityRules != null) {
                 // ensure the json data is an array
-                if (!jsonObj.get("columnSecurityRules").isJsonArray()) {
+                if (!jsonObj.get("column_security_rules").isJsonArray()) {
                     throw new IllegalArgumentException(
                             String.format(
-                                    "Expected the field `columnSecurityRules` to be an array in"
+                                    "Expected the field `column_security_rules` to be an array in"
                                             + " the JSON string but got `%s`",
-                                    jsonObj.get("columnSecurityRules").toString()));
+                                    jsonObj.get("column_security_rules").toString()));
                 }
 
-                // validate the optional field `columnSecurityRules` (array)
+                // validate the optional field `column_security_rules` (array)
                 for (int i = 0; i < jsonArraycolumnSecurityRules.size(); i++) {
                     ColumnSecurityRule.validateJsonElement(jsonArraycolumnSecurityRules.get(i));
                 }

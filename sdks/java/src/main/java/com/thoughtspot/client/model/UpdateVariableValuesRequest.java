@@ -10,7 +10,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
-import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
@@ -32,121 +31,78 @@ import java.util.Set;
 public class UpdateVariableValuesRequest implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public static final String SERIALIZED_NAME_VARIABLE_UPDATES = "variable_updates";
+    public static final String SERIALIZED_NAME_VARIABLE_ASSIGNMENT = "variable_assignment";
 
-    @SerializedName(SERIALIZED_NAME_VARIABLE_UPDATES)
+    @SerializedName(SERIALIZED_NAME_VARIABLE_ASSIGNMENT)
     @javax.annotation.Nonnull
-    private List<VariableValueInput> variableUpdates;
+    private List<VariableUpdateAssignmentInput> variableAssignment;
 
-    /** Type of update operation */
-    @JsonAdapter(OperationEnum.Adapter.class)
-    public enum OperationEnum {
-        ADD("ADD"),
+    public static final String SERIALIZED_NAME_VARIABLE_VALUE_SCOPE = "variable_value_scope";
 
-        REMOVE("REMOVE"),
-
-        REPLACE("REPLACE");
-
-        private String value;
-
-        OperationEnum(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        public static OperationEnum fromValue(String value) {
-            for (OperationEnum b : OperationEnum.values()) {
-                if (b.value.equals(value)) {
-                    return b;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected value '" + value + "'");
-        }
-
-        public static class Adapter extends TypeAdapter<OperationEnum> {
-            @Override
-            public void write(final JsonWriter jsonWriter, final OperationEnum enumeration)
-                    throws IOException {
-                jsonWriter.value(enumeration.getValue());
-            }
-
-            @Override
-            public OperationEnum read(final JsonReader jsonReader) throws IOException {
-                String value = jsonReader.nextString();
-                return OperationEnum.fromValue(value);
-            }
-        }
-
-        public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-            String value = jsonElement.getAsString();
-            OperationEnum.fromValue(value);
-        }
-    }
-
-    public static final String SERIALIZED_NAME_OPERATION = "operation";
-
-    @SerializedName(SERIALIZED_NAME_OPERATION)
+    @SerializedName(SERIALIZED_NAME_VARIABLE_VALUE_SCOPE)
     @javax.annotation.Nonnull
-    private OperationEnum operation;
+    private List<VariableUpdateScopeInput> variableValueScope;
 
     public UpdateVariableValuesRequest() {}
 
-    public UpdateVariableValuesRequest variableUpdates(
-            @javax.annotation.Nonnull List<VariableValueInput> variableUpdates) {
-        this.variableUpdates = variableUpdates;
+    public UpdateVariableValuesRequest variableAssignment(
+            @javax.annotation.Nonnull List<VariableUpdateAssignmentInput> variableAssignment) {
+        this.variableAssignment = variableAssignment;
         return this;
     }
 
-    public UpdateVariableValuesRequest addVariableUpdatesItem(
-            VariableValueInput variableUpdatesItem) {
-        if (this.variableUpdates == null) {
-            this.variableUpdates = new ArrayList<>();
+    public UpdateVariableValuesRequest addVariableAssignmentItem(
+            VariableUpdateAssignmentInput variableAssignmentItem) {
+        if (this.variableAssignment == null) {
+            this.variableAssignment = new ArrayList<>();
         }
-        this.variableUpdates.add(variableUpdatesItem);
+        this.variableAssignment.add(variableAssignmentItem);
         return this;
     }
 
     /**
-     * Variables and values
+     * Variables and values to update
      *
-     * @return variableUpdates
+     * @return variableAssignment
      */
     @javax.annotation.Nonnull
-    public List<VariableValueInput> getVariableUpdates() {
-        return variableUpdates;
+    public List<VariableUpdateAssignmentInput> getVariableAssignment() {
+        return variableAssignment;
     }
 
-    public void setVariableUpdates(
-            @javax.annotation.Nonnull List<VariableValueInput> variableUpdates) {
-        this.variableUpdates = variableUpdates;
+    public void setVariableAssignment(
+            @javax.annotation.Nonnull List<VariableUpdateAssignmentInput> variableAssignment) {
+        this.variableAssignment = variableAssignment;
     }
 
-    public UpdateVariableValuesRequest operation(
-            @javax.annotation.Nonnull OperationEnum operation) {
-        this.operation = operation;
+    public UpdateVariableValuesRequest variableValueScope(
+            @javax.annotation.Nonnull List<VariableUpdateScopeInput> variableValueScope) {
+        this.variableValueScope = variableValueScope;
+        return this;
+    }
+
+    public UpdateVariableValuesRequest addVariableValueScopeItem(
+            VariableUpdateScopeInput variableValueScopeItem) {
+        if (this.variableValueScope == null) {
+            this.variableValueScope = new ArrayList<>();
+        }
+        this.variableValueScope.add(variableValueScopeItem);
         return this;
     }
 
     /**
-     * Type of update operation
+     * Variables and values to update
      *
-     * @return operation
+     * @return variableValueScope
      */
     @javax.annotation.Nonnull
-    public OperationEnum getOperation() {
-        return operation;
+    public List<VariableUpdateScopeInput> getVariableValueScope() {
+        return variableValueScope;
     }
 
-    public void setOperation(@javax.annotation.Nonnull OperationEnum operation) {
-        this.operation = operation;
+    public void setVariableValueScope(
+            @javax.annotation.Nonnull List<VariableUpdateScopeInput> variableValueScope) {
+        this.variableValueScope = variableValueScope;
     }
 
     @Override
@@ -158,21 +114,27 @@ public class UpdateVariableValuesRequest implements Serializable {
             return false;
         }
         UpdateVariableValuesRequest updateVariableValuesRequest = (UpdateVariableValuesRequest) o;
-        return Objects.equals(this.variableUpdates, updateVariableValuesRequest.variableUpdates)
-                && Objects.equals(this.operation, updateVariableValuesRequest.operation);
+        return Objects.equals(
+                        this.variableAssignment, updateVariableValuesRequest.variableAssignment)
+                && Objects.equals(
+                        this.variableValueScope, updateVariableValuesRequest.variableValueScope);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(variableUpdates, operation);
+        return Objects.hash(variableAssignment, variableValueScope);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class UpdateVariableValuesRequest {\n");
-        sb.append("    variableUpdates: ").append(toIndentedString(variableUpdates)).append("\n");
-        sb.append("    operation: ").append(toIndentedString(operation)).append("\n");
+        sb.append("    variableAssignment: ")
+                .append(toIndentedString(variableAssignment))
+                .append("\n");
+        sb.append("    variableValueScope: ")
+                .append(toIndentedString(variableValueScope))
+                .append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -194,13 +156,13 @@ public class UpdateVariableValuesRequest implements Serializable {
     static {
         // a set of all properties/fields (JSON key names)
         openapiFields = new HashSet<String>();
-        openapiFields.add("variable_updates");
-        openapiFields.add("operation");
+        openapiFields.add("variable_assignment");
+        openapiFields.add("variable_value_scope");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
-        openapiRequiredFields.add("variable_updates");
-        openapiRequiredFields.add("operation");
+        openapiRequiredFields.add("variable_assignment");
+        openapiRequiredFields.add("variable_value_scope");
     }
 
     /**
@@ -245,29 +207,35 @@ public class UpdateVariableValuesRequest implements Serializable {
         }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
         // ensure the json data is an array
-        if (!jsonObj.get("variable_updates").isJsonArray()) {
+        if (!jsonObj.get("variable_assignment").isJsonArray()) {
             throw new IllegalArgumentException(
                     String.format(
-                            "Expected the field `variable_updates` to be an array in the JSON"
+                            "Expected the field `variable_assignment` to be an array in the JSON"
                                     + " string but got `%s`",
-                            jsonObj.get("variable_updates").toString()));
+                            jsonObj.get("variable_assignment").toString()));
         }
 
-        JsonArray jsonArrayvariableUpdates = jsonObj.getAsJsonArray("variable_updates");
-        // validate the required field `variable_updates` (array)
-        for (int i = 0; i < jsonArrayvariableUpdates.size(); i++) {
-            VariableValueInput.validateJsonElement(jsonArrayvariableUpdates.get(i));
+        JsonArray jsonArrayvariableAssignment = jsonObj.getAsJsonArray("variable_assignment");
+        // validate the required field `variable_assignment` (array)
+        for (int i = 0; i < jsonArrayvariableAssignment.size(); i++) {
+            VariableUpdateAssignmentInput.validateJsonElement(jsonArrayvariableAssignment.get(i));
         }
         ;
-        if (!jsonObj.get("operation").isJsonPrimitive()) {
+        // ensure the json data is an array
+        if (!jsonObj.get("variable_value_scope").isJsonArray()) {
             throw new IllegalArgumentException(
                     String.format(
-                            "Expected the field `operation` to be a primitive type in the JSON"
+                            "Expected the field `variable_value_scope` to be an array in the JSON"
                                     + " string but got `%s`",
-                            jsonObj.get("operation").toString()));
+                            jsonObj.get("variable_value_scope").toString()));
         }
-        // validate the required field `operation`
-        OperationEnum.validateJsonElement(jsonObj.get("operation"));
+
+        JsonArray jsonArrayvariableValueScope = jsonObj.getAsJsonArray("variable_value_scope");
+        // validate the required field `variable_value_scope` (array)
+        for (int i = 0; i < jsonArrayvariableValueScope.size(); i++) {
+            VariableUpdateScopeInput.validateJsonElement(jsonArrayvariableValueScope.get(i));
+        }
+        ;
     }
 
     public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

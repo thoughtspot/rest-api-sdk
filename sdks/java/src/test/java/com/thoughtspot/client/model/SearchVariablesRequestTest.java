@@ -22,6 +22,12 @@ public class SearchVariablesRequestTest {
         // TODO: test variableDetails
     }
 
+    /** Test the property 'valueScope' */
+    @Test
+    public void valueScopeTest() {
+        // TODO: test valueScope
+    }
+
     /** Test the property 'recordOffset' */
     @Test
     public void recordOffsetTest() {

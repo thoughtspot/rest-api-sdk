@@ -154,6 +154,7 @@ import { GetAsyncImportStatusResponse } from '../models/GetAsyncImportStatusResp
 import { GetCustomAccessTokenRequest } from '../models/GetCustomAccessTokenRequest';
 import { GetDataSourceSuggestionsRequest } from '../models/GetDataSourceSuggestionsRequest';
 import { GetFullAccessTokenRequest } from '../models/GetFullAccessTokenRequest';
+import { GetFullAccessTokenRequestUserParameters } from '../models/GetFullAccessTokenRequestUserParameters';
 import { GetObjectAccessTokenRequest } from '../models/GetObjectAccessTokenRequest';
 import { GetRelevantQuestionsRequest } from '../models/GetRelevantQuestionsRequest';
 import { GetRelevantQuestionsRequestAiContext } from '../models/GetRelevantQuestionsRequestAiContext';

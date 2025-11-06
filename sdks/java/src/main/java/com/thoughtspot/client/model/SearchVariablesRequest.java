@@ -38,6 +38,12 @@ public class SearchVariablesRequest implements Serializable {
     @javax.annotation.Nullable
     private List<VariableDetailInput> variableDetails;
 
+    public static final String SERIALIZED_NAME_VALUE_SCOPE = "value_scope";
+
+    @SerializedName(SERIALIZED_NAME_VALUE_SCOPE)
+    @javax.annotation.Nullable
+    private List<ValueScopeInput> valueScope;
+
     public static final String SERIALIZED_NAME_RECORD_OFFSET = "record_offset";
 
     @SerializedName(SERIALIZED_NAME_RECORD_OFFSET)
@@ -55,9 +61,7 @@ public class SearchVariablesRequest implements Serializable {
     public enum OutputFormatEnum {
         METADATA_ONLY("METADATA_ONLY"),
 
-        METADATA_AND_VALUES("METADATA_AND_VALUES"),
-
-        EDITABLE_METADATA_AND_VALUES("EDITABLE_METADATA_AND_VALUES");
+        METADATA_AND_VALUES("METADATA_AND_VALUES");
 
         private String value;
 
@@ -140,6 +144,34 @@ public class SearchVariablesRequest implements Serializable {
         this.variableDetails = variableDetails;
     }
 
+    public SearchVariablesRequest valueScope(
+            @javax.annotation.Nullable List<ValueScopeInput> valueScope) {
+        this.valueScope = valueScope;
+        return this;
+    }
+
+    public SearchVariablesRequest addValueScopeItem(ValueScopeInput valueScopeItem) {
+        if (this.valueScope == null) {
+            this.valueScope = new ArrayList<>();
+        }
+        this.valueScope.add(valueScopeItem);
+        return this;
+    }
+
+    /**
+     * Array of scope filters
+     *
+     * @return valueScope
+     */
+    @javax.annotation.Nullable
+    public List<ValueScopeInput> getValueScope() {
+        return valueScope;
+    }
+
+    public void setValueScope(@javax.annotation.Nullable List<ValueScopeInput> valueScope) {
+        this.valueScope = valueScope;
+    }
+
     public SearchVariablesRequest recordOffset(@javax.annotation.Nullable Integer recordOffset) {
         this.recordOffset = recordOffset;
         return this;
@@ -208,6 +240,7 @@ public class SearchVariablesRequest implements Serializable {
         }
         SearchVariablesRequest searchVariablesRequest = (SearchVariablesRequest) o;
         return Objects.equals(this.variableDetails, searchVariablesRequest.variableDetails)
+                && Objects.equals(this.valueScope, searchVariablesRequest.valueScope)
                 && Objects.equals(this.recordOffset, searchVariablesRequest.recordOffset)
                 && Objects.equals(this.recordSize, searchVariablesRequest.recordSize)
                 && Objects.equals(this.outputFormat, searchVariablesRequest.outputFormat);
@@ -215,7 +248,7 @@ public class SearchVariablesRequest implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(variableDetails, recordOffset, recordSize, outputFormat);
+        return Objects.hash(variableDetails, valueScope, recordOffset, recordSize, outputFormat);
     }
 
     @Override
@@ -223,6 +256,7 @@ public class SearchVariablesRequest implements Serializable {
         StringBuilder sb = new StringBuilder();
         sb.append("class SearchVariablesRequest {\n");
         sb.append("    variableDetails: ").append(toIndentedString(variableDetails)).append("\n");
+        sb.append("    valueScope: ").append(toIndentedString(valueScope)).append("\n");
         sb.append("    recordOffset: ").append(toIndentedString(recordOffset)).append("\n");
         sb.append("    recordSize: ").append(toIndentedString(recordSize)).append("\n");
         sb.append("    outputFormat: ").append(toIndentedString(outputFormat)).append("\n");
@@ -248,6 +282,7 @@ public class SearchVariablesRequest implements Serializable {
         // a set of all properties/fields (JSON key names)
         openapiFields = new HashSet<String>();
         openapiFields.add("variable_details");
+        openapiFields.add("value_scope");
         openapiFields.add("record_offset");
         openapiFields.add("record_size");
         openapiFields.add("output_format");
@@ -302,6 +337,25 @@ public class SearchVariablesRequest implements Serializable {
                 // validate the optional field `variable_details` (array)
                 for (int i = 0; i < jsonArrayvariableDetails.size(); i++) {
                     VariableDetailInput.validateJsonElement(jsonArrayvariableDetails.get(i));
+                }
+                ;
+            }
+        }
+        if (jsonObj.get("value_scope") != null && !jsonObj.get("value_scope").isJsonNull()) {
+            JsonArray jsonArrayvalueScope = jsonObj.getAsJsonArray("value_scope");
+            if (jsonArrayvalueScope != null) {
+                // ensure the json data is an array
+                if (!jsonObj.get("value_scope").isJsonArray()) {
+                    throw new IllegalArgumentException(
+                            String.format(
+                                    "Expected the field `value_scope` to be an array in the JSON"
+                                            + " string but got `%s`",
+                                    jsonObj.get("value_scope").toString()));
+                }
+
+                // validate the optional field `value_scope` (array)
+                for (int i = 0; i < jsonArrayvalueScope.size(); i++) {
+                    ValueScopeInput.validateJsonElement(jsonArrayvalueScope.get(i));
                 }
                 ;
             }

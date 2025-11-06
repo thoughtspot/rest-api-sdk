@@ -117,6 +117,12 @@ public class ResponseSchedule implements Serializable {
     @javax.annotation.Nullable
     private List<ResponseScheduleRun> historyRuns;
 
+    public static final String SERIALIZED_NAME_PERSONALISED_VIEW_ID = "personalised_view_id";
+
+    @SerializedName(SERIALIZED_NAME_PERSONALISED_VIEW_ID)
+    @javax.annotation.Nullable
+    private String personalisedViewId;
+
     public ResponseSchedule() {}
 
     public ResponseSchedule author(@javax.annotation.Nonnull Author author) {
@@ -397,6 +403,26 @@ public class ResponseSchedule implements Serializable {
         this.historyRuns = historyRuns;
     }
 
+    public ResponseSchedule personalisedViewId(
+            @javax.annotation.Nullable String personalisedViewId) {
+        this.personalisedViewId = personalisedViewId;
+        return this;
+    }
+
+    /**
+     * Personalised view id of the liveboard to be scheduled.
+     *
+     * @return personalisedViewId
+     */
+    @javax.annotation.Nullable
+    public String getPersonalisedViewId() {
+        return personalisedViewId;
+    }
+
+    public void setPersonalisedViewId(@javax.annotation.Nullable String personalisedViewId) {
+        this.personalisedViewId = personalisedViewId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -419,7 +445,8 @@ public class ResponseSchedule implements Serializable {
                 && Objects.equals(this.recipientDetails, responseSchedule.recipientDetails)
                 && Objects.equals(this.status, responseSchedule.status)
                 && Objects.equals(this.timeZone, responseSchedule.timeZone)
-                && Objects.equals(this.historyRuns, responseSchedule.historyRuns);
+                && Objects.equals(this.historyRuns, responseSchedule.historyRuns)
+                && Objects.equals(this.personalisedViewId, responseSchedule.personalisedViewId);
     }
 
     private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -447,7 +474,8 @@ public class ResponseSchedule implements Serializable {
                 recipientDetails,
                 status,
                 timeZone,
-                historyRuns);
+                historyRuns,
+                personalisedViewId);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -477,6 +505,9 @@ public class ResponseSchedule implements Serializable {
         sb.append("    status: ").append(toIndentedString(status)).append("\n");
         sb.append("    timeZone: ").append(toIndentedString(timeZone)).append("\n");
         sb.append("    historyRuns: ").append(toIndentedString(historyRuns)).append("\n");
+        sb.append("    personalisedViewId: ")
+                .append(toIndentedString(personalisedViewId))
+                .append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -512,6 +543,7 @@ public class ResponseSchedule implements Serializable {
         openapiFields.add("status");
         openapiFields.add("time_zone");
         openapiFields.add("history_runs");
+        openapiFields.add("personalised_view_id");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -645,6 +677,15 @@ public class ResponseSchedule implements Serializable {
                 }
                 ;
             }
+        }
+        if ((jsonObj.get("personalised_view_id") != null
+                        && !jsonObj.get("personalised_view_id").isJsonNull())
+                && !jsonObj.get("personalised_view_id").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `personalised_view_id` to be a primitive type in"
+                                    + " the JSON string but got `%s`",
+                            jsonObj.get("personalised_view_id").toString()));
         }
     }
 

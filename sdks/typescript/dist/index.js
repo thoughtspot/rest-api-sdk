@@ -5710,9 +5710,52 @@ _GetFullAccessTokenRequest.attributeTypeMap = [
     "baseName": "group_identifiers",
     "type": "Array<string>",
     "format": ""
+  },
+  {
+    "name": "user_parameters",
+    "baseName": "user_parameters",
+    "type": "GetFullAccessTokenRequestUserParameters",
+    "format": ""
   }
 ];
 var GetFullAccessTokenRequest = _GetFullAccessTokenRequest;
+
+// models/GetFullAccessTokenRequestUserParameters.ts
+var _GetFullAccessTokenRequestUserParameters = class _GetFullAccessTokenRequestUserParameters {
+  static getAttributeTypeMap() {
+    return _GetFullAccessTokenRequestUserParameters.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_GetFullAccessTokenRequestUserParameters.discriminator = void 0;
+_GetFullAccessTokenRequestUserParameters.attributeTypeMap = [
+  {
+    "name": "objects",
+    "baseName": "objects",
+    "type": "Array<UserObject>",
+    "format": ""
+  },
+  {
+    "name": "runtime_filters",
+    "baseName": "runtime_filters",
+    "type": "Array<RuntimeFilters>",
+    "format": ""
+  },
+  {
+    "name": "runtime_sorts",
+    "baseName": "runtime_sorts",
+    "type": "Array<RuntimeSorts>",
+    "format": ""
+  },
+  {
+    "name": "parameters",
+    "baseName": "parameters",
+    "type": "Array<RuntimeParameters>",
+    "format": ""
+  }
+];
+var GetFullAccessTokenRequestUserParameters = _GetFullAccessTokenRequestUserParameters;
 
 // models/GetObjectAccessTokenRequest.ts
 var _GetObjectAccessTokenRequest = class _GetObjectAccessTokenRequest {
@@ -5782,6 +5825,12 @@ _GetObjectAccessTokenRequest.attributeTypeMap = [
     "name": "group_identifiers",
     "baseName": "group_identifiers",
     "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "user_parameters",
+    "baseName": "user_parameters",
+    "type": "GetFullAccessTokenRequestUserParameters",
     "format": ""
   }
 ];
@@ -15326,6 +15375,7 @@ var typeMap = {
   "GetCustomAccessTokenRequest": GetCustomAccessTokenRequest,
   "GetDataSourceSuggestionsRequest": GetDataSourceSuggestionsRequest,
   "GetFullAccessTokenRequest": GetFullAccessTokenRequest,
+  "GetFullAccessTokenRequestUserParameters": GetFullAccessTokenRequestUserParameters,
   "GetObjectAccessTokenRequest": GetObjectAccessTokenRequest,
   "GetRelevantQuestionsRequest": GetRelevantQuestionsRequest,
   "GetRelevantQuestionsRequestAiContext": GetRelevantQuestionsRequestAiContext,
@@ -49460,6 +49510,7 @@ export {
   GetCustomAccessTokenRequest,
   GetDataSourceSuggestionsRequest,
   GetFullAccessTokenRequest,
+  GetFullAccessTokenRequestUserParameters,
   GetObjectAccessTokenRequest,
   GetRelevantQuestionsRequest,
   GetRelevantQuestionsRequestAiContext,
