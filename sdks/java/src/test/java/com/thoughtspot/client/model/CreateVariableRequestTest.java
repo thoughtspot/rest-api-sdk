@@ -28,15 +28,15 @@ public class CreateVariableRequestTest {
         // TODO: test name
     }
 
-    /** Test the property 'sensitive' */
+    /** Test the property 'isSensitive' */
     @Test
-    public void sensitiveTest() {
-        // TODO: test sensitive
+    public void isSensitiveTest() {
+        // TODO: test isSensitive
     }
 
-    /** Test the property 'values' */
+    /** Test the property 'dataType' */
     @Test
-    public void valuesTest() {
-        // TODO: test values
+    public void dataTypeTest() {
+        // TODO: test dataType
     }
 }

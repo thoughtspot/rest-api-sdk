@@ -52,6 +52,7 @@
 |**extendedPreferences** | **Object** | Preferences for the user |  [optional] |
 |**userParameters** | **Object** | User Parameters which are specified for the user via JWToken |  [optional] |
 |**accessControlProperties** | **Object** | Access Control Properties which are specified for the user via JWToken |  [optional] |
+|**variableValues** | **Object** | Formula Variables which are specified for the user via JWToken |  [optional] |
 
 
 

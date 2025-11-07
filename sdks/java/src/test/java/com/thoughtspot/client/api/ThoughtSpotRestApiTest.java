@@ -17,6 +17,8 @@ import com.thoughtspot.client.model.ColumnSecurityRuleResponse;
 import com.thoughtspot.client.model.CommitBranchRequest;
 import com.thoughtspot.client.model.CommitHistoryResponse;
 import com.thoughtspot.client.model.CommitResponse;
+import com.thoughtspot.client.model.CommunicationChannelPreferencesResponse;
+import com.thoughtspot.client.model.ConfigureCommunicationChannelPreferencesRequest;
 import com.thoughtspot.client.model.ConnectionConfigurationResponse;
 import com.thoughtspot.client.model.ConnectionConfigurationSearchRequest;
 import com.thoughtspot.client.model.Conversation;
@@ -39,6 +41,7 @@ import com.thoughtspot.client.model.CreateTagRequest;
 import com.thoughtspot.client.model.CreateUserGroupRequest;
 import com.thoughtspot.client.model.CreateUserRequest;
 import com.thoughtspot.client.model.CreateVariableRequest;
+import com.thoughtspot.client.model.CreateWebhookConfigurationRequest;
 import com.thoughtspot.client.model.DbtSearchResponse;
 import com.thoughtspot.client.model.DeactivateUserRequest;
 import com.thoughtspot.client.model.DeleteConfigRequest;
@@ -46,6 +49,7 @@ import com.thoughtspot.client.model.DeleteConnectionConfigurationRequest;
 import com.thoughtspot.client.model.DeleteConnectionRequest;
 import com.thoughtspot.client.model.DeleteMetadataRequest;
 import com.thoughtspot.client.model.DeleteOrgEmailCustomizationRequest;
+import com.thoughtspot.client.model.DeleteWebhookConfigurationsRequest;
 import com.thoughtspot.client.model.DeployCommitRequest;
 import com.thoughtspot.client.model.DeployResponse;
 import com.thoughtspot.client.model.EurekaDataSourceSuggestionResponse;
@@ -105,6 +109,7 @@ import com.thoughtspot.client.model.RevokeTokenRequest;
 import com.thoughtspot.client.model.RoleResponse;
 import com.thoughtspot.client.model.SearchCalendarsRequest;
 import com.thoughtspot.client.model.SearchCommitsRequest;
+import com.thoughtspot.client.model.SearchCommunicationChannelPreferencesRequest;
 import com.thoughtspot.client.model.SearchConfigRequest;
 import com.thoughtspot.client.model.SearchConnectionRequest;
 import com.thoughtspot.client.model.SearchConnectionResponse;
@@ -121,6 +126,8 @@ import com.thoughtspot.client.model.SearchTagsRequest;
 import com.thoughtspot.client.model.SearchUserGroupsRequest;
 import com.thoughtspot.client.model.SearchUsersRequest;
 import com.thoughtspot.client.model.SearchVariablesRequest;
+import com.thoughtspot.client.model.SearchWebhookConfigurationsRequest;
+import com.thoughtspot.client.model.SendAgentMessageRequest;
 import com.thoughtspot.client.model.SendAgentMessageResponse;
 import com.thoughtspot.client.model.SendAgentMessageStreamingRequest;
 import com.thoughtspot.client.model.SendMessageRequest;
@@ -154,11 +161,15 @@ import com.thoughtspot.client.model.UpdateUserGroupRequest;
 import com.thoughtspot.client.model.UpdateUserRequest;
 import com.thoughtspot.client.model.UpdateVariableRequest;
 import com.thoughtspot.client.model.UpdateVariableValuesRequest;
+import com.thoughtspot.client.model.UpdateWebhookConfigurationRequest;
 import com.thoughtspot.client.model.User;
 import com.thoughtspot.client.model.UserGroupResponse;
 import com.thoughtspot.client.model.ValidateMergeRequest;
 import com.thoughtspot.client.model.ValidateTokenRequest;
 import com.thoughtspot.client.model.Variable;
+import com.thoughtspot.client.model.WebhookDeleteResponse;
+import com.thoughtspot.client.model.WebhookResponse;
+import com.thoughtspot.client.model.WebhookSearchResponse;
 import java.io.File;
 import java.util.List;
 import org.junit.jupiter.api.Disabled;
@@ -251,6 +262,29 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     * Version: 10.14.0.cl or later Configure communication channel preferences. - Use
+     * &#x60;cluster_preferences&#x60; to update the default preferences for your ThoughtSpot
+     * application instance. - If your instance has
+     * [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), use
+     * &#x60;org_preferences&#x60; to specify Org-specific preferences that override the defaults.
+     * Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60;
+     * (**Has developer privilege**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
+     * &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can manage application settings**) privilege are
+     * also authorized to perform this action.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void configureCommunicationChannelPreferencesTest() throws ApiException {
+        ConfigureCommunicationChannelPreferencesRequest
+                configureCommunicationChannelPreferencesRequest = null;
+        api.configureCommunicationChannelPreferences(
+                configureCommunicationChannelPreferencesRequest);
+        // TODO: test validations
+    }
+
+    /**
      * Version: 10.12.0.cl or later Gets connection configuration objects. Requires
      * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection
      * object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
@@ -318,9 +352,9 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Makes a copy of an Answer or Liveboard saved in Atlas Version: 10.3.0.cl or later Creates a
-     * copy of a metadata object. Requires at least view access to the metadata object being copied.
-     * Upon successful execution, the API creates a copy of the metadata object specified in the API
+     * Makes a copy of an Answer or Liveboard Version: 10.3.0.cl or later Creates a copy of a
+     * metadata object. Requires at least view access to the metadata object being copied. Upon
+     * successful execution, the API creates a copy of the metadata object specified in the API
      * request and returns the ID of the new object.
      *
      * @throws ApiException if the Api call fails
@@ -722,17 +756,18 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Create a variable which can be used for parameterizing metadata objects Version: 10.9.0.cl or
-     * later Allows creating a variable which can be used for parameterizing metadata objects in
-     * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint supports the
-     * following types of variables: * CONNECTION_PROPERTY - For connection properties *
-     * TABLE_MAPPING - For table mappings * CONNECTION_PROPERTY_PER_PRINCIPAL - For connection
-     * properties per principal. In order to use this please contact support to enable this. *
-     * FORMULA_VARIABLE - For Formula variables When creating a variable, you need to specify: * The
-     * variable type * A unique name for the variable * Whether the variable contains sensitive
-     * values (defaults to false) * The data type of the variable, only specify for fomula variables
-     * (defaults to null) The operation will fail if: * The user lacks required permissions * The
-     * variable name already exists * The variable type is invalid
+     * Create a variable which can be used for parameterizing metadata objects Version: 10.14.0.cl
+     * or later Allows creating a variable which can be used for parameterizing metadata objects in
+     * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES
+     * permission allows you to manage Formula Variables in the current organization scope. The API
+     * endpoint supports the following types of variables: * CONNECTION_PROPERTY - For connection
+     * properties * TABLE_MAPPING - For table mappings * CONNECTION_PROPERTY_PER_PRINCIPAL - For
+     * connection properties per principal. In order to use this please contact support to enable
+     * this. * FORMULA_VARIABLE - For Formula variables When creating a variable, you need to
+     * specify: * The variable type * A unique name for the variable * Whether the variable contains
+     * sensitive values (defaults to false) * The data type of the variable, only specify for fomula
+     * variables (defaults to null) The operation will fail if: * The user lacks required
+     * permissions * The variable name already exists * The variable type is invalid
      *
      * @throws ApiException if the Api call fails
      */
@@ -740,6 +775,25 @@ public class ThoughtSpotRestApiTest {
     public void createVariableTest() throws ApiException {
         CreateVariableRequest createVariableRequest = null;
         Variable response = api.createVariable(createVariableRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 10.14.0.cl or later Creates a new webhook configuration to receive notifications for
+     * specified events. The webhook will be triggered when the configured events occur in the
+     * system. Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or
+     * &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
+     * &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to
+     * perform this action.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void createWebhookConfigurationTest() throws ApiException {
+        CreateWebhookConfigurationRequest createWebhookConfigurationRequest = null;
+        WebhookResponse response =
+                api.createWebhookConfiguration(createWebhookConfigurationRequest);
         // TODO: test validations
     }
 
@@ -827,15 +881,15 @@ public class ThoughtSpotRestApiTest {
     @Test
     public void dbtGenerateTmlTest() throws ApiException {
         String dbtConnectionIdentifier = null;
-        String importWorksheets = null;
         String modelTables = null;
+        String importWorksheets = null;
         String worksheets = null;
         File fileContent = null;
         Object response =
                 api.dbtGenerateTml(
                         dbtConnectionIdentifier,
-                        importWorksheets,
                         modelTables,
+                        importWorksheets,
                         worksheets,
                         fileContent);
         // TODO: test validations
@@ -1161,10 +1215,11 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Delete a variable Version: 10.9.0.cl or later Allows deleting a variable from ThoughtSpot.
-     * Requires ADMINISTRATION role and TENANT scope. The API endpoint requires: * The variable
-     * identifier (ID or name) The operation will fail if: * The user lacks required permissions *
-     * The variable doesn&#39;t exist * The variable is being used by other objects
+     * Delete a variable Version: 10.14.0.cl or later Allows deleting a variable from ThoughtSpot.
+     * Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you
+     * to manage Formula Variables in the current organization scope. The API endpoint requires: *
+     * The variable identifier (ID or name) The operation will fail if: * The user lacks required
+     * permissions * The variable doesn&#39;t exist * The variable is being used by other objects
      *
      * @throws ApiException if the Api call fails
      */
@@ -1172,6 +1227,25 @@ public class ThoughtSpotRestApiTest {
     public void deleteVariableTest() throws ApiException {
         String identifier = null;
         api.deleteVariable(identifier);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 10.14.0.cl or later Deletes one or more webhook configurations by their unique id or
+     * name. Returns status of each deletion operation, including successfully deleted webhooks and
+     * any failures with error details. Requires &#x60;ADMINISTRATION&#x60; (**Can administer
+     * ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If
+     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
+     * on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**)
+     * privilege are also authorized to perform this action.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void deleteWebhookConfigurationsTest() throws ApiException {
+        DeleteWebhookConfigurationsRequest deleteWebhookConfigurationsRequest = null;
+        WebhookDeleteResponse response =
+                api.deleteWebhookConfigurations(deleteWebhookConfigurationsRequest);
         // TODO: test validations
     }
 
@@ -1673,8 +1747,7 @@ public class ThoughtSpotRestApiTest {
      * persist on a specific set of objects for user sessions initiated using the token. Once
      * defined, the rules are added to the user&#39;s &#x60;access_control_properties&#x60; object,
      * after which all sessions will use the persisted values. Specify the object type as
-     * &#x60;LOGICAL_TABLE&#x60;. The &#x60;LIVEBOARD&#x60; and &#x60;ANSWER&#x60; object types are
-     * not supported. For more information, see [ABAC via tokens
+     * &#x60;LOGICAL_TABLE&#x60;. For more information, see [ABAC via tokens
      * Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).
      * ##### Just-in-time provisioning For just-in-time user creation and provisioning, define the
      * following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
@@ -1682,7 +1755,9 @@ public class ThoughtSpotRestApiTest {
      * to &#x60;true&#x60; if the user is not available in ThoughtSpot. If the user already exists
      * in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60; in the
      * API request, the user properties such as the display name, email, Org and group assignment
-     * will not be updated with new values. For more information, see [Just-in-time
+     * will not be updated with new values. If &#x60;auto_create&#x60; is set to &#x60;true&#x60;,
+     * it won&#39;t create formula variables and hence won&#39;t be applicable for
+     * &#x60;variable_values&#x60;. For more information, see [Just-in-time
      * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). #####
      * Important point to note All options in the token creation APIs that define access to the
      * content in ThoughtSpot will do so during the token creation and not when the token is being
@@ -1690,7 +1765,13 @@ public class ThoughtSpotRestApiTest {
      * the authentication token is created. Persist options such as &#x60;APPEND&#x60;,
      * &#x60;REPLACE&#x60;, &#x60;RESET&#x60; will persist security parameters on the user profile
      * when the token is created, while Persist option &#x60;NONE&#x60; will not persist anything
-     * but will be honoured in the session.
+     * but will be honoured in the session. ##### Formula Variables Before using variables_values,
+     * variables must be created using Create Variable API with type as Formula_Variable
+     * (/api/rest/2.0/template/variables/create) The persist_option RESET and NONE cannot be used
+     * when variable_values are provided in the request. If you are working with variable_values,
+     * you must use other (APPEND, REPLACE) supported modes. If you want to use RESET or NONE, do
+     * not pass any variable_values. In such cases, variable_values will remain unaffected. When
+     * using object_id with variable_values, models are supported.
      *
      * @throws ApiException if the Api call fails
      */
@@ -2164,6 +2245,30 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     * Version: 10.14.0.cl or later Fetch communication channel preferences. - Use
+     * &#x60;cluster_preferences&#x60; to fetch the default preferences for your ThoughtSpot
+     * application instance. - If your instance has
+     * [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), use
+     * &#x60;org_preferences&#x60; to fetch any Org-specific preferences that override the defaults.
+     * Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60;
+     * (**Has developer privilege**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
+     * &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can manage application settings**) privilege are
+     * also authorized to perform this action.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void searchCommunicationChannelPreferencesTest() throws ApiException {
+        SearchCommunicationChannelPreferencesRequest searchCommunicationChannelPreferencesRequest =
+                null;
+        CommunicationChannelPreferencesResponse response =
+                api.searchCommunicationChannelPreferences(
+                        searchCommunicationChannelPreferencesRequest);
+        // TODO: test validations
+    }
+
+    /**
      * Version: 9.2.0.cl or later Gets Git repository connections configured on the ThoughtSpot
      * instance. Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
      * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
@@ -2464,13 +2569,14 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Search variables Version: 10.9.0.cl or later Allows searching for variables in ThoughtSpot.
-     * Requires ADMINISTRATION role. The API endpoint supports searching variables by: * Variable
-     * identifier (ID or name) * Variable type * Name pattern (case-insensitive, supports % for
-     * wildcard) The search results can be formatted in three ways: * METADATA_ONLY - Returns only
-     * variable metadata (default) * METADATA_AND_VALUES - Returns variable metadata and values *
-     * EDITABLE_METADATA_AND_VALUES - Returns only editable variable metadata and values The values
-     * can be filtered by scope: * org_identifier * principal_identifier * model_identifier
+     * Search variables Version: 10.14.0.cl or later Allows searching for variables in ThoughtSpot.
+     * Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage
+     * Formula Variables in the current organization scope. The API endpoint supports searching
+     * variables by: * Variable identifier (ID or name) * Variable type * Name pattern
+     * (case-insensitive, supports % for wildcard) The search results can be formatted in three
+     * ways: * METADATA - Returns only variable metadata (default) * METADATA_AND_VALUES - Returns
+     * variable metadata and values The values can be filtered by scope: * org_identifier *
+     * principal_identifier * model_identifier
      *
      * @throws ApiException if the Api call fails
      */
@@ -2478,6 +2584,51 @@ public class ThoughtSpotRestApiTest {
     public void searchVariablesTest() throws ApiException {
         SearchVariablesRequest searchVariablesRequest = null;
         List<Variable> response = api.searchVariables(searchVariablesRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 10.14.0.cl or later Searches for webhook configurations based on various criteria
+     * such as Org, webhook identifier, event type, with support for pagination and sorting. Returns
+     * matching webhook configurations with their complete details. Requires
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has
+     * developer privilege**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
+     * &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to
+     * perform this action.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void searchWebhookConfigurationsTest() throws ApiException {
+        SearchWebhookConfigurationsRequest searchWebhookConfigurationsRequest = null;
+        WebhookSearchResponse response =
+                api.searchWebhookConfigurations(searchWebhookConfigurationsRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 10.13.0.cl or later This API allows users to initiate or continue an agent (Spotter)
+     * conversation by submitting one or more natural language messages. To use this API, the user
+     * must have access to the relevant conversational session (via conversation_identifier) and
+     * submit at least one message. #### Usage guidelines To initiate or continue a conversation,
+     * the request must include: - &#x60;conversation_identifier&#x60;: a unique session ID for
+     * continuity and message tracking - &#x60;messages&#x60;: an array of one or more text
+     * messages, each with a value and type The API returns a array of object with a type, message,
+     * and metadata. - &#x60;type&#x60;: Type of the message — text, answer, or error. -
+     * &#x60;message&#x60;: Main content of the response. - &#x60;metadata&#x60;: Additional info
+     * depending on the message type. &gt; ###### Note: &gt; * This endpoint is currently in Beta.
+     * Breaking changes may be introduced before the endpoint is made Generally Available. &gt; *
+     * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your
+     * cluster.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void sendAgentMessageTest() throws ApiException {
+        String conversationIdentifier = null;
+        SendAgentMessageRequest sendAgentMessageRequest = null;
+        Object response = api.sendAgentMessage(conversationIdentifier, sendAgentMessageRequest);
         // TODO: test validations
     }
 
@@ -2805,31 +2956,71 @@ public class ThoughtSpotRestApiTest {
      * explicitly provide the authenticationType property in the payload. If you do not specify
      * authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type. * A
      * JSON map of configuration attributes, database details, and table properties in
-     * &#x60;data_warehouse_config&#x60; as shown in the following example: &#x60;&#x60;&#x60; {
-     * \&quot;configuration\&quot;:{ \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
-     * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
-     * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
-     * \&quot;externalDatabases\&quot;:[ { \&quot;name\&quot;:\&quot;AllDatatypes\&quot;,
-     * \&quot;isAutoCreated\&quot;:false, \&quot;schemas\&quot;:[ {
-     * \&quot;name\&quot;:\&quot;alldatatypes\&quot;, \&quot;tables\&quot;:[ {
-     * \&quot;name\&quot;:\&quot;allDatatypes\&quot;, \&quot;type\&quot;:\&quot;TABLE\&quot;,
-     * \&quot;description\&quot;:\&quot;\&quot;, \&quot;selected\&quot;:true,
-     * \&quot;linked\&quot;:true, \&quot;columns\&quot;:[ {
-     * \&quot;name\&quot;:\&quot;CNUMBER\&quot;, \&quot;type\&quot;:\&quot;INT64\&quot;,
-     * \&quot;canImport\&quot;:true, \&quot;selected\&quot;:true, \&quot;isLinkedActive\&quot;:true,
-     * \&quot;isImported\&quot;:false, \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,
-     * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
-     * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; }, {
-     * \&quot;name\&quot;:\&quot;CDECIMAL\&quot;, \&quot;type\&quot;:\&quot;INT64\&quot;,
-     * \&quot;canImport\&quot;:true, \&quot;selected\&quot;:true, \&quot;isLinkedActive\&quot;:true,
-     * \&quot;isImported\&quot;:false, \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,
-     * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
-     * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; } ] } ] } ] } ] } &#x60;&#x60;&#x60; 3. If
-     * you are updating a configuration attribute, connection name, or description, you can set
-     * &#x60;validate&#x60; to &#x60;false&#x60;. **NOTE:** If the &#x60;authentication_type&#x60;
-     * is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType
-     * property in the payload. If you do not specify authenticationType, the API will default to
-     * SERVICE_ACCOUNT as the authentication type. * A JSON map of configuration attributes in
+     * &#x60;data_warehouse_config&#x60; as shown in the following example: * This is an example of
+     * updating a single table in a empty connection: &#x60;&#x60;&#x60; {
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
+     * \&quot;externalDatabases\&quot;: [ { \&quot;name\&quot;: \&quot;DEVELOPMENT\&quot;,
+     * \&quot;isAutoCreated\&quot;: false, \&quot;schemas\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;TS_dataset\&quot;, \&quot;tables\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;DEMORENAME\&quot;, \&quot;type\&quot;: \&quot;TABLE\&quot;, \&quot;description\&quot;:
+     * \&quot;\&quot;, \&quot;selected\&quot;: true, \&quot;linked\&quot;: true, \&quot;gid\&quot;:
+     * 0, \&quot;datasetId\&quot;: \&quot;-1\&quot;, \&quot;subType\&quot;: \&quot;\&quot;,
+     * \&quot;reportId\&quot;: \&quot;\&quot;, \&quot;viewId\&quot;: \&quot;\&quot;,
+     * \&quot;columns\&quot;: [ { \&quot;name\&quot;: \&quot;Col1\&quot;, \&quot;type\&quot;:
+     * \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;: true, \&quot;selected\&quot;: true,
+     * \&quot;description\&quot;: \&quot;\&quot;, \&quot;isLinkedActive\&quot;: true,
+     * \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;: \&quot;Col2\&quot;,
+     * \&quot;type\&quot;: \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;: true,
+     * \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;Col3\&quot;, \&quot;type\&quot;: \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;: true,
+     * \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;Col312\&quot;, \&quot;type\&quot;: \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;:
+     * true, \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;Col4\&quot;, \&quot;type\&quot;: \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;: true,
+     * \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false } ],
+     * \&quot;relationships\&quot;: [] } ] } ] } ], \&quot;configuration\&quot;: {
+     * \&quot;password\&quot;: \&quot;\&quot;, \&quot;database\&quot;: \&quot;DEVELOPMENT\&quot;,
+     * \&quot;role\&quot;: \&quot;DEV\&quot;, \&quot;accountName\&quot;:
+     * \&quot;thoughtspot_partner\&quot;, \&quot;warehouse\&quot;: \&quot;DEMO_WH\&quot;,
+     * \&quot;user\&quot;: \&quot;DEV_USER\&quot; } } &#x60;&#x60;&#x60; * This is an example of
+     * updating a single table in an existing connection with tables: &#x60;&#x60;&#x60; {
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
+     * \&quot;externalDatabases\&quot;: [ { \&quot;name\&quot;: \&quot;DEVELOPMENT\&quot;,
+     * \&quot;isAutoCreated\&quot;: false, \&quot;schemas\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;TS_dataset\&quot;, \&quot;tables\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;CUSTOMER\&quot;, \&quot;type\&quot;: \&quot;TABLE\&quot;, \&quot;description\&quot;:
+     * \&quot;\&quot;, \&quot;selected\&quot;: true, \&quot;linked\&quot;: true, \&quot;gid\&quot;:
+     * 0, \&quot;datasetId\&quot;: \&quot;-1\&quot;, \&quot;subType\&quot;: \&quot;\&quot;,
+     * \&quot;reportId\&quot;: \&quot;\&quot;, \&quot;viewId\&quot;: \&quot;\&quot;,
+     * \&quot;columns\&quot;: [], \&quot;relationships\&quot;: [] }, { \&quot;name\&quot;:
+     * \&quot;tpch5k_falcon_default_schema_users\&quot;, \&quot;type\&quot;: \&quot;TABLE\&quot;,
+     * \&quot;description\&quot;: \&quot;\&quot;, \&quot;selected\&quot;: true,
+     * \&quot;linked\&quot;: true, \&quot;gid\&quot;: 0, \&quot;datasetId\&quot;: \&quot;-1\&quot;,
+     * \&quot;subType\&quot;: \&quot;\&quot;, \&quot;reportId\&quot;: \&quot;\&quot;,
+     * \&quot;viewId\&quot;: \&quot;\&quot;, \&quot;columns\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;user_id\&quot;, \&quot;type\&quot;: \&quot;INT64\&quot;, \&quot;canImport\&quot;:
+     * true, \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;product_id\&quot;, \&quot;type\&quot;: \&quot;INT64\&quot;, \&quot;canImport\&quot;:
+     * true, \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
+     * \&quot;user_cost\&quot;, \&quot;type\&quot;: \&quot;INT64\&quot;, \&quot;canImport\&quot;:
+     * true, \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false } ],
+     * \&quot;relationships\&quot;: [] } ] } ] } ], \&quot;configuration\&quot;: {
+     * \&quot;password\&quot;: \&quot;\&quot;, \&quot;database\&quot;: \&quot;DEVELOPMENT\&quot;,
+     * \&quot;role\&quot;: \&quot;DEV\&quot;, \&quot;accountName\&quot;:
+     * \&quot;thoughtspot_partner\&quot;, \&quot;warehouse\&quot;: \&quot;DEMO_WH\&quot;,
+     * \&quot;user\&quot;: \&quot;DEV_USER\&quot; } } &#x60;&#x60;&#x60; 3. If you are updating a
+     * configuration attribute, connection name, or description, you can set &#x60;validate&#x60; to
+     * &#x60;false&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is anything other than
+     * SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload.
+     * If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the
+     * authentication type. * A JSON map of configuration attributes in
      * &#x60;data_warehouse_config&#x60;. The following example shows the configuration attributes
      * for a Snowflake connection: &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
      * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
@@ -3169,9 +3360,10 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Update a variable&#39;s properties Version: 10.9.0.cl or later Allows updating a
-     * variable&#39;s properties in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The
-     * API endpoint allows updating: * The variable name
+     * Update a variable&#39;s name Version: 10.14.0.cl or later Allows updating a variable&#39;s
+     * properties in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The
+     * CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current
+     * organization scope. The API endpoint allows updating: * The variable name
      *
      * @throws ApiException if the Api call fails
      */
@@ -3184,16 +3376,17 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Update values for multiple variables Version: 10.9.0.cl or later Allows updating values for
-     * multiple variables in ThoughtSpot. Requires ADMINISTRATION role. The API endpoint allows: *
-     * Adding new values to variables * Replacing existing values * Deleting values from variables
-     * When updating variable values, you need to specify: * The variable identifiers * The values
-     * to add/replace/remove for each variable * The operation to perform (ADD, REPLACE, REMOVE,
-     * CLEAR) Behaviour based on operation type: * ADD - Adds values to the variable if this is a
-     * list type variable, else same as replace. * REPLACE - Replaces all values of a given set of
-     * constraints with the current set of values. * REMOVE - Removes any values which match the set
-     * of conditions of the variables if this is a list type variable, else clears value. * CLEAR -
-     * Removes all constrains for a given variable, scope is ignored
+     * Update values for multiple variables Version: 10.14.0.cl or later Allows updating values for
+     * multiple variables in ThoughtSpot. Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES
+     * permission allows you to manage Formula Variables in the current organization scope. The API
+     * endpoint allows: * Adding new values to variables * Replacing existing values * Deleting
+     * values from variables When updating variable values, you need to specify: * The variable
+     * identifiers * The values to add/replace/remove for each variable * The operation to perform
+     * (ADD, REPLACE, REMOVE, CLEAR) Behaviour based on operation type: * ADD - Adds values to the
+     * variable if this is a list type variable, else same as replace. * REPLACE - Replaces all
+     * values of a given set of constraints with the current set of values. * REMOVE - Removes any
+     * values which match the set of conditions of the variables if this is a list type variable,
+     * else clears value. * CLEAR - Removes all constrains for a given variable, scope is ignored
      *
      * @throws ApiException if the Api call fails
      */
@@ -3201,6 +3394,24 @@ public class ThoughtSpotRestApiTest {
     public void updateVariableValuesTest() throws ApiException {
         UpdateVariableValuesRequest updateVariableValuesRequest = null;
         api.updateVariableValues(updateVariableValuesRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 10.14.0.cl or later Updates an existing webhook configuration by its unique id or
+     * name. Only the provided fields will be updated. Requires &#x60;ADMINISTRATION&#x60; (**Can
+     * administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.
+     * If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is
+     * enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage
+     * webhooks**) privilege are also authorized to perform this action.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void updateWebhookConfigurationTest() throws ApiException {
+        String webhookIdentifier = null;
+        UpdateWebhookConfigurationRequest updateWebhookConfigurationRequest = null;
+        api.updateWebhookConfiguration(webhookIdentifier, updateWebhookConfigurationRequest);
         // TODO: test validations
     }
 

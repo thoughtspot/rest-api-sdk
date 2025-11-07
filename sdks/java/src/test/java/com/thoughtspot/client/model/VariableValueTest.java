@@ -22,6 +22,12 @@ public class VariableValueTest {
         // TODO: test value
     }
 
+    /** Test the property 'valueList' */
+    @Test
+    public void valueListTest() {
+        // TODO: test valueList
+    }
+
     /** Test the property 'orgIdentifier' */
     @Test
     public void orgIdentifierTest() {

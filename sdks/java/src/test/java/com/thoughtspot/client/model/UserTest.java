@@ -285,4 +285,10 @@ public class UserTest {
     public void accessControlPropertiesTest() {
         // TODO: test accessControlProperties
     }
+
+    /** Test the property 'variableValues' */
+    @Test
+    public void variableValuesTest() {
+        // TODO: test variableValues
+    }
 }

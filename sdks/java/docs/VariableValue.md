@@ -8,6 +8,7 @@
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**value** | **String** | The value of the variable |  [optional] |
+|**valueList** | **List&lt;String&gt;** | The value of the variable if it is a list type |  [optional] |
 |**orgIdentifier** | **String** | The unique name of the org |  |
 |**principalType** | [**PrincipalTypeEnum**](#PrincipalTypeEnum) | Principal type |  [optional] |
 |**principalIdentifier** | **String** | Unique ID or name of the principal |  [optional] |

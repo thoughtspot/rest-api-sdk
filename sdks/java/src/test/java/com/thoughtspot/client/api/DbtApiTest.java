@@ -101,15 +101,15 @@ public class DbtApiTest {
     @Test
     public void dbtGenerateTmlTest() throws ApiException {
         String dbtConnectionIdentifier = null;
-        String importWorksheets = null;
         String modelTables = null;
+        String importWorksheets = null;
         String worksheets = null;
         File fileContent = null;
         Object response =
                 api.dbtGenerateTml(
                         dbtConnectionIdentifier,
-                        importWorksheets,
                         modelTables,
+                        importWorksheets,
                         worksheets,
                         fileContent);
         // TODO: test validations

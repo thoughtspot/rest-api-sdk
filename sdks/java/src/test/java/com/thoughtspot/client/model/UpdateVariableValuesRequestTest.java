@@ -16,15 +16,15 @@ public class UpdateVariableValuesRequestTest {
         // TODO: test UpdateVariableValuesRequest
     }
 
-    /** Test the property 'variableUpdates' */
+    /** Test the property 'variableAssignment' */
     @Test
-    public void variableUpdatesTest() {
-        // TODO: test variableUpdates
+    public void variableAssignmentTest() {
+        // TODO: test variableAssignment
     }
 
-    /** Test the property 'operation' */
+    /** Test the property 'variableValueScope' */
     @Test
-    public void operationTest() {
-        // TODO: test operation
+    public void variableValueScopeTest() {
+        // TODO: test variableValueScope
     }
 }

@@ -23,6 +23,7 @@ import com.thoughtspot.client.model.GetDataSourceSuggestionsRequest;
 import com.thoughtspot.client.model.GetRelevantQuestionsRequest;
 import com.thoughtspot.client.model.QueryGetDecomposedQueryRequest;
 import com.thoughtspot.client.model.ResponseMessage;
+import com.thoughtspot.client.model.SendAgentMessageRequest;
 import com.thoughtspot.client.model.SendAgentMessageResponse;
 import com.thoughtspot.client.model.SendAgentMessageStreamingRequest;
 import com.thoughtspot.client.model.SendMessageRequest;
@@ -1051,6 +1052,234 @@ public class AiApi {
                 queryGetDecomposedQueryValidateBeforeCall(
                         queryGetDecomposedQueryRequest, _callback);
         Type localVarReturnType = new TypeToken<EurekaDecomposeQueryResponse>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for sendAgentMessage
+     *
+     * @param conversationIdentifier Unique identifier for the conversation (used to track context)
+     *     (required)
+     * @param sendAgentMessageRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call sendAgentMessageCall(
+            String conversationIdentifier,
+            SendAgentMessageRequest sendAgentMessageRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = sendAgentMessageRequest;
+
+        // create path and map variables
+        String localVarPath =
+                "/api/rest/2.0/ai/agent/{conversation_identifier}/converse"
+                        .replace(
+                                "{" + "conversation_identifier" + "}",
+                                localVarApiClient.escapeString(conversationIdentifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call sendAgentMessageValidateBeforeCall(
+            String conversationIdentifier,
+            SendAgentMessageRequest sendAgentMessageRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'conversationIdentifier' is set
+        if (conversationIdentifier == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'conversationIdentifier' when calling"
+                            + " sendAgentMessage(Async)");
+        }
+
+        // verify the required parameter 'sendAgentMessageRequest' is set
+        if (sendAgentMessageRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'sendAgentMessageRequest' when calling"
+                            + " sendAgentMessage(Async)");
+        }
+
+        return sendAgentMessageCall(conversationIdentifier, sendAgentMessageRequest, _callback);
+    }
+
+    /**
+     * Version: 10.13.0.cl or later This API allows users to initiate or continue an agent (Spotter)
+     * conversation by submitting one or more natural language messages. To use this API, the user
+     * must have access to the relevant conversational session (via conversation_identifier) and
+     * submit at least one message. #### Usage guidelines To initiate or continue a conversation,
+     * the request must include: - &#x60;conversation_identifier&#x60;: a unique session ID for
+     * continuity and message tracking - &#x60;messages&#x60;: an array of one or more text
+     * messages, each with a value and type The API returns a array of object with a type, message,
+     * and metadata. - &#x60;type&#x60;: Type of the message — text, answer, or error. -
+     * &#x60;message&#x60;: Main content of the response. - &#x60;metadata&#x60;: Additional info
+     * depending on the message type. &gt; ###### Note: &gt; * This endpoint is currently in Beta.
+     * Breaking changes may be introduced before the endpoint is made Generally Available. &gt; *
+     * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your
+     * cluster.
+     *
+     * @param conversationIdentifier Unique identifier for the conversation (used to track context)
+     *     (required)
+     * @param sendAgentMessageRequest (required)
+     * @return Object
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public Object sendAgentMessage(
+            String conversationIdentifier, SendAgentMessageRequest sendAgentMessageRequest)
+            throws ApiException {
+        ApiResponse<Object> localVarResp =
+                sendAgentMessageWithHttpInfo(conversationIdentifier, sendAgentMessageRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Version: 10.13.0.cl or later This API allows users to initiate or continue an agent (Spotter)
+     * conversation by submitting one or more natural language messages. To use this API, the user
+     * must have access to the relevant conversational session (via conversation_identifier) and
+     * submit at least one message. #### Usage guidelines To initiate or continue a conversation,
+     * the request must include: - &#x60;conversation_identifier&#x60;: a unique session ID for
+     * continuity and message tracking - &#x60;messages&#x60;: an array of one or more text
+     * messages, each with a value and type The API returns a array of object with a type, message,
+     * and metadata. - &#x60;type&#x60;: Type of the message — text, answer, or error. -
+     * &#x60;message&#x60;: Main content of the response. - &#x60;metadata&#x60;: Additional info
+     * depending on the message type. &gt; ###### Note: &gt; * This endpoint is currently in Beta.
+     * Breaking changes may be introduced before the endpoint is made Generally Available. &gt; *
+     * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your
+     * cluster.
+     *
+     * @param conversationIdentifier Unique identifier for the conversation (used to track context)
+     *     (required)
+     * @param sendAgentMessageRequest (required)
+     * @return ApiResponse&lt;Object&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<Object> sendAgentMessageWithHttpInfo(
+            String conversationIdentifier, SendAgentMessageRequest sendAgentMessageRequest)
+            throws ApiException {
+        okhttp3.Call localVarCall =
+                sendAgentMessageValidateBeforeCall(
+                        conversationIdentifier, sendAgentMessageRequest, null);
+        Type localVarReturnType = new TypeToken<Object>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Version: 10.13.0.cl or later This API allows users to initiate or continue
+     * an agent (Spotter) conversation by submitting one or more natural language messages. To use
+     * this API, the user must have access to the relevant conversational session (via
+     * conversation_identifier) and submit at least one message. #### Usage guidelines To initiate
+     * or continue a conversation, the request must include: - &#x60;conversation_identifier&#x60;:
+     * a unique session ID for continuity and message tracking - &#x60;messages&#x60;: an array of
+     * one or more text messages, each with a value and type The API returns a array of object with
+     * a type, message, and metadata. - &#x60;type&#x60;: Type of the message — text, answer, or
+     * error. - &#x60;message&#x60;: Main content of the response. - &#x60;metadata&#x60;:
+     * Additional info depending on the message type. &gt; ###### Note: &gt; * This endpoint is
+     * currently in Beta. Breaking changes may be introduced before the endpoint is made Generally
+     * Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to
+     * enable Spotter on your cluster.
+     *
+     * @param conversationIdentifier Unique identifier for the conversation (used to track context)
+     *     (required)
+     * @param sendAgentMessageRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call sendAgentMessageAsync(
+            String conversationIdentifier,
+            SendAgentMessageRequest sendAgentMessageRequest,
+            final ApiCallback<Object> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                sendAgentMessageValidateBeforeCall(
+                        conversationIdentifier, sendAgentMessageRequest, _callback);
+        Type localVarReturnType = new TypeToken<Object>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

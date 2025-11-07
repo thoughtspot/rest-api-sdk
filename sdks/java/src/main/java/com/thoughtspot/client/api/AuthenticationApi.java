@@ -525,8 +525,7 @@ public class AuthenticationApi {
      * persist on a specific set of objects for user sessions initiated using the token. Once
      * defined, the rules are added to the user&#39;s &#x60;access_control_properties&#x60; object,
      * after which all sessions will use the persisted values. Specify the object type as
-     * &#x60;LOGICAL_TABLE&#x60;. The &#x60;LIVEBOARD&#x60; and &#x60;ANSWER&#x60; object types are
-     * not supported. For more information, see [ABAC via tokens
+     * &#x60;LOGICAL_TABLE&#x60;. For more information, see [ABAC via tokens
      * Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).
      * ##### Just-in-time provisioning For just-in-time user creation and provisioning, define the
      * following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
@@ -534,7 +533,9 @@ public class AuthenticationApi {
      * to &#x60;true&#x60; if the user is not available in ThoughtSpot. If the user already exists
      * in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60; in the
      * API request, the user properties such as the display name, email, Org and group assignment
-     * will not be updated with new values. For more information, see [Just-in-time
+     * will not be updated with new values. If &#x60;auto_create&#x60; is set to &#x60;true&#x60;,
+     * it won&#39;t create formula variables and hence won&#39;t be applicable for
+     * &#x60;variable_values&#x60;. For more information, see [Just-in-time
      * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). #####
      * Important point to note All options in the token creation APIs that define access to the
      * content in ThoughtSpot will do so during the token creation and not when the token is being
@@ -542,7 +543,13 @@ public class AuthenticationApi {
      * the authentication token is created. Persist options such as &#x60;APPEND&#x60;,
      * &#x60;REPLACE&#x60;, &#x60;RESET&#x60; will persist security parameters on the user profile
      * when the token is created, while Persist option &#x60;NONE&#x60; will not persist anything
-     * but will be honoured in the session.
+     * but will be honoured in the session. ##### Formula Variables Before using variables_values,
+     * variables must be created using Create Variable API with type as Formula_Variable
+     * (/api/rest/2.0/template/variables/create) The persist_option RESET and NONE cannot be used
+     * when variable_values are provided in the request. If you are working with variable_values,
+     * you must use other (APPEND, REPLACE) supported modes. If you want to use RESET or NONE, do
+     * not pass any variable_values. In such cases, variable_values will remain unaffected. When
+     * using object_id with variable_values, models are supported.
      *
      * @param getCustomAccessTokenRequest (required)
      * @return AccessToken
@@ -597,8 +604,7 @@ public class AuthenticationApi {
      * persist on a specific set of objects for user sessions initiated using the token. Once
      * defined, the rules are added to the user&#39;s &#x60;access_control_properties&#x60; object,
      * after which all sessions will use the persisted values. Specify the object type as
-     * &#x60;LOGICAL_TABLE&#x60;. The &#x60;LIVEBOARD&#x60; and &#x60;ANSWER&#x60; object types are
-     * not supported. For more information, see [ABAC via tokens
+     * &#x60;LOGICAL_TABLE&#x60;. For more information, see [ABAC via tokens
      * Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).
      * ##### Just-in-time provisioning For just-in-time user creation and provisioning, define the
      * following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
@@ -606,7 +612,9 @@ public class AuthenticationApi {
      * to &#x60;true&#x60; if the user is not available in ThoughtSpot. If the user already exists
      * in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60; in the
      * API request, the user properties such as the display name, email, Org and group assignment
-     * will not be updated with new values. For more information, see [Just-in-time
+     * will not be updated with new values. If &#x60;auto_create&#x60; is set to &#x60;true&#x60;,
+     * it won&#39;t create formula variables and hence won&#39;t be applicable for
+     * &#x60;variable_values&#x60;. For more information, see [Just-in-time
      * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). #####
      * Important point to note All options in the token creation APIs that define access to the
      * content in ThoughtSpot will do so during the token creation and not when the token is being
@@ -614,7 +622,13 @@ public class AuthenticationApi {
      * the authentication token is created. Persist options such as &#x60;APPEND&#x60;,
      * &#x60;REPLACE&#x60;, &#x60;RESET&#x60; will persist security parameters on the user profile
      * when the token is created, while Persist option &#x60;NONE&#x60; will not persist anything
-     * but will be honoured in the session.
+     * but will be honoured in the session. ##### Formula Variables Before using variables_values,
+     * variables must be created using Create Variable API with type as Formula_Variable
+     * (/api/rest/2.0/template/variables/create) The persist_option RESET and NONE cannot be used
+     * when variable_values are provided in the request. If you are working with variable_values,
+     * you must use other (APPEND, REPLACE) supported modes. If you want to use RESET or NONE, do
+     * not pass any variable_values. In such cases, variable_values will remain unaffected. When
+     * using object_id with variable_values, models are supported.
      *
      * @param getCustomAccessTokenRequest (required)
      * @return ApiResponse&lt;AccessToken&gt;
@@ -670,8 +684,7 @@ public class AuthenticationApi {
      * persist on a specific set of objects for user sessions initiated using the token. Once
      * defined, the rules are added to the user&#39;s &#x60;access_control_properties&#x60; object,
      * after which all sessions will use the persisted values. Specify the object type as
-     * &#x60;LOGICAL_TABLE&#x60;. The &#x60;LIVEBOARD&#x60; and &#x60;ANSWER&#x60; object types are
-     * not supported. For more information, see [ABAC via tokens
+     * &#x60;LOGICAL_TABLE&#x60;. For more information, see [ABAC via tokens
      * Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).
      * ##### Just-in-time provisioning For just-in-time user creation and provisioning, define the
      * following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
@@ -679,7 +692,9 @@ public class AuthenticationApi {
      * to &#x60;true&#x60; if the user is not available in ThoughtSpot. If the user already exists
      * in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60; in the
      * API request, the user properties such as the display name, email, Org and group assignment
-     * will not be updated with new values. For more information, see [Just-in-time
+     * will not be updated with new values. If &#x60;auto_create&#x60; is set to &#x60;true&#x60;,
+     * it won&#39;t create formula variables and hence won&#39;t be applicable for
+     * &#x60;variable_values&#x60;. For more information, see [Just-in-time
      * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). #####
      * Important point to note All options in the token creation APIs that define access to the
      * content in ThoughtSpot will do so during the token creation and not when the token is being
@@ -687,7 +702,13 @@ public class AuthenticationApi {
      * the authentication token is created. Persist options such as &#x60;APPEND&#x60;,
      * &#x60;REPLACE&#x60;, &#x60;RESET&#x60; will persist security parameters on the user profile
      * when the token is created, while Persist option &#x60;NONE&#x60; will not persist anything
-     * but will be honoured in the session.
+     * but will be honoured in the session. ##### Formula Variables Before using variables_values,
+     * variables must be created using Create Variable API with type as Formula_Variable
+     * (/api/rest/2.0/template/variables/create) The persist_option RESET and NONE cannot be used
+     * when variable_values are provided in the request. If you are working with variable_values,
+     * you must use other (APPEND, REPLACE) supported modes. If you want to use RESET or NONE, do
+     * not pass any variable_values. In such cases, variable_values will remain unaffected. When
+     * using object_id with variable_values, models are supported.
      *
      * @param getCustomAccessTokenRequest (required)
      * @param _callback The callback to be executed when the API call finishes
