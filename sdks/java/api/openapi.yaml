@@ -614,56 +614,62 @@ paths:
       - application/json
   /api/rest/2.0/auth/token/custom:
     post:
-      description: |2+
-
-         Version: 10.4.0.cl or later
-
-
-        Gets an authentication token with custom rules and security attributes and creates a full session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid for 5 mins.
-
-        To add a new user and assign privileges during auto creation, you need `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.
-
-        To assign security attributes with filter rules and Parameters to the JWT token, you'll need administrator privileges and edit access to the data source (Worksheet or Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source is required.
-
-        #### Usage guidelines
-
-        You can generate the token for a user by providing a `username` and `password`, or by using the cluster’s `secret_key`.
-
-        To generate a `secret_key` on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable) in the **Develop** > **Customizations** > **Security Settings** page.
-
-        **Note**: When both `password` and `secret_key` are included in the API request, `password` takes precedence.
-
-        If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.
-
-        ##### Attribute-Based Access Control (ABAC) with tokens
-
-        To implement Attribute-Based Access Control (ABAC) and assign security entitlements to users during session creation, you can generate a token with custom filtering rules and Parameters in the `filter_rules` and `parameter_values` array respectively. These attributes can be configured to persist on a specific set of objects for user sessions initiated using the token. Once defined, the rules are added to the user's `access_control_properties` object, after which all sessions will use the persisted values.
-
-        Specify the object type as `LOGICAL_TABLE`.  The `LIVEBOARD` and `ANSWER` object types are not supported.
-
-        For more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).
-
-        ##### Just-in-time provisioning
-
-        For just-in-time user creation and provisioning, define the following attributes:
-
-        * `auto_create`
-        * `username`
-        * `display_name`
-        * `email`
-        * `groups`
-
-        Set `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true` in the API request, the user properties such as the display name, email, Org and group assignment will not be updated with new values.
-
-        For more information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).
-
-        ##### Important point to note
-        All options in the token creation APIs that define access to the content in ThoughtSpot will do so during the token creation and not when the token is being used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Persist options such as  `APPEND`, `REPLACE`, `RESET` will persist security parameters on the user profile when the token is created, while Persist option `NONE` will not persist anything but will be honoured in the session.
-
-
-
-
-
+      description: "\n Version: 10.4.0.cl or later\n\n\nGets an authentication token\
+        \ with custom rules and security attributes and creates a full session in\
+        \ ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot\
+        \ remains valid for 5 mins.\n\nTo add a new user and assign privileges during\
+        \ auto creation, you need `ADMINISTRATION` (**Can administer ThoughtSpot**)\
+        \ privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
+        \ is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**)\
+        \ privilege and edit access to the data source is required.\n\nTo assign security\
+        \ attributes with filter rules and Parameters to the JWT token, you'll need\
+        \ administrator privileges and edit access to the data source (Worksheet or\
+        \ Model). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
+        \ is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**)\
+        \ privilege and edit access to the data source is required.\n\n#### Usage\
+        \ guidelines\n\nYou can generate the token for a user by providing a `username`\
+        \ and `password`, or by using the cluster’s `secret_key`.\n\nTo generate a\
+        \ `secret_key` on your cluster, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/?pageid=trusted-auth#trusted-auth-enable)\
+        \ in the **Develop** > **Customizations** > **Security Settings** page.\n\n\
+        **Note**: When both `password` and `secret_key` are included in the API request,\
+        \ `password` takes precedence.\n\nIf Multi-Factor Authentication (MFA) is\
+        \ enabled on your instance, the API login request with basic authentication\
+        \ (`username`  and `password` ) returns an error. You can switch to token-based\
+        \ authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.\n\
+        \n##### Attribute-Based Access Control (ABAC) with tokens\n\nTo implement\
+        \ Attribute-Based Access Control (ABAC) and assign security entitlements to\
+        \ users during session creation, you can generate a token with custom filtering\
+        \ rules and Parameters in the `filter_rules` and `parameter_values` array\
+        \ respectively. These attributes can be configured to persist on a specific\
+        \ set of objects for user sessions initiated using the token. Once defined,\
+        \ the rules are added to the user's `access_control_properties` object, after\
+        \ which all sessions will use the persisted values.\n\nSpecify the object\
+        \ type as `LOGICAL_TABLE`. \n\nFor more information, see [ABAC via tokens\
+        \ Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).\n\
+        \n##### Just-in-time provisioning\n\nFor just-in-time user creation and provisioning,\
+        \ define the following attributes:\n\n* `auto_create`\n* `username`\n* `display_name`\n\
+        * `email`\n* `groups`\n\nSet `auto_create` to `true` if the user is not available\
+        \ in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create`\
+        \ parameter is set to `true` in the API request, the user properties such\
+        \ as the display name, email, Org and group assignment will not be updated\
+        \ with new values. If `auto_create` is set to `true`, it won't create formula\
+        \ variables and hence won't be applicable for `variable_values`.\n\nFor more\
+        \ information, see [Just-in-time provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning).\n\
+        \n##### Important point to note\nAll options in the token creation APIs that\
+        \ define access to the content in ThoughtSpot will do so during the token\
+        \ creation and not when the token is being used for authentication. For example,\
+        \ `auto_create:true` will create the user when the authentication token is\
+        \ created. Persist options such as  `APPEND`, `REPLACE`, `RESET` will persist\
+        \ security parameters on the user profile when the token is created, while\
+        \ Persist option `NONE` will not persist anything but will be honoured in\
+        \ the session.\n\n##### Formula Variables\nBefore using variables_values,\
+        \ variables must be created using Create Variable API with type as Formula_Variable\
+        \ (/api/rest/2.0/template/variables/create)\nThe persist_option RESET and\
+        \ NONE cannot be used when variable_values are provided in the request.\n\
+        If you are working with variable_values, you must use other (APPEND, REPLACE)\
+        \ supported modes.\nIf you want to use RESET or NONE, do not pass any variable_values.\
+        \ In such cases, variable_values will remain unaffected.\nWhen using object_id\
+        \ with variable_values, models are supported. \n\n\n\n\n"
       operationId: getCustomAccessToken
       parameters: []
       requestBody:
@@ -1885,46 +1891,102 @@ paths:
         \ If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT\
         \ as the authentication type.\n\n   * A JSON map of configuration attributes,\
         \ database details, and table properties in `data_warehouse_config` as shown\
-        \ in the following example:\n\n   ```\n   {\n      \"configuration\":{\n \
-        \        \"accountName\":\"thoughtspot_partner\",\n         \"user\":\"tsadmin\"\
-        ,\n         \"password\":\"TestConn123\",\n         \"role\":\"sysadmin\"\
-        ,\n         \"warehouse\":\"MEDIUM_WH\"\n      },\n      \"externalDatabases\"\
-        :[\n         {\n            \"name\":\"AllDatatypes\",\n            \"isAutoCreated\"\
-        :false,\n            \"schemas\":[\n               {\n                  \"\
-        name\":\"alldatatypes\",\n                  \"tables\":[\n               \
-        \      {\n                        \"name\":\"allDatatypes\",\n           \
-        \             \"type\":\"TABLE\",\n                        \"description\"\
-        :\"\",\n                        \"selected\":true,\n                     \
-        \   \"linked\":true,\n                        \"columns\":[\n            \
-        \               {\n                              \"name\":\"CNUMBER\",\n \
-        \                             \"type\":\"INT64\",\n                      \
-        \        \"canImport\":true,\n                              \"selected\":true,\n\
-        \                              \"isLinkedActive\":true,\n                \
-        \              \"isImported\":false,\n                              \"tableName\"\
-        :\"allDatatypes\",\n                              \"schemaName\":\"alldatatypes\"\
-        ,\n                              \"dbName\":\"AllDatatypes\"\n           \
-        \                },\n                           {\n                      \
-        \        \"name\":\"CDECIMAL\",\n                              \"type\":\"\
-        INT64\",\n                              \"canImport\":true,\n            \
-        \                  \"selected\":true,\n                              \"isLinkedActive\"\
-        :true,\n                              \"isImported\":false,\n            \
-        \                  \"tableName\":\"allDatatypes\",\n                     \
-        \         \"schemaName\":\"alldatatypes\",\n                             \
-        \ \"dbName\":\"AllDatatypes\"\n                           }\n            \
-        \            ]\n                     }\n                  ]\n            \
-        \   }\n            ]\n         }\n      ]\n   }\n   ```\n\n3. If you are updating\
-        \ a configuration attribute, connection name, or description, you can set\
-        \ `validate` to `false`.\n\n  **NOTE:** If the `authentication_type` is anything\
-        \ other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType\
-        \ property in the payload. If you do not  specify authenticationType, the\
-        \ API will default to SERVICE_ACCOUNT as the authentication type.\n\n  * A\
-        \ JSON map of configuration attributes in `data_warehouse_config`. The following\
-        \ example shows the configuration attributes for a Snowflake connection:\n\
-        \   ```\n   {\n      \"configuration\":{\n         \"accountName\":\"thoughtspot_partner\"\
-        ,\n         \"user\":\"tsadmin\",\n         \"password\":\"TestConn123\",\n\
-        \         \"role\":\"sysadmin\",\n         \"warehouse\":\"MEDIUM_WH\"\n \
-        \     },\n      \"externalDatabases\":[\n\n      ]\n   }\n   ```\n\n\n\n\n\
-        \n"
+        \ in the following example:\n   * This is an example of updating a single\
+        \ table in a empty connection:\n   \n      ```\n      {\n        \"authenticationType\"\
+        : \"SERVICE_ACCOUNT\",\n        \"externalDatabases\": [\n          {\n  \
+        \          \"name\": \"DEVELOPMENT\",\n            \"isAutoCreated\": false,\n\
+        \            \"schemas\": [\n              {\n                \"name\": \"\
+        TS_dataset\",\n                \"tables\": [\n                  {\n      \
+        \              \"name\": \"DEMORENAME\",\n                    \"type\": \"\
+        TABLE\",\n                    \"description\": \"\",\n                   \
+        \ \"selected\": true,\n                    \"linked\": true,\n           \
+        \         \"gid\": 0,\n                    \"datasetId\": \"-1\",\n      \
+        \              \"subType\": \"\",\n                    \"reportId\": \"\"\
+        ,\n                    \"viewId\": \"\",\n                    \"columns\"\
+        : [\n                      {\n                        \"name\": \"Col1\",\n\
+        \                        \"type\": \"VARCHAR\",\n                        \"\
+        canImport\": true,\n                        \"selected\": true,\n        \
+        \                \"description\": \"\",\n                        \"isLinkedActive\"\
+        : true,\n                        \"isAggregate\": false\n                \
+        \      },\n                      {\n                        \"name\": \"Col2\"\
+        ,\n                        \"type\": \"VARCHAR\",\n                      \
+        \  \"canImport\": true,\n                        \"selected\": true,\n   \
+        \                     \"description\": \"\",\n                        \"isLinkedActive\"\
+        : true,\n                        \"isAggregate\": false\n                \
+        \      },\n                      {\n                        \"name\": \"Col3\"\
+        ,\n                        \"type\": \"VARCHAR\",\n                      \
+        \  \"canImport\": true,\n                        \"selected\": true,\n   \
+        \                     \"description\": \"\",\n                        \"isLinkedActive\"\
+        : true,\n                        \"isAggregate\": false\n                \
+        \      },\n                      {\n                        \"name\": \"Col312\"\
+        ,\n                        \"type\": \"VARCHAR\",\n                      \
+        \  \"canImport\": true,\n                        \"selected\": true,\n   \
+        \                     \"description\": \"\",\n                        \"isLinkedActive\"\
+        : true,\n                        \"isAggregate\": false\n                \
+        \      },\n                      {\n                        \"name\": \"Col4\"\
+        ,\n                        \"type\": \"VARCHAR\",\n                      \
+        \  \"canImport\": true,\n                        \"selected\": true,\n   \
+        \                     \"description\": \"\",\n                        \"isLinkedActive\"\
+        : true,\n                        \"isAggregate\": false\n                \
+        \      }\n                    ],\n                    \"relationships\": []\n\
+        \                  }\n                ]\n              }\n            ]\n\
+        \          }\n        ],\n        \"configuration\": {\n          \"password\"\
+        : \"\",\n          \"database\": \"DEVELOPMENT\",\n          \"role\": \"\
+        DEV\",\n          \"accountName\": \"thoughtspot_partner\",\n          \"\
+        warehouse\": \"DEMO_WH\",\n          \"user\": \"DEV_USER\"\n        }\n \
+        \     }\n      ```\n      \n* This is an example of updating a single table\
+        \ in an existing connection with tables:\n    \n      ```\n      {\n     \
+        \   \"authenticationType\": \"SERVICE_ACCOUNT\",\n        \"externalDatabases\"\
+        : [\n          {\n            \"name\": \"DEVELOPMENT\",\n            \"isAutoCreated\"\
+        : false,\n            \"schemas\": [\n              {\n                \"\
+        name\": \"TS_dataset\",\n                \"tables\": [\n                 \
+        \ {\n                    \"name\": \"CUSTOMER\",\n                    \"type\"\
+        : \"TABLE\",\n                    \"description\": \"\",\n               \
+        \     \"selected\": true,\n                    \"linked\": true,\n       \
+        \             \"gid\": 0,\n                    \"datasetId\": \"-1\",\n  \
+        \                  \"subType\": \"\",\n                    \"reportId\": \"\
+        \",\n                    \"viewId\": \"\",\n                    \"columns\"\
+        : [],\n                    \"relationships\": []\n                  },\n \
+        \                 {\n                    \"name\": \"tpch5k_falcon_default_schema_users\"\
+        ,\n                    \"type\": \"TABLE\",\n                    \"description\"\
+        : \"\",\n                    \"selected\": true,\n                    \"linked\"\
+        : true,\n                    \"gid\": 0,\n                    \"datasetId\"\
+        : \"-1\",\n                    \"subType\": \"\",\n                    \"\
+        reportId\": \"\",\n                    \"viewId\": \"\",\n               \
+        \     \"columns\": [\n                      {\n                        \"\
+        name\": \"user_id\",\n                        \"type\": \"INT64\",\n     \
+        \                   \"canImport\": true,\n                        \"selected\"\
+        : true,\n                        \"description\": \"\",\n                \
+        \        \"isLinkedActive\": true,\n                        \"isAggregate\"\
+        : false\n                      },\n                      {\n             \
+        \           \"name\": \"product_id\",\n                        \"type\": \"\
+        INT64\",\n                        \"canImport\": true,\n                 \
+        \       \"selected\": true,\n                        \"description\": \"\"\
+        ,\n                        \"isLinkedActive\": true,\n                   \
+        \     \"isAggregate\": false\n                      },\n                 \
+        \     {\n                        \"name\": \"user_cost\",\n              \
+        \          \"type\": \"INT64\",\n                        \"canImport\": true,\n\
+        \                        \"selected\": true,\n                        \"description\"\
+        : \"\",\n                        \"isLinkedActive\": true,\n             \
+        \           \"isAggregate\": false\n                      }\n            \
+        \        ],\n                    \"relationships\": []\n                 \
+        \ }\n                ]\n              }\n            ]\n          }\n    \
+        \    ],\n        \"configuration\": {\n          \"password\": \"\",\n   \
+        \       \"database\": \"DEVELOPMENT\",\n          \"role\": \"DEV\",\n   \
+        \       \"accountName\": \"thoughtspot_partner\",\n          \"warehouse\"\
+        : \"DEMO_WH\",\n          \"user\": \"DEV_USER\"\n        }\n      }\n   \
+        \   ```\n\n3. If you are updating a configuration attribute, connection name,\
+        \ or description, you can set `validate` to `false`.\n\n  **NOTE:** If the\
+        \ `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly\
+        \ provide the authenticationType property in the payload. If you do not  specify\
+        \ authenticationType, the API will default to SERVICE_ACCOUNT as the authentication\
+        \ type.\n\n  * A JSON map of configuration attributes in `data_warehouse_config`.\
+        \ The following example shows the configuration attributes for a Snowflake\
+        \ connection:\n   ```\n   {\n      \"configuration\":{\n         \"accountName\"\
+        :\"thoughtspot_partner\",\n         \"user\":\"tsadmin\",\n         \"password\"\
+        :\"TestConn123\",\n         \"role\":\"sysadmin\",\n         \"warehouse\"\
+        :\"MEDIUM_WH\"\n      },\n      \"externalDatabases\":[\n\n      ]\n   }\n\
+        \   ```\n\n\n\n\n\n"
       operationId: updateConnectionV2
       parameters:
       - description: Unique ID or name of the connection.
@@ -7834,9 +7896,10 @@ paths:
       description: "\nCreate a variable which can be used for parameterizing metadata\
         \ objects \n Version: 10.9.0.cl or later\n\n\nAllows creating a variable which\
         \ can be used for parameterizing metadata objects in ThoughtSpot.\n\nRequires\
-        \ ADMINISTRATION role and TENANT scope.\n\nThe API endpoint supports the following\
-        \ types of variables:\n* CONNECTION_PROPERTY - For connection properties\n\
-        * TABLE_MAPPING - For table mappings\n* CONNECTION_PROPERTY_PER_PRINCIPAL\
+        \ ADMINISTRATION role and TENANT scope.\nThe CAN_MANAGE_VARIABLES permission\
+        \ allows you to manage Formula Variables in the current organization scope.\n\
+        \nThe API endpoint supports the following types of variables:\n* CONNECTION_PROPERTY\
+        \ - For connection properties\n* TABLE_MAPPING - For table mappings\n* CONNECTION_PROPERTY_PER_PRINCIPAL\
         \ - For connection properties per principal. In order to use this please contact\
         \ support to enable this.\n* FORMULA_VARIABLE - For Formula variables\n\n\
         When creating a variable, you need to specify:\n* The variable type\n* A unique\
@@ -7894,10 +7957,11 @@ paths:
     post:
       description: "\nDelete a variable \n Version: 10.9.0.cl or later\n\n\nAllows\
         \ deleting a variable from ThoughtSpot.\n\nRequires ADMINISTRATION role and\
-        \ TENANT scope.\n\nThe API endpoint requires:\n* The variable identifier (ID\
-        \ or name)\n\nThe operation will fail if:\n* The user lacks required permissions\n\
-        * The variable doesn't exist\n* The variable is being used by other objects\
-        \ \n\n\n\n\n"
+        \ TENANT scope.\nThe CAN_MANAGE_VARIABLES permission allows you to manage\
+        \ Formula Variables in the current organization scope.\n\nThe API endpoint\
+        \ requires:\n* The variable identifier (ID or name)\n\nThe operation will\
+        \ fail if:\n* The user lacks required permissions\n* The variable doesn't\
+        \ exist\n* The variable is being used by other objects \n\n\n\n\n"
       operationId: deleteVariable
       parameters:
       - description: Unique id or name of the variable
@@ -7944,14 +8008,14 @@ paths:
     post:
       description: "\nSearch variables \n Version: 10.9.0.cl or later\n\n\nAllows\
         \ searching for variables in ThoughtSpot.\n\nRequires ADMINISTRATION role.\n\
-        \nThe API endpoint supports searching variables by:\n* Variable identifier\
-        \ (ID or name)\n* Variable type\n* Name pattern (case-insensitive, supports\
-        \ % for wildcard)\n\nThe search results can be formatted in three ways:\n\
-        * METADATA_ONLY - Returns only variable metadata (default)\n* METADATA_AND_VALUES\
-        \ - Returns variable metadata and values\n* EDITABLE_METADATA_AND_VALUES -\
-        \ Returns only editable variable metadata and values\n\nThe values can be\
-        \ filtered by scope:\n* org_identifier\n* principal_identifier\n* model_identifier\n\
-        \n\n\n\n\n"
+        The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables\
+        \ in the current organization scope.\n\nThe API endpoint supports searching\
+        \ variables by:\n* Variable identifier (ID or name)\n* Variable type\n* Name\
+        \ pattern (case-insensitive, supports % for wildcard)\n\nThe search results\
+        \ can be formatted in three ways:\n* METADATA - Returns only variable metadata\
+        \ (default)\n* METADATA_AND_VALUES - Returns variable metadata and values\n\
+        \nThe values can be filtered by scope:\n* org_identifier\n* principal_identifier\n\
+        * model_identifier\n\n\n\n\n\n"
       operationId: searchVariables
       parameters: []
       requestBody:
@@ -8003,8 +8067,9 @@ paths:
     post:
       description: "\nUpdate a variable's properties \n Version: 10.9.0.cl or later\n\
         \n\nAllows updating a variable's properties in ThoughtSpot.\n\nRequires ADMINISTRATION\
-        \ role and TENANT scope.\n\nThe API endpoint allows updating:\n* The variable\
-        \ name\n\n\n\n\n"
+        \ role and TENANT scope.\nThe CAN_MANAGE_VARIABLES permission allows you to\
+        \ manage Formula Variables in the current organization scope.\n\nThe API endpoint\
+        \ allows updating:\n* The variable name\n\n\n\n\n"
       operationId: updateVariable
       parameters:
       - description: Unique id or name of the variable to update.
@@ -8058,17 +8123,18 @@ paths:
     post:
       description: "\nUpdate values for multiple variables \n Version: 10.9.0.cl or\
         \ later\n\n\nAllows updating values for multiple variables in ThoughtSpot.\n\
-        \nRequires ADMINISTRATION role.\n\nThe API endpoint allows:\n* Adding new\
-        \ values to variables\n* Replacing existing values\n* Deleting values from\
-        \ variables\n\nWhen updating variable values, you need to specify:\n* The\
-        \ variable identifiers\n* The values to add/replace/remove for each variable\n\
-        * The operation to perform (ADD, REPLACE, REMOVE, CLEAR)\n\nBehaviour based\
-        \ on operation type:\n* ADD - Adds values to the variable if this is a list\
-        \ type variable, else same as replace.\n* REPLACE - Replaces all values of\
-        \ a given set of constraints with the current set of values.\n* REMOVE - Removes\
-        \ any values which match the set of conditions of the variables if this is\
-        \ a list type variable, else clears value.\n* CLEAR - Removes all constrains\
-        \ for a given variable, scope is ignored\n\n\n\n\n\n"
+        \nRequires ADMINISTRATION role.\nThe CAN_MANAGE_VARIABLES permission allows\
+        \ you to manage Formula Variables in the current organization scope.\n\nThe\
+        \ API endpoint allows:\n* Adding new values to variables\n* Replacing existing\
+        \ values\n* Deleting values from variables\n\nWhen updating variable values,\
+        \ you need to specify:\n* The variable identifiers\n* The values to add/replace/remove\
+        \ for each variable\n* The operation to perform (ADD, REPLACE, REMOVE, CLEAR)\n\
+        \nBehaviour based on operation type:\n* ADD - Adds values to the variable\
+        \ if this is a list type variable, else same as replace.\n* REPLACE - Replaces\
+        \ all values of a given set of constraints with the current set of values.\n\
+        * REMOVE - Removes any values which match the set of conditions of the variables\
+        \ if this is a list type variable, else clears value.\n* CLEAR - Removes all\
+        \ constrains for a given variable, scope is ignored\n\n\n\n\n\n"
       operationId: updateVariableValues
       parameters: []
       requestBody:
@@ -15957,6 +16023,14 @@ components:
           items:
             type: string
           type: array
+        user_parameters:
+          allOf:
+          - $ref: '#/components/schemas/User_Parameter_Options'
+          description: |-
+            <div>Deprecated: 10.4.0.cl and later
+            </div>
+
+            Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).
       required:
       - username
       type: object
@@ -16015,6 +16089,14 @@ components:
           items:
             type: string
           type: array
+        user_parameters:
+          allOf:
+          - $ref: '#/components/schemas/User_Parameter_Options'
+          description: |-
+            <div>Deprecated: 10.4.0.cl and later
+            </div>
+
+            Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).
       required:
       - username
       type: object

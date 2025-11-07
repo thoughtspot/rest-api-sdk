@@ -4,69 +4,112 @@
 
 package com.thoughtspot.client.model;
 
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import com.thoughtspot.client.model.UserParameterOptions;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for GetFullAccessTokenRequest */
+/**
+ * Model tests for GetFullAccessTokenRequest
+ */
 public class GetFullAccessTokenRequestTest {
     private final GetFullAccessTokenRequest model = new GetFullAccessTokenRequest();
 
-    /** Model tests for GetFullAccessTokenRequest */
+    /**
+     * Model tests for GetFullAccessTokenRequest
+     */
     @Test
     public void testGetFullAccessTokenRequest() {
         // TODO: test GetFullAccessTokenRequest
     }
 
-    /** Test the property 'username' */
+    /**
+     * Test the property 'username'
+     */
     @Test
     public void usernameTest() {
         // TODO: test username
     }
 
-    /** Test the property 'password' */
+    /**
+     * Test the property 'password'
+     */
     @Test
     public void passwordTest() {
         // TODO: test password
     }
 
-    /** Test the property 'secretKey' */
+    /**
+     * Test the property 'secretKey'
+     */
     @Test
     public void secretKeyTest() {
         // TODO: test secretKey
     }
 
-    /** Test the property 'validityTimeInSec' */
+    /**
+     * Test the property 'validityTimeInSec'
+     */
     @Test
     public void validityTimeInSecTest() {
         // TODO: test validityTimeInSec
     }
 
-    /** Test the property 'orgId' */
+    /**
+     * Test the property 'orgId'
+     */
     @Test
     public void orgIdTest() {
         // TODO: test orgId
     }
 
-    /** Test the property 'email' */
+    /**
+     * Test the property 'email'
+     */
     @Test
     public void emailTest() {
         // TODO: test email
     }
 
-    /** Test the property 'displayName' */
+    /**
+     * Test the property 'displayName'
+     */
     @Test
     public void displayNameTest() {
         // TODO: test displayName
     }
 
-    /** Test the property 'autoCreate' */
+    /**
+     * Test the property 'autoCreate'
+     */
     @Test
     public void autoCreateTest() {
         // TODO: test autoCreate
     }
 
-    /** Test the property 'groupIdentifiers' */
+    /**
+     * Test the property 'groupIdentifiers'
+     */
     @Test
     public void groupIdentifiersTest() {
         // TODO: test groupIdentifiers
     }
+
+    /**
+     * Test the property 'userParameters'
+     */
+    @Test
+    public void userParametersTest() {
+        // TODO: test userParameters
+    }
+
 }

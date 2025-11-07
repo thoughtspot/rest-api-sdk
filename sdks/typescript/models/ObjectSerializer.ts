@@ -143,6 +143,7 @@ export * from '../models/GetAsyncImportStatusResponse';
 export * from '../models/GetCustomAccessTokenRequest';
 export * from '../models/GetDataSourceSuggestionsRequest';
 export * from '../models/GetFullAccessTokenRequest';
+export * from '../models/GetFullAccessTokenRequestUserParameters';
 export * from '../models/GetObjectAccessTokenRequest';
 export * from '../models/GetRelevantQuestionsRequest';
 export * from '../models/GetRelevantQuestionsRequestAiContext';
@@ -485,6 +486,7 @@ import { GetAsyncImportStatusResponse } from '../models/GetAsyncImportStatusResp
 import { GetCustomAccessTokenRequest     , GetCustomAccessTokenRequestPersistOptionEnum          } from '../models/GetCustomAccessTokenRequest';
 import { GetDataSourceSuggestionsRequest } from '../models/GetDataSourceSuggestionsRequest';
 import { GetFullAccessTokenRequest } from '../models/GetFullAccessTokenRequest';
+import { GetFullAccessTokenRequestUserParameters } from '../models/GetFullAccessTokenRequestUserParameters';
 import { GetObjectAccessTokenRequest } from '../models/GetObjectAccessTokenRequest';
 import { GetRelevantQuestionsRequest } from '../models/GetRelevantQuestionsRequest';
 import { GetRelevantQuestionsRequestAiContext } from '../models/GetRelevantQuestionsRequestAiContext';
@@ -1042,6 +1044,7 @@ let typeMap: {[index: string]: any} = {
     "GetCustomAccessTokenRequest": GetCustomAccessTokenRequest,
     "GetDataSourceSuggestionsRequest": GetDataSourceSuggestionsRequest,
     "GetFullAccessTokenRequest": GetFullAccessTokenRequest,
+    "GetFullAccessTokenRequestUserParameters": GetFullAccessTokenRequestUserParameters,
     "GetObjectAccessTokenRequest": GetObjectAccessTokenRequest,
     "GetRelevantQuestionsRequest": GetRelevantQuestionsRequest,
     "GetRelevantQuestionsRequestAiContext": GetRelevantQuestionsRequestAiContext,
