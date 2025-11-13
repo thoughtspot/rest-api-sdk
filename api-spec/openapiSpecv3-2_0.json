@@ -22,6 +22,14 @@
       "description": "Roles for version 10.4.0.cl"
     },
     {
+      "name": "10.15.0.cl",
+      "id": "10.15.0.cl",
+      "tags": [
+        "10.15.0.cl"
+      ],
+      "description": "Roles for version 10.15.0.cl"
+    },
+    {
       "name": "10.7.0.cl",
       "id": "10.7.0.cl",
       "tags": [
@@ -76,6 +84,14 @@
         "9.9.0.cl"
       ],
       "description": "Roles for version 9.9.0.cl"
+    },
+    {
+      "name": "26.2.0.cl",
+      "id": "26.2.0.cl",
+      "tags": [
+        "26.2.0.cl"
+      ],
+      "description": "Roles for version 26.2.0.cl"
     },
     {
       "name": "9.6.0.cl",
@@ -324,10 +340,10 @@
     "/api/rest/2.0/ai/data-source-suggestions": {
       "post": {
         "operationId": "getDataSourceSuggestions",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.13.0.cl or later</span>\n\nProvides relevant data source recommendations for a user-submitted natural language query.\n\nTo use this API, the user must have at least view-level access to the underlying metadata entities referenced in the response.\n\n#### Usage guidelines\n\nThe request must include a `query` string via the request body.\n\nThe returned results include metadata such as:\n- `confidence`: a float indicating the model's confidence in the relevance of each recommendation\n- `details`: includes `data_source_identifier`, `data_source_name`, and `description` of each recommended data source\n- `reasoning`: rationale provided by the LLM to explain why each data source was recommended\n\nIf the API request is successful, ThoughtSpot returns a ranked list of data sources, each annotated with relevant reasoning.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before it is made Generally Available.\n> * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.15.0.cl or later</span>\n\nProvides relevant data source recommendations for a user-submitted natural language query.\n\nTo use this API, the user must have at least view-level access to the underlying metadata entities referenced in the response.\n\n#### Usage guidelines\n\nThe request must include a `query` string via the request body.\n\nThe returned results include metadata such as:\n- `confidence`: a float indicating the model's confidence in the relevance of each recommendation\n- `details`: includes `data_source_identifier`, `data_source_name`, and `description` of each recommended data source\n- `reasoning`: rationale provided by the LLM to explain why each data source was recommended\n\nIf the API request is successful, ThoughtSpot returns a ranked list of data sources, each annotated with relevant reasoning.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before it is made Generally Available.\n> * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
-          "10.13.0.cl"
+          "10.15.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -366,6 +382,78 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/eureka_DataSourceSuggestionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/instructions/get": {
+      "post": {
+        "operationId": "getNLInstructions",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.15.0.cl or later</span>\n\nThis API allows users to retrieve existing natural language (NL) instructions for a specific data-model. These instructions guide the AI system in understanding data context and generating more accurate responses when processing natural language queries.\n\n#### Usage guidelines\n\nTo retrieve NL instructions for a data-model, the request must include:\n- `data_source_identifier`: The unique ID or name of the data-model to retrieve NL instructions\n\nThe API returns a response object with:\n- `nl_instructions_info`: An array of instruction objects, each containing:\n  - `instructions`: Array of text instructions for natural language processing\n  - `scope`: The scope of the instruction (`GLOBAL`). It can be extended to data-model-user scope in future.\n\n#### Instructions Scope\n\n- **GLOBAL**: Instructions that apply globally across the system on the given data-model (currently only global instructions are supported)\n\n> ###### Note:\n> * To use this API, the user needs atleast view access on the data-model and they must use corresponding org related bearerToken where the data-model exists.\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * Available from version 10.15.0.cl and later.\n> * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n> * Use this API to view currently configured instructions before modifying them with `setNLInstructions`.\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "10.15.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data_source_identifier": {
+                    "description": "Unique ID or name of the data-model for which to retrieve NL instructions.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "data_source_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_GetNLInstructionsResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_GetNLInstructionsResponse"
                 }
               }
             }
@@ -606,10 +694,10 @@
     "/api/rest/2.0/ai/agent/{conversation_identifier}/converse": {
       "post": {
         "operationId": "sendAgentMessage",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.13.0.cl or later</span>\n\nThis API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages. \nTo use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.\n\n\n#### Usage guidelines\n\nTo initiate or continue a conversation, the request must include:\n- `conversation_identifier`: a unique session ID for continuity and message tracking\n- `messages`: an array of one or more text messages, each with a value and type\n\nThe API returns a array of object with a type, message, and metadata.\n- `type`: Type of the message — text, answer, or error.\n- `message`: Main content of the response.\n- `metadata`: Additional info depending on the message type.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.15.0.cl or later</span>\n\nThis API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages. \nTo use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.\n\n\n#### Usage guidelines\n\nTo initiate or continue a conversation, the request must include:\n- `conversation_identifier`: a unique session ID for continuity and message tracking\n- `messages`: an array of one or more text messages, each with a value and type\n\nThe API returns a array of object with a type, message, and metadata.\n- `type`: Type of the message — text, answer, or error.\n- `message`: Main content of the response.\n- `metadata`: Additional info depending on the message type.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
-          "10.13.0.cl"
+          "10.15.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -834,6 +922,86 @@
                   "items": {
                     "$ref": "#/components/schemas/ResponseMessage"
                   }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/instructions/set": {
+      "post": {
+        "operationId": "setNLInstructions",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.15.0.cl or later</span>\n\nThis API allows users to set natural language (NL) instructions for a specific data-model to improve AI-generated answers and query processing. These instructions help guide the AI system to better understand the data context and provide more accurate responses.\n\n#### Usage guidelines\n\nTo set NL instructions for a data-model, the request must include:\n- `data_source_identifier`: The unique ID or name of the data-model for which to set NL instructions\n- `nl_instructions_info`: An array of instruction objects, each containing:\n  - `instructions`: Array of text instructions for the LLM\n  - `scope`: The scope of the instruction (`GLOBAL`). Currently only `GLOBAL` is supported. It can be extended to data-model-user scope in future.\n\nThe API returns a response object with:\n- `success`: Boolean indicating whether the operation was successful\n\n#### Instructions Scope\n\n- **GLOBAL**: Instructions that apply globally for that data-model across the system\n\n> ###### Note:\n> * To use this API, the user needs either edit access or SPOTTER_COACHING_PRIVILEGE on the data-model and they must use corresponding org related bearerToken where the data-model exists.\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * Available from version 10.15.0.cl and later.\n> * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n> * Instructions help improve the accuracy and relevance of AI-generated responses for the specified data-model.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "10.15.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data_source_identifier": {
+                    "description": "Unique ID or name of the data-model for which to set NL instructions.",
+                    "type": "string"
+                  },
+                  "nl_instructions_info": {
+                    "description": "List of NL instructions to set for the data-model.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/NLInstructionsInfoInput"
+                    }
+                  }
+                },
+                "required": [
+                  "data_source_identifier",
+                  "nl_instructions_info"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_SetNLInstructionsResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_SetNLInstructionsResponse"
                 }
               }
             }
@@ -1103,7 +1271,7 @@
                     "type": "string"
                   },
                   "persist_option": {
-                    "description": "Indicates whether the specified attributes should be persisted or not.",
+                    "description": "Indicates whether the specified attributes should be persisted or not. RESET and NONE are not applicable if you are setting variable_values.",
                     "type": "string",
                     "enum": [
                       "REPLACE",
@@ -1124,6 +1292,13 @@
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/ParameterValues"
+                    }
+                  },
+                  "variable_values": {
+                    "description": "List of variable values where `name` references an existing formula variable and `values` is any value from the corresponding column. <br/>  <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/VariableValues"
                     }
                   },
                   "objects": {
@@ -1149,7 +1324,7 @@
                     }
                   },
                   "auto_create": {
-                    "description": "   Creates a new user if the specified username does not exist in ThoughtSpot. To provision a user just-in-time (JIT), set this attribute to true.\n   \n\nNote: For JIT provisioning of a user, the secret_key is required.  <br/>  <span class=\"since-beta-tag\">Version: 10.5.0.cl or later</span>",
+                    "description": "   Creates a new user if the specified username does not exist in ThoughtSpot. To provision a user just-in-time (JIT), set this attribute to true.\n   \n\nNote: For JIT provisioning of a user, the secret_key is required. New formula variables won't be created.  <br/>  <span class=\"since-beta-tag\">Version: 10.5.0.cl or later</span>",
                     "default": true,
                     "type": "boolean",
                     "nullable": true
@@ -1279,6 +1454,14 @@
                     "items": {
                       "type": "string"
                     }
+                  },
+                  "user_parameters": {
+                    "description": "<div><span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span><span class=\"since-beta-tag\">Deprecated: 10.4.0.cl and later</span></div>\n\nDefine attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/User_Parameter_Options"
+                      }
+                    ]
                   }
                 },
                 "required": [
@@ -1408,6 +1591,14 @@
                     "items": {
                       "type": "string"
                     }
+                  },
+                  "user_parameters": {
+                    "description": "<div><span class=\"since-beta-tag\">Version: 9.10.5.cl or later</span><span class=\"since-beta-tag\">Deprecated: 10.4.0.cl and later</span></div>\n\nDefine attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/User_Parameter_Options"
+                      }
+                    ]
                   }
                 },
                 "required": [
@@ -2604,6 +2795,109 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/FetchConnectionDiffStatusResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/connections/refresh-tokens/revoke": {
+      "post": {
+        "operationId": "invalidateConnectionTokens",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.2.0.cl or later</span>\n\nUser should have Administrative Privilege or be the Connection Author to Invalidates the refresh tokens.\n\n## Token Invalidation Rules\n\nYou can specify different combinations of identifiers to control\nwhich refresh tokens are invalidated:\n\n- **connection_identifier only**: All user's refresh tokens will be\n  deleted except the connection author.\n- **connection_identifier + user_identifiers**: Only specified user's\n  refresh tokens will be deleted. If the author's user_identifier is\n  included, their token will also be invalidated.\n- **connection_identifier + configuration_identifiers**: Refresh\n  tokens for the specified configurations will be deleted.\n- **connection_identifier + org_identifiers**: Refresh tokens for the\n  specified orgs will be deleted. This is only applicable for published\n  connections.\n\n**Note**: The `org_identifiers` field is only applicable for published connections. Using this field with unpublished connections will result in an error: \"The 'org_identifiers' field is only applicable for published connections. Please ensure the connection is published before including this field.\"\n\nAfter tokens are invalidated, logged-in users will need to re-authenticate to access visualizations.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Connections",
+          "26.2.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "connection_identifier": {
+                    "description": "Unique ID or name of the connection whose token needs to be deleted. All the users associated with the connection will have their tokens deleted except the author.",
+                    "type": "string"
+                  },
+                  "configuration_identifiers": {
+                    "description": "Unique ID or name of configurations. If provided, the specified configuration's user tokens will be deleted.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "user_identifiers": {
+                    "description": "Unique ID or name of users. If provided, only the specified user's refresh tokens will be deleted. If the author's user_identifier is included, their token will also be deleted.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "org_identifiers": {
+                    "description": "Unique ID or name of orgs. This is applicable only for published connections. If provided, the specified org's user tokens will be deleted. This field is only valid for published connections; using it with unpublished connections will return an error.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "connection_identifier"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Token(s) successfully revoked.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidateConnectionTokensResponse"
                 }
               }
             }
@@ -5550,6 +5844,7 @@
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "CAN_MODIFY_FOLDERS",
+                        "CAN_MANAGE_VARIABLES",
                         "CAN_VIEW_FOLDERS",
                         "PREVIEW_DOCUMENT_SEARCH",
                         "CAN_SETUP_VERSION_CONTROL",
@@ -5910,6 +6205,7 @@
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
                         "CAN_MODIFY_FOLDERS",
+                        "CAN_MANAGE_VARIABLES",
                         "CAN_VIEW_FOLDERS",
                         "CAN_SETUP_VERSION_CONTROL",
                         "CAN_MANAGE_WEBHOOKS",
@@ -6118,6 +6414,7 @@
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "CAN_MODIFY_FOLDERS",
+                        "CAN_MANAGE_VARIABLES",
                         "CAN_VIEW_FOLDERS",
                         "PREVIEW_DOCUMENT_SEARCH",
                         "CAN_SETUP_VERSION_CONTROL",
@@ -8764,6 +9061,7 @@
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
+                        "CAN_MANAGE_VARIABLES",
                         "CAN_MODIFY_FOLDERS",
                         "CAN_VIEW_FOLDERS",
                         "CAN_SETUP_VERSION_CONTROL",
@@ -8996,6 +9294,7 @@
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "CAN_VIEW_FOLDERS",
                         "CAN_MODIDY_FOLDERS",
+                        "CAN_MANAGE_VARIABLES",
                         "PREVIEW_DOCUMENT_SEARCH",
                         "CAN_SETUP_VERSION_CONTROL",
                         "CAN_MANAGE_WEBHOOKS",
@@ -9157,6 +9456,7 @@
                         "CAN_ACCESS_ANALYST_STUDIO",
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "CAN_MODIFY_FOLDERS",
+                        "CAN_MANAGE_VARIABLES",
                         "CAN_VIEW_FOLDERS",
                         "PREVIEW_DOCUMENT_SEARCH",
                         "PREVIEW_THOUGHTSPOT_SAGE",
@@ -13868,6 +14168,7 @@
                         "CAN_MANAGE_ANALYST_STUDIO",
                         "PREVIEW_DOCUMENT_SEARCH",
                         "CAN_MODIFY_FOLDERS",
+                        "CAN_MANAGE_VARIABLES",
                         "CAN_VIEW_FOLDERS",
                         "CAN_SETUP_VERSION_CONTROL",
                         "CAN_MANAGE_WEBHOOKS",
@@ -14261,7 +14562,8 @@
                     "enum": [
                       "CONNECTION_PROPERTY",
                       "TABLE_MAPPING",
-                      "CONNECTION_PROPERTY_PER_PRINCIPAL"
+                      "CONNECTION_PROPERTY_PER_PRINCIPAL",
+                      "FORMULA_VARIABLE"
                     ]
                   },
                   "name": {
@@ -14457,12 +14759,12 @@
                     "type": "integer",
                     "format": "int32"
                   },
-                  "output_format": {
+                  "response_content": {
                     "description": "Format in which we want the output",
-                    "default": "METADATA_ONLY",
+                    "default": "METADATA",
                     "type": "string",
                     "enum": [
-                      "METADATA_ONLY",
+                      "METADATA",
                       "METADATA_AND_VALUES"
                     ]
                   }
@@ -19028,6 +19330,7 @@
                 "CAN_MANAGE_ANALYST_STUDIO",
                 "CAN_VIEW_FOLDERS",
                 "CAN_MODIDY_FOLDERS",
+                "CAN_MANAGE_VARIABLES",
                 "PREVIEW_DOCUMENT_SEARCH",
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_MANAGE_WEBHOOKS",
@@ -19567,6 +19870,44 @@
           }
         }
       },
+      "eureka_GetNLInstructionsResponse": {
+        "type": "object",
+        "required": [
+          "nl_instructions_info"
+        ],
+        "properties": {
+          "nl_instructions_info": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NLInstructionsInfo"
+            },
+            "description": "List of NL instructions with their scopes."
+          }
+        }
+      },
+      "NLInstructionsInfo": {
+        "type": "object",
+        "required": [
+          "instructions",
+          "scope"
+        ],
+        "properties": {
+          "instructions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "User instructions for natural language processing."
+          },
+          "scope": {
+            "type": "string",
+            "enum": [
+              "GLOBAL"
+            ],
+            "description": "Scope of the instruction."
+          }
+        }
+      },
       "RiseGQLArgWrapper": {
         "type": "object",
         "required": [
@@ -19595,7 +19936,8 @@
             "enum": [
               "CONNECTION_PROPERTY",
               "TABLE_MAPPING",
-              "CONNECTION_PROPERTY_PER_PRINCIPAL"
+              "CONNECTION_PROPERTY_PER_PRINCIPAL",
+              "FORMULA_VARIABLE"
             ],
             "description": "Type of variable",
             "nullable": true
@@ -19658,7 +20000,8 @@
             "enum": [
               "CONNECTION_PROPERTY",
               "TABLE_MAPPING",
-              "CONNECTION_PROPERTY_PER_PRINCIPAL"
+              "CONNECTION_PROPERTY_PER_PRINCIPAL",
+              "FORMULA_VARIABLE"
             ],
             "description": "Type of the variable",
             "nullable": true
@@ -20676,6 +21019,37 @@
         },
         "description": "Filter Rules to be applied on Objects."
       },
+      "VariableValues": {
+        "type": "object",
+        "required": [
+          "name",
+          "values"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the existing formula variable."
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "number"
+                }
+              ]
+            },
+            "description": "The values to filter on."
+          }
+        },
+        "description": "Variable values."
+      },
       "TokenAccessScopeObject": {
         "type": "object",
         "required": [
@@ -21094,6 +21468,7 @@
                 "CAN_ACCESS_ANALYST_STUDIO",
                 "CAN_MANAGE_ANALYST_STUDIO",
                 "CAN_MODIFY_FOLDERS",
+                "CAN_MANAGE_VARIABLES",
                 "CAN_VIEW_FOLDERS",
                 "PREVIEW_DOCUMENT_SEARCH",
                 "CAN_SETUP_VERSION_CONTROL",
@@ -22005,6 +22380,18 @@
           }
         }
       },
+      "InvalidateConnectionTokensResponse": {
+        "type": "object",
+        "required": [
+          "revoke_result"
+        ],
+        "properties": {
+          "revoke_result": {
+            "type": "string",
+            "description": "Result message describing the outcome of the token revocation operation."
+          }
+        }
+      },
       "RoleResponse": {
         "type": "object",
         "required": [
@@ -22084,6 +22471,7 @@
                 "CAN_ACCESS_ANALYST_STUDIO",
                 "CAN_MANAGE_ANALYST_STUDIO",
                 "PREVIEW_DOCUMENT_SEARCH",
+                "CAN_MANAGE_VARIABLES",
                 "CAN_MODIFY_FOLDERS",
                 "CAN_VIEW_FOLDERS",
                 "CAN_SETUP_VERSION_CONTROL",
@@ -23238,6 +23626,41 @@
           }
         }
       },
+      "NLInstructionsInfoInput": {
+        "type": "object",
+        "required": [
+          "instructions",
+          "scope"
+        ],
+        "properties": {
+          "instructions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "User instructions for natural language processing."
+          },
+          "scope": {
+            "type": "string",
+            "enum": [
+              "GLOBAL"
+            ],
+            "description": "Scope of the instruction (USER or GLOBAL). Defaults to GLOBAL."
+          }
+        }
+      },
+      "eureka_SetNLInstructionsResponse": {
+        "type": "object",
+        "required": [
+          "success"
+        ],
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Success status of the operation."
+          }
+        }
+      },
       "VariableUpdateAssignmentInput": {
         "type": "object",
         "required": [
@@ -23263,7 +23686,7 @@
               "ADD",
               "REMOVE",
               "REPLACE",
-              "CLEAR"
+              "RESET"
             ],
             "description": "Operation to perform"
           }
