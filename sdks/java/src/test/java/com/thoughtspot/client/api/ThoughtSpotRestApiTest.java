@@ -54,7 +54,9 @@ import com.thoughtspot.client.model.DeployCommitRequest;
 import com.thoughtspot.client.model.DeployResponse;
 import com.thoughtspot.client.model.EurekaDataSourceSuggestionResponse;
 import com.thoughtspot.client.model.EurekaDecomposeQueryResponse;
+import com.thoughtspot.client.model.EurekaGetNLInstructionsResponse;
 import com.thoughtspot.client.model.EurekaGetRelevantQuestionsResponse;
+import com.thoughtspot.client.model.EurekaSetNLInstructionsResponse;
 import com.thoughtspot.client.model.ExportAnswerReportRequest;
 import com.thoughtspot.client.model.ExportLiveboardReportRequest;
 import com.thoughtspot.client.model.ExportMetadataTMLBatchedRequest;
@@ -75,6 +77,7 @@ import com.thoughtspot.client.model.GetAsyncImportStatusResponse;
 import com.thoughtspot.client.model.GetCustomAccessTokenRequest;
 import com.thoughtspot.client.model.GetDataSourceSuggestionsRequest;
 import com.thoughtspot.client.model.GetFullAccessTokenRequest;
+import com.thoughtspot.client.model.GetNLInstructionsRequest;
 import com.thoughtspot.client.model.GetObjectAccessTokenRequest;
 import com.thoughtspot.client.model.GetRelevantQuestionsRequest;
 import com.thoughtspot.client.model.GetTokenResponse;
@@ -131,6 +134,7 @@ import com.thoughtspot.client.model.SendAgentMessageRequest;
 import com.thoughtspot.client.model.SendAgentMessageResponse;
 import com.thoughtspot.client.model.SendAgentMessageStreamingRequest;
 import com.thoughtspot.client.model.SendMessageRequest;
+import com.thoughtspot.client.model.SetNLInstructionsRequest;
 import com.thoughtspot.client.model.ShareMetadataRequest;
 import com.thoughtspot.client.model.SingleAnswerRequest;
 import com.thoughtspot.client.model.SqlQueryResponse;
@@ -1849,6 +1853,35 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     * Version: 10.15.0.cl or later This API allows users to retrieve existing natural language (NL)
+     * instructions for a specific data-model. These instructions guide the AI system in
+     * understanding data context and generating more accurate responses when processing natural
+     * language queries. #### Usage guidelines To retrieve NL instructions for a data-model, the
+     * request must include: - &#x60;data_source_identifier&#x60;: The unique ID or name of the
+     * data-model to retrieve NL instructions The API returns a response object with: -
+     * &#x60;nl_instructions_info&#x60;: An array of instruction objects, each containing: -
+     * &#x60;instructions&#x60;: Array of text instructions for natural language processing -
+     * &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). It can be extended to
+     * data-model-user scope in future. #### Instructions Scope - **GLOBAL**: Instructions that
+     * apply globally across the system on the given data-model (currently only global instructions
+     * are supported) &gt; ###### Note: &gt; * To use this API, the user needs atleast view access
+     * on the data-model and they must use corresponding org related bearerToken where the
+     * data-model exists. &gt; * This endpoint is currently in Beta. Breaking changes may be
+     * introduced before the endpoint is made Generally Available. &gt; * Available from version
+     * 10.15.0.cl and later. &gt; * This endpoint requires Spotter — please contact ThoughtSpot
+     * Support to enable Spotter on your cluster. &gt; * Use this API to view currently configured
+     * instructions before modifying them with &#x60;setNLInstructions&#x60;.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getNLInstructionsTest() throws ApiException {
+        GetNLInstructionsRequest getNLInstructionsRequest = null;
+        EurekaGetNLInstructionsResponse response = api.getNLInstructions(getNLInstructionsRequest);
+        // TODO: test validations
+    }
+
+    /**
      * Version: 9.0.0.cl or later Gets an authentication token that provides access to a specific
      * metadata object. By default, the token obtained from ThoughtSpot remains valid for 5 mins.
      * You can generate the token for a user by providing a &#x60;username&#x60; and
@@ -2683,6 +2716,36 @@ public class ThoughtSpotRestApiTest {
         SendMessageRequest sendMessageRequest = null;
         List<ResponseMessage> response =
                 api.sendMessage(conversationIdentifier, sendMessageRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 10.15.0.cl or later This API allows users to set natural language (NL) instructions
+     * for a specific data-model to improve AI-generated answers and query processing. These
+     * instructions help guide the AI system to better understand the data context and provide more
+     * accurate responses. #### Usage guidelines To set NL instructions for a data-model, the
+     * request must include: - &#x60;data_source_identifier&#x60;: The unique ID or name of the
+     * data-model for which to set NL instructions - &#x60;nl_instructions_info&#x60;: An array of
+     * instruction objects, each containing: - &#x60;instructions&#x60;: Array of text instructions
+     * for the LLM - &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). Currently
+     * only &#x60;GLOBAL&#x60; is supported. It can be extended to data-model-user scope in future.
+     * The API returns a response object with: - &#x60;success&#x60;: Boolean indicating whether the
+     * operation was successful #### Instructions Scope - **GLOBAL**: Instructions that apply
+     * globally for that data-model across the system &gt; ###### Note: &gt; * To use this API, the
+     * user needs either edit access or SPOTTER_COACHING_PRIVILEGE on the data-model and they must
+     * use corresponding org related bearerToken where the data-model exists. &gt; * This endpoint
+     * is currently in Beta. Breaking changes may be introduced before the endpoint is made
+     * Generally Available. &gt; * Available from version 10.15.0.cl and later. &gt; * This endpoint
+     * requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. &gt;
+     * * Instructions help improve the accuracy and relevance of AI-generated responses for the
+     * specified data-model.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void setNLInstructionsTest() throws ApiException {
+        SetNLInstructionsRequest setNLInstructionsRequest = null;
+        EurekaSetNLInstructionsResponse response = api.setNLInstructions(setNLInstructionsRequest);
         // TODO: test validations
     }
 

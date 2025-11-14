@@ -64,7 +64,10 @@ public class GetCustomAccessTokenRequest implements Serializable {
     @javax.annotation.Nullable
     private String orgIdentifier;
 
-    /** Indicates whether the specified attributes should be persisted or not. */
+    /**
+     * Indicates whether the specified attributes should be persisted or not. RESET and NONE are not
+     * applicable if you are setting variable_values.
+     */
     @JsonAdapter(PersistOptionEnum.Adapter.class)
     public enum PersistOptionEnum {
         REPLACE("REPLACE"),
@@ -136,6 +139,12 @@ public class GetCustomAccessTokenRequest implements Serializable {
     @SerializedName(SERIALIZED_NAME_PARAMETER_VALUES)
     @javax.annotation.Nullable
     private List<ParameterValues> parameterValues;
+
+    public static final String SERIALIZED_NAME_VARIABLE_VALUES = "variable_values";
+
+    @SerializedName(SERIALIZED_NAME_VARIABLE_VALUES)
+    @javax.annotation.Nullable
+    private List<VariableValues> variableValues;
 
     public static final String SERIALIZED_NAME_OBJECTS = "objects";
 
@@ -278,7 +287,8 @@ public class GetCustomAccessTokenRequest implements Serializable {
     }
 
     /**
-     * Indicates whether the specified attributes should be persisted or not.
+     * Indicates whether the specified attributes should be persisted or not. RESET and NONE are not
+     * applicable if you are setting variable_values.
      *
      * @return persistOption
      */
@@ -346,6 +356,35 @@ public class GetCustomAccessTokenRequest implements Serializable {
     public void setParameterValues(
             @javax.annotation.Nullable List<ParameterValues> parameterValues) {
         this.parameterValues = parameterValues;
+    }
+
+    public GetCustomAccessTokenRequest variableValues(
+            @javax.annotation.Nullable List<VariableValues> variableValues) {
+        this.variableValues = variableValues;
+        return this;
+    }
+
+    public GetCustomAccessTokenRequest addVariableValuesItem(VariableValues variableValuesItem) {
+        if (this.variableValues == null) {
+            this.variableValues = new ArrayList<>();
+        }
+        this.variableValues.add(variableValuesItem);
+        return this;
+    }
+
+    /**
+     * List of variable values where &#x60;name&#x60; references an existing formula variable and
+     * &#x60;values&#x60; is any value from the corresponding column. Version: 10.14.0.cl or later
+     *
+     * @return variableValues
+     */
+    @javax.annotation.Nullable
+    public List<VariableValues> getVariableValues() {
+        return variableValues;
+    }
+
+    public void setVariableValues(@javax.annotation.Nullable List<VariableValues> variableValues) {
+        this.variableValues = variableValues;
     }
 
     public GetCustomAccessTokenRequest objects(
@@ -452,7 +491,8 @@ public class GetCustomAccessTokenRequest implements Serializable {
     /**
      * Creates a new user if the specified username does not exist in ThoughtSpot. To provision a
      * user just-in-time (JIT), set this attribute to true. Note: For JIT provisioning of a user,
-     * the secret_key is required. Version: 10.5.0.cl or later
+     * the secret_key is required. New formula variables won&#39;t be created. Version: 10.5.0.cl or
+     * later
      *
      * @return autoCreate
      */
@@ -483,6 +523,7 @@ public class GetCustomAccessTokenRequest implements Serializable {
                 && Objects.equals(this.persistOption, getCustomAccessTokenRequest.persistOption)
                 && Objects.equals(this.filterRules, getCustomAccessTokenRequest.filterRules)
                 && Objects.equals(this.parameterValues, getCustomAccessTokenRequest.parameterValues)
+                && Objects.equals(this.variableValues, getCustomAccessTokenRequest.variableValues)
                 && Objects.equals(this.objects, getCustomAccessTokenRequest.objects)
                 && Objects.equals(this.email, getCustomAccessTokenRequest.email)
                 && Objects.equals(this.displayName, getCustomAccessTokenRequest.displayName)
@@ -510,6 +551,7 @@ public class GetCustomAccessTokenRequest implements Serializable {
                 persistOption,
                 filterRules,
                 parameterValues,
+                variableValues,
                 objects,
                 email,
                 displayName,
@@ -538,6 +580,7 @@ public class GetCustomAccessTokenRequest implements Serializable {
         sb.append("    persistOption: ").append(toIndentedString(persistOption)).append("\n");
         sb.append("    filterRules: ").append(toIndentedString(filterRules)).append("\n");
         sb.append("    parameterValues: ").append(toIndentedString(parameterValues)).append("\n");
+        sb.append("    variableValues: ").append(toIndentedString(variableValues)).append("\n");
         sb.append("    objects: ").append(toIndentedString(objects)).append("\n");
         sb.append("    email: ").append(toIndentedString(email)).append("\n");
         sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
@@ -572,6 +615,7 @@ public class GetCustomAccessTokenRequest implements Serializable {
         openapiFields.add("persist_option");
         openapiFields.add("filter_rules");
         openapiFields.add("parameter_values");
+        openapiFields.add("variable_values");
         openapiFields.add("objects");
         openapiFields.add("email");
         openapiFields.add("display_name");
@@ -700,6 +744,26 @@ public class GetCustomAccessTokenRequest implements Serializable {
                 // validate the optional field `parameter_values` (array)
                 for (int i = 0; i < jsonArrayparameterValues.size(); i++) {
                     ParameterValues.validateJsonElement(jsonArrayparameterValues.get(i));
+                }
+                ;
+            }
+        }
+        if (jsonObj.get("variable_values") != null
+                && !jsonObj.get("variable_values").isJsonNull()) {
+            JsonArray jsonArrayvariableValues = jsonObj.getAsJsonArray("variable_values");
+            if (jsonArrayvariableValues != null) {
+                // ensure the json data is an array
+                if (!jsonObj.get("variable_values").isJsonArray()) {
+                    throw new IllegalArgumentException(
+                            String.format(
+                                    "Expected the field `variable_values` to be an array in the"
+                                            + " JSON string but got `%s`",
+                                    jsonObj.get("variable_values").toString()));
+                }
+
+                // validate the optional field `variable_values` (array)
+                for (int i = 0; i < jsonArrayvariableValues.size(); i++) {
+                    VariableValues.validateJsonElement(jsonArrayvariableValues.get(i));
                 }
                 ;
             }

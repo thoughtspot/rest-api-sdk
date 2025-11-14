@@ -57,15 +57,15 @@ public class SearchVariablesRequest implements Serializable {
     private Integer recordSize = 10;
 
     /** Format in which we want the output */
-    @JsonAdapter(OutputFormatEnum.Adapter.class)
-    public enum OutputFormatEnum {
-        METADATA_ONLY("METADATA_ONLY"),
+    @JsonAdapter(ResponseContentEnum.Adapter.class)
+    public enum ResponseContentEnum {
+        METADATA("METADATA"),
 
         METADATA_AND_VALUES("METADATA_AND_VALUES");
 
         private String value;
 
-        OutputFormatEnum(String value) {
+        ResponseContentEnum(String value) {
             this.value = value;
         }
 
@@ -78,8 +78,8 @@ public class SearchVariablesRequest implements Serializable {
             return String.valueOf(value);
         }
 
-        public static OutputFormatEnum fromValue(String value) {
-            for (OutputFormatEnum b : OutputFormatEnum.values()) {
+        public static ResponseContentEnum fromValue(String value) {
+            for (ResponseContentEnum b : ResponseContentEnum.values()) {
                 if (b.value.equals(value)) {
                     return b;
                 }
@@ -87,31 +87,31 @@ public class SearchVariablesRequest implements Serializable {
             throw new IllegalArgumentException("Unexpected value '" + value + "'");
         }
 
-        public static class Adapter extends TypeAdapter<OutputFormatEnum> {
+        public static class Adapter extends TypeAdapter<ResponseContentEnum> {
             @Override
-            public void write(final JsonWriter jsonWriter, final OutputFormatEnum enumeration)
+            public void write(final JsonWriter jsonWriter, final ResponseContentEnum enumeration)
                     throws IOException {
                 jsonWriter.value(enumeration.getValue());
             }
 
             @Override
-            public OutputFormatEnum read(final JsonReader jsonReader) throws IOException {
+            public ResponseContentEnum read(final JsonReader jsonReader) throws IOException {
                 String value = jsonReader.nextString();
-                return OutputFormatEnum.fromValue(value);
+                return ResponseContentEnum.fromValue(value);
             }
         }
 
         public static void validateJsonElement(JsonElement jsonElement) throws IOException {
             String value = jsonElement.getAsString();
-            OutputFormatEnum.fromValue(value);
+            ResponseContentEnum.fromValue(value);
         }
     }
 
-    public static final String SERIALIZED_NAME_OUTPUT_FORMAT = "output_format";
+    public static final String SERIALIZED_NAME_RESPONSE_CONTENT = "response_content";
 
-    @SerializedName(SERIALIZED_NAME_OUTPUT_FORMAT)
+    @SerializedName(SERIALIZED_NAME_RESPONSE_CONTENT)
     @javax.annotation.Nullable
-    private OutputFormatEnum outputFormat = OutputFormatEnum.METADATA_ONLY;
+    private ResponseContentEnum responseContent = ResponseContentEnum.METADATA;
 
     public SearchVariablesRequest() {}
 
@@ -210,24 +210,24 @@ public class SearchVariablesRequest implements Serializable {
         this.recordSize = recordSize;
     }
 
-    public SearchVariablesRequest outputFormat(
-            @javax.annotation.Nullable OutputFormatEnum outputFormat) {
-        this.outputFormat = outputFormat;
+    public SearchVariablesRequest responseContent(
+            @javax.annotation.Nullable ResponseContentEnum responseContent) {
+        this.responseContent = responseContent;
         return this;
     }
 
     /**
      * Format in which we want the output
      *
-     * @return outputFormat
+     * @return responseContent
      */
     @javax.annotation.Nullable
-    public OutputFormatEnum getOutputFormat() {
-        return outputFormat;
+    public ResponseContentEnum getResponseContent() {
+        return responseContent;
     }
 
-    public void setOutputFormat(@javax.annotation.Nullable OutputFormatEnum outputFormat) {
-        this.outputFormat = outputFormat;
+    public void setResponseContent(@javax.annotation.Nullable ResponseContentEnum responseContent) {
+        this.responseContent = responseContent;
     }
 
     @Override
@@ -243,12 +243,12 @@ public class SearchVariablesRequest implements Serializable {
                 && Objects.equals(this.valueScope, searchVariablesRequest.valueScope)
                 && Objects.equals(this.recordOffset, searchVariablesRequest.recordOffset)
                 && Objects.equals(this.recordSize, searchVariablesRequest.recordSize)
-                && Objects.equals(this.outputFormat, searchVariablesRequest.outputFormat);
+                && Objects.equals(this.responseContent, searchVariablesRequest.responseContent);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(variableDetails, valueScope, recordOffset, recordSize, outputFormat);
+        return Objects.hash(variableDetails, valueScope, recordOffset, recordSize, responseContent);
     }
 
     @Override
@@ -259,7 +259,7 @@ public class SearchVariablesRequest implements Serializable {
         sb.append("    valueScope: ").append(toIndentedString(valueScope)).append("\n");
         sb.append("    recordOffset: ").append(toIndentedString(recordOffset)).append("\n");
         sb.append("    recordSize: ").append(toIndentedString(recordSize)).append("\n");
-        sb.append("    outputFormat: ").append(toIndentedString(outputFormat)).append("\n");
+        sb.append("    responseContent: ").append(toIndentedString(responseContent)).append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -285,7 +285,7 @@ public class SearchVariablesRequest implements Serializable {
         openapiFields.add("value_scope");
         openapiFields.add("record_offset");
         openapiFields.add("record_size");
-        openapiFields.add("output_format");
+        openapiFields.add("response_content");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -360,17 +360,19 @@ public class SearchVariablesRequest implements Serializable {
                 ;
             }
         }
-        if ((jsonObj.get("output_format") != null && !jsonObj.get("output_format").isJsonNull())
-                && !jsonObj.get("output_format").isJsonPrimitive()) {
+        if ((jsonObj.get("response_content") != null
+                        && !jsonObj.get("response_content").isJsonNull())
+                && !jsonObj.get("response_content").isJsonPrimitive()) {
             throw new IllegalArgumentException(
                     String.format(
-                            "Expected the field `output_format` to be a primitive type in the JSON"
-                                    + " string but got `%s`",
-                            jsonObj.get("output_format").toString()));
+                            "Expected the field `response_content` to be a primitive type in the"
+                                    + " JSON string but got `%s`",
+                            jsonObj.get("response_content").toString()));
         }
-        // validate the optional field `output_format`
-        if (jsonObj.get("output_format") != null && !jsonObj.get("output_format").isJsonNull()) {
-            OutputFormatEnum.validateJsonElement(jsonObj.get("output_format"));
+        // validate the optional field `response_content`
+        if (jsonObj.get("response_content") != null
+                && !jsonObj.get("response_content").isJsonNull()) {
+            ResponseContentEnum.validateJsonElement(jsonObj.get("response_content"));
         }
     }
 

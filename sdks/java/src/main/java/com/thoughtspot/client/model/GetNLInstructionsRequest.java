@@ -21,39 +21,39 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-/** CreateEmailCustomisationRequest */
+/** GetNLInstructionsRequest */
 @javax.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         comments = "Generator version: 7.12.0")
-public class CreateEmailCustomisationRequest implements Serializable {
+public class GetNLInstructionsRequest implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public static final String SERIALIZED_NAME_TEMPLATE_PROPERTIES = "template_properties";
+    public static final String SERIALIZED_NAME_DATA_SOURCE_IDENTIFIER = "data_source_identifier";
 
-    @SerializedName(SERIALIZED_NAME_TEMPLATE_PROPERTIES)
+    @SerializedName(SERIALIZED_NAME_DATA_SOURCE_IDENTIFIER)
     @javax.annotation.Nonnull
-    private Object templateProperties;
+    private String dataSourceIdentifier;
 
-    public CreateEmailCustomisationRequest() {}
+    public GetNLInstructionsRequest() {}
 
-    public CreateEmailCustomisationRequest templateProperties(
-            @javax.annotation.Nonnull Object templateProperties) {
-        this.templateProperties = templateProperties;
+    public GetNLInstructionsRequest dataSourceIdentifier(
+            @javax.annotation.Nonnull String dataSourceIdentifier) {
+        this.dataSourceIdentifier = dataSourceIdentifier;
         return this;
     }
 
     /**
-     * Email customization configuration as key value pair
+     * Unique ID or name of the data-model for which to retrieve NL instructions.
      *
-     * @return templateProperties
+     * @return dataSourceIdentifier
      */
     @javax.annotation.Nonnull
-    public Object getTemplateProperties() {
-        return templateProperties;
+    public String getDataSourceIdentifier() {
+        return dataSourceIdentifier;
     }
 
-    public void setTemplateProperties(@javax.annotation.Nonnull Object templateProperties) {
-        this.templateProperties = templateProperties;
+    public void setDataSourceIdentifier(@javax.annotation.Nonnull String dataSourceIdentifier) {
+        this.dataSourceIdentifier = dataSourceIdentifier;
     }
 
     @Override
@@ -64,23 +64,22 @@ public class CreateEmailCustomisationRequest implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CreateEmailCustomisationRequest createEmailCustomisationRequest =
-                (CreateEmailCustomisationRequest) o;
+        GetNLInstructionsRequest getNLInstructionsRequest = (GetNLInstructionsRequest) o;
         return Objects.equals(
-                this.templateProperties, createEmailCustomisationRequest.templateProperties);
+                this.dataSourceIdentifier, getNLInstructionsRequest.dataSourceIdentifier);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(templateProperties);
+        return Objects.hash(dataSourceIdentifier);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class CreateEmailCustomisationRequest {\n");
-        sb.append("    templateProperties: ")
-                .append(toIndentedString(templateProperties))
+        sb.append("class GetNLInstructionsRequest {\n");
+        sb.append("    dataSourceIdentifier: ")
+                .append(toIndentedString(dataSourceIdentifier))
                 .append("\n");
         sb.append("}");
         return sb.toString();
@@ -103,46 +102,45 @@ public class CreateEmailCustomisationRequest implements Serializable {
     static {
         // a set of all properties/fields (JSON key names)
         openapiFields = new HashSet<String>();
-        openapiFields.add("template_properties");
+        openapiFields.add("data_source_identifier");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
-        openapiRequiredFields.add("template_properties");
+        openapiRequiredFields.add("data_source_identifier");
     }
 
     /**
      * Validates the JSON Element and throws an exception if issues found
      *
      * @param jsonElement JSON Element
-     * @throws IOException if the JSON Element is invalid with respect to
-     *     CreateEmailCustomisationRequest
+     * @throws IOException if the JSON Element is invalid with respect to GetNLInstructionsRequest
      */
     public static void validateJsonElement(JsonElement jsonElement) throws IOException {
         if (jsonElement == null) {
-            if (!CreateEmailCustomisationRequest.openapiRequiredFields
+            if (!GetNLInstructionsRequest.openapiRequiredFields
                     .isEmpty()) { // has required fields but JSON element is null
                 throw new IllegalArgumentException(
                         String.format(
-                                "The required field(s) %s in CreateEmailCustomisationRequest is"
-                                        + " not found in the empty JSON string",
-                                CreateEmailCustomisationRequest.openapiRequiredFields.toString()));
+                                "The required field(s) %s in GetNLInstructionsRequest is not found"
+                                        + " in the empty JSON string",
+                                GetNLInstructionsRequest.openapiRequiredFields.toString()));
             }
         }
 
         Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
         // check to see if the JSON string contains additional fields
         for (Map.Entry<String, JsonElement> entry : entries) {
-            if (!CreateEmailCustomisationRequest.openapiFields.contains(entry.getKey())) {
+            if (!GetNLInstructionsRequest.openapiFields.contains(entry.getKey())) {
                 throw new IllegalArgumentException(
                         String.format(
                                 "The field `%s` in the JSON string is not defined in the"
-                                        + " `CreateEmailCustomisationRequest` properties. JSON: %s",
+                                        + " `GetNLInstructionsRequest` properties. JSON: %s",
                                 entry.getKey(), jsonElement.toString()));
             }
         }
 
         // check to make sure all required properties/fields are present in the JSON string
-        for (String requiredField : CreateEmailCustomisationRequest.openapiRequiredFields) {
+        for (String requiredField : GetNLInstructionsRequest.openapiRequiredFields) {
             if (jsonElement.getAsJsonObject().get(requiredField) == null) {
                 throw new IllegalArgumentException(
                         String.format(
@@ -151,33 +149,38 @@ public class CreateEmailCustomisationRequest implements Serializable {
             }
         }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
+        if (!jsonObj.get("data_source_identifier").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `data_source_identifier` to be a primitive type in"
+                                    + " the JSON string but got `%s`",
+                            jsonObj.get("data_source_identifier").toString()));
+        }
     }
 
     public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
         @SuppressWarnings("unchecked")
         @Override
         public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-            if (!CreateEmailCustomisationRequest.class.isAssignableFrom(type.getRawType())) {
-                return null; // this class only serializes 'CreateEmailCustomisationRequest' and its
+            if (!GetNLInstructionsRequest.class.isAssignableFrom(type.getRawType())) {
+                return null; // this class only serializes 'GetNLInstructionsRequest' and its
                 // subtypes
             }
             final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-            final TypeAdapter<CreateEmailCustomisationRequest> thisAdapter =
-                    gson.getDelegateAdapter(
-                            this, TypeToken.get(CreateEmailCustomisationRequest.class));
+            final TypeAdapter<GetNLInstructionsRequest> thisAdapter =
+                    gson.getDelegateAdapter(this, TypeToken.get(GetNLInstructionsRequest.class));
 
             return (TypeAdapter<T>)
-                    new TypeAdapter<CreateEmailCustomisationRequest>() {
+                    new TypeAdapter<GetNLInstructionsRequest>() {
                         @Override
-                        public void write(JsonWriter out, CreateEmailCustomisationRequest value)
+                        public void write(JsonWriter out, GetNLInstructionsRequest value)
                                 throws IOException {
                             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
                             elementAdapter.write(out, obj);
                         }
 
                         @Override
-                        public CreateEmailCustomisationRequest read(JsonReader in)
-                                throws IOException {
+                        public GetNLInstructionsRequest read(JsonReader in) throws IOException {
                             JsonElement jsonElement = elementAdapter.read(in);
                             validateJsonElement(jsonElement);
                             return thisAdapter.fromJsonTree(jsonElement);
@@ -187,19 +190,18 @@ public class CreateEmailCustomisationRequest implements Serializable {
     }
 
     /**
-     * Create an instance of CreateEmailCustomisationRequest given an JSON string
+     * Create an instance of GetNLInstructionsRequest given an JSON string
      *
      * @param jsonString JSON string
-     * @return An instance of CreateEmailCustomisationRequest
-     * @throws IOException if the JSON string is invalid with respect to
-     *     CreateEmailCustomisationRequest
+     * @return An instance of GetNLInstructionsRequest
+     * @throws IOException if the JSON string is invalid with respect to GetNLInstructionsRequest
      */
-    public static CreateEmailCustomisationRequest fromJson(String jsonString) throws IOException {
-        return JSON.getGson().fromJson(jsonString, CreateEmailCustomisationRequest.class);
+    public static GetNLInstructionsRequest fromJson(String jsonString) throws IOException {
+        return JSON.getGson().fromJson(jsonString, GetNLInstructionsRequest.class);
     }
 
     /**
-     * Convert an instance of CreateEmailCustomisationRequest to an JSON string
+     * Convert an instance of GetNLInstructionsRequest to an JSON string
      *
      * @return JSON string
      */

@@ -14,75 +14,80 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.thoughtspot.client.JSON;
-import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-/** DbtGenerateSyncTmlRequest */
+/** Variable values. */
 @javax.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         comments = "Generator version: 7.12.0")
-public class DbtGenerateSyncTmlRequest implements Serializable {
+public class VariableValues implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public static final String SERIALIZED_NAME_DBT_CONNECTION_IDENTIFIER =
-            "dbt_connection_identifier";
+    public static final String SERIALIZED_NAME_NAME = "name";
 
-    @SerializedName(SERIALIZED_NAME_DBT_CONNECTION_IDENTIFIER)
+    @SerializedName(SERIALIZED_NAME_NAME)
     @javax.annotation.Nonnull
-    private String dbtConnectionIdentifier;
+    private String name;
 
-    public static final String SERIALIZED_NAME_FILE_CONTENT = "file_content";
+    public static final String SERIALIZED_NAME_VALUES = "values";
 
-    @SerializedName(SERIALIZED_NAME_FILE_CONTENT)
-    @javax.annotation.Nullable
-    private File fileContent;
+    @SerializedName(SERIALIZED_NAME_VALUES)
+    @javax.annotation.Nonnull
+    private List<Object> values;
 
-    public DbtGenerateSyncTmlRequest() {}
+    public VariableValues() {}
 
-    public DbtGenerateSyncTmlRequest dbtConnectionIdentifier(
-            @javax.annotation.Nonnull String dbtConnectionIdentifier) {
-        this.dbtConnectionIdentifier = dbtConnectionIdentifier;
+    public VariableValues name(@javax.annotation.Nonnull String name) {
+        this.name = name;
         return this;
     }
 
     /**
-     * Unique ID of the DBT connection.
+     * The name of the existing formula variable.
      *
-     * @return dbtConnectionIdentifier
+     * @return name
      */
     @javax.annotation.Nonnull
-    public String getDbtConnectionIdentifier() {
-        return dbtConnectionIdentifier;
+    public String getName() {
+        return name;
     }
 
-    public void setDbtConnectionIdentifier(
-            @javax.annotation.Nonnull String dbtConnectionIdentifier) {
-        this.dbtConnectionIdentifier = dbtConnectionIdentifier;
+    public void setName(@javax.annotation.Nonnull String name) {
+        this.name = name;
     }
 
-    public DbtGenerateSyncTmlRequest fileContent(@javax.annotation.Nullable File fileContent) {
-        this.fileContent = fileContent;
+    public VariableValues values(@javax.annotation.Nonnull List<Object> values) {
+        this.values = values;
+        return this;
+    }
+
+    public VariableValues addValuesItem(Object valuesItem) {
+        if (this.values == null) {
+            this.values = new ArrayList<>();
+        }
+        this.values.add(valuesItem);
         return this;
     }
 
     /**
-     * Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the
-     * connection was created with import_type ‘ZIP_FILE’
+     * The values to filter on.
      *
-     * @return fileContent
+     * @return values
      */
-    @javax.annotation.Nullable
-    public File getFileContent() {
-        return fileContent;
+    @javax.annotation.Nonnull
+    public List<Object> getValues() {
+        return values;
     }
 
-    public void setFileContent(@javax.annotation.Nullable File fileContent) {
-        this.fileContent = fileContent;
+    public void setValues(@javax.annotation.Nonnull List<Object> values) {
+        this.values = values;
     }
 
     @Override
@@ -93,26 +98,22 @@ public class DbtGenerateSyncTmlRequest implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        DbtGenerateSyncTmlRequest dbtGenerateSyncTmlRequest = (DbtGenerateSyncTmlRequest) o;
-        return Objects.equals(
-                        this.dbtConnectionIdentifier,
-                        dbtGenerateSyncTmlRequest.dbtConnectionIdentifier)
-                && Objects.equals(this.fileContent, dbtGenerateSyncTmlRequest.fileContent);
+        VariableValues variableValues = (VariableValues) o;
+        return Objects.equals(this.name, variableValues.name)
+                && Objects.equals(this.values, variableValues.values);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(dbtConnectionIdentifier, fileContent);
+        return Objects.hash(name, values);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class DbtGenerateSyncTmlRequest {\n");
-        sb.append("    dbtConnectionIdentifier: ")
-                .append(toIndentedString(dbtConnectionIdentifier))
-                .append("\n");
-        sb.append("    fileContent: ").append(toIndentedString(fileContent)).append("\n");
+        sb.append("class VariableValues {\n");
+        sb.append("    name: ").append(toIndentedString(name)).append("\n");
+        sb.append("    values: ").append(toIndentedString(values)).append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -134,46 +135,47 @@ public class DbtGenerateSyncTmlRequest implements Serializable {
     static {
         // a set of all properties/fields (JSON key names)
         openapiFields = new HashSet<String>();
-        openapiFields.add("dbt_connection_identifier");
-        openapiFields.add("file_content");
+        openapiFields.add("name");
+        openapiFields.add("values");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
-        openapiRequiredFields.add("dbt_connection_identifier");
+        openapiRequiredFields.add("name");
+        openapiRequiredFields.add("values");
     }
 
     /**
      * Validates the JSON Element and throws an exception if issues found
      *
      * @param jsonElement JSON Element
-     * @throws IOException if the JSON Element is invalid with respect to DbtGenerateSyncTmlRequest
+     * @throws IOException if the JSON Element is invalid with respect to VariableValues
      */
     public static void validateJsonElement(JsonElement jsonElement) throws IOException {
         if (jsonElement == null) {
-            if (!DbtGenerateSyncTmlRequest.openapiRequiredFields
+            if (!VariableValues.openapiRequiredFields
                     .isEmpty()) { // has required fields but JSON element is null
                 throw new IllegalArgumentException(
                         String.format(
-                                "The required field(s) %s in DbtGenerateSyncTmlRequest is not"
-                                        + " found in the empty JSON string",
-                                DbtGenerateSyncTmlRequest.openapiRequiredFields.toString()));
+                                "The required field(s) %s in VariableValues is not found in the"
+                                        + " empty JSON string",
+                                VariableValues.openapiRequiredFields.toString()));
             }
         }
 
         Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
         // check to see if the JSON string contains additional fields
         for (Map.Entry<String, JsonElement> entry : entries) {
-            if (!DbtGenerateSyncTmlRequest.openapiFields.contains(entry.getKey())) {
+            if (!VariableValues.openapiFields.contains(entry.getKey())) {
                 throw new IllegalArgumentException(
                         String.format(
                                 "The field `%s` in the JSON string is not defined in the"
-                                        + " `DbtGenerateSyncTmlRequest` properties. JSON: %s",
+                                        + " `VariableValues` properties. JSON: %s",
                                 entry.getKey(), jsonElement.toString()));
             }
         }
 
         // check to make sure all required properties/fields are present in the JSON string
-        for (String requiredField : DbtGenerateSyncTmlRequest.openapiRequiredFields) {
+        for (String requiredField : VariableValues.openapiRequiredFields) {
             if (jsonElement.getAsJsonObject().get(requiredField) == null) {
                 throw new IllegalArgumentException(
                         String.format(
@@ -182,12 +184,24 @@ public class DbtGenerateSyncTmlRequest implements Serializable {
             }
         }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-        if (!jsonObj.get("dbt_connection_identifier").isJsonPrimitive()) {
+        if (!jsonObj.get("name").isJsonPrimitive()) {
             throw new IllegalArgumentException(
                     String.format(
-                            "Expected the field `dbt_connection_identifier` to be a primitive type"
-                                    + " in the JSON string but got `%s`",
-                            jsonObj.get("dbt_connection_identifier").toString()));
+                            "Expected the field `name` to be a primitive type in the JSON string"
+                                    + " but got `%s`",
+                            jsonObj.get("name").toString()));
+        }
+        // ensure the required json array is present
+        if (jsonObj.get("values") == null) {
+            throw new IllegalArgumentException(
+                    "Expected the field `linkedContent` to be an array in the JSON string but got"
+                            + " `null`");
+        } else if (!jsonObj.get("values").isJsonArray()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `values` to be an array in the JSON string but got"
+                                    + " `%s`",
+                            jsonObj.get("values").toString()));
         }
     }
 
@@ -195,25 +209,23 @@ public class DbtGenerateSyncTmlRequest implements Serializable {
         @SuppressWarnings("unchecked")
         @Override
         public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-            if (!DbtGenerateSyncTmlRequest.class.isAssignableFrom(type.getRawType())) {
-                return null; // this class only serializes 'DbtGenerateSyncTmlRequest' and its
-                // subtypes
+            if (!VariableValues.class.isAssignableFrom(type.getRawType())) {
+                return null; // this class only serializes 'VariableValues' and its subtypes
             }
             final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-            final TypeAdapter<DbtGenerateSyncTmlRequest> thisAdapter =
-                    gson.getDelegateAdapter(this, TypeToken.get(DbtGenerateSyncTmlRequest.class));
+            final TypeAdapter<VariableValues> thisAdapter =
+                    gson.getDelegateAdapter(this, TypeToken.get(VariableValues.class));
 
             return (TypeAdapter<T>)
-                    new TypeAdapter<DbtGenerateSyncTmlRequest>() {
+                    new TypeAdapter<VariableValues>() {
                         @Override
-                        public void write(JsonWriter out, DbtGenerateSyncTmlRequest value)
-                                throws IOException {
+                        public void write(JsonWriter out, VariableValues value) throws IOException {
                             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
                             elementAdapter.write(out, obj);
                         }
 
                         @Override
-                        public DbtGenerateSyncTmlRequest read(JsonReader in) throws IOException {
+                        public VariableValues read(JsonReader in) throws IOException {
                             JsonElement jsonElement = elementAdapter.read(in);
                             validateJsonElement(jsonElement);
                             return thisAdapter.fromJsonTree(jsonElement);
@@ -223,18 +235,18 @@ public class DbtGenerateSyncTmlRequest implements Serializable {
     }
 
     /**
-     * Create an instance of DbtGenerateSyncTmlRequest given an JSON string
+     * Create an instance of VariableValues given an JSON string
      *
      * @param jsonString JSON string
-     * @return An instance of DbtGenerateSyncTmlRequest
-     * @throws IOException if the JSON string is invalid with respect to DbtGenerateSyncTmlRequest
+     * @return An instance of VariableValues
+     * @throws IOException if the JSON string is invalid with respect to VariableValues
      */
-    public static DbtGenerateSyncTmlRequest fromJson(String jsonString) throws IOException {
-        return JSON.getGson().fromJson(jsonString, DbtGenerateSyncTmlRequest.class);
+    public static VariableValues fromJson(String jsonString) throws IOException {
+        return JSON.getGson().fromJson(jsonString, VariableValues.class);
     }
 
     /**
-     * Convert an instance of DbtGenerateSyncTmlRequest to an JSON string
+     * Convert an instance of VariableValues to an JSON string
      *
      * @return JSON string
      */

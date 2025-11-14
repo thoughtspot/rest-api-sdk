@@ -1,13 +1,13 @@
 
 
-# CreateEmailCustomisationRequest
+# EurekaSetNLInstructionsResponse
 
 
 ## Properties
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**templateProperties** | **Object** | Email customization configuration as key value pair |  |
+|**success** | **Boolean** | Success status of the operation. |  |
 
 
 ## Implemented Interfaces

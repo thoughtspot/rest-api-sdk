@@ -113,6 +113,8 @@ public class GroupsImportListInput implements Serializable {
 
         CAN_MODIFY_FOLDERS("CAN_MODIFY_FOLDERS"),
 
+        CAN_MANAGE_VARIABLES("CAN_MANAGE_VARIABLES"),
+
         CAN_VIEW_FOLDERS("CAN_VIEW_FOLDERS"),
 
         PREVIEW_DOCUMENT_SEARCH("PREVIEW_DOCUMENT_SEARCH"),
