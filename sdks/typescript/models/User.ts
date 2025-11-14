@@ -190,6 +190,10 @@ export class User {
     * Access Control Properties which are specified for the user via JWToken
     */
     'access_control_properties'?: any | null;
+    /**
+    * Formula Variables which are specified for the user via JWToken
+    */
+    'variable_values'?: any | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -461,6 +465,12 @@ export class User {
         {
             "name": "access_control_properties",
             "baseName": "access_control_properties",
+            "type": "any",
+            "format": ""
+        },
+        {
+            "name": "variable_values",
+            "baseName": "variable_values",
             "type": "any",
             "format": ""
         }    ];

@@ -52,7 +52,7 @@ public class VariableUpdateAssignmentInput implements Serializable {
 
         REPLACE("REPLACE"),
 
-        CLEAR("CLEAR");
+        RESET("RESET");
 
         private String value;
 

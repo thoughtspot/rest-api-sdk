@@ -81,5 +81,5 @@ export class Variable {
 }
 
 
-export type VariableVariableTypeEnum = "CONNECTION_PROPERTY" | "TABLE_MAPPING" | "CONNECTION_PROPERTY_PER_PRINCIPAL" ;
+export type VariableVariableTypeEnum = "CONNECTION_PROPERTY" | "TABLE_MAPPING" | "CONNECTION_PROPERTY_PER_PRINCIPAL" | "FORMULA_VARIABLE" ;
 

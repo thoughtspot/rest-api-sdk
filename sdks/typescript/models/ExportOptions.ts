@@ -36,6 +36,10 @@ export class ExportOptions {
     * Boolean flag indicating whether to export column security rules of the object. This will only be respected when the object can have column security rules and export_associated is true.   Version: 10.12.0.cl or later 
     */
     'export_column_security_rules'?: boolean | null;
+    /**
+    * Boolean flag indicating whether to export column aliases of the model. This will only be respected when the object can have column aliases.   Version: 10.13.0.cl or later 
+    */
+    'export_with_column_aliases'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -67,6 +71,12 @@ export class ExportOptions {
         {
             "name": "export_column_security_rules",
             "baseName": "export_column_security_rules",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "export_with_column_aliases",
+            "baseName": "export_with_column_aliases",
             "type": "boolean",
             "format": ""
         }    ];

@@ -21,7 +21,7 @@ Input for variable value update in batch operations
 | ADD | &quot;ADD&quot; |
 | REMOVE | &quot;REMOVE&quot; |
 | REPLACE | &quot;REPLACE&quot; |
-| CLEAR | &quot;CLEAR&quot; |
+| RESET | &quot;RESET&quot; |
 
 
 ## Implemented Interfaces
