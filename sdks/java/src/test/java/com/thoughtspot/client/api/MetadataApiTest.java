@@ -18,10 +18,12 @@ import com.thoughtspot.client.model.ImportEPackAsyncTaskStatus;
 import com.thoughtspot.client.model.ImportMetadataTMLAsyncRequest;
 import com.thoughtspot.client.model.ImportMetadataTMLRequest;
 import com.thoughtspot.client.model.MetadataSearchResponse;
+import com.thoughtspot.client.model.ParameterizeMetadataRequest;
 import com.thoughtspot.client.model.ResponseCopyObject;
 import com.thoughtspot.client.model.ResponseWorksheetToModelConversion;
 import com.thoughtspot.client.model.SearchMetadataRequest;
 import com.thoughtspot.client.model.SqlQueryResponse;
+import com.thoughtspot.client.model.UnparameterizeMetadataRequest;
 import com.thoughtspot.client.model.UpdateMetadataHeaderRequest;
 import com.thoughtspot.client.model.UpdateMetadataObjIdRequest;
 import java.util.List;
@@ -322,6 +324,25 @@ public class MetadataApiTest {
     }
 
     /**
+     * Parameterize fields in metadata objects. Version: 10.9.0.cl or later Allows parameterizing
+     * fields in metadata objects in ThoughtSpot. Requires appropriate permissions to modify the
+     * metadata object. The API endpoint allows parameterizing the following types of metadata
+     * objects: * Logical Tables * Connections For a Logical Table the field type must be
+     * &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName * tableName
+     * For a Connection the field type is always &#x60;CONNECTION_PROPERTY&#x60;. We use the
+     * field_name in this case to specify the exact property of a connection which needs to be
+     * parameterized.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void parameterizeMetadataTest() throws ApiException {
+        ParameterizeMetadataRequest parameterizeMetadataRequest = null;
+        api.parameterizeMetadata(parameterizeMetadataRequest);
+        // TODO: test validations
+    }
+
+    /**
      * Version: 9.0.0.cl or later Gets a list of metadata objects available on the ThoughtSpot
      * system. This API endpoint is available to all users who have view access to the object. Users
      * with &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privileges can view data for
@@ -357,6 +378,25 @@ public class MetadataApiTest {
     public void searchMetadataTest() throws ApiException {
         SearchMetadataRequest searchMetadataRequest = null;
         List<MetadataSearchResponse> response = api.searchMetadata(searchMetadataRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Remove parameterization from fields in metadata objects. Version: 10.9.0.cl or later Allows
+     * removing parameterization from fields in metadata objects in ThoughtSpot. Requires
+     * appropriate permissions to modify the metadata object. The API endpoint allows
+     * unparameterizing the following types of metadata objects: * Logical Tables * Connections For
+     * a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: *
+     * databaseName * schemaName * tableName For a Connection the field type is always
+     * &#x60;CONNECTION_PROPERTY&#x60;. We use the field_name in this case to specify the exact
+     * property of a connection which needs to be unparameterized.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void unparameterizeMetadataTest() throws ApiException {
+        UnparameterizeMetadataRequest unparameterizeMetadataRequest = null;
+        api.unparameterizeMetadata(unparameterizeMetadataRequest);
         // TODO: test validations
     }
 
