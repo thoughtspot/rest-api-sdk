@@ -3199,62 +3199,33 @@ paths:
       - application/json
   /api/rest/2.0/customization/email:
     post:
-      description: |2+
-
-        Version: 10.10.0.cl or later
-
-
-        Creates a customization configuration for the notification email.
-
-        #### Pre-requisites
-
-        Requires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
-        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.
-
-        **NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.
-
-        #### Usage guidelines
-
-        To create a custom configuration pass these parameters in your API request:
-
-        - A JSON map of configuration attributes `template_properties`. The following example shows a sample set of customization configuration:
-
-        ```
-        {
-          {
-            "ctaButtonBgColor": "#444DEA",
-            "ctaTextFontColor": "#FFFFFF",
-            "primaryBgColor": "#D3DEF0",
-            "hideMobileAppNudge": false,
-            "fontFamily" : "",
-            "hideProductName" : false,
-            "hideFooterPhone" : false,
-            "hideFooterAddress" : false,
-            "hidePrivacyPolicy" : false,
-            "hideManageNotification" : false,
-            "hideTsVocabularyDefinitions": false,
-            "hideNotificationStatus" : false,
-            "hideErrorMessage": false,
-            "hideUnsubscribeLink" : false,
-            "hideModifyAlert": false,
-            "textTransform": "",
-            "replacementValueForLiveboard": "LB dashboard",
-            "replacementValueForAnswer": "Answer dashboard",
-            "replacementValueForSpotIQ": "SpotIQ dashboard",
-            "logoUrl":"",
-            "productName":"ThoughtSpot",
-            "footerPhone":"(800) 508-7008",
-            "footerAddress":"444 Castro St, Suite 1000 Mountain View, CA 94041",
-            "companyWebsiteUrl":"",
-            "companyPrivacyPolicyUrl":""
-          }
-        }
-        ```
-
-
-
-
-
+      description: "\nVersion: 10.10.0.cl or later\n\n\nCreates a customization configuration\
+        \ for the notification email.\n\n#### Pre-requisites\n\nRequires `DEVELOPER`\
+        \ (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**)\
+        \ privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
+        \ is enabled on your instance, the `DEVELOPER` (**Has developer privilege**)\
+        \ privilege is required.\n\n**NOTE**:This endpoint in currently in beta. Contact\
+        \ ThoughtSpot support to enable this on your instance.\n\n#### Usage guidelines\n\
+        \nTo create a custom configuration pass these parameters in your API request:\n\
+        \n- A JSON map of configuration attributes `template_properties`. The following\
+        \ example shows a sample set of customization configuration:\n\n```\n{\n \
+        \ {\n      \"cta_button_bg_color\": \"#444DEA\",\n    \t\"cta_text_font_color\"\
+        : \"#FFFFFF\",\n    \t\"primary_bg_color\": \"#D3DEF0\",\n      \"logo_url\"\
+        : \"https://storage.pardot.com/710713/1642089901EbkRibJq/TS_fullworkmark_darkmode.png\"\
+        ,\n  \t  \"font_family\": \"\",\n    \t\"product_name\": \"ThoughtSpot\",\n\
+        \    \t\"footer_address\": \"444 Castro St, Suite 1000 Mountain View, CA 94041\"\
+        ,\n\t    \"footer_phone\": \"(800) 508-7008\",\n      \"replacement_value_for_liveboard\"\
+        : \"Dashboard\",\n    \t\"replacement_value_for_answer\": \"Chart\",\n   \
+        \ \t\"replacement_value_for_spot_iq\": \"AI Insights\",\n   \t  \"hide_footer_phone\"\
+        : false,\n      \"hide_footer_address\": false,\n      \"hide_product_name\"\
+        : false,\n    \t\"hide_manage_notification\": false,\n    \t\"hide_mobile_app_nudge\"\
+        : false,\n    \t\"hide_privacy_policy\": false,\n    \t\"hide_ts_vocabulary_definitions\"\
+        : false,\n    \t\"hide_error_message\": false,\n    \t\"hide_unsubscribe_link\"\
+        : false,\n      \"hide_notification_status\": false,\n    \t\"hide_modify_alert\"\
+        : false,\n    \t\"company_website_url\": \"https://your-website.com/\",\n\
+        \    \t\"company_privacy_policy_url\" : \"https://link-to-privacy-policy.com/\"\
+        ,\n      \"contact_support_url\": \"https://link-to-contact-support.com/\"\
+        ,\n      \"hide_contact_support_url\": false\n  }\n}\n```\n\n\n\n\n\n"
       operationId: createEmailCustomization
       parameters: []
       requestBody:
@@ -3485,62 +3456,33 @@ paths:
       - application/json
   /api/rest/2.0/customization/email/update:
     post:
-      description: |2+
-
-        Version: 10.12.0.cl or later
-
-
-        Updates a customization configuration for the notification email.
-
-        #### Pre-requisites
-
-        Requires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
-        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.
-
-        **NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.
-
-        #### Usage guidelines
-
-        To update a custom configuration pass these parameters in your API request:
-
-        - A JSON map of configuration attributes `template_properties`. The following example shows a sample set of customization configuration:
-
-        ```
-        {
-          {
-            "ctaButtonBgColor": "#444DEA",
-            "ctaTextFontColor": "#FFFFFF",
-            "primaryBgColor": "#D3DEF0",
-            "hideMobileAppNudge": false,
-            "fontFamily" : "",
-            "hideProductName" : false,
-            "hideFooterPhone" : false,
-            "hideFooterAddress" : false,
-            "hidePrivacyPolicy" : false,
-            "hideManageNotification" : false,
-            "hideTsVocabularyDefinitions": false,
-            "hideNotificationStatus" : false,
-            "hideErrorMessage": false,
-            "hideUnsubscribeLink" : false,
-            "hideModifyAlert": false,
-            "textTransform": "",
-            "replacementValueForLiveboard": "LB dashboard",
-            "replacementValueForAnswer": "Answer dashboard",
-            "replacementValueForSpotIQ": "SpotIQ dashboard",
-            "logoUrl":"",
-            "productName":"ThoughtSpot",
-            "footerPhone":"(800) 508-7008",
-            "footerAddress":"444 Castro St, Suite 1000 Mountain View, CA 94041",
-            "companyWebsiteUrl":"",
-            "companyPrivacyPolicyUrl":""
-          }
-        }
-        ```
-
-
-
-
-
+      description: "\nVersion: 10.12.0.cl or later\n\n\nUpdates a customization configuration\
+        \ for the notification email.\n\n#### Pre-requisites\n\nRequires `DEVELOPER`\
+        \ (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**)\
+        \ privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
+        \ is enabled on your instance, the `DEVELOPER` (**Has developer privilege**)\
+        \ privilege is required.\n\n**NOTE**:This endpoint in currently in beta. Contact\
+        \ ThoughtSpot support to enable this on your instance.\n\n#### Usage guidelines\n\
+        \nTo update a custom configuration pass these parameters in your API request:\n\
+        \n- A JSON map of configuration attributes `template_properties`. The following\
+        \ example shows a sample set of customization configuration:\n\n```\n{\n \
+        \ {\n      \"cta_button_bg_color\": \"#444DEA\",\n    \t\"cta_text_font_color\"\
+        : \"#FFFFFF\",\n    \t\"primary_bg_color\": \"#D3DEF0\",\n      \"logo_url\"\
+        : \"https://storage.pardot.com/710713/1642089901EbkRibJq/TS_fullworkmark_darkmode.png\"\
+        ,\n  \t  \"font_family\": \"\",\n    \t\"product_name\": \"ThoughtSpot\",\n\
+        \    \t\"footer_address\": \"444 Castro St, Suite 1000 Mountain View, CA 94041\"\
+        ,\n\t    \"footer_phone\": \"(800) 508-7008\",\n      \"replacement_value_for_liveboard\"\
+        : \"Dashboard\",\n    \t\"replacement_value_for_answer\": \"Chart\",\n   \
+        \ \t\"replacement_value_for_spot_iq\": \"AI Insights\",\n   \t  \"hide_footer_phone\"\
+        : false,\n      \"hide_footer_address\": false,\n      \"hide_product_name\"\
+        : false,\n    \t\"hide_manage_notification\": false,\n    \t\"hide_mobile_app_nudge\"\
+        : false,\n    \t\"hide_privacy_policy\": false,\n    \t\"hide_ts_vocabulary_definitions\"\
+        : false,\n    \t\"hide_error_message\": false,\n    \t\"hide_unsubscribe_link\"\
+        : false,\n      \"hide_notification_status\": false,\n    \t\"hide_modify_alert\"\
+        : false,\n    \t\"company_website_url\": \"https://your-website.com/\",\n\
+        \    \t\"company_privacy_policy_url\" : \"https://link-to-privacy-policy.com/\"\
+        ,\n      \"contact_support_url\": \"https://link-to-contact-support.com/\"\
+        ,\n      \"hide_contact_support_url\": false\n  }\n}\n```\n\n\n\n\n\n"
       operationId: updateEmailCustomization
       parameters: []
       requestBody:
@@ -7967,13 +7909,13 @@ paths:
         \nThe API endpoint supports the following types of variables:\n* CONNECTION_PROPERTY\
         \ - For connection properties\n* TABLE_MAPPING - For table mappings\n* CONNECTION_PROPERTY_PER_PRINCIPAL\
         \ - For connection properties per principal. In order to use this please contact\
-        \ support to enable this.\n* FORMULA_VARIABLE - For Formula variables, introduced\
-        \ in 10.15.0.cl\n\nWhen creating a variable, you need to specify:\n* The variable\
-        \ type\n* A unique name for the variable\n* Whether the variable contains\
-        \ sensitive values (defaults to false)\n* The data type of the variable, only\
-        \ specify for formula variables (defaults to null)\n\nThe operation will fail\
-        \ if:\n* The user lacks required permissions\n* The variable name already\
-        \ exists\n* The variable type is invalid\n\n\n\n\n"
+        \ support to enable this.\n* FORMULA_VARIABLE - For Formula variables\n\n\
+        When creating a variable, you need to specify:\n* The variable type\n* A unique\
+        \ name for the variable\n* Whether the variable contains sensitive values\
+        \ (defaults to false)\n* The data type of the variable, only specify for fomula\
+        \ variables (defaults to null)\n\nThe operation will fail if:\n* The user\
+        \ lacks required permissions\n* The variable name already exists\n* The variable\
+        \ type is invalid\n\n\n\n\n"
       operationId: createVariable
       parameters: []
       requestBody:
@@ -16857,6 +16799,14 @@ components:
           description: Company website URL (HTTP/HTTPS only)
           nullable: true
           type: string
+        contact_support_url:
+          description: Contact support url (HTTP/HTTPS only).
+          nullable: true
+          type: string
+        hide_contact_support_url:
+          description: Whether to hide contact support url.
+          nullable: true
+          type: boolean
       type: object
     ExternalTableInput:
       properties:
@@ -22158,8 +22108,7 @@ components:
           nullable: true
           type: boolean
         data_type:
-          description: "Variable Data Type, only for formula_variable type, leave\
-            \ empty for others \n  Version: 10.15.0.cl or later\n"
+          description: Variable Data Type
           enum:
           - VARCHAR
           - INT32

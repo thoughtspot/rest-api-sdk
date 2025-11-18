@@ -26,7 +26,7 @@ export class CreateVariableRequest {
     */
     'is_sensitive'?: boolean | null;
     /**
-    * Variable Data Type, only for formula_variable type, leave empty for others    Version: 10.15.0.cl or later 
+    * Variable Data Type
     */
     'data_type'?: CreateVariableRequestDataTypeEnum;
 
