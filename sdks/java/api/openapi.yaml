@@ -7909,13 +7909,13 @@ paths:
         \nThe API endpoint supports the following types of variables:\n* CONNECTION_PROPERTY\
         \ - For connection properties\n* TABLE_MAPPING - For table mappings\n* CONNECTION_PROPERTY_PER_PRINCIPAL\
         \ - For connection properties per principal. In order to use this please contact\
-        \ support to enable this.\n* FORMULA_VARIABLE - For Formula variables\n\n\
-        When creating a variable, you need to specify:\n* The variable type\n* A unique\
-        \ name for the variable\n* Whether the variable contains sensitive values\
-        \ (defaults to false)\n* The data type of the variable, only specify for fomula\
-        \ variables (defaults to null)\n\nThe operation will fail if:\n* The user\
-        \ lacks required permissions\n* The variable name already exists\n* The variable\
-        \ type is invalid\n\n\n\n\n"
+        \ support to enable this.\n* FORMULA_VARIABLE - For Formula variables, introduced\
+        \ in 10.15.0.cl\n\nWhen creating a variable, you need to specify:\n* The variable\
+        \ type\n* A unique name for the variable\n* Whether the variable contains\
+        \ sensitive values (defaults to false)\n* The data type of the variable, only\
+        \ specify for formula variables (defaults to null)\n\nThe operation will fail\
+        \ if:\n* The user lacks required permissions\n* The variable name already\
+        \ exists\n* The variable type is invalid\n\n\n\n\n"
       operationId: createVariable
       parameters: []
       requestBody:
@@ -22108,7 +22108,8 @@ components:
           nullable: true
           type: boolean
         data_type:
-          description: Variable Data Type
+          description: "Variable Data Type, only for formula_variable type, leave\
+            \ empty for others \n  Version: 10.15.0.cl or later\n"
           enum:
           - VARCHAR
           - INT32
