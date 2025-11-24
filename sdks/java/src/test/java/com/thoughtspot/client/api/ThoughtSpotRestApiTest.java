@@ -606,22 +606,26 @@ public class ThoughtSpotRestApiTest {
      * #### Usage guidelines To create a custom configuration pass these parameters in your API
      * request: - A JSON map of configuration attributes &#x60;template_properties&#x60;. The
      * following example shows a sample set of customization configuration: &#x60;&#x60;&#x60; { {
-     * \&quot;ctaButtonBgColor\&quot;: \&quot;#444DEA\&quot;, \&quot;ctaTextFontColor\&quot;:
-     * \&quot;#FFFFFF\&quot;, \&quot;primaryBgColor\&quot;: \&quot;#D3DEF0\&quot;,
-     * \&quot;hideMobileAppNudge\&quot;: false, \&quot;fontFamily\&quot; : \&quot;\&quot;,
-     * \&quot;hideProductName\&quot; : false, \&quot;hideFooterPhone\&quot; : false,
-     * \&quot;hideFooterAddress\&quot; : false, \&quot;hidePrivacyPolicy\&quot; : false,
-     * \&quot;hideManageNotification\&quot; : false, \&quot;hideTsVocabularyDefinitions\&quot;:
-     * false, \&quot;hideNotificationStatus\&quot; : false, \&quot;hideErrorMessage\&quot;: false,
-     * \&quot;hideUnsubscribeLink\&quot; : false, \&quot;hideModifyAlert\&quot;: false,
-     * \&quot;textTransform\&quot;: \&quot;\&quot;, \&quot;replacementValueForLiveboard\&quot;:
-     * \&quot;LB dashboard\&quot;, \&quot;replacementValueForAnswer\&quot;: \&quot;Answer
-     * dashboard\&quot;, \&quot;replacementValueForSpotIQ\&quot;: \&quot;SpotIQ dashboard\&quot;,
-     * \&quot;logoUrl\&quot;:\&quot;\&quot;, \&quot;productName\&quot;:\&quot;ThoughtSpot\&quot;,
-     * \&quot;footerPhone\&quot;:\&quot;(800) 508-7008\&quot;,
-     * \&quot;footerAddress\&quot;:\&quot;444 Castro St, Suite 1000 Mountain View, CA 94041\&quot;,
-     * \&quot;companyWebsiteUrl\&quot;:\&quot;\&quot;,
-     * \&quot;companyPrivacyPolicyUrl\&quot;:\&quot;\&quot; } } &#x60;&#x60;&#x60;
+     * \&quot;cta_button_bg_color\&quot;: \&quot;#444DEA\&quot;, \&quot;cta_text_font_color\&quot;:
+     * \&quot;#FFFFFF\&quot;, \&quot;primary_bg_color\&quot;: \&quot;#D3DEF0\&quot;,
+     * \&quot;logo_url\&quot;:
+     * \&quot;https://storage.pardot.com/710713/1642089901EbkRibJq/TS_fullworkmark_darkmode.png\&quot;,
+     * \&quot;font_family\&quot;: \&quot;\&quot;, \&quot;product_name\&quot;:
+     * \&quot;ThoughtSpot\&quot;, \&quot;footer_address\&quot;: \&quot;444 Castro St, Suite 1000
+     * Mountain View, CA 94041\&quot;, \&quot;footer_phone\&quot;: \&quot;(800) 508-7008\&quot;,
+     * \&quot;replacement_value_for_liveboard\&quot;: \&quot;Dashboard\&quot;,
+     * \&quot;replacement_value_for_answer\&quot;: \&quot;Chart\&quot;,
+     * \&quot;replacement_value_for_spot_iq\&quot;: \&quot;AI Insights\&quot;,
+     * \&quot;hide_footer_phone\&quot;: false, \&quot;hide_footer_address\&quot;: false,
+     * \&quot;hide_product_name\&quot;: false, \&quot;hide_manage_notification\&quot;: false,
+     * \&quot;hide_mobile_app_nudge\&quot;: false, \&quot;hide_privacy_policy\&quot;: false,
+     * \&quot;hide_ts_vocabulary_definitions\&quot;: false, \&quot;hide_error_message\&quot;: false,
+     * \&quot;hide_unsubscribe_link\&quot;: false, \&quot;hide_notification_status\&quot;: false,
+     * \&quot;hide_modify_alert\&quot;: false, \&quot;company_website_url\&quot;:
+     * \&quot;https://your-website.com/\&quot;, \&quot;company_privacy_policy_url\&quot; :
+     * \&quot;https://link-to-privacy-policy.com/\&quot;, \&quot;contact_support_url\&quot;:
+     * \&quot;https://link-to-contact-support.com/\&quot;, \&quot;hide_contact_support_url\&quot;:
+     * false } } &#x60;&#x60;&#x60;
      *
      * @throws ApiException if the Api call fails
      */
@@ -767,11 +771,11 @@ public class ThoughtSpotRestApiTest {
      * endpoint supports the following types of variables: * CONNECTION_PROPERTY - For connection
      * properties * TABLE_MAPPING - For table mappings * CONNECTION_PROPERTY_PER_PRINCIPAL - For
      * connection properties per principal. In order to use this please contact support to enable
-     * this. * FORMULA_VARIABLE - For Formula variables When creating a variable, you need to
-     * specify: * The variable type * A unique name for the variable * Whether the variable contains
-     * sensitive values (defaults to false) * The data type of the variable, only specify for fomula
-     * variables (defaults to null) The operation will fail if: * The user lacks required
-     * permissions * The variable name already exists * The variable type is invalid
+     * this. * FORMULA_VARIABLE - For Formula variables, introduced in 10.15.0.cl When creating a
+     * variable, you need to specify: * The variable type * A unique name for the variable * Whether
+     * the variable contains sensitive values (defaults to false) * The data type of the variable,
+     * only specify for formula variables (defaults to null) The operation will fail if: * The user
+     * lacks required permissions * The variable name already exists * The variable type is invalid
      *
      * @throws ApiException if the Api call fails
      */
@@ -3178,22 +3182,26 @@ public class ThoughtSpotRestApiTest {
      * #### Usage guidelines To update a custom configuration pass these parameters in your API
      * request: - A JSON map of configuration attributes &#x60;template_properties&#x60;. The
      * following example shows a sample set of customization configuration: &#x60;&#x60;&#x60; { {
-     * \&quot;ctaButtonBgColor\&quot;: \&quot;#444DEA\&quot;, \&quot;ctaTextFontColor\&quot;:
-     * \&quot;#FFFFFF\&quot;, \&quot;primaryBgColor\&quot;: \&quot;#D3DEF0\&quot;,
-     * \&quot;hideMobileAppNudge\&quot;: false, \&quot;fontFamily\&quot; : \&quot;\&quot;,
-     * \&quot;hideProductName\&quot; : false, \&quot;hideFooterPhone\&quot; : false,
-     * \&quot;hideFooterAddress\&quot; : false, \&quot;hidePrivacyPolicy\&quot; : false,
-     * \&quot;hideManageNotification\&quot; : false, \&quot;hideTsVocabularyDefinitions\&quot;:
-     * false, \&quot;hideNotificationStatus\&quot; : false, \&quot;hideErrorMessage\&quot;: false,
-     * \&quot;hideUnsubscribeLink\&quot; : false, \&quot;hideModifyAlert\&quot;: false,
-     * \&quot;textTransform\&quot;: \&quot;\&quot;, \&quot;replacementValueForLiveboard\&quot;:
-     * \&quot;LB dashboard\&quot;, \&quot;replacementValueForAnswer\&quot;: \&quot;Answer
-     * dashboard\&quot;, \&quot;replacementValueForSpotIQ\&quot;: \&quot;SpotIQ dashboard\&quot;,
-     * \&quot;logoUrl\&quot;:\&quot;\&quot;, \&quot;productName\&quot;:\&quot;ThoughtSpot\&quot;,
-     * \&quot;footerPhone\&quot;:\&quot;(800) 508-7008\&quot;,
-     * \&quot;footerAddress\&quot;:\&quot;444 Castro St, Suite 1000 Mountain View, CA 94041\&quot;,
-     * \&quot;companyWebsiteUrl\&quot;:\&quot;\&quot;,
-     * \&quot;companyPrivacyPolicyUrl\&quot;:\&quot;\&quot; } } &#x60;&#x60;&#x60;
+     * \&quot;cta_button_bg_color\&quot;: \&quot;#444DEA\&quot;, \&quot;cta_text_font_color\&quot;:
+     * \&quot;#FFFFFF\&quot;, \&quot;primary_bg_color\&quot;: \&quot;#D3DEF0\&quot;,
+     * \&quot;logo_url\&quot;:
+     * \&quot;https://storage.pardot.com/710713/1642089901EbkRibJq/TS_fullworkmark_darkmode.png\&quot;,
+     * \&quot;font_family\&quot;: \&quot;\&quot;, \&quot;product_name\&quot;:
+     * \&quot;ThoughtSpot\&quot;, \&quot;footer_address\&quot;: \&quot;444 Castro St, Suite 1000
+     * Mountain View, CA 94041\&quot;, \&quot;footer_phone\&quot;: \&quot;(800) 508-7008\&quot;,
+     * \&quot;replacement_value_for_liveboard\&quot;: \&quot;Dashboard\&quot;,
+     * \&quot;replacement_value_for_answer\&quot;: \&quot;Chart\&quot;,
+     * \&quot;replacement_value_for_spot_iq\&quot;: \&quot;AI Insights\&quot;,
+     * \&quot;hide_footer_phone\&quot;: false, \&quot;hide_footer_address\&quot;: false,
+     * \&quot;hide_product_name\&quot;: false, \&quot;hide_manage_notification\&quot;: false,
+     * \&quot;hide_mobile_app_nudge\&quot;: false, \&quot;hide_privacy_policy\&quot;: false,
+     * \&quot;hide_ts_vocabulary_definitions\&quot;: false, \&quot;hide_error_message\&quot;: false,
+     * \&quot;hide_unsubscribe_link\&quot;: false, \&quot;hide_notification_status\&quot;: false,
+     * \&quot;hide_modify_alert\&quot;: false, \&quot;company_website_url\&quot;:
+     * \&quot;https://your-website.com/\&quot;, \&quot;company_privacy_policy_url\&quot; :
+     * \&quot;https://link-to-privacy-policy.com/\&quot;, \&quot;contact_support_url\&quot;:
+     * \&quot;https://link-to-contact-support.com/\&quot;, \&quot;hide_contact_support_url\&quot;:
+     * false } } &#x60;&#x60;&#x60;
      *
      * @throws ApiException if the Api call fails
      */
