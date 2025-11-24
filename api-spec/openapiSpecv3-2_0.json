@@ -12202,7 +12202,9 @@
                 "examples": {
                   "example_1": {
                     "value": {
-                      "onboarding_content_url": ""
+                      "onboarding_content_url": "",
+                      "saml_enabled": false,
+                      "okta_enabled": false
                     }
                   }
                 }
@@ -17062,6 +17064,14 @@
         "properties": {
           "onboarding_content_url": {
             "type": "string",
+            "nullable": true
+          },
+          "saml_enabled": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "okta_enabled": {
+            "type": "boolean",
             "nullable": true
           }
         }

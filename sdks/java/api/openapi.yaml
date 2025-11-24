@@ -6596,6 +6596,8 @@ paths:
                 example_1:
                   value:
                     onboarding_content_url: ""
+                    saml_enabled: false
+                    okta_enabled: false
               schema:
                 $ref: '#/components/schemas/SystemConfig'
           description: Cluster config information.
@@ -9784,10 +9786,18 @@ components:
     SystemConfig:
       example:
         onboarding_content_url: onboarding_content_url
+        saml_enabled: true
+        okta_enabled: true
       properties:
         onboarding_content_url:
           nullable: true
           type: string
+        saml_enabled:
+          nullable: true
+          type: boolean
+        okta_enabled:
+          nullable: true
+          type: boolean
       type: object
     SystemOverrideInfo:
       example:

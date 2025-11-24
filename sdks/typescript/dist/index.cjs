@@ -11918,6 +11918,18 @@ _SystemConfig.attributeTypeMap = [
     "baseName": "onboarding_content_url",
     "type": "string",
     "format": ""
+  },
+  {
+    "name": "saml_enabled",
+    "baseName": "saml_enabled",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "okta_enabled",
+    "baseName": "okta_enabled",
+    "type": "boolean",
+    "format": ""
   }
 ];
 var SystemConfig = _SystemConfig;

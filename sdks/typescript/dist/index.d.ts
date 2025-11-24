@@ -14326,6 +14326,8 @@ type SqlQueryResponseMetadataTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE"
  */
 declare class SystemConfig {
     'onboarding_content_url'?: string | null;
+    'saml_enabled'?: boolean | null;
+    'okta_enabled'?: boolean | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
