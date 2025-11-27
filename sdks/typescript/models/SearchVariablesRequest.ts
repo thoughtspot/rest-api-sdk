@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+import { ValueScopeInput } from '../models/ValueScopeInput';
 import { VariableDetailInput } from '../models/VariableDetailInput';
 import { HttpFile } from '../http/http';
 
@@ -18,6 +19,10 @@ export class SearchVariablesRequest {
     * Variable details
     */
     'variable_details'?: Array<VariableDetailInput>;
+    /**
+    * Array of scope filters
+    */
+    'value_scope'?: Array<ValueScopeInput>;
     /**
     * The starting record number from where the records should be included
     */
@@ -29,7 +34,7 @@ export class SearchVariablesRequest {
     /**
     * Format in which we want the output
     */
-    'output_format'?: SearchVariablesRequestOutputFormatEnum;
+    'response_content'?: SearchVariablesRequestResponseContentEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -38,6 +43,12 @@ export class SearchVariablesRequest {
             "name": "variable_details",
             "baseName": "variable_details",
             "type": "Array<VariableDetailInput>",
+            "format": ""
+        },
+        {
+            "name": "value_scope",
+            "baseName": "value_scope",
+            "type": "Array<ValueScopeInput>",
             "format": ""
         },
         {
@@ -53,9 +64,9 @@ export class SearchVariablesRequest {
             "format": "int32"
         },
         {
-            "name": "output_format",
-            "baseName": "output_format",
-            "type": "SearchVariablesRequestOutputFormatEnum",
+            "name": "response_content",
+            "baseName": "response_content",
+            "type": "SearchVariablesRequestResponseContentEnum",
             "format": ""
         }    ];
 
@@ -68,5 +79,5 @@ export class SearchVariablesRequest {
 }
 
 
-export type SearchVariablesRequestOutputFormatEnum = "METADATA_ONLY" | "METADATA_AND_VALUES" | "EDITABLE_METADATA_AND_VALUES" ;
+export type SearchVariablesRequestResponseContentEnum = "METADATA" | "METADATA_AND_VALUES" ;
 

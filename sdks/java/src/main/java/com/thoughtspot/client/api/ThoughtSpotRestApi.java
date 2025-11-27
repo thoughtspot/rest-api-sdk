@@ -61,7 +61,9 @@ import com.thoughtspot.client.model.DeployCommitRequest;
 import com.thoughtspot.client.model.DeployResponse;
 import com.thoughtspot.client.model.EurekaDataSourceSuggestionResponse;
 import com.thoughtspot.client.model.EurekaDecomposeQueryResponse;
+import com.thoughtspot.client.model.EurekaGetNLInstructionsResponse;
 import com.thoughtspot.client.model.EurekaGetRelevantQuestionsResponse;
+import com.thoughtspot.client.model.EurekaSetNLInstructionsResponse;
 import com.thoughtspot.client.model.ExportAnswerReportRequest;
 import com.thoughtspot.client.model.ExportLiveboardReportRequest;
 import com.thoughtspot.client.model.ExportMetadataTMLBatchedRequest;
@@ -82,6 +84,7 @@ import com.thoughtspot.client.model.GetAsyncImportStatusResponse;
 import com.thoughtspot.client.model.GetCustomAccessTokenRequest;
 import com.thoughtspot.client.model.GetDataSourceSuggestionsRequest;
 import com.thoughtspot.client.model.GetFullAccessTokenRequest;
+import com.thoughtspot.client.model.GetNLInstructionsRequest;
 import com.thoughtspot.client.model.GetObjectAccessTokenRequest;
 import com.thoughtspot.client.model.GetRelevantQuestionsRequest;
 import com.thoughtspot.client.model.GetTokenResponse;
@@ -138,6 +141,7 @@ import com.thoughtspot.client.model.SendAgentMessageRequest;
 import com.thoughtspot.client.model.SendAgentMessageResponse;
 import com.thoughtspot.client.model.SendAgentMessageStreamingRequest;
 import com.thoughtspot.client.model.SendMessageRequest;
+import com.thoughtspot.client.model.SetNLInstructionsRequest;
 import com.thoughtspot.client.model.ShareMetadataRequest;
 import com.thoughtspot.client.model.SingleAnswerRequest;
 import com.thoughtspot.client.model.SqlQueryResponse;
@@ -3658,22 +3662,26 @@ public class ThoughtSpotRestApi {
      * #### Usage guidelines To create a custom configuration pass these parameters in your API
      * request: - A JSON map of configuration attributes &#x60;template_properties&#x60;. The
      * following example shows a sample set of customization configuration: &#x60;&#x60;&#x60; { {
-     * \&quot;ctaButtonBgColor\&quot;: \&quot;#444DEA\&quot;, \&quot;ctaTextFontColor\&quot;:
-     * \&quot;#FFFFFF\&quot;, \&quot;primaryBgColor\&quot;: \&quot;#D3DEF0\&quot;,
-     * \&quot;hideMobileAppNudge\&quot;: false, \&quot;fontFamily\&quot; : \&quot;\&quot;,
-     * \&quot;hideProductName\&quot; : false, \&quot;hideFooterPhone\&quot; : false,
-     * \&quot;hideFooterAddress\&quot; : false, \&quot;hidePrivacyPolicy\&quot; : false,
-     * \&quot;hideManageNotification\&quot; : false, \&quot;hideTsVocabularyDefinitions\&quot;:
-     * false, \&quot;hideNotificationStatus\&quot; : false, \&quot;hideErrorMessage\&quot;: false,
-     * \&quot;hideUnsubscribeLink\&quot; : false, \&quot;hideModifyAlert\&quot;: false,
-     * \&quot;textTransform\&quot;: \&quot;\&quot;, \&quot;replacementValueForLiveboard\&quot;:
-     * \&quot;LB dashboard\&quot;, \&quot;replacementValueForAnswer\&quot;: \&quot;Answer
-     * dashboard\&quot;, \&quot;replacementValueForSpotIQ\&quot;: \&quot;SpotIQ dashboard\&quot;,
-     * \&quot;logoUrl\&quot;:\&quot;\&quot;, \&quot;productName\&quot;:\&quot;ThoughtSpot\&quot;,
-     * \&quot;footerPhone\&quot;:\&quot;(800) 508-7008\&quot;,
-     * \&quot;footerAddress\&quot;:\&quot;444 Castro St, Suite 1000 Mountain View, CA 94041\&quot;,
-     * \&quot;companyWebsiteUrl\&quot;:\&quot;\&quot;,
-     * \&quot;companyPrivacyPolicyUrl\&quot;:\&quot;\&quot; } } &#x60;&#x60;&#x60;
+     * \&quot;cta_button_bg_color\&quot;: \&quot;#444DEA\&quot;, \&quot;cta_text_font_color\&quot;:
+     * \&quot;#FFFFFF\&quot;, \&quot;primary_bg_color\&quot;: \&quot;#D3DEF0\&quot;,
+     * \&quot;logo_url\&quot;:
+     * \&quot;https://storage.pardot.com/710713/1642089901EbkRibJq/TS_fullworkmark_darkmode.png\&quot;,
+     * \&quot;font_family\&quot;: \&quot;\&quot;, \&quot;product_name\&quot;:
+     * \&quot;ThoughtSpot\&quot;, \&quot;footer_address\&quot;: \&quot;444 Castro St, Suite 1000
+     * Mountain View, CA 94041\&quot;, \&quot;footer_phone\&quot;: \&quot;(800) 508-7008\&quot;,
+     * \&quot;replacement_value_for_liveboard\&quot;: \&quot;Dashboard\&quot;,
+     * \&quot;replacement_value_for_answer\&quot;: \&quot;Chart\&quot;,
+     * \&quot;replacement_value_for_spot_iq\&quot;: \&quot;AI Insights\&quot;,
+     * \&quot;hide_footer_phone\&quot;: false, \&quot;hide_footer_address\&quot;: false,
+     * \&quot;hide_product_name\&quot;: false, \&quot;hide_manage_notification\&quot;: false,
+     * \&quot;hide_mobile_app_nudge\&quot;: false, \&quot;hide_privacy_policy\&quot;: false,
+     * \&quot;hide_ts_vocabulary_definitions\&quot;: false, \&quot;hide_error_message\&quot;: false,
+     * \&quot;hide_unsubscribe_link\&quot;: false, \&quot;hide_notification_status\&quot;: false,
+     * \&quot;hide_modify_alert\&quot;: false, \&quot;company_website_url\&quot;:
+     * \&quot;https://your-website.com/\&quot;, \&quot;company_privacy_policy_url\&quot; :
+     * \&quot;https://link-to-privacy-policy.com/\&quot;, \&quot;contact_support_url\&quot;:
+     * \&quot;https://link-to-contact-support.com/\&quot;, \&quot;hide_contact_support_url\&quot;:
+     * false } } &#x60;&#x60;&#x60;
      *
      * @param createEmailCustomizationRequest (required)
      * @return CreateEmailCustomizationResponse
@@ -3706,22 +3714,26 @@ public class ThoughtSpotRestApi {
      * #### Usage guidelines To create a custom configuration pass these parameters in your API
      * request: - A JSON map of configuration attributes &#x60;template_properties&#x60;. The
      * following example shows a sample set of customization configuration: &#x60;&#x60;&#x60; { {
-     * \&quot;ctaButtonBgColor\&quot;: \&quot;#444DEA\&quot;, \&quot;ctaTextFontColor\&quot;:
-     * \&quot;#FFFFFF\&quot;, \&quot;primaryBgColor\&quot;: \&quot;#D3DEF0\&quot;,
-     * \&quot;hideMobileAppNudge\&quot;: false, \&quot;fontFamily\&quot; : \&quot;\&quot;,
-     * \&quot;hideProductName\&quot; : false, \&quot;hideFooterPhone\&quot; : false,
-     * \&quot;hideFooterAddress\&quot; : false, \&quot;hidePrivacyPolicy\&quot; : false,
-     * \&quot;hideManageNotification\&quot; : false, \&quot;hideTsVocabularyDefinitions\&quot;:
-     * false, \&quot;hideNotificationStatus\&quot; : false, \&quot;hideErrorMessage\&quot;: false,
-     * \&quot;hideUnsubscribeLink\&quot; : false, \&quot;hideModifyAlert\&quot;: false,
-     * \&quot;textTransform\&quot;: \&quot;\&quot;, \&quot;replacementValueForLiveboard\&quot;:
-     * \&quot;LB dashboard\&quot;, \&quot;replacementValueForAnswer\&quot;: \&quot;Answer
-     * dashboard\&quot;, \&quot;replacementValueForSpotIQ\&quot;: \&quot;SpotIQ dashboard\&quot;,
-     * \&quot;logoUrl\&quot;:\&quot;\&quot;, \&quot;productName\&quot;:\&quot;ThoughtSpot\&quot;,
-     * \&quot;footerPhone\&quot;:\&quot;(800) 508-7008\&quot;,
-     * \&quot;footerAddress\&quot;:\&quot;444 Castro St, Suite 1000 Mountain View, CA 94041\&quot;,
-     * \&quot;companyWebsiteUrl\&quot;:\&quot;\&quot;,
-     * \&quot;companyPrivacyPolicyUrl\&quot;:\&quot;\&quot; } } &#x60;&#x60;&#x60;
+     * \&quot;cta_button_bg_color\&quot;: \&quot;#444DEA\&quot;, \&quot;cta_text_font_color\&quot;:
+     * \&quot;#FFFFFF\&quot;, \&quot;primary_bg_color\&quot;: \&quot;#D3DEF0\&quot;,
+     * \&quot;logo_url\&quot;:
+     * \&quot;https://storage.pardot.com/710713/1642089901EbkRibJq/TS_fullworkmark_darkmode.png\&quot;,
+     * \&quot;font_family\&quot;: \&quot;\&quot;, \&quot;product_name\&quot;:
+     * \&quot;ThoughtSpot\&quot;, \&quot;footer_address\&quot;: \&quot;444 Castro St, Suite 1000
+     * Mountain View, CA 94041\&quot;, \&quot;footer_phone\&quot;: \&quot;(800) 508-7008\&quot;,
+     * \&quot;replacement_value_for_liveboard\&quot;: \&quot;Dashboard\&quot;,
+     * \&quot;replacement_value_for_answer\&quot;: \&quot;Chart\&quot;,
+     * \&quot;replacement_value_for_spot_iq\&quot;: \&quot;AI Insights\&quot;,
+     * \&quot;hide_footer_phone\&quot;: false, \&quot;hide_footer_address\&quot;: false,
+     * \&quot;hide_product_name\&quot;: false, \&quot;hide_manage_notification\&quot;: false,
+     * \&quot;hide_mobile_app_nudge\&quot;: false, \&quot;hide_privacy_policy\&quot;: false,
+     * \&quot;hide_ts_vocabulary_definitions\&quot;: false, \&quot;hide_error_message\&quot;: false,
+     * \&quot;hide_unsubscribe_link\&quot;: false, \&quot;hide_notification_status\&quot;: false,
+     * \&quot;hide_modify_alert\&quot;: false, \&quot;company_website_url\&quot;:
+     * \&quot;https://your-website.com/\&quot;, \&quot;company_privacy_policy_url\&quot; :
+     * \&quot;https://link-to-privacy-policy.com/\&quot;, \&quot;contact_support_url\&quot;:
+     * \&quot;https://link-to-contact-support.com/\&quot;, \&quot;hide_contact_support_url\&quot;:
+     * false } } &#x60;&#x60;&#x60;
      *
      * @param createEmailCustomizationRequest (required)
      * @return ApiResponse&lt;CreateEmailCustomizationResponse&gt;
@@ -3755,22 +3767,26 @@ public class ThoughtSpotRestApi {
      * this on your instance. #### Usage guidelines To create a custom configuration pass these
      * parameters in your API request: - A JSON map of configuration attributes
      * &#x60;template_properties&#x60;. The following example shows a sample set of customization
-     * configuration: &#x60;&#x60;&#x60; { { \&quot;ctaButtonBgColor\&quot;: \&quot;#444DEA\&quot;,
-     * \&quot;ctaTextFontColor\&quot;: \&quot;#FFFFFF\&quot;, \&quot;primaryBgColor\&quot;:
-     * \&quot;#D3DEF0\&quot;, \&quot;hideMobileAppNudge\&quot;: false, \&quot;fontFamily\&quot; :
-     * \&quot;\&quot;, \&quot;hideProductName\&quot; : false, \&quot;hideFooterPhone\&quot; : false,
-     * \&quot;hideFooterAddress\&quot; : false, \&quot;hidePrivacyPolicy\&quot; : false,
-     * \&quot;hideManageNotification\&quot; : false, \&quot;hideTsVocabularyDefinitions\&quot;:
-     * false, \&quot;hideNotificationStatus\&quot; : false, \&quot;hideErrorMessage\&quot;: false,
-     * \&quot;hideUnsubscribeLink\&quot; : false, \&quot;hideModifyAlert\&quot;: false,
-     * \&quot;textTransform\&quot;: \&quot;\&quot;, \&quot;replacementValueForLiveboard\&quot;:
-     * \&quot;LB dashboard\&quot;, \&quot;replacementValueForAnswer\&quot;: \&quot;Answer
-     * dashboard\&quot;, \&quot;replacementValueForSpotIQ\&quot;: \&quot;SpotIQ dashboard\&quot;,
-     * \&quot;logoUrl\&quot;:\&quot;\&quot;, \&quot;productName\&quot;:\&quot;ThoughtSpot\&quot;,
-     * \&quot;footerPhone\&quot;:\&quot;(800) 508-7008\&quot;,
-     * \&quot;footerAddress\&quot;:\&quot;444 Castro St, Suite 1000 Mountain View, CA 94041\&quot;,
-     * \&quot;companyWebsiteUrl\&quot;:\&quot;\&quot;,
-     * \&quot;companyPrivacyPolicyUrl\&quot;:\&quot;\&quot; } } &#x60;&#x60;&#x60;
+     * configuration: &#x60;&#x60;&#x60; { { \&quot;cta_button_bg_color\&quot;:
+     * \&quot;#444DEA\&quot;, \&quot;cta_text_font_color\&quot;: \&quot;#FFFFFF\&quot;,
+     * \&quot;primary_bg_color\&quot;: \&quot;#D3DEF0\&quot;, \&quot;logo_url\&quot;:
+     * \&quot;https://storage.pardot.com/710713/1642089901EbkRibJq/TS_fullworkmark_darkmode.png\&quot;,
+     * \&quot;font_family\&quot;: \&quot;\&quot;, \&quot;product_name\&quot;:
+     * \&quot;ThoughtSpot\&quot;, \&quot;footer_address\&quot;: \&quot;444 Castro St, Suite 1000
+     * Mountain View, CA 94041\&quot;, \&quot;footer_phone\&quot;: \&quot;(800) 508-7008\&quot;,
+     * \&quot;replacement_value_for_liveboard\&quot;: \&quot;Dashboard\&quot;,
+     * \&quot;replacement_value_for_answer\&quot;: \&quot;Chart\&quot;,
+     * \&quot;replacement_value_for_spot_iq\&quot;: \&quot;AI Insights\&quot;,
+     * \&quot;hide_footer_phone\&quot;: false, \&quot;hide_footer_address\&quot;: false,
+     * \&quot;hide_product_name\&quot;: false, \&quot;hide_manage_notification\&quot;: false,
+     * \&quot;hide_mobile_app_nudge\&quot;: false, \&quot;hide_privacy_policy\&quot;: false,
+     * \&quot;hide_ts_vocabulary_definitions\&quot;: false, \&quot;hide_error_message\&quot;: false,
+     * \&quot;hide_unsubscribe_link\&quot;: false, \&quot;hide_notification_status\&quot;: false,
+     * \&quot;hide_modify_alert\&quot;: false, \&quot;company_website_url\&quot;:
+     * \&quot;https://your-website.com/\&quot;, \&quot;company_privacy_policy_url\&quot; :
+     * \&quot;https://link-to-privacy-policy.com/\&quot;, \&quot;contact_support_url\&quot;:
+     * \&quot;https://link-to-contact-support.com/\&quot;, \&quot;hide_contact_support_url\&quot;:
+     * false } } &#x60;&#x60;&#x60;
      *
      * @param createEmailCustomizationRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -5035,11 +5051,11 @@ public class ThoughtSpotRestApi {
      * endpoint supports the following types of variables: * CONNECTION_PROPERTY - For connection
      * properties * TABLE_MAPPING - For table mappings * CONNECTION_PROPERTY_PER_PRINCIPAL - For
      * connection properties per principal. In order to use this please contact support to enable
-     * this. * FORMULA_VARIABLE - For Formula variables When creating a variable, you need to
-     * specify: * The variable type * A unique name for the variable * Whether the variable contains
-     * sensitive values (defaults to false) * The data type of the variable, only specify for fomula
-     * variables (defaults to null) The operation will fail if: * The user lacks required
-     * permissions * The variable name already exists * The variable type is invalid
+     * this. * FORMULA_VARIABLE - For Formula variables, introduced in 10.15.0.cl When creating a
+     * variable, you need to specify: * The variable type * A unique name for the variable * Whether
+     * the variable contains sensitive values (defaults to false) * The data type of the variable,
+     * only specify for formula variables (defaults to null) The operation will fail if: * The user
+     * lacks required permissions * The variable name already exists * The variable type is invalid
      *
      * @param createVariableRequest (required)
      * @return Variable
@@ -5070,11 +5086,11 @@ public class ThoughtSpotRestApi {
      * endpoint supports the following types of variables: * CONNECTION_PROPERTY - For connection
      * properties * TABLE_MAPPING - For table mappings * CONNECTION_PROPERTY_PER_PRINCIPAL - For
      * connection properties per principal. In order to use this please contact support to enable
-     * this. * FORMULA_VARIABLE - For Formula variables When creating a variable, you need to
-     * specify: * The variable type * A unique name for the variable * Whether the variable contains
-     * sensitive values (defaults to false) * The data type of the variable, only specify for fomula
-     * variables (defaults to null) The operation will fail if: * The user lacks required
-     * permissions * The variable name already exists * The variable type is invalid
+     * this. * FORMULA_VARIABLE - For Formula variables, introduced in 10.15.0.cl When creating a
+     * variable, you need to specify: * The variable type * A unique name for the variable * Whether
+     * the variable contains sensitive values (defaults to false) * The data type of the variable,
+     * only specify for formula variables (defaults to null) The operation will fail if: * The user
+     * lacks required permissions * The variable name already exists * The variable type is invalid
      *
      * @param createVariableRequest (required)
      * @return ApiResponse&lt;Variable&gt;
@@ -5106,12 +5122,12 @@ public class ThoughtSpotRestApi {
      * organization scope. The API endpoint supports the following types of variables: *
      * CONNECTION_PROPERTY - For connection properties * TABLE_MAPPING - For table mappings *
      * CONNECTION_PROPERTY_PER_PRINCIPAL - For connection properties per principal. In order to use
-     * this please contact support to enable this. * FORMULA_VARIABLE - For Formula variables When
-     * creating a variable, you need to specify: * The variable type * A unique name for the
-     * variable * Whether the variable contains sensitive values (defaults to false) * The data type
-     * of the variable, only specify for fomula variables (defaults to null) The operation will fail
-     * if: * The user lacks required permissions * The variable name already exists * The variable
-     * type is invalid
+     * this please contact support to enable this. * FORMULA_VARIABLE - For Formula variables,
+     * introduced in 10.15.0.cl When creating a variable, you need to specify: * The variable type *
+     * A unique name for the variable * Whether the variable contains sensitive values (defaults to
+     * false) * The data type of the variable, only specify for formula variables (defaults to null)
+     * The operation will fail if: * The user lacks required permissions * The variable name already
+     * exists * The variable type is invalid
      *
      * @param createVariableRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -14626,6 +14642,221 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
+     * Build call for getNLInstructions
+     *
+     * @param getNLInstructionsRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call getNLInstructionsCall(
+            GetNLInstructionsRequest getNLInstructionsRequest, final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = getNLInstructionsRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/ai/instructions/get";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getNLInstructionsValidateBeforeCall(
+            GetNLInstructionsRequest getNLInstructionsRequest, final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'getNLInstructionsRequest' is set
+        if (getNLInstructionsRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'getNLInstructionsRequest' when calling"
+                            + " getNLInstructions(Async)");
+        }
+
+        return getNLInstructionsCall(getNLInstructionsRequest, _callback);
+    }
+
+    /**
+     * Version: 10.15.0.cl or later This API allows users to retrieve existing natural language (NL)
+     * instructions for a specific data-model. These instructions guide the AI system in
+     * understanding data context and generating more accurate responses when processing natural
+     * language queries. #### Usage guidelines To retrieve NL instructions for a data-model, the
+     * request must include: - &#x60;data_source_identifier&#x60;: The unique ID or name of the
+     * data-model to retrieve NL instructions The API returns a response object with: -
+     * &#x60;nl_instructions_info&#x60;: An array of instruction objects, each containing: -
+     * &#x60;instructions&#x60;: Array of text instructions for natural language processing -
+     * &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). It can be extended to
+     * data-model-user scope in future. #### Instructions Scope - **GLOBAL**: Instructions that
+     * apply globally across the system on the given data-model (currently only global instructions
+     * are supported) &gt; ###### Note: &gt; * To use this API, the user needs atleast view access
+     * on the data-model and they must use corresponding org related bearerToken where the
+     * data-model exists. &gt; * This endpoint is currently in Beta. Breaking changes may be
+     * introduced before the endpoint is made Generally Available. &gt; * Available from version
+     * 10.15.0.cl and later. &gt; * This endpoint requires Spotter — please contact ThoughtSpot
+     * Support to enable Spotter on your cluster. &gt; * Use this API to view currently configured
+     * instructions before modifying them with &#x60;setNLInstructions&#x60;.
+     *
+     * @param getNLInstructionsRequest (required)
+     * @return EurekaGetNLInstructionsResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public EurekaGetNLInstructionsResponse getNLInstructions(
+            GetNLInstructionsRequest getNLInstructionsRequest) throws ApiException {
+        ApiResponse<EurekaGetNLInstructionsResponse> localVarResp =
+                getNLInstructionsWithHttpInfo(getNLInstructionsRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Version: 10.15.0.cl or later This API allows users to retrieve existing natural language (NL)
+     * instructions for a specific data-model. These instructions guide the AI system in
+     * understanding data context and generating more accurate responses when processing natural
+     * language queries. #### Usage guidelines To retrieve NL instructions for a data-model, the
+     * request must include: - &#x60;data_source_identifier&#x60;: The unique ID or name of the
+     * data-model to retrieve NL instructions The API returns a response object with: -
+     * &#x60;nl_instructions_info&#x60;: An array of instruction objects, each containing: -
+     * &#x60;instructions&#x60;: Array of text instructions for natural language processing -
+     * &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). It can be extended to
+     * data-model-user scope in future. #### Instructions Scope - **GLOBAL**: Instructions that
+     * apply globally across the system on the given data-model (currently only global instructions
+     * are supported) &gt; ###### Note: &gt; * To use this API, the user needs atleast view access
+     * on the data-model and they must use corresponding org related bearerToken where the
+     * data-model exists. &gt; * This endpoint is currently in Beta. Breaking changes may be
+     * introduced before the endpoint is made Generally Available. &gt; * Available from version
+     * 10.15.0.cl and later. &gt; * This endpoint requires Spotter — please contact ThoughtSpot
+     * Support to enable Spotter on your cluster. &gt; * Use this API to view currently configured
+     * instructions before modifying them with &#x60;setNLInstructions&#x60;.
+     *
+     * @param getNLInstructionsRequest (required)
+     * @return ApiResponse&lt;EurekaGetNLInstructionsResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<EurekaGetNLInstructionsResponse> getNLInstructionsWithHttpInfo(
+            GetNLInstructionsRequest getNLInstructionsRequest) throws ApiException {
+        okhttp3.Call localVarCall =
+                getNLInstructionsValidateBeforeCall(getNLInstructionsRequest, null);
+        Type localVarReturnType = new TypeToken<EurekaGetNLInstructionsResponse>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Version: 10.15.0.cl or later This API allows users to retrieve existing
+     * natural language (NL) instructions for a specific data-model. These instructions guide the AI
+     * system in understanding data context and generating more accurate responses when processing
+     * natural language queries. #### Usage guidelines To retrieve NL instructions for a data-model,
+     * the request must include: - &#x60;data_source_identifier&#x60;: The unique ID or name of the
+     * data-model to retrieve NL instructions The API returns a response object with: -
+     * &#x60;nl_instructions_info&#x60;: An array of instruction objects, each containing: -
+     * &#x60;instructions&#x60;: Array of text instructions for natural language processing -
+     * &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). It can be extended to
+     * data-model-user scope in future. #### Instructions Scope - **GLOBAL**: Instructions that
+     * apply globally across the system on the given data-model (currently only global instructions
+     * are supported) &gt; ###### Note: &gt; * To use this API, the user needs atleast view access
+     * on the data-model and they must use corresponding org related bearerToken where the
+     * data-model exists. &gt; * This endpoint is currently in Beta. Breaking changes may be
+     * introduced before the endpoint is made Generally Available. &gt; * Available from version
+     * 10.15.0.cl and later. &gt; * This endpoint requires Spotter — please contact ThoughtSpot
+     * Support to enable Spotter on your cluster. &gt; * Use this API to view currently configured
+     * instructions before modifying them with &#x60;setNLInstructions&#x60;.
+     *
+     * @param getNLInstructionsRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call getNLInstructionsAsync(
+            GetNLInstructionsRequest getNLInstructionsRequest,
+            final ApiCallback<EurekaGetNLInstructionsResponse> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                getNLInstructionsValidateBeforeCall(getNLInstructionsRequest, _callback);
+        Type localVarReturnType = new TypeToken<EurekaGetNLInstructionsResponse>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for getObjectAccessToken
      *
      * @param getObjectAccessTokenRequest (required)
@@ -21921,6 +22152,224 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
+     * Build call for setNLInstructions
+     *
+     * @param setNLInstructionsRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call setNLInstructionsCall(
+            SetNLInstructionsRequest setNLInstructionsRequest, final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = setNLInstructionsRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/ai/instructions/set";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call setNLInstructionsValidateBeforeCall(
+            SetNLInstructionsRequest setNLInstructionsRequest, final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'setNLInstructionsRequest' is set
+        if (setNLInstructionsRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'setNLInstructionsRequest' when calling"
+                            + " setNLInstructions(Async)");
+        }
+
+        return setNLInstructionsCall(setNLInstructionsRequest, _callback);
+    }
+
+    /**
+     * Version: 10.15.0.cl or later This API allows users to set natural language (NL) instructions
+     * for a specific data-model to improve AI-generated answers and query processing. These
+     * instructions help guide the AI system to better understand the data context and provide more
+     * accurate responses. #### Usage guidelines To set NL instructions for a data-model, the
+     * request must include: - &#x60;data_source_identifier&#x60;: The unique ID or name of the
+     * data-model for which to set NL instructions - &#x60;nl_instructions_info&#x60;: An array of
+     * instruction objects, each containing: - &#x60;instructions&#x60;: Array of text instructions
+     * for the LLM - &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). Currently
+     * only &#x60;GLOBAL&#x60; is supported. It can be extended to data-model-user scope in future.
+     * The API returns a response object with: - &#x60;success&#x60;: Boolean indicating whether the
+     * operation was successful #### Instructions Scope - **GLOBAL**: Instructions that apply
+     * globally for that data-model across the system &gt; ###### Note: &gt; * To use this API, the
+     * user needs either edit access or SPOTTER_COACHING_PRIVILEGE on the data-model and they must
+     * use corresponding org related bearerToken where the data-model exists. &gt; * This endpoint
+     * is currently in Beta. Breaking changes may be introduced before the endpoint is made
+     * Generally Available. &gt; * Available from version 10.15.0.cl and later. &gt; * This endpoint
+     * requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. &gt;
+     * * Instructions help improve the accuracy and relevance of AI-generated responses for the
+     * specified data-model.
+     *
+     * @param setNLInstructionsRequest (required)
+     * @return EurekaSetNLInstructionsResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public EurekaSetNLInstructionsResponse setNLInstructions(
+            SetNLInstructionsRequest setNLInstructionsRequest) throws ApiException {
+        ApiResponse<EurekaSetNLInstructionsResponse> localVarResp =
+                setNLInstructionsWithHttpInfo(setNLInstructionsRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Version: 10.15.0.cl or later This API allows users to set natural language (NL) instructions
+     * for a specific data-model to improve AI-generated answers and query processing. These
+     * instructions help guide the AI system to better understand the data context and provide more
+     * accurate responses. #### Usage guidelines To set NL instructions for a data-model, the
+     * request must include: - &#x60;data_source_identifier&#x60;: The unique ID or name of the
+     * data-model for which to set NL instructions - &#x60;nl_instructions_info&#x60;: An array of
+     * instruction objects, each containing: - &#x60;instructions&#x60;: Array of text instructions
+     * for the LLM - &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). Currently
+     * only &#x60;GLOBAL&#x60; is supported. It can be extended to data-model-user scope in future.
+     * The API returns a response object with: - &#x60;success&#x60;: Boolean indicating whether the
+     * operation was successful #### Instructions Scope - **GLOBAL**: Instructions that apply
+     * globally for that data-model across the system &gt; ###### Note: &gt; * To use this API, the
+     * user needs either edit access or SPOTTER_COACHING_PRIVILEGE on the data-model and they must
+     * use corresponding org related bearerToken where the data-model exists. &gt; * This endpoint
+     * is currently in Beta. Breaking changes may be introduced before the endpoint is made
+     * Generally Available. &gt; * Available from version 10.15.0.cl and later. &gt; * This endpoint
+     * requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. &gt;
+     * * Instructions help improve the accuracy and relevance of AI-generated responses for the
+     * specified data-model.
+     *
+     * @param setNLInstructionsRequest (required)
+     * @return ApiResponse&lt;EurekaSetNLInstructionsResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<EurekaSetNLInstructionsResponse> setNLInstructionsWithHttpInfo(
+            SetNLInstructionsRequest setNLInstructionsRequest) throws ApiException {
+        okhttp3.Call localVarCall =
+                setNLInstructionsValidateBeforeCall(setNLInstructionsRequest, null);
+        Type localVarReturnType = new TypeToken<EurekaSetNLInstructionsResponse>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Version: 10.15.0.cl or later This API allows users to set natural language
+     * (NL) instructions for a specific data-model to improve AI-generated answers and query
+     * processing. These instructions help guide the AI system to better understand the data context
+     * and provide more accurate responses. #### Usage guidelines To set NL instructions for a
+     * data-model, the request must include: - &#x60;data_source_identifier&#x60;: The unique ID or
+     * name of the data-model for which to set NL instructions - &#x60;nl_instructions_info&#x60;:
+     * An array of instruction objects, each containing: - &#x60;instructions&#x60;: Array of text
+     * instructions for the LLM - &#x60;scope&#x60;: The scope of the instruction
+     * (&#x60;GLOBAL&#x60;). Currently only &#x60;GLOBAL&#x60; is supported. It can be extended to
+     * data-model-user scope in future. The API returns a response object with: -
+     * &#x60;success&#x60;: Boolean indicating whether the operation was successful ####
+     * Instructions Scope - **GLOBAL**: Instructions that apply globally for that data-model across
+     * the system &gt; ###### Note: &gt; * To use this API, the user needs either edit access or
+     * SPOTTER_COACHING_PRIVILEGE on the data-model and they must use corresponding org related
+     * bearerToken where the data-model exists. &gt; * This endpoint is currently in Beta. Breaking
+     * changes may be introduced before the endpoint is made Generally Available. &gt; * Available
+     * from version 10.15.0.cl and later. &gt; * This endpoint requires Spotter — please contact
+     * ThoughtSpot Support to enable Spotter on your cluster. &gt; * Instructions help improve the
+     * accuracy and relevance of AI-generated responses for the specified data-model.
+     *
+     * @param setNLInstructionsRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call setNLInstructionsAsync(
+            SetNLInstructionsRequest setNLInstructionsRequest,
+            final ApiCallback<EurekaSetNLInstructionsResponse> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                setNLInstructionsValidateBeforeCall(setNLInstructionsRequest, _callback);
+        Type localVarReturnType = new TypeToken<EurekaSetNLInstructionsResponse>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for shareMetadata
      *
      * @param shareMetadataRequest (required)
@@ -25144,22 +25593,26 @@ public class ThoughtSpotRestApi {
      * #### Usage guidelines To update a custom configuration pass these parameters in your API
      * request: - A JSON map of configuration attributes &#x60;template_properties&#x60;. The
      * following example shows a sample set of customization configuration: &#x60;&#x60;&#x60; { {
-     * \&quot;ctaButtonBgColor\&quot;: \&quot;#444DEA\&quot;, \&quot;ctaTextFontColor\&quot;:
-     * \&quot;#FFFFFF\&quot;, \&quot;primaryBgColor\&quot;: \&quot;#D3DEF0\&quot;,
-     * \&quot;hideMobileAppNudge\&quot;: false, \&quot;fontFamily\&quot; : \&quot;\&quot;,
-     * \&quot;hideProductName\&quot; : false, \&quot;hideFooterPhone\&quot; : false,
-     * \&quot;hideFooterAddress\&quot; : false, \&quot;hidePrivacyPolicy\&quot; : false,
-     * \&quot;hideManageNotification\&quot; : false, \&quot;hideTsVocabularyDefinitions\&quot;:
-     * false, \&quot;hideNotificationStatus\&quot; : false, \&quot;hideErrorMessage\&quot;: false,
-     * \&quot;hideUnsubscribeLink\&quot; : false, \&quot;hideModifyAlert\&quot;: false,
-     * \&quot;textTransform\&quot;: \&quot;\&quot;, \&quot;replacementValueForLiveboard\&quot;:
-     * \&quot;LB dashboard\&quot;, \&quot;replacementValueForAnswer\&quot;: \&quot;Answer
-     * dashboard\&quot;, \&quot;replacementValueForSpotIQ\&quot;: \&quot;SpotIQ dashboard\&quot;,
-     * \&quot;logoUrl\&quot;:\&quot;\&quot;, \&quot;productName\&quot;:\&quot;ThoughtSpot\&quot;,
-     * \&quot;footerPhone\&quot;:\&quot;(800) 508-7008\&quot;,
-     * \&quot;footerAddress\&quot;:\&quot;444 Castro St, Suite 1000 Mountain View, CA 94041\&quot;,
-     * \&quot;companyWebsiteUrl\&quot;:\&quot;\&quot;,
-     * \&quot;companyPrivacyPolicyUrl\&quot;:\&quot;\&quot; } } &#x60;&#x60;&#x60;
+     * \&quot;cta_button_bg_color\&quot;: \&quot;#444DEA\&quot;, \&quot;cta_text_font_color\&quot;:
+     * \&quot;#FFFFFF\&quot;, \&quot;primary_bg_color\&quot;: \&quot;#D3DEF0\&quot;,
+     * \&quot;logo_url\&quot;:
+     * \&quot;https://storage.pardot.com/710713/1642089901EbkRibJq/TS_fullworkmark_darkmode.png\&quot;,
+     * \&quot;font_family\&quot;: \&quot;\&quot;, \&quot;product_name\&quot;:
+     * \&quot;ThoughtSpot\&quot;, \&quot;footer_address\&quot;: \&quot;444 Castro St, Suite 1000
+     * Mountain View, CA 94041\&quot;, \&quot;footer_phone\&quot;: \&quot;(800) 508-7008\&quot;,
+     * \&quot;replacement_value_for_liveboard\&quot;: \&quot;Dashboard\&quot;,
+     * \&quot;replacement_value_for_answer\&quot;: \&quot;Chart\&quot;,
+     * \&quot;replacement_value_for_spot_iq\&quot;: \&quot;AI Insights\&quot;,
+     * \&quot;hide_footer_phone\&quot;: false, \&quot;hide_footer_address\&quot;: false,
+     * \&quot;hide_product_name\&quot;: false, \&quot;hide_manage_notification\&quot;: false,
+     * \&quot;hide_mobile_app_nudge\&quot;: false, \&quot;hide_privacy_policy\&quot;: false,
+     * \&quot;hide_ts_vocabulary_definitions\&quot;: false, \&quot;hide_error_message\&quot;: false,
+     * \&quot;hide_unsubscribe_link\&quot;: false, \&quot;hide_notification_status\&quot;: false,
+     * \&quot;hide_modify_alert\&quot;: false, \&quot;company_website_url\&quot;:
+     * \&quot;https://your-website.com/\&quot;, \&quot;company_privacy_policy_url\&quot; :
+     * \&quot;https://link-to-privacy-policy.com/\&quot;, \&quot;contact_support_url\&quot;:
+     * \&quot;https://link-to-contact-support.com/\&quot;, \&quot;hide_contact_support_url\&quot;:
+     * false } } &#x60;&#x60;&#x60;
      *
      * @param updateEmailCustomizationRequest (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -25190,22 +25643,26 @@ public class ThoughtSpotRestApi {
      * #### Usage guidelines To update a custom configuration pass these parameters in your API
      * request: - A JSON map of configuration attributes &#x60;template_properties&#x60;. The
      * following example shows a sample set of customization configuration: &#x60;&#x60;&#x60; { {
-     * \&quot;ctaButtonBgColor\&quot;: \&quot;#444DEA\&quot;, \&quot;ctaTextFontColor\&quot;:
-     * \&quot;#FFFFFF\&quot;, \&quot;primaryBgColor\&quot;: \&quot;#D3DEF0\&quot;,
-     * \&quot;hideMobileAppNudge\&quot;: false, \&quot;fontFamily\&quot; : \&quot;\&quot;,
-     * \&quot;hideProductName\&quot; : false, \&quot;hideFooterPhone\&quot; : false,
-     * \&quot;hideFooterAddress\&quot; : false, \&quot;hidePrivacyPolicy\&quot; : false,
-     * \&quot;hideManageNotification\&quot; : false, \&quot;hideTsVocabularyDefinitions\&quot;:
-     * false, \&quot;hideNotificationStatus\&quot; : false, \&quot;hideErrorMessage\&quot;: false,
-     * \&quot;hideUnsubscribeLink\&quot; : false, \&quot;hideModifyAlert\&quot;: false,
-     * \&quot;textTransform\&quot;: \&quot;\&quot;, \&quot;replacementValueForLiveboard\&quot;:
-     * \&quot;LB dashboard\&quot;, \&quot;replacementValueForAnswer\&quot;: \&quot;Answer
-     * dashboard\&quot;, \&quot;replacementValueForSpotIQ\&quot;: \&quot;SpotIQ dashboard\&quot;,
-     * \&quot;logoUrl\&quot;:\&quot;\&quot;, \&quot;productName\&quot;:\&quot;ThoughtSpot\&quot;,
-     * \&quot;footerPhone\&quot;:\&quot;(800) 508-7008\&quot;,
-     * \&quot;footerAddress\&quot;:\&quot;444 Castro St, Suite 1000 Mountain View, CA 94041\&quot;,
-     * \&quot;companyWebsiteUrl\&quot;:\&quot;\&quot;,
-     * \&quot;companyPrivacyPolicyUrl\&quot;:\&quot;\&quot; } } &#x60;&#x60;&#x60;
+     * \&quot;cta_button_bg_color\&quot;: \&quot;#444DEA\&quot;, \&quot;cta_text_font_color\&quot;:
+     * \&quot;#FFFFFF\&quot;, \&quot;primary_bg_color\&quot;: \&quot;#D3DEF0\&quot;,
+     * \&quot;logo_url\&quot;:
+     * \&quot;https://storage.pardot.com/710713/1642089901EbkRibJq/TS_fullworkmark_darkmode.png\&quot;,
+     * \&quot;font_family\&quot;: \&quot;\&quot;, \&quot;product_name\&quot;:
+     * \&quot;ThoughtSpot\&quot;, \&quot;footer_address\&quot;: \&quot;444 Castro St, Suite 1000
+     * Mountain View, CA 94041\&quot;, \&quot;footer_phone\&quot;: \&quot;(800) 508-7008\&quot;,
+     * \&quot;replacement_value_for_liveboard\&quot;: \&quot;Dashboard\&quot;,
+     * \&quot;replacement_value_for_answer\&quot;: \&quot;Chart\&quot;,
+     * \&quot;replacement_value_for_spot_iq\&quot;: \&quot;AI Insights\&quot;,
+     * \&quot;hide_footer_phone\&quot;: false, \&quot;hide_footer_address\&quot;: false,
+     * \&quot;hide_product_name\&quot;: false, \&quot;hide_manage_notification\&quot;: false,
+     * \&quot;hide_mobile_app_nudge\&quot;: false, \&quot;hide_privacy_policy\&quot;: false,
+     * \&quot;hide_ts_vocabulary_definitions\&quot;: false, \&quot;hide_error_message\&quot;: false,
+     * \&quot;hide_unsubscribe_link\&quot;: false, \&quot;hide_notification_status\&quot;: false,
+     * \&quot;hide_modify_alert\&quot;: false, \&quot;company_website_url\&quot;:
+     * \&quot;https://your-website.com/\&quot;, \&quot;company_privacy_policy_url\&quot; :
+     * \&quot;https://link-to-privacy-policy.com/\&quot;, \&quot;contact_support_url\&quot;:
+     * \&quot;https://link-to-contact-support.com/\&quot;, \&quot;hide_contact_support_url\&quot;:
+     * false } } &#x60;&#x60;&#x60;
      *
      * @param updateEmailCustomizationRequest (required)
      * @return ApiResponse&lt;Void&gt;
@@ -25239,22 +25696,26 @@ public class ThoughtSpotRestApi {
      * this on your instance. #### Usage guidelines To update a custom configuration pass these
      * parameters in your API request: - A JSON map of configuration attributes
      * &#x60;template_properties&#x60;. The following example shows a sample set of customization
-     * configuration: &#x60;&#x60;&#x60; { { \&quot;ctaButtonBgColor\&quot;: \&quot;#444DEA\&quot;,
-     * \&quot;ctaTextFontColor\&quot;: \&quot;#FFFFFF\&quot;, \&quot;primaryBgColor\&quot;:
-     * \&quot;#D3DEF0\&quot;, \&quot;hideMobileAppNudge\&quot;: false, \&quot;fontFamily\&quot; :
-     * \&quot;\&quot;, \&quot;hideProductName\&quot; : false, \&quot;hideFooterPhone\&quot; : false,
-     * \&quot;hideFooterAddress\&quot; : false, \&quot;hidePrivacyPolicy\&quot; : false,
-     * \&quot;hideManageNotification\&quot; : false, \&quot;hideTsVocabularyDefinitions\&quot;:
-     * false, \&quot;hideNotificationStatus\&quot; : false, \&quot;hideErrorMessage\&quot;: false,
-     * \&quot;hideUnsubscribeLink\&quot; : false, \&quot;hideModifyAlert\&quot;: false,
-     * \&quot;textTransform\&quot;: \&quot;\&quot;, \&quot;replacementValueForLiveboard\&quot;:
-     * \&quot;LB dashboard\&quot;, \&quot;replacementValueForAnswer\&quot;: \&quot;Answer
-     * dashboard\&quot;, \&quot;replacementValueForSpotIQ\&quot;: \&quot;SpotIQ dashboard\&quot;,
-     * \&quot;logoUrl\&quot;:\&quot;\&quot;, \&quot;productName\&quot;:\&quot;ThoughtSpot\&quot;,
-     * \&quot;footerPhone\&quot;:\&quot;(800) 508-7008\&quot;,
-     * \&quot;footerAddress\&quot;:\&quot;444 Castro St, Suite 1000 Mountain View, CA 94041\&quot;,
-     * \&quot;companyWebsiteUrl\&quot;:\&quot;\&quot;,
-     * \&quot;companyPrivacyPolicyUrl\&quot;:\&quot;\&quot; } } &#x60;&#x60;&#x60;
+     * configuration: &#x60;&#x60;&#x60; { { \&quot;cta_button_bg_color\&quot;:
+     * \&quot;#444DEA\&quot;, \&quot;cta_text_font_color\&quot;: \&quot;#FFFFFF\&quot;,
+     * \&quot;primary_bg_color\&quot;: \&quot;#D3DEF0\&quot;, \&quot;logo_url\&quot;:
+     * \&quot;https://storage.pardot.com/710713/1642089901EbkRibJq/TS_fullworkmark_darkmode.png\&quot;,
+     * \&quot;font_family\&quot;: \&quot;\&quot;, \&quot;product_name\&quot;:
+     * \&quot;ThoughtSpot\&quot;, \&quot;footer_address\&quot;: \&quot;444 Castro St, Suite 1000
+     * Mountain View, CA 94041\&quot;, \&quot;footer_phone\&quot;: \&quot;(800) 508-7008\&quot;,
+     * \&quot;replacement_value_for_liveboard\&quot;: \&quot;Dashboard\&quot;,
+     * \&quot;replacement_value_for_answer\&quot;: \&quot;Chart\&quot;,
+     * \&quot;replacement_value_for_spot_iq\&quot;: \&quot;AI Insights\&quot;,
+     * \&quot;hide_footer_phone\&quot;: false, \&quot;hide_footer_address\&quot;: false,
+     * \&quot;hide_product_name\&quot;: false, \&quot;hide_manage_notification\&quot;: false,
+     * \&quot;hide_mobile_app_nudge\&quot;: false, \&quot;hide_privacy_policy\&quot;: false,
+     * \&quot;hide_ts_vocabulary_definitions\&quot;: false, \&quot;hide_error_message\&quot;: false,
+     * \&quot;hide_unsubscribe_link\&quot;: false, \&quot;hide_notification_status\&quot;: false,
+     * \&quot;hide_modify_alert\&quot;: false, \&quot;company_website_url\&quot;:
+     * \&quot;https://your-website.com/\&quot;, \&quot;company_privacy_policy_url\&quot; :
+     * \&quot;https://link-to-privacy-policy.com/\&quot;, \&quot;contact_support_url\&quot;:
+     * \&quot;https://link-to-contact-support.com/\&quot;, \&quot;hide_contact_support_url\&quot;:
+     * false } } &#x60;&#x60;&#x60;
      *
      * @param updateEmailCustomizationRequest (required)
      * @param _callback The callback to be executed when the API call finishes

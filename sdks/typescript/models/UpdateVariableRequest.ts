@@ -10,22 +10,13 @@
  * Do not edit the class manually.
  */
 
-import { InputVariableValue } from '../models/InputVariableValue';
 import { HttpFile } from '../http/http';
 
 export class UpdateVariableRequest {
     /**
-    * New name of the variable if we want to rename.
+    * New name of the variable.
     */
-    'name'?: string;
-    /**
-    * Operation to perform on the values.
-    */
-    'operation'?: UpdateVariableRequestOperationEnum;
-    /**
-    * Values of variable to be updated.
-    */
-    'values'?: Array<InputVariableValue>;
+    'name': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -34,18 +25,6 @@ export class UpdateVariableRequest {
             "name": "name",
             "baseName": "name",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "operation",
-            "baseName": "operation",
-            "type": "UpdateVariableRequestOperationEnum",
-            "format": ""
-        },
-        {
-            "name": "values",
-            "baseName": "values",
-            "type": "Array<InputVariableValue>",
             "format": ""
         }    ];
 
@@ -56,7 +35,4 @@ export class UpdateVariableRequest {
     public constructor() {
     }
 }
-
-
-export type UpdateVariableRequestOperationEnum = "ADD" | "REMOVE" | "REPLACE" ;
 

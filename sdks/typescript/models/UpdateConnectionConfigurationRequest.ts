@@ -117,7 +117,7 @@ export class UpdateConnectionConfigurationRequest {
 }
 
 
-export type UpdateConnectionConfigurationRequestAuthenticationTypeEnum = "SERVICE_ACCOUNT" | "OAUTH" | "OAUTH_WITH_SERVICE_PRINCIPAL" | "EXTOAUTH" | "KEY_PAIR" | "EXTOAUTH_WITH_PKCE" | "OAUTH_WITH_PKCE" | "PERSONAL_ACCESS_TOKEN" ;
+export type UpdateConnectionConfigurationRequestAuthenticationTypeEnum = "SERVICE_ACCOUNT" | "OAUTH" | "OAUTH_WITH_SERVICE_PRINCIPAL" | "EXTOAUTH" | "KEY_PAIR" | "EXTOAUTH_WITH_PKCE" | "OAUTH_WITH_PKCE" | "PERSONAL_ACCESS_TOKEN" | "OAUTH_CLIENT_CREDENTIALS" ;
 export type UpdateConnectionConfigurationRequestPolicyTypeEnum = "NO_POLICY" | "PRINCIPALS" | "PROCESSES" ;
 export type UpdateConnectionConfigurationRequestPolicyProcessesEnum = "SAGE_INDEXING" | "ROW_COUNT_STATS" ;
 

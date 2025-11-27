@@ -8,13 +8,13 @@ Method | HTTP request | Description
 [**deleteVariable**](VariableApi.md#deleteVariable) | **POST** /api/rest/2.0/template/variables/{identifier}/delete | 
 [**searchVariables**](VariableApi.md#searchVariables) | **POST** /api/rest/2.0/template/variables/search | 
 [**updateVariable**](VariableApi.md#updateVariable) | **POST** /api/rest/2.0/template/variables/{identifier}/update | 
-[**updateVariableValues**](VariableApi.md#updateVariableValues) | **POST** /api/rest/2.0/template/variables/update | 
+[**updateVariableValues**](VariableApi.md#updateVariableValues) | **POST** /api/rest/2.0/template/variables/update-values | 
 
 
 # **createVariable**
 > Variable createVariable(createVariableRequest)
 
- Create a variable which can be used for parameterizing metadata objects   Version: 10.9.0.cl or later   Allows creating a variable which can be used for parameterizing metadata objects in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint supports the following types of variables: * CONNECTION_PROPERTY - For connection properties * TABLE_MAPPING - For table mappings * CONNECTION_PROPERTY_PER_PRINCIPAL - For connection properties per principal. In order to use this please contact support to enable this.  When creating a variable, you need to specify: * The variable type * A unique name for the variable * Whether the variable contains sensitive values (defaults to false)  The operation will fail if: * The user lacks required permissions * The variable name already exists * The variable type is invalid     
+ Create a variable which can be used for parameterizing metadata objects   Version: 10.14.0.cl or later   Allows creating a variable which can be used for parameterizing metadata objects in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint supports the following types of variables: * CONNECTION_PROPERTY - For connection properties * TABLE_MAPPING - For table mappings * CONNECTION_PROPERTY_PER_PRINCIPAL - For connection properties per principal. In order to use this please contact support to enable this. * FORMULA_VARIABLE - For Formula variables, introduced in 10.15.0.cl  When creating a variable, you need to specify: * The variable type * A unique name for the variable * Whether the variable contains sensitive values (defaults to false) * The data type of the variable, only specify for formula variables (defaults to null)  The operation will fail if: * The user lacks required permissions * The variable name already exists * The variable type is invalid     
 
 ### Example
 
@@ -33,16 +33,8 @@ apiInstance.createVariable(
   {
     type: "CONNECTION_PROPERTY",
     name: "name_example",
-    sensitive: false,
-    values: [
-      {
-        value: "value_example",
-        org_identifier: "org_identifier_example",
-        principal_type: "USER",
-        principal_identifier: "principal_identifier_example",
-        priority: 1,
-      },
-    ],
+    is_sensitive: false,
+    data_type: "VARCHAR",
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -87,7 +79,7 @@ Name | Type | Description  | Notes
 # **deleteVariable**
 > void deleteVariable()
 
- Delete a variable   Version: 10.9.0.cl or later   Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn\'t exist * The variable is being used by other objects      
+ Delete a variable   Version: 10.14.0.cl or later   Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn\'t exist * The variable is being used by other objects      
 
 ### Example
 
@@ -147,7 +139,7 @@ Name | Type | Description  | Notes
 # **searchVariables**
 > Array<Variable> searchVariables(searchVariablesRequest)
 
- Search variables   Version: 10.9.0.cl or later   Allows searching for variables in ThoughtSpot.  Requires ADMINISTRATION role.  The API endpoint supports searching variables by: * Variable identifier (ID or name) * Variable type * Name pattern (case-insensitive, supports % for wildcard)  The search results can be formatted in three ways: * METADATA_ONLY - Returns only variable metadata (default) * METADATA_AND_VALUES - Returns variable metadata and values * EDITABLE_METADATA_AND_VALUES - Returns only editable variable metadata and values  The values can be filtered by scope: * org_identifier * principal_identifier * model_identifier      
+ Search variables   Version: 10.14.0.cl or later   Allows searching for variables in ThoughtSpot.  Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint supports searching variables by: * Variable identifier (ID or name) * Variable type * Name pattern (case-insensitive, supports % for wildcard)  The search results can be formatted in three ways: * METADATA - Returns only variable metadata (default) * METADATA_AND_VALUES - Returns variable metadata and values  The values can be filtered by scope: * org_identifier * principal_identifier * model_identifier      
 
 ### Example
 
@@ -171,9 +163,17 @@ apiInstance.searchVariables(
         name_pattern: "name_pattern_example",
       },
     ],
+    value_scope: [
+      {
+        org_identifier: "org_identifier_example",
+        principal_type: "USER",
+        principal_identifier: "principal_identifier_example",
+        model_identifier: "model_identifier_example",
+      },
+    ],
     record_offset: 0,
     record_size: 10,
-    output_format: "METADATA_ONLY",
+    response_content: "METADATA",
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -218,7 +218,7 @@ Name | Type | Description  | Notes
 # **updateVariable**
 > void updateVariable(updateVariableRequest)
 
- Update a variable\'s properties   Version: 10.9.0.cl or later   Allows updating a variable\'s properties in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows updating: * The variable name     
+ Update a variable\'s name   Version: 10.14.0.cl or later   Allows updating a variable\'s properties in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
 
 ### Example
 
@@ -238,16 +238,6 @@ apiInstance.updateVariable(
   // UpdateVariableRequest
   {
     name: "name_example",
-    operation: "REPLACE",
-    values: [
-      {
-        value: "value_example",
-        org_identifier: "org_identifier_example",
-        principal_type: "USER",
-        principal_identifier: "principal_identifier_example",
-        priority: 1,
-      },
-    ],
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -282,7 +272,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | Updating the variable is successful. |  -  |
+**204** | Variable name updated successfully. |  -  |
 **400** | Invalid request. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Forbidden access. |  -  |
@@ -293,7 +283,7 @@ Name | Type | Description  | Notes
 # **updateVariableValues**
 > void updateVariableValues(updateVariableValuesRequest)
 
- Update values for multiple variables   Version: 10.9.0.cl or later   Allows updating values for multiple variables in ThoughtSpot.  Requires ADMINISTRATION role.  The API endpoint allows: * Adding new values to variables * Replacing existing values * Deleting values from variables  When updating variable values, you need to specify: * The variable identifiers * The values to add/replace/remove for each variable * The operation to perform (ADD, REPLACE, REMOVE, CLEAR)  Behaviour based on operation type: * ADD - Adds values to the variable if this is a list type variable, else same as replace. * REPLACE - Replaces all values of a given set of constraints with the current set of values. * REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value. * CLEAR - Removes all constrains for a given variable, scope is ignored      
+ Update values for multiple variables   Version: 10.14.0.cl or later   Allows updating values for multiple variables in ThoughtSpot.  Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows: * Adding new values to variables * Replacing existing values * Deleting values from variables  When updating variable values, you need to specify: * The variable identifiers * The values to add/replace/remove for each variable * The operation to perform (ADD, REPLACE, REMOVE, CLEAR)  Behaviour based on operation type: * ADD - Adds values to the variable if this is a list type variable, else same as replace. * REPLACE - Replaces all values of a given set of constraints with the current set of values. * REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value. * CLEAR - Removes all constrains for a given variable, scope is ignored      
 
 ### Example
 
@@ -310,21 +300,24 @@ const apiInstance = new VariableApi(configuration);
 apiInstance.updateVariableValues(
   // UpdateVariableValuesRequest
   {
-    variable_updates: [
+    variable_assignment: [
       {
         variable_identifier: "variable_identifier_example",
         variable_values: [
-          {
-            value: "value_example",
-            org_identifier: "org_identifier_example",
-            principal_type: "USER",
-            principal_identifier: "principal_identifier_example",
-            priority: 1,
-          },
+          "variable_values_example",
         ],
+        operation: "ADD",
       },
     ],
-    operation: "ADD",
+    variable_value_scope: [
+      {
+        org_identifier: "org_identifier_example",
+        principal_type: "USER",
+        principal_identifier: "principal_identifier_example",
+        model_identifier: "model_identifier_example",
+        priority: 1,
+      },
+    ],
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -358,7 +351,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | Updating variable values is successful. |  -  |
+**204** | Variable values updated successfully. |  -  |
 **400** | Invalid request. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Forbidden access. |  -  |

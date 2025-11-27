@@ -54,7 +54,9 @@ import com.thoughtspot.client.model.DeployCommitRequest;
 import com.thoughtspot.client.model.DeployResponse;
 import com.thoughtspot.client.model.EurekaDataSourceSuggestionResponse;
 import com.thoughtspot.client.model.EurekaDecomposeQueryResponse;
+import com.thoughtspot.client.model.EurekaGetNLInstructionsResponse;
 import com.thoughtspot.client.model.EurekaGetRelevantQuestionsResponse;
+import com.thoughtspot.client.model.EurekaSetNLInstructionsResponse;
 import com.thoughtspot.client.model.ExportAnswerReportRequest;
 import com.thoughtspot.client.model.ExportLiveboardReportRequest;
 import com.thoughtspot.client.model.ExportMetadataTMLBatchedRequest;
@@ -75,6 +77,7 @@ import com.thoughtspot.client.model.GetAsyncImportStatusResponse;
 import com.thoughtspot.client.model.GetCustomAccessTokenRequest;
 import com.thoughtspot.client.model.GetDataSourceSuggestionsRequest;
 import com.thoughtspot.client.model.GetFullAccessTokenRequest;
+import com.thoughtspot.client.model.GetNLInstructionsRequest;
 import com.thoughtspot.client.model.GetObjectAccessTokenRequest;
 import com.thoughtspot.client.model.GetRelevantQuestionsRequest;
 import com.thoughtspot.client.model.GetTokenResponse;
@@ -131,6 +134,7 @@ import com.thoughtspot.client.model.SendAgentMessageRequest;
 import com.thoughtspot.client.model.SendAgentMessageResponse;
 import com.thoughtspot.client.model.SendAgentMessageStreamingRequest;
 import com.thoughtspot.client.model.SendMessageRequest;
+import com.thoughtspot.client.model.SetNLInstructionsRequest;
 import com.thoughtspot.client.model.ShareMetadataRequest;
 import com.thoughtspot.client.model.SingleAnswerRequest;
 import com.thoughtspot.client.model.SqlQueryResponse;
@@ -602,22 +606,26 @@ public class ThoughtSpotRestApiTest {
      * #### Usage guidelines To create a custom configuration pass these parameters in your API
      * request: - A JSON map of configuration attributes &#x60;template_properties&#x60;. The
      * following example shows a sample set of customization configuration: &#x60;&#x60;&#x60; { {
-     * \&quot;ctaButtonBgColor\&quot;: \&quot;#444DEA\&quot;, \&quot;ctaTextFontColor\&quot;:
-     * \&quot;#FFFFFF\&quot;, \&quot;primaryBgColor\&quot;: \&quot;#D3DEF0\&quot;,
-     * \&quot;hideMobileAppNudge\&quot;: false, \&quot;fontFamily\&quot; : \&quot;\&quot;,
-     * \&quot;hideProductName\&quot; : false, \&quot;hideFooterPhone\&quot; : false,
-     * \&quot;hideFooterAddress\&quot; : false, \&quot;hidePrivacyPolicy\&quot; : false,
-     * \&quot;hideManageNotification\&quot; : false, \&quot;hideTsVocabularyDefinitions\&quot;:
-     * false, \&quot;hideNotificationStatus\&quot; : false, \&quot;hideErrorMessage\&quot;: false,
-     * \&quot;hideUnsubscribeLink\&quot; : false, \&quot;hideModifyAlert\&quot;: false,
-     * \&quot;textTransform\&quot;: \&quot;\&quot;, \&quot;replacementValueForLiveboard\&quot;:
-     * \&quot;LB dashboard\&quot;, \&quot;replacementValueForAnswer\&quot;: \&quot;Answer
-     * dashboard\&quot;, \&quot;replacementValueForSpotIQ\&quot;: \&quot;SpotIQ dashboard\&quot;,
-     * \&quot;logoUrl\&quot;:\&quot;\&quot;, \&quot;productName\&quot;:\&quot;ThoughtSpot\&quot;,
-     * \&quot;footerPhone\&quot;:\&quot;(800) 508-7008\&quot;,
-     * \&quot;footerAddress\&quot;:\&quot;444 Castro St, Suite 1000 Mountain View, CA 94041\&quot;,
-     * \&quot;companyWebsiteUrl\&quot;:\&quot;\&quot;,
-     * \&quot;companyPrivacyPolicyUrl\&quot;:\&quot;\&quot; } } &#x60;&#x60;&#x60;
+     * \&quot;cta_button_bg_color\&quot;: \&quot;#444DEA\&quot;, \&quot;cta_text_font_color\&quot;:
+     * \&quot;#FFFFFF\&quot;, \&quot;primary_bg_color\&quot;: \&quot;#D3DEF0\&quot;,
+     * \&quot;logo_url\&quot;:
+     * \&quot;https://storage.pardot.com/710713/1642089901EbkRibJq/TS_fullworkmark_darkmode.png\&quot;,
+     * \&quot;font_family\&quot;: \&quot;\&quot;, \&quot;product_name\&quot;:
+     * \&quot;ThoughtSpot\&quot;, \&quot;footer_address\&quot;: \&quot;444 Castro St, Suite 1000
+     * Mountain View, CA 94041\&quot;, \&quot;footer_phone\&quot;: \&quot;(800) 508-7008\&quot;,
+     * \&quot;replacement_value_for_liveboard\&quot;: \&quot;Dashboard\&quot;,
+     * \&quot;replacement_value_for_answer\&quot;: \&quot;Chart\&quot;,
+     * \&quot;replacement_value_for_spot_iq\&quot;: \&quot;AI Insights\&quot;,
+     * \&quot;hide_footer_phone\&quot;: false, \&quot;hide_footer_address\&quot;: false,
+     * \&quot;hide_product_name\&quot;: false, \&quot;hide_manage_notification\&quot;: false,
+     * \&quot;hide_mobile_app_nudge\&quot;: false, \&quot;hide_privacy_policy\&quot;: false,
+     * \&quot;hide_ts_vocabulary_definitions\&quot;: false, \&quot;hide_error_message\&quot;: false,
+     * \&quot;hide_unsubscribe_link\&quot;: false, \&quot;hide_notification_status\&quot;: false,
+     * \&quot;hide_modify_alert\&quot;: false, \&quot;company_website_url\&quot;:
+     * \&quot;https://your-website.com/\&quot;, \&quot;company_privacy_policy_url\&quot; :
+     * \&quot;https://link-to-privacy-policy.com/\&quot;, \&quot;contact_support_url\&quot;:
+     * \&quot;https://link-to-contact-support.com/\&quot;, \&quot;hide_contact_support_url\&quot;:
+     * false } } &#x60;&#x60;&#x60;
      *
      * @throws ApiException if the Api call fails
      */
@@ -763,11 +771,11 @@ public class ThoughtSpotRestApiTest {
      * endpoint supports the following types of variables: * CONNECTION_PROPERTY - For connection
      * properties * TABLE_MAPPING - For table mappings * CONNECTION_PROPERTY_PER_PRINCIPAL - For
      * connection properties per principal. In order to use this please contact support to enable
-     * this. * FORMULA_VARIABLE - For Formula variables When creating a variable, you need to
-     * specify: * The variable type * A unique name for the variable * Whether the variable contains
-     * sensitive values (defaults to false) * The data type of the variable, only specify for fomula
-     * variables (defaults to null) The operation will fail if: * The user lacks required
-     * permissions * The variable name already exists * The variable type is invalid
+     * this. * FORMULA_VARIABLE - For Formula variables, introduced in 10.15.0.cl When creating a
+     * variable, you need to specify: * The variable type * A unique name for the variable * Whether
+     * the variable contains sensitive values (defaults to false) * The data type of the variable,
+     * only specify for formula variables (defaults to null) The operation will fail if: * The user
+     * lacks required permissions * The variable name already exists * The variable type is invalid
      *
      * @throws ApiException if the Api call fails
      */
@@ -1849,6 +1857,35 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     * Version: 10.15.0.cl or later This API allows users to retrieve existing natural language (NL)
+     * instructions for a specific data-model. These instructions guide the AI system in
+     * understanding data context and generating more accurate responses when processing natural
+     * language queries. #### Usage guidelines To retrieve NL instructions for a data-model, the
+     * request must include: - &#x60;data_source_identifier&#x60;: The unique ID or name of the
+     * data-model to retrieve NL instructions The API returns a response object with: -
+     * &#x60;nl_instructions_info&#x60;: An array of instruction objects, each containing: -
+     * &#x60;instructions&#x60;: Array of text instructions for natural language processing -
+     * &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). It can be extended to
+     * data-model-user scope in future. #### Instructions Scope - **GLOBAL**: Instructions that
+     * apply globally across the system on the given data-model (currently only global instructions
+     * are supported) &gt; ###### Note: &gt; * To use this API, the user needs atleast view access
+     * on the data-model and they must use corresponding org related bearerToken where the
+     * data-model exists. &gt; * This endpoint is currently in Beta. Breaking changes may be
+     * introduced before the endpoint is made Generally Available. &gt; * Available from version
+     * 10.15.0.cl and later. &gt; * This endpoint requires Spotter — please contact ThoughtSpot
+     * Support to enable Spotter on your cluster. &gt; * Use this API to view currently configured
+     * instructions before modifying them with &#x60;setNLInstructions&#x60;.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getNLInstructionsTest() throws ApiException {
+        GetNLInstructionsRequest getNLInstructionsRequest = null;
+        EurekaGetNLInstructionsResponse response = api.getNLInstructions(getNLInstructionsRequest);
+        // TODO: test validations
+    }
+
+    /**
      * Version: 9.0.0.cl or later Gets an authentication token that provides access to a specific
      * metadata object. By default, the token obtained from ThoughtSpot remains valid for 5 mins.
      * You can generate the token for a user by providing a &#x60;username&#x60; and
@@ -2687,6 +2724,36 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     * Version: 10.15.0.cl or later This API allows users to set natural language (NL) instructions
+     * for a specific data-model to improve AI-generated answers and query processing. These
+     * instructions help guide the AI system to better understand the data context and provide more
+     * accurate responses. #### Usage guidelines To set NL instructions for a data-model, the
+     * request must include: - &#x60;data_source_identifier&#x60;: The unique ID or name of the
+     * data-model for which to set NL instructions - &#x60;nl_instructions_info&#x60;: An array of
+     * instruction objects, each containing: - &#x60;instructions&#x60;: Array of text instructions
+     * for the LLM - &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). Currently
+     * only &#x60;GLOBAL&#x60; is supported. It can be extended to data-model-user scope in future.
+     * The API returns a response object with: - &#x60;success&#x60;: Boolean indicating whether the
+     * operation was successful #### Instructions Scope - **GLOBAL**: Instructions that apply
+     * globally for that data-model across the system &gt; ###### Note: &gt; * To use this API, the
+     * user needs either edit access or SPOTTER_COACHING_PRIVILEGE on the data-model and they must
+     * use corresponding org related bearerToken where the data-model exists. &gt; * This endpoint
+     * is currently in Beta. Breaking changes may be introduced before the endpoint is made
+     * Generally Available. &gt; * Available from version 10.15.0.cl and later. &gt; * This endpoint
+     * requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. &gt;
+     * * Instructions help improve the accuracy and relevance of AI-generated responses for the
+     * specified data-model.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void setNLInstructionsTest() throws ApiException {
+        SetNLInstructionsRequest setNLInstructionsRequest = null;
+        EurekaSetNLInstructionsResponse response = api.setNLInstructions(setNLInstructionsRequest);
+        // TODO: test validations
+    }
+
+    /**
      * Version: 9.0.0.cl or later Allows sharing one or several metadata objects with users and
      * groups in ThoughtSpot. Requires edit access to the metadata object. The API endpoint allows
      * sharing only the following types of metadata objects: * Liveboards * Visualizations * Answers
@@ -3115,22 +3182,26 @@ public class ThoughtSpotRestApiTest {
      * #### Usage guidelines To update a custom configuration pass these parameters in your API
      * request: - A JSON map of configuration attributes &#x60;template_properties&#x60;. The
      * following example shows a sample set of customization configuration: &#x60;&#x60;&#x60; { {
-     * \&quot;ctaButtonBgColor\&quot;: \&quot;#444DEA\&quot;, \&quot;ctaTextFontColor\&quot;:
-     * \&quot;#FFFFFF\&quot;, \&quot;primaryBgColor\&quot;: \&quot;#D3DEF0\&quot;,
-     * \&quot;hideMobileAppNudge\&quot;: false, \&quot;fontFamily\&quot; : \&quot;\&quot;,
-     * \&quot;hideProductName\&quot; : false, \&quot;hideFooterPhone\&quot; : false,
-     * \&quot;hideFooterAddress\&quot; : false, \&quot;hidePrivacyPolicy\&quot; : false,
-     * \&quot;hideManageNotification\&quot; : false, \&quot;hideTsVocabularyDefinitions\&quot;:
-     * false, \&quot;hideNotificationStatus\&quot; : false, \&quot;hideErrorMessage\&quot;: false,
-     * \&quot;hideUnsubscribeLink\&quot; : false, \&quot;hideModifyAlert\&quot;: false,
-     * \&quot;textTransform\&quot;: \&quot;\&quot;, \&quot;replacementValueForLiveboard\&quot;:
-     * \&quot;LB dashboard\&quot;, \&quot;replacementValueForAnswer\&quot;: \&quot;Answer
-     * dashboard\&quot;, \&quot;replacementValueForSpotIQ\&quot;: \&quot;SpotIQ dashboard\&quot;,
-     * \&quot;logoUrl\&quot;:\&quot;\&quot;, \&quot;productName\&quot;:\&quot;ThoughtSpot\&quot;,
-     * \&quot;footerPhone\&quot;:\&quot;(800) 508-7008\&quot;,
-     * \&quot;footerAddress\&quot;:\&quot;444 Castro St, Suite 1000 Mountain View, CA 94041\&quot;,
-     * \&quot;companyWebsiteUrl\&quot;:\&quot;\&quot;,
-     * \&quot;companyPrivacyPolicyUrl\&quot;:\&quot;\&quot; } } &#x60;&#x60;&#x60;
+     * \&quot;cta_button_bg_color\&quot;: \&quot;#444DEA\&quot;, \&quot;cta_text_font_color\&quot;:
+     * \&quot;#FFFFFF\&quot;, \&quot;primary_bg_color\&quot;: \&quot;#D3DEF0\&quot;,
+     * \&quot;logo_url\&quot;:
+     * \&quot;https://storage.pardot.com/710713/1642089901EbkRibJq/TS_fullworkmark_darkmode.png\&quot;,
+     * \&quot;font_family\&quot;: \&quot;\&quot;, \&quot;product_name\&quot;:
+     * \&quot;ThoughtSpot\&quot;, \&quot;footer_address\&quot;: \&quot;444 Castro St, Suite 1000
+     * Mountain View, CA 94041\&quot;, \&quot;footer_phone\&quot;: \&quot;(800) 508-7008\&quot;,
+     * \&quot;replacement_value_for_liveboard\&quot;: \&quot;Dashboard\&quot;,
+     * \&quot;replacement_value_for_answer\&quot;: \&quot;Chart\&quot;,
+     * \&quot;replacement_value_for_spot_iq\&quot;: \&quot;AI Insights\&quot;,
+     * \&quot;hide_footer_phone\&quot;: false, \&quot;hide_footer_address\&quot;: false,
+     * \&quot;hide_product_name\&quot;: false, \&quot;hide_manage_notification\&quot;: false,
+     * \&quot;hide_mobile_app_nudge\&quot;: false, \&quot;hide_privacy_policy\&quot;: false,
+     * \&quot;hide_ts_vocabulary_definitions\&quot;: false, \&quot;hide_error_message\&quot;: false,
+     * \&quot;hide_unsubscribe_link\&quot;: false, \&quot;hide_notification_status\&quot;: false,
+     * \&quot;hide_modify_alert\&quot;: false, \&quot;company_website_url\&quot;:
+     * \&quot;https://your-website.com/\&quot;, \&quot;company_privacy_policy_url\&quot; :
+     * \&quot;https://link-to-privacy-policy.com/\&quot;, \&quot;contact_support_url\&quot;:
+     * \&quot;https://link-to-contact-support.com/\&quot;, \&quot;hide_contact_support_url\&quot;:
+     * false } } &#x60;&#x60;&#x60;
      *
      * @throws ApiException if the Api call fails
      */

@@ -18,6 +18,10 @@ export class VariableValue {
     */
     'value'?: string | null;
     /**
+    * The value of the variable if it is a list type
+    */
+    'value_list'?: Array<string> | null;
+    /**
     * The unique name of the org
     */
     'org_identifier': string;
@@ -41,6 +45,12 @@ export class VariableValue {
             "name": "value",
             "baseName": "value",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "value_list",
+            "baseName": "value_list",
+            "type": "Array<string>",
             "format": ""
         },
         {

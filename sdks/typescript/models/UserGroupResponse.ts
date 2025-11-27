@@ -330,6 +330,6 @@ export class UserGroupResponse {
 
 
 export type UserGroupResponseParentTypeEnum = "USER" | "GROUP" ;
-export type UserGroupResponseTypeEnum = "LOCAL_GROUP" | "LDAP_GROUP" ;
+export type UserGroupResponseTypeEnum = "LOCAL_GROUP" | "LDAP_GROUP" | "TEAM_GROUP" | "TENANT_GROUP" ;
 export type UserGroupResponseVisibilityEnum = "SHARABLE" | "NON_SHARABLE" ;
 

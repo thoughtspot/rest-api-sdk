@@ -64,6 +64,12 @@ public class GetCustomAccessTokenRequestTest {
         // TODO: test parameterValues
     }
 
+    /** Test the property 'variableValues' */
+    @Test
+    public void variableValuesTest() {
+        // TODO: test variableValues
+    }
+
     /** Test the property 'objects' */
     @Test
     public void objectsTest() {

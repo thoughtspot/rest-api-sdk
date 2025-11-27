@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { InputVariableValue } from '../models/InputVariableValue';
 import { HttpFile } from '../http/http';
 
 export class CreateVariableRequest {
@@ -25,11 +24,11 @@ export class CreateVariableRequest {
     /**
     * If the variable contains sensitive values like passwords
     */
-    'sensitive'?: boolean | null;
+    'is_sensitive'?: boolean | null;
     /**
-    * Values of variable
+    * Variable Data Type
     */
-    'values'?: Array<InputVariableValue>;
+    'data_type'?: CreateVariableRequestDataTypeEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -47,15 +46,15 @@ export class CreateVariableRequest {
             "format": ""
         },
         {
-            "name": "sensitive",
-            "baseName": "sensitive",
+            "name": "is_sensitive",
+            "baseName": "is_sensitive",
             "type": "boolean",
             "format": ""
         },
         {
-            "name": "values",
-            "baseName": "values",
-            "type": "Array<InputVariableValue>",
+            "name": "data_type",
+            "baseName": "data_type",
+            "type": "CreateVariableRequestDataTypeEnum",
             "format": ""
         }    ];
 
@@ -68,5 +67,6 @@ export class CreateVariableRequest {
 }
 
 
-export type CreateVariableRequestTypeEnum = "CONNECTION_PROPERTY" | "TABLE_MAPPING" | "CONNECTION_PROPERTY_PER_PRINCIPAL" ;
+export type CreateVariableRequestTypeEnum = "CONNECTION_PROPERTY" | "TABLE_MAPPING" | "CONNECTION_PROPERTY_PER_PRINCIPAL" | "FORMULA_VARIABLE" ;
+export type CreateVariableRequestDataTypeEnum = "VARCHAR" | "INT32" | "INT64" | "DOUBLE" | "DATE" | "DATE_TIME" ;
 

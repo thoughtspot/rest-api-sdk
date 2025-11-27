@@ -40,9 +40,9 @@ public class SearchVariablesRequestTest {
         // TODO: test recordSize
     }
 
-    /** Test the property 'outputFormat' */
+    /** Test the property 'responseContent' */
     @Test
-    public void outputFormatTest() {
-        // TODO: test outputFormat
+    public void responseContentTest() {
+        // TODO: test responseContent
     }
 }

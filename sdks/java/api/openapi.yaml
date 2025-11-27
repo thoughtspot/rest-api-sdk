@@ -190,6 +190,78 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
+  /api/rest/2.0/ai/instructions/get:
+    post:
+      description: |2+
+
+        Version: 10.15.0.cl or later
+
+
+        This API allows users to retrieve existing natural language (NL) instructions for a specific data-model. These instructions guide the AI system in understanding data context and generating more accurate responses when processing natural language queries.
+
+        #### Usage guidelines
+
+        To retrieve NL instructions for a data-model, the request must include:
+        - `data_source_identifier`: The unique ID or name of the data-model to retrieve NL instructions
+
+        The API returns a response object with:
+        - `nl_instructions_info`: An array of instruction objects, each containing:
+          - `instructions`: Array of text instructions for natural language processing
+          - `scope`: The scope of the instruction (`GLOBAL`). It can be extended to data-model-user scope in future.
+
+        #### Instructions Scope
+
+        - **GLOBAL**: Instructions that apply globally across the system on the given data-model (currently only global instructions are supported)
+
+        > ###### Note:
+        > * To use this API, the user needs atleast view access on the data-model and they must use corresponding org related bearerToken where the data-model exists.
+        > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.
+        > * Available from version 10.15.0.cl and later.
+        > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.
+        > * Use this API to view currently configured instructions before modifying them with `setNLInstructions`.
+
+
+
+
+      operationId: getNLInstructions
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/getNLInstructions_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eureka_GetNLInstructionsResponse'
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eureka_GetNLInstructionsResponse'
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/ai/relevant-questions/:
     post:
       description: |2+
@@ -490,6 +562,80 @@ paths:
                 items:
                   $ref: '#/components/schemas/ResponseMessage'
                 type: array
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/rest/2.0/ai/instructions/set:
+    post:
+      description: |2+
+
+        Version: 10.15.0.cl or later
+
+
+        This API allows users to set natural language (NL) instructions for a specific data-model to improve AI-generated answers and query processing. These instructions help guide the AI system to better understand the data context and provide more accurate responses.
+
+        #### Usage guidelines
+
+        To set NL instructions for a data-model, the request must include:
+        - `data_source_identifier`: The unique ID or name of the data-model for which to set NL instructions
+        - `nl_instructions_info`: An array of instruction objects, each containing:
+          - `instructions`: Array of text instructions for the LLM
+          - `scope`: The scope of the instruction (`GLOBAL`). Currently only `GLOBAL` is supported. It can be extended to data-model-user scope in future.
+
+        The API returns a response object with:
+        - `success`: Boolean indicating whether the operation was successful
+
+        #### Instructions Scope
+
+        - **GLOBAL**: Instructions that apply globally for that data-model across the system
+
+        > ###### Note:
+        > * To use this API, the user needs either edit access or SPOTTER_COACHING_PRIVILEGE on the data-model and they must use corresponding org related bearerToken where the data-model exists.
+        > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.
+        > * Available from version 10.15.0.cl and later.
+        > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.
+        > * Instructions help improve the accuracy and relevance of AI-generated responses for the specified data-model.
+
+
+
+
+
+      operationId: setNLInstructions
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/setNLInstructions_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eureka_SetNLInstructionsResponse'
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eureka_SetNLInstructionsResponse'
           description: Common error response
         "400":
           content:
@@ -3332,62 +3478,33 @@ paths:
       - application/json
   /api/rest/2.0/customization/email:
     post:
-      description: |2+
-
-        Version: 10.10.0.cl or later
-
-
-        Creates a customization configuration for the notification email.
-
-        #### Pre-requisites
-
-        Requires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
-        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.
-
-        **NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.
-
-        #### Usage guidelines
-
-        To create a custom configuration pass these parameters in your API request:
-
-        - A JSON map of configuration attributes `template_properties`. The following example shows a sample set of customization configuration:
-
-        ```
-        {
-          {
-            "ctaButtonBgColor": "#444DEA",
-            "ctaTextFontColor": "#FFFFFF",
-            "primaryBgColor": "#D3DEF0",
-            "hideMobileAppNudge": false,
-            "fontFamily" : "",
-            "hideProductName" : false,
-            "hideFooterPhone" : false,
-            "hideFooterAddress" : false,
-            "hidePrivacyPolicy" : false,
-            "hideManageNotification" : false,
-            "hideTsVocabularyDefinitions": false,
-            "hideNotificationStatus" : false,
-            "hideErrorMessage": false,
-            "hideUnsubscribeLink" : false,
-            "hideModifyAlert": false,
-            "textTransform": "",
-            "replacementValueForLiveboard": "LB dashboard",
-            "replacementValueForAnswer": "Answer dashboard",
-            "replacementValueForSpotIQ": "SpotIQ dashboard",
-            "logoUrl":"",
-            "productName":"ThoughtSpot",
-            "footerPhone":"(800) 508-7008",
-            "footerAddress":"444 Castro St, Suite 1000 Mountain View, CA 94041",
-            "companyWebsiteUrl":"",
-            "companyPrivacyPolicyUrl":""
-          }
-        }
-        ```
-
-
-
-
-
+      description: "\nVersion: 10.10.0.cl or later\n\n\nCreates a customization configuration\
+        \ for the notification email.\n\n#### Pre-requisites\n\nRequires `DEVELOPER`\
+        \ (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**)\
+        \ privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
+        \ is enabled on your instance, the `DEVELOPER` (**Has developer privilege**)\
+        \ privilege is required.\n\n**NOTE**:This endpoint in currently in beta. Contact\
+        \ ThoughtSpot support to enable this on your instance.\n\n#### Usage guidelines\n\
+        \nTo create a custom configuration pass these parameters in your API request:\n\
+        \n- A JSON map of configuration attributes `template_properties`. The following\
+        \ example shows a sample set of customization configuration:\n\n```\n{\n \
+        \ {\n      \"cta_button_bg_color\": \"#444DEA\",\n    \t\"cta_text_font_color\"\
+        : \"#FFFFFF\",\n    \t\"primary_bg_color\": \"#D3DEF0\",\n      \"logo_url\"\
+        : \"https://storage.pardot.com/710713/1642089901EbkRibJq/TS_fullworkmark_darkmode.png\"\
+        ,\n  \t  \"font_family\": \"\",\n    \t\"product_name\": \"ThoughtSpot\",\n\
+        \    \t\"footer_address\": \"444 Castro St, Suite 1000 Mountain View, CA 94041\"\
+        ,\n\t    \"footer_phone\": \"(800) 508-7008\",\n      \"replacement_value_for_liveboard\"\
+        : \"Dashboard\",\n    \t\"replacement_value_for_answer\": \"Chart\",\n   \
+        \ \t\"replacement_value_for_spot_iq\": \"AI Insights\",\n   \t  \"hide_footer_phone\"\
+        : false,\n      \"hide_footer_address\": false,\n      \"hide_product_name\"\
+        : false,\n    \t\"hide_manage_notification\": false,\n    \t\"hide_mobile_app_nudge\"\
+        : false,\n    \t\"hide_privacy_policy\": false,\n    \t\"hide_ts_vocabulary_definitions\"\
+        : false,\n    \t\"hide_error_message\": false,\n    \t\"hide_unsubscribe_link\"\
+        : false,\n      \"hide_notification_status\": false,\n    \t\"hide_modify_alert\"\
+        : false,\n    \t\"company_website_url\": \"https://your-website.com/\",\n\
+        \    \t\"company_privacy_policy_url\" : \"https://link-to-privacy-policy.com/\"\
+        ,\n      \"contact_support_url\": \"https://link-to-contact-support.com/\"\
+        ,\n      \"hide_contact_support_url\": false\n  }\n}\n```\n\n\n\n\n\n"
       operationId: createEmailCustomization
       parameters: []
       requestBody:
@@ -3618,62 +3735,33 @@ paths:
       - application/json
   /api/rest/2.0/customization/email/update:
     post:
-      description: |2+
-
-        Version: 10.12.0.cl or later
-
-
-        Updates a customization configuration for the notification email.
-
-        #### Pre-requisites
-
-        Requires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
-        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.
-
-        **NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.
-
-        #### Usage guidelines
-
-        To update a custom configuration pass these parameters in your API request:
-
-        - A JSON map of configuration attributes `template_properties`. The following example shows a sample set of customization configuration:
-
-        ```
-        {
-          {
-            "ctaButtonBgColor": "#444DEA",
-            "ctaTextFontColor": "#FFFFFF",
-            "primaryBgColor": "#D3DEF0",
-            "hideMobileAppNudge": false,
-            "fontFamily" : "",
-            "hideProductName" : false,
-            "hideFooterPhone" : false,
-            "hideFooterAddress" : false,
-            "hidePrivacyPolicy" : false,
-            "hideManageNotification" : false,
-            "hideTsVocabularyDefinitions": false,
-            "hideNotificationStatus" : false,
-            "hideErrorMessage": false,
-            "hideUnsubscribeLink" : false,
-            "hideModifyAlert": false,
-            "textTransform": "",
-            "replacementValueForLiveboard": "LB dashboard",
-            "replacementValueForAnswer": "Answer dashboard",
-            "replacementValueForSpotIQ": "SpotIQ dashboard",
-            "logoUrl":"",
-            "productName":"ThoughtSpot",
-            "footerPhone":"(800) 508-7008",
-            "footerAddress":"444 Castro St, Suite 1000 Mountain View, CA 94041",
-            "companyWebsiteUrl":"",
-            "companyPrivacyPolicyUrl":""
-          }
-        }
-        ```
-
-
-
-
-
+      description: "\nVersion: 10.12.0.cl or later\n\n\nUpdates a customization configuration\
+        \ for the notification email.\n\n#### Pre-requisites\n\nRequires `DEVELOPER`\
+        \ (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**)\
+        \ privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
+        \ is enabled on your instance, the `DEVELOPER` (**Has developer privilege**)\
+        \ privilege is required.\n\n**NOTE**:This endpoint in currently in beta. Contact\
+        \ ThoughtSpot support to enable this on your instance.\n\n#### Usage guidelines\n\
+        \nTo update a custom configuration pass these parameters in your API request:\n\
+        \n- A JSON map of configuration attributes `template_properties`. The following\
+        \ example shows a sample set of customization configuration:\n\n```\n{\n \
+        \ {\n      \"cta_button_bg_color\": \"#444DEA\",\n    \t\"cta_text_font_color\"\
+        : \"#FFFFFF\",\n    \t\"primary_bg_color\": \"#D3DEF0\",\n      \"logo_url\"\
+        : \"https://storage.pardot.com/710713/1642089901EbkRibJq/TS_fullworkmark_darkmode.png\"\
+        ,\n  \t  \"font_family\": \"\",\n    \t\"product_name\": \"ThoughtSpot\",\n\
+        \    \t\"footer_address\": \"444 Castro St, Suite 1000 Mountain View, CA 94041\"\
+        ,\n\t    \"footer_phone\": \"(800) 508-7008\",\n      \"replacement_value_for_liveboard\"\
+        : \"Dashboard\",\n    \t\"replacement_value_for_answer\": \"Chart\",\n   \
+        \ \t\"replacement_value_for_spot_iq\": \"AI Insights\",\n   \t  \"hide_footer_phone\"\
+        : false,\n      \"hide_footer_address\": false,\n      \"hide_product_name\"\
+        : false,\n    \t\"hide_manage_notification\": false,\n    \t\"hide_mobile_app_nudge\"\
+        : false,\n    \t\"hide_privacy_policy\": false,\n    \t\"hide_ts_vocabulary_definitions\"\
+        : false,\n    \t\"hide_error_message\": false,\n    \t\"hide_unsubscribe_link\"\
+        : false,\n      \"hide_notification_status\": false,\n    \t\"hide_modify_alert\"\
+        : false,\n    \t\"company_website_url\": \"https://your-website.com/\",\n\
+        \    \t\"company_privacy_policy_url\" : \"https://link-to-privacy-policy.com/\"\
+        ,\n      \"contact_support_url\": \"https://link-to-contact-support.com/\"\
+        ,\n      \"hide_contact_support_url\": false\n  }\n}\n```\n\n\n\n\n\n"
       operationId: updateEmailCustomization
       parameters: []
       requestBody:
@@ -6787,6 +6875,8 @@ paths:
                 example_1:
                   value:
                     onboarding_content_url: ""
+                    saml_enabled: false
+                    okta_enabled: false
               schema:
                 $ref: '#/components/schemas/SystemConfig'
           description: Cluster config information.
@@ -8100,13 +8190,13 @@ paths:
         \nThe API endpoint supports the following types of variables:\n* CONNECTION_PROPERTY\
         \ - For connection properties\n* TABLE_MAPPING - For table mappings\n* CONNECTION_PROPERTY_PER_PRINCIPAL\
         \ - For connection properties per principal. In order to use this please contact\
-        \ support to enable this.\n* FORMULA_VARIABLE - For Formula variables\n\n\
-        When creating a variable, you need to specify:\n* The variable type\n* A unique\
-        \ name for the variable\n* Whether the variable contains sensitive values\
-        \ (defaults to false)\n* The data type of the variable, only specify for fomula\
-        \ variables (defaults to null)\n\nThe operation will fail if:\n* The user\
-        \ lacks required permissions\n* The variable name already exists\n* The variable\
-        \ type is invalid\n\n\n\n\n"
+        \ support to enable this.\n* FORMULA_VARIABLE - For Formula variables, introduced\
+        \ in 10.15.0.cl\n\nWhen creating a variable, you need to specify:\n* The variable\
+        \ type\n* A unique name for the variable\n* Whether the variable contains\
+        \ sensitive values (defaults to false)\n* The data type of the variable, only\
+        \ specify for formula variables (defaults to null)\n\nThe operation will fail\
+        \ if:\n* The user lacks required permissions\n* The variable name already\
+        \ exists\n* The variable type is invalid\n\n\n\n\n"
       operationId: createVariable
       parameters: []
       requestBody:
@@ -12722,6 +12812,7 @@ components:
             - CAN_MANAGE_ANALYST_STUDIO
             - CAN_VIEW_FOLDERS
             - CAN_MODIDY_FOLDERS
+            - CAN_MANAGE_VARIABLES
             - PREVIEW_DOCUMENT_SEARCH
             - CAN_SETUP_VERSION_CONTROL
             - CAN_MANAGE_WEBHOOKS
@@ -13314,6 +13405,47 @@ components:
           nullable: true
           type: string
       type: object
+    eureka_GetNLInstructionsResponse:
+      example:
+        nl_instructions_info:
+        - instructions:
+          - instructions
+          - instructions
+          scope: GLOBAL
+        - instructions:
+          - instructions
+          - instructions
+          scope: GLOBAL
+      properties:
+        nl_instructions_info:
+          description: List of NL instructions with their scopes.
+          items:
+            $ref: '#/components/schemas/NLInstructionsInfo'
+          type: array
+      required:
+      - nl_instructions_info
+      type: object
+    NLInstructionsInfo:
+      example:
+        instructions:
+        - instructions
+        - instructions
+        scope: GLOBAL
+      properties:
+        instructions:
+          description: User instructions for natural language processing.
+          items:
+            type: string
+          type: array
+        scope:
+          description: Scope of the instruction.
+          enum:
+          - GLOBAL
+          type: string
+      required:
+      - instructions
+      - scope
+      type: object
     RiseGQLArgWrapper:
       properties:
         name:
@@ -13337,6 +13469,7 @@ components:
           - CONNECTION_PROPERTY
           - TABLE_MAPPING
           - CONNECTION_PROPERTY_PER_PRINCIPAL
+          - FORMULA_VARIABLE
           nullable: true
           type: string
         name_pattern:
@@ -13405,6 +13538,7 @@ components:
           - CONNECTION_PROPERTY
           - TABLE_MAPPING
           - CONNECTION_PROPERTY_PER_PRINCIPAL
+          - FORMULA_VARIABLE
           nullable: true
           type: string
         sensitive:
@@ -14395,6 +14529,21 @@ components:
       - name
       - values
       type: object
+    VariableValues:
+      description: Variable values.
+      properties:
+        name:
+          description: The name of the existing formula variable.
+          type: string
+        values:
+          description: The values to filter on.
+          items:
+            type: object
+          type: array
+      required:
+      - name
+      - values
+      type: object
     TokenAccessScopeObject:
       description: Objects on which the filter rules and parameters values should
         be applied to
@@ -14763,6 +14912,7 @@ components:
             - CAN_ACCESS_ANALYST_STUDIO
             - CAN_MANAGE_ANALYST_STUDIO
             - CAN_MODIFY_FOLDERS
+            - CAN_MANAGE_VARIABLES
             - CAN_VIEW_FOLDERS
             - PREVIEW_DOCUMENT_SEARCH
             - CAN_SETUP_VERSION_CONTROL
@@ -15745,6 +15895,7 @@ components:
             - CAN_ACCESS_ANALYST_STUDIO
             - CAN_MANAGE_ANALYST_STUDIO
             - PREVIEW_DOCUMENT_SEARCH
+            - CAN_MANAGE_VARIABLES
             - CAN_MODIFY_FOLDERS
             - CAN_VIEW_FOLDERS
             - CAN_SETUP_VERSION_CONTROL
@@ -16750,6 +16901,32 @@ components:
       required:
       - success
       type: object
+    NLInstructionsInfoInput:
+      properties:
+        instructions:
+          description: User instructions for natural language processing.
+          items:
+            type: string
+          type: array
+        scope:
+          description: Scope of the instruction (USER or GLOBAL). Defaults to GLOBAL.
+          enum:
+          - GLOBAL
+          type: string
+      required:
+      - instructions
+      - scope
+      type: object
+    eureka_SetNLInstructionsResponse:
+      example:
+        success: true
+      properties:
+        success:
+          description: Success status of the operation.
+          type: boolean
+      required:
+      - success
+      type: object
     VariableUpdateAssignmentInput:
       description: Input for variable value update in batch operations
       properties:
@@ -16767,7 +16944,7 @@ components:
           - ADD
           - REMOVE
           - REPLACE
-          - CLEAR
+          - RESET
           type: string
       required:
       - operation
@@ -17231,6 +17408,15 @@ components:
       required:
       - query
       type: object
+    getNLInstructions_request:
+      properties:
+        data_source_identifier:
+          description: Unique ID or name of the data-model for which to retrieve NL
+            instructions.
+          type: string
+      required:
+      - data_source_identifier
+      type: object
     getRelevantQuestions_request:
       properties:
         metadata_context:
@@ -17339,6 +17525,20 @@ components:
       - message
       - metadata_identifier
       type: object
+    setNLInstructions_request:
+      properties:
+        data_source_identifier:
+          description: Unique ID or name of the data-model for which to set NL instructions.
+          type: string
+        nl_instructions_info:
+          description: List of NL instructions to set for the data-model.
+          items:
+            $ref: '#/components/schemas/NLInstructionsInfoInput'
+          type: array
+      required:
+      - data_source_identifier
+      - nl_instructions_info
+      type: object
     singleAnswer_request:
       properties:
         query:
@@ -17382,7 +17582,7 @@ components:
           type: string
         persist_option:
           description: Indicates whether the specified attributes should be persisted
-            or not.
+            or not. RESET and NONE are not applicable if you are setting variable_values.
           enum:
           - REPLACE
           - APPEND
@@ -17398,6 +17598,13 @@ components:
           description: Parameter values.
           items:
             $ref: '#/components/schemas/ParameterValues'
+          type: array
+        variable_values:
+          description: "List of variable values where `name` references an existing\
+            \ formula variable and `values` is any value from the corresponding column.\
+            \ \n  Version: 10.14.0.cl or later\n"
+          items:
+            $ref: '#/components/schemas/VariableValues'
           type: array
         objects:
           description: Objects on which the filter rules and parameters values should
@@ -17425,7 +17632,8 @@ components:
           description: "   Creates a new user if the specified username does not exist\
             \ in ThoughtSpot. To provision a user just-in-time (JIT), set this attribute\
             \ to true.\n   \n\nNote: For JIT provisioning of a user, the secret_key\
-            \ is required.  \n  Version: 10.5.0.cl or later\n"
+            \ is required. New formula variables won't be created.  \n  Version: 10.5.0.cl\
+            \ or later\n"
           nullable: true
           type: boolean
       required:
@@ -18672,6 +18880,7 @@ components:
             - CAN_ACCESS_ANALYST_STUDIO
             - CAN_MANAGE_ANALYST_STUDIO
             - CAN_MODIFY_FOLDERS
+            - CAN_MANAGE_VARIABLES
             - CAN_VIEW_FOLDERS
             - PREVIEW_DOCUMENT_SEARCH
             - CAN_SETUP_VERSION_CONTROL
@@ -18804,6 +19013,7 @@ components:
             - CAN_MANAGE_ANALYST_STUDIO
             - PREVIEW_DOCUMENT_SEARCH
             - CAN_MODIFY_FOLDERS
+            - CAN_MANAGE_VARIABLES
             - CAN_VIEW_FOLDERS
             - CAN_SETUP_VERSION_CONTROL
             - CAN_MANAGE_WEBHOOKS
@@ -18924,6 +19134,7 @@ components:
             - CAN_ACCESS_ANALYST_STUDIO
             - CAN_MANAGE_ANALYST_STUDIO
             - CAN_MODIFY_FOLDERS
+            - CAN_MANAGE_VARIABLES
             - CAN_VIEW_FOLDERS
             - PREVIEW_DOCUMENT_SEARCH
             - CAN_SETUP_VERSION_CONTROL
@@ -19815,6 +20026,7 @@ components:
             - CAN_ACCESS_ANALYST_STUDIO
             - CAN_MANAGE_ANALYST_STUDIO
             - PREVIEW_DOCUMENT_SEARCH
+            - CAN_MANAGE_VARIABLES
             - CAN_MODIFY_FOLDERS
             - CAN_VIEW_FOLDERS
             - CAN_SETUP_VERSION_CONTROL
@@ -19903,6 +20115,7 @@ components:
             - CAN_MANAGE_ANALYST_STUDIO
             - CAN_VIEW_FOLDERS
             - CAN_MODIDY_FOLDERS
+            - CAN_MANAGE_VARIABLES
             - PREVIEW_DOCUMENT_SEARCH
             - CAN_SETUP_VERSION_CONTROL
             - CAN_MANAGE_WEBHOOKS
@@ -19979,6 +20192,7 @@ components:
             - CAN_ACCESS_ANALYST_STUDIO
             - CAN_MANAGE_ANALYST_STUDIO
             - CAN_MODIFY_FOLDERS
+            - CAN_MANAGE_VARIABLES
             - CAN_VIEW_FOLDERS
             - PREVIEW_DOCUMENT_SEARCH
             - PREVIEW_THOUGHTSPOT_SAGE
@@ -22031,6 +22245,7 @@ components:
             - CAN_MANAGE_ANALYST_STUDIO
             - PREVIEW_DOCUMENT_SEARCH
             - CAN_MODIFY_FOLDERS
+            - CAN_MANAGE_VARIABLES
             - CAN_VIEW_FOLDERS
             - CAN_SETUP_VERSION_CONTROL
             - CAN_MANAGE_WEBHOOKS
@@ -22238,6 +22453,7 @@ components:
           - CONNECTION_PROPERTY
           - TABLE_MAPPING
           - CONNECTION_PROPERTY_PER_PRINCIPAL
+          - FORMULA_VARIABLE
           type: string
         name:
           description: Name of the variable. This is unique across the cluster.
@@ -22284,11 +22500,11 @@ components:
           description: The number of records that should be included
           format: int32
           type: integer
-        output_format:
-          default: METADATA_ONLY
+        response_content:
+          default: METADATA
           description: Format in which we want the output
           enum:
-          - METADATA_ONLY
+          - METADATA
           - METADATA_AND_VALUES
           type: string
       type: object
@@ -22667,6 +22883,11 @@ x-roles:
   tags:
   - 10.4.0.cl
   description: Roles for version 10.4.0.cl
+- name: 10.15.0.cl
+  id: 10.15.0.cl
+  tags:
+  - 10.15.0.cl
+  description: Roles for version 10.15.0.cl
 - name: 10.7.0.cl
   id: 10.7.0.cl
   tags:
