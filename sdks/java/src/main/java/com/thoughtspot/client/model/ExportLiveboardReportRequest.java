@@ -68,7 +68,9 @@ public class ExportLiveboardReportRequest implements Serializable {
     public enum FileFormatEnum {
         PDF("PDF"),
 
-        PNG("PNG");
+        PNG("PNG"),
+
+        CSV("CSV");
 
         private String value;
 
