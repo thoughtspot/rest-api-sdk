@@ -5631,17 +5631,17 @@ paths:
   /api/rest/2.0/report/liveboard:
     post:
       description: "\n Version: 9.0.0.cl or later\n\n\nExports a Liveboard and its\
-        \ visualizations in PDF or PNG file format.\n\nRequires at least view access\
-        \ to the Liveboard.\n\n#### Usage guidelines\n\nIn the request body, specify\
-        \ the GUID or name of the Liveboard. To generate a Liveboard report with specific\
-        \ visualizations, add GUIDs or names of the visualizations.\n\nThe default\
-        \ `file_format` is PDF. For PDF downloads, you can specify additional parameters\
-        \ to customize the page orientation and include or exclude the cover page,\
-        \ logo, footer text, and page numbers. Similar customization options are also\
-        \ available for PNG output.\n\n**NOTE**: The downloadable file returned in\
-        \ API response file is extensionless. Please rename the downloaded file by\
-        \ typing in the relevant extension.\n\nOptionally, you can define [runtime\
-        \ overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)\
+        \ visualizations in PDF, PNG, or CSV file format.\n\nRequires at least view\
+        \ access to the Liveboard.\n\n#### Usage guidelines\n\nIn the request body,\
+        \ specify the GUID or name of the Liveboard. To generate a Liveboard report\
+        \ with specific visualizations, add GUIDs or names of the visualizations.\n\
+        \nThe default `file_format` is CSV. For PDF exports, you can specify additional\
+        \ parameters to customize the page orientation and include or exclude the\
+        \ cover page, logo, footer text, and page numbers. Similar customization options\
+        \ are available for PNG exports. CSV exports do not support customization\
+        \ options.\n\n**NOTE**: The downloadable file returned in API response file\
+        \ is extensionless. Please rename the downloaded file by typing in the relevant\
+        \ extension.\n\nOptionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)\
         \ to apply to the Answer data.\n\nTo include unsaved changes in the report,\
         \ pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard`\
         \ method in the Visual Embed SDK. Upon successful execution, the API returns\
@@ -5651,7 +5651,12 @@ paths:
         \ can be exported in the PNG format in the resolution of your choice. To enable\
         \ this on your instance, contact ThoughtSpot support. When this feature is\
         \ enabled, the options `include_cover_page`,`include_filter_page` within the\
-        \ `png_options` will not be available for PNG exports.\n\n\n\n\n"
+        \ `png_options` will not be available for PNG exports.\n\n**NOTE**: Starting\
+        \ with the ThoughtSpot Cloud 26.2.0.cl release, Liveboards can be exported\
+        \ in CSV format. All visualizations in the Liveboard can be exported as individual\
+        \ CSV files. If multiple visualizations are selected or if the entire Liveboard\
+        \ is exported, the output is returned as a .zip file containing the CSV files\
+        \ for each visualization.\n\n\n\n\n\n"
       operationId: exportLiveboardReport
       parameters: []
       requestBody:
