@@ -2055,7 +2055,7 @@
     "/api/rest/2.0/connection-configurations/create": {
       "post": {
         "operationId": "createConnectionConfiguration",
-        "description": "\n <span class=\"since-beta-tag\">Version: 10.12.0.cl or later</span>\n\nCreates an additional configuration to an existing connection to a data warehouse.  \n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.\n\n#### Usage guidelines\n\n * A JSON map of configuration attributes in `configuration`. The following example shows the configuration attributes:\n  ```\n   {\n     \"user\":\"DEV_USER\",\n     \"password\":\"TestConn123\",\n     \"role\":\"DEV\",\n     \"warehouse\":\"DEV_WH\"\n    }\n  ```\n\n* If the `policy_type` is `PRINCIPALS`, then `policy_principals` is a required field.\n* If the `policy_type` is `PROCESSES`, then `policy_processes` is a required field.\n* If the `policy_type` is `NO_POLICY`, then `policy_principals` and `policy_processes` are not required fields.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.12.0.cl or later</span>\n\nCreates an additional configuration to an existing connection to a data warehouse.  \n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.\n\n#### Usage guidelines\n\n * A JSON map of configuration attributes in `configuration`. The following example shows the configuration attributes:\n  ```\n   {\n     \"user\":\"DEV_USER\",\n     \"password\":\"TestConn123\",\n     \"role\":\"DEV\",\n     \"warehouse\":\"DEV_WH\"\n    }\n  ```\n\n* If the `policy_type` is `PRINCIPALS`, then `policy_principals` is a required field.\n* If the `policy_type` is `PROCESSES`, then `policy_processes` is a required field.\n* If the `policy_type` is `NO_POLICY`, then `policy_principals` and `policy_processes` are not required fields.\n\n#### Parameterized Connection Support\nFor parameterized connections that use OAuth authentication, only the same_as_parent and policy_process_options  attributes are allowed in the API request. These attributes are not applicable to connections that are not parameterized.\n\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Connection Configurations",
           "10.12.0.cl"
@@ -2077,6 +2077,20 @@
                   "connection_identifier": {
                     "description": "Unique ID or name of the connection.",
                     "type": "string"
+                  },
+                  "same_as_parent": {
+                    "description": "Specifies whether the connection configuration should inherit all properties and authentication\ntype from its parent connection. This attribute is only applicable to parameterized connections.\nWhen set to true, the configuration uses only the connection properties and authentication type\ninherited from the parent. <br/>  <span class=\"since-beta-tag\">Version: 26.2.0.cl or later</span>",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "policy_process_options": {
+                    "description": "This attribute is only applicable to parameterized connections. Ensure that the policy is\nset to Processes to allow the configuration to be used exclusively for system processes. <br/>  <span class=\"since-beta-tag\">Version: 26.2.0.cl or later</span>",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/PolicyProcessOptionsInput"
+                      }
+                    ]
                   },
                   "authentication_type": {
                     "description": "Type of authentication used for the connection.",
@@ -2271,7 +2285,7 @@
     "/api/rest/2.0/connection-configurations/{configuration_identifier}/update": {
       "post": {
         "operationId": "updateConnectionConfiguration",
-        "description": "\n <span class=\"since-beta-tag\">Version: 10.12.0.cl or later</span>\n\nUpdates a connection configuration object.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.\n\n#### Supported operations\nThis API endpoint lets you perform the following operations in a single API request:\n\n * Edit the name or description of the configuration\n * Edit the configuration properties\n * Edit the `policy_type`\n * Edit the type of authentication\n * Enable or disable a configuration\n\n **NOTE**: When updating a configuration where `disabled` is `true`, you must reset `disabled` to `true` in your update request payload. If not explicitly set again, the API will default `disabled` to `false`.\n \n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.12.0.cl or later</span>\n\nUpdates a connection configuration object.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.\n\n#### Supported operations\nThis API endpoint lets you perform the following operations in a single API request:\n\n * Edit the name or description of the configuration\n * Edit the configuration properties\n * Edit the `policy_type`\n * Edit the type of authentication\n * Enable or disable a configuration\n\n#### Parameterized Connection Support\nFor parameterized oauth based connections, only the `same_as_parent` and `policy_process_options` attributes are allowed. These attributes are not applicable to connections that are not parameterized.\n\n **NOTE**: When updating a configuration where `disabled` is `true`, you must reset `disabled` to `true` in your update request payload. If not explicitly set again, the API will default `disabled` to `false`.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Connection Configurations",
           "10.12.0.cl"
@@ -2293,6 +2307,20 @@
                   "description": {
                     "description": "Description of the configuration.",
                     "type": "string"
+                  },
+                  "same_as_parent": {
+                    "description": "Specifies whether the connection configuration should inherit all properties and authentication\ntype from its parent connection. This attribute is only applicable to parameterized connections.\nWhen set to true, the configuration uses only the connection properties and authentication type\ninherited from the parent. <br/>  <span class=\"since-beta-tag\">Version: 26.2.0.cl or later</span>",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "policy_process_options": {
+                    "description": "This attribute is only applicable to parameterized connections. Ensure that the policy is\nset to Processes to allow the configuration to be used exclusively for system processes. <br/>  <span class=\"since-beta-tag\">Version: 26.2.0.cl or later</span>",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/PolicyProcessOptionsInput"
+                      }
+                    ]
                   },
                   "authentication_type": {
                     "description": "Type of authentication.",
@@ -20125,6 +20153,14 @@
               "PROCESSES"
             ],
             "nullable": true
+          },
+          "same_as_parent": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "policy_process_options": {
+            "$ref": "#/components/schemas/PolicyProcessOptions",
+            "nullable": true
           }
         }
       },
@@ -20140,6 +20176,15 @@
             "nullable": true
           },
           "type": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "PolicyProcessOptions": {
+        "type": "object",
+        "properties": {
+          "impersonate_user": {
             "type": "string",
             "nullable": true
           }
@@ -23828,6 +23873,15 @@
           "table_name": {
             "type": "string",
             "description": "Name of the table. Table names may be case-sensitive depending on the database system."
+          }
+        }
+      },
+      "PolicyProcessOptionsInput": {
+        "type": "object",
+        "properties": {
+          "impersonate_user": {
+            "type": "string",
+            "nullable": true
           }
         }
       },

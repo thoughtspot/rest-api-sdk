@@ -387,7 +387,10 @@ public class ConnectionConfigurationsApi {
      * required field. * If the &#x60;policy_type&#x60; is &#x60;PROCESSES&#x60;, then
      * &#x60;policy_processes&#x60; is a required field. * If the &#x60;policy_type&#x60; is
      * &#x60;NO_POLICY&#x60;, then &#x60;policy_principals&#x60; and &#x60;policy_processes&#x60;
-     * are not required fields.
+     * are not required fields. #### Parameterized Connection Support For parameterized connections
+     * that use OAuth authentication, only the same_as_parent and policy_process_options attributes
+     * are allowed in the API request. These attributes are not applicable to connections that are
+     * not parameterized.
      *
      * @param createConnectionConfigurationRequest (required)
      * @return ConnectionConfigurationResponse
@@ -427,7 +430,10 @@ public class ConnectionConfigurationsApi {
      * required field. * If the &#x60;policy_type&#x60; is &#x60;PROCESSES&#x60;, then
      * &#x60;policy_processes&#x60; is a required field. * If the &#x60;policy_type&#x60; is
      * &#x60;NO_POLICY&#x60;, then &#x60;policy_principals&#x60; and &#x60;policy_processes&#x60;
-     * are not required fields.
+     * are not required fields. #### Parameterized Connection Support For parameterized connections
+     * that use OAuth authentication, only the same_as_parent and policy_process_options attributes
+     * are allowed in the API request. These attributes are not applicable to connections that are
+     * not parameterized.
      *
      * @param createConnectionConfigurationRequest (required)
      * @return ApiResponse&lt;ConnectionConfigurationResponse&gt;
@@ -469,7 +475,10 @@ public class ConnectionConfigurationsApi {
      * required field. * If the &#x60;policy_type&#x60; is &#x60;PROCESSES&#x60;, then
      * &#x60;policy_processes&#x60; is a required field. * If the &#x60;policy_type&#x60; is
      * &#x60;NO_POLICY&#x60;, then &#x60;policy_principals&#x60; and &#x60;policy_processes&#x60;
-     * are not required fields.
+     * are not required fields. #### Parameterized Connection Support For parameterized connections
+     * that use OAuth authentication, only the same_as_parent and policy_process_options attributes
+     * are allowed in the API request. These attributes are not applicable to connections that are
+     * not parameterized.
      *
      * @param createConnectionConfigurationRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -796,8 +805,11 @@ public class ConnectionConfigurationsApi {
      * Connections**) privilege is required. #### Supported operations This API endpoint lets you
      * perform the following operations in a single API request: * Edit the name or description of
      * the configuration * Edit the configuration properties * Edit the &#x60;policy_type&#x60; *
-     * Edit the type of authentication * Enable or disable a configuration **NOTE**: When updating a
-     * configuration where &#x60;disabled&#x60; is &#x60;true&#x60;, you must reset
+     * Edit the type of authentication * Enable or disable a configuration #### Parameterized
+     * Connection Support For parameterized oauth based connections, only the
+     * &#x60;same_as_parent&#x60; and &#x60;policy_process_options&#x60; attributes are allowed.
+     * These attributes are not applicable to connections that are not parameterized. **NOTE**: When
+     * updating a configuration where &#x60;disabled&#x60; is &#x60;true&#x60;, you must reset
      * &#x60;disabled&#x60; to &#x60;true&#x60; in your update request payload. If not explicitly
      * set again, the API will default &#x60;disabled&#x60; to &#x60;false&#x60;.
      *
@@ -833,8 +845,11 @@ public class ConnectionConfigurationsApi {
      * Connections**) privilege is required. #### Supported operations This API endpoint lets you
      * perform the following operations in a single API request: * Edit the name or description of
      * the configuration * Edit the configuration properties * Edit the &#x60;policy_type&#x60; *
-     * Edit the type of authentication * Enable or disable a configuration **NOTE**: When updating a
-     * configuration where &#x60;disabled&#x60; is &#x60;true&#x60;, you must reset
+     * Edit the type of authentication * Enable or disable a configuration #### Parameterized
+     * Connection Support For parameterized oauth based connections, only the
+     * &#x60;same_as_parent&#x60; and &#x60;policy_process_options&#x60; attributes are allowed.
+     * These attributes are not applicable to connections that are not parameterized. **NOTE**: When
+     * updating a configuration where &#x60;disabled&#x60; is &#x60;true&#x60;, you must reset
      * &#x60;disabled&#x60; to &#x60;true&#x60; in your update request payload. If not explicitly
      * set again, the API will default &#x60;disabled&#x60; to &#x60;false&#x60;.
      *
@@ -873,8 +888,11 @@ public class ConnectionConfigurationsApi {
      * Connections**) privilege is required. #### Supported operations This API endpoint lets you
      * perform the following operations in a single API request: * Edit the name or description of
      * the configuration * Edit the configuration properties * Edit the &#x60;policy_type&#x60; *
-     * Edit the type of authentication * Enable or disable a configuration **NOTE**: When updating a
-     * configuration where &#x60;disabled&#x60; is &#x60;true&#x60;, you must reset
+     * Edit the type of authentication * Enable or disable a configuration #### Parameterized
+     * Connection Support For parameterized oauth based connections, only the
+     * &#x60;same_as_parent&#x60; and &#x60;policy_process_options&#x60; attributes are allowed.
+     * These attributes are not applicable to connections that are not parameterized. **NOTE**: When
+     * updating a configuration where &#x60;disabled&#x60; is &#x60;true&#x60;, you must reset
      * &#x60;disabled&#x60; to &#x60;true&#x60; in your update request payload. If not explicitly
      * set again, the API will default &#x60;disabled&#x60; to &#x60;false&#x60;.
      *

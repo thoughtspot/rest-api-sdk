@@ -1132,7 +1132,10 @@ paths:
         \ `PRINCIPALS`, then `policy_principals` is a required field.\n* If the `policy_type`\
         \ is `PROCESSES`, then `policy_processes` is a required field.\n* If the `policy_type`\
         \ is `NO_POLICY`, then `policy_principals` and `policy_processes` are not\
-        \ required fields.\n\n\n\n\n\n"
+        \ required fields.\n\n#### Parameterized Connection Support\nFor parameterized\
+        \ connections that use OAuth authentication, only the same_as_parent and policy_process_options\
+        \  attributes are allowed in the API request. These attributes are not applicable\
+        \ to connections that are not parameterized.\n\n\n\n\n\n\n"
       operationId: createConnectionConfiguration
       parameters: []
       requestBody:
@@ -1238,19 +1241,35 @@ paths:
       - application/json
   /api/rest/2.0/connection-configurations/{configuration_identifier}/update:
     post:
-      description: "\n Version: 10.12.0.cl or later\n\n\nUpdates a connection configuration\
-        \ object.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions\
-        \ to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**)\
-        \ privilege.\n\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
-        \ is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can\
-        \ create/edit Connections**) privilege is required.\n\n#### Supported operations\n\
-        This API endpoint lets you perform the following operations in a single API\
-        \ request:\n\n * Edit the name or description of the configuration\n * Edit\
-        \ the configuration properties\n * Edit the `policy_type`\n * Edit the type\
-        \ of authentication\n * Enable or disable a configuration\n\n **NOTE**: When\
-        \ updating a configuration where `disabled` is `true`, you must reset `disabled`\
-        \ to `true` in your update request payload. If not explicitly set again, the\
-        \ API will default `disabled` to `false`.\n \n\n\n\n\n"
+      description: |2+
+
+         Version: 10.12.0.cl or later
+
+
+        Updates a connection configuration object.
+
+        Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.
+
+        #### Supported operations
+        This API endpoint lets you perform the following operations in a single API request:
+
+         * Edit the name or description of the configuration
+         * Edit the configuration properties
+         * Edit the `policy_type`
+         * Edit the type of authentication
+         * Enable or disable a configuration
+
+        #### Parameterized Connection Support
+        For parameterized oauth based connections, only the `same_as_parent` and `policy_process_options` attributes are allowed. These attributes are not applicable to connections that are not parameterized.
+
+         **NOTE**: When updating a configuration where `disabled` is `true`, you must reset `disabled` to `true` in your update request payload. If not explicitly set again, the API will default `disabled` to `false`.
+
+
+
+
+
       operationId: updateConnectionConfiguration
       parameters:
       - description: Unique ID or name of the configuration.
@@ -13362,9 +13381,12 @@ components:
     ConnectionConfigurationResponse:
       example:
         policy_type: NO_POLICY
+        policy_process_options:
+          impersonate_user: impersonate_user
         configuration_identifier: configuration_identifier
         configuration: "{}"
         name: name
+        same_as_parent: true
         description: description
         disabled: true
         policy_principals:
@@ -13451,6 +13473,11 @@ components:
           - PROCESSES
           nullable: true
           type: string
+        same_as_parent:
+          nullable: true
+          type: boolean
+        policy_process_options:
+          $ref: '#/components/schemas/PolicyProcessOptions'
       type: object
     UserPrincipal:
       example:
@@ -13465,6 +13492,14 @@ components:
           nullable: true
           type: string
         type:
+          nullable: true
+          type: string
+      type: object
+    PolicyProcessOptions:
+      example:
+        impersonate_user: impersonate_user
+      properties:
+        impersonate_user:
           nullable: true
           type: string
       type: object
@@ -16850,6 +16885,12 @@ components:
       - connection_identifier
       - table_name
       type: object
+    PolicyProcessOptionsInput:
+      properties:
+        impersonate_user:
+          nullable: true
+          type: string
+      type: object
     WebhookAuthenticationInput:
       properties:
         API_KEY:
@@ -17493,6 +17534,23 @@ components:
         connection_identifier:
           description: Unique ID or name of the connection.
           type: string
+        same_as_parent:
+          default: false
+          description: "Specifies whether the connection configuration should inherit\
+            \ all properties and authentication\ntype from its parent connection.\
+            \ This attribute is only applicable to parameterized connections.\nWhen\
+            \ set to true, the configuration uses only the connection properties and\
+            \ authentication type\ninherited from the parent. \n  Version: 26.2.0.cl\
+            \ or later\n"
+          nullable: true
+          type: boolean
+        policy_process_options:
+          allOf:
+          - $ref: '#/components/schemas/PolicyProcessOptionsInput'
+          description: "This attribute is only applicable to parameterized connections.\
+            \ Ensure that the policy is\nset to Processes to allow the configuration\
+            \ to be used exclusively for system processes. \n  Version: 26.2.0.cl\
+            \ or later\n"
         authentication_type:
           default: SERVICE_ACCOUNT
           description: Type of authentication used for the connection.
@@ -17556,6 +17614,23 @@ components:
         description:
           description: Description of the configuration.
           type: string
+        same_as_parent:
+          default: false
+          description: "Specifies whether the connection configuration should inherit\
+            \ all properties and authentication\ntype from its parent connection.\
+            \ This attribute is only applicable to parameterized connections.\nWhen\
+            \ set to true, the configuration uses only the connection properties and\
+            \ authentication type\ninherited from the parent. \n  Version: 26.2.0.cl\
+            \ or later\n"
+          nullable: true
+          type: boolean
+        policy_process_options:
+          allOf:
+          - $ref: '#/components/schemas/PolicyProcessOptionsInput'
+          description: "This attribute is only applicable to parameterized connections.\
+            \ Ensure that the policy is\nset to Processes to allow the configuration\
+            \ to be used exclusively for system processes. \n  Version: 26.2.0.cl\
+            \ or later\n"
         authentication_type:
           description: Type of authentication.
           enum:
