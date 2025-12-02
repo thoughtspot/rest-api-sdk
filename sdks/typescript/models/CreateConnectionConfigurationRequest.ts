@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { CreateConnectionConfigurationRequestPolicyProcessOptions } from '../models/CreateConnectionConfigurationRequestPolicyProcessOptions';
 import { HttpFile } from '../http/http';
 
 export class CreateConnectionConfigurationRequest {
@@ -26,11 +25,6 @@ export class CreateConnectionConfigurationRequest {
     * Unique ID or name of the connection.
     */
     'connection_identifier': string;
-    /**
-    * Specifies whether the connection configuration should inherit all properties and authentication type from its parent connection. This attribute is only applicable to parameterized connections. When set to true, the configuration uses only the connection properties and authentication type inherited from the parent.    Version: 26.2.0.cl or later 
-    */
-    'same_as_parent'?: boolean | null;
-    'policy_process_options'?: CreateConnectionConfigurationRequestPolicyProcessOptions;
     /**
     * Type of authentication used for the connection.
     */
@@ -71,18 +65,6 @@ export class CreateConnectionConfigurationRequest {
             "name": "connection_identifier",
             "baseName": "connection_identifier",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "same_as_parent",
-            "baseName": "same_as_parent",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "policy_process_options",
-            "baseName": "policy_process_options",
-            "type": "CreateConnectionConfigurationRequestPolicyProcessOptions",
             "format": ""
         },
         {
