@@ -247,6 +247,7 @@ export * from '../models/ResponseWorksheetToModelConversion';
 export * from '../models/RevertCommitRequest';
 export * from '../models/RevertResponse';
 export * from '../models/RevertedMetadata';
+export * from '../models/RevokeRefreshTokensResponse';
 export * from '../models/RevokeTokenRequest';
 export * from '../models/RiseGQLArgWrapper';
 export * from '../models/RiseSetter';
@@ -632,6 +633,7 @@ import { ResponseWorksheetToModelConversion } from '../models/ResponseWorksheetT
 import { RevertCommitRequest  , RevertCommitRequestRevertPolicyEnum   } from '../models/RevertCommitRequest';
 import { RevertResponse } from '../models/RevertResponse';
 import { RevertedMetadata } from '../models/RevertedMetadata';
+import { RevokeRefreshTokensResponse } from '../models/RevokeRefreshTokensResponse';
 import { RevokeTokenRequest } from '../models/RevokeTokenRequest';
 import { RiseGQLArgWrapper } from '../models/RiseGQLArgWrapper';
 import { RiseSetter } from '../models/RiseSetter';
@@ -1257,6 +1259,7 @@ let typeMap: {[index: string]: any} = {
     "RevertCommitRequest": RevertCommitRequest,
     "RevertResponse": RevertResponse,
     "RevertedMetadata": RevertedMetadata,
+    "RevokeRefreshTokensResponse": RevokeRefreshTokensResponse,
     "RevokeTokenRequest": RevokeTokenRequest,
     "RiseGQLArgWrapper": RiseGQLArgWrapper,
     "RiseSetter": RiseSetter,

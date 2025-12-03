@@ -9140,6 +9140,25 @@ _RevertedMetadata.attributeTypeMap = [
 ];
 var RevertedMetadata = _RevertedMetadata;
 
+// models/RevokeRefreshTokensResponse.ts
+var _RevokeRefreshTokensResponse = class _RevokeRefreshTokensResponse {
+  static getAttributeTypeMap() {
+    return _RevokeRefreshTokensResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_RevokeRefreshTokensResponse.discriminator = void 0;
+_RevokeRefreshTokensResponse.attributeTypeMap = [
+  {
+    "name": "data",
+    "baseName": "data",
+    "type": "string",
+    "format": ""
+  }
+];
+var RevokeRefreshTokensResponse = _RevokeRefreshTokensResponse;
+
 // models/RevokeTokenRequest.ts
 var _RevokeTokenRequest = class _RevokeTokenRequest {
   static getAttributeTypeMap() {
@@ -15683,6 +15702,7 @@ var typeMap = {
   "RevertCommitRequest": RevertCommitRequest,
   "RevertResponse": RevertResponse,
   "RevertedMetadata": RevertedMetadata,
+  "RevokeRefreshTokensResponse": RevokeRefreshTokensResponse,
   "RevokeTokenRequest": RevokeTokenRequest,
   "RiseGQLArgWrapper": RiseGQLArgWrapper,
   "RiseSetter": RiseSetter,
@@ -49363,6 +49383,7 @@ export {
   RevertCommitRequest,
   RevertResponse,
   RevertedMetadata,
+  RevokeRefreshTokensResponse,
   RevokeTokenRequest,
   RiseGQLArgWrapper,
   RiseSetter,

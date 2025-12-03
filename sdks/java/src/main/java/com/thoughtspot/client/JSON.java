@@ -635,6 +635,9 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.RevertedMetadata.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.RevokeRefreshTokensResponse
+                        .CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.RevokeTokenRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.RiseGQLArgWrapper.CustomTypeAdapterFactory());

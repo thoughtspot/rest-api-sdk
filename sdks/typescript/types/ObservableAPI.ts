@@ -251,6 +251,7 @@ import { ResponseWorksheetToModelConversion } from '../models/ResponseWorksheetT
 import { RevertCommitRequest } from '../models/RevertCommitRequest';
 import { RevertResponse } from '../models/RevertResponse';
 import { RevertedMetadata } from '../models/RevertedMetadata';
+import { RevokeRefreshTokensResponse } from '../models/RevokeRefreshTokensResponse';
 import { RevokeTokenRequest } from '../models/RevokeTokenRequest';
 import { RiseGQLArgWrapper } from '../models/RiseGQLArgWrapper';
 import { RiseSetter } from '../models/RiseSetter';

@@ -15537,6 +15537,15 @@ components:
           nullable: true
           type: boolean
       type: object
+    RevokeRefreshTokensResponse:
+      properties:
+        data:
+          description: Result message describing the outcome of the refresh token
+            revocation operation.
+          type: string
+      required:
+      - data
+      type: object
     RoleResponse:
       example:
         privileges:
@@ -22664,6 +22673,11 @@ x-roles:
   tags:
   - 9.9.0.cl
   description: Roles for version 9.9.0.cl
+- name: 26.2.0.cl
+  id: 26.2.0.cl
+  tags:
+  - 26.2.0.cl
+  description: Roles for version 26.2.0.cl
 - name: 9.6.0.cl
   id: 9.6.0.cl
   tags:
