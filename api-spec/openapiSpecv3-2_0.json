@@ -86,6 +86,14 @@
       "description": "Roles for version 9.9.0.cl"
     },
     {
+      "name": "26.2.0.cl",
+      "id": "26.2.0.cl",
+      "tags": [
+        "26.2.0.cl"
+      ],
+      "description": "Roles for version 26.2.0.cl"
+    },
+    {
       "name": "9.6.0.cl",
       "id": "9.6.0.cl",
       "tags": [
@@ -2841,6 +2849,132 @@
           },
           "403": {
             "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/connections/{connection_identifier}/revoke-refresh-tokens": {
+      "post": {
+        "operationId": "revokeRefreshTokens",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.2.0.cl or later</span>\n\nRevokes OAuth refresh tokens for users who no longer require access to a data warehouse connection.\nWhen a token is revoked, the affected user's session for that connection is terminated, and they must re-authenticate to regain access.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DATAMANAGEMENT` (**Can manage data**) privileges.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on the ThoughtSpot instance, users with `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege can also make API requests to revoke tokens for connection users.\n\n#### Usage guidelines\n\nYou can specify different combinations of identifiers to control which refresh tokens are revoked.\n\n- **connection_identifier**: Revokes refresh tokens for all users of the connection, except the connection author.\n- **connection_identifier** and **user_identifiers**: Revokes refresh tokens only for the users specified in the request. If the name or ID of the connection author is included in the request, their token will also be revoked.\n- **connection_identifier** and **configuration_identifiers**: Revokes refresh tokens for all users on the specified configurations, except the configuration author.\n- **connection_identifier**, **configuration_identifiers**, and **user_identifiers**: Revokes refresh tokens for the specified users on the specified configurations.\n- **connection_identifier** and **org_identifiers**: Revokes refresh tokens for the specified Orgs. Applicable only for published connections.\n- **connection_identifier**, **org_identifiers**, and **user_identifiers**: Revokes refresh tokens for the specified users in the specified Orgs. Applicable only for published connections.\n\n**NOTE**: The `org_identifiers` parameter is only applicable for published connections. Using this parameter for unpublished connections will result in an error. Ensure that the connections are published before making the API request.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Connections",
+          "26.2.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "configuration_identifiers": {
+                    "description": "Unique ID or name of the configuration. When provided, the refresh tokens of the users associated with the connection configuration will be revoked.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "user_identifiers": {
+                    "description": "Unique ID or name of the users. When provided, the refresh tokens of the specified users will be revoked. If the request includes the user ID or name of the connection author, their token will also be revoked.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "org_identifiers": {
+                    "description": "Unique ID or name of the Org. When provided, the refresh tokens of all users associated with the published connection in the Org will be revoked. This parameter is valid only for published connections. Using it with unpublished connections will result in an error.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "connection_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the connection whose refresh tokens need to be revoked. All the users associated with the connection will have their refresh tokens revoked except the author."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Token(s) successfully revoked.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevokeRefreshTokensResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Object not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
             "content": {
               "application/json": {
                 "schema": {
@@ -22323,6 +22457,18 @@
             "type": "boolean",
             "description": "Status of the connection diff.",
             "nullable": true
+          }
+        }
+      },
+      "RevokeRefreshTokensResponse": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "type": "string",
+            "description": "Result message describing the outcome of the refresh token revocation operation."
           }
         }
       },
