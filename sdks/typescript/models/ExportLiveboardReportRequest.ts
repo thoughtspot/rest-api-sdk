@@ -151,5 +151,5 @@ export class ExportLiveboardReportRequest {
 }
 
 
-export type ExportLiveboardReportRequestFileFormatEnum = "PDF" | "PNG" | "CSV" | "XLSX" ;
+export type ExportLiveboardReportRequestFileFormatEnum = "PDF" | "PNG" | "CSV" ;
 

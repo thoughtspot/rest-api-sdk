@@ -69,16 +69,4 @@ public class ConnectionConfigurationResponseTest {
     public void policyTypeTest() {
         // TODO: test policyType
     }
-
-    /** Test the property 'sameAsParent' */
-    @Test
-    public void sameAsParentTest() {
-        // TODO: test sameAsParent
-    }
-
-    /** Test the property 'policyProcessOptions' */
-    @Test
-    public void policyProcessOptionsTest() {
-        // TODO: test policyProcessOptions
-    }
 }

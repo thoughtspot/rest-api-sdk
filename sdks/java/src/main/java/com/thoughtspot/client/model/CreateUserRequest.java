@@ -349,7 +349,9 @@ public class CreateUserRequest implements Serializable {
 
         KO_KR("ko-KR"),
 
-        EN_DE("en-DE");
+        EN_DE("en-DE"),
+
+        USE_BROWSER_LANGUAGE("USE_BROWSER_LANGUAGE");
 
         private String value;
 

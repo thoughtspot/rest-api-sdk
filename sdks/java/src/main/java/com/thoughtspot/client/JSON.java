@@ -561,11 +561,6 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.PngOptionsInput.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.PolicyProcessOptions.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.PolicyProcessOptionsInput
-                        .CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.PrincipalsInput.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.PrincipalsListItem.CustomTypeAdapterFactory());
@@ -634,9 +629,6 @@ public class JSON {
                 new com.thoughtspot.client.model.RevertResponse.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.RevertedMetadata.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.RevokeRefreshTokensResponse
-                        .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.RevokeTokenRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(

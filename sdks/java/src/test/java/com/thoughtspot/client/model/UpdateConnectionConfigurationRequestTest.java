@@ -35,18 +35,6 @@ public class UpdateConnectionConfigurationRequestTest {
         // TODO: test description
     }
 
-    /** Test the property 'sameAsParent' */
-    @Test
-    public void sameAsParentTest() {
-        // TODO: test sameAsParent
-    }
-
-    /** Test the property 'policyProcessOptions' */
-    @Test
-    public void policyProcessOptionsTest() {
-        // TODO: test policyProcessOptions
-    }
-
     /** Test the property 'authenticationType' */
     @Test
     public void authenticationTypeTest() {

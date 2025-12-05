@@ -51,18 +51,6 @@ public class UpdateConnectionConfigurationRequest implements Serializable {
     @javax.annotation.Nullable
     private String description;
 
-    public static final String SERIALIZED_NAME_SAME_AS_PARENT = "same_as_parent";
-
-    @SerializedName(SERIALIZED_NAME_SAME_AS_PARENT)
-    @javax.annotation.Nullable
-    private Boolean sameAsParent = false;
-
-    public static final String SERIALIZED_NAME_POLICY_PROCESS_OPTIONS = "policy_process_options";
-
-    @SerializedName(SERIALIZED_NAME_POLICY_PROCESS_OPTIONS)
-    @javax.annotation.Nullable
-    private PolicyProcessOptionsInput policyProcessOptions;
-
     /** Type of authentication. */
     @JsonAdapter(AuthenticationTypeEnum.Adapter.class)
     public enum AuthenticationTypeEnum {
@@ -329,52 +317,6 @@ public class UpdateConnectionConfigurationRequest implements Serializable {
         this.description = description;
     }
 
-    public UpdateConnectionConfigurationRequest sameAsParent(
-            @javax.annotation.Nullable Boolean sameAsParent) {
-        this.sameAsParent = sameAsParent;
-        return this;
-    }
-
-    /**
-     * Specifies whether the connection configuration should inherit all properties and
-     * authentication type from its parent connection. This attribute is only applicable to
-     * parameterized connections. When set to true, the configuration uses only the connection
-     * properties and authentication type inherited from the parent. Version: 26.2.0.cl or later
-     *
-     * @return sameAsParent
-     */
-    @javax.annotation.Nullable
-    public Boolean getSameAsParent() {
-        return sameAsParent;
-    }
-
-    public void setSameAsParent(@javax.annotation.Nullable Boolean sameAsParent) {
-        this.sameAsParent = sameAsParent;
-    }
-
-    public UpdateConnectionConfigurationRequest policyProcessOptions(
-            @javax.annotation.Nullable PolicyProcessOptionsInput policyProcessOptions) {
-        this.policyProcessOptions = policyProcessOptions;
-        return this;
-    }
-
-    /**
-     * This attribute is only applicable to parameterized connections. Ensure that the policy is set
-     * to Processes to allow the configuration to be used exclusively for system processes. Version:
-     * 26.2.0.cl or later
-     *
-     * @return policyProcessOptions
-     */
-    @javax.annotation.Nullable
-    public PolicyProcessOptionsInput getPolicyProcessOptions() {
-        return policyProcessOptions;
-    }
-
-    public void setPolicyProcessOptions(
-            @javax.annotation.Nullable PolicyProcessOptionsInput policyProcessOptions) {
-        this.policyProcessOptions = policyProcessOptions;
-    }
-
     public UpdateConnectionConfigurationRequest authenticationType(
             @javax.annotation.Nullable AuthenticationTypeEnum authenticationType) {
         this.authenticationType = authenticationType;
@@ -533,11 +475,6 @@ public class UpdateConnectionConfigurationRequest implements Serializable {
                 && Objects.equals(
                         this.description, updateConnectionConfigurationRequest.description)
                 && Objects.equals(
-                        this.sameAsParent, updateConnectionConfigurationRequest.sameAsParent)
-                && Objects.equals(
-                        this.policyProcessOptions,
-                        updateConnectionConfigurationRequest.policyProcessOptions)
-                && Objects.equals(
                         this.authenticationType,
                         updateConnectionConfigurationRequest.authenticationType)
                 && Objects.equals(
@@ -566,8 +503,6 @@ public class UpdateConnectionConfigurationRequest implements Serializable {
                 connectionIdentifier,
                 name,
                 description,
-                sameAsParent,
-                policyProcessOptions,
                 authenticationType,
                 _configuration,
                 policyType,
@@ -592,10 +527,6 @@ public class UpdateConnectionConfigurationRequest implements Serializable {
                 .append("\n");
         sb.append("    name: ").append(toIndentedString(name)).append("\n");
         sb.append("    description: ").append(toIndentedString(description)).append("\n");
-        sb.append("    sameAsParent: ").append(toIndentedString(sameAsParent)).append("\n");
-        sb.append("    policyProcessOptions: ")
-                .append(toIndentedString(policyProcessOptions))
-                .append("\n");
         sb.append("    authenticationType: ")
                 .append(toIndentedString(authenticationType))
                 .append("\n");
@@ -628,8 +559,6 @@ public class UpdateConnectionConfigurationRequest implements Serializable {
         openapiFields.add("connection_identifier");
         openapiFields.add("name");
         openapiFields.add("description");
-        openapiFields.add("same_as_parent");
-        openapiFields.add("policy_process_options");
         openapiFields.add("authentication_type");
         openapiFields.add("configuration");
         openapiFields.add("policy_type");
@@ -707,11 +636,6 @@ public class UpdateConnectionConfigurationRequest implements Serializable {
                             "Expected the field `description` to be a primitive type in the JSON"
                                     + " string but got `%s`",
                             jsonObj.get("description").toString()));
-        }
-        // validate the optional field `policy_process_options`
-        if (jsonObj.get("policy_process_options") != null
-                && !jsonObj.get("policy_process_options").isJsonNull()) {
-            PolicyProcessOptionsInput.validateJsonElement(jsonObj.get("policy_process_options"));
         }
         if ((jsonObj.get("authentication_type") != null
                         && !jsonObj.get("authentication_type").isJsonNull())

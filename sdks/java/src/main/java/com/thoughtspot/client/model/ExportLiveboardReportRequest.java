@@ -70,9 +70,7 @@ public class ExportLiveboardReportRequest implements Serializable {
 
         PNG("PNG"),
 
-        CSV("CSV"),
-
-        XLSX("XLSX");
+        CSV("CSV");
 
         private String value;
 
