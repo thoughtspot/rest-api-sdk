@@ -607,9 +607,7 @@ public class RegionalSettingsInput implements Serializable {
 
         KO_KR("ko-KR"),
 
-        EN_DE("en-DE"),
-
-        USE_BROWSER_LANGUAGE("USE_BROWSER_LANGUAGE");
+        EN_DE("en-DE");
 
         private String value;
 
@@ -716,9 +714,7 @@ public class RegionalSettingsInput implements Serializable {
 
         KO_KR("ko-KR"),
 
-        EN_DE("en-DE"),
-
-        USE_BROWSER_LANGUAGE("USE_BROWSER_LANGUAGE");
+        EN_DE("en-DE");
 
         private String value;
 
@@ -825,9 +821,7 @@ public class RegionalSettingsInput implements Serializable {
 
         KO_KR("ko-KR"),
 
-        EN_DE("en-DE"),
-
-        USE_BROWSER_LANGUAGE("USE_BROWSER_LANGUAGE");
+        EN_DE("en-DE");
 
         private String value;
 

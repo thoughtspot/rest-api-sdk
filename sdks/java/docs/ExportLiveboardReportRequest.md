@@ -30,6 +30,7 @@
 | PDF | &quot;PDF&quot; |
 | PNG | &quot;PNG&quot; |
 | CSV | &quot;CSV&quot; |
+| XLSX | &quot;XLSX&quot; |
 
 
 ## Implemented Interfaces

@@ -286,7 +286,6 @@
 | ZH_HANT | &quot;zh-Hant&quot; |
 | KO_KR | &quot;ko-KR&quot; |
 | EN_DE | &quot;en-DE&quot; |
-| USE_BROWSER_LANGUAGE | &quot;USE_BROWSER_LANGUAGE&quot; |
 
 
 
@@ -321,7 +320,6 @@
 | ZH_HANT | &quot;zh-Hant&quot; |
 | KO_KR | &quot;ko-KR&quot; |
 | EN_DE | &quot;en-DE&quot; |
-| USE_BROWSER_LANGUAGE | &quot;USE_BROWSER_LANGUAGE&quot; |
 
 
 
@@ -356,7 +354,6 @@
 | ZH_HANT | &quot;zh-Hant&quot; |
 | KO_KR | &quot;ko-KR&quot; |
 | EN_DE | &quot;en-DE&quot; |
-| USE_BROWSER_LANGUAGE | &quot;USE_BROWSER_LANGUAGE&quot; |
 
 
 ## Implemented Interfaces

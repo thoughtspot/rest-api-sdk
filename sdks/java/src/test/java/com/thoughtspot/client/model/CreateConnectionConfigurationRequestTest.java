@@ -35,6 +35,18 @@ public class CreateConnectionConfigurationRequestTest {
         // TODO: test connectionIdentifier
     }
 
+    /** Test the property 'sameAsParent' */
+    @Test
+    public void sameAsParentTest() {
+        // TODO: test sameAsParent
+    }
+
+    /** Test the property 'policyProcessOptions' */
+    @Test
+    public void policyProcessOptionsTest() {
+        // TODO: test policyProcessOptions
+    }
+
     /** Test the property 'authenticationType' */
     @Test
     public void authenticationTypeTest() {

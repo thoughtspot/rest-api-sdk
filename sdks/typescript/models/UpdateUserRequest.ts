@@ -202,5 +202,5 @@ export type UpdateUserRequestVisibilityEnum = "SHARABLE" | "NON_SHARABLE" ;
 export type UpdateUserRequestAccountStatusEnum = "ACTIVE" | "INACTIVE" | "EXPIRED" | "LOCKED" | "PENDING" | "SUSPENDED" ;
 export type UpdateUserRequestAccountTypeEnum = "LOCAL_USER" | "LDAP_USER" | "SAML_USER" | "OIDC_USER" | "REMOTE_USER" ;
 export type UpdateUserRequestOperationEnum = "ADD" | "REMOVE" | "REPLACE" ;
-export type UpdateUserRequestPreferredLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN" | "de-CH" | "en-NZ" | "es-MX" | "en-AU" | "zh-Hant" | "ko-KR" | "en-DE" | "USE_BROWSER_LANGUAGE" ;
+export type UpdateUserRequestPreferredLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN" | "de-CH" | "en-NZ" | "es-MX" | "en-AU" | "zh-Hant" | "ko-KR" | "en-DE" ;
 
