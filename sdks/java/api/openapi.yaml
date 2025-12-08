@@ -9969,6 +9969,160 @@ components:
       - id
       - name
       type: object
+    SecuritySettingsResponse:
+      description: Response type for security settings search.
+      properties:
+        cluster_preferences:
+          $ref: '#/components/schemas/SecuritySettingsClusterPreferences'
+        org_preferences:
+          description: Org-level security preferences.
+          items:
+            $ref: '#/components/schemas/SecuritySettingsOrgPreferences'
+          nullable: true
+          type: array
+      type: object
+    SecuritySettingsClusterPreferences:
+      description: Cluster-level security preferences.
+      properties:
+        enable_partitioned_cookies:
+          description: Support embedded access when third-party cookies are blocked.
+          nullable: true
+          type: boolean
+        cors_whitelisted_urls:
+          description: Allowed origins for CORS.
+          items:
+            type: string
+          nullable: true
+          type: array
+        csp_settings:
+          $ref: '#/components/schemas/CspSettings'
+        saml_redirect_urls:
+          description: Allowed redirect hosts for SAML login.
+          items:
+            type: string
+          nullable: true
+          type: array
+        non_embed_access:
+          $ref: '#/components/schemas/ClusterNonEmbedAccess'
+      type: object
+    CspSettings:
+      description: CSP (Content Security Policy) settings.
+      properties:
+        connect_src_urls:
+          description: Allowed URLs for connect-src directive.
+          items:
+            type: string
+          nullable: true
+          type: array
+        font_src_urls:
+          description: Allowed URLs for font-src directive.
+          items:
+            type: string
+          nullable: true
+          type: array
+        visual_embed_hosts:
+          description: Allowed hosts for visual embed (frame-ancestors directive).
+          items:
+            type: string
+          nullable: true
+          type: array
+        iframe_src_urls:
+          description: Allowed URLs for frame-src directive.
+          items:
+            type: string
+          nullable: true
+          type: array
+        img_src_urls:
+          description: Allowed URLs for img-src directive.
+          items:
+            type: string
+          nullable: true
+          type: array
+        script_src_urls:
+          $ref: '#/components/schemas/ScriptSrcUrls'
+        style_src_urls:
+          description: Allowed URLs for style-src directive.
+          items:
+            type: string
+          nullable: true
+          type: array
+      type: object
+    ScriptSrcUrls:
+      description: Script-src CSP settings.
+      properties:
+        enabled:
+          description: Whether script-src customization is enabled.
+          nullable: true
+          type: boolean
+        urls:
+          description: Allowed URLs for script-src directive. Can only be set if enabled
+            is true.
+          items:
+            type: string
+          nullable: true
+          type: array
+      type: object
+    ClusterNonEmbedAccess:
+      description: Cluster-level non-embed access configuration.
+      properties:
+        block_full_app_access:
+          description: Block full application access for non-embedded usage.
+          nullable: true
+          type: boolean
+      type: object
+    SecuritySettingsOrgPreferences:
+      description: Org-level security preferences.
+      properties:
+        org:
+          $ref: '#/components/schemas/SecuritySettingsOrgDetails'
+        cors_whitelisted_urls:
+          description: Allowed origins for CORS for this org.
+          items:
+            type: string
+          nullable: true
+          type: array
+        non_embed_access:
+          $ref: '#/components/schemas/OrgNonEmbedAccess'
+      type: object
+    SecuritySettingsOrgDetails:
+      description: Org details for security settings.
+      properties:
+        id:
+          description: Unique identifier of the org.
+          format: int32
+          nullable: true
+          type: integer
+        name:
+          description: Name of the org.
+          nullable: true
+          type: string
+      type: object
+    OrgNonEmbedAccess:
+      description: Org-level non-embed access configuration.
+      properties:
+        block_full_app_access:
+          description: Block full application access for non-embedded usage.
+          nullable: true
+          type: boolean
+        groups_with_access:
+          description: Groups that have non-embed full app access.
+          items:
+            $ref: '#/components/schemas/GroupInfo'
+          nullable: true
+          type: array
+      type: object
+    GroupInfo:
+      description: Group information for non-embed access.
+      properties:
+        id:
+          description: Unique identifier of the group.
+          nullable: true
+          type: string
+        name:
+          description: Name of the group.
+          nullable: true
+          type: string
+      type: object
     OrgResponse:
       example:
         visibility: SHOW
@@ -11069,6 +11223,7 @@ components:
           - zh-Hant
           - ko-KR
           - en-DE
+          - USE_BROWSER_LANGUAGE
           nullable: true
           type: string
         number_format_locale:
@@ -11101,6 +11256,7 @@ components:
           - zh-Hant
           - ko-KR
           - en-DE
+          - USE_BROWSER_LANGUAGE
           nullable: true
           type: string
         date_format_locale:
@@ -11133,6 +11289,7 @@ components:
           - zh-Hant
           - ko-KR
           - en-DE
+          - USE_BROWSER_LANGUAGE
           nullable: true
           type: string
       type: object
@@ -14572,6 +14729,129 @@ components:
           type: array
       required:
       - org_identifier
+      type: object
+    SecuritySettingsClusterPreferencesInput:
+      description: Input for cluster-level security preferences configuration.
+      properties:
+        enable_partitioned_cookies:
+          description: Support embedded access when third-party cookies are blocked.
+          nullable: true
+          type: boolean
+        cors_whitelisted_urls:
+          description: Allowed origins for CORS.
+          items:
+            type: string
+          nullable: true
+          type: array
+        csp_settings:
+          $ref: '#/components/schemas/CspSettingsInput'
+        saml_redirect_urls:
+          description: Allowed redirect hosts for SAML login.
+          items:
+            type: string
+          nullable: true
+          type: array
+        non_embed_access:
+          $ref: '#/components/schemas/ClusterNonEmbedAccessInput'
+      type: object
+    CspSettingsInput:
+      description: Input for CSP (Content Security Policy) settings.
+      properties:
+        connect_src_urls:
+          description: Allowed URLs for connect-src directive.
+          items:
+            type: string
+          nullable: true
+          type: array
+        font_src_urls:
+          description: Allowed URLs for font-src directive.
+          items:
+            type: string
+          nullable: true
+          type: array
+        visual_embed_hosts:
+          description: Allowed hosts for visual embed (frame-ancestors directive).
+          items:
+            type: string
+          nullable: true
+          type: array
+        iframe_src_urls:
+          description: Allowed URLs for frame-src directive.
+          items:
+            type: string
+          nullable: true
+          type: array
+        img_src_urls:
+          description: Allowed URLs for img-src directive.
+          items:
+            type: string
+          nullable: true
+          type: array
+        script_src_urls:
+          $ref: '#/components/schemas/ScriptSrcUrlsInput'
+        style_src_urls:
+          description: Allowed URLs for style-src directive.
+          items:
+            type: string
+          nullable: true
+          type: array
+      type: object
+    ScriptSrcUrlsInput:
+      description: Input for script-src CSP settings.
+      properties:
+        enabled:
+          description: Whether script-src customization is enabled.
+          nullable: true
+          type: boolean
+        urls:
+          description: Allowed URLs for script-src directive. Can only be set if enabled
+            is true.
+          items:
+            type: string
+          nullable: true
+          type: array
+      type: object
+    ClusterNonEmbedAccessInput:
+      description: Input for cluster-level non-embed access configuration.
+      properties:
+        block_full_app_access:
+          description: Block full application access for non-embedded usage.
+          nullable: true
+          type: boolean
+      type: object
+    SecuritySettingsOrgPreferencesInput:
+      description: |-
+        Input for org-level security preferences configuration.
+        Note: cross-org operations are not supported currently.
+      properties:
+        org_identifier:
+          description: Unique identifier or name of the org
+          type: string
+        cors_whitelisted_urls:
+          description: Allowed origins for CORS for this org.
+          items:
+            type: string
+          nullable: true
+          type: array
+        non_embed_access:
+          $ref: '#/components/schemas/OrgNonEmbedAccessInput'
+      required:
+      - org_identifier
+      type: object
+    OrgNonEmbedAccessInput:
+      description: Input for org-level non-embed access configuration.
+      properties:
+        block_full_app_access:
+          description: Block full application access for non-embedded usage.
+          nullable: true
+          type: boolean
+        groups_identifiers_with_access:
+          description: Group identifiers that are allowed non-embed full app access.
+            Can only be set if block_full_app_access is true.
+          items:
+            type: string
+          nullable: true
+          type: array
       type: object
     TagMetadataTypeInput:
       properties:
@@ -21846,6 +22126,7 @@ components:
           - zh-Hant
           - ko-KR
           - en-DE
+          - USE_BROWSER_LANGUAGE
           type: string
         extended_properties:
           description: Properties for the user
@@ -22186,6 +22467,7 @@ components:
           - zh-Hant
           - ko-KR
           - en-DE
+          - USE_BROWSER_LANGUAGE
           type: string
         extended_properties:
           description: Properties for the user
