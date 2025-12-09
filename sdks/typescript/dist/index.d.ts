@@ -4635,7 +4635,7 @@ declare class CreateUserRequest {
 type CreateUserRequestAccountTypeEnum = "LOCAL_USER" | "LDAP_USER" | "SAML_USER" | "OIDC_USER" | "REMOTE_USER";
 type CreateUserRequestAccountStatusEnum = "ACTIVE" | "INACTIVE" | "EXPIRED" | "LOCKED" | "PENDING" | "SUSPENDED";
 type CreateUserRequestVisibilityEnum = "SHARABLE" | "NON_SHARABLE";
-type CreateUserRequestPreferredLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN" | "de-CH" | "en-NZ" | "es-MX" | "en-AU" | "zh-Hant" | "ko-KR" | "en-DE" | "USE_BROWSER_LANGUAGE";
+type CreateUserRequestPreferredLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN" | "de-CH" | "en-NZ" | "es-MX" | "en-AU" | "zh-Hant" | "ko-KR" | "en-DE";
 
 /**
  * ThoughtSpot Public REST API
@@ -6246,9 +6246,9 @@ declare class ExportAnswerReportRequestRegionalSettings {
     constructor();
 }
 type ExportAnswerReportRequestRegionalSettingsCurrencyFormatEnum = "ADP" | "AED" | "AFN" | "ALL" | "AMD" | "ANG" | "AOA" | "ARA" | "ARS" | "ATS" | "AUD" | "AWG" | "AZN" | "BAM" | "BBD" | "BDT" | "BEF" | "BGL" | "BGM" | "BGN" | "BHD" | "BIF" | "BMD" | "BND" | "BOB" | "BOP" | "BOV" | "BRL" | "BSD" | "BTN" | "BUK" | "BWP" | "BYN" | "BZD" | "CAD" | "CDF" | "CHE" | "CHF" | "CHW" | "CLE" | "CLP" | "CNX" | "CNY" | "COP" | "COU" | "CRC" | "CSK" | "CUC" | "CUP" | "CVE" | "CYP" | "CZK" | "DDM" | "DEM" | "DJF" | "DKK" | "DOP" | "DZD" | "ECS" | "ECV" | "EEK" | "EGP" | "ERN" | "ESP" | "ETB" | "EUR" | "FIM" | "FJD" | "FKP" | "FRF" | "GBP" | "GEK" | "GEL" | "GHS" | "GIP" | "GMD" | "GNF" | "GNS" | "GQE" | "GRD" | "GTQ" | "GWE" | "GWP" | "GYD" | "HKD" | "HNL" | "HRD" | "HRK" | "HTG" | "HUF" | "IDR" | "IEP" | "ILP" | "ILS" | "INR" | "IQD" | "IRR" | "ISK" | "ITL" | "JMD" | "JOD" | "JPY" | "KES" | "KGS" | "KHR" | "KMF" | "KPW" | "KRW" | "KWD" | "KYD" | "KZT" | "LAK" | "LBP" | "LKR" | "LRD" | "LSL" | "LTL" | "LTT" | "LUC" | "LUF" | "LUL" | "LVL" | "LVR" | "LYD" | "MAD" | "MAF" | "MCF" | "MDC" | "MDL" | "MGA" | "MGF" | "MKD" | "MLF" | "MMK" | "MNT" | "MOP" | "MRU" | "MTL" | "MTP" | "MUR" | "MVR" | "MWK" | "MXN" | "MXV" | "MYR" | "MZE" | "MZN" | "NAD" | "NGN" | "NIO" | "NLG" | "NOK" | "NPR" | "NZD" | "OMR" | "PAB" | "PEI" | "PEN" | "PGK" | "PHP" | "PKR" | "PLN" | "PTE" | "PYG" | "QAR" | "RHD" | "RON" | "RSD" | "RUB" | "RWF" | "SAR" | "SBD" | "SCR" | "SDG" | "SEK" | "SGD" | "SHP" | "SIT" | "SKK" | "SLL" | "SOS" | "SRD" | "SRG" | "SSP" | "STN" | "SUR" | "SVC" | "SYP" | "SZL" | "THB" | "TJR" | "TJS" | "TMT" | "TND" | "TOP" | "TPE" | "TRY" | "TTD" | "TWD" | "TZS" | "UAH" | "UAK" | "UGX" | "USD" | "UYU" | "UYW" | "UZS" | "VES" | "VND" | "VUV" | "WST" | "XAF" | "XAG" | "XAU" | "XBA" | "XBB" | "XCD" | "XDR" | "XEU" | "XFO" | "XFU" | "XOF" | "XPD" | "XPF" | "XPT" | "XRE" | "XSU" | "XTS" | "XUA" | "XXX" | "YDD" | "YER" | "ZAR" | "ZMW";
-type ExportAnswerReportRequestRegionalSettingsUserLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN" | "de-CH" | "en-NZ" | "es-MX" | "en-AU" | "zh-Hant" | "ko-KR" | "en-DE" | "USE_BROWSER_LANGUAGE";
-type ExportAnswerReportRequestRegionalSettingsNumberFormatLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN" | "de-CH" | "en-NZ" | "es-MX" | "en-AU" | "zh-Hant" | "ko-KR" | "en-DE" | "USE_BROWSER_LANGUAGE";
-type ExportAnswerReportRequestRegionalSettingsDateFormatLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN" | "de-CH" | "en-NZ" | "es-MX" | "en-AU" | "zh-Hant" | "ko-KR" | "en-DE" | "USE_BROWSER_LANGUAGE";
+type ExportAnswerReportRequestRegionalSettingsUserLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN" | "de-CH" | "en-NZ" | "es-MX" | "en-AU" | "zh-Hant" | "ko-KR" | "en-DE";
+type ExportAnswerReportRequestRegionalSettingsNumberFormatLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN" | "de-CH" | "en-NZ" | "es-MX" | "en-AU" | "zh-Hant" | "ko-KR" | "en-DE";
+type ExportAnswerReportRequestRegionalSettingsDateFormatLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN" | "de-CH" | "en-NZ" | "es-MX" | "en-AU" | "zh-Hant" | "ko-KR" | "en-DE";
 
 /**
  * ThoughtSpot Public REST API
@@ -10830,9 +10830,9 @@ declare class RegionalSettingsInput {
     constructor();
 }
 type RegionalSettingsInputCurrencyFormatEnum = "ADP" | "AED" | "AFN" | "ALL" | "AMD" | "ANG" | "AOA" | "ARA" | "ARS" | "ATS" | "AUD" | "AWG" | "AZN" | "BAM" | "BBD" | "BDT" | "BEF" | "BGL" | "BGM" | "BGN" | "BHD" | "BIF" | "BMD" | "BND" | "BOB" | "BOP" | "BOV" | "BRL" | "BSD" | "BTN" | "BUK" | "BWP" | "BYN" | "BZD" | "CAD" | "CDF" | "CHE" | "CHF" | "CHW" | "CLE" | "CLP" | "CNX" | "CNY" | "COP" | "COU" | "CRC" | "CSK" | "CUC" | "CUP" | "CVE" | "CYP" | "CZK" | "DDM" | "DEM" | "DJF" | "DKK" | "DOP" | "DZD" | "ECS" | "ECV" | "EEK" | "EGP" | "ERN" | "ESP" | "ETB" | "EUR" | "FIM" | "FJD" | "FKP" | "FRF" | "GBP" | "GEK" | "GEL" | "GHS" | "GIP" | "GMD" | "GNF" | "GNS" | "GQE" | "GRD" | "GTQ" | "GWE" | "GWP" | "GYD" | "HKD" | "HNL" | "HRD" | "HRK" | "HTG" | "HUF" | "IDR" | "IEP" | "ILP" | "ILS" | "INR" | "IQD" | "IRR" | "ISK" | "ITL" | "JMD" | "JOD" | "JPY" | "KES" | "KGS" | "KHR" | "KMF" | "KPW" | "KRW" | "KWD" | "KYD" | "KZT" | "LAK" | "LBP" | "LKR" | "LRD" | "LSL" | "LTL" | "LTT" | "LUC" | "LUF" | "LUL" | "LVL" | "LVR" | "LYD" | "MAD" | "MAF" | "MCF" | "MDC" | "MDL" | "MGA" | "MGF" | "MKD" | "MLF" | "MMK" | "MNT" | "MOP" | "MRU" | "MTL" | "MTP" | "MUR" | "MVR" | "MWK" | "MXN" | "MXV" | "MYR" | "MZE" | "MZN" | "NAD" | "NGN" | "NIO" | "NLG" | "NOK" | "NPR" | "NZD" | "OMR" | "PAB" | "PEI" | "PEN" | "PGK" | "PHP" | "PKR" | "PLN" | "PTE" | "PYG" | "QAR" | "RHD" | "RON" | "RSD" | "RUB" | "RWF" | "SAR" | "SBD" | "SCR" | "SDG" | "SEK" | "SGD" | "SHP" | "SIT" | "SKK" | "SLL" | "SOS" | "SRD" | "SRG" | "SSP" | "STN" | "SUR" | "SVC" | "SYP" | "SZL" | "THB" | "TJR" | "TJS" | "TMT" | "TND" | "TOP" | "TPE" | "TRY" | "TTD" | "TWD" | "TZS" | "UAH" | "UAK" | "UGX" | "USD" | "UYU" | "UYW" | "UZS" | "VES" | "VND" | "VUV" | "WST" | "XAF" | "XAG" | "XAU" | "XBA" | "XBB" | "XCD" | "XDR" | "XEU" | "XFO" | "XFU" | "XOF" | "XPD" | "XPF" | "XPT" | "XRE" | "XSU" | "XTS" | "XUA" | "XXX" | "YDD" | "YER" | "ZAR" | "ZMW";
-type RegionalSettingsInputUserLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN" | "de-CH" | "en-NZ" | "es-MX" | "en-AU" | "zh-Hant" | "ko-KR" | "en-DE" | "USE_BROWSER_LANGUAGE";
-type RegionalSettingsInputNumberFormatLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN" | "de-CH" | "en-NZ" | "es-MX" | "en-AU" | "zh-Hant" | "ko-KR" | "en-DE" | "USE_BROWSER_LANGUAGE";
-type RegionalSettingsInputDateFormatLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN" | "de-CH" | "en-NZ" | "es-MX" | "en-AU" | "zh-Hant" | "ko-KR" | "en-DE" | "USE_BROWSER_LANGUAGE";
+type RegionalSettingsInputUserLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN" | "de-CH" | "en-NZ" | "es-MX" | "en-AU" | "zh-Hant" | "ko-KR" | "en-DE";
+type RegionalSettingsInputNumberFormatLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN" | "de-CH" | "en-NZ" | "es-MX" | "en-AU" | "zh-Hant" | "ko-KR" | "en-DE";
+type RegionalSettingsInputDateFormatLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN" | "de-CH" | "en-NZ" | "es-MX" | "en-AU" | "zh-Hant" | "ko-KR" | "en-DE";
 
 /**
  * ThoughtSpot Public REST API
@@ -13664,6 +13664,10 @@ declare class SearchUsersRequest {
     * Indicates if the user\'s favorite objects should be displayed.
     */
     'include_favorite_metadata'?: boolean | null;
+    /**
+    * Indicates if the user\'s formula variable values should be included in the response.
+    */
+    'include_variable_values'?: boolean | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -16220,7 +16224,7 @@ type UpdateUserRequestVisibilityEnum = "SHARABLE" | "NON_SHARABLE";
 type UpdateUserRequestAccountStatusEnum = "ACTIVE" | "INACTIVE" | "EXPIRED" | "LOCKED" | "PENDING" | "SUSPENDED";
 type UpdateUserRequestAccountTypeEnum = "LOCAL_USER" | "LDAP_USER" | "SAML_USER" | "OIDC_USER" | "REMOTE_USER";
 type UpdateUserRequestOperationEnum = "ADD" | "REMOVE" | "REPLACE";
-type UpdateUserRequestPreferredLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN" | "de-CH" | "en-NZ" | "es-MX" | "en-AU" | "zh-Hant" | "ko-KR" | "en-DE" | "USE_BROWSER_LANGUAGE";
+type UpdateUserRequestPreferredLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN" | "de-CH" | "en-NZ" | "es-MX" | "en-AU" | "zh-Hant" | "ko-KR" | "en-DE";
 
 /**
  * ThoughtSpot Public REST API

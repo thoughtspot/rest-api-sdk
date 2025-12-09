@@ -13640,8 +13640,7 @@
                       "en-AU",
                       "zh-Hant",
                       "ko-KR",
-                      "en-DE",
-                      "USE_BROWSER_LANGUAGE"
+                      "en-DE"
                     ]
                   },
                   "extended_properties": {
@@ -14321,6 +14320,12 @@
                     "default": false,
                     "type": "boolean",
                     "nullable": true
+                  },
+                  "include_variable_values": {
+                    "description": "Indicates if the user's formula variable values should be included in the response.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
                   }
                 }
               }
@@ -14523,8 +14528,7 @@
                       "en-AU",
                       "zh-Hant",
                       "ko-KR",
-                      "en-DE",
-                      "USE_BROWSER_LANGUAGE"
+                      "en-DE"
                     ]
                   },
                   "extended_properties": {
@@ -18445,8 +18449,7 @@
               "en-AU",
               "zh-Hant",
               "ko-KR",
-              "en-DE",
-              "USE_BROWSER_LANGUAGE"
+              "en-DE"
             ]
           },
           "number_format_locale": {
@@ -18480,8 +18483,7 @@
               "en-AU",
               "zh-Hant",
               "ko-KR",
-              "en-DE",
-              "USE_BROWSER_LANGUAGE"
+              "en-DE"
             ]
           },
           "date_format_locale": {
@@ -18515,8 +18517,7 @@
               "en-AU",
               "zh-Hant",
               "ko-KR",
-              "en-DE",
-              "USE_BROWSER_LANGUAGE"
+              "en-DE"
             ]
           }
         }
