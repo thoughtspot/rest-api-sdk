@@ -14044,6 +14044,10 @@ declare class SearchUsersRequest {
     * Indicates if the user\'s favorite objects should be displayed.
     */
     'include_favorite_metadata'?: boolean | null;
+    /**
+    * Indicates if the user\'s formula variable values should be included in the response.
+    */
+    'include_variable_values'?: boolean | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;

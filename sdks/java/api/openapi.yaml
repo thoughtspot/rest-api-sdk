@@ -22359,6 +22359,12 @@ components:
           description: Indicates if the user's favorite objects should be displayed.
           nullable: true
           type: boolean
+        include_variable_values:
+          default: false
+          description: Indicates if the user's formula variable values should be included
+            in the response.
+          nullable: true
+          type: boolean
       type: object
     updateUser_request:
       properties:
