@@ -12346,89 +12346,6 @@
         }
       }
     },
-    "/api/rest/2.0/system/security-settings/configure": {
-      "post": {
-        "operationId": "configureSecuritySettings",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.2.0.cl or later</span>\n\nConfigure security settings for your ThoughtSpot application instance.\n- Use `cluster_preferences` to update cluster-level security settings including CORS whitelisted URLs, CSP settings, SAML redirect URLs, partitioned cookies, and non-embed access configuration.\n- Use `org_preferences` to configure Org-specific security settings. If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this allows configuring CORS and non-embed access settings specific to the Org.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. Cluster-level SAML and script-src settings require `ADMINISTRATION` privilege.\nSee [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "System",
-          "26.2.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "cluster_preferences": {
-                    "description": "Cluster-level security preferences.",
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/SecuritySettingsClusterPreferencesInput"
-                      }
-                    ]
-                  },
-                  "org_preferences": {
-                    "description": "Org-level security preferences for the current org.",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/SecuritySettingsOrgPreferencesInput"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "204": {
-            "description": "Successfully configured the security settings."
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/rest/2.0/system/config": {
       "get": {
         "operationId": "getSystemConfig",
@@ -12727,153 +12644,6 @@
                               ]
                             }
                           ]
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/system/security-settings/search": {
-      "post": {
-        "operationId": "searchSecuritySettings",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.2.0.cl or later</span>\n\nFetch security settings for your ThoughtSpot application instance.\n- Use `scope: CLUSTER` to retrieve cluster-level security settings, including CORS and CSP allowlists, SAML redirect URLs, and settings that control access to non-embedded pages.\n- Use `scope: ORG` to retrieve Org-level security settings. If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this returns CORS and non-embed access settings specific to the Org.\n- If `scope` is not specified, returns both cluster and Org-specific settings based on user privileges.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\nSee [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "System",
-          "26.2.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "scope": {
-                    "description": "Scope of security settings to retrieve. CLUSTER returns cluster-level settings,\nORG returns org-level settings for the current org.\nIf not specified, returns both cluster and org settings based on user privileges.",
-                    "type": "string",
-                    "enum": [
-                      "CLUSTER",
-                      "ORG"
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the list of security settings.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SecuritySettingsResponse"
-                },
-                "examples": {
-                  "example_1": {
-                    "value": {
-                      "cluster_preferences": {
-                        "enable_partitioned_cookies": false,
-                        "cors_whitelisted_urls": [
-                          "example.com"
-                        ],
-                        "csp_settings": {
-                          "connect_src_urls": [
-                            "https://connect.example.com"
-                          ],
-                          "font_src_urls": [
-                            "https://font.example.com"
-                          ],
-                          "visual_embed_hosts": [
-                            "https://embed.example.com"
-                          ],
-                          "iframe_src_urls": [
-                            "https://embed.example.com"
-                          ],
-                          "img_src_urls": [
-                            "https://img.example.com"
-                          ],
-                          "script_src_urls": {
-                            "enabled": true,
-                            "urls": [
-                              "https://script.example.com"
-                            ]
-                          },
-                          "style_src_urls": [
-                            "https://style.example.com"
-                          ]
-                        },
-                        "saml_redirect_urls": [
-                          "https://saml.example.com"
-                        ],
-                        "non_embed_access": {
-                          "block_full_app_access": true
-                        }
-                      },
-                      "org_preferences": [
-                        {
-                          "org": {
-                            "id": 0,
-                            "name": "Primary"
-                          },
-                          "cors_whitelisted_urls": [
-                            "https://cors.example.com"
-                          ],
-                          "non_embed_access": {
-                            "block_full_app_access": true,
-                            "groups_with_access": [
-                              {
-                                "id": "1234567890",
-                                "name": "Group Name"
-                              }
-                            ]
-                          }
                         }
                       ]
                     }
@@ -13870,8 +13640,7 @@
                       "en-AU",
                       "zh-Hant",
                       "ko-KR",
-                      "en-DE",
-                      "USE_BROWSER_LANGUAGE"
+                      "en-DE"
                     ]
                   },
                   "extended_properties": {
@@ -14551,6 +14320,12 @@
                     "default": false,
                     "type": "boolean",
                     "nullable": true
+                  },
+                  "include_variable_values": {
+                    "description": "Indicates if the user's formula variable values should be included in the response.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
                   }
                 }
               }
@@ -14753,8 +14528,7 @@
                       "en-AU",
                       "zh-Hant",
                       "ko-KR",
-                      "en-DE",
-                      "USE_BROWSER_LANGUAGE"
+                      "en-DE"
                     ]
                   },
                   "extended_properties": {
@@ -17589,227 +17363,6 @@
           }
         }
       },
-      "SecuritySettingsResponse": {
-        "type": "object",
-        "properties": {
-          "cluster_preferences": {
-            "$ref": "#/components/schemas/SecuritySettingsClusterPreferences",
-            "description": "Cluster-level security preferences.",
-            "nullable": true
-          },
-          "org_preferences": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SecuritySettingsOrgPreferences"
-            },
-            "description": "Org-level security preferences.",
-            "nullable": true
-          }
-        },
-        "description": "Response type for security settings search."
-      },
-      "SecuritySettingsClusterPreferences": {
-        "type": "object",
-        "properties": {
-          "enable_partitioned_cookies": {
-            "type": "boolean",
-            "description": "Support embedded access when third-party cookies are blocked.",
-            "nullable": true
-          },
-          "cors_whitelisted_urls": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Allowed origins for CORS.",
-            "nullable": true
-          },
-          "csp_settings": {
-            "$ref": "#/components/schemas/CspSettings",
-            "description": "CSP (Content Security Policy) settings.",
-            "nullable": true
-          },
-          "saml_redirect_urls": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Allowed redirect hosts for SAML login.",
-            "nullable": true
-          },
-          "non_embed_access": {
-            "$ref": "#/components/schemas/ClusterNonEmbedAccess",
-            "description": "Non-embed access configuration at cluster level.",
-            "nullable": true
-          }
-        },
-        "description": "Cluster-level security preferences."
-      },
-      "CspSettings": {
-        "type": "object",
-        "properties": {
-          "connect_src_urls": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Allowed URLs for connect-src directive.",
-            "nullable": true
-          },
-          "font_src_urls": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Allowed URLs for font-src directive.",
-            "nullable": true
-          },
-          "visual_embed_hosts": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Allowed hosts for visual embed (frame-ancestors directive).",
-            "nullable": true
-          },
-          "iframe_src_urls": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Allowed URLs for frame-src directive.",
-            "nullable": true
-          },
-          "img_src_urls": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Allowed URLs for img-src directive.",
-            "nullable": true
-          },
-          "script_src_urls": {
-            "$ref": "#/components/schemas/ScriptSrcUrls",
-            "description": "Script-src settings including URLs and enabled flag.",
-            "nullable": true
-          },
-          "style_src_urls": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Allowed URLs for style-src directive.",
-            "nullable": true
-          }
-        },
-        "description": "CSP (Content Security Policy) settings."
-      },
-      "ScriptSrcUrls": {
-        "type": "object",
-        "properties": {
-          "enabled": {
-            "type": "boolean",
-            "description": "Whether script-src customization is enabled.",
-            "nullable": true
-          },
-          "urls": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Allowed URLs for script-src directive. Can only be set if enabled is true.",
-            "nullable": true
-          }
-        },
-        "description": "Script-src CSP settings."
-      },
-      "ClusterNonEmbedAccess": {
-        "type": "object",
-        "properties": {
-          "block_full_app_access": {
-            "type": "boolean",
-            "description": "Block full application access for non-embedded usage.",
-            "nullable": true
-          }
-        },
-        "description": "Cluster-level non-embed access configuration."
-      },
-      "SecuritySettingsOrgPreferences": {
-        "type": "object",
-        "properties": {
-          "org": {
-            "$ref": "#/components/schemas/SecuritySettingsOrgDetails",
-            "description": "Org details (id and name).",
-            "nullable": true
-          },
-          "cors_whitelisted_urls": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Allowed origins for CORS for this org.",
-            "nullable": true
-          },
-          "non_embed_access": {
-            "$ref": "#/components/schemas/OrgNonEmbedAccess",
-            "description": "Non-embed access configuration for this org.",
-            "nullable": true
-          }
-        },
-        "description": "Org-level security preferences."
-      },
-      "SecuritySettingsOrgDetails": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Unique identifier of the org.",
-            "nullable": true
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the org.",
-            "nullable": true
-          }
-        },
-        "description": "Org details for security settings."
-      },
-      "OrgNonEmbedAccess": {
-        "type": "object",
-        "properties": {
-          "block_full_app_access": {
-            "type": "boolean",
-            "description": "Block full application access for non-embedded usage.",
-            "nullable": true
-          },
-          "groups_with_access": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/GroupInfo"
-            },
-            "description": "Groups that have non-embed full app access.",
-            "nullable": true
-          }
-        },
-        "description": "Org-level non-embed access configuration."
-      },
-      "GroupInfo": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Unique identifier of the group.",
-            "nullable": true
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the group.",
-            "nullable": true
-          }
-        },
-        "description": "Group information for non-embed access."
-      },
       "OrgResponse": {
         "type": "object",
         "properties": {
@@ -18896,8 +18449,7 @@
               "en-AU",
               "zh-Hant",
               "ko-KR",
-              "en-DE",
-              "USE_BROWSER_LANGUAGE"
+              "en-DE"
             ]
           },
           "number_format_locale": {
@@ -18931,8 +18483,7 @@
               "en-AU",
               "zh-Hant",
               "ko-KR",
-              "en-DE",
-              "USE_BROWSER_LANGUAGE"
+              "en-DE"
             ]
           },
           "date_format_locale": {
@@ -18966,8 +18517,7 @@
               "en-AU",
               "zh-Hant",
               "ko-KR",
-              "en-DE",
-              "USE_BROWSER_LANGUAGE"
+              "en-DE"
             ]
           }
         }
@@ -21920,177 +21470,6 @@
             "nullable": true
           }
         }
-      },
-      "SecuritySettingsClusterPreferencesInput": {
-        "type": "object",
-        "properties": {
-          "enable_partitioned_cookies": {
-            "type": "boolean",
-            "description": "Support embedded access when third-party cookies are blocked.",
-            "nullable": true
-          },
-          "cors_whitelisted_urls": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Allowed origins for CORS.",
-            "nullable": true
-          },
-          "csp_settings": {
-            "$ref": "#/components/schemas/CspSettingsInput",
-            "description": "CSP (Content Security Policy) settings.",
-            "nullable": true
-          },
-          "saml_redirect_urls": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Allowed redirect hosts for SAML login.",
-            "nullable": true
-          },
-          "non_embed_access": {
-            "$ref": "#/components/schemas/ClusterNonEmbedAccessInput",
-            "description": "Non-embed access configuration at cluster level.",
-            "nullable": true
-          }
-        },
-        "description": "Input for cluster-level security preferences configuration."
-      },
-      "CspSettingsInput": {
-        "type": "object",
-        "properties": {
-          "connect_src_urls": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Allowed URLs for connect-src directive.",
-            "nullable": true
-          },
-          "font_src_urls": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Allowed URLs for font-src directive.",
-            "nullable": true
-          },
-          "visual_embed_hosts": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Allowed hosts for visual embed (frame-ancestors directive).",
-            "nullable": true
-          },
-          "iframe_src_urls": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Allowed URLs for frame-src directive.",
-            "nullable": true
-          },
-          "img_src_urls": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Allowed URLs for img-src directive.",
-            "nullable": true
-          },
-          "script_src_urls": {
-            "$ref": "#/components/schemas/ScriptSrcUrlsInput",
-            "description": "Script-src settings including URLs and enabled flag.",
-            "nullable": true
-          },
-          "style_src_urls": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Allowed URLs for style-src directive.",
-            "nullable": true
-          }
-        },
-        "description": "Input for CSP (Content Security Policy) settings."
-      },
-      "ScriptSrcUrlsInput": {
-        "type": "object",
-        "properties": {
-          "enabled": {
-            "type": "boolean",
-            "description": "Whether script-src customization is enabled.",
-            "nullable": true
-          },
-          "urls": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Allowed URLs for script-src directive. Can only be set if enabled is true.",
-            "nullable": true
-          }
-        },
-        "description": "Input for script-src CSP settings."
-      },
-      "ClusterNonEmbedAccessInput": {
-        "type": "object",
-        "properties": {
-          "block_full_app_access": {
-            "type": "boolean",
-            "description": "Block full application access for non-embedded usage.",
-            "nullable": true
-          }
-        },
-        "description": "Input for cluster-level non-embed access configuration."
-      },
-      "SecuritySettingsOrgPreferencesInput": {
-        "type": "object",
-        "required": [
-          "org_identifier"
-        ],
-        "properties": {
-          "org_identifier": {
-            "type": "string",
-            "description": "Unique identifier or name of the org"
-          },
-          "cors_whitelisted_urls": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Allowed origins for CORS for this org.",
-            "nullable": true
-          },
-          "non_embed_access": {
-            "$ref": "#/components/schemas/OrgNonEmbedAccessInput",
-            "description": "Non-embed access configuration for this org.",
-            "nullable": true
-          }
-        },
-        "description": "Input for org-level security preferences configuration.\nNote: cross-org operations are not supported currently."
-      },
-      "OrgNonEmbedAccessInput": {
-        "type": "object",
-        "properties": {
-          "block_full_app_access": {
-            "type": "boolean",
-            "description": "Block full application access for non-embedded usage.",
-            "nullable": true
-          },
-          "groups_identifiers_with_access": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Group identifiers that are allowed non-embed full app access. Can only be set if block_full_app_access is true.",
-            "nullable": true
-          }
-        },
-        "description": "Input for org-level non-embed access configuration."
       },
       "TagMetadataTypeInput": {
         "type": "object",
