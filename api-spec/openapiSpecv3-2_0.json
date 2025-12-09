@@ -7783,7 +7783,7 @@
     "/api/rest/2.0/metadata/parameterize": {
       "post": {
         "operationId": "parameterizeMetadata",
-        "description": "\nParameterize fields in metadata objects. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows parameterizing fields in metadata objects in ThoughtSpot.\n\nRequires appropriate permissions to modify the metadata object.\n\nThe API endpoint allows parameterizing the following types of metadata objects:\n* Logical Tables\n* Connections\n\nFor a Logical Table the field type must be `ATTRIBUTE` and field name can be one of:\n* databaseName\n* schemaName\n* tableName\n\nFor a Connection the field type is always `CONNECTION_PROPERTY`. We use the field_name in this\ncase to specify the exact property of a connection which needs to be parameterized.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nParameterize fields in metadata objects. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows parameterizing fields in metadata objects in ThoughtSpot.\n\nRequires appropriate permissions to modify the metadata object.\n\nThe API endpoint allows parameterizing the following types of metadata objects:\n* Logical Tables\n* Connections\n* Connection Configs\n\nFor a Logical Table the field type must be `ATTRIBUTE` and field name can be one of:\n* databaseName\n* schemaName\n* tableName\n\nFor a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be parameterized.\n\nFor Connection Config, the only supported field name is:\n* impersonate_user\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Metadata",
           "10.9.0.cl"
@@ -7799,7 +7799,8 @@
                     "type": "string",
                     "enum": [
                       "LOGICAL_TABLE",
-                      "CONNECTION"
+                      "CONNECTION",
+                      "CONNECTION_CONFIG"
                     ]
                   },
                   "metadata_identifier": {
@@ -8128,7 +8129,7 @@
     "/api/rest/2.0/metadata/unparameterize": {
       "post": {
         "operationId": "unparameterizeMetadata",
-        "description": "\nRemove parameterization from fields in metadata objects. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows removing parameterization from fields in metadata objects in ThoughtSpot.\n\nRequires appropriate permissions to modify the metadata object.\n\nThe API endpoint allows unparameterizing the following types of metadata objects:\n* Logical Tables\n* Connections\n\nFor a Logical Table the field type must be `ATTRIBUTE` and field name can be one of:\n* databaseName\n* schemaName\n* tableName\n\nFor a Connection the field type is always `CONNECTION_PROPERTY`. We use the field_name in this\ncase to specify the exact property of a connection which needs to be unparameterized.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nRemove parameterization from fields in metadata objects. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows removing parameterization from fields in metadata objects in ThoughtSpot.\n\nRequires appropriate permissions to modify the metadata object.\n\nThe API endpoint allows unparameterizing the following types of metadata objects:\n* Logical Tables\n* Connections\n* Connection Configs\n\nFor a Logical Table the field type must be `ATTRIBUTE` and field name can be one of:\n* databaseName\n* schemaName\n* tableName\n\nFor a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.\n\nFor Connection Config, the only supported field name is:\n* impersonate_user\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Metadata",
           "10.9.0.cl"
@@ -8144,7 +8145,8 @@
                     "type": "string",
                     "enum": [
                       "LOGICAL_TABLE",
-                      "CONNECTION"
+                      "CONNECTION",
+                      "CONNECTION_CONFIG"
                     ]
                   },
                   "metadata_identifier": {
@@ -14548,12 +14550,6 @@
                   },
                   "include_favorite_metadata": {
                     "description": "Indicates if the user's favorite objects should be displayed.",
-                    "default": false,
-                    "type": "boolean",
-                    "nullable": true
-                  },
-                  "include_variable_values": {
-                    "description": "Indicates if the user's formula variable values should be included in the response.",
                     "default": false,
                     "type": "boolean",
                     "nullable": true

@@ -4693,11 +4693,13 @@ paths:
         \ or later\n\n\nAllows parameterizing fields in metadata objects in ThoughtSpot.\n\
         \nRequires appropriate permissions to modify the metadata object.\n\nThe API\
         \ endpoint allows parameterizing the following types of metadata objects:\n\
-        * Logical Tables\n* Connections\n\nFor a Logical Table the field type must\
-        \ be `ATTRIBUTE` and field name can be one of:\n* databaseName\n* schemaName\n\
-        * tableName\n\nFor a Connection the field type is always `CONNECTION_PROPERTY`.\
-        \ We use the field_name in this\ncase to specify the exact property of a connection\
-        \ which needs to be parameterized.\n\n\n\n\n\n"
+        * Logical Tables\n* Connections\n* Connection Configs\n\nFor a Logical Table\
+        \ the field type must be `ATTRIBUTE` and field name can be one of:\n* databaseName\n\
+        * schemaName\n* tableName\n\nFor a Connection or Connection Config, the field\
+        \ type is always `CONNECTION_PROPERTY`. In this case, field_name specifies\
+        \ the exact property of the Connection or Connection Config that needs to\
+        \ be parameterized.\n\nFor Connection Config, the only supported field name\
+        \ is:\n* impersonate_user\n\n\n\n\n\n"
       operationId: parameterizeMetadata
       parameters: []
       requestBody:
@@ -4835,11 +4837,12 @@ paths:
         \ in metadata objects in ThoughtSpot.\n\nRequires appropriate permissions\
         \ to modify the metadata object.\n\nThe API endpoint allows unparameterizing\
         \ the following types of metadata objects:\n* Logical Tables\n* Connections\n\
-        \nFor a Logical Table the field type must be `ATTRIBUTE` and field name can\
-        \ be one of:\n* databaseName\n* schemaName\n* tableName\n\nFor a Connection\
-        \ the field type is always `CONNECTION_PROPERTY`. We use the field_name in\
-        \ this\ncase to specify the exact property of a connection which needs to\
-        \ be unparameterized.\n\n\n\n\n\n"
+        * Connection Configs\n\nFor a Logical Table the field type must be `ATTRIBUTE`\
+        \ and field name can be one of:\n* databaseName\n* schemaName\n* tableName\n\
+        \nFor a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`.\
+        \ In this case, field_name specifies the exact property of the Connection\
+        \ or Connection Config that needs to be unparameterized.\n\nFor Connection\
+        \ Config, the only supported field name is:\n* impersonate_user\n\n\n\n\n\n"
       operationId: unparameterizeMetadata
       parameters: []
       requestBody:
@@ -19571,6 +19574,7 @@ components:
           enum:
           - LOGICAL_TABLE
           - CONNECTION
+          - CONNECTION_CONFIG
           type: string
         metadata_identifier:
           description: Unique ID or name of the metadata object to parameterize.
@@ -19754,6 +19758,7 @@ components:
           enum:
           - LOGICAL_TABLE
           - CONNECTION
+          - CONNECTION_CONFIG
           type: string
         metadata_identifier:
           description: Unique ID or name of the metadata object to unparameterize.
@@ -22352,12 +22357,6 @@ components:
         include_favorite_metadata:
           default: false
           description: Indicates if the user's favorite objects should be displayed.
-          nullable: true
-          type: boolean
-        include_variable_values:
-          default: false
-          description: Indicates if the user's formula variable values should be included
-            in the response.
           nullable: true
           type: boolean
       type: object

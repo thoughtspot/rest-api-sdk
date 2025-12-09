@@ -628,7 +628,6 @@ apiInstance.searchUsers(
       "role_identifiers_example",
     ],
     include_favorite_metadata: false,
-    include_variable_values: false,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);

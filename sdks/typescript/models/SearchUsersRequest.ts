@@ -92,10 +92,6 @@ export class SearchUsersRequest {
     * Indicates if the user\'s favorite objects should be displayed.
     */
     'include_favorite_metadata'?: boolean | null;
-    /**
-    * Indicates if the user\'s formula variable values should be included in the response.
-    */
-    'include_variable_values'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -217,12 +213,6 @@ export class SearchUsersRequest {
         {
             "name": "include_favorite_metadata",
             "baseName": "include_favorite_metadata",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "include_variable_values",
-            "baseName": "include_variable_values",
             "type": "boolean",
             "format": ""
         }    ];

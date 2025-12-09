@@ -456,12 +456,6 @@ public class SearchUsersRequest implements Serializable {
     @javax.annotation.Nullable
     private Boolean includeFavoriteMetadata = false;
 
-    public static final String SERIALIZED_NAME_INCLUDE_VARIABLE_VALUES = "include_variable_values";
-
-    @SerializedName(SERIALIZED_NAME_INCLUDE_VARIABLE_VALUES)
-    @javax.annotation.Nullable
-    private Boolean includeVariableValues = false;
-
     public SearchUsersRequest() {}
 
     public SearchUsersRequest userIdentifier(@javax.annotation.Nullable String userIdentifier) {
@@ -900,26 +894,6 @@ public class SearchUsersRequest implements Serializable {
         this.includeFavoriteMetadata = includeFavoriteMetadata;
     }
 
-    public SearchUsersRequest includeVariableValues(
-            @javax.annotation.Nullable Boolean includeVariableValues) {
-        this.includeVariableValues = includeVariableValues;
-        return this;
-    }
-
-    /**
-     * Indicates if the user&#39;s formula variable values should be included in the response.
-     *
-     * @return includeVariableValues
-     */
-    @javax.annotation.Nullable
-    public Boolean getIncludeVariableValues() {
-        return includeVariableValues;
-    }
-
-    public void setIncludeVariableValues(@javax.annotation.Nullable Boolean includeVariableValues) {
-        this.includeVariableValues = includeVariableValues;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -953,9 +927,7 @@ public class SearchUsersRequest implements Serializable {
                 && Objects.equals(this.sortOptions, searchUsersRequest.sortOptions)
                 && Objects.equals(this.roleIdentifiers, searchUsersRequest.roleIdentifiers)
                 && Objects.equals(
-                        this.includeFavoriteMetadata, searchUsersRequest.includeFavoriteMetadata)
-                && Objects.equals(
-                        this.includeVariableValues, searchUsersRequest.includeVariableValues);
+                        this.includeFavoriteMetadata, searchUsersRequest.includeFavoriteMetadata);
     }
 
     private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -989,8 +961,7 @@ public class SearchUsersRequest implements Serializable {
                 recordSize,
                 sortOptions,
                 roleIdentifiers,
-                includeFavoriteMetadata,
-                includeVariableValues);
+                includeFavoriteMetadata);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -1031,9 +1002,6 @@ public class SearchUsersRequest implements Serializable {
         sb.append("    roleIdentifiers: ").append(toIndentedString(roleIdentifiers)).append("\n");
         sb.append("    includeFavoriteMetadata: ")
                 .append(toIndentedString(includeFavoriteMetadata))
-                .append("\n");
-        sb.append("    includeVariableValues: ")
-                .append(toIndentedString(includeVariableValues))
                 .append("\n");
         sb.append("}");
         return sb.toString();
@@ -1076,7 +1044,6 @@ public class SearchUsersRequest implements Serializable {
         openapiFields.add("sort_options");
         openapiFields.add("role_identifiers");
         openapiFields.add("include_favorite_metadata");
-        openapiFields.add("include_variable_values");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
