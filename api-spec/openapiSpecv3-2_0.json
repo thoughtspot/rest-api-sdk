@@ -14553,6 +14553,12 @@
                     "default": false,
                     "type": "boolean",
                     "nullable": true
+                  },
+                  "include_variable_values": {
+                    "description": "Indicates if the user's formula variable values should be included in the response.",
+                    "default": false,
+                    "type": "boolean",
+                    "nullable": true
                   }
                 }
               }
