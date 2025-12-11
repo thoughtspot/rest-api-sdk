@@ -358,15 +358,16 @@ public class ReportsApi {
     }
 
     /**
-     * Version: 9.0.0.cl or later Exports a Liveboard and its visualizations in PDF or PNG file
-     * format. Requires at least view access to the Liveboard. #### Usage guidelines In the request
-     * body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific
-     * visualizations, add GUIDs or names of the visualizations. The default &#x60;file_format&#x60;
-     * is PDF. For PDF downloads, you can specify additional parameters to customize the page
-     * orientation and include or exclude the cover page, logo, footer text, and page numbers.
-     * Similar customization options are also available for PNG output. **NOTE**: The downloadable
-     * file returned in API response file is extensionless. Please rename the downloaded file by
-     * typing in the relevant extension. Optionally, you can define [runtime
+     * Version: 9.0.0.cl or later Exports a Liveboard and its visualizations in PDF, PNG, or CSV
+     * file format. Requires at least view access to the Liveboard. #### Usage guidelines In the
+     * request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with
+     * specific visualizations, add GUIDs or names of the visualizations. The default
+     * &#x60;file_format&#x60; is CSV. For PDF exports, you can specify additional parameters to
+     * customize the page orientation and include or exclude the cover page, logo, footer text, and
+     * page numbers. Similar customization options are available for PNG exports. CSV exports do not
+     * support customization options. **NOTE**: The downloadable file returned in API response file
+     * is extensionless. Please rename the downloaded file by typing in the relevant extension.
+     * Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
      * to apply to the Answer data. To include unsaved changes in the report, pass the
      * &#x60;transient_pinboard_content&#x60; script generated from the
@@ -378,7 +379,11 @@ public class ReportsApi {
      * the PNG format in the resolution of your choice. To enable this on your instance, contact
      * ThoughtSpot support. When this feature is enabled, the options
      * &#x60;include_cover_page&#x60;,&#x60;include_filter_page&#x60; within the
-     * &#x60;png_options&#x60; will not be available for PNG exports.
+     * &#x60;png_options&#x60; will not be available for PNG exports. **NOTE**: Starting with the
+     * ThoughtSpot Cloud 26.2.0.cl release, Liveboards can be exported in CSV format. All
+     * visualizations in the Liveboard can be exported as individual CSV files. If multiple
+     * visualizations are selected or if the entire Liveboard is exported, the output is returned as
+     * a .zip file containing the CSV files for each visualization.
      *
      * @param exportLiveboardReportRequest (required)
      * @return File
@@ -403,15 +408,16 @@ public class ReportsApi {
     }
 
     /**
-     * Version: 9.0.0.cl or later Exports a Liveboard and its visualizations in PDF or PNG file
-     * format. Requires at least view access to the Liveboard. #### Usage guidelines In the request
-     * body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific
-     * visualizations, add GUIDs or names of the visualizations. The default &#x60;file_format&#x60;
-     * is PDF. For PDF downloads, you can specify additional parameters to customize the page
-     * orientation and include or exclude the cover page, logo, footer text, and page numbers.
-     * Similar customization options are also available for PNG output. **NOTE**: The downloadable
-     * file returned in API response file is extensionless. Please rename the downloaded file by
-     * typing in the relevant extension. Optionally, you can define [runtime
+     * Version: 9.0.0.cl or later Exports a Liveboard and its visualizations in PDF, PNG, or CSV
+     * file format. Requires at least view access to the Liveboard. #### Usage guidelines In the
+     * request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with
+     * specific visualizations, add GUIDs or names of the visualizations. The default
+     * &#x60;file_format&#x60; is CSV. For PDF exports, you can specify additional parameters to
+     * customize the page orientation and include or exclude the cover page, logo, footer text, and
+     * page numbers. Similar customization options are available for PNG exports. CSV exports do not
+     * support customization options. **NOTE**: The downloadable file returned in API response file
+     * is extensionless. Please rename the downloaded file by typing in the relevant extension.
+     * Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
      * to apply to the Answer data. To include unsaved changes in the report, pass the
      * &#x60;transient_pinboard_content&#x60; script generated from the
@@ -423,7 +429,11 @@ public class ReportsApi {
      * the PNG format in the resolution of your choice. To enable this on your instance, contact
      * ThoughtSpot support. When this feature is enabled, the options
      * &#x60;include_cover_page&#x60;,&#x60;include_filter_page&#x60; within the
-     * &#x60;png_options&#x60; will not be available for PNG exports.
+     * &#x60;png_options&#x60; will not be available for PNG exports. **NOTE**: Starting with the
+     * ThoughtSpot Cloud 26.2.0.cl release, Liveboards can be exported in CSV format. All
+     * visualizations in the Liveboard can be exported as individual CSV files. If multiple
+     * visualizations are selected or if the entire Liveboard is exported, the output is returned as
+     * a .zip file containing the CSV files for each visualization.
      *
      * @param exportLiveboardReportRequest (required)
      * @return ApiResponse&lt;File&gt;
@@ -449,15 +459,16 @@ public class ReportsApi {
     }
 
     /**
-     * (asynchronously) Version: 9.0.0.cl or later Exports a Liveboard and its visualizations in PDF
-     * or PNG file format. Requires at least view access to the Liveboard. #### Usage guidelines In
-     * the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report
-     * with specific visualizations, add GUIDs or names of the visualizations. The default
-     * &#x60;file_format&#x60; is PDF. For PDF downloads, you can specify additional parameters to
-     * customize the page orientation and include or exclude the cover page, logo, footer text, and
-     * page numbers. Similar customization options are also available for PNG output. **NOTE**: The
-     * downloadable file returned in API response file is extensionless. Please rename the
-     * downloaded file by typing in the relevant extension. Optionally, you can define [runtime
+     * (asynchronously) Version: 9.0.0.cl or later Exports a Liveboard and its visualizations in
+     * PDF, PNG, or CSV file format. Requires at least view access to the Liveboard. #### Usage
+     * guidelines In the request body, specify the GUID or name of the Liveboard. To generate a
+     * Liveboard report with specific visualizations, add GUIDs or names of the visualizations. The
+     * default &#x60;file_format&#x60; is CSV. For PDF exports, you can specify additional
+     * parameters to customize the page orientation and include or exclude the cover page, logo,
+     * footer text, and page numbers. Similar customization options are available for PNG exports.
+     * CSV exports do not support customization options. **NOTE**: The downloadable file returned in
+     * API response file is extensionless. Please rename the downloaded file by typing in the
+     * relevant extension. Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
      * to apply to the Answer data. To include unsaved changes in the report, pass the
      * &#x60;transient_pinboard_content&#x60; script generated from the
@@ -469,7 +480,11 @@ public class ReportsApi {
      * the PNG format in the resolution of your choice. To enable this on your instance, contact
      * ThoughtSpot support. When this feature is enabled, the options
      * &#x60;include_cover_page&#x60;,&#x60;include_filter_page&#x60; within the
-     * &#x60;png_options&#x60; will not be available for PNG exports.
+     * &#x60;png_options&#x60; will not be available for PNG exports. **NOTE**: Starting with the
+     * ThoughtSpot Cloud 26.2.0.cl release, Liveboards can be exported in CSV format. All
+     * visualizations in the Liveboard can be exported as individual CSV files. If multiple
+     * visualizations are selected or if the entire Liveboard is exported, the output is returned as
+     * a .zip file containing the CSV files for each visualization.
      *
      * @param exportLiveboardReportRequest (required)
      * @param _callback The callback to be executed when the API call finishes

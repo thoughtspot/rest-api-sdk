@@ -114,10 +114,12 @@ docs/EntityHeader.md
 docs/ErrorResponse.md
 docs/EurekaDataSourceSuggestionResponse.md
 docs/EurekaDecomposeQueryResponse.md
+docs/EurekaGetNLInstructionsResponse.md
 docs/EurekaGetRelevantQuestionsResponse.md
 docs/EurekaLLMDecomposeQueryResponse.md
 docs/EurekaLLMSuggestedQuery.md
 docs/EurekaRelevantQuestion.md
+docs/EurekaSetNLInstructionsResponse.md
 docs/EventChannelConfig.md
 docs/EventChannelConfigInput.md
 docs/ExcludeMetadataListItemInput.md
@@ -151,6 +153,7 @@ docs/GetAsyncImportStatusResponse.md
 docs/GetCustomAccessTokenRequest.md
 docs/GetDataSourceSuggestionsRequest.md
 docs/GetFullAccessTokenRequest.md
+docs/GetNLInstructionsRequest.md
 docs/GetObjectAccessTokenRequest.md
 docs/GetRelevantQuestionsRequest.md
 docs/GetTokenResponse.md
@@ -191,6 +194,8 @@ docs/MetadataResponse.md
 docs/MetadataSearchResponse.md
 docs/MetadataSearchSortOptions.md
 docs/ModelTableList.md
+docs/NLInstructionsInfo.md
+docs/NLInstructionsInfoInput.md
 docs/ObjectIDAndName.md
 docs/Org.md
 docs/OrgChannelConfigInput.md
@@ -284,6 +289,7 @@ docs/SendAgentMessageRequest.md
 docs/SendAgentMessageResponse.md
 docs/SendAgentMessageStreamingRequest.md
 docs/SendMessageRequest.md
+docs/SetNLInstructionsRequest.md
 docs/ShareMetadataRequest.md
 docs/ShareMetadataTypeInput.md
 docs/SharePermissionsInput.md
@@ -350,6 +356,7 @@ docs/VariableDetailInput.md
 docs/VariableUpdateAssignmentInput.md
 docs/VariableUpdateScopeInput.md
 docs/VariableValue.md
+docs/VariableValues.md
 docs/VersionControlApi.md
 docs/WebhookAuthApiKey.md
 docs/WebhookAuthApiKeyInput.md
@@ -527,10 +534,12 @@ src/main/java/com/thoughtspot/client/model/EntityHeader.java
 src/main/java/com/thoughtspot/client/model/ErrorResponse.java
 src/main/java/com/thoughtspot/client/model/EurekaDataSourceSuggestionResponse.java
 src/main/java/com/thoughtspot/client/model/EurekaDecomposeQueryResponse.java
+src/main/java/com/thoughtspot/client/model/EurekaGetNLInstructionsResponse.java
 src/main/java/com/thoughtspot/client/model/EurekaGetRelevantQuestionsResponse.java
 src/main/java/com/thoughtspot/client/model/EurekaLLMDecomposeQueryResponse.java
 src/main/java/com/thoughtspot/client/model/EurekaLLMSuggestedQuery.java
 src/main/java/com/thoughtspot/client/model/EurekaRelevantQuestion.java
+src/main/java/com/thoughtspot/client/model/EurekaSetNLInstructionsResponse.java
 src/main/java/com/thoughtspot/client/model/EventChannelConfig.java
 src/main/java/com/thoughtspot/client/model/EventChannelConfigInput.java
 src/main/java/com/thoughtspot/client/model/ExcludeMetadataListItemInput.java
@@ -564,6 +573,7 @@ src/main/java/com/thoughtspot/client/model/GetAsyncImportStatusResponse.java
 src/main/java/com/thoughtspot/client/model/GetCustomAccessTokenRequest.java
 src/main/java/com/thoughtspot/client/model/GetDataSourceSuggestionsRequest.java
 src/main/java/com/thoughtspot/client/model/GetFullAccessTokenRequest.java
+src/main/java/com/thoughtspot/client/model/GetNLInstructionsRequest.java
 src/main/java/com/thoughtspot/client/model/GetObjectAccessTokenRequest.java
 src/main/java/com/thoughtspot/client/model/GetRelevantQuestionsRequest.java
 src/main/java/com/thoughtspot/client/model/GetTokenResponse.java
@@ -601,6 +611,8 @@ src/main/java/com/thoughtspot/client/model/MetadataResponse.java
 src/main/java/com/thoughtspot/client/model/MetadataSearchResponse.java
 src/main/java/com/thoughtspot/client/model/MetadataSearchSortOptions.java
 src/main/java/com/thoughtspot/client/model/ModelTableList.java
+src/main/java/com/thoughtspot/client/model/NLInstructionsInfo.java
+src/main/java/com/thoughtspot/client/model/NLInstructionsInfoInput.java
 src/main/java/com/thoughtspot/client/model/ObjectIDAndName.java
 src/main/java/com/thoughtspot/client/model/Org.java
 src/main/java/com/thoughtspot/client/model/OrgChannelConfigInput.java
@@ -689,6 +701,7 @@ src/main/java/com/thoughtspot/client/model/SendAgentMessageRequest.java
 src/main/java/com/thoughtspot/client/model/SendAgentMessageResponse.java
 src/main/java/com/thoughtspot/client/model/SendAgentMessageStreamingRequest.java
 src/main/java/com/thoughtspot/client/model/SendMessageRequest.java
+src/main/java/com/thoughtspot/client/model/SetNLInstructionsRequest.java
 src/main/java/com/thoughtspot/client/model/ShareMetadataRequest.java
 src/main/java/com/thoughtspot/client/model/ShareMetadataTypeInput.java
 src/main/java/com/thoughtspot/client/model/SharePermissionsInput.java
@@ -750,6 +763,7 @@ src/main/java/com/thoughtspot/client/model/VariableDetailInput.java
 src/main/java/com/thoughtspot/client/model/VariableUpdateAssignmentInput.java
 src/main/java/com/thoughtspot/client/model/VariableUpdateScopeInput.java
 src/main/java/com/thoughtspot/client/model/VariableValue.java
+src/main/java/com/thoughtspot/client/model/VariableValues.java
 src/main/java/com/thoughtspot/client/model/WebhookAuthApiKey.java
 src/main/java/com/thoughtspot/client/model/WebhookAuthApiKeyInput.java
 src/main/java/com/thoughtspot/client/model/WebhookAuthBasicAuth.java
@@ -892,10 +906,12 @@ src/test/java/com/thoughtspot/client/model/EntityHeaderTest.java
 src/test/java/com/thoughtspot/client/model/ErrorResponseTest.java
 src/test/java/com/thoughtspot/client/model/EurekaDataSourceSuggestionResponseTest.java
 src/test/java/com/thoughtspot/client/model/EurekaDecomposeQueryResponseTest.java
+src/test/java/com/thoughtspot/client/model/EurekaGetNLInstructionsResponseTest.java
 src/test/java/com/thoughtspot/client/model/EurekaGetRelevantQuestionsResponseTest.java
 src/test/java/com/thoughtspot/client/model/EurekaLLMDecomposeQueryResponseTest.java
 src/test/java/com/thoughtspot/client/model/EurekaLLMSuggestedQueryTest.java
 src/test/java/com/thoughtspot/client/model/EurekaRelevantQuestionTest.java
+src/test/java/com/thoughtspot/client/model/EurekaSetNLInstructionsResponseTest.java
 src/test/java/com/thoughtspot/client/model/EventChannelConfigInputTest.java
 src/test/java/com/thoughtspot/client/model/EventChannelConfigTest.java
 src/test/java/com/thoughtspot/client/model/ExcludeMetadataListItemInputTest.java
@@ -929,6 +945,7 @@ src/test/java/com/thoughtspot/client/model/GetAsyncImportStatusResponseTest.java
 src/test/java/com/thoughtspot/client/model/GetCustomAccessTokenRequestTest.java
 src/test/java/com/thoughtspot/client/model/GetDataSourceSuggestionsRequestTest.java
 src/test/java/com/thoughtspot/client/model/GetFullAccessTokenRequestTest.java
+src/test/java/com/thoughtspot/client/model/GetNLInstructionsRequestTest.java
 src/test/java/com/thoughtspot/client/model/GetObjectAccessTokenRequestTest.java
 src/test/java/com/thoughtspot/client/model/GetRelevantQuestionsRequestTest.java
 src/test/java/com/thoughtspot/client/model/GetTokenResponseTest.java
@@ -966,6 +983,8 @@ src/test/java/com/thoughtspot/client/model/MetadataResponseTest.java
 src/test/java/com/thoughtspot/client/model/MetadataSearchResponseTest.java
 src/test/java/com/thoughtspot/client/model/MetadataSearchSortOptionsTest.java
 src/test/java/com/thoughtspot/client/model/ModelTableListTest.java
+src/test/java/com/thoughtspot/client/model/NLInstructionsInfoInputTest.java
+src/test/java/com/thoughtspot/client/model/NLInstructionsInfoTest.java
 src/test/java/com/thoughtspot/client/model/ObjectIDAndNameTest.java
 src/test/java/com/thoughtspot/client/model/OrgChannelConfigInputTest.java
 src/test/java/com/thoughtspot/client/model/OrgChannelConfigResponseTest.java
@@ -1054,6 +1073,7 @@ src/test/java/com/thoughtspot/client/model/SendAgentMessageRequestTest.java
 src/test/java/com/thoughtspot/client/model/SendAgentMessageResponseTest.java
 src/test/java/com/thoughtspot/client/model/SendAgentMessageStreamingRequestTest.java
 src/test/java/com/thoughtspot/client/model/SendMessageRequestTest.java
+src/test/java/com/thoughtspot/client/model/SetNLInstructionsRequestTest.java
 src/test/java/com/thoughtspot/client/model/ShareMetadataRequestTest.java
 src/test/java/com/thoughtspot/client/model/ShareMetadataTypeInputTest.java
 src/test/java/com/thoughtspot/client/model/SharePermissionsInputTest.java
@@ -1115,6 +1135,7 @@ src/test/java/com/thoughtspot/client/model/VariableTest.java
 src/test/java/com/thoughtspot/client/model/VariableUpdateAssignmentInputTest.java
 src/test/java/com/thoughtspot/client/model/VariableUpdateScopeInputTest.java
 src/test/java/com/thoughtspot/client/model/VariableValueTest.java
+src/test/java/com/thoughtspot/client/model/VariableValuesTest.java
 src/test/java/com/thoughtspot/client/model/WebhookAuthApiKeyInputTest.java
 src/test/java/com/thoughtspot/client/model/WebhookAuthApiKeyTest.java
 src/test/java/com/thoughtspot/client/model/WebhookAuthBasicAuthInputTest.java
