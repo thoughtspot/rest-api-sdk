@@ -13872,8 +13872,7 @@
                       "en-AU",
                       "zh-Hant",
                       "ko-KR",
-                      "en-DE",
-                      "USE_BROWSER_LANGUAGE"
+                      "en-DE"
                     ]
                   },
                   "extended_properties": {
@@ -14761,8 +14760,7 @@
                       "en-AU",
                       "zh-Hant",
                       "ko-KR",
-                      "en-DE",
-                      "USE_BROWSER_LANGUAGE"
+                      "en-DE"
                     ]
                   },
                   "extended_properties": {
@@ -18904,8 +18902,7 @@
               "en-AU",
               "zh-Hant",
               "ko-KR",
-              "en-DE",
-              "USE_BROWSER_LANGUAGE"
+              "en-DE"
             ]
           },
           "number_format_locale": {
@@ -18939,8 +18936,7 @@
               "en-AU",
               "zh-Hant",
               "ko-KR",
-              "en-DE",
-              "USE_BROWSER_LANGUAGE"
+              "en-DE"
             ]
           },
           "date_format_locale": {
@@ -18974,8 +18970,7 @@
               "en-AU",
               "zh-Hant",
               "ko-KR",
-              "en-DE",
-              "USE_BROWSER_LANGUAGE"
+              "en-DE"
             ]
           }
         }

@@ -11226,7 +11226,6 @@ components:
           - zh-Hant
           - ko-KR
           - en-DE
-          - USE_BROWSER_LANGUAGE
           nullable: true
           type: string
         number_format_locale:
@@ -11259,7 +11258,6 @@ components:
           - zh-Hant
           - ko-KR
           - en-DE
-          - USE_BROWSER_LANGUAGE
           nullable: true
           type: string
         date_format_locale:
@@ -11292,7 +11290,6 @@ components:
           - zh-Hant
           - ko-KR
           - en-DE
-          - USE_BROWSER_LANGUAGE
           nullable: true
           type: string
       type: object
@@ -22131,7 +22128,6 @@ components:
           - zh-Hant
           - ko-KR
           - en-DE
-          - USE_BROWSER_LANGUAGE
           type: string
         extended_properties:
           description: Properties for the user
@@ -22478,7 +22474,6 @@ components:
           - zh-Hant
           - ko-KR
           - en-DE
-          - USE_BROWSER_LANGUAGE
           type: string
         extended_properties:
           description: Properties for the user
