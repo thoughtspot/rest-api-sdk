@@ -10,6 +10,8 @@
 |**connectionIdentifier** | **String** | Unique ID or name of the connection. |  |
 |**name** | **String** | Name of the configuration to update. |  [optional] |
 |**description** | **String** | Description of the configuration. |  [optional] |
+|**sameAsParent** | **Boolean** | Specifies whether the connection configuration should inherit all properties and authentication type from its parent connection. This attribute is only applicable to parameterized connections. When set to true, the configuration uses only the connection properties and authentication type inherited from the parent.    Version: 26.2.0.cl or later  |  [optional] |
+|**policyProcessOptions** | [**PolicyProcessOptionsInput**](PolicyProcessOptionsInput.md) | This attribute is only applicable to parameterized connections. Ensure that the policy is set to Processes to allow the configuration to be used exclusively for system processes.    Version: 26.2.0.cl or later  |  [optional] |
 |**authenticationType** | [**AuthenticationTypeEnum**](#AuthenticationTypeEnum) | Type of authentication. |  [optional] |
 |**_configuration** | **Object** | Configuration properties in JSON. |  [optional] |
 |**policyType** | [**PolicyTypeEnum**](#PolicyTypeEnum) | Type of policy. |  [optional] |

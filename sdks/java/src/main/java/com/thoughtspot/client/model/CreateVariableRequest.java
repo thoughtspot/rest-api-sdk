@@ -104,7 +104,10 @@ public class CreateVariableRequest implements Serializable {
     @javax.annotation.Nullable
     private Boolean isSensitive = false;
 
-    /** Variable Data Type */
+    /**
+     * Variable Data Type, only for formula_variable type, leave empty for others Version:
+     * 10.15.0.cl or later
+     */
     @JsonAdapter(DataTypeEnum.Adapter.class)
     public enum DataTypeEnum {
         VARCHAR("VARCHAR"),
@@ -234,7 +237,8 @@ public class CreateVariableRequest implements Serializable {
     }
 
     /**
-     * Variable Data Type
+     * Variable Data Type, only for formula_variable type, leave empty for others Version:
+     * 10.15.0.cl or later
      *
      * @return dataType
      */

@@ -21,6 +21,7 @@
 |---- | -----|
 | LOGICAL_TABLE | &quot;LOGICAL_TABLE&quot; |
 | CONNECTION | &quot;CONNECTION&quot; |
+| CONNECTION_CONFIG | &quot;CONNECTION_CONFIG&quot; |
 
 
 
