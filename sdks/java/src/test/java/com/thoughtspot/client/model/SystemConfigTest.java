@@ -21,4 +21,16 @@ public class SystemConfigTest {
     public void onboardingContentUrlTest() {
         // TODO: test onboardingContentUrl
     }
+
+    /** Test the property 'samlEnabled' */
+    @Test
+    public void samlEnabledTest() {
+        // TODO: test samlEnabled
+    }
+
+    /** Test the property 'oktaEnabled' */
+    @Test
+    public void oktaEnabledTest() {
+        // TODO: test oktaEnabled
+    }
 }

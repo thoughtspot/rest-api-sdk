@@ -33,6 +33,8 @@ Email customization configuration properties
 |**hideModifyAlert** | **Boolean** | Whether to hide modify alert |  [optional] |
 |**companyPrivacyPolicyUrl** | **String** | Company privacy policy URL (HTTP/HTTPS only) |  [optional] |
 |**companyWebsiteUrl** | **String** | Company website URL (HTTP/HTTPS only) |  [optional] |
+|**contactSupportUrl** | **String** | Contact support url (HTTP/HTTPS only). |  [optional] |
+|**hideContactSupportUrl** | **Boolean** | Whether to hide contact support url. |  [optional] |
 
 
 ## Implemented Interfaces
