@@ -77,6 +77,6 @@ export class ParameterizeMetadataRequest {
 }
 
 
-export type ParameterizeMetadataRequestMetadataTypeEnum = "LOGICAL_TABLE" | "CONNECTION" ;
+export type ParameterizeMetadataRequestMetadataTypeEnum = "LOGICAL_TABLE" | "CONNECTION" | "CONNECTION_CONFIG" ;
 export type ParameterizeMetadataRequestFieldTypeEnum = "ATTRIBUTE" | "CONNECTION_PROPERTY" ;
 
