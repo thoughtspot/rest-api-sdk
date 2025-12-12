@@ -306,6 +306,18 @@ public class ConnectionConfigurationResponse implements Serializable {
     @javax.annotation.Nullable
     private PolicyTypeEnum policyType;
 
+    public static final String SERIALIZED_NAME_SAME_AS_PARENT = "same_as_parent";
+
+    @SerializedName(SERIALIZED_NAME_SAME_AS_PARENT)
+    @javax.annotation.Nullable
+    private Boolean sameAsParent;
+
+    public static final String SERIALIZED_NAME_POLICY_PROCESS_OPTIONS = "policy_process_options";
+
+    @SerializedName(SERIALIZED_NAME_POLICY_PROCESS_OPTIONS)
+    @javax.annotation.Nullable
+    private PolicyProcessOptions policyProcessOptions;
+
     public ConnectionConfigurationResponse() {}
 
     public ConnectionConfigurationResponse configurationIdentifier(
@@ -508,6 +520,47 @@ public class ConnectionConfigurationResponse implements Serializable {
         this.policyType = policyType;
     }
 
+    public ConnectionConfigurationResponse sameAsParent(
+            @javax.annotation.Nullable Boolean sameAsParent) {
+        this.sameAsParent = sameAsParent;
+        return this;
+    }
+
+    /**
+     * Get sameAsParent
+     *
+     * @return sameAsParent
+     */
+    @javax.annotation.Nullable
+    public Boolean getSameAsParent() {
+        return sameAsParent;
+    }
+
+    public void setSameAsParent(@javax.annotation.Nullable Boolean sameAsParent) {
+        this.sameAsParent = sameAsParent;
+    }
+
+    public ConnectionConfigurationResponse policyProcessOptions(
+            @javax.annotation.Nullable PolicyProcessOptions policyProcessOptions) {
+        this.policyProcessOptions = policyProcessOptions;
+        return this;
+    }
+
+    /**
+     * Get policyProcessOptions
+     *
+     * @return policyProcessOptions
+     */
+    @javax.annotation.Nullable
+    public PolicyProcessOptions getPolicyProcessOptions() {
+        return policyProcessOptions;
+    }
+
+    public void setPolicyProcessOptions(
+            @javax.annotation.Nullable PolicyProcessOptions policyProcessOptions) {
+        this.policyProcessOptions = policyProcessOptions;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -532,7 +585,11 @@ public class ConnectionConfigurationResponse implements Serializable {
                 && Objects.equals(this.disabled, connectionConfigurationResponse.disabled)
                 && Objects.equals(
                         this.dataWarehouseType, connectionConfigurationResponse.dataWarehouseType)
-                && Objects.equals(this.policyType, connectionConfigurationResponse.policyType);
+                && Objects.equals(this.policyType, connectionConfigurationResponse.policyType)
+                && Objects.equals(this.sameAsParent, connectionConfigurationResponse.sameAsParent)
+                && Objects.equals(
+                        this.policyProcessOptions,
+                        connectionConfigurationResponse.policyProcessOptions);
     }
 
     private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -555,7 +612,9 @@ public class ConnectionConfigurationResponse implements Serializable {
                 policyProcesses,
                 disabled,
                 dataWarehouseType,
-                policyType);
+                policyType,
+                sameAsParent,
+                policyProcessOptions);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -582,6 +641,10 @@ public class ConnectionConfigurationResponse implements Serializable {
                 .append(toIndentedString(dataWarehouseType))
                 .append("\n");
         sb.append("    policyType: ").append(toIndentedString(policyType)).append("\n");
+        sb.append("    sameAsParent: ").append(toIndentedString(sameAsParent)).append("\n");
+        sb.append("    policyProcessOptions: ")
+                .append(toIndentedString(policyProcessOptions))
+                .append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -612,6 +675,8 @@ public class ConnectionConfigurationResponse implements Serializable {
         openapiFields.add("disabled");
         openapiFields.add("data_warehouse_type");
         openapiFields.add("policy_type");
+        openapiFields.add("same_as_parent");
+        openapiFields.add("policy_process_options");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -728,6 +793,11 @@ public class ConnectionConfigurationResponse implements Serializable {
         // validate the optional field `policy_type`
         if (jsonObj.get("policy_type") != null && !jsonObj.get("policy_type").isJsonNull()) {
             PolicyTypeEnum.validateJsonElement(jsonObj.get("policy_type"));
+        }
+        // validate the optional field `policy_process_options`
+        if (jsonObj.get("policy_process_options") != null
+                && !jsonObj.get("policy_process_options").isJsonNull()) {
+            PolicyProcessOptions.validateJsonElement(jsonObj.get("policy_process_options"));
         }
     }
 
