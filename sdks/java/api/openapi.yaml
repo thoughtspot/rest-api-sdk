@@ -121,147 +121,6 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
-  /api/rest/2.0/ai/data-source-suggestions:
-    post:
-      description: |2+
-
-        Version: 10.13.0.cl or later
-
-
-        Provides relevant data source recommendations for a user-submitted natural language query.
-
-        To use this API, the user must have at least view-level access to the underlying metadata entities referenced in the response.
-
-        #### Usage guidelines
-
-        The request must include a `query` string via the request body.
-
-        The returned results include metadata such as:
-        - `confidence`: a float indicating the model's confidence in the relevance of each recommendation
-        - `details`: includes `data_source_identifier`, `data_source_name`, and `description` of each recommended data source
-        - `reasoning`: rationale provided by the LLM to explain why each data source was recommended
-
-        If the API request is successful, ThoughtSpot returns a ranked list of data sources, each annotated with relevant reasoning.
-
-        > ###### Note:
-        > * This endpoint is currently in Beta. Breaking changes may be introduced before it is made Generally Available.
-        > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.
-
-
-
-
-
-      operationId: getDataSourceSuggestions
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/getDataSourceSuggestions_request'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/eureka_DataSourceSuggestionResponse'
-          description: Common successful response
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/eureka_DataSourceSuggestionResponse'
-          description: Common error response
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Operation failed
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Operation failed
-      tags:
-      - AI
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/ai/instructions/get:
-    post:
-      description: |2+
-
-        Version: 10.15.0.cl or later
-
-
-        This API allows users to retrieve existing natural language (NL) instructions for a specific data-model. These instructions guide the AI system in understanding data context and generating more accurate responses when processing natural language queries.
-
-        #### Usage guidelines
-
-        To retrieve NL instructions for a data-model, the request must include:
-        - `data_source_identifier`: The unique ID or name of the data-model to retrieve NL instructions
-
-        The API returns a response object with:
-        - `nl_instructions_info`: An array of instruction objects, each containing:
-          - `instructions`: Array of text instructions for natural language processing
-          - `scope`: The scope of the instruction (`GLOBAL`). It can be extended to data-model-user scope in future.
-
-        #### Instructions Scope
-
-        - **GLOBAL**: Instructions that apply globally across the system on the given data-model (currently only global instructions are supported)
-
-        > ###### Note:
-        > * To use this API, the user needs atleast view access on the data-model and they must use corresponding org related bearerToken where the data-model exists.
-        > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.
-        > * Available from version 10.15.0.cl and later.
-        > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.
-        > * Use this API to view currently configured instructions before modifying them with `setNLInstructions`.
-
-
-
-
-      operationId: getNLInstructions
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/getNLInstructions_request'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/eureka_GetNLInstructionsResponse'
-          description: Common successful response
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/eureka_GetNLInstructionsResponse'
-          description: Common error response
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Operation failed
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Operation failed
-      tags:
-      - AI
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
   /api/rest/2.0/ai/relevant-questions/:
     post:
       description: |2+
@@ -360,70 +219,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/eureka_DecomposeQueryResponse'
-          description: Common error response
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Operation failed
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Operation failed
-      tags:
-      - AI
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/ai/agent/{conversation_identifier}/converse:
-    post:
-      description: "\nVersion: 10.13.0.cl or later\n\n\nThis API allows users to initiate\
-        \ or continue an agent (Spotter) conversation by submitting one or more natural\
-        \ language messages. \nTo use this API, the user must have access to the relevant\
-        \ conversational session (via conversation_identifier) and submit at least\
-        \ one message.\n\n\n#### Usage guidelines\n\nTo initiate or continue a conversation,\
-        \ the request must include:\n- `conversation_identifier`: a unique session\
-        \ ID for continuity and message tracking\n- `messages`: an array of one or\
-        \ more text messages, each with a value and type\n\nThe API returns a array\
-        \ of object with a type, message, and metadata.\n- `type`: Type of the message\
-        \ — text, answer, or error.\n- `message`: Main content of the response.\n\
-        - `metadata`: Additional info depending on the message type.\n\n> ###### Note:\n\
-        > * This endpoint is currently in Beta. Breaking changes may be introduced\
-        \ before the endpoint is made Generally Available.\n> * This endpoint requires\
-        \ Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\
-        \n\n\n\n"
-      operationId: sendAgentMessage
-      parameters:
-      - description: Unique identifier for the conversation (used to track context)
-        explode: false
-        in: path
-        name: conversation_identifier
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/sendAgentMessage_request'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                type: object
-          description: Common successful response
-        "201":
-          content:
-            application/json:
-              schema:
-                type: object
           description: Common error response
         "400":
           content:
@@ -562,80 +357,6 @@ paths:
                 items:
                   $ref: '#/components/schemas/ResponseMessage'
                 type: array
-          description: Common error response
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Operation failed
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Operation failed
-      tags:
-      - AI
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/ai/instructions/set:
-    post:
-      description: |2+
-
-        Version: 10.15.0.cl or later
-
-
-        This API allows users to set natural language (NL) instructions for a specific data-model to improve AI-generated answers and query processing. These instructions help guide the AI system to better understand the data context and provide more accurate responses.
-
-        #### Usage guidelines
-
-        To set NL instructions for a data-model, the request must include:
-        - `data_source_identifier`: The unique ID or name of the data-model for which to set NL instructions
-        - `nl_instructions_info`: An array of instruction objects, each containing:
-          - `instructions`: Array of text instructions for the LLM
-          - `scope`: The scope of the instruction (`GLOBAL`). Currently only `GLOBAL` is supported. It can be extended to data-model-user scope in future.
-
-        The API returns a response object with:
-        - `success`: Boolean indicating whether the operation was successful
-
-        #### Instructions Scope
-
-        - **GLOBAL**: Instructions that apply globally for that data-model across the system
-
-        > ###### Note:
-        > * To use this API, the user needs either edit access or SPOTTER_COACHING_PRIVILEGE on the data-model and they must use corresponding org related bearerToken where the data-model exists.
-        > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.
-        > * Available from version 10.15.0.cl and later.
-        > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.
-        > * Instructions help improve the accuracy and relevance of AI-generated responses for the specified data-model.
-
-
-
-
-
-      operationId: setNLInstructions
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/setNLInstructions_request'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/eureka_SetNLInstructionsResponse'
-          description: Common successful response
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/eureka_SetNLInstructionsResponse'
           description: Common error response
         "400":
           content:
@@ -1411,7 +1132,10 @@ paths:
         \ `PRINCIPALS`, then `policy_principals` is a required field.\n* If the `policy_type`\
         \ is `PROCESSES`, then `policy_processes` is a required field.\n* If the `policy_type`\
         \ is `NO_POLICY`, then `policy_principals` and `policy_processes` are not\
-        \ required fields.\n\n\n\n\n\n"
+        \ required fields.\n\n#### Parameterized Connection Support\nFor parameterized\
+        \ connections that use OAuth authentication, only the same_as_parent and policy_process_options\
+        \  attributes are allowed in the API request. These attributes are not applicable\
+        \ to connections that are not parameterized.\n\n\n\n\n\n\n"
       operationId: createConnectionConfiguration
       parameters: []
       requestBody:
@@ -1517,19 +1241,35 @@ paths:
       - application/json
   /api/rest/2.0/connection-configurations/{configuration_identifier}/update:
     post:
-      description: "\n Version: 10.12.0.cl or later\n\n\nUpdates a connection configuration\
-        \ object.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions\
-        \ to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**)\
-        \ privilege.\n\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
-        \ is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can\
-        \ create/edit Connections**) privilege is required.\n\n#### Supported operations\n\
-        This API endpoint lets you perform the following operations in a single API\
-        \ request:\n\n * Edit the name or description of the configuration\n * Edit\
-        \ the configuration properties\n * Edit the `policy_type`\n * Edit the type\
-        \ of authentication\n * Enable or disable a configuration\n\n **NOTE**: When\
-        \ updating a configuration where `disabled` is `true`, you must reset `disabled`\
-        \ to `true` in your update request payload. If not explicitly set again, the\
-        \ API will default `disabled` to `false`.\n \n\n\n\n\n"
+      description: |2+
+
+         Version: 10.12.0.cl or later
+
+
+        Updates a connection configuration object.
+
+        Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.
+
+        #### Supported operations
+        This API endpoint lets you perform the following operations in a single API request:
+
+         * Edit the name or description of the configuration
+         * Edit the configuration properties
+         * Edit the `policy_type`
+         * Edit the type of authentication
+         * Enable or disable a configuration
+
+        #### Parameterized Connection Support
+        For parameterized oauth based connections, only the `same_as_parent` and `policy_process_options` attributes are allowed. These attributes are not applicable to connections that are not parameterized.
+
+         **NOTE**: When updating a configuration where `disabled` is `true`, you must reset `disabled` to `true` in your update request payload. If not explicitly set again, the API will default `disabled` to `false`.
+
+
+
+
+
       operationId: updateConnectionConfiguration
       parameters:
       - description: Unique ID or name of the configuration.
@@ -4953,11 +4693,13 @@ paths:
         \ or later\n\n\nAllows parameterizing fields in metadata objects in ThoughtSpot.\n\
         \nRequires appropriate permissions to modify the metadata object.\n\nThe API\
         \ endpoint allows parameterizing the following types of metadata objects:\n\
-        * Logical Tables\n* Connections\n\nFor a Logical Table the field type must\
-        \ be `ATTRIBUTE` and field name can be one of:\n* databaseName\n* schemaName\n\
-        * tableName\n\nFor a Connection the field type is always `CONNECTION_PROPERTY`.\
-        \ We use the field_name in this\ncase to specify the exact property of a connection\
-        \ which needs to be parameterized.\n\n\n\n\n\n"
+        * Logical Tables\n* Connections\n* Connection Configs\n\nFor a Logical Table\
+        \ the field type must be `ATTRIBUTE` and field name can be one of:\n* databaseName\n\
+        * schemaName\n* tableName\n\nFor a Connection or Connection Config, the field\
+        \ type is always `CONNECTION_PROPERTY`. In this case, field_name specifies\
+        \ the exact property of the Connection or Connection Config that needs to\
+        \ be parameterized.\n\nFor Connection Config, the only supported field name\
+        \ is:\n* impersonate_user\n\n\n\n\n\n"
       operationId: parameterizeMetadata
       parameters: []
       requestBody:
@@ -5095,11 +4837,12 @@ paths:
         \ in metadata objects in ThoughtSpot.\n\nRequires appropriate permissions\
         \ to modify the metadata object.\n\nThe API endpoint allows unparameterizing\
         \ the following types of metadata objects:\n* Logical Tables\n* Connections\n\
-        \nFor a Logical Table the field type must be `ATTRIBUTE` and field name can\
-        \ be one of:\n* databaseName\n* schemaName\n* tableName\n\nFor a Connection\
-        \ the field type is always `CONNECTION_PROPERTY`. We use the field_name in\
-        \ this\ncase to specify the exact property of a connection which needs to\
-        \ be unparameterized.\n\n\n\n\n\n"
+        * Connection Configs\n\nFor a Logical Table the field type must be `ATTRIBUTE`\
+        \ and field name can be one of:\n* databaseName\n* schemaName\n* tableName\n\
+        \nFor a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`.\
+        \ In this case, field_name specifies the exact property of the Connection\
+        \ or Connection Config that needs to be unparameterized.\n\nFor Connection\
+        \ Config, the only supported field name is:\n* impersonate_user\n\n\n\n\n\n"
       operationId: unparameterizeMetadata
       parameters: []
       requestBody:
@@ -5631,17 +5374,17 @@ paths:
   /api/rest/2.0/report/liveboard:
     post:
       description: "\n Version: 9.0.0.cl or later\n\n\nExports a Liveboard and its\
-        \ visualizations in PDF or PNG file format.\n\nRequires at least view access\
-        \ to the Liveboard.\n\n#### Usage guidelines\n\nIn the request body, specify\
-        \ the GUID or name of the Liveboard. To generate a Liveboard report with specific\
-        \ visualizations, add GUIDs or names of the visualizations.\n\nThe default\
-        \ `file_format` is PDF. For PDF downloads, you can specify additional parameters\
-        \ to customize the page orientation and include or exclude the cover page,\
-        \ logo, footer text, and page numbers. Similar customization options are also\
-        \ available for PNG output.\n\n**NOTE**: The downloadable file returned in\
-        \ API response file is extensionless. Please rename the downloaded file by\
-        \ typing in the relevant extension.\n\nOptionally, you can define [runtime\
-        \ overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)\
+        \ visualizations in PDF, PNG, CSV, or XLSX file format.\n\nRequires at least\
+        \ view access to the Liveboard.\n\n#### Usage guidelines\n\nIn the request\
+        \ body, specify the GUID or name of the Liveboard. To generate a Liveboard\
+        \ report with specific visualizations, add GUIDs or names of the visualizations.\n\
+        \nThe default `file_format` is CSV. For PDF exports, you can specify additional\
+        \ parameters to customize the page orientation and include or exclude the\
+        \ cover page, logo, footer text, and page numbers. Similar customization options\
+        \ are available for PNG exports. CSV and XLSX exports do not support customization\
+        \ options.\n\n**NOTE**: The downloadable file returned in API response file\
+        \ is extensionless. Please rename the downloaded file by typing in the relevant\
+        \ extension.\n\nOptionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)\
         \ to apply to the Answer data.\n\nTo include unsaved changes in the report,\
         \ pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard`\
         \ method in the Visual Embed SDK. Upon successful execution, the API returns\
@@ -5651,7 +5394,16 @@ paths:
         \ can be exported in the PNG format in the resolution of your choice. To enable\
         \ this on your instance, contact ThoughtSpot support. When this feature is\
         \ enabled, the options `include_cover_page`,`include_filter_page` within the\
-        \ `png_options` will not be available for PNG exports.\n\n\n\n\n"
+        \ `png_options` will not be available for PNG exports.\n\n**NOTE**: Starting\
+        \ with the ThoughtSpot Cloud 26.2.0.cl release, Liveboards can be exported\
+        \ in CSV format. All visualizations in the Liveboard can be exported as individual\
+        \ CSV files. If multiple visualizations are selected or if the entire Liveboard\
+        \ is exported, the output is returned as a .zip file containing the CSV files\
+        \ for each visualization.\n\n**NOTE**: Starting with the ThoughtSpot Cloud\
+        \ 26.2.0.cl release, Liveboards can be exported in XLSX format. All selected\
+        \ visualizations are consolidated into a single Excel workbook (.xlsx), with\
+        \ each visualization placed in its own worksheet (tab). XLSX exports are limited\
+        \ to 255 worksheets (tabs) per workbook.\n\n\n\n\n\n"
       operationId: exportLiveboardReport
       parameters: []
       requestBody:
@@ -10065,10 +9817,18 @@ components:
     SystemConfig:
       example:
         onboarding_content_url: onboarding_content_url
+        saml_enabled: true
+        okta_enabled: true
       properties:
         onboarding_content_url:
           nullable: true
           type: string
+        saml_enabled:
+          nullable: true
+          type: boolean
+        okta_enabled:
+          nullable: true
+          type: boolean
       type: object
     SystemOverrideInfo:
       example:
@@ -10211,6 +9971,160 @@ components:
       required:
       - id
       - name
+      type: object
+    SecuritySettingsResponse:
+      description: Response type for security settings search.
+      properties:
+        cluster_preferences:
+          $ref: '#/components/schemas/SecuritySettingsClusterPreferences'
+        org_preferences:
+          description: Org-level security preferences.
+          items:
+            $ref: '#/components/schemas/SecuritySettingsOrgPreferences'
+          nullable: true
+          type: array
+      type: object
+    SecuritySettingsClusterPreferences:
+      description: Cluster-level security preferences.
+      properties:
+        enable_partitioned_cookies:
+          description: Support embedded access when third-party cookies are blocked.
+          nullable: true
+          type: boolean
+        cors_whitelisted_urls:
+          description: Allowed origins for CORS.
+          items:
+            type: string
+          nullable: true
+          type: array
+        csp_settings:
+          $ref: '#/components/schemas/CspSettings'
+        saml_redirect_urls:
+          description: Allowed redirect hosts for SAML login.
+          items:
+            type: string
+          nullable: true
+          type: array
+        non_embed_access:
+          $ref: '#/components/schemas/ClusterNonEmbedAccess'
+      type: object
+    CspSettings:
+      description: CSP (Content Security Policy) settings.
+      properties:
+        connect_src_urls:
+          description: Allowed URLs for connect-src directive.
+          items:
+            type: string
+          nullable: true
+          type: array
+        font_src_urls:
+          description: Allowed URLs for font-src directive.
+          items:
+            type: string
+          nullable: true
+          type: array
+        visual_embed_hosts:
+          description: Allowed hosts for visual embed (frame-ancestors directive).
+          items:
+            type: string
+          nullable: true
+          type: array
+        iframe_src_urls:
+          description: Allowed URLs for frame-src directive.
+          items:
+            type: string
+          nullable: true
+          type: array
+        img_src_urls:
+          description: Allowed URLs for img-src directive.
+          items:
+            type: string
+          nullable: true
+          type: array
+        script_src_urls:
+          $ref: '#/components/schemas/ScriptSrcUrls'
+        style_src_urls:
+          description: Allowed URLs for style-src directive.
+          items:
+            type: string
+          nullable: true
+          type: array
+      type: object
+    ScriptSrcUrls:
+      description: Script-src CSP settings.
+      properties:
+        enabled:
+          description: Whether script-src customization is enabled.
+          nullable: true
+          type: boolean
+        urls:
+          description: Allowed URLs for script-src directive. Can only be set if enabled
+            is true.
+          items:
+            type: string
+          nullable: true
+          type: array
+      type: object
+    ClusterNonEmbedAccess:
+      description: Cluster-level non-embed access configuration.
+      properties:
+        block_full_app_access:
+          description: Block full application access for non-embedded usage.
+          nullable: true
+          type: boolean
+      type: object
+    SecuritySettingsOrgPreferences:
+      description: Org-level security preferences.
+      properties:
+        org:
+          $ref: '#/components/schemas/SecuritySettingsOrgDetails'
+        cors_whitelisted_urls:
+          description: Allowed origins for CORS for this org.
+          items:
+            type: string
+          nullable: true
+          type: array
+        non_embed_access:
+          $ref: '#/components/schemas/OrgNonEmbedAccess'
+      type: object
+    SecuritySettingsOrgDetails:
+      description: Org details for security settings.
+      properties:
+        id:
+          description: Unique identifier of the org.
+          format: int32
+          nullable: true
+          type: integer
+        name:
+          description: Name of the org.
+          nullable: true
+          type: string
+      type: object
+    OrgNonEmbedAccess:
+      description: Org-level non-embed access configuration.
+      properties:
+        block_full_app_access:
+          description: Block full application access for non-embedded usage.
+          nullable: true
+          type: boolean
+        groups_with_access:
+          description: Groups that have non-embed full app access.
+          items:
+            $ref: '#/components/schemas/GroupInfo'
+          nullable: true
+          type: array
+      type: object
+    GroupInfo:
+      description: Group information for non-embed access.
+      properties:
+        id:
+          description: Unique identifier of the group.
+          nullable: true
+          type: string
+        name:
+          description: Name of the group.
+          nullable: true
+          type: string
       type: object
     OrgResponse:
       example:
@@ -13343,20 +13257,6 @@ components:
           type: string
       type: object
     eureka_DataSourceSuggestionResponse:
-      example:
-        data_sources:
-        - confidence: 0.8008282
-          reasoning: reasoning
-          details:
-            data_source_identifier: data_source_identifier
-            description: description
-            data_source_name: data_source_name
-        - confidence: 0.8008282
-          reasoning: reasoning
-          details:
-            data_source_identifier: data_source_identifier
-            description: description
-            data_source_name: data_source_name
       properties:
         data_sources:
           description: List of data sources suggested.
@@ -13366,13 +13266,6 @@ components:
           type: array
       type: object
     DataSource:
-      example:
-        confidence: 0.8008282
-        reasoning: reasoning
-        details:
-          data_source_identifier: data_source_identifier
-          description: description
-          data_source_name: data_source_name
       properties:
         confidence:
           description: Confidence score for the data source suggestion.
@@ -13387,10 +13280,6 @@ components:
           type: string
       type: object
     EntityHeader:
-      example:
-        data_source_identifier: data_source_identifier
-        description: description
-        data_source_name: data_source_name
       properties:
         description:
           description: Description of the data source.
@@ -13406,16 +13295,6 @@ components:
           type: string
       type: object
     eureka_GetNLInstructionsResponse:
-      example:
-        nl_instructions_info:
-        - instructions:
-          - instructions
-          - instructions
-          scope: GLOBAL
-        - instructions:
-          - instructions
-          - instructions
-          scope: GLOBAL
       properties:
         nl_instructions_info:
           description: List of NL instructions with their scopes.
@@ -13426,11 +13305,6 @@ components:
       - nl_instructions_info
       type: object
     NLInstructionsInfo:
-      example:
-        instructions:
-        - instructions
-        - instructions
-        scope: GLOBAL
       properties:
         instructions:
           description: User instructions for natural language processing.
@@ -13664,9 +13538,12 @@ components:
     ConnectionConfigurationResponse:
       example:
         policy_type: NO_POLICY
+        policy_process_options:
+          impersonate_user: impersonate_user
         configuration_identifier: configuration_identifier
         configuration: "{}"
         name: name
+        same_as_parent: true
         description: description
         disabled: true
         policy_principals:
@@ -13753,6 +13630,11 @@ components:
           - PROCESSES
           nullable: true
           type: string
+        same_as_parent:
+          nullable: true
+          type: boolean
+        policy_process_options:
+          $ref: '#/components/schemas/PolicyProcessOptions'
       type: object
     UserPrincipal:
       example:
@@ -13767,6 +13649,14 @@ components:
           nullable: true
           type: string
         type:
+          nullable: true
+          type: string
+      type: object
+    PolicyProcessOptions:
+      example:
+        impersonate_user: impersonate_user
+      properties:
+        impersonate_user:
           nullable: true
           type: string
       type: object
@@ -14840,6 +14730,129 @@ components:
       required:
       - org_identifier
       type: object
+    SecuritySettingsClusterPreferencesInput:
+      description: Input for cluster-level security preferences configuration.
+      properties:
+        enable_partitioned_cookies:
+          description: Support embedded access when third-party cookies are blocked.
+          nullable: true
+          type: boolean
+        cors_whitelisted_urls:
+          description: Allowed origins for CORS.
+          items:
+            type: string
+          nullable: true
+          type: array
+        csp_settings:
+          $ref: '#/components/schemas/CspSettingsInput'
+        saml_redirect_urls:
+          description: Allowed redirect hosts for SAML login.
+          items:
+            type: string
+          nullable: true
+          type: array
+        non_embed_access:
+          $ref: '#/components/schemas/ClusterNonEmbedAccessInput'
+      type: object
+    CspSettingsInput:
+      description: Input for CSP (Content Security Policy) settings.
+      properties:
+        connect_src_urls:
+          description: Allowed URLs for connect-src directive.
+          items:
+            type: string
+          nullable: true
+          type: array
+        font_src_urls:
+          description: Allowed URLs for font-src directive.
+          items:
+            type: string
+          nullable: true
+          type: array
+        visual_embed_hosts:
+          description: Allowed hosts for visual embed (frame-ancestors directive).
+          items:
+            type: string
+          nullable: true
+          type: array
+        iframe_src_urls:
+          description: Allowed URLs for frame-src directive.
+          items:
+            type: string
+          nullable: true
+          type: array
+        img_src_urls:
+          description: Allowed URLs for img-src directive.
+          items:
+            type: string
+          nullable: true
+          type: array
+        script_src_urls:
+          $ref: '#/components/schemas/ScriptSrcUrlsInput'
+        style_src_urls:
+          description: Allowed URLs for style-src directive.
+          items:
+            type: string
+          nullable: true
+          type: array
+      type: object
+    ScriptSrcUrlsInput:
+      description: Input for script-src CSP settings.
+      properties:
+        enabled:
+          description: Whether script-src customization is enabled.
+          nullable: true
+          type: boolean
+        urls:
+          description: Allowed URLs for script-src directive. Can only be set if enabled
+            is true.
+          items:
+            type: string
+          nullable: true
+          type: array
+      type: object
+    ClusterNonEmbedAccessInput:
+      description: Input for cluster-level non-embed access configuration.
+      properties:
+        block_full_app_access:
+          description: Block full application access for non-embedded usage.
+          nullable: true
+          type: boolean
+      type: object
+    SecuritySettingsOrgPreferencesInput:
+      description: |-
+        Input for org-level security preferences configuration.
+        Note: cross-org operations are not supported currently.
+      properties:
+        org_identifier:
+          description: Unique identifier or name of the org
+          type: string
+        cors_whitelisted_urls:
+          description: Allowed origins for CORS for this org.
+          items:
+            type: string
+          nullable: true
+          type: array
+        non_embed_access:
+          $ref: '#/components/schemas/OrgNonEmbedAccessInput'
+      required:
+      - org_identifier
+      type: object
+    OrgNonEmbedAccessInput:
+      description: Input for org-level non-embed access configuration.
+      properties:
+        block_full_app_access:
+          description: Block full application access for non-embedded usage.
+          nullable: true
+          type: boolean
+        groups_identifiers_with_access:
+          description: Group identifiers that are allowed non-embed full app access.
+            Can only be set if block_full_app_access is true.
+          items:
+            type: string
+          nullable: true
+          type: array
+      type: object
     TagMetadataTypeInput:
       properties:
         type:
@@ -15803,6 +15816,15 @@ components:
           description: Status of the connection diff.
           nullable: true
           type: boolean
+      type: object
+    RevokeRefreshTokensResponse:
+      properties:
+        data:
+          description: Result message describing the outcome of the refresh token
+            revocation operation.
+          type: string
+      required:
+      - data
       type: object
     RoleResponse:
       example:
@@ -16918,8 +16940,6 @@ components:
       - scope
       type: object
     eureka_SetNLInstructionsResponse:
-      example:
-        success: true
       properties:
         success:
           description: Success status of the operation.
@@ -17122,6 +17142,14 @@ components:
           description: Company website URL (HTTP/HTTPS only)
           nullable: true
           type: string
+        contact_support_url:
+          description: Contact support url (HTTP/HTTPS only).
+          nullable: true
+          type: string
+        hide_contact_support_url:
+          description: Whether to hide contact support url.
+          nullable: true
+          type: boolean
       type: object
     ExternalTableInput:
       properties:
@@ -17145,6 +17173,12 @@ components:
       required:
       - connection_identifier
       - table_name
+      type: object
+    PolicyProcessOptionsInput:
+      properties:
+        impersonate_user:
+          nullable: true
+          type: string
       type: object
     WebhookAuthenticationInput:
       properties:
@@ -17400,23 +17434,6 @@ components:
       required:
       - metadata_identifier
       type: object
-    getDataSourceSuggestions_request:
-      properties:
-        query:
-          description: User query used to suggest data sources.
-          type: string
-      required:
-      - query
-      type: object
-    getNLInstructions_request:
-      properties:
-        data_source_identifier:
-          description: Unique ID or name of the data-model for which to retrieve NL
-            instructions.
-          type: string
-      required:
-      - data_source_identifier
-      type: object
     getRelevantQuestions_request:
       properties:
         metadata_context:
@@ -17487,16 +17504,6 @@ components:
             type: string
           type: array
       type: object
-    sendAgentMessage_request:
-      properties:
-        messages:
-          description: messages to be sent to the agent
-          items:
-            type: string
-          type: array
-      required:
-      - messages
-      type: object
     sendAgentMessageStreaming_request:
       properties:
         conversation_identifier:
@@ -17524,20 +17531,6 @@ components:
       required:
       - message
       - metadata_identifier
-      type: object
-    setNLInstructions_request:
-      properties:
-        data_source_identifier:
-          description: Unique ID or name of the data-model for which to set NL instructions.
-          type: string
-        nl_instructions_info:
-          description: List of NL instructions to set for the data-model.
-          items:
-            $ref: '#/components/schemas/NLInstructionsInfoInput'
-          type: array
-      required:
-      - data_source_identifier
-      - nl_instructions_info
       type: object
     singleAnswer_request:
       properties:
@@ -17830,6 +17823,23 @@ components:
         connection_identifier:
           description: Unique ID or name of the connection.
           type: string
+        same_as_parent:
+          default: false
+          description: "Specifies whether the connection configuration should inherit\
+            \ all properties and authentication\ntype from its parent connection.\
+            \ This attribute is only applicable to parameterized connections.\nWhen\
+            \ set to true, the configuration uses only the connection properties and\
+            \ authentication type\ninherited from the parent. \n  Version: 26.2.0.cl\
+            \ or later\n"
+          nullable: true
+          type: boolean
+        policy_process_options:
+          allOf:
+          - $ref: '#/components/schemas/PolicyProcessOptionsInput'
+          description: "This attribute is only applicable to parameterized connections.\
+            \ Ensure that the policy is\nset to Processes to allow the configuration\
+            \ to be used exclusively for system processes. \n  Version: 26.2.0.cl\
+            \ or later\n"
         authentication_type:
           default: SERVICE_ACCOUNT
           description: Type of authentication used for the connection.
@@ -17893,6 +17903,23 @@ components:
         description:
           description: Description of the configuration.
           type: string
+        same_as_parent:
+          default: false
+          description: "Specifies whether the connection configuration should inherit\
+            \ all properties and authentication\ntype from its parent connection.\
+            \ This attribute is only applicable to parameterized connections.\nWhen\
+            \ set to true, the configuration uses only the connection properties and\
+            \ authentication type\ninherited from the parent. \n  Version: 26.2.0.cl\
+            \ or later\n"
+          nullable: true
+          type: boolean
+        policy_process_options:
+          allOf:
+          - $ref: '#/components/schemas/PolicyProcessOptionsInput'
+          description: "This attribute is only applicable to parameterized connections.\
+            \ Ensure that the policy is\nset to Processes to allow the configuration\
+            \ to be used exclusively for system processes. \n  Version: 26.2.0.cl\
+            \ or later\n"
         authentication_type:
           description: Type of authentication.
           enum:
@@ -19544,6 +19571,7 @@ components:
           enum:
           - LOGICAL_TABLE
           - CONNECTION
+          - CONNECTION_CONFIG
           type: string
         metadata_identifier:
           description: Unique ID or name of the metadata object to parameterize.
@@ -19727,6 +19755,7 @@ components:
           enum:
           - LOGICAL_TABLE
           - CONNECTION
+          - CONNECTION_CONFIG
           type: string
         metadata_identifier:
           description: Unique ID or name of the metadata object to unparameterize.
@@ -19908,6 +19937,8 @@ components:
           enum:
           - PDF
           - PNG
+          - CSV
+          - XLSX
           type: string
         runtime_filter:
           description: "JSON object with representing filter condition to apply filters\
@@ -22324,6 +22355,12 @@ components:
           description: Indicates if the user's favorite objects should be displayed.
           nullable: true
           type: boolean
+        include_variable_values:
+          default: false
+          description: Indicates if the user's formula variable values should be included
+            in the response.
+          nullable: true
+          type: boolean
       type: object
     updateUser_request:
       properties:
@@ -22464,7 +22501,8 @@ components:
           nullable: true
           type: boolean
         data_type:
-          description: Variable Data Type
+          description: "Variable Data Type, only for formula_variable type, leave\
+            \ empty for others \n  Version: 10.15.0.cl or later\n"
           enum:
           - VARCHAR
           - INT32
@@ -22923,6 +22961,11 @@ x-roles:
   tags:
   - 9.9.0.cl
   description: Roles for version 9.9.0.cl
+- name: 26.2.0.cl
+  id: 26.2.0.cl
+  tags:
+  - 26.2.0.cl
+  description: Roles for version 26.2.0.cl
 - name: 9.6.0.cl
   id: 9.6.0.cl
   tags:
