@@ -77,6 +77,6 @@ export class UnparameterizeMetadataRequest {
 }
 
 
-export type UnparameterizeMetadataRequestMetadataTypeEnum = "LOGICAL_TABLE" | "CONNECTION" ;
+export type UnparameterizeMetadataRequestMetadataTypeEnum = "LOGICAL_TABLE" | "CONNECTION" | "CONNECTION_CONFIG" ;
 export type UnparameterizeMetadataRequestFieldTypeEnum = "ATTRIBUTE" | "CONNECTION_PROPERTY" ;
 

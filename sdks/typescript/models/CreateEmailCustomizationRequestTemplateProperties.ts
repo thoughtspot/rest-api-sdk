@@ -116,6 +116,14 @@ export class CreateEmailCustomizationRequestTemplateProperties {
     * Company website URL (HTTP/HTTPS only)
     */
     'company_website_url'?: string | null;
+    /**
+    * Contact support url (HTTP/HTTPS only).
+    */
+    'contact_support_url'?: string | null;
+    /**
+    * Whether to hide contact support url.
+    */
+    'hide_contact_support_url'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -268,6 +276,18 @@ export class CreateEmailCustomizationRequestTemplateProperties {
             "name": "company_website_url",
             "baseName": "company_website_url",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "contact_support_url",
+            "baseName": "contact_support_url",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "hide_contact_support_url",
+            "baseName": "hide_contact_support_url",
+            "type": "boolean",
             "format": ""
         }    ];
 
