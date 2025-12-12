@@ -1,7 +1,7 @@
 import chai from "chai";
 import chaiAsPromised from "chai-as-promised";
 import { createBearerAuthenticationConfig } from "../utils/config";
-import { PromiseEmailCustomisationApi } from "../types/PromiseAPI";
+import { PromiseWebhooksApi } from "../types/PromiseAPI";
 import requestBodies from "./testDataUpdated.json";
 
 chai.use(chaiAsPromised);
@@ -17,15 +17,15 @@ const config = createBearerAuthenticationConfig(BASE_URL, {
 });
 
 
-const instance = new PromiseEmailCustomisationApi(config);
+const instance = new PromiseWebhooksApi(config);
 
-describe('EmailCustomisationApi', function() {
+describe('WebhooksApi', function() {
 
 
-      describe('createEmailCustomisation', function() {
+      describe('createWebhookConfiguration', function() {
 
         const testReqBodies = requestBodies.filter(
-          (body: any) => body.Metadata.operationId === "createEmailCustomisation"
+          (body: any) => body.Metadata.operationId === "createWebhookConfiguration"
         );
         testReqBodies.forEach(async (test: any) => {
           it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
@@ -33,8 +33,8 @@ describe('EmailCustomisationApi', function() {
             if (test.Metadata.scenario === "positive") {         
               var data;
               try {
-                data = await instance.createEmailCustomisation(
-                    // createEmailCustomisationRequest CreateEmailCustomisationRequest
+                data = await instance.createWebhookConfiguration(
+                    // createWebhookConfigurationRequest CreateWebhookConfigurationRequest
                      test.Body   
                 )
               } catch (er) {
@@ -43,8 +43,8 @@ describe('EmailCustomisationApi', function() {
               }
             } else {
                 await expect(
-                  instance.createEmailCustomisation(
-                    // createEmailCustomisationRequest CreateEmailCustomisationRequest
+                  instance.createWebhookConfiguration(
+                    // createWebhookConfigurationRequest CreateWebhookConfigurationRequest
                      test.Body   
                   )
                 ).to.be.rejectedWith(Error);
@@ -54,10 +54,10 @@ describe('EmailCustomisationApi', function() {
         });     
       });
 
-      describe('deleteEmailCustomisation', function() {
+      describe('deleteWebhookConfigurations', function() {
 
         const testReqBodies = requestBodies.filter(
-          (body: any) => body.Metadata.operationId === "deleteEmailCustomisation"
+          (body: any) => body.Metadata.operationId === "deleteWebhookConfigurations"
         );
         testReqBodies.forEach(async (test: any) => {
           it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
@@ -65,9 +65,9 @@ describe('EmailCustomisationApi', function() {
             if (test.Metadata.scenario === "positive") {         
               var data;
               try {
-                data = await instance.deleteEmailCustomisation(
-                    // templateIdentifier template_identifier
-                    test.Path_Variables.template_identifier    
+                data = await instance.deleteWebhookConfigurations(
+                    // deleteWebhookConfigurationsRequest DeleteWebhookConfigurationsRequest
+                     test.Body   
                 )
               } catch (er) {
                 console.error(er, "Response", data)
@@ -75,9 +75,9 @@ describe('EmailCustomisationApi', function() {
               }
             } else {
                 await expect(
-                  instance.deleteEmailCustomisation(
-                    // templateIdentifier template_identifier
-                    test.Path_Variables.template_identifier    
+                  instance.deleteWebhookConfigurations(
+                    // deleteWebhookConfigurationsRequest DeleteWebhookConfigurationsRequest
+                     test.Body   
                   )
                 ).to.be.rejectedWith(Error);
             }
@@ -86,10 +86,10 @@ describe('EmailCustomisationApi', function() {
         });     
       });
 
-      describe('searchEmailCustomisation', function() {
+      describe('searchWebhookConfigurations', function() {
 
         const testReqBodies = requestBodies.filter(
-          (body: any) => body.Metadata.operationId === "searchEmailCustomisation"
+          (body: any) => body.Metadata.operationId === "searchWebhookConfigurations"
         );
         testReqBodies.forEach(async (test: any) => {
           it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
@@ -97,7 +97,9 @@ describe('EmailCustomisationApi', function() {
             if (test.Metadata.scenario === "positive") {         
               var data;
               try {
-                data = await instance.searchEmailCustomisation(
+                data = await instance.searchWebhookConfigurations(
+                    // searchWebhookConfigurationsRequest SearchWebhookConfigurationsRequest
+                     test.Body   
                 )
               } catch (er) {
                 console.error(er, "Response", data)
@@ -105,7 +107,9 @@ describe('EmailCustomisationApi', function() {
               }
             } else {
                 await expect(
-                  instance.searchEmailCustomisation(
+                  instance.searchWebhookConfigurations(
+                    // searchWebhookConfigurationsRequest SearchWebhookConfigurationsRequest
+                     test.Body   
                   )
                 ).to.be.rejectedWith(Error);
             }
@@ -114,10 +118,10 @@ describe('EmailCustomisationApi', function() {
         });     
       });
 
-      describe('validateEmailCustomisation', function() {
+      describe('updateWebhookConfiguration', function() {
 
         const testReqBodies = requestBodies.filter(
-          (body: any) => body.Metadata.operationId === "validateEmailCustomisation"
+          (body: any) => body.Metadata.operationId === "updateWebhookConfiguration"
         );
         testReqBodies.forEach(async (test: any) => {
           it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
@@ -125,7 +129,11 @@ describe('EmailCustomisationApi', function() {
             if (test.Metadata.scenario === "positive") {         
               var data;
               try {
-                data = await instance.validateEmailCustomisation(
+                data = await instance.updateWebhookConfiguration(
+                    // webhookIdentifier webhook_identifier
+                    test.Path_Variables.webhook_identifier     , 
+                    // updateWebhookConfigurationRequest UpdateWebhookConfigurationRequest
+                     test.Body   
                 )
               } catch (er) {
                 console.error(er, "Response", data)
@@ -133,7 +141,11 @@ describe('EmailCustomisationApi', function() {
               }
             } else {
                 await expect(
-                  instance.validateEmailCustomisation(
+                  instance.updateWebhookConfiguration(
+                    // webhookIdentifier webhook_identifier
+                    test.Path_Variables.webhook_identifier     , 
+                    // updateWebhookConfigurationRequest UpdateWebhookConfigurationRequest
+                     test.Body   
                   )
                 ).to.be.rejectedWith(Error);
             }
