@@ -10,7 +10,7 @@
 |**type** | [**TypeEnum**](#TypeEnum) | Type of variable |  |
 |**name** | **String** | Name of the variable. This is unique across the cluster. |  |
 |**isSensitive** | **Boolean** | If the variable contains sensitive values like passwords |  [optional] |
-|**dataType** | [**DataTypeEnum**](#DataTypeEnum) | Variable Data Type |  [optional] |
+|**dataType** | [**DataTypeEnum**](#DataTypeEnum) | Variable Data Type, only for formula_variable type, leave empty for others    Version: 10.15.0.cl or later  |  [optional] |
 
 
 

@@ -36,6 +36,18 @@ public class SystemConfig implements Serializable {
     @javax.annotation.Nullable
     private String onboardingContentUrl;
 
+    public static final String SERIALIZED_NAME_SAML_ENABLED = "saml_enabled";
+
+    @SerializedName(SERIALIZED_NAME_SAML_ENABLED)
+    @javax.annotation.Nullable
+    private Boolean samlEnabled;
+
+    public static final String SERIALIZED_NAME_OKTA_ENABLED = "okta_enabled";
+
+    @SerializedName(SERIALIZED_NAME_OKTA_ENABLED)
+    @javax.annotation.Nullable
+    private Boolean oktaEnabled;
+
     public SystemConfig() {}
 
     public SystemConfig onboardingContentUrl(
@@ -58,6 +70,44 @@ public class SystemConfig implements Serializable {
         this.onboardingContentUrl = onboardingContentUrl;
     }
 
+    public SystemConfig samlEnabled(@javax.annotation.Nullable Boolean samlEnabled) {
+        this.samlEnabled = samlEnabled;
+        return this;
+    }
+
+    /**
+     * Get samlEnabled
+     *
+     * @return samlEnabled
+     */
+    @javax.annotation.Nullable
+    public Boolean getSamlEnabled() {
+        return samlEnabled;
+    }
+
+    public void setSamlEnabled(@javax.annotation.Nullable Boolean samlEnabled) {
+        this.samlEnabled = samlEnabled;
+    }
+
+    public SystemConfig oktaEnabled(@javax.annotation.Nullable Boolean oktaEnabled) {
+        this.oktaEnabled = oktaEnabled;
+        return this;
+    }
+
+    /**
+     * Get oktaEnabled
+     *
+     * @return oktaEnabled
+     */
+    @javax.annotation.Nullable
+    public Boolean getOktaEnabled() {
+        return oktaEnabled;
+    }
+
+    public void setOktaEnabled(@javax.annotation.Nullable Boolean oktaEnabled) {
+        this.oktaEnabled = oktaEnabled;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -67,7 +117,9 @@ public class SystemConfig implements Serializable {
             return false;
         }
         SystemConfig systemConfig = (SystemConfig) o;
-        return Objects.equals(this.onboardingContentUrl, systemConfig.onboardingContentUrl);
+        return Objects.equals(this.onboardingContentUrl, systemConfig.onboardingContentUrl)
+                && Objects.equals(this.samlEnabled, systemConfig.samlEnabled)
+                && Objects.equals(this.oktaEnabled, systemConfig.oktaEnabled);
     }
 
     private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -81,7 +133,7 @@ public class SystemConfig implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(onboardingContentUrl);
+        return Objects.hash(onboardingContentUrl, samlEnabled, oktaEnabled);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -98,6 +150,8 @@ public class SystemConfig implements Serializable {
         sb.append("    onboardingContentUrl: ")
                 .append(toIndentedString(onboardingContentUrl))
                 .append("\n");
+        sb.append("    samlEnabled: ").append(toIndentedString(samlEnabled)).append("\n");
+        sb.append("    oktaEnabled: ").append(toIndentedString(oktaEnabled)).append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -120,6 +174,8 @@ public class SystemConfig implements Serializable {
         // a set of all properties/fields (JSON key names)
         openapiFields = new HashSet<String>();
         openapiFields.add("onboarding_content_url");
+        openapiFields.add("saml_enabled");
+        openapiFields.add("okta_enabled");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();

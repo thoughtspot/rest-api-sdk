@@ -165,4 +165,16 @@ public class TemplatePropertiesInputCreateTest {
     public void companyWebsiteUrlTest() {
         // TODO: test companyWebsiteUrl
     }
+
+    /** Test the property 'contactSupportUrl' */
+    @Test
+    public void contactSupportUrlTest() {
+        // TODO: test contactSupportUrl
+    }
+
+    /** Test the property 'hideContactSupportUrl' */
+    @Test
+    public void hideContactSupportUrlTest() {
+        // TODO: test hideContactSupportUrl
+    }
 }

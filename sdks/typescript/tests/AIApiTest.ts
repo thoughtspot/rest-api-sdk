@@ -22,6 +22,38 @@ const instance = new PromiseAIApi(config);
 describe('AIApi', function() {
 
 
+      describe('createAgentConversation', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "createAgentConversation"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.createAgentConversation(
+                    // createAgentConversationRequest CreateAgentConversationRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.createAgentConversation(
+                    // createAgentConversationRequest CreateAgentConversationRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('createConversation', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -54,6 +86,38 @@ describe('AIApi', function() {
         });     
       });
 
+      describe('getRelevantQuestions', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "getRelevantQuestions"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.getRelevantQuestions(
+                    // getRelevantQuestionsRequest GetRelevantQuestionsRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.getRelevantQuestions(
+                    // getRelevantQuestionsRequest GetRelevantQuestionsRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('queryGetDecomposedQuery', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -77,6 +141,38 @@ describe('AIApi', function() {
                 await expect(
                   instance.queryGetDecomposedQuery(
                     // queryGetDecomposedQueryRequest QueryGetDecomposedQueryRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('sendAgentMessageStreaming', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "sendAgentMessageStreaming"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.sendAgentMessageStreaming(
+                    // sendAgentMessageStreamingRequest SendAgentMessageStreamingRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.sendAgentMessageStreaming(
+                    // sendAgentMessageStreamingRequest SendAgentMessageStreamingRequest
                      test.Body   
                   )
                 ).to.be.rejectedWith(Error);

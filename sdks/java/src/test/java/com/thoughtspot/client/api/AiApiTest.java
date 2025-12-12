@@ -9,21 +9,14 @@ import com.thoughtspot.client.model.AgentConversation;
 import com.thoughtspot.client.model.Conversation;
 import com.thoughtspot.client.model.CreateAgentConversationRequest;
 import com.thoughtspot.client.model.CreateConversationRequest;
-import com.thoughtspot.client.model.EurekaDataSourceSuggestionResponse;
 import com.thoughtspot.client.model.EurekaDecomposeQueryResponse;
-import com.thoughtspot.client.model.EurekaGetNLInstructionsResponse;
 import com.thoughtspot.client.model.EurekaGetRelevantQuestionsResponse;
-import com.thoughtspot.client.model.EurekaSetNLInstructionsResponse;
-import com.thoughtspot.client.model.GetDataSourceSuggestionsRequest;
-import com.thoughtspot.client.model.GetNLInstructionsRequest;
 import com.thoughtspot.client.model.GetRelevantQuestionsRequest;
 import com.thoughtspot.client.model.QueryGetDecomposedQueryRequest;
 import com.thoughtspot.client.model.ResponseMessage;
-import com.thoughtspot.client.model.SendAgentMessageRequest;
 import com.thoughtspot.client.model.SendAgentMessageResponse;
 import com.thoughtspot.client.model.SendAgentMessageStreamingRequest;
 import com.thoughtspot.client.model.SendMessageRequest;
-import com.thoughtspot.client.model.SetNLInstructionsRequest;
 import com.thoughtspot.client.model.SingleAnswerRequest;
 import java.util.List;
 import org.junit.jupiter.api.Disabled;
@@ -65,60 +58,6 @@ public class AiApiTest {
     public void createConversationTest() throws ApiException {
         CreateConversationRequest createConversationRequest = null;
         Conversation response = api.createConversation(createConversationRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Version: 10.13.0.cl or later Provides relevant data source recommendations for a
-     * user-submitted natural language query. To use this API, the user must have at least
-     * view-level access to the underlying metadata entities referenced in the response. #### Usage
-     * guidelines The request must include a &#x60;query&#x60; string via the request body. The
-     * returned results include metadata such as: - &#x60;confidence&#x60;: a float indicating the
-     * model&#39;s confidence in the relevance of each recommendation - &#x60;details&#x60;:
-     * includes &#x60;data_source_identifier&#x60;, &#x60;data_source_name&#x60;, and
-     * &#x60;description&#x60; of each recommended data source - &#x60;reasoning&#x60;: rationale
-     * provided by the LLM to explain why each data source was recommended If the API request is
-     * successful, ThoughtSpot returns a ranked list of data sources, each annotated with relevant
-     * reasoning. &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes may
-     * be introduced before it is made Generally Available. &gt; * This endpoint requires Spotter —
-     * please contact ThoughtSpot Support to enable Spotter on your cluster.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void getDataSourceSuggestionsTest() throws ApiException {
-        GetDataSourceSuggestionsRequest getDataSourceSuggestionsRequest = null;
-        EurekaDataSourceSuggestionResponse response =
-                api.getDataSourceSuggestions(getDataSourceSuggestionsRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Version: 10.15.0.cl or later This API allows users to retrieve existing natural language (NL)
-     * instructions for a specific data-model. These instructions guide the AI system in
-     * understanding data context and generating more accurate responses when processing natural
-     * language queries. #### Usage guidelines To retrieve NL instructions for a data-model, the
-     * request must include: - &#x60;data_source_identifier&#x60;: The unique ID or name of the
-     * data-model to retrieve NL instructions The API returns a response object with: -
-     * &#x60;nl_instructions_info&#x60;: An array of instruction objects, each containing: -
-     * &#x60;instructions&#x60;: Array of text instructions for natural language processing -
-     * &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). It can be extended to
-     * data-model-user scope in future. #### Instructions Scope - **GLOBAL**: Instructions that
-     * apply globally across the system on the given data-model (currently only global instructions
-     * are supported) &gt; ###### Note: &gt; * To use this API, the user needs atleast view access
-     * on the data-model and they must use corresponding org related bearerToken where the
-     * data-model exists. &gt; * This endpoint is currently in Beta. Breaking changes may be
-     * introduced before the endpoint is made Generally Available. &gt; * Available from version
-     * 10.15.0.cl and later. &gt; * This endpoint requires Spotter — please contact ThoughtSpot
-     * Support to enable Spotter on your cluster. &gt; * Use this API to view currently configured
-     * instructions before modifying them with &#x60;setNLInstructions&#x60;.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void getNLInstructionsTest() throws ApiException {
-        GetNLInstructionsRequest getNLInstructionsRequest = null;
-        EurekaGetNLInstructionsResponse response = api.getNLInstructions(getNLInstructionsRequest);
         // TODO: test validations
     }
 
@@ -174,31 +113,6 @@ public class AiApiTest {
      * submit at least one message. #### Usage guidelines To initiate or continue a conversation,
      * the request must include: - &#x60;conversation_identifier&#x60;: a unique session ID for
      * continuity and message tracking - &#x60;messages&#x60;: an array of one or more text
-     * messages, each with a value and type The API returns a array of object with a type, message,
-     * and metadata. - &#x60;type&#x60;: Type of the message — text, answer, or error. -
-     * &#x60;message&#x60;: Main content of the response. - &#x60;metadata&#x60;: Additional info
-     * depending on the message type. &gt; ###### Note: &gt; * This endpoint is currently in Beta.
-     * Breaking changes may be introduced before the endpoint is made Generally Available. &gt; *
-     * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your
-     * cluster.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void sendAgentMessageTest() throws ApiException {
-        String conversationIdentifier = null;
-        SendAgentMessageRequest sendAgentMessageRequest = null;
-        Object response = api.sendAgentMessage(conversationIdentifier, sendAgentMessageRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Version: 10.13.0.cl or later This API allows users to initiate or continue an agent (Spotter)
-     * conversation by submitting one or more natural language messages. To use this API, the user
-     * must have access to the relevant conversational session (via conversation_identifier) and
-     * submit at least one message. #### Usage guidelines To initiate or continue a conversation,
-     * the request must include: - &#x60;conversation_identifier&#x60;: a unique session ID for
-     * continuity and message tracking - &#x60;messages&#x60;: an array of one or more text
      * messages, each with a value and type Additionally, user can specify what tool can be included
      * &#x60;conversation_settings&#x60; parameter, which supports: -
      * &#x60;enable_contextual_change_analysis&#x60; (default: false) -
@@ -243,36 +157,6 @@ public class AiApiTest {
         SendMessageRequest sendMessageRequest = null;
         List<ResponseMessage> response =
                 api.sendMessage(conversationIdentifier, sendMessageRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Version: 10.15.0.cl or later This API allows users to set natural language (NL) instructions
-     * for a specific data-model to improve AI-generated answers and query processing. These
-     * instructions help guide the AI system to better understand the data context and provide more
-     * accurate responses. #### Usage guidelines To set NL instructions for a data-model, the
-     * request must include: - &#x60;data_source_identifier&#x60;: The unique ID or name of the
-     * data-model for which to set NL instructions - &#x60;nl_instructions_info&#x60;: An array of
-     * instruction objects, each containing: - &#x60;instructions&#x60;: Array of text instructions
-     * for the LLM - &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). Currently
-     * only &#x60;GLOBAL&#x60; is supported. It can be extended to data-model-user scope in future.
-     * The API returns a response object with: - &#x60;success&#x60;: Boolean indicating whether the
-     * operation was successful #### Instructions Scope - **GLOBAL**: Instructions that apply
-     * globally for that data-model across the system &gt; ###### Note: &gt; * To use this API, the
-     * user needs either edit access or SPOTTER_COACHING_PRIVILEGE on the data-model and they must
-     * use corresponding org related bearerToken where the data-model exists. &gt; * This endpoint
-     * is currently in Beta. Breaking changes may be introduced before the endpoint is made
-     * Generally Available. &gt; * Available from version 10.15.0.cl and later. &gt; * This endpoint
-     * requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. &gt;
-     * * Instructions help improve the accuracy and relevance of AI-generated responses for the
-     * specified data-model.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void setNLInstructionsTest() throws ApiException {
-        SetNLInstructionsRequest setNLInstructionsRequest = null;
-        EurekaSetNLInstructionsResponse response = api.setNLInstructions(setNLInstructionsRequest);
         // TODO: test validations
     }
 

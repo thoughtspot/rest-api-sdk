@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+import { PolicyProcessOptions } from '../models/PolicyProcessOptions';
 import { UserPrincipal } from '../models/UserPrincipal';
 import { HttpFile } from '../http/http';
 
@@ -23,6 +24,8 @@ export class ConnectionConfigurationResponse {
     'disabled'?: boolean | null;
     'data_warehouse_type'?: ConnectionConfigurationResponseDataWarehouseTypeEnum | null;
     'policy_type'?: ConnectionConfigurationResponsePolicyTypeEnum | null;
+    'same_as_parent'?: boolean | null;
+    'policy_process_options'?: PolicyProcessOptions;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -79,6 +82,18 @@ export class ConnectionConfigurationResponse {
             "name": "policy_type",
             "baseName": "policy_type",
             "type": "ConnectionConfigurationResponsePolicyTypeEnum",
+            "format": ""
+        },
+        {
+            "name": "same_as_parent",
+            "baseName": "same_as_parent",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "policy_process_options",
+            "baseName": "policy_process_options",
+            "type": "PolicyProcessOptions",
             "format": ""
         }    ];
 

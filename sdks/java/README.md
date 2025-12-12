@@ -14,7 +14,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.thoughtspot</groupId>
   <artifactId>rest-api-sdk</artifactId>
-  <version>2.20.0</version>
+  <version>2.21.0</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -29,7 +29,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "com.thoughtspot:rest-api-sdk:2.20.0"
+     implementation "com.thoughtspot:rest-api-sdk:2.21.0"
   }
 ```
 
