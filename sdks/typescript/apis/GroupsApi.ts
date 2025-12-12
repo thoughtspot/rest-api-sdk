@@ -41,6 +41,7 @@ export class GroupsApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
         requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.20.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.20.0")
       
 
 
@@ -92,6 +93,7 @@ export class GroupsApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
         requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.20.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.20.0")
       
 
 
@@ -131,6 +133,7 @@ export class GroupsApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
         requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.20.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.20.0")
       
 
 
@@ -181,6 +184,7 @@ export class GroupsApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
         requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.20.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.20.0")
       
 
 
@@ -239,6 +243,7 @@ export class GroupsApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
         requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.20.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.20.0")
       
 
 
