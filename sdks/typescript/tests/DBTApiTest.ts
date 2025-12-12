@@ -140,9 +140,9 @@ describe('DBTApi', function() {
                 data = await instance.dbtGenerateTml(
                     // dbtConnectionIdentifier dbt_connection_identifier
                         , 
-                    // importWorksheets import_worksheets
-                        , 
                     // modelTables model_tables
+                        , 
+                    // importWorksheets import_worksheets
                         , 
                     // worksheets worksheets
                         , 
@@ -158,9 +158,9 @@ describe('DBTApi', function() {
                   instance.dbtGenerateTml(
                     // dbtConnectionIdentifier dbt_connection_identifier
                         , 
-                    // importWorksheets import_worksheets
-                        , 
                     // modelTables model_tables
+                        , 
+                    // importWorksheets import_worksheets
                         , 
                     // worksheets worksheets
                         , 

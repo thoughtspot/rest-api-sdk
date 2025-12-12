@@ -182,6 +182,38 @@ describe('ThoughtSpotRestApi', function() {
         });     
       });
 
+      describe('configureCommunicationChannelPreferences', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "configureCommunicationChannelPreferences"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.configureCommunicationChannelPreferences(
+                    // configureCommunicationChannelPreferencesRequest ConfigureCommunicationChannelPreferencesRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.configureCommunicationChannelPreferences(
+                    // configureCommunicationChannelPreferencesRequest ConfigureCommunicationChannelPreferencesRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('connectionConfigurationSearch', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -269,6 +301,38 @@ describe('ThoughtSpotRestApi', function() {
                 await expect(
                   instance.copyObject(
                     // copyObjectRequest CopyObjectRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('createAgentConversation', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "createAgentConversation"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.createAgentConversation(
+                    // createAgentConversationRequest CreateAgentConversationRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.createAgentConversation(
+                    // createAgentConversationRequest CreateAgentConversationRequest
                      test.Body   
                   )
                 ).to.be.rejectedWith(Error);
@@ -726,6 +790,38 @@ describe('ThoughtSpotRestApi', function() {
         });     
       });
 
+      describe('createWebhookConfiguration', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "createWebhookConfiguration"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.createWebhookConfiguration(
+                    // createWebhookConfigurationRequest CreateWebhookConfigurationRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.createWebhookConfiguration(
+                    // createWebhookConfigurationRequest CreateWebhookConfigurationRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('dbtConnection', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -844,9 +940,9 @@ describe('ThoughtSpotRestApi', function() {
                 data = await instance.dbtGenerateTml(
                     // dbtConnectionIdentifier dbt_connection_identifier
                         , 
-                    // importWorksheets import_worksheets
-                        , 
                     // modelTables model_tables
+                        , 
+                    // importWorksheets import_worksheets
                         , 
                     // worksheets worksheets
                         , 
@@ -862,9 +958,9 @@ describe('ThoughtSpotRestApi', function() {
                   instance.dbtGenerateTml(
                     // dbtConnectionIdentifier dbt_connection_identifier
                         , 
-                    // importWorksheets import_worksheets
-                        , 
                     // modelTables model_tables
+                        , 
+                    // importWorksheets import_worksheets
                         , 
                     // worksheets worksheets
                         , 
@@ -1474,6 +1570,38 @@ describe('ThoughtSpotRestApi', function() {
                   instance.deleteVariable(
                     // identifier identifier
                     test.Path_Variables.identifier    
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('deleteWebhookConfigurations', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "deleteWebhookConfigurations"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.deleteWebhookConfigurations(
+                    // deleteWebhookConfigurationsRequest DeleteWebhookConfigurationsRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.deleteWebhookConfigurations(
+                    // deleteWebhookConfigurationsRequest DeleteWebhookConfigurationsRequest
+                     test.Body   
                   )
                 ).to.be.rejectedWith(Error);
             }
@@ -2210,6 +2338,38 @@ describe('ThoughtSpotRestApi', function() {
         });     
       });
 
+      describe('getRelevantQuestions', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "getRelevantQuestions"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.getRelevantQuestions(
+                    // getRelevantQuestionsRequest GetRelevantQuestionsRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.getRelevantQuestions(
+                    // getRelevantQuestionsRequest GetRelevantQuestionsRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('getSystemConfig', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -2742,6 +2902,38 @@ describe('ThoughtSpotRestApi', function() {
         });     
       });
 
+      describe('searchCommunicationChannelPreferences', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "searchCommunicationChannelPreferences"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.searchCommunicationChannelPreferences(
+                    // searchCommunicationChannelPreferencesRequest SearchCommunicationChannelPreferencesRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.searchCommunicationChannelPreferences(
+                    // searchCommunicationChannelPreferencesRequest SearchCommunicationChannelPreferencesRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('searchConfig', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -3149,6 +3341,70 @@ describe('ThoughtSpotRestApi', function() {
                 await expect(
                   instance.searchVariables(
                     // searchVariablesRequest SearchVariablesRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('searchWebhookConfigurations', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "searchWebhookConfigurations"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.searchWebhookConfigurations(
+                    // searchWebhookConfigurationsRequest SearchWebhookConfigurationsRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.searchWebhookConfigurations(
+                    // searchWebhookConfigurationsRequest SearchWebhookConfigurationsRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('sendAgentMessageStreaming', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "sendAgentMessageStreaming"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.sendAgentMessageStreaming(
+                    // sendAgentMessageStreamingRequest SendAgentMessageStreamingRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.sendAgentMessageStreaming(
+                    // sendAgentMessageStreamingRequest SendAgentMessageStreamingRequest
                      test.Body   
                   )
                 ).to.be.rejectedWith(Error);
@@ -4069,6 +4325,42 @@ describe('ThoughtSpotRestApi', function() {
                 await expect(
                   instance.updateVariableValues(
                     // updateVariableValuesRequest UpdateVariableValuesRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('updateWebhookConfiguration', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "updateWebhookConfiguration"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.updateWebhookConfiguration(
+                    // webhookIdentifier webhook_identifier
+                    test.Path_Variables.webhook_identifier     , 
+                    // updateWebhookConfigurationRequest UpdateWebhookConfigurationRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.updateWebhookConfiguration(
+                    // webhookIdentifier webhook_identifier
+                    test.Path_Variables.webhook_identifier     , 
+                    // updateWebhookConfigurationRequest UpdateWebhookConfigurationRequest
                      test.Body   
                   )
                 ).to.be.rejectedWith(Error);
