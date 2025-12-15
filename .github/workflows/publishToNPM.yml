@@ -1,34 +1,31 @@
 name: Publish TypeScript SDK to npm (OIDC)
 
 on:
-  pull_request:
-    types: [closed]
-    branches:
-      - release
-      - '*.cl'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'NPM tag for the release (e.g., latest, beta, alpha, next)'
+        required: false
+        default: 'latest'
+        type: string
 
 permissions:
   id-token: write
   contents: read
-  pull-requests: read
 
 jobs:
   publish:
-    if: |
-      github.event.pull_request.merged == true &&
-      github.event.pull_request.user.login == 'tse-developer' &&
-      startsWith(github.event.pull_request.title, 'jenkins-')
-    
     runs-on: ubuntu-latest
     
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
       - uses: actions/setup-node@v3
         with:
-            node-version: '20.19.4'
-            registry-url: 'https://registry.npmjs.org'
+          node-version: '20.19.4'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Update npm for OIDC support
         run: npm install -g npm@latest
@@ -39,7 +36,7 @@ jobs:
         run: |
           VERSION=$(node -p "require('./package.json').version")
           echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "📌 Version: $VERSION"
+          echo "Version: $VERSION"
 
       - name: Check if version exists on npm
         id: npm-check
@@ -48,7 +45,7 @@ jobs:
           EXISTING=$(npm view @thoughtspot/rest-api-sdk@${VERSION} version 2>/dev/null || echo 'not_found')
           if [ "$EXISTING" = "$VERSION" ]; then
             echo "exists=true" >> $GITHUB_OUTPUT
-            echo "⚠️ Version $VERSION already exists on npm - skipping publish"
+            echo "Version $VERSION already exists on npm - skipping publish"
           else
             echo "exists=false" >> $GITHUB_OUTPUT
           fi
@@ -63,20 +60,10 @@ jobs:
         working-directory: sdks/typescript
         run: npm run build
 
-      - name: Determine npm tag
-        if: steps.npm-check.outputs.exists == 'false'
-        id: npm-tag
-        run: |
-          BRANCH="${{ github.event.pull_request.base.ref }}"
-          if [[ "$BRANCH" == "release" ]] || [[ "$BRANCH" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.cl$ ]]; then
-            echo "tag=latest" >> $GITHUB_OUTPUT
-          else
-            echo "tag=test" >> $GITHUB_OUTPUT
-          fi
-
       - name: Publish to npm with OIDC
         if: steps.npm-check.outputs.exists == 'false'
         working-directory: sdks/typescript
         run: |
-          npm publish --tag ${{ steps.npm-tag.outputs.tag }}
-          echo "✅ Published @thoughtspot/rest-api-sdk@${{ steps.version.outputs.version }} to tag ${{ steps.npm-tag.outputs.tag }}"
+          NPM_TAG=$(echo "${{ github.event.inputs.tag }}" | tr '[:upper:]' '[:lower:]')
+          npm publish --tag $NPM_TAG
+          echo "Published @thoughtspot/rest-api-sdk@${{ steps.version.outputs.version }} to tag $NPM_TAG"
