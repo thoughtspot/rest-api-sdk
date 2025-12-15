@@ -14,6 +14,8 @@ import { HttpFile } from '../http/http';
 
 export class SystemConfig {
     'onboarding_content_url'?: string | null;
+    'saml_enabled'?: boolean | null;
+    'okta_enabled'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -22,6 +24,18 @@ export class SystemConfig {
             "name": "onboarding_content_url",
             "baseName": "onboarding_content_url",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "saml_enabled",
+            "baseName": "saml_enabled",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "okta_enabled",
+            "baseName": "okta_enabled",
+            "type": "boolean",
             "format": ""
         }    ];
 
