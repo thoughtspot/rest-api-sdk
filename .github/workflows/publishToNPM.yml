@@ -64,5 +64,6 @@ jobs:
         if: steps.npm-check.outputs.exists == 'false'
         working-directory: sdks/typescript
         run: |
-          npm publish --tag ${{ inputs.tag }}
-          echo "Published @thoughtspot/rest-api-sdk@${{ steps.version.outputs.version }} to tag ${{ inputs.tag }}"
+          NPM_TAG=$(echo "${{ github.event.inputs.tag }}" | tr '[:upper:]' '[:lower:]')
+          npm publish --tag $NPM_TAG
+          echo "Published @thoughtspot/rest-api-sdk@${{ steps.version.outputs.version }} to tag $NPM_TAG"
