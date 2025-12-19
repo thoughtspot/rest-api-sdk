@@ -8107,7 +8107,7 @@ paths:
   /api/rest/2.0/template/variables/{identifier}/update:
     post:
       description: "\nUpdate a variable's name \n Version: 10.14.0.cl or later\n\n\
-        \nAllows updating a variable's properties in ThoughtSpot.\n\nRequires ADMINISTRATION\
+        \nAllows updating a variable's name in ThoughtSpot.\n\nRequires ADMINISTRATION\
         \ role and TENANT scope.\nThe CAN_MANAGE_VARIABLES permission allows you to\
         \ manage Formula Variables in the current organization scope.\n\nThe API endpoint\
         \ allows updating:\n* The variable name\n\n\n\n\n"
@@ -8169,12 +8169,12 @@ paths:
         \ API endpoint allows:\n* Adding new values to variables\n* Replacing existing\
         \ values\n* Deleting values from variables\n\nWhen updating variable values,\
         \ you need to specify:\n* The variable identifiers\n* The values to add/replace/remove\
-        \ for each variable\n* The operation to perform (ADD, REPLACE, REMOVE, CLEAR)\n\
+        \ for each variable\n* The operation to perform (ADD, REPLACE, REMOVE, RESET)\n\
         \nBehaviour based on operation type:\n* ADD - Adds values to the variable\
         \ if this is a list type variable, else same as replace.\n* REPLACE - Replaces\
         \ all values of a given set of constraints with the current set of values.\n\
         * REMOVE - Removes any values which match the set of conditions of the variables\
-        \ if this is a list type variable, else clears value.\n* CLEAR - Removes all\
+        \ if this is a list type variable, else clears value.\n* RESET - Removes all\
         \ constrains for a given variable, scope is ignored\n\n\n\n\n\n"
       operationId: updateVariableValues
       parameters: []
