@@ -13158,7 +13158,7 @@
         }
       }
     },
-    "/api/rest/2.0/users/activate": {
+    "/api/rest/11.0/users/activate": {
       "post": {
         "operationId": "activateUser",
         "description": "\n <span class=\"since-beta-tag\">Version: 9.7.0.cl or later</span>\n\nActivates a deactivated user account.\n\nRequires `ADMINISTRATION` (**Can administer Thoughtspot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege is required.\n\nTo activate an inactive user account, the API request body must include the following information:\n\n- Username or the GUID of the user account.\n- Auth token generated for the deactivated user. The auth token is sent in the API response when a user is deactivated.\n- Password for the user account.\n\n\n\n\n#### Endpoint URL\n",
