@@ -10,49 +10,6 @@ servers:
 security:
 - bearerAuth: []
 paths:
-  /api/rest/2.0/ai/agent/conversation/create:
-    post:
-      description: |
-        Version: 10.13.0.cl or later
-      operationId: createAgentConversation
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/createAgentConversation_request'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentConversation'
-          description: Common successful response
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentConversation'
-          description: Common error response
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Operation failed
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Operation failed
-      tags:
-      - AI
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
   /api/rest/2.0/ai/conversation/create:
     post:
       description: |2+
@@ -121,79 +78,6 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
-  /api/rest/2.0/ai/relevant-questions/:
-    post:
-      description: |2+
-
-        Version: 10.13.0.cl or later
-
-
-        Breaks down a user-submitted query into a series of analytical sub-questions using relevant contextual metadata.
-
-        To use this API, the user must have at least view-level access to the referenced metadata objects.
-
-        #### Usage guidelines
-
-        To accurately generate relevant questions, the request must include at least one of the following metadata identifiers within `metadata_context` : `conversation_identifier`, `answer_identifiers`, `liveboard_identifiers`, or `data_source_identifiers`.
-
-        You can further enhance the quality and precision of breakdown by providing additional `ai_context` such as:
-
-        - `content`: User provided content like text data, csv data as a string message to provide context & potentially improve the quality of the response.
-        - `instructions`: User specific text instructions sent to AI system for processing the query.
-
-        Additional optional parameters include:
-
-        - `limit_relevant_questions`: Controls the maximum number of relevant questions returned. Defaults to 5 if not specified.
-        - `bypass_cache`: If set to true, forces fresh computation instead of returning cached results.
-
-        If the API request is successful, ThoughtSpot returns a list of relevant analytical queries, each aligned with the user's original question. Each returned question includes the query string, along with the identifier and name of the corresponding data source.
-
-        > ###### Note:
-        > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.
-        > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
-
-
-
-
-      operationId: getRelevantQuestions
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/getRelevantQuestions_request'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/eureka_GetRelevantQuestionsResponse'
-          description: Common successful response
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/eureka_GetRelevantQuestionsResponse'
-          description: Common error response
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Operation failed
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Operation failed
-      tags:
-      - AI
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
   /api/rest/2.0/ai/analytical-questions:
     post:
       deprecated: true
@@ -219,68 +103,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/eureka_DecomposeQueryResponse'
-          description: Common error response
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Operation failed
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Operation failed
-      tags:
-      - AI
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/ai/agent/converse/sse:
-    post:
-      description: "\nVersion: 10.13.0.cl or later\n\n\nThis API allows users to initiate\
-        \ or continue an agent (Spotter) conversation by submitting one or more natural\
-        \ language messages. \nTo use this API, the user must have access to the relevant\
-        \ conversational session (via conversation_identifier) and submit at least\
-        \ one message.\n\n\n#### Usage guidelines\n\nTo initiate or continue a conversation,\
-        \ the request must include:\n- `conversation_identifier`: a unique session\
-        \ ID for continuity and message tracking\n- `messages`: an array of one or\
-        \ more text messages, each with a value and type\n\nAdditionally, user can\
-        \ specify what tool can be included `conversation_settings` parameter, which\
-        \ supports:\n- `enable_contextual_change_analysis` (default: false)\n- `enable_natural_language_answer_generation`\
-        \ (default: true)\n- `enable_reasoning` (default: false)\n\nIf the request\
-        \ is valid, the API returns a stream of messages in real time, including:\n\
-        - `ack`: confirms receipt of the request\n- `text / text-chunk`: content chunks,\
-        \ optionally formatted (e.g., markdown)\n- `answer`: the final structured\
-        \ response with metadata and analytics\n- `error`: if a failure occurs\n-\
-        \ `notification`: notification messages for operation being performed\n\n\
-        > ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may\
-        \ be introduced before the endpoint is made Generally Available.\n> * This\
-        \ endpoint requires Spotter - please contact ThoughtSpot support to enable\
-        \ Spotter on your cluster.\n> * The streaming protocol uses Server-Sent Events\
-        \ (SSE)\n\n\n\n\n"
-      operationId: sendAgentMessageStreaming
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/sendAgentMessageStreaming_request'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SendAgentMessageResponse'
-          description: Common successful response
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SendAgentMessageResponse'
           description: Common error response
         "400":
           content:
@@ -6541,64 +6363,6 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
-  /api/rest/2.0/system/preferences/communication-channels/configure:
-    post:
-      description: |2+
-
-        Version: 10.14.0.cl or later
-
-
-        Configure communication channel preferences.
-        - Use `cluster_preferences` to update the default preferences for your ThoughtSpot application instance.
-        - If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), use `org_preferences` to specify Org-specific preferences that override the defaults.
-
-        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege are also authorized to perform this action.
-
-
-
-
-
-      operationId: configureCommunicationChannelPreferences
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/configureCommunicationChannelPreferences_request'
-        required: true
-      responses:
-        "204":
-          description: Communication channel preferences successfully updated.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - System
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
   /api/rest/2.0/system/config:
     get:
       description: |2+
@@ -6779,83 +6543,6 @@ paths:
       tags:
       - System
       - ThoughtSpotRest
-      x-accepts:
-      - application/json
-  /api/rest/2.0/system/preferences/communication-channels/search:
-    post:
-      description: |2+
-
-        Version: 10.14.0.cl or later
-
-
-        Fetch communication channel preferences.
-        - Use `cluster_preferences` to fetch the default preferences for your ThoughtSpot application instance.
-        - If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), use `org_preferences` to fetch any Org-specific preferences that override the defaults.
-
-        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege are also authorized to perform this action.
-
-
-
-
-
-      operationId: searchCommunicationChannelPreferences
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/searchCommunicationChannelPreferences_request'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                example_1:
-                  value:
-                    cluster_preferences:
-                    - event_type: LIVEBOARD_SCHEDULE
-                      channels:
-                      - WEBHOOK
-                    org_preferences:
-                    - org:
-                        id: "583464508"
-                        name: test_org
-                      preferences:
-                      - event_type: LIVEBOARD_SCHEDULE
-                        channels:
-                        - EMAIL
-              schema:
-                $ref: '#/components/schemas/CommunicationChannelPreferencesResponse'
-          description: Communication channel preferences retrieved successfully.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - System
-      - ThoughtSpotRest
-      x-content-type: application/json
       x-accepts:
       - application/json
   /api/rest/2.0/system/config-update:
@@ -7932,291 +7619,6 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
-  /api/rest/2.0/template/variables/create:
-    post:
-      description: "\nCreate a variable which can be used for parameterizing metadata\
-        \ objects \n Version: 10.14.0.cl or later\n\n\nAllows creating a variable\
-        \ which can be used for parameterizing metadata objects in ThoughtSpot.\n\n\
-        Requires ADMINISTRATION role and TENANT scope.\nThe CAN_MANAGE_VARIABLES permission\
-        \ allows you to manage Formula Variables in the current organization scope.\n\
-        \nThe API endpoint supports the following types of variables:\n* CONNECTION_PROPERTY\
-        \ - For connection properties\n* TABLE_MAPPING - For table mappings\n* CONNECTION_PROPERTY_PER_PRINCIPAL\
-        \ - For connection properties per principal. In order to use this please contact\
-        \ support to enable this.\n* FORMULA_VARIABLE - For Formula variables, introduced\
-        \ in 10.15.0.cl\n\nWhen creating a variable, you need to specify:\n* The variable\
-        \ type\n* A unique name for the variable\n* Whether the variable contains\
-        \ sensitive values (defaults to false)\n* The data type of the variable, only\
-        \ specify for formula variables (defaults to null)\n\nThe operation will fail\
-        \ if:\n* The user lacks required permissions\n* The variable name already\
-        \ exists\n* The variable type is invalid\n\n\n\n\n"
-      operationId: createVariable
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/createVariable_request'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Variable'
-          description: Create variable is successful.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Variable
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/template/variables/{identifier}/delete:
-    post:
-      description: "\nDelete a variable \n Version: 10.14.0.cl or later\n\n\nAllows\
-        \ deleting a variable from ThoughtSpot.\n\nRequires ADMINISTRATION role and\
-        \ TENANT scope.\nThe CAN_MANAGE_VARIABLES permission allows you to manage\
-        \ Formula Variables in the current organization scope.\n\nThe API endpoint\
-        \ requires:\n* The variable identifier (ID or name)\n\nThe operation will\
-        \ fail if:\n* The user lacks required permissions\n* The variable doesn't\
-        \ exist\n* The variable is being used by other objects \n\n\n\n\n"
-      operationId: deleteVariable
-      parameters:
-      - description: Unique id or name of the variable
-        explode: false
-        in: path
-        name: identifier
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "204":
-          description: Deleting the variable is successful.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Variable
-      - ThoughtSpotRest
-      x-accepts:
-      - application/json
-  /api/rest/2.0/template/variables/search:
-    post:
-      description: "\nSearch variables \n Version: 10.14.0.cl or later\n\n\nAllows\
-        \ searching for variables in ThoughtSpot.\n\nRequires ADMINISTRATION role.\n\
-        The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables\
-        \ in the current organization scope.\n\nThe API endpoint supports searching\
-        \ variables by:\n* Variable identifier (ID or name)\n* Variable type\n* Name\
-        \ pattern (case-insensitive, supports % for wildcard)\n\nThe search results\
-        \ can be formatted in three ways:\n* METADATA - Returns only variable metadata\
-        \ (default)\n* METADATA_AND_VALUES - Returns variable metadata and values\n\
-        \nThe values can be filtered by scope:\n* org_identifier\n* principal_identifier\n\
-        * model_identifier\n\n\n\n\n\n"
-      operationId: searchVariables
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/searchVariables_request'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/Variable'
-                type: array
-          description: List of variables is successful.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Variable
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/template/variables/{identifier}/update:
-    post:
-      description: "\nUpdate a variable's name \n Version: 10.14.0.cl or later\n\n\
-        \nAllows updating a variable's name in ThoughtSpot.\n\nRequires ADMINISTRATION\
-        \ role and TENANT scope.\nThe CAN_MANAGE_VARIABLES permission allows you to\
-        \ manage Formula Variables in the current organization scope.\n\nThe API endpoint\
-        \ allows updating:\n* The variable name\n\n\n\n\n"
-      operationId: updateVariable
-      parameters:
-      - description: Unique id or name of the variable to update.
-        explode: false
-        in: path
-        name: identifier
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/updateVariable_request'
-        required: true
-      responses:
-        "204":
-          description: Variable name updated successfully.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Variable
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/template/variables/update-values:
-    post:
-      description: "\nUpdate values for multiple variables \n Version: 10.14.0.cl\
-        \ or later\n\n\nAllows updating values for multiple variables in ThoughtSpot.\n\
-        \nRequires ADMINISTRATION role.\nThe CAN_MANAGE_VARIABLES permission allows\
-        \ you to manage Formula Variables in the current organization scope.\n\nThe\
-        \ API endpoint allows:\n* Adding new values to variables\n* Replacing existing\
-        \ values\n* Deleting values from variables\n\nWhen updating variable values,\
-        \ you need to specify:\n* The variable identifiers\n* The values to add/replace/remove\
-        \ for each variable\n* The operation to perform (ADD, REPLACE, REMOVE, RESET)\n\
-        \nBehaviour based on operation type:\n* ADD - Adds values to the variable\
-        \ if this is a list type variable, else same as replace.\n* REPLACE - Replaces\
-        \ all values of a given set of constraints with the current set of values.\n\
-        * REMOVE - Removes any values which match the set of conditions of the variables\
-        \ if this is a list type variable, else clears value.\n* RESET - Removes all\
-        \ constrains for a given variable, scope is ignored\n\n\n\n\n\n"
-      operationId: updateVariableValues
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/updateVariableValues_request'
-        required: true
-      responses:
-        "204":
-          description: Variable values updated successfully.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Variable
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
   /api/rest/2.0/vcs/git/branches/commit:
     post:
       description: |2+
@@ -8809,435 +8211,6 @@ paths:
           description: Unexpected error
       tags:
       - Version Control
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/webhooks/create:
-    post:
-      description: |2+
-
-        Version: 10.14.0.cl or later
-
-
-        Creates a new webhook configuration to receive notifications for specified events. The webhook will be triggered when the configured events occur in the system.
-
-        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.
-
-
-
-
-
-      operationId: createWebhookConfiguration
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/createWebhookConfiguration_request'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                example_1:
-                  description: Basic webhook with Bearer token authentication
-                  value:
-                    id: f47ac10b-58cc-4372-a567-0e02b2c3d479
-                    name: My Liveboard Webhook
-                    description: Webhook to notify external system about liveboard
-                      schedules
-                    org:
-                      id: "0"
-                      name: Primary
-                    url: https://myapp.example.com/webhooks/thoughtspot
-                    url_params:
-                      api_key: abc123
-                      version: v1
-                    events:
-                    - LIVEBOARD_SCHEDULE
-                    authentication:
-                      BEARER_TOKEN: '***'
-                    signature_verification:
-                      type: HMAC_SHA256
-                      header: X-Webhook-Signature
-                      algorithm: SHA256
-                      secret: '***'
-                    created_at: 2025-08-21T21:57:10.243089030Z
-                    last_modified_at: 2025-08-21T21:57:10.243089030Z
-                    created_by:
-                      id: 8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b
-                      name: sarah_chen
-                    last_modified_by:
-                      id: 8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b
-                      name: sarah_chen
-                example_2:
-                  description: Webhook with OAuth2 authentication
-                  value:
-                    id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-                    name: OAuth2 Webhook
-                    description: Webhook with OAuth2 client credentials
-                    org:
-                      id: "0"
-                      name: Primary
-                    url: https://api.example.com/webhooks
-                    events:
-                    - LIVEBOARD_SCHEDULE
-                    authentication:
-                      OAUTH2:
-                        authorization_url: https://auth.example.com/oauth2/authorize
-                        client_id: client_123
-                        client_secret: '***'
-                    created_at: 2025-08-21T22:15:30.123456789Z
-                    last_modified_at: 2025-08-21T22:15:30.123456789Z
-                    created_by:
-                      id: 7d5e9f2a-4b8c-4d6e-9a3b-5c7e1f4a8b2d
-                      name: mike_rodriguez
-              schema:
-                $ref: '#/components/schemas/WebhookResponse'
-          description: Webhook configuration created successfully
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Webhooks
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/webhooks/delete:
-    post:
-      description: |2+
-
-        Version: 10.14.0.cl or later
-
-
-        Deletes one or more webhook configurations by their unique id or name. Returns status of each deletion operation, including successfully deleted webhooks and any failures with error details.
-
-        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.
-
-
-
-
-
-      operationId: deleteWebhookConfigurations
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/deleteWebhookConfigurations_request'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                example_1:
-                  description: Successful deletion of multiple webhooks
-                  value:
-                    deleted_count: 2
-                    failed_count: 0
-                    deleted_webhooks:
-                    - id: b9e3d8f2-4c7a-4e1b-8d3c-5f9a2b7e4c6d
-                      name: Old Webhook 1
-                      description: First webhook to be deleted
-                      org:
-                        id: "0"
-                        name: Primary
-                      url: https://old-service.example.com/webhook1
-                      events:
-                      - LIVEBOARD_SCHEDULE
-                      authentication:
-                        BEARER_TOKEN: '***'
-                      created_at: 2025-08-21T15:30:00.000000000Z
-                      last_modified_at: 2025-08-21T15:30:00.000000000Z
-                      created_by:
-                        id: 1f4e7b2d-9c3a-4e6f-8b1d-3e7c5a9b2f4e
-                        name: jennifer_patel
-                    - id: e7c4a1f8-2b5d-4a9e-7c3f-8b1e5d4a7c9b
-                      name: Old Webhook 2
-                      description: Second webhook to be deleted
-                      org:
-                        id: "0"
-                        name: Primary
-                      url: https://old-service.example.com/webhook2
-                      events:
-                      - LIVEBOARD_SCHEDULE
-                      authentication:
-                        API_KEY:
-                          key: X-API-Key
-                          value: '***'
-                      created_at: 2025-08-21T16:45:30.123456789Z
-                      last_modified_at: 2025-08-21T16:45:30.123456789Z
-                      created_by:
-                        id: 9a5c2e8f-4b7d-4c1e-9f2a-6c8e3b5d7a4c
-                        name: david_thompson
-                    failed_webhooks: []
-                example_2:
-                  description: Partial failure during deletion
-                  value:
-                    deleted_count: 1
-                    failed_count: 1
-                    deleted_webhooks:
-                    - id: c8f2a5e9-3d6b-4f1e-a8c2-7e4b1d9f5a3c
-                      name: Successfully Deleted Webhook
-                      description: This webhook was deleted successfully
-                      org:
-                        id: "0"
-                        name: Primary
-                      url: https://service.example.com/webhook
-                      events:
-                      - LIVEBOARD_SCHEDULE
-                      authentication:
-                        NO_AUTH: ""
-                      created_at: 2025-08-21T18:20:15.456789012Z
-                      last_modified_at: 2025-08-21T18:20:15.456789012Z
-                      created_by:
-                        id: 6e9c4f2a-8b5d-4e1f-9c3a-5f8b2e7d4a6c
-                        name: emma_wang
-                    failed_webhooks:
-                    - id: a3f7c1e4-9b2d-4a6e-8f3c-1e5b7a9c4f2e
-                      name: Non-existent Webhook
-                      error_message: Webhook not found or access denied
-              schema:
-                $ref: '#/components/schemas/WebhookDeleteResponse'
-          description: Webhook configurations deleted successfully
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Webhooks
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/webhooks/search:
-    post:
-      description: |2+
-
-        Version: 10.14.0.cl or later
-
-
-        Searches for webhook configurations based on various criteria such as Org, webhook identifier, event type, with support for pagination and sorting. Returns matching webhook configurations with their complete details.
-
-        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.
-
-
-
-
-
-      operationId: searchWebhookConfigurations
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/searchWebhookConfigurations_request'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                example_1:
-                  description: Search results with multiple webhooks
-                  value:
-                    webhooks:
-                    - id: f47ac10b-58cc-4372-a567-0e02b2c3d479
-                      name: Liveboard Schedule Webhook
-                      description: Webhook for liveboard schedule notifications
-                      org:
-                        id: "0"
-                        name: Primary
-                      url: https://myapp.example.com/webhooks
-                      url_params:
-                        api_key: abc123
-                      events:
-                      - LIVEBOARD_SCHEDULE
-                      authentication:
-                        BEARER_TOKEN: '***'
-                      signature_verification:
-                        type: HMAC_SHA256
-                        header: X-Webhook-Signature
-                        algorithm: SHA256
-                        secret: '***'
-                      created_at: 2025-08-21T21:57:10.243089030Z
-                      last_modified_at: 2025-08-21T22:10:15.123456789Z
-                      created_by:
-                        id: 8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b
-                        name: sarah_chen
-                      last_modified_by:
-                        id: 2c9a7e4f-6b3d-4a8e-9f1c-5e7a3b9c2d6f
-                        name: alex_kim
-                    - id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-                      name: API Key Webhook
-                      description: Webhook with API key authentication
-                      org:
-                        id: "0"
-                        name: Primary
-                      url: https://api.example.com/notifications
-                      events:
-                      - LIVEBOARD_SCHEDULE
-                      authentication:
-                        API_KEY:
-                          key: X-API-Key
-                          value: '***'
-                      created_at: 2025-08-21T20:30:45.987654321Z
-                      last_modified_at: 2025-08-21T20:30:45.987654321Z
-                      created_by:
-                        id: 7d5e9f2a-4b8c-4d6e-9a3b-5c7e1f4a8b2d
-                        name: mike_rodriguez
-                    pagination:
-                      record_offset: 0
-                      record_size: 50
-                      total_count: 2
-                      has_more: false
-                example_2:
-                  description: Empty search results
-                  value:
-                    webhooks: []
-                    pagination:
-                      record_offset: 0
-                      record_size: 50
-                      total_count: 0
-                      has_more: false
-              schema:
-                $ref: '#/components/schemas/WebhookSearchResponse'
-          description: Webhook configurations retrieved successfully
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Webhooks
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/webhooks/{webhook_identifier}/update:
-    post:
-      description: |2+
-
-        Version: 10.14.0.cl or later
-
-
-        Updates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.
-
-        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.
-
-
-
-
-
-      operationId: updateWebhookConfiguration
-      parameters:
-      - description: Unique ID or name of the webhook configuration.
-        explode: false
-        in: path
-        name: webhook_identifier
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/updateWebhookConfiguration_request'
-        required: true
-      responses:
-        "204":
-          description: Webhook configuration updated successfully
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Webhooks
       - ThoughtSpotRest
       x-content-type: application/json
       x-accepts:
@@ -9856,41 +8829,6 @@ components:
       - org_identifier
       type: object
     CommunicationChannelPreferencesResponse:
-      example:
-        cluster_preferences:
-        - event_type: LIVEBOARD_SCHEDULE
-          channels:
-          - EMAIL
-          - EMAIL
-        - event_type: LIVEBOARD_SCHEDULE
-          channels:
-          - EMAIL
-          - EMAIL
-        org_preferences:
-        - preferences:
-          - event_type: LIVEBOARD_SCHEDULE
-            channels:
-            - EMAIL
-            - EMAIL
-          - event_type: LIVEBOARD_SCHEDULE
-            channels:
-            - EMAIL
-            - EMAIL
-          org:
-            name: name
-            id: id
-        - preferences:
-          - event_type: LIVEBOARD_SCHEDULE
-            channels:
-            - EMAIL
-            - EMAIL
-          - event_type: LIVEBOARD_SCHEDULE
-            channels:
-            - EMAIL
-            - EMAIL
-          org:
-            name: name
-            id: id
       properties:
         cluster_preferences:
           description: Cluster-level default configurations.
@@ -9906,11 +8844,6 @@ components:
           type: array
       type: object
     EventChannelConfig:
-      example:
-        event_type: LIVEBOARD_SCHEDULE
-        channels:
-        - EMAIL
-        - EMAIL
       properties:
         event_type:
           description: Type of event for which communication channels are configured
@@ -9931,19 +8864,6 @@ components:
       - event_type
       type: object
     OrgChannelConfigResponse:
-      example:
-        preferences:
-        - event_type: LIVEBOARD_SCHEDULE
-          channels:
-          - EMAIL
-          - EMAIL
-        - event_type: LIVEBOARD_SCHEDULE
-          channels:
-          - EMAIL
-          - EMAIL
-        org:
-          name: name
-          id: id
       properties:
         org:
           $ref: '#/components/schemas/OrgDetails'
@@ -9958,9 +8878,6 @@ components:
       - preferences
       type: object
     OrgDetails:
-      example:
-        name: name
-        id: id
       properties:
         id:
           description: Unique id of the org
@@ -13139,14 +12056,6 @@ components:
           type: array
       type: object
     eureka_GetRelevantQuestionsResponse:
-      example:
-        relevant_questions:
-        - data_source_identifier: data_source_identifier
-          query: query
-          data_source_name: data_source_name
-        - data_source_identifier: data_source_identifier
-          query: query
-          data_source_name: data_source_name
       properties:
         relevant_questions:
           description: List of relevant questions that can be run on their respective
@@ -13157,10 +12066,6 @@ components:
           type: array
       type: object
     eureka_RelevantQuestion:
-      example:
-        data_source_identifier: data_source_identifier
-        query: query
-        data_source_name: data_source_name
       properties:
         query:
           description: NL query that can be run using spotter aka natural language
@@ -13377,28 +12282,6 @@ components:
       type: object
     Variable:
       description: Variable object
-      example:
-        variable_type: CONNECTION_PROPERTY
-        values:
-        - principal_identifier: principal_identifier
-          org_identifier: org_identifier
-          value_list:
-          - value_list
-          - value_list
-          principal_type: USER
-          priority: 0
-          value: value
-        - principal_identifier: principal_identifier
-          org_identifier: org_identifier
-          value_list:
-          - value_list
-          - value_list
-          principal_type: USER
-          priority: 0
-          value: value
-        name: name
-        id: id
-        sensitive: true
       properties:
         id:
           description: Unique identifier of the variable
@@ -13430,15 +12313,6 @@ components:
       - name
       type: object
     VariableValue:
-      example:
-        principal_identifier: principal_identifier
-        org_identifier: org_identifier
-        value_list:
-        - value_list
-        - value_list
-        principal_type: USER
-        priority: 0
-        value: value
       properties:
         value:
           description: The value of the variable
@@ -13681,85 +12555,6 @@ components:
           type: string
       type: object
     WebhookSearchResponse:
-      example:
-        pagination:
-          total_count: 1
-          record_size: 6
-          has_more: true
-          record_offset: 0
-        webhooks:
-        - creation_time_in_millis: 0.8008282
-          org:
-            name: name
-            id: id
-          signature_verification:
-            header: header
-            secret: secret
-            type: HMAC_SHA256
-            algorithm: SHA256
-          description: description
-          modification_time_in_millis: 6.0274563
-          last_modified_by:
-            name: name
-            id: id
-          created_by:
-            name: name
-            id: id
-          url: url
-          url_params: "{}"
-          name: name
-          id: id
-          events:
-          - LIVEBOARD_SCHEDULE
-          - LIVEBOARD_SCHEDULE
-          authentication:
-            OAUTH2:
-              authorization_url: authorization_url
-              client_secret: client_secret
-              client_id: client_id
-            API_KEY:
-              value: value
-              key: key
-            BEARER_TOKEN: BEARER_TOKEN
-            BASIC_AUTH:
-              password: password
-              username: username
-        - creation_time_in_millis: 0.8008282
-          org:
-            name: name
-            id: id
-          signature_verification:
-            header: header
-            secret: secret
-            type: HMAC_SHA256
-            algorithm: SHA256
-          description: description
-          modification_time_in_millis: 6.0274563
-          last_modified_by:
-            name: name
-            id: id
-          created_by:
-            name: name
-            id: id
-          url: url
-          url_params: "{}"
-          name: name
-          id: id
-          events:
-          - LIVEBOARD_SCHEDULE
-          - LIVEBOARD_SCHEDULE
-          authentication:
-            OAUTH2:
-              authorization_url: authorization_url
-              client_secret: client_secret
-              client_id: client_id
-            API_KEY:
-              value: value
-              key: key
-            BEARER_TOKEN: BEARER_TOKEN
-            BASIC_AUTH:
-              password: password
-              username: username
       properties:
         webhooks:
           description: List of webhook configurations matching the search criteria.
@@ -13773,43 +12568,6 @@ components:
       - webhooks
       type: object
     WebhookResponse:
-      example:
-        creation_time_in_millis: 0.8008282
-        org:
-          name: name
-          id: id
-        signature_verification:
-          header: header
-          secret: secret
-          type: HMAC_SHA256
-          algorithm: SHA256
-        description: description
-        modification_time_in_millis: 6.0274563
-        last_modified_by:
-          name: name
-          id: id
-        created_by:
-          name: name
-          id: id
-        url: url
-        url_params: "{}"
-        name: name
-        id: id
-        events:
-        - LIVEBOARD_SCHEDULE
-        - LIVEBOARD_SCHEDULE
-        authentication:
-          OAUTH2:
-            authorization_url: authorization_url
-            client_secret: client_secret
-            client_id: client_id
-          API_KEY:
-            value: value
-            key: key
-          BEARER_TOKEN: BEARER_TOKEN
-          BASIC_AUTH:
-            password: password
-            username: username
       properties:
         id:
           description: Unique identifier of the webhook configuration.
@@ -13862,9 +12620,6 @@ components:
       - url
       type: object
     WebhookOrg:
-      example:
-        name: name
-        id: id
       properties:
         id:
           description: Unique identifier of the org.
@@ -13877,18 +12632,6 @@ components:
       - name
       type: object
     WebhookAuthentication:
-      example:
-        OAUTH2:
-          authorization_url: authorization_url
-          client_secret: client_secret
-          client_id: client_id
-        API_KEY:
-          value: value
-          key: key
-        BEARER_TOKEN: BEARER_TOKEN
-        BASIC_AUTH:
-          password: password
-          username: username
       properties:
         API_KEY:
           $ref: '#/components/schemas/WebhookAuthApiKey'
@@ -13902,9 +12645,6 @@ components:
           $ref: '#/components/schemas/WebhookAuthOAuth2'
       type: object
     WebhookAuthApiKey:
-      example:
-        value: value
-        key: key
       properties:
         key:
           description: The header or query parameter name for the API key.
@@ -13917,9 +12657,6 @@ components:
       - value
       type: object
     WebhookAuthBasicAuth:
-      example:
-        password: password
-        username: username
       properties:
         username:
           description: Username for basic authentication.
@@ -13932,10 +12669,6 @@ components:
       - username
       type: object
     WebhookAuthOAuth2:
-      example:
-        authorization_url: authorization_url
-        client_secret: client_secret
-        client_id: client_id
       properties:
         authorization_url:
           description: OAuth2 authorization server URL.
@@ -13952,11 +12685,6 @@ components:
       - client_secret
       type: object
     WebhookSignatureVerification:
-      example:
-        header: header
-        secret: secret
-        type: HMAC_SHA256
-        algorithm: SHA256
       properties:
         type:
           description: Signature verification method type.
@@ -13981,9 +12709,6 @@ components:
       - type
       type: object
     WebhookUser:
-      example:
-        name: name
-        id: id
       properties:
         id:
           description: Unique identifier of the user.
@@ -13996,11 +12721,6 @@ components:
       - name
       type: object
     WebhookPagination:
-      example:
-        total_count: 1
-        record_size: 6
-        has_more: true
-        record_offset: 0
       properties:
         record_offset:
           description: The starting record number from where the records are included.
@@ -16901,8 +15621,6 @@ components:
           type: boolean
       type: object
     AgentConversation:
-      example:
-        conversation_id: conversation_id
       properties:
         conversation_id:
           description: Unique identifier of the conversation.
@@ -16911,9 +15629,6 @@ components:
       - conversation_id
       type: object
     SendAgentMessageResponse:
-      example:
-        success: true
-        message: message
       properties:
         success:
           type: boolean
@@ -17258,89 +15973,6 @@ components:
       - type
       type: object
     WebhookDeleteResponse:
-      example:
-        failed_webhooks:
-        - name: name
-          id: id
-          error: error
-        - name: name
-          id: id
-          error: error
-        deleted_webhooks:
-        - creation_time_in_millis: 0.8008282
-          org:
-            name: name
-            id: id
-          signature_verification:
-            header: header
-            secret: secret
-            type: HMAC_SHA256
-            algorithm: SHA256
-          description: description
-          modification_time_in_millis: 6.0274563
-          last_modified_by:
-            name: name
-            id: id
-          created_by:
-            name: name
-            id: id
-          url: url
-          url_params: "{}"
-          name: name
-          id: id
-          events:
-          - LIVEBOARD_SCHEDULE
-          - LIVEBOARD_SCHEDULE
-          authentication:
-            OAUTH2:
-              authorization_url: authorization_url
-              client_secret: client_secret
-              client_id: client_id
-            API_KEY:
-              value: value
-              key: key
-            BEARER_TOKEN: BEARER_TOKEN
-            BASIC_AUTH:
-              password: password
-              username: username
-        - creation_time_in_millis: 0.8008282
-          org:
-            name: name
-            id: id
-          signature_verification:
-            header: header
-            secret: secret
-            type: HMAC_SHA256
-            algorithm: SHA256
-          description: description
-          modification_time_in_millis: 6.0274563
-          last_modified_by:
-            name: name
-            id: id
-          created_by:
-            name: name
-            id: id
-          url: url
-          url_params: "{}"
-          name: name
-          id: id
-          events:
-          - LIVEBOARD_SCHEDULE
-          - LIVEBOARD_SCHEDULE
-          authentication:
-            OAUTH2:
-              authorization_url: authorization_url
-              client_secret: client_secret
-              client_id: client_id
-            API_KEY:
-              value: value
-              key: key
-            BEARER_TOKEN: BEARER_TOKEN
-            BASIC_AUTH:
-              password: password
-              username: username
-        failed_count: 6
-        deleted_count: 0
       properties:
         deleted_count:
           description: Number of webhooks successfully deleted.
@@ -17367,10 +15999,6 @@ components:
       - failed_webhooks
       type: object
     WebhookDeleteFailure:
-      example:
-        name: name
-        id: id
-        error: error
       properties:
         id:
           description: Unique identifier of the webhook that failed to delete.
@@ -17407,20 +16035,6 @@ components:
           description: Runtime param override type in JWT.
           type: object
       type: object
-    createAgentConversation_request:
-      properties:
-        metadata_context:
-          allOf:
-          - $ref: '#/components/schemas/ContextPayloadV2Input'
-          description: Context for the conversation.
-        conversation_settings:
-          allOf:
-          - $ref: '#/components/schemas/ConversationSettingsInput'
-          description: Conversation settings.
-      required:
-      - conversation_settings
-      - metadata_context
-      type: object
     createConversation_request:
       properties:
         metadata_identifier:
@@ -17433,36 +16047,6 @@ components:
           type: string
       required:
       - metadata_identifier
-      type: object
-    getRelevantQuestions_request:
-      properties:
-        metadata_context:
-          allOf:
-          - $ref: '#/components/schemas/MetadataContext'
-          description: metadata for the query to enable generation of relevant sub-questions;
-            at least one context identifier is required.
-        limit_relevant_questions:
-          description: "Maximum number of relevant questions that is allowed in the\
-            \ response, default = 5."
-          format: int32
-          type: integer
-        bypass_cache:
-          description: "If true, results are not returned from cache & calculated\
-            \ every time."
-          nullable: true
-          type: boolean
-        query:
-          description: "A user query that requires breaking down into smaller, more\
-            \ manageable analytical questions to facilitate better understanding and\
-            \ analysis."
-          type: string
-        ai_context:
-          allOf:
-          - $ref: '#/components/schemas/AIContext'
-          description: Additional context to guide the response.
-      required:
-      - metadata_context
-      - query
       type: object
     queryGetDecomposedQuery_request:
       properties:
@@ -17503,20 +16087,6 @@ components:
           items:
             type: string
           type: array
-      type: object
-    sendAgentMessageStreaming_request:
-      properties:
-        conversation_identifier:
-          description: Unique identifier for the conversation (used to track context)
-          type: string
-        messages:
-          description: messages to be sent to the agent
-          items:
-            type: string
-          type: array
-      required:
-      - conversation_identifier
-      - messages
       type: object
     sendMessage_request:
       properties:
@@ -21894,34 +20464,6 @@ components:
       required:
       - column_security_rules
       type: object
-    configureCommunicationChannelPreferences_request:
-      properties:
-        cluster_preferences:
-          description: Cluster-level default configurations.
-          items:
-            $ref: '#/components/schemas/EventChannelConfigInput'
-          type: array
-        org_preferences:
-          description: Org-specific configurations.
-          items:
-            $ref: '#/components/schemas/OrgChannelConfigInput'
-          type: array
-      type: object
-    searchCommunicationChannelPreferences_request:
-      properties:
-        cluster_preferences:
-          description: Event types to search for in cluster-level preferences.
-          items:
-            enum:
-            - LIVEBOARD_SCHEDULE
-            type: string
-          type: array
-        org_preferences:
-          description: Org-specific search criteria.
-          items:
-            $ref: '#/components/schemas/OrgPreferenceSearchCriteriaInput'
-          type: array
-      type: object
     updateSystemConfig_request:
       properties:
         configuration:
@@ -22482,94 +21024,6 @@ components:
           description: Preferences for the user
           type: object
       type: object
-    createVariable_request:
-      properties:
-        type:
-          description: Type of variable
-          enum:
-          - CONNECTION_PROPERTY
-          - TABLE_MAPPING
-          - CONNECTION_PROPERTY_PER_PRINCIPAL
-          - FORMULA_VARIABLE
-          type: string
-        name:
-          description: Name of the variable. This is unique across the cluster.
-          type: string
-        is_sensitive:
-          default: false
-          description: If the variable contains sensitive values like passwords
-          nullable: true
-          type: boolean
-        data_type:
-          description: "Variable Data Type, only for formula_variable type, leave\
-            \ empty for others \n  Version: 10.15.0.cl or later\n"
-          enum:
-          - VARCHAR
-          - INT32
-          - INT64
-          - DOUBLE
-          - DATE
-          - DATE_TIME
-          type: string
-      required:
-      - name
-      - type
-      type: object
-    searchVariables_request:
-      properties:
-        variable_details:
-          description: Variable details
-          items:
-            $ref: '#/components/schemas/VariableDetailInput'
-          type: array
-        value_scope:
-          description: Array of scope filters
-          items:
-            $ref: '#/components/schemas/ValueScopeInput'
-          type: array
-        record_offset:
-          default: 0
-          description: The starting record number from where the records should be
-            included
-          format: int32
-          type: integer
-        record_size:
-          default: 10
-          description: The number of records that should be included
-          format: int32
-          type: integer
-        response_content:
-          default: METADATA
-          description: Format in which we want the output
-          enum:
-          - METADATA
-          - METADATA_AND_VALUES
-          type: string
-      type: object
-    updateVariable_request:
-      properties:
-        name:
-          description: New name of the variable.
-          type: string
-      required:
-      - name
-      type: object
-    updateVariableValues_request:
-      properties:
-        variable_assignment:
-          description: Variables and values to update
-          items:
-            $ref: '#/components/schemas/VariableUpdateAssignmentInput'
-          type: array
-        variable_value_scope:
-          description: Variables and values to update
-          items:
-            $ref: '#/components/schemas/VariableUpdateScopeInput'
-          type: array
-      required:
-      - variable_assignment
-      - variable_value_scope
-      type: object
     commitBranch_request:
       properties:
         metadata:
@@ -22801,110 +21255,6 @@ components:
       required:
       - source_branch_name
       - target_branch_name
-      type: object
-    createWebhookConfiguration_request:
-      properties:
-        name:
-          description: Name of the webhook configuration.
-          type: string
-        description:
-          description: Description of the webhook configuration.
-          type: string
-        url:
-          description: The webhook endpoint URL.
-          type: string
-        url_params:
-          description: Additional URL parameters as key-value pairs.
-          type: object
-        events:
-          description: List of events to subscribe to.
-          items:
-            enum:
-            - LIVEBOARD_SCHEDULE
-            type: string
-          type: array
-        authentication:
-          allOf:
-          - $ref: '#/components/schemas/WebhookAuthenticationInput'
-          description: Authorization configuration for the webhook.
-        signature_verification:
-          allOf:
-          - $ref: '#/components/schemas/WebhookSignatureVerificationInput'
-          description: Configuration for webhook signature verification.
-      required:
-      - events
-      - name
-      - url
-      type: object
-    deleteWebhookConfigurations_request:
-      properties:
-        webhook_identifiers:
-          description: List of webhook identifiers to delete.
-          items:
-            type: string
-          type: array
-      required:
-      - webhook_identifiers
-      type: object
-    searchWebhookConfigurations_request:
-      properties:
-        org_identifier:
-          description: Unique ID or name of the org.
-          type: string
-        webhook_identifier:
-          description: Unique ID or name of the webhook.
-          type: string
-        event_type:
-          description: Type of webhook event to filter by.
-          enum:
-          - LIVEBOARD_SCHEDULE
-          type: string
-        record_offset:
-          default: 0
-          description: "The offset point, starting from where the webhooks should\
-            \ be included in the response."
-          format: int32
-          type: integer
-        record_size:
-          default: 50
-          description: The number of webhooks that should be included in the response
-            starting from offset position.
-          format: int32
-          type: integer
-        sort_options:
-          allOf:
-          - $ref: '#/components/schemas/WebhookSortOptionsInput'
-          description: Sort option includes sort field and sort order.
-      type: object
-    updateWebhookConfiguration_request:
-      properties:
-        name:
-          description: Name of the webhook configuration.
-          type: string
-        description:
-          description: Description of the webhook configuration.
-          type: string
-        url:
-          description: The webhook endpoint URL.
-          type: string
-        url_params:
-          description: Additional URL parameters as key-value pairs.
-          type: object
-        events:
-          description: List of events to subscribe to.
-          items:
-            enum:
-            - LIVEBOARD_SCHEDULE
-            type: string
-          type: array
-        authentication:
-          allOf:
-          - $ref: '#/components/schemas/WebhookAuthenticationInput'
-          description: Authorization configuration for the webhook.
-        signature_verification:
-          allOf:
-          - $ref: '#/components/schemas/WebhookSignatureVerificationInput'
-          description: Configuration for webhook signature verification.
       type: object
   securitySchemes:
     bearerAuth:

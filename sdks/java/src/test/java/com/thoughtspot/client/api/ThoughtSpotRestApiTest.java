@@ -7,7 +7,6 @@ package com.thoughtspot.client.api;
 import com.thoughtspot.client.ApiException;
 import com.thoughtspot.client.model.AccessToken;
 import com.thoughtspot.client.model.ActivateUserRequest;
-import com.thoughtspot.client.model.AgentConversation;
 import com.thoughtspot.client.model.AnswerDataResponse;
 import com.thoughtspot.client.model.AssignChangeAuthorRequest;
 import com.thoughtspot.client.model.AssignTagRequest;
@@ -17,14 +16,11 @@ import com.thoughtspot.client.model.ColumnSecurityRuleResponse;
 import com.thoughtspot.client.model.CommitBranchRequest;
 import com.thoughtspot.client.model.CommitHistoryResponse;
 import com.thoughtspot.client.model.CommitResponse;
-import com.thoughtspot.client.model.CommunicationChannelPreferencesResponse;
-import com.thoughtspot.client.model.ConfigureCommunicationChannelPreferencesRequest;
 import com.thoughtspot.client.model.ConnectionConfigurationResponse;
 import com.thoughtspot.client.model.ConnectionConfigurationSearchRequest;
 import com.thoughtspot.client.model.Conversation;
 import com.thoughtspot.client.model.ConvertWorksheetToModelRequest;
 import com.thoughtspot.client.model.CopyObjectRequest;
-import com.thoughtspot.client.model.CreateAgentConversationRequest;
 import com.thoughtspot.client.model.CreateCalendarRequest;
 import com.thoughtspot.client.model.CreateConfigRequest;
 import com.thoughtspot.client.model.CreateConnectionConfigurationRequest;
@@ -40,8 +36,6 @@ import com.thoughtspot.client.model.CreateScheduleRequest;
 import com.thoughtspot.client.model.CreateTagRequest;
 import com.thoughtspot.client.model.CreateUserGroupRequest;
 import com.thoughtspot.client.model.CreateUserRequest;
-import com.thoughtspot.client.model.CreateVariableRequest;
-import com.thoughtspot.client.model.CreateWebhookConfigurationRequest;
 import com.thoughtspot.client.model.DbtSearchResponse;
 import com.thoughtspot.client.model.DeactivateUserRequest;
 import com.thoughtspot.client.model.DeleteConfigRequest;
@@ -49,11 +43,9 @@ import com.thoughtspot.client.model.DeleteConnectionConfigurationRequest;
 import com.thoughtspot.client.model.DeleteConnectionRequest;
 import com.thoughtspot.client.model.DeleteMetadataRequest;
 import com.thoughtspot.client.model.DeleteOrgEmailCustomizationRequest;
-import com.thoughtspot.client.model.DeleteWebhookConfigurationsRequest;
 import com.thoughtspot.client.model.DeployCommitRequest;
 import com.thoughtspot.client.model.DeployResponse;
 import com.thoughtspot.client.model.EurekaDecomposeQueryResponse;
-import com.thoughtspot.client.model.EurekaGetRelevantQuestionsResponse;
 import com.thoughtspot.client.model.ExportAnswerReportRequest;
 import com.thoughtspot.client.model.ExportLiveboardReportRequest;
 import com.thoughtspot.client.model.ExportMetadataTMLBatchedRequest;
@@ -74,7 +66,6 @@ import com.thoughtspot.client.model.GetAsyncImportStatusResponse;
 import com.thoughtspot.client.model.GetCustomAccessTokenRequest;
 import com.thoughtspot.client.model.GetFullAccessTokenRequest;
 import com.thoughtspot.client.model.GetObjectAccessTokenRequest;
-import com.thoughtspot.client.model.GetRelevantQuestionsRequest;
 import com.thoughtspot.client.model.GetTokenResponse;
 import com.thoughtspot.client.model.ImportEPackAsyncTaskStatus;
 import com.thoughtspot.client.model.ImportMetadataTMLAsyncRequest;
@@ -107,7 +98,6 @@ import com.thoughtspot.client.model.RevokeTokenRequest;
 import com.thoughtspot.client.model.RoleResponse;
 import com.thoughtspot.client.model.SearchCalendarsRequest;
 import com.thoughtspot.client.model.SearchCommitsRequest;
-import com.thoughtspot.client.model.SearchCommunicationChannelPreferencesRequest;
 import com.thoughtspot.client.model.SearchConfigRequest;
 import com.thoughtspot.client.model.SearchConnectionRequest;
 import com.thoughtspot.client.model.SearchConnectionResponse;
@@ -123,10 +113,6 @@ import com.thoughtspot.client.model.SearchSchedulesRequest;
 import com.thoughtspot.client.model.SearchTagsRequest;
 import com.thoughtspot.client.model.SearchUserGroupsRequest;
 import com.thoughtspot.client.model.SearchUsersRequest;
-import com.thoughtspot.client.model.SearchVariablesRequest;
-import com.thoughtspot.client.model.SearchWebhookConfigurationsRequest;
-import com.thoughtspot.client.model.SendAgentMessageResponse;
-import com.thoughtspot.client.model.SendAgentMessageStreamingRequest;
 import com.thoughtspot.client.model.SendMessageRequest;
 import com.thoughtspot.client.model.ShareMetadataRequest;
 import com.thoughtspot.client.model.SingleAnswerRequest;
@@ -156,17 +142,10 @@ import com.thoughtspot.client.model.UpdateSystemConfigRequest;
 import com.thoughtspot.client.model.UpdateTagRequest;
 import com.thoughtspot.client.model.UpdateUserGroupRequest;
 import com.thoughtspot.client.model.UpdateUserRequest;
-import com.thoughtspot.client.model.UpdateVariableRequest;
-import com.thoughtspot.client.model.UpdateVariableValuesRequest;
-import com.thoughtspot.client.model.UpdateWebhookConfigurationRequest;
 import com.thoughtspot.client.model.User;
 import com.thoughtspot.client.model.UserGroupResponse;
 import com.thoughtspot.client.model.ValidateMergeRequest;
 import com.thoughtspot.client.model.ValidateTokenRequest;
-import com.thoughtspot.client.model.Variable;
-import com.thoughtspot.client.model.WebhookDeleteResponse;
-import com.thoughtspot.client.model.WebhookResponse;
-import com.thoughtspot.client.model.WebhookSearchResponse;
 import java.io.File;
 import java.util.List;
 import org.junit.jupiter.api.Disabled;
@@ -259,29 +238,6 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Version: 10.14.0.cl or later Configure communication channel preferences. - Use
-     * &#x60;cluster_preferences&#x60; to update the default preferences for your ThoughtSpot
-     * application instance. - If your instance has
-     * [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), use
-     * &#x60;org_preferences&#x60; to specify Org-specific preferences that override the defaults.
-     * Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60;
-     * (**Has developer privilege**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
-     * &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can manage application settings**) privilege are
-     * also authorized to perform this action.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void configureCommunicationChannelPreferencesTest() throws ApiException {
-        ConfigureCommunicationChannelPreferencesRequest
-                configureCommunicationChannelPreferencesRequest = null;
-        api.configureCommunicationChannelPreferences(
-                configureCommunicationChannelPreferencesRequest);
-        // TODO: test validations
-    }
-
-    /**
      * Version: 10.12.0.cl or later Gets connection configuration objects. Requires
      * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection
      * object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
@@ -360,18 +316,6 @@ public class ThoughtSpotRestApiTest {
     public void copyObjectTest() throws ApiException {
         CopyObjectRequest copyObjectRequest = null;
         ResponseCopyObject response = api.copyObject(copyObjectRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Version: 10.13.0.cl or later
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void createAgentConversationTest() throws ApiException {
-        CreateAgentConversationRequest createAgentConversationRequest = null;
-        AgentConversation response = api.createAgentConversation(createAgentConversationRequest);
         // TODO: test validations
     }
 
@@ -756,48 +700,6 @@ public class ThoughtSpotRestApiTest {
     public void createUserGroupTest() throws ApiException {
         CreateUserGroupRequest createUserGroupRequest = null;
         UserGroupResponse response = api.createUserGroup(createUserGroupRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Create a variable which can be used for parameterizing metadata objects Version: 10.14.0.cl
-     * or later Allows creating a variable which can be used for parameterizing metadata objects in
-     * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES
-     * permission allows you to manage Formula Variables in the current organization scope. The API
-     * endpoint supports the following types of variables: * CONNECTION_PROPERTY - For connection
-     * properties * TABLE_MAPPING - For table mappings * CONNECTION_PROPERTY_PER_PRINCIPAL - For
-     * connection properties per principal. In order to use this please contact support to enable
-     * this. * FORMULA_VARIABLE - For Formula variables, introduced in 10.15.0.cl When creating a
-     * variable, you need to specify: * The variable type * A unique name for the variable * Whether
-     * the variable contains sensitive values (defaults to false) * The data type of the variable,
-     * only specify for formula variables (defaults to null) The operation will fail if: * The user
-     * lacks required permissions * The variable name already exists * The variable type is invalid
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void createVariableTest() throws ApiException {
-        CreateVariableRequest createVariableRequest = null;
-        Variable response = api.createVariable(createVariableRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Version: 10.14.0.cl or later Creates a new webhook configuration to receive notifications for
-     * specified events. The webhook will be triggered when the configured events occur in the
-     * system. Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or
-     * &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
-     * &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to
-     * perform this action.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void createWebhookConfigurationTest() throws ApiException {
-        CreateWebhookConfigurationRequest createWebhookConfigurationRequest = null;
-        WebhookResponse response =
-                api.createWebhookConfiguration(createWebhookConfigurationRequest);
         // TODO: test validations
     }
 
@@ -1215,41 +1117,6 @@ public class ThoughtSpotRestApiTest {
     public void deleteUserGroupTest() throws ApiException {
         String groupIdentifier = null;
         api.deleteUserGroup(groupIdentifier);
-        // TODO: test validations
-    }
-
-    /**
-     * Delete a variable Version: 10.14.0.cl or later Allows deleting a variable from ThoughtSpot.
-     * Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you
-     * to manage Formula Variables in the current organization scope. The API endpoint requires: *
-     * The variable identifier (ID or name) The operation will fail if: * The user lacks required
-     * permissions * The variable doesn&#39;t exist * The variable is being used by other objects
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void deleteVariableTest() throws ApiException {
-        String identifier = null;
-        api.deleteVariable(identifier);
-        // TODO: test validations
-    }
-
-    /**
-     * Version: 10.14.0.cl or later Deletes one or more webhook configurations by their unique id or
-     * name. Returns status of each deletion operation, including successfully deleted webhooks and
-     * any failures with error details. Requires &#x60;ADMINISTRATION&#x60; (**Can administer
-     * ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If
-     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**)
-     * privilege are also authorized to perform this action.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void deleteWebhookConfigurationsTest() throws ApiException {
-        DeleteWebhookConfigurationsRequest deleteWebhookConfigurationsRequest = null;
-        WebhookDeleteResponse response =
-                api.deleteWebhookConfigurations(deleteWebhookConfigurationsRequest);
         // TODO: test validations
     }
 
@@ -1876,38 +1743,6 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Version: 10.13.0.cl or later Breaks down a user-submitted query into a series of analytical
-     * sub-questions using relevant contextual metadata. To use this API, the user must have at
-     * least view-level access to the referenced metadata objects. #### Usage guidelines To
-     * accurately generate relevant questions, the request must include at least one of the
-     * following metadata identifiers within &#x60;metadata_context&#x60; :
-     * &#x60;conversation_identifier&#x60;, &#x60;answer_identifiers&#x60;,
-     * &#x60;liveboard_identifiers&#x60;, or &#x60;data_source_identifiers&#x60;. You can further
-     * enhance the quality and precision of breakdown by providing additional &#x60;ai_context&#x60;
-     * such as: - &#x60;content&#x60;: User provided content like text data, csv data as a string
-     * message to provide context &amp; potentially improve the quality of the response. -
-     * &#x60;instructions&#x60;: User specific text instructions sent to AI system for processing
-     * the query. Additional optional parameters include: - &#x60;limit_relevant_questions&#x60;:
-     * Controls the maximum number of relevant questions returned. Defaults to 5 if not specified. -
-     * &#x60;bypass_cache&#x60;: If set to true, forces fresh computation instead of returning
-     * cached results. If the API request is successful, ThoughtSpot returns a list of relevant
-     * analytical queries, each aligned with the user&#39;s original question. Each returned
-     * question includes the query string, along with the identifier and name of the corresponding
-     * data source. &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes
-     * may be introduced before the endpoint is made Generally Available. &gt; * This endpoint
-     * requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void getRelevantQuestionsTest() throws ApiException {
-        GetRelevantQuestionsRequest getRelevantQuestionsRequest = null;
-        EurekaGetRelevantQuestionsResponse response =
-                api.getRelevantQuestions(getRelevantQuestionsRequest);
-        // TODO: test validations
-    }
-
-    /**
      * Version: 9.0.0.cl or later Retrieves the current configuration details of the cluster. If the
      * request is successful, the API returns a list configuration settings applied on the cluster.
      * Requires &#x60;ADMINISTRATION&#x60;(**Can administer ThoughtSpot**) privilege to view these
@@ -2234,30 +2069,6 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Version: 10.14.0.cl or later Fetch communication channel preferences. - Use
-     * &#x60;cluster_preferences&#x60; to fetch the default preferences for your ThoughtSpot
-     * application instance. - If your instance has
-     * [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), use
-     * &#x60;org_preferences&#x60; to fetch any Org-specific preferences that override the defaults.
-     * Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60;
-     * (**Has developer privilege**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
-     * &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can manage application settings**) privilege are
-     * also authorized to perform this action.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void searchCommunicationChannelPreferencesTest() throws ApiException {
-        SearchCommunicationChannelPreferencesRequest searchCommunicationChannelPreferencesRequest =
-                null;
-        CommunicationChannelPreferencesResponse response =
-                api.searchCommunicationChannelPreferences(
-                        searchCommunicationChannelPreferencesRequest);
-        // TODO: test validations
-    }
-
-    /**
      * Version: 9.2.0.cl or later Gets Git repository connections configured on the ThoughtSpot
      * instance. Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
      * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
@@ -2554,76 +2365,6 @@ public class ThoughtSpotRestApiTest {
     public void searchUsersTest() throws ApiException {
         SearchUsersRequest searchUsersRequest = null;
         List<User> response = api.searchUsers(searchUsersRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Search variables Version: 10.14.0.cl or later Allows searching for variables in ThoughtSpot.
-     * Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage
-     * Formula Variables in the current organization scope. The API endpoint supports searching
-     * variables by: * Variable identifier (ID or name) * Variable type * Name pattern
-     * (case-insensitive, supports % for wildcard) The search results can be formatted in three
-     * ways: * METADATA - Returns only variable metadata (default) * METADATA_AND_VALUES - Returns
-     * variable metadata and values The values can be filtered by scope: * org_identifier *
-     * principal_identifier * model_identifier
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void searchVariablesTest() throws ApiException {
-        SearchVariablesRequest searchVariablesRequest = null;
-        List<Variable> response = api.searchVariables(searchVariablesRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Version: 10.14.0.cl or later Searches for webhook configurations based on various criteria
-     * such as Org, webhook identifier, event type, with support for pagination and sorting. Returns
-     * matching webhook configurations with their complete details. Requires
-     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has
-     * developer privilege**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
-     * &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to
-     * perform this action.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void searchWebhookConfigurationsTest() throws ApiException {
-        SearchWebhookConfigurationsRequest searchWebhookConfigurationsRequest = null;
-        WebhookSearchResponse response =
-                api.searchWebhookConfigurations(searchWebhookConfigurationsRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Version: 10.13.0.cl or later This API allows users to initiate or continue an agent (Spotter)
-     * conversation by submitting one or more natural language messages. To use this API, the user
-     * must have access to the relevant conversational session (via conversation_identifier) and
-     * submit at least one message. #### Usage guidelines To initiate or continue a conversation,
-     * the request must include: - &#x60;conversation_identifier&#x60;: a unique session ID for
-     * continuity and message tracking - &#x60;messages&#x60;: an array of one or more text
-     * messages, each with a value and type Additionally, user can specify what tool can be included
-     * &#x60;conversation_settings&#x60; parameter, which supports: -
-     * &#x60;enable_contextual_change_analysis&#x60; (default: false) -
-     * &#x60;enable_natural_language_answer_generation&#x60; (default: true) -
-     * &#x60;enable_reasoning&#x60; (default: false) If the request is valid, the API returns a
-     * stream of messages in real time, including: - &#x60;ack&#x60;: confirms receipt of the
-     * request - &#x60;text / text-chunk&#x60;: content chunks, optionally formatted (e.g.,
-     * markdown) - &#x60;answer&#x60;: the final structured response with metadata and analytics -
-     * &#x60;error&#x60;: if a failure occurs - &#x60;notification&#x60;: notification messages for
-     * operation being performed &gt; ###### Note: &gt; * This endpoint is currently in Beta.
-     * Breaking changes may be introduced before the endpoint is made Generally Available. &gt; *
-     * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your
-     * cluster. &gt; * The streaming protocol uses Server-Sent Events (SSE)
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void sendAgentMessageStreamingTest() throws ApiException {
-        SendAgentMessageStreamingRequest sendAgentMessageStreamingRequest = null;
-        SendAgentMessageResponse response =
-                api.sendAgentMessageStreaming(sendAgentMessageStreamingRequest);
         // TODO: test validations
     }
 
@@ -3328,62 +3069,6 @@ public class ThoughtSpotRestApiTest {
         String groupIdentifier = null;
         UpdateUserGroupRequest updateUserGroupRequest = null;
         api.updateUserGroup(groupIdentifier, updateUserGroupRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Update a variable&#39;s name Version: 10.14.0.cl or later Allows updating a variable&#39;s
-     * name in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES
-     * permission allows you to manage Formula Variables in the current organization scope. The API
-     * endpoint allows updating: * The variable name
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void updateVariableTest() throws ApiException {
-        String identifier = null;
-        UpdateVariableRequest updateVariableRequest = null;
-        api.updateVariable(identifier, updateVariableRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Update values for multiple variables Version: 10.14.0.cl or later Allows updating values for
-     * multiple variables in ThoughtSpot. Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES
-     * permission allows you to manage Formula Variables in the current organization scope. The API
-     * endpoint allows: * Adding new values to variables * Replacing existing values * Deleting
-     * values from variables When updating variable values, you need to specify: * The variable
-     * identifiers * The values to add/replace/remove for each variable * The operation to perform
-     * (ADD, REPLACE, REMOVE, RESET) Behaviour based on operation type: * ADD - Adds values to the
-     * variable if this is a list type variable, else same as replace. * REPLACE - Replaces all
-     * values of a given set of constraints with the current set of values. * REMOVE - Removes any
-     * values which match the set of conditions of the variables if this is a list type variable,
-     * else clears value. * RESET - Removes all constrains for a given variable, scope is ignored
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void updateVariableValuesTest() throws ApiException {
-        UpdateVariableValuesRequest updateVariableValuesRequest = null;
-        api.updateVariableValues(updateVariableValuesRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Version: 10.14.0.cl or later Updates an existing webhook configuration by its unique id or
-     * name. Only the provided fields will be updated. Requires &#x60;ADMINISTRATION&#x60; (**Can
-     * administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.
-     * If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is
-     * enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage
-     * webhooks**) privilege are also authorized to perform this action.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void updateWebhookConfigurationTest() throws ApiException {
-        String webhookIdentifier = null;
-        UpdateWebhookConfigurationRequest updateWebhookConfigurationRequest = null;
-        api.updateWebhookConfiguration(webhookIdentifier, updateWebhookConfigurationRequest);
         // TODO: test validations
     }
 

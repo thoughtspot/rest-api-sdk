@@ -9,11 +9,9 @@ All URIs are relative to *CLUSTER_URL*
 | [**assignTag**](ThoughtSpotRestApi.md#assignTag) | **POST** /api/rest/2.0/tags/assign |
 | [**changeUserPassword**](ThoughtSpotRestApi.md#changeUserPassword) | **POST** /api/rest/2.0/users/change-password |
 | [**commitBranch**](ThoughtSpotRestApi.md#commitBranch) | **POST** /api/rest/2.0/vcs/git/branches/commit |
-| [**configureCommunicationChannelPreferences**](ThoughtSpotRestApi.md#configureCommunicationChannelPreferences) | **POST** /api/rest/2.0/system/preferences/communication-channels/configure |
 | [**connectionConfigurationSearch**](ThoughtSpotRestApi.md#connectionConfigurationSearch) | **POST** /api/rest/2.0/connection-configurations/search |
 | [**convertWorksheetToModel**](ThoughtSpotRestApi.md#convertWorksheetToModel) | **POST** /api/rest/2.0/metadata/worksheets/convert |
 | [**copyObject**](ThoughtSpotRestApi.md#copyObject) | **POST** /api/rest/2.0/metadata/copyobject |
-| [**createAgentConversation**](ThoughtSpotRestApi.md#createAgentConversation) | **POST** /api/rest/2.0/ai/agent/conversation/create |
 | [**createCalendar**](ThoughtSpotRestApi.md#createCalendar) | **POST** /api/rest/2.0/calendars/create |
 | [**createConfig**](ThoughtSpotRestApi.md#createConfig) | **POST** /api/rest/2.0/vcs/git/config/create |
 | [**createConnection**](ThoughtSpotRestApi.md#createConnection) | **POST** /api/rest/2.0/connection/create |
@@ -27,8 +25,6 @@ All URIs are relative to *CLUSTER_URL*
 | [**createTag**](ThoughtSpotRestApi.md#createTag) | **POST** /api/rest/2.0/tags/create |
 | [**createUser**](ThoughtSpotRestApi.md#createUser) | **POST** /api/rest/2.0/users/create |
 | [**createUserGroup**](ThoughtSpotRestApi.md#createUserGroup) | **POST** /api/rest/2.0/groups/create |
-| [**createVariable**](ThoughtSpotRestApi.md#createVariable) | **POST** /api/rest/2.0/template/variables/create |
-| [**createWebhookConfiguration**](ThoughtSpotRestApi.md#createWebhookConfiguration) | **POST** /api/rest/2.0/webhooks/create |
 | [**dbtConnection**](ThoughtSpotRestApi.md#dbtConnection) | **POST** /api/rest/2.0/dbt/dbt-connection |
 | [**dbtGenerateSyncTml**](ThoughtSpotRestApi.md#dbtGenerateSyncTml) | **POST** /api/rest/2.0/dbt/generate-sync-tml |
 | [**dbtGenerateTml**](ThoughtSpotRestApi.md#dbtGenerateTml) | **POST** /api/rest/2.0/dbt/generate-tml |
@@ -50,8 +46,6 @@ All URIs are relative to *CLUSTER_URL*
 | [**deleteTag**](ThoughtSpotRestApi.md#deleteTag) | **POST** /api/rest/2.0/tags/{tag_identifier}/delete |
 | [**deleteUser**](ThoughtSpotRestApi.md#deleteUser) | **POST** /api/rest/2.0/users/{user_identifier}/delete |
 | [**deleteUserGroup**](ThoughtSpotRestApi.md#deleteUserGroup) | **POST** /api/rest/2.0/groups/{group_identifier}/delete |
-| [**deleteVariable**](ThoughtSpotRestApi.md#deleteVariable) | **POST** /api/rest/2.0/template/variables/{identifier}/delete |
-| [**deleteWebhookConfigurations**](ThoughtSpotRestApi.md#deleteWebhookConfigurations) | **POST** /api/rest/2.0/webhooks/delete |
 | [**deployCommit**](ThoughtSpotRestApi.md#deployCommit) | **POST** /api/rest/2.0/vcs/git/commits/deploy |
 | [**downloadConnectionMetadataChanges**](ThoughtSpotRestApi.md#downloadConnectionMetadataChanges) | **POST** /api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier} |
 | [**exportAnswerReport**](ThoughtSpotRestApi.md#exportAnswerReport) | **POST** /api/rest/2.0/report/answer |
@@ -75,7 +69,6 @@ All URIs are relative to *CLUSTER_URL*
 | [**getCustomAccessToken**](ThoughtSpotRestApi.md#getCustomAccessToken) | **POST** /api/rest/2.0/auth/token/custom |
 | [**getFullAccessToken**](ThoughtSpotRestApi.md#getFullAccessToken) | **POST** /api/rest/2.0/auth/token/full |
 | [**getObjectAccessToken**](ThoughtSpotRestApi.md#getObjectAccessToken) | **POST** /api/rest/2.0/auth/token/object |
-| [**getRelevantQuestions**](ThoughtSpotRestApi.md#getRelevantQuestions) | **POST** /api/rest/2.0/ai/relevant-questions/ |
 | [**getSystemConfig**](ThoughtSpotRestApi.md#getSystemConfig) | **GET** /api/rest/2.0/system/config |
 | [**getSystemInformation**](ThoughtSpotRestApi.md#getSystemInformation) | **GET** /api/rest/2.0/system |
 | [**getSystemOverrideInfo**](ThoughtSpotRestApi.md#getSystemOverrideInfo) | **GET** /api/rest/2.0/system/config-overrides |
@@ -93,7 +86,6 @@ All URIs are relative to *CLUSTER_URL*
 | [**revokeToken**](ThoughtSpotRestApi.md#revokeToken) | **POST** /api/rest/2.0/auth/token/revoke |
 | [**searchCalendars**](ThoughtSpotRestApi.md#searchCalendars) | **POST** /api/rest/2.0/calendars/search |
 | [**searchCommits**](ThoughtSpotRestApi.md#searchCommits) | **POST** /api/rest/2.0/vcs/git/commits/search |
-| [**searchCommunicationChannelPreferences**](ThoughtSpotRestApi.md#searchCommunicationChannelPreferences) | **POST** /api/rest/2.0/system/preferences/communication-channels/search |
 | [**searchConfig**](ThoughtSpotRestApi.md#searchConfig) | **POST** /api/rest/2.0/vcs/git/config/search |
 | [**searchConnection**](ThoughtSpotRestApi.md#searchConnection) | **POST** /api/rest/2.0/connection/search |
 | [**searchCustomActions**](ThoughtSpotRestApi.md#searchCustomActions) | **POST** /api/rest/2.0/customization/custom-actions/search |
@@ -106,9 +98,6 @@ All URIs are relative to *CLUSTER_URL*
 | [**searchTags**](ThoughtSpotRestApi.md#searchTags) | **POST** /api/rest/2.0/tags/search |
 | [**searchUserGroups**](ThoughtSpotRestApi.md#searchUserGroups) | **POST** /api/rest/2.0/groups/search |
 | [**searchUsers**](ThoughtSpotRestApi.md#searchUsers) | **POST** /api/rest/2.0/users/search |
-| [**searchVariables**](ThoughtSpotRestApi.md#searchVariables) | **POST** /api/rest/2.0/template/variables/search |
-| [**searchWebhookConfigurations**](ThoughtSpotRestApi.md#searchWebhookConfigurations) | **POST** /api/rest/2.0/webhooks/search |
-| [**sendAgentMessageStreaming**](ThoughtSpotRestApi.md#sendAgentMessageStreaming) | **POST** /api/rest/2.0/ai/agent/converse/sse |
 | [**sendMessage**](ThoughtSpotRestApi.md#sendMessage) | **POST** /api/rest/2.0/ai/conversation/{conversation_identifier}/converse |
 | [**shareMetadata**](ThoughtSpotRestApi.md#shareMetadata) | **POST** /api/rest/2.0/security/metadata/share |
 | [**singleAnswer**](ThoughtSpotRestApi.md#singleAnswer) | **POST** /api/rest/2.0/ai/answer/create |
@@ -133,9 +122,6 @@ All URIs are relative to *CLUSTER_URL*
 | [**updateTag**](ThoughtSpotRestApi.md#updateTag) | **POST** /api/rest/2.0/tags/{tag_identifier}/update |
 | [**updateUser**](ThoughtSpotRestApi.md#updateUser) | **POST** /api/rest/2.0/users/{user_identifier}/update |
 | [**updateUserGroup**](ThoughtSpotRestApi.md#updateUserGroup) | **POST** /api/rest/2.0/groups/{group_identifier}/update |
-| [**updateVariable**](ThoughtSpotRestApi.md#updateVariable) | **POST** /api/rest/2.0/template/variables/{identifier}/update |
-| [**updateVariableValues**](ThoughtSpotRestApi.md#updateVariableValues) | **POST** /api/rest/2.0/template/variables/update-values |
-| [**updateWebhookConfiguration**](ThoughtSpotRestApi.md#updateWebhookConfiguration) | **POST** /api/rest/2.0/webhooks/{webhook_identifier}/update |
 | [**validateEmailCustomization**](ThoughtSpotRestApi.md#validateEmailCustomization) | **POST** /api/rest/2.0/customization/email/validate |
 | [**validateMerge**](ThoughtSpotRestApi.md#validateMerge) | **POST** /api/rest/2.0/vcs/git/branches/validate |
 | [**validateToken**](ThoughtSpotRestApi.md#validateToken) | **POST** /api/rest/2.0/auth/token/validate |
@@ -321,42 +307,6 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
-<a id="configureCommunicationChannelPreferences"></a>
-# **configureCommunicationChannelPreferences**
-> configureCommunicationChannelPreferences(configureCommunicationChannelPreferencesRequest)
-
-
-
- Version: 10.14.0.cl or later   Configure communication channel preferences. - Use &#x60;cluster_preferences&#x60; to update the default preferences for your ThoughtSpot application instance. - If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), use &#x60;org_preferences&#x60; to specify Org-specific preferences that override the defaults.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can manage application settings**) privilege are also authorized to perform this action.      
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **configureCommunicationChannelPreferencesRequest** | [**ConfigureCommunicationChannelPreferencesRequest**](ConfigureCommunicationChannelPreferencesRequest.md)
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **204** | Communication channel preferences successfully updated. |  -  |
-| **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
 <a id="connectionConfigurationSearch"></a>
 # **connectionConfigurationSearch**
 > List&lt;ConnectionConfigurationResponse&gt; connectionConfigurationSearch(connectionConfigurationSearchRequest)
@@ -465,41 +415,6 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **404** | Object not found |  -  |
 | **500** | Unexpected error |  -  |
-
-<a id="createAgentConversation"></a>
-# **createAgentConversation**
-> AgentConversation createAgentConversation(createAgentConversationRequest)
-
-
-
-Version: 10.13.0.cl or later 
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **createAgentConversationRequest** | [**CreateAgentConversationRequest**](CreateAgentConversationRequest.md)
-
-### Return type
-
-[**AgentConversation**](AgentConversation.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Common successful response |  -  |
-| **201** | Common error response |  -  |
-| **400** | Operation failed |  -  |
-| **500** | Operation failed |  -  |
 
 <a id="createCalendar"></a>
 # **createCalendar**
@@ -962,78 +877,6 @@ Version: 10.13.0.cl or later
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | User group successfully created. |  -  |
-| **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
-<a id="createVariable"></a>
-# **createVariable**
-> Variable createVariable(createVariableRequest)
-
-
-
- Create a variable which can be used for parameterizing metadata objects   Version: 10.14.0.cl or later   Allows creating a variable which can be used for parameterizing metadata objects in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint supports the following types of variables: * CONNECTION_PROPERTY - For connection properties * TABLE_MAPPING - For table mappings * CONNECTION_PROPERTY_PER_PRINCIPAL - For connection properties per principal. In order to use this please contact support to enable this. * FORMULA_VARIABLE - For Formula variables, introduced in 10.15.0.cl  When creating a variable, you need to specify: * The variable type * A unique name for the variable * Whether the variable contains sensitive values (defaults to false) * The data type of the variable, only specify for formula variables (defaults to null)  The operation will fail if: * The user lacks required permissions * The variable name already exists * The variable type is invalid     
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **createVariableRequest** | [**CreateVariableRequest**](CreateVariableRequest.md)
-
-### Return type
-
-[**Variable**](Variable.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Create variable is successful. |  -  |
-| **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
-<a id="createWebhookConfiguration"></a>
-# **createWebhookConfiguration**
-> WebhookResponse createWebhookConfiguration(createWebhookConfigurationRequest)
-
-
-
- Version: 10.14.0.cl or later   Creates a new webhook configuration to receive notifications for specified events. The webhook will be triggered when the configured events occur in the system.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to perform this action.      
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **createWebhookConfigurationRequest** | [**CreateWebhookConfigurationRequest**](CreateWebhookConfigurationRequest.md)
-
-### Return type
-
-[**WebhookResponse**](WebhookResponse.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Webhook configuration created successfully |  -  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
@@ -1800,78 +1643,6 @@ null (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | User group successfully deleted. |  -  |
-| **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
-<a id="deleteVariable"></a>
-# **deleteVariable**
-> deleteVariable(identifier)
-
-
-
- Delete a variable   Version: 10.14.0.cl or later   Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn&#39;t exist * The variable is being used by other objects      
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **identifier** | **String**
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **204** | Deleting the variable is successful. |  -  |
-| **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
-<a id="deleteWebhookConfigurations"></a>
-# **deleteWebhookConfigurations**
-> WebhookDeleteResponse deleteWebhookConfigurations(deleteWebhookConfigurationsRequest)
-
-
-
- Version: 10.14.0.cl or later   Deletes one or more webhook configurations by their unique id or name. Returns status of each deletion operation, including successfully deleted webhooks and any failures with error details.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to perform this action.      
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **deleteWebhookConfigurationsRequest** | [**DeleteWebhookConfigurationsRequest**](DeleteWebhookConfigurationsRequest.md)
-
-### Return type
-
-[**WebhookDeleteResponse**](WebhookDeleteResponse.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Webhook configurations deleted successfully |  -  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
@@ -2699,41 +2470,6 @@ No authorization required
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
-<a id="getRelevantQuestions"></a>
-# **getRelevantQuestions**
-> EurekaGetRelevantQuestionsResponse getRelevantQuestions(getRelevantQuestionsRequest)
-
-
-
- Version: 10.13.0.cl or later   Breaks down a user-submitted query into a series of analytical sub-questions using relevant contextual metadata.  To use this API, the user must have at least view-level access to the referenced metadata objects.  #### Usage guidelines  To accurately generate relevant questions, the request must include at least one of the following metadata identifiers within &#x60;metadata_context&#x60; : &#x60;conversation_identifier&#x60;, &#x60;answer_identifiers&#x60;, &#x60;liveboard_identifiers&#x60;, or &#x60;data_source_identifiers&#x60;.  You can further enhance the quality and precision of breakdown by providing additional &#x60;ai_context&#x60; such as:  - &#x60;content&#x60;: User provided content like text data, csv data as a string message to provide context &amp; potentially improve the quality of the response. - &#x60;instructions&#x60;: User specific text instructions sent to AI system for processing the query.  Additional optional parameters include:  - &#x60;limit_relevant_questions&#x60;: Controls the maximum number of relevant questions returned. Defaults to 5 if not specified. - &#x60;bypass_cache&#x60;: If set to true, forces fresh computation instead of returning cached results.  If the API request is successful, ThoughtSpot returns a list of relevant analytical queries, each aligned with the user&#39;s original question. Each returned question includes the query string, along with the identifier and name of the corresponding data source.  &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.     
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **getRelevantQuestionsRequest** | [**GetRelevantQuestionsRequest**](GetRelevantQuestionsRequest.md)
-
-### Return type
-
-[**EurekaGetRelevantQuestionsResponse**](EurekaGetRelevantQuestionsResponse.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Common successful response |  -  |
-| **201** | Common error response |  -  |
-| **400** | Operation failed |  -  |
-| **500** | Operation failed |  -  |
-
 <a id="getSystemConfig"></a>
 # **getSystemConfig**
 > SystemConfig getSystemConfig()
@@ -3334,42 +3070,6 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
-<a id="searchCommunicationChannelPreferences"></a>
-# **searchCommunicationChannelPreferences**
-> CommunicationChannelPreferencesResponse searchCommunicationChannelPreferences(searchCommunicationChannelPreferencesRequest)
-
-
-
- Version: 10.14.0.cl or later   Fetch communication channel preferences. - Use &#x60;cluster_preferences&#x60; to fetch the default preferences for your ThoughtSpot application instance. - If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), use &#x60;org_preferences&#x60; to fetch any Org-specific preferences that override the defaults.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can manage application settings**) privilege are also authorized to perform this action.      
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **searchCommunicationChannelPreferencesRequest** | [**SearchCommunicationChannelPreferencesRequest**](SearchCommunicationChannelPreferencesRequest.md)
-
-### Return type
-
-[**CommunicationChannelPreferencesResponse**](CommunicationChannelPreferencesResponse.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Communication channel preferences retrieved successfully. |  -  |
-| **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
 <a id="searchConfig"></a>
 # **searchConfig**
 > List&lt;RepoConfigObject&gt; searchConfig(searchConfigRequest)
@@ -3800,113 +3500,6 @@ null (empty response body)
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
-
-<a id="searchVariables"></a>
-# **searchVariables**
-> List&lt;Variable&gt; searchVariables(searchVariablesRequest)
-
-
-
- Search variables   Version: 10.14.0.cl or later   Allows searching for variables in ThoughtSpot.  Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint supports searching variables by: * Variable identifier (ID or name) * Variable type * Name pattern (case-insensitive, supports % for wildcard)  The search results can be formatted in three ways: * METADATA - Returns only variable metadata (default) * METADATA_AND_VALUES - Returns variable metadata and values  The values can be filtered by scope: * org_identifier * principal_identifier * model_identifier      
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **searchVariablesRequest** | [**SearchVariablesRequest**](SearchVariablesRequest.md)
-
-### Return type
-
-[**List&lt;Variable&gt;**](Variable.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | List of variables is successful. |  -  |
-| **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
-<a id="searchWebhookConfigurations"></a>
-# **searchWebhookConfigurations**
-> WebhookSearchResponse searchWebhookConfigurations(searchWebhookConfigurationsRequest)
-
-
-
- Version: 10.14.0.cl or later   Searches for webhook configurations based on various criteria such as Org, webhook identifier, event type, with support for pagination and sorting. Returns matching webhook configurations with their complete details.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to perform this action.      
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **searchWebhookConfigurationsRequest** | [**SearchWebhookConfigurationsRequest**](SearchWebhookConfigurationsRequest.md)
-
-### Return type
-
-[**WebhookSearchResponse**](WebhookSearchResponse.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Webhook configurations retrieved successfully |  -  |
-| **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
-<a id="sendAgentMessageStreaming"></a>
-# **sendAgentMessageStreaming**
-> SendAgentMessageResponse sendAgentMessageStreaming(sendAgentMessageStreamingRequest)
-
-
-
- Version: 10.13.0.cl or later   This API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages.  To use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.   #### Usage guidelines  To initiate or continue a conversation, the request must include: - &#x60;conversation_identifier&#x60;: a unique session ID for continuity and message tracking - &#x60;messages&#x60;: an array of one or more text messages, each with a value and type  Additionally, user can specify what tool can be included &#x60;conversation_settings&#x60; parameter, which supports: - &#x60;enable_contextual_change_analysis&#x60; (default: false) - &#x60;enable_natural_language_answer_generation&#x60; (default: true) - &#x60;enable_reasoning&#x60; (default: false)  If the request is valid, the API returns a stream of messages in real time, including: - &#x60;ack&#x60;: confirms receipt of the request - &#x60;text / text-chunk&#x60;: content chunks, optionally formatted (e.g., markdown) - &#x60;answer&#x60;: the final structured response with metadata and analytics - &#x60;error&#x60;: if a failure occurs - &#x60;notification&#x60;: notification messages for operation being performed  &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster. &gt; * The streaming protocol uses Server-Sent Events (SSE)     
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **sendAgentMessageStreamingRequest** | [**SendAgentMessageStreamingRequest**](SendAgentMessageStreamingRequest.md)
-
-### Return type
-
-[**SendAgentMessageResponse**](SendAgentMessageResponse.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Common successful response |  -  |
-| **201** | Common error response |  -  |
-| **400** | Operation failed |  -  |
-| **500** | Operation failed |  -  |
 
 <a id="sendMessage"></a>
 # **sendMessage**
@@ -4786,116 +4379,6 @@ null (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | User group successfully updated. |  -  |
-| **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
-<a id="updateVariable"></a>
-# **updateVariable**
-> updateVariable(identifier, updateVariableRequest)
-
-
-
- Update a variable&#39;s name   Version: 10.14.0.cl or later   Allows updating a variable&#39;s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **identifier** | **String**
-| **updateVariableRequest** | [**UpdateVariableRequest**](UpdateVariableRequest.md)
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **204** | Variable name updated successfully. |  -  |
-| **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
-<a id="updateVariableValues"></a>
-# **updateVariableValues**
-> updateVariableValues(updateVariableValuesRequest)
-
-
-
- Update values for multiple variables   Version: 10.14.0.cl or later   Allows updating values for multiple variables in ThoughtSpot.  Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows: * Adding new values to variables * Replacing existing values * Deleting values from variables  When updating variable values, you need to specify: * The variable identifiers * The values to add/replace/remove for each variable * The operation to perform (ADD, REPLACE, REMOVE, RESET)  Behaviour based on operation type: * ADD - Adds values to the variable if this is a list type variable, else same as replace. * REPLACE - Replaces all values of a given set of constraints with the current set of values. * REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value. * RESET - Removes all constrains for a given variable, scope is ignored      
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **updateVariableValuesRequest** | [**UpdateVariableValuesRequest**](UpdateVariableValuesRequest.md)
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **204** | Variable values updated successfully. |  -  |
-| **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
-<a id="updateWebhookConfiguration"></a>
-# **updateWebhookConfiguration**
-> updateWebhookConfiguration(webhookIdentifier, updateWebhookConfigurationRequest)
-
-
-
- Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to perform this action.      
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **webhookIdentifier** | **String**
-| **updateWebhookConfigurationRequest** | [**UpdateWebhookConfigurationRequest**](UpdateWebhookConfigurationRequest.md)
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **204** | Webhook configuration updated successfully |  -  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
