@@ -13872,7 +13872,8 @@
                       "en-AU",
                       "zh-Hant",
                       "ko-KR",
-                      "en-DE"
+                      "en-DE",
+                      "USE_BROWSER_LANGUAGE"
                     ]
                   },
                   "extended_properties": {
@@ -14760,7 +14761,8 @@
                       "en-AU",
                       "zh-Hant",
                       "ko-KR",
-                      "en-DE"
+                      "en-DE",
+                      "USE_BROWSER_LANGUAGE"
                     ]
                   },
                   "extended_properties": {
@@ -15128,7 +15130,7 @@
     "/api/rest/2.0/template/variables/{identifier}/update": {
       "post": {
         "operationId": "updateVariable",
-        "description": "\nUpdate a variable's name <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nAllows updating a variable's name in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint allows updating:\n* The variable name\n\n\n\n#### Endpoint URL\n",
+        "description": "\nUpdate a variable's name <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nAllows updating a variable's properties in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint allows updating:\n* The variable name\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Variable",
           "10.14.0.cl"
@@ -15213,7 +15215,7 @@
     "/api/rest/2.0/template/variables/update-values": {
       "post": {
         "operationId": "updateVariableValues",
-        "description": "\nUpdate values for multiple variables <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nAllows updating values for multiple variables in ThoughtSpot.\n\nRequires ADMINISTRATION role.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint allows:\n* Adding new values to variables\n* Replacing existing values\n* Deleting values from variables\n\nWhen updating variable values, you need to specify:\n* The variable identifiers\n* The values to add/replace/remove for each variable\n* The operation to perform (ADD, REPLACE, REMOVE, RESET)\n\nBehaviour based on operation type:\n* ADD - Adds values to the variable if this is a list type variable, else same as replace.\n* REPLACE - Replaces all values of a given set of constraints with the current set of values.\n* REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value.\n* RESET - Removes all constrains for a given variable, scope is ignored\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nUpdate values for multiple variables <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nAllows updating values for multiple variables in ThoughtSpot.\n\nRequires ADMINISTRATION role.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint allows:\n* Adding new values to variables\n* Replacing existing values\n* Deleting values from variables\n\nWhen updating variable values, you need to specify:\n* The variable identifiers\n* The values to add/replace/remove for each variable\n* The operation to perform (ADD, REPLACE, REMOVE, CLEAR)\n\nBehaviour based on operation type:\n* ADD - Adds values to the variable if this is a list type variable, else same as replace.\n* REPLACE - Replaces all values of a given set of constraints with the current set of values.\n* REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value.\n* CLEAR - Removes all constrains for a given variable, scope is ignored\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Variable",
           "10.14.0.cl"
@@ -18902,7 +18904,8 @@
               "en-AU",
               "zh-Hant",
               "ko-KR",
-              "en-DE"
+              "en-DE",
+              "USE_BROWSER_LANGUAGE"
             ]
           },
           "number_format_locale": {
@@ -18936,7 +18939,8 @@
               "en-AU",
               "zh-Hant",
               "ko-KR",
-              "en-DE"
+              "en-DE",
+              "USE_BROWSER_LANGUAGE"
             ]
           },
           "date_format_locale": {
@@ -18970,7 +18974,8 @@
               "en-AU",
               "zh-Hant",
               "ko-KR",
-              "en-DE"
+              "en-DE",
+              "USE_BROWSER_LANGUAGE"
             ]
           }
         }
