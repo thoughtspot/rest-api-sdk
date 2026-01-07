@@ -3616,6 +3616,12 @@ _CreateUserRequest.attributeTypeMap = [
     "format": ""
   },
   {
+    "name": "use_browser_language",
+    "baseName": "use_browser_language",
+    "type": "boolean",
+    "format": ""
+  },
+  {
     "name": "extended_properties",
     "baseName": "extended_properties",
     "type": "any",
@@ -6713,6 +6719,18 @@ _ImportUser.attributeTypeMap = [
     "name": "favorite_metadata",
     "baseName": "favorite_metadata",
     "type": "Array<FavoriteMetadataInput>",
+    "format": ""
+  },
+  {
+    "name": "preferred_locale",
+    "baseName": "preferred_locale",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "use_browser_language",
+    "baseName": "use_browser_language",
+    "type": "boolean",
     "format": ""
   }
 ];
@@ -13818,6 +13836,12 @@ _UpdateUserRequest.attributeTypeMap = [
     "format": ""
   },
   {
+    "name": "use_browser_language",
+    "baseName": "use_browser_language",
+    "type": "boolean",
+    "format": ""
+  },
+  {
     "name": "extended_properties",
     "baseName": "extended_properties",
     "type": "any",
@@ -14086,6 +14110,12 @@ _User.attributeTypeMap = [
     "name": "preferred_locale",
     "baseName": "preferred_locale",
     "type": "string",
+    "format": ""
+  },
+  {
+    "name": "use_browser_language",
+    "baseName": "use_browser_language",
+    "type": "boolean",
     "format": ""
   },
   {

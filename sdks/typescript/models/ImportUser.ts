@@ -70,6 +70,14 @@ export class ImportUser {
     * Metadata objects to add to the user\'s favorites list.
     */
     'favorite_metadata'?: Array<FavoriteMetadataInput> | null;
+    /**
+    * Locale for the user.
+    */
+    'preferred_locale'?: string | null;
+    /**
+    * Flag to indicate whether to use the browser locale for the user in the UI. When set to true, the preferred_locale value is unset and the browser\'s language setting takes precedence.
+    */
+    'use_browser_language'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -156,6 +164,18 @@ export class ImportUser {
             "name": "favorite_metadata",
             "baseName": "favorite_metadata",
             "type": "Array<FavoriteMetadataInput>",
+            "format": ""
+        },
+        {
+            "name": "preferred_locale",
+            "baseName": "preferred_locale",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "use_browser_language",
+            "baseName": "use_browser_language",
+            "type": "boolean",
             "format": ""
         }    ];
 

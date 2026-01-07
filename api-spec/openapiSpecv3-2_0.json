@@ -13875,6 +13875,11 @@
                       "en-DE"
                     ]
                   },
+                  "use_browser_language": {
+                    "description": "Flag to indicate whether to use the browser locale for the user in the UI.\nWhen set to true, the preferred_locale value is unset and the browser's\nlanguage setting takes precedence.",
+                    "type": "boolean",
+                    "nullable": true
+                  },
                   "extended_properties": {
                     "description": "Properties for the user",
                     "type": "object"
@@ -14762,6 +14767,11 @@
                       "ko-KR",
                       "en-DE"
                     ]
+                  },
+                  "use_browser_language": {
+                    "description": "Flag to indicate whether to use the browser locale for the user in the UI.\nWhen set to true, the preferred_locale value is unset and the browser's\nlanguage setting takes precedence.",
+                    "type": "boolean",
+                    "nullable": true
                   },
                   "extended_properties": {
                     "description": "Properties for the user",
@@ -17196,6 +17206,11 @@
           "preferred_locale": {
             "type": "string",
             "description": "Locale for the user.",
+            "nullable": true
+          },
+          "use_browser_language": {
+            "type": "boolean",
+            "description": "Flag to indicate whether to use the browser locale for the user in the UI.\nWhen set to true, the preferred_locale value is unset and the browser's\nlanguage setting takes precedence.",
             "nullable": true
           },
           "extended_properties": {
@@ -21809,6 +21824,16 @@
               "$ref": "#/components/schemas/FavoriteMetadataInput"
             },
             "description": "Metadata objects to add to the user's favorites list.",
+            "nullable": true
+          },
+          "preferred_locale": {
+            "type": "string",
+            "description": "Locale for the user.",
+            "nullable": true
+          },
+          "use_browser_language": {
+            "type": "boolean",
+            "description": "Flag to indicate whether to use the browser locale for the user in the UI.\nWhen set to true, the preferred_locale value is unset and the browser's\nlanguage setting takes precedence.",
             "nullable": true
           }
         }

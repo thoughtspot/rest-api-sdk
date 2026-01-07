@@ -8315,6 +8315,7 @@ components:
         visibility: SHARABLE
         display_name: display_name
         parent_type: USER
+        use_browser_language: true
         notify_on_share: true
         tags:
         - name: name
@@ -8538,6 +8539,13 @@ components:
           description: Locale for the user.
           nullable: true
           type: string
+        use_browser_language:
+          description: |-
+            Flag to indicate whether to use the browser locale for the user in the UI.
+            When set to true, the preferred_locale value is unset and the browser's
+            language setting takes precedence.
+          nullable: true
+          type: boolean
         extended_properties:
           description: Properties for the user
           nullable: true
@@ -13343,6 +13351,17 @@ components:
             $ref: '#/components/schemas/FavoriteMetadataInput'
           nullable: true
           type: array
+        preferred_locale:
+          description: Locale for the user.
+          nullable: true
+          type: string
+        use_browser_language:
+          description: |-
+            Flag to indicate whether to use the browser locale for the user in the UI.
+            When set to true, the preferred_locale value is unset and the browser's
+            language setting takes precedence.
+          nullable: true
+          type: boolean
       required:
       - display_name
       - user_identifier
@@ -20671,6 +20690,13 @@ components:
           - ko-KR
           - en-DE
           type: string
+        use_browser_language:
+          description: |-
+            Flag to indicate whether to use the browser locale for the user in the UI.
+            When set to true, the preferred_locale value is unset and the browser's
+            language setting takes precedence.
+          nullable: true
+          type: boolean
         extended_properties:
           description: Properties for the user
           type: object
@@ -21017,6 +21043,13 @@ components:
           - ko-KR
           - en-DE
           type: string
+        use_browser_language:
+          description: |-
+            Flag to indicate whether to use the browser locale for the user in the UI.
+            When set to true, the preferred_locale value is unset and the browser's
+            language setting takes precedence.
+          nullable: true
+          type: boolean
         extended_properties:
           description: Properties for the user
           type: object

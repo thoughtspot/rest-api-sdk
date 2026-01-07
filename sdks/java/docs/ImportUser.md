@@ -21,6 +21,8 @@
 |**onboardingExperienceCompleted** | **Boolean** | Revisit the new user onboarding walkthroughs |  [optional] |
 |**homeLiveboardIdentifier** | **String** | Unique ID or name of the default Liveboard assigned to the user. |  [optional] |
 |**favoriteMetadata** | [**List&lt;FavoriteMetadataInput&gt;**](FavoriteMetadataInput.md) | Metadata objects to add to the user&#39;s favorites list. |  [optional] |
+|**preferredLocale** | **String** | Locale for the user. |  [optional] |
+|**useBrowserLanguage** | **Boolean** | Flag to indicate whether to use the browser locale for the user in the UI. When set to true, the preferred_locale value is unset and the browser&#39;s language setting takes precedence. |  [optional] |
 
 
 

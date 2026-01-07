@@ -291,6 +291,18 @@ public class ImportUser implements Serializable {
     @javax.annotation.Nullable
     private List<FavoriteMetadataInput> favoriteMetadata;
 
+    public static final String SERIALIZED_NAME_PREFERRED_LOCALE = "preferred_locale";
+
+    @SerializedName(SERIALIZED_NAME_PREFERRED_LOCALE)
+    @javax.annotation.Nullable
+    private String preferredLocale;
+
+    public static final String SERIALIZED_NAME_USE_BROWSER_LANGUAGE = "use_browser_language";
+
+    @SerializedName(SERIALIZED_NAME_USE_BROWSER_LANGUAGE)
+    @javax.annotation.Nullable
+    private Boolean useBrowserLanguage;
+
     public ImportUser() {}
 
     public ImportUser userIdentifier(@javax.annotation.Nonnull String userIdentifier) {
@@ -592,6 +604,45 @@ public class ImportUser implements Serializable {
         this.favoriteMetadata = favoriteMetadata;
     }
 
+    public ImportUser preferredLocale(@javax.annotation.Nullable String preferredLocale) {
+        this.preferredLocale = preferredLocale;
+        return this;
+    }
+
+    /**
+     * Locale for the user.
+     *
+     * @return preferredLocale
+     */
+    @javax.annotation.Nullable
+    public String getPreferredLocale() {
+        return preferredLocale;
+    }
+
+    public void setPreferredLocale(@javax.annotation.Nullable String preferredLocale) {
+        this.preferredLocale = preferredLocale;
+    }
+
+    public ImportUser useBrowserLanguage(@javax.annotation.Nullable Boolean useBrowserLanguage) {
+        this.useBrowserLanguage = useBrowserLanguage;
+        return this;
+    }
+
+    /**
+     * Flag to indicate whether to use the browser locale for the user in the UI. When set to true,
+     * the preferred_locale value is unset and the browser&#39;s language setting takes precedence.
+     *
+     * @return useBrowserLanguage
+     */
+    @javax.annotation.Nullable
+    public Boolean getUseBrowserLanguage() {
+        return useBrowserLanguage;
+    }
+
+    public void setUseBrowserLanguage(@javax.annotation.Nullable Boolean useBrowserLanguage) {
+        this.useBrowserLanguage = useBrowserLanguage;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -617,7 +668,9 @@ public class ImportUser implements Serializable {
                         this.onboardingExperienceCompleted,
                         importUser.onboardingExperienceCompleted)
                 && Objects.equals(this.homeLiveboardIdentifier, importUser.homeLiveboardIdentifier)
-                && Objects.equals(this.favoriteMetadata, importUser.favoriteMetadata);
+                && Objects.equals(this.favoriteMetadata, importUser.favoriteMetadata)
+                && Objects.equals(this.preferredLocale, importUser.preferredLocale)
+                && Objects.equals(this.useBrowserLanguage, importUser.useBrowserLanguage);
     }
 
     private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -645,7 +698,9 @@ public class ImportUser implements Serializable {
                 showOnboardingExperience,
                 onboardingExperienceCompleted,
                 homeLiveboardIdentifier,
-                favoriteMetadata);
+                favoriteMetadata,
+                preferredLocale,
+                useBrowserLanguage);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -679,6 +734,10 @@ public class ImportUser implements Serializable {
                 .append(toIndentedString(homeLiveboardIdentifier))
                 .append("\n");
         sb.append("    favoriteMetadata: ").append(toIndentedString(favoriteMetadata)).append("\n");
+        sb.append("    preferredLocale: ").append(toIndentedString(preferredLocale)).append("\n");
+        sb.append("    useBrowserLanguage: ")
+                .append(toIndentedString(useBrowserLanguage))
+                .append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -714,6 +773,8 @@ public class ImportUser implements Serializable {
         openapiFields.add("onboarding_experience_completed");
         openapiFields.add("home_liveboard_identifier");
         openapiFields.add("favorite_metadata");
+        openapiFields.add("preferred_locale");
+        openapiFields.add("use_browser_language");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -875,6 +936,15 @@ public class ImportUser implements Serializable {
                 }
                 ;
             }
+        }
+        if ((jsonObj.get("preferred_locale") != null
+                        && !jsonObj.get("preferred_locale").isJsonNull())
+                && !jsonObj.get("preferred_locale").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `preferred_locale` to be a primitive type in the"
+                                    + " JSON string but got `%s`",
+                            jsonObj.get("preferred_locale").toString()));
         }
     }
 

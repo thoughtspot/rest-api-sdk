@@ -506,6 +506,12 @@ public class User implements Serializable {
     @javax.annotation.Nullable
     private String preferredLocale;
 
+    public static final String SERIALIZED_NAME_USE_BROWSER_LANGUAGE = "use_browser_language";
+
+    @SerializedName(SERIALIZED_NAME_USE_BROWSER_LANGUAGE)
+    @javax.annotation.Nullable
+    private Boolean useBrowserLanguage;
+
     public static final String SERIALIZED_NAME_EXTENDED_PROPERTIES = "extended_properties";
 
     @SerializedName(SERIALIZED_NAME_EXTENDED_PROPERTIES)
@@ -1377,6 +1383,26 @@ public class User implements Serializable {
         this.preferredLocale = preferredLocale;
     }
 
+    public User useBrowserLanguage(@javax.annotation.Nullable Boolean useBrowserLanguage) {
+        this.useBrowserLanguage = useBrowserLanguage;
+        return this;
+    }
+
+    /**
+     * Flag to indicate whether to use the browser locale for the user in the UI. When set to true,
+     * the preferred_locale value is unset and the browser&#39;s language setting takes precedence.
+     *
+     * @return useBrowserLanguage
+     */
+    @javax.annotation.Nullable
+    public Boolean getUseBrowserLanguage() {
+        return useBrowserLanguage;
+    }
+
+    public void setUseBrowserLanguage(@javax.annotation.Nullable Boolean useBrowserLanguage) {
+        this.useBrowserLanguage = useBrowserLanguage;
+    }
+
     public User extendedProperties(@javax.annotation.Nullable Object extendedProperties) {
         this.extendedProperties = extendedProperties;
         return this;
@@ -1524,6 +1550,7 @@ public class User implements Serializable {
                 && Objects.equals(this.welcomeEmailSent, user.welcomeEmailSent)
                 && Objects.equals(this.orgPrivileges, user.orgPrivileges)
                 && Objects.equals(this.preferredLocale, user.preferredLocale)
+                && Objects.equals(this.useBrowserLanguage, user.useBrowserLanguage)
                 && Objects.equals(this.extendedProperties, user.extendedProperties)
                 && Objects.equals(this.extendedPreferences, user.extendedPreferences)
                 && Objects.equals(this.userParameters, user.userParameters)
@@ -1584,6 +1611,7 @@ public class User implements Serializable {
                 welcomeEmailSent,
                 orgPrivileges,
                 preferredLocale,
+                useBrowserLanguage,
                 extendedProperties,
                 extendedPreferences,
                 userParameters,
@@ -1661,6 +1689,9 @@ public class User implements Serializable {
         sb.append("    welcomeEmailSent: ").append(toIndentedString(welcomeEmailSent)).append("\n");
         sb.append("    orgPrivileges: ").append(toIndentedString(orgPrivileges)).append("\n");
         sb.append("    preferredLocale: ").append(toIndentedString(preferredLocale)).append("\n");
+        sb.append("    useBrowserLanguage: ")
+                .append(toIndentedString(useBrowserLanguage))
+                .append("\n");
         sb.append("    extendedProperties: ")
                 .append(toIndentedString(extendedProperties))
                 .append("\n");
@@ -1734,6 +1765,7 @@ public class User implements Serializable {
         openapiFields.add("welcome_email_sent");
         openapiFields.add("org_privileges");
         openapiFields.add("preferred_locale");
+        openapiFields.add("use_browser_language");
         openapiFields.add("extended_properties");
         openapiFields.add("extended_preferences");
         openapiFields.add("user_parameters");
