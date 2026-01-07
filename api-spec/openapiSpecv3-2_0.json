@@ -21101,13 +21101,11 @@
       },
       "StorageConfig": {
         "type": "object",
-        "required": [
-          "aws_s3_config"
-        ],
         "properties": {
           "aws_s3_config": {
             "$ref": "#/components/schemas/AwsS3Config",
-            "description": "AWS S3 storage configuration."
+            "description": "AWS S3 storage configuration.",
+            "nullable": true
           }
         },
         "description": "Storage configuration containing provider-specific settings."
@@ -24886,13 +24884,11 @@
       },
       "StorageConfigInput": {
         "type": "object",
-        "required": [
-          "aws_s3_config"
-        ],
         "properties": {
           "aws_s3_config": {
             "$ref": "#/components/schemas/AwsS3ConfigInput",
-            "description": "AWS S3 storage configuration."
+            "description": "AWS S3 storage configuration.",
+            "nullable": true
           }
         },
         "description": "Input type for storage configuration."
