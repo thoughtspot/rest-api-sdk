@@ -21087,6 +21087,9 @@
         "properties": {
           "storage_type": {
             "type": "string",
+            "enum": [
+              "AWS_S3"
+            ],
             "description": "Type of storage destination (e.g., AWS_S3)."
           },
           "storage_config": {
@@ -24869,6 +24872,9 @@
         "properties": {
           "storage_type": {
             "type": "string",
+            "enum": [
+              "AWS_S3"
+            ],
             "description": "Type of storage destination (e.g., AWS_S3)."
           },
           "storage_config": {
