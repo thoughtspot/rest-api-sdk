@@ -21115,7 +21115,7 @@
           "bucket_name",
           "region",
           "role_arn",
-          "externalId"
+          "external_id"
         ],
         "properties": {
           "bucket_name": {
@@ -21130,7 +21130,7 @@
             "type": "string",
             "description": "ARN of the IAM role used for S3 access."
           },
-          "externalId": {
+          "external_id": {
             "type": "string",
             "description": "External ID for secure cross-account role assumption."
           },
@@ -24897,7 +24897,7 @@
           "bucket_name",
           "region",
           "role_arn",
-          "externalId"
+          "external_id"
         ],
         "properties": {
           "bucket_name": {
@@ -24912,7 +24912,7 @@
             "type": "string",
             "description": "ARN of the IAM role to assume for S3 access."
           },
-          "externalId": {
+          "external_id": {
             "type": "string",
             "description": "External ID for secure cross-account role assumption."
           },
