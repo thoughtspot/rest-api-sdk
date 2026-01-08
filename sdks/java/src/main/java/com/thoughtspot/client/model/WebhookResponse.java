@@ -161,6 +161,12 @@ public class WebhookResponse implements Serializable {
     @javax.annotation.Nullable
     private WebhookUser lastModifiedBy;
 
+    public static final String SERIALIZED_NAME_STORAGE_DESTINATION = "storage_destination";
+
+    @SerializedName(SERIALIZED_NAME_STORAGE_DESTINATION)
+    @javax.annotation.Nullable
+    private StorageDestination storageDestination;
+
     public WebhookResponse() {}
 
     public WebhookResponse id(@javax.annotation.Nonnull String id) {
@@ -424,6 +430,27 @@ public class WebhookResponse implements Serializable {
         this.lastModifiedBy = lastModifiedBy;
     }
 
+    public WebhookResponse storageDestination(
+            @javax.annotation.Nullable StorageDestination storageDestination) {
+        this.storageDestination = storageDestination;
+        return this;
+    }
+
+    /**
+     * Get storageDestination
+     *
+     * @return storageDestination
+     */
+    @javax.annotation.Nullable
+    public StorageDestination getStorageDestination() {
+        return storageDestination;
+    }
+
+    public void setStorageDestination(
+            @javax.annotation.Nullable StorageDestination storageDestination) {
+        this.storageDestination = storageDestination;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -446,7 +473,8 @@ public class WebhookResponse implements Serializable {
                 && Objects.equals(
                         this.modificationTimeInMillis, webhookResponse.modificationTimeInMillis)
                 && Objects.equals(this.createdBy, webhookResponse.createdBy)
-                && Objects.equals(this.lastModifiedBy, webhookResponse.lastModifiedBy);
+                && Objects.equals(this.lastModifiedBy, webhookResponse.lastModifiedBy)
+                && Objects.equals(this.storageDestination, webhookResponse.storageDestination);
     }
 
     private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -473,7 +501,8 @@ public class WebhookResponse implements Serializable {
                 creationTimeInMillis,
                 modificationTimeInMillis,
                 createdBy,
-                lastModifiedBy);
+                lastModifiedBy,
+                storageDestination);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -506,6 +535,9 @@ public class WebhookResponse implements Serializable {
                 .append("\n");
         sb.append("    createdBy: ").append(toIndentedString(createdBy)).append("\n");
         sb.append("    lastModifiedBy: ").append(toIndentedString(lastModifiedBy)).append("\n");
+        sb.append("    storageDestination: ")
+                .append(toIndentedString(storageDestination))
+                .append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -540,6 +572,7 @@ public class WebhookResponse implements Serializable {
         openapiFields.add("modification_time_in_millis");
         openapiFields.add("created_by");
         openapiFields.add("last_modified_by");
+        openapiFields.add("storage_destination");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -653,6 +686,11 @@ public class WebhookResponse implements Serializable {
         if (jsonObj.get("last_modified_by") != null
                 && !jsonObj.get("last_modified_by").isJsonNull()) {
             WebhookUser.validateJsonElement(jsonObj.get("last_modified_by"));
+        }
+        // validate the optional field `storage_destination`
+        if (jsonObj.get("storage_destination") != null
+                && !jsonObj.get("storage_destination").isJsonNull()) {
+            StorageDestination.validateJsonElement(jsonObj.get("storage_destination"));
         }
     }
 

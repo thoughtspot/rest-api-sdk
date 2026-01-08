@@ -22,6 +22,8 @@ export * from '../models/AuthenticationInput';
 export * from '../models/Author';
 export * from '../models/AuthorMetadataTypeInput';
 export * from '../models/AuthorType';
+export * from '../models/AwsS3Config';
+export * from '../models/AwsS3ConfigInput';
 export * from '../models/BasicAuth';
 export * from '../models/BasicAuthInput';
 export * from '../models/CALLBACK';
@@ -304,6 +306,10 @@ export * from '../models/SortOptions';
 export * from '../models/SortingOptions';
 export * from '../models/SqlQuery';
 export * from '../models/SqlQueryResponse';
+export * from '../models/StorageConfig';
+export * from '../models/StorageConfigInput';
+export * from '../models/StorageDestination';
+export * from '../models/StorageDestinationInput';
 export * from '../models/SystemConfig';
 export * from '../models/SystemInfo';
 export * from '../models/SystemOverrideInfo';
@@ -403,6 +409,8 @@ import { AuthenticationInput } from '../models/AuthenticationInput';
 import { Author } from '../models/Author';
 import { AuthorMetadataTypeInput, AuthorMetadataTypeInputTypeEnum    } from '../models/AuthorMetadataTypeInput';
 import { AuthorType } from '../models/AuthorType';
+import { AwsS3Config } from '../models/AwsS3Config';
+import { AwsS3ConfigInput } from '../models/AwsS3ConfigInput';
 import { BasicAuth } from '../models/BasicAuth';
 import { BasicAuthInput } from '../models/BasicAuthInput';
 import { CALLBACK } from '../models/CALLBACK';
@@ -685,6 +693,10 @@ import { SortOptions, SortOptionsFieldNameEnum  , SortOptionsOrderEnum   } from 
 import { SortingOptions } from '../models/SortingOptions';
 import { SqlQuery } from '../models/SqlQuery';
 import { SqlQueryResponse  , SqlQueryResponseMetadataTypeEnum    } from '../models/SqlQueryResponse';
+import { StorageConfig } from '../models/StorageConfig';
+import { StorageConfigInput } from '../models/StorageConfigInput';
+import { StorageDestination, StorageDestinationStorageTypeEnum    } from '../models/StorageDestination';
+import { StorageDestinationInput, StorageDestinationInputStorageTypeEnum    } from '../models/StorageDestinationInput';
 import { SystemConfig } from '../models/SystemConfig';
 import { SystemInfo } from '../models/SystemInfo';
 import { SystemOverrideInfo } from '../models/SystemOverrideInfo';
@@ -753,7 +765,7 @@ import { WebhookDeleteFailure } from '../models/WebhookDeleteFailure';
 import { WebhookDeleteResponse } from '../models/WebhookDeleteResponse';
 import { WebhookOrg } from '../models/WebhookOrg';
 import { WebhookPagination } from '../models/WebhookPagination';
-import { WebhookResponse      , WebhookResponseEventsEnum         } from '../models/WebhookResponse';
+import { WebhookResponse      , WebhookResponseEventsEnum          } from '../models/WebhookResponse';
 import { WebhookSearchResponse } from '../models/WebhookSearchResponse';
 import { WebhookSignatureVerification, WebhookSignatureVerificationTypeEnum   , WebhookSignatureVerificationAlgorithmEnum    } from '../models/WebhookSignatureVerification';
 import { WebhookSignatureVerificationInput, WebhookSignatureVerificationInputTypeEnum   , WebhookSignatureVerificationInputAlgorithmEnum    } from '../models/WebhookSignatureVerificationInput';
@@ -935,6 +947,8 @@ let enumsMap: Set<string> = new Set<string>([
     "SortOptionsFieldNameEnum",
     "SortOptionsOrderEnum",
     "SqlQueryResponseMetadataTypeEnum",
+    "StorageDestinationStorageTypeEnum",
+    "StorageDestinationInputStorageTypeEnum",
     "TagMetadataTypeInputTypeEnum",
     "TokenAccessScopeObjectTypeEnum",
     "UnparameterizeMetadataRequestMetadataTypeEnum",
@@ -1012,6 +1026,8 @@ let typeMap: {[index: string]: any} = {
     "Author": Author,
     "AuthorMetadataTypeInput": AuthorMetadataTypeInput,
     "AuthorType": AuthorType,
+    "AwsS3Config": AwsS3Config,
+    "AwsS3ConfigInput": AwsS3ConfigInput,
     "BasicAuth": BasicAuth,
     "BasicAuthInput": BasicAuthInput,
     "CALLBACK": CALLBACK,
@@ -1294,6 +1310,10 @@ let typeMap: {[index: string]: any} = {
     "SortingOptions": SortingOptions,
     "SqlQuery": SqlQuery,
     "SqlQueryResponse": SqlQueryResponse,
+    "StorageConfig": StorageConfig,
+    "StorageConfigInput": StorageConfigInput,
+    "StorageDestination": StorageDestination,
+    "StorageDestinationInput": StorageDestinationInput,
     "SystemConfig": SystemConfig,
     "SystemInfo": SystemInfo,
     "SystemOverrideInfo": SystemOverrideInfo,

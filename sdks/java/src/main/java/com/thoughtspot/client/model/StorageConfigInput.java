@@ -1,0 +1,192 @@
+/*
+ * NOTE: This class is auto generated. Do not edit the class manually.
+ */
+
+package com.thoughtspot.client.model;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.TypeAdapter;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import com.thoughtspot.client.JSON;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+
+/** Input type for storage configuration. */
+@javax.annotation.Generated(
+        value = "org.openapitools.codegen.languages.JavaClientCodegen",
+        comments = "Generator version: 7.12.0")
+public class StorageConfigInput implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    public static final String SERIALIZED_NAME_AWS_S3_CONFIG = "aws_s3_config";
+
+    @SerializedName(SERIALIZED_NAME_AWS_S3_CONFIG)
+    @javax.annotation.Nullable
+    private AwsS3ConfigInput awsS3Config;
+
+    public StorageConfigInput() {}
+
+    public StorageConfigInput awsS3Config(@javax.annotation.Nullable AwsS3ConfigInput awsS3Config) {
+        this.awsS3Config = awsS3Config;
+        return this;
+    }
+
+    /**
+     * Get awsS3Config
+     *
+     * @return awsS3Config
+     */
+    @javax.annotation.Nullable
+    public AwsS3ConfigInput getAwsS3Config() {
+        return awsS3Config;
+    }
+
+    public void setAwsS3Config(@javax.annotation.Nullable AwsS3ConfigInput awsS3Config) {
+        this.awsS3Config = awsS3Config;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        StorageConfigInput storageConfigInput = (StorageConfigInput) o;
+        return Objects.equals(this.awsS3Config, storageConfigInput.awsS3Config);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(awsS3Config);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("class StorageConfigInput {\n");
+        sb.append("    awsS3Config: ").append(toIndentedString(awsS3Config)).append("\n");
+        sb.append("}");
+        return sb.toString();
+    }
+
+    /**
+     * Convert the given object to string with each line indented by 4 spaces (except the first
+     * line).
+     */
+    private String toIndentedString(Object o) {
+        if (o == null) {
+            return "null";
+        }
+        return o.toString().replace("\n", "\n    ");
+    }
+
+    public static HashSet<String> openapiFields;
+    public static HashSet<String> openapiRequiredFields;
+
+    static {
+        // a set of all properties/fields (JSON key names)
+        openapiFields = new HashSet<String>();
+        openapiFields.add("aws_s3_config");
+
+        // a set of required properties/fields (JSON key names)
+        openapiRequiredFields = new HashSet<String>();
+    }
+
+    /**
+     * Validates the JSON Element and throws an exception if issues found
+     *
+     * @param jsonElement JSON Element
+     * @throws IOException if the JSON Element is invalid with respect to StorageConfigInput
+     */
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+        if (jsonElement == null) {
+            if (!StorageConfigInput.openapiRequiredFields
+                    .isEmpty()) { // has required fields but JSON element is null
+                throw new IllegalArgumentException(
+                        String.format(
+                                "The required field(s) %s in StorageConfigInput is not found in"
+                                        + " the empty JSON string",
+                                StorageConfigInput.openapiRequiredFields.toString()));
+            }
+        }
+
+        Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
+        // check to see if the JSON string contains additional fields
+        for (Map.Entry<String, JsonElement> entry : entries) {
+            if (!StorageConfigInput.openapiFields.contains(entry.getKey())) {
+                throw new IllegalArgumentException(
+                        String.format(
+                                "The field `%s` in the JSON string is not defined in the"
+                                        + " `StorageConfigInput` properties. JSON: %s",
+                                entry.getKey(), jsonElement.toString()));
+            }
+        }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
+        // validate the optional field `aws_s3_config`
+        if (jsonObj.get("aws_s3_config") != null && !jsonObj.get("aws_s3_config").isJsonNull()) {
+            AwsS3ConfigInput.validateJsonElement(jsonObj.get("aws_s3_config"));
+        }
+    }
+
+    public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+        @SuppressWarnings("unchecked")
+        @Override
+        public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+            if (!StorageConfigInput.class.isAssignableFrom(type.getRawType())) {
+                return null; // this class only serializes 'StorageConfigInput' and its subtypes
+            }
+            final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+            final TypeAdapter<StorageConfigInput> thisAdapter =
+                    gson.getDelegateAdapter(this, TypeToken.get(StorageConfigInput.class));
+
+            return (TypeAdapter<T>)
+                    new TypeAdapter<StorageConfigInput>() {
+                        @Override
+                        public void write(JsonWriter out, StorageConfigInput value)
+                                throws IOException {
+                            JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+                            elementAdapter.write(out, obj);
+                        }
+
+                        @Override
+                        public StorageConfigInput read(JsonReader in) throws IOException {
+                            JsonElement jsonElement = elementAdapter.read(in);
+                            validateJsonElement(jsonElement);
+                            return thisAdapter.fromJsonTree(jsonElement);
+                        }
+                    }.nullSafe();
+        }
+    }
+
+    /**
+     * Create an instance of StorageConfigInput given an JSON string
+     *
+     * @param jsonString JSON string
+     * @return An instance of StorageConfigInput
+     * @throws IOException if the JSON string is invalid with respect to StorageConfigInput
+     */
+    public static StorageConfigInput fromJson(String jsonString) throws IOException {
+        return JSON.getGson().fromJson(jsonString, StorageConfigInput.class);
+    }
+
+    /**
+     * Convert an instance of StorageConfigInput to an JSON string
+     *
+     * @return JSON string
+     */
+    public String toJson() {
+        return JSON.getGson().toJson(this);
+    }
+}

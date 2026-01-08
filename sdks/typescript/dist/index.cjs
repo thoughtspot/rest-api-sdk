@@ -67,6 +67,8 @@ __export(typescript_exports, {
   Author: () => Author,
   AuthorMetadataTypeInput: () => AuthorMetadataTypeInput,
   AuthorType: () => AuthorType,
+  AwsS3Config: () => AwsS3Config,
+  AwsS3ConfigInput: () => AwsS3ConfigInput,
   BasicAuth: () => BasicAuth,
   BasicAuthInput: () => BasicAuthInput,
   BearerAuthAuthentication: () => BearerAuthAuthentication,
@@ -373,6 +375,10 @@ __export(typescript_exports, {
   SortingOptions: () => SortingOptions,
   SqlQuery: () => SqlQuery,
   SqlQueryResponse: () => SqlQueryResponse,
+  StorageConfig: () => StorageConfig,
+  StorageConfigInput: () => StorageConfigInput,
+  StorageDestination: () => StorageDestination,
+  StorageDestinationInput: () => StorageDestinationInput,
   SystemApi: () => PromiseSystemApi,
   SystemConfig: () => SystemConfig,
   SystemInfo: () => SystemInfo,
@@ -1431,6 +1437,92 @@ _AuthorType.attributeTypeMap = [
   }
 ];
 var AuthorType = _AuthorType;
+
+// models/AwsS3Config.ts
+var _AwsS3Config = class _AwsS3Config {
+  static getAttributeTypeMap() {
+    return _AwsS3Config.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AwsS3Config.discriminator = void 0;
+_AwsS3Config.attributeTypeMap = [
+  {
+    "name": "bucket_name",
+    "baseName": "bucket_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "region",
+    "baseName": "region",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "role_arn",
+    "baseName": "role_arn",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "external_id",
+    "baseName": "external_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "path_prefix",
+    "baseName": "path_prefix",
+    "type": "string",
+    "format": ""
+  }
+];
+var AwsS3Config = _AwsS3Config;
+
+// models/AwsS3ConfigInput.ts
+var _AwsS3ConfigInput = class _AwsS3ConfigInput {
+  static getAttributeTypeMap() {
+    return _AwsS3ConfigInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AwsS3ConfigInput.discriminator = void 0;
+_AwsS3ConfigInput.attributeTypeMap = [
+  {
+    "name": "bucket_name",
+    "baseName": "bucket_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "region",
+    "baseName": "region",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "role_arn",
+    "baseName": "role_arn",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "external_id",
+    "baseName": "external_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "path_prefix",
+    "baseName": "path_prefix",
+    "type": "string",
+    "format": ""
+  }
+];
+var AwsS3ConfigInput = _AwsS3ConfigInput;
 
 // models/BasicAuth.ts
 var _BasicAuth = class _BasicAuth {
@@ -11920,6 +12012,94 @@ _SqlQueryResponse.attributeTypeMap = [
 ];
 var SqlQueryResponse = _SqlQueryResponse;
 
+// models/StorageConfig.ts
+var _StorageConfig = class _StorageConfig {
+  static getAttributeTypeMap() {
+    return _StorageConfig.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_StorageConfig.discriminator = void 0;
+_StorageConfig.attributeTypeMap = [
+  {
+    "name": "aws_s3_config",
+    "baseName": "aws_s3_config",
+    "type": "AwsS3Config",
+    "format": ""
+  }
+];
+var StorageConfig = _StorageConfig;
+
+// models/StorageConfigInput.ts
+var _StorageConfigInput = class _StorageConfigInput {
+  static getAttributeTypeMap() {
+    return _StorageConfigInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_StorageConfigInput.discriminator = void 0;
+_StorageConfigInput.attributeTypeMap = [
+  {
+    "name": "aws_s3_config",
+    "baseName": "aws_s3_config",
+    "type": "AwsS3ConfigInput",
+    "format": ""
+  }
+];
+var StorageConfigInput = _StorageConfigInput;
+
+// models/StorageDestination.ts
+var _StorageDestination = class _StorageDestination {
+  static getAttributeTypeMap() {
+    return _StorageDestination.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_StorageDestination.discriminator = void 0;
+_StorageDestination.attributeTypeMap = [
+  {
+    "name": "storage_type",
+    "baseName": "storage_type",
+    "type": "StorageDestinationStorageTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "storage_config",
+    "baseName": "storage_config",
+    "type": "StorageConfig",
+    "format": ""
+  }
+];
+var StorageDestination = _StorageDestination;
+
+// models/StorageDestinationInput.ts
+var _StorageDestinationInput = class _StorageDestinationInput {
+  static getAttributeTypeMap() {
+    return _StorageDestinationInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_StorageDestinationInput.discriminator = void 0;
+_StorageDestinationInput.attributeTypeMap = [
+  {
+    "name": "storage_type",
+    "baseName": "storage_type",
+    "type": "StorageDestinationInputStorageTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "storage_config",
+    "baseName": "storage_config",
+    "type": "StorageConfigInput",
+    "format": ""
+  }
+];
+var StorageDestinationInput = _StorageDestinationInput;
+
 // models/SystemConfig.ts
 var _SystemConfig = class _SystemConfig {
   static getAttributeTypeMap() {
@@ -15243,6 +15423,12 @@ _WebhookResponse.attributeTypeMap = [
     "baseName": "last_modified_by",
     "type": "WebhookUser",
     "format": ""
+  },
+  {
+    "name": "storage_destination",
+    "baseName": "storage_destination",
+    "type": "StorageDestination",
+    "format": ""
   }
 ];
 var WebhookResponse = _WebhookResponse;
@@ -15665,6 +15851,8 @@ var enumsMap = /* @__PURE__ */ new Set([
   "SortOptionsFieldNameEnum",
   "SortOptionsOrderEnum",
   "SqlQueryResponseMetadataTypeEnum",
+  "StorageDestinationStorageTypeEnum",
+  "StorageDestinationInputStorageTypeEnum",
   "TagMetadataTypeInputTypeEnum",
   "TokenAccessScopeObjectTypeEnum",
   "UnparameterizeMetadataRequestMetadataTypeEnum",
@@ -15741,6 +15929,8 @@ var typeMap = {
   "Author": Author,
   "AuthorMetadataTypeInput": AuthorMetadataTypeInput,
   "AuthorType": AuthorType,
+  "AwsS3Config": AwsS3Config,
+  "AwsS3ConfigInput": AwsS3ConfigInput,
   "BasicAuth": BasicAuth,
   "BasicAuthInput": BasicAuthInput,
   "CALLBACK": CALLBACK,
@@ -16023,6 +16213,10 @@ var typeMap = {
   "SortingOptions": SortingOptions,
   "SqlQuery": SqlQuery,
   "SqlQueryResponse": SqlQueryResponse,
+  "StorageConfig": StorageConfig,
+  "StorageConfigInput": StorageConfigInput,
+  "StorageDestination": StorageDestination,
+  "StorageDestinationInput": StorageDestinationInput,
   "SystemConfig": SystemConfig,
   "SystemInfo": SystemInfo,
   "SystemOverrideInfo": SystemOverrideInfo,
@@ -46253,6 +46447,8 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   Author,
   AuthorMetadataTypeInput,
   AuthorType,
+  AwsS3Config,
+  AwsS3ConfigInput,
   BasicAuth,
   BasicAuthInput,
   BearerAuthAuthentication,
@@ -46559,6 +46755,10 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   SortingOptions,
   SqlQuery,
   SqlQueryResponse,
+  StorageConfig,
+  StorageConfigInput,
+  StorageDestination,
+  StorageDestinationInput,
   SystemApi,
   SystemConfig,
   SystemInfo,

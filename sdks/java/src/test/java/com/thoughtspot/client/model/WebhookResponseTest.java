@@ -93,4 +93,10 @@ public class WebhookResponseTest {
     public void lastModifiedByTest() {
         // TODO: test lastModifiedBy
     }
+
+    /** Test the property 'storageDestination' */
+    @Test
+    public void storageDestinationTest() {
+        // TODO: test storageDestination
+    }
 }

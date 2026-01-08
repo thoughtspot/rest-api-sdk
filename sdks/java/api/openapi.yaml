@@ -12619,6 +12619,8 @@ components:
           $ref: '#/components/schemas/WebhookUser'
         last_modified_by:
           $ref: '#/components/schemas/WebhookUser'
+        storage_destination:
+          $ref: '#/components/schemas/StorageDestination'
       required:
       - creation_time_in_millis
       - events
@@ -12727,6 +12729,51 @@ components:
       required:
       - id
       - name
+      type: object
+    StorageDestination:
+      description: Storage destination configuration for webhook payload delivery.
+      properties:
+        storage_type:
+          description: "Type of storage destination (e.g., AWS_S3)."
+          enum:
+          - AWS_S3
+          type: string
+        storage_config:
+          $ref: '#/components/schemas/StorageConfig'
+      required:
+      - storage_config
+      - storage_type
+      type: object
+    StorageConfig:
+      description: Storage configuration containing provider-specific settings.
+      properties:
+        aws_s3_config:
+          $ref: '#/components/schemas/AwsS3Config'
+      type: object
+    AwsS3Config:
+      description: AWS S3 storage configuration details.
+      properties:
+        bucket_name:
+          description: Name of the S3 bucket where webhook payloads are stored.
+          type: string
+        region:
+          description: AWS region where the S3 bucket is located.
+          type: string
+        role_arn:
+          description: ARN of the IAM role used for S3 access.
+          type: string
+        external_id:
+          description: External ID for secure cross-account role assumption.
+          type: string
+        path_prefix:
+          description: Path prefix for organizing objects within the bucket.
+          nullable: true
+          type: string
+      required:
+      - bucket_name
+      - external_id
+      - region
+      - role_arn
       type: object
     WebhookPagination:
       properties:
@@ -15990,6 +16037,51 @@ components:
       - header
       - secret
       - type
+      type: object
+    StorageDestinationInput:
+      description: Input type for storage destination configuration.
+      properties:
+        storage_type:
+          description: "Type of storage destination (e.g., AWS_S3)."
+          enum:
+          - AWS_S3
+          type: string
+        storage_config:
+          $ref: '#/components/schemas/StorageConfigInput'
+      required:
+      - storage_config
+      - storage_type
+      type: object
+    StorageConfigInput:
+      description: Input type for storage configuration.
+      properties:
+        aws_s3_config:
+          $ref: '#/components/schemas/AwsS3ConfigInput'
+      type: object
+    AwsS3ConfigInput:
+      description: Input type for AWS S3 storage configuration.
+      properties:
+        bucket_name:
+          description: Name of the S3 bucket where webhook payloads will be stored.
+          type: string
+        region:
+          description: AWS region where the S3 bucket is located.
+          type: string
+        role_arn:
+          description: ARN of the IAM role to assume for S3 access.
+          type: string
+        external_id:
+          description: External ID for secure cross-account role assumption.
+          type: string
+        path_prefix:
+          description: Optional path prefix for organizing objects within the bucket.
+          nullable: true
+          type: string
+      required:
+      - bucket_name
+      - external_id
+      - region
+      - role_arn
       type: object
     WebhookDeleteResponse:
       properties:
