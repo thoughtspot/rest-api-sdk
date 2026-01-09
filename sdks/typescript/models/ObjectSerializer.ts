@@ -191,6 +191,8 @@ export * from '../models/ModelTableList';
 export * from '../models/NLInstructionsInfo';
 export * from '../models/NLInstructionsInfoInput';
 export * from '../models/ObjectIDAndName';
+export * from '../models/ObjectPrivilegesMetadataInput';
+export * from '../models/ObjectPrivilegesOfMetadataResponse';
 export * from '../models/Org';
 export * from '../models/OrgChannelConfigInput';
 export * from '../models/OrgChannelConfigResponse';
@@ -578,6 +580,8 @@ import { ModelTableList } from '../models/ModelTableList';
 import { NLInstructionsInfo , NLInstructionsInfoScopeEnum   } from '../models/NLInstructionsInfo';
 import { NLInstructionsInfoInput , NLInstructionsInfoInputScopeEnum   } from '../models/NLInstructionsInfoInput';
 import { ObjectIDAndName } from '../models/ObjectIDAndName';
+import { ObjectPrivilegesMetadataInput, ObjectPrivilegesMetadataInputTypeEnum    } from '../models/ObjectPrivilegesMetadataInput';
+import { ObjectPrivilegesOfMetadataResponse } from '../models/ObjectPrivilegesOfMetadataResponse';
 import { Org } from '../models/Org';
 import { OrgChannelConfigInput , OrgChannelConfigInputOperationEnum   , OrgChannelConfigInputResetEventsEnum   } from '../models/OrgChannelConfigInput';
 import { OrgChannelConfigResponse } from '../models/OrgChannelConfigResponse';
@@ -881,6 +885,7 @@ let enumsMap: Set<string> = new Set<string>([
     "MetadataSearchSortOptionsOrderEnum",
     "NLInstructionsInfoScopeEnum",
     "NLInstructionsInfoInputScopeEnum",
+    "ObjectPrivilegesMetadataInputTypeEnum",
     "OrgChannelConfigInputOperationEnum",
     "OrgChannelConfigInputResetEventsEnum",
     "OrgPreferenceSearchCriteriaInputEventTypesEnum",
@@ -1196,6 +1201,8 @@ let typeMap: {[index: string]: any} = {
     "NLInstructionsInfo": NLInstructionsInfo,
     "NLInstructionsInfoInput": NLInstructionsInfoInput,
     "ObjectIDAndName": ObjectIDAndName,
+    "ObjectPrivilegesMetadataInput": ObjectPrivilegesMetadataInput,
+    "ObjectPrivilegesOfMetadataResponse": ObjectPrivilegesOfMetadataResponse,
     "Org": Org,
     "OrgChannelConfigInput": OrgChannelConfigInput,
     "OrgChannelConfigResponse": OrgChannelConfigResponse,

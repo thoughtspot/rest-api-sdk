@@ -10234,6 +10234,28 @@ components:
           nullable: true
           type: object
       type: object
+    ObjectPrivilegesMetadataInput:
+      properties:
+        type:
+          description: |-
+            Type of metadata object.
+            Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.
+          enum:
+          - LOGICAL_TABLE
+          nullable: true
+          type: string
+        identifier:
+          description: Unique ID or name of the metadata object.
+          type: string
+      required:
+      - identifier
+      type: object
+    ObjectPrivilegesOfMetadataResponse:
+      properties:
+        metadata_object_privileges:
+          nullable: true
+          type: object
+      type: object
     PrincipalsInput:
       properties:
         identifier:
@@ -21511,6 +21533,11 @@ x-roles:
   tags:
   - 9.5.0.cl
   description: Roles for version 9.5.0.cl
+- name: 26.3.0.cl
+  id: 26.3.0.cl
+  tags:
+  - 26.3.0.cl
+  description: Roles for version 26.3.0.cl
 - name: 10.14.0.cl
   id: 10.14.0.cl
   tags:

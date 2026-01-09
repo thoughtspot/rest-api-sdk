@@ -195,6 +195,8 @@ import { ModelTableList } from '../models/ModelTableList';
 import { NLInstructionsInfo } from '../models/NLInstructionsInfo';
 import { NLInstructionsInfoInput } from '../models/NLInstructionsInfoInput';
 import { ObjectIDAndName } from '../models/ObjectIDAndName';
+import { ObjectPrivilegesMetadataInput } from '../models/ObjectPrivilegesMetadataInput';
+import { ObjectPrivilegesOfMetadataResponse } from '../models/ObjectPrivilegesOfMetadataResponse';
 import { Org } from '../models/Org';
 import { OrgChannelConfigInput } from '../models/OrgChannelConfigInput';
 import { OrgChannelConfigResponse } from '../models/OrgChannelConfigResponse';

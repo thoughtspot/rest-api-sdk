@@ -250,6 +250,8 @@ __export(typescript_exports, {
   NLInstructionsInfo: () => NLInstructionsInfo,
   NLInstructionsInfoInput: () => NLInstructionsInfoInput,
   ObjectIDAndName: () => ObjectIDAndName,
+  ObjectPrivilegesMetadataInput: () => ObjectPrivilegesMetadataInput,
+  ObjectPrivilegesOfMetadataResponse: () => ObjectPrivilegesOfMetadataResponse,
   Org: () => Org,
   OrgChannelConfigInput: () => OrgChannelConfigInput,
   OrgChannelConfigResponse: () => OrgChannelConfigResponse,
@@ -7738,6 +7740,50 @@ _ObjectIDAndName.attributeTypeMap = [
   }
 ];
 var ObjectIDAndName = _ObjectIDAndName;
+
+// models/ObjectPrivilegesMetadataInput.ts
+var _ObjectPrivilegesMetadataInput = class _ObjectPrivilegesMetadataInput {
+  static getAttributeTypeMap() {
+    return _ObjectPrivilegesMetadataInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ObjectPrivilegesMetadataInput.discriminator = void 0;
+_ObjectPrivilegesMetadataInput.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "ObjectPrivilegesMetadataInputTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "identifier",
+    "baseName": "identifier",
+    "type": "string",
+    "format": ""
+  }
+];
+var ObjectPrivilegesMetadataInput = _ObjectPrivilegesMetadataInput;
+
+// models/ObjectPrivilegesOfMetadataResponse.ts
+var _ObjectPrivilegesOfMetadataResponse = class _ObjectPrivilegesOfMetadataResponse {
+  static getAttributeTypeMap() {
+    return _ObjectPrivilegesOfMetadataResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ObjectPrivilegesOfMetadataResponse.discriminator = void 0;
+_ObjectPrivilegesOfMetadataResponse.attributeTypeMap = [
+  {
+    "name": "metadata_object_privileges",
+    "baseName": "metadata_object_privileges",
+    "type": "any",
+    "format": ""
+  }
+];
+var ObjectPrivilegesOfMetadataResponse = _ObjectPrivilegesOfMetadataResponse;
 
 // models/Org.ts
 var _Org = class _Org {
@@ -15785,6 +15831,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "MetadataSearchSortOptionsOrderEnum",
   "NLInstructionsInfoScopeEnum",
   "NLInstructionsInfoInputScopeEnum",
+  "ObjectPrivilegesMetadataInputTypeEnum",
   "OrgChannelConfigInputOperationEnum",
   "OrgChannelConfigInputResetEventsEnum",
   "OrgPreferenceSearchCriteriaInputEventTypesEnum",
@@ -16099,6 +16146,8 @@ var typeMap = {
   "NLInstructionsInfo": NLInstructionsInfo,
   "NLInstructionsInfoInput": NLInstructionsInfoInput,
   "ObjectIDAndName": ObjectIDAndName,
+  "ObjectPrivilegesMetadataInput": ObjectPrivilegesMetadataInput,
+  "ObjectPrivilegesOfMetadataResponse": ObjectPrivilegesOfMetadataResponse,
   "Org": Org,
   "OrgChannelConfigInput": OrgChannelConfigInput,
   "OrgChannelConfigResponse": OrgChannelConfigResponse,
@@ -46631,6 +46680,8 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   NLInstructionsInfo,
   NLInstructionsInfoInput,
   ObjectIDAndName,
+  ObjectPrivilegesMetadataInput,
+  ObjectPrivilegesOfMetadataResponse,
   Org,
   OrgChannelConfigInput,
   OrgChannelConfigResponse,
