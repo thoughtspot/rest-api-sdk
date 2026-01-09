@@ -73,7 +73,7 @@ export class ImportUser {
     /**
     * Locale for the user.
     */
-    'preferred_locale'?: string | null;
+    'preferred_locale'?: ImportUserPreferredLocaleEnum | null;
     /**
     * Flag to indicate whether to use the browser locale for the user in the UI. When set to true, the preferred_locale value is unset and the browser\'s language setting takes precedence.
     */
@@ -169,7 +169,7 @@ export class ImportUser {
         {
             "name": "preferred_locale",
             "baseName": "preferred_locale",
-            "type": "string",
+            "type": "ImportUserPreferredLocaleEnum",
             "format": ""
         },
         {
@@ -191,4 +191,5 @@ export class ImportUser {
 export type ImportUserAccountTypeEnum = "LOCAL_USER" | "LDAP_USER" | "SAML_USER" | "OIDC_USER" | "REMOTE_USER" ;
 export type ImportUserAccountStatusEnum = "ACTIVE" | "INACTIVE" | "EXPIRED" | "LOCKED" | "PENDING" | "SUSPENDED" ;
 export type ImportUserVisibilityEnum = "SHARABLE" | "NON_SHARABLE" ;
+export type ImportUserPreferredLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN" | "de-CH" | "en-NZ" | "es-MX" | "en-AU" | "zh-Hant" | "ko-KR" | "en-DE" ;
 

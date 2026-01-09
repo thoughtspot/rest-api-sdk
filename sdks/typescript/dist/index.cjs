@@ -6816,7 +6816,7 @@ _ImportUser.attributeTypeMap = [
   {
     "name": "preferred_locale",
     "baseName": "preferred_locale",
-    "type": "string",
+    "type": "ImportUserPreferredLocaleEnum",
     "format": ""
   },
   {
@@ -15773,6 +15773,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "ImportUserAccountTypeEnum",
   "ImportUserAccountStatusEnum",
   "ImportUserVisibilityEnum",
+  "ImportUserPreferredLocaleEnum",
   "JWTMetadataObjectTypeEnum",
   "MetadataInputTypeEnum",
   "MetadataListItemInputTypeEnum",

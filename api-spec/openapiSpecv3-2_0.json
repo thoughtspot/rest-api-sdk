@@ -21915,7 +21915,36 @@
           "preferred_locale": {
             "type": "string",
             "description": "Locale for the user.",
-            "nullable": true
+            "nullable": true,
+            "enum": [
+              "en-CA",
+              "en-GB",
+              "en-US",
+              "de-DE",
+              "ja-JP",
+              "zh-CN",
+              "pt-BR",
+              "fr-FR",
+              "fr-CA",
+              "es-US",
+              "da-DK",
+              "es-ES",
+              "fi-FI",
+              "sv-SE",
+              "nb-NO",
+              "pt-PT",
+              "nl-NL",
+              "it-IT",
+              "ru-RU",
+              "en-IN",
+              "de-CH",
+              "en-NZ",
+              "es-MX",
+              "en-AU",
+              "zh-Hant",
+              "ko-KR",
+              "en-DE"
+            ]
           },
           "use_browser_language": {
             "type": "boolean",

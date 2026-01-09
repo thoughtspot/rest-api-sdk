@@ -467,7 +467,7 @@ apiInstance.importUsers(
             type: "LIVEBOARD",
           },
         ],
-        preferred_locale: "preferred_locale_example",
+        preferred_locale: "en-CA",
         use_browser_language: true,
       },
     ],

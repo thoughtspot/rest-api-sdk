@@ -13400,6 +13400,34 @@ components:
           type: array
         preferred_locale:
           description: Locale for the user.
+          enum:
+          - en-CA
+          - en-GB
+          - en-US
+          - de-DE
+          - ja-JP
+          - zh-CN
+          - pt-BR
+          - fr-FR
+          - fr-CA
+          - es-US
+          - da-DK
+          - es-ES
+          - fi-FI
+          - sv-SE
+          - nb-NO
+          - pt-PT
+          - nl-NL
+          - it-IT
+          - ru-RU
+          - en-IN
+          - de-CH
+          - en-NZ
+          - es-MX
+          - en-AU
+          - zh-Hant
+          - ko-KR
+          - en-DE
           nullable: true
           type: string
         use_browser_language:
