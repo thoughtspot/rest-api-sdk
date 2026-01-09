@@ -16255,6 +16255,14 @@
                         "$ref": "#/components/schemas/WebhookSignatureVerificationInput"
                       }
                     ]
+                  },
+                  "storage_destination": {
+                    "description": "Configuration for storage destination <br/>  <span class=\"since-beta-tag\">Version: 26.3.0.cl or later</span>",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/StorageDestinationInput"
+                      }
+                    ]
                   }
                 },
                 "required": [
@@ -16824,6 +16832,14 @@
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/WebhookSignatureVerificationInput"
+                      }
+                    ]
+                  },
+                  "storage_destination": {
+                    "description": "Configuration for storage destination <br/>  <span class=\"since-beta-tag\">Version: 26.3.0.cl or later</span>",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/StorageDestinationInput"
                       }
                     ]
                   }
@@ -20921,6 +20937,11 @@
             "$ref": "#/components/schemas/WebhookUser",
             "description": "User who last modified the webhook.",
             "nullable": true
+          },
+          "storage_destination": {
+            "$ref": "#/components/schemas/StorageDestination",
+            "description": "Storage destination configuration for webhook payload delivery.",
+            "nullable": true
           }
         }
       },
@@ -21071,6 +21092,71 @@
             "description": "Name of the user."
           }
         }
+      },
+      "StorageDestination": {
+        "type": "object",
+        "required": [
+          "storage_type",
+          "storage_config"
+        ],
+        "properties": {
+          "storage_type": {
+            "type": "string",
+            "enum": [
+              "AWS_S3"
+            ],
+            "description": "Type of storage destination (e.g., AWS_S3)."
+          },
+          "storage_config": {
+            "$ref": "#/components/schemas/StorageConfig",
+            "description": "Storage-specific configuration settings."
+          }
+        },
+        "description": "Storage destination configuration for webhook payload delivery."
+      },
+      "StorageConfig": {
+        "type": "object",
+        "properties": {
+          "aws_s3_config": {
+            "$ref": "#/components/schemas/AwsS3Config",
+            "description": "AWS S3 storage configuration.",
+            "nullable": true
+          }
+        },
+        "description": "Storage configuration containing provider-specific settings."
+      },
+      "AwsS3Config": {
+        "type": "object",
+        "required": [
+          "bucket_name",
+          "region",
+          "role_arn",
+          "external_id"
+        ],
+        "properties": {
+          "bucket_name": {
+            "type": "string",
+            "description": "Name of the S3 bucket where webhook payloads are stored."
+          },
+          "region": {
+            "type": "string",
+            "description": "AWS region where the S3 bucket is located."
+          },
+          "role_arn": {
+            "type": "string",
+            "description": "ARN of the IAM role used for S3 access."
+          },
+          "external_id": {
+            "type": "string",
+            "description": "External ID for secure cross-account role assumption."
+          },
+          "path_prefix": {
+            "type": "string",
+            "description": "Path prefix for organizing objects within the bucket.",
+            "nullable": true
+          }
+        },
+        "description": "AWS S3 storage configuration details."
       },
       "WebhookPagination": {
         "type": "object",
@@ -24828,6 +24914,71 @@
             "description": "Shared secret used for HMAC signature generation."
           }
         }
+      },
+      "StorageDestinationInput": {
+        "type": "object",
+        "required": [
+          "storage_type",
+          "storage_config"
+        ],
+        "properties": {
+          "storage_type": {
+            "type": "string",
+            "enum": [
+              "AWS_S3"
+            ],
+            "description": "Type of storage destination (e.g., AWS_S3)."
+          },
+          "storage_config": {
+            "$ref": "#/components/schemas/StorageConfigInput",
+            "description": "Storage-specific configuration settings."
+          }
+        },
+        "description": "Input type for storage destination configuration."
+      },
+      "StorageConfigInput": {
+        "type": "object",
+        "properties": {
+          "aws_s3_config": {
+            "$ref": "#/components/schemas/AwsS3ConfigInput",
+            "description": "AWS S3 storage configuration.",
+            "nullable": true
+          }
+        },
+        "description": "Input type for storage configuration."
+      },
+      "AwsS3ConfigInput": {
+        "type": "object",
+        "required": [
+          "bucket_name",
+          "region",
+          "role_arn",
+          "external_id"
+        ],
+        "properties": {
+          "bucket_name": {
+            "type": "string",
+            "description": "Name of the S3 bucket where webhook payloads will be stored."
+          },
+          "region": {
+            "type": "string",
+            "description": "AWS region where the S3 bucket is located."
+          },
+          "role_arn": {
+            "type": "string",
+            "description": "ARN of the IAM role to assume for S3 access."
+          },
+          "external_id": {
+            "type": "string",
+            "description": "External ID for secure cross-account role assumption."
+          },
+          "path_prefix": {
+            "type": "string",
+            "description": "Optional path prefix for organizing objects within the bucket.",
+            "nullable": true
+          }
+        },
+        "description": "Input type for AWS S3 storage configuration."
       },
       "WebhookDeleteResponse": {
         "type": "object",
