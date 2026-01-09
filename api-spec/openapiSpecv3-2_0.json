@@ -24752,12 +24752,12 @@
           },
           "contact_support_url": {
             "type": "string",
-            "description": "Contact support url (HTTP/HTTPS only).",
+            "description": "Contact support url (HTTP/HTTPS only). <br/>  <span class=\"since-beta-tag\">Version: 26.2.0.cl or later</span>",
             "nullable": true
           },
           "hide_contact_support_url": {
             "type": "boolean",
-            "description": "Whether to hide contact support url.",
+            "description": "Whether to hide contact support url. <br/>  <span class=\"since-beta-tag\">Version: 26.2.0.cl or later</span>",
             "nullable": true
           }
         },

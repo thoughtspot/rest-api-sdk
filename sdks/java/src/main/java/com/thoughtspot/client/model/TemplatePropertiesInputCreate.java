@@ -713,7 +713,7 @@ public class TemplatePropertiesInputCreate implements Serializable {
     }
 
     /**
-     * Contact support url (HTTP/HTTPS only).
+     * Contact support url (HTTP/HTTPS only). Version: 26.2.0.cl or later
      *
      * @return contactSupportUrl
      */
@@ -733,7 +733,7 @@ public class TemplatePropertiesInputCreate implements Serializable {
     }
 
     /**
-     * Whether to hide contact support url.
+     * Whether to hide contact support url. Version: 26.2.0.cl or later
      *
      * @return hideContactSupportUrl
      */

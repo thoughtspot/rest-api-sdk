@@ -15952,11 +15952,13 @@ components:
           nullable: true
           type: string
         contact_support_url:
-          description: Contact support url (HTTP/HTTPS only).
+          description: "Contact support url (HTTP/HTTPS only). \n  Version: 26.2.0.cl\
+            \ or later\n"
           nullable: true
           type: string
         hide_contact_support_url:
-          description: Whether to hide contact support url.
+          description: "Whether to hide contact support url. \n  Version: 26.2.0.cl\
+            \ or later\n"
           nullable: true
           type: boolean
       type: object

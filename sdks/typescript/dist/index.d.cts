@@ -3779,11 +3779,11 @@ declare class CreateEmailCustomizationRequestTemplateProperties {
     */
     'company_website_url'?: string | null;
     /**
-    * Contact support url (HTTP/HTTPS only).
+    * Contact support url (HTTP/HTTPS only).    Version: 26.2.0.cl or later
     */
     'contact_support_url'?: string | null;
     /**
-    * Whether to hide contact support url.
+    * Whether to hide contact support url.    Version: 26.2.0.cl or later
     */
     'hide_contact_support_url'?: boolean | null;
     static readonly discriminator: string | undefined;
@@ -14749,11 +14749,11 @@ declare class TemplatePropertiesInputCreate {
     */
     'company_website_url'?: string | null;
     /**
-    * Contact support url (HTTP/HTTPS only).
+    * Contact support url (HTTP/HTTPS only).    Version: 26.2.0.cl or later
     */
     'contact_support_url'?: string | null;
     /**
-    * Whether to hide contact support url.
+    * Whether to hide contact support url.    Version: 26.2.0.cl or later
     */
     'hide_contact_support_url'?: boolean | null;
     static readonly discriminator: string | undefined;
