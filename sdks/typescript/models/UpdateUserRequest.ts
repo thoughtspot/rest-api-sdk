@@ -71,7 +71,7 @@ export class UpdateUserRequest {
     */
     'operation'?: UpdateUserRequestOperationEnum;
     /**
-    * Locale for the user.
+    * Locale for the user. When setting this value, do not set use_browser_language to true, otherwise the browser\'s language setting will take precedence and the preferred_locale value will be ignored.
     */
     'preferred_locale'?: UpdateUserRequestPreferredLocaleEnum;
     /**
