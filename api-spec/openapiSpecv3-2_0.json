@@ -158,14 +158,6 @@
       "description": "Roles for version 9.5.0.cl"
     },
     {
-      "name": "26.3.0.cl",
-      "id": "26.3.0.cl",
-      "tags": [
-        "26.3.0.cl"
-      ],
-      "description": "Roles for version 26.3.0.cl"
-    },
-    {
       "name": "10.14.0.cl",
       "id": "10.14.0.cl",
       "tags": [
@@ -420,7 +412,7 @@
     "/api/rest/2.0/ai/instructions/get": {
       "post": {
         "operationId": "getNLInstructions",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.15.0.cl or later</span>\n\nThis API allows users to retrieve existing natural language (NL) instructions for a specific data-model. These instructions guide the AI system in understanding data context and generating more accurate responses when processing natural language queries.\n\n#### Usage guidelines\n\nTo retrieve NL instructions for a data-model, the request must include:\n- `data_source_identifier`: The unique ID of the data-model to retrieve NL instructions\n\nThe API returns a response object with:\n- `nl_instructions_info`: An array of instruction objects, each containing:\n  - `instructions`: Array of text instructions for natural language processing\n  - `scope`: The scope of the instruction (`GLOBAL`). It can be extended to data-model-user scope in future.\n\n#### Instructions Scope\n\n- **GLOBAL**: Instructions that apply globally across the system on the given data-model (currently only global instructions are supported)\n\n> ###### Note:\n> * To use this API, the user needs atleast view access on the data-model and they must use corresponding org related bearerToken where the data-model exists.\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * Available from version 10.15.0.cl and later.\n> * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n> * Use this API to view currently configured instructions before modifying them with `setNLInstructions`.\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.15.0.cl or later</span>\n\nThis API allows users to retrieve existing natural language (NL) instructions for a specific data-model. These instructions guide the AI system in understanding data context and generating more accurate responses when processing natural language queries.\n\n#### Usage guidelines\n\nTo retrieve NL instructions for a data-model, the request must include:\n- `data_source_identifier`: The unique ID or name of the data-model to retrieve NL instructions\n\nThe API returns a response object with:\n- `nl_instructions_info`: An array of instruction objects, each containing:\n  - `instructions`: Array of text instructions for natural language processing\n  - `scope`: The scope of the instruction (`GLOBAL`). It can be extended to data-model-user scope in future.\n\n#### Instructions Scope\n\n- **GLOBAL**: Instructions that apply globally across the system on the given data-model (currently only global instructions are supported)\n\n> ###### Note:\n> * To use this API, the user needs atleast view access on the data-model and they must use corresponding org related bearerToken where the data-model exists.\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * Available from version 10.15.0.cl and later.\n> * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n> * Use this API to view currently configured instructions before modifying them with `setNLInstructions`.\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "10.15.0.cl"
@@ -960,7 +952,7 @@
     "/api/rest/2.0/ai/instructions/set": {
       "post": {
         "operationId": "setNLInstructions",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.15.0.cl or later</span>\n\nThis API allows users to set natural language (NL) instructions for a specific data-model to improve AI-generated answers and query processing. These instructions help guide the AI system to better understand the data context and provide more accurate responses.\n\n#### Usage guidelines\n\nTo set NL instructions for a data-model, the request must include:\n- `data_source_identifier`: The unique ID of the data-model for which to set NL instructions\n- `nl_instructions_info`: An array of instruction objects, each containing:\n  - `instructions`: Array of text instructions for the LLM\n  - `scope`: The scope of the instruction (`GLOBAL`). Currently only `GLOBAL` is supported. It can be extended to data-model-user scope in future.\n\nThe API returns a response object with:\n- `success`: Boolean indicating whether the operation was successful\n\n#### Instructions Scope\n\n- **GLOBAL**: Instructions that apply globally for that data-model across the system\n\n> ###### Note:\n> * To use this API, the user needs either edit access or SPOTTER_COACHING_PRIVILEGE on the data-model and they must use corresponding org related bearerToken where the data-model exists.\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * Available from version 10.15.0.cl and later.\n> * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n> * Instructions help improve the accuracy and relevance of AI-generated responses for the specified data-model.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.15.0.cl or later</span>\n\nThis API allows users to set natural language (NL) instructions for a specific data-model to improve AI-generated answers and query processing. These instructions help guide the AI system to better understand the data context and provide more accurate responses.\n\n#### Usage guidelines\n\nTo set NL instructions for a data-model, the request must include:\n- `data_source_identifier`: The unique ID or name of the data-model for which to set NL instructions\n- `nl_instructions_info`: An array of instruction objects, each containing:\n  - `instructions`: Array of text instructions for the LLM\n  - `scope`: The scope of the instruction (`GLOBAL`). Currently only `GLOBAL` is supported. It can be extended to data-model-user scope in future.\n\nThe API returns a response object with:\n- `success`: Boolean indicating whether the operation was successful\n\n#### Instructions Scope\n\n- **GLOBAL**: Instructions that apply globally for that data-model across the system\n\n> ###### Note:\n> * To use this API, the user needs either edit access or SPOTTER_COACHING_PRIVILEGE on the data-model and they must use corresponding org related bearerToken where the data-model exists.\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * Available from version 10.15.0.cl and later.\n> * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n> * Instructions help improve the accuracy and relevance of AI-generated responses for the specified data-model.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "10.15.0.cl"
@@ -5908,7 +5900,8 @@
                         "PREVIEW_DOCUMENT_SEARCH",
                         "CAN_SETUP_VERSION_CONTROL",
                         "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "CAN_DOWNLOAD_DETAILED_DATA",
+                        "CAN_USE_SPOTTER"
                       ]
                     }
                   },
@@ -6269,7 +6262,8 @@
                         "CAN_SETUP_VERSION_CONTROL",
                         "CAN_MANAGE_WEBHOOKS",
                         "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "CAN_DOWNLOAD_DETAILED_DATA",
+                        "CAN_USE_SPOTTER"
                       ]
                     }
                   },
@@ -6478,7 +6472,8 @@
                         "PREVIEW_DOCUMENT_SEARCH",
                         "CAN_SETUP_VERSION_CONTROL",
                         "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "CAN_DOWNLOAD_DETAILED_DATA",
+                        "CAN_USE_SPOTTER"
                       ]
                     }
                   },
@@ -9131,7 +9126,8 @@
                         "PREVIEW_THOUGHTSPOT_SAGE",
                         "CAN_MANAGE_WEBHOOKS",
                         "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "CAN_DOWNLOAD_DETAILED_DATA",
+                        "CAN_USE_SPOTTER"
                       ]
                     }
                   },
@@ -9362,7 +9358,8 @@
                         "CAN_SETUP_VERSION_CONTROL",
                         "CAN_MANAGE_WEBHOOKS",
                         "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "CAN_DOWNLOAD_DETAILED_DATA",
+                        "CAN_USE_SPOTTER"
                       ]
                     }
                   },
@@ -9525,7 +9522,8 @@
                         "PREVIEW_THOUGHTSPOT_SAGE",
                         "CAN_MANAGE_WEBHOOKS",
                         "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "CAN_DOWNLOAD_DETAILED_DATA",
+                        "CAN_USE_SPOTTER"
                       ]
                     }
                   }
@@ -11533,110 +11531,6 @@
         }
       }
     },
-    "/api/rest/2.0/security/metadata/fetch-object-privileges": {
-      "post": {
-        "operationId": "fetchObjectPrivileges",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.3.0.cl or later</span>\n\nThis API fetches the object privileges present for the given list of principals (user or group), on the given set of objects. It supports pagination, which can be enabled and configured using the request parameters. It provides users access to certain features based on privilege based access control.\n\n#### Usage guidelines\n\n- Specify the `type` (`USER` or `USER_GROUP`) and `identifier` (either GUID or name) of the principals for which you want to retrieve object privilege information in the `principals` array.\n- Specify the `type`  (`LOGICAL_TABLE`)  and `identifier` (either GUID or name) of the metadata objects for which you want to retrieve object privilege information in the `metadata` array. Only `LOGICAL_TABLE` metadata type is supported for now. It may be extended for other metadata types in future.\n- To control the offset from where principals have to be fetched, use `record_offset`. When `record_offset` is 0, information is fetched from the beginning.\n- To control the number of principals to be fetched, use `record_size`. Default `record_size` is 20.\n- Ensure `record_offset` for a subsequent request is one more than the value of `record_size` of the previous request.\n- Ensure using correct Authorization Bearer Token corresponding to specific user & org. \n\n#### Example request\n\n```json\n{\n  \"principals\": [\n    {\n      \"type\": \"type-1\",\n      \"identifier\": \"principal-guid-or-name-1\"\n    },\n    {\n      \"type\": \"type-2\",\n      \"identifier\": \"principal-guid-or-name-2\"\n    }\n  ],\n  \"metadata\": [\n    {\n      \"type\": \"metadata-type-1\",\n      \"identifier\": \"metadata-guid-or-name-1\"\n    },\n    {\n      \"type\": \"metadata-type-2\",\n      \"identifier\": \"metadata-guid-or-name-2\"\n    }\n  ],\n  \"record_offset\": 0,\n  \"record_size\": 20\n}\n```\n\n\n#### Response format\n\nThe API returns an array of `metadata_object_privileges` objects wrapped in JSON. Each `metadata_object_privileges` object contains:\n- Metadata information (GUID, name and type)\n- Array of `principal_object_privilege_info`.\n- Each `principal_object_privilege_info` contains:\n  - Principal type. All principals of this type are listed as described below.\n  - Array of `principal_object_privileges`.\n  - Each `principal_object_privileges` contains:\n    - Principal information (GUID, name, subtype)\n    - List of applied object level privileges.\n\n#### Example response\n\n```json\n{\n    \"metadata_object_privileges\": [\n      {\n        \"metadata_id\": \"metadata-guid-1\",\n        \"metadata_name\": \"metadata-name-1\",\n        \"metadata_type\": \"metadata-type-1\",\n        \"principal_object_privilege_info\": [\n          {\n            \"principal_type\": \"principal-type-1\",\n            \"principal_object_privileges\": [\n              {\n                \"principal_id\": \"principal-guid-1\",\n                \"principal_name\": \"principal-name-1\",\n                \"principal_sub_type\": \"principal-sub-type-1\",\n                \"object_privileges\": \"[object-privilege-1, object-privilege-2]\"\n              },\n              {\n                \"principal_id\": \"principal-guid-2\",\n                \"principal_name\": \"principal-name-2\",\n                \"principal_sub_type\": \"principal-sub-type-2\",\n                \"object_privileges\": \"[object-privilege-1, object-privilege-2]\"\n              }\n            ]\n          },\n          {\n            \"principal_type\": \"principal-type-2\",\n            \"principal_object_privileges\": [\n              {\n                \"principal_id\": \"principal-guid-3\",\n                \"principal_name\": \"principal-guid-4\",\n                \"principal_sub_type\": \"principal-sub-type-4\",\n                \"object_privileges\": \"[object-privilege-1]\"\n              }\n            ]\n          }\n        ]\n      },\n      {\n        \"metadata_id\": \"metadata-guid-2\",\n        \"metadata_name\": \"metadata-name-2\",\n        \"metadata_type\": \"metadata-type-2\",\n        \"principal_object_privilege_info\": [\n          {\n            \"principal_type\": \"principal-type-1\",\n            \"principal_object_privileges\": [\n              {\n                \"principal_id\": \"principal-guid-1\",\n                \"principal_name\": \"principal-name-1\",\n                \"principal_sub_type\": \"principal-sub-type-1\",\n                \"object_privileges\": \"[object-privilege-3, object-privilege-4]\"\n              },\n              {\n                \"principal_id\": \"principal-guid-2\",\n                \"principal_name\": \"principal-name-2\",\n                \"principal_sub_type\": \"principal-sub-type-2\",\n                \"object_privileges\": \"[object-privilege-4]\"\n              }\n            ]\n          }\n        ]\n      }\n    ]\n}\n```\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Security",
-          "26.3.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "metadata": {
-                    "description": "Metadata objects for which you want to fetch object privileges. For now only LOGICAL_TABLE is supported. It may be extended to other metadata types in the future.",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/ObjectPrivilegesMetadataInput"
-                    }
-                  },
-                  "principals": {
-                    "description": "User or group objects for which you want to fetch object privileges.\nIf not specified, the API returns all users and groups that\nhave object privileges on the specified metadata objects.",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/PrincipalsInput"
-                    }
-                  },
-                  "record_offset": {
-                    "description": "The starting record number from where the records should be included for each metadata type.",
-                    "default": 0,
-                    "type": "integer",
-                    "format": "int32"
-                  },
-                  "record_size": {
-                    "description": "The number of records that should be included for each metadata type.",
-                    "default": 20,
-                    "type": "integer",
-                    "format": "int32"
-                  }
-                },
-                "required": [
-                  "metadata"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Fetching defined object privileges of metadata objects is successful.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ObjectPrivilegesOfMetadataResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/rest/2.0/security/principals/fetch-permissions": {
       "post": {
         "operationId": "fetchPermissionsOfPrincipals",
@@ -11938,120 +11832,6 @@
           },
           "403": {
             "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/security/metadata/manage-object-privilege": {
-      "post": {
-        "operationId": "manageObjectPrivilege",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.3.0.cl or later</span>\n\nThis API allows the addition or deletion of object level privileges for a set of users and groups, on a set of metadata objects. It provides users to access certain features based on privilege based access control.\n\n#### Usage guidelines\n\n- Specify the `operation`. The supported operations are: `ADD`, `REMOVE`.\n- Specify the type of the objects on which the object privileges are being provided in `metadata_type`. Only `LOGICAL_TABLE` metadata type is supported for now. It may be extended for other metadata types in future.\n- Specify the list of object privilege types in the `object_privilege_types` array. The supported object privilege types are: `SPOTTER_COACHING_PRIVILEGE`.\n- Specify the identifiers (either GUID or name) for the metadata objects in the `metadata_identifiers` array.\n- Specify the `type` (`USER` or `USER_GROUP`) and `identifier` (either GUID or name) of the principals to which you want to apply the given operation and given object privileges in the `principals` array.\n- Ensure using correct Authorization Bearer Token corresponding to specific user & org.\n\n#### Example request\n\n```json\n{\n  \"operation\": \"operation-type\",\n  \"metadata_type\": \"metadata-type\",\n  \"object_privilege_types\": [\"privilege-type-1\", \"privilege-type-2\"],\n  \"metadata_identifiers\": [\"metadata-guid-or-name-1\", \"metadata-guid-or-name-1\"],\n  \"principals\": [\n    {\n      \"type\": \"type-1\", \n      \"identifier\": \"principal-guid-or-name-1\"\n    },\n    {\n      \"type\": \"type-2\",\n      \"identifier\": \"principal-guid-or-name-2\"\n    }\n  ]\n}\n```\n\n> ###### Note:\n> * Only admin users, users with edit access and users with coaching privilege on a given data-model can add or remove principals related to SPOTTER_COACHING_PRIVILEGE  \n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "Security",
-          "26.3.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "operation": {
-                    "description": "Operation to perform to manage object privileges. Available operations are: `ADD`, `REMOVE`.",
-                    "type": "string",
-                    "enum": [
-                      "ADD",
-                      "REMOVE"
-                    ]
-                  },
-                  "metadata_type": {
-                    "description": "Type of metadata objects on which you want to perform the operation. For now only LOGICAL_TABLE is supported. It may be extended to other metadata types in the future.",
-                    "type": "string",
-                    "enum": [
-                      "LOGICAL_TABLE"
-                    ]
-                  },
-                  "object_privilege_types": {
-                    "description": "List of object privilege types on which you want to perform the operation.",
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "enum": [
-                        "SPOTTER_COACHING_PRIVILEGE"
-                      ]
-                    }
-                  },
-                  "metadata_identifiers": {
-                    "description": "List of metadata identifiers (GUID or name) on which you want to perform the operation.",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "principals": {
-                    "description": "User or group objects (GUID or name) to which you want to apply the given operation and given object privileges.",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/PrincipalsInput"
-                    }
-                  }
-                },
-                "required": [
-                  "operation",
-                  "metadata_type",
-                  "object_privilege_types",
-                  "metadata_identifiers",
-                  "principals"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "204": {
-            "description": "Object privileges added/removed successfully"
-          },
-          "400": {
-            "description": "Invalid request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access",
             "content": {
               "application/json": {
                 "schema": {
@@ -14069,7 +13849,7 @@
                     }
                   },
                   "preferred_locale": {
-                    "description": "Locale for the user. When setting this value, do not set use_browser_language\nto true, otherwise the browser's language setting will take precedence and the\npreferred_locale value will be ignored.",
+                    "description": "Locale for the user.",
                     "type": "string",
                     "enum": [
                       "en-CA",
@@ -14691,7 +14471,8 @@
                         "CAN_SETUP_VERSION_CONTROL",
                         "CAN_MANAGE_WEBHOOKS",
                         "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "CAN_DOWNLOAD_DETAILED_DATA",
+                        "CAN_USE_SPOTTER"
                       ]
                     }
                   },
@@ -14962,7 +14743,7 @@
                     ]
                   },
                   "preferred_locale": {
-                    "description": "Locale for the user. When setting this value, do not set use_browser_language\nto true, otherwise the browser's language setting will take precedence and the\npreferred_locale value will be ignored.",
+                    "description": "Locale for the user.",
                     "type": "string",
                     "enum": [
                       "en-CA",
@@ -16481,14 +16262,6 @@
                         "$ref": "#/components/schemas/WebhookSignatureVerificationInput"
                       }
                     ]
-                  },
-                  "storage_destination": {
-                    "description": "Configuration for storage destination <br/>  <span class=\"since-beta-tag\">Version: 26.3.0.cl or later</span>",
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/StorageDestinationInput"
-                      }
-                    ]
                   }
                 },
                 "required": [
@@ -17058,14 +16831,6 @@
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/WebhookSignatureVerificationInput"
-                      }
-                    ]
-                  },
-                  "storage_destination": {
-                    "description": "Configuration for storage destination <br/>  <span class=\"since-beta-tag\">Version: 26.3.0.cl or later</span>",
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/StorageDestinationInput"
                       }
                     ]
                   }
@@ -19250,35 +19015,6 @@
           }
         }
       },
-      "ObjectPrivilegesMetadataInput": {
-        "type": "object",
-        "required": [
-          "identifier"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "LOGICAL_TABLE"
-            ],
-            "description": "Type of metadata object.\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
-            "nullable": true
-          },
-          "identifier": {
-            "type": "string",
-            "description": "Unique ID or name of the metadata object."
-          }
-        }
-      },
-      "ObjectPrivilegesOfMetadataResponse": {
-        "type": "object",
-        "properties": {
-          "metadata_object_privileges": {
-            "type": "object",
-            "nullable": true
-          }
-        }
-      },
       "PrincipalsInput": {
         "type": "object",
         "required": [
@@ -20143,7 +19879,8 @@
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_MANAGE_WEBHOOKS",
                 "CAN_DOWNLOAD_VISUALS",
-                "CAN_DOWNLOAD_DETAILED_DATA"
+                "CAN_DOWNLOAD_DETAILED_DATA",
+                "CAN_USE_SPOTTER"
               ]
             },
             "description": "Privileges granted to the role."
@@ -21192,11 +20929,6 @@
             "$ref": "#/components/schemas/WebhookUser",
             "description": "User who last modified the webhook.",
             "nullable": true
-          },
-          "storage_destination": {
-            "$ref": "#/components/schemas/StorageDestination",
-            "description": "Storage destination configuration for webhook payload delivery.",
-            "nullable": true
           }
         }
       },
@@ -21347,71 +21079,6 @@
             "description": "Name of the user."
           }
         }
-      },
-      "StorageDestination": {
-        "type": "object",
-        "required": [
-          "storage_type",
-          "storage_config"
-        ],
-        "properties": {
-          "storage_type": {
-            "type": "string",
-            "enum": [
-              "AWS_S3"
-            ],
-            "description": "Type of storage destination (e.g., AWS_S3)."
-          },
-          "storage_config": {
-            "$ref": "#/components/schemas/StorageConfig",
-            "description": "Storage-specific configuration settings."
-          }
-        },
-        "description": "Storage destination configuration for webhook payload delivery."
-      },
-      "StorageConfig": {
-        "type": "object",
-        "properties": {
-          "aws_s3_config": {
-            "$ref": "#/components/schemas/AwsS3Config",
-            "description": "AWS S3 storage configuration.",
-            "nullable": true
-          }
-        },
-        "description": "Storage configuration containing provider-specific settings."
-      },
-      "AwsS3Config": {
-        "type": "object",
-        "required": [
-          "bucket_name",
-          "region",
-          "role_arn",
-          "external_id"
-        ],
-        "properties": {
-          "bucket_name": {
-            "type": "string",
-            "description": "Name of the S3 bucket where webhook payloads are stored."
-          },
-          "region": {
-            "type": "string",
-            "description": "AWS region where the S3 bucket is located."
-          },
-          "role_arn": {
-            "type": "string",
-            "description": "ARN of the IAM role used for S3 access."
-          },
-          "external_id": {
-            "type": "string",
-            "description": "External ID for secure cross-account role assumption."
-          },
-          "path_prefix": {
-            "type": "string",
-            "description": "Path prefix for organizing objects within the bucket.",
-            "nullable": true
-          }
-        },
-        "description": "AWS S3 storage configuration details."
       },
       "WebhookPagination": {
         "type": "object",
@@ -22170,36 +21837,7 @@
           "preferred_locale": {
             "type": "string",
             "description": "Locale for the user.",
-            "nullable": true,
-            "enum": [
-              "en-CA",
-              "en-GB",
-              "en-US",
-              "de-DE",
-              "ja-JP",
-              "zh-CN",
-              "pt-BR",
-              "fr-FR",
-              "fr-CA",
-              "es-US",
-              "da-DK",
-              "es-ES",
-              "fi-FI",
-              "sv-SE",
-              "nb-NO",
-              "pt-PT",
-              "nl-NL",
-              "it-IT",
-              "ru-RU",
-              "en-IN",
-              "de-CH",
-              "en-NZ",
-              "es-MX",
-              "en-AU",
-              "zh-Hant",
-              "ko-KR",
-              "en-DE"
-            ]
+            "nullable": true
           },
           "use_browser_language": {
             "type": "boolean",
@@ -22578,7 +22216,8 @@
                 "PREVIEW_DOCUMENT_SEARCH",
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_DOWNLOAD_VISUALS",
-                "CAN_DOWNLOAD_DETAILED_DATA"
+                "CAN_DOWNLOAD_DETAILED_DATA",
+                "CAN_USE_SPOTTER"
               ]
             },
             "description": "Privileges that will be assigned to the group.",
@@ -23583,7 +23222,8 @@
                 "PREVIEW_THOUGHTSPOT_SAGE",
                 "CAN_MANAGE_WEBHOOKS",
                 "CAN_DOWNLOAD_VISUALS",
-                "CAN_DOWNLOAD_DETAILED_DATA"
+                "CAN_DOWNLOAD_DETAILED_DATA",
+                "CAN_USE_SPOTTER"
               ]
             },
             "description": "Privileges granted to the role."
@@ -25007,12 +24647,12 @@
           },
           "contact_support_url": {
             "type": "string",
-            "description": "Contact support url (HTTP/HTTPS only). <br/>  <span class=\"since-beta-tag\">Version: 26.2.0.cl or later</span>",
+            "description": "Contact support url (HTTP/HTTPS only).",
             "nullable": true
           },
           "hide_contact_support_url": {
             "type": "boolean",
-            "description": "Whether to hide contact support url. <br/>  <span class=\"since-beta-tag\">Version: 26.2.0.cl or later</span>",
+            "description": "Whether to hide contact support url.",
             "nullable": true
           }
         },
@@ -25169,71 +24809,6 @@
             "description": "Shared secret used for HMAC signature generation."
           }
         }
-      },
-      "StorageDestinationInput": {
-        "type": "object",
-        "required": [
-          "storage_type",
-          "storage_config"
-        ],
-        "properties": {
-          "storage_type": {
-            "type": "string",
-            "enum": [
-              "AWS_S3"
-            ],
-            "description": "Type of storage destination (e.g., AWS_S3)."
-          },
-          "storage_config": {
-            "$ref": "#/components/schemas/StorageConfigInput",
-            "description": "Storage-specific configuration settings."
-          }
-        },
-        "description": "Input type for storage destination configuration."
-      },
-      "StorageConfigInput": {
-        "type": "object",
-        "properties": {
-          "aws_s3_config": {
-            "$ref": "#/components/schemas/AwsS3ConfigInput",
-            "description": "AWS S3 storage configuration.",
-            "nullable": true
-          }
-        },
-        "description": "Input type for storage configuration."
-      },
-      "AwsS3ConfigInput": {
-        "type": "object",
-        "required": [
-          "bucket_name",
-          "region",
-          "role_arn",
-          "external_id"
-        ],
-        "properties": {
-          "bucket_name": {
-            "type": "string",
-            "description": "Name of the S3 bucket where webhook payloads will be stored."
-          },
-          "region": {
-            "type": "string",
-            "description": "AWS region where the S3 bucket is located."
-          },
-          "role_arn": {
-            "type": "string",
-            "description": "ARN of the IAM role to assume for S3 access."
-          },
-          "external_id": {
-            "type": "string",
-            "description": "External ID for secure cross-account role assumption."
-          },
-          "path_prefix": {
-            "type": "string",
-            "description": "Optional path prefix for organizing objects within the bucket.",
-            "nullable": true
-          }
-        },
-        "description": "Input type for AWS S3 storage configuration."
       },
       "WebhookDeleteResponse": {
         "type": "object",
