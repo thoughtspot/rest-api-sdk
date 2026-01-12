@@ -121,7 +121,9 @@ public class UpdateUserGroupRequest implements Serializable {
 
         CAN_DOWNLOAD_VISUALS("CAN_DOWNLOAD_VISUALS"),
 
-        CAN_DOWNLOAD_DETAILED_DATA("CAN_DOWNLOAD_DETAILED_DATA");
+        CAN_DOWNLOAD_DETAILED_DATA("CAN_DOWNLOAD_DETAILED_DATA"),
+
+        CAN_USE_SPOTTER("CAN_USE_SPOTTER");
 
         private String value;
 

@@ -5908,7 +5908,8 @@
                         "PREVIEW_DOCUMENT_SEARCH",
                         "CAN_SETUP_VERSION_CONTROL",
                         "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "CAN_DOWNLOAD_DETAILED_DATA",
+                        "CAN_USE_SPOTTER"
                       ]
                     }
                   },
@@ -6269,7 +6270,8 @@
                         "CAN_SETUP_VERSION_CONTROL",
                         "CAN_MANAGE_WEBHOOKS",
                         "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "CAN_DOWNLOAD_DETAILED_DATA",
+                        "CAN_USE_SPOTTER"
                       ]
                     }
                   },
@@ -6478,7 +6480,8 @@
                         "PREVIEW_DOCUMENT_SEARCH",
                         "CAN_SETUP_VERSION_CONTROL",
                         "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "CAN_DOWNLOAD_DETAILED_DATA",
+                        "CAN_USE_SPOTTER"
                       ]
                     }
                   },
@@ -9131,7 +9134,8 @@
                         "PREVIEW_THOUGHTSPOT_SAGE",
                         "CAN_MANAGE_WEBHOOKS",
                         "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "CAN_DOWNLOAD_DETAILED_DATA",
+                        "CAN_USE_SPOTTER"
                       ]
                     }
                   },
@@ -9362,7 +9366,8 @@
                         "CAN_SETUP_VERSION_CONTROL",
                         "CAN_MANAGE_WEBHOOKS",
                         "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "CAN_DOWNLOAD_DETAILED_DATA",
+                        "CAN_USE_SPOTTER"
                       ]
                     }
                   },
@@ -9525,7 +9530,8 @@
                         "PREVIEW_THOUGHTSPOT_SAGE",
                         "CAN_MANAGE_WEBHOOKS",
                         "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "CAN_DOWNLOAD_DETAILED_DATA",
+                        "CAN_USE_SPOTTER"
                       ]
                     }
                   }
@@ -14691,7 +14697,8 @@
                         "CAN_SETUP_VERSION_CONTROL",
                         "CAN_MANAGE_WEBHOOKS",
                         "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "CAN_DOWNLOAD_DETAILED_DATA",
+                        "CAN_USE_SPOTTER"
                       ]
                     }
                   },
@@ -20143,7 +20150,8 @@
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_MANAGE_WEBHOOKS",
                 "CAN_DOWNLOAD_VISUALS",
-                "CAN_DOWNLOAD_DETAILED_DATA"
+                "CAN_DOWNLOAD_DETAILED_DATA",
+                "CAN_USE_SPOTTER"
               ]
             },
             "description": "Privileges granted to the role."
@@ -22578,7 +22586,8 @@
                 "PREVIEW_DOCUMENT_SEARCH",
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_DOWNLOAD_VISUALS",
-                "CAN_DOWNLOAD_DETAILED_DATA"
+                "CAN_DOWNLOAD_DETAILED_DATA",
+                "CAN_USE_SPOTTER"
               ]
             },
             "description": "Privileges that will be assigned to the group.",
@@ -23583,7 +23592,8 @@
                 "PREVIEW_THOUGHTSPOT_SAGE",
                 "CAN_MANAGE_WEBHOOKS",
                 "CAN_DOWNLOAD_VISUALS",
-                "CAN_DOWNLOAD_DETAILED_DATA"
+                "CAN_DOWNLOAD_DETAILED_DATA",
+                "CAN_USE_SPOTTER"
               ]
             },
             "description": "Privileges granted to the role."
