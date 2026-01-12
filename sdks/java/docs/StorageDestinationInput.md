@@ -8,7 +8,7 @@ Input type for storage destination configuration.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**storageType** | [**StorageTypeEnum**](#StorageTypeEnum) | Type of storage destination (e.g., AWS_S3). |  |
+|**storageType** | [**StorageTypeEnum**](#StorageTypeEnum) | Type of storage destination. Example: \&quot;AWS_S3\&quot; |  |
 |**storageConfig** | [**StorageConfigInput**](StorageConfigInput.md) |  |  |
 
 

@@ -29,7 +29,7 @@ import java.util.Set;
 public class StorageDestinationInput implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    /** Type of storage destination (e.g., AWS_S3). */
+    /** Type of storage destination. Example: \&quot;AWS_S3\&quot; */
     @JsonAdapter(StorageTypeEnum.Adapter.class)
     public enum StorageTypeEnum {
         AWS_S3("AWS_S3");
@@ -99,7 +99,7 @@ public class StorageDestinationInput implements Serializable {
     }
 
     /**
-     * Type of storage destination (e.g., AWS_S3).
+     * Type of storage destination. Example: \&quot;AWS_S3\&quot;
      *
      * @return storageType
      */

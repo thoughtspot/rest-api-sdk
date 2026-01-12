@@ -12787,6 +12787,7 @@ components:
           type: string
         external_id:
           description: External ID for secure cross-account role assumption.
+          nullable: true
           type: string
         path_prefix:
           description: Path prefix for organizing objects within the bucket.
@@ -12794,7 +12795,6 @@ components:
           type: string
       required:
       - bucket_name
-      - external_id
       - region
       - role_arn
       type: object
@@ -16097,7 +16097,9 @@ components:
       description: Input type for storage destination configuration.
       properties:
         storage_type:
-          description: "Type of storage destination (e.g., AWS_S3)."
+          description: |-
+            Type of storage destination.
+            Example: "AWS_S3"
           enum:
           - AWS_S3
           type: string
@@ -16117,24 +16119,34 @@ components:
       description: Input type for AWS S3 storage configuration.
       properties:
         bucket_name:
-          description: Name of the S3 bucket where webhook payloads will be stored.
+          description: |-
+            Name of the S3 bucket where webhook payloads will be stored.
+            Example: "my-webhook-files"
           type: string
         region:
-          description: AWS region where the S3 bucket is located.
+          description: |-
+            AWS region where the S3 bucket is located.
+            Example: "us-west-2"
           type: string
         role_arn:
-          description: ARN of the IAM role to assume for S3 access.
+          description: |-
+            ARN of the IAM role to assume for S3 access.
+            Example: "arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole"
           type: string
         external_id:
-          description: External ID for secure cross-account role assumption.
+          description: |-
+            External ID for secure cross-account role assumption.
+            Example: "ts-webhook-a1b2c3d4-7890"
+          nullable: true
           type: string
         path_prefix:
-          description: Optional path prefix for organizing objects within the bucket.
+          description: |-
+            Optional path prefix for organizing objects within the bucket.
+            Example: "thoughtspot-webhooks/"
           nullable: true
           type: string
       required:
       - bucket_name
-      - external_id
       - region
       - role_arn
       type: object

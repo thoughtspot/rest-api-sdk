@@ -1659,7 +1659,7 @@ declare class AwsS3Config {
     /**
     * External ID for secure cross-account role assumption.
     */
-    'external_id': string;
+    'external_id'?: string | null;
     /**
     * Path prefix for organizing objects within the bucket.
     */
@@ -1696,23 +1696,23 @@ declare class AwsS3Config {
 */
 declare class AwsS3ConfigInput {
     /**
-    * Name of the S3 bucket where webhook payloads will be stored.
+    * Name of the S3 bucket where webhook payloads will be stored. Example: \"my-webhook-files\"
     */
     'bucket_name': string;
     /**
-    * AWS region where the S3 bucket is located.
+    * AWS region where the S3 bucket is located. Example: \"us-west-2\"
     */
     'region': string;
     /**
-    * ARN of the IAM role to assume for S3 access.
+    * ARN of the IAM role to assume for S3 access. Example: \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\"
     */
     'role_arn': string;
     /**
-    * External ID for secure cross-account role assumption.
+    * External ID for secure cross-account role assumption. Example: \"ts-webhook-a1b2c3d4-7890\"
     */
-    'external_id': string;
+    'external_id'?: string | null;
     /**
-    * Optional path prefix for organizing objects within the bucket.
+    * Optional path prefix for organizing objects within the bucket. Example: \"thoughtspot-webhooks/\"
     */
     'path_prefix'?: string | null;
     static readonly discriminator: string | undefined;
@@ -14458,7 +14458,7 @@ type StorageDestinationStorageTypeEnum = "AWS_S3";
 */
 declare class StorageDestinationInput {
     /**
-    * Type of storage destination (e.g., AWS_S3).
+    * Type of storage destination. Example: \"AWS_S3\"
     */
     'storage_type': StorageDestinationInputStorageTypeEnum;
     'storage_config': StorageConfigInput;

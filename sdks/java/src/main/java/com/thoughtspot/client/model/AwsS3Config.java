@@ -51,7 +51,7 @@ public class AwsS3Config implements Serializable {
     public static final String SERIALIZED_NAME_EXTERNAL_ID = "external_id";
 
     @SerializedName(SERIALIZED_NAME_EXTERNAL_ID)
-    @javax.annotation.Nonnull
+    @javax.annotation.Nullable
     private String externalId;
 
     public static final String SERIALIZED_NAME_PATH_PREFIX = "path_prefix";
@@ -119,7 +119,7 @@ public class AwsS3Config implements Serializable {
         this.roleArn = roleArn;
     }
 
-    public AwsS3Config externalId(@javax.annotation.Nonnull String externalId) {
+    public AwsS3Config externalId(@javax.annotation.Nullable String externalId) {
         this.externalId = externalId;
         return this;
     }
@@ -129,12 +129,12 @@ public class AwsS3Config implements Serializable {
      *
      * @return externalId
      */
-    @javax.annotation.Nonnull
+    @javax.annotation.Nullable
     public String getExternalId() {
         return externalId;
     }
 
-    public void setExternalId(@javax.annotation.Nonnull String externalId) {
+    public void setExternalId(@javax.annotation.Nullable String externalId) {
         this.externalId = externalId;
     }
 
@@ -235,7 +235,6 @@ public class AwsS3Config implements Serializable {
         openapiRequiredFields.add("bucket_name");
         openapiRequiredFields.add("region");
         openapiRequiredFields.add("role_arn");
-        openapiRequiredFields.add("external_id");
     }
 
     /**
@@ -299,7 +298,8 @@ public class AwsS3Config implements Serializable {
                                     + " string but got `%s`",
                             jsonObj.get("role_arn").toString()));
         }
-        if (!jsonObj.get("external_id").isJsonPrimitive()) {
+        if ((jsonObj.get("external_id") != null && !jsonObj.get("external_id").isJsonNull())
+                && !jsonObj.get("external_id").isJsonPrimitive()) {
             throw new IllegalArgumentException(
                     String.format(
                             "Expected the field `external_id` to be a primitive type in the JSON"

@@ -18,7 +18,7 @@ import { HttpFile } from '../http/http';
 */
 export class StorageDestinationInput {
     /**
-    * Type of storage destination (e.g., AWS_S3).
+    * Type of storage destination. Example: \"AWS_S3\"
     */
     'storage_type': StorageDestinationInputStorageTypeEnum;
     'storage_config': StorageConfigInput;

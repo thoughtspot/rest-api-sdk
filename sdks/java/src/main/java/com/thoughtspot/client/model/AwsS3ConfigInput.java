@@ -51,7 +51,7 @@ public class AwsS3ConfigInput implements Serializable {
     public static final String SERIALIZED_NAME_EXTERNAL_ID = "external_id";
 
     @SerializedName(SERIALIZED_NAME_EXTERNAL_ID)
-    @javax.annotation.Nonnull
+    @javax.annotation.Nullable
     private String externalId;
 
     public static final String SERIALIZED_NAME_PATH_PREFIX = "path_prefix";
@@ -68,7 +68,8 @@ public class AwsS3ConfigInput implements Serializable {
     }
 
     /**
-     * Name of the S3 bucket where webhook payloads will be stored.
+     * Name of the S3 bucket where webhook payloads will be stored. Example:
+     * \&quot;my-webhook-files\&quot;
      *
      * @return bucketName
      */
@@ -87,7 +88,7 @@ public class AwsS3ConfigInput implements Serializable {
     }
 
     /**
-     * AWS region where the S3 bucket is located.
+     * AWS region where the S3 bucket is located. Example: \&quot;us-west-2\&quot;
      *
      * @return region
      */
@@ -106,7 +107,8 @@ public class AwsS3ConfigInput implements Serializable {
     }
 
     /**
-     * ARN of the IAM role to assume for S3 access.
+     * ARN of the IAM role to assume for S3 access. Example:
+     * \&quot;arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\&quot;
      *
      * @return roleArn
      */
@@ -119,22 +121,23 @@ public class AwsS3ConfigInput implements Serializable {
         this.roleArn = roleArn;
     }
 
-    public AwsS3ConfigInput externalId(@javax.annotation.Nonnull String externalId) {
+    public AwsS3ConfigInput externalId(@javax.annotation.Nullable String externalId) {
         this.externalId = externalId;
         return this;
     }
 
     /**
-     * External ID for secure cross-account role assumption.
+     * External ID for secure cross-account role assumption. Example:
+     * \&quot;ts-webhook-a1b2c3d4-7890\&quot;
      *
      * @return externalId
      */
-    @javax.annotation.Nonnull
+    @javax.annotation.Nullable
     public String getExternalId() {
         return externalId;
     }
 
-    public void setExternalId(@javax.annotation.Nonnull String externalId) {
+    public void setExternalId(@javax.annotation.Nullable String externalId) {
         this.externalId = externalId;
     }
 
@@ -144,7 +147,8 @@ public class AwsS3ConfigInput implements Serializable {
     }
 
     /**
-     * Optional path prefix for organizing objects within the bucket.
+     * Optional path prefix for organizing objects within the bucket. Example:
+     * \&quot;thoughtspot-webhooks/\&quot;
      *
      * @return pathPrefix
      */
@@ -235,7 +239,6 @@ public class AwsS3ConfigInput implements Serializable {
         openapiRequiredFields.add("bucket_name");
         openapiRequiredFields.add("region");
         openapiRequiredFields.add("role_arn");
-        openapiRequiredFields.add("external_id");
     }
 
     /**
@@ -299,7 +302,8 @@ public class AwsS3ConfigInput implements Serializable {
                                     + " string but got `%s`",
                             jsonObj.get("role_arn").toString()));
         }
-        if (!jsonObj.get("external_id").isJsonPrimitive()) {
+        if ((jsonObj.get("external_id") != null && !jsonObj.get("external_id").isJsonNull())
+                && !jsonObj.get("external_id").isJsonPrimitive()) {
             throw new IllegalArgumentException(
                     String.format(
                             "Expected the field `external_id` to be a primitive type in the JSON"

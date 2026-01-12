@@ -31,7 +31,7 @@ export class AwsS3Config {
     /**
     * External ID for secure cross-account role assumption.
     */
-    'external_id': string;
+    'external_id'?: string | null;
     /**
     * Path prefix for organizing objects within the bucket.
     */
