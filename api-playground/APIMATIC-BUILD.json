@@ -78,7 +78,9 @@
         }
       },
       "enableExport": false,
-      "enableConsoleCalls": true
+      "enableConsoleCalls": true,
+      "useLegacyApiPlayground": true
     }
   }
 }
+
