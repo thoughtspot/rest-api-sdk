@@ -8997,6 +8997,26 @@ components:
           description: Block full application access for non-embedded usage.
           nullable: true
           type: boolean
+        groups_with_access:
+          description: |-
+            Groups that have non-embed full app access.
+            Only applicable when orgs feature is disabled. Use org_preferences when org feature is enabled.
+          items:
+            $ref: '#/components/schemas/GroupInfo'
+          nullable: true
+          type: array
+      type: object
+    GroupInfo:
+      description: Group information for non-embed access.
+      properties:
+        id:
+          description: Unique identifier of the group.
+          nullable: true
+          type: string
+        name:
+          description: Name of the group.
+          nullable: true
+          type: string
       type: object
     SecuritySettingsOrgPreferences:
       description: Org-level security preferences.
@@ -9038,18 +9058,6 @@ components:
             $ref: '#/components/schemas/GroupInfo'
           nullable: true
           type: array
-      type: object
-    GroupInfo:
-      description: Group information for non-embed access.
-      properties:
-        id:
-          description: Unique identifier of the group.
-          nullable: true
-          type: string
-        name:
-          description: Name of the group.
-          nullable: true
-          type: string
       type: object
     OrgResponse:
       example:
@@ -13659,6 +13667,14 @@ components:
           description: Block full application access for non-embedded usage.
           nullable: true
           type: boolean
+        groups_identifiers_with_access:
+          description: |-
+            Group identifiers that are allowed non-embed full app access.
+            Can only be set when orgs feature is disabled and block_full_app_access is true.
+          items:
+            type: string
+          nullable: true
+          type: array
       type: object
     SecuritySettingsOrgPreferencesInput:
       description: |-

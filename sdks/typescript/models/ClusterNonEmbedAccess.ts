@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+import { GroupInfo } from '../models/GroupInfo';
 import { HttpFile } from '../http/http';
 
 /**
@@ -20,6 +21,10 @@ export class ClusterNonEmbedAccess {
     * Block full application access for non-embedded usage.
     */
     'block_full_app_access'?: boolean | null;
+    /**
+    * Groups that have non-embed full app access. Only applicable when orgs feature is disabled. Use org_preferences when org feature is enabled.
+    */
+    'groups_with_access'?: Array<GroupInfo> | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -28,6 +33,12 @@ export class ClusterNonEmbedAccess {
             "name": "block_full_app_access",
             "baseName": "block_full_app_access",
             "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "groups_with_access",
+            "baseName": "groups_with_access",
+            "type": "Array<GroupInfo>",
             "format": ""
         }    ];
 

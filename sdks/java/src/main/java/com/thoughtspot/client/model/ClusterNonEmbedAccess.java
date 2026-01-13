@@ -5,6 +5,7 @@
 package com.thoughtspot.client.model;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.TypeAdapter;
@@ -16,8 +17,10 @@ import com.google.gson.stream.JsonWriter;
 import com.thoughtspot.client.JSON;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -35,6 +38,12 @@ public class ClusterNonEmbedAccess implements Serializable {
     @SerializedName(SERIALIZED_NAME_BLOCK_FULL_APP_ACCESS)
     @javax.annotation.Nullable
     private Boolean blockFullAppAccess;
+
+    public static final String SERIALIZED_NAME_GROUPS_WITH_ACCESS = "groups_with_access";
+
+    @SerializedName(SERIALIZED_NAME_GROUPS_WITH_ACCESS)
+    @javax.annotation.Nullable
+    private List<GroupInfo> groupsWithAccess;
 
     public ClusterNonEmbedAccess() {}
 
@@ -58,6 +67,35 @@ public class ClusterNonEmbedAccess implements Serializable {
         this.blockFullAppAccess = blockFullAppAccess;
     }
 
+    public ClusterNonEmbedAccess groupsWithAccess(
+            @javax.annotation.Nullable List<GroupInfo> groupsWithAccess) {
+        this.groupsWithAccess = groupsWithAccess;
+        return this;
+    }
+
+    public ClusterNonEmbedAccess addGroupsWithAccessItem(GroupInfo groupsWithAccessItem) {
+        if (this.groupsWithAccess == null) {
+            this.groupsWithAccess = new ArrayList<>();
+        }
+        this.groupsWithAccess.add(groupsWithAccessItem);
+        return this;
+    }
+
+    /**
+     * Groups that have non-embed full app access. Only applicable when orgs feature is disabled.
+     * Use org_preferences when org feature is enabled.
+     *
+     * @return groupsWithAccess
+     */
+    @javax.annotation.Nullable
+    public List<GroupInfo> getGroupsWithAccess() {
+        return groupsWithAccess;
+    }
+
+    public void setGroupsWithAccess(@javax.annotation.Nullable List<GroupInfo> groupsWithAccess) {
+        this.groupsWithAccess = groupsWithAccess;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -67,7 +105,8 @@ public class ClusterNonEmbedAccess implements Serializable {
             return false;
         }
         ClusterNonEmbedAccess clusterNonEmbedAccess = (ClusterNonEmbedAccess) o;
-        return Objects.equals(this.blockFullAppAccess, clusterNonEmbedAccess.blockFullAppAccess);
+        return Objects.equals(this.blockFullAppAccess, clusterNonEmbedAccess.blockFullAppAccess)
+                && Objects.equals(this.groupsWithAccess, clusterNonEmbedAccess.groupsWithAccess);
     }
 
     private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -81,7 +120,7 @@ public class ClusterNonEmbedAccess implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(blockFullAppAccess);
+        return Objects.hash(blockFullAppAccess, groupsWithAccess);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -98,6 +137,7 @@ public class ClusterNonEmbedAccess implements Serializable {
         sb.append("    blockFullAppAccess: ")
                 .append(toIndentedString(blockFullAppAccess))
                 .append("\n");
+        sb.append("    groupsWithAccess: ").append(toIndentedString(groupsWithAccess)).append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -120,6 +160,7 @@ public class ClusterNonEmbedAccess implements Serializable {
         // a set of all properties/fields (JSON key names)
         openapiFields = new HashSet<String>();
         openapiFields.add("block_full_app_access");
+        openapiFields.add("groups_with_access");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -155,6 +196,26 @@ public class ClusterNonEmbedAccess implements Serializable {
             }
         }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
+        if (jsonObj.get("groups_with_access") != null
+                && !jsonObj.get("groups_with_access").isJsonNull()) {
+            JsonArray jsonArraygroupsWithAccess = jsonObj.getAsJsonArray("groups_with_access");
+            if (jsonArraygroupsWithAccess != null) {
+                // ensure the json data is an array
+                if (!jsonObj.get("groups_with_access").isJsonArray()) {
+                    throw new IllegalArgumentException(
+                            String.format(
+                                    "Expected the field `groups_with_access` to be an array in the"
+                                            + " JSON string but got `%s`",
+                                    jsonObj.get("groups_with_access").toString()));
+                }
+
+                // validate the optional field `groups_with_access` (array)
+                for (int i = 0; i < jsonArraygroupsWithAccess.size(); i++) {
+                    GroupInfo.validateJsonElement(jsonArraygroupsWithAccess.get(i));
+                }
+                ;
+            }
+        }
     }
 
     public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

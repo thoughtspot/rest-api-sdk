@@ -1734,6 +1734,12 @@ _ClusterNonEmbedAccess.attributeTypeMap = [
     "baseName": "block_full_app_access",
     "type": "boolean",
     "format": ""
+  },
+  {
+    "name": "groups_with_access",
+    "baseName": "groups_with_access",
+    "type": "Array<GroupInfo>",
+    "format": ""
   }
 ];
 var ClusterNonEmbedAccess = _ClusterNonEmbedAccess;
@@ -1752,6 +1758,12 @@ _ClusterNonEmbedAccessInput.attributeTypeMap = [
     "name": "block_full_app_access",
     "baseName": "block_full_app_access",
     "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "groups_identifiers_with_access",
+    "baseName": "groups_identifiers_with_access",
+    "type": "Array<string>",
     "format": ""
   }
 ];
