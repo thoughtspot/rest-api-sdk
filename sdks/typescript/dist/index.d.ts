@@ -16820,6 +16820,10 @@ declare class VariableValue {
     */
     'principal_identifier'?: string | null;
     /**
+    * Unique ID of the model   Version: 26.3.0.cl or later
+    */
+    'model_identifier'?: string | null;
+    /**
     * The priority assigned to this value. If there are 2 matching values, the one with the higher priority will be picked.
     */
     'priority'?: number | null;

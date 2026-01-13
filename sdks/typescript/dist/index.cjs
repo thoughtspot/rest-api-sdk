@@ -14983,6 +14983,12 @@ _VariableValue.attributeTypeMap = [
     "format": ""
   },
   {
+    "name": "model_identifier",
+    "baseName": "model_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
     "name": "priority",
     "baseName": "priority",
     "type": "number",
