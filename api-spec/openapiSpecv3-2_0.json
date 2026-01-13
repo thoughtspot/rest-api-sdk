@@ -16490,7 +16490,7 @@
                     ]
                   },
                   "storage_destination": {
-                    "description": "Configuration for storage destination <br/>  <span class=\"since-beta-tag\">Version: 26.3.0.cl or later</span>",
+                    "description": "Configuration for storage destination.\nExample: {\"storage_type\": \"AWS_S3\", \"storage_config\": {\"aws_s3_config\": {\"bucket_name\": \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\", \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"}}} <br/>  <span class=\"since-beta-tag\">Version: 26.3.0.cl or later</span>",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/StorageDestinationInput"
@@ -17069,7 +17069,7 @@
                     ]
                   },
                   "storage_destination": {
-                    "description": "Configuration for storage destination <br/>  <span class=\"since-beta-tag\">Version: 26.3.0.cl or later</span>",
+                    "description": "Configuration for storage destination.\nExample: {\"storage_type\": \"AWS_S3\", \"storage_config\": {\"aws_s3_config\": {\"bucket_name\": \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\", \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"}}} <br/>  <span class=\"since-beta-tag\">Version: 26.3.0.cl or later</span>",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/StorageDestinationInput"
@@ -21398,8 +21398,7 @@
         "required": [
           "bucket_name",
           "region",
-          "role_arn",
-          "external_id"
+          "role_arn"
         ],
         "properties": {
           "bucket_name": {
@@ -21416,7 +21415,8 @@
           },
           "external_id": {
             "type": "string",
-            "description": "External ID for secure cross-account role assumption."
+            "description": "External ID for secure cross-account role assumption.",
+            "nullable": true
           },
           "path_prefix": {
             "type": "string",
@@ -25197,11 +25197,11 @@
             "enum": [
               "AWS_S3"
             ],
-            "description": "Type of storage destination (e.g., AWS_S3)."
+            "description": "Type of storage destination.\nExample: \"AWS_S3\""
           },
           "storage_config": {
             "$ref": "#/components/schemas/StorageConfigInput",
-            "description": "Storage-specific configuration settings."
+            "description": "Storage-specific configuration settings.\nExample: {\"aws_s3_config\": {\"bucket_name\": \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\", \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"}}"
           }
         },
         "description": "Input type for storage destination configuration."
@@ -25211,7 +25211,7 @@
         "properties": {
           "aws_s3_config": {
             "$ref": "#/components/schemas/AwsS3ConfigInput",
-            "description": "AWS S3 storage configuration.",
+            "description": "AWS S3 storage configuration.\nExample: {\"bucket_name\": \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\", \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"}",
             "nullable": true
           }
         },
@@ -25222,29 +25222,29 @@
         "required": [
           "bucket_name",
           "region",
-          "role_arn",
-          "external_id"
+          "role_arn"
         ],
         "properties": {
           "bucket_name": {
             "type": "string",
-            "description": "Name of the S3 bucket where webhook payloads will be stored."
+            "description": "Name of the S3 bucket where webhook payloads will be stored.\nExample: \"my-webhook-files\""
           },
           "region": {
             "type": "string",
-            "description": "AWS region where the S3 bucket is located."
+            "description": "AWS region where the S3 bucket is located.\nExample: \"us-west-2\""
           },
           "role_arn": {
             "type": "string",
-            "description": "ARN of the IAM role to assume for S3 access."
+            "description": "ARN of the IAM role to assume for S3 access.\nExample: \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\""
           },
           "external_id": {
             "type": "string",
-            "description": "External ID for secure cross-account role assumption."
+            "description": "External ID for secure cross-account role assumption.\nExample: \"ts-webhook-a1b2c3d4-7890\"",
+            "nullable": true
           },
           "path_prefix": {
             "type": "string",
-            "description": "Optional path prefix for organizing objects within the bucket.",
+            "description": "Optional path prefix for organizing objects within the bucket.\nExample: \"thoughtspot-webhooks/\"",
             "nullable": true
           }
         },
