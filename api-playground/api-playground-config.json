@@ -2,6 +2,6 @@
     "hideApiFields": [
         { "operationId": "getFullAccessToken", "fields": ["user_parameters"] },
         { "operationId": "getObjectAccessToken", "fields": ["user_parameters"] },
-        { "operationId": "getCustomAccessToken", "fields": ["filter_rules", "parameter_values"] }
+        { "operationId": "getCustomAccessToken", "fields": ["filter_rules"] }
     ]
 }
