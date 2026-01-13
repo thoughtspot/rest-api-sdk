@@ -59,11 +59,34 @@ jobs:
         if: steps.npm-check.outputs.exists == 'false'
         working-directory: sdks/typescript
         run: npm run build
+      
+      - name: Get Branch Name
+        id: branch_name
+        run: echo "::set-output name=BRANCH_NAME::$(git branch --show-current)"
 
       - name: Publish to npm with OIDC
         if: steps.npm-check.outputs.exists == 'false'
         working-directory: sdks/typescript
         run: |
+          BRANCH_NAME="${{ steps.branch_name.outputs.BRANCH_NAME }}"
           NPM_TAG=$(echo "${{ github.event.inputs.tag }}" | tr '[:upper:]' '[:lower:]')
-          npm publish --tag $NPM_TAG
-          echo "Published @thoughtspot/rest-api-sdk@${{ steps.version.outputs.version }} to tag $NPM_TAG"
+          if [ "$BRANCH_NAME" = "release" ]; then
+            echo "publish prod with tag: $NPM_TAG"
+            npm publish --tag $NPM_TAG
+          elif [ "$NPM_TAG" = "latest" ]; then
+            echo "Error: 'latest' tag can only be used when publishing from the release branch"
+            echo "Current branch: $BRANCH_NAME"
+            exit 1
+          else
+            CURRENT_VERSION=$(node -p "require('./package.json').version")
+            if [[ "$CURRENT_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+              echo "Error: Stable versions (X.Y.Z) can only be published from the release branch"
+              echo "Current version: $CURRENT_VERSION"
+              echo "Current branch: $BRANCH_NAME"
+              echo "Please use a pre-release version (e.g., X.Y.Z-beta.1, X.Y.Z-alpha.0) for non-release branches"
+              exit 1
+            fi
+            echo "Publishing from $BRANCH_NAME branch with tag: $NPM_TAG"
+            npm publish --tag $NPM_TAG
+            echo "Published @thoughtspot/rest-api-sdk@${{ steps.version.outputs.version }} to tag $NPM_TAG"
+          fi
