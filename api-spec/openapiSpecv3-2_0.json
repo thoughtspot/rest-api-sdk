@@ -17993,9 +17993,33 @@
             "type": "boolean",
             "description": "Block full application access for non-embedded usage.",
             "nullable": true
+          },
+          "groups_with_access": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GroupInfo"
+            },
+            "description": "Groups that have non-embed full app access.\nOnly applicable when orgs feature is disabled. Use org_preferences when org feature is enabled.",
+            "nullable": true
           }
         },
         "description": "Cluster-level non-embed access configuration."
+      },
+      "GroupInfo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the group.",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the group.",
+            "nullable": true
+          }
+        },
+        "description": "Group information for non-embed access."
       },
       "SecuritySettingsOrgPreferences": {
         "type": "object",
@@ -18056,22 +18080,6 @@
           }
         },
         "description": "Org-level non-embed access configuration."
-      },
-      "GroupInfo": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Unique identifier of the group.",
-            "nullable": true
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the group.",
-            "nullable": true
-          }
-        },
-        "description": "Group information for non-embed access."
       },
       "OrgResponse": {
         "type": "object",
@@ -20867,6 +20875,11 @@
             "description": "Unique ID or name of the principal",
             "nullable": true
           },
+          "model_identifier": {
+            "type": "string",
+            "description": "Unique ID of the model <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.3.0.cl or later</span>",
+            "nullable": true
+          },
           "priority": {
             "type": "integer",
             "format": "int32",
@@ -22440,6 +22453,14 @@
           "block_full_app_access": {
             "type": "boolean",
             "description": "Block full application access for non-embedded usage.",
+            "nullable": true
+          },
+          "groups_identifiers_with_access": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Group identifiers that are allowed non-embed full app access.\nCan only be set when orgs feature is disabled and block_full_app_access is true.",
             "nullable": true
           }
         },
