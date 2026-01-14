@@ -21442,27 +21442,46 @@
       "StorageSetupInfo": {
         "type": "object",
         "properties": {
+          "storage_type": {
+            "type": "string",
+            "enum": [
+              "AWS_S3"
+            ],
+            "description": "The type of customer's storage destination.\nIndicates which storage backend the setup info is for.",
+            "nullable": true
+          },
           "cluster_type": {
             "type": "string",
             "enum": [
               "AWS",
               "GCP"
             ],
-            "description": "The type of ThoughtSpot cluster deployment.\nDetermines which authentication method will be used for S3 access.",
+            "description": "The type of ThoughtSpot cluster deployment.\nDetermines which authentication method will be used for storage access.",
             "nullable": true
           },
+          "aws_s3_setup": {
+            "$ref": "#/components/schemas/AWSS3SetupInfo",
+            "description": "Setup information for accessing customer's AWS S3 bucket.\nContains cluster-specific setup details based on where ThoughtSpot is deployed.",
+            "nullable": true
+          }
+        },
+        "description": "Setup information for customer-managed storage configuration.\nThis field is populated when storage_destination is configured.\nIt provides ThoughtSpot's identity information and configuration\nrequired for customers to set up cross-cloud/cross-account access to their storage.\nThe setup info varies based on:\n- storage_type: The customer's storage destination (currently AWS_S3)\n- cluster_type: Where ThoughtSpot is deployed (AWS, GCP)"
+      },
+      "AWSS3SetupInfo": {
+        "type": "object",
+        "properties": {
           "aws_assume_role_setup": {
             "$ref": "#/components/schemas/AWSAssumeRoleSetup",
-            "description": "Setup information for AWS clusters using STS AssumeRole.\nOnly populated when cluster_type is AWS.",
+            "description": "Setup info when ThoughtSpot cluster is on AWS (uses STS AssumeRole).",
             "nullable": true
           },
           "gcp_web_identity_setup": {
             "$ref": "#/components/schemas/GCPWebIdentitySetup",
-            "description": "Setup information for GCP clusters using STS AssumeRoleWithWebIdentity.\nOnly populated when cluster_type is GCP.",
+            "description": "Setup info when ThoughtSpot cluster is on GCP (uses STS AssumeRoleWithWebIdentity).",
             "nullable": true
           }
         },
-        "description": "Setup information for customer-managed storage configuration.\nThis is populated when storage_destination is configured with AWS_S3.\nIt provides ThoughtSpot's identity information and IAM policy configuration\nrequired for customers to set up cross-account access to their S3 buckets."
+        "description": "Setup information for accessing customer's AWS S3 bucket.\nContains cluster-specific setup details based on where ThoughtSpot is deployed.\nOnly one of the nested setup objects will be populated based on cluster_type."
       },
       "AWSAssumeRoleSetup": {
         "type": "object",
