@@ -180,6 +180,14 @@
         "9.7.0.cl"
       ],
       "description": "Roles for version 9.7.0.cl"
+    },
+    {
+      "name": "26.4.0.cl",
+      "id": "26.4.0.cl",
+      "tags": [
+        "26.4.0.cl"
+      ],
+      "description": "Roles for version 26.4.0.cl"
     }
   ],
   "tags": [],
@@ -16490,7 +16498,7 @@
                     ]
                   },
                   "storage_destination": {
-                    "description": "Configuration for storage destination.\nExample: {\"storage_type\": \"AWS_S3\", \"storage_config\": {\"aws_s3_config\": {\"bucket_name\": \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\", \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"}}} <br/>  <span class=\"since-beta-tag\">Version: 26.3.0.cl or later</span>",
+                    "description": "Configuration for storage destination.\nExample: {\"storage_type\": \"AWS_S3\", \"storage_config\": {\"aws_s3_config\": {\"bucket_name\": \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\", \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"}}} <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/StorageDestinationInput"
@@ -16815,6 +16823,79 @@
         }
       }
     },
+    "/api/rest/2.0/webhooks/{webhook_identifier}/storage-setup": {
+      "get": {
+        "operationId": "getWebhookStorageSetup",
+        "description": "<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>",
+        "tags": [
+          "Webhooks",
+          "26.4.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "webhook_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the webhook configuration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Fetch current session user detail successful.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StorageSetupInfo"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/webhooks/search": {
       "post": {
         "operationId": "searchWebhookConfigurations",
@@ -17069,7 +17150,7 @@
                     ]
                   },
                   "storage_destination": {
-                    "description": "Configuration for storage destination.\nExample: {\"storage_type\": \"AWS_S3\", \"storage_config\": {\"aws_s3_config\": {\"bucket_name\": \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\", \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"}}} <br/>  <span class=\"since-beta-tag\">Version: 26.3.0.cl or later</span>",
+                    "description": "Configuration for storage destination.\nExample: {\"storage_type\": \"AWS_S3\", \"storage_config\": {\"aws_s3_config\": {\"bucket_name\": \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\", \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"}}} <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/StorageDestinationInput"
@@ -21218,11 +21299,6 @@
             "$ref": "#/components/schemas/StorageDestination",
             "description": "Storage destination configuration for webhook payload delivery.",
             "nullable": true
-          },
-          "storage_setup_info": {
-            "$ref": "#/components/schemas/StorageSetupInfo",
-            "description": "Setup information for customer-managed storage configuration.\nThis field is populated when storage_destination is configured with AWS_S3.\nIt provides ThoughtSpot's identity information and IAM policy configuration\nrequired for customers to set up cross-account access to their S3 buckets. <br/>  <span class=\"since-beta-tag\">Version: 26.3.0.cl or later</span>",
-            "nullable": true
           }
         }
       },
@@ -21439,49 +21515,60 @@
         },
         "description": "AWS S3 storage configuration details."
       },
+      "WebhookPagination": {
+        "type": "object",
+        "required": [
+          "record_offset",
+          "record_size",
+          "total_count",
+          "has_more"
+        ],
+        "properties": {
+          "record_offset": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The starting record number from where the records are included."
+          },
+          "record_size": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of records included in the response."
+          },
+          "total_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Total number of webhook configurations available."
+          },
+          "has_more": {
+            "type": "boolean",
+            "description": "Indicates whether more records are available beyond the current response."
+          }
+        }
+      },
       "StorageSetupInfo": {
         "type": "object",
         "properties": {
-          "storage_type": {
-            "type": "string",
-            "enum": [
-              "AWS_S3"
-            ],
-            "description": "The type of customer's storage destination.\nIndicates which storage backend the setup info is for.",
-            "nullable": true
-          },
           "cluster_type": {
             "type": "string",
             "enum": [
               "AWS",
               "GCP"
             ],
-            "description": "The type of ThoughtSpot cluster deployment.\nDetermines which authentication method will be used for storage access.",
+            "description": "The type of ThoughtSpot cluster deployment.\nDetermines which authentication method is used for S3 access.",
             "nullable": true
           },
-          "aws_s3_setup": {
-            "$ref": "#/components/schemas/AWSS3SetupInfo",
-            "description": "Setup information for accessing customer's AWS S3 bucket.\nContains cluster-specific setup details based on where ThoughtSpot is deployed.",
-            "nullable": true
-          }
-        },
-        "description": "Setup information for customer-managed storage configuration.\nThis field is populated when storage_destination is configured.\nIt provides ThoughtSpot's identity information and configuration\nrequired for customers to set up cross-cloud/cross-account access to their storage.\nThe setup info varies based on:\n- storage_type: The customer's storage destination (currently AWS_S3)\n- cluster_type: Where ThoughtSpot is deployed (AWS, GCP)"
-      },
-      "AWSS3SetupInfo": {
-        "type": "object",
-        "properties": {
           "aws_assume_role_setup": {
             "$ref": "#/components/schemas/AWSAssumeRoleSetup",
-            "description": "Setup info when ThoughtSpot cluster is on AWS (uses STS AssumeRole).",
+            "description": "Setup info when ThoughtSpot cluster is on AWS.\nUses STS AssumeRole for cross-account S3 access.\nOnly populated when cluster_type is AWS.",
             "nullable": true
           },
           "gcp_web_identity_setup": {
             "$ref": "#/components/schemas/GCPWebIdentitySetup",
-            "description": "Setup info when ThoughtSpot cluster is on GCP (uses STS AssumeRoleWithWebIdentity).",
+            "description": "Setup info when ThoughtSpot cluster is on GCP.\nUses STS AssumeRoleWithWebIdentity for cross-account S3 access.\nOnly populated when cluster_type is GCP.",
             "nullable": true
           }
         },
-        "description": "Setup information for accessing customer's AWS S3 bucket.\nContains cluster-specific setup details based on where ThoughtSpot is deployed.\nOnly one of the nested setup objects will be populated based on cluster_type."
+        "description": "Setup information for customer-managed storage configuration.\nProvides ThoughtSpot's identity information and IAM policy configuration\nrequired for customers to set up cross-account access to their S3 buckets.\nOnly one of aws_assume_role_setup or gcp_web_identity_setup will be populated\nbased on the ThoughtSpot cluster type."
       },
       "AWSAssumeRoleSetup": {
         "type": "object",
@@ -21539,36 +21626,6 @@
           }
         },
         "description": "Setup information for GCP clusters using STS AssumeRoleWithWebIdentity.\nThoughtSpot will use its GCP service account to obtain OIDC tokens for AWS access."
-      },
-      "WebhookPagination": {
-        "type": "object",
-        "required": [
-          "record_offset",
-          "record_size",
-          "total_count",
-          "has_more"
-        ],
-        "properties": {
-          "record_offset": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The starting record number from where the records are included."
-          },
-          "record_size": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The number of records included in the response."
-          },
-          "total_count": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Total number of webhook configurations available."
-          },
-          "has_more": {
-            "type": "boolean",
-            "description": "Indicates whether more records are available beyond the current response."
-          }
-        }
       },
       "GenericInfo": {
         "type": "object",
