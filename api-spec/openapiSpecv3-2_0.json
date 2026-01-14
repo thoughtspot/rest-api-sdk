@@ -21476,8 +21476,8 @@
             "description": "ThoughtSpot's AWS Account ID. You must include this in your IAM role's\ntrust policy to allow ThoughtSpot to assume your role."
           },
           "trust_policy_template": {
-            "type": "string",
-            "description": "Sample IAM trust policy JSON that you should attach to your IAM role.\nReplace the placeholder values with your actual External ID."
+            "type": "object",
+            "description": "Sample IAM trust policy JSON object that you should attach to your IAM role.\nThe policy includes ThoughtSpot's AWS Account ID and your External ID.\nStructure: { \"Version\": \"2012-10-17\", \"Statement\": [{ \"Effect\": \"Allow\", \"Principal\": { \"AWS\": \"...\" }, \"Action\": \"sts:AssumeRole\", \"Condition\": { \"StringEquals\": { \"sts:ExternalId\": \"...\" } } }] }"
           },
           "setup_instructions": {
             "type": "array",
@@ -21507,8 +21507,8 @@
             "description": "The OIDC identity provider URL. For GCP, this is always 'accounts.google.com'.\nYou must configure this as an Identity Provider in AWS IAM."
           },
           "trust_policy_template": {
-            "type": "string",
-            "description": "Sample IAM trust policy JSON for Web Identity Federation.\nThis policy allows ThoughtSpot's GCP service account to assume your AWS role."
+            "type": "object",
+            "description": "Sample IAM trust policy JSON object for Web Identity Federation.\nThis policy allows ThoughtSpot's GCP service account to assume your AWS role.\nStructure: { \"Version\": \"2012-10-17\", \"Statement\": [{ \"Effect\": \"Allow\", \"Principal\": { \"Federated\": \"arn:aws:iam::<YOUR_ACCOUNT>:oidc-provider/accounts.google.com\" }, \"Action\": \"sts:AssumeRoleWithWebIdentity\", \"Condition\": { \"StringEquals\": { \"accounts.google.com:sub\": \"...\" } } }] }"
           },
           "setup_instructions": {
             "type": "array",
