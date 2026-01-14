@@ -1,0 +1,82 @@
+name: Add Version to FilterByRole
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version number to add (e.g., 10.16.0.cl)'
+        required: true
+        type: string
+      email:
+        description: "Email ID of the tse-developer user account"
+        type: string
+        required: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  add-version:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          ref: release
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Validate version format
+        run: |
+          VERSION="${{ github.event.inputs.version }}"
+          if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.cl$ ]]; then
+            echo "Error: Version must be in format X.Y.Z.cl (e.g., 10.16.0.cl)"
+            exit 1
+          fi
+          echo "Version format validated: $VERSION"
+
+      - name: Check if version already exists
+        run: |
+          VERSION="${{ github.event.inputs.version }}"
+          if grep -q "\"$VERSION\"" api-playground/APIMATIC-BUILD.json; then
+            echo "Error: Version $VERSION already exists in filterByRole"
+            exit 1
+          fi
+          echo "Version $VERSION not found, proceeding to add..."
+
+      - name: Add version to filterByRole
+        run: |
+          VERSION="${{ github.event.inputs.version }}"
+          # Use sed to append the version before the closing bracket
+          sed -i 's/\("filterByRole": \[.*\)\]/\1, "'"$VERSION"'"]/' api-playground/APIMATIC-BUILD.json
+
+      - name: Create branch and commit
+        run: |
+          VERSION="${{ github.event.inputs.version }}"
+          BRANCH_NAME="$VERSION"
+          
+          git config user.name "tse-developer"
+          git config user.email "${{ github.event.inputs.email }}"
+          
+          git checkout -b "$BRANCH_NAME"
+          git add api-playground/APIMATIC-BUILD.json
+          git commit -m "Add version $VERSION to filterByRole"
+          git push origin "$BRANCH_NAME"
+
+      - name: Create Pull Request
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION="${{ github.event.inputs.version }}"
+          BRANCH_NAME="$VERSION"
+          gh pr create \
+            --title "Add version $VERSION to filterByRole" \
+            --body "## Summary: Added version $VERSION to filterByRole" \
+            --base release \
+            --head "$BRANCH_NAME"
