@@ -1296,7 +1296,7 @@
                     }
                   },
                   "parameter_values": {
-                    "description": "Parameter values.",
+                    "description": "Allows developers to assign parameter values for existing parameters to a user at login. Note: Using parameter values for row level security use cases will ultimately be deprecated. Developers can still pass data security values via the Custom Access token via the variable_values field and create RLS rules based on custom variables. Please refer to the [ABAC via RLS documentation](https://developers.thoughtspot.com/docs/abac-user-parameters) for more details.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/ParameterValues"
@@ -1310,7 +1310,7 @@
                     }
                   },
                   "objects": {
-                    "description": "Objects on which the filter rules and parameters values should be applied to",
+                    "description": "Objects on which the parameter and variable values should be applied to",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/TokenAccessScopeObject"
@@ -5908,7 +5908,8 @@
                         "PREVIEW_DOCUMENT_SEARCH",
                         "CAN_SETUP_VERSION_CONTROL",
                         "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "CAN_DOWNLOAD_DETAILED_DATA",
+                        "CAN_USE_SPOTTER"
                       ]
                     }
                   },
@@ -6269,7 +6270,8 @@
                         "CAN_SETUP_VERSION_CONTROL",
                         "CAN_MANAGE_WEBHOOKS",
                         "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "CAN_DOWNLOAD_DETAILED_DATA",
+                        "CAN_USE_SPOTTER"
                       ]
                     }
                   },
@@ -6478,7 +6480,8 @@
                         "PREVIEW_DOCUMENT_SEARCH",
                         "CAN_SETUP_VERSION_CONTROL",
                         "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "CAN_DOWNLOAD_DETAILED_DATA",
+                        "CAN_USE_SPOTTER"
                       ]
                     }
                   },
@@ -9131,7 +9134,8 @@
                         "PREVIEW_THOUGHTSPOT_SAGE",
                         "CAN_MANAGE_WEBHOOKS",
                         "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "CAN_DOWNLOAD_DETAILED_DATA",
+                        "CAN_USE_SPOTTER"
                       ]
                     }
                   },
@@ -9362,7 +9366,8 @@
                         "CAN_SETUP_VERSION_CONTROL",
                         "CAN_MANAGE_WEBHOOKS",
                         "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "CAN_DOWNLOAD_DETAILED_DATA",
+                        "CAN_USE_SPOTTER"
                       ]
                     }
                   },
@@ -9525,7 +9530,8 @@
                         "PREVIEW_THOUGHTSPOT_SAGE",
                         "CAN_MANAGE_WEBHOOKS",
                         "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "CAN_DOWNLOAD_DETAILED_DATA",
+                        "CAN_USE_SPOTTER"
                       ]
                     }
                   }
@@ -14691,7 +14697,8 @@
                         "CAN_SETUP_VERSION_CONTROL",
                         "CAN_MANAGE_WEBHOOKS",
                         "CAN_DOWNLOAD_VISUALS",
-                        "CAN_DOWNLOAD_DETAILED_DATA"
+                        "CAN_DOWNLOAD_DETAILED_DATA",
+                        "CAN_USE_SPOTTER"
                       ]
                     }
                   },
@@ -20151,7 +20158,8 @@
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_MANAGE_WEBHOOKS",
                 "CAN_DOWNLOAD_VISUALS",
-                "CAN_DOWNLOAD_DETAILED_DATA"
+                "CAN_DOWNLOAD_DETAILED_DATA",
+                "CAN_USE_SPOTTER"
               ]
             },
             "description": "Privileges granted to the role."
@@ -21210,6 +21218,11 @@
             "$ref": "#/components/schemas/StorageDestination",
             "description": "Storage destination configuration for webhook payload delivery.",
             "nullable": true
+          },
+          "storage_setup_info": {
+            "$ref": "#/components/schemas/StorageSetupInfo",
+            "description": "Setup information for customer-managed storage configuration.\nThis field is populated when storage_destination is configured with AWS_S3.\nIt provides ThoughtSpot's identity information and IAM policy configuration\nrequired for customers to set up cross-account access to their S3 buckets. <br/>  <span class=\"since-beta-tag\">Version: 26.3.0.cl or later</span>",
+            "nullable": true
           }
         }
       },
@@ -21425,6 +21438,88 @@
           }
         },
         "description": "AWS S3 storage configuration details."
+      },
+      "StorageSetupInfo": {
+        "type": "object",
+        "properties": {
+          "cluster_type": {
+            "type": "string",
+            "enum": [
+              "AWS",
+              "GCP"
+            ],
+            "description": "The type of ThoughtSpot cluster deployment.\nDetermines which authentication method will be used for S3 access.",
+            "nullable": true
+          },
+          "aws_assume_role_setup": {
+            "$ref": "#/components/schemas/AWSAssumeRoleSetup",
+            "description": "Setup information for AWS clusters using STS AssumeRole.\nOnly populated when cluster_type is AWS.",
+            "nullable": true
+          },
+          "gcp_web_identity_setup": {
+            "$ref": "#/components/schemas/GCPWebIdentitySetup",
+            "description": "Setup information for GCP clusters using STS AssumeRoleWithWebIdentity.\nOnly populated when cluster_type is GCP.",
+            "nullable": true
+          }
+        },
+        "description": "Setup information for customer-managed storage configuration.\nThis is populated when storage_destination is configured with AWS_S3.\nIt provides ThoughtSpot's identity information and IAM policy configuration\nrequired for customers to set up cross-account access to their S3 buckets."
+      },
+      "AWSAssumeRoleSetup": {
+        "type": "object",
+        "required": [
+          "thoughtspot_aws_account_id",
+          "trust_policy_template"
+        ],
+        "properties": {
+          "thoughtspot_aws_account_id": {
+            "type": "string",
+            "description": "ThoughtSpot's AWS Account ID. You must include this in your IAM role's\ntrust policy to allow ThoughtSpot to assume your role."
+          },
+          "trust_policy_template": {
+            "type": "string",
+            "description": "Sample IAM trust policy JSON that you should attach to your IAM role.\nReplace the placeholder values with your actual External ID."
+          },
+          "setup_instructions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Step-by-step instructions to configure your AWS IAM role.",
+            "nullable": true
+          }
+        },
+        "description": "Setup information for AWS clusters using STS AssumeRole.\nThoughtSpot will use its AWS IAM role to assume your role in your AWS account."
+      },
+      "GCPWebIdentitySetup": {
+        "type": "object",
+        "required": [
+          "thoughtspot_gcp_service_account_id",
+          "oidc_provider",
+          "trust_policy_template"
+        ],
+        "properties": {
+          "thoughtspot_gcp_service_account_id": {
+            "type": "string",
+            "description": "ThoughtSpot's GCP service account unique ID (numeric).\nThis is the 'sub' claim in OIDC tokens and must be included in your\nIAM role's trust policy condition."
+          },
+          "oidc_provider": {
+            "type": "string",
+            "description": "The OIDC identity provider URL. For GCP, this is always 'accounts.google.com'.\nYou must configure this as an Identity Provider in AWS IAM."
+          },
+          "trust_policy_template": {
+            "type": "string",
+            "description": "Sample IAM trust policy JSON for Web Identity Federation.\nThis policy allows ThoughtSpot's GCP service account to assume your AWS role."
+          },
+          "setup_instructions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Step-by-step instructions to configure AWS for GCP Web Identity Federation.",
+            "nullable": true
+          }
+        },
+        "description": "Setup information for GCP clusters using STS AssumeRoleWithWebIdentity.\nThoughtSpot will use its GCP service account to obtain OIDC tokens for AWS access."
       },
       "WebhookPagination": {
         "type": "object",
@@ -22599,7 +22694,8 @@
                 "PREVIEW_DOCUMENT_SEARCH",
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_DOWNLOAD_VISUALS",
-                "CAN_DOWNLOAD_DETAILED_DATA"
+                "CAN_DOWNLOAD_DETAILED_DATA",
+                "CAN_USE_SPOTTER"
               ]
             },
             "description": "Privileges that will be assigned to the group.",
@@ -23604,7 +23700,8 @@
                 "PREVIEW_THOUGHTSPOT_SAGE",
                 "CAN_MANAGE_WEBHOOKS",
                 "CAN_DOWNLOAD_VISUALS",
-                "CAN_DOWNLOAD_DETAILED_DATA"
+                "CAN_DOWNLOAD_DETAILED_DATA",
+                "CAN_USE_SPOTTER"
               ]
             },
             "description": "Privileges granted to the role."
