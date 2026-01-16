@@ -16498,7 +16498,7 @@
                     ]
                   },
                   "storage_destination": {
-                    "description": "Configuration for storage destination.\nExample: {\"storage_type\": \"AWS_S3\", \"storage_config\": {\"aws_s3_config\": {\"bucket_name\": \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\", \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"}}} <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>",
+                    "description": "Configuration for storage destination.\nExample: {\"storage_type\": \"AWS_S3\", \"storage_config\": {\"aws_s3_config\": {\"bucket_name\": \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\", \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"}}} <br/>  <span class=\"since-beta-tag\">Version: 26.3.0.cl or later</span>",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/StorageDestinationInput"
@@ -16844,17 +16844,17 @@
         ],
         "responses": {
           "200": {
-            "description": "Fetch current session user detail successful.",
+            "description": "Storage setup information retrieved successfully",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/StorageSetupInfo"
+                  "type": "object"
                 }
               }
             }
           },
           "400": {
-            "description": "Invalid request.",
+            "description": "Bad Request - Webhook does not have storage destination configured",
             "content": {
               "application/json": {
                 "schema": {
@@ -17150,7 +17150,7 @@
                     ]
                   },
                   "storage_destination": {
-                    "description": "Configuration for storage destination.\nExample: {\"storage_type\": \"AWS_S3\", \"storage_config\": {\"aws_s3_config\": {\"bucket_name\": \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\", \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"}}} <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>",
+                    "description": "Configuration for storage destination.\nExample: {\"storage_type\": \"AWS_S3\", \"storage_config\": {\"aws_s3_config\": {\"bucket_name\": \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\", \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"}}} <br/>  <span class=\"since-beta-tag\">Version: 26.3.0.cl or later</span>",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/StorageDestinationInput"
@@ -21545,8 +21545,12 @@
           }
         }
       },
-      "StorageSetupInfo": {
+      "AWSStorageSetupInfo": {
         "type": "object",
+        "required": [
+          "cluster_type",
+          "aws_assume_role_setup"
+        ],
         "properties": {
           "cluster_type": {
             "type": "string",
@@ -21554,27 +21558,21 @@
               "AWS",
               "GCP"
             ],
-            "description": "The type of ThoughtSpot cluster deployment.\nDetermines which authentication method is used for S3 access.\nExample: \"AWS\" or \"GCP\"",
-            "nullable": true
+            "description": "The type of ThoughtSpot cluster deployment.\nAlways 'AWS' for this type."
           },
           "aws_assume_role_setup": {
             "$ref": "#/components/schemas/AWSAssumeRoleSetup",
-            "description": "Setup info when ThoughtSpot cluster is on AWS.\nUses STS AssumeRole for cross-account S3 access.\nOnly populated when cluster_type is AWS.",
-            "nullable": true
-          },
-          "gcp_web_identity_setup": {
-            "$ref": "#/components/schemas/GCPWebIdentitySetup",
-            "description": "Setup info when ThoughtSpot cluster is on GCP.\nUses STS AssumeRoleWithWebIdentity for cross-account S3 access.\nOnly populated when cluster_type is GCP.",
-            "nullable": true
+            "description": "Setup info for AWS clusters using STS AssumeRole."
           }
         },
-        "description": "Setup information for customer-managed storage configuration.\nProvides ThoughtSpot's identity information and IAM policy configuration\nrequired for customers to set up cross-account access to their S3 buckets.\nOnly one of aws_assume_role_setup or gcp_web_identity_setup will be populated\nbased on the ThoughtSpot cluster type.\nExample response for AWS cluster:\n{\n  \"cluster_type\": \"AWS\",\n  \"aws_assume_role_setup\": {\n    \"thoughtspot_aws_account_id\": \"123456789012\",\n    \"trust_policy_template\": { \"Version\": \"2012-10-17\", \"Statement\": [...] },\n    \"setup_instructions\": [\"1. Create an IAM role...\", \"2. Add trust policy...\"]\n  },\n  \"gcp_web_identity_setup\": null\n}\nExample response for GCP cluster:\n{\n  \"cluster_type\": \"GCP\",\n  \"aws_assume_role_setup\": null,\n  \"gcp_web_identity_setup\": {\n    \"thoughtspot_gcp_service_account_id\": \"115663769112811637952\",\n    \"oidc_provider\": \"accounts.google.com\",\n    \"trust_policy_template\": { \"Version\": \"2012-10-17\", \"Statement\": [...] },\n    \"setup_instructions\": [\"1. Add accounts.google.com as Identity Provider...\", \"2. Create IAM role...\"]\n  }\n}"
+        "description": "Storage setup information when ThoughtSpot cluster is deployed on AWS.\nUses STS AssumeRole for cross-account S3 access.\nExample response:\n{\n  \"cluster_type\": \"AWS\",\n  \"aws_assume_role_setup\": {\n    \"thoughtspot_aws_account_id\": \"123456789012\",\n    \"trust_policy_template\": { \"Version\": \"2012-10-17\", \"Statement\": [...] },\n    \"setup_instructions\": [\"1. Create an IAM role...\", \"2. Add trust policy...\"]\n  }\n}"
       },
       "AWSAssumeRoleSetup": {
         "type": "object",
         "required": [
           "thoughtspot_aws_account_id",
-          "trust_policy_template"
+          "trust_policy_template",
+          "setup_instructions"
         ],
         "properties": {
           "thoughtspot_aws_account_id": {
@@ -21590,18 +21588,40 @@
             "items": {
               "type": "string"
             },
-            "description": "Step-by-step instructions to configure your AWS IAM role.\nExample: [\"1. Create an IAM role in your AWS account\", \"2. Add the trust policy with ThoughtSpot's AWS Account ID\"]",
-            "nullable": true
+            "description": "Step-by-step instructions to configure your AWS IAM role.\nExample: [\"1. Create an IAM role in your AWS account\", \"2. Add the trust policy with ThoughtSpot's AWS Account ID\"]"
           }
         },
         "description": "Setup information for AWS clusters using STS AssumeRole.\nThoughtSpot will use its AWS IAM role to assume your role in your AWS account.\nExample:\n{\n  \"thoughtspot_aws_account_id\": \"123456789012\",\n  \"trust_policy_template\": {\n    \"Version\": \"2012-10-17\",\n    \"Statement\": [{\n      \"Effect\": \"Allow\",\n      \"Principal\": { \"AWS\": \"arn:aws:iam::123456789012:root\" },\n      \"Action\": \"sts:AssumeRole\",\n      \"Condition\": { \"StringEquals\": { \"sts:ExternalId\": \"your-external-id\" } }\n    }]\n  },\n  \"setup_instructions\": [\n    \"1. Create an IAM role in your AWS account\",\n    \"2. Copy the trust policy template and attach it to your role\",\n    \"3. Attach S3 permissions (s3:PutObject, s3:PutObjectAcl) to the role\",\n    \"4. Use the role ARN in your webhook storage configuration\"\n  ]\n}"
+      },
+      "GCPStorageSetupInfo": {
+        "type": "object",
+        "required": [
+          "cluster_type",
+          "gcp_web_identity_setup"
+        ],
+        "properties": {
+          "cluster_type": {
+            "type": "string",
+            "enum": [
+              "AWS",
+              "GCP"
+            ],
+            "description": "The type of ThoughtSpot cluster deployment.\nAlways 'GCP' for this type."
+          },
+          "gcp_web_identity_setup": {
+            "$ref": "#/components/schemas/GCPWebIdentitySetup",
+            "description": "Setup info for GCP clusters using STS AssumeRoleWithWebIdentity."
+          }
+        },
+        "description": "Storage setup information when ThoughtSpot cluster is deployed on GCP.\nUses STS AssumeRoleWithWebIdentity for cross-account S3 access.\nExample response:\n{\n  \"cluster_type\": \"GCP\",\n  \"gcp_web_identity_setup\": {\n    \"thoughtspot_gcp_service_account_id\": \"115663769112811637952\",\n    \"oidc_provider\": \"accounts.google.com\",\n    \"trust_policy_template\": { \"Version\": \"2012-10-17\", \"Statement\": [...] },\n    \"setup_instructions\": [\"1. Add accounts.google.com as Identity Provider...\", \"2. Create IAM role...\"]\n  }\n}"
       },
       "GCPWebIdentitySetup": {
         "type": "object",
         "required": [
           "thoughtspot_gcp_service_account_id",
           "oidc_provider",
-          "trust_policy_template"
+          "trust_policy_template",
+          "setup_instructions"
         ],
         "properties": {
           "thoughtspot_gcp_service_account_id": {
@@ -21621,8 +21641,7 @@
             "items": {
               "type": "string"
             },
-            "description": "Step-by-step instructions to configure AWS for GCP Web Identity Federation.\nExample: [\"1. Add accounts.google.com as an Identity Provider in AWS IAM\", \"2. Create an IAM role with Web Identity Federation trust\"]",
-            "nullable": true
+            "description": "Step-by-step instructions to configure AWS for GCP Web Identity Federation.\nExample: [\"1. Add accounts.google.com as an Identity Provider in AWS IAM\", \"2. Create an IAM role with Web Identity Federation trust\"]"
           }
         },
         "description": "Setup information for GCP clusters using STS AssumeRoleWithWebIdentity.\nThoughtSpot will use its GCP service account to obtain OIDC tokens for AWS access.\nExample:\n{\n  \"thoughtspot_gcp_service_account_id\": \"115663769112811637952\",\n  \"oidc_provider\": \"accounts.google.com\",\n  \"trust_policy_template\": {\n    \"Version\": \"2012-10-17\",\n    \"Statement\": [{\n      \"Effect\": \"Allow\",\n      \"Principal\": { \"Federated\": \"arn:aws:iam::YOUR_AWS_ACCOUNT_ID:oidc-provider/accounts.google.com\" },\n      \"Action\": \"sts:AssumeRoleWithWebIdentity\",\n      \"Condition\": { \"StringEquals\": { \"accounts.google.com:sub\": \"115663769112811637952\" } }\n    }]\n  },\n  \"setup_instructions\": [\n    \"1. Add accounts.google.com as an Identity Provider in AWS IAM\",\n    \"2. Create an IAM role with Web Identity Federation trust\",\n    \"3. Configure the trust policy with ThoughtSpot's GCP service account ID\",\n    \"4. Attach S3 permissions (s3:PutObject, s3:PutObjectAcl) to the role\",\n    \"5. Use the role ARN in your webhook storage configuration\"\n  ]\n}"
