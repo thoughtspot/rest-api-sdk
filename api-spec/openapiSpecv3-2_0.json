@@ -16825,8 +16825,8 @@
     },
     "/api/rest/2.0/webhooks/{webhook_identifier}/storage-config": {
       "get": {
-        "operationId": "getWebhookStorageSetup",
-        "description": "<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>",
+        "operationId": "getWebhookStorageConfig",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\nRetrieves the storage setup configuration for a webhook. Returns ThoughtSpot's identity information and IAM policy templates required for customers to set up cross-account access to their S3 buckets. The response varies based on the ThoughtSpot cluster deployment type (AWS or GCP).\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Webhooks",
           "26.4.0.cl"
@@ -16849,6 +16849,76 @@
               "application/json": {
                 "schema": {
                   "type": "object"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Storage setup info for AWS cluster deployment",
+                    "value": {
+                      "cluster_type": "AWS",
+                      "storage_type": "AWS_S3",
+                      "aws_config": {
+                        "thoughtspot_aws_account_id": "123456789012",
+                        "trust_policy_template": {
+                          "Version": "2012-10-17",
+                          "Statement": [
+                            {
+                              "Effect": "Allow",
+                              "Principal": {
+                                "AWS": "arn:aws:iam::123456789012:root"
+                              },
+                              "Action": "sts:AssumeRole",
+                              "Condition": {
+                                "StringEquals": {
+                                  "sts:ExternalId": "ts-webhook-a1b2c3d4-7890"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "setup_instructions": [
+                          "1. Create an IAM role in your AWS account",
+                          "2. Copy the trust policy template and attach it to your role",
+                          "3. Attach S3 permissions (s3:PutObject, s3:PutObjectAcl) to the role",
+                          "4. Use the role ARN in your webhook storage configuration"
+                        ]
+                      }
+                    }
+                  },
+                  "example_2": {
+                    "description": "Storage setup info for GCP cluster deployment",
+                    "value": {
+                      "cluster_type": "GCP",
+                      "storage_type": "AWS_S3",
+                      "gcp_config": {
+                        "thoughtspot_gcp_service_account_id": "115663769112811637952",
+                        "oidc_provider": "accounts.google.com",
+                        "trust_policy_template": {
+                          "Version": "2012-10-17",
+                          "Statement": [
+                            {
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Federated": "arn:aws:iam::YOUR_AWS_ACCOUNT_ID:oidc-provider/accounts.google.com"
+                              },
+                              "Action": "sts:AssumeRoleWithWebIdentity",
+                              "Condition": {
+                                "StringEquals": {
+                                  "accounts.google.com:sub": "115663769112811637952"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "setup_instructions": [
+                          "1. Add accounts.google.com as an Identity Provider in AWS IAM",
+                          "2. Create an IAM role with Web Identity Federation trust",
+                          "3. Configure the trust policy with ThoughtSpot's GCP service account ID",
+                          "4. Attach S3 permissions (s3:PutObject, s3:PutObjectAcl) to the role",
+                          "5. Use the role ARN in your webhook storage configuration"
+                        ]
+                      }
+                    }
+                  }
                 }
               }
             }
