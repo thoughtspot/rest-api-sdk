@@ -22,6 +22,14 @@
       "description": "Roles for version 10.4.0.cl"
     },
     {
+      "name": "26.4.0.cl",
+      "id": "26.4.0.cl",
+      "tags": [
+        "26.4.0.cl"
+      ],
+      "description": "Roles for version 26.4.0.cl"
+    },
+    {
       "name": "10.15.0.cl",
       "id": "10.15.0.cl",
       "tags": [
@@ -345,6 +353,155 @@
         }
       }
     },
+    "/api/rest/2.0/ai/agent/conversation/{conversation_id}/delete": {
+      "post": {
+        "operationId": "deleteConversation",
+        "description": "<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>",
+        "tags": [
+          "AI",
+          "26.4.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "conversation_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the conversation to delete."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteConversationResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteConversationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/agent/conversations": {
+      "get": {
+        "operationId": "getConversationHistory",
+        "description": "<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>",
+        "tags": [
+          "AI",
+          "26.4.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "Maximum number of conversations to return (default: 20).",
+            "default": 20
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "Number of conversations to skip for pagination (default: 0).",
+            "default": 0
+          },
+          {
+            "in": "query",
+            "name": "skip_empty",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "Skip empty conversations without messages (default: true).",
+            "default": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationHistoryResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationHistoryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/ai/data-source-suggestions": {
       "post": {
         "operationId": "getDataSourceSuggestions",
@@ -588,6 +745,69 @@
         }
       }
     },
+    "/api/rest/2.0/ai/agent/conversation/{conversation_id}": {
+      "get": {
+        "operationId": "loadConversation",
+        "description": "<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>",
+        "tags": [
+          "AI",
+          "26.4.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "conversation_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the conversation to load."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/ai/analytical-questions": {
       "post": {
         "operationId": "queryGetDecomposedQuery",
@@ -672,6 +892,88 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/eureka_DecomposeQueryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/agent/conversation/{conversation_id}/rename": {
+      "post": {
+        "operationId": "renameConversation",
+        "description": "<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>",
+        "tags": [
+          "AI",
+          "26.4.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "new_title": {
+                    "description": "New title for the conversation.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "new_title"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "conversation_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the conversation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RenameConversationResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RenameConversationResponse"
                 }
               }
             }
@@ -20480,6 +20782,94 @@
         },
         "description": "MetadataType InputType used in Custom Action API's"
       },
+      "ConversationHistoryResponse": {
+        "type": "object",
+        "required": [
+          "conversations"
+        ],
+        "properties": {
+          "conversations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConversationRecord"
+            },
+            "description": "List of conversations."
+          }
+        }
+      },
+      "ConversationRecord": {
+        "type": "object",
+        "required": [
+          "conversation_id",
+          "created_at",
+          "updated_at"
+        ],
+        "properties": {
+          "conversation_id": {
+            "type": "string",
+            "description": "Unique identifier of the conversation."
+          },
+          "title": {
+            "type": "string",
+            "description": "Title of the conversation.",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string",
+            "description": "Timestamp when conversation was created."
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "Timestamp when conversation was last updated."
+          },
+          "data_source_identifier": {
+            "type": "string",
+            "description": "Data source identifier associated with this conversation.",
+            "nullable": true
+          },
+          "data_source_name": {
+            "type": "string",
+            "description": "Data source name.",
+            "nullable": true
+          },
+          "conversation_settings": {
+            "$ref": "#/components/schemas/ConversationSettings",
+            "description": "Conversation settings.",
+            "nullable": true
+          },
+          "active_thread_length": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of messages in active thread.",
+            "nullable": true
+          }
+        }
+      },
+      "ConversationSettings": {
+        "type": "object",
+        "properties": {
+          "enable_contextual_change_analysis": {
+            "type": "boolean",
+            "description": "Enable contextual change analysis.",
+            "nullable": true
+          },
+          "enable_natural_language_answer_generation": {
+            "type": "boolean",
+            "description": "Enable natural language answer generation.",
+            "nullable": true
+          },
+          "enable_reasoning": {
+            "type": "boolean",
+            "description": "Enable reasoning.",
+            "nullable": true
+          },
+          "save_chat_enabled": {
+            "type": "boolean",
+            "description": "Enable saving chat.",
+            "nullable": true
+          }
+        }
+      },
       "MetadataContext": {
         "type": "object",
         "properties": {
@@ -24732,6 +25122,12 @@
             "default": false,
             "description": "Enable reasoning.",
             "nullable": true
+          },
+          "save_chat_enabled": {
+            "type": "boolean",
+            "default": false,
+            "description": "Enable saving chat.",
+            "nullable": true
           }
         }
       },
@@ -24759,6 +25155,30 @@
           "message": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "RenameConversationResponse": {
+        "type": "object",
+        "required": [
+          "success"
+        ],
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Success status."
+          }
+        }
+      },
+      "DeleteConversationResponse": {
+        "type": "object",
+        "required": [
+          "success"
+        ],
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Success status."
           }
         }
       },
