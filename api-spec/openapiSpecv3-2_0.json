@@ -12185,7 +12185,7 @@
                 "type": "object",
                 "properties": {
                   "metadata_type": {
-                    "description": "Type of metadata. Required if identifier in metadata_identifies is a name.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN\n5. Connection",
+                    "description": "Type of metadata. Required if identifier in metadata_identifies is a name.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN",
                     "type": "string",
                     "enum": [
                       "LIVEBOARD",
@@ -21548,9 +21548,7 @@
           },
           "type": {
             "type": "string",
-            "enum": [
-              "LOGICAL_TABLE"
-            ],
+            "enum": [],
             "nullable": true
           }
         },
