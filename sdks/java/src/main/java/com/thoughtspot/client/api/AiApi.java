@@ -186,7 +186,7 @@ public class AiApi {
     }
 
     /**
-     * Version: 10.13.0.cl or later
+     * Version: 26.2.0.cl or later
      *
      * @param createAgentConversationRequest (required)
      * @return AgentConversation
@@ -210,7 +210,7 @@ public class AiApi {
     }
 
     /**
-     * Version: 10.13.0.cl or later
+     * Version: 26.2.0.cl or later
      *
      * @param createAgentConversationRequest (required)
      * @return ApiResponse&lt;AgentConversation&gt;
@@ -235,7 +235,7 @@ public class AiApi {
     }
 
     /**
-     * (asynchronously) Version: 10.13.0.cl or later
+     * (asynchronously) Version: 26.2.0.cl or later
      *
      * @param createAgentConversationRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -1378,7 +1378,7 @@ public class AiApi {
     }
 
     /**
-     * Version: 10.15.0.cl or later This API allows users to initiate or continue an agent (Spotter)
+     * Version: 26.2.0.cl or later This API allows users to initiate or continue an agent (Spotter)
      * conversation by submitting one or more natural language messages. To use this API, the user
      * must have access to the relevant conversational session (via conversation_identifier) and
      * submit at least one message. #### Usage guidelines To initiate or continue a conversation,
@@ -1417,7 +1417,7 @@ public class AiApi {
     }
 
     /**
-     * Version: 10.15.0.cl or later This API allows users to initiate or continue an agent (Spotter)
+     * Version: 26.2.0.cl or later This API allows users to initiate or continue an agent (Spotter)
      * conversation by submitting one or more natural language messages. To use this API, the user
      * must have access to the relevant conversational session (via conversation_identifier) and
      * submit at least one message. #### Usage guidelines To initiate or continue a conversation,
@@ -1458,7 +1458,7 @@ public class AiApi {
     }
 
     /**
-     * (asynchronously) Version: 10.15.0.cl or later This API allows users to initiate or continue
+     * (asynchronously) Version: 26.2.0.cl or later This API allows users to initiate or continue
      * an agent (Spotter) conversation by submitting one or more natural language messages. To use
      * this API, the user must have access to the relevant conversational session (via
      * conversation_identifier) and submit at least one message. #### Usage guidelines To initiate
@@ -1591,7 +1591,7 @@ public class AiApi {
     }
 
     /**
-     * Version: 10.13.0.cl or later This API allows users to initiate or continue an agent (Spotter)
+     * Version: 26.2.0.cl or later This API allows users to initiate or continue an agent (Spotter)
      * conversation by submitting one or more natural language messages. To use this API, the user
      * must have access to the relevant conversational session (via conversation_identifier) and
      * submit at least one message. #### Usage guidelines To initiate or continue a conversation,
@@ -1633,7 +1633,7 @@ public class AiApi {
     }
 
     /**
-     * Version: 10.13.0.cl or later This API allows users to initiate or continue an agent (Spotter)
+     * Version: 26.2.0.cl or later This API allows users to initiate or continue an agent (Spotter)
      * conversation by submitting one or more natural language messages. To use this API, the user
      * must have access to the relevant conversational session (via conversation_identifier) and
      * submit at least one message. #### Usage guidelines To initiate or continue a conversation,

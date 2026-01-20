@@ -19,7 +19,6 @@ docs/ActivateUserRequest.md
 docs/AgentConversation.md
 docs/AiApi.md
 docs/AnswerContent.md
-docs/AnswerContextInput.md
 docs/AnswerDataResponse.md
 docs/AssignChangeAuthorRequest.md
 docs/AssignTagRequest.md
@@ -182,7 +181,6 @@ docs/JWTMetadataObject.md
 docs/JWTParameter.md
 docs/JWTUserOptions.md
 docs/JWTUserOptionsFull.md
-docs/LBContextInput.md
 docs/LiveboardContent.md
 docs/LiveboardDataResponse.md
 docs/LiveboardOptions.md
@@ -468,7 +466,6 @@ src/main/java/com/thoughtspot/client/model/ActionDetailsInputCreate.java
 src/main/java/com/thoughtspot/client/model/ActivateUserRequest.java
 src/main/java/com/thoughtspot/client/model/AgentConversation.java
 src/main/java/com/thoughtspot/client/model/AnswerContent.java
-src/main/java/com/thoughtspot/client/model/AnswerContextInput.java
 src/main/java/com/thoughtspot/client/model/AnswerDataResponse.java
 src/main/java/com/thoughtspot/client/model/AssignChangeAuthorRequest.java
 src/main/java/com/thoughtspot/client/model/AssignTagRequest.java
@@ -622,7 +619,6 @@ src/main/java/com/thoughtspot/client/model/JWTMetadataObject.java
 src/main/java/com/thoughtspot/client/model/JWTParameter.java
 src/main/java/com/thoughtspot/client/model/JWTUserOptions.java
 src/main/java/com/thoughtspot/client/model/JWTUserOptionsFull.java
-src/main/java/com/thoughtspot/client/model/LBContextInput.java
 src/main/java/com/thoughtspot/client/model/LiveboardContent.java
 src/main/java/com/thoughtspot/client/model/LiveboardDataResponse.java
 src/main/java/com/thoughtspot/client/model/LiveboardOptions.java
@@ -861,7 +857,6 @@ src/test/java/com/thoughtspot/client/model/ActionDetailsTest.java
 src/test/java/com/thoughtspot/client/model/ActivateUserRequestTest.java
 src/test/java/com/thoughtspot/client/model/AgentConversationTest.java
 src/test/java/com/thoughtspot/client/model/AnswerContentTest.java
-src/test/java/com/thoughtspot/client/model/AnswerContextInputTest.java
 src/test/java/com/thoughtspot/client/model/AnswerDataResponseTest.java
 src/test/java/com/thoughtspot/client/model/AssignChangeAuthorRequestTest.java
 src/test/java/com/thoughtspot/client/model/AssignTagRequestTest.java
@@ -1015,7 +1010,6 @@ src/test/java/com/thoughtspot/client/model/JWTMetadataObjectTest.java
 src/test/java/com/thoughtspot/client/model/JWTParameterTest.java
 src/test/java/com/thoughtspot/client/model/JWTUserOptionsFullTest.java
 src/test/java/com/thoughtspot/client/model/JWTUserOptionsTest.java
-src/test/java/com/thoughtspot/client/model/LBContextInputTest.java
 src/test/java/com/thoughtspot/client/model/LiveboardContentTest.java
 src/test/java/com/thoughtspot/client/model/LiveboardDataResponseTest.java
 src/test/java/com/thoughtspot/client/model/LiveboardOptionsInputTest.java
