@@ -13,6 +13,8 @@ import { CreateConnectionResponse } from '../models/CreateConnectionResponse';
 import { DeleteConnectionRequest } from '../models/DeleteConnectionRequest';
 import { ErrorResponse } from '../models/ErrorResponse';
 import { FetchConnectionDiffStatusResponse } from '../models/FetchConnectionDiffStatusResponse';
+import { RevokeRefreshTokensRequest } from '../models/RevokeRefreshTokensRequest';
+import { RevokeRefreshTokensResponse } from '../models/RevokeRefreshTokensResponse';
 import { SearchConnectionRequest } from '../models/SearchConnectionRequest';
 import { SearchConnectionResponse } from '../models/SearchConnectionResponse';
 import { UpdateConnectionRequest } from '../models/UpdateConnectionRequest';
@@ -42,7 +44,8 @@ export class ConnectionsApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.20.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0")
       
 
 
@@ -92,7 +95,8 @@ export class ConnectionsApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.20.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0")
       
 
 
@@ -143,7 +147,8 @@ export class ConnectionsApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.20.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0")
       
 
 
@@ -183,7 +188,8 @@ export class ConnectionsApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.20.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0")
       
 
 
@@ -223,10 +229,70 @@ export class ConnectionsApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.20.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0")
       
 
 
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["bearerAuth"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     *   Version: 26.2.0.cl or later   Revokes OAuth refresh tokens for users who no longer require access to a data warehouse connection. When a token is revoked, the affected user\'s session for that connection is terminated, and they must re-authenticate to regain access.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DATAMANAGEMENT` (**Can manage data**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on the ThoughtSpot instance, users with `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege can also make API requests to revoke tokens for connection users.  #### Usage guidelines  You can specify different combinations of identifiers to control which refresh tokens are revoked.  - **connection_identifier**: Revokes refresh tokens for all users of the connection, except the connection author. - **connection_identifier** and **user_identifiers**: Revokes refresh tokens only for the users specified in the request. If the name or ID of the connection author is included in the request, their token will also be revoked. - **connection_identifier** and **configuration_identifiers**: Revokes refresh tokens for all users on the specified configurations, except the configuration author. - **connection_identifier**, **configuration_identifiers**, and **user_identifiers**: Revokes refresh tokens for the specified users on the specified configurations. - **connection_identifier** and **org_identifiers**: Revokes refresh tokens for the specified Orgs. Applicable only for published connections. - **connection_identifier**, **org_identifiers**, and **user_identifiers**: Revokes refresh tokens for the specified users in the specified Orgs. Applicable only for published connections.  **NOTE**: The `org_identifiers` parameter is only applicable for published connections. Using this parameter for unpublished connections will result in an error. Ensure that the connections are published before making the API request.      
+     * @param connectionIdentifier Unique ID or name of the connection whose refresh tokens need to be revoked. All the users associated with the connection will have their refresh tokens revoked except the author.
+     * @param revokeRefreshTokensRequest 
+     */
+    public async revokeRefreshTokens(connectionIdentifier: string, revokeRefreshTokensRequest: RevokeRefreshTokensRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'connectionIdentifier' is not null or undefined
+        if (connectionIdentifier === null || connectionIdentifier === undefined) {
+            throw new RequiredError("ConnectionsApi", "revokeRefreshTokens", "connectionIdentifier");
+        }
+
+
+        // verify required parameter 'revokeRefreshTokensRequest' is not null or undefined
+        if (revokeRefreshTokensRequest === null || revokeRefreshTokensRequest === undefined) {
+            throw new RequiredError("ConnectionsApi", "revokeRefreshTokens", "revokeRefreshTokensRequest");
+        }
+
+
+        // Path Params
+        const localVarPath = '/api/rest/2.0/connections/{connection_identifier}/revoke-refresh-tokens'
+            .replace('{' + 'connection_identifier' + '}', encodeURIComponent(String(connectionIdentifier)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0")
+      
+
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(revokeRefreshTokensRequest, "RevokeRefreshTokensRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
@@ -262,7 +328,8 @@ export class ConnectionsApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.20.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0")
       
 
 
@@ -312,7 +379,8 @@ export class ConnectionsApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.20.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0")
       
 
 
@@ -370,7 +438,8 @@ export class ConnectionsApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.20.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0")
       
 
 
@@ -673,6 +742,77 @@ export class ConnectionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "FetchConnectionDiffStatusResponse", ""
             ) as FetchConnectionDiffStatusResponse;
+            return body;
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to revokeRefreshTokens
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async revokeRefreshTokens(response: ResponseContext): Promise<RevokeRefreshTokensResponse > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: RevokeRefreshTokensResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RevokeRefreshTokensResponse", ""
+            ) as RevokeRefreshTokensResponse;
+            return body;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Invalid request.", body, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
+        }
+        if (isCodeInRange("404", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Object not found", body, response.headers);
+        }
+        if (isCodeInRange("409", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Conflict", body, response.headers);
+        }
+        if (isCodeInRange("500", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: RevokeRefreshTokensResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RevokeRefreshTokensResponse", ""
+            ) as RevokeRefreshTokensResponse;
             return body;
         }
 

@@ -187,6 +187,19 @@ public class TemplatePropertiesInputCreate implements Serializable {
     @javax.annotation.Nullable
     private String companyWebsiteUrl;
 
+    public static final String SERIALIZED_NAME_CONTACT_SUPPORT_URL = "contact_support_url";
+
+    @SerializedName(SERIALIZED_NAME_CONTACT_SUPPORT_URL)
+    @javax.annotation.Nullable
+    private String contactSupportUrl;
+
+    public static final String SERIALIZED_NAME_HIDE_CONTACT_SUPPORT_URL =
+            "hide_contact_support_url";
+
+    @SerializedName(SERIALIZED_NAME_HIDE_CONTACT_SUPPORT_URL)
+    @javax.annotation.Nullable
+    private Boolean hideContactSupportUrl;
+
     public TemplatePropertiesInputCreate() {}
 
     public TemplatePropertiesInputCreate ctaButtonBgColor(
@@ -693,6 +706,46 @@ public class TemplatePropertiesInputCreate implements Serializable {
         this.companyWebsiteUrl = companyWebsiteUrl;
     }
 
+    public TemplatePropertiesInputCreate contactSupportUrl(
+            @javax.annotation.Nullable String contactSupportUrl) {
+        this.contactSupportUrl = contactSupportUrl;
+        return this;
+    }
+
+    /**
+     * Contact support url (HTTP/HTTPS only). Version: 26.2.0.cl or later
+     *
+     * @return contactSupportUrl
+     */
+    @javax.annotation.Nullable
+    public String getContactSupportUrl() {
+        return contactSupportUrl;
+    }
+
+    public void setContactSupportUrl(@javax.annotation.Nullable String contactSupportUrl) {
+        this.contactSupportUrl = contactSupportUrl;
+    }
+
+    public TemplatePropertiesInputCreate hideContactSupportUrl(
+            @javax.annotation.Nullable Boolean hideContactSupportUrl) {
+        this.hideContactSupportUrl = hideContactSupportUrl;
+        return this;
+    }
+
+    /**
+     * Whether to hide contact support url. Version: 26.2.0.cl or later
+     *
+     * @return hideContactSupportUrl
+     */
+    @javax.annotation.Nullable
+    public Boolean getHideContactSupportUrl() {
+        return hideContactSupportUrl;
+    }
+
+    public void setHideContactSupportUrl(@javax.annotation.Nullable Boolean hideContactSupportUrl) {
+        this.hideContactSupportUrl = hideContactSupportUrl;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -751,7 +804,12 @@ public class TemplatePropertiesInputCreate implements Serializable {
                         this.companyPrivacyPolicyUrl,
                         templatePropertiesInputCreate.companyPrivacyPolicyUrl)
                 && Objects.equals(
-                        this.companyWebsiteUrl, templatePropertiesInputCreate.companyWebsiteUrl);
+                        this.companyWebsiteUrl, templatePropertiesInputCreate.companyWebsiteUrl)
+                && Objects.equals(
+                        this.contactSupportUrl, templatePropertiesInputCreate.contactSupportUrl)
+                && Objects.equals(
+                        this.hideContactSupportUrl,
+                        templatePropertiesInputCreate.hideContactSupportUrl);
     }
 
     private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -790,7 +848,9 @@ public class TemplatePropertiesInputCreate implements Serializable {
                 hideUnsubscribeLink,
                 hideModifyAlert,
                 companyPrivacyPolicyUrl,
-                companyWebsiteUrl);
+                companyWebsiteUrl,
+                contactSupportUrl,
+                hideContactSupportUrl);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -853,6 +913,12 @@ public class TemplatePropertiesInputCreate implements Serializable {
         sb.append("    companyWebsiteUrl: ")
                 .append(toIndentedString(companyWebsiteUrl))
                 .append("\n");
+        sb.append("    contactSupportUrl: ")
+                .append(toIndentedString(contactSupportUrl))
+                .append("\n");
+        sb.append("    hideContactSupportUrl: ")
+                .append(toIndentedString(hideContactSupportUrl))
+                .append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -899,6 +965,8 @@ public class TemplatePropertiesInputCreate implements Serializable {
         openapiFields.add("hide_modify_alert");
         openapiFields.add("company_privacy_policy_url");
         openapiFields.add("company_website_url");
+        openapiFields.add("contact_support_url");
+        openapiFields.add("hide_contact_support_url");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -1054,6 +1122,15 @@ public class TemplatePropertiesInputCreate implements Serializable {
                             "Expected the field `company_website_url` to be a primitive type in"
                                     + " the JSON string but got `%s`",
                             jsonObj.get("company_website_url").toString()));
+        }
+        if ((jsonObj.get("contact_support_url") != null
+                        && !jsonObj.get("contact_support_url").isJsonNull())
+                && !jsonObj.get("contact_support_url").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `contact_support_url` to be a primitive type in"
+                                    + " the JSON string but got `%s`",
+                            jsonObj.get("contact_support_url").toString()));
         }
     }
 

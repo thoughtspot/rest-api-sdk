@@ -57,4 +57,10 @@ public class CreateWebhookConfigurationRequestTest {
     public void signatureVerificationTest() {
         // TODO: test signatureVerification
     }
+
+    /** Test the property 'storageDestination' */
+    @Test
+    public void storageDestinationTest() {
+        // TODO: test storageDestination
+    }
 }

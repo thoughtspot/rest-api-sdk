@@ -69,7 +69,7 @@ public class AiApiTest {
     }
 
     /**
-     * Version: 10.13.0.cl or later Provides relevant data source recommendations for a
+     * Version: 10.15.0.cl or later Provides relevant data source recommendations for a
      * user-submitted natural language query. To use this API, the user must have at least
      * view-level access to the underlying metadata entities referenced in the response. #### Usage
      * guidelines The request must include a &#x60;query&#x60; string via the request body. The
@@ -98,8 +98,8 @@ public class AiApiTest {
      * instructions for a specific data-model. These instructions guide the AI system in
      * understanding data context and generating more accurate responses when processing natural
      * language queries. #### Usage guidelines To retrieve NL instructions for a data-model, the
-     * request must include: - &#x60;data_source_identifier&#x60;: The unique ID or name of the
-     * data-model to retrieve NL instructions The API returns a response object with: -
+     * request must include: - &#x60;data_source_identifier&#x60;: The unique ID of the data-model
+     * to retrieve NL instructions The API returns a response object with: -
      * &#x60;nl_instructions_info&#x60;: An array of instruction objects, each containing: -
      * &#x60;instructions&#x60;: Array of text instructions for natural language processing -
      * &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). It can be extended to
@@ -168,7 +168,7 @@ public class AiApiTest {
     }
 
     /**
-     * Version: 10.13.0.cl or later This API allows users to initiate or continue an agent (Spotter)
+     * Version: 10.15.0.cl or later This API allows users to initiate or continue an agent (Spotter)
      * conversation by submitting one or more natural language messages. To use this API, the user
      * must have access to the relevant conversational session (via conversation_identifier) and
      * submit at least one message. #### Usage guidelines To initiate or continue a conversation,
@@ -251,12 +251,12 @@ public class AiApiTest {
      * for a specific data-model to improve AI-generated answers and query processing. These
      * instructions help guide the AI system to better understand the data context and provide more
      * accurate responses. #### Usage guidelines To set NL instructions for a data-model, the
-     * request must include: - &#x60;data_source_identifier&#x60;: The unique ID or name of the
-     * data-model for which to set NL instructions - &#x60;nl_instructions_info&#x60;: An array of
-     * instruction objects, each containing: - &#x60;instructions&#x60;: Array of text instructions
-     * for the LLM - &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). Currently
-     * only &#x60;GLOBAL&#x60; is supported. It can be extended to data-model-user scope in future.
-     * The API returns a response object with: - &#x60;success&#x60;: Boolean indicating whether the
+     * request must include: - &#x60;data_source_identifier&#x60;: The unique ID of the data-model
+     * for which to set NL instructions - &#x60;nl_instructions_info&#x60;: An array of instruction
+     * objects, each containing: - &#x60;instructions&#x60;: Array of text instructions for the LLM
+     * - &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). Currently only
+     * &#x60;GLOBAL&#x60; is supported. It can be extended to data-model-user scope in future. The
+     * API returns a response object with: - &#x60;success&#x60;: Boolean indicating whether the
      * operation was successful #### Instructions Scope - **GLOBAL**: Instructions that apply
      * globally for that data-model across the system &gt; ###### Note: &gt; * To use this API, the
      * user needs either edit access or SPOTTER_COACHING_PRIVILEGE on the data-model and they must

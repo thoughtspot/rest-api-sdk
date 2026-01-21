@@ -189,6 +189,7 @@ apiInstance.createUser(
       },
     ],
     preferred_locale: "en-CA",
+    use_browser_language: true,
     extended_properties: {},
     extended_preferences: {},
     trigger_welcome_email: true,
@@ -466,6 +467,8 @@ apiInstance.importUsers(
             type: "LIVEBOARD",
           },
         ],
+        preferred_locale: "en-CA",
+        use_browser_language: true,
       },
     ],
     default_password: "default_password_example",
@@ -628,6 +631,7 @@ apiInstance.searchUsers(
       "role_identifiers_example",
     ],
     include_favorite_metadata: false,
+    include_variable_values: false,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -715,6 +719,7 @@ apiInstance.updateUser(
     ],
     operation: "REPLACE",
     preferred_locale: "en-CA",
+    use_browser_language: true,
     extended_properties: {},
     extended_preferences: {},
   } 

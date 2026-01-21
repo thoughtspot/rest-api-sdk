@@ -25,6 +25,8 @@ import { AuthenticationInput } from '../models/AuthenticationInput';
 import { Author } from '../models/Author';
 import { AuthorMetadataTypeInput } from '../models/AuthorMetadataTypeInput';
 import { AuthorType } from '../models/AuthorType';
+import { AwsS3Config } from '../models/AwsS3Config';
+import { AwsS3ConfigInput } from '../models/AwsS3ConfigInput';
 import { BasicAuth } from '../models/BasicAuth';
 import { BasicAuthInput } from '../models/BasicAuthInput';
 import { CALLBACK } from '../models/CALLBACK';
@@ -32,6 +34,8 @@ import { CALLBACKInput } from '../models/CALLBACKInput';
 import { CALLBACKInputMandatory } from '../models/CALLBACKInputMandatory';
 import { CalendarResponse } from '../models/CalendarResponse';
 import { ChangeUserPasswordRequest } from '../models/ChangeUserPasswordRequest';
+import { ClusterNonEmbedAccess } from '../models/ClusterNonEmbedAccess';
+import { ClusterNonEmbedAccessInput } from '../models/ClusterNonEmbedAccessInput';
 import { Column } from '../models/Column';
 import { ColumnSecurityRule } from '../models/ColumnSecurityRule';
 import { ColumnSecurityRuleColumn } from '../models/ColumnSecurityRuleColumn';
@@ -48,6 +52,8 @@ import { CommitResponse } from '../models/CommitResponse';
 import { CommiterType } from '../models/CommiterType';
 import { CommunicationChannelPreferencesResponse } from '../models/CommunicationChannelPreferencesResponse';
 import { ConfigureCommunicationChannelPreferencesRequest } from '../models/ConfigureCommunicationChannelPreferencesRequest';
+import { ConfigureSecuritySettingsRequest } from '../models/ConfigureSecuritySettingsRequest';
+import { ConfigureSecuritySettingsRequestClusterPreferences } from '../models/ConfigureSecuritySettingsRequestClusterPreferences';
 import { ConnectionConfigurationResponse } from '../models/ConnectionConfigurationResponse';
 import { ConnectionConfigurationSearchRequest } from '../models/ConnectionConfigurationSearchRequest';
 import { ConnectionInput } from '../models/ConnectionInput';
@@ -63,6 +69,7 @@ import { CreateCalendarRequest } from '../models/CreateCalendarRequest';
 import { CreateCalendarRequestTableReference } from '../models/CreateCalendarRequestTableReference';
 import { CreateConfigRequest } from '../models/CreateConfigRequest';
 import { CreateConnectionConfigurationRequest } from '../models/CreateConnectionConfigurationRequest';
+import { CreateConnectionConfigurationRequestPolicyProcessOptions } from '../models/CreateConnectionConfigurationRequestPolicyProcessOptions';
 import { CreateConnectionRequest } from '../models/CreateConnectionRequest';
 import { CreateConnectionResponse } from '../models/CreateConnectionResponse';
 import { CreateConversationRequest } from '../models/CreateConversationRequest';
@@ -86,8 +93,11 @@ import { CreateVariableRequest } from '../models/CreateVariableRequest';
 import { CreateWebhookConfigurationRequest } from '../models/CreateWebhookConfigurationRequest';
 import { CreateWebhookConfigurationRequestAuthentication } from '../models/CreateWebhookConfigurationRequestAuthentication';
 import { CreateWebhookConfigurationRequestSignatureVerification } from '../models/CreateWebhookConfigurationRequestSignatureVerification';
+import { CreateWebhookConfigurationRequestStorageDestination } from '../models/CreateWebhookConfigurationRequestStorageDestination';
 import { CronExpression } from '../models/CronExpression';
 import { CronExpressionInput } from '../models/CronExpressionInput';
+import { CspSettings } from '../models/CspSettings';
+import { CspSettingsInput } from '../models/CspSettingsInput';
 import { CustomActionMetadataTypeInput } from '../models/CustomActionMetadataTypeInput';
 import { DataSource } from '../models/DataSource';
 import { DataSourceContextInput } from '../models/DataSourceContextInput';
@@ -163,6 +173,7 @@ import { GetRelevantQuestionsRequest } from '../models/GetRelevantQuestionsReque
 import { GetRelevantQuestionsRequestAiContext } from '../models/GetRelevantQuestionsRequestAiContext';
 import { GetRelevantQuestionsRequestMetadataContext } from '../models/GetRelevantQuestionsRequestMetadataContext';
 import { GetTokenResponse } from '../models/GetTokenResponse';
+import { GroupInfo } from '../models/GroupInfo';
 import { GroupObject } from '../models/GroupObject';
 import { GroupsImportListInput } from '../models/GroupsImportListInput';
 import { HeaderAttributeInput } from '../models/HeaderAttributeInput';
@@ -200,11 +211,15 @@ import { ModelTableList } from '../models/ModelTableList';
 import { NLInstructionsInfo } from '../models/NLInstructionsInfo';
 import { NLInstructionsInfoInput } from '../models/NLInstructionsInfoInput';
 import { ObjectIDAndName } from '../models/ObjectIDAndName';
+import { ObjectPrivilegesMetadataInput } from '../models/ObjectPrivilegesMetadataInput';
+import { ObjectPrivilegesOfMetadataResponse } from '../models/ObjectPrivilegesOfMetadataResponse';
 import { Org } from '../models/Org';
 import { OrgChannelConfigInput } from '../models/OrgChannelConfigInput';
 import { OrgChannelConfigResponse } from '../models/OrgChannelConfigResponse';
 import { OrgDetails } from '../models/OrgDetails';
 import { OrgInfo } from '../models/OrgInfo';
+import { OrgNonEmbedAccess } from '../models/OrgNonEmbedAccess';
+import { OrgNonEmbedAccessInput } from '../models/OrgNonEmbedAccessInput';
 import { OrgPreferenceSearchCriteriaInput } from '../models/OrgPreferenceSearchCriteriaInput';
 import { OrgResponse } from '../models/OrgResponse';
 import { OrgType } from '../models/OrgType';
@@ -219,6 +234,8 @@ import { PermissionOfMetadataResponse } from '../models/PermissionOfMetadataResp
 import { PermissionOfPrincipalsResponse } from '../models/PermissionOfPrincipalsResponse';
 import { PermissionsMetadataTypeInput } from '../models/PermissionsMetadataTypeInput';
 import { PngOptionsInput } from '../models/PngOptionsInput';
+import { PolicyProcessOptions } from '../models/PolicyProcessOptions';
+import { PolicyProcessOptionsInput } from '../models/PolicyProcessOptionsInput';
 import { PrincipalsInput } from '../models/PrincipalsInput';
 import { PrincipalsListItem } from '../models/PrincipalsListItem';
 import { PrincipalsListItemInput } from '../models/PrincipalsListItemInput';
@@ -249,6 +266,8 @@ import { ResponseWorksheetToModelConversion } from '../models/ResponseWorksheetT
 import { RevertCommitRequest } from '../models/RevertCommitRequest';
 import { RevertResponse } from '../models/RevertResponse';
 import { RevertedMetadata } from '../models/RevertedMetadata';
+import { RevokeRefreshTokensRequest } from '../models/RevokeRefreshTokensRequest';
+import { RevokeRefreshTokensResponse } from '../models/RevokeRefreshTokensResponse';
 import { RevokeTokenRequest } from '../models/RevokeTokenRequest';
 import { RiseGQLArgWrapper } from '../models/RiseGQLArgWrapper';
 import { RiseSetter } from '../models/RiseSetter';
@@ -264,6 +283,8 @@ import { ScheduleHistoryRunsOptionsInput } from '../models/ScheduleHistoryRunsOp
 import { SchedulesPdfOptionsInput } from '../models/SchedulesPdfOptionsInput';
 import { SchemaObject } from '../models/SchemaObject';
 import { Scope } from '../models/Scope';
+import { ScriptSrcUrls } from '../models/ScriptSrcUrls';
+import { ScriptSrcUrlsInput } from '../models/ScriptSrcUrlsInput';
 import { SearchCalendarsRequest } from '../models/SearchCalendarsRequest';
 import { SearchCalendarsRequestSortOptions } from '../models/SearchCalendarsRequestSortOptions';
 import { SearchCommitsRequest } from '../models/SearchCommitsRequest';
@@ -286,6 +307,7 @@ import { SearchRolesRequest } from '../models/SearchRolesRequest';
 import { SearchSchedulesRequest } from '../models/SearchSchedulesRequest';
 import { SearchSchedulesRequestHistoryRunsOptions } from '../models/SearchSchedulesRequestHistoryRunsOptions';
 import { SearchSchedulesRequestSortOptions } from '../models/SearchSchedulesRequestSortOptions';
+import { SearchSecuritySettingsRequest } from '../models/SearchSecuritySettingsRequest';
 import { SearchTagsRequest } from '../models/SearchTagsRequest';
 import { SearchUserGroupsRequest } from '../models/SearchUserGroupsRequest';
 import { SearchUserGroupsRequestSortOptions } from '../models/SearchUserGroupsRequestSortOptions';
@@ -294,6 +316,12 @@ import { SearchUsersRequestSortOptions } from '../models/SearchUsersRequestSortO
 import { SearchVariablesRequest } from '../models/SearchVariablesRequest';
 import { SearchWebhookConfigurationsRequest } from '../models/SearchWebhookConfigurationsRequest';
 import { SearchWebhookConfigurationsRequestSortOptions } from '../models/SearchWebhookConfigurationsRequestSortOptions';
+import { SecuritySettingsClusterPreferences } from '../models/SecuritySettingsClusterPreferences';
+import { SecuritySettingsClusterPreferencesInput } from '../models/SecuritySettingsClusterPreferencesInput';
+import { SecuritySettingsOrgDetails } from '../models/SecuritySettingsOrgDetails';
+import { SecuritySettingsOrgPreferences } from '../models/SecuritySettingsOrgPreferences';
+import { SecuritySettingsOrgPreferencesInput } from '../models/SecuritySettingsOrgPreferencesInput';
+import { SecuritySettingsResponse } from '../models/SecuritySettingsResponse';
 import { SendAgentMessageRequest } from '../models/SendAgentMessageRequest';
 import { SendAgentMessageResponse } from '../models/SendAgentMessageResponse';
 import { SendAgentMessageStreamingRequest } from '../models/SendAgentMessageStreamingRequest';
@@ -309,6 +337,10 @@ import { SortOptions } from '../models/SortOptions';
 import { SortingOptions } from '../models/SortingOptions';
 import { SqlQuery } from '../models/SqlQuery';
 import { SqlQueryResponse } from '../models/SqlQueryResponse';
+import { StorageConfig } from '../models/StorageConfig';
+import { StorageConfigInput } from '../models/StorageConfigInput';
+import { StorageDestination } from '../models/StorageDestination';
+import { StorageDestinationInput } from '../models/StorageDestinationInput';
 import { SystemConfig } from '../models/SystemConfig';
 import { SystemInfo } from '../models/SystemInfo';
 import { SystemOverrideInfo } from '../models/SystemOverrideInfo';
@@ -525,7 +557,7 @@ export class ObjectAIApi {
     }
 
     /**
-     *  Version: 10.13.0.cl or later   Provides relevant data source recommendations for a user-submitted natural language query.  To use this API, the user must have at least view-level access to the underlying metadata entities referenced in the response.  #### Usage guidelines  The request must include a `query` string via the request body.  The returned results include metadata such as: - `confidence`: a float indicating the model\'s confidence in the relevance of each recommendation - `details`: includes `data_source_identifier`, `data_source_name`, and `description` of each recommended data source - `reasoning`: rationale provided by the LLM to explain why each data source was recommended  If the API request is successful, ThoughtSpot returns a ranked list of data sources, each annotated with relevant reasoning.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before it is made Generally Available. > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+     *  Version: 10.15.0.cl or later   Provides relevant data source recommendations for a user-submitted natural language query.  To use this API, the user must have at least view-level access to the underlying metadata entities referenced in the response.  #### Usage guidelines  The request must include a `query` string via the request body.  The returned results include metadata such as: - `confidence`: a float indicating the model\'s confidence in the relevance of each recommendation - `details`: includes `data_source_identifier`, `data_source_name`, and `description` of each recommended data source - `reasoning`: rationale provided by the LLM to explain why each data source was recommended  If the API request is successful, ThoughtSpot returns a ranked list of data sources, each annotated with relevant reasoning.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before it is made Generally Available. > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
      * @param param the request object
      */
     public getDataSourceSuggestions(param: AIApiGetDataSourceSuggestionsRequest, options?: Configuration): Promise<EurekaDataSourceSuggestionResponse> {
@@ -533,7 +565,7 @@ export class ObjectAIApi {
     }
 
     /**
-     *  Version: 10.15.0.cl or later   This API allows users to retrieve existing natural language (NL) instructions for a specific data-model. These instructions guide the AI system in understanding data context and generating more accurate responses when processing natural language queries.  #### Usage guidelines  To retrieve NL instructions for a data-model, the request must include: - `data_source_identifier`: The unique ID or name of the data-model to retrieve NL instructions  The API returns a response object with: - `nl_instructions_info`: An array of instruction objects, each containing:   - `instructions`: Array of text instructions for natural language processing   - `scope`: The scope of the instruction (`GLOBAL`). It can be extended to data-model-user scope in future.  #### Instructions Scope  - **GLOBAL**: Instructions that apply globally across the system on the given data-model (currently only global instructions are supported)  > ###### Note: > * To use this API, the user needs atleast view access on the data-model and they must use corresponding org related bearerToken where the data-model exists. > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * Available from version 10.15.0.cl and later. > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. > * Use this API to view currently configured instructions before modifying them with `setNLInstructions`.     
+     *  Version: 10.15.0.cl or later   This API allows users to retrieve existing natural language (NL) instructions for a specific data-model. These instructions guide the AI system in understanding data context and generating more accurate responses when processing natural language queries.  #### Usage guidelines  To retrieve NL instructions for a data-model, the request must include: - `data_source_identifier`: The unique ID of the data-model to retrieve NL instructions  The API returns a response object with: - `nl_instructions_info`: An array of instruction objects, each containing:   - `instructions`: Array of text instructions for natural language processing   - `scope`: The scope of the instruction (`GLOBAL`). It can be extended to data-model-user scope in future.  #### Instructions Scope  - **GLOBAL**: Instructions that apply globally across the system on the given data-model (currently only global instructions are supported)  > ###### Note: > * To use this API, the user needs atleast view access on the data-model and they must use corresponding org related bearerToken where the data-model exists. > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * Available from version 10.15.0.cl and later. > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. > * Use this API to view currently configured instructions before modifying them with `setNLInstructions`.     
      * @param param the request object
      */
     public getNLInstructions(param: AIApiGetNLInstructionsRequest, options?: Configuration): Promise<EurekaGetNLInstructionsResponse> {
@@ -557,7 +589,7 @@ export class ObjectAIApi {
     }
 
     /**
-     *  Version: 10.13.0.cl or later   This API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages.  To use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.   #### Usage guidelines  To initiate or continue a conversation, the request must include: - `conversation_identifier`: a unique session ID for continuity and message tracking - `messages`: an array of one or more text messages, each with a value and type  The API returns a array of object with a type, message, and metadata. - `type`: Type of the message — text, answer, or error. - `message`: Main content of the response. - `metadata`: Additional info depending on the message type.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.     
+     *  Version: 10.15.0.cl or later   This API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages.  To use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.   #### Usage guidelines  To initiate or continue a conversation, the request must include: - `conversation_identifier`: a unique session ID for continuity and message tracking - `messages`: an array of one or more text messages, each with a value and type  The API returns a array of object with a type, message, and metadata. - `type`: Type of the message — text, answer, or error. - `message`: Main content of the response. - `metadata`: Additional info depending on the message type.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.     
      * @param param the request object
      */
     public sendAgentMessage(param: AIApiSendAgentMessageRequest, options?: Configuration): Promise<any> {
@@ -581,7 +613,7 @@ export class ObjectAIApi {
     }
 
     /**
-     *  Version: 10.15.0.cl or later   This API allows users to set natural language (NL) instructions for a specific data-model to improve AI-generated answers and query processing. These instructions help guide the AI system to better understand the data context and provide more accurate responses.  #### Usage guidelines  To set NL instructions for a data-model, the request must include: - `data_source_identifier`: The unique ID or name of the data-model for which to set NL instructions - `nl_instructions_info`: An array of instruction objects, each containing:   - `instructions`: Array of text instructions for the LLM   - `scope`: The scope of the instruction (`GLOBAL`). Currently only `GLOBAL` is supported. It can be extended to data-model-user scope in future.  The API returns a response object with: - `success`: Boolean indicating whether the operation was successful  #### Instructions Scope  - **GLOBAL**: Instructions that apply globally for that data-model across the system  > ###### Note: > * To use this API, the user needs either edit access or SPOTTER_COACHING_PRIVILEGE on the data-model and they must use corresponding org related bearerToken where the data-model exists. > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * Available from version 10.15.0.cl and later. > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. > * Instructions help improve the accuracy and relevance of AI-generated responses for the specified data-model.      
+     *  Version: 10.15.0.cl or later   This API allows users to set natural language (NL) instructions for a specific data-model to improve AI-generated answers and query processing. These instructions help guide the AI system to better understand the data context and provide more accurate responses.  #### Usage guidelines  To set NL instructions for a data-model, the request must include: - `data_source_identifier`: The unique ID of the data-model for which to set NL instructions - `nl_instructions_info`: An array of instruction objects, each containing:   - `instructions`: Array of text instructions for the LLM   - `scope`: The scope of the instruction (`GLOBAL`). Currently only `GLOBAL` is supported. It can be extended to data-model-user scope in future.  The API returns a response object with: - `success`: Boolean indicating whether the operation was successful  #### Instructions Scope  - **GLOBAL**: Instructions that apply globally for that data-model across the system  > ###### Note: > * To use this API, the user needs either edit access or SPOTTER_COACHING_PRIVILEGE on the data-model and they must use corresponding org related bearerToken where the data-model exists. > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * Available from version 10.15.0.cl and later. > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. > * Instructions help improve the accuracy and relevance of AI-generated responses for the specified data-model.      
      * @param param the request object
      */
     public setNLInstructions(param: AIApiSetNLInstructionsRequest, options?: Configuration): Promise<EurekaSetNLInstructionsResponse> {
@@ -806,7 +838,7 @@ export class ObjectConnectionConfigurationsApi {
     }
 
     /**
-     *   Version: 10.12.0.cl or later   Creates an additional configuration to an existing connection to a data warehouse.    Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  #### Usage guidelines   * A JSON map of configuration attributes in `configuration`. The following example shows the configuration attributes:   ```    {      \"user\":\"DEV_USER\",      \"password\":\"TestConn123\",      \"role\":\"DEV\",      \"warehouse\":\"DEV_WH\"     }   ```  * If the `policy_type` is `PRINCIPALS`, then `policy_principals` is a required field. * If the `policy_type` is `PROCESSES`, then `policy_processes` is a required field. * If the `policy_type` is `NO_POLICY`, then `policy_principals` and `policy_processes` are not required fields.      
+     *   Version: 10.12.0.cl or later   Creates an additional configuration to an existing connection to a data warehouse.    Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  #### Usage guidelines   * A JSON map of configuration attributes in `configuration`. The following example shows the configuration attributes:   ```    {      \"user\":\"DEV_USER\",      \"password\":\"TestConn123\",      \"role\":\"DEV\",      \"warehouse\":\"DEV_WH\"     }   ```  * If the `policy_type` is `PRINCIPALS`, then `policy_principals` is a required field. * If the `policy_type` is `PROCESSES`, then `policy_processes` is a required field. * If the `policy_type` is `NO_POLICY`, then `policy_principals` and `policy_processes` are not required fields.  #### Parameterized Connection Support For parameterized connections that use OAuth authentication, only the same_as_parent and policy_process_options  attributes are allowed in the API request. These attributes are not applicable to connections that are not parameterized.       
      * @param param the request object
      */
     public createConnectionConfiguration(param: ConnectionConfigurationsApiCreateConnectionConfigurationRequest, options?: Configuration): Promise<ConnectionConfigurationResponse> {
@@ -822,7 +854,7 @@ export class ObjectConnectionConfigurationsApi {
     }
 
     /**
-     *   Version: 10.12.0.cl or later   Updates a connection configuration object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  #### Supported operations This API endpoint lets you perform the following operations in a single API request:   * Edit the name or description of the configuration  * Edit the configuration properties  * Edit the `policy_type`  * Edit the type of authentication  * Enable or disable a configuration   **NOTE**: When updating a configuration where `disabled` is `true`, you must reset `disabled` to `true` in your update request payload. If not explicitly set again, the API will default `disabled` to `false`.       
+     *   Version: 10.12.0.cl or later   Updates a connection configuration object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  #### Supported operations This API endpoint lets you perform the following operations in a single API request:   * Edit the name or description of the configuration  * Edit the configuration properties  * Edit the `policy_type`  * Edit the type of authentication  * Enable or disable a configuration  #### Parameterized Connection Support For parameterized oauth based connections, only the `same_as_parent` and `policy_process_options` attributes are allowed. These attributes are not applicable to connections that are not parameterized.   **NOTE**: When updating a configuration where `disabled` is `true`, you must reset `disabled` to `true` in your update request payload. If not explicitly set again, the API will default `disabled` to `false`.      
      * @param param the request object
      */
     public updateConnectionConfiguration(param: ConnectionConfigurationsApiUpdateConnectionConfigurationRequest, options?: Configuration): Promise<void> {
@@ -877,6 +909,21 @@ export interface ConnectionsApiFetchConnectionDiffStatusRequest {
      * @memberof ConnectionsApifetchConnectionDiffStatus
      */
     connectionIdentifier: string
+}
+
+export interface ConnectionsApiRevokeRefreshTokensRequest {
+    /**
+     * Unique ID or name of the connection whose refresh tokens need to be revoked. All the users associated with the connection will have their refresh tokens revoked except the author.
+     * @type string
+     * @memberof ConnectionsApirevokeRefreshTokens
+     */
+    connectionIdentifier: string
+    /**
+     * 
+     * @type RevokeRefreshTokensRequest
+     * @memberof ConnectionsApirevokeRefreshTokens
+     */
+    revokeRefreshTokensRequest: RevokeRefreshTokensRequest
 }
 
 export interface ConnectionsApiSearchConnectionRequest {
@@ -957,6 +1004,14 @@ export class ObjectConnectionsApi {
      */
     public fetchConnectionDiffStatus(param: ConnectionsApiFetchConnectionDiffStatusRequest, options?: Configuration): Promise<FetchConnectionDiffStatusResponse> {
         return this.api.fetchConnectionDiffStatus(param.connectionIdentifier,  options).toPromise();
+    }
+
+    /**
+     *   Version: 26.2.0.cl or later   Revokes OAuth refresh tokens for users who no longer require access to a data warehouse connection. When a token is revoked, the affected user\'s session for that connection is terminated, and they must re-authenticate to regain access.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DATAMANAGEMENT` (**Can manage data**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on the ThoughtSpot instance, users with `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege can also make API requests to revoke tokens for connection users.  #### Usage guidelines  You can specify different combinations of identifiers to control which refresh tokens are revoked.  - **connection_identifier**: Revokes refresh tokens for all users of the connection, except the connection author. - **connection_identifier** and **user_identifiers**: Revokes refresh tokens only for the users specified in the request. If the name or ID of the connection author is included in the request, their token will also be revoked. - **connection_identifier** and **configuration_identifiers**: Revokes refresh tokens for all users on the specified configurations, except the configuration author. - **connection_identifier**, **configuration_identifiers**, and **user_identifiers**: Revokes refresh tokens for the specified users on the specified configurations. - **connection_identifier** and **org_identifiers**: Revokes refresh tokens for the specified Orgs. Applicable only for published connections. - **connection_identifier**, **org_identifiers**, and **user_identifiers**: Revokes refresh tokens for the specified users in the specified Orgs. Applicable only for published connections.  **NOTE**: The `org_identifiers` parameter is only applicable for published connections. Using this parameter for unpublished connections will result in an error. Ensure that the connections are published before making the API request.      
+     * @param param the request object
+     */
+    public revokeRefreshTokens(param: ConnectionsApiRevokeRefreshTokensRequest, options?: Configuration): Promise<RevokeRefreshTokensResponse> {
+        return this.api.revokeRefreshTokens(param.connectionIdentifier, param.revokeRefreshTokensRequest,  options).toPromise();
     }
 
     /**
@@ -1955,7 +2010,7 @@ export class ObjectMetadataApi {
     }
 
     /**
-     *  Parameterize fields in metadata objects.   Version: 10.9.0.cl or later   Allows parameterizing fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection the field type is always `CONNECTION_PROPERTY`. We use the field_name in this case to specify the exact property of a connection which needs to be parameterized.      
+     *  Parameterize fields in metadata objects.   Version: 10.9.0.cl or later   Allows parameterizing fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be parameterized.  For Connection Config, the only supported field name is: * impersonate_user      
      * @param param the request object
      */
     public parameterizeMetadata(param: MetadataApiParameterizeMetadataRequest, options?: Configuration): Promise<void> {
@@ -1971,7 +2026,7 @@ export class ObjectMetadataApi {
     }
 
     /**
-     *  Remove parameterization from fields in metadata objects.   Version: 10.9.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection the field type is always `CONNECTION_PROPERTY`. We use the field_name in this case to specify the exact property of a connection which needs to be unparameterized.      
+     *  Remove parameterization from fields in metadata objects.   Version: 10.9.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user      
      * @param param the request object
      */
     public unparameterizeMetadata(param: MetadataApiUnparameterizeMetadataRequest, options?: Configuration): Promise<void> {
@@ -2119,7 +2174,7 @@ export class ObjectReportsApi {
     }
 
     /**
-     *   Version: 9.0.0.cl or later   Exports a Liveboard and its visualizations in PDF or PNG file format.  Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is PDF. For PDF downloads, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  **NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).    **NOTE**: Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in the PNG format in the resolution of your choice. To enable this on your instance, contact ThoughtSpot support. When this feature is enabled, the options `include_cover_page`,`include_filter_page` within the `png_options` will not be available for PNG exports.     
+     *   Version: 9.0.0.cl or later   Exports a Liveboard and its visualizations in PDF, PNG, CSV, or XLSX file format.  Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF exports, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are available for PNG exports. CSV and XLSX exports do not support customization options.  **NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).    **NOTE**: Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in the PNG format in the resolution of your choice. To enable this on your instance, contact ThoughtSpot support. When this feature is enabled, the options `include_cover_page`,`include_filter_page` within the `png_options` will not be available for PNG exports.  **NOTE**: Starting with the ThoughtSpot Cloud 26.2.0.cl release, Liveboards can be exported in CSV format. All visualizations in the Liveboard can be exported as individual CSV files. If multiple visualizations are selected or if the entire Liveboard is exported, the output is returned as a .zip file containing the CSV files for each visualization.  **NOTE**: Starting with the ThoughtSpot Cloud 26.2.0.cl release, Liveboards can be exported in XLSX format. All selected visualizations are consolidated into a single Excel workbook (.xlsx), with each visualization placed in its own worksheet (tab). XLSX exports are limited to 255 worksheets (tabs) per workbook.      
      * @param param the request object
      */
     public exportLiveboardReport(param: ReportsApiExportLiveboardReportRequest, options?: Configuration): Promise<HttpFile> {
@@ -2460,6 +2515,15 @@ export interface SystemApiConfigureCommunicationChannelPreferencesRequest {
     configureCommunicationChannelPreferencesRequest: ConfigureCommunicationChannelPreferencesRequest
 }
 
+export interface SystemApiConfigureSecuritySettingsRequest {
+    /**
+     * 
+     * @type ConfigureSecuritySettingsRequest
+     * @memberof SystemApiconfigureSecuritySettings
+     */
+    configureSecuritySettingsRequest: ConfigureSecuritySettingsRequest
+}
+
 export interface SystemApiGetSystemConfigRequest {
 }
 
@@ -2476,6 +2540,15 @@ export interface SystemApiSearchCommunicationChannelPreferencesRequest {
      * @memberof SystemApisearchCommunicationChannelPreferences
      */
     searchCommunicationChannelPreferencesRequest: SearchCommunicationChannelPreferencesRequest
+}
+
+export interface SystemApiSearchSecuritySettingsRequest {
+    /**
+     * 
+     * @type SearchSecuritySettingsRequest
+     * @memberof SystemApisearchSecuritySettings
+     */
+    searchSecuritySettingsRequest: SearchSecuritySettingsRequest
 }
 
 export interface SystemApiUpdateSystemConfigRequest {
@@ -2500,6 +2573,14 @@ export class ObjectSystemApi {
      */
     public configureCommunicationChannelPreferences(param: SystemApiConfigureCommunicationChannelPreferencesRequest, options?: Configuration): Promise<void> {
         return this.api.configureCommunicationChannelPreferences(param.configureCommunicationChannelPreferencesRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 26.2.0.cl or later   Configure security settings for your ThoughtSpot application instance. - Use `cluster_preferences` to update cluster-level security settings including CORS whitelisted URLs, CSP settings, SAML redirect URLs, partitioned cookies, and non-embed access configuration. - Use `org_preferences` to configure Org-specific security settings. If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this allows configuring CORS and non-embed access settings specific to the Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. Cluster-level SAML and script-src settings require `ADMINISTRATION` privilege. See [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.     
+     * @param param the request object
+     */
+    public configureSecuritySettings(param: SystemApiConfigureSecuritySettingsRequest, options?: Configuration): Promise<void> {
+        return this.api.configureSecuritySettings(param.configureSecuritySettingsRequest,  options).toPromise();
     }
 
     /**
@@ -2532,6 +2613,14 @@ export class ObjectSystemApi {
      */
     public searchCommunicationChannelPreferences(param: SystemApiSearchCommunicationChannelPreferencesRequest, options?: Configuration): Promise<CommunicationChannelPreferencesResponse> {
         return this.api.searchCommunicationChannelPreferences(param.searchCommunicationChannelPreferencesRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 26.2.0.cl or later   Fetch security settings for your ThoughtSpot application instance. - Use `scope: CLUSTER` to retrieve cluster-level security settings, including CORS and CSP allowlists, SAML redirect URLs, and settings that control access to non-embedded pages. - Use `scope: ORG` to retrieve Org-level security settings. If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this returns CORS and non-embed access settings specific to the Org. - If `scope` is not specified, returns both cluster and Org-specific settings based on user privileges.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. See [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.     
+     * @param param the request object
+     */
+    public searchSecuritySettings(param: SystemApiSearchSecuritySettingsRequest, options?: Configuration): Promise<SecuritySettingsResponse> {
+        return this.api.searchSecuritySettings(param.searchSecuritySettingsRequest,  options).toPromise();
     }
 
     /**
@@ -2719,6 +2808,15 @@ export interface ThoughtSpotRestApiConfigureCommunicationChannelPreferencesReque
      * @memberof ThoughtSpotRestApiconfigureCommunicationChannelPreferences
      */
     configureCommunicationChannelPreferencesRequest: ConfigureCommunicationChannelPreferencesRequest
+}
+
+export interface ThoughtSpotRestApiConfigureSecuritySettingsRequest {
+    /**
+     * 
+     * @type ConfigureSecuritySettingsRequest
+     * @memberof ThoughtSpotRestApiconfigureSecuritySettings
+     */
+    configureSecuritySettingsRequest: ConfigureSecuritySettingsRequest
 }
 
 export interface ThoughtSpotRestApiConnectionConfigurationSearchRequest {
@@ -3507,6 +3605,21 @@ export interface ThoughtSpotRestApiRevertCommitRequest {
     revertCommitRequest: RevertCommitRequest
 }
 
+export interface ThoughtSpotRestApiRevokeRefreshTokensRequest {
+    /**
+     * Unique ID or name of the connection whose refresh tokens need to be revoked. All the users associated with the connection will have their refresh tokens revoked except the author.
+     * @type string
+     * @memberof ThoughtSpotRestApirevokeRefreshTokens
+     */
+    connectionIdentifier: string
+    /**
+     * 
+     * @type RevokeRefreshTokensRequest
+     * @memberof ThoughtSpotRestApirevokeRefreshTokens
+     */
+    revokeRefreshTokensRequest: RevokeRefreshTokensRequest
+}
+
 export interface ThoughtSpotRestApiRevokeTokenRequest {
     /**
      * 
@@ -3622,6 +3735,15 @@ export interface ThoughtSpotRestApiSearchSchedulesRequest {
      * @memberof ThoughtSpotRestApisearchSchedules
      */
     searchSchedulesRequest: SearchSchedulesRequest
+}
+
+export interface ThoughtSpotRestApiSearchSecuritySettingsRequest {
+    /**
+     * 
+     * @type SearchSecuritySettingsRequest
+     * @memberof ThoughtSpotRestApisearchSecuritySettings
+     */
+    searchSecuritySettingsRequest: SearchSecuritySettingsRequest
 }
 
 export interface ThoughtSpotRestApiSearchTagsRequest {
@@ -4160,6 +4282,14 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
+     *  Version: 26.2.0.cl or later   Configure security settings for your ThoughtSpot application instance. - Use `cluster_preferences` to update cluster-level security settings including CORS whitelisted URLs, CSP settings, SAML redirect URLs, partitioned cookies, and non-embed access configuration. - Use `org_preferences` to configure Org-specific security settings. If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this allows configuring CORS and non-embed access settings specific to the Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. Cluster-level SAML and script-src settings require `ADMINISTRATION` privilege. See [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.     
+     * @param param the request object
+     */
+    public configureSecuritySettings(param: ThoughtSpotRestApiConfigureSecuritySettingsRequest, options?: Configuration): Promise<void> {
+        return this.api.configureSecuritySettings(param.configureSecuritySettingsRequest,  options).toPromise();
+    }
+
+    /**
      *   Version: 10.12.0.cl or later   Gets connection configuration objects.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  #### Usage guidelines * To get a list of all configurations available in the ThoughtSpot system, send the API request with only the connection name or GUID in the request body. * To fetch details of a configuration object, specify the configuration object name or GUID.      
      * @param param the request object
      */
@@ -4216,7 +4346,7 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *   Version: 10.12.0.cl or later   Creates an additional configuration to an existing connection to a data warehouse.    Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  #### Usage guidelines   * A JSON map of configuration attributes in `configuration`. The following example shows the configuration attributes:   ```    {      \"user\":\"DEV_USER\",      \"password\":\"TestConn123\",      \"role\":\"DEV\",      \"warehouse\":\"DEV_WH\"     }   ```  * If the `policy_type` is `PRINCIPALS`, then `policy_principals` is a required field. * If the `policy_type` is `PROCESSES`, then `policy_processes` is a required field. * If the `policy_type` is `NO_POLICY`, then `policy_principals` and `policy_processes` are not required fields.      
+     *   Version: 10.12.0.cl or later   Creates an additional configuration to an existing connection to a data warehouse.    Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  #### Usage guidelines   * A JSON map of configuration attributes in `configuration`. The following example shows the configuration attributes:   ```    {      \"user\":\"DEV_USER\",      \"password\":\"TestConn123\",      \"role\":\"DEV\",      \"warehouse\":\"DEV_WH\"     }   ```  * If the `policy_type` is `PRINCIPALS`, then `policy_principals` is a required field. * If the `policy_type` is `PROCESSES`, then `policy_processes` is a required field. * If the `policy_type` is `NO_POLICY`, then `policy_principals` and `policy_processes` are not required fields.  #### Parameterized Connection Support For parameterized connections that use OAuth authentication, only the same_as_parent and policy_process_options  attributes are allowed in the API request. These attributes are not applicable to connections that are not parameterized.       
      * @param param the request object
      */
     public createConnectionConfiguration(param: ThoughtSpotRestApiCreateConnectionConfigurationRequest, options?: Configuration): Promise<ConnectionConfigurationResponse> {
@@ -4520,7 +4650,7 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *   Version: 9.0.0.cl or later   Exports a Liveboard and its visualizations in PDF or PNG file format.  Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is PDF. For PDF downloads, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  **NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).    **NOTE**: Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in the PNG format in the resolution of your choice. To enable this on your instance, contact ThoughtSpot support. When this feature is enabled, the options `include_cover_page`,`include_filter_page` within the `png_options` will not be available for PNG exports.     
+     *   Version: 9.0.0.cl or later   Exports a Liveboard and its visualizations in PDF, PNG, CSV, or XLSX file format.  Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default `file_format` is CSV. For PDF exports, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are available for PNG exports. CSV and XLSX exports do not support customization options.  **NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).    **NOTE**: Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in the PNG format in the resolution of your choice. To enable this on your instance, contact ThoughtSpot support. When this feature is enabled, the options `include_cover_page`,`include_filter_page` within the `png_options` will not be available for PNG exports.  **NOTE**: Starting with the ThoughtSpot Cloud 26.2.0.cl release, Liveboards can be exported in CSV format. All visualizations in the Liveboard can be exported as individual CSV files. If multiple visualizations are selected or if the entire Liveboard is exported, the output is returned as a .zip file containing the CSV files for each visualization.  **NOTE**: Starting with the ThoughtSpot Cloud 26.2.0.cl release, Liveboards can be exported in XLSX format. All selected visualizations are consolidated into a single Excel workbook (.xlsx), with each visualization placed in its own worksheet (tab). XLSX exports are limited to 255 worksheets (tabs) per workbook.      
      * @param param the request object
      */
     public exportLiveboardReport(param: ThoughtSpotRestApiExportLiveboardReportRequest, options?: Configuration): Promise<HttpFile> {
@@ -4664,7 +4794,7 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *  Version: 10.13.0.cl or later   Provides relevant data source recommendations for a user-submitted natural language query.  To use this API, the user must have at least view-level access to the underlying metadata entities referenced in the response.  #### Usage guidelines  The request must include a `query` string via the request body.  The returned results include metadata such as: - `confidence`: a float indicating the model\'s confidence in the relevance of each recommendation - `details`: includes `data_source_identifier`, `data_source_name`, and `description` of each recommended data source - `reasoning`: rationale provided by the LLM to explain why each data source was recommended  If the API request is successful, ThoughtSpot returns a ranked list of data sources, each annotated with relevant reasoning.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before it is made Generally Available. > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+     *  Version: 10.15.0.cl or later   Provides relevant data source recommendations for a user-submitted natural language query.  To use this API, the user must have at least view-level access to the underlying metadata entities referenced in the response.  #### Usage guidelines  The request must include a `query` string via the request body.  The returned results include metadata such as: - `confidence`: a float indicating the model\'s confidence in the relevance of each recommendation - `details`: includes `data_source_identifier`, `data_source_name`, and `description` of each recommended data source - `reasoning`: rationale provided by the LLM to explain why each data source was recommended  If the API request is successful, ThoughtSpot returns a ranked list of data sources, each annotated with relevant reasoning.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before it is made Generally Available. > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
      * @param param the request object
      */
     public getDataSourceSuggestions(param: ThoughtSpotRestApiGetDataSourceSuggestionsRequest, options?: Configuration): Promise<EurekaDataSourceSuggestionResponse> {
@@ -4680,7 +4810,7 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *  Version: 10.15.0.cl or later   This API allows users to retrieve existing natural language (NL) instructions for a specific data-model. These instructions guide the AI system in understanding data context and generating more accurate responses when processing natural language queries.  #### Usage guidelines  To retrieve NL instructions for a data-model, the request must include: - `data_source_identifier`: The unique ID or name of the data-model to retrieve NL instructions  The API returns a response object with: - `nl_instructions_info`: An array of instruction objects, each containing:   - `instructions`: Array of text instructions for natural language processing   - `scope`: The scope of the instruction (`GLOBAL`). It can be extended to data-model-user scope in future.  #### Instructions Scope  - **GLOBAL**: Instructions that apply globally across the system on the given data-model (currently only global instructions are supported)  > ###### Note: > * To use this API, the user needs atleast view access on the data-model and they must use corresponding org related bearerToken where the data-model exists. > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * Available from version 10.15.0.cl and later. > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. > * Use this API to view currently configured instructions before modifying them with `setNLInstructions`.     
+     *  Version: 10.15.0.cl or later   This API allows users to retrieve existing natural language (NL) instructions for a specific data-model. These instructions guide the AI system in understanding data context and generating more accurate responses when processing natural language queries.  #### Usage guidelines  To retrieve NL instructions for a data-model, the request must include: - `data_source_identifier`: The unique ID of the data-model to retrieve NL instructions  The API returns a response object with: - `nl_instructions_info`: An array of instruction objects, each containing:   - `instructions`: Array of text instructions for natural language processing   - `scope`: The scope of the instruction (`GLOBAL`). It can be extended to data-model-user scope in future.  #### Instructions Scope  - **GLOBAL**: Instructions that apply globally across the system on the given data-model (currently only global instructions are supported)  > ###### Note: > * To use this API, the user needs atleast view access on the data-model and they must use corresponding org related bearerToken where the data-model exists. > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * Available from version 10.15.0.cl and later. > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. > * Use this API to view currently configured instructions before modifying them with `setNLInstructions`.     
      * @param param the request object
      */
     public getNLInstructions(param: ThoughtSpotRestApiGetNLInstructionsRequest, options?: Configuration): Promise<EurekaGetNLInstructionsResponse> {
@@ -4776,7 +4906,7 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *  Parameterize fields in metadata objects.   Version: 10.9.0.cl or later   Allows parameterizing fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection the field type is always `CONNECTION_PROPERTY`. We use the field_name in this case to specify the exact property of a connection which needs to be parameterized.      
+     *  Parameterize fields in metadata objects.   Version: 10.9.0.cl or later   Allows parameterizing fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be parameterized.  For Connection Config, the only supported field name is: * impersonate_user      
      * @param param the request object
      */
     public parameterizeMetadata(param: ThoughtSpotRestApiParameterizeMetadataRequest, options?: Configuration): Promise<void> {
@@ -4813,6 +4943,14 @@ export class ObjectThoughtSpotRestApi {
      */
     public revertCommit(param: ThoughtSpotRestApiRevertCommitRequest, options?: Configuration): Promise<RevertResponse> {
         return this.api.revertCommit(param.commitId, param.revertCommitRequest,  options).toPromise();
+    }
+
+    /**
+     *   Version: 26.2.0.cl or later   Revokes OAuth refresh tokens for users who no longer require access to a data warehouse connection. When a token is revoked, the affected user\'s session for that connection is terminated, and they must re-authenticate to regain access.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DATAMANAGEMENT` (**Can manage data**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on the ThoughtSpot instance, users with `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege can also make API requests to revoke tokens for connection users.  #### Usage guidelines  You can specify different combinations of identifiers to control which refresh tokens are revoked.  - **connection_identifier**: Revokes refresh tokens for all users of the connection, except the connection author. - **connection_identifier** and **user_identifiers**: Revokes refresh tokens only for the users specified in the request. If the name or ID of the connection author is included in the request, their token will also be revoked. - **connection_identifier** and **configuration_identifiers**: Revokes refresh tokens for all users on the specified configurations, except the configuration author. - **connection_identifier**, **configuration_identifiers**, and **user_identifiers**: Revokes refresh tokens for the specified users on the specified configurations. - **connection_identifier** and **org_identifiers**: Revokes refresh tokens for the specified Orgs. Applicable only for published connections. - **connection_identifier**, **org_identifiers**, and **user_identifiers**: Revokes refresh tokens for the specified users in the specified Orgs. Applicable only for published connections.  **NOTE**: The `org_identifiers` parameter is only applicable for published connections. Using this parameter for unpublished connections will result in an error. Ensure that the connections are published before making the API request.      
+     * @param param the request object
+     */
+    public revokeRefreshTokens(param: ThoughtSpotRestApiRevokeRefreshTokensRequest, options?: Configuration): Promise<RevokeRefreshTokensResponse> {
+        return this.api.revokeRefreshTokens(param.connectionIdentifier, param.revokeRefreshTokensRequest,  options).toPromise();
     }
 
     /**
@@ -4920,6 +5058,14 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
+     *  Version: 26.2.0.cl or later   Fetch security settings for your ThoughtSpot application instance. - Use `scope: CLUSTER` to retrieve cluster-level security settings, including CORS and CSP allowlists, SAML redirect URLs, and settings that control access to non-embedded pages. - Use `scope: ORG` to retrieve Org-level security settings. If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this returns CORS and non-embed access settings specific to the Org. - If `scope` is not specified, returns both cluster and Org-specific settings based on user privileges.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. See [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.     
+     * @param param the request object
+     */
+    public searchSecuritySettings(param: ThoughtSpotRestApiSearchSecuritySettingsRequest, options?: Configuration): Promise<SecuritySettingsResponse> {
+        return this.api.searchSecuritySettings(param.searchSecuritySettingsRequest,  options).toPromise();
+    }
+
+    /**
      *   Version: 9.0.0.cl or later   Gets a list of tag objects available on the ThoughtSpot system. To get details of a specific tag object, specify the GUID or name.  Any authenticated user can search for tag objects.      
      * @param param the request object
      */
@@ -4960,7 +5106,7 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *  Version: 10.13.0.cl or later   This API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages.  To use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.   #### Usage guidelines  To initiate or continue a conversation, the request must include: - `conversation_identifier`: a unique session ID for continuity and message tracking - `messages`: an array of one or more text messages, each with a value and type  The API returns a array of object with a type, message, and metadata. - `type`: Type of the message — text, answer, or error. - `message`: Main content of the response. - `metadata`: Additional info depending on the message type.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.     
+     *  Version: 10.15.0.cl or later   This API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages.  To use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.   #### Usage guidelines  To initiate or continue a conversation, the request must include: - `conversation_identifier`: a unique session ID for continuity and message tracking - `messages`: an array of one or more text messages, each with a value and type  The API returns a array of object with a type, message, and metadata. - `type`: Type of the message — text, answer, or error. - `message`: Main content of the response. - `metadata`: Additional info depending on the message type.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.     
      * @param param the request object
      */
     public sendAgentMessage(param: ThoughtSpotRestApiSendAgentMessageRequest, options?: Configuration): Promise<any> {
@@ -4984,7 +5130,7 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *  Version: 10.15.0.cl or later   This API allows users to set natural language (NL) instructions for a specific data-model to improve AI-generated answers and query processing. These instructions help guide the AI system to better understand the data context and provide more accurate responses.  #### Usage guidelines  To set NL instructions for a data-model, the request must include: - `data_source_identifier`: The unique ID or name of the data-model for which to set NL instructions - `nl_instructions_info`: An array of instruction objects, each containing:   - `instructions`: Array of text instructions for the LLM   - `scope`: The scope of the instruction (`GLOBAL`). Currently only `GLOBAL` is supported. It can be extended to data-model-user scope in future.  The API returns a response object with: - `success`: Boolean indicating whether the operation was successful  #### Instructions Scope  - **GLOBAL**: Instructions that apply globally for that data-model across the system  > ###### Note: > * To use this API, the user needs either edit access or SPOTTER_COACHING_PRIVILEGE on the data-model and they must use corresponding org related bearerToken where the data-model exists. > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * Available from version 10.15.0.cl and later. > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. > * Instructions help improve the accuracy and relevance of AI-generated responses for the specified data-model.      
+     *  Version: 10.15.0.cl or later   This API allows users to set natural language (NL) instructions for a specific data-model to improve AI-generated answers and query processing. These instructions help guide the AI system to better understand the data context and provide more accurate responses.  #### Usage guidelines  To set NL instructions for a data-model, the request must include: - `data_source_identifier`: The unique ID of the data-model for which to set NL instructions - `nl_instructions_info`: An array of instruction objects, each containing:   - `instructions`: Array of text instructions for the LLM   - `scope`: The scope of the instruction (`GLOBAL`). Currently only `GLOBAL` is supported. It can be extended to data-model-user scope in future.  The API returns a response object with: - `success`: Boolean indicating whether the operation was successful  #### Instructions Scope  - **GLOBAL**: Instructions that apply globally for that data-model across the system  > ###### Note: > * To use this API, the user needs either edit access or SPOTTER_COACHING_PRIVILEGE on the data-model and they must use corresponding org related bearerToken where the data-model exists. > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * Available from version 10.15.0.cl and later. > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. > * Instructions help improve the accuracy and relevance of AI-generated responses for the specified data-model.      
      * @param param the request object
      */
     public setNLInstructions(param: ThoughtSpotRestApiSetNLInstructionsRequest, options?: Configuration): Promise<EurekaSetNLInstructionsResponse> {
@@ -5016,7 +5162,7 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *  Remove parameterization from fields in metadata objects.   Version: 10.9.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection the field type is always `CONNECTION_PROPERTY`. We use the field_name in this case to specify the exact property of a connection which needs to be unparameterized.      
+     *  Remove parameterization from fields in metadata objects.   Version: 10.9.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user      
      * @param param the request object
      */
     public unparameterizeMetadata(param: ThoughtSpotRestApiUnparameterizeMetadataRequest, options?: Configuration): Promise<void> {
@@ -5064,7 +5210,7 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *   Version: 10.12.0.cl or later   Updates a connection configuration object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  #### Supported operations This API endpoint lets you perform the following operations in a single API request:   * Edit the name or description of the configuration  * Edit the configuration properties  * Edit the `policy_type`  * Edit the type of authentication  * Enable or disable a configuration   **NOTE**: When updating a configuration where `disabled` is `true`, you must reset `disabled` to `true` in your update request payload. If not explicitly set again, the API will default `disabled` to `false`.       
+     *   Version: 10.12.0.cl or later   Updates a connection configuration object.  Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  #### Supported operations This API endpoint lets you perform the following operations in a single API request:   * Edit the name or description of the configuration  * Edit the configuration properties  * Edit the `policy_type`  * Edit the type of authentication  * Enable or disable a configuration  #### Parameterized Connection Support For parameterized oauth based connections, only the `same_as_parent` and `policy_process_options` attributes are allowed. These attributes are not applicable to connections that are not parameterized.   **NOTE**: When updating a configuration where `disabled` is `true`, you must reset `disabled` to `true` in your update request payload. If not explicitly set again, the API will default `disabled` to `false`.      
      * @param param the request object
      */
     public updateConnectionConfiguration(param: ThoughtSpotRestApiUpdateConnectionConfigurationRequest, options?: Configuration): Promise<void> {
@@ -5176,7 +5322,7 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *  Update a variable\'s name   Version: 10.14.0.cl or later   Allows updating a variable\'s properties in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
+     *  Update a variable\'s name   Version: 10.14.0.cl or later   Allows updating a variable\'s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
      * @param param the request object
      */
     public updateVariable(param: ThoughtSpotRestApiUpdateVariableRequest, options?: Configuration): Promise<void> {
@@ -5184,7 +5330,7 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *  Update values for multiple variables   Version: 10.14.0.cl or later   Allows updating values for multiple variables in ThoughtSpot.  Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows: * Adding new values to variables * Replacing existing values * Deleting values from variables  When updating variable values, you need to specify: * The variable identifiers * The values to add/replace/remove for each variable * The operation to perform (ADD, REPLACE, REMOVE, CLEAR)  Behaviour based on operation type: * ADD - Adds values to the variable if this is a list type variable, else same as replace. * REPLACE - Replaces all values of a given set of constraints with the current set of values. * REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value. * CLEAR - Removes all constrains for a given variable, scope is ignored      
+     *  Update values for multiple variables   Version: 10.14.0.cl or later   Allows updating values for multiple variables in ThoughtSpot.  Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows: * Adding new values to variables * Replacing existing values * Deleting values from variables  When updating variable values, you need to specify: * The variable identifiers * The values to add/replace/remove for each variable * The operation to perform (ADD, REPLACE, REMOVE, RESET)  Behaviour based on operation type: * ADD - Adds values to the variable if this is a list type variable, else same as replace. * REPLACE - Replaces all values of a given set of constraints with the current set of values. * REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value. * RESET - Removes all constrains for a given variable, scope is ignored      
      * @param param the request object
      */
     public updateVariableValues(param: ThoughtSpotRestApiUpdateVariableValuesRequest, options?: Configuration): Promise<void> {
@@ -5499,7 +5645,7 @@ export class ObjectVariableApi {
     }
 
     /**
-     *  Update a variable\'s name   Version: 10.14.0.cl or later   Allows updating a variable\'s properties in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
+     *  Update a variable\'s name   Version: 10.14.0.cl or later   Allows updating a variable\'s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
      * @param param the request object
      */
     public updateVariable(param: VariableApiUpdateVariableRequest, options?: Configuration): Promise<void> {
@@ -5507,7 +5653,7 @@ export class ObjectVariableApi {
     }
 
     /**
-     *  Update values for multiple variables   Version: 10.14.0.cl or later   Allows updating values for multiple variables in ThoughtSpot.  Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows: * Adding new values to variables * Replacing existing values * Deleting values from variables  When updating variable values, you need to specify: * The variable identifiers * The values to add/replace/remove for each variable * The operation to perform (ADD, REPLACE, REMOVE, CLEAR)  Behaviour based on operation type: * ADD - Adds values to the variable if this is a list type variable, else same as replace. * REPLACE - Replaces all values of a given set of constraints with the current set of values. * REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value. * CLEAR - Removes all constrains for a given variable, scope is ignored      
+     *  Update values for multiple variables   Version: 10.14.0.cl or later   Allows updating values for multiple variables in ThoughtSpot.  Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows: * Adding new values to variables * Replacing existing values * Deleting values from variables  When updating variable values, you need to specify: * The variable identifiers * The values to add/replace/remove for each variable * The operation to perform (ADD, REPLACE, REMOVE, RESET)  Behaviour based on operation type: * ADD - Adds values to the variable if this is a list type variable, else same as replace. * REPLACE - Replaces all values of a given set of constraints with the current set of values. * REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value. * RESET - Removes all constrains for a given variable, scope is ignored      
      * @param param the request object
      */
     public updateVariableValues(param: VariableApiUpdateVariableValuesRequest, options?: Configuration): Promise<void> {

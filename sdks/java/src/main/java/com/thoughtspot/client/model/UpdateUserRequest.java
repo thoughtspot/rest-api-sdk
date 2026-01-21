@@ -347,7 +347,11 @@ public class UpdateUserRequest implements Serializable {
     @javax.annotation.Nullable
     private OperationEnum operation = OperationEnum.REPLACE;
 
-    /** Locale for the user. */
+    /**
+     * Locale for the user. When setting this value, do not set use_browser_language to true,
+     * otherwise the browser&#39;s language setting will take precedence and the preferred_locale
+     * value will be ignored.
+     */
     @JsonAdapter(PreferredLocaleEnum.Adapter.class)
     public enum PreferredLocaleEnum {
         EN_CA("en-CA"),
@@ -453,6 +457,12 @@ public class UpdateUserRequest implements Serializable {
     @SerializedName(SERIALIZED_NAME_PREFERRED_LOCALE)
     @javax.annotation.Nullable
     private PreferredLocaleEnum preferredLocale;
+
+    public static final String SERIALIZED_NAME_USE_BROWSER_LANGUAGE = "use_browser_language";
+
+    @SerializedName(SERIALIZED_NAME_USE_BROWSER_LANGUAGE)
+    @javax.annotation.Nullable
+    private Boolean useBrowserLanguage;
 
     public static final String SERIALIZED_NAME_EXTENDED_PROPERTIES = "extended_properties";
 
@@ -781,7 +791,9 @@ public class UpdateUserRequest implements Serializable {
     }
 
     /**
-     * Locale for the user.
+     * Locale for the user. When setting this value, do not set use_browser_language to true,
+     * otherwise the browser&#39;s language setting will take precedence and the preferred_locale
+     * value will be ignored.
      *
      * @return preferredLocale
      */
@@ -792,6 +804,27 @@ public class UpdateUserRequest implements Serializable {
 
     public void setPreferredLocale(@javax.annotation.Nullable PreferredLocaleEnum preferredLocale) {
         this.preferredLocale = preferredLocale;
+    }
+
+    public UpdateUserRequest useBrowserLanguage(
+            @javax.annotation.Nullable Boolean useBrowserLanguage) {
+        this.useBrowserLanguage = useBrowserLanguage;
+        return this;
+    }
+
+    /**
+     * Flag to indicate whether to use the browser locale for the user in the UI. When set to true,
+     * the preferred_locale value is unset and the browser&#39;s language setting takes precedence.
+     *
+     * @return useBrowserLanguage
+     */
+    @javax.annotation.Nullable
+    public Boolean getUseBrowserLanguage() {
+        return useBrowserLanguage;
+    }
+
+    public void setUseBrowserLanguage(@javax.annotation.Nullable Boolean useBrowserLanguage) {
+        this.useBrowserLanguage = useBrowserLanguage;
     }
 
     public UpdateUserRequest extendedProperties(
@@ -862,6 +895,7 @@ public class UpdateUserRequest implements Serializable {
                 && Objects.equals(this.orgIdentifiers, updateUserRequest.orgIdentifiers)
                 && Objects.equals(this.operation, updateUserRequest.operation)
                 && Objects.equals(this.preferredLocale, updateUserRequest.preferredLocale)
+                && Objects.equals(this.useBrowserLanguage, updateUserRequest.useBrowserLanguage)
                 && Objects.equals(this.extendedProperties, updateUserRequest.extendedProperties)
                 && Objects.equals(this.extendedPreferences, updateUserRequest.extendedPreferences);
     }
@@ -893,6 +927,7 @@ public class UpdateUserRequest implements Serializable {
                 orgIdentifiers,
                 operation,
                 preferredLocale,
+                useBrowserLanguage,
                 extendedProperties,
                 extendedPreferences);
     }
@@ -929,6 +964,9 @@ public class UpdateUserRequest implements Serializable {
         sb.append("    orgIdentifiers: ").append(toIndentedString(orgIdentifiers)).append("\n");
         sb.append("    operation: ").append(toIndentedString(operation)).append("\n");
         sb.append("    preferredLocale: ").append(toIndentedString(preferredLocale)).append("\n");
+        sb.append("    useBrowserLanguage: ")
+                .append(toIndentedString(useBrowserLanguage))
+                .append("\n");
         sb.append("    extendedProperties: ")
                 .append(toIndentedString(extendedProperties))
                 .append("\n");
@@ -971,6 +1009,7 @@ public class UpdateUserRequest implements Serializable {
         openapiFields.add("org_identifiers");
         openapiFields.add("operation");
         openapiFields.add("preferred_locale");
+        openapiFields.add("use_browser_language");
         openapiFields.add("extended_properties");
         openapiFields.add("extended_preferences");
 

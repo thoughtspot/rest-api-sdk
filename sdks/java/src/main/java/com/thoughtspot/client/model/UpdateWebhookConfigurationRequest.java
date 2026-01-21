@@ -122,6 +122,12 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
     @javax.annotation.Nullable
     private WebhookSignatureVerificationInput signatureVerification;
 
+    public static final String SERIALIZED_NAME_STORAGE_DESTINATION = "storage_destination";
+
+    @SerializedName(SERIALIZED_NAME_STORAGE_DESTINATION)
+    @javax.annotation.Nullable
+    private StorageDestinationInput storageDestination;
+
     public UpdateWebhookConfigurationRequest() {}
 
     public UpdateWebhookConfigurationRequest name(@javax.annotation.Nullable String name) {
@@ -272,6 +278,33 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
         this.signatureVerification = signatureVerification;
     }
 
+    public UpdateWebhookConfigurationRequest storageDestination(
+            @javax.annotation.Nullable StorageDestinationInput storageDestination) {
+        this.storageDestination = storageDestination;
+        return this;
+    }
+
+    /**
+     * Configuration for storage destination. Example: {\&quot;storage_type\&quot;:
+     * \&quot;AWS_S3\&quot;, \&quot;storage_config\&quot;: {\&quot;aws_s3_config\&quot;:
+     * {\&quot;bucket_name\&quot;: \&quot;my-webhook-files\&quot;, \&quot;region\&quot;:
+     * \&quot;us-west-2\&quot;, \&quot;role_arn\&quot;:
+     * \&quot;arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\&quot;,
+     * \&quot;external_id\&quot;: \&quot;ts-webhook-a1b2c3d4-7890\&quot;, \&quot;path_prefix\&quot;:
+     * \&quot;thoughtspot-webhooks/\&quot;}}} Version: 26.3.0.cl or later
+     *
+     * @return storageDestination
+     */
+    @javax.annotation.Nullable
+    public StorageDestinationInput getStorageDestination() {
+        return storageDestination;
+    }
+
+    public void setStorageDestination(
+            @javax.annotation.Nullable StorageDestinationInput storageDestination) {
+        this.storageDestination = storageDestination;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -291,13 +324,23 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
                         this.authentication, updateWebhookConfigurationRequest.authentication)
                 && Objects.equals(
                         this.signatureVerification,
-                        updateWebhookConfigurationRequest.signatureVerification);
+                        updateWebhookConfigurationRequest.signatureVerification)
+                && Objects.equals(
+                        this.storageDestination,
+                        updateWebhookConfigurationRequest.storageDestination);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
-                name, description, url, urlParams, events, authentication, signatureVerification);
+                name,
+                description,
+                url,
+                urlParams,
+                events,
+                authentication,
+                signatureVerification,
+                storageDestination);
     }
 
     @Override
@@ -312,6 +355,9 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
         sb.append("    authentication: ").append(toIndentedString(authentication)).append("\n");
         sb.append("    signatureVerification: ")
                 .append(toIndentedString(signatureVerification))
+                .append("\n");
+        sb.append("    storageDestination: ")
+                .append(toIndentedString(storageDestination))
                 .append("\n");
         sb.append("}");
         return sb.toString();
@@ -341,6 +387,7 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
         openapiFields.add("events");
         openapiFields.add("authentication");
         openapiFields.add("signature_verification");
+        openapiFields.add("storage_destination");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -421,6 +468,11 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
                 && !jsonObj.get("signature_verification").isJsonNull()) {
             WebhookSignatureVerificationInput.validateJsonElement(
                     jsonObj.get("signature_verification"));
+        }
+        // validate the optional field `storage_destination`
+        if (jsonObj.get("storage_destination") != null
+                && !jsonObj.get("storage_destination").isJsonNull()) {
+            StorageDestinationInput.validateJsonElement(jsonObj.get("storage_destination"));
         }
     }
 

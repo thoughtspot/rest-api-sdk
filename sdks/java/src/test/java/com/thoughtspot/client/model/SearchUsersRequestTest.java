@@ -135,4 +135,10 @@ public class SearchUsersRequestTest {
     public void includeFavoriteMetadataTest() {
         // TODO: test includeFavoriteMetadata
     }
+
+    /** Test the property 'includeVariableValues' */
+    @Test
+    public void includeVariableValuesTest() {
+        // TODO: test includeVariableValues
+    }
 }

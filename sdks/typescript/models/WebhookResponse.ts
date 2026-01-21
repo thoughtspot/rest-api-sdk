@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+import { StorageDestination } from '../models/StorageDestination';
 import { WebhookAuthentication } from '../models/WebhookAuthentication';
 import { WebhookOrg } from '../models/WebhookOrg';
 import { WebhookSignatureVerification } from '../models/WebhookSignatureVerification';
@@ -54,6 +55,7 @@ export class WebhookResponse {
     'modification_time_in_millis': number;
     'created_by'?: WebhookUser;
     'last_modified_by'?: WebhookUser;
+    'storage_destination'?: StorageDestination;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -134,6 +136,12 @@ export class WebhookResponse {
             "name": "last_modified_by",
             "baseName": "last_modified_by",
             "type": "WebhookUser",
+            "format": ""
+        },
+        {
+            "name": "storage_destination",
+            "baseName": "storage_destination",
+            "type": "StorageDestination",
             "format": ""
         }    ];
 

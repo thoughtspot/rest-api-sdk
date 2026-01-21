@@ -27,6 +27,7 @@
 |**sortOptions** | [**SortOptions**](SortOptions.md) | Sort options. |  [optional] |
 |**roleIdentifiers** | **List&lt;String&gt;** | Filters by the role assigned to the user. |  [optional] |
 |**includeFavoriteMetadata** | **Boolean** | Indicates if the user&#39;s favorite objects should be displayed. |  [optional] |
+|**includeVariableValues** | **Boolean** | Indicates if the user&#39;s formula variable values should be included in the response. |  [optional] |
 
 
 
@@ -85,6 +86,7 @@
 | CAN_MANAGE_WEBHOOKS | &quot;CAN_MANAGE_WEBHOOKS&quot; |
 | CAN_DOWNLOAD_VISUALS | &quot;CAN_DOWNLOAD_VISUALS&quot; |
 | CAN_DOWNLOAD_DETAILED_DATA | &quot;CAN_DOWNLOAD_DETAILED_DATA&quot; |
+| CAN_USE_SPOTTER | &quot;CAN_USE_SPOTTER&quot; |
 
 
 

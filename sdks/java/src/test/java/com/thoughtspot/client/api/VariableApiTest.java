@@ -80,9 +80,9 @@ public class VariableApiTest {
 
     /**
      * Update a variable&#39;s name Version: 10.14.0.cl or later Allows updating a variable&#39;s
-     * properties in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The
-     * CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current
-     * organization scope. The API endpoint allows updating: * The variable name
+     * name in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES
+     * permission allows you to manage Formula Variables in the current organization scope. The API
+     * endpoint allows updating: * The variable name
      *
      * @throws ApiException if the Api call fails
      */
@@ -101,11 +101,11 @@ public class VariableApiTest {
      * endpoint allows: * Adding new values to variables * Replacing existing values * Deleting
      * values from variables When updating variable values, you need to specify: * The variable
      * identifiers * The values to add/replace/remove for each variable * The operation to perform
-     * (ADD, REPLACE, REMOVE, CLEAR) Behaviour based on operation type: * ADD - Adds values to the
+     * (ADD, REPLACE, REMOVE, RESET) Behaviour based on operation type: * ADD - Adds values to the
      * variable if this is a list type variable, else same as replace. * REPLACE - Replaces all
      * values of a given set of constraints with the current set of values. * REMOVE - Removes any
      * values which match the set of conditions of the variables if this is a list type variable,
-     * else clears value. * CLEAR - Removes all constrains for a given variable, scope is ignored
+     * else clears value. * RESET - Removes all constrains for a given variable, scope is ignored
      *
      * @throws ApiException if the Api call fails
      */

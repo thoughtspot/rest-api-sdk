@@ -10,6 +10,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**changeUserPassword**](ThoughtSpotRestApi.md#changeUserPassword) | **POST** /api/rest/2.0/users/change-password |
 | [**commitBranch**](ThoughtSpotRestApi.md#commitBranch) | **POST** /api/rest/2.0/vcs/git/branches/commit |
 | [**configureCommunicationChannelPreferences**](ThoughtSpotRestApi.md#configureCommunicationChannelPreferences) | **POST** /api/rest/2.0/system/preferences/communication-channels/configure |
+| [**configureSecuritySettings**](ThoughtSpotRestApi.md#configureSecuritySettings) | **POST** /api/rest/2.0/system/security-settings/configure |
 | [**connectionConfigurationSearch**](ThoughtSpotRestApi.md#connectionConfigurationSearch) | **POST** /api/rest/2.0/connection-configurations/search |
 | [**convertWorksheetToModel**](ThoughtSpotRestApi.md#convertWorksheetToModel) | **POST** /api/rest/2.0/metadata/worksheets/convert |
 | [**copyObject**](ThoughtSpotRestApi.md#copyObject) | **POST** /api/rest/2.0/metadata/copyobject |
@@ -92,6 +93,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**queryGetDecomposedQuery**](ThoughtSpotRestApi.md#queryGetDecomposedQuery) | **POST** /api/rest/2.0/ai/analytical-questions |
 | [**resetUserPassword**](ThoughtSpotRestApi.md#resetUserPassword) | **POST** /api/rest/2.0/users/reset-password |
 | [**revertCommit**](ThoughtSpotRestApi.md#revertCommit) | **POST** /api/rest/2.0/vcs/git/commits/{commit_id}/revert |
+| [**revokeRefreshTokens**](ThoughtSpotRestApi.md#revokeRefreshTokens) | **POST** /api/rest/2.0/connections/{connection_identifier}/revoke-refresh-tokens |
 | [**revokeToken**](ThoughtSpotRestApi.md#revokeToken) | **POST** /api/rest/2.0/auth/token/revoke |
 | [**searchCalendars**](ThoughtSpotRestApi.md#searchCalendars) | **POST** /api/rest/2.0/calendars/search |
 | [**searchCommits**](ThoughtSpotRestApi.md#searchCommits) | **POST** /api/rest/2.0/vcs/git/commits/search |
@@ -105,6 +107,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**searchOrgs**](ThoughtSpotRestApi.md#searchOrgs) | **POST** /api/rest/2.0/orgs/search |
 | [**searchRoles**](ThoughtSpotRestApi.md#searchRoles) | **POST** /api/rest/2.0/roles/search |
 | [**searchSchedules**](ThoughtSpotRestApi.md#searchSchedules) | **POST** /api/rest/2.0/schedules/search |
+| [**searchSecuritySettings**](ThoughtSpotRestApi.md#searchSecuritySettings) | **POST** /api/rest/2.0/system/security-settings/search |
 | [**searchTags**](ThoughtSpotRestApi.md#searchTags) | **POST** /api/rest/2.0/tags/search |
 | [**searchUserGroups**](ThoughtSpotRestApi.md#searchUserGroups) | **POST** /api/rest/2.0/groups/search |
 | [**searchUsers**](ThoughtSpotRestApi.md#searchUsers) | **POST** /api/rest/2.0/users/search |
@@ -356,6 +359,42 @@ null (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | Communication channel preferences successfully updated. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="configureSecuritySettings"></a>
+# **configureSecuritySettings**
+> configureSecuritySettings(configureSecuritySettingsRequest)
+
+
+
+ Version: 26.2.0.cl or later   Configure security settings for your ThoughtSpot application instance. - Use &#x60;cluster_preferences&#x60; to update cluster-level security settings including CORS whitelisted URLs, CSP settings, SAML redirect URLs, partitioned cookies, and non-embed access configuration. - Use &#x60;org_preferences&#x60; to configure Org-specific security settings. If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this allows configuring CORS and non-embed access settings specific to the Org.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. Cluster-level SAML and script-src settings require &#x60;ADMINISTRATION&#x60; privilege. See [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.     
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **configureSecuritySettingsRequest** | [**ConfigureSecuritySettingsRequest**](ConfigureSecuritySettingsRequest.md)
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Successfully configured the security settings. |  -  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
@@ -619,7 +658,7 @@ Version: 10.13.0.cl or later
 
 
 
-  Version: 10.12.0.cl or later   Creates an additional configuration to an existing connection to a data warehouse.    Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is required.  #### Usage guidelines   * A JSON map of configuration attributes in &#x60;configuration&#x60;. The following example shows the configuration attributes:   &#x60;&#x60;&#x60;    {      \&quot;user\&quot;:\&quot;DEV_USER\&quot;,      \&quot;password\&quot;:\&quot;TestConn123\&quot;,      \&quot;role\&quot;:\&quot;DEV\&quot;,      \&quot;warehouse\&quot;:\&quot;DEV_WH\&quot;     }   &#x60;&#x60;&#x60;  * If the &#x60;policy_type&#x60; is &#x60;PRINCIPALS&#x60;, then &#x60;policy_principals&#x60; is a required field. * If the &#x60;policy_type&#x60; is &#x60;PROCESSES&#x60;, then &#x60;policy_processes&#x60; is a required field. * If the &#x60;policy_type&#x60; is &#x60;NO_POLICY&#x60;, then &#x60;policy_principals&#x60; and &#x60;policy_processes&#x60; are not required fields.      
+  Version: 10.12.0.cl or later   Creates an additional configuration to an existing connection to a data warehouse.    Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is required.  #### Usage guidelines   * A JSON map of configuration attributes in &#x60;configuration&#x60;. The following example shows the configuration attributes:   &#x60;&#x60;&#x60;    {      \&quot;user\&quot;:\&quot;DEV_USER\&quot;,      \&quot;password\&quot;:\&quot;TestConn123\&quot;,      \&quot;role\&quot;:\&quot;DEV\&quot;,      \&quot;warehouse\&quot;:\&quot;DEV_WH\&quot;     }   &#x60;&#x60;&#x60;  * If the &#x60;policy_type&#x60; is &#x60;PRINCIPALS&#x60;, then &#x60;policy_principals&#x60; is a required field. * If the &#x60;policy_type&#x60; is &#x60;PROCESSES&#x60;, then &#x60;policy_processes&#x60; is a required field. * If the &#x60;policy_type&#x60; is &#x60;NO_POLICY&#x60;, then &#x60;policy_principals&#x60; and &#x60;policy_processes&#x60; are not required fields.  #### Parameterized Connection Support For parameterized connections that use OAuth authentication, only the same_as_parent and policy_process_options  attributes are allowed in the API request. These attributes are not applicable to connections that are not parameterized.       
 
 ### Parameters
 
@@ -1995,7 +2034,7 @@ null (empty response body)
 
 
 
-  Version: 9.0.0.cl or later   Exports a Liveboard and its visualizations in PDF or PNG file format.  Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default &#x60;file_format&#x60; is PDF. For PDF downloads, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are also available for PNG output.  **NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the &#x60;transient_pinboard_content&#x60; script generated from the &#x60;getExportRequestForCurrentPinboard&#x60; method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).    **NOTE**: Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in the PNG format in the resolution of your choice. To enable this on your instance, contact ThoughtSpot support. When this feature is enabled, the options &#x60;include_cover_page&#x60;,&#x60;include_filter_page&#x60; within the &#x60;png_options&#x60; will not be available for PNG exports.     
+  Version: 9.0.0.cl or later   Exports a Liveboard and its visualizations in PDF, PNG, CSV, or XLSX file format.  Requires at least view access to the Liveboard.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  The default &#x60;file_format&#x60; is CSV. For PDF exports, you can specify additional parameters to customize the page orientation and include or exclude the cover page, logo, footer text, and page numbers. Similar customization options are available for PNG exports. CSV and XLSX exports do not support customization options.  **NOTE**: The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  To include unsaved changes in the report, pass the &#x60;transient_pinboard_content&#x60; script generated from the &#x60;getExportRequestForCurrentPinboard&#x60; method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).    **NOTE**: Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in the PNG format in the resolution of your choice. To enable this on your instance, contact ThoughtSpot support. When this feature is enabled, the options &#x60;include_cover_page&#x60;,&#x60;include_filter_page&#x60; within the &#x60;png_options&#x60; will not be available for PNG exports.  **NOTE**: Starting with the ThoughtSpot Cloud 26.2.0.cl release, Liveboards can be exported in CSV format. All visualizations in the Liveboard can be exported as individual CSV files. If multiple visualizations are selected or if the entire Liveboard is exported, the output is returned as a .zip file containing the CSV files for each visualization.  **NOTE**: Starting with the ThoughtSpot Cloud 26.2.0.cl release, Liveboards can be exported in XLSX format. All selected visualizations are consolidated into a single Excel workbook (.xlsx), with each visualization placed in its own worksheet (tab). XLSX exports are limited to 255 worksheets (tabs) per workbook.      
 
 ### Parameters
 
@@ -2637,7 +2676,7 @@ No authorization required
 
 
 
- Version: 10.13.0.cl or later   Provides relevant data source recommendations for a user-submitted natural language query.  To use this API, the user must have at least view-level access to the underlying metadata entities referenced in the response.  #### Usage guidelines  The request must include a &#x60;query&#x60; string via the request body.  The returned results include metadata such as: - &#x60;confidence&#x60;: a float indicating the model&#39;s confidence in the relevance of each recommendation - &#x60;details&#x60;: includes &#x60;data_source_identifier&#x60;, &#x60;data_source_name&#x60;, and &#x60;description&#x60; of each recommended data source - &#x60;reasoning&#x60;: rationale provided by the LLM to explain why each data source was recommended  If the API request is successful, ThoughtSpot returns a ranked list of data sources, each annotated with relevant reasoning.  &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes may be introduced before it is made Generally Available. &gt; * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+ Version: 10.15.0.cl or later   Provides relevant data source recommendations for a user-submitted natural language query.  To use this API, the user must have at least view-level access to the underlying metadata entities referenced in the response.  #### Usage guidelines  The request must include a &#x60;query&#x60; string via the request body.  The returned results include metadata such as: - &#x60;confidence&#x60;: a float indicating the model&#39;s confidence in the relevance of each recommendation - &#x60;details&#x60;: includes &#x60;data_source_identifier&#x60;, &#x60;data_source_name&#x60;, and &#x60;description&#x60; of each recommended data source - &#x60;reasoning&#x60;: rationale provided by the LLM to explain why each data source was recommended  If the API request is successful, ThoughtSpot returns a ranked list of data sources, each annotated with relevant reasoning.  &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes may be introduced before it is made Generally Available. &gt; * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
 
 ### Parameters
 
@@ -2708,7 +2747,7 @@ No authorization required
 
 
 
- Version: 10.15.0.cl or later   This API allows users to retrieve existing natural language (NL) instructions for a specific data-model. These instructions guide the AI system in understanding data context and generating more accurate responses when processing natural language queries.  #### Usage guidelines  To retrieve NL instructions for a data-model, the request must include: - &#x60;data_source_identifier&#x60;: The unique ID or name of the data-model to retrieve NL instructions  The API returns a response object with: - &#x60;nl_instructions_info&#x60;: An array of instruction objects, each containing:   - &#x60;instructions&#x60;: Array of text instructions for natural language processing   - &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). It can be extended to data-model-user scope in future.  #### Instructions Scope  - **GLOBAL**: Instructions that apply globally across the system on the given data-model (currently only global instructions are supported)  &gt; ###### Note: &gt; * To use this API, the user needs atleast view access on the data-model and they must use corresponding org related bearerToken where the data-model exists. &gt; * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; * Available from version 10.15.0.cl and later. &gt; * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. &gt; * Use this API to view currently configured instructions before modifying them with &#x60;setNLInstructions&#x60;.     
+ Version: 10.15.0.cl or later   This API allows users to retrieve existing natural language (NL) instructions for a specific data-model. These instructions guide the AI system in understanding data context and generating more accurate responses when processing natural language queries.  #### Usage guidelines  To retrieve NL instructions for a data-model, the request must include: - &#x60;data_source_identifier&#x60;: The unique ID of the data-model to retrieve NL instructions  The API returns a response object with: - &#x60;nl_instructions_info&#x60;: An array of instruction objects, each containing:   - &#x60;instructions&#x60;: Array of text instructions for natural language processing   - &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). It can be extended to data-model-user scope in future.  #### Instructions Scope  - **GLOBAL**: Instructions that apply globally across the system on the given data-model (currently only global instructions are supported)  &gt; ###### Note: &gt; * To use this API, the user needs atleast view access on the data-model and they must use corresponding org related bearerToken where the data-model exists. &gt; * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; * Available from version 10.15.0.cl and later. &gt; * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. &gt; * Use this API to view currently configured instructions before modifying them with &#x60;setNLInstructions&#x60;.     
 
 ### Parameters
 
@@ -3126,7 +3165,7 @@ null (empty response body)
 
 
 
- Parameterize fields in metadata objects.   Version: 10.9.0.cl or later   Allows parameterizing fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections  For a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName * tableName  For a Connection the field type is always &#x60;CONNECTION_PROPERTY&#x60;. We use the field_name in this case to specify the exact property of a connection which needs to be parameterized.      
+ Parameterize fields in metadata objects.   Version: 10.9.0.cl or later   Allows parameterizing fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be parameterized.  For Connection Config, the only supported field name is: * impersonate_user      
 
 ### Parameters
 
@@ -3298,6 +3337,45 @@ null (empty response body)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="revokeRefreshTokens"></a>
+# **revokeRefreshTokens**
+> RevokeRefreshTokensResponse revokeRefreshTokens(connectionIdentifier, revokeRefreshTokensRequest)
+
+
+
+  Version: 26.2.0.cl or later   Revokes OAuth refresh tokens for users who no longer require access to a data warehouse connection. When a token is revoked, the affected user&#39;s session for that connection is terminated, and they must re-authenticate to regain access.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on the ThoughtSpot instance, users with &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege can also make API requests to revoke tokens for connection users.  #### Usage guidelines  You can specify different combinations of identifiers to control which refresh tokens are revoked.  - **connection_identifier**: Revokes refresh tokens for all users of the connection, except the connection author. - **connection_identifier** and **user_identifiers**: Revokes refresh tokens only for the users specified in the request. If the name or ID of the connection author is included in the request, their token will also be revoked. - **connection_identifier** and **configuration_identifiers**: Revokes refresh tokens for all users on the specified configurations, except the configuration author. - **connection_identifier**, **configuration_identifiers**, and **user_identifiers**: Revokes refresh tokens for the specified users on the specified configurations. - **connection_identifier** and **org_identifiers**: Revokes refresh tokens for the specified Orgs. Applicable only for published connections. - **connection_identifier**, **org_identifiers**, and **user_identifiers**: Revokes refresh tokens for the specified users in the specified Orgs. Applicable only for published connections.  **NOTE**: The &#x60;org_identifiers&#x60; parameter is only applicable for published connections. Using this parameter for unpublished connections will result in an error. Ensure that the connections are published before making the API request.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **connectionIdentifier** | **String**
+| **revokeRefreshTokensRequest** | [**RevokeRefreshTokensRequest**](RevokeRefreshTokensRequest.md)
+
+### Return type
+
+[**RevokeRefreshTokensResponse**](RevokeRefreshTokensResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Token(s) successfully revoked. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **404** | Object not found |  -  |
+| **409** | Conflict |  -  |
 | **500** | Unexpected error |  -  |
 
 <a id="revokeToken"></a>
@@ -3767,6 +3845,42 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
+<a id="searchSecuritySettings"></a>
+# **searchSecuritySettings**
+> SecuritySettingsResponse searchSecuritySettings(searchSecuritySettingsRequest)
+
+
+
+ Version: 26.2.0.cl or later   Fetch security settings for your ThoughtSpot application instance. - Use &#x60;scope: CLUSTER&#x60; to retrieve cluster-level security settings, including CORS and CSP allowlists, SAML redirect URLs, and settings that control access to non-embedded pages. - Use &#x60;scope: ORG&#x60; to retrieve Org-level security settings. If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this returns CORS and non-embed access settings specific to the Org. - If &#x60;scope&#x60; is not specified, returns both cluster and Org-specific settings based on user privileges.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. See [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.     
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **searchSecuritySettingsRequest** | [**SearchSecuritySettingsRequest**](SearchSecuritySettingsRequest.md)
+
+### Return type
+
+[**SecuritySettingsResponse**](SecuritySettingsResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successfully retrieved the list of security settings. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
 <a id="searchTags"></a>
 # **searchTags**
 > List&lt;Tag&gt; searchTags(searchTagsRequest)
@@ -3953,7 +4067,7 @@ null (empty response body)
 
 
 
- Version: 10.13.0.cl or later   This API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages.  To use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.   #### Usage guidelines  To initiate or continue a conversation, the request must include: - &#x60;conversation_identifier&#x60;: a unique session ID for continuity and message tracking - &#x60;messages&#x60;: an array of one or more text messages, each with a value and type  The API returns a array of object with a type, message, and metadata. - &#x60;type&#x60;: Type of the message — text, answer, or error. - &#x60;message&#x60;: Main content of the response. - &#x60;metadata&#x60;: Additional info depending on the message type.  &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.     
+ Version: 10.15.0.cl or later   This API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages.  To use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.   #### Usage guidelines  To initiate or continue a conversation, the request must include: - &#x60;conversation_identifier&#x60;: a unique session ID for continuity and message tracking - &#x60;messages&#x60;: an array of one or more text messages, each with a value and type  The API returns a array of object with a type, message, and metadata. - &#x60;type&#x60;: Type of the message — text, answer, or error. - &#x60;message&#x60;: Main content of the response. - &#x60;metadata&#x60;: Additional info depending on the message type.  &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.     
 
 ### Parameters
 
@@ -4060,7 +4174,7 @@ null (empty response body)
 
 
 
- Version: 10.15.0.cl or later   This API allows users to set natural language (NL) instructions for a specific data-model to improve AI-generated answers and query processing. These instructions help guide the AI system to better understand the data context and provide more accurate responses.  #### Usage guidelines  To set NL instructions for a data-model, the request must include: - &#x60;data_source_identifier&#x60;: The unique ID or name of the data-model for which to set NL instructions - &#x60;nl_instructions_info&#x60;: An array of instruction objects, each containing:   - &#x60;instructions&#x60;: Array of text instructions for the LLM   - &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). Currently only &#x60;GLOBAL&#x60; is supported. It can be extended to data-model-user scope in future.  The API returns a response object with: - &#x60;success&#x60;: Boolean indicating whether the operation was successful  #### Instructions Scope  - **GLOBAL**: Instructions that apply globally for that data-model across the system  &gt; ###### Note: &gt; * To use this API, the user needs either edit access or SPOTTER_COACHING_PRIVILEGE on the data-model and they must use corresponding org related bearerToken where the data-model exists. &gt; * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; * Available from version 10.15.0.cl and later. &gt; * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. &gt; * Instructions help improve the accuracy and relevance of AI-generated responses for the specified data-model.      
+ Version: 10.15.0.cl or later   This API allows users to set natural language (NL) instructions for a specific data-model to improve AI-generated answers and query processing. These instructions help guide the AI system to better understand the data context and provide more accurate responses.  #### Usage guidelines  To set NL instructions for a data-model, the request must include: - &#x60;data_source_identifier&#x60;: The unique ID of the data-model for which to set NL instructions - &#x60;nl_instructions_info&#x60;: An array of instruction objects, each containing:   - &#x60;instructions&#x60;: Array of text instructions for the LLM   - &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). Currently only &#x60;GLOBAL&#x60; is supported. It can be extended to data-model-user scope in future.  The API returns a response object with: - &#x60;success&#x60;: Boolean indicating whether the operation was successful  #### Instructions Scope  - **GLOBAL**: Instructions that apply globally for that data-model across the system  &gt; ###### Note: &gt; * To use this API, the user needs either edit access or SPOTTER_COACHING_PRIVILEGE on the data-model and they must use corresponding org related bearerToken where the data-model exists. &gt; * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; * Available from version 10.15.0.cl and later. &gt; * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. &gt; * Instructions help improve the accuracy and relevance of AI-generated responses for the specified data-model.      
 
 ### Parameters
 
@@ -4202,7 +4316,7 @@ null (empty response body)
 
 
 
- Remove parameterization from fields in metadata objects.   Version: 10.9.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections  For a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName * tableName  For a Connection the field type is always &#x60;CONNECTION_PROPERTY&#x60;. We use the field_name in this case to specify the exact property of a connection which needs to be unparameterized.      
+ Remove parameterization from fields in metadata objects.   Version: 10.9.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user      
 
 ### Parameters
 
@@ -4419,7 +4533,7 @@ null (empty response body)
 
 
 
-  Version: 10.12.0.cl or later   Updates a connection configuration object.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is required.  #### Supported operations This API endpoint lets you perform the following operations in a single API request:   * Edit the name or description of the configuration  * Edit the configuration properties  * Edit the &#x60;policy_type&#x60;  * Edit the type of authentication  * Enable or disable a configuration   **NOTE**: When updating a configuration where &#x60;disabled&#x60; is &#x60;true&#x60;, you must reset &#x60;disabled&#x60; to &#x60;true&#x60; in your update request payload. If not explicitly set again, the API will default &#x60;disabled&#x60; to &#x60;false&#x60;.       
+  Version: 10.12.0.cl or later   Updates a connection configuration object.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is required.  #### Supported operations This API endpoint lets you perform the following operations in a single API request:   * Edit the name or description of the configuration  * Edit the configuration properties  * Edit the &#x60;policy_type&#x60;  * Edit the type of authentication  * Enable or disable a configuration  #### Parameterized Connection Support For parameterized oauth based connections, only the &#x60;same_as_parent&#x60; and &#x60;policy_process_options&#x60; attributes are allowed. These attributes are not applicable to connections that are not parameterized.   **NOTE**: When updating a configuration where &#x60;disabled&#x60; is &#x60;true&#x60;, you must reset &#x60;disabled&#x60; to &#x60;true&#x60; in your update request payload. If not explicitly set again, the API will default &#x60;disabled&#x60; to &#x60;false&#x60;.      
 
 ### Parameters
 
@@ -4942,7 +5056,7 @@ null (empty response body)
 
 
 
- Update a variable&#39;s name   Version: 10.14.0.cl or later   Allows updating a variable&#39;s properties in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
+ Update a variable&#39;s name   Version: 10.14.0.cl or later   Allows updating a variable&#39;s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
 
 ### Parameters
 
@@ -4979,7 +5093,7 @@ null (empty response body)
 
 
 
- Update values for multiple variables   Version: 10.14.0.cl or later   Allows updating values for multiple variables in ThoughtSpot.  Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows: * Adding new values to variables * Replacing existing values * Deleting values from variables  When updating variable values, you need to specify: * The variable identifiers * The values to add/replace/remove for each variable * The operation to perform (ADD, REPLACE, REMOVE, CLEAR)  Behaviour based on operation type: * ADD - Adds values to the variable if this is a list type variable, else same as replace. * REPLACE - Replaces all values of a given set of constraints with the current set of values. * REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value. * CLEAR - Removes all constrains for a given variable, scope is ignored      
+ Update values for multiple variables   Version: 10.14.0.cl or later   Allows updating values for multiple variables in ThoughtSpot.  Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows: * Adding new values to variables * Replacing existing values * Deleting values from variables  When updating variable values, you need to specify: * The variable identifiers * The values to add/replace/remove for each variable * The operation to perform (ADD, REPLACE, REMOVE, RESET)  Behaviour based on operation type: * ADD - Adds values to the variable if this is a list type variable, else same as replace. * REPLACE - Replaces all values of a given set of constraints with the current set of values. * REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value. * RESET - Removes all constrains for a given variable, scope is ignored      
 
 ### Parameters
 

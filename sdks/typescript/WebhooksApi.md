@@ -39,6 +39,7 @@ apiInstance.createWebhookConfiguration(
     ],
     authentication: null,
     signature_verification: null,
+    storage_destination: null,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -242,6 +243,7 @@ apiInstance.updateWebhookConfiguration(
     ],
     authentication: null,
     signature_verification: null,
+    storage_destination: null,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);

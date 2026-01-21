@@ -12,6 +12,7 @@
 
 import { CreateWebhookConfigurationRequestAuthentication } from '../models/CreateWebhookConfigurationRequestAuthentication';
 import { CreateWebhookConfigurationRequestSignatureVerification } from '../models/CreateWebhookConfigurationRequestSignatureVerification';
+import { CreateWebhookConfigurationRequestStorageDestination } from '../models/CreateWebhookConfigurationRequestStorageDestination';
 import { HttpFile } from '../http/http';
 
 export class UpdateWebhookConfigurationRequest {
@@ -37,6 +38,7 @@ export class UpdateWebhookConfigurationRequest {
     'events'?: Array<UpdateWebhookConfigurationRequestEventsEnum>;
     'authentication'?: CreateWebhookConfigurationRequestAuthentication;
     'signature_verification'?: CreateWebhookConfigurationRequestSignatureVerification;
+    'storage_destination'?: CreateWebhookConfigurationRequestStorageDestination;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -81,6 +83,12 @@ export class UpdateWebhookConfigurationRequest {
             "name": "signature_verification",
             "baseName": "signature_verification",
             "type": "CreateWebhookConfigurationRequestSignatureVerification",
+            "format": ""
+        },
+        {
+            "name": "storage_destination",
+            "baseName": "storage_destination",
+            "type": "CreateWebhookConfigurationRequestStorageDestination",
             "format": ""
         }    ];
 

@@ -71,9 +71,13 @@ export class CreateUserRequest {
     */
     'favorite_metadata'?: Array<FavoriteMetadataInput>;
     /**
-    * Locale for the user.
+    * Locale for the user. When setting this value, do not set use_browser_language to true, otherwise the browser\'s language setting will take precedence and the preferred_locale value will be ignored.
     */
     'preferred_locale'?: CreateUserRequestPreferredLocaleEnum;
+    /**
+    * Flag to indicate whether to use the browser locale for the user in the UI. When set to true, the preferred_locale value is unset and the browser\'s language setting takes precedence.
+    */
+    'use_browser_language'?: boolean | null;
     /**
     * Properties for the user
     */
@@ -182,6 +186,12 @@ export class CreateUserRequest {
             "name": "preferred_locale",
             "baseName": "preferred_locale",
             "type": "CreateUserRequestPreferredLocaleEnum",
+            "format": ""
+        },
+        {
+            "name": "use_browser_language",
+            "baseName": "use_browser_language",
+            "type": "boolean",
             "format": ""
         },
         {

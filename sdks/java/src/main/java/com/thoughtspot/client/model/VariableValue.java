@@ -114,6 +114,12 @@ public class VariableValue implements Serializable {
     @javax.annotation.Nullable
     private String principalIdentifier;
 
+    public static final String SERIALIZED_NAME_MODEL_IDENTIFIER = "model_identifier";
+
+    @SerializedName(SERIALIZED_NAME_MODEL_IDENTIFIER)
+    @javax.annotation.Nullable
+    private String modelIdentifier;
+
     public static final String SERIALIZED_NAME_PRIORITY = "priority";
 
     @SerializedName(SERIALIZED_NAME_PRIORITY)
@@ -226,6 +232,25 @@ public class VariableValue implements Serializable {
         this.principalIdentifier = principalIdentifier;
     }
 
+    public VariableValue modelIdentifier(@javax.annotation.Nullable String modelIdentifier) {
+        this.modelIdentifier = modelIdentifier;
+        return this;
+    }
+
+    /**
+     * Unique ID of the model Version: 26.3.0.cl or later
+     *
+     * @return modelIdentifier
+     */
+    @javax.annotation.Nullable
+    public String getModelIdentifier() {
+        return modelIdentifier;
+    }
+
+    public void setModelIdentifier(@javax.annotation.Nullable String modelIdentifier) {
+        this.modelIdentifier = modelIdentifier;
+    }
+
     public VariableValue priority(@javax.annotation.Nullable Integer priority) {
         this.priority = priority;
         return this;
@@ -260,6 +285,7 @@ public class VariableValue implements Serializable {
                 && Objects.equals(this.orgIdentifier, variableValue.orgIdentifier)
                 && Objects.equals(this.principalType, variableValue.principalType)
                 && Objects.equals(this.principalIdentifier, variableValue.principalIdentifier)
+                && Objects.equals(this.modelIdentifier, variableValue.modelIdentifier)
                 && Objects.equals(this.priority, variableValue.priority);
     }
 
@@ -275,7 +301,13 @@ public class VariableValue implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(
-                value, valueList, orgIdentifier, principalType, principalIdentifier, priority);
+                value,
+                valueList,
+                orgIdentifier,
+                principalType,
+                principalIdentifier,
+                modelIdentifier,
+                priority);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -296,6 +328,7 @@ public class VariableValue implements Serializable {
         sb.append("    principalIdentifier: ")
                 .append(toIndentedString(principalIdentifier))
                 .append("\n");
+        sb.append("    modelIdentifier: ").append(toIndentedString(modelIdentifier)).append("\n");
         sb.append("    priority: ").append(toIndentedString(priority)).append("\n");
         sb.append("}");
         return sb.toString();
@@ -323,6 +356,7 @@ public class VariableValue implements Serializable {
         openapiFields.add("org_identifier");
         openapiFields.add("principal_type");
         openapiFields.add("principal_identifier");
+        openapiFields.add("model_identifier");
         openapiFields.add("priority");
 
         // a set of required properties/fields (JSON key names)
@@ -415,6 +449,15 @@ public class VariableValue implements Serializable {
                             "Expected the field `principal_identifier` to be a primitive type in"
                                     + " the JSON string but got `%s`",
                             jsonObj.get("principal_identifier").toString()));
+        }
+        if ((jsonObj.get("model_identifier") != null
+                        && !jsonObj.get("model_identifier").isJsonNull())
+                && !jsonObj.get("model_identifier").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `model_identifier` to be a primitive type in the"
+                                    + " JSON string but got `%s`",
+                            jsonObj.get("model_identifier").toString()));
         }
     }
 

@@ -125,7 +125,7 @@ paths:
     post:
       description: |2+
 
-        Version: 10.13.0.cl or later
+        Version: 10.15.0.cl or later
 
 
         Provides relevant data source recommendations for a user-submitted natural language query.
@@ -202,7 +202,7 @@ paths:
         #### Usage guidelines
 
         To retrieve NL instructions for a data-model, the request must include:
-        - `data_source_identifier`: The unique ID or name of the data-model to retrieve NL instructions
+        - `data_source_identifier`: The unique ID of the data-model to retrieve NL instructions
 
         The API returns a response object with:
         - `nl_instructions_info`: An array of instruction objects, each containing:
@@ -381,7 +381,7 @@ paths:
       - application/json
   /api/rest/2.0/ai/agent/{conversation_identifier}/converse:
     post:
-      description: "\nVersion: 10.13.0.cl or later\n\n\nThis API allows users to initiate\
+      description: "\nVersion: 10.15.0.cl or later\n\n\nThis API allows users to initiate\
         \ or continue an agent (Spotter) conversation by submitting one or more natural\
         \ language messages. \nTo use this API, the user must have access to the relevant\
         \ conversational session (via conversation_identifier) and submit at least\
@@ -593,7 +593,7 @@ paths:
         #### Usage guidelines
 
         To set NL instructions for a data-model, the request must include:
-        - `data_source_identifier`: The unique ID or name of the data-model for which to set NL instructions
+        - `data_source_identifier`: The unique ID of the data-model for which to set NL instructions
         - `nl_instructions_info`: An array of instruction objects, each containing:
           - `instructions`: Array of text instructions for the LLM
           - `scope`: The scope of the instruction (`GLOBAL`). Currently only `GLOBAL` is supported. It can be extended to data-model-user scope in future.
@@ -1411,7 +1411,10 @@ paths:
         \ `PRINCIPALS`, then `policy_principals` is a required field.\n* If the `policy_type`\
         \ is `PROCESSES`, then `policy_processes` is a required field.\n* If the `policy_type`\
         \ is `NO_POLICY`, then `policy_principals` and `policy_processes` are not\
-        \ required fields.\n\n\n\n\n\n"
+        \ required fields.\n\n#### Parameterized Connection Support\nFor parameterized\
+        \ connections that use OAuth authentication, only the same_as_parent and policy_process_options\
+        \  attributes are allowed in the API request. These attributes are not applicable\
+        \ to connections that are not parameterized.\n\n\n\n\n\n\n"
       operationId: createConnectionConfiguration
       parameters: []
       requestBody:
@@ -1517,19 +1520,35 @@ paths:
       - application/json
   /api/rest/2.0/connection-configurations/{configuration_identifier}/update:
     post:
-      description: "\n Version: 10.12.0.cl or later\n\n\nUpdates a connection configuration\
-        \ object.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions\
-        \ to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**)\
-        \ privilege.\n\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
-        \ is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can\
-        \ create/edit Connections**) privilege is required.\n\n#### Supported operations\n\
-        This API endpoint lets you perform the following operations in a single API\
-        \ request:\n\n * Edit the name or description of the configuration\n * Edit\
-        \ the configuration properties\n * Edit the `policy_type`\n * Edit the type\
-        \ of authentication\n * Enable or disable a configuration\n\n **NOTE**: When\
-        \ updating a configuration where `disabled` is `true`, you must reset `disabled`\
-        \ to `true` in your update request payload. If not explicitly set again, the\
-        \ API will default `disabled` to `false`.\n \n\n\n\n\n"
+      description: |2+
+
+         Version: 10.12.0.cl or later
+
+
+        Updates a connection configuration object.
+
+        Requires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.
+
+        #### Supported operations
+        This API endpoint lets you perform the following operations in a single API request:
+
+         * Edit the name or description of the configuration
+         * Edit the configuration properties
+         * Edit the `policy_type`
+         * Edit the type of authentication
+         * Enable or disable a configuration
+
+        #### Parameterized Connection Support
+        For parameterized oauth based connections, only the `same_as_parent` and `policy_process_options` attributes are allowed. These attributes are not applicable to connections that are not parameterized.
+
+         **NOTE**: When updating a configuration where `disabled` is `true`, you must reset `disabled` to `true` in your update request payload. If not explicitly set again, the API will default `disabled` to `false`.
+
+
+
+
+
       operationId: updateConnectionConfiguration
       parameters:
       - description: Unique ID or name of the configuration.
@@ -1916,6 +1935,103 @@ paths:
       tags:
       - Connections
       - ThoughtSpotRest
+      x-accepts:
+      - application/json
+  /api/rest/2.0/connections/{connection_identifier}/revoke-refresh-tokens:
+    post:
+      description: |2+
+
+         Version: 26.2.0.cl or later
+
+
+        Revokes OAuth refresh tokens for users who no longer require access to a data warehouse connection.
+        When a token is revoked, the affected user's session for that connection is terminated, and they must re-authenticate to regain access.
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DATAMANAGEMENT` (**Can manage data**) privileges.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on the ThoughtSpot instance, users with `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege can also make API requests to revoke tokens for connection users.
+
+        #### Usage guidelines
+
+        You can specify different combinations of identifiers to control which refresh tokens are revoked.
+
+        - **connection_identifier**: Revokes refresh tokens for all users of the connection, except the connection author.
+        - **connection_identifier** and **user_identifiers**: Revokes refresh tokens only for the users specified in the request. If the name or ID of the connection author is included in the request, their token will also be revoked.
+        - **connection_identifier** and **configuration_identifiers**: Revokes refresh tokens for all users on the specified configurations, except the configuration author.
+        - **connection_identifier**, **configuration_identifiers**, and **user_identifiers**: Revokes refresh tokens for the specified users on the specified configurations.
+        - **connection_identifier** and **org_identifiers**: Revokes refresh tokens for the specified Orgs. Applicable only for published connections.
+        - **connection_identifier**, **org_identifiers**, and **user_identifiers**: Revokes refresh tokens for the specified users in the specified Orgs. Applicable only for published connections.
+
+        **NOTE**: The `org_identifiers` parameter is only applicable for published connections. Using this parameter for unpublished connections will result in an error. Ensure that the connections are published before making the API request.
+
+
+
+
+
+      operationId: revokeRefreshTokens
+      parameters:
+      - description: Unique ID or name of the connection whose refresh tokens need
+          to be revoked. All the users associated with the connection will have their
+          refresh tokens revoked except the author.
+        explode: false
+        in: path
+        name: connection_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/revokeRefreshTokens_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RevokeRefreshTokensResponse'
+          description: Token(s) successfully revoked.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Object not found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Conflict
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Connections
+      - ThoughtSpotRest
+      x-content-type: application/json
       x-accepts:
       - application/json
   /api/rest/2.0/connection/search:
@@ -4953,11 +5069,13 @@ paths:
         \ or later\n\n\nAllows parameterizing fields in metadata objects in ThoughtSpot.\n\
         \nRequires appropriate permissions to modify the metadata object.\n\nThe API\
         \ endpoint allows parameterizing the following types of metadata objects:\n\
-        * Logical Tables\n* Connections\n\nFor a Logical Table the field type must\
-        \ be `ATTRIBUTE` and field name can be one of:\n* databaseName\n* schemaName\n\
-        * tableName\n\nFor a Connection the field type is always `CONNECTION_PROPERTY`.\
-        \ We use the field_name in this\ncase to specify the exact property of a connection\
-        \ which needs to be parameterized.\n\n\n\n\n\n"
+        * Logical Tables\n* Connections\n* Connection Configs\n\nFor a Logical Table\
+        \ the field type must be `ATTRIBUTE` and field name can be one of:\n* databaseName\n\
+        * schemaName\n* tableName\n\nFor a Connection or Connection Config, the field\
+        \ type is always `CONNECTION_PROPERTY`. In this case, field_name specifies\
+        \ the exact property of the Connection or Connection Config that needs to\
+        \ be parameterized.\n\nFor Connection Config, the only supported field name\
+        \ is:\n* impersonate_user\n\n\n\n\n\n"
       operationId: parameterizeMetadata
       parameters: []
       requestBody:
@@ -5095,11 +5213,12 @@ paths:
         \ in metadata objects in ThoughtSpot.\n\nRequires appropriate permissions\
         \ to modify the metadata object.\n\nThe API endpoint allows unparameterizing\
         \ the following types of metadata objects:\n* Logical Tables\n* Connections\n\
-        \nFor a Logical Table the field type must be `ATTRIBUTE` and field name can\
-        \ be one of:\n* databaseName\n* schemaName\n* tableName\n\nFor a Connection\
-        \ the field type is always `CONNECTION_PROPERTY`. We use the field_name in\
-        \ this\ncase to specify the exact property of a connection which needs to\
-        \ be unparameterized.\n\n\n\n\n\n"
+        * Connection Configs\n\nFor a Logical Table the field type must be `ATTRIBUTE`\
+        \ and field name can be one of:\n* databaseName\n* schemaName\n* tableName\n\
+        \nFor a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`.\
+        \ In this case, field_name specifies the exact property of the Connection\
+        \ or Connection Config that needs to be unparameterized.\n\nFor Connection\
+        \ Config, the only supported field name is:\n* impersonate_user\n\n\n\n\n\n"
       operationId: unparameterizeMetadata
       parameters: []
       requestBody:
@@ -5631,17 +5750,17 @@ paths:
   /api/rest/2.0/report/liveboard:
     post:
       description: "\n Version: 9.0.0.cl or later\n\n\nExports a Liveboard and its\
-        \ visualizations in PDF or PNG file format.\n\nRequires at least view access\
-        \ to the Liveboard.\n\n#### Usage guidelines\n\nIn the request body, specify\
-        \ the GUID or name of the Liveboard. To generate a Liveboard report with specific\
-        \ visualizations, add GUIDs or names of the visualizations.\n\nThe default\
-        \ `file_format` is PDF. For PDF downloads, you can specify additional parameters\
-        \ to customize the page orientation and include or exclude the cover page,\
-        \ logo, footer text, and page numbers. Similar customization options are also\
-        \ available for PNG output.\n\n**NOTE**: The downloadable file returned in\
-        \ API response file is extensionless. Please rename the downloaded file by\
-        \ typing in the relevant extension.\n\nOptionally, you can define [runtime\
-        \ overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)\
+        \ visualizations in PDF, PNG, CSV, or XLSX file format.\n\nRequires at least\
+        \ view access to the Liveboard.\n\n#### Usage guidelines\n\nIn the request\
+        \ body, specify the GUID or name of the Liveboard. To generate a Liveboard\
+        \ report with specific visualizations, add GUIDs or names of the visualizations.\n\
+        \nThe default `file_format` is CSV. For PDF exports, you can specify additional\
+        \ parameters to customize the page orientation and include or exclude the\
+        \ cover page, logo, footer text, and page numbers. Similar customization options\
+        \ are available for PNG exports. CSV and XLSX exports do not support customization\
+        \ options.\n\n**NOTE**: The downloadable file returned in API response file\
+        \ is extensionless. Please rename the downloaded file by typing in the relevant\
+        \ extension.\n\nOptionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)\
         \ to apply to the Answer data.\n\nTo include unsaved changes in the report,\
         \ pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard`\
         \ method in the Visual Embed SDK. Upon successful execution, the API returns\
@@ -5651,7 +5770,16 @@ paths:
         \ can be exported in the PNG format in the resolution of your choice. To enable\
         \ this on your instance, contact ThoughtSpot support. When this feature is\
         \ enabled, the options `include_cover_page`,`include_filter_page` within the\
-        \ `png_options` will not be available for PNG exports.\n\n\n\n\n"
+        \ `png_options` will not be available for PNG exports.\n\n**NOTE**: Starting\
+        \ with the ThoughtSpot Cloud 26.2.0.cl release, Liveboards can be exported\
+        \ in CSV format. All visualizations in the Liveboard can be exported as individual\
+        \ CSV files. If multiple visualizations are selected or if the entire Liveboard\
+        \ is exported, the output is returned as a .zip file containing the CSV files\
+        \ for each visualization.\n\n**NOTE**: Starting with the ThoughtSpot Cloud\
+        \ 26.2.0.cl release, Liveboards can be exported in XLSX format. All selected\
+        \ visualizations are consolidated into a single Excel workbook (.xlsx), with\
+        \ each visualization placed in its own worksheet (tab). XLSX exports are limited\
+        \ to 255 worksheets (tabs) per workbook.\n\n\n\n\n\n"
       operationId: exportLiveboardReport
       parameters: []
       requestBody:
@@ -6847,6 +6975,64 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
+  /api/rest/2.0/system/security-settings/configure:
+    post:
+      description: |2+
+
+        Version: 26.2.0.cl or later
+
+
+        Configure security settings for your ThoughtSpot application instance.
+        - Use `cluster_preferences` to update cluster-level security settings including CORS whitelisted URLs, CSP settings, SAML redirect URLs, partitioned cookies, and non-embed access configuration.
+        - Use `org_preferences` to configure Org-specific security settings. If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this allows configuring CORS and non-embed access settings specific to the Org.
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. Cluster-level SAML and script-src settings require `ADMINISTRATION` privilege.
+        See [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.
+
+
+
+
+      operationId: configureSecuritySettings
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/configureSecuritySettings_request'
+        required: true
+      responses:
+        "204":
+          description: Successfully configured the security settings.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - System
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/system/config:
     get:
       description: |2+
@@ -7076,6 +7262,108 @@ paths:
               schema:
                 $ref: '#/components/schemas/CommunicationChannelPreferencesResponse'
           description: Communication channel preferences retrieved successfully.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - System
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/rest/2.0/system/security-settings/search:
+    post:
+      description: |2+
+
+        Version: 26.2.0.cl or later
+
+
+        Fetch security settings for your ThoughtSpot application instance.
+        - Use `scope: CLUSTER` to retrieve cluster-level security settings, including CORS and CSP allowlists, SAML redirect URLs, and settings that control access to non-embedded pages.
+        - Use `scope: ORG` to retrieve Org-level security settings. If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this returns CORS and non-embed access settings specific to the Org.
+        - If `scope` is not specified, returns both cluster and Org-specific settings based on user privileges.
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.
+        See [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.
+
+
+
+
+      operationId: searchSecuritySettings
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/searchSecuritySettings_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  value:
+                    cluster_preferences:
+                      enable_partitioned_cookies: false
+                      cors_whitelisted_urls:
+                      - example.com
+                      csp_settings:
+                        connect_src_urls:
+                        - https://connect.example.com
+                        font_src_urls:
+                        - https://font.example.com
+                        visual_embed_hosts:
+                        - https://embed.example.com
+                        iframe_src_urls:
+                        - https://embed.example.com
+                        img_src_urls:
+                        - https://img.example.com
+                        script_src_urls:
+                          enabled: true
+                          urls:
+                          - https://script.example.com
+                        style_src_urls:
+                        - https://style.example.com
+                      saml_redirect_urls:
+                      - https://saml.example.com
+                      non_embed_access:
+                        block_full_app_access: true
+                    org_preferences:
+                    - org:
+                        id: 0
+                        name: Primary
+                      cors_whitelisted_urls:
+                      - https://cors.example.com
+                      non_embed_access:
+                        block_full_app_access: true
+                        groups_with_access:
+                        - id: "1234567890"
+                          name: Group Name
+              schema:
+                $ref: '#/components/schemas/SecuritySettingsResponse'
+          description: Successfully retrieved the list of security settings.
         "400":
           content:
             application/json:
@@ -8355,7 +8643,7 @@ paths:
   /api/rest/2.0/template/variables/{identifier}/update:
     post:
       description: "\nUpdate a variable's name \n Version: 10.14.0.cl or later\n\n\
-        \nAllows updating a variable's properties in ThoughtSpot.\n\nRequires ADMINISTRATION\
+        \nAllows updating a variable's name in ThoughtSpot.\n\nRequires ADMINISTRATION\
         \ role and TENANT scope.\nThe CAN_MANAGE_VARIABLES permission allows you to\
         \ manage Formula Variables in the current organization scope.\n\nThe API endpoint\
         \ allows updating:\n* The variable name\n\n\n\n\n"
@@ -8417,12 +8705,12 @@ paths:
         \ API endpoint allows:\n* Adding new values to variables\n* Replacing existing\
         \ values\n* Deleting values from variables\n\nWhen updating variable values,\
         \ you need to specify:\n* The variable identifiers\n* The values to add/replace/remove\
-        \ for each variable\n* The operation to perform (ADD, REPLACE, REMOVE, CLEAR)\n\
+        \ for each variable\n* The operation to perform (ADD, REPLACE, REMOVE, RESET)\n\
         \nBehaviour based on operation type:\n* ADD - Adds values to the variable\
         \ if this is a list type variable, else same as replace.\n* REPLACE - Replaces\
         \ all values of a given set of constraints with the current set of values.\n\
         * REMOVE - Removes any values which match the set of conditions of the variables\
-        \ if this is a list type variable, else clears value.\n* CLEAR - Removes all\
+        \ if this is a list type variable, else clears value.\n* RESET - Removes all\
         \ constrains for a given variable, scope is ignored\n\n\n\n\n\n"
       operationId: updateVariableValues
       parameters: []
@@ -9590,6 +9878,7 @@ components:
         visibility: SHARABLE
         display_name: display_name
         parent_type: USER
+        use_browser_language: true
         notify_on_share: true
         tags:
         - name: name
@@ -9813,6 +10102,13 @@ components:
           description: Locale for the user.
           nullable: true
           type: string
+        use_browser_language:
+          description: |-
+            Flag to indicate whether to use the browser locale for the user in the UI.
+            When set to true, the preferred_locale value is unset and the browser's
+            language setting takes precedence.
+          nullable: true
+          type: boolean
         extended_properties:
           description: Properties for the user
           nullable: true
@@ -10065,10 +10361,18 @@ components:
     SystemConfig:
       example:
         onboarding_content_url: onboarding_content_url
+        saml_enabled: true
+        okta_enabled: true
       properties:
         onboarding_content_url:
           nullable: true
           type: string
+        saml_enabled:
+          nullable: true
+          type: boolean
+        okta_enabled:
+          nullable: true
+          type: boolean
       type: object
     SystemOverrideInfo:
       example:
@@ -10211,6 +10515,337 @@ components:
       required:
       - id
       - name
+      type: object
+    SecuritySettingsResponse:
+      description: Response type for security settings search.
+      example:
+        cluster_preferences:
+          cors_whitelisted_urls:
+          - cors_whitelisted_urls
+          - cors_whitelisted_urls
+          non_embed_access:
+            block_full_app_access: true
+            groups_with_access:
+            - name: name
+              id: id
+            - name: name
+              id: id
+          saml_redirect_urls:
+          - saml_redirect_urls
+          - saml_redirect_urls
+          csp_settings:
+            visual_embed_hosts:
+            - visual_embed_hosts
+            - visual_embed_hosts
+            font_src_urls:
+            - font_src_urls
+            - font_src_urls
+            img_src_urls:
+            - img_src_urls
+            - img_src_urls
+            script_src_urls:
+              urls:
+              - urls
+              - urls
+              enabled: true
+            iframe_src_urls:
+            - iframe_src_urls
+            - iframe_src_urls
+            connect_src_urls:
+            - connect_src_urls
+            - connect_src_urls
+            style_src_urls:
+            - style_src_urls
+            - style_src_urls
+          enable_partitioned_cookies: true
+        org_preferences:
+        - cors_whitelisted_urls:
+          - cors_whitelisted_urls
+          - cors_whitelisted_urls
+          non_embed_access:
+            block_full_app_access: true
+            groups_with_access:
+            - name: name
+              id: id
+            - name: name
+              id: id
+          org:
+            name: name
+            id: 0
+        - cors_whitelisted_urls:
+          - cors_whitelisted_urls
+          - cors_whitelisted_urls
+          non_embed_access:
+            block_full_app_access: true
+            groups_with_access:
+            - name: name
+              id: id
+            - name: name
+              id: id
+          org:
+            name: name
+            id: 0
+      properties:
+        cluster_preferences:
+          $ref: '#/components/schemas/SecuritySettingsClusterPreferences'
+        org_preferences:
+          description: Org-level security preferences.
+          items:
+            $ref: '#/components/schemas/SecuritySettingsOrgPreferences'
+          nullable: true
+          type: array
+      type: object
+    SecuritySettingsClusterPreferences:
+      description: Cluster-level security preferences.
+      example:
+        cors_whitelisted_urls:
+        - cors_whitelisted_urls
+        - cors_whitelisted_urls
+        non_embed_access:
+          block_full_app_access: true
+          groups_with_access:
+          - name: name
+            id: id
+          - name: name
+            id: id
+        saml_redirect_urls:
+        - saml_redirect_urls
+        - saml_redirect_urls
+        csp_settings:
+          visual_embed_hosts:
+          - visual_embed_hosts
+          - visual_embed_hosts
+          font_src_urls:
+          - font_src_urls
+          - font_src_urls
+          img_src_urls:
+          - img_src_urls
+          - img_src_urls
+          script_src_urls:
+            urls:
+            - urls
+            - urls
+            enabled: true
+          iframe_src_urls:
+          - iframe_src_urls
+          - iframe_src_urls
+          connect_src_urls:
+          - connect_src_urls
+          - connect_src_urls
+          style_src_urls:
+          - style_src_urls
+          - style_src_urls
+        enable_partitioned_cookies: true
+      properties:
+        enable_partitioned_cookies:
+          description: Support embedded access when third-party cookies are blocked.
+          nullable: true
+          type: boolean
+        cors_whitelisted_urls:
+          description: Allowed origins for CORS.
+          items:
+            type: string
+          nullable: true
+          type: array
+        csp_settings:
+          $ref: '#/components/schemas/CspSettings'
+        saml_redirect_urls:
+          description: Allowed redirect hosts for SAML login.
+          items:
+            type: string
+          nullable: true
+          type: array
+        non_embed_access:
+          $ref: '#/components/schemas/ClusterNonEmbedAccess'
+      type: object
+    CspSettings:
+      description: CSP (Content Security Policy) settings.
+      example:
+        visual_embed_hosts:
+        - visual_embed_hosts
+        - visual_embed_hosts
+        font_src_urls:
+        - font_src_urls
+        - font_src_urls
+        img_src_urls:
+        - img_src_urls
+        - img_src_urls
+        script_src_urls:
+          urls:
+          - urls
+          - urls
+          enabled: true
+        iframe_src_urls:
+        - iframe_src_urls
+        - iframe_src_urls
+        connect_src_urls:
+        - connect_src_urls
+        - connect_src_urls
+        style_src_urls:
+        - style_src_urls
+        - style_src_urls
+      properties:
+        connect_src_urls:
+          description: Allowed URLs for connect-src directive.
+          items:
+            type: string
+          nullable: true
+          type: array
+        font_src_urls:
+          description: Allowed URLs for font-src directive.
+          items:
+            type: string
+          nullable: true
+          type: array
+        visual_embed_hosts:
+          description: Allowed hosts for visual embed (frame-ancestors directive).
+          items:
+            type: string
+          nullable: true
+          type: array
+        iframe_src_urls:
+          description: Allowed URLs for frame-src directive.
+          items:
+            type: string
+          nullable: true
+          type: array
+        img_src_urls:
+          description: Allowed URLs for img-src directive.
+          items:
+            type: string
+          nullable: true
+          type: array
+        script_src_urls:
+          $ref: '#/components/schemas/ScriptSrcUrls'
+        style_src_urls:
+          description: Allowed URLs for style-src directive.
+          items:
+            type: string
+          nullable: true
+          type: array
+      type: object
+    ScriptSrcUrls:
+      description: Script-src CSP settings.
+      example:
+        urls:
+        - urls
+        - urls
+        enabled: true
+      properties:
+        enabled:
+          description: Whether script-src customization is enabled.
+          nullable: true
+          type: boolean
+        urls:
+          description: Allowed URLs for script-src directive. Can only be set if enabled
+            is true.
+          items:
+            type: string
+          nullable: true
+          type: array
+      type: object
+    ClusterNonEmbedAccess:
+      description: Cluster-level non-embed access configuration.
+      example:
+        block_full_app_access: true
+        groups_with_access:
+        - name: name
+          id: id
+        - name: name
+          id: id
+      properties:
+        block_full_app_access:
+          description: Block full application access for non-embedded usage.
+          nullable: true
+          type: boolean
+        groups_with_access:
+          description: |-
+            Groups that have non-embed full app access.
+            Only applicable when orgs feature is disabled. Use org_preferences when org feature is enabled.
+          items:
+            $ref: '#/components/schemas/GroupInfo'
+          nullable: true
+          type: array
+      type: object
+    GroupInfo:
+      description: Group information for non-embed access.
+      example:
+        name: name
+        id: id
+      properties:
+        id:
+          description: Unique identifier of the group.
+          nullable: true
+          type: string
+        name:
+          description: Name of the group.
+          nullable: true
+          type: string
+      type: object
+    SecuritySettingsOrgPreferences:
+      description: Org-level security preferences.
+      example:
+        cors_whitelisted_urls:
+        - cors_whitelisted_urls
+        - cors_whitelisted_urls
+        non_embed_access:
+          block_full_app_access: true
+          groups_with_access:
+          - name: name
+            id: id
+          - name: name
+            id: id
+        org:
+          name: name
+          id: 0
+      properties:
+        org:
+          $ref: '#/components/schemas/SecuritySettingsOrgDetails'
+        cors_whitelisted_urls:
+          description: Allowed origins for CORS for this org.
+          items:
+            type: string
+          nullable: true
+          type: array
+        non_embed_access:
+          $ref: '#/components/schemas/OrgNonEmbedAccess'
+      type: object
+    SecuritySettingsOrgDetails:
+      description: Org details for security settings.
+      example:
+        name: name
+        id: 0
+      properties:
+        id:
+          description: Unique identifier of the org.
+          format: int32
+          nullable: true
+          type: integer
+        name:
+          description: Name of the org.
+          nullable: true
+          type: string
+      type: object
+    OrgNonEmbedAccess:
+      description: Org-level non-embed access configuration.
+      example:
+        block_full_app_access: true
+        groups_with_access:
+        - name: name
+          id: id
+        - name: name
+          id: id
+      properties:
+        block_full_app_access:
+          description: Block full application access for non-embedded usage.
+          nullable: true
+          type: boolean
+        groups_with_access:
+          description: Groups that have non-embed full app access.
+          items:
+            $ref: '#/components/schemas/GroupInfo'
+          nullable: true
+          type: array
       type: object
     OrgResponse:
       example:
@@ -11392,6 +12027,28 @@ components:
         metadata_permission_details: "{}"
       properties:
         metadata_permission_details:
+          nullable: true
+          type: object
+      type: object
+    ObjectPrivilegesMetadataInput:
+      properties:
+        type:
+          description: |-
+            Type of metadata object.
+            Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.
+          enum:
+          - LOGICAL_TABLE
+          nullable: true
+          type: string
+        identifier:
+          description: Unique ID or name of the metadata object.
+          type: string
+      required:
+      - identifier
+      type: object
+    ObjectPrivilegesOfMetadataResponse:
+      properties:
+        metadata_object_privileges:
           nullable: true
           type: object
       type: object
@@ -12818,6 +13475,7 @@ components:
             - CAN_MANAGE_WEBHOOKS
             - CAN_DOWNLOAD_VISUALS
             - CAN_DOWNLOAD_DETAILED_DATA
+            - CAN_USE_SPOTTER
             type: string
           type: array
         permission:
@@ -13507,6 +14165,7 @@ components:
         variable_type: CONNECTION_PROPERTY
         values:
         - principal_identifier: principal_identifier
+          model_identifier: model_identifier
           org_identifier: org_identifier
           value_list:
           - value_list
@@ -13515,6 +14174,7 @@ components:
           priority: 0
           value: value
         - principal_identifier: principal_identifier
+          model_identifier: model_identifier
           org_identifier: org_identifier
           value_list:
           - value_list
@@ -13558,6 +14218,7 @@ components:
     VariableValue:
       example:
         principal_identifier: principal_identifier
+        model_identifier: model_identifier
         org_identifier: org_identifier
         value_list:
         - value_list
@@ -13588,6 +14249,10 @@ components:
           type: string
         principal_identifier:
           description: Unique ID or name of the principal
+          nullable: true
+          type: string
+        model_identifier:
+          description: "Unique ID of the model \n Version: 26.3.0.cl or later\n"
           nullable: true
           type: string
         priority:
@@ -13664,9 +14329,12 @@ components:
     ConnectionConfigurationResponse:
       example:
         policy_type: NO_POLICY
+        policy_process_options:
+          impersonate_user: impersonate_user
         configuration_identifier: configuration_identifier
         configuration: "{}"
         name: name
+        same_as_parent: true
         description: description
         disabled: true
         policy_principals:
@@ -13753,6 +14421,11 @@ components:
           - PROCESSES
           nullable: true
           type: string
+        same_as_parent:
+          nullable: true
+          type: boolean
+        policy_process_options:
+          $ref: '#/components/schemas/PolicyProcessOptions'
       type: object
     UserPrincipal:
       example:
@@ -13767,6 +14440,14 @@ components:
           nullable: true
           type: string
         type:
+          nullable: true
+          type: string
+      type: object
+    PolicyProcessOptions:
+      example:
+        impersonate_user: impersonate_user
+      properties:
+        impersonate_user:
           nullable: true
           type: string
       type: object
@@ -13816,6 +14497,15 @@ components:
             name: name
             id: id
           url: url
+          storage_destination:
+            storage_type: AWS_S3
+            storage_config:
+              aws_s3_config:
+                role_arn: role_arn
+                bucket_name: bucket_name
+                external_id: external_id
+                region: region
+                path_prefix: path_prefix
           url_params: "{}"
           name: name
           id: id
@@ -13852,6 +14542,15 @@ components:
             name: name
             id: id
           url: url
+          storage_destination:
+            storage_type: AWS_S3
+            storage_config:
+              aws_s3_config:
+                role_arn: role_arn
+                bucket_name: bucket_name
+                external_id: external_id
+                region: region
+                path_prefix: path_prefix
           url_params: "{}"
           name: name
           id: id
@@ -13902,6 +14601,15 @@ components:
           name: name
           id: id
         url: url
+        storage_destination:
+          storage_type: AWS_S3
+          storage_config:
+            aws_s3_config:
+              role_arn: role_arn
+              bucket_name: bucket_name
+              external_id: external_id
+              region: region
+              path_prefix: path_prefix
         url_params: "{}"
         name: name
         id: id
@@ -13963,6 +14671,8 @@ components:
           $ref: '#/components/schemas/WebhookUser'
         last_modified_by:
           $ref: '#/components/schemas/WebhookUser'
+        storage_destination:
+          $ref: '#/components/schemas/StorageDestination'
       required:
       - creation_time_in_millis
       - events
@@ -14104,6 +14814,73 @@ components:
       required:
       - id
       - name
+      type: object
+    StorageDestination:
+      description: Storage destination configuration for webhook payload delivery.
+      example:
+        storage_type: AWS_S3
+        storage_config:
+          aws_s3_config:
+            role_arn: role_arn
+            bucket_name: bucket_name
+            external_id: external_id
+            region: region
+            path_prefix: path_prefix
+      properties:
+        storage_type:
+          description: "Type of storage destination (e.g., AWS_S3)."
+          enum:
+          - AWS_S3
+          type: string
+        storage_config:
+          $ref: '#/components/schemas/StorageConfig'
+      required:
+      - storage_config
+      - storage_type
+      type: object
+    StorageConfig:
+      description: Storage configuration containing provider-specific settings.
+      example:
+        aws_s3_config:
+          role_arn: role_arn
+          bucket_name: bucket_name
+          external_id: external_id
+          region: region
+          path_prefix: path_prefix
+      properties:
+        aws_s3_config:
+          $ref: '#/components/schemas/AwsS3Config'
+      type: object
+    AwsS3Config:
+      description: AWS S3 storage configuration details.
+      example:
+        role_arn: role_arn
+        bucket_name: bucket_name
+        external_id: external_id
+        region: region
+        path_prefix: path_prefix
+      properties:
+        bucket_name:
+          description: Name of the S3 bucket where webhook payloads are stored.
+          type: string
+        region:
+          description: AWS region where the S3 bucket is located.
+          type: string
+        role_arn:
+          description: ARN of the IAM role used for S3 access.
+          type: string
+        external_id:
+          description: External ID for secure cross-account role assumption.
+          nullable: true
+          type: string
+        path_prefix:
+          description: Path prefix for organizing objects within the bucket.
+          nullable: true
+          type: string
+      required:
+      - bucket_name
+      - region
+      - role_arn
       type: object
     WebhookPagination:
       example:
@@ -14733,6 +15510,47 @@ components:
             $ref: '#/components/schemas/FavoriteMetadataInput'
           nullable: true
           type: array
+        preferred_locale:
+          description: "Locale for the user. When setting this value, do not set use_browser_language\
+            \ to true, otherwise the browser's language setting will take precedence\
+            \ and the preferred_locale value will be ignored."
+          enum:
+          - en-CA
+          - en-GB
+          - en-US
+          - de-DE
+          - ja-JP
+          - zh-CN
+          - pt-BR
+          - fr-FR
+          - fr-CA
+          - es-US
+          - da-DK
+          - es-ES
+          - fi-FI
+          - sv-SE
+          - nb-NO
+          - pt-PT
+          - nl-NL
+          - it-IT
+          - ru-RU
+          - en-IN
+          - de-CH
+          - en-NZ
+          - es-MX
+          - en-AU
+          - zh-Hant
+          - ko-KR
+          - en-DE
+          nullable: true
+          type: string
+        use_browser_language:
+          description: |-
+            Flag to indicate whether to use the browser locale for the user in the UI.
+            When set to true, the preferred_locale value is unset and the browser's
+            language setting takes precedence.
+          nullable: true
+          type: boolean
       required:
       - display_name
       - user_identifier
@@ -14840,6 +15658,137 @@ components:
       required:
       - org_identifier
       type: object
+    SecuritySettingsClusterPreferencesInput:
+      description: Input for cluster-level security preferences configuration.
+      properties:
+        enable_partitioned_cookies:
+          description: Support embedded access when third-party cookies are blocked.
+          nullable: true
+          type: boolean
+        cors_whitelisted_urls:
+          description: Allowed origins for CORS.
+          items:
+            type: string
+          nullable: true
+          type: array
+        csp_settings:
+          $ref: '#/components/schemas/CspSettingsInput'
+        saml_redirect_urls:
+          description: Allowed redirect hosts for SAML login.
+          items:
+            type: string
+          nullable: true
+          type: array
+        non_embed_access:
+          $ref: '#/components/schemas/ClusterNonEmbedAccessInput'
+      type: object
+    CspSettingsInput:
+      description: Input for CSP (Content Security Policy) settings.
+      properties:
+        connect_src_urls:
+          description: Allowed URLs for connect-src directive.
+          items:
+            type: string
+          nullable: true
+          type: array
+        font_src_urls:
+          description: Allowed URLs for font-src directive.
+          items:
+            type: string
+          nullable: true
+          type: array
+        visual_embed_hosts:
+          description: Allowed hosts for visual embed (frame-ancestors directive).
+          items:
+            type: string
+          nullable: true
+          type: array
+        iframe_src_urls:
+          description: Allowed URLs for frame-src directive.
+          items:
+            type: string
+          nullable: true
+          type: array
+        img_src_urls:
+          description: Allowed URLs for img-src directive.
+          items:
+            type: string
+          nullable: true
+          type: array
+        script_src_urls:
+          $ref: '#/components/schemas/ScriptSrcUrlsInput'
+        style_src_urls:
+          description: Allowed URLs for style-src directive.
+          items:
+            type: string
+          nullable: true
+          type: array
+      type: object
+    ScriptSrcUrlsInput:
+      description: Input for script-src CSP settings.
+      properties:
+        enabled:
+          description: Whether script-src customization is enabled.
+          nullable: true
+          type: boolean
+        urls:
+          description: Allowed URLs for script-src directive. Can only be set if enabled
+            is true.
+          items:
+            type: string
+          nullable: true
+          type: array
+      type: object
+    ClusterNonEmbedAccessInput:
+      description: Input for cluster-level non-embed access configuration.
+      properties:
+        block_full_app_access:
+          description: Block full application access for non-embedded usage.
+          nullable: true
+          type: boolean
+        groups_identifiers_with_access:
+          description: |-
+            Group identifiers that are allowed non-embed full app access.
+            Can only be set when orgs feature is disabled and block_full_app_access is true.
+          items:
+            type: string
+          nullable: true
+          type: array
+      type: object
+    SecuritySettingsOrgPreferencesInput:
+      description: |-
+        Input for org-level security preferences configuration.
+        Note: cross-org operations are not supported currently.
+      properties:
+        org_identifier:
+          description: Unique identifier or name of the org
+          type: string
+        cors_whitelisted_urls:
+          description: Allowed origins for CORS for this org.
+          items:
+            type: string
+          nullable: true
+          type: array
+        non_embed_access:
+          $ref: '#/components/schemas/OrgNonEmbedAccessInput'
+      required:
+      - org_identifier
+      type: object
+    OrgNonEmbedAccessInput:
+      description: Input for org-level non-embed access configuration.
+      properties:
+        block_full_app_access:
+          description: Block full application access for non-embedded usage.
+          nullable: true
+          type: boolean
+        groups_identifiers_with_access:
+          description: Group identifiers that are allowed non-embed full app access.
+            Can only be set if block_full_app_access is true.
+          items:
+            type: string
+          nullable: true
+          type: array
+      type: object
     TagMetadataTypeInput:
       properties:
         type:
@@ -14918,6 +15867,7 @@ components:
             - CAN_SETUP_VERSION_CONTROL
             - CAN_DOWNLOAD_VISUALS
             - CAN_DOWNLOAD_DETAILED_DATA
+            - CAN_USE_SPOTTER
             type: string
           nullable: true
           type: array
@@ -15804,6 +16754,17 @@ components:
           nullable: true
           type: boolean
       type: object
+    RevokeRefreshTokensResponse:
+      example:
+        data: data
+      properties:
+        data:
+          description: Result message describing the outcome of the refresh token
+            revocation operation.
+          type: string
+      required:
+      - data
+      type: object
     RoleResponse:
       example:
         privileges:
@@ -15903,6 +16864,7 @@ components:
             - CAN_MANAGE_WEBHOOKS
             - CAN_DOWNLOAD_VISUALS
             - CAN_DOWNLOAD_DETAILED_DATA
+            - CAN_USE_SPOTTER
             type: string
           type: array
         permission:
@@ -17122,6 +18084,16 @@ components:
           description: Company website URL (HTTP/HTTPS only)
           nullable: true
           type: string
+        contact_support_url:
+          description: "Contact support url (HTTP/HTTPS only). \n  Version: 26.2.0.cl\
+            \ or later\n"
+          nullable: true
+          type: string
+        hide_contact_support_url:
+          description: "Whether to hide contact support url. \n  Version: 26.2.0.cl\
+            \ or later\n"
+          nullable: true
+          type: boolean
       type: object
     ExternalTableInput:
       properties:
@@ -17145,6 +18117,12 @@ components:
       required:
       - connection_identifier
       - table_name
+      type: object
+    PolicyProcessOptionsInput:
+      properties:
+        impersonate_user:
+          nullable: true
+          type: string
       type: object
     WebhookAuthenticationInput:
       properties:
@@ -17223,6 +18201,63 @@ components:
       - secret
       - type
       type: object
+    StorageDestinationInput:
+      description: Input type for storage destination configuration.
+      properties:
+        storage_type:
+          description: |-
+            Type of storage destination.
+            Example: "AWS_S3"
+          enum:
+          - AWS_S3
+          type: string
+        storage_config:
+          $ref: '#/components/schemas/StorageConfigInput'
+      required:
+      - storage_config
+      - storage_type
+      type: object
+    StorageConfigInput:
+      description: Input type for storage configuration.
+      properties:
+        aws_s3_config:
+          $ref: '#/components/schemas/AwsS3ConfigInput'
+      type: object
+    AwsS3ConfigInput:
+      description: Input type for AWS S3 storage configuration.
+      properties:
+        bucket_name:
+          description: |-
+            Name of the S3 bucket where webhook payloads will be stored.
+            Example: "my-webhook-files"
+          type: string
+        region:
+          description: |-
+            AWS region where the S3 bucket is located.
+            Example: "us-west-2"
+          type: string
+        role_arn:
+          description: |-
+            ARN of the IAM role to assume for S3 access.
+            Example: "arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole"
+          type: string
+        external_id:
+          description: |-
+            External ID for secure cross-account role assumption.
+            Example: "ts-webhook-a1b2c3d4-7890"
+          nullable: true
+          type: string
+        path_prefix:
+          description: |-
+            Optional path prefix for organizing objects within the bucket.
+            Example: "thoughtspot-webhooks/"
+          nullable: true
+          type: string
+      required:
+      - bucket_name
+      - region
+      - role_arn
+      type: object
     WebhookDeleteResponse:
       example:
         failed_webhooks:
@@ -17251,6 +18286,15 @@ components:
             name: name
             id: id
           url: url
+          storage_destination:
+            storage_type: AWS_S3
+            storage_config:
+              aws_s3_config:
+                role_arn: role_arn
+                bucket_name: bucket_name
+                external_id: external_id
+                region: region
+                path_prefix: path_prefix
           url_params: "{}"
           name: name
           id: id
@@ -17287,6 +18331,15 @@ components:
             name: name
             id: id
           url: url
+          storage_destination:
+            storage_type: AWS_S3
+            storage_config:
+              aws_s3_config:
+                role_arn: role_arn
+                bucket_name: bucket_name
+                external_id: external_id
+                region: region
+                path_prefix: path_prefix
           url_params: "{}"
           name: name
           id: id
@@ -17595,7 +18648,13 @@ components:
             $ref: '#/components/schemas/FilterRules'
           type: array
         parameter_values:
-          description: Parameter values.
+          description: "Allows developers to assign parameter values for existing\
+            \ parameters to a user at login. Note: Using parameter values for row\
+            \ level security use cases will ultimately be deprecated. Developers can\
+            \ still pass data security values via the Custom Access token via the\
+            \ variable_values field and create RLS rules based on custom variables.\
+            \ Please refer to the [ABAC via RLS documentation](https://developers.thoughtspot.com/docs/abac-user-parameters)\
+            \ for more details."
           items:
             $ref: '#/components/schemas/ParameterValues'
           type: array
@@ -17607,8 +18666,8 @@ components:
             $ref: '#/components/schemas/VariableValues'
           type: array
         objects:
-          description: Objects on which the filter rules and parameters values should
-            be applied to
+          description: Objects on which the parameter and variable values should be
+            applied to
           items:
             $ref: '#/components/schemas/TokenAccessScopeObject'
           type: array
@@ -17830,6 +18889,23 @@ components:
         connection_identifier:
           description: Unique ID or name of the connection.
           type: string
+        same_as_parent:
+          default: false
+          description: "Specifies whether the connection configuration should inherit\
+            \ all properties and authentication\ntype from its parent connection.\
+            \ This attribute is only applicable to parameterized connections.\nWhen\
+            \ set to true, the configuration uses only the connection properties and\
+            \ authentication type\ninherited from the parent. \n  Version: 26.2.0.cl\
+            \ or later\n"
+          nullable: true
+          type: boolean
+        policy_process_options:
+          allOf:
+          - $ref: '#/components/schemas/PolicyProcessOptionsInput'
+          description: "This attribute is only applicable to parameterized connections.\
+            \ Ensure that the policy is\nset to Processes to allow the configuration\
+            \ to be used exclusively for system processes. \n  Version: 26.2.0.cl\
+            \ or later\n"
         authentication_type:
           default: SERVICE_ACCOUNT
           description: Type of authentication used for the connection.
@@ -17893,6 +18969,23 @@ components:
         description:
           description: Description of the configuration.
           type: string
+        same_as_parent:
+          default: false
+          description: "Specifies whether the connection configuration should inherit\
+            \ all properties and authentication\ntype from its parent connection.\
+            \ This attribute is only applicable to parameterized connections.\nWhen\
+            \ set to true, the configuration uses only the connection properties and\
+            \ authentication type\ninherited from the parent. \n  Version: 26.2.0.cl\
+            \ or later\n"
+          nullable: true
+          type: boolean
+        policy_process_options:
+          allOf:
+          - $ref: '#/components/schemas/PolicyProcessOptionsInput'
+          description: "This attribute is only applicable to parameterized connections.\
+            \ Ensure that the policy is\nset to Processes to allow the configuration\
+            \ to be used exclusively for system processes. \n  Version: 26.2.0.cl\
+            \ or later\n"
         authentication_type:
           description: Type of authentication.
           enum:
@@ -18006,6 +19099,32 @@ components:
           type: string
       required:
       - connection_identifier
+      type: object
+    revokeRefreshTokens_request:
+      properties:
+        configuration_identifiers:
+          description: "Unique ID or name of the configuration. When provided, the\
+            \ refresh tokens of the users associated with the connection configuration\
+            \ will be revoked."
+          items:
+            type: string
+          type: array
+        user_identifiers:
+          description: "Unique ID or name of the users. When provided, the refresh\
+            \ tokens of the specified users will be revoked. If the request includes\
+            \ the user ID or name of the connection author, their token will also\
+            \ be revoked."
+          items:
+            type: string
+          type: array
+        org_identifiers:
+          description: "Unique ID or name of the Org. When provided, the refresh tokens\
+            \ of all users associated with the published connection in the Org will\
+            \ be revoked. This parameter is valid only for published connections.\
+            \ Using it with unpublished connections will result in an error."
+          items:
+            type: string
+          type: array
       type: object
     searchConnection_request:
       properties:
@@ -18886,6 +20005,7 @@ components:
             - CAN_SETUP_VERSION_CONTROL
             - CAN_DOWNLOAD_VISUALS
             - CAN_DOWNLOAD_DETAILED_DATA
+            - CAN_USE_SPOTTER
             type: string
           type: array
         sub_group_identifiers:
@@ -19019,6 +20139,7 @@ components:
             - CAN_MANAGE_WEBHOOKS
             - CAN_DOWNLOAD_VISUALS
             - CAN_DOWNLOAD_DETAILED_DATA
+            - CAN_USE_SPOTTER
             type: string
           type: array
         sub_group_identifiers:
@@ -19140,6 +20261,7 @@ components:
             - CAN_SETUP_VERSION_CONTROL
             - CAN_DOWNLOAD_VISUALS
             - CAN_DOWNLOAD_DETAILED_DATA
+            - CAN_USE_SPOTTER
             type: string
           type: array
         sub_group_identifiers:
@@ -19544,6 +20666,7 @@ components:
           enum:
           - LOGICAL_TABLE
           - CONNECTION
+          - CONNECTION_CONFIG
           type: string
         metadata_identifier:
           description: Unique ID or name of the metadata object to parameterize.
@@ -19727,6 +20850,7 @@ components:
           enum:
           - LOGICAL_TABLE
           - CONNECTION
+          - CONNECTION_CONFIG
           type: string
         metadata_identifier:
           description: Unique ID or name of the metadata object to unparameterize.
@@ -19908,6 +21032,8 @@ components:
           enum:
           - PDF
           - PNG
+          - CSV
+          - XLSX
           type: string
         runtime_filter:
           description: "JSON object with representing filter condition to apply filters\
@@ -20034,6 +21160,7 @@ components:
             - CAN_MANAGE_WEBHOOKS
             - CAN_DOWNLOAD_VISUALS
             - CAN_DOWNLOAD_DETAILED_DATA
+            - CAN_USE_SPOTTER
             type: string
           type: array
         read_only:
@@ -20121,6 +21248,7 @@ components:
             - CAN_MANAGE_WEBHOOKS
             - CAN_DOWNLOAD_VISUALS
             - CAN_DOWNLOAD_DETAILED_DATA
+            - CAN_USE_SPOTTER
             type: string
           type: array
         deprecated:
@@ -20199,6 +21327,7 @@ components:
             - CAN_MANAGE_WEBHOOKS
             - CAN_DOWNLOAD_VISUALS
             - CAN_DOWNLOAD_DETAILED_DATA
+            - CAN_USE_SPOTTER
             type: string
           type: array
       required:
@@ -21876,6 +23005,18 @@ components:
             $ref: '#/components/schemas/OrgChannelConfigInput'
           type: array
       type: object
+    configureSecuritySettings_request:
+      properties:
+        cluster_preferences:
+          allOf:
+          - $ref: '#/components/schemas/SecuritySettingsClusterPreferencesInput'
+          description: Cluster-level security preferences.
+        org_preferences:
+          description: Org-level security preferences for the current org.
+          items:
+            $ref: '#/components/schemas/SecuritySettingsOrgPreferencesInput'
+          type: array
+      type: object
     searchCommunicationChannelPreferences_request:
       properties:
         cluster_preferences:
@@ -21890,6 +23031,18 @@ components:
           items:
             $ref: '#/components/schemas/OrgPreferenceSearchCriteriaInput'
           type: array
+      type: object
+    searchSecuritySettings_request:
+      properties:
+        scope:
+          description: |-
+            Scope of security settings to retrieve. CLUSTER returns cluster-level settings,
+            ORG returns org-level settings for the current org.
+            If not specified, returns both cluster and org settings based on user privileges.
+          enum:
+          - CLUSTER
+          - ORG
+          type: string
       type: object
     updateSystemConfig_request:
       properties:
@@ -22068,7 +23221,10 @@ components:
             $ref: '#/components/schemas/FavoriteMetadataInput'
           type: array
         preferred_locale:
-          description: Locale for the user.
+          description: |-
+            Locale for the user. When setting this value, do not set use_browser_language
+            to true, otherwise the browser's language setting will take precedence and the
+            preferred_locale value will be ignored.
           enum:
           - en-CA
           - en-GB
@@ -22098,6 +23254,13 @@ components:
           - ko-KR
           - en-DE
           type: string
+        use_browser_language:
+          description: |-
+            Flag to indicate whether to use the browser locale for the user in the UI.
+            When set to true, the preferred_locale value is unset and the browser's
+            language setting takes precedence.
+          nullable: true
+          type: boolean
         extended_properties:
           description: Properties for the user
           type: object
@@ -22251,6 +23414,7 @@ components:
             - CAN_MANAGE_WEBHOOKS
             - CAN_DOWNLOAD_VISUALS
             - CAN_DOWNLOAD_DETAILED_DATA
+            - CAN_USE_SPOTTER
             type: string
           type: array
         account_type:
@@ -22322,6 +23486,12 @@ components:
         include_favorite_metadata:
           default: false
           description: Indicates if the user's favorite objects should be displayed.
+          nullable: true
+          type: boolean
+        include_variable_values:
+          default: false
+          description: Indicates if the user's formula variable values should be included
+            in the response.
           nullable: true
           type: boolean
       type: object
@@ -22408,7 +23578,10 @@ components:
           - REPLACE
           type: string
         preferred_locale:
-          description: Locale for the user.
+          description: |-
+            Locale for the user. When setting this value, do not set use_browser_language
+            to true, otherwise the browser's language setting will take precedence and the
+            preferred_locale value will be ignored.
           enum:
           - en-CA
           - en-GB
@@ -22438,6 +23611,13 @@ components:
           - ko-KR
           - en-DE
           type: string
+        use_browser_language:
+          description: |-
+            Flag to indicate whether to use the browser locale for the user in the UI.
+            When set to true, the preferred_locale value is unset and the browser's
+            language setting takes precedence.
+          nullable: true
+          type: boolean
         extended_properties:
           description: Properties for the user
           type: object
@@ -22464,7 +23644,8 @@ components:
           nullable: true
           type: boolean
         data_type:
-          description: Variable Data Type
+          description: "Variable Data Type, only for formula_variable type, leave\
+            \ empty for others \n  Version: 10.15.0.cl or later\n"
           enum:
           - VARCHAR
           - INT32
@@ -22793,6 +23974,14 @@ components:
           allOf:
           - $ref: '#/components/schemas/WebhookSignatureVerificationInput'
           description: Configuration for webhook signature verification.
+        storage_destination:
+          allOf:
+          - $ref: '#/components/schemas/StorageDestinationInput'
+          description: "Configuration for storage destination.\nExample: {\"storage_type\"\
+            : \"AWS_S3\", \"storage_config\": {\"aws_s3_config\": {\"bucket_name\"\
+            : \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\"\
+            , \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"\
+            }}} \n  Version: 26.3.0.cl or later\n"
       required:
       - events
       - name
@@ -22867,6 +24056,14 @@ components:
           allOf:
           - $ref: '#/components/schemas/WebhookSignatureVerificationInput'
           description: Configuration for webhook signature verification.
+        storage_destination:
+          allOf:
+          - $ref: '#/components/schemas/StorageDestinationInput'
+          description: "Configuration for storage destination.\nExample: {\"storage_type\"\
+            : \"AWS_S3\", \"storage_config\": {\"aws_s3_config\": {\"bucket_name\"\
+            : \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\"\
+            , \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"\
+            }}} \n  Version: 26.3.0.cl or later\n"
       type: object
   securitySchemes:
     bearerAuth:
@@ -22923,6 +24120,11 @@ x-roles:
   tags:
   - 9.9.0.cl
   description: Roles for version 9.9.0.cl
+- name: 26.2.0.cl
+  id: 26.2.0.cl
+  tags:
+  - 26.2.0.cl
+  description: Roles for version 26.2.0.cl
 - name: 9.6.0.cl
   id: 9.6.0.cl
   tags:
@@ -22963,6 +24165,11 @@ x-roles:
   tags:
   - 9.5.0.cl
   description: Roles for version 9.5.0.cl
+- name: 26.3.0.cl
+  id: 26.3.0.cl
+  tags:
+  - 26.3.0.cl
+  description: Roles for version 26.3.0.cl
 - name: 10.14.0.cl
   id: 10.14.0.cl
   tags:

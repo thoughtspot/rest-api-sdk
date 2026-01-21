@@ -344,7 +344,12 @@ public class GetCustomAccessTokenRequest implements Serializable {
     }
 
     /**
-     * Parameter values.
+     * Allows developers to assign parameter values for existing parameters to a user at login.
+     * Note: Using parameter values for row level security use cases will ultimately be deprecated.
+     * Developers can still pass data security values via the Custom Access token via the
+     * variable_values field and create RLS rules based on custom variables. Please refer to the
+     * [ABAC via RLS documentation](https://developers.thoughtspot.com/docs/abac-user-parameters)
+     * for more details.
      *
      * @return parameterValues
      */
@@ -402,7 +407,7 @@ public class GetCustomAccessTokenRequest implements Serializable {
     }
 
     /**
-     * Objects on which the filter rules and parameters values should be applied to
+     * Objects on which the parameter and variable values should be applied to
      *
      * @return objects
      */

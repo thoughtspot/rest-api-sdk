@@ -9,6 +9,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**deleteConnectionV2**](ConnectionsApi.md#deleteConnectionV2) | **POST** /api/rest/2.0/connections/{connection_identifier}/delete |
 | [**downloadConnectionMetadataChanges**](ConnectionsApi.md#downloadConnectionMetadataChanges) | **POST** /api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier} |
 | [**fetchConnectionDiffStatus**](ConnectionsApi.md#fetchConnectionDiffStatus) | **POST** /api/rest/2.0/connections/fetch-connection-diff-status/{connection_identifier} |
+| [**revokeRefreshTokens**](ConnectionsApi.md#revokeRefreshTokens) | **POST** /api/rest/2.0/connections/{connection_identifier}/revoke-refresh-tokens |
 | [**searchConnection**](ConnectionsApi.md#searchConnection) | **POST** /api/rest/2.0/connection/search |
 | [**updateConnection**](ConnectionsApi.md#updateConnection) | **POST** /api/rest/2.0/connection/update |
 | [**updateConnectionV2**](ConnectionsApi.md#updateConnectionV2) | **POST** /api/rest/2.0/connections/{connection_identifier}/update |
@@ -192,6 +193,45 @@ null (empty response body)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="revokeRefreshTokens"></a>
+# **revokeRefreshTokens**
+> RevokeRefreshTokensResponse revokeRefreshTokens(connectionIdentifier, revokeRefreshTokensRequest)
+
+
+
+  Version: 26.2.0.cl or later   Revokes OAuth refresh tokens for users who no longer require access to a data warehouse connection. When a token is revoked, the affected user&#39;s session for that connection is terminated, and they must re-authenticate to regain access.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on the ThoughtSpot instance, users with &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege can also make API requests to revoke tokens for connection users.  #### Usage guidelines  You can specify different combinations of identifiers to control which refresh tokens are revoked.  - **connection_identifier**: Revokes refresh tokens for all users of the connection, except the connection author. - **connection_identifier** and **user_identifiers**: Revokes refresh tokens only for the users specified in the request. If the name or ID of the connection author is included in the request, their token will also be revoked. - **connection_identifier** and **configuration_identifiers**: Revokes refresh tokens for all users on the specified configurations, except the configuration author. - **connection_identifier**, **configuration_identifiers**, and **user_identifiers**: Revokes refresh tokens for the specified users on the specified configurations. - **connection_identifier** and **org_identifiers**: Revokes refresh tokens for the specified Orgs. Applicable only for published connections. - **connection_identifier**, **org_identifiers**, and **user_identifiers**: Revokes refresh tokens for the specified users in the specified Orgs. Applicable only for published connections.  **NOTE**: The &#x60;org_identifiers&#x60; parameter is only applicable for published connections. Using this parameter for unpublished connections will result in an error. Ensure that the connections are published before making the API request.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **connectionIdentifier** | **String**
+| **revokeRefreshTokensRequest** | [**RevokeRefreshTokensRequest**](RevokeRefreshTokensRequest.md)
+
+### Return type
+
+[**RevokeRefreshTokensResponse**](RevokeRefreshTokensResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Token(s) successfully revoked. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **404** | Object not found |  -  |
+| **409** | Conflict |  -  |
 | **500** | Unexpected error |  -  |
 
 <a id="searchConnection"></a>

@@ -70,6 +70,14 @@ export class ImportUser {
     * Metadata objects to add to the user\'s favorites list.
     */
     'favorite_metadata'?: Array<FavoriteMetadataInput> | null;
+    /**
+    * Locale for the user. When setting this value, do not set use_browser_language to true, otherwise the browser\'s language setting will take precedence and the preferred_locale value will be ignored.
+    */
+    'preferred_locale'?: ImportUserPreferredLocaleEnum | null;
+    /**
+    * Flag to indicate whether to use the browser locale for the user in the UI. When set to true, the preferred_locale value is unset and the browser\'s language setting takes precedence.
+    */
+    'use_browser_language'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -157,6 +165,18 @@ export class ImportUser {
             "baseName": "favorite_metadata",
             "type": "Array<FavoriteMetadataInput>",
             "format": ""
+        },
+        {
+            "name": "preferred_locale",
+            "baseName": "preferred_locale",
+            "type": "ImportUserPreferredLocaleEnum",
+            "format": ""
+        },
+        {
+            "name": "use_browser_language",
+            "baseName": "use_browser_language",
+            "type": "boolean",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -171,4 +191,5 @@ export class ImportUser {
 export type ImportUserAccountTypeEnum = "LOCAL_USER" | "LDAP_USER" | "SAML_USER" | "OIDC_USER" | "REMOTE_USER" ;
 export type ImportUserAccountStatusEnum = "ACTIVE" | "INACTIVE" | "EXPIRED" | "LOCKED" | "PENDING" | "SUSPENDED" ;
 export type ImportUserVisibilityEnum = "SHARABLE" | "NON_SHARABLE" ;
+export type ImportUserPreferredLocaleEnum = "en-CA" | "en-GB" | "en-US" | "de-DE" | "ja-JP" | "zh-CN" | "pt-BR" | "fr-FR" | "fr-CA" | "es-US" | "da-DK" | "es-ES" | "fi-FI" | "sv-SE" | "nb-NO" | "pt-PT" | "nl-NL" | "it-IT" | "ru-RU" | "en-IN" | "de-CH" | "en-NZ" | "es-MX" | "en-AU" | "zh-Hant" | "ko-KR" | "en-DE" ;
 

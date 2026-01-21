@@ -294,7 +294,11 @@ public class CreateUserRequest implements Serializable {
     @javax.annotation.Nullable
     private List<FavoriteMetadataInput> favoriteMetadata;
 
-    /** Locale for the user. */
+    /**
+     * Locale for the user. When setting this value, do not set use_browser_language to true,
+     * otherwise the browser&#39;s language setting will take precedence and the preferred_locale
+     * value will be ignored.
+     */
     @JsonAdapter(PreferredLocaleEnum.Adapter.class)
     public enum PreferredLocaleEnum {
         EN_CA("en-CA"),
@@ -400,6 +404,12 @@ public class CreateUserRequest implements Serializable {
     @SerializedName(SERIALIZED_NAME_PREFERRED_LOCALE)
     @javax.annotation.Nullable
     private PreferredLocaleEnum preferredLocale;
+
+    public static final String SERIALIZED_NAME_USE_BROWSER_LANGUAGE = "use_browser_language";
+
+    @SerializedName(SERIALIZED_NAME_USE_BROWSER_LANGUAGE)
+    @javax.annotation.Nullable
+    private Boolean useBrowserLanguage;
 
     public static final String SERIALIZED_NAME_EXTENDED_PROPERTIES = "extended_properties";
 
@@ -741,7 +751,9 @@ public class CreateUserRequest implements Serializable {
     }
 
     /**
-     * Locale for the user.
+     * Locale for the user. When setting this value, do not set use_browser_language to true,
+     * otherwise the browser&#39;s language setting will take precedence and the preferred_locale
+     * value will be ignored.
      *
      * @return preferredLocale
      */
@@ -752,6 +764,27 @@ public class CreateUserRequest implements Serializable {
 
     public void setPreferredLocale(@javax.annotation.Nullable PreferredLocaleEnum preferredLocale) {
         this.preferredLocale = preferredLocale;
+    }
+
+    public CreateUserRequest useBrowserLanguage(
+            @javax.annotation.Nullable Boolean useBrowserLanguage) {
+        this.useBrowserLanguage = useBrowserLanguage;
+        return this;
+    }
+
+    /**
+     * Flag to indicate whether to use the browser locale for the user in the UI. When set to true,
+     * the preferred_locale value is unset and the browser&#39;s language setting takes precedence.
+     *
+     * @return useBrowserLanguage
+     */
+    @javax.annotation.Nullable
+    public Boolean getUseBrowserLanguage() {
+        return useBrowserLanguage;
+    }
+
+    public void setUseBrowserLanguage(@javax.annotation.Nullable Boolean useBrowserLanguage) {
+        this.useBrowserLanguage = useBrowserLanguage;
     }
 
     public CreateUserRequest extendedProperties(
@@ -866,6 +899,7 @@ public class CreateUserRequest implements Serializable {
                         this.homeLiveboardIdentifier, createUserRequest.homeLiveboardIdentifier)
                 && Objects.equals(this.favoriteMetadata, createUserRequest.favoriteMetadata)
                 && Objects.equals(this.preferredLocale, createUserRequest.preferredLocale)
+                && Objects.equals(this.useBrowserLanguage, createUserRequest.useBrowserLanguage)
                 && Objects.equals(this.extendedProperties, createUserRequest.extendedProperties)
                 && Objects.equals(this.extendedPreferences, createUserRequest.extendedPreferences)
                 && Objects.equals(this.triggerWelcomeEmail, createUserRequest.triggerWelcomeEmail)
@@ -900,6 +934,7 @@ public class CreateUserRequest implements Serializable {
                 homeLiveboardIdentifier,
                 favoriteMetadata,
                 preferredLocale,
+                useBrowserLanguage,
                 extendedProperties,
                 extendedPreferences,
                 triggerWelcomeEmail,
@@ -938,6 +973,9 @@ public class CreateUserRequest implements Serializable {
                 .append("\n");
         sb.append("    favoriteMetadata: ").append(toIndentedString(favoriteMetadata)).append("\n");
         sb.append("    preferredLocale: ").append(toIndentedString(preferredLocale)).append("\n");
+        sb.append("    useBrowserLanguage: ")
+                .append(toIndentedString(useBrowserLanguage))
+                .append("\n");
         sb.append("    extendedProperties: ")
                 .append(toIndentedString(extendedProperties))
                 .append("\n");
@@ -986,6 +1024,7 @@ public class CreateUserRequest implements Serializable {
         openapiFields.add("home_liveboard_identifier");
         openapiFields.add("favorite_metadata");
         openapiFields.add("preferred_locale");
+        openapiFields.add("use_browser_language");
         openapiFields.add("extended_properties");
         openapiFields.add("extended_preferences");
         openapiFields.add("trigger_welcome_email");
