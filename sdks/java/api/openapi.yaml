@@ -8540,10 +8540,10 @@ components:
           nullable: true
           type: string
         use_browser_language:
-          description: |-
-            Flag to indicate whether to use the browser locale for the user in the UI.
-            When set to true, the preferred_locale value is unset and the browser's
-            language setting takes precedence.
+          description: "Flag to indicate whether to use the browser locale for the\
+            \ user in the UI.\nWhen set to true, the preferred_locale value is unset\
+            \ and the browser's\nlanguage setting takes precedence. \n  Version: 26.3.0.cl\
+            \ or later\n"
           nullable: true
           type: boolean
         extended_properties:
@@ -13434,7 +13434,9 @@ components:
           nullable: true
           type: array
         preferred_locale:
-          description: Locale for the user.
+          description: "Locale for the user. When setting this value, do not set use_browser_language\
+            \ to true, otherwise the browser's language setting will take precedence\
+            \ and the preferred_locale value will be ignored."
           enum:
           - en-CA
           - en-GB
@@ -13466,10 +13468,10 @@ components:
           nullable: true
           type: string
         use_browser_language:
-          description: |-
-            Flag to indicate whether to use the browser locale for the user in the UI.
-            When set to true, the preferred_locale value is unset and the browser's
-            language setting takes precedence.
+          description: "Flag to indicate whether to use the browser locale for the\
+            \ user in the UI.\nWhen set to true, the preferred_locale value is unset\
+            \ and the browser's\nlanguage setting takes precedence. \n  Version: 26.3.0.cl\
+            \ or later\n"
           nullable: true
           type: boolean
       required:
@@ -20885,10 +20887,10 @@ components:
           - en-DE
           type: string
         use_browser_language:
-          description: |-
-            Flag to indicate whether to use the browser locale for the user in the UI.
-            When set to true, the preferred_locale value is unset and the browser's
-            language setting takes precedence.
+          description: "Flag to indicate whether to use the browser locale for the\
+            \ user in the UI.\nWhen set to true, the preferred_locale value is unset\
+            \ and the browser's\nlanguage setting takes precedence. \n  Version: 26.3.0.cl\
+            \ or later\n"
           nullable: true
           type: boolean
         extended_properties:
@@ -21242,10 +21244,10 @@ components:
           - en-DE
           type: string
         use_browser_language:
-          description: |-
-            Flag to indicate whether to use the browser locale for the user in the UI.
-            When set to true, the preferred_locale value is unset and the browser's
-            language setting takes precedence.
+          description: "Flag to indicate whether to use the browser locale for the\
+            \ user in the UI.\nWhen set to true, the preferred_locale value is unset\
+            \ and the browser's\nlanguage setting takes precedence. \n  Version: 26.3.0.cl\
+            \ or later\n"
           nullable: true
           type: boolean
         extended_properties:

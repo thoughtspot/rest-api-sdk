@@ -75,7 +75,7 @@ export class UpdateUserRequest {
     */
     'preferred_locale'?: UpdateUserRequestPreferredLocaleEnum;
     /**
-    * Flag to indicate whether to use the browser locale for the user in the UI. When set to true, the preferred_locale value is unset and the browser\'s language setting takes precedence.
+    * Flag to indicate whether to use the browser locale for the user in the UI. When set to true, the preferred_locale value is unset and the browser\'s language setting takes precedence.    Version: 26.3.0.cl or later 
     */
     'use_browser_language'?: boolean | null;
     /**

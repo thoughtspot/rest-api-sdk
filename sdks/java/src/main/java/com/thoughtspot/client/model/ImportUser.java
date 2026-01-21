@@ -291,7 +291,11 @@ public class ImportUser implements Serializable {
     @javax.annotation.Nullable
     private List<FavoriteMetadataInput> favoriteMetadata;
 
-    /** Locale for the user. */
+    /**
+     * Locale for the user. When setting this value, do not set use_browser_language to true,
+     * otherwise the browser&#39;s language setting will take precedence and the preferred_locale
+     * value will be ignored.
+     */
     @JsonAdapter(PreferredLocaleEnum.Adapter.class)
     public enum PreferredLocaleEnum {
         EN_CA("en-CA"),
@@ -712,7 +716,9 @@ public class ImportUser implements Serializable {
     }
 
     /**
-     * Locale for the user.
+     * Locale for the user. When setting this value, do not set use_browser_language to true,
+     * otherwise the browser&#39;s language setting will take precedence and the preferred_locale
+     * value will be ignored.
      *
      * @return preferredLocale
      */
@@ -733,6 +739,7 @@ public class ImportUser implements Serializable {
     /**
      * Flag to indicate whether to use the browser locale for the user in the UI. When set to true,
      * the preferred_locale value is unset and the browser&#39;s language setting takes precedence.
+     * Version: 26.3.0.cl or later
      *
      * @return useBrowserLanguage
      */

@@ -48,7 +48,7 @@
 |**welcomeEmailSent** | **Boolean** | Indicates whether welcome email is sent for the user. |  [optional] |
 |**orgPrivileges** | **Object** | Privileges which are assigned to the user with org. |  [optional] |
 |**preferredLocale** | **String** | Locale for the user. |  [optional] |
-|**useBrowserLanguage** | **Boolean** | Flag to indicate whether to use the browser locale for the user in the UI. When set to true, the preferred_locale value is unset and the browser&#39;s language setting takes precedence. |  [optional] |
+|**useBrowserLanguage** | **Boolean** | Flag to indicate whether to use the browser locale for the user in the UI. When set to true, the preferred_locale value is unset and the browser&#39;s language setting takes precedence.    Version: 26.3.0.cl or later  |  [optional] |
 |**extendedProperties** | **Object** | Properties for the user |  [optional] |
 |**extendedPreferences** | **Object** | Preferences for the user |  [optional] |
 |**userParameters** | **Object** | User Parameters which are specified for the user via JWToken |  [optional] |

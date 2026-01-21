@@ -22,7 +22,7 @@
 |**orgIdentifiers** | **List&lt;String&gt;** | IDs of the Orgs. |  [optional] |
 |**operation** | [**OperationEnum**](#OperationEnum) | Type of update operation. Default operation type is REPLACE |  [optional] |
 |**preferredLocale** | [**PreferredLocaleEnum**](#PreferredLocaleEnum) | Locale for the user. When setting this value, do not set use_browser_language to true, otherwise the browser&#39;s language setting will take precedence and the preferred_locale value will be ignored. |  [optional] |
-|**useBrowserLanguage** | **Boolean** | Flag to indicate whether to use the browser locale for the user in the UI. When set to true, the preferred_locale value is unset and the browser&#39;s language setting takes precedence. |  [optional] |
+|**useBrowserLanguage** | **Boolean** | Flag to indicate whether to use the browser locale for the user in the UI. When set to true, the preferred_locale value is unset and the browser&#39;s language setting takes precedence.    Version: 26.3.0.cl or later  |  [optional] |
 |**extendedProperties** | **Object** | Properties for the user |  [optional] |
 |**extendedPreferences** | **Object** | Preferences for the user |  [optional] |
 
