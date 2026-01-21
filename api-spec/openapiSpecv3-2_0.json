@@ -378,7 +378,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DeleteConversationResponse"
+                  "type": "object"
                 }
               }
             }
@@ -388,7 +388,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DeleteConversationResponse"
+                  "type": "object"
                 }
               }
             }
@@ -464,7 +464,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ConversationHistoryResponse"
+                  "type": "object"
                 }
               }
             }
@@ -474,7 +474,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ConversationHistoryResponse"
+                  "type": "object"
                 }
               }
             }
@@ -963,7 +963,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RenameConversationResponse"
+                  "type": "object"
                 }
               }
             }
@@ -973,7 +973,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RenameConversationResponse"
+                  "type": "object"
                 }
               }
             }
@@ -14410,7 +14410,7 @@
                     ]
                   },
                   "use_browser_language": {
-                    "description": "Flag to indicate whether to use the browser locale for the user in the UI.\nWhen set to true, the preferred_locale value is unset and the browser's\nlanguage setting takes precedence.",
+                    "description": "Flag to indicate whether to use the browser locale for the user in the UI.\nWhen set to true, the preferred_locale value is unset and the browser's\nlanguage setting takes precedence. <br/>  <span class=\"since-beta-tag\">Version: 26.3.0.cl or later</span>",
                     "type": "boolean",
                     "nullable": true
                   },
@@ -15304,7 +15304,7 @@
                     ]
                   },
                   "use_browser_language": {
-                    "description": "Flag to indicate whether to use the browser locale for the user in the UI.\nWhen set to true, the preferred_locale value is unset and the browser's\nlanguage setting takes precedence.",
+                    "description": "Flag to indicate whether to use the browser locale for the user in the UI.\nWhen set to true, the preferred_locale value is unset and the browser's\nlanguage setting takes precedence. <br/>  <span class=\"since-beta-tag\">Version: 26.3.0.cl or later</span>",
                     "type": "boolean",
                     "nullable": true
                   },
@@ -17761,7 +17761,7 @@
           },
           "use_browser_language": {
             "type": "boolean",
-            "description": "Flag to indicate whether to use the browser locale for the user in the UI.\nWhen set to true, the preferred_locale value is unset and the browser's\nlanguage setting takes precedence.",
+            "description": "Flag to indicate whether to use the browser locale for the user in the UI.\nWhen set to true, the preferred_locale value is unset and the browser's\nlanguage setting takes precedence. <br/>  <span class=\"since-beta-tag\">Version: 26.3.0.cl or later</span>",
             "nullable": true
           },
           "extended_properties": {
@@ -20782,94 +20782,6 @@
         },
         "description": "MetadataType InputType used in Custom Action API's"
       },
-      "ConversationHistoryResponse": {
-        "type": "object",
-        "required": [
-          "conversations"
-        ],
-        "properties": {
-          "conversations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ConversationRecord"
-            },
-            "description": "List of conversations."
-          }
-        }
-      },
-      "ConversationRecord": {
-        "type": "object",
-        "required": [
-          "conversation_id",
-          "created_at",
-          "updated_at"
-        ],
-        "properties": {
-          "conversation_id": {
-            "type": "string",
-            "description": "Unique identifier of the conversation."
-          },
-          "title": {
-            "type": "string",
-            "description": "Title of the conversation.",
-            "nullable": true
-          },
-          "created_at": {
-            "type": "string",
-            "description": "Timestamp when conversation was created."
-          },
-          "updated_at": {
-            "type": "string",
-            "description": "Timestamp when conversation was last updated."
-          },
-          "data_source_identifier": {
-            "type": "string",
-            "description": "Data source identifier associated with this conversation.",
-            "nullable": true
-          },
-          "data_source_name": {
-            "type": "string",
-            "description": "Data source name.",
-            "nullable": true
-          },
-          "conversation_settings": {
-            "$ref": "#/components/schemas/ConversationSettings",
-            "description": "Conversation settings.",
-            "nullable": true
-          },
-          "active_thread_length": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of messages in active thread.",
-            "nullable": true
-          }
-        }
-      },
-      "ConversationSettings": {
-        "type": "object",
-        "properties": {
-          "enable_contextual_change_analysis": {
-            "type": "boolean",
-            "description": "Enable contextual change analysis.",
-            "nullable": true
-          },
-          "enable_natural_language_answer_generation": {
-            "type": "boolean",
-            "description": "Enable natural language answer generation.",
-            "nullable": true
-          },
-          "enable_reasoning": {
-            "type": "boolean",
-            "description": "Enable reasoning.",
-            "nullable": true
-          },
-          "save_chat_enabled": {
-            "type": "boolean",
-            "description": "Enable saving chat.",
-            "nullable": true
-          }
-        }
-      },
       "MetadataContext": {
         "type": "object",
         "properties": {
@@ -22580,7 +22492,7 @@
           },
           "preferred_locale": {
             "type": "string",
-            "description": "Locale for the user.",
+            "description": "Locale for the user. When setting this value, do not set use_browser_language to true, otherwise the browser's language setting will take precedence and the preferred_locale value will be ignored.",
             "nullable": true,
             "enum": [
               "en-CA",
@@ -22614,7 +22526,7 @@
           },
           "use_browser_language": {
             "type": "boolean",
-            "description": "Flag to indicate whether to use the browser locale for the user in the UI.\nWhen set to true, the preferred_locale value is unset and the browser's\nlanguage setting takes precedence.",
+            "description": "Flag to indicate whether to use the browser locale for the user in the UI.\nWhen set to true, the preferred_locale value is unset and the browser's\nlanguage setting takes precedence. <br/>  <span class=\"since-beta-tag\">Version: 26.3.0.cl or later</span>",
             "nullable": true
           }
         }
@@ -25155,30 +25067,6 @@
           "message": {
             "type": "string",
             "nullable": true
-          }
-        }
-      },
-      "RenameConversationResponse": {
-        "type": "object",
-        "required": [
-          "success"
-        ],
-        "properties": {
-          "success": {
-            "type": "boolean",
-            "description": "Success status."
-          }
-        }
-      },
-      "DeleteConversationResponse": {
-        "type": "object",
-        "required": [
-          "success"
-        ],
-        "properties": {
-          "success": {
-            "type": "boolean",
-            "description": "Success status."
           }
         }
       },
