@@ -12297,14 +12297,16 @@ components:
           type: string
       type: object
     ValueScopeInput:
-      description: Input for variable scope in search
+      description: Input for filtering variable values by scope in search operations
       properties:
         org_identifier:
           description: The unique name of the org
           nullable: true
           type: string
         principal_type:
-          description: Principal type
+          description: "Type of principal to filter by. Use USER to filter values\
+            \ assigned to specific users, or USER_GROUP to filter values assigned\
+            \ to groups."
           enum:
           - USER
           - USER_GROUP
@@ -12315,7 +12317,8 @@ components:
           nullable: true
           type: string
         model_identifier:
-          description: Model Identifier
+          description: Unique ID or name of the model to filter by. Applicable only
+            for FORMULA_VARIABLE type.
           nullable: true
           type: string
       type: object
@@ -12367,7 +12370,9 @@ components:
           description: The unique name of the org
           type: string
         principal_type:
-          description: Principal type
+          description: "Type of principal to which this value applies. Use USER to\
+            \ assign the value to a specific user, or USER_GROUP to assign it to a\
+            \ group."
           enum:
           - USER
           - USER_GROUP
@@ -15828,13 +15833,16 @@ components:
       - variable_values
       type: object
     VariableUpdateScopeInput:
-      description: Input for variable value update in batch operations
+      description: Input for defining the scope of variable value assignments in batch
+        update operations
       properties:
         org_identifier:
           description: The unique name of the org
           type: string
         principal_type:
-          description: Principal type
+          description: "Type of principal to which the variable value applies. Use\
+            \ USER to assign values to a specific user, or USER_GROUP to assign values\
+            \ to a group."
           enum:
           - USER
           - USER_GROUP
@@ -15845,11 +15853,14 @@ components:
           nullable: true
           type: string
         model_identifier:
-          description: Unique ID of the model
+          description: Unique ID or name of the model. Required for FORMULA_VARIABLE
+            type to scope the variable value to a specific worksheet.
           nullable: true
           type: string
         priority:
-          description: Priority level
+          description: "The priority level for this scope assignment, used for conflict\
+            \ resolution when multiple values match. Higher priority values (larger\
+            \ numbers) take precedence."
           format: int32
           nullable: true
           type: integer

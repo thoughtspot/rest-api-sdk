@@ -16760,7 +16760,7 @@ declare class ValidateTokenRequest {
  * Do not edit the class manually.
  */
 /**
-* Input for variable scope in search
+* Input for filtering variable values by scope in search operations
 */
 declare class ValueScopeInput {
     /**
@@ -16768,7 +16768,7 @@ declare class ValueScopeInput {
     */
     'org_identifier'?: string | null;
     /**
-    * Principal type
+    * Type of principal to filter by. Use USER to filter values assigned to specific users, or USER_GROUP to filter values assigned to groups.
     */
     'principal_type'?: ValueScopeInputPrincipalTypeEnum | null;
     /**
@@ -16776,7 +16776,7 @@ declare class ValueScopeInput {
     */
     'principal_identifier'?: string | null;
     /**
-    * Model Identifier
+    * Unique ID or name of the model to filter by. Applicable only for FORMULA_VARIABLE type.
     */
     'model_identifier'?: string | null;
     static readonly discriminator: string | undefined;
@@ -16821,7 +16821,7 @@ declare class VariableValue {
     */
     'org_identifier': string;
     /**
-    * Principal type
+    * Type of principal to which this value applies. Use USER to assign the value to a specific user, or USER_GROUP to assign it to a group.
     */
     'principal_type'?: VariableValuePrincipalTypeEnum | null;
     /**
@@ -17006,7 +17006,7 @@ type VariableUpdateAssignmentInputOperationEnum = "ADD" | "REMOVE" | "REPLACE" |
  * Do not edit the class manually.
  */
 /**
-* Input for variable value update in batch operations
+* Input for defining the scope of variable value assignments in batch update operations
 */
 declare class VariableUpdateScopeInput {
     /**
@@ -17014,7 +17014,7 @@ declare class VariableUpdateScopeInput {
     */
     'org_identifier': string;
     /**
-    * Principal type
+    * Type of principal to which the variable value applies. Use USER to assign values to a specific user, or USER_GROUP to assign values to a group.
     */
     'principal_type'?: VariableUpdateScopeInputPrincipalTypeEnum | null;
     /**
@@ -17022,11 +17022,11 @@ declare class VariableUpdateScopeInput {
     */
     'principal_identifier'?: string | null;
     /**
-    * Unique ID of the model
+    * Unique ID or name of the model. Required for FORMULA_VARIABLE type to scope the variable value to a specific worksheet.
     */
     'model_identifier'?: string | null;
     /**
-    * Priority level
+    * The priority level for this scope assignment, used for conflict resolution when multiple values match. Higher priority values (larger numbers) take precedence.
     */
     'priority'?: number | null;
     static readonly discriminator: string | undefined;

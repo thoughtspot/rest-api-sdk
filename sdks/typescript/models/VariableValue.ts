@@ -26,7 +26,7 @@ export class VariableValue {
     */
     'org_identifier': string;
     /**
-    * Principal type
+    * Type of principal to which this value applies. Use USER to assign the value to a specific user, or USER_GROUP to assign it to a group.
     */
     'principal_type'?: VariableValuePrincipalTypeEnum | null;
     /**

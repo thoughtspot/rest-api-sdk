@@ -24,7 +24,7 @@ import java.util.Objects;
 import java.util.Set;
 import org.openapitools.jackson.nullable.JsonNullable;
 
-/** Input for variable value update in batch operations */
+/** Input for defining the scope of variable value assignments in batch update operations */
 @javax.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         comments = "Generator version: 7.12.0")
@@ -37,7 +37,10 @@ public class VariableUpdateScopeInput implements Serializable {
     @javax.annotation.Nonnull
     private String orgIdentifier;
 
-    /** Principal type */
+    /**
+     * Type of principal to which the variable value applies. Use USER to assign values to a
+     * specific user, or USER_GROUP to assign values to a group.
+     */
     @JsonAdapter(PrincipalTypeEnum.Adapter.class)
     public enum PrincipalTypeEnum {
         USER("USER"),
@@ -140,7 +143,8 @@ public class VariableUpdateScopeInput implements Serializable {
     }
 
     /**
-     * Principal type
+     * Type of principal to which the variable value applies. Use USER to assign values to a
+     * specific user, or USER_GROUP to assign values to a group.
      *
      * @return principalType
      */
@@ -180,7 +184,8 @@ public class VariableUpdateScopeInput implements Serializable {
     }
 
     /**
-     * Unique ID of the model
+     * Unique ID or name of the model. Required for FORMULA_VARIABLE type to scope the variable
+     * value to a specific worksheet.
      *
      * @return modelIdentifier
      */
@@ -199,7 +204,8 @@ public class VariableUpdateScopeInput implements Serializable {
     }
 
     /**
-     * Priority level
+     * The priority level for this scope assignment, used for conflict resolution when multiple
+     * values match. Higher priority values (larger numbers) take precedence.
      *
      * @return priority
      */

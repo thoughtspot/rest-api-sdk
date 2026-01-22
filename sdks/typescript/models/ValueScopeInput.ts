@@ -13,7 +13,7 @@
 import { HttpFile } from '../http/http';
 
 /**
-* Input for variable scope in search
+* Input for filtering variable values by scope in search operations
 */
 export class ValueScopeInput {
     /**
@@ -21,7 +21,7 @@ export class ValueScopeInput {
     */
     'org_identifier'?: string | null;
     /**
-    * Principal type
+    * Type of principal to filter by. Use USER to filter values assigned to specific users, or USER_GROUP to filter values assigned to groups.
     */
     'principal_type'?: ValueScopeInputPrincipalTypeEnum | null;
     /**
@@ -29,7 +29,7 @@ export class ValueScopeInput {
     */
     'principal_identifier'?: string | null;
     /**
-    * Model Identifier
+    * Unique ID or name of the model to filter by. Applicable only for FORMULA_VARIABLE type.
     */
     'model_identifier'?: string | null;
 

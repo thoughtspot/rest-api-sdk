@@ -13,7 +13,7 @@
 import { HttpFile } from '../http/http';
 
 /**
-* Input for variable value update in batch operations
+* Input for defining the scope of variable value assignments in batch update operations
 */
 export class VariableUpdateScopeInput {
     /**
@@ -21,7 +21,7 @@ export class VariableUpdateScopeInput {
     */
     'org_identifier': string;
     /**
-    * Principal type
+    * Type of principal to which the variable value applies. Use USER to assign values to a specific user, or USER_GROUP to assign values to a group.
     */
     'principal_type'?: VariableUpdateScopeInputPrincipalTypeEnum | null;
     /**
@@ -29,11 +29,11 @@ export class VariableUpdateScopeInput {
     */
     'principal_identifier'?: string | null;
     /**
-    * Unique ID of the model
+    * Unique ID or name of the model. Required for FORMULA_VARIABLE type to scope the variable value to a specific worksheet.
     */
     'model_identifier'?: string | null;
     /**
-    * Priority level
+    * The priority level for this scope assignment, used for conflict resolution when multiple values match. Higher priority values (larger numbers) take precedence.
     */
     'priority'?: number | null;
 

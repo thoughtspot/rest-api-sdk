@@ -24,7 +24,7 @@ import java.util.Objects;
 import java.util.Set;
 import org.openapitools.jackson.nullable.JsonNullable;
 
-/** Input for variable scope in search */
+/** Input for filtering variable values by scope in search operations */
 @javax.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         comments = "Generator version: 7.12.0")
@@ -37,7 +37,10 @@ public class ValueScopeInput implements Serializable {
     @javax.annotation.Nullable
     private String orgIdentifier;
 
-    /** Principal type */
+    /**
+     * Type of principal to filter by. Use USER to filter values assigned to specific users, or
+     * USER_GROUP to filter values assigned to groups.
+     */
     @JsonAdapter(PrincipalTypeEnum.Adapter.class)
     public enum PrincipalTypeEnum {
         USER("USER"),
@@ -134,7 +137,8 @@ public class ValueScopeInput implements Serializable {
     }
 
     /**
-     * Principal type
+     * Type of principal to filter by. Use USER to filter values assigned to specific users, or
+     * USER_GROUP to filter values assigned to groups.
      *
      * @return principalType
      */
@@ -173,7 +177,7 @@ public class ValueScopeInput implements Serializable {
     }
 
     /**
-     * Model Identifier
+     * Unique ID or name of the model to filter by. Applicable only for FORMULA_VARIABLE type.
      *
      * @return modelIdentifier
      */
