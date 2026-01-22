@@ -15468,14 +15468,14 @@
                 "type": "object",
                 "properties": {
                   "variable_assignment": {
-                    "description": "Variables and values to update",
+                    "description": "Array of variable assignment objects specifying the variable identifier, values to assign, and the operation type (ADD, REMOVE, REPLACE, or RESET) to perform on each variable.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/VariableUpdateAssignmentInput"
                     }
                   },
                   "variable_value_scope": {
-                    "description": "Variables and values to update",
+                    "description": "Array of scope objects defining where the variable values apply, including organization context, optional principal constraints (user or group), model reference for formula variables, and priority for conflict resolution.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/VariableUpdateScopeInput"
@@ -20788,7 +20788,7 @@
               "USER",
               "USER_GROUP"
             ],
-            "description": "Principal type",
+            "description": "Type of principal to filter by. Use USER to filter values assigned to specific users, or USER_GROUP to filter values assigned to groups.",
             "nullable": true
           },
           "principal_identifier": {
@@ -20798,11 +20798,11 @@
           },
           "model_identifier": {
             "type": "string",
-            "description": "Model Identifier",
+            "description": "Unique ID or name of the model to filter by. Applicable only for FORMULA_VARIABLE type.",
             "nullable": true
           }
         },
-        "description": "Input for variable scope in search"
+        "description": "Input for filtering variable values by scope in search operations"
       },
       "Variable": {
         "type": "object",
@@ -20875,7 +20875,7 @@
               "USER",
               "USER_GROUP"
             ],
-            "description": "Principal type",
+            "description": "Type of principal to which this value applies. Use USER to assign the value to a specific user, or USER_GROUP to assign it to a group.",
             "nullable": true
           },
           "principal_identifier": {
@@ -24845,7 +24845,7 @@
               "USER",
               "USER_GROUP"
             ],
-            "description": "Principal type",
+            "description": "Type of principal to which the variable value applies. Use USER to assign values to a specific user, or USER_GROUP to assign values to a group.",
             "nullable": true
           },
           "principal_identifier": {
@@ -24855,17 +24855,17 @@
           },
           "model_identifier": {
             "type": "string",
-            "description": "Unique ID of the model",
+            "description": "Unique ID or name of the model. Required for FORMULA_VARIABLE type to scope the variable value to a specific worksheet.",
             "nullable": true
           },
           "priority": {
             "type": "integer",
             "format": "int32",
-            "description": "Priority level",
+            "description": "The priority level for this scope assignment, used for conflict resolution when multiple values match. Higher priority values (larger numbers) take precedence.",
             "nullable": true
           }
         },
-        "description": "Input for variable value update in batch operations"
+        "description": "Input for defining the scope of variable value assignments in batch update operations"
       },
       "CreateEmailCustomizationResponse": {
         "type": "object",
