@@ -22,6 +22,70 @@ const instance = new PromiseSystemApi(config);
 describe('SystemApi', function() {
 
 
+      describe('configureCommunicationChannelPreferences', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "configureCommunicationChannelPreferences"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.configureCommunicationChannelPreferences(
+                    // configureCommunicationChannelPreferencesRequest ConfigureCommunicationChannelPreferencesRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.configureCommunicationChannelPreferences(
+                    // configureCommunicationChannelPreferencesRequest ConfigureCommunicationChannelPreferencesRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('configureSecuritySettings', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "configureSecuritySettings"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.configureSecuritySettings(
+                    // configureSecuritySettingsRequest ConfigureSecuritySettingsRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.configureSecuritySettings(
+                    // configureSecuritySettingsRequest ConfigureSecuritySettingsRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('getSystemConfig', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -98,6 +162,70 @@ describe('SystemApi', function() {
             } else {
                 await expect(
                   instance.getSystemOverrideInfo(
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('searchCommunicationChannelPreferences', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "searchCommunicationChannelPreferences"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.searchCommunicationChannelPreferences(
+                    // searchCommunicationChannelPreferencesRequest SearchCommunicationChannelPreferencesRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.searchCommunicationChannelPreferences(
+                    // searchCommunicationChannelPreferencesRequest SearchCommunicationChannelPreferencesRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('searchSecuritySettings', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "searchSecuritySettings"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.searchSecuritySettings(
+                    // searchSecuritySettingsRequest SearchSecuritySettingsRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.searchSecuritySettings(
+                    // searchSecuritySettingsRequest SearchSecuritySettingsRequest
+                     test.Body   
                   )
                 ).to.be.rejectedWith(Error);
             }

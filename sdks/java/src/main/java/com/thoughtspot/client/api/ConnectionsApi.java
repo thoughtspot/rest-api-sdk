@@ -16,6 +16,8 @@ import com.thoughtspot.client.model.CreateConnectionRequest;
 import com.thoughtspot.client.model.CreateConnectionResponse;
 import com.thoughtspot.client.model.DeleteConnectionRequest;
 import com.thoughtspot.client.model.FetchConnectionDiffStatusResponse;
+import com.thoughtspot.client.model.RevokeRefreshTokensRequest;
+import com.thoughtspot.client.model.RevokeRefreshTokensResponse;
 import com.thoughtspot.client.model.SearchConnectionRequest;
 import com.thoughtspot.client.model.SearchConnectionResponse;
 import com.thoughtspot.client.model.UpdateConnectionRequest;
@@ -1139,6 +1141,283 @@ public class ConnectionsApi {
         okhttp3.Call localVarCall =
                 fetchConnectionDiffStatusValidateBeforeCall(connectionIdentifier, _callback);
         Type localVarReturnType = new TypeToken<FetchConnectionDiffStatusResponse>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for revokeRefreshTokens
+     *
+     * @param connectionIdentifier Unique ID or name of the connection whose refresh tokens need to
+     *     be revoked. All the users associated with the connection will have their refresh tokens
+     *     revoked except the author. (required)
+     * @param revokeRefreshTokensRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Token(s) successfully revoked. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Object not found </td><td>  -  </td></tr>
+     * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call revokeRefreshTokensCall(
+            String connectionIdentifier,
+            RevokeRefreshTokensRequest revokeRefreshTokensRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = revokeRefreshTokensRequest;
+
+        // create path and map variables
+        String localVarPath =
+                "/api/rest/2.0/connections/{connection_identifier}/revoke-refresh-tokens"
+                        .replace(
+                                "{" + "connection_identifier" + "}",
+                                localVarApiClient.escapeString(connectionIdentifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call revokeRefreshTokensValidateBeforeCall(
+            String connectionIdentifier,
+            RevokeRefreshTokensRequest revokeRefreshTokensRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'connectionIdentifier' is set
+        if (connectionIdentifier == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'connectionIdentifier' when calling"
+                            + " revokeRefreshTokens(Async)");
+        }
+
+        // verify the required parameter 'revokeRefreshTokensRequest' is set
+        if (revokeRefreshTokensRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'revokeRefreshTokensRequest' when calling"
+                            + " revokeRefreshTokens(Async)");
+        }
+
+        return revokeRefreshTokensCall(connectionIdentifier, revokeRefreshTokensRequest, _callback);
+    }
+
+    /**
+     * Version: 26.2.0.cl or later Revokes OAuth refresh tokens for users who no longer require
+     * access to a data warehouse connection. When a token is revoked, the affected user&#39;s
+     * session for that connection is terminated, and they must re-authenticate to regain access.
+     * Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or
+     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privileges. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on the ThoughtSpot instance,
+     * users with &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**)
+     * privilege can also make API requests to revoke tokens for connection users. #### Usage
+     * guidelines You can specify different combinations of identifiers to control which refresh
+     * tokens are revoked. - **connection_identifier**: Revokes refresh tokens for all users of the
+     * connection, except the connection author. - **connection_identifier** and
+     * **user_identifiers**: Revokes refresh tokens only for the users specified in the request. If
+     * the name or ID of the connection author is included in the request, their token will also be
+     * revoked. - **connection_identifier** and **configuration_identifiers**: Revokes refresh
+     * tokens for all users on the specified configurations, except the configuration author. -
+     * **connection_identifier**, **configuration_identifiers**, and **user_identifiers**: Revokes
+     * refresh tokens for the specified users on the specified configurations. -
+     * **connection_identifier** and **org_identifiers**: Revokes refresh tokens for the specified
+     * Orgs. Applicable only for published connections. - **connection_identifier**,
+     * **org_identifiers**, and **user_identifiers**: Revokes refresh tokens for the specified users
+     * in the specified Orgs. Applicable only for published connections. **NOTE**: The
+     * &#x60;org_identifiers&#x60; parameter is only applicable for published connections. Using
+     * this parameter for unpublished connections will result in an error. Ensure that the
+     * connections are published before making the API request.
+     *
+     * @param connectionIdentifier Unique ID or name of the connection whose refresh tokens need to
+     *     be revoked. All the users associated with the connection will have their refresh tokens
+     *     revoked except the author. (required)
+     * @param revokeRefreshTokensRequest (required)
+     * @return RevokeRefreshTokensResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Token(s) successfully revoked. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Object not found </td><td>  -  </td></tr>
+     * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public RevokeRefreshTokensResponse revokeRefreshTokens(
+            String connectionIdentifier, RevokeRefreshTokensRequest revokeRefreshTokensRequest)
+            throws ApiException {
+        ApiResponse<RevokeRefreshTokensResponse> localVarResp =
+                revokeRefreshTokensWithHttpInfo(connectionIdentifier, revokeRefreshTokensRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Version: 26.2.0.cl or later Revokes OAuth refresh tokens for users who no longer require
+     * access to a data warehouse connection. When a token is revoked, the affected user&#39;s
+     * session for that connection is terminated, and they must re-authenticate to regain access.
+     * Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or
+     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privileges. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on the ThoughtSpot instance,
+     * users with &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**)
+     * privilege can also make API requests to revoke tokens for connection users. #### Usage
+     * guidelines You can specify different combinations of identifiers to control which refresh
+     * tokens are revoked. - **connection_identifier**: Revokes refresh tokens for all users of the
+     * connection, except the connection author. - **connection_identifier** and
+     * **user_identifiers**: Revokes refresh tokens only for the users specified in the request. If
+     * the name or ID of the connection author is included in the request, their token will also be
+     * revoked. - **connection_identifier** and **configuration_identifiers**: Revokes refresh
+     * tokens for all users on the specified configurations, except the configuration author. -
+     * **connection_identifier**, **configuration_identifiers**, and **user_identifiers**: Revokes
+     * refresh tokens for the specified users on the specified configurations. -
+     * **connection_identifier** and **org_identifiers**: Revokes refresh tokens for the specified
+     * Orgs. Applicable only for published connections. - **connection_identifier**,
+     * **org_identifiers**, and **user_identifiers**: Revokes refresh tokens for the specified users
+     * in the specified Orgs. Applicable only for published connections. **NOTE**: The
+     * &#x60;org_identifiers&#x60; parameter is only applicable for published connections. Using
+     * this parameter for unpublished connections will result in an error. Ensure that the
+     * connections are published before making the API request.
+     *
+     * @param connectionIdentifier Unique ID or name of the connection whose refresh tokens need to
+     *     be revoked. All the users associated with the connection will have their refresh tokens
+     *     revoked except the author. (required)
+     * @param revokeRefreshTokensRequest (required)
+     * @return ApiResponse&lt;RevokeRefreshTokensResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Token(s) successfully revoked. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Object not found </td><td>  -  </td></tr>
+     * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<RevokeRefreshTokensResponse> revokeRefreshTokensWithHttpInfo(
+            String connectionIdentifier, RevokeRefreshTokensRequest revokeRefreshTokensRequest)
+            throws ApiException {
+        okhttp3.Call localVarCall =
+                revokeRefreshTokensValidateBeforeCall(
+                        connectionIdentifier, revokeRefreshTokensRequest, null);
+        Type localVarReturnType = new TypeToken<RevokeRefreshTokensResponse>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Version: 26.2.0.cl or later Revokes OAuth refresh tokens for users who no
+     * longer require access to a data warehouse connection. When a token is revoked, the affected
+     * user&#39;s session for that connection is terminated, and they must re-authenticate to regain
+     * access. Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or
+     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privileges. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on the ThoughtSpot instance,
+     * users with &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**)
+     * privilege can also make API requests to revoke tokens for connection users. #### Usage
+     * guidelines You can specify different combinations of identifiers to control which refresh
+     * tokens are revoked. - **connection_identifier**: Revokes refresh tokens for all users of the
+     * connection, except the connection author. - **connection_identifier** and
+     * **user_identifiers**: Revokes refresh tokens only for the users specified in the request. If
+     * the name or ID of the connection author is included in the request, their token will also be
+     * revoked. - **connection_identifier** and **configuration_identifiers**: Revokes refresh
+     * tokens for all users on the specified configurations, except the configuration author. -
+     * **connection_identifier**, **configuration_identifiers**, and **user_identifiers**: Revokes
+     * refresh tokens for the specified users on the specified configurations. -
+     * **connection_identifier** and **org_identifiers**: Revokes refresh tokens for the specified
+     * Orgs. Applicable only for published connections. - **connection_identifier**,
+     * **org_identifiers**, and **user_identifiers**: Revokes refresh tokens for the specified users
+     * in the specified Orgs. Applicable only for published connections. **NOTE**: The
+     * &#x60;org_identifiers&#x60; parameter is only applicable for published connections. Using
+     * this parameter for unpublished connections will result in an error. Ensure that the
+     * connections are published before making the API request.
+     *
+     * @param connectionIdentifier Unique ID or name of the connection whose refresh tokens need to
+     *     be revoked. All the users associated with the connection will have their refresh tokens
+     *     revoked except the author. (required)
+     * @param revokeRefreshTokensRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Token(s) successfully revoked. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Object not found </td><td>  -  </td></tr>
+     * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call revokeRefreshTokensAsync(
+            String connectionIdentifier,
+            RevokeRefreshTokensRequest revokeRefreshTokensRequest,
+            final ApiCallback<RevokeRefreshTokensResponse> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                revokeRefreshTokensValidateBeforeCall(
+                        connectionIdentifier, revokeRefreshTokensRequest, _callback);
+        Type localVarReturnType = new TypeToken<RevokeRefreshTokensResponse>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

@@ -5,10 +5,12 @@ All URIs are relative to *CLUSTER_URL*
 | Method | HTTP request |
 |------------- | ------------- |
 | [**configureCommunicationChannelPreferences**](SystemApi.md#configureCommunicationChannelPreferences) | **POST** /api/rest/2.0/system/preferences/communication-channels/configure |
+| [**configureSecuritySettings**](SystemApi.md#configureSecuritySettings) | **POST** /api/rest/2.0/system/security-settings/configure |
 | [**getSystemConfig**](SystemApi.md#getSystemConfig) | **GET** /api/rest/2.0/system/config |
 | [**getSystemInformation**](SystemApi.md#getSystemInformation) | **GET** /api/rest/2.0/system |
 | [**getSystemOverrideInfo**](SystemApi.md#getSystemOverrideInfo) | **GET** /api/rest/2.0/system/config-overrides |
 | [**searchCommunicationChannelPreferences**](SystemApi.md#searchCommunicationChannelPreferences) | **POST** /api/rest/2.0/system/preferences/communication-channels/search |
+| [**searchSecuritySettings**](SystemApi.md#searchSecuritySettings) | **POST** /api/rest/2.0/system/security-settings/search |
 | [**updateSystemConfig**](SystemApi.md#updateSystemConfig) | **POST** /api/rest/2.0/system/config-update |
 
 
@@ -43,6 +45,42 @@ null (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | Communication channel preferences successfully updated. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="configureSecuritySettings"></a>
+# **configureSecuritySettings**
+> configureSecuritySettings(configureSecuritySettingsRequest)
+
+
+
+ Version: 26.2.0.cl or later   Configure security settings for your ThoughtSpot application instance. - Use &#x60;cluster_preferences&#x60; to update cluster-level security settings including CORS whitelisted URLs, CSP settings, SAML redirect URLs, partitioned cookies, and non-embed access configuration. - Use &#x60;org_preferences&#x60; to configure Org-specific security settings. If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this allows configuring CORS and non-embed access settings specific to the Org.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. Cluster-level SAML and script-src settings require &#x60;ADMINISTRATION&#x60; privilege. See [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.     
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **configureSecuritySettingsRequest** | [**ConfigureSecuritySettingsRequest**](ConfigureSecuritySettingsRequest.md)
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Successfully configured the security settings. |  -  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
@@ -178,6 +216,42 @@ This endpoint does not need any parameter.
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Communication channel preferences retrieved successfully. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="searchSecuritySettings"></a>
+# **searchSecuritySettings**
+> SecuritySettingsResponse searchSecuritySettings(searchSecuritySettingsRequest)
+
+
+
+ Version: 26.2.0.cl or later   Fetch security settings for your ThoughtSpot application instance. - Use &#x60;scope: CLUSTER&#x60; to retrieve cluster-level security settings, including CORS and CSP allowlists, SAML redirect URLs, and settings that control access to non-embedded pages. - Use &#x60;scope: ORG&#x60; to retrieve Org-level security settings. If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this returns CORS and non-embed access settings specific to the Org. - If &#x60;scope&#x60; is not specified, returns both cluster and Org-specific settings based on user privileges.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. See [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.     
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **searchSecuritySettingsRequest** | [**SearchSecuritySettingsRequest**](SearchSecuritySettingsRequest.md)
+
+### Return type
+
+[**SecuritySettingsResponse**](SecuritySettingsResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successfully retrieved the list of security settings. |  -  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |

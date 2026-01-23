@@ -9,6 +9,8 @@ import com.thoughtspot.client.model.CreateConnectionRequest;
 import com.thoughtspot.client.model.CreateConnectionResponse;
 import com.thoughtspot.client.model.DeleteConnectionRequest;
 import com.thoughtspot.client.model.FetchConnectionDiffStatusResponse;
+import com.thoughtspot.client.model.RevokeRefreshTokensRequest;
+import com.thoughtspot.client.model.RevokeRefreshTokensResponse;
 import com.thoughtspot.client.model.SearchConnectionRequest;
 import com.thoughtspot.client.model.SearchConnectionResponse;
 import com.thoughtspot.client.model.UpdateConnectionRequest;
@@ -152,6 +154,43 @@ public class ConnectionsApiTest {
         String connectionIdentifier = null;
         FetchConnectionDiffStatusResponse response =
                 api.fetchConnectionDiffStatus(connectionIdentifier);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 26.2.0.cl or later Revokes OAuth refresh tokens for users who no longer require
+     * access to a data warehouse connection. When a token is revoked, the affected user&#39;s
+     * session for that connection is terminated, and they must re-authenticate to regain access.
+     * Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or
+     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privileges. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on the ThoughtSpot instance,
+     * users with &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**)
+     * privilege can also make API requests to revoke tokens for connection users. #### Usage
+     * guidelines You can specify different combinations of identifiers to control which refresh
+     * tokens are revoked. - **connection_identifier**: Revokes refresh tokens for all users of the
+     * connection, except the connection author. - **connection_identifier** and
+     * **user_identifiers**: Revokes refresh tokens only for the users specified in the request. If
+     * the name or ID of the connection author is included in the request, their token will also be
+     * revoked. - **connection_identifier** and **configuration_identifiers**: Revokes refresh
+     * tokens for all users on the specified configurations, except the configuration author. -
+     * **connection_identifier**, **configuration_identifiers**, and **user_identifiers**: Revokes
+     * refresh tokens for the specified users on the specified configurations. -
+     * **connection_identifier** and **org_identifiers**: Revokes refresh tokens for the specified
+     * Orgs. Applicable only for published connections. - **connection_identifier**,
+     * **org_identifiers**, and **user_identifiers**: Revokes refresh tokens for the specified users
+     * in the specified Orgs. Applicable only for published connections. **NOTE**: The
+     * &#x60;org_identifiers&#x60; parameter is only applicable for published connections. Using
+     * this parameter for unpublished connections will result in an error. Ensure that the
+     * connections are published before making the API request.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void revokeRefreshTokensTest() throws ApiException {
+        String connectionIdentifier = null;
+        RevokeRefreshTokensRequest revokeRefreshTokensRequest = null;
+        RevokeRefreshTokensResponse response =
+                api.revokeRefreshTokens(connectionIdentifier, revokeRefreshTokensRequest);
         // TODO: test validations
     }
 

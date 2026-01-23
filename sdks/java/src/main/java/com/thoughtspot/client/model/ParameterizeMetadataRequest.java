@@ -34,7 +34,9 @@ public class ParameterizeMetadataRequest implements Serializable {
     public enum MetadataTypeEnum {
         LOGICAL_TABLE("LOGICAL_TABLE"),
 
-        CONNECTION("CONNECTION");
+        CONNECTION("CONNECTION"),
+
+        CONNECTION_CONFIG("CONNECTION_CONFIG");
 
         private String value;
 

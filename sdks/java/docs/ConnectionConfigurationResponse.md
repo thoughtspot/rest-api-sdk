@@ -16,6 +16,8 @@
 |**disabled** | **Boolean** |  |  [optional] |
 |**dataWarehouseType** | [**DataWarehouseTypeEnum**](#DataWarehouseTypeEnum) |  |  [optional] |
 |**policyType** | [**PolicyTypeEnum**](#PolicyTypeEnum) |  |  [optional] |
+|**sameAsParent** | **Boolean** |  |  [optional] |
+|**policyProcessOptions** | [**PolicyProcessOptions**](PolicyProcessOptions.md) |  |  [optional] |
 
 
 
