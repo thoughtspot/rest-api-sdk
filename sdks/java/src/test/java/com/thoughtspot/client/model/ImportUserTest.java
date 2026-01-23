@@ -99,4 +99,10 @@ public class ImportUserTest {
     public void favoriteMetadataTest() {
         // TODO: test favoriteMetadata
     }
+
+    /** Test the property 'preferredLocale' */
+    @Test
+    public void preferredLocaleTest() {
+        // TODO: test preferredLocale
+    }
 }

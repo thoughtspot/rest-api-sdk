@@ -291,6 +291,117 @@ public class ImportUser implements Serializable {
     @javax.annotation.Nullable
     private List<FavoriteMetadataInput> favoriteMetadata;
 
+    /**
+     * Locale for the user. When setting this value, do not set use_browser_language to true,
+     * otherwise the browser&#39;s language setting will take precedence and the preferred_locale
+     * value will be ignored.
+     */
+    @JsonAdapter(PreferredLocaleEnum.Adapter.class)
+    public enum PreferredLocaleEnum {
+        EN_CA("en-CA"),
+
+        EN_GB("en-GB"),
+
+        EN_US("en-US"),
+
+        DE_DE("de-DE"),
+
+        JA_JP("ja-JP"),
+
+        ZH_CN("zh-CN"),
+
+        PT_BR("pt-BR"),
+
+        FR_FR("fr-FR"),
+
+        FR_CA("fr-CA"),
+
+        ES_US("es-US"),
+
+        DA_DK("da-DK"),
+
+        ES_ES("es-ES"),
+
+        FI_FI("fi-FI"),
+
+        SV_SE("sv-SE"),
+
+        NB_NO("nb-NO"),
+
+        PT_PT("pt-PT"),
+
+        NL_NL("nl-NL"),
+
+        IT_IT("it-IT"),
+
+        RU_RU("ru-RU"),
+
+        EN_IN("en-IN"),
+
+        DE_CH("de-CH"),
+
+        EN_NZ("en-NZ"),
+
+        ES_MX("es-MX"),
+
+        EN_AU("en-AU"),
+
+        ZH_HANT("zh-Hant"),
+
+        KO_KR("ko-KR"),
+
+        EN_DE("en-DE");
+
+        private String value;
+
+        PreferredLocaleEnum(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        public static PreferredLocaleEnum fromValue(String value) {
+            for (PreferredLocaleEnum b : PreferredLocaleEnum.values()) {
+                if (b.value.equals(value)) {
+                    return b;
+                }
+            }
+            return null;
+        }
+
+        public static class Adapter extends TypeAdapter<PreferredLocaleEnum> {
+            @Override
+            public void write(final JsonWriter jsonWriter, final PreferredLocaleEnum enumeration)
+                    throws IOException {
+                jsonWriter.value(enumeration.getValue());
+            }
+
+            @Override
+            public PreferredLocaleEnum read(final JsonReader jsonReader) throws IOException {
+                String value = jsonReader.nextString();
+                return PreferredLocaleEnum.fromValue(value);
+            }
+        }
+
+        public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+            String value = jsonElement.getAsString();
+            PreferredLocaleEnum.fromValue(value);
+        }
+    }
+
+    public static final String SERIALIZED_NAME_PREFERRED_LOCALE = "preferred_locale";
+
+    @SerializedName(SERIALIZED_NAME_PREFERRED_LOCALE)
+    @javax.annotation.Nullable
+    private PreferredLocaleEnum preferredLocale;
+
     public ImportUser() {}
 
     public ImportUser userIdentifier(@javax.annotation.Nonnull String userIdentifier) {
@@ -592,6 +703,28 @@ public class ImportUser implements Serializable {
         this.favoriteMetadata = favoriteMetadata;
     }
 
+    public ImportUser preferredLocale(
+            @javax.annotation.Nullable PreferredLocaleEnum preferredLocale) {
+        this.preferredLocale = preferredLocale;
+        return this;
+    }
+
+    /**
+     * Locale for the user. When setting this value, do not set use_browser_language to true,
+     * otherwise the browser&#39;s language setting will take precedence and the preferred_locale
+     * value will be ignored.
+     *
+     * @return preferredLocale
+     */
+    @javax.annotation.Nullable
+    public PreferredLocaleEnum getPreferredLocale() {
+        return preferredLocale;
+    }
+
+    public void setPreferredLocale(@javax.annotation.Nullable PreferredLocaleEnum preferredLocale) {
+        this.preferredLocale = preferredLocale;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -617,7 +750,8 @@ public class ImportUser implements Serializable {
                         this.onboardingExperienceCompleted,
                         importUser.onboardingExperienceCompleted)
                 && Objects.equals(this.homeLiveboardIdentifier, importUser.homeLiveboardIdentifier)
-                && Objects.equals(this.favoriteMetadata, importUser.favoriteMetadata);
+                && Objects.equals(this.favoriteMetadata, importUser.favoriteMetadata)
+                && Objects.equals(this.preferredLocale, importUser.preferredLocale);
     }
 
     private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -645,7 +779,8 @@ public class ImportUser implements Serializable {
                 showOnboardingExperience,
                 onboardingExperienceCompleted,
                 homeLiveboardIdentifier,
-                favoriteMetadata);
+                favoriteMetadata,
+                preferredLocale);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -679,6 +814,7 @@ public class ImportUser implements Serializable {
                 .append(toIndentedString(homeLiveboardIdentifier))
                 .append("\n");
         sb.append("    favoriteMetadata: ").append(toIndentedString(favoriteMetadata)).append("\n");
+        sb.append("    preferredLocale: ").append(toIndentedString(preferredLocale)).append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -714,6 +850,7 @@ public class ImportUser implements Serializable {
         openapiFields.add("onboarding_experience_completed");
         openapiFields.add("home_liveboard_identifier");
         openapiFields.add("favorite_metadata");
+        openapiFields.add("preferred_locale");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -875,6 +1012,20 @@ public class ImportUser implements Serializable {
                 }
                 ;
             }
+        }
+        if ((jsonObj.get("preferred_locale") != null
+                        && !jsonObj.get("preferred_locale").isJsonNull())
+                && !jsonObj.get("preferred_locale").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `preferred_locale` to be a primitive type in the"
+                                    + " JSON string but got `%s`",
+                            jsonObj.get("preferred_locale").toString()));
+        }
+        // validate the optional field `preferred_locale`
+        if (jsonObj.get("preferred_locale") != null
+                && !jsonObj.get("preferred_locale").isJsonNull()) {
+            PreferredLocaleEnum.validateJsonElement(jsonObj.get("preferred_locale"));
         }
     }
 

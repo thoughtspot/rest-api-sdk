@@ -746,9 +746,9 @@ public class VariableApi {
 
     /**
      * Update a variable&#39;s name Version: 10.14.0.cl or later Allows updating a variable&#39;s
-     * properties in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The
-     * CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current
-     * organization scope. The API endpoint allows updating: * The variable name
+     * name in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES
+     * permission allows you to manage Formula Variables in the current organization scope. The API
+     * endpoint allows updating: * The variable name
      *
      * @param identifier Unique id or name of the variable to update. (required)
      * @param updateVariableRequest (required)
@@ -772,9 +772,9 @@ public class VariableApi {
 
     /**
      * Update a variable&#39;s name Version: 10.14.0.cl or later Allows updating a variable&#39;s
-     * properties in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The
-     * CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current
-     * organization scope. The API endpoint allows updating: * The variable name
+     * name in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES
+     * permission allows you to manage Formula Variables in the current organization scope. The API
+     * endpoint allows updating: * The variable name
      *
      * @param identifier Unique id or name of the variable to update. (required)
      * @param updateVariableRequest (required)
@@ -801,7 +801,7 @@ public class VariableApi {
 
     /**
      * (asynchronously) Update a variable&#39;s name Version: 10.14.0.cl or later Allows updating a
-     * variable&#39;s properties in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The
+     * variable&#39;s name in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The
      * CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current
      * organization scope. The API endpoint allows updating: * The variable name
      *
@@ -927,11 +927,11 @@ public class VariableApi {
      * endpoint allows: * Adding new values to variables * Replacing existing values * Deleting
      * values from variables When updating variable values, you need to specify: * The variable
      * identifiers * The values to add/replace/remove for each variable * The operation to perform
-     * (ADD, REPLACE, REMOVE, CLEAR) Behaviour based on operation type: * ADD - Adds values to the
+     * (ADD, REPLACE, REMOVE, RESET) Behaviour based on operation type: * ADD - Adds values to the
      * variable if this is a list type variable, else same as replace. * REPLACE - Replaces all
      * values of a given set of constraints with the current set of values. * REMOVE - Removes any
      * values which match the set of conditions of the variables if this is a list type variable,
-     * else clears value. * CLEAR - Removes all constrains for a given variable, scope is ignored
+     * else clears value. * RESET - Removes all constrains for a given variable, scope is ignored
      *
      * @param updateVariableValuesRequest (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -959,11 +959,11 @@ public class VariableApi {
      * endpoint allows: * Adding new values to variables * Replacing existing values * Deleting
      * values from variables When updating variable values, you need to specify: * The variable
      * identifiers * The values to add/replace/remove for each variable * The operation to perform
-     * (ADD, REPLACE, REMOVE, CLEAR) Behaviour based on operation type: * ADD - Adds values to the
+     * (ADD, REPLACE, REMOVE, RESET) Behaviour based on operation type: * ADD - Adds values to the
      * variable if this is a list type variable, else same as replace. * REPLACE - Replaces all
      * values of a given set of constraints with the current set of values. * REMOVE - Removes any
      * values which match the set of conditions of the variables if this is a list type variable,
-     * else clears value. * CLEAR - Removes all constrains for a given variable, scope is ignored
+     * else clears value. * RESET - Removes all constrains for a given variable, scope is ignored
      *
      * @param updateVariableValuesRequest (required)
      * @return ApiResponse&lt;Void&gt;
@@ -994,11 +994,11 @@ public class VariableApi {
      * organization scope. The API endpoint allows: * Adding new values to variables * Replacing
      * existing values * Deleting values from variables When updating variable values, you need to
      * specify: * The variable identifiers * The values to add/replace/remove for each variable *
-     * The operation to perform (ADD, REPLACE, REMOVE, CLEAR) Behaviour based on operation type: *
+     * The operation to perform (ADD, REPLACE, REMOVE, RESET) Behaviour based on operation type: *
      * ADD - Adds values to the variable if this is a list type variable, else same as replace. *
      * REPLACE - Replaces all values of a given set of constraints with the current set of values. *
      * REMOVE - Removes any values which match the set of conditions of the variables if this is a
-     * list type variable, else clears value. * CLEAR - Removes all constrains for a given variable,
+     * list type variable, else clears value. * RESET - Removes all constrains for a given variable,
      * scope is ignored
      *
      * @param updateVariableValuesRequest (required)

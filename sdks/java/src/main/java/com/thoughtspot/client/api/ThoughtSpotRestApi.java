@@ -26,6 +26,7 @@ import com.thoughtspot.client.model.CommitHistoryResponse;
 import com.thoughtspot.client.model.CommitResponse;
 import com.thoughtspot.client.model.CommunicationChannelPreferencesResponse;
 import com.thoughtspot.client.model.ConfigureCommunicationChannelPreferencesRequest;
+import com.thoughtspot.client.model.ConfigureSecuritySettingsRequest;
 import com.thoughtspot.client.model.ConnectionConfigurationResponse;
 import com.thoughtspot.client.model.ConnectionConfigurationSearchRequest;
 import com.thoughtspot.client.model.Conversation;
@@ -115,6 +116,8 @@ import com.thoughtspot.client.model.ResponseSchedule;
 import com.thoughtspot.client.model.ResponseWorksheetToModelConversion;
 import com.thoughtspot.client.model.RevertCommitRequest;
 import com.thoughtspot.client.model.RevertResponse;
+import com.thoughtspot.client.model.RevokeRefreshTokensRequest;
+import com.thoughtspot.client.model.RevokeRefreshTokensResponse;
 import com.thoughtspot.client.model.RevokeTokenRequest;
 import com.thoughtspot.client.model.RoleResponse;
 import com.thoughtspot.client.model.SearchCalendarsRequest;
@@ -132,11 +135,13 @@ import com.thoughtspot.client.model.SearchOrgsRequest;
 import com.thoughtspot.client.model.SearchRoleResponse;
 import com.thoughtspot.client.model.SearchRolesRequest;
 import com.thoughtspot.client.model.SearchSchedulesRequest;
+import com.thoughtspot.client.model.SearchSecuritySettingsRequest;
 import com.thoughtspot.client.model.SearchTagsRequest;
 import com.thoughtspot.client.model.SearchUserGroupsRequest;
 import com.thoughtspot.client.model.SearchUsersRequest;
 import com.thoughtspot.client.model.SearchVariablesRequest;
 import com.thoughtspot.client.model.SearchWebhookConfigurationsRequest;
+import com.thoughtspot.client.model.SecuritySettingsResponse;
 import com.thoughtspot.client.model.SendAgentMessageRequest;
 import com.thoughtspot.client.model.SendAgentMessageResponse;
 import com.thoughtspot.client.model.SendAgentMessageStreamingRequest;
@@ -1318,6 +1323,202 @@ public class ThoughtSpotRestApi {
         okhttp3.Call localVarCall =
                 configureCommunicationChannelPreferencesValidateBeforeCall(
                         configureCommunicationChannelPreferencesRequest, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for configureSecuritySettings
+     *
+     * @param configureSecuritySettingsRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Successfully configured the security settings. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call configureSecuritySettingsCall(
+            ConfigureSecuritySettingsRequest configureSecuritySettingsRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = configureSecuritySettingsRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/system/security-settings/configure";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call configureSecuritySettingsValidateBeforeCall(
+            ConfigureSecuritySettingsRequest configureSecuritySettingsRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'configureSecuritySettingsRequest' is set
+        if (configureSecuritySettingsRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'configureSecuritySettingsRequest' when"
+                            + " calling configureSecuritySettings(Async)");
+        }
+
+        return configureSecuritySettingsCall(configureSecuritySettingsRequest, _callback);
+    }
+
+    /**
+     * Version: 26.2.0.cl or later Configure security settings for your ThoughtSpot application
+     * instance. - Use &#x60;cluster_preferences&#x60; to update cluster-level security settings
+     * including CORS whitelisted URLs, CSP settings, SAML redirect URLs, partitioned cookies, and
+     * non-embed access configuration. - Use &#x60;org_preferences&#x60; to configure Org-specific
+     * security settings. If your instance has
+     * [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this allows configuring CORS
+     * and non-embed access settings specific to the Org. Requires &#x60;ADMINISTRATION&#x60; (**Can
+     * administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.
+     * Cluster-level SAML and script-src settings require &#x60;ADMINISTRATION&#x60; privilege. See
+     * [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more
+     * details.
+     *
+     * @param configureSecuritySettingsRequest (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Successfully configured the security settings. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public void configureSecuritySettings(
+            ConfigureSecuritySettingsRequest configureSecuritySettingsRequest) throws ApiException {
+        configureSecuritySettingsWithHttpInfo(configureSecuritySettingsRequest);
+    }
+
+    /**
+     * Version: 26.2.0.cl or later Configure security settings for your ThoughtSpot application
+     * instance. - Use &#x60;cluster_preferences&#x60; to update cluster-level security settings
+     * including CORS whitelisted URLs, CSP settings, SAML redirect URLs, partitioned cookies, and
+     * non-embed access configuration. - Use &#x60;org_preferences&#x60; to configure Org-specific
+     * security settings. If your instance has
+     * [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this allows configuring CORS
+     * and non-embed access settings specific to the Org. Requires &#x60;ADMINISTRATION&#x60; (**Can
+     * administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.
+     * Cluster-level SAML and script-src settings require &#x60;ADMINISTRATION&#x60; privilege. See
+     * [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more
+     * details.
+     *
+     * @param configureSecuritySettingsRequest (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Successfully configured the security settings. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<Void> configureSecuritySettingsWithHttpInfo(
+            ConfigureSecuritySettingsRequest configureSecuritySettingsRequest) throws ApiException {
+        okhttp3.Call localVarCall =
+                configureSecuritySettingsValidateBeforeCall(configureSecuritySettingsRequest, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     * (asynchronously) Version: 26.2.0.cl or later Configure security settings for your ThoughtSpot
+     * application instance. - Use &#x60;cluster_preferences&#x60; to update cluster-level security
+     * settings including CORS whitelisted URLs, CSP settings, SAML redirect URLs, partitioned
+     * cookies, and non-embed access configuration. - Use &#x60;org_preferences&#x60; to configure
+     * Org-specific security settings. If your instance has
+     * [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this allows configuring CORS
+     * and non-embed access settings specific to the Org. Requires &#x60;ADMINISTRATION&#x60; (**Can
+     * administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.
+     * Cluster-level SAML and script-src settings require &#x60;ADMINISTRATION&#x60; privilege. See
+     * [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more
+     * details.
+     *
+     * @param configureSecuritySettingsRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Successfully configured the security settings. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call configureSecuritySettingsAsync(
+            ConfigureSecuritySettingsRequest configureSecuritySettingsRequest,
+            final ApiCallback<Void> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                configureSecuritySettingsValidateBeforeCall(
+                        configureSecuritySettingsRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -3047,7 +3248,10 @@ public class ThoughtSpotRestApi {
      * required field. * If the &#x60;policy_type&#x60; is &#x60;PROCESSES&#x60;, then
      * &#x60;policy_processes&#x60; is a required field. * If the &#x60;policy_type&#x60; is
      * &#x60;NO_POLICY&#x60;, then &#x60;policy_principals&#x60; and &#x60;policy_processes&#x60;
-     * are not required fields.
+     * are not required fields. #### Parameterized Connection Support For parameterized connections
+     * that use OAuth authentication, only the same_as_parent and policy_process_options attributes
+     * are allowed in the API request. These attributes are not applicable to connections that are
+     * not parameterized.
      *
      * @param createConnectionConfigurationRequest (required)
      * @return ConnectionConfigurationResponse
@@ -3087,7 +3291,10 @@ public class ThoughtSpotRestApi {
      * required field. * If the &#x60;policy_type&#x60; is &#x60;PROCESSES&#x60;, then
      * &#x60;policy_processes&#x60; is a required field. * If the &#x60;policy_type&#x60; is
      * &#x60;NO_POLICY&#x60;, then &#x60;policy_principals&#x60; and &#x60;policy_processes&#x60;
-     * are not required fields.
+     * are not required fields. #### Parameterized Connection Support For parameterized connections
+     * that use OAuth authentication, only the same_as_parent and policy_process_options attributes
+     * are allowed in the API request. These attributes are not applicable to connections that are
+     * not parameterized.
      *
      * @param createConnectionConfigurationRequest (required)
      * @return ApiResponse&lt;ConnectionConfigurationResponse&gt;
@@ -3129,7 +3336,10 @@ public class ThoughtSpotRestApi {
      * required field. * If the &#x60;policy_type&#x60; is &#x60;PROCESSES&#x60;, then
      * &#x60;policy_processes&#x60; is a required field. * If the &#x60;policy_type&#x60; is
      * &#x60;NO_POLICY&#x60;, then &#x60;policy_principals&#x60; and &#x60;policy_processes&#x60;
-     * are not required fields.
+     * are not required fields. #### Parameterized Connection Support For parameterized connections
+     * that use OAuth authentication, only the same_as_parent and policy_process_options attributes
+     * are allowed in the API request. These attributes are not applicable to connections that are
+     * not parameterized.
      *
      * @param createConnectionConfigurationRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -10506,15 +10716,16 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 9.0.0.cl or later Exports a Liveboard and its visualizations in PDF or PNG file
-     * format. Requires at least view access to the Liveboard. #### Usage guidelines In the request
-     * body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific
-     * visualizations, add GUIDs or names of the visualizations. The default &#x60;file_format&#x60;
-     * is PDF. For PDF downloads, you can specify additional parameters to customize the page
-     * orientation and include or exclude the cover page, logo, footer text, and page numbers.
-     * Similar customization options are also available for PNG output. **NOTE**: The downloadable
-     * file returned in API response file is extensionless. Please rename the downloaded file by
-     * typing in the relevant extension. Optionally, you can define [runtime
+     * Version: 9.0.0.cl or later Exports a Liveboard and its visualizations in PDF, PNG, CSV, or
+     * XLSX file format. Requires at least view access to the Liveboard. #### Usage guidelines In
+     * the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report
+     * with specific visualizations, add GUIDs or names of the visualizations. The default
+     * &#x60;file_format&#x60; is CSV. For PDF exports, you can specify additional parameters to
+     * customize the page orientation and include or exclude the cover page, logo, footer text, and
+     * page numbers. Similar customization options are available for PNG exports. CSV and XLSX
+     * exports do not support customization options. **NOTE**: The downloadable file returned in API
+     * response file is extensionless. Please rename the downloaded file by typing in the relevant
+     * extension. Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
      * to apply to the Answer data. To include unsaved changes in the report, pass the
      * &#x60;transient_pinboard_content&#x60; script generated from the
@@ -10526,7 +10737,15 @@ public class ThoughtSpotRestApi {
      * the PNG format in the resolution of your choice. To enable this on your instance, contact
      * ThoughtSpot support. When this feature is enabled, the options
      * &#x60;include_cover_page&#x60;,&#x60;include_filter_page&#x60; within the
-     * &#x60;png_options&#x60; will not be available for PNG exports.
+     * &#x60;png_options&#x60; will not be available for PNG exports. **NOTE**: Starting with the
+     * ThoughtSpot Cloud 26.2.0.cl release, Liveboards can be exported in CSV format. All
+     * visualizations in the Liveboard can be exported as individual CSV files. If multiple
+     * visualizations are selected or if the entire Liveboard is exported, the output is returned as
+     * a .zip file containing the CSV files for each visualization. **NOTE**: Starting with the
+     * ThoughtSpot Cloud 26.2.0.cl release, Liveboards can be exported in XLSX format. All selected
+     * visualizations are consolidated into a single Excel workbook (.xlsx), with each visualization
+     * placed in its own worksheet (tab). XLSX exports are limited to 255 worksheets (tabs) per
+     * workbook.
      *
      * @param exportLiveboardReportRequest (required)
      * @return File
@@ -10551,15 +10770,16 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 9.0.0.cl or later Exports a Liveboard and its visualizations in PDF or PNG file
-     * format. Requires at least view access to the Liveboard. #### Usage guidelines In the request
-     * body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific
-     * visualizations, add GUIDs or names of the visualizations. The default &#x60;file_format&#x60;
-     * is PDF. For PDF downloads, you can specify additional parameters to customize the page
-     * orientation and include or exclude the cover page, logo, footer text, and page numbers.
-     * Similar customization options are also available for PNG output. **NOTE**: The downloadable
-     * file returned in API response file is extensionless. Please rename the downloaded file by
-     * typing in the relevant extension. Optionally, you can define [runtime
+     * Version: 9.0.0.cl or later Exports a Liveboard and its visualizations in PDF, PNG, CSV, or
+     * XLSX file format. Requires at least view access to the Liveboard. #### Usage guidelines In
+     * the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report
+     * with specific visualizations, add GUIDs or names of the visualizations. The default
+     * &#x60;file_format&#x60; is CSV. For PDF exports, you can specify additional parameters to
+     * customize the page orientation and include or exclude the cover page, logo, footer text, and
+     * page numbers. Similar customization options are available for PNG exports. CSV and XLSX
+     * exports do not support customization options. **NOTE**: The downloadable file returned in API
+     * response file is extensionless. Please rename the downloaded file by typing in the relevant
+     * extension. Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
      * to apply to the Answer data. To include unsaved changes in the report, pass the
      * &#x60;transient_pinboard_content&#x60; script generated from the
@@ -10571,7 +10791,15 @@ public class ThoughtSpotRestApi {
      * the PNG format in the resolution of your choice. To enable this on your instance, contact
      * ThoughtSpot support. When this feature is enabled, the options
      * &#x60;include_cover_page&#x60;,&#x60;include_filter_page&#x60; within the
-     * &#x60;png_options&#x60; will not be available for PNG exports.
+     * &#x60;png_options&#x60; will not be available for PNG exports. **NOTE**: Starting with the
+     * ThoughtSpot Cloud 26.2.0.cl release, Liveboards can be exported in CSV format. All
+     * visualizations in the Liveboard can be exported as individual CSV files. If multiple
+     * visualizations are selected or if the entire Liveboard is exported, the output is returned as
+     * a .zip file containing the CSV files for each visualization. **NOTE**: Starting with the
+     * ThoughtSpot Cloud 26.2.0.cl release, Liveboards can be exported in XLSX format. All selected
+     * visualizations are consolidated into a single Excel workbook (.xlsx), with each visualization
+     * placed in its own worksheet (tab). XLSX exports are limited to 255 worksheets (tabs) per
+     * workbook.
      *
      * @param exportLiveboardReportRequest (required)
      * @return ApiResponse&lt;File&gt;
@@ -10597,15 +10825,16 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 9.0.0.cl or later Exports a Liveboard and its visualizations in PDF
-     * or PNG file format. Requires at least view access to the Liveboard. #### Usage guidelines In
-     * the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report
-     * with specific visualizations, add GUIDs or names of the visualizations. The default
-     * &#x60;file_format&#x60; is PDF. For PDF downloads, you can specify additional parameters to
-     * customize the page orientation and include or exclude the cover page, logo, footer text, and
-     * page numbers. Similar customization options are also available for PNG output. **NOTE**: The
-     * downloadable file returned in API response file is extensionless. Please rename the
-     * downloaded file by typing in the relevant extension. Optionally, you can define [runtime
+     * (asynchronously) Version: 9.0.0.cl or later Exports a Liveboard and its visualizations in
+     * PDF, PNG, CSV, or XLSX file format. Requires at least view access to the Liveboard. ####
+     * Usage guidelines In the request body, specify the GUID or name of the Liveboard. To generate
+     * a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.
+     * The default &#x60;file_format&#x60; is CSV. For PDF exports, you can specify additional
+     * parameters to customize the page orientation and include or exclude the cover page, logo,
+     * footer text, and page numbers. Similar customization options are available for PNG exports.
+     * CSV and XLSX exports do not support customization options. **NOTE**: The downloadable file
+     * returned in API response file is extensionless. Please rename the downloaded file by typing
+     * in the relevant extension. Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
      * to apply to the Answer data. To include unsaved changes in the report, pass the
      * &#x60;transient_pinboard_content&#x60; script generated from the
@@ -10617,7 +10846,15 @@ public class ThoughtSpotRestApi {
      * the PNG format in the resolution of your choice. To enable this on your instance, contact
      * ThoughtSpot support. When this feature is enabled, the options
      * &#x60;include_cover_page&#x60;,&#x60;include_filter_page&#x60; within the
-     * &#x60;png_options&#x60; will not be available for PNG exports.
+     * &#x60;png_options&#x60; will not be available for PNG exports. **NOTE**: Starting with the
+     * ThoughtSpot Cloud 26.2.0.cl release, Liveboards can be exported in CSV format. All
+     * visualizations in the Liveboard can be exported as individual CSV files. If multiple
+     * visualizations are selected or if the entire Liveboard is exported, the output is returned as
+     * a .zip file containing the CSV files for each visualization. **NOTE**: Starting with the
+     * ThoughtSpot Cloud 26.2.0.cl release, Liveboards can be exported in XLSX format. All selected
+     * visualizations are consolidated into a single Excel workbook (.xlsx), with each visualization
+     * placed in its own worksheet (tab). XLSX exports are limited to 255 worksheets (tabs) per
+     * workbook.
      *
      * @param exportLiveboardReportRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -14273,7 +14510,7 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.13.0.cl or later Provides relevant data source recommendations for a
+     * Version: 10.15.0.cl or later Provides relevant data source recommendations for a
      * user-submitted natural language query. To use this API, the user must have at least
      * view-level access to the underlying metadata entities referenced in the response. #### Usage
      * guidelines The request must include a &#x60;query&#x60; string via the request body. The
@@ -14309,7 +14546,7 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.13.0.cl or later Provides relevant data source recommendations for a
+     * Version: 10.15.0.cl or later Provides relevant data source recommendations for a
      * user-submitted natural language query. To use this API, the user must have at least
      * view-level access to the underlying metadata entities referenced in the response. #### Usage
      * guidelines The request must include a &#x60;query&#x60; string via the request body. The
@@ -14346,7 +14583,7 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 10.13.0.cl or later Provides relevant data source recommendations
+     * (asynchronously) Version: 10.15.0.cl or later Provides relevant data source recommendations
      * for a user-submitted natural language query. To use this API, the user must have at least
      * view-level access to the underlying metadata entities referenced in the response. #### Usage
      * guidelines The request must include a &#x60;query&#x60; string via the request body. The
@@ -14732,8 +14969,8 @@ public class ThoughtSpotRestApi {
      * instructions for a specific data-model. These instructions guide the AI system in
      * understanding data context and generating more accurate responses when processing natural
      * language queries. #### Usage guidelines To retrieve NL instructions for a data-model, the
-     * request must include: - &#x60;data_source_identifier&#x60;: The unique ID or name of the
-     * data-model to retrieve NL instructions The API returns a response object with: -
+     * request must include: - &#x60;data_source_identifier&#x60;: The unique ID of the data-model
+     * to retrieve NL instructions The API returns a response object with: -
      * &#x60;nl_instructions_info&#x60;: An array of instruction objects, each containing: -
      * &#x60;instructions&#x60;: Array of text instructions for natural language processing -
      * &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). It can be extended to
@@ -14773,8 +15010,8 @@ public class ThoughtSpotRestApi {
      * instructions for a specific data-model. These instructions guide the AI system in
      * understanding data context and generating more accurate responses when processing natural
      * language queries. #### Usage guidelines To retrieve NL instructions for a data-model, the
-     * request must include: - &#x60;data_source_identifier&#x60;: The unique ID or name of the
-     * data-model to retrieve NL instructions The API returns a response object with: -
+     * request must include: - &#x60;data_source_identifier&#x60;: The unique ID of the data-model
+     * to retrieve NL instructions The API returns a response object with: -
      * &#x60;nl_instructions_info&#x60;: An array of instruction objects, each containing: -
      * &#x60;instructions&#x60;: Array of text instructions for natural language processing -
      * &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). It can be extended to
@@ -14815,7 +15052,7 @@ public class ThoughtSpotRestApi {
      * natural language (NL) instructions for a specific data-model. These instructions guide the AI
      * system in understanding data context and generating more accurate responses when processing
      * natural language queries. #### Usage guidelines To retrieve NL instructions for a data-model,
-     * the request must include: - &#x60;data_source_identifier&#x60;: The unique ID or name of the
+     * the request must include: - &#x60;data_source_identifier&#x60;: The unique ID of the
      * data-model to retrieve NL instructions The API returns a response object with: -
      * &#x60;nl_instructions_info&#x60;: An array of instruction objects, each containing: -
      * &#x60;instructions&#x60;: Array of text instructions for natural language processing -
@@ -17068,11 +17305,12 @@ public class ThoughtSpotRestApi {
      * Parameterize fields in metadata objects. Version: 10.9.0.cl or later Allows parameterizing
      * fields in metadata objects in ThoughtSpot. Requires appropriate permissions to modify the
      * metadata object. The API endpoint allows parameterizing the following types of metadata
-     * objects: * Logical Tables * Connections For a Logical Table the field type must be
-     * &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName * tableName
-     * For a Connection the field type is always &#x60;CONNECTION_PROPERTY&#x60;. We use the
-     * field_name in this case to specify the exact property of a connection which needs to be
-     * parameterized.
+     * objects: * Logical Tables * Connections * Connection Configs For a Logical Table the field
+     * type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName
+     * * tableName For a Connection or Connection Config, the field type is always
+     * &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact property of the
+     * Connection or Connection Config that needs to be parameterized. For Connection Config, the
+     * only supported field name is: * impersonate_user
      *
      * @param parameterizeMetadataRequest (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -17097,11 +17335,12 @@ public class ThoughtSpotRestApi {
      * Parameterize fields in metadata objects. Version: 10.9.0.cl or later Allows parameterizing
      * fields in metadata objects in ThoughtSpot. Requires appropriate permissions to modify the
      * metadata object. The API endpoint allows parameterizing the following types of metadata
-     * objects: * Logical Tables * Connections For a Logical Table the field type must be
-     * &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName * tableName
-     * For a Connection the field type is always &#x60;CONNECTION_PROPERTY&#x60;. We use the
-     * field_name in this case to specify the exact property of a connection which needs to be
-     * parameterized.
+     * objects: * Logical Tables * Connections * Connection Configs For a Logical Table the field
+     * type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName
+     * * tableName For a Connection or Connection Config, the field type is always
+     * &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact property of the
+     * Connection or Connection Config that needs to be parameterized. For Connection Config, the
+     * only supported field name is: * impersonate_user
      *
      * @param parameterizeMetadataRequest (required)
      * @return ApiResponse&lt;Void&gt;
@@ -17129,11 +17368,12 @@ public class ThoughtSpotRestApi {
      * (asynchronously) Parameterize fields in metadata objects. Version: 10.9.0.cl or later Allows
      * parameterizing fields in metadata objects in ThoughtSpot. Requires appropriate permissions to
      * modify the metadata object. The API endpoint allows parameterizing the following types of
-     * metadata objects: * Logical Tables * Connections For a Logical Table the field type must be
-     * &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName * tableName
-     * For a Connection the field type is always &#x60;CONNECTION_PROPERTY&#x60;. We use the
-     * field_name in this case to specify the exact property of a connection which needs to be
-     * parameterized.
+     * metadata objects: * Logical Tables * Connections * Connection Configs For a Logical Table the
+     * field type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName *
+     * schemaName * tableName For a Connection or Connection Config, the field type is always
+     * &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact property of the
+     * Connection or Connection Config that needs to be parameterized. For Connection Config, the
+     * only supported field name is: * impersonate_user
      *
      * @param parameterizeMetadataRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -17885,6 +18125,283 @@ public class ThoughtSpotRestApi {
         okhttp3.Call localVarCall =
                 revertCommitValidateBeforeCall(commitId, revertCommitRequest, _callback);
         Type localVarReturnType = new TypeToken<RevertResponse>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for revokeRefreshTokens
+     *
+     * @param connectionIdentifier Unique ID or name of the connection whose refresh tokens need to
+     *     be revoked. All the users associated with the connection will have their refresh tokens
+     *     revoked except the author. (required)
+     * @param revokeRefreshTokensRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Token(s) successfully revoked. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Object not found </td><td>  -  </td></tr>
+     * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call revokeRefreshTokensCall(
+            String connectionIdentifier,
+            RevokeRefreshTokensRequest revokeRefreshTokensRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = revokeRefreshTokensRequest;
+
+        // create path and map variables
+        String localVarPath =
+                "/api/rest/2.0/connections/{connection_identifier}/revoke-refresh-tokens"
+                        .replace(
+                                "{" + "connection_identifier" + "}",
+                                localVarApiClient.escapeString(connectionIdentifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call revokeRefreshTokensValidateBeforeCall(
+            String connectionIdentifier,
+            RevokeRefreshTokensRequest revokeRefreshTokensRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'connectionIdentifier' is set
+        if (connectionIdentifier == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'connectionIdentifier' when calling"
+                            + " revokeRefreshTokens(Async)");
+        }
+
+        // verify the required parameter 'revokeRefreshTokensRequest' is set
+        if (revokeRefreshTokensRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'revokeRefreshTokensRequest' when calling"
+                            + " revokeRefreshTokens(Async)");
+        }
+
+        return revokeRefreshTokensCall(connectionIdentifier, revokeRefreshTokensRequest, _callback);
+    }
+
+    /**
+     * Version: 26.2.0.cl or later Revokes OAuth refresh tokens for users who no longer require
+     * access to a data warehouse connection. When a token is revoked, the affected user&#39;s
+     * session for that connection is terminated, and they must re-authenticate to regain access.
+     * Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or
+     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privileges. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on the ThoughtSpot instance,
+     * users with &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**)
+     * privilege can also make API requests to revoke tokens for connection users. #### Usage
+     * guidelines You can specify different combinations of identifiers to control which refresh
+     * tokens are revoked. - **connection_identifier**: Revokes refresh tokens for all users of the
+     * connection, except the connection author. - **connection_identifier** and
+     * **user_identifiers**: Revokes refresh tokens only for the users specified in the request. If
+     * the name or ID of the connection author is included in the request, their token will also be
+     * revoked. - **connection_identifier** and **configuration_identifiers**: Revokes refresh
+     * tokens for all users on the specified configurations, except the configuration author. -
+     * **connection_identifier**, **configuration_identifiers**, and **user_identifiers**: Revokes
+     * refresh tokens for the specified users on the specified configurations. -
+     * **connection_identifier** and **org_identifiers**: Revokes refresh tokens for the specified
+     * Orgs. Applicable only for published connections. - **connection_identifier**,
+     * **org_identifiers**, and **user_identifiers**: Revokes refresh tokens for the specified users
+     * in the specified Orgs. Applicable only for published connections. **NOTE**: The
+     * &#x60;org_identifiers&#x60; parameter is only applicable for published connections. Using
+     * this parameter for unpublished connections will result in an error. Ensure that the
+     * connections are published before making the API request.
+     *
+     * @param connectionIdentifier Unique ID or name of the connection whose refresh tokens need to
+     *     be revoked. All the users associated with the connection will have their refresh tokens
+     *     revoked except the author. (required)
+     * @param revokeRefreshTokensRequest (required)
+     * @return RevokeRefreshTokensResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Token(s) successfully revoked. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Object not found </td><td>  -  </td></tr>
+     * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public RevokeRefreshTokensResponse revokeRefreshTokens(
+            String connectionIdentifier, RevokeRefreshTokensRequest revokeRefreshTokensRequest)
+            throws ApiException {
+        ApiResponse<RevokeRefreshTokensResponse> localVarResp =
+                revokeRefreshTokensWithHttpInfo(connectionIdentifier, revokeRefreshTokensRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Version: 26.2.0.cl or later Revokes OAuth refresh tokens for users who no longer require
+     * access to a data warehouse connection. When a token is revoked, the affected user&#39;s
+     * session for that connection is terminated, and they must re-authenticate to regain access.
+     * Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or
+     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privileges. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on the ThoughtSpot instance,
+     * users with &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**)
+     * privilege can also make API requests to revoke tokens for connection users. #### Usage
+     * guidelines You can specify different combinations of identifiers to control which refresh
+     * tokens are revoked. - **connection_identifier**: Revokes refresh tokens for all users of the
+     * connection, except the connection author. - **connection_identifier** and
+     * **user_identifiers**: Revokes refresh tokens only for the users specified in the request. If
+     * the name or ID of the connection author is included in the request, their token will also be
+     * revoked. - **connection_identifier** and **configuration_identifiers**: Revokes refresh
+     * tokens for all users on the specified configurations, except the configuration author. -
+     * **connection_identifier**, **configuration_identifiers**, and **user_identifiers**: Revokes
+     * refresh tokens for the specified users on the specified configurations. -
+     * **connection_identifier** and **org_identifiers**: Revokes refresh tokens for the specified
+     * Orgs. Applicable only for published connections. - **connection_identifier**,
+     * **org_identifiers**, and **user_identifiers**: Revokes refresh tokens for the specified users
+     * in the specified Orgs. Applicable only for published connections. **NOTE**: The
+     * &#x60;org_identifiers&#x60; parameter is only applicable for published connections. Using
+     * this parameter for unpublished connections will result in an error. Ensure that the
+     * connections are published before making the API request.
+     *
+     * @param connectionIdentifier Unique ID or name of the connection whose refresh tokens need to
+     *     be revoked. All the users associated with the connection will have their refresh tokens
+     *     revoked except the author. (required)
+     * @param revokeRefreshTokensRequest (required)
+     * @return ApiResponse&lt;RevokeRefreshTokensResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Token(s) successfully revoked. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Object not found </td><td>  -  </td></tr>
+     * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<RevokeRefreshTokensResponse> revokeRefreshTokensWithHttpInfo(
+            String connectionIdentifier, RevokeRefreshTokensRequest revokeRefreshTokensRequest)
+            throws ApiException {
+        okhttp3.Call localVarCall =
+                revokeRefreshTokensValidateBeforeCall(
+                        connectionIdentifier, revokeRefreshTokensRequest, null);
+        Type localVarReturnType = new TypeToken<RevokeRefreshTokensResponse>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Version: 26.2.0.cl or later Revokes OAuth refresh tokens for users who no
+     * longer require access to a data warehouse connection. When a token is revoked, the affected
+     * user&#39;s session for that connection is terminated, and they must re-authenticate to regain
+     * access. Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or
+     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privileges. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on the ThoughtSpot instance,
+     * users with &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**)
+     * privilege can also make API requests to revoke tokens for connection users. #### Usage
+     * guidelines You can specify different combinations of identifiers to control which refresh
+     * tokens are revoked. - **connection_identifier**: Revokes refresh tokens for all users of the
+     * connection, except the connection author. - **connection_identifier** and
+     * **user_identifiers**: Revokes refresh tokens only for the users specified in the request. If
+     * the name or ID of the connection author is included in the request, their token will also be
+     * revoked. - **connection_identifier** and **configuration_identifiers**: Revokes refresh
+     * tokens for all users on the specified configurations, except the configuration author. -
+     * **connection_identifier**, **configuration_identifiers**, and **user_identifiers**: Revokes
+     * refresh tokens for the specified users on the specified configurations. -
+     * **connection_identifier** and **org_identifiers**: Revokes refresh tokens for the specified
+     * Orgs. Applicable only for published connections. - **connection_identifier**,
+     * **org_identifiers**, and **user_identifiers**: Revokes refresh tokens for the specified users
+     * in the specified Orgs. Applicable only for published connections. **NOTE**: The
+     * &#x60;org_identifiers&#x60; parameter is only applicable for published connections. Using
+     * this parameter for unpublished connections will result in an error. Ensure that the
+     * connections are published before making the API request.
+     *
+     * @param connectionIdentifier Unique ID or name of the connection whose refresh tokens need to
+     *     be revoked. All the users associated with the connection will have their refresh tokens
+     *     revoked except the author. (required)
+     * @param revokeRefreshTokensRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Token(s) successfully revoked. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Object not found </td><td>  -  </td></tr>
+     * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call revokeRefreshTokensAsync(
+            String connectionIdentifier,
+            RevokeRefreshTokensRequest revokeRefreshTokensRequest,
+            final ApiCallback<RevokeRefreshTokensResponse> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                revokeRefreshTokensValidateBeforeCall(
+                        connectionIdentifier, revokeRefreshTokensRequest, _callback);
+        Type localVarReturnType = new TypeToken<RevokeRefreshTokensResponse>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -20551,6 +21068,204 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
+     * Build call for searchSecuritySettings
+     *
+     * @param searchSecuritySettingsRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Successfully retrieved the list of security settings. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call searchSecuritySettingsCall(
+            SearchSecuritySettingsRequest searchSecuritySettingsRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = searchSecuritySettingsRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/system/security-settings/search";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call searchSecuritySettingsValidateBeforeCall(
+            SearchSecuritySettingsRequest searchSecuritySettingsRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'searchSecuritySettingsRequest' is set
+        if (searchSecuritySettingsRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'searchSecuritySettingsRequest' when calling"
+                            + " searchSecuritySettings(Async)");
+        }
+
+        return searchSecuritySettingsCall(searchSecuritySettingsRequest, _callback);
+    }
+
+    /**
+     * Version: 26.2.0.cl or later Fetch security settings for your ThoughtSpot application
+     * instance. - Use &#x60;scope: CLUSTER&#x60; to retrieve cluster-level security settings,
+     * including CORS and CSP allowlists, SAML redirect URLs, and settings that control access to
+     * non-embedded pages. - Use &#x60;scope: ORG&#x60; to retrieve Org-level security settings. If
+     * your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this
+     * returns CORS and non-embed access settings specific to the Org. - If &#x60;scope&#x60; is not
+     * specified, returns both cluster and Org-specific settings based on user privileges. Requires
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has
+     * developer privilege**) privilege. See [Security
+     * Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.
+     *
+     * @param searchSecuritySettingsRequest (required)
+     * @return SecuritySettingsResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Successfully retrieved the list of security settings. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public SecuritySettingsResponse searchSecuritySettings(
+            SearchSecuritySettingsRequest searchSecuritySettingsRequest) throws ApiException {
+        ApiResponse<SecuritySettingsResponse> localVarResp =
+                searchSecuritySettingsWithHttpInfo(searchSecuritySettingsRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Version: 26.2.0.cl or later Fetch security settings for your ThoughtSpot application
+     * instance. - Use &#x60;scope: CLUSTER&#x60; to retrieve cluster-level security settings,
+     * including CORS and CSP allowlists, SAML redirect URLs, and settings that control access to
+     * non-embedded pages. - Use &#x60;scope: ORG&#x60; to retrieve Org-level security settings. If
+     * your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this
+     * returns CORS and non-embed access settings specific to the Org. - If &#x60;scope&#x60; is not
+     * specified, returns both cluster and Org-specific settings based on user privileges. Requires
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has
+     * developer privilege**) privilege. See [Security
+     * Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.
+     *
+     * @param searchSecuritySettingsRequest (required)
+     * @return ApiResponse&lt;SecuritySettingsResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Successfully retrieved the list of security settings. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<SecuritySettingsResponse> searchSecuritySettingsWithHttpInfo(
+            SearchSecuritySettingsRequest searchSecuritySettingsRequest) throws ApiException {
+        okhttp3.Call localVarCall =
+                searchSecuritySettingsValidateBeforeCall(searchSecuritySettingsRequest, null);
+        Type localVarReturnType = new TypeToken<SecuritySettingsResponse>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Version: 26.2.0.cl or later Fetch security settings for your ThoughtSpot
+     * application instance. - Use &#x60;scope: CLUSTER&#x60; to retrieve cluster-level security
+     * settings, including CORS and CSP allowlists, SAML redirect URLs, and settings that control
+     * access to non-embedded pages. - Use &#x60;scope: ORG&#x60; to retrieve Org-level security
+     * settings. If your instance has
+     * [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this returns CORS and
+     * non-embed access settings specific to the Org. - If &#x60;scope&#x60; is not specified,
+     * returns both cluster and Org-specific settings based on user privileges. Requires
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has
+     * developer privilege**) privilege. See [Security
+     * Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.
+     *
+     * @param searchSecuritySettingsRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Successfully retrieved the list of security settings. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call searchSecuritySettingsAsync(
+            SearchSecuritySettingsRequest searchSecuritySettingsRequest,
+            final ApiCallback<SecuritySettingsResponse> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                searchSecuritySettingsValidateBeforeCall(searchSecuritySettingsRequest, _callback);
+        Type localVarReturnType = new TypeToken<SecuritySettingsResponse>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for searchTags
      *
      * @param searchTagsRequest (required)
@@ -21592,7 +22307,7 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.13.0.cl or later This API allows users to initiate or continue an agent (Spotter)
+     * Version: 10.15.0.cl or later This API allows users to initiate or continue an agent (Spotter)
      * conversation by submitting one or more natural language messages. To use this API, the user
      * must have access to the relevant conversational session (via conversation_identifier) and
      * submit at least one message. #### Usage guidelines To initiate or continue a conversation,
@@ -21631,7 +22346,7 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.13.0.cl or later This API allows users to initiate or continue an agent (Spotter)
+     * Version: 10.15.0.cl or later This API allows users to initiate or continue an agent (Spotter)
      * conversation by submitting one or more natural language messages. To use this API, the user
      * must have access to the relevant conversational session (via conversation_identifier) and
      * submit at least one message. #### Usage guidelines To initiate or continue a conversation,
@@ -21672,7 +22387,7 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 10.13.0.cl or later This API allows users to initiate or continue
+     * (asynchronously) Version: 10.15.0.cl or later This API allows users to initiate or continue
      * an agent (Spotter) conversation by submitting one or more natural language messages. To use
      * this API, the user must have access to the relevant conversational session (via
      * conversation_identifier) and submit at least one message. #### Usage guidelines To initiate
@@ -22242,12 +22957,12 @@ public class ThoughtSpotRestApi {
      * for a specific data-model to improve AI-generated answers and query processing. These
      * instructions help guide the AI system to better understand the data context and provide more
      * accurate responses. #### Usage guidelines To set NL instructions for a data-model, the
-     * request must include: - &#x60;data_source_identifier&#x60;: The unique ID or name of the
-     * data-model for which to set NL instructions - &#x60;nl_instructions_info&#x60;: An array of
-     * instruction objects, each containing: - &#x60;instructions&#x60;: Array of text instructions
-     * for the LLM - &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). Currently
-     * only &#x60;GLOBAL&#x60; is supported. It can be extended to data-model-user scope in future.
-     * The API returns a response object with: - &#x60;success&#x60;: Boolean indicating whether the
+     * request must include: - &#x60;data_source_identifier&#x60;: The unique ID of the data-model
+     * for which to set NL instructions - &#x60;nl_instructions_info&#x60;: An array of instruction
+     * objects, each containing: - &#x60;instructions&#x60;: Array of text instructions for the LLM
+     * - &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). Currently only
+     * &#x60;GLOBAL&#x60; is supported. It can be extended to data-model-user scope in future. The
+     * API returns a response object with: - &#x60;success&#x60;: Boolean indicating whether the
      * operation was successful #### Instructions Scope - **GLOBAL**: Instructions that apply
      * globally for that data-model across the system &gt; ###### Note: &gt; * To use this API, the
      * user needs either edit access or SPOTTER_COACHING_PRIVILEGE on the data-model and they must
@@ -22284,12 +22999,12 @@ public class ThoughtSpotRestApi {
      * for a specific data-model to improve AI-generated answers and query processing. These
      * instructions help guide the AI system to better understand the data context and provide more
      * accurate responses. #### Usage guidelines To set NL instructions for a data-model, the
-     * request must include: - &#x60;data_source_identifier&#x60;: The unique ID or name of the
-     * data-model for which to set NL instructions - &#x60;nl_instructions_info&#x60;: An array of
-     * instruction objects, each containing: - &#x60;instructions&#x60;: Array of text instructions
-     * for the LLM - &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). Currently
-     * only &#x60;GLOBAL&#x60; is supported. It can be extended to data-model-user scope in future.
-     * The API returns a response object with: - &#x60;success&#x60;: Boolean indicating whether the
+     * request must include: - &#x60;data_source_identifier&#x60;: The unique ID of the data-model
+     * for which to set NL instructions - &#x60;nl_instructions_info&#x60;: An array of instruction
+     * objects, each containing: - &#x60;instructions&#x60;: Array of text instructions for the LLM
+     * - &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). Currently only
+     * &#x60;GLOBAL&#x60; is supported. It can be extended to data-model-user scope in future. The
+     * API returns a response object with: - &#x60;success&#x60;: Boolean indicating whether the
      * operation was successful #### Instructions Scope - **GLOBAL**: Instructions that apply
      * globally for that data-model across the system &gt; ###### Note: &gt; * To use this API, the
      * user needs either edit access or SPOTTER_COACHING_PRIVILEGE on the data-model and they must
@@ -22327,9 +23042,9 @@ public class ThoughtSpotRestApi {
      * (NL) instructions for a specific data-model to improve AI-generated answers and query
      * processing. These instructions help guide the AI system to better understand the data context
      * and provide more accurate responses. #### Usage guidelines To set NL instructions for a
-     * data-model, the request must include: - &#x60;data_source_identifier&#x60;: The unique ID or
-     * name of the data-model for which to set NL instructions - &#x60;nl_instructions_info&#x60;:
-     * An array of instruction objects, each containing: - &#x60;instructions&#x60;: Array of text
+     * data-model, the request must include: - &#x60;data_source_identifier&#x60;: The unique ID of
+     * the data-model for which to set NL instructions - &#x60;nl_instructions_info&#x60;: An array
+     * of instruction objects, each containing: - &#x60;instructions&#x60;: Array of text
      * instructions for the LLM - &#x60;scope&#x60;: The scope of the instruction
      * (&#x60;GLOBAL&#x60;). Currently only &#x60;GLOBAL&#x60; is supported. It can be extended to
      * data-model-user scope in future. The API returns a response object with: -
@@ -22981,11 +23696,12 @@ public class ThoughtSpotRestApi {
      * Remove parameterization from fields in metadata objects. Version: 10.9.0.cl or later Allows
      * removing parameterization from fields in metadata objects in ThoughtSpot. Requires
      * appropriate permissions to modify the metadata object. The API endpoint allows
-     * unparameterizing the following types of metadata objects: * Logical Tables * Connections For
-     * a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: *
-     * databaseName * schemaName * tableName For a Connection the field type is always
-     * &#x60;CONNECTION_PROPERTY&#x60;. We use the field_name in this case to specify the exact
-     * property of a connection which needs to be unparameterized.
+     * unparameterizing the following types of metadata objects: * Logical Tables * Connections *
+     * Connection Configs For a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field
+     * name can be one of: * databaseName * schemaName * tableName For a Connection or Connection
+     * Config, the field type is always &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name
+     * specifies the exact property of the Connection or Connection Config that needs to be
+     * unparameterized. For Connection Config, the only supported field name is: * impersonate_user
      *
      * @param unparameterizeMetadataRequest (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -23010,11 +23726,12 @@ public class ThoughtSpotRestApi {
      * Remove parameterization from fields in metadata objects. Version: 10.9.0.cl or later Allows
      * removing parameterization from fields in metadata objects in ThoughtSpot. Requires
      * appropriate permissions to modify the metadata object. The API endpoint allows
-     * unparameterizing the following types of metadata objects: * Logical Tables * Connections For
-     * a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: *
-     * databaseName * schemaName * tableName For a Connection the field type is always
-     * &#x60;CONNECTION_PROPERTY&#x60;. We use the field_name in this case to specify the exact
-     * property of a connection which needs to be unparameterized.
+     * unparameterizing the following types of metadata objects: * Logical Tables * Connections *
+     * Connection Configs For a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field
+     * name can be one of: * databaseName * schemaName * tableName For a Connection or Connection
+     * Config, the field type is always &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name
+     * specifies the exact property of the Connection or Connection Config that needs to be
+     * unparameterized. For Connection Config, the only supported field name is: * impersonate_user
      *
      * @param unparameterizeMetadataRequest (required)
      * @return ApiResponse&lt;Void&gt;
@@ -23042,11 +23759,12 @@ public class ThoughtSpotRestApi {
      * (asynchronously) Remove parameterization from fields in metadata objects. Version: 10.9.0.cl
      * or later Allows removing parameterization from fields in metadata objects in ThoughtSpot.
      * Requires appropriate permissions to modify the metadata object. The API endpoint allows
-     * unparameterizing the following types of metadata objects: * Logical Tables * Connections For
-     * a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: *
-     * databaseName * schemaName * tableName For a Connection the field type is always
-     * &#x60;CONNECTION_PROPERTY&#x60;. We use the field_name in this case to specify the exact
-     * property of a connection which needs to be unparameterized.
+     * unparameterizing the following types of metadata objects: * Logical Tables * Connections *
+     * Connection Configs For a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field
+     * name can be one of: * databaseName * schemaName * tableName For a Connection or Connection
+     * Config, the field type is always &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name
+     * specifies the exact property of the Connection or Connection Config that needs to be
+     * unparameterized. For Connection Config, the only supported field name is: * impersonate_user
      *
      * @param unparameterizeMetadataRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -24343,8 +25061,11 @@ public class ThoughtSpotRestApi {
      * Connections**) privilege is required. #### Supported operations This API endpoint lets you
      * perform the following operations in a single API request: * Edit the name or description of
      * the configuration * Edit the configuration properties * Edit the &#x60;policy_type&#x60; *
-     * Edit the type of authentication * Enable or disable a configuration **NOTE**: When updating a
-     * configuration where &#x60;disabled&#x60; is &#x60;true&#x60;, you must reset
+     * Edit the type of authentication * Enable or disable a configuration #### Parameterized
+     * Connection Support For parameterized oauth based connections, only the
+     * &#x60;same_as_parent&#x60; and &#x60;policy_process_options&#x60; attributes are allowed.
+     * These attributes are not applicable to connections that are not parameterized. **NOTE**: When
+     * updating a configuration where &#x60;disabled&#x60; is &#x60;true&#x60;, you must reset
      * &#x60;disabled&#x60; to &#x60;true&#x60; in your update request payload. If not explicitly
      * set again, the API will default &#x60;disabled&#x60; to &#x60;false&#x60;.
      *
@@ -24380,8 +25101,11 @@ public class ThoughtSpotRestApi {
      * Connections**) privilege is required. #### Supported operations This API endpoint lets you
      * perform the following operations in a single API request: * Edit the name or description of
      * the configuration * Edit the configuration properties * Edit the &#x60;policy_type&#x60; *
-     * Edit the type of authentication * Enable or disable a configuration **NOTE**: When updating a
-     * configuration where &#x60;disabled&#x60; is &#x60;true&#x60;, you must reset
+     * Edit the type of authentication * Enable or disable a configuration #### Parameterized
+     * Connection Support For parameterized oauth based connections, only the
+     * &#x60;same_as_parent&#x60; and &#x60;policy_process_options&#x60; attributes are allowed.
+     * These attributes are not applicable to connections that are not parameterized. **NOTE**: When
+     * updating a configuration where &#x60;disabled&#x60; is &#x60;true&#x60;, you must reset
      * &#x60;disabled&#x60; to &#x60;true&#x60; in your update request payload. If not explicitly
      * set again, the API will default &#x60;disabled&#x60; to &#x60;false&#x60;.
      *
@@ -24420,8 +25144,11 @@ public class ThoughtSpotRestApi {
      * Connections**) privilege is required. #### Supported operations This API endpoint lets you
      * perform the following operations in a single API request: * Edit the name or description of
      * the configuration * Edit the configuration properties * Edit the &#x60;policy_type&#x60; *
-     * Edit the type of authentication * Enable or disable a configuration **NOTE**: When updating a
-     * configuration where &#x60;disabled&#x60; is &#x60;true&#x60;, you must reset
+     * Edit the type of authentication * Enable or disable a configuration #### Parameterized
+     * Connection Support For parameterized oauth based connections, only the
+     * &#x60;same_as_parent&#x60; and &#x60;policy_process_options&#x60; attributes are allowed.
+     * These attributes are not applicable to connections that are not parameterized. **NOTE**: When
+     * updating a configuration where &#x60;disabled&#x60; is &#x60;true&#x60;, you must reset
      * &#x60;disabled&#x60; to &#x60;true&#x60; in your update request payload. If not explicitly
      * set again, the API will default &#x60;disabled&#x60; to &#x60;false&#x60;.
      *
@@ -27741,9 +28468,9 @@ public class ThoughtSpotRestApi {
 
     /**
      * Update a variable&#39;s name Version: 10.14.0.cl or later Allows updating a variable&#39;s
-     * properties in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The
-     * CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current
-     * organization scope. The API endpoint allows updating: * The variable name
+     * name in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES
+     * permission allows you to manage Formula Variables in the current organization scope. The API
+     * endpoint allows updating: * The variable name
      *
      * @param identifier Unique id or name of the variable to update. (required)
      * @param updateVariableRequest (required)
@@ -27767,9 +28494,9 @@ public class ThoughtSpotRestApi {
 
     /**
      * Update a variable&#39;s name Version: 10.14.0.cl or later Allows updating a variable&#39;s
-     * properties in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The
-     * CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current
-     * organization scope. The API endpoint allows updating: * The variable name
+     * name in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES
+     * permission allows you to manage Formula Variables in the current organization scope. The API
+     * endpoint allows updating: * The variable name
      *
      * @param identifier Unique id or name of the variable to update. (required)
      * @param updateVariableRequest (required)
@@ -27796,7 +28523,7 @@ public class ThoughtSpotRestApi {
 
     /**
      * (asynchronously) Update a variable&#39;s name Version: 10.14.0.cl or later Allows updating a
-     * variable&#39;s properties in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The
+     * variable&#39;s name in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The
      * CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current
      * organization scope. The API endpoint allows updating: * The variable name
      *
@@ -27922,11 +28649,11 @@ public class ThoughtSpotRestApi {
      * endpoint allows: * Adding new values to variables * Replacing existing values * Deleting
      * values from variables When updating variable values, you need to specify: * The variable
      * identifiers * The values to add/replace/remove for each variable * The operation to perform
-     * (ADD, REPLACE, REMOVE, CLEAR) Behaviour based on operation type: * ADD - Adds values to the
+     * (ADD, REPLACE, REMOVE, RESET) Behaviour based on operation type: * ADD - Adds values to the
      * variable if this is a list type variable, else same as replace. * REPLACE - Replaces all
      * values of a given set of constraints with the current set of values. * REMOVE - Removes any
      * values which match the set of conditions of the variables if this is a list type variable,
-     * else clears value. * CLEAR - Removes all constrains for a given variable, scope is ignored
+     * else clears value. * RESET - Removes all constrains for a given variable, scope is ignored
      *
      * @param updateVariableValuesRequest (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -27954,11 +28681,11 @@ public class ThoughtSpotRestApi {
      * endpoint allows: * Adding new values to variables * Replacing existing values * Deleting
      * values from variables When updating variable values, you need to specify: * The variable
      * identifiers * The values to add/replace/remove for each variable * The operation to perform
-     * (ADD, REPLACE, REMOVE, CLEAR) Behaviour based on operation type: * ADD - Adds values to the
+     * (ADD, REPLACE, REMOVE, RESET) Behaviour based on operation type: * ADD - Adds values to the
      * variable if this is a list type variable, else same as replace. * REPLACE - Replaces all
      * values of a given set of constraints with the current set of values. * REMOVE - Removes any
      * values which match the set of conditions of the variables if this is a list type variable,
-     * else clears value. * CLEAR - Removes all constrains for a given variable, scope is ignored
+     * else clears value. * RESET - Removes all constrains for a given variable, scope is ignored
      *
      * @param updateVariableValuesRequest (required)
      * @return ApiResponse&lt;Void&gt;
@@ -27989,11 +28716,11 @@ public class ThoughtSpotRestApi {
      * organization scope. The API endpoint allows: * Adding new values to variables * Replacing
      * existing values * Deleting values from variables When updating variable values, you need to
      * specify: * The variable identifiers * The values to add/replace/remove for each variable *
-     * The operation to perform (ADD, REPLACE, REMOVE, CLEAR) Behaviour based on operation type: *
+     * The operation to perform (ADD, REPLACE, REMOVE, RESET) Behaviour based on operation type: *
      * ADD - Adds values to the variable if this is a list type variable, else same as replace. *
      * REPLACE - Replaces all values of a given set of constraints with the current set of values. *
      * REMOVE - Removes any values which match the set of conditions of the variables if this is a
-     * list type variable, else clears value. * CLEAR - Removes all constrains for a given variable,
+     * list type variable, else clears value. * RESET - Removes all constrains for a given variable,
      * scope is ignored
      *
      * @param updateVariableValuesRequest (required)

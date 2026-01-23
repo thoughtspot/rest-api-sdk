@@ -14,7 +14,10 @@ import com.thoughtspot.client.Configuration;
 import com.thoughtspot.client.Pair;
 import com.thoughtspot.client.model.CommunicationChannelPreferencesResponse;
 import com.thoughtspot.client.model.ConfigureCommunicationChannelPreferencesRequest;
+import com.thoughtspot.client.model.ConfigureSecuritySettingsRequest;
 import com.thoughtspot.client.model.SearchCommunicationChannelPreferencesRequest;
+import com.thoughtspot.client.model.SearchSecuritySettingsRequest;
+import com.thoughtspot.client.model.SecuritySettingsResponse;
 import com.thoughtspot.client.model.SystemConfig;
 import com.thoughtspot.client.model.SystemInfo;
 import com.thoughtspot.client.model.SystemOverrideInfo;
@@ -285,6 +288,202 @@ public class SystemApi {
         okhttp3.Call localVarCall =
                 configureCommunicationChannelPreferencesValidateBeforeCall(
                         configureCommunicationChannelPreferencesRequest, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for configureSecuritySettings
+     *
+     * @param configureSecuritySettingsRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Successfully configured the security settings. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call configureSecuritySettingsCall(
+            ConfigureSecuritySettingsRequest configureSecuritySettingsRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = configureSecuritySettingsRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/system/security-settings/configure";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call configureSecuritySettingsValidateBeforeCall(
+            ConfigureSecuritySettingsRequest configureSecuritySettingsRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'configureSecuritySettingsRequest' is set
+        if (configureSecuritySettingsRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'configureSecuritySettingsRequest' when"
+                            + " calling configureSecuritySettings(Async)");
+        }
+
+        return configureSecuritySettingsCall(configureSecuritySettingsRequest, _callback);
+    }
+
+    /**
+     * Version: 26.2.0.cl or later Configure security settings for your ThoughtSpot application
+     * instance. - Use &#x60;cluster_preferences&#x60; to update cluster-level security settings
+     * including CORS whitelisted URLs, CSP settings, SAML redirect URLs, partitioned cookies, and
+     * non-embed access configuration. - Use &#x60;org_preferences&#x60; to configure Org-specific
+     * security settings. If your instance has
+     * [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this allows configuring CORS
+     * and non-embed access settings specific to the Org. Requires &#x60;ADMINISTRATION&#x60; (**Can
+     * administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.
+     * Cluster-level SAML and script-src settings require &#x60;ADMINISTRATION&#x60; privilege. See
+     * [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more
+     * details.
+     *
+     * @param configureSecuritySettingsRequest (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Successfully configured the security settings. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public void configureSecuritySettings(
+            ConfigureSecuritySettingsRequest configureSecuritySettingsRequest) throws ApiException {
+        configureSecuritySettingsWithHttpInfo(configureSecuritySettingsRequest);
+    }
+
+    /**
+     * Version: 26.2.0.cl or later Configure security settings for your ThoughtSpot application
+     * instance. - Use &#x60;cluster_preferences&#x60; to update cluster-level security settings
+     * including CORS whitelisted URLs, CSP settings, SAML redirect URLs, partitioned cookies, and
+     * non-embed access configuration. - Use &#x60;org_preferences&#x60; to configure Org-specific
+     * security settings. If your instance has
+     * [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this allows configuring CORS
+     * and non-embed access settings specific to the Org. Requires &#x60;ADMINISTRATION&#x60; (**Can
+     * administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.
+     * Cluster-level SAML and script-src settings require &#x60;ADMINISTRATION&#x60; privilege. See
+     * [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more
+     * details.
+     *
+     * @param configureSecuritySettingsRequest (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Successfully configured the security settings. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<Void> configureSecuritySettingsWithHttpInfo(
+            ConfigureSecuritySettingsRequest configureSecuritySettingsRequest) throws ApiException {
+        okhttp3.Call localVarCall =
+                configureSecuritySettingsValidateBeforeCall(configureSecuritySettingsRequest, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     * (asynchronously) Version: 26.2.0.cl or later Configure security settings for your ThoughtSpot
+     * application instance. - Use &#x60;cluster_preferences&#x60; to update cluster-level security
+     * settings including CORS whitelisted URLs, CSP settings, SAML redirect URLs, partitioned
+     * cookies, and non-embed access configuration. - Use &#x60;org_preferences&#x60; to configure
+     * Org-specific security settings. If your instance has
+     * [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this allows configuring CORS
+     * and non-embed access settings specific to the Org. Requires &#x60;ADMINISTRATION&#x60; (**Can
+     * administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.
+     * Cluster-level SAML and script-src settings require &#x60;ADMINISTRATION&#x60; privilege. See
+     * [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more
+     * details.
+     *
+     * @param configureSecuritySettingsRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Successfully configured the security settings. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call configureSecuritySettingsAsync(
+            ConfigureSecuritySettingsRequest configureSecuritySettingsRequest,
+            final ApiCallback<Void> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                configureSecuritySettingsValidateBeforeCall(
+                        configureSecuritySettingsRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -985,6 +1184,204 @@ public class SystemApi {
                         searchCommunicationChannelPreferencesRequest, _callback);
         Type localVarReturnType =
                 new TypeToken<CommunicationChannelPreferencesResponse>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for searchSecuritySettings
+     *
+     * @param searchSecuritySettingsRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Successfully retrieved the list of security settings. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call searchSecuritySettingsCall(
+            SearchSecuritySettingsRequest searchSecuritySettingsRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = searchSecuritySettingsRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/system/security-settings/search";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call searchSecuritySettingsValidateBeforeCall(
+            SearchSecuritySettingsRequest searchSecuritySettingsRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'searchSecuritySettingsRequest' is set
+        if (searchSecuritySettingsRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'searchSecuritySettingsRequest' when calling"
+                            + " searchSecuritySettings(Async)");
+        }
+
+        return searchSecuritySettingsCall(searchSecuritySettingsRequest, _callback);
+    }
+
+    /**
+     * Version: 26.2.0.cl or later Fetch security settings for your ThoughtSpot application
+     * instance. - Use &#x60;scope: CLUSTER&#x60; to retrieve cluster-level security settings,
+     * including CORS and CSP allowlists, SAML redirect URLs, and settings that control access to
+     * non-embedded pages. - Use &#x60;scope: ORG&#x60; to retrieve Org-level security settings. If
+     * your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this
+     * returns CORS and non-embed access settings specific to the Org. - If &#x60;scope&#x60; is not
+     * specified, returns both cluster and Org-specific settings based on user privileges. Requires
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has
+     * developer privilege**) privilege. See [Security
+     * Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.
+     *
+     * @param searchSecuritySettingsRequest (required)
+     * @return SecuritySettingsResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Successfully retrieved the list of security settings. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public SecuritySettingsResponse searchSecuritySettings(
+            SearchSecuritySettingsRequest searchSecuritySettingsRequest) throws ApiException {
+        ApiResponse<SecuritySettingsResponse> localVarResp =
+                searchSecuritySettingsWithHttpInfo(searchSecuritySettingsRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Version: 26.2.0.cl or later Fetch security settings for your ThoughtSpot application
+     * instance. - Use &#x60;scope: CLUSTER&#x60; to retrieve cluster-level security settings,
+     * including CORS and CSP allowlists, SAML redirect URLs, and settings that control access to
+     * non-embedded pages. - Use &#x60;scope: ORG&#x60; to retrieve Org-level security settings. If
+     * your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this
+     * returns CORS and non-embed access settings specific to the Org. - If &#x60;scope&#x60; is not
+     * specified, returns both cluster and Org-specific settings based on user privileges. Requires
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has
+     * developer privilege**) privilege. See [Security
+     * Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.
+     *
+     * @param searchSecuritySettingsRequest (required)
+     * @return ApiResponse&lt;SecuritySettingsResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Successfully retrieved the list of security settings. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<SecuritySettingsResponse> searchSecuritySettingsWithHttpInfo(
+            SearchSecuritySettingsRequest searchSecuritySettingsRequest) throws ApiException {
+        okhttp3.Call localVarCall =
+                searchSecuritySettingsValidateBeforeCall(searchSecuritySettingsRequest, null);
+        Type localVarReturnType = new TypeToken<SecuritySettingsResponse>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Version: 26.2.0.cl or later Fetch security settings for your ThoughtSpot
+     * application instance. - Use &#x60;scope: CLUSTER&#x60; to retrieve cluster-level security
+     * settings, including CORS and CSP allowlists, SAML redirect URLs, and settings that control
+     * access to non-embedded pages. - Use &#x60;scope: ORG&#x60; to retrieve Org-level security
+     * settings. If your instance has
+     * [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this returns CORS and
+     * non-embed access settings specific to the Org. - If &#x60;scope&#x60; is not specified,
+     * returns both cluster and Org-specific settings based on user privileges. Requires
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has
+     * developer privilege**) privilege. See [Security
+     * Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.
+     *
+     * @param searchSecuritySettingsRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Successfully retrieved the list of security settings. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call searchSecuritySettingsAsync(
+            SearchSecuritySettingsRequest searchSecuritySettingsRequest,
+            final ApiCallback<SecuritySettingsResponse> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                searchSecuritySettingsValidateBeforeCall(searchSecuritySettingsRequest, _callback);
+        Type localVarReturnType = new TypeToken<SecuritySettingsResponse>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
