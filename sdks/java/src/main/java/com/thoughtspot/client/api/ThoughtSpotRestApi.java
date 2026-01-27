@@ -19442,14 +19442,19 @@ public class ThoughtSpotRestApi {
 
     /**
      * Version: 9.0.0.cl or later Allows sharing one or several metadata objects with users and
-     * groups in ThoughtSpot. Requires edit access to the metadata object. The API endpoint allows
-     * sharing only the following types of metadata objects: * Liveboards * Visualizations * Answers
-     * * Worksheets * Views * Connections You can provide &#x60;READ_ONLY&#x60; or
-     * &#x60;MODIFY&#x60; access when sharing an object with another user or group. With
-     * &#x60;READ_ONLY&#x60; access grants view access to the shared object, whereas
-     * &#x60;MODIFY&#x60; provides edit access. To prevent a user or group from accessing the shared
-     * object, specify the GUID or name of the principal and set &#x60;shareMode&#x60; to
-     * &#x60;NO_ACCESS&#x60;.
+     * groups in ThoughtSpot. Requires edit access to the metadata object. #### Supported metadata
+     * objects: * Liveboards * Visualizations * Answers * Models * Views * Connections #### Object
+     * permissions You can provide &#x60;READ_ONLY&#x60; or &#x60;MODIFY&#x60; access when sharing
+     * an object with another user or group. The &#x60;READ_ONLY&#x60; permission grants view access
+     * to the shared object, whereas &#x60;MODIFY&#x60; provides edit access. To prevent a user or
+     * group from accessing the shared object, specify the GUID or name of the principal and set
+     * &#x60;shareMode&#x60; to &#x60;NO_ACCESS&#x60;. #### Sharing a visualization * Sharing a
+     * visualization implicitly shares the entire Liveboard with the recipient. * Object permissions
+     * set for a shared visualization also apply to the Liveboard unless overridden by another API
+     * request or via UI. * If email notifications for object sharing are enabled, a notification
+     * with a link to the shared visualization will be sent to the recipient’s email address.
+     * Although this link opens the shared visualization, recipients can also access other
+     * visualizations in the Liveboard.
      *
      * @param shareMetadataRequest (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -19471,14 +19476,19 @@ public class ThoughtSpotRestApi {
 
     /**
      * Version: 9.0.0.cl or later Allows sharing one or several metadata objects with users and
-     * groups in ThoughtSpot. Requires edit access to the metadata object. The API endpoint allows
-     * sharing only the following types of metadata objects: * Liveboards * Visualizations * Answers
-     * * Worksheets * Views * Connections You can provide &#x60;READ_ONLY&#x60; or
-     * &#x60;MODIFY&#x60; access when sharing an object with another user or group. With
-     * &#x60;READ_ONLY&#x60; access grants view access to the shared object, whereas
-     * &#x60;MODIFY&#x60; provides edit access. To prevent a user or group from accessing the shared
-     * object, specify the GUID or name of the principal and set &#x60;shareMode&#x60; to
-     * &#x60;NO_ACCESS&#x60;.
+     * groups in ThoughtSpot. Requires edit access to the metadata object. #### Supported metadata
+     * objects: * Liveboards * Visualizations * Answers * Models * Views * Connections #### Object
+     * permissions You can provide &#x60;READ_ONLY&#x60; or &#x60;MODIFY&#x60; access when sharing
+     * an object with another user or group. The &#x60;READ_ONLY&#x60; permission grants view access
+     * to the shared object, whereas &#x60;MODIFY&#x60; provides edit access. To prevent a user or
+     * group from accessing the shared object, specify the GUID or name of the principal and set
+     * &#x60;shareMode&#x60; to &#x60;NO_ACCESS&#x60;. #### Sharing a visualization * Sharing a
+     * visualization implicitly shares the entire Liveboard with the recipient. * Object permissions
+     * set for a shared visualization also apply to the Liveboard unless overridden by another API
+     * request or via UI. * If email notifications for object sharing are enabled, a notification
+     * with a link to the shared visualization will be sent to the recipient’s email address.
+     * Although this link opens the shared visualization, recipients can also access other
+     * visualizations in the Liveboard.
      *
      * @param shareMetadataRequest (required)
      * @return ApiResponse&lt;Void&gt;
@@ -19503,14 +19513,19 @@ public class ThoughtSpotRestApi {
 
     /**
      * (asynchronously) Version: 9.0.0.cl or later Allows sharing one or several metadata objects
-     * with users and groups in ThoughtSpot. Requires edit access to the metadata object. The API
-     * endpoint allows sharing only the following types of metadata objects: * Liveboards *
-     * Visualizations * Answers * Worksheets * Views * Connections You can provide
-     * &#x60;READ_ONLY&#x60; or &#x60;MODIFY&#x60; access when sharing an object with another user
-     * or group. With &#x60;READ_ONLY&#x60; access grants view access to the shared object, whereas
+     * with users and groups in ThoughtSpot. Requires edit access to the metadata object. ####
+     * Supported metadata objects: * Liveboards * Visualizations * Answers * Models * Views *
+     * Connections #### Object permissions You can provide &#x60;READ_ONLY&#x60; or
+     * &#x60;MODIFY&#x60; access when sharing an object with another user or group. The
+     * &#x60;READ_ONLY&#x60; permission grants view access to the shared object, whereas
      * &#x60;MODIFY&#x60; provides edit access. To prevent a user or group from accessing the shared
      * object, specify the GUID or name of the principal and set &#x60;shareMode&#x60; to
-     * &#x60;NO_ACCESS&#x60;.
+     * &#x60;NO_ACCESS&#x60;. #### Sharing a visualization * Sharing a visualization implicitly
+     * shares the entire Liveboard with the recipient. * Object permissions set for a shared
+     * visualization also apply to the Liveboard unless overridden by another API request or via UI.
+     * * If email notifications for object sharing are enabled, a notification with a link to the
+     * shared visualization will be sent to the recipient’s email address. Although this link opens
+     * the shared visualization, recipients can also access other visualizations in the Liveboard.
      *
      * @param shareMetadataRequest (required)
      * @param _callback The callback to be executed when the API call finishes
