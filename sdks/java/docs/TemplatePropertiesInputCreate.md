@@ -35,6 +35,7 @@ Email customization configuration properties
 |**companyWebsiteUrl** | **String** | Company website URL (HTTP/HTTPS only) |  [optional] |
 |**contactSupportUrl** | **String** | Contact support url (HTTP/HTTPS only).    Version: 26.2.0.cl or later  |  [optional] |
 |**hideContactSupportUrl** | **Boolean** | Whether to hide contact support url.    Version: 26.2.0.cl or later  |  [optional] |
+|**hideLogoUrl** | **Boolean** | Whether to hide logo    Version: 26.4.0.cl or later  |  [optional] |
 
 
 ## Implemented Interfaces

@@ -200,6 +200,12 @@ public class TemplatePropertiesInputCreate implements Serializable {
     @javax.annotation.Nullable
     private Boolean hideContactSupportUrl;
 
+    public static final String SERIALIZED_NAME_HIDE_LOGO_URL = "hide_logo_url";
+
+    @SerializedName(SERIALIZED_NAME_HIDE_LOGO_URL)
+    @javax.annotation.Nullable
+    private Boolean hideLogoUrl;
+
     public TemplatePropertiesInputCreate() {}
 
     public TemplatePropertiesInputCreate ctaButtonBgColor(
@@ -746,6 +752,26 @@ public class TemplatePropertiesInputCreate implements Serializable {
         this.hideContactSupportUrl = hideContactSupportUrl;
     }
 
+    public TemplatePropertiesInputCreate hideLogoUrl(
+            @javax.annotation.Nullable Boolean hideLogoUrl) {
+        this.hideLogoUrl = hideLogoUrl;
+        return this;
+    }
+
+    /**
+     * Whether to hide logo Version: 26.4.0.cl or later
+     *
+     * @return hideLogoUrl
+     */
+    @javax.annotation.Nullable
+    public Boolean getHideLogoUrl() {
+        return hideLogoUrl;
+    }
+
+    public void setHideLogoUrl(@javax.annotation.Nullable Boolean hideLogoUrl) {
+        this.hideLogoUrl = hideLogoUrl;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -809,7 +835,8 @@ public class TemplatePropertiesInputCreate implements Serializable {
                         this.contactSupportUrl, templatePropertiesInputCreate.contactSupportUrl)
                 && Objects.equals(
                         this.hideContactSupportUrl,
-                        templatePropertiesInputCreate.hideContactSupportUrl);
+                        templatePropertiesInputCreate.hideContactSupportUrl)
+                && Objects.equals(this.hideLogoUrl, templatePropertiesInputCreate.hideLogoUrl);
     }
 
     private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -850,7 +877,8 @@ public class TemplatePropertiesInputCreate implements Serializable {
                 companyPrivacyPolicyUrl,
                 companyWebsiteUrl,
                 contactSupportUrl,
-                hideContactSupportUrl);
+                hideContactSupportUrl,
+                hideLogoUrl);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -919,6 +947,7 @@ public class TemplatePropertiesInputCreate implements Serializable {
         sb.append("    hideContactSupportUrl: ")
                 .append(toIndentedString(hideContactSupportUrl))
                 .append("\n");
+        sb.append("    hideLogoUrl: ").append(toIndentedString(hideLogoUrl)).append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -967,6 +996,7 @@ public class TemplatePropertiesInputCreate implements Serializable {
         openapiFields.add("company_website_url");
         openapiFields.add("contact_support_url");
         openapiFields.add("hide_contact_support_url");
+        openapiFields.add("hide_logo_url");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();

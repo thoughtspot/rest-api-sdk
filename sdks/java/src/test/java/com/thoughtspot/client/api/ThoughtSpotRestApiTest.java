@@ -565,7 +565,7 @@ public class ThoughtSpotRestApiTest {
      * \&quot;https://your-website.com/\&quot;, \&quot;company_privacy_policy_url\&quot; :
      * \&quot;https://link-to-privacy-policy.com/\&quot;, \&quot;contact_support_url\&quot;:
      * \&quot;https://link-to-contact-support.com/\&quot;, \&quot;hide_contact_support_url\&quot;:
-     * false } } &#x60;&#x60;&#x60;
+     * false, \&quot;hide_logo_url\&quot; : false } } &#x60;&#x60;&#x60;
      *
      * @throws ApiException if the Api call fails
      */
@@ -2848,7 +2848,7 @@ public class ThoughtSpotRestApiTest {
      * \&quot;https://your-website.com/\&quot;, \&quot;company_privacy_policy_url\&quot; :
      * \&quot;https://link-to-privacy-policy.com/\&quot;, \&quot;contact_support_url\&quot;:
      * \&quot;https://link-to-contact-support.com/\&quot;, \&quot;hide_contact_support_url\&quot;:
-     * false } } &#x60;&#x60;&#x60;
+     * false, \&quot;hide_logo_url\&quot; : false } } &#x60;&#x60;&#x60;
      *
      * @throws ApiException if the Api call fails
      */

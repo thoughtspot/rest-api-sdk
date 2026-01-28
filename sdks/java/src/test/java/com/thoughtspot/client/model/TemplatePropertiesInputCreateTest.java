@@ -177,4 +177,10 @@ public class TemplatePropertiesInputCreateTest {
     public void hideContactSupportUrlTest() {
         // TODO: test hideContactSupportUrl
     }
+
+    /** Test the property 'hideLogoUrl' */
+    @Test
+    public void hideLogoUrlTest() {
+        // TODO: test hideLogoUrl
+    }
 }

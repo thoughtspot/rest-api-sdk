@@ -199,7 +199,7 @@ public class EmailCustomizationApi {
      * \&quot;https://your-website.com/\&quot;, \&quot;company_privacy_policy_url\&quot; :
      * \&quot;https://link-to-privacy-policy.com/\&quot;, \&quot;contact_support_url\&quot;:
      * \&quot;https://link-to-contact-support.com/\&quot;, \&quot;hide_contact_support_url\&quot;:
-     * false } } &#x60;&#x60;&#x60;
+     * false, \&quot;hide_logo_url\&quot; : false } } &#x60;&#x60;&#x60;
      *
      * @param createEmailCustomizationRequest (required)
      * @return CreateEmailCustomizationResponse
@@ -251,7 +251,7 @@ public class EmailCustomizationApi {
      * \&quot;https://your-website.com/\&quot;, \&quot;company_privacy_policy_url\&quot; :
      * \&quot;https://link-to-privacy-policy.com/\&quot;, \&quot;contact_support_url\&quot;:
      * \&quot;https://link-to-contact-support.com/\&quot;, \&quot;hide_contact_support_url\&quot;:
-     * false } } &#x60;&#x60;&#x60;
+     * false, \&quot;hide_logo_url\&quot; : false } } &#x60;&#x60;&#x60;
      *
      * @param createEmailCustomizationRequest (required)
      * @return ApiResponse&lt;CreateEmailCustomizationResponse&gt;
@@ -304,7 +304,7 @@ public class EmailCustomizationApi {
      * \&quot;https://your-website.com/\&quot;, \&quot;company_privacy_policy_url\&quot; :
      * \&quot;https://link-to-privacy-policy.com/\&quot;, \&quot;contact_support_url\&quot;:
      * \&quot;https://link-to-contact-support.com/\&quot;, \&quot;hide_contact_support_url\&quot;:
-     * false } } &#x60;&#x60;&#x60;
+     * false, \&quot;hide_logo_url\&quot; : false } } &#x60;&#x60;&#x60;
      *
      * @param createEmailCustomizationRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -1024,7 +1024,7 @@ public class EmailCustomizationApi {
      * \&quot;https://your-website.com/\&quot;, \&quot;company_privacy_policy_url\&quot; :
      * \&quot;https://link-to-privacy-policy.com/\&quot;, \&quot;contact_support_url\&quot;:
      * \&quot;https://link-to-contact-support.com/\&quot;, \&quot;hide_contact_support_url\&quot;:
-     * false } } &#x60;&#x60;&#x60;
+     * false, \&quot;hide_logo_url\&quot; : false } } &#x60;&#x60;&#x60;
      *
      * @param updateEmailCustomizationRequest (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -1074,7 +1074,7 @@ public class EmailCustomizationApi {
      * \&quot;https://your-website.com/\&quot;, \&quot;company_privacy_policy_url\&quot; :
      * \&quot;https://link-to-privacy-policy.com/\&quot;, \&quot;contact_support_url\&quot;:
      * \&quot;https://link-to-contact-support.com/\&quot;, \&quot;hide_contact_support_url\&quot;:
-     * false } } &#x60;&#x60;&#x60;
+     * false, \&quot;hide_logo_url\&quot; : false } } &#x60;&#x60;&#x60;
      *
      * @param updateEmailCustomizationRequest (required)
      * @return ApiResponse&lt;Void&gt;
@@ -1127,7 +1127,7 @@ public class EmailCustomizationApi {
      * \&quot;https://your-website.com/\&quot;, \&quot;company_privacy_policy_url\&quot; :
      * \&quot;https://link-to-privacy-policy.com/\&quot;, \&quot;contact_support_url\&quot;:
      * \&quot;https://link-to-contact-support.com/\&quot;, \&quot;hide_contact_support_url\&quot;:
-     * false } } &#x60;&#x60;&#x60;
+     * false, \&quot;hide_logo_url\&quot; : false } } &#x60;&#x60;&#x60;
      *
      * @param updateEmailCustomizationRequest (required)
      * @param _callback The callback to be executed when the API call finishes

@@ -124,6 +124,10 @@ export class TemplatePropertiesInputCreate {
     * Whether to hide contact support url.    Version: 26.2.0.cl or later 
     */
     'hide_contact_support_url'?: boolean | null;
+    /**
+    * Whether to hide logo    Version: 26.4.0.cl or later 
+    */
+    'hide_logo_url'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -287,6 +291,12 @@ export class TemplatePropertiesInputCreate {
         {
             "name": "hide_contact_support_url",
             "baseName": "hide_contact_support_url",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "hide_logo_url",
+            "baseName": "hide_logo_url",
             "type": "boolean",
             "format": ""
         }    ];

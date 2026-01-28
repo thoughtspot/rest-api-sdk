@@ -3050,23 +3050,24 @@ paths:
         \nTo create a custom configuration pass these parameters in your API request:\n\
         \n- A JSON map of configuration attributes `template_properties`. The following\
         \ example shows a sample set of customization configuration:\n\n```\n{\n \
-        \ {\n      \"cta_button_bg_color\": \"#444DEA\",\n    \t\"cta_text_font_color\"\
-        : \"#FFFFFF\",\n    \t\"primary_bg_color\": \"#D3DEF0\",\n      \"logo_url\"\
+        \ {\n      \"cta_button_bg_color\": \"#444DEA\",\n      \"cta_text_font_color\"\
+        : \"#FFFFFF\",\n      \"primary_bg_color\": \"#D3DEF0\",\n      \"logo_url\"\
         : \"https://storage.pardot.com/710713/1642089901EbkRibJq/TS_fullworkmark_darkmode.png\"\
-        ,\n  \t  \"font_family\": \"\",\n    \t\"product_name\": \"ThoughtSpot\",\n\
-        \    \t\"footer_address\": \"444 Castro St, Suite 1000 Mountain View, CA 94041\"\
-        ,\n\t    \"footer_phone\": \"(800) 508-7008\",\n      \"replacement_value_for_liveboard\"\
-        : \"Dashboard\",\n    \t\"replacement_value_for_answer\": \"Chart\",\n   \
-        \ \t\"replacement_value_for_spot_iq\": \"AI Insights\",\n   \t  \"hide_footer_phone\"\
+        ,\n  \t  \"font_family\": \"\",\n      \"product_name\": \"ThoughtSpot\",\n\
+        \      \"footer_address\": \"444 Castro St, Suite 1000 Mountain View, CA 94041\"\
+        ,\n\t  \"footer_phone\": \"(800) 508-7008\",\n      \"replacement_value_for_liveboard\"\
+        : \"Dashboard\",\n      \"replacement_value_for_answer\": \"Chart\",\n   \
+        \   \"replacement_value_for_spot_iq\": \"AI Insights\",\n   \t  \"hide_footer_phone\"\
         : false,\n      \"hide_footer_address\": false,\n      \"hide_product_name\"\
-        : false,\n    \t\"hide_manage_notification\": false,\n    \t\"hide_mobile_app_nudge\"\
-        : false,\n    \t\"hide_privacy_policy\": false,\n    \t\"hide_ts_vocabulary_definitions\"\
-        : false,\n    \t\"hide_error_message\": false,\n    \t\"hide_unsubscribe_link\"\
-        : false,\n      \"hide_notification_status\": false,\n    \t\"hide_modify_alert\"\
-        : false,\n    \t\"company_website_url\": \"https://your-website.com/\",\n\
-        \    \t\"company_privacy_policy_url\" : \"https://link-to-privacy-policy.com/\"\
+        : false,\n      \"hide_manage_notification\": false,\n      \"hide_mobile_app_nudge\"\
+        : false,\n      \"hide_privacy_policy\": false,\n      \"hide_ts_vocabulary_definitions\"\
+        : false,\n      \"hide_error_message\": false,\n      \"hide_unsubscribe_link\"\
+        : false,\n      \"hide_notification_status\": false,\n      \"hide_modify_alert\"\
+        : false,\n      \"company_website_url\": \"https://your-website.com/\",\n\
+        \      \"company_privacy_policy_url\" : \"https://link-to-privacy-policy.com/\"\
         ,\n      \"contact_support_url\": \"https://link-to-contact-support.com/\"\
-        ,\n      \"hide_contact_support_url\": false\n  }\n}\n```\n\n\n\n\n\n"
+        ,\n      \"hide_contact_support_url\": false,\n\t  \"hide_logo_url\" : false\n\
+        \  }\n}\n```\n\n\n\n\n\n"
       operationId: createEmailCustomization
       parameters: []
       requestBody:
@@ -3308,22 +3309,23 @@ paths:
         \n- A JSON map of configuration attributes `template_properties`. The following\
         \ example shows a sample set of customization configuration:\n\n```\n{\n \
         \ {\n      \"cta_button_bg_color\": \"#444DEA\",\n    \t\"cta_text_font_color\"\
-        : \"#FFFFFF\",\n    \t\"primary_bg_color\": \"#D3DEF0\",\n      \"logo_url\"\
+        : \"#FFFFFF\",\n    \t\"primary_bg_color\": \"#D3DEF0\",\n        \"logo_url\"\
         : \"https://storage.pardot.com/710713/1642089901EbkRibJq/TS_fullworkmark_darkmode.png\"\
-        ,\n  \t  \"font_family\": \"\",\n    \t\"product_name\": \"ThoughtSpot\",\n\
-        \    \t\"footer_address\": \"444 Castro St, Suite 1000 Mountain View, CA 94041\"\
-        ,\n\t    \"footer_phone\": \"(800) 508-7008\",\n      \"replacement_value_for_liveboard\"\
+        ,\n  \t    \"font_family\": \"\",\n    \t\"product_name\": \"ThoughtSpot\"\
+        ,\n    \t\"footer_address\": \"444 Castro St, Suite 1000 Mountain View, CA\
+        \ 94041\",\n\t    \"footer_phone\": \"(800) 508-7008\",\n        \"replacement_value_for_liveboard\"\
         : \"Dashboard\",\n    \t\"replacement_value_for_answer\": \"Chart\",\n   \
-        \ \t\"replacement_value_for_spot_iq\": \"AI Insights\",\n   \t  \"hide_footer_phone\"\
-        : false,\n      \"hide_footer_address\": false,\n      \"hide_product_name\"\
+        \ \t\"replacement_value_for_spot_iq\": \"AI Insights\",\n   \t    \"hide_footer_phone\"\
+        : false,\n        \"hide_footer_address\": false,\n        \"hide_product_name\"\
         : false,\n    \t\"hide_manage_notification\": false,\n    \t\"hide_mobile_app_nudge\"\
-        : false,\n    \t\"hide_privacy_policy\": false,\n    \t\"hide_ts_vocabulary_definitions\"\
+        : false,\n    \t\"hide_privacy_policy\": false,\n     \t\"hide_ts_vocabulary_definitions\"\
         : false,\n    \t\"hide_error_message\": false,\n    \t\"hide_unsubscribe_link\"\
-        : false,\n      \"hide_notification_status\": false,\n    \t\"hide_modify_alert\"\
+        : false,\n        \"hide_notification_status\": false,\n    \t\"hide_modify_alert\"\
         : false,\n    \t\"company_website_url\": \"https://your-website.com/\",\n\
         \    \t\"company_privacy_policy_url\" : \"https://link-to-privacy-policy.com/\"\
-        ,\n      \"contact_support_url\": \"https://link-to-contact-support.com/\"\
-        ,\n      \"hide_contact_support_url\": false\n  }\n}\n```\n\n\n\n\n\n"
+        ,\n        \"contact_support_url\": \"https://link-to-contact-support.com/\"\
+        ,\n        \"hide_contact_support_url\": false,\n\t    \"hide_logo_url\" :\
+        \ false\n  }\n}\n```\n\n\n\n\n\n"
       operationId: updateEmailCustomization
       parameters: []
       requestBody:
@@ -16009,6 +16011,10 @@ components:
         hide_contact_support_url:
           description: "Whether to hide contact support url. \n  Version: 26.2.0.cl\
             \ or later\n"
+          nullable: true
+          type: boolean
+        hide_logo_url:
+          description: "Whether to hide logo \n  Version: 26.4.0.cl or later\n"
           nullable: true
           type: boolean
       type: object
