@@ -74,7 +74,7 @@ export class AIApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Version: 10.7.0.cl or later 
+     *  Version: 10.7.0.cl or later        
      * @param queryGetDecomposedQueryRequest 
      */
     public async queryGetDecomposedQuery(queryGetDecomposedQueryRequest: QueryGetDecomposedQueryRequest, _options?: Configuration): Promise<RequestContext> {

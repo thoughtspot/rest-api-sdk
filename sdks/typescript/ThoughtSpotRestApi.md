@@ -5229,7 +5229,7 @@ Name | Type | Description  | Notes
 # **queryGetDecomposedQuery**
 > EurekaDecomposeQueryResponse queryGetDecomposedQuery(queryGetDecomposedQueryRequest)
 
-Version: 10.7.0.cl or later 
+ Version: 10.7.0.cl or later        
 
 ### Example
 

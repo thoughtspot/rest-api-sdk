@@ -431,7 +431,7 @@ export class ObservableAIApi {
     }
 
     /**
-     * Version: 10.7.0.cl or later 
+     *  Version: 10.7.0.cl or later        
      * @param queryGetDecomposedQueryRequest 
      */
     public queryGetDecomposedQuery(queryGetDecomposedQueryRequest: QueryGetDecomposedQueryRequest, _options?: Configuration): Observable<EurekaDecomposeQueryResponse> {
@@ -4877,7 +4877,7 @@ export class ObservableThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.7.0.cl or later 
+     *  Version: 10.7.0.cl or later        
      * @param queryGetDecomposedQueryRequest 
      */
     public queryGetDecomposedQuery(queryGetDecomposedQueryRequest: QueryGetDecomposedQueryRequest, _options?: Configuration): Observable<EurekaDecomposeQueryResponse> {

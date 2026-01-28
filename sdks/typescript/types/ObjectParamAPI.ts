@@ -451,7 +451,7 @@ export class ObjectAIApi {
     }
 
     /**
-     * Version: 10.7.0.cl or later 
+     *  Version: 10.7.0.cl or later        
      * @param param the request object
      */
     public queryGetDecomposedQuery(param: AIApiQueryGetDecomposedQueryRequest, options?: Configuration): Promise<EurekaDecomposeQueryResponse> {
@@ -4384,7 +4384,7 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.7.0.cl or later 
+     *  Version: 10.7.0.cl or later        
      * @param param the request object
      */
     public queryGetDecomposedQuery(param: ThoughtSpotRestApiQueryGetDecomposedQueryRequest, options?: Configuration): Promise<EurekaDecomposeQueryResponse> {

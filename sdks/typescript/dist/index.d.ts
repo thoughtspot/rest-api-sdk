@@ -17985,7 +17985,7 @@ declare class AIApiRequestFactory extends BaseAPIRequestFactory {
      */
     createConversation(createConversationRequest: CreateConversationRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     * Version: 10.7.0.cl or later
+     *  Version: 10.7.0.cl or later
      * @param queryGetDecomposedQueryRequest
      */
     queryGetDecomposedQuery(queryGetDecomposedQueryRequest: QueryGetDecomposedQueryRequest, _options?: Configuration): Promise<RequestContext>;
@@ -19871,7 +19871,7 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      */
     publishMetadata(publishMetadataRequest: PublishMetadataRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     * Version: 10.7.0.cl or later
+     *  Version: 10.7.0.cl or later
      * @param queryGetDecomposedQueryRequest
      */
     queryGetDecomposedQuery(queryGetDecomposedQueryRequest: QueryGetDecomposedQueryRequest, _options?: Configuration): Promise<RequestContext>;
@@ -21362,7 +21362,7 @@ declare class PromiseAIApi {
      */
     createConversation(createConversationRequest: CreateConversationRequest, _options?: Configuration): Promise<Conversation>;
     /**
-     * Version: 10.7.0.cl or later
+     *  Version: 10.7.0.cl or later
      * @param queryGetDecomposedQueryRequest
      */
     queryGetDecomposedQuery(queryGetDecomposedQueryRequest: QueryGetDecomposedQueryRequest, _options?: Configuration): Promise<EurekaDecomposeQueryResponse>;
@@ -22375,7 +22375,7 @@ declare class PromiseThoughtSpotRestApi {
      */
     publishMetadata(publishMetadataRequest: PublishMetadataRequest, _options?: Configuration): Promise<void>;
     /**
-     * Version: 10.7.0.cl or later
+     *  Version: 10.7.0.cl or later
      * @param queryGetDecomposedQueryRequest
      */
     queryGetDecomposedQuery(queryGetDecomposedQueryRequest: QueryGetDecomposedQueryRequest, _options?: Configuration): Promise<EurekaDecomposeQueryResponse>;

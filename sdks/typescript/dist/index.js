@@ -16158,7 +16158,7 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   * Version: 10.7.0.cl or later 
+   *  Version: 10.7.0.cl or later        
    * @param queryGetDecomposedQueryRequest 
    */
   queryGetDecomposedQuery(queryGetDecomposedQueryRequest, _options) {
@@ -28619,7 +28619,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   * Version: 10.7.0.cl or later 
+   *  Version: 10.7.0.cl or later        
    * @param queryGetDecomposedQueryRequest 
    */
   queryGetDecomposedQuery(queryGetDecomposedQueryRequest, _options) {
@@ -39326,7 +39326,7 @@ var ObservableAIApi = class {
     }));
   }
   /**
-   * Version: 10.7.0.cl or later 
+   *  Version: 10.7.0.cl or later        
    * @param queryGetDecomposedQueryRequest 
    */
   queryGetDecomposedQuery(queryGetDecomposedQueryRequest, _options) {
@@ -42678,7 +42678,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   * Version: 10.7.0.cl or later 
+   *  Version: 10.7.0.cl or later        
    * @param queryGetDecomposedQueryRequest 
    */
   queryGetDecomposedQuery(queryGetDecomposedQueryRequest, _options) {
@@ -43882,7 +43882,7 @@ var PromiseAIApi = class {
     return result.toPromise();
   }
   /**
-   * Version: 10.7.0.cl or later 
+   *  Version: 10.7.0.cl or later        
    * @param queryGetDecomposedQueryRequest 
    */
   queryGetDecomposedQuery(queryGetDecomposedQueryRequest, _options) {
@@ -45426,7 +45426,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   * Version: 10.7.0.cl or later 
+   *  Version: 10.7.0.cl or later        
    * @param queryGetDecomposedQueryRequest 
    */
   queryGetDecomposedQuery(queryGetDecomposedQueryRequest, _options) {

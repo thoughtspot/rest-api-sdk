@@ -81,8 +81,16 @@ paths:
   /api/rest/2.0/ai/analytical-questions:
     post:
       deprecated: true
-      description: |
+      description: |2+
+
         Version: 10.7.0.cl or later
+
+
+
+
+
+
+
       operationId: queryGetDecomposedQuery
       parameters: []
       requestBody:

@@ -413,7 +413,7 @@ export class PromiseAIApi {
     }
 
     /**
-     * Version: 10.7.0.cl or later 
+     *  Version: 10.7.0.cl or later        
      * @param queryGetDecomposedQueryRequest 
      */
     public queryGetDecomposedQuery(queryGetDecomposedQueryRequest: QueryGetDecomposedQueryRequest, _options?: Configuration): Promise<EurekaDecomposeQueryResponse> {
@@ -2400,7 +2400,7 @@ export class PromiseThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.7.0.cl or later 
+     *  Version: 10.7.0.cl or later        
      * @param queryGetDecomposedQueryRequest 
      */
     public queryGetDecomposedQuery(queryGetDecomposedQueryRequest: QueryGetDecomposedQueryRequest, _options?: Configuration): Promise<EurekaDecomposeQueryResponse> {
