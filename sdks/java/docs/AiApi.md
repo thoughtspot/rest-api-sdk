@@ -23,13 +23,13 @@ All URIs are relative to *CLUSTER_URL*
 
 
 
-Version: 10.13.0.cl or later 
+Version: 26.2.0.cl or later 
 
 ### Parameters
 
-| Name | Type |
-|------------- | ------------- |
-| **createAgentConversationRequest** | [**CreateAgentConversationRequest**](CreateAgentConversationRequest.md)
+| Name                               | Type                                                                    |
+|------------------------------------|-------------------------------------------------------------------------|
+| **createAgentConversationRequest** | [**CreateAgentConversationRequest**](CreateAgentConversationRequest.md) |
 
 ### Return type
 
@@ -62,9 +62,9 @@ Version: 10.13.0.cl or later
 
 ### Parameters
 
-| Name | Type |
-|------------- | ------------- |
-| **createConversationRequest** | [**CreateConversationRequest**](CreateConversationRequest.md)
+| Name                          | Type                                                          |
+|-------------------------------|---------------------------------------------------------------|
+| **createConversationRequest** | [**CreateConversationRequest**](CreateConversationRequest.md) |
 
 ### Return type
 
@@ -97,9 +97,9 @@ Version: 10.13.0.cl or later
 
 ### Parameters
 
-| Name | Type |
-|------------- | ------------- |
-| **getDataSourceSuggestionsRequest** | [**GetDataSourceSuggestionsRequest**](GetDataSourceSuggestionsRequest.md)
+| Name                                | Type                                                                      |
+|-------------------------------------|---------------------------------------------------------------------------|
+| **getDataSourceSuggestionsRequest** | [**GetDataSourceSuggestionsRequest**](GetDataSourceSuggestionsRequest.md) |
 
 ### Return type
 
@@ -132,9 +132,9 @@ Version: 10.13.0.cl or later
 
 ### Parameters
 
-| Name | Type |
-|------------- | ------------- |
-| **getNLInstructionsRequest** | [**GetNLInstructionsRequest**](GetNLInstructionsRequest.md)
+| Name                         | Type                                                        |
+|------------------------------|-------------------------------------------------------------|
+| **getNLInstructionsRequest** | [**GetNLInstructionsRequest**](GetNLInstructionsRequest.md) |
 
 ### Return type
 
@@ -150,12 +150,12 @@ Version: 10.13.0.cl or later
  - **Accept**: application/json
 
 ### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Common successful response |  -  |
-| **201** | Common error response |  -  |
-| **400** | Operation failed |  -  |
-| **500** | Operation failed |  -  |
+| Status code | Description                | Response headers |
+|-------------|----------------------------|------------------|
+| **200**     | Common successful response | -                |
+| **201**     | Common error response      | -                |
+| **400**     | Operation failed           | -                |
+| **500**     | Operation failed           | -                |
 
 <a id="getRelevantQuestions"></a>
 # **getRelevantQuestions**
@@ -167,9 +167,9 @@ Version: 10.13.0.cl or later
 
 ### Parameters
 
-| Name | Type |
-|------------- | ------------- |
-| **getRelevantQuestionsRequest** | [**GetRelevantQuestionsRequest**](GetRelevantQuestionsRequest.md)
+| Name                            | Type                                                              |
+|---------------------------------|-------------------------------------------------------------------|
+| **getRelevantQuestionsRequest** | [**GetRelevantQuestionsRequest**](GetRelevantQuestionsRequest.md) |
 
 ### Return type
 
@@ -202,9 +202,9 @@ Version: 10.7.0.cl or later
 
 ### Parameters
 
-| Name | Type |
-|------------- | ------------- |
-| **queryGetDecomposedQueryRequest** | [**QueryGetDecomposedQueryRequest**](QueryGetDecomposedQueryRequest.md)
+| Name                               | Type                                                                    |
+|------------------------------------|-------------------------------------------------------------------------|
+| **queryGetDecomposedQueryRequest** | [**QueryGetDecomposedQueryRequest**](QueryGetDecomposedQueryRequest.md) |
 
 ### Return type
 
@@ -220,12 +220,12 @@ Version: 10.7.0.cl or later
  - **Accept**: application/json
 
 ### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Common successful response |  -  |
-| **201** | Common error response |  -  |
-| **400** | Operation failed |  -  |
-| **500** | Operation failed |  -  |
+| Status code | Description                | Response headers |
+|-------------|----------------------------|------------------|
+| **200**     | Common successful response | -                |
+| **201**     | Common error response      | -                |
+| **400**     | Operation failed           | -                |
+| **500**     | Operation failed           | -                |
 
 <a id="sendAgentMessage"></a>
 # **sendAgentMessage**
@@ -233,14 +233,14 @@ Version: 10.7.0.cl or later
 
 
 
- Version: 10.15.0.cl or later   This API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages.  To use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.   #### Usage guidelines  To initiate or continue a conversation, the request must include: - &#x60;conversation_identifier&#x60;: a unique session ID for continuity and message tracking - &#x60;messages&#x60;: an array of one or more text messages, each with a value and type  The API returns a array of object with a type, message, and metadata. - &#x60;type&#x60;: Type of the message — text, answer, or error. - &#x60;message&#x60;: Main content of the response. - &#x60;metadata&#x60;: Additional info depending on the message type.  &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.     
+ Version: 26.2.0.cl or later   This API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages.  To use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.   #### Usage guidelines  To initiate or continue a conversation, the request must include: - &#x60;conversation_identifier&#x60;: a unique session ID for continuity and message tracking - &#x60;messages&#x60;: an array of one or more text messages, each with a value and type  The API returns a array of object with a type, message, and metadata. - &#x60;type&#x60;: Type of the message — text, answer, or error. - &#x60;message&#x60;: Main content of the response. - &#x60;metadata&#x60;: Additional info depending on the message type.  &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.     
 
 ### Parameters
 
-| Name | Type |
-|------------- | ------------- |
-| **conversationIdentifier** | **String**
-| **sendAgentMessageRequest** | [**SendAgentMessageRequest**](SendAgentMessageRequest.md)
+| Name                        | Type                                                      |
+|-----------------------------|-----------------------------------------------------------|
+| **conversationIdentifier**  | **String**                                                |
+| **sendAgentMessageRequest** | [**SendAgentMessageRequest**](SendAgentMessageRequest.md) |
 
 ### Return type
 
@@ -269,13 +269,13 @@ Version: 10.7.0.cl or later
 
 
 
- Version: 10.13.0.cl or later   This API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages.  To use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.   #### Usage guidelines  To initiate or continue a conversation, the request must include: - &#x60;conversation_identifier&#x60;: a unique session ID for continuity and message tracking - &#x60;messages&#x60;: an array of one or more text messages, each with a value and type  Additionally, user can specify what tool can be included &#x60;conversation_settings&#x60; parameter, which supports: - &#x60;enable_contextual_change_analysis&#x60; (default: false) - &#x60;enable_natural_language_answer_generation&#x60; (default: true) - &#x60;enable_reasoning&#x60; (default: false)  If the request is valid, the API returns a stream of messages in real time, including: - &#x60;ack&#x60;: confirms receipt of the request - &#x60;text / text-chunk&#x60;: content chunks, optionally formatted (e.g., markdown) - &#x60;answer&#x60;: the final structured response with metadata and analytics - &#x60;error&#x60;: if a failure occurs - &#x60;notification&#x60;: notification messages for operation being performed  &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster. &gt; * The streaming protocol uses Server-Sent Events (SSE)     
+ Version: 26.2.0.cl or later   This API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages.  To use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.   #### Usage guidelines  To initiate or continue a conversation, the request must include: - &#x60;conversation_identifier&#x60;: a unique session ID for continuity and message tracking - &#x60;messages&#x60;: an array of one or more text messages, each with a value and type  Additionally, user can specify what tool can be included &#x60;conversation_settings&#x60; parameter, which supports: - &#x60;enable_contextual_change_analysis&#x60; (default: false) - &#x60;enable_natural_language_answer_generation&#x60; (default: true) - &#x60;enable_reasoning&#x60; (default: false)  If the request is valid, the API returns a stream of messages in real time, including: - &#x60;ack&#x60;: confirms receipt of the request - &#x60;text / text-chunk&#x60;: content chunks, optionally formatted (e.g., markdown) - &#x60;answer&#x60;: the final structured response with metadata and analytics - &#x60;error&#x60;: if a failure occurs - &#x60;notification&#x60;: notification messages for operation being performed  &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster. &gt; * The streaming protocol uses Server-Sent Events (SSE)     
 
 ### Parameters
 
-| Name | Type |
-|------------- | ------------- |
-| **sendAgentMessageStreamingRequest** | [**SendAgentMessageStreamingRequest**](SendAgentMessageStreamingRequest.md)
+| Name                                 | Type                                                                        |
+|--------------------------------------|-----------------------------------------------------------------------------|
+| **sendAgentMessageStreamingRequest** | [**SendAgentMessageStreamingRequest**](SendAgentMessageStreamingRequest.md) |
 
 ### Return type
 
@@ -291,12 +291,12 @@ Version: 10.7.0.cl or later
  - **Accept**: application/json
 
 ### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Common successful response |  -  |
-| **201** | Common error response |  -  |
-| **400** | Operation failed |  -  |
-| **500** | Operation failed |  -  |
+| Status code | Description                | Response headers |
+|-------------|----------------------------|------------------|
+| **200**     | Common successful response | -                |
+| **201**     | Common error response      | -                |
+| **400**     | Operation failed           | -                |
+| **500**     | Operation failed           | -                |
 
 <a id="sendMessage"></a>
 # **sendMessage**
@@ -308,10 +308,10 @@ Version: 10.7.0.cl or later
 
 ### Parameters
 
-| Name | Type |
-|------------- | ------------- |
-| **conversationIdentifier** | **String**
-| **sendMessageRequest** | [**SendMessageRequest**](SendMessageRequest.md)
+| Name                       | Type                                            |
+|----------------------------|-------------------------------------------------|
+| **conversationIdentifier** | **String**                                      |
+| **sendMessageRequest**     | [**SendMessageRequest**](SendMessageRequest.md) |
 
 ### Return type
 
@@ -327,12 +327,12 @@ Version: 10.7.0.cl or later
  - **Accept**: application/json
 
 ### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Common successful response |  -  |
-| **201** | Common error response |  -  |
-| **400** | Operation failed |  -  |
-| **500** | Operation failed |  -  |
+| Status code | Description                | Response headers |
+|-------------|----------------------------|------------------|
+| **200**     | Common successful response | -                |
+| **201**     | Common error response      | -                |
+| **400**     | Operation failed           | -                |
+| **500**     | Operation failed           | -                |
 
 <a id="setNLInstructions"></a>
 # **setNLInstructions**
@@ -344,9 +344,9 @@ Version: 10.7.0.cl or later
 
 ### Parameters
 
-| Name | Type |
-|------------- | ------------- |
-| **setNLInstructionsRequest** | [**SetNLInstructionsRequest**](SetNLInstructionsRequest.md)
+| Name                         | Type                                                        |
+|------------------------------|-------------------------------------------------------------|
+| **setNLInstructionsRequest** | [**SetNLInstructionsRequest**](SetNLInstructionsRequest.md) |
 
 ### Return type
 
@@ -362,12 +362,12 @@ Version: 10.7.0.cl or later
  - **Accept**: application/json
 
 ### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Common successful response |  -  |
-| **201** | Common error response |  -  |
-| **400** | Operation failed |  -  |
-| **500** | Operation failed |  -  |
+| Status code | Description                | Response headers |
+|-------------|----------------------------|------------------|
+| **200**     | Common successful response | -                |
+| **201**     | Common error response      | -                |
+| **400**     | Operation failed           | -                |
+| **500**     | Operation failed           | -                |
 
 <a id="singleAnswer"></a>
 # **singleAnswer**
@@ -379,9 +379,9 @@ Version: 10.7.0.cl or later
 
 ### Parameters
 
-| Name | Type |
-|------------- | ------------- |
-| **singleAnswerRequest** | [**SingleAnswerRequest**](SingleAnswerRequest.md)
+| Name                    | Type                                              |
+|-------------------------|---------------------------------------------------|
+| **singleAnswerRequest** | [**SingleAnswerRequest**](SingleAnswerRequest.md) |
 
 ### Return type
 
@@ -397,10 +397,10 @@ Version: 10.7.0.cl or later
  - **Accept**: application/json
 
 ### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Common successful response |  -  |
-| **201** | Common error response |  -  |
-| **400** | Operation failed |  -  |
-| **500** | Operation failed |  -  |
+| Status code | Description                | Response headers |
+|-------------|----------------------------|------------------|
+| **200**     | Common successful response | -                |
+| **201**     | Common error response      | -                |
+| **400**     | Operation failed           | -                |
+| **500**     | Operation failed           | -                |
 

@@ -11,7 +11,6 @@ export * from '../models/ActionDetailsInputCreate';
 export * from '../models/ActivateUserRequest';
 export * from '../models/AgentConversation';
 export * from '../models/AnswerContent';
-export * from '../models/AnswerContextInput';
 export * from '../models/AnswerDataResponse';
 export * from '../models/AssignChangeAuthorRequest';
 export * from '../models/AssignTagRequest';
@@ -186,7 +185,6 @@ export * from '../models/JWTMetadataObject';
 export * from '../models/JWTParameter';
 export * from '../models/JWTUserOptions';
 export * from '../models/JWTUserOptionsFull';
-export * from '../models/LBContextInput';
 export * from '../models/LiveboardContent';
 export * from '../models/LiveboardDataResponse';
 export * from '../models/LiveboardOptions';
@@ -420,7 +418,6 @@ import { ActionDetailsInputCreate } from '../models/ActionDetailsInputCreate';
 import { ActivateUserRequest } from '../models/ActivateUserRequest';
 import { AgentConversation } from '../models/AgentConversation';
 import { AnswerContent } from '../models/AnswerContent';
-import { AnswerContextInput } from '../models/AnswerContextInput';
 import { AnswerDataResponse } from '../models/AnswerDataResponse';
 import { AssignChangeAuthorRequest } from '../models/AssignChangeAuthorRequest';
 import { AssignTagRequest } from '../models/AssignTagRequest';
@@ -595,7 +592,6 @@ import { JWTMetadataObject , JWTMetadataObjectTypeEnum   } from '../models/JWTMe
 import { JWTParameter } from '../models/JWTParameter';
 import { JWTUserOptions } from '../models/JWTUserOptions';
 import { JWTUserOptionsFull } from '../models/JWTUserOptionsFull';
-import { LBContextInput } from '../models/LBContextInput';
 import { LiveboardContent } from '../models/LiveboardContent';
 import { LiveboardDataResponse } from '../models/LiveboardDataResponse';
 import { LiveboardOptions } from '../models/LiveboardOptions';
@@ -1071,7 +1067,6 @@ let typeMap: {[index: string]: any} = {
     "ActivateUserRequest": ActivateUserRequest,
     "AgentConversation": AgentConversation,
     "AnswerContent": AnswerContent,
-    "AnswerContextInput": AnswerContextInput,
     "AnswerDataResponse": AnswerDataResponse,
     "AssignChangeAuthorRequest": AssignChangeAuthorRequest,
     "AssignTagRequest": AssignTagRequest,
@@ -1246,7 +1241,6 @@ let typeMap: {[index: string]: any} = {
     "JWTParameter": JWTParameter,
     "JWTUserOptions": JWTUserOptions,
     "JWTUserOptionsFull": JWTUserOptionsFull,
-    "LBContextInput": LBContextInput,
     "LiveboardContent": LiveboardContent,
     "LiveboardDataResponse": LiveboardDataResponse,
     "LiveboardOptions": LiveboardOptions,

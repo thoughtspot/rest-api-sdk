@@ -70,7 +70,6 @@ models/ActionDetailsInputCreate.ts
 models/ActivateUserRequest.ts
 models/AgentConversation.ts
 models/AnswerContent.ts
-models/AnswerContextInput.ts
 models/AnswerDataResponse.ts
 models/AssignChangeAuthorRequest.ts
 models/AssignTagRequest.ts
@@ -245,7 +244,6 @@ models/JWTMetadataObject.ts
 models/JWTParameter.ts
 models/JWTUserOptions.ts
 models/JWTUserOptionsFull.ts
-models/LBContextInput.ts
 models/LiveboardContent.ts
 models/LiveboardDataResponse.ts
 models/LiveboardOptions.ts

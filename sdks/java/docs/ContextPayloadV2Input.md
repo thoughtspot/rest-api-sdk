@@ -5,21 +5,17 @@
 
 ## Properties
 
-| Name | Type | Description | Notes |
-|------------ | ------------- | ------------- | -------------|
-|**type** | [**TypeEnum**](#TypeEnum) | Type of the context. |  [optional] |
-|**answerContext** | [**AnswerContextInput**](AnswerContextInput.md) |  |  [optional] |
-|**liveboardContext** | [**LBContextInput**](LBContextInput.md) |  |  [optional] |
-|**dataSourceContext** | [**DataSourceContextInput**](DataSourceContextInput.md) |  |  [optional] |
+| Name                  | Type                                                    | Description          | Notes      |
+|-----------------------|---------------------------------------------------------|----------------------|------------|
+| **type**              | [**TypeEnum**](#TypeEnum)                               | Type of the context. | [optional] |
+| **dataSourceContext** | [**DataSourceContextInput**](DataSourceContextInput.md) |                      | [optional] |
 
 
 
 ## Enum: TypeEnum
 
-| Name | Value |
-|---- | -----|
-| ANSWER | &quot;answer&quot; |
-| LIVEBOARD | &quot;liveboard&quot; |
+| Name        | Value                   |
+|-------------|-------------------------|
 | DATA_SOURCE | &quot;data_source&quot; |
 
 

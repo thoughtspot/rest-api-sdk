@@ -17603,42 +17603,11 @@ components:
         type:
           description: Type of the context.
           enum:
-          - answer
-          - liveboard
-          - data_source
+          - DATA_SOURCE
           nullable: true
           type: string
-        answer_context:
-          $ref: '#/components/schemas/AnswerContextInput'
-        liveboard_context:
-          $ref: '#/components/schemas/LBContextInput'
         data_source_context:
           $ref: '#/components/schemas/DataSourceContextInput'
-      type: object
-    AnswerContextInput:
-      properties:
-        session_identifier:
-          description: Unique identifier of the answer session.
-          type: string
-        generation_number:
-          description: Generation number of the answer.
-          format: int32
-          type: integer
-      required:
-      - generation_number
-      - session_identifier
-      type: object
-    LBContextInput:
-      properties:
-        liveboard_identifier:
-          description: Unique identifier of the liveboard.
-          type: string
-        visualization_identifier:
-          description: Unique identifier of the visualization.
-          type: string
-      required:
-      - liveboard_identifier
-      - visualization_identifier
       type: object
     DataSourceContextInput:
       properties:

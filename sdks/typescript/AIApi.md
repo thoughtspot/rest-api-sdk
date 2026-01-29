@@ -2,25 +2,24 @@
 
 All URIs are relative to *CLUSTER_URL*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**createAgentConversation**](AIApi.md#createAgentConversation) | **POST** /api/rest/2.0/ai/agent/conversation/create | 
-[**createConversation**](AIApi.md#createConversation) | **POST** /api/rest/2.0/ai/conversation/create | 
-[**getDataSourceSuggestions**](AIApi.md#getDataSourceSuggestions) | **POST** /api/rest/2.0/ai/data-source-suggestions | 
-[**getNLInstructions**](AIApi.md#getNLInstructions) | **POST** /api/rest/2.0/ai/instructions/get | 
-[**getRelevantQuestions**](AIApi.md#getRelevantQuestions) | **POST** /api/rest/2.0/ai/relevant-questions/ | 
-[**queryGetDecomposedQuery**](AIApi.md#queryGetDecomposedQuery) | **POST** /api/rest/2.0/ai/analytical-questions | 
-[**sendAgentMessage**](AIApi.md#sendAgentMessage) | **POST** /api/rest/2.0/ai/agent/{conversation_identifier}/converse | 
-[**sendAgentMessageStreaming**](AIApi.md#sendAgentMessageStreaming) | **POST** /api/rest/2.0/ai/agent/converse/sse | 
-[**sendMessage**](AIApi.md#sendMessage) | **POST** /api/rest/2.0/ai/conversation/{conversation_identifier}/converse | 
-[**setNLInstructions**](AIApi.md#setNLInstructions) | **POST** /api/rest/2.0/ai/instructions/set | 
-[**singleAnswer**](AIApi.md#singleAnswer) | **POST** /api/rest/2.0/ai/answer/create | 
-
+| Method                                                              | HTTP request                                                              | Description |
+|---------------------------------------------------------------------|---------------------------------------------------------------------------|-------------|
+| [**createAgentConversation**](AIApi.md#createAgentConversation)     | **POST** /api/rest/2.0/ai/agent/conversation/create                       |             |
+| [**createConversation**](AIApi.md#createConversation)               | **POST** /api/rest/2.0/ai/conversation/create                             |             |
+| [**getDataSourceSuggestions**](AIApi.md#getDataSourceSuggestions)   | **POST** /api/rest/2.0/ai/data-source-suggestions                         |             |
+| [**getNLInstructions**](AIApi.md#getNLInstructions)                 | **POST** /api/rest/2.0/ai/instructions/get                                |             |
+| [**getRelevantQuestions**](AIApi.md#getRelevantQuestions)           | **POST** /api/rest/2.0/ai/relevant-questions/                             |             |
+| [**queryGetDecomposedQuery**](AIApi.md#queryGetDecomposedQuery)     | **POST** /api/rest/2.0/ai/analytical-questions                            |             |
+| [**sendAgentMessage**](AIApi.md#sendAgentMessage)                   | **POST** /api/rest/2.0/ai/agent/{conversation_identifier}/converse        |             |
+| [**sendAgentMessageStreaming**](AIApi.md#sendAgentMessageStreaming) | **POST** /api/rest/2.0/ai/agent/converse/sse                              |             |
+| [**sendMessage**](AIApi.md#sendMessage)                             | **POST** /api/rest/2.0/ai/conversation/{conversation_identifier}/converse |             |
+| [**setNLInstructions**](AIApi.md#setNLInstructions)                 | **POST** /api/rest/2.0/ai/instructions/set                                |             |
+| [**singleAnswer**](AIApi.md#singleAnswer)                           | **POST** /api/rest/2.0/ai/answer/create                                   |             |
 
 # **createAgentConversation**
 > AgentConversation createAgentConversation(createAgentConversationRequest)
 
-Version: 10.13.0.cl or later 
+Version: 26.2.0.cl or later 
 
 ### Example
 
@@ -50,10 +49,9 @@ apiInstance.createAgentConversation(
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **createAgentConversationRequest** | **CreateAgentConversationRequest**|  |
-
+| Name                               | Type                               | Description | Notes |
+|------------------------------------|------------------------------------|-------------|-------|
+| **createAgentConversationRequest** | **CreateAgentConversationRequest** |             |       |
 
 ### Return type
 
@@ -70,12 +68,12 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Common successful response |  -  |
-**201** | Common error response |  -  |
-**400** | Operation failed |  -  |
-**500** | Operation failed |  -  |
+| Status code | Description                | Response headers |
+|-------------|----------------------------|------------------|
+| **200**     | Common successful response | -                |
+| **201**     | Common error response      | -                |
+| **400**     | Operation failed           | -                |
+| **500**     | Operation failed           | -                |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
@@ -112,10 +110,9 @@ apiInstance.createConversation(
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **createConversationRequest** | **CreateConversationRequest**|  |
-
+| Name                          | Type                          | Description | Notes |
+|-------------------------------|-------------------------------|-------------|-------|
+| **createConversationRequest** | **CreateConversationRequest** |             |       |
 
 ### Return type
 
@@ -132,12 +129,12 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Common successful response |  -  |
-**201** | Common error response |  -  |
-**400** | Operation failed |  -  |
-**500** | Operation failed |  -  |
+| Status code | Description                | Response headers |
+|-------------|----------------------------|------------------|
+| **200**     | Common successful response | -                |
+| **201**     | Common error response      | -                |
+| **400**     | Operation failed           | -                |
+| **500**     | Operation failed           | -                |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
@@ -173,10 +170,9 @@ apiInstance.getDataSourceSuggestions(
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **getDataSourceSuggestionsRequest** | **GetDataSourceSuggestionsRequest**|  |
-
+| Name                                | Type                                | Description | Notes |
+|-------------------------------------|-------------------------------------|-------------|-------|
+| **getDataSourceSuggestionsRequest** | **GetDataSourceSuggestionsRequest** |             |       |
 
 ### Return type
 
@@ -193,12 +189,12 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Common successful response |  -  |
-**201** | Common error response |  -  |
-**400** | Operation failed |  -  |
-**500** | Operation failed |  -  |
+| Status code | Description                | Response headers |
+|-------------|----------------------------|------------------|
+| **200**     | Common successful response | -                |
+| **201**     | Common error response      | -                |
+| **400**     | Operation failed           | -                |
+| **500**     | Operation failed           | -                |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
@@ -234,10 +230,9 @@ apiInstance.getNLInstructions(
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **getNLInstructionsRequest** | **GetNLInstructionsRequest**|  |
-
+| Name                         | Type                         | Description | Notes |
+|------------------------------|------------------------------|-------------|-------|
+| **getNLInstructionsRequest** | **GetNLInstructionsRequest** |             |       |
 
 ### Return type
 
@@ -254,12 +249,12 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Common successful response |  -  |
-**201** | Common error response |  -  |
-**400** | Operation failed |  -  |
-**500** | Operation failed |  -  |
+| Status code | Description                | Response headers |
+|-------------|----------------------------|------------------|
+| **200**     | Common successful response | -                |
+| **201**     | Common error response      | -                |
+| **400**     | Operation failed           | -                |
+| **500**     | Operation failed           | -                |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
@@ -299,10 +294,9 @@ apiInstance.getRelevantQuestions(
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **getRelevantQuestionsRequest** | **GetRelevantQuestionsRequest**|  |
-
+| Name                            | Type                            | Description | Notes |
+|---------------------------------|---------------------------------|-------------|-------|
+| **getRelevantQuestionsRequest** | **GetRelevantQuestionsRequest** |             |       |
 
 ### Return type
 
@@ -319,12 +313,12 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Common successful response |  -  |
-**201** | Common error response |  -  |
-**400** | Operation failed |  -  |
-**500** | Operation failed |  -  |
+| Status code | Description                | Response headers |
+|-------------|----------------------------|------------------|
+| **200**     | Common successful response | -                |
+| **201**     | Common error response      | -                |
+| **400**     | Operation failed           | -                |
+| **500**     | Operation failed           | -                |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
@@ -374,10 +368,9 @@ apiInstance.queryGetDecomposedQuery(
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **queryGetDecomposedQueryRequest** | **QueryGetDecomposedQueryRequest**|  |
-
+| Name                               | Type                               | Description | Notes |
+|------------------------------------|------------------------------------|-------------|-------|
+| **queryGetDecomposedQueryRequest** | **QueryGetDecomposedQueryRequest** |             |       |
 
 ### Return type
 
@@ -394,19 +387,19 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Common successful response |  -  |
-**201** | Common error response |  -  |
-**400** | Operation failed |  -  |
-**500** | Operation failed |  -  |
+| Status code | Description                | Response headers |
+|-------------|----------------------------|------------------|
+| **200**     | Common successful response | -                |
+| **201**     | Common error response      | -                |
+| **400**     | Operation failed           | -                |
+| **500**     | Operation failed           | -                |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **sendAgentMessage**
 > any sendAgentMessage(sendAgentMessageRequest)
 
- Version: 10.15.0.cl or later   This API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages.  To use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.   #### Usage guidelines  To initiate or continue a conversation, the request must include: - `conversation_identifier`: a unique session ID for continuity and message tracking - `messages`: an array of one or more text messages, each with a value and type  The API returns a array of object with a type, message, and metadata. - `type`: Type of the message — text, answer, or error. - `message`: Main content of the response. - `metadata`: Additional info depending on the message type.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.     
+ Version: 26.2.0.cl or later   This API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages.  To use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.   #### Usage guidelines  To initiate or continue a conversation, the request must include: - `conversation_identifier`: a unique session ID for continuity and message tracking - `messages`: an array of one or more text messages, each with a value and type  The API returns a array of object with a type, message, and metadata. - `type`: Type of the message — text, answer, or error. - `message`: Main content of the response. - `metadata`: Additional info depending on the message type.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.     
 
 ### Example
 
@@ -439,11 +432,10 @@ apiInstance.sendAgentMessage(
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **sendAgentMessageRequest** | **SendAgentMessageRequest**|  |
- **conversationIdentifier** | [**string**] | Unique identifier for the conversation (used to track context) | defaults to undefined
-
+| Name                        | Type                        | Description                                                    | Notes                 |
+|-----------------------------|-----------------------------|----------------------------------------------------------------|-----------------------|
+| **sendAgentMessageRequest** | **SendAgentMessageRequest** |                                                                |                       |
+| **conversationIdentifier**  | [**string**]                | Unique identifier for the conversation (used to track context) | defaults to undefined |
 
 ### Return type
 
@@ -460,19 +452,19 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Common successful response |  -  |
-**201** | Common error response |  -  |
-**400** | Operation failed |  -  |
-**500** | Operation failed |  -  |
+| Status code | Description                | Response headers |
+|-------------|----------------------------|------------------|
+| **200**     | Common successful response | -                |
+| **201**     | Common error response      | -                |
+| **400**     | Operation failed           | -                |
+| **500**     | Operation failed           | -                |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **sendAgentMessageStreaming**
 > SendAgentMessageResponse sendAgentMessageStreaming(sendAgentMessageStreamingRequest)
 
- Version: 10.13.0.cl or later   This API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages.  To use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.   #### Usage guidelines  To initiate or continue a conversation, the request must include: - `conversation_identifier`: a unique session ID for continuity and message tracking - `messages`: an array of one or more text messages, each with a value and type  Additionally, user can specify what tool can be included `conversation_settings` parameter, which supports: - `enable_contextual_change_analysis` (default: false) - `enable_natural_language_answer_generation` (default: true) - `enable_reasoning` (default: false)  If the request is valid, the API returns a stream of messages in real time, including: - `ack`: confirms receipt of the request - `text / text-chunk`: content chunks, optionally formatted (e.g., markdown) - `answer`: the final structured response with metadata and analytics - `error`: if a failure occurs - `notification`: notification messages for operation being performed  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster. > * The streaming protocol uses Server-Sent Events (SSE)     
+ Version: 26.2.0.cl or later   This API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages.  To use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.   #### Usage guidelines  To initiate or continue a conversation, the request must include: - `conversation_identifier`: a unique session ID for continuity and message tracking - `messages`: an array of one or more text messages, each with a value and type  Additionally, user can specify what tool can be included `conversation_settings` parameter, which supports: - `enable_contextual_change_analysis` (default: false) - `enable_natural_language_answer_generation` (default: true) - `enable_reasoning` (default: false)  If the request is valid, the API returns a stream of messages in real time, including: - `ack`: confirms receipt of the request - `text / text-chunk`: content chunks, optionally formatted (e.g., markdown) - `answer`: the final structured response with metadata and analytics - `error`: if a failure occurs - `notification`: notification messages for operation being performed  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster. > * The streaming protocol uses Server-Sent Events (SSE)     
 
 ### Example
 
@@ -504,10 +496,9 @@ apiInstance.sendAgentMessageStreaming(
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **sendAgentMessageStreamingRequest** | **SendAgentMessageStreamingRequest**|  |
-
+| Name                                 | Type                                 | Description | Notes |
+|--------------------------------------|--------------------------------------|-------------|-------|
+| **sendAgentMessageStreamingRequest** | **SendAgentMessageStreamingRequest** |             |       |
 
 ### Return type
 
@@ -524,12 +515,12 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Common successful response |  -  |
-**201** | Common error response |  -  |
-**400** | Operation failed |  -  |
-**500** | Operation failed |  -  |
+| Status code | Description                | Response headers |
+|-------------|----------------------------|------------------|
+| **200**     | Common successful response | -                |
+| **201**     | Common error response      | -                |
+| **400**     | Operation failed           | -                |
+| **500**     | Operation failed           | -                |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
@@ -568,11 +559,10 @@ apiInstance.sendMessage(
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **sendMessageRequest** | **SendMessageRequest**|  |
- **conversationIdentifier** | [**string**] | Unique identifier of the conversation. | defaults to undefined
-
+| Name                       | Type                   | Description                            | Notes                 |
+|----------------------------|------------------------|----------------------------------------|-----------------------|
+| **sendMessageRequest**     | **SendMessageRequest** |                                        |                       |
+| **conversationIdentifier** | [**string**]           | Unique identifier of the conversation. | defaults to undefined |
 
 ### Return type
 
@@ -589,12 +579,12 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Common successful response |  -  |
-**201** | Common error response |  -  |
-**400** | Operation failed |  -  |
-**500** | Operation failed |  -  |
+| Status code | Description                | Response headers |
+|-------------|----------------------------|------------------|
+| **200**     | Common successful response | -                |
+| **201**     | Common error response      | -                |
+| **400**     | Operation failed           | -                |
+| **500**     | Operation failed           | -                |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
@@ -638,10 +628,9 @@ apiInstance.setNLInstructions(
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **setNLInstructionsRequest** | **SetNLInstructionsRequest**|  |
-
+| Name                         | Type                         | Description | Notes |
+|------------------------------|------------------------------|-------------|-------|
+| **setNLInstructionsRequest** | **SetNLInstructionsRequest** |             |       |
 
 ### Return type
 
@@ -658,12 +647,12 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Common successful response |  -  |
-**201** | Common error response |  -  |
-**400** | Operation failed |  -  |
-**500** | Operation failed |  -  |
+| Status code | Description                | Response headers |
+|-------------|----------------------------|------------------|
+| **200**     | Common successful response | -                |
+| **201**     | Common error response      | -                |
+| **400**     | Operation failed           | -                |
+| **500**     | Operation failed           | -                |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
@@ -700,10 +689,9 @@ apiInstance.singleAnswer(
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **singleAnswerRequest** | **SingleAnswerRequest**|  |
-
+| Name                    | Type                    | Description | Notes |
+|-------------------------|-------------------------|-------------|-------|
+| **singleAnswerRequest** | **SingleAnswerRequest** |             |       |
 
 ### Return type
 
@@ -720,12 +708,12 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Common successful response |  -  |
-**201** | Common error response |  -  |
-**400** | Operation failed |  -  |
-**500** | Operation failed |  -  |
+| Status code | Description                | Response headers |
+|-------------|----------------------------|------------------|
+| **200**     | Common successful response | -                |
+| **201**     | Common error response      | -                |
+| **400**     | Operation failed           | -                |
+| **500**     | Operation failed           | -                |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
