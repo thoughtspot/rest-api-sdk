@@ -78,6 +78,7 @@ __export(typescript_exports, {
   CALLBACKInputMandatory: () => CALLBACKInputMandatory,
   CalendarResponse: () => CalendarResponse,
   ChangeUserPasswordRequest: () => ChangeUserPasswordRequest,
+  ChannelValidationDetail: () => ChannelValidationDetail,
   ClusterNonEmbedAccess: () => ClusterNonEmbedAccess,
   ClusterNonEmbedAccessInput: () => ClusterNonEmbedAccessInput,
   Column: () => Column,
@@ -95,6 +96,7 @@ __export(typescript_exports, {
   CommitResponse: () => CommitResponse,
   CommiterType: () => CommiterType,
   CommunicationChannelPreferencesResponse: () => CommunicationChannelPreferencesResponse,
+  CommunicationChannelValidateResponse: () => CommunicationChannelValidateResponse,
   ConnectionConfigurationResponse: () => ConnectionConfigurationResponse,
   ConnectionConfigurationSearchRequest: () => ConnectionConfigurationSearchRequest,
   ConnectionConfigurationsApi: () => PromiseConnectionConfigurationsApi,
@@ -1753,6 +1755,55 @@ _ChangeUserPasswordRequest.attributeTypeMap = [
 ];
 var ChangeUserPasswordRequest = _ChangeUserPasswordRequest;
 
+// models/ChannelValidationDetail.ts
+var _ChannelValidationDetail = class _ChannelValidationDetail {
+  static getAttributeTypeMap() {
+    return _ChannelValidationDetail.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ChannelValidationDetail.discriminator = void 0;
+_ChannelValidationDetail.attributeTypeMap = [
+  {
+    "name": "validation_step",
+    "baseName": "validation_step",
+    "type": "ChannelValidationDetailValidationStepEnum",
+    "format": ""
+  },
+  {
+    "name": "status",
+    "baseName": "status",
+    "type": "ChannelValidationDetailStatusEnum",
+    "format": ""
+  },
+  {
+    "name": "error_code",
+    "baseName": "error_code",
+    "type": "ChannelValidationDetailErrorCodeEnum",
+    "format": ""
+  },
+  {
+    "name": "http_status",
+    "baseName": "http_status",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "error_message",
+    "baseName": "error_message",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "additional_info",
+    "baseName": "additional_info",
+    "type": "string",
+    "format": ""
+  }
+];
+var ChannelValidationDetail = _ChannelValidationDetail;
+
 // models/ClusterNonEmbedAccess.ts
 var _ClusterNonEmbedAccess = class _ClusterNonEmbedAccess {
   static getAttributeTypeMap() {
@@ -2291,6 +2342,55 @@ _CommunicationChannelPreferencesResponse.attributeTypeMap = [
   }
 ];
 var CommunicationChannelPreferencesResponse = _CommunicationChannelPreferencesResponse;
+
+// models/CommunicationChannelValidateResponse.ts
+var _CommunicationChannelValidateResponse = class _CommunicationChannelValidateResponse {
+  static getAttributeTypeMap() {
+    return _CommunicationChannelValidateResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CommunicationChannelValidateResponse.discriminator = void 0;
+_CommunicationChannelValidateResponse.attributeTypeMap = [
+  {
+    "name": "channel_type",
+    "baseName": "channel_type",
+    "type": "CommunicationChannelValidateResponseChannelTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "channel_id",
+    "baseName": "channel_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "channel_name",
+    "baseName": "channel_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "event_type",
+    "baseName": "event_type",
+    "type": "CommunicationChannelValidateResponseEventTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "result_code",
+    "baseName": "result_code",
+    "type": "CommunicationChannelValidateResponseResultCodeEnum",
+    "format": ""
+  },
+  {
+    "name": "details",
+    "baseName": "details",
+    "type": "Array<ChannelValidationDetail>",
+    "format": ""
+  }
+];
+var CommunicationChannelValidateResponse = _CommunicationChannelValidateResponse;
 
 // models/ConnectionConfigurationResponse.ts
 var _ConnectionConfigurationResponse = class _ConnectionConfigurationResponse {
@@ -15885,7 +15985,13 @@ var enumsMap = /* @__PURE__ */ new Set([
   "AssociateMetadataInputTypeEnum",
   "AssociateMetadataInputCreateTypeEnum",
   "AuthorMetadataTypeInputTypeEnum",
+  "ChannelValidationDetailValidationStepEnum",
+  "ChannelValidationDetailStatusEnum",
+  "ChannelValidationDetailErrorCodeEnum",
   "ColumnSecurityRuleGroupOperationOperationEnum",
+  "CommunicationChannelValidateResponseChannelTypeEnum",
+  "CommunicationChannelValidateResponseEventTypeEnum",
+  "CommunicationChannelValidateResponseResultCodeEnum",
   "ConnectionConfigurationResponsePolicyProcessesEnum",
   "ConnectionConfigurationResponseDataWarehouseTypeEnum",
   "ConnectionConfigurationResponsePolicyTypeEnum",
@@ -16127,6 +16233,7 @@ var typeMap = {
   "CALLBACKInputMandatory": CALLBACKInputMandatory,
   "CalendarResponse": CalendarResponse,
   "ChangeUserPasswordRequest": ChangeUserPasswordRequest,
+  "ChannelValidationDetail": ChannelValidationDetail,
   "ClusterNonEmbedAccess": ClusterNonEmbedAccess,
   "ClusterNonEmbedAccessInput": ClusterNonEmbedAccessInput,
   "Column": Column,
@@ -16144,6 +16251,7 @@ var typeMap = {
   "CommitResponse": CommitResponse,
   "CommiterType": CommiterType,
   "CommunicationChannelPreferencesResponse": CommunicationChannelPreferencesResponse,
+  "CommunicationChannelValidateResponse": CommunicationChannelValidateResponse,
   "ConnectionConfigurationResponse": ConnectionConfigurationResponse,
   "ConnectionConfigurationSearchRequest": ConnectionConfigurationSearchRequest,
   "ConnectionInput": ConnectionInput,
@@ -46651,6 +46759,7 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   CALLBACKInputMandatory,
   CalendarResponse,
   ChangeUserPasswordRequest,
+  ChannelValidationDetail,
   ClusterNonEmbedAccess,
   ClusterNonEmbedAccessInput,
   Column,
@@ -46668,6 +46777,7 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   CommitResponse,
   CommiterType,
   CommunicationChannelPreferencesResponse,
+  CommunicationChannelValidateResponse,
   ConnectionConfigurationResponse,
   ConnectionConfigurationSearchRequest,
   ConnectionConfigurationsApi,

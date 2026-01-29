@@ -32,6 +32,7 @@ export * from '../models/CALLBACKInput';
 export * from '../models/CALLBACKInputMandatory';
 export * from '../models/CalendarResponse';
 export * from '../models/ChangeUserPasswordRequest';
+export * from '../models/ChannelValidationDetail';
 export * from '../models/ClusterNonEmbedAccess';
 export * from '../models/ClusterNonEmbedAccessInput';
 export * from '../models/Column';
@@ -49,6 +50,7 @@ export * from '../models/CommitHistoryResponse';
 export * from '../models/CommitResponse';
 export * from '../models/CommiterType';
 export * from '../models/CommunicationChannelPreferencesResponse';
+export * from '../models/CommunicationChannelValidateResponse';
 export * from '../models/ConnectionConfigurationResponse';
 export * from '../models/ConnectionConfigurationSearchRequest';
 export * from '../models/ConnectionInput';
@@ -424,6 +426,7 @@ import { CALLBACKInput } from '../models/CALLBACKInput';
 import { CALLBACKInputMandatory } from '../models/CALLBACKInputMandatory';
 import { CalendarResponse } from '../models/CalendarResponse';
 import { ChangeUserPasswordRequest } from '../models/ChangeUserPasswordRequest';
+import { ChannelValidationDetail, ChannelValidationDetailValidationStepEnum  , ChannelValidationDetailStatusEnum  , ChannelValidationDetailErrorCodeEnum      } from '../models/ChannelValidationDetail';
 import { ClusterNonEmbedAccess } from '../models/ClusterNonEmbedAccess';
 import { ClusterNonEmbedAccessInput } from '../models/ClusterNonEmbedAccessInput';
 import { Column } from '../models/Column';
@@ -441,6 +444,7 @@ import { CommitHistoryResponse } from '../models/CommitHistoryResponse';
 import { CommitResponse } from '../models/CommitResponse';
 import { CommiterType } from '../models/CommiterType';
 import { CommunicationChannelPreferencesResponse } from '../models/CommunicationChannelPreferencesResponse';
+import { CommunicationChannelValidateResponse, CommunicationChannelValidateResponseChannelTypeEnum    , CommunicationChannelValidateResponseEventTypeEnum  , CommunicationChannelValidateResponseResultCodeEnum    } from '../models/CommunicationChannelValidateResponse';
 import { ConnectionConfigurationResponse     , ConnectionConfigurationResponsePolicyProcessesEnum   , ConnectionConfigurationResponseDataWarehouseTypeEnum  , ConnectionConfigurationResponsePolicyTypeEnum     } from '../models/ConnectionConfigurationResponse';
 import { ConnectionConfigurationSearchRequest  , ConnectionConfigurationSearchRequestPolicyTypeEnum   } from '../models/ConnectionConfigurationSearchRequest';
 import { ConnectionInput } from '../models/ConnectionInput';
@@ -807,7 +811,13 @@ let enumsMap: Set<string> = new Set<string>([
     "AssociateMetadataInputTypeEnum",
     "AssociateMetadataInputCreateTypeEnum",
     "AuthorMetadataTypeInputTypeEnum",
+    "ChannelValidationDetailValidationStepEnum",
+    "ChannelValidationDetailStatusEnum",
+    "ChannelValidationDetailErrorCodeEnum",
     "ColumnSecurityRuleGroupOperationOperationEnum",
+    "CommunicationChannelValidateResponseChannelTypeEnum",
+    "CommunicationChannelValidateResponseEventTypeEnum",
+    "CommunicationChannelValidateResponseResultCodeEnum",
     "ConnectionConfigurationResponsePolicyProcessesEnum",
     "ConnectionConfigurationResponseDataWarehouseTypeEnum",
     "ConnectionConfigurationResponsePolicyTypeEnum",
@@ -1050,6 +1060,7 @@ let typeMap: {[index: string]: any} = {
     "CALLBACKInputMandatory": CALLBACKInputMandatory,
     "CalendarResponse": CalendarResponse,
     "ChangeUserPasswordRequest": ChangeUserPasswordRequest,
+    "ChannelValidationDetail": ChannelValidationDetail,
     "ClusterNonEmbedAccess": ClusterNonEmbedAccess,
     "ClusterNonEmbedAccessInput": ClusterNonEmbedAccessInput,
     "Column": Column,
@@ -1067,6 +1078,7 @@ let typeMap: {[index: string]: any} = {
     "CommitResponse": CommitResponse,
     "CommiterType": CommiterType,
     "CommunicationChannelPreferencesResponse": CommunicationChannelPreferencesResponse,
+    "CommunicationChannelValidateResponse": CommunicationChannelValidateResponse,
     "ConnectionConfigurationResponse": ConnectionConfigurationResponse,
     "ConnectionConfigurationSearchRequest": ConnectionConfigurationSearchRequest,
     "ConnectionInput": ConnectionInput,

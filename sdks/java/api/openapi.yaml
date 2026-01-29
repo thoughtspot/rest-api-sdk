@@ -13896,6 +13896,88 @@ components:
           nullable: true
           type: array
       type: object
+    CommunicationChannelValidateResponse:
+      description: Response containing validation results for communication channel
+        configuration.
+      properties:
+        channel_type:
+          description: Type of communication channel that was validated.
+          enum:
+          - WEBHOOK
+          type: string
+        channel_id:
+          description: "ID of the communication channel (e.g., webhook_id)."
+          type: string
+        channel_name:
+          description: "Name of the communication channel (e.g., webhook name)."
+          nullable: true
+          type: string
+        event_type:
+          description: Event type that was validated.
+          enum:
+          - LIVEBOARD_SCHEDULE
+          type: string
+        result_code:
+          description: Overall result of the validation.
+          enum:
+          - SUCCESS
+          - FAILED
+          - PARTIAL_SUCCESS
+          type: string
+        details:
+          description: Detailed results of various validation sub-steps.
+          items:
+            $ref: '#/components/schemas/ChannelValidationDetail'
+          nullable: true
+          type: array
+      required:
+      - channel_id
+      - channel_type
+      - event_type
+      - result_code
+      type: object
+    ChannelValidationDetail:
+      description: Validation detail result for a sub-step.
+      properties:
+        validation_step:
+          description: The validation step that was performed.
+          enum:
+          - HTTP_CONNECTION_CHECK
+          - STORAGE_FILE_UPLOAD_CHECK
+          type: string
+        status:
+          description: Status of this validation step.
+          enum:
+          - SUCCESS
+          - FAILED
+          type: string
+        error_code:
+          description: Error code if the validation step failed.
+          enum:
+          - INVALID_CREDENTIALS
+          - FORBIDDEN
+          - UNAUTHORIZED
+          - CONNECTION_TIMEOUT
+          - UNKNOWN
+          nullable: true
+          type: string
+        http_status:
+          description: HTTP status code returned by the channel (if applicable).
+          format: int32
+          nullable: true
+          type: integer
+        error_message:
+          description: Error message from the channel or validation process.
+          nullable: true
+          type: string
+        additional_info:
+          description: Additional information about the validation step.
+          nullable: true
+          type: string
+      required:
+      - status
+      - validation_step
+      type: object
     TagMetadataTypeInput:
       properties:
         type:
@@ -21793,14 +21875,14 @@ x-roles:
   tags:
   - 10.14.0.cl
   description: Roles for version 10.14.0.cl
-- name: 9.7.0.cl
-  id: 9.7.0.cl
-  tags:
-  - 9.7.0.cl
-  description: Roles for version 9.7.0.cl
 - name: 26.4.0.cl
   id: 26.4.0.cl
   tags:
   - 26.4.0.cl
   description: Roles for version 26.4.0.cl
+- name: 9.7.0.cl
+  id: 9.7.0.cl
+  tags:
+  - 9.7.0.cl
+  description: Roles for version 9.7.0.cl
 
