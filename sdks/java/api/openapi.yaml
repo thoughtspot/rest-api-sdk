@@ -12838,6 +12838,186 @@ components:
       - record_size
       - total_count
       type: object
+    StorageSetupInfo:
+      description: |-
+        Setup information for customer-managed storage configuration.
+        Provides ThoughtSpot's identity information and IAM policy configuration
+        required for customers to set up cross-account access to their S3 buckets.
+        The response contains cluster-specific configuration based on the cluster_type:
+        - For AWS clusters: aws_config will be populated
+        - For GCP clusters: gcp_config will be populated
+        Example query:
+        ```graphql
+        query {
+          getWebhookStorageConfig(webhook_identifier: "my-webhook") {
+            cluster_type
+            storage_type
+            aws_config {
+              thoughtspot_aws_account_id
+              trust_policy_template
+              setup_instructions
+            }
+            gcp_config {
+              thoughtspot_gcp_service_account_id
+              oidc_provider
+              trust_policy_template
+              setup_instructions
+            }
+          }
+        }
+        ```
+        Example AWS response:
+        {
+          "cluster_type": "AWS",
+          "storage_type": "AWS_S3",
+          "aws_config": {
+            "thoughtspot_aws_account_id": "123456789012",
+            "trust_policy_template": { "Version": "2012-10-17", "Statement": [...] },
+            "setup_instructions": ["1. Create an IAM role...", "2. Add trust policy..."]
+          },
+          "gcp_config": null
+        }
+        Example GCP response:
+        {
+          "cluster_type": "GCP",
+          "storage_type": "AWS_S3",
+          "aws_config": null,
+          "gcp_config": {
+            "thoughtspot_gcp_service_account_id": "115663769112811637952",
+            "oidc_provider": "accounts.google.com",
+            "trust_policy_template": { "Version": "2012-10-17", "Statement": [...] },
+            "setup_instructions": ["1. Add accounts.google.com as Identity Provider..."]
+          }
+        }
+      properties:
+        cluster_type:
+          description: |-
+            The type of ThoughtSpot cluster deployment.
+            Determines which authentication method is used for S3 access.
+            Example: "AWS" or "GCP"
+          enum:
+          - AWS
+          - GCP
+          type: string
+        storage_type:
+          description: "Type of storage destination (e.g., AWS_S3)."
+          enum:
+          - AWS_S3
+          type: string
+        aws_config:
+          $ref: '#/components/schemas/AWSAssumeRoleSetup'
+        gcp_config:
+          $ref: '#/components/schemas/GCPWebIdentitySetup'
+      required:
+      - cluster_type
+      - storage_type
+      type: object
+    AWSAssumeRoleSetup:
+      description: |-
+        Setup information for AWS clusters using STS AssumeRole.
+        ThoughtSpot will use its AWS IAM role to assume your role in your AWS account.
+        Example:
+        {
+          "thoughtspot_aws_account_id": "123456789012",
+          "trust_policy_template": {
+            "Version": "2012-10-17",
+            "Statement": [{
+              "Effect": "Allow",
+              "Principal": { "AWS": "arn:aws:iam::123456789012:root" },
+              "Action": "sts:AssumeRole",
+              "Condition": { "StringEquals": { "sts:ExternalId": "your-external-id" } }
+            }]
+          },
+          "setup_instructions": [
+            "1. Create an IAM role in your AWS account",
+            "2. Copy the trust policy template and attach it to your role",
+            "3. Attach S3 permissions (s3:PutObject, s3:PutObjectAcl) to the role",
+            "4. Use the role ARN in your webhook storage configuration"
+          ]
+        }
+      properties:
+        thoughtspot_aws_account_id:
+          description: |-
+            ThoughtSpot's AWS Account ID. You must include this in your IAM role's
+            trust policy to allow ThoughtSpot to assume your role.
+            Example: "123456789012"
+          type: string
+        trust_policy_template:
+          description: |-
+            Sample IAM trust policy JSON object that you should attach to your IAM role.
+            The policy includes ThoughtSpot's AWS Account ID and your External ID.
+            Example: { "Version": "2012-10-17", "Statement": [{ "Effect": "Allow", "Principal": { "AWS": "arn:aws:iam::123456789012:root" }, "Action": "sts:AssumeRole", "Condition": { "StringEquals": { "sts:ExternalId": "your-external-id" } } }] }
+          type: object
+        setup_instructions:
+          description: |-
+            Step-by-step instructions to configure your AWS IAM role.
+            Example: ["1. Create an IAM role in your AWS account", "2. Add the trust policy with ThoughtSpot's AWS Account ID"]
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - thoughtspot_aws_account_id
+      - trust_policy_template
+      type: object
+    GCPWebIdentitySetup:
+      description: |-
+        Setup information for GCP clusters using STS AssumeRoleWithWebIdentity.
+        ThoughtSpot will use its GCP service account to obtain OIDC tokens for AWS access.
+        Example:
+        {
+          "thoughtspot_gcp_service_account_id": "115663769112811637952",
+          "oidc_provider": "accounts.google.com",
+          "trust_policy_template": {
+            "Version": "2012-10-17",
+            "Statement": [{
+              "Effect": "Allow",
+              "Principal": { "Federated": "arn:aws:iam::YOUR_AWS_ACCOUNT_ID:oidc-provider/accounts.google.com" },
+              "Action": "sts:AssumeRoleWithWebIdentity",
+              "Condition": { "StringEquals": { "accounts.google.com:sub": "115663769112811637952" } }
+            }]
+          },
+          "setup_instructions": [
+            "1. Add accounts.google.com as an Identity Provider in AWS IAM",
+            "2. Create an IAM role with Web Identity Federation trust",
+            "3. Configure the trust policy with ThoughtSpot's GCP service account ID",
+            "4. Attach S3 permissions (s3:PutObject, s3:PutObjectAcl) to the role",
+            "5. Use the role ARN in your webhook storage configuration"
+          ]
+        }
+      properties:
+        thoughtspot_gcp_service_account_id:
+          description: |-
+            ThoughtSpot's GCP service account unique ID (numeric).
+            This is the 'sub' claim in OIDC tokens and must be included in your
+            IAM role's trust policy condition.
+            Example: "115663769112811637952"
+          type: string
+        oidc_provider:
+          description: |-
+            The OIDC identity provider URL. For GCP, this is always 'accounts.google.com'.
+            You must configure this as an Identity Provider in AWS IAM.
+            Example: "accounts.google.com"
+          nullable: true
+          type: string
+        trust_policy_template:
+          description: |-
+            Sample IAM trust policy JSON object for Web Identity Federation.
+            This policy allows ThoughtSpot's GCP service account to assume your AWS role.
+            Example: { "Version": "2012-10-17", "Statement": [{ "Effect": "Allow", "Principal": { "Federated": "arn:aws:iam::YOUR_AWS_ACCOUNT_ID:oidc-provider/accounts.google.com" }, "Action": "sts:AssumeRoleWithWebIdentity", "Condition": { "StringEquals": { "accounts.google.com:sub": "115663769112811637952" } } }] }
+          type: object
+        setup_instructions:
+          description: |-
+            Step-by-step instructions to configure AWS for GCP Web Identity Federation.
+            Example: ["1. Add accounts.google.com as an Identity Provider in AWS IAM", "2. Create an IAM role with Web Identity Federation trust"]
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - thoughtspot_gcp_service_account_id
+      - trust_policy_template
+      type: object
     GenericInfo:
       example:
         name: name
@@ -21618,4 +21798,9 @@ x-roles:
   tags:
   - 9.7.0.cl
   description: Roles for version 9.7.0.cl
+- name: 26.4.0.cl
+  id: 26.4.0.cl
+  tags:
+  - 26.4.0.cl
+  description: Roles for version 26.4.0.cl
 

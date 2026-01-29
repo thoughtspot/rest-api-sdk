@@ -356,6 +356,37 @@ _APIKeyInput.attributeTypeMap = [
 ];
 var APIKeyInput = _APIKeyInput;
 
+// models/AWSAssumeRoleSetup.ts
+var _AWSAssumeRoleSetup = class _AWSAssumeRoleSetup {
+  static getAttributeTypeMap() {
+    return _AWSAssumeRoleSetup.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AWSAssumeRoleSetup.discriminator = void 0;
+_AWSAssumeRoleSetup.attributeTypeMap = [
+  {
+    "name": "thoughtspot_aws_account_id",
+    "baseName": "thoughtspot_aws_account_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "trust_policy_template",
+    "baseName": "trust_policy_template",
+    "type": "any",
+    "format": ""
+  },
+  {
+    "name": "setup_instructions",
+    "baseName": "setup_instructions",
+    "type": "Array<string>",
+    "format": ""
+  }
+];
+var AWSAssumeRoleSetup = _AWSAssumeRoleSetup;
+
 // models/AccessToken.ts
 var _AccessToken = class _AccessToken {
   static getAttributeTypeMap() {
@@ -5479,6 +5510,43 @@ _FrequencyInput.attributeTypeMap = [
   }
 ];
 var FrequencyInput = _FrequencyInput;
+
+// models/GCPWebIdentitySetup.ts
+var _GCPWebIdentitySetup = class _GCPWebIdentitySetup {
+  static getAttributeTypeMap() {
+    return _GCPWebIdentitySetup.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_GCPWebIdentitySetup.discriminator = void 0;
+_GCPWebIdentitySetup.attributeTypeMap = [
+  {
+    "name": "thoughtspot_gcp_service_account_id",
+    "baseName": "thoughtspot_gcp_service_account_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "oidc_provider",
+    "baseName": "oidc_provider",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "trust_policy_template",
+    "baseName": "trust_policy_template",
+    "type": "any",
+    "format": ""
+  },
+  {
+    "name": "setup_instructions",
+    "baseName": "setup_instructions",
+    "type": "Array<string>",
+    "format": ""
+  }
+];
+var GCPWebIdentitySetup = _GCPWebIdentitySetup;
 
 // models/GenerateCSVRequest.ts
 var _GenerateCSVRequest = class _GenerateCSVRequest {
@@ -11713,6 +11781,43 @@ _StorageDestinationInput.attributeTypeMap = [
 ];
 var StorageDestinationInput = _StorageDestinationInput;
 
+// models/StorageSetupInfo.ts
+var _StorageSetupInfo = class _StorageSetupInfo {
+  static getAttributeTypeMap() {
+    return _StorageSetupInfo.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_StorageSetupInfo.discriminator = void 0;
+_StorageSetupInfo.attributeTypeMap = [
+  {
+    "name": "cluster_type",
+    "baseName": "cluster_type",
+    "type": "StorageSetupInfoClusterTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "storage_type",
+    "baseName": "storage_type",
+    "type": "StorageSetupInfoStorageTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "aws_config",
+    "baseName": "aws_config",
+    "type": "AWSAssumeRoleSetup",
+    "format": ""
+  },
+  {
+    "name": "gcp_config",
+    "baseName": "gcp_config",
+    "type": "GCPWebIdentitySetup",
+    "format": ""
+  }
+];
+var StorageSetupInfo = _StorageSetupInfo;
+
 // models/SystemConfig.ts
 var _SystemConfig = class _SystemConfig {
   static getAttributeTypeMap() {
@@ -15480,6 +15585,8 @@ var enumsMap = /* @__PURE__ */ new Set([
   "SqlQueryResponseMetadataTypeEnum",
   "StorageDestinationStorageTypeEnum",
   "StorageDestinationInputStorageTypeEnum",
+  "StorageSetupInfoClusterTypeEnum",
+  "StorageSetupInfoStorageTypeEnum",
   "TagMetadataTypeInputTypeEnum",
   "TokenAccessScopeObjectTypeEnum",
   "UnparameterizeMetadataRequestMetadataTypeEnum",
@@ -15535,6 +15642,7 @@ var typeMap = {
   "AIContext": AIContext,
   "APIKey": APIKey,
   "APIKeyInput": APIKeyInput,
+  "AWSAssumeRoleSetup": AWSAssumeRoleSetup,
   "AccessToken": AccessToken,
   "ActionConfig": ActionConfig,
   "ActionConfigInput": ActionConfigInput,
@@ -15679,6 +15787,7 @@ var typeMap = {
   "ForceLogoutUsersRequest": ForceLogoutUsersRequest,
   "Frequency": Frequency,
   "FrequencyInput": FrequencyInput,
+  "GCPWebIdentitySetup": GCPWebIdentitySetup,
   "GenerateCSVRequest": GenerateCSVRequest,
   "GenericInfo": GenericInfo,
   "GetAsyncImportStatusResponse": GetAsyncImportStatusResponse,
@@ -15846,6 +15955,7 @@ var typeMap = {
   "StorageConfigInput": StorageConfigInput,
   "StorageDestination": StorageDestination,
   "StorageDestinationInput": StorageDestinationInput,
+  "StorageSetupInfo": StorageSetupInfo,
   "SystemConfig": SystemConfig,
   "SystemInfo": SystemInfo,
   "SystemOverrideInfo": SystemOverrideInfo,
@@ -46052,6 +46162,7 @@ export {
   AIContext,
   APIKey,
   APIKeyInput,
+  AWSAssumeRoleSetup,
   AccessToken,
   ActionConfig,
   ActionConfigInput,
@@ -46206,6 +46317,7 @@ export {
   ForceLogoutUsersRequest,
   Frequency,
   FrequencyInput,
+  GCPWebIdentitySetup,
   GenerateCSVRequest,
   GenericInfo,
   GetAsyncImportStatusResponse,
@@ -46389,6 +46501,7 @@ export {
   StorageConfigInput,
   StorageDestination,
   StorageDestinationInput,
+  StorageSetupInfo,
   PromiseSystemApi as SystemApi,
   SystemConfig,
   SystemInfo,
