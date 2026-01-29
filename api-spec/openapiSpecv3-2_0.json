@@ -174,20 +174,20 @@
       "description": "Roles for version 10.14.0.cl"
     },
     {
-      "name": "9.7.0.cl",
-      "id": "9.7.0.cl",
-      "tags": [
-        "9.7.0.cl"
-      ],
-      "description": "Roles for version 9.7.0.cl"
-    },
-    {
       "name": "26.4.0.cl",
       "id": "26.4.0.cl",
       "tags": [
         "26.4.0.cl"
       ],
       "description": "Roles for version 26.4.0.cl"
+    },
+    {
+      "name": "9.7.0.cl",
+      "id": "9.7.0.cl",
+      "tags": [
+        "9.7.0.cl"
+      ],
+      "description": "Roles for version 9.7.0.cl"
     }
   ],
   "tags": [],
@@ -13242,6 +13242,104 @@
         }
       }
     },
+    "/api/rest/2.0/system/communication-channels/validate": {
+      "post": {
+        "operationId": "validateCommunicationChannel",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "System",
+          "26.4.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "channel_type": {
+                    "description": "Type of communication channel to validate (e.g., WEBHOOK).",
+                    "type": "string",
+                    "enum": [
+                      "WEBHOOK"
+                    ]
+                  },
+                  "channel_identifier": {
+                    "description": "Unique identifier or name for the communication channel.",
+                    "type": "string"
+                  },
+                  "event_type": {
+                    "description": "Event type to validate for this channel.",
+                    "type": "string",
+                    "enum": [
+                      "LIVEBOARD_SCHEDULE"
+                    ]
+                  }
+                },
+                "required": [
+                  "channel_type",
+                  "channel_identifier",
+                  "event_type"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "communication channel configuration validated successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommunicationChannelValidateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/tags/assign": {
       "post": {
         "operationId": "assignTag",
@@ -22761,6 +22859,112 @@
           }
         },
         "description": "Input for org-level non-embed access configuration."
+      },
+      "CommunicationChannelValidateResponse": {
+        "type": "object",
+        "required": [
+          "channel_type",
+          "channel_id",
+          "event_type",
+          "result_code"
+        ],
+        "properties": {
+          "channel_type": {
+            "type": "string",
+            "enum": [
+              "WEBHOOK"
+            ],
+            "description": "Type of communication channel that was validated."
+          },
+          "channel_id": {
+            "type": "string",
+            "description": "ID of the communication channel (e.g., webhook_id)."
+          },
+          "channel_name": {
+            "type": "string",
+            "description": "Name of the communication channel (e.g., webhook name).",
+            "nullable": true
+          },
+          "event_type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD_SCHEDULE"
+            ],
+            "description": "Event type that was validated."
+          },
+          "result_code": {
+            "type": "string",
+            "enum": [
+              "SUCCESS",
+              "FAILED",
+              "PARTIAL_SUCCESS"
+            ],
+            "description": "Overall result of the validation."
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChannelValidationDetail"
+            },
+            "description": "Detailed results of various validation sub-steps.",
+            "nullable": true
+          }
+        },
+        "description": "Response containing validation results for communication channel configuration."
+      },
+      "ChannelValidationDetail": {
+        "type": "object",
+        "required": [
+          "validation_step",
+          "status"
+        ],
+        "properties": {
+          "validation_step": {
+            "type": "string",
+            "enum": [
+              "HTTP_CONNECTION_CHECK",
+              "STORAGE_FILE_UPLOAD_CHECK"
+            ],
+            "description": "The validation step that was performed."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "SUCCESS",
+              "FAILED"
+            ],
+            "description": "Status of this validation step."
+          },
+          "error_code": {
+            "type": "string",
+            "enum": [
+              "INVALID_CREDENTIALS",
+              "FORBIDDEN",
+              "UNAUTHORIZED",
+              "CONNECTION_TIMEOUT",
+              "UNKNOWN"
+            ],
+            "description": "Error code if the validation step failed.",
+            "nullable": true
+          },
+          "http_status": {
+            "type": "integer",
+            "format": "int32",
+            "description": "HTTP status code returned by the channel (if applicable).",
+            "nullable": true
+          },
+          "error_message": {
+            "type": "string",
+            "description": "Error message from the channel or validation process.",
+            "nullable": true
+          },
+          "additional_info": {
+            "type": "string",
+            "description": "Additional information about the validation step.",
+            "nullable": true
+          }
+        },
+        "description": "Validation detail result for a sub-step."
       },
       "TagMetadataTypeInput": {
         "type": "object",
