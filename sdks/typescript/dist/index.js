@@ -1936,6 +1936,99 @@ _CommunicationChannelValidateResponse.attributeTypeMap = [
 ];
 var CommunicationChannelValidateResponse = _CommunicationChannelValidateResponse;
 
+// models/ConfigureCommunicationChannelPreferencesRequest.ts
+var _ConfigureCommunicationChannelPreferencesRequest = class _ConfigureCommunicationChannelPreferencesRequest {
+  static getAttributeTypeMap() {
+    return _ConfigureCommunicationChannelPreferencesRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ConfigureCommunicationChannelPreferencesRequest.discriminator = void 0;
+_ConfigureCommunicationChannelPreferencesRequest.attributeTypeMap = [
+  {
+    "name": "cluster_preferences",
+    "baseName": "cluster_preferences",
+    "type": "Array<EventChannelConfigInput>",
+    "format": ""
+  },
+  {
+    "name": "org_preferences",
+    "baseName": "org_preferences",
+    "type": "Array<OrgChannelConfigInput>",
+    "format": ""
+  }
+];
+var ConfigureCommunicationChannelPreferencesRequest = _ConfigureCommunicationChannelPreferencesRequest;
+
+// models/ConfigureSecuritySettingsRequest.ts
+var _ConfigureSecuritySettingsRequest = class _ConfigureSecuritySettingsRequest {
+  static getAttributeTypeMap() {
+    return _ConfigureSecuritySettingsRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ConfigureSecuritySettingsRequest.discriminator = void 0;
+_ConfigureSecuritySettingsRequest.attributeTypeMap = [
+  {
+    "name": "cluster_preferences",
+    "baseName": "cluster_preferences",
+    "type": "ConfigureSecuritySettingsRequestClusterPreferences",
+    "format": ""
+  },
+  {
+    "name": "org_preferences",
+    "baseName": "org_preferences",
+    "type": "Array<SecuritySettingsOrgPreferencesInput>",
+    "format": ""
+  }
+];
+var ConfigureSecuritySettingsRequest = _ConfigureSecuritySettingsRequest;
+
+// models/ConfigureSecuritySettingsRequestClusterPreferences.ts
+var _ConfigureSecuritySettingsRequestClusterPreferences = class _ConfigureSecuritySettingsRequestClusterPreferences {
+  static getAttributeTypeMap() {
+    return _ConfigureSecuritySettingsRequestClusterPreferences.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ConfigureSecuritySettingsRequestClusterPreferences.discriminator = void 0;
+_ConfigureSecuritySettingsRequestClusterPreferences.attributeTypeMap = [
+  {
+    "name": "enable_partitioned_cookies",
+    "baseName": "enable_partitioned_cookies",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "cors_whitelisted_urls",
+    "baseName": "cors_whitelisted_urls",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "csp_settings",
+    "baseName": "csp_settings",
+    "type": "CspSettingsInput",
+    "format": ""
+  },
+  {
+    "name": "saml_redirect_urls",
+    "baseName": "saml_redirect_urls",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "non_embed_access",
+    "baseName": "non_embed_access",
+    "type": "ClusterNonEmbedAccessInput",
+    "format": ""
+  }
+];
+var ConfigureSecuritySettingsRequestClusterPreferences = _ConfigureSecuritySettingsRequestClusterPreferences;
+
 // models/ConnectionConfigurationResponse.ts
 var _ConnectionConfigurationResponse = class _ConnectionConfigurationResponse {
   static getAttributeTypeMap() {
@@ -2237,6 +2330,99 @@ _CopyObjectRequest.attributeTypeMap = [
   }
 ];
 var CopyObjectRequest = _CopyObjectRequest;
+
+// models/CreateAgentConversationRequest.ts
+var _CreateAgentConversationRequest = class _CreateAgentConversationRequest {
+  static getAttributeTypeMap() {
+    return _CreateAgentConversationRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CreateAgentConversationRequest.discriminator = void 0;
+_CreateAgentConversationRequest.attributeTypeMap = [
+  {
+    "name": "metadata_context",
+    "baseName": "metadata_context",
+    "type": "CreateAgentConversationRequestMetadataContext",
+    "format": ""
+  },
+  {
+    "name": "conversation_settings",
+    "baseName": "conversation_settings",
+    "type": "CreateAgentConversationRequestConversationSettings",
+    "format": ""
+  }
+];
+var CreateAgentConversationRequest = _CreateAgentConversationRequest;
+
+// models/CreateAgentConversationRequestConversationSettings.ts
+var _CreateAgentConversationRequestConversationSettings = class _CreateAgentConversationRequestConversationSettings {
+  static getAttributeTypeMap() {
+    return _CreateAgentConversationRequestConversationSettings.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CreateAgentConversationRequestConversationSettings.discriminator = void 0;
+_CreateAgentConversationRequestConversationSettings.attributeTypeMap = [
+  {
+    "name": "enable_contextual_change_analysis",
+    "baseName": "enable_contextual_change_analysis",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "enable_natural_language_answer_generation",
+    "baseName": "enable_natural_language_answer_generation",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "enable_reasoning",
+    "baseName": "enable_reasoning",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var CreateAgentConversationRequestConversationSettings = _CreateAgentConversationRequestConversationSettings;
+
+// models/CreateAgentConversationRequestMetadataContext.ts
+var _CreateAgentConversationRequestMetadataContext = class _CreateAgentConversationRequestMetadataContext {
+  static getAttributeTypeMap() {
+    return _CreateAgentConversationRequestMetadataContext.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CreateAgentConversationRequestMetadataContext.discriminator = void 0;
+_CreateAgentConversationRequestMetadataContext.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "CreateAgentConversationRequestMetadataContextTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "answer_context",
+    "baseName": "answer_context",
+    "type": "AnswerContextInput",
+    "format": ""
+  },
+  {
+    "name": "liveboard_context",
+    "baseName": "liveboard_context",
+    "type": "LBContextInput",
+    "format": ""
+  },
+  {
+    "name": "data_source_context",
+    "baseName": "data_source_context",
+    "type": "DataSourceContextInput",
+    "format": ""
+  }
+];
+var CreateAgentConversationRequestMetadataContext = _CreateAgentConversationRequestMetadataContext;
 
 // models/CreateCalendarRequest.ts
 var _CreateCalendarRequest = class _CreateCalendarRequest {
@@ -3438,6 +3624,203 @@ _CreateUserRequest.attributeTypeMap = [
 ];
 var CreateUserRequest = _CreateUserRequest;
 
+// models/CreateVariableRequest.ts
+var _CreateVariableRequest = class _CreateVariableRequest {
+  static getAttributeTypeMap() {
+    return _CreateVariableRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CreateVariableRequest.discriminator = void 0;
+_CreateVariableRequest.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "CreateVariableRequestTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "is_sensitive",
+    "baseName": "is_sensitive",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "data_type",
+    "baseName": "data_type",
+    "type": "CreateVariableRequestDataTypeEnum",
+    "format": ""
+  }
+];
+var CreateVariableRequest = _CreateVariableRequest;
+
+// models/CreateWebhookConfigurationRequest.ts
+var _CreateWebhookConfigurationRequest = class _CreateWebhookConfigurationRequest {
+  static getAttributeTypeMap() {
+    return _CreateWebhookConfigurationRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CreateWebhookConfigurationRequest.discriminator = void 0;
+_CreateWebhookConfigurationRequest.attributeTypeMap = [
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "description",
+    "baseName": "description",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "url",
+    "baseName": "url",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "url_params",
+    "baseName": "url_params",
+    "type": "any",
+    "format": ""
+  },
+  {
+    "name": "events",
+    "baseName": "events",
+    "type": "Array<CreateWebhookConfigurationRequestEventsEnum>",
+    "format": ""
+  },
+  {
+    "name": "authentication",
+    "baseName": "authentication",
+    "type": "CreateWebhookConfigurationRequestAuthentication",
+    "format": ""
+  },
+  {
+    "name": "signature_verification",
+    "baseName": "signature_verification",
+    "type": "CreateWebhookConfigurationRequestSignatureVerification",
+    "format": ""
+  },
+  {
+    "name": "storage_destination",
+    "baseName": "storage_destination",
+    "type": "CreateWebhookConfigurationRequestStorageDestination",
+    "format": ""
+  }
+];
+var CreateWebhookConfigurationRequest = _CreateWebhookConfigurationRequest;
+
+// models/CreateWebhookConfigurationRequestAuthentication.ts
+var _CreateWebhookConfigurationRequestAuthentication = class _CreateWebhookConfigurationRequestAuthentication {
+  static getAttributeTypeMap() {
+    return _CreateWebhookConfigurationRequestAuthentication.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CreateWebhookConfigurationRequestAuthentication.discriminator = void 0;
+_CreateWebhookConfigurationRequestAuthentication.attributeTypeMap = [
+  {
+    "name": "API_KEY",
+    "baseName": "API_KEY",
+    "type": "WebhookAuthApiKeyInput",
+    "format": ""
+  },
+  {
+    "name": "BASIC_AUTH",
+    "baseName": "BASIC_AUTH",
+    "type": "WebhookAuthBasicAuthInput",
+    "format": ""
+  },
+  {
+    "name": "BEARER_TOKEN",
+    "baseName": "BEARER_TOKEN",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "OAUTH2",
+    "baseName": "OAUTH2",
+    "type": "WebhookAuthOAuth2Input",
+    "format": ""
+  }
+];
+var CreateWebhookConfigurationRequestAuthentication = _CreateWebhookConfigurationRequestAuthentication;
+
+// models/CreateWebhookConfigurationRequestSignatureVerification.ts
+var _CreateWebhookConfigurationRequestSignatureVerification = class _CreateWebhookConfigurationRequestSignatureVerification {
+  static getAttributeTypeMap() {
+    return _CreateWebhookConfigurationRequestSignatureVerification.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CreateWebhookConfigurationRequestSignatureVerification.discriminator = void 0;
+_CreateWebhookConfigurationRequestSignatureVerification.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "CreateWebhookConfigurationRequestSignatureVerificationTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "header",
+    "baseName": "header",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "algorithm",
+    "baseName": "algorithm",
+    "type": "CreateWebhookConfigurationRequestSignatureVerificationAlgorithmEnum",
+    "format": ""
+  },
+  {
+    "name": "secret",
+    "baseName": "secret",
+    "type": "string",
+    "format": ""
+  }
+];
+var CreateWebhookConfigurationRequestSignatureVerification = _CreateWebhookConfigurationRequestSignatureVerification;
+
+// models/CreateWebhookConfigurationRequestStorageDestination.ts
+var _CreateWebhookConfigurationRequestStorageDestination = class _CreateWebhookConfigurationRequestStorageDestination {
+  static getAttributeTypeMap() {
+    return _CreateWebhookConfigurationRequestStorageDestination.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CreateWebhookConfigurationRequestStorageDestination.discriminator = void 0;
+_CreateWebhookConfigurationRequestStorageDestination.attributeTypeMap = [
+  {
+    "name": "storage_type",
+    "baseName": "storage_type",
+    "type": "CreateWebhookConfigurationRequestStorageDestinationStorageTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "storage_config",
+    "baseName": "storage_config",
+    "type": "StorageConfigInput",
+    "format": ""
+  }
+];
+var CreateWebhookConfigurationRequestStorageDestination = _CreateWebhookConfigurationRequestStorageDestination;
+
 // models/CronExpression.ts
 var _CronExpression = class _CronExpression {
   static getAttributeTypeMap() {
@@ -4095,6 +4478,25 @@ _DeleteOrgEmailCustomizationRequest.attributeTypeMap = [
   }
 ];
 var DeleteOrgEmailCustomizationRequest = _DeleteOrgEmailCustomizationRequest;
+
+// models/DeleteWebhookConfigurationsRequest.ts
+var _DeleteWebhookConfigurationsRequest = class _DeleteWebhookConfigurationsRequest {
+  static getAttributeTypeMap() {
+    return _DeleteWebhookConfigurationsRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_DeleteWebhookConfigurationsRequest.discriminator = void 0;
+_DeleteWebhookConfigurationsRequest.attributeTypeMap = [
+  {
+    "name": "webhook_identifiers",
+    "baseName": "webhook_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  }
+];
+var DeleteWebhookConfigurationsRequest = _DeleteWebhookConfigurationsRequest;
 
 // models/DeployCommitRequest.ts
 var _DeployCommitRequest = class _DeployCommitRequest {
@@ -5429,6 +5831,43 @@ _FetchLogsRequest.attributeTypeMap = [
 ];
 var FetchLogsRequest = _FetchLogsRequest;
 
+// models/FetchObjectPrivilegesRequest.ts
+var _FetchObjectPrivilegesRequest = class _FetchObjectPrivilegesRequest {
+  static getAttributeTypeMap() {
+    return _FetchObjectPrivilegesRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_FetchObjectPrivilegesRequest.discriminator = void 0;
+_FetchObjectPrivilegesRequest.attributeTypeMap = [
+  {
+    "name": "metadata",
+    "baseName": "metadata",
+    "type": "Array<ObjectPrivilegesMetadataInput>",
+    "format": ""
+  },
+  {
+    "name": "principals",
+    "baseName": "principals",
+    "type": "Array<PrincipalsInput>",
+    "format": ""
+  },
+  {
+    "name": "record_offset",
+    "baseName": "record_offset",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "record_size",
+    "baseName": "record_size",
+    "type": "number",
+    "format": "int32"
+  }
+];
+var FetchObjectPrivilegesRequest = _FetchObjectPrivilegesRequest;
+
 // models/FetchPermissionsOfPrincipalsRequest.ts
 var _FetchPermissionsOfPrincipalsRequest = class _FetchPermissionsOfPrincipalsRequest {
   static getAttributeTypeMap() {
@@ -5848,6 +6287,25 @@ _GetCustomAccessTokenRequest.attributeTypeMap = [
 ];
 var GetCustomAccessTokenRequest = _GetCustomAccessTokenRequest;
 
+// models/GetDataSourceSuggestionsRequest.ts
+var _GetDataSourceSuggestionsRequest = class _GetDataSourceSuggestionsRequest {
+  static getAttributeTypeMap() {
+    return _GetDataSourceSuggestionsRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_GetDataSourceSuggestionsRequest.discriminator = void 0;
+_GetDataSourceSuggestionsRequest.attributeTypeMap = [
+  {
+    "name": "query",
+    "baseName": "query",
+    "type": "string",
+    "format": ""
+  }
+];
+var GetDataSourceSuggestionsRequest = _GetDataSourceSuggestionsRequest;
+
 // models/GetFullAccessTokenRequest.ts
 var _GetFullAccessTokenRequest = class _GetFullAccessTokenRequest {
   static getAttributeTypeMap() {
@@ -5958,6 +6416,25 @@ _GetFullAccessTokenRequestUserParameters.attributeTypeMap = [
 ];
 var GetFullAccessTokenRequestUserParameters = _GetFullAccessTokenRequestUserParameters;
 
+// models/GetNLInstructionsRequest.ts
+var _GetNLInstructionsRequest = class _GetNLInstructionsRequest {
+  static getAttributeTypeMap() {
+    return _GetNLInstructionsRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_GetNLInstructionsRequest.discriminator = void 0;
+_GetNLInstructionsRequest.attributeTypeMap = [
+  {
+    "name": "data_source_identifier",
+    "baseName": "data_source_identifier",
+    "type": "string",
+    "format": ""
+  }
+];
+var GetNLInstructionsRequest = _GetNLInstructionsRequest;
+
 // models/GetObjectAccessTokenRequest.ts
 var _GetObjectAccessTokenRequest = class _GetObjectAccessTokenRequest {
   static getAttributeTypeMap() {
@@ -6036,6 +6513,111 @@ _GetObjectAccessTokenRequest.attributeTypeMap = [
   }
 ];
 var GetObjectAccessTokenRequest = _GetObjectAccessTokenRequest;
+
+// models/GetRelevantQuestionsRequest.ts
+var _GetRelevantQuestionsRequest = class _GetRelevantQuestionsRequest {
+  static getAttributeTypeMap() {
+    return _GetRelevantQuestionsRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_GetRelevantQuestionsRequest.discriminator = void 0;
+_GetRelevantQuestionsRequest.attributeTypeMap = [
+  {
+    "name": "metadata_context",
+    "baseName": "metadata_context",
+    "type": "GetRelevantQuestionsRequestMetadataContext",
+    "format": ""
+  },
+  {
+    "name": "limit_relevant_questions",
+    "baseName": "limit_relevant_questions",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "bypass_cache",
+    "baseName": "bypass_cache",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "query",
+    "baseName": "query",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "ai_context",
+    "baseName": "ai_context",
+    "type": "GetRelevantQuestionsRequestAiContext",
+    "format": ""
+  }
+];
+var GetRelevantQuestionsRequest = _GetRelevantQuestionsRequest;
+
+// models/GetRelevantQuestionsRequestAiContext.ts
+var _GetRelevantQuestionsRequestAiContext = class _GetRelevantQuestionsRequestAiContext {
+  static getAttributeTypeMap() {
+    return _GetRelevantQuestionsRequestAiContext.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_GetRelevantQuestionsRequestAiContext.discriminator = void 0;
+_GetRelevantQuestionsRequestAiContext.attributeTypeMap = [
+  {
+    "name": "instructions",
+    "baseName": "instructions",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "content",
+    "baseName": "content",
+    "type": "Array<string>",
+    "format": ""
+  }
+];
+var GetRelevantQuestionsRequestAiContext = _GetRelevantQuestionsRequestAiContext;
+
+// models/GetRelevantQuestionsRequestMetadataContext.ts
+var _GetRelevantQuestionsRequestMetadataContext = class _GetRelevantQuestionsRequestMetadataContext {
+  static getAttributeTypeMap() {
+    return _GetRelevantQuestionsRequestMetadataContext.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_GetRelevantQuestionsRequestMetadataContext.discriminator = void 0;
+_GetRelevantQuestionsRequestMetadataContext.attributeTypeMap = [
+  {
+    "name": "data_source_identifiers",
+    "baseName": "data_source_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "answer_identifiers",
+    "baseName": "answer_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "conversation_identifier",
+    "baseName": "conversation_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "liveboard_identifiers",
+    "baseName": "liveboard_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  }
+];
+var GetRelevantQuestionsRequestMetadataContext = _GetRelevantQuestionsRequestMetadataContext;
 
 // models/GetTokenResponse.ts
 var _GetTokenResponse = class _GetTokenResponse {
@@ -7077,6 +7659,49 @@ _LoginRequest.attributeTypeMap = [
   }
 ];
 var LoginRequest = _LoginRequest;
+
+// models/ManageObjectPrivilegeRequest.ts
+var _ManageObjectPrivilegeRequest = class _ManageObjectPrivilegeRequest {
+  static getAttributeTypeMap() {
+    return _ManageObjectPrivilegeRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ManageObjectPrivilegeRequest.discriminator = void 0;
+_ManageObjectPrivilegeRequest.attributeTypeMap = [
+  {
+    "name": "operation",
+    "baseName": "operation",
+    "type": "ManageObjectPrivilegeRequestOperationEnum",
+    "format": ""
+  },
+  {
+    "name": "metadata_type",
+    "baseName": "metadata_type",
+    "type": "ManageObjectPrivilegeRequestMetadataTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "object_privilege_types",
+    "baseName": "object_privilege_types",
+    "type": "Array<ManageObjectPrivilegeRequestObjectPrivilegeTypesEnum>",
+    "format": ""
+  },
+  {
+    "name": "metadata_identifiers",
+    "baseName": "metadata_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "principals",
+    "baseName": "principals",
+    "type": "Array<PrincipalsInput>",
+    "format": ""
+  }
+];
+var ManageObjectPrivilegeRequest = _ManageObjectPrivilegeRequest;
 
 // models/MetadataAssociationItem.ts
 var _MetadataAssociationItem = class _MetadataAssociationItem {
@@ -9287,6 +9912,37 @@ _RevertedMetadata.attributeTypeMap = [
 ];
 var RevertedMetadata = _RevertedMetadata;
 
+// models/RevokeRefreshTokensRequest.ts
+var _RevokeRefreshTokensRequest = class _RevokeRefreshTokensRequest {
+  static getAttributeTypeMap() {
+    return _RevokeRefreshTokensRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_RevokeRefreshTokensRequest.discriminator = void 0;
+_RevokeRefreshTokensRequest.attributeTypeMap = [
+  {
+    "name": "configuration_identifiers",
+    "baseName": "configuration_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "user_identifiers",
+    "baseName": "user_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "org_identifiers",
+    "baseName": "org_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  }
+];
+var RevokeRefreshTokensRequest = _RevokeRefreshTokensRequest;
+
 // models/RevokeRefreshTokensResponse.ts
 var _RevokeRefreshTokensResponse = class _RevokeRefreshTokensResponse {
   static getAttributeTypeMap() {
@@ -10009,6 +10665,31 @@ _SearchCommitsRequest.attributeTypeMap = [
   }
 ];
 var SearchCommitsRequest = _SearchCommitsRequest;
+
+// models/SearchCommunicationChannelPreferencesRequest.ts
+var _SearchCommunicationChannelPreferencesRequest = class _SearchCommunicationChannelPreferencesRequest {
+  static getAttributeTypeMap() {
+    return _SearchCommunicationChannelPreferencesRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SearchCommunicationChannelPreferencesRequest.discriminator = void 0;
+_SearchCommunicationChannelPreferencesRequest.attributeTypeMap = [
+  {
+    "name": "cluster_preferences",
+    "baseName": "cluster_preferences",
+    "type": "Array<SearchCommunicationChannelPreferencesRequestClusterPreferencesEnum>",
+    "format": ""
+  },
+  {
+    "name": "org_preferences",
+    "baseName": "org_preferences",
+    "type": "Array<OrgPreferenceSearchCriteriaInput>",
+    "format": ""
+  }
+];
+var SearchCommunicationChannelPreferencesRequest = _SearchCommunicationChannelPreferencesRequest;
 
 // models/SearchConfigRequest.ts
 var _SearchConfigRequest = class _SearchConfigRequest {
@@ -10892,6 +11573,25 @@ _SearchSchedulesRequestSortOptions.attributeTypeMap = [
 ];
 var SearchSchedulesRequestSortOptions = _SearchSchedulesRequestSortOptions;
 
+// models/SearchSecuritySettingsRequest.ts
+var _SearchSecuritySettingsRequest = class _SearchSecuritySettingsRequest {
+  static getAttributeTypeMap() {
+    return _SearchSecuritySettingsRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SearchSecuritySettingsRequest.discriminator = void 0;
+_SearchSecuritySettingsRequest.attributeTypeMap = [
+  {
+    "name": "scope",
+    "baseName": "scope",
+    "type": "SearchSecuritySettingsRequestScopeEnum",
+    "format": ""
+  }
+];
+var SearchSecuritySettingsRequest = _SearchSecuritySettingsRequest;
+
 // models/SearchTagsRequest.ts
 var _SearchTagsRequest = class _SearchTagsRequest {
   static getAttributeTypeMap() {
@@ -11227,6 +11927,123 @@ _SearchUsersRequestSortOptions.attributeTypeMap = [
 ];
 var SearchUsersRequestSortOptions = _SearchUsersRequestSortOptions;
 
+// models/SearchVariablesRequest.ts
+var _SearchVariablesRequest = class _SearchVariablesRequest {
+  static getAttributeTypeMap() {
+    return _SearchVariablesRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SearchVariablesRequest.discriminator = void 0;
+_SearchVariablesRequest.attributeTypeMap = [
+  {
+    "name": "variable_details",
+    "baseName": "variable_details",
+    "type": "Array<VariableDetailInput>",
+    "format": ""
+  },
+  {
+    "name": "value_scope",
+    "baseName": "value_scope",
+    "type": "Array<ValueScopeInput>",
+    "format": ""
+  },
+  {
+    "name": "record_offset",
+    "baseName": "record_offset",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "record_size",
+    "baseName": "record_size",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "response_content",
+    "baseName": "response_content",
+    "type": "SearchVariablesRequestResponseContentEnum",
+    "format": ""
+  }
+];
+var SearchVariablesRequest = _SearchVariablesRequest;
+
+// models/SearchWebhookConfigurationsRequest.ts
+var _SearchWebhookConfigurationsRequest = class _SearchWebhookConfigurationsRequest {
+  static getAttributeTypeMap() {
+    return _SearchWebhookConfigurationsRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SearchWebhookConfigurationsRequest.discriminator = void 0;
+_SearchWebhookConfigurationsRequest.attributeTypeMap = [
+  {
+    "name": "org_identifier",
+    "baseName": "org_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "webhook_identifier",
+    "baseName": "webhook_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "event_type",
+    "baseName": "event_type",
+    "type": "SearchWebhookConfigurationsRequestEventTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "record_offset",
+    "baseName": "record_offset",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "record_size",
+    "baseName": "record_size",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "sort_options",
+    "baseName": "sort_options",
+    "type": "SearchWebhookConfigurationsRequestSortOptions",
+    "format": ""
+  }
+];
+var SearchWebhookConfigurationsRequest = _SearchWebhookConfigurationsRequest;
+
+// models/SearchWebhookConfigurationsRequestSortOptions.ts
+var _SearchWebhookConfigurationsRequestSortOptions = class _SearchWebhookConfigurationsRequestSortOptions {
+  static getAttributeTypeMap() {
+    return _SearchWebhookConfigurationsRequestSortOptions.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SearchWebhookConfigurationsRequestSortOptions.discriminator = void 0;
+_SearchWebhookConfigurationsRequestSortOptions.attributeTypeMap = [
+  {
+    "name": "field_name",
+    "baseName": "field_name",
+    "type": "SearchWebhookConfigurationsRequestSortOptionsFieldNameEnum",
+    "format": ""
+  },
+  {
+    "name": "order",
+    "baseName": "order",
+    "type": "SearchWebhookConfigurationsRequestSortOptionsOrderEnum",
+    "format": ""
+  }
+];
+var SearchWebhookConfigurationsRequestSortOptions = _SearchWebhookConfigurationsRequestSortOptions;
+
 // models/SecuritySettingsClusterPreferences.ts
 var _SecuritySettingsClusterPreferences = class _SecuritySettingsClusterPreferences {
   static getAttributeTypeMap() {
@@ -11425,6 +12242,25 @@ _SecuritySettingsResponse.attributeTypeMap = [
 ];
 var SecuritySettingsResponse = _SecuritySettingsResponse;
 
+// models/SendAgentMessageRequest.ts
+var _SendAgentMessageRequest = class _SendAgentMessageRequest {
+  static getAttributeTypeMap() {
+    return _SendAgentMessageRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SendAgentMessageRequest.discriminator = void 0;
+_SendAgentMessageRequest.attributeTypeMap = [
+  {
+    "name": "messages",
+    "baseName": "messages",
+    "type": "Array<string>",
+    "format": ""
+  }
+];
+var SendAgentMessageRequest = _SendAgentMessageRequest;
+
 // models/SendAgentMessageResponse.ts
 var _SendAgentMessageResponse = class _SendAgentMessageResponse {
   static getAttributeTypeMap() {
@@ -11450,6 +12286,31 @@ _SendAgentMessageResponse.attributeTypeMap = [
 ];
 var SendAgentMessageResponse = _SendAgentMessageResponse;
 
+// models/SendAgentMessageStreamingRequest.ts
+var _SendAgentMessageStreamingRequest = class _SendAgentMessageStreamingRequest {
+  static getAttributeTypeMap() {
+    return _SendAgentMessageStreamingRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SendAgentMessageStreamingRequest.discriminator = void 0;
+_SendAgentMessageStreamingRequest.attributeTypeMap = [
+  {
+    "name": "conversation_identifier",
+    "baseName": "conversation_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "messages",
+    "baseName": "messages",
+    "type": "Array<string>",
+    "format": ""
+  }
+];
+var SendAgentMessageStreamingRequest = _SendAgentMessageStreamingRequest;
+
 // models/SendMessageRequest.ts
 var _SendMessageRequest = class _SendMessageRequest {
   static getAttributeTypeMap() {
@@ -11474,6 +12335,31 @@ _SendMessageRequest.attributeTypeMap = [
   }
 ];
 var SendMessageRequest = _SendMessageRequest;
+
+// models/SetNLInstructionsRequest.ts
+var _SetNLInstructionsRequest = class _SetNLInstructionsRequest {
+  static getAttributeTypeMap() {
+    return _SetNLInstructionsRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SetNLInstructionsRequest.discriminator = void 0;
+_SetNLInstructionsRequest.attributeTypeMap = [
+  {
+    "name": "data_source_identifier",
+    "baseName": "data_source_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "nl_instructions_info",
+    "baseName": "nl_instructions_info",
+    "type": "Array<NLInstructionsInfoInput>",
+    "format": ""
+  }
+];
+var SetNLInstructionsRequest = _SetNLInstructionsRequest;
 
 // models/ShareMetadataRequest.ts
 var _ShareMetadataRequest = class _ShareMetadataRequest {
@@ -12691,6 +13577,31 @@ _URLInputMandatory.attributeTypeMap = [
 ];
 var URLInputMandatory = _URLInputMandatory;
 
+// models/UnassignTagRequest.ts
+var _UnassignTagRequest = class _UnassignTagRequest {
+  static getAttributeTypeMap() {
+    return _UnassignTagRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UnassignTagRequest.discriminator = void 0;
+_UnassignTagRequest.attributeTypeMap = [
+  {
+    "name": "metadata",
+    "baseName": "metadata",
+    "type": "Array<TagMetadataTypeInput>",
+    "format": ""
+  },
+  {
+    "name": "tag_identifiers",
+    "baseName": "tag_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  }
+];
+var UnassignTagRequest = _UnassignTagRequest;
+
 // models/UnparameterizeMetadataRequest.ts
 var _UnparameterizeMetadataRequest = class _UnparameterizeMetadataRequest {
   static getAttributeTypeMap() {
@@ -13858,6 +14769,111 @@ _UpdateUserRequest.attributeTypeMap = [
 ];
 var UpdateUserRequest = _UpdateUserRequest;
 
+// models/UpdateVariableRequest.ts
+var _UpdateVariableRequest = class _UpdateVariableRequest {
+  static getAttributeTypeMap() {
+    return _UpdateVariableRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UpdateVariableRequest.discriminator = void 0;
+_UpdateVariableRequest.attributeTypeMap = [
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  }
+];
+var UpdateVariableRequest = _UpdateVariableRequest;
+
+// models/UpdateVariableValuesRequest.ts
+var _UpdateVariableValuesRequest = class _UpdateVariableValuesRequest {
+  static getAttributeTypeMap() {
+    return _UpdateVariableValuesRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UpdateVariableValuesRequest.discriminator = void 0;
+_UpdateVariableValuesRequest.attributeTypeMap = [
+  {
+    "name": "variable_assignment",
+    "baseName": "variable_assignment",
+    "type": "Array<VariableUpdateAssignmentInput>",
+    "format": ""
+  },
+  {
+    "name": "variable_value_scope",
+    "baseName": "variable_value_scope",
+    "type": "Array<VariableUpdateScopeInput>",
+    "format": ""
+  }
+];
+var UpdateVariableValuesRequest = _UpdateVariableValuesRequest;
+
+// models/UpdateWebhookConfigurationRequest.ts
+var _UpdateWebhookConfigurationRequest = class _UpdateWebhookConfigurationRequest {
+  static getAttributeTypeMap() {
+    return _UpdateWebhookConfigurationRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UpdateWebhookConfigurationRequest.discriminator = void 0;
+_UpdateWebhookConfigurationRequest.attributeTypeMap = [
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "description",
+    "baseName": "description",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "url",
+    "baseName": "url",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "url_params",
+    "baseName": "url_params",
+    "type": "any",
+    "format": ""
+  },
+  {
+    "name": "events",
+    "baseName": "events",
+    "type": "Array<UpdateWebhookConfigurationRequestEventsEnum>",
+    "format": ""
+  },
+  {
+    "name": "authentication",
+    "baseName": "authentication",
+    "type": "CreateWebhookConfigurationRequestAuthentication",
+    "format": ""
+  },
+  {
+    "name": "signature_verification",
+    "baseName": "signature_verification",
+    "type": "CreateWebhookConfigurationRequestSignatureVerification",
+    "format": ""
+  },
+  {
+    "name": "storage_destination",
+    "baseName": "storage_destination",
+    "type": "CreateWebhookConfigurationRequestStorageDestination",
+    "format": ""
+  }
+];
+var UpdateWebhookConfigurationRequest = _UpdateWebhookConfigurationRequest;
+
 // models/User.ts
 var _User = class _User {
   static getAttributeTypeMap() {
@@ -14488,6 +15504,37 @@ _UserPrincipal.attributeTypeMap = [
   }
 ];
 var UserPrincipal = _UserPrincipal;
+
+// models/ValidateCommunicationChannelRequest.ts
+var _ValidateCommunicationChannelRequest = class _ValidateCommunicationChannelRequest {
+  static getAttributeTypeMap() {
+    return _ValidateCommunicationChannelRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ValidateCommunicationChannelRequest.discriminator = void 0;
+_ValidateCommunicationChannelRequest.attributeTypeMap = [
+  {
+    "name": "channel_type",
+    "baseName": "channel_type",
+    "type": "ValidateCommunicationChannelRequestChannelTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "channel_identifier",
+    "baseName": "channel_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "event_type",
+    "baseName": "event_type",
+    "type": "ValidateCommunicationChannelRequestEventTypeEnum",
+    "format": ""
+  }
+];
+var ValidateCommunicationChannelRequest = _ValidateCommunicationChannelRequest;
 
 // models/ValidateMergeRequest.ts
 var _ValidateMergeRequest = class _ValidateMergeRequest {
@@ -15542,6 +16589,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "ConnectionConfigurationSearchRequestPolicyTypeEnum",
   "ContextPayloadV2InputTypeEnum",
   "CopyObjectRequestTypeEnum",
+  "CreateAgentConversationRequestMetadataContextTypeEnum",
   "CreateCalendarRequestCreationMethodEnum",
   "CreateCalendarRequestCalendarTypeEnum",
   "CreateCalendarRequestMonthOffsetEnum",
@@ -15563,6 +16611,12 @@ var enumsMap = /* @__PURE__ */ new Set([
   "CreateUserRequestAccountStatusEnum",
   "CreateUserRequestVisibilityEnum",
   "CreateUserRequestPreferredLocaleEnum",
+  "CreateVariableRequestTypeEnum",
+  "CreateVariableRequestDataTypeEnum",
+  "CreateWebhookConfigurationRequestEventsEnum",
+  "CreateWebhookConfigurationRequestSignatureVerificationTypeEnum",
+  "CreateWebhookConfigurationRequestSignatureVerificationAlgorithmEnum",
+  "CreateWebhookConfigurationRequestStorageDestinationStorageTypeEnum",
   "CustomActionMetadataTypeInputTypeEnum",
   "DeleteMetadataTypeInputTypeEnum",
   "DeployCommitRequestDeployTypeEnum",
@@ -15609,6 +16663,9 @@ var enumsMap = /* @__PURE__ */ new Set([
   "ImportUserVisibilityEnum",
   "ImportUserPreferredLocaleEnum",
   "JWTMetadataObjectTypeEnum",
+  "ManageObjectPrivilegeRequestOperationEnum",
+  "ManageObjectPrivilegeRequestMetadataTypeEnum",
+  "ManageObjectPrivilegeRequestObjectPrivilegeTypesEnum",
   "MetadataInputTypeEnum",
   "MetadataListItemInputTypeEnum",
   "MetadataListItemInputSubtypesEnum",
@@ -15648,6 +16705,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "SearchCalendarsRequestSortOptionsFieldNameEnum",
   "SearchCalendarsRequestSortOptionsOrderEnum",
   "SearchCommitsRequestMetadataTypeEnum",
+  "SearchCommunicationChannelPreferencesRequestClusterPreferencesEnum",
   "SearchConnectionRequestDataWarehouseTypesEnum",
   "SearchConnectionRequestDataWarehouseObjectTypeEnum",
   "SearchConnectionRequestAuthenticationTypeEnum",
@@ -15666,6 +16724,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "SearchRoleResponsePermissionEnum",
   "SearchRolesRequestPrivilegesEnum",
   "SearchRolesRequestPermissionsEnum",
+  "SearchSecuritySettingsRequestScopeEnum",
   "SearchUserGroupsRequestPrivilegesEnum",
   "SearchUserGroupsRequestTypeEnum",
   "SearchUserGroupsRequestVisibilityEnum",
@@ -15677,6 +16736,10 @@ var enumsMap = /* @__PURE__ */ new Set([
   "SearchUsersRequestAccountStatusEnum",
   "SearchUsersRequestSortOptionsFieldNameEnum",
   "SearchUsersRequestSortOptionsOrderEnum",
+  "SearchVariablesRequestResponseContentEnum",
+  "SearchWebhookConfigurationsRequestEventTypeEnum",
+  "SearchWebhookConfigurationsRequestSortOptionsFieldNameEnum",
+  "SearchWebhookConfigurationsRequestSortOptionsOrderEnum",
   "ShareMetadataRequestMetadataTypeEnum",
   "ShareMetadataTypeInputTypeEnum",
   "SharePermissionsInputShareModeEnum",
@@ -15720,6 +16783,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "UpdateUserRequestAccountTypeEnum",
   "UpdateUserRequestOperationEnum",
   "UpdateUserRequestPreferredLocaleEnum",
+  "UpdateWebhookConfigurationRequestEventsEnum",
   "UserVisibilityEnum",
   "UserAccountTypeEnum",
   "UserAccountStatusEnum",
@@ -15728,6 +16792,8 @@ var enumsMap = /* @__PURE__ */ new Set([
   "UserGroupResponseTypeEnum",
   "UserGroupResponseVisibilityEnum",
   "UserObjectTypeEnum",
+  "ValidateCommunicationChannelRequestChannelTypeEnum",
+  "ValidateCommunicationChannelRequestEventTypeEnum",
   "ValueScopeInputPrincipalTypeEnum",
   "VariableVariableTypeEnum",
   "VariableDetailInputTypeEnum",
@@ -15796,6 +16862,9 @@ var typeMap = {
   "CommiterType": CommiterType,
   "CommunicationChannelPreferencesResponse": CommunicationChannelPreferencesResponse,
   "CommunicationChannelValidateResponse": CommunicationChannelValidateResponse,
+  "ConfigureCommunicationChannelPreferencesRequest": ConfigureCommunicationChannelPreferencesRequest,
+  "ConfigureSecuritySettingsRequest": ConfigureSecuritySettingsRequest,
+  "ConfigureSecuritySettingsRequestClusterPreferences": ConfigureSecuritySettingsRequestClusterPreferences,
   "ConnectionConfigurationResponse": ConnectionConfigurationResponse,
   "ConnectionConfigurationSearchRequest": ConnectionConfigurationSearchRequest,
   "ConnectionInput": ConnectionInput,
@@ -15804,6 +16873,9 @@ var typeMap = {
   "ConversationSettingsInput": ConversationSettingsInput,
   "ConvertWorksheetToModelRequest": ConvertWorksheetToModelRequest,
   "CopyObjectRequest": CopyObjectRequest,
+  "CreateAgentConversationRequest": CreateAgentConversationRequest,
+  "CreateAgentConversationRequestConversationSettings": CreateAgentConversationRequestConversationSettings,
+  "CreateAgentConversationRequestMetadataContext": CreateAgentConversationRequestMetadataContext,
   "CreateCalendarRequest": CreateCalendarRequest,
   "CreateCalendarRequestTableReference": CreateCalendarRequestTableReference,
   "CreateConfigRequest": CreateConfigRequest,
@@ -15828,6 +16900,11 @@ var typeMap = {
   "CreateTagRequest": CreateTagRequest,
   "CreateUserGroupRequest": CreateUserGroupRequest,
   "CreateUserRequest": CreateUserRequest,
+  "CreateVariableRequest": CreateVariableRequest,
+  "CreateWebhookConfigurationRequest": CreateWebhookConfigurationRequest,
+  "CreateWebhookConfigurationRequestAuthentication": CreateWebhookConfigurationRequestAuthentication,
+  "CreateWebhookConfigurationRequestSignatureVerification": CreateWebhookConfigurationRequestSignatureVerification,
+  "CreateWebhookConfigurationRequestStorageDestination": CreateWebhookConfigurationRequestStorageDestination,
   "CronExpression": CronExpression,
   "CronExpressionInput": CronExpressionInput,
   "CspSettings": CspSettings,
@@ -15850,6 +16927,7 @@ var typeMap = {
   "DeleteMetadataRequest": DeleteMetadataRequest,
   "DeleteMetadataTypeInput": DeleteMetadataTypeInput,
   "DeleteOrgEmailCustomizationRequest": DeleteOrgEmailCustomizationRequest,
+  "DeleteWebhookConfigurationsRequest": DeleteWebhookConfigurationsRequest,
   "DeployCommitRequest": DeployCommitRequest,
   "DeployResponse": DeployResponse,
   "EntityHeader": EntityHeader,
@@ -15887,6 +16965,7 @@ var typeMap = {
   "FetchLiveboardDataRequest": FetchLiveboardDataRequest,
   "FetchLiveboardSqlQueryRequest": FetchLiveboardSqlQueryRequest,
   "FetchLogsRequest": FetchLogsRequest,
+  "FetchObjectPrivilegesRequest": FetchObjectPrivilegesRequest,
   "FetchPermissionsOfPrincipalsRequest": FetchPermissionsOfPrincipalsRequest,
   "FetchPermissionsOnMetadataRequest": FetchPermissionsOnMetadataRequest,
   "FilterRules": FilterRules,
@@ -15898,9 +16977,14 @@ var typeMap = {
   "GenericInfo": GenericInfo,
   "GetAsyncImportStatusResponse": GetAsyncImportStatusResponse,
   "GetCustomAccessTokenRequest": GetCustomAccessTokenRequest,
+  "GetDataSourceSuggestionsRequest": GetDataSourceSuggestionsRequest,
   "GetFullAccessTokenRequest": GetFullAccessTokenRequest,
   "GetFullAccessTokenRequestUserParameters": GetFullAccessTokenRequestUserParameters,
+  "GetNLInstructionsRequest": GetNLInstructionsRequest,
   "GetObjectAccessTokenRequest": GetObjectAccessTokenRequest,
+  "GetRelevantQuestionsRequest": GetRelevantQuestionsRequest,
+  "GetRelevantQuestionsRequestAiContext": GetRelevantQuestionsRequestAiContext,
+  "GetRelevantQuestionsRequestMetadataContext": GetRelevantQuestionsRequestMetadataContext,
   "GetTokenResponse": GetTokenResponse,
   "GroupInfo": GroupInfo,
   "GroupObject": GroupObject,
@@ -15928,6 +17012,7 @@ var typeMap = {
   "LiveboardOptionsInput": LiveboardOptionsInput,
   "LogResponse": LogResponse,
   "LoginRequest": LoginRequest,
+  "ManageObjectPrivilegeRequest": ManageObjectPrivilegeRequest,
   "MetadataAssociationItem": MetadataAssociationItem,
   "MetadataContext": MetadataContext,
   "MetadataInput": MetadataInput,
@@ -15995,6 +17080,7 @@ var typeMap = {
   "RevertCommitRequest": RevertCommitRequest,
   "RevertResponse": RevertResponse,
   "RevertedMetadata": RevertedMetadata,
+  "RevokeRefreshTokensRequest": RevokeRefreshTokensRequest,
   "RevokeRefreshTokensResponse": RevokeRefreshTokensResponse,
   "RevokeTokenRequest": RevokeTokenRequest,
   "RiseGQLArgWrapper": RiseGQLArgWrapper,
@@ -16016,6 +17102,7 @@ var typeMap = {
   "SearchCalendarsRequest": SearchCalendarsRequest,
   "SearchCalendarsRequestSortOptions": SearchCalendarsRequestSortOptions,
   "SearchCommitsRequest": SearchCommitsRequest,
+  "SearchCommunicationChannelPreferencesRequest": SearchCommunicationChannelPreferencesRequest,
   "SearchConfigRequest": SearchConfigRequest,
   "SearchConnectionRequest": SearchConnectionRequest,
   "SearchConnectionRequestSortOptions": SearchConnectionRequestSortOptions,
@@ -16034,19 +17121,26 @@ var typeMap = {
   "SearchSchedulesRequest": SearchSchedulesRequest,
   "SearchSchedulesRequestHistoryRunsOptions": SearchSchedulesRequestHistoryRunsOptions,
   "SearchSchedulesRequestSortOptions": SearchSchedulesRequestSortOptions,
+  "SearchSecuritySettingsRequest": SearchSecuritySettingsRequest,
   "SearchTagsRequest": SearchTagsRequest,
   "SearchUserGroupsRequest": SearchUserGroupsRequest,
   "SearchUserGroupsRequestSortOptions": SearchUserGroupsRequestSortOptions,
   "SearchUsersRequest": SearchUsersRequest,
   "SearchUsersRequestSortOptions": SearchUsersRequestSortOptions,
+  "SearchVariablesRequest": SearchVariablesRequest,
+  "SearchWebhookConfigurationsRequest": SearchWebhookConfigurationsRequest,
+  "SearchWebhookConfigurationsRequestSortOptions": SearchWebhookConfigurationsRequestSortOptions,
   "SecuritySettingsClusterPreferences": SecuritySettingsClusterPreferences,
   "SecuritySettingsClusterPreferencesInput": SecuritySettingsClusterPreferencesInput,
   "SecuritySettingsOrgDetails": SecuritySettingsOrgDetails,
   "SecuritySettingsOrgPreferences": SecuritySettingsOrgPreferences,
   "SecuritySettingsOrgPreferencesInput": SecuritySettingsOrgPreferencesInput,
   "SecuritySettingsResponse": SecuritySettingsResponse,
+  "SendAgentMessageRequest": SendAgentMessageRequest,
   "SendAgentMessageResponse": SendAgentMessageResponse,
+  "SendAgentMessageStreamingRequest": SendAgentMessageStreamingRequest,
   "SendMessageRequest": SendMessageRequest,
+  "SetNLInstructionsRequest": SetNLInstructionsRequest,
   "ShareMetadataRequest": ShareMetadataRequest,
   "ShareMetadataTypeInput": ShareMetadataTypeInput,
   "SharePermissionsInput": SharePermissionsInput,
@@ -16075,6 +17169,7 @@ var typeMap = {
   "URL": URL2,
   "URLInput": URLInput,
   "URLInputMandatory": URLInputMandatory,
+  "UnassignTagRequest": UnassignTagRequest,
   "UnparameterizeMetadataRequest": UnparameterizeMetadataRequest,
   "UnpublishMetadataRequest": UnpublishMetadataRequest,
   "UpdateCalendarRequest": UpdateCalendarRequest,
@@ -16102,6 +17197,9 @@ var typeMap = {
   "UpdateTagRequest": UpdateTagRequest,
   "UpdateUserGroupRequest": UpdateUserGroupRequest,
   "UpdateUserRequest": UpdateUserRequest,
+  "UpdateVariableRequest": UpdateVariableRequest,
+  "UpdateVariableValuesRequest": UpdateVariableValuesRequest,
+  "UpdateWebhookConfigurationRequest": UpdateWebhookConfigurationRequest,
   "User": User,
   "UserGroup": UserGroup,
   "UserGroupResponse": UserGroupResponse,
@@ -16109,6 +17207,7 @@ var typeMap = {
   "UserObject": UserObject,
   "UserParameterOptions": UserParameterOptions,
   "UserPrincipal": UserPrincipal,
+  "ValidateCommunicationChannelRequest": ValidateCommunicationChannelRequest,
   "ValidateMergeRequest": ValidateMergeRequest,
   "ValidateTokenRequest": ValidateTokenRequest,
   "ValueScopeInput": ValueScopeInput,
@@ -25716,14 +26815,14 @@ var TagsApiRequestFactory = class extends BaseAPIRequestFactory {
   }
   /**
    *   Version: 9.0.0.cl or later   Removes the tags applied to a Liveboard, Answer, Table, or Worksheet.  Requires edit access to the metadata object.      
-   * @param assignTagRequest 
+   * @param unassignTagRequest 
    */
-  unassignTag(assignTagRequest, _options) {
+  unassignTag(unassignTagRequest, _options) {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
-      if (assignTagRequest === null || assignTagRequest === void 0) {
-        throw new RequiredError("TagsApi", "unassignTag", "assignTagRequest");
+      if (unassignTagRequest === null || unassignTagRequest === void 0) {
+        throw new RequiredError("TagsApi", "unassignTag", "unassignTagRequest");
       }
       const localVarPath = "/api/rest/2.0/tags/unassign";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
@@ -25735,7 +26834,7 @@ var TagsApiRequestFactory = class extends BaseAPIRequestFactory {
       ]);
       requestContext.setHeaderParam("Content-Type", contentType);
       const serializedBody = ObjectSerializer.stringify(
-        ObjectSerializer.serialize(assignTagRequest, "AssignTagRequest", ""),
+        ObjectSerializer.serialize(unassignTagRequest, "UnassignTagRequest", ""),
         contentType
       );
       requestContext.setBody(serializedBody);
@@ -29621,14 +30720,14 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
   }
   /**
    *   Version: 9.0.0.cl or later   Removes the tags applied to a Liveboard, Answer, Table, or Worksheet.  Requires edit access to the metadata object.      
-   * @param assignTagRequest 
+   * @param unassignTagRequest 
    */
-  unassignTag(assignTagRequest, _options) {
+  unassignTag(unassignTagRequest, _options) {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
-      if (assignTagRequest === null || assignTagRequest === void 0) {
-        throw new RequiredError("ThoughtSpotRestApi", "unassignTag", "assignTagRequest");
+      if (unassignTagRequest === null || unassignTagRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "unassignTag", "unassignTagRequest");
       }
       const localVarPath = "/api/rest/2.0/tags/unassign";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
@@ -29640,7 +30739,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       ]);
       requestContext.setHeaderParam("Content-Type", contentType);
       const serializedBody = ObjectSerializer.stringify(
-        ObjectSerializer.serialize(assignTagRequest, "AssignTagRequest", ""),
+        ObjectSerializer.serialize(unassignTagRequest, "UnassignTagRequest", ""),
         contentType
       );
       requestContext.setBody(serializedBody);
@@ -41476,10 +42575,10 @@ var ObservableTagsApi = class {
   }
   /**
    *   Version: 9.0.0.cl or later   Removes the tags applied to a Liveboard, Answer, Table, or Worksheet.  Requires edit access to the metadata object.      
-   * @param assignTagRequest 
+   * @param unassignTagRequest 
    */
-  unassignTag(assignTagRequest, _options) {
-    const requestContextPromise = this.requestFactory.unassignTag(assignTagRequest, _options);
+  unassignTag(unassignTagRequest, _options) {
+    const requestContextPromise = this.requestFactory.unassignTag(unassignTagRequest, _options);
     let middlewarePreObservable = from(requestContextPromise);
     for (let middleware of this.configuration.middleware) {
       middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
@@ -43275,10 +44374,10 @@ var ObservableThoughtSpotRestApi = class {
   }
   /**
    *   Version: 9.0.0.cl or later   Removes the tags applied to a Liveboard, Answer, Table, or Worksheet.  Requires edit access to the metadata object.      
-   * @param assignTagRequest 
+   * @param unassignTagRequest 
    */
-  unassignTag(assignTagRequest, _options) {
-    const requestContextPromise = this.requestFactory.unassignTag(assignTagRequest, _options);
+  unassignTag(unassignTagRequest, _options) {
+    const requestContextPromise = this.requestFactory.unassignTag(unassignTagRequest, _options);
     let middlewarePreObservable = from(requestContextPromise);
     for (let middleware of this.configuration.middleware) {
       middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
@@ -45006,10 +46105,10 @@ var PromiseTagsApi = class {
   }
   /**
    *   Version: 9.0.0.cl or later   Removes the tags applied to a Liveboard, Answer, Table, or Worksheet.  Requires edit access to the metadata object.      
-   * @param assignTagRequest 
+   * @param unassignTagRequest 
    */
-  unassignTag(assignTagRequest, _options) {
-    const result = this.api.unassignTag(assignTagRequest, _options);
+  unassignTag(unassignTagRequest, _options) {
+    const result = this.api.unassignTag(unassignTagRequest, _options);
     return result.toPromise();
   }
   /**
@@ -45813,10 +46912,10 @@ var PromiseThoughtSpotRestApi = class {
   }
   /**
    *   Version: 9.0.0.cl or later   Removes the tags applied to a Liveboard, Answer, Table, or Worksheet.  Requires edit access to the metadata object.      
-   * @param assignTagRequest 
+   * @param unassignTagRequest 
    */
-  unassignTag(assignTagRequest, _options) {
-    const result = this.api.unassignTag(assignTagRequest, _options);
+  unassignTag(unassignTagRequest, _options) {
+    const result = this.api.unassignTag(unassignTagRequest, _options);
     return result.toPromise();
   }
   /**
@@ -46321,6 +47420,9 @@ export {
   CommiterType,
   CommunicationChannelPreferencesResponse,
   CommunicationChannelValidateResponse,
+  ConfigureCommunicationChannelPreferencesRequest,
+  ConfigureSecuritySettingsRequest,
+  ConfigureSecuritySettingsRequestClusterPreferences,
   ConnectionConfigurationResponse,
   ConnectionConfigurationSearchRequest,
   PromiseConnectionConfigurationsApi as ConnectionConfigurationsApi,
@@ -46331,6 +47433,9 @@ export {
   ConversationSettingsInput,
   ConvertWorksheetToModelRequest,
   CopyObjectRequest,
+  CreateAgentConversationRequest,
+  CreateAgentConversationRequestConversationSettings,
+  CreateAgentConversationRequestMetadataContext,
   CreateCalendarRequest,
   CreateCalendarRequestTableReference,
   CreateConfigRequest,
@@ -46355,6 +47460,11 @@ export {
   CreateTagRequest,
   CreateUserGroupRequest,
   CreateUserRequest,
+  CreateVariableRequest,
+  CreateWebhookConfigurationRequest,
+  CreateWebhookConfigurationRequestAuthentication,
+  CreateWebhookConfigurationRequestSignatureVerification,
+  CreateWebhookConfigurationRequestStorageDestination,
   CronExpression,
   CronExpressionInput,
   CspSettings,
@@ -46381,6 +47491,7 @@ export {
   DeleteMetadataRequest,
   DeleteMetadataTypeInput,
   DeleteOrgEmailCustomizationRequest,
+  DeleteWebhookConfigurationsRequest,
   DeployCommitRequest,
   DeployResponse,
   PromiseEmailCustomizationApi as EmailCustomizationApi,
@@ -46419,6 +47530,7 @@ export {
   FetchLiveboardDataRequest,
   FetchLiveboardSqlQueryRequest,
   FetchLogsRequest,
+  FetchObjectPrivilegesRequest,
   FetchPermissionsOfPrincipalsRequest,
   FetchPermissionsOnMetadataRequest,
   FilterRules,
@@ -46430,9 +47542,14 @@ export {
   GenericInfo,
   GetAsyncImportStatusResponse,
   GetCustomAccessTokenRequest,
+  GetDataSourceSuggestionsRequest,
   GetFullAccessTokenRequest,
   GetFullAccessTokenRequestUserParameters,
+  GetNLInstructionsRequest,
   GetObjectAccessTokenRequest,
+  GetRelevantQuestionsRequest,
+  GetRelevantQuestionsRequestAiContext,
+  GetRelevantQuestionsRequestMetadataContext,
   GetTokenResponse,
   GroupInfo,
   GroupObject,
@@ -46465,6 +47582,7 @@ export {
   PromiseLogApi as LogApi,
   LogResponse,
   LoginRequest,
+  ManageObjectPrivilegeRequest,
   PromiseMetadataApi as MetadataApi,
   MetadataAssociationItem,
   MetadataContext,
@@ -46538,6 +47656,7 @@ export {
   RevertCommitRequest,
   RevertResponse,
   RevertedMetadata,
+  RevokeRefreshTokensRequest,
   RevokeRefreshTokensResponse,
   RevokeTokenRequest,
   RiseGQLArgWrapper,
@@ -46561,6 +47680,7 @@ export {
   SearchCalendarsRequest,
   SearchCalendarsRequestSortOptions,
   SearchCommitsRequest,
+  SearchCommunicationChannelPreferencesRequest,
   SearchConfigRequest,
   SearchConnectionRequest,
   SearchConnectionRequestSortOptions,
@@ -46579,11 +47699,15 @@ export {
   SearchSchedulesRequest,
   SearchSchedulesRequestHistoryRunsOptions,
   SearchSchedulesRequestSortOptions,
+  SearchSecuritySettingsRequest,
   SearchTagsRequest,
   SearchUserGroupsRequest,
   SearchUserGroupsRequestSortOptions,
   SearchUsersRequest,
   SearchUsersRequestSortOptions,
+  SearchVariablesRequest,
+  SearchWebhookConfigurationsRequest,
+  SearchWebhookConfigurationsRequestSortOptions,
   PromiseSecurityApi as SecurityApi,
   SecuritySettingsClusterPreferences,
   SecuritySettingsClusterPreferencesInput,
@@ -46592,9 +47716,12 @@ export {
   SecuritySettingsOrgPreferencesInput,
   SecuritySettingsResponse,
   SelfDecodingBody,
+  SendAgentMessageRequest,
   SendAgentMessageResponse,
+  SendAgentMessageStreamingRequest,
   SendMessageRequest,
   ServerConfiguration,
+  SetNLInstructionsRequest,
   ShareMetadataRequest,
   ShareMetadataTypeInput,
   SharePermissionsInput,
@@ -46626,6 +47753,7 @@ export {
   URL2 as URL,
   URLInput,
   URLInputMandatory,
+  UnassignTagRequest,
   UnparameterizeMetadataRequest,
   UnpublishMetadataRequest,
   UpdateCalendarRequest,
@@ -46653,6 +47781,9 @@ export {
   UpdateTagRequest,
   UpdateUserGroupRequest,
   UpdateUserRequest,
+  UpdateVariableRequest,
+  UpdateVariableValuesRequest,
+  UpdateWebhookConfigurationRequest,
   User,
   UserGroup,
   UserGroupResponse,
@@ -46661,6 +47792,7 @@ export {
   UserParameterOptions,
   UserPrincipal,
   PromiseUsersApi as UsersApi,
+  ValidateCommunicationChannelRequest,
   ValidateMergeRequest,
   ValidateTokenRequest,
   ValueScopeInput,

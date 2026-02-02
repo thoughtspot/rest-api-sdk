@@ -51,6 +51,9 @@ export * from '../models/CommitResponse';
 export * from '../models/CommiterType';
 export * from '../models/CommunicationChannelPreferencesResponse';
 export * from '../models/CommunicationChannelValidateResponse';
+export * from '../models/ConfigureCommunicationChannelPreferencesRequest';
+export * from '../models/ConfigureSecuritySettingsRequest';
+export * from '../models/ConfigureSecuritySettingsRequestClusterPreferences';
 export * from '../models/ConnectionConfigurationResponse';
 export * from '../models/ConnectionConfigurationSearchRequest';
 export * from '../models/ConnectionInput';
@@ -59,6 +62,9 @@ export * from '../models/Conversation';
 export * from '../models/ConversationSettingsInput';
 export * from '../models/ConvertWorksheetToModelRequest';
 export * from '../models/CopyObjectRequest';
+export * from '../models/CreateAgentConversationRequest';
+export * from '../models/CreateAgentConversationRequestConversationSettings';
+export * from '../models/CreateAgentConversationRequestMetadataContext';
 export * from '../models/CreateCalendarRequest';
 export * from '../models/CreateCalendarRequestTableReference';
 export * from '../models/CreateConfigRequest';
@@ -83,6 +89,11 @@ export * from '../models/CreateScheduleRequestRecipientDetails';
 export * from '../models/CreateTagRequest';
 export * from '../models/CreateUserGroupRequest';
 export * from '../models/CreateUserRequest';
+export * from '../models/CreateVariableRequest';
+export * from '../models/CreateWebhookConfigurationRequest';
+export * from '../models/CreateWebhookConfigurationRequestAuthentication';
+export * from '../models/CreateWebhookConfigurationRequestSignatureVerification';
+export * from '../models/CreateWebhookConfigurationRequestStorageDestination';
 export * from '../models/CronExpression';
 export * from '../models/CronExpressionInput';
 export * from '../models/CspSettings';
@@ -105,6 +116,7 @@ export * from '../models/DeleteConnectionRequest';
 export * from '../models/DeleteMetadataRequest';
 export * from '../models/DeleteMetadataTypeInput';
 export * from '../models/DeleteOrgEmailCustomizationRequest';
+export * from '../models/DeleteWebhookConfigurationsRequest';
 export * from '../models/DeployCommitRequest';
 export * from '../models/DeployResponse';
 export * from '../models/EntityHeader';
@@ -142,6 +154,7 @@ export * from '../models/FetchConnectionDiffStatusResponse';
 export * from '../models/FetchLiveboardDataRequest';
 export * from '../models/FetchLiveboardSqlQueryRequest';
 export * from '../models/FetchLogsRequest';
+export * from '../models/FetchObjectPrivilegesRequest';
 export * from '../models/FetchPermissionsOfPrincipalsRequest';
 export * from '../models/FetchPermissionsOnMetadataRequest';
 export * from '../models/FilterRules';
@@ -153,9 +166,14 @@ export * from '../models/GenerateCSVRequest';
 export * from '../models/GenericInfo';
 export * from '../models/GetAsyncImportStatusResponse';
 export * from '../models/GetCustomAccessTokenRequest';
+export * from '../models/GetDataSourceSuggestionsRequest';
 export * from '../models/GetFullAccessTokenRequest';
 export * from '../models/GetFullAccessTokenRequestUserParameters';
+export * from '../models/GetNLInstructionsRequest';
 export * from '../models/GetObjectAccessTokenRequest';
+export * from '../models/GetRelevantQuestionsRequest';
+export * from '../models/GetRelevantQuestionsRequestAiContext';
+export * from '../models/GetRelevantQuestionsRequestMetadataContext';
 export * from '../models/GetTokenResponse';
 export * from '../models/GroupInfo';
 export * from '../models/GroupObject';
@@ -183,6 +201,7 @@ export * from '../models/LiveboardOptions';
 export * from '../models/LiveboardOptionsInput';
 export * from '../models/LogResponse';
 export * from '../models/LoginRequest';
+export * from '../models/ManageObjectPrivilegeRequest';
 export * from '../models/MetadataAssociationItem';
 export * from '../models/MetadataContext';
 export * from '../models/MetadataInput';
@@ -250,6 +269,7 @@ export * from '../models/ResponseWorksheetToModelConversion';
 export * from '../models/RevertCommitRequest';
 export * from '../models/RevertResponse';
 export * from '../models/RevertedMetadata';
+export * from '../models/RevokeRefreshTokensRequest';
 export * from '../models/RevokeRefreshTokensResponse';
 export * from '../models/RevokeTokenRequest';
 export * from '../models/RiseGQLArgWrapper';
@@ -271,6 +291,7 @@ export * from '../models/ScriptSrcUrlsInput';
 export * from '../models/SearchCalendarsRequest';
 export * from '../models/SearchCalendarsRequestSortOptions';
 export * from '../models/SearchCommitsRequest';
+export * from '../models/SearchCommunicationChannelPreferencesRequest';
 export * from '../models/SearchConfigRequest';
 export * from '../models/SearchConnectionRequest';
 export * from '../models/SearchConnectionRequestSortOptions';
@@ -289,19 +310,26 @@ export * from '../models/SearchRolesRequest';
 export * from '../models/SearchSchedulesRequest';
 export * from '../models/SearchSchedulesRequestHistoryRunsOptions';
 export * from '../models/SearchSchedulesRequestSortOptions';
+export * from '../models/SearchSecuritySettingsRequest';
 export * from '../models/SearchTagsRequest';
 export * from '../models/SearchUserGroupsRequest';
 export * from '../models/SearchUserGroupsRequestSortOptions';
 export * from '../models/SearchUsersRequest';
 export * from '../models/SearchUsersRequestSortOptions';
+export * from '../models/SearchVariablesRequest';
+export * from '../models/SearchWebhookConfigurationsRequest';
+export * from '../models/SearchWebhookConfigurationsRequestSortOptions';
 export * from '../models/SecuritySettingsClusterPreferences';
 export * from '../models/SecuritySettingsClusterPreferencesInput';
 export * from '../models/SecuritySettingsOrgDetails';
 export * from '../models/SecuritySettingsOrgPreferences';
 export * from '../models/SecuritySettingsOrgPreferencesInput';
 export * from '../models/SecuritySettingsResponse';
+export * from '../models/SendAgentMessageRequest';
 export * from '../models/SendAgentMessageResponse';
+export * from '../models/SendAgentMessageStreamingRequest';
 export * from '../models/SendMessageRequest';
+export * from '../models/SetNLInstructionsRequest';
 export * from '../models/ShareMetadataRequest';
 export * from '../models/ShareMetadataTypeInput';
 export * from '../models/SharePermissionsInput';
@@ -330,6 +358,7 @@ export * from '../models/TokenValidationResponse';
 export * from '../models/URL';
 export * from '../models/URLInput';
 export * from '../models/URLInputMandatory';
+export * from '../models/UnassignTagRequest';
 export * from '../models/UnparameterizeMetadataRequest';
 export * from '../models/UnpublishMetadataRequest';
 export * from '../models/UpdateCalendarRequest';
@@ -357,6 +386,9 @@ export * from '../models/UpdateSystemConfigRequest';
 export * from '../models/UpdateTagRequest';
 export * from '../models/UpdateUserGroupRequest';
 export * from '../models/UpdateUserRequest';
+export * from '../models/UpdateVariableRequest';
+export * from '../models/UpdateVariableValuesRequest';
+export * from '../models/UpdateWebhookConfigurationRequest';
 export * from '../models/User';
 export * from '../models/UserGroup';
 export * from '../models/UserGroupResponse';
@@ -364,6 +396,7 @@ export * from '../models/UserInfo';
 export * from '../models/UserObject';
 export * from '../models/UserParameterOptions';
 export * from '../models/UserPrincipal';
+export * from '../models/ValidateCommunicationChannelRequest';
 export * from '../models/ValidateMergeRequest';
 export * from '../models/ValidateTokenRequest';
 export * from '../models/ValueScopeInput';
@@ -445,6 +478,9 @@ import { CommitResponse } from '../models/CommitResponse';
 import { CommiterType } from '../models/CommiterType';
 import { CommunicationChannelPreferencesResponse } from '../models/CommunicationChannelPreferencesResponse';
 import { CommunicationChannelValidateResponse, CommunicationChannelValidateResponseChannelTypeEnum    , CommunicationChannelValidateResponseEventTypeEnum  , CommunicationChannelValidateResponseResultCodeEnum    } from '../models/CommunicationChannelValidateResponse';
+import { ConfigureCommunicationChannelPreferencesRequest } from '../models/ConfigureCommunicationChannelPreferencesRequest';
+import { ConfigureSecuritySettingsRequest } from '../models/ConfigureSecuritySettingsRequest';
+import { ConfigureSecuritySettingsRequestClusterPreferences } from '../models/ConfigureSecuritySettingsRequestClusterPreferences';
 import { ConnectionConfigurationResponse     , ConnectionConfigurationResponsePolicyProcessesEnum   , ConnectionConfigurationResponseDataWarehouseTypeEnum  , ConnectionConfigurationResponsePolicyTypeEnum     } from '../models/ConnectionConfigurationResponse';
 import { ConnectionConfigurationSearchRequest  , ConnectionConfigurationSearchRequestPolicyTypeEnum   } from '../models/ConnectionConfigurationSearchRequest';
 import { ConnectionInput } from '../models/ConnectionInput';
@@ -453,6 +489,9 @@ import { Conversation } from '../models/Conversation';
 import { ConversationSettingsInput } from '../models/ConversationSettingsInput';
 import { ConvertWorksheetToModelRequest } from '../models/ConvertWorksheetToModelRequest';
 import { CopyObjectRequest  , CopyObjectRequestTypeEnum    } from '../models/CopyObjectRequest';
+import { CreateAgentConversationRequest } from '../models/CreateAgentConversationRequest';
+import { CreateAgentConversationRequestConversationSettings } from '../models/CreateAgentConversationRequestConversationSettings';
+import { CreateAgentConversationRequestMetadataContext, CreateAgentConversationRequestMetadataContextTypeEnum      } from '../models/CreateAgentConversationRequestMetadataContext';
 import { CreateCalendarRequest , CreateCalendarRequestCreationMethodEnum     , CreateCalendarRequestCalendarTypeEnum  , CreateCalendarRequestMonthOffsetEnum  , CreateCalendarRequestStartDayOfWeekEnum     } from '../models/CreateCalendarRequest';
 import { CreateCalendarRequestTableReference } from '../models/CreateCalendarRequestTableReference';
 import { CreateConfigRequest } from '../models/CreateConfigRequest';
@@ -477,6 +516,11 @@ import { CreateScheduleRequestRecipientDetails } from '../models/CreateScheduleR
 import { CreateTagRequest } from '../models/CreateTagRequest';
 import { CreateUserGroupRequest    , CreateUserGroupRequestPrivilegesEnum   , CreateUserGroupRequestTypeEnum   , CreateUserGroupRequestVisibilityEnum    } from '../models/CreateUserGroupRequest';
 import { CreateUserRequest    , CreateUserRequestAccountTypeEnum  , CreateUserRequestAccountStatusEnum    , CreateUserRequestVisibilityEnum       , CreateUserRequestPreferredLocaleEnum        } from '../models/CreateUserRequest';
+import { CreateVariableRequest, CreateVariableRequestTypeEnum    , CreateVariableRequestDataTypeEnum   } from '../models/CreateVariableRequest';
+import { CreateWebhookConfigurationRequest    , CreateWebhookConfigurationRequestEventsEnum      } from '../models/CreateWebhookConfigurationRequest';
+import { CreateWebhookConfigurationRequestAuthentication } from '../models/CreateWebhookConfigurationRequestAuthentication';
+import { CreateWebhookConfigurationRequestSignatureVerification, CreateWebhookConfigurationRequestSignatureVerificationTypeEnum   , CreateWebhookConfigurationRequestSignatureVerificationAlgorithmEnum    } from '../models/CreateWebhookConfigurationRequestSignatureVerification';
+import { CreateWebhookConfigurationRequestStorageDestination, CreateWebhookConfigurationRequestStorageDestinationStorageTypeEnum    } from '../models/CreateWebhookConfigurationRequestStorageDestination';
 import { CronExpression } from '../models/CronExpression';
 import { CronExpressionInput } from '../models/CronExpressionInput';
 import { CspSettings } from '../models/CspSettings';
@@ -499,6 +543,7 @@ import { DeleteConnectionRequest } from '../models/DeleteConnectionRequest';
 import { DeleteMetadataRequest } from '../models/DeleteMetadataRequest';
 import { DeleteMetadataTypeInput, DeleteMetadataTypeInputTypeEnum    } from '../models/DeleteMetadataTypeInput';
 import { DeleteOrgEmailCustomizationRequest } from '../models/DeleteOrgEmailCustomizationRequest';
+import { DeleteWebhookConfigurationsRequest } from '../models/DeleteWebhookConfigurationsRequest';
 import { DeployCommitRequest  , DeployCommitRequestDeployTypeEnum  , DeployCommitRequestDeployPolicyEnum   } from '../models/DeployCommitRequest';
 import { DeployResponse } from '../models/DeployResponse';
 import { EntityHeader } from '../models/EntityHeader';
@@ -536,6 +581,7 @@ import { FetchConnectionDiffStatusResponse } from '../models/FetchConnectionDiff
 import { FetchLiveboardDataRequest   , FetchLiveboardDataRequestDataFormatEnum        } from '../models/FetchLiveboardDataRequest';
 import { FetchLiveboardSqlQueryRequest } from '../models/FetchLiveboardSqlQueryRequest';
 import { FetchLogsRequest, FetchLogsRequestLogTypeEnum      } from '../models/FetchLogsRequest';
+import { FetchObjectPrivilegesRequest } from '../models/FetchObjectPrivilegesRequest';
 import { FetchPermissionsOfPrincipalsRequest    , FetchPermissionsOfPrincipalsRequestDefaultMetadataTypeEnum   } from '../models/FetchPermissionsOfPrincipalsRequest';
 import { FetchPermissionsOnMetadataRequest } from '../models/FetchPermissionsOnMetadataRequest';
 import { FilterRules , FilterRulesOperatorEnum    } from '../models/FilterRules';
@@ -547,9 +593,14 @@ import { GenerateCSVRequest  , GenerateCSVRequestCalendarTypeEnum  , GenerateCSV
 import { GenericInfo } from '../models/GenericInfo';
 import { GetAsyncImportStatusResponse } from '../models/GetAsyncImportStatusResponse';
 import { GetCustomAccessTokenRequest     , GetCustomAccessTokenRequestPersistOptionEnum           } from '../models/GetCustomAccessTokenRequest';
+import { GetDataSourceSuggestionsRequest } from '../models/GetDataSourceSuggestionsRequest';
 import { GetFullAccessTokenRequest } from '../models/GetFullAccessTokenRequest';
 import { GetFullAccessTokenRequestUserParameters } from '../models/GetFullAccessTokenRequestUserParameters';
+import { GetNLInstructionsRequest } from '../models/GetNLInstructionsRequest';
 import { GetObjectAccessTokenRequest } from '../models/GetObjectAccessTokenRequest';
+import { GetRelevantQuestionsRequest } from '../models/GetRelevantQuestionsRequest';
+import { GetRelevantQuestionsRequestAiContext } from '../models/GetRelevantQuestionsRequestAiContext';
+import { GetRelevantQuestionsRequestMetadataContext } from '../models/GetRelevantQuestionsRequestMetadataContext';
 import { GetTokenResponse } from '../models/GetTokenResponse';
 import { GroupInfo } from '../models/GroupInfo';
 import { GroupObject } from '../models/GroupObject';
@@ -577,6 +628,7 @@ import { LiveboardOptions } from '../models/LiveboardOptions';
 import { LiveboardOptionsInput } from '../models/LiveboardOptionsInput';
 import { LogResponse } from '../models/LogResponse';
 import { LoginRequest } from '../models/LoginRequest';
+import { ManageObjectPrivilegeRequest, ManageObjectPrivilegeRequestOperationEnum  , ManageObjectPrivilegeRequestMetadataTypeEnum  , ManageObjectPrivilegeRequestObjectPrivilegeTypesEnum     } from '../models/ManageObjectPrivilegeRequest';
 import { MetadataAssociationItem } from '../models/MetadataAssociationItem';
 import { MetadataContext } from '../models/MetadataContext';
 import { MetadataInput , MetadataInputTypeEnum   } from '../models/MetadataInput';
@@ -644,6 +696,7 @@ import { ResponseWorksheetToModelConversion } from '../models/ResponseWorksheetT
 import { RevertCommitRequest  , RevertCommitRequestRevertPolicyEnum   } from '../models/RevertCommitRequest';
 import { RevertResponse } from '../models/RevertResponse';
 import { RevertedMetadata } from '../models/RevertedMetadata';
+import { RevokeRefreshTokensRequest } from '../models/RevokeRefreshTokensRequest';
 import { RevokeRefreshTokensResponse } from '../models/RevokeRefreshTokensResponse';
 import { RevokeTokenRequest } from '../models/RevokeTokenRequest';
 import { RiseGQLArgWrapper } from '../models/RiseGQLArgWrapper';
@@ -665,6 +718,7 @@ import { ScriptSrcUrlsInput } from '../models/ScriptSrcUrlsInput';
 import { SearchCalendarsRequest } from '../models/SearchCalendarsRequest';
 import { SearchCalendarsRequestSortOptions, SearchCalendarsRequestSortOptionsFieldNameEnum  , SearchCalendarsRequestSortOptionsOrderEnum   } from '../models/SearchCalendarsRequestSortOptions';
 import { SearchCommitsRequest , SearchCommitsRequestMetadataTypeEnum      } from '../models/SearchCommitsRequest';
+import { SearchCommunicationChannelPreferencesRequest, SearchCommunicationChannelPreferencesRequestClusterPreferencesEnum    } from '../models/SearchCommunicationChannelPreferencesRequest';
 import { SearchConfigRequest } from '../models/SearchConfigRequest';
 import { SearchConnectionRequest , SearchConnectionRequestDataWarehouseTypesEnum     , SearchConnectionRequestDataWarehouseObjectTypeEnum     , SearchConnectionRequestAuthenticationTypeEnum    } from '../models/SearchConnectionRequest';
 import { SearchConnectionRequestSortOptions, SearchConnectionRequestSortOptionsFieldNameEnum  , SearchConnectionRequestSortOptionsOrderEnum   } from '../models/SearchConnectionRequestSortOptions';
@@ -683,19 +737,26 @@ import { SearchRolesRequest   , SearchRolesRequestPrivilegesEnum     , SearchRol
 import { SearchSchedulesRequest } from '../models/SearchSchedulesRequest';
 import { SearchSchedulesRequestHistoryRunsOptions } from '../models/SearchSchedulesRequestHistoryRunsOptions';
 import { SearchSchedulesRequestSortOptions } from '../models/SearchSchedulesRequestSortOptions';
+import { SearchSecuritySettingsRequest, SearchSecuritySettingsRequestScopeEnum   } from '../models/SearchSecuritySettingsRequest';
 import { SearchTagsRequest } from '../models/SearchTagsRequest';
 import { SearchUserGroupsRequest      , SearchUserGroupsRequestPrivilegesEnum   , SearchUserGroupsRequestTypeEnum   , SearchUserGroupsRequestVisibilityEnum         } from '../models/SearchUserGroupsRequest';
 import { SearchUserGroupsRequestSortOptions, SearchUserGroupsRequestSortOptionsFieldNameEnum  , SearchUserGroupsRequestSortOptionsOrderEnum   } from '../models/SearchUserGroupsRequestSortOptions';
 import { SearchUsersRequest   , SearchUsersRequestVisibilityEnum    , SearchUsersRequestPrivilegesEnum  , SearchUsersRequestAccountTypeEnum  , SearchUsersRequestAccountStatusEnum               } from '../models/SearchUsersRequest';
 import { SearchUsersRequestSortOptions, SearchUsersRequestSortOptionsFieldNameEnum  , SearchUsersRequestSortOptionsOrderEnum   } from '../models/SearchUsersRequestSortOptions';
+import { SearchVariablesRequest    , SearchVariablesRequestResponseContentEnum   } from '../models/SearchVariablesRequest';
+import { SearchWebhookConfigurationsRequest  , SearchWebhookConfigurationsRequestEventTypeEnum      } from '../models/SearchWebhookConfigurationsRequest';
+import { SearchWebhookConfigurationsRequestSortOptions, SearchWebhookConfigurationsRequestSortOptionsFieldNameEnum  , SearchWebhookConfigurationsRequestSortOptionsOrderEnum   } from '../models/SearchWebhookConfigurationsRequestSortOptions';
 import { SecuritySettingsClusterPreferences } from '../models/SecuritySettingsClusterPreferences';
 import { SecuritySettingsClusterPreferencesInput } from '../models/SecuritySettingsClusterPreferencesInput';
 import { SecuritySettingsOrgDetails } from '../models/SecuritySettingsOrgDetails';
 import { SecuritySettingsOrgPreferences } from '../models/SecuritySettingsOrgPreferences';
 import { SecuritySettingsOrgPreferencesInput } from '../models/SecuritySettingsOrgPreferencesInput';
 import { SecuritySettingsResponse } from '../models/SecuritySettingsResponse';
+import { SendAgentMessageRequest } from '../models/SendAgentMessageRequest';
 import { SendAgentMessageResponse } from '../models/SendAgentMessageResponse';
+import { SendAgentMessageStreamingRequest } from '../models/SendAgentMessageStreamingRequest';
 import { SendMessageRequest } from '../models/SendMessageRequest';
+import { SetNLInstructionsRequest } from '../models/SetNLInstructionsRequest';
 import { ShareMetadataRequest, ShareMetadataRequestMetadataTypeEnum            } from '../models/ShareMetadataRequest';
 import { ShareMetadataTypeInput, ShareMetadataTypeInputTypeEnum    } from '../models/ShareMetadataTypeInput';
 import { SharePermissionsInput , SharePermissionsInputShareModeEnum   } from '../models/SharePermissionsInput';
@@ -724,6 +785,7 @@ import { TokenValidationResponse } from '../models/TokenValidationResponse';
 import { URL } from '../models/URL';
 import { URLInput } from '../models/URLInput';
 import { URLInputMandatory } from '../models/URLInputMandatory';
+import { UnassignTagRequest } from '../models/UnassignTagRequest';
 import { UnparameterizeMetadataRequest, UnparameterizeMetadataRequestMetadataTypeEnum   , UnparameterizeMetadataRequestFieldTypeEnum     } from '../models/UnparameterizeMetadataRequest';
 import { UnpublishMetadataRequest } from '../models/UnpublishMetadataRequest';
 import { UpdateCalendarRequest, UpdateCalendarRequestUpdateMethodEnum     , UpdateCalendarRequestCalendarTypeEnum  , UpdateCalendarRequestMonthOffsetEnum  , UpdateCalendarRequestStartDayOfWeekEnum     } from '../models/UpdateCalendarRequest';
@@ -751,6 +813,9 @@ import { UpdateSystemConfigRequest } from '../models/UpdateSystemConfigRequest';
 import { UpdateTagRequest } from '../models/UpdateTagRequest';
 import { UpdateUserGroupRequest    , UpdateUserGroupRequestPrivilegesEnum   , UpdateUserGroupRequestTypeEnum   , UpdateUserGroupRequestVisibilityEnum   , UpdateUserGroupRequestOperationEnum   } from '../models/UpdateUserGroupRequest';
 import { UpdateUserRequest  , UpdateUserRequestVisibilityEnum   , UpdateUserRequestAccountStatusEnum     , UpdateUserRequestAccountTypeEnum      , UpdateUserRequestOperationEnum  , UpdateUserRequestPreferredLocaleEnum      } from '../models/UpdateUserRequest';
+import { UpdateVariableRequest } from '../models/UpdateVariableRequest';
+import { UpdateVariableValuesRequest } from '../models/UpdateVariableValuesRequest';
+import { UpdateWebhookConfigurationRequest    , UpdateWebhookConfigurationRequestEventsEnum      } from '../models/UpdateWebhookConfigurationRequest';
 import { User   , UserVisibilityEnum         , UserAccountTypeEnum  , UserAccountStatusEnum                  , UserParentTypeEnum                    } from '../models/User';
 import { UserGroup } from '../models/UserGroup';
 import { UserGroupResponse                     , UserGroupResponseParentTypeEnum      , UserGroupResponseTypeEnum   , UserGroupResponseVisibilityEnum    } from '../models/UserGroupResponse';
@@ -758,6 +823,7 @@ import { UserInfo } from '../models/UserInfo';
 import { UserObject, UserObjectTypeEnum    } from '../models/UserObject';
 import { UserParameterOptions } from '../models/UserParameterOptions';
 import { UserPrincipal } from '../models/UserPrincipal';
+import { ValidateCommunicationChannelRequest, ValidateCommunicationChannelRequestChannelTypeEnum   , ValidateCommunicationChannelRequestEventTypeEnum   } from '../models/ValidateCommunicationChannelRequest';
 import { ValidateMergeRequest } from '../models/ValidateMergeRequest';
 import { ValidateTokenRequest } from '../models/ValidateTokenRequest';
 import { ValueScopeInput , ValueScopeInputPrincipalTypeEnum     } from '../models/ValueScopeInput';
@@ -824,6 +890,7 @@ let enumsMap: Set<string> = new Set<string>([
     "ConnectionConfigurationSearchRequestPolicyTypeEnum",
     "ContextPayloadV2InputTypeEnum",
     "CopyObjectRequestTypeEnum",
+    "CreateAgentConversationRequestMetadataContextTypeEnum",
     "CreateCalendarRequestCreationMethodEnum",
     "CreateCalendarRequestCalendarTypeEnum",
     "CreateCalendarRequestMonthOffsetEnum",
@@ -845,6 +912,12 @@ let enumsMap: Set<string> = new Set<string>([
     "CreateUserRequestAccountStatusEnum",
     "CreateUserRequestVisibilityEnum",
     "CreateUserRequestPreferredLocaleEnum",
+    "CreateVariableRequestTypeEnum",
+    "CreateVariableRequestDataTypeEnum",
+    "CreateWebhookConfigurationRequestEventsEnum",
+    "CreateWebhookConfigurationRequestSignatureVerificationTypeEnum",
+    "CreateWebhookConfigurationRequestSignatureVerificationAlgorithmEnum",
+    "CreateWebhookConfigurationRequestStorageDestinationStorageTypeEnum",
     "CustomActionMetadataTypeInputTypeEnum",
     "DeleteMetadataTypeInputTypeEnum",
     "DeployCommitRequestDeployTypeEnum",
@@ -891,6 +964,9 @@ let enumsMap: Set<string> = new Set<string>([
     "ImportUserVisibilityEnum",
     "ImportUserPreferredLocaleEnum",
     "JWTMetadataObjectTypeEnum",
+    "ManageObjectPrivilegeRequestOperationEnum",
+    "ManageObjectPrivilegeRequestMetadataTypeEnum",
+    "ManageObjectPrivilegeRequestObjectPrivilegeTypesEnum",
     "MetadataInputTypeEnum",
     "MetadataListItemInputTypeEnum",
     "MetadataListItemInputSubtypesEnum",
@@ -930,6 +1006,7 @@ let enumsMap: Set<string> = new Set<string>([
     "SearchCalendarsRequestSortOptionsFieldNameEnum",
     "SearchCalendarsRequestSortOptionsOrderEnum",
     "SearchCommitsRequestMetadataTypeEnum",
+    "SearchCommunicationChannelPreferencesRequestClusterPreferencesEnum",
     "SearchConnectionRequestDataWarehouseTypesEnum",
     "SearchConnectionRequestDataWarehouseObjectTypeEnum",
     "SearchConnectionRequestAuthenticationTypeEnum",
@@ -948,6 +1025,7 @@ let enumsMap: Set<string> = new Set<string>([
     "SearchRoleResponsePermissionEnum",
     "SearchRolesRequestPrivilegesEnum",
     "SearchRolesRequestPermissionsEnum",
+    "SearchSecuritySettingsRequestScopeEnum",
     "SearchUserGroupsRequestPrivilegesEnum",
     "SearchUserGroupsRequestTypeEnum",
     "SearchUserGroupsRequestVisibilityEnum",
@@ -959,6 +1037,10 @@ let enumsMap: Set<string> = new Set<string>([
     "SearchUsersRequestAccountStatusEnum",
     "SearchUsersRequestSortOptionsFieldNameEnum",
     "SearchUsersRequestSortOptionsOrderEnum",
+    "SearchVariablesRequestResponseContentEnum",
+    "SearchWebhookConfigurationsRequestEventTypeEnum",
+    "SearchWebhookConfigurationsRequestSortOptionsFieldNameEnum",
+    "SearchWebhookConfigurationsRequestSortOptionsOrderEnum",
     "ShareMetadataRequestMetadataTypeEnum",
     "ShareMetadataTypeInputTypeEnum",
     "SharePermissionsInputShareModeEnum",
@@ -1002,6 +1084,7 @@ let enumsMap: Set<string> = new Set<string>([
     "UpdateUserRequestAccountTypeEnum",
     "UpdateUserRequestOperationEnum",
     "UpdateUserRequestPreferredLocaleEnum",
+    "UpdateWebhookConfigurationRequestEventsEnum",
     "UserVisibilityEnum",
     "UserAccountTypeEnum",
     "UserAccountStatusEnum",
@@ -1010,6 +1093,8 @@ let enumsMap: Set<string> = new Set<string>([
     "UserGroupResponseTypeEnum",
     "UserGroupResponseVisibilityEnum",
     "UserObjectTypeEnum",
+    "ValidateCommunicationChannelRequestChannelTypeEnum",
+    "ValidateCommunicationChannelRequestEventTypeEnum",
     "ValueScopeInputPrincipalTypeEnum",
     "VariableVariableTypeEnum",
     "VariableDetailInputTypeEnum",
@@ -1079,6 +1164,9 @@ let typeMap: {[index: string]: any} = {
     "CommiterType": CommiterType,
     "CommunicationChannelPreferencesResponse": CommunicationChannelPreferencesResponse,
     "CommunicationChannelValidateResponse": CommunicationChannelValidateResponse,
+    "ConfigureCommunicationChannelPreferencesRequest": ConfigureCommunicationChannelPreferencesRequest,
+    "ConfigureSecuritySettingsRequest": ConfigureSecuritySettingsRequest,
+    "ConfigureSecuritySettingsRequestClusterPreferences": ConfigureSecuritySettingsRequestClusterPreferences,
     "ConnectionConfigurationResponse": ConnectionConfigurationResponse,
     "ConnectionConfigurationSearchRequest": ConnectionConfigurationSearchRequest,
     "ConnectionInput": ConnectionInput,
@@ -1087,6 +1175,9 @@ let typeMap: {[index: string]: any} = {
     "ConversationSettingsInput": ConversationSettingsInput,
     "ConvertWorksheetToModelRequest": ConvertWorksheetToModelRequest,
     "CopyObjectRequest": CopyObjectRequest,
+    "CreateAgentConversationRequest": CreateAgentConversationRequest,
+    "CreateAgentConversationRequestConversationSettings": CreateAgentConversationRequestConversationSettings,
+    "CreateAgentConversationRequestMetadataContext": CreateAgentConversationRequestMetadataContext,
     "CreateCalendarRequest": CreateCalendarRequest,
     "CreateCalendarRequestTableReference": CreateCalendarRequestTableReference,
     "CreateConfigRequest": CreateConfigRequest,
@@ -1111,6 +1202,11 @@ let typeMap: {[index: string]: any} = {
     "CreateTagRequest": CreateTagRequest,
     "CreateUserGroupRequest": CreateUserGroupRequest,
     "CreateUserRequest": CreateUserRequest,
+    "CreateVariableRequest": CreateVariableRequest,
+    "CreateWebhookConfigurationRequest": CreateWebhookConfigurationRequest,
+    "CreateWebhookConfigurationRequestAuthentication": CreateWebhookConfigurationRequestAuthentication,
+    "CreateWebhookConfigurationRequestSignatureVerification": CreateWebhookConfigurationRequestSignatureVerification,
+    "CreateWebhookConfigurationRequestStorageDestination": CreateWebhookConfigurationRequestStorageDestination,
     "CronExpression": CronExpression,
     "CronExpressionInput": CronExpressionInput,
     "CspSettings": CspSettings,
@@ -1133,6 +1229,7 @@ let typeMap: {[index: string]: any} = {
     "DeleteMetadataRequest": DeleteMetadataRequest,
     "DeleteMetadataTypeInput": DeleteMetadataTypeInput,
     "DeleteOrgEmailCustomizationRequest": DeleteOrgEmailCustomizationRequest,
+    "DeleteWebhookConfigurationsRequest": DeleteWebhookConfigurationsRequest,
     "DeployCommitRequest": DeployCommitRequest,
     "DeployResponse": DeployResponse,
     "EntityHeader": EntityHeader,
@@ -1170,6 +1267,7 @@ let typeMap: {[index: string]: any} = {
     "FetchLiveboardDataRequest": FetchLiveboardDataRequest,
     "FetchLiveboardSqlQueryRequest": FetchLiveboardSqlQueryRequest,
     "FetchLogsRequest": FetchLogsRequest,
+    "FetchObjectPrivilegesRequest": FetchObjectPrivilegesRequest,
     "FetchPermissionsOfPrincipalsRequest": FetchPermissionsOfPrincipalsRequest,
     "FetchPermissionsOnMetadataRequest": FetchPermissionsOnMetadataRequest,
     "FilterRules": FilterRules,
@@ -1181,9 +1279,14 @@ let typeMap: {[index: string]: any} = {
     "GenericInfo": GenericInfo,
     "GetAsyncImportStatusResponse": GetAsyncImportStatusResponse,
     "GetCustomAccessTokenRequest": GetCustomAccessTokenRequest,
+    "GetDataSourceSuggestionsRequest": GetDataSourceSuggestionsRequest,
     "GetFullAccessTokenRequest": GetFullAccessTokenRequest,
     "GetFullAccessTokenRequestUserParameters": GetFullAccessTokenRequestUserParameters,
+    "GetNLInstructionsRequest": GetNLInstructionsRequest,
     "GetObjectAccessTokenRequest": GetObjectAccessTokenRequest,
+    "GetRelevantQuestionsRequest": GetRelevantQuestionsRequest,
+    "GetRelevantQuestionsRequestAiContext": GetRelevantQuestionsRequestAiContext,
+    "GetRelevantQuestionsRequestMetadataContext": GetRelevantQuestionsRequestMetadataContext,
     "GetTokenResponse": GetTokenResponse,
     "GroupInfo": GroupInfo,
     "GroupObject": GroupObject,
@@ -1211,6 +1314,7 @@ let typeMap: {[index: string]: any} = {
     "LiveboardOptionsInput": LiveboardOptionsInput,
     "LogResponse": LogResponse,
     "LoginRequest": LoginRequest,
+    "ManageObjectPrivilegeRequest": ManageObjectPrivilegeRequest,
     "MetadataAssociationItem": MetadataAssociationItem,
     "MetadataContext": MetadataContext,
     "MetadataInput": MetadataInput,
@@ -1278,6 +1382,7 @@ let typeMap: {[index: string]: any} = {
     "RevertCommitRequest": RevertCommitRequest,
     "RevertResponse": RevertResponse,
     "RevertedMetadata": RevertedMetadata,
+    "RevokeRefreshTokensRequest": RevokeRefreshTokensRequest,
     "RevokeRefreshTokensResponse": RevokeRefreshTokensResponse,
     "RevokeTokenRequest": RevokeTokenRequest,
     "RiseGQLArgWrapper": RiseGQLArgWrapper,
@@ -1299,6 +1404,7 @@ let typeMap: {[index: string]: any} = {
     "SearchCalendarsRequest": SearchCalendarsRequest,
     "SearchCalendarsRequestSortOptions": SearchCalendarsRequestSortOptions,
     "SearchCommitsRequest": SearchCommitsRequest,
+    "SearchCommunicationChannelPreferencesRequest": SearchCommunicationChannelPreferencesRequest,
     "SearchConfigRequest": SearchConfigRequest,
     "SearchConnectionRequest": SearchConnectionRequest,
     "SearchConnectionRequestSortOptions": SearchConnectionRequestSortOptions,
@@ -1317,19 +1423,26 @@ let typeMap: {[index: string]: any} = {
     "SearchSchedulesRequest": SearchSchedulesRequest,
     "SearchSchedulesRequestHistoryRunsOptions": SearchSchedulesRequestHistoryRunsOptions,
     "SearchSchedulesRequestSortOptions": SearchSchedulesRequestSortOptions,
+    "SearchSecuritySettingsRequest": SearchSecuritySettingsRequest,
     "SearchTagsRequest": SearchTagsRequest,
     "SearchUserGroupsRequest": SearchUserGroupsRequest,
     "SearchUserGroupsRequestSortOptions": SearchUserGroupsRequestSortOptions,
     "SearchUsersRequest": SearchUsersRequest,
     "SearchUsersRequestSortOptions": SearchUsersRequestSortOptions,
+    "SearchVariablesRequest": SearchVariablesRequest,
+    "SearchWebhookConfigurationsRequest": SearchWebhookConfigurationsRequest,
+    "SearchWebhookConfigurationsRequestSortOptions": SearchWebhookConfigurationsRequestSortOptions,
     "SecuritySettingsClusterPreferences": SecuritySettingsClusterPreferences,
     "SecuritySettingsClusterPreferencesInput": SecuritySettingsClusterPreferencesInput,
     "SecuritySettingsOrgDetails": SecuritySettingsOrgDetails,
     "SecuritySettingsOrgPreferences": SecuritySettingsOrgPreferences,
     "SecuritySettingsOrgPreferencesInput": SecuritySettingsOrgPreferencesInput,
     "SecuritySettingsResponse": SecuritySettingsResponse,
+    "SendAgentMessageRequest": SendAgentMessageRequest,
     "SendAgentMessageResponse": SendAgentMessageResponse,
+    "SendAgentMessageStreamingRequest": SendAgentMessageStreamingRequest,
     "SendMessageRequest": SendMessageRequest,
+    "SetNLInstructionsRequest": SetNLInstructionsRequest,
     "ShareMetadataRequest": ShareMetadataRequest,
     "ShareMetadataTypeInput": ShareMetadataTypeInput,
     "SharePermissionsInput": SharePermissionsInput,
@@ -1358,6 +1471,7 @@ let typeMap: {[index: string]: any} = {
     "URL": URL,
     "URLInput": URLInput,
     "URLInputMandatory": URLInputMandatory,
+    "UnassignTagRequest": UnassignTagRequest,
     "UnparameterizeMetadataRequest": UnparameterizeMetadataRequest,
     "UnpublishMetadataRequest": UnpublishMetadataRequest,
     "UpdateCalendarRequest": UpdateCalendarRequest,
@@ -1385,6 +1499,9 @@ let typeMap: {[index: string]: any} = {
     "UpdateTagRequest": UpdateTagRequest,
     "UpdateUserGroupRequest": UpdateUserGroupRequest,
     "UpdateUserRequest": UpdateUserRequest,
+    "UpdateVariableRequest": UpdateVariableRequest,
+    "UpdateVariableValuesRequest": UpdateVariableValuesRequest,
+    "UpdateWebhookConfigurationRequest": UpdateWebhookConfigurationRequest,
     "User": User,
     "UserGroup": UserGroup,
     "UserGroupResponse": UserGroupResponse,
@@ -1392,6 +1509,7 @@ let typeMap: {[index: string]: any} = {
     "UserObject": UserObject,
     "UserParameterOptions": UserParameterOptions,
     "UserPrincipal": UserPrincipal,
+    "ValidateCommunicationChannelRequest": ValidateCommunicationChannelRequest,
     "ValidateMergeRequest": ValidateMergeRequest,
     "ValidateTokenRequest": ValidateTokenRequest,
     "ValueScopeInput": ValueScopeInput,

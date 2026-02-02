@@ -3610,7 +3610,7 @@ null (empty response body)
 
 <a id="unassignTag"></a>
 # **unassignTag**
-> unassignTag(assignTagRequest)
+> unassignTag(unassignTagRequest)
 
 
 
@@ -3620,7 +3620,7 @@ null (empty response body)
 
 | Name | Type |
 |------------- | ------------- |
-| **assignTagRequest** | [**AssignTagRequest**](AssignTagRequest.md)
+| **unassignTagRequest** | [**UnassignTagRequest**](UnassignTagRequest.md)
 
 ### Return type
 

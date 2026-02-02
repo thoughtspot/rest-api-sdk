@@ -6790,7 +6790,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **unassignTag**
-> void unassignTag(assignTagRequest)
+> void unassignTag(unassignTagRequest)
 
   Version: 9.0.0.cl or later   Removes the tags applied to a Liveboard, Answer, Table, or Worksheet.  Requires edit access to the metadata object.      
 
@@ -6807,7 +6807,7 @@ const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
 const apiInstance = new ThoughtSpotRestApi(configuration);
 
 apiInstance.unassignTag(
-  // AssignTagRequest
+  // UnassignTagRequest
   {
     metadata: [
       {
@@ -6831,7 +6831,7 @@ apiInstance.unassignTag(
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **assignTagRequest** | **AssignTagRequest**|  |
+ **unassignTagRequest** | **UnassignTagRequest**|  |
 
 
 ### Return type

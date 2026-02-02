@@ -45,7 +45,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/createConversation_request'
+              $ref: '#/components/schemas/CreateConversationRequest'
         required: true
       responses:
         "200":
@@ -97,7 +97,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/queryGetDecomposedQuery_request'
+              $ref: '#/components/schemas/QueryGetDecomposedQueryRequest'
         required: true
       responses:
         "200":
@@ -169,7 +169,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/sendMessage_request'
+              $ref: '#/components/schemas/SendMessageRequest'
         required: true
       responses:
         "200":
@@ -231,7 +231,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/singleAnswer_request'
+              $ref: '#/components/schemas/SingleAnswerRequest'
         required: true
       responses:
         "200":
@@ -437,7 +437,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/getCustomAccessToken_request'
+              $ref: '#/components/schemas/GetCustomAccessTokenRequest'
         required: true
       responses:
         "200":
@@ -525,7 +525,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/getFullAccessToken_request'
+              $ref: '#/components/schemas/GetFullAccessTokenRequest'
         required: true
       responses:
         "200":
@@ -611,7 +611,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/getObjectAccessToken_request'
+              $ref: '#/components/schemas/GetObjectAccessTokenRequest'
         required: true
       responses:
         "200":
@@ -675,7 +675,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/login_request'
+              $ref: '#/components/schemas/LoginRequest'
         required: true
       responses:
         "204":
@@ -783,7 +783,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/revokeToken_request'
+              $ref: '#/components/schemas/RevokeTokenRequest'
         required: true
       responses:
         "204":
@@ -840,7 +840,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/validateToken_request'
+              $ref: '#/components/schemas/ValidateTokenRequest'
         required: true
       responses:
         "200":
@@ -906,7 +906,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/connectionConfigurationSearch_request'
+              $ref: '#/components/schemas/ConnectionConfigurationSearchRequest'
         required: true
       responses:
         "200":
@@ -972,7 +972,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/createConnectionConfiguration_request'
+              $ref: '#/components/schemas/CreateConnectionConfigurationRequest'
         required: true
       responses:
         "200":
@@ -1034,7 +1034,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/deleteConnectionConfiguration_request'
+              $ref: '#/components/schemas/DeleteConnectionConfigurationRequest'
         required: true
       responses:
         "204":
@@ -1114,7 +1114,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/updateConnectionConfiguration_request'
+              $ref: '#/components/schemas/UpdateConnectionConfigurationRequest'
         required: true
       responses:
         "204":
@@ -1204,7 +1204,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/createConnection_request'
+              $ref: '#/components/schemas/CreateConnectionRequest'
         required: true
       responses:
         "200":
@@ -1264,7 +1264,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/deleteConnection_request'
+              $ref: '#/components/schemas/DeleteConnectionRequest'
         required: true
       responses:
         "204":
@@ -1553,7 +1553,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/searchConnection_request'
+              $ref: '#/components/schemas/SearchConnectionRequest'
         required: true
       responses:
         "200":
@@ -1619,7 +1619,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/updateConnection_request'
+              $ref: '#/components/schemas/UpdateConnectionRequest'
         required: true
       responses:
         "204":
@@ -1781,7 +1781,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/updateConnectionV2_request'
+              $ref: '#/components/schemas/UpdateConnectionV2Request'
         required: true
       responses:
         "204":
@@ -1842,7 +1842,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/createCustomAction_request'
+              $ref: '#/components/schemas/CreateCustomActionRequest'
         required: true
       responses:
         "200":
@@ -1973,7 +1973,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/searchCustomActions_request'
+              $ref: '#/components/schemas/SearchCustomActionsRequest'
         required: true
       responses:
         "200":
@@ -2065,7 +2065,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/updateCustomAction_request'
+              $ref: '#/components/schemas/UpdateCustomActionRequest'
         required: true
       responses:
         "204":
@@ -2158,7 +2158,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/createCalendar_request'
+              $ref: '#/components/schemas/CreateCalendarRequest'
         required: true
       responses:
         "200":
@@ -2278,7 +2278,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/generateCSV_request'
+              $ref: '#/components/schemas/GenerateCSVRequest'
         required: true
       responses:
         "200":
@@ -2346,7 +2346,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/searchCalendars_request'
+              $ref: '#/components/schemas/SearchCalendarsRequest'
         required: true
       responses:
         "200":
@@ -2436,7 +2436,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/updateCalendar_request'
+              $ref: '#/components/schemas/UpdateCalendarRequest'
         required: true
       responses:
         "204":
@@ -2493,7 +2493,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/fetchAnswerData_request'
+              $ref: '#/components/schemas/FetchAnswerDataRequest'
         required: true
       responses:
         "200":
@@ -2552,7 +2552,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/fetchLiveboardData_request'
+              $ref: '#/components/schemas/FetchLiveboardDataRequest'
         required: true
       responses:
         "200":
@@ -2613,7 +2613,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/searchData_request'
+              $ref: '#/components/schemas/SearchDataRequest'
         required: true
       responses:
         "200":
@@ -3082,7 +3082,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/createEmailCustomization_request'
+              $ref: '#/components/schemas/CreateEmailCustomizationRequest'
         required: true
       responses:
         "200":
@@ -3208,7 +3208,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/deleteOrgEmailCustomization_request'
+              $ref: '#/components/schemas/DeleteOrgEmailCustomizationRequest'
         required: true
       responses:
         "204":
@@ -3269,7 +3269,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/searchEmailCustomization_request'
+              $ref: '#/components/schemas/SearchEmailCustomizationRequest'
         required: true
       responses:
         "200":
@@ -3340,7 +3340,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/updateEmailCustomization_request'
+              $ref: '#/components/schemas/UpdateEmailCustomizationRequest'
         required: true
       responses:
         "204":
@@ -3458,7 +3458,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/createUserGroup_request'
+              $ref: '#/components/schemas/CreateUserGroupRequest'
         required: true
       responses:
         "200":
@@ -3585,7 +3585,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/importUserGroups_request'
+              $ref: '#/components/schemas/ImportUserGroupsRequest'
         required: true
       responses:
         "200":
@@ -3651,7 +3651,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/searchUserGroups_request'
+              $ref: '#/components/schemas/SearchUserGroupsRequest'
         required: true
       responses:
         "200":
@@ -3732,7 +3732,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/updateUserGroup_request'
+              $ref: '#/components/schemas/UpdateUserGroupRequest'
         required: true
       responses:
         "204":
@@ -3788,7 +3788,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/fetchLogs_request'
+              $ref: '#/components/schemas/FetchLogsRequest'
         required: true
       responses:
         "200":
@@ -3874,7 +3874,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/convertWorksheetToModel_request'
+              $ref: '#/components/schemas/ConvertWorksheetToModelRequest'
         required: true
       responses:
         "200":
@@ -3926,7 +3926,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/copyObject_request'
+              $ref: '#/components/schemas/CopyObjectRequest'
         required: true
       responses:
         "200":
@@ -3982,7 +3982,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/deleteMetadata_request'
+              $ref: '#/components/schemas/DeleteMetadataRequest'
         required: true
       responses:
         "204":
@@ -4049,7 +4049,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/exportMetadataTML_request'
+              $ref: '#/components/schemas/ExportMetadataTMLRequest'
         required: true
       responses:
         "200":
@@ -4123,7 +4123,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/exportMetadataTMLBatched_request'
+              $ref: '#/components/schemas/ExportMetadataTMLBatchedRequest'
         required: true
       responses:
         "200":
@@ -4199,7 +4199,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/fetchAnswerSqlQuery_request'
+              $ref: '#/components/schemas/FetchAnswerSqlQueryRequest'
         required: true
       responses:
         "200":
@@ -4255,7 +4255,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/fetchAsyncImportTaskStatus_request'
+              $ref: '#/components/schemas/FetchAsyncImportTaskStatusRequest'
         required: true
       responses:
         "200":
@@ -4333,7 +4333,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/fetchLiveboardSqlQuery_request'
+              $ref: '#/components/schemas/FetchLiveboardSqlQueryRequest'
         required: true
       responses:
         "200":
@@ -4410,7 +4410,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/importMetadataTML_request'
+              $ref: '#/components/schemas/ImportMetadataTMLRequest'
         required: true
       responses:
         "200":
@@ -4480,7 +4480,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/importMetadataTMLAsync_request'
+              $ref: '#/components/schemas/ImportMetadataTMLAsyncRequest'
         required: true
       responses:
         "200":
@@ -4538,7 +4538,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/parameterizeMetadata_request'
+              $ref: '#/components/schemas/ParameterizeMetadataRequest'
         required: true
       responses:
         "204":
@@ -4621,7 +4621,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/searchMetadata_request'
+              $ref: '#/components/schemas/SearchMetadataRequest'
         required: true
       responses:
         "200":
@@ -4681,7 +4681,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/unparameterizeMetadata_request'
+              $ref: '#/components/schemas/UnparameterizeMetadataRequest'
         required: true
       responses:
         "204":
@@ -4763,7 +4763,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/updateMetadataHeader_request'
+              $ref: '#/components/schemas/UpdateMetadataHeaderRequest'
         required: true
       responses:
         "204":
@@ -4837,7 +4837,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/updateMetadataObjId_request'
+              $ref: '#/components/schemas/UpdateMetadataObjIdRequest'
         required: true
       responses:
         "204":
@@ -4896,7 +4896,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/createOrg_request'
+              $ref: '#/components/schemas/CreateOrgRequest'
         required: true
       responses:
         "200":
@@ -5025,7 +5025,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/searchOrgs_request'
+              $ref: '#/components/schemas/SearchOrgsRequest'
         required: true
       responses:
         "200":
@@ -5109,7 +5109,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/updateOrg_request'
+              $ref: '#/components/schemas/UpdateOrgRequest'
         required: true
       responses:
         "204":
@@ -5162,7 +5162,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/exportAnswerReport_request'
+              $ref: '#/components/schemas/ExportAnswerReportRequest'
         required: true
       responses:
         "200":
@@ -5239,7 +5239,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/exportLiveboardReport_request'
+              $ref: '#/components/schemas/ExportLiveboardReportRequest'
         required: true
       responses:
         "200":
@@ -5301,7 +5301,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/createRole_request'
+              $ref: '#/components/schemas/CreateRoleRequest'
         required: true
       responses:
         "200":
@@ -5420,7 +5420,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/searchRoles_request'
+              $ref: '#/components/schemas/SearchRolesRequest'
         required: true
       responses:
         "200":
@@ -5490,7 +5490,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/updateRole_request'
+              $ref: '#/components/schemas/UpdateRoleRequest'
         required: true
       responses:
         "200":
@@ -5563,7 +5563,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/createSchedule_request'
+              $ref: '#/components/schemas/CreateScheduleRequest'
         required: true
       responses:
         "200":
@@ -5666,7 +5666,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/searchSchedules_request'
+              $ref: '#/components/schemas/SearchSchedulesRequest'
         required: true
       responses:
         "200":
@@ -5734,7 +5734,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/updateSchedule_request'
+              $ref: '#/components/schemas/UpdateScheduleRequest'
         required: true
       responses:
         "204":
@@ -5792,7 +5792,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/assignChangeAuthor_request'
+              $ref: '#/components/schemas/AssignChangeAuthorRequest'
         required: true
       responses:
         "204":
@@ -5861,7 +5861,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/fetchColumnSecurityRules_request'
+              $ref: '#/components/schemas/FetchColumnSecurityRulesRequest'
         required: true
       responses:
         "200":
@@ -5919,7 +5919,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/fetchPermissionsOfPrincipals_request'
+              $ref: '#/components/schemas/FetchPermissionsOfPrincipalsRequest'
         required: true
       responses:
         "200":
@@ -6008,7 +6008,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/fetchPermissionsOnMetadata_request'
+              $ref: '#/components/schemas/FetchPermissionsOnMetadataRequest'
         required: true
       responses:
         "200":
@@ -6111,7 +6111,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/publishMetadata_request'
+              $ref: '#/components/schemas/PublishMetadataRequest'
         required: true
       responses:
         "204":
@@ -6171,7 +6171,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/shareMetadata_request'
+              $ref: '#/components/schemas/ShareMetadataRequest'
         required: true
       responses:
         "204":
@@ -6236,7 +6236,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/unpublishMetadata_request'
+              $ref: '#/components/schemas/UnpublishMetadataRequest'
         required: true
       responses:
         "204":
@@ -6326,7 +6326,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/updateColumnSecurityRules_request'
+              $ref: '#/components/schemas/UpdateColumnSecurityRulesRequest'
         required: true
       responses:
         "204":
@@ -6566,7 +6566,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/updateSystemConfig_request'
+              $ref: '#/components/schemas/UpdateSystemConfigRequest'
         required: true
       responses:
         "204":
@@ -6622,7 +6622,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/assignTag_request'
+              $ref: '#/components/schemas/AssignTagRequest'
         required: true
       responses:
         "204":
@@ -6681,7 +6681,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/createTag_request'
+              $ref: '#/components/schemas/CreateTagRequest'
         required: true
       responses:
         "200":
@@ -6814,7 +6814,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/searchTags_request'
+              $ref: '#/components/schemas/SearchTagsRequest'
         required: true
       responses:
         "200":
@@ -6903,7 +6903,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/assignTag_request'
+              $ref: '#/components/schemas/UnassignTagRequest'
         required: true
       responses:
         "204":
@@ -6960,7 +6960,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/updateTag_request'
+              $ref: '#/components/schemas/UpdateTagRequest'
         required: true
       responses:
         "204":
@@ -7023,7 +7023,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/activateUser_request'
+              $ref: '#/components/schemas/ActivateUserRequest'
         required: true
       responses:
         "200":
@@ -7084,7 +7084,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/changeUserPassword_request'
+              $ref: '#/components/schemas/ChangeUserPasswordRequest'
         required: true
       responses:
         "204":
@@ -7143,7 +7143,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/createUser_request'
+              $ref: '#/components/schemas/CreateUserRequest'
         required: true
       responses:
         "200":
@@ -7210,7 +7210,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/deactivateUser_request'
+              $ref: '#/components/schemas/DeactivateUserRequest'
         required: true
       responses:
         "200":
@@ -7326,7 +7326,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/forceLogoutUsers_request'
+              $ref: '#/components/schemas/ForceLogoutUsersRequest'
         required: true
       responses:
         "204":
@@ -7389,7 +7389,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/importUsers_request'
+              $ref: '#/components/schemas/ImportUsersRequest'
         required: true
       responses:
         "200":
@@ -7450,7 +7450,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/resetUserPassword_request'
+              $ref: '#/components/schemas/ResetUserPasswordRequest'
         required: true
       responses:
         "204":
@@ -7510,7 +7510,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/searchUsers_request'
+              $ref: '#/components/schemas/SearchUsersRequest'
         required: true
       responses:
         "200":
@@ -7583,7 +7583,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/updateUser_request'
+              $ref: '#/components/schemas/UpdateUserRequest'
         required: true
       responses:
         "204":
@@ -7646,7 +7646,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/commitBranch_request'
+              $ref: '#/components/schemas/CommitBranchRequest'
         required: true
       responses:
         "200":
@@ -7721,7 +7721,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/createConfig_request'
+              $ref: '#/components/schemas/CreateConfigRequest'
         required: true
       responses:
         "200":
@@ -7783,7 +7783,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/deleteConfig_request'
+              $ref: '#/components/schemas/DeleteConfigRequest'
         required: true
       responses:
         "204":
@@ -7843,7 +7843,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/deployCommit_request'
+              $ref: '#/components/schemas/DeployCommitRequest'
         required: true
       responses:
         "200":
@@ -7919,7 +7919,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/revertCommit_request'
+              $ref: '#/components/schemas/RevertCommitRequest'
         required: true
       responses:
         "200":
@@ -7981,7 +7981,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/searchCommits_request'
+              $ref: '#/components/schemas/SearchCommitsRequest'
         required: true
       responses:
         "200":
@@ -8045,7 +8045,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/searchConfig_request'
+              $ref: '#/components/schemas/SearchConfigRequest'
         required: true
       responses:
         "200":
@@ -8109,7 +8109,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/updateConfig_request'
+              $ref: '#/components/schemas/UpdateConfigRequest'
         required: true
       responses:
         "200":
@@ -8173,7 +8173,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/validateMerge_request'
+              $ref: '#/components/schemas/ValidateMergeRequest'
         required: true
       responses:
         "200":
@@ -8637,6 +8637,9 @@ components:
           type: string
       type: object
     FavoriteMetadataInput:
+      example:
+        identifier: identifier
+        type: LIVEBOARD
       properties:
         identifier:
           description: Unique ID or name of the metadata object.
@@ -9377,6 +9380,14 @@ components:
           type: string
       type: object
     MetadataListItemInput:
+      example:
+        identifier: identifier
+        name_pattern: name_pattern
+        obj_identifier: obj_identifier
+        type: LIVEBOARD
+        subtypes:
+        - ONE_TO_ONE_LOGICAL
+        - ONE_TO_ONE_LOGICAL
       properties:
         identifier:
           description: Unique ID or name of the metadata.
@@ -9436,6 +9447,11 @@ components:
       type: object
     PermissionInput:
       description: Details of users or groups.
+      example:
+        principal:
+          identifier: identifier
+          type: USER
+        share_mode: READ_ONLY
       properties:
         principal:
           $ref: '#/components/schemas/PrincipalsInput'
@@ -9451,6 +9467,9 @@ components:
       - share_mode
       type: object
     ExcludeMetadataListItemInput:
+      example:
+        identifier: identifier
+        type: LIVEBOARD
       properties:
         identifier:
           description: Unique ID or name of the metadata.
@@ -10264,6 +10283,9 @@ components:
           type: object
       type: object
     PrincipalsInput:
+      example:
+        identifier: identifier
+        type: USER
       properties:
         identifier:
           description: Unique ID or name of the principal object such as a user or
@@ -10281,6 +10303,9 @@ components:
       type: object
     PermissionsMetadataTypeInput:
       description: MetadataType InputType used in Permission API's
+      example:
+        identifier: identifier
+        type: LIVEBOARD
       properties:
         type:
           description: "  Type of metadata object.\n  \n\nRequired if the name of\
@@ -10301,6 +10326,9 @@ components:
       - identifier
       type: object
     ColumnSecurityRuleTableInput:
+      example:
+        identifier: identifier
+        obj_identifier: obj_identifier
       properties:
         identifier:
           description: Name or GUID of the table
@@ -10806,6 +10834,18 @@ components:
           type: string
       type: object
     ConnectionInput:
+      example:
+        identifier: identifier
+        data_warehouse_objects:
+        - schema: schema
+          database: database
+          column: column
+          table: table
+        - schema: schema
+          database: database
+          column: column
+          table: table
+        name_pattern: name_pattern
       properties:
         identifier:
           description: Unique ID or name of the connection.
@@ -10824,6 +10864,11 @@ components:
           type: array
       type: object
     DataWarehouseObjectInput:
+      example:
+        schema: schema
+        database: database
+        column: column
+        table: table
       properties:
         database:
           description: Name of the database.
@@ -12030,6 +12075,9 @@ components:
       type: object
     CustomActionMetadataTypeInput:
       description: MetadataType InputType used in Custom Action API's
+      example:
+        identifier: identifier
+        type: VISUALIZATION
       properties:
         type:
           description: "  Type of metadata object.\n  \n\nRequired if the name of\
@@ -13362,6 +13410,12 @@ components:
       type: object
     FilterRules:
       description: Filter Rules to be applied on Objects.
+      example:
+        values:
+        - "{}"
+        - "{}"
+        column_name: column_name
+        operator: EQ
       properties:
         column_name:
           description: The name of the column to apply the filter on.
@@ -13400,6 +13454,11 @@ components:
       type: object
     ParameterValues:
       description: Filter Rules to be applied on Objects.
+      example:
+        values:
+        - "{}"
+        - "{}"
+        name: name
       properties:
         name:
           description: The name of the column to apply the filter on.
@@ -13415,6 +13474,11 @@ components:
       type: object
     VariableValues:
       description: Variable values.
+      example:
+        values:
+        - "{}"
+        - "{}"
+        name: name
       properties:
         name:
           description: The name of the existing formula variable.
@@ -13431,6 +13495,9 @@ components:
     TokenAccessScopeObject:
       description: Objects on which the filter rules and parameters values should
         be applied to
+      example:
+        identifier: identifier
+        type: LOGICAL_TABLE
       properties:
         type:
           description: "  Type of object.\n  \n\nRequired if the name of the object\
@@ -13449,6 +13516,8 @@ components:
       type: object
     Group_Object:
       description: Groups objects.
+      example:
+        identifier: identifier
       properties:
         identifier:
           nullable: true
@@ -13535,6 +13604,31 @@ components:
           type: string
       type: object
     ImportUser:
+      example:
+        user_identifier: user_identifier
+        preferred_locale: en-CA
+        account_type: LOCAL_USER
+        onboarding_experience_completed: true
+        visibility: SHARABLE
+        account_status: ACTIVE
+        display_name: display_name
+        use_browser_language: true
+        home_liveboard_identifier: home_liveboard_identifier
+        notify_on_share: true
+        show_onboarding_experience: true
+        favorite_metadata:
+        - identifier: identifier
+          type: LIVEBOARD
+        - identifier: identifier
+          type: LIVEBOARD
+        password: password
+        group_identifiers:
+        - group_identifiers
+        - group_identifiers
+        org_identifiers:
+        - org_identifiers
+        - org_identifiers
+        email: email
       properties:
         user_identifier:
           description: Unique ID or name of the user.
@@ -13979,6 +14073,9 @@ components:
       - validation_step
       type: object
     TagMetadataTypeInput:
+      example:
+        identifier: identifier
+        type: LIVEBOARD
       properties:
         type:
           description: "  Type of metadata.\n  \n\nRequired if the name of the object\
@@ -14002,6 +14099,24 @@ components:
       - identifier
       type: object
     GroupsImportListInput:
+      example:
+        privileges:
+        - ADMINISTRATION
+        - ADMINISTRATION
+        visibility: SHARABLE
+        group_identifier: group_identifier
+        sub_group_identifiers:
+        - sub_group_identifiers
+        - sub_group_identifiers
+        description: description
+        default_liveboard_identifiers:
+        - default_liveboard_identifiers
+        - default_liveboard_identifiers
+        user_identifiers:
+        - user_identifiers
+        - user_identifiers
+        display_name: display_name
+        type: LOCAL_GROUP
       properties:
         display_name:
           description: Unique display name of the group.
@@ -14425,6 +14540,15 @@ components:
       type: object
     HeaderUpdateInput:
       description: Favorite object options.
+      example:
+        identifier: identifier
+        obj_identifier: obj_identifier
+        attributes:
+        - name: name
+          value: value
+        - name: name
+          value: value
+        type: ANSWER
       properties:
         identifier:
           description: Unique ID of a specified type to identify the header.
@@ -14457,6 +14581,9 @@ components:
       type: object
     HeaderAttributeInput:
       description: Attribute to update in a header.
+      example:
+        name: name
+        value: value
       properties:
         name:
           description: Attribute name to be updated.
@@ -14470,6 +14597,11 @@ components:
       type: object
     UpdateObjIdInput:
       description: Input for updating object ID of a metadata object.
+      example:
+        metadata_identifier: metadata_identifier
+        new_obj_id: new_obj_id
+        type: ANSWER
+        current_obj_id: current_obj_id
       properties:
         metadata_identifier:
           description: GUID or name of the metadata object.
@@ -14501,6 +14633,11 @@ components:
       type: object
     ExportMetadataTypeInput:
       description: MetadataType InputType used in Export MetadataType API
+      example:
+        identifier: identifier
+        session_identifier: session_identifier
+        type: LIVEBOARD
+        generation_number: 0
       properties:
         type:
           description: "  Type of metadata.\n  \n\nRequired if the name of the object\
@@ -14537,6 +14674,9 @@ components:
       type: object
     DeleteMetadataTypeInput:
       description: MetadataType InputType used in Delete MetadataType API
+      example:
+        identifier: identifier
+        type: LIVEBOARD
       properties:
         type:
           description: "  Type of metadata.\n  \n\nRequired if the name of the object\
@@ -14557,6 +14697,9 @@ components:
       - identifier
       type: object
     PublishMetadataListItem:
+      example:
+        identifier: identifier
+        type: LIVEBOARD
       properties:
         identifier:
           description: Unique ID or name of the metadata.
@@ -14574,6 +14717,9 @@ components:
       type: object
     AuthorMetadataTypeInput:
       description: MetadataType InputType used in Author API's
+      example:
+        identifier: identifier
+        type: LIVEBOARD
       properties:
         type:
           description: "  Type of metadata.\n  \n\nRequired if the name of the object\
@@ -14593,6 +14739,9 @@ components:
       - identifier
       type: object
     ShareMetadataTypeInput:
+      example:
+        identifier: identifier
+        type: LIVEBOARD
       properties:
         type:
           description: "  Type of metadata.\n  \n\nType of metadata. Required if the\
@@ -14613,6 +14762,11 @@ components:
       - identifier
       type: object
     SharePermissionsInput:
+      example:
+        principal:
+          identifier: identifier
+          type: USER
+        share_mode: READ_ONLY
       properties:
         principal:
           $ref: '#/components/schemas/PrincipalsInput'
@@ -14628,6 +14782,18 @@ components:
       - share_mode
       type: object
     ColumnSecurityRuleUpdate:
+      example:
+        column_identifier: column_identifier
+        is_unsecured: true
+        group_access:
+        - group_identifiers:
+          - group_identifiers
+          - group_identifiers
+          operation: ADD
+        - group_identifiers:
+          - group_identifiers
+          - group_identifiers
+          operation: ADD
       properties:
         column_identifier:
           description: Column identifier (col_id or name)
@@ -14648,6 +14814,11 @@ components:
       - column_identifier
       type: object
     ColumnSecurityRuleGroupOperation:
+      example:
+        group_identifiers:
+        - group_identifiers
+        - group_identifiers
+        operation: ADD
       properties:
         operation:
           description: Type of operation to be performed on the groups
@@ -14667,6 +14838,9 @@ components:
       - operation
       type: object
     MetadataObject:
+      example:
+        identifier: identifier
+        type: LIVEBOARD
       properties:
         identifier:
           description: Unique ID or name of the metadata
@@ -15574,6 +15748,9 @@ components:
       - status
       type: object
     MetadataInput:
+      example:
+        identifier: identifier
+        type: LIVEBOARD
       properties:
         identifier:
           nullable: true
@@ -15714,6 +15891,12 @@ components:
           type: string
       type: object
     Associate_Metadata_Input_Create:
+      example:
+        identifier: identifier
+        type: VISUALIZATION
+        action_config:
+          visibility: true
+          position: MENU
       properties:
         action_config:
           $ref: '#/components/schemas/ActionConfigInputCreate'
@@ -15736,6 +15919,9 @@ components:
     ActionConfigInputCreate:
       description: Specify that the association is enabled for the metadata object
         Default
+      example:
+        visibility: true
+        position: MENU
       properties:
         position:
           default: MENU
@@ -15807,6 +15993,12 @@ components:
           type: string
       type: object
     Associate_Metadata_Input:
+      example:
+        identifier: identifier
+        type: VISUALIZATION
+        action_config:
+          visibility: true
+          position: MENU
       properties:
         action_config:
           $ref: '#/components/schemas/ActionConfigInput'
@@ -15828,6 +16020,9 @@ components:
     ActionConfigInput:
       description: Specify that the association is enabled for the metadata object
         Default
+      example:
+        visibility: true
+        position: MENU
       properties:
         position:
           description: "Position of the Custom action on the Metadata object. Earlier\
@@ -16511,7 +16706,24 @@ components:
           description: Runtime param override type in JWT.
           type: object
       type: object
-    createConversation_request:
+    CreateAgentConversationRequest:
+      properties:
+        metadata_context:
+          allOf:
+          - $ref: '#/components/schemas/ContextPayloadV2Input'
+          description: Context for the conversation.
+        conversation_settings:
+          allOf:
+          - $ref: '#/components/schemas/ConversationSettingsInput'
+          description: Conversation settings.
+      required:
+      - conversation_settings
+      - metadata_context
+      type: object
+    CreateConversationRequest:
+      example:
+        metadata_identifier: metadata_identifier
+        tokens: tokens
       properties:
         metadata_identifier:
           description: "ID of the metadata object, such as a Worksheet or Model, to\
@@ -16524,7 +16736,70 @@ components:
       required:
       - metadata_identifier
       type: object
-    queryGetDecomposedQuery_request:
+    GetDataSourceSuggestionsRequest:
+      properties:
+        query:
+          description: User query used to suggest data sources.
+          type: string
+      required:
+      - query
+      type: object
+    GetNLInstructionsRequest:
+      properties:
+        data_source_identifier:
+          description: Unique ID or name of the data-model for which to retrieve NL
+            instructions.
+          type: string
+      required:
+      - data_source_identifier
+      type: object
+    GetRelevantQuestionsRequest:
+      properties:
+        metadata_context:
+          allOf:
+          - $ref: '#/components/schemas/MetadataContext'
+          description: metadata for the query to enable generation of relevant sub-questions;
+            at least one context identifier is required.
+        limit_relevant_questions:
+          description: "Maximum number of relevant questions that is allowed in the\
+            \ response, default = 5."
+          format: int32
+          type: integer
+        bypass_cache:
+          description: "If true, results are not returned from cache & calculated\
+            \ every time."
+          nullable: true
+          type: boolean
+        query:
+          description: "A user query that requires breaking down into smaller, more\
+            \ manageable analytical questions to facilitate better understanding and\
+            \ analysis."
+          type: string
+        ai_context:
+          allOf:
+          - $ref: '#/components/schemas/AIContext'
+          description: Additional context to guide the response.
+      required:
+      - metadata_context
+      - query
+      type: object
+    QueryGetDecomposedQueryRequest:
+      example:
+        maxDecomposedQueries: 0
+        worksheetIds:
+        - worksheetIds
+        - worksheetIds
+        liveboardIds:
+        - liveboardIds
+        - liveboardIds
+        conversationId: conversationId
+        nlsRequest: ""
+        answerIds:
+        - answerIds
+        - answerIds
+        content:
+        - content
+        - content
       properties:
         answerIds:
           description: List of answer unique identifiers (GUIDs) whose data will be
@@ -16564,7 +16839,34 @@ components:
             type: string
           type: array
       type: object
-    sendMessage_request:
+    SendAgentMessageRequest:
+      properties:
+        messages:
+          description: messages to be sent to the agent
+          items:
+            type: string
+          type: array
+      required:
+      - messages
+      type: object
+    SendAgentMessageStreamingRequest:
+      properties:
+        conversation_identifier:
+          description: Unique identifier for the conversation (used to track context)
+          type: string
+        messages:
+          description: messages to be sent to the agent
+          items:
+            type: string
+          type: array
+      required:
+      - conversation_identifier
+      - messages
+      type: object
+    SendMessageRequest:
+      example:
+        metadata_identifier: metadata_identifier
+        message: message
       properties:
         metadata_identifier:
           description: "ID of the metadata object, such as a Worksheet or Model, to\
@@ -16578,7 +16880,24 @@ components:
       - message
       - metadata_identifier
       type: object
-    singleAnswer_request:
+    SetNLInstructionsRequest:
+      properties:
+        data_source_identifier:
+          description: Unique ID or name of the data-model for which to set NL instructions.
+          type: string
+        nl_instructions_info:
+          description: List of NL instructions to set for the data-model.
+          items:
+            $ref: '#/components/schemas/NLInstructionsInfoInput'
+          type: array
+      required:
+      - data_source_identifier
+      - nl_instructions_info
+      type: object
+    SingleAnswerRequest:
+      example:
+        metadata_identifier: metadata_identifier
+        query: query
       properties:
         query:
           description: A natural language query string to generate the Answer.
@@ -16591,7 +16910,54 @@ components:
       - metadata_identifier
       - query
       type: object
-    getCustomAccessToken_request:
+    GetCustomAccessTokenRequest:
+      example:
+        parameter_values:
+        - values:
+          - "{}"
+          - "{}"
+          name: name
+        - values:
+          - "{}"
+          - "{}"
+          name: name
+        org_identifier: org_identifier
+        objects:
+        - identifier: identifier
+          type: LOGICAL_TABLE
+        - identifier: identifier
+          type: LOGICAL_TABLE
+        groups:
+        - identifier: identifier
+        - identifier: identifier
+        display_name: display_name
+        secret_key: ""
+        persist_option: REPLACE
+        password: ""
+        variable_values:
+        - values:
+          - "{}"
+          - "{}"
+          name: name
+        - values:
+          - "{}"
+          - "{}"
+          name: name
+        validity_time_in_sec: 0
+        filter_rules:
+        - values:
+          - "{}"
+          - "{}"
+          column_name: column_name
+          operator: EQ
+        - values:
+          - "{}"
+          - "{}"
+          column_name: column_name
+          operator: EQ
+        email: email
+        auto_create: true
+        username: username
       properties:
         username:
           description: Username of the ThoughtSpot user. The username is stored in
@@ -16685,7 +17051,20 @@ components:
       - persist_option
       - username
       type: object
-    getFullAccessToken_request:
+    GetFullAccessTokenRequest:
+      example:
+        secret_key: ""
+        password: ""
+        user_parameters: ""
+        group_identifiers:
+        - group_identifiers
+        - group_identifiers
+        org_id: 6
+        validity_time_in_sec: 0
+        display_name: display_name
+        email: email
+        auto_create: false
+        username: username
       properties:
         username:
           description: Username of the ThoughtSpot user. The username is stored in
@@ -16746,7 +17125,21 @@ components:
       required:
       - username
       type: object
-    getObjectAccessToken_request:
+    GetObjectAccessTokenRequest:
+      example:
+        secret_key: ""
+        password: ""
+        user_parameters: ""
+        group_identifiers:
+        - group_identifiers
+        - group_identifiers
+        org_id: 6
+        validity_time_in_sec: 0
+        display_name: display_name
+        object_id: object_id
+        email: email
+        auto_create: false
+        username: username
       properties:
         username:
           description: Username of the ThoughtSpot user. The username is stored in
@@ -16812,7 +17205,12 @@ components:
       required:
       - username
       type: object
-    login_request:
+    LoginRequest:
+      example:
+        password: password
+        org_identifier: org_identifier
+        remember_me: false
+        username: username
       properties:
         username:
           description: Username of the ThoughtSpot user
@@ -16832,21 +17230,30 @@ components:
           nullable: true
           type: boolean
       type: object
-    revokeToken_request:
+    RevokeTokenRequest:
+      example:
+        user_identifier: user_identifier
+        token: token
       properties:
         user_identifier:
           type: string
         token:
           type: string
       type: object
-    validateToken_request:
+    ValidateTokenRequest:
+      example:
+        token: token
       properties:
         token:
           type: string
       required:
       - token
       type: object
-    connectionConfigurationSearch_request:
+    ConnectionConfigurationSearchRequest:
+      example:
+        policy_type: NO_POLICY
+        configuration_identifier: configuration_identifier
+        connection_identifier: connection_identifier
       properties:
         connection_identifier:
           description: Unique ID or name of the connection.
@@ -16864,7 +17271,22 @@ components:
       required:
       - connection_identifier
       type: object
-    createConnectionConfiguration_request:
+    CreateConnectionConfigurationRequest:
+      example:
+        policy_process_options: ""
+        policy_type: NO_POLICY
+        configuration: "{}"
+        name: name
+        same_as_parent: false
+        description: description
+        policy_principals:
+        - policy_principals
+        - policy_principals
+        authentication_type: SERVICE_ACCOUNT
+        policy_processes:
+        - SAGE_INDEXING
+        - SAGE_INDEXING
+        connection_identifier: connection_identifier
       properties:
         name:
           description: Unique name for the configuration.
@@ -16932,7 +17354,10 @@ components:
       - connection_identifier
       - name
       type: object
-    deleteConnectionConfiguration_request:
+    DeleteConnectionConfigurationRequest:
+      example:
+        configuration_identifier: configuration_identifier
+        connection_identifier: connection_identifier
       properties:
         configuration_identifier:
           description: Unique ID or name of the configuration.
@@ -16944,7 +17369,23 @@ components:
       - configuration_identifier
       - connection_identifier
       type: object
-    updateConnectionConfiguration_request:
+    UpdateConnectionConfigurationRequest:
+      example:
+        policy_process_options: ""
+        policy_type: NO_POLICY
+        configuration: "{}"
+        disable: false
+        name: name
+        same_as_parent: false
+        description: description
+        policy_principals:
+        - policy_principals
+        - policy_principals
+        authentication_type: SERVICE_ACCOUNT
+        policy_processes:
+        - SAGE_INDEXING
+        - SAGE_INDEXING
+        connection_identifier: connection_identifier
       properties:
         connection_identifier:
           description: Unique ID or name of the connection.
@@ -17017,7 +17458,13 @@ components:
       required:
       - connection_identifier
       type: object
-    createConnection_request:
+    CreateConnectionRequest:
+      example:
+        data_warehouse_config: "{}"
+        name: name
+        description: description
+        data_warehouse_type: SNOWFLAKE
+        validate: true
       properties:
         name:
           description: Unique name for the connection.
@@ -17078,7 +17525,9 @@ components:
       - data_warehouse_type
       - name
       type: object
-    deleteConnection_request:
+    DeleteConnectionRequest:
+      example:
+        connection_identifier: connection_identifier
       properties:
         connection_identifier:
           description: Unique ID or name of the connection.
@@ -17086,7 +17535,71 @@ components:
       required:
       - connection_identifier
       type: object
-    searchConnection_request:
+    RevokeRefreshTokensRequest:
+      properties:
+        configuration_identifiers:
+          description: "Unique ID or name of the configuration. When provided, the\
+            \ refresh tokens of the users associated with the connection configuration\
+            \ will be revoked."
+          items:
+            type: string
+          type: array
+        user_identifiers:
+          description: "Unique ID or name of the users. When provided, the refresh\
+            \ tokens of the specified users will be revoked. If the request includes\
+            \ the user ID or name of the connection author, their token will also\
+            \ be revoked."
+          items:
+            type: string
+          type: array
+        org_identifiers:
+          description: "Unique ID or name of the Org. When provided, the refresh tokens\
+            \ of all users associated with the published connection in the Org will\
+            \ be revoked. This parameter is valid only for published connections.\
+            \ Using it with unpublished connections will result in an error."
+          items:
+            type: string
+          type: array
+      type: object
+    SearchConnectionRequest:
+      example:
+        tag_identifiers:
+        - tag_identifiers
+        - tag_identifiers
+        configuration: "{}"
+        record_size: 6
+        data_warehouse_types:
+        - SNOWFLAKE
+        - SNOWFLAKE
+        data_warehouse_object_type: DATABASE
+        include_details: true
+        authentication_type: SERVICE_ACCOUNT
+        connections:
+        - identifier: identifier
+          data_warehouse_objects:
+          - schema: schema
+            database: database
+            column: column
+            table: table
+          - schema: schema
+            database: database
+            column: column
+            table: table
+          name_pattern: name_pattern
+        - identifier: identifier
+          data_warehouse_objects:
+          - schema: schema
+            database: database
+            column: column
+            table: table
+          - schema: schema
+            database: database
+            column: column
+            table: table
+          name_pattern: name_pattern
+        sort_options: ""
+        show_resolved_parameters: false
+        record_offset: 0
       properties:
         connections:
           description: List of connections and name pattern
@@ -17200,7 +17713,13 @@ components:
           nullable: true
           type: boolean
       type: object
-    updateConnection_request:
+    UpdateConnectionRequest:
+      example:
+        data_warehouse_config: "{}"
+        name: name
+        description: description
+        connection_identifier: connection_identifier
+        validate: true
       properties:
         connection_identifier:
           description: Unique ID or name of the connection.
@@ -17222,7 +17741,12 @@ components:
       required:
       - connection_identifier
       type: object
-    updateConnectionV2_request:
+    UpdateConnectionV2Request:
+      example:
+        data_warehouse_config: "{}"
+        name: name
+        description: description
+        validate: true
       properties:
         name:
           description: Updated name of the connection.
@@ -17239,7 +17763,25 @@ components:
           nullable: true
           type: boolean
       type: object
-    createCustomAction_request:
+    CreateCustomActionRequest:
+      example:
+        action_details: ""
+        default_action_config: ""
+        group_identifiers:
+        - group_identifiers
+        - group_identifiers
+        name: name
+        associate_metadata:
+        - identifier: identifier
+          type: VISUALIZATION
+          action_config:
+            visibility: true
+            position: MENU
+        - identifier: identifier
+          type: VISUALIZATION
+          action_config:
+            visibility: true
+            position: MENU
       properties:
         name:
           description: Name of the custom action. The custom action name must be unique.
@@ -17270,7 +17812,19 @@ components:
       - action_details
       - name
       type: object
-    searchCustomActions_request:
+    SearchCustomActionsRequest:
+      example:
+        include_metadata_associations: false
+        metadata:
+        - identifier: identifier
+          type: VISUALIZATION
+        - identifier: identifier
+          type: VISUALIZATION
+        custom_action_identifier: custom_action_identifier
+        default_action_config: ""
+        name_pattern: name_pattern
+        include_group_associations: false
+        type: CALLBACK
       properties:
         custom_action_identifier:
           description: Name or ID of the custom action.
@@ -17309,7 +17863,26 @@ components:
           - URL
           type: string
       type: object
-    updateCustomAction_request:
+    UpdateCustomActionRequest:
+      example:
+        action_details: ""
+        default_action_config: ""
+        group_identifiers:
+        - group_identifiers
+        - group_identifiers
+        name: name
+        operation: ADD
+        associate_metadata:
+        - identifier: identifier
+          type: VISUALIZATION
+          action_config:
+            visibility: true
+            position: MENU
+        - identifier: identifier
+          type: VISUALIZATION
+          action_config:
+            visibility: true
+            position: MENU
       properties:
         action_details:
           allOf:
@@ -17344,7 +17917,18 @@ components:
           - REMOVE
           type: string
       type: object
-    createCalendar_request:
+    CreateCalendarRequest:
+      example:
+        end_date: end_date
+        creation_method: FROM_INPUT_PARAMS
+        start_day_of_week: Sunday
+        name: name
+        calendar_type: MONTH_OFFSET
+        table_reference: ""
+        year_name_prefix: ""
+        month_offset: January
+        start_date: start_date
+        quarter_name_prefix: ""
       properties:
         name:
           description: Name of the custom calendar.
@@ -17426,7 +18010,15 @@ components:
       - name
       - table_reference
       type: object
-    generateCSV_request:
+    GenerateCSVRequest:
+      example:
+        end_date: end_date
+        start_day_of_week: Sunday
+        calendar_type: MONTH_OFFSET
+        year_name_prefix: year_name_prefix
+        month_offset: January
+        start_date: start_date
+        quarter_name_prefix: quarter_name_prefix
       properties:
         start_date:
           description: Start date for the calendar in `MM/dd/yyyy` format.
@@ -17482,7 +18074,13 @@ components:
       - end_date
       - start_date
       type: object
-    searchCalendars_request:
+    SearchCalendarsRequest:
+      example:
+        name_pattern: name_pattern
+        record_size: 6
+        sort_options: ""
+        connection_identifier: connection_identifier
+        record_offset: 0
       properties:
         connection_identifier:
           description: Unique ID or name of the connection.
@@ -17506,7 +18104,17 @@ components:
           - $ref: '#/components/schemas/SortOption'
           description: Sort options.
       type: object
-    updateCalendar_request:
+    UpdateCalendarRequest:
+      example:
+        end_date: end_date
+        start_day_of_week: Sunday
+        update_method: FROM_INPUT_PARAMS
+        calendar_type: MONTH_OFFSET
+        table_reference: ""
+        year_name_prefix: ""
+        month_offset: January
+        start_date: start_date
+        quarter_name_prefix: ""
       properties:
         update_method:
           default: FROM_INPUT_PARAMS
@@ -17583,7 +18191,15 @@ components:
       required:
       - table_reference
       type: object
-    fetchAnswerData_request:
+    FetchAnswerDataRequest:
+      example:
+        data_format: COMPACT
+        runtime_filter: "{}"
+        metadata_identifier: metadata_identifier
+        record_size: 6
+        runtime_sort: "{}"
+        runtime_param_override: "{}"
+        record_offset: 0
       properties:
         metadata_identifier:
           description: GUID or name of the Answer.
@@ -17629,7 +18245,19 @@ components:
       required:
       - metadata_identifier
       type: object
-    fetchLiveboardData_request:
+    FetchLiveboardDataRequest:
+      example:
+        data_format: COMPACT
+        runtime_filter: "{}"
+        metadata_identifier: metadata_identifier
+        record_size: 6
+        visualization_identifiers:
+        - visualization_identifiers
+        - visualization_identifiers
+        runtime_sort: "{}"
+        transient_content: transient_content
+        runtime_param_override: "{}"
+        record_offset: 0
       properties:
         metadata_identifier:
           description: GUID or name of the Liveboard.
@@ -17683,7 +18311,16 @@ components:
       required:
       - metadata_identifier
       type: object
-    searchData_request:
+    SearchDataRequest:
+      example:
+        data_format: COMPACT
+        runtime_filter: "{}"
+        logical_table_identifier: logical_table_identifier
+        record_size: 6
+        runtime_sort: "{}"
+        runtime_param_override: "{}"
+        query_string: query_string
+        record_offset: 0
       properties:
         query_string:
           description: "Query string with search tokens. For example, <code>[Sales][Region]</code>.\
@@ -17737,142 +18374,10 @@ components:
       - logical_table_identifier
       - query_string
       type: object
-    dbtConnection_request:
-      properties:
-        connection_name:
-          description: Name of the connection.
-          type: string
-        database_name:
-          description: Name of the Database.
-          type: string
-        import_type:
-          default: DBT_CLOUD
-          description: Mention type of Import
-          enum:
-          - DBT_CLOUD
-          - ZIP_FILE
-          type: string
-        access_token:
-          description: Access token is mandatory when Import_Type is DBT_CLOUD.
-          type: string
-        dbt_url:
-          description: DBT URL is mandatory when Import_Type is DBT_CLOUD.
-          type: string
-        account_id:
-          description: Account ID is mandatory when Import_Type is DBT_CLOUD
-          type: string
-        project_id:
-          description: Project ID is mandatory when Import_Type is DBT_CLOUD
-          type: string
-        dbt_env_id:
-          description: DBT Environment ID"
-          type: string
-        project_name:
-          description: Name of the project
-          type: string
-        file_content:
-          description: Upload DBT Manifest and Catalog artifact files as a ZIP file.
-            This field is Mandatory when Import Type is 'ZIP_FILE'
-          format: binary
-          type: string
-      required:
-      - connection_name
-      - database_name
-      type: object
-    dbtGenerateSyncTml_request:
-      properties:
-        dbt_connection_identifier:
-          description: Unique ID of the DBT connection.
-          type: string
-        file_content:
-          description: Upload DBT Manifest and Catalog artifact files as a ZIP file.
-            This field is mandatory if the connection was created with import_type
-            ‘ZIP_FILE’
-          format: binary
-          type: string
-      required:
-      - dbt_connection_identifier
-      type: object
-    dbtGenerateTml_request:
-      properties:
-        dbt_connection_identifier:
-          description: Unique ID of the DBT connection.
-          type: string
-        model_tables:
-          description: |-
-            List of Models and their respective Tables
-            Example: '[{"model_name": "model_name", "tables": ["table_name"]}]'
-          format: json
-          type: string
-        import_worksheets:
-          description: Mention the worksheet tmls to import
-          enum:
-          - ALL
-          - NONE
-          - SELECTED
-          type: string
-        worksheets:
-          description: |-
-            List of worksheets is mandatory when import_Worksheets is type SELECTED
-            Example: ["worksheet_name"]
-          format: json
-          type: string
-        file_content:
-          description: Upload DBT Manifest and Catalog artifact files as a ZIP file.
-            This field is mandatory if the connection was created with import_type
-            ‘ZIP_FILE’
-          format: binary
-          type: string
-      required:
-      - dbt_connection_identifier
-      - import_worksheets
-      - model_tables
-      type: object
-    updateDbtConnection_request:
-      properties:
-        dbt_connection_identifier:
-          description: Unique ID of the DBT Connection.
-          type: string
-        connection_name:
-          description: Name of the connection.
-          type: string
-        database_name:
-          description: Name of the Database.
-          type: string
-        import_type:
-          default: DBT_CLOUD
-          description: Mention type of Import
-          enum:
-          - DBT_CLOUD
-          - ZIP_FILE
-          type: string
-        access_token:
-          description: Access token is mandatory when Import_Type is DBT_CLOUD.
-          type: string
-        dbt_url:
-          description: DBT URL is mandatory when Import_Type is DBT_CLOUD.
-          type: string
-        account_id:
-          description: Account ID is mandatory when Import_Type is DBT_CLOUD
-          type: string
-        project_id:
-          description: Project ID is mandatory when Import_Type is DBT_CLOUD
-          type: string
-        dbt_env_id:
-          description: DBT Environment ID"
-          type: string
-        project_name:
-          description: Name of the project
-          type: string
-        file_content:
-          description: Upload DBT Manifest and Catalog artifact files as a ZIP file.
-            This field is Mandatory when Import Type is 'ZIP_FILE'
-          format: binary
-          type: string
-      required:
-      - dbt_connection_identifier
-      type: object
-    createEmailCustomization_request:
+    CreateEmailCustomizationRequest:
+      example:
+        org_identifier: org_identifier
+        template_properties: ""
       properties:
         template_properties:
           allOf:
@@ -17884,7 +18389,11 @@ components:
       required:
       - template_properties
       type: object
-    deleteOrgEmailCustomization_request:
+    DeleteOrgEmailCustomizationRequest:
+      example:
+        org_identifiers:
+        - org_identifiers
+        - org_identifiers
       properties:
         org_identifiers:
           description: Unique identifier of the organization.
@@ -17892,7 +18401,11 @@ components:
             type: string
           type: array
       type: object
-    searchEmailCustomization_request:
+    SearchEmailCustomizationRequest:
+      example:
+        org_identifiers:
+        - org_identifiers
+        - org_identifiers
       properties:
         org_identifiers:
           description: "Unique ID or name of org \n  Version: 10.12.0.cl or later\n"
@@ -17900,7 +18413,10 @@ components:
             type: string
           type: array
       type: object
-    updateEmailCustomization_request:
+    UpdateEmailCustomizationRequest:
+      example:
+        org_identifier: org_identifier
+        template_properties: ""
       properties:
         template_properties:
           allOf:
@@ -17912,7 +18428,28 @@ components:
       required:
       - template_properties
       type: object
-    createUserGroup_request:
+    CreateUserGroupRequest:
+      example:
+        privileges:
+        - ADMINISTRATION
+        - ADMINISTRATION
+        role_identifiers:
+        - role_identifiers
+        - role_identifiers
+        visibility: SHARABLE
+        name: name
+        sub_group_identifiers:
+        - sub_group_identifiers
+        - sub_group_identifiers
+        description: description
+        default_liveboard_identifiers:
+        - default_liveboard_identifiers
+        - default_liveboard_identifiers
+        user_identifiers:
+        - user_identifiers
+        - user_identifiers
+        display_name: display_name
+        type: LOCAL_GROUP
       properties:
         name:
           description: Name of the group. The group name must be unique.
@@ -18007,7 +18544,45 @@ components:
       - display_name
       - name
       type: object
-    importUserGroups_request:
+    ImportUserGroupsRequest:
+      example:
+        delete_unspecified_groups: false
+        groups:
+        - privileges:
+          - ADMINISTRATION
+          - ADMINISTRATION
+          visibility: SHARABLE
+          group_identifier: group_identifier
+          sub_group_identifiers:
+          - sub_group_identifiers
+          - sub_group_identifiers
+          description: description
+          default_liveboard_identifiers:
+          - default_liveboard_identifiers
+          - default_liveboard_identifiers
+          user_identifiers:
+          - user_identifiers
+          - user_identifiers
+          display_name: display_name
+          type: LOCAL_GROUP
+        - privileges:
+          - ADMINISTRATION
+          - ADMINISTRATION
+          visibility: SHARABLE
+          group_identifier: group_identifier
+          sub_group_identifiers:
+          - sub_group_identifiers
+          - sub_group_identifiers
+          description: description
+          default_liveboard_identifiers:
+          - default_liveboard_identifiers
+          - default_liveboard_identifiers
+          user_identifiers:
+          - user_identifiers
+          - user_identifiers
+          display_name: display_name
+          type: LOCAL_GROUP
+        dry_run: true
       properties:
         groups:
           description: Details of groups which are to be imported
@@ -18028,7 +18603,37 @@ components:
           nullable: true
           type: boolean
       type: object
-    searchUserGroups_request:
+    SearchUserGroupsRequest:
+      example:
+        privileges:
+        - ADMINISTRATION
+        - ADMINISTRATION
+        visibility: SHARABLE
+        include_users: true
+        sub_group_identifiers:
+        - sub_group_identifiers
+        - sub_group_identifiers
+        description: description
+        record_size: 6
+        display_name: display_name
+        type: LOCAL_GROUP
+        record_offset: 0
+        role_identifiers:
+        - role_identifiers
+        - role_identifiers
+        name_pattern: name_pattern
+        group_identifier: group_identifier
+        org_identifiers:
+        - org_identifiers
+        - org_identifiers
+        include_sub_groups: true
+        default_liveboard_identifiers:
+        - default_liveboard_identifiers
+        - default_liveboard_identifiers
+        user_identifiers:
+        - user_identifiers
+        - user_identifiers
+        sort_options: ""
       properties:
         default_liveboard_identifiers:
           description: GUID of Liveboards that are assigned as default Liveboards
@@ -18168,7 +18773,29 @@ components:
           nullable: true
           type: boolean
       type: object
-    updateUserGroup_request:
+    UpdateUserGroupRequest:
+      example:
+        privileges:
+        - ADMINISTRATION
+        - ADMINISTRATION
+        role_identifiers:
+        - role_identifiers
+        - role_identifiers
+        visibility: SHARABLE
+        name: name
+        sub_group_identifiers:
+        - sub_group_identifiers
+        - sub_group_identifiers
+        description: description
+        default_liveboard_identifiers:
+        - default_liveboard_identifiers
+        - default_liveboard_identifiers
+        user_identifiers:
+        - user_identifiers
+        - user_identifiers
+        display_name: display_name
+        type: LOCAL_GROUP
+        operation: REPLACE
       properties:
         name:
           description: Name of the group to modify.
@@ -18266,7 +18893,12 @@ components:
           - REPLACE
           type: string
       type: object
-    fetchLogs_request:
+    FetchLogsRequest:
+      example:
+        log_type: SECURITY_AUDIT
+        end_epoch_time_in_millis: 6.0274563
+        get_all_logs: true
+        start_epoch_time_in_millis: 0.8008282
       properties:
         log_type:
           description: Name of the log type
@@ -18289,7 +18921,16 @@ components:
       required:
       - log_type
       type: object
-    convertWorksheetToModel_request:
+    ConvertWorksheetToModelRequest:
+      example:
+        worksheet_ids:
+        - worksheet_ids
+        - worksheet_ids
+        apply_changes: false
+        exclude_worksheet_ids:
+        - exclude_worksheet_ids
+        - exclude_worksheet_ids
+        convert_all: false
       properties:
         worksheet_ids:
           description: List of Worksheet IDs.
@@ -18313,7 +18954,12 @@ components:
           nullable: true
           type: boolean
       type: object
-    copyObject_request:
+    CopyObjectRequest:
+      example:
+        identifier: identifier
+        description: description
+        type: LIVEBOARD
+        title: title
       properties:
         description:
           description: Description of the new object
@@ -18334,7 +18980,14 @@ components:
       required:
       - identifier
       type: object
-    deleteMetadata_request:
+    DeleteMetadataRequest:
+      example:
+        delete_disabled_objects: false
+        metadata:
+        - identifier: identifier
+          type: LIVEBOARD
+        - identifier: identifier
+          type: LIVEBOARD
       properties:
         metadata:
           description: Metadata objects.
@@ -18349,7 +19002,25 @@ components:
       required:
       - metadata
       type: object
-    exportMetadataTML_request:
+    ExportMetadataTMLRequest:
+      example:
+        export_schema_version: DEFAULT
+        all_orgs_override: false
+        metadata:
+        - identifier: identifier
+          session_identifier: session_identifier
+          type: LIVEBOARD
+          generation_number: 0
+        - identifier: identifier
+          session_identifier: session_identifier
+          type: LIVEBOARD
+          generation_number: 0
+        export_associated: false
+        export_fqn: false
+        edoc_format: JSON
+        export_options: ""
+        export_dependent: false
+        export_connection_as_dependent: false
       properties:
         metadata:
           description: Metadata objects.
@@ -18414,7 +19085,14 @@ components:
       required:
       - metadata
       type: object
-    exportMetadataTMLBatched_request:
+    ExportMetadataTMLBatchedRequest:
+      example:
+        batch_offset: 0
+        all_orgs_override: false
+        batch_size: 6
+        metadata_type: USER
+        edoc_format: JSON
+        export_dependent: false
       properties:
         metadata_type:
           description: "Type of metadata object to export, can be one of USER | ROLE\
@@ -18457,7 +19135,9 @@ components:
       required:
       - metadata_type
       type: object
-    fetchAnswerSqlQuery_request:
+    FetchAnswerSqlQueryRequest:
+      example:
+        metadata_identifier: metadata_identifier
       properties:
         metadata_identifier:
           description: ID or name of an Answer.
@@ -18465,7 +19145,18 @@ components:
       required:
       - metadata_identifier
       type: object
-    fetchAsyncImportTaskStatus_request:
+    FetchAsyncImportTaskStatusRequest:
+      example:
+        task_status:
+        - COMPLETED
+        - COMPLETED
+        record_size: 6
+        include_import_response: false
+        task_ids:
+        - task_ids
+        - task_ids
+        author_identifier: author_identifier
+        record_offset: 0
       properties:
         task_ids:
           description: List of task IDs to fetch status for.
@@ -18505,7 +19196,12 @@ components:
           nullable: true
           type: boolean
       type: object
-    fetchLiveboardSqlQuery_request:
+    FetchLiveboardSqlQueryRequest:
+      example:
+        metadata_identifier: metadata_identifier
+        visualization_identifiers:
+        - visualization_identifiers
+        - visualization_identifiers
       properties:
         metadata_identifier:
           description: ID or name of the Liveboard.
@@ -18518,7 +19214,16 @@ components:
       required:
       - metadata_identifier
       type: object
-    importMetadataTML_request:
+    ImportMetadataTMLRequest:
+      example:
+        all_orgs_override: false
+        skip_diff_check: false
+        enable_large_metadata_validation: false
+        import_policy: PARTIAL
+        metadata_tmls:
+        - metadata_tmls
+        - metadata_tmls
+        create_new: false
       properties:
         metadata_tmls:
           description: |-
@@ -18568,7 +19273,16 @@ components:
       required:
       - metadata_tmls
       type: object
-    importMetadataTMLAsync_request:
+    ImportMetadataTMLAsyncRequest:
+      example:
+        all_orgs_override: false
+        skip_diff_check: false
+        enable_large_metadata_validation: false
+        import_policy: PARTIAL_OBJECT
+        metadata_tmls:
+        - metadata_tmls
+        - metadata_tmls
+        create_new: false
       properties:
         metadata_tmls:
           description: Details of TML objects.
@@ -18619,7 +19333,13 @@ components:
       required:
       - metadata_tmls
       type: object
-    parameterizeMetadata_request:
+    ParameterizeMetadataRequest:
+      example:
+        metadata_identifier: metadata_identifier
+        metadata_type: LOGICAL_TABLE
+        variable_identifier: variable_identifier
+        field_type: ATTRIBUTE
+        field_name: field_name
       properties:
         metadata_type:
           description: Type of metadata object to parameterize.
@@ -18649,7 +19369,65 @@ components:
       - metadata_identifier
       - variable_identifier
       type: object
-    searchMetadata_request:
+    SearchMetadataRequest:
+      example:
+        metadata:
+        - identifier: identifier
+          name_pattern: name_pattern
+          obj_identifier: obj_identifier
+          type: LIVEBOARD
+          subtypes:
+          - ONE_TO_ONE_LOGICAL
+          - ONE_TO_ONE_LOGICAL
+        - identifier: identifier
+          name_pattern: name_pattern
+          obj_identifier: obj_identifier
+          type: LIVEBOARD
+          subtypes:
+          - ONE_TO_ONE_LOGICAL
+          - ONE_TO_ONE_LOGICAL
+        include_visualization_headers: false
+        include_only_published_objects: false
+        modified_by_user_identifiers:
+        - modified_by_user_identifiers
+        - modified_by_user_identifiers
+        record_offset: 6
+        created_by_user_identifiers:
+        - created_by_user_identifiers
+        - created_by_user_identifiers
+        exclude_objects:
+        - identifier: identifier
+          type: LIVEBOARD
+        - identifier: identifier
+          type: LIVEBOARD
+        permissions:
+        - principal:
+            identifier: identifier
+            type: USER
+          share_mode: READ_ONLY
+        - principal:
+            identifier: identifier
+            type: USER
+          share_mode: READ_ONLY
+        include_hidden_objects: false
+        show_resolved_parameters: false
+        include_auto_created_objects: false
+        dependent_object_version: V1
+        dependent_objects_record_size: 0
+        tag_identifiers:
+        - tag_identifiers
+        - tag_identifiers
+        include_dependent_objects: false
+        record_size: 1
+        include_details: false
+        include_discoverable_objects: true
+        include_stats: false
+        liveboard_response_version: V1
+        include_worksheet_search_assist_data: true
+        include_headers: true
+        favorite_object_options: ""
+        include_incomplete_objects: false
+        sort_options: ""
       properties:
         metadata:
           description: "Metadata objects such as Liveboards, Answers, and Worksheets."
@@ -18803,7 +19581,13 @@ components:
           nullable: true
           type: boolean
       type: object
-    unparameterizeMetadata_request:
+    UnparameterizeMetadataRequest:
+      example:
+        metadata_identifier: metadata_identifier
+        metadata_type: LOGICAL_TABLE
+        field_type: ATTRIBUTE
+        value: value
+        field_name: field_name
       properties:
         metadata_type:
           description: Type of metadata object to unparameterize.
@@ -18833,7 +19617,26 @@ components:
       - metadata_identifier
       - value
       type: object
-    updateMetadataHeader_request:
+    UpdateMetadataHeaderRequest:
+      example:
+        org_identifier: org_identifier
+        headers_update:
+        - identifier: identifier
+          obj_identifier: obj_identifier
+          attributes:
+          - name: name
+            value: value
+          - name: name
+            value: value
+          type: ANSWER
+        - identifier: identifier
+          obj_identifier: obj_identifier
+          attributes:
+          - name: name
+            value: value
+          - name: name
+            value: value
+          type: ANSWER
       properties:
         headers_update:
           description: List of header objects to update.
@@ -18846,7 +19649,17 @@ components:
       required:
       - headers_update
       type: object
-    updateMetadataObjId_request:
+    UpdateMetadataObjIdRequest:
+      example:
+        metadata:
+        - metadata_identifier: metadata_identifier
+          new_obj_id: new_obj_id
+          type: ANSWER
+          current_obj_id: current_obj_id
+        - metadata_identifier: metadata_identifier
+          new_obj_id: new_obj_id
+          type: ANSWER
+          current_obj_id: current_obj_id
       properties:
         metadata:
           description: List of metadata objects to update their object IDs.
@@ -18856,7 +19669,10 @@ components:
       required:
       - metadata
       type: object
-    createOrg_request:
+    CreateOrgRequest:
+      example:
+        name: name
+        description: description
       properties:
         name:
           description: Name of the Org.
@@ -18867,7 +19683,15 @@ components:
       required:
       - name
       type: object
-    searchOrgs_request:
+    SearchOrgsRequest:
+      example:
+        visibility: SHOW
+        org_identifier: org_identifier
+        description: description
+        user_identifiers:
+        - user_identifiers
+        - user_identifiers
+        status: ACTIVE
       properties:
         org_identifier:
           description: ID or name of the Org
@@ -18894,7 +19718,17 @@ components:
             type: string
           type: array
       type: object
-    updateOrg_request:
+    UpdateOrgRequest:
+      example:
+        group_identifiers:
+        - group_identifiers
+        - group_identifiers
+        name: name
+        description: description
+        user_identifiers:
+        - user_identifiers
+        - user_identifiers
+        operation: ADD
       properties:
         name:
           description: Name of the Org
@@ -18921,7 +19755,16 @@ components:
           - REPLACE
           type: string
       type: object
-    exportAnswerReport_request:
+    ExportAnswerReportRequest:
+      example:
+        runtime_filter: "{}"
+        regional_settings: ""
+        metadata_identifier: metadata_identifier
+        session_identifier: session_identifier
+        runtime_sort: "{}"
+        generation_number: 0
+        runtime_param_override: "{}"
+        file_format: CSV
       properties:
         metadata_identifier:
           description: Unique ID or name of the metadata object.
@@ -18961,7 +19804,25 @@ components:
           description: Options for specific region specific overrides to support date/number/string/currency
             formatting.
       type: object
-    exportLiveboardReport_request:
+    ExportLiveboardReportRequest:
+      example:
+        regional_settings: ""
+        pdf_options: ""
+        transient_content: transient_content
+        runtime_param_override: "{}"
+        runtime_filter: "{}"
+        png_options: ""
+        metadata_identifier: metadata_identifier
+        tab_identifiers:
+        - tab_identifiers
+        - tab_identifiers
+        personalised_view_identifier: personalised_view_identifier
+        visualization_identifiers:
+        - visualization_identifiers
+        - visualization_identifiers
+        runtime_sort: "{}"
+        override_filters: "{}"
+        file_format: PDF
       properties:
         metadata_identifier:
           description: GUID or name of the Liveboard object.
@@ -19068,7 +19929,14 @@ components:
       required:
       - metadata_identifier
       type: object
-    createRole_request:
+    CreateRoleRequest:
+      example:
+        privileges:
+        - USERDATAUPLOADING
+        - USERDATAUPLOADING
+        read_only: false
+        name: name
+        description: description
       properties:
         name:
           description: Unique name of the Role.
@@ -19135,7 +20003,26 @@ components:
       required:
       - name
       type: object
-    searchRoles_request:
+    SearchRolesRequest:
+      example:
+        privileges:
+        - UNKNOWN
+        - UNKNOWN
+        role_identifiers:
+        - role_identifiers
+        - role_identifiers
+        external: true
+        group_identifiers:
+        - group_identifiers
+        - group_identifiers
+        permissions:
+        - READ_ONLY
+        - READ_ONLY
+        deprecated: true
+        org_identifiers:
+        - org_identifiers
+        - org_identifiers
+        shared_via_connection: true
       properties:
         role_identifiers:
           description: unique ID or name of the Roles
@@ -19237,7 +20124,13 @@ components:
             type: string
           type: array
       type: object
-    updateRole_request:
+    UpdateRoleRequest:
+      example:
+        privileges:
+        - USERDATAUPLOADING
+        - USERDATAUPLOADING
+        name: name
+        description: description
       properties:
         name:
           description: Name of the Role.
@@ -19293,7 +20186,19 @@ components:
       required:
       - name
       type: object
-    createSchedule_request:
+    CreateScheduleRequest:
+      example:
+        metadata_identifier: metadata_identifier
+        metadata_type: LIVEBOARD
+        liveboard_options: ""
+        name: name
+        description: description
+        pdf_options: ""
+        recipient_details: ""
+        time_zone: America/Los_Angeles
+        personalised_view_id: personalised_view_id
+        file_format: PDF
+        frequency: ""
       properties:
         name:
           description: Name of the scheduled job.
@@ -19982,7 +20887,20 @@ components:
       - recipient_details
       - time_zone
       type: object
-    searchSchedules_request:
+    SearchSchedulesRequest:
+      example:
+        metadata:
+        - identifier: identifier
+          type: LIVEBOARD
+        - identifier: identifier
+          type: LIVEBOARD
+        record_size: 6
+        history_runs_options: ""
+        sort_options: ""
+        record_offset: 0
+        schedule_identifiers:
+        - schedule_identifiers
+        - schedule_identifiers
       properties:
         metadata:
           description: Metadata objects associated with the scheduled jobs.
@@ -20012,7 +20930,20 @@ components:
             type: string
           type: array
       type: object
-    updateSchedule_request:
+    UpdateScheduleRequest:
+      example:
+        metadata_identifier: metadata_identifier
+        metadata_type: LIVEBOARD
+        liveboard_options: ""
+        name: name
+        description: description
+        pdf_options: ""
+        recipient_details: ""
+        time_zone: Africa/Abidjan
+        personalised_view_id: personalised_view_id
+        file_format: CSV
+        frequency: ""
+        status: ACTIVE
       properties:
         name:
           description: Name of the scheduled job.
@@ -20698,7 +21629,15 @@ components:
           description: Personalised view id of the liveboard to be scheduled.
           type: string
       type: object
-    assignChangeAuthor_request:
+    AssignChangeAuthorRequest:
+      example:
+        user_identifier: user_identifier
+        metadata:
+        - identifier: identifier
+          type: LIVEBOARD
+        - identifier: identifier
+          type: LIVEBOARD
+        current_owner_identifier: current_owner_identifier
       properties:
         metadata:
           description: GUID or name of the metadata object.
@@ -20717,7 +21656,13 @@ components:
       - metadata
       - user_identifier
       type: object
-    fetchColumnSecurityRules_request:
+    FetchColumnSecurityRulesRequest:
+      example:
+        tables:
+        - identifier: identifier
+          obj_identifier: obj_identifier
+        - identifier: identifier
+          obj_identifier: obj_identifier
       properties:
         tables:
           description: Array of table identifier objects for which to fetch column
@@ -20728,7 +21673,53 @@ components:
       required:
       - tables
       type: object
-    fetchPermissionsOfPrincipals_request:
+    FetchObjectPrivilegesRequest:
+      properties:
+        metadata:
+          description: Metadata objects for which you want to fetch object privileges.
+            For now only LOGICAL_TABLE is supported. It may be extended to other metadata
+            types in the future.
+          items:
+            $ref: '#/components/schemas/ObjectPrivilegesMetadataInput'
+          type: array
+        principals:
+          description: |-
+            User or group objects for which you want to fetch object privileges.
+            If not specified, the API returns all users and groups that
+            have object privileges on the specified metadata objects.
+          items:
+            $ref: '#/components/schemas/PrincipalsInput'
+          type: array
+        record_offset:
+          default: 0
+          description: The starting record number from where the records should be
+            included for each metadata type.
+          format: int32
+          type: integer
+        record_size:
+          default: 20
+          description: The number of records that should be included for each metadata
+            type.
+          format: int32
+          type: integer
+      required:
+      - metadata
+      type: object
+    FetchPermissionsOfPrincipalsRequest:
+      example:
+        metadata:
+        - identifier: identifier
+          type: LIVEBOARD
+        - identifier: identifier
+          type: LIVEBOARD
+        record_size: 6
+        default_metadata_type: ALL
+        principals:
+        - identifier: identifier
+          type: USER
+        - identifier: identifier
+          type: USER
+        record_offset: 0
       properties:
         principals:
           description: GUID or name of the user or group.
@@ -20769,7 +21760,22 @@ components:
       required:
       - principals
       type: object
-    fetchPermissionsOnMetadata_request:
+    FetchPermissionsOnMetadataRequest:
+      example:
+        metadata:
+        - identifier: identifier
+          type: LIVEBOARD
+        - identifier: identifier
+          type: LIVEBOARD
+        permission_type: permission_type
+        include_dependent_objects: false
+        record_size: 6
+        principals:
+        - identifier: identifier
+          type: USER
+        - identifier: identifier
+          type: USER
+        record_offset: 0
       properties:
         metadata:
           description: GUID or name of the metadata object.
@@ -20814,7 +21820,60 @@ components:
       required:
       - metadata
       type: object
-    publishMetadata_request:
+    ManageObjectPrivilegeRequest:
+      properties:
+        operation:
+          description: "Operation to perform to manage object privileges. Available\
+            \ operations are: `ADD`, `REMOVE`."
+          enum:
+          - ADD
+          - REMOVE
+          type: string
+        metadata_type:
+          description: Type of metadata objects on which you want to perform the operation.
+            For now only LOGICAL_TABLE is supported. It may be extended to other metadata
+            types in the future.
+          enum:
+          - LOGICAL_TABLE
+          type: string
+        object_privilege_types:
+          description: List of object privilege types on which you want to perform
+            the operation.
+          items:
+            enum:
+            - SPOTTER_COACHING_PRIVILEGE
+            type: string
+          type: array
+        metadata_identifiers:
+          description: List of metadata identifiers (GUID or name) on which you want
+            to perform the operation.
+          items:
+            type: string
+          type: array
+        principals:
+          description: User or group objects (GUID or name) to which you want to apply
+            the given operation and given object privileges.
+          items:
+            $ref: '#/components/schemas/PrincipalsInput'
+          type: array
+      required:
+      - metadata_identifiers
+      - metadata_type
+      - object_privilege_types
+      - operation
+      - principals
+      type: object
+    PublishMetadataRequest:
+      example:
+        metadata:
+        - identifier: identifier
+          type: LIVEBOARD
+        - identifier: identifier
+          type: LIVEBOARD
+        skip_validation: true
+        org_identifiers:
+        - org_identifiers
+        - org_identifiers
       properties:
         metadata:
           description: Metadata objects to be published.
@@ -20835,7 +21894,36 @@ components:
       - metadata
       - org_identifiers
       type: object
-    shareMetadata_request:
+    ShareMetadataRequest:
+      example:
+        emails:
+        - emails
+        - emails
+        metadata:
+        - identifier: identifier
+          type: LIVEBOARD
+        - identifier: identifier
+          type: LIVEBOARD
+        has_lenient_discoverability: false
+        metadata_type: LIVEBOARD
+        permissions:
+        - principal:
+            identifier: identifier
+            type: USER
+          share_mode: READ_ONLY
+        - principal:
+            identifier: identifier
+            type: USER
+          share_mode: READ_ONLY
+        visualization_identifiers:
+        - visualization_identifiers
+        - visualization_identifiers
+        enable_custom_url: false
+        message: message
+        metadata_identifiers:
+        - metadata_identifiers
+        - metadata_identifiers
+        notify_on_share: true
       properties:
         metadata_type:
           description: |-
@@ -20902,7 +21990,18 @@ components:
       - message
       - permissions
       type: object
-    unpublishMetadata_request:
+    UnpublishMetadataRequest:
+      example:
+        include_dependencies: true
+        metadata:
+        - identifier: identifier
+          type: LIVEBOARD
+        - identifier: identifier
+          type: LIVEBOARD
+        org_identifiers:
+        - org_identifiers
+        - org_identifiers
+        force: true
       properties:
         force:
           description: Force unpublishes the object. This will break all the dependent
@@ -20929,7 +22028,34 @@ components:
       - metadata
       - org_identifiers
       type: object
-    updateColumnSecurityRules_request:
+    UpdateColumnSecurityRulesRequest:
+      example:
+        identifier: identifier
+        column_security_rules:
+        - column_identifier: column_identifier
+          is_unsecured: true
+          group_access:
+          - group_identifiers:
+            - group_identifiers
+            - group_identifiers
+            operation: ADD
+          - group_identifiers:
+            - group_identifiers
+            - group_identifiers
+            operation: ADD
+        - column_identifier: column_identifier
+          is_unsecured: true
+          group_access:
+          - group_identifiers:
+            - group_identifiers
+            - group_identifiers
+            operation: ADD
+          - group_identifiers:
+            - group_identifiers
+            - group_identifiers
+            operation: ADD
+        clear_csr: true
+        obj_identifier: obj_identifier
       properties:
         identifier:
           description: GUID or name of the table for which we want to create column
@@ -20952,7 +22078,61 @@ components:
       required:
       - column_security_rules
       type: object
-    updateSystemConfig_request:
+    ConfigureCommunicationChannelPreferencesRequest:
+      properties:
+        cluster_preferences:
+          description: Cluster-level default configurations.
+          items:
+            $ref: '#/components/schemas/EventChannelConfigInput'
+          type: array
+        org_preferences:
+          description: Org-specific configurations.
+          items:
+            $ref: '#/components/schemas/OrgChannelConfigInput'
+          type: array
+      type: object
+    ConfigureSecuritySettingsRequest:
+      properties:
+        cluster_preferences:
+          allOf:
+          - $ref: '#/components/schemas/SecuritySettingsClusterPreferencesInput'
+          description: Cluster-level security preferences.
+        org_preferences:
+          description: Org-level security preferences for the current org.
+          items:
+            $ref: '#/components/schemas/SecuritySettingsOrgPreferencesInput'
+          type: array
+      type: object
+    SearchCommunicationChannelPreferencesRequest:
+      properties:
+        cluster_preferences:
+          description: Event types to search for in cluster-level preferences.
+          items:
+            enum:
+            - LIVEBOARD_SCHEDULE
+            type: string
+          type: array
+        org_preferences:
+          description: Org-specific search criteria.
+          items:
+            $ref: '#/components/schemas/OrgPreferenceSearchCriteriaInput'
+          type: array
+      type: object
+    SearchSecuritySettingsRequest:
+      properties:
+        scope:
+          description: |-
+            Scope of security settings to retrieve. CLUSTER returns cluster-level settings,
+            ORG returns org-level settings for the current org.
+            If not specified, returns both cluster and org settings based on user privileges.
+          enum:
+          - CLUSTER
+          - ORG
+          type: string
+      type: object
+    UpdateSystemConfigRequest:
+      example:
+        configuration: "{}"
       properties:
         configuration:
           description: Configuration JSON with the key-value pair of configuration
@@ -20961,7 +22141,36 @@ components:
       required:
       - configuration
       type: object
-    assignTag_request:
+    ValidateCommunicationChannelRequest:
+      properties:
+        channel_type:
+          description: "Type of communication channel to validate (e.g., WEBHOOK)."
+          enum:
+          - WEBHOOK
+          type: string
+        channel_identifier:
+          description: Unique identifier or name for the communication channel.
+          type: string
+        event_type:
+          description: Event type to validate for this channel.
+          enum:
+          - LIVEBOARD_SCHEDULE
+          type: string
+      required:
+      - channel_identifier
+      - channel_type
+      - event_type
+      type: object
+    AssignTagRequest:
+      example:
+        metadata:
+        - identifier: identifier
+          type: LIVEBOARD
+        - identifier: identifier
+          type: LIVEBOARD
+        tag_identifiers:
+        - tag_identifiers
+        - tag_identifiers
       properties:
         metadata:
           description: Metadata objects.
@@ -20977,7 +22186,10 @@ components:
       - metadata
       - tag_identifiers
       type: object
-    createTag_request:
+    CreateTagRequest:
+      example:
+        color: color
+        name: name
       properties:
         name:
           description: Name of the tag.
@@ -20988,7 +22200,11 @@ components:
       required:
       - name
       type: object
-    searchTags_request:
+    SearchTagsRequest:
+      example:
+        color: color
+        name_pattern: name_pattern
+        tag_identifier: tag_identifier
       properties:
         tag_identifier:
           description: Name or Id of the tag.
@@ -21000,7 +22216,35 @@ components:
           description: Color of the tag.
           type: string
       type: object
-    updateTag_request:
+    UnassignTagRequest:
+      example:
+        metadata:
+        - identifier: identifier
+          type: LIVEBOARD
+        - identifier: identifier
+          type: LIVEBOARD
+        tag_identifiers:
+        - tag_identifiers
+        - tag_identifiers
+      properties:
+        metadata:
+          description: Metadata objects.
+          items:
+            $ref: '#/components/schemas/TagMetadataTypeInput'
+          type: array
+        tag_identifiers:
+          description: GUID or name of the tag.
+          items:
+            type: string
+          type: array
+      required:
+      - metadata
+      - tag_identifiers
+      type: object
+    UpdateTagRequest:
+      example:
+        color: color
+        name: name
       properties:
         name:
           description: Name of the tag.
@@ -21009,7 +22253,12 @@ components:
           description: "Hex color code to be assigned to the tag. For example, #ff78a9."
           type: string
       type: object
-    activateUser_request:
+    ActivateUserRequest:
+      example:
+        user_identifier: user_identifier
+        password: password
+        auth_token: auth_token
+        properties: properties
       properties:
         user_identifier:
           description: Unique ID or name of the user.
@@ -21028,7 +22277,11 @@ components:
       - password
       - user_identifier
       type: object
-    changeUserPassword_request:
+    ChangeUserPasswordRequest:
+      example:
+        user_identifier: user_identifier
+        new_password: new_password
+        current_password: current_password
       properties:
         current_password:
           description: Current password of the user.
@@ -21044,7 +22297,36 @@ components:
       - new_password
       - user_identifier
       type: object
-    createUser_request:
+    CreateUserRequest:
+      example:
+        preferred_locale: en-CA
+        account_type: LOCAL_USER
+        onboarding_experience_completed: false
+        visibility: SHARABLE
+        trigger_welcome_email: true
+        trigger_activation_email: true
+        account_status: ACTIVE
+        display_name: display_name
+        use_browser_language: true
+        home_liveboard_identifier: home_liveboard_identifier
+        notify_on_share: true
+        show_onboarding_experience: true
+        favorite_metadata:
+        - identifier: identifier
+          type: LIVEBOARD
+        - identifier: identifier
+          type: LIVEBOARD
+        password: password
+        group_identifiers:
+        - group_identifiers
+        - group_identifiers
+        extended_properties: "{}"
+        name: name
+        org_identifiers:
+        - org_identifiers
+        - org_identifiers
+        extended_preferences: "{}"
+        email: email
       properties:
         name:
           description: Name of the user. The username string must be unique.
@@ -21192,7 +22474,10 @@ components:
       - email
       - name
       type: object
-    deactivateUser_request:
+    DeactivateUserRequest:
+      example:
+        user_identifier: user_identifier
+        base_url: base_url
       properties:
         user_identifier:
           description: Unique ID or name of the user.
@@ -21204,7 +22489,11 @@ components:
       - base_url
       - user_identifier
       type: object
-    forceLogoutUsers_request:
+    ForceLogoutUsersRequest:
+      example:
+        user_identifiers:
+        - user_identifiers
+        - user_identifiers
       properties:
         user_identifiers:
           description: GUID or name of the users for force logging out their sessions.
@@ -21212,7 +22501,60 @@ components:
             type: string
           type: array
       type: object
-    importUsers_request:
+    ImportUsersRequest:
+      example:
+        delete_unspecified_users: false
+        default_password: default_password
+        dry_run: true
+        users:
+        - user_identifier: user_identifier
+          preferred_locale: en-CA
+          account_type: LOCAL_USER
+          onboarding_experience_completed: true
+          visibility: SHARABLE
+          account_status: ACTIVE
+          display_name: display_name
+          use_browser_language: true
+          home_liveboard_identifier: home_liveboard_identifier
+          notify_on_share: true
+          show_onboarding_experience: true
+          favorite_metadata:
+          - identifier: identifier
+            type: LIVEBOARD
+          - identifier: identifier
+            type: LIVEBOARD
+          password: password
+          group_identifiers:
+          - group_identifiers
+          - group_identifiers
+          org_identifiers:
+          - org_identifiers
+          - org_identifiers
+          email: email
+        - user_identifier: user_identifier
+          preferred_locale: en-CA
+          account_type: LOCAL_USER
+          onboarding_experience_completed: true
+          visibility: SHARABLE
+          account_status: ACTIVE
+          display_name: display_name
+          use_browser_language: true
+          home_liveboard_identifier: home_liveboard_identifier
+          notify_on_share: true
+          show_onboarding_experience: true
+          favorite_metadata:
+          - identifier: identifier
+            type: LIVEBOARD
+          - identifier: identifier
+            type: LIVEBOARD
+          password: password
+          group_identifiers:
+          - group_identifiers
+          - group_identifiers
+          org_identifiers:
+          - org_identifiers
+          - org_identifiers
+          email: email
       properties:
         users:
           description: List of users needs to be imported.
@@ -21238,7 +22580,10 @@ components:
       required:
       - users
       type: object
-    resetUserPassword_request:
+    ResetUserPasswordRequest:
+      example:
+        user_identifier: user_identifier
+        new_password: new_password
       properties:
         new_password:
           description: New password for the user.
@@ -21250,7 +22595,41 @@ components:
       - new_password
       - user_identifier
       type: object
-    searchUsers_request:
+    SearchUsersRequest:
+      example:
+        user_identifier: user_identifier
+        include_variable_values: false
+        privileges:
+        - ADMINISTRATION
+        - ADMINISTRATION
+        account_type: LOCAL_USER
+        onboarding_experience_completed: true
+        visibility: SHARABLE
+        include_favorite_metadata: false
+        record_size: 6
+        account_status: ACTIVE
+        display_name: display_name
+        home_liveboard_identifier: home_liveboard_identifier
+        notify_on_share: true
+        record_offset: 0
+        show_onboarding_experience: true
+        favorite_metadata:
+        - identifier: identifier
+          type: LIVEBOARD
+        - identifier: identifier
+          type: LIVEBOARD
+        role_identifiers:
+        - role_identifiers
+        - role_identifiers
+        group_identifiers:
+        - group_identifiers
+        - group_identifiers
+        name_pattern: name_pattern
+        org_identifiers:
+        - org_identifiers
+        - org_identifiers
+        email: email
+        sort_options: ""
       properties:
         user_identifier:
           description: GUID / name of the user to search
@@ -21403,7 +22782,34 @@ components:
           nullable: true
           type: boolean
       type: object
-    updateUser_request:
+    UpdateUserRequest:
+      example:
+        preferred_locale: en-CA
+        onboarding_experience_completed: true
+        account_type: LOCAL_USER
+        visibility: SHARABLE
+        account_status: ACTIVE
+        display_name: display_name
+        use_browser_language: true
+        home_liveboard_identifier: home_liveboard_identifier
+        notify_on_share: true
+        show_onboarding_experience: true
+        favorite_metadata:
+        - identifier: identifier
+          type: LIVEBOARD
+        - identifier: identifier
+          type: LIVEBOARD
+        group_identifiers:
+        - group_identifiers
+        - group_identifiers
+        extended_properties: "{}"
+        name: name
+        org_identifiers:
+        - org_identifiers
+        - org_identifiers
+        operation: REPLACE
+        extended_preferences: "{}"
+        email: email
       properties:
         name:
           description: Name of the user. The username string must be unique.
@@ -21533,7 +22939,109 @@ components:
           description: Preferences for the user
           type: object
       type: object
-    commitBranch_request:
+    CreateVariableRequest:
+      properties:
+        type:
+          description: Type of variable
+          enum:
+          - CONNECTION_PROPERTY
+          - TABLE_MAPPING
+          - CONNECTION_PROPERTY_PER_PRINCIPAL
+          - FORMULA_VARIABLE
+          type: string
+        name:
+          description: Name of the variable. This is unique across the cluster.
+          type: string
+        is_sensitive:
+          default: false
+          description: If the variable contains sensitive values like passwords
+          nullable: true
+          type: boolean
+        data_type:
+          description: "Variable Data Type, only for formula_variable type, leave\
+            \ empty for others \n  Version: 10.15.0.cl or later\n"
+          enum:
+          - VARCHAR
+          - INT32
+          - INT64
+          - DOUBLE
+          - DATE
+          - DATE_TIME
+          type: string
+      required:
+      - name
+      - type
+      type: object
+    SearchVariablesRequest:
+      properties:
+        variable_details:
+          description: Variable details
+          items:
+            $ref: '#/components/schemas/VariableDetailInput'
+          type: array
+        value_scope:
+          description: Array of scope filters
+          items:
+            $ref: '#/components/schemas/ValueScopeInput'
+          type: array
+        record_offset:
+          default: 0
+          description: The starting record number from where the records should be
+            included
+          format: int32
+          type: integer
+        record_size:
+          default: 10
+          description: The number of records that should be included
+          format: int32
+          type: integer
+        response_content:
+          default: METADATA
+          description: Format in which we want the output
+          enum:
+          - METADATA
+          - METADATA_AND_VALUES
+          type: string
+      type: object
+    UpdateVariableRequest:
+      properties:
+        name:
+          description: New name of the variable.
+          type: string
+      required:
+      - name
+      type: object
+    UpdateVariableValuesRequest:
+      properties:
+        variable_assignment:
+          description: "Array of variable assignment objects specifying the variable\
+            \ identifier, values to assign, and the operation type (ADD, REMOVE, REPLACE,\
+            \ or RESET) to perform on each variable."
+          items:
+            $ref: '#/components/schemas/VariableUpdateAssignmentInput'
+          type: array
+        variable_value_scope:
+          description: "Array of scope objects defining where the variable values\
+            \ apply, including organization context, optional principal constraints\
+            \ (user or group), model reference for formula variables, and priority\
+            \ for conflict resolution."
+          items:
+            $ref: '#/components/schemas/VariableUpdateScopeInput'
+          type: array
+      required:
+      - variable_assignment
+      - variable_value_scope
+      type: object
+    CommitBranchRequest:
+      example:
+        metadata:
+        - identifier: identifier
+          type: LIVEBOARD
+        - identifier: identifier
+          type: LIVEBOARD
+        branch_name: branch_name
+        delete_aware: true
+        comment: comment
       properties:
         metadata:
           description: Metadata objects.
@@ -21558,7 +23066,18 @@ components:
       - comment
       - metadata
       type: object
-    createConfig_request:
+    CreateConfigRequest:
+      example:
+        access_token: access_token
+        branch_names:
+        - branch_names
+        - branch_names
+        enable_guid_mapping: true
+        configuration_branch_name: configuration_branch_name
+        org_identifier: org_identifier
+        repository_url: repository_url
+        commit_branch_name: commit_branch_name
+        username: username
       properties:
         repository_url:
           description: URL for connecting to remote repository
@@ -21605,7 +23124,9 @@ components:
       - repository_url
       - username
       type: object
-    deleteConfig_request:
+    DeleteConfigRequest:
+      example:
+        cluster_level: true
       properties:
         cluster_level:
           description: "   Applicable when Orgs is enabled in the cluster\n   \n\n\
@@ -21616,7 +23137,12 @@ components:
           nullable: true
           type: boolean
       type: object
-    deployCommit_request:
+    DeployCommitRequest:
+      example:
+        branch_name: branch_name
+        deploy_type: DELTA
+        deploy_policy: ALL_OR_NONE
+        commit_id: commit_id
       properties:
         commit_id:
           description: "   Commit_id against which the files should be picked to deploy.\n\
@@ -21649,7 +23175,15 @@ components:
       required:
       - branch_name
       type: object
-    revertCommit_request:
+    RevertCommitRequest:
+      example:
+        metadata:
+        - identifier: identifier
+          type: LIVEBOARD
+        - identifier: identifier
+          type: LIVEBOARD
+        branch_name: branch_name
+        revert_policy: ALL_OR_NONE
       properties:
         metadata:
           description: Metadata objects.
@@ -21670,7 +23204,13 @@ components:
           - PARTIAL
           type: string
       type: object
-    searchCommits_request:
+    SearchCommitsRequest:
+      example:
+        metadata_identifier: metadata_identifier
+        metadata_type: LIVEBOARD
+        branch_name: branch_name
+        record_size: 6
+        record_offset: 0
       properties:
         metadata_identifier:
           description: Unique ID or name of the metadata.
@@ -21703,7 +23243,11 @@ components:
       required:
       - metadata_identifier
       type: object
-    searchConfig_request:
+    SearchConfigRequest:
+      example:
+        org_identifiers:
+        - org_identifiers
+        - org_identifiers
       properties:
         org_identifiers:
           description: "   Applicable when Orgs is enabled in the cluster\n   \n\n\
@@ -21715,7 +23259,17 @@ components:
             type: string
           type: array
       type: object
-    updateConfig_request:
+    UpdateConfigRequest:
+      example:
+        access_token: access_token
+        branch_names:
+        - branch_names
+        - branch_names
+        enable_guid_mapping: true
+        configuration_branch_name: configuration_branch_name
+        org_identifier: org_identifier
+        commit_branch_name: commit_branch_name
+        username: username
       properties:
         username:
           description: Username to authenticate connection to version control system
@@ -21752,7 +23306,10 @@ components:
             \ \n  Version: 9.7.0.cl or later\n"
           type: string
       type: object
-    validateMerge_request:
+    ValidateMergeRequest:
+      example:
+        source_branch_name: source_branch_name
+        target_branch_name: target_branch_name
       properties:
         source_branch_name:
           description: Name of the branch from which changes need to be picked for
@@ -21764,6 +23321,261 @@ components:
       required:
       - source_branch_name
       - target_branch_name
+      type: object
+    CreateWebhookConfigurationRequest:
+      properties:
+        name:
+          description: Name of the webhook configuration.
+          type: string
+        description:
+          description: Description of the webhook configuration.
+          type: string
+        url:
+          description: The webhook endpoint URL.
+          type: string
+        url_params:
+          description: Additional URL parameters as key-value pairs.
+          type: object
+        events:
+          description: List of events to subscribe to.
+          items:
+            enum:
+            - LIVEBOARD_SCHEDULE
+            type: string
+          type: array
+        authentication:
+          allOf:
+          - $ref: '#/components/schemas/WebhookAuthenticationInput'
+          description: Authorization configuration for the webhook.
+        signature_verification:
+          allOf:
+          - $ref: '#/components/schemas/WebhookSignatureVerificationInput'
+          description: Configuration for webhook signature verification.
+        storage_destination:
+          allOf:
+          - $ref: '#/components/schemas/StorageDestinationInput'
+          description: "Configuration for storage destination.\nExample: {\"storage_type\"\
+            : \"AWS_S3\", \"storage_config\": {\"aws_s3_config\": {\"bucket_name\"\
+            : \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\"\
+            , \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"\
+            }}} \n  Version: 26.3.0.cl or later\n"
+      required:
+      - events
+      - name
+      - url
+      type: object
+    DeleteWebhookConfigurationsRequest:
+      properties:
+        webhook_identifiers:
+          description: List of webhook identifiers to delete.
+          items:
+            type: string
+          type: array
+      required:
+      - webhook_identifiers
+      type: object
+    SearchWebhookConfigurationsRequest:
+      properties:
+        org_identifier:
+          description: Unique ID or name of the org.
+          type: string
+        webhook_identifier:
+          description: Unique ID or name of the webhook.
+          type: string
+        event_type:
+          description: Type of webhook event to filter by.
+          enum:
+          - LIVEBOARD_SCHEDULE
+          type: string
+        record_offset:
+          default: 0
+          description: "The offset point, starting from where the webhooks should\
+            \ be included in the response."
+          format: int32
+          type: integer
+        record_size:
+          default: 50
+          description: The number of webhooks that should be included in the response
+            starting from offset position.
+          format: int32
+          type: integer
+        sort_options:
+          allOf:
+          - $ref: '#/components/schemas/WebhookSortOptionsInput'
+          description: Sort option includes sort field and sort order.
+      type: object
+    UpdateWebhookConfigurationRequest:
+      properties:
+        name:
+          description: Name of the webhook configuration.
+          type: string
+        description:
+          description: Description of the webhook configuration.
+          type: string
+        url:
+          description: The webhook endpoint URL.
+          type: string
+        url_params:
+          description: Additional URL parameters as key-value pairs.
+          type: object
+        events:
+          description: List of events to subscribe to.
+          items:
+            enum:
+            - LIVEBOARD_SCHEDULE
+            type: string
+          type: array
+        authentication:
+          allOf:
+          - $ref: '#/components/schemas/WebhookAuthenticationInput'
+          description: Authorization configuration for the webhook.
+        signature_verification:
+          allOf:
+          - $ref: '#/components/schemas/WebhookSignatureVerificationInput'
+          description: Configuration for webhook signature verification.
+        storage_destination:
+          allOf:
+          - $ref: '#/components/schemas/StorageDestinationInput'
+          description: "Configuration for storage destination.\nExample: {\"storage_type\"\
+            : \"AWS_S3\", \"storage_config\": {\"aws_s3_config\": {\"bucket_name\"\
+            : \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\"\
+            , \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"\
+            }}} \n  Version: 26.3.0.cl or later\n"
+      type: object
+    dbtConnection_request:
+      properties:
+        connection_name:
+          description: Name of the connection.
+          type: string
+        database_name:
+          description: Name of the Database.
+          type: string
+        import_type:
+          default: DBT_CLOUD
+          description: Mention type of Import
+          enum:
+          - DBT_CLOUD
+          - ZIP_FILE
+          type: string
+        access_token:
+          description: Access token is mandatory when Import_Type is DBT_CLOUD.
+          type: string
+        dbt_url:
+          description: DBT URL is mandatory when Import_Type is DBT_CLOUD.
+          type: string
+        account_id:
+          description: Account ID is mandatory when Import_Type is DBT_CLOUD
+          type: string
+        project_id:
+          description: Project ID is mandatory when Import_Type is DBT_CLOUD
+          type: string
+        dbt_env_id:
+          description: DBT Environment ID"
+          type: string
+        project_name:
+          description: Name of the project
+          type: string
+        file_content:
+          description: Upload DBT Manifest and Catalog artifact files as a ZIP file.
+            This field is Mandatory when Import Type is 'ZIP_FILE'
+          format: binary
+          type: string
+      required:
+      - connection_name
+      - database_name
+      type: object
+    dbtGenerateSyncTml_request:
+      properties:
+        dbt_connection_identifier:
+          description: Unique ID of the DBT connection.
+          type: string
+        file_content:
+          description: Upload DBT Manifest and Catalog artifact files as a ZIP file.
+            This field is mandatory if the connection was created with import_type
+            ‘ZIP_FILE’
+          format: binary
+          type: string
+      required:
+      - dbt_connection_identifier
+      type: object
+    dbtGenerateTml_request:
+      properties:
+        dbt_connection_identifier:
+          description: Unique ID of the DBT connection.
+          type: string
+        model_tables:
+          description: |-
+            List of Models and their respective Tables
+            Example: '[{"model_name": "model_name", "tables": ["table_name"]}]'
+          format: json
+          type: string
+        import_worksheets:
+          description: Mention the worksheet tmls to import
+          enum:
+          - ALL
+          - NONE
+          - SELECTED
+          type: string
+        worksheets:
+          description: |-
+            List of worksheets is mandatory when import_Worksheets is type SELECTED
+            Example: ["worksheet_name"]
+          format: json
+          type: string
+        file_content:
+          description: Upload DBT Manifest and Catalog artifact files as a ZIP file.
+            This field is mandatory if the connection was created with import_type
+            ‘ZIP_FILE’
+          format: binary
+          type: string
+      required:
+      - dbt_connection_identifier
+      - import_worksheets
+      - model_tables
+      type: object
+    updateDbtConnection_request:
+      properties:
+        dbt_connection_identifier:
+          description: Unique ID of the DBT Connection.
+          type: string
+        connection_name:
+          description: Name of the connection.
+          type: string
+        database_name:
+          description: Name of the Database.
+          type: string
+        import_type:
+          default: DBT_CLOUD
+          description: Mention type of Import
+          enum:
+          - DBT_CLOUD
+          - ZIP_FILE
+          type: string
+        access_token:
+          description: Access token is mandatory when Import_Type is DBT_CLOUD.
+          type: string
+        dbt_url:
+          description: DBT URL is mandatory when Import_Type is DBT_CLOUD.
+          type: string
+        account_id:
+          description: Account ID is mandatory when Import_Type is DBT_CLOUD
+          type: string
+        project_id:
+          description: Project ID is mandatory when Import_Type is DBT_CLOUD
+          type: string
+        dbt_env_id:
+          description: DBT Environment ID"
+          type: string
+        project_name:
+          description: Name of the project
+          type: string
+        file_content:
+          description: Upload DBT Manifest and Catalog artifact files as a ZIP file.
+            This field is Mandatory when Import Type is 'ZIP_FILE'
+          format: binary
+          type: string
+      required:
+      - dbt_connection_identifier
       type: object
   securitySchemes:
     bearerAuth:

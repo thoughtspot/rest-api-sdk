@@ -123,6 +123,7 @@ import com.thoughtspot.client.model.SystemOverrideInfo;
 import com.thoughtspot.client.model.Tag;
 import com.thoughtspot.client.model.Token;
 import com.thoughtspot.client.model.TokenValidationResponse;
+import com.thoughtspot.client.model.UnassignTagRequest;
 import com.thoughtspot.client.model.UnparameterizeMetadataRequest;
 import com.thoughtspot.client.model.UnpublishMetadataRequest;
 import com.thoughtspot.client.model.UpdateCalendarRequest;
@@ -2437,8 +2438,8 @@ public class ThoughtSpotRestApiTest {
      */
     @Test
     public void unassignTagTest() throws ApiException {
-        AssignTagRequest assignTagRequest = null;
-        api.unassignTag(assignTagRequest);
+        UnassignTagRequest unassignTagRequest = null;
+        api.unassignTag(unassignTagRequest);
         // TODO: test validations
     }
 

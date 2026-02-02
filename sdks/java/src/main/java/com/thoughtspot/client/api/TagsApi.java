@@ -16,6 +16,7 @@ import com.thoughtspot.client.model.AssignTagRequest;
 import com.thoughtspot.client.model.CreateTagRequest;
 import com.thoughtspot.client.model.SearchTagsRequest;
 import com.thoughtspot.client.model.Tag;
+import com.thoughtspot.client.model.UnassignTagRequest;
 import com.thoughtspot.client.model.UpdateTagRequest;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -761,7 +762,7 @@ public class TagsApi {
     /**
      * Build call for unassignTag
      *
-     * @param assignTagRequest (required)
+     * @param unassignTagRequest (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -777,7 +778,8 @@ public class TagsApi {
      * </table>
      */
     public okhttp3.Call unassignTagCall(
-            AssignTagRequest assignTagRequest, final ApiCallback _callback) throws ApiException {
+            UnassignTagRequest unassignTagRequest, final ApiCallback _callback)
+            throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {};
@@ -791,7 +793,7 @@ public class TagsApi {
             basePath = null;
         }
 
-        Object localVarPostBody = assignTagRequest;
+        Object localVarPostBody = unassignTagRequest;
 
         // create path and map variables
         String localVarPath = "/api/rest/2.0/tags/unassign";
@@ -832,22 +834,23 @@ public class TagsApi {
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call unassignTagValidateBeforeCall(
-            AssignTagRequest assignTagRequest, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'assignTagRequest' is set
-        if (assignTagRequest == null) {
+            UnassignTagRequest unassignTagRequest, final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'unassignTagRequest' is set
+        if (unassignTagRequest == null) {
             throw new ApiException(
-                    "Missing the required parameter 'assignTagRequest' when calling"
+                    "Missing the required parameter 'unassignTagRequest' when calling"
                             + " unassignTag(Async)");
         }
 
-        return unassignTagCall(assignTagRequest, _callback);
+        return unassignTagCall(unassignTagRequest, _callback);
     }
 
     /**
      * Version: 9.0.0.cl or later Removes the tags applied to a Liveboard, Answer, Table, or
      * Worksheet. Requires edit access to the metadata object.
      *
-     * @param assignTagRequest (required)
+     * @param unassignTagRequest (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
      * @http.response.details
@@ -861,15 +864,15 @@ public class TagsApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public void unassignTag(AssignTagRequest assignTagRequest) throws ApiException {
-        unassignTagWithHttpInfo(assignTagRequest);
+    public void unassignTag(UnassignTagRequest unassignTagRequest) throws ApiException {
+        unassignTagWithHttpInfo(unassignTagRequest);
     }
 
     /**
      * Version: 9.0.0.cl or later Removes the tags applied to a Liveboard, Answer, Table, or
      * Worksheet. Requires edit access to the metadata object.
      *
-     * @param assignTagRequest (required)
+     * @param unassignTagRequest (required)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -884,9 +887,9 @@ public class TagsApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public ApiResponse<Void> unassignTagWithHttpInfo(AssignTagRequest assignTagRequest)
+    public ApiResponse<Void> unassignTagWithHttpInfo(UnassignTagRequest unassignTagRequest)
             throws ApiException {
-        okhttp3.Call localVarCall = unassignTagValidateBeforeCall(assignTagRequest, null);
+        okhttp3.Call localVarCall = unassignTagValidateBeforeCall(unassignTagRequest, null);
         return localVarApiClient.execute(localVarCall);
     }
 
@@ -894,7 +897,7 @@ public class TagsApi {
      * (asynchronously) Version: 9.0.0.cl or later Removes the tags applied to a Liveboard, Answer,
      * Table, or Worksheet. Requires edit access to the metadata object.
      *
-     * @param assignTagRequest (required)
+     * @param unassignTagRequest (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body
@@ -911,10 +914,10 @@ public class TagsApi {
      * </table>
      */
     public okhttp3.Call unassignTagAsync(
-            AssignTagRequest assignTagRequest, final ApiCallback<Void> _callback)
+            UnassignTagRequest unassignTagRequest, final ApiCallback<Void> _callback)
             throws ApiException {
 
-        okhttp3.Call localVarCall = unassignTagValidateBeforeCall(assignTagRequest, _callback);
+        okhttp3.Call localVarCall = unassignTagValidateBeforeCall(unassignTagRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }

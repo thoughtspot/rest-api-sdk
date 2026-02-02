@@ -54,6 +54,9 @@ import { CommitResponse } from '../models/CommitResponse';
 import { CommiterType } from '../models/CommiterType';
 import { CommunicationChannelPreferencesResponse } from '../models/CommunicationChannelPreferencesResponse';
 import { CommunicationChannelValidateResponse } from '../models/CommunicationChannelValidateResponse';
+import { ConfigureCommunicationChannelPreferencesRequest } from '../models/ConfigureCommunicationChannelPreferencesRequest';
+import { ConfigureSecuritySettingsRequest } from '../models/ConfigureSecuritySettingsRequest';
+import { ConfigureSecuritySettingsRequestClusterPreferences } from '../models/ConfigureSecuritySettingsRequestClusterPreferences';
 import { ConnectionConfigurationResponse } from '../models/ConnectionConfigurationResponse';
 import { ConnectionConfigurationSearchRequest } from '../models/ConnectionConfigurationSearchRequest';
 import { ConnectionInput } from '../models/ConnectionInput';
@@ -62,6 +65,9 @@ import { Conversation } from '../models/Conversation';
 import { ConversationSettingsInput } from '../models/ConversationSettingsInput';
 import { ConvertWorksheetToModelRequest } from '../models/ConvertWorksheetToModelRequest';
 import { CopyObjectRequest } from '../models/CopyObjectRequest';
+import { CreateAgentConversationRequest } from '../models/CreateAgentConversationRequest';
+import { CreateAgentConversationRequestConversationSettings } from '../models/CreateAgentConversationRequestConversationSettings';
+import { CreateAgentConversationRequestMetadataContext } from '../models/CreateAgentConversationRequestMetadataContext';
 import { CreateCalendarRequest } from '../models/CreateCalendarRequest';
 import { CreateCalendarRequestTableReference } from '../models/CreateCalendarRequestTableReference';
 import { CreateConfigRequest } from '../models/CreateConfigRequest';
@@ -86,6 +92,11 @@ import { CreateScheduleRequestRecipientDetails } from '../models/CreateScheduleR
 import { CreateTagRequest } from '../models/CreateTagRequest';
 import { CreateUserGroupRequest } from '../models/CreateUserGroupRequest';
 import { CreateUserRequest } from '../models/CreateUserRequest';
+import { CreateVariableRequest } from '../models/CreateVariableRequest';
+import { CreateWebhookConfigurationRequest } from '../models/CreateWebhookConfigurationRequest';
+import { CreateWebhookConfigurationRequestAuthentication } from '../models/CreateWebhookConfigurationRequestAuthentication';
+import { CreateWebhookConfigurationRequestSignatureVerification } from '../models/CreateWebhookConfigurationRequestSignatureVerification';
+import { CreateWebhookConfigurationRequestStorageDestination } from '../models/CreateWebhookConfigurationRequestStorageDestination';
 import { CronExpression } from '../models/CronExpression';
 import { CronExpressionInput } from '../models/CronExpressionInput';
 import { CspSettings } from '../models/CspSettings';
@@ -108,6 +119,7 @@ import { DeleteConnectionRequest } from '../models/DeleteConnectionRequest';
 import { DeleteMetadataRequest } from '../models/DeleteMetadataRequest';
 import { DeleteMetadataTypeInput } from '../models/DeleteMetadataTypeInput';
 import { DeleteOrgEmailCustomizationRequest } from '../models/DeleteOrgEmailCustomizationRequest';
+import { DeleteWebhookConfigurationsRequest } from '../models/DeleteWebhookConfigurationsRequest';
 import { DeployCommitRequest } from '../models/DeployCommitRequest';
 import { DeployResponse } from '../models/DeployResponse';
 import { EntityHeader } from '../models/EntityHeader';
@@ -145,6 +157,7 @@ import { FetchConnectionDiffStatusResponse } from '../models/FetchConnectionDiff
 import { FetchLiveboardDataRequest } from '../models/FetchLiveboardDataRequest';
 import { FetchLiveboardSqlQueryRequest } from '../models/FetchLiveboardSqlQueryRequest';
 import { FetchLogsRequest } from '../models/FetchLogsRequest';
+import { FetchObjectPrivilegesRequest } from '../models/FetchObjectPrivilegesRequest';
 import { FetchPermissionsOfPrincipalsRequest } from '../models/FetchPermissionsOfPrincipalsRequest';
 import { FetchPermissionsOnMetadataRequest } from '../models/FetchPermissionsOnMetadataRequest';
 import { FilterRules } from '../models/FilterRules';
@@ -156,9 +169,14 @@ import { GenerateCSVRequest } from '../models/GenerateCSVRequest';
 import { GenericInfo } from '../models/GenericInfo';
 import { GetAsyncImportStatusResponse } from '../models/GetAsyncImportStatusResponse';
 import { GetCustomAccessTokenRequest } from '../models/GetCustomAccessTokenRequest';
+import { GetDataSourceSuggestionsRequest } from '../models/GetDataSourceSuggestionsRequest';
 import { GetFullAccessTokenRequest } from '../models/GetFullAccessTokenRequest';
 import { GetFullAccessTokenRequestUserParameters } from '../models/GetFullAccessTokenRequestUserParameters';
+import { GetNLInstructionsRequest } from '../models/GetNLInstructionsRequest';
 import { GetObjectAccessTokenRequest } from '../models/GetObjectAccessTokenRequest';
+import { GetRelevantQuestionsRequest } from '../models/GetRelevantQuestionsRequest';
+import { GetRelevantQuestionsRequestAiContext } from '../models/GetRelevantQuestionsRequestAiContext';
+import { GetRelevantQuestionsRequestMetadataContext } from '../models/GetRelevantQuestionsRequestMetadataContext';
 import { GetTokenResponse } from '../models/GetTokenResponse';
 import { GroupInfo } from '../models/GroupInfo';
 import { GroupObject } from '../models/GroupObject';
@@ -186,6 +204,7 @@ import { LiveboardOptions } from '../models/LiveboardOptions';
 import { LiveboardOptionsInput } from '../models/LiveboardOptionsInput';
 import { LogResponse } from '../models/LogResponse';
 import { LoginRequest } from '../models/LoginRequest';
+import { ManageObjectPrivilegeRequest } from '../models/ManageObjectPrivilegeRequest';
 import { MetadataAssociationItem } from '../models/MetadataAssociationItem';
 import { MetadataContext } from '../models/MetadataContext';
 import { MetadataInput } from '../models/MetadataInput';
@@ -253,6 +272,7 @@ import { ResponseWorksheetToModelConversion } from '../models/ResponseWorksheetT
 import { RevertCommitRequest } from '../models/RevertCommitRequest';
 import { RevertResponse } from '../models/RevertResponse';
 import { RevertedMetadata } from '../models/RevertedMetadata';
+import { RevokeRefreshTokensRequest } from '../models/RevokeRefreshTokensRequest';
 import { RevokeRefreshTokensResponse } from '../models/RevokeRefreshTokensResponse';
 import { RevokeTokenRequest } from '../models/RevokeTokenRequest';
 import { RiseGQLArgWrapper } from '../models/RiseGQLArgWrapper';
@@ -274,6 +294,7 @@ import { ScriptSrcUrlsInput } from '../models/ScriptSrcUrlsInput';
 import { SearchCalendarsRequest } from '../models/SearchCalendarsRequest';
 import { SearchCalendarsRequestSortOptions } from '../models/SearchCalendarsRequestSortOptions';
 import { SearchCommitsRequest } from '../models/SearchCommitsRequest';
+import { SearchCommunicationChannelPreferencesRequest } from '../models/SearchCommunicationChannelPreferencesRequest';
 import { SearchConfigRequest } from '../models/SearchConfigRequest';
 import { SearchConnectionRequest } from '../models/SearchConnectionRequest';
 import { SearchConnectionRequestSortOptions } from '../models/SearchConnectionRequestSortOptions';
@@ -292,19 +313,26 @@ import { SearchRolesRequest } from '../models/SearchRolesRequest';
 import { SearchSchedulesRequest } from '../models/SearchSchedulesRequest';
 import { SearchSchedulesRequestHistoryRunsOptions } from '../models/SearchSchedulesRequestHistoryRunsOptions';
 import { SearchSchedulesRequestSortOptions } from '../models/SearchSchedulesRequestSortOptions';
+import { SearchSecuritySettingsRequest } from '../models/SearchSecuritySettingsRequest';
 import { SearchTagsRequest } from '../models/SearchTagsRequest';
 import { SearchUserGroupsRequest } from '../models/SearchUserGroupsRequest';
 import { SearchUserGroupsRequestSortOptions } from '../models/SearchUserGroupsRequestSortOptions';
 import { SearchUsersRequest } from '../models/SearchUsersRequest';
 import { SearchUsersRequestSortOptions } from '../models/SearchUsersRequestSortOptions';
+import { SearchVariablesRequest } from '../models/SearchVariablesRequest';
+import { SearchWebhookConfigurationsRequest } from '../models/SearchWebhookConfigurationsRequest';
+import { SearchWebhookConfigurationsRequestSortOptions } from '../models/SearchWebhookConfigurationsRequestSortOptions';
 import { SecuritySettingsClusterPreferences } from '../models/SecuritySettingsClusterPreferences';
 import { SecuritySettingsClusterPreferencesInput } from '../models/SecuritySettingsClusterPreferencesInput';
 import { SecuritySettingsOrgDetails } from '../models/SecuritySettingsOrgDetails';
 import { SecuritySettingsOrgPreferences } from '../models/SecuritySettingsOrgPreferences';
 import { SecuritySettingsOrgPreferencesInput } from '../models/SecuritySettingsOrgPreferencesInput';
 import { SecuritySettingsResponse } from '../models/SecuritySettingsResponse';
+import { SendAgentMessageRequest } from '../models/SendAgentMessageRequest';
 import { SendAgentMessageResponse } from '../models/SendAgentMessageResponse';
+import { SendAgentMessageStreamingRequest } from '../models/SendAgentMessageStreamingRequest';
 import { SendMessageRequest } from '../models/SendMessageRequest';
+import { SetNLInstructionsRequest } from '../models/SetNLInstructionsRequest';
 import { ShareMetadataRequest } from '../models/ShareMetadataRequest';
 import { ShareMetadataTypeInput } from '../models/ShareMetadataTypeInput';
 import { SharePermissionsInput } from '../models/SharePermissionsInput';
@@ -333,6 +361,7 @@ import { TokenValidationResponse } from '../models/TokenValidationResponse';
 import { URL } from '../models/URL';
 import { URLInput } from '../models/URLInput';
 import { URLInputMandatory } from '../models/URLInputMandatory';
+import { UnassignTagRequest } from '../models/UnassignTagRequest';
 import { UnparameterizeMetadataRequest } from '../models/UnparameterizeMetadataRequest';
 import { UnpublishMetadataRequest } from '../models/UnpublishMetadataRequest';
 import { UpdateCalendarRequest } from '../models/UpdateCalendarRequest';
@@ -360,6 +389,9 @@ import { UpdateSystemConfigRequest } from '../models/UpdateSystemConfigRequest';
 import { UpdateTagRequest } from '../models/UpdateTagRequest';
 import { UpdateUserGroupRequest } from '../models/UpdateUserGroupRequest';
 import { UpdateUserRequest } from '../models/UpdateUserRequest';
+import { UpdateVariableRequest } from '../models/UpdateVariableRequest';
+import { UpdateVariableValuesRequest } from '../models/UpdateVariableValuesRequest';
+import { UpdateWebhookConfigurationRequest } from '../models/UpdateWebhookConfigurationRequest';
 import { User } from '../models/User';
 import { UserGroup } from '../models/UserGroup';
 import { UserGroupResponse } from '../models/UserGroupResponse';
@@ -367,6 +399,7 @@ import { UserInfo } from '../models/UserInfo';
 import { UserObject } from '../models/UserObject';
 import { UserParameterOptions } from '../models/UserParameterOptions';
 import { UserPrincipal } from '../models/UserPrincipal';
+import { ValidateCommunicationChannelRequest } from '../models/ValidateCommunicationChannelRequest';
 import { ValidateMergeRequest } from '../models/ValidateMergeRequest';
 import { ValidateTokenRequest } from '../models/ValidateTokenRequest';
 import { ValueScopeInput } from '../models/ValueScopeInput';
@@ -2435,10 +2468,10 @@ export interface TagsApiSearchTagsRequest {
 export interface TagsApiUnassignTagRequest {
     /**
      * 
-     * @type AssignTagRequest
+     * @type UnassignTagRequest
      * @memberof TagsApiunassignTag
      */
-    assignTagRequest: AssignTagRequest
+    unassignTagRequest: UnassignTagRequest
 }
 
 export interface TagsApiUpdateTagRequest {
@@ -2500,7 +2533,7 @@ export class ObjectTagsApi {
      * @param param the request object
      */
     public unassignTag(param: TagsApiUnassignTagRequest, options?: Configuration): Promise<void> {
-        return this.api.unassignTag(param.assignTagRequest,  options).toPromise();
+        return this.api.unassignTag(param.unassignTagRequest,  options).toPromise();
     }
 
     /**
@@ -3446,10 +3479,10 @@ export interface ThoughtSpotRestApiSingleAnswerRequest {
 export interface ThoughtSpotRestApiUnassignTagRequest {
     /**
      * 
-     * @type AssignTagRequest
+     * @type UnassignTagRequest
      * @memberof ThoughtSpotRestApiunassignTag
      */
-    assignTagRequest: AssignTagRequest
+    unassignTagRequest: UnassignTagRequest
 }
 
 export interface ThoughtSpotRestApiUnparameterizeMetadataRequest {
@@ -4561,7 +4594,7 @@ export class ObjectThoughtSpotRestApi {
      * @param param the request object
      */
     public unassignTag(param: ThoughtSpotRestApiUnassignTagRequest, options?: Configuration): Promise<void> {
-        return this.api.unassignTag(param.assignTagRequest,  options).toPromise();
+        return this.api.unassignTag(param.unassignTagRequest,  options).toPromise();
     }
 
     /**

@@ -127,6 +127,7 @@ import { SystemOverrideInfo } from '../models/SystemOverrideInfo';
 import { Tag } from '../models/Tag';
 import { Token } from '../models/Token';
 import { TokenValidationResponse } from '../models/TokenValidationResponse';
+import { UnassignTagRequest } from '../models/UnassignTagRequest';
 import { UnparameterizeMetadataRequest } from '../models/UnparameterizeMetadataRequest';
 import { UnpublishMetadataRequest } from '../models/UnpublishMetadataRequest';
 import { UpdateCalendarRequest } from '../models/UpdateCalendarRequest';
@@ -4994,14 +4995,14 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      *   Version: 9.0.0.cl or later   Removes the tags applied to a Liveboard, Answer, Table, or Worksheet.  Requires edit access to the metadata object.      
-     * @param assignTagRequest 
+     * @param unassignTagRequest 
      */
-    public async unassignTag(assignTagRequest: AssignTagRequest, _options?: Configuration): Promise<RequestContext> {
+    public async unassignTag(unassignTagRequest: UnassignTagRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
-        // verify required parameter 'assignTagRequest' is not null or undefined
-        if (assignTagRequest === null || assignTagRequest === undefined) {
-            throw new RequiredError("ThoughtSpotRestApi", "unassignTag", "assignTagRequest");
+        // verify required parameter 'unassignTagRequest' is not null or undefined
+        if (unassignTagRequest === null || unassignTagRequest === undefined) {
+            throw new RequiredError("ThoughtSpotRestApi", "unassignTag", "unassignTagRequest");
         }
 
 
@@ -5023,7 +5024,7 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(assignTagRequest, "AssignTagRequest", ""),
+            ObjectSerializer.serialize(unassignTagRequest, "UnassignTagRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
