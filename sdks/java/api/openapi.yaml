@@ -14045,16 +14045,6 @@ components:
           - SUCCESS
           - FAILED
           type: string
-        error_code:
-          description: Error code if the validation step failed.
-          enum:
-          - INVALID_CREDENTIALS
-          - FORBIDDEN
-          - UNAUTHORIZED
-          - CONNECTION_TIMEOUT
-          - UNKNOWN
-          nullable: true
-          type: string
         http_status:
           description: HTTP status code returned by the channel (if applicable).
           format: int32
@@ -14062,10 +14052,6 @@ components:
           type: integer
         error_message:
           description: Error message from the channel or validation process.
-          nullable: true
-          type: string
-        additional_info:
-          description: Additional information about the validation step.
           nullable: true
           type: string
       required:

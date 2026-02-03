@@ -28,12 +28,6 @@ public class ChannelValidationDetailTest {
         // TODO: test status
     }
 
-    /** Test the property 'errorCode' */
-    @Test
-    public void errorCodeTest() {
-        // TODO: test errorCode
-    }
-
     /** Test the property 'httpStatus' */
     @Test
     public void httpStatusTest() {
@@ -44,11 +38,5 @@ public class ChannelValidationDetailTest {
     @Test
     public void errorMessageTest() {
         // TODO: test errorMessage
-    }
-
-    /** Test the property 'additionalInfo' */
-    @Test
-    public void additionalInfoTest() {
-        // TODO: test additionalInfo
     }
 }

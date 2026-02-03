@@ -25,10 +25,6 @@ export class ChannelValidationDetail {
     */
     'status': ChannelValidationDetailStatusEnum;
     /**
-    * Error code if the validation step failed.
-    */
-    'error_code'?: ChannelValidationDetailErrorCodeEnum | null;
-    /**
     * HTTP status code returned by the channel (if applicable).
     */
     'http_status'?: number | null;
@@ -36,10 +32,6 @@ export class ChannelValidationDetail {
     * Error message from the channel or validation process.
     */
     'error_message'?: string | null;
-    /**
-    * Additional information about the validation step.
-    */
-    'additional_info'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -57,12 +49,6 @@ export class ChannelValidationDetail {
             "format": ""
         },
         {
-            "name": "error_code",
-            "baseName": "error_code",
-            "type": "ChannelValidationDetailErrorCodeEnum",
-            "format": ""
-        },
-        {
             "name": "http_status",
             "baseName": "http_status",
             "type": "number",
@@ -71,12 +57,6 @@ export class ChannelValidationDetail {
         {
             "name": "error_message",
             "baseName": "error_message",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "additional_info",
-            "baseName": "additional_info",
             "type": "string",
             "format": ""
         }    ];
@@ -92,5 +72,4 @@ export class ChannelValidationDetail {
 
 export type ChannelValidationDetailValidationStepEnum = "HTTP_CONNECTION_CHECK" | "STORAGE_FILE_UPLOAD_CHECK" ;
 export type ChannelValidationDetailStatusEnum = "SUCCESS" | "FAILED" ;
-export type ChannelValidationDetailErrorCodeEnum = "INVALID_CREDENTIALS" | "FORBIDDEN" | "UNAUTHORIZED" | "CONNECTION_TIMEOUT" | "UNKNOWN" ;
 

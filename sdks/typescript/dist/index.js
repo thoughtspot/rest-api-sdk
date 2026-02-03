@@ -1322,12 +1322,6 @@ _ChannelValidationDetail.attributeTypeMap = [
     "format": ""
   },
   {
-    "name": "error_code",
-    "baseName": "error_code",
-    "type": "ChannelValidationDetailErrorCodeEnum",
-    "format": ""
-  },
-  {
     "name": "http_status",
     "baseName": "http_status",
     "type": "number",
@@ -1336,12 +1330,6 @@ _ChannelValidationDetail.attributeTypeMap = [
   {
     "name": "error_message",
     "baseName": "error_message",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "additional_info",
-    "baseName": "additional_info",
     "type": "string",
     "format": ""
   }
@@ -16578,7 +16566,6 @@ var enumsMap = /* @__PURE__ */ new Set([
   "AuthorMetadataTypeInputTypeEnum",
   "ChannelValidationDetailValidationStepEnum",
   "ChannelValidationDetailStatusEnum",
-  "ChannelValidationDetailErrorCodeEnum",
   "ColumnSecurityRuleGroupOperationOperationEnum",
   "CommunicationChannelValidateResponseChannelTypeEnum",
   "CommunicationChannelValidateResponseEventTypeEnum",

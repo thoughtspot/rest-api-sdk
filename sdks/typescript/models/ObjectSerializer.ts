@@ -459,7 +459,7 @@ import { CALLBACKInput } from '../models/CALLBACKInput';
 import { CALLBACKInputMandatory } from '../models/CALLBACKInputMandatory';
 import { CalendarResponse } from '../models/CalendarResponse';
 import { ChangeUserPasswordRequest } from '../models/ChangeUserPasswordRequest';
-import { ChannelValidationDetail, ChannelValidationDetailValidationStepEnum  , ChannelValidationDetailStatusEnum  , ChannelValidationDetailErrorCodeEnum      } from '../models/ChannelValidationDetail';
+import { ChannelValidationDetail, ChannelValidationDetailValidationStepEnum  , ChannelValidationDetailStatusEnum     } from '../models/ChannelValidationDetail';
 import { ClusterNonEmbedAccess } from '../models/ClusterNonEmbedAccess';
 import { ClusterNonEmbedAccessInput } from '../models/ClusterNonEmbedAccessInput';
 import { Column } from '../models/Column';
@@ -879,7 +879,6 @@ let enumsMap: Set<string> = new Set<string>([
     "AuthorMetadataTypeInputTypeEnum",
     "ChannelValidationDetailValidationStepEnum",
     "ChannelValidationDetailStatusEnum",
-    "ChannelValidationDetailErrorCodeEnum",
     "ColumnSecurityRuleGroupOperationOperationEnum",
     "CommunicationChannelValidateResponseChannelTypeEnum",
     "CommunicationChannelValidateResponseEventTypeEnum",

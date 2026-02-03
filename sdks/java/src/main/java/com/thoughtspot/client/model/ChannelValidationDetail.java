@@ -145,69 +145,6 @@ public class ChannelValidationDetail implements Serializable {
     @javax.annotation.Nonnull
     private StatusEnum status;
 
-    /** Error code if the validation step failed. */
-    @JsonAdapter(ErrorCodeEnum.Adapter.class)
-    public enum ErrorCodeEnum {
-        INVALID_CREDENTIALS("INVALID_CREDENTIALS"),
-
-        FORBIDDEN("FORBIDDEN"),
-
-        UNAUTHORIZED("UNAUTHORIZED"),
-
-        CONNECTION_TIMEOUT("CONNECTION_TIMEOUT"),
-
-        UNKNOWN("UNKNOWN");
-
-        private String value;
-
-        ErrorCodeEnum(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        public static ErrorCodeEnum fromValue(String value) {
-            for (ErrorCodeEnum b : ErrorCodeEnum.values()) {
-                if (b.value.equals(value)) {
-                    return b;
-                }
-            }
-            return null;
-        }
-
-        public static class Adapter extends TypeAdapter<ErrorCodeEnum> {
-            @Override
-            public void write(final JsonWriter jsonWriter, final ErrorCodeEnum enumeration)
-                    throws IOException {
-                jsonWriter.value(enumeration.getValue());
-            }
-
-            @Override
-            public ErrorCodeEnum read(final JsonReader jsonReader) throws IOException {
-                String value = jsonReader.nextString();
-                return ErrorCodeEnum.fromValue(value);
-            }
-        }
-
-        public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-            String value = jsonElement.getAsString();
-            ErrorCodeEnum.fromValue(value);
-        }
-    }
-
-    public static final String SERIALIZED_NAME_ERROR_CODE = "error_code";
-
-    @SerializedName(SERIALIZED_NAME_ERROR_CODE)
-    @javax.annotation.Nullable
-    private ErrorCodeEnum errorCode;
-
     public static final String SERIALIZED_NAME_HTTP_STATUS = "http_status";
 
     @SerializedName(SERIALIZED_NAME_HTTP_STATUS)
@@ -219,12 +156,6 @@ public class ChannelValidationDetail implements Serializable {
     @SerializedName(SERIALIZED_NAME_ERROR_MESSAGE)
     @javax.annotation.Nullable
     private String errorMessage;
-
-    public static final String SERIALIZED_NAME_ADDITIONAL_INFO = "additional_info";
-
-    @SerializedName(SERIALIZED_NAME_ADDITIONAL_INFO)
-    @javax.annotation.Nullable
-    private String additionalInfo;
 
     public ChannelValidationDetail() {}
 
@@ -267,25 +198,6 @@ public class ChannelValidationDetail implements Serializable {
         this.status = status;
     }
 
-    public ChannelValidationDetail errorCode(@javax.annotation.Nullable ErrorCodeEnum errorCode) {
-        this.errorCode = errorCode;
-        return this;
-    }
-
-    /**
-     * Error code if the validation step failed.
-     *
-     * @return errorCode
-     */
-    @javax.annotation.Nullable
-    public ErrorCodeEnum getErrorCode() {
-        return errorCode;
-    }
-
-    public void setErrorCode(@javax.annotation.Nullable ErrorCodeEnum errorCode) {
-        this.errorCode = errorCode;
-    }
-
     public ChannelValidationDetail httpStatus(@javax.annotation.Nullable Integer httpStatus) {
         this.httpStatus = httpStatus;
         return this;
@@ -324,26 +236,6 @@ public class ChannelValidationDetail implements Serializable {
         this.errorMessage = errorMessage;
     }
 
-    public ChannelValidationDetail additionalInfo(
-            @javax.annotation.Nullable String additionalInfo) {
-        this.additionalInfo = additionalInfo;
-        return this;
-    }
-
-    /**
-     * Additional information about the validation step.
-     *
-     * @return additionalInfo
-     */
-    @javax.annotation.Nullable
-    public String getAdditionalInfo() {
-        return additionalInfo;
-    }
-
-    public void setAdditionalInfo(@javax.annotation.Nullable String additionalInfo) {
-        this.additionalInfo = additionalInfo;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -355,10 +247,8 @@ public class ChannelValidationDetail implements Serializable {
         ChannelValidationDetail channelValidationDetail = (ChannelValidationDetail) o;
         return Objects.equals(this.validationStep, channelValidationDetail.validationStep)
                 && Objects.equals(this.status, channelValidationDetail.status)
-                && Objects.equals(this.errorCode, channelValidationDetail.errorCode)
                 && Objects.equals(this.httpStatus, channelValidationDetail.httpStatus)
-                && Objects.equals(this.errorMessage, channelValidationDetail.errorMessage)
-                && Objects.equals(this.additionalInfo, channelValidationDetail.additionalInfo);
+                && Objects.equals(this.errorMessage, channelValidationDetail.errorMessage);
     }
 
     private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -372,8 +262,7 @@ public class ChannelValidationDetail implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(
-                validationStep, status, errorCode, httpStatus, errorMessage, additionalInfo);
+        return Objects.hash(validationStep, status, httpStatus, errorMessage);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -389,10 +278,8 @@ public class ChannelValidationDetail implements Serializable {
         sb.append("class ChannelValidationDetail {\n");
         sb.append("    validationStep: ").append(toIndentedString(validationStep)).append("\n");
         sb.append("    status: ").append(toIndentedString(status)).append("\n");
-        sb.append("    errorCode: ").append(toIndentedString(errorCode)).append("\n");
         sb.append("    httpStatus: ").append(toIndentedString(httpStatus)).append("\n");
         sb.append("    errorMessage: ").append(toIndentedString(errorMessage)).append("\n");
-        sb.append("    additionalInfo: ").append(toIndentedString(additionalInfo)).append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -416,10 +303,8 @@ public class ChannelValidationDetail implements Serializable {
         openapiFields = new HashSet<String>();
         openapiFields.add("validation_step");
         openapiFields.add("status");
-        openapiFields.add("error_code");
         openapiFields.add("http_status");
         openapiFields.add("error_message");
-        openapiFields.add("additional_info");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -485,18 +370,6 @@ public class ChannelValidationDetail implements Serializable {
         }
         // validate the required field `status`
         StatusEnum.validateJsonElement(jsonObj.get("status"));
-        if ((jsonObj.get("error_code") != null && !jsonObj.get("error_code").isJsonNull())
-                && !jsonObj.get("error_code").isJsonPrimitive()) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            "Expected the field `error_code` to be a primitive type in the JSON"
-                                    + " string but got `%s`",
-                            jsonObj.get("error_code").toString()));
-        }
-        // validate the optional field `error_code`
-        if (jsonObj.get("error_code") != null && !jsonObj.get("error_code").isJsonNull()) {
-            ErrorCodeEnum.validateJsonElement(jsonObj.get("error_code"));
-        }
         if ((jsonObj.get("error_message") != null && !jsonObj.get("error_message").isJsonNull())
                 && !jsonObj.get("error_message").isJsonPrimitive()) {
             throw new IllegalArgumentException(
@@ -504,14 +377,6 @@ public class ChannelValidationDetail implements Serializable {
                             "Expected the field `error_message` to be a primitive type in the JSON"
                                     + " string but got `%s`",
                             jsonObj.get("error_message").toString()));
-        }
-        if ((jsonObj.get("additional_info") != null && !jsonObj.get("additional_info").isJsonNull())
-                && !jsonObj.get("additional_info").isJsonPrimitive()) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            "Expected the field `additional_info` to be a primitive type in the"
-                                    + " JSON string but got `%s`",
-                            jsonObj.get("additional_info").toString()));
         }
     }
 
