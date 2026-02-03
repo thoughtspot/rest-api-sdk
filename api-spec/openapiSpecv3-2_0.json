@@ -110,6 +110,14 @@
       "description": "Roles for version 10.10.0.cl"
     },
     {
+      "name": "26.4.0.cl",
+      "id": "26.4.0.cl",
+      "tags": [
+        "26.4.0.cl"
+      ],
+      "description": "Roles for version 26.4.0.cl"
+    },
+    {
       "name": "10.6.0.cl",
       "id": "10.6.0.cl",
       "tags": [
@@ -172,14 +180,6 @@
         "10.14.0.cl"
       ],
       "description": "Roles for version 10.14.0.cl"
-    },
-    {
-      "name": "26.4.0.cl",
-      "id": "26.4.0.cl",
-      "tags": [
-        "26.4.0.cl"
-      ],
-      "description": "Roles for version 26.4.0.cl"
     },
     {
       "name": "9.7.0.cl",
@@ -4656,6 +4656,308 @@
         "responses": {
           "204": {
             "description": "User group successfully updated."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/jobs/retry": {
+      "post": {
+        "operationId": "retryChannelDelivery",
+        "description": "\n[MOCK/TEST] Retry a failed job delivery for a specific channel.\nThis mutation demonstrates how to handle oneOf in GraphQL inputs.\nSince GraphQL doesn't support union types for inputs, we use an\ninput type with optional fields where exactly one should be provided.\nThe channel_config input represents:\nOpenAPI oneOf: [WebhookRetryConfig, EmailRetryConfig]\nGraphQL: ChannelRetryConfigInput with optional fields for each type <br/>  <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Jobs",
+          "26.4.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RetryChannelDeliveryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Retry initiated successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RetryDeliveryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Job not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/jobs/history/communication-channels/search": {
+      "post": {
+        "operationId": "searchChannelHistory",
+        "description": "\nSearches delivery history for communication channels like webhooks.\nReturns channel-level delivery status and the associated event that\ntriggered it. Use this to monitor channel health and delivery success\nrates across events. <br/>  <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Jobs",
+          "26.4.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchChannelHistoryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Channel status logs retrieved successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchChannelHistoryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/jobs/history/events/search": {
+      "post": {
+        "operationId": "searchEventHistory",
+        "description": "\nSearches execution history for events like liveboard schedules.\nReturns event-level status along with delivery status for each\nconfigured communication channel. <br/>  <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Jobs",
+          "26.4.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchEventHistoryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Event status logs retrieved successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchEventHistoryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/jobs/test-notification": {
+      "post": {
+        "operationId": "sendTestNotification",
+        "description": "\n[MOCK/TEST] Send a test notification through a channel.\nAlternative pattern: Using a discriminator field (channel_type)\nalongside the polymorphic input to make the type explicit. <br/>  <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Jobs",
+          "26.4.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendTestNotificationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Test notification sent.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TestNotificationResponse"
+                }
+              }
+            }
           },
           "400": {
             "description": "Invalid request.",
@@ -15745,6 +16047,429 @@
         },
         "description": "Setup information for GCP clusters using STS AssumeRoleWithWebIdentity.\nThoughtSpot will use its GCP service account to obtain OIDC tokens for AWS access.\nExample:\n{\n  \"thoughtspot_gcp_service_account_id\": \"115663769112811637952\",\n  \"oidc_provider\": \"accounts.google.com\",\n  \"trust_policy_template\": {\n    \"Version\": \"2012-10-17\",\n    \"Statement\": [{\n      \"Effect\": \"Allow\",\n      \"Principal\": { \"Federated\": \"arn:aws:iam::YOUR_AWS_ACCOUNT_ID:oidc-provider/accounts.google.com\" },\n      \"Action\": \"sts:AssumeRoleWithWebIdentity\",\n      \"Condition\": { \"StringEquals\": { \"accounts.google.com:sub\": \"115663769112811637952\" } }\n    }]\n  },\n  \"setup_instructions\": [\n    \"1. Add accounts.google.com as an Identity Provider in AWS IAM\",\n    \"2. Create an IAM role with Web Identity Federation trust\",\n    \"3. Configure the trust policy with ThoughtSpot's GCP service account ID\",\n    \"4. Attach S3 permissions (s3:PutObject, s3:PutObjectAcl) to the role\",\n    \"5. Use the role ARN in your webhook storage configuration\"\n  ]\n}"
       },
+      "EventHistoryChannelIdentifierInput": {
+        "type": "object",
+        "required": [
+          "channel_type"
+        ],
+        "properties": {
+          "channel_type": {
+            "type": "string",
+            "enum": [
+              "WEBHOOK",
+              "EMAIL"
+            ],
+            "description": "Type of communication channel."
+          },
+          "channel_identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the communication channel.",
+            "nullable": true
+          }
+        },
+        "description": "Identifies a specific communication channel to include in the response."
+      },
+      "SearchEventHistoryResponse": {
+        "type": "object",
+        "required": [
+          "events"
+        ],
+        "properties": {
+          "events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EventHistoryEventDetail"
+            },
+            "description": "List of events with their execution history."
+          }
+        },
+        "description": "Response for event execution history search."
+      },
+      "EventHistoryEventDetail": {
+        "type": "object",
+        "required": [
+          "type",
+          "id",
+          "jobs"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD_SCHEDULE"
+            ],
+            "description": "Type of the event."
+          },
+          "id": {
+            "type": "string",
+            "description": "Unique ID of the event."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the event.",
+            "nullable": true
+          },
+          "created_by": {
+            "$ref": "#/components/schemas/JobsObjectIdAndName",
+            "description": "User who created the event.",
+            "nullable": true
+          },
+          "jobs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EventHistoryJob"
+            },
+            "description": "List of job executions for this event."
+          }
+        },
+        "description": "An event with its job execution history."
+      },
+      "JobsObjectIdAndName": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique ID of the object."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the object."
+          }
+        },
+        "description": "Object representation with ID and Name."
+      },
+      "EventHistoryJob": {
+        "type": "object",
+        "required": [
+          "id",
+          "status",
+          "creation_time_in_millis"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for this job."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "RUNNING",
+              "SUCCESS",
+              "FAILED"
+            ],
+            "description": "Execution status of the job."
+          },
+          "creation_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Timestamp when this job was created (epoch milliseconds)."
+          },
+          "channels": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EventHistoryJobChannelDetail"
+            },
+            "description": "Delivery status for each communication channel.\nOnly included when include_channel_details is true.",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "description": "Additional execution details such as error messages or diagnostic information.",
+            "nullable": true
+          }
+        },
+        "description": "A single job execution record."
+      },
+      "EventHistoryJobChannelDetail": {
+        "type": "object",
+        "required": [
+          "type",
+          "id",
+          "status"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "WEBHOOK",
+              "EMAIL"
+            ],
+            "description": "Type of communication channel."
+          },
+          "id": {
+            "type": "string",
+            "description": "Unique ID of the communication channel."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the communication channel.",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "RETRY",
+              "SUCCESS",
+              "FAILED",
+              "QUEUED",
+              "SENT",
+              "DELIVERED",
+              "BOUNCED"
+            ],
+            "description": "Delivery status for the channel."
+          }
+        },
+        "description": "Delivery status for a communication channel within a job."
+      },
+      "SearchChannelHistoryResponse": {
+        "type": "object",
+        "required": [
+          "channels"
+        ],
+        "properties": {
+          "channels": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChannelHistoryChannelDetail"
+            },
+            "description": "List of channels with their delivery history."
+          }
+        },
+        "description": "Response for channel delivery history search."
+      },
+      "ChannelHistoryChannelDetail": {
+        "type": "object",
+        "required": [
+          "type",
+          "id",
+          "jobs_by_event"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "WEBHOOK",
+              "EMAIL"
+            ],
+            "description": "Type of communication channel."
+          },
+          "id": {
+            "type": "string",
+            "description": "Unique ID of the communication channel."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the communication channel.",
+            "nullable": true
+          },
+          "created_by": {
+            "$ref": "#/components/schemas/JobsObjectIdAndName",
+            "description": "User who created the channel.",
+            "nullable": true
+          },
+          "jobs_by_event": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChannelHistoryJobsByEvent"
+            },
+            "description": "Job executions grouped by the event that triggered them."
+          }
+        },
+        "description": "A channel with its job execution history grouped by triggering event."
+      },
+      "ChannelHistoryJobsByEvent": {
+        "type": "object",
+        "required": [
+          "event",
+          "jobs"
+        ],
+        "properties": {
+          "event": {
+            "$ref": "#/components/schemas/ChannelHistoryEventInfo",
+            "description": "Event that triggered these jobs."
+          },
+          "jobs": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "List of job executions triggered by this event."
+          }
+        },
+        "description": "Jobs grouped by the event that triggered them."
+      },
+      "ChannelHistoryEventInfo": {
+        "type": "object",
+        "required": [
+          "type",
+          "id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD_SCHEDULE"
+            ],
+            "description": "Type of the event."
+          },
+          "id": {
+            "type": "string",
+            "description": "Unique ID of the event."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the event.",
+            "nullable": true
+          }
+        },
+        "description": "Event metadata for the triggering event."
+      },
+      "ChannelHistoryWebhookJob": {
+        "type": "object",
+        "required": [
+          "id",
+          "status",
+          "creation_time_in_millis"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for this job."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "RETRY",
+              "SUCCESS",
+              "FAILED",
+              "QUEUED",
+              "SENT",
+              "DELIVERED",
+              "BOUNCED"
+            ],
+            "description": "Delivery status of the job."
+          },
+          "creation_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Timestamp when this job was created (epoch milliseconds)."
+          },
+          "detail": {
+            "type": "string",
+            "description": "Additional delivery details such as HTTP response code or error message.",
+            "nullable": true
+          },
+          "principal": {
+            "$ref": "#/components/schemas/ChannelHistoryPrincipal",
+            "description": "The user or group context under which this webhook was executed.",
+            "nullable": true
+          },
+          "retry_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of retry attempts made for this webhook delivery.\n0 indicates first attempt.",
+            "nullable": true
+          }
+        },
+        "description": "A single job execution record for webhook channel.\nContains base job fields plus webhook-specific fields.\nCorresponds to OpenAPI allOf: [Channel_History_Job_Base, Channel_History_Webhook_Info]"
+      },
+      "ChannelHistoryPrincipal": {
+        "type": "object",
+        "required": [
+          "type",
+          "id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "USER",
+              "USER_GROUP"
+            ],
+            "description": "Type of principal (USER or USER_GROUP)."
+          },
+          "id": {
+            "type": "string",
+            "description": "Unique ID of the principal."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the principal.",
+            "nullable": true
+          }
+        },
+        "description": "The user or group context under which a job was executed."
+      },
+      "ChannelHistoryEmailJob": {
+        "type": "object",
+        "required": [
+          "id",
+          "status",
+          "creation_time_in_millis"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for this job."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "RETRY",
+              "SUCCESS",
+              "FAILED",
+              "QUEUED",
+              "SENT",
+              "DELIVERED",
+              "BOUNCED"
+            ],
+            "description": "Delivery status of the job."
+          },
+          "creation_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Timestamp when this job was created (epoch milliseconds)."
+          },
+          "detail": {
+            "type": "string",
+            "description": "Additional delivery details such as error message or bounce reason.",
+            "nullable": true
+          },
+          "recipient_email": {
+            "type": "string",
+            "description": "Email address of the recipient.",
+            "nullable": true
+          },
+          "subject": {
+            "type": "string",
+            "description": "Subject line of the email.",
+            "nullable": true
+          },
+          "template_id": {
+            "type": "string",
+            "description": "Identifier of the email template used.",
+            "nullable": true
+          },
+          "bounce_type": {
+            "type": "string",
+            "enum": [
+              "HARD",
+              "SOFT",
+              "NONE"
+            ],
+            "description": "Type of bounce if email was not delivered.",
+            "nullable": true
+          }
+        },
+        "description": "A single job execution record for email channel.\nContains base job fields plus email-specific fields.\nCorresponds to OpenAPI allOf: [Channel_History_Job_Base, Channel_History_Email_Info]"
+      },
       "GenericInfo": {
         "type": "object",
         "properties": {
@@ -19698,6 +20423,178 @@
           }
         }
       },
+      "ChannelRetryConfigInput": {
+        "type": "object",
+        "properties": {
+          "webhook": {
+            "$ref": "#/components/schemas/WebhookRetryConfigInput",
+            "description": "Webhook-specific retry configuration.\nProvide this when retrying a webhook delivery.",
+            "nullable": true
+          },
+          "email": {
+            "$ref": "#/components/schemas/EmailRetryConfigInput",
+            "description": "Email-specific retry configuration.\nProvide this when retrying an email delivery.",
+            "nullable": true
+          }
+        },
+        "description": "Channel-specific retry configuration.\nThis demonstrates the oneOf pattern for GraphQL inputs.\nSince GraphQL doesn't support union types for inputs, we use an input type\nwith optional fields. The client should provide exactly ONE of the fields.\nOpenAPI equivalent:\n```yaml\noneOf:\n  - $ref: \"#/components/schemas/WebhookRetryConfig\"\n  - $ref: \"#/components/schemas/EmailRetryConfig\"\n```\nGraphQL pattern: Input with mutually exclusive optional fields.\nValidation that exactly one is provided must be done at runtime."
+      },
+      "WebhookRetryConfigInput": {
+        "type": "object",
+        "properties": {
+          "override_url": {
+            "type": "string",
+            "description": "Override the webhook URL for this retry attempt.\nIf not provided, uses the original URL.",
+            "nullable": true
+          },
+          "additional_headers": {
+            "type": "object",
+            "description": "Additional headers to include in the retry request.",
+            "nullable": true
+          },
+          "max_retries": {
+            "type": "integer",
+            "format": "int32",
+            "default": 3,
+            "description": "Maximum number of retry attempts.",
+            "nullable": true
+          },
+          "retry_delay_ms": {
+            "type": "integer",
+            "format": "int32",
+            "default": 1000,
+            "description": "Delay between retries in milliseconds.",
+            "nullable": true
+          }
+        },
+        "description": "Retry configuration specific to webhook channels."
+      },
+      "EmailRetryConfigInput": {
+        "type": "object",
+        "properties": {
+          "override_recipient": {
+            "type": "string",
+            "description": "Override the recipient email for this retry attempt.\nIf not provided, uses the original recipient.",
+            "nullable": true
+          },
+          "override_subject": {
+            "type": "string",
+            "description": "Override the subject line for this retry attempt.",
+            "nullable": true
+          },
+          "force_send": {
+            "type": "boolean",
+            "default": false,
+            "description": "Force send even if previous attempt was a hard bounce.\nUse with caution as this may affect sender reputation.",
+            "nullable": true
+          }
+        },
+        "description": "Retry configuration specific to email channels."
+      },
+      "RetryDeliveryResponse": {
+        "type": "object",
+        "required": [
+          "job_id",
+          "status"
+        ],
+        "properties": {
+          "job_id": {
+            "type": "string",
+            "description": "New job ID for the retry attempt."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "RETRY",
+              "SUCCESS",
+              "FAILED",
+              "QUEUED",
+              "SENT",
+              "DELIVERED",
+              "BOUNCED"
+            ],
+            "description": "Current status of the retry."
+          },
+          "next_retry_at": {
+            "type": "number",
+            "format": "float",
+            "description": "Estimated time for next retry attempt in milliseconds (if applicable).",
+            "nullable": true
+          }
+        },
+        "description": "Response from retry delivery operation."
+      },
+      "WebhookTestConfigInput": {
+        "type": "object",
+        "required": [
+          "url"
+        ],
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "Webhook URL to send test payload to."
+          },
+          "headers": {
+            "type": "object",
+            "description": "Custom headers to include in the test request.",
+            "nullable": true
+          },
+          "test_payload": {
+            "type": "object",
+            "description": "Custom payload to send. If not provided, uses a default test payload.",
+            "nullable": true
+          }
+        },
+        "description": "Webhook test configuration."
+      },
+      "EmailTestConfigInput": {
+        "type": "object",
+        "required": [
+          "recipient_email"
+        ],
+        "properties": {
+          "recipient_email": {
+            "type": "string",
+            "description": "Email address to send test email to."
+          },
+          "subject": {
+            "type": "string",
+            "default": "ThoughtSpot Test Email",
+            "description": "Subject line for the test email.",
+            "nullable": true
+          },
+          "template_id": {
+            "type": "string",
+            "description": "Template ID to use for the test email.",
+            "nullable": true
+          }
+        },
+        "description": "Email test configuration."
+      },
+      "TestNotificationResponse": {
+        "type": "object",
+        "required": [
+          "success"
+        ],
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Whether the test notification was sent successfully."
+          },
+          "response_details": {
+            "type": "object",
+            "description": "Response details from the channel.\nFor webhooks: HTTP status code and response body.\nFor email: Delivery status and message ID.",
+            "nullable": true
+          },
+          "error_message": {
+            "type": "string",
+            "description": "Error message if the test failed.",
+            "nullable": true
+          }
+        },
+        "description": "Response from test notification operation."
+      },
       "Runtime_Filter": {
         "type": "object",
         "properties": {
@@ -21768,6 +22665,215 @@
             ]
           }
         }
+      },
+      "RetryChannelDeliveryRequest": {
+        "type": "object",
+        "properties": {
+          "job_id": {
+            "description": "Unique identifier of the job to retry.",
+            "type": "string"
+          },
+          "channel_type": {
+            "description": "Type of channel to retry.",
+            "type": "string",
+            "enum": [
+              "WEBHOOK",
+              "EMAIL"
+            ]
+          },
+          "channel_config": {
+            "description": "Channel-specific retry configuration.\nProvide exactly ONE of: webhook_config OR email_config.\nThis demonstrates the oneOf pattern for GraphQL inputs.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ChannelRetryConfigInput"
+              }
+            ]
+          }
+        },
+        "required": [
+          "job_id",
+          "channel_type",
+          "channel_config"
+        ]
+      },
+      "SearchChannelHistoryRequest": {
+        "type": "object",
+        "properties": {
+          "channel_type": {
+            "description": "Type of communication channel to search history for.",
+            "type": "string",
+            "enum": [
+              "WEBHOOK",
+              "EMAIL"
+            ]
+          },
+          "job_ids": {
+            "description": "List of job execution record IDs to retrieve.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "channel_identifiers": {
+            "description": "List of channel IDs or names to filter by.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "channel_status": {
+            "description": "Filter by channel delivery status.",
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "RETRY",
+              "SUCCESS",
+              "FAILED",
+              "QUEUED",
+              "SENT",
+              "DELIVERED",
+              "BOUNCED"
+            ]
+          },
+          "channel_created_by": {
+            "description": "Unique ID or name of user who created the communication channel.",
+            "type": "string"
+          },
+          "event_types": {
+            "description": "Filter by event types that triggered the channel.",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "LIVEBOARD_SCHEDULE"
+              ]
+            }
+          },
+          "start_epoch_time_in_millis": {
+            "description": "Filter records created on or after this time (epoch milliseconds).",
+            "type": "number",
+            "format": "float"
+          },
+          "end_epoch_time_in_millis": {
+            "description": "Filter records created before this time (epoch milliseconds).",
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "required": [
+          "channel_type"
+        ]
+      },
+      "SearchEventHistoryRequest": {
+        "type": "object",
+        "properties": {
+          "event_type": {
+            "description": "Type of event to search history for.",
+            "type": "string",
+            "enum": [
+              "LIVEBOARD_SCHEDULE"
+            ]
+          },
+          "job_ids": {
+            "description": "List of job execution record IDs to retrieve.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "event_identifiers": {
+            "description": "List of event IDs or names to filter by.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "event_status": {
+            "description": "Filter by event execution status.",
+            "type": "string",
+            "enum": [
+              "RUNNING",
+              "SUCCESS",
+              "FAILED"
+            ]
+          },
+          "event_created_by": {
+            "description": "Unique ID or name of user who created the event.",
+            "type": "string"
+          },
+          "channel_identifiers": {
+            "description": "Specific communication channels to include in response.\nIf omitted, all configured channels are returned.\nRequires include_channel_details to be true.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EventHistoryChannelIdentifierInput"
+            }
+          },
+          "channel_status": {
+            "description": "Filter by channel delivery status.",
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "RETRY",
+              "SUCCESS",
+              "FAILED",
+              "QUEUED",
+              "SENT",
+              "DELIVERED",
+              "BOUNCED"
+            ]
+          },
+          "include_channel_details": {
+            "description": "Include delivery status for communication channels configured for this event.",
+            "default": false,
+            "type": "boolean",
+            "nullable": true
+          },
+          "start_epoch_time_in_millis": {
+            "description": "Filter records created on or after this time (epoch milliseconds).",
+            "type": "number",
+            "format": "float"
+          },
+          "end_epoch_time_in_millis": {
+            "description": "Filter records created before this time (epoch milliseconds).",
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "SendTestNotificationRequest": {
+        "type": "object",
+        "properties": {
+          "channel_type": {
+            "description": "Type of channel to test.",
+            "type": "string",
+            "enum": [
+              "WEBHOOK",
+              "EMAIL"
+            ]
+          },
+          "webhook_config": {
+            "description": "Webhook-specific configuration. Required when channel_type is WEBHOOK.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/WebhookTestConfigInput"
+              }
+            ]
+          },
+          "email_config": {
+            "description": "Email-specific configuration. Required when channel_type is EMAIL.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EmailTestConfigInput"
+              }
+            ]
+          }
+        },
+        "required": [
+          "channel_type"
+        ]
       },
       "FetchLogsRequest": {
         "type": "object",
