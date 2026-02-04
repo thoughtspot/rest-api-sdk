@@ -1,5 +1,5 @@
 import { Observable, from } from '../rxjsStub';
-
+import packageJson from '../package.json';
 export * from './isomorphic-fetch';
 
 /**
@@ -37,7 +37,9 @@ export type RequestBody = undefined | string | FormData | URLSearchParams;
  * Represents an HTTP request context
  */
 export class RequestContext {
-    private headers: { [key: string]: string } = {};
+    private headers: { [key: string]: string } = {
+            'X-ThoughtSpot-Client': `ThoughtSpot-Client/typescript/${packageJson.version}`
+    };
     private body: RequestBody = undefined;
     private url: URL;
 
