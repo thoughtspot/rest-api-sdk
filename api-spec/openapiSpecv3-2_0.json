@@ -9747,6 +9747,72 @@
         }
       }
     },
+    "/api/rest/2.0/template/variables/delete": {
+      "post": {
+        "operationId": "deleteVariables",
+        "description": "\nDelete variable(s) <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Variable",
+          "26.4.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteVariablesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Deletion of variable(s) is successful."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/template/variables/{identifier}/update-values": {
       "post": {
         "operationId": "putVariableValues",
@@ -25771,6 +25837,21 @@
         "required": [
           "type",
           "name"
+        ]
+      },
+      "DeleteVariablesRequest": {
+        "type": "object",
+        "properties": {
+          "identifiers": {
+            "description": "Unique id(s) or name(s) of the variable(s) to delete",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "identifiers"
         ]
       },
       "PutVariableValuesRequest": {
