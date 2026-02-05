@@ -332,6 +332,8 @@ public class JSON {
                 new com.thoughtspot.client.model.DeleteOrgEmailCustomizationRequest
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.DeleteVariablesRequest.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.DeleteWebhookConfigurationsRequest
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(

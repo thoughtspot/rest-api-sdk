@@ -22993,6 +22993,16 @@ components:
       - name
       - type
       type: object
+    DeleteVariablesRequest:
+      properties:
+        identifiers:
+          description: Unique id(s) or name(s) of the variable(s) to delete
+          items:
+            type: string
+          type: array
+      required:
+      - identifiers
+      type: object
     PutVariableValuesRequest:
       properties:
         operation:

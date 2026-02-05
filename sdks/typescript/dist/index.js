@@ -4467,6 +4467,25 @@ _DeleteOrgEmailCustomizationRequest.attributeTypeMap = [
 ];
 var DeleteOrgEmailCustomizationRequest = _DeleteOrgEmailCustomizationRequest;
 
+// models/DeleteVariablesRequest.ts
+var _DeleteVariablesRequest = class _DeleteVariablesRequest {
+  static getAttributeTypeMap() {
+    return _DeleteVariablesRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_DeleteVariablesRequest.discriminator = void 0;
+_DeleteVariablesRequest.attributeTypeMap = [
+  {
+    "name": "identifiers",
+    "baseName": "identifiers",
+    "type": "Array<string>",
+    "format": ""
+  }
+];
+var DeleteVariablesRequest = _DeleteVariablesRequest;
+
 // models/DeleteWebhookConfigurationsRequest.ts
 var _DeleteWebhookConfigurationsRequest = class _DeleteWebhookConfigurationsRequest {
   static getAttributeTypeMap() {
@@ -16990,6 +17009,7 @@ var typeMap = {
   "DeleteMetadataRequest": DeleteMetadataRequest,
   "DeleteMetadataTypeInput": DeleteMetadataTypeInput,
   "DeleteOrgEmailCustomizationRequest": DeleteOrgEmailCustomizationRequest,
+  "DeleteVariablesRequest": DeleteVariablesRequest,
   "DeleteWebhookConfigurationsRequest": DeleteWebhookConfigurationsRequest,
   "DeployCommitRequest": DeployCommitRequest,
   "DeployResponse": DeployResponse,
@@ -47556,6 +47576,7 @@ export {
   DeleteMetadataRequest,
   DeleteMetadataTypeInput,
   DeleteOrgEmailCustomizationRequest,
+  DeleteVariablesRequest,
   DeleteWebhookConfigurationsRequest,
   DeployCommitRequest,
   DeployResponse,

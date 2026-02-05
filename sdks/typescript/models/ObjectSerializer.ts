@@ -116,6 +116,7 @@ export * from '../models/DeleteConnectionRequest';
 export * from '../models/DeleteMetadataRequest';
 export * from '../models/DeleteMetadataTypeInput';
 export * from '../models/DeleteOrgEmailCustomizationRequest';
+export * from '../models/DeleteVariablesRequest';
 export * from '../models/DeleteWebhookConfigurationsRequest';
 export * from '../models/DeployCommitRequest';
 export * from '../models/DeployResponse';
@@ -545,6 +546,7 @@ import { DeleteConnectionRequest } from '../models/DeleteConnectionRequest';
 import { DeleteMetadataRequest } from '../models/DeleteMetadataRequest';
 import { DeleteMetadataTypeInput, DeleteMetadataTypeInputTypeEnum    } from '../models/DeleteMetadataTypeInput';
 import { DeleteOrgEmailCustomizationRequest } from '../models/DeleteOrgEmailCustomizationRequest';
+import { DeleteVariablesRequest } from '../models/DeleteVariablesRequest';
 import { DeleteWebhookConfigurationsRequest } from '../models/DeleteWebhookConfigurationsRequest';
 import { DeployCommitRequest  , DeployCommitRequestDeployTypeEnum  , DeployCommitRequestDeployPolicyEnum   } from '../models/DeployCommitRequest';
 import { DeployResponse } from '../models/DeployResponse';
@@ -1234,6 +1236,7 @@ let typeMap: {[index: string]: any} = {
     "DeleteMetadataRequest": DeleteMetadataRequest,
     "DeleteMetadataTypeInput": DeleteMetadataTypeInput,
     "DeleteOrgEmailCustomizationRequest": DeleteOrgEmailCustomizationRequest,
+    "DeleteVariablesRequest": DeleteVariablesRequest,
     "DeleteWebhookConfigurationsRequest": DeleteWebhookConfigurationsRequest,
     "DeployCommitRequest": DeployCommitRequest,
     "DeployResponse": DeployResponse,
