@@ -16309,6 +16309,41 @@ components:
       required:
       - org_identifier
       type: object
+    VariablePutAssignmentInput:
+      description: Input for variable value put operations
+      properties:
+        assigned_values:
+          description: Values of the variable
+          items:
+            type: string
+          type: array
+        org_identifier:
+          description: The unique name of the org
+          nullable: true
+          type: string
+        principal_type:
+          description: Principal type
+          enum:
+          - USER
+          - USER_GROUP
+          nullable: true
+          type: string
+        principal_identifier:
+          description: Unique ID or name of the principal
+          nullable: true
+          type: string
+        model_identifier:
+          description: Unique ID of the model
+          nullable: true
+          type: string
+        priority:
+          description: Priority level
+          format: int32
+          nullable: true
+          type: integer
+      required:
+      - assigned_values
+      type: object
     CreateEmailCustomizationResponse:
       example:
         tenant_id: tenant_id
@@ -22957,6 +22992,24 @@ components:
       required:
       - name
       - type
+      type: object
+    PutVariableValuesRequest:
+      properties:
+        operation:
+          description: Operation to perform
+          enum:
+          - ADD
+          - REMOVE
+          - REPLACE
+          - RESET
+          type: string
+        variable_assignment:
+          description: Variable assignments
+          items:
+            $ref: '#/components/schemas/VariablePutAssignmentInput'
+          type: array
+      required:
+      - variable_assignment
       type: object
     SearchVariablesRequest:
       properties:

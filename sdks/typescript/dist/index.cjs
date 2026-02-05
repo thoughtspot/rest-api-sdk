@@ -304,6 +304,7 @@ __export(typescript_exports, {
   PrincipalsListItemInput: () => PrincipalsListItemInput,
   PublishMetadataListItem: () => PublishMetadataListItem,
   PublishMetadataRequest: () => PublishMetadataRequest,
+  PutVariableValuesRequest: () => PutVariableValuesRequest,
   QueryGetDecomposedQueryRequest: () => QueryGetDecomposedQueryRequest,
   QueryGetDecomposedQueryRequestNlsRequest: () => QueryGetDecomposedQueryRequestNlsRequest,
   RecipientDetails: () => RecipientDetails,
@@ -475,6 +476,7 @@ __export(typescript_exports, {
   ValueScopeInput: () => ValueScopeInput,
   Variable: () => Variable,
   VariableDetailInput: () => VariableDetailInput,
+  VariablePutAssignmentInput: () => VariablePutAssignmentInput,
   VariableUpdateAssignmentInput: () => VariableUpdateAssignmentInput,
   VariableUpdateScopeInput: () => VariableUpdateScopeInput,
   VariableValue: () => VariableValue,
@@ -9446,6 +9448,31 @@ _PublishMetadataRequest.attributeTypeMap = [
 ];
 var PublishMetadataRequest = _PublishMetadataRequest;
 
+// models/PutVariableValuesRequest.ts
+var _PutVariableValuesRequest = class _PutVariableValuesRequest {
+  static getAttributeTypeMap() {
+    return _PutVariableValuesRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_PutVariableValuesRequest.discriminator = void 0;
+_PutVariableValuesRequest.attributeTypeMap = [
+  {
+    "name": "operation",
+    "baseName": "operation",
+    "type": "PutVariableValuesRequestOperationEnum",
+    "format": ""
+  },
+  {
+    "name": "variable_assignment",
+    "baseName": "variable_assignment",
+    "type": "Array<VariablePutAssignmentInput>",
+    "format": ""
+  }
+];
+var PutVariableValuesRequest = _PutVariableValuesRequest;
+
 // models/QueryGetDecomposedQueryRequest.ts
 var _QueryGetDecomposedQueryRequest = class _QueryGetDecomposedQueryRequest {
   static getAttributeTypeMap() {
@@ -16168,6 +16195,55 @@ _VariableDetailInput.attributeTypeMap = [
 ];
 var VariableDetailInput = _VariableDetailInput;
 
+// models/VariablePutAssignmentInput.ts
+var _VariablePutAssignmentInput = class _VariablePutAssignmentInput {
+  static getAttributeTypeMap() {
+    return _VariablePutAssignmentInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_VariablePutAssignmentInput.discriminator = void 0;
+_VariablePutAssignmentInput.attributeTypeMap = [
+  {
+    "name": "assigned_values",
+    "baseName": "assigned_values",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "org_identifier",
+    "baseName": "org_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "principal_type",
+    "baseName": "principal_type",
+    "type": "VariablePutAssignmentInputPrincipalTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "principal_identifier",
+    "baseName": "principal_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "model_identifier",
+    "baseName": "model_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "priority",
+    "baseName": "priority",
+    "type": "number",
+    "format": "int32"
+  }
+];
+var VariablePutAssignmentInput = _VariablePutAssignmentInput;
+
 // models/VariableUpdateAssignmentInput.ts
 var _VariableUpdateAssignmentInput = class _VariableUpdateAssignmentInput {
   static getAttributeTypeMap() {
@@ -17166,6 +17242,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "PermissionsMetadataTypeInputTypeEnum",
   "PrincipalsInputTypeEnum",
   "PublishMetadataListItemTypeEnum",
+  "PutVariableValuesRequestOperationEnum",
   "RegionalSettingsInputCurrencyFormatEnum",
   "RegionalSettingsInputUserLocaleEnum",
   "RegionalSettingsInputNumberFormatLocaleEnum",
@@ -17273,6 +17350,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "ValueScopeInputPrincipalTypeEnum",
   "VariableVariableTypeEnum",
   "VariableDetailInputTypeEnum",
+  "VariablePutAssignmentInputPrincipalTypeEnum",
   "VariableUpdateAssignmentInputOperationEnum",
   "VariableUpdateScopeInputPrincipalTypeEnum",
   "VariableValuePrincipalTypeEnum",
@@ -17531,6 +17609,7 @@ var typeMap = {
   "PrincipalsListItemInput": PrincipalsListItemInput,
   "PublishMetadataListItem": PublishMetadataListItem,
   "PublishMetadataRequest": PublishMetadataRequest,
+  "PutVariableValuesRequest": PutVariableValuesRequest,
   "QueryGetDecomposedQueryRequest": QueryGetDecomposedQueryRequest,
   "QueryGetDecomposedQueryRequestNlsRequest": QueryGetDecomposedQueryRequestNlsRequest,
   "RecipientDetails": RecipientDetails,
@@ -17689,6 +17768,7 @@ var typeMap = {
   "ValueScopeInput": ValueScopeInput,
   "Variable": Variable,
   "VariableDetailInput": VariableDetailInput,
+  "VariablePutAssignmentInput": VariablePutAssignmentInput,
   "VariableUpdateAssignmentInput": VariableUpdateAssignmentInput,
   "VariableUpdateScopeInput": VariableUpdateScopeInput,
   "VariableValue": VariableValue,
@@ -48104,6 +48184,7 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   PrincipalsListItemInput,
   PublishMetadataListItem,
   PublishMetadataRequest,
+  PutVariableValuesRequest,
   QueryGetDecomposedQueryRequest,
   QueryGetDecomposedQueryRequestNlsRequest,
   RecipientDetails,
@@ -48275,6 +48356,7 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   ValueScopeInput,
   Variable,
   VariableDetailInput,
+  VariablePutAssignmentInput,
   VariableUpdateAssignmentInput,
   VariableUpdateScopeInput,
   VariableValue,

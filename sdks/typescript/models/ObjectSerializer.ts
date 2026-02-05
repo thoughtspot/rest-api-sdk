@@ -244,6 +244,7 @@ export * from '../models/PrincipalsListItem';
 export * from '../models/PrincipalsListItemInput';
 export * from '../models/PublishMetadataListItem';
 export * from '../models/PublishMetadataRequest';
+export * from '../models/PutVariableValuesRequest';
 export * from '../models/QueryGetDecomposedQueryRequest';
 export * from '../models/QueryGetDecomposedQueryRequestNlsRequest';
 export * from '../models/RecipientDetails';
@@ -402,6 +403,7 @@ export * from '../models/ValidateTokenRequest';
 export * from '../models/ValueScopeInput';
 export * from '../models/Variable';
 export * from '../models/VariableDetailInput';
+export * from '../models/VariablePutAssignmentInput';
 export * from '../models/VariableUpdateAssignmentInput';
 export * from '../models/VariableUpdateScopeInput';
 export * from '../models/VariableValue';
@@ -671,6 +673,7 @@ import { PrincipalsListItem } from '../models/PrincipalsListItem';
 import { PrincipalsListItemInput } from '../models/PrincipalsListItemInput';
 import { PublishMetadataListItem , PublishMetadataListItemTypeEnum   } from '../models/PublishMetadataListItem';
 import { PublishMetadataRequest } from '../models/PublishMetadataRequest';
+import { PutVariableValuesRequest, PutVariableValuesRequestOperationEnum    } from '../models/PutVariableValuesRequest';
 import { QueryGetDecomposedQueryRequest } from '../models/QueryGetDecomposedQueryRequest';
 import { QueryGetDecomposedQueryRequestNlsRequest } from '../models/QueryGetDecomposedQueryRequestNlsRequest';
 import { RecipientDetails } from '../models/RecipientDetails';
@@ -829,6 +832,7 @@ import { ValidateTokenRequest } from '../models/ValidateTokenRequest';
 import { ValueScopeInput , ValueScopeInputPrincipalTypeEnum     } from '../models/ValueScopeInput';
 import { Variable  , VariableVariableTypeEnum     } from '../models/Variable';
 import { VariableDetailInput , VariableDetailInputTypeEnum    } from '../models/VariableDetailInput';
+import { VariablePutAssignmentInput  , VariablePutAssignmentInputPrincipalTypeEnum      } from '../models/VariablePutAssignmentInput';
 import { VariableUpdateAssignmentInput  , VariableUpdateAssignmentInputOperationEnum   } from '../models/VariableUpdateAssignmentInput';
 import { VariableUpdateScopeInput , VariableUpdateScopeInputPrincipalTypeEnum      } from '../models/VariableUpdateScopeInput';
 import { VariableValue   , VariableValuePrincipalTypeEnum      } from '../models/VariableValue';
@@ -990,6 +994,7 @@ let enumsMap: Set<string> = new Set<string>([
     "PermissionsMetadataTypeInputTypeEnum",
     "PrincipalsInputTypeEnum",
     "PublishMetadataListItemTypeEnum",
+    "PutVariableValuesRequestOperationEnum",
     "RegionalSettingsInputCurrencyFormatEnum",
     "RegionalSettingsInputUserLocaleEnum",
     "RegionalSettingsInputNumberFormatLocaleEnum",
@@ -1097,6 +1102,7 @@ let enumsMap: Set<string> = new Set<string>([
     "ValueScopeInputPrincipalTypeEnum",
     "VariableVariableTypeEnum",
     "VariableDetailInputTypeEnum",
+    "VariablePutAssignmentInputPrincipalTypeEnum",
     "VariableUpdateAssignmentInputOperationEnum",
     "VariableUpdateScopeInputPrincipalTypeEnum",
     "VariableValuePrincipalTypeEnum",
@@ -1356,6 +1362,7 @@ let typeMap: {[index: string]: any} = {
     "PrincipalsListItemInput": PrincipalsListItemInput,
     "PublishMetadataListItem": PublishMetadataListItem,
     "PublishMetadataRequest": PublishMetadataRequest,
+    "PutVariableValuesRequest": PutVariableValuesRequest,
     "QueryGetDecomposedQueryRequest": QueryGetDecomposedQueryRequest,
     "QueryGetDecomposedQueryRequestNlsRequest": QueryGetDecomposedQueryRequestNlsRequest,
     "RecipientDetails": RecipientDetails,
@@ -1514,6 +1521,7 @@ let typeMap: {[index: string]: any} = {
     "ValueScopeInput": ValueScopeInput,
     "Variable": Variable,
     "VariableDetailInput": VariableDetailInput,
+    "VariablePutAssignmentInput": VariablePutAssignmentInput,
     "VariableUpdateAssignmentInput": VariableUpdateAssignmentInput,
     "VariableUpdateScopeInput": VariableUpdateScopeInput,
     "VariableValue": VariableValue,
