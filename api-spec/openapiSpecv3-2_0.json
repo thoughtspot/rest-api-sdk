@@ -9747,6 +9747,82 @@
         }
       }
     },
+    "/api/rest/2.0/template/variables/{identifier}/update-values": {
+      "post": {
+        "operationId": "putVariableValues",
+        "description": "\nUpdate values for a variable <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Variable",
+          "26.4.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutVariableValuesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the variable"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Variable values updated successfully."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/template/variables/search": {
       "post": {
         "operationId": "searchVariables",
@@ -19237,6 +19313,52 @@
         },
         "description": "Input for defining the scope of variable value assignments in batch update operations"
       },
+      "VariablePutAssignmentInput": {
+        "type": "object",
+        "required": [
+          "assigned_values"
+        ],
+        "properties": {
+          "assigned_values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Values of the variable"
+          },
+          "org_identifier": {
+            "type": "string",
+            "description": "The unique name of the org",
+            "nullable": true
+          },
+          "principal_type": {
+            "type": "string",
+            "enum": [
+              "USER",
+              "USER_GROUP"
+            ],
+            "description": "Principal type",
+            "nullable": true
+          },
+          "principal_identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the principal",
+            "nullable": true
+          },
+          "model_identifier": {
+            "type": "string",
+            "description": "Unique ID of the model",
+            "nullable": true
+          },
+          "priority": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Priority level",
+            "nullable": true
+          }
+        },
+        "description": "Input for variable value put operations"
+      },
       "CreateEmailCustomizationResponse": {
         "type": "object",
         "required": [
@@ -25649,6 +25771,31 @@
         "required": [
           "type",
           "name"
+        ]
+      },
+      "PutVariableValuesRequest": {
+        "type": "object",
+        "properties": {
+          "operation": {
+            "description": "Operation to perform",
+            "type": "string",
+            "enum": [
+              "ADD",
+              "REMOVE",
+              "REPLACE",
+              "RESET"
+            ]
+          },
+          "variable_assignment": {
+            "description": "Variable assignments",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VariablePutAssignmentInput"
+            }
+          }
+        },
+        "required": [
+          "variable_assignment"
         ]
       },
       "SearchVariablesRequest": {
