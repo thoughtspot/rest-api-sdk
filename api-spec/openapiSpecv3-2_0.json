@@ -62,6 +62,14 @@
       "description": "Roles for version 9.12.0.cl"
     },
     {
+      "name": "26.4.0.cl",
+      "id": "26.4.0.cl",
+      "tags": [
+        "26.4.0.cl"
+      ],
+      "description": "Roles for version 26.4.0.cl"
+    },
+    {
       "name": "10.12.0.cl",
       "id": "10.12.0.cl",
       "tags": [
@@ -172,14 +180,6 @@
         "10.14.0.cl"
       ],
       "description": "Roles for version 10.14.0.cl"
-    },
-    {
-      "name": "26.4.0.cl",
-      "id": "26.4.0.cl",
-      "tags": [
-        "26.4.0.cl"
-      ],
-      "description": "Roles for version 26.4.0.cl"
     },
     {
       "name": "9.7.0.cl",
@@ -1500,6 +1500,321 @@
           },
           "403": {
             "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/collections/create": {
+      "post": {
+        "operationId": "createCollection",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\nCreates a new collection in ThoughtSpot.\n\nCollections allow you to organize and group related metadata objects such as Liveboards, Answers, worksheets, and other data objects. You can also create nested collections (sub-collections) to build a hierarchical structure.\n\n#### Supported operations\n\nThe API endpoint lets you perform the following operations:\n\n* Create a new collection\n* Add metadata objects (Liveboards, Answers, Logical Tables) to the collection\n* Create nested collections by adding sub-collections\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Collections",
+          "26.4.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCollectionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Collection created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Collection"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/collections/delete": {
+      "post": {
+        "operationId": "deleteCollection",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\nDeletes one or more collections from ThoughtSpot.\n\n#### Delete options\n\n* **delete_children**: When set to `true`, deletes the child objects (metadata items) within the collection that the user has access to. Objects that the user does not have permission to delete will be skipped.\n* **dry_run**: When set to `true`, performs a preview of the deletion operation without actually deleting anything. The response shows what would be deleted, allowing you to review before committing the deletion.\n\n#### Response\n\nThe response includes:\n* **metadata_deleted**: List of metadata objects that were successfully deleted\n* **metadata_skipped**: List of metadata objects that were skipped due to lack of permissions or other constraints\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Collections",
+          "26.4.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteCollectionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Collections deleted successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionDeleteResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/collections/search": {
+      "post": {
+        "operationId": "searchCollections",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\nGets a list of collections available in ThoughtSpot.\n\nTo get details of a specific collection, specify the collection GUID or name. You can also filter the API response based on the collection name pattern, author, and other criteria.\n\n#### Search options\n\n* **name_pattern**: Use '%' as a wildcard character to match collection names\n* **collection_identifiers**: Search for specific collections by their GUIDs or names\n* **include_metadata**: When set to `true`, includes the metadata objects within each collection in the response\n\n**NOTE**: If the API returns an empty list, consider increasing the value of the `record_size` parameter. To search across all available collections, set `record_size` to `-1`.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Collections",
+          "26.4.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchCollectionsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved list of collections",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionSearchResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/collections/{collection_identifier}/update": {
+      "post": {
+        "operationId": "updateCollection",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\nUpdates an existing collection in ThoughtSpot.\n\n#### Supported operations\n\nThis API endpoint lets you perform the following operations:\n\n* Update collection name and description\n* Change visibility settings\n* Add metadata objects to the collection (operation: ADD)\n* Remove metadata objects from the collection (operation: REMOVE)\n* Replace all metadata objects in the collection (operation: REPLACE)\n\n#### Operation types\n\n* **ADD**: Adds the specified metadata objects to the existing collection without removing current items\n* **REMOVE**: Removes only the specified metadata objects from the collection\n* **REPLACE**: Replaces all existing metadata objects with the specified items (default behavior)\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Collections",
+          "26.4.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCollectionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "collection_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique GUID of the collection. Note: Collection names cannot be used as\nidentifiers since duplicate names are allowed."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Collection updated successfully. No content returned."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found.",
             "content": {
               "application/json": {
                 "schema": {
@@ -15887,6 +16202,136 @@
         },
         "description": "Setup information for GCP clusters using STS AssumeRoleWithWebIdentity.\nThoughtSpot will use its GCP service account to obtain OIDC tokens for AWS access.\nExample:\n{\n  \"thoughtspot_gcp_service_account_id\": \"115663769112811637952\",\n  \"oidc_provider\": \"accounts.google.com\",\n  \"trust_policy_template\": {\n    \"Version\": \"2012-10-17\",\n    \"Statement\": [{\n      \"Effect\": \"Allow\",\n      \"Principal\": { \"Federated\": \"arn:aws:iam::YOUR_AWS_ACCOUNT_ID:oidc-provider/accounts.google.com\" },\n      \"Action\": \"sts:AssumeRoleWithWebIdentity\",\n      \"Condition\": { \"StringEquals\": { \"accounts.google.com:sub\": \"115663769112811637952\" } }\n    }]\n  },\n  \"setup_instructions\": [\n    \"1. Add accounts.google.com as an Identity Provider in AWS IAM\",\n    \"2. Create an IAM role with Web Identity Federation trust\",\n    \"3. Configure the trust policy with ThoughtSpot's GCP service account ID\",\n    \"4. Attach S3 permissions (s3:PutObject, s3:PutObjectAcl) to the role\",\n    \"5. Use the role ARN in your webhook storage configuration\"\n  ]\n}"
       },
+      "CollectionSearchResponse": {
+        "type": "object",
+        "required": [
+          "collections"
+        ],
+        "properties": {
+          "collections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Collection"
+            },
+            "description": "List of collections matching the search criteria."
+          },
+          "record_offset": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The starting record number from where the records are included.",
+            "nullable": true
+          },
+          "record_size": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of records returned.",
+            "nullable": true
+          },
+          "is_last_batch": {
+            "type": "boolean",
+            "description": "Indicates if this is the last batch of results.",
+            "nullable": true
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Total count of records returned.",
+            "nullable": true
+          }
+        },
+        "description": "Response object for search collections operation."
+      },
+      "Collection": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the collection."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the collection."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the collection.",
+            "nullable": true
+          },
+          "metadata": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CollectionMetadataItem"
+            },
+            "description": "Metadata objects in the collection.",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string",
+            "description": "Creation timestamp in milliseconds.",
+            "nullable": true
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "Last updated timestamp in milliseconds.",
+            "nullable": true
+          },
+          "author_name": {
+            "type": "string",
+            "description": "Name of the author who created the collection.",
+            "nullable": true
+          },
+          "author_id": {
+            "type": "string",
+            "description": "Unique identifier of the author.",
+            "nullable": true
+          },
+          "org": {
+            "$ref": "#/components/schemas/CollectionEntityIdentifier",
+            "description": "Org associated with the collection.",
+            "nullable": true
+          }
+        },
+        "description": "Response object for a collection."
+      },
+      "CollectionMetadataItem": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Type of the metadata object.",
+            "nullable": true
+          },
+          "identifiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CollectionEntityIdentifier"
+            },
+            "description": "List of identifiers for this metadata type.",
+            "nullable": true
+          }
+        },
+        "description": "Metadata item in a collection response."
+      },
+      "CollectionEntityIdentifier": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "Unique identifier of the entity.",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the entity.",
+            "nullable": true
+          }
+        },
+        "description": "Entity identifier with name."
+      },
       "GenericInfo": {
         "type": "object",
         "properties": {
@@ -19886,6 +20331,74 @@
           }
         }
       },
+      "CollectionMetadataInput": {
+        "type": "object",
+        "required": [
+          "type",
+          "identifiers"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER",
+              "LOGICAL_TABLE",
+              "COLLECTION"
+            ],
+            "description": "Type of metadata object."
+          },
+          "identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of unique IDs or names of metadata objects."
+          }
+        },
+        "description": "Input type for metadata to be added to a collection."
+      },
+      "CollectionDeleteResponse": {
+        "type": "object",
+        "properties": {
+          "metadata_deleted": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CollectionDeleteTypeIdentifiers"
+            },
+            "description": "List of metadata objects that were successfully deleted.",
+            "nullable": true
+          },
+          "metadata_skipped": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CollectionDeleteTypeIdentifiers"
+            },
+            "description": "List of metadata objects that were skipped during deletion.\nObjects may be skipped due to lack of permissions, dependencies, or other constraints.",
+            "nullable": true
+          }
+        },
+        "description": "Response object for delete collection operation."
+      },
+      "CollectionDeleteTypeIdentifiers": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Type of the metadata object (e.g., Collection, Worksheet, Table).",
+            "nullable": true
+          },
+          "identifiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GenericInfo"
+            },
+            "description": "List of metadata identifiers belonging to the given type.",
+            "nullable": true
+          }
+        },
+        "description": "Group of metadata objects identified by type."
+      },
       "Runtime_Filter": {
         "type": "object",
         "properties": {
@@ -20423,6 +20936,135 @@
         "required": [
           "token"
         ]
+      },
+      "CreateCollectionRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "Name of the collection.",
+            "type": "string"
+          },
+          "description": {
+            "description": "Description of the collection.",
+            "type": "string"
+          },
+          "metadata": {
+            "description": "Metadata objects to add to the collection.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CollectionMetadataInput"
+            }
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "DeleteCollectionRequest": {
+        "type": "object",
+        "properties": {
+          "collection_identifiers": {
+            "description": "Unique GUIDs of collections to delete. Note: Collection names cannot be\nused as identifiers since duplicate names are allowed.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "delete_children": {
+            "description": "Flag to delete child objects of the collection that the user has access to.",
+            "default": false,
+            "type": "boolean",
+            "nullable": true
+          },
+          "dry_run": {
+            "description": "Preview deletion without actually deleting. When set to true, returns\nwhat would be deleted without performing the actual deletion.",
+            "default": false,
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "required": [
+          "collection_identifiers"
+        ]
+      },
+      "SearchCollectionsRequest": {
+        "type": "object",
+        "properties": {
+          "name_pattern": {
+            "description": "A pattern to match case-insensitive name of the Collection object.\nUse '%' for wildcard match.",
+            "type": "string"
+          },
+          "record_offset": {
+            "description": "The starting record number from where the records should be included.",
+            "default": 0,
+            "type": "integer",
+            "format": "int32"
+          },
+          "record_size": {
+            "description": "The number of records that should be included.\n-1 implies no pagination.",
+            "default": 10,
+            "type": "integer",
+            "format": "int32"
+          },
+          "collection_identifiers": {
+            "description": "Unique GUIDs of collections to search. Note: Collection names cannot be\nused as identifiers since duplicate names are allowed.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "created_by_user_identifiers": {
+            "description": "Filter collections by author. Provide unique IDs or names of users\nwho created the collections.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "include_metadata": {
+            "description": "Include collection metadata items in the response.",
+            "default": false,
+            "type": "boolean",
+            "nullable": true
+          },
+          "sort_options": {
+            "description": "Sort options.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SortOptions"
+              }
+            ]
+          }
+        }
+      },
+      "UpdateCollectionRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "Name of the collection.",
+            "type": "string"
+          },
+          "description": {
+            "description": "Description of the collection.",
+            "type": "string"
+          },
+          "metadata": {
+            "description": "Metadata objects to add, remove, or replace in the collection.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CollectionMetadataInput"
+            }
+          },
+          "operation": {
+            "description": "Type of update operation. Default operation type is REPLACE.",
+            "default": "REPLACE",
+            "type": "string",
+            "enum": [
+              "ADD",
+              "REMOVE",
+              "REPLACE"
+            ]
+          }
+        }
       },
       "ConnectionConfigurationSearchRequest": {
         "type": "object",

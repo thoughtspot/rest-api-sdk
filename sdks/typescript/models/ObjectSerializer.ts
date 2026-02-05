@@ -35,6 +35,13 @@ export * from '../models/ChangeUserPasswordRequest';
 export * from '../models/ChannelValidationDetail';
 export * from '../models/ClusterNonEmbedAccess';
 export * from '../models/ClusterNonEmbedAccessInput';
+export * from '../models/Collection';
+export * from '../models/CollectionDeleteResponse';
+export * from '../models/CollectionDeleteTypeIdentifiers';
+export * from '../models/CollectionEntityIdentifier';
+export * from '../models/CollectionMetadataInput';
+export * from '../models/CollectionMetadataItem';
+export * from '../models/CollectionSearchResponse';
 export * from '../models/Column';
 export * from '../models/ColumnSecurityRule';
 export * from '../models/ColumnSecurityRuleColumn';
@@ -67,6 +74,7 @@ export * from '../models/CreateAgentConversationRequestConversationSettings';
 export * from '../models/CreateAgentConversationRequestMetadataContext';
 export * from '../models/CreateCalendarRequest';
 export * from '../models/CreateCalendarRequestTableReference';
+export * from '../models/CreateCollectionRequest';
 export * from '../models/CreateConfigRequest';
 export * from '../models/CreateConnectionConfigurationRequest';
 export * from '../models/CreateConnectionConfigurationRequestPolicyProcessOptions';
@@ -110,6 +118,7 @@ export * from '../models/DefaultActionConfig';
 export * from '../models/DefaultActionConfigInput';
 export * from '../models/DefaultActionConfigInputCreate';
 export * from '../models/DefaultActionConfigSearchInput';
+export * from '../models/DeleteCollectionRequest';
 export * from '../models/DeleteConfigRequest';
 export * from '../models/DeleteConnectionConfigurationRequest';
 export * from '../models/DeleteConnectionRequest';
@@ -292,6 +301,8 @@ export * from '../models/ScriptSrcUrls';
 export * from '../models/ScriptSrcUrlsInput';
 export * from '../models/SearchCalendarsRequest';
 export * from '../models/SearchCalendarsRequestSortOptions';
+export * from '../models/SearchCollectionsRequest';
+export * from '../models/SearchCollectionsRequestSortOptions';
 export * from '../models/SearchCommitsRequest';
 export * from '../models/SearchCommunicationChannelPreferencesRequest';
 export * from '../models/SearchConfigRequest';
@@ -317,7 +328,6 @@ export * from '../models/SearchTagsRequest';
 export * from '../models/SearchUserGroupsRequest';
 export * from '../models/SearchUserGroupsRequestSortOptions';
 export * from '../models/SearchUsersRequest';
-export * from '../models/SearchUsersRequestSortOptions';
 export * from '../models/SearchVariablesRequest';
 export * from '../models/SearchWebhookConfigurationsRequest';
 export * from '../models/SearchWebhookConfigurationsRequestSortOptions';
@@ -365,6 +375,7 @@ export * from '../models/UnparameterizeMetadataRequest';
 export * from '../models/UnpublishMetadataRequest';
 export * from '../models/UpdateCalendarRequest';
 export * from '../models/UpdateCalendarRequestTableReference';
+export * from '../models/UpdateCollectionRequest';
 export * from '../models/UpdateColumnSecurityRulesRequest';
 export * from '../models/UpdateConfigRequest';
 export * from '../models/UpdateConnectionConfigurationRequest';
@@ -465,6 +476,13 @@ import { ChangeUserPasswordRequest } from '../models/ChangeUserPasswordRequest';
 import { ChannelValidationDetail, ChannelValidationDetailValidationStepEnum  , ChannelValidationDetailStatusEnum     } from '../models/ChannelValidationDetail';
 import { ClusterNonEmbedAccess } from '../models/ClusterNonEmbedAccess';
 import { ClusterNonEmbedAccessInput } from '../models/ClusterNonEmbedAccessInput';
+import { Collection } from '../models/Collection';
+import { CollectionDeleteResponse } from '../models/CollectionDeleteResponse';
+import { CollectionDeleteTypeIdentifiers } from '../models/CollectionDeleteTypeIdentifiers';
+import { CollectionEntityIdentifier } from '../models/CollectionEntityIdentifier';
+import { CollectionMetadataInput, CollectionMetadataInputTypeEnum    } from '../models/CollectionMetadataInput';
+import { CollectionMetadataItem } from '../models/CollectionMetadataItem';
+import { CollectionSearchResponse } from '../models/CollectionSearchResponse';
 import { Column } from '../models/Column';
 import { ColumnSecurityRule } from '../models/ColumnSecurityRule';
 import { ColumnSecurityRuleColumn } from '../models/ColumnSecurityRuleColumn';
@@ -497,6 +515,7 @@ import { CreateAgentConversationRequestConversationSettings } from '../models/Cr
 import { CreateAgentConversationRequestMetadataContext, CreateAgentConversationRequestMetadataContextTypeEnum      } from '../models/CreateAgentConversationRequestMetadataContext';
 import { CreateCalendarRequest , CreateCalendarRequestCreationMethodEnum     , CreateCalendarRequestCalendarTypeEnum  , CreateCalendarRequestMonthOffsetEnum  , CreateCalendarRequestStartDayOfWeekEnum     } from '../models/CreateCalendarRequest';
 import { CreateCalendarRequestTableReference } from '../models/CreateCalendarRequestTableReference';
+import { CreateCollectionRequest } from '../models/CreateCollectionRequest';
 import { CreateConfigRequest } from '../models/CreateConfigRequest';
 import { CreateConnectionConfigurationRequest     , CreateConnectionConfigurationRequestAuthenticationTypeEnum   , CreateConnectionConfigurationRequestPolicyTypeEnum   , CreateConnectionConfigurationRequestPolicyProcessesEnum   } from '../models/CreateConnectionConfigurationRequest';
 import { CreateConnectionConfigurationRequestPolicyProcessOptions } from '../models/CreateConnectionConfigurationRequestPolicyProcessOptions';
@@ -540,6 +559,7 @@ import { DefaultActionConfig } from '../models/DefaultActionConfig';
 import { DefaultActionConfigInput } from '../models/DefaultActionConfigInput';
 import { DefaultActionConfigInputCreate } from '../models/DefaultActionConfigInputCreate';
 import { DefaultActionConfigSearchInput } from '../models/DefaultActionConfigSearchInput';
+import { DeleteCollectionRequest } from '../models/DeleteCollectionRequest';
 import { DeleteConfigRequest } from '../models/DeleteConfigRequest';
 import { DeleteConnectionConfigurationRequest } from '../models/DeleteConnectionConfigurationRequest';
 import { DeleteConnectionRequest } from '../models/DeleteConnectionRequest';
@@ -722,6 +742,8 @@ import { ScriptSrcUrls } from '../models/ScriptSrcUrls';
 import { ScriptSrcUrlsInput } from '../models/ScriptSrcUrlsInput';
 import { SearchCalendarsRequest } from '../models/SearchCalendarsRequest';
 import { SearchCalendarsRequestSortOptions, SearchCalendarsRequestSortOptionsFieldNameEnum  , SearchCalendarsRequestSortOptionsOrderEnum   } from '../models/SearchCalendarsRequestSortOptions';
+import { SearchCollectionsRequest } from '../models/SearchCollectionsRequest';
+import { SearchCollectionsRequestSortOptions, SearchCollectionsRequestSortOptionsFieldNameEnum  , SearchCollectionsRequestSortOptionsOrderEnum   } from '../models/SearchCollectionsRequestSortOptions';
 import { SearchCommitsRequest , SearchCommitsRequestMetadataTypeEnum      } from '../models/SearchCommitsRequest';
 import { SearchCommunicationChannelPreferencesRequest, SearchCommunicationChannelPreferencesRequestClusterPreferencesEnum    } from '../models/SearchCommunicationChannelPreferencesRequest';
 import { SearchConfigRequest } from '../models/SearchConfigRequest';
@@ -747,7 +769,6 @@ import { SearchTagsRequest } from '../models/SearchTagsRequest';
 import { SearchUserGroupsRequest      , SearchUserGroupsRequestPrivilegesEnum   , SearchUserGroupsRequestTypeEnum   , SearchUserGroupsRequestVisibilityEnum         } from '../models/SearchUserGroupsRequest';
 import { SearchUserGroupsRequestSortOptions, SearchUserGroupsRequestSortOptionsFieldNameEnum  , SearchUserGroupsRequestSortOptionsOrderEnum   } from '../models/SearchUserGroupsRequestSortOptions';
 import { SearchUsersRequest   , SearchUsersRequestVisibilityEnum    , SearchUsersRequestPrivilegesEnum  , SearchUsersRequestAccountTypeEnum  , SearchUsersRequestAccountStatusEnum               } from '../models/SearchUsersRequest';
-import { SearchUsersRequestSortOptions, SearchUsersRequestSortOptionsFieldNameEnum  , SearchUsersRequestSortOptionsOrderEnum   } from '../models/SearchUsersRequestSortOptions';
 import { SearchVariablesRequest    , SearchVariablesRequestResponseContentEnum   } from '../models/SearchVariablesRequest';
 import { SearchWebhookConfigurationsRequest  , SearchWebhookConfigurationsRequestEventTypeEnum      } from '../models/SearchWebhookConfigurationsRequest';
 import { SearchWebhookConfigurationsRequestSortOptions, SearchWebhookConfigurationsRequestSortOptionsFieldNameEnum  , SearchWebhookConfigurationsRequestSortOptionsOrderEnum   } from '../models/SearchWebhookConfigurationsRequestSortOptions';
@@ -795,6 +816,7 @@ import { UnparameterizeMetadataRequest, UnparameterizeMetadataRequestMetadataTyp
 import { UnpublishMetadataRequest } from '../models/UnpublishMetadataRequest';
 import { UpdateCalendarRequest, UpdateCalendarRequestUpdateMethodEnum     , UpdateCalendarRequestCalendarTypeEnum  , UpdateCalendarRequestMonthOffsetEnum  , UpdateCalendarRequestStartDayOfWeekEnum     } from '../models/UpdateCalendarRequest';
 import { UpdateCalendarRequestTableReference } from '../models/UpdateCalendarRequestTableReference';
+import { UpdateCollectionRequest   , UpdateCollectionRequestOperationEnum   } from '../models/UpdateCollectionRequest';
 import { UpdateColumnSecurityRulesRequest } from '../models/UpdateColumnSecurityRulesRequest';
 import { UpdateConfigRequest } from '../models/UpdateConfigRequest';
 import { UpdateConnectionConfigurationRequest     , UpdateConnectionConfigurationRequestAuthenticationTypeEnum   , UpdateConnectionConfigurationRequestPolicyTypeEnum   , UpdateConnectionConfigurationRequestPolicyProcessesEnum    } from '../models/UpdateConnectionConfigurationRequest';
@@ -885,6 +907,7 @@ let enumsMap: Set<string> = new Set<string>([
     "AuthorMetadataTypeInputTypeEnum",
     "ChannelValidationDetailValidationStepEnum",
     "ChannelValidationDetailStatusEnum",
+    "CollectionMetadataInputTypeEnum",
     "ColumnSecurityRuleGroupOperationOperationEnum",
     "CommunicationChannelValidateResponseChannelTypeEnum",
     "CommunicationChannelValidateResponseEventTypeEnum",
@@ -1011,6 +1034,8 @@ let enumsMap: Set<string> = new Set<string>([
     "SchedulesPdfOptionsInputPageSizeEnum",
     "SearchCalendarsRequestSortOptionsFieldNameEnum",
     "SearchCalendarsRequestSortOptionsOrderEnum",
+    "SearchCollectionsRequestSortOptionsFieldNameEnum",
+    "SearchCollectionsRequestSortOptionsOrderEnum",
     "SearchCommitsRequestMetadataTypeEnum",
     "SearchCommunicationChannelPreferencesRequestClusterPreferencesEnum",
     "SearchConnectionRequestDataWarehouseTypesEnum",
@@ -1041,8 +1066,6 @@ let enumsMap: Set<string> = new Set<string>([
     "SearchUsersRequestPrivilegesEnum",
     "SearchUsersRequestAccountTypeEnum",
     "SearchUsersRequestAccountStatusEnum",
-    "SearchUsersRequestSortOptionsFieldNameEnum",
-    "SearchUsersRequestSortOptionsOrderEnum",
     "SearchVariablesRequestResponseContentEnum",
     "SearchWebhookConfigurationsRequestEventTypeEnum",
     "SearchWebhookConfigurationsRequestSortOptionsFieldNameEnum",
@@ -1069,6 +1092,7 @@ let enumsMap: Set<string> = new Set<string>([
     "UpdateCalendarRequestCalendarTypeEnum",
     "UpdateCalendarRequestMonthOffsetEnum",
     "UpdateCalendarRequestStartDayOfWeekEnum",
+    "UpdateCollectionRequestOperationEnum",
     "UpdateConnectionConfigurationRequestAuthenticationTypeEnum",
     "UpdateConnectionConfigurationRequestPolicyTypeEnum",
     "UpdateConnectionConfigurationRequestPolicyProcessesEnum",
@@ -1155,6 +1179,13 @@ let typeMap: {[index: string]: any} = {
     "ChannelValidationDetail": ChannelValidationDetail,
     "ClusterNonEmbedAccess": ClusterNonEmbedAccess,
     "ClusterNonEmbedAccessInput": ClusterNonEmbedAccessInput,
+    "Collection": Collection,
+    "CollectionDeleteResponse": CollectionDeleteResponse,
+    "CollectionDeleteTypeIdentifiers": CollectionDeleteTypeIdentifiers,
+    "CollectionEntityIdentifier": CollectionEntityIdentifier,
+    "CollectionMetadataInput": CollectionMetadataInput,
+    "CollectionMetadataItem": CollectionMetadataItem,
+    "CollectionSearchResponse": CollectionSearchResponse,
     "Column": Column,
     "ColumnSecurityRule": ColumnSecurityRule,
     "ColumnSecurityRuleColumn": ColumnSecurityRuleColumn,
@@ -1187,6 +1218,7 @@ let typeMap: {[index: string]: any} = {
     "CreateAgentConversationRequestMetadataContext": CreateAgentConversationRequestMetadataContext,
     "CreateCalendarRequest": CreateCalendarRequest,
     "CreateCalendarRequestTableReference": CreateCalendarRequestTableReference,
+    "CreateCollectionRequest": CreateCollectionRequest,
     "CreateConfigRequest": CreateConfigRequest,
     "CreateConnectionConfigurationRequest": CreateConnectionConfigurationRequest,
     "CreateConnectionConfigurationRequestPolicyProcessOptions": CreateConnectionConfigurationRequestPolicyProcessOptions,
@@ -1230,6 +1262,7 @@ let typeMap: {[index: string]: any} = {
     "DefaultActionConfigInput": DefaultActionConfigInput,
     "DefaultActionConfigInputCreate": DefaultActionConfigInputCreate,
     "DefaultActionConfigSearchInput": DefaultActionConfigSearchInput,
+    "DeleteCollectionRequest": DeleteCollectionRequest,
     "DeleteConfigRequest": DeleteConfigRequest,
     "DeleteConnectionConfigurationRequest": DeleteConnectionConfigurationRequest,
     "DeleteConnectionRequest": DeleteConnectionRequest,
@@ -1412,6 +1445,8 @@ let typeMap: {[index: string]: any} = {
     "ScriptSrcUrlsInput": ScriptSrcUrlsInput,
     "SearchCalendarsRequest": SearchCalendarsRequest,
     "SearchCalendarsRequestSortOptions": SearchCalendarsRequestSortOptions,
+    "SearchCollectionsRequest": SearchCollectionsRequest,
+    "SearchCollectionsRequestSortOptions": SearchCollectionsRequestSortOptions,
     "SearchCommitsRequest": SearchCommitsRequest,
     "SearchCommunicationChannelPreferencesRequest": SearchCommunicationChannelPreferencesRequest,
     "SearchConfigRequest": SearchConfigRequest,
@@ -1437,7 +1472,6 @@ let typeMap: {[index: string]: any} = {
     "SearchUserGroupsRequest": SearchUserGroupsRequest,
     "SearchUserGroupsRequestSortOptions": SearchUserGroupsRequestSortOptions,
     "SearchUsersRequest": SearchUsersRequest,
-    "SearchUsersRequestSortOptions": SearchUsersRequestSortOptions,
     "SearchVariablesRequest": SearchVariablesRequest,
     "SearchWebhookConfigurationsRequest": SearchWebhookConfigurationsRequest,
     "SearchWebhookConfigurationsRequestSortOptions": SearchWebhookConfigurationsRequestSortOptions,
@@ -1485,6 +1519,7 @@ let typeMap: {[index: string]: any} = {
     "UnpublishMetadataRequest": UnpublishMetadataRequest,
     "UpdateCalendarRequest": UpdateCalendarRequest,
     "UpdateCalendarRequestTableReference": UpdateCalendarRequestTableReference,
+    "UpdateCollectionRequest": UpdateCollectionRequest,
     "UpdateColumnSecurityRulesRequest": UpdateColumnSecurityRulesRequest,
     "UpdateConfigRequest": UpdateConfigRequest,
     "UpdateConnectionConfigurationRequest": UpdateConnectionConfigurationRequest,

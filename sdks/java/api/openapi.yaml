@@ -13066,6 +13066,103 @@ components:
       - thoughtspot_gcp_service_account_id
       - trust_policy_template
       type: object
+    CollectionSearchResponse:
+      description: Response object for search collections operation.
+      properties:
+        collections:
+          description: List of collections matching the search criteria.
+          items:
+            $ref: '#/components/schemas/Collection'
+          type: array
+        record_offset:
+          description: The starting record number from where the records are included.
+          format: int32
+          nullable: true
+          type: integer
+        record_size:
+          description: The number of records returned.
+          format: int32
+          nullable: true
+          type: integer
+        is_last_batch:
+          description: Indicates if this is the last batch of results.
+          nullable: true
+          type: boolean
+        count:
+          description: Total count of records returned.
+          format: int32
+          nullable: true
+          type: integer
+      required:
+      - collections
+      type: object
+    Collection:
+      description: Response object for a collection.
+      properties:
+        id:
+          description: Unique identifier of the collection.
+          type: string
+        name:
+          description: Name of the collection.
+          type: string
+        description:
+          description: Description of the collection.
+          nullable: true
+          type: string
+        metadata:
+          description: Metadata objects in the collection.
+          items:
+            $ref: '#/components/schemas/CollectionMetadataItem'
+          nullable: true
+          type: array
+        created_at:
+          description: Creation timestamp in milliseconds.
+          nullable: true
+          type: string
+        updated_at:
+          description: Last updated timestamp in milliseconds.
+          nullable: true
+          type: string
+        author_name:
+          description: Name of the author who created the collection.
+          nullable: true
+          type: string
+        author_id:
+          description: Unique identifier of the author.
+          nullable: true
+          type: string
+        org:
+          $ref: '#/components/schemas/CollectionEntityIdentifier'
+      required:
+      - id
+      - name
+      type: object
+    CollectionMetadataItem:
+      description: Metadata item in a collection response.
+      properties:
+        type:
+          description: Type of the metadata object.
+          nullable: true
+          type: string
+        identifiers:
+          description: List of identifiers for this metadata type.
+          items:
+            $ref: '#/components/schemas/CollectionEntityIdentifier'
+          nullable: true
+          type: array
+      type: object
+    CollectionEntityIdentifier:
+      description: Entity identifier with name.
+      properties:
+        identifier:
+          description: Unique identifier of the entity.
+          nullable: true
+          type: string
+        name:
+          description: Name of the entity.
+          nullable: true
+          type: string
+      type: object
     GenericInfo:
       example:
         name: name
@@ -16706,6 +16803,59 @@ components:
       - id
       - name
       type: object
+    CollectionMetadataInput:
+      description: Input type for metadata to be added to a collection.
+      properties:
+        type:
+          description: Type of metadata object.
+          enum:
+          - LIVEBOARD
+          - ANSWER
+          - LOGICAL_TABLE
+          - COLLECTION
+          type: string
+        identifiers:
+          description: List of unique IDs or names of metadata objects.
+          items:
+            type: string
+          type: array
+      required:
+      - identifiers
+      - type
+      type: object
+    CollectionDeleteResponse:
+      description: Response object for delete collection operation.
+      properties:
+        metadata_deleted:
+          description: List of metadata objects that were successfully deleted.
+          items:
+            $ref: '#/components/schemas/CollectionDeleteTypeIdentifiers'
+          nullable: true
+          type: array
+        metadata_skipped:
+          description: |-
+            List of metadata objects that were skipped during deletion.
+            Objects may be skipped due to lack of permissions, dependencies, or other constraints.
+          items:
+            $ref: '#/components/schemas/CollectionDeleteTypeIdentifiers'
+          nullable: true
+          type: array
+      type: object
+    CollectionDeleteTypeIdentifiers:
+      description: Group of metadata objects identified by type.
+      properties:
+        type:
+          description: "Type of the metadata object (e.g., Collection, Worksheet,\
+            \ Table)."
+          nullable: true
+          type: string
+        identifiers:
+          description: List of metadata identifiers belonging to the given type.
+          items:
+            $ref: '#/components/schemas/GenericInfo'
+          nullable: true
+          type: array
+      type: object
     Runtime_Filter:
       description: List of runtime parameters need to set during the session.
       properties:
@@ -17269,6 +17419,113 @@ components:
           type: string
       required:
       - token
+      type: object
+    CreateCollectionRequest:
+      properties:
+        name:
+          description: Name of the collection.
+          type: string
+        description:
+          description: Description of the collection.
+          type: string
+        metadata:
+          description: Metadata objects to add to the collection.
+          items:
+            $ref: '#/components/schemas/CollectionMetadataInput'
+          type: array
+      required:
+      - name
+      type: object
+    DeleteCollectionRequest:
+      properties:
+        collection_identifiers:
+          description: |-
+            Unique GUIDs of collections to delete. Note: Collection names cannot be
+            used as identifiers since duplicate names are allowed.
+          items:
+            type: string
+          type: array
+        delete_children:
+          default: false
+          description: Flag to delete child objects of the collection that the user
+            has access to.
+          nullable: true
+          type: boolean
+        dry_run:
+          default: false
+          description: |-
+            Preview deletion without actually deleting. When set to true, returns
+            what would be deleted without performing the actual deletion.
+          nullable: true
+          type: boolean
+      required:
+      - collection_identifiers
+      type: object
+    SearchCollectionsRequest:
+      properties:
+        name_pattern:
+          description: |-
+            A pattern to match case-insensitive name of the Collection object.
+            Use '%' for wildcard match.
+          type: string
+        record_offset:
+          default: 0
+          description: The starting record number from where the records should be
+            included.
+          format: int32
+          type: integer
+        record_size:
+          default: 10
+          description: |-
+            The number of records that should be included.
+            -1 implies no pagination.
+          format: int32
+          type: integer
+        collection_identifiers:
+          description: |-
+            Unique GUIDs of collections to search. Note: Collection names cannot be
+            used as identifiers since duplicate names are allowed.
+          items:
+            type: string
+          type: array
+        created_by_user_identifiers:
+          description: |-
+            Filter collections by author. Provide unique IDs or names of users
+            who created the collections.
+          items:
+            type: string
+          type: array
+        include_metadata:
+          default: false
+          description: Include collection metadata items in the response.
+          nullable: true
+          type: boolean
+        sort_options:
+          allOf:
+          - $ref: '#/components/schemas/SortOptions'
+          description: Sort options.
+      type: object
+    UpdateCollectionRequest:
+      properties:
+        name:
+          description: Name of the collection.
+          type: string
+        description:
+          description: Description of the collection.
+          type: string
+        metadata:
+          description: "Metadata objects to add, remove, or replace in the collection."
+          items:
+            $ref: '#/components/schemas/CollectionMetadataInput'
+          type: array
+        operation:
+          default: REPLACE
+          description: Type of update operation. Default operation type is REPLACE.
+          enum:
+          - ADD
+          - REMOVE
+          - REPLACE
+          type: string
       type: object
     ConnectionConfigurationSearchRequest:
       example:
@@ -23666,6 +23923,11 @@ x-roles:
   tags:
   - 9.12.0.cl
   description: Roles for version 9.12.0.cl
+- name: 26.4.0.cl
+  id: 26.4.0.cl
+  tags:
+  - 26.4.0.cl
+  description: Roles for version 26.4.0.cl
 - name: 10.12.0.cl
   id: 10.12.0.cl
   tags:
@@ -23736,11 +23998,6 @@ x-roles:
   tags:
   - 10.14.0.cl
   description: Roles for version 10.14.0.cl
-- name: 26.4.0.cl
-  id: 26.4.0.cl
-  tags:
-  - 26.4.0.cl
-  description: Roles for version 26.4.0.cl
 - name: 9.7.0.cl
   id: 9.7.0.cl
   tags:

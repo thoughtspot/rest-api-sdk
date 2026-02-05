@@ -1386,6 +1386,241 @@ _ClusterNonEmbedAccessInput.attributeTypeMap = [
 ];
 var ClusterNonEmbedAccessInput = _ClusterNonEmbedAccessInput;
 
+// models/Collection.ts
+var _Collection = class _Collection {
+  static getAttributeTypeMap() {
+    return _Collection.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_Collection.discriminator = void 0;
+_Collection.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "description",
+    "baseName": "description",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "metadata",
+    "baseName": "metadata",
+    "type": "Array<CollectionMetadataItem>",
+    "format": ""
+  },
+  {
+    "name": "created_at",
+    "baseName": "created_at",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "updated_at",
+    "baseName": "updated_at",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "author_name",
+    "baseName": "author_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "author_id",
+    "baseName": "author_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "org",
+    "baseName": "org",
+    "type": "CollectionEntityIdentifier",
+    "format": ""
+  }
+];
+var Collection = _Collection;
+
+// models/CollectionDeleteResponse.ts
+var _CollectionDeleteResponse = class _CollectionDeleteResponse {
+  static getAttributeTypeMap() {
+    return _CollectionDeleteResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CollectionDeleteResponse.discriminator = void 0;
+_CollectionDeleteResponse.attributeTypeMap = [
+  {
+    "name": "metadata_deleted",
+    "baseName": "metadata_deleted",
+    "type": "Array<CollectionDeleteTypeIdentifiers>",
+    "format": ""
+  },
+  {
+    "name": "metadata_skipped",
+    "baseName": "metadata_skipped",
+    "type": "Array<CollectionDeleteTypeIdentifiers>",
+    "format": ""
+  }
+];
+var CollectionDeleteResponse = _CollectionDeleteResponse;
+
+// models/CollectionDeleteTypeIdentifiers.ts
+var _CollectionDeleteTypeIdentifiers = class _CollectionDeleteTypeIdentifiers {
+  static getAttributeTypeMap() {
+    return _CollectionDeleteTypeIdentifiers.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CollectionDeleteTypeIdentifiers.discriminator = void 0;
+_CollectionDeleteTypeIdentifiers.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "identifiers",
+    "baseName": "identifiers",
+    "type": "Array<GenericInfo>",
+    "format": ""
+  }
+];
+var CollectionDeleteTypeIdentifiers = _CollectionDeleteTypeIdentifiers;
+
+// models/CollectionEntityIdentifier.ts
+var _CollectionEntityIdentifier = class _CollectionEntityIdentifier {
+  static getAttributeTypeMap() {
+    return _CollectionEntityIdentifier.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CollectionEntityIdentifier.discriminator = void 0;
+_CollectionEntityIdentifier.attributeTypeMap = [
+  {
+    "name": "identifier",
+    "baseName": "identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  }
+];
+var CollectionEntityIdentifier = _CollectionEntityIdentifier;
+
+// models/CollectionMetadataInput.ts
+var _CollectionMetadataInput = class _CollectionMetadataInput {
+  static getAttributeTypeMap() {
+    return _CollectionMetadataInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CollectionMetadataInput.discriminator = void 0;
+_CollectionMetadataInput.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "CollectionMetadataInputTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "identifiers",
+    "baseName": "identifiers",
+    "type": "Array<string>",
+    "format": ""
+  }
+];
+var CollectionMetadataInput = _CollectionMetadataInput;
+
+// models/CollectionMetadataItem.ts
+var _CollectionMetadataItem = class _CollectionMetadataItem {
+  static getAttributeTypeMap() {
+    return _CollectionMetadataItem.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CollectionMetadataItem.discriminator = void 0;
+_CollectionMetadataItem.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "identifiers",
+    "baseName": "identifiers",
+    "type": "Array<CollectionEntityIdentifier>",
+    "format": ""
+  }
+];
+var CollectionMetadataItem = _CollectionMetadataItem;
+
+// models/CollectionSearchResponse.ts
+var _CollectionSearchResponse = class _CollectionSearchResponse {
+  static getAttributeTypeMap() {
+    return _CollectionSearchResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CollectionSearchResponse.discriminator = void 0;
+_CollectionSearchResponse.attributeTypeMap = [
+  {
+    "name": "collections",
+    "baseName": "collections",
+    "type": "Array<Collection>",
+    "format": ""
+  },
+  {
+    "name": "record_offset",
+    "baseName": "record_offset",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "record_size",
+    "baseName": "record_size",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "is_last_batch",
+    "baseName": "is_last_batch",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "count",
+    "baseName": "count",
+    "type": "number",
+    "format": "int32"
+  }
+];
+var CollectionSearchResponse = _CollectionSearchResponse;
+
 // models/Column.ts
 var _Column = class _Column {
   static getAttributeTypeMap() {
@@ -2521,6 +2756,37 @@ _CreateCalendarRequestTableReference.attributeTypeMap = [
   }
 ];
 var CreateCalendarRequestTableReference = _CreateCalendarRequestTableReference;
+
+// models/CreateCollectionRequest.ts
+var _CreateCollectionRequest = class _CreateCollectionRequest {
+  static getAttributeTypeMap() {
+    return _CreateCollectionRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CreateCollectionRequest.discriminator = void 0;
+_CreateCollectionRequest.attributeTypeMap = [
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "description",
+    "baseName": "description",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "metadata",
+    "baseName": "metadata",
+    "type": "Array<CollectionMetadataInput>",
+    "format": ""
+  }
+];
+var CreateCollectionRequest = _CreateCollectionRequest;
 
 // models/CreateConfigRequest.ts
 var _CreateConfigRequest = class _CreateConfigRequest {
@@ -4334,6 +4600,37 @@ _DefaultActionConfigSearchInput.attributeTypeMap = [
   }
 ];
 var DefaultActionConfigSearchInput = _DefaultActionConfigSearchInput;
+
+// models/DeleteCollectionRequest.ts
+var _DeleteCollectionRequest = class _DeleteCollectionRequest {
+  static getAttributeTypeMap() {
+    return _DeleteCollectionRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_DeleteCollectionRequest.discriminator = void 0;
+_DeleteCollectionRequest.attributeTypeMap = [
+  {
+    "name": "collection_identifiers",
+    "baseName": "collection_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "delete_children",
+    "baseName": "delete_children",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "dry_run",
+    "baseName": "dry_run",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var DeleteCollectionRequest = _DeleteCollectionRequest;
 
 // models/DeleteConfigRequest.ts
 var _DeleteConfigRequest = class _DeleteConfigRequest {
@@ -10655,6 +10952,86 @@ _SearchCalendarsRequestSortOptions.attributeTypeMap = [
 ];
 var SearchCalendarsRequestSortOptions = _SearchCalendarsRequestSortOptions;
 
+// models/SearchCollectionsRequest.ts
+var _SearchCollectionsRequest = class _SearchCollectionsRequest {
+  static getAttributeTypeMap() {
+    return _SearchCollectionsRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SearchCollectionsRequest.discriminator = void 0;
+_SearchCollectionsRequest.attributeTypeMap = [
+  {
+    "name": "name_pattern",
+    "baseName": "name_pattern",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "record_offset",
+    "baseName": "record_offset",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "record_size",
+    "baseName": "record_size",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "collection_identifiers",
+    "baseName": "collection_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "created_by_user_identifiers",
+    "baseName": "created_by_user_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "include_metadata",
+    "baseName": "include_metadata",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "sort_options",
+    "baseName": "sort_options",
+    "type": "SearchCollectionsRequestSortOptions",
+    "format": ""
+  }
+];
+var SearchCollectionsRequest = _SearchCollectionsRequest;
+
+// models/SearchCollectionsRequestSortOptions.ts
+var _SearchCollectionsRequestSortOptions = class _SearchCollectionsRequestSortOptions {
+  static getAttributeTypeMap() {
+    return _SearchCollectionsRequestSortOptions.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SearchCollectionsRequestSortOptions.discriminator = void 0;
+_SearchCollectionsRequestSortOptions.attributeTypeMap = [
+  {
+    "name": "field_name",
+    "baseName": "field_name",
+    "type": "SearchCollectionsRequestSortOptionsFieldNameEnum",
+    "format": ""
+  },
+  {
+    "name": "order",
+    "baseName": "order",
+    "type": "SearchCollectionsRequestSortOptionsOrderEnum",
+    "format": ""
+  }
+];
+var SearchCollectionsRequestSortOptions = _SearchCollectionsRequestSortOptions;
+
 // models/SearchCommitsRequest.ts
 var _SearchCommitsRequest = class _SearchCommitsRequest {
   static getAttributeTypeMap() {
@@ -11910,7 +12287,7 @@ _SearchUsersRequest.attributeTypeMap = [
   {
     "name": "sort_options",
     "baseName": "sort_options",
-    "type": "SearchUsersRequestSortOptions",
+    "type": "SearchCollectionsRequestSortOptions",
     "format": ""
   },
   {
@@ -11933,31 +12310,6 @@ _SearchUsersRequest.attributeTypeMap = [
   }
 ];
 var SearchUsersRequest = _SearchUsersRequest;
-
-// models/SearchUsersRequestSortOptions.ts
-var _SearchUsersRequestSortOptions = class _SearchUsersRequestSortOptions {
-  static getAttributeTypeMap() {
-    return _SearchUsersRequestSortOptions.attributeTypeMap;
-  }
-  constructor() {
-  }
-};
-_SearchUsersRequestSortOptions.discriminator = void 0;
-_SearchUsersRequestSortOptions.attributeTypeMap = [
-  {
-    "name": "field_name",
-    "baseName": "field_name",
-    "type": "SearchUsersRequestSortOptionsFieldNameEnum",
-    "format": ""
-  },
-  {
-    "name": "order",
-    "baseName": "order",
-    "type": "SearchUsersRequestSortOptionsOrderEnum",
-    "format": ""
-  }
-];
-var SearchUsersRequestSortOptions = _SearchUsersRequestSortOptions;
 
 // models/SearchVariablesRequest.ts
 var _SearchVariablesRequest = class _SearchVariablesRequest {
@@ -13817,6 +14169,43 @@ _UpdateCalendarRequestTableReference.attributeTypeMap = [
   }
 ];
 var UpdateCalendarRequestTableReference = _UpdateCalendarRequestTableReference;
+
+// models/UpdateCollectionRequest.ts
+var _UpdateCollectionRequest = class _UpdateCollectionRequest {
+  static getAttributeTypeMap() {
+    return _UpdateCollectionRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UpdateCollectionRequest.discriminator = void 0;
+_UpdateCollectionRequest.attributeTypeMap = [
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "description",
+    "baseName": "description",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "metadata",
+    "baseName": "metadata",
+    "type": "Array<CollectionMetadataInput>",
+    "format": ""
+  },
+  {
+    "name": "operation",
+    "baseName": "operation",
+    "type": "UpdateCollectionRequestOperationEnum",
+    "format": ""
+  }
+];
+var UpdateCollectionRequest = _UpdateCollectionRequest;
 
 // models/UpdateColumnSecurityRulesRequest.ts
 var _UpdateColumnSecurityRulesRequest = class _UpdateColumnSecurityRulesRequest {
@@ -16659,6 +17048,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "AuthorMetadataTypeInputTypeEnum",
   "ChannelValidationDetailValidationStepEnum",
   "ChannelValidationDetailStatusEnum",
+  "CollectionMetadataInputTypeEnum",
   "ColumnSecurityRuleGroupOperationOperationEnum",
   "CommunicationChannelValidateResponseChannelTypeEnum",
   "CommunicationChannelValidateResponseEventTypeEnum",
@@ -16785,6 +17175,8 @@ var enumsMap = /* @__PURE__ */ new Set([
   "SchedulesPdfOptionsInputPageSizeEnum",
   "SearchCalendarsRequestSortOptionsFieldNameEnum",
   "SearchCalendarsRequestSortOptionsOrderEnum",
+  "SearchCollectionsRequestSortOptionsFieldNameEnum",
+  "SearchCollectionsRequestSortOptionsOrderEnum",
   "SearchCommitsRequestMetadataTypeEnum",
   "SearchCommunicationChannelPreferencesRequestClusterPreferencesEnum",
   "SearchConnectionRequestDataWarehouseTypesEnum",
@@ -16815,8 +17207,6 @@ var enumsMap = /* @__PURE__ */ new Set([
   "SearchUsersRequestPrivilegesEnum",
   "SearchUsersRequestAccountTypeEnum",
   "SearchUsersRequestAccountStatusEnum",
-  "SearchUsersRequestSortOptionsFieldNameEnum",
-  "SearchUsersRequestSortOptionsOrderEnum",
   "SearchVariablesRequestResponseContentEnum",
   "SearchWebhookConfigurationsRequestEventTypeEnum",
   "SearchWebhookConfigurationsRequestSortOptionsFieldNameEnum",
@@ -16843,6 +17233,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "UpdateCalendarRequestCalendarTypeEnum",
   "UpdateCalendarRequestMonthOffsetEnum",
   "UpdateCalendarRequestStartDayOfWeekEnum",
+  "UpdateCollectionRequestOperationEnum",
   "UpdateConnectionConfigurationRequestAuthenticationTypeEnum",
   "UpdateConnectionConfigurationRequestPolicyTypeEnum",
   "UpdateConnectionConfigurationRequestPolicyProcessesEnum",
@@ -16928,6 +17319,13 @@ var typeMap = {
   "ChannelValidationDetail": ChannelValidationDetail,
   "ClusterNonEmbedAccess": ClusterNonEmbedAccess,
   "ClusterNonEmbedAccessInput": ClusterNonEmbedAccessInput,
+  "Collection": Collection,
+  "CollectionDeleteResponse": CollectionDeleteResponse,
+  "CollectionDeleteTypeIdentifiers": CollectionDeleteTypeIdentifiers,
+  "CollectionEntityIdentifier": CollectionEntityIdentifier,
+  "CollectionMetadataInput": CollectionMetadataInput,
+  "CollectionMetadataItem": CollectionMetadataItem,
+  "CollectionSearchResponse": CollectionSearchResponse,
   "Column": Column,
   "ColumnSecurityRule": ColumnSecurityRule,
   "ColumnSecurityRuleColumn": ColumnSecurityRuleColumn,
@@ -16960,6 +17358,7 @@ var typeMap = {
   "CreateAgentConversationRequestMetadataContext": CreateAgentConversationRequestMetadataContext,
   "CreateCalendarRequest": CreateCalendarRequest,
   "CreateCalendarRequestTableReference": CreateCalendarRequestTableReference,
+  "CreateCollectionRequest": CreateCollectionRequest,
   "CreateConfigRequest": CreateConfigRequest,
   "CreateConnectionConfigurationRequest": CreateConnectionConfigurationRequest,
   "CreateConnectionConfigurationRequestPolicyProcessOptions": CreateConnectionConfigurationRequestPolicyProcessOptions,
@@ -17003,6 +17402,7 @@ var typeMap = {
   "DefaultActionConfigInput": DefaultActionConfigInput,
   "DefaultActionConfigInputCreate": DefaultActionConfigInputCreate,
   "DefaultActionConfigSearchInput": DefaultActionConfigSearchInput,
+  "DeleteCollectionRequest": DeleteCollectionRequest,
   "DeleteConfigRequest": DeleteConfigRequest,
   "DeleteConnectionConfigurationRequest": DeleteConnectionConfigurationRequest,
   "DeleteConnectionRequest": DeleteConnectionRequest,
@@ -17185,6 +17585,8 @@ var typeMap = {
   "ScriptSrcUrlsInput": ScriptSrcUrlsInput,
   "SearchCalendarsRequest": SearchCalendarsRequest,
   "SearchCalendarsRequestSortOptions": SearchCalendarsRequestSortOptions,
+  "SearchCollectionsRequest": SearchCollectionsRequest,
+  "SearchCollectionsRequestSortOptions": SearchCollectionsRequestSortOptions,
   "SearchCommitsRequest": SearchCommitsRequest,
   "SearchCommunicationChannelPreferencesRequest": SearchCommunicationChannelPreferencesRequest,
   "SearchConfigRequest": SearchConfigRequest,
@@ -17210,7 +17612,6 @@ var typeMap = {
   "SearchUserGroupsRequest": SearchUserGroupsRequest,
   "SearchUserGroupsRequestSortOptions": SearchUserGroupsRequestSortOptions,
   "SearchUsersRequest": SearchUsersRequest,
-  "SearchUsersRequestSortOptions": SearchUsersRequestSortOptions,
   "SearchVariablesRequest": SearchVariablesRequest,
   "SearchWebhookConfigurationsRequest": SearchWebhookConfigurationsRequest,
   "SearchWebhookConfigurationsRequestSortOptions": SearchWebhookConfigurationsRequestSortOptions,
@@ -17258,6 +17659,7 @@ var typeMap = {
   "UnpublishMetadataRequest": UnpublishMetadataRequest,
   "UpdateCalendarRequest": UpdateCalendarRequest,
   "UpdateCalendarRequestTableReference": UpdateCalendarRequestTableReference,
+  "UpdateCollectionRequest": UpdateCollectionRequest,
   "UpdateColumnSecurityRulesRequest": UpdateColumnSecurityRulesRequest,
   "UpdateConfigRequest": UpdateConfigRequest,
   "UpdateConnectionConfigurationRequest": UpdateConnectionConfigurationRequest,
@@ -47489,6 +47891,13 @@ export {
   ChannelValidationDetail,
   ClusterNonEmbedAccess,
   ClusterNonEmbedAccessInput,
+  Collection,
+  CollectionDeleteResponse,
+  CollectionDeleteTypeIdentifiers,
+  CollectionEntityIdentifier,
+  CollectionMetadataInput,
+  CollectionMetadataItem,
+  CollectionSearchResponse,
   Column,
   ColumnSecurityRule,
   ColumnSecurityRuleColumn,
@@ -47523,6 +47932,7 @@ export {
   CreateAgentConversationRequestMetadataContext,
   CreateCalendarRequest,
   CreateCalendarRequestTableReference,
+  CreateCollectionRequest,
   CreateConfigRequest,
   CreateConnectionConfigurationRequest,
   CreateConnectionConfigurationRequestPolicyProcessOptions,
@@ -47570,6 +47980,7 @@ export {
   DefaultActionConfigInput,
   DefaultActionConfigInputCreate,
   DefaultActionConfigSearchInput,
+  DeleteCollectionRequest,
   DeleteConfigRequest,
   DeleteConnectionConfigurationRequest,
   DeleteConnectionRequest,
@@ -47766,6 +48177,8 @@ export {
   ScriptSrcUrlsInput,
   SearchCalendarsRequest,
   SearchCalendarsRequestSortOptions,
+  SearchCollectionsRequest,
+  SearchCollectionsRequestSortOptions,
   SearchCommitsRequest,
   SearchCommunicationChannelPreferencesRequest,
   SearchConfigRequest,
@@ -47791,7 +48204,6 @@ export {
   SearchUserGroupsRequest,
   SearchUserGroupsRequestSortOptions,
   SearchUsersRequest,
-  SearchUsersRequestSortOptions,
   SearchVariablesRequest,
   SearchWebhookConfigurationsRequest,
   SearchWebhookConfigurationsRequestSortOptions,
@@ -47845,6 +48257,7 @@ export {
   UnpublishMetadataRequest,
   UpdateCalendarRequest,
   UpdateCalendarRequestTableReference,
+  UpdateCollectionRequest,
   UpdateColumnSecurityRulesRequest,
   UpdateConfigRequest,
   UpdateConnectionConfigurationRequest,
