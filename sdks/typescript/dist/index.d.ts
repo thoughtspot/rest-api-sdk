@@ -5702,7 +5702,7 @@ declare class CreateVariableRequest {
     }[];
     constructor();
 }
-type CreateVariableRequestTypeEnum = "CONNECTION_PROPERTY" | "TABLE_MAPPING" | "CONNECTION_PROPERTY_PER_PRINCIPAL" | "FORMULA_VARIABLE";
+type CreateVariableRequestTypeEnum = "CONNECTION_PROPERTY" | "TABLE_MAPPING" | "CONNECTION_PROPERTY_PER_PRINCIPAL" | "FORMULA_VARIABLE" | "USER_PROPERTY";
 type CreateVariableRequestDataTypeEnum = "VARCHAR" | "INT32" | "INT64" | "DOUBLE" | "DATE" | "DATE_TIME";
 
 /**
@@ -15554,7 +15554,7 @@ declare class VariableDetailInput {
     }[];
     constructor();
 }
-type VariableDetailInputTypeEnum = "CONNECTION_PROPERTY" | "TABLE_MAPPING" | "CONNECTION_PROPERTY_PER_PRINCIPAL" | "FORMULA_VARIABLE";
+type VariableDetailInputTypeEnum = "CONNECTION_PROPERTY" | "TABLE_MAPPING" | "CONNECTION_PROPERTY_PER_PRINCIPAL" | "FORMULA_VARIABLE" | "USER_PROPERTY";
 
 /**
  * ThoughtSpot Public REST API
@@ -19366,7 +19366,7 @@ declare class Variable {
     }[];
     constructor();
 }
-type VariableVariableTypeEnum = "CONNECTION_PROPERTY" | "TABLE_MAPPING" | "CONNECTION_PROPERTY_PER_PRINCIPAL" | "FORMULA_VARIABLE";
+type VariableVariableTypeEnum = "CONNECTION_PROPERTY" | "TABLE_MAPPING" | "CONNECTION_PROPERTY_PER_PRINCIPAL" | "FORMULA_VARIABLE" | "USER_PROPERTY";
 
 /**
  * ThoughtSpot Public REST API

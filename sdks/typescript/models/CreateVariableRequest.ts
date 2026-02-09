@@ -67,6 +67,6 @@ export class CreateVariableRequest {
 }
 
 
-export type CreateVariableRequestTypeEnum = "CONNECTION_PROPERTY" | "TABLE_MAPPING" | "CONNECTION_PROPERTY_PER_PRINCIPAL" | "FORMULA_VARIABLE" ;
+export type CreateVariableRequestTypeEnum = "CONNECTION_PROPERTY" | "TABLE_MAPPING" | "CONNECTION_PROPERTY_PER_PRINCIPAL" | "FORMULA_VARIABLE" | "USER_PROPERTY" ;
 export type CreateVariableRequestDataTypeEnum = "VARCHAR" | "INT32" | "INT64" | "DOUBLE" | "DATE" | "DATE_TIME" ;
 
