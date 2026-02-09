@@ -17657,7 +17657,7 @@
           },
           "include_obj_id": {
             "type": "boolean",
-            "default": false,
+            "default": true,
             "description": "Boolean flag to export Object ID of the object. This flag will work only after the Object ID feature has been enabled. Please contact support to enable the feature.",
             "nullable": true
           },
