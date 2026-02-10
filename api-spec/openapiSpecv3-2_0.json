@@ -8670,7 +8670,7 @@
     "/api/rest/2.0/system/communication-channels/validate": {
       "post": {
         "operationId": "validateCommunicationChannel",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\nValidates a communication channel configuration to ensure it is properly set up and can receive events.\n- Use `channel_type` to specify the type of communication channel to validate (e.g., WEBHOOK).\n- Use `channel_identifier` to provide the unique identifier or name for the communication channel.\n- Use `event_type` to specify the event type to validate for this channel.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. For webhook channels, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "System",
           "26.4.0.cl"
@@ -17395,6 +17395,7 @@
           "channel_type",
           "channel_id",
           "event_type",
+          "job_id",
           "result_code"
         ],
         "properties": {
@@ -17420,6 +17421,10 @@
               "LIVEBOARD_SCHEDULE"
             ],
             "description": "Event type that was validated."
+          },
+          "job_id": {
+            "type": "string",
+            "description": "Unique Job Id of the validation."
           },
           "result_code": {
             "type": "string",
@@ -17474,9 +17479,35 @@
             "type": "string",
             "description": "Error message from the channel or validation process.",
             "nullable": true
+          },
+          "aws_s3_info": {
+            "$ref": "#/components/schemas/ChannelValidationAwsS3Info",
+            "description": "AWS S3 storage information from the validation step.",
+            "nullable": true
           }
         },
         "description": "Validation detail result for a sub-step."
+      },
+      "ChannelValidationAwsS3Info": {
+        "type": "object",
+        "properties": {
+          "bucket_name": {
+            "type": "string",
+            "description": "Name of the S3 bucket.",
+            "nullable": true
+          },
+          "file_name": {
+            "type": "string",
+            "description": "Name of the uploaded file.",
+            "nullable": true
+          },
+          "object_key": {
+            "type": "string",
+            "description": "Key of the object in S3 storage.",
+            "nullable": true
+          }
+        },
+        "description": "AWS S3 storage information returned from a validation step."
       },
       "TagMetadataTypeInput": {
         "type": "object",
