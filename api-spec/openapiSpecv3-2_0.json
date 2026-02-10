@@ -11151,6 +11151,16 @@
                       },
                       "creation_time_in_millis": 1724277430243,
                       "modification_time_in_millis": 1724277430243,
+                      "additional_headers": [
+                        {
+                          "key": "Custom-Header",
+                          "value": "value1"
+                        },
+                        {
+                          "key": "Custom-Header-2",
+                          "value": "value2"
+                        }
+                      ],
                       "created_by": {
                         "id": "8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b",
                         "name": "sarah_chen"
@@ -11608,6 +11618,16 @@
                           },
                           "creation_time_in_millis": 1724277430243,
                           "modification_time_in_millis": 1724278215123,
+                          "additional_headers": [
+                            {
+                              "key": "Custom-Header",
+                              "value": "value1"
+                            },
+                            {
+                              "key": "Custom-Header-2",
+                              "value": "value2"
+                            }
+                          ],
                           "created_by": {
                             "id": "8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b",
                             "name": "sarah_chen"
@@ -15407,8 +15427,7 @@
               "CONNECTION_PROPERTY",
               "TABLE_MAPPING",
               "CONNECTION_PROPERTY_PER_PRINCIPAL",
-              "FORMULA_VARIABLE",
-              "USER_PROPERTY"
+              "FORMULA_VARIABLE"
             ],
             "description": "Type of variable",
             "nullable": true
@@ -15472,8 +15491,7 @@
               "CONNECTION_PROPERTY",
               "TABLE_MAPPING",
               "CONNECTION_PROPERTY_PER_PRINCIPAL",
-              "FORMULA_VARIABLE",
-              "USER_PROPERTY"
+              "FORMULA_VARIABLE"
             ],
             "description": "Type of the variable",
             "nullable": true
@@ -15842,6 +15860,14 @@
             "description": "Redacted configuration for webhook signature verification.",
             "nullable": true
           },
+          "additional_headers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WebhookKeyValuePair"
+            },
+            "description": "Additional headers as an array of key-value pairs. <br/>  <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>",
+            "nullable": true
+          },
           "creation_time_in_millis": {
             "type": "number",
             "format": "float",
@@ -15999,6 +16025,24 @@
             "description": "Shared secret used for HMAC signature generation."
           }
         }
+      },
+      "WebhookKeyValuePair": {
+        "type": "object",
+        "required": [
+          "key",
+          "value"
+        ],
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Header name."
+          },
+          "value": {
+            "type": "string",
+            "description": "Header value."
+          }
+        },
+        "description": "Key-value pair for additional webhook headers."
       },
       "WebhookUser": {
         "type": "object",
@@ -20275,6 +20319,24 @@
           }
         },
         "description": "Input type for AWS S3 storage configuration."
+      },
+      "WebhookKeyValuePairInput": {
+        "type": "object",
+        "required": [
+          "key",
+          "value"
+        ],
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Header name."
+          },
+          "value": {
+            "type": "string",
+            "description": "Header value."
+          }
+        },
+        "description": "Key-value pair input for additional webhook headers."
       },
       "WebhookDeleteResponse": {
         "type": "object",
@@ -26452,8 +26514,7 @@
               "CONNECTION_PROPERTY",
               "TABLE_MAPPING",
               "CONNECTION_PROPERTY_PER_PRINCIPAL",
-              "FORMULA_VARIABLE",
-              "USER_PROPERTY"
+              "FORMULA_VARIABLE"
             ]
           },
           "name": {
@@ -26900,6 +26961,13 @@
                 "$ref": "#/components/schemas/StorageDestinationInput"
               }
             ]
+          },
+          "additional_headers": {
+            "description": "Additional headers as an array of key-value pairs.\nExample: [{\"key\": \"X-Custom-Header\", \"value\": \"custom_value\"}] <br/>  <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WebhookKeyValuePairInput"
+            }
           }
         },
         "required": [
@@ -27015,6 +27083,13 @@
                 "$ref": "#/components/schemas/StorageDestinationInput"
               }
             ]
+          },
+          "additional_headers": {
+            "description": "Additional headers as an array of key-value pairs.\nExample: [{\"key\": \"X-Custom-Header\", \"value\": \"custom_value\"}] <br/>  <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WebhookKeyValuePairInput"
+            }
           }
         }
       }
