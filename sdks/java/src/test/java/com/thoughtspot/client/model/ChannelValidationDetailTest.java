@@ -39,4 +39,10 @@ public class ChannelValidationDetailTest {
     public void errorMessageTest() {
         // TODO: test errorMessage
     }
+
+    /** Test the property 'awsS3Info' */
+    @Test
+    public void awsS3InfoTest() {
+        // TODO: test awsS3Info
+    }
 }

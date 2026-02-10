@@ -14110,6 +14110,9 @@ components:
           enum:
           - LIVEBOARD_SCHEDULE
           type: string
+        job_id:
+          description: Unique Job Id of the validation.
+          type: string
         result_code:
           description: Overall result of the validation.
           enum:
@@ -14127,6 +14130,7 @@ components:
       - channel_id
       - channel_type
       - event_type
+      - job_id
       - result_code
       type: object
     ChannelValidationDetail:
@@ -14153,9 +14157,27 @@ components:
           description: Error message from the channel or validation process.
           nullable: true
           type: string
+        aws_s3_info:
+          $ref: '#/components/schemas/ChannelValidationAwsS3Info'
       required:
       - status
       - validation_step
+      type: object
+    ChannelValidationAwsS3Info:
+      description: AWS S3 storage information returned from a validation step.
+      properties:
+        bucket_name:
+          description: Name of the S3 bucket.
+          nullable: true
+          type: string
+        file_name:
+          description: Name of the uploaded file.
+          nullable: true
+          type: string
+        object_key:
+          description: Key of the object in S3 storage.
+          nullable: true
+          type: string
       type: object
     TagMetadataTypeInput:
       example:

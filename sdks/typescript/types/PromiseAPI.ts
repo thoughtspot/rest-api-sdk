@@ -35,6 +35,7 @@ import { CALLBACKInput } from '../models/CALLBACKInput';
 import { CALLBACKInputMandatory } from '../models/CALLBACKInputMandatory';
 import { CalendarResponse } from '../models/CalendarResponse';
 import { ChangeUserPasswordRequest } from '../models/ChangeUserPasswordRequest';
+import { ChannelValidationAwsS3Info } from '../models/ChannelValidationAwsS3Info';
 import { ChannelValidationDetail } from '../models/ChannelValidationDetail';
 import { ClusterNonEmbedAccess } from '../models/ClusterNonEmbedAccess';
 import { ClusterNonEmbedAccessInput } from '../models/ClusterNonEmbedAccessInput';

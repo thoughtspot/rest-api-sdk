@@ -157,6 +157,12 @@ public class ChannelValidationDetail implements Serializable {
     @javax.annotation.Nullable
     private String errorMessage;
 
+    public static final String SERIALIZED_NAME_AWS_S3_INFO = "aws_s3_info";
+
+    @SerializedName(SERIALIZED_NAME_AWS_S3_INFO)
+    @javax.annotation.Nullable
+    private ChannelValidationAwsS3Info awsS3Info;
+
     public ChannelValidationDetail() {}
 
     public ChannelValidationDetail validationStep(
@@ -236,6 +242,26 @@ public class ChannelValidationDetail implements Serializable {
         this.errorMessage = errorMessage;
     }
 
+    public ChannelValidationDetail awsS3Info(
+            @javax.annotation.Nullable ChannelValidationAwsS3Info awsS3Info) {
+        this.awsS3Info = awsS3Info;
+        return this;
+    }
+
+    /**
+     * Get awsS3Info
+     *
+     * @return awsS3Info
+     */
+    @javax.annotation.Nullable
+    public ChannelValidationAwsS3Info getAwsS3Info() {
+        return awsS3Info;
+    }
+
+    public void setAwsS3Info(@javax.annotation.Nullable ChannelValidationAwsS3Info awsS3Info) {
+        this.awsS3Info = awsS3Info;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -248,7 +274,8 @@ public class ChannelValidationDetail implements Serializable {
         return Objects.equals(this.validationStep, channelValidationDetail.validationStep)
                 && Objects.equals(this.status, channelValidationDetail.status)
                 && Objects.equals(this.httpStatus, channelValidationDetail.httpStatus)
-                && Objects.equals(this.errorMessage, channelValidationDetail.errorMessage);
+                && Objects.equals(this.errorMessage, channelValidationDetail.errorMessage)
+                && Objects.equals(this.awsS3Info, channelValidationDetail.awsS3Info);
     }
 
     private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -262,7 +289,7 @@ public class ChannelValidationDetail implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(validationStep, status, httpStatus, errorMessage);
+        return Objects.hash(validationStep, status, httpStatus, errorMessage, awsS3Info);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -280,6 +307,7 @@ public class ChannelValidationDetail implements Serializable {
         sb.append("    status: ").append(toIndentedString(status)).append("\n");
         sb.append("    httpStatus: ").append(toIndentedString(httpStatus)).append("\n");
         sb.append("    errorMessage: ").append(toIndentedString(errorMessage)).append("\n");
+        sb.append("    awsS3Info: ").append(toIndentedString(awsS3Info)).append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -305,6 +333,7 @@ public class ChannelValidationDetail implements Serializable {
         openapiFields.add("status");
         openapiFields.add("http_status");
         openapiFields.add("error_message");
+        openapiFields.add("aws_s3_info");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -377,6 +406,10 @@ public class ChannelValidationDetail implements Serializable {
                             "Expected the field `error_message` to be a primitive type in the JSON"
                                     + " string but got `%s`",
                             jsonObj.get("error_message").toString()));
+        }
+        // validate the optional field `aws_s3_info`
+        if (jsonObj.get("aws_s3_info") != null && !jsonObj.get("aws_s3_info").isJsonNull()) {
+            ChannelValidationAwsS3Info.validateJsonElement(jsonObj.get("aws_s3_info"));
         }
     }
 

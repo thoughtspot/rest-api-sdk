@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+import { ChannelValidationAwsS3Info } from '../models/ChannelValidationAwsS3Info';
 import { HttpFile } from '../http/http';
 
 /**
@@ -32,6 +33,7 @@ export class ChannelValidationDetail {
     * Error message from the channel or validation process.
     */
     'error_message'?: string | null;
+    'aws_s3_info'?: ChannelValidationAwsS3Info;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -58,6 +60,12 @@ export class ChannelValidationDetail {
             "name": "error_message",
             "baseName": "error_message",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "aws_s3_info",
+            "baseName": "aws_s3_info",
+            "type": "ChannelValidationAwsS3Info",
             "format": ""
         }    ];
 

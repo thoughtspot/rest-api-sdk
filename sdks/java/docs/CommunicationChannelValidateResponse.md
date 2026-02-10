@@ -12,6 +12,7 @@ Response containing validation results for communication channel configuration.
 |**channelId** | **String** | ID of the communication channel (e.g., webhook_id). |  |
 |**channelName** | **String** | Name of the communication channel (e.g., webhook name). |  [optional] |
 |**eventType** | [**EventTypeEnum**](#EventTypeEnum) | Event type that was validated. |  |
+|**jobId** | **String** | Unique Job Id of the validation. |  |
 |**resultCode** | [**ResultCodeEnum**](#ResultCodeEnum) | Overall result of the validation. |  |
 |**details** | [**List&lt;ChannelValidationDetail&gt;**](ChannelValidationDetail.md) | Detailed results of various validation sub-steps. |  [optional] |
 

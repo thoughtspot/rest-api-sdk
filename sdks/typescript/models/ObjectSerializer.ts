@@ -32,6 +32,7 @@ export * from '../models/CALLBACKInput';
 export * from '../models/CALLBACKInputMandatory';
 export * from '../models/CalendarResponse';
 export * from '../models/ChangeUserPasswordRequest';
+export * from '../models/ChannelValidationAwsS3Info';
 export * from '../models/ChannelValidationDetail';
 export * from '../models/ClusterNonEmbedAccess';
 export * from '../models/ClusterNonEmbedAccessInput';
@@ -473,7 +474,8 @@ import { CALLBACKInput } from '../models/CALLBACKInput';
 import { CALLBACKInputMandatory } from '../models/CALLBACKInputMandatory';
 import { CalendarResponse } from '../models/CalendarResponse';
 import { ChangeUserPasswordRequest } from '../models/ChangeUserPasswordRequest';
-import { ChannelValidationDetail, ChannelValidationDetailValidationStepEnum  , ChannelValidationDetailStatusEnum     } from '../models/ChannelValidationDetail';
+import { ChannelValidationAwsS3Info } from '../models/ChannelValidationAwsS3Info';
+import { ChannelValidationDetail, ChannelValidationDetailValidationStepEnum  , ChannelValidationDetailStatusEnum      } from '../models/ChannelValidationDetail';
 import { ClusterNonEmbedAccess } from '../models/ClusterNonEmbedAccess';
 import { ClusterNonEmbedAccessInput } from '../models/ClusterNonEmbedAccessInput';
 import { Collection } from '../models/Collection';
@@ -498,7 +500,7 @@ import { CommitHistoryResponse } from '../models/CommitHistoryResponse';
 import { CommitResponse } from '../models/CommitResponse';
 import { CommiterType } from '../models/CommiterType';
 import { CommunicationChannelPreferencesResponse } from '../models/CommunicationChannelPreferencesResponse';
-import { CommunicationChannelValidateResponse, CommunicationChannelValidateResponseChannelTypeEnum    , CommunicationChannelValidateResponseEventTypeEnum  , CommunicationChannelValidateResponseResultCodeEnum    } from '../models/CommunicationChannelValidateResponse';
+import { CommunicationChannelValidateResponse, CommunicationChannelValidateResponseChannelTypeEnum    , CommunicationChannelValidateResponseEventTypeEnum   , CommunicationChannelValidateResponseResultCodeEnum    } from '../models/CommunicationChannelValidateResponse';
 import { ConfigureCommunicationChannelPreferencesRequest } from '../models/ConfigureCommunicationChannelPreferencesRequest';
 import { ConfigureSecuritySettingsRequest } from '../models/ConfigureSecuritySettingsRequest';
 import { ConfigureSecuritySettingsRequestClusterPreferences } from '../models/ConfigureSecuritySettingsRequestClusterPreferences';
@@ -1176,6 +1178,7 @@ let typeMap: {[index: string]: any} = {
     "CALLBACKInputMandatory": CALLBACKInputMandatory,
     "CalendarResponse": CalendarResponse,
     "ChangeUserPasswordRequest": ChangeUserPasswordRequest,
+    "ChannelValidationAwsS3Info": ChannelValidationAwsS3Info,
     "ChannelValidationDetail": ChannelValidationDetail,
     "ClusterNonEmbedAccess": ClusterNonEmbedAccess,
     "ClusterNonEmbedAccessInput": ClusterNonEmbedAccessInput,

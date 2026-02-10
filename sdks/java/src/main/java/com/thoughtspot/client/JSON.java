@@ -159,6 +159,9 @@ public class JSON {
                 new com.thoughtspot.client.model.ChangeUserPasswordRequest
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.ChannelValidationAwsS3Info
+                        .CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.ChannelValidationDetail
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(

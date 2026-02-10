@@ -1299,6 +1299,37 @@ _ChangeUserPasswordRequest.attributeTypeMap = [
 ];
 var ChangeUserPasswordRequest = _ChangeUserPasswordRequest;
 
+// models/ChannelValidationAwsS3Info.ts
+var _ChannelValidationAwsS3Info = class _ChannelValidationAwsS3Info {
+  static getAttributeTypeMap() {
+    return _ChannelValidationAwsS3Info.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ChannelValidationAwsS3Info.discriminator = void 0;
+_ChannelValidationAwsS3Info.attributeTypeMap = [
+  {
+    "name": "bucket_name",
+    "baseName": "bucket_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "file_name",
+    "baseName": "file_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "object_key",
+    "baseName": "object_key",
+    "type": "string",
+    "format": ""
+  }
+];
+var ChannelValidationAwsS3Info = _ChannelValidationAwsS3Info;
+
 // models/ChannelValidationDetail.ts
 var _ChannelValidationDetail = class _ChannelValidationDetail {
   static getAttributeTypeMap() {
@@ -1331,6 +1362,12 @@ _ChannelValidationDetail.attributeTypeMap = [
     "name": "error_message",
     "baseName": "error_message",
     "type": "string",
+    "format": ""
+  },
+  {
+    "name": "aws_s3_info",
+    "baseName": "aws_s3_info",
+    "type": "ChannelValidationAwsS3Info",
     "format": ""
   }
 ];
@@ -2142,6 +2179,12 @@ _CommunicationChannelValidateResponse.attributeTypeMap = [
     "name": "event_type",
     "baseName": "event_type",
     "type": "CommunicationChannelValidateResponseEventTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "job_id",
+    "baseName": "job_id",
+    "type": "string",
     "format": ""
   },
   {
@@ -17316,6 +17359,7 @@ var typeMap = {
   "CALLBACKInputMandatory": CALLBACKInputMandatory,
   "CalendarResponse": CalendarResponse,
   "ChangeUserPasswordRequest": ChangeUserPasswordRequest,
+  "ChannelValidationAwsS3Info": ChannelValidationAwsS3Info,
   "ChannelValidationDetail": ChannelValidationDetail,
   "ClusterNonEmbedAccess": ClusterNonEmbedAccess,
   "ClusterNonEmbedAccessInput": ClusterNonEmbedAccessInput,
@@ -47888,6 +47932,7 @@ export {
   CALLBACKInputMandatory,
   CalendarResponse,
   ChangeUserPasswordRequest,
+  ChannelValidationAwsS3Info,
   ChannelValidationDetail,
   ClusterNonEmbedAccess,
   ClusterNonEmbedAccessInput,

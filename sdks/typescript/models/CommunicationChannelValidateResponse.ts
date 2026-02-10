@@ -34,6 +34,10 @@ export class CommunicationChannelValidateResponse {
     */
     'event_type': CommunicationChannelValidateResponseEventTypeEnum;
     /**
+    * Unique Job Id of the validation.
+    */
+    'job_id': string;
+    /**
     * Overall result of the validation.
     */
     'result_code': CommunicationChannelValidateResponseResultCodeEnum;
@@ -67,6 +71,12 @@ export class CommunicationChannelValidateResponse {
             "name": "event_type",
             "baseName": "event_type",
             "type": "CommunicationChannelValidateResponseEventTypeEnum",
+            "format": ""
+        },
+        {
+            "name": "job_id",
+            "baseName": "job_id",
+            "type": "string",
             "format": ""
         },
         {

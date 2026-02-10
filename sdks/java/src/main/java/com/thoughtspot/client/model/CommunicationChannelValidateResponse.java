@@ -156,6 +156,12 @@ public class CommunicationChannelValidateResponse implements Serializable {
     @javax.annotation.Nonnull
     private EventTypeEnum eventType;
 
+    public static final String SERIALIZED_NAME_JOB_ID = "job_id";
+
+    @SerializedName(SERIALIZED_NAME_JOB_ID)
+    @javax.annotation.Nonnull
+    private String jobId;
+
     /** Overall result of the validation. */
     @JsonAdapter(ResultCodeEnum.Adapter.class)
     public enum ResultCodeEnum {
@@ -303,6 +309,25 @@ public class CommunicationChannelValidateResponse implements Serializable {
         this.eventType = eventType;
     }
 
+    public CommunicationChannelValidateResponse jobId(@javax.annotation.Nonnull String jobId) {
+        this.jobId = jobId;
+        return this;
+    }
+
+    /**
+     * Unique Job Id of the validation.
+     *
+     * @return jobId
+     */
+    @javax.annotation.Nonnull
+    public String getJobId() {
+        return jobId;
+    }
+
+    public void setJobId(@javax.annotation.Nonnull String jobId) {
+        this.jobId = jobId;
+    }
+
     public CommunicationChannelValidateResponse resultCode(
             @javax.annotation.Nonnull ResultCodeEnum resultCode) {
         this.resultCode = resultCode;
@@ -367,6 +392,7 @@ public class CommunicationChannelValidateResponse implements Serializable {
                 && Objects.equals(
                         this.channelName, communicationChannelValidateResponse.channelName)
                 && Objects.equals(this.eventType, communicationChannelValidateResponse.eventType)
+                && Objects.equals(this.jobId, communicationChannelValidateResponse.jobId)
                 && Objects.equals(this.resultCode, communicationChannelValidateResponse.resultCode)
                 && Objects.equals(this.details, communicationChannelValidateResponse.details);
     }
@@ -382,7 +408,8 @@ public class CommunicationChannelValidateResponse implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(channelType, channelId, channelName, eventType, resultCode, details);
+        return Objects.hash(
+                channelType, channelId, channelName, eventType, jobId, resultCode, details);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -400,6 +427,7 @@ public class CommunicationChannelValidateResponse implements Serializable {
         sb.append("    channelId: ").append(toIndentedString(channelId)).append("\n");
         sb.append("    channelName: ").append(toIndentedString(channelName)).append("\n");
         sb.append("    eventType: ").append(toIndentedString(eventType)).append("\n");
+        sb.append("    jobId: ").append(toIndentedString(jobId)).append("\n");
         sb.append("    resultCode: ").append(toIndentedString(resultCode)).append("\n");
         sb.append("    details: ").append(toIndentedString(details)).append("\n");
         sb.append("}");
@@ -427,6 +455,7 @@ public class CommunicationChannelValidateResponse implements Serializable {
         openapiFields.add("channel_id");
         openapiFields.add("channel_name");
         openapiFields.add("event_type");
+        openapiFields.add("job_id");
         openapiFields.add("result_code");
         openapiFields.add("details");
 
@@ -435,6 +464,7 @@ public class CommunicationChannelValidateResponse implements Serializable {
         openapiRequiredFields.add("channel_type");
         openapiRequiredFields.add("channel_id");
         openapiRequiredFields.add("event_type");
+        openapiRequiredFields.add("job_id");
         openapiRequiredFields.add("result_code");
     }
 
@@ -514,6 +544,13 @@ public class CommunicationChannelValidateResponse implements Serializable {
         }
         // validate the required field `event_type`
         EventTypeEnum.validateJsonElement(jsonObj.get("event_type"));
+        if (!jsonObj.get("job_id").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `job_id` to be a primitive type in the JSON string"
+                                    + " but got `%s`",
+                            jsonObj.get("job_id").toString()));
+        }
         if (!jsonObj.get("result_code").isJsonPrimitive()) {
             throw new IllegalArgumentException(
                     String.format(
