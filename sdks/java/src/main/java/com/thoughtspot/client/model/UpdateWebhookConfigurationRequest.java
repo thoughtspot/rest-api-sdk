@@ -5,6 +5,7 @@
 package com.thoughtspot.client.model;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.TypeAdapter;
@@ -127,6 +128,12 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
     @SerializedName(SERIALIZED_NAME_STORAGE_DESTINATION)
     @javax.annotation.Nullable
     private StorageDestinationInput storageDestination;
+
+    public static final String SERIALIZED_NAME_ADDITIONAL_HEADERS = "additional_headers";
+
+    @SerializedName(SERIALIZED_NAME_ADDITIONAL_HEADERS)
+    @javax.annotation.Nullable
+    private List<WebhookKeyValuePairInput> additionalHeaders;
 
     public UpdateWebhookConfigurationRequest() {}
 
@@ -305,6 +312,38 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
         this.storageDestination = storageDestination;
     }
 
+    public UpdateWebhookConfigurationRequest additionalHeaders(
+            @javax.annotation.Nullable List<WebhookKeyValuePairInput> additionalHeaders) {
+        this.additionalHeaders = additionalHeaders;
+        return this;
+    }
+
+    public UpdateWebhookConfigurationRequest addAdditionalHeadersItem(
+            WebhookKeyValuePairInput additionalHeadersItem) {
+        if (this.additionalHeaders == null) {
+            this.additionalHeaders = new ArrayList<>();
+        }
+        this.additionalHeaders.add(additionalHeadersItem);
+        return this;
+    }
+
+    /**
+     * Additional headers as an array of key-value pairs. Example: [{\&quot;key\&quot;:
+     * \&quot;X-Custom-Header\&quot;, \&quot;value\&quot;: \&quot;custom_value\&quot;}] Version:
+     * 26.4.0.cl or later
+     *
+     * @return additionalHeaders
+     */
+    @javax.annotation.Nullable
+    public List<WebhookKeyValuePairInput> getAdditionalHeaders() {
+        return additionalHeaders;
+    }
+
+    public void setAdditionalHeaders(
+            @javax.annotation.Nullable List<WebhookKeyValuePairInput> additionalHeaders) {
+        this.additionalHeaders = additionalHeaders;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -327,7 +366,10 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
                         updateWebhookConfigurationRequest.signatureVerification)
                 && Objects.equals(
                         this.storageDestination,
-                        updateWebhookConfigurationRequest.storageDestination);
+                        updateWebhookConfigurationRequest.storageDestination)
+                && Objects.equals(
+                        this.additionalHeaders,
+                        updateWebhookConfigurationRequest.additionalHeaders);
     }
 
     @Override
@@ -340,7 +382,8 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
                 events,
                 authentication,
                 signatureVerification,
-                storageDestination);
+                storageDestination,
+                additionalHeaders);
     }
 
     @Override
@@ -358,6 +401,9 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
                 .append("\n");
         sb.append("    storageDestination: ")
                 .append(toIndentedString(storageDestination))
+                .append("\n");
+        sb.append("    additionalHeaders: ")
+                .append(toIndentedString(additionalHeaders))
                 .append("\n");
         sb.append("}");
         return sb.toString();
@@ -388,6 +434,7 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
         openapiFields.add("authentication");
         openapiFields.add("signature_verification");
         openapiFields.add("storage_destination");
+        openapiFields.add("additional_headers");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -473,6 +520,26 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
         if (jsonObj.get("storage_destination") != null
                 && !jsonObj.get("storage_destination").isJsonNull()) {
             StorageDestinationInput.validateJsonElement(jsonObj.get("storage_destination"));
+        }
+        if (jsonObj.get("additional_headers") != null
+                && !jsonObj.get("additional_headers").isJsonNull()) {
+            JsonArray jsonArrayadditionalHeaders = jsonObj.getAsJsonArray("additional_headers");
+            if (jsonArrayadditionalHeaders != null) {
+                // ensure the json data is an array
+                if (!jsonObj.get("additional_headers").isJsonArray()) {
+                    throw new IllegalArgumentException(
+                            String.format(
+                                    "Expected the field `additional_headers` to be an array in the"
+                                            + " JSON string but got `%s`",
+                                    jsonObj.get("additional_headers").toString()));
+                }
+
+                // validate the optional field `additional_headers` (array)
+                for (int i = 0; i < jsonArrayadditionalHeaders.size(); i++) {
+                    WebhookKeyValuePairInput.validateJsonElement(jsonArrayadditionalHeaders.get(i));
+                }
+                ;
+            }
         }
     }
 

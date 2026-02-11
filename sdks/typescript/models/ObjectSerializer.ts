@@ -32,6 +32,8 @@ export * from '../models/CALLBACKInput';
 export * from '../models/CALLBACKInputMandatory';
 export * from '../models/CalendarResponse';
 export * from '../models/ChangeUserPasswordRequest';
+export * from '../models/ChannelHistoryEventInput';
+export * from '../models/ChannelHistoryJob';
 export * from '../models/ChannelValidationAwsS3Info';
 export * from '../models/ChannelValidationDetail';
 export * from '../models/ClusterNonEmbedAccess';
@@ -302,6 +304,8 @@ export * from '../models/ScriptSrcUrls';
 export * from '../models/ScriptSrcUrlsInput';
 export * from '../models/SearchCalendarsRequest';
 export * from '../models/SearchCalendarsRequestSortOptions';
+export * from '../models/SearchChannelHistoryRequest';
+export * from '../models/SearchChannelHistoryResponse';
 export * from '../models/SearchCollectionsRequest';
 export * from '../models/SearchCollectionsRequestSortOptions';
 export * from '../models/SearchCommitsRequest';
@@ -431,6 +435,8 @@ export * from '../models/WebhookAuthentication';
 export * from '../models/WebhookAuthenticationInput';
 export * from '../models/WebhookDeleteFailure';
 export * from '../models/WebhookDeleteResponse';
+export * from '../models/WebhookKeyValuePair';
+export * from '../models/WebhookKeyValuePairInput';
 export * from '../models/WebhookOrg';
 export * from '../models/WebhookPagination';
 export * from '../models/WebhookResponse';
@@ -474,6 +480,8 @@ import { CALLBACKInput } from '../models/CALLBACKInput';
 import { CALLBACKInputMandatory } from '../models/CALLBACKInputMandatory';
 import { CalendarResponse } from '../models/CalendarResponse';
 import { ChangeUserPasswordRequest } from '../models/ChangeUserPasswordRequest';
+import { ChannelHistoryEventInput, ChannelHistoryEventInputTypeEnum    } from '../models/ChannelHistoryEventInput';
+import { ChannelHistoryJob , ChannelHistoryJobStatusEnum      } from '../models/ChannelHistoryJob';
 import { ChannelValidationAwsS3Info } from '../models/ChannelValidationAwsS3Info';
 import { ChannelValidationDetail, ChannelValidationDetailValidationStepEnum  , ChannelValidationDetailStatusEnum      } from '../models/ChannelValidationDetail';
 import { ClusterNonEmbedAccess } from '../models/ClusterNonEmbedAccess';
@@ -541,7 +549,7 @@ import { CreateTagRequest } from '../models/CreateTagRequest';
 import { CreateUserGroupRequest    , CreateUserGroupRequestPrivilegesEnum   , CreateUserGroupRequestTypeEnum   , CreateUserGroupRequestVisibilityEnum    } from '../models/CreateUserGroupRequest';
 import { CreateUserRequest    , CreateUserRequestAccountTypeEnum  , CreateUserRequestAccountStatusEnum    , CreateUserRequestVisibilityEnum       , CreateUserRequestPreferredLocaleEnum        } from '../models/CreateUserRequest';
 import { CreateVariableRequest, CreateVariableRequestTypeEnum    , CreateVariableRequestDataTypeEnum   } from '../models/CreateVariableRequest';
-import { CreateWebhookConfigurationRequest    , CreateWebhookConfigurationRequestEventsEnum      } from '../models/CreateWebhookConfigurationRequest';
+import { CreateWebhookConfigurationRequest    , CreateWebhookConfigurationRequestEventsEnum       } from '../models/CreateWebhookConfigurationRequest';
 import { CreateWebhookConfigurationRequestAuthentication } from '../models/CreateWebhookConfigurationRequestAuthentication';
 import { CreateWebhookConfigurationRequestSignatureVerification, CreateWebhookConfigurationRequestSignatureVerificationTypeEnum   , CreateWebhookConfigurationRequestSignatureVerificationAlgorithmEnum    } from '../models/CreateWebhookConfigurationRequestSignatureVerification';
 import { CreateWebhookConfigurationRequestStorageDestination, CreateWebhookConfigurationRequestStorageDestinationStorageTypeEnum    } from '../models/CreateWebhookConfigurationRequestStorageDestination';
@@ -744,6 +752,8 @@ import { ScriptSrcUrls } from '../models/ScriptSrcUrls';
 import { ScriptSrcUrlsInput } from '../models/ScriptSrcUrlsInput';
 import { SearchCalendarsRequest } from '../models/SearchCalendarsRequest';
 import { SearchCalendarsRequestSortOptions, SearchCalendarsRequestSortOptionsFieldNameEnum  , SearchCalendarsRequestSortOptionsOrderEnum   } from '../models/SearchCalendarsRequestSortOptions';
+import { SearchChannelHistoryRequest, SearchChannelHistoryRequestChannelTypeEnum    , SearchChannelHistoryRequestChannelStatusEnum     } from '../models/SearchChannelHistoryRequest';
+import { SearchChannelHistoryResponse } from '../models/SearchChannelHistoryResponse';
 import { SearchCollectionsRequest } from '../models/SearchCollectionsRequest';
 import { SearchCollectionsRequestSortOptions, SearchCollectionsRequestSortOptionsFieldNameEnum  , SearchCollectionsRequestSortOptionsOrderEnum   } from '../models/SearchCollectionsRequestSortOptions';
 import { SearchCommitsRequest , SearchCommitsRequestMetadataTypeEnum      } from '../models/SearchCommitsRequest';
@@ -844,7 +854,7 @@ import { UpdateUserGroupRequest    , UpdateUserGroupRequestPrivilegesEnum   , Up
 import { UpdateUserRequest  , UpdateUserRequestVisibilityEnum   , UpdateUserRequestAccountStatusEnum     , UpdateUserRequestAccountTypeEnum      , UpdateUserRequestOperationEnum  , UpdateUserRequestPreferredLocaleEnum      } from '../models/UpdateUserRequest';
 import { UpdateVariableRequest } from '../models/UpdateVariableRequest';
 import { UpdateVariableValuesRequest } from '../models/UpdateVariableValuesRequest';
-import { UpdateWebhookConfigurationRequest    , UpdateWebhookConfigurationRequestEventsEnum      } from '../models/UpdateWebhookConfigurationRequest';
+import { UpdateWebhookConfigurationRequest    , UpdateWebhookConfigurationRequestEventsEnum       } from '../models/UpdateWebhookConfigurationRequest';
 import { User   , UserVisibilityEnum         , UserAccountTypeEnum  , UserAccountStatusEnum                  , UserParentTypeEnum                    } from '../models/User';
 import { UserGroup } from '../models/UserGroup';
 import { UserGroupResponse                     , UserGroupResponseParentTypeEnum      , UserGroupResponseTypeEnum   , UserGroupResponseVisibilityEnum    } from '../models/UserGroupResponse';
@@ -873,9 +883,11 @@ import { WebhookAuthentication } from '../models/WebhookAuthentication';
 import { WebhookAuthenticationInput } from '../models/WebhookAuthenticationInput';
 import { WebhookDeleteFailure } from '../models/WebhookDeleteFailure';
 import { WebhookDeleteResponse } from '../models/WebhookDeleteResponse';
+import { WebhookKeyValuePair } from '../models/WebhookKeyValuePair';
+import { WebhookKeyValuePairInput } from '../models/WebhookKeyValuePairInput';
 import { WebhookOrg } from '../models/WebhookOrg';
 import { WebhookPagination } from '../models/WebhookPagination';
-import { WebhookResponse      , WebhookResponseEventsEnum          } from '../models/WebhookResponse';
+import { WebhookResponse      , WebhookResponseEventsEnum           } from '../models/WebhookResponse';
 import { WebhookSearchResponse } from '../models/WebhookSearchResponse';
 import { WebhookSignatureVerification, WebhookSignatureVerificationTypeEnum   , WebhookSignatureVerificationAlgorithmEnum    } from '../models/WebhookSignatureVerification';
 import { WebhookSignatureVerificationInput, WebhookSignatureVerificationInputTypeEnum   , WebhookSignatureVerificationInputAlgorithmEnum    } from '../models/WebhookSignatureVerificationInput';
@@ -907,6 +919,8 @@ let enumsMap: Set<string> = new Set<string>([
     "AssociateMetadataInputTypeEnum",
     "AssociateMetadataInputCreateTypeEnum",
     "AuthorMetadataTypeInputTypeEnum",
+    "ChannelHistoryEventInputTypeEnum",
+    "ChannelHistoryJobStatusEnum",
     "ChannelValidationDetailValidationStepEnum",
     "ChannelValidationDetailStatusEnum",
     "CollectionMetadataInputTypeEnum",
@@ -1036,6 +1050,8 @@ let enumsMap: Set<string> = new Set<string>([
     "SchedulesPdfOptionsInputPageSizeEnum",
     "SearchCalendarsRequestSortOptionsFieldNameEnum",
     "SearchCalendarsRequestSortOptionsOrderEnum",
+    "SearchChannelHistoryRequestChannelTypeEnum",
+    "SearchChannelHistoryRequestChannelStatusEnum",
     "SearchCollectionsRequestSortOptionsFieldNameEnum",
     "SearchCollectionsRequestSortOptionsOrderEnum",
     "SearchCommitsRequestMetadataTypeEnum",
@@ -1178,6 +1194,8 @@ let typeMap: {[index: string]: any} = {
     "CALLBACKInputMandatory": CALLBACKInputMandatory,
     "CalendarResponse": CalendarResponse,
     "ChangeUserPasswordRequest": ChangeUserPasswordRequest,
+    "ChannelHistoryEventInput": ChannelHistoryEventInput,
+    "ChannelHistoryJob": ChannelHistoryJob,
     "ChannelValidationAwsS3Info": ChannelValidationAwsS3Info,
     "ChannelValidationDetail": ChannelValidationDetail,
     "ClusterNonEmbedAccess": ClusterNonEmbedAccess,
@@ -1448,6 +1466,8 @@ let typeMap: {[index: string]: any} = {
     "ScriptSrcUrlsInput": ScriptSrcUrlsInput,
     "SearchCalendarsRequest": SearchCalendarsRequest,
     "SearchCalendarsRequestSortOptions": SearchCalendarsRequestSortOptions,
+    "SearchChannelHistoryRequest": SearchChannelHistoryRequest,
+    "SearchChannelHistoryResponse": SearchChannelHistoryResponse,
     "SearchCollectionsRequest": SearchCollectionsRequest,
     "SearchCollectionsRequestSortOptions": SearchCollectionsRequestSortOptions,
     "SearchCommitsRequest": SearchCommitsRequest,
@@ -1577,6 +1597,8 @@ let typeMap: {[index: string]: any} = {
     "WebhookAuthenticationInput": WebhookAuthenticationInput,
     "WebhookDeleteFailure": WebhookDeleteFailure,
     "WebhookDeleteResponse": WebhookDeleteResponse,
+    "WebhookKeyValuePair": WebhookKeyValuePair,
+    "WebhookKeyValuePairInput": WebhookKeyValuePairInput,
     "WebhookOrg": WebhookOrg,
     "WebhookPagination": WebhookPagination,
     "WebhookResponse": WebhookResponse,

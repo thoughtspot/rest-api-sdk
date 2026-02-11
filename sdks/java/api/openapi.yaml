@@ -12696,6 +12696,13 @@ components:
           $ref: '#/components/schemas/WebhookAuthentication'
         signature_verification:
           $ref: '#/components/schemas/WebhookSignatureVerification'
+        additional_headers:
+          description: "Additional headers as an array of key-value pairs. \n  Version:\
+            \ 26.4.0.cl or later\n"
+          items:
+            $ref: '#/components/schemas/WebhookKeyValuePair'
+          nullable: true
+          type: array
         creation_time_in_millis:
           description: Creation time of the webhook configuration in milliseconds.
           format: float
@@ -12806,6 +12813,19 @@ components:
       - header
       - secret
       - type
+      type: object
+    WebhookKeyValuePair:
+      description: Key-value pair for additional webhook headers.
+      properties:
+        key:
+          description: Header name.
+          type: string
+        value:
+          description: Header value.
+          type: string
+      required:
+      - key
+      - value
       type: object
     WebhookUser:
       properties:
@@ -13164,6 +13184,64 @@ components:
           description: Name of the entity.
           nullable: true
           type: string
+      type: object
+    ChannelHistoryEventInput:
+      description: Event specification for channel history search.
+      properties:
+        type:
+          description: Type of the event.
+          enum:
+          - LIVEBOARD_SCHEDULE
+          type: string
+        identifier:
+          description: Unique ID or name of the event.
+          nullable: true
+          type: string
+      required:
+      - type
+      type: object
+    SearchChannelHistoryResponse:
+      description: Response wrapper for channel delivery history.
+      properties:
+        jobs:
+          description: List of job execution records.
+          items:
+            $ref: '#/components/schemas/ChannelHistoryJob'
+          type: array
+      required:
+      - jobs
+      type: object
+    ChannelHistoryJob:
+      description: A single job execution record for a channel.
+      properties:
+        id:
+          description: Unique identifier for this job.
+          type: string
+        status:
+          description: Delivery status of this job.
+          enum:
+          - PENDING
+          - RETRY
+          - SUCCESS
+          - FAILED
+          type: string
+        creation_time_in_millis:
+          description: Timestamp when this job was created (epoch milliseconds).
+          type: object
+        detail:
+          description: Additional delivery details such as HTTP response code or error
+            message.
+          nullable: true
+          type: string
+        try_count:
+          description: Number of attempts made. 1 indicates first attempt.
+          format: int32
+          nullable: true
+          type: integer
+      required:
+      - creation_time_in_millis
+      - id
+      - status
       type: object
     GenericInfo:
       example:
@@ -16785,6 +16863,19 @@ components:
       - region
       - role_arn
       type: object
+    WebhookKeyValuePairInput:
+      description: Key-value pair input for additional webhook headers.
+      properties:
+        key:
+          description: Header name.
+          type: string
+        value:
+          description: Header value.
+          type: string
+      required:
+      - key
+      - value
+      type: object
     WebhookDeleteResponse:
       properties:
         deleted_count:
@@ -19194,6 +19285,42 @@ components:
           - REMOVE
           - REPLACE
           type: string
+      type: object
+    SearchChannelHistoryRequest:
+      properties:
+        channel_type:
+          description: Type of communication channel to search history for.
+          enum:
+          - WEBHOOK
+          type: string
+        job_ids:
+          description: List of job execution record IDs to retrieve.
+          items:
+            type: string
+          type: array
+        channel_identifiers:
+          description: List of channel IDs or names to filter by.
+          items:
+            type: string
+          type: array
+        channel_status:
+          description: Filter by channel delivery status.
+          enum:
+          - PENDING
+          - RETRY
+          - SUCCESS
+          - FAILED
+          type: string
+        events:
+          description: Filter by events that triggered the channel.
+          items:
+            $ref: '#/components/schemas/ChannelHistoryEventInput'
+          type: array
+        start_epoch_time_in_millis:
+          description: Filter records created on or after this time (epoch milliseconds).
+          type: object
+      required:
+      - channel_type
       type: object
     FetchLogsRequest:
       example:
@@ -23690,6 +23817,13 @@ components:
             : \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\"\
             , \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"\
             }}} \n  Version: 26.3.0.cl or later\n"
+        additional_headers:
+          description: "Additional headers as an array of key-value pairs.\nExample:\
+            \ [{\"key\": \"X-Custom-Header\", \"value\": \"custom_value\"}] \n  Version:\
+            \ 26.4.0.cl or later\n"
+          items:
+            $ref: '#/components/schemas/WebhookKeyValuePairInput'
+          type: array
       required:
       - events
       - name
@@ -23772,6 +23906,13 @@ components:
             : \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\"\
             , \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"\
             }}} \n  Version: 26.3.0.cl or later\n"
+        additional_headers:
+          description: "Additional headers as an array of key-value pairs.\nExample:\
+            \ [{\"key\": \"X-Custom-Header\", \"value\": \"custom_value\"}] \n  Version:\
+            \ 26.4.0.cl or later\n"
+          items:
+            $ref: '#/components/schemas/WebhookKeyValuePairInput'
+          type: array
       type: object
     dbtConnection_request:
       properties:

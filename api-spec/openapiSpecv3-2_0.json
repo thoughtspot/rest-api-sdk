@@ -5015,6 +5015,79 @@
         }
       }
     },
+    "/api/rest/2.0/jobs/history/communication-channels/search": {
+      "post": {
+        "operationId": "searchChannelHistory",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\nSearches delivery history for communication channels such as webhooks. Returns channel-level delivery status for each job execution record. Use this to monitor channel health and delivery success rates across events.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.\n\n**NOTE**: When `channel_type` is `WEBHOOK`, the following constraints apply:\n\n- `job_ids`, `channel_identifiers`, and `events` each accept at most one element.\n- When `job_ids` is provided, it is used as the sole lookup key and other filter fields are ignored.\n- When `job_ids` is not provided, `channel_identifiers` and `events` are both required. Each must contain exactly one element, and the event object must include the `identifier` field.\n- Records older than the configured retention period are not returned.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Jobs",
+          "26.4.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchChannelHistoryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Channel status logs retrieved successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchChannelHistoryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/logs/fetch": {
       "post": {
         "operationId": "fetchLogs",
@@ -11151,6 +11224,16 @@
                       },
                       "creation_time_in_millis": 1724277430243,
                       "modification_time_in_millis": 1724277430243,
+                      "additional_headers": [
+                        {
+                          "key": "Custom-Header",
+                          "value": "value1"
+                        },
+                        {
+                          "key": "Custom-Header-2",
+                          "value": "value2"
+                        }
+                      ],
                       "created_by": {
                         "id": "8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b",
                         "name": "sarah_chen"
@@ -11608,6 +11691,16 @@
                           },
                           "creation_time_in_millis": 1724277430243,
                           "modification_time_in_millis": 1724278215123,
+                          "additional_headers": [
+                            {
+                              "key": "Custom-Header",
+                              "value": "value1"
+                            },
+                            {
+                              "key": "Custom-Header-2",
+                              "value": "value2"
+                            }
+                          ],
                           "created_by": {
                             "id": "8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b",
                             "name": "sarah_chen"
@@ -15842,6 +15935,14 @@
             "description": "Redacted configuration for webhook signature verification.",
             "nullable": true
           },
+          "additional_headers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WebhookKeyValuePair"
+            },
+            "description": "Additional headers as an array of key-value pairs. <br/>  <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>",
+            "nullable": true
+          },
           "creation_time_in_millis": {
             "type": "number",
             "format": "float",
@@ -15999,6 +16100,24 @@
             "description": "Shared secret used for HMAC signature generation."
           }
         }
+      },
+      "WebhookKeyValuePair": {
+        "type": "object",
+        "required": [
+          "key",
+          "value"
+        ],
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Header name."
+          },
+          "value": {
+            "type": "string",
+            "description": "Header value."
+          }
+        },
+        "description": "Key-value pair for additional webhook headers."
       },
       "WebhookUser": {
         "type": "object",
@@ -16333,6 +16452,83 @@
           }
         },
         "description": "Entity identifier with name."
+      },
+      "ChannelHistoryEventInput": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD_SCHEDULE"
+            ],
+            "description": "Type of the event."
+          },
+          "identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the event.",
+            "nullable": true
+          }
+        },
+        "description": "Event specification for channel history search."
+      },
+      "SearchChannelHistoryResponse": {
+        "type": "object",
+        "required": [
+          "jobs"
+        ],
+        "properties": {
+          "jobs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChannelHistoryJob"
+            },
+            "description": "List of job execution records."
+          }
+        },
+        "description": "Response wrapper for channel delivery history."
+      },
+      "ChannelHistoryJob": {
+        "type": "object",
+        "required": [
+          "id",
+          "status",
+          "creation_time_in_millis"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for this job."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "RETRY",
+              "SUCCESS",
+              "FAILED"
+            ],
+            "description": "Delivery status of this job."
+          },
+          "creation_time_in_millis": {
+            "type": "object",
+            "description": "Timestamp when this job was created (epoch milliseconds)."
+          },
+          "detail": {
+            "type": "string",
+            "description": "Additional delivery details such as HTTP response code or error message.",
+            "nullable": true
+          },
+          "try_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of attempts made. 1 indicates first attempt.",
+            "nullable": true
+          }
+        },
+        "description": "A single job execution record for a channel."
       },
       "GenericInfo": {
         "type": "object",
@@ -20307,6 +20503,24 @@
         },
         "description": "Input type for AWS S3 storage configuration."
       },
+      "WebhookKeyValuePairInput": {
+        "type": "object",
+        "required": [
+          "key",
+          "value"
+        ],
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Header name."
+          },
+          "value": {
+            "type": "string",
+            "description": "Header value."
+          }
+        },
+        "description": "Key-value pair input for additional webhook headers."
+      },
       "WebhookDeleteResponse": {
         "type": "object",
         "required": [
@@ -22631,6 +22845,56 @@
             ]
           }
         }
+      },
+      "SearchChannelHistoryRequest": {
+        "type": "object",
+        "properties": {
+          "channel_type": {
+            "description": "Type of communication channel to search history for.",
+            "type": "string",
+            "enum": [
+              "WEBHOOK"
+            ]
+          },
+          "job_ids": {
+            "description": "List of job execution record IDs to retrieve.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "channel_identifiers": {
+            "description": "List of channel IDs or names to filter by.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "channel_status": {
+            "description": "Filter by channel delivery status.",
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "RETRY",
+              "SUCCESS",
+              "FAILED"
+            ]
+          },
+          "events": {
+            "description": "Filter by events that triggered the channel.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChannelHistoryEventInput"
+            }
+          },
+          "start_epoch_time_in_millis": {
+            "description": "Filter records created on or after this time (epoch milliseconds).",
+            "type": "object"
+          }
+        },
+        "required": [
+          "channel_type"
+        ]
       },
       "FetchLogsRequest": {
         "type": "object",
@@ -26931,6 +27195,13 @@
                 "$ref": "#/components/schemas/StorageDestinationInput"
               }
             ]
+          },
+          "additional_headers": {
+            "description": "Additional headers as an array of key-value pairs.\nExample: [{\"key\": \"X-Custom-Header\", \"value\": \"custom_value\"}] <br/>  <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WebhookKeyValuePairInput"
+            }
           }
         },
         "required": [
@@ -27046,6 +27317,13 @@
                 "$ref": "#/components/schemas/StorageDestinationInput"
               }
             ]
+          },
+          "additional_headers": {
+            "description": "Additional headers as an array of key-value pairs.\nExample: [{\"key\": \"X-Custom-Header\", \"value\": \"custom_value\"}] <br/>  <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WebhookKeyValuePairInput"
+            }
           }
         }
       }

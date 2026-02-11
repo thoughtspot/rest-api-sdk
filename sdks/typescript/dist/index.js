@@ -1299,6 +1299,74 @@ _ChangeUserPasswordRequest.attributeTypeMap = [
 ];
 var ChangeUserPasswordRequest = _ChangeUserPasswordRequest;
 
+// models/ChannelHistoryEventInput.ts
+var _ChannelHistoryEventInput = class _ChannelHistoryEventInput {
+  static getAttributeTypeMap() {
+    return _ChannelHistoryEventInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ChannelHistoryEventInput.discriminator = void 0;
+_ChannelHistoryEventInput.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "ChannelHistoryEventInputTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "identifier",
+    "baseName": "identifier",
+    "type": "string",
+    "format": ""
+  }
+];
+var ChannelHistoryEventInput = _ChannelHistoryEventInput;
+
+// models/ChannelHistoryJob.ts
+var _ChannelHistoryJob = class _ChannelHistoryJob {
+  static getAttributeTypeMap() {
+    return _ChannelHistoryJob.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ChannelHistoryJob.discriminator = void 0;
+_ChannelHistoryJob.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "status",
+    "baseName": "status",
+    "type": "ChannelHistoryJobStatusEnum",
+    "format": ""
+  },
+  {
+    "name": "creation_time_in_millis",
+    "baseName": "creation_time_in_millis",
+    "type": "any",
+    "format": ""
+  },
+  {
+    "name": "detail",
+    "baseName": "detail",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "try_count",
+    "baseName": "try_count",
+    "type": "number",
+    "format": "int32"
+  }
+];
+var ChannelHistoryJob = _ChannelHistoryJob;
+
 // models/ChannelValidationAwsS3Info.ts
 var _ChannelValidationAwsS3Info = class _ChannelValidationAwsS3Info {
   static getAttributeTypeMap() {
@@ -4014,6 +4082,12 @@ _CreateWebhookConfigurationRequest.attributeTypeMap = [
     "name": "storage_destination",
     "baseName": "storage_destination",
     "type": "CreateWebhookConfigurationRequestStorageDestination",
+    "format": ""
+  },
+  {
+    "name": "additional_headers",
+    "baseName": "additional_headers",
+    "type": "Array<WebhookKeyValuePairInput>",
     "format": ""
   }
 ];
@@ -10995,6 +11069,74 @@ _SearchCalendarsRequestSortOptions.attributeTypeMap = [
 ];
 var SearchCalendarsRequestSortOptions = _SearchCalendarsRequestSortOptions;
 
+// models/SearchChannelHistoryRequest.ts
+var _SearchChannelHistoryRequest = class _SearchChannelHistoryRequest {
+  static getAttributeTypeMap() {
+    return _SearchChannelHistoryRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SearchChannelHistoryRequest.discriminator = void 0;
+_SearchChannelHistoryRequest.attributeTypeMap = [
+  {
+    "name": "channel_type",
+    "baseName": "channel_type",
+    "type": "SearchChannelHistoryRequestChannelTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "job_ids",
+    "baseName": "job_ids",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "channel_identifiers",
+    "baseName": "channel_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "channel_status",
+    "baseName": "channel_status",
+    "type": "SearchChannelHistoryRequestChannelStatusEnum",
+    "format": ""
+  },
+  {
+    "name": "events",
+    "baseName": "events",
+    "type": "Array<ChannelHistoryEventInput>",
+    "format": ""
+  },
+  {
+    "name": "start_epoch_time_in_millis",
+    "baseName": "start_epoch_time_in_millis",
+    "type": "any",
+    "format": ""
+  }
+];
+var SearchChannelHistoryRequest = _SearchChannelHistoryRequest;
+
+// models/SearchChannelHistoryResponse.ts
+var _SearchChannelHistoryResponse = class _SearchChannelHistoryResponse {
+  static getAttributeTypeMap() {
+    return _SearchChannelHistoryResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SearchChannelHistoryResponse.discriminator = void 0;
+_SearchChannelHistoryResponse.attributeTypeMap = [
+  {
+    "name": "jobs",
+    "baseName": "jobs",
+    "type": "Array<ChannelHistoryJob>",
+    "format": ""
+  }
+];
+var SearchChannelHistoryResponse = _SearchChannelHistoryResponse;
+
 // models/SearchCollectionsRequest.ts
 var _SearchCollectionsRequest = class _SearchCollectionsRequest {
   static getAttributeTypeMap() {
@@ -15334,6 +15476,12 @@ _UpdateWebhookConfigurationRequest.attributeTypeMap = [
     "baseName": "storage_destination",
     "type": "CreateWebhookConfigurationRequestStorageDestination",
     "format": ""
+  },
+  {
+    "name": "additional_headers",
+    "baseName": "additional_headers",
+    "type": "Array<WebhookKeyValuePairInput>",
+    "format": ""
   }
 ];
 var UpdateWebhookConfigurationRequest = _UpdateWebhookConfigurationRequest;
@@ -16662,6 +16810,56 @@ _WebhookDeleteResponse.attributeTypeMap = [
 ];
 var WebhookDeleteResponse = _WebhookDeleteResponse;
 
+// models/WebhookKeyValuePair.ts
+var _WebhookKeyValuePair = class _WebhookKeyValuePair {
+  static getAttributeTypeMap() {
+    return _WebhookKeyValuePair.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_WebhookKeyValuePair.discriminator = void 0;
+_WebhookKeyValuePair.attributeTypeMap = [
+  {
+    "name": "key",
+    "baseName": "key",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "value",
+    "baseName": "value",
+    "type": "string",
+    "format": ""
+  }
+];
+var WebhookKeyValuePair = _WebhookKeyValuePair;
+
+// models/WebhookKeyValuePairInput.ts
+var _WebhookKeyValuePairInput = class _WebhookKeyValuePairInput {
+  static getAttributeTypeMap() {
+    return _WebhookKeyValuePairInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_WebhookKeyValuePairInput.discriminator = void 0;
+_WebhookKeyValuePairInput.attributeTypeMap = [
+  {
+    "name": "key",
+    "baseName": "key",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "value",
+    "baseName": "value",
+    "type": "string",
+    "format": ""
+  }
+];
+var WebhookKeyValuePairInput = _WebhookKeyValuePairInput;
+
 // models/WebhookOrg.ts
 var _WebhookOrg = class _WebhookOrg {
   static getAttributeTypeMap() {
@@ -16786,6 +16984,12 @@ _WebhookResponse.attributeTypeMap = [
     "name": "signature_verification",
     "baseName": "signature_verification",
     "type": "WebhookSignatureVerification",
+    "format": ""
+  },
+  {
+    "name": "additional_headers",
+    "baseName": "additional_headers",
+    "type": "Array<WebhookKeyValuePair>",
     "format": ""
   },
   {
@@ -17089,6 +17293,8 @@ var enumsMap = /* @__PURE__ */ new Set([
   "AssociateMetadataInputTypeEnum",
   "AssociateMetadataInputCreateTypeEnum",
   "AuthorMetadataTypeInputTypeEnum",
+  "ChannelHistoryEventInputTypeEnum",
+  "ChannelHistoryJobStatusEnum",
   "ChannelValidationDetailValidationStepEnum",
   "ChannelValidationDetailStatusEnum",
   "CollectionMetadataInputTypeEnum",
@@ -17218,6 +17424,8 @@ var enumsMap = /* @__PURE__ */ new Set([
   "SchedulesPdfOptionsInputPageSizeEnum",
   "SearchCalendarsRequestSortOptionsFieldNameEnum",
   "SearchCalendarsRequestSortOptionsOrderEnum",
+  "SearchChannelHistoryRequestChannelTypeEnum",
+  "SearchChannelHistoryRequestChannelStatusEnum",
   "SearchCollectionsRequestSortOptionsFieldNameEnum",
   "SearchCollectionsRequestSortOptionsOrderEnum",
   "SearchCommitsRequestMetadataTypeEnum",
@@ -17359,6 +17567,8 @@ var typeMap = {
   "CALLBACKInputMandatory": CALLBACKInputMandatory,
   "CalendarResponse": CalendarResponse,
   "ChangeUserPasswordRequest": ChangeUserPasswordRequest,
+  "ChannelHistoryEventInput": ChannelHistoryEventInput,
+  "ChannelHistoryJob": ChannelHistoryJob,
   "ChannelValidationAwsS3Info": ChannelValidationAwsS3Info,
   "ChannelValidationDetail": ChannelValidationDetail,
   "ClusterNonEmbedAccess": ClusterNonEmbedAccess,
@@ -17629,6 +17839,8 @@ var typeMap = {
   "ScriptSrcUrlsInput": ScriptSrcUrlsInput,
   "SearchCalendarsRequest": SearchCalendarsRequest,
   "SearchCalendarsRequestSortOptions": SearchCalendarsRequestSortOptions,
+  "SearchChannelHistoryRequest": SearchChannelHistoryRequest,
+  "SearchChannelHistoryResponse": SearchChannelHistoryResponse,
   "SearchCollectionsRequest": SearchCollectionsRequest,
   "SearchCollectionsRequestSortOptions": SearchCollectionsRequestSortOptions,
   "SearchCommitsRequest": SearchCommitsRequest,
@@ -17758,6 +17970,8 @@ var typeMap = {
   "WebhookAuthenticationInput": WebhookAuthenticationInput,
   "WebhookDeleteFailure": WebhookDeleteFailure,
   "WebhookDeleteResponse": WebhookDeleteResponse,
+  "WebhookKeyValuePair": WebhookKeyValuePair,
+  "WebhookKeyValuePairInput": WebhookKeyValuePairInput,
   "WebhookOrg": WebhookOrg,
   "WebhookPagination": WebhookPagination,
   "WebhookResponse": WebhookResponse,
@@ -47932,6 +48146,8 @@ export {
   CALLBACKInputMandatory,
   CalendarResponse,
   ChangeUserPasswordRequest,
+  ChannelHistoryEventInput,
+  ChannelHistoryJob,
   ChannelValidationAwsS3Info,
   ChannelValidationDetail,
   ClusterNonEmbedAccess,
@@ -48222,6 +48438,8 @@ export {
   ScriptSrcUrlsInput,
   SearchCalendarsRequest,
   SearchCalendarsRequestSortOptions,
+  SearchChannelHistoryRequest,
+  SearchChannelHistoryResponse,
   SearchCollectionsRequest,
   SearchCollectionsRequestSortOptions,
   SearchCommitsRequest,
@@ -48359,6 +48577,8 @@ export {
   WebhookAuthenticationInput,
   WebhookDeleteFailure,
   WebhookDeleteResponse,
+  WebhookKeyValuePair,
+  WebhookKeyValuePairInput,
   WebhookOrg,
   WebhookPagination,
   WebhookResponse,
