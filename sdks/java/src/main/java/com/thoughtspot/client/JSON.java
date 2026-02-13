@@ -621,6 +621,9 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.ParameterValues.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.ParameterizeMetadataFieldsRequest
+                        .CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.ParameterizeMetadataRequest
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(

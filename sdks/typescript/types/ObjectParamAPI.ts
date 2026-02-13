@@ -243,6 +243,7 @@ import { OrgPreferenceSearchCriteriaInput } from '../models/OrgPreferenceSearchC
 import { OrgResponse } from '../models/OrgResponse';
 import { OrgType } from '../models/OrgType';
 import { ParameterValues } from '../models/ParameterValues';
+import { ParameterizeMetadataFieldsRequest } from '../models/ParameterizeMetadataFieldsRequest';
 import { ParameterizeMetadataRequest } from '../models/ParameterizeMetadataRequest';
 import { ParametersListItem } from '../models/ParametersListItem';
 import { ParametersListItemInput } from '../models/ParametersListItemInput';

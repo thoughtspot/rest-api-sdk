@@ -300,6 +300,7 @@ __export(typescript_exports, {
   OrgType: () => OrgType,
   OrgsApi: () => PromiseOrgsApi,
   ParameterValues: () => ParameterValues,
+  ParameterizeMetadataFieldsRequest: () => ParameterizeMetadataFieldsRequest,
   ParameterizeMetadataRequest: () => ParameterizeMetadataRequest,
   ParametersListItem: () => ParametersListItem,
   ParametersListItemInput: () => ParametersListItemInput,
@@ -9379,6 +9380,49 @@ _ParameterValues.attributeTypeMap = [
 ];
 var ParameterValues = _ParameterValues;
 
+// models/ParameterizeMetadataFieldsRequest.ts
+var _ParameterizeMetadataFieldsRequest = class _ParameterizeMetadataFieldsRequest {
+  static getAttributeTypeMap() {
+    return _ParameterizeMetadataFieldsRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ParameterizeMetadataFieldsRequest.discriminator = void 0;
+_ParameterizeMetadataFieldsRequest.attributeTypeMap = [
+  {
+    "name": "metadata_type",
+    "baseName": "metadata_type",
+    "type": "ParameterizeMetadataFieldsRequestMetadataTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "metadata_identifier",
+    "baseName": "metadata_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "field_type",
+    "baseName": "field_type",
+    "type": "ParameterizeMetadataFieldsRequestFieldTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "field_names",
+    "baseName": "field_names",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "variable_identifier",
+    "baseName": "variable_identifier",
+    "type": "string",
+    "format": ""
+  }
+];
+var ParameterizeMetadataFieldsRequest = _ParameterizeMetadataFieldsRequest;
+
 // models/ParameterizeMetadataRequest.ts
 var _ParameterizeMetadataRequest = class _ParameterizeMetadataRequest {
   static getAttributeTypeMap() {
@@ -17911,6 +17955,8 @@ var enumsMap = /* @__PURE__ */ new Set([
   "OrgPreferenceSearchCriteriaInputEventTypesEnum",
   "OrgResponseStatusEnum",
   "OrgResponseVisibilityEnum",
+  "ParameterizeMetadataFieldsRequestMetadataTypeEnum",
+  "ParameterizeMetadataFieldsRequestFieldTypeEnum",
   "ParameterizeMetadataRequestMetadataTypeEnum",
   "ParameterizeMetadataRequestFieldTypeEnum",
   "PdfOptionsPageSizeEnum",
@@ -18285,6 +18331,7 @@ var typeMap = {
   "OrgResponse": OrgResponse,
   "OrgType": OrgType,
   "ParameterValues": ParameterValues,
+  "ParameterizeMetadataFieldsRequest": ParameterizeMetadataFieldsRequest,
   "ParameterizeMetadataRequest": ParameterizeMetadataRequest,
   "ParametersListItem": ParametersListItem,
   "ParametersListItemInput": ParametersListItemInput,
@@ -48879,6 +48926,7 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   OrgType,
   OrgsApi,
   ParameterValues,
+  ParameterizeMetadataFieldsRequest,
   ParameterizeMetadataRequest,
   ParametersListItem,
   ParametersListItemInput,

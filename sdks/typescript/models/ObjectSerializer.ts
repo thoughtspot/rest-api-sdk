@@ -240,6 +240,7 @@ export * from '../models/OrgPreferenceSearchCriteriaInput';
 export * from '../models/OrgResponse';
 export * from '../models/OrgType';
 export * from '../models/ParameterValues';
+export * from '../models/ParameterizeMetadataFieldsRequest';
 export * from '../models/ParameterizeMetadataRequest';
 export * from '../models/ParametersListItem';
 export * from '../models/ParametersListItemInput';
@@ -688,6 +689,7 @@ import { OrgPreferenceSearchCriteriaInput , OrgPreferenceSearchCriteriaInputEven
 import { OrgResponse  , OrgResponseStatusEnum   , OrgResponseVisibilityEnum   } from '../models/OrgResponse';
 import { OrgType } from '../models/OrgType';
 import { ParameterValues } from '../models/ParameterValues';
+import { ParameterizeMetadataFieldsRequest, ParameterizeMetadataFieldsRequestMetadataTypeEnum   , ParameterizeMetadataFieldsRequestFieldTypeEnum     } from '../models/ParameterizeMetadataFieldsRequest';
 import { ParameterizeMetadataRequest, ParameterizeMetadataRequestMetadataTypeEnum   , ParameterizeMetadataRequestFieldTypeEnum     } from '../models/ParameterizeMetadataRequest';
 import { ParametersListItem } from '../models/ParametersListItem';
 import { ParametersListItemInput } from '../models/ParametersListItemInput';
@@ -1027,6 +1029,8 @@ let enumsMap: Set<string> = new Set<string>([
     "OrgPreferenceSearchCriteriaInputEventTypesEnum",
     "OrgResponseStatusEnum",
     "OrgResponseVisibilityEnum",
+    "ParameterizeMetadataFieldsRequestMetadataTypeEnum",
+    "ParameterizeMetadataFieldsRequestFieldTypeEnum",
     "ParameterizeMetadataRequestMetadataTypeEnum",
     "ParameterizeMetadataRequestFieldTypeEnum",
     "PdfOptionsPageSizeEnum",
@@ -1402,6 +1406,7 @@ let typeMap: {[index: string]: any} = {
     "OrgResponse": OrgResponse,
     "OrgType": OrgType,
     "ParameterValues": ParameterValues,
+    "ParameterizeMetadataFieldsRequest": ParameterizeMetadataFieldsRequest,
     "ParameterizeMetadataRequest": ParameterizeMetadataRequest,
     "ParametersListItem": ParametersListItem,
     "ParametersListItemInput": ParametersListItemInput,

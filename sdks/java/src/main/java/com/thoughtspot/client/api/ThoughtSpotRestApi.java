@@ -15225,7 +15225,10 @@ public class ThoughtSpotRestApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call parameterizeMetadataCall(
             ParameterizeMetadataRequest parameterizeMetadataRequest, final ApiCallback _callback)
             throws ApiException {
@@ -15281,6 +15284,7 @@ public class ThoughtSpotRestApi {
                 _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call parameterizeMetadataValidateBeforeCall(
             ParameterizeMetadataRequest parameterizeMetadataRequest, final ApiCallback _callback)
@@ -15319,7 +15323,10 @@ public class ThoughtSpotRestApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public void parameterizeMetadata(ParameterizeMetadataRequest parameterizeMetadataRequest)
             throws ApiException {
         parameterizeMetadataWithHttpInfo(parameterizeMetadataRequest);
@@ -15350,7 +15357,10 @@ public class ThoughtSpotRestApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public ApiResponse<Void> parameterizeMetadataWithHttpInfo(
             ParameterizeMetadataRequest parameterizeMetadataRequest) throws ApiException {
         okhttp3.Call localVarCall =
@@ -15384,7 +15394,10 @@ public class ThoughtSpotRestApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call parameterizeMetadataAsync(
             ParameterizeMetadataRequest parameterizeMetadataRequest,
             final ApiCallback<Void> _callback)
