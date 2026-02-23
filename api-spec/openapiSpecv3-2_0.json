@@ -5041,6 +5041,103 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SearchChannelHistoryResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Search webhook channel history by channel identifier and event",
+                    "request": {
+                      "channel_type": "WEBHOOK",
+                      "channel_identifiers": [
+                        "webhook-identifier"
+                      ],
+                      "events": [
+                        {
+                          "type": "LIVEBOARD_SCHEDULE",
+                          "identifier": "schedule-identifier"
+                        }
+                      ]
+                    },
+                    "value": {
+                      "jobs": [
+                        {
+                          "id": "n.6170538a-a4d4-4712-91bf-39b353db2b72",
+                          "status": "SUCCESS",
+                          "creation_time_in_millis": 1771599720674,
+                          "event": {
+                            "type": "LIVEBOARD_SCHEDULE",
+                            "id": "2bb2ff83-b8d9-4d2b-8913-b2589bb6831b",
+                            "name": "schedule-identifier",
+                            "run_id": "90c4f1b0-08c9-4a6c-8e61-49cffd9f1550"
+                          },
+                          "recipients": [
+                            {
+                              "type": "USER",
+                              "id": "d211f619-8b72-45d3-92a7-69dde41159c7",
+                              "name": "admin-user",
+                              "email": "admin@example.com"
+                            }
+                          ],
+                          "detail": "",
+                          "try_count": 1
+                        },
+                        {
+                          "id": "n.5c5bbedb-c425-48c0-8b54-a17267b08e7c",
+                          "status": "SUCCESS",
+                          "creation_time_in_millis": 1771599600508,
+                          "event": {
+                            "type": "LIVEBOARD_SCHEDULE",
+                            "id": "2bb2ff83-b8d9-4d2b-8913-b2589bb6831b",
+                            "name": "schedule-identifier",
+                            "run_id": "b9834966-fe85-4fa9-8a10-9889c01d4826"
+                          },
+                          "recipients": [
+                            {
+                              "type": "USER",
+                              "id": "d211f619-8b72-45d3-92a7-69dde41159c7",
+                              "name": "admin-user",
+                              "email": "admin@example.com"
+                            }
+                          ],
+                          "detail": "",
+                          "try_count": 1
+                        }
+                      ]
+                    }
+                  },
+                  "example_2": {
+                    "description": "Search webhook channel history by job ID",
+                    "request": {
+                      "channel_type": "WEBHOOK",
+                      "job_ids": [
+                        "n.5c5bbedb-c425-48c0-8b54-a17267b08e7c"
+                      ]
+                    },
+                    "value": {
+                      "jobs": [
+                        {
+                          "id": "n.5c5bbedb-c425-48c0-8b54-a17267b08e7c",
+                          "status": "SUCCESS",
+                          "creation_time_in_millis": 1771599600508,
+                          "event": {
+                            "type": "LIVEBOARD_SCHEDULE",
+                            "id": "2bb2ff83-b8d9-4d2b-8913-b2589bb6831b",
+                            "name": "schedule-identifier",
+                            "run_id": "b9834966-fe85-4fa9-8a10-9889c01d4826"
+                          },
+                          "recipients": [
+                            {
+                              "type": "USER",
+                              "id": "d211f619-8b72-45d3-92a7-69dde41159c7",
+                              "name": "admin-user",
+                              "email": "admin@example.com"
+                            }
+                          ],
+                          "detail": "",
+                          "try_count": 1
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             }
@@ -16586,6 +16683,19 @@
             "format": "float",
             "description": "Timestamp when this job was created (epoch milliseconds)."
           },
+          "event": {
+            "$ref": "#/components/schemas/ChannelHistoryEventInfo",
+            "description": "Event metadata for the triggering event associated with this job.",
+            "nullable": true
+          },
+          "recipients": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JobRecipient"
+            },
+            "description": "The users, groups or external recipients for this job.",
+            "nullable": true
+          },
           "detail": {
             "type": "string",
             "description": "Additional delivery details such as HTTP response code or error message.",
@@ -16599,6 +16709,69 @@
           }
         },
         "description": "A single job execution record for a channel."
+      },
+      "ChannelHistoryEventInfo": {
+        "type": "object",
+        "required": [
+          "type",
+          "id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD_SCHEDULE"
+            ],
+            "description": "Type of the event."
+          },
+          "id": {
+            "type": "string",
+            "description": "Unique ID of the event."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the event.",
+            "nullable": true
+          },
+          "run_id": {
+            "type": "string",
+            "description": "Unique run ID for this event execution.",
+            "nullable": true
+          }
+        },
+        "description": "Event metadata for the triggering event associated with a job."
+      },
+      "JobRecipient": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "USER",
+              "EXTERNAL"
+            ],
+            "description": "Type of the recipient."
+          },
+          "id": {
+            "type": "string",
+            "description": "Unique ID of the recipient.",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the recipient.",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "description": "Email of the recipient.",
+            "nullable": true
+          }
+        },
+        "description": "A recipient (user, group, or external) for a job execution."
       },
       "GenericInfo": {
         "type": "object",
