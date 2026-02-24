@@ -4,27 +4,45 @@
 
 package com.thoughtspot.client.model;
 
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for WebhookSortOptionsInput */
+/**
+ * Model tests for WebhookSortOptionsInput
+ */
 public class WebhookSortOptionsInputTest {
     private final WebhookSortOptionsInput model = new WebhookSortOptionsInput();
 
-    /** Model tests for WebhookSortOptionsInput */
+    /**
+     * Model tests for WebhookSortOptionsInput
+     */
     @Test
     public void testWebhookSortOptionsInput() {
         // TODO: test WebhookSortOptionsInput
     }
 
-    /** Test the property 'fieldName' */
+    /**
+     * Test the property 'fieldName'
+     */
     @Test
     public void fieldNameTest() {
         // TODO: test fieldName
     }
 
-    /** Test the property 'order' */
+    /**
+     * Test the property 'order'
+     */
     @Test
     public void orderTest() {
         // TODO: test order
     }
+
 }

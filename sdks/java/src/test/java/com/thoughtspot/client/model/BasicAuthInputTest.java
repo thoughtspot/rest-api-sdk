@@ -4,27 +4,45 @@
 
 package com.thoughtspot.client.model;
 
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for BasicAuthInput */
+/**
+ * Model tests for BasicAuthInput
+ */
 public class BasicAuthInputTest {
     private final BasicAuthInput model = new BasicAuthInput();
 
-    /** Model tests for BasicAuthInput */
+    /**
+     * Model tests for BasicAuthInput
+     */
     @Test
     public void testBasicAuthInput() {
         // TODO: test BasicAuthInput
     }
 
-    /** Test the property 'password' */
+    /**
+     * Test the property 'password'
+     */
     @Test
     public void passwordTest() {
         // TODO: test password
     }
 
-    /** Test the property 'username' */
+    /**
+     * Test the property 'username'
+     */
     @Test
     public void usernameTest() {
         // TODO: test username
     }
+
 }

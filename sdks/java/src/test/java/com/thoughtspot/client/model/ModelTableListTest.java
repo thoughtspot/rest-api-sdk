@@ -4,33 +4,55 @@
 
 package com.thoughtspot.client.model;
 
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for ModelTableList */
+/**
+ * Model tests for ModelTableList
+ */
 public class ModelTableListTest {
     private final ModelTableList model = new ModelTableList();
 
-    /** Model tests for ModelTableList */
+    /**
+     * Model tests for ModelTableList
+     */
     @Test
     public void testModelTableList() {
         // TODO: test ModelTableList
     }
 
-    /** Test the property 'modelName' */
+    /**
+     * Test the property 'modelName'
+     */
     @Test
     public void modelNameTest() {
         // TODO: test modelName
     }
 
-    /** Test the property 'modelPath' */
+    /**
+     * Test the property 'modelPath'
+     */
     @Test
     public void modelPathTest() {
         // TODO: test modelPath
     }
 
-    /** Test the property 'tables' */
+    /**
+     * Test the property 'tables'
+     */
     @Test
     public void tablesTest() {
         // TODO: test tables
     }
+
 }

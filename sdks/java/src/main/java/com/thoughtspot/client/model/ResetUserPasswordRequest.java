@@ -4,241 +4,317 @@
 
 package com.thoughtspot.client.model;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import java.util.Objects;
 import com.google.gson.TypeAdapter;
-import com.google.gson.TypeAdapterFactory;
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.thoughtspot.client.JSON;
 import java.io.IOException;
+import java.util.Arrays;
 import java.io.Serializable;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 
-/** ResetUserPasswordRequest */
-@javax.annotation.Generated(
-        value = "org.openapitools.codegen.languages.JavaClientCodegen",
-        comments = "Generator version: 7.12.0")
+import com.thoughtspot.client.JSON;
+
+/**
+ * ResetUserPasswordRequest
+ */
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class ResetUserPasswordRequest implements Serializable {
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    public static final String SERIALIZED_NAME_NEW_PASSWORD = "new_password";
+  public static final String SERIALIZED_NAME_NEW_PASSWORD = "new_password";
+  @SerializedName(SERIALIZED_NAME_NEW_PASSWORD)
+  @javax.annotation.Nonnull
+  private String newPassword;
 
-    @SerializedName(SERIALIZED_NAME_NEW_PASSWORD)
-    @javax.annotation.Nonnull
-    private String newPassword;
+  public static final String SERIALIZED_NAME_USER_IDENTIFIER = "user_identifier";
+  @SerializedName(SERIALIZED_NAME_USER_IDENTIFIER)
+  @javax.annotation.Nonnull
+  private String userIdentifier;
 
-    public static final String SERIALIZED_NAME_USER_IDENTIFIER = "user_identifier";
+  public ResetUserPasswordRequest() {
+  }
 
-    @SerializedName(SERIALIZED_NAME_USER_IDENTIFIER)
-    @javax.annotation.Nonnull
-    private String userIdentifier;
+  public ResetUserPasswordRequest newPassword(@javax.annotation.Nonnull String newPassword) {
+    this.newPassword = newPassword;
+    return this;
+  }
 
-    public ResetUserPasswordRequest() {}
+  /**
+   * New password for the user.
+   * @return newPassword
+   */
+  @javax.annotation.Nonnull
+  public String getNewPassword() {
+    return newPassword;
+  }
 
-    public ResetUserPasswordRequest newPassword(@javax.annotation.Nonnull String newPassword) {
-        this.newPassword = newPassword;
-        return this;
+  public void setNewPassword(@javax.annotation.Nonnull String newPassword) {
+    this.newPassword = newPassword;
+  }
+
+
+  public ResetUserPasswordRequest userIdentifier(@javax.annotation.Nonnull String userIdentifier) {
+    this.userIdentifier = userIdentifier;
+    return this;
+  }
+
+  /**
+   * GUID or name of the user.
+   * @return userIdentifier
+   */
+  @javax.annotation.Nonnull
+  public String getUserIdentifier() {
+    return userIdentifier;
+  }
+
+  public void setUserIdentifier(@javax.annotation.Nonnull String userIdentifier) {
+    this.userIdentifier = userIdentifier;
+  }
+
+  /**
+   * A container for additional, undeclared properties.
+   * This is a holder for any undeclared properties as specified with
+   * the 'additionalProperties' keyword in the OAS document.
+   */
+  private Map<String, Object> additionalProperties;
+
+  /**
+   * Set the additional (undeclared) property with the specified name and value.
+   * If the property does not already exist, create it otherwise replace it.
+   *
+   * @param key name of the property
+   * @param value value of the property
+   * @return the ResetUserPasswordRequest instance itself
+   */
+  public ResetUserPasswordRequest putAdditionalProperty(String key, Object value) {
+    if (this.additionalProperties == null) {
+        this.additionalProperties = new HashMap<String, Object>();
     }
+    this.additionalProperties.put(key, value);
+    return this;
+  }
 
-    /**
-     * New password for the user.
-     *
-     * @return newPassword
-     */
-    @javax.annotation.Nonnull
-    public String getNewPassword() {
-        return newPassword;
+  /**
+   * Return the additional (undeclared) property.
+   *
+   * @return a map of objects
+   */
+  public Map<String, Object> getAdditionalProperties() {
+    return additionalProperties;
+  }
+
+  /**
+   * Return the additional (undeclared) property with the specified name.
+   *
+   * @param key name of the property
+   * @return an object
+   */
+  public Object getAdditionalProperty(String key) {
+    if (this.additionalProperties == null) {
+        return null;
     }
+    return this.additionalProperties.get(key);
+  }
 
-    public void setNewPassword(@javax.annotation.Nonnull String newPassword) {
-        this.newPassword = newPassword;
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
     }
-
-    public ResetUserPasswordRequest userIdentifier(
-            @javax.annotation.Nonnull String userIdentifier) {
-        this.userIdentifier = userIdentifier;
-        return this;
+    if (o == null || getClass() != o.getClass()) {
+      return false;
     }
+    ResetUserPasswordRequest resetUserPasswordRequest = (ResetUserPasswordRequest) o;
+    return Objects.equals(this.newPassword, resetUserPasswordRequest.newPassword) &&
+        Objects.equals(this.userIdentifier, resetUserPasswordRequest.userIdentifier)&&
+        Objects.equals(this.additionalProperties, resetUserPasswordRequest.additionalProperties);
+  }
 
-    /**
-     * GUID or name of the user.
-     *
-     * @return userIdentifier
-     */
-    @javax.annotation.Nonnull
-    public String getUserIdentifier() {
-        return userIdentifier;
+  @Override
+  public int hashCode() {
+    return Objects.hash(newPassword, userIdentifier, additionalProperties);
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("class ResetUserPasswordRequest {\n");
+    sb.append("    newPassword: ").append(toIndentedString(newPassword)).append("\n");
+    sb.append("    userIdentifier: ").append(toIndentedString(userIdentifier)).append("\n");
+    sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
+    sb.append("}");
+    return sb.toString();
+  }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+    if (o == null) {
+      return "null";
     }
+    return o.toString().replace("\n", "\n    ");
+  }
 
-    public void setUserIdentifier(@javax.annotation.Nonnull String userIdentifier) {
-        this.userIdentifier = userIdentifier;
-    }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("new_password");
+    openapiFields.add("user_identifier");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("new_password");
+    openapiRequiredFields.add("user_identifier");
+  }
+
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to ResetUserPasswordRequest
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!ResetUserPasswordRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format("The required field(s) %s in ResetUserPasswordRequest is not found in the empty JSON string", ResetUserPasswordRequest.openapiRequiredFields.toString()));
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+      }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : ResetUserPasswordRequest.openapiRequiredFields) {
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
-        ResetUserPasswordRequest resetUserPasswordRequest = (ResetUserPasswordRequest) o;
-        return Objects.equals(this.newPassword, resetUserPasswordRequest.newPassword)
-                && Objects.equals(this.userIdentifier, resetUserPasswordRequest.userIdentifier);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(newPassword, userIdentifier);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("class ResetUserPasswordRequest {\n");
-        sb.append("    newPassword: ").append(toIndentedString(newPassword)).append("\n");
-        sb.append("    userIdentifier: ").append(toIndentedString(userIdentifier)).append("\n");
-        sb.append("}");
-        return sb.toString();
-    }
-
-    /**
-     * Convert the given object to string with each line indented by 4 spaces (except the first
-     * line).
-     */
-    private String toIndentedString(Object o) {
-        if (o == null) {
-            return "null";
-        }
-        return o.toString().replace("\n", "\n    ");
-    }
-
-    public static HashSet<String> openapiFields;
-    public static HashSet<String> openapiRequiredFields;
-
-    static {
-        // a set of all properties/fields (JSON key names)
-        openapiFields = new HashSet<String>();
-        openapiFields.add("new_password");
-        openapiFields.add("user_identifier");
-
-        // a set of required properties/fields (JSON key names)
-        openapiRequiredFields = new HashSet<String>();
-        openapiRequiredFields.add("new_password");
-        openapiRequiredFields.add("user_identifier");
-    }
-
-    /**
-     * Validates the JSON Element and throws an exception if issues found
-     *
-     * @param jsonElement JSON Element
-     * @throws IOException if the JSON Element is invalid with respect to ResetUserPasswordRequest
-     */
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-        if (jsonElement == null) {
-            if (!ResetUserPasswordRequest.openapiRequiredFields
-                    .isEmpty()) { // has required fields but JSON element is null
-                throw new IllegalArgumentException(
-                        String.format(
-                                "The required field(s) %s in ResetUserPasswordRequest is not found"
-                                        + " in the empty JSON string",
-                                ResetUserPasswordRequest.openapiRequiredFields.toString()));
-            }
-        }
-
-        Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-        // check to see if the JSON string contains additional fields
-        for (Map.Entry<String, JsonElement> entry : entries) {
-            if (!ResetUserPasswordRequest.openapiFields.contains(entry.getKey())) {
-                throw new IllegalArgumentException(
-                        String.format(
-                                "The field `%s` in the JSON string is not defined in the"
-                                        + " `ResetUserPasswordRequest` properties. JSON: %s",
-                                entry.getKey(), jsonElement.toString()));
-            }
-        }
-
-        // check to make sure all required properties/fields are present in the JSON string
-        for (String requiredField : ResetUserPasswordRequest.openapiRequiredFields) {
-            if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-                throw new IllegalArgumentException(
-                        String.format(
-                                "The required field `%s` is not found in the JSON string: %s",
-                                requiredField, jsonElement.toString()));
-            }
-        }
+      }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-        if (!jsonObj.get("new_password").isJsonPrimitive()) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            "Expected the field `new_password` to be a primitive type in the JSON"
-                                    + " string but got `%s`",
-                            jsonObj.get("new_password").toString()));
-        }
-        if (!jsonObj.get("user_identifier").isJsonPrimitive()) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            "Expected the field `user_identifier` to be a primitive type in the"
-                                    + " JSON string but got `%s`",
-                            jsonObj.get("user_identifier").toString()));
-        }
+      if (!jsonObj.get("new_password").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `new_password` to be a primitive type in the JSON string but got `%s`", jsonObj.get("new_password").toString()));
+      }
+      if (!jsonObj.get("user_identifier").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `user_identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("user_identifier").toString()));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!ResetUserPasswordRequest.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'ResetUserPasswordRequest' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<ResetUserPasswordRequest> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(ResetUserPasswordRequest.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<ResetUserPasswordRequest>() {
+           @Override
+           public void write(JsonWriter out, ResetUserPasswordRequest value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             obj.remove("additionalProperties");
+             // serialize additional properties
+             if (value.getAdditionalProperties() != null) {
+               for (Map.Entry<String, Object> entry : value.getAdditionalProperties().entrySet()) {
+                 if (entry.getValue() instanceof String)
+                   obj.addProperty(entry.getKey(), (String) entry.getValue());
+                 else if (entry.getValue() instanceof Number)
+                   obj.addProperty(entry.getKey(), (Number) entry.getValue());
+                 else if (entry.getValue() instanceof Boolean)
+                   obj.addProperty(entry.getKey(), (Boolean) entry.getValue());
+                 else if (entry.getValue() instanceof Character)
+                   obj.addProperty(entry.getKey(), (Character) entry.getValue());
+                 else {
+                   JsonElement jsonElement = gson.toJsonTree(entry.getValue());
+                   if (jsonElement.isJsonArray()) {
+                     obj.add(entry.getKey(), jsonElement.getAsJsonArray());
+                   } else {
+                     obj.add(entry.getKey(), jsonElement.getAsJsonObject());
+                   }
+                 }
+               }
+             }
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public ResetUserPasswordRequest read(JsonReader in) throws IOException {
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             JsonObject jsonObj = jsonElement.getAsJsonObject();
+             // store additional fields in the deserialized instance
+             ResetUserPasswordRequest instance = thisAdapter.fromJsonTree(jsonObj);
+             for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
+               if (!openapiFields.contains(entry.getKey())) {
+                 if (entry.getValue().isJsonPrimitive()) { // primitive type
+                   if (entry.getValue().getAsJsonPrimitive().isString())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsString());
+                   else if (entry.getValue().getAsJsonPrimitive().isNumber())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsNumber());
+                   else if (entry.getValue().getAsJsonPrimitive().isBoolean())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsBoolean());
+                   else
+                     throw new IllegalArgumentException(String.format("The field `%s` has unknown primitive type. Value: %s", entry.getKey(), entry.getValue().toString()));
+                 } else if (entry.getValue().isJsonArray()) {
+                     instance.putAdditionalProperty(entry.getKey(), gson.fromJson(entry.getValue(), List.class));
+                 } else { // JSON object
+                     instance.putAdditionalProperty(entry.getKey(), gson.fromJson(entry.getValue(), HashMap.class));
+                 }
+               }
+             }
+             return instance;
+           }
+
+       }.nullSafe();
     }
+  }
 
-    public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-        @SuppressWarnings("unchecked")
-        @Override
-        public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-            if (!ResetUserPasswordRequest.class.isAssignableFrom(type.getRawType())) {
-                return null; // this class only serializes 'ResetUserPasswordRequest' and its
-                // subtypes
-            }
-            final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-            final TypeAdapter<ResetUserPasswordRequest> thisAdapter =
-                    gson.getDelegateAdapter(this, TypeToken.get(ResetUserPasswordRequest.class));
+  /**
+   * Create an instance of ResetUserPasswordRequest given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of ResetUserPasswordRequest
+   * @throws IOException if the JSON string is invalid with respect to ResetUserPasswordRequest
+   */
+  public static ResetUserPasswordRequest fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, ResetUserPasswordRequest.class);
+  }
 
-            return (TypeAdapter<T>)
-                    new TypeAdapter<ResetUserPasswordRequest>() {
-                        @Override
-                        public void write(JsonWriter out, ResetUserPasswordRequest value)
-                                throws IOException {
-                            JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-                            elementAdapter.write(out, obj);
-                        }
-
-                        @Override
-                        public ResetUserPasswordRequest read(JsonReader in) throws IOException {
-                            JsonElement jsonElement = elementAdapter.read(in);
-                            validateJsonElement(jsonElement);
-                            return thisAdapter.fromJsonTree(jsonElement);
-                        }
-                    }.nullSafe();
-        }
-    }
-
-    /**
-     * Create an instance of ResetUserPasswordRequest given an JSON string
-     *
-     * @param jsonString JSON string
-     * @return An instance of ResetUserPasswordRequest
-     * @throws IOException if the JSON string is invalid with respect to ResetUserPasswordRequest
-     */
-    public static ResetUserPasswordRequest fromJson(String jsonString) throws IOException {
-        return JSON.getGson().fromJson(jsonString, ResetUserPasswordRequest.class);
-    }
-
-    /**
-     * Convert an instance of ResetUserPasswordRequest to an JSON string
-     *
-     * @return JSON string
-     */
-    public String toJson() {
-        return JSON.getGson().toJson(this);
-    }
+  /**
+   * Convert an instance of ResetUserPasswordRequest to an JSON string
+   *
+   * @return JSON string
+   */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
+

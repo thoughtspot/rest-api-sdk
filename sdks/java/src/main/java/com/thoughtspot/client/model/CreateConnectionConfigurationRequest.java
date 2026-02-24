@@ -4,779 +4,758 @@
 
 package com.thoughtspot.client.model;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import java.util.Objects;
 import com.google.gson.TypeAdapter;
-import com.google.gson.TypeAdapterFactory;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.thoughtspot.client.JSON;
+import com.thoughtspot.client.model.PolicyProcessOptionsInput;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.io.Serializable;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
-import org.openapitools.jackson.nullable.JsonNullable;
 
-/** CreateConnectionConfigurationRequest */
-@javax.annotation.Generated(
-        value = "org.openapitools.codegen.languages.JavaClientCodegen",
-        comments = "Generator version: 7.12.0")
+import com.thoughtspot.client.JSON;
+
+/**
+ * CreateConnectionConfigurationRequest
+ */
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class CreateConnectionConfigurationRequest implements Serializable {
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    public static final String SERIALIZED_NAME_NAME = "name";
+  public static final String SERIALIZED_NAME_NAME = "name";
+  @SerializedName(SERIALIZED_NAME_NAME)
+  @javax.annotation.Nonnull
+  private String name;
 
-    @SerializedName(SERIALIZED_NAME_NAME)
-    @javax.annotation.Nonnull
-    private String name;
+  public static final String SERIALIZED_NAME_DESCRIPTION = "description";
+  @SerializedName(SERIALIZED_NAME_DESCRIPTION)
+  @javax.annotation.Nullable
+  private String description;
 
-    public static final String SERIALIZED_NAME_DESCRIPTION = "description";
+  public static final String SERIALIZED_NAME_CONNECTION_IDENTIFIER = "connection_identifier";
+  @SerializedName(SERIALIZED_NAME_CONNECTION_IDENTIFIER)
+  @javax.annotation.Nonnull
+  private String connectionIdentifier;
 
-    @SerializedName(SERIALIZED_NAME_DESCRIPTION)
-    @javax.annotation.Nullable
-    private String description;
+  public static final String SERIALIZED_NAME_SAME_AS_PARENT = "same_as_parent";
+  @SerializedName(SERIALIZED_NAME_SAME_AS_PARENT)
+  @javax.annotation.Nullable
+  private Boolean sameAsParent = false;
 
-    public static final String SERIALIZED_NAME_CONNECTION_IDENTIFIER = "connection_identifier";
+  public static final String SERIALIZED_NAME_POLICY_PROCESS_OPTIONS = "policy_process_options";
+  @SerializedName(SERIALIZED_NAME_POLICY_PROCESS_OPTIONS)
+  @javax.annotation.Nullable
+  private PolicyProcessOptionsInput policyProcessOptions;
 
-    @SerializedName(SERIALIZED_NAME_CONNECTION_IDENTIFIER)
-    @javax.annotation.Nonnull
-    private String connectionIdentifier;
+  /**
+   * Type of authentication used for the connection.
+   */
+  @JsonAdapter(AuthenticationTypeEnum.Adapter.class)
+  public enum AuthenticationTypeEnum {
+    SERVICE_ACCOUNT("SERVICE_ACCOUNT"),
+    
+    KEY_PAIR("KEY_PAIR"),
+    
+    PERSONAL_ACCESS_TOKEN("PERSONAL_ACCESS_TOKEN"),
+    
+    OAUTH_WITH_SERVICE_PRINCIPAL("OAUTH_WITH_SERVICE_PRINCIPAL"),
+    
+    OAUTH_CLIENT_CREDENTIALS("OAUTH_CLIENT_CREDENTIALS");
 
-    public static final String SERIALIZED_NAME_SAME_AS_PARENT = "same_as_parent";
+    private String value;
 
-    @SerializedName(SERIALIZED_NAME_SAME_AS_PARENT)
-    @javax.annotation.Nullable
-    private Boolean sameAsParent = false;
-
-    public static final String SERIALIZED_NAME_POLICY_PROCESS_OPTIONS = "policy_process_options";
-
-    @SerializedName(SERIALIZED_NAME_POLICY_PROCESS_OPTIONS)
-    @javax.annotation.Nullable
-    private PolicyProcessOptionsInput policyProcessOptions;
-
-    /** Type of authentication used for the connection. */
-    @JsonAdapter(AuthenticationTypeEnum.Adapter.class)
-    public enum AuthenticationTypeEnum {
-        SERVICE_ACCOUNT("SERVICE_ACCOUNT"),
-
-        KEY_PAIR("KEY_PAIR"),
-
-        PERSONAL_ACCESS_TOKEN("PERSONAL_ACCESS_TOKEN"),
-
-        OAUTH_WITH_SERVICE_PRINCIPAL("OAUTH_WITH_SERVICE_PRINCIPAL"),
-
-        OAUTH_CLIENT_CREDENTIALS("OAUTH_CLIENT_CREDENTIALS");
-
-        private String value;
-
-        AuthenticationTypeEnum(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        public static AuthenticationTypeEnum fromValue(String value) {
-            for (AuthenticationTypeEnum b : AuthenticationTypeEnum.values()) {
-                if (b.value.equals(value)) {
-                    return b;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected value '" + value + "'");
-        }
-
-        public static class Adapter extends TypeAdapter<AuthenticationTypeEnum> {
-            @Override
-            public void write(final JsonWriter jsonWriter, final AuthenticationTypeEnum enumeration)
-                    throws IOException {
-                jsonWriter.value(enumeration.getValue());
-            }
-
-            @Override
-            public AuthenticationTypeEnum read(final JsonReader jsonReader) throws IOException {
-                String value = jsonReader.nextString();
-                return AuthenticationTypeEnum.fromValue(value);
-            }
-        }
-
-        public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-            String value = jsonElement.getAsString();
-            AuthenticationTypeEnum.fromValue(value);
-        }
+    AuthenticationTypeEnum(String value) {
+      this.value = value;
     }
 
-    public static final String SERIALIZED_NAME_AUTHENTICATION_TYPE = "authentication_type";
-
-    @SerializedName(SERIALIZED_NAME_AUTHENTICATION_TYPE)
-    @javax.annotation.Nullable
-    private AuthenticationTypeEnum authenticationType = AuthenticationTypeEnum.SERVICE_ACCOUNT;
-
-    public static final String SERIALIZED_NAME_CONFIGURATION = "configuration";
-
-    @SerializedName(SERIALIZED_NAME_CONFIGURATION)
-    @javax.annotation.Nonnull
-    private Object _configuration;
-
-    /** Type of policy. */
-    @JsonAdapter(PolicyTypeEnum.Adapter.class)
-    public enum PolicyTypeEnum {
-        NO_POLICY("NO_POLICY"),
-
-        PRINCIPALS("PRINCIPALS"),
-
-        PROCESSES("PROCESSES");
-
-        private String value;
-
-        PolicyTypeEnum(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        public static PolicyTypeEnum fromValue(String value) {
-            for (PolicyTypeEnum b : PolicyTypeEnum.values()) {
-                if (b.value.equals(value)) {
-                    return b;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected value '" + value + "'");
-        }
-
-        public static class Adapter extends TypeAdapter<PolicyTypeEnum> {
-            @Override
-            public void write(final JsonWriter jsonWriter, final PolicyTypeEnum enumeration)
-                    throws IOException {
-                jsonWriter.value(enumeration.getValue());
-            }
-
-            @Override
-            public PolicyTypeEnum read(final JsonReader jsonReader) throws IOException {
-                String value = jsonReader.nextString();
-                return PolicyTypeEnum.fromValue(value);
-            }
-        }
-
-        public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-            String value = jsonElement.getAsString();
-            PolicyTypeEnum.fromValue(value);
-        }
-    }
-
-    public static final String SERIALIZED_NAME_POLICY_TYPE = "policy_type";
-
-    @SerializedName(SERIALIZED_NAME_POLICY_TYPE)
-    @javax.annotation.Nullable
-    private PolicyTypeEnum policyType = PolicyTypeEnum.NO_POLICY;
-
-    public static final String SERIALIZED_NAME_POLICY_PRINCIPALS = "policy_principals";
-
-    @SerializedName(SERIALIZED_NAME_POLICY_PRINCIPALS)
-    @javax.annotation.Nullable
-    private List<String> policyPrincipals;
-
-    /** Gets or Sets policyProcesses */
-    @JsonAdapter(PolicyProcessesEnum.Adapter.class)
-    public enum PolicyProcessesEnum {
-        SAGE_INDEXING("SAGE_INDEXING"),
-
-        ROW_COUNT_STATS("ROW_COUNT_STATS");
-
-        private String value;
-
-        PolicyProcessesEnum(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        public static PolicyProcessesEnum fromValue(String value) {
-            for (PolicyProcessesEnum b : PolicyProcessesEnum.values()) {
-                if (b.value.equals(value)) {
-                    return b;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected value '" + value + "'");
-        }
-
-        public static class Adapter extends TypeAdapter<PolicyProcessesEnum> {
-            @Override
-            public void write(final JsonWriter jsonWriter, final PolicyProcessesEnum enumeration)
-                    throws IOException {
-                jsonWriter.value(enumeration.getValue());
-            }
-
-            @Override
-            public PolicyProcessesEnum read(final JsonReader jsonReader) throws IOException {
-                String value = jsonReader.nextString();
-                return PolicyProcessesEnum.fromValue(value);
-            }
-        }
-
-        public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-            String value = jsonElement.getAsString();
-            PolicyProcessesEnum.fromValue(value);
-        }
-    }
-
-    public static final String SERIALIZED_NAME_POLICY_PROCESSES = "policy_processes";
-
-    @SerializedName(SERIALIZED_NAME_POLICY_PROCESSES)
-    @javax.annotation.Nullable
-    private List<PolicyProcessesEnum> policyProcesses;
-
-    public CreateConnectionConfigurationRequest() {}
-
-    public CreateConnectionConfigurationRequest name(@javax.annotation.Nonnull String name) {
-        this.name = name;
-        return this;
-    }
-
-    /**
-     * Unique name for the configuration.
-     *
-     * @return name
-     */
-    @javax.annotation.Nonnull
-    public String getName() {
-        return name;
-    }
-
-    public void setName(@javax.annotation.Nonnull String name) {
-        this.name = name;
-    }
-
-    public CreateConnectionConfigurationRequest description(
-            @javax.annotation.Nullable String description) {
-        this.description = description;
-        return this;
-    }
-
-    /**
-     * Description of the configuration.
-     *
-     * @return description
-     */
-    @javax.annotation.Nullable
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(@javax.annotation.Nullable String description) {
-        this.description = description;
-    }
-
-    public CreateConnectionConfigurationRequest connectionIdentifier(
-            @javax.annotation.Nonnull String connectionIdentifier) {
-        this.connectionIdentifier = connectionIdentifier;
-        return this;
-    }
-
-    /**
-     * Unique ID or name of the connection.
-     *
-     * @return connectionIdentifier
-     */
-    @javax.annotation.Nonnull
-    public String getConnectionIdentifier() {
-        return connectionIdentifier;
-    }
-
-    public void setConnectionIdentifier(@javax.annotation.Nonnull String connectionIdentifier) {
-        this.connectionIdentifier = connectionIdentifier;
-    }
-
-    public CreateConnectionConfigurationRequest sameAsParent(
-            @javax.annotation.Nullable Boolean sameAsParent) {
-        this.sameAsParent = sameAsParent;
-        return this;
-    }
-
-    /**
-     * Specifies whether the connection configuration should inherit all properties and
-     * authentication type from its parent connection. This attribute is only applicable to
-     * parameterized connections. When set to true, the configuration uses only the connection
-     * properties and authentication type inherited from the parent. Version: 26.2.0.cl or later
-     *
-     * @return sameAsParent
-     */
-    @javax.annotation.Nullable
-    public Boolean getSameAsParent() {
-        return sameAsParent;
-    }
-
-    public void setSameAsParent(@javax.annotation.Nullable Boolean sameAsParent) {
-        this.sameAsParent = sameAsParent;
-    }
-
-    public CreateConnectionConfigurationRequest policyProcessOptions(
-            @javax.annotation.Nullable PolicyProcessOptionsInput policyProcessOptions) {
-        this.policyProcessOptions = policyProcessOptions;
-        return this;
-    }
-
-    /**
-     * This attribute is only applicable to parameterized connections. Ensure that the policy is set
-     * to Processes to allow the configuration to be used exclusively for system processes. Version:
-     * 26.2.0.cl or later
-     *
-     * @return policyProcessOptions
-     */
-    @javax.annotation.Nullable
-    public PolicyProcessOptionsInput getPolicyProcessOptions() {
-        return policyProcessOptions;
-    }
-
-    public void setPolicyProcessOptions(
-            @javax.annotation.Nullable PolicyProcessOptionsInput policyProcessOptions) {
-        this.policyProcessOptions = policyProcessOptions;
-    }
-
-    public CreateConnectionConfigurationRequest authenticationType(
-            @javax.annotation.Nullable AuthenticationTypeEnum authenticationType) {
-        this.authenticationType = authenticationType;
-        return this;
-    }
-
-    /**
-     * Type of authentication used for the connection.
-     *
-     * @return authenticationType
-     */
-    @javax.annotation.Nullable
-    public AuthenticationTypeEnum getAuthenticationType() {
-        return authenticationType;
-    }
-
-    public void setAuthenticationType(
-            @javax.annotation.Nullable AuthenticationTypeEnum authenticationType) {
-        this.authenticationType = authenticationType;
-    }
-
-    public CreateConnectionConfigurationRequest _configuration(
-            @javax.annotation.Nonnull Object _configuration) {
-        this._configuration = _configuration;
-        return this;
-    }
-
-    /**
-     * Configuration properties in JSON.
-     *
-     * @return _configuration
-     */
-    @javax.annotation.Nonnull
-    public Object getConfiguration() {
-        return _configuration;
-    }
-
-    public void setConfiguration(@javax.annotation.Nonnull Object _configuration) {
-        this._configuration = _configuration;
-    }
-
-    public CreateConnectionConfigurationRequest policyType(
-            @javax.annotation.Nullable PolicyTypeEnum policyType) {
-        this.policyType = policyType;
-        return this;
-    }
-
-    /**
-     * Type of policy.
-     *
-     * @return policyType
-     */
-    @javax.annotation.Nullable
-    public PolicyTypeEnum getPolicyType() {
-        return policyType;
-    }
-
-    public void setPolicyType(@javax.annotation.Nullable PolicyTypeEnum policyType) {
-        this.policyType = policyType;
-    }
-
-    public CreateConnectionConfigurationRequest policyPrincipals(
-            @javax.annotation.Nullable List<String> policyPrincipals) {
-        this.policyPrincipals = policyPrincipals;
-        return this;
-    }
-
-    public CreateConnectionConfigurationRequest addPolicyPrincipalsItem(
-            String policyPrincipalsItem) {
-        if (this.policyPrincipals == null) {
-            this.policyPrincipals = new ArrayList<>();
-        }
-        this.policyPrincipals.add(policyPrincipalsItem);
-        return this;
-    }
-
-    /**
-     * Unique ID or name of the User and User Groups.
-     *
-     * @return policyPrincipals
-     */
-    @javax.annotation.Nullable
-    public List<String> getPolicyPrincipals() {
-        return policyPrincipals;
-    }
-
-    public void setPolicyPrincipals(@javax.annotation.Nullable List<String> policyPrincipals) {
-        this.policyPrincipals = policyPrincipals;
-    }
-
-    public CreateConnectionConfigurationRequest policyProcesses(
-            @javax.annotation.Nullable List<PolicyProcessesEnum> policyProcesses) {
-        this.policyProcesses = policyProcesses;
-        return this;
-    }
-
-    public CreateConnectionConfigurationRequest addPolicyProcessesItem(
-            PolicyProcessesEnum policyProcessesItem) {
-        if (this.policyProcesses == null) {
-            this.policyProcesses = new ArrayList<>();
-        }
-        this.policyProcesses.add(policyProcessesItem);
-        return this;
-    }
-
-    /**
-     * Action that the query performed on the data warehouse, such as SAGE_INDEXING and
-     * ROW_COUNT_STATS.
-     *
-     * @return policyProcesses
-     */
-    @javax.annotation.Nullable
-    public List<PolicyProcessesEnum> getPolicyProcesses() {
-        return policyProcesses;
-    }
-
-    public void setPolicyProcesses(
-            @javax.annotation.Nullable List<PolicyProcessesEnum> policyProcesses) {
-        this.policyProcesses = policyProcesses;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        CreateConnectionConfigurationRequest createConnectionConfigurationRequest =
-                (CreateConnectionConfigurationRequest) o;
-        return Objects.equals(this.name, createConnectionConfigurationRequest.name)
-                && Objects.equals(
-                        this.description, createConnectionConfigurationRequest.description)
-                && Objects.equals(
-                        this.connectionIdentifier,
-                        createConnectionConfigurationRequest.connectionIdentifier)
-                && Objects.equals(
-                        this.sameAsParent, createConnectionConfigurationRequest.sameAsParent)
-                && Objects.equals(
-                        this.policyProcessOptions,
-                        createConnectionConfigurationRequest.policyProcessOptions)
-                && Objects.equals(
-                        this.authenticationType,
-                        createConnectionConfigurationRequest.authenticationType)
-                && Objects.equals(
-                        this._configuration, createConnectionConfigurationRequest._configuration)
-                && Objects.equals(this.policyType, createConnectionConfigurationRequest.policyType)
-                && Objects.equals(
-                        this.policyPrincipals,
-                        createConnectionConfigurationRequest.policyPrincipals)
-                && Objects.equals(
-                        this.policyProcesses, createConnectionConfigurationRequest.policyProcesses);
-    }
-
-    private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-        return a == b
-                || (a != null
-                        && b != null
-                        && a.isPresent()
-                        && b.isPresent()
-                        && Objects.deepEquals(a.get(), b.get()));
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(
-                name,
-                description,
-                connectionIdentifier,
-                sameAsParent,
-                policyProcessOptions,
-                authenticationType,
-                _configuration,
-                policyType,
-                policyPrincipals,
-                policyProcesses);
-    }
-
-    private static <T> int hashCodeNullable(JsonNullable<T> a) {
-        if (a == null) {
-            return 1;
-        }
-        return a.isPresent() ? Arrays.deepHashCode(new Object[] {a.get()}) : 31;
+    public String getValue() {
+      return value;
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("class CreateConnectionConfigurationRequest {\n");
-        sb.append("    name: ").append(toIndentedString(name)).append("\n");
-        sb.append("    description: ").append(toIndentedString(description)).append("\n");
-        sb.append("    connectionIdentifier: ")
-                .append(toIndentedString(connectionIdentifier))
-                .append("\n");
-        sb.append("    sameAsParent: ").append(toIndentedString(sameAsParent)).append("\n");
-        sb.append("    policyProcessOptions: ")
-                .append(toIndentedString(policyProcessOptions))
-                .append("\n");
-        sb.append("    authenticationType: ")
-                .append(toIndentedString(authenticationType))
-                .append("\n");
-        sb.append("    _configuration: ").append(toIndentedString(_configuration)).append("\n");
-        sb.append("    policyType: ").append(toIndentedString(policyType)).append("\n");
-        sb.append("    policyPrincipals: ").append(toIndentedString(policyPrincipals)).append("\n");
-        sb.append("    policyProcesses: ").append(toIndentedString(policyProcesses)).append("\n");
-        sb.append("}");
-        return sb.toString();
+      return String.valueOf(value);
     }
 
-    /**
-     * Convert the given object to string with each line indented by 4 spaces (except the first
-     * line).
-     */
-    private String toIndentedString(Object o) {
-        if (o == null) {
-            return "null";
+    public static AuthenticationTypeEnum fromValue(String value) {
+      for (AuthenticationTypeEnum b : AuthenticationTypeEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
         }
-        return o.toString().replace("\n", "\n    ");
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
 
-    public static HashSet<String> openapiFields;
-    public static HashSet<String> openapiRequiredFields;
+    public static class Adapter extends TypeAdapter<AuthenticationTypeEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final AuthenticationTypeEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
 
-    static {
-        // a set of all properties/fields (JSON key names)
-        openapiFields = new HashSet<String>();
-        openapiFields.add("name");
-        openapiFields.add("description");
-        openapiFields.add("connection_identifier");
-        openapiFields.add("same_as_parent");
-        openapiFields.add("policy_process_options");
-        openapiFields.add("authentication_type");
-        openapiFields.add("configuration");
-        openapiFields.add("policy_type");
-        openapiFields.add("policy_principals");
-        openapiFields.add("policy_processes");
-
-        // a set of required properties/fields (JSON key names)
-        openapiRequiredFields = new HashSet<String>();
-        openapiRequiredFields.add("name");
-        openapiRequiredFields.add("connection_identifier");
-        openapiRequiredFields.add("configuration");
+      @Override
+      public AuthenticationTypeEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return AuthenticationTypeEnum.fromValue(value);
+      }
     }
 
-    /**
-     * Validates the JSON Element and throws an exception if issues found
-     *
-     * @param jsonElement JSON Element
-     * @throws IOException if the JSON Element is invalid with respect to
-     *     CreateConnectionConfigurationRequest
-     */
     public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-        if (jsonElement == null) {
-            if (!CreateConnectionConfigurationRequest.openapiRequiredFields
-                    .isEmpty()) { // has required fields but JSON element is null
-                throw new IllegalArgumentException(
-                        String.format(
-                                "The required field(s) %s in CreateConnectionConfigurationRequest"
-                                        + " is not found in the empty JSON string",
-                                CreateConnectionConfigurationRequest.openapiRequiredFields
-                                        .toString()));
-            }
-        }
+      String value = jsonElement.getAsString();
+      AuthenticationTypeEnum.fromValue(value);
+    }
+  }
 
-        Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-        // check to see if the JSON string contains additional fields
-        for (Map.Entry<String, JsonElement> entry : entries) {
-            if (!CreateConnectionConfigurationRequest.openapiFields.contains(entry.getKey())) {
-                throw new IllegalArgumentException(
-                        String.format(
-                                "The field `%s` in the JSON string is not defined in the"
-                                    + " `CreateConnectionConfigurationRequest` properties. JSON:"
-                                    + " %s",
-                                entry.getKey(), jsonElement.toString()));
-            }
-        }
+  public static final String SERIALIZED_NAME_AUTHENTICATION_TYPE = "authentication_type";
+  @SerializedName(SERIALIZED_NAME_AUTHENTICATION_TYPE)
+  @javax.annotation.Nullable
+  private AuthenticationTypeEnum authenticationType = AuthenticationTypeEnum.SERVICE_ACCOUNT;
 
-        // check to make sure all required properties/fields are present in the JSON string
-        for (String requiredField : CreateConnectionConfigurationRequest.openapiRequiredFields) {
-            if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-                throw new IllegalArgumentException(
-                        String.format(
-                                "The required field `%s` is not found in the JSON string: %s",
-                                requiredField, jsonElement.toString()));
-            }
+  public static final String SERIALIZED_NAME_CONFIGURATION = "configuration";
+  @SerializedName(SERIALIZED_NAME_CONFIGURATION)
+  @javax.annotation.Nonnull
+  private Object _configuration;
+
+  /**
+   * Type of policy.
+   */
+  @JsonAdapter(PolicyTypeEnum.Adapter.class)
+  public enum PolicyTypeEnum {
+    NO_POLICY("NO_POLICY"),
+    
+    PRINCIPALS("PRINCIPALS"),
+    
+    PROCESSES("PROCESSES");
+
+    private String value;
+
+    PolicyTypeEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static PolicyTypeEnum fromValue(String value) {
+      for (PolicyTypeEnum b : PolicyTypeEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
         }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+
+    public static class Adapter extends TypeAdapter<PolicyTypeEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final PolicyTypeEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public PolicyTypeEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return PolicyTypeEnum.fromValue(value);
+      }
+    }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      PolicyTypeEnum.fromValue(value);
+    }
+  }
+
+  public static final String SERIALIZED_NAME_POLICY_TYPE = "policy_type";
+  @SerializedName(SERIALIZED_NAME_POLICY_TYPE)
+  @javax.annotation.Nullable
+  private PolicyTypeEnum policyType = PolicyTypeEnum.NO_POLICY;
+
+  public static final String SERIALIZED_NAME_POLICY_PRINCIPALS = "policy_principals";
+  @SerializedName(SERIALIZED_NAME_POLICY_PRINCIPALS)
+  @javax.annotation.Nullable
+  private List<String> policyPrincipals;
+
+  /**
+   * Gets or Sets policyProcesses
+   */
+  @JsonAdapter(PolicyProcessesEnum.Adapter.class)
+  public enum PolicyProcessesEnum {
+    SAGE_INDEXING("SAGE_INDEXING"),
+    
+    ROW_COUNT_STATS("ROW_COUNT_STATS");
+
+    private String value;
+
+    PolicyProcessesEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static PolicyProcessesEnum fromValue(String value) {
+      for (PolicyProcessesEnum b : PolicyProcessesEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+
+    public static class Adapter extends TypeAdapter<PolicyProcessesEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final PolicyProcessesEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public PolicyProcessesEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return PolicyProcessesEnum.fromValue(value);
+      }
+    }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      PolicyProcessesEnum.fromValue(value);
+    }
+  }
+
+  public static final String SERIALIZED_NAME_POLICY_PROCESSES = "policy_processes";
+  @SerializedName(SERIALIZED_NAME_POLICY_PROCESSES)
+  @javax.annotation.Nullable
+  private List<PolicyProcessesEnum> policyProcesses;
+
+  public CreateConnectionConfigurationRequest() {
+  }
+
+  public CreateConnectionConfigurationRequest name(@javax.annotation.Nonnull String name) {
+    this.name = name;
+    return this;
+  }
+
+  /**
+   * Unique name for the configuration.
+   * @return name
+   */
+  @javax.annotation.Nonnull
+  public String getName() {
+    return name;
+  }
+
+  public void setName(@javax.annotation.Nonnull String name) {
+    this.name = name;
+  }
+
+
+  public CreateConnectionConfigurationRequest description(@javax.annotation.Nullable String description) {
+    this.description = description;
+    return this;
+  }
+
+  /**
+   * Description of the configuration.
+   * @return description
+   */
+  @javax.annotation.Nullable
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(@javax.annotation.Nullable String description) {
+    this.description = description;
+  }
+
+
+  public CreateConnectionConfigurationRequest connectionIdentifier(@javax.annotation.Nonnull String connectionIdentifier) {
+    this.connectionIdentifier = connectionIdentifier;
+    return this;
+  }
+
+  /**
+   * Unique ID or name of the connection.
+   * @return connectionIdentifier
+   */
+  @javax.annotation.Nonnull
+  public String getConnectionIdentifier() {
+    return connectionIdentifier;
+  }
+
+  public void setConnectionIdentifier(@javax.annotation.Nonnull String connectionIdentifier) {
+    this.connectionIdentifier = connectionIdentifier;
+  }
+
+
+  public CreateConnectionConfigurationRequest sameAsParent(@javax.annotation.Nullable Boolean sameAsParent) {
+    this.sameAsParent = sameAsParent;
+    return this;
+  }
+
+  /**
+   * Specifies whether the connection configuration should inherit all properties and authentication type from its parent connection. This attribute is only applicable to parameterized connections. When set to true, the configuration uses only the connection properties and authentication type inherited from the parent.    Version: 26.2.0.cl or later 
+   * @return sameAsParent
+   */
+  @javax.annotation.Nullable
+  public Boolean getSameAsParent() {
+    return sameAsParent;
+  }
+
+  public void setSameAsParent(@javax.annotation.Nullable Boolean sameAsParent) {
+    this.sameAsParent = sameAsParent;
+  }
+
+
+  public CreateConnectionConfigurationRequest policyProcessOptions(@javax.annotation.Nullable PolicyProcessOptionsInput policyProcessOptions) {
+    this.policyProcessOptions = policyProcessOptions;
+    return this;
+  }
+
+  /**
+   * This attribute is only applicable to parameterized connections. Ensure that the policy is set to Processes to allow the configuration to be used exclusively for system processes.    Version: 26.2.0.cl or later 
+   * @return policyProcessOptions
+   */
+  @javax.annotation.Nullable
+  public PolicyProcessOptionsInput getPolicyProcessOptions() {
+    return policyProcessOptions;
+  }
+
+  public void setPolicyProcessOptions(@javax.annotation.Nullable PolicyProcessOptionsInput policyProcessOptions) {
+    this.policyProcessOptions = policyProcessOptions;
+  }
+
+
+  public CreateConnectionConfigurationRequest authenticationType(@javax.annotation.Nullable AuthenticationTypeEnum authenticationType) {
+    this.authenticationType = authenticationType;
+    return this;
+  }
+
+  /**
+   * Type of authentication used for the connection.
+   * @return authenticationType
+   */
+  @javax.annotation.Nullable
+  public AuthenticationTypeEnum getAuthenticationType() {
+    return authenticationType;
+  }
+
+  public void setAuthenticationType(@javax.annotation.Nullable AuthenticationTypeEnum authenticationType) {
+    this.authenticationType = authenticationType;
+  }
+
+
+  public CreateConnectionConfigurationRequest _configuration(@javax.annotation.Nonnull Object _configuration) {
+    this._configuration = _configuration;
+    return this;
+  }
+
+  /**
+   * Configuration properties in JSON.
+   * @return _configuration
+   */
+  @javax.annotation.Nonnull
+  public Object getConfiguration() {
+    return _configuration;
+  }
+
+  public void setConfiguration(@javax.annotation.Nonnull Object _configuration) {
+    this._configuration = _configuration;
+  }
+
+
+  public CreateConnectionConfigurationRequest policyType(@javax.annotation.Nullable PolicyTypeEnum policyType) {
+    this.policyType = policyType;
+    return this;
+  }
+
+  /**
+   * Type of policy.
+   * @return policyType
+   */
+  @javax.annotation.Nullable
+  public PolicyTypeEnum getPolicyType() {
+    return policyType;
+  }
+
+  public void setPolicyType(@javax.annotation.Nullable PolicyTypeEnum policyType) {
+    this.policyType = policyType;
+  }
+
+
+  public CreateConnectionConfigurationRequest policyPrincipals(@javax.annotation.Nullable List<String> policyPrincipals) {
+    this.policyPrincipals = policyPrincipals;
+    return this;
+  }
+
+  public CreateConnectionConfigurationRequest addPolicyPrincipalsItem(String policyPrincipalsItem) {
+    if (this.policyPrincipals == null) {
+      this.policyPrincipals = new ArrayList<>();
+    }
+    this.policyPrincipals.add(policyPrincipalsItem);
+    return this;
+  }
+
+  /**
+   * Unique ID or name of the User and User Groups.
+   * @return policyPrincipals
+   */
+  @javax.annotation.Nullable
+  public List<String> getPolicyPrincipals() {
+    return policyPrincipals;
+  }
+
+  public void setPolicyPrincipals(@javax.annotation.Nullable List<String> policyPrincipals) {
+    this.policyPrincipals = policyPrincipals;
+  }
+
+
+  public CreateConnectionConfigurationRequest policyProcesses(@javax.annotation.Nullable List<PolicyProcessesEnum> policyProcesses) {
+    this.policyProcesses = policyProcesses;
+    return this;
+  }
+
+  public CreateConnectionConfigurationRequest addPolicyProcessesItem(PolicyProcessesEnum policyProcessesItem) {
+    if (this.policyProcesses == null) {
+      this.policyProcesses = new ArrayList<>();
+    }
+    this.policyProcesses.add(policyProcessesItem);
+    return this;
+  }
+
+  /**
+   * Action that the query performed on the data warehouse, such as SAGE_INDEXING and ROW_COUNT_STATS.
+   * @return policyProcesses
+   */
+  @javax.annotation.Nullable
+  public List<PolicyProcessesEnum> getPolicyProcesses() {
+    return policyProcesses;
+  }
+
+  public void setPolicyProcesses(@javax.annotation.Nullable List<PolicyProcessesEnum> policyProcesses) {
+    this.policyProcesses = policyProcesses;
+  }
+
+  /**
+   * A container for additional, undeclared properties.
+   * This is a holder for any undeclared properties as specified with
+   * the 'additionalProperties' keyword in the OAS document.
+   */
+  private Map<String, Object> additionalProperties;
+
+  /**
+   * Set the additional (undeclared) property with the specified name and value.
+   * If the property does not already exist, create it otherwise replace it.
+   *
+   * @param key name of the property
+   * @param value value of the property
+   * @return the CreateConnectionConfigurationRequest instance itself
+   */
+  public CreateConnectionConfigurationRequest putAdditionalProperty(String key, Object value) {
+    if (this.additionalProperties == null) {
+        this.additionalProperties = new HashMap<String, Object>();
+    }
+    this.additionalProperties.put(key, value);
+    return this;
+  }
+
+  /**
+   * Return the additional (undeclared) property.
+   *
+   * @return a map of objects
+   */
+  public Map<String, Object> getAdditionalProperties() {
+    return additionalProperties;
+  }
+
+  /**
+   * Return the additional (undeclared) property with the specified name.
+   *
+   * @param key name of the property
+   * @return an object
+   */
+  public Object getAdditionalProperty(String key) {
+    if (this.additionalProperties == null) {
+        return null;
+    }
+    return this.additionalProperties.get(key);
+  }
+
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    CreateConnectionConfigurationRequest createConnectionConfigurationRequest = (CreateConnectionConfigurationRequest) o;
+    return Objects.equals(this.name, createConnectionConfigurationRequest.name) &&
+        Objects.equals(this.description, createConnectionConfigurationRequest.description) &&
+        Objects.equals(this.connectionIdentifier, createConnectionConfigurationRequest.connectionIdentifier) &&
+        Objects.equals(this.sameAsParent, createConnectionConfigurationRequest.sameAsParent) &&
+        Objects.equals(this.policyProcessOptions, createConnectionConfigurationRequest.policyProcessOptions) &&
+        Objects.equals(this.authenticationType, createConnectionConfigurationRequest.authenticationType) &&
+        Objects.equals(this._configuration, createConnectionConfigurationRequest._configuration) &&
+        Objects.equals(this.policyType, createConnectionConfigurationRequest.policyType) &&
+        Objects.equals(this.policyPrincipals, createConnectionConfigurationRequest.policyPrincipals) &&
+        Objects.equals(this.policyProcesses, createConnectionConfigurationRequest.policyProcesses)&&
+        Objects.equals(this.additionalProperties, createConnectionConfigurationRequest.additionalProperties);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(name, description, connectionIdentifier, sameAsParent, policyProcessOptions, authenticationType, _configuration, policyType, policyPrincipals, policyProcesses, additionalProperties);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("class CreateConnectionConfigurationRequest {\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    connectionIdentifier: ").append(toIndentedString(connectionIdentifier)).append("\n");
+    sb.append("    sameAsParent: ").append(toIndentedString(sameAsParent)).append("\n");
+    sb.append("    policyProcessOptions: ").append(toIndentedString(policyProcessOptions)).append("\n");
+    sb.append("    authenticationType: ").append(toIndentedString(authenticationType)).append("\n");
+    sb.append("    _configuration: ").append(toIndentedString(_configuration)).append("\n");
+    sb.append("    policyType: ").append(toIndentedString(policyType)).append("\n");
+    sb.append("    policyPrincipals: ").append(toIndentedString(policyPrincipals)).append("\n");
+    sb.append("    policyProcesses: ").append(toIndentedString(policyProcesses)).append("\n");
+    sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
+    sb.append("}");
+    return sb.toString();
+  }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
+
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("name");
+    openapiFields.add("description");
+    openapiFields.add("connection_identifier");
+    openapiFields.add("same_as_parent");
+    openapiFields.add("policy_process_options");
+    openapiFields.add("authentication_type");
+    openapiFields.add("configuration");
+    openapiFields.add("policy_type");
+    openapiFields.add("policy_principals");
+    openapiFields.add("policy_processes");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("name");
+    openapiRequiredFields.add("connection_identifier");
+    openapiRequiredFields.add("configuration");
+  }
+
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to CreateConnectionConfigurationRequest
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!CreateConnectionConfigurationRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format("The required field(s) %s in CreateConnectionConfigurationRequest is not found in the empty JSON string", CreateConnectionConfigurationRequest.openapiRequiredFields.toString()));
+        }
+      }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : CreateConnectionConfigurationRequest.openapiRequiredFields) {
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
+        }
+      }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-        if (!jsonObj.get("name").isJsonPrimitive()) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            "Expected the field `name` to be a primitive type in the JSON string"
-                                    + " but got `%s`",
-                            jsonObj.get("name").toString()));
-        }
-        if ((jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull())
-                && !jsonObj.get("description").isJsonPrimitive()) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            "Expected the field `description` to be a primitive type in the JSON"
-                                    + " string but got `%s`",
-                            jsonObj.get("description").toString()));
-        }
-        if (!jsonObj.get("connection_identifier").isJsonPrimitive()) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            "Expected the field `connection_identifier` to be a primitive type in"
-                                    + " the JSON string but got `%s`",
-                            jsonObj.get("connection_identifier").toString()));
-        }
-        // validate the optional field `policy_process_options`
-        if (jsonObj.get("policy_process_options") != null
-                && !jsonObj.get("policy_process_options").isJsonNull()) {
-            PolicyProcessOptionsInput.validateJsonElement(jsonObj.get("policy_process_options"));
-        }
-        if ((jsonObj.get("authentication_type") != null
-                        && !jsonObj.get("authentication_type").isJsonNull())
-                && !jsonObj.get("authentication_type").isJsonPrimitive()) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            "Expected the field `authentication_type` to be a primitive type in"
-                                    + " the JSON string but got `%s`",
-                            jsonObj.get("authentication_type").toString()));
-        }
-        // validate the optional field `authentication_type`
-        if (jsonObj.get("authentication_type") != null
-                && !jsonObj.get("authentication_type").isJsonNull()) {
-            AuthenticationTypeEnum.validateJsonElement(jsonObj.get("authentication_type"));
-        }
-        if ((jsonObj.get("policy_type") != null && !jsonObj.get("policy_type").isJsonNull())
-                && !jsonObj.get("policy_type").isJsonPrimitive()) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            "Expected the field `policy_type` to be a primitive type in the JSON"
-                                    + " string but got `%s`",
-                            jsonObj.get("policy_type").toString()));
-        }
-        // validate the optional field `policy_type`
-        if (jsonObj.get("policy_type") != null && !jsonObj.get("policy_type").isJsonNull()) {
-            PolicyTypeEnum.validateJsonElement(jsonObj.get("policy_type"));
-        }
-        // ensure the optional json data is an array if present
-        if (jsonObj.get("policy_principals") != null
-                && !jsonObj.get("policy_principals").isJsonNull()
-                && !jsonObj.get("policy_principals").isJsonArray()) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            "Expected the field `policy_principals` to be an array in the JSON"
-                                    + " string but got `%s`",
-                            jsonObj.get("policy_principals").toString()));
-        }
-        // ensure the optional json data is an array if present
-        if (jsonObj.get("policy_processes") != null
-                && !jsonObj.get("policy_processes").isJsonNull()
-                && !jsonObj.get("policy_processes").isJsonArray()) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            "Expected the field `policy_processes` to be an array in the JSON"
-                                    + " string but got `%s`",
-                            jsonObj.get("policy_processes").toString()));
-        }
+      if (!jsonObj.get("name").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
+      }
+      if ((jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull()) && !jsonObj.get("description").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `description` to be a primitive type in the JSON string but got `%s`", jsonObj.get("description").toString()));
+      }
+      if (!jsonObj.get("connection_identifier").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `connection_identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("connection_identifier").toString()));
+      }
+      // validate the optional field `policy_process_options`
+      if (jsonObj.get("policy_process_options") != null && !jsonObj.get("policy_process_options").isJsonNull()) {
+        PolicyProcessOptionsInput.validateJsonElement(jsonObj.get("policy_process_options"));
+      }
+      if ((jsonObj.get("authentication_type") != null && !jsonObj.get("authentication_type").isJsonNull()) && !jsonObj.get("authentication_type").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `authentication_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("authentication_type").toString()));
+      }
+      // validate the optional field `authentication_type`
+      if (jsonObj.get("authentication_type") != null && !jsonObj.get("authentication_type").isJsonNull()) {
+        AuthenticationTypeEnum.validateJsonElement(jsonObj.get("authentication_type"));
+      }
+      if ((jsonObj.get("policy_type") != null && !jsonObj.get("policy_type").isJsonNull()) && !jsonObj.get("policy_type").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `policy_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("policy_type").toString()));
+      }
+      // validate the optional field `policy_type`
+      if (jsonObj.get("policy_type") != null && !jsonObj.get("policy_type").isJsonNull()) {
+        PolicyTypeEnum.validateJsonElement(jsonObj.get("policy_type"));
+      }
+      // ensure the optional json data is an array if present
+      if (jsonObj.get("policy_principals") != null && !jsonObj.get("policy_principals").isJsonNull() && !jsonObj.get("policy_principals").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `policy_principals` to be an array in the JSON string but got `%s`", jsonObj.get("policy_principals").toString()));
+      }
+      // ensure the optional json data is an array if present
+      if (jsonObj.get("policy_processes") != null && !jsonObj.get("policy_processes").isJsonNull() && !jsonObj.get("policy_processes").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `policy_processes` to be an array in the JSON string but got `%s`", jsonObj.get("policy_processes").toString()));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!CreateConnectionConfigurationRequest.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'CreateConnectionConfigurationRequest' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<CreateConnectionConfigurationRequest> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(CreateConnectionConfigurationRequest.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<CreateConnectionConfigurationRequest>() {
+           @Override
+           public void write(JsonWriter out, CreateConnectionConfigurationRequest value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             obj.remove("additionalProperties");
+             // serialize additional properties
+             if (value.getAdditionalProperties() != null) {
+               for (Map.Entry<String, Object> entry : value.getAdditionalProperties().entrySet()) {
+                 if (entry.getValue() instanceof String)
+                   obj.addProperty(entry.getKey(), (String) entry.getValue());
+                 else if (entry.getValue() instanceof Number)
+                   obj.addProperty(entry.getKey(), (Number) entry.getValue());
+                 else if (entry.getValue() instanceof Boolean)
+                   obj.addProperty(entry.getKey(), (Boolean) entry.getValue());
+                 else if (entry.getValue() instanceof Character)
+                   obj.addProperty(entry.getKey(), (Character) entry.getValue());
+                 else {
+                   JsonElement jsonElement = gson.toJsonTree(entry.getValue());
+                   if (jsonElement.isJsonArray()) {
+                     obj.add(entry.getKey(), jsonElement.getAsJsonArray());
+                   } else {
+                     obj.add(entry.getKey(), jsonElement.getAsJsonObject());
+                   }
+                 }
+               }
+             }
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public CreateConnectionConfigurationRequest read(JsonReader in) throws IOException {
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             JsonObject jsonObj = jsonElement.getAsJsonObject();
+             // store additional fields in the deserialized instance
+             CreateConnectionConfigurationRequest instance = thisAdapter.fromJsonTree(jsonObj);
+             for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
+               if (!openapiFields.contains(entry.getKey())) {
+                 if (entry.getValue().isJsonPrimitive()) { // primitive type
+                   if (entry.getValue().getAsJsonPrimitive().isString())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsString());
+                   else if (entry.getValue().getAsJsonPrimitive().isNumber())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsNumber());
+                   else if (entry.getValue().getAsJsonPrimitive().isBoolean())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsBoolean());
+                   else
+                     throw new IllegalArgumentException(String.format("The field `%s` has unknown primitive type. Value: %s", entry.getKey(), entry.getValue().toString()));
+                 } else if (entry.getValue().isJsonArray()) {
+                     instance.putAdditionalProperty(entry.getKey(), gson.fromJson(entry.getValue(), List.class));
+                 } else { // JSON object
+                     instance.putAdditionalProperty(entry.getKey(), gson.fromJson(entry.getValue(), HashMap.class));
+                 }
+               }
+             }
+             return instance;
+           }
+
+       }.nullSafe();
     }
+  }
 
-    public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-        @SuppressWarnings("unchecked")
-        @Override
-        public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-            if (!CreateConnectionConfigurationRequest.class.isAssignableFrom(type.getRawType())) {
-                return null; // this class only serializes 'CreateConnectionConfigurationRequest'
-                // and its subtypes
-            }
-            final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-            final TypeAdapter<CreateConnectionConfigurationRequest> thisAdapter =
-                    gson.getDelegateAdapter(
-                            this, TypeToken.get(CreateConnectionConfigurationRequest.class));
+  /**
+   * Create an instance of CreateConnectionConfigurationRequest given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of CreateConnectionConfigurationRequest
+   * @throws IOException if the JSON string is invalid with respect to CreateConnectionConfigurationRequest
+   */
+  public static CreateConnectionConfigurationRequest fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, CreateConnectionConfigurationRequest.class);
+  }
 
-            return (TypeAdapter<T>)
-                    new TypeAdapter<CreateConnectionConfigurationRequest>() {
-                        @Override
-                        public void write(
-                                JsonWriter out, CreateConnectionConfigurationRequest value)
-                                throws IOException {
-                            JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-                            elementAdapter.write(out, obj);
-                        }
-
-                        @Override
-                        public CreateConnectionConfigurationRequest read(JsonReader in)
-                                throws IOException {
-                            JsonElement jsonElement = elementAdapter.read(in);
-                            validateJsonElement(jsonElement);
-                            return thisAdapter.fromJsonTree(jsonElement);
-                        }
-                    }.nullSafe();
-        }
-    }
-
-    /**
-     * Create an instance of CreateConnectionConfigurationRequest given an JSON string
-     *
-     * @param jsonString JSON string
-     * @return An instance of CreateConnectionConfigurationRequest
-     * @throws IOException if the JSON string is invalid with respect to
-     *     CreateConnectionConfigurationRequest
-     */
-    public static CreateConnectionConfigurationRequest fromJson(String jsonString)
-            throws IOException {
-        return JSON.getGson().fromJson(jsonString, CreateConnectionConfigurationRequest.class);
-    }
-
-    /**
-     * Convert an instance of CreateConnectionConfigurationRequest to an JSON string
-     *
-     * @return JSON string
-     */
-    public String toJson() {
-        return JSON.getGson().toJson(this);
-    }
+  /**
+   * Convert an instance of CreateConnectionConfigurationRequest to an JSON string
+   *
+   * @return JSON string
+   */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
+

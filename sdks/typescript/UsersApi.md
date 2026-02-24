@@ -189,6 +189,7 @@ apiInstance.createUser(
       },
     ],
     preferred_locale: "en-CA",
+    use_browser_language: true,
     extended_properties: {},
     extended_preferences: {},
     trigger_welcome_email: true,
@@ -467,6 +468,7 @@ apiInstance.importUsers(
           },
         ],
         preferred_locale: "en-CA",
+        use_browser_language: true,
       },
     ],
     default_password: "default_password_example",
@@ -717,6 +719,7 @@ apiInstance.updateUser(
     ],
     operation: "REPLACE",
     preferred_locale: "en-CA",
+    use_browser_language: true,
     extended_properties: {},
     extended_preferences: {},
   } 

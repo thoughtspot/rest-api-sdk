@@ -4,21 +4,37 @@
 
 package com.thoughtspot.client.model;
 
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for CALLBACKInputMandatory */
+/**
+ * Model tests for CALLBACKInputMandatory
+ */
 public class CALLBACKInputMandatoryTest {
     private final CALLBACKInputMandatory model = new CALLBACKInputMandatory();
 
-    /** Model tests for CALLBACKInputMandatory */
+    /**
+     * Model tests for CALLBACKInputMandatory
+     */
     @Test
     public void testCALLBACKInputMandatory() {
         // TODO: test CALLBACKInputMandatory
     }
 
-    /** Test the property 'reference' */
+    /**
+     * Test the property 'reference'
+     */
     @Test
     public void referenceTest() {
         // TODO: test reference
     }
+
 }

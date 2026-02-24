@@ -4,243 +4,317 @@
 
 package com.thoughtspot.client.model;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import java.util.Objects;
 import com.google.gson.TypeAdapter;
-import com.google.gson.TypeAdapterFactory;
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.thoughtspot.client.JSON;
 import java.io.IOException;
+import java.util.Arrays;
 import java.io.Serializable;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 
-/** SendMessageRequest */
-@javax.annotation.Generated(
-        value = "org.openapitools.codegen.languages.JavaClientCodegen",
-        comments = "Generator version: 7.12.0")
+import com.thoughtspot.client.JSON;
+
+/**
+ * SendMessageRequest
+ */
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class SendMessageRequest implements Serializable {
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    public static final String SERIALIZED_NAME_METADATA_IDENTIFIER = "metadata_identifier";
+  public static final String SERIALIZED_NAME_METADATA_IDENTIFIER = "metadata_identifier";
+  @SerializedName(SERIALIZED_NAME_METADATA_IDENTIFIER)
+  @javax.annotation.Nonnull
+  private String metadataIdentifier;
 
-    @SerializedName(SERIALIZED_NAME_METADATA_IDENTIFIER)
-    @javax.annotation.Nonnull
-    private String metadataIdentifier;
+  public static final String SERIALIZED_NAME_MESSAGE = "message";
+  @SerializedName(SERIALIZED_NAME_MESSAGE)
+  @javax.annotation.Nonnull
+  private String message;
 
-    public static final String SERIALIZED_NAME_MESSAGE = "message";
+  public SendMessageRequest() {
+  }
 
-    @SerializedName(SERIALIZED_NAME_MESSAGE)
-    @javax.annotation.Nonnull
-    private String message;
+  public SendMessageRequest metadataIdentifier(@javax.annotation.Nonnull String metadataIdentifier) {
+    this.metadataIdentifier = metadataIdentifier;
+    return this;
+  }
 
-    public SendMessageRequest() {}
+  /**
+   * ID of the metadata object, such as a Worksheet or Model, to use as a data source for the conversation.
+   * @return metadataIdentifier
+   */
+  @javax.annotation.Nonnull
+  public String getMetadataIdentifier() {
+    return metadataIdentifier;
+  }
 
-    public SendMessageRequest metadataIdentifier(
-            @javax.annotation.Nonnull String metadataIdentifier) {
-        this.metadataIdentifier = metadataIdentifier;
-        return this;
+  public void setMetadataIdentifier(@javax.annotation.Nonnull String metadataIdentifier) {
+    this.metadataIdentifier = metadataIdentifier;
+  }
+
+
+  public SendMessageRequest message(@javax.annotation.Nonnull String message) {
+    this.message = message;
+    return this;
+  }
+
+  /**
+   * A message string with the follow-up question to continue the conversation.
+   * @return message
+   */
+  @javax.annotation.Nonnull
+  public String getMessage() {
+    return message;
+  }
+
+  public void setMessage(@javax.annotation.Nonnull String message) {
+    this.message = message;
+  }
+
+  /**
+   * A container for additional, undeclared properties.
+   * This is a holder for any undeclared properties as specified with
+   * the 'additionalProperties' keyword in the OAS document.
+   */
+  private Map<String, Object> additionalProperties;
+
+  /**
+   * Set the additional (undeclared) property with the specified name and value.
+   * If the property does not already exist, create it otherwise replace it.
+   *
+   * @param key name of the property
+   * @param value value of the property
+   * @return the SendMessageRequest instance itself
+   */
+  public SendMessageRequest putAdditionalProperty(String key, Object value) {
+    if (this.additionalProperties == null) {
+        this.additionalProperties = new HashMap<String, Object>();
     }
+    this.additionalProperties.put(key, value);
+    return this;
+  }
 
-    /**
-     * ID of the metadata object, such as a Worksheet or Model, to use as a data source for the
-     * conversation.
-     *
-     * @return metadataIdentifier
-     */
-    @javax.annotation.Nonnull
-    public String getMetadataIdentifier() {
-        return metadataIdentifier;
+  /**
+   * Return the additional (undeclared) property.
+   *
+   * @return a map of objects
+   */
+  public Map<String, Object> getAdditionalProperties() {
+    return additionalProperties;
+  }
+
+  /**
+   * Return the additional (undeclared) property with the specified name.
+   *
+   * @param key name of the property
+   * @return an object
+   */
+  public Object getAdditionalProperty(String key) {
+    if (this.additionalProperties == null) {
+        return null;
     }
+    return this.additionalProperties.get(key);
+  }
 
-    public void setMetadataIdentifier(@javax.annotation.Nonnull String metadataIdentifier) {
-        this.metadataIdentifier = metadataIdentifier;
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
     }
-
-    public SendMessageRequest message(@javax.annotation.Nonnull String message) {
-        this.message = message;
-        return this;
+    if (o == null || getClass() != o.getClass()) {
+      return false;
     }
+    SendMessageRequest sendMessageRequest = (SendMessageRequest) o;
+    return Objects.equals(this.metadataIdentifier, sendMessageRequest.metadataIdentifier) &&
+        Objects.equals(this.message, sendMessageRequest.message)&&
+        Objects.equals(this.additionalProperties, sendMessageRequest.additionalProperties);
+  }
 
-    /**
-     * A message string with the follow-up question to continue the conversation.
-     *
-     * @return message
-     */
-    @javax.annotation.Nonnull
-    public String getMessage() {
-        return message;
+  @Override
+  public int hashCode() {
+    return Objects.hash(metadataIdentifier, message, additionalProperties);
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("class SendMessageRequest {\n");
+    sb.append("    metadataIdentifier: ").append(toIndentedString(metadataIdentifier)).append("\n");
+    sb.append("    message: ").append(toIndentedString(message)).append("\n");
+    sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
+    sb.append("}");
+    return sb.toString();
+  }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+    if (o == null) {
+      return "null";
     }
+    return o.toString().replace("\n", "\n    ");
+  }
 
-    public void setMessage(@javax.annotation.Nonnull String message) {
-        this.message = message;
-    }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("metadata_identifier");
+    openapiFields.add("message");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("metadata_identifier");
+    openapiRequiredFields.add("message");
+  }
+
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to SendMessageRequest
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!SendMessageRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format("The required field(s) %s in SendMessageRequest is not found in the empty JSON string", SendMessageRequest.openapiRequiredFields.toString()));
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+      }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : SendMessageRequest.openapiRequiredFields) {
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
-        SendMessageRequest sendMessageRequest = (SendMessageRequest) o;
-        return Objects.equals(this.metadataIdentifier, sendMessageRequest.metadataIdentifier)
-                && Objects.equals(this.message, sendMessageRequest.message);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(metadataIdentifier, message);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("class SendMessageRequest {\n");
-        sb.append("    metadataIdentifier: ")
-                .append(toIndentedString(metadataIdentifier))
-                .append("\n");
-        sb.append("    message: ").append(toIndentedString(message)).append("\n");
-        sb.append("}");
-        return sb.toString();
-    }
-
-    /**
-     * Convert the given object to string with each line indented by 4 spaces (except the first
-     * line).
-     */
-    private String toIndentedString(Object o) {
-        if (o == null) {
-            return "null";
-        }
-        return o.toString().replace("\n", "\n    ");
-    }
-
-    public static HashSet<String> openapiFields;
-    public static HashSet<String> openapiRequiredFields;
-
-    static {
-        // a set of all properties/fields (JSON key names)
-        openapiFields = new HashSet<String>();
-        openapiFields.add("metadata_identifier");
-        openapiFields.add("message");
-
-        // a set of required properties/fields (JSON key names)
-        openapiRequiredFields = new HashSet<String>();
-        openapiRequiredFields.add("metadata_identifier");
-        openapiRequiredFields.add("message");
-    }
-
-    /**
-     * Validates the JSON Element and throws an exception if issues found
-     *
-     * @param jsonElement JSON Element
-     * @throws IOException if the JSON Element is invalid with respect to SendMessageRequest
-     */
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-        if (jsonElement == null) {
-            if (!SendMessageRequest.openapiRequiredFields
-                    .isEmpty()) { // has required fields but JSON element is null
-                throw new IllegalArgumentException(
-                        String.format(
-                                "The required field(s) %s in SendMessageRequest is not found in"
-                                        + " the empty JSON string",
-                                SendMessageRequest.openapiRequiredFields.toString()));
-            }
-        }
-
-        Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-        // check to see if the JSON string contains additional fields
-        for (Map.Entry<String, JsonElement> entry : entries) {
-            if (!SendMessageRequest.openapiFields.contains(entry.getKey())) {
-                throw new IllegalArgumentException(
-                        String.format(
-                                "The field `%s` in the JSON string is not defined in the"
-                                        + " `SendMessageRequest` properties. JSON: %s",
-                                entry.getKey(), jsonElement.toString()));
-            }
-        }
-
-        // check to make sure all required properties/fields are present in the JSON string
-        for (String requiredField : SendMessageRequest.openapiRequiredFields) {
-            if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-                throw new IllegalArgumentException(
-                        String.format(
-                                "The required field `%s` is not found in the JSON string: %s",
-                                requiredField, jsonElement.toString()));
-            }
-        }
+      }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-        if (!jsonObj.get("metadata_identifier").isJsonPrimitive()) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            "Expected the field `metadata_identifier` to be a primitive type in"
-                                    + " the JSON string but got `%s`",
-                            jsonObj.get("metadata_identifier").toString()));
-        }
-        if (!jsonObj.get("message").isJsonPrimitive()) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            "Expected the field `message` to be a primitive type in the JSON"
-                                    + " string but got `%s`",
-                            jsonObj.get("message").toString()));
-        }
+      if (!jsonObj.get("metadata_identifier").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `metadata_identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("metadata_identifier").toString()));
+      }
+      if (!jsonObj.get("message").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `message` to be a primitive type in the JSON string but got `%s`", jsonObj.get("message").toString()));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!SendMessageRequest.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'SendMessageRequest' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<SendMessageRequest> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(SendMessageRequest.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<SendMessageRequest>() {
+           @Override
+           public void write(JsonWriter out, SendMessageRequest value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             obj.remove("additionalProperties");
+             // serialize additional properties
+             if (value.getAdditionalProperties() != null) {
+               for (Map.Entry<String, Object> entry : value.getAdditionalProperties().entrySet()) {
+                 if (entry.getValue() instanceof String)
+                   obj.addProperty(entry.getKey(), (String) entry.getValue());
+                 else if (entry.getValue() instanceof Number)
+                   obj.addProperty(entry.getKey(), (Number) entry.getValue());
+                 else if (entry.getValue() instanceof Boolean)
+                   obj.addProperty(entry.getKey(), (Boolean) entry.getValue());
+                 else if (entry.getValue() instanceof Character)
+                   obj.addProperty(entry.getKey(), (Character) entry.getValue());
+                 else {
+                   JsonElement jsonElement = gson.toJsonTree(entry.getValue());
+                   if (jsonElement.isJsonArray()) {
+                     obj.add(entry.getKey(), jsonElement.getAsJsonArray());
+                   } else {
+                     obj.add(entry.getKey(), jsonElement.getAsJsonObject());
+                   }
+                 }
+               }
+             }
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public SendMessageRequest read(JsonReader in) throws IOException {
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             JsonObject jsonObj = jsonElement.getAsJsonObject();
+             // store additional fields in the deserialized instance
+             SendMessageRequest instance = thisAdapter.fromJsonTree(jsonObj);
+             for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
+               if (!openapiFields.contains(entry.getKey())) {
+                 if (entry.getValue().isJsonPrimitive()) { // primitive type
+                   if (entry.getValue().getAsJsonPrimitive().isString())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsString());
+                   else if (entry.getValue().getAsJsonPrimitive().isNumber())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsNumber());
+                   else if (entry.getValue().getAsJsonPrimitive().isBoolean())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsBoolean());
+                   else
+                     throw new IllegalArgumentException(String.format("The field `%s` has unknown primitive type. Value: %s", entry.getKey(), entry.getValue().toString()));
+                 } else if (entry.getValue().isJsonArray()) {
+                     instance.putAdditionalProperty(entry.getKey(), gson.fromJson(entry.getValue(), List.class));
+                 } else { // JSON object
+                     instance.putAdditionalProperty(entry.getKey(), gson.fromJson(entry.getValue(), HashMap.class));
+                 }
+               }
+             }
+             return instance;
+           }
+
+       }.nullSafe();
     }
+  }
 
-    public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-        @SuppressWarnings("unchecked")
-        @Override
-        public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-            if (!SendMessageRequest.class.isAssignableFrom(type.getRawType())) {
-                return null; // this class only serializes 'SendMessageRequest' and its subtypes
-            }
-            final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-            final TypeAdapter<SendMessageRequest> thisAdapter =
-                    gson.getDelegateAdapter(this, TypeToken.get(SendMessageRequest.class));
+  /**
+   * Create an instance of SendMessageRequest given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of SendMessageRequest
+   * @throws IOException if the JSON string is invalid with respect to SendMessageRequest
+   */
+  public static SendMessageRequest fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, SendMessageRequest.class);
+  }
 
-            return (TypeAdapter<T>)
-                    new TypeAdapter<SendMessageRequest>() {
-                        @Override
-                        public void write(JsonWriter out, SendMessageRequest value)
-                                throws IOException {
-                            JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-                            elementAdapter.write(out, obj);
-                        }
-
-                        @Override
-                        public SendMessageRequest read(JsonReader in) throws IOException {
-                            JsonElement jsonElement = elementAdapter.read(in);
-                            validateJsonElement(jsonElement);
-                            return thisAdapter.fromJsonTree(jsonElement);
-                        }
-                    }.nullSafe();
-        }
-    }
-
-    /**
-     * Create an instance of SendMessageRequest given an JSON string
-     *
-     * @param jsonString JSON string
-     * @return An instance of SendMessageRequest
-     * @throws IOException if the JSON string is invalid with respect to SendMessageRequest
-     */
-    public static SendMessageRequest fromJson(String jsonString) throws IOException {
-        return JSON.getGson().fromJson(jsonString, SendMessageRequest.class);
-    }
-
-    /**
-     * Convert an instance of SendMessageRequest to an JSON string
-     *
-     * @return JSON string
-     */
-    public String toJson() {
-        return JSON.getGson().toJson(this);
-    }
+  /**
+   * Convert an instance of SendMessageRequest to an JSON string
+   *
+   * @return JSON string
+   */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
+

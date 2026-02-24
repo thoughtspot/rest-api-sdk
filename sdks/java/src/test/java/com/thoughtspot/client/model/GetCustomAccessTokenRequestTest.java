@@ -4,99 +4,148 @@
 
 package com.thoughtspot.client.model;
 
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import com.thoughtspot.client.model.FilterRules;
+import com.thoughtspot.client.model.GroupObject;
+import com.thoughtspot.client.model.ParameterValues;
+import com.thoughtspot.client.model.TokenAccessScopeObject;
+import com.thoughtspot.client.model.VariableValues;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for GetCustomAccessTokenRequest */
+/**
+ * Model tests for GetCustomAccessTokenRequest
+ */
 public class GetCustomAccessTokenRequestTest {
     private final GetCustomAccessTokenRequest model = new GetCustomAccessTokenRequest();
 
-    /** Model tests for GetCustomAccessTokenRequest */
+    /**
+     * Model tests for GetCustomAccessTokenRequest
+     */
     @Test
     public void testGetCustomAccessTokenRequest() {
         // TODO: test GetCustomAccessTokenRequest
     }
 
-    /** Test the property 'username' */
+    /**
+     * Test the property 'username'
+     */
     @Test
     public void usernameTest() {
         // TODO: test username
     }
 
-    /** Test the property 'password' */
+    /**
+     * Test the property 'password'
+     */
     @Test
     public void passwordTest() {
         // TODO: test password
     }
 
-    /** Test the property 'secretKey' */
+    /**
+     * Test the property 'secretKey'
+     */
     @Test
     public void secretKeyTest() {
         // TODO: test secretKey
     }
 
-    /** Test the property 'validityTimeInSec' */
+    /**
+     * Test the property 'validityTimeInSec'
+     */
     @Test
     public void validityTimeInSecTest() {
         // TODO: test validityTimeInSec
     }
 
-    /** Test the property 'orgIdentifier' */
+    /**
+     * Test the property 'orgIdentifier'
+     */
     @Test
     public void orgIdentifierTest() {
         // TODO: test orgIdentifier
     }
 
-    /** Test the property 'persistOption' */
+    /**
+     * Test the property 'persistOption'
+     */
     @Test
     public void persistOptionTest() {
         // TODO: test persistOption
     }
 
-    /** Test the property 'filterRules' */
+    /**
+     * Test the property 'filterRules'
+     */
     @Test
     public void filterRulesTest() {
         // TODO: test filterRules
     }
 
-    /** Test the property 'parameterValues' */
+    /**
+     * Test the property 'parameterValues'
+     */
     @Test
     public void parameterValuesTest() {
         // TODO: test parameterValues
     }
 
-    /** Test the property 'variableValues' */
+    /**
+     * Test the property 'variableValues'
+     */
     @Test
     public void variableValuesTest() {
         // TODO: test variableValues
     }
 
-    /** Test the property 'objects' */
+    /**
+     * Test the property 'objects'
+     */
     @Test
     public void objectsTest() {
         // TODO: test objects
     }
 
-    /** Test the property 'email' */
+    /**
+     * Test the property 'email'
+     */
     @Test
     public void emailTest() {
         // TODO: test email
     }
 
-    /** Test the property 'displayName' */
+    /**
+     * Test the property 'displayName'
+     */
     @Test
     public void displayNameTest() {
         // TODO: test displayName
     }
 
-    /** Test the property 'groups' */
+    /**
+     * Test the property 'groups'
+     */
     @Test
     public void groupsTest() {
         // TODO: test groups
     }
 
-    /** Test the property 'autoCreate' */
+    /**
+     * Test the property 'autoCreate'
+     */
     @Test
     public void autoCreateTest() {
         // TODO: test autoCreate
     }
+
 }
