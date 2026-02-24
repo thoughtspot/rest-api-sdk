@@ -2090,6 +2090,38 @@ describe('ThoughtSpotRestApi', function() {
         });     
       });
 
+      describe('fetchObjectPrivileges', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "fetchObjectPrivileges"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.fetchObjectPrivileges(
+                    // fetchObjectPrivilegesRequest FetchObjectPrivilegesRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.fetchObjectPrivileges(
+                    // fetchObjectPrivilegesRequest FetchObjectPrivilegesRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('fetchPermissionsOfPrincipals', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -2730,6 +2762,38 @@ describe('ThoughtSpotRestApi', function() {
             } else {
                 await expect(
                   instance.logout(
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('manageObjectPrivilege', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "manageObjectPrivilege"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.manageObjectPrivilege(
+                    // manageObjectPrivilegeRequest ManageObjectPrivilegeRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.manageObjectPrivilege(
+                    // manageObjectPrivilegeRequest ManageObjectPrivilegeRequest
+                     test.Body   
                   )
                 ).to.be.rejectedWith(Error);
             }
@@ -3758,7 +3822,7 @@ describe('ThoughtSpotRestApi', function() {
               var data;
               try {
                 data = await instance.unassignTag(
-                    // assignTagRequest AssignTagRequest
+                    // unassignTagRequest UnassignTagRequest
                      test.Body   
                 )
               } catch (er) {
@@ -3768,7 +3832,7 @@ describe('ThoughtSpotRestApi', function() {
             } else {
                 await expect(
                   instance.unassignTag(
-                    // assignTagRequest AssignTagRequest
+                    // unassignTagRequest UnassignTagRequest
                      test.Body   
                   )
                 ).to.be.rejectedWith(Error);

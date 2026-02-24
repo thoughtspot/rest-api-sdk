@@ -83,6 +83,7 @@ Response for search role api should handle hidden privileges as well.
 | CAN_MANAGE_WEBHOOKS | &quot;CAN_MANAGE_WEBHOOKS&quot; |
 | CAN_DOWNLOAD_VISUALS | &quot;CAN_DOWNLOAD_VISUALS&quot; |
 | CAN_DOWNLOAD_DETAILED_DATA | &quot;CAN_DOWNLOAD_DETAILED_DATA&quot; |
+| CAN_USE_SPOTTER | &quot;CAN_USE_SPOTTER&quot; |
 
 
 

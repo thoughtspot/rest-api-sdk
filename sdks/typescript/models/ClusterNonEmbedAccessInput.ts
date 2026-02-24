@@ -20,6 +20,10 @@ export class ClusterNonEmbedAccessInput {
     * Block full application access for non-embedded usage.
     */
     'block_full_app_access'?: boolean | null;
+    /**
+    * Group identifiers that are allowed non-embed full app access. Can only be set when orgs feature is disabled and block_full_app_access is true.
+    */
+    'groups_identifiers_with_access'?: Array<string> | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -28,6 +32,12 @@ export class ClusterNonEmbedAccessInput {
             "name": "block_full_app_access",
             "baseName": "block_full_app_access",
             "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "groups_identifiers_with_access",
+            "baseName": "groups_identifiers_with_access",
+            "type": "Array<string>",
             "format": ""
         }    ];
 

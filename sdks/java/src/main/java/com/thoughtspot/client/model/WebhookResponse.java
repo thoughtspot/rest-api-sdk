@@ -19,11 +19,11 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 /** WebhookResponse */
@@ -160,6 +160,12 @@ public class WebhookResponse implements Serializable {
     @SerializedName(SERIALIZED_NAME_LAST_MODIFIED_BY)
     @javax.annotation.Nullable
     private WebhookUser lastModifiedBy;
+
+    public static final String SERIALIZED_NAME_STORAGE_DESTINATION = "storage_destination";
+
+    @SerializedName(SERIALIZED_NAME_STORAGE_DESTINATION)
+    @javax.annotation.Nullable
+    private StorageDestination storageDestination;
 
     public WebhookResponse() {}
 
@@ -424,6 +430,71 @@ public class WebhookResponse implements Serializable {
         this.lastModifiedBy = lastModifiedBy;
     }
 
+    public WebhookResponse storageDestination(
+            @javax.annotation.Nullable StorageDestination storageDestination) {
+        this.storageDestination = storageDestination;
+        return this;
+    }
+
+    /**
+     * Get storageDestination
+     *
+     * @return storageDestination
+     */
+    @javax.annotation.Nullable
+    public StorageDestination getStorageDestination() {
+        return storageDestination;
+    }
+
+    public void setStorageDestination(
+            @javax.annotation.Nullable StorageDestination storageDestination) {
+        this.storageDestination = storageDestination;
+    }
+
+    /**
+     * A container for additional, undeclared properties. This is a holder for any undeclared
+     * properties as specified with the 'additionalProperties' keyword in the OAS document.
+     */
+    private Map<String, Object> additionalProperties;
+
+    /**
+     * Set the additional (undeclared) property with the specified name and value. If the property
+     * does not already exist, create it otherwise replace it.
+     *
+     * @param key name of the property
+     * @param value value of the property
+     * @return the WebhookResponse instance itself
+     */
+    public WebhookResponse putAdditionalProperty(String key, Object value) {
+        if (this.additionalProperties == null) {
+            this.additionalProperties = new HashMap<String, Object>();
+        }
+        this.additionalProperties.put(key, value);
+        return this;
+    }
+
+    /**
+     * Return the additional (undeclared) property.
+     *
+     * @return a map of objects
+     */
+    public Map<String, Object> getAdditionalProperties() {
+        return additionalProperties;
+    }
+
+    /**
+     * Return the additional (undeclared) property with the specified name.
+     *
+     * @param key name of the property
+     * @return an object
+     */
+    public Object getAdditionalProperty(String key) {
+        if (this.additionalProperties == null) {
+            return null;
+        }
+        return this.additionalProperties.get(key);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -446,7 +517,9 @@ public class WebhookResponse implements Serializable {
                 && Objects.equals(
                         this.modificationTimeInMillis, webhookResponse.modificationTimeInMillis)
                 && Objects.equals(this.createdBy, webhookResponse.createdBy)
-                && Objects.equals(this.lastModifiedBy, webhookResponse.lastModifiedBy);
+                && Objects.equals(this.lastModifiedBy, webhookResponse.lastModifiedBy)
+                && Objects.equals(this.storageDestination, webhookResponse.storageDestination)
+                && Objects.equals(this.additionalProperties, webhookResponse.additionalProperties);
     }
 
     private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -473,7 +546,9 @@ public class WebhookResponse implements Serializable {
                 creationTimeInMillis,
                 modificationTimeInMillis,
                 createdBy,
-                lastModifiedBy);
+                lastModifiedBy,
+                storageDestination,
+                additionalProperties);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -506,6 +581,12 @@ public class WebhookResponse implements Serializable {
                 .append("\n");
         sb.append("    createdBy: ").append(toIndentedString(createdBy)).append("\n");
         sb.append("    lastModifiedBy: ").append(toIndentedString(lastModifiedBy)).append("\n");
+        sb.append("    storageDestination: ")
+                .append(toIndentedString(storageDestination))
+                .append("\n");
+        sb.append("    additionalProperties: ")
+                .append(toIndentedString(additionalProperties))
+                .append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -540,6 +621,7 @@ public class WebhookResponse implements Serializable {
         openapiFields.add("modification_time_in_millis");
         openapiFields.add("created_by");
         openapiFields.add("last_modified_by");
+        openapiFields.add("storage_destination");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -566,18 +648,6 @@ public class WebhookResponse implements Serializable {
                                 "The required field(s) %s in WebhookResponse is not found in the"
                                         + " empty JSON string",
                                 WebhookResponse.openapiRequiredFields.toString()));
-            }
-        }
-
-        Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-        // check to see if the JSON string contains additional fields
-        for (Map.Entry<String, JsonElement> entry : entries) {
-            if (!WebhookResponse.openapiFields.contains(entry.getKey())) {
-                throw new IllegalArgumentException(
-                        String.format(
-                                "The field `%s` in the JSON string is not defined in the"
-                                        + " `WebhookResponse` properties. JSON: %s",
-                                entry.getKey(), jsonElement.toString()));
             }
         }
 
@@ -654,6 +724,11 @@ public class WebhookResponse implements Serializable {
                 && !jsonObj.get("last_modified_by").isJsonNull()) {
             WebhookUser.validateJsonElement(jsonObj.get("last_modified_by"));
         }
+        // validate the optional field `storage_destination`
+        if (jsonObj.get("storage_destination") != null
+                && !jsonObj.get("storage_destination").isJsonNull()) {
+            StorageDestination.validateJsonElement(jsonObj.get("storage_destination"));
+        }
     }
 
     public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
@@ -673,6 +748,30 @@ public class WebhookResponse implements Serializable {
                         public void write(JsonWriter out, WebhookResponse value)
                                 throws IOException {
                             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+                            obj.remove("additionalProperties");
+                            // serialize additional properties
+                            if (value.getAdditionalProperties() != null) {
+                                for (Map.Entry<String, Object> entry :
+                                        value.getAdditionalProperties().entrySet()) {
+                                    if (entry.getValue() instanceof String)
+                                        obj.addProperty(entry.getKey(), (String) entry.getValue());
+                                    else if (entry.getValue() instanceof Number)
+                                        obj.addProperty(entry.getKey(), (Number) entry.getValue());
+                                    else if (entry.getValue() instanceof Boolean)
+                                        obj.addProperty(entry.getKey(), (Boolean) entry.getValue());
+                                    else if (entry.getValue() instanceof Character)
+                                        obj.addProperty(
+                                                entry.getKey(), (Character) entry.getValue());
+                                    else {
+                                        JsonElement jsonElement = gson.toJsonTree(entry.getValue());
+                                        if (jsonElement.isJsonArray()) {
+                                            obj.add(entry.getKey(), jsonElement.getAsJsonArray());
+                                        } else {
+                                            obj.add(entry.getKey(), jsonElement.getAsJsonObject());
+                                        }
+                                    }
+                                }
+                            }
                             elementAdapter.write(out, obj);
                         }
 
@@ -680,7 +779,41 @@ public class WebhookResponse implements Serializable {
                         public WebhookResponse read(JsonReader in) throws IOException {
                             JsonElement jsonElement = elementAdapter.read(in);
                             validateJsonElement(jsonElement);
-                            return thisAdapter.fromJsonTree(jsonElement);
+                            JsonObject jsonObj = jsonElement.getAsJsonObject();
+                            // store additional fields in the deserialized instance
+                            WebhookResponse instance = thisAdapter.fromJsonTree(jsonObj);
+                            for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
+                                if (!openapiFields.contains(entry.getKey())) {
+                                    if (entry.getValue().isJsonPrimitive()) { // primitive type
+                                        if (entry.getValue().getAsJsonPrimitive().isString())
+                                            instance.putAdditionalProperty(
+                                                    entry.getKey(), entry.getValue().getAsString());
+                                        else if (entry.getValue().getAsJsonPrimitive().isNumber())
+                                            instance.putAdditionalProperty(
+                                                    entry.getKey(), entry.getValue().getAsNumber());
+                                        else if (entry.getValue().getAsJsonPrimitive().isBoolean())
+                                            instance.putAdditionalProperty(
+                                                    entry.getKey(),
+                                                    entry.getValue().getAsBoolean());
+                                        else
+                                            throw new IllegalArgumentException(
+                                                    String.format(
+                                                            "The field `%s` has unknown primitive"
+                                                                    + " type. Value: %s",
+                                                            entry.getKey(),
+                                                            entry.getValue().toString()));
+                                    } else if (entry.getValue().isJsonArray()) {
+                                        instance.putAdditionalProperty(
+                                                entry.getKey(),
+                                                gson.fromJson(entry.getValue(), List.class));
+                                    } else { // JSON object
+                                        instance.putAdditionalProperty(
+                                                entry.getKey(),
+                                                gson.fromJson(entry.getValue(), HashMap.class));
+                                    }
+                                }
+                            }
+                            return instance;
                         }
                     }.nullSafe();
         }

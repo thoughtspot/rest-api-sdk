@@ -105,4 +105,10 @@ public class ImportUserTest {
     public void preferredLocaleTest() {
         // TODO: test preferredLocale
     }
+
+    /** Test the property 'useBrowserLanguage' */
+    @Test
+    public void useBrowserLanguageTest() {
+        // TODO: test useBrowserLanguage
+    }
 }
