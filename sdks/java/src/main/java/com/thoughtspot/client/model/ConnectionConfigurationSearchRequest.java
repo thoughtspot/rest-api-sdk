@@ -17,10 +17,11 @@ import com.google.gson.stream.JsonWriter;
 import com.thoughtspot.client.JSON;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 /** ConnectionConfigurationSearchRequest */
 @javax.annotation.Generated(
@@ -164,6 +165,50 @@ public class ConnectionConfigurationSearchRequest implements Serializable {
         this.policyType = policyType;
     }
 
+    /**
+     * A container for additional, undeclared properties. This is a holder for any undeclared
+     * properties as specified with the 'additionalProperties' keyword in the OAS document.
+     */
+    private Map<String, Object> additionalProperties;
+
+    /**
+     * Set the additional (undeclared) property with the specified name and value. If the property
+     * does not already exist, create it otherwise replace it.
+     *
+     * @param key name of the property
+     * @param value value of the property
+     * @return the ConnectionConfigurationSearchRequest instance itself
+     */
+    public ConnectionConfigurationSearchRequest putAdditionalProperty(String key, Object value) {
+        if (this.additionalProperties == null) {
+            this.additionalProperties = new HashMap<String, Object>();
+        }
+        this.additionalProperties.put(key, value);
+        return this;
+    }
+
+    /**
+     * Return the additional (undeclared) property.
+     *
+     * @return a map of objects
+     */
+    public Map<String, Object> getAdditionalProperties() {
+        return additionalProperties;
+    }
+
+    /**
+     * Return the additional (undeclared) property with the specified name.
+     *
+     * @param key name of the property
+     * @return an object
+     */
+    public Object getAdditionalProperty(String key) {
+        if (this.additionalProperties == null) {
+            return null;
+        }
+        return this.additionalProperties.get(key);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -180,12 +225,16 @@ public class ConnectionConfigurationSearchRequest implements Serializable {
                 && Objects.equals(
                         this.configurationIdentifier,
                         connectionConfigurationSearchRequest.configurationIdentifier)
-                && Objects.equals(this.policyType, connectionConfigurationSearchRequest.policyType);
+                && Objects.equals(this.policyType, connectionConfigurationSearchRequest.policyType)
+                && Objects.equals(
+                        this.additionalProperties,
+                        connectionConfigurationSearchRequest.additionalProperties);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(connectionIdentifier, configurationIdentifier, policyType);
+        return Objects.hash(
+                connectionIdentifier, configurationIdentifier, policyType, additionalProperties);
     }
 
     @Override
@@ -199,6 +248,9 @@ public class ConnectionConfigurationSearchRequest implements Serializable {
                 .append(toIndentedString(configurationIdentifier))
                 .append("\n");
         sb.append("    policyType: ").append(toIndentedString(policyType)).append("\n");
+        sb.append("    additionalProperties: ")
+                .append(toIndentedString(additionalProperties))
+                .append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -246,19 +298,6 @@ public class ConnectionConfigurationSearchRequest implements Serializable {
                                         + " is not found in the empty JSON string",
                                 ConnectionConfigurationSearchRequest.openapiRequiredFields
                                         .toString()));
-            }
-        }
-
-        Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-        // check to see if the JSON string contains additional fields
-        for (Map.Entry<String, JsonElement> entry : entries) {
-            if (!ConnectionConfigurationSearchRequest.openapiFields.contains(entry.getKey())) {
-                throw new IllegalArgumentException(
-                        String.format(
-                                "The field `%s` in the JSON string is not defined in the"
-                                    + " `ConnectionConfigurationSearchRequest` properties. JSON:"
-                                    + " %s",
-                                entry.getKey(), jsonElement.toString()));
             }
         }
 
@@ -322,6 +361,30 @@ public class ConnectionConfigurationSearchRequest implements Serializable {
                                 JsonWriter out, ConnectionConfigurationSearchRequest value)
                                 throws IOException {
                             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+                            obj.remove("additionalProperties");
+                            // serialize additional properties
+                            if (value.getAdditionalProperties() != null) {
+                                for (Map.Entry<String, Object> entry :
+                                        value.getAdditionalProperties().entrySet()) {
+                                    if (entry.getValue() instanceof String)
+                                        obj.addProperty(entry.getKey(), (String) entry.getValue());
+                                    else if (entry.getValue() instanceof Number)
+                                        obj.addProperty(entry.getKey(), (Number) entry.getValue());
+                                    else if (entry.getValue() instanceof Boolean)
+                                        obj.addProperty(entry.getKey(), (Boolean) entry.getValue());
+                                    else if (entry.getValue() instanceof Character)
+                                        obj.addProperty(
+                                                entry.getKey(), (Character) entry.getValue());
+                                    else {
+                                        JsonElement jsonElement = gson.toJsonTree(entry.getValue());
+                                        if (jsonElement.isJsonArray()) {
+                                            obj.add(entry.getKey(), jsonElement.getAsJsonArray());
+                                        } else {
+                                            obj.add(entry.getKey(), jsonElement.getAsJsonObject());
+                                        }
+                                    }
+                                }
+                            }
                             elementAdapter.write(out, obj);
                         }
 
@@ -330,7 +393,42 @@ public class ConnectionConfigurationSearchRequest implements Serializable {
                                 throws IOException {
                             JsonElement jsonElement = elementAdapter.read(in);
                             validateJsonElement(jsonElement);
-                            return thisAdapter.fromJsonTree(jsonElement);
+                            JsonObject jsonObj = jsonElement.getAsJsonObject();
+                            // store additional fields in the deserialized instance
+                            ConnectionConfigurationSearchRequest instance =
+                                    thisAdapter.fromJsonTree(jsonObj);
+                            for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
+                                if (!openapiFields.contains(entry.getKey())) {
+                                    if (entry.getValue().isJsonPrimitive()) { // primitive type
+                                        if (entry.getValue().getAsJsonPrimitive().isString())
+                                            instance.putAdditionalProperty(
+                                                    entry.getKey(), entry.getValue().getAsString());
+                                        else if (entry.getValue().getAsJsonPrimitive().isNumber())
+                                            instance.putAdditionalProperty(
+                                                    entry.getKey(), entry.getValue().getAsNumber());
+                                        else if (entry.getValue().getAsJsonPrimitive().isBoolean())
+                                            instance.putAdditionalProperty(
+                                                    entry.getKey(),
+                                                    entry.getValue().getAsBoolean());
+                                        else
+                                            throw new IllegalArgumentException(
+                                                    String.format(
+                                                            "The field `%s` has unknown primitive"
+                                                                    + " type. Value: %s",
+                                                            entry.getKey(),
+                                                            entry.getValue().toString()));
+                                    } else if (entry.getValue().isJsonArray()) {
+                                        instance.putAdditionalProperty(
+                                                entry.getKey(),
+                                                gson.fromJson(entry.getValue(), List.class));
+                                    } else { // JSON object
+                                        instance.putAdditionalProperty(
+                                                entry.getKey(),
+                                                gson.fromJson(entry.getValue(), HashMap.class));
+                                    }
+                                }
+                            }
+                            return instance;
                         }
                     }.nullSafe();
         }
