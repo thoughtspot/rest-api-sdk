@@ -20,6 +20,7 @@
 |**modificationTimeInMillis** | **Float** | Last modified time of the webhook configuration in milliseconds. |  |
 |**createdBy** | [**WebhookUser**](WebhookUser.md) |  |  [optional] |
 |**lastModifiedBy** | [**WebhookUser**](WebhookUser.md) |  |  [optional] |
+|**storageDestination** | [**StorageDestination**](StorageDestination.md) |  |  [optional] |
 
 
 

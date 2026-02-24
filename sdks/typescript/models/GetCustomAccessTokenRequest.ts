@@ -47,7 +47,7 @@ export class GetCustomAccessTokenRequest {
     */
     'filter_rules'?: Array<FilterRules>;
     /**
-    * Parameter values.
+    * Allows developers to assign parameter values for existing parameters to a user at login. Note: Using parameter values for row level security use cases will ultimately be deprecated. Developers can still pass data security values via the Custom Access token via the variable_values field and create RLS rules based on custom variables. Please refer to the [ABAC via RLS documentation](https://developers.thoughtspot.com/docs/abac-user-parameters) for more details.
     */
     'parameter_values'?: Array<ParameterValues>;
     /**
@@ -55,7 +55,7 @@ export class GetCustomAccessTokenRequest {
     */
     'variable_values'?: Array<VariableValues>;
     /**
-    * Objects on which the filter rules and parameters values should be applied to
+    * Objects on which the parameter and variable values should be applied to
     */
     'objects'?: Array<TokenAccessScopeObject>;
     /**

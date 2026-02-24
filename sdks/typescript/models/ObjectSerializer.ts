@@ -22,6 +22,8 @@ export * from '../models/AuthenticationInput';
 export * from '../models/Author';
 export * from '../models/AuthorMetadataTypeInput';
 export * from '../models/AuthorType';
+export * from '../models/AwsS3Config';
+export * from '../models/AwsS3ConfigInput';
 export * from '../models/BasicAuth';
 export * from '../models/BasicAuthInput';
 export * from '../models/CALLBACK';
@@ -88,6 +90,7 @@ export * from '../models/CreateVariableRequest';
 export * from '../models/CreateWebhookConfigurationRequest';
 export * from '../models/CreateWebhookConfigurationRequestAuthentication';
 export * from '../models/CreateWebhookConfigurationRequestSignatureVerification';
+export * from '../models/CreateWebhookConfigurationRequestStorageDestination';
 export * from '../models/CronExpression';
 export * from '../models/CronExpressionInput';
 export * from '../models/CspSettings';
@@ -148,6 +151,7 @@ export * from '../models/FetchConnectionDiffStatusResponse';
 export * from '../models/FetchLiveboardDataRequest';
 export * from '../models/FetchLiveboardSqlQueryRequest';
 export * from '../models/FetchLogsRequest';
+export * from '../models/FetchObjectPrivilegesRequest';
 export * from '../models/FetchPermissionsOfPrincipalsRequest';
 export * from '../models/FetchPermissionsOnMetadataRequest';
 export * from '../models/FilterRules';
@@ -193,6 +197,7 @@ export * from '../models/LiveboardOptions';
 export * from '../models/LiveboardOptionsInput';
 export * from '../models/LogResponse';
 export * from '../models/LoginRequest';
+export * from '../models/ManageObjectPrivilegeRequest';
 export * from '../models/MetadataAssociationItem';
 export * from '../models/MetadataContext';
 export * from '../models/MetadataInput';
@@ -205,6 +210,8 @@ export * from '../models/ModelTableList';
 export * from '../models/NLInstructionsInfo';
 export * from '../models/NLInstructionsInfoInput';
 export * from '../models/ObjectIDAndName';
+export * from '../models/ObjectPrivilegesMetadataInput';
+export * from '../models/ObjectPrivilegesOfMetadataResponse';
 export * from '../models/Org';
 export * from '../models/OrgChannelConfigInput';
 export * from '../models/OrgChannelConfigResponse';
@@ -329,6 +336,10 @@ export * from '../models/SortOptions';
 export * from '../models/SortingOptions';
 export * from '../models/SqlQuery';
 export * from '../models/SqlQueryResponse';
+export * from '../models/StorageConfig';
+export * from '../models/StorageConfigInput';
+export * from '../models/StorageDestination';
+export * from '../models/StorageDestinationInput';
 export * from '../models/SystemConfig';
 export * from '../models/SystemInfo';
 export * from '../models/SystemOverrideInfo';
@@ -342,6 +353,7 @@ export * from '../models/TokenValidationResponse';
 export * from '../models/URL';
 export * from '../models/URLInput';
 export * from '../models/URLInputMandatory';
+export * from '../models/UnassignTagRequest';
 export * from '../models/UnparameterizeMetadataRequest';
 export * from '../models/UnpublishMetadataRequest';
 export * from '../models/UpdateCalendarRequest';
@@ -431,6 +443,8 @@ import { AuthenticationInput } from '../models/AuthenticationInput';
 import { Author } from '../models/Author';
 import { AuthorMetadataTypeInput, AuthorMetadataTypeInputTypeEnum    } from '../models/AuthorMetadataTypeInput';
 import { AuthorType } from '../models/AuthorType';
+import { AwsS3Config } from '../models/AwsS3Config';
+import { AwsS3ConfigInput } from '../models/AwsS3ConfigInput';
 import { BasicAuth } from '../models/BasicAuth';
 import { BasicAuthInput } from '../models/BasicAuthInput';
 import { CALLBACK } from '../models/CALLBACK';
@@ -492,11 +506,12 @@ import { CreateScheduleRequestPdfOptions       , CreateScheduleRequestPdfOptions
 import { CreateScheduleRequestRecipientDetails } from '../models/CreateScheduleRequestRecipientDetails';
 import { CreateTagRequest } from '../models/CreateTagRequest';
 import { CreateUserGroupRequest    , CreateUserGroupRequestPrivilegesEnum   , CreateUserGroupRequestTypeEnum   , CreateUserGroupRequestVisibilityEnum    } from '../models/CreateUserGroupRequest';
-import { CreateUserRequest    , CreateUserRequestAccountTypeEnum  , CreateUserRequestAccountStatusEnum    , CreateUserRequestVisibilityEnum       , CreateUserRequestPreferredLocaleEnum       } from '../models/CreateUserRequest';
+import { CreateUserRequest    , CreateUserRequestAccountTypeEnum  , CreateUserRequestAccountStatusEnum    , CreateUserRequestVisibilityEnum       , CreateUserRequestPreferredLocaleEnum        } from '../models/CreateUserRequest';
 import { CreateVariableRequest, CreateVariableRequestTypeEnum    , CreateVariableRequestDataTypeEnum   } from '../models/CreateVariableRequest';
-import { CreateWebhookConfigurationRequest    , CreateWebhookConfigurationRequestEventsEnum     } from '../models/CreateWebhookConfigurationRequest';
+import { CreateWebhookConfigurationRequest    , CreateWebhookConfigurationRequestEventsEnum      } from '../models/CreateWebhookConfigurationRequest';
 import { CreateWebhookConfigurationRequestAuthentication } from '../models/CreateWebhookConfigurationRequestAuthentication';
 import { CreateWebhookConfigurationRequestSignatureVerification, CreateWebhookConfigurationRequestSignatureVerificationTypeEnum   , CreateWebhookConfigurationRequestSignatureVerificationAlgorithmEnum    } from '../models/CreateWebhookConfigurationRequestSignatureVerification';
+import { CreateWebhookConfigurationRequestStorageDestination, CreateWebhookConfigurationRequestStorageDestinationStorageTypeEnum    } from '../models/CreateWebhookConfigurationRequestStorageDestination';
 import { CronExpression } from '../models/CronExpression';
 import { CronExpressionInput } from '../models/CronExpressionInput';
 import { CspSettings } from '../models/CspSettings';
@@ -557,6 +572,7 @@ import { FetchConnectionDiffStatusResponse } from '../models/FetchConnectionDiff
 import { FetchLiveboardDataRequest   , FetchLiveboardDataRequestDataFormatEnum        } from '../models/FetchLiveboardDataRequest';
 import { FetchLiveboardSqlQueryRequest } from '../models/FetchLiveboardSqlQueryRequest';
 import { FetchLogsRequest, FetchLogsRequestLogTypeEnum      } from '../models/FetchLogsRequest';
+import { FetchObjectPrivilegesRequest } from '../models/FetchObjectPrivilegesRequest';
 import { FetchPermissionsOfPrincipalsRequest    , FetchPermissionsOfPrincipalsRequestDefaultMetadataTypeEnum   } from '../models/FetchPermissionsOfPrincipalsRequest';
 import { FetchPermissionsOnMetadataRequest } from '../models/FetchPermissionsOnMetadataRequest';
 import { FilterRules , FilterRulesOperatorEnum    } from '../models/FilterRules';
@@ -584,7 +600,7 @@ import { HeaderUpdateInput  , HeaderUpdateInputTypeEnum    } from '../models/Hea
 import { ImportEPackAsyncTaskStatus     , ImportEPackAsyncTaskStatusTaskStatusEnum   , ImportEPackAsyncTaskStatusImportPolicyEnum          } from '../models/ImportEPackAsyncTaskStatus';
 import { ImportMetadataTMLAsyncRequest   , ImportMetadataTMLAsyncRequestImportPolicyEnum     } from '../models/ImportMetadataTMLAsyncRequest';
 import { ImportMetadataTMLRequest , ImportMetadataTMLRequestImportPolicyEnum       } from '../models/ImportMetadataTMLRequest';
-import { ImportUser   , ImportUserAccountTypeEnum  , ImportUserAccountStatusEnum     , ImportUserVisibilityEnum       , ImportUserPreferredLocaleEnum   } from '../models/ImportUser';
+import { ImportUser   , ImportUserAccountTypeEnum  , ImportUserAccountStatusEnum     , ImportUserVisibilityEnum       , ImportUserPreferredLocaleEnum    } from '../models/ImportUser';
 import { ImportUserGroupsRequest } from '../models/ImportUserGroupsRequest';
 import { ImportUserGroupsResponse } from '../models/ImportUserGroupsResponse';
 import { ImportUserType } from '../models/ImportUserType';
@@ -602,6 +618,7 @@ import { LiveboardOptions } from '../models/LiveboardOptions';
 import { LiveboardOptionsInput } from '../models/LiveboardOptionsInput';
 import { LogResponse } from '../models/LogResponse';
 import { LoginRequest } from '../models/LoginRequest';
+import { ManageObjectPrivilegeRequest, ManageObjectPrivilegeRequestOperationEnum  , ManageObjectPrivilegeRequestMetadataTypeEnum  , ManageObjectPrivilegeRequestObjectPrivilegeTypesEnum     } from '../models/ManageObjectPrivilegeRequest';
 import { MetadataAssociationItem } from '../models/MetadataAssociationItem';
 import { MetadataContext } from '../models/MetadataContext';
 import { MetadataInput , MetadataInputTypeEnum   } from '../models/MetadataInput';
@@ -614,6 +631,8 @@ import { ModelTableList } from '../models/ModelTableList';
 import { NLInstructionsInfo , NLInstructionsInfoScopeEnum   } from '../models/NLInstructionsInfo';
 import { NLInstructionsInfoInput , NLInstructionsInfoInputScopeEnum   } from '../models/NLInstructionsInfoInput';
 import { ObjectIDAndName } from '../models/ObjectIDAndName';
+import { ObjectPrivilegesMetadataInput, ObjectPrivilegesMetadataInputTypeEnum    } from '../models/ObjectPrivilegesMetadataInput';
+import { ObjectPrivilegesOfMetadataResponse } from '../models/ObjectPrivilegesOfMetadataResponse';
 import { Org } from '../models/Org';
 import { OrgChannelConfigInput , OrgChannelConfigInputOperationEnum   , OrgChannelConfigInputResetEventsEnum   } from '../models/OrgChannelConfigInput';
 import { OrgChannelConfigResponse } from '../models/OrgChannelConfigResponse';
@@ -738,6 +757,10 @@ import { SortOptions, SortOptionsFieldNameEnum  , SortOptionsOrderEnum   } from 
 import { SortingOptions } from '../models/SortingOptions';
 import { SqlQuery } from '../models/SqlQuery';
 import { SqlQueryResponse  , SqlQueryResponseMetadataTypeEnum    } from '../models/SqlQueryResponse';
+import { StorageConfig } from '../models/StorageConfig';
+import { StorageConfigInput } from '../models/StorageConfigInput';
+import { StorageDestination, StorageDestinationStorageTypeEnum    } from '../models/StorageDestination';
+import { StorageDestinationInput, StorageDestinationInputStorageTypeEnum    } from '../models/StorageDestinationInput';
 import { SystemConfig } from '../models/SystemConfig';
 import { SystemInfo } from '../models/SystemInfo';
 import { SystemOverrideInfo } from '../models/SystemOverrideInfo';
@@ -751,6 +774,7 @@ import { TokenValidationResponse } from '../models/TokenValidationResponse';
 import { URL } from '../models/URL';
 import { URLInput } from '../models/URLInput';
 import { URLInputMandatory } from '../models/URLInputMandatory';
+import { UnassignTagRequest } from '../models/UnassignTagRequest';
 import { UnparameterizeMetadataRequest, UnparameterizeMetadataRequestMetadataTypeEnum   , UnparameterizeMetadataRequestFieldTypeEnum     } from '../models/UnparameterizeMetadataRequest';
 import { UnpublishMetadataRequest } from '../models/UnpublishMetadataRequest';
 import { UpdateCalendarRequest, UpdateCalendarRequestUpdateMethodEnum     , UpdateCalendarRequestCalendarTypeEnum  , UpdateCalendarRequestMonthOffsetEnum  , UpdateCalendarRequestStartDayOfWeekEnum     } from '../models/UpdateCalendarRequest';
@@ -777,11 +801,11 @@ import { UpdateScheduleRequestRecipientDetails } from '../models/UpdateScheduleR
 import { UpdateSystemConfigRequest } from '../models/UpdateSystemConfigRequest';
 import { UpdateTagRequest } from '../models/UpdateTagRequest';
 import { UpdateUserGroupRequest    , UpdateUserGroupRequestPrivilegesEnum   , UpdateUserGroupRequestTypeEnum   , UpdateUserGroupRequestVisibilityEnum   , UpdateUserGroupRequestOperationEnum   } from '../models/UpdateUserGroupRequest';
-import { UpdateUserRequest  , UpdateUserRequestVisibilityEnum   , UpdateUserRequestAccountStatusEnum     , UpdateUserRequestAccountTypeEnum      , UpdateUserRequestOperationEnum  , UpdateUserRequestPreferredLocaleEnum     } from '../models/UpdateUserRequest';
+import { UpdateUserRequest  , UpdateUserRequestVisibilityEnum   , UpdateUserRequestAccountStatusEnum     , UpdateUserRequestAccountTypeEnum      , UpdateUserRequestOperationEnum  , UpdateUserRequestPreferredLocaleEnum      } from '../models/UpdateUserRequest';
 import { UpdateVariableRequest } from '../models/UpdateVariableRequest';
 import { UpdateVariableValuesRequest } from '../models/UpdateVariableValuesRequest';
-import { UpdateWebhookConfigurationRequest    , UpdateWebhookConfigurationRequestEventsEnum     } from '../models/UpdateWebhookConfigurationRequest';
-import { User   , UserVisibilityEnum         , UserAccountTypeEnum  , UserAccountStatusEnum                  , UserParentTypeEnum                   } from '../models/User';
+import { UpdateWebhookConfigurationRequest    , UpdateWebhookConfigurationRequestEventsEnum      } from '../models/UpdateWebhookConfigurationRequest';
+import { User   , UserVisibilityEnum         , UserAccountTypeEnum  , UserAccountStatusEnum                  , UserParentTypeEnum                    } from '../models/User';
 import { UserGroup } from '../models/UserGroup';
 import { UserGroupResponse                     , UserGroupResponseParentTypeEnum      , UserGroupResponseTypeEnum   , UserGroupResponseVisibilityEnum    } from '../models/UserGroupResponse';
 import { UserInfo } from '../models/UserInfo';
@@ -795,7 +819,7 @@ import { Variable  , VariableVariableTypeEnum     } from '../models/Variable';
 import { VariableDetailInput , VariableDetailInputTypeEnum    } from '../models/VariableDetailInput';
 import { VariableUpdateAssignmentInput  , VariableUpdateAssignmentInputOperationEnum   } from '../models/VariableUpdateAssignmentInput';
 import { VariableUpdateScopeInput , VariableUpdateScopeInputPrincipalTypeEnum      } from '../models/VariableUpdateScopeInput';
-import { VariableValue   , VariableValuePrincipalTypeEnum     } from '../models/VariableValue';
+import { VariableValue   , VariableValuePrincipalTypeEnum      } from '../models/VariableValue';
 import { VariableValues } from '../models/VariableValues';
 import { WebhookAuthApiKey } from '../models/WebhookAuthApiKey';
 import { WebhookAuthApiKeyInput } from '../models/WebhookAuthApiKeyInput';
@@ -809,7 +833,7 @@ import { WebhookDeleteFailure } from '../models/WebhookDeleteFailure';
 import { WebhookDeleteResponse } from '../models/WebhookDeleteResponse';
 import { WebhookOrg } from '../models/WebhookOrg';
 import { WebhookPagination } from '../models/WebhookPagination';
-import { WebhookResponse      , WebhookResponseEventsEnum         } from '../models/WebhookResponse';
+import { WebhookResponse      , WebhookResponseEventsEnum          } from '../models/WebhookResponse';
 import { WebhookSearchResponse } from '../models/WebhookSearchResponse';
 import { WebhookSignatureVerification, WebhookSignatureVerificationTypeEnum   , WebhookSignatureVerificationAlgorithmEnum    } from '../models/WebhookSignatureVerification';
 import { WebhookSignatureVerificationInput, WebhookSignatureVerificationInputTypeEnum   , WebhookSignatureVerificationInputAlgorithmEnum    } from '../models/WebhookSignatureVerificationInput';
@@ -875,6 +899,7 @@ let enumsMap: Set<string> = new Set<string>([
     "CreateWebhookConfigurationRequestEventsEnum",
     "CreateWebhookConfigurationRequestSignatureVerificationTypeEnum",
     "CreateWebhookConfigurationRequestSignatureVerificationAlgorithmEnum",
+    "CreateWebhookConfigurationRequestStorageDestinationStorageTypeEnum",
     "CustomActionMetadataTypeInputTypeEnum",
     "DeleteMetadataTypeInputTypeEnum",
     "DeployCommitRequestDeployTypeEnum",
@@ -921,6 +946,9 @@ let enumsMap: Set<string> = new Set<string>([
     "ImportUserVisibilityEnum",
     "ImportUserPreferredLocaleEnum",
     "JWTMetadataObjectTypeEnum",
+    "ManageObjectPrivilegeRequestOperationEnum",
+    "ManageObjectPrivilegeRequestMetadataTypeEnum",
+    "ManageObjectPrivilegeRequestObjectPrivilegeTypesEnum",
     "MetadataInputTypeEnum",
     "MetadataListItemInputTypeEnum",
     "MetadataListItemInputSubtypesEnum",
@@ -931,6 +959,7 @@ let enumsMap: Set<string> = new Set<string>([
     "MetadataSearchSortOptionsOrderEnum",
     "NLInstructionsInfoScopeEnum",
     "NLInstructionsInfoInputScopeEnum",
+    "ObjectPrivilegesMetadataInputTypeEnum",
     "OrgChannelConfigInputOperationEnum",
     "OrgChannelConfigInputResetEventsEnum",
     "OrgPreferenceSearchCriteriaInputEventTypesEnum",
@@ -1004,6 +1033,8 @@ let enumsMap: Set<string> = new Set<string>([
     "SortOptionsFieldNameEnum",
     "SortOptionsOrderEnum",
     "SqlQueryResponseMetadataTypeEnum",
+    "StorageDestinationStorageTypeEnum",
+    "StorageDestinationInputStorageTypeEnum",
     "TagMetadataTypeInputTypeEnum",
     "TokenAccessScopeObjectTypeEnum",
     "UnparameterizeMetadataRequestMetadataTypeEnum",
@@ -1082,6 +1113,8 @@ let typeMap: {[index: string]: any} = {
     "Author": Author,
     "AuthorMetadataTypeInput": AuthorMetadataTypeInput,
     "AuthorType": AuthorType,
+    "AwsS3Config": AwsS3Config,
+    "AwsS3ConfigInput": AwsS3ConfigInput,
     "BasicAuth": BasicAuth,
     "BasicAuthInput": BasicAuthInput,
     "CALLBACK": CALLBACK,
@@ -1148,6 +1181,7 @@ let typeMap: {[index: string]: any} = {
     "CreateWebhookConfigurationRequest": CreateWebhookConfigurationRequest,
     "CreateWebhookConfigurationRequestAuthentication": CreateWebhookConfigurationRequestAuthentication,
     "CreateWebhookConfigurationRequestSignatureVerification": CreateWebhookConfigurationRequestSignatureVerification,
+    "CreateWebhookConfigurationRequestStorageDestination": CreateWebhookConfigurationRequestStorageDestination,
     "CronExpression": CronExpression,
     "CronExpressionInput": CronExpressionInput,
     "CspSettings": CspSettings,
@@ -1208,6 +1242,7 @@ let typeMap: {[index: string]: any} = {
     "FetchLiveboardDataRequest": FetchLiveboardDataRequest,
     "FetchLiveboardSqlQueryRequest": FetchLiveboardSqlQueryRequest,
     "FetchLogsRequest": FetchLogsRequest,
+    "FetchObjectPrivilegesRequest": FetchObjectPrivilegesRequest,
     "FetchPermissionsOfPrincipalsRequest": FetchPermissionsOfPrincipalsRequest,
     "FetchPermissionsOnMetadataRequest": FetchPermissionsOnMetadataRequest,
     "FilterRules": FilterRules,
@@ -1253,6 +1288,7 @@ let typeMap: {[index: string]: any} = {
     "LiveboardOptionsInput": LiveboardOptionsInput,
     "LogResponse": LogResponse,
     "LoginRequest": LoginRequest,
+    "ManageObjectPrivilegeRequest": ManageObjectPrivilegeRequest,
     "MetadataAssociationItem": MetadataAssociationItem,
     "MetadataContext": MetadataContext,
     "MetadataInput": MetadataInput,
@@ -1265,6 +1301,8 @@ let typeMap: {[index: string]: any} = {
     "NLInstructionsInfo": NLInstructionsInfo,
     "NLInstructionsInfoInput": NLInstructionsInfoInput,
     "ObjectIDAndName": ObjectIDAndName,
+    "ObjectPrivilegesMetadataInput": ObjectPrivilegesMetadataInput,
+    "ObjectPrivilegesOfMetadataResponse": ObjectPrivilegesOfMetadataResponse,
     "Org": Org,
     "OrgChannelConfigInput": OrgChannelConfigInput,
     "OrgChannelConfigResponse": OrgChannelConfigResponse,
@@ -1389,6 +1427,10 @@ let typeMap: {[index: string]: any} = {
     "SortingOptions": SortingOptions,
     "SqlQuery": SqlQuery,
     "SqlQueryResponse": SqlQueryResponse,
+    "StorageConfig": StorageConfig,
+    "StorageConfigInput": StorageConfigInput,
+    "StorageDestination": StorageDestination,
+    "StorageDestinationInput": StorageDestinationInput,
     "SystemConfig": SystemConfig,
     "SystemInfo": SystemInfo,
     "SystemOverrideInfo": SystemOverrideInfo,
@@ -1402,6 +1444,7 @@ let typeMap: {[index: string]: any} = {
     "URL": URL,
     "URLInput": URLInput,
     "URLInputMandatory": URLInputMandatory,
+    "UnassignTagRequest": UnassignTagRequest,
     "UnparameterizeMetadataRequest": UnparameterizeMetadataRequest,
     "UnpublishMetadataRequest": UnpublishMetadataRequest,
     "UpdateCalendarRequest": UpdateCalendarRequest,

@@ -81,6 +81,8 @@ models/AuthenticationInput.ts
 models/Author.ts
 models/AuthorMetadataTypeInput.ts
 models/AuthorType.ts
+models/AwsS3Config.ts
+models/AwsS3ConfigInput.ts
 models/BasicAuth.ts
 models/BasicAuthInput.ts
 models/CALLBACK.ts
@@ -147,6 +149,7 @@ models/CreateVariableRequest.ts
 models/CreateWebhookConfigurationRequest.ts
 models/CreateWebhookConfigurationRequestAuthentication.ts
 models/CreateWebhookConfigurationRequestSignatureVerification.ts
+models/CreateWebhookConfigurationRequestStorageDestination.ts
 models/CronExpression.ts
 models/CronExpressionInput.ts
 models/CspSettings.ts
@@ -207,6 +210,7 @@ models/FetchConnectionDiffStatusResponse.ts
 models/FetchLiveboardDataRequest.ts
 models/FetchLiveboardSqlQueryRequest.ts
 models/FetchLogsRequest.ts
+models/FetchObjectPrivilegesRequest.ts
 models/FetchPermissionsOfPrincipalsRequest.ts
 models/FetchPermissionsOnMetadataRequest.ts
 models/FilterRules.ts
@@ -252,6 +256,7 @@ models/LiveboardOptions.ts
 models/LiveboardOptionsInput.ts
 models/LogResponse.ts
 models/LoginRequest.ts
+models/ManageObjectPrivilegeRequest.ts
 models/MetadataAssociationItem.ts
 models/MetadataContext.ts
 models/MetadataInput.ts
@@ -264,6 +269,8 @@ models/ModelTableList.ts
 models/NLInstructionsInfo.ts
 models/NLInstructionsInfoInput.ts
 models/ObjectIDAndName.ts
+models/ObjectPrivilegesMetadataInput.ts
+models/ObjectPrivilegesOfMetadataResponse.ts
 models/ObjectSerializer.ts
 models/Org.ts
 models/OrgChannelConfigInput.ts
@@ -389,6 +396,10 @@ models/SortOptions.ts
 models/SortingOptions.ts
 models/SqlQuery.ts
 models/SqlQueryResponse.ts
+models/StorageConfig.ts
+models/StorageConfigInput.ts
+models/StorageDestination.ts
+models/StorageDestinationInput.ts
 models/SystemConfig.ts
 models/SystemInfo.ts
 models/SystemOverrideInfo.ts
@@ -402,6 +413,7 @@ models/TokenValidationResponse.ts
 models/URL.ts
 models/URLInput.ts
 models/URLInputMandatory.ts
+models/UnassignTagRequest.ts
 models/UnparameterizeMetadataRequest.ts
 models/UnpublishMetadataRequest.ts
 models/UpdateCalendarRequest.ts

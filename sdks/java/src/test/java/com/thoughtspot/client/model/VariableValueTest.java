@@ -46,6 +46,12 @@ public class VariableValueTest {
         // TODO: test principalIdentifier
     }
 
+    /** Test the property 'modelIdentifier' */
+    @Test
+    public void modelIdentifierTest() {
+        // TODO: test modelIdentifier
+    }
+
     /** Test the property 'priority' */
     @Test
     public void priorityTest() {

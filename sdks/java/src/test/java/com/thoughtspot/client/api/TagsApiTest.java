@@ -9,6 +9,7 @@ import com.thoughtspot.client.model.AssignTagRequest;
 import com.thoughtspot.client.model.CreateTagRequest;
 import com.thoughtspot.client.model.SearchTagsRequest;
 import com.thoughtspot.client.model.Tag;
+import com.thoughtspot.client.model.UnassignTagRequest;
 import com.thoughtspot.client.model.UpdateTagRequest;
 import java.util.List;
 import org.junit.jupiter.api.Disabled;
@@ -89,8 +90,8 @@ public class TagsApiTest {
      */
     @Test
     public void unassignTagTest() throws ApiException {
-        AssignTagRequest assignTagRequest = null;
-        api.unassignTag(assignTagRequest);
+        UnassignTagRequest unassignTagRequest = null;
+        api.unassignTag(unassignTagRequest);
         // TODO: test validations
     }
 

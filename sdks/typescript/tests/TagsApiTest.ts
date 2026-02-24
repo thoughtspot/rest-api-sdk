@@ -162,7 +162,7 @@ describe('TagsApi', function() {
               var data;
               try {
                 data = await instance.unassignTag(
-                    // assignTagRequest AssignTagRequest
+                    // unassignTagRequest UnassignTagRequest
                      test.Body   
                 )
               } catch (er) {
@@ -172,7 +172,7 @@ describe('TagsApi', function() {
             } else {
                 await expect(
                   instance.unassignTag(
-                    // assignTagRequest AssignTagRequest
+                    // unassignTagRequest UnassignTagRequest
                      test.Body   
                   )
                 ).to.be.rejectedWith(Error);

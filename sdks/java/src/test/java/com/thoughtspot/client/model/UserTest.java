@@ -262,6 +262,12 @@ public class UserTest {
         // TODO: test preferredLocale
     }
 
+    /** Test the property 'useBrowserLanguage' */
+    @Test
+    public void useBrowserLanguageTest() {
+        // TODO: test useBrowserLanguage
+    }
+
     /** Test the property 'extendedProperties' */
     @Test
     public void extendedPropertiesTest() {

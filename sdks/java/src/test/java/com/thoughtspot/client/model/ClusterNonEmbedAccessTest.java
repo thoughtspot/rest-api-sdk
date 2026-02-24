@@ -21,4 +21,10 @@ public class ClusterNonEmbedAccessTest {
     public void blockFullAppAccessTest() {
         // TODO: test blockFullAppAccess
     }
+
+    /** Test the property 'groupsWithAccess' */
+    @Test
+    public void groupsWithAccessTest() {
+        // TODO: test groupsWithAccess
+    }
 }

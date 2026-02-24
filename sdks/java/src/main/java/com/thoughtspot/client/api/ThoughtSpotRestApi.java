@@ -77,6 +77,7 @@ import com.thoughtspot.client.model.FetchConnectionDiffStatusResponse;
 import com.thoughtspot.client.model.FetchLiveboardDataRequest;
 import com.thoughtspot.client.model.FetchLiveboardSqlQueryRequest;
 import com.thoughtspot.client.model.FetchLogsRequest;
+import com.thoughtspot.client.model.FetchObjectPrivilegesRequest;
 import com.thoughtspot.client.model.FetchPermissionsOfPrincipalsRequest;
 import com.thoughtspot.client.model.FetchPermissionsOnMetadataRequest;
 import com.thoughtspot.client.model.ForceLogoutUsersRequest;
@@ -99,7 +100,9 @@ import com.thoughtspot.client.model.ImportUsersResponse;
 import com.thoughtspot.client.model.LiveboardDataResponse;
 import com.thoughtspot.client.model.LogResponse;
 import com.thoughtspot.client.model.LoginRequest;
+import com.thoughtspot.client.model.ManageObjectPrivilegeRequest;
 import com.thoughtspot.client.model.MetadataSearchResponse;
+import com.thoughtspot.client.model.ObjectPrivilegesOfMetadataResponse;
 import com.thoughtspot.client.model.OrgResponse;
 import com.thoughtspot.client.model.ParameterizeMetadataRequest;
 import com.thoughtspot.client.model.PermissionOfMetadataResponse;
@@ -156,6 +159,7 @@ import com.thoughtspot.client.model.SystemOverrideInfo;
 import com.thoughtspot.client.model.Tag;
 import com.thoughtspot.client.model.Token;
 import com.thoughtspot.client.model.TokenValidationResponse;
+import com.thoughtspot.client.model.UnassignTagRequest;
 import com.thoughtspot.client.model.UnparameterizeMetadataRequest;
 import com.thoughtspot.client.model.UnpublishMetadataRequest;
 import com.thoughtspot.client.model.UpdateCalendarRequest;
@@ -3891,7 +3895,7 @@ public class ThoughtSpotRestApi {
      * \&quot;https://your-website.com/\&quot;, \&quot;company_privacy_policy_url\&quot; :
      * \&quot;https://link-to-privacy-policy.com/\&quot;, \&quot;contact_support_url\&quot;:
      * \&quot;https://link-to-contact-support.com/\&quot;, \&quot;hide_contact_support_url\&quot;:
-     * false } } &#x60;&#x60;&#x60;
+     * false, \&quot;hide_logo_url\&quot; : false } } &#x60;&#x60;&#x60;
      *
      * @param createEmailCustomizationRequest (required)
      * @return CreateEmailCustomizationResponse
@@ -3943,7 +3947,7 @@ public class ThoughtSpotRestApi {
      * \&quot;https://your-website.com/\&quot;, \&quot;company_privacy_policy_url\&quot; :
      * \&quot;https://link-to-privacy-policy.com/\&quot;, \&quot;contact_support_url\&quot;:
      * \&quot;https://link-to-contact-support.com/\&quot;, \&quot;hide_contact_support_url\&quot;:
-     * false } } &#x60;&#x60;&#x60;
+     * false, \&quot;hide_logo_url\&quot; : false } } &#x60;&#x60;&#x60;
      *
      * @param createEmailCustomizationRequest (required)
      * @return ApiResponse&lt;CreateEmailCustomizationResponse&gt;
@@ -3996,7 +4000,7 @@ public class ThoughtSpotRestApi {
      * \&quot;https://your-website.com/\&quot;, \&quot;company_privacy_policy_url\&quot; :
      * \&quot;https://link-to-privacy-policy.com/\&quot;, \&quot;contact_support_url\&quot;:
      * \&quot;https://link-to-contact-support.com/\&quot;, \&quot;hide_contact_support_url\&quot;:
-     * false } } &#x60;&#x60;&#x60;
+     * false, \&quot;hide_logo_url\&quot; : false } } &#x60;&#x60;&#x60;
      *
      * @param createEmailCustomizationRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -10717,35 +10721,31 @@ public class ThoughtSpotRestApi {
 
     /**
      * Version: 9.0.0.cl or later Exports a Liveboard and its visualizations in PDF, PNG, CSV, or
-     * XLSX file format. Requires at least view access to the Liveboard. #### Usage guidelines In
-     * the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report
-     * with specific visualizations, add GUIDs or names of the visualizations. The default
-     * &#x60;file_format&#x60; is CSV. For PDF exports, you can specify additional parameters to
-     * customize the page orientation and include or exclude the cover page, logo, footer text, and
-     * page numbers. Similar customization options are available for PNG exports. CSV and XLSX
-     * exports do not support customization options. **NOTE**: The downloadable file returned in API
-     * response file is extensionless. Please rename the downloaded file by typing in the relevant
-     * extension. Optionally, you can define [runtime
+     * XLSX file format. The default &#x60;file_format&#x60; is CSV. Requires at least view access
+     * to the Liveboard. #### Usage guidelines In the request body, specify the GUID or name of the
+     * Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of
+     * the visualizations. **NOTE**: * The downloadable file returned in API response file is
+     * extensionless. Please rename the downloaded file by typing in the relevant extension. *
+     * Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
-     * to apply to the Answer data. To include unsaved changes in the report, pass the
+     * to apply to the Answer data. * To include unsaved changes in the report, pass the
      * &#x60;transient_pinboard_content&#x60; script generated from the
      * &#x60;getExportRequestForCurrentPinboard&#x60; method in the Visual Embed SDK. Upon
      * successful execution, the API returns the report with unsaved changes, including ad hoc
      * changes to visualizations. For more information, see [Liveboard Report
      * API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
-     * **NOTE**: Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in
-     * the PNG format in the resolution of your choice. To enable this on your instance, contact
-     * ThoughtSpot support. When this feature is enabled, the options
+     * * Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in the PNG
+     * format in the resolution of your choice. To enable this on your instance, contact ThoughtSpot
+     * support. When this feature is enabled, the options
      * &#x60;include_cover_page&#x60;,&#x60;include_filter_page&#x60; within the
-     * &#x60;png_options&#x60; will not be available for PNG exports. **NOTE**: Starting with the
-     * ThoughtSpot Cloud 26.2.0.cl release, Liveboards can be exported in CSV format. All
-     * visualizations in the Liveboard can be exported as individual CSV files. If multiple
-     * visualizations are selected or if the entire Liveboard is exported, the output is returned as
-     * a .zip file containing the CSV files for each visualization. **NOTE**: Starting with the
-     * ThoughtSpot Cloud 26.2.0.cl release, Liveboards can be exported in XLSX format. All selected
-     * visualizations are consolidated into a single Excel workbook (.xlsx), with each visualization
-     * placed in its own worksheet (tab). XLSX exports are limited to 255 worksheets (tabs) per
-     * workbook.
+     * &#x60;png_options&#x60; will not be available for PNG exports. * Starting with the
+     * ThoughtSpot Cloud 26.2.0.cl release, * Liveboards can be exported in CSV format. * All
+     * visualizations within a Liveboard can be exported as individual CSV files. * When exporting
+     * multiple visualizations or the entire Liveboard, the system returns the report as a
+     * compressed ZIP file containing the separate CSV files for each visualization. * Liveboards
+     * can also be exported in XLSX format. * All selected visualizations are consolidated into a
+     * single Excel workbook (.xlsx), with each visualization placed in its own worksheet (tab). *
+     * XLSX exports are limited to a maximum of 255 worksheets (tabs) per workbook.
      *
      * @param exportLiveboardReportRequest (required)
      * @return File
@@ -10771,35 +10771,31 @@ public class ThoughtSpotRestApi {
 
     /**
      * Version: 9.0.0.cl or later Exports a Liveboard and its visualizations in PDF, PNG, CSV, or
-     * XLSX file format. Requires at least view access to the Liveboard. #### Usage guidelines In
-     * the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report
-     * with specific visualizations, add GUIDs or names of the visualizations. The default
-     * &#x60;file_format&#x60; is CSV. For PDF exports, you can specify additional parameters to
-     * customize the page orientation and include or exclude the cover page, logo, footer text, and
-     * page numbers. Similar customization options are available for PNG exports. CSV and XLSX
-     * exports do not support customization options. **NOTE**: The downloadable file returned in API
-     * response file is extensionless. Please rename the downloaded file by typing in the relevant
-     * extension. Optionally, you can define [runtime
+     * XLSX file format. The default &#x60;file_format&#x60; is CSV. Requires at least view access
+     * to the Liveboard. #### Usage guidelines In the request body, specify the GUID or name of the
+     * Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of
+     * the visualizations. **NOTE**: * The downloadable file returned in API response file is
+     * extensionless. Please rename the downloaded file by typing in the relevant extension. *
+     * Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
-     * to apply to the Answer data. To include unsaved changes in the report, pass the
+     * to apply to the Answer data. * To include unsaved changes in the report, pass the
      * &#x60;transient_pinboard_content&#x60; script generated from the
      * &#x60;getExportRequestForCurrentPinboard&#x60; method in the Visual Embed SDK. Upon
      * successful execution, the API returns the report with unsaved changes, including ad hoc
      * changes to visualizations. For more information, see [Liveboard Report
      * API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
-     * **NOTE**: Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in
-     * the PNG format in the resolution of your choice. To enable this on your instance, contact
-     * ThoughtSpot support. When this feature is enabled, the options
+     * * Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in the PNG
+     * format in the resolution of your choice. To enable this on your instance, contact ThoughtSpot
+     * support. When this feature is enabled, the options
      * &#x60;include_cover_page&#x60;,&#x60;include_filter_page&#x60; within the
-     * &#x60;png_options&#x60; will not be available for PNG exports. **NOTE**: Starting with the
-     * ThoughtSpot Cloud 26.2.0.cl release, Liveboards can be exported in CSV format. All
-     * visualizations in the Liveboard can be exported as individual CSV files. If multiple
-     * visualizations are selected or if the entire Liveboard is exported, the output is returned as
-     * a .zip file containing the CSV files for each visualization. **NOTE**: Starting with the
-     * ThoughtSpot Cloud 26.2.0.cl release, Liveboards can be exported in XLSX format. All selected
-     * visualizations are consolidated into a single Excel workbook (.xlsx), with each visualization
-     * placed in its own worksheet (tab). XLSX exports are limited to 255 worksheets (tabs) per
-     * workbook.
+     * &#x60;png_options&#x60; will not be available for PNG exports. * Starting with the
+     * ThoughtSpot Cloud 26.2.0.cl release, * Liveboards can be exported in CSV format. * All
+     * visualizations within a Liveboard can be exported as individual CSV files. * When exporting
+     * multiple visualizations or the entire Liveboard, the system returns the report as a
+     * compressed ZIP file containing the separate CSV files for each visualization. * Liveboards
+     * can also be exported in XLSX format. * All selected visualizations are consolidated into a
+     * single Excel workbook (.xlsx), with each visualization placed in its own worksheet (tab). *
+     * XLSX exports are limited to a maximum of 255 worksheets (tabs) per workbook.
      *
      * @param exportLiveboardReportRequest (required)
      * @return ApiResponse&lt;File&gt;
@@ -10826,35 +10822,31 @@ public class ThoughtSpotRestApi {
 
     /**
      * (asynchronously) Version: 9.0.0.cl or later Exports a Liveboard and its visualizations in
-     * PDF, PNG, CSV, or XLSX file format. Requires at least view access to the Liveboard. ####
-     * Usage guidelines In the request body, specify the GUID or name of the Liveboard. To generate
-     * a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.
-     * The default &#x60;file_format&#x60; is CSV. For PDF exports, you can specify additional
-     * parameters to customize the page orientation and include or exclude the cover page, logo,
-     * footer text, and page numbers. Similar customization options are available for PNG exports.
-     * CSV and XLSX exports do not support customization options. **NOTE**: The downloadable file
-     * returned in API response file is extensionless. Please rename the downloaded file by typing
-     * in the relevant extension. Optionally, you can define [runtime
+     * PDF, PNG, CSV, or XLSX file format. The default &#x60;file_format&#x60; is CSV. Requires at
+     * least view access to the Liveboard. #### Usage guidelines In the request body, specify the
+     * GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations,
+     * add GUIDs or names of the visualizations. **NOTE**: * The downloadable file returned in API
+     * response file is extensionless. Please rename the downloaded file by typing in the relevant
+     * extension. * Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
-     * to apply to the Answer data. To include unsaved changes in the report, pass the
+     * to apply to the Answer data. * To include unsaved changes in the report, pass the
      * &#x60;transient_pinboard_content&#x60; script generated from the
      * &#x60;getExportRequestForCurrentPinboard&#x60; method in the Visual Embed SDK. Upon
      * successful execution, the API returns the report with unsaved changes, including ad hoc
      * changes to visualizations. For more information, see [Liveboard Report
      * API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
-     * **NOTE**: Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in
-     * the PNG format in the resolution of your choice. To enable this on your instance, contact
-     * ThoughtSpot support. When this feature is enabled, the options
+     * * Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in the PNG
+     * format in the resolution of your choice. To enable this on your instance, contact ThoughtSpot
+     * support. When this feature is enabled, the options
      * &#x60;include_cover_page&#x60;,&#x60;include_filter_page&#x60; within the
-     * &#x60;png_options&#x60; will not be available for PNG exports. **NOTE**: Starting with the
-     * ThoughtSpot Cloud 26.2.0.cl release, Liveboards can be exported in CSV format. All
-     * visualizations in the Liveboard can be exported as individual CSV files. If multiple
-     * visualizations are selected or if the entire Liveboard is exported, the output is returned as
-     * a .zip file containing the CSV files for each visualization. **NOTE**: Starting with the
-     * ThoughtSpot Cloud 26.2.0.cl release, Liveboards can be exported in XLSX format. All selected
-     * visualizations are consolidated into a single Excel workbook (.xlsx), with each visualization
-     * placed in its own worksheet (tab). XLSX exports are limited to 255 worksheets (tabs) per
-     * workbook.
+     * &#x60;png_options&#x60; will not be available for PNG exports. * Starting with the
+     * ThoughtSpot Cloud 26.2.0.cl release, * Liveboards can be exported in CSV format. * All
+     * visualizations within a Liveboard can be exported as individual CSV files. * When exporting
+     * multiple visualizations or the entire Liveboard, the system returns the report as a
+     * compressed ZIP file containing the separate CSV files for each visualization. * Liveboards
+     * can also be exported in XLSX format. * All selected visualizations are consolidated into a
+     * single Excel workbook (.xlsx), with each visualization placed in its own worksheet (tab). *
+     * XLSX exports are limited to a maximum of 255 worksheets (tabs) per workbook.
      *
      * @param exportLiveboardReportRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -13016,6 +13008,357 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
+     * Build call for fetchObjectPrivileges
+     *
+     * @param fetchObjectPrivilegesRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Fetching defined object privileges of metadata objects is successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call fetchObjectPrivilegesCall(
+            FetchObjectPrivilegesRequest fetchObjectPrivilegesRequest, final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = fetchObjectPrivilegesRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/security/metadata/fetch-object-privileges";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call fetchObjectPrivilegesValidateBeforeCall(
+            FetchObjectPrivilegesRequest fetchObjectPrivilegesRequest, final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'fetchObjectPrivilegesRequest' is set
+        if (fetchObjectPrivilegesRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'fetchObjectPrivilegesRequest' when calling"
+                            + " fetchObjectPrivileges(Async)");
+        }
+
+        return fetchObjectPrivilegesCall(fetchObjectPrivilegesRequest, _callback);
+    }
+
+    /**
+     * Version: 26.3.0.cl or later This API fetches the object privileges present for the given list
+     * of principals (user or group), on the given set of objects. It supports pagination, which can
+     * be enabled and configured using the request parameters. It provides users access to certain
+     * features based on privilege based access control. #### Usage guidelines - Specify the
+     * &#x60;type&#x60; (&#x60;USER&#x60; or &#x60;USER_GROUP&#x60;) and &#x60;identifier&#x60;
+     * (either GUID or name) of the principals for which you want to retrieve object privilege
+     * information in the &#x60;principals&#x60; array. - Specify the &#x60;type&#x60;
+     * (&#x60;LOGICAL_TABLE&#x60;) and &#x60;identifier&#x60; (either GUID or name) of the metadata
+     * objects for which you want to retrieve object privilege information in the
+     * &#x60;metadata&#x60; array. Only &#x60;LOGICAL_TABLE&#x60; metadata type is supported for
+     * now. It may be extended for other metadata types in future. - To control the offset from
+     * where principals have to be fetched, use &#x60;record_offset&#x60;. When
+     * &#x60;record_offset&#x60; is 0, information is fetched from the beginning. - To control the
+     * number of principals to be fetched, use &#x60;record_size&#x60;. Default
+     * &#x60;record_size&#x60; is 20. - Ensure &#x60;record_offset&#x60; for a subsequent request is
+     * one more than the value of &#x60;record_size&#x60; of the previous request. - Ensure using
+     * correct Authorization Bearer Token corresponding to specific user &amp; org. #### Example
+     * request &#x60;&#x60;&#x60;json { \&quot;principals\&quot;: [ { \&quot;type\&quot;:
+     * \&quot;type-1\&quot;, \&quot;identifier\&quot;: \&quot;principal-guid-or-name-1\&quot; }, {
+     * \&quot;type\&quot;: \&quot;type-2\&quot;, \&quot;identifier\&quot;:
+     * \&quot;principal-guid-or-name-2\&quot; } ], \&quot;metadata\&quot;: [ { \&quot;type\&quot;:
+     * \&quot;metadata-type-1\&quot;, \&quot;identifier\&quot;:
+     * \&quot;metadata-guid-or-name-1\&quot; }, { \&quot;type\&quot;: \&quot;metadata-type-2\&quot;,
+     * \&quot;identifier\&quot;: \&quot;metadata-guid-or-name-2\&quot; } ],
+     * \&quot;record_offset\&quot;: 0, \&quot;record_size\&quot;: 20 } &#x60;&#x60;&#x60; ####
+     * Response format The API returns an array of &#x60;metadata_object_privileges&#x60; objects
+     * wrapped in JSON. Each &#x60;metadata_object_privileges&#x60; object contains: - Metadata
+     * information (GUID, name and type) - Array of &#x60;principal_object_privilege_info&#x60;. -
+     * Each &#x60;principal_object_privilege_info&#x60; contains: - Principal type. All principals
+     * of this type are listed as described below. - Array of
+     * &#x60;principal_object_privileges&#x60;. - Each &#x60;principal_object_privileges&#x60;
+     * contains: - Principal information (GUID, name, subtype) - List of applied object level
+     * privileges. #### Example response &#x60;&#x60;&#x60;json {
+     * \&quot;metadata_object_privileges\&quot;: [ { \&quot;metadata_id\&quot;:
+     * \&quot;metadata-guid-1\&quot;, \&quot;metadata_name\&quot;: \&quot;metadata-name-1\&quot;,
+     * \&quot;metadata_type\&quot;: \&quot;metadata-type-1\&quot;,
+     * \&quot;principal_object_privilege_info\&quot;: [ { \&quot;principal_type\&quot;:
+     * \&quot;principal-type-1\&quot;, \&quot;principal_object_privileges\&quot;: [ {
+     * \&quot;principal_id\&quot;: \&quot;principal-guid-1\&quot;, \&quot;principal_name\&quot;:
+     * \&quot;principal-name-1\&quot;, \&quot;principal_sub_type\&quot;:
+     * \&quot;principal-sub-type-1\&quot;, \&quot;object_privileges\&quot;:
+     * \&quot;[object-privilege-1, object-privilege-2]\&quot; }, { \&quot;principal_id\&quot;:
+     * \&quot;principal-guid-2\&quot;, \&quot;principal_name\&quot;: \&quot;principal-name-2\&quot;,
+     * \&quot;principal_sub_type\&quot;: \&quot;principal-sub-type-2\&quot;,
+     * \&quot;object_privileges\&quot;: \&quot;[object-privilege-1, object-privilege-2]\&quot; } ]
+     * }, { \&quot;principal_type\&quot;: \&quot;principal-type-2\&quot;,
+     * \&quot;principal_object_privileges\&quot;: [ { \&quot;principal_id\&quot;:
+     * \&quot;principal-guid-3\&quot;, \&quot;principal_name\&quot;: \&quot;principal-guid-4\&quot;,
+     * \&quot;principal_sub_type\&quot;: \&quot;principal-sub-type-4\&quot;,
+     * \&quot;object_privileges\&quot;: \&quot;[object-privilege-1]\&quot; } ] } ] }, {
+     * \&quot;metadata_id\&quot;: \&quot;metadata-guid-2\&quot;, \&quot;metadata_name\&quot;:
+     * \&quot;metadata-name-2\&quot;, \&quot;metadata_type\&quot;: \&quot;metadata-type-2\&quot;,
+     * \&quot;principal_object_privilege_info\&quot;: [ { \&quot;principal_type\&quot;:
+     * \&quot;principal-type-1\&quot;, \&quot;principal_object_privileges\&quot;: [ {
+     * \&quot;principal_id\&quot;: \&quot;principal-guid-1\&quot;, \&quot;principal_name\&quot;:
+     * \&quot;principal-name-1\&quot;, \&quot;principal_sub_type\&quot;:
+     * \&quot;principal-sub-type-1\&quot;, \&quot;object_privileges\&quot;:
+     * \&quot;[object-privilege-3, object-privilege-4]\&quot; }, { \&quot;principal_id\&quot;:
+     * \&quot;principal-guid-2\&quot;, \&quot;principal_name\&quot;: \&quot;principal-name-2\&quot;,
+     * \&quot;principal_sub_type\&quot;: \&quot;principal-sub-type-2\&quot;,
+     * \&quot;object_privileges\&quot;: \&quot;[object-privilege-4]\&quot; } ] } ] } ] }
+     * &#x60;&#x60;&#x60;
+     *
+     * @param fetchObjectPrivilegesRequest (required)
+     * @return ObjectPrivilegesOfMetadataResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Fetching defined object privileges of metadata objects is successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ObjectPrivilegesOfMetadataResponse fetchObjectPrivileges(
+            FetchObjectPrivilegesRequest fetchObjectPrivilegesRequest) throws ApiException {
+        ApiResponse<ObjectPrivilegesOfMetadataResponse> localVarResp =
+                fetchObjectPrivilegesWithHttpInfo(fetchObjectPrivilegesRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Version: 26.3.0.cl or later This API fetches the object privileges present for the given list
+     * of principals (user or group), on the given set of objects. It supports pagination, which can
+     * be enabled and configured using the request parameters. It provides users access to certain
+     * features based on privilege based access control. #### Usage guidelines - Specify the
+     * &#x60;type&#x60; (&#x60;USER&#x60; or &#x60;USER_GROUP&#x60;) and &#x60;identifier&#x60;
+     * (either GUID or name) of the principals for which you want to retrieve object privilege
+     * information in the &#x60;principals&#x60; array. - Specify the &#x60;type&#x60;
+     * (&#x60;LOGICAL_TABLE&#x60;) and &#x60;identifier&#x60; (either GUID or name) of the metadata
+     * objects for which you want to retrieve object privilege information in the
+     * &#x60;metadata&#x60; array. Only &#x60;LOGICAL_TABLE&#x60; metadata type is supported for
+     * now. It may be extended for other metadata types in future. - To control the offset from
+     * where principals have to be fetched, use &#x60;record_offset&#x60;. When
+     * &#x60;record_offset&#x60; is 0, information is fetched from the beginning. - To control the
+     * number of principals to be fetched, use &#x60;record_size&#x60;. Default
+     * &#x60;record_size&#x60; is 20. - Ensure &#x60;record_offset&#x60; for a subsequent request is
+     * one more than the value of &#x60;record_size&#x60; of the previous request. - Ensure using
+     * correct Authorization Bearer Token corresponding to specific user &amp; org. #### Example
+     * request &#x60;&#x60;&#x60;json { \&quot;principals\&quot;: [ { \&quot;type\&quot;:
+     * \&quot;type-1\&quot;, \&quot;identifier\&quot;: \&quot;principal-guid-or-name-1\&quot; }, {
+     * \&quot;type\&quot;: \&quot;type-2\&quot;, \&quot;identifier\&quot;:
+     * \&quot;principal-guid-or-name-2\&quot; } ], \&quot;metadata\&quot;: [ { \&quot;type\&quot;:
+     * \&quot;metadata-type-1\&quot;, \&quot;identifier\&quot;:
+     * \&quot;metadata-guid-or-name-1\&quot; }, { \&quot;type\&quot;: \&quot;metadata-type-2\&quot;,
+     * \&quot;identifier\&quot;: \&quot;metadata-guid-or-name-2\&quot; } ],
+     * \&quot;record_offset\&quot;: 0, \&quot;record_size\&quot;: 20 } &#x60;&#x60;&#x60; ####
+     * Response format The API returns an array of &#x60;metadata_object_privileges&#x60; objects
+     * wrapped in JSON. Each &#x60;metadata_object_privileges&#x60; object contains: - Metadata
+     * information (GUID, name and type) - Array of &#x60;principal_object_privilege_info&#x60;. -
+     * Each &#x60;principal_object_privilege_info&#x60; contains: - Principal type. All principals
+     * of this type are listed as described below. - Array of
+     * &#x60;principal_object_privileges&#x60;. - Each &#x60;principal_object_privileges&#x60;
+     * contains: - Principal information (GUID, name, subtype) - List of applied object level
+     * privileges. #### Example response &#x60;&#x60;&#x60;json {
+     * \&quot;metadata_object_privileges\&quot;: [ { \&quot;metadata_id\&quot;:
+     * \&quot;metadata-guid-1\&quot;, \&quot;metadata_name\&quot;: \&quot;metadata-name-1\&quot;,
+     * \&quot;metadata_type\&quot;: \&quot;metadata-type-1\&quot;,
+     * \&quot;principal_object_privilege_info\&quot;: [ { \&quot;principal_type\&quot;:
+     * \&quot;principal-type-1\&quot;, \&quot;principal_object_privileges\&quot;: [ {
+     * \&quot;principal_id\&quot;: \&quot;principal-guid-1\&quot;, \&quot;principal_name\&quot;:
+     * \&quot;principal-name-1\&quot;, \&quot;principal_sub_type\&quot;:
+     * \&quot;principal-sub-type-1\&quot;, \&quot;object_privileges\&quot;:
+     * \&quot;[object-privilege-1, object-privilege-2]\&quot; }, { \&quot;principal_id\&quot;:
+     * \&quot;principal-guid-2\&quot;, \&quot;principal_name\&quot;: \&quot;principal-name-2\&quot;,
+     * \&quot;principal_sub_type\&quot;: \&quot;principal-sub-type-2\&quot;,
+     * \&quot;object_privileges\&quot;: \&quot;[object-privilege-1, object-privilege-2]\&quot; } ]
+     * }, { \&quot;principal_type\&quot;: \&quot;principal-type-2\&quot;,
+     * \&quot;principal_object_privileges\&quot;: [ { \&quot;principal_id\&quot;:
+     * \&quot;principal-guid-3\&quot;, \&quot;principal_name\&quot;: \&quot;principal-guid-4\&quot;,
+     * \&quot;principal_sub_type\&quot;: \&quot;principal-sub-type-4\&quot;,
+     * \&quot;object_privileges\&quot;: \&quot;[object-privilege-1]\&quot; } ] } ] }, {
+     * \&quot;metadata_id\&quot;: \&quot;metadata-guid-2\&quot;, \&quot;metadata_name\&quot;:
+     * \&quot;metadata-name-2\&quot;, \&quot;metadata_type\&quot;: \&quot;metadata-type-2\&quot;,
+     * \&quot;principal_object_privilege_info\&quot;: [ { \&quot;principal_type\&quot;:
+     * \&quot;principal-type-1\&quot;, \&quot;principal_object_privileges\&quot;: [ {
+     * \&quot;principal_id\&quot;: \&quot;principal-guid-1\&quot;, \&quot;principal_name\&quot;:
+     * \&quot;principal-name-1\&quot;, \&quot;principal_sub_type\&quot;:
+     * \&quot;principal-sub-type-1\&quot;, \&quot;object_privileges\&quot;:
+     * \&quot;[object-privilege-3, object-privilege-4]\&quot; }, { \&quot;principal_id\&quot;:
+     * \&quot;principal-guid-2\&quot;, \&quot;principal_name\&quot;: \&quot;principal-name-2\&quot;,
+     * \&quot;principal_sub_type\&quot;: \&quot;principal-sub-type-2\&quot;,
+     * \&quot;object_privileges\&quot;: \&quot;[object-privilege-4]\&quot; } ] } ] } ] }
+     * &#x60;&#x60;&#x60;
+     *
+     * @param fetchObjectPrivilegesRequest (required)
+     * @return ApiResponse&lt;ObjectPrivilegesOfMetadataResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Fetching defined object privileges of metadata objects is successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<ObjectPrivilegesOfMetadataResponse> fetchObjectPrivilegesWithHttpInfo(
+            FetchObjectPrivilegesRequest fetchObjectPrivilegesRequest) throws ApiException {
+        okhttp3.Call localVarCall =
+                fetchObjectPrivilegesValidateBeforeCall(fetchObjectPrivilegesRequest, null);
+        Type localVarReturnType = new TypeToken<ObjectPrivilegesOfMetadataResponse>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Version: 26.3.0.cl or later This API fetches the object privileges present
+     * for the given list of principals (user or group), on the given set of objects. It supports
+     * pagination, which can be enabled and configured using the request parameters. It provides
+     * users access to certain features based on privilege based access control. #### Usage
+     * guidelines - Specify the &#x60;type&#x60; (&#x60;USER&#x60; or &#x60;USER_GROUP&#x60;) and
+     * &#x60;identifier&#x60; (either GUID or name) of the principals for which you want to retrieve
+     * object privilege information in the &#x60;principals&#x60; array. - Specify the
+     * &#x60;type&#x60; (&#x60;LOGICAL_TABLE&#x60;) and &#x60;identifier&#x60; (either GUID or name)
+     * of the metadata objects for which you want to retrieve object privilege information in the
+     * &#x60;metadata&#x60; array. Only &#x60;LOGICAL_TABLE&#x60; metadata type is supported for
+     * now. It may be extended for other metadata types in future. - To control the offset from
+     * where principals have to be fetched, use &#x60;record_offset&#x60;. When
+     * &#x60;record_offset&#x60; is 0, information is fetched from the beginning. - To control the
+     * number of principals to be fetched, use &#x60;record_size&#x60;. Default
+     * &#x60;record_size&#x60; is 20. - Ensure &#x60;record_offset&#x60; for a subsequent request is
+     * one more than the value of &#x60;record_size&#x60; of the previous request. - Ensure using
+     * correct Authorization Bearer Token corresponding to specific user &amp; org. #### Example
+     * request &#x60;&#x60;&#x60;json { \&quot;principals\&quot;: [ { \&quot;type\&quot;:
+     * \&quot;type-1\&quot;, \&quot;identifier\&quot;: \&quot;principal-guid-or-name-1\&quot; }, {
+     * \&quot;type\&quot;: \&quot;type-2\&quot;, \&quot;identifier\&quot;:
+     * \&quot;principal-guid-or-name-2\&quot; } ], \&quot;metadata\&quot;: [ { \&quot;type\&quot;:
+     * \&quot;metadata-type-1\&quot;, \&quot;identifier\&quot;:
+     * \&quot;metadata-guid-or-name-1\&quot; }, { \&quot;type\&quot;: \&quot;metadata-type-2\&quot;,
+     * \&quot;identifier\&quot;: \&quot;metadata-guid-or-name-2\&quot; } ],
+     * \&quot;record_offset\&quot;: 0, \&quot;record_size\&quot;: 20 } &#x60;&#x60;&#x60; ####
+     * Response format The API returns an array of &#x60;metadata_object_privileges&#x60; objects
+     * wrapped in JSON. Each &#x60;metadata_object_privileges&#x60; object contains: - Metadata
+     * information (GUID, name and type) - Array of &#x60;principal_object_privilege_info&#x60;. -
+     * Each &#x60;principal_object_privilege_info&#x60; contains: - Principal type. All principals
+     * of this type are listed as described below. - Array of
+     * &#x60;principal_object_privileges&#x60;. - Each &#x60;principal_object_privileges&#x60;
+     * contains: - Principal information (GUID, name, subtype) - List of applied object level
+     * privileges. #### Example response &#x60;&#x60;&#x60;json {
+     * \&quot;metadata_object_privileges\&quot;: [ { \&quot;metadata_id\&quot;:
+     * \&quot;metadata-guid-1\&quot;, \&quot;metadata_name\&quot;: \&quot;metadata-name-1\&quot;,
+     * \&quot;metadata_type\&quot;: \&quot;metadata-type-1\&quot;,
+     * \&quot;principal_object_privilege_info\&quot;: [ { \&quot;principal_type\&quot;:
+     * \&quot;principal-type-1\&quot;, \&quot;principal_object_privileges\&quot;: [ {
+     * \&quot;principal_id\&quot;: \&quot;principal-guid-1\&quot;, \&quot;principal_name\&quot;:
+     * \&quot;principal-name-1\&quot;, \&quot;principal_sub_type\&quot;:
+     * \&quot;principal-sub-type-1\&quot;, \&quot;object_privileges\&quot;:
+     * \&quot;[object-privilege-1, object-privilege-2]\&quot; }, { \&quot;principal_id\&quot;:
+     * \&quot;principal-guid-2\&quot;, \&quot;principal_name\&quot;: \&quot;principal-name-2\&quot;,
+     * \&quot;principal_sub_type\&quot;: \&quot;principal-sub-type-2\&quot;,
+     * \&quot;object_privileges\&quot;: \&quot;[object-privilege-1, object-privilege-2]\&quot; } ]
+     * }, { \&quot;principal_type\&quot;: \&quot;principal-type-2\&quot;,
+     * \&quot;principal_object_privileges\&quot;: [ { \&quot;principal_id\&quot;:
+     * \&quot;principal-guid-3\&quot;, \&quot;principal_name\&quot;: \&quot;principal-guid-4\&quot;,
+     * \&quot;principal_sub_type\&quot;: \&quot;principal-sub-type-4\&quot;,
+     * \&quot;object_privileges\&quot;: \&quot;[object-privilege-1]\&quot; } ] } ] }, {
+     * \&quot;metadata_id\&quot;: \&quot;metadata-guid-2\&quot;, \&quot;metadata_name\&quot;:
+     * \&quot;metadata-name-2\&quot;, \&quot;metadata_type\&quot;: \&quot;metadata-type-2\&quot;,
+     * \&quot;principal_object_privilege_info\&quot;: [ { \&quot;principal_type\&quot;:
+     * \&quot;principal-type-1\&quot;, \&quot;principal_object_privileges\&quot;: [ {
+     * \&quot;principal_id\&quot;: \&quot;principal-guid-1\&quot;, \&quot;principal_name\&quot;:
+     * \&quot;principal-name-1\&quot;, \&quot;principal_sub_type\&quot;:
+     * \&quot;principal-sub-type-1\&quot;, \&quot;object_privileges\&quot;:
+     * \&quot;[object-privilege-3, object-privilege-4]\&quot; }, { \&quot;principal_id\&quot;:
+     * \&quot;principal-guid-2\&quot;, \&quot;principal_name\&quot;: \&quot;principal-name-2\&quot;,
+     * \&quot;principal_sub_type\&quot;: \&quot;principal-sub-type-2\&quot;,
+     * \&quot;object_privileges\&quot;: \&quot;[object-privilege-4]\&quot; } ] } ] } ] }
+     * &#x60;&#x60;&#x60;
+     *
+     * @param fetchObjectPrivilegesRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Fetching defined object privileges of metadata objects is successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call fetchObjectPrivilegesAsync(
+            FetchObjectPrivilegesRequest fetchObjectPrivilegesRequest,
+            final ApiCallback<ObjectPrivilegesOfMetadataResponse> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                fetchObjectPrivilegesValidateBeforeCall(fetchObjectPrivilegesRequest, _callback);
+        Type localVarReturnType = new TypeToken<ObjectPrivilegesOfMetadataResponse>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for fetchPermissionsOfPrincipals
      *
      * @param fetchPermissionsOfPrincipalsRequest (required)
@@ -13852,7 +14195,11 @@ public class ThoughtSpotRestApi {
      * Version: 9.0.0.cl or later Retrieves details of the current user session for the token
      * provided in the request header. Any ThoughtSpot user can access this endpoint and send an API
      * request. The data returned in the API response varies according to user&#39;s privilege and
-     * object access permissions.
+     * object access permissions. **NOTE**: In ThoughtSpot, users with cluster administration
+     * privileges can access all Orgs by default. However, unless the administrator is explicitly
+     * added to an Org, the Orgs list in the session information returned by the API will include
+     * only the Primary Org. To include other Orgs in the API response, you must explicitly add the
+     * administrator to each Org in the Admin settings page in the UI or via user REST API.
      *
      * @return User
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -13877,7 +14224,11 @@ public class ThoughtSpotRestApi {
      * Version: 9.0.0.cl or later Retrieves details of the current user session for the token
      * provided in the request header. Any ThoughtSpot user can access this endpoint and send an API
      * request. The data returned in the API response varies according to user&#39;s privilege and
-     * object access permissions.
+     * object access permissions. **NOTE**: In ThoughtSpot, users with cluster administration
+     * privileges can access all Orgs by default. However, unless the administrator is explicitly
+     * added to an Org, the Orgs list in the session information returned by the API will include
+     * only the Primary Org. To include other Orgs in the API response, you must explicitly add the
+     * administrator to each Org in the Admin settings page in the UI or via user REST API.
      *
      * @return ApiResponse&lt;User&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -13903,7 +14254,12 @@ public class ThoughtSpotRestApi {
      * (asynchronously) Version: 9.0.0.cl or later Retrieves details of the current user session for
      * the token provided in the request header. Any ThoughtSpot user can access this endpoint and
      * send an API request. The data returned in the API response varies according to user&#39;s
-     * privilege and object access permissions.
+     * privilege and object access permissions. **NOTE**: In ThoughtSpot, users with cluster
+     * administration privileges can access all Orgs by default. However, unless the administrator
+     * is explicitly added to an Org, the Orgs list in the session information returned by the API
+     * will include only the Primary Org. To include other Orgs in the API response, you must
+     * explicitly add the administrator to each Org in the Admin settings page in the UI or via user
+     * REST API.
      *
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -14179,61 +14535,65 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.4.0.cl or later Gets an authentication token with custom rules and security
-     * attributes and creates a full session in ThoughtSpot for a given user. By default, the token
-     * obtained from ThoughtSpot remains valid for 5 mins. To add a new user and assign privileges
-     * during auto creation, you need &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**)
-     * privilege. If [Role-Based Access Control
+     * Version: 10.4.0.cl or later Creates an authentication token that provides values for the
+     * formula variables in the Row Level Security (RLS) rules for a given user. Recommended for use
+     * cases that require Attribute-based access control (ABAC) via RLS. #### Required privileges To
+     * add a new user and assign privileges during auto-creation, the &#x60;ADMINISTRATION&#x60;
+     * (**Can administer ThoughtSpot**) privilege is required. If [Role-Based Access Control
      * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
-     * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
-     * and edit access to the data source is required. To assign security attributes with filter
-     * rules and Parameters to the JWT token, you&#39;ll need administrator privileges and edit
-     * access to the data source (Worksheet or Model). If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
-     * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
-     * and edit access to the data source is required. #### Usage guidelines You can generate the
-     * token for a user by providing a &#x60;username&#x60; and &#x60;password&#x60;, or by using
-     * the cluster’s &#x60;secret_key&#x60;. To generate a &#x60;secret_key&#x60; on your cluster,
-     * the administrator must enable [Trusted
-     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable)
-     * in the **Develop** &gt; **Customizations** &gt; **Security Settings** page. **Note**: When
-     * both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,
-     * &#x60;password&#x60; takes precedence. If Multi-Factor Authentication (MFA) is enabled on
-     * your instance, the API login request with basic authentication (&#x60;username&#x60; and
-     * &#x60;password&#x60; ) returns an error. You can switch to token-based authentication with
-     * &#x60;secret_key&#x60; or contact ThoughtSpot Support for assistance. ##### Attribute-Based
-     * Access Control (ABAC) with tokens To implement Attribute-Based Access Control (ABAC) and
-     * assign security entitlements to users during session creation, you can generate a token with
-     * custom filtering rules and Parameters in the &#x60;filter_rules&#x60; and
-     * &#x60;parameter_values&#x60; array respectively. These attributes can be configured to
-     * persist on a specific set of objects for user sessions initiated using the token. Once
-     * defined, the rules are added to the user&#39;s &#x60;access_control_properties&#x60; object,
-     * after which all sessions will use the persisted values. Specify the object type as
-     * &#x60;LOGICAL_TABLE&#x60;. For more information, see [ABAC via tokens
-     * Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).
-     * ##### Just-in-time provisioning For just-in-time user creation and provisioning, define the
-     * following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60; (**Can Enable or Disable Trusted Authentication**) privilege
+     * and edit access to the data source are required. To configure formula variables for all Orgs
+     * on your instance or the Primary Org, cluster administration privileges are required. Org
+     * administrators can configure formula variables for their respective Orgs. If Role-Based
+     * Access Control (RBAC) is enabled, users with the &#x60;CAN_MANAGE_VARIABLES&#x60; (**Can
+     * manage variables**) role privilege can also create and manage variables for their Org
+     * context. #### Usage guidelines You can generate a token by providing a &#x60;username&#x60;
+     * and &#x60;password&#x60;, or by using a &#x60;secret_key&#x60;. To generate a
+     * &#x60;secret_key&#x60;, the administrator must enable [Trusted
+     * authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the
+     * **Develop** &gt; **Customizations** &gt; **Security Settings** page. **Note**: * When both
+     * &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,
+     * &#x60;password&#x60; takes precedence. * If [Multi-Factor Authentication
+     * (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your
+     * instance, the API login request with &#x60;username&#x60; and &#x60;password&#x60; returns an
+     * error. You can switch to token-based authentication with &#x60;secret_key&#x60; or contact
+     * ThoughtSpot Support for assistance. The token obtained from ThoughtSpot is valid for 5
+     * minutes by default. You can configure the token expiration time as required. #### ABAC via
+     * RLS To implement ABAC via RLS and assign security entitlements to users during session
+     * creation, generate a token with custom variable values. The values set in the authentication
+     * token are applied to the formula variables referenced in RLS rules at the table level, which
+     * determines the data each user can access based on their entitlements. The variable values can
+     * be configured to persist for a specific set of Models in user sessions initiated with the
+     * token, allowing different RLS rules to be set for different data models. Once defined, the
+     * rules are added to the user&#39;s &#x60;variable_values&#x60; object, after which all
+     * sessions will use the persisted values. For more information, see [ABAC via tokens
+     * Documentation](https://developers.thoughtspot.com/docs/abac-via-rls-variables). ##### Formula
+     * variables Before defining variable values, ensure the variables are created and available on
+     * your instance. To create a formula variable, you can use the **Create variable**
+     * (&#x60;/api/rest/2.0/template/variables/create&#x60;) REST API endpoint, with the variable
+     * &#x60;type&#x60; set as &#x60;Formula_Variable&#x60; in the API request. The API doesn&#39;t
+     * support &#x60;\&quot;persist_option\&quot;: \&quot;RESET\&quot;&#x60; and
+     * &#x60;\&quot;persist_option\&quot;: \&quot;NONE\&quot;&#x60; when &#x60;variable_values&#x60;
+     * are defined in the request. If you are using &#x60;variable_values&#x60; for token
+     * generation, you must use other supported persist options such as &#x60;APPEND&#x60; or
+     * &#x60;REPLACE&#x60;. If you want to use &#x60;RESET&#x60; or &#x60;NONE&#x60;, do not pass
+     * any &#x60;variable_values&#x60;. In such cases, &#x60;variable_values&#x60; will remain
+     * unaffected. #### Supported objects The supported object type is &#x60;LOGICAL_TABLE&#x60;.
+     * When using &#x60;object_id&#x60; with &#x60;variable_values&#x60;, models are supported. ####
+     * Just-in-time provisioning For [just-in-time user creation and
+     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the
+     * following attributes in the API request: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
      * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;groups&#x60; Set &#x60;auto_create&#x60;
-     * to &#x60;true&#x60; if the user is not available in ThoughtSpot. If the user already exists
-     * in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60; in the
-     * API request, the user properties such as the display name, email, Org and group assignment
-     * will not be updated with new values. If &#x60;auto_create&#x60; is set to &#x60;true&#x60;,
-     * it won&#39;t create formula variables and hence won&#39;t be applicable for
-     * &#x60;variable_values&#x60;. For more information, see [Just-in-time
-     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). #####
-     * Important point to note All options in the token creation APIs that define access to the
-     * content in ThoughtSpot will do so during the token creation and not when the token is being
-     * used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when
-     * the authentication token is created. Persist options such as &#x60;APPEND&#x60;,
-     * &#x60;REPLACE&#x60;, &#x60;RESET&#x60; will persist security parameters on the user profile
-     * when the token is created, while Persist option &#x60;NONE&#x60; will not persist anything
-     * but will be honoured in the session. ##### Formula Variables Before using variables_values,
-     * variables must be created using Create Variable API with type as Formula_Variable
-     * (/api/rest/2.0/template/variables/create) The persist_option RESET and NONE cannot be used
-     * when variable_values are provided in the request. If you are working with variable_values,
-     * you must use other (APPEND, REPLACE) supported modes. If you want to use RESET or NONE, do
-     * not pass any variable_values. In such cases, variable_values will remain unaffected. When
-     * using object_id with variable_values, models are supported.
+     * to &#x60;true&#x60; if the username does not exist in ThoughtSpot. If the username already
+     * exists in ThoughtSpot and &#x60;auto_create&#x60; is set to &#x60;true&#x60;, user properties
+     * such as display name, email, Org and group entitlements will not be updated with new values.
+     * Setting &#x60;auto_create&#x60; to &#x60;true&#x60; does not create formula variables. Hence,
+     * this setting will not be applicable to &#x60;variable_values&#x60;. #### Important point to
+     * note All options in the token creation APIs that define user access to data in ThoughtSpot
+     * will take effect during token creation, not when the token is used for authentication. For
+     * example, &#x60;auto_create:true&#x60; will create the user when the authentication token is
+     * created. Persist options such as &#x60;APPEND&#x60; and &#x60;REPLACE&#x60; will persist
+     * &#x60;variable_values&#x60; on the user profile when the token is created.
      *
      * @param getCustomAccessTokenRequest (required)
      * @return AccessToken
@@ -14258,61 +14618,65 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.4.0.cl or later Gets an authentication token with custom rules and security
-     * attributes and creates a full session in ThoughtSpot for a given user. By default, the token
-     * obtained from ThoughtSpot remains valid for 5 mins. To add a new user and assign privileges
-     * during auto creation, you need &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**)
-     * privilege. If [Role-Based Access Control
+     * Version: 10.4.0.cl or later Creates an authentication token that provides values for the
+     * formula variables in the Row Level Security (RLS) rules for a given user. Recommended for use
+     * cases that require Attribute-based access control (ABAC) via RLS. #### Required privileges To
+     * add a new user and assign privileges during auto-creation, the &#x60;ADMINISTRATION&#x60;
+     * (**Can administer ThoughtSpot**) privilege is required. If [Role-Based Access Control
      * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
-     * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
-     * and edit access to the data source is required. To assign security attributes with filter
-     * rules and Parameters to the JWT token, you&#39;ll need administrator privileges and edit
-     * access to the data source (Worksheet or Model). If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
-     * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
-     * and edit access to the data source is required. #### Usage guidelines You can generate the
-     * token for a user by providing a &#x60;username&#x60; and &#x60;password&#x60;, or by using
-     * the cluster’s &#x60;secret_key&#x60;. To generate a &#x60;secret_key&#x60; on your cluster,
-     * the administrator must enable [Trusted
-     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable)
-     * in the **Develop** &gt; **Customizations** &gt; **Security Settings** page. **Note**: When
-     * both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,
-     * &#x60;password&#x60; takes precedence. If Multi-Factor Authentication (MFA) is enabled on
-     * your instance, the API login request with basic authentication (&#x60;username&#x60; and
-     * &#x60;password&#x60; ) returns an error. You can switch to token-based authentication with
-     * &#x60;secret_key&#x60; or contact ThoughtSpot Support for assistance. ##### Attribute-Based
-     * Access Control (ABAC) with tokens To implement Attribute-Based Access Control (ABAC) and
-     * assign security entitlements to users during session creation, you can generate a token with
-     * custom filtering rules and Parameters in the &#x60;filter_rules&#x60; and
-     * &#x60;parameter_values&#x60; array respectively. These attributes can be configured to
-     * persist on a specific set of objects for user sessions initiated using the token. Once
-     * defined, the rules are added to the user&#39;s &#x60;access_control_properties&#x60; object,
-     * after which all sessions will use the persisted values. Specify the object type as
-     * &#x60;LOGICAL_TABLE&#x60;. For more information, see [ABAC via tokens
-     * Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).
-     * ##### Just-in-time provisioning For just-in-time user creation and provisioning, define the
-     * following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60; (**Can Enable or Disable Trusted Authentication**) privilege
+     * and edit access to the data source are required. To configure formula variables for all Orgs
+     * on your instance or the Primary Org, cluster administration privileges are required. Org
+     * administrators can configure formula variables for their respective Orgs. If Role-Based
+     * Access Control (RBAC) is enabled, users with the &#x60;CAN_MANAGE_VARIABLES&#x60; (**Can
+     * manage variables**) role privilege can also create and manage variables for their Org
+     * context. #### Usage guidelines You can generate a token by providing a &#x60;username&#x60;
+     * and &#x60;password&#x60;, or by using a &#x60;secret_key&#x60;. To generate a
+     * &#x60;secret_key&#x60;, the administrator must enable [Trusted
+     * authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the
+     * **Develop** &gt; **Customizations** &gt; **Security Settings** page. **Note**: * When both
+     * &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,
+     * &#x60;password&#x60; takes precedence. * If [Multi-Factor Authentication
+     * (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your
+     * instance, the API login request with &#x60;username&#x60; and &#x60;password&#x60; returns an
+     * error. You can switch to token-based authentication with &#x60;secret_key&#x60; or contact
+     * ThoughtSpot Support for assistance. The token obtained from ThoughtSpot is valid for 5
+     * minutes by default. You can configure the token expiration time as required. #### ABAC via
+     * RLS To implement ABAC via RLS and assign security entitlements to users during session
+     * creation, generate a token with custom variable values. The values set in the authentication
+     * token are applied to the formula variables referenced in RLS rules at the table level, which
+     * determines the data each user can access based on their entitlements. The variable values can
+     * be configured to persist for a specific set of Models in user sessions initiated with the
+     * token, allowing different RLS rules to be set for different data models. Once defined, the
+     * rules are added to the user&#39;s &#x60;variable_values&#x60; object, after which all
+     * sessions will use the persisted values. For more information, see [ABAC via tokens
+     * Documentation](https://developers.thoughtspot.com/docs/abac-via-rls-variables). ##### Formula
+     * variables Before defining variable values, ensure the variables are created and available on
+     * your instance. To create a formula variable, you can use the **Create variable**
+     * (&#x60;/api/rest/2.0/template/variables/create&#x60;) REST API endpoint, with the variable
+     * &#x60;type&#x60; set as &#x60;Formula_Variable&#x60; in the API request. The API doesn&#39;t
+     * support &#x60;\&quot;persist_option\&quot;: \&quot;RESET\&quot;&#x60; and
+     * &#x60;\&quot;persist_option\&quot;: \&quot;NONE\&quot;&#x60; when &#x60;variable_values&#x60;
+     * are defined in the request. If you are using &#x60;variable_values&#x60; for token
+     * generation, you must use other supported persist options such as &#x60;APPEND&#x60; or
+     * &#x60;REPLACE&#x60;. If you want to use &#x60;RESET&#x60; or &#x60;NONE&#x60;, do not pass
+     * any &#x60;variable_values&#x60;. In such cases, &#x60;variable_values&#x60; will remain
+     * unaffected. #### Supported objects The supported object type is &#x60;LOGICAL_TABLE&#x60;.
+     * When using &#x60;object_id&#x60; with &#x60;variable_values&#x60;, models are supported. ####
+     * Just-in-time provisioning For [just-in-time user creation and
+     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the
+     * following attributes in the API request: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
      * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;groups&#x60; Set &#x60;auto_create&#x60;
-     * to &#x60;true&#x60; if the user is not available in ThoughtSpot. If the user already exists
-     * in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60; in the
-     * API request, the user properties such as the display name, email, Org and group assignment
-     * will not be updated with new values. If &#x60;auto_create&#x60; is set to &#x60;true&#x60;,
-     * it won&#39;t create formula variables and hence won&#39;t be applicable for
-     * &#x60;variable_values&#x60;. For more information, see [Just-in-time
-     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). #####
-     * Important point to note All options in the token creation APIs that define access to the
-     * content in ThoughtSpot will do so during the token creation and not when the token is being
-     * used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when
-     * the authentication token is created. Persist options such as &#x60;APPEND&#x60;,
-     * &#x60;REPLACE&#x60;, &#x60;RESET&#x60; will persist security parameters on the user profile
-     * when the token is created, while Persist option &#x60;NONE&#x60; will not persist anything
-     * but will be honoured in the session. ##### Formula Variables Before using variables_values,
-     * variables must be created using Create Variable API with type as Formula_Variable
-     * (/api/rest/2.0/template/variables/create) The persist_option RESET and NONE cannot be used
-     * when variable_values are provided in the request. If you are working with variable_values,
-     * you must use other (APPEND, REPLACE) supported modes. If you want to use RESET or NONE, do
-     * not pass any variable_values. In such cases, variable_values will remain unaffected. When
-     * using object_id with variable_values, models are supported.
+     * to &#x60;true&#x60; if the username does not exist in ThoughtSpot. If the username already
+     * exists in ThoughtSpot and &#x60;auto_create&#x60; is set to &#x60;true&#x60;, user properties
+     * such as display name, email, Org and group entitlements will not be updated with new values.
+     * Setting &#x60;auto_create&#x60; to &#x60;true&#x60; does not create formula variables. Hence,
+     * this setting will not be applicable to &#x60;variable_values&#x60;. #### Important point to
+     * note All options in the token creation APIs that define user access to data in ThoughtSpot
+     * will take effect during token creation, not when the token is used for authentication. For
+     * example, &#x60;auto_create:true&#x60; will create the user when the authentication token is
+     * created. Persist options such as &#x60;APPEND&#x60; and &#x60;REPLACE&#x60; will persist
+     * &#x60;variable_values&#x60; on the user profile when the token is created.
      *
      * @param getCustomAccessTokenRequest (required)
      * @return ApiResponse&lt;AccessToken&gt;
@@ -14338,61 +14702,65 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 10.4.0.cl or later Gets an authentication token with custom rules
-     * and security attributes and creates a full session in ThoughtSpot for a given user. By
-     * default, the token obtained from ThoughtSpot remains valid for 5 mins. To add a new user and
-     * assign privileges during auto creation, you need &#x60;ADMINISTRATION&#x60; (**Can administer
-     * ThoughtSpot**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
-     * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
-     * and edit access to the data source is required. To assign security attributes with filter
-     * rules and Parameters to the JWT token, you&#39;ll need administrator privileges and edit
-     * access to the data source (Worksheet or Model). If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
-     * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
-     * and edit access to the data source is required. #### Usage guidelines You can generate the
-     * token for a user by providing a &#x60;username&#x60; and &#x60;password&#x60;, or by using
-     * the cluster’s &#x60;secret_key&#x60;. To generate a &#x60;secret_key&#x60; on your cluster,
-     * the administrator must enable [Trusted
-     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable)
-     * in the **Develop** &gt; **Customizations** &gt; **Security Settings** page. **Note**: When
-     * both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,
-     * &#x60;password&#x60; takes precedence. If Multi-Factor Authentication (MFA) is enabled on
-     * your instance, the API login request with basic authentication (&#x60;username&#x60; and
-     * &#x60;password&#x60; ) returns an error. You can switch to token-based authentication with
-     * &#x60;secret_key&#x60; or contact ThoughtSpot Support for assistance. ##### Attribute-Based
-     * Access Control (ABAC) with tokens To implement Attribute-Based Access Control (ABAC) and
-     * assign security entitlements to users during session creation, you can generate a token with
-     * custom filtering rules and Parameters in the &#x60;filter_rules&#x60; and
-     * &#x60;parameter_values&#x60; array respectively. These attributes can be configured to
-     * persist on a specific set of objects for user sessions initiated using the token. Once
-     * defined, the rules are added to the user&#39;s &#x60;access_control_properties&#x60; object,
-     * after which all sessions will use the persisted values. Specify the object type as
-     * &#x60;LOGICAL_TABLE&#x60;. For more information, see [ABAC via tokens
-     * Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).
-     * ##### Just-in-time provisioning For just-in-time user creation and provisioning, define the
-     * following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
+     * (asynchronously) Version: 10.4.0.cl or later Creates an authentication token that provides
+     * values for the formula variables in the Row Level Security (RLS) rules for a given user.
+     * Recommended for use cases that require Attribute-based access control (ABAC) via RLS. ####
+     * Required privileges To add a new user and assign privileges during auto-creation, the
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required. If
+     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled,
+     * the &#x60;CONTROL_TRUSTED_AUTH&#x60; (**Can Enable or Disable Trusted Authentication**)
+     * privilege and edit access to the data source are required. To configure formula variables for
+     * all Orgs on your instance or the Primary Org, cluster administration privileges are required.
+     * Org administrators can configure formula variables for their respective Orgs. If Role-Based
+     * Access Control (RBAC) is enabled, users with the &#x60;CAN_MANAGE_VARIABLES&#x60; (**Can
+     * manage variables**) role privilege can also create and manage variables for their Org
+     * context. #### Usage guidelines You can generate a token by providing a &#x60;username&#x60;
+     * and &#x60;password&#x60;, or by using a &#x60;secret_key&#x60;. To generate a
+     * &#x60;secret_key&#x60;, the administrator must enable [Trusted
+     * authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the
+     * **Develop** &gt; **Customizations** &gt; **Security Settings** page. **Note**: * When both
+     * &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,
+     * &#x60;password&#x60; takes precedence. * If [Multi-Factor Authentication
+     * (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your
+     * instance, the API login request with &#x60;username&#x60; and &#x60;password&#x60; returns an
+     * error. You can switch to token-based authentication with &#x60;secret_key&#x60; or contact
+     * ThoughtSpot Support for assistance. The token obtained from ThoughtSpot is valid for 5
+     * minutes by default. You can configure the token expiration time as required. #### ABAC via
+     * RLS To implement ABAC via RLS and assign security entitlements to users during session
+     * creation, generate a token with custom variable values. The values set in the authentication
+     * token are applied to the formula variables referenced in RLS rules at the table level, which
+     * determines the data each user can access based on their entitlements. The variable values can
+     * be configured to persist for a specific set of Models in user sessions initiated with the
+     * token, allowing different RLS rules to be set for different data models. Once defined, the
+     * rules are added to the user&#39;s &#x60;variable_values&#x60; object, after which all
+     * sessions will use the persisted values. For more information, see [ABAC via tokens
+     * Documentation](https://developers.thoughtspot.com/docs/abac-via-rls-variables). ##### Formula
+     * variables Before defining variable values, ensure the variables are created and available on
+     * your instance. To create a formula variable, you can use the **Create variable**
+     * (&#x60;/api/rest/2.0/template/variables/create&#x60;) REST API endpoint, with the variable
+     * &#x60;type&#x60; set as &#x60;Formula_Variable&#x60; in the API request. The API doesn&#39;t
+     * support &#x60;\&quot;persist_option\&quot;: \&quot;RESET\&quot;&#x60; and
+     * &#x60;\&quot;persist_option\&quot;: \&quot;NONE\&quot;&#x60; when &#x60;variable_values&#x60;
+     * are defined in the request. If you are using &#x60;variable_values&#x60; for token
+     * generation, you must use other supported persist options such as &#x60;APPEND&#x60; or
+     * &#x60;REPLACE&#x60;. If you want to use &#x60;RESET&#x60; or &#x60;NONE&#x60;, do not pass
+     * any &#x60;variable_values&#x60;. In such cases, &#x60;variable_values&#x60; will remain
+     * unaffected. #### Supported objects The supported object type is &#x60;LOGICAL_TABLE&#x60;.
+     * When using &#x60;object_id&#x60; with &#x60;variable_values&#x60;, models are supported. ####
+     * Just-in-time provisioning For [just-in-time user creation and
+     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the
+     * following attributes in the API request: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
      * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;groups&#x60; Set &#x60;auto_create&#x60;
-     * to &#x60;true&#x60; if the user is not available in ThoughtSpot. If the user already exists
-     * in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60; in the
-     * API request, the user properties such as the display name, email, Org and group assignment
-     * will not be updated with new values. If &#x60;auto_create&#x60; is set to &#x60;true&#x60;,
-     * it won&#39;t create formula variables and hence won&#39;t be applicable for
-     * &#x60;variable_values&#x60;. For more information, see [Just-in-time
-     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). #####
-     * Important point to note All options in the token creation APIs that define access to the
-     * content in ThoughtSpot will do so during the token creation and not when the token is being
-     * used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when
-     * the authentication token is created. Persist options such as &#x60;APPEND&#x60;,
-     * &#x60;REPLACE&#x60;, &#x60;RESET&#x60; will persist security parameters on the user profile
-     * when the token is created, while Persist option &#x60;NONE&#x60; will not persist anything
-     * but will be honoured in the session. ##### Formula Variables Before using variables_values,
-     * variables must be created using Create Variable API with type as Formula_Variable
-     * (/api/rest/2.0/template/variables/create) The persist_option RESET and NONE cannot be used
-     * when variable_values are provided in the request. If you are working with variable_values,
-     * you must use other (APPEND, REPLACE) supported modes. If you want to use RESET or NONE, do
-     * not pass any variable_values. In such cases, variable_values will remain unaffected. When
-     * using object_id with variable_values, models are supported.
+     * to &#x60;true&#x60; if the username does not exist in ThoughtSpot. If the username already
+     * exists in ThoughtSpot and &#x60;auto_create&#x60; is set to &#x60;true&#x60;, user properties
+     * such as display name, email, Org and group entitlements will not be updated with new values.
+     * Setting &#x60;auto_create&#x60; to &#x60;true&#x60; does not create formula variables. Hence,
+     * this setting will not be applicable to &#x60;variable_values&#x60;. #### Important point to
+     * note All options in the token creation APIs that define user access to data in ThoughtSpot
+     * will take effect during token creation, not when the token is used for authentication. For
+     * example, &#x60;auto_create:true&#x60; will create the user when the authentication token is
+     * created. Persist options such as &#x60;APPEND&#x60; and &#x60;REPLACE&#x60; will persist
+     * &#x60;variable_values&#x60; on the user profile when the token is created.
      *
      * @param getCustomAccessTokenRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -14712,36 +15080,36 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 9.0.0.cl or later Gets an authentication token and creates a full session in
-     * ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid
-     * for 5 mins. You can generate the token for a user by providing a &#x60;username&#x60; and
-     * &#x60;password&#x60;, or by using the cluster’s &#x60;secret_key&#x60; (for [Trusted
-     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable)).
-     * To generate a &#x60;secret_key&#x60; on your cluster, the administrator must enable **Trusted
-     * authentication** in the **Develop** &gt; **Customizations** &gt; **Security Settings** page.
-     * For more information, see [Trusted
-     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable).
-     * **Note**: When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API
-     * request, &#x60;password&#x60; takes precedence. If Multi-Factor Authentication (MFA) is
-     * enabled on your instance, the API login request with basic authentication
-     * (&#x60;username&#x60; and &#x60;password&#x60; ) returns an error. You can switch to
-     * token-based authentication with &#x60;secret_key&#x60; or contact ThoughtSpot Support for
-     * assistance. #### Just-in-time provisioning For just-in-time user creation and provisioning,
-     * define the following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
+     * Version: 9.0.0.cl or later Generates an authentication token for creating a full session in
+     * ThoughtSpot for a given user. Recommended for use cases that do not require Attribute-based
+     * access control (ABAC) via Row Level Security (RLS). #### Usage guidelines You can generate a
+     * token for a user by providing a &#x60;username&#x60; and &#x60;password&#x60;, or by using
+     * the &#x60;secret_key&#x60; generated for your instance. To generate a &#x60;secret_key&#x60;,
+     * the administrator must enable [Trusted
+     * authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the
+     * **Develop** &gt; **Customizations** &gt; **Security Settings** page. **Note**: * When both
+     * &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,
+     * &#x60;password&#x60; takes precedence. * If [Multi-Factor Authentication
+     * (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your
+     * instance, the API login request with &#x60;username&#x60; and &#x60;password&#x60; returns an
+     * error. You can switch to token-based authentication with &#x60;secret_key&#x60; or contact
+     * ThoughtSpot Support for assistance. The token obtained from ThoughtSpot is valid for 5
+     * minutes by default. You can configure the token expiration time as required. ####
+     * Just-in-time provisioning For [just-in-time user creation and
+     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the
+     * following attributes in the API request: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
      * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;group_identifiers&#x60; Set
-     * &#x60;auto_create&#x60; to &#x60;True&#x60; if the user is not available in ThoughtSpot. If
-     * the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to
-     * &#x60;true&#x60;, the API call will update user properties like display name, email and group
-     * assignment. For more information, see [Just-in-time
-     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). To add a
-     * new user and assign privileges, you need &#x60;ADMINISTRATION&#x60; (**Can administer
-     * ThoughtSpot**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
-     * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
-     * is required. #### Important point to note All options in the token creation APIs changing the
-     * content in ThoughtSpot will do so during the token creation and not when the token is being
-     * used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when
-     * the authentication token is created.
+     * &#x60;auto_create&#x60; to &#x60;true&#x60; if the username does not exist in ThoughtSpot. If
+     * the user already exists in ThoughtSpot and &#x60;auto_create&#x60; is set to
+     * &#x60;true&#x60;, user properties such as display name, email and group assignment will be
+     * updated. To add a new user and assign privileges during auto-creation, the
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required. If
+     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled,
+     * the &#x60;CONTROL_TRUSTED_AUTH&#x60; (**Can Enable or Disable Trusted Authentication**)
+     * privilege is required. #### Important point to note All options in the token creation APIs
+     * that define user access to data in ThoughtSpot will take effect during token creation, not
+     * when the token is used for authentication. For example, &#x60;auto_create:true&#x60; will
+     * create the user when the authentication token is created.
      *
      * @param getFullAccessTokenRequest (required)
      * @return Token
@@ -14765,36 +15133,36 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 9.0.0.cl or later Gets an authentication token and creates a full session in
-     * ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid
-     * for 5 mins. You can generate the token for a user by providing a &#x60;username&#x60; and
-     * &#x60;password&#x60;, or by using the cluster’s &#x60;secret_key&#x60; (for [Trusted
-     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable)).
-     * To generate a &#x60;secret_key&#x60; on your cluster, the administrator must enable **Trusted
-     * authentication** in the **Develop** &gt; **Customizations** &gt; **Security Settings** page.
-     * For more information, see [Trusted
-     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable).
-     * **Note**: When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API
-     * request, &#x60;password&#x60; takes precedence. If Multi-Factor Authentication (MFA) is
-     * enabled on your instance, the API login request with basic authentication
-     * (&#x60;username&#x60; and &#x60;password&#x60; ) returns an error. You can switch to
-     * token-based authentication with &#x60;secret_key&#x60; or contact ThoughtSpot Support for
-     * assistance. #### Just-in-time provisioning For just-in-time user creation and provisioning,
-     * define the following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
+     * Version: 9.0.0.cl or later Generates an authentication token for creating a full session in
+     * ThoughtSpot for a given user. Recommended for use cases that do not require Attribute-based
+     * access control (ABAC) via Row Level Security (RLS). #### Usage guidelines You can generate a
+     * token for a user by providing a &#x60;username&#x60; and &#x60;password&#x60;, or by using
+     * the &#x60;secret_key&#x60; generated for your instance. To generate a &#x60;secret_key&#x60;,
+     * the administrator must enable [Trusted
+     * authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the
+     * **Develop** &gt; **Customizations** &gt; **Security Settings** page. **Note**: * When both
+     * &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,
+     * &#x60;password&#x60; takes precedence. * If [Multi-Factor Authentication
+     * (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your
+     * instance, the API login request with &#x60;username&#x60; and &#x60;password&#x60; returns an
+     * error. You can switch to token-based authentication with &#x60;secret_key&#x60; or contact
+     * ThoughtSpot Support for assistance. The token obtained from ThoughtSpot is valid for 5
+     * minutes by default. You can configure the token expiration time as required. ####
+     * Just-in-time provisioning For [just-in-time user creation and
+     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the
+     * following attributes in the API request: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
      * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;group_identifiers&#x60; Set
-     * &#x60;auto_create&#x60; to &#x60;True&#x60; if the user is not available in ThoughtSpot. If
-     * the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to
-     * &#x60;true&#x60;, the API call will update user properties like display name, email and group
-     * assignment. For more information, see [Just-in-time
-     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). To add a
-     * new user and assign privileges, you need &#x60;ADMINISTRATION&#x60; (**Can administer
-     * ThoughtSpot**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
-     * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
-     * is required. #### Important point to note All options in the token creation APIs changing the
-     * content in ThoughtSpot will do so during the token creation and not when the token is being
-     * used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when
-     * the authentication token is created.
+     * &#x60;auto_create&#x60; to &#x60;true&#x60; if the username does not exist in ThoughtSpot. If
+     * the user already exists in ThoughtSpot and &#x60;auto_create&#x60; is set to
+     * &#x60;true&#x60;, user properties such as display name, email and group assignment will be
+     * updated. To add a new user and assign privileges during auto-creation, the
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required. If
+     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled,
+     * the &#x60;CONTROL_TRUSTED_AUTH&#x60; (**Can Enable or Disable Trusted Authentication**)
+     * privilege is required. #### Important point to note All options in the token creation APIs
+     * that define user access to data in ThoughtSpot will take effect during token creation, not
+     * when the token is used for authentication. For example, &#x60;auto_create:true&#x60; will
+     * create the user when the authentication token is created.
      *
      * @param getFullAccessTokenRequest (required)
      * @return ApiResponse&lt;Token&gt;
@@ -14820,37 +15188,36 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 9.0.0.cl or later Gets an authentication token and creates a full
-     * session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot
-     * remains valid for 5 mins. You can generate the token for a user by providing a
-     * &#x60;username&#x60; and &#x60;password&#x60;, or by using the cluster’s
-     * &#x60;secret_key&#x60; (for [Trusted
-     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable)).
-     * To generate a &#x60;secret_key&#x60; on your cluster, the administrator must enable **Trusted
-     * authentication** in the **Develop** &gt; **Customizations** &gt; **Security Settings** page.
-     * For more information, see [Trusted
-     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable).
-     * **Note**: When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API
-     * request, &#x60;password&#x60; takes precedence. If Multi-Factor Authentication (MFA) is
-     * enabled on your instance, the API login request with basic authentication
-     * (&#x60;username&#x60; and &#x60;password&#x60; ) returns an error. You can switch to
-     * token-based authentication with &#x60;secret_key&#x60; or contact ThoughtSpot Support for
-     * assistance. #### Just-in-time provisioning For just-in-time user creation and provisioning,
-     * define the following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
+     * (asynchronously) Version: 9.0.0.cl or later Generates an authentication token for creating a
+     * full session in ThoughtSpot for a given user. Recommended for use cases that do not require
+     * Attribute-based access control (ABAC) via Row Level Security (RLS). #### Usage guidelines You
+     * can generate a token for a user by providing a &#x60;username&#x60; and &#x60;password&#x60;,
+     * or by using the &#x60;secret_key&#x60; generated for your instance. To generate a
+     * &#x60;secret_key&#x60;, the administrator must enable [Trusted
+     * authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the
+     * **Develop** &gt; **Customizations** &gt; **Security Settings** page. **Note**: * When both
+     * &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,
+     * &#x60;password&#x60; takes precedence. * If [Multi-Factor Authentication
+     * (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your
+     * instance, the API login request with &#x60;username&#x60; and &#x60;password&#x60; returns an
+     * error. You can switch to token-based authentication with &#x60;secret_key&#x60; or contact
+     * ThoughtSpot Support for assistance. The token obtained from ThoughtSpot is valid for 5
+     * minutes by default. You can configure the token expiration time as required. ####
+     * Just-in-time provisioning For [just-in-time user creation and
+     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the
+     * following attributes in the API request: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
      * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;group_identifiers&#x60; Set
-     * &#x60;auto_create&#x60; to &#x60;True&#x60; if the user is not available in ThoughtSpot. If
-     * the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to
-     * &#x60;true&#x60;, the API call will update user properties like display name, email and group
-     * assignment. For more information, see [Just-in-time
-     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). To add a
-     * new user and assign privileges, you need &#x60;ADMINISTRATION&#x60; (**Can administer
-     * ThoughtSpot**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
-     * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
-     * is required. #### Important point to note All options in the token creation APIs changing the
-     * content in ThoughtSpot will do so during the token creation and not when the token is being
-     * used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when
-     * the authentication token is created.
+     * &#x60;auto_create&#x60; to &#x60;true&#x60; if the username does not exist in ThoughtSpot. If
+     * the user already exists in ThoughtSpot and &#x60;auto_create&#x60; is set to
+     * &#x60;true&#x60;, user properties such as display name, email and group assignment will be
+     * updated. To add a new user and assign privileges during auto-creation, the
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required. If
+     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled,
+     * the &#x60;CONTROL_TRUSTED_AUTH&#x60; (**Can Enable or Disable Trusted Authentication**)
+     * privilege is required. #### Important point to note All options in the token creation APIs
+     * that define user access to data in ThoughtSpot will take effect during token creation, not
+     * when the token is used for authentication. For example, &#x60;auto_create:true&#x60; will
+     * create the user when the authentication token is created.
      *
      * @param getFullAccessTokenRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -15181,34 +15548,37 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 9.0.0.cl or later Gets an authentication token that provides access to a specific
-     * metadata object. By default, the token obtained from ThoughtSpot remains valid for 5 mins.
-     * You can generate the token for a user by providing a &#x60;username&#x60; and
-     * &#x60;password&#x60;, or by using the cluster’s &#x60;secret key&#x60; (for [Trusted
-     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable)).
-     * To generate a &#x60;secret_key&#x60; on your cluster, the administrator must enable **Trusted
-     * authentication** in the **Develop** &gt; **Customizations** &gt; **Security Settings** page.
-     * **Note**: When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API
-     * request, &#x60;password&#x60; takes precedence. If Multi-Factor Authentication (MFA) is
-     * enabled on your instance, the API login request with basic authentication
-     * (&#x60;username&#x60; and &#x60;password&#x60; ) returns an error. You can switch to
-     * token-based authentication with &#x60;secret_key&#x60; or contact ThoughtSpot Support for
-     * assistance. #### Just-in-time provisioning For just-in-time user creation and provisioning,
-     * define the following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
+     * Version: 9.0.0.cl or later Generates an authentication token that provides access to a
+     * specific metadata object. This object list is intersected with the list of objects the user
+     * is allowed to access via group membership. For more information, see [Object
+     * security](https://docs.thoughtspot.com/cloud/latest/security-data-object#object_security).
+     * #### Usage guidelines You can generate a token for a user by providing a &#x60;username&#x60;
+     * and &#x60;password&#x60;, or by using the &#x60;secret_key&#x60; generated for your instance.
+     * To generate a &#x60;secret_key&#x60;, the administrator must enable [Trusted
+     * authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the
+     * **Develop** &gt; **Customizations** &gt; **Security Settings** page. **Note**: * When both
+     * &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,
+     * &#x60;password&#x60; takes precedence. * If [Multi-Factor Authentication
+     * (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your
+     * instance, the API login request with &#x60;username&#x60; and &#x60;password&#x60; returns an
+     * error. You can switch to token-based authentication with &#x60;secret_key&#x60; or contact
+     * ThoughtSpot Support for assistance. The token obtained from ThoughtSpot is valid for 5
+     * minutes by default. You can configure the token expiration time as required. ####
+     * Just-in-time provisioning For [just-in-time user creation and
+     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the
+     * following attributes in the API request: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
      * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;group_identifiers&#x60; Set
-     * &#x60;auto_create&#x60; to &#x60;True&#x60; if the user is not available in ThoughtSpot. If
+     * &#x60;auto_create&#x60; to &#x60;true&#x60; if the user is not available in ThoughtSpot. If
      * the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to
-     * &#x60;true&#x60;, the API call will update user properties like display name, email and group
-     * assignment. For more information, see [Just-in-time
-     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). To add a
-     * new user and assign privileges, you need &#x60;ADMINISTRATION&#x60; (**Can administer
-     * ThoughtSpot**) privilege. If [Role-Based Access Control
+     * &#x60;true&#x60;, user properties such as display name, email, and group assignment will be
+     * updated. To add a new user and assign privileges, the &#x60;ADMINISTRATION&#x60; (**Can
+     * administer ThoughtSpot**) privilege is required. If [Role-Based Access Control
      * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
      * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
-     * is required. #### Important point to note All options in the token creation APIs changing the
-     * content in ThoughtSpot will do so during the token creation and not when the token is being
-     * used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when
-     * the authentication token is created.
+     * is required. #### Important point to note All options in the token creation APIs that define
+     * user access to data in ThoughtSpot will take effect during token creation, not when the token
+     * is used for authentication. For example, &#x60;auto_create:true&#x60; will create the user
+     * when the authentication token is created.
      *
      * @param getObjectAccessTokenRequest (required)
      * @return Token
@@ -15233,34 +15603,37 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 9.0.0.cl or later Gets an authentication token that provides access to a specific
-     * metadata object. By default, the token obtained from ThoughtSpot remains valid for 5 mins.
-     * You can generate the token for a user by providing a &#x60;username&#x60; and
-     * &#x60;password&#x60;, or by using the cluster’s &#x60;secret key&#x60; (for [Trusted
-     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable)).
-     * To generate a &#x60;secret_key&#x60; on your cluster, the administrator must enable **Trusted
-     * authentication** in the **Develop** &gt; **Customizations** &gt; **Security Settings** page.
-     * **Note**: When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API
-     * request, &#x60;password&#x60; takes precedence. If Multi-Factor Authentication (MFA) is
-     * enabled on your instance, the API login request with basic authentication
-     * (&#x60;username&#x60; and &#x60;password&#x60; ) returns an error. You can switch to
-     * token-based authentication with &#x60;secret_key&#x60; or contact ThoughtSpot Support for
-     * assistance. #### Just-in-time provisioning For just-in-time user creation and provisioning,
-     * define the following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
+     * Version: 9.0.0.cl or later Generates an authentication token that provides access to a
+     * specific metadata object. This object list is intersected with the list of objects the user
+     * is allowed to access via group membership. For more information, see [Object
+     * security](https://docs.thoughtspot.com/cloud/latest/security-data-object#object_security).
+     * #### Usage guidelines You can generate a token for a user by providing a &#x60;username&#x60;
+     * and &#x60;password&#x60;, or by using the &#x60;secret_key&#x60; generated for your instance.
+     * To generate a &#x60;secret_key&#x60;, the administrator must enable [Trusted
+     * authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the
+     * **Develop** &gt; **Customizations** &gt; **Security Settings** page. **Note**: * When both
+     * &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,
+     * &#x60;password&#x60; takes precedence. * If [Multi-Factor Authentication
+     * (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your
+     * instance, the API login request with &#x60;username&#x60; and &#x60;password&#x60; returns an
+     * error. You can switch to token-based authentication with &#x60;secret_key&#x60; or contact
+     * ThoughtSpot Support for assistance. The token obtained from ThoughtSpot is valid for 5
+     * minutes by default. You can configure the token expiration time as required. ####
+     * Just-in-time provisioning For [just-in-time user creation and
+     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the
+     * following attributes in the API request: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
      * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;group_identifiers&#x60; Set
-     * &#x60;auto_create&#x60; to &#x60;True&#x60; if the user is not available in ThoughtSpot. If
+     * &#x60;auto_create&#x60; to &#x60;true&#x60; if the user is not available in ThoughtSpot. If
      * the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to
-     * &#x60;true&#x60;, the API call will update user properties like display name, email and group
-     * assignment. For more information, see [Just-in-time
-     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). To add a
-     * new user and assign privileges, you need &#x60;ADMINISTRATION&#x60; (**Can administer
-     * ThoughtSpot**) privilege. If [Role-Based Access Control
+     * &#x60;true&#x60;, user properties such as display name, email, and group assignment will be
+     * updated. To add a new user and assign privileges, the &#x60;ADMINISTRATION&#x60; (**Can
+     * administer ThoughtSpot**) privilege is required. If [Role-Based Access Control
      * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
      * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
-     * is required. #### Important point to note All options in the token creation APIs changing the
-     * content in ThoughtSpot will do so during the token creation and not when the token is being
-     * used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when
-     * the authentication token is created.
+     * is required. #### Important point to note All options in the token creation APIs that define
+     * user access to data in ThoughtSpot will take effect during token creation, not when the token
+     * is used for authentication. For example, &#x60;auto_create:true&#x60; will create the user
+     * when the authentication token is created.
      *
      * @param getObjectAccessTokenRequest (required)
      * @return ApiResponse&lt;Token&gt;
@@ -15286,34 +15659,37 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 9.0.0.cl or later Gets an authentication token that provides access
-     * to a specific metadata object. By default, the token obtained from ThoughtSpot remains valid
-     * for 5 mins. You can generate the token for a user by providing a &#x60;username&#x60; and
-     * &#x60;password&#x60;, or by using the cluster’s &#x60;secret key&#x60; (for [Trusted
-     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable)).
-     * To generate a &#x60;secret_key&#x60; on your cluster, the administrator must enable **Trusted
-     * authentication** in the **Develop** &gt; **Customizations** &gt; **Security Settings** page.
-     * **Note**: When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API
-     * request, &#x60;password&#x60; takes precedence. If Multi-Factor Authentication (MFA) is
-     * enabled on your instance, the API login request with basic authentication
-     * (&#x60;username&#x60; and &#x60;password&#x60; ) returns an error. You can switch to
-     * token-based authentication with &#x60;secret_key&#x60; or contact ThoughtSpot Support for
-     * assistance. #### Just-in-time provisioning For just-in-time user creation and provisioning,
-     * define the following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
+     * (asynchronously) Version: 9.0.0.cl or later Generates an authentication token that provides
+     * access to a specific metadata object. This object list is intersected with the list of
+     * objects the user is allowed to access via group membership. For more information, see [Object
+     * security](https://docs.thoughtspot.com/cloud/latest/security-data-object#object_security).
+     * #### Usage guidelines You can generate a token for a user by providing a &#x60;username&#x60;
+     * and &#x60;password&#x60;, or by using the &#x60;secret_key&#x60; generated for your instance.
+     * To generate a &#x60;secret_key&#x60;, the administrator must enable [Trusted
+     * authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the
+     * **Develop** &gt; **Customizations** &gt; **Security Settings** page. **Note**: * When both
+     * &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,
+     * &#x60;password&#x60; takes precedence. * If [Multi-Factor Authentication
+     * (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your
+     * instance, the API login request with &#x60;username&#x60; and &#x60;password&#x60; returns an
+     * error. You can switch to token-based authentication with &#x60;secret_key&#x60; or contact
+     * ThoughtSpot Support for assistance. The token obtained from ThoughtSpot is valid for 5
+     * minutes by default. You can configure the token expiration time as required. ####
+     * Just-in-time provisioning For [just-in-time user creation and
+     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the
+     * following attributes in the API request: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
      * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;group_identifiers&#x60; Set
-     * &#x60;auto_create&#x60; to &#x60;True&#x60; if the user is not available in ThoughtSpot. If
+     * &#x60;auto_create&#x60; to &#x60;true&#x60; if the user is not available in ThoughtSpot. If
      * the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to
-     * &#x60;true&#x60;, the API call will update user properties like display name, email and group
-     * assignment. For more information, see [Just-in-time
-     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). To add a
-     * new user and assign privileges, you need &#x60;ADMINISTRATION&#x60; (**Can administer
-     * ThoughtSpot**) privilege. If [Role-Based Access Control
+     * &#x60;true&#x60;, user properties such as display name, email, and group assignment will be
+     * updated. To add a new user and assign privileges, the &#x60;ADMINISTRATION&#x60; (**Can
+     * administer ThoughtSpot**) privilege is required. If [Role-Based Access Control
      * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
      * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
-     * is required. #### Important point to note All options in the token creation APIs changing the
-     * content in ThoughtSpot will do so during the token creation and not when the token is being
-     * used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when
-     * the authentication token is created.
+     * is required. #### Important point to note All options in the token creation APIs that define
+     * user access to data in ThoughtSpot will take effect during token creation, not when the token
+     * is used for authentication. For example, &#x60;auto_create:true&#x60; will create the user
+     * when the authentication token is created.
      *
      * @param getObjectAccessTokenRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -17211,6 +17587,241 @@ public class ThoughtSpotRestApi {
     public okhttp3.Call logoutAsync(final ApiCallback<Void> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = logoutValidateBeforeCall(_callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for manageObjectPrivilege
+     *
+     * @param manageObjectPrivilegeRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Object privileges added/removed successfully </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call manageObjectPrivilegeCall(
+            ManageObjectPrivilegeRequest manageObjectPrivilegeRequest, final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = manageObjectPrivilegeRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/security/metadata/manage-object-privilege";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call manageObjectPrivilegeValidateBeforeCall(
+            ManageObjectPrivilegeRequest manageObjectPrivilegeRequest, final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'manageObjectPrivilegeRequest' is set
+        if (manageObjectPrivilegeRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'manageObjectPrivilegeRequest' when calling"
+                            + " manageObjectPrivilege(Async)");
+        }
+
+        return manageObjectPrivilegeCall(manageObjectPrivilegeRequest, _callback);
+    }
+
+    /**
+     * Version: 26.3.0.cl or later This API allows the addition or deletion of object level
+     * privileges for a set of users and groups, on a set of metadata objects. It provides users to
+     * access certain features based on privilege based access control. #### Usage guidelines -
+     * Specify the &#x60;operation&#x60;. The supported operations are: &#x60;ADD&#x60;,
+     * &#x60;REMOVE&#x60;. - Specify the type of the objects on which the object privileges are
+     * being provided in &#x60;metadata_type&#x60;. Only &#x60;LOGICAL_TABLE&#x60; metadata type is
+     * supported for now. It may be extended for other metadata types in future. - Specify the list
+     * of object privilege types in the &#x60;object_privilege_types&#x60; array. The supported
+     * object privilege types are: &#x60;SPOTTER_COACHING_PRIVILEGE&#x60;. - Specify the identifiers
+     * (either GUID or name) for the metadata objects in the &#x60;metadata_identifiers&#x60; array.
+     * - Specify the &#x60;type&#x60; (&#x60;USER&#x60; or &#x60;USER_GROUP&#x60;) and
+     * &#x60;identifier&#x60; (either GUID or name) of the principals to which you want to apply the
+     * given operation and given object privileges in the &#x60;principals&#x60; array. - Ensure
+     * using correct Authorization Bearer Token corresponding to specific user &amp; org. ####
+     * Example request &#x60;&#x60;&#x60;json { \&quot;operation\&quot;:
+     * \&quot;operation-type\&quot;, \&quot;metadata_type\&quot;: \&quot;metadata-type\&quot;,
+     * \&quot;object_privilege_types\&quot;: [\&quot;privilege-type-1\&quot;,
+     * \&quot;privilege-type-2\&quot;], \&quot;metadata_identifiers\&quot;:
+     * [\&quot;metadata-guid-or-name-1\&quot;, \&quot;metadata-guid-or-name-1\&quot;],
+     * \&quot;principals\&quot;: [ { \&quot;type\&quot;: \&quot;type-1\&quot;,
+     * \&quot;identifier\&quot;: \&quot;principal-guid-or-name-1\&quot; }, { \&quot;type\&quot;:
+     * \&quot;type-2\&quot;, \&quot;identifier\&quot;: \&quot;principal-guid-or-name-2\&quot; } ] }
+     * &#x60;&#x60;&#x60; &gt; ###### Note: &gt; * Only admin users, users with edit access and
+     * users with coaching privilege on a given data-model can add or remove principals related to
+     * SPOTTER_COACHING_PRIVILEGE
+     *
+     * @param manageObjectPrivilegeRequest (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Object privileges added/removed successfully </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public void manageObjectPrivilege(ManageObjectPrivilegeRequest manageObjectPrivilegeRequest)
+            throws ApiException {
+        manageObjectPrivilegeWithHttpInfo(manageObjectPrivilegeRequest);
+    }
+
+    /**
+     * Version: 26.3.0.cl or later This API allows the addition or deletion of object level
+     * privileges for a set of users and groups, on a set of metadata objects. It provides users to
+     * access certain features based on privilege based access control. #### Usage guidelines -
+     * Specify the &#x60;operation&#x60;. The supported operations are: &#x60;ADD&#x60;,
+     * &#x60;REMOVE&#x60;. - Specify the type of the objects on which the object privileges are
+     * being provided in &#x60;metadata_type&#x60;. Only &#x60;LOGICAL_TABLE&#x60; metadata type is
+     * supported for now. It may be extended for other metadata types in future. - Specify the list
+     * of object privilege types in the &#x60;object_privilege_types&#x60; array. The supported
+     * object privilege types are: &#x60;SPOTTER_COACHING_PRIVILEGE&#x60;. - Specify the identifiers
+     * (either GUID or name) for the metadata objects in the &#x60;metadata_identifiers&#x60; array.
+     * - Specify the &#x60;type&#x60; (&#x60;USER&#x60; or &#x60;USER_GROUP&#x60;) and
+     * &#x60;identifier&#x60; (either GUID or name) of the principals to which you want to apply the
+     * given operation and given object privileges in the &#x60;principals&#x60; array. - Ensure
+     * using correct Authorization Bearer Token corresponding to specific user &amp; org. ####
+     * Example request &#x60;&#x60;&#x60;json { \&quot;operation\&quot;:
+     * \&quot;operation-type\&quot;, \&quot;metadata_type\&quot;: \&quot;metadata-type\&quot;,
+     * \&quot;object_privilege_types\&quot;: [\&quot;privilege-type-1\&quot;,
+     * \&quot;privilege-type-2\&quot;], \&quot;metadata_identifiers\&quot;:
+     * [\&quot;metadata-guid-or-name-1\&quot;, \&quot;metadata-guid-or-name-1\&quot;],
+     * \&quot;principals\&quot;: [ { \&quot;type\&quot;: \&quot;type-1\&quot;,
+     * \&quot;identifier\&quot;: \&quot;principal-guid-or-name-1\&quot; }, { \&quot;type\&quot;:
+     * \&quot;type-2\&quot;, \&quot;identifier\&quot;: \&quot;principal-guid-or-name-2\&quot; } ] }
+     * &#x60;&#x60;&#x60; &gt; ###### Note: &gt; * Only admin users, users with edit access and
+     * users with coaching privilege on a given data-model can add or remove principals related to
+     * SPOTTER_COACHING_PRIVILEGE
+     *
+     * @param manageObjectPrivilegeRequest (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Object privileges added/removed successfully </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<Void> manageObjectPrivilegeWithHttpInfo(
+            ManageObjectPrivilegeRequest manageObjectPrivilegeRequest) throws ApiException {
+        okhttp3.Call localVarCall =
+                manageObjectPrivilegeValidateBeforeCall(manageObjectPrivilegeRequest, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     * (asynchronously) Version: 26.3.0.cl or later This API allows the addition or deletion of
+     * object level privileges for a set of users and groups, on a set of metadata objects. It
+     * provides users to access certain features based on privilege based access control. #### Usage
+     * guidelines - Specify the &#x60;operation&#x60;. The supported operations are:
+     * &#x60;ADD&#x60;, &#x60;REMOVE&#x60;. - Specify the type of the objects on which the object
+     * privileges are being provided in &#x60;metadata_type&#x60;. Only &#x60;LOGICAL_TABLE&#x60;
+     * metadata type is supported for now. It may be extended for other metadata types in future. -
+     * Specify the list of object privilege types in the &#x60;object_privilege_types&#x60; array.
+     * The supported object privilege types are: &#x60;SPOTTER_COACHING_PRIVILEGE&#x60;. - Specify
+     * the identifiers (either GUID or name) for the metadata objects in the
+     * &#x60;metadata_identifiers&#x60; array. - Specify the &#x60;type&#x60; (&#x60;USER&#x60; or
+     * &#x60;USER_GROUP&#x60;) and &#x60;identifier&#x60; (either GUID or name) of the principals to
+     * which you want to apply the given operation and given object privileges in the
+     * &#x60;principals&#x60; array. - Ensure using correct Authorization Bearer Token corresponding
+     * to specific user &amp; org. #### Example request &#x60;&#x60;&#x60;json {
+     * \&quot;operation\&quot;: \&quot;operation-type\&quot;, \&quot;metadata_type\&quot;:
+     * \&quot;metadata-type\&quot;, \&quot;object_privilege_types\&quot;:
+     * [\&quot;privilege-type-1\&quot;, \&quot;privilege-type-2\&quot;],
+     * \&quot;metadata_identifiers\&quot;: [\&quot;metadata-guid-or-name-1\&quot;,
+     * \&quot;metadata-guid-or-name-1\&quot;], \&quot;principals\&quot;: [ { \&quot;type\&quot;:
+     * \&quot;type-1\&quot;, \&quot;identifier\&quot;: \&quot;principal-guid-or-name-1\&quot; }, {
+     * \&quot;type\&quot;: \&quot;type-2\&quot;, \&quot;identifier\&quot;:
+     * \&quot;principal-guid-or-name-2\&quot; } ] } &#x60;&#x60;&#x60; &gt; ###### Note: &gt; * Only
+     * admin users, users with edit access and users with coaching privilege on a given data-model
+     * can add or remove principals related to SPOTTER_COACHING_PRIVILEGE
+     *
+     * @param manageObjectPrivilegeRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Object privileges added/removed successfully </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call manageObjectPrivilegeAsync(
+            ManageObjectPrivilegeRequest manageObjectPrivilegeRequest,
+            final ApiCallback<Void> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                manageObjectPrivilegeValidateBeforeCall(manageObjectPrivilegeRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -23173,14 +23784,19 @@ public class ThoughtSpotRestApi {
 
     /**
      * Version: 9.0.0.cl or later Allows sharing one or several metadata objects with users and
-     * groups in ThoughtSpot. Requires edit access to the metadata object. The API endpoint allows
-     * sharing only the following types of metadata objects: * Liveboards * Visualizations * Answers
-     * * Worksheets * Views * Connections You can provide &#x60;READ_ONLY&#x60; or
-     * &#x60;MODIFY&#x60; access when sharing an object with another user or group. With
-     * &#x60;READ_ONLY&#x60; access grants view access to the shared object, whereas
-     * &#x60;MODIFY&#x60; provides edit access. To prevent a user or group from accessing the shared
-     * object, specify the GUID or name of the principal and set &#x60;shareMode&#x60; to
-     * &#x60;NO_ACCESS&#x60;.
+     * groups in ThoughtSpot. Requires edit access to the metadata object. #### Supported metadata
+     * objects: * Liveboards * Visualizations * Answers * Models * Views * Connections #### Object
+     * permissions You can provide &#x60;READ_ONLY&#x60; or &#x60;MODIFY&#x60; access when sharing
+     * an object with another user or group. The &#x60;READ_ONLY&#x60; permission grants view access
+     * to the shared object, whereas &#x60;MODIFY&#x60; provides edit access. To prevent a user or
+     * group from accessing the shared object, specify the GUID or name of the principal and set
+     * &#x60;shareMode&#x60; to &#x60;NO_ACCESS&#x60;. #### Sharing a visualization * Sharing a
+     * visualization implicitly shares the entire Liveboard with the recipient. * Object permissions
+     * set for a shared visualization also apply to the Liveboard unless overridden by another API
+     * request or via UI. * If email notifications for object sharing are enabled, a notification
+     * with a link to the shared visualization will be sent to the recipient’s email address.
+     * Although this link opens the shared visualization, recipients can also access other
+     * visualizations in the Liveboard.
      *
      * @param shareMetadataRequest (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -23202,14 +23818,19 @@ public class ThoughtSpotRestApi {
 
     /**
      * Version: 9.0.0.cl or later Allows sharing one or several metadata objects with users and
-     * groups in ThoughtSpot. Requires edit access to the metadata object. The API endpoint allows
-     * sharing only the following types of metadata objects: * Liveboards * Visualizations * Answers
-     * * Worksheets * Views * Connections You can provide &#x60;READ_ONLY&#x60; or
-     * &#x60;MODIFY&#x60; access when sharing an object with another user or group. With
-     * &#x60;READ_ONLY&#x60; access grants view access to the shared object, whereas
-     * &#x60;MODIFY&#x60; provides edit access. To prevent a user or group from accessing the shared
-     * object, specify the GUID or name of the principal and set &#x60;shareMode&#x60; to
-     * &#x60;NO_ACCESS&#x60;.
+     * groups in ThoughtSpot. Requires edit access to the metadata object. #### Supported metadata
+     * objects: * Liveboards * Visualizations * Answers * Models * Views * Connections #### Object
+     * permissions You can provide &#x60;READ_ONLY&#x60; or &#x60;MODIFY&#x60; access when sharing
+     * an object with another user or group. The &#x60;READ_ONLY&#x60; permission grants view access
+     * to the shared object, whereas &#x60;MODIFY&#x60; provides edit access. To prevent a user or
+     * group from accessing the shared object, specify the GUID or name of the principal and set
+     * &#x60;shareMode&#x60; to &#x60;NO_ACCESS&#x60;. #### Sharing a visualization * Sharing a
+     * visualization implicitly shares the entire Liveboard with the recipient. * Object permissions
+     * set for a shared visualization also apply to the Liveboard unless overridden by another API
+     * request or via UI. * If email notifications for object sharing are enabled, a notification
+     * with a link to the shared visualization will be sent to the recipient’s email address.
+     * Although this link opens the shared visualization, recipients can also access other
+     * visualizations in the Liveboard.
      *
      * @param shareMetadataRequest (required)
      * @return ApiResponse&lt;Void&gt;
@@ -23234,14 +23855,19 @@ public class ThoughtSpotRestApi {
 
     /**
      * (asynchronously) Version: 9.0.0.cl or later Allows sharing one or several metadata objects
-     * with users and groups in ThoughtSpot. Requires edit access to the metadata object. The API
-     * endpoint allows sharing only the following types of metadata objects: * Liveboards *
-     * Visualizations * Answers * Worksheets * Views * Connections You can provide
-     * &#x60;READ_ONLY&#x60; or &#x60;MODIFY&#x60; access when sharing an object with another user
-     * or group. With &#x60;READ_ONLY&#x60; access grants view access to the shared object, whereas
+     * with users and groups in ThoughtSpot. Requires edit access to the metadata object. ####
+     * Supported metadata objects: * Liveboards * Visualizations * Answers * Models * Views *
+     * Connections #### Object permissions You can provide &#x60;READ_ONLY&#x60; or
+     * &#x60;MODIFY&#x60; access when sharing an object with another user or group. The
+     * &#x60;READ_ONLY&#x60; permission grants view access to the shared object, whereas
      * &#x60;MODIFY&#x60; provides edit access. To prevent a user or group from accessing the shared
      * object, specify the GUID or name of the principal and set &#x60;shareMode&#x60; to
-     * &#x60;NO_ACCESS&#x60;.
+     * &#x60;NO_ACCESS&#x60;. #### Sharing a visualization * Sharing a visualization implicitly
+     * shares the entire Liveboard with the recipient. * Object permissions set for a shared
+     * visualization also apply to the Liveboard unless overridden by another API request or via UI.
+     * * If email notifications for object sharing are enabled, a notification with a link to the
+     * shared visualization will be sent to the recipient’s email address. Although this link opens
+     * the shared visualization, recipients can also access other visualizations in the Liveboard.
      *
      * @param shareMetadataRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -23446,7 +24072,7 @@ public class ThoughtSpotRestApi {
     /**
      * Build call for unassignTag
      *
-     * @param assignTagRequest (required)
+     * @param unassignTagRequest (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -23462,7 +24088,8 @@ public class ThoughtSpotRestApi {
      * </table>
      */
     public okhttp3.Call unassignTagCall(
-            AssignTagRequest assignTagRequest, final ApiCallback _callback) throws ApiException {
+            UnassignTagRequest unassignTagRequest, final ApiCallback _callback)
+            throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {};
@@ -23476,7 +24103,7 @@ public class ThoughtSpotRestApi {
             basePath = null;
         }
 
-        Object localVarPostBody = assignTagRequest;
+        Object localVarPostBody = unassignTagRequest;
 
         // create path and map variables
         String localVarPath = "/api/rest/2.0/tags/unassign";
@@ -23517,22 +24144,23 @@ public class ThoughtSpotRestApi {
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call unassignTagValidateBeforeCall(
-            AssignTagRequest assignTagRequest, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'assignTagRequest' is set
-        if (assignTagRequest == null) {
+            UnassignTagRequest unassignTagRequest, final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'unassignTagRequest' is set
+        if (unassignTagRequest == null) {
             throw new ApiException(
-                    "Missing the required parameter 'assignTagRequest' when calling"
+                    "Missing the required parameter 'unassignTagRequest' when calling"
                             + " unassignTag(Async)");
         }
 
-        return unassignTagCall(assignTagRequest, _callback);
+        return unassignTagCall(unassignTagRequest, _callback);
     }
 
     /**
      * Version: 9.0.0.cl or later Removes the tags applied to a Liveboard, Answer, Table, or
      * Worksheet. Requires edit access to the metadata object.
      *
-     * @param assignTagRequest (required)
+     * @param unassignTagRequest (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
      * @http.response.details
@@ -23546,15 +24174,15 @@ public class ThoughtSpotRestApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public void unassignTag(AssignTagRequest assignTagRequest) throws ApiException {
-        unassignTagWithHttpInfo(assignTagRequest);
+    public void unassignTag(UnassignTagRequest unassignTagRequest) throws ApiException {
+        unassignTagWithHttpInfo(unassignTagRequest);
     }
 
     /**
      * Version: 9.0.0.cl or later Removes the tags applied to a Liveboard, Answer, Table, or
      * Worksheet. Requires edit access to the metadata object.
      *
-     * @param assignTagRequest (required)
+     * @param unassignTagRequest (required)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -23569,9 +24197,9 @@ public class ThoughtSpotRestApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public ApiResponse<Void> unassignTagWithHttpInfo(AssignTagRequest assignTagRequest)
+    public ApiResponse<Void> unassignTagWithHttpInfo(UnassignTagRequest unassignTagRequest)
             throws ApiException {
-        okhttp3.Call localVarCall = unassignTagValidateBeforeCall(assignTagRequest, null);
+        okhttp3.Call localVarCall = unassignTagValidateBeforeCall(unassignTagRequest, null);
         return localVarApiClient.execute(localVarCall);
     }
 
@@ -23579,7 +24207,7 @@ public class ThoughtSpotRestApi {
      * (asynchronously) Version: 9.0.0.cl or later Removes the tags applied to a Liveboard, Answer,
      * Table, or Worksheet. Requires edit access to the metadata object.
      *
-     * @param assignTagRequest (required)
+     * @param unassignTagRequest (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body
@@ -23596,10 +24224,10 @@ public class ThoughtSpotRestApi {
      * </table>
      */
     public okhttp3.Call unassignTagAsync(
-            AssignTagRequest assignTagRequest, final ApiCallback<Void> _callback)
+            UnassignTagRequest unassignTagRequest, final ApiCallback<Void> _callback)
             throws ApiException {
 
-        okhttp3.Call localVarCall = unassignTagValidateBeforeCall(assignTagRequest, _callback);
+        okhttp3.Call localVarCall = unassignTagValidateBeforeCall(unassignTagRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -26339,7 +26967,7 @@ public class ThoughtSpotRestApi {
      * \&quot;https://your-website.com/\&quot;, \&quot;company_privacy_policy_url\&quot; :
      * \&quot;https://link-to-privacy-policy.com/\&quot;, \&quot;contact_support_url\&quot;:
      * \&quot;https://link-to-contact-support.com/\&quot;, \&quot;hide_contact_support_url\&quot;:
-     * false } } &#x60;&#x60;&#x60;
+     * false, \&quot;hide_logo_url\&quot; : false } } &#x60;&#x60;&#x60;
      *
      * @param updateEmailCustomizationRequest (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -26389,7 +27017,7 @@ public class ThoughtSpotRestApi {
      * \&quot;https://your-website.com/\&quot;, \&quot;company_privacy_policy_url\&quot; :
      * \&quot;https://link-to-privacy-policy.com/\&quot;, \&quot;contact_support_url\&quot;:
      * \&quot;https://link-to-contact-support.com/\&quot;, \&quot;hide_contact_support_url\&quot;:
-     * false } } &#x60;&#x60;&#x60;
+     * false, \&quot;hide_logo_url\&quot; : false } } &#x60;&#x60;&#x60;
      *
      * @param updateEmailCustomizationRequest (required)
      * @return ApiResponse&lt;Void&gt;
@@ -26442,7 +27070,7 @@ public class ThoughtSpotRestApi {
      * \&quot;https://your-website.com/\&quot;, \&quot;company_privacy_policy_url\&quot; :
      * \&quot;https://link-to-privacy-policy.com/\&quot;, \&quot;contact_support_url\&quot;:
      * \&quot;https://link-to-contact-support.com/\&quot;, \&quot;hide_contact_support_url\&quot;:
-     * false } } &#x60;&#x60;&#x60;
+     * false, \&quot;hide_logo_url\&quot; : false } } &#x60;&#x60;&#x60;
      *
      * @param updateEmailCustomizationRequest (required)
      * @param _callback The callback to be executed when the API call finishes

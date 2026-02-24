@@ -12,6 +12,7 @@
 |**orgIdentifier** | **String** | The unique name of the org |  |
 |**principalType** | [**PrincipalTypeEnum**](#PrincipalTypeEnum) | Principal type |  [optional] |
 |**principalIdentifier** | **String** | Unique ID or name of the principal |  [optional] |
+|**modelIdentifier** | **String** | Unique ID of the model   Version: 26.3.0.cl or later  |  [optional] |
 |**priority** | **Integer** | The priority assigned to this value. If there are 2 matching values, the one with the higher priority will be picked. |  [optional] |
 
 

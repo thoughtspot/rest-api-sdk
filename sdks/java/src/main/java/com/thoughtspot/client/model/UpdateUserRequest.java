@@ -20,11 +20,11 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 /** UpdateUserRequest */
@@ -347,7 +347,11 @@ public class UpdateUserRequest implements Serializable {
     @javax.annotation.Nullable
     private OperationEnum operation = OperationEnum.REPLACE;
 
-    /** Locale for the user. */
+    /**
+     * Locale for the user. When setting this value, do not set use_browser_language to true,
+     * otherwise the browser&#39;s language setting will take precedence and the preferred_locale
+     * value will be ignored.
+     */
     @JsonAdapter(PreferredLocaleEnum.Adapter.class)
     public enum PreferredLocaleEnum {
         EN_CA("en-CA"),
@@ -453,6 +457,12 @@ public class UpdateUserRequest implements Serializable {
     @SerializedName(SERIALIZED_NAME_PREFERRED_LOCALE)
     @javax.annotation.Nullable
     private PreferredLocaleEnum preferredLocale;
+
+    public static final String SERIALIZED_NAME_USE_BROWSER_LANGUAGE = "use_browser_language";
+
+    @SerializedName(SERIALIZED_NAME_USE_BROWSER_LANGUAGE)
+    @javax.annotation.Nullable
+    private Boolean useBrowserLanguage;
 
     public static final String SERIALIZED_NAME_EXTENDED_PROPERTIES = "extended_properties";
 
@@ -781,7 +791,9 @@ public class UpdateUserRequest implements Serializable {
     }
 
     /**
-     * Locale for the user.
+     * Locale for the user. When setting this value, do not set use_browser_language to true,
+     * otherwise the browser&#39;s language setting will take precedence and the preferred_locale
+     * value will be ignored.
      *
      * @return preferredLocale
      */
@@ -792,6 +804,28 @@ public class UpdateUserRequest implements Serializable {
 
     public void setPreferredLocale(@javax.annotation.Nullable PreferredLocaleEnum preferredLocale) {
         this.preferredLocale = preferredLocale;
+    }
+
+    public UpdateUserRequest useBrowserLanguage(
+            @javax.annotation.Nullable Boolean useBrowserLanguage) {
+        this.useBrowserLanguage = useBrowserLanguage;
+        return this;
+    }
+
+    /**
+     * Flag to indicate whether to use the browser locale for the user in the UI. When set to true,
+     * the preferred_locale value is unset and the browser&#39;s language setting takes precedence.
+     * Version: 26.3.0.cl or later
+     *
+     * @return useBrowserLanguage
+     */
+    @javax.annotation.Nullable
+    public Boolean getUseBrowserLanguage() {
+        return useBrowserLanguage;
+    }
+
+    public void setUseBrowserLanguage(@javax.annotation.Nullable Boolean useBrowserLanguage) {
+        this.useBrowserLanguage = useBrowserLanguage;
     }
 
     public UpdateUserRequest extendedProperties(
@@ -834,6 +868,50 @@ public class UpdateUserRequest implements Serializable {
         this.extendedPreferences = extendedPreferences;
     }
 
+    /**
+     * A container for additional, undeclared properties. This is a holder for any undeclared
+     * properties as specified with the 'additionalProperties' keyword in the OAS document.
+     */
+    private Map<String, Object> additionalProperties;
+
+    /**
+     * Set the additional (undeclared) property with the specified name and value. If the property
+     * does not already exist, create it otherwise replace it.
+     *
+     * @param key name of the property
+     * @param value value of the property
+     * @return the UpdateUserRequest instance itself
+     */
+    public UpdateUserRequest putAdditionalProperty(String key, Object value) {
+        if (this.additionalProperties == null) {
+            this.additionalProperties = new HashMap<String, Object>();
+        }
+        this.additionalProperties.put(key, value);
+        return this;
+    }
+
+    /**
+     * Return the additional (undeclared) property.
+     *
+     * @return a map of objects
+     */
+    public Map<String, Object> getAdditionalProperties() {
+        return additionalProperties;
+    }
+
+    /**
+     * Return the additional (undeclared) property with the specified name.
+     *
+     * @param key name of the property
+     * @return an object
+     */
+    public Object getAdditionalProperty(String key) {
+        if (this.additionalProperties == null) {
+            return null;
+        }
+        return this.additionalProperties.get(key);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -862,8 +940,11 @@ public class UpdateUserRequest implements Serializable {
                 && Objects.equals(this.orgIdentifiers, updateUserRequest.orgIdentifiers)
                 && Objects.equals(this.operation, updateUserRequest.operation)
                 && Objects.equals(this.preferredLocale, updateUserRequest.preferredLocale)
+                && Objects.equals(this.useBrowserLanguage, updateUserRequest.useBrowserLanguage)
                 && Objects.equals(this.extendedProperties, updateUserRequest.extendedProperties)
-                && Objects.equals(this.extendedPreferences, updateUserRequest.extendedPreferences);
+                && Objects.equals(this.extendedPreferences, updateUserRequest.extendedPreferences)
+                && Objects.equals(
+                        this.additionalProperties, updateUserRequest.additionalProperties);
     }
 
     private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -893,8 +974,10 @@ public class UpdateUserRequest implements Serializable {
                 orgIdentifiers,
                 operation,
                 preferredLocale,
+                useBrowserLanguage,
                 extendedProperties,
-                extendedPreferences);
+                extendedPreferences,
+                additionalProperties);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -929,11 +1012,17 @@ public class UpdateUserRequest implements Serializable {
         sb.append("    orgIdentifiers: ").append(toIndentedString(orgIdentifiers)).append("\n");
         sb.append("    operation: ").append(toIndentedString(operation)).append("\n");
         sb.append("    preferredLocale: ").append(toIndentedString(preferredLocale)).append("\n");
+        sb.append("    useBrowserLanguage: ")
+                .append(toIndentedString(useBrowserLanguage))
+                .append("\n");
         sb.append("    extendedProperties: ")
                 .append(toIndentedString(extendedProperties))
                 .append("\n");
         sb.append("    extendedPreferences: ")
                 .append(toIndentedString(extendedPreferences))
+                .append("\n");
+        sb.append("    additionalProperties: ")
+                .append(toIndentedString(additionalProperties))
                 .append("\n");
         sb.append("}");
         return sb.toString();
@@ -971,6 +1060,7 @@ public class UpdateUserRequest implements Serializable {
         openapiFields.add("org_identifiers");
         openapiFields.add("operation");
         openapiFields.add("preferred_locale");
+        openapiFields.add("use_browser_language");
         openapiFields.add("extended_properties");
         openapiFields.add("extended_preferences");
 
@@ -993,18 +1083,6 @@ public class UpdateUserRequest implements Serializable {
                                 "The required field(s) %s in UpdateUserRequest is not found in the"
                                         + " empty JSON string",
                                 UpdateUserRequest.openapiRequiredFields.toString()));
-            }
-        }
-
-        Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-        // check to see if the JSON string contains additional fields
-        for (Map.Entry<String, JsonElement> entry : entries) {
-            if (!UpdateUserRequest.openapiFields.contains(entry.getKey())) {
-                throw new IllegalArgumentException(
-                        String.format(
-                                "The field `%s` in the JSON string is not defined in the"
-                                        + " `UpdateUserRequest` properties. JSON: %s",
-                                entry.getKey(), jsonElement.toString()));
             }
         }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -1162,6 +1240,30 @@ public class UpdateUserRequest implements Serializable {
                         public void write(JsonWriter out, UpdateUserRequest value)
                                 throws IOException {
                             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+                            obj.remove("additionalProperties");
+                            // serialize additional properties
+                            if (value.getAdditionalProperties() != null) {
+                                for (Map.Entry<String, Object> entry :
+                                        value.getAdditionalProperties().entrySet()) {
+                                    if (entry.getValue() instanceof String)
+                                        obj.addProperty(entry.getKey(), (String) entry.getValue());
+                                    else if (entry.getValue() instanceof Number)
+                                        obj.addProperty(entry.getKey(), (Number) entry.getValue());
+                                    else if (entry.getValue() instanceof Boolean)
+                                        obj.addProperty(entry.getKey(), (Boolean) entry.getValue());
+                                    else if (entry.getValue() instanceof Character)
+                                        obj.addProperty(
+                                                entry.getKey(), (Character) entry.getValue());
+                                    else {
+                                        JsonElement jsonElement = gson.toJsonTree(entry.getValue());
+                                        if (jsonElement.isJsonArray()) {
+                                            obj.add(entry.getKey(), jsonElement.getAsJsonArray());
+                                        } else {
+                                            obj.add(entry.getKey(), jsonElement.getAsJsonObject());
+                                        }
+                                    }
+                                }
+                            }
                             elementAdapter.write(out, obj);
                         }
 
@@ -1169,7 +1271,41 @@ public class UpdateUserRequest implements Serializable {
                         public UpdateUserRequest read(JsonReader in) throws IOException {
                             JsonElement jsonElement = elementAdapter.read(in);
                             validateJsonElement(jsonElement);
-                            return thisAdapter.fromJsonTree(jsonElement);
+                            JsonObject jsonObj = jsonElement.getAsJsonObject();
+                            // store additional fields in the deserialized instance
+                            UpdateUserRequest instance = thisAdapter.fromJsonTree(jsonObj);
+                            for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
+                                if (!openapiFields.contains(entry.getKey())) {
+                                    if (entry.getValue().isJsonPrimitive()) { // primitive type
+                                        if (entry.getValue().getAsJsonPrimitive().isString())
+                                            instance.putAdditionalProperty(
+                                                    entry.getKey(), entry.getValue().getAsString());
+                                        else if (entry.getValue().getAsJsonPrimitive().isNumber())
+                                            instance.putAdditionalProperty(
+                                                    entry.getKey(), entry.getValue().getAsNumber());
+                                        else if (entry.getValue().getAsJsonPrimitive().isBoolean())
+                                            instance.putAdditionalProperty(
+                                                    entry.getKey(),
+                                                    entry.getValue().getAsBoolean());
+                                        else
+                                            throw new IllegalArgumentException(
+                                                    String.format(
+                                                            "The field `%s` has unknown primitive"
+                                                                    + " type. Value: %s",
+                                                            entry.getKey(),
+                                                            entry.getValue().toString()));
+                                    } else if (entry.getValue().isJsonArray()) {
+                                        instance.putAdditionalProperty(
+                                                entry.getKey(),
+                                                gson.fromJson(entry.getValue(), List.class));
+                                    } else { // JSON object
+                                        instance.putAdditionalProperty(
+                                                entry.getKey(),
+                                                gson.fromJson(entry.getValue(), HashMap.class));
+                                    }
+                                }
+                            }
+                            return instance;
                         }
                     }.nullSafe();
         }

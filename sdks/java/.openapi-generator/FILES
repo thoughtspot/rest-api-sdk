@@ -31,6 +31,8 @@ docs/AuthenticationInput.md
 docs/Author.md
 docs/AuthorMetadataTypeInput.md
 docs/AuthorType.md
+docs/AwsS3Config.md
+docs/AwsS3ConfigInput.md
 docs/BasicAuth.md
 docs/BasicAuthInput.md
 docs/CALLBACK.md
@@ -146,6 +148,7 @@ docs/FetchConnectionDiffStatusResponse.md
 docs/FetchLiveboardDataRequest.md
 docs/FetchLiveboardSqlQueryRequest.md
 docs/FetchLogsRequest.md
+docs/FetchObjectPrivilegesRequest.md
 docs/FetchPermissionsOfPrincipalsRequest.md
 docs/FetchPermissionsOnMetadataRequest.md
 docs/FilterRules.md
@@ -190,6 +193,7 @@ docs/LiveboardOptionsInput.md
 docs/LogApi.md
 docs/LogResponse.md
 docs/LoginRequest.md
+docs/ManageObjectPrivilegeRequest.md
 docs/MetadataApi.md
 docs/MetadataAssociationItem.md
 docs/MetadataContext.md
@@ -203,6 +207,8 @@ docs/ModelTableList.md
 docs/NLInstructionsInfo.md
 docs/NLInstructionsInfoInput.md
 docs/ObjectIDAndName.md
+docs/ObjectPrivilegesMetadataInput.md
+docs/ObjectPrivilegesOfMetadataResponse.md
 docs/Org.md
 docs/OrgChannelConfigInput.md
 docs/OrgChannelConfigResponse.md
@@ -321,6 +327,10 @@ docs/SortOptions.md
 docs/SortingOptions.md
 docs/SqlQuery.md
 docs/SqlQueryResponse.md
+docs/StorageConfig.md
+docs/StorageConfigInput.md
+docs/StorageDestination.md
+docs/StorageDestinationInput.md
 docs/SystemApi.md
 docs/SystemConfig.md
 docs/SystemInfo.md
@@ -337,6 +347,7 @@ docs/TokenValidationResponse.md
 docs/URL.md
 docs/URLInput.md
 docs/URLInputMandatory.md
+docs/UnassignTagRequest.md
 docs/UnparameterizeMetadataRequest.md
 docs/UnpublishMetadataRequest.md
 docs/UpdateCalendarRequest.md
@@ -479,6 +490,8 @@ src/main/java/com/thoughtspot/client/model/AuthenticationInput.java
 src/main/java/com/thoughtspot/client/model/Author.java
 src/main/java/com/thoughtspot/client/model/AuthorMetadataTypeInput.java
 src/main/java/com/thoughtspot/client/model/AuthorType.java
+src/main/java/com/thoughtspot/client/model/AwsS3Config.java
+src/main/java/com/thoughtspot/client/model/AwsS3ConfigInput.java
 src/main/java/com/thoughtspot/client/model/BasicAuth.java
 src/main/java/com/thoughtspot/client/model/BasicAuthInput.java
 src/main/java/com/thoughtspot/client/model/CALLBACK.java
@@ -587,6 +600,7 @@ src/main/java/com/thoughtspot/client/model/FetchConnectionDiffStatusResponse.jav
 src/main/java/com/thoughtspot/client/model/FetchLiveboardDataRequest.java
 src/main/java/com/thoughtspot/client/model/FetchLiveboardSqlQueryRequest.java
 src/main/java/com/thoughtspot/client/model/FetchLogsRequest.java
+src/main/java/com/thoughtspot/client/model/FetchObjectPrivilegesRequest.java
 src/main/java/com/thoughtspot/client/model/FetchPermissionsOfPrincipalsRequest.java
 src/main/java/com/thoughtspot/client/model/FetchPermissionsOnMetadataRequest.java
 src/main/java/com/thoughtspot/client/model/FilterRules.java
@@ -629,6 +643,7 @@ src/main/java/com/thoughtspot/client/model/LiveboardOptions.java
 src/main/java/com/thoughtspot/client/model/LiveboardOptionsInput.java
 src/main/java/com/thoughtspot/client/model/LogResponse.java
 src/main/java/com/thoughtspot/client/model/LoginRequest.java
+src/main/java/com/thoughtspot/client/model/ManageObjectPrivilegeRequest.java
 src/main/java/com/thoughtspot/client/model/MetadataAssociationItem.java
 src/main/java/com/thoughtspot/client/model/MetadataContext.java
 src/main/java/com/thoughtspot/client/model/MetadataInput.java
@@ -641,6 +656,8 @@ src/main/java/com/thoughtspot/client/model/ModelTableList.java
 src/main/java/com/thoughtspot/client/model/NLInstructionsInfo.java
 src/main/java/com/thoughtspot/client/model/NLInstructionsInfoInput.java
 src/main/java/com/thoughtspot/client/model/ObjectIDAndName.java
+src/main/java/com/thoughtspot/client/model/ObjectPrivilegesMetadataInput.java
+src/main/java/com/thoughtspot/client/model/ObjectPrivilegesOfMetadataResponse.java
 src/main/java/com/thoughtspot/client/model/Org.java
 src/main/java/com/thoughtspot/client/model/OrgChannelConfigInput.java
 src/main/java/com/thoughtspot/client/model/OrgChannelConfigResponse.java
@@ -754,6 +771,10 @@ src/main/java/com/thoughtspot/client/model/SortOptions.java
 src/main/java/com/thoughtspot/client/model/SortingOptions.java
 src/main/java/com/thoughtspot/client/model/SqlQuery.java
 src/main/java/com/thoughtspot/client/model/SqlQueryResponse.java
+src/main/java/com/thoughtspot/client/model/StorageConfig.java
+src/main/java/com/thoughtspot/client/model/StorageConfigInput.java
+src/main/java/com/thoughtspot/client/model/StorageDestination.java
+src/main/java/com/thoughtspot/client/model/StorageDestinationInput.java
 src/main/java/com/thoughtspot/client/model/SystemConfig.java
 src/main/java/com/thoughtspot/client/model/SystemInfo.java
 src/main/java/com/thoughtspot/client/model/SystemOverrideInfo.java
@@ -767,6 +788,7 @@ src/main/java/com/thoughtspot/client/model/TokenValidationResponse.java
 src/main/java/com/thoughtspot/client/model/URL.java
 src/main/java/com/thoughtspot/client/model/URLInput.java
 src/main/java/com/thoughtspot/client/model/URLInputMandatory.java
+src/main/java/com/thoughtspot/client/model/UnassignTagRequest.java
 src/main/java/com/thoughtspot/client/model/UnparameterizeMetadataRequest.java
 src/main/java/com/thoughtspot/client/model/UnpublishMetadataRequest.java
 src/main/java/com/thoughtspot/client/model/UpdateCalendarRequest.java
@@ -872,6 +894,8 @@ src/test/java/com/thoughtspot/client/model/AuthenticationTest.java
 src/test/java/com/thoughtspot/client/model/AuthorMetadataTypeInputTest.java
 src/test/java/com/thoughtspot/client/model/AuthorTest.java
 src/test/java/com/thoughtspot/client/model/AuthorTypeTest.java
+src/test/java/com/thoughtspot/client/model/AwsS3ConfigInputTest.java
+src/test/java/com/thoughtspot/client/model/AwsS3ConfigTest.java
 src/test/java/com/thoughtspot/client/model/BasicAuthInputTest.java
 src/test/java/com/thoughtspot/client/model/BasicAuthTest.java
 src/test/java/com/thoughtspot/client/model/CALLBACKInputMandatoryTest.java
@@ -980,6 +1004,7 @@ src/test/java/com/thoughtspot/client/model/FetchConnectionDiffStatusResponseTest
 src/test/java/com/thoughtspot/client/model/FetchLiveboardDataRequestTest.java
 src/test/java/com/thoughtspot/client/model/FetchLiveboardSqlQueryRequestTest.java
 src/test/java/com/thoughtspot/client/model/FetchLogsRequestTest.java
+src/test/java/com/thoughtspot/client/model/FetchObjectPrivilegesRequestTest.java
 src/test/java/com/thoughtspot/client/model/FetchPermissionsOfPrincipalsRequestTest.java
 src/test/java/com/thoughtspot/client/model/FetchPermissionsOnMetadataRequestTest.java
 src/test/java/com/thoughtspot/client/model/FilterRulesTest.java
@@ -1022,6 +1047,7 @@ src/test/java/com/thoughtspot/client/model/LiveboardOptionsInputTest.java
 src/test/java/com/thoughtspot/client/model/LiveboardOptionsTest.java
 src/test/java/com/thoughtspot/client/model/LogResponseTest.java
 src/test/java/com/thoughtspot/client/model/LoginRequestTest.java
+src/test/java/com/thoughtspot/client/model/ManageObjectPrivilegeRequestTest.java
 src/test/java/com/thoughtspot/client/model/MetadataAssociationItemTest.java
 src/test/java/com/thoughtspot/client/model/MetadataContextTest.java
 src/test/java/com/thoughtspot/client/model/MetadataInputTest.java
@@ -1034,6 +1060,8 @@ src/test/java/com/thoughtspot/client/model/ModelTableListTest.java
 src/test/java/com/thoughtspot/client/model/NLInstructionsInfoInputTest.java
 src/test/java/com/thoughtspot/client/model/NLInstructionsInfoTest.java
 src/test/java/com/thoughtspot/client/model/ObjectIDAndNameTest.java
+src/test/java/com/thoughtspot/client/model/ObjectPrivilegesMetadataInputTest.java
+src/test/java/com/thoughtspot/client/model/ObjectPrivilegesOfMetadataResponseTest.java
 src/test/java/com/thoughtspot/client/model/OrgChannelConfigInputTest.java
 src/test/java/com/thoughtspot/client/model/OrgChannelConfigResponseTest.java
 src/test/java/com/thoughtspot/client/model/OrgDetailsTest.java
@@ -1147,6 +1175,10 @@ src/test/java/com/thoughtspot/client/model/SortOptionsTest.java
 src/test/java/com/thoughtspot/client/model/SortingOptionsTest.java
 src/test/java/com/thoughtspot/client/model/SqlQueryResponseTest.java
 src/test/java/com/thoughtspot/client/model/SqlQueryTest.java
+src/test/java/com/thoughtspot/client/model/StorageConfigInputTest.java
+src/test/java/com/thoughtspot/client/model/StorageConfigTest.java
+src/test/java/com/thoughtspot/client/model/StorageDestinationInputTest.java
+src/test/java/com/thoughtspot/client/model/StorageDestinationTest.java
 src/test/java/com/thoughtspot/client/model/SystemConfigTest.java
 src/test/java/com/thoughtspot/client/model/SystemInfoTest.java
 src/test/java/com/thoughtspot/client/model/SystemOverrideInfoTest.java
@@ -1160,6 +1192,7 @@ src/test/java/com/thoughtspot/client/model/TokenValidationResponseTest.java
 src/test/java/com/thoughtspot/client/model/URLInputMandatoryTest.java
 src/test/java/com/thoughtspot/client/model/URLInputTest.java
 src/test/java/com/thoughtspot/client/model/URLTest.java
+src/test/java/com/thoughtspot/client/model/UnassignTagRequestTest.java
 src/test/java/com/thoughtspot/client/model/UnparameterizeMetadataRequestTest.java
 src/test/java/com/thoughtspot/client/model/UnpublishMetadataRequestTest.java
 src/test/java/com/thoughtspot/client/model/UpdateCalendarRequestTest.java
