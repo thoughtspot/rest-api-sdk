@@ -171,7 +171,7 @@ public class SearchChannelHistoryRequest implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_START_EPOCH_TIME_IN_MILLIS)
     @javax.annotation.Nullable
-    private Object startEpochTimeInMillis;
+    private Float startEpochTimeInMillis;
 
     public SearchChannelHistoryRequest() {}
 
@@ -299,7 +299,7 @@ public class SearchChannelHistoryRequest implements Serializable {
     }
 
     public SearchChannelHistoryRequest startEpochTimeInMillis(
-            @javax.annotation.Nullable Object startEpochTimeInMillis) {
+            @javax.annotation.Nullable Float startEpochTimeInMillis) {
         this.startEpochTimeInMillis = startEpochTimeInMillis;
         return this;
     }
@@ -310,12 +310,11 @@ public class SearchChannelHistoryRequest implements Serializable {
      * @return startEpochTimeInMillis
      */
     @javax.annotation.Nullable
-    public Object getStartEpochTimeInMillis() {
+    public Float getStartEpochTimeInMillis() {
         return startEpochTimeInMillis;
     }
 
-    public void setStartEpochTimeInMillis(
-            @javax.annotation.Nullable Object startEpochTimeInMillis) {
+    public void setStartEpochTimeInMillis(@javax.annotation.Nullable Float startEpochTimeInMillis) {
         this.startEpochTimeInMillis = startEpochTimeInMillis;
     }
 

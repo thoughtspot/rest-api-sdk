@@ -13236,7 +13236,8 @@ components:
           type: string
         creation_time_in_millis:
           description: Timestamp when this job was created (epoch milliseconds).
-          type: object
+          format: float
+          type: number
         detail:
           description: Additional delivery details such as HTTP response code or error
             message.
@@ -19327,7 +19328,8 @@ components:
           type: array
         start_epoch_time_in_millis:
           description: Filter records created on or after this time (epoch milliseconds).
-          type: object
+          format: float
+          type: number
       required:
       - channel_type
       type: object

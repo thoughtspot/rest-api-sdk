@@ -1349,8 +1349,8 @@ _ChannelHistoryJob.attributeTypeMap = [
   {
     "name": "creation_time_in_millis",
     "baseName": "creation_time_in_millis",
-    "type": "any",
-    "format": ""
+    "type": "number",
+    "format": "float"
   },
   {
     "name": "detail",
@@ -11155,8 +11155,8 @@ _SearchChannelHistoryRequest.attributeTypeMap = [
   {
     "name": "start_epoch_time_in_millis",
     "baseName": "start_epoch_time_in_millis",
-    "type": "any",
-    "format": ""
+    "type": "number",
+    "format": "float"
   }
 ];
 var SearchChannelHistoryRequest = _SearchChannelHistoryRequest;

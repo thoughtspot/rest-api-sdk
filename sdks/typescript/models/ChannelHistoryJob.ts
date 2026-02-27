@@ -27,7 +27,7 @@ export class ChannelHistoryJob {
     /**
     * Timestamp when this job was created (epoch milliseconds).
     */
-    'creation_time_in_millis': any;
+    'creation_time_in_millis': number;
     /**
     * Additional delivery details such as HTTP response code or error message.
     */
@@ -55,8 +55,8 @@ export class ChannelHistoryJob {
         {
             "name": "creation_time_in_millis",
             "baseName": "creation_time_in_millis",
-            "type": "any",
-            "format": ""
+            "type": "number",
+            "format": "float"
         },
         {
             "name": "detail",

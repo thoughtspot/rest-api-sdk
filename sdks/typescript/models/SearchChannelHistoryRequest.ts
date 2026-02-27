@@ -37,7 +37,7 @@ export class SearchChannelHistoryRequest {
     /**
     * Filter records created on or after this time (epoch milliseconds).
     */
-    'start_epoch_time_in_millis'?: any;
+    'start_epoch_time_in_millis'?: number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -75,8 +75,8 @@ export class SearchChannelHistoryRequest {
         {
             "name": "start_epoch_time_in_millis",
             "baseName": "start_epoch_time_in_millis",
-            "type": "any",
-            "format": ""
+            "type": "number",
+            "format": "float"
         }    ];
 
     static getAttributeTypeMap() {

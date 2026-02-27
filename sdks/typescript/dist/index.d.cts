@@ -1936,7 +1936,7 @@ declare class ChannelHistoryJob {
     /**
     * Timestamp when this job was created (epoch milliseconds).
     */
-    'creation_time_in_millis': any;
+    'creation_time_in_millis': number;
     /**
     * Additional delivery details such as HTTP response code or error message.
     */
@@ -14263,7 +14263,7 @@ declare class SearchChannelHistoryRequest {
     /**
     * Filter records created on or after this time (epoch milliseconds).
     */
-    'start_epoch_time_in_millis'?: any;
+    'start_epoch_time_in_millis'?: number;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;

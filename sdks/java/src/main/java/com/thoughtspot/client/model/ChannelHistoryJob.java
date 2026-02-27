@@ -103,7 +103,7 @@ public class ChannelHistoryJob implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_CREATION_TIME_IN_MILLIS)
     @javax.annotation.Nonnull
-    private Object creationTimeInMillis;
+    private Float creationTimeInMillis;
 
     public static final String SERIALIZED_NAME_DETAIL = "detail";
 
@@ -158,7 +158,7 @@ public class ChannelHistoryJob implements Serializable {
     }
 
     public ChannelHistoryJob creationTimeInMillis(
-            @javax.annotation.Nonnull Object creationTimeInMillis) {
+            @javax.annotation.Nonnull Float creationTimeInMillis) {
         this.creationTimeInMillis = creationTimeInMillis;
         return this;
     }
@@ -169,11 +169,11 @@ public class ChannelHistoryJob implements Serializable {
      * @return creationTimeInMillis
      */
     @javax.annotation.Nonnull
-    public Object getCreationTimeInMillis() {
+    public Float getCreationTimeInMillis() {
         return creationTimeInMillis;
     }
 
-    public void setCreationTimeInMillis(@javax.annotation.Nonnull Object creationTimeInMillis) {
+    public void setCreationTimeInMillis(@javax.annotation.Nonnull Float creationTimeInMillis) {
         this.creationTimeInMillis = creationTimeInMillis;
     }
 
