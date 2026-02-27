@@ -16582,7 +16582,8 @@
             "description": "Delivery status of this job."
           },
           "creation_time_in_millis": {
-            "type": "object",
+            "type": "number",
+            "format": "float",
             "description": "Timestamp when this job was created (epoch milliseconds)."
           },
           "detail": {
@@ -22958,7 +22959,8 @@
           },
           "start_epoch_time_in_millis": {
             "description": "Filter records created on or after this time (epoch milliseconds).",
-            "type": "object"
+            "type": "number",
+            "format": "float"
           }
         },
         "required": [
