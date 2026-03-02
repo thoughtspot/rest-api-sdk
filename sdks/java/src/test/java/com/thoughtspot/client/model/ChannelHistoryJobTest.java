@@ -34,6 +34,18 @@ public class ChannelHistoryJobTest {
         // TODO: test creationTimeInMillis
     }
 
+    /** Test the property 'event' */
+    @Test
+    public void eventTest() {
+        // TODO: test event
+    }
+
+    /** Test the property 'recipients' */
+    @Test
+    public void recipientsTest() {
+        // TODO: test recipients
+    }
+
     /** Test the property 'detail' */
     @Test
     public void detailTest() {

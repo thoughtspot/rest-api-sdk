@@ -78,6 +78,7 @@ __export(typescript_exports, {
   CALLBACKInputMandatory: () => CALLBACKInputMandatory,
   CalendarResponse: () => CalendarResponse,
   ChangeUserPasswordRequest: () => ChangeUserPasswordRequest,
+  ChannelHistoryEventInfo: () => ChannelHistoryEventInfo,
   ChannelHistoryEventInput: () => ChannelHistoryEventInput,
   ChannelHistoryJob: () => ChannelHistoryJob,
   ChannelValidationAwsS3Info: () => ChannelValidationAwsS3Info,
@@ -264,6 +265,7 @@ __export(typescript_exports, {
   JWTParameter: () => JWTParameter,
   JWTUserOptions: () => JWTUserOptions,
   JWTUserOptionsFull: () => JWTUserOptionsFull,
+  JobRecipient: () => JobRecipient,
   LBContextInput: () => LBContextInput,
   LiveboardContent: () => LiveboardContent,
   LiveboardDataResponse: () => LiveboardDataResponse,
@@ -1810,6 +1812,43 @@ _ChangeUserPasswordRequest.attributeTypeMap = [
 ];
 var ChangeUserPasswordRequest = _ChangeUserPasswordRequest;
 
+// models/ChannelHistoryEventInfo.ts
+var _ChannelHistoryEventInfo = class _ChannelHistoryEventInfo {
+  static getAttributeTypeMap() {
+    return _ChannelHistoryEventInfo.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ChannelHistoryEventInfo.discriminator = void 0;
+_ChannelHistoryEventInfo.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "ChannelHistoryEventInfoTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "run_id",
+    "baseName": "run_id",
+    "type": "string",
+    "format": ""
+  }
+];
+var ChannelHistoryEventInfo = _ChannelHistoryEventInfo;
+
 // models/ChannelHistoryEventInput.ts
 var _ChannelHistoryEventInput = class _ChannelHistoryEventInput {
   static getAttributeTypeMap() {
@@ -1862,6 +1901,18 @@ _ChannelHistoryJob.attributeTypeMap = [
     "baseName": "creation_time_in_millis",
     "type": "number",
     "format": "float"
+  },
+  {
+    "name": "event",
+    "baseName": "event",
+    "type": "ChannelHistoryEventInfo",
+    "format": ""
+  },
+  {
+    "name": "recipients",
+    "baseName": "recipients",
+    "type": "Array<JobRecipient>",
+    "format": ""
   },
   {
     "name": "detail",
@@ -8368,6 +8419,43 @@ _JWTUserOptionsFull.attributeTypeMap = [
   }
 ];
 var JWTUserOptionsFull = _JWTUserOptionsFull;
+
+// models/JobRecipient.ts
+var _JobRecipient = class _JobRecipient {
+  static getAttributeTypeMap() {
+    return _JobRecipient.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_JobRecipient.discriminator = void 0;
+_JobRecipient.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "JobRecipientTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "email",
+    "baseName": "email",
+    "type": "string",
+    "format": ""
+  }
+];
+var JobRecipient = _JobRecipient;
 
 // models/LBContextInput.ts
 var _LBContextInput = class _LBContextInput {
@@ -17847,6 +17935,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "AssociateMetadataInputTypeEnum",
   "AssociateMetadataInputCreateTypeEnum",
   "AuthorMetadataTypeInputTypeEnum",
+  "ChannelHistoryEventInfoTypeEnum",
   "ChannelHistoryEventInputTypeEnum",
   "ChannelHistoryJobStatusEnum",
   "ChannelValidationDetailValidationStepEnum",
@@ -17936,6 +18025,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "ImportUserVisibilityEnum",
   "ImportUserPreferredLocaleEnum",
   "JWTMetadataObjectTypeEnum",
+  "JobRecipientTypeEnum",
   "ManageObjectPrivilegeRequestOperationEnum",
   "ManageObjectPrivilegeRequestMetadataTypeEnum",
   "ManageObjectPrivilegeRequestObjectPrivilegeTypesEnum",
@@ -18123,6 +18213,7 @@ var typeMap = {
   "CALLBACKInputMandatory": CALLBACKInputMandatory,
   "CalendarResponse": CalendarResponse,
   "ChangeUserPasswordRequest": ChangeUserPasswordRequest,
+  "ChannelHistoryEventInfo": ChannelHistoryEventInfo,
   "ChannelHistoryEventInput": ChannelHistoryEventInput,
   "ChannelHistoryJob": ChannelHistoryJob,
   "ChannelValidationAwsS3Info": ChannelValidationAwsS3Info,
@@ -18298,6 +18389,7 @@ var typeMap = {
   "JWTParameter": JWTParameter,
   "JWTUserOptions": JWTUserOptions,
   "JWTUserOptionsFull": JWTUserOptionsFull,
+  "JobRecipient": JobRecipient,
   "LBContextInput": LBContextInput,
   "LiveboardContent": LiveboardContent,
   "LiveboardDataResponse": LiveboardDataResponse,
@@ -48704,6 +48796,7 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   CALLBACKInputMandatory,
   CalendarResponse,
   ChangeUserPasswordRequest,
+  ChannelHistoryEventInfo,
   ChannelHistoryEventInput,
   ChannelHistoryJob,
   ChannelValidationAwsS3Info,
@@ -48890,6 +48983,7 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   JWTParameter,
   JWTUserOptions,
   JWTUserOptionsFull,
+  JobRecipient,
   LBContextInput,
   LiveboardContent,
   LiveboardDataResponse,

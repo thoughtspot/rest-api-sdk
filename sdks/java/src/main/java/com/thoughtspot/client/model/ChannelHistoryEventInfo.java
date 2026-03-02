@@ -5,7 +5,6 @@
 package com.thoughtspot.client.model;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.TypeAdapter;
@@ -18,7 +17,6 @@ import com.google.gson.stream.JsonWriter;
 import com.thoughtspot.client.JSON;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -27,33 +25,21 @@ import java.util.Map;
 import java.util.Objects;
 import org.openapitools.jackson.nullable.JsonNullable;
 
-/** A single job execution record for a channel. */
+/** Event metadata for the triggering event associated with a job. */
 @javax.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         comments = "Generator version: 7.12.0")
-public class ChannelHistoryJob implements Serializable {
+public class ChannelHistoryEventInfo implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public static final String SERIALIZED_NAME_ID = "id";
-
-    @SerializedName(SERIALIZED_NAME_ID)
-    @javax.annotation.Nonnull
-    private String id;
-
-    /** Delivery status of this job. */
-    @JsonAdapter(StatusEnum.Adapter.class)
-    public enum StatusEnum {
-        PENDING("PENDING"),
-
-        RETRY("RETRY"),
-
-        SUCCESS("SUCCESS"),
-
-        FAILED("FAILED");
+    /** Type of the event. */
+    @JsonAdapter(TypeEnum.Adapter.class)
+    public enum TypeEnum {
+        LIVEBOARD_SCHEDULE("LIVEBOARD_SCHEDULE");
 
         private String value;
 
-        StatusEnum(String value) {
+        TypeEnum(String value) {
             this.value = value;
         }
 
@@ -66,8 +52,8 @@ public class ChannelHistoryJob implements Serializable {
             return String.valueOf(value);
         }
 
-        public static StatusEnum fromValue(String value) {
-            for (StatusEnum b : StatusEnum.values()) {
+        public static TypeEnum fromValue(String value) {
+            for (TypeEnum b : TypeEnum.values()) {
                 if (b.value.equals(value)) {
                     return b;
                 }
@@ -75,71 +61,78 @@ public class ChannelHistoryJob implements Serializable {
             throw new IllegalArgumentException("Unexpected value '" + value + "'");
         }
 
-        public static class Adapter extends TypeAdapter<StatusEnum> {
+        public static class Adapter extends TypeAdapter<TypeEnum> {
             @Override
-            public void write(final JsonWriter jsonWriter, final StatusEnum enumeration)
+            public void write(final JsonWriter jsonWriter, final TypeEnum enumeration)
                     throws IOException {
                 jsonWriter.value(enumeration.getValue());
             }
 
             @Override
-            public StatusEnum read(final JsonReader jsonReader) throws IOException {
+            public TypeEnum read(final JsonReader jsonReader) throws IOException {
                 String value = jsonReader.nextString();
-                return StatusEnum.fromValue(value);
+                return TypeEnum.fromValue(value);
             }
         }
 
         public static void validateJsonElement(JsonElement jsonElement) throws IOException {
             String value = jsonElement.getAsString();
-            StatusEnum.fromValue(value);
+            TypeEnum.fromValue(value);
         }
     }
 
-    public static final String SERIALIZED_NAME_STATUS = "status";
+    public static final String SERIALIZED_NAME_TYPE = "type";
 
-    @SerializedName(SERIALIZED_NAME_STATUS)
+    @SerializedName(SERIALIZED_NAME_TYPE)
     @javax.annotation.Nonnull
-    private StatusEnum status;
+    private TypeEnum type;
 
-    public static final String SERIALIZED_NAME_CREATION_TIME_IN_MILLIS = "creation_time_in_millis";
+    public static final String SERIALIZED_NAME_ID = "id";
 
-    @SerializedName(SERIALIZED_NAME_CREATION_TIME_IN_MILLIS)
+    @SerializedName(SERIALIZED_NAME_ID)
     @javax.annotation.Nonnull
-    private Float creationTimeInMillis;
+    private String id;
 
-    public static final String SERIALIZED_NAME_EVENT = "event";
+    public static final String SERIALIZED_NAME_NAME = "name";
 
-    @SerializedName(SERIALIZED_NAME_EVENT)
+    @SerializedName(SERIALIZED_NAME_NAME)
     @javax.annotation.Nullable
-    private ChannelHistoryEventInfo event;
+    private String name;
 
-    public static final String SERIALIZED_NAME_RECIPIENTS = "recipients";
+    public static final String SERIALIZED_NAME_RUN_ID = "run_id";
 
-    @SerializedName(SERIALIZED_NAME_RECIPIENTS)
+    @SerializedName(SERIALIZED_NAME_RUN_ID)
     @javax.annotation.Nullable
-    private List<JobRecipient> recipients;
+    private String runId;
 
-    public static final String SERIALIZED_NAME_DETAIL = "detail";
+    public ChannelHistoryEventInfo() {}
 
-    @SerializedName(SERIALIZED_NAME_DETAIL)
-    @javax.annotation.Nullable
-    private String detail;
+    public ChannelHistoryEventInfo type(@javax.annotation.Nonnull TypeEnum type) {
+        this.type = type;
+        return this;
+    }
 
-    public static final String SERIALIZED_NAME_TRY_COUNT = "try_count";
+    /**
+     * Type of the event.
+     *
+     * @return type
+     */
+    @javax.annotation.Nonnull
+    public TypeEnum getType() {
+        return type;
+    }
 
-    @SerializedName(SERIALIZED_NAME_TRY_COUNT)
-    @javax.annotation.Nullable
-    private Integer tryCount;
+    public void setType(@javax.annotation.Nonnull TypeEnum type) {
+        this.type = type;
+    }
 
-    public ChannelHistoryJob() {}
-
-    public ChannelHistoryJob id(@javax.annotation.Nonnull String id) {
+    public ChannelHistoryEventInfo id(@javax.annotation.Nonnull String id) {
         this.id = id;
         return this;
     }
 
     /**
-     * Unique identifier for this job.
+     * Unique ID of the event.
      *
      * @return id
      */
@@ -152,127 +145,42 @@ public class ChannelHistoryJob implements Serializable {
         this.id = id;
     }
 
-    public ChannelHistoryJob status(@javax.annotation.Nonnull StatusEnum status) {
-        this.status = status;
+    public ChannelHistoryEventInfo name(@javax.annotation.Nullable String name) {
+        this.name = name;
         return this;
     }
 
     /**
-     * Delivery status of this job.
+     * Name of the event.
      *
-     * @return status
-     */
-    @javax.annotation.Nonnull
-    public StatusEnum getStatus() {
-        return status;
-    }
-
-    public void setStatus(@javax.annotation.Nonnull StatusEnum status) {
-        this.status = status;
-    }
-
-    public ChannelHistoryJob creationTimeInMillis(
-            @javax.annotation.Nonnull Float creationTimeInMillis) {
-        this.creationTimeInMillis = creationTimeInMillis;
-        return this;
-    }
-
-    /**
-     * Timestamp when this job was created (epoch milliseconds).
-     *
-     * @return creationTimeInMillis
-     */
-    @javax.annotation.Nonnull
-    public Float getCreationTimeInMillis() {
-        return creationTimeInMillis;
-    }
-
-    public void setCreationTimeInMillis(@javax.annotation.Nonnull Float creationTimeInMillis) {
-        this.creationTimeInMillis = creationTimeInMillis;
-    }
-
-    public ChannelHistoryJob event(@javax.annotation.Nullable ChannelHistoryEventInfo event) {
-        this.event = event;
-        return this;
-    }
-
-    /**
-     * Get event
-     *
-     * @return event
+     * @return name
      */
     @javax.annotation.Nullable
-    public ChannelHistoryEventInfo getEvent() {
-        return event;
+    public String getName() {
+        return name;
     }
 
-    public void setEvent(@javax.annotation.Nullable ChannelHistoryEventInfo event) {
-        this.event = event;
+    public void setName(@javax.annotation.Nullable String name) {
+        this.name = name;
     }
 
-    public ChannelHistoryJob recipients(@javax.annotation.Nullable List<JobRecipient> recipients) {
-        this.recipients = recipients;
-        return this;
-    }
-
-    public ChannelHistoryJob addRecipientsItem(JobRecipient recipientsItem) {
-        if (this.recipients == null) {
-            this.recipients = new ArrayList<>();
-        }
-        this.recipients.add(recipientsItem);
+    public ChannelHistoryEventInfo runId(@javax.annotation.Nullable String runId) {
+        this.runId = runId;
         return this;
     }
 
     /**
-     * The users, groups or external recipients for this job.
+     * Unique run ID for this event execution.
      *
-     * @return recipients
+     * @return runId
      */
     @javax.annotation.Nullable
-    public List<JobRecipient> getRecipients() {
-        return recipients;
+    public String getRunId() {
+        return runId;
     }
 
-    public void setRecipients(@javax.annotation.Nullable List<JobRecipient> recipients) {
-        this.recipients = recipients;
-    }
-
-    public ChannelHistoryJob detail(@javax.annotation.Nullable String detail) {
-        this.detail = detail;
-        return this;
-    }
-
-    /**
-     * Additional delivery details such as HTTP response code or error message.
-     *
-     * @return detail
-     */
-    @javax.annotation.Nullable
-    public String getDetail() {
-        return detail;
-    }
-
-    public void setDetail(@javax.annotation.Nullable String detail) {
-        this.detail = detail;
-    }
-
-    public ChannelHistoryJob tryCount(@javax.annotation.Nullable Integer tryCount) {
-        this.tryCount = tryCount;
-        return this;
-    }
-
-    /**
-     * Number of attempts made. 1 indicates first attempt.
-     *
-     * @return tryCount
-     */
-    @javax.annotation.Nullable
-    public Integer getTryCount() {
-        return tryCount;
-    }
-
-    public void setTryCount(@javax.annotation.Nullable Integer tryCount) {
-        this.tryCount = tryCount;
+    public void setRunId(@javax.annotation.Nullable String runId) {
+        this.runId = runId;
     }
 
     /**
@@ -287,9 +195,9 @@ public class ChannelHistoryJob implements Serializable {
      *
      * @param key name of the property
      * @param value value of the property
-     * @return the ChannelHistoryJob instance itself
+     * @return the ChannelHistoryEventInfo instance itself
      */
-    public ChannelHistoryJob putAdditionalProperty(String key, Object value) {
+    public ChannelHistoryEventInfo putAdditionalProperty(String key, Object value) {
         if (this.additionalProperties == null) {
             this.additionalProperties = new HashMap<String, Object>();
         }
@@ -327,16 +235,13 @@ public class ChannelHistoryJob implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        ChannelHistoryJob channelHistoryJob = (ChannelHistoryJob) o;
-        return Objects.equals(this.id, channelHistoryJob.id)
-                && Objects.equals(this.status, channelHistoryJob.status)
-                && Objects.equals(this.creationTimeInMillis, channelHistoryJob.creationTimeInMillis)
-                && Objects.equals(this.event, channelHistoryJob.event)
-                && Objects.equals(this.recipients, channelHistoryJob.recipients)
-                && Objects.equals(this.detail, channelHistoryJob.detail)
-                && Objects.equals(this.tryCount, channelHistoryJob.tryCount)
+        ChannelHistoryEventInfo channelHistoryEventInfo = (ChannelHistoryEventInfo) o;
+        return Objects.equals(this.type, channelHistoryEventInfo.type)
+                && Objects.equals(this.id, channelHistoryEventInfo.id)
+                && Objects.equals(this.name, channelHistoryEventInfo.name)
+                && Objects.equals(this.runId, channelHistoryEventInfo.runId)
                 && Objects.equals(
-                        this.additionalProperties, channelHistoryJob.additionalProperties);
+                        this.additionalProperties, channelHistoryEventInfo.additionalProperties);
     }
 
     private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -350,15 +255,7 @@ public class ChannelHistoryJob implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(
-                id,
-                status,
-                creationTimeInMillis,
-                event,
-                recipients,
-                detail,
-                tryCount,
-                additionalProperties);
+        return Objects.hash(type, id, name, runId, additionalProperties);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -371,16 +268,11 @@ public class ChannelHistoryJob implements Serializable {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class ChannelHistoryJob {\n");
+        sb.append("class ChannelHistoryEventInfo {\n");
+        sb.append("    type: ").append(toIndentedString(type)).append("\n");
         sb.append("    id: ").append(toIndentedString(id)).append("\n");
-        sb.append("    status: ").append(toIndentedString(status)).append("\n");
-        sb.append("    creationTimeInMillis: ")
-                .append(toIndentedString(creationTimeInMillis))
-                .append("\n");
-        sb.append("    event: ").append(toIndentedString(event)).append("\n");
-        sb.append("    recipients: ").append(toIndentedString(recipients)).append("\n");
-        sb.append("    detail: ").append(toIndentedString(detail)).append("\n");
-        sb.append("    tryCount: ").append(toIndentedString(tryCount)).append("\n");
+        sb.append("    name: ").append(toIndentedString(name)).append("\n");
+        sb.append("    runId: ").append(toIndentedString(runId)).append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
                 .append("\n");
@@ -405,41 +297,37 @@ public class ChannelHistoryJob implements Serializable {
     static {
         // a set of all properties/fields (JSON key names)
         openapiFields = new HashSet<String>();
+        openapiFields.add("type");
         openapiFields.add("id");
-        openapiFields.add("status");
-        openapiFields.add("creation_time_in_millis");
-        openapiFields.add("event");
-        openapiFields.add("recipients");
-        openapiFields.add("detail");
-        openapiFields.add("try_count");
+        openapiFields.add("name");
+        openapiFields.add("run_id");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
+        openapiRequiredFields.add("type");
         openapiRequiredFields.add("id");
-        openapiRequiredFields.add("status");
-        openapiRequiredFields.add("creation_time_in_millis");
     }
 
     /**
      * Validates the JSON Element and throws an exception if issues found
      *
      * @param jsonElement JSON Element
-     * @throws IOException if the JSON Element is invalid with respect to ChannelHistoryJob
+     * @throws IOException if the JSON Element is invalid with respect to ChannelHistoryEventInfo
      */
     public static void validateJsonElement(JsonElement jsonElement) throws IOException {
         if (jsonElement == null) {
-            if (!ChannelHistoryJob.openapiRequiredFields
+            if (!ChannelHistoryEventInfo.openapiRequiredFields
                     .isEmpty()) { // has required fields but JSON element is null
                 throw new IllegalArgumentException(
                         String.format(
-                                "The required field(s) %s in ChannelHistoryJob is not found in the"
-                                        + " empty JSON string",
-                                ChannelHistoryJob.openapiRequiredFields.toString()));
+                                "The required field(s) %s in ChannelHistoryEventInfo is not found"
+                                        + " in the empty JSON string",
+                                ChannelHistoryEventInfo.openapiRequiredFields.toString()));
             }
         }
 
         // check to make sure all required properties/fields are present in the JSON string
-        for (String requiredField : ChannelHistoryJob.openapiRequiredFields) {
+        for (String requiredField : ChannelHistoryEventInfo.openapiRequiredFields) {
             if (jsonElement.getAsJsonObject().get(requiredField) == null) {
                 throw new IllegalArgumentException(
                         String.format(
@@ -448,6 +336,15 @@ public class ChannelHistoryJob implements Serializable {
             }
         }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
+        if (!jsonObj.get("type").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `type` to be a primitive type in the JSON string"
+                                    + " but got `%s`",
+                            jsonObj.get("type").toString()));
+        }
+        // validate the required field `type`
+        TypeEnum.validateJsonElement(jsonObj.get("type"));
         if (!jsonObj.get("id").isJsonPrimitive()) {
             throw new IllegalArgumentException(
                     String.format(
@@ -455,45 +352,21 @@ public class ChannelHistoryJob implements Serializable {
                                     + " got `%s`",
                             jsonObj.get("id").toString()));
         }
-        if (!jsonObj.get("status").isJsonPrimitive()) {
+        if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull())
+                && !jsonObj.get("name").isJsonPrimitive()) {
             throw new IllegalArgumentException(
                     String.format(
-                            "Expected the field `status` to be a primitive type in the JSON string"
+                            "Expected the field `name` to be a primitive type in the JSON string"
                                     + " but got `%s`",
-                            jsonObj.get("status").toString()));
+                            jsonObj.get("name").toString()));
         }
-        // validate the required field `status`
-        StatusEnum.validateJsonElement(jsonObj.get("status"));
-        // validate the optional field `event`
-        if (jsonObj.get("event") != null && !jsonObj.get("event").isJsonNull()) {
-            ChannelHistoryEventInfo.validateJsonElement(jsonObj.get("event"));
-        }
-        if (jsonObj.get("recipients") != null && !jsonObj.get("recipients").isJsonNull()) {
-            JsonArray jsonArrayrecipients = jsonObj.getAsJsonArray("recipients");
-            if (jsonArrayrecipients != null) {
-                // ensure the json data is an array
-                if (!jsonObj.get("recipients").isJsonArray()) {
-                    throw new IllegalArgumentException(
-                            String.format(
-                                    "Expected the field `recipients` to be an array in the JSON"
-                                            + " string but got `%s`",
-                                    jsonObj.get("recipients").toString()));
-                }
-
-                // validate the optional field `recipients` (array)
-                for (int i = 0; i < jsonArrayrecipients.size(); i++) {
-                    JobRecipient.validateJsonElement(jsonArrayrecipients.get(i));
-                }
-                ;
-            }
-        }
-        if ((jsonObj.get("detail") != null && !jsonObj.get("detail").isJsonNull())
-                && !jsonObj.get("detail").isJsonPrimitive()) {
+        if ((jsonObj.get("run_id") != null && !jsonObj.get("run_id").isJsonNull())
+                && !jsonObj.get("run_id").isJsonPrimitive()) {
             throw new IllegalArgumentException(
                     String.format(
-                            "Expected the field `detail` to be a primitive type in the JSON string"
+                            "Expected the field `run_id` to be a primitive type in the JSON string"
                                     + " but got `%s`",
-                            jsonObj.get("detail").toString()));
+                            jsonObj.get("run_id").toString()));
         }
     }
 
@@ -501,17 +374,18 @@ public class ChannelHistoryJob implements Serializable {
         @SuppressWarnings("unchecked")
         @Override
         public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-            if (!ChannelHistoryJob.class.isAssignableFrom(type.getRawType())) {
-                return null; // this class only serializes 'ChannelHistoryJob' and its subtypes
+            if (!ChannelHistoryEventInfo.class.isAssignableFrom(type.getRawType())) {
+                return null; // this class only serializes 'ChannelHistoryEventInfo' and its
+                // subtypes
             }
             final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-            final TypeAdapter<ChannelHistoryJob> thisAdapter =
-                    gson.getDelegateAdapter(this, TypeToken.get(ChannelHistoryJob.class));
+            final TypeAdapter<ChannelHistoryEventInfo> thisAdapter =
+                    gson.getDelegateAdapter(this, TypeToken.get(ChannelHistoryEventInfo.class));
 
             return (TypeAdapter<T>)
-                    new TypeAdapter<ChannelHistoryJob>() {
+                    new TypeAdapter<ChannelHistoryEventInfo>() {
                         @Override
-                        public void write(JsonWriter out, ChannelHistoryJob value)
+                        public void write(JsonWriter out, ChannelHistoryEventInfo value)
                                 throws IOException {
                             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
                             obj.remove("additionalProperties");
@@ -542,12 +416,12 @@ public class ChannelHistoryJob implements Serializable {
                         }
 
                         @Override
-                        public ChannelHistoryJob read(JsonReader in) throws IOException {
+                        public ChannelHistoryEventInfo read(JsonReader in) throws IOException {
                             JsonElement jsonElement = elementAdapter.read(in);
                             validateJsonElement(jsonElement);
                             JsonObject jsonObj = jsonElement.getAsJsonObject();
                             // store additional fields in the deserialized instance
-                            ChannelHistoryJob instance = thisAdapter.fromJsonTree(jsonObj);
+                            ChannelHistoryEventInfo instance = thisAdapter.fromJsonTree(jsonObj);
                             for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
                                 if (!openapiFields.contains(entry.getKey())) {
                                     if (entry.getValue().isJsonPrimitive()) { // primitive type
@@ -586,18 +460,18 @@ public class ChannelHistoryJob implements Serializable {
     }
 
     /**
-     * Create an instance of ChannelHistoryJob given an JSON string
+     * Create an instance of ChannelHistoryEventInfo given an JSON string
      *
      * @param jsonString JSON string
-     * @return An instance of ChannelHistoryJob
-     * @throws IOException if the JSON string is invalid with respect to ChannelHistoryJob
+     * @return An instance of ChannelHistoryEventInfo
+     * @throws IOException if the JSON string is invalid with respect to ChannelHistoryEventInfo
      */
-    public static ChannelHistoryJob fromJson(String jsonString) throws IOException {
-        return JSON.getGson().fromJson(jsonString, ChannelHistoryJob.class);
+    public static ChannelHistoryEventInfo fromJson(String jsonString) throws IOException {
+        return JSON.getGson().fromJson(jsonString, ChannelHistoryEventInfo.class);
     }
 
     /**
-     * Convert an instance of ChannelHistoryJob to an JSON string
+     * Convert an instance of ChannelHistoryEventInfo to an JSON string
      *
      * @return JSON string
      */

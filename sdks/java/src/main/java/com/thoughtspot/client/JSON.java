@@ -159,6 +159,9 @@ public class JSON {
                 new com.thoughtspot.client.model.ChangeUserPasswordRequest
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.ChannelHistoryEventInfo
+                        .CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.ChannelHistoryEventInput
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
@@ -546,6 +549,8 @@ public class JSON {
                 new com.thoughtspot.client.model.JWTUserOptions.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.JWTUserOptionsFull.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.JobRecipient.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.LBContextInput.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
