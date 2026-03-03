@@ -6,6 +6,8 @@ package com.thoughtspot.client.api;
 
 import com.thoughtspot.client.ApiException;
 import com.thoughtspot.client.model.CreateVariableRequest;
+import com.thoughtspot.client.model.DeleteVariablesRequest;
+import com.thoughtspot.client.model.PutVariableValuesRequest;
 import com.thoughtspot.client.model.SearchVariablesRequest;
 import com.thoughtspot.client.model.UpdateVariableRequest;
 import com.thoughtspot.client.model.UpdateVariableValuesRequest;
@@ -56,6 +58,47 @@ public class VariableApiTest {
     public void deleteVariableTest() throws ApiException {
         String identifier = null;
         api.deleteVariable(identifier);
+        // TODO: test validations
+    }
+
+    /**
+     * Delete variable(s) Version: 26.4.0.cl or later Allows deleting multiple variables from
+     * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES
+     * permission allows you to manage Formula Variables in the current organization scope. The API
+     * endpoint requires: * The variable identifiers (IDs or names) The operation will fail if: *
+     * The user lacks required permissions * Any of the variables don&#39;t exist * Any of the
+     * variables are being used by other objects
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void deleteVariablesTest() throws ApiException {
+        DeleteVariablesRequest deleteVariablesRequest = null;
+        api.deleteVariables(deleteVariablesRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Update values for a variable Version: 26.4.0.cl or later Allows updating values for a
+     * specific variable in ThoughtSpot. Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES
+     * permission allows you to manage Formula Variables in the current organization scope. The API
+     * endpoint allows: * Adding new values to the variable * Replacing existing values * Deleting
+     * values from the variable * Resetting all values When updating variable values, you need to
+     * specify: * The variable identifier (ID or name) * The values to add/replace/remove * The
+     * operation to perform (ADD, REPLACE, REMOVE, RESET) Behaviour based on operation type: * ADD -
+     * Adds values to the variable if this is a list type variable, else same as replace. * REPLACE
+     * - Replaces all values of a given set of constraints with the current set of values. * REMOVE
+     * - Removes any values which match the set of conditions of the variables if this is a list
+     * type variable, else clears value. * RESET - Removes all constraints for the given variable,
+     * scope is ignored
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void putVariableValuesTest() throws ApiException {
+        String identifier = null;
+        PutVariableValuesRequest putVariableValuesRequest = null;
+        api.putVariableValues(identifier, putVariableValuesRequest);
         // TODO: test validations
     }
 

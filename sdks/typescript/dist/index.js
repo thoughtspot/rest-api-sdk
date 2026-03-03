@@ -356,6 +356,37 @@ _APIKeyInput.attributeTypeMap = [
 ];
 var APIKeyInput = _APIKeyInput;
 
+// models/AWSAssumeRoleSetup.ts
+var _AWSAssumeRoleSetup = class _AWSAssumeRoleSetup {
+  static getAttributeTypeMap() {
+    return _AWSAssumeRoleSetup.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AWSAssumeRoleSetup.discriminator = void 0;
+_AWSAssumeRoleSetup.attributeTypeMap = [
+  {
+    "name": "thoughtspot_aws_account_id",
+    "baseName": "thoughtspot_aws_account_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "trust_policy_template",
+    "baseName": "trust_policy_template",
+    "type": "any",
+    "format": ""
+  },
+  {
+    "name": "setup_instructions",
+    "baseName": "setup_instructions",
+    "type": "Array<string>",
+    "format": ""
+  }
+];
+var AWSAssumeRoleSetup = _AWSAssumeRoleSetup;
+
 // models/AccessToken.ts
 var _AccessToken = class _AccessToken {
   static getAttributeTypeMap() {
@@ -1268,6 +1299,148 @@ _ChangeUserPasswordRequest.attributeTypeMap = [
 ];
 var ChangeUserPasswordRequest = _ChangeUserPasswordRequest;
 
+// models/ChannelHistoryEventInput.ts
+var _ChannelHistoryEventInput = class _ChannelHistoryEventInput {
+  static getAttributeTypeMap() {
+    return _ChannelHistoryEventInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ChannelHistoryEventInput.discriminator = void 0;
+_ChannelHistoryEventInput.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "ChannelHistoryEventInputTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "identifier",
+    "baseName": "identifier",
+    "type": "string",
+    "format": ""
+  }
+];
+var ChannelHistoryEventInput = _ChannelHistoryEventInput;
+
+// models/ChannelHistoryJob.ts
+var _ChannelHistoryJob = class _ChannelHistoryJob {
+  static getAttributeTypeMap() {
+    return _ChannelHistoryJob.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ChannelHistoryJob.discriminator = void 0;
+_ChannelHistoryJob.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "status",
+    "baseName": "status",
+    "type": "ChannelHistoryJobStatusEnum",
+    "format": ""
+  },
+  {
+    "name": "creation_time_in_millis",
+    "baseName": "creation_time_in_millis",
+    "type": "any",
+    "format": ""
+  },
+  {
+    "name": "detail",
+    "baseName": "detail",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "try_count",
+    "baseName": "try_count",
+    "type": "number",
+    "format": "int32"
+  }
+];
+var ChannelHistoryJob = _ChannelHistoryJob;
+
+// models/ChannelValidationAwsS3Info.ts
+var _ChannelValidationAwsS3Info = class _ChannelValidationAwsS3Info {
+  static getAttributeTypeMap() {
+    return _ChannelValidationAwsS3Info.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ChannelValidationAwsS3Info.discriminator = void 0;
+_ChannelValidationAwsS3Info.attributeTypeMap = [
+  {
+    "name": "bucket_name",
+    "baseName": "bucket_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "file_name",
+    "baseName": "file_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "object_key",
+    "baseName": "object_key",
+    "type": "string",
+    "format": ""
+  }
+];
+var ChannelValidationAwsS3Info = _ChannelValidationAwsS3Info;
+
+// models/ChannelValidationDetail.ts
+var _ChannelValidationDetail = class _ChannelValidationDetail {
+  static getAttributeTypeMap() {
+    return _ChannelValidationDetail.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ChannelValidationDetail.discriminator = void 0;
+_ChannelValidationDetail.attributeTypeMap = [
+  {
+    "name": "validation_step",
+    "baseName": "validation_step",
+    "type": "ChannelValidationDetailValidationStepEnum",
+    "format": ""
+  },
+  {
+    "name": "status",
+    "baseName": "status",
+    "type": "ChannelValidationDetailStatusEnum",
+    "format": ""
+  },
+  {
+    "name": "http_status",
+    "baseName": "http_status",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "error_message",
+    "baseName": "error_message",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "aws_s3_info",
+    "baseName": "aws_s3_info",
+    "type": "ChannelValidationAwsS3Info",
+    "format": ""
+  }
+];
+var ChannelValidationDetail = _ChannelValidationDetail;
+
 // models/ClusterNonEmbedAccess.ts
 var _ClusterNonEmbedAccess = class _ClusterNonEmbedAccess {
   static getAttributeTypeMap() {
@@ -1317,6 +1490,241 @@ _ClusterNonEmbedAccessInput.attributeTypeMap = [
   }
 ];
 var ClusterNonEmbedAccessInput = _ClusterNonEmbedAccessInput;
+
+// models/Collection.ts
+var _Collection = class _Collection {
+  static getAttributeTypeMap() {
+    return _Collection.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_Collection.discriminator = void 0;
+_Collection.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "description",
+    "baseName": "description",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "metadata",
+    "baseName": "metadata",
+    "type": "Array<CollectionMetadataItem>",
+    "format": ""
+  },
+  {
+    "name": "created_at",
+    "baseName": "created_at",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "updated_at",
+    "baseName": "updated_at",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "author_name",
+    "baseName": "author_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "author_id",
+    "baseName": "author_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "org",
+    "baseName": "org",
+    "type": "CollectionEntityIdentifier",
+    "format": ""
+  }
+];
+var Collection = _Collection;
+
+// models/CollectionDeleteResponse.ts
+var _CollectionDeleteResponse = class _CollectionDeleteResponse {
+  static getAttributeTypeMap() {
+    return _CollectionDeleteResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CollectionDeleteResponse.discriminator = void 0;
+_CollectionDeleteResponse.attributeTypeMap = [
+  {
+    "name": "metadata_deleted",
+    "baseName": "metadata_deleted",
+    "type": "Array<CollectionDeleteTypeIdentifiers>",
+    "format": ""
+  },
+  {
+    "name": "metadata_skipped",
+    "baseName": "metadata_skipped",
+    "type": "Array<CollectionDeleteTypeIdentifiers>",
+    "format": ""
+  }
+];
+var CollectionDeleteResponse = _CollectionDeleteResponse;
+
+// models/CollectionDeleteTypeIdentifiers.ts
+var _CollectionDeleteTypeIdentifiers = class _CollectionDeleteTypeIdentifiers {
+  static getAttributeTypeMap() {
+    return _CollectionDeleteTypeIdentifiers.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CollectionDeleteTypeIdentifiers.discriminator = void 0;
+_CollectionDeleteTypeIdentifiers.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "identifiers",
+    "baseName": "identifiers",
+    "type": "Array<GenericInfo>",
+    "format": ""
+  }
+];
+var CollectionDeleteTypeIdentifiers = _CollectionDeleteTypeIdentifiers;
+
+// models/CollectionEntityIdentifier.ts
+var _CollectionEntityIdentifier = class _CollectionEntityIdentifier {
+  static getAttributeTypeMap() {
+    return _CollectionEntityIdentifier.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CollectionEntityIdentifier.discriminator = void 0;
+_CollectionEntityIdentifier.attributeTypeMap = [
+  {
+    "name": "identifier",
+    "baseName": "identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  }
+];
+var CollectionEntityIdentifier = _CollectionEntityIdentifier;
+
+// models/CollectionMetadataInput.ts
+var _CollectionMetadataInput = class _CollectionMetadataInput {
+  static getAttributeTypeMap() {
+    return _CollectionMetadataInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CollectionMetadataInput.discriminator = void 0;
+_CollectionMetadataInput.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "CollectionMetadataInputTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "identifiers",
+    "baseName": "identifiers",
+    "type": "Array<string>",
+    "format": ""
+  }
+];
+var CollectionMetadataInput = _CollectionMetadataInput;
+
+// models/CollectionMetadataItem.ts
+var _CollectionMetadataItem = class _CollectionMetadataItem {
+  static getAttributeTypeMap() {
+    return _CollectionMetadataItem.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CollectionMetadataItem.discriminator = void 0;
+_CollectionMetadataItem.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "identifiers",
+    "baseName": "identifiers",
+    "type": "Array<CollectionEntityIdentifier>",
+    "format": ""
+  }
+];
+var CollectionMetadataItem = _CollectionMetadataItem;
+
+// models/CollectionSearchResponse.ts
+var _CollectionSearchResponse = class _CollectionSearchResponse {
+  static getAttributeTypeMap() {
+    return _CollectionSearchResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CollectionSearchResponse.discriminator = void 0;
+_CollectionSearchResponse.attributeTypeMap = [
+  {
+    "name": "collections",
+    "baseName": "collections",
+    "type": "Array<Collection>",
+    "format": ""
+  },
+  {
+    "name": "record_offset",
+    "baseName": "record_offset",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "record_size",
+    "baseName": "record_size",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "is_last_batch",
+    "baseName": "is_last_batch",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "count",
+    "baseName": "count",
+    "type": "number",
+    "format": "int32"
+  }
+];
+var CollectionSearchResponse = _CollectionSearchResponse;
 
 // models/Column.ts
 var _Column = class _Column {
@@ -1806,6 +2214,61 @@ _CommunicationChannelPreferencesResponse.attributeTypeMap = [
   }
 ];
 var CommunicationChannelPreferencesResponse = _CommunicationChannelPreferencesResponse;
+
+// models/CommunicationChannelValidateResponse.ts
+var _CommunicationChannelValidateResponse = class _CommunicationChannelValidateResponse {
+  static getAttributeTypeMap() {
+    return _CommunicationChannelValidateResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CommunicationChannelValidateResponse.discriminator = void 0;
+_CommunicationChannelValidateResponse.attributeTypeMap = [
+  {
+    "name": "channel_type",
+    "baseName": "channel_type",
+    "type": "CommunicationChannelValidateResponseChannelTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "channel_id",
+    "baseName": "channel_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "channel_name",
+    "baseName": "channel_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "event_type",
+    "baseName": "event_type",
+    "type": "CommunicationChannelValidateResponseEventTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "job_id",
+    "baseName": "job_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "result_code",
+    "baseName": "result_code",
+    "type": "CommunicationChannelValidateResponseResultCodeEnum",
+    "format": ""
+  },
+  {
+    "name": "details",
+    "baseName": "details",
+    "type": "Array<ChannelValidationDetail>",
+    "format": ""
+  }
+];
+var CommunicationChannelValidateResponse = _CommunicationChannelValidateResponse;
 
 // models/ConfigureCommunicationChannelPreferencesRequest.ts
 var _ConfigureCommunicationChannelPreferencesRequest = class _ConfigureCommunicationChannelPreferencesRequest {
@@ -2405,6 +2868,37 @@ _CreateCalendarRequestTableReference.attributeTypeMap = [
 ];
 var CreateCalendarRequestTableReference = _CreateCalendarRequestTableReference;
 
+// models/CreateCollectionRequest.ts
+var _CreateCollectionRequest = class _CreateCollectionRequest {
+  static getAttributeTypeMap() {
+    return _CreateCollectionRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CreateCollectionRequest.discriminator = void 0;
+_CreateCollectionRequest.attributeTypeMap = [
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "description",
+    "baseName": "description",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "metadata",
+    "baseName": "metadata",
+    "type": "Array<CollectionMetadataInput>",
+    "format": ""
+  }
+];
+var CreateCollectionRequest = _CreateCollectionRequest;
+
 // models/CreateConfigRequest.ts
 var _CreateConfigRequest = class _CreateConfigRequest {
   static getAttributeTypeMap() {
@@ -2944,6 +3438,12 @@ _CreateEmailCustomizationRequestTemplateProperties.attributeTypeMap = [
   {
     "name": "hide_contact_support_url",
     "baseName": "hide_contact_support_url",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "hide_logo_url",
+    "baseName": "hide_logo_url",
     "type": "boolean",
     "format": ""
   }
@@ -3583,6 +4083,12 @@ _CreateWebhookConfigurationRequest.attributeTypeMap = [
     "baseName": "storage_destination",
     "type": "CreateWebhookConfigurationRequestStorageDestination",
     "format": ""
+  },
+  {
+    "name": "additional_headers",
+    "baseName": "additional_headers",
+    "type": "Array<WebhookKeyValuePairInput>",
+    "format": ""
   }
 ];
 var CreateWebhookConfigurationRequest = _CreateWebhookConfigurationRequest;
@@ -4212,6 +4718,37 @@ _DefaultActionConfigSearchInput.attributeTypeMap = [
 ];
 var DefaultActionConfigSearchInput = _DefaultActionConfigSearchInput;
 
+// models/DeleteCollectionRequest.ts
+var _DeleteCollectionRequest = class _DeleteCollectionRequest {
+  static getAttributeTypeMap() {
+    return _DeleteCollectionRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_DeleteCollectionRequest.discriminator = void 0;
+_DeleteCollectionRequest.attributeTypeMap = [
+  {
+    "name": "collection_identifiers",
+    "baseName": "collection_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "delete_children",
+    "baseName": "delete_children",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "dry_run",
+    "baseName": "dry_run",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var DeleteCollectionRequest = _DeleteCollectionRequest;
+
 // models/DeleteConfigRequest.ts
 var _DeleteConfigRequest = class _DeleteConfigRequest {
   static getAttributeTypeMap() {
@@ -4343,6 +4880,25 @@ _DeleteOrgEmailCustomizationRequest.attributeTypeMap = [
   }
 ];
 var DeleteOrgEmailCustomizationRequest = _DeleteOrgEmailCustomizationRequest;
+
+// models/DeleteVariablesRequest.ts
+var _DeleteVariablesRequest = class _DeleteVariablesRequest {
+  static getAttributeTypeMap() {
+    return _DeleteVariablesRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_DeleteVariablesRequest.discriminator = void 0;
+_DeleteVariablesRequest.attributeTypeMap = [
+  {
+    "name": "identifiers",
+    "baseName": "identifiers",
+    "type": "Array<string>",
+    "format": ""
+  }
+];
+var DeleteVariablesRequest = _DeleteVariablesRequest;
 
 // models/DeleteWebhookConfigurationsRequest.ts
 var _DeleteWebhookConfigurationsRequest = class _DeleteWebhookConfigurationsRequest {
@@ -5912,6 +6468,43 @@ _FrequencyInput.attributeTypeMap = [
   }
 ];
 var FrequencyInput = _FrequencyInput;
+
+// models/GCPWebIdentitySetup.ts
+var _GCPWebIdentitySetup = class _GCPWebIdentitySetup {
+  static getAttributeTypeMap() {
+    return _GCPWebIdentitySetup.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_GCPWebIdentitySetup.discriminator = void 0;
+_GCPWebIdentitySetup.attributeTypeMap = [
+  {
+    "name": "thoughtspot_gcp_service_account_id",
+    "baseName": "thoughtspot_gcp_service_account_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "oidc_provider",
+    "baseName": "oidc_provider",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "trust_policy_template",
+    "baseName": "trust_policy_template",
+    "type": "any",
+    "format": ""
+  },
+  {
+    "name": "setup_instructions",
+    "baseName": "setup_instructions",
+    "type": "Array<string>",
+    "format": ""
+  }
+];
+var GCPWebIdentitySetup = _GCPWebIdentitySetup;
 
 // models/GenerateCSVRequest.ts
 var _GenerateCSVRequest = class _GenerateCSVRequest {
@@ -8276,6 +8869,49 @@ _ParameterValues.attributeTypeMap = [
 ];
 var ParameterValues = _ParameterValues;
 
+// models/ParameterizeMetadataFieldsRequest.ts
+var _ParameterizeMetadataFieldsRequest = class _ParameterizeMetadataFieldsRequest {
+  static getAttributeTypeMap() {
+    return _ParameterizeMetadataFieldsRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ParameterizeMetadataFieldsRequest.discriminator = void 0;
+_ParameterizeMetadataFieldsRequest.attributeTypeMap = [
+  {
+    "name": "metadata_type",
+    "baseName": "metadata_type",
+    "type": "ParameterizeMetadataFieldsRequestMetadataTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "metadata_identifier",
+    "baseName": "metadata_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "field_type",
+    "baseName": "field_type",
+    "type": "ParameterizeMetadataFieldsRequestFieldTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "field_names",
+    "baseName": "field_names",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "variable_identifier",
+    "baseName": "variable_identifier",
+    "type": "string",
+    "format": ""
+  }
+];
+var ParameterizeMetadataFieldsRequest = _ParameterizeMetadataFieldsRequest;
+
 // models/ParameterizeMetadataRequest.ts
 var _ParameterizeMetadataRequest = class _ParameterizeMetadataRequest {
   static getAttributeTypeMap() {
@@ -8796,6 +9432,31 @@ _PublishMetadataRequest.attributeTypeMap = [
   }
 ];
 var PublishMetadataRequest = _PublishMetadataRequest;
+
+// models/PutVariableValuesRequest.ts
+var _PutVariableValuesRequest = class _PutVariableValuesRequest {
+  static getAttributeTypeMap() {
+    return _PutVariableValuesRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_PutVariableValuesRequest.discriminator = void 0;
+_PutVariableValuesRequest.attributeTypeMap = [
+  {
+    "name": "operation",
+    "baseName": "operation",
+    "type": "PutVariableValuesRequestOperationEnum",
+    "format": ""
+  },
+  {
+    "name": "variable_assignment",
+    "baseName": "variable_assignment",
+    "type": "Array<VariablePutAssignmentInput>",
+    "format": ""
+  }
+];
+var PutVariableValuesRequest = _PutVariableValuesRequest;
 
 // models/QueryGetDecomposedQueryRequest.ts
 var _QueryGetDecomposedQueryRequest = class _QueryGetDecomposedQueryRequest {
@@ -10451,6 +11112,154 @@ _SearchCalendarsRequestSortOptions.attributeTypeMap = [
 ];
 var SearchCalendarsRequestSortOptions = _SearchCalendarsRequestSortOptions;
 
+// models/SearchChannelHistoryRequest.ts
+var _SearchChannelHistoryRequest = class _SearchChannelHistoryRequest {
+  static getAttributeTypeMap() {
+    return _SearchChannelHistoryRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SearchChannelHistoryRequest.discriminator = void 0;
+_SearchChannelHistoryRequest.attributeTypeMap = [
+  {
+    "name": "channel_type",
+    "baseName": "channel_type",
+    "type": "SearchChannelHistoryRequestChannelTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "job_ids",
+    "baseName": "job_ids",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "channel_identifiers",
+    "baseName": "channel_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "channel_status",
+    "baseName": "channel_status",
+    "type": "SearchChannelHistoryRequestChannelStatusEnum",
+    "format": ""
+  },
+  {
+    "name": "events",
+    "baseName": "events",
+    "type": "Array<ChannelHistoryEventInput>",
+    "format": ""
+  },
+  {
+    "name": "start_epoch_time_in_millis",
+    "baseName": "start_epoch_time_in_millis",
+    "type": "any",
+    "format": ""
+  }
+];
+var SearchChannelHistoryRequest = _SearchChannelHistoryRequest;
+
+// models/SearchChannelHistoryResponse.ts
+var _SearchChannelHistoryResponse = class _SearchChannelHistoryResponse {
+  static getAttributeTypeMap() {
+    return _SearchChannelHistoryResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SearchChannelHistoryResponse.discriminator = void 0;
+_SearchChannelHistoryResponse.attributeTypeMap = [
+  {
+    "name": "jobs",
+    "baseName": "jobs",
+    "type": "Array<ChannelHistoryJob>",
+    "format": ""
+  }
+];
+var SearchChannelHistoryResponse = _SearchChannelHistoryResponse;
+
+// models/SearchCollectionsRequest.ts
+var _SearchCollectionsRequest = class _SearchCollectionsRequest {
+  static getAttributeTypeMap() {
+    return _SearchCollectionsRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SearchCollectionsRequest.discriminator = void 0;
+_SearchCollectionsRequest.attributeTypeMap = [
+  {
+    "name": "name_pattern",
+    "baseName": "name_pattern",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "record_offset",
+    "baseName": "record_offset",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "record_size",
+    "baseName": "record_size",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "collection_identifiers",
+    "baseName": "collection_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "created_by_user_identifiers",
+    "baseName": "created_by_user_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "include_metadata",
+    "baseName": "include_metadata",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "sort_options",
+    "baseName": "sort_options",
+    "type": "SearchCollectionsRequestSortOptions",
+    "format": ""
+  }
+];
+var SearchCollectionsRequest = _SearchCollectionsRequest;
+
+// models/SearchCollectionsRequestSortOptions.ts
+var _SearchCollectionsRequestSortOptions = class _SearchCollectionsRequestSortOptions {
+  static getAttributeTypeMap() {
+    return _SearchCollectionsRequestSortOptions.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SearchCollectionsRequestSortOptions.discriminator = void 0;
+_SearchCollectionsRequestSortOptions.attributeTypeMap = [
+  {
+    "name": "field_name",
+    "baseName": "field_name",
+    "type": "SearchCollectionsRequestSortOptionsFieldNameEnum",
+    "format": ""
+  },
+  {
+    "name": "order",
+    "baseName": "order",
+    "type": "SearchCollectionsRequestSortOptionsOrderEnum",
+    "format": ""
+  }
+];
+var SearchCollectionsRequestSortOptions = _SearchCollectionsRequestSortOptions;
+
 // models/SearchCommitsRequest.ts
 var _SearchCommitsRequest = class _SearchCommitsRequest {
   static getAttributeTypeMap() {
@@ -11706,7 +12515,7 @@ _SearchUsersRequest.attributeTypeMap = [
   {
     "name": "sort_options",
     "baseName": "sort_options",
-    "type": "SearchUsersRequestSortOptions",
+    "type": "SearchCollectionsRequestSortOptions",
     "format": ""
   },
   {
@@ -11729,31 +12538,6 @@ _SearchUsersRequest.attributeTypeMap = [
   }
 ];
 var SearchUsersRequest = _SearchUsersRequest;
-
-// models/SearchUsersRequestSortOptions.ts
-var _SearchUsersRequestSortOptions = class _SearchUsersRequestSortOptions {
-  static getAttributeTypeMap() {
-    return _SearchUsersRequestSortOptions.attributeTypeMap;
-  }
-  constructor() {
-  }
-};
-_SearchUsersRequestSortOptions.discriminator = void 0;
-_SearchUsersRequestSortOptions.attributeTypeMap = [
-  {
-    "name": "field_name",
-    "baseName": "field_name",
-    "type": "SearchUsersRequestSortOptionsFieldNameEnum",
-    "format": ""
-  },
-  {
-    "name": "order",
-    "baseName": "order",
-    "type": "SearchUsersRequestSortOptionsOrderEnum",
-    "format": ""
-  }
-];
-var SearchUsersRequestSortOptions = _SearchUsersRequestSortOptions;
 
 // models/SearchVariablesRequest.ts
 var _SearchVariablesRequest = class _SearchVariablesRequest {
@@ -12593,6 +13377,43 @@ _StorageDestinationInput.attributeTypeMap = [
 ];
 var StorageDestinationInput = _StorageDestinationInput;
 
+// models/StorageSetupInfo.ts
+var _StorageSetupInfo = class _StorageSetupInfo {
+  static getAttributeTypeMap() {
+    return _StorageSetupInfo.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_StorageSetupInfo.discriminator = void 0;
+_StorageSetupInfo.attributeTypeMap = [
+  {
+    "name": "cluster_type",
+    "baseName": "cluster_type",
+    "type": "StorageSetupInfoClusterTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "storage_type",
+    "baseName": "storage_type",
+    "type": "StorageSetupInfoStorageTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "aws_config",
+    "baseName": "aws_config",
+    "type": "AWSAssumeRoleSetup",
+    "format": ""
+  },
+  {
+    "name": "gcp_config",
+    "baseName": "gcp_config",
+    "type": "GCPWebIdentitySetup",
+    "format": ""
+  }
+];
+var StorageSetupInfo = _StorageSetupInfo;
+
 // models/SystemConfig.ts
 var _SystemConfig = class _SystemConfig {
   static getAttributeTypeMap() {
@@ -13130,6 +13951,12 @@ _TemplatePropertiesInputCreate.attributeTypeMap = [
     "baseName": "hide_contact_support_url",
     "type": "boolean",
     "format": ""
+  },
+  {
+    "name": "hide_logo_url",
+    "baseName": "hide_logo_url",
+    "type": "boolean",
+    "format": ""
   }
 ];
 var TemplatePropertiesInputCreate = _TemplatePropertiesInputCreate;
@@ -13570,6 +14397,43 @@ _UpdateCalendarRequestTableReference.attributeTypeMap = [
   }
 ];
 var UpdateCalendarRequestTableReference = _UpdateCalendarRequestTableReference;
+
+// models/UpdateCollectionRequest.ts
+var _UpdateCollectionRequest = class _UpdateCollectionRequest {
+  static getAttributeTypeMap() {
+    return _UpdateCollectionRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UpdateCollectionRequest.discriminator = void 0;
+_UpdateCollectionRequest.attributeTypeMap = [
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "description",
+    "baseName": "description",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "metadata",
+    "baseName": "metadata",
+    "type": "Array<CollectionMetadataInput>",
+    "format": ""
+  },
+  {
+    "name": "operation",
+    "baseName": "operation",
+    "type": "UpdateCollectionRequestOperationEnum",
+    "format": ""
+  }
+];
+var UpdateCollectionRequest = _UpdateCollectionRequest;
 
 // models/UpdateColumnSecurityRulesRequest.ts
 var _UpdateColumnSecurityRulesRequest = class _UpdateColumnSecurityRulesRequest {
@@ -14655,6 +15519,12 @@ _UpdateWebhookConfigurationRequest.attributeTypeMap = [
     "baseName": "storage_destination",
     "type": "CreateWebhookConfigurationRequestStorageDestination",
     "format": ""
+  },
+  {
+    "name": "additional_headers",
+    "baseName": "additional_headers",
+    "type": "Array<WebhookKeyValuePairInput>",
+    "format": ""
   }
 ];
 var UpdateWebhookConfigurationRequest = _UpdateWebhookConfigurationRequest;
@@ -15290,6 +16160,37 @@ _UserPrincipal.attributeTypeMap = [
 ];
 var UserPrincipal = _UserPrincipal;
 
+// models/ValidateCommunicationChannelRequest.ts
+var _ValidateCommunicationChannelRequest = class _ValidateCommunicationChannelRequest {
+  static getAttributeTypeMap() {
+    return _ValidateCommunicationChannelRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ValidateCommunicationChannelRequest.discriminator = void 0;
+_ValidateCommunicationChannelRequest.attributeTypeMap = [
+  {
+    "name": "channel_type",
+    "baseName": "channel_type",
+    "type": "ValidateCommunicationChannelRequestChannelTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "channel_identifier",
+    "baseName": "channel_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "event_type",
+    "baseName": "event_type",
+    "type": "ValidateCommunicationChannelRequestEventTypeEnum",
+    "format": ""
+  }
+];
+var ValidateCommunicationChannelRequest = _ValidateCommunicationChannelRequest;
+
 // models/ValidateMergeRequest.ts
 var _ValidateMergeRequest = class _ValidateMergeRequest {
   static getAttributeTypeMap() {
@@ -15444,6 +16345,55 @@ _VariableDetailInput.attributeTypeMap = [
   }
 ];
 var VariableDetailInput = _VariableDetailInput;
+
+// models/VariablePutAssignmentInput.ts
+var _VariablePutAssignmentInput = class _VariablePutAssignmentInput {
+  static getAttributeTypeMap() {
+    return _VariablePutAssignmentInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_VariablePutAssignmentInput.discriminator = void 0;
+_VariablePutAssignmentInput.attributeTypeMap = [
+  {
+    "name": "assigned_values",
+    "baseName": "assigned_values",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "org_identifier",
+    "baseName": "org_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "principal_type",
+    "baseName": "principal_type",
+    "type": "VariablePutAssignmentInputPrincipalTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "principal_identifier",
+    "baseName": "principal_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "model_identifier",
+    "baseName": "model_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "priority",
+    "baseName": "priority",
+    "type": "number",
+    "format": "int32"
+  }
+];
+var VariablePutAssignmentInput = _VariablePutAssignmentInput;
 
 // models/VariableUpdateAssignmentInput.ts
 var _VariableUpdateAssignmentInput = class _VariableUpdateAssignmentInput {
@@ -15903,6 +16853,56 @@ _WebhookDeleteResponse.attributeTypeMap = [
 ];
 var WebhookDeleteResponse = _WebhookDeleteResponse;
 
+// models/WebhookKeyValuePair.ts
+var _WebhookKeyValuePair = class _WebhookKeyValuePair {
+  static getAttributeTypeMap() {
+    return _WebhookKeyValuePair.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_WebhookKeyValuePair.discriminator = void 0;
+_WebhookKeyValuePair.attributeTypeMap = [
+  {
+    "name": "key",
+    "baseName": "key",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "value",
+    "baseName": "value",
+    "type": "string",
+    "format": ""
+  }
+];
+var WebhookKeyValuePair = _WebhookKeyValuePair;
+
+// models/WebhookKeyValuePairInput.ts
+var _WebhookKeyValuePairInput = class _WebhookKeyValuePairInput {
+  static getAttributeTypeMap() {
+    return _WebhookKeyValuePairInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_WebhookKeyValuePairInput.discriminator = void 0;
+_WebhookKeyValuePairInput.attributeTypeMap = [
+  {
+    "name": "key",
+    "baseName": "key",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "value",
+    "baseName": "value",
+    "type": "string",
+    "format": ""
+  }
+];
+var WebhookKeyValuePairInput = _WebhookKeyValuePairInput;
+
 // models/WebhookOrg.ts
 var _WebhookOrg = class _WebhookOrg {
   static getAttributeTypeMap() {
@@ -16027,6 +17027,12 @@ _WebhookResponse.attributeTypeMap = [
     "name": "signature_verification",
     "baseName": "signature_verification",
     "type": "WebhookSignatureVerification",
+    "format": ""
+  },
+  {
+    "name": "additional_headers",
+    "baseName": "additional_headers",
+    "type": "Array<WebhookKeyValuePair>",
     "format": ""
   },
   {
@@ -16330,7 +17336,15 @@ var enumsMap = /* @__PURE__ */ new Set([
   "AssociateMetadataInputTypeEnum",
   "AssociateMetadataInputCreateTypeEnum",
   "AuthorMetadataTypeInputTypeEnum",
+  "ChannelHistoryEventInputTypeEnum",
+  "ChannelHistoryJobStatusEnum",
+  "ChannelValidationDetailValidationStepEnum",
+  "ChannelValidationDetailStatusEnum",
+  "CollectionMetadataInputTypeEnum",
   "ColumnSecurityRuleGroupOperationOperationEnum",
+  "CommunicationChannelValidateResponseChannelTypeEnum",
+  "CommunicationChannelValidateResponseEventTypeEnum",
+  "CommunicationChannelValidateResponseResultCodeEnum",
   "ConnectionConfigurationResponsePolicyProcessesEnum",
   "ConnectionConfigurationResponseDataWarehouseTypeEnum",
   "ConnectionConfigurationResponsePolicyTypeEnum",
@@ -16430,6 +17444,8 @@ var enumsMap = /* @__PURE__ */ new Set([
   "OrgPreferenceSearchCriteriaInputEventTypesEnum",
   "OrgResponseStatusEnum",
   "OrgResponseVisibilityEnum",
+  "ParameterizeMetadataFieldsRequestMetadataTypeEnum",
+  "ParameterizeMetadataFieldsRequestFieldTypeEnum",
   "ParameterizeMetadataRequestMetadataTypeEnum",
   "ParameterizeMetadataRequestFieldTypeEnum",
   "PdfOptionsPageSizeEnum",
@@ -16438,6 +17454,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "PermissionsMetadataTypeInputTypeEnum",
   "PrincipalsInputTypeEnum",
   "PublishMetadataListItemTypeEnum",
+  "PutVariableValuesRequestOperationEnum",
   "RegionalSettingsInputCurrencyFormatEnum",
   "RegionalSettingsInputUserLocaleEnum",
   "RegionalSettingsInputNumberFormatLocaleEnum",
@@ -16452,6 +17469,10 @@ var enumsMap = /* @__PURE__ */ new Set([
   "SchedulesPdfOptionsInputPageSizeEnum",
   "SearchCalendarsRequestSortOptionsFieldNameEnum",
   "SearchCalendarsRequestSortOptionsOrderEnum",
+  "SearchChannelHistoryRequestChannelTypeEnum",
+  "SearchChannelHistoryRequestChannelStatusEnum",
+  "SearchCollectionsRequestSortOptionsFieldNameEnum",
+  "SearchCollectionsRequestSortOptionsOrderEnum",
   "SearchCommitsRequestMetadataTypeEnum",
   "SearchCommunicationChannelPreferencesRequestClusterPreferencesEnum",
   "SearchConnectionRequestDataWarehouseTypesEnum",
@@ -16482,8 +17503,6 @@ var enumsMap = /* @__PURE__ */ new Set([
   "SearchUsersRequestPrivilegesEnum",
   "SearchUsersRequestAccountTypeEnum",
   "SearchUsersRequestAccountStatusEnum",
-  "SearchUsersRequestSortOptionsFieldNameEnum",
-  "SearchUsersRequestSortOptionsOrderEnum",
   "SearchVariablesRequestResponseContentEnum",
   "SearchWebhookConfigurationsRequestEventTypeEnum",
   "SearchWebhookConfigurationsRequestSortOptionsFieldNameEnum",
@@ -16500,6 +17519,8 @@ var enumsMap = /* @__PURE__ */ new Set([
   "SqlQueryResponseMetadataTypeEnum",
   "StorageDestinationStorageTypeEnum",
   "StorageDestinationInputStorageTypeEnum",
+  "StorageSetupInfoClusterTypeEnum",
+  "StorageSetupInfoStorageTypeEnum",
   "TagMetadataTypeInputTypeEnum",
   "TokenAccessScopeObjectTypeEnum",
   "UnparameterizeMetadataRequestMetadataTypeEnum",
@@ -16508,6 +17529,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "UpdateCalendarRequestCalendarTypeEnum",
   "UpdateCalendarRequestMonthOffsetEnum",
   "UpdateCalendarRequestStartDayOfWeekEnum",
+  "UpdateCollectionRequestOperationEnum",
   "UpdateConnectionConfigurationRequestAuthenticationTypeEnum",
   "UpdateConnectionConfigurationRequestPolicyTypeEnum",
   "UpdateConnectionConfigurationRequestPolicyProcessesEnum",
@@ -16538,9 +17560,12 @@ var enumsMap = /* @__PURE__ */ new Set([
   "UserGroupResponseTypeEnum",
   "UserGroupResponseVisibilityEnum",
   "UserObjectTypeEnum",
+  "ValidateCommunicationChannelRequestChannelTypeEnum",
+  "ValidateCommunicationChannelRequestEventTypeEnum",
   "ValueScopeInputPrincipalTypeEnum",
   "VariableVariableTypeEnum",
   "VariableDetailInputTypeEnum",
+  "VariablePutAssignmentInputPrincipalTypeEnum",
   "VariableUpdateAssignmentInputOperationEnum",
   "VariableUpdateScopeInputPrincipalTypeEnum",
   "VariableValuePrincipalTypeEnum",
@@ -16556,6 +17581,7 @@ var typeMap = {
   "AIContext": AIContext,
   "APIKey": APIKey,
   "APIKeyInput": APIKeyInput,
+  "AWSAssumeRoleSetup": AWSAssumeRoleSetup,
   "AccessToken": AccessToken,
   "ActionConfig": ActionConfig,
   "ActionConfigInput": ActionConfigInput,
@@ -16586,8 +17612,19 @@ var typeMap = {
   "CALLBACKInputMandatory": CALLBACKInputMandatory,
   "CalendarResponse": CalendarResponse,
   "ChangeUserPasswordRequest": ChangeUserPasswordRequest,
+  "ChannelHistoryEventInput": ChannelHistoryEventInput,
+  "ChannelHistoryJob": ChannelHistoryJob,
+  "ChannelValidationAwsS3Info": ChannelValidationAwsS3Info,
+  "ChannelValidationDetail": ChannelValidationDetail,
   "ClusterNonEmbedAccess": ClusterNonEmbedAccess,
   "ClusterNonEmbedAccessInput": ClusterNonEmbedAccessInput,
+  "Collection": Collection,
+  "CollectionDeleteResponse": CollectionDeleteResponse,
+  "CollectionDeleteTypeIdentifiers": CollectionDeleteTypeIdentifiers,
+  "CollectionEntityIdentifier": CollectionEntityIdentifier,
+  "CollectionMetadataInput": CollectionMetadataInput,
+  "CollectionMetadataItem": CollectionMetadataItem,
+  "CollectionSearchResponse": CollectionSearchResponse,
   "Column": Column,
   "ColumnSecurityRule": ColumnSecurityRule,
   "ColumnSecurityRuleColumn": ColumnSecurityRuleColumn,
@@ -16603,6 +17640,7 @@ var typeMap = {
   "CommitResponse": CommitResponse,
   "CommiterType": CommiterType,
   "CommunicationChannelPreferencesResponse": CommunicationChannelPreferencesResponse,
+  "CommunicationChannelValidateResponse": CommunicationChannelValidateResponse,
   "ConfigureCommunicationChannelPreferencesRequest": ConfigureCommunicationChannelPreferencesRequest,
   "ConfigureSecuritySettingsRequest": ConfigureSecuritySettingsRequest,
   "ConfigureSecuritySettingsRequestClusterPreferences": ConfigureSecuritySettingsRequestClusterPreferences,
@@ -16619,6 +17657,7 @@ var typeMap = {
   "CreateAgentConversationRequestMetadataContext": CreateAgentConversationRequestMetadataContext,
   "CreateCalendarRequest": CreateCalendarRequest,
   "CreateCalendarRequestTableReference": CreateCalendarRequestTableReference,
+  "CreateCollectionRequest": CreateCollectionRequest,
   "CreateConfigRequest": CreateConfigRequest,
   "CreateConnectionConfigurationRequest": CreateConnectionConfigurationRequest,
   "CreateConnectionConfigurationRequestPolicyProcessOptions": CreateConnectionConfigurationRequestPolicyProcessOptions,
@@ -16662,12 +17701,14 @@ var typeMap = {
   "DefaultActionConfigInput": DefaultActionConfigInput,
   "DefaultActionConfigInputCreate": DefaultActionConfigInputCreate,
   "DefaultActionConfigSearchInput": DefaultActionConfigSearchInput,
+  "DeleteCollectionRequest": DeleteCollectionRequest,
   "DeleteConfigRequest": DeleteConfigRequest,
   "DeleteConnectionConfigurationRequest": DeleteConnectionConfigurationRequest,
   "DeleteConnectionRequest": DeleteConnectionRequest,
   "DeleteMetadataRequest": DeleteMetadataRequest,
   "DeleteMetadataTypeInput": DeleteMetadataTypeInput,
   "DeleteOrgEmailCustomizationRequest": DeleteOrgEmailCustomizationRequest,
+  "DeleteVariablesRequest": DeleteVariablesRequest,
   "DeleteWebhookConfigurationsRequest": DeleteWebhookConfigurationsRequest,
   "DeployCommitRequest": DeployCommitRequest,
   "DeployResponse": DeployResponse,
@@ -16713,6 +17754,7 @@ var typeMap = {
   "ForceLogoutUsersRequest": ForceLogoutUsersRequest,
   "Frequency": Frequency,
   "FrequencyInput": FrequencyInput,
+  "GCPWebIdentitySetup": GCPWebIdentitySetup,
   "GenerateCSVRequest": GenerateCSVRequest,
   "GenericInfo": GenericInfo,
   "GetAsyncImportStatusResponse": GetAsyncImportStatusResponse,
@@ -16778,6 +17820,7 @@ var typeMap = {
   "OrgResponse": OrgResponse,
   "OrgType": OrgType,
   "ParameterValues": ParameterValues,
+  "ParameterizeMetadataFieldsRequest": ParameterizeMetadataFieldsRequest,
   "ParameterizeMetadataRequest": ParameterizeMetadataRequest,
   "ParametersListItem": ParametersListItem,
   "ParametersListItemInput": ParametersListItemInput,
@@ -16795,6 +17838,7 @@ var typeMap = {
   "PrincipalsListItemInput": PrincipalsListItemInput,
   "PublishMetadataListItem": PublishMetadataListItem,
   "PublishMetadataRequest": PublishMetadataRequest,
+  "PutVariableValuesRequest": PutVariableValuesRequest,
   "QueryGetDecomposedQueryRequest": QueryGetDecomposedQueryRequest,
   "QueryGetDecomposedQueryRequestNlsRequest": QueryGetDecomposedQueryRequestNlsRequest,
   "RecipientDetails": RecipientDetails,
@@ -16841,6 +17885,10 @@ var typeMap = {
   "ScriptSrcUrlsInput": ScriptSrcUrlsInput,
   "SearchCalendarsRequest": SearchCalendarsRequest,
   "SearchCalendarsRequestSortOptions": SearchCalendarsRequestSortOptions,
+  "SearchChannelHistoryRequest": SearchChannelHistoryRequest,
+  "SearchChannelHistoryResponse": SearchChannelHistoryResponse,
+  "SearchCollectionsRequest": SearchCollectionsRequest,
+  "SearchCollectionsRequestSortOptions": SearchCollectionsRequestSortOptions,
   "SearchCommitsRequest": SearchCommitsRequest,
   "SearchCommunicationChannelPreferencesRequest": SearchCommunicationChannelPreferencesRequest,
   "SearchConfigRequest": SearchConfigRequest,
@@ -16866,7 +17914,6 @@ var typeMap = {
   "SearchUserGroupsRequest": SearchUserGroupsRequest,
   "SearchUserGroupsRequestSortOptions": SearchUserGroupsRequestSortOptions,
   "SearchUsersRequest": SearchUsersRequest,
-  "SearchUsersRequestSortOptions": SearchUsersRequestSortOptions,
   "SearchVariablesRequest": SearchVariablesRequest,
   "SearchWebhookConfigurationsRequest": SearchWebhookConfigurationsRequest,
   "SearchWebhookConfigurationsRequestSortOptions": SearchWebhookConfigurationsRequestSortOptions,
@@ -16895,6 +17942,7 @@ var typeMap = {
   "StorageConfigInput": StorageConfigInput,
   "StorageDestination": StorageDestination,
   "StorageDestinationInput": StorageDestinationInput,
+  "StorageSetupInfo": StorageSetupInfo,
   "SystemConfig": SystemConfig,
   "SystemInfo": SystemInfo,
   "SystemOverrideInfo": SystemOverrideInfo,
@@ -16913,6 +17961,7 @@ var typeMap = {
   "UnpublishMetadataRequest": UnpublishMetadataRequest,
   "UpdateCalendarRequest": UpdateCalendarRequest,
   "UpdateCalendarRequestTableReference": UpdateCalendarRequestTableReference,
+  "UpdateCollectionRequest": UpdateCollectionRequest,
   "UpdateColumnSecurityRulesRequest": UpdateColumnSecurityRulesRequest,
   "UpdateConfigRequest": UpdateConfigRequest,
   "UpdateConnectionConfigurationRequest": UpdateConnectionConfigurationRequest,
@@ -16946,11 +17995,13 @@ var typeMap = {
   "UserObject": UserObject,
   "UserParameterOptions": UserParameterOptions,
   "UserPrincipal": UserPrincipal,
+  "ValidateCommunicationChannelRequest": ValidateCommunicationChannelRequest,
   "ValidateMergeRequest": ValidateMergeRequest,
   "ValidateTokenRequest": ValidateTokenRequest,
   "ValueScopeInput": ValueScopeInput,
   "Variable": Variable,
   "VariableDetailInput": VariableDetailInput,
+  "VariablePutAssignmentInput": VariablePutAssignmentInput,
   "VariableUpdateAssignmentInput": VariableUpdateAssignmentInput,
   "VariableUpdateScopeInput": VariableUpdateScopeInput,
   "VariableValue": VariableValue,
@@ -16965,6 +18016,8 @@ var typeMap = {
   "WebhookAuthenticationInput": WebhookAuthenticationInput,
   "WebhookDeleteFailure": WebhookDeleteFailure,
   "WebhookDeleteResponse": WebhookDeleteResponse,
+  "WebhookKeyValuePair": WebhookKeyValuePair,
+  "WebhookKeyValuePairInput": WebhookKeyValuePairInput,
   "WebhookOrg": WebhookOrg,
   "WebhookPagination": WebhookPagination,
   "WebhookResponse": WebhookResponse,
@@ -17187,8 +18240,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/ai/agent/conversation/create";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -17224,8 +18277,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/ai/conversation/create";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -17261,8 +18314,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/ai/data-source-suggestions";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -17298,8 +18351,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/ai/instructions/get";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -17335,8 +18388,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/ai/relevant-questions/";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -17372,8 +18425,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/ai/analytical-questions";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -17413,8 +18466,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/ai/agent/{conversation_identifier}/converse".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -17450,8 +18503,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/ai/agent/converse/sse";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -17491,8 +18544,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/ai/conversation/{conversation_identifier}/converse".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -17528,8 +18581,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/ai/instructions/set";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -17565,8 +18618,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/ai/answer/create";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -18187,8 +19240,8 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/auth/session/user";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -18211,8 +19264,8 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/auth/session/token";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -18239,8 +19292,8 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/auth/token/custom";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -18271,8 +19324,8 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/auth/token/full";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -18303,8 +19356,8 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/auth/token/object";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -18335,8 +19388,8 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/auth/session/login";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -18368,8 +19421,8 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/auth/session/logout";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -18396,8 +19449,8 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/auth/token/revoke";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -18433,8 +19486,8 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/auth/token/validate";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -18994,6 +20047,419 @@ var AuthenticationApiResponseProcessor = class {
   }
 };
 
+// apis/CollectionsApi.ts
+var CollectionsApiRequestFactory = class extends BaseAPIRequestFactory {
+  /**
+   *   Version: 26.4.0.cl or later   Creates a new collection in ThoughtSpot.  Collections allow you to organize and group related metadata objects such as Liveboards, Answers, worksheets, and other data objects. You can also create nested collections (sub-collections) to build a hierarchical structure.  #### Supported operations  The API endpoint lets you perform the following operations:  * Create a new collection * Add metadata objects (Liveboards, Answers, Logical Tables) to the collection * Create nested collections by adding sub-collections      
+   * @param createCollectionRequest 
+   */
+  createCollection(createCollectionRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (createCollectionRequest === null || createCollectionRequest === void 0) {
+        throw new RequiredError("CollectionsApi", "createCollection", "createCollectionRequest");
+      }
+      const localVarPath = "/api/rest/2.0/collections/create";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(createCollectionRequest, "CreateCollectionRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *   Version: 26.4.0.cl or later   Deletes one or more collections from ThoughtSpot.  #### Delete options  * **delete_children**: When set to `true`, deletes the child objects (metadata items) within the collection that the user has access to. Objects that the user does not have permission to delete will be skipped. * **dry_run**: When set to `true`, performs a preview of the deletion operation without actually deleting anything. The response shows what would be deleted, allowing you to review before committing the deletion.  #### Response  The response includes: * **metadata_deleted**: List of metadata objects that were successfully deleted * **metadata_skipped**: List of metadata objects that were skipped due to lack of permissions or other constraints      
+   * @param deleteCollectionRequest 
+   */
+  deleteCollection(deleteCollectionRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (deleteCollectionRequest === null || deleteCollectionRequest === void 0) {
+        throw new RequiredError("CollectionsApi", "deleteCollection", "deleteCollectionRequest");
+      }
+      const localVarPath = "/api/rest/2.0/collections/delete";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(deleteCollectionRequest, "DeleteCollectionRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *   Version: 26.4.0.cl or later   Gets a list of collections available in ThoughtSpot.  To get details of a specific collection, specify the collection GUID or name. You can also filter the API response based on the collection name pattern, author, and other criteria.  #### Search options  * **name_pattern**: Use \'%\' as a wildcard character to match collection names * **collection_identifiers**: Search for specific collections by their GUIDs or names * **include_metadata**: When set to `true`, includes the metadata objects within each collection in the response  **NOTE**: If the API returns an empty list, consider increasing the value of the `record_size` parameter. To search across all available collections, set `record_size` to `-1`.      
+   * @param searchCollectionsRequest 
+   */
+  searchCollections(searchCollectionsRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (searchCollectionsRequest === null || searchCollectionsRequest === void 0) {
+        throw new RequiredError("CollectionsApi", "searchCollections", "searchCollectionsRequest");
+      }
+      const localVarPath = "/api/rest/2.0/collections/search";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(searchCollectionsRequest, "SearchCollectionsRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *   Version: 26.4.0.cl or later   Updates an existing collection in ThoughtSpot.  #### Supported operations  This API endpoint lets you perform the following operations:  * Update collection name and description * Change visibility settings * Add metadata objects to the collection (operation: ADD) * Remove metadata objects from the collection (operation: REMOVE) * Replace all metadata objects in the collection (operation: REPLACE)  #### Operation types  * **ADD**: Adds the specified metadata objects to the existing collection without removing current items * **REMOVE**: Removes only the specified metadata objects from the collection * **REPLACE**: Replaces all existing metadata objects with the specified items (default behavior)      
+   * @param collectionIdentifier Unique GUID of the collection. Note: Collection names cannot be used as identifiers since duplicate names are allowed.
+   * @param updateCollectionRequest 
+   */
+  updateCollection(collectionIdentifier, updateCollectionRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (collectionIdentifier === null || collectionIdentifier === void 0) {
+        throw new RequiredError("CollectionsApi", "updateCollection", "collectionIdentifier");
+      }
+      if (updateCollectionRequest === null || updateCollectionRequest === void 0) {
+        throw new RequiredError("CollectionsApi", "updateCollection", "updateCollectionRequest");
+      }
+      const localVarPath = "/api/rest/2.0/collections/{collection_identifier}/update".replace("{collection_identifier}", encodeURIComponent(String(collectionIdentifier)));
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(updateCollectionRequest, "UpdateCollectionRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+};
+var CollectionsApiResponseProcessor = class {
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to createCollection
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  createCollection(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "Collection",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "Collection",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to deleteCollection
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  deleteCollection(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "CollectionDeleteResponse",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("404", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Resource not found.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "CollectionDeleteResponse",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to searchCollections
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  searchCollections(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "CollectionSearchResponse",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "CollectionSearchResponse",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to updateCollection
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  updateCollection(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("204", response.httpStatusCode)) {
+        return;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("404", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Resource not found.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "void",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+};
+
 // apis/ConnectionConfigurationsApi.ts
 var ConnectionConfigurationsApiRequestFactory = class extends BaseAPIRequestFactory {
   /**
@@ -19010,8 +20476,8 @@ var ConnectionConfigurationsApiRequestFactory = class extends BaseAPIRequestFact
       const localVarPath = "/api/rest/2.0/connection-configurations/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -19047,8 +20513,8 @@ var ConnectionConfigurationsApiRequestFactory = class extends BaseAPIRequestFact
       const localVarPath = "/api/rest/2.0/connection-configurations/create";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -19084,8 +20550,8 @@ var ConnectionConfigurationsApiRequestFactory = class extends BaseAPIRequestFact
       const localVarPath = "/api/rest/2.0/connection-configurations/delete";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -19125,8 +20591,8 @@ var ConnectionConfigurationsApiRequestFactory = class extends BaseAPIRequestFact
       const localVarPath = "/api/rest/2.0/connection-configurations/{configuration_identifier}/update".replace("{configuration_identifier}", encodeURIComponent(String(configurationIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -19389,7 +20855,7 @@ var ConnectionConfigurationsApiResponseProcessor = class {
 // apis/ConnectionsApi.ts
 var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
   /**
-   *   Version: 9.2.0.cl or later   Creates a connection to a data warehouse for live query services.    Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  #### Create a connection without tables  To create a connection without tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a SnowFlake connection:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"externalDatabases\":[       ]   }   ``` 2. Set `validate` to `false`.  #### Create a connection with tables  To create a connection with tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"externalDatabases\":[         {            \"name\":\"AllDatatypes\",            \"isAutoCreated\":false,            \"schemas\":[               {                  \"name\":\"alldatatypes\",                  \"tables\":[                     {                        \"name\":\"allDatatypes\",                        \"type\":\"TABLE\",                        \"description\":\"\",                        \"selected\":true,                        \"linked\":true,                        \"columns\":[                           {                              \"name\":\"CNUMBER\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           },                           {                              \"name\":\"CDECIMAL\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           }                        ]                     }                  ]               }            ]         }      ]   }   ``` 2. Set `validate` to `true`.      
+   *   Version: 9.2.0.cl or later   Creates a connection to a data warehouse for live query services.    Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  #### Create a connection without tables  To create a connection without tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a SnowFlake connection:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"authenticationType\": \"SERVICE_ACCOUNT\",      \"externalDatabases\":[       ]   }   ``` 2. Set `validate` to `false`.  **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.  #### Create a connection with tables  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) and `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**) privilege is required.  To create a connection with tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"authenticationType\": \"SERVICE_ACCOUNT\",      \"externalDatabases\":[         {            \"name\":\"AllDatatypes\",            \"isAutoCreated\":false,            \"schemas\":[               {                  \"name\":\"alldatatypes\",                  \"tables\":[                     {                        \"name\":\"allDatatypes\",                        \"type\":\"TABLE\",                        \"description\":\"\",                        \"selected\":true,                        \"linked\":true,                        \"columns\":[                           {                              \"name\":\"CNUMBER\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           },                           {                              \"name\":\"CDECIMAL\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           }                        ]                     }                  ]               }            ]         }      ]   }   ``` 2. Set `validate` to `true`.  **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.      
    * @param createConnectionRequest 
    */
   createConnection(createConnectionRequest, _options) {
@@ -19402,8 +20868,8 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/connection/create";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -19439,8 +20905,8 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/connection/delete";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -19476,8 +20942,8 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/connections/{connection_identifier}/delete".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -19504,8 +20970,8 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier}".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -19532,8 +20998,8 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/connections/fetch-connection-diff-status/{connection_identifier}".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -19564,8 +21030,8 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/connections/{connection_identifier}/revoke-refresh-tokens".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -19601,8 +21067,8 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/connection/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -19638,8 +21104,8 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/connection/update";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -19679,8 +21145,8 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/connections/{connection_identifier}/update".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -20263,8 +21729,8 @@ var CustomActionApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/customization/custom-actions";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -20300,8 +21766,8 @@ var CustomActionApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/customization/custom-actions/{custom_action_identifier}/delete".replace("{custom_action_identifier}", encodeURIComponent(String(customActionIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -20328,8 +21794,8 @@ var CustomActionApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/customization/custom-actions/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -20369,8 +21835,8 @@ var CustomActionApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/customization/custom-actions/{custom_action_identifier}/update".replace("{custom_action_identifier}", encodeURIComponent(String(customActionIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -20646,8 +22112,8 @@ var CustomCalendarsApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/calendars/create";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -20683,8 +22149,8 @@ var CustomCalendarsApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/calendars/{calendar_identifier}/delete".replace("{calendar_identifier}", encodeURIComponent(String(calendarIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -20711,8 +22177,8 @@ var CustomCalendarsApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/calendars/generate-csv";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -20748,8 +22214,8 @@ var CustomCalendarsApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/calendars/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -20789,8 +22255,8 @@ var CustomCalendarsApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/calendars/{calendar_identifier}/update".replace("{calendar_identifier}", encodeURIComponent(String(calendarIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -21139,8 +22605,8 @@ var DBTApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/dbt/dbt-connection";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const useForm = canConsumeForm([
         "multipart/form-data"
       ]);
@@ -21216,8 +22682,8 @@ var DBTApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/dbt/generate-sync-tml";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const useForm = canConsumeForm([
         "multipart/form-data"
       ]);
@@ -21278,8 +22744,8 @@ var DBTApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/dbt/generate-tml";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const useForm = canConsumeForm([
         "multipart/form-data"
       ]);
@@ -21335,8 +22801,8 @@ var DBTApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/dbt/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -21363,8 +22829,8 @@ var DBTApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/dbt/{dbt_connection_identifier}/delete".replace("{dbt_connection_identifier}", encodeURIComponent(String(dbtConnectionIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -21401,8 +22867,8 @@ var DBTApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/dbt/update-dbt-connection";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const useForm = canConsumeForm([
         "multipart/form-data"
       ]);
@@ -21847,8 +23313,8 @@ var DataApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/answer/data";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -21884,8 +23350,8 @@ var DataApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/liveboard/data";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -21921,8 +23387,8 @@ var DataApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/searchdata";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -22147,8 +23613,8 @@ var EmailCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/customization/email";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -22184,8 +23650,8 @@ var EmailCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/customization/email/{template_identifier}/delete".replace("{template_identifier}", encodeURIComponent(String(templateIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -22212,8 +23678,8 @@ var EmailCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/customization/email/delete";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -22249,8 +23715,8 @@ var EmailCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/customization/email/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -22286,8 +23752,8 @@ var EmailCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/customization/email/update";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -22319,8 +23785,8 @@ var EmailCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/customization/email/validate";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -22667,8 +24133,8 @@ var GroupsApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/groups/create";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -22704,8 +24170,8 @@ var GroupsApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/groups/{group_identifier}/delete".replace("{group_identifier}", encodeURIComponent(String(groupIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -22732,8 +24198,8 @@ var GroupsApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/groups/import";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -22769,8 +24235,8 @@ var GroupsApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/groups/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -22810,8 +24276,8 @@ var GroupsApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/groups/{group_identifier}/update".replace("{group_identifier}", encodeURIComponent(String(groupIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -23132,6 +24598,110 @@ var GroupsApiResponseProcessor = class {
   }
 };
 
+// apis/JobsApi.ts
+var JobsApiRequestFactory = class extends BaseAPIRequestFactory {
+  /**
+   *   Version: 26.4.0.cl or later   Searches delivery history for communication channels such as webhooks. Returns channel-level delivery status for each job execution record. Use this to monitor channel health and delivery success rates across events.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.  **NOTE**: When `channel_type` is `WEBHOOK`, the following constraints apply:  - `job_ids`, `channel_identifiers`, and `events` each accept at most one element. - When `job_ids` is provided, it is used as the sole lookup key and other filter fields are ignored. - When `job_ids` is not provided, `channel_identifiers` and `events` are both required. Each must contain exactly one element, and the event object must include the `identifier` field. - Records older than the configured retention period are not returned.      
+   * @param searchChannelHistoryRequest 
+   */
+  searchChannelHistory(searchChannelHistoryRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (searchChannelHistoryRequest === null || searchChannelHistoryRequest === void 0) {
+        throw new RequiredError("JobsApi", "searchChannelHistory", "searchChannelHistoryRequest");
+      }
+      const localVarPath = "/api/rest/2.0/jobs/history/communication-channels/search";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(searchChannelHistoryRequest, "SearchChannelHistoryRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+};
+var JobsApiResponseProcessor = class {
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to searchChannelHistory
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  searchChannelHistory(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "SearchChannelHistoryResponse",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "SearchChannelHistoryResponse",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+};
+
 // apis/LogApi.ts
 var LogApiRequestFactory = class extends BaseAPIRequestFactory {
   /**
@@ -23148,8 +24718,8 @@ var LogApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/logs/fetch";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -23252,8 +24822,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/worksheets/convert";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -23289,8 +24859,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/copyobject";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -23326,8 +24896,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/delete";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -23363,8 +24933,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/tml/export";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -23400,8 +24970,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/tml/export/batch";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -23437,8 +25007,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/answer/sql";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -23474,8 +25044,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/tml/async/status";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -23511,8 +25081,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/liveboard/sql";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -23548,8 +25118,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/tml/import";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -23585,8 +25155,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/tml/async/import";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -23622,14 +25192,51 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/parameterize";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
       requestContext.setHeaderParam("Content-Type", contentType);
       const serializedBody = ObjectSerializer.stringify(
         ObjectSerializer.serialize(parameterizeMetadataRequest, "ParameterizeMetadataRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.4.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
+   * @param parameterizeMetadataFieldsRequest 
+   */
+  parameterizeMetadataFields(parameterizeMetadataFieldsRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (parameterizeMetadataFieldsRequest === null || parameterizeMetadataFieldsRequest === void 0) {
+        throw new RequiredError("MetadataApi", "parameterizeMetadataFields", "parameterizeMetadataFieldsRequest");
+      }
+      const localVarPath = "/api/rest/2.0/metadata/parameterize-fields";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(parameterizeMetadataFieldsRequest, "ParameterizeMetadataFieldsRequest", ""),
         contentType
       );
       requestContext.setBody(serializedBody);
@@ -23659,8 +25266,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -23696,8 +25303,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/unparameterize";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -23733,8 +25340,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/headers/update";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -23770,8 +25377,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/update-obj-id";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -24468,6 +26075,62 @@ var MetadataApiResponseProcessor = class {
    * Unwraps the actual response sent by the server from the response context and deserializes the response content
    * to the expected objects
    *
+   * @params response Response returned by the server for a request to parameterizeMetadataFields
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  parameterizeMetadataFields(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("204", response.httpStatusCode)) {
+        return;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "void",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
    * @params response Response returned by the server for a request to searchMetadata
    * @throws ApiException if the response code was not in [200, 299]
    */
@@ -24711,8 +26374,8 @@ var OrgsApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/orgs/create";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -24748,8 +26411,8 @@ var OrgsApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/orgs/{org_identifier}/delete".replace("{org_identifier}", encodeURIComponent(String(orgIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -24776,8 +26439,8 @@ var OrgsApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/orgs/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -24817,8 +26480,8 @@ var OrgsApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/orgs/{org_identifier}/update".replace("{org_identifier}", encodeURIComponent(String(orgIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -25094,8 +26757,8 @@ var ReportsApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/report/answer";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -25131,8 +26794,8 @@ var ReportsApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/report/liveboard";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -25288,8 +26951,8 @@ var RolesApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/roles/create";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -25325,8 +26988,8 @@ var RolesApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/roles/{role_identifier}/delete".replace("{role_identifier}", encodeURIComponent(String(roleIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -25353,8 +27016,8 @@ var RolesApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/roles/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -25394,8 +27057,8 @@ var RolesApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/roles/{role_identifier}/update".replace("{role_identifier}", encodeURIComponent(String(roleIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -25676,8 +27339,8 @@ var SchedulesApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/schedules/create";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -25713,8 +27376,8 @@ var SchedulesApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/schedules/{schedule_identifier}/delete".replace("{schedule_identifier}", encodeURIComponent(String(scheduleIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -25741,8 +27404,8 @@ var SchedulesApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/schedules/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -25782,8 +27445,8 @@ var SchedulesApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/schedules/{schedule_identifier}/update".replace("{schedule_identifier}", encodeURIComponent(String(scheduleIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -26059,8 +27722,8 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/security/metadata/assign";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -26096,8 +27759,8 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/security/column/rules/fetch";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -26133,8 +27796,8 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/security/metadata/fetch-object-privileges";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -26170,8 +27833,8 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/security/principals/fetch-permissions";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -26207,8 +27870,8 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/security/metadata/fetch-permissions";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -26244,8 +27907,8 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/security/metadata/manage-object-privilege";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -26281,8 +27944,8 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/security/metadata/publish";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -26318,8 +27981,8 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/security/metadata/share";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -26355,8 +28018,8 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/security/metadata/unpublish";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -26392,8 +28055,8 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/security/column/rules/update";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -27015,8 +28678,8 @@ var SystemApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/system/preferences/communication-channels/configure";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -27052,8 +28715,8 @@ var SystemApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/system/security-settings/configure";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -27085,8 +28748,8 @@ var SystemApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/system/config";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -27109,8 +28772,8 @@ var SystemApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/system";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -27133,8 +28796,8 @@ var SystemApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/system/config-overrides";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -27161,8 +28824,8 @@ var SystemApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/system/preferences/communication-channels/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -27198,8 +28861,8 @@ var SystemApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/system/security-settings/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -27235,14 +28898,51 @@ var SystemApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/system/config-update";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
       requestContext.setHeaderParam("Content-Type", contentType);
       const serializedBody = ObjectSerializer.stringify(
         ObjectSerializer.serialize(updateSystemConfigRequest, "UpdateSystemConfigRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *  Version: 26.4.0.cl or later   Validates a communication channel configuration to ensure it is properly set up and can receive events. - Use `channel_type` to specify the type of communication channel to validate (e.g., WEBHOOK). - Use `channel_identifier` to provide the unique identifier or name for the communication channel. - Use `event_type` to specify the event type to validate for this channel.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. For webhook channels, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+   * @param validateCommunicationChannelRequest 
+   */
+  validateCommunicationChannel(validateCommunicationChannelRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (validateCommunicationChannelRequest === null || validateCommunicationChannelRequest === void 0) {
+        throw new RequiredError("SystemApi", "validateCommunicationChannel", "validateCommunicationChannelRequest");
+      }
+      const localVarPath = "/api/rest/2.0/system/communication-channels/validate";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(validateCommunicationChannelRequest, "ValidateCommunicationChannelRequest", ""),
         contentType
       );
       requestContext.setBody(serializedBody);
@@ -27733,6 +29433,67 @@ var SystemApiResponseProcessor = class {
       throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
     });
   }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to validateCommunicationChannel
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  validateCommunicationChannel(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "CommunicationChannelValidateResponse",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "CommunicationChannelValidateResponse",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
 };
 
 // apis/TagsApi.ts
@@ -27751,8 +29512,8 @@ var TagsApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/tags/assign";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -27788,8 +29549,8 @@ var TagsApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/tags/create";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -27825,8 +29586,8 @@ var TagsApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/tags/{tag_identifier}/delete".replace("{tag_identifier}", encodeURIComponent(String(tagIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -27853,8 +29614,8 @@ var TagsApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/tags/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -27890,8 +29651,8 @@ var TagsApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/tags/unassign";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -27931,8 +29692,8 @@ var TagsApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/tags/{tag_identifier}/update".replace("{tag_identifier}", encodeURIComponent(String(tagIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -28320,8 +30081,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/users/activate";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -28357,8 +30118,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/security/metadata/assign";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -28394,8 +30155,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/tags/assign";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -28431,8 +30192,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/users/change-password";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -28468,8 +30229,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/vcs/git/branches/commit";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -28505,8 +30266,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/system/preferences/communication-channels/configure";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -28542,8 +30303,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/system/security-settings/configure";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -28579,8 +30340,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/connection-configurations/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -28616,8 +30377,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/worksheets/convert";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -28653,8 +30414,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/copyobject";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -28690,8 +30451,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/ai/agent/conversation/create";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -28727,14 +30488,51 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/calendars/create";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
       requestContext.setHeaderParam("Content-Type", contentType);
       const serializedBody = ObjectSerializer.stringify(
         ObjectSerializer.serialize(createCalendarRequest, "CreateCalendarRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *   Version: 26.4.0.cl or later   Creates a new collection in ThoughtSpot.  Collections allow you to organize and group related metadata objects such as Liveboards, Answers, worksheets, and other data objects. You can also create nested collections (sub-collections) to build a hierarchical structure.  #### Supported operations  The API endpoint lets you perform the following operations:  * Create a new collection * Add metadata objects (Liveboards, Answers, Logical Tables) to the collection * Create nested collections by adding sub-collections      
+   * @param createCollectionRequest 
+   */
+  createCollection(createCollectionRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (createCollectionRequest === null || createCollectionRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "createCollection", "createCollectionRequest");
+      }
+      const localVarPath = "/api/rest/2.0/collections/create";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(createCollectionRequest, "CreateCollectionRequest", ""),
         contentType
       );
       requestContext.setBody(serializedBody);
@@ -28764,8 +30562,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/vcs/git/config/create";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -28788,7 +30586,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *   Version: 9.2.0.cl or later   Creates a connection to a data warehouse for live query services.    Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  #### Create a connection without tables  To create a connection without tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a SnowFlake connection:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"externalDatabases\":[       ]   }   ``` 2. Set `validate` to `false`.  #### Create a connection with tables  To create a connection with tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"externalDatabases\":[         {            \"name\":\"AllDatatypes\",            \"isAutoCreated\":false,            \"schemas\":[               {                  \"name\":\"alldatatypes\",                  \"tables\":[                     {                        \"name\":\"allDatatypes\",                        \"type\":\"TABLE\",                        \"description\":\"\",                        \"selected\":true,                        \"linked\":true,                        \"columns\":[                           {                              \"name\":\"CNUMBER\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           },                           {                              \"name\":\"CDECIMAL\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           }                        ]                     }                  ]               }            ]         }      ]   }   ``` 2. Set `validate` to `true`.      
+   *   Version: 9.2.0.cl or later   Creates a connection to a data warehouse for live query services.    Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  #### Create a connection without tables  To create a connection without tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a SnowFlake connection:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"authenticationType\": \"SERVICE_ACCOUNT\",      \"externalDatabases\":[       ]   }   ``` 2. Set `validate` to `false`.  **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.  #### Create a connection with tables  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) and `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**) privilege is required.  To create a connection with tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"authenticationType\": \"SERVICE_ACCOUNT\",      \"externalDatabases\":[         {            \"name\":\"AllDatatypes\",            \"isAutoCreated\":false,            \"schemas\":[               {                  \"name\":\"alldatatypes\",                  \"tables\":[                     {                        \"name\":\"allDatatypes\",                        \"type\":\"TABLE\",                        \"description\":\"\",                        \"selected\":true,                        \"linked\":true,                        \"columns\":[                           {                              \"name\":\"CNUMBER\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           },                           {                              \"name\":\"CDECIMAL\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           }                        ]                     }                  ]               }            ]         }      ]   }   ``` 2. Set `validate` to `true`.  **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.      
    * @param createConnectionRequest 
    */
   createConnection(createConnectionRequest, _options) {
@@ -28801,8 +30599,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/connection/create";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -28838,8 +30636,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/connection-configurations/create";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -28875,8 +30673,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/ai/conversation/create";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -28912,8 +30710,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/customization/custom-actions";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -28949,8 +30747,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/customization/email";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -28986,8 +30784,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/orgs/create";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -29023,8 +30821,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/roles/create";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -29060,8 +30858,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/schedules/create";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -29097,8 +30895,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/tags/create";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -29134,8 +30932,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/users/create";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -29171,8 +30969,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/groups/create";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -29208,8 +31006,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/template/variables/create";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -29245,8 +31043,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/webhooks/create";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -29294,8 +31092,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/dbt/dbt-connection";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const useForm = canConsumeForm([
         "multipart/form-data"
       ]);
@@ -29371,8 +31169,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/dbt/generate-sync-tml";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const useForm = canConsumeForm([
         "multipart/form-data"
       ]);
@@ -29433,8 +31231,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/dbt/generate-tml";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const useForm = canConsumeForm([
         "multipart/form-data"
       ]);
@@ -29490,8 +31288,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/dbt/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -29518,8 +31316,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/users/deactivate";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -29555,8 +31353,45 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/calendars/{calendar_identifier}/delete".replace("{calendar_identifier}", encodeURIComponent(String(calendarIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *   Version: 26.4.0.cl or later   Deletes one or more collections from ThoughtSpot.  #### Delete options  * **delete_children**: When set to `true`, deletes the child objects (metadata items) within the collection that the user has access to. Objects that the user does not have permission to delete will be skipped. * **dry_run**: When set to `true`, performs a preview of the deletion operation without actually deleting anything. The response shows what would be deleted, allowing you to review before committing the deletion.  #### Response  The response includes: * **metadata_deleted**: List of metadata objects that were successfully deleted * **metadata_skipped**: List of metadata objects that were skipped due to lack of permissions or other constraints      
+   * @param deleteCollectionRequest 
+   */
+  deleteCollection(deleteCollectionRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (deleteCollectionRequest === null || deleteCollectionRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "deleteCollection", "deleteCollectionRequest");
+      }
+      const localVarPath = "/api/rest/2.0/collections/delete";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(deleteCollectionRequest, "DeleteCollectionRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -29583,8 +31418,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/vcs/git/config/delete";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -29620,8 +31455,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/connection/delete";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -29657,8 +31492,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/connection-configurations/delete";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -29694,8 +31529,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/connections/{connection_identifier}/delete".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -29722,8 +31557,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/customization/custom-actions/{custom_action_identifier}/delete".replace("{custom_action_identifier}", encodeURIComponent(String(customActionIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -29750,8 +31585,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/dbt/{dbt_connection_identifier}/delete".replace("{dbt_connection_identifier}", encodeURIComponent(String(dbtConnectionIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -29778,8 +31613,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/customization/email/{template_identifier}/delete".replace("{template_identifier}", encodeURIComponent(String(templateIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -29806,8 +31641,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/delete";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -29843,8 +31678,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/orgs/{org_identifier}/delete".replace("{org_identifier}", encodeURIComponent(String(orgIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -29871,8 +31706,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/customization/email/delete";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -29908,8 +31743,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/roles/{role_identifier}/delete".replace("{role_identifier}", encodeURIComponent(String(roleIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -29936,8 +31771,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/schedules/{schedule_identifier}/delete".replace("{schedule_identifier}", encodeURIComponent(String(scheduleIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -29964,8 +31799,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/tags/{tag_identifier}/delete".replace("{tag_identifier}", encodeURIComponent(String(tagIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -29992,8 +31827,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/users/{user_identifier}/delete".replace("{user_identifier}", encodeURIComponent(String(userIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -30020,8 +31855,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/groups/{group_identifier}/delete".replace("{group_identifier}", encodeURIComponent(String(groupIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -30048,8 +31883,45 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/template/variables/{identifier}/delete".replace("{identifier}", encodeURIComponent(String(identifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *  Delete variable(s)   Version: 26.4.0.cl or later   Allows deleting multiple variables from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifiers (IDs or names)  The operation will fail if: * The user lacks required permissions * Any of the variables don\'t exist * Any of the variables are being used by other objects      
+   * @param deleteVariablesRequest 
+   */
+  deleteVariables(deleteVariablesRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (deleteVariablesRequest === null || deleteVariablesRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "deleteVariables", "deleteVariablesRequest");
+      }
+      const localVarPath = "/api/rest/2.0/template/variables/delete";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(deleteVariablesRequest, "DeleteVariablesRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -30076,8 +31948,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/webhooks/delete";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -30113,8 +31985,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/vcs/git/commits/deploy";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -30150,8 +32022,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier}".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -30178,8 +32050,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/report/answer";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -30215,8 +32087,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/report/liveboard";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -30252,8 +32124,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/tml/export";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -30289,8 +32161,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/tml/export/batch";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -30326,8 +32198,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/answer/data";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -30363,8 +32235,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/answer/sql";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -30400,8 +32272,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/tml/async/status";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -30437,8 +32309,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/security/column/rules/fetch";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -30474,8 +32346,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/connections/fetch-connection-diff-status/{connection_identifier}".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -30502,8 +32374,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/liveboard/data";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -30539,8 +32411,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/liveboard/sql";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -30576,8 +32448,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/logs/fetch";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -30613,8 +32485,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/security/metadata/fetch-object-privileges";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -30650,8 +32522,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/security/principals/fetch-permissions";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -30687,8 +32559,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/security/metadata/fetch-permissions";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -30724,8 +32596,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/users/force-logout";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -30761,8 +32633,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/calendars/generate-csv";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -30794,8 +32666,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/auth/session/user";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -30818,8 +32690,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/auth/session/token";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -30846,8 +32718,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/auth/token/custom";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -30878,8 +32750,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/ai/data-source-suggestions";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -30915,8 +32787,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/auth/token/full";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -30947,8 +32819,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/ai/instructions/get";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -30984,8 +32856,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/auth/token/object";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -31016,8 +32888,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/ai/relevant-questions/";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -31049,8 +32921,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/system/config";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -31073,8 +32945,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/system";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -31097,8 +32969,36 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/system/config-overrides";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *  Version: 26.4.0.cl or later   Get storage config information for a webhook configuration. This endpoint provides ThoughtSpot\'s identity information and IAM policy configuration required for customers to set up cross-account access to their S3 buckets.  The setup info returned depends on the ThoughtSpot cluster type: - For AWS clusters: Returns `aws_config` with STS AssumeRole configuration - For GCP clusters: Returns `gcp_config` with STS AssumeRoleWithWebIdentity configuration  **Note:** This endpoint only returns data if the webhook has a storage destination configured.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+   * @param webhookIdentifier Unique ID or name of the webhook configuration.
+   */
+  getWebhookStorageConfig(webhookIdentifier, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (webhookIdentifier === null || webhookIdentifier === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "getWebhookStorageConfig", "webhookIdentifier");
+      }
+      const localVarPath = "/api/rest/2.0/webhooks/{webhook_identifier}/storage-config".replace("{webhook_identifier}", encodeURIComponent(String(webhookIdentifier)));
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -31125,8 +33025,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/tml/import";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -31162,8 +33062,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/tml/async/import";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -31199,8 +33099,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/groups/import";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -31236,8 +33136,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/users/import";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -31273,8 +33173,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/auth/session/login";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -31306,8 +33206,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/auth/session/logout";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -31334,8 +33234,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/security/metadata/manage-object-privilege";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -31371,14 +33271,51 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/parameterize";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
       requestContext.setHeaderParam("Content-Type", contentType);
       const serializedBody = ObjectSerializer.stringify(
         ObjectSerializer.serialize(parameterizeMetadataRequest, "ParameterizeMetadataRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.4.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
+   * @param parameterizeMetadataFieldsRequest 
+   */
+  parameterizeMetadataFields(parameterizeMetadataFieldsRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (parameterizeMetadataFieldsRequest === null || parameterizeMetadataFieldsRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "parameterizeMetadataFields", "parameterizeMetadataFieldsRequest");
+      }
+      const localVarPath = "/api/rest/2.0/metadata/parameterize-fields";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(parameterizeMetadataFieldsRequest, "ParameterizeMetadataFieldsRequest", ""),
         contentType
       );
       requestContext.setBody(serializedBody);
@@ -31408,14 +33345,55 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/security/metadata/publish";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
       requestContext.setHeaderParam("Content-Type", contentType);
       const serializedBody = ObjectSerializer.stringify(
         ObjectSerializer.serialize(publishMetadataRequest, "PublishMetadataRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *  Update values for a variable   Version: 26.4.0.cl or later   Allows updating values for a specific variable in ThoughtSpot.  Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows: * Adding new values to the variable * Replacing existing values * Deleting values from the variable * Resetting all values  When updating variable values, you need to specify: * The variable identifier (ID or name) * The values to add/replace/remove * The operation to perform (ADD, REPLACE, REMOVE, RESET)  Behaviour based on operation type: * ADD - Adds values to the variable if this is a list type variable, else same as replace. * REPLACE - Replaces all values of a given set of constraints with the current set of values. * REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value. * RESET - Removes all constraints for the given variable, scope is ignored      
+   * @param identifier Unique ID or name of the variable
+   * @param putVariableValuesRequest 
+   */
+  putVariableValues(identifier, putVariableValuesRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (identifier === null || identifier === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "putVariableValues", "identifier");
+      }
+      if (putVariableValuesRequest === null || putVariableValuesRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "putVariableValues", "putVariableValuesRequest");
+      }
+      const localVarPath = "/api/rest/2.0/template/variables/{identifier}/update-values".replace("{identifier}", encodeURIComponent(String(identifier)));
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(putVariableValuesRequest, "PutVariableValuesRequest", ""),
         contentType
       );
       requestContext.setBody(serializedBody);
@@ -31445,8 +33423,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/ai/analytical-questions";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -31482,8 +33460,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/users/reset-password";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -31523,8 +33501,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/vcs/git/commits/{commit_id}/revert".replace("{commit_id}", encodeURIComponent(String(commitId)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -31564,8 +33542,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/connections/{connection_identifier}/revoke-refresh-tokens".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -31601,8 +33579,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/auth/token/revoke";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -31638,14 +33616,88 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/calendars/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
       requestContext.setHeaderParam("Content-Type", contentType);
       const serializedBody = ObjectSerializer.stringify(
         ObjectSerializer.serialize(searchCalendarsRequest, "SearchCalendarsRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *   Version: 26.4.0.cl or later   Searches delivery history for communication channels such as webhooks. Returns channel-level delivery status for each job execution record. Use this to monitor channel health and delivery success rates across events.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.  **NOTE**: When `channel_type` is `WEBHOOK`, the following constraints apply:  - `job_ids`, `channel_identifiers`, and `events` each accept at most one element. - When `job_ids` is provided, it is used as the sole lookup key and other filter fields are ignored. - When `job_ids` is not provided, `channel_identifiers` and `events` are both required. Each must contain exactly one element, and the event object must include the `identifier` field. - Records older than the configured retention period are not returned.      
+   * @param searchChannelHistoryRequest 
+   */
+  searchChannelHistory(searchChannelHistoryRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (searchChannelHistoryRequest === null || searchChannelHistoryRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "searchChannelHistory", "searchChannelHistoryRequest");
+      }
+      const localVarPath = "/api/rest/2.0/jobs/history/communication-channels/search";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(searchChannelHistoryRequest, "SearchChannelHistoryRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *   Version: 26.4.0.cl or later   Gets a list of collections available in ThoughtSpot.  To get details of a specific collection, specify the collection GUID or name. You can also filter the API response based on the collection name pattern, author, and other criteria.  #### Search options  * **name_pattern**: Use \'%\' as a wildcard character to match collection names * **collection_identifiers**: Search for specific collections by their GUIDs or names * **include_metadata**: When set to `true`, includes the metadata objects within each collection in the response  **NOTE**: If the API returns an empty list, consider increasing the value of the `record_size` parameter. To search across all available collections, set `record_size` to `-1`.      
+   * @param searchCollectionsRequest 
+   */
+  searchCollections(searchCollectionsRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (searchCollectionsRequest === null || searchCollectionsRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "searchCollections", "searchCollectionsRequest");
+      }
+      const localVarPath = "/api/rest/2.0/collections/search";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(searchCollectionsRequest, "SearchCollectionsRequest", ""),
         contentType
       );
       requestContext.setBody(serializedBody);
@@ -31675,8 +33727,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/vcs/git/commits/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -31712,8 +33764,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/system/preferences/communication-channels/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -31749,8 +33801,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/vcs/git/config/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -31786,8 +33838,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/connection/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -31823,8 +33875,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/customization/custom-actions/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -31860,8 +33912,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/searchdata";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -31897,8 +33949,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/customization/email/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -31934,8 +33986,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -31971,8 +34023,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/orgs/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -32008,8 +34060,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/roles/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -32045,8 +34097,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/schedules/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -32082,8 +34134,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/system/security-settings/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -32119,8 +34171,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/tags/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -32156,8 +34208,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/groups/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -32193,8 +34245,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/users/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -32230,8 +34282,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/template/variables/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -32267,8 +34319,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/webhooks/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -32308,8 +34360,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/ai/agent/{conversation_identifier}/converse".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -32345,8 +34397,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/ai/agent/converse/sse";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -32386,8 +34438,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/ai/conversation/{conversation_identifier}/converse".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -32423,8 +34475,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/ai/instructions/set";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -32460,8 +34512,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/security/metadata/share";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -32497,8 +34549,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/ai/answer/create";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -32534,8 +34586,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/tags/unassign";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -32571,8 +34623,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/unparameterize";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -32608,8 +34660,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/security/metadata/unpublish";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -32649,14 +34701,55 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/calendars/{calendar_identifier}/update".replace("{calendar_identifier}", encodeURIComponent(String(calendarIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
       requestContext.setHeaderParam("Content-Type", contentType);
       const serializedBody = ObjectSerializer.stringify(
         ObjectSerializer.serialize(updateCalendarRequest, "UpdateCalendarRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *   Version: 26.4.0.cl or later   Updates an existing collection in ThoughtSpot.  #### Supported operations  This API endpoint lets you perform the following operations:  * Update collection name and description * Change visibility settings * Add metadata objects to the collection (operation: ADD) * Remove metadata objects from the collection (operation: REMOVE) * Replace all metadata objects in the collection (operation: REPLACE)  #### Operation types  * **ADD**: Adds the specified metadata objects to the existing collection without removing current items * **REMOVE**: Removes only the specified metadata objects from the collection * **REPLACE**: Replaces all existing metadata objects with the specified items (default behavior)      
+   * @param collectionIdentifier Unique GUID of the collection. Note: Collection names cannot be used as identifiers since duplicate names are allowed.
+   * @param updateCollectionRequest 
+   */
+  updateCollection(collectionIdentifier, updateCollectionRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (collectionIdentifier === null || collectionIdentifier === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "updateCollection", "collectionIdentifier");
+      }
+      if (updateCollectionRequest === null || updateCollectionRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "updateCollection", "updateCollectionRequest");
+      }
+      const localVarPath = "/api/rest/2.0/collections/{collection_identifier}/update".replace("{collection_identifier}", encodeURIComponent(String(collectionIdentifier)));
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(updateCollectionRequest, "UpdateCollectionRequest", ""),
         contentType
       );
       requestContext.setBody(serializedBody);
@@ -32686,8 +34779,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/security/column/rules/update";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -32723,8 +34816,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/vcs/git/config/update";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -32760,8 +34853,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/connection/update";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -32801,8 +34894,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/connection-configurations/{configuration_identifier}/update".replace("{configuration_identifier}", encodeURIComponent(String(configurationIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -32842,8 +34935,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/connections/{connection_identifier}/update".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -32883,8 +34976,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/customization/custom-actions/{custom_action_identifier}/update".replace("{custom_action_identifier}", encodeURIComponent(String(customActionIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -32930,8 +35023,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/dbt/update-dbt-connection";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const useForm = canConsumeForm([
         "multipart/form-data"
       ]);
@@ -33009,8 +35102,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/customization/email/update";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -33046,8 +35139,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/headers/update";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -33083,8 +35176,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/metadata/update-obj-id";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -33124,8 +35217,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/orgs/{org_identifier}/update".replace("{org_identifier}", encodeURIComponent(String(orgIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -33165,8 +35258,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/roles/{role_identifier}/update".replace("{role_identifier}", encodeURIComponent(String(roleIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -33206,8 +35299,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/schedules/{schedule_identifier}/update".replace("{schedule_identifier}", encodeURIComponent(String(scheduleIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -33243,8 +35336,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/system/config-update";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -33284,8 +35377,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/tags/{tag_identifier}/update".replace("{tag_identifier}", encodeURIComponent(String(tagIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -33325,8 +35418,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/users/{user_identifier}/update".replace("{user_identifier}", encodeURIComponent(String(userIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -33366,8 +35459,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/groups/{group_identifier}/update".replace("{group_identifier}", encodeURIComponent(String(groupIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -33407,8 +35500,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/template/variables/{identifier}/update".replace("{identifier}", encodeURIComponent(String(identifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -33444,8 +35537,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/template/variables/update-values";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -33485,14 +35578,51 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/webhooks/{webhook_identifier}/update".replace("{webhook_identifier}", encodeURIComponent(String(webhookIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
       requestContext.setHeaderParam("Content-Type", contentType);
       const serializedBody = ObjectSerializer.stringify(
         ObjectSerializer.serialize(updateWebhookConfigurationRequest, "UpdateWebhookConfigurationRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *  Version: 26.4.0.cl or later   Validates a communication channel configuration to ensure it is properly set up and can receive events. - Use `channel_type` to specify the type of communication channel to validate (e.g., WEBHOOK). - Use `channel_identifier` to provide the unique identifier or name for the communication channel. - Use `event_type` to specify the event type to validate for this channel.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. For webhook channels, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+   * @param validateCommunicationChannelRequest 
+   */
+  validateCommunicationChannel(validateCommunicationChannelRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (validateCommunicationChannelRequest === null || validateCommunicationChannelRequest === void 0) {
+        throw new RequiredError("ThoughtSpotRestApi", "validateCommunicationChannel", "validateCommunicationChannelRequest");
+      }
+      const localVarPath = "/api/rest/2.0/system/communication-channels/validate";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(validateCommunicationChannelRequest, "ValidateCommunicationChannelRequest", ""),
         contentType
       );
       requestContext.setBody(serializedBody);
@@ -33518,8 +35648,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/customization/email/validate";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -33546,8 +35676,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/vcs/git/branches/validate";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -33583,8 +35713,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/auth/token/validate";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -34319,6 +36449,67 @@ var ThoughtSpotRestApiResponseProcessor = class {
    * Unwraps the actual response sent by the server from the response context and deserializes the response content
    * to the expected objects
    *
+   * @params response Response returned by the server for a request to createCollection
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  createCollection(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "Collection",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "Collection",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
    * @params response Response returned by the server for a request to createConfig
    * @throws ApiException if the response code was not in [200, 299]
    */
@@ -35518,6 +37709,75 @@ var ThoughtSpotRestApiResponseProcessor = class {
    * Unwraps the actual response sent by the server from the response context and deserializes the response content
    * to the expected objects
    *
+   * @params response Response returned by the server for a request to deleteCollection
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  deleteCollection(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "CollectionDeleteResponse",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("404", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Resource not found.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "CollectionDeleteResponse",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
    * @params response Response returned by the server for a request to deleteConfig
    * @throws ApiException if the response code was not in [200, 299]
    */
@@ -36354,6 +38614,62 @@ var ThoughtSpotRestApiResponseProcessor = class {
    * @throws ApiException if the response code was not in [200, 299]
    */
   deleteVariable(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("204", response.httpStatusCode)) {
+        return;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "void",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to deleteVariables
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  deleteVariables(response) {
     return __async(this, null, function* () {
       const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
       if (isCodeInRange("204", response.httpStatusCode)) {
@@ -38256,6 +40572,67 @@ var ThoughtSpotRestApiResponseProcessor = class {
    * Unwraps the actual response sent by the server from the response context and deserializes the response content
    * to the expected objects
    *
+   * @params response Response returned by the server for a request to getWebhookStorageConfig
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  getWebhookStorageConfig(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "StorageSetupInfo",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request. Webhook not found or does not have storage destination configured.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "StorageSetupInfo",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
    * @params response Response returned by the server for a request to importMetadataTML
    * @throws ApiException if the response code was not in [200, 299]
    */
@@ -38724,10 +41101,122 @@ var ThoughtSpotRestApiResponseProcessor = class {
    * Unwraps the actual response sent by the server from the response context and deserializes the response content
    * to the expected objects
    *
+   * @params response Response returned by the server for a request to parameterizeMetadataFields
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  parameterizeMetadataFields(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("204", response.httpStatusCode)) {
+        return;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "void",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
    * @params response Response returned by the server for a request to publishMetadata
    * @throws ApiException if the response code was not in [200, 299]
    */
   publishMetadata(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("204", response.httpStatusCode)) {
+        return;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "void",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to putVariableValues
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  putVariableValues(response) {
     return __async(this, null, function* () {
       const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
       if (isCodeInRange("204", response.httpStatusCode)) {
@@ -39133,6 +41622,128 @@ var ThoughtSpotRestApiResponseProcessor = class {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "Array<CalendarResponse>",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to searchChannelHistory
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  searchChannelHistory(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "SearchChannelHistoryResponse",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "SearchChannelHistoryResponse",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to searchCollections
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  searchCollections(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "CollectionSearchResponse",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "CollectionSearchResponse",
           ""
         );
         return body;
@@ -40718,6 +43329,70 @@ var ThoughtSpotRestApiResponseProcessor = class {
    * Unwraps the actual response sent by the server from the response context and deserializes the response content
    * to the expected objects
    *
+   * @params response Response returned by the server for a request to updateCollection
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  updateCollection(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("204", response.httpStatusCode)) {
+        return;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("404", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Resource not found.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "void",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
    * @params response Response returned by the server for a request to updateColumnSecurityRules
    * @throws ApiException if the response code was not in [200, 299]
    */
@@ -41853,6 +44528,67 @@ var ThoughtSpotRestApiResponseProcessor = class {
    * Unwraps the actual response sent by the server from the response context and deserializes the response content
    * to the expected objects
    *
+   * @params response Response returned by the server for a request to validateCommunicationChannel
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  validateCommunicationChannel(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "CommunicationChannelValidateResponse",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "CommunicationChannelValidateResponse",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
    * @params response Response returned by the server for a request to validateEmailCustomization
    * @throws ApiException if the response code was not in [200, 299]
    */
@@ -42037,8 +44773,8 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/users/activate";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -42074,8 +44810,8 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/users/change-password";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -42111,8 +44847,8 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/users/create";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -42148,8 +44884,8 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/users/deactivate";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -42185,8 +44921,8 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/users/{user_identifier}/delete".replace("{user_identifier}", encodeURIComponent(String(userIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -42213,8 +44949,8 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/users/force-logout";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -42250,8 +44986,8 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/users/import";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -42287,8 +45023,8 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/users/reset-password";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -42324,8 +45060,8 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/users/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -42365,8 +45101,8 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/users/{user_identifier}/update".replace("{user_identifier}", encodeURIComponent(String(userIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -42993,8 +45729,8 @@ var VariableApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/template/variables/create";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -43030,8 +45766,86 @@ var VariableApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/template/variables/{identifier}/delete".replace("{identifier}", encodeURIComponent(String(identifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *  Delete variable(s)   Version: 26.4.0.cl or later   Allows deleting multiple variables from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifiers (IDs or names)  The operation will fail if: * The user lacks required permissions * Any of the variables don\'t exist * Any of the variables are being used by other objects      
+   * @param deleteVariablesRequest 
+   */
+  deleteVariables(deleteVariablesRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (deleteVariablesRequest === null || deleteVariablesRequest === void 0) {
+        throw new RequiredError("VariableApi", "deleteVariables", "deleteVariablesRequest");
+      }
+      const localVarPath = "/api/rest/2.0/template/variables/delete";
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(deleteVariablesRequest, "DeleteVariablesRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *  Update values for a variable   Version: 26.4.0.cl or later   Allows updating values for a specific variable in ThoughtSpot.  Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows: * Adding new values to the variable * Replacing existing values * Deleting values from the variable * Resetting all values  When updating variable values, you need to specify: * The variable identifier (ID or name) * The values to add/replace/remove * The operation to perform (ADD, REPLACE, REMOVE, RESET)  Behaviour based on operation type: * ADD - Adds values to the variable if this is a list type variable, else same as replace. * REPLACE - Replaces all values of a given set of constraints with the current set of values. * REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value. * RESET - Removes all constraints for the given variable, scope is ignored      
+   * @param identifier Unique ID or name of the variable
+   * @param putVariableValuesRequest 
+   */
+  putVariableValues(identifier, putVariableValuesRequest, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (identifier === null || identifier === void 0) {
+        throw new RequiredError("VariableApi", "putVariableValues", "identifier");
+      }
+      if (putVariableValuesRequest === null || putVariableValuesRequest === void 0) {
+        throw new RequiredError("VariableApi", "putVariableValues", "putVariableValuesRequest");
+      }
+      const localVarPath = "/api/rest/2.0/template/variables/{identifier}/update-values".replace("{identifier}", encodeURIComponent(String(identifier)));
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "application/json"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+      const serializedBody = ObjectSerializer.stringify(
+        ObjectSerializer.serialize(putVariableValuesRequest, "PutVariableValuesRequest", ""),
+        contentType
+      );
+      requestContext.setBody(serializedBody);
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -43058,8 +45872,8 @@ var VariableApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/template/variables/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -43099,8 +45913,8 @@ var VariableApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/template/variables/{identifier}/update".replace("{identifier}", encodeURIComponent(String(identifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -43136,8 +45950,8 @@ var VariableApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/template/variables/update-values";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -43230,6 +46044,118 @@ var VariableApiResponseProcessor = class {
    * @throws ApiException if the response code was not in [200, 299]
    */
   deleteVariable(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("204", response.httpStatusCode)) {
+        return;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "void",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to deleteVariables
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  deleteVariables(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("204", response.httpStatusCode)) {
+        return;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "void",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to putVariableValues
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  putVariableValues(response) {
     return __async(this, null, function* () {
       const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
       if (isCodeInRange("204", response.httpStatusCode)) {
@@ -43469,8 +46395,8 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/vcs/git/branches/commit";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -43506,8 +46432,8 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/vcs/git/config/create";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -43543,8 +46469,8 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/vcs/git/config/delete";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -43580,8 +46506,8 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/vcs/git/commits/deploy";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -43621,8 +46547,8 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/vcs/git/commits/{commit_id}/revert".replace("{commit_id}", encodeURIComponent(String(commitId)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -43658,8 +46584,8 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/vcs/git/commits/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -43695,8 +46621,8 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/vcs/git/config/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -43732,8 +46658,8 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/vcs/git/config/update";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -43769,8 +46695,8 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/vcs/git/branches/validate";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -44356,8 +47282,8 @@ var WebhooksApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/webhooks/create";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -44393,8 +47319,8 @@ var WebhooksApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/webhooks/delete";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -44404,6 +47330,34 @@ var WebhooksApiRequestFactory = class extends BaseAPIRequestFactory {
         contentType
       );
       requestContext.setBody(serializedBody);
+      let authMethod;
+      authMethod = _config.authMethods["bearerAuth"];
+      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
+        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
+      }
+      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
+      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
+        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
+      }
+      return requestContext;
+    });
+  }
+  /**
+   *  Version: 26.4.0.cl or later   Get storage config information for a webhook configuration. This endpoint provides ThoughtSpot\'s identity information and IAM policy configuration required for customers to set up cross-account access to their S3 buckets.  The setup info returned depends on the ThoughtSpot cluster type: - For AWS clusters: Returns `aws_config` with STS AssumeRole configuration - For GCP clusters: Returns `gcp_config` with STS AssumeRoleWithWebIdentity configuration  **Note:** This endpoint only returns data if the webhook has a storage destination configured.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+   * @param webhookIdentifier Unique ID or name of the webhook configuration.
+   */
+  getWebhookStorageConfig(webhookIdentifier, _options) {
+    return __async(this, null, function* () {
+      var _a, _b, _c;
+      let _config = _options || this.configuration;
+      if (webhookIdentifier === null || webhookIdentifier === void 0) {
+        throw new RequiredError("WebhooksApi", "getWebhookStorageConfig", "webhookIdentifier");
+      }
+      const localVarPath = "/api/rest/2.0/webhooks/{webhook_identifier}/storage-config".replace("{webhook_identifier}", encodeURIComponent(String(webhookIdentifier)));
+      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
+      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       let authMethod;
       authMethod = _config.authMethods["bearerAuth"];
       if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
@@ -44430,8 +47384,8 @@ var WebhooksApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/webhooks/search";
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -44471,8 +47425,8 @@ var WebhooksApiRequestFactory = class extends BaseAPIRequestFactory {
       const localVarPath = "/api/rest/2.0/webhooks/{webhook_identifier}/update".replace("{webhook_identifier}", encodeURIComponent(String(webhookIdentifier)));
       const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.22.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.22.0");
+      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
+      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -44611,6 +47565,67 @@ var WebhooksApiResponseProcessor = class {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "WebhookDeleteResponse",
+          ""
+        );
+        return body;
+      }
+      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
+    });
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to getWebhookStorageConfig
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  getWebhookStorageConfig(response) {
+    return __async(this, null, function* () {
+      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+      if (isCodeInRange("200", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "StorageSetupInfo",
+          ""
+        );
+        return body;
+      }
+      if (isCodeInRange("400", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Invalid request. Webhook not found or does not have storage destination configured.", body, response.headers);
+      }
+      if (isCodeInRange("401", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+      }
+      if (isCodeInRange("403", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+      }
+      if (isCodeInRange("500", response.httpStatusCode)) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "ErrorResponse",
+          ""
+        );
+        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+      }
+      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+        const body = ObjectSerializer.deserialize(
+          ObjectSerializer.parse(yield response.body.text(), contentType),
+          "StorageSetupInfo",
           ""
         );
         return body;
@@ -45111,6 +48126,86 @@ var ObservableAuthenticationApi = class {
     }));
   }
 };
+var ObservableCollectionsApi = class {
+  constructor(configuration, requestFactory, responseProcessor) {
+    this.configuration = configuration;
+    this.requestFactory = requestFactory || new CollectionsApiRequestFactory(configuration);
+    this.responseProcessor = responseProcessor || new CollectionsApiResponseProcessor();
+  }
+  /**
+   *   Version: 26.4.0.cl or later   Creates a new collection in ThoughtSpot.  Collections allow you to organize and group related metadata objects such as Liveboards, Answers, worksheets, and other data objects. You can also create nested collections (sub-collections) to build a hierarchical structure.  #### Supported operations  The API endpoint lets you perform the following operations:  * Create a new collection * Add metadata objects (Liveboards, Answers, Logical Tables) to the collection * Create nested collections by adding sub-collections      
+   * @param createCollectionRequest 
+   */
+  createCollection(createCollectionRequest, _options) {
+    const requestContextPromise = this.requestFactory.createCollection(createCollectionRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.createCollection(rsp)));
+    }));
+  }
+  /**
+   *   Version: 26.4.0.cl or later   Deletes one or more collections from ThoughtSpot.  #### Delete options  * **delete_children**: When set to `true`, deletes the child objects (metadata items) within the collection that the user has access to. Objects that the user does not have permission to delete will be skipped. * **dry_run**: When set to `true`, performs a preview of the deletion operation without actually deleting anything. The response shows what would be deleted, allowing you to review before committing the deletion.  #### Response  The response includes: * **metadata_deleted**: List of metadata objects that were successfully deleted * **metadata_skipped**: List of metadata objects that were skipped due to lack of permissions or other constraints      
+   * @param deleteCollectionRequest 
+   */
+  deleteCollection(deleteCollectionRequest, _options) {
+    const requestContextPromise = this.requestFactory.deleteCollection(deleteCollectionRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.deleteCollection(rsp)));
+    }));
+  }
+  /**
+   *   Version: 26.4.0.cl or later   Gets a list of collections available in ThoughtSpot.  To get details of a specific collection, specify the collection GUID or name. You can also filter the API response based on the collection name pattern, author, and other criteria.  #### Search options  * **name_pattern**: Use \'%\' as a wildcard character to match collection names * **collection_identifiers**: Search for specific collections by their GUIDs or names * **include_metadata**: When set to `true`, includes the metadata objects within each collection in the response  **NOTE**: If the API returns an empty list, consider increasing the value of the `record_size` parameter. To search across all available collections, set `record_size` to `-1`.      
+   * @param searchCollectionsRequest 
+   */
+  searchCollections(searchCollectionsRequest, _options) {
+    const requestContextPromise = this.requestFactory.searchCollections(searchCollectionsRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.searchCollections(rsp)));
+    }));
+  }
+  /**
+   *   Version: 26.4.0.cl or later   Updates an existing collection in ThoughtSpot.  #### Supported operations  This API endpoint lets you perform the following operations:  * Update collection name and description * Change visibility settings * Add metadata objects to the collection (operation: ADD) * Remove metadata objects from the collection (operation: REMOVE) * Replace all metadata objects in the collection (operation: REPLACE)  #### Operation types  * **ADD**: Adds the specified metadata objects to the existing collection without removing current items * **REMOVE**: Removes only the specified metadata objects from the collection * **REPLACE**: Replaces all existing metadata objects with the specified items (default behavior)      
+   * @param collectionIdentifier Unique GUID of the collection. Note: Collection names cannot be used as identifiers since duplicate names are allowed.
+   * @param updateCollectionRequest 
+   */
+  updateCollection(collectionIdentifier, updateCollectionRequest, _options) {
+    const requestContextPromise = this.requestFactory.updateCollection(collectionIdentifier, updateCollectionRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.updateCollection(rsp)));
+    }));
+  }
+};
 var ObservableConnectionConfigurationsApi = class {
   constructor(configuration, requestFactory, responseProcessor) {
     this.configuration = configuration;
@@ -45198,7 +48293,7 @@ var ObservableConnectionsApi = class {
     this.responseProcessor = responseProcessor || new ConnectionsApiResponseProcessor();
   }
   /**
-   *   Version: 9.2.0.cl or later   Creates a connection to a data warehouse for live query services.    Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  #### Create a connection without tables  To create a connection without tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a SnowFlake connection:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"externalDatabases\":[       ]   }   ``` 2. Set `validate` to `false`.  #### Create a connection with tables  To create a connection with tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"externalDatabases\":[         {            \"name\":\"AllDatatypes\",            \"isAutoCreated\":false,            \"schemas\":[               {                  \"name\":\"alldatatypes\",                  \"tables\":[                     {                        \"name\":\"allDatatypes\",                        \"type\":\"TABLE\",                        \"description\":\"\",                        \"selected\":true,                        \"linked\":true,                        \"columns\":[                           {                              \"name\":\"CNUMBER\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           },                           {                              \"name\":\"CDECIMAL\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           }                        ]                     }                  ]               }            ]         }      ]   }   ``` 2. Set `validate` to `true`.      
+   *   Version: 9.2.0.cl or later   Creates a connection to a data warehouse for live query services.    Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  #### Create a connection without tables  To create a connection without tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a SnowFlake connection:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"authenticationType\": \"SERVICE_ACCOUNT\",      \"externalDatabases\":[       ]   }   ``` 2. Set `validate` to `false`.  **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.  #### Create a connection with tables  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) and `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**) privilege is required.  To create a connection with tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"authenticationType\": \"SERVICE_ACCOUNT\",      \"externalDatabases\":[         {            \"name\":\"AllDatatypes\",            \"isAutoCreated\":false,            \"schemas\":[               {                  \"name\":\"alldatatypes\",                  \"tables\":[                     {                        \"name\":\"allDatatypes\",                        \"type\":\"TABLE\",                        \"description\":\"\",                        \"selected\":true,                        \"linked\":true,                        \"columns\":[                           {                              \"name\":\"CNUMBER\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           },                           {                              \"name\":\"CDECIMAL\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           }                        ]                     }                  ]               }            ]         }      ]   }   ``` 2. Set `validate` to `true`.  **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.      
    * @param createConnectionRequest 
    */
   createConnection(createConnectionRequest, _options) {
@@ -45951,6 +49046,31 @@ var ObservableGroupsApi = class {
     }));
   }
 };
+var ObservableJobsApi = class {
+  constructor(configuration, requestFactory, responseProcessor) {
+    this.configuration = configuration;
+    this.requestFactory = requestFactory || new JobsApiRequestFactory(configuration);
+    this.responseProcessor = responseProcessor || new JobsApiResponseProcessor();
+  }
+  /**
+   *   Version: 26.4.0.cl or later   Searches delivery history for communication channels such as webhooks. Returns channel-level delivery status for each job execution record. Use this to monitor channel health and delivery success rates across events.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.  **NOTE**: When `channel_type` is `WEBHOOK`, the following constraints apply:  - `job_ids`, `channel_identifiers`, and `events` each accept at most one element. - When `job_ids` is provided, it is used as the sole lookup key and other filter fields are ignored. - When `job_ids` is not provided, `channel_identifiers` and `events` are both required. Each must contain exactly one element, and the event object must include the `identifier` field. - Records older than the configured retention period are not returned.      
+   * @param searchChannelHistoryRequest 
+   */
+  searchChannelHistory(searchChannelHistoryRequest, _options) {
+    const requestContextPromise = this.requestFactory.searchChannelHistory(searchChannelHistoryRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.searchChannelHistory(rsp)));
+    }));
+  }
+};
 var ObservableLogApi = class {
   constructor(configuration, requestFactory, responseProcessor) {
     this.configuration = configuration;
@@ -46178,6 +49298,24 @@ var ObservableMetadataApi = class {
         middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
       }
       return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.parameterizeMetadata(rsp)));
+    }));
+  }
+  /**
+   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.4.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
+   * @param parameterizeMetadataFieldsRequest 
+   */
+  parameterizeMetadataFields(parameterizeMetadataFieldsRequest, _options) {
+    const requestContextPromise = this.requestFactory.parameterizeMetadataFields(parameterizeMetadataFieldsRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.parameterizeMetadataFields(rsp)));
     }));
   }
   /**
@@ -46870,6 +50008,24 @@ var ObservableSystemApi = class {
       return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.updateSystemConfig(rsp)));
     }));
   }
+  /**
+   *  Version: 26.4.0.cl or later   Validates a communication channel configuration to ensure it is properly set up and can receive events. - Use `channel_type` to specify the type of communication channel to validate (e.g., WEBHOOK). - Use `channel_identifier` to provide the unique identifier or name for the communication channel. - Use `event_type` to specify the event type to validate for this channel.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. For webhook channels, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+   * @param validateCommunicationChannelRequest 
+   */
+  validateCommunicationChannel(validateCommunicationChannelRequest, _options) {
+    const requestContextPromise = this.requestFactory.validateCommunicationChannel(validateCommunicationChannelRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.validateCommunicationChannel(rsp)));
+    }));
+  }
 };
 var ObservableTagsApi = class {
   constructor(configuration, requestFactory, responseProcessor) {
@@ -47210,6 +50366,24 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
+   *   Version: 26.4.0.cl or later   Creates a new collection in ThoughtSpot.  Collections allow you to organize and group related metadata objects such as Liveboards, Answers, worksheets, and other data objects. You can also create nested collections (sub-collections) to build a hierarchical structure.  #### Supported operations  The API endpoint lets you perform the following operations:  * Create a new collection * Add metadata objects (Liveboards, Answers, Logical Tables) to the collection * Create nested collections by adding sub-collections      
+   * @param createCollectionRequest 
+   */
+  createCollection(createCollectionRequest, _options) {
+    const requestContextPromise = this.requestFactory.createCollection(createCollectionRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.createCollection(rsp)));
+    }));
+  }
+  /**
    *   Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_SETUP_VERSION_CONTROL` (**Can set up version control**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).  **Note**: ThoughtSpot supports only GitHub / itHub Enterprise for CI/CD.      
    * @param createConfigRequest 
    */
@@ -47228,7 +50402,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 9.2.0.cl or later   Creates a connection to a data warehouse for live query services.    Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  #### Create a connection without tables  To create a connection without tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a SnowFlake connection:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"externalDatabases\":[       ]   }   ``` 2. Set `validate` to `false`.  #### Create a connection with tables  To create a connection with tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"externalDatabases\":[         {            \"name\":\"AllDatatypes\",            \"isAutoCreated\":false,            \"schemas\":[               {                  \"name\":\"alldatatypes\",                  \"tables\":[                     {                        \"name\":\"allDatatypes\",                        \"type\":\"TABLE\",                        \"description\":\"\",                        \"selected\":true,                        \"linked\":true,                        \"columns\":[                           {                              \"name\":\"CNUMBER\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           },                           {                              \"name\":\"CDECIMAL\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           }                        ]                     }                  ]               }            ]         }      ]   }   ``` 2. Set `validate` to `true`.      
+   *   Version: 9.2.0.cl or later   Creates a connection to a data warehouse for live query services.    Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  #### Create a connection without tables  To create a connection without tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a SnowFlake connection:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"authenticationType\": \"SERVICE_ACCOUNT\",      \"externalDatabases\":[       ]   }   ``` 2. Set `validate` to `false`.  **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.  #### Create a connection with tables  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) and `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**) privilege is required.  To create a connection with tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"authenticationType\": \"SERVICE_ACCOUNT\",      \"externalDatabases\":[         {            \"name\":\"AllDatatypes\",            \"isAutoCreated\":false,            \"schemas\":[               {                  \"name\":\"alldatatypes\",                  \"tables\":[                     {                        \"name\":\"allDatatypes\",                        \"type\":\"TABLE\",                        \"description\":\"\",                        \"selected\":true,                        \"linked\":true,                        \"columns\":[                           {                              \"name\":\"CNUMBER\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           },                           {                              \"name\":\"CDECIMAL\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           }                        ]                     }                  ]               }            ]         }      ]   }   ``` 2. Set `validate` to `true`.  **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.      
    * @param createConnectionRequest 
    */
   createConnection(createConnectionRequest, _options) {
@@ -47583,6 +50757,24 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
+   *   Version: 26.4.0.cl or later   Deletes one or more collections from ThoughtSpot.  #### Delete options  * **delete_children**: When set to `true`, deletes the child objects (metadata items) within the collection that the user has access to. Objects that the user does not have permission to delete will be skipped. * **dry_run**: When set to `true`, performs a preview of the deletion operation without actually deleting anything. The response shows what would be deleted, allowing you to review before committing the deletion.  #### Response  The response includes: * **metadata_deleted**: List of metadata objects that were successfully deleted * **metadata_skipped**: List of metadata objects that were skipped due to lack of permissions or other constraints      
+   * @param deleteCollectionRequest 
+   */
+  deleteCollection(deleteCollectionRequest, _options) {
+    const requestContextPromise = this.requestFactory.deleteCollection(deleteCollectionRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.deleteCollection(rsp)));
+    }));
+  }
+  /**
    *   Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_SETUP_VERSION_CONTROL` (**Can set up version control**) privilege.      
    * @param deleteConfigRequest 
    */
@@ -47868,6 +51060,24 @@ var ObservableThoughtSpotRestApi = class {
         middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
       }
       return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.deleteVariable(rsp)));
+    }));
+  }
+  /**
+   *  Delete variable(s)   Version: 26.4.0.cl or later   Allows deleting multiple variables from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifiers (IDs or names)  The operation will fail if: * The user lacks required permissions * Any of the variables don\'t exist * Any of the variables are being used by other objects      
+   * @param deleteVariablesRequest 
+   */
+  deleteVariables(deleteVariablesRequest, _options) {
+    const requestContextPromise = this.requestFactory.deleteVariables(deleteVariablesRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.deleteVariables(rsp)));
     }));
   }
   /**
@@ -48424,6 +51634,24 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
+   *  Version: 26.4.0.cl or later   Get storage config information for a webhook configuration. This endpoint provides ThoughtSpot\'s identity information and IAM policy configuration required for customers to set up cross-account access to their S3 buckets.  The setup info returned depends on the ThoughtSpot cluster type: - For AWS clusters: Returns `aws_config` with STS AssumeRole configuration - For GCP clusters: Returns `gcp_config` with STS AssumeRoleWithWebIdentity configuration  **Note:** This endpoint only returns data if the webhook has a storage destination configured.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+   * @param webhookIdentifier Unique ID or name of the webhook configuration.
+   */
+  getWebhookStorageConfig(webhookIdentifier, _options) {
+    const requestContextPromise = this.requestFactory.getWebhookStorageConfig(webhookIdentifier, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.getWebhookStorageConfig(rsp)));
+    }));
+  }
+  /**
    *   Version: 9.0.0.cl or later   Imports [TML](https://docs.thoughtspot.com/cloud/latest/tml) files into ThoughtSpot.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtsSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required: - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### Usage guidelines  *  Import all related objects in a single TML Import API call. For example, Tables that use the same Connection object and Worksheets connected to these Tables. * Include the `fqn` property to distinguish objects that have the same name.   For example, if you have multiple Connections or Worksheets with the same name on ThoughtSpot and the Connection or Worksheet referenced in your TML file does not have a unique name to distinguish, it may result in invalid object references.   Adding `fqn` helps ThoughtSpot differentiate a Table from another with the same name.   We recommend [exporting TML with FQNs](#/http/api-endpoints/metadata/export-metadata-tml) and using these during the import operation. * You can upload multiple TML files at a time.   If you import a Worksheet along with Liveboards, Answers, and other dependent objects in a single API call, the imported objects will be immediately available for use.   When you import only a Worksheet object, it may take some time for the Worksheet to become available in the ThoughtSpot system. Please wait for a few minutes, and then proceed to create an Answer and Liveboard from the newly imported Worksheet.  For more information, see [TML Documentation](https://developers.thoughtspot.com/docs/tml#_import_a_tml).      
    * @param importMetadataTMLRequest 
    */
@@ -48567,6 +51795,24 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
+   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.4.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
+   * @param parameterizeMetadataFieldsRequest 
+   */
+  parameterizeMetadataFields(parameterizeMetadataFieldsRequest, _options) {
+    const requestContextPromise = this.requestFactory.parameterizeMetadataFields(parameterizeMetadataFieldsRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.parameterizeMetadataFields(rsp)));
+    }));
+  }
+  /**
    *  Version: 10.9.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
    * @param publishMetadataRequest 
    */
@@ -48582,6 +51828,25 @@ var ObservableThoughtSpotRestApi = class {
         middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
       }
       return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.publishMetadata(rsp)));
+    }));
+  }
+  /**
+   *  Update values for a variable   Version: 26.4.0.cl or later   Allows updating values for a specific variable in ThoughtSpot.  Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows: * Adding new values to the variable * Replacing existing values * Deleting values from the variable * Resetting all values  When updating variable values, you need to specify: * The variable identifier (ID or name) * The values to add/replace/remove * The operation to perform (ADD, REPLACE, REMOVE, RESET)  Behaviour based on operation type: * ADD - Adds values to the variable if this is a list type variable, else same as replace. * REPLACE - Replaces all values of a given set of constraints with the current set of values. * REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value. * RESET - Removes all constraints for the given variable, scope is ignored      
+   * @param identifier Unique ID or name of the variable
+   * @param putVariableValuesRequest 
+   */
+  putVariableValues(identifier, putVariableValuesRequest, _options) {
+    const requestContextPromise = this.requestFactory.putVariableValues(identifier, putVariableValuesRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.putVariableValues(rsp)));
     }));
   }
   /**
@@ -48692,6 +51957,42 @@ var ObservableThoughtSpotRestApi = class {
         middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
       }
       return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.searchCalendars(rsp)));
+    }));
+  }
+  /**
+   *   Version: 26.4.0.cl or later   Searches delivery history for communication channels such as webhooks. Returns channel-level delivery status for each job execution record. Use this to monitor channel health and delivery success rates across events.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.  **NOTE**: When `channel_type` is `WEBHOOK`, the following constraints apply:  - `job_ids`, `channel_identifiers`, and `events` each accept at most one element. - When `job_ids` is provided, it is used as the sole lookup key and other filter fields are ignored. - When `job_ids` is not provided, `channel_identifiers` and `events` are both required. Each must contain exactly one element, and the event object must include the `identifier` field. - Records older than the configured retention period are not returned.      
+   * @param searchChannelHistoryRequest 
+   */
+  searchChannelHistory(searchChannelHistoryRequest, _options) {
+    const requestContextPromise = this.requestFactory.searchChannelHistory(searchChannelHistoryRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.searchChannelHistory(rsp)));
+    }));
+  }
+  /**
+   *   Version: 26.4.0.cl or later   Gets a list of collections available in ThoughtSpot.  To get details of a specific collection, specify the collection GUID or name. You can also filter the API response based on the collection name pattern, author, and other criteria.  #### Search options  * **name_pattern**: Use \'%\' as a wildcard character to match collection names * **collection_identifiers**: Search for specific collections by their GUIDs or names * **include_metadata**: When set to `true`, includes the metadata objects within each collection in the response  **NOTE**: If the API returns an empty list, consider increasing the value of the `record_size` parameter. To search across all available collections, set `record_size` to `-1`.      
+   * @param searchCollectionsRequest 
+   */
+  searchCollections(searchCollectionsRequest, _options) {
+    const requestContextPromise = this.requestFactory.searchCollections(searchCollectionsRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.searchCollections(rsp)));
     }));
   }
   /**
@@ -49184,6 +52485,25 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
+   *   Version: 26.4.0.cl or later   Updates an existing collection in ThoughtSpot.  #### Supported operations  This API endpoint lets you perform the following operations:  * Update collection name and description * Change visibility settings * Add metadata objects to the collection (operation: ADD) * Remove metadata objects from the collection (operation: REMOVE) * Replace all metadata objects in the collection (operation: REPLACE)  #### Operation types  * **ADD**: Adds the specified metadata objects to the existing collection without removing current items * **REMOVE**: Removes only the specified metadata objects from the collection * **REPLACE**: Replaces all existing metadata objects with the specified items (default behavior)      
+   * @param collectionIdentifier Unique GUID of the collection. Note: Collection names cannot be used as identifiers since duplicate names are allowed.
+   * @param updateCollectionRequest 
+   */
+  updateCollection(collectionIdentifier, updateCollectionRequest, _options) {
+    const requestContextPromise = this.requestFactory.updateCollection(collectionIdentifier, updateCollectionRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.updateCollection(rsp)));
+    }));
+  }
+  /**
    *  Version: 10.12.0.cl or later   Creates, updates, or deletes column security rules for specified tables.  This API endpoint allows you to create, update, or delete column-level security rules on columns of a table. The operation follows an \"all or none\" policy: if defining security rules for any of the provided columns fails, the entire operation will be rolled back, and no rules will be created.  #### Usage guidelines  - Provide table identifier using either `identifier` (GUID or name) or `obj_identifier` (object ID) - Use `clear_csr: true` to remove all column security rules from the table - For each column, specify the security rule using `column_security_rules` array - Use `is_unsecured: true` to mark a specific column as unprotected - Use `group_access` operations to manage group associations:   - `ADD`: Add groups to the column\'s access list   - `REMOVE`: Remove groups from the column\'s access list   - `REPLACE`: Replace all existing groups with the specified groups  #### Required permissions  - `ADMINISTRATION` - Can administer ThoughtSpot - `DATAMANAGEMENT` - Can manage data (if RBAC is disabled) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` - Can manage worksheet views and tables (if RBAC is enabled)  #### Example request  ```json {   \"identifier\": \"table-guid\",   \"obj_identifier\": \"table-object-id\",   \"clear_csr\": false,   \"column_security_rules\": [     {       \"column_identifier\": \"col id or col name\",       \"is_unsecured\": false,       \"group_access\": [         {           \"operation\": \"ADD\",           \"group_identifiers\": [\"hr_group_id\", \"hr_group_name\", \"finance_group_id\"]         }       ]     },     {       \"column_identifier\": \"col id or col name\",       \"is_unsecured\": true     },     {       \"column_identifier\": \"col id or col name\",       \"is_unsecured\": false,       \"group_access\": [         {           \"operation\": \"REPLACE\",           \"group_identifiers\": [\"management_group_id\", \"management_group_name\"]         }       ]     }   ] } ```  #### Request Body Schema  - `identifier` (string, optional): GUID or name of the table for which we want to create column security rules - `obj_identifier` (string, optional): The object ID of the table - `clear_csr` (boolean, optional): If true, then all the secured columns will be marked as unprotected, and all the group associations will be removed - `column_security_rules` (array of objects, required): An array where each object defines the security rule for a specific column  Each column security rule object contains: - `column_identifier` (string, required): Column identifier (col_id or name) - `is_unsecured` (boolean, optional): If true, the column will be marked as unprotected and all groups associated with it will be removed - `group_access` (array of objects, optional): Array of group operation objects  Each group operation object contains: - `operation` (string, required): Operation type - ADD, REMOVE, or REPLACE - `group_identifiers` (array of strings, required): Array of group identifiers (name or GUID) on which the operation will be performed  #### Response  This API does not return any response body. A successful operation returns HTTP 200 status code.  #### Operation Types  - **ADD**: Adds the specified groups to the column\'s access list - **REMOVE**: Removes the specified groups from the column\'s access list   - **REPLACE**: Replaces all existing groups with the specified groups      
    * @param updateColumnSecurityRulesRequest 
    */
@@ -49565,6 +52885,24 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
+   *  Version: 26.4.0.cl or later   Validates a communication channel configuration to ensure it is properly set up and can receive events. - Use `channel_type` to specify the type of communication channel to validate (e.g., WEBHOOK). - Use `channel_identifier` to provide the unique identifier or name for the communication channel. - Use `event_type` to specify the event type to validate for this channel.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. For webhook channels, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+   * @param validateCommunicationChannelRequest 
+   */
+  validateCommunicationChannel(validateCommunicationChannelRequest, _options) {
+    const requestContextPromise = this.requestFactory.validateCommunicationChannel(validateCommunicationChannelRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.validateCommunicationChannel(rsp)));
+    }));
+  }
+  /**
    *  Version: 10.10.0.cl or later   Validates the email customization configuration if any set for the ThoughtSpot system.  #### Pre-requisites  Requires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.  **NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.      
    */
   validateEmailCustomization(_options) {
@@ -49849,6 +53187,43 @@ var ObservableVariableApi = class {
     }));
   }
   /**
+   *  Delete variable(s)   Version: 26.4.0.cl or later   Allows deleting multiple variables from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifiers (IDs or names)  The operation will fail if: * The user lacks required permissions * Any of the variables don\'t exist * Any of the variables are being used by other objects      
+   * @param deleteVariablesRequest 
+   */
+  deleteVariables(deleteVariablesRequest, _options) {
+    const requestContextPromise = this.requestFactory.deleteVariables(deleteVariablesRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.deleteVariables(rsp)));
+    }));
+  }
+  /**
+   *  Update values for a variable   Version: 26.4.0.cl or later   Allows updating values for a specific variable in ThoughtSpot.  Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows: * Adding new values to the variable * Replacing existing values * Deleting values from the variable * Resetting all values  When updating variable values, you need to specify: * The variable identifier (ID or name) * The values to add/replace/remove * The operation to perform (ADD, REPLACE, REMOVE, RESET)  Behaviour based on operation type: * ADD - Adds values to the variable if this is a list type variable, else same as replace. * REPLACE - Replaces all values of a given set of constraints with the current set of values. * REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value. * RESET - Removes all constraints for the given variable, scope is ignored      
+   * @param identifier Unique ID or name of the variable
+   * @param putVariableValuesRequest 
+   */
+  putVariableValues(identifier, putVariableValuesRequest, _options) {
+    const requestContextPromise = this.requestFactory.putVariableValues(identifier, putVariableValuesRequest, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.putVariableValues(rsp)));
+    }));
+  }
+  /**
    *  Search variables   Version: 10.14.0.cl or later   Allows searching for variables in ThoughtSpot.  Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint supports searching variables by: * Variable identifier (ID or name) * Variable type * Name pattern (case-insensitive, supports % for wildcard)  The search results can be formatted in three ways: * METADATA - Returns only variable metadata (default) * METADATA_AND_VALUES - Returns variable metadata and values  The values can be filtered by scope: * org_identifier * principal_identifier * model_identifier      
    * @param searchVariablesRequest 
    */
@@ -50117,6 +53492,24 @@ var ObservableWebhooksApi = class {
     }));
   }
   /**
+   *  Version: 26.4.0.cl or later   Get storage config information for a webhook configuration. This endpoint provides ThoughtSpot\'s identity information and IAM policy configuration required for customers to set up cross-account access to their S3 buckets.  The setup info returned depends on the ThoughtSpot cluster type: - For AWS clusters: Returns `aws_config` with STS AssumeRole configuration - For GCP clusters: Returns `gcp_config` with STS AssumeRoleWithWebIdentity configuration  **Note:** This endpoint only returns data if the webhook has a storage destination configured.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+   * @param webhookIdentifier Unique ID or name of the webhook configuration.
+   */
+  getWebhookStorageConfig(webhookIdentifier, _options) {
+    const requestContextPromise = this.requestFactory.getWebhookStorageConfig(webhookIdentifier, _options);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (let middleware of this.configuration.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (let middleware of this.configuration.middleware) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.getWebhookStorageConfig(rsp)));
+    }));
+  }
+  /**
    *  Version: 10.14.0.cl or later   Searches for webhook configurations based on various criteria such as Org, webhook identifier, event type, with support for pagination and sorting. Returns matching webhook configurations with their complete details.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
    * @param searchWebhookConfigurationsRequest 
    */
@@ -50325,6 +53718,44 @@ var PromiseAuthenticationApi = class {
     return result.toPromise();
   }
 };
+var PromiseCollectionsApi = class {
+  constructor(configuration, requestFactory, responseProcessor) {
+    this.api = new ObservableCollectionsApi(configuration, requestFactory, responseProcessor);
+  }
+  /**
+   *   Version: 26.4.0.cl or later   Creates a new collection in ThoughtSpot.  Collections allow you to organize and group related metadata objects such as Liveboards, Answers, worksheets, and other data objects. You can also create nested collections (sub-collections) to build a hierarchical structure.  #### Supported operations  The API endpoint lets you perform the following operations:  * Create a new collection * Add metadata objects (Liveboards, Answers, Logical Tables) to the collection * Create nested collections by adding sub-collections      
+   * @param createCollectionRequest 
+   */
+  createCollection(createCollectionRequest, _options) {
+    const result = this.api.createCollection(createCollectionRequest, _options);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.4.0.cl or later   Deletes one or more collections from ThoughtSpot.  #### Delete options  * **delete_children**: When set to `true`, deletes the child objects (metadata items) within the collection that the user has access to. Objects that the user does not have permission to delete will be skipped. * **dry_run**: When set to `true`, performs a preview of the deletion operation without actually deleting anything. The response shows what would be deleted, allowing you to review before committing the deletion.  #### Response  The response includes: * **metadata_deleted**: List of metadata objects that were successfully deleted * **metadata_skipped**: List of metadata objects that were skipped due to lack of permissions or other constraints      
+   * @param deleteCollectionRequest 
+   */
+  deleteCollection(deleteCollectionRequest, _options) {
+    const result = this.api.deleteCollection(deleteCollectionRequest, _options);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.4.0.cl or later   Gets a list of collections available in ThoughtSpot.  To get details of a specific collection, specify the collection GUID or name. You can also filter the API response based on the collection name pattern, author, and other criteria.  #### Search options  * **name_pattern**: Use \'%\' as a wildcard character to match collection names * **collection_identifiers**: Search for specific collections by their GUIDs or names * **include_metadata**: When set to `true`, includes the metadata objects within each collection in the response  **NOTE**: If the API returns an empty list, consider increasing the value of the `record_size` parameter. To search across all available collections, set `record_size` to `-1`.      
+   * @param searchCollectionsRequest 
+   */
+  searchCollections(searchCollectionsRequest, _options) {
+    const result = this.api.searchCollections(searchCollectionsRequest, _options);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.4.0.cl or later   Updates an existing collection in ThoughtSpot.  #### Supported operations  This API endpoint lets you perform the following operations:  * Update collection name and description * Change visibility settings * Add metadata objects to the collection (operation: ADD) * Remove metadata objects from the collection (operation: REMOVE) * Replace all metadata objects in the collection (operation: REPLACE)  #### Operation types  * **ADD**: Adds the specified metadata objects to the existing collection without removing current items * **REMOVE**: Removes only the specified metadata objects from the collection * **REPLACE**: Replaces all existing metadata objects with the specified items (default behavior)      
+   * @param collectionIdentifier Unique GUID of the collection. Note: Collection names cannot be used as identifiers since duplicate names are allowed.
+   * @param updateCollectionRequest 
+   */
+  updateCollection(collectionIdentifier, updateCollectionRequest, _options) {
+    const result = this.api.updateCollection(collectionIdentifier, updateCollectionRequest, _options);
+    return result.toPromise();
+  }
+};
 var PromiseConnectionConfigurationsApi = class {
   constructor(configuration, requestFactory, responseProcessor) {
     this.api = new ObservableConnectionConfigurationsApi(configuration, requestFactory, responseProcessor);
@@ -50368,7 +53799,7 @@ var PromiseConnectionsApi = class {
     this.api = new ObservableConnectionsApi(configuration, requestFactory, responseProcessor);
   }
   /**
-   *   Version: 9.2.0.cl or later   Creates a connection to a data warehouse for live query services.    Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  #### Create a connection without tables  To create a connection without tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a SnowFlake connection:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"externalDatabases\":[       ]   }   ``` 2. Set `validate` to `false`.  #### Create a connection with tables  To create a connection with tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"externalDatabases\":[         {            \"name\":\"AllDatatypes\",            \"isAutoCreated\":false,            \"schemas\":[               {                  \"name\":\"alldatatypes\",                  \"tables\":[                     {                        \"name\":\"allDatatypes\",                        \"type\":\"TABLE\",                        \"description\":\"\",                        \"selected\":true,                        \"linked\":true,                        \"columns\":[                           {                              \"name\":\"CNUMBER\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           },                           {                              \"name\":\"CDECIMAL\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           }                        ]                     }                  ]               }            ]         }      ]   }   ``` 2. Set `validate` to `true`.      
+   *   Version: 9.2.0.cl or later   Creates a connection to a data warehouse for live query services.    Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  #### Create a connection without tables  To create a connection without tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a SnowFlake connection:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"authenticationType\": \"SERVICE_ACCOUNT\",      \"externalDatabases\":[       ]   }   ``` 2. Set `validate` to `false`.  **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.  #### Create a connection with tables  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) and `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**) privilege is required.  To create a connection with tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"authenticationType\": \"SERVICE_ACCOUNT\",      \"externalDatabases\":[         {            \"name\":\"AllDatatypes\",            \"isAutoCreated\":false,            \"schemas\":[               {                  \"name\":\"alldatatypes\",                  \"tables\":[                     {                        \"name\":\"allDatatypes\",                        \"type\":\"TABLE\",                        \"description\":\"\",                        \"selected\":true,                        \"linked\":true,                        \"columns\":[                           {                              \"name\":\"CNUMBER\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           },                           {                              \"name\":\"CDECIMAL\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           }                        ]                     }                  ]               }            ]         }      ]   }   ``` 2. Set `validate` to `true`.  **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.      
    * @param createConnectionRequest 
    */
   createConnection(createConnectionRequest, _options) {
@@ -50729,6 +54160,19 @@ var PromiseGroupsApi = class {
     return result.toPromise();
   }
 };
+var PromiseJobsApi = class {
+  constructor(configuration, requestFactory, responseProcessor) {
+    this.api = new ObservableJobsApi(configuration, requestFactory, responseProcessor);
+  }
+  /**
+   *   Version: 26.4.0.cl or later   Searches delivery history for communication channels such as webhooks. Returns channel-level delivery status for each job execution record. Use this to monitor channel health and delivery success rates across events.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.  **NOTE**: When `channel_type` is `WEBHOOK`, the following constraints apply:  - `job_ids`, `channel_identifiers`, and `events` each accept at most one element. - When `job_ids` is provided, it is used as the sole lookup key and other filter fields are ignored. - When `job_ids` is not provided, `channel_identifiers` and `events` are both required. Each must contain exactly one element, and the event object must include the `identifier` field. - Records older than the configured retention period are not returned.      
+   * @param searchChannelHistoryRequest 
+   */
+  searchChannelHistory(searchChannelHistoryRequest, _options) {
+    const result = this.api.searchChannelHistory(searchChannelHistoryRequest, _options);
+    return result.toPromise();
+  }
+};
 var PromiseLogApi = class {
   constructor(configuration, requestFactory, responseProcessor) {
     this.api = new ObservableLogApi(configuration, requestFactory, responseProcessor);
@@ -50832,6 +54276,14 @@ var PromiseMetadataApi = class {
    */
   parameterizeMetadata(parameterizeMetadataRequest, _options) {
     const result = this.api.parameterizeMetadata(parameterizeMetadataRequest, _options);
+    return result.toPromise();
+  }
+  /**
+   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.4.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
+   * @param parameterizeMetadataFieldsRequest 
+   */
+  parameterizeMetadataFields(parameterizeMetadataFieldsRequest, _options) {
+    const result = this.api.parameterizeMetadataFields(parameterizeMetadataFieldsRequest, _options);
     return result.toPromise();
   }
   /**
@@ -51152,6 +54604,14 @@ var PromiseSystemApi = class {
     const result = this.api.updateSystemConfig(updateSystemConfigRequest, _options);
     return result.toPromise();
   }
+  /**
+   *  Version: 26.4.0.cl or later   Validates a communication channel configuration to ensure it is properly set up and can receive events. - Use `channel_type` to specify the type of communication channel to validate (e.g., WEBHOOK). - Use `channel_identifier` to provide the unique identifier or name for the communication channel. - Use `event_type` to specify the event type to validate for this channel.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. For webhook channels, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+   * @param validateCommunicationChannelRequest 
+   */
+  validateCommunicationChannel(validateCommunicationChannelRequest, _options) {
+    const result = this.api.validateCommunicationChannel(validateCommunicationChannelRequest, _options);
+    return result.toPromise();
+  }
 };
 var PromiseTagsApi = class {
   constructor(configuration, requestFactory, responseProcessor) {
@@ -51308,6 +54768,14 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
+   *   Version: 26.4.0.cl or later   Creates a new collection in ThoughtSpot.  Collections allow you to organize and group related metadata objects such as Liveboards, Answers, worksheets, and other data objects. You can also create nested collections (sub-collections) to build a hierarchical structure.  #### Supported operations  The API endpoint lets you perform the following operations:  * Create a new collection * Add metadata objects (Liveboards, Answers, Logical Tables) to the collection * Create nested collections by adding sub-collections      
+   * @param createCollectionRequest 
+   */
+  createCollection(createCollectionRequest, _options) {
+    const result = this.api.createCollection(createCollectionRequest, _options);
+    return result.toPromise();
+  }
+  /**
    *   Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_SETUP_VERSION_CONTROL` (**Can set up version control**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).  **Note**: ThoughtSpot supports only GitHub / itHub Enterprise for CI/CD.      
    * @param createConfigRequest 
    */
@@ -51316,7 +54784,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.2.0.cl or later   Creates a connection to a data warehouse for live query services.    Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  #### Create a connection without tables  To create a connection without tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a SnowFlake connection:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"externalDatabases\":[       ]   }   ``` 2. Set `validate` to `false`.  #### Create a connection with tables  To create a connection with tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"externalDatabases\":[         {            \"name\":\"AllDatatypes\",            \"isAutoCreated\":false,            \"schemas\":[               {                  \"name\":\"alldatatypes\",                  \"tables\":[                     {                        \"name\":\"allDatatypes\",                        \"type\":\"TABLE\",                        \"description\":\"\",                        \"selected\":true,                        \"linked\":true,                        \"columns\":[                           {                              \"name\":\"CNUMBER\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           },                           {                              \"name\":\"CDECIMAL\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           }                        ]                     }                  ]               }            ]         }      ]   }   ``` 2. Set `validate` to `true`.      
+   *   Version: 9.2.0.cl or later   Creates a connection to a data warehouse for live query services.    Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  #### Create a connection without tables  To create a connection without tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a SnowFlake connection:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"authenticationType\": \"SERVICE_ACCOUNT\",      \"externalDatabases\":[       ]   }   ``` 2. Set `validate` to `false`.  **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.  #### Create a connection with tables  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) and `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**) privilege is required.  To create a connection with tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"authenticationType\": \"SERVICE_ACCOUNT\",      \"externalDatabases\":[         {            \"name\":\"AllDatatypes\",            \"isAutoCreated\":false,            \"schemas\":[               {                  \"name\":\"alldatatypes\",                  \"tables\":[                     {                        \"name\":\"allDatatypes\",                        \"type\":\"TABLE\",                        \"description\":\"\",                        \"selected\":true,                        \"linked\":true,                        \"columns\":[                           {                              \"name\":\"CNUMBER\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           },                           {                              \"name\":\"CDECIMAL\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           }                        ]                     }                  ]               }            ]         }      ]   }   ``` 2. Set `validate` to `true`.  **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.      
    * @param createConnectionRequest 
    */
   createConnection(createConnectionRequest, _options) {
@@ -51481,6 +54949,14 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
+   *   Version: 26.4.0.cl or later   Deletes one or more collections from ThoughtSpot.  #### Delete options  * **delete_children**: When set to `true`, deletes the child objects (metadata items) within the collection that the user has access to. Objects that the user does not have permission to delete will be skipped. * **dry_run**: When set to `true`, performs a preview of the deletion operation without actually deleting anything. The response shows what would be deleted, allowing you to review before committing the deletion.  #### Response  The response includes: * **metadata_deleted**: List of metadata objects that were successfully deleted * **metadata_skipped**: List of metadata objects that were skipped due to lack of permissions or other constraints      
+   * @param deleteCollectionRequest 
+   */
+  deleteCollection(deleteCollectionRequest, _options) {
+    const result = this.api.deleteCollection(deleteCollectionRequest, _options);
+    return result.toPromise();
+  }
+  /**
    *   Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_SETUP_VERSION_CONTROL` (**Can set up version control**) privilege.      
    * @param deleteConfigRequest 
    */
@@ -51606,6 +55082,14 @@ var PromiseThoughtSpotRestApi = class {
    */
   deleteVariable(identifier, _options) {
     const result = this.api.deleteVariable(identifier, _options);
+    return result.toPromise();
+  }
+  /**
+   *  Delete variable(s)   Version: 26.4.0.cl or later   Allows deleting multiple variables from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifiers (IDs or names)  The operation will fail if: * The user lacks required permissions * Any of the variables don\'t exist * Any of the variables are being used by other objects      
+   * @param deleteVariablesRequest 
+   */
+  deleteVariables(deleteVariablesRequest, _options) {
+    const result = this.api.deleteVariables(deleteVariablesRequest, _options);
     return result.toPromise();
   }
   /**
@@ -51852,6 +55336,14 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
+   *  Version: 26.4.0.cl or later   Get storage config information for a webhook configuration. This endpoint provides ThoughtSpot\'s identity information and IAM policy configuration required for customers to set up cross-account access to their S3 buckets.  The setup info returned depends on the ThoughtSpot cluster type: - For AWS clusters: Returns `aws_config` with STS AssumeRole configuration - For GCP clusters: Returns `gcp_config` with STS AssumeRoleWithWebIdentity configuration  **Note:** This endpoint only returns data if the webhook has a storage destination configured.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+   * @param webhookIdentifier Unique ID or name of the webhook configuration.
+   */
+  getWebhookStorageConfig(webhookIdentifier, _options) {
+    const result = this.api.getWebhookStorageConfig(webhookIdentifier, _options);
+    return result.toPromise();
+  }
+  /**
    *   Version: 9.0.0.cl or later   Imports [TML](https://docs.thoughtspot.com/cloud/latest/tml) files into ThoughtSpot.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtsSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required: - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### Usage guidelines  *  Import all related objects in a single TML Import API call. For example, Tables that use the same Connection object and Worksheets connected to these Tables. * Include the `fqn` property to distinguish objects that have the same name.   For example, if you have multiple Connections or Worksheets with the same name on ThoughtSpot and the Connection or Worksheet referenced in your TML file does not have a unique name to distinguish, it may result in invalid object references.   Adding `fqn` helps ThoughtSpot differentiate a Table from another with the same name.   We recommend [exporting TML with FQNs](#/http/api-endpoints/metadata/export-metadata-tml) and using these during the import operation. * You can upload multiple TML files at a time.   If you import a Worksheet along with Liveboards, Answers, and other dependent objects in a single API call, the imported objects will be immediately available for use.   When you import only a Worksheet object, it may take some time for the Worksheet to become available in the ThoughtSpot system. Please wait for a few minutes, and then proceed to create an Answer and Liveboard from the newly imported Worksheet.  For more information, see [TML Documentation](https://developers.thoughtspot.com/docs/tml#_import_a_tml).      
    * @param importMetadataTMLRequest 
    */
@@ -51915,11 +55407,28 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
+   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.4.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
+   * @param parameterizeMetadataFieldsRequest 
+   */
+  parameterizeMetadataFields(parameterizeMetadataFieldsRequest, _options) {
+    const result = this.api.parameterizeMetadataFields(parameterizeMetadataFieldsRequest, _options);
+    return result.toPromise();
+  }
+  /**
    *  Version: 10.9.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
    * @param publishMetadataRequest 
    */
   publishMetadata(publishMetadataRequest, _options) {
     const result = this.api.publishMetadata(publishMetadataRequest, _options);
+    return result.toPromise();
+  }
+  /**
+   *  Update values for a variable   Version: 26.4.0.cl or later   Allows updating values for a specific variable in ThoughtSpot.  Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows: * Adding new values to the variable * Replacing existing values * Deleting values from the variable * Resetting all values  When updating variable values, you need to specify: * The variable identifier (ID or name) * The values to add/replace/remove * The operation to perform (ADD, REPLACE, REMOVE, RESET)  Behaviour based on operation type: * ADD - Adds values to the variable if this is a list type variable, else same as replace. * REPLACE - Replaces all values of a given set of constraints with the current set of values. * REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value. * RESET - Removes all constraints for the given variable, scope is ignored      
+   * @param identifier Unique ID or name of the variable
+   * @param putVariableValuesRequest 
+   */
+  putVariableValues(identifier, putVariableValuesRequest, _options) {
+    const result = this.api.putVariableValues(identifier, putVariableValuesRequest, _options);
     return result.toPromise();
   }
   /**
@@ -51970,6 +55479,22 @@ var PromiseThoughtSpotRestApi = class {
    */
   searchCalendars(searchCalendarsRequest, _options) {
     const result = this.api.searchCalendars(searchCalendarsRequest, _options);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.4.0.cl or later   Searches delivery history for communication channels such as webhooks. Returns channel-level delivery status for each job execution record. Use this to monitor channel health and delivery success rates across events.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.  **NOTE**: When `channel_type` is `WEBHOOK`, the following constraints apply:  - `job_ids`, `channel_identifiers`, and `events` each accept at most one element. - When `job_ids` is provided, it is used as the sole lookup key and other filter fields are ignored. - When `job_ids` is not provided, `channel_identifiers` and `events` are both required. Each must contain exactly one element, and the event object must include the `identifier` field. - Records older than the configured retention period are not returned.      
+   * @param searchChannelHistoryRequest 
+   */
+  searchChannelHistory(searchChannelHistoryRequest, _options) {
+    const result = this.api.searchChannelHistory(searchChannelHistoryRequest, _options);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.4.0.cl or later   Gets a list of collections available in ThoughtSpot.  To get details of a specific collection, specify the collection GUID or name. You can also filter the API response based on the collection name pattern, author, and other criteria.  #### Search options  * **name_pattern**: Use \'%\' as a wildcard character to match collection names * **collection_identifiers**: Search for specific collections by their GUIDs or names * **include_metadata**: When set to `true`, includes the metadata objects within each collection in the response  **NOTE**: If the API returns an empty list, consider increasing the value of the `record_size` parameter. To search across all available collections, set `record_size` to `-1`.      
+   * @param searchCollectionsRequest 
+   */
+  searchCollections(searchCollectionsRequest, _options) {
+    const result = this.api.searchCollections(searchCollectionsRequest, _options);
     return result.toPromise();
   }
   /**
@@ -52192,6 +55717,15 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
+   *   Version: 26.4.0.cl or later   Updates an existing collection in ThoughtSpot.  #### Supported operations  This API endpoint lets you perform the following operations:  * Update collection name and description * Change visibility settings * Add metadata objects to the collection (operation: ADD) * Remove metadata objects from the collection (operation: REMOVE) * Replace all metadata objects in the collection (operation: REPLACE)  #### Operation types  * **ADD**: Adds the specified metadata objects to the existing collection without removing current items * **REMOVE**: Removes only the specified metadata objects from the collection * **REPLACE**: Replaces all existing metadata objects with the specified items (default behavior)      
+   * @param collectionIdentifier Unique GUID of the collection. Note: Collection names cannot be used as identifiers since duplicate names are allowed.
+   * @param updateCollectionRequest 
+   */
+  updateCollection(collectionIdentifier, updateCollectionRequest, _options) {
+    const result = this.api.updateCollection(collectionIdentifier, updateCollectionRequest, _options);
+    return result.toPromise();
+  }
+  /**
    *  Version: 10.12.0.cl or later   Creates, updates, or deletes column security rules for specified tables.  This API endpoint allows you to create, update, or delete column-level security rules on columns of a table. The operation follows an \"all or none\" policy: if defining security rules for any of the provided columns fails, the entire operation will be rolled back, and no rules will be created.  #### Usage guidelines  - Provide table identifier using either `identifier` (GUID or name) or `obj_identifier` (object ID) - Use `clear_csr: true` to remove all column security rules from the table - For each column, specify the security rule using `column_security_rules` array - Use `is_unsecured: true` to mark a specific column as unprotected - Use `group_access` operations to manage group associations:   - `ADD`: Add groups to the column\'s access list   - `REMOVE`: Remove groups from the column\'s access list   - `REPLACE`: Replace all existing groups with the specified groups  #### Required permissions  - `ADMINISTRATION` - Can administer ThoughtSpot - `DATAMANAGEMENT` - Can manage data (if RBAC is disabled) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` - Can manage worksheet views and tables (if RBAC is enabled)  #### Example request  ```json {   \"identifier\": \"table-guid\",   \"obj_identifier\": \"table-object-id\",   \"clear_csr\": false,   \"column_security_rules\": [     {       \"column_identifier\": \"col id or col name\",       \"is_unsecured\": false,       \"group_access\": [         {           \"operation\": \"ADD\",           \"group_identifiers\": [\"hr_group_id\", \"hr_group_name\", \"finance_group_id\"]         }       ]     },     {       \"column_identifier\": \"col id or col name\",       \"is_unsecured\": true     },     {       \"column_identifier\": \"col id or col name\",       \"is_unsecured\": false,       \"group_access\": [         {           \"operation\": \"REPLACE\",           \"group_identifiers\": [\"management_group_id\", \"management_group_name\"]         }       ]     }   ] } ```  #### Request Body Schema  - `identifier` (string, optional): GUID or name of the table for which we want to create column security rules - `obj_identifier` (string, optional): The object ID of the table - `clear_csr` (boolean, optional): If true, then all the secured columns will be marked as unprotected, and all the group associations will be removed - `column_security_rules` (array of objects, required): An array where each object defines the security rule for a specific column  Each column security rule object contains: - `column_identifier` (string, required): Column identifier (col_id or name) - `is_unsecured` (boolean, optional): If true, the column will be marked as unprotected and all groups associated with it will be removed - `group_access` (array of objects, optional): Array of group operation objects  Each group operation object contains: - `operation` (string, required): Operation type - ADD, REMOVE, or REPLACE - `group_identifiers` (array of strings, required): Array of group identifiers (name or GUID) on which the operation will be performed  #### Response  This API does not return any response body. A successful operation returns HTTP 200 status code.  #### Operation Types  - **ADD**: Adds the specified groups to the column\'s access list - **REMOVE**: Removes the specified groups from the column\'s access list   - **REPLACE**: Replaces all existing groups with the specified groups      
    * @param updateColumnSecurityRulesRequest 
    */
@@ -52373,6 +55907,14 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
+   *  Version: 26.4.0.cl or later   Validates a communication channel configuration to ensure it is properly set up and can receive events. - Use `channel_type` to specify the type of communication channel to validate (e.g., WEBHOOK). - Use `channel_identifier` to provide the unique identifier or name for the communication channel. - Use `event_type` to specify the event type to validate for this channel.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. For webhook channels, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+   * @param validateCommunicationChannelRequest 
+   */
+  validateCommunicationChannel(validateCommunicationChannelRequest, _options) {
+    const result = this.api.validateCommunicationChannel(validateCommunicationChannelRequest, _options);
+    return result.toPromise();
+  }
+  /**
    *  Version: 10.10.0.cl or later   Validates the email customization configuration if any set for the ThoughtSpot system.  #### Pre-requisites  Requires `DEVELOPER` (**has developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.  **NOTE**:This endpoint in currently in beta. Contact ThoughtSpot support to enable this on your instance.      
    */
   validateEmailCustomization(_options) {
@@ -52503,6 +56045,23 @@ var PromiseVariableApi = class {
     return result.toPromise();
   }
   /**
+   *  Delete variable(s)   Version: 26.4.0.cl or later   Allows deleting multiple variables from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifiers (IDs or names)  The operation will fail if: * The user lacks required permissions * Any of the variables don\'t exist * Any of the variables are being used by other objects      
+   * @param deleteVariablesRequest 
+   */
+  deleteVariables(deleteVariablesRequest, _options) {
+    const result = this.api.deleteVariables(deleteVariablesRequest, _options);
+    return result.toPromise();
+  }
+  /**
+   *  Update values for a variable   Version: 26.4.0.cl or later   Allows updating values for a specific variable in ThoughtSpot.  Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows: * Adding new values to the variable * Replacing existing values * Deleting values from the variable * Resetting all values  When updating variable values, you need to specify: * The variable identifier (ID or name) * The values to add/replace/remove * The operation to perform (ADD, REPLACE, REMOVE, RESET)  Behaviour based on operation type: * ADD - Adds values to the variable if this is a list type variable, else same as replace. * REPLACE - Replaces all values of a given set of constraints with the current set of values. * REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value. * RESET - Removes all constraints for the given variable, scope is ignored      
+   * @param identifier Unique ID or name of the variable
+   * @param putVariableValuesRequest 
+   */
+  putVariableValues(identifier, putVariableValuesRequest, _options) {
+    const result = this.api.putVariableValues(identifier, putVariableValuesRequest, _options);
+    return result.toPromise();
+  }
+  /**
    *  Search variables   Version: 10.14.0.cl or later   Allows searching for variables in ThoughtSpot.  Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint supports searching variables by: * Variable identifier (ID or name) * Variable type * Name pattern (case-insensitive, supports % for wildcard)  The search results can be formatted in three ways: * METADATA - Returns only variable metadata (default) * METADATA_AND_VALUES - Returns variable metadata and values  The values can be filtered by scope: * org_identifier * principal_identifier * model_identifier      
    * @param searchVariablesRequest 
    */
@@ -52627,6 +56186,14 @@ var PromiseWebhooksApi = class {
     return result.toPromise();
   }
   /**
+   *  Version: 26.4.0.cl or later   Get storage config information for a webhook configuration. This endpoint provides ThoughtSpot\'s identity information and IAM policy configuration required for customers to set up cross-account access to their S3 buckets.  The setup info returned depends on the ThoughtSpot cluster type: - For AWS clusters: Returns `aws_config` with STS AssumeRole configuration - For GCP clusters: Returns `gcp_config` with STS AssumeRoleWithWebIdentity configuration  **Note:** This endpoint only returns data if the webhook has a storage destination configured.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+   * @param webhookIdentifier Unique ID or name of the webhook configuration.
+   */
+  getWebhookStorageConfig(webhookIdentifier, _options) {
+    const result = this.api.getWebhookStorageConfig(webhookIdentifier, _options);
+    return result.toPromise();
+  }
+  /**
    *  Version: 10.14.0.cl or later   Searches for webhook configurations based on various criteria such as Org, webhook identifier, event type, with support for pagination and sorting. Returns matching webhook configurations with their complete details.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
    * @param searchWebhookConfigurationsRequest 
    */
@@ -52725,6 +56292,7 @@ export {
   AIContext,
   APIKey,
   APIKeyInput,
+  AWSAssumeRoleSetup,
   AccessToken,
   ActionConfig,
   ActionConfigInput,
@@ -52758,8 +56326,20 @@ export {
   CALLBACKInputMandatory,
   CalendarResponse,
   ChangeUserPasswordRequest,
+  ChannelHistoryEventInput,
+  ChannelHistoryJob,
+  ChannelValidationAwsS3Info,
+  ChannelValidationDetail,
   ClusterNonEmbedAccess,
   ClusterNonEmbedAccessInput,
+  Collection,
+  CollectionDeleteResponse,
+  CollectionDeleteTypeIdentifiers,
+  CollectionEntityIdentifier,
+  CollectionMetadataInput,
+  CollectionMetadataItem,
+  CollectionSearchResponse,
+  PromiseCollectionsApi as CollectionsApi,
   Column,
   ColumnSecurityRule,
   ColumnSecurityRuleColumn,
@@ -52775,6 +56355,7 @@ export {
   CommitResponse,
   CommiterType,
   CommunicationChannelPreferencesResponse,
+  CommunicationChannelValidateResponse,
   ConfigureCommunicationChannelPreferencesRequest,
   ConfigureSecuritySettingsRequest,
   ConfigureSecuritySettingsRequestClusterPreferences,
@@ -52793,6 +56374,7 @@ export {
   CreateAgentConversationRequestMetadataContext,
   CreateCalendarRequest,
   CreateCalendarRequestTableReference,
+  CreateCollectionRequest,
   CreateConfigRequest,
   CreateConnectionConfigurationRequest,
   CreateConnectionConfigurationRequestPolicyProcessOptions,
@@ -52840,12 +56422,14 @@ export {
   DefaultActionConfigInput,
   DefaultActionConfigInputCreate,
   DefaultActionConfigSearchInput,
+  DeleteCollectionRequest,
   DeleteConfigRequest,
   DeleteConnectionConfigurationRequest,
   DeleteConnectionRequest,
   DeleteMetadataRequest,
   DeleteMetadataTypeInput,
   DeleteOrgEmailCustomizationRequest,
+  DeleteVariablesRequest,
   DeleteWebhookConfigurationsRequest,
   DeployCommitRequest,
   DeployResponse,
@@ -52892,6 +56476,7 @@ export {
   ForceLogoutUsersRequest,
   Frequency,
   FrequencyInput,
+  GCPWebIdentitySetup,
   GenerateCSVRequest,
   GenericInfo,
   GetAsyncImportStatusResponse,
@@ -52928,6 +56513,7 @@ export {
   JWTParameter,
   JWTUserOptions,
   JWTUserOptionsFull,
+  PromiseJobsApi as JobsApi,
   LBContextInput,
   LiveboardContent,
   LiveboardDataResponse,
@@ -52964,6 +56550,7 @@ export {
   OrgType,
   PromiseOrgsApi as OrgsApi,
   ParameterValues,
+  ParameterizeMetadataFieldsRequest,
   ParameterizeMetadataRequest,
   ParametersListItem,
   ParametersListItemInput,
@@ -52981,6 +56568,7 @@ export {
   PrincipalsListItemInput,
   PublishMetadataListItem,
   PublishMetadataRequest,
+  PutVariableValuesRequest,
   QueryGetDecomposedQueryRequest,
   QueryGetDecomposedQueryRequestNlsRequest,
   RecipientDetails,
@@ -53033,6 +56621,10 @@ export {
   ScriptSrcUrlsInput,
   SearchCalendarsRequest,
   SearchCalendarsRequestSortOptions,
+  SearchChannelHistoryRequest,
+  SearchChannelHistoryResponse,
+  SearchCollectionsRequest,
+  SearchCollectionsRequestSortOptions,
   SearchCommitsRequest,
   SearchCommunicationChannelPreferencesRequest,
   SearchConfigRequest,
@@ -53058,7 +56650,6 @@ export {
   SearchUserGroupsRequest,
   SearchUserGroupsRequestSortOptions,
   SearchUsersRequest,
-  SearchUsersRequestSortOptions,
   SearchVariablesRequest,
   SearchWebhookConfigurationsRequest,
   SearchWebhookConfigurationsRequestSortOptions,
@@ -53090,6 +56681,7 @@ export {
   StorageConfigInput,
   StorageDestination,
   StorageDestinationInput,
+  StorageSetupInfo,
   PromiseSystemApi as SystemApi,
   SystemConfig,
   SystemInfo,
@@ -53111,6 +56703,7 @@ export {
   UnpublishMetadataRequest,
   UpdateCalendarRequest,
   UpdateCalendarRequestTableReference,
+  UpdateCollectionRequest,
   UpdateColumnSecurityRulesRequest,
   UpdateConfigRequest,
   UpdateConnectionConfigurationRequest,
@@ -53145,12 +56738,14 @@ export {
   UserParameterOptions,
   UserPrincipal,
   PromiseUsersApi as UsersApi,
+  ValidateCommunicationChannelRequest,
   ValidateMergeRequest,
   ValidateTokenRequest,
   ValueScopeInput,
   Variable,
   PromiseVariableApi as VariableApi,
   VariableDetailInput,
+  VariablePutAssignmentInput,
   VariableUpdateAssignmentInput,
   VariableUpdateScopeInput,
   VariableValue,
@@ -53166,6 +56761,8 @@ export {
   WebhookAuthenticationInput,
   WebhookDeleteFailure,
   WebhookDeleteResponse,
+  WebhookKeyValuePair,
+  WebhookKeyValuePairInput,
   WebhookOrg,
   WebhookPagination,
   WebhookResponse,

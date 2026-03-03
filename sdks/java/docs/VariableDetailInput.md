@@ -22,6 +22,7 @@ Input for variable details in search
 | TABLE_MAPPING | &quot;TABLE_MAPPING&quot; |
 | CONNECTION_PROPERTY_PER_PRINCIPAL | &quot;CONNECTION_PROPERTY_PER_PRINCIPAL&quot; |
 | FORMULA_VARIABLE | &quot;FORMULA_VARIABLE&quot; |
+| USER_PROPERTY | &quot;USER_PROPERTY&quot; |
 
 
 ## Implemented Interfaces

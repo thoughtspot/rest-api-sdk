@@ -41,7 +41,9 @@ public class CreateVariableRequest implements Serializable {
 
         CONNECTION_PROPERTY_PER_PRINCIPAL("CONNECTION_PROPERTY_PER_PRINCIPAL"),
 
-        FORMULA_VARIABLE("FORMULA_VARIABLE");
+        FORMULA_VARIABLE("FORMULA_VARIABLE"),
+
+        USER_PROPERTY("USER_PROPERTY");
 
         private String value;
 

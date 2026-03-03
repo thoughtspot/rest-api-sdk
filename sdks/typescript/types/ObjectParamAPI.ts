@@ -4,6 +4,7 @@ import { Configuration} from '../configuration'
 import { AIContext } from '../models/AIContext';
 import { APIKey } from '../models/APIKey';
 import { APIKeyInput } from '../models/APIKeyInput';
+import { AWSAssumeRoleSetup } from '../models/AWSAssumeRoleSetup';
 import { AccessToken } from '../models/AccessToken';
 import { ActionConfig } from '../models/ActionConfig';
 import { ActionConfigInput } from '../models/ActionConfigInput';
@@ -34,8 +35,19 @@ import { CALLBACKInput } from '../models/CALLBACKInput';
 import { CALLBACKInputMandatory } from '../models/CALLBACKInputMandatory';
 import { CalendarResponse } from '../models/CalendarResponse';
 import { ChangeUserPasswordRequest } from '../models/ChangeUserPasswordRequest';
+import { ChannelHistoryEventInput } from '../models/ChannelHistoryEventInput';
+import { ChannelHistoryJob } from '../models/ChannelHistoryJob';
+import { ChannelValidationAwsS3Info } from '../models/ChannelValidationAwsS3Info';
+import { ChannelValidationDetail } from '../models/ChannelValidationDetail';
 import { ClusterNonEmbedAccess } from '../models/ClusterNonEmbedAccess';
 import { ClusterNonEmbedAccessInput } from '../models/ClusterNonEmbedAccessInput';
+import { Collection } from '../models/Collection';
+import { CollectionDeleteResponse } from '../models/CollectionDeleteResponse';
+import { CollectionDeleteTypeIdentifiers } from '../models/CollectionDeleteTypeIdentifiers';
+import { CollectionEntityIdentifier } from '../models/CollectionEntityIdentifier';
+import { CollectionMetadataInput } from '../models/CollectionMetadataInput';
+import { CollectionMetadataItem } from '../models/CollectionMetadataItem';
+import { CollectionSearchResponse } from '../models/CollectionSearchResponse';
 import { Column } from '../models/Column';
 import { ColumnSecurityRule } from '../models/ColumnSecurityRule';
 import { ColumnSecurityRuleColumn } from '../models/ColumnSecurityRuleColumn';
@@ -51,6 +63,7 @@ import { CommitHistoryResponse } from '../models/CommitHistoryResponse';
 import { CommitResponse } from '../models/CommitResponse';
 import { CommiterType } from '../models/CommiterType';
 import { CommunicationChannelPreferencesResponse } from '../models/CommunicationChannelPreferencesResponse';
+import { CommunicationChannelValidateResponse } from '../models/CommunicationChannelValidateResponse';
 import { ConfigureCommunicationChannelPreferencesRequest } from '../models/ConfigureCommunicationChannelPreferencesRequest';
 import { ConfigureSecuritySettingsRequest } from '../models/ConfigureSecuritySettingsRequest';
 import { ConfigureSecuritySettingsRequestClusterPreferences } from '../models/ConfigureSecuritySettingsRequestClusterPreferences';
@@ -67,6 +80,7 @@ import { CreateAgentConversationRequestConversationSettings } from '../models/Cr
 import { CreateAgentConversationRequestMetadataContext } from '../models/CreateAgentConversationRequestMetadataContext';
 import { CreateCalendarRequest } from '../models/CreateCalendarRequest';
 import { CreateCalendarRequestTableReference } from '../models/CreateCalendarRequestTableReference';
+import { CreateCollectionRequest } from '../models/CreateCollectionRequest';
 import { CreateConfigRequest } from '../models/CreateConfigRequest';
 import { CreateConnectionConfigurationRequest } from '../models/CreateConnectionConfigurationRequest';
 import { CreateConnectionConfigurationRequestPolicyProcessOptions } from '../models/CreateConnectionConfigurationRequestPolicyProcessOptions';
@@ -110,12 +124,14 @@ import { DefaultActionConfig } from '../models/DefaultActionConfig';
 import { DefaultActionConfigInput } from '../models/DefaultActionConfigInput';
 import { DefaultActionConfigInputCreate } from '../models/DefaultActionConfigInputCreate';
 import { DefaultActionConfigSearchInput } from '../models/DefaultActionConfigSearchInput';
+import { DeleteCollectionRequest } from '../models/DeleteCollectionRequest';
 import { DeleteConfigRequest } from '../models/DeleteConfigRequest';
 import { DeleteConnectionConfigurationRequest } from '../models/DeleteConnectionConfigurationRequest';
 import { DeleteConnectionRequest } from '../models/DeleteConnectionRequest';
 import { DeleteMetadataRequest } from '../models/DeleteMetadataRequest';
 import { DeleteMetadataTypeInput } from '../models/DeleteMetadataTypeInput';
 import { DeleteOrgEmailCustomizationRequest } from '../models/DeleteOrgEmailCustomizationRequest';
+import { DeleteVariablesRequest } from '../models/DeleteVariablesRequest';
 import { DeleteWebhookConfigurationsRequest } from '../models/DeleteWebhookConfigurationsRequest';
 import { DeployCommitRequest } from '../models/DeployCommitRequest';
 import { DeployResponse } from '../models/DeployResponse';
@@ -161,6 +177,7 @@ import { FilterRules } from '../models/FilterRules';
 import { ForceLogoutUsersRequest } from '../models/ForceLogoutUsersRequest';
 import { Frequency } from '../models/Frequency';
 import { FrequencyInput } from '../models/FrequencyInput';
+import { GCPWebIdentitySetup } from '../models/GCPWebIdentitySetup';
 import { GenerateCSVRequest } from '../models/GenerateCSVRequest';
 import { GenericInfo } from '../models/GenericInfo';
 import { GetAsyncImportStatusResponse } from '../models/GetAsyncImportStatusResponse';
@@ -226,6 +243,7 @@ import { OrgPreferenceSearchCriteriaInput } from '../models/OrgPreferenceSearchC
 import { OrgResponse } from '../models/OrgResponse';
 import { OrgType } from '../models/OrgType';
 import { ParameterValues } from '../models/ParameterValues';
+import { ParameterizeMetadataFieldsRequest } from '../models/ParameterizeMetadataFieldsRequest';
 import { ParameterizeMetadataRequest } from '../models/ParameterizeMetadataRequest';
 import { ParametersListItem } from '../models/ParametersListItem';
 import { ParametersListItemInput } from '../models/ParametersListItemInput';
@@ -243,6 +261,7 @@ import { PrincipalsListItem } from '../models/PrincipalsListItem';
 import { PrincipalsListItemInput } from '../models/PrincipalsListItemInput';
 import { PublishMetadataListItem } from '../models/PublishMetadataListItem';
 import { PublishMetadataRequest } from '../models/PublishMetadataRequest';
+import { PutVariableValuesRequest } from '../models/PutVariableValuesRequest';
 import { QueryGetDecomposedQueryRequest } from '../models/QueryGetDecomposedQueryRequest';
 import { QueryGetDecomposedQueryRequestNlsRequest } from '../models/QueryGetDecomposedQueryRequestNlsRequest';
 import { RecipientDetails } from '../models/RecipientDetails';
@@ -289,6 +308,10 @@ import { ScriptSrcUrls } from '../models/ScriptSrcUrls';
 import { ScriptSrcUrlsInput } from '../models/ScriptSrcUrlsInput';
 import { SearchCalendarsRequest } from '../models/SearchCalendarsRequest';
 import { SearchCalendarsRequestSortOptions } from '../models/SearchCalendarsRequestSortOptions';
+import { SearchChannelHistoryRequest } from '../models/SearchChannelHistoryRequest';
+import { SearchChannelHistoryResponse } from '../models/SearchChannelHistoryResponse';
+import { SearchCollectionsRequest } from '../models/SearchCollectionsRequest';
+import { SearchCollectionsRequestSortOptions } from '../models/SearchCollectionsRequestSortOptions';
 import { SearchCommitsRequest } from '../models/SearchCommitsRequest';
 import { SearchCommunicationChannelPreferencesRequest } from '../models/SearchCommunicationChannelPreferencesRequest';
 import { SearchConfigRequest } from '../models/SearchConfigRequest';
@@ -314,7 +337,6 @@ import { SearchTagsRequest } from '../models/SearchTagsRequest';
 import { SearchUserGroupsRequest } from '../models/SearchUserGroupsRequest';
 import { SearchUserGroupsRequestSortOptions } from '../models/SearchUserGroupsRequestSortOptions';
 import { SearchUsersRequest } from '../models/SearchUsersRequest';
-import { SearchUsersRequestSortOptions } from '../models/SearchUsersRequestSortOptions';
 import { SearchVariablesRequest } from '../models/SearchVariablesRequest';
 import { SearchWebhookConfigurationsRequest } from '../models/SearchWebhookConfigurationsRequest';
 import { SearchWebhookConfigurationsRequestSortOptions } from '../models/SearchWebhookConfigurationsRequestSortOptions';
@@ -343,6 +365,7 @@ import { StorageConfig } from '../models/StorageConfig';
 import { StorageConfigInput } from '../models/StorageConfigInput';
 import { StorageDestination } from '../models/StorageDestination';
 import { StorageDestinationInput } from '../models/StorageDestinationInput';
+import { StorageSetupInfo } from '../models/StorageSetupInfo';
 import { SystemConfig } from '../models/SystemConfig';
 import { SystemInfo } from '../models/SystemInfo';
 import { SystemOverrideInfo } from '../models/SystemOverrideInfo';
@@ -361,6 +384,7 @@ import { UnparameterizeMetadataRequest } from '../models/UnparameterizeMetadataR
 import { UnpublishMetadataRequest } from '../models/UnpublishMetadataRequest';
 import { UpdateCalendarRequest } from '../models/UpdateCalendarRequest';
 import { UpdateCalendarRequestTableReference } from '../models/UpdateCalendarRequestTableReference';
+import { UpdateCollectionRequest } from '../models/UpdateCollectionRequest';
 import { UpdateColumnSecurityRulesRequest } from '../models/UpdateColumnSecurityRulesRequest';
 import { UpdateConfigRequest } from '../models/UpdateConfigRequest';
 import { UpdateConnectionConfigurationRequest } from '../models/UpdateConnectionConfigurationRequest';
@@ -394,11 +418,13 @@ import { UserInfo } from '../models/UserInfo';
 import { UserObject } from '../models/UserObject';
 import { UserParameterOptions } from '../models/UserParameterOptions';
 import { UserPrincipal } from '../models/UserPrincipal';
+import { ValidateCommunicationChannelRequest } from '../models/ValidateCommunicationChannelRequest';
 import { ValidateMergeRequest } from '../models/ValidateMergeRequest';
 import { ValidateTokenRequest } from '../models/ValidateTokenRequest';
 import { ValueScopeInput } from '../models/ValueScopeInput';
 import { Variable } from '../models/Variable';
 import { VariableDetailInput } from '../models/VariableDetailInput';
+import { VariablePutAssignmentInput } from '../models/VariablePutAssignmentInput';
 import { VariableUpdateAssignmentInput } from '../models/VariableUpdateAssignmentInput';
 import { VariableUpdateScopeInput } from '../models/VariableUpdateScopeInput';
 import { VariableValue } from '../models/VariableValue';
@@ -413,6 +439,8 @@ import { WebhookAuthentication } from '../models/WebhookAuthentication';
 import { WebhookAuthenticationInput } from '../models/WebhookAuthenticationInput';
 import { WebhookDeleteFailure } from '../models/WebhookDeleteFailure';
 import { WebhookDeleteResponse } from '../models/WebhookDeleteResponse';
+import { WebhookKeyValuePair } from '../models/WebhookKeyValuePair';
+import { WebhookKeyValuePairInput } from '../models/WebhookKeyValuePairInput';
 import { WebhookOrg } from '../models/WebhookOrg';
 import { WebhookPagination } from '../models/WebhookPagination';
 import { WebhookResponse } from '../models/WebhookResponse';
@@ -780,6 +808,92 @@ export class ObjectAuthenticationApi {
 
 }
 
+import { ObservableCollectionsApi } from "./ObservableAPI";
+import { CollectionsApiRequestFactory, CollectionsApiResponseProcessor} from "../apis/CollectionsApi";
+
+export interface CollectionsApiCreateCollectionRequest {
+    /**
+     * 
+     * @type CreateCollectionRequest
+     * @memberof CollectionsApicreateCollection
+     */
+    createCollectionRequest: CreateCollectionRequest
+}
+
+export interface CollectionsApiDeleteCollectionRequest {
+    /**
+     * 
+     * @type DeleteCollectionRequest
+     * @memberof CollectionsApideleteCollection
+     */
+    deleteCollectionRequest: DeleteCollectionRequest
+}
+
+export interface CollectionsApiSearchCollectionsRequest {
+    /**
+     * 
+     * @type SearchCollectionsRequest
+     * @memberof CollectionsApisearchCollections
+     */
+    searchCollectionsRequest: SearchCollectionsRequest
+}
+
+export interface CollectionsApiUpdateCollectionRequest {
+    /**
+     * Unique GUID of the collection. Note: Collection names cannot be used as identifiers since duplicate names are allowed.
+     * @type string
+     * @memberof CollectionsApiupdateCollection
+     */
+    collectionIdentifier: string
+    /**
+     * 
+     * @type UpdateCollectionRequest
+     * @memberof CollectionsApiupdateCollection
+     */
+    updateCollectionRequest: UpdateCollectionRequest
+}
+
+export class ObjectCollectionsApi {
+    private api: ObservableCollectionsApi
+
+    public constructor(configuration: Configuration, requestFactory?: CollectionsApiRequestFactory, responseProcessor?: CollectionsApiResponseProcessor) {
+        this.api = new ObservableCollectionsApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     *   Version: 26.4.0.cl or later   Creates a new collection in ThoughtSpot.  Collections allow you to organize and group related metadata objects such as Liveboards, Answers, worksheets, and other data objects. You can also create nested collections (sub-collections) to build a hierarchical structure.  #### Supported operations  The API endpoint lets you perform the following operations:  * Create a new collection * Add metadata objects (Liveboards, Answers, Logical Tables) to the collection * Create nested collections by adding sub-collections      
+     * @param param the request object
+     */
+    public createCollection(param: CollectionsApiCreateCollectionRequest, options?: Configuration): Promise<Collection> {
+        return this.api.createCollection(param.createCollectionRequest,  options).toPromise();
+    }
+
+    /**
+     *   Version: 26.4.0.cl or later   Deletes one or more collections from ThoughtSpot.  #### Delete options  * **delete_children**: When set to `true`, deletes the child objects (metadata items) within the collection that the user has access to. Objects that the user does not have permission to delete will be skipped. * **dry_run**: When set to `true`, performs a preview of the deletion operation without actually deleting anything. The response shows what would be deleted, allowing you to review before committing the deletion.  #### Response  The response includes: * **metadata_deleted**: List of metadata objects that were successfully deleted * **metadata_skipped**: List of metadata objects that were skipped due to lack of permissions or other constraints      
+     * @param param the request object
+     */
+    public deleteCollection(param: CollectionsApiDeleteCollectionRequest, options?: Configuration): Promise<CollectionDeleteResponse> {
+        return this.api.deleteCollection(param.deleteCollectionRequest,  options).toPromise();
+    }
+
+    /**
+     *   Version: 26.4.0.cl or later   Gets a list of collections available in ThoughtSpot.  To get details of a specific collection, specify the collection GUID or name. You can also filter the API response based on the collection name pattern, author, and other criteria.  #### Search options  * **name_pattern**: Use \'%\' as a wildcard character to match collection names * **collection_identifiers**: Search for specific collections by their GUIDs or names * **include_metadata**: When set to `true`, includes the metadata objects within each collection in the response  **NOTE**: If the API returns an empty list, consider increasing the value of the `record_size` parameter. To search across all available collections, set `record_size` to `-1`.      
+     * @param param the request object
+     */
+    public searchCollections(param: CollectionsApiSearchCollectionsRequest, options?: Configuration): Promise<CollectionSearchResponse> {
+        return this.api.searchCollections(param.searchCollectionsRequest,  options).toPromise();
+    }
+
+    /**
+     *   Version: 26.4.0.cl or later   Updates an existing collection in ThoughtSpot.  #### Supported operations  This API endpoint lets you perform the following operations:  * Update collection name and description * Change visibility settings * Add metadata objects to the collection (operation: ADD) * Remove metadata objects from the collection (operation: REMOVE) * Replace all metadata objects in the collection (operation: REPLACE)  #### Operation types  * **ADD**: Adds the specified metadata objects to the existing collection without removing current items * **REMOVE**: Removes only the specified metadata objects from the collection * **REPLACE**: Replaces all existing metadata objects with the specified items (default behavior)      
+     * @param param the request object
+     */
+    public updateCollection(param: CollectionsApiUpdateCollectionRequest, options?: Configuration): Promise<void> {
+        return this.api.updateCollection(param.collectionIdentifier, param.updateCollectionRequest,  options).toPromise();
+    }
+
+}
+
 import { ObservableConnectionConfigurationsApi } from "./ObservableAPI";
 import { ConnectionConfigurationsApiRequestFactory, ConnectionConfigurationsApiResponseProcessor} from "../apis/ConnectionConfigurationsApi";
 
@@ -970,7 +1084,7 @@ export class ObjectConnectionsApi {
     }
 
     /**
-     *   Version: 9.2.0.cl or later   Creates a connection to a data warehouse for live query services.    Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  #### Create a connection without tables  To create a connection without tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a SnowFlake connection:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"externalDatabases\":[       ]   }   ``` 2. Set `validate` to `false`.  #### Create a connection with tables  To create a connection with tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"externalDatabases\":[         {            \"name\":\"AllDatatypes\",            \"isAutoCreated\":false,            \"schemas\":[               {                  \"name\":\"alldatatypes\",                  \"tables\":[                     {                        \"name\":\"allDatatypes\",                        \"type\":\"TABLE\",                        \"description\":\"\",                        \"selected\":true,                        \"linked\":true,                        \"columns\":[                           {                              \"name\":\"CNUMBER\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           },                           {                              \"name\":\"CDECIMAL\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           }                        ]                     }                  ]               }            ]         }      ]   }   ``` 2. Set `validate` to `true`.      
+     *   Version: 9.2.0.cl or later   Creates a connection to a data warehouse for live query services.    Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  #### Create a connection without tables  To create a connection without tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a SnowFlake connection:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"authenticationType\": \"SERVICE_ACCOUNT\",      \"externalDatabases\":[       ]   }   ``` 2. Set `validate` to `false`.  **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.  #### Create a connection with tables  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) and `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**) privilege is required.  To create a connection with tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"authenticationType\": \"SERVICE_ACCOUNT\",      \"externalDatabases\":[         {            \"name\":\"AllDatatypes\",            \"isAutoCreated\":false,            \"schemas\":[               {                  \"name\":\"alldatatypes\",                  \"tables\":[                     {                        \"name\":\"allDatatypes\",                        \"type\":\"TABLE\",                        \"description\":\"\",                        \"selected\":true,                        \"linked\":true,                        \"columns\":[                           {                              \"name\":\"CNUMBER\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           },                           {                              \"name\":\"CDECIMAL\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           }                        ]                     }                  ]               }            ]         }      ]   }   ``` 2. Set `validate` to `true`.  **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.      
      * @param param the request object
      */
     public createConnection(param: ConnectionsApiCreateConnectionRequest, options?: Configuration): Promise<CreateConnectionResponse> {
@@ -1758,6 +1872,35 @@ export class ObjectGroupsApi {
 
 }
 
+import { ObservableJobsApi } from "./ObservableAPI";
+import { JobsApiRequestFactory, JobsApiResponseProcessor} from "../apis/JobsApi";
+
+export interface JobsApiSearchChannelHistoryRequest {
+    /**
+     * 
+     * @type SearchChannelHistoryRequest
+     * @memberof JobsApisearchChannelHistory
+     */
+    searchChannelHistoryRequest: SearchChannelHistoryRequest
+}
+
+export class ObjectJobsApi {
+    private api: ObservableJobsApi
+
+    public constructor(configuration: Configuration, requestFactory?: JobsApiRequestFactory, responseProcessor?: JobsApiResponseProcessor) {
+        this.api = new ObservableJobsApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     *   Version: 26.4.0.cl or later   Searches delivery history for communication channels such as webhooks. Returns channel-level delivery status for each job execution record. Use this to monitor channel health and delivery success rates across events.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.  **NOTE**: When `channel_type` is `WEBHOOK`, the following constraints apply:  - `job_ids`, `channel_identifiers`, and `events` each accept at most one element. - When `job_ids` is provided, it is used as the sole lookup key and other filter fields are ignored. - When `job_ids` is not provided, `channel_identifiers` and `events` are both required. Each must contain exactly one element, and the event object must include the `identifier` field. - Records older than the configured retention period are not returned.      
+     * @param param the request object
+     */
+    public searchChannelHistory(param: JobsApiSearchChannelHistoryRequest, options?: Configuration): Promise<SearchChannelHistoryResponse> {
+        return this.api.searchChannelHistory(param.searchChannelHistoryRequest,  options).toPromise();
+    }
+
+}
+
 import { ObservableLogApi } from "./ObservableAPI";
 import { LogApiRequestFactory, LogApiResponseProcessor} from "../apis/LogApi";
 
@@ -1889,6 +2032,15 @@ export interface MetadataApiParameterizeMetadataRequest {
     parameterizeMetadataRequest: ParameterizeMetadataRequest
 }
 
+export interface MetadataApiParameterizeMetadataFieldsRequest {
+    /**
+     * 
+     * @type ParameterizeMetadataFieldsRequest
+     * @memberof MetadataApiparameterizeMetadataFields
+     */
+    parameterizeMetadataFieldsRequest: ParameterizeMetadataFieldsRequest
+}
+
 export interface MetadataApiSearchMetadataRequest {
     /**
      * 
@@ -2018,6 +2170,14 @@ export class ObjectMetadataApi {
      */
     public parameterizeMetadata(param: MetadataApiParameterizeMetadataRequest, options?: Configuration): Promise<void> {
         return this.api.parameterizeMetadata(param.parameterizeMetadataRequest,  options).toPromise();
+    }
+
+    /**
+     *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.4.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
+     * @param param the request object
+     */
+    public parameterizeMetadataFields(param: MetadataApiParameterizeMetadataFieldsRequest, options?: Configuration): Promise<void> {
+        return this.api.parameterizeMetadataFields(param.parameterizeMetadataFieldsRequest,  options).toPromise();
     }
 
     /**
@@ -2597,6 +2757,15 @@ export interface SystemApiUpdateSystemConfigRequest {
     updateSystemConfigRequest: UpdateSystemConfigRequest
 }
 
+export interface SystemApiValidateCommunicationChannelRequest {
+    /**
+     * 
+     * @type ValidateCommunicationChannelRequest
+     * @memberof SystemApivalidateCommunicationChannel
+     */
+    validateCommunicationChannelRequest: ValidateCommunicationChannelRequest
+}
+
 export class ObjectSystemApi {
     private api: ObservableSystemApi
 
@@ -2666,6 +2835,14 @@ export class ObjectSystemApi {
      */
     public updateSystemConfig(param: SystemApiUpdateSystemConfigRequest, options?: Configuration): Promise<void> {
         return this.api.updateSystemConfig(param.updateSystemConfigRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 26.4.0.cl or later   Validates a communication channel configuration to ensure it is properly set up and can receive events. - Use `channel_type` to specify the type of communication channel to validate (e.g., WEBHOOK). - Use `channel_identifier` to provide the unique identifier or name for the communication channel. - Use `event_type` to specify the event type to validate for this channel.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. For webhook channels, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+     * @param param the request object
+     */
+    public validateCommunicationChannel(param: SystemApiValidateCommunicationChannelRequest, options?: Configuration): Promise<CommunicationChannelValidateResponse> {
+        return this.api.validateCommunicationChannel(param.validateCommunicationChannelRequest,  options).toPromise();
     }
 
 }
@@ -2899,6 +3076,15 @@ export interface ThoughtSpotRestApiCreateCalendarRequest {
      * @memberof ThoughtSpotRestApicreateCalendar
      */
     createCalendarRequest: CreateCalendarRequest
+}
+
+export interface ThoughtSpotRestApiCreateCollectionRequest {
+    /**
+     * 
+     * @type CreateCollectionRequest
+     * @memberof ThoughtSpotRestApicreateCollection
+     */
+    createCollectionRequest: CreateCollectionRequest
 }
 
 export interface ThoughtSpotRestApiCreateConfigRequest {
@@ -3159,6 +3345,15 @@ export interface ThoughtSpotRestApiDeleteCalendarRequest {
     calendarIdentifier: string
 }
 
+export interface ThoughtSpotRestApiDeleteCollectionRequest {
+    /**
+     * 
+     * @type DeleteCollectionRequest
+     * @memberof ThoughtSpotRestApideleteCollection
+     */
+    deleteCollectionRequest: DeleteCollectionRequest
+}
+
 export interface ThoughtSpotRestApiDeleteConfigRequest {
     /**
      * 
@@ -3301,6 +3496,15 @@ export interface ThoughtSpotRestApiDeleteVariableRequest {
      * @memberof ThoughtSpotRestApideleteVariable
      */
     identifier: string
+}
+
+export interface ThoughtSpotRestApiDeleteVariablesRequest {
+    /**
+     * 
+     * @type DeleteVariablesRequest
+     * @memberof ThoughtSpotRestApideleteVariables
+     */
+    deleteVariablesRequest: DeleteVariablesRequest
 }
 
 export interface ThoughtSpotRestApiDeleteWebhookConfigurationsRequest {
@@ -3552,6 +3756,15 @@ export interface ThoughtSpotRestApiGetSystemInformationRequest {
 export interface ThoughtSpotRestApiGetSystemOverrideInfoRequest {
 }
 
+export interface ThoughtSpotRestApiGetWebhookStorageConfigRequest {
+    /**
+     * Unique ID or name of the webhook configuration.
+     * @type string
+     * @memberof ThoughtSpotRestApigetWebhookStorageConfig
+     */
+    webhookIdentifier: string
+}
+
 export interface ThoughtSpotRestApiImportMetadataTMLRequest {
     /**
      * 
@@ -3618,6 +3831,15 @@ export interface ThoughtSpotRestApiParameterizeMetadataRequest {
     parameterizeMetadataRequest: ParameterizeMetadataRequest
 }
 
+export interface ThoughtSpotRestApiParameterizeMetadataFieldsRequest {
+    /**
+     * 
+     * @type ParameterizeMetadataFieldsRequest
+     * @memberof ThoughtSpotRestApiparameterizeMetadataFields
+     */
+    parameterizeMetadataFieldsRequest: ParameterizeMetadataFieldsRequest
+}
+
 export interface ThoughtSpotRestApiPublishMetadataRequest {
     /**
      * 
@@ -3625,6 +3847,21 @@ export interface ThoughtSpotRestApiPublishMetadataRequest {
      * @memberof ThoughtSpotRestApipublishMetadata
      */
     publishMetadataRequest: PublishMetadataRequest
+}
+
+export interface ThoughtSpotRestApiPutVariableValuesRequest {
+    /**
+     * Unique ID or name of the variable
+     * @type string
+     * @memberof ThoughtSpotRestApiputVariableValues
+     */
+    identifier: string
+    /**
+     * 
+     * @type PutVariableValuesRequest
+     * @memberof ThoughtSpotRestApiputVariableValues
+     */
+    putVariableValuesRequest: PutVariableValuesRequest
 }
 
 export interface ThoughtSpotRestApiQueryGetDecomposedQueryRequest {
@@ -3691,6 +3928,24 @@ export interface ThoughtSpotRestApiSearchCalendarsRequest {
      * @memberof ThoughtSpotRestApisearchCalendars
      */
     searchCalendarsRequest: SearchCalendarsRequest
+}
+
+export interface ThoughtSpotRestApiSearchChannelHistoryRequest {
+    /**
+     * 
+     * @type SearchChannelHistoryRequest
+     * @memberof ThoughtSpotRestApisearchChannelHistory
+     */
+    searchChannelHistoryRequest: SearchChannelHistoryRequest
+}
+
+export interface ThoughtSpotRestApiSearchCollectionsRequest {
+    /**
+     * 
+     * @type SearchCollectionsRequest
+     * @memberof ThoughtSpotRestApisearchCollections
+     */
+    searchCollectionsRequest: SearchCollectionsRequest
 }
 
 export interface ThoughtSpotRestApiSearchCommitsRequest {
@@ -3952,6 +4207,21 @@ export interface ThoughtSpotRestApiUpdateCalendarRequest {
      * @memberof ThoughtSpotRestApiupdateCalendar
      */
     updateCalendarRequest: UpdateCalendarRequest
+}
+
+export interface ThoughtSpotRestApiUpdateCollectionRequest {
+    /**
+     * Unique GUID of the collection. Note: Collection names cannot be used as identifiers since duplicate names are allowed.
+     * @type string
+     * @memberof ThoughtSpotRestApiupdateCollection
+     */
+    collectionIdentifier: string
+    /**
+     * 
+     * @type UpdateCollectionRequest
+     * @memberof ThoughtSpotRestApiupdateCollection
+     */
+    updateCollectionRequest: UpdateCollectionRequest
 }
 
 export interface ThoughtSpotRestApiUpdateColumnSecurityRulesRequest {
@@ -4260,6 +4530,15 @@ export interface ThoughtSpotRestApiUpdateWebhookConfigurationRequest {
     updateWebhookConfigurationRequest: UpdateWebhookConfigurationRequest
 }
 
+export interface ThoughtSpotRestApiValidateCommunicationChannelRequest {
+    /**
+     * 
+     * @type ValidateCommunicationChannelRequest
+     * @memberof ThoughtSpotRestApivalidateCommunicationChannel
+     */
+    validateCommunicationChannelRequest: ValidateCommunicationChannelRequest
+}
+
 export interface ThoughtSpotRestApiValidateEmailCustomizationRequest {
 }
 
@@ -4385,6 +4664,14 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
+     *   Version: 26.4.0.cl or later   Creates a new collection in ThoughtSpot.  Collections allow you to organize and group related metadata objects such as Liveboards, Answers, worksheets, and other data objects. You can also create nested collections (sub-collections) to build a hierarchical structure.  #### Supported operations  The API endpoint lets you perform the following operations:  * Create a new collection * Add metadata objects (Liveboards, Answers, Logical Tables) to the collection * Create nested collections by adding sub-collections      
+     * @param param the request object
+     */
+    public createCollection(param: ThoughtSpotRestApiCreateCollectionRequest, options?: Configuration): Promise<Collection> {
+        return this.api.createCollection(param.createCollectionRequest,  options).toPromise();
+    }
+
+    /**
      *   Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_SETUP_VERSION_CONTROL` (**Can set up version control**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).  **Note**: ThoughtSpot supports only GitHub / itHub Enterprise for CI/CD.      
      * @param param the request object
      */
@@ -4393,7 +4680,7 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *   Version: 9.2.0.cl or later   Creates a connection to a data warehouse for live query services.    Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  #### Create a connection without tables  To create a connection without tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a SnowFlake connection:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"externalDatabases\":[       ]   }   ``` 2. Set `validate` to `false`.  #### Create a connection with tables  To create a connection with tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"externalDatabases\":[         {            \"name\":\"AllDatatypes\",            \"isAutoCreated\":false,            \"schemas\":[               {                  \"name\":\"alldatatypes\",                  \"tables\":[                     {                        \"name\":\"allDatatypes\",                        \"type\":\"TABLE\",                        \"description\":\"\",                        \"selected\":true,                        \"linked\":true,                        \"columns\":[                           {                              \"name\":\"CNUMBER\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           },                           {                              \"name\":\"CDECIMAL\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           }                        ]                     }                  ]               }            ]         }      ]   }   ``` 2. Set `validate` to `true`.      
+     *   Version: 9.2.0.cl or later   Creates a connection to a data warehouse for live query services.    Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  #### Create a connection without tables  To create a connection without tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a SnowFlake connection:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"authenticationType\": \"SERVICE_ACCOUNT\",      \"externalDatabases\":[       ]   }   ``` 2. Set `validate` to `false`.  **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.  #### Create a connection with tables  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) and `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**) privilege is required.  To create a connection with tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"authenticationType\": \"SERVICE_ACCOUNT\",      \"externalDatabases\":[         {            \"name\":\"AllDatatypes\",            \"isAutoCreated\":false,            \"schemas\":[               {                  \"name\":\"alldatatypes\",                  \"tables\":[                     {                        \"name\":\"allDatatypes\",                        \"type\":\"TABLE\",                        \"description\":\"\",                        \"selected\":true,                        \"linked\":true,                        \"columns\":[                           {                              \"name\":\"CNUMBER\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           },                           {                              \"name\":\"CDECIMAL\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           }                        ]                     }                  ]               }            ]         }      ]   }   ``` 2. Set `validate` to `true`.  **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.      
      * @param param the request object
      */
     public createConnection(param: ThoughtSpotRestApiCreateConnectionRequest, options?: Configuration): Promise<CreateConnectionResponse> {
@@ -4545,6 +4832,14 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
+     *   Version: 26.4.0.cl or later   Deletes one or more collections from ThoughtSpot.  #### Delete options  * **delete_children**: When set to `true`, deletes the child objects (metadata items) within the collection that the user has access to. Objects that the user does not have permission to delete will be skipped. * **dry_run**: When set to `true`, performs a preview of the deletion operation without actually deleting anything. The response shows what would be deleted, allowing you to review before committing the deletion.  #### Response  The response includes: * **metadata_deleted**: List of metadata objects that were successfully deleted * **metadata_skipped**: List of metadata objects that were skipped due to lack of permissions or other constraints      
+     * @param param the request object
+     */
+    public deleteCollection(param: ThoughtSpotRestApiDeleteCollectionRequest, options?: Configuration): Promise<CollectionDeleteResponse> {
+        return this.api.deleteCollection(param.deleteCollectionRequest,  options).toPromise();
+    }
+
+    /**
      *   Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_SETUP_VERSION_CONTROL` (**Can set up version control**) privilege.      
      * @param param the request object
      */
@@ -4670,6 +4965,14 @@ export class ObjectThoughtSpotRestApi {
      */
     public deleteVariable(param: ThoughtSpotRestApiDeleteVariableRequest, options?: Configuration): Promise<void> {
         return this.api.deleteVariable(param.identifier,  options).toPromise();
+    }
+
+    /**
+     *  Delete variable(s)   Version: 26.4.0.cl or later   Allows deleting multiple variables from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifiers (IDs or names)  The operation will fail if: * The user lacks required permissions * Any of the variables don\'t exist * Any of the variables are being used by other objects      
+     * @param param the request object
+     */
+    public deleteVariables(param: ThoughtSpotRestApiDeleteVariablesRequest, options?: Configuration): Promise<void> {
+        return this.api.deleteVariables(param.deleteVariablesRequest,  options).toPromise();
     }
 
     /**
@@ -4921,6 +5224,14 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
+     *  Version: 26.4.0.cl or later   Get storage config information for a webhook configuration. This endpoint provides ThoughtSpot\'s identity information and IAM policy configuration required for customers to set up cross-account access to their S3 buckets.  The setup info returned depends on the ThoughtSpot cluster type: - For AWS clusters: Returns `aws_config` with STS AssumeRole configuration - For GCP clusters: Returns `gcp_config` with STS AssumeRoleWithWebIdentity configuration  **Note:** This endpoint only returns data if the webhook has a storage destination configured.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+     * @param param the request object
+     */
+    public getWebhookStorageConfig(param: ThoughtSpotRestApiGetWebhookStorageConfigRequest, options?: Configuration): Promise<StorageSetupInfo> {
+        return this.api.getWebhookStorageConfig(param.webhookIdentifier,  options).toPromise();
+    }
+
+    /**
      *   Version: 9.0.0.cl or later   Imports [TML](https://docs.thoughtspot.com/cloud/latest/tml) files into ThoughtSpot.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtsSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required: - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### Usage guidelines  *  Import all related objects in a single TML Import API call. For example, Tables that use the same Connection object and Worksheets connected to these Tables. * Include the `fqn` property to distinguish objects that have the same name.   For example, if you have multiple Connections or Worksheets with the same name on ThoughtSpot and the Connection or Worksheet referenced in your TML file does not have a unique name to distinguish, it may result in invalid object references.   Adding `fqn` helps ThoughtSpot differentiate a Table from another with the same name.   We recommend [exporting TML with FQNs](#/http/api-endpoints/metadata/export-metadata-tml) and using these during the import operation. * You can upload multiple TML files at a time.   If you import a Worksheet along with Liveboards, Answers, and other dependent objects in a single API call, the imported objects will be immediately available for use.   When you import only a Worksheet object, it may take some time for the Worksheet to become available in the ThoughtSpot system. Please wait for a few minutes, and then proceed to create an Answer and Liveboard from the newly imported Worksheet.  For more information, see [TML Documentation](https://developers.thoughtspot.com/docs/tml#_import_a_tml).      
      * @param param the request object
      */
@@ -4985,11 +5296,27 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
+     *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.4.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
+     * @param param the request object
+     */
+    public parameterizeMetadataFields(param: ThoughtSpotRestApiParameterizeMetadataFieldsRequest, options?: Configuration): Promise<void> {
+        return this.api.parameterizeMetadataFields(param.parameterizeMetadataFieldsRequest,  options).toPromise();
+    }
+
+    /**
      *  Version: 10.9.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
      * @param param the request object
      */
     public publishMetadata(param: ThoughtSpotRestApiPublishMetadataRequest, options?: Configuration): Promise<void> {
         return this.api.publishMetadata(param.publishMetadataRequest,  options).toPromise();
+    }
+
+    /**
+     *  Update values for a variable   Version: 26.4.0.cl or later   Allows updating values for a specific variable in ThoughtSpot.  Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows: * Adding new values to the variable * Replacing existing values * Deleting values from the variable * Resetting all values  When updating variable values, you need to specify: * The variable identifier (ID or name) * The values to add/replace/remove * The operation to perform (ADD, REPLACE, REMOVE, RESET)  Behaviour based on operation type: * ADD - Adds values to the variable if this is a list type variable, else same as replace. * REPLACE - Replaces all values of a given set of constraints with the current set of values. * REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value. * RESET - Removes all constraints for the given variable, scope is ignored      
+     * @param param the request object
+     */
+    public putVariableValues(param: ThoughtSpotRestApiPutVariableValuesRequest, options?: Configuration): Promise<void> {
+        return this.api.putVariableValues(param.identifier, param.putVariableValuesRequest,  options).toPromise();
     }
 
     /**
@@ -5038,6 +5365,22 @@ export class ObjectThoughtSpotRestApi {
      */
     public searchCalendars(param: ThoughtSpotRestApiSearchCalendarsRequest, options?: Configuration): Promise<Array<CalendarResponse>> {
         return this.api.searchCalendars(param.searchCalendarsRequest,  options).toPromise();
+    }
+
+    /**
+     *   Version: 26.4.0.cl or later   Searches delivery history for communication channels such as webhooks. Returns channel-level delivery status for each job execution record. Use this to monitor channel health and delivery success rates across events.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.  **NOTE**: When `channel_type` is `WEBHOOK`, the following constraints apply:  - `job_ids`, `channel_identifiers`, and `events` each accept at most one element. - When `job_ids` is provided, it is used as the sole lookup key and other filter fields are ignored. - When `job_ids` is not provided, `channel_identifiers` and `events` are both required. Each must contain exactly one element, and the event object must include the `identifier` field. - Records older than the configured retention period are not returned.      
+     * @param param the request object
+     */
+    public searchChannelHistory(param: ThoughtSpotRestApiSearchChannelHistoryRequest, options?: Configuration): Promise<SearchChannelHistoryResponse> {
+        return this.api.searchChannelHistory(param.searchChannelHistoryRequest,  options).toPromise();
+    }
+
+    /**
+     *   Version: 26.4.0.cl or later   Gets a list of collections available in ThoughtSpot.  To get details of a specific collection, specify the collection GUID or name. You can also filter the API response based on the collection name pattern, author, and other criteria.  #### Search options  * **name_pattern**: Use \'%\' as a wildcard character to match collection names * **collection_identifiers**: Search for specific collections by their GUIDs or names * **include_metadata**: When set to `true`, includes the metadata objects within each collection in the response  **NOTE**: If the API returns an empty list, consider increasing the value of the `record_size` parameter. To search across all available collections, set `record_size` to `-1`.      
+     * @param param the request object
+     */
+    public searchCollections(param: ThoughtSpotRestApiSearchCollectionsRequest, options?: Configuration): Promise<CollectionSearchResponse> {
+        return this.api.searchCollections(param.searchCollectionsRequest,  options).toPromise();
     }
 
     /**
@@ -5257,6 +5600,14 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
+     *   Version: 26.4.0.cl or later   Updates an existing collection in ThoughtSpot.  #### Supported operations  This API endpoint lets you perform the following operations:  * Update collection name and description * Change visibility settings * Add metadata objects to the collection (operation: ADD) * Remove metadata objects from the collection (operation: REMOVE) * Replace all metadata objects in the collection (operation: REPLACE)  #### Operation types  * **ADD**: Adds the specified metadata objects to the existing collection without removing current items * **REMOVE**: Removes only the specified metadata objects from the collection * **REPLACE**: Replaces all existing metadata objects with the specified items (default behavior)      
+     * @param param the request object
+     */
+    public updateCollection(param: ThoughtSpotRestApiUpdateCollectionRequest, options?: Configuration): Promise<void> {
+        return this.api.updateCollection(param.collectionIdentifier, param.updateCollectionRequest,  options).toPromise();
+    }
+
+    /**
      *  Version: 10.12.0.cl or later   Creates, updates, or deletes column security rules for specified tables.  This API endpoint allows you to create, update, or delete column-level security rules on columns of a table. The operation follows an \"all or none\" policy: if defining security rules for any of the provided columns fails, the entire operation will be rolled back, and no rules will be created.  #### Usage guidelines  - Provide table identifier using either `identifier` (GUID or name) or `obj_identifier` (object ID) - Use `clear_csr: true` to remove all column security rules from the table - For each column, specify the security rule using `column_security_rules` array - Use `is_unsecured: true` to mark a specific column as unprotected - Use `group_access` operations to manage group associations:   - `ADD`: Add groups to the column\'s access list   - `REMOVE`: Remove groups from the column\'s access list   - `REPLACE`: Replace all existing groups with the specified groups  #### Required permissions  - `ADMINISTRATION` - Can administer ThoughtSpot - `DATAMANAGEMENT` - Can manage data (if RBAC is disabled) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` - Can manage worksheet views and tables (if RBAC is enabled)  #### Example request  ```json {   \"identifier\": \"table-guid\",   \"obj_identifier\": \"table-object-id\",   \"clear_csr\": false,   \"column_security_rules\": [     {       \"column_identifier\": \"col id or col name\",       \"is_unsecured\": false,       \"group_access\": [         {           \"operation\": \"ADD\",           \"group_identifiers\": [\"hr_group_id\", \"hr_group_name\", \"finance_group_id\"]         }       ]     },     {       \"column_identifier\": \"col id or col name\",       \"is_unsecured\": true     },     {       \"column_identifier\": \"col id or col name\",       \"is_unsecured\": false,       \"group_access\": [         {           \"operation\": \"REPLACE\",           \"group_identifiers\": [\"management_group_id\", \"management_group_name\"]         }       ]     }   ] } ```  #### Request Body Schema  - `identifier` (string, optional): GUID or name of the table for which we want to create column security rules - `obj_identifier` (string, optional): The object ID of the table - `clear_csr` (boolean, optional): If true, then all the secured columns will be marked as unprotected, and all the group associations will be removed - `column_security_rules` (array of objects, required): An array where each object defines the security rule for a specific column  Each column security rule object contains: - `column_identifier` (string, required): Column identifier (col_id or name) - `is_unsecured` (boolean, optional): If true, the column will be marked as unprotected and all groups associated with it will be removed - `group_access` (array of objects, optional): Array of group operation objects  Each group operation object contains: - `operation` (string, required): Operation type - ADD, REMOVE, or REPLACE - `group_identifiers` (array of strings, required): Array of group identifiers (name or GUID) on which the operation will be performed  #### Response  This API does not return any response body. A successful operation returns HTTP 200 status code.  #### Operation Types  - **ADD**: Adds the specified groups to the column\'s access list - **REMOVE**: Removes the specified groups from the column\'s access list   - **REPLACE**: Replaces all existing groups with the specified groups      
      * @param param the request object
      */
@@ -5414,6 +5765,14 @@ export class ObjectThoughtSpotRestApi {
      */
     public updateWebhookConfiguration(param: ThoughtSpotRestApiUpdateWebhookConfigurationRequest, options?: Configuration): Promise<void> {
         return this.api.updateWebhookConfiguration(param.webhookIdentifier, param.updateWebhookConfigurationRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 26.4.0.cl or later   Validates a communication channel configuration to ensure it is properly set up and can receive events. - Use `channel_type` to specify the type of communication channel to validate (e.g., WEBHOOK). - Use `channel_identifier` to provide the unique identifier or name for the communication channel. - Use `event_type` to specify the event type to validate for this channel.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. For webhook channels, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+     * @param param the request object
+     */
+    public validateCommunicationChannel(param: ThoughtSpotRestApiValidateCommunicationChannelRequest, options?: Configuration): Promise<CommunicationChannelValidateResponse> {
+        return this.api.validateCommunicationChannel(param.validateCommunicationChannelRequest,  options).toPromise();
     }
 
     /**
@@ -5651,6 +6010,30 @@ export interface VariableApiDeleteVariableRequest {
     identifier: string
 }
 
+export interface VariableApiDeleteVariablesRequest {
+    /**
+     * 
+     * @type DeleteVariablesRequest
+     * @memberof VariableApideleteVariables
+     */
+    deleteVariablesRequest: DeleteVariablesRequest
+}
+
+export interface VariableApiPutVariableValuesRequest {
+    /**
+     * Unique ID or name of the variable
+     * @type string
+     * @memberof VariableApiputVariableValues
+     */
+    identifier: string
+    /**
+     * 
+     * @type PutVariableValuesRequest
+     * @memberof VariableApiputVariableValues
+     */
+    putVariableValuesRequest: PutVariableValuesRequest
+}
+
 export interface VariableApiSearchVariablesRequest {
     /**
      * 
@@ -5705,6 +6088,22 @@ export class ObjectVariableApi {
      */
     public deleteVariable(param: VariableApiDeleteVariableRequest, options?: Configuration): Promise<void> {
         return this.api.deleteVariable(param.identifier,  options).toPromise();
+    }
+
+    /**
+     *  Delete variable(s)   Version: 26.4.0.cl or later   Allows deleting multiple variables from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifiers (IDs or names)  The operation will fail if: * The user lacks required permissions * Any of the variables don\'t exist * Any of the variables are being used by other objects      
+     * @param param the request object
+     */
+    public deleteVariables(param: VariableApiDeleteVariablesRequest, options?: Configuration): Promise<void> {
+        return this.api.deleteVariables(param.deleteVariablesRequest,  options).toPromise();
+    }
+
+    /**
+     *  Update values for a variable   Version: 26.4.0.cl or later   Allows updating values for a specific variable in ThoughtSpot.  Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows: * Adding new values to the variable * Replacing existing values * Deleting values from the variable * Resetting all values  When updating variable values, you need to specify: * The variable identifier (ID or name) * The values to add/replace/remove * The operation to perform (ADD, REPLACE, REMOVE, RESET)  Behaviour based on operation type: * ADD - Adds values to the variable if this is a list type variable, else same as replace. * REPLACE - Replaces all values of a given set of constraints with the current set of values. * REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value. * RESET - Removes all constraints for the given variable, scope is ignored      
+     * @param param the request object
+     */
+    public putVariableValues(param: VariableApiPutVariableValuesRequest, options?: Configuration): Promise<void> {
+        return this.api.putVariableValues(param.identifier, param.putVariableValuesRequest,  options).toPromise();
     }
 
     /**
@@ -5925,6 +6324,15 @@ export interface WebhooksApiDeleteWebhookConfigurationsRequest {
     deleteWebhookConfigurationsRequest: DeleteWebhookConfigurationsRequest
 }
 
+export interface WebhooksApiGetWebhookStorageConfigRequest {
+    /**
+     * Unique ID or name of the webhook configuration.
+     * @type string
+     * @memberof WebhooksApigetWebhookStorageConfig
+     */
+    webhookIdentifier: string
+}
+
 export interface WebhooksApiSearchWebhookConfigurationsRequest {
     /**
      * 
@@ -5970,6 +6378,14 @@ export class ObjectWebhooksApi {
      */
     public deleteWebhookConfigurations(param: WebhooksApiDeleteWebhookConfigurationsRequest, options?: Configuration): Promise<WebhookDeleteResponse> {
         return this.api.deleteWebhookConfigurations(param.deleteWebhookConfigurationsRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 26.4.0.cl or later   Get storage config information for a webhook configuration. This endpoint provides ThoughtSpot\'s identity information and IAM policy configuration required for customers to set up cross-account access to their S3 buckets.  The setup info returned depends on the ThoughtSpot cluster type: - For AWS clusters: Returns `aws_config` with STS AssumeRole configuration - For GCP clusters: Returns `gcp_config` with STS AssumeRoleWithWebIdentity configuration  **Note:** This endpoint only returns data if the webhook has a storage destination configured.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+     * @param param the request object
+     */
+    public getWebhookStorageConfig(param: WebhooksApiGetWebhookStorageConfigRequest, options?: Configuration): Promise<StorageSetupInfo> {
+        return this.api.getWebhookStorageConfig(param.webhookIdentifier,  options).toPromise();
     }
 
     /**

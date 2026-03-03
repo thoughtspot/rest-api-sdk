@@ -13,11 +13,15 @@ import com.thoughtspot.client.model.AssignChangeAuthorRequest;
 import com.thoughtspot.client.model.AssignTagRequest;
 import com.thoughtspot.client.model.CalendarResponse;
 import com.thoughtspot.client.model.ChangeUserPasswordRequest;
+import com.thoughtspot.client.model.Collection;
+import com.thoughtspot.client.model.CollectionDeleteResponse;
+import com.thoughtspot.client.model.CollectionSearchResponse;
 import com.thoughtspot.client.model.ColumnSecurityRuleResponse;
 import com.thoughtspot.client.model.CommitBranchRequest;
 import com.thoughtspot.client.model.CommitHistoryResponse;
 import com.thoughtspot.client.model.CommitResponse;
 import com.thoughtspot.client.model.CommunicationChannelPreferencesResponse;
+import com.thoughtspot.client.model.CommunicationChannelValidateResponse;
 import com.thoughtspot.client.model.ConfigureCommunicationChannelPreferencesRequest;
 import com.thoughtspot.client.model.ConfigureSecuritySettingsRequest;
 import com.thoughtspot.client.model.ConnectionConfigurationResponse;
@@ -27,6 +31,7 @@ import com.thoughtspot.client.model.ConvertWorksheetToModelRequest;
 import com.thoughtspot.client.model.CopyObjectRequest;
 import com.thoughtspot.client.model.CreateAgentConversationRequest;
 import com.thoughtspot.client.model.CreateCalendarRequest;
+import com.thoughtspot.client.model.CreateCollectionRequest;
 import com.thoughtspot.client.model.CreateConfigRequest;
 import com.thoughtspot.client.model.CreateConnectionConfigurationRequest;
 import com.thoughtspot.client.model.CreateConnectionRequest;
@@ -45,11 +50,13 @@ import com.thoughtspot.client.model.CreateVariableRequest;
 import com.thoughtspot.client.model.CreateWebhookConfigurationRequest;
 import com.thoughtspot.client.model.DbtSearchResponse;
 import com.thoughtspot.client.model.DeactivateUserRequest;
+import com.thoughtspot.client.model.DeleteCollectionRequest;
 import com.thoughtspot.client.model.DeleteConfigRequest;
 import com.thoughtspot.client.model.DeleteConnectionConfigurationRequest;
 import com.thoughtspot.client.model.DeleteConnectionRequest;
 import com.thoughtspot.client.model.DeleteMetadataRequest;
 import com.thoughtspot.client.model.DeleteOrgEmailCustomizationRequest;
+import com.thoughtspot.client.model.DeleteVariablesRequest;
 import com.thoughtspot.client.model.DeleteWebhookConfigurationsRequest;
 import com.thoughtspot.client.model.DeployCommitRequest;
 import com.thoughtspot.client.model.DeployResponse;
@@ -97,10 +104,12 @@ import com.thoughtspot.client.model.ManageObjectPrivilegeRequest;
 import com.thoughtspot.client.model.MetadataSearchResponse;
 import com.thoughtspot.client.model.ObjectPrivilegesOfMetadataResponse;
 import com.thoughtspot.client.model.OrgResponse;
+import com.thoughtspot.client.model.ParameterizeMetadataFieldsRequest;
 import com.thoughtspot.client.model.ParameterizeMetadataRequest;
 import com.thoughtspot.client.model.PermissionOfMetadataResponse;
 import com.thoughtspot.client.model.PermissionOfPrincipalsResponse;
 import com.thoughtspot.client.model.PublishMetadataRequest;
+import com.thoughtspot.client.model.PutVariableValuesRequest;
 import com.thoughtspot.client.model.QueryGetDecomposedQueryRequest;
 import com.thoughtspot.client.model.RepoConfigObject;
 import com.thoughtspot.client.model.ResetUserPasswordRequest;
@@ -117,6 +126,9 @@ import com.thoughtspot.client.model.RevokeRefreshTokensResponse;
 import com.thoughtspot.client.model.RevokeTokenRequest;
 import com.thoughtspot.client.model.RoleResponse;
 import com.thoughtspot.client.model.SearchCalendarsRequest;
+import com.thoughtspot.client.model.SearchChannelHistoryRequest;
+import com.thoughtspot.client.model.SearchChannelHistoryResponse;
+import com.thoughtspot.client.model.SearchCollectionsRequest;
 import com.thoughtspot.client.model.SearchCommitsRequest;
 import com.thoughtspot.client.model.SearchCommunicationChannelPreferencesRequest;
 import com.thoughtspot.client.model.SearchConfigRequest;
@@ -146,6 +158,7 @@ import com.thoughtspot.client.model.SetNLInstructionsRequest;
 import com.thoughtspot.client.model.ShareMetadataRequest;
 import com.thoughtspot.client.model.SingleAnswerRequest;
 import com.thoughtspot.client.model.SqlQueryResponse;
+import com.thoughtspot.client.model.StorageSetupInfo;
 import com.thoughtspot.client.model.SystemConfig;
 import com.thoughtspot.client.model.SystemInfo;
 import com.thoughtspot.client.model.SystemOverrideInfo;
@@ -156,6 +169,7 @@ import com.thoughtspot.client.model.UnassignTagRequest;
 import com.thoughtspot.client.model.UnparameterizeMetadataRequest;
 import com.thoughtspot.client.model.UnpublishMetadataRequest;
 import com.thoughtspot.client.model.UpdateCalendarRequest;
+import com.thoughtspot.client.model.UpdateCollectionRequest;
 import com.thoughtspot.client.model.UpdateColumnSecurityRulesRequest;
 import com.thoughtspot.client.model.UpdateConfigRequest;
 import com.thoughtspot.client.model.UpdateConnectionConfigurationRequest;
@@ -177,6 +191,7 @@ import com.thoughtspot.client.model.UpdateVariableValuesRequest;
 import com.thoughtspot.client.model.UpdateWebhookConfigurationRequest;
 import com.thoughtspot.client.model.User;
 import com.thoughtspot.client.model.UserGroupResponse;
+import com.thoughtspot.client.model.ValidateCommunicationChannelRequest;
 import com.thoughtspot.client.model.ValidateMergeRequest;
 import com.thoughtspot.client.model.ValidateTokenRequest;
 import com.thoughtspot.client.model.Variable;
@@ -476,6 +491,23 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     * Version: 26.4.0.cl or later Creates a new collection in ThoughtSpot. Collections allow you to
+     * organize and group related metadata objects such as Liveboards, Answers, worksheets, and
+     * other data objects. You can also create nested collections (sub-collections) to build a
+     * hierarchical structure. #### Supported operations The API endpoint lets you perform the
+     * following operations: * Create a new collection * Add metadata objects (Liveboards, Answers,
+     * Logical Tables) to the collection * Create nested collections by adding sub-collections
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void createCollectionTest() throws ApiException {
+        CreateCollectionRequest createCollectionRequest = null;
+        Collection response = api.createCollection(createCollectionRequest);
+        // TODO: test validations
+    }
+
+    /**
      * Version: 9.2.0.cl or later Allows you to connect a ThoughtSpot instance to a Git repository.
      * Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
      * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
@@ -516,15 +548,23 @@ public class ThoughtSpotRestApiTest {
      * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
      * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
      * \&quot;externalDatabases\&quot;:[ ] } &#x60;&#x60;&#x60; 2. Set &#x60;validate&#x60; to
-     * &#x60;false&#x60;. #### Create a connection with tables To create a connection with tables:
-     * 1. Pass these parameters in your API request. * Name of the connection. * Type of the data
-     * warehouse to connect to. * A JSON map of configuration attributes, database details, and
-     * table properties in &#x60;data_warehouse_config&#x60; as shown in the following example:
-     * &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
-     * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
+     * &#x60;false&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is anything other than
+     * SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload.
+     * If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the
+     * authentication type. #### Create a connection with tables If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) and
+     * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) privilege is
+     * required. To create a connection with tables: 1. Pass these parameters in your API request. *
+     * Name of the connection. * Type of the data warehouse to connect to. * A JSON map of
+     * configuration attributes, database details, and table properties in
+     * &#x60;data_warehouse_config&#x60; as shown in the following example: &#x60;&#x60;&#x60; {
+     * \&quot;configuration\&quot;:{ \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
      * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
      * \&quot;externalDatabases\&quot;:[ { \&quot;name\&quot;:\&quot;AllDatatypes\&quot;,
      * \&quot;isAutoCreated\&quot;:false, \&quot;schemas\&quot;:[ {
      * \&quot;name\&quot;:\&quot;alldatatypes\&quot;, \&quot;tables\&quot;:[ {
@@ -541,7 +581,10 @@ public class ThoughtSpotRestApiTest {
      * \&quot;isImported\&quot;:false, \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,
      * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
      * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; } ] } ] } ] } ] } &#x60;&#x60;&#x60; 2. Set
-     * &#x60;validate&#x60; to &#x60;true&#x60;.
+     * &#x60;validate&#x60; to &#x60;true&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is
+     * anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType
+     * property in the payload. If you do not specify authenticationType, the API will default to
+     * SERVICE_ACCOUNT as the authentication type.
      *
      * @throws ApiException if the Api call fails
      */
@@ -998,6 +1041,26 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     * Version: 26.4.0.cl or later Deletes one or more collections from ThoughtSpot. #### Delete
+     * options * **delete_children**: When set to &#x60;true&#x60;, deletes the child objects
+     * (metadata items) within the collection that the user has access to. Objects that the user
+     * does not have permission to delete will be skipped. * **dry_run**: When set to
+     * &#x60;true&#x60;, performs a preview of the deletion operation without actually deleting
+     * anything. The response shows what would be deleted, allowing you to review before committing
+     * the deletion. #### Response The response includes: * **metadata_deleted**: List of metadata
+     * objects that were successfully deleted * **metadata_skipped**: List of metadata objects that
+     * were skipped due to lack of permissions or other constraints
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void deleteCollectionTest() throws ApiException {
+        DeleteCollectionRequest deleteCollectionRequest = null;
+        CollectionDeleteResponse response = api.deleteCollection(deleteCollectionRequest);
+        // TODO: test validations
+    }
+
+    /**
      * Version: 9.2.0.cl or later Deletes Git repository configuration from your ThoughtSpot
      * instance. Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
      * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
@@ -1269,6 +1332,23 @@ public class ThoughtSpotRestApiTest {
     public void deleteVariableTest() throws ApiException {
         String identifier = null;
         api.deleteVariable(identifier);
+        // TODO: test validations
+    }
+
+    /**
+     * Delete variable(s) Version: 26.4.0.cl or later Allows deleting multiple variables from
+     * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES
+     * permission allows you to manage Formula Variables in the current organization scope. The API
+     * endpoint requires: * The variable identifiers (IDs or names) The operation will fail if: *
+     * The user lacks required permissions * Any of the variables don&#39;t exist * Any of the
+     * variables are being used by other objects
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void deleteVariablesTest() throws ApiException {
+        DeleteVariablesRequest deleteVariablesRequest = null;
+        api.deleteVariables(deleteVariablesRequest);
         // TODO: test validations
     }
 
@@ -2130,6 +2210,29 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     * Version: 26.4.0.cl or later Get storage config information for a webhook configuration. This
+     * endpoint provides ThoughtSpot&#39;s identity information and IAM policy configuration
+     * required for customers to set up cross-account access to their S3 buckets. The setup info
+     * returned depends on the ThoughtSpot cluster type: - For AWS clusters: Returns
+     * &#x60;aws_config&#x60; with STS AssumeRole configuration - For GCP clusters: Returns
+     * &#x60;gcp_config&#x60; with STS AssumeRoleWithWebIdentity configuration **Note:** This
+     * endpoint only returns data if the webhook has a storage destination configured. Requires
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has
+     * developer privilege**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
+     * &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to
+     * perform this action.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getWebhookStorageConfigTest() throws ApiException {
+        String webhookIdentifier = null;
+        StorageSetupInfo response = api.getWebhookStorageConfig(webhookIdentifier);
+        // TODO: test validations
+    }
+
+    /**
      * Version: 9.0.0.cl or later Imports [TML](https://docs.thoughtspot.com/cloud/latest/tml) files
      * into ThoughtSpot. Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or
      * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtsSpot**) privilege. If [Role-Based Access
@@ -2323,6 +2426,29 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     * Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for
+     * LOGICAL_TABLE. Version: 26.4.0.cl or later Allows parameterizing multiple fields of metadata
+     * objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for
+     * LOGICAL_TABLE. Requires appropriate permissions to modify the metadata object. The API
+     * endpoint allows parameterizing the following types of metadata objects: * Logical Tables *
+     * Connections * Connection Configs For a Logical Table, the field type must be
+     * &#x60;ATTRIBUTE&#x60; and field names can include: * databaseName * schemaName * tableName
+     * For a Connection or Connection Config, the field type is always
+     * &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_names specifies the exact properties of
+     * the Connection or Connection Config that need to be parameterized. For Connection Config,
+     * supported field names include: * impersonate_user You can parameterize multiple fields at
+     * once by providing an array of field names.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void parameterizeMetadataFieldsTest() throws ApiException {
+        ParameterizeMetadataFieldsRequest parameterizeMetadataFieldsRequest = null;
+        api.parameterizeMetadataFields(parameterizeMetadataFieldsRequest);
+        // TODO: test validations
+    }
+
+    /**
      * Version: 10.9.0.cl or later Allows publishing metadata objects across organizations in
      * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
      * publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
@@ -2335,6 +2461,30 @@ public class ThoughtSpotRestApiTest {
     public void publishMetadataTest() throws ApiException {
         PublishMetadataRequest publishMetadataRequest = null;
         api.publishMetadata(publishMetadataRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Update values for a variable Version: 26.4.0.cl or later Allows updating values for a
+     * specific variable in ThoughtSpot. Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES
+     * permission allows you to manage Formula Variables in the current organization scope. The API
+     * endpoint allows: * Adding new values to the variable * Replacing existing values * Deleting
+     * values from the variable * Resetting all values When updating variable values, you need to
+     * specify: * The variable identifier (ID or name) * The values to add/replace/remove * The
+     * operation to perform (ADD, REPLACE, REMOVE, RESET) Behaviour based on operation type: * ADD -
+     * Adds values to the variable if this is a list type variable, else same as replace. * REPLACE
+     * - Replaces all values of a given set of constraints with the current set of values. * REMOVE
+     * - Removes any values which match the set of conditions of the variables if this is a list
+     * type variable, else clears value. * RESET - Removes all constraints for the given variable,
+     * scope is ignored
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void putVariableValuesTest() throws ApiException {
+        String identifier = null;
+        PutVariableValuesRequest putVariableValuesRequest = null;
+        api.putVariableValues(identifier, putVariableValuesRequest);
         // TODO: test validations
     }
 
@@ -2460,6 +2610,53 @@ public class ThoughtSpotRestApiTest {
     public void searchCalendarsTest() throws ApiException {
         SearchCalendarsRequest searchCalendarsRequest = null;
         List<CalendarResponse> response = api.searchCalendars(searchCalendarsRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 26.4.0.cl or later Searches delivery history for communication channels such as
+     * webhooks. Returns channel-level delivery status for each job execution record. Use this to
+     * monitor channel health and delivery success rates across events. Requires
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has
+     * developer privilege**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
+     * &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to
+     * perform this action. **NOTE**: When &#x60;channel_type&#x60; is &#x60;WEBHOOK&#x60;, the
+     * following constraints apply: - &#x60;job_ids&#x60;, &#x60;channel_identifiers&#x60;, and
+     * &#x60;events&#x60; each accept at most one element. - When &#x60;job_ids&#x60; is provided,
+     * it is used as the sole lookup key and other filter fields are ignored. - When
+     * &#x60;job_ids&#x60; is not provided, &#x60;channel_identifiers&#x60; and &#x60;events&#x60;
+     * are both required. Each must contain exactly one element, and the event object must include
+     * the &#x60;identifier&#x60; field. - Records older than the configured retention period are
+     * not returned.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void searchChannelHistoryTest() throws ApiException {
+        SearchChannelHistoryRequest searchChannelHistoryRequest = null;
+        SearchChannelHistoryResponse response =
+                api.searchChannelHistory(searchChannelHistoryRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 26.4.0.cl or later Gets a list of collections available in ThoughtSpot. To get
+     * details of a specific collection, specify the collection GUID or name. You can also filter
+     * the API response based on the collection name pattern, author, and other criteria. ####
+     * Search options * **name_pattern**: Use &#39;%&#39; as a wildcard character to match
+     * collection names * **collection_identifiers**: Search for specific collections by their GUIDs
+     * or names * **include_metadata**: When set to &#x60;true&#x60;, includes the metadata objects
+     * within each collection in the response **NOTE**: If the API returns an empty list, consider
+     * increasing the value of the &#x60;record_size&#x60; parameter. To search across all available
+     * collections, set &#x60;record_size&#x60; to &#x60;-1&#x60;.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void searchCollectionsTest() throws ApiException {
+        SearchCollectionsRequest searchCollectionsRequest = null;
+        CollectionSearchResponse response = api.searchCollections(searchCollectionsRequest);
         // TODO: test validations
     }
 
@@ -3114,6 +3311,26 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     * Version: 26.4.0.cl or later Updates an existing collection in ThoughtSpot. #### Supported
+     * operations This API endpoint lets you perform the following operations: * Update collection
+     * name and description * Change visibility settings * Add metadata objects to the collection
+     * (operation: ADD) * Remove metadata objects from the collection (operation: REMOVE) * Replace
+     * all metadata objects in the collection (operation: REPLACE) #### Operation types * **ADD**:
+     * Adds the specified metadata objects to the existing collection without removing current items
+     * * **REMOVE**: Removes only the specified metadata objects from the collection * **REPLACE**:
+     * Replaces all existing metadata objects with the specified items (default behavior)
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void updateCollectionTest() throws ApiException {
+        String collectionIdentifier = null;
+        UpdateCollectionRequest updateCollectionRequest = null;
+        api.updateCollection(collectionIdentifier, updateCollectionRequest);
+        // TODO: test validations
+    }
+
+    /**
      * Version: 10.12.0.cl or later Creates, updates, or deletes column security rules for specified
      * tables. This API endpoint allows you to create, update, or delete column-level security rules
      * on columns of a table. The operation follows an \&quot;all or none\&quot; policy: if defining
@@ -3712,6 +3929,27 @@ public class ThoughtSpotRestApiTest {
         String webhookIdentifier = null;
         UpdateWebhookConfigurationRequest updateWebhookConfigurationRequest = null;
         api.updateWebhookConfiguration(webhookIdentifier, updateWebhookConfigurationRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 26.4.0.cl or later Validates a communication channel configuration to ensure it is
+     * properly set up and can receive events. - Use &#x60;channel_type&#x60; to specify the type of
+     * communication channel to validate (e.g., WEBHOOK). - Use &#x60;channel_identifier&#x60; to
+     * provide the unique identifier or name for the communication channel. - Use
+     * &#x60;event_type&#x60; to specify the event type to validate for this channel. Requires
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has
+     * developer privilege**) privilege. For webhook channels, users with
+     * &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to
+     * perform this action.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void validateCommunicationChannelTest() throws ApiException {
+        ValidateCommunicationChannelRequest validateCommunicationChannelRequest = null;
+        CommunicationChannelValidateResponse response =
+                api.validateCommunicationChannel(validateCommunicationChannelRequest);
         // TODO: test validations
     }
 

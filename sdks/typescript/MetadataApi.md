@@ -15,6 +15,7 @@ Method | HTTP request | Description
 [**importMetadataTML**](MetadataApi.md#importMetadataTML) | **POST** /api/rest/2.0/metadata/tml/import | 
 [**importMetadataTMLAsync**](MetadataApi.md#importMetadataTMLAsync) | **POST** /api/rest/2.0/metadata/tml/async/import | 
 [**parameterizeMetadata**](MetadataApi.md#parameterizeMetadata) | **POST** /api/rest/2.0/metadata/parameterize | 
+[**parameterizeMetadataFields**](MetadataApi.md#parameterizeMetadataFields) | **POST** /api/rest/2.0/metadata/parameterize-fields | 
 [**searchMetadata**](MetadataApi.md#searchMetadata) | **POST** /api/rest/2.0/metadata/search | 
 [**unparameterizeMetadata**](MetadataApi.md#unparameterizeMetadata) | **POST** /api/rest/2.0/metadata/unparameterize | 
 [**updateMetadataHeader**](MetadataApi.md#updateMetadataHeader) | **POST** /api/rest/2.0/metadata/headers/update | 
@@ -743,6 +744,74 @@ apiInstance.parameterizeMetadata(
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **parameterizeMetadataRequest** | **ParameterizeMetadataRequest**|  |
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Parameterize successful. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **parameterizeMetadataFields**
+> void parameterizeMetadataFields(parameterizeMetadataFieldsRequest)
+
+ Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.4.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, MetadataApi, ParameterizeMetadataFieldsRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new MetadataApi(configuration);
+
+apiInstance.parameterizeMetadataFields(
+  // ParameterizeMetadataFieldsRequest
+  {
+    metadata_type: "LOGICAL_TABLE",
+    metadata_identifier: "metadata_identifier_example",
+    field_type: "ATTRIBUTE",
+    field_names: [
+      "field_names_example",
+    ],
+    variable_identifier: "variable_identifier_example",
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **parameterizeMetadataFieldsRequest** | **ParameterizeMetadataFieldsRequest**|  |
 
 
 ### Return type

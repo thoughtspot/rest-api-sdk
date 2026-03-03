@@ -15,6 +15,7 @@ import com.thoughtspot.client.Pair;
 import com.thoughtspot.client.model.CreateWebhookConfigurationRequest;
 import com.thoughtspot.client.model.DeleteWebhookConfigurationsRequest;
 import com.thoughtspot.client.model.SearchWebhookConfigurationsRequest;
+import com.thoughtspot.client.model.StorageSetupInfo;
 import com.thoughtspot.client.model.UpdateWebhookConfigurationRequest;
 import com.thoughtspot.client.model.WebhookDeleteResponse;
 import com.thoughtspot.client.model.WebhookResponse;
@@ -466,6 +467,207 @@ public class WebhooksApi {
                 deleteWebhookConfigurationsValidateBeforeCall(
                         deleteWebhookConfigurationsRequest, _callback);
         Type localVarReturnType = new TypeToken<WebhookDeleteResponse>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getWebhookStorageConfig
+     *
+     * @param webhookIdentifier Unique ID or name of the webhook configuration. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Storage setup information retrieved successfully </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. Webhook not found or does not have storage destination configured. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call getWebhookStorageConfigCall(
+            String webhookIdentifier, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath =
+                "/api/rest/2.0/webhooks/{webhook_identifier}/storage-config"
+                        .replace(
+                                "{" + "webhook_identifier" + "}",
+                                localVarApiClient.escapeString(webhookIdentifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "GET",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getWebhookStorageConfigValidateBeforeCall(
+            String webhookIdentifier, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'webhookIdentifier' is set
+        if (webhookIdentifier == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'webhookIdentifier' when calling"
+                            + " getWebhookStorageConfig(Async)");
+        }
+
+        return getWebhookStorageConfigCall(webhookIdentifier, _callback);
+    }
+
+    /**
+     * Version: 26.4.0.cl or later Get storage config information for a webhook configuration. This
+     * endpoint provides ThoughtSpot&#39;s identity information and IAM policy configuration
+     * required for customers to set up cross-account access to their S3 buckets. The setup info
+     * returned depends on the ThoughtSpot cluster type: - For AWS clusters: Returns
+     * &#x60;aws_config&#x60; with STS AssumeRole configuration - For GCP clusters: Returns
+     * &#x60;gcp_config&#x60; with STS AssumeRoleWithWebIdentity configuration **Note:** This
+     * endpoint only returns data if the webhook has a storage destination configured. Requires
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has
+     * developer privilege**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
+     * &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to
+     * perform this action.
+     *
+     * @param webhookIdentifier Unique ID or name of the webhook configuration. (required)
+     * @return StorageSetupInfo
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Storage setup information retrieved successfully </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. Webhook not found or does not have storage destination configured. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public StorageSetupInfo getWebhookStorageConfig(String webhookIdentifier) throws ApiException {
+        ApiResponse<StorageSetupInfo> localVarResp =
+                getWebhookStorageConfigWithHttpInfo(webhookIdentifier);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Version: 26.4.0.cl or later Get storage config information for a webhook configuration. This
+     * endpoint provides ThoughtSpot&#39;s identity information and IAM policy configuration
+     * required for customers to set up cross-account access to their S3 buckets. The setup info
+     * returned depends on the ThoughtSpot cluster type: - For AWS clusters: Returns
+     * &#x60;aws_config&#x60; with STS AssumeRole configuration - For GCP clusters: Returns
+     * &#x60;gcp_config&#x60; with STS AssumeRoleWithWebIdentity configuration **Note:** This
+     * endpoint only returns data if the webhook has a storage destination configured. Requires
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has
+     * developer privilege**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
+     * &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to
+     * perform this action.
+     *
+     * @param webhookIdentifier Unique ID or name of the webhook configuration. (required)
+     * @return ApiResponse&lt;StorageSetupInfo&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Storage setup information retrieved successfully </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. Webhook not found or does not have storage destination configured. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<StorageSetupInfo> getWebhookStorageConfigWithHttpInfo(
+            String webhookIdentifier) throws ApiException {
+        okhttp3.Call localVarCall =
+                getWebhookStorageConfigValidateBeforeCall(webhookIdentifier, null);
+        Type localVarReturnType = new TypeToken<StorageSetupInfo>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Version: 26.4.0.cl or later Get storage config information for a webhook
+     * configuration. This endpoint provides ThoughtSpot&#39;s identity information and IAM policy
+     * configuration required for customers to set up cross-account access to their S3 buckets. The
+     * setup info returned depends on the ThoughtSpot cluster type: - For AWS clusters: Returns
+     * &#x60;aws_config&#x60; with STS AssumeRole configuration - For GCP clusters: Returns
+     * &#x60;gcp_config&#x60; with STS AssumeRoleWithWebIdentity configuration **Note:** This
+     * endpoint only returns data if the webhook has a storage destination configured. Requires
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has
+     * developer privilege**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
+     * &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to
+     * perform this action.
+     *
+     * @param webhookIdentifier Unique ID or name of the webhook configuration. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Storage setup information retrieved successfully </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. Webhook not found or does not have storage destination configured. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call getWebhookStorageConfigAsync(
+            String webhookIdentifier, final ApiCallback<StorageSetupInfo> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                getWebhookStorageConfigValidateBeforeCall(webhookIdentifier, _callback);
+        Type localVarReturnType = new TypeToken<StorageSetupInfo>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

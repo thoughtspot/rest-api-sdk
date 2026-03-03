@@ -11,7 +11,7 @@
  */
 
 import { FavoriteMetadataInput } from '../models/FavoriteMetadataInput';
-import { SearchUsersRequestSortOptions } from '../models/SearchUsersRequestSortOptions';
+import { SearchCollectionsRequestSortOptions } from '../models/SearchCollectionsRequestSortOptions';
 import { HttpFile } from '../http/http';
 
 export class SearchUsersRequest {
@@ -83,7 +83,7 @@ export class SearchUsersRequest {
     * The number of records that should be included.
     */
     'record_size'?: number;
-    'sort_options'?: SearchUsersRequestSortOptions;
+    'sort_options'?: SearchCollectionsRequestSortOptions;
     /**
     * Filters by the role assigned to the user.
     */
@@ -205,7 +205,7 @@ export class SearchUsersRequest {
         {
             "name": "sort_options",
             "baseName": "sort_options",
-            "type": "SearchUsersRequestSortOptions",
+            "type": "SearchCollectionsRequestSortOptions",
             "format": ""
         },
         {

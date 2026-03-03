@@ -13,6 +13,7 @@
 import { CreateWebhookConfigurationRequestAuthentication } from '../models/CreateWebhookConfigurationRequestAuthentication';
 import { CreateWebhookConfigurationRequestSignatureVerification } from '../models/CreateWebhookConfigurationRequestSignatureVerification';
 import { CreateWebhookConfigurationRequestStorageDestination } from '../models/CreateWebhookConfigurationRequestStorageDestination';
+import { WebhookKeyValuePairInput } from '../models/WebhookKeyValuePairInput';
 import { HttpFile } from '../http/http';
 
 export class CreateWebhookConfigurationRequest {
@@ -39,6 +40,10 @@ export class CreateWebhookConfigurationRequest {
     'authentication'?: CreateWebhookConfigurationRequestAuthentication;
     'signature_verification'?: CreateWebhookConfigurationRequestSignatureVerification;
     'storage_destination'?: CreateWebhookConfigurationRequestStorageDestination;
+    /**
+    * Additional headers as an array of key-value pairs. Example: [{\"key\": \"X-Custom-Header\", \"value\": \"custom_value\"}]    Version: 26.4.0.cl or later 
+    */
+    'additional_headers'?: Array<WebhookKeyValuePairInput>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -89,6 +94,12 @@ export class CreateWebhookConfigurationRequest {
             "name": "storage_destination",
             "baseName": "storage_destination",
             "type": "CreateWebhookConfigurationRequestStorageDestination",
+            "format": ""
+        },
+        {
+            "name": "additional_headers",
+            "baseName": "additional_headers",
+            "type": "Array<WebhookKeyValuePairInput>",
             "format": ""
         }    ];
 

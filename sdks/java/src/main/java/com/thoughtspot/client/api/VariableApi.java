@@ -13,6 +13,8 @@ import com.thoughtspot.client.ApiResponse;
 import com.thoughtspot.client.Configuration;
 import com.thoughtspot.client.Pair;
 import com.thoughtspot.client.model.CreateVariableRequest;
+import com.thoughtspot.client.model.DeleteVariablesRequest;
+import com.thoughtspot.client.model.PutVariableValuesRequest;
 import com.thoughtspot.client.model.SearchVariablesRequest;
 import com.thoughtspot.client.model.UpdateVariableRequest;
 import com.thoughtspot.client.model.UpdateVariableValuesRequest;
@@ -298,7 +300,10 @@ public class VariableApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call deleteVariableCall(String identifier, final ApiCallback _callback)
             throws ApiException {
         String basePath = null;
@@ -357,6 +362,7 @@ public class VariableApi {
                 _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call deleteVariableValidateBeforeCall(
             String identifier, final ApiCallback _callback) throws ApiException {
@@ -390,7 +396,10 @@ public class VariableApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public void deleteVariable(String identifier) throws ApiException {
         deleteVariableWithHttpInfo(identifier);
     }
@@ -416,7 +425,10 @@ public class VariableApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public ApiResponse<Void> deleteVariableWithHttpInfo(String identifier) throws ApiException {
         okhttp3.Call localVarCall = deleteVariableValidateBeforeCall(identifier, null);
         return localVarApiClient.execute(localVarCall);
@@ -445,11 +457,408 @@ public class VariableApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call deleteVariableAsync(String identifier, final ApiCallback<Void> _callback)
             throws ApiException {
 
         okhttp3.Call localVarCall = deleteVariableValidateBeforeCall(identifier, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for deleteVariables
+     *
+     * @param deleteVariablesRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Deletion of variable(s) is successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call deleteVariablesCall(
+            DeleteVariablesRequest deleteVariablesRequest, final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = deleteVariablesRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/template/variables/delete";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call deleteVariablesValidateBeforeCall(
+            DeleteVariablesRequest deleteVariablesRequest, final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'deleteVariablesRequest' is set
+        if (deleteVariablesRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'deleteVariablesRequest' when calling"
+                            + " deleteVariables(Async)");
+        }
+
+        return deleteVariablesCall(deleteVariablesRequest, _callback);
+    }
+
+    /**
+     * Delete variable(s) Version: 26.4.0.cl or later Allows deleting multiple variables from
+     * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES
+     * permission allows you to manage Formula Variables in the current organization scope. The API
+     * endpoint requires: * The variable identifiers (IDs or names) The operation will fail if: *
+     * The user lacks required permissions * Any of the variables don&#39;t exist * Any of the
+     * variables are being used by other objects
+     *
+     * @param deleteVariablesRequest (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Deletion of variable(s) is successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public void deleteVariables(DeleteVariablesRequest deleteVariablesRequest) throws ApiException {
+        deleteVariablesWithHttpInfo(deleteVariablesRequest);
+    }
+
+    /**
+     * Delete variable(s) Version: 26.4.0.cl or later Allows deleting multiple variables from
+     * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES
+     * permission allows you to manage Formula Variables in the current organization scope. The API
+     * endpoint requires: * The variable identifiers (IDs or names) The operation will fail if: *
+     * The user lacks required permissions * Any of the variables don&#39;t exist * Any of the
+     * variables are being used by other objects
+     *
+     * @param deleteVariablesRequest (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Deletion of variable(s) is successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<Void> deleteVariablesWithHttpInfo(
+            DeleteVariablesRequest deleteVariablesRequest) throws ApiException {
+        okhttp3.Call localVarCall = deleteVariablesValidateBeforeCall(deleteVariablesRequest, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     * (asynchronously) Delete variable(s) Version: 26.4.0.cl or later Allows deleting multiple
+     * variables from ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The
+     * CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current
+     * organization scope. The API endpoint requires: * The variable identifiers (IDs or names) The
+     * operation will fail if: * The user lacks required permissions * Any of the variables
+     * don&#39;t exist * Any of the variables are being used by other objects
+     *
+     * @param deleteVariablesRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Deletion of variable(s) is successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call deleteVariablesAsync(
+            DeleteVariablesRequest deleteVariablesRequest, final ApiCallback<Void> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                deleteVariablesValidateBeforeCall(deleteVariablesRequest, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for putVariableValues
+     *
+     * @param identifier Unique ID or name of the variable (required)
+     * @param putVariableValuesRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Variable values updated successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call putVariableValuesCall(
+            String identifier,
+            PutVariableValuesRequest putVariableValuesRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = putVariableValuesRequest;
+
+        // create path and map variables
+        String localVarPath =
+                "/api/rest/2.0/template/variables/{identifier}/update-values"
+                        .replace(
+                                "{" + "identifier" + "}",
+                                localVarApiClient.escapeString(identifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call putVariableValuesValidateBeforeCall(
+            String identifier,
+            PutVariableValuesRequest putVariableValuesRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'identifier' is set
+        if (identifier == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'identifier' when calling"
+                            + " putVariableValues(Async)");
+        }
+
+        // verify the required parameter 'putVariableValuesRequest' is set
+        if (putVariableValuesRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'putVariableValuesRequest' when calling"
+                            + " putVariableValues(Async)");
+        }
+
+        return putVariableValuesCall(identifier, putVariableValuesRequest, _callback);
+    }
+
+    /**
+     * Update values for a variable Version: 26.4.0.cl or later Allows updating values for a
+     * specific variable in ThoughtSpot. Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES
+     * permission allows you to manage Formula Variables in the current organization scope. The API
+     * endpoint allows: * Adding new values to the variable * Replacing existing values * Deleting
+     * values from the variable * Resetting all values When updating variable values, you need to
+     * specify: * The variable identifier (ID or name) * The values to add/replace/remove * The
+     * operation to perform (ADD, REPLACE, REMOVE, RESET) Behaviour based on operation type: * ADD -
+     * Adds values to the variable if this is a list type variable, else same as replace. * REPLACE
+     * - Replaces all values of a given set of constraints with the current set of values. * REMOVE
+     * - Removes any values which match the set of conditions of the variables if this is a list
+     * type variable, else clears value. * RESET - Removes all constraints for the given variable,
+     * scope is ignored
+     *
+     * @param identifier Unique ID or name of the variable (required)
+     * @param putVariableValuesRequest (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Variable values updated successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public void putVariableValues(
+            String identifier, PutVariableValuesRequest putVariableValuesRequest)
+            throws ApiException {
+        putVariableValuesWithHttpInfo(identifier, putVariableValuesRequest);
+    }
+
+    /**
+     * Update values for a variable Version: 26.4.0.cl or later Allows updating values for a
+     * specific variable in ThoughtSpot. Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES
+     * permission allows you to manage Formula Variables in the current organization scope. The API
+     * endpoint allows: * Adding new values to the variable * Replacing existing values * Deleting
+     * values from the variable * Resetting all values When updating variable values, you need to
+     * specify: * The variable identifier (ID or name) * The values to add/replace/remove * The
+     * operation to perform (ADD, REPLACE, REMOVE, RESET) Behaviour based on operation type: * ADD -
+     * Adds values to the variable if this is a list type variable, else same as replace. * REPLACE
+     * - Replaces all values of a given set of constraints with the current set of values. * REMOVE
+     * - Removes any values which match the set of conditions of the variables if this is a list
+     * type variable, else clears value. * RESET - Removes all constraints for the given variable,
+     * scope is ignored
+     *
+     * @param identifier Unique ID or name of the variable (required)
+     * @param putVariableValuesRequest (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Variable values updated successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<Void> putVariableValuesWithHttpInfo(
+            String identifier, PutVariableValuesRequest putVariableValuesRequest)
+            throws ApiException {
+        okhttp3.Call localVarCall =
+                putVariableValuesValidateBeforeCall(identifier, putVariableValuesRequest, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     * (asynchronously) Update values for a variable Version: 26.4.0.cl or later Allows updating
+     * values for a specific variable in ThoughtSpot. Requires ADMINISTRATION role. The
+     * CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current
+     * organization scope. The API endpoint allows: * Adding new values to the variable * Replacing
+     * existing values * Deleting values from the variable * Resetting all values When updating
+     * variable values, you need to specify: * The variable identifier (ID or name) * The values to
+     * add/replace/remove * The operation to perform (ADD, REPLACE, REMOVE, RESET) Behaviour based
+     * on operation type: * ADD - Adds values to the variable if this is a list type variable, else
+     * same as replace. * REPLACE - Replaces all values of a given set of constraints with the
+     * current set of values. * REMOVE - Removes any values which match the set of conditions of the
+     * variables if this is a list type variable, else clears value. * RESET - Removes all
+     * constraints for the given variable, scope is ignored
+     *
+     * @param identifier Unique ID or name of the variable (required)
+     * @param putVariableValuesRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Variable values updated successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call putVariableValuesAsync(
+            String identifier,
+            PutVariableValuesRequest putVariableValuesRequest,
+            final ApiCallback<Void> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                putVariableValuesValidateBeforeCall(
+                        identifier, putVariableValuesRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -850,7 +1259,10 @@ public class VariableApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call updateVariableValuesCall(
             UpdateVariableValuesRequest updateVariableValuesRequest, final ApiCallback _callback)
             throws ApiException {
@@ -906,6 +1318,7 @@ public class VariableApi {
                 _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call updateVariableValuesValidateBeforeCall(
             UpdateVariableValuesRequest updateVariableValuesRequest, final ApiCallback _callback)
@@ -946,7 +1359,10 @@ public class VariableApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public void updateVariableValues(UpdateVariableValuesRequest updateVariableValuesRequest)
             throws ApiException {
         updateVariableValuesWithHttpInfo(updateVariableValuesRequest);
@@ -979,7 +1395,10 @@ public class VariableApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public ApiResponse<Void> updateVariableValuesWithHttpInfo(
             UpdateVariableValuesRequest updateVariableValuesRequest) throws ApiException {
         okhttp3.Call localVarCall =
@@ -1016,7 +1435,10 @@ public class VariableApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call updateVariableValuesAsync(
             UpdateVariableValuesRequest updateVariableValuesRequest,
             final ApiCallback<Void> _callback)

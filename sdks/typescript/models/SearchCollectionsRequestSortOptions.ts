@@ -15,15 +15,15 @@ import { HttpFile } from '../http/http';
 /**
 * Sort options.
 */
-export class SearchUsersRequestSortOptions {
+export class SearchCollectionsRequestSortOptions {
     /**
     * Name of the field to apply the sort on.
     */
-    'field_name'?: SearchUsersRequestSortOptionsFieldNameEnum | null;
+    'field_name'?: SearchCollectionsRequestSortOptionsFieldNameEnum | null;
     /**
     * Sort order : ASC(Ascending) or DESC(Descending).
     */
-    'order'?: SearchUsersRequestSortOptionsOrderEnum | null;
+    'order'?: SearchCollectionsRequestSortOptionsOrderEnum | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -31,18 +31,18 @@ export class SearchUsersRequestSortOptions {
         {
             "name": "field_name",
             "baseName": "field_name",
-            "type": "SearchUsersRequestSortOptionsFieldNameEnum",
+            "type": "SearchCollectionsRequestSortOptionsFieldNameEnum",
             "format": ""
         },
         {
             "name": "order",
             "baseName": "order",
-            "type": "SearchUsersRequestSortOptionsOrderEnum",
+            "type": "SearchCollectionsRequestSortOptionsOrderEnum",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return SearchUsersRequestSortOptions.attributeTypeMap;
+        return SearchCollectionsRequestSortOptions.attributeTypeMap;
     }
 
     public constructor() {
@@ -50,6 +50,6 @@ export class SearchUsersRequestSortOptions {
 }
 
 
-export type SearchUsersRequestSortOptionsFieldNameEnum = "NAME" | "DISPLAY_NAME" | "AUTHOR" | "CREATED" | "MODIFIED" ;
-export type SearchUsersRequestSortOptionsOrderEnum = "ASC" | "DESC" ;
+export type SearchCollectionsRequestSortOptionsFieldNameEnum = "NAME" | "DISPLAY_NAME" | "AUTHOR" | "CREATED" | "MODIFIED" ;
+export type SearchCollectionsRequestSortOptionsOrderEnum = "ASC" | "DESC" ;
 
