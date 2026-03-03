@@ -1172,18 +1172,26 @@ paths:
         \ attributes for a SnowFlake connection:\n  ```\n  {\n     \"configuration\"\
         :{\n        \"accountName\":\"thoughtspot_partner\",\n        \"user\":\"\
         tsadmin\",\n        \"password\":\"TestConn123\",\n        \"role\":\"sysadmin\"\
-        ,\n        \"warehouse\":\"MEDIUM_WH\"\n     },\n     \"externalDatabases\"\
-        :[\n\n     ]\n  }\n  ```\n2. Set `validate` to `false`.\n\n#### Create a connection\
-        \ with tables\n\nTo create a connection with tables:\n\n1. Pass these parameters\
-        \ in your API request.\n * Name of the connection.\n * Type of the data warehouse\
-        \ to connect to.\n * A JSON map of configuration attributes, database details,\
-        \ and table properties in `data_warehouse_config` as shown in the following\
-        \ example:\n  ```\n  {\n     \"configuration\":{\n        \"accountName\"\
-        :\"thoughtspot_partner\",\n        \"user\":\"tsadmin\",\n        \"password\"\
-        :\"TestConn123\",\n        \"role\":\"sysadmin\",\n        \"warehouse\":\"\
-        MEDIUM_WH\"\n     },\n     \"externalDatabases\":[\n        {\n          \
-        \ \"name\":\"AllDatatypes\",\n           \"isAutoCreated\":false,\n      \
-        \     \"schemas\":[\n              {\n                 \"name\":\"alldatatypes\"\
+        ,\n        \"warehouse\":\"MEDIUM_WH\"\n     },\n     \"authenticationType\"\
+        : \"SERVICE_ACCOUNT\",\n     \"externalDatabases\":[\n\n     ]\n  }\n  ```\n\
+        2. Set `validate` to `false`.\n\n**NOTE:** If the `authentication_type` is\
+        \ anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType\
+        \ property in the payload. If you do not specify authenticationType, the API\
+        \ will default to SERVICE_ACCOUNT as the authentication type.\n\n#### Create\
+        \ a connection with tables\n\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
+        \ is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can\
+        \ create/edit Connections**) and `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can\
+        \ manage data models**) privilege is required.\n\nTo create a connection with\
+        \ tables:\n\n1. Pass these parameters in your API request.\n * Name of the\
+        \ connection.\n * Type of the data warehouse to connect to.\n * A JSON map\
+        \ of configuration attributes, database details, and table properties in `data_warehouse_config`\
+        \ as shown in the following example:\n  ```\n  {\n     \"configuration\":{\n\
+        \        \"accountName\":\"thoughtspot_partner\",\n        \"user\":\"tsadmin\"\
+        ,\n        \"password\":\"TestConn123\",\n        \"role\":\"sysadmin\",\n\
+        \        \"warehouse\":\"MEDIUM_WH\"\n     },\n     \"authenticationType\"\
+        : \"SERVICE_ACCOUNT\",\n     \"externalDatabases\":[\n        {\n        \
+        \   \"name\":\"AllDatatypes\",\n           \"isAutoCreated\":false,\n    \
+        \       \"schemas\":[\n              {\n                 \"name\":\"alldatatypes\"\
         ,\n                 \"tables\":[\n                    {\n                \
         \       \"name\":\"allDatatypes\",\n                       \"type\":\"TABLE\"\
         ,\n                       \"description\":\"\",\n                       \"\
@@ -1205,7 +1213,10 @@ paths:
         \                  \"dbName\":\"AllDatatypes\"\n                         \
         \ }\n                       ]\n                    }\n                 ]\n\
         \              }\n           ]\n        }\n     ]\n  }\n  ```\n2. Set `validate`\
-        \ to `true`.\n\n\n\n\n\n"
+        \ to `true`.\n\n**NOTE:** If the `authentication_type` is anything other than\
+        \ SERVICE_ACCOUNT, you must explicitly provide the authenticationType property\
+        \ in the payload. If you do not specify authenticationType, the API will default\
+        \ to SERVICE_ACCOUNT as the authentication type.\n\n\n\n\n\n"
       operationId: createConnection
       parameters: []
       requestBody:

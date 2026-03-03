@@ -38,15 +38,23 @@ public class ConnectionsApiTest {
      * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
      * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
      * \&quot;externalDatabases\&quot;:[ ] } &#x60;&#x60;&#x60; 2. Set &#x60;validate&#x60; to
-     * &#x60;false&#x60;. #### Create a connection with tables To create a connection with tables:
-     * 1. Pass these parameters in your API request. * Name of the connection. * Type of the data
-     * warehouse to connect to. * A JSON map of configuration attributes, database details, and
-     * table properties in &#x60;data_warehouse_config&#x60; as shown in the following example:
-     * &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
-     * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
+     * &#x60;false&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is anything other than
+     * SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload.
+     * If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the
+     * authentication type. #### Create a connection with tables If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) and
+     * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) privilege is
+     * required. To create a connection with tables: 1. Pass these parameters in your API request. *
+     * Name of the connection. * Type of the data warehouse to connect to. * A JSON map of
+     * configuration attributes, database details, and table properties in
+     * &#x60;data_warehouse_config&#x60; as shown in the following example: &#x60;&#x60;&#x60; {
+     * \&quot;configuration\&quot;:{ \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
      * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
      * \&quot;externalDatabases\&quot;:[ { \&quot;name\&quot;:\&quot;AllDatatypes\&quot;,
      * \&quot;isAutoCreated\&quot;:false, \&quot;schemas\&quot;:[ {
      * \&quot;name\&quot;:\&quot;alldatatypes\&quot;, \&quot;tables\&quot;:[ {
@@ -63,7 +71,10 @@ public class ConnectionsApiTest {
      * \&quot;isImported\&quot;:false, \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,
      * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
      * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; } ] } ] } ] } ] } &#x60;&#x60;&#x60; 2. Set
-     * &#x60;validate&#x60; to &#x60;true&#x60;.
+     * &#x60;validate&#x60; to &#x60;true&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is
+     * anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType
+     * property in the payload. If you do not specify authenticationType, the API will default to
+     * SERVICE_ACCOUNT as the authentication type.
      *
      * @throws ApiException if the Api call fails
      */
