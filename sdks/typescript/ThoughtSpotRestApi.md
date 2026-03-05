@@ -6941,7 +6941,7 @@ apiInstance.searchChannelHistory(
         identifier: "identifier_example",
       },
     ],
-    start_epoch_time_in_millis: {},
+    start_epoch_time_in_millis: 3.14,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);

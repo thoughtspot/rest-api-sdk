@@ -12,7 +12,7 @@
 |**channelIdentifiers** | **List&lt;String&gt;** | List of channel IDs or names to filter by. |  [optional] |
 |**channelStatus** | [**ChannelStatusEnum**](#ChannelStatusEnum) | Filter by channel delivery status. |  [optional] |
 |**events** | [**List&lt;ChannelHistoryEventInput&gt;**](ChannelHistoryEventInput.md) | Filter by events that triggered the channel. |  [optional] |
-|**startEpochTimeInMillis** | **Object** | Filter records created on or after this time (epoch milliseconds). |  [optional] |
+|**startEpochTimeInMillis** | **Float** | Filter records created on or after this time (epoch milliseconds). |  [optional] |
 
 
 

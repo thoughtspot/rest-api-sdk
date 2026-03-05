@@ -32,6 +32,7 @@ export * from '../models/CALLBACKInput';
 export * from '../models/CALLBACKInputMandatory';
 export * from '../models/CalendarResponse';
 export * from '../models/ChangeUserPasswordRequest';
+export * from '../models/ChannelHistoryEventInfo';
 export * from '../models/ChannelHistoryEventInput';
 export * from '../models/ChannelHistoryJob';
 export * from '../models/ChannelValidationAwsS3Info';
@@ -207,6 +208,7 @@ export * from '../models/JWTMetadataObject';
 export * from '../models/JWTParameter';
 export * from '../models/JWTUserOptions';
 export * from '../models/JWTUserOptionsFull';
+export * from '../models/JobRecipient';
 export * from '../models/LBContextInput';
 export * from '../models/LiveboardContent';
 export * from '../models/LiveboardDataResponse';
@@ -481,8 +483,9 @@ import { CALLBACKInput } from '../models/CALLBACKInput';
 import { CALLBACKInputMandatory } from '../models/CALLBACKInputMandatory';
 import { CalendarResponse } from '../models/CalendarResponse';
 import { ChangeUserPasswordRequest } from '../models/ChangeUserPasswordRequest';
+import { ChannelHistoryEventInfo, ChannelHistoryEventInfoTypeEnum      } from '../models/ChannelHistoryEventInfo';
 import { ChannelHistoryEventInput, ChannelHistoryEventInputTypeEnum    } from '../models/ChannelHistoryEventInput';
-import { ChannelHistoryJob , ChannelHistoryJobStatusEnum      } from '../models/ChannelHistoryJob';
+import { ChannelHistoryJob , ChannelHistoryJobStatusEnum        } from '../models/ChannelHistoryJob';
 import { ChannelValidationAwsS3Info } from '../models/ChannelValidationAwsS3Info';
 import { ChannelValidationDetail, ChannelValidationDetailValidationStepEnum  , ChannelValidationDetailStatusEnum      } from '../models/ChannelValidationDetail';
 import { ClusterNonEmbedAccess } from '../models/ClusterNonEmbedAccess';
@@ -656,6 +659,7 @@ import { JWTMetadataObject , JWTMetadataObjectTypeEnum   } from '../models/JWTMe
 import { JWTParameter } from '../models/JWTParameter';
 import { JWTUserOptions } from '../models/JWTUserOptions';
 import { JWTUserOptionsFull } from '../models/JWTUserOptionsFull';
+import { JobRecipient, JobRecipientTypeEnum      } from '../models/JobRecipient';
 import { LBContextInput } from '../models/LBContextInput';
 import { LiveboardContent } from '../models/LiveboardContent';
 import { LiveboardDataResponse } from '../models/LiveboardDataResponse';
@@ -921,6 +925,7 @@ let enumsMap: Set<string> = new Set<string>([
     "AssociateMetadataInputTypeEnum",
     "AssociateMetadataInputCreateTypeEnum",
     "AuthorMetadataTypeInputTypeEnum",
+    "ChannelHistoryEventInfoTypeEnum",
     "ChannelHistoryEventInputTypeEnum",
     "ChannelHistoryJobStatusEnum",
     "ChannelValidationDetailValidationStepEnum",
@@ -1010,6 +1015,7 @@ let enumsMap: Set<string> = new Set<string>([
     "ImportUserVisibilityEnum",
     "ImportUserPreferredLocaleEnum",
     "JWTMetadataObjectTypeEnum",
+    "JobRecipientTypeEnum",
     "ManageObjectPrivilegeRequestOperationEnum",
     "ManageObjectPrivilegeRequestMetadataTypeEnum",
     "ManageObjectPrivilegeRequestObjectPrivilegeTypesEnum",
@@ -1198,6 +1204,7 @@ let typeMap: {[index: string]: any} = {
     "CALLBACKInputMandatory": CALLBACKInputMandatory,
     "CalendarResponse": CalendarResponse,
     "ChangeUserPasswordRequest": ChangeUserPasswordRequest,
+    "ChannelHistoryEventInfo": ChannelHistoryEventInfo,
     "ChannelHistoryEventInput": ChannelHistoryEventInput,
     "ChannelHistoryJob": ChannelHistoryJob,
     "ChannelValidationAwsS3Info": ChannelValidationAwsS3Info,
@@ -1373,6 +1380,7 @@ let typeMap: {[index: string]: any} = {
     "JWTParameter": JWTParameter,
     "JWTUserOptions": JWTUserOptions,
     "JWTUserOptionsFull": JWTUserOptionsFull,
+    "JobRecipient": JobRecipient,
     "LBContextInput": LBContextInput,
     "LiveboardContent": LiveboardContent,
     "LiveboardDataResponse": LiveboardDataResponse,

@@ -16661,8 +16661,22 @@
             "description": "Delivery status of this job."
           },
           "creation_time_in_millis": {
-            "type": "object",
+            "type": "number",
+            "format": "float",
             "description": "Timestamp when this job was created (epoch milliseconds)."
+          },
+          "event": {
+            "$ref": "#/components/schemas/ChannelHistoryEventInfo",
+            "description": "Event metadata for the triggering event associated with this job.",
+            "nullable": true
+          },
+          "recipients": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JobRecipient"
+            },
+            "description": "The users, groups or external recipients for this job.",
+            "nullable": true
           },
           "detail": {
             "type": "string",
@@ -16677,6 +16691,69 @@
           }
         },
         "description": "A single job execution record for a channel."
+      },
+      "ChannelHistoryEventInfo": {
+        "type": "object",
+        "required": [
+          "type",
+          "id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD_SCHEDULE"
+            ],
+            "description": "Type of the event."
+          },
+          "id": {
+            "type": "string",
+            "description": "Unique ID of the event."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the event.",
+            "nullable": true
+          },
+          "run_id": {
+            "type": "string",
+            "description": "Unique run ID for this event execution.",
+            "nullable": true
+          }
+        },
+        "description": "Event metadata for the triggering event associated with a job."
+      },
+      "JobRecipient": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "USER",
+              "EXTERNAL"
+            ],
+            "description": "Type of the recipient."
+          },
+          "id": {
+            "type": "string",
+            "description": "Unique ID of the recipient.",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the recipient.",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "description": "Email of the recipient.",
+            "nullable": true
+          }
+        },
+        "description": "A recipient (user, group, or external) for a job execution."
       },
       "GenericInfo": {
         "type": "object",
@@ -23037,7 +23114,8 @@
           },
           "start_epoch_time_in_millis": {
             "description": "Filter records created on or after this time (epoch milliseconds).",
-            "type": "object"
+            "type": "number",
+            "format": "float"
           }
         },
         "required": [
