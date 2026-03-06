@@ -1,7 +1,6 @@
 export * from '../models/AIContext';
 export * from '../models/APIKey';
 export * from '../models/APIKeyInput';
-export * from '../models/AWSAssumeRoleSetup';
 export * from '../models/AccessToken';
 export * from '../models/ActionConfig';
 export * from '../models/ActionConfigInput';
@@ -175,7 +174,6 @@ export * from '../models/FilterRules';
 export * from '../models/ForceLogoutUsersRequest';
 export * from '../models/Frequency';
 export * from '../models/FrequencyInput';
-export * from '../models/GCPWebIdentitySetup';
 export * from '../models/GenerateCSVRequest';
 export * from '../models/GenericInfo';
 export * from '../models/GetAsyncImportStatusResponse';
@@ -364,7 +362,6 @@ export * from '../models/StorageConfig';
 export * from '../models/StorageConfigInput';
 export * from '../models/StorageDestination';
 export * from '../models/StorageDestinationInput';
-export * from '../models/StorageSetupInfo';
 export * from '../models/SyncMetadataRequest';
 export * from '../models/SyncMetadataResponse';
 export * from '../models/SystemConfig';
@@ -454,7 +451,6 @@ export * from '../models/WebhookUser';
 import { AIContext } from '../models/AIContext';
 import { APIKey } from '../models/APIKey';
 import { APIKeyInput } from '../models/APIKeyInput';
-import { AWSAssumeRoleSetup } from '../models/AWSAssumeRoleSetup';
 import { AccessToken } from '../models/AccessToken';
 import { ActionConfig } from '../models/ActionConfig';
 import { ActionConfigInput, ActionConfigInputPositionEnum    } from '../models/ActionConfigInput';
@@ -628,7 +624,6 @@ import { FilterRules , FilterRulesOperatorEnum    } from '../models/FilterRules'
 import { ForceLogoutUsersRequest } from '../models/ForceLogoutUsersRequest';
 import { Frequency } from '../models/Frequency';
 import { FrequencyInput } from '../models/FrequencyInput';
-import { GCPWebIdentitySetup } from '../models/GCPWebIdentitySetup';
 import { GenerateCSVRequest  , GenerateCSVRequestCalendarTypeEnum  , GenerateCSVRequestMonthOffsetEnum  , GenerateCSVRequestStartDayOfWeekEnum     } from '../models/GenerateCSVRequest';
 import { GenericInfo } from '../models/GenericInfo';
 import { GetAsyncImportStatusResponse } from '../models/GetAsyncImportStatusResponse';
@@ -817,7 +812,6 @@ import { StorageConfig } from '../models/StorageConfig';
 import { StorageConfigInput } from '../models/StorageConfigInput';
 import { StorageDestination, StorageDestinationStorageTypeEnum    } from '../models/StorageDestination';
 import { StorageDestinationInput, StorageDestinationInputStorageTypeEnum    } from '../models/StorageDestinationInput';
-import { StorageSetupInfo, StorageSetupInfoClusterTypeEnum  , StorageSetupInfoStorageTypeEnum     } from '../models/StorageSetupInfo';
 import { SyncMetadataRequest , SyncMetadataRequestSyncAttributesEnum   } from '../models/SyncMetadataRequest';
 import { SyncMetadataResponse, SyncMetadataResponseStatusEnum        } from '../models/SyncMetadataResponse';
 import { SystemConfig } from '../models/SystemConfig';
@@ -1114,8 +1108,6 @@ let enumsMap: Set<string> = new Set<string>([
     "SqlQueryResponseMetadataTypeEnum",
     "StorageDestinationStorageTypeEnum",
     "StorageDestinationInputStorageTypeEnum",
-    "StorageSetupInfoClusterTypeEnum",
-    "StorageSetupInfoStorageTypeEnum",
     "SyncMetadataRequestSyncAttributesEnum",
     "SyncMetadataResponseStatusEnum",
     "TagMetadataTypeInputTypeEnum",
@@ -1179,7 +1171,6 @@ let typeMap: {[index: string]: any} = {
     "AIContext": AIContext,
     "APIKey": APIKey,
     "APIKeyInput": APIKeyInput,
-    "AWSAssumeRoleSetup": AWSAssumeRoleSetup,
     "AccessToken": AccessToken,
     "ActionConfig": ActionConfig,
     "ActionConfigInput": ActionConfigInput,
@@ -1353,7 +1344,6 @@ let typeMap: {[index: string]: any} = {
     "ForceLogoutUsersRequest": ForceLogoutUsersRequest,
     "Frequency": Frequency,
     "FrequencyInput": FrequencyInput,
-    "GCPWebIdentitySetup": GCPWebIdentitySetup,
     "GenerateCSVRequest": GenerateCSVRequest,
     "GenericInfo": GenericInfo,
     "GetAsyncImportStatusResponse": GetAsyncImportStatusResponse,
@@ -1542,7 +1532,6 @@ let typeMap: {[index: string]: any} = {
     "StorageConfigInput": StorageConfigInput,
     "StorageDestination": StorageDestination,
     "StorageDestinationInput": StorageDestinationInput,
-    "StorageSetupInfo": StorageSetupInfo,
     "SyncMetadataRequest": SyncMetadataRequest,
     "SyncMetadataResponse": SyncMetadataResponse,
     "SystemConfig": SystemConfig,
