@@ -102,6 +102,14 @@
       "description": "Roles for version 26.2.0.cl"
     },
     {
+      "name": "26.5.0.cl",
+      "id": "26.5.0.cl",
+      "tags": [
+        "26.5.0.cl"
+      ],
+      "description": "Roles for version 26.5.0.cl"
+    },
+    {
       "name": "9.6.0.cl",
       "id": "9.6.0.cl",
       "tags": [
@@ -2633,6 +2641,99 @@
           },
           "403": {
             "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/connections/{connection_identifier}/resync-metadata": {
+      "post": {
+        "operationId": "syncMetadata",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>\n\nSynchronizes connection metadata attributes from your Cloud Data Warehouse (CDW) with ThoughtSpot.\n\nRequires the  `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**) privilege is required.\n\n#### Usage guidelines\n\nTo synchronize attributes from a CDW, specify the connection GUID or name in the `connection_identifier` path parameter and  `sync_attributes` in the request body. Default attribute is `[\"DESCRIPTION\"]`.\n\n##### Hierarchical schema\n\n* Connection: The connection object for the sync operation.\n* Tables: Tables for the sync operation. When no table is specified, all tables are synchronized.\n* Columns: If the table is specified, you can add the columns for the sync operation. If no columns are specified, all columns in the specified table are considered for the sync operation.\n\nTo set the scope for the sync operation:\n\n* Connection-level: To sync all tables and columns, pass an empty request body, or only the attributes in the request body.\n* Table-level: To synchronize specific tables and their columns, specify the table identifiers in the `tables` array.\n* Column-level: To synchronize specific columns, specify the table identifier as the key and column identifiers as the value in the `tables` array.\n\n```\n{\n  \"tables\": [\n    {\"table-guid-1\": [\"column-guid-1\", \"column-guid-2\"]},\n    \"table-guid-2\"\n  ],\n  \"sync_attributes\": [\"DESCRIPTION\"]\n}\n```\n\n##### API response\n\nIf the sync operation is successful, the API returns the following information:\n\n* Status of the sync operation. For example, `SUCCESS`, `PARTIAL_SUCCESS`, or `NO_UPDATE`.\n* Number of tables and columns that were updated.\n* Number of tables and columns with the sync failed status when the overall sync status is `PARTIAL_SUCCESS`.\n* Message text indicating the sync results.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Connections",
+          "26.5.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SyncMetadataRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "connection_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the connection."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Metadata synced successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SyncMetadataResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request parameters or hierarchy.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Connection, table, or column not found.",
             "content": {
               "application/json": {
                 "schema": {
@@ -18938,6 +19039,51 @@
           }
         }
       },
+      "SyncMetadataResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "SUCCESS",
+              "PARTIAL_SUCCESS",
+              "NO_UPDATE"
+            ],
+            "description": "Overall status of the sync operation.",
+            "nullable": true
+          },
+          "tables_updated": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of tables with metadata updates.",
+            "nullable": true
+          },
+          "columns_updated": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of columns with metadata updates.",
+            "nullable": true
+          },
+          "tables_failed": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of tables that failed to sync (for PARTIAL_SUCCESS).",
+            "nullable": true
+          },
+          "columns_failed": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of columns that failed to sync (for PARTIAL_SUCCESS).",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "description": "Message describing the result.",
+            "nullable": true
+          }
+        },
+        "description": "Response from sync metadata operation."
+      },
       "RoleResponse": {
         "type": "object",
         "required": [
@@ -21972,6 +22118,28 @@
             "default": false,
             "type": "boolean",
             "nullable": true
+          }
+        }
+      },
+      "SyncMetadataRequest": {
+        "type": "object",
+        "properties": {
+          "tables": {
+            "description": "Array of tables to sync. Each element can be:\n- String: Table identifier (GUID or name) to sync\n  all columns for that table.\n- Object: {tableId: [columnIds]} to sync specific\n  columns.\nIf not provided, syncs all tables in the connection.",
+            "type": "object"
+          },
+          "sync_attributes": {
+            "description": "List of sync_attributes to sync from CDW.\nThe default value is DESCRIPTION.",
+            "default": [
+              "DESCRIPTION"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "DESCRIPTION"
+              ]
+            }
           }
         }
       },

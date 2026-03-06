@@ -15387,6 +15387,42 @@ components:
       required:
       - data
       type: object
+    SyncMetadataResponse:
+      description: Response from sync metadata operation.
+      properties:
+        status:
+          description: Overall status of the sync operation.
+          enum:
+          - SUCCESS
+          - PARTIAL_SUCCESS
+          - NO_UPDATE
+          nullable: true
+          type: string
+        tables_updated:
+          description: Number of tables with metadata updates.
+          format: int32
+          nullable: true
+          type: integer
+        columns_updated:
+          description: Number of columns with metadata updates.
+          format: int32
+          nullable: true
+          type: integer
+        tables_failed:
+          description: Number of tables that failed to sync (for PARTIAL_SUCCESS).
+          format: int32
+          nullable: true
+          type: integer
+        columns_failed:
+          description: Number of columns that failed to sync (for PARTIAL_SUCCESS).
+          format: int32
+          nullable: true
+          type: integer
+        message:
+          description: Message describing the result.
+          nullable: true
+          type: string
+      type: object
     RoleResponse:
       example:
         privileges:
@@ -18181,6 +18217,29 @@ components:
             Indicates whether to show resolved parameterised values.
           nullable: true
           type: boolean
+      type: object
+    SyncMetadataRequest:
+      properties:
+        tables:
+          description: |-
+            Array of tables to sync. Each element can be:
+            - String: Table identifier (GUID or name) to sync
+              all columns for that table.
+            - Object: {tableId: [columnIds]} to sync specific
+              columns.
+            If not provided, syncs all tables in the connection.
+          type: object
+        sync_attributes:
+          default:
+          - DESCRIPTION
+          description: |-
+            List of sync_attributes to sync from CDW.
+            The default value is DESCRIPTION.
+          items:
+            enum:
+            - DESCRIPTION
+            type: string
+          type: array
       type: object
     UpdateConnectionRequest:
       example:
@@ -24224,6 +24283,11 @@ x-roles:
   tags:
   - 26.2.0.cl
   description: Roles for version 26.2.0.cl
+- name: 26.5.0.cl
+  id: 26.5.0.cl
+  tags:
+  - 26.5.0.cl
+  description: Roles for version 26.5.0.cl
 - name: 9.6.0.cl
   id: 9.6.0.cl
   tags:

@@ -13500,6 +13500,80 @@ _StorageSetupInfo.attributeTypeMap = [
 ];
 var StorageSetupInfo = _StorageSetupInfo;
 
+// models/SyncMetadataRequest.ts
+var _SyncMetadataRequest = class _SyncMetadataRequest {
+  static getAttributeTypeMap() {
+    return _SyncMetadataRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SyncMetadataRequest.discriminator = void 0;
+_SyncMetadataRequest.attributeTypeMap = [
+  {
+    "name": "tables",
+    "baseName": "tables",
+    "type": "any",
+    "format": ""
+  },
+  {
+    "name": "sync_attributes",
+    "baseName": "sync_attributes",
+    "type": "Array<SyncMetadataRequestSyncAttributesEnum>",
+    "format": ""
+  }
+];
+var SyncMetadataRequest = _SyncMetadataRequest;
+
+// models/SyncMetadataResponse.ts
+var _SyncMetadataResponse = class _SyncMetadataResponse {
+  static getAttributeTypeMap() {
+    return _SyncMetadataResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SyncMetadataResponse.discriminator = void 0;
+_SyncMetadataResponse.attributeTypeMap = [
+  {
+    "name": "status",
+    "baseName": "status",
+    "type": "SyncMetadataResponseStatusEnum",
+    "format": ""
+  },
+  {
+    "name": "tables_updated",
+    "baseName": "tables_updated",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "columns_updated",
+    "baseName": "columns_updated",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "tables_failed",
+    "baseName": "tables_failed",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "columns_failed",
+    "baseName": "columns_failed",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "message",
+    "baseName": "message",
+    "type": "string",
+    "format": ""
+  }
+];
+var SyncMetadataResponse = _SyncMetadataResponse;
+
 // models/SystemConfig.ts
 var _SystemConfig = class _SystemConfig {
   static getAttributeTypeMap() {
@@ -17609,6 +17683,8 @@ var enumsMap = /* @__PURE__ */ new Set([
   "StorageDestinationInputStorageTypeEnum",
   "StorageSetupInfoClusterTypeEnum",
   "StorageSetupInfoStorageTypeEnum",
+  "SyncMetadataRequestSyncAttributesEnum",
+  "SyncMetadataResponseStatusEnum",
   "TagMetadataTypeInputTypeEnum",
   "TokenAccessScopeObjectTypeEnum",
   "UnparameterizeMetadataRequestMetadataTypeEnum",
@@ -18033,6 +18109,8 @@ var typeMap = {
   "StorageDestination": StorageDestination,
   "StorageDestinationInput": StorageDestinationInput,
   "StorageSetupInfo": StorageSetupInfo,
+  "SyncMetadataRequest": SyncMetadataRequest,
+  "SyncMetadataResponse": SyncMetadataResponse,
   "SystemConfig": SystemConfig,
   "SystemInfo": SystemInfo,
   "SystemOverrideInfo": SystemOverrideInfo,
@@ -48638,6 +48716,8 @@ export {
   StorageDestination,
   StorageDestinationInput,
   StorageSetupInfo,
+  SyncMetadataRequest,
+  SyncMetadataResponse,
   PromiseSystemApi as SystemApi,
   SystemConfig,
   SystemInfo,

@@ -365,6 +365,8 @@ export * from '../models/StorageConfigInput';
 export * from '../models/StorageDestination';
 export * from '../models/StorageDestinationInput';
 export * from '../models/StorageSetupInfo';
+export * from '../models/SyncMetadataRequest';
+export * from '../models/SyncMetadataResponse';
 export * from '../models/SystemConfig';
 export * from '../models/SystemInfo';
 export * from '../models/SystemOverrideInfo';
@@ -816,6 +818,8 @@ import { StorageConfigInput } from '../models/StorageConfigInput';
 import { StorageDestination, StorageDestinationStorageTypeEnum    } from '../models/StorageDestination';
 import { StorageDestinationInput, StorageDestinationInputStorageTypeEnum    } from '../models/StorageDestinationInput';
 import { StorageSetupInfo, StorageSetupInfoClusterTypeEnum  , StorageSetupInfoStorageTypeEnum     } from '../models/StorageSetupInfo';
+import { SyncMetadataRequest , SyncMetadataRequestSyncAttributesEnum   } from '../models/SyncMetadataRequest';
+import { SyncMetadataResponse, SyncMetadataResponseStatusEnum        } from '../models/SyncMetadataResponse';
 import { SystemConfig } from '../models/SystemConfig';
 import { SystemInfo } from '../models/SystemInfo';
 import { SystemOverrideInfo } from '../models/SystemOverrideInfo';
@@ -1112,6 +1116,8 @@ let enumsMap: Set<string> = new Set<string>([
     "StorageDestinationInputStorageTypeEnum",
     "StorageSetupInfoClusterTypeEnum",
     "StorageSetupInfoStorageTypeEnum",
+    "SyncMetadataRequestSyncAttributesEnum",
+    "SyncMetadataResponseStatusEnum",
     "TagMetadataTypeInputTypeEnum",
     "TokenAccessScopeObjectTypeEnum",
     "UnparameterizeMetadataRequestMetadataTypeEnum",
@@ -1537,6 +1543,8 @@ let typeMap: {[index: string]: any} = {
     "StorageDestination": StorageDestination,
     "StorageDestinationInput": StorageDestinationInput,
     "StorageSetupInfo": StorageSetupInfo,
+    "SyncMetadataRequest": SyncMetadataRequest,
+    "SyncMetadataResponse": SyncMetadataResponse,
     "SystemConfig": SystemConfig,
     "SystemInfo": SystemInfo,
     "SystemOverrideInfo": SystemOverrideInfo,

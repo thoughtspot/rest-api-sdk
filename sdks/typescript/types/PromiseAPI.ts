@@ -368,6 +368,8 @@ import { StorageConfigInput } from '../models/StorageConfigInput';
 import { StorageDestination } from '../models/StorageDestination';
 import { StorageDestinationInput } from '../models/StorageDestinationInput';
 import { StorageSetupInfo } from '../models/StorageSetupInfo';
+import { SyncMetadataRequest } from '../models/SyncMetadataRequest';
+import { SyncMetadataResponse } from '../models/SyncMetadataResponse';
 import { SystemConfig } from '../models/SystemConfig';
 import { SystemInfo } from '../models/SystemInfo';
 import { SystemOverrideInfo } from '../models/SystemOverrideInfo';
