@@ -44,7 +44,6 @@ __export(typescript_exports, {
   AIContext: () => AIContext,
   APIKey: () => APIKey,
   APIKeyInput: () => APIKeyInput,
-  AWSAssumeRoleSetup: () => AWSAssumeRoleSetup,
   AccessToken: () => AccessToken,
   ActionConfig: () => ActionConfig,
   ActionConfigInput: () => ActionConfigInput,
@@ -229,7 +228,6 @@ __export(typescript_exports, {
   ForceLogoutUsersRequest: () => ForceLogoutUsersRequest,
   Frequency: () => Frequency,
   FrequencyInput: () => FrequencyInput,
-  GCPWebIdentitySetup: () => GCPWebIdentitySetup,
   GenerateCSVRequest: () => GenerateCSVRequest,
   GenericInfo: () => GenericInfo,
   GetAsyncImportStatusResponse: () => GetAsyncImportStatusResponse,
@@ -435,7 +433,6 @@ __export(typescript_exports, {
   StorageConfigInput: () => StorageConfigInput,
   StorageDestination: () => StorageDestination,
   StorageDestinationInput: () => StorageDestinationInput,
-  StorageSetupInfo: () => StorageSetupInfo,
   SystemApi: () => PromiseSystemApi,
   SystemConfig: () => SystemConfig,
   SystemInfo: () => SystemInfo,
@@ -872,37 +869,6 @@ _APIKeyInput.attributeTypeMap = [
   }
 ];
 var APIKeyInput = _APIKeyInput;
-
-// models/AWSAssumeRoleSetup.ts
-var _AWSAssumeRoleSetup = class _AWSAssumeRoleSetup {
-  static getAttributeTypeMap() {
-    return _AWSAssumeRoleSetup.attributeTypeMap;
-  }
-  constructor() {
-  }
-};
-_AWSAssumeRoleSetup.discriminator = void 0;
-_AWSAssumeRoleSetup.attributeTypeMap = [
-  {
-    "name": "thoughtspot_aws_account_id",
-    "baseName": "thoughtspot_aws_account_id",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "trust_policy_template",
-    "baseName": "trust_policy_template",
-    "type": "any",
-    "format": ""
-  },
-  {
-    "name": "setup_instructions",
-    "baseName": "setup_instructions",
-    "type": "Array<string>",
-    "format": ""
-  }
-];
-var AWSAssumeRoleSetup = _AWSAssumeRoleSetup;
 
 // models/AccessToken.ts
 var _AccessToken = class _AccessToken {
@@ -7034,43 +7000,6 @@ _FrequencyInput.attributeTypeMap = [
   }
 ];
 var FrequencyInput = _FrequencyInput;
-
-// models/GCPWebIdentitySetup.ts
-var _GCPWebIdentitySetup = class _GCPWebIdentitySetup {
-  static getAttributeTypeMap() {
-    return _GCPWebIdentitySetup.attributeTypeMap;
-  }
-  constructor() {
-  }
-};
-_GCPWebIdentitySetup.discriminator = void 0;
-_GCPWebIdentitySetup.attributeTypeMap = [
-  {
-    "name": "thoughtspot_gcp_service_account_id",
-    "baseName": "thoughtspot_gcp_service_account_id",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "oidc_provider",
-    "baseName": "oidc_provider",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "trust_policy_template",
-    "baseName": "trust_policy_template",
-    "type": "any",
-    "format": ""
-  },
-  {
-    "name": "setup_instructions",
-    "baseName": "setup_instructions",
-    "type": "Array<string>",
-    "format": ""
-  }
-];
-var GCPWebIdentitySetup = _GCPWebIdentitySetup;
 
 // models/GenerateCSVRequest.ts
 var _GenerateCSVRequest = class _GenerateCSVRequest {
@@ -13980,43 +13909,6 @@ _StorageDestinationInput.attributeTypeMap = [
 ];
 var StorageDestinationInput = _StorageDestinationInput;
 
-// models/StorageSetupInfo.ts
-var _StorageSetupInfo = class _StorageSetupInfo {
-  static getAttributeTypeMap() {
-    return _StorageSetupInfo.attributeTypeMap;
-  }
-  constructor() {
-  }
-};
-_StorageSetupInfo.discriminator = void 0;
-_StorageSetupInfo.attributeTypeMap = [
-  {
-    "name": "cluster_type",
-    "baseName": "cluster_type",
-    "type": "StorageSetupInfoClusterTypeEnum",
-    "format": ""
-  },
-  {
-    "name": "storage_type",
-    "baseName": "storage_type",
-    "type": "StorageSetupInfoStorageTypeEnum",
-    "format": ""
-  },
-  {
-    "name": "aws_config",
-    "baseName": "aws_config",
-    "type": "AWSAssumeRoleSetup",
-    "format": ""
-  },
-  {
-    "name": "gcp_config",
-    "baseName": "gcp_config",
-    "type": "GCPWebIdentitySetup",
-    "format": ""
-  }
-];
-var StorageSetupInfo = _StorageSetupInfo;
-
 // models/SystemConfig.ts
 var _SystemConfig = class _SystemConfig {
   static getAttributeTypeMap() {
@@ -18124,8 +18016,6 @@ var enumsMap = /* @__PURE__ */ new Set([
   "SqlQueryResponseMetadataTypeEnum",
   "StorageDestinationStorageTypeEnum",
   "StorageDestinationInputStorageTypeEnum",
-  "StorageSetupInfoClusterTypeEnum",
-  "StorageSetupInfoStorageTypeEnum",
   "TagMetadataTypeInputTypeEnum",
   "TokenAccessScopeObjectTypeEnum",
   "UnparameterizeMetadataRequestMetadataTypeEnum",
@@ -18186,7 +18076,6 @@ var typeMap = {
   "AIContext": AIContext,
   "APIKey": APIKey,
   "APIKeyInput": APIKeyInput,
-  "AWSAssumeRoleSetup": AWSAssumeRoleSetup,
   "AccessToken": AccessToken,
   "ActionConfig": ActionConfig,
   "ActionConfigInput": ActionConfigInput,
@@ -18360,7 +18249,6 @@ var typeMap = {
   "ForceLogoutUsersRequest": ForceLogoutUsersRequest,
   "Frequency": Frequency,
   "FrequencyInput": FrequencyInput,
-  "GCPWebIdentitySetup": GCPWebIdentitySetup,
   "GenerateCSVRequest": GenerateCSVRequest,
   "GenericInfo": GenericInfo,
   "GetAsyncImportStatusResponse": GetAsyncImportStatusResponse,
@@ -18549,7 +18437,6 @@ var typeMap = {
   "StorageConfigInput": StorageConfigInput,
   "StorageDestination": StorageDestination,
   "StorageDestinationInput": StorageDestinationInput,
-  "StorageSetupInfo": StorageSetupInfo,
   "SystemConfig": SystemConfig,
   "SystemInfo": SystemInfo,
   "SystemOverrideInfo": SystemOverrideInfo,
@@ -33591,34 +33478,6 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *  Version: 26.4.0.cl or later   Get storage config information for a webhook configuration. This endpoint provides ThoughtSpot\'s identity information and IAM policy configuration required for customers to set up cross-account access to their S3 buckets.  The setup info returned depends on the ThoughtSpot cluster type: - For AWS clusters: Returns `aws_config` with STS AssumeRole configuration - For GCP clusters: Returns `gcp_config` with STS AssumeRoleWithWebIdentity configuration  **Note:** This endpoint only returns data if the webhook has a storage destination configured.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
-   * @param webhookIdentifier Unique ID or name of the webhook configuration.
-   */
-  getWebhookStorageConfig(webhookIdentifier, _options) {
-    return __async(this, null, function* () {
-      var _a, _b, _c;
-      let _config = _options || this.configuration;
-      if (webhookIdentifier === null || webhookIdentifier === void 0) {
-        throw new RequiredError("ThoughtSpotRestApi", "getWebhookStorageConfig", "webhookIdentifier");
-      }
-      const localVarPath = "/api/rest/2.0/webhooks/{webhook_identifier}/storage-config".replace("{webhook_identifier}", encodeURIComponent(String(webhookIdentifier)));
-      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
-      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
-      let authMethod;
-      authMethod = _config.authMethods["bearerAuth"];
-      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
-        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
-      }
-      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
-      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
-        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
-      }
-      return requestContext;
-    });
-  }
-  /**
    *   Version: 9.0.0.cl or later   Imports [TML](https://docs.thoughtspot.com/cloud/latest/tml) files into ThoughtSpot.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtsSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required: - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### Usage guidelines  *  Import all related objects in a single TML Import API call. For example, Tables that use the same Connection object and Worksheets connected to these Tables. * Include the `fqn` property to distinguish objects that have the same name.   For example, if you have multiple Connections or Worksheets with the same name on ThoughtSpot and the Connection or Worksheet referenced in your TML file does not have a unique name to distinguish, it may result in invalid object references.   Adding `fqn` helps ThoughtSpot differentiate a Table from another with the same name.   We recommend [exporting TML with FQNs](#/http/api-endpoints/metadata/export-metadata-tml) and using these during the import operation. * You can upload multiple TML files at a time.   If you import a Worksheet along with Liveboards, Answers, and other dependent objects in a single API call, the imported objects will be immediately available for use.   When you import only a Worksheet object, it may take some time for the Worksheet to become available in the ThoughtSpot system. Please wait for a few minutes, and then proceed to create an Answer and Liveboard from the newly imported Worksheet.  For more information, see [TML Documentation](https://developers.thoughtspot.com/docs/tml#_import_a_tml).      
    * @param importMetadataTMLRequest 
    */
@@ -41179,67 +41038,6 @@ var ThoughtSpotRestApiResponseProcessor = class {
    * Unwraps the actual response sent by the server from the response context and deserializes the response content
    * to the expected objects
    *
-   * @params response Response returned by the server for a request to getWebhookStorageConfig
-   * @throws ApiException if the response code was not in [200, 299]
-   */
-  getWebhookStorageConfig(response) {
-    return __async(this, null, function* () {
-      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-      if (isCodeInRange("200", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "StorageSetupInfo",
-          ""
-        );
-        return body;
-      }
-      if (isCodeInRange("400", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "ErrorResponse",
-          ""
-        );
-        throw new ApiException(response.httpStatusCode, "Invalid request. Webhook not found or does not have storage destination configured.", body, response.headers);
-      }
-      if (isCodeInRange("401", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "ErrorResponse",
-          ""
-        );
-        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
-      }
-      if (isCodeInRange("403", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "ErrorResponse",
-          ""
-        );
-        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
-      }
-      if (isCodeInRange("500", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "ErrorResponse",
-          ""
-        );
-        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
-      }
-      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "StorageSetupInfo",
-          ""
-        );
-        return body;
-      }
-      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
-    });
-  }
-  /**
-   * Unwraps the actual response sent by the server from the response context and deserializes the response content
-   * to the expected objects
-   *
    * @params response Response returned by the server for a request to importMetadataTML
    * @throws ApiException if the response code was not in [200, 299]
    */
@@ -47950,34 +47748,6 @@ var WebhooksApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *  Version: 26.4.0.cl or later   Get storage config information for a webhook configuration. This endpoint provides ThoughtSpot\'s identity information and IAM policy configuration required for customers to set up cross-account access to their S3 buckets.  The setup info returned depends on the ThoughtSpot cluster type: - For AWS clusters: Returns `aws_config` with STS AssumeRole configuration - For GCP clusters: Returns `gcp_config` with STS AssumeRoleWithWebIdentity configuration  **Note:** This endpoint only returns data if the webhook has a storage destination configured.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
-   * @param webhookIdentifier Unique ID or name of the webhook configuration.
-   */
-  getWebhookStorageConfig(webhookIdentifier, _options) {
-    return __async(this, null, function* () {
-      var _a, _b, _c;
-      let _config = _options || this.configuration;
-      if (webhookIdentifier === null || webhookIdentifier === void 0) {
-        throw new RequiredError("WebhooksApi", "getWebhookStorageConfig", "webhookIdentifier");
-      }
-      const localVarPath = "/api/rest/2.0/webhooks/{webhook_identifier}/storage-config".replace("{webhook_identifier}", encodeURIComponent(String(webhookIdentifier)));
-      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
-      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0");
-      let authMethod;
-      authMethod = _config.authMethods["bearerAuth"];
-      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
-        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
-      }
-      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
-      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
-        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
-      }
-      return requestContext;
-    });
-  }
-  /**
    *  Version: 10.14.0.cl or later   Searches for webhook configurations based on various criteria such as Org, webhook identifier, event type, with support for pagination and sorting. Returns matching webhook configurations with their complete details.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
    * @param searchWebhookConfigurationsRequest 
    */
@@ -48172,67 +47942,6 @@ var WebhooksApiResponseProcessor = class {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "WebhookDeleteResponse",
-          ""
-        );
-        return body;
-      }
-      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
-    });
-  }
-  /**
-   * Unwraps the actual response sent by the server from the response context and deserializes the response content
-   * to the expected objects
-   *
-   * @params response Response returned by the server for a request to getWebhookStorageConfig
-   * @throws ApiException if the response code was not in [200, 299]
-   */
-  getWebhookStorageConfig(response) {
-    return __async(this, null, function* () {
-      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-      if (isCodeInRange("200", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "StorageSetupInfo",
-          ""
-        );
-        return body;
-      }
-      if (isCodeInRange("400", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "ErrorResponse",
-          ""
-        );
-        throw new ApiException(response.httpStatusCode, "Invalid request. Webhook not found or does not have storage destination configured.", body, response.headers);
-      }
-      if (isCodeInRange("401", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "ErrorResponse",
-          ""
-        );
-        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
-      }
-      if (isCodeInRange("403", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "ErrorResponse",
-          ""
-        );
-        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
-      }
-      if (isCodeInRange("500", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "ErrorResponse",
-          ""
-        );
-        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
-      }
-      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "StorageSetupInfo",
           ""
         );
         return body;
@@ -52241,24 +51950,6 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *  Version: 26.4.0.cl or later   Get storage config information for a webhook configuration. This endpoint provides ThoughtSpot\'s identity information and IAM policy configuration required for customers to set up cross-account access to their S3 buckets.  The setup info returned depends on the ThoughtSpot cluster type: - For AWS clusters: Returns `aws_config` with STS AssumeRole configuration - For GCP clusters: Returns `gcp_config` with STS AssumeRoleWithWebIdentity configuration  **Note:** This endpoint only returns data if the webhook has a storage destination configured.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
-   * @param webhookIdentifier Unique ID or name of the webhook configuration.
-   */
-  getWebhookStorageConfig(webhookIdentifier, _options) {
-    const requestContextPromise = this.requestFactory.getWebhookStorageConfig(webhookIdentifier, _options);
-    let middlewarePreObservable = from(requestContextPromise);
-    for (let middleware of this.configuration.middleware) {
-      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
-    }
-    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
-      let middlewarePostObservable = of(response);
-      for (let middleware of this.configuration.middleware) {
-        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
-      }
-      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.getWebhookStorageConfig(rsp)));
-    }));
-  }
-  /**
    *   Version: 9.0.0.cl or later   Imports [TML](https://docs.thoughtspot.com/cloud/latest/tml) files into ThoughtSpot.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtsSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required: - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### Usage guidelines  *  Import all related objects in a single TML Import API call. For example, Tables that use the same Connection object and Worksheets connected to these Tables. * Include the `fqn` property to distinguish objects that have the same name.   For example, if you have multiple Connections or Worksheets with the same name on ThoughtSpot and the Connection or Worksheet referenced in your TML file does not have a unique name to distinguish, it may result in invalid object references.   Adding `fqn` helps ThoughtSpot differentiate a Table from another with the same name.   We recommend [exporting TML with FQNs](#/http/api-endpoints/metadata/export-metadata-tml) and using these during the import operation. * You can upload multiple TML files at a time.   If you import a Worksheet along with Liveboards, Answers, and other dependent objects in a single API call, the imported objects will be immediately available for use.   When you import only a Worksheet object, it may take some time for the Worksheet to become available in the ThoughtSpot system. Please wait for a few minutes, and then proceed to create an Answer and Liveboard from the newly imported Worksheet.  For more information, see [TML Documentation](https://developers.thoughtspot.com/docs/tml#_import_a_tml).      
    * @param importMetadataTMLRequest 
    */
@@ -54099,24 +53790,6 @@ var ObservableWebhooksApi = class {
     }));
   }
   /**
-   *  Version: 26.4.0.cl or later   Get storage config information for a webhook configuration. This endpoint provides ThoughtSpot\'s identity information and IAM policy configuration required for customers to set up cross-account access to their S3 buckets.  The setup info returned depends on the ThoughtSpot cluster type: - For AWS clusters: Returns `aws_config` with STS AssumeRole configuration - For GCP clusters: Returns `gcp_config` with STS AssumeRoleWithWebIdentity configuration  **Note:** This endpoint only returns data if the webhook has a storage destination configured.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
-   * @param webhookIdentifier Unique ID or name of the webhook configuration.
-   */
-  getWebhookStorageConfig(webhookIdentifier, _options) {
-    const requestContextPromise = this.requestFactory.getWebhookStorageConfig(webhookIdentifier, _options);
-    let middlewarePreObservable = from(requestContextPromise);
-    for (let middleware of this.configuration.middleware) {
-      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
-    }
-    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
-      let middlewarePostObservable = of(response);
-      for (let middleware of this.configuration.middleware) {
-        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
-      }
-      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.getWebhookStorageConfig(rsp)));
-    }));
-  }
-  /**
    *  Version: 10.14.0.cl or later   Searches for webhook configurations based on various criteria such as Org, webhook identifier, event type, with support for pagination and sorting. Returns matching webhook configurations with their complete details.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
    * @param searchWebhookConfigurationsRequest 
    */
@@ -55943,14 +55616,6 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *  Version: 26.4.0.cl or later   Get storage config information for a webhook configuration. This endpoint provides ThoughtSpot\'s identity information and IAM policy configuration required for customers to set up cross-account access to their S3 buckets.  The setup info returned depends on the ThoughtSpot cluster type: - For AWS clusters: Returns `aws_config` with STS AssumeRole configuration - For GCP clusters: Returns `gcp_config` with STS AssumeRoleWithWebIdentity configuration  **Note:** This endpoint only returns data if the webhook has a storage destination configured.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
-   * @param webhookIdentifier Unique ID or name of the webhook configuration.
-   */
-  getWebhookStorageConfig(webhookIdentifier, _options) {
-    const result = this.api.getWebhookStorageConfig(webhookIdentifier, _options);
-    return result.toPromise();
-  }
-  /**
    *   Version: 9.0.0.cl or later   Imports [TML](https://docs.thoughtspot.com/cloud/latest/tml) files into ThoughtSpot.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtsSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required: - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### Usage guidelines  *  Import all related objects in a single TML Import API call. For example, Tables that use the same Connection object and Worksheets connected to these Tables. * Include the `fqn` property to distinguish objects that have the same name.   For example, if you have multiple Connections or Worksheets with the same name on ThoughtSpot and the Connection or Worksheet referenced in your TML file does not have a unique name to distinguish, it may result in invalid object references.   Adding `fqn` helps ThoughtSpot differentiate a Table from another with the same name.   We recommend [exporting TML with FQNs](#/http/api-endpoints/metadata/export-metadata-tml) and using these during the import operation. * You can upload multiple TML files at a time.   If you import a Worksheet along with Liveboards, Answers, and other dependent objects in a single API call, the imported objects will be immediately available for use.   When you import only a Worksheet object, it may take some time for the Worksheet to become available in the ThoughtSpot system. Please wait for a few minutes, and then proceed to create an Answer and Liveboard from the newly imported Worksheet.  For more information, see [TML Documentation](https://developers.thoughtspot.com/docs/tml#_import_a_tml).      
    * @param importMetadataTMLRequest 
    */
@@ -56793,14 +56458,6 @@ var PromiseWebhooksApi = class {
     return result.toPromise();
   }
   /**
-   *  Version: 26.4.0.cl or later   Get storage config information for a webhook configuration. This endpoint provides ThoughtSpot\'s identity information and IAM policy configuration required for customers to set up cross-account access to their S3 buckets.  The setup info returned depends on the ThoughtSpot cluster type: - For AWS clusters: Returns `aws_config` with STS AssumeRole configuration - For GCP clusters: Returns `gcp_config` with STS AssumeRoleWithWebIdentity configuration  **Note:** This endpoint only returns data if the webhook has a storage destination configured.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
-   * @param webhookIdentifier Unique ID or name of the webhook configuration.
-   */
-  getWebhookStorageConfig(webhookIdentifier, _options) {
-    const result = this.api.getWebhookStorageConfig(webhookIdentifier, _options);
-    return result.toPromise();
-  }
-  /**
    *  Version: 10.14.0.cl or later   Searches for webhook configurations based on various criteria such as Org, webhook identifier, event type, with support for pagination and sorting. Returns matching webhook configurations with their complete details.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
    * @param searchWebhookConfigurationsRequest 
    */
@@ -56900,7 +56557,6 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   AIContext,
   APIKey,
   APIKeyInput,
-  AWSAssumeRoleSetup,
   AccessToken,
   ActionConfig,
   ActionConfigInput,
@@ -57085,7 +56741,6 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   ForceLogoutUsersRequest,
   Frequency,
   FrequencyInput,
-  GCPWebIdentitySetup,
   GenerateCSVRequest,
   GenericInfo,
   GetAsyncImportStatusResponse,
@@ -57291,7 +56946,6 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   StorageConfigInput,
   StorageDestination,
   StorageDestinationInput,
-  StorageSetupInfo,
   SystemApi,
   SystemConfig,
   SystemInfo,

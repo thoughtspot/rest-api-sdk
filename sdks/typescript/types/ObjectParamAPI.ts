@@ -4,7 +4,6 @@ import { Configuration} from '../configuration'
 import { AIContext } from '../models/AIContext';
 import { APIKey } from '../models/APIKey';
 import { APIKeyInput } from '../models/APIKeyInput';
-import { AWSAssumeRoleSetup } from '../models/AWSAssumeRoleSetup';
 import { AccessToken } from '../models/AccessToken';
 import { ActionConfig } from '../models/ActionConfig';
 import { ActionConfigInput } from '../models/ActionConfigInput';
@@ -178,7 +177,6 @@ import { FilterRules } from '../models/FilterRules';
 import { ForceLogoutUsersRequest } from '../models/ForceLogoutUsersRequest';
 import { Frequency } from '../models/Frequency';
 import { FrequencyInput } from '../models/FrequencyInput';
-import { GCPWebIdentitySetup } from '../models/GCPWebIdentitySetup';
 import { GenerateCSVRequest } from '../models/GenerateCSVRequest';
 import { GenericInfo } from '../models/GenericInfo';
 import { GetAsyncImportStatusResponse } from '../models/GetAsyncImportStatusResponse';
@@ -367,7 +365,6 @@ import { StorageConfig } from '../models/StorageConfig';
 import { StorageConfigInput } from '../models/StorageConfigInput';
 import { StorageDestination } from '../models/StorageDestination';
 import { StorageDestinationInput } from '../models/StorageDestinationInput';
-import { StorageSetupInfo } from '../models/StorageSetupInfo';
 import { SystemConfig } from '../models/SystemConfig';
 import { SystemInfo } from '../models/SystemInfo';
 import { SystemOverrideInfo } from '../models/SystemOverrideInfo';
@@ -3758,15 +3755,6 @@ export interface ThoughtSpotRestApiGetSystemInformationRequest {
 export interface ThoughtSpotRestApiGetSystemOverrideInfoRequest {
 }
 
-export interface ThoughtSpotRestApiGetWebhookStorageConfigRequest {
-    /**
-     * Unique ID or name of the webhook configuration.
-     * @type string
-     * @memberof ThoughtSpotRestApigetWebhookStorageConfig
-     */
-    webhookIdentifier: string
-}
-
 export interface ThoughtSpotRestApiImportMetadataTMLRequest {
     /**
      * 
@@ -5226,14 +5214,6 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *  Version: 26.4.0.cl or later   Get storage config information for a webhook configuration. This endpoint provides ThoughtSpot\'s identity information and IAM policy configuration required for customers to set up cross-account access to their S3 buckets.  The setup info returned depends on the ThoughtSpot cluster type: - For AWS clusters: Returns `aws_config` with STS AssumeRole configuration - For GCP clusters: Returns `gcp_config` with STS AssumeRoleWithWebIdentity configuration  **Note:** This endpoint only returns data if the webhook has a storage destination configured.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
-     * @param param the request object
-     */
-    public getWebhookStorageConfig(param: ThoughtSpotRestApiGetWebhookStorageConfigRequest, options?: Configuration): Promise<StorageSetupInfo> {
-        return this.api.getWebhookStorageConfig(param.webhookIdentifier,  options).toPromise();
-    }
-
-    /**
      *   Version: 9.0.0.cl or later   Imports [TML](https://docs.thoughtspot.com/cloud/latest/tml) files into ThoughtSpot.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtsSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required: - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### Usage guidelines  *  Import all related objects in a single TML Import API call. For example, Tables that use the same Connection object and Worksheets connected to these Tables. * Include the `fqn` property to distinguish objects that have the same name.   For example, if you have multiple Connections or Worksheets with the same name on ThoughtSpot and the Connection or Worksheet referenced in your TML file does not have a unique name to distinguish, it may result in invalid object references.   Adding `fqn` helps ThoughtSpot differentiate a Table from another with the same name.   We recommend [exporting TML with FQNs](#/http/api-endpoints/metadata/export-metadata-tml) and using these during the import operation. * You can upload multiple TML files at a time.   If you import a Worksheet along with Liveboards, Answers, and other dependent objects in a single API call, the imported objects will be immediately available for use.   When you import only a Worksheet object, it may take some time for the Worksheet to become available in the ThoughtSpot system. Please wait for a few minutes, and then proceed to create an Answer and Liveboard from the newly imported Worksheet.  For more information, see [TML Documentation](https://developers.thoughtspot.com/docs/tml#_import_a_tml).      
      * @param param the request object
      */
@@ -6326,15 +6306,6 @@ export interface WebhooksApiDeleteWebhookConfigurationsRequest {
     deleteWebhookConfigurationsRequest: DeleteWebhookConfigurationsRequest
 }
 
-export interface WebhooksApiGetWebhookStorageConfigRequest {
-    /**
-     * Unique ID or name of the webhook configuration.
-     * @type string
-     * @memberof WebhooksApigetWebhookStorageConfig
-     */
-    webhookIdentifier: string
-}
-
 export interface WebhooksApiSearchWebhookConfigurationsRequest {
     /**
      * 
@@ -6380,14 +6351,6 @@ export class ObjectWebhooksApi {
      */
     public deleteWebhookConfigurations(param: WebhooksApiDeleteWebhookConfigurationsRequest, options?: Configuration): Promise<WebhookDeleteResponse> {
         return this.api.deleteWebhookConfigurations(param.deleteWebhookConfigurationsRequest,  options).toPromise();
-    }
-
-    /**
-     *  Version: 26.4.0.cl or later   Get storage config information for a webhook configuration. This endpoint provides ThoughtSpot\'s identity information and IAM policy configuration required for customers to set up cross-account access to their S3 buckets.  The setup info returned depends on the ThoughtSpot cluster type: - For AWS clusters: Returns `aws_config` with STS AssumeRole configuration - For GCP clusters: Returns `gcp_config` with STS AssumeRoleWithWebIdentity configuration  **Note:** This endpoint only returns data if the webhook has a storage destination configured.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
-     * @param param the request object
-     */
-    public getWebhookStorageConfig(param: WebhooksApiGetWebhookStorageConfigRequest, options?: Configuration): Promise<StorageSetupInfo> {
-        return this.api.getWebhookStorageConfig(param.webhookIdentifier,  options).toPromise();
     }
 
     /**

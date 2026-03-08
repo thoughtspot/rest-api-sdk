@@ -86,7 +86,6 @@ All URIs are relative to *CLUSTER_URL*
 | [**getSystemConfig**](ThoughtSpotRestApi.md#getSystemConfig) | **GET** /api/rest/2.0/system/config |
 | [**getSystemInformation**](ThoughtSpotRestApi.md#getSystemInformation) | **GET** /api/rest/2.0/system |
 | [**getSystemOverrideInfo**](ThoughtSpotRestApi.md#getSystemOverrideInfo) | **GET** /api/rest/2.0/system/config-overrides |
-| [**getWebhookStorageConfig**](ThoughtSpotRestApi.md#getWebhookStorageConfig) | **GET** /api/rest/2.0/webhooks/{webhook_identifier}/storage-config |
 | [**importMetadataTML**](ThoughtSpotRestApi.md#importMetadataTML) | **POST** /api/rest/2.0/metadata/tml/import |
 | [**importMetadataTMLAsync**](ThoughtSpotRestApi.md#importMetadataTMLAsync) | **POST** /api/rest/2.0/metadata/tml/async/import |
 | [**importUserGroups**](ThoughtSpotRestApi.md#importUserGroups) | **POST** /api/rest/2.0/groups/import |
@@ -3099,42 +3098,6 @@ This endpoint does not need any parameter.
 |-------------|-------------|------------------|
 | **200** | Cluster configuration which can be overridden. |  -  |
 | **400** | Invalid request. |  -  |
-| **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
-| **500** | Unexpected error |  -  |
-
-<a id="getWebhookStorageConfig"></a>
-# **getWebhookStorageConfig**
-> StorageSetupInfo getWebhookStorageConfig(webhookIdentifier)
-
-
-
- Version: 26.4.0.cl or later   Get storage config information for a webhook configuration. This endpoint provides ThoughtSpot&#39;s identity information and IAM policy configuration required for customers to set up cross-account access to their S3 buckets.  The setup info returned depends on the ThoughtSpot cluster type: - For AWS clusters: Returns &#x60;aws_config&#x60; with STS AssumeRole configuration - For GCP clusters: Returns &#x60;gcp_config&#x60; with STS AssumeRoleWithWebIdentity configuration  **Note:** This endpoint only returns data if the webhook has a storage destination configured.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to perform this action.      
-
-### Parameters
-
-| Name | Type |
-|------------- | ------------- |
-| **webhookIdentifier** | **String**
-
-### Return type
-
-[**StorageSetupInfo**](StorageSetupInfo.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Storage setup information retrieved successfully |  -  |
-| **400** | Invalid request. Webhook not found or does not have storage destination configured. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |

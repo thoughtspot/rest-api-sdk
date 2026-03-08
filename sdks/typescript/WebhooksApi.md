@@ -6,7 +6,6 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**createWebhookConfiguration**](WebhooksApi.md#createWebhookConfiguration) | **POST** /api/rest/2.0/webhooks/create | 
 [**deleteWebhookConfigurations**](WebhooksApi.md#deleteWebhookConfigurations) | **POST** /api/rest/2.0/webhooks/delete | 
-[**getWebhookStorageConfig**](WebhooksApi.md#getWebhookStorageConfig) | **GET** /api/rest/2.0/webhooks/{webhook_identifier}/storage-config | 
 [**searchWebhookConfigurations**](WebhooksApi.md#searchWebhookConfigurations) | **POST** /api/rest/2.0/webhooks/search | 
 [**updateWebhookConfiguration**](WebhooksApi.md#updateWebhookConfiguration) | **POST** /api/rest/2.0/webhooks/{webhook_identifier}/update | 
 
@@ -146,66 +145,6 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Webhook configurations deleted successfully |  -  |
 **400** | Invalid request. |  -  |
-**401** | Unauthorized access. |  -  |
-**403** | Forbidden access. |  -  |
-**500** | Unexpected error |  -  |
-
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
-
-# **getWebhookStorageConfig**
-> StorageSetupInfo getWebhookStorageConfig()
-
- Version: 26.4.0.cl or later   Get storage config information for a webhook configuration. This endpoint provides ThoughtSpot\'s identity information and IAM policy configuration required for customers to set up cross-account access to their S3 buckets.  The setup info returned depends on the ThoughtSpot cluster type: - For AWS clusters: Returns `aws_config` with STS AssumeRole configuration - For GCP clusters: Returns `gcp_config` with STS AssumeRoleWithWebIdentity configuration  **Note:** This endpoint only returns data if the webhook has a storage destination configured.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
-
-### Example
-
-
-```typescript
-import { createBearerAuthenticationConfig, WebhooksApi, GetWebhookStorageConfigRequest } from '@thoughtspot/rest-api-sdk';
-
-const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
-    username: "YOUR_USERNAME",
-    password: "YOUR_PASSWORD",
-});
-const apiInstance = new WebhooksApi(configuration);
-
-apiInstance.getWebhookStorageConfig(
-  // string | Unique ID or name of the webhook configuration.
-  "webhook_identifier_example" 
-).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
-
-
-```
-
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **webhookIdentifier** | [**string**] | Unique ID or name of the webhook configuration. | defaults to undefined
-
-
-### Return type
-
-**StorageSetupInfo**
-
-### Authorization
-
-[bearerAuth](README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Storage setup information retrieved successfully |  -  |
-**400** | Invalid request. Webhook not found or does not have storage destination configured. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Forbidden access. |  -  |
 **500** | Unexpected error |  -  |

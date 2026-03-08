@@ -162,7 +162,6 @@ import { SetNLInstructionsRequest } from '../models/SetNLInstructionsRequest';
 import { ShareMetadataRequest } from '../models/ShareMetadataRequest';
 import { SingleAnswerRequest } from '../models/SingleAnswerRequest';
 import { SqlQueryResponse } from '../models/SqlQueryResponse';
-import { StorageSetupInfo } from '../models/StorageSetupInfo';
 import { SystemConfig } from '../models/SystemConfig';
 import { SystemInfo } from '../models/SystemInfo';
 import { SystemOverrideInfo } from '../models/SystemOverrideInfo';
@@ -4246,47 +4245,6 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
 
         // Path Params
         const localVarPath = '/api/rest/2.0/system/config-overrides';
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET); 
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.23.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.23.0")
-      
-
-
-
-        let authMethod: SecurityAuthentication | undefined;
-        // Apply auth methods
-        authMethod = _config.authMethods["bearerAuth"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
-        if (defaultAuth?.applySecurityAuthentication) {
-            await defaultAuth?.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
-     *  Version: 26.4.0.cl or later   Get storage config information for a webhook configuration. This endpoint provides ThoughtSpot\'s identity information and IAM policy configuration required for customers to set up cross-account access to their S3 buckets.  The setup info returned depends on the ThoughtSpot cluster type: - For AWS clusters: Returns `aws_config` with STS AssumeRole configuration - For GCP clusters: Returns `gcp_config` with STS AssumeRoleWithWebIdentity configuration  **Note:** This endpoint only returns data if the webhook has a storage destination configured.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
-     * @param webhookIdentifier Unique ID or name of the webhook configuration.
-     */
-    public async getWebhookStorageConfig(webhookIdentifier: string, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'webhookIdentifier' is not null or undefined
-        if (webhookIdentifier === null || webhookIdentifier === undefined) {
-            throw new RequiredError("ThoughtSpotRestApi", "getWebhookStorageConfig", "webhookIdentifier");
-        }
-
-
-        // Path Params
-        const localVarPath = '/api/rest/2.0/webhooks/{webhook_identifier}/storage-config'
-            .replace('{' + 'webhook_identifier' + '}', encodeURIComponent(String(webhookIdentifier)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET); 
@@ -12649,63 +12607,6 @@ export class ThoughtSpotRestApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "SystemOverrideInfo", ""
             ) as SystemOverrideInfo;
-            return body;
-        }
-
-        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
-    }
-
-    /**
-     * Unwraps the actual response sent by the server from the response context and deserializes the response content
-     * to the expected objects
-     *
-     * @params response Response returned by the server for a request to getWebhookStorageConfig
-     * @throws ApiException if the response code was not in [200, 299]
-     */
-     public async getWebhookStorageConfig(response: ResponseContext): Promise<StorageSetupInfo > {
-        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: StorageSetupInfo = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "StorageSetupInfo", ""
-            ) as StorageSetupInfo;
-            return body;
-        }
-        if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: ErrorResponse = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "ErrorResponse", ""
-            ) as ErrorResponse;
-            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Invalid request. Webhook not found or does not have storage destination configured.", body, response.headers);
-        }
-        if (isCodeInRange("401", response.httpStatusCode)) {
-            const body: ErrorResponse = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "ErrorResponse", ""
-            ) as ErrorResponse;
-            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
-        }
-        if (isCodeInRange("403", response.httpStatusCode)) {
-            const body: ErrorResponse = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "ErrorResponse", ""
-            ) as ErrorResponse;
-            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
-        }
-        if (isCodeInRange("500", response.httpStatusCode)) {
-            const body: ErrorResponse = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "ErrorResponse", ""
-            ) as ErrorResponse;
-            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unexpected error", body, response.headers);
-        }
-
-        // Work around for missing responses in specification, e.g. for petstore.yaml
-        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: StorageSetupInfo = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "StorageSetupInfo", ""
-            ) as StorageSetupInfo;
             return body;
         }
 

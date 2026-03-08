@@ -158,7 +158,6 @@ import com.thoughtspot.client.model.SetNLInstructionsRequest;
 import com.thoughtspot.client.model.ShareMetadataRequest;
 import com.thoughtspot.client.model.SingleAnswerRequest;
 import com.thoughtspot.client.model.SqlQueryResponse;
-import com.thoughtspot.client.model.StorageSetupInfo;
 import com.thoughtspot.client.model.SystemConfig;
 import com.thoughtspot.client.model.SystemInfo;
 import com.thoughtspot.client.model.SystemOverrideInfo;
@@ -2206,29 +2205,6 @@ public class ThoughtSpotRestApiTest {
     @Test
     public void getSystemOverrideInfoTest() throws ApiException {
         SystemOverrideInfo response = api.getSystemOverrideInfo();
-        // TODO: test validations
-    }
-
-    /**
-     * Version: 26.4.0.cl or later Get storage config information for a webhook configuration. This
-     * endpoint provides ThoughtSpot&#39;s identity information and IAM policy configuration
-     * required for customers to set up cross-account access to their S3 buckets. The setup info
-     * returned depends on the ThoughtSpot cluster type: - For AWS clusters: Returns
-     * &#x60;aws_config&#x60; with STS AssumeRole configuration - For GCP clusters: Returns
-     * &#x60;gcp_config&#x60; with STS AssumeRoleWithWebIdentity configuration **Note:** This
-     * endpoint only returns data if the webhook has a storage destination configured. Requires
-     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has
-     * developer privilege**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
-     * &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to
-     * perform this action.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void getWebhookStorageConfigTest() throws ApiException {
-        String webhookIdentifier = null;
-        StorageSetupInfo response = api.getWebhookStorageConfig(webhookIdentifier);
         // TODO: test validations
     }
 
