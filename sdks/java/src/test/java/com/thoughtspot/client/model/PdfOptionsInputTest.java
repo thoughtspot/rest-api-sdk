@@ -16,6 +16,18 @@ public class PdfOptionsInputTest {
         // TODO: test PdfOptionsInput
     }
 
+    /** Test the property 'pageSize' */
+    @Test
+    public void pageSizeTest() {
+        // TODO: test pageSize
+    }
+
+    /** Test the property 'zoomLevel' */
+    @Test
+    public void zoomLevelTest() {
+        // TODO: test zoomLevel
+    }
+
     /** Test the property 'includeCoverPage' */
     @Test
     public void includeCoverPageTest() {

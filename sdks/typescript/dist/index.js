@@ -5518,6 +5518,18 @@ var _ExportLiveboardReportRequestPdfOptions = class _ExportLiveboardReportReques
 _ExportLiveboardReportRequestPdfOptions.discriminator = void 0;
 _ExportLiveboardReportRequestPdfOptions.attributeTypeMap = [
   {
+    "name": "page_size",
+    "baseName": "page_size",
+    "type": "ExportLiveboardReportRequestPdfOptionsPageSizeEnum",
+    "format": ""
+  },
+  {
+    "name": "zoom_level",
+    "baseName": "zoom_level",
+    "type": "number",
+    "format": "int32"
+  },
+  {
     "name": "include_cover_page",
     "baseName": "include_cover_page",
     "type": "boolean",
@@ -9100,6 +9112,18 @@ var _PdfOptionsInput = class _PdfOptionsInput {
 };
 _PdfOptionsInput.discriminator = void 0;
 _PdfOptionsInput.attributeTypeMap = [
+  {
+    "name": "page_size",
+    "baseName": "page_size",
+    "type": "PdfOptionsInputPageSizeEnum",
+    "format": ""
+  },
+  {
+    "name": "zoom_level",
+    "baseName": "zoom_level",
+    "type": "number",
+    "format": "int32"
+  },
   {
     "name": "include_cover_page",
     "baseName": "include_cover_page",
@@ -17450,6 +17474,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "ExportAnswerReportRequestRegionalSettingsNumberFormatLocaleEnum",
   "ExportAnswerReportRequestRegionalSettingsDateFormatLocaleEnum",
   "ExportLiveboardReportRequestFileFormatEnum",
+  "ExportLiveboardReportRequestPdfOptionsPageSizeEnum",
   "ExportLiveboardReportRequestPdfOptionsPageOrientationEnum",
   "ExportMetadataTMLBatchedRequestMetadataTypeEnum",
   "ExportMetadataTMLBatchedRequestEdocFormatEnum",
@@ -17506,6 +17531,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "ParameterizeMetadataRequestMetadataTypeEnum",
   "ParameterizeMetadataRequestFieldTypeEnum",
   "PdfOptionsPageSizeEnum",
+  "PdfOptionsInputPageSizeEnum",
   "PdfOptionsInputPageOrientationEnum",
   "PermissionInputShareModeEnum",
   "PermissionsMetadataTypeInputTypeEnum",

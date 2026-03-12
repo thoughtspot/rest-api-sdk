@@ -598,7 +598,7 @@ import { ExcludeMetadataListItemInput , ExcludeMetadataListItemInputTypeEnum   }
 import { ExportAnswerReportRequest   , ExportAnswerReportRequestFileFormatEnum       } from '../models/ExportAnswerReportRequest';
 import { ExportAnswerReportRequestRegionalSettings, ExportAnswerReportRequestRegionalSettingsCurrencyFormatEnum  , ExportAnswerReportRequestRegionalSettingsUserLocaleEnum  , ExportAnswerReportRequestRegionalSettingsNumberFormatLocaleEnum  , ExportAnswerReportRequestRegionalSettingsDateFormatLocaleEnum   } from '../models/ExportAnswerReportRequestRegionalSettings';
 import { ExportLiveboardReportRequest     , ExportLiveboardReportRequestFileFormatEnum          } from '../models/ExportLiveboardReportRequest';
-import { ExportLiveboardReportRequestPdfOptions    , ExportLiveboardReportRequestPdfOptionsPageOrientationEnum     } from '../models/ExportLiveboardReportRequestPdfOptions';
+import { ExportLiveboardReportRequestPdfOptions, ExportLiveboardReportRequestPdfOptionsPageSizeEnum       , ExportLiveboardReportRequestPdfOptionsPageOrientationEnum     } from '../models/ExportLiveboardReportRequestPdfOptions';
 import { ExportLiveboardReportRequestPngOptions } from '../models/ExportLiveboardReportRequestPngOptions';
 import { ExportMetadataTMLBatchedRequest, ExportMetadataTMLBatchedRequestMetadataTypeEnum    , ExportMetadataTMLBatchedRequestEdocFormatEnum     } from '../models/ExportMetadataTMLBatchedRequest';
 import { ExportMetadataTMLRequest   , ExportMetadataTMLRequestEdocFormatEnum  , ExportMetadataTMLRequestExportSchemaVersionEnum       } from '../models/ExportMetadataTMLRequest';
@@ -695,7 +695,7 @@ import { ParameterizeMetadataRequest, ParameterizeMetadataRequestMetadataTypeEnu
 import { ParametersListItem } from '../models/ParametersListItem';
 import { ParametersListItemInput } from '../models/ParametersListItemInput';
 import { PdfOptions       , PdfOptionsPageSizeEnum    } from '../models/PdfOptions';
-import { PdfOptionsInput    , PdfOptionsInputPageOrientationEnum     } from '../models/PdfOptionsInput';
+import { PdfOptionsInput, PdfOptionsInputPageSizeEnum       , PdfOptionsInputPageOrientationEnum     } from '../models/PdfOptionsInput';
 import { PermissionInput , PermissionInputShareModeEnum   } from '../models/PermissionInput';
 import { PermissionOfMetadataResponse } from '../models/PermissionOfMetadataResponse';
 import { PermissionOfPrincipalsResponse } from '../models/PermissionOfPrincipalsResponse';
@@ -982,6 +982,7 @@ let enumsMap: Set<string> = new Set<string>([
     "ExportAnswerReportRequestRegionalSettingsNumberFormatLocaleEnum",
     "ExportAnswerReportRequestRegionalSettingsDateFormatLocaleEnum",
     "ExportLiveboardReportRequestFileFormatEnum",
+    "ExportLiveboardReportRequestPdfOptionsPageSizeEnum",
     "ExportLiveboardReportRequestPdfOptionsPageOrientationEnum",
     "ExportMetadataTMLBatchedRequestMetadataTypeEnum",
     "ExportMetadataTMLBatchedRequestEdocFormatEnum",
@@ -1038,6 +1039,7 @@ let enumsMap: Set<string> = new Set<string>([
     "ParameterizeMetadataRequestMetadataTypeEnum",
     "ParameterizeMetadataRequestFieldTypeEnum",
     "PdfOptionsPageSizeEnum",
+    "PdfOptionsInputPageSizeEnum",
     "PdfOptionsInputPageOrientationEnum",
     "PermissionInputShareModeEnum",
     "PermissionsMetadataTypeInputTypeEnum",
