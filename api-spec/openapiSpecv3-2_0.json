@@ -13657,6 +13657,21 @@
       "PdfOptionsInput": {
         "type": "object",
         "properties": {
+          "page_size": {
+            "type": "string",
+            "enum": [
+              "A4",
+              "CONTINUOUS"
+            ],
+            "description": "Size of PDF page. `A4` generates a paginated A4 PDF. `CONTINUOUS` generates a continuous PDF that matches the Liveboard layout. Each Liveboard tab has its own page of variable length. Defaults to `A4` if not specified. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>",
+            "nullable": true
+          },
+          "zoom_level": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Zoom level percentage for the PDF. Only applicable when `page_size` is `CONTINUOUS`. Acceptable values are integers in the range [45, 175]. Defaults to 100 if not specified. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>",
+            "nullable": true
+          },
           "include_cover_page": {
             "type": "boolean",
             "default": true,
@@ -13672,7 +13687,7 @@
           "include_filter_page": {
             "type": "boolean",
             "default": true,
-            "description": "Indicates whether to include a page with all applied filters.",
+            "description": "Indicates whether to include a page with all applied filters. For `CONTINUOUS` page_size, this parameter indicates whether to include the filter header.",
             "nullable": true
           },
           "include_page_number": {
