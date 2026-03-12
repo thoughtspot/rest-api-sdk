@@ -2833,7 +2833,7 @@
     "/api/rest/2.0/connections/{connection_identifier}/status": {
       "put": {
         "operationId": "updateConnectionStatus",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\nActivates or deactivates a connection. A deactivated connection cannot be used for queries or operations until it is activated again.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required. Only the connection owner or an administrator can perform this operation.\n\n#### Usage guidelines\n\nTo update the status of a connection, specify the connection GUID or name in the `connection_identifier` path parameter and the desired `status` in the request body.\n\n- **ACTIVATED**: Enables the connection. Queries and operations can resume on an activated connection.\n- **DEACTIVATED**: Disables the connection. A deactivated connection cannot be used for queries or operations until it is activated again.\n\n**NOTE**: Deactivating a connection does not delete the connection or its associated metadata. The connection and its objects remain intact and can be reactivated at any time.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Connections",
           "26.6.0.cl"
@@ -22059,10 +22059,7 @@
               "DEACTIVATED"
             ]
           }
-        },
-        "required": [
-          "status"
-        ]
+        }
       },
       "UpdateConnectionV2Request": {
         "type": "object",
