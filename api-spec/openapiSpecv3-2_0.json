@@ -23636,6 +23636,12 @@
             "type": "boolean",
             "nullable": true
           },
+          "include_personalised_views": {
+            "description": "When set to true and include_details is also true, includes personalised views\nin the metadata_detail for LIVEBOARD objects.",
+            "default": false,
+            "type": "boolean",
+            "nullable": true
+          },
           "include_headers": {
             "description": "Includes headers of the metadata objects.",
             "default": true,
