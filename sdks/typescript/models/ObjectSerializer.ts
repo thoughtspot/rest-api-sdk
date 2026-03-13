@@ -770,7 +770,7 @@ import { SearchCustomActionsRequestDefaultActionConfig } from '../models/SearchC
 import { SearchDataRequest  , SearchDataRequestDataFormatEnum        } from '../models/SearchDataRequest';
 import { SearchDataResponse } from '../models/SearchDataResponse';
 import { SearchEmailCustomizationRequest } from '../models/SearchEmailCustomizationRequest';
-import { SearchMetadataRequest   , SearchMetadataRequestDependentObjectVersionEnum                     , SearchMetadataRequestLiveboardResponseVersionEnum    } from '../models/SearchMetadataRequest';
+import { SearchMetadataRequest   , SearchMetadataRequestDependentObjectVersionEnum                      , SearchMetadataRequestLiveboardResponseVersionEnum    } from '../models/SearchMetadataRequest';
 import { SearchMetadataRequestFavoriteObjectOptions } from '../models/SearchMetadataRequestFavoriteObjectOptions';
 import { SearchMetadataRequestSortOptions, SearchMetadataRequestSortOptionsFieldNameEnum  , SearchMetadataRequestSortOptionsOrderEnum   } from '../models/SearchMetadataRequestSortOptions';
 import { SearchOrgsRequest  , SearchOrgsRequestVisibilityEnum  , SearchOrgsRequestStatusEnum    } from '../models/SearchOrgsRequest';

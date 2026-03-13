@@ -11786,6 +11786,12 @@ _SearchMetadataRequest.attributeTypeMap = [
     "format": ""
   },
   {
+    "name": "include_personalised_views",
+    "baseName": "include_personalised_views",
+    "type": "boolean",
+    "format": ""
+  },
+  {
     "name": "include_headers",
     "baseName": "include_headers",
     "type": "boolean",

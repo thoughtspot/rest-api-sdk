@@ -19824,6 +19824,7 @@ components:
           subtypes:
           - ONE_TO_ONE_LOGICAL
           - ONE_TO_ONE_LOGICAL
+        include_personalised_views: false
         include_visualization_headers: false
         include_only_published_objects: false
         modified_by_user_identifiers:
@@ -19921,6 +19922,13 @@ components:
         include_details:
           default: false
           description: Includes complete details of the metadata objects.
+          nullable: true
+          type: boolean
+        include_personalised_views:
+          default: false
+          description: |-
+            When set to true and include_details is also true, includes personalised views
+            in the metadata_detail for LIVEBOARD objects.
           nullable: true
           type: boolean
         include_headers:

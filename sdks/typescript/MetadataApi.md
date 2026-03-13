@@ -825,6 +825,7 @@ apiInstance.searchMetadata(
     include_dependent_objects: false,
     dependent_objects_record_size: 50,
     include_details: false,
+    include_personalised_views: false,
     include_headers: true,
     include_hidden_objects: false,
     include_incomplete_objects: false,

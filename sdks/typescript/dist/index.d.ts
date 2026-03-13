@@ -15077,6 +15077,10 @@ declare class SearchMetadataRequest {
     */
     'include_details'?: boolean | null;
     /**
+    * When set to true and include_details is also true, includes personalised views in the metadata_detail for LIVEBOARD objects.
+    */
+    'include_personalised_views'?: boolean | null;
+    /**
     * Includes headers of the metadata objects.
     */
     'include_headers'?: boolean | null;

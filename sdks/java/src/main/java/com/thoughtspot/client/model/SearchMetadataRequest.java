@@ -151,6 +151,13 @@ public class SearchMetadataRequest implements Serializable {
     @javax.annotation.Nullable
     private Boolean includeDetails = false;
 
+    public static final String SERIALIZED_NAME_INCLUDE_PERSONALISED_VIEWS =
+            "include_personalised_views";
+
+    @SerializedName(SERIALIZED_NAME_INCLUDE_PERSONALISED_VIEWS)
+    @javax.annotation.Nullable
+    private Boolean includePersonalisedViews = false;
+
     public static final String SERIALIZED_NAME_INCLUDE_HEADERS = "include_headers";
 
     @SerializedName(SERIALIZED_NAME_INCLUDE_HEADERS)
@@ -544,6 +551,28 @@ public class SearchMetadataRequest implements Serializable {
 
     public void setIncludeDetails(@javax.annotation.Nullable Boolean includeDetails) {
         this.includeDetails = includeDetails;
+    }
+
+    public SearchMetadataRequest includePersonalisedViews(
+            @javax.annotation.Nullable Boolean includePersonalisedViews) {
+        this.includePersonalisedViews = includePersonalisedViews;
+        return this;
+    }
+
+    /**
+     * When set to true and include_details is also true, includes personalised views in the
+     * metadata_detail for LIVEBOARD objects.
+     *
+     * @return includePersonalisedViews
+     */
+    @javax.annotation.Nullable
+    public Boolean getIncludePersonalisedViews() {
+        return includePersonalisedViews;
+    }
+
+    public void setIncludePersonalisedViews(
+            @javax.annotation.Nullable Boolean includePersonalisedViews) {
+        this.includePersonalisedViews = includePersonalisedViews;
     }
 
     public SearchMetadataRequest includeHeaders(@javax.annotation.Nullable Boolean includeHeaders) {
@@ -945,6 +974,9 @@ public class SearchMetadataRequest implements Serializable {
                         this.dependentObjectsRecordSize,
                         searchMetadataRequest.dependentObjectsRecordSize)
                 && Objects.equals(this.includeDetails, searchMetadataRequest.includeDetails)
+                && Objects.equals(
+                        this.includePersonalisedViews,
+                        searchMetadataRequest.includePersonalisedViews)
                 && Objects.equals(this.includeHeaders, searchMetadataRequest.includeHeaders)
                 && Objects.equals(
                         this.includeHiddenObjects, searchMetadataRequest.includeHiddenObjects)
@@ -1002,6 +1034,7 @@ public class SearchMetadataRequest implements Serializable {
                 includeDependentObjects,
                 dependentObjectsRecordSize,
                 includeDetails,
+                includePersonalisedViews,
                 includeHeaders,
                 includeHiddenObjects,
                 includeIncompleteObjects,
@@ -1053,6 +1086,9 @@ public class SearchMetadataRequest implements Serializable {
                 .append(toIndentedString(dependentObjectsRecordSize))
                 .append("\n");
         sb.append("    includeDetails: ").append(toIndentedString(includeDetails)).append("\n");
+        sb.append("    includePersonalisedViews: ")
+                .append(toIndentedString(includePersonalisedViews))
+                .append("\n");
         sb.append("    includeHeaders: ").append(toIndentedString(includeHeaders)).append("\n");
         sb.append("    includeHiddenObjects: ")
                 .append(toIndentedString(includeHiddenObjects))
@@ -1120,6 +1156,7 @@ public class SearchMetadataRequest implements Serializable {
         openapiFields.add("include_dependent_objects");
         openapiFields.add("dependent_objects_record_size");
         openapiFields.add("include_details");
+        openapiFields.add("include_personalised_views");
         openapiFields.add("include_headers");
         openapiFields.add("include_hidden_objects");
         openapiFields.add("include_incomplete_objects");
