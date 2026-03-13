@@ -16,73 +16,54 @@ import com.google.gson.stream.JsonWriter;
 import com.thoughtspot.client.JSON;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** LBContextInput */
+/** SendAgentConversationMessageStreamingRequest */
 @javax.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         comments = "Generator version: 7.12.0")
-public class LBContextInput implements Serializable {
+public class SendAgentConversationMessageStreamingRequest implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public static final String SERIALIZED_NAME_LIVEBOARD_IDENTIFIER = "liveboard_identifier";
+    public static final String SERIALIZED_NAME_MESSAGES = "messages";
 
-    @SerializedName(SERIALIZED_NAME_LIVEBOARD_IDENTIFIER)
+    @SerializedName(SERIALIZED_NAME_MESSAGES)
     @javax.annotation.Nonnull
-    private String liveboardIdentifier;
+    private List<String> messages;
 
-    public static final String SERIALIZED_NAME_VISUALIZATION_IDENTIFIER =
-            "visualization_identifier";
+    public SendAgentConversationMessageStreamingRequest() {}
 
-    @SerializedName(SERIALIZED_NAME_VISUALIZATION_IDENTIFIER)
-    @javax.annotation.Nonnull
-    private String visualizationIdentifier;
+    public SendAgentConversationMessageStreamingRequest messages(
+            @javax.annotation.Nonnull List<String> messages) {
+        this.messages = messages;
+        return this;
+    }
 
-    public LBContextInput() {}
-
-    public LBContextInput liveboardIdentifier(
-            @javax.annotation.Nonnull String liveboardIdentifier) {
-        this.liveboardIdentifier = liveboardIdentifier;
+    public SendAgentConversationMessageStreamingRequest addMessagesItem(String messagesItem) {
+        if (this.messages == null) {
+            this.messages = new ArrayList<>();
+        }
+        this.messages.add(messagesItem);
         return this;
     }
 
     /**
-     * Unique identifier of the liveboard.
+     * messages to be sent to the agent
      *
-     * @return liveboardIdentifier
+     * @return messages
      */
     @javax.annotation.Nonnull
-    public String getLiveboardIdentifier() {
-        return liveboardIdentifier;
+    public List<String> getMessages() {
+        return messages;
     }
 
-    public void setLiveboardIdentifier(@javax.annotation.Nonnull String liveboardIdentifier) {
-        this.liveboardIdentifier = liveboardIdentifier;
-    }
-
-    public LBContextInput visualizationIdentifier(
-            @javax.annotation.Nonnull String visualizationIdentifier) {
-        this.visualizationIdentifier = visualizationIdentifier;
-        return this;
-    }
-
-    /**
-     * Unique identifier of the visualization.
-     *
-     * @return visualizationIdentifier
-     */
-    @javax.annotation.Nonnull
-    public String getVisualizationIdentifier() {
-        return visualizationIdentifier;
-    }
-
-    public void setVisualizationIdentifier(
-            @javax.annotation.Nonnull String visualizationIdentifier) {
-        this.visualizationIdentifier = visualizationIdentifier;
+    public void setMessages(@javax.annotation.Nonnull List<String> messages) {
+        this.messages = messages;
     }
 
     /**
@@ -97,9 +78,10 @@ public class LBContextInput implements Serializable {
      *
      * @param key name of the property
      * @param value value of the property
-     * @return the LBContextInput instance itself
+     * @return the SendAgentConversationMessageStreamingRequest instance itself
      */
-    public LBContextInput putAdditionalProperty(String key, Object value) {
+    public SendAgentConversationMessageStreamingRequest putAdditionalProperty(
+            String key, Object value) {
         if (this.additionalProperties == null) {
             this.additionalProperties = new HashMap<String, Object>();
         }
@@ -137,28 +119,24 @@ public class LBContextInput implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        LBContextInput lbContextInput = (LBContextInput) o;
-        return Objects.equals(this.liveboardIdentifier, lbContextInput.liveboardIdentifier)
+        SendAgentConversationMessageStreamingRequest sendAgentConversationMessageStreamingRequest =
+                (SendAgentConversationMessageStreamingRequest) o;
+        return Objects.equals(this.messages, sendAgentConversationMessageStreamingRequest.messages)
                 && Objects.equals(
-                        this.visualizationIdentifier, lbContextInput.visualizationIdentifier)
-                && Objects.equals(this.additionalProperties, lbContextInput.additionalProperties);
+                        this.additionalProperties,
+                        sendAgentConversationMessageStreamingRequest.additionalProperties);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(liveboardIdentifier, visualizationIdentifier, additionalProperties);
+        return Objects.hash(messages, additionalProperties);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class LBContextInput {\n");
-        sb.append("    liveboardIdentifier: ")
-                .append(toIndentedString(liveboardIdentifier))
-                .append("\n");
-        sb.append("    visualizationIdentifier: ")
-                .append(toIndentedString(visualizationIdentifier))
-                .append("\n");
+        sb.append("class SendAgentConversationMessageStreamingRequest {\n");
+        sb.append("    messages: ").append(toIndentedString(messages)).append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
                 .append("\n");
@@ -183,35 +161,37 @@ public class LBContextInput implements Serializable {
     static {
         // a set of all properties/fields (JSON key names)
         openapiFields = new HashSet<String>();
-        openapiFields.add("liveboard_identifier");
-        openapiFields.add("visualization_identifier");
+        openapiFields.add("messages");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
-        openapiRequiredFields.add("liveboard_identifier");
-        openapiRequiredFields.add("visualization_identifier");
+        openapiRequiredFields.add("messages");
     }
 
     /**
      * Validates the JSON Element and throws an exception if issues found
      *
      * @param jsonElement JSON Element
-     * @throws IOException if the JSON Element is invalid with respect to LBContextInput
+     * @throws IOException if the JSON Element is invalid with respect to
+     *     SendAgentConversationMessageStreamingRequest
      */
     public static void validateJsonElement(JsonElement jsonElement) throws IOException {
         if (jsonElement == null) {
-            if (!LBContextInput.openapiRequiredFields
+            if (!SendAgentConversationMessageStreamingRequest.openapiRequiredFields
                     .isEmpty()) { // has required fields but JSON element is null
                 throw new IllegalArgumentException(
                         String.format(
-                                "The required field(s) %s in LBContextInput is not found in the"
-                                        + " empty JSON string",
-                                LBContextInput.openapiRequiredFields.toString()));
+                                "The required field(s) %s in"
+                                    + " SendAgentConversationMessageStreamingRequest is not found"
+                                    + " in the empty JSON string",
+                                SendAgentConversationMessageStreamingRequest.openapiRequiredFields
+                                        .toString()));
             }
         }
 
         // check to make sure all required properties/fields are present in the JSON string
-        for (String requiredField : LBContextInput.openapiRequiredFields) {
+        for (String requiredField :
+                SendAgentConversationMessageStreamingRequest.openapiRequiredFields) {
             if (jsonElement.getAsJsonObject().get(requiredField) == null) {
                 throw new IllegalArgumentException(
                         String.format(
@@ -220,19 +200,17 @@ public class LBContextInput implements Serializable {
             }
         }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-        if (!jsonObj.get("liveboard_identifier").isJsonPrimitive()) {
+        // ensure the required json array is present
+        if (jsonObj.get("messages") == null) {
+            throw new IllegalArgumentException(
+                    "Expected the field `linkedContent` to be an array in the JSON string but got"
+                            + " `null`");
+        } else if (!jsonObj.get("messages").isJsonArray()) {
             throw new IllegalArgumentException(
                     String.format(
-                            "Expected the field `liveboard_identifier` to be a primitive type in"
-                                    + " the JSON string but got `%s`",
-                            jsonObj.get("liveboard_identifier").toString()));
-        }
-        if (!jsonObj.get("visualization_identifier").isJsonPrimitive()) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            "Expected the field `visualization_identifier` to be a primitive type"
-                                    + " in the JSON string but got `%s`",
-                            jsonObj.get("visualization_identifier").toString()));
+                            "Expected the field `messages` to be an array in the JSON string but"
+                                    + " got `%s`",
+                            jsonObj.get("messages").toString()));
         }
     }
 
@@ -240,17 +218,23 @@ public class LBContextInput implements Serializable {
         @SuppressWarnings("unchecked")
         @Override
         public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-            if (!LBContextInput.class.isAssignableFrom(type.getRawType())) {
-                return null; // this class only serializes 'LBContextInput' and its subtypes
+            if (!SendAgentConversationMessageStreamingRequest.class.isAssignableFrom(
+                    type.getRawType())) {
+                return null; // this class only serializes
+                // 'SendAgentConversationMessageStreamingRequest' and its subtypes
             }
             final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-            final TypeAdapter<LBContextInput> thisAdapter =
-                    gson.getDelegateAdapter(this, TypeToken.get(LBContextInput.class));
+            final TypeAdapter<SendAgentConversationMessageStreamingRequest> thisAdapter =
+                    gson.getDelegateAdapter(
+                            this,
+                            TypeToken.get(SendAgentConversationMessageStreamingRequest.class));
 
             return (TypeAdapter<T>)
-                    new TypeAdapter<LBContextInput>() {
+                    new TypeAdapter<SendAgentConversationMessageStreamingRequest>() {
                         @Override
-                        public void write(JsonWriter out, LBContextInput value) throws IOException {
+                        public void write(
+                                JsonWriter out, SendAgentConversationMessageStreamingRequest value)
+                                throws IOException {
                             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
                             obj.remove("additionalProperties");
                             // serialize additional properties
@@ -280,12 +264,14 @@ public class LBContextInput implements Serializable {
                         }
 
                         @Override
-                        public LBContextInput read(JsonReader in) throws IOException {
+                        public SendAgentConversationMessageStreamingRequest read(JsonReader in)
+                                throws IOException {
                             JsonElement jsonElement = elementAdapter.read(in);
                             validateJsonElement(jsonElement);
                             JsonObject jsonObj = jsonElement.getAsJsonObject();
                             // store additional fields in the deserialized instance
-                            LBContextInput instance = thisAdapter.fromJsonTree(jsonObj);
+                            SendAgentConversationMessageStreamingRequest instance =
+                                    thisAdapter.fromJsonTree(jsonObj);
                             for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
                                 if (!openapiFields.contains(entry.getKey())) {
                                     if (entry.getValue().isJsonPrimitive()) { // primitive type
@@ -324,18 +310,21 @@ public class LBContextInput implements Serializable {
     }
 
     /**
-     * Create an instance of LBContextInput given an JSON string
+     * Create an instance of SendAgentConversationMessageStreamingRequest given an JSON string
      *
      * @param jsonString JSON string
-     * @return An instance of LBContextInput
-     * @throws IOException if the JSON string is invalid with respect to LBContextInput
+     * @return An instance of SendAgentConversationMessageStreamingRequest
+     * @throws IOException if the JSON string is invalid with respect to
+     *     SendAgentConversationMessageStreamingRequest
      */
-    public static LBContextInput fromJson(String jsonString) throws IOException {
-        return JSON.getGson().fromJson(jsonString, LBContextInput.class);
+    public static SendAgentConversationMessageStreamingRequest fromJson(String jsonString)
+            throws IOException {
+        return JSON.getGson()
+                .fromJson(jsonString, SendAgentConversationMessageStreamingRequest.class);
     }
 
     /**
-     * Convert an instance of LBContextInput to an JSON string
+     * Convert an instance of SendAgentConversationMessageStreamingRequest to an JSON string
      *
      * @return JSON string
      */

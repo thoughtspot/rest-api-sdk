@@ -6,12 +6,12 @@
   },
   "x-roles": [
     {
-      "name": "10.13.0.cl",
-      "id": "10.13.0.cl",
+      "name": "26.2.0.cl",
+      "id": "26.2.0.cl",
       "tags": [
-        "10.13.0.cl"
+        "26.2.0.cl"
       ],
-      "description": "Roles for version 10.13.0.cl"
+      "description": "Roles for version 26.2.0.cl"
     },
     {
       "name": "10.4.0.cl",
@@ -30,12 +30,28 @@
       "description": "Roles for version 10.15.0.cl"
     },
     {
+      "name": "10.13.0.cl",
+      "id": "10.13.0.cl",
+      "tags": [
+        "10.13.0.cl"
+      ],
+      "description": "Roles for version 10.13.0.cl"
+    },
+    {
       "name": "10.7.0.cl",
       "id": "10.7.0.cl",
       "tags": [
         "10.7.0.cl"
       ],
       "description": "Roles for version 10.7.0.cl"
+    },
+    {
+      "name": "26.5.0.cl",
+      "id": "26.5.0.cl",
+      "tags": [
+        "26.5.0.cl"
+      ],
+      "description": "Roles for version 26.5.0.cl"
     },
     {
       "name": "9.0.0.cl",
@@ -92,22 +108,6 @@
         "9.9.0.cl"
       ],
       "description": "Roles for version 9.9.0.cl"
-    },
-    {
-      "name": "26.2.0.cl",
-      "id": "26.2.0.cl",
-      "tags": [
-        "26.2.0.cl"
-      ],
-      "description": "Roles for version 26.2.0.cl"
-    },
-    {
-      "name": "26.5.0.cl",
-      "id": "26.5.0.cl",
-      "tags": [
-        "26.5.0.cl"
-      ],
-      "description": "Roles for version 26.5.0.cl"
     },
     {
       "name": "9.6.0.cl",
@@ -203,10 +203,10 @@
     "/api/rest/2.0/ai/agent/conversation/create": {
       "post": {
         "operationId": "createAgentConversation",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.13.0.cl or later</span>\n\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.2.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.2.0.cl or later</span>\n\nCreates a new Spotter agent conversation based on the provided context and settings. The endpoint was in Beta from 26.2.0.cl through 26.4.0.cl.\n\nRequires `CAN_USE_SPOTTER` privilege and at least view access to the metadata object specified in the request.\n\n#### Usage guidelines\n\nThe request must include the `metadata_context` parameter to define the conversation context. The context type can be one of:\n\n- `DATA_SOURCE` *(available from 26.5.0.cl)*: targets a specific data source. Provide `data_source_identifier` in `data_source_context` for a single data source, or `data_source_identifiers` for multi-data-source context. The deprecated `guid` field is accepted for backwards compatibility.\n- `AUTO_MODE` *(available from 26.5.0.cl)*: automatically discovers and selects the most relevant datasets for the user's queries.\n\n> **Note for callers on versions 26.2.0.cl – 26.4.0.cl (Beta):** use the lowercase `data_source` enum value with the `guid` field instead of the above. Example: `{ \"type\": \"data_source\", \"data_source_context\": { \"guid\": \"<worksheet-id>\" } }`.\n\nThe `conversation_settings` parameter controls which Spotter capabilities are enabled for the conversation:\n\n- `enable_contextual_change_analysis` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to `false` has no effect on versions >= 26.2.0.cl\n- `enable_natural_language_answer_generation` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to `false` has no effect on versions >= 26.2.0.cl\n- `enable_reasoning` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to `false` has no effect on versions >= 26.2.0.cl\n- `enable_save_chat` (default: `false`, *available from 26.5.0.cl*) — enables saving the conversation for later retrieval via conversation history\n\nIf the request is successful, the response includes a unique `conversation_identifier` that must be passed to `sendAgentConversationMessage` or `sendAgentConversationMessageStreaming` to send messages within this conversation. The response also includes `conversation_id` with the same value for backwards compatibility; use `conversation_identifier` for new integrations.\n\n#### Example request\n\n```json\n{\n  \"metadata_context\": {\n    \"type\": \"DATA_SOURCE\",\n    \"data_source_context\": {\n      \"data_source_identifier\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\"\n    }\n  },\n  \"conversation_settings\": {}\n}\n```\n\n#### Error responses\n\n| Code | Description                                                                                                                             |\n| ---- | --------------------------------------------------------------------------------------------------------------------------------------- |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                    |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks view permission on the specified metadata object. |\n\n> ###### Note:\n>\n> - This endpoint was in Beta from 26.2.0.cl through 26.4.0.cl and is Generally Available from version 26.5.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
-          "10.13.0.cl"
+          "26.2.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -226,6 +226,22 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AgentConversation"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "Create a conversation with a specific data source",
+                    "value": {
+                      "conversation_id": "wwHQ5j8O8dQC",
+                      "conversation_identifier": "wwHQ5j8O8dQC"
+                    }
+                  },
+                  "example_2": {
+                    "summary": "Create a conversation using auto mode where the agent automatically discovers and selects the most relevant datasets for the user's queries",
+                    "value": {
+                      "conversation_id": "aaHQ5j8O8dQC",
+                      "conversation_identifier": "aaHQ5j8O8dQC"
+                    }
+                  }
                 }
               }
             }
@@ -250,6 +266,26 @@
               }
             }
           },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
           "500": {
             "description": "Operation failed",
             "content": {
@@ -266,7 +302,7 @@
     "/api/rest/2.0/ai/conversation/create": {
       "post": {
         "operationId": "createConversation",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nCreates a Conversation object to start an AI-driven conversation based on a specific data model.\n\nRequires at least view access to the metadata object specified in the request.\n\n#### Usage guidelines\n\nThis API requires the `metadata_identifier` parameter to define the context for the conversation.\n\nYou can also specify the tokens to initiate the conversation as shown in this example:\n\n`\"tokens\": \"[tea],[sales],[type]\"`\n\nIf the API request is successful, ThoughtSpot returns the ID of the conversation.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nCreates a new conversation session tied to a specific data model for AI-driven natural language querying.\n\nRequires `CAN_USE_SPOTTER` privilege and at least view access to the metadata object specified in the request.\n\n#### Usage guidelines\n\nThe request must include:\n- `metadata_identifier`: the unique ID of the data source that provides context for the conversation\n\nOptionally, you can provide:\n- `tokens`: a token string to set initial context for the conversation (e.g., `\"[sales],[item type],[state]\"`)\n\nIf the request is successful, ThoughtSpot returns a unique `conversation_identifier` that must be passed to `sendMessage` to continue the conversation.\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks view permission on the specified metadata object. |\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "10.4.0.cl"
@@ -313,6 +349,26 @@
               }
             }
           },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
           "500": {
             "description": "Operation failed",
             "content": {
@@ -329,7 +385,7 @@
     "/api/rest/2.0/ai/data-source-suggestions": {
       "post": {
         "operationId": "getDataSourceSuggestions",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.15.0.cl or later</span>\n\nProvides relevant data source recommendations for a user-submitted natural language query.\n\nTo use this API, the user must have at least view-level access to the underlying metadata entities referenced in the response.\n\n#### Usage guidelines\n\nThe request must include a `query` string via the request body.\n\nThe returned results include metadata such as:\n- `confidence`: a float indicating the model's confidence in the relevance of each recommendation\n- `details`: includes `data_source_identifier`, `data_source_name`, and `description` of each recommended data source\n- `reasoning`: rationale provided by the LLM to explain why each data source was recommended\n\nIf the API request is successful, ThoughtSpot returns a ranked list of data sources, each annotated with relevant reasoning.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before it is made Generally Available.\n> * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.15.0.cl or later</span>\n\nSuggests the most relevant data sources for a given natural language query, ranked by confidence with LLM-generated reasoning.\n\nRequires `CAN_USE_SPOTTER` privilege and at least view-level access to the underlying metadata entities referenced in the response.\n\n#### Usage guidelines\n\nThe request must include:\n- `query`: the natural language question to find relevant data sources for\n\nIf the request is successful, the API returns a ranked list of suggested data sources, each containing:\n- `confidence`: a float score indicating the model's confidence in the relevance of the suggestion\n- `details`: metadata about the data source\n  - `data_source_identifier`: the unique ID of the data source\n  - `data_source_name`: the display name of the data source\n  - `description`: a description of the data source\n- `reasoning`: LLM-generated rationale explaining why the data source was recommended\n\n#### Error responses\n\n| Code | Description                                                                                                                                |\n|------|--------------------------------------------------------------------------------------------------------------------------------------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                       |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks view permission on the underlying metadata entities. |\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before it is made Generally Available.\n> * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "10.15.0.cl"
@@ -376,6 +432,26 @@
               }
             }
           },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
           "500": {
             "description": "Operation failed",
             "content": {
@@ -392,7 +468,7 @@
     "/api/rest/2.0/ai/instructions/get": {
       "post": {
         "operationId": "getNLInstructions",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.15.0.cl or later</span>\n\nThis API allows users to retrieve existing natural language (NL) instructions for a specific data-model. These instructions guide the AI system in understanding data context and generating more accurate responses when processing natural language queries.\n\n#### Usage guidelines\n\nTo retrieve NL instructions for a data-model, the request must include:\n- `data_source_identifier`: The unique ID of the data-model to retrieve NL instructions\n\nThe API returns a response object with:\n- `nl_instructions_info`: An array of instruction objects, each containing:\n  - `instructions`: Array of text instructions for natural language processing\n  - `scope`: The scope of the instruction (`GLOBAL`). It can be extended to data-model-user scope in future.\n\n#### Instructions Scope\n\n- **GLOBAL**: Instructions that apply globally across the system on the given data-model (currently only global instructions are supported)\n\n> ###### Note:\n> * To use this API, the user needs atleast view access on the data-model and they must use corresponding org related bearerToken where the data-model exists.\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * Available from version 10.15.0.cl and later.\n> * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n> * Use this API to view currently configured instructions before modifying them with `setNLInstructions`.\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.15.0.cl or later</span>\n\nRetrieves existing natural language (NL) instructions configured for a specific data model. These instructions guide the AI system in understanding data context and generating more accurate responses.\n\nRequires `CAN_USE_SPOTTER` privilege, at least view access on the data model, and a bearer token corresponding to the org where the data model exists.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `data_source_identifier`: the unique ID of the data model to retrieve instructions for\n\nIf the request is successful, the API returns:\n\n- `nl_instructions_info`: an array of instruction objects, each containing:\n  - `instructions`: the configured text instructions for AI processing\n  - `scope`: the scope of the instruction — currently only `GLOBAL` is supported\n\n#### Instructions scope\n\n- **GLOBAL**: Instructions that apply globally across the system on the given data-model (currently only global instructions are supported)\n\n#### Error responses\n\n| Code | Description                                                                                                                                                                                        |\n|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                                                               |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, lacks view access on the data model, or the bearer token does not correspond to the org where the data model exists. |\n\n> ###### Note:\n>\n> - To use this API, the user needs at least view access on the data model, and must use the bearer token corresponding to the org where the data model exists.\n> - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> - Available from version 10.15.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n> - Use this API to review currently configured instructions before modifying them with `setNLInstructions`.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "10.15.0.cl"
@@ -439,6 +515,26 @@
               }
             }
           },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
           "500": {
             "description": "Operation failed",
             "content": {
@@ -455,7 +551,7 @@
     "/api/rest/2.0/ai/relevant-questions/": {
       "post": {
         "operationId": "getRelevantQuestions",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.13.0.cl or later</span>\n\nBreaks down a user-submitted query into a series of analytical sub-questions using relevant contextual metadata.\n\nTo use this API, the user must have at least view-level access to the referenced metadata objects.\n\n#### Usage guidelines\n\nTo accurately generate relevant questions, the request must include at least one of the following metadata identifiers within `metadata_context` : `conversation_identifier`, `answer_identifiers`, `liveboard_identifiers`, or `data_source_identifiers`.\n\nYou can further enhance the quality and precision of breakdown by providing additional `ai_context` such as:\n\n- `content`: User provided content like text data, csv data as a string message to provide context & potentially improve the quality of the response.\n- `instructions`: User specific text instructions sent to AI system for processing the query.\n\nAdditional optional parameters include:\n\n- `limit_relevant_questions`: Controls the maximum number of relevant questions returned. Defaults to 5 if not specified.\n- `bypass_cache`: If set to true, forces fresh computation instead of returning cached results.\n\nIf the API request is successful, ThoughtSpot returns a list of relevant analytical queries, each aligned with the user's original question. Each returned question includes the query string, along with the identifier and name of the corresponding data source.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.13.0.cl or later</span>\n\nBreaks down a natural language query into a series of smaller analytical sub-questions, each mapped to a relevant data source.\n\nRequires `CAN_USE_SPOTTER` privilege and at least view-level access to the referenced metadata objects.\n\n#### Usage guidelines\n\nThe request must include:\n- `query`: the natural language question to decompose into analytical sub-questions\n- `metadata_context`: at least one of the following context identifiers to guide question generation:\n  - `conversation_identifier` — an existing conversation session ID\n  - `answer_identifiers` — a list of Answer GUIDs\n  - `liveboard_identifiers` — a list of Liveboard GUIDs\n  - `data_source_identifiers` — a list of data source GUIDs\n\nOptional parameters for refining the output:\n- `ai_context`: additional context to improve response quality\n  - `content` — supplementary text or CSV data as string input\n  - `instructions` — custom text instructions for the AI system\n- `limit_relevant_questions`: maximum number of questions to return (default: `5`)\n- `bypass_cache`: if `true`, forces fresh computation instead of returning cached results\n\nIf the request is successful, the API returns a list of relevant analytical questions, each containing:\n- `query`: the generated sub-question\n- `data_source_identifier`: the unique ID of the data source the question targets\n- `data_source_name`: the display name of the corresponding data source\n\n#### Error responses\n\n| Code | Description                                                                                                                           |\n|------|---------------------------------------------------------------------------------------------------------------------------------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                  |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks view access to the referenced metadata objects. |\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "10.13.0.cl"
@@ -502,6 +598,26 @@
               }
             }
           },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
           "500": {
             "description": "Operation failed",
             "content": {
@@ -518,7 +634,7 @@
     "/api/rest/2.0/ai/analytical-questions": {
       "post": {
         "operationId": "queryGetDecomposedQuery",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.7.0.cl or later</span>\n\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.7.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 10.7.0.cl or later</span>\n\n**Deprecated** — Use `getRelevantQuestions` instead (available from 10.13.0.cl).\n\nBreaks down a topical or goal-oriented natural language question into smaller, actionable analytical sub-questions, each mapped to a relevant data source for independent execution.\n\nRequires `CAN_USE_SPOTTER` privilege and at least view-level access to the referenced metadata objects.\n\n#### Usage guidelines\n\nThe request accepts the following parameters:\n\n- `nlsRequest`: contains the user `query` to decompose, along with optional `instructions` and `bypassCache` flag\n- `worksheetIds`: list of data source identifiers to scope the decomposition\n- `answerIds`: list of Answer GUIDs whose data guides the response\n- `liveboardIds`: list of Liveboard GUIDs whose data guides the response\n- `conversationId`: an existing conversation session ID for context continuity\n- `content`: supplementary text or CSV data to improve response quality\n- `maxDecomposedQueries`: maximum number of sub-questions to return (default: `5`)\n\nIf the request is successful, the API returns a `decomposedQueryResponse` containing a list of `decomposedQueries`, each with:\n- `query`: the generated analytical sub-question\n- `worksheetId`: the unique ID of the data source the question targets\n- `worksheetName`: the display name of the corresponding data source\n\n#### Error responses\n\n| Code | Description                                                                                                                           |\n|------|---------------------------------------------------------------------------------------------------------------------------------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                  |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks view access to the referenced metadata objects. |\n\n> ###### Note:\n> * This endpoint is deprecated since 10.13.0.cl. Use `getRelevantQuestions` for new integrations.\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter — please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
         "deprecated": true,
         "tags": [
           "AI",
@@ -566,6 +682,321 @@
               }
             }
           },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send": {
+      "post": {
+        "operationId": "sendAgentConversationMessage",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>\n\nSends natural language messages to an existing Spotter agent conversation and returns the complete response synchronously.\n\nRequires `CAN_USE_SPOTTER` privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by `conversation_identifier`. A conversation must first be created using the `createAgentConversation` API.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier`: the unique session ID returned by `createAgentConversation`, used for context continuity and message tracking\n- `messages`: an array of one or more text messages to send to the agent\n\nThe API returns an array of response objects, each containing:\n\n- `type`: the kind of response — `text`, `answer`, or `error`\n- `message`: the main content of the response\n- `metadata`: additional information depending on the message type (e.g., answer metadata includes analytics and visualization details)\n\n#### Error responses\n\n| Code | Description                                                                                                                      |\n|------|----------------------------------------------------------------------------------------------------------------------------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks permission on the referenced conversation. |\n\n> ###### Note:\n>\n> - This endpoint is Generally Available from version 26.5.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n> - For real-time streamed responses, use `sendAgentConversationMessageStreaming` instead.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.5.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendAgentConversationMessageRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "conversation_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier for the conversation (used to track context)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "Send a message to an existing agent conversation",
+                    "value": {
+                      "messages": [
+                        {
+                          "metadata": {},
+                          "internal": {},
+                          "type": "text",
+                          "text": "\n\nI'll compare sales between 2025 and 2024. First, let me get the dataset context to identify the relevant sales and date columns.",
+                          "agent_context": ""
+                        },
+                        {
+                          "metadata": {},
+                          "internal": {},
+                          "type": "text",
+                          "text": "```json\n{\"search_mode\": \"semantic\", \"dataset_name\": \"(Sample) Retail - Apparel\", \"columns\": [{\"name\": \"sales\", \"type\": \"MEASURE\", \"data_type\": \"double\"}, {\"name\": \"date\", \"type\": \"ATTRIBUTE\", \"data_type\": \"date\", \"sample_values\": [\"2025\", \"2024\"]}]}\n```",
+                          "agent_context": ""
+                        },
+                        {
+                          "metadata": {},
+                          "internal": {},
+                          "type": "text",
+                          "text": "\n\nPerfect! I found the sales and date columns. I can see the dataset contains sales data for both 2025 and 2024. Now I'll create a comparison query to show sales for 2025 versus 2024.",
+                          "agent_context": ""
+                        },
+                        {
+                          "metadata": {
+                            "output": "<base64-encoded-protobuf-output>",
+                            "worksheet_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
+                            "assumptions": "",
+                            "chart_type": "KPI",
+                            "interrupted": false,
+                            "data_awareness_enabled": true
+                          },
+                          "internal": {},
+                          "type": "answer",
+                          "title": "Compare total sales for 2025 vs 2024",
+                          "description": "",
+                          "session_id": "842bb67a-e08e-4861-97e8-8db9538db51d",
+                          "gen_no": 2,
+                          "sage_query": "[sales] [date] = '2025' vs [date] = '2024'",
+                          "tml_tokens": [
+                            "[sales]",
+                            "[date] = '2025' vs [date] = '2024'"
+                          ],
+                          "formulas": [],
+                          "parameters": [],
+                          "subqueries": [],
+                          "viz_suggestion": "CAEQIBomEiQ2NjE5NzI0Yy1kMjVlLTU4MDItOWNjOC1jNDA3MWY3OWY5MzAoATIA",
+                          "ac_state": null
+                        },
+                        {
+                          "metadata": {},
+                          "internal": {},
+                          "type": "text",
+                          "text": "\n\nThe visualization shows the side-by-side comparison of total sales (in USD) between the two years, allowing you to see the year-over-year performance. You can see the sales figures for both 2024 and 2025, making it easy to identify growth or decline trends in your retail apparel business.",
+                          "agent_context": ""
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send/stream": {
+      "post": {
+        "operationId": "sendAgentConversationMessageStreaming",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>\n\nSends one or more natural language messages to an existing Spotter agent conversation and returns the response as a real-time Server-Sent Events stream.\n\nRequires `CAN_USE_SPOTTER` privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by `conversation_identifier`. A conversation must first be created using the `createAgentConversation` API.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier`: the unique session ID returned by `createAgentConversation`, used for context continuity and message tracking\n- `messages`: an array of one or more text messages to send to the agent\n\nIf the request is valid, the API returns a Server-Sent Events (SSE) stream. Each line has the form `data: [{\"type\": \"...\", ...}]` — a JSON array of event objects. Event types include:\n\n- `ack`: confirms receipt of the request (`node_id`)\n- `conv_title`: conversation title (`title`, `conv_id`)\n- `notification`: status updates on operations (`group_id`, `metadata`, `code` — e.g. `TOOL_CALL_NOTIFICATION`, `nls_start`, `FINAL_RESPONSE_NOTIFICATION`)\n- `text-chunk`: incremental content chunks (`id`, `group_id`, `metadata` with `format` and `type` such as `thinking` or `text`, `content`)\n- `text`: full text block with same structure as `text-chunk`\n- `answer`: structured answer with metadata (`id`, `group_id`, `metadata` with `sage_query`, `session_id`, `title`, etc., `title`)\n- `error`: if a failure occurs\n\n#### Error responses\n\n| Code | Description                                                                                                                      |\n| ---- | -------------------------------------------------------------------------------------------------------------------------------- |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks permission on the referenced conversation. |\n\n> ###### Note:\n>\n> - This endpoint is Generally Available from version 26.5.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n> - The streaming protocol uses Server-Sent Events (SSE).\n> - For the complete response in a single payload, use `sendAgentConversationMessage` instead.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.5.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendAgentConversationMessageStreamingRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "conversation_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier for the conversation (used to track context)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendAgentMessageResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "SSE stream — each line is data: [{\"type\": \"...\", ...}]. Events arrive over time; this example shows a minimal sequence.",
+                    "value": [
+                      {
+                        "type": "ack",
+                        "node_id": "aGxzcFVrtom8"
+                      },
+                      {
+                        "type": "conv_title",
+                        "title": "Sales 2025 vs 2024",
+                        "conv_id": "-XIi04l5rrof"
+                      },
+                      {
+                        "type": "notification",
+                        "group_id": "cDEsAQbSnd3J",
+                        "metadata": {
+                          "type": "thinking",
+                          "tool_title": "Analyzing Sales Performance: 2025 vs 2024"
+                        },
+                        "code": "TOOL_CALL_NOTIFICATION"
+                      },
+                      {
+                        "id": "mNAdvy-NK2l6",
+                        "type": "text-chunk",
+                        "group_id": "cDEsAQbSnd3J",
+                        "metadata": {
+                          "format": "markdown",
+                          "type": "thinking"
+                        },
+                        "content": "\n\nI need to compare sales performance between 2025 and 2024."
+                      },
+                      {
+                        "id": "hxWMDP-pgR3B",
+                        "type": "answer",
+                        "group_id": "m1MTvttEUa7o",
+                        "metadata": {
+                          "sage_query": "[sales] [date] = '2025' vs [date] = '2024'",
+                          "session_id": "431adcf9-1328-4d8c-81a1-0faa7fa37ba6",
+                          "title": "Compare sales for 2025 vs 2024"
+                        },
+                        "title": "Compare sales for 2025 vs 2024"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendAgentMessageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
           "500": {
             "description": "Operation failed",
             "content": {
@@ -582,10 +1013,11 @@
     "/api/rest/2.0/ai/agent/{conversation_identifier}/converse": {
       "post": {
         "operationId": "sendAgentMessage",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.15.0.cl or later</span>\n\nThis API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages. \nTo use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.\n\n\n#### Usage guidelines\n\nTo initiate or continue a conversation, the request must include:\n- `conversation_identifier`: a unique session ID for continuity and message tracking\n- `messages`: an array of one or more text messages, each with a value and type\n\nThe API returns a array of object with a type, message, and metadata.\n- `type`: Type of the message — text, answer, or error.\n- `message`: Main content of the response.\n- `metadata`: Additional info depending on the message type.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.2.0.cl or later</span>\n\n**Deprecated** — Use `sendAgentConversationMessage` instead.\n\nSend natural language messages to an existing Spotter agent conversation and returns the complete response synchronously.\n\nRequires `CAN_USE_SPOTTER` privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by `conversation_identifier`.\nA conversation must first be created using the `createAgentConversation` API.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier`: the unique session ID returned by `createAgentConversation`, used for context continuity and message tracking\n- `messages`: an array of one or more text messages to send to the agent\n\nThe API returns an array of response objects, each containing:\n\n- `type`: the kind of response — `text`, `answer`, or `error`\n- `message`: the main content of the response\n- `metadata`: additional information depending on the message type (e.g., answer metadata includes analytics and visualization details)\n\n#### Error responses\n\n| Code | Description                                                                                                                      |\n|------|----------------------------------------------------------------------------------------------------------------------------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks permission on the referenced conversation. |\n\n> ###### Note:\n>\n> - This endpoint is deprecated. Use `sendAgentConversationMessage` for new integrations.\n> - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "deprecated": true,
         "tags": [
           "AI",
-          "10.15.0.cl"
+          "26.2.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -639,6 +1071,26 @@
               }
             }
           },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
           "500": {
             "description": "Operation failed",
             "content": {
@@ -655,10 +1107,11 @@
     "/api/rest/2.0/ai/agent/converse/sse": {
       "post": {
         "operationId": "sendAgentMessageStreaming",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.13.0.cl or later</span>\n\nThis API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages. \nTo use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.\n\n\n#### Usage guidelines\n\nTo initiate or continue a conversation, the request must include:\n- `conversation_identifier`: a unique session ID for continuity and message tracking\n- `messages`: an array of one or more text messages, each with a value and type\n\nAdditionally, user can specify what tool can be included `conversation_settings` parameter, which supports:\n- `enable_contextual_change_analysis` (default: false)\n- `enable_natural_language_answer_generation` (default: true)\n- `enable_reasoning` (default: false)\n\nIf the request is valid, the API returns a stream of messages in real time, including:\n- `ack`: confirms receipt of the request\n- `text / text-chunk`: content chunks, optionally formatted (e.g., markdown)\n- `answer`: the final structured response with metadata and analytics\n- `error`: if a failure occurs\n- `notification`: notification messages for operation being performed\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n> * The streaming protocol uses Server-Sent Events (SSE)\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.2.0.cl or later</span>\n\n**Deprecated** — Use `sendAgentConversationMessageStreaming` instead.\n\nSends one or more natural language messages to an existing Spotter agent conversation and returns the response as a real-time Server-Sent Events stream.\n\nRequires `CAN_USE_SPOTTER` privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by `conversation_identifier`. A conversation must first be created using the `createAgentConversation` API.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier`: the unique session ID returned by `createAgentConversation`, used for context continuity and message tracking\n- `messages`: an array of one or more text messages to send to the agent\n\nIf the request is valid, the API returns a Server-Sent Events (SSE) stream. Each line has the form `data: [{\"type\": \"...\", ...}]` — a JSON array of event objects. Event types include:\n\n- `ack`: confirms receipt of the request (`node_id`)\n- `conv_title`: conversation title (`title`, `conv_id`)\n- `notification`: status updates on operations (`group_id`, `metadata`, `code` — e.g. `TOOL_CALL_NOTIFICATION`, `nls_start`, `FINAL_RESPONSE_NOTIFICATION`)\n- `text-chunk`: incremental content chunks (`id`, `group_id`, `metadata` with `format` and `type` such as `thinking` or `text`, `content`)\n- `text`: full text block with same structure as `text-chunk`\n- `answer`: structured answer with metadata (`id`, `group_id`, `metadata` with `sage_query`, `session_id`, `title`, etc., `title`)\n- `error`: if a failure occurs\n\n#### Error responses\n\n| Code | Description                                                                                                                      |\n|------|----------------------------------------------------------------------------------------------------------------------------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks permission on the referenced conversation. |\n\n> ###### Note:\n>\n> - This endpoint is deprecated. Use `sendAgentConversationMessageStreaming` for new integrations.\n> - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n> - The streaming protocol uses Server-Sent Events (SSE).\n\n\n\n\n#### Endpoint URL\n",
+        "deprecated": true,
         "tags": [
           "AI",
-          "10.13.0.cl"
+          "26.2.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -702,6 +1155,26 @@
               }
             }
           },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
           "500": {
             "description": "Operation failed",
             "content": {
@@ -718,7 +1191,7 @@
     "/api/rest/2.0/ai/conversation/{conversation_identifier}/converse": {
       "post": {
         "operationId": "sendMessage",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nAllows sending a follow-up message to an ongoing conversation within the context of the metadata model.\n\nRequires at least view access to the metadata object specified in the request.\n\n#### Usage guidelines\n\nThe API requires you to specify the `conversation_identifier` in the request path, and a `metadata_identifier` and `message` string in the request body.\n\nIf the API request is successful, ThoughtSpot returns the session ID, tokens used in the conversation, and visualization type.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nSends a follow-up message to an existing conversation within the context of a data model.\n\nRequires `CAN_USE_SPOTTER` privilege and at least view access to the metadata object specified in the request. A conversation must first be created using the `createConversation` API.\n\n#### Usage guidelines\n\nThe request must include:\n- `conversation_identifier`: the unique session ID returned by `createConversation`\n- `metadata_identifier`: the unique ID of the data source used for the conversation\n- `message`: a natural language string with the follow-up question\n\nIf the request is successful, the API returns an array of response messages, each containing:\n- `session_identifier`: the unique ID of the generated response\n- `generation_number`: the generation number of the response\n- `message_type`: the type of the response (e.g., `TSAnswer`)\n- `visualization_type`: the generated visualization type (`Chart`, `Table`, or `Undefined`)\n- `tokens` / `display_tokens`: the search tokens and user-friendly display tokens for the response\n\n#### Error responses\n\n| Code | Description                                                                                                                             |\n|------|-----------------------------------------------------------------------------------------------------------------------------------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                    |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks view permission on the specified metadata object. |\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "10.4.0.cl"
@@ -781,6 +1254,26 @@
               }
             }
           },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
           "500": {
             "description": "Operation failed",
             "content": {
@@ -797,7 +1290,7 @@
     "/api/rest/2.0/ai/instructions/set": {
       "post": {
         "operationId": "setNLInstructions",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.15.0.cl or later</span>\n\nThis API allows users to set natural language (NL) instructions for a specific data-model to improve AI-generated answers and query processing. These instructions help guide the AI system to better understand the data context and provide more accurate responses.\n\n#### Usage guidelines\n\nTo set NL instructions for a data-model, the request must include:\n- `data_source_identifier`: The unique ID of the data-model for which to set NL instructions\n- `nl_instructions_info`: An array of instruction objects, each containing:\n  - `instructions`: Array of text instructions for the LLM\n  - `scope`: The scope of the instruction (`GLOBAL`). Currently only `GLOBAL` is supported. It can be extended to data-model-user scope in future.\n\nThe API returns a response object with:\n- `success`: Boolean indicating whether the operation was successful\n\n#### Instructions Scope\n\n- **GLOBAL**: Instructions that apply globally for that data-model across the system\n\n> ###### Note:\n> * To use this API, the user needs either edit access or SPOTTER_COACHING_PRIVILEGE on the data-model and they must use corresponding org related bearerToken where the data-model exists.\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * Available from version 10.15.0.cl and later.\n> * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n> * Instructions help improve the accuracy and relevance of AI-generated responses for the specified data-model.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.15.0.cl or later</span>\n\nThis API allows users to set natural language (NL) instructions for a specific data-model to improve AI-generated answers and query processing. These instructions help guide the AI system to better understand the data context and provide more accurate responses.\n\nRequires `CAN_USE_SPOTTER` privilege, either edit access or `SPOTTER_COACHING_PRIVILEGE` on the data model, and a bearer token corresponding to the org where the data model exists.\n\n#### Usage guidelines\n\nTo set NL instructions for a data-model, the request must include:\n\n- `data_source_identifier`: The unique ID of the data-model for which to set NL instructions\n- `nl_instructions_info`: An array of instruction objects, each containing:\n  - `instructions`: Array of text instructions for the LLM\n  - `scope`: The scope of the instruction (`GLOBAL`). Currently only `GLOBAL` is supported. It can be extended to data-model-user scope in future.\n\n#### Instructions scope\n\n- **GLOBAL**: instructions that apply to all users querying this data model\n\nIf the request is successful, the API returns:\n\n- `success`: a boolean indicating whether the operation completed successfully\n\n#### Error responses\n\n| Code | Description                                                                                                                                                                                                                        |\n|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                                                                                               |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, lacks edit access or `SPOTTER_COACHING_PRIVILEGE` on the data model, or the bearer token does not correspond to the org where the data model exists. |\n\n> ###### Note:\n>\n> - To use this API, the user needs either edit access or `SPOTTER_COACHING_PRIVILEGE` on the data model, and must use the bearer token corresponding to the org where the data model exists.\n> - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> - Available from version 10.15.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n> - Instructions help improve the accuracy and relevance of AI-generated responses for the specified data-model.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "10.15.0.cl"
@@ -844,6 +1337,26 @@
               }
             }
           },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
           "500": {
             "description": "Operation failed",
             "content": {
@@ -860,7 +1373,7 @@
     "/api/rest/2.0/ai/answer/create": {
       "post": {
         "operationId": "singleAnswer",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nProcesses a natural language query and returns an AI-generated response based on a specified data model.\n\nRequires at least view access to the metadata object specified in the request.\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nProcesses a natural language query against a specified data model and returns a single AI-generated answer without requiring a conversation session.\n\nRequires `CAN_USE_SPOTTER` privilege and at least view access to the metadata object specified in the request.\n\n#### Usage guidelines\n\nThe request must include:\n- `query`: a natural language question (e.g., \"What were total sales last quarter?\")\n- `metadata_identifier`: the unique ID of the data source to query against\n\nIf the request is successful, the API returns a response message containing:\n- `session_identifier`: the unique ID of the generated response\n- `generation_number`: the generation number of the response\n- `message_type`: the type of the response (e.g., `TSAnswer`)\n- `visualization_type`: the generated visualization type (`Chart`, `Table`, or `Undefined`)\n- `tokens` / `display_tokens`: the search tokens and user-friendly display tokens for the response\n\n#### Error responses\n\n| Code | Description                                                                                                                             |\n|------|-----------------------------------------------------------------------------------------------------------------------------------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                    |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks view permission on the specified metadata object. |\n\n> ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "10.4.0.cl"
@@ -899,6 +1412,26 @@
           },
           "400": {
             "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -19978,21 +20511,11 @@
           "type": {
             "type": "string",
             "enum": [
-              "answer",
-              "liveboard",
-              "data_source"
+              "data_source",
+              "DATA_SOURCE",
+              "AUTO_MODE"
             ],
             "description": "Type of the context.",
-            "nullable": true
-          },
-          "answer_context": {
-            "$ref": "#/components/schemas/AnswerContextInput",
-            "description": "Answer context.",
-            "nullable": true
-          },
-          "liveboard_context": {
-            "$ref": "#/components/schemas/LBContextInput",
-            "description": "Liveboard context.",
             "nullable": true
           },
           "data_source_context": {
@@ -20002,50 +20525,26 @@
           }
         }
       },
-      "AnswerContextInput": {
-        "type": "object",
-        "required": [
-          "session_identifier",
-          "generation_number"
-        ],
-        "properties": {
-          "session_identifier": {
-            "type": "string",
-            "description": "Unique identifier of the answer session."
-          },
-          "generation_number": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Generation number of the answer."
-          }
-        }
-      },
-      "LBContextInput": {
-        "type": "object",
-        "required": [
-          "liveboard_identifier",
-          "visualization_identifier"
-        ],
-        "properties": {
-          "liveboard_identifier": {
-            "type": "string",
-            "description": "Unique identifier of the liveboard."
-          },
-          "visualization_identifier": {
-            "type": "string",
-            "description": "Unique identifier of the visualization."
-          }
-        }
-      },
       "DataSourceContextInput": {
         "type": "object",
-        "required": [
-          "guid"
-        ],
         "properties": {
+          "data_source_identifier": {
+            "type": "string",
+            "description": "Unique identifier of the data source.\nRequired when context type is DATA_SOURCE and `data_source_identifiers` is not provided.\nAt least one of `data_source_identifier` or `data_source_identifiers` must be supplied for DATA_SOURCE context;\nomit only when context type is AUTO_MODE. <br/>  <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>",
+            "nullable": true
+          },
+          "data_source_identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Unique identifiers of data sources for multi-data-source context.\nRequired when context type is DATA_SOURCE and `data_source_identifier` is not provided. <br/>  <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>",
+            "nullable": true
+          },
           "guid": {
             "type": "string",
-            "description": "Unique identifier of the data source."
+            "description": "Deprecated. Use `data_source_identifier` instead.\nPreviously required when neither `data_source_identifier` nor `data_source_identifiers` was provided for DATA_SOURCE context. <br/>  <span class=\"since-beta-tag\">Version: 26.2.0.cl or later</span>",
+            "nullable": true
           }
         }
       },
@@ -20054,20 +20553,26 @@
         "properties": {
           "enable_contextual_change_analysis": {
             "type": "boolean",
-            "default": false,
-            "description": "Enable contextual change analysis.",
+            "default": true,
+            "description": "Enable contextual change analysis.\nDefault changed from `false` to `true` in 26.2.0.cl.\nIgnored on versions >= 26.2.0.cl where it is always enabled. <br/>  <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>",
             "nullable": true
           },
           "enable_natural_language_answer_generation": {
             "type": "boolean",
             "default": true,
-            "description": "Enable natural language to answer generation.",
+            "description": "Enable natural language to answer generation.\nDefault changed from `false` to `true` in 26.2.0.cl.\nIgnored on versions >= 26.2.0.cl where it is always enabled. <br/>  <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>",
             "nullable": true
           },
           "enable_reasoning": {
             "type": "boolean",
+            "default": true,
+            "description": "Enable reasoning.\nDefault changed from `false` to `true` in 26.2.0.cl.\nIgnored on versions >= 26.2.0.cl where it is always enabled. <br/>  <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>",
+            "nullable": true
+          },
+          "enable_save_chat": {
+            "type": "boolean",
             "default": false,
-            "description": "Enable reasoning.",
+            "description": "Enable save conversation. When `true`, the conversation is persisted\nand can be retrieved later via conversation history. <br/>  <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>",
             "nullable": true
           }
         }
@@ -20075,12 +20580,17 @@
       "AgentConversation": {
         "type": "object",
         "required": [
-          "conversation_id"
+          "conversation_id",
+          "conversation_identifier"
         ],
         "properties": {
           "conversation_id": {
             "type": "string",
             "description": "Unique identifier of the conversation."
+          },
+          "conversation_identifier": {
+            "type": "string",
+            "description": "Unique identifier of the conversation. <br/>  <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>"
           }
         }
       },
@@ -20091,10 +20601,12 @@
         ],
         "properties": {
           "success": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Indicates whether the agent response was received and processed successfully."
           },
           "message": {
             "type": "string",
+            "description": "Optional message providing additional context about the operation outcome.",
             "nullable": true
           }
         }
@@ -20980,6 +21492,36 @@
             }
           }
         }
+      },
+      "SendAgentConversationMessageRequest": {
+        "type": "object",
+        "properties": {
+          "messages": {
+            "description": "messages to be sent to the agent",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "messages"
+        ]
+      },
+      "SendAgentConversationMessageStreamingRequest": {
+        "type": "object",
+        "properties": {
+          "messages": {
+            "description": "messages to be sent to the agent",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "messages"
+        ]
       },
       "SendAgentMessageRequest": {
         "type": "object",

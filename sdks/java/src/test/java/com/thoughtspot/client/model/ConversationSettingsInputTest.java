@@ -33,4 +33,10 @@ public class ConversationSettingsInputTest {
     public void enableReasoningTest() {
         // TODO: test enableReasoning
     }
+
+    /** Test the property 'enableSaveChat' */
+    @Test
+    public void enableSaveChatTest() {
+        // TODO: test enableSaveChat
+    }
 }

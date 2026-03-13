@@ -8,8 +8,6 @@
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**type** | [**TypeEnum**](#TypeEnum) | Type of the context. |  [optional] |
-|**answerContext** | [**AnswerContextInput**](AnswerContextInput.md) |  |  [optional] |
-|**liveboardContext** | [**LBContextInput**](LBContextInput.md) |  |  [optional] |
 |**dataSourceContext** | [**DataSourceContextInput**](DataSourceContextInput.md) |  |  [optional] |
 
 
@@ -18,9 +16,9 @@
 
 | Name | Value |
 |---- | -----|
-| ANSWER | &quot;answer&quot; |
-| LIVEBOARD | &quot;liveboard&quot; |
 | DATA_SOURCE | &quot;data_source&quot; |
+| DATA_SOURCE2 | &quot;DATA_SOURCE&quot; |
+| AUTO_MODE | &quot;AUTO_MODE&quot; |
 
 
 ## Implemented Interfaces

@@ -10,9 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { AnswerContextInput } from '../models/AnswerContextInput';
 import { DataSourceContextInput } from '../models/DataSourceContextInput';
-import { LBContextInput } from '../models/LBContextInput';
 import { HttpFile } from '../http/http';
 
 export class ContextPayloadV2Input {
@@ -20,8 +18,6 @@ export class ContextPayloadV2Input {
     * Type of the context.
     */
     'type'?: ContextPayloadV2InputTypeEnum | null;
-    'answer_context'?: AnswerContextInput;
-    'liveboard_context'?: LBContextInput;
     'data_source_context'?: DataSourceContextInput;
 
     static readonly discriminator: string | undefined = undefined;
@@ -31,18 +27,6 @@ export class ContextPayloadV2Input {
             "name": "type",
             "baseName": "type",
             "type": "ContextPayloadV2InputTypeEnum",
-            "format": ""
-        },
-        {
-            "name": "answer_context",
-            "baseName": "answer_context",
-            "type": "AnswerContextInput",
-            "format": ""
-        },
-        {
-            "name": "liveboard_context",
-            "baseName": "liveboard_context",
-            "type": "LBContextInput",
             "format": ""
         },
         {
@@ -61,5 +45,5 @@ export class ContextPayloadV2Input {
 }
 
 
-export type ContextPayloadV2InputTypeEnum = "answer" | "liveboard" | "data_source" ;
+export type ContextPayloadV2InputTypeEnum = "data_source" | "DATA_SOURCE" | "AUTO_MODE" ;
 

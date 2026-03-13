@@ -16,70 +16,54 @@ import com.google.gson.stream.JsonWriter;
 import com.thoughtspot.client.JSON;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** AnswerContextInput */
+/** SendAgentConversationMessageRequest */
 @javax.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         comments = "Generator version: 7.12.0")
-public class AnswerContextInput implements Serializable {
+public class SendAgentConversationMessageRequest implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public static final String SERIALIZED_NAME_SESSION_IDENTIFIER = "session_identifier";
+    public static final String SERIALIZED_NAME_MESSAGES = "messages";
 
-    @SerializedName(SERIALIZED_NAME_SESSION_IDENTIFIER)
+    @SerializedName(SERIALIZED_NAME_MESSAGES)
     @javax.annotation.Nonnull
-    private String sessionIdentifier;
+    private List<String> messages;
 
-    public static final String SERIALIZED_NAME_GENERATION_NUMBER = "generation_number";
+    public SendAgentConversationMessageRequest() {}
 
-    @SerializedName(SERIALIZED_NAME_GENERATION_NUMBER)
-    @javax.annotation.Nonnull
-    private Integer generationNumber;
+    public SendAgentConversationMessageRequest messages(
+            @javax.annotation.Nonnull List<String> messages) {
+        this.messages = messages;
+        return this;
+    }
 
-    public AnswerContextInput() {}
-
-    public AnswerContextInput sessionIdentifier(
-            @javax.annotation.Nonnull String sessionIdentifier) {
-        this.sessionIdentifier = sessionIdentifier;
+    public SendAgentConversationMessageRequest addMessagesItem(String messagesItem) {
+        if (this.messages == null) {
+            this.messages = new ArrayList<>();
+        }
+        this.messages.add(messagesItem);
         return this;
     }
 
     /**
-     * Unique identifier of the answer session.
+     * messages to be sent to the agent
      *
-     * @return sessionIdentifier
+     * @return messages
      */
     @javax.annotation.Nonnull
-    public String getSessionIdentifier() {
-        return sessionIdentifier;
+    public List<String> getMessages() {
+        return messages;
     }
 
-    public void setSessionIdentifier(@javax.annotation.Nonnull String sessionIdentifier) {
-        this.sessionIdentifier = sessionIdentifier;
-    }
-
-    public AnswerContextInput generationNumber(@javax.annotation.Nonnull Integer generationNumber) {
-        this.generationNumber = generationNumber;
-        return this;
-    }
-
-    /**
-     * Generation number of the answer.
-     *
-     * @return generationNumber
-     */
-    @javax.annotation.Nonnull
-    public Integer getGenerationNumber() {
-        return generationNumber;
-    }
-
-    public void setGenerationNumber(@javax.annotation.Nonnull Integer generationNumber) {
-        this.generationNumber = generationNumber;
+    public void setMessages(@javax.annotation.Nonnull List<String> messages) {
+        this.messages = messages;
     }
 
     /**
@@ -94,9 +78,9 @@ public class AnswerContextInput implements Serializable {
      *
      * @param key name of the property
      * @param value value of the property
-     * @return the AnswerContextInput instance itself
+     * @return the SendAgentConversationMessageRequest instance itself
      */
-    public AnswerContextInput putAdditionalProperty(String key, Object value) {
+    public SendAgentConversationMessageRequest putAdditionalProperty(String key, Object value) {
         if (this.additionalProperties == null) {
             this.additionalProperties = new HashMap<String, Object>();
         }
@@ -134,26 +118,24 @@ public class AnswerContextInput implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        AnswerContextInput answerContextInput = (AnswerContextInput) o;
-        return Objects.equals(this.sessionIdentifier, answerContextInput.sessionIdentifier)
-                && Objects.equals(this.generationNumber, answerContextInput.generationNumber)
+        SendAgentConversationMessageRequest sendAgentConversationMessageRequest =
+                (SendAgentConversationMessageRequest) o;
+        return Objects.equals(this.messages, sendAgentConversationMessageRequest.messages)
                 && Objects.equals(
-                        this.additionalProperties, answerContextInput.additionalProperties);
+                        this.additionalProperties,
+                        sendAgentConversationMessageRequest.additionalProperties);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(sessionIdentifier, generationNumber, additionalProperties);
+        return Objects.hash(messages, additionalProperties);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class AnswerContextInput {\n");
-        sb.append("    sessionIdentifier: ")
-                .append(toIndentedString(sessionIdentifier))
-                .append("\n");
-        sb.append("    generationNumber: ").append(toIndentedString(generationNumber)).append("\n");
+        sb.append("class SendAgentConversationMessageRequest {\n");
+        sb.append("    messages: ").append(toIndentedString(messages)).append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
                 .append("\n");
@@ -178,35 +160,35 @@ public class AnswerContextInput implements Serializable {
     static {
         // a set of all properties/fields (JSON key names)
         openapiFields = new HashSet<String>();
-        openapiFields.add("session_identifier");
-        openapiFields.add("generation_number");
+        openapiFields.add("messages");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
-        openapiRequiredFields.add("session_identifier");
-        openapiRequiredFields.add("generation_number");
+        openapiRequiredFields.add("messages");
     }
 
     /**
      * Validates the JSON Element and throws an exception if issues found
      *
      * @param jsonElement JSON Element
-     * @throws IOException if the JSON Element is invalid with respect to AnswerContextInput
+     * @throws IOException if the JSON Element is invalid with respect to
+     *     SendAgentConversationMessageRequest
      */
     public static void validateJsonElement(JsonElement jsonElement) throws IOException {
         if (jsonElement == null) {
-            if (!AnswerContextInput.openapiRequiredFields
+            if (!SendAgentConversationMessageRequest.openapiRequiredFields
                     .isEmpty()) { // has required fields but JSON element is null
                 throw new IllegalArgumentException(
                         String.format(
-                                "The required field(s) %s in AnswerContextInput is not found in"
-                                        + " the empty JSON string",
-                                AnswerContextInput.openapiRequiredFields.toString()));
+                                "The required field(s) %s in SendAgentConversationMessageRequest"
+                                        + " is not found in the empty JSON string",
+                                SendAgentConversationMessageRequest.openapiRequiredFields
+                                        .toString()));
             }
         }
 
         // check to make sure all required properties/fields are present in the JSON string
-        for (String requiredField : AnswerContextInput.openapiRequiredFields) {
+        for (String requiredField : SendAgentConversationMessageRequest.openapiRequiredFields) {
             if (jsonElement.getAsJsonObject().get(requiredField) == null) {
                 throw new IllegalArgumentException(
                         String.format(
@@ -215,12 +197,17 @@ public class AnswerContextInput implements Serializable {
             }
         }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-        if (!jsonObj.get("session_identifier").isJsonPrimitive()) {
+        // ensure the required json array is present
+        if (jsonObj.get("messages") == null) {
+            throw new IllegalArgumentException(
+                    "Expected the field `linkedContent` to be an array in the JSON string but got"
+                            + " `null`");
+        } else if (!jsonObj.get("messages").isJsonArray()) {
             throw new IllegalArgumentException(
                     String.format(
-                            "Expected the field `session_identifier` to be a primitive type in the"
-                                    + " JSON string but got `%s`",
-                            jsonObj.get("session_identifier").toString()));
+                            "Expected the field `messages` to be an array in the JSON string but"
+                                    + " got `%s`",
+                            jsonObj.get("messages").toString()));
         }
     }
 
@@ -228,17 +215,19 @@ public class AnswerContextInput implements Serializable {
         @SuppressWarnings("unchecked")
         @Override
         public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-            if (!AnswerContextInput.class.isAssignableFrom(type.getRawType())) {
-                return null; // this class only serializes 'AnswerContextInput' and its subtypes
+            if (!SendAgentConversationMessageRequest.class.isAssignableFrom(type.getRawType())) {
+                return null; // this class only serializes 'SendAgentConversationMessageRequest' and
+                // its subtypes
             }
             final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-            final TypeAdapter<AnswerContextInput> thisAdapter =
-                    gson.getDelegateAdapter(this, TypeToken.get(AnswerContextInput.class));
+            final TypeAdapter<SendAgentConversationMessageRequest> thisAdapter =
+                    gson.getDelegateAdapter(
+                            this, TypeToken.get(SendAgentConversationMessageRequest.class));
 
             return (TypeAdapter<T>)
-                    new TypeAdapter<AnswerContextInput>() {
+                    new TypeAdapter<SendAgentConversationMessageRequest>() {
                         @Override
-                        public void write(JsonWriter out, AnswerContextInput value)
+                        public void write(JsonWriter out, SendAgentConversationMessageRequest value)
                                 throws IOException {
                             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
                             obj.remove("additionalProperties");
@@ -269,12 +258,14 @@ public class AnswerContextInput implements Serializable {
                         }
 
                         @Override
-                        public AnswerContextInput read(JsonReader in) throws IOException {
+                        public SendAgentConversationMessageRequest read(JsonReader in)
+                                throws IOException {
                             JsonElement jsonElement = elementAdapter.read(in);
                             validateJsonElement(jsonElement);
                             JsonObject jsonObj = jsonElement.getAsJsonObject();
                             // store additional fields in the deserialized instance
-                            AnswerContextInput instance = thisAdapter.fromJsonTree(jsonObj);
+                            SendAgentConversationMessageRequest instance =
+                                    thisAdapter.fromJsonTree(jsonObj);
                             for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
                                 if (!openapiFields.contains(entry.getKey())) {
                                     if (entry.getValue().isJsonPrimitive()) { // primitive type
@@ -313,18 +304,20 @@ public class AnswerContextInput implements Serializable {
     }
 
     /**
-     * Create an instance of AnswerContextInput given an JSON string
+     * Create an instance of SendAgentConversationMessageRequest given an JSON string
      *
      * @param jsonString JSON string
-     * @return An instance of AnswerContextInput
-     * @throws IOException if the JSON string is invalid with respect to AnswerContextInput
+     * @return An instance of SendAgentConversationMessageRequest
+     * @throws IOException if the JSON string is invalid with respect to
+     *     SendAgentConversationMessageRequest
      */
-    public static AnswerContextInput fromJson(String jsonString) throws IOException {
-        return JSON.getGson().fromJson(jsonString, AnswerContextInput.class);
+    public static SendAgentConversationMessageRequest fromJson(String jsonString)
+            throws IOException {
+        return JSON.getGson().fromJson(jsonString, SendAgentConversationMessageRequest.class);
     }
 
     /**
-     * Convert an instance of AnswerContextInput to an JSON string
+     * Convert an instance of SendAgentConversationMessageRequest to an JSON string
      *
      * @return JSON string
      */

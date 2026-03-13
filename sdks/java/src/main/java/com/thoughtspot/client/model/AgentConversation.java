@@ -35,6 +35,12 @@ public class AgentConversation implements Serializable {
     @javax.annotation.Nonnull
     private String conversationId;
 
+    public static final String SERIALIZED_NAME_CONVERSATION_IDENTIFIER = "conversation_identifier";
+
+    @SerializedName(SERIALIZED_NAME_CONVERSATION_IDENTIFIER)
+    @javax.annotation.Nonnull
+    private String conversationIdentifier;
+
     public AgentConversation() {}
 
     public AgentConversation conversationId(@javax.annotation.Nonnull String conversationId) {
@@ -54,6 +60,26 @@ public class AgentConversation implements Serializable {
 
     public void setConversationId(@javax.annotation.Nonnull String conversationId) {
         this.conversationId = conversationId;
+    }
+
+    public AgentConversation conversationIdentifier(
+            @javax.annotation.Nonnull String conversationIdentifier) {
+        this.conversationIdentifier = conversationIdentifier;
+        return this;
+    }
+
+    /**
+     * Unique identifier of the conversation. Version: 26.5.0.cl or later
+     *
+     * @return conversationIdentifier
+     */
+    @javax.annotation.Nonnull
+    public String getConversationIdentifier() {
+        return conversationIdentifier;
+    }
+
+    public void setConversationIdentifier(@javax.annotation.Nonnull String conversationIdentifier) {
+        this.conversationIdentifier = conversationIdentifier;
     }
 
     /**
@@ -111,12 +137,14 @@ public class AgentConversation implements Serializable {
         AgentConversation agentConversation = (AgentConversation) o;
         return Objects.equals(this.conversationId, agentConversation.conversationId)
                 && Objects.equals(
+                        this.conversationIdentifier, agentConversation.conversationIdentifier)
+                && Objects.equals(
                         this.additionalProperties, agentConversation.additionalProperties);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(conversationId, additionalProperties);
+        return Objects.hash(conversationId, conversationIdentifier, additionalProperties);
     }
 
     @Override
@@ -124,6 +152,9 @@ public class AgentConversation implements Serializable {
         StringBuilder sb = new StringBuilder();
         sb.append("class AgentConversation {\n");
         sb.append("    conversationId: ").append(toIndentedString(conversationId)).append("\n");
+        sb.append("    conversationIdentifier: ")
+                .append(toIndentedString(conversationIdentifier))
+                .append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
                 .append("\n");
@@ -149,10 +180,12 @@ public class AgentConversation implements Serializable {
         // a set of all properties/fields (JSON key names)
         openapiFields = new HashSet<String>();
         openapiFields.add("conversation_id");
+        openapiFields.add("conversation_identifier");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
         openapiRequiredFields.add("conversation_id");
+        openapiRequiredFields.add("conversation_identifier");
     }
 
     /**
@@ -189,6 +222,13 @@ public class AgentConversation implements Serializable {
                             "Expected the field `conversation_id` to be a primitive type in the"
                                     + " JSON string but got `%s`",
                             jsonObj.get("conversation_id").toString()));
+        }
+        if (!jsonObj.get("conversation_identifier").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `conversation_identifier` to be a primitive type"
+                                    + " in the JSON string but got `%s`",
+                            jsonObj.get("conversation_identifier").toString()));
         }
     }
 
