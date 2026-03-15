@@ -14249,6 +14249,21 @@
             "type": "string",
             "description": "Text to include in the footer of each page.",
             "nullable": true
+          },
+          "page_size": {
+            "type": "string",
+            "enum": [
+              "A4",
+              "CONTINUOUS"
+            ],
+            "description": "Size of PDF page. `A4` generates a paginated A4 PDF. `CONTINUOUS` generates a WYSIWYG continuous PDF that matches the Liveboard layout. Defaults to `A4` if not specified. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>",
+            "nullable": true
+          },
+          "zoom_level": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Zoom level percentage for the PDF. Only applicable when `pdf_type` is `CONTINUOUS`. Acceptable values are integers in the range [45, 175]. Defaults to 100 if not specified. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>",
+            "nullable": true
           }
         }
       },
