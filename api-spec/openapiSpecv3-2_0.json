@@ -8855,6 +8855,363 @@
         }
       }
     },
+    "/api/rest/2.0/customization/style/create": {
+      "post": {
+        "operationId": "createStyleCustomization",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.10.0.cl or later</span>\n\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Style Customization",
+          "10.10.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "Name for the style customization.",
+                    "type": "string"
+                  },
+                  "description": {
+                    "description": "Description of the style customization.",
+                    "type": "string"
+                  },
+                  "org_identifier": {
+                    "description": "Unique ID or name of the organization. If unspecified, the current session organization is used.",
+                    "type": "string"
+                  },
+                  "logo": {
+                    "description": "Logo configuration for the application. Supports favicon and wide logo image file uploads.",
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "color": {
+                    "description": "Color configuration for the style customization.",
+                    "type": "string"
+                  },
+                  "text": {
+                    "description": "Text configuration for the style customization.",
+                    "type": "string"
+                  },
+                  "font": {
+                    "description": "Font configuration for the style customization, including font file uploads.",
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Style customization is successfully created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StyleCustomizationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/customization/style/{custom_style_identifier}/delete": {
+      "post": {
+        "operationId": "deleteStyleCustomization",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.10.0.cl or later</span>\n\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Style Customization",
+          "10.10.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "custom_style_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the style customization object."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Style Customization successfully deleted."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/customization/style/search": {
+      "post": {
+        "operationId": "searchStyleCustomization",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.10.0.cl or later</span>\n\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Style Customization",
+          "10.10.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchStyleCustomizationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Style customization search result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StyleCustomizationResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/customization/style/{custom_style_identifier}/update": {
+      "post": {
+        "operationId": "updateStyleCustomization",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.10.0.cl or later</span>\n\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Style Customization",
+          "10.10.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "Name for the style customization.",
+                    "type": "string"
+                  },
+                  "description": {
+                    "description": "Description of the style customization.",
+                    "type": "string"
+                  },
+                  "logo": {
+                    "description": "Logo configuration for the application. Supports favicon and wide logo image file uploads.",
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "color": {
+                    "description": "Color configuration for the style customization.",
+                    "type": "string"
+                  },
+                  "text": {
+                    "description": "Text configuration for the style customization.",
+                    "type": "string"
+                  },
+                  "font": {
+                    "description": "Font configuration for the style customization, including font file uploads.",
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "include_cluster_level_font": {
+                    "description": "Indicates whether to include the cluster-level font while updating style customization.",
+                    "default": true,
+                    "type": "boolean",
+                    "nullable": true
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "custom_style_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the style customization object."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Style customization successfully updated."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/system/preferences/communication-channels/configure": {
       "post": {
         "operationId": "configureCommunicationChannelPreferences",
@@ -20949,6 +21306,217 @@
         },
         "description": "Email customization configuration properties"
       },
+      "StyleCustomizationResponse": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "org"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the style customization."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the style customization."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the style customization.",
+            "nullable": true
+          },
+          "org": {
+            "$ref": "#/components/schemas/StyleCustomizationOrg",
+            "description": "Organization associated with the style customization."
+          },
+          "logo": {
+            "$ref": "#/components/schemas/StyleLogoResponse",
+            "description": "Logo configuration in the response.",
+            "nullable": true
+          },
+          "color": {
+            "$ref": "#/components/schemas/StyleColorResponse",
+            "description": "Color configuration in the response.",
+            "nullable": true
+          },
+          "text": {
+            "$ref": "#/components/schemas/StyleTextResponse",
+            "description": "Text configuration in the response.",
+            "nullable": true
+          },
+          "font": {
+            "$ref": "#/components/schemas/StyleFontResponse",
+            "description": "Font configuration in the response.",
+            "nullable": true
+          }
+        },
+        "description": "Style customization object."
+      },
+      "StyleCustomizationOrg": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Unique identifier of the organization.",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the organization.",
+            "nullable": true
+          }
+        },
+        "description": "Organization associated with the style customization."
+      },
+      "StyleLogoResponse": {
+        "type": "object",
+        "properties": {
+          "favicon": {
+            "type": "string",
+            "description": "Unique identifier of the favicon logo.",
+            "nullable": true
+          },
+          "wide": {
+            "type": "string",
+            "description": "Unique identifier of the wide logo.",
+            "nullable": true
+          }
+        },
+        "description": "Logo identifiers in the style customization response."
+      },
+      "StyleColorResponse": {
+        "type": "object",
+        "properties": {
+          "application_background": {
+            "type": "string",
+            "description": "Background color of the application.",
+            "nullable": true
+          },
+          "navigation_panel": {
+            "type": "string",
+            "description": "Navigation panel color of the application.",
+            "nullable": true
+          },
+          "chart_color_palettes": {
+            "type": "object",
+            "description": "Color palettes for charts.",
+            "nullable": true
+          }
+        },
+        "description": "Color configuration in the style customization response."
+      },
+      "StyleTextResponse": {
+        "type": "object",
+        "properties": {
+          "page_title": {
+            "type": "string",
+            "description": "Page title for the application.",
+            "nullable": true
+          },
+          "page_footer": {
+            "type": "string",
+            "description": "Footer text for the application.",
+            "nullable": true
+          }
+        },
+        "description": "Text configuration in the style customization response."
+      },
+      "StyleFontResponse": {
+        "type": "object",
+        "properties": {
+          "chart_visualization": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StyleFontConfig"
+            },
+            "description": "Font configurations for chart visualizations.",
+            "nullable": true
+          },
+          "table_visualization": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StyleFontConfig"
+            },
+            "description": "Font configurations for table visualizations.",
+            "nullable": true
+          },
+          "custom_font_faces": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StyleCustomFontFace"
+            },
+            "description": "Available custom font faces.",
+            "nullable": true
+          }
+        },
+        "description": "Font configuration in the style customization response."
+      },
+      "StyleFontConfig": {
+        "type": "object",
+        "properties": {
+          "feature": {
+            "type": "string",
+            "description": "Feature of the visualization.",
+            "nullable": true
+          },
+          "guid": {
+            "type": "string",
+            "description": "Unique identifier of the font.",
+            "nullable": true
+          }
+        },
+        "description": "Font assignment for a visualization feature."
+      },
+      "StyleCustomFontFace": {
+        "type": "object",
+        "properties": {
+          "family_id": {
+            "type": "string",
+            "description": "Unique identifier of the font family.",
+            "nullable": true
+          },
+          "family_name": {
+            "type": "string",
+            "description": "Custom name of the font family.",
+            "nullable": true
+          },
+          "color": {
+            "type": "string",
+            "description": "Color of the font.",
+            "nullable": true
+          },
+          "weight": {
+            "type": "string",
+            "description": "Weight of the font.",
+            "nullable": true
+          },
+          "style": {
+            "type": "string",
+            "description": "Style of the font.",
+            "nullable": true
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Size of the font in points.",
+            "nullable": true
+          },
+          "stretch": {
+            "type": "string",
+            "description": "Stretch property of the font.",
+            "nullable": true
+          },
+          "url": {
+            "type": "string",
+            "description": "URL to fetch the font file.",
+            "nullable": true
+          }
+        },
+        "description": "Custom font face details."
+      },
       "ExternalTableInput": {
         "type": "object",
         "required": [
@@ -26684,6 +27252,26 @@
         "required": [
           "column_security_rules"
         ]
+      },
+      "SearchStyleCustomizationRequest": {
+        "type": "object",
+        "properties": {
+          "custom_style_identifier": {
+            "description": "Unique ID or name of the style customization object.",
+            "type": "string"
+          },
+          "description": {
+            "description": "Description of the style customization object.",
+            "type": "string"
+          },
+          "org_identifiers": {
+            "description": "Unique IDs or names of the organizations.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
       },
       "ConfigureCommunicationChannelPreferencesRequest": {
         "type": "object",
