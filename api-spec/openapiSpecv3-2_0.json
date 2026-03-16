@@ -8882,22 +8882,36 @@
                     "type": "string"
                   },
                   "logo": {
-                    "description": "Logo configuration for the application. Supports favicon and wide logo image file uploads.",
-                    "type": "string",
-                    "format": "binary"
+                    "description": "Logo configuration for the application. Supports favicon and wide logo uploads.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/StyleLogoInput"
+                      }
+                    ]
                   },
                   "color": {
                     "description": "Color configuration for the style customization.",
-                    "type": "string"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/StyleColorInput"
+                      }
+                    ]
                   },
                   "text": {
                     "description": "Text configuration for the style customization.",
-                    "type": "string"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/StyleTextInput"
+                      }
+                    ]
                   },
                   "font": {
-                    "description": "Font configuration for the style customization, including font file uploads.",
-                    "type": "string",
-                    "format": "binary"
+                    "description": "Font configuration for the style customization.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/StyleFontInput"
+                      }
+                    ]
                   }
                 }
               }
@@ -9125,22 +9139,36 @@
                     "type": "string"
                   },
                   "logo": {
-                    "description": "Logo configuration for the application. Supports favicon and wide logo image file uploads.",
-                    "type": "string",
-                    "format": "binary"
+                    "description": "Logo configuration for the application. Supports favicon and wide logo uploads.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/StyleLogoInput"
+                      }
+                    ]
                   },
                   "color": {
                     "description": "Color configuration for the style customization.",
-                    "type": "string"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/StyleColorInput"
+                      }
+                    ]
                   },
                   "text": {
                     "description": "Text configuration for the style customization.",
-                    "type": "string"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/StyleTextInput"
+                      }
+                    ]
                   },
                   "font": {
-                    "description": "Font configuration for the style customization, including font file uploads.",
-                    "type": "string",
-                    "format": "binary"
+                    "description": "Font configuration for the style customization.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/StyleFontInput"
+                      }
+                    ]
                   },
                   "include_cluster_level_font": {
                     "description": "Indicates whether to include the cluster-level font while updating style customization.",
@@ -21306,6 +21334,201 @@
         },
         "description": "Email customization configuration properties"
       },
+      "StyleLogoInput": {
+        "type": "object",
+        "properties": {
+          "favicon": {
+            "$ref": "#/components/schemas/StyleImageFileInput",
+            "description": "Favicon logo for the application.",
+            "nullable": true
+          },
+          "wide": {
+            "$ref": "#/components/schemas/StyleImageFileInput",
+            "description": "Wide logo for the application.",
+            "nullable": true
+          }
+        },
+        "description": "Logo configuration for the application."
+      },
+      "StyleImageFileInput": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the file including extension (e.g. logo.png).",
+            "nullable": true
+          },
+          "content": {
+            "type": "string",
+            "format": "binary",
+            "description": "Binary content of the file."
+          }
+        },
+        "description": "Image file to upload. The content field accepts binary file data."
+      },
+      "StyleColorInput": {
+        "type": "object",
+        "properties": {
+          "application_background": {
+            "type": "string",
+            "description": "Background color of the application in hex format (e.g. #FFFFFF).",
+            "nullable": true
+          },
+          "navigation_panel": {
+            "type": "string",
+            "description": "Navigation panel color of the application in hex format.",
+            "nullable": true
+          },
+          "chart_color_palettes": {
+            "$ref": "#/components/schemas/StyleChartColorPalettesInput",
+            "description": "Color palettes for charts.",
+            "nullable": true
+          }
+        },
+        "description": "Color configuration for the style customization."
+      },
+      "StyleChartColorPalettesInput": {
+        "type": "object",
+        "properties": {
+          "primary": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Ordered sequence of primary colors.",
+            "nullable": true
+          },
+          "secondary": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "description": "Multidimensional ordered sequence of secondary colors.",
+            "nullable": true
+          },
+          "disable_rotation": {
+            "type": "boolean",
+            "description": "Disable rotation of colors in charts.",
+            "nullable": true
+          }
+        },
+        "description": "Color palettes for chart customization."
+      },
+      "StyleTextInput": {
+        "type": "object",
+        "properties": {
+          "page_title": {
+            "type": "string",
+            "description": "Page title for the application.",
+            "nullable": true
+          },
+          "page_footer": {
+            "type": "string",
+            "description": "Footer text for the application.",
+            "nullable": true
+          }
+        },
+        "description": "Text configuration for the style customization."
+      },
+      "StyleFontInput": {
+        "type": "object",
+        "properties": {
+          "chart_visualization": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StyleVisualizationFontInput"
+            },
+            "description": "Font configuration for chart visualizations.",
+            "nullable": true
+          },
+          "table_visualization": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StyleVisualizationFontInput"
+            },
+            "description": "Font configuration for table visualizations.",
+            "nullable": true
+          }
+        },
+        "description": "Font configuration for chart and table visualizations."
+      },
+      "StyleVisualizationFontInput": {
+        "type": "object",
+        "properties": {
+          "feature": {
+            "type": "string",
+            "description": "Feature identifier of the visualization.",
+            "nullable": true
+          },
+          "font": {
+            "$ref": "#/components/schemas/StyleFontRequestInput",
+            "description": "Font to use for this visualization feature. Provide either an existing font GUID or upload a new font file.",
+            "nullable": true
+          },
+          "font_properties": {
+            "$ref": "#/components/schemas/StyleFontPropertiesInput",
+            "description": "Properties to apply to the font.",
+            "nullable": true
+          }
+        },
+        "description": "Font assignment for a specific visualization feature."
+      },
+      "StyleFontRequestInput": {
+        "type": "object",
+        "properties": {
+          "guid": {
+            "type": "string",
+            "description": "GUID of an existing font file already stored in ThoughtSpot.",
+            "nullable": true
+          },
+          "file": {
+            "$ref": "#/components/schemas/StyleImageFileInput",
+            "description": "New font file to upload for this visualization.",
+            "nullable": true
+          }
+        },
+        "description": "Font selection: reference an existing font by GUID or upload a new font file."
+      },
+      "StyleFontPropertiesInput": {
+        "type": "object",
+        "properties": {
+          "family_name": {
+            "type": "string",
+            "description": "Custom name of the font family.",
+            "nullable": true
+          },
+          "color": {
+            "type": "string",
+            "description": "Color of the font.",
+            "nullable": true
+          },
+          "weight": {
+            "type": "string",
+            "description": "Weight of the font (e.g. NORMAL, BOLD).",
+            "nullable": true
+          },
+          "style": {
+            "type": "string",
+            "description": "Style of the font (e.g. NORMAL, ITALIC).",
+            "nullable": true
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Size of the font in points.",
+            "nullable": true
+          },
+          "stretch": {
+            "type": "string",
+            "description": "Stretch property of the font (e.g. NORMAL, CONDENSED).",
+            "nullable": true
+          }
+        },
+        "description": "Properties to apply to a font."
+      },
       "StyleCustomizationResponse": {
         "type": "object",
         "required": [
@@ -21358,8 +21581,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int32",
+            "type": "string",
             "description": "Unique identifier of the organization.",
             "nullable": true
           },
@@ -21376,12 +21598,12 @@
         "properties": {
           "favicon": {
             "type": "string",
-            "description": "Unique identifier of the favicon logo.",
+            "description": "GUID of the stored favicon logo.",
             "nullable": true
           },
           "wide": {
             "type": "string",
-            "description": "Unique identifier of the wide logo.",
+            "description": "GUID of the stored wide logo.",
             "nullable": true
           }
         },
@@ -21401,12 +21623,42 @@
             "nullable": true
           },
           "chart_color_palettes": {
-            "type": "object",
+            "$ref": "#/components/schemas/StyleChartColorPalettesResponse",
             "description": "Color palettes for charts.",
             "nullable": true
           }
         },
         "description": "Color configuration in the style customization response."
+      },
+      "StyleChartColorPalettesResponse": {
+        "type": "object",
+        "properties": {
+          "primary": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Ordered sequence of primary colors.",
+            "nullable": true
+          },
+          "secondary": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "description": "Multidimensional ordered sequence of secondary colors.",
+            "nullable": true
+          },
+          "disable_rotation": {
+            "type": "boolean",
+            "description": "Whether color rotation in charts is disabled.",
+            "nullable": true
+          }
+        },
+        "description": "Chart color palette configuration."
       },
       "StyleTextResponse": {
         "type": "object",
@@ -21430,17 +21682,17 @@
           "chart_visualization": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/StyleFontConfig"
+              "$ref": "#/components/schemas/StyleVisualizationFontResponse"
             },
-            "description": "Font configurations for chart visualizations.",
+            "description": "Font assignments for chart visualizations.",
             "nullable": true
           },
           "table_visualization": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/StyleFontConfig"
+              "$ref": "#/components/schemas/StyleVisualizationFontResponse"
             },
-            "description": "Font configurations for table visualizations.",
+            "description": "Font assignments for table visualizations.",
             "nullable": true
           },
           "custom_font_faces": {
@@ -21448,23 +21700,23 @@
             "items": {
               "$ref": "#/components/schemas/StyleCustomFontFace"
             },
-            "description": "Available custom font faces.",
+            "description": "Custom font faces available in the style customization.",
             "nullable": true
           }
         },
         "description": "Font configuration in the style customization response."
       },
-      "StyleFontConfig": {
+      "StyleVisualizationFontResponse": {
         "type": "object",
         "properties": {
           "feature": {
             "type": "string",
-            "description": "Feature of the visualization.",
+            "description": "Feature identifier of the visualization.",
             "nullable": true
           },
-          "guid": {
+          "font": {
             "type": "string",
-            "description": "Unique identifier of the font.",
+            "description": "GUID of the font assigned to this visualization feature.",
             "nullable": true
           }
         },
@@ -21473,12 +21725,12 @@
       "StyleCustomFontFace": {
         "type": "object",
         "properties": {
-          "family_id": {
+          "id": {
             "type": "string",
-            "description": "Unique identifier of the font family.",
+            "description": "GUID of the font file.",
             "nullable": true
           },
-          "family_name": {
+          "name": {
             "type": "string",
             "description": "Custom name of the font family.",
             "nullable": true
