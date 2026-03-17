@@ -68,6 +68,10 @@
     font-family: Optimo-Plain, sans-serif;
 }
 
+strong {
+    font-weight: 700;
+}
+
 .portal-header {
     background: #323946
 }
