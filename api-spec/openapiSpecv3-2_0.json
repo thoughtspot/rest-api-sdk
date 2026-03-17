@@ -6619,7 +6619,7 @@
     "/api/rest/2.0/metadata/parameterize": {
       "post": {
         "operationId": "parameterizeMetadata",
-        "description": "\nParameterize fields in metadata objects. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows parameterizing fields in metadata objects in ThoughtSpot.\n\nRequires appropriate permissions to modify the metadata object.\n\nThe API endpoint allows parameterizing the following types of metadata objects:\n* Logical Tables\n* Connections\n* Connection Configs\n\nFor a Logical Table the field type must be `ATTRIBUTE` and field name can be one of:\n* databaseName\n* schemaName\n* tableName\n\nFor a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be parameterized.\n\nFor Connection Config, the only supported field name is:\n* impersonate_user\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nParameterize fields in metadata objects. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\n**Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/metadata/parameterize-fields](/api/rest/2.0/metadata/parameterize-fields) instead.\n\nAllows parameterizing fields in metadata objects in ThoughtSpot.\n\nRequires appropriate permissions to modify the metadata object.\n\nThe API endpoint allows parameterizing the following types of metadata objects:\n* Logical Tables\n* Connections\n* Connection Configs\n\nFor a Logical Table the field type must be `ATTRIBUTE` and field name can be one of:\n* databaseName\n* schemaName\n* tableName\n\nFor a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be parameterized.\n\nFor Connection Config, the only supported field name is:\n* impersonate_user\n\n\n\n\n#### Endpoint URL\n",
         "deprecated": true,
         "tags": [
           "Metadata",
@@ -6686,10 +6686,10 @@
     "/api/rest/2.0/metadata/parameterize-fields": {
       "post": {
         "operationId": "parameterizeMetadataFields",
-        "description": "\nParameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE. <br/>  <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\nAllows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.\n\nRequires appropriate permissions to modify the metadata object.\n\nThe API endpoint allows parameterizing the following types of metadata objects:\n* Logical Tables\n* Connections\n* Connection Configs\n\nFor a Logical Table, the field type must be `ATTRIBUTE` and field names can include:\n* databaseName\n* schemaName\n* tableName\n\nFor a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.\n\nFor Connection Config, supported field names include:\n* impersonate_user\n\nYou can parameterize multiple fields at once by providing an array of field names.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nParameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE. <br/>  <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>\n\nAllows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.\n\nRequires appropriate permissions to modify the metadata object.\n\nThe API endpoint allows parameterizing the following types of metadata objects:\n* Logical Tables\n* Connections\n* Connection Configs\n\nFor a Logical Table, the field type must be `ATTRIBUTE` and field names can include:\n* databaseName\n* schemaName\n* tableName\n\nFor a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.\n\nFor Connection Config, supported field names include:\n* impersonate_user\n\nYou can parameterize multiple fields at once by providing an array of field names.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Metadata",
-          "26.4.0.cl"
+          "26.5.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -6828,10 +6828,10 @@
     "/api/rest/2.0/metadata/unparameterize": {
       "post": {
         "operationId": "unparameterizeMetadata",
-        "description": "\nRemove parameterization from fields in metadata objects. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows removing parameterization from fields in metadata objects in ThoughtSpot.\n\nRequires appropriate permissions to modify the metadata object.\n\nThe API endpoint allows unparameterizing the following types of metadata objects:\n* Logical Tables\n* Connections\n* Connection Configs\n\nFor a Logical Table the field type must be `ATTRIBUTE` and field name can be one of:\n* databaseName\n* schemaName\n* tableName\n\nFor a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.\n\nFor Connection Config, the only supported field name is:\n* impersonate_user\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nRemove parameterization from fields in metadata objects. <br/>  <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>\n\nAllows removing parameterization from fields in metadata objects in ThoughtSpot.\n\nRequires appropriate permissions to modify the metadata object.\n\nThe API endpoint allows unparameterizing the following types of metadata objects:\n* Logical Tables\n* Connections\n* Connection Configs\n\nFor a Logical Table the field type must be `ATTRIBUTE` and field name can be one of:\n* databaseName\n* schemaName\n* tableName\n\nFor a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.\n\nFor Connection Config, the only supported field name is:\n* impersonate_user\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Metadata",
-          "10.9.0.cl"
+          "26.5.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -8594,10 +8594,10 @@
     "/api/rest/2.0/security/metadata/publish": {
       "post": {
         "operationId": "publishMetadata",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows publishing metadata objects across organizations in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\n\nThe API endpoint allows publishing the following types of metadata objects:\n* Liveboards\n* Answers\n* Logical Tables\n\nThis API will essentially share the objects along with it's dependencies to\nthe org admins of the orgs to which it is being published.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>\n\nAllows publishing metadata objects across organizations in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\n\nThe API endpoint allows publishing the following types of metadata objects:\n* Liveboards\n* Answers\n* Logical Tables\n\nThis API will essentially share the objects along with it's dependencies to\nthe org admins of the orgs to which it is being published.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Security",
-          "10.9.0.cl"
+          "26.5.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -8726,10 +8726,10 @@
     "/api/rest/2.0/security/metadata/unpublish": {
       "post": {
         "operationId": "unpublishMetadata",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows unpublishing metadata objects from organizations in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\n\nThe API endpoint allows unpublishing the following types of metadata objects:\n* Liveboards\n* Answers\n* Logical Tables\n\nWhen unpublishing objects, you can:\n* Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them\n* Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>\n\nAllows unpublishing metadata objects from organizations in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\n\nThe API endpoint allows unpublishing the following types of metadata objects:\n* Liveboards\n* Answers\n* Logical Tables\n\nWhen unpublishing objects, you can:\n* Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them\n* Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Security",
-          "10.9.0.cl"
+          "26.5.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -10779,10 +10779,10 @@
     "/api/rest/2.0/template/variables/create": {
       "post": {
         "operationId": "createVariable",
-        "description": "\nCreate a variable which can be used for parameterizing metadata objects <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nAllows creating a variable which can be used for parameterizing metadata objects in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint supports the following types of variables:\n* CONNECTION_PROPERTY - For connection properties\n* TABLE_MAPPING - For table mappings\n* CONNECTION_PROPERTY_PER_PRINCIPAL - For connection properties per principal. In order to use this please contact support to enable this.\n* FORMULA_VARIABLE - For Formula variables, introduced in 10.15.0.cl\n\nWhen creating a variable, you need to specify:\n* The variable type\n* A unique name for the variable\n* Whether the variable contains sensitive values (defaults to false)\n* The data type of the variable, only specify for formula variables (defaults to null)\n\nThe operation will fail if:\n* The user lacks required permissions\n* The variable name already exists\n* The variable type is invalid\n\n\n\n#### Endpoint URL\n",
+        "description": "\nCreate a variable which can be used for parameterizing metadata objects <br/>  <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\nAllows creating a variable which can be used for parameterizing metadata objects in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint supports the following types of variables:\n* CONNECTION_PROPERTY - For connection properties\n* TABLE_MAPPING - For table mappings\n* CONNECTION_PROPERTY_PER_PRINCIPAL - For connection properties per principal. In order to use this please contact support to enable this.\n* FORMULA_VARIABLE - For Formula variables, introduced in 10.15.0.cl\n\nWhen creating a variable, you need to specify:\n* The variable type\n* A unique name for the variable\n* Whether the variable contains sensitive values (defaults to false)\n* The data type of the variable, only specify for formula variables (defaults to null)\n\nThe operation will fail if:\n* The user lacks required permissions\n* The variable name already exists\n* The variable type is invalid\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Variable",
-          "10.14.0.cl"
+          "26.4.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -10852,7 +10852,7 @@
     "/api/rest/2.0/template/variables/{identifier}/delete": {
       "post": {
         "operationId": "deleteVariable",
-        "description": "\nDelete a variable <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nAllows deleting a variable from ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint requires:\n* The variable identifier (ID or name)\n\nThe operation will fail if:\n* The user lacks required permissions\n* The variable doesn't exist\n* The variable is being used by other objects \n\n\n\n#### Endpoint URL\n",
+        "description": "\nDelete a variable <br/>  <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\n**Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.\n\nAllows deleting a variable from ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint requires:\n* The variable identifier (ID or name)\n\nThe operation will fail if:\n* The user lacks required permissions\n* The variable doesn't exist\n* The variable is being used by other objects \n\n\n\n#### Endpoint URL\n",
         "deprecated": true,
         "tags": [
           "Variable",
@@ -10919,7 +10919,7 @@
     "/api/rest/2.0/template/variables/delete": {
       "post": {
         "operationId": "deleteVariables",
-        "description": "\nDelete variable(s) <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\nAllows deleting multiple variables from ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint requires:\n* The variable identifiers (IDs or names)\n\nThe operation will fail if:\n* The user lacks required permissions\n* Any of the variables don't exist\n* Any of the variables are being used by other objects\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nDelete variable(s) <br/>  <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\nAllows deleting multiple variables from ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint requires:\n* The variable identifiers (IDs or names)\n\nThe operation will fail if:\n* The user lacks required permissions\n* Any of the variables don't exist\n* Any of the variables are being used by other objects\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Variable",
           "26.4.0.cl"
@@ -10985,7 +10985,7 @@
     "/api/rest/2.0/template/variables/{identifier}/update-values": {
       "post": {
         "operationId": "putVariableValues",
-        "description": "\nUpdate values for a variable <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\nAllows updating values for a specific variable in ThoughtSpot.\n\nRequires ADMINISTRATION role.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint allows:\n* Adding new values to the variable\n* Replacing existing values\n* Deleting values from the variable\n* Resetting all values\n\nWhen updating variable values, you need to specify:\n* The variable identifier (ID or name)\n* The values to add/replace/remove\n* The operation to perform (ADD, REPLACE, REMOVE, RESET)\n\nBehaviour based on operation type:\n* ADD - Adds values to the variable if this is a list type variable, else same as replace.\n* REPLACE - Replaces all values of a given set of constraints with the current set of values.\n* REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value.\n* RESET - Removes all constraints for the given variable, scope is ignored\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nUpdate values for a variable <br/>  <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\nAllows updating values for a specific variable in ThoughtSpot.\n\nRequires ADMINISTRATION role.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint allows:\n* Adding new values to the variable\n* Replacing existing values\n* Deleting values from the variable\n* Resetting all values\n\nWhen updating variable values, you need to specify:\n* The variable identifier (ID or name)\n* The values to add/replace/remove\n* The operation to perform (ADD, REPLACE, REMOVE, RESET)\n\nBehaviour based on operation type:\n* ADD - Adds values to the variable if this is a list type variable, else same as replace.\n* REPLACE - Replaces all values of a given set of constraints with the current set of values.\n* REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value.\n* RESET - Removes all constraints for the given variable, scope is ignored\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Variable",
           "26.4.0.cl"
@@ -11061,10 +11061,10 @@
     "/api/rest/2.0/template/variables/search": {
       "post": {
         "operationId": "searchVariables",
-        "description": "\nSearch variables <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nAllows searching for variables in ThoughtSpot.\n\nRequires ADMINISTRATION role.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint supports searching variables by:\n* Variable identifier (ID or name)\n* Variable type\n* Name pattern (case-insensitive, supports % for wildcard)\n\nThe search results can be formatted in three ways:\n* METADATA - Returns only variable metadata (default)\n* METADATA_AND_VALUES - Returns variable metadata and values\n\nThe values can be filtered by scope:\n* org_identifier\n* principal_identifier\n* model_identifier\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nSearch variables <br/>  <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\nAllows searching for variables in ThoughtSpot.\n\nRequires ADMINISTRATION role.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint supports searching variables by:\n* Variable identifier (ID or name)\n* Variable type\n* Name pattern (case-insensitive, supports % for wildcard)\n\nThe search results can be formatted in three ways:\n* METADATA - Returns only variable metadata (default)\n* METADATA_AND_VALUES - Returns variable metadata and values\n\nThe values can be filtered by scope:\n* org_identifier\n* principal_identifier\n* model_identifier\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Variable",
-          "10.14.0.cl"
+          "26.4.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -11137,10 +11137,10 @@
     "/api/rest/2.0/template/variables/{identifier}/update": {
       "post": {
         "operationId": "updateVariable",
-        "description": "\nUpdate a variable's name <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nAllows updating a variable's name in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint allows updating:\n* The variable name\n\n\n\n#### Endpoint URL\n",
+        "description": "\nUpdate a variable's name <br/>  <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\nAllows updating a variable's name in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint allows updating:\n* The variable name\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Variable",
-          "10.14.0.cl"
+          "26.4.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -11213,7 +11213,7 @@
     "/api/rest/2.0/template/variables/update-values": {
       "post": {
         "operationId": "updateVariableValues",
-        "description": "\nUpdate values for multiple variables <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nAllows updating values for multiple variables in ThoughtSpot.\n\nRequires ADMINISTRATION role.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint allows:\n* Adding new values to variables\n* Replacing existing values\n* Deleting values from variables\n\nWhen updating variable values, you need to specify:\n* The variable identifiers\n* The values to add/replace/remove for each variable\n* The operation to perform (ADD, REPLACE, REMOVE, RESET)\n\nBehaviour based on operation type:\n* ADD - Adds values to the variable if this is a list type variable, else same as replace.\n* REPLACE - Replaces all values of a given set of constraints with the current set of values.\n* REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value.\n* RESET - Removes all constrains for a given variable, scope is ignored\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nUpdate values for multiple variables <br/>  <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\n**Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/{identifier}/update-values](/api/rest/2.0/template/variables/%7Bidentifier%7D/update-values) instead.\n\nAllows updating values for multiple variables in ThoughtSpot.\n\nRequires ADMINISTRATION role.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint allows:\n* Adding new values to variables\n* Replacing existing values\n* Deleting values from variables\n\nWhen updating variable values, you need to specify:\n* The variable identifiers\n* The values to add/replace/remove for each variable\n* The operation to perform (ADD, REPLACE, REMOVE, RESET)\n\nBehaviour based on operation type:\n* ADD - Adds values to the variable if this is a list type variable, else same as replace.\n* REPLACE - Replaces all values of a given set of constraints with the current set of values.\n* REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value.\n* RESET - Removes all constrains for a given variable, scope is ignored\n\n\n\n\n#### Endpoint URL\n",
         "deprecated": true,
         "tags": [
           "Variable",
