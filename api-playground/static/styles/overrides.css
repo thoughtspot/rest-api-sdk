@@ -65,11 +65,11 @@
 }
 
 *:not(pre):not(pre *) {
-    font-family: Optimo-Plain, sans-serif;
+    font-family: Optimo-Plain, sans-serif !important;
 }
 
 strong {
-    font-weight: 700;
+    font-weight: 700 !important;
 }
 
 .portal-header {
