@@ -30,7 +30,6 @@ import com.thoughtspot.client.model.ResponseCopyObject;
 import com.thoughtspot.client.model.ResponseWorksheetToModelConversion;
 import com.thoughtspot.client.model.SearchMetadataRequest;
 import com.thoughtspot.client.model.SqlQueryResponse;
-import com.thoughtspot.client.model.UnparameterizeMetadataRequest;
 import com.thoughtspot.client.model.UpdateMetadataHeaderRequest;
 import com.thoughtspot.client.model.UpdateMetadataObjIdRequest;
 import java.lang.reflect.Type;
@@ -2371,15 +2370,17 @@ public class MetadataApi {
     }
 
     /**
-     * Parameterize fields in metadata objects. Version: 10.9.0.cl or later Allows parameterizing
-     * fields in metadata objects in ThoughtSpot. Requires appropriate permissions to modify the
-     * metadata object. The API endpoint allows parameterizing the following types of metadata
-     * objects: * Logical Tables * Connections * Connection Configs For a Logical Table the field
-     * type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName
-     * * tableName For a Connection or Connection Config, the field type is always
-     * &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact property of the
-     * Connection or Connection Config that needs to be parameterized. For Connection Config, the
-     * only supported field name is: * impersonate_user
+     * Parameterize fields in metadata objects. Version: 10.9.0.cl or later **Note:** This API
+     * endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST
+     * /api/rest/2.0/metadata/parameterize-fields](/api/rest/2.0/metadata/parameterize-fields)
+     * instead. Allows parameterizing fields in metadata objects in ThoughtSpot. Requires
+     * appropriate permissions to modify the metadata object. The API endpoint allows parameterizing
+     * the following types of metadata objects: * Logical Tables * Connections * Connection Configs
+     * For a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one
+     * of: * databaseName * schemaName * tableName For a Connection or Connection Config, the field
+     * type is always &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact
+     * property of the Connection or Connection Config that needs to be parameterized. For
+     * Connection Config, the only supported field name is: * impersonate_user
      *
      * @param parameterizeMetadataRequest (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -2404,15 +2405,17 @@ public class MetadataApi {
     }
 
     /**
-     * Parameterize fields in metadata objects. Version: 10.9.0.cl or later Allows parameterizing
-     * fields in metadata objects in ThoughtSpot. Requires appropriate permissions to modify the
-     * metadata object. The API endpoint allows parameterizing the following types of metadata
-     * objects: * Logical Tables * Connections * Connection Configs For a Logical Table the field
-     * type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName
-     * * tableName For a Connection or Connection Config, the field type is always
-     * &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact property of the
-     * Connection or Connection Config that needs to be parameterized. For Connection Config, the
-     * only supported field name is: * impersonate_user
+     * Parameterize fields in metadata objects. Version: 10.9.0.cl or later **Note:** This API
+     * endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST
+     * /api/rest/2.0/metadata/parameterize-fields](/api/rest/2.0/metadata/parameterize-fields)
+     * instead. Allows parameterizing fields in metadata objects in ThoughtSpot. Requires
+     * appropriate permissions to modify the metadata object. The API endpoint allows parameterizing
+     * the following types of metadata objects: * Logical Tables * Connections * Connection Configs
+     * For a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one
+     * of: * databaseName * schemaName * tableName For a Connection or Connection Config, the field
+     * type is always &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact
+     * property of the Connection or Connection Config that needs to be parameterized. For
+     * Connection Config, the only supported field name is: * impersonate_user
      *
      * @param parameterizeMetadataRequest (required)
      * @return ApiResponse&lt;Void&gt;
@@ -2440,15 +2443,18 @@ public class MetadataApi {
     }
 
     /**
-     * (asynchronously) Parameterize fields in metadata objects. Version: 10.9.0.cl or later Allows
-     * parameterizing fields in metadata objects in ThoughtSpot. Requires appropriate permissions to
-     * modify the metadata object. The API endpoint allows parameterizing the following types of
-     * metadata objects: * Logical Tables * Connections * Connection Configs For a Logical Table the
-     * field type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName *
-     * schemaName * tableName For a Connection or Connection Config, the field type is always
-     * &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact property of the
-     * Connection or Connection Config that needs to be parameterized. For Connection Config, the
-     * only supported field name is: * impersonate_user
+     * (asynchronously) Parameterize fields in metadata objects. Version: 10.9.0.cl or later
+     * **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future
+     * release. Use [POST
+     * /api/rest/2.0/metadata/parameterize-fields](/api/rest/2.0/metadata/parameterize-fields)
+     * instead. Allows parameterizing fields in metadata objects in ThoughtSpot. Requires
+     * appropriate permissions to modify the metadata object. The API endpoint allows parameterizing
+     * the following types of metadata objects: * Logical Tables * Connections * Connection Configs
+     * For a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one
+     * of: * databaseName * schemaName * tableName For a Connection or Connection Config, the field
+     * type is always &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact
+     * property of the Connection or Connection Config that needs to be parameterized. For
+     * Connection Config, the only supported field name is: * impersonate_user
      *
      * @param parameterizeMetadataRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -2725,195 +2731,6 @@ public class MetadataApi {
                 searchMetadataValidateBeforeCall(searchMetadataRequest, _callback);
         Type localVarReturnType = new TypeToken<List<MetadataSearchResponse>>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for unparameterizeMetadata
-     *
-     * @param unparameterizeMetadataRequest (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Successfuly removed parameters. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call unparameterizeMetadataCall(
-            UnparameterizeMetadataRequest unparameterizeMetadataRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {};
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
-            basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = unparameterizeMetadataRequest;
-
-        // create path and map variables
-        String localVarPath = "/api/rest/2.0/metadata/unparameterize";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {"application/json"};
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {"application/json"};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call unparameterizeMetadataValidateBeforeCall(
-            UnparameterizeMetadataRequest unparameterizeMetadataRequest,
-            final ApiCallback _callback)
-            throws ApiException {
-        // verify the required parameter 'unparameterizeMetadataRequest' is set
-        if (unparameterizeMetadataRequest == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'unparameterizeMetadataRequest' when calling"
-                            + " unparameterizeMetadata(Async)");
-        }
-
-        return unparameterizeMetadataCall(unparameterizeMetadataRequest, _callback);
-    }
-
-    /**
-     * Remove parameterization from fields in metadata objects. Version: 10.9.0.cl or later Allows
-     * removing parameterization from fields in metadata objects in ThoughtSpot. Requires
-     * appropriate permissions to modify the metadata object. The API endpoint allows
-     * unparameterizing the following types of metadata objects: * Logical Tables * Connections *
-     * Connection Configs For a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field
-     * name can be one of: * databaseName * schemaName * tableName For a Connection or Connection
-     * Config, the field type is always &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name
-     * specifies the exact property of the Connection or Connection Config that needs to be
-     * unparameterized. For Connection Config, the only supported field name is: * impersonate_user
-     *
-     * @param unparameterizeMetadataRequest (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Successfuly removed parameters. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public void unparameterizeMetadata(UnparameterizeMetadataRequest unparameterizeMetadataRequest)
-            throws ApiException {
-        unparameterizeMetadataWithHttpInfo(unparameterizeMetadataRequest);
-    }
-
-    /**
-     * Remove parameterization from fields in metadata objects. Version: 10.9.0.cl or later Allows
-     * removing parameterization from fields in metadata objects in ThoughtSpot. Requires
-     * appropriate permissions to modify the metadata object. The API endpoint allows
-     * unparameterizing the following types of metadata objects: * Logical Tables * Connections *
-     * Connection Configs For a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field
-     * name can be one of: * databaseName * schemaName * tableName For a Connection or Connection
-     * Config, the field type is always &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name
-     * specifies the exact property of the Connection or Connection Config that needs to be
-     * unparameterized. For Connection Config, the only supported field name is: * impersonate_user
-     *
-     * @param unparameterizeMetadataRequest (required)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Successfuly removed parameters. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public ApiResponse<Void> unparameterizeMetadataWithHttpInfo(
-            UnparameterizeMetadataRequest unparameterizeMetadataRequest) throws ApiException {
-        okhttp3.Call localVarCall =
-                unparameterizeMetadataValidateBeforeCall(unparameterizeMetadataRequest, null);
-        return localVarApiClient.execute(localVarCall);
-    }
-
-    /**
-     * (asynchronously) Remove parameterization from fields in metadata objects. Version: 10.9.0.cl
-     * or later Allows removing parameterization from fields in metadata objects in ThoughtSpot.
-     * Requires appropriate permissions to modify the metadata object. The API endpoint allows
-     * unparameterizing the following types of metadata objects: * Logical Tables * Connections *
-     * Connection Configs For a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field
-     * name can be one of: * databaseName * schemaName * tableName For a Connection or Connection
-     * Config, the field type is always &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name
-     * specifies the exact property of the Connection or Connection Config that needs to be
-     * unparameterized. For Connection Config, the only supported field name is: * impersonate_user
-     *
-     * @param unparameterizeMetadataRequest (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
-     * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 204 </td><td> Successfuly removed parameters. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
-     */
-    public okhttp3.Call unparameterizeMetadataAsync(
-            UnparameterizeMetadataRequest unparameterizeMetadataRequest,
-            final ApiCallback<Void> _callback)
-            throws ApiException {
-
-        okhttp3.Call localVarCall =
-                unparameterizeMetadataValidateBeforeCall(unparameterizeMetadataRequest, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
     /**

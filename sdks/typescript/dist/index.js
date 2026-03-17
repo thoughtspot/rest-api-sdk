@@ -24058,7 +24058,7 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *  Parameterize fields in metadata objects.   Version: 10.9.0.cl or later   Allows parameterizing fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be parameterized.  For Connection Config, the only supported field name is: * impersonate_user      
+   *  Parameterize fields in metadata objects.   Version: 10.9.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/metadata/parameterize-fields](/api/rest/2.0/metadata/parameterize-fields) instead.  Allows parameterizing fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be parameterized.  For Connection Config, the only supported field name is: * impersonate_user      
    * @param parameterizeMetadataRequest 
    */
   parameterizeMetadata(parameterizeMetadataRequest, _options) {
@@ -24116,43 +24116,6 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
       requestContext.setHeaderParam("Content-Type", contentType);
       const serializedBody = ObjectSerializer.stringify(
         ObjectSerializer.serialize(searchMetadataRequest, "SearchMetadataRequest", ""),
-        contentType
-      );
-      requestContext.setBody(serializedBody);
-      let authMethod;
-      authMethod = _config.authMethods["bearerAuth"];
-      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
-        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
-      }
-      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
-      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
-        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
-      }
-      return requestContext;
-    });
-  }
-  /**
-   *  Remove parameterization from fields in metadata objects.   Version: 10.9.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user      
-   * @param unparameterizeMetadataRequest 
-   */
-  unparameterizeMetadata(unparameterizeMetadataRequest, _options) {
-    return __async(this, null, function* () {
-      var _a, _b, _c;
-      let _config = _options || this.configuration;
-      if (unparameterizeMetadataRequest === null || unparameterizeMetadataRequest === void 0) {
-        throw new RequiredError("MetadataApi", "unparameterizeMetadata", "unparameterizeMetadataRequest");
-      }
-      const localVarPath = "/api/rest/2.0/metadata/unparameterize";
-      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
-      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.24.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.24.0");
-      const contentType = ObjectSerializer.getPreferredMediaType([
-        "application/json"
-      ]);
-      requestContext.setHeaderParam("Content-Type", contentType);
-      const serializedBody = ObjectSerializer.stringify(
-        ObjectSerializer.serialize(unparameterizeMetadataRequest, "UnparameterizeMetadataRequest", ""),
         contentType
       );
       requestContext.setBody(serializedBody);
@@ -24967,62 +24930,6 @@ var MetadataApiResponseProcessor = class {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "Array<MetadataSearchResponse>",
-          ""
-        );
-        return body;
-      }
-      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
-    });
-  }
-  /**
-   * Unwraps the actual response sent by the server from the response context and deserializes the response content
-   * to the expected objects
-   *
-   * @params response Response returned by the server for a request to unparameterizeMetadata
-   * @throws ApiException if the response code was not in [200, 299]
-   */
-  unparameterizeMetadata(response) {
-    return __async(this, null, function* () {
-      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-      if (isCodeInRange("204", response.httpStatusCode)) {
-        return;
-      }
-      if (isCodeInRange("400", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "ErrorResponse",
-          ""
-        );
-        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
-      }
-      if (isCodeInRange("401", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "ErrorResponse",
-          ""
-        );
-        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
-      }
-      if (isCodeInRange("403", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "ErrorResponse",
-          ""
-        );
-        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
-      }
-      if (isCodeInRange("500", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "ErrorResponse",
-          ""
-        );
-        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
-      }
-      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "void",
           ""
         );
         return body;
@@ -26643,43 +26550,6 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *  Version: 10.9.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
-   * @param publishMetadataRequest 
-   */
-  publishMetadata(publishMetadataRequest, _options) {
-    return __async(this, null, function* () {
-      var _a, _b, _c;
-      let _config = _options || this.configuration;
-      if (publishMetadataRequest === null || publishMetadataRequest === void 0) {
-        throw new RequiredError("SecurityApi", "publishMetadata", "publishMetadataRequest");
-      }
-      const localVarPath = "/api/rest/2.0/security/metadata/publish";
-      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
-      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.24.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.24.0");
-      const contentType = ObjectSerializer.getPreferredMediaType([
-        "application/json"
-      ]);
-      requestContext.setHeaderParam("Content-Type", contentType);
-      const serializedBody = ObjectSerializer.stringify(
-        ObjectSerializer.serialize(publishMetadataRequest, "PublishMetadataRequest", ""),
-        contentType
-      );
-      requestContext.setBody(serializedBody);
-      let authMethod;
-      authMethod = _config.authMethods["bearerAuth"];
-      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
-        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
-      }
-      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
-      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
-        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
-      }
-      return requestContext;
-    });
-  }
-  /**
    *   Version: 9.0.0.cl or later   Allows sharing one or several metadata objects with users and groups in ThoughtSpot.  Requires edit access to the metadata object.  #### Supported metadata objects: * Liveboards * Visualizations * Answers * Models * Views * Connections  #### Object permissions  You can provide `READ_ONLY` or `MODIFY` access when sharing an object with another user or group. The `READ_ONLY` permission grants view access to the shared object, whereas `MODIFY` provides edit access.  To prevent a user or group from accessing the shared object, specify the GUID or name of the principal and set `shareMode` to `NO_ACCESS`.  #### Sharing a visualization  * Sharing a visualization implicitly shares the entire Liveboard with the recipient.   * Object permissions set for a shared visualization also apply to the Liveboard unless overridden by another API request or via UI. * If email notifications for object sharing are enabled, a notification with a link to the shared visualization will be sent to the recipient’s email address. Although this link opens the shared visualization, recipients can also access other visualizations in the Liveboard.      
    * @param shareMetadataRequest 
    */
@@ -26701,43 +26571,6 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
       requestContext.setHeaderParam("Content-Type", contentType);
       const serializedBody = ObjectSerializer.stringify(
         ObjectSerializer.serialize(shareMetadataRequest, "ShareMetadataRequest", ""),
-        contentType
-      );
-      requestContext.setBody(serializedBody);
-      let authMethod;
-      authMethod = _config.authMethods["bearerAuth"];
-      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
-        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
-      }
-      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
-      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
-        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
-      }
-      return requestContext;
-    });
-  }
-  /**
-   *  Version: 10.9.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
-   * @param unpublishMetadataRequest 
-   */
-  unpublishMetadata(unpublishMetadataRequest, _options) {
-    return __async(this, null, function* () {
-      var _a, _b, _c;
-      let _config = _options || this.configuration;
-      if (unpublishMetadataRequest === null || unpublishMetadataRequest === void 0) {
-        throw new RequiredError("SecurityApi", "unpublishMetadata", "unpublishMetadataRequest");
-      }
-      const localVarPath = "/api/rest/2.0/security/metadata/unpublish";
-      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
-      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.24.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.24.0");
-      const contentType = ObjectSerializer.getPreferredMediaType([
-        "application/json"
-      ]);
-      requestContext.setHeaderParam("Content-Type", contentType);
-      const serializedBody = ObjectSerializer.stringify(
-        ObjectSerializer.serialize(unpublishMetadataRequest, "UnpublishMetadataRequest", ""),
         contentType
       );
       requestContext.setBody(serializedBody);
@@ -27035,122 +26868,10 @@ var SecurityApiResponseProcessor = class {
    * Unwraps the actual response sent by the server from the response context and deserializes the response content
    * to the expected objects
    *
-   * @params response Response returned by the server for a request to publishMetadata
-   * @throws ApiException if the response code was not in [200, 299]
-   */
-  publishMetadata(response) {
-    return __async(this, null, function* () {
-      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-      if (isCodeInRange("204", response.httpStatusCode)) {
-        return;
-      }
-      if (isCodeInRange("400", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "ErrorResponse",
-          ""
-        );
-        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
-      }
-      if (isCodeInRange("401", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "ErrorResponse",
-          ""
-        );
-        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
-      }
-      if (isCodeInRange("403", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "ErrorResponse",
-          ""
-        );
-        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
-      }
-      if (isCodeInRange("500", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "ErrorResponse",
-          ""
-        );
-        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
-      }
-      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "void",
-          ""
-        );
-        return body;
-      }
-      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
-    });
-  }
-  /**
-   * Unwraps the actual response sent by the server from the response context and deserializes the response content
-   * to the expected objects
-   *
    * @params response Response returned by the server for a request to shareMetadata
    * @throws ApiException if the response code was not in [200, 299]
    */
   shareMetadata(response) {
-    return __async(this, null, function* () {
-      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-      if (isCodeInRange("204", response.httpStatusCode)) {
-        return;
-      }
-      if (isCodeInRange("400", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "ErrorResponse",
-          ""
-        );
-        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
-      }
-      if (isCodeInRange("401", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "ErrorResponse",
-          ""
-        );
-        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
-      }
-      if (isCodeInRange("403", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "ErrorResponse",
-          ""
-        );
-        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
-      }
-      if (isCodeInRange("500", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "ErrorResponse",
-          ""
-        );
-        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
-      }
-      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "void",
-          ""
-        );
-        return body;
-      }
-      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
-    });
-  }
-  /**
-   * Unwraps the actual response sent by the server from the response context and deserializes the response content
-   * to the expected objects
-   *
-   * @params response Response returned by the server for a request to unpublishMetadata
-   * @throws ApiException if the response code was not in [200, 299]
-   */
-  unpublishMetadata(response) {
     return __async(this, null, function* () {
       const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
       if (isCodeInRange("204", response.httpStatusCode)) {
@@ -30799,7 +30520,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     });
   }
   /**
-   *  Parameterize fields in metadata objects.   Version: 10.9.0.cl or later   Allows parameterizing fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be parameterized.  For Connection Config, the only supported field name is: * impersonate_user      
+   *  Parameterize fields in metadata objects.   Version: 10.9.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/metadata/parameterize-fields](/api/rest/2.0/metadata/parameterize-fields) instead.  Allows parameterizing fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be parameterized.  For Connection Config, the only supported field name is: * impersonate_user      
    * @param parameterizeMetadataRequest 
    */
   parameterizeMetadata(parameterizeMetadataRequest, _options) {
@@ -30820,43 +30541,6 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       requestContext.setHeaderParam("Content-Type", contentType);
       const serializedBody = ObjectSerializer.stringify(
         ObjectSerializer.serialize(parameterizeMetadataRequest, "ParameterizeMetadataRequest", ""),
-        contentType
-      );
-      requestContext.setBody(serializedBody);
-      let authMethod;
-      authMethod = _config.authMethods["bearerAuth"];
-      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
-        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
-      }
-      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
-      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
-        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
-      }
-      return requestContext;
-    });
-  }
-  /**
-   *  Version: 10.9.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
-   * @param publishMetadataRequest 
-   */
-  publishMetadata(publishMetadataRequest, _options) {
-    return __async(this, null, function* () {
-      var _a, _b, _c;
-      let _config = _options || this.configuration;
-      if (publishMetadataRequest === null || publishMetadataRequest === void 0) {
-        throw new RequiredError("ThoughtSpotRestApi", "publishMetadata", "publishMetadataRequest");
-      }
-      const localVarPath = "/api/rest/2.0/security/metadata/publish";
-      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
-      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.24.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.24.0");
-      const contentType = ObjectSerializer.getPreferredMediaType([
-        "application/json"
-      ]);
-      requestContext.setHeaderParam("Content-Type", contentType);
-      const serializedBody = ObjectSerializer.stringify(
-        ObjectSerializer.serialize(publishMetadataRequest, "PublishMetadataRequest", ""),
         contentType
       );
       requestContext.setBody(serializedBody);
@@ -31679,80 +31363,6 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       requestContext.setHeaderParam("Content-Type", contentType);
       const serializedBody = ObjectSerializer.stringify(
         ObjectSerializer.serialize(unassignTagRequest, "UnassignTagRequest", ""),
-        contentType
-      );
-      requestContext.setBody(serializedBody);
-      let authMethod;
-      authMethod = _config.authMethods["bearerAuth"];
-      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
-        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
-      }
-      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
-      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
-        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
-      }
-      return requestContext;
-    });
-  }
-  /**
-   *  Remove parameterization from fields in metadata objects.   Version: 10.9.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user      
-   * @param unparameterizeMetadataRequest 
-   */
-  unparameterizeMetadata(unparameterizeMetadataRequest, _options) {
-    return __async(this, null, function* () {
-      var _a, _b, _c;
-      let _config = _options || this.configuration;
-      if (unparameterizeMetadataRequest === null || unparameterizeMetadataRequest === void 0) {
-        throw new RequiredError("ThoughtSpotRestApi", "unparameterizeMetadata", "unparameterizeMetadataRequest");
-      }
-      const localVarPath = "/api/rest/2.0/metadata/unparameterize";
-      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
-      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.24.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.24.0");
-      const contentType = ObjectSerializer.getPreferredMediaType([
-        "application/json"
-      ]);
-      requestContext.setHeaderParam("Content-Type", contentType);
-      const serializedBody = ObjectSerializer.stringify(
-        ObjectSerializer.serialize(unparameterizeMetadataRequest, "UnparameterizeMetadataRequest", ""),
-        contentType
-      );
-      requestContext.setBody(serializedBody);
-      let authMethod;
-      authMethod = _config.authMethods["bearerAuth"];
-      if (authMethod == null ? void 0 : authMethod.applySecurityAuthentication) {
-        yield authMethod == null ? void 0 : authMethod.applySecurityAuthentication(requestContext);
-      }
-      const defaultAuth = ((_a = _options == null ? void 0 : _options.authMethods) == null ? void 0 : _a.default) || ((_c = (_b = this.configuration) == null ? void 0 : _b.authMethods) == null ? void 0 : _c.default);
-      if (defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication) {
-        yield defaultAuth == null ? void 0 : defaultAuth.applySecurityAuthentication(requestContext);
-      }
-      return requestContext;
-    });
-  }
-  /**
-   *  Version: 10.9.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
-   * @param unpublishMetadataRequest 
-   */
-  unpublishMetadata(unpublishMetadataRequest, _options) {
-    return __async(this, null, function* () {
-      var _a, _b, _c;
-      let _config = _options || this.configuration;
-      if (unpublishMetadataRequest === null || unpublishMetadataRequest === void 0) {
-        throw new RequiredError("ThoughtSpotRestApi", "unpublishMetadata", "unpublishMetadataRequest");
-      }
-      const localVarPath = "/api/rest/2.0/security/metadata/unpublish";
-      const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
-      requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-      requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.24.0");
-      requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.24.0");
-      const contentType = ObjectSerializer.getPreferredMediaType([
-        "application/json"
-      ]);
-      requestContext.setHeaderParam("Content-Type", contentType);
-      const serializedBody = ObjectSerializer.stringify(
-        ObjectSerializer.serialize(unpublishMetadataRequest, "UnpublishMetadataRequest", ""),
         contentType
       );
       requestContext.setBody(serializedBody);
@@ -37078,62 +36688,6 @@ var ThoughtSpotRestApiResponseProcessor = class {
    * Unwraps the actual response sent by the server from the response context and deserializes the response content
    * to the expected objects
    *
-   * @params response Response returned by the server for a request to publishMetadata
-   * @throws ApiException if the response code was not in [200, 299]
-   */
-  publishMetadata(response) {
-    return __async(this, null, function* () {
-      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-      if (isCodeInRange("204", response.httpStatusCode)) {
-        return;
-      }
-      if (isCodeInRange("400", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "ErrorResponse",
-          ""
-        );
-        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
-      }
-      if (isCodeInRange("401", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "ErrorResponse",
-          ""
-        );
-        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
-      }
-      if (isCodeInRange("403", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "ErrorResponse",
-          ""
-        );
-        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
-      }
-      if (isCodeInRange("500", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "ErrorResponse",
-          ""
-        );
-        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
-      }
-      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "void",
-          ""
-        );
-        return body;
-      }
-      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
-    });
-  }
-  /**
-   * Unwraps the actual response sent by the server from the response context and deserializes the response content
-   * to the expected objects
-   *
    * @params response Response returned by the server for a request to queryGetDecomposedQuery
    * @throws ApiException if the response code was not in [200, 299]
    */
@@ -38420,118 +37974,6 @@ var ThoughtSpotRestApiResponseProcessor = class {
    * @throws ApiException if the response code was not in [200, 299]
    */
   unassignTag(response) {
-    return __async(this, null, function* () {
-      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-      if (isCodeInRange("204", response.httpStatusCode)) {
-        return;
-      }
-      if (isCodeInRange("400", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "ErrorResponse",
-          ""
-        );
-        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
-      }
-      if (isCodeInRange("401", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "ErrorResponse",
-          ""
-        );
-        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
-      }
-      if (isCodeInRange("403", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "ErrorResponse",
-          ""
-        );
-        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
-      }
-      if (isCodeInRange("500", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "ErrorResponse",
-          ""
-        );
-        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
-      }
-      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "void",
-          ""
-        );
-        return body;
-      }
-      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
-    });
-  }
-  /**
-   * Unwraps the actual response sent by the server from the response context and deserializes the response content
-   * to the expected objects
-   *
-   * @params response Response returned by the server for a request to unparameterizeMetadata
-   * @throws ApiException if the response code was not in [200, 299]
-   */
-  unparameterizeMetadata(response) {
-    return __async(this, null, function* () {
-      const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-      if (isCodeInRange("204", response.httpStatusCode)) {
-        return;
-      }
-      if (isCodeInRange("400", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "ErrorResponse",
-          ""
-        );
-        throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
-      }
-      if (isCodeInRange("401", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "ErrorResponse",
-          ""
-        );
-        throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
-      }
-      if (isCodeInRange("403", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "ErrorResponse",
-          ""
-        );
-        throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
-      }
-      if (isCodeInRange("500", response.httpStatusCode)) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "ErrorResponse",
-          ""
-        );
-        throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
-      }
-      if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-        const body = ObjectSerializer.deserialize(
-          ObjectSerializer.parse(yield response.body.text(), contentType),
-          "void",
-          ""
-        );
-        return body;
-      }
-      throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", yield response.getBodyAsAny(), response.headers);
-    });
-  }
-  /**
-   * Unwraps the actual response sent by the server from the response context and deserializes the response content
-   * to the expected objects
-   *
-   * @params response Response returned by the server for a request to unpublishMetadata
-   * @throws ApiException if the response code was not in [200, 299]
-   */
-  unpublishMetadata(response) {
     return __async(this, null, function* () {
       const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
       if (isCodeInRange("204", response.httpStatusCode)) {
@@ -42898,7 +42340,7 @@ var ObservableMetadataApi = class {
     }));
   }
   /**
-   *  Parameterize fields in metadata objects.   Version: 10.9.0.cl or later   Allows parameterizing fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be parameterized.  For Connection Config, the only supported field name is: * impersonate_user      
+   *  Parameterize fields in metadata objects.   Version: 10.9.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/metadata/parameterize-fields](/api/rest/2.0/metadata/parameterize-fields) instead.  Allows parameterizing fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be parameterized.  For Connection Config, the only supported field name is: * impersonate_user      
    * @param parameterizeMetadataRequest 
    */
   parameterizeMetadata(parameterizeMetadataRequest, _options) {
@@ -42931,24 +42373,6 @@ var ObservableMetadataApi = class {
         middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
       }
       return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.searchMetadata(rsp)));
-    }));
-  }
-  /**
-   *  Remove parameterization from fields in metadata objects.   Version: 10.9.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user      
-   * @param unparameterizeMetadataRequest 
-   */
-  unparameterizeMetadata(unparameterizeMetadataRequest, _options) {
-    const requestContextPromise = this.requestFactory.unparameterizeMetadata(unparameterizeMetadataRequest, _options);
-    let middlewarePreObservable = from(requestContextPromise);
-    for (let middleware of this.configuration.middleware) {
-      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
-    }
-    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
-      let middlewarePostObservable = of(response);
-      for (let middleware of this.configuration.middleware) {
-        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
-      }
-      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.unparameterizeMetadata(rsp)));
     }));
   }
   /**
@@ -43350,24 +42774,6 @@ var ObservableSecurityApi = class {
     }));
   }
   /**
-   *  Version: 10.9.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
-   * @param publishMetadataRequest 
-   */
-  publishMetadata(publishMetadataRequest, _options) {
-    const requestContextPromise = this.requestFactory.publishMetadata(publishMetadataRequest, _options);
-    let middlewarePreObservable = from(requestContextPromise);
-    for (let middleware of this.configuration.middleware) {
-      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
-    }
-    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
-      let middlewarePostObservable = of(response);
-      for (let middleware of this.configuration.middleware) {
-        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
-      }
-      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.publishMetadata(rsp)));
-    }));
-  }
-  /**
    *   Version: 9.0.0.cl or later   Allows sharing one or several metadata objects with users and groups in ThoughtSpot.  Requires edit access to the metadata object.  #### Supported metadata objects: * Liveboards * Visualizations * Answers * Models * Views * Connections  #### Object permissions  You can provide `READ_ONLY` or `MODIFY` access when sharing an object with another user or group. The `READ_ONLY` permission grants view access to the shared object, whereas `MODIFY` provides edit access.  To prevent a user or group from accessing the shared object, specify the GUID or name of the principal and set `shareMode` to `NO_ACCESS`.  #### Sharing a visualization  * Sharing a visualization implicitly shares the entire Liveboard with the recipient.   * Object permissions set for a shared visualization also apply to the Liveboard unless overridden by another API request or via UI. * If email notifications for object sharing are enabled, a notification with a link to the shared visualization will be sent to the recipient’s email address. Although this link opens the shared visualization, recipients can also access other visualizations in the Liveboard.      
    * @param shareMetadataRequest 
    */
@@ -43383,24 +42789,6 @@ var ObservableSecurityApi = class {
         middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
       }
       return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.shareMetadata(rsp)));
-    }));
-  }
-  /**
-   *  Version: 10.9.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
-   * @param unpublishMetadataRequest 
-   */
-  unpublishMetadata(unpublishMetadataRequest, _options) {
-    const requestContextPromise = this.requestFactory.unpublishMetadata(unpublishMetadataRequest, _options);
-    let middlewarePreObservable = from(requestContextPromise);
-    for (let middleware of this.configuration.middleware) {
-      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
-    }
-    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
-      let middlewarePostObservable = of(response);
-      for (let middleware of this.configuration.middleware) {
-        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
-      }
-      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.unpublishMetadata(rsp)));
     }));
   }
   /**
@@ -44960,7 +44348,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *  Parameterize fields in metadata objects.   Version: 10.9.0.cl or later   Allows parameterizing fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be parameterized.  For Connection Config, the only supported field name is: * impersonate_user      
+   *  Parameterize fields in metadata objects.   Version: 10.9.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/metadata/parameterize-fields](/api/rest/2.0/metadata/parameterize-fields) instead.  Allows parameterizing fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be parameterized.  For Connection Config, the only supported field name is: * impersonate_user      
    * @param parameterizeMetadataRequest 
    */
   parameterizeMetadata(parameterizeMetadataRequest, _options) {
@@ -44975,24 +44363,6 @@ var ObservableThoughtSpotRestApi = class {
         middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
       }
       return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.parameterizeMetadata(rsp)));
-    }));
-  }
-  /**
-   *  Version: 10.9.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
-   * @param publishMetadataRequest 
-   */
-  publishMetadata(publishMetadataRequest, _options) {
-    const requestContextPromise = this.requestFactory.publishMetadata(publishMetadataRequest, _options);
-    let middlewarePreObservable = from(requestContextPromise);
-    for (let middleware of this.configuration.middleware) {
-      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
-    }
-    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
-      let middlewarePostObservable = of(response);
-      for (let middleware of this.configuration.middleware) {
-        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
-      }
-      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.publishMetadata(rsp)));
     }));
   }
   /**
@@ -45391,42 +44761,6 @@ var ObservableThoughtSpotRestApi = class {
         middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
       }
       return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.unassignTag(rsp)));
-    }));
-  }
-  /**
-   *  Remove parameterization from fields in metadata objects.   Version: 10.9.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user      
-   * @param unparameterizeMetadataRequest 
-   */
-  unparameterizeMetadata(unparameterizeMetadataRequest, _options) {
-    const requestContextPromise = this.requestFactory.unparameterizeMetadata(unparameterizeMetadataRequest, _options);
-    let middlewarePreObservable = from(requestContextPromise);
-    for (let middleware of this.configuration.middleware) {
-      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
-    }
-    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
-      let middlewarePostObservable = of(response);
-      for (let middleware of this.configuration.middleware) {
-        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
-      }
-      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.unparameterizeMetadata(rsp)));
-    }));
-  }
-  /**
-   *  Version: 10.9.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
-   * @param unpublishMetadataRequest 
-   */
-  unpublishMetadata(unpublishMetadataRequest, _options) {
-    const requestContextPromise = this.requestFactory.unpublishMetadata(unpublishMetadataRequest, _options);
-    let middlewarePreObservable = from(requestContextPromise);
-    for (let middleware of this.configuration.middleware) {
-      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
-    }
-    return middlewarePreObservable.pipe(mergeMap((ctx) => this.configuration.httpApi.send(ctx))).pipe(mergeMap((response) => {
-      let middlewarePostObservable = of(response);
-      for (let middleware of this.configuration.middleware) {
-        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
-      }
-      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.unpublishMetadata(rsp)));
     }));
   }
   /**
@@ -46792,7 +46126,7 @@ var PromiseMetadataApi = class {
     return result.toPromise();
   }
   /**
-   *  Parameterize fields in metadata objects.   Version: 10.9.0.cl or later   Allows parameterizing fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be parameterized.  For Connection Config, the only supported field name is: * impersonate_user      
+   *  Parameterize fields in metadata objects.   Version: 10.9.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/metadata/parameterize-fields](/api/rest/2.0/metadata/parameterize-fields) instead.  Allows parameterizing fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be parameterized.  For Connection Config, the only supported field name is: * impersonate_user      
    * @param parameterizeMetadataRequest 
    */
   parameterizeMetadata(parameterizeMetadataRequest, _options) {
@@ -46805,14 +46139,6 @@ var PromiseMetadataApi = class {
    */
   searchMetadata(searchMetadataRequest, _options) {
     const result = this.api.searchMetadata(searchMetadataRequest, _options);
-    return result.toPromise();
-  }
-  /**
-   *  Remove parameterization from fields in metadata objects.   Version: 10.9.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user      
-   * @param unparameterizeMetadataRequest 
-   */
-  unparameterizeMetadata(unparameterizeMetadataRequest, _options) {
-    const result = this.api.unparameterizeMetadata(unparameterizeMetadataRequest, _options);
     return result.toPromise();
   }
   /**
@@ -47004,27 +46330,11 @@ var PromiseSecurityApi = class {
     return result.toPromise();
   }
   /**
-   *  Version: 10.9.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
-   * @param publishMetadataRequest 
-   */
-  publishMetadata(publishMetadataRequest, _options) {
-    const result = this.api.publishMetadata(publishMetadataRequest, _options);
-    return result.toPromise();
-  }
-  /**
    *   Version: 9.0.0.cl or later   Allows sharing one or several metadata objects with users and groups in ThoughtSpot.  Requires edit access to the metadata object.  #### Supported metadata objects: * Liveboards * Visualizations * Answers * Models * Views * Connections  #### Object permissions  You can provide `READ_ONLY` or `MODIFY` access when sharing an object with another user or group. The `READ_ONLY` permission grants view access to the shared object, whereas `MODIFY` provides edit access.  To prevent a user or group from accessing the shared object, specify the GUID or name of the principal and set `shareMode` to `NO_ACCESS`.  #### Sharing a visualization  * Sharing a visualization implicitly shares the entire Liveboard with the recipient.   * Object permissions set for a shared visualization also apply to the Liveboard unless overridden by another API request or via UI. * If email notifications for object sharing are enabled, a notification with a link to the shared visualization will be sent to the recipient’s email address. Although this link opens the shared visualization, recipients can also access other visualizations in the Liveboard.      
    * @param shareMetadataRequest 
    */
   shareMetadata(shareMetadataRequest, _options) {
     const result = this.api.shareMetadata(shareMetadataRequest, _options);
-    return result.toPromise();
-  }
-  /**
-   *  Version: 10.9.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
-   * @param unpublishMetadataRequest 
-   */
-  unpublishMetadata(unpublishMetadataRequest, _options) {
-    const result = this.api.unpublishMetadata(unpublishMetadataRequest, _options);
     return result.toPromise();
   }
   /**
@@ -47728,19 +47038,11 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *  Parameterize fields in metadata objects.   Version: 10.9.0.cl or later   Allows parameterizing fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be parameterized.  For Connection Config, the only supported field name is: * impersonate_user      
+   *  Parameterize fields in metadata objects.   Version: 10.9.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/metadata/parameterize-fields](/api/rest/2.0/metadata/parameterize-fields) instead.  Allows parameterizing fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be parameterized.  For Connection Config, the only supported field name is: * impersonate_user      
    * @param parameterizeMetadataRequest 
    */
   parameterizeMetadata(parameterizeMetadataRequest, _options) {
     const result = this.api.parameterizeMetadata(parameterizeMetadataRequest, _options);
-    return result.toPromise();
-  }
-  /**
-   *  Version: 10.9.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
-   * @param publishMetadataRequest 
-   */
-  publishMetadata(publishMetadataRequest, _options) {
-    const result = this.api.publishMetadata(publishMetadataRequest, _options);
     return result.toPromise();
   }
   /**
@@ -47919,22 +47221,6 @@ var PromiseThoughtSpotRestApi = class {
    */
   unassignTag(unassignTagRequest, _options) {
     const result = this.api.unassignTag(unassignTagRequest, _options);
-    return result.toPromise();
-  }
-  /**
-   *  Remove parameterization from fields in metadata objects.   Version: 10.9.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user      
-   * @param unparameterizeMetadataRequest 
-   */
-  unparameterizeMetadata(unparameterizeMetadataRequest, _options) {
-    const result = this.api.unparameterizeMetadata(unparameterizeMetadataRequest, _options);
-    return result.toPromise();
-  }
-  /**
-   *  Version: 10.9.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
-   * @param unpublishMetadataRequest 
-   */
-  unpublishMetadata(unpublishMetadataRequest, _options) {
-    const result = this.api.unpublishMetadata(unpublishMetadataRequest, _options);
     return result.toPromise();
   }
   /**

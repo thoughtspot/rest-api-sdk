@@ -4666,7 +4666,9 @@ paths:
     post:
       deprecated: true
       description: "\nParameterize fields in metadata objects. \n Version: 10.9.0.cl\
-        \ or later\n\n\nAllows parameterizing fields in metadata objects in ThoughtSpot.\n\
+        \ or later\n\n\n**Note:** This API endpoint is deprecated and will be removed\
+        \ from ThoughtSpot in a future release. Use [POST /api/rest/2.0/metadata/parameterize-fields](/api/rest/2.0/metadata/parameterize-fields)\
+        \ instead.\n\nAllows parameterizing fields in metadata objects in ThoughtSpot.\n\
         \nRequires appropriate permissions to modify the metadata object.\n\nThe API\
         \ endpoint allows parameterizing the following types of metadata objects:\n\
         * Logical Tables\n* Connections\n* Connection Configs\n\nFor a Logical Table\
@@ -4776,60 +4778,6 @@ paths:
                   $ref: '#/components/schemas/MetadataSearchResponse'
                 type: array
           description: Metadata objects search result.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Metadata
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/metadata/unparameterize:
-    post:
-      description: "\nRemove parameterization from fields in metadata objects. \n\
-        \ Version: 10.9.0.cl or later\n\n\nAllows removing parameterization from fields\
-        \ in metadata objects in ThoughtSpot.\n\nRequires appropriate permissions\
-        \ to modify the metadata object.\n\nThe API endpoint allows unparameterizing\
-        \ the following types of metadata objects:\n* Logical Tables\n* Connections\n\
-        * Connection Configs\n\nFor a Logical Table the field type must be `ATTRIBUTE`\
-        \ and field name can be one of:\n* databaseName\n* schemaName\n* tableName\n\
-        \nFor a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`.\
-        \ In this case, field_name specifies the exact property of the Connection\
-        \ or Connection Config that needs to be unparameterized.\n\nFor Connection\
-        \ Config, the only supported field name is:\n* impersonate_user\n\n\n\n\n\n"
-      operationId: unparameterizeMetadata
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UnparameterizeMetadataRequest'
-        required: true
-      responses:
-        "204":
-          description: Successfuly removed parameters.
         "400":
           content:
             application/json:
@@ -6226,70 +6174,6 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
-  /api/rest/2.0/security/metadata/publish:
-    post:
-      description: |2+
-
-        Version: 10.9.0.cl or later
-
-
-        Allows publishing metadata objects across organizations in ThoughtSpot.
-
-        Requires ADMINISTRATION role and TENANT scope.
-
-        The API endpoint allows publishing the following types of metadata objects:
-        * Liveboards
-        * Answers
-        * Logical Tables
-
-        This API will essentially share the objects along with it's dependencies to
-        the org admins of the orgs to which it is being published.
-
-
-
-
-
-      operationId: publishMetadata
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PublishMetadataRequest'
-        required: true
-      responses:
-        "204":
-          description: Publishing metadata objects is successful.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Security
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
   /api/rest/2.0/security/metadata/share:
     post:
       description: "\n Version: 9.0.0.cl or later\n\n\nAllows sharing one or several\
@@ -6320,71 +6204,6 @@ paths:
       responses:
         "204":
           description: Sharing metadata objects is successful.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Security
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/security/metadata/unpublish:
-    post:
-      description: |2+
-
-        Version: 10.9.0.cl or later
-
-
-        Allows unpublishing metadata objects from organizations in ThoughtSpot.
-
-        Requires ADMINISTRATION role and TENANT scope.
-
-        The API endpoint allows unpublishing the following types of metadata objects:
-        * Liveboards
-        * Answers
-        * Logical Tables
-
-        When unpublishing objects, you can:
-        * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them
-        * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations
-
-
-
-
-
-      operationId: unpublishMetadata
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UnpublishMetadataRequest'
-        required: true
-      responses:
-        "204":
-          description: Unpublishing metadata objects is successful.
         "400":
           content:
             application/json:
@@ -14921,9 +14740,6 @@ components:
       - identifier
       type: object
     PublishMetadataListItem:
-      example:
-        identifier: identifier
-        type: LIVEBOARD
       properties:
         identifier:
           description: Unique ID or name of the metadata.
@@ -20182,12 +19998,6 @@ components:
           type: boolean
       type: object
     UnparameterizeMetadataRequest:
-      example:
-        metadata_identifier: metadata_identifier
-        metadata_type: LOGICAL_TABLE
-        field_type: ATTRIBUTE
-        value: value
-        field_name: field_name
       properties:
         metadata_type:
           description: Type of metadata object to unparameterize.
@@ -22464,16 +22274,6 @@ components:
       - principals
       type: object
     PublishMetadataRequest:
-      example:
-        metadata:
-        - identifier: identifier
-          type: LIVEBOARD
-        - identifier: identifier
-          type: LIVEBOARD
-        skip_validation: true
-        org_identifiers:
-        - org_identifiers
-        - org_identifiers
       properties:
         metadata:
           description: Metadata objects to be published.
@@ -22591,17 +22391,6 @@ components:
       - permissions
       type: object
     UnpublishMetadataRequest:
-      example:
-        include_dependencies: true
-        metadata:
-        - identifier: identifier
-          type: LIVEBOARD
-        - identifier: identifier
-          type: LIVEBOARD
-        org_identifiers:
-        - org_identifiers
-        - org_identifiers
-        force: true
       properties:
         force:
           description: Force unpublishes the object. This will break all the dependent

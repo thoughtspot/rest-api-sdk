@@ -23,7 +23,6 @@ import com.thoughtspot.client.model.ResponseCopyObject;
 import com.thoughtspot.client.model.ResponseWorksheetToModelConversion;
 import com.thoughtspot.client.model.SearchMetadataRequest;
 import com.thoughtspot.client.model.SqlQueryResponse;
-import com.thoughtspot.client.model.UnparameterizeMetadataRequest;
 import com.thoughtspot.client.model.UpdateMetadataHeaderRequest;
 import com.thoughtspot.client.model.UpdateMetadataObjIdRequest;
 import java.util.List;
@@ -324,15 +323,17 @@ public class MetadataApiTest {
     }
 
     /**
-     * Parameterize fields in metadata objects. Version: 10.9.0.cl or later Allows parameterizing
-     * fields in metadata objects in ThoughtSpot. Requires appropriate permissions to modify the
-     * metadata object. The API endpoint allows parameterizing the following types of metadata
-     * objects: * Logical Tables * Connections * Connection Configs For a Logical Table the field
-     * type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName
-     * * tableName For a Connection or Connection Config, the field type is always
-     * &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact property of the
-     * Connection or Connection Config that needs to be parameterized. For Connection Config, the
-     * only supported field name is: * impersonate_user
+     * Parameterize fields in metadata objects. Version: 10.9.0.cl or later **Note:** This API
+     * endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST
+     * /api/rest/2.0/metadata/parameterize-fields](/api/rest/2.0/metadata/parameterize-fields)
+     * instead. Allows parameterizing fields in metadata objects in ThoughtSpot. Requires
+     * appropriate permissions to modify the metadata object. The API endpoint allows parameterizing
+     * the following types of metadata objects: * Logical Tables * Connections * Connection Configs
+     * For a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one
+     * of: * databaseName * schemaName * tableName For a Connection or Connection Config, the field
+     * type is always &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact
+     * property of the Connection or Connection Config that needs to be parameterized. For
+     * Connection Config, the only supported field name is: * impersonate_user
      *
      * @throws ApiException if the Api call fails
      */
@@ -379,26 +380,6 @@ public class MetadataApiTest {
     public void searchMetadataTest() throws ApiException {
         SearchMetadataRequest searchMetadataRequest = null;
         List<MetadataSearchResponse> response = api.searchMetadata(searchMetadataRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Remove parameterization from fields in metadata objects. Version: 10.9.0.cl or later Allows
-     * removing parameterization from fields in metadata objects in ThoughtSpot. Requires
-     * appropriate permissions to modify the metadata object. The API endpoint allows
-     * unparameterizing the following types of metadata objects: * Logical Tables * Connections *
-     * Connection Configs For a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field
-     * name can be one of: * databaseName * schemaName * tableName For a Connection or Connection
-     * Config, the field type is always &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name
-     * specifies the exact property of the Connection or Connection Config that needs to be
-     * unparameterized. For Connection Config, the only supported field name is: * impersonate_user
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void unparameterizeMetadataTest() throws ApiException {
-        UnparameterizeMetadataRequest unparameterizeMetadataRequest = null;
-        api.unparameterizeMetadata(unparameterizeMetadataRequest);
         // TODO: test validations
     }
 

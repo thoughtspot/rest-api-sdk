@@ -82,7 +82,6 @@ import com.thoughtspot.client.model.OrgResponse;
 import com.thoughtspot.client.model.ParameterizeMetadataRequest;
 import com.thoughtspot.client.model.PermissionOfMetadataResponse;
 import com.thoughtspot.client.model.PermissionOfPrincipalsResponse;
-import com.thoughtspot.client.model.PublishMetadataRequest;
 import com.thoughtspot.client.model.QueryGetDecomposedQueryRequest;
 import com.thoughtspot.client.model.RepoConfigObject;
 import com.thoughtspot.client.model.ResetUserPasswordRequest;
@@ -124,8 +123,6 @@ import com.thoughtspot.client.model.Tag;
 import com.thoughtspot.client.model.Token;
 import com.thoughtspot.client.model.TokenValidationResponse;
 import com.thoughtspot.client.model.UnassignTagRequest;
-import com.thoughtspot.client.model.UnparameterizeMetadataRequest;
-import com.thoughtspot.client.model.UnpublishMetadataRequest;
 import com.thoughtspot.client.model.UpdateCalendarRequest;
 import com.thoughtspot.client.model.UpdateColumnSecurityRulesRequest;
 import com.thoughtspot.client.model.UpdateConfigRequest;
@@ -1953,15 +1950,17 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Parameterize fields in metadata objects. Version: 10.9.0.cl or later Allows parameterizing
-     * fields in metadata objects in ThoughtSpot. Requires appropriate permissions to modify the
-     * metadata object. The API endpoint allows parameterizing the following types of metadata
-     * objects: * Logical Tables * Connections * Connection Configs For a Logical Table the field
-     * type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName
-     * * tableName For a Connection or Connection Config, the field type is always
-     * &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact property of the
-     * Connection or Connection Config that needs to be parameterized. For Connection Config, the
-     * only supported field name is: * impersonate_user
+     * Parameterize fields in metadata objects. Version: 10.9.0.cl or later **Note:** This API
+     * endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST
+     * /api/rest/2.0/metadata/parameterize-fields](/api/rest/2.0/metadata/parameterize-fields)
+     * instead. Allows parameterizing fields in metadata objects in ThoughtSpot. Requires
+     * appropriate permissions to modify the metadata object. The API endpoint allows parameterizing
+     * the following types of metadata objects: * Logical Tables * Connections * Connection Configs
+     * For a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one
+     * of: * databaseName * schemaName * tableName For a Connection or Connection Config, the field
+     * type is always &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact
+     * property of the Connection or Connection Config that needs to be parameterized. For
+     * Connection Config, the only supported field name is: * impersonate_user
      *
      * @throws ApiException if the Api call fails
      */
@@ -1969,22 +1968,6 @@ public class ThoughtSpotRestApiTest {
     public void parameterizeMetadataTest() throws ApiException {
         ParameterizeMetadataRequest parameterizeMetadataRequest = null;
         api.parameterizeMetadata(parameterizeMetadataRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Version: 10.9.0.cl or later Allows publishing metadata objects across organizations in
-     * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
-     * publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
-     * This API will essentially share the objects along with it&#39;s dependencies to the org
-     * admins of the orgs to which it is being published.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void publishMetadataTest() throws ApiException {
-        PublishMetadataRequest publishMetadataRequest = null;
-        api.publishMetadata(publishMetadataRequest);
         // TODO: test validations
     }
 
@@ -2519,44 +2502,6 @@ public class ThoughtSpotRestApiTest {
     public void unassignTagTest() throws ApiException {
         UnassignTagRequest unassignTagRequest = null;
         api.unassignTag(unassignTagRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Remove parameterization from fields in metadata objects. Version: 10.9.0.cl or later Allows
-     * removing parameterization from fields in metadata objects in ThoughtSpot. Requires
-     * appropriate permissions to modify the metadata object. The API endpoint allows
-     * unparameterizing the following types of metadata objects: * Logical Tables * Connections *
-     * Connection Configs For a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field
-     * name can be one of: * databaseName * schemaName * tableName For a Connection or Connection
-     * Config, the field type is always &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name
-     * specifies the exact property of the Connection or Connection Config that needs to be
-     * unparameterized. For Connection Config, the only supported field name is: * impersonate_user
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void unparameterizeMetadataTest() throws ApiException {
-        UnparameterizeMetadataRequest unparameterizeMetadataRequest = null;
-        api.unparameterizeMetadata(unparameterizeMetadataRequest);
-        // TODO: test validations
-    }
-
-    /**
-     * Version: 10.9.0.cl or later Allows unpublishing metadata objects from organizations in
-     * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
-     * unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
-     * When unpublishing objects, you can: * Include dependencies by setting
-     * &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no
-     * other published object is using them * Force unpublish by setting &#x60;force&#x60; to true -
-     * this will break all dependent objects in the unpublished organizations
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void unpublishMetadataTest() throws ApiException {
-        UnpublishMetadataRequest unpublishMetadataRequest = null;
-        api.unpublishMetadata(unpublishMetadataRequest);
         // TODO: test validations
     }
 

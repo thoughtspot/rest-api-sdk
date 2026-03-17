@@ -1779,15 +1779,6 @@ export interface MetadataApiSearchMetadataRequest {
     searchMetadataRequest: SearchMetadataRequest
 }
 
-export interface MetadataApiUnparameterizeMetadataRequest {
-    /**
-     * 
-     * @type UnparameterizeMetadataRequest
-     * @memberof MetadataApiunparameterizeMetadata
-     */
-    unparameterizeMetadataRequest: UnparameterizeMetadataRequest
-}
-
 export interface MetadataApiUpdateMetadataHeaderRequest {
     /**
      * 
@@ -1894,7 +1885,7 @@ export class ObjectMetadataApi {
     }
 
     /**
-     *  Parameterize fields in metadata objects.   Version: 10.9.0.cl or later   Allows parameterizing fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be parameterized.  For Connection Config, the only supported field name is: * impersonate_user      
+     *  Parameterize fields in metadata objects.   Version: 10.9.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/metadata/parameterize-fields](/api/rest/2.0/metadata/parameterize-fields) instead.  Allows parameterizing fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be parameterized.  For Connection Config, the only supported field name is: * impersonate_user      
      * @param param the request object
      */
     public parameterizeMetadata(param: MetadataApiParameterizeMetadataRequest, options?: Configuration): Promise<void> {
@@ -1907,14 +1898,6 @@ export class ObjectMetadataApi {
      */
     public searchMetadata(param: MetadataApiSearchMetadataRequest, options?: Configuration): Promise<Array<MetadataSearchResponse>> {
         return this.api.searchMetadata(param.searchMetadataRequest,  options).toPromise();
-    }
-
-    /**
-     *  Remove parameterization from fields in metadata objects.   Version: 10.9.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user      
-     * @param param the request object
-     */
-    public unparameterizeMetadata(param: MetadataApiUnparameterizeMetadataRequest, options?: Configuration): Promise<void> {
-        return this.api.unparameterizeMetadata(param.unparameterizeMetadataRequest,  options).toPromise();
     }
 
     /**
@@ -2278,15 +2261,6 @@ export interface SecurityApiFetchPermissionsOnMetadataRequest {
     fetchPermissionsOnMetadataRequest: FetchPermissionsOnMetadataRequest
 }
 
-export interface SecurityApiPublishMetadataRequest {
-    /**
-     * 
-     * @type PublishMetadataRequest
-     * @memberof SecurityApipublishMetadata
-     */
-    publishMetadataRequest: PublishMetadataRequest
-}
-
 export interface SecurityApiShareMetadataRequest {
     /**
      * 
@@ -2294,15 +2268,6 @@ export interface SecurityApiShareMetadataRequest {
      * @memberof SecurityApishareMetadata
      */
     shareMetadataRequest: ShareMetadataRequest
-}
-
-export interface SecurityApiUnpublishMetadataRequest {
-    /**
-     * 
-     * @type UnpublishMetadataRequest
-     * @memberof SecurityApiunpublishMetadata
-     */
-    unpublishMetadataRequest: UnpublishMetadataRequest
 }
 
 export interface SecurityApiUpdateColumnSecurityRulesRequest {
@@ -2354,27 +2319,11 @@ export class ObjectSecurityApi {
     }
 
     /**
-     *  Version: 10.9.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
-     * @param param the request object
-     */
-    public publishMetadata(param: SecurityApiPublishMetadataRequest, options?: Configuration): Promise<void> {
-        return this.api.publishMetadata(param.publishMetadataRequest,  options).toPromise();
-    }
-
-    /**
      *   Version: 9.0.0.cl or later   Allows sharing one or several metadata objects with users and groups in ThoughtSpot.  Requires edit access to the metadata object.  #### Supported metadata objects: * Liveboards * Visualizations * Answers * Models * Views * Connections  #### Object permissions  You can provide `READ_ONLY` or `MODIFY` access when sharing an object with another user or group. The `READ_ONLY` permission grants view access to the shared object, whereas `MODIFY` provides edit access.  To prevent a user or group from accessing the shared object, specify the GUID or name of the principal and set `shareMode` to `NO_ACCESS`.  #### Sharing a visualization  * Sharing a visualization implicitly shares the entire Liveboard with the recipient.   * Object permissions set for a shared visualization also apply to the Liveboard unless overridden by another API request or via UI. * If email notifications for object sharing are enabled, a notification with a link to the shared visualization will be sent to the recipient’s email address. Although this link opens the shared visualization, recipients can also access other visualizations in the Liveboard.      
      * @param param the request object
      */
     public shareMetadata(param: SecurityApiShareMetadataRequest, options?: Configuration): Promise<void> {
         return this.api.shareMetadata(param.shareMetadataRequest,  options).toPromise();
-    }
-
-    /**
-     *  Version: 10.9.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
-     * @param param the request object
-     */
-    public unpublishMetadata(param: SecurityApiUnpublishMetadataRequest, options?: Configuration): Promise<void> {
-        return this.api.unpublishMetadata(param.unpublishMetadataRequest,  options).toPromise();
     }
 
     /**
@@ -3289,15 +3238,6 @@ export interface ThoughtSpotRestApiParameterizeMetadataRequest {
     parameterizeMetadataRequest: ParameterizeMetadataRequest
 }
 
-export interface ThoughtSpotRestApiPublishMetadataRequest {
-    /**
-     * 
-     * @type PublishMetadataRequest
-     * @memberof ThoughtSpotRestApipublishMetadata
-     */
-    publishMetadataRequest: PublishMetadataRequest
-}
-
 export interface ThoughtSpotRestApiQueryGetDecomposedQueryRequest {
     /**
      * 
@@ -3506,24 +3446,6 @@ export interface ThoughtSpotRestApiUnassignTagRequest {
      * @memberof ThoughtSpotRestApiunassignTag
      */
     unassignTagRequest: UnassignTagRequest
-}
-
-export interface ThoughtSpotRestApiUnparameterizeMetadataRequest {
-    /**
-     * 
-     * @type UnparameterizeMetadataRequest
-     * @memberof ThoughtSpotRestApiunparameterizeMetadata
-     */
-    unparameterizeMetadataRequest: UnparameterizeMetadataRequest
-}
-
-export interface ThoughtSpotRestApiUnpublishMetadataRequest {
-    /**
-     * 
-     * @type UnpublishMetadataRequest
-     * @memberof ThoughtSpotRestApiunpublishMetadata
-     */
-    unpublishMetadataRequest: UnpublishMetadataRequest
 }
 
 export interface ThoughtSpotRestApiUpdateCalendarRequest {
@@ -4429,19 +4351,11 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *  Parameterize fields in metadata objects.   Version: 10.9.0.cl or later   Allows parameterizing fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be parameterized.  For Connection Config, the only supported field name is: * impersonate_user      
+     *  Parameterize fields in metadata objects.   Version: 10.9.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/metadata/parameterize-fields](/api/rest/2.0/metadata/parameterize-fields) instead.  Allows parameterizing fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be parameterized.  For Connection Config, the only supported field name is: * impersonate_user      
      * @param param the request object
      */
     public parameterizeMetadata(param: ThoughtSpotRestApiParameterizeMetadataRequest, options?: Configuration): Promise<void> {
         return this.api.parameterizeMetadata(param.parameterizeMetadataRequest,  options).toPromise();
-    }
-
-    /**
-     *  Version: 10.9.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
-     * @param param the request object
-     */
-    public publishMetadata(param: ThoughtSpotRestApiPublishMetadataRequest, options?: Configuration): Promise<void> {
-        return this.api.publishMetadata(param.publishMetadataRequest,  options).toPromise();
     }
 
     /**
@@ -4618,22 +4532,6 @@ export class ObjectThoughtSpotRestApi {
      */
     public unassignTag(param: ThoughtSpotRestApiUnassignTagRequest, options?: Configuration): Promise<void> {
         return this.api.unassignTag(param.unassignTagRequest,  options).toPromise();
-    }
-
-    /**
-     *  Remove parameterization from fields in metadata objects.   Version: 10.9.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user      
-     * @param param the request object
-     */
-    public unparameterizeMetadata(param: ThoughtSpotRestApiUnparameterizeMetadataRequest, options?: Configuration): Promise<void> {
-        return this.api.unparameterizeMetadata(param.unparameterizeMetadataRequest,  options).toPromise();
-    }
-
-    /**
-     *  Version: 10.9.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
-     * @param param the request object
-     */
-    public unpublishMetadata(param: ThoughtSpotRestApiUnpublishMetadataRequest, options?: Configuration): Promise<void> {
-        return this.api.unpublishMetadata(param.unpublishMetadataRequest,  options).toPromise();
     }
 
     /**
