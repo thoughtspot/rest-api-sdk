@@ -2,7 +2,7 @@
   "$schema": "https://titan.apimatic.io/api/build/schema",
   "buildFileVersion": "1.0",
   "generatePortal": {
-     "useHostedPortalScript": false,
+    "useHostedPortalScript": false,
     "pageTitle": "ThoughtSpot Public Rest APIs",
     "languageConfig": {
       "http": {}
@@ -83,6 +83,5 @@
     }
   }
 }
-
 
 

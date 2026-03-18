@@ -1,17 +1,75 @@
 @font-face {
-    font-family: 'Optimo-Plain';
-    src: url('../fonts/Plain-Medium.otf') format('opentype');
-    font-weight: 500;
+    font-family: Optimo-Plain;
+    src: url('../fonts/optimo/Plain-Light.otf') format('opentype');
+    font-weight: 400;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'Optimo-Plain';
-    src: url('../fonts/Plain-Light.otf') format('opentype');
-    font-weight: 300;
+    font-family: Optimo-Plain;
+    src: url('../fonts/optimo/Plain-LightIta.otf') format('opentype');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: Optimo-Plain;
+    src: url('../fonts/optimo/Plain-Regular.otf') format('opentype');
+    font-weight: 600;
     font-style: normal;
     font-display: swap;
+}
+
+@font-face {
+    font-family: Optimo-Plain;
+    src: url('../fonts/optimo/Plain-RegularIta.otf') format('opentype');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: Optimo-Plain;
+    src: url('../fonts/optimo/Plain-Medium.ttf') format('truetype'); /* [1] */
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: Optimo-Plain;
+    src: url('../fonts/optimo/Plain-MediumIta.ttf') format('truetype'); /* [1] */
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: BB-Roller-Regular;
+    src: url('../fonts/bb-roller/BB-Roller-Mono-Regular-fontlab.ttf')
+        format('truetype'); /* [1] */
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: BB-Roller-Mono-semibold;
+    src: url('../fonts/bb-roller/BB-Roller-Mono-ProTx-semibold.otf')
+        format('truetype'); /* [1] */
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+*:not(pre):not(pre *) {
+    font-family: Optimo-Plain, sans-serif !important;
+}
+
+strong {
+    font-weight: 700 !important;
 }
 
 .portal-header {

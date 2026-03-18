@@ -1,5 +1,3 @@
-
-
 const navigateEndpoint = (apiResourceId) => {
   document.location.hash = apiResourceId;
 };
