@@ -64,7 +64,7 @@
     font-display: swap;
 }
 
-*:not(pre):not(pre *) {
+*:not(pre):not(pre *):not(.body-response):not(.body-response *) {
     font-family: Optimo-Plain, sans-serif !important;
 }
 
