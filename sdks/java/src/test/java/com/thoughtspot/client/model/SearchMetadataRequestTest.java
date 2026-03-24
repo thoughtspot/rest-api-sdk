@@ -76,6 +76,12 @@ public class SearchMetadataRequestTest {
         // TODO: test includeDetails
     }
 
+    /** Test the property 'includePersonalisedViews' */
+    @Test
+    public void includePersonalisedViewsTest() {
+        // TODO: test includePersonalisedViews
+    }
+
     /** Test the property 'includeHeaders' */
     @Test
     public void includeHeadersTest() {

@@ -1,0 +1,563 @@
+/*
+ * NOTE: This class is auto generated. Do not edit the class manually.
+ */
+
+package com.thoughtspot.client.model;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.TypeAdapter;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import com.thoughtspot.client.JSON;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import org.openapitools.jackson.nullable.JsonNullable;
+
+/** Validation detail result for a sub-step. */
+@javax.annotation.Generated(
+        value = "org.openapitools.codegen.languages.JavaClientCodegen",
+        comments = "Generator version: 7.12.0")
+public class ChannelValidationDetail implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    /** The validation step that was performed. */
+    @JsonAdapter(ValidationStepEnum.Adapter.class)
+    public enum ValidationStepEnum {
+        HTTP_CONNECTION_CHECK("HTTP_CONNECTION_CHECK"),
+
+        STORAGE_FILE_UPLOAD_CHECK("STORAGE_FILE_UPLOAD_CHECK");
+
+        private String value;
+
+        ValidationStepEnum(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        public static ValidationStepEnum fromValue(String value) {
+            for (ValidationStepEnum b : ValidationStepEnum.values()) {
+                if (b.value.equals(value)) {
+                    return b;
+                }
+            }
+            throw new IllegalArgumentException("Unexpected value '" + value + "'");
+        }
+
+        public static class Adapter extends TypeAdapter<ValidationStepEnum> {
+            @Override
+            public void write(final JsonWriter jsonWriter, final ValidationStepEnum enumeration)
+                    throws IOException {
+                jsonWriter.value(enumeration.getValue());
+            }
+
+            @Override
+            public ValidationStepEnum read(final JsonReader jsonReader) throws IOException {
+                String value = jsonReader.nextString();
+                return ValidationStepEnum.fromValue(value);
+            }
+        }
+
+        public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+            String value = jsonElement.getAsString();
+            ValidationStepEnum.fromValue(value);
+        }
+    }
+
+    public static final String SERIALIZED_NAME_VALIDATION_STEP = "validation_step";
+
+    @SerializedName(SERIALIZED_NAME_VALIDATION_STEP)
+    @javax.annotation.Nonnull
+    private ValidationStepEnum validationStep;
+
+    /** Status of this validation step. */
+    @JsonAdapter(StatusEnum.Adapter.class)
+    public enum StatusEnum {
+        SUCCESS("SUCCESS"),
+
+        FAILED("FAILED");
+
+        private String value;
+
+        StatusEnum(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        public static StatusEnum fromValue(String value) {
+            for (StatusEnum b : StatusEnum.values()) {
+                if (b.value.equals(value)) {
+                    return b;
+                }
+            }
+            throw new IllegalArgumentException("Unexpected value '" + value + "'");
+        }
+
+        public static class Adapter extends TypeAdapter<StatusEnum> {
+            @Override
+            public void write(final JsonWriter jsonWriter, final StatusEnum enumeration)
+                    throws IOException {
+                jsonWriter.value(enumeration.getValue());
+            }
+
+            @Override
+            public StatusEnum read(final JsonReader jsonReader) throws IOException {
+                String value = jsonReader.nextString();
+                return StatusEnum.fromValue(value);
+            }
+        }
+
+        public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+            String value = jsonElement.getAsString();
+            StatusEnum.fromValue(value);
+        }
+    }
+
+    public static final String SERIALIZED_NAME_STATUS = "status";
+
+    @SerializedName(SERIALIZED_NAME_STATUS)
+    @javax.annotation.Nonnull
+    private StatusEnum status;
+
+    public static final String SERIALIZED_NAME_HTTP_STATUS = "http_status";
+
+    @SerializedName(SERIALIZED_NAME_HTTP_STATUS)
+    @javax.annotation.Nullable
+    private Integer httpStatus;
+
+    public static final String SERIALIZED_NAME_ERROR_MESSAGE = "error_message";
+
+    @SerializedName(SERIALIZED_NAME_ERROR_MESSAGE)
+    @javax.annotation.Nullable
+    private String errorMessage;
+
+    public static final String SERIALIZED_NAME_AWS_S3_INFO = "aws_s3_info";
+
+    @SerializedName(SERIALIZED_NAME_AWS_S3_INFO)
+    @javax.annotation.Nullable
+    private ChannelValidationAwsS3Info awsS3Info;
+
+    public ChannelValidationDetail() {}
+
+    public ChannelValidationDetail validationStep(
+            @javax.annotation.Nonnull ValidationStepEnum validationStep) {
+        this.validationStep = validationStep;
+        return this;
+    }
+
+    /**
+     * The validation step that was performed.
+     *
+     * @return validationStep
+     */
+    @javax.annotation.Nonnull
+    public ValidationStepEnum getValidationStep() {
+        return validationStep;
+    }
+
+    public void setValidationStep(@javax.annotation.Nonnull ValidationStepEnum validationStep) {
+        this.validationStep = validationStep;
+    }
+
+    public ChannelValidationDetail status(@javax.annotation.Nonnull StatusEnum status) {
+        this.status = status;
+        return this;
+    }
+
+    /**
+     * Status of this validation step.
+     *
+     * @return status
+     */
+    @javax.annotation.Nonnull
+    public StatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(@javax.annotation.Nonnull StatusEnum status) {
+        this.status = status;
+    }
+
+    public ChannelValidationDetail httpStatus(@javax.annotation.Nullable Integer httpStatus) {
+        this.httpStatus = httpStatus;
+        return this;
+    }
+
+    /**
+     * HTTP status code returned by the channel (if applicable).
+     *
+     * @return httpStatus
+     */
+    @javax.annotation.Nullable
+    public Integer getHttpStatus() {
+        return httpStatus;
+    }
+
+    public void setHttpStatus(@javax.annotation.Nullable Integer httpStatus) {
+        this.httpStatus = httpStatus;
+    }
+
+    public ChannelValidationDetail errorMessage(@javax.annotation.Nullable String errorMessage) {
+        this.errorMessage = errorMessage;
+        return this;
+    }
+
+    /**
+     * Error message from the channel or validation process.
+     *
+     * @return errorMessage
+     */
+    @javax.annotation.Nullable
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(@javax.annotation.Nullable String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
+    public ChannelValidationDetail awsS3Info(
+            @javax.annotation.Nullable ChannelValidationAwsS3Info awsS3Info) {
+        this.awsS3Info = awsS3Info;
+        return this;
+    }
+
+    /**
+     * Get awsS3Info
+     *
+     * @return awsS3Info
+     */
+    @javax.annotation.Nullable
+    public ChannelValidationAwsS3Info getAwsS3Info() {
+        return awsS3Info;
+    }
+
+    public void setAwsS3Info(@javax.annotation.Nullable ChannelValidationAwsS3Info awsS3Info) {
+        this.awsS3Info = awsS3Info;
+    }
+
+    /**
+     * A container for additional, undeclared properties. This is a holder for any undeclared
+     * properties as specified with the 'additionalProperties' keyword in the OAS document.
+     */
+    private Map<String, Object> additionalProperties;
+
+    /**
+     * Set the additional (undeclared) property with the specified name and value. If the property
+     * does not already exist, create it otherwise replace it.
+     *
+     * @param key name of the property
+     * @param value value of the property
+     * @return the ChannelValidationDetail instance itself
+     */
+    public ChannelValidationDetail putAdditionalProperty(String key, Object value) {
+        if (this.additionalProperties == null) {
+            this.additionalProperties = new HashMap<String, Object>();
+        }
+        this.additionalProperties.put(key, value);
+        return this;
+    }
+
+    /**
+     * Return the additional (undeclared) property.
+     *
+     * @return a map of objects
+     */
+    public Map<String, Object> getAdditionalProperties() {
+        return additionalProperties;
+    }
+
+    /**
+     * Return the additional (undeclared) property with the specified name.
+     *
+     * @param key name of the property
+     * @return an object
+     */
+    public Object getAdditionalProperty(String key) {
+        if (this.additionalProperties == null) {
+            return null;
+        }
+        return this.additionalProperties.get(key);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        ChannelValidationDetail channelValidationDetail = (ChannelValidationDetail) o;
+        return Objects.equals(this.validationStep, channelValidationDetail.validationStep)
+                && Objects.equals(this.status, channelValidationDetail.status)
+                && Objects.equals(this.httpStatus, channelValidationDetail.httpStatus)
+                && Objects.equals(this.errorMessage, channelValidationDetail.errorMessage)
+                && Objects.equals(this.awsS3Info, channelValidationDetail.awsS3Info)
+                && Objects.equals(
+                        this.additionalProperties, channelValidationDetail.additionalProperties);
+    }
+
+    private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+        return a == b
+                || (a != null
+                        && b != null
+                        && a.isPresent()
+                        && b.isPresent()
+                        && Objects.deepEquals(a.get(), b.get()));
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+                validationStep, status, httpStatus, errorMessage, awsS3Info, additionalProperties);
+    }
+
+    private static <T> int hashCodeNullable(JsonNullable<T> a) {
+        if (a == null) {
+            return 1;
+        }
+        return a.isPresent() ? Arrays.deepHashCode(new Object[] {a.get()}) : 31;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("class ChannelValidationDetail {\n");
+        sb.append("    validationStep: ").append(toIndentedString(validationStep)).append("\n");
+        sb.append("    status: ").append(toIndentedString(status)).append("\n");
+        sb.append("    httpStatus: ").append(toIndentedString(httpStatus)).append("\n");
+        sb.append("    errorMessage: ").append(toIndentedString(errorMessage)).append("\n");
+        sb.append("    awsS3Info: ").append(toIndentedString(awsS3Info)).append("\n");
+        sb.append("    additionalProperties: ")
+                .append(toIndentedString(additionalProperties))
+                .append("\n");
+        sb.append("}");
+        return sb.toString();
+    }
+
+    /**
+     * Convert the given object to string with each line indented by 4 spaces (except the first
+     * line).
+     */
+    private String toIndentedString(Object o) {
+        if (o == null) {
+            return "null";
+        }
+        return o.toString().replace("\n", "\n    ");
+    }
+
+    public static HashSet<String> openapiFields;
+    public static HashSet<String> openapiRequiredFields;
+
+    static {
+        // a set of all properties/fields (JSON key names)
+        openapiFields = new HashSet<String>();
+        openapiFields.add("validation_step");
+        openapiFields.add("status");
+        openapiFields.add("http_status");
+        openapiFields.add("error_message");
+        openapiFields.add("aws_s3_info");
+
+        // a set of required properties/fields (JSON key names)
+        openapiRequiredFields = new HashSet<String>();
+        openapiRequiredFields.add("validation_step");
+        openapiRequiredFields.add("status");
+    }
+
+    /**
+     * Validates the JSON Element and throws an exception if issues found
+     *
+     * @param jsonElement JSON Element
+     * @throws IOException if the JSON Element is invalid with respect to ChannelValidationDetail
+     */
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+        if (jsonElement == null) {
+            if (!ChannelValidationDetail.openapiRequiredFields
+                    .isEmpty()) { // has required fields but JSON element is null
+                throw new IllegalArgumentException(
+                        String.format(
+                                "The required field(s) %s in ChannelValidationDetail is not found"
+                                        + " in the empty JSON string",
+                                ChannelValidationDetail.openapiRequiredFields.toString()));
+            }
+        }
+
+        // check to make sure all required properties/fields are present in the JSON string
+        for (String requiredField : ChannelValidationDetail.openapiRequiredFields) {
+            if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+                throw new IllegalArgumentException(
+                        String.format(
+                                "The required field `%s` is not found in the JSON string: %s",
+                                requiredField, jsonElement.toString()));
+            }
+        }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
+        if (!jsonObj.get("validation_step").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `validation_step` to be a primitive type in the"
+                                    + " JSON string but got `%s`",
+                            jsonObj.get("validation_step").toString()));
+        }
+        // validate the required field `validation_step`
+        ValidationStepEnum.validateJsonElement(jsonObj.get("validation_step"));
+        if (!jsonObj.get("status").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `status` to be a primitive type in the JSON string"
+                                    + " but got `%s`",
+                            jsonObj.get("status").toString()));
+        }
+        // validate the required field `status`
+        StatusEnum.validateJsonElement(jsonObj.get("status"));
+        if ((jsonObj.get("error_message") != null && !jsonObj.get("error_message").isJsonNull())
+                && !jsonObj.get("error_message").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `error_message` to be a primitive type in the JSON"
+                                    + " string but got `%s`",
+                            jsonObj.get("error_message").toString()));
+        }
+        // validate the optional field `aws_s3_info`
+        if (jsonObj.get("aws_s3_info") != null && !jsonObj.get("aws_s3_info").isJsonNull()) {
+            ChannelValidationAwsS3Info.validateJsonElement(jsonObj.get("aws_s3_info"));
+        }
+    }
+
+    public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+        @SuppressWarnings("unchecked")
+        @Override
+        public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+            if (!ChannelValidationDetail.class.isAssignableFrom(type.getRawType())) {
+                return null; // this class only serializes 'ChannelValidationDetail' and its
+                // subtypes
+            }
+            final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+            final TypeAdapter<ChannelValidationDetail> thisAdapter =
+                    gson.getDelegateAdapter(this, TypeToken.get(ChannelValidationDetail.class));
+
+            return (TypeAdapter<T>)
+                    new TypeAdapter<ChannelValidationDetail>() {
+                        @Override
+                        public void write(JsonWriter out, ChannelValidationDetail value)
+                                throws IOException {
+                            JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+                            obj.remove("additionalProperties");
+                            // serialize additional properties
+                            if (value.getAdditionalProperties() != null) {
+                                for (Map.Entry<String, Object> entry :
+                                        value.getAdditionalProperties().entrySet()) {
+                                    if (entry.getValue() instanceof String)
+                                        obj.addProperty(entry.getKey(), (String) entry.getValue());
+                                    else if (entry.getValue() instanceof Number)
+                                        obj.addProperty(entry.getKey(), (Number) entry.getValue());
+                                    else if (entry.getValue() instanceof Boolean)
+                                        obj.addProperty(entry.getKey(), (Boolean) entry.getValue());
+                                    else if (entry.getValue() instanceof Character)
+                                        obj.addProperty(
+                                                entry.getKey(), (Character) entry.getValue());
+                                    else {
+                                        JsonElement jsonElement = gson.toJsonTree(entry.getValue());
+                                        if (jsonElement.isJsonArray()) {
+                                            obj.add(entry.getKey(), jsonElement.getAsJsonArray());
+                                        } else {
+                                            obj.add(entry.getKey(), jsonElement.getAsJsonObject());
+                                        }
+                                    }
+                                }
+                            }
+                            elementAdapter.write(out, obj);
+                        }
+
+                        @Override
+                        public ChannelValidationDetail read(JsonReader in) throws IOException {
+                            JsonElement jsonElement = elementAdapter.read(in);
+                            validateJsonElement(jsonElement);
+                            JsonObject jsonObj = jsonElement.getAsJsonObject();
+                            // store additional fields in the deserialized instance
+                            ChannelValidationDetail instance = thisAdapter.fromJsonTree(jsonObj);
+                            for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
+                                if (!openapiFields.contains(entry.getKey())) {
+                                    if (entry.getValue().isJsonPrimitive()) { // primitive type
+                                        if (entry.getValue().getAsJsonPrimitive().isString())
+                                            instance.putAdditionalProperty(
+                                                    entry.getKey(), entry.getValue().getAsString());
+                                        else if (entry.getValue().getAsJsonPrimitive().isNumber())
+                                            instance.putAdditionalProperty(
+                                                    entry.getKey(), entry.getValue().getAsNumber());
+                                        else if (entry.getValue().getAsJsonPrimitive().isBoolean())
+                                            instance.putAdditionalProperty(
+                                                    entry.getKey(),
+                                                    entry.getValue().getAsBoolean());
+                                        else
+                                            throw new IllegalArgumentException(
+                                                    String.format(
+                                                            "The field `%s` has unknown primitive"
+                                                                    + " type. Value: %s",
+                                                            entry.getKey(),
+                                                            entry.getValue().toString()));
+                                    } else if (entry.getValue().isJsonArray()) {
+                                        instance.putAdditionalProperty(
+                                                entry.getKey(),
+                                                gson.fromJson(entry.getValue(), List.class));
+                                    } else { // JSON object
+                                        instance.putAdditionalProperty(
+                                                entry.getKey(),
+                                                gson.fromJson(entry.getValue(), HashMap.class));
+                                    }
+                                }
+                            }
+                            return instance;
+                        }
+                    }.nullSafe();
+        }
+    }
+
+    /**
+     * Create an instance of ChannelValidationDetail given an JSON string
+     *
+     * @param jsonString JSON string
+     * @return An instance of ChannelValidationDetail
+     * @throws IOException if the JSON string is invalid with respect to ChannelValidationDetail
+     */
+    public static ChannelValidationDetail fromJson(String jsonString) throws IOException {
+        return JSON.getGson().fromJson(jsonString, ChannelValidationDetail.class);
+    }
+
+    /**
+     * Convert an instance of ChannelValidationDetail to an JSON string
+     *
+     * @return JSON string
+     */
+    public String toJson() {
+        return JSON.getGson().toJson(this);
+    }
+}

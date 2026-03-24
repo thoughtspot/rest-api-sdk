@@ -21,4 +21,10 @@ public class AgentConversationTest {
     public void conversationIdTest() {
         // TODO: test conversationId
     }
+
+    /** Test the property 'conversationIdentifier' */
+    @Test
+    public void conversationIdentifierTest() {
+        // TODO: test conversationIdentifier
+    }
 }

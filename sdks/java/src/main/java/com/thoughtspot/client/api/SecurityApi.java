@@ -1564,7 +1564,7 @@ public class SecurityApi {
     }
 
     /**
-     * Version: 10.9.0.cl or later Allows publishing metadata objects across organizations in
+     * Version: 26.5.0.cl or later Allows publishing metadata objects across organizations in
      * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
      * publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
      * This API will essentially share the objects along with it&#39;s dependencies to the org
@@ -1589,7 +1589,7 @@ public class SecurityApi {
     }
 
     /**
-     * Version: 10.9.0.cl or later Allows publishing metadata objects across organizations in
+     * Version: 26.5.0.cl or later Allows publishing metadata objects across organizations in
      * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
      * publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
      * This API will essentially share the objects along with it&#39;s dependencies to the org
@@ -1617,7 +1617,7 @@ public class SecurityApi {
     }
 
     /**
-     * (asynchronously) Version: 10.9.0.cl or later Allows publishing metadata objects across
+     * (asynchronously) Version: 26.5.0.cl or later Allows publishing metadata objects across
      * organizations in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint
      * allows publishing the following types of metadata objects: * Liveboards * Answers * Logical
      * Tables This API will essentially share the objects along with it&#39;s dependencies to the
@@ -1935,7 +1935,7 @@ public class SecurityApi {
     }
 
     /**
-     * Version: 10.9.0.cl or later Allows unpublishing metadata objects from organizations in
+     * Version: 26.5.0.cl or later Allows unpublishing metadata objects from organizations in
      * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
      * unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
      * When unpublishing objects, you can: * Include dependencies by setting
@@ -1963,7 +1963,7 @@ public class SecurityApi {
     }
 
     /**
-     * Version: 10.9.0.cl or later Allows unpublishing metadata objects from organizations in
+     * Version: 26.5.0.cl or later Allows unpublishing metadata objects from organizations in
      * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
      * unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
      * When unpublishing objects, you can: * Include dependencies by setting
@@ -1994,7 +1994,7 @@ public class SecurityApi {
     }
 
     /**
-     * (asynchronously) Version: 10.9.0.cl or later Allows unpublishing metadata objects from
+     * (asynchronously) Version: 26.5.0.cl or later Allows unpublishing metadata objects from
      * organizations in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint
      * allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical
      * Tables When unpublishing objects, you can: * Include dependencies by setting

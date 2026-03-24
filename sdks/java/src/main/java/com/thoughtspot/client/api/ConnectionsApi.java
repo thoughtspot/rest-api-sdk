@@ -20,6 +20,8 @@ import com.thoughtspot.client.model.RevokeRefreshTokensRequest;
 import com.thoughtspot.client.model.RevokeRefreshTokensResponse;
 import com.thoughtspot.client.model.SearchConnectionRequest;
 import com.thoughtspot.client.model.SearchConnectionResponse;
+import com.thoughtspot.client.model.SyncMetadataRequest;
+import com.thoughtspot.client.model.SyncMetadataResponse;
 import com.thoughtspot.client.model.UpdateConnectionRequest;
 import com.thoughtspot.client.model.UpdateConnectionV2Request;
 import java.io.File;
@@ -189,15 +191,23 @@ public class ConnectionsApi {
      * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
      * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
      * \&quot;externalDatabases\&quot;:[ ] } &#x60;&#x60;&#x60; 2. Set &#x60;validate&#x60; to
-     * &#x60;false&#x60;. #### Create a connection with tables To create a connection with tables:
-     * 1. Pass these parameters in your API request. * Name of the connection. * Type of the data
-     * warehouse to connect to. * A JSON map of configuration attributes, database details, and
-     * table properties in &#x60;data_warehouse_config&#x60; as shown in the following example:
-     * &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
-     * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
+     * &#x60;false&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is anything other than
+     * SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload.
+     * If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the
+     * authentication type. #### Create a connection with tables If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) and
+     * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) privilege is
+     * required. To create a connection with tables: 1. Pass these parameters in your API request. *
+     * Name of the connection. * Type of the data warehouse to connect to. * A JSON map of
+     * configuration attributes, database details, and table properties in
+     * &#x60;data_warehouse_config&#x60; as shown in the following example: &#x60;&#x60;&#x60; {
+     * \&quot;configuration\&quot;:{ \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
      * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
      * \&quot;externalDatabases\&quot;:[ { \&quot;name\&quot;:\&quot;AllDatatypes\&quot;,
      * \&quot;isAutoCreated\&quot;:false, \&quot;schemas\&quot;:[ {
      * \&quot;name\&quot;:\&quot;alldatatypes\&quot;, \&quot;tables\&quot;:[ {
@@ -214,7 +224,10 @@ public class ConnectionsApi {
      * \&quot;isImported\&quot;:false, \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,
      * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
      * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; } ] } ] } ] } ] } &#x60;&#x60;&#x60; 2. Set
-     * &#x60;validate&#x60; to &#x60;true&#x60;.
+     * &#x60;validate&#x60; to &#x60;true&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is
+     * anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType
+     * property in the payload. If you do not specify authenticationType, the API will default to
+     * SERVICE_ACCOUNT as the authentication type.
      *
      * @param createConnectionRequest (required)
      * @return CreateConnectionResponse
@@ -252,15 +265,23 @@ public class ConnectionsApi {
      * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
      * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
      * \&quot;externalDatabases\&quot;:[ ] } &#x60;&#x60;&#x60; 2. Set &#x60;validate&#x60; to
-     * &#x60;false&#x60;. #### Create a connection with tables To create a connection with tables:
-     * 1. Pass these parameters in your API request. * Name of the connection. * Type of the data
-     * warehouse to connect to. * A JSON map of configuration attributes, database details, and
-     * table properties in &#x60;data_warehouse_config&#x60; as shown in the following example:
-     * &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
-     * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
+     * &#x60;false&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is anything other than
+     * SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload.
+     * If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the
+     * authentication type. #### Create a connection with tables If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) and
+     * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) privilege is
+     * required. To create a connection with tables: 1. Pass these parameters in your API request. *
+     * Name of the connection. * Type of the data warehouse to connect to. * A JSON map of
+     * configuration attributes, database details, and table properties in
+     * &#x60;data_warehouse_config&#x60; as shown in the following example: &#x60;&#x60;&#x60; {
+     * \&quot;configuration\&quot;:{ \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
      * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
      * \&quot;externalDatabases\&quot;:[ { \&quot;name\&quot;:\&quot;AllDatatypes\&quot;,
      * \&quot;isAutoCreated\&quot;:false, \&quot;schemas\&quot;:[ {
      * \&quot;name\&quot;:\&quot;alldatatypes\&quot;, \&quot;tables\&quot;:[ {
@@ -277,7 +298,10 @@ public class ConnectionsApi {
      * \&quot;isImported\&quot;:false, \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,
      * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
      * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; } ] } ] } ] } ] } &#x60;&#x60;&#x60; 2. Set
-     * &#x60;validate&#x60; to &#x60;true&#x60;.
+     * &#x60;validate&#x60; to &#x60;true&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is
+     * anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType
+     * property in the payload. If you do not specify authenticationType, the API will default to
+     * SERVICE_ACCOUNT as the authentication type.
      *
      * @param createConnectionRequest (required)
      * @return ApiResponse&lt;CreateConnectionResponse&gt;
@@ -316,15 +340,23 @@ public class ConnectionsApi {
      * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
      * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
      * \&quot;externalDatabases\&quot;:[ ] } &#x60;&#x60;&#x60; 2. Set &#x60;validate&#x60; to
-     * &#x60;false&#x60;. #### Create a connection with tables To create a connection with tables:
-     * 1. Pass these parameters in your API request. * Name of the connection. * Type of the data
-     * warehouse to connect to. * A JSON map of configuration attributes, database details, and
-     * table properties in &#x60;data_warehouse_config&#x60; as shown in the following example:
-     * &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
-     * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
+     * &#x60;false&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is anything other than
+     * SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload.
+     * If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the
+     * authentication type. #### Create a connection with tables If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) and
+     * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) privilege is
+     * required. To create a connection with tables: 1. Pass these parameters in your API request. *
+     * Name of the connection. * Type of the data warehouse to connect to. * A JSON map of
+     * configuration attributes, database details, and table properties in
+     * &#x60;data_warehouse_config&#x60; as shown in the following example: &#x60;&#x60;&#x60; {
+     * \&quot;configuration\&quot;:{ \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
      * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
      * \&quot;externalDatabases\&quot;:[ { \&quot;name\&quot;:\&quot;AllDatatypes\&quot;,
      * \&quot;isAutoCreated\&quot;:false, \&quot;schemas\&quot;:[ {
      * \&quot;name\&quot;:\&quot;alldatatypes\&quot;, \&quot;tables\&quot;:[ {
@@ -341,7 +373,10 @@ public class ConnectionsApi {
      * \&quot;isImported\&quot;:false, \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,
      * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
      * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; } ] } ] } ] } ] } &#x60;&#x60;&#x60; 2. Set
-     * &#x60;validate&#x60; to &#x60;true&#x60;.
+     * &#x60;validate&#x60; to &#x60;true&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is
+     * anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType
+     * property in the payload. If you do not specify authenticationType, the API will default to
+     * SERVICE_ACCOUNT as the authentication type.
      *
      * @param createConnectionRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -1784,6 +1819,276 @@ public class ConnectionsApi {
         okhttp3.Call localVarCall =
                 searchConnectionValidateBeforeCall(searchConnectionRequest, _callback);
         Type localVarReturnType = new TypeToken<List<SearchConnectionResponse>>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for syncMetadata
+     *
+     * @param connectionIdentifier Unique ID or name of the connection. (required)
+     * @param syncMetadataRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Metadata synced successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request parameters or hierarchy. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Connection, table, or column not found. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call syncMetadataCall(
+            String connectionIdentifier,
+            SyncMetadataRequest syncMetadataRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = syncMetadataRequest;
+
+        // create path and map variables
+        String localVarPath =
+                "/api/rest/2.0/connections/{connection_identifier}/resync-metadata"
+                        .replace(
+                                "{" + "connection_identifier" + "}",
+                                localVarApiClient.escapeString(connectionIdentifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call syncMetadataValidateBeforeCall(
+            String connectionIdentifier,
+            SyncMetadataRequest syncMetadataRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'connectionIdentifier' is set
+        if (connectionIdentifier == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'connectionIdentifier' when calling"
+                            + " syncMetadata(Async)");
+        }
+
+        // verify the required parameter 'syncMetadataRequest' is set
+        if (syncMetadataRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'syncMetadataRequest' when calling"
+                            + " syncMetadata(Async)");
+        }
+
+        return syncMetadataCall(connectionIdentifier, syncMetadataRequest, _callback);
+    }
+
+    /**
+     * Version: 26.5.0.cl or later Synchronizes connection metadata attributes from your Cloud Data
+     * Warehouse (CDW) with ThoughtSpot. Requires the &#x60;DATAMANAGEMENT&#x60; (**Can manage
+     * data**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) privilege is
+     * required. #### Usage guidelines To synchronize attributes from a CDW, specify the connection
+     * GUID or name in the &#x60;connection_identifier&#x60; path parameter and
+     * &#x60;sync_attributes&#x60; in the request body. Default attribute is
+     * &#x60;[\&quot;DESCRIPTION\&quot;]&#x60;. ##### Hierarchical schema * Connection: The
+     * connection object for the sync operation. * Tables: Tables for the sync operation. When no
+     * table is specified, all tables are synchronized. * Columns: If the table is specified, you
+     * can add the columns for the sync operation. If no columns are specified, all columns in the
+     * specified table are considered for the sync operation. To set the scope for the sync
+     * operation: * Connection-level: To sync all tables and columns, pass an empty request body, or
+     * only the attributes in the request body. * Table-level: To synchronize specific tables and
+     * their columns, specify the table identifiers in the &#x60;tables&#x60; array. * Column-level:
+     * To synchronize specific columns, specify the table identifier as the key and column
+     * identifiers as the value in the &#x60;tables&#x60; array. &#x60;&#x60;&#x60; {
+     * \&quot;tables\&quot;: [ {\&quot;table-guid-1\&quot;: [\&quot;column-guid-1\&quot;,
+     * \&quot;column-guid-2\&quot;]}, \&quot;table-guid-2\&quot; ], \&quot;sync_attributes\&quot;:
+     * [\&quot;DESCRIPTION\&quot;] } &#x60;&#x60;&#x60; ##### API response If the sync operation is
+     * successful, the API returns the following information: * Status of the sync operation. For
+     * example, &#x60;SUCCESS&#x60;, &#x60;PARTIAL_SUCCESS&#x60;, or &#x60;NO_UPDATE&#x60;. * Number
+     * of tables and columns that were updated. * Number of tables and columns with the sync failed
+     * status when the overall sync status is &#x60;PARTIAL_SUCCESS&#x60;. * Message text indicating
+     * the sync results.
+     *
+     * @param connectionIdentifier Unique ID or name of the connection. (required)
+     * @param syncMetadataRequest (required)
+     * @return SyncMetadataResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Metadata synced successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request parameters or hierarchy. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Connection, table, or column not found. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public SyncMetadataResponse syncMetadata(
+            String connectionIdentifier, SyncMetadataRequest syncMetadataRequest)
+            throws ApiException {
+        ApiResponse<SyncMetadataResponse> localVarResp =
+                syncMetadataWithHttpInfo(connectionIdentifier, syncMetadataRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Version: 26.5.0.cl or later Synchronizes connection metadata attributes from your Cloud Data
+     * Warehouse (CDW) with ThoughtSpot. Requires the &#x60;DATAMANAGEMENT&#x60; (**Can manage
+     * data**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) privilege is
+     * required. #### Usage guidelines To synchronize attributes from a CDW, specify the connection
+     * GUID or name in the &#x60;connection_identifier&#x60; path parameter and
+     * &#x60;sync_attributes&#x60; in the request body. Default attribute is
+     * &#x60;[\&quot;DESCRIPTION\&quot;]&#x60;. ##### Hierarchical schema * Connection: The
+     * connection object for the sync operation. * Tables: Tables for the sync operation. When no
+     * table is specified, all tables are synchronized. * Columns: If the table is specified, you
+     * can add the columns for the sync operation. If no columns are specified, all columns in the
+     * specified table are considered for the sync operation. To set the scope for the sync
+     * operation: * Connection-level: To sync all tables and columns, pass an empty request body, or
+     * only the attributes in the request body. * Table-level: To synchronize specific tables and
+     * their columns, specify the table identifiers in the &#x60;tables&#x60; array. * Column-level:
+     * To synchronize specific columns, specify the table identifier as the key and column
+     * identifiers as the value in the &#x60;tables&#x60; array. &#x60;&#x60;&#x60; {
+     * \&quot;tables\&quot;: [ {\&quot;table-guid-1\&quot;: [\&quot;column-guid-1\&quot;,
+     * \&quot;column-guid-2\&quot;]}, \&quot;table-guid-2\&quot; ], \&quot;sync_attributes\&quot;:
+     * [\&quot;DESCRIPTION\&quot;] } &#x60;&#x60;&#x60; ##### API response If the sync operation is
+     * successful, the API returns the following information: * Status of the sync operation. For
+     * example, &#x60;SUCCESS&#x60;, &#x60;PARTIAL_SUCCESS&#x60;, or &#x60;NO_UPDATE&#x60;. * Number
+     * of tables and columns that were updated. * Number of tables and columns with the sync failed
+     * status when the overall sync status is &#x60;PARTIAL_SUCCESS&#x60;. * Message text indicating
+     * the sync results.
+     *
+     * @param connectionIdentifier Unique ID or name of the connection. (required)
+     * @param syncMetadataRequest (required)
+     * @return ApiResponse&lt;SyncMetadataResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Metadata synced successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request parameters or hierarchy. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Connection, table, or column not found. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<SyncMetadataResponse> syncMetadataWithHttpInfo(
+            String connectionIdentifier, SyncMetadataRequest syncMetadataRequest)
+            throws ApiException {
+        okhttp3.Call localVarCall =
+                syncMetadataValidateBeforeCall(connectionIdentifier, syncMetadataRequest, null);
+        Type localVarReturnType = new TypeToken<SyncMetadataResponse>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Version: 26.5.0.cl or later Synchronizes connection metadata attributes from
+     * your Cloud Data Warehouse (CDW) with ThoughtSpot. Requires the &#x60;DATAMANAGEMENT&#x60;
+     * (**Can manage data**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) privilege is
+     * required. #### Usage guidelines To synchronize attributes from a CDW, specify the connection
+     * GUID or name in the &#x60;connection_identifier&#x60; path parameter and
+     * &#x60;sync_attributes&#x60; in the request body. Default attribute is
+     * &#x60;[\&quot;DESCRIPTION\&quot;]&#x60;. ##### Hierarchical schema * Connection: The
+     * connection object for the sync operation. * Tables: Tables for the sync operation. When no
+     * table is specified, all tables are synchronized. * Columns: If the table is specified, you
+     * can add the columns for the sync operation. If no columns are specified, all columns in the
+     * specified table are considered for the sync operation. To set the scope for the sync
+     * operation: * Connection-level: To sync all tables and columns, pass an empty request body, or
+     * only the attributes in the request body. * Table-level: To synchronize specific tables and
+     * their columns, specify the table identifiers in the &#x60;tables&#x60; array. * Column-level:
+     * To synchronize specific columns, specify the table identifier as the key and column
+     * identifiers as the value in the &#x60;tables&#x60; array. &#x60;&#x60;&#x60; {
+     * \&quot;tables\&quot;: [ {\&quot;table-guid-1\&quot;: [\&quot;column-guid-1\&quot;,
+     * \&quot;column-guid-2\&quot;]}, \&quot;table-guid-2\&quot; ], \&quot;sync_attributes\&quot;:
+     * [\&quot;DESCRIPTION\&quot;] } &#x60;&#x60;&#x60; ##### API response If the sync operation is
+     * successful, the API returns the following information: * Status of the sync operation. For
+     * example, &#x60;SUCCESS&#x60;, &#x60;PARTIAL_SUCCESS&#x60;, or &#x60;NO_UPDATE&#x60;. * Number
+     * of tables and columns that were updated. * Number of tables and columns with the sync failed
+     * status when the overall sync status is &#x60;PARTIAL_SUCCESS&#x60;. * Message text indicating
+     * the sync results.
+     *
+     * @param connectionIdentifier Unique ID or name of the connection. (required)
+     * @param syncMetadataRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Metadata synced successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request parameters or hierarchy. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Connection, table, or column not found. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call syncMetadataAsync(
+            String connectionIdentifier,
+            SyncMetadataRequest syncMetadataRequest,
+            final ApiCallback<SyncMetadataResponse> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                syncMetadataValidateBeforeCall(
+                        connectionIdentifier, syncMetadataRequest, _callback);
+        Type localVarReturnType = new TypeToken<SyncMetadataResponse>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

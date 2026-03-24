@@ -63,4 +63,10 @@ public class CreateWebhookConfigurationRequestTest {
     public void storageDestinationTest() {
         // TODO: test storageDestination
     }
+
+    /** Test the property 'additionalHeaders' */
+    @Test
+    public void additionalHeadersTest() {
+        // TODO: test additionalHeaders
+    }
 }

@@ -20,11 +20,15 @@ import com.thoughtspot.client.model.AssignChangeAuthorRequest;
 import com.thoughtspot.client.model.AssignTagRequest;
 import com.thoughtspot.client.model.CalendarResponse;
 import com.thoughtspot.client.model.ChangeUserPasswordRequest;
+import com.thoughtspot.client.model.Collection;
+import com.thoughtspot.client.model.CollectionDeleteResponse;
+import com.thoughtspot.client.model.CollectionSearchResponse;
 import com.thoughtspot.client.model.ColumnSecurityRuleResponse;
 import com.thoughtspot.client.model.CommitBranchRequest;
 import com.thoughtspot.client.model.CommitHistoryResponse;
 import com.thoughtspot.client.model.CommitResponse;
 import com.thoughtspot.client.model.CommunicationChannelPreferencesResponse;
+import com.thoughtspot.client.model.CommunicationChannelValidateResponse;
 import com.thoughtspot.client.model.ConfigureCommunicationChannelPreferencesRequest;
 import com.thoughtspot.client.model.ConfigureSecuritySettingsRequest;
 import com.thoughtspot.client.model.ConnectionConfigurationResponse;
@@ -34,6 +38,7 @@ import com.thoughtspot.client.model.ConvertWorksheetToModelRequest;
 import com.thoughtspot.client.model.CopyObjectRequest;
 import com.thoughtspot.client.model.CreateAgentConversationRequest;
 import com.thoughtspot.client.model.CreateCalendarRequest;
+import com.thoughtspot.client.model.CreateCollectionRequest;
 import com.thoughtspot.client.model.CreateConfigRequest;
 import com.thoughtspot.client.model.CreateConnectionConfigurationRequest;
 import com.thoughtspot.client.model.CreateConnectionRequest;
@@ -52,11 +57,13 @@ import com.thoughtspot.client.model.CreateVariableRequest;
 import com.thoughtspot.client.model.CreateWebhookConfigurationRequest;
 import com.thoughtspot.client.model.DbtSearchResponse;
 import com.thoughtspot.client.model.DeactivateUserRequest;
+import com.thoughtspot.client.model.DeleteCollectionRequest;
 import com.thoughtspot.client.model.DeleteConfigRequest;
 import com.thoughtspot.client.model.DeleteConnectionConfigurationRequest;
 import com.thoughtspot.client.model.DeleteConnectionRequest;
 import com.thoughtspot.client.model.DeleteMetadataRequest;
 import com.thoughtspot.client.model.DeleteOrgEmailCustomizationRequest;
+import com.thoughtspot.client.model.DeleteVariablesRequest;
 import com.thoughtspot.client.model.DeleteWebhookConfigurationsRequest;
 import com.thoughtspot.client.model.DeployCommitRequest;
 import com.thoughtspot.client.model.DeployResponse;
@@ -104,10 +111,12 @@ import com.thoughtspot.client.model.ManageObjectPrivilegeRequest;
 import com.thoughtspot.client.model.MetadataSearchResponse;
 import com.thoughtspot.client.model.ObjectPrivilegesOfMetadataResponse;
 import com.thoughtspot.client.model.OrgResponse;
+import com.thoughtspot.client.model.ParameterizeMetadataFieldsRequest;
 import com.thoughtspot.client.model.ParameterizeMetadataRequest;
 import com.thoughtspot.client.model.PermissionOfMetadataResponse;
 import com.thoughtspot.client.model.PermissionOfPrincipalsResponse;
 import com.thoughtspot.client.model.PublishMetadataRequest;
+import com.thoughtspot.client.model.PutVariableValuesRequest;
 import com.thoughtspot.client.model.QueryGetDecomposedQueryRequest;
 import com.thoughtspot.client.model.RepoConfigObject;
 import com.thoughtspot.client.model.ResetUserPasswordRequest;
@@ -124,6 +133,9 @@ import com.thoughtspot.client.model.RevokeRefreshTokensResponse;
 import com.thoughtspot.client.model.RevokeTokenRequest;
 import com.thoughtspot.client.model.RoleResponse;
 import com.thoughtspot.client.model.SearchCalendarsRequest;
+import com.thoughtspot.client.model.SearchChannelHistoryRequest;
+import com.thoughtspot.client.model.SearchChannelHistoryResponse;
+import com.thoughtspot.client.model.SearchCollectionsRequest;
 import com.thoughtspot.client.model.SearchCommitsRequest;
 import com.thoughtspot.client.model.SearchCommunicationChannelPreferencesRequest;
 import com.thoughtspot.client.model.SearchConfigRequest;
@@ -145,6 +157,8 @@ import com.thoughtspot.client.model.SearchUsersRequest;
 import com.thoughtspot.client.model.SearchVariablesRequest;
 import com.thoughtspot.client.model.SearchWebhookConfigurationsRequest;
 import com.thoughtspot.client.model.SecuritySettingsResponse;
+import com.thoughtspot.client.model.SendAgentConversationMessageRequest;
+import com.thoughtspot.client.model.SendAgentConversationMessageStreamingRequest;
 import com.thoughtspot.client.model.SendAgentMessageRequest;
 import com.thoughtspot.client.model.SendAgentMessageResponse;
 import com.thoughtspot.client.model.SendAgentMessageStreamingRequest;
@@ -153,6 +167,8 @@ import com.thoughtspot.client.model.SetNLInstructionsRequest;
 import com.thoughtspot.client.model.ShareMetadataRequest;
 import com.thoughtspot.client.model.SingleAnswerRequest;
 import com.thoughtspot.client.model.SqlQueryResponse;
+import com.thoughtspot.client.model.SyncMetadataRequest;
+import com.thoughtspot.client.model.SyncMetadataResponse;
 import com.thoughtspot.client.model.SystemConfig;
 import com.thoughtspot.client.model.SystemInfo;
 import com.thoughtspot.client.model.SystemOverrideInfo;
@@ -163,6 +179,7 @@ import com.thoughtspot.client.model.UnassignTagRequest;
 import com.thoughtspot.client.model.UnparameterizeMetadataRequest;
 import com.thoughtspot.client.model.UnpublishMetadataRequest;
 import com.thoughtspot.client.model.UpdateCalendarRequest;
+import com.thoughtspot.client.model.UpdateCollectionRequest;
 import com.thoughtspot.client.model.UpdateColumnSecurityRulesRequest;
 import com.thoughtspot.client.model.UpdateConfigRequest;
 import com.thoughtspot.client.model.UpdateConnectionConfigurationRequest;
@@ -184,6 +201,7 @@ import com.thoughtspot.client.model.UpdateVariableValuesRequest;
 import com.thoughtspot.client.model.UpdateWebhookConfigurationRequest;
 import com.thoughtspot.client.model.User;
 import com.thoughtspot.client.model.UserGroupResponse;
+import com.thoughtspot.client.model.ValidateCommunicationChannelRequest;
 import com.thoughtspot.client.model.ValidateMergeRequest;
 import com.thoughtspot.client.model.ValidateTokenRequest;
 import com.thoughtspot.client.model.Variable;
@@ -2186,6 +2204,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -2261,7 +2281,49 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.13.0.cl or later
+     * Version: 26.2.0.cl or later Creates a new Spotter agent conversation based on the provided
+     * context and settings. The endpoint was in Beta from 26.2.0.cl through 26.4.0.cl. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view access to the metadata object
+     * specified in the request. #### Usage guidelines The request must include the
+     * &#x60;metadata_context&#x60; parameter to define the conversation context. The context type
+     * can be one of: - &#x60;DATA_SOURCE&#x60; *(available from 26.5.0.cl)*: targets a specific
+     * data source. Provide &#x60;data_source_identifier&#x60; in &#x60;data_source_context&#x60;
+     * for a single data source, or &#x60;data_source_identifiers&#x60; for multi-data-source
+     * context. The deprecated &#x60;guid&#x60; field is accepted for backwards compatibility. -
+     * &#x60;AUTO_MODE&#x60; *(available from 26.5.0.cl)*: automatically discovers and selects the
+     * most relevant datasets for the user&#39;s queries. &gt; **Note for callers on versions
+     * 26.2.0.cl – 26.4.0.cl (Beta):** use the lowercase &#x60;data_source&#x60; enum value with the
+     * &#x60;guid&#x60; field instead of the above. Example: &#x60;{ \&quot;type\&quot;:
+     * \&quot;data_source\&quot;, \&quot;data_source_context\&quot;: { \&quot;guid\&quot;:
+     * \&quot;&lt;worksheet-id&gt;\&quot; } }&#x60;. The &#x60;conversation_settings&#x60; parameter
+     * controls which Spotter capabilities are enabled for the conversation: -
+     * &#x60;enable_contextual_change_analysis&#x60; (default: &#x60;true&#x60;, **deprecated from
+     * 26.2.0.cl**) — always enabled in Spotter 3; setting this to &#x60;false&#x60; has no effect
+     * on versions &gt;&#x3D; 26.2.0.cl - &#x60;enable_natural_language_answer_generation&#x60;
+     * (default: &#x60;true&#x60;, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3;
+     * setting this to &#x60;false&#x60; has no effect on versions &gt;&#x3D; 26.2.0.cl -
+     * &#x60;enable_reasoning&#x60; (default: &#x60;true&#x60;, **deprecated from 26.2.0.cl**) —
+     * always enabled in Spotter 3; setting this to &#x60;false&#x60; has no effect on versions
+     * &gt;&#x3D; 26.2.0.cl - &#x60;enable_save_chat&#x60; (default: &#x60;false&#x60;, *available
+     * from 26.5.0.cl*) — enables saving the conversation for later retrieval via conversation
+     * history If the request is successful, the response includes a unique
+     * &#x60;conversation_identifier&#x60; that must be passed to
+     * &#x60;sendAgentConversationMessage&#x60; or &#x60;sendAgentConversationMessageStreaming&#x60;
+     * to send messages within this conversation. The response also includes
+     * &#x60;conversation_id&#x60; with the same value for backwards compatibility; use
+     * &#x60;conversation_identifier&#x60; for new integrations. #### Example request
+     * &#x60;&#x60;&#x60;json { \&quot;metadata_context\&quot;: { \&quot;type\&quot;:
+     * \&quot;DATA_SOURCE\&quot;, \&quot;data_source_context\&quot;: {
+     * \&quot;data_source_identifier\&quot;: \&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890\&quot; } },
+     * \&quot;conversation_settings\&quot;: {} } &#x60;&#x60;&#x60; #### Error responses | Code |
+     * Description | | ---- |
+     * ---------------------------------------------------------------------------------------------------------------------------------------
+     * | | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view permission on the specified metadata object. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint was in Beta from 26.2.0.cl through 26.4.0.cl and is Generally Available from version
+     * 26.5.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to
+     * enable Spotter on your cluster.
      *
      * @param createAgentConversationRequest (required)
      * @return AgentConversation
@@ -2274,6 +2336,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -2285,7 +2349,49 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.13.0.cl or later
+     * Version: 26.2.0.cl or later Creates a new Spotter agent conversation based on the provided
+     * context and settings. The endpoint was in Beta from 26.2.0.cl through 26.4.0.cl. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view access to the metadata object
+     * specified in the request. #### Usage guidelines The request must include the
+     * &#x60;metadata_context&#x60; parameter to define the conversation context. The context type
+     * can be one of: - &#x60;DATA_SOURCE&#x60; *(available from 26.5.0.cl)*: targets a specific
+     * data source. Provide &#x60;data_source_identifier&#x60; in &#x60;data_source_context&#x60;
+     * for a single data source, or &#x60;data_source_identifiers&#x60; for multi-data-source
+     * context. The deprecated &#x60;guid&#x60; field is accepted for backwards compatibility. -
+     * &#x60;AUTO_MODE&#x60; *(available from 26.5.0.cl)*: automatically discovers and selects the
+     * most relevant datasets for the user&#39;s queries. &gt; **Note for callers on versions
+     * 26.2.0.cl – 26.4.0.cl (Beta):** use the lowercase &#x60;data_source&#x60; enum value with the
+     * &#x60;guid&#x60; field instead of the above. Example: &#x60;{ \&quot;type\&quot;:
+     * \&quot;data_source\&quot;, \&quot;data_source_context\&quot;: { \&quot;guid\&quot;:
+     * \&quot;&lt;worksheet-id&gt;\&quot; } }&#x60;. The &#x60;conversation_settings&#x60; parameter
+     * controls which Spotter capabilities are enabled for the conversation: -
+     * &#x60;enable_contextual_change_analysis&#x60; (default: &#x60;true&#x60;, **deprecated from
+     * 26.2.0.cl**) — always enabled in Spotter 3; setting this to &#x60;false&#x60; has no effect
+     * on versions &gt;&#x3D; 26.2.0.cl - &#x60;enable_natural_language_answer_generation&#x60;
+     * (default: &#x60;true&#x60;, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3;
+     * setting this to &#x60;false&#x60; has no effect on versions &gt;&#x3D; 26.2.0.cl -
+     * &#x60;enable_reasoning&#x60; (default: &#x60;true&#x60;, **deprecated from 26.2.0.cl**) —
+     * always enabled in Spotter 3; setting this to &#x60;false&#x60; has no effect on versions
+     * &gt;&#x3D; 26.2.0.cl - &#x60;enable_save_chat&#x60; (default: &#x60;false&#x60;, *available
+     * from 26.5.0.cl*) — enables saving the conversation for later retrieval via conversation
+     * history If the request is successful, the response includes a unique
+     * &#x60;conversation_identifier&#x60; that must be passed to
+     * &#x60;sendAgentConversationMessage&#x60; or &#x60;sendAgentConversationMessageStreaming&#x60;
+     * to send messages within this conversation. The response also includes
+     * &#x60;conversation_id&#x60; with the same value for backwards compatibility; use
+     * &#x60;conversation_identifier&#x60; for new integrations. #### Example request
+     * &#x60;&#x60;&#x60;json { \&quot;metadata_context\&quot;: { \&quot;type\&quot;:
+     * \&quot;DATA_SOURCE\&quot;, \&quot;data_source_context\&quot;: {
+     * \&quot;data_source_identifier\&quot;: \&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890\&quot; } },
+     * \&quot;conversation_settings\&quot;: {} } &#x60;&#x60;&#x60; #### Error responses | Code |
+     * Description | | ---- |
+     * ---------------------------------------------------------------------------------------------------------------------------------------
+     * | | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view permission on the specified metadata object. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint was in Beta from 26.2.0.cl through 26.4.0.cl and is Generally Available from version
+     * 26.5.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to
+     * enable Spotter on your cluster.
      *
      * @param createAgentConversationRequest (required)
      * @return ApiResponse&lt;AgentConversation&gt;
@@ -2298,6 +2404,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -2310,7 +2418,49 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 10.13.0.cl or later
+     * (asynchronously) Version: 26.2.0.cl or later Creates a new Spotter agent conversation based
+     * on the provided context and settings. The endpoint was in Beta from 26.2.0.cl through
+     * 26.4.0.cl. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view access to the
+     * metadata object specified in the request. #### Usage guidelines The request must include the
+     * &#x60;metadata_context&#x60; parameter to define the conversation context. The context type
+     * can be one of: - &#x60;DATA_SOURCE&#x60; *(available from 26.5.0.cl)*: targets a specific
+     * data source. Provide &#x60;data_source_identifier&#x60; in &#x60;data_source_context&#x60;
+     * for a single data source, or &#x60;data_source_identifiers&#x60; for multi-data-source
+     * context. The deprecated &#x60;guid&#x60; field is accepted for backwards compatibility. -
+     * &#x60;AUTO_MODE&#x60; *(available from 26.5.0.cl)*: automatically discovers and selects the
+     * most relevant datasets for the user&#39;s queries. &gt; **Note for callers on versions
+     * 26.2.0.cl – 26.4.0.cl (Beta):** use the lowercase &#x60;data_source&#x60; enum value with the
+     * &#x60;guid&#x60; field instead of the above. Example: &#x60;{ \&quot;type\&quot;:
+     * \&quot;data_source\&quot;, \&quot;data_source_context\&quot;: { \&quot;guid\&quot;:
+     * \&quot;&lt;worksheet-id&gt;\&quot; } }&#x60;. The &#x60;conversation_settings&#x60; parameter
+     * controls which Spotter capabilities are enabled for the conversation: -
+     * &#x60;enable_contextual_change_analysis&#x60; (default: &#x60;true&#x60;, **deprecated from
+     * 26.2.0.cl**) — always enabled in Spotter 3; setting this to &#x60;false&#x60; has no effect
+     * on versions &gt;&#x3D; 26.2.0.cl - &#x60;enable_natural_language_answer_generation&#x60;
+     * (default: &#x60;true&#x60;, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3;
+     * setting this to &#x60;false&#x60; has no effect on versions &gt;&#x3D; 26.2.0.cl -
+     * &#x60;enable_reasoning&#x60; (default: &#x60;true&#x60;, **deprecated from 26.2.0.cl**) —
+     * always enabled in Spotter 3; setting this to &#x60;false&#x60; has no effect on versions
+     * &gt;&#x3D; 26.2.0.cl - &#x60;enable_save_chat&#x60; (default: &#x60;false&#x60;, *available
+     * from 26.5.0.cl*) — enables saving the conversation for later retrieval via conversation
+     * history If the request is successful, the response includes a unique
+     * &#x60;conversation_identifier&#x60; that must be passed to
+     * &#x60;sendAgentConversationMessage&#x60; or &#x60;sendAgentConversationMessageStreaming&#x60;
+     * to send messages within this conversation. The response also includes
+     * &#x60;conversation_id&#x60; with the same value for backwards compatibility; use
+     * &#x60;conversation_identifier&#x60; for new integrations. #### Example request
+     * &#x60;&#x60;&#x60;json { \&quot;metadata_context\&quot;: { \&quot;type\&quot;:
+     * \&quot;DATA_SOURCE\&quot;, \&quot;data_source_context\&quot;: {
+     * \&quot;data_source_identifier\&quot;: \&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890\&quot; } },
+     * \&quot;conversation_settings\&quot;: {} } &#x60;&#x60;&#x60; #### Error responses | Code |
+     * Description | | ---- |
+     * ---------------------------------------------------------------------------------------------------------------------------------------
+     * | | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view permission on the specified metadata object. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint was in Beta from 26.2.0.cl through 26.4.0.cl and is Generally Available from version
+     * 26.5.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to
+     * enable Spotter on your cluster.
      *
      * @param createAgentConversationRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -2324,6 +2474,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -2657,6 +2809,190 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
+     * Build call for createCollection
+     *
+     * @param createCollectionRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Collection created successfully </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call createCollectionCall(
+            CreateCollectionRequest createCollectionRequest, final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = createCollectionRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/collections/create";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call createCollectionValidateBeforeCall(
+            CreateCollectionRequest createCollectionRequest, final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'createCollectionRequest' is set
+        if (createCollectionRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'createCollectionRequest' when calling"
+                            + " createCollection(Async)");
+        }
+
+        return createCollectionCall(createCollectionRequest, _callback);
+    }
+
+    /**
+     * Version: 26.4.0.cl or later Creates a new collection in ThoughtSpot. Collections allow you to
+     * organize and group related metadata objects such as Liveboards, Answers, worksheets, and
+     * other data objects. You can also create nested collections (sub-collections) to build a
+     * hierarchical structure. #### Supported operations The API endpoint lets you perform the
+     * following operations: * Create a new collection * Add metadata objects (Liveboards, Answers,
+     * Logical Tables) to the collection * Create nested collections by adding sub-collections
+     *
+     * @param createCollectionRequest (required)
+     * @return Collection
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Collection created successfully </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public Collection createCollection(CreateCollectionRequest createCollectionRequest)
+            throws ApiException {
+        ApiResponse<Collection> localVarResp =
+                createCollectionWithHttpInfo(createCollectionRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Version: 26.4.0.cl or later Creates a new collection in ThoughtSpot. Collections allow you to
+     * organize and group related metadata objects such as Liveboards, Answers, worksheets, and
+     * other data objects. You can also create nested collections (sub-collections) to build a
+     * hierarchical structure. #### Supported operations The API endpoint lets you perform the
+     * following operations: * Create a new collection * Add metadata objects (Liveboards, Answers,
+     * Logical Tables) to the collection * Create nested collections by adding sub-collections
+     *
+     * @param createCollectionRequest (required)
+     * @return ApiResponse&lt;Collection&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Collection created successfully </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<Collection> createCollectionWithHttpInfo(
+            CreateCollectionRequest createCollectionRequest) throws ApiException {
+        okhttp3.Call localVarCall =
+                createCollectionValidateBeforeCall(createCollectionRequest, null);
+        Type localVarReturnType = new TypeToken<Collection>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Version: 26.4.0.cl or later Creates a new collection in ThoughtSpot.
+     * Collections allow you to organize and group related metadata objects such as Liveboards,
+     * Answers, worksheets, and other data objects. You can also create nested collections
+     * (sub-collections) to build a hierarchical structure. #### Supported operations The API
+     * endpoint lets you perform the following operations: * Create a new collection * Add metadata
+     * objects (Liveboards, Answers, Logical Tables) to the collection * Create nested collections
+     * by adding sub-collections
+     *
+     * @param createCollectionRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Collection created successfully </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call createCollectionAsync(
+            CreateCollectionRequest createCollectionRequest,
+            final ApiCallback<Collection> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                createCollectionValidateBeforeCall(createCollectionRequest, _callback);
+        Type localVarReturnType = new TypeToken<Collection>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for createConfig
      *
      * @param createConfigRequest (required)
@@ -2967,15 +3303,23 @@ public class ThoughtSpotRestApi {
      * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
      * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
      * \&quot;externalDatabases\&quot;:[ ] } &#x60;&#x60;&#x60; 2. Set &#x60;validate&#x60; to
-     * &#x60;false&#x60;. #### Create a connection with tables To create a connection with tables:
-     * 1. Pass these parameters in your API request. * Name of the connection. * Type of the data
-     * warehouse to connect to. * A JSON map of configuration attributes, database details, and
-     * table properties in &#x60;data_warehouse_config&#x60; as shown in the following example:
-     * &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
-     * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
+     * &#x60;false&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is anything other than
+     * SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload.
+     * If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the
+     * authentication type. #### Create a connection with tables If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) and
+     * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) privilege is
+     * required. To create a connection with tables: 1. Pass these parameters in your API request. *
+     * Name of the connection. * Type of the data warehouse to connect to. * A JSON map of
+     * configuration attributes, database details, and table properties in
+     * &#x60;data_warehouse_config&#x60; as shown in the following example: &#x60;&#x60;&#x60; {
+     * \&quot;configuration\&quot;:{ \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
      * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
      * \&quot;externalDatabases\&quot;:[ { \&quot;name\&quot;:\&quot;AllDatatypes\&quot;,
      * \&quot;isAutoCreated\&quot;:false, \&quot;schemas\&quot;:[ {
      * \&quot;name\&quot;:\&quot;alldatatypes\&quot;, \&quot;tables\&quot;:[ {
@@ -2992,7 +3336,10 @@ public class ThoughtSpotRestApi {
      * \&quot;isImported\&quot;:false, \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,
      * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
      * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; } ] } ] } ] } ] } &#x60;&#x60;&#x60; 2. Set
-     * &#x60;validate&#x60; to &#x60;true&#x60;.
+     * &#x60;validate&#x60; to &#x60;true&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is
+     * anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType
+     * property in the payload. If you do not specify authenticationType, the API will default to
+     * SERVICE_ACCOUNT as the authentication type.
      *
      * @param createConnectionRequest (required)
      * @return CreateConnectionResponse
@@ -3030,15 +3377,23 @@ public class ThoughtSpotRestApi {
      * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
      * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
      * \&quot;externalDatabases\&quot;:[ ] } &#x60;&#x60;&#x60; 2. Set &#x60;validate&#x60; to
-     * &#x60;false&#x60;. #### Create a connection with tables To create a connection with tables:
-     * 1. Pass these parameters in your API request. * Name of the connection. * Type of the data
-     * warehouse to connect to. * A JSON map of configuration attributes, database details, and
-     * table properties in &#x60;data_warehouse_config&#x60; as shown in the following example:
-     * &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
-     * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
+     * &#x60;false&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is anything other than
+     * SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload.
+     * If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the
+     * authentication type. #### Create a connection with tables If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) and
+     * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) privilege is
+     * required. To create a connection with tables: 1. Pass these parameters in your API request. *
+     * Name of the connection. * Type of the data warehouse to connect to. * A JSON map of
+     * configuration attributes, database details, and table properties in
+     * &#x60;data_warehouse_config&#x60; as shown in the following example: &#x60;&#x60;&#x60; {
+     * \&quot;configuration\&quot;:{ \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
      * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
      * \&quot;externalDatabases\&quot;:[ { \&quot;name\&quot;:\&quot;AllDatatypes\&quot;,
      * \&quot;isAutoCreated\&quot;:false, \&quot;schemas\&quot;:[ {
      * \&quot;name\&quot;:\&quot;alldatatypes\&quot;, \&quot;tables\&quot;:[ {
@@ -3055,7 +3410,10 @@ public class ThoughtSpotRestApi {
      * \&quot;isImported\&quot;:false, \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,
      * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
      * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; } ] } ] } ] } ] } &#x60;&#x60;&#x60; 2. Set
-     * &#x60;validate&#x60; to &#x60;true&#x60;.
+     * &#x60;validate&#x60; to &#x60;true&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is
+     * anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType
+     * property in the payload. If you do not specify authenticationType, the API will default to
+     * SERVICE_ACCOUNT as the authentication type.
      *
      * @param createConnectionRequest (required)
      * @return ApiResponse&lt;CreateConnectionResponse&gt;
@@ -3094,15 +3452,23 @@ public class ThoughtSpotRestApi {
      * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
      * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
      * \&quot;externalDatabases\&quot;:[ ] } &#x60;&#x60;&#x60; 2. Set &#x60;validate&#x60; to
-     * &#x60;false&#x60;. #### Create a connection with tables To create a connection with tables:
-     * 1. Pass these parameters in your API request. * Name of the connection. * Type of the data
-     * warehouse to connect to. * A JSON map of configuration attributes, database details, and
-     * table properties in &#x60;data_warehouse_config&#x60; as shown in the following example:
-     * &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
-     * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
+     * &#x60;false&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is anything other than
+     * SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload.
+     * If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the
+     * authentication type. #### Create a connection with tables If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) and
+     * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) privilege is
+     * required. To create a connection with tables: 1. Pass these parameters in your API request. *
+     * Name of the connection. * Type of the data warehouse to connect to. * A JSON map of
+     * configuration attributes, database details, and table properties in
+     * &#x60;data_warehouse_config&#x60; as shown in the following example: &#x60;&#x60;&#x60; {
+     * \&quot;configuration\&quot;:{ \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
      * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
      * \&quot;externalDatabases\&quot;:[ { \&quot;name\&quot;:\&quot;AllDatatypes\&quot;,
      * \&quot;isAutoCreated\&quot;:false, \&quot;schemas\&quot;:[ {
      * \&quot;name\&quot;:\&quot;alldatatypes\&quot;, \&quot;tables\&quot;:[ {
@@ -3119,7 +3485,10 @@ public class ThoughtSpotRestApi {
      * \&quot;isImported\&quot;:false, \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,
      * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
      * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; } ] } ] } ] } ] } &#x60;&#x60;&#x60; 2. Set
-     * &#x60;validate&#x60; to &#x60;true&#x60;.
+     * &#x60;validate&#x60; to &#x60;true&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is
+     * anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType
+     * property in the payload. If you do not specify authenticationType, the API will default to
+     * SERVICE_ACCOUNT as the authentication type.
      *
      * @param createConnectionRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -3387,6 +3756,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -3460,13 +3831,18 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.4.0.cl or later Creates a Conversation object to start an AI-driven conversation
-     * based on a specific data model. Requires at least view access to the metadata object
-     * specified in the request. #### Usage guidelines This API requires the
-     * &#x60;metadata_identifier&#x60; parameter to define the context for the conversation. You can
-     * also specify the tokens to initiate the conversation as shown in this example:
-     * &#x60;\&quot;tokens\&quot;: \&quot;[tea],[sales],[type]\&quot;&#x60; If the API request is
-     * successful, ThoughtSpot returns the ID of the conversation. &gt; ###### Note: &gt; * This
+     * Version: 10.4.0.cl or later Creates a new conversation session tied to a specific data model
+     * for AI-driven natural language querying. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and
+     * at least view access to the metadata object specified in the request. #### Usage guidelines
+     * The request must include: - &#x60;metadata_identifier&#x60;: the unique ID of the data source
+     * that provides context for the conversation Optionally, you can provide: - &#x60;tokens&#x60;:
+     * a token string to set initial context for the conversation (e.g., &#x60;\&quot;[sales],[item
+     * type],[state]\&quot;&#x60;) If the request is successful, ThoughtSpot returns a unique
+     * &#x60;conversation_identifier&#x60; that must be passed to &#x60;sendMessage&#x60; to
+     * continue the conversation. #### Error responses | Code | Description | |------|-------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view permission on the specified metadata object. | &gt; ###### Note: &gt; * This
      * endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made
      * Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot
      * support to enable Spotter on your cluster.
@@ -3482,6 +3858,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -3493,13 +3871,18 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.4.0.cl or later Creates a Conversation object to start an AI-driven conversation
-     * based on a specific data model. Requires at least view access to the metadata object
-     * specified in the request. #### Usage guidelines This API requires the
-     * &#x60;metadata_identifier&#x60; parameter to define the context for the conversation. You can
-     * also specify the tokens to initiate the conversation as shown in this example:
-     * &#x60;\&quot;tokens\&quot;: \&quot;[tea],[sales],[type]\&quot;&#x60; If the API request is
-     * successful, ThoughtSpot returns the ID of the conversation. &gt; ###### Note: &gt; * This
+     * Version: 10.4.0.cl or later Creates a new conversation session tied to a specific data model
+     * for AI-driven natural language querying. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and
+     * at least view access to the metadata object specified in the request. #### Usage guidelines
+     * The request must include: - &#x60;metadata_identifier&#x60;: the unique ID of the data source
+     * that provides context for the conversation Optionally, you can provide: - &#x60;tokens&#x60;:
+     * a token string to set initial context for the conversation (e.g., &#x60;\&quot;[sales],[item
+     * type],[state]\&quot;&#x60;) If the request is successful, ThoughtSpot returns a unique
+     * &#x60;conversation_identifier&#x60; that must be passed to &#x60;sendMessage&#x60; to
+     * continue the conversation. #### Error responses | Code | Description | |------|-------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view permission on the specified metadata object. | &gt; ###### Note: &gt; * This
      * endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made
      * Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot
      * support to enable Spotter on your cluster.
@@ -3515,6 +3898,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -3527,13 +3912,19 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 10.4.0.cl or later Creates a Conversation object to start an
-     * AI-driven conversation based on a specific data model. Requires at least view access to the
-     * metadata object specified in the request. #### Usage guidelines This API requires the
-     * &#x60;metadata_identifier&#x60; parameter to define the context for the conversation. You can
-     * also specify the tokens to initiate the conversation as shown in this example:
-     * &#x60;\&quot;tokens\&quot;: \&quot;[tea],[sales],[type]\&quot;&#x60; If the API request is
-     * successful, ThoughtSpot returns the ID of the conversation. &gt; ###### Note: &gt; * This
+     * (asynchronously) Version: 10.4.0.cl or later Creates a new conversation session tied to a
+     * specific data model for AI-driven natural language querying. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view access to the metadata object
+     * specified in the request. #### Usage guidelines The request must include: -
+     * &#x60;metadata_identifier&#x60;: the unique ID of the data source that provides context for
+     * the conversation Optionally, you can provide: - &#x60;tokens&#x60;: a token string to set
+     * initial context for the conversation (e.g., &#x60;\&quot;[sales],[item
+     * type],[state]\&quot;&#x60;) If the request is successful, ThoughtSpot returns a unique
+     * &#x60;conversation_identifier&#x60; that must be passed to &#x60;sendMessage&#x60; to
+     * continue the conversation. #### Error responses | Code | Description | |------|-------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view permission on the specified metadata object. | &gt; ###### Note: &gt; * This
      * endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made
      * Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot
      * support to enable Spotter on your cluster.
@@ -3550,6 +3941,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -5258,8 +5651,8 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Create a variable which can be used for parameterizing metadata objects Version: 10.14.0.cl
-     * or later Allows creating a variable which can be used for parameterizing metadata objects in
+     * Create a variable which can be used for parameterizing metadata objects Version: 26.4.0.cl or
+     * later Allows creating a variable which can be used for parameterizing metadata objects in
      * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES
      * permission allows you to manage Formula Variables in the current organization scope. The API
      * endpoint supports the following types of variables: * CONNECTION_PROPERTY - For connection
@@ -5293,8 +5686,8 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Create a variable which can be used for parameterizing metadata objects Version: 10.14.0.cl
-     * or later Allows creating a variable which can be used for parameterizing metadata objects in
+     * Create a variable which can be used for parameterizing metadata objects Version: 26.4.0.cl or
+     * later Allows creating a variable which can be used for parameterizing metadata objects in
      * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES
      * permission allows you to manage Formula Variables in the current organization scope. The API
      * endpoint supports the following types of variables: * CONNECTION_PROPERTY - For connection
@@ -5330,7 +5723,7 @@ public class ThoughtSpotRestApi {
 
     /**
      * (asynchronously) Create a variable which can be used for parameterizing metadata objects
-     * Version: 10.14.0.cl or later Allows creating a variable which can be used for parameterizing
+     * Version: 26.4.0.cl or later Allows creating a variable which can be used for parameterizing
      * metadata objects in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The
      * CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current
      * organization scope. The API endpoint supports the following types of variables: *
@@ -7014,6 +7407,202 @@ public class ThoughtSpotRestApi {
 
         okhttp3.Call localVarCall = deleteCalendarValidateBeforeCall(calendarIdentifier, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for deleteCollection
+     *
+     * @param deleteCollectionRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Collections deleted successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Resource not found. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call deleteCollectionCall(
+            DeleteCollectionRequest deleteCollectionRequest, final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = deleteCollectionRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/collections/delete";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call deleteCollectionValidateBeforeCall(
+            DeleteCollectionRequest deleteCollectionRequest, final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'deleteCollectionRequest' is set
+        if (deleteCollectionRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'deleteCollectionRequest' when calling"
+                            + " deleteCollection(Async)");
+        }
+
+        return deleteCollectionCall(deleteCollectionRequest, _callback);
+    }
+
+    /**
+     * Version: 26.4.0.cl or later Deletes one or more collections from ThoughtSpot. #### Delete
+     * options * **delete_children**: When set to &#x60;true&#x60;, deletes the child objects
+     * (metadata items) within the collection that the user has access to. Objects that the user
+     * does not have permission to delete will be skipped. * **dry_run**: When set to
+     * &#x60;true&#x60;, performs a preview of the deletion operation without actually deleting
+     * anything. The response shows what would be deleted, allowing you to review before committing
+     * the deletion. #### Response The response includes: * **metadata_deleted**: List of metadata
+     * objects that were successfully deleted * **metadata_skipped**: List of metadata objects that
+     * were skipped due to lack of permissions or other constraints
+     *
+     * @param deleteCollectionRequest (required)
+     * @return CollectionDeleteResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Collections deleted successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Resource not found. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public CollectionDeleteResponse deleteCollection(
+            DeleteCollectionRequest deleteCollectionRequest) throws ApiException {
+        ApiResponse<CollectionDeleteResponse> localVarResp =
+                deleteCollectionWithHttpInfo(deleteCollectionRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Version: 26.4.0.cl or later Deletes one or more collections from ThoughtSpot. #### Delete
+     * options * **delete_children**: When set to &#x60;true&#x60;, deletes the child objects
+     * (metadata items) within the collection that the user has access to. Objects that the user
+     * does not have permission to delete will be skipped. * **dry_run**: When set to
+     * &#x60;true&#x60;, performs a preview of the deletion operation without actually deleting
+     * anything. The response shows what would be deleted, allowing you to review before committing
+     * the deletion. #### Response The response includes: * **metadata_deleted**: List of metadata
+     * objects that were successfully deleted * **metadata_skipped**: List of metadata objects that
+     * were skipped due to lack of permissions or other constraints
+     *
+     * @param deleteCollectionRequest (required)
+     * @return ApiResponse&lt;CollectionDeleteResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Collections deleted successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Resource not found. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<CollectionDeleteResponse> deleteCollectionWithHttpInfo(
+            DeleteCollectionRequest deleteCollectionRequest) throws ApiException {
+        okhttp3.Call localVarCall =
+                deleteCollectionValidateBeforeCall(deleteCollectionRequest, null);
+        Type localVarReturnType = new TypeToken<CollectionDeleteResponse>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Version: 26.4.0.cl or later Deletes one or more collections from
+     * ThoughtSpot. #### Delete options * **delete_children**: When set to &#x60;true&#x60;, deletes
+     * the child objects (metadata items) within the collection that the user has access to. Objects
+     * that the user does not have permission to delete will be skipped. * **dry_run**: When set to
+     * &#x60;true&#x60;, performs a preview of the deletion operation without actually deleting
+     * anything. The response shows what would be deleted, allowing you to review before committing
+     * the deletion. #### Response The response includes: * **metadata_deleted**: List of metadata
+     * objects that were successfully deleted * **metadata_skipped**: List of metadata objects that
+     * were skipped due to lack of permissions or other constraints
+     *
+     * @param deleteCollectionRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Collections deleted successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Resource not found. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call deleteCollectionAsync(
+            DeleteCollectionRequest deleteCollectionRequest,
+            final ApiCallback<CollectionDeleteResponse> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                deleteCollectionValidateBeforeCall(deleteCollectionRequest, _callback);
+        Type localVarReturnType = new TypeToken<CollectionDeleteResponse>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
@@ -9720,7 +10309,10 @@ public class ThoughtSpotRestApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call deleteVariableCall(String identifier, final ApiCallback _callback)
             throws ApiException {
         String basePath = null;
@@ -9779,6 +10371,7 @@ public class ThoughtSpotRestApi {
                 _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call deleteVariableValidateBeforeCall(
             String identifier, final ApiCallback _callback) throws ApiException {
@@ -9793,11 +10386,14 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Delete a variable Version: 10.14.0.cl or later Allows deleting a variable from ThoughtSpot.
-     * Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you
-     * to manage Formula Variables in the current organization scope. The API endpoint requires: *
-     * The variable identifier (ID or name) The operation will fail if: * The user lacks required
-     * permissions * The variable doesn&#39;t exist * The variable is being used by other objects
+     * Delete a variable Version: 10.14.0.cl or later **Note:** This API endpoint is deprecated and
+     * will be removed from ThoughtSpot in a future release. Use [POST
+     * /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.
+     * Allows deleting a variable from ThoughtSpot. Requires ADMINISTRATION role and TENANT scope.
+     * The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current
+     * organization scope. The API endpoint requires: * The variable identifier (ID or name) The
+     * operation will fail if: * The user lacks required permissions * The variable doesn&#39;t
+     * exist * The variable is being used by other objects
      *
      * @param identifier Unique id or name of the variable (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -9812,17 +10408,23 @@ public class ThoughtSpotRestApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public void deleteVariable(String identifier) throws ApiException {
         deleteVariableWithHttpInfo(identifier);
     }
 
     /**
-     * Delete a variable Version: 10.14.0.cl or later Allows deleting a variable from ThoughtSpot.
-     * Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you
-     * to manage Formula Variables in the current organization scope. The API endpoint requires: *
-     * The variable identifier (ID or name) The operation will fail if: * The user lacks required
-     * permissions * The variable doesn&#39;t exist * The variable is being used by other objects
+     * Delete a variable Version: 10.14.0.cl or later **Note:** This API endpoint is deprecated and
+     * will be removed from ThoughtSpot in a future release. Use [POST
+     * /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.
+     * Allows deleting a variable from ThoughtSpot. Requires ADMINISTRATION role and TENANT scope.
+     * The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current
+     * organization scope. The API endpoint requires: * The variable identifier (ID or name) The
+     * operation will fail if: * The user lacks required permissions * The variable doesn&#39;t
+     * exist * The variable is being used by other objects
      *
      * @param identifier Unique id or name of the variable (required)
      * @return ApiResponse&lt;Void&gt;
@@ -9838,19 +10440,24 @@ public class ThoughtSpotRestApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public ApiResponse<Void> deleteVariableWithHttpInfo(String identifier) throws ApiException {
         okhttp3.Call localVarCall = deleteVariableValidateBeforeCall(identifier, null);
         return localVarApiClient.execute(localVarCall);
     }
 
     /**
-     * (asynchronously) Delete a variable Version: 10.14.0.cl or later Allows deleting a variable
-     * from ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES
-     * permission allows you to manage Formula Variables in the current organization scope. The API
-     * endpoint requires: * The variable identifier (ID or name) The operation will fail if: * The
-     * user lacks required permissions * The variable doesn&#39;t exist * The variable is being used
-     * by other objects
+     * (asynchronously) Delete a variable Version: 10.14.0.cl or later **Note:** This API endpoint
+     * is deprecated and will be removed from ThoughtSpot in a future release. Use [POST
+     * /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.
+     * Allows deleting a variable from ThoughtSpot. Requires ADMINISTRATION role and TENANT scope.
+     * The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current
+     * organization scope. The API endpoint requires: * The variable identifier (ID or name) The
+     * operation will fail if: * The user lacks required permissions * The variable doesn&#39;t
+     * exist * The variable is being used by other objects
      *
      * @param identifier Unique id or name of the variable (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -9867,11 +10474,189 @@ public class ThoughtSpotRestApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call deleteVariableAsync(String identifier, final ApiCallback<Void> _callback)
             throws ApiException {
 
         okhttp3.Call localVarCall = deleteVariableValidateBeforeCall(identifier, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for deleteVariables
+     *
+     * @param deleteVariablesRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Deletion of variable(s) is successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call deleteVariablesCall(
+            DeleteVariablesRequest deleteVariablesRequest, final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = deleteVariablesRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/template/variables/delete";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call deleteVariablesValidateBeforeCall(
+            DeleteVariablesRequest deleteVariablesRequest, final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'deleteVariablesRequest' is set
+        if (deleteVariablesRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'deleteVariablesRequest' when calling"
+                            + " deleteVariables(Async)");
+        }
+
+        return deleteVariablesCall(deleteVariablesRequest, _callback);
+    }
+
+    /**
+     * Delete variable(s) Version: 26.4.0.cl or later Allows deleting multiple variables from
+     * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES
+     * permission allows you to manage Formula Variables in the current organization scope. The API
+     * endpoint requires: * The variable identifiers (IDs or names) The operation will fail if: *
+     * The user lacks required permissions * Any of the variables don&#39;t exist * Any of the
+     * variables are being used by other objects
+     *
+     * @param deleteVariablesRequest (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Deletion of variable(s) is successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public void deleteVariables(DeleteVariablesRequest deleteVariablesRequest) throws ApiException {
+        deleteVariablesWithHttpInfo(deleteVariablesRequest);
+    }
+
+    /**
+     * Delete variable(s) Version: 26.4.0.cl or later Allows deleting multiple variables from
+     * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES
+     * permission allows you to manage Formula Variables in the current organization scope. The API
+     * endpoint requires: * The variable identifiers (IDs or names) The operation will fail if: *
+     * The user lacks required permissions * Any of the variables don&#39;t exist * Any of the
+     * variables are being used by other objects
+     *
+     * @param deleteVariablesRequest (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Deletion of variable(s) is successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<Void> deleteVariablesWithHttpInfo(
+            DeleteVariablesRequest deleteVariablesRequest) throws ApiException {
+        okhttp3.Call localVarCall = deleteVariablesValidateBeforeCall(deleteVariablesRequest, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     * (asynchronously) Delete variable(s) Version: 26.4.0.cl or later Allows deleting multiple
+     * variables from ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The
+     * CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current
+     * organization scope. The API endpoint requires: * The variable identifiers (IDs or names) The
+     * operation will fail if: * The user lacks required permissions * Any of the variables
+     * don&#39;t exist * Any of the variables are being used by other objects
+     *
+     * @param deleteVariablesRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Deletion of variable(s) is successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call deleteVariablesAsync(
+            DeleteVariablesRequest deleteVariablesRequest, final ApiCallback<Void> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                deleteVariablesValidateBeforeCall(deleteVariablesRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -14803,6 +15588,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -14878,19 +15665,25 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.15.0.cl or later Provides relevant data source recommendations for a
-     * user-submitted natural language query. To use this API, the user must have at least
-     * view-level access to the underlying metadata entities referenced in the response. #### Usage
-     * guidelines The request must include a &#x60;query&#x60; string via the request body. The
-     * returned results include metadata such as: - &#x60;confidence&#x60;: a float indicating the
-     * model&#39;s confidence in the relevance of each recommendation - &#x60;details&#x60;:
-     * includes &#x60;data_source_identifier&#x60;, &#x60;data_source_name&#x60;, and
-     * &#x60;description&#x60; of each recommended data source - &#x60;reasoning&#x60;: rationale
-     * provided by the LLM to explain why each data source was recommended If the API request is
-     * successful, ThoughtSpot returns a ranked list of data sources, each annotated with relevant
-     * reasoning. &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes may
-     * be introduced before it is made Generally Available. &gt; * This endpoint requires Spotter —
-     * please contact ThoughtSpot Support to enable Spotter on your cluster.
+     * Version: 10.15.0.cl or later Suggests the most relevant data sources for a given natural
+     * language query, ranked by confidence with LLM-generated reasoning. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view-level access to the underlying
+     * metadata entities referenced in the response. #### Usage guidelines The request must include:
+     * - &#x60;query&#x60;: the natural language question to find relevant data sources for If the
+     * request is successful, the API returns a ranked list of suggested data sources, each
+     * containing: - &#x60;confidence&#x60;: a float score indicating the model&#39;s confidence in
+     * the relevance of the suggestion - &#x60;details&#x60;: metadata about the data source -
+     * &#x60;data_source_identifier&#x60;: the unique ID of the data source -
+     * &#x60;data_source_name&#x60;: the display name of the data source - &#x60;description&#x60;:
+     * a description of the data source - &#x60;reasoning&#x60;: LLM-generated rationale explaining
+     * why the data source was recommended #### Error responses | Code | Description |
+     * |------|--------------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view permission on the underlying metadata entities. | &gt; ###### Note: &gt; * This
+     * endpoint is currently in Beta. Breaking changes may be introduced before it is made Generally
+     * Available. &gt; * This endpoint requires Spotter — please contact ThoughtSpot Support to
+     * enable Spotter on your cluster.
      *
      * @param getDataSourceSuggestionsRequest (required)
      * @return EurekaDataSourceSuggestionResponse
@@ -14903,6 +15696,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -14914,19 +15709,25 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.15.0.cl or later Provides relevant data source recommendations for a
-     * user-submitted natural language query. To use this API, the user must have at least
-     * view-level access to the underlying metadata entities referenced in the response. #### Usage
-     * guidelines The request must include a &#x60;query&#x60; string via the request body. The
-     * returned results include metadata such as: - &#x60;confidence&#x60;: a float indicating the
-     * model&#39;s confidence in the relevance of each recommendation - &#x60;details&#x60;:
-     * includes &#x60;data_source_identifier&#x60;, &#x60;data_source_name&#x60;, and
-     * &#x60;description&#x60; of each recommended data source - &#x60;reasoning&#x60;: rationale
-     * provided by the LLM to explain why each data source was recommended If the API request is
-     * successful, ThoughtSpot returns a ranked list of data sources, each annotated with relevant
-     * reasoning. &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes may
-     * be introduced before it is made Generally Available. &gt; * This endpoint requires Spotter —
-     * please contact ThoughtSpot Support to enable Spotter on your cluster.
+     * Version: 10.15.0.cl or later Suggests the most relevant data sources for a given natural
+     * language query, ranked by confidence with LLM-generated reasoning. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view-level access to the underlying
+     * metadata entities referenced in the response. #### Usage guidelines The request must include:
+     * - &#x60;query&#x60;: the natural language question to find relevant data sources for If the
+     * request is successful, the API returns a ranked list of suggested data sources, each
+     * containing: - &#x60;confidence&#x60;: a float score indicating the model&#39;s confidence in
+     * the relevance of the suggestion - &#x60;details&#x60;: metadata about the data source -
+     * &#x60;data_source_identifier&#x60;: the unique ID of the data source -
+     * &#x60;data_source_name&#x60;: the display name of the data source - &#x60;description&#x60;:
+     * a description of the data source - &#x60;reasoning&#x60;: LLM-generated rationale explaining
+     * why the data source was recommended #### Error responses | Code | Description |
+     * |------|--------------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view permission on the underlying metadata entities. | &gt; ###### Note: &gt; * This
+     * endpoint is currently in Beta. Breaking changes may be introduced before it is made Generally
+     * Available. &gt; * This endpoint requires Spotter — please contact ThoughtSpot Support to
+     * enable Spotter on your cluster.
      *
      * @param getDataSourceSuggestionsRequest (required)
      * @return ApiResponse&lt;EurekaDataSourceSuggestionResponse&gt;
@@ -14939,6 +15740,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -14951,19 +15754,25 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 10.15.0.cl or later Provides relevant data source recommendations
-     * for a user-submitted natural language query. To use this API, the user must have at least
-     * view-level access to the underlying metadata entities referenced in the response. #### Usage
-     * guidelines The request must include a &#x60;query&#x60; string via the request body. The
-     * returned results include metadata such as: - &#x60;confidence&#x60;: a float indicating the
-     * model&#39;s confidence in the relevance of each recommendation - &#x60;details&#x60;:
-     * includes &#x60;data_source_identifier&#x60;, &#x60;data_source_name&#x60;, and
-     * &#x60;description&#x60; of each recommended data source - &#x60;reasoning&#x60;: rationale
-     * provided by the LLM to explain why each data source was recommended If the API request is
-     * successful, ThoughtSpot returns a ranked list of data sources, each annotated with relevant
-     * reasoning. &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes may
-     * be introduced before it is made Generally Available. &gt; * This endpoint requires Spotter —
-     * please contact ThoughtSpot Support to enable Spotter on your cluster.
+     * (asynchronously) Version: 10.15.0.cl or later Suggests the most relevant data sources for a
+     * given natural language query, ranked by confidence with LLM-generated reasoning. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view-level access to the underlying
+     * metadata entities referenced in the response. #### Usage guidelines The request must include:
+     * - &#x60;query&#x60;: the natural language question to find relevant data sources for If the
+     * request is successful, the API returns a ranked list of suggested data sources, each
+     * containing: - &#x60;confidence&#x60;: a float score indicating the model&#39;s confidence in
+     * the relevance of the suggestion - &#x60;details&#x60;: metadata about the data source -
+     * &#x60;data_source_identifier&#x60;: the unique ID of the data source -
+     * &#x60;data_source_name&#x60;: the display name of the data source - &#x60;description&#x60;:
+     * a description of the data source - &#x60;reasoning&#x60;: LLM-generated rationale explaining
+     * why the data source was recommended #### Error responses | Code | Description |
+     * |------|--------------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view permission on the underlying metadata entities. | &gt; ###### Note: &gt; * This
+     * endpoint is currently in Beta. Breaking changes may be introduced before it is made Generally
+     * Available. &gt; * This endpoint requires Spotter — please contact ThoughtSpot Support to
+     * enable Spotter on your cluster.
      *
      * @param getDataSourceSuggestionsRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -14977,6 +15786,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -15259,6 +16070,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -15332,23 +16145,28 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.15.0.cl or later This API allows users to retrieve existing natural language (NL)
-     * instructions for a specific data-model. These instructions guide the AI system in
-     * understanding data context and generating more accurate responses when processing natural
-     * language queries. #### Usage guidelines To retrieve NL instructions for a data-model, the
-     * request must include: - &#x60;data_source_identifier&#x60;: The unique ID of the data-model
-     * to retrieve NL instructions The API returns a response object with: -
-     * &#x60;nl_instructions_info&#x60;: An array of instruction objects, each containing: -
-     * &#x60;instructions&#x60;: Array of text instructions for natural language processing -
-     * &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). It can be extended to
-     * data-model-user scope in future. #### Instructions Scope - **GLOBAL**: Instructions that
-     * apply globally across the system on the given data-model (currently only global instructions
-     * are supported) &gt; ###### Note: &gt; * To use this API, the user needs atleast view access
-     * on the data-model and they must use corresponding org related bearerToken where the
-     * data-model exists. &gt; * This endpoint is currently in Beta. Breaking changes may be
-     * introduced before the endpoint is made Generally Available. &gt; * Available from version
-     * 10.15.0.cl and later. &gt; * This endpoint requires Spotter — please contact ThoughtSpot
-     * Support to enable Spotter on your cluster. &gt; * Use this API to view currently configured
+     * Version: 10.15.0.cl or later Retrieves existing natural language (NL) instructions configured
+     * for a specific data model. These instructions guide the AI system in understanding data
+     * context and generating more accurate responses. Requires &#x60;CAN_USE_SPOTTER&#x60;
+     * privilege, at least view access on the data model, and a bearer token corresponding to the
+     * org where the data model exists. #### Usage guidelines The request must include: -
+     * &#x60;data_source_identifier&#x60;: the unique ID of the data model to retrieve instructions
+     * for If the request is successful, the API returns: - &#x60;nl_instructions_info&#x60;: an
+     * array of instruction objects, each containing: - &#x60;instructions&#x60;: the configured
+     * text instructions for AI processing - &#x60;scope&#x60;: the scope of the instruction —
+     * currently only &#x60;GLOBAL&#x60; is supported #### Instructions scope - **GLOBAL**:
+     * Instructions that apply globally across the system on the given data-model (currently only
+     * global instructions are supported) #### Error responses | Code | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, lacks
+     * view access on the data model, or the bearer token does not correspond to the org where the
+     * data model exists. | &gt; ###### Note: &gt; &gt; - To use this API, the user needs at least
+     * view access on the data model, and must use the bearer token corresponding to the org where
+     * the data model exists. &gt; - This endpoint is currently in Beta. Breaking changes may be
+     * introduced before the endpoint is made Generally Available. &gt; - Available from version
+     * 10.15.0.cl and later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot
+     * Support to enable Spotter on your cluster. &gt; - Use this API to review currently configured
      * instructions before modifying them with &#x60;setNLInstructions&#x60;.
      *
      * @param getNLInstructionsRequest (required)
@@ -15362,6 +16180,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -15373,23 +16193,28 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.15.0.cl or later This API allows users to retrieve existing natural language (NL)
-     * instructions for a specific data-model. These instructions guide the AI system in
-     * understanding data context and generating more accurate responses when processing natural
-     * language queries. #### Usage guidelines To retrieve NL instructions for a data-model, the
-     * request must include: - &#x60;data_source_identifier&#x60;: The unique ID of the data-model
-     * to retrieve NL instructions The API returns a response object with: -
-     * &#x60;nl_instructions_info&#x60;: An array of instruction objects, each containing: -
-     * &#x60;instructions&#x60;: Array of text instructions for natural language processing -
-     * &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). It can be extended to
-     * data-model-user scope in future. #### Instructions Scope - **GLOBAL**: Instructions that
-     * apply globally across the system on the given data-model (currently only global instructions
-     * are supported) &gt; ###### Note: &gt; * To use this API, the user needs atleast view access
-     * on the data-model and they must use corresponding org related bearerToken where the
-     * data-model exists. &gt; * This endpoint is currently in Beta. Breaking changes may be
-     * introduced before the endpoint is made Generally Available. &gt; * Available from version
-     * 10.15.0.cl and later. &gt; * This endpoint requires Spotter — please contact ThoughtSpot
-     * Support to enable Spotter on your cluster. &gt; * Use this API to view currently configured
+     * Version: 10.15.0.cl or later Retrieves existing natural language (NL) instructions configured
+     * for a specific data model. These instructions guide the AI system in understanding data
+     * context and generating more accurate responses. Requires &#x60;CAN_USE_SPOTTER&#x60;
+     * privilege, at least view access on the data model, and a bearer token corresponding to the
+     * org where the data model exists. #### Usage guidelines The request must include: -
+     * &#x60;data_source_identifier&#x60;: the unique ID of the data model to retrieve instructions
+     * for If the request is successful, the API returns: - &#x60;nl_instructions_info&#x60;: an
+     * array of instruction objects, each containing: - &#x60;instructions&#x60;: the configured
+     * text instructions for AI processing - &#x60;scope&#x60;: the scope of the instruction —
+     * currently only &#x60;GLOBAL&#x60; is supported #### Instructions scope - **GLOBAL**:
+     * Instructions that apply globally across the system on the given data-model (currently only
+     * global instructions are supported) #### Error responses | Code | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, lacks
+     * view access on the data model, or the bearer token does not correspond to the org where the
+     * data model exists. | &gt; ###### Note: &gt; &gt; - To use this API, the user needs at least
+     * view access on the data model, and must use the bearer token corresponding to the org where
+     * the data model exists. &gt; - This endpoint is currently in Beta. Breaking changes may be
+     * introduced before the endpoint is made Generally Available. &gt; - Available from version
+     * 10.15.0.cl and later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot
+     * Support to enable Spotter on your cluster. &gt; - Use this API to review currently configured
      * instructions before modifying them with &#x60;setNLInstructions&#x60;.
      *
      * @param getNLInstructionsRequest (required)
@@ -15403,6 +16228,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -15415,23 +16242,29 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 10.15.0.cl or later This API allows users to retrieve existing
-     * natural language (NL) instructions for a specific data-model. These instructions guide the AI
-     * system in understanding data context and generating more accurate responses when processing
-     * natural language queries. #### Usage guidelines To retrieve NL instructions for a data-model,
-     * the request must include: - &#x60;data_source_identifier&#x60;: The unique ID of the
-     * data-model to retrieve NL instructions The API returns a response object with: -
-     * &#x60;nl_instructions_info&#x60;: An array of instruction objects, each containing: -
-     * &#x60;instructions&#x60;: Array of text instructions for natural language processing -
-     * &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). It can be extended to
-     * data-model-user scope in future. #### Instructions Scope - **GLOBAL**: Instructions that
-     * apply globally across the system on the given data-model (currently only global instructions
-     * are supported) &gt; ###### Note: &gt; * To use this API, the user needs atleast view access
-     * on the data-model and they must use corresponding org related bearerToken where the
-     * data-model exists. &gt; * This endpoint is currently in Beta. Breaking changes may be
-     * introduced before the endpoint is made Generally Available. &gt; * Available from version
-     * 10.15.0.cl and later. &gt; * This endpoint requires Spotter — please contact ThoughtSpot
-     * Support to enable Spotter on your cluster. &gt; * Use this API to view currently configured
+     * (asynchronously) Version: 10.15.0.cl or later Retrieves existing natural language (NL)
+     * instructions configured for a specific data model. These instructions guide the AI system in
+     * understanding data context and generating more accurate responses. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege, at least view access on the data model, and a bearer
+     * token corresponding to the org where the data model exists. #### Usage guidelines The request
+     * must include: - &#x60;data_source_identifier&#x60;: the unique ID of the data model to
+     * retrieve instructions for If the request is successful, the API returns: -
+     * &#x60;nl_instructions_info&#x60;: an array of instruction objects, each containing: -
+     * &#x60;instructions&#x60;: the configured text instructions for AI processing -
+     * &#x60;scope&#x60;: the scope of the instruction — currently only &#x60;GLOBAL&#x60; is
+     * supported #### Instructions scope - **GLOBAL**: Instructions that apply globally across the
+     * system on the given data-model (currently only global instructions are supported) #### Error
+     * responses | Code | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, lacks
+     * view access on the data model, or the bearer token does not correspond to the org where the
+     * data model exists. | &gt; ###### Note: &gt; &gt; - To use this API, the user needs at least
+     * view access on the data model, and must use the bearer token corresponding to the org where
+     * the data model exists. &gt; - This endpoint is currently in Beta. Breaking changes may be
+     * introduced before the endpoint is made Generally Available. &gt; - Available from version
+     * 10.15.0.cl and later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot
+     * Support to enable Spotter on your cluster. &gt; - Use this API to review currently configured
      * instructions before modifying them with &#x60;setNLInstructions&#x60;.
      *
      * @param getNLInstructionsRequest (required)
@@ -15446,6 +16279,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -15732,6 +16567,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -15805,26 +16642,33 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.13.0.cl or later Breaks down a user-submitted query into a series of analytical
-     * sub-questions using relevant contextual metadata. To use this API, the user must have at
-     * least view-level access to the referenced metadata objects. #### Usage guidelines To
-     * accurately generate relevant questions, the request must include at least one of the
-     * following metadata identifiers within &#x60;metadata_context&#x60; :
-     * &#x60;conversation_identifier&#x60;, &#x60;answer_identifiers&#x60;,
-     * &#x60;liveboard_identifiers&#x60;, or &#x60;data_source_identifiers&#x60;. You can further
-     * enhance the quality and precision of breakdown by providing additional &#x60;ai_context&#x60;
-     * such as: - &#x60;content&#x60;: User provided content like text data, csv data as a string
-     * message to provide context &amp; potentially improve the quality of the response. -
-     * &#x60;instructions&#x60;: User specific text instructions sent to AI system for processing
-     * the query. Additional optional parameters include: - &#x60;limit_relevant_questions&#x60;:
-     * Controls the maximum number of relevant questions returned. Defaults to 5 if not specified. -
-     * &#x60;bypass_cache&#x60;: If set to true, forces fresh computation instead of returning
-     * cached results. If the API request is successful, ThoughtSpot returns a list of relevant
-     * analytical queries, each aligned with the user&#39;s original question. Each returned
-     * question includes the query string, along with the identifier and name of the corresponding
-     * data source. &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes
-     * may be introduced before the endpoint is made Generally Available. &gt; * This endpoint
-     * requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
+     * Version: 10.13.0.cl or later Breaks down a natural language query into a series of smaller
+     * analytical sub-questions, each mapped to a relevant data source. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view-level access to the referenced
+     * metadata objects. #### Usage guidelines The request must include: - &#x60;query&#x60;: the
+     * natural language question to decompose into analytical sub-questions -
+     * &#x60;metadata_context&#x60;: at least one of the following context identifiers to guide
+     * question generation: - &#x60;conversation_identifier&#x60; — an existing conversation session
+     * ID - &#x60;answer_identifiers&#x60; — a list of Answer GUIDs -
+     * &#x60;liveboard_identifiers&#x60; — a list of Liveboard GUIDs -
+     * &#x60;data_source_identifiers&#x60; — a list of data source GUIDs Optional parameters for
+     * refining the output: - &#x60;ai_context&#x60;: additional context to improve response quality
+     * - &#x60;content&#x60; — supplementary text or CSV data as string input -
+     * &#x60;instructions&#x60; — custom text instructions for the AI system -
+     * &#x60;limit_relevant_questions&#x60;: maximum number of questions to return (default:
+     * &#x60;5&#x60;) - &#x60;bypass_cache&#x60;: if &#x60;true&#x60;, forces fresh computation
+     * instead of returning cached results If the request is successful, the API returns a list of
+     * relevant analytical questions, each containing: - &#x60;query&#x60;: the generated
+     * sub-question - &#x60;data_source_identifier&#x60;: the unique ID of the data source the
+     * question targets - &#x60;data_source_name&#x60;: the display name of the corresponding data
+     * source #### Error responses | Code | Description |
+     * |------|---------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view access to the referenced metadata objects. | &gt; ###### Note: &gt; * This
+     * endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made
+     * Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot
+     * support to enable Spotter on your cluster.
      *
      * @param getRelevantQuestionsRequest (required)
      * @return EurekaGetRelevantQuestionsResponse
@@ -15837,6 +16681,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -15848,26 +16694,33 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.13.0.cl or later Breaks down a user-submitted query into a series of analytical
-     * sub-questions using relevant contextual metadata. To use this API, the user must have at
-     * least view-level access to the referenced metadata objects. #### Usage guidelines To
-     * accurately generate relevant questions, the request must include at least one of the
-     * following metadata identifiers within &#x60;metadata_context&#x60; :
-     * &#x60;conversation_identifier&#x60;, &#x60;answer_identifiers&#x60;,
-     * &#x60;liveboard_identifiers&#x60;, or &#x60;data_source_identifiers&#x60;. You can further
-     * enhance the quality and precision of breakdown by providing additional &#x60;ai_context&#x60;
-     * such as: - &#x60;content&#x60;: User provided content like text data, csv data as a string
-     * message to provide context &amp; potentially improve the quality of the response. -
-     * &#x60;instructions&#x60;: User specific text instructions sent to AI system for processing
-     * the query. Additional optional parameters include: - &#x60;limit_relevant_questions&#x60;:
-     * Controls the maximum number of relevant questions returned. Defaults to 5 if not specified. -
-     * &#x60;bypass_cache&#x60;: If set to true, forces fresh computation instead of returning
-     * cached results. If the API request is successful, ThoughtSpot returns a list of relevant
-     * analytical queries, each aligned with the user&#39;s original question. Each returned
-     * question includes the query string, along with the identifier and name of the corresponding
-     * data source. &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes
-     * may be introduced before the endpoint is made Generally Available. &gt; * This endpoint
-     * requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
+     * Version: 10.13.0.cl or later Breaks down a natural language query into a series of smaller
+     * analytical sub-questions, each mapped to a relevant data source. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view-level access to the referenced
+     * metadata objects. #### Usage guidelines The request must include: - &#x60;query&#x60;: the
+     * natural language question to decompose into analytical sub-questions -
+     * &#x60;metadata_context&#x60;: at least one of the following context identifiers to guide
+     * question generation: - &#x60;conversation_identifier&#x60; — an existing conversation session
+     * ID - &#x60;answer_identifiers&#x60; — a list of Answer GUIDs -
+     * &#x60;liveboard_identifiers&#x60; — a list of Liveboard GUIDs -
+     * &#x60;data_source_identifiers&#x60; — a list of data source GUIDs Optional parameters for
+     * refining the output: - &#x60;ai_context&#x60;: additional context to improve response quality
+     * - &#x60;content&#x60; — supplementary text or CSV data as string input -
+     * &#x60;instructions&#x60; — custom text instructions for the AI system -
+     * &#x60;limit_relevant_questions&#x60;: maximum number of questions to return (default:
+     * &#x60;5&#x60;) - &#x60;bypass_cache&#x60;: if &#x60;true&#x60;, forces fresh computation
+     * instead of returning cached results If the request is successful, the API returns a list of
+     * relevant analytical questions, each containing: - &#x60;query&#x60;: the generated
+     * sub-question - &#x60;data_source_identifier&#x60;: the unique ID of the data source the
+     * question targets - &#x60;data_source_name&#x60;: the display name of the corresponding data
+     * source #### Error responses | Code | Description |
+     * |------|---------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view access to the referenced metadata objects. | &gt; ###### Note: &gt; * This
+     * endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made
+     * Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot
+     * support to enable Spotter on your cluster.
      *
      * @param getRelevantQuestionsRequest (required)
      * @return ApiResponse&lt;EurekaGetRelevantQuestionsResponse&gt;
@@ -15880,6 +16733,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -15892,26 +16747,33 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 10.13.0.cl or later Breaks down a user-submitted query into a
-     * series of analytical sub-questions using relevant contextual metadata. To use this API, the
-     * user must have at least view-level access to the referenced metadata objects. #### Usage
-     * guidelines To accurately generate relevant questions, the request must include at least one
-     * of the following metadata identifiers within &#x60;metadata_context&#x60; :
-     * &#x60;conversation_identifier&#x60;, &#x60;answer_identifiers&#x60;,
-     * &#x60;liveboard_identifiers&#x60;, or &#x60;data_source_identifiers&#x60;. You can further
-     * enhance the quality and precision of breakdown by providing additional &#x60;ai_context&#x60;
-     * such as: - &#x60;content&#x60;: User provided content like text data, csv data as a string
-     * message to provide context &amp; potentially improve the quality of the response. -
-     * &#x60;instructions&#x60;: User specific text instructions sent to AI system for processing
-     * the query. Additional optional parameters include: - &#x60;limit_relevant_questions&#x60;:
-     * Controls the maximum number of relevant questions returned. Defaults to 5 if not specified. -
-     * &#x60;bypass_cache&#x60;: If set to true, forces fresh computation instead of returning
-     * cached results. If the API request is successful, ThoughtSpot returns a list of relevant
-     * analytical queries, each aligned with the user&#39;s original question. Each returned
-     * question includes the query string, along with the identifier and name of the corresponding
-     * data source. &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes
-     * may be introduced before the endpoint is made Generally Available. &gt; * This endpoint
-     * requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
+     * (asynchronously) Version: 10.13.0.cl or later Breaks down a natural language query into a
+     * series of smaller analytical sub-questions, each mapped to a relevant data source. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view-level access to the referenced
+     * metadata objects. #### Usage guidelines The request must include: - &#x60;query&#x60;: the
+     * natural language question to decompose into analytical sub-questions -
+     * &#x60;metadata_context&#x60;: at least one of the following context identifiers to guide
+     * question generation: - &#x60;conversation_identifier&#x60; — an existing conversation session
+     * ID - &#x60;answer_identifiers&#x60; — a list of Answer GUIDs -
+     * &#x60;liveboard_identifiers&#x60; — a list of Liveboard GUIDs -
+     * &#x60;data_source_identifiers&#x60; — a list of data source GUIDs Optional parameters for
+     * refining the output: - &#x60;ai_context&#x60;: additional context to improve response quality
+     * - &#x60;content&#x60; — supplementary text or CSV data as string input -
+     * &#x60;instructions&#x60; — custom text instructions for the AI system -
+     * &#x60;limit_relevant_questions&#x60;: maximum number of questions to return (default:
+     * &#x60;5&#x60;) - &#x60;bypass_cache&#x60;: if &#x60;true&#x60;, forces fresh computation
+     * instead of returning cached results If the request is successful, the API returns a list of
+     * relevant analytical questions, each containing: - &#x60;query&#x60;: the generated
+     * sub-question - &#x60;data_source_identifier&#x60;: the unique ID of the data source the
+     * question targets - &#x60;data_source_name&#x60;: the display name of the corresponding data
+     * source #### Error responses | Code | Description |
+     * |------|---------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view access to the referenced metadata objects. | &gt; ###### Note: &gt; * This
+     * endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made
+     * Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot
+     * support to enable Spotter on your cluster.
      *
      * @param getRelevantQuestionsRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -15925,6 +16787,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -17842,7 +18706,10 @@ public class ThoughtSpotRestApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call parameterizeMetadataCall(
             ParameterizeMetadataRequest parameterizeMetadataRequest, final ApiCallback _callback)
             throws ApiException {
@@ -17898,6 +18765,7 @@ public class ThoughtSpotRestApi {
                 _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call parameterizeMetadataValidateBeforeCall(
             ParameterizeMetadataRequest parameterizeMetadataRequest, final ApiCallback _callback)
@@ -17913,15 +18781,17 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Parameterize fields in metadata objects. Version: 10.9.0.cl or later Allows parameterizing
-     * fields in metadata objects in ThoughtSpot. Requires appropriate permissions to modify the
-     * metadata object. The API endpoint allows parameterizing the following types of metadata
-     * objects: * Logical Tables * Connections * Connection Configs For a Logical Table the field
-     * type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName
-     * * tableName For a Connection or Connection Config, the field type is always
-     * &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact property of the
-     * Connection or Connection Config that needs to be parameterized. For Connection Config, the
-     * only supported field name is: * impersonate_user
+     * Parameterize fields in metadata objects. Version: 10.9.0.cl or later **Note:** This API
+     * endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST
+     * /api/rest/2.0/metadata/parameterize-fields](/api/rest/2.0/metadata/parameterize-fields)
+     * instead. Allows parameterizing fields in metadata objects in ThoughtSpot. Requires
+     * appropriate permissions to modify the metadata object. The API endpoint allows parameterizing
+     * the following types of metadata objects: * Logical Tables * Connections * Connection Configs
+     * For a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one
+     * of: * databaseName * schemaName * tableName For a Connection or Connection Config, the field
+     * type is always &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact
+     * property of the Connection or Connection Config that needs to be parameterized. For
+     * Connection Config, the only supported field name is: * impersonate_user
      *
      * @param parameterizeMetadataRequest (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -17936,22 +18806,27 @@ public class ThoughtSpotRestApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public void parameterizeMetadata(ParameterizeMetadataRequest parameterizeMetadataRequest)
             throws ApiException {
         parameterizeMetadataWithHttpInfo(parameterizeMetadataRequest);
     }
 
     /**
-     * Parameterize fields in metadata objects. Version: 10.9.0.cl or later Allows parameterizing
-     * fields in metadata objects in ThoughtSpot. Requires appropriate permissions to modify the
-     * metadata object. The API endpoint allows parameterizing the following types of metadata
-     * objects: * Logical Tables * Connections * Connection Configs For a Logical Table the field
-     * type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName
-     * * tableName For a Connection or Connection Config, the field type is always
-     * &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact property of the
-     * Connection or Connection Config that needs to be parameterized. For Connection Config, the
-     * only supported field name is: * impersonate_user
+     * Parameterize fields in metadata objects. Version: 10.9.0.cl or later **Note:** This API
+     * endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST
+     * /api/rest/2.0/metadata/parameterize-fields](/api/rest/2.0/metadata/parameterize-fields)
+     * instead. Allows parameterizing fields in metadata objects in ThoughtSpot. Requires
+     * appropriate permissions to modify the metadata object. The API endpoint allows parameterizing
+     * the following types of metadata objects: * Logical Tables * Connections * Connection Configs
+     * For a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one
+     * of: * databaseName * schemaName * tableName For a Connection or Connection Config, the field
+     * type is always &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact
+     * property of the Connection or Connection Config that needs to be parameterized. For
+     * Connection Config, the only supported field name is: * impersonate_user
      *
      * @param parameterizeMetadataRequest (required)
      * @return ApiResponse&lt;Void&gt;
@@ -17967,7 +18842,10 @@ public class ThoughtSpotRestApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public ApiResponse<Void> parameterizeMetadataWithHttpInfo(
             ParameterizeMetadataRequest parameterizeMetadataRequest) throws ApiException {
         okhttp3.Call localVarCall =
@@ -17976,15 +18854,18 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Parameterize fields in metadata objects. Version: 10.9.0.cl or later Allows
-     * parameterizing fields in metadata objects in ThoughtSpot. Requires appropriate permissions to
-     * modify the metadata object. The API endpoint allows parameterizing the following types of
-     * metadata objects: * Logical Tables * Connections * Connection Configs For a Logical Table the
-     * field type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName *
-     * schemaName * tableName For a Connection or Connection Config, the field type is always
-     * &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact property of the
-     * Connection or Connection Config that needs to be parameterized. For Connection Config, the
-     * only supported field name is: * impersonate_user
+     * (asynchronously) Parameterize fields in metadata objects. Version: 10.9.0.cl or later
+     * **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future
+     * release. Use [POST
+     * /api/rest/2.0/metadata/parameterize-fields](/api/rest/2.0/metadata/parameterize-fields)
+     * instead. Allows parameterizing fields in metadata objects in ThoughtSpot. Requires
+     * appropriate permissions to modify the metadata object. The API endpoint allows parameterizing
+     * the following types of metadata objects: * Logical Tables * Connections * Connection Configs
+     * For a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one
+     * of: * databaseName * schemaName * tableName For a Connection or Connection Config, the field
+     * type is always &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact
+     * property of the Connection or Connection Config that needs to be parameterized. For
+     * Connection Config, the only supported field name is: * impersonate_user
      *
      * @param parameterizeMetadataRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -18001,7 +18882,10 @@ public class ThoughtSpotRestApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call parameterizeMetadataAsync(
             ParameterizeMetadataRequest parameterizeMetadataRequest,
             final ApiCallback<Void> _callback)
@@ -18009,6 +18893,208 @@ public class ThoughtSpotRestApi {
 
         okhttp3.Call localVarCall =
                 parameterizeMetadataValidateBeforeCall(parameterizeMetadataRequest, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for parameterizeMetadataFields
+     *
+     * @param parameterizeMetadataFieldsRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Parameterize successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call parameterizeMetadataFieldsCall(
+            ParameterizeMetadataFieldsRequest parameterizeMetadataFieldsRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = parameterizeMetadataFieldsRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/metadata/parameterize-fields";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call parameterizeMetadataFieldsValidateBeforeCall(
+            ParameterizeMetadataFieldsRequest parameterizeMetadataFieldsRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'parameterizeMetadataFieldsRequest' is set
+        if (parameterizeMetadataFieldsRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'parameterizeMetadataFieldsRequest' when"
+                            + " calling parameterizeMetadataFields(Async)");
+        }
+
+        return parameterizeMetadataFieldsCall(parameterizeMetadataFieldsRequest, _callback);
+    }
+
+    /**
+     * Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for
+     * LOGICAL_TABLE. Version: 26.5.0.cl or later Allows parameterizing multiple fields of metadata
+     * objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for
+     * LOGICAL_TABLE. Requires appropriate permissions to modify the metadata object. The API
+     * endpoint allows parameterizing the following types of metadata objects: * Logical Tables *
+     * Connections * Connection Configs For a Logical Table, the field type must be
+     * &#x60;ATTRIBUTE&#x60; and field names can include: * databaseName * schemaName * tableName
+     * For a Connection or Connection Config, the field type is always
+     * &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_names specifies the exact properties of
+     * the Connection or Connection Config that need to be parameterized. For Connection Config,
+     * supported field names include: * impersonate_user You can parameterize multiple fields at
+     * once by providing an array of field names.
+     *
+     * @param parameterizeMetadataFieldsRequest (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Parameterize successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public void parameterizeMetadataFields(
+            ParameterizeMetadataFieldsRequest parameterizeMetadataFieldsRequest)
+            throws ApiException {
+        parameterizeMetadataFieldsWithHttpInfo(parameterizeMetadataFieldsRequest);
+    }
+
+    /**
+     * Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for
+     * LOGICAL_TABLE. Version: 26.5.0.cl or later Allows parameterizing multiple fields of metadata
+     * objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for
+     * LOGICAL_TABLE. Requires appropriate permissions to modify the metadata object. The API
+     * endpoint allows parameterizing the following types of metadata objects: * Logical Tables *
+     * Connections * Connection Configs For a Logical Table, the field type must be
+     * &#x60;ATTRIBUTE&#x60; and field names can include: * databaseName * schemaName * tableName
+     * For a Connection or Connection Config, the field type is always
+     * &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_names specifies the exact properties of
+     * the Connection or Connection Config that need to be parameterized. For Connection Config,
+     * supported field names include: * impersonate_user You can parameterize multiple fields at
+     * once by providing an array of field names.
+     *
+     * @param parameterizeMetadataFieldsRequest (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Parameterize successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<Void> parameterizeMetadataFieldsWithHttpInfo(
+            ParameterizeMetadataFieldsRequest parameterizeMetadataFieldsRequest)
+            throws ApiException {
+        okhttp3.Call localVarCall =
+                parameterizeMetadataFieldsValidateBeforeCall(
+                        parameterizeMetadataFieldsRequest, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     * (asynchronously) Parameterize multiple fields of metadata objects. For example [schemaName,
+     * databaseName] for LOGICAL_TABLE. Version: 26.5.0.cl or later Allows parameterizing multiple
+     * fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName,
+     * databaseName] for LOGICAL_TABLE. Requires appropriate permissions to modify the metadata
+     * object. The API endpoint allows parameterizing the following types of metadata objects: *
+     * Logical Tables * Connections * Connection Configs For a Logical Table, the field type must be
+     * &#x60;ATTRIBUTE&#x60; and field names can include: * databaseName * schemaName * tableName
+     * For a Connection or Connection Config, the field type is always
+     * &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_names specifies the exact properties of
+     * the Connection or Connection Config that need to be parameterized. For Connection Config,
+     * supported field names include: * impersonate_user You can parameterize multiple fields at
+     * once by providing an array of field names.
+     *
+     * @param parameterizeMetadataFieldsRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Parameterize successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call parameterizeMetadataFieldsAsync(
+            ParameterizeMetadataFieldsRequest parameterizeMetadataFieldsRequest,
+            final ApiCallback<Void> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                parameterizeMetadataFieldsValidateBeforeCall(
+                        parameterizeMetadataFieldsRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -18100,7 +19186,7 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.9.0.cl or later Allows publishing metadata objects across organizations in
+     * Version: 26.5.0.cl or later Allows publishing metadata objects across organizations in
      * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
      * publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
      * This API will essentially share the objects along with it&#39;s dependencies to the org
@@ -18125,7 +19211,7 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.9.0.cl or later Allows publishing metadata objects across organizations in
+     * Version: 26.5.0.cl or later Allows publishing metadata objects across organizations in
      * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
      * publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
      * This API will essentially share the objects along with it&#39;s dependencies to the org
@@ -18153,7 +19239,7 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 10.9.0.cl or later Allows publishing metadata objects across
+     * (asynchronously) Version: 26.5.0.cl or later Allows publishing metadata objects across
      * organizations in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint
      * allows publishing the following types of metadata objects: * Liveboards * Answers * Logical
      * Tables This API will essentially share the objects along with it&#39;s dependencies to the
@@ -18185,6 +19271,225 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
+     * Build call for putVariableValues
+     *
+     * @param identifier Unique ID or name of the variable (required)
+     * @param putVariableValuesRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Variable values updated successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call putVariableValuesCall(
+            String identifier,
+            PutVariableValuesRequest putVariableValuesRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = putVariableValuesRequest;
+
+        // create path and map variables
+        String localVarPath =
+                "/api/rest/2.0/template/variables/{identifier}/update-values"
+                        .replace(
+                                "{" + "identifier" + "}",
+                                localVarApiClient.escapeString(identifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call putVariableValuesValidateBeforeCall(
+            String identifier,
+            PutVariableValuesRequest putVariableValuesRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'identifier' is set
+        if (identifier == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'identifier' when calling"
+                            + " putVariableValues(Async)");
+        }
+
+        // verify the required parameter 'putVariableValuesRequest' is set
+        if (putVariableValuesRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'putVariableValuesRequest' when calling"
+                            + " putVariableValues(Async)");
+        }
+
+        return putVariableValuesCall(identifier, putVariableValuesRequest, _callback);
+    }
+
+    /**
+     * Update values for a variable Version: 26.4.0.cl or later Allows updating values for a
+     * specific variable in ThoughtSpot. Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES
+     * permission allows you to manage Formula Variables in the current organization scope. The API
+     * endpoint allows: * Adding new values to the variable * Replacing existing values * Deleting
+     * values from the variable * Resetting all values When updating variable values, you need to
+     * specify: * The variable identifier (ID or name) * The values to add/replace/remove * The
+     * operation to perform (ADD, REPLACE, REMOVE, RESET) Behaviour based on operation type: * ADD -
+     * Adds values to the variable if this is a list type variable, else same as replace. * REPLACE
+     * - Replaces all values of a given set of constraints with the current set of values. * REMOVE
+     * - Removes any values which match the set of conditions of the variables if this is a list
+     * type variable, else clears value. * RESET - Removes all constraints for the given variable,
+     * scope is ignored
+     *
+     * @param identifier Unique ID or name of the variable (required)
+     * @param putVariableValuesRequest (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Variable values updated successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public void putVariableValues(
+            String identifier, PutVariableValuesRequest putVariableValuesRequest)
+            throws ApiException {
+        putVariableValuesWithHttpInfo(identifier, putVariableValuesRequest);
+    }
+
+    /**
+     * Update values for a variable Version: 26.4.0.cl or later Allows updating values for a
+     * specific variable in ThoughtSpot. Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES
+     * permission allows you to manage Formula Variables in the current organization scope. The API
+     * endpoint allows: * Adding new values to the variable * Replacing existing values * Deleting
+     * values from the variable * Resetting all values When updating variable values, you need to
+     * specify: * The variable identifier (ID or name) * The values to add/replace/remove * The
+     * operation to perform (ADD, REPLACE, REMOVE, RESET) Behaviour based on operation type: * ADD -
+     * Adds values to the variable if this is a list type variable, else same as replace. * REPLACE
+     * - Replaces all values of a given set of constraints with the current set of values. * REMOVE
+     * - Removes any values which match the set of conditions of the variables if this is a list
+     * type variable, else clears value. * RESET - Removes all constraints for the given variable,
+     * scope is ignored
+     *
+     * @param identifier Unique ID or name of the variable (required)
+     * @param putVariableValuesRequest (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Variable values updated successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<Void> putVariableValuesWithHttpInfo(
+            String identifier, PutVariableValuesRequest putVariableValuesRequest)
+            throws ApiException {
+        okhttp3.Call localVarCall =
+                putVariableValuesValidateBeforeCall(identifier, putVariableValuesRequest, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     * (asynchronously) Update values for a variable Version: 26.4.0.cl or later Allows updating
+     * values for a specific variable in ThoughtSpot. Requires ADMINISTRATION role. The
+     * CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current
+     * organization scope. The API endpoint allows: * Adding new values to the variable * Replacing
+     * existing values * Deleting values from the variable * Resetting all values When updating
+     * variable values, you need to specify: * The variable identifier (ID or name) * The values to
+     * add/replace/remove * The operation to perform (ADD, REPLACE, REMOVE, RESET) Behaviour based
+     * on operation type: * ADD - Adds values to the variable if this is a list type variable, else
+     * same as replace. * REPLACE - Replaces all values of a given set of constraints with the
+     * current set of values. * REMOVE - Removes any values which match the set of conditions of the
+     * variables if this is a list type variable, else clears value. * RESET - Removes all
+     * constraints for the given variable, scope is ignored
+     *
+     * @param identifier Unique ID or name of the variable (required)
+     * @param putVariableValuesRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Variable values updated successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call putVariableValuesAsync(
+            String identifier,
+            PutVariableValuesRequest putVariableValuesRequest,
+            final ApiCallback<Void> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                putVariableValuesValidateBeforeCall(
+                        identifier, putVariableValuesRequest, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for queryGetDecomposedQuery
      *
      * @param queryGetDecomposedQueryRequest (required)
@@ -18198,6 +19503,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      *
@@ -18277,7 +19584,32 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.7.0.cl or later
+     * Version: 10.7.0.cl or later **Deprecated** — Use &#x60;getRelevantQuestions&#x60; instead
+     * (available from 10.13.0.cl). Breaks down a topical or goal-oriented natural language question
+     * into smaller, actionable analytical sub-questions, each mapped to a relevant data source for
+     * independent execution. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view-level
+     * access to the referenced metadata objects. #### Usage guidelines The request accepts the
+     * following parameters: - &#x60;nlsRequest&#x60;: contains the user &#x60;query&#x60; to
+     * decompose, along with optional &#x60;instructions&#x60; and &#x60;bypassCache&#x60; flag -
+     * &#x60;worksheetIds&#x60;: list of data source identifiers to scope the decomposition -
+     * &#x60;answerIds&#x60;: list of Answer GUIDs whose data guides the response -
+     * &#x60;liveboardIds&#x60;: list of Liveboard GUIDs whose data guides the response -
+     * &#x60;conversationId&#x60;: an existing conversation session ID for context continuity -
+     * &#x60;content&#x60;: supplementary text or CSV data to improve response quality -
+     * &#x60;maxDecomposedQueries&#x60;: maximum number of sub-questions to return (default:
+     * &#x60;5&#x60;) If the request is successful, the API returns a
+     * &#x60;decomposedQueryResponse&#x60; containing a list of &#x60;decomposedQueries&#x60;, each
+     * with: - &#x60;query&#x60;: the generated analytical sub-question - &#x60;worksheetId&#x60;:
+     * the unique ID of the data source the question targets - &#x60;worksheetName&#x60;: the
+     * display name of the corresponding data source #### Error responses | Code | Description |
+     * |------|---------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view access to the referenced metadata objects. | &gt; ###### Note: &gt; * This
+     * endpoint is deprecated since 10.13.0.cl. Use &#x60;getRelevantQuestions&#x60; for new
+     * integrations. &gt; * This endpoint is currently in Beta. Breaking changes may be introduced
+     * before the endpoint is made Generally Available. &gt; * This endpoint requires Spotter —
+     * please contact ThoughtSpot support to enable Spotter on your cluster.
      *
      * @param queryGetDecomposedQueryRequest (required)
      * @return EurekaDecomposeQueryResponse
@@ -18290,6 +19622,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      *
@@ -18304,7 +19638,32 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.7.0.cl or later
+     * Version: 10.7.0.cl or later **Deprecated** — Use &#x60;getRelevantQuestions&#x60; instead
+     * (available from 10.13.0.cl). Breaks down a topical or goal-oriented natural language question
+     * into smaller, actionable analytical sub-questions, each mapped to a relevant data source for
+     * independent execution. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view-level
+     * access to the referenced metadata objects. #### Usage guidelines The request accepts the
+     * following parameters: - &#x60;nlsRequest&#x60;: contains the user &#x60;query&#x60; to
+     * decompose, along with optional &#x60;instructions&#x60; and &#x60;bypassCache&#x60; flag -
+     * &#x60;worksheetIds&#x60;: list of data source identifiers to scope the decomposition -
+     * &#x60;answerIds&#x60;: list of Answer GUIDs whose data guides the response -
+     * &#x60;liveboardIds&#x60;: list of Liveboard GUIDs whose data guides the response -
+     * &#x60;conversationId&#x60;: an existing conversation session ID for context continuity -
+     * &#x60;content&#x60;: supplementary text or CSV data to improve response quality -
+     * &#x60;maxDecomposedQueries&#x60;: maximum number of sub-questions to return (default:
+     * &#x60;5&#x60;) If the request is successful, the API returns a
+     * &#x60;decomposedQueryResponse&#x60; containing a list of &#x60;decomposedQueries&#x60;, each
+     * with: - &#x60;query&#x60;: the generated analytical sub-question - &#x60;worksheetId&#x60;:
+     * the unique ID of the data source the question targets - &#x60;worksheetName&#x60;: the
+     * display name of the corresponding data source #### Error responses | Code | Description |
+     * |------|---------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view access to the referenced metadata objects. | &gt; ###### Note: &gt; * This
+     * endpoint is deprecated since 10.13.0.cl. Use &#x60;getRelevantQuestions&#x60; for new
+     * integrations. &gt; * This endpoint is currently in Beta. Breaking changes may be introduced
+     * before the endpoint is made Generally Available. &gt; * This endpoint requires Spotter —
+     * please contact ThoughtSpot support to enable Spotter on your cluster.
      *
      * @param queryGetDecomposedQueryRequest (required)
      * @return ApiResponse&lt;EurekaDecomposeQueryResponse&gt;
@@ -18317,6 +19676,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      *
@@ -18332,7 +19693,32 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 10.7.0.cl or later
+     * (asynchronously) Version: 10.7.0.cl or later **Deprecated** — Use
+     * &#x60;getRelevantQuestions&#x60; instead (available from 10.13.0.cl). Breaks down a topical
+     * or goal-oriented natural language question into smaller, actionable analytical sub-questions,
+     * each mapped to a relevant data source for independent execution. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view-level access to the referenced
+     * metadata objects. #### Usage guidelines The request accepts the following parameters: -
+     * &#x60;nlsRequest&#x60;: contains the user &#x60;query&#x60; to decompose, along with optional
+     * &#x60;instructions&#x60; and &#x60;bypassCache&#x60; flag - &#x60;worksheetIds&#x60;: list of
+     * data source identifiers to scope the decomposition - &#x60;answerIds&#x60;: list of Answer
+     * GUIDs whose data guides the response - &#x60;liveboardIds&#x60;: list of Liveboard GUIDs
+     * whose data guides the response - &#x60;conversationId&#x60;: an existing conversation session
+     * ID for context continuity - &#x60;content&#x60;: supplementary text or CSV data to improve
+     * response quality - &#x60;maxDecomposedQueries&#x60;: maximum number of sub-questions to
+     * return (default: &#x60;5&#x60;) If the request is successful, the API returns a
+     * &#x60;decomposedQueryResponse&#x60; containing a list of &#x60;decomposedQueries&#x60;, each
+     * with: - &#x60;query&#x60;: the generated analytical sub-question - &#x60;worksheetId&#x60;:
+     * the unique ID of the data source the question targets - &#x60;worksheetName&#x60;: the
+     * display name of the corresponding data source #### Error responses | Code | Description |
+     * |------|---------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view access to the referenced metadata objects. | &gt; ###### Note: &gt; * This
+     * endpoint is deprecated since 10.13.0.cl. Use &#x60;getRelevantQuestions&#x60; for new
+     * integrations. &gt; * This endpoint is currently in Beta. Breaking changes may be introduced
+     * before the endpoint is made Generally Available. &gt; * This endpoint requires Spotter —
+     * please contact ThoughtSpot support to enable Spotter on your cluster.
      *
      * @param queryGetDecomposedQueryRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -18346,6 +19732,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      *
@@ -19387,6 +20775,408 @@ public class ThoughtSpotRestApi {
         okhttp3.Call localVarCall =
                 searchCalendarsValidateBeforeCall(searchCalendarsRequest, _callback);
         Type localVarReturnType = new TypeToken<List<CalendarResponse>>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for searchChannelHistory
+     *
+     * @param searchChannelHistoryRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Channel status logs retrieved successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call searchChannelHistoryCall(
+            SearchChannelHistoryRequest searchChannelHistoryRequest, final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = searchChannelHistoryRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/jobs/history/communication-channels/search";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call searchChannelHistoryValidateBeforeCall(
+            SearchChannelHistoryRequest searchChannelHistoryRequest, final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'searchChannelHistoryRequest' is set
+        if (searchChannelHistoryRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'searchChannelHistoryRequest' when calling"
+                            + " searchChannelHistory(Async)");
+        }
+
+        return searchChannelHistoryCall(searchChannelHistoryRequest, _callback);
+    }
+
+    /**
+     * Version: 26.4.0.cl or later Searches delivery history for communication channels such as
+     * webhooks. Returns channel-level delivery status for each job execution record. Use this to
+     * monitor channel health and delivery success rates across events. Requires
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has
+     * developer privilege**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
+     * &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to
+     * perform this action. **NOTE**: When &#x60;channel_type&#x60; is &#x60;WEBHOOK&#x60;, the
+     * following constraints apply: - &#x60;job_ids&#x60;, &#x60;channel_identifiers&#x60;, and
+     * &#x60;events&#x60; each accept at most one element. - When &#x60;job_ids&#x60; is provided,
+     * it is used as the sole lookup key and other filter fields are ignored. - When
+     * &#x60;job_ids&#x60; is not provided, &#x60;channel_identifiers&#x60; and &#x60;events&#x60;
+     * are both required. Each must contain exactly one element, and the event object must include
+     * the &#x60;identifier&#x60; field. - Records older than the configured retention period are
+     * not returned.
+     *
+     * @param searchChannelHistoryRequest (required)
+     * @return SearchChannelHistoryResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Channel status logs retrieved successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public SearchChannelHistoryResponse searchChannelHistory(
+            SearchChannelHistoryRequest searchChannelHistoryRequest) throws ApiException {
+        ApiResponse<SearchChannelHistoryResponse> localVarResp =
+                searchChannelHistoryWithHttpInfo(searchChannelHistoryRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Version: 26.4.0.cl or later Searches delivery history for communication channels such as
+     * webhooks. Returns channel-level delivery status for each job execution record. Use this to
+     * monitor channel health and delivery success rates across events. Requires
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has
+     * developer privilege**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
+     * &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to
+     * perform this action. **NOTE**: When &#x60;channel_type&#x60; is &#x60;WEBHOOK&#x60;, the
+     * following constraints apply: - &#x60;job_ids&#x60;, &#x60;channel_identifiers&#x60;, and
+     * &#x60;events&#x60; each accept at most one element. - When &#x60;job_ids&#x60; is provided,
+     * it is used as the sole lookup key and other filter fields are ignored. - When
+     * &#x60;job_ids&#x60; is not provided, &#x60;channel_identifiers&#x60; and &#x60;events&#x60;
+     * are both required. Each must contain exactly one element, and the event object must include
+     * the &#x60;identifier&#x60; field. - Records older than the configured retention period are
+     * not returned.
+     *
+     * @param searchChannelHistoryRequest (required)
+     * @return ApiResponse&lt;SearchChannelHistoryResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Channel status logs retrieved successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<SearchChannelHistoryResponse> searchChannelHistoryWithHttpInfo(
+            SearchChannelHistoryRequest searchChannelHistoryRequest) throws ApiException {
+        okhttp3.Call localVarCall =
+                searchChannelHistoryValidateBeforeCall(searchChannelHistoryRequest, null);
+        Type localVarReturnType = new TypeToken<SearchChannelHistoryResponse>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Version: 26.4.0.cl or later Searches delivery history for communication
+     * channels such as webhooks. Returns channel-level delivery status for each job execution
+     * record. Use this to monitor channel health and delivery success rates across events. Requires
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has
+     * developer privilege**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
+     * &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to
+     * perform this action. **NOTE**: When &#x60;channel_type&#x60; is &#x60;WEBHOOK&#x60;, the
+     * following constraints apply: - &#x60;job_ids&#x60;, &#x60;channel_identifiers&#x60;, and
+     * &#x60;events&#x60; each accept at most one element. - When &#x60;job_ids&#x60; is provided,
+     * it is used as the sole lookup key and other filter fields are ignored. - When
+     * &#x60;job_ids&#x60; is not provided, &#x60;channel_identifiers&#x60; and &#x60;events&#x60;
+     * are both required. Each must contain exactly one element, and the event object must include
+     * the &#x60;identifier&#x60; field. - Records older than the configured retention period are
+     * not returned.
+     *
+     * @param searchChannelHistoryRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Channel status logs retrieved successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call searchChannelHistoryAsync(
+            SearchChannelHistoryRequest searchChannelHistoryRequest,
+            final ApiCallback<SearchChannelHistoryResponse> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                searchChannelHistoryValidateBeforeCall(searchChannelHistoryRequest, _callback);
+        Type localVarReturnType = new TypeToken<SearchChannelHistoryResponse>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for searchCollections
+     *
+     * @param searchCollectionsRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Successfully retrieved list of collections </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call searchCollectionsCall(
+            SearchCollectionsRequest searchCollectionsRequest, final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = searchCollectionsRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/collections/search";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call searchCollectionsValidateBeforeCall(
+            SearchCollectionsRequest searchCollectionsRequest, final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'searchCollectionsRequest' is set
+        if (searchCollectionsRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'searchCollectionsRequest' when calling"
+                            + " searchCollections(Async)");
+        }
+
+        return searchCollectionsCall(searchCollectionsRequest, _callback);
+    }
+
+    /**
+     * Version: 26.4.0.cl or later Gets a list of collections available in ThoughtSpot. To get
+     * details of a specific collection, specify the collection GUID or name. You can also filter
+     * the API response based on the collection name pattern, author, and other criteria. ####
+     * Search options * **name_pattern**: Use &#39;%&#39; as a wildcard character to match
+     * collection names * **collection_identifiers**: Search for specific collections by their GUIDs
+     * or names * **include_metadata**: When set to &#x60;true&#x60;, includes the metadata objects
+     * within each collection in the response **NOTE**: If the API returns an empty list, consider
+     * increasing the value of the &#x60;record_size&#x60; parameter. To search across all available
+     * collections, set &#x60;record_size&#x60; to &#x60;-1&#x60;.
+     *
+     * @param searchCollectionsRequest (required)
+     * @return CollectionSearchResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Successfully retrieved list of collections </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public CollectionSearchResponse searchCollections(
+            SearchCollectionsRequest searchCollectionsRequest) throws ApiException {
+        ApiResponse<CollectionSearchResponse> localVarResp =
+                searchCollectionsWithHttpInfo(searchCollectionsRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Version: 26.4.0.cl or later Gets a list of collections available in ThoughtSpot. To get
+     * details of a specific collection, specify the collection GUID or name. You can also filter
+     * the API response based on the collection name pattern, author, and other criteria. ####
+     * Search options * **name_pattern**: Use &#39;%&#39; as a wildcard character to match
+     * collection names * **collection_identifiers**: Search for specific collections by their GUIDs
+     * or names * **include_metadata**: When set to &#x60;true&#x60;, includes the metadata objects
+     * within each collection in the response **NOTE**: If the API returns an empty list, consider
+     * increasing the value of the &#x60;record_size&#x60; parameter. To search across all available
+     * collections, set &#x60;record_size&#x60; to &#x60;-1&#x60;.
+     *
+     * @param searchCollectionsRequest (required)
+     * @return ApiResponse&lt;CollectionSearchResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Successfully retrieved list of collections </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<CollectionSearchResponse> searchCollectionsWithHttpInfo(
+            SearchCollectionsRequest searchCollectionsRequest) throws ApiException {
+        okhttp3.Call localVarCall =
+                searchCollectionsValidateBeforeCall(searchCollectionsRequest, null);
+        Type localVarReturnType = new TypeToken<CollectionSearchResponse>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Version: 26.4.0.cl or later Gets a list of collections available in
+     * ThoughtSpot. To get details of a specific collection, specify the collection GUID or name.
+     * You can also filter the API response based on the collection name pattern, author, and other
+     * criteria. #### Search options * **name_pattern**: Use &#39;%&#39; as a wildcard character to
+     * match collection names * **collection_identifiers**: Search for specific collections by their
+     * GUIDs or names * **include_metadata**: When set to &#x60;true&#x60;, includes the metadata
+     * objects within each collection in the response **NOTE**: If the API returns an empty list,
+     * consider increasing the value of the &#x60;record_size&#x60; parameter. To search across all
+     * available collections, set &#x60;record_size&#x60; to &#x60;-1&#x60;.
+     *
+     * @param searchCollectionsRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Successfully retrieved list of collections </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call searchCollectionsAsync(
+            SearchCollectionsRequest searchCollectionsRequest,
+            final ApiCallback<CollectionSearchResponse> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                searchCollectionsValidateBeforeCall(searchCollectionsRequest, _callback);
+        Type localVarReturnType = new TypeToken<CollectionSearchResponse>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -22519,7 +24309,7 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Search variables Version: 10.14.0.cl or later Allows searching for variables in ThoughtSpot.
+     * Search variables Version: 26.4.0.cl or later Allows searching for variables in ThoughtSpot.
      * Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage
      * Formula Variables in the current organization scope. The API endpoint supports searching
      * variables by: * Variable identifier (ID or name) * Variable type * Name pattern
@@ -22551,7 +24341,7 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Search variables Version: 10.14.0.cl or later Allows searching for variables in ThoughtSpot.
+     * Search variables Version: 26.4.0.cl or later Allows searching for variables in ThoughtSpot.
      * Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage
      * Formula Variables in the current organization scope. The API endpoint supports searching
      * variables by: * Variable identifier (ID or name) * Variable type * Name pattern
@@ -22583,7 +24373,7 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Search variables Version: 10.14.0.cl or later Allows searching for variables
+     * (asynchronously) Search variables Version: 26.4.0.cl or later Allows searching for variables
      * in ThoughtSpot. Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you
      * to manage Formula Variables in the current organization scope. The API endpoint supports
      * searching variables by: * Variable identifier (ID or name) * Variable type * Name pattern
@@ -22815,6 +24605,574 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
+     * Build call for sendAgentConversationMessage
+     *
+     * @param conversationIdentifier Unique identifier for the conversation (used to track context)
+     *     (required)
+     * @param sendAgentConversationMessageRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call sendAgentConversationMessageCall(
+            String conversationIdentifier,
+            SendAgentConversationMessageRequest sendAgentConversationMessageRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = sendAgentConversationMessageRequest;
+
+        // create path and map variables
+        String localVarPath =
+                "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send"
+                        .replace(
+                                "{" + "conversation_identifier" + "}",
+                                localVarApiClient.escapeString(conversationIdentifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call sendAgentConversationMessageValidateBeforeCall(
+            String conversationIdentifier,
+            SendAgentConversationMessageRequest sendAgentConversationMessageRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'conversationIdentifier' is set
+        if (conversationIdentifier == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'conversationIdentifier' when calling"
+                            + " sendAgentConversationMessage(Async)");
+        }
+
+        // verify the required parameter 'sendAgentConversationMessageRequest' is set
+        if (sendAgentConversationMessageRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'sendAgentConversationMessageRequest' when"
+                            + " calling sendAgentConversationMessage(Async)");
+        }
+
+        return sendAgentConversationMessageCall(
+                conversationIdentifier, sendAgentConversationMessageRequest, _callback);
+    }
+
+    /**
+     * Version: 26.5.0.cl or later Sends natural language messages to an existing Spotter agent
+     * conversation and returns the complete response synchronously. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the metadata object associated with the
+     * conversation. The user must have access to the conversation session referenced by
+     * &#x60;conversation_identifier&#x60;. A conversation must first be created using the
+     * &#x60;createAgentConversation&#x60; API. #### Usage guidelines The request must include: -
+     * &#x60;conversation_identifier&#x60;: the unique session ID returned by
+     * &#x60;createAgentConversation&#x60;, used for context continuity and message tracking -
+     * &#x60;messages&#x60;: an array of one or more text messages to send to the agent The API
+     * returns an array of response objects, each containing: - &#x60;type&#x60;: the kind of
+     * response — &#x60;text&#x60;, &#x60;answer&#x60;, or &#x60;error&#x60; - &#x60;message&#x60;:
+     * the main content of the response - &#x60;metadata&#x60;: additional information depending on
+     * the message type (e.g., answer metadata includes analytics and visualization details) ####
+     * Error responses | Code | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks permission on the referenced conversation. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint is Generally Available from version 26.5.0.cl. &gt; - This endpoint requires Spotter
+     * - please contact ThoughtSpot support to enable Spotter on your cluster. &gt; - For real-time
+     * streamed responses, use &#x60;sendAgentConversationMessageStreaming&#x60; instead.
+     *
+     * @param conversationIdentifier Unique identifier for the conversation (used to track context)
+     *     (required)
+     * @param sendAgentConversationMessageRequest (required)
+     * @return Object
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public Object sendAgentConversationMessage(
+            String conversationIdentifier,
+            SendAgentConversationMessageRequest sendAgentConversationMessageRequest)
+            throws ApiException {
+        ApiResponse<Object> localVarResp =
+                sendAgentConversationMessageWithHttpInfo(
+                        conversationIdentifier, sendAgentConversationMessageRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Version: 26.5.0.cl or later Sends natural language messages to an existing Spotter agent
+     * conversation and returns the complete response synchronously. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the metadata object associated with the
+     * conversation. The user must have access to the conversation session referenced by
+     * &#x60;conversation_identifier&#x60;. A conversation must first be created using the
+     * &#x60;createAgentConversation&#x60; API. #### Usage guidelines The request must include: -
+     * &#x60;conversation_identifier&#x60;: the unique session ID returned by
+     * &#x60;createAgentConversation&#x60;, used for context continuity and message tracking -
+     * &#x60;messages&#x60;: an array of one or more text messages to send to the agent The API
+     * returns an array of response objects, each containing: - &#x60;type&#x60;: the kind of
+     * response — &#x60;text&#x60;, &#x60;answer&#x60;, or &#x60;error&#x60; - &#x60;message&#x60;:
+     * the main content of the response - &#x60;metadata&#x60;: additional information depending on
+     * the message type (e.g., answer metadata includes analytics and visualization details) ####
+     * Error responses | Code | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks permission on the referenced conversation. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint is Generally Available from version 26.5.0.cl. &gt; - This endpoint requires Spotter
+     * - please contact ThoughtSpot support to enable Spotter on your cluster. &gt; - For real-time
+     * streamed responses, use &#x60;sendAgentConversationMessageStreaming&#x60; instead.
+     *
+     * @param conversationIdentifier Unique identifier for the conversation (used to track context)
+     *     (required)
+     * @param sendAgentConversationMessageRequest (required)
+     * @return ApiResponse&lt;Object&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<Object> sendAgentConversationMessageWithHttpInfo(
+            String conversationIdentifier,
+            SendAgentConversationMessageRequest sendAgentConversationMessageRequest)
+            throws ApiException {
+        okhttp3.Call localVarCall =
+                sendAgentConversationMessageValidateBeforeCall(
+                        conversationIdentifier, sendAgentConversationMessageRequest, null);
+        Type localVarReturnType = new TypeToken<Object>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Version: 26.5.0.cl or later Sends natural language messages to an existing
+     * Spotter agent conversation and returns the complete response synchronously. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the metadata object associated with the
+     * conversation. The user must have access to the conversation session referenced by
+     * &#x60;conversation_identifier&#x60;. A conversation must first be created using the
+     * &#x60;createAgentConversation&#x60; API. #### Usage guidelines The request must include: -
+     * &#x60;conversation_identifier&#x60;: the unique session ID returned by
+     * &#x60;createAgentConversation&#x60;, used for context continuity and message tracking -
+     * &#x60;messages&#x60;: an array of one or more text messages to send to the agent The API
+     * returns an array of response objects, each containing: - &#x60;type&#x60;: the kind of
+     * response — &#x60;text&#x60;, &#x60;answer&#x60;, or &#x60;error&#x60; - &#x60;message&#x60;:
+     * the main content of the response - &#x60;metadata&#x60;: additional information depending on
+     * the message type (e.g., answer metadata includes analytics and visualization details) ####
+     * Error responses | Code | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks permission on the referenced conversation. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint is Generally Available from version 26.5.0.cl. &gt; - This endpoint requires Spotter
+     * - please contact ThoughtSpot support to enable Spotter on your cluster. &gt; - For real-time
+     * streamed responses, use &#x60;sendAgentConversationMessageStreaming&#x60; instead.
+     *
+     * @param conversationIdentifier Unique identifier for the conversation (used to track context)
+     *     (required)
+     * @param sendAgentConversationMessageRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call sendAgentConversationMessageAsync(
+            String conversationIdentifier,
+            SendAgentConversationMessageRequest sendAgentConversationMessageRequest,
+            final ApiCallback<Object> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                sendAgentConversationMessageValidateBeforeCall(
+                        conversationIdentifier, sendAgentConversationMessageRequest, _callback);
+        Type localVarReturnType = new TypeToken<Object>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for sendAgentConversationMessageStreaming
+     *
+     * @param conversationIdentifier Unique identifier for the conversation (used to track context)
+     *     (required)
+     * @param sendAgentConversationMessageStreamingRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call sendAgentConversationMessageStreamingCall(
+            String conversationIdentifier,
+            SendAgentConversationMessageStreamingRequest
+                    sendAgentConversationMessageStreamingRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = sendAgentConversationMessageStreamingRequest;
+
+        // create path and map variables
+        String localVarPath =
+                "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send/stream"
+                        .replace(
+                                "{" + "conversation_identifier" + "}",
+                                localVarApiClient.escapeString(conversationIdentifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call sendAgentConversationMessageStreamingValidateBeforeCall(
+            String conversationIdentifier,
+            SendAgentConversationMessageStreamingRequest
+                    sendAgentConversationMessageStreamingRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'conversationIdentifier' is set
+        if (conversationIdentifier == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'conversationIdentifier' when calling"
+                            + " sendAgentConversationMessageStreaming(Async)");
+        }
+
+        // verify the required parameter 'sendAgentConversationMessageStreamingRequest' is set
+        if (sendAgentConversationMessageStreamingRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'sendAgentConversationMessageStreamingRequest'"
+                            + " when calling sendAgentConversationMessageStreaming(Async)");
+        }
+
+        return sendAgentConversationMessageStreamingCall(
+                conversationIdentifier, sendAgentConversationMessageStreamingRequest, _callback);
+    }
+
+    /**
+     * Version: 26.5.0.cl or later Sends one or more natural language messages to an existing
+     * Spotter agent conversation and returns the response as a real-time Server-Sent Events stream.
+     * Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the metadata object associated
+     * with the conversation. The user must have access to the conversation session referenced by
+     * &#x60;conversation_identifier&#x60;. A conversation must first be created using the
+     * &#x60;createAgentConversation&#x60; API. #### Usage guidelines The request must include: -
+     * &#x60;conversation_identifier&#x60;: the unique session ID returned by
+     * &#x60;createAgentConversation&#x60;, used for context continuity and message tracking -
+     * &#x60;messages&#x60;: an array of one or more text messages to send to the agent If the
+     * request is valid, the API returns a Server-Sent Events (SSE) stream. Each line has the form
+     * &#x60;data: [{\&quot;type\&quot;: \&quot;...\&quot;, ...}]&#x60; — a JSON array of event
+     * objects. Event types include: - &#x60;ack&#x60;: confirms receipt of the request
+     * (&#x60;node_id&#x60;) - &#x60;conv_title&#x60;: conversation title (&#x60;title&#x60;,
+     * &#x60;conv_id&#x60;) - &#x60;notification&#x60;: status updates on operations
+     * (&#x60;group_id&#x60;, &#x60;metadata&#x60;, &#x60;code&#x60; — e.g.
+     * &#x60;TOOL_CALL_NOTIFICATION&#x60;, &#x60;nls_start&#x60;,
+     * &#x60;FINAL_RESPONSE_NOTIFICATION&#x60;) - &#x60;text-chunk&#x60;: incremental content chunks
+     * (&#x60;id&#x60;, &#x60;group_id&#x60;, &#x60;metadata&#x60; with &#x60;format&#x60; and
+     * &#x60;type&#x60; such as &#x60;thinking&#x60; or &#x60;text&#x60;, &#x60;content&#x60;) -
+     * &#x60;text&#x60;: full text block with same structure as &#x60;text-chunk&#x60; -
+     * &#x60;answer&#x60;: structured answer with metadata (&#x60;id&#x60;, &#x60;group_id&#x60;,
+     * &#x60;metadata&#x60; with &#x60;sage_query&#x60;, &#x60;session_id&#x60;, &#x60;title&#x60;,
+     * etc., &#x60;title&#x60;) - &#x60;error&#x60;: if a failure occurs #### Error responses | Code
+     * | Description | | ---- |
+     * --------------------------------------------------------------------------------------------------------------------------------
+     * | | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks permission on the referenced conversation. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint is Generally Available from version 26.5.0.cl. &gt; - This endpoint requires Spotter
+     * - please contact ThoughtSpot support to enable Spotter on your cluster. &gt; - The streaming
+     * protocol uses Server-Sent Events (SSE). &gt; - For the complete response in a single payload,
+     * use &#x60;sendAgentConversationMessage&#x60; instead.
+     *
+     * @param conversationIdentifier Unique identifier for the conversation (used to track context)
+     *     (required)
+     * @param sendAgentConversationMessageStreamingRequest (required)
+     * @return SendAgentMessageResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public SendAgentMessageResponse sendAgentConversationMessageStreaming(
+            String conversationIdentifier,
+            SendAgentConversationMessageStreamingRequest
+                    sendAgentConversationMessageStreamingRequest)
+            throws ApiException {
+        ApiResponse<SendAgentMessageResponse> localVarResp =
+                sendAgentConversationMessageStreamingWithHttpInfo(
+                        conversationIdentifier, sendAgentConversationMessageStreamingRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Version: 26.5.0.cl or later Sends one or more natural language messages to an existing
+     * Spotter agent conversation and returns the response as a real-time Server-Sent Events stream.
+     * Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the metadata object associated
+     * with the conversation. The user must have access to the conversation session referenced by
+     * &#x60;conversation_identifier&#x60;. A conversation must first be created using the
+     * &#x60;createAgentConversation&#x60; API. #### Usage guidelines The request must include: -
+     * &#x60;conversation_identifier&#x60;: the unique session ID returned by
+     * &#x60;createAgentConversation&#x60;, used for context continuity and message tracking -
+     * &#x60;messages&#x60;: an array of one or more text messages to send to the agent If the
+     * request is valid, the API returns a Server-Sent Events (SSE) stream. Each line has the form
+     * &#x60;data: [{\&quot;type\&quot;: \&quot;...\&quot;, ...}]&#x60; — a JSON array of event
+     * objects. Event types include: - &#x60;ack&#x60;: confirms receipt of the request
+     * (&#x60;node_id&#x60;) - &#x60;conv_title&#x60;: conversation title (&#x60;title&#x60;,
+     * &#x60;conv_id&#x60;) - &#x60;notification&#x60;: status updates on operations
+     * (&#x60;group_id&#x60;, &#x60;metadata&#x60;, &#x60;code&#x60; — e.g.
+     * &#x60;TOOL_CALL_NOTIFICATION&#x60;, &#x60;nls_start&#x60;,
+     * &#x60;FINAL_RESPONSE_NOTIFICATION&#x60;) - &#x60;text-chunk&#x60;: incremental content chunks
+     * (&#x60;id&#x60;, &#x60;group_id&#x60;, &#x60;metadata&#x60; with &#x60;format&#x60; and
+     * &#x60;type&#x60; such as &#x60;thinking&#x60; or &#x60;text&#x60;, &#x60;content&#x60;) -
+     * &#x60;text&#x60;: full text block with same structure as &#x60;text-chunk&#x60; -
+     * &#x60;answer&#x60;: structured answer with metadata (&#x60;id&#x60;, &#x60;group_id&#x60;,
+     * &#x60;metadata&#x60; with &#x60;sage_query&#x60;, &#x60;session_id&#x60;, &#x60;title&#x60;,
+     * etc., &#x60;title&#x60;) - &#x60;error&#x60;: if a failure occurs #### Error responses | Code
+     * | Description | | ---- |
+     * --------------------------------------------------------------------------------------------------------------------------------
+     * | | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks permission on the referenced conversation. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint is Generally Available from version 26.5.0.cl. &gt; - This endpoint requires Spotter
+     * - please contact ThoughtSpot support to enable Spotter on your cluster. &gt; - The streaming
+     * protocol uses Server-Sent Events (SSE). &gt; - For the complete response in a single payload,
+     * use &#x60;sendAgentConversationMessage&#x60; instead.
+     *
+     * @param conversationIdentifier Unique identifier for the conversation (used to track context)
+     *     (required)
+     * @param sendAgentConversationMessageStreamingRequest (required)
+     * @return ApiResponse&lt;SendAgentMessageResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<SendAgentMessageResponse> sendAgentConversationMessageStreamingWithHttpInfo(
+            String conversationIdentifier,
+            SendAgentConversationMessageStreamingRequest
+                    sendAgentConversationMessageStreamingRequest)
+            throws ApiException {
+        okhttp3.Call localVarCall =
+                sendAgentConversationMessageStreamingValidateBeforeCall(
+                        conversationIdentifier, sendAgentConversationMessageStreamingRequest, null);
+        Type localVarReturnType = new TypeToken<SendAgentMessageResponse>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Version: 26.5.0.cl or later Sends one or more natural language messages to
+     * an existing Spotter agent conversation and returns the response as a real-time Server-Sent
+     * Events stream. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the metadata
+     * object associated with the conversation. The user must have access to the conversation
+     * session referenced by &#x60;conversation_identifier&#x60;. A conversation must first be
+     * created using the &#x60;createAgentConversation&#x60; API. #### Usage guidelines The request
+     * must include: - &#x60;conversation_identifier&#x60;: the unique session ID returned by
+     * &#x60;createAgentConversation&#x60;, used for context continuity and message tracking -
+     * &#x60;messages&#x60;: an array of one or more text messages to send to the agent If the
+     * request is valid, the API returns a Server-Sent Events (SSE) stream. Each line has the form
+     * &#x60;data: [{\&quot;type\&quot;: \&quot;...\&quot;, ...}]&#x60; — a JSON array of event
+     * objects. Event types include: - &#x60;ack&#x60;: confirms receipt of the request
+     * (&#x60;node_id&#x60;) - &#x60;conv_title&#x60;: conversation title (&#x60;title&#x60;,
+     * &#x60;conv_id&#x60;) - &#x60;notification&#x60;: status updates on operations
+     * (&#x60;group_id&#x60;, &#x60;metadata&#x60;, &#x60;code&#x60; — e.g.
+     * &#x60;TOOL_CALL_NOTIFICATION&#x60;, &#x60;nls_start&#x60;,
+     * &#x60;FINAL_RESPONSE_NOTIFICATION&#x60;) - &#x60;text-chunk&#x60;: incremental content chunks
+     * (&#x60;id&#x60;, &#x60;group_id&#x60;, &#x60;metadata&#x60; with &#x60;format&#x60; and
+     * &#x60;type&#x60; such as &#x60;thinking&#x60; or &#x60;text&#x60;, &#x60;content&#x60;) -
+     * &#x60;text&#x60;: full text block with same structure as &#x60;text-chunk&#x60; -
+     * &#x60;answer&#x60;: structured answer with metadata (&#x60;id&#x60;, &#x60;group_id&#x60;,
+     * &#x60;metadata&#x60; with &#x60;sage_query&#x60;, &#x60;session_id&#x60;, &#x60;title&#x60;,
+     * etc., &#x60;title&#x60;) - &#x60;error&#x60;: if a failure occurs #### Error responses | Code
+     * | Description | | ---- |
+     * --------------------------------------------------------------------------------------------------------------------------------
+     * | | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks permission on the referenced conversation. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint is Generally Available from version 26.5.0.cl. &gt; - This endpoint requires Spotter
+     * - please contact ThoughtSpot support to enable Spotter on your cluster. &gt; - The streaming
+     * protocol uses Server-Sent Events (SSE). &gt; - For the complete response in a single payload,
+     * use &#x60;sendAgentConversationMessage&#x60; instead.
+     *
+     * @param conversationIdentifier Unique identifier for the conversation (used to track context)
+     *     (required)
+     * @param sendAgentConversationMessageStreamingRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call sendAgentConversationMessageStreamingAsync(
+            String conversationIdentifier,
+            SendAgentConversationMessageStreamingRequest
+                    sendAgentConversationMessageStreamingRequest,
+            final ApiCallback<SendAgentMessageResponse> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                sendAgentConversationMessageStreamingValidateBeforeCall(
+                        conversationIdentifier,
+                        sendAgentConversationMessageStreamingRequest,
+                        _callback);
+        Type localVarReturnType = new TypeToken<SendAgentMessageResponse>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for sendAgentMessage
      *
      * @param conversationIdentifier Unique identifier for the conversation (used to track context)
@@ -22830,9 +25188,14 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call sendAgentMessageCall(
             String conversationIdentifier,
             SendAgentMessageRequest sendAgentMessageRequest,
@@ -22894,6 +25257,7 @@ public class ThoughtSpotRestApi {
                 _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call sendAgentMessageValidateBeforeCall(
             String conversationIdentifier,
@@ -22918,19 +25282,28 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.15.0.cl or later This API allows users to initiate or continue an agent (Spotter)
-     * conversation by submitting one or more natural language messages. To use this API, the user
-     * must have access to the relevant conversational session (via conversation_identifier) and
-     * submit at least one message. #### Usage guidelines To initiate or continue a conversation,
-     * the request must include: - &#x60;conversation_identifier&#x60;: a unique session ID for
-     * continuity and message tracking - &#x60;messages&#x60;: an array of one or more text
-     * messages, each with a value and type The API returns a array of object with a type, message,
-     * and metadata. - &#x60;type&#x60;: Type of the message — text, answer, or error. -
-     * &#x60;message&#x60;: Main content of the response. - &#x60;metadata&#x60;: Additional info
-     * depending on the message type. &gt; ###### Note: &gt; * This endpoint is currently in Beta.
-     * Breaking changes may be introduced before the endpoint is made Generally Available. &gt; *
-     * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your
-     * cluster.
+     * Version: 26.2.0.cl or later **Deprecated** — Use &#x60;sendAgentConversationMessage&#x60;
+     * instead. Send natural language messages to an existing Spotter agent conversation and returns
+     * the complete response synchronously. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and
+     * access to the metadata object associated with the conversation. The user must have access to
+     * the conversation session referenced by &#x60;conversation_identifier&#x60;. A conversation
+     * must first be created using the &#x60;createAgentConversation&#x60; API. #### Usage
+     * guidelines The request must include: - &#x60;conversation_identifier&#x60;: the unique
+     * session ID returned by &#x60;createAgentConversation&#x60;, used for context continuity and
+     * message tracking - &#x60;messages&#x60;: an array of one or more text messages to send to the
+     * agent The API returns an array of response objects, each containing: - &#x60;type&#x60;: the
+     * kind of response — &#x60;text&#x60;, &#x60;answer&#x60;, or &#x60;error&#x60; -
+     * &#x60;message&#x60;: the main content of the response - &#x60;metadata&#x60;: additional
+     * information depending on the message type (e.g., answer metadata includes analytics and
+     * visualization details) #### Error responses | Code | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks permission on the referenced conversation. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint is deprecated. Use &#x60;sendAgentConversationMessage&#x60; for new integrations.
+     * &gt; - This endpoint is currently in Beta. Breaking changes may be introduced before the
+     * endpoint is made Generally Available. &gt; - This endpoint requires Spotter - please contact
+     * ThoughtSpot support to enable Spotter on your cluster.
      *
      * @param conversationIdentifier Unique identifier for the conversation (used to track context)
      *     (required)
@@ -22945,9 +25318,14 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public Object sendAgentMessage(
             String conversationIdentifier, SendAgentMessageRequest sendAgentMessageRequest)
             throws ApiException {
@@ -22957,19 +25335,28 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.15.0.cl or later This API allows users to initiate or continue an agent (Spotter)
-     * conversation by submitting one or more natural language messages. To use this API, the user
-     * must have access to the relevant conversational session (via conversation_identifier) and
-     * submit at least one message. #### Usage guidelines To initiate or continue a conversation,
-     * the request must include: - &#x60;conversation_identifier&#x60;: a unique session ID for
-     * continuity and message tracking - &#x60;messages&#x60;: an array of one or more text
-     * messages, each with a value and type The API returns a array of object with a type, message,
-     * and metadata. - &#x60;type&#x60;: Type of the message — text, answer, or error. -
-     * &#x60;message&#x60;: Main content of the response. - &#x60;metadata&#x60;: Additional info
-     * depending on the message type. &gt; ###### Note: &gt; * This endpoint is currently in Beta.
-     * Breaking changes may be introduced before the endpoint is made Generally Available. &gt; *
-     * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your
-     * cluster.
+     * Version: 26.2.0.cl or later **Deprecated** — Use &#x60;sendAgentConversationMessage&#x60;
+     * instead. Send natural language messages to an existing Spotter agent conversation and returns
+     * the complete response synchronously. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and
+     * access to the metadata object associated with the conversation. The user must have access to
+     * the conversation session referenced by &#x60;conversation_identifier&#x60;. A conversation
+     * must first be created using the &#x60;createAgentConversation&#x60; API. #### Usage
+     * guidelines The request must include: - &#x60;conversation_identifier&#x60;: the unique
+     * session ID returned by &#x60;createAgentConversation&#x60;, used for context continuity and
+     * message tracking - &#x60;messages&#x60;: an array of one or more text messages to send to the
+     * agent The API returns an array of response objects, each containing: - &#x60;type&#x60;: the
+     * kind of response — &#x60;text&#x60;, &#x60;answer&#x60;, or &#x60;error&#x60; -
+     * &#x60;message&#x60;: the main content of the response - &#x60;metadata&#x60;: additional
+     * information depending on the message type (e.g., answer metadata includes analytics and
+     * visualization details) #### Error responses | Code | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks permission on the referenced conversation. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint is deprecated. Use &#x60;sendAgentConversationMessage&#x60; for new integrations.
+     * &gt; - This endpoint is currently in Beta. Breaking changes may be introduced before the
+     * endpoint is made Generally Available. &gt; - This endpoint requires Spotter - please contact
+     * ThoughtSpot support to enable Spotter on your cluster.
      *
      * @param conversationIdentifier Unique identifier for the conversation (used to track context)
      *     (required)
@@ -22984,9 +25371,14 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public ApiResponse<Object> sendAgentMessageWithHttpInfo(
             String conversationIdentifier, SendAgentMessageRequest sendAgentMessageRequest)
             throws ApiException {
@@ -22998,19 +25390,29 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 10.15.0.cl or later This API allows users to initiate or continue
-     * an agent (Spotter) conversation by submitting one or more natural language messages. To use
-     * this API, the user must have access to the relevant conversational session (via
-     * conversation_identifier) and submit at least one message. #### Usage guidelines To initiate
-     * or continue a conversation, the request must include: - &#x60;conversation_identifier&#x60;:
-     * a unique session ID for continuity and message tracking - &#x60;messages&#x60;: an array of
-     * one or more text messages, each with a value and type The API returns a array of object with
-     * a type, message, and metadata. - &#x60;type&#x60;: Type of the message — text, answer, or
-     * error. - &#x60;message&#x60;: Main content of the response. - &#x60;metadata&#x60;:
-     * Additional info depending on the message type. &gt; ###### Note: &gt; * This endpoint is
-     * currently in Beta. Breaking changes may be introduced before the endpoint is made Generally
-     * Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to
-     * enable Spotter on your cluster.
+     * (asynchronously) Version: 26.2.0.cl or later **Deprecated** — Use
+     * &#x60;sendAgentConversationMessage&#x60; instead. Send natural language messages to an
+     * existing Spotter agent conversation and returns the complete response synchronously. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the metadata object associated with the
+     * conversation. The user must have access to the conversation session referenced by
+     * &#x60;conversation_identifier&#x60;. A conversation must first be created using the
+     * &#x60;createAgentConversation&#x60; API. #### Usage guidelines The request must include: -
+     * &#x60;conversation_identifier&#x60;: the unique session ID returned by
+     * &#x60;createAgentConversation&#x60;, used for context continuity and message tracking -
+     * &#x60;messages&#x60;: an array of one or more text messages to send to the agent The API
+     * returns an array of response objects, each containing: - &#x60;type&#x60;: the kind of
+     * response — &#x60;text&#x60;, &#x60;answer&#x60;, or &#x60;error&#x60; - &#x60;message&#x60;:
+     * the main content of the response - &#x60;metadata&#x60;: additional information depending on
+     * the message type (e.g., answer metadata includes analytics and visualization details) ####
+     * Error responses | Code | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks permission on the referenced conversation. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint is deprecated. Use &#x60;sendAgentConversationMessage&#x60; for new integrations.
+     * &gt; - This endpoint is currently in Beta. Breaking changes may be introduced before the
+     * endpoint is made Generally Available. &gt; - This endpoint requires Spotter - please contact
+     * ThoughtSpot support to enable Spotter on your cluster.
      *
      * @param conversationIdentifier Unique identifier for the conversation (used to track context)
      *     (required)
@@ -23026,9 +25428,14 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call sendAgentMessageAsync(
             String conversationIdentifier,
             SendAgentMessageRequest sendAgentMessageRequest,
@@ -23056,9 +25463,14 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call sendAgentMessageStreamingCall(
             SendAgentMessageStreamingRequest sendAgentMessageStreamingRequest,
             final ApiCallback _callback)
@@ -23115,6 +25527,7 @@ public class ThoughtSpotRestApi {
                 _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call sendAgentMessageStreamingValidateBeforeCall(
             SendAgentMessageStreamingRequest sendAgentMessageStreamingRequest,
@@ -23131,25 +25544,40 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.13.0.cl or later This API allows users to initiate or continue an agent (Spotter)
-     * conversation by submitting one or more natural language messages. To use this API, the user
-     * must have access to the relevant conversational session (via conversation_identifier) and
-     * submit at least one message. #### Usage guidelines To initiate or continue a conversation,
-     * the request must include: - &#x60;conversation_identifier&#x60;: a unique session ID for
-     * continuity and message tracking - &#x60;messages&#x60;: an array of one or more text
-     * messages, each with a value and type Additionally, user can specify what tool can be included
-     * &#x60;conversation_settings&#x60; parameter, which supports: -
-     * &#x60;enable_contextual_change_analysis&#x60; (default: false) -
-     * &#x60;enable_natural_language_answer_generation&#x60; (default: true) -
-     * &#x60;enable_reasoning&#x60; (default: false) If the request is valid, the API returns a
-     * stream of messages in real time, including: - &#x60;ack&#x60;: confirms receipt of the
-     * request - &#x60;text / text-chunk&#x60;: content chunks, optionally formatted (e.g.,
-     * markdown) - &#x60;answer&#x60;: the final structured response with metadata and analytics -
-     * &#x60;error&#x60;: if a failure occurs - &#x60;notification&#x60;: notification messages for
-     * operation being performed &gt; ###### Note: &gt; * This endpoint is currently in Beta.
-     * Breaking changes may be introduced before the endpoint is made Generally Available. &gt; *
-     * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your
-     * cluster. &gt; * The streaming protocol uses Server-Sent Events (SSE)
+     * Version: 26.2.0.cl or later **Deprecated** — Use
+     * &#x60;sendAgentConversationMessageStreaming&#x60; instead. Sends one or more natural language
+     * messages to an existing Spotter agent conversation and returns the response as a real-time
+     * Server-Sent Events stream. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the
+     * metadata object associated with the conversation. The user must have access to the
+     * conversation session referenced by &#x60;conversation_identifier&#x60;. A conversation must
+     * first be created using the &#x60;createAgentConversation&#x60; API. #### Usage guidelines The
+     * request must include: - &#x60;conversation_identifier&#x60;: the unique session ID returned
+     * by &#x60;createAgentConversation&#x60;, used for context continuity and message tracking -
+     * &#x60;messages&#x60;: an array of one or more text messages to send to the agent If the
+     * request is valid, the API returns a Server-Sent Events (SSE) stream. Each line has the form
+     * &#x60;data: [{\&quot;type\&quot;: \&quot;...\&quot;, ...}]&#x60; — a JSON array of event
+     * objects. Event types include: - &#x60;ack&#x60;: confirms receipt of the request
+     * (&#x60;node_id&#x60;) - &#x60;conv_title&#x60;: conversation title (&#x60;title&#x60;,
+     * &#x60;conv_id&#x60;) - &#x60;notification&#x60;: status updates on operations
+     * (&#x60;group_id&#x60;, &#x60;metadata&#x60;, &#x60;code&#x60; — e.g.
+     * &#x60;TOOL_CALL_NOTIFICATION&#x60;, &#x60;nls_start&#x60;,
+     * &#x60;FINAL_RESPONSE_NOTIFICATION&#x60;) - &#x60;text-chunk&#x60;: incremental content chunks
+     * (&#x60;id&#x60;, &#x60;group_id&#x60;, &#x60;metadata&#x60; with &#x60;format&#x60; and
+     * &#x60;type&#x60; such as &#x60;thinking&#x60; or &#x60;text&#x60;, &#x60;content&#x60;) -
+     * &#x60;text&#x60;: full text block with same structure as &#x60;text-chunk&#x60; -
+     * &#x60;answer&#x60;: structured answer with metadata (&#x60;id&#x60;, &#x60;group_id&#x60;,
+     * &#x60;metadata&#x60; with &#x60;sage_query&#x60;, &#x60;session_id&#x60;, &#x60;title&#x60;,
+     * etc., &#x60;title&#x60;) - &#x60;error&#x60;: if a failure occurs #### Error responses | Code
+     * | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks permission on the referenced conversation. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint is deprecated. Use &#x60;sendAgentConversationMessageStreaming&#x60; for new
+     * integrations. &gt; - This endpoint is currently in Beta. Breaking changes may be introduced
+     * before the endpoint is made Generally Available. &gt; - This endpoint requires Spotter -
+     * please contact ThoughtSpot support to enable Spotter on your cluster. &gt; - The streaming
+     * protocol uses Server-Sent Events (SSE).
      *
      * @param sendAgentMessageStreamingRequest (required)
      * @return SendAgentMessageResponse
@@ -23162,9 +25590,14 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public SendAgentMessageResponse sendAgentMessageStreaming(
             SendAgentMessageStreamingRequest sendAgentMessageStreamingRequest) throws ApiException {
         ApiResponse<SendAgentMessageResponse> localVarResp =
@@ -23173,25 +25606,40 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.13.0.cl or later This API allows users to initiate or continue an agent (Spotter)
-     * conversation by submitting one or more natural language messages. To use this API, the user
-     * must have access to the relevant conversational session (via conversation_identifier) and
-     * submit at least one message. #### Usage guidelines To initiate or continue a conversation,
-     * the request must include: - &#x60;conversation_identifier&#x60;: a unique session ID for
-     * continuity and message tracking - &#x60;messages&#x60;: an array of one or more text
-     * messages, each with a value and type Additionally, user can specify what tool can be included
-     * &#x60;conversation_settings&#x60; parameter, which supports: -
-     * &#x60;enable_contextual_change_analysis&#x60; (default: false) -
-     * &#x60;enable_natural_language_answer_generation&#x60; (default: true) -
-     * &#x60;enable_reasoning&#x60; (default: false) If the request is valid, the API returns a
-     * stream of messages in real time, including: - &#x60;ack&#x60;: confirms receipt of the
-     * request - &#x60;text / text-chunk&#x60;: content chunks, optionally formatted (e.g.,
-     * markdown) - &#x60;answer&#x60;: the final structured response with metadata and analytics -
-     * &#x60;error&#x60;: if a failure occurs - &#x60;notification&#x60;: notification messages for
-     * operation being performed &gt; ###### Note: &gt; * This endpoint is currently in Beta.
-     * Breaking changes may be introduced before the endpoint is made Generally Available. &gt; *
-     * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your
-     * cluster. &gt; * The streaming protocol uses Server-Sent Events (SSE)
+     * Version: 26.2.0.cl or later **Deprecated** — Use
+     * &#x60;sendAgentConversationMessageStreaming&#x60; instead. Sends one or more natural language
+     * messages to an existing Spotter agent conversation and returns the response as a real-time
+     * Server-Sent Events stream. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the
+     * metadata object associated with the conversation. The user must have access to the
+     * conversation session referenced by &#x60;conversation_identifier&#x60;. A conversation must
+     * first be created using the &#x60;createAgentConversation&#x60; API. #### Usage guidelines The
+     * request must include: - &#x60;conversation_identifier&#x60;: the unique session ID returned
+     * by &#x60;createAgentConversation&#x60;, used for context continuity and message tracking -
+     * &#x60;messages&#x60;: an array of one or more text messages to send to the agent If the
+     * request is valid, the API returns a Server-Sent Events (SSE) stream. Each line has the form
+     * &#x60;data: [{\&quot;type\&quot;: \&quot;...\&quot;, ...}]&#x60; — a JSON array of event
+     * objects. Event types include: - &#x60;ack&#x60;: confirms receipt of the request
+     * (&#x60;node_id&#x60;) - &#x60;conv_title&#x60;: conversation title (&#x60;title&#x60;,
+     * &#x60;conv_id&#x60;) - &#x60;notification&#x60;: status updates on operations
+     * (&#x60;group_id&#x60;, &#x60;metadata&#x60;, &#x60;code&#x60; — e.g.
+     * &#x60;TOOL_CALL_NOTIFICATION&#x60;, &#x60;nls_start&#x60;,
+     * &#x60;FINAL_RESPONSE_NOTIFICATION&#x60;) - &#x60;text-chunk&#x60;: incremental content chunks
+     * (&#x60;id&#x60;, &#x60;group_id&#x60;, &#x60;metadata&#x60; with &#x60;format&#x60; and
+     * &#x60;type&#x60; such as &#x60;thinking&#x60; or &#x60;text&#x60;, &#x60;content&#x60;) -
+     * &#x60;text&#x60;: full text block with same structure as &#x60;text-chunk&#x60; -
+     * &#x60;answer&#x60;: structured answer with metadata (&#x60;id&#x60;, &#x60;group_id&#x60;,
+     * &#x60;metadata&#x60; with &#x60;sage_query&#x60;, &#x60;session_id&#x60;, &#x60;title&#x60;,
+     * etc., &#x60;title&#x60;) - &#x60;error&#x60;: if a failure occurs #### Error responses | Code
+     * | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks permission on the referenced conversation. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint is deprecated. Use &#x60;sendAgentConversationMessageStreaming&#x60; for new
+     * integrations. &gt; - This endpoint is currently in Beta. Breaking changes may be introduced
+     * before the endpoint is made Generally Available. &gt; - This endpoint requires Spotter -
+     * please contact ThoughtSpot support to enable Spotter on your cluster. &gt; - The streaming
+     * protocol uses Server-Sent Events (SSE).
      *
      * @param sendAgentMessageStreamingRequest (required)
      * @return ApiResponse&lt;SendAgentMessageResponse&gt;
@@ -23204,9 +25652,14 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public ApiResponse<SendAgentMessageResponse> sendAgentMessageStreamingWithHttpInfo(
             SendAgentMessageStreamingRequest sendAgentMessageStreamingRequest) throws ApiException {
         okhttp3.Call localVarCall =
@@ -23216,25 +25669,40 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 10.13.0.cl or later This API allows users to initiate or continue
-     * an agent (Spotter) conversation by submitting one or more natural language messages. To use
-     * this API, the user must have access to the relevant conversational session (via
-     * conversation_identifier) and submit at least one message. #### Usage guidelines To initiate
-     * or continue a conversation, the request must include: - &#x60;conversation_identifier&#x60;:
-     * a unique session ID for continuity and message tracking - &#x60;messages&#x60;: an array of
-     * one or more text messages, each with a value and type Additionally, user can specify what
-     * tool can be included &#x60;conversation_settings&#x60; parameter, which supports: -
-     * &#x60;enable_contextual_change_analysis&#x60; (default: false) -
-     * &#x60;enable_natural_language_answer_generation&#x60; (default: true) -
-     * &#x60;enable_reasoning&#x60; (default: false) If the request is valid, the API returns a
-     * stream of messages in real time, including: - &#x60;ack&#x60;: confirms receipt of the
-     * request - &#x60;text / text-chunk&#x60;: content chunks, optionally formatted (e.g.,
-     * markdown) - &#x60;answer&#x60;: the final structured response with metadata and analytics -
-     * &#x60;error&#x60;: if a failure occurs - &#x60;notification&#x60;: notification messages for
-     * operation being performed &gt; ###### Note: &gt; * This endpoint is currently in Beta.
-     * Breaking changes may be introduced before the endpoint is made Generally Available. &gt; *
-     * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your
-     * cluster. &gt; * The streaming protocol uses Server-Sent Events (SSE)
+     * (asynchronously) Version: 26.2.0.cl or later **Deprecated** — Use
+     * &#x60;sendAgentConversationMessageStreaming&#x60; instead. Sends one or more natural language
+     * messages to an existing Spotter agent conversation and returns the response as a real-time
+     * Server-Sent Events stream. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the
+     * metadata object associated with the conversation. The user must have access to the
+     * conversation session referenced by &#x60;conversation_identifier&#x60;. A conversation must
+     * first be created using the &#x60;createAgentConversation&#x60; API. #### Usage guidelines The
+     * request must include: - &#x60;conversation_identifier&#x60;: the unique session ID returned
+     * by &#x60;createAgentConversation&#x60;, used for context continuity and message tracking -
+     * &#x60;messages&#x60;: an array of one or more text messages to send to the agent If the
+     * request is valid, the API returns a Server-Sent Events (SSE) stream. Each line has the form
+     * &#x60;data: [{\&quot;type\&quot;: \&quot;...\&quot;, ...}]&#x60; — a JSON array of event
+     * objects. Event types include: - &#x60;ack&#x60;: confirms receipt of the request
+     * (&#x60;node_id&#x60;) - &#x60;conv_title&#x60;: conversation title (&#x60;title&#x60;,
+     * &#x60;conv_id&#x60;) - &#x60;notification&#x60;: status updates on operations
+     * (&#x60;group_id&#x60;, &#x60;metadata&#x60;, &#x60;code&#x60; — e.g.
+     * &#x60;TOOL_CALL_NOTIFICATION&#x60;, &#x60;nls_start&#x60;,
+     * &#x60;FINAL_RESPONSE_NOTIFICATION&#x60;) - &#x60;text-chunk&#x60;: incremental content chunks
+     * (&#x60;id&#x60;, &#x60;group_id&#x60;, &#x60;metadata&#x60; with &#x60;format&#x60; and
+     * &#x60;type&#x60; such as &#x60;thinking&#x60; or &#x60;text&#x60;, &#x60;content&#x60;) -
+     * &#x60;text&#x60;: full text block with same structure as &#x60;text-chunk&#x60; -
+     * &#x60;answer&#x60;: structured answer with metadata (&#x60;id&#x60;, &#x60;group_id&#x60;,
+     * &#x60;metadata&#x60; with &#x60;sage_query&#x60;, &#x60;session_id&#x60;, &#x60;title&#x60;,
+     * etc., &#x60;title&#x60;) - &#x60;error&#x60;: if a failure occurs #### Error responses | Code
+     * | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks permission on the referenced conversation. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint is deprecated. Use &#x60;sendAgentConversationMessageStreaming&#x60; for new
+     * integrations. &gt; - This endpoint is currently in Beta. Breaking changes may be introduced
+     * before the endpoint is made Generally Available. &gt; - This endpoint requires Spotter -
+     * please contact ThoughtSpot support to enable Spotter on your cluster. &gt; - The streaming
+     * protocol uses Server-Sent Events (SSE).
      *
      * @param sendAgentMessageStreamingRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -23248,9 +25716,14 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call sendAgentMessageStreamingAsync(
             SendAgentMessageStreamingRequest sendAgentMessageStreamingRequest,
             final ApiCallback<SendAgentMessageResponse> _callback)
@@ -23278,6 +25751,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -23366,16 +25841,28 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.4.0.cl or later Allows sending a follow-up message to an ongoing conversation
-     * within the context of the metadata model. Requires at least view access to the metadata
-     * object specified in the request. #### Usage guidelines The API requires you to specify the
-     * &#x60;conversation_identifier&#x60; in the request path, and a
-     * &#x60;metadata_identifier&#x60; and &#x60;message&#x60; string in the request body. If the
-     * API request is successful, ThoughtSpot returns the session ID, tokens used in the
-     * conversation, and visualization type. &gt; ###### Note: &gt; * This endpoint is currently in
-     * Beta. Breaking changes may be introduced before the endpoint is made Generally Available.
-     * &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter
-     * on your cluster.
+     * Version: 10.4.0.cl or later Sends a follow-up message to an existing conversation within the
+     * context of a data model. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view
+     * access to the metadata object specified in the request. A conversation must first be created
+     * using the &#x60;createConversation&#x60; API. #### Usage guidelines The request must include:
+     * - &#x60;conversation_identifier&#x60;: the unique session ID returned by
+     * &#x60;createConversation&#x60; - &#x60;metadata_identifier&#x60;: the unique ID of the data
+     * source used for the conversation - &#x60;message&#x60;: a natural language string with the
+     * follow-up question If the request is successful, the API returns an array of response
+     * messages, each containing: - &#x60;session_identifier&#x60;: the unique ID of the generated
+     * response - &#x60;generation_number&#x60;: the generation number of the response -
+     * &#x60;message_type&#x60;: the type of the response (e.g., &#x60;TSAnswer&#x60;) -
+     * &#x60;visualization_type&#x60;: the generated visualization type (&#x60;Chart&#x60;,
+     * &#x60;Table&#x60;, or &#x60;Undefined&#x60;) - &#x60;tokens&#x60; /
+     * &#x60;display_tokens&#x60;: the search tokens and user-friendly display tokens for the
+     * response #### Error responses | Code | Description |
+     * |------|-----------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view permission on the specified metadata object. | &gt; ###### Note: &gt; * This
+     * endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made
+     * Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot
+     * support to enable Spotter on your cluster.
      *
      * @param conversationIdentifier Unique identifier of the conversation. (required)
      * @param sendMessageRequest (required)
@@ -23389,6 +25876,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -23401,16 +25890,28 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.4.0.cl or later Allows sending a follow-up message to an ongoing conversation
-     * within the context of the metadata model. Requires at least view access to the metadata
-     * object specified in the request. #### Usage guidelines The API requires you to specify the
-     * &#x60;conversation_identifier&#x60; in the request path, and a
-     * &#x60;metadata_identifier&#x60; and &#x60;message&#x60; string in the request body. If the
-     * API request is successful, ThoughtSpot returns the session ID, tokens used in the
-     * conversation, and visualization type. &gt; ###### Note: &gt; * This endpoint is currently in
-     * Beta. Breaking changes may be introduced before the endpoint is made Generally Available.
-     * &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter
-     * on your cluster.
+     * Version: 10.4.0.cl or later Sends a follow-up message to an existing conversation within the
+     * context of a data model. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view
+     * access to the metadata object specified in the request. A conversation must first be created
+     * using the &#x60;createConversation&#x60; API. #### Usage guidelines The request must include:
+     * - &#x60;conversation_identifier&#x60;: the unique session ID returned by
+     * &#x60;createConversation&#x60; - &#x60;metadata_identifier&#x60;: the unique ID of the data
+     * source used for the conversation - &#x60;message&#x60;: a natural language string with the
+     * follow-up question If the request is successful, the API returns an array of response
+     * messages, each containing: - &#x60;session_identifier&#x60;: the unique ID of the generated
+     * response - &#x60;generation_number&#x60;: the generation number of the response -
+     * &#x60;message_type&#x60;: the type of the response (e.g., &#x60;TSAnswer&#x60;) -
+     * &#x60;visualization_type&#x60;: the generated visualization type (&#x60;Chart&#x60;,
+     * &#x60;Table&#x60;, or &#x60;Undefined&#x60;) - &#x60;tokens&#x60; /
+     * &#x60;display_tokens&#x60;: the search tokens and user-friendly display tokens for the
+     * response #### Error responses | Code | Description |
+     * |------|-----------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view permission on the specified metadata object. | &gt; ###### Note: &gt; * This
+     * endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made
+     * Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot
+     * support to enable Spotter on your cluster.
      *
      * @param conversationIdentifier Unique identifier of the conversation. (required)
      * @param sendMessageRequest (required)
@@ -23424,6 +25925,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -23437,16 +25940,28 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 10.4.0.cl or later Allows sending a follow-up message to an ongoing
-     * conversation within the context of the metadata model. Requires at least view access to the
-     * metadata object specified in the request. #### Usage guidelines The API requires you to
-     * specify the &#x60;conversation_identifier&#x60; in the request path, and a
-     * &#x60;metadata_identifier&#x60; and &#x60;message&#x60; string in the request body. If the
-     * API request is successful, ThoughtSpot returns the session ID, tokens used in the
-     * conversation, and visualization type. &gt; ###### Note: &gt; * This endpoint is currently in
-     * Beta. Breaking changes may be introduced before the endpoint is made Generally Available.
-     * &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter
-     * on your cluster.
+     * (asynchronously) Version: 10.4.0.cl or later Sends a follow-up message to an existing
+     * conversation within the context of a data model. Requires &#x60;CAN_USE_SPOTTER&#x60;
+     * privilege and at least view access to the metadata object specified in the request. A
+     * conversation must first be created using the &#x60;createConversation&#x60; API. #### Usage
+     * guidelines The request must include: - &#x60;conversation_identifier&#x60;: the unique
+     * session ID returned by &#x60;createConversation&#x60; - &#x60;metadata_identifier&#x60;: the
+     * unique ID of the data source used for the conversation - &#x60;message&#x60;: a natural
+     * language string with the follow-up question If the request is successful, the API returns an
+     * array of response messages, each containing: - &#x60;session_identifier&#x60;: the unique ID
+     * of the generated response - &#x60;generation_number&#x60;: the generation number of the
+     * response - &#x60;message_type&#x60;: the type of the response (e.g., &#x60;TSAnswer&#x60;) -
+     * &#x60;visualization_type&#x60;: the generated visualization type (&#x60;Chart&#x60;,
+     * &#x60;Table&#x60;, or &#x60;Undefined&#x60;) - &#x60;tokens&#x60; /
+     * &#x60;display_tokens&#x60;: the search tokens and user-friendly display tokens for the
+     * response #### Error responses | Code | Description |
+     * |------|-----------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view permission on the specified metadata object. | &gt; ###### Note: &gt; * This
+     * endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made
+     * Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot
+     * support to enable Spotter on your cluster.
      *
      * @param conversationIdentifier Unique identifier of the conversation. (required)
      * @param sendMessageRequest (required)
@@ -23461,6 +25976,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -23491,6 +26008,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -23567,22 +26086,30 @@ public class ThoughtSpotRestApi {
      * Version: 10.15.0.cl or later This API allows users to set natural language (NL) instructions
      * for a specific data-model to improve AI-generated answers and query processing. These
      * instructions help guide the AI system to better understand the data context and provide more
-     * accurate responses. #### Usage guidelines To set NL instructions for a data-model, the
-     * request must include: - &#x60;data_source_identifier&#x60;: The unique ID of the data-model
-     * for which to set NL instructions - &#x60;nl_instructions_info&#x60;: An array of instruction
-     * objects, each containing: - &#x60;instructions&#x60;: Array of text instructions for the LLM
-     * - &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). Currently only
-     * &#x60;GLOBAL&#x60; is supported. It can be extended to data-model-user scope in future. The
-     * API returns a response object with: - &#x60;success&#x60;: Boolean indicating whether the
-     * operation was successful #### Instructions Scope - **GLOBAL**: Instructions that apply
-     * globally for that data-model across the system &gt; ###### Note: &gt; * To use this API, the
-     * user needs either edit access or SPOTTER_COACHING_PRIVILEGE on the data-model and they must
-     * use corresponding org related bearerToken where the data-model exists. &gt; * This endpoint
-     * is currently in Beta. Breaking changes may be introduced before the endpoint is made
-     * Generally Available. &gt; * Available from version 10.15.0.cl and later. &gt; * This endpoint
-     * requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. &gt;
-     * * Instructions help improve the accuracy and relevance of AI-generated responses for the
-     * specified data-model.
+     * accurate responses. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege, either edit access or
+     * &#x60;SPOTTER_COACHING_PRIVILEGE&#x60; on the data model, and a bearer token corresponding to
+     * the org where the data model exists. #### Usage guidelines To set NL instructions for a
+     * data-model, the request must include: - &#x60;data_source_identifier&#x60;: The unique ID of
+     * the data-model for which to set NL instructions - &#x60;nl_instructions_info&#x60;: An array
+     * of instruction objects, each containing: - &#x60;instructions&#x60;: Array of text
+     * instructions for the LLM - &#x60;scope&#x60;: The scope of the instruction
+     * (&#x60;GLOBAL&#x60;). Currently only &#x60;GLOBAL&#x60; is supported. It can be extended to
+     * data-model-user scope in future. #### Instructions scope - **GLOBAL**: instructions that
+     * apply to all users querying this data model If the request is successful, the API returns: -
+     * &#x60;success&#x60;: a boolean indicating whether the operation completed successfully ####
+     * Error responses | Code | Description |
+     * |------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, lacks
+     * edit access or &#x60;SPOTTER_COACHING_PRIVILEGE&#x60; on the data model, or the bearer token
+     * does not correspond to the org where the data model exists. | &gt; ###### Note: &gt; &gt; -
+     * To use this API, the user needs either edit access or &#x60;SPOTTER_COACHING_PRIVILEGE&#x60;
+     * on the data model, and must use the bearer token corresponding to the org where the data
+     * model exists. &gt; - This endpoint is currently in Beta. Breaking changes may be introduced
+     * before the endpoint is made Generally Available. &gt; - Available from version 10.15.0.cl and
+     * later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable
+     * Spotter on your cluster. &gt; - Instructions help improve the accuracy and relevance of
+     * AI-generated responses for the specified data-model.
      *
      * @param setNLInstructionsRequest (required)
      * @return EurekaSetNLInstructionsResponse
@@ -23595,6 +26122,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -23609,22 +26138,30 @@ public class ThoughtSpotRestApi {
      * Version: 10.15.0.cl or later This API allows users to set natural language (NL) instructions
      * for a specific data-model to improve AI-generated answers and query processing. These
      * instructions help guide the AI system to better understand the data context and provide more
-     * accurate responses. #### Usage guidelines To set NL instructions for a data-model, the
-     * request must include: - &#x60;data_source_identifier&#x60;: The unique ID of the data-model
-     * for which to set NL instructions - &#x60;nl_instructions_info&#x60;: An array of instruction
-     * objects, each containing: - &#x60;instructions&#x60;: Array of text instructions for the LLM
-     * - &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). Currently only
-     * &#x60;GLOBAL&#x60; is supported. It can be extended to data-model-user scope in future. The
-     * API returns a response object with: - &#x60;success&#x60;: Boolean indicating whether the
-     * operation was successful #### Instructions Scope - **GLOBAL**: Instructions that apply
-     * globally for that data-model across the system &gt; ###### Note: &gt; * To use this API, the
-     * user needs either edit access or SPOTTER_COACHING_PRIVILEGE on the data-model and they must
-     * use corresponding org related bearerToken where the data-model exists. &gt; * This endpoint
-     * is currently in Beta. Breaking changes may be introduced before the endpoint is made
-     * Generally Available. &gt; * Available from version 10.15.0.cl and later. &gt; * This endpoint
-     * requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. &gt;
-     * * Instructions help improve the accuracy and relevance of AI-generated responses for the
-     * specified data-model.
+     * accurate responses. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege, either edit access or
+     * &#x60;SPOTTER_COACHING_PRIVILEGE&#x60; on the data model, and a bearer token corresponding to
+     * the org where the data model exists. #### Usage guidelines To set NL instructions for a
+     * data-model, the request must include: - &#x60;data_source_identifier&#x60;: The unique ID of
+     * the data-model for which to set NL instructions - &#x60;nl_instructions_info&#x60;: An array
+     * of instruction objects, each containing: - &#x60;instructions&#x60;: Array of text
+     * instructions for the LLM - &#x60;scope&#x60;: The scope of the instruction
+     * (&#x60;GLOBAL&#x60;). Currently only &#x60;GLOBAL&#x60; is supported. It can be extended to
+     * data-model-user scope in future. #### Instructions scope - **GLOBAL**: instructions that
+     * apply to all users querying this data model If the request is successful, the API returns: -
+     * &#x60;success&#x60;: a boolean indicating whether the operation completed successfully ####
+     * Error responses | Code | Description |
+     * |------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, lacks
+     * edit access or &#x60;SPOTTER_COACHING_PRIVILEGE&#x60; on the data model, or the bearer token
+     * does not correspond to the org where the data model exists. | &gt; ###### Note: &gt; &gt; -
+     * To use this API, the user needs either edit access or &#x60;SPOTTER_COACHING_PRIVILEGE&#x60;
+     * on the data model, and must use the bearer token corresponding to the org where the data
+     * model exists. &gt; - This endpoint is currently in Beta. Breaking changes may be introduced
+     * before the endpoint is made Generally Available. &gt; - Available from version 10.15.0.cl and
+     * later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable
+     * Spotter on your cluster. &gt; - Instructions help improve the accuracy and relevance of
+     * AI-generated responses for the specified data-model.
      *
      * @param setNLInstructionsRequest (required)
      * @return ApiResponse&lt;EurekaSetNLInstructionsResponse&gt;
@@ -23637,6 +26174,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -23652,22 +26191,31 @@ public class ThoughtSpotRestApi {
      * (asynchronously) Version: 10.15.0.cl or later This API allows users to set natural language
      * (NL) instructions for a specific data-model to improve AI-generated answers and query
      * processing. These instructions help guide the AI system to better understand the data context
-     * and provide more accurate responses. #### Usage guidelines To set NL instructions for a
-     * data-model, the request must include: - &#x60;data_source_identifier&#x60;: The unique ID of
-     * the data-model for which to set NL instructions - &#x60;nl_instructions_info&#x60;: An array
-     * of instruction objects, each containing: - &#x60;instructions&#x60;: Array of text
-     * instructions for the LLM - &#x60;scope&#x60;: The scope of the instruction
-     * (&#x60;GLOBAL&#x60;). Currently only &#x60;GLOBAL&#x60; is supported. It can be extended to
-     * data-model-user scope in future. The API returns a response object with: -
-     * &#x60;success&#x60;: Boolean indicating whether the operation was successful ####
-     * Instructions Scope - **GLOBAL**: Instructions that apply globally for that data-model across
-     * the system &gt; ###### Note: &gt; * To use this API, the user needs either edit access or
-     * SPOTTER_COACHING_PRIVILEGE on the data-model and they must use corresponding org related
-     * bearerToken where the data-model exists. &gt; * This endpoint is currently in Beta. Breaking
-     * changes may be introduced before the endpoint is made Generally Available. &gt; * Available
-     * from version 10.15.0.cl and later. &gt; * This endpoint requires Spotter — please contact
-     * ThoughtSpot Support to enable Spotter on your cluster. &gt; * Instructions help improve the
-     * accuracy and relevance of AI-generated responses for the specified data-model.
+     * and provide more accurate responses. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege, either
+     * edit access or &#x60;SPOTTER_COACHING_PRIVILEGE&#x60; on the data model, and a bearer token
+     * corresponding to the org where the data model exists. #### Usage guidelines To set NL
+     * instructions for a data-model, the request must include: -
+     * &#x60;data_source_identifier&#x60;: The unique ID of the data-model for which to set NL
+     * instructions - &#x60;nl_instructions_info&#x60;: An array of instruction objects, each
+     * containing: - &#x60;instructions&#x60;: Array of text instructions for the LLM -
+     * &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). Currently only
+     * &#x60;GLOBAL&#x60; is supported. It can be extended to data-model-user scope in future. ####
+     * Instructions scope - **GLOBAL**: instructions that apply to all users querying this data
+     * model If the request is successful, the API returns: - &#x60;success&#x60;: a boolean
+     * indicating whether the operation completed successfully #### Error responses | Code |
+     * Description |
+     * |------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, lacks
+     * edit access or &#x60;SPOTTER_COACHING_PRIVILEGE&#x60; on the data model, or the bearer token
+     * does not correspond to the org where the data model exists. | &gt; ###### Note: &gt; &gt; -
+     * To use this API, the user needs either edit access or &#x60;SPOTTER_COACHING_PRIVILEGE&#x60;
+     * on the data model, and must use the bearer token corresponding to the org where the data
+     * model exists. &gt; - This endpoint is currently in Beta. Breaking changes may be introduced
+     * before the endpoint is made Generally Available. &gt; - Available from version 10.15.0.cl and
+     * later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable
+     * Spotter on your cluster. &gt; - Instructions help improve the accuracy and relevance of
+     * AI-generated responses for the specified data-model.
      *
      * @param setNLInstructionsRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -23681,6 +26229,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -23908,6 +26458,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -23981,12 +26533,27 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.4.0.cl or later Processes a natural language query and returns an AI-generated
-     * response based on a specified data model. Requires at least view access to the metadata
-     * object specified in the request. &gt; ###### Note: &gt; * This endpoint is currently in Beta.
-     * Breaking changes may be introduced before the endpoint is made Generally Available. &gt; *
-     * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your
-     * cluster.
+     * Version: 10.4.0.cl or later Processes a natural language query against a specified data model
+     * and returns a single AI-generated answer without requiring a conversation session. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view access to the metadata object
+     * specified in the request. #### Usage guidelines The request must include: -
+     * &#x60;query&#x60;: a natural language question (e.g., \&quot;What were total sales last
+     * quarter?\&quot;) - &#x60;metadata_identifier&#x60;: the unique ID of the data source to query
+     * against If the request is successful, the API returns a response message containing: -
+     * &#x60;session_identifier&#x60;: the unique ID of the generated response -
+     * &#x60;generation_number&#x60;: the generation number of the response -
+     * &#x60;message_type&#x60;: the type of the response (e.g., &#x60;TSAnswer&#x60;) -
+     * &#x60;visualization_type&#x60;: the generated visualization type (&#x60;Chart&#x60;,
+     * &#x60;Table&#x60;, or &#x60;Undefined&#x60;) - &#x60;tokens&#x60; /
+     * &#x60;display_tokens&#x60;: the search tokens and user-friendly display tokens for the
+     * response #### Error responses | Code | Description |
+     * |------|-----------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view permission on the specified metadata object. | &gt; ###### Note: &gt; * This
+     * endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made
+     * Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot
+     * support to enable Spotter on your cluster.
      *
      * @param singleAnswerRequest (required)
      * @return ResponseMessage
@@ -23999,6 +26566,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -24009,12 +26578,27 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.4.0.cl or later Processes a natural language query and returns an AI-generated
-     * response based on a specified data model. Requires at least view access to the metadata
-     * object specified in the request. &gt; ###### Note: &gt; * This endpoint is currently in Beta.
-     * Breaking changes may be introduced before the endpoint is made Generally Available. &gt; *
-     * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your
-     * cluster.
+     * Version: 10.4.0.cl or later Processes a natural language query against a specified data model
+     * and returns a single AI-generated answer without requiring a conversation session. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view access to the metadata object
+     * specified in the request. #### Usage guidelines The request must include: -
+     * &#x60;query&#x60;: a natural language question (e.g., \&quot;What were total sales last
+     * quarter?\&quot;) - &#x60;metadata_identifier&#x60;: the unique ID of the data source to query
+     * against If the request is successful, the API returns a response message containing: -
+     * &#x60;session_identifier&#x60;: the unique ID of the generated response -
+     * &#x60;generation_number&#x60;: the generation number of the response -
+     * &#x60;message_type&#x60;: the type of the response (e.g., &#x60;TSAnswer&#x60;) -
+     * &#x60;visualization_type&#x60;: the generated visualization type (&#x60;Chart&#x60;,
+     * &#x60;Table&#x60;, or &#x60;Undefined&#x60;) - &#x60;tokens&#x60; /
+     * &#x60;display_tokens&#x60;: the search tokens and user-friendly display tokens for the
+     * response #### Error responses | Code | Description |
+     * |------|-----------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view permission on the specified metadata object. | &gt; ###### Note: &gt; * This
+     * endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made
+     * Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot
+     * support to enable Spotter on your cluster.
      *
      * @param singleAnswerRequest (required)
      * @return ApiResponse&lt;ResponseMessage&gt;
@@ -24027,6 +26611,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -24038,12 +26624,27 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 10.4.0.cl or later Processes a natural language query and returns
-     * an AI-generated response based on a specified data model. Requires at least view access to
-     * the metadata object specified in the request. &gt; ###### Note: &gt; * This endpoint is
-     * currently in Beta. Breaking changes may be introduced before the endpoint is made Generally
-     * Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to
-     * enable Spotter on your cluster.
+     * (asynchronously) Version: 10.4.0.cl or later Processes a natural language query against a
+     * specified data model and returns a single AI-generated answer without requiring a
+     * conversation session. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view access
+     * to the metadata object specified in the request. #### Usage guidelines The request must
+     * include: - &#x60;query&#x60;: a natural language question (e.g., \&quot;What were total sales
+     * last quarter?\&quot;) - &#x60;metadata_identifier&#x60;: the unique ID of the data source to
+     * query against If the request is successful, the API returns a response message containing: -
+     * &#x60;session_identifier&#x60;: the unique ID of the generated response -
+     * &#x60;generation_number&#x60;: the generation number of the response -
+     * &#x60;message_type&#x60;: the type of the response (e.g., &#x60;TSAnswer&#x60;) -
+     * &#x60;visualization_type&#x60;: the generated visualization type (&#x60;Chart&#x60;,
+     * &#x60;Table&#x60;, or &#x60;Undefined&#x60;) - &#x60;tokens&#x60; /
+     * &#x60;display_tokens&#x60;: the search tokens and user-friendly display tokens for the
+     * response #### Error responses | Code | Description |
+     * |------|-----------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view permission on the specified metadata object. | &gt; ###### Note: &gt; * This
+     * endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made
+     * Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot
+     * support to enable Spotter on your cluster.
      *
      * @param singleAnswerRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -24057,6 +26658,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -24066,6 +26669,276 @@ public class ThoughtSpotRestApi {
 
         okhttp3.Call localVarCall = singleAnswerValidateBeforeCall(singleAnswerRequest, _callback);
         Type localVarReturnType = new TypeToken<ResponseMessage>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for syncMetadata
+     *
+     * @param connectionIdentifier Unique ID or name of the connection. (required)
+     * @param syncMetadataRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Metadata synced successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request parameters or hierarchy. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Connection, table, or column not found. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call syncMetadataCall(
+            String connectionIdentifier,
+            SyncMetadataRequest syncMetadataRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = syncMetadataRequest;
+
+        // create path and map variables
+        String localVarPath =
+                "/api/rest/2.0/connections/{connection_identifier}/resync-metadata"
+                        .replace(
+                                "{" + "connection_identifier" + "}",
+                                localVarApiClient.escapeString(connectionIdentifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call syncMetadataValidateBeforeCall(
+            String connectionIdentifier,
+            SyncMetadataRequest syncMetadataRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'connectionIdentifier' is set
+        if (connectionIdentifier == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'connectionIdentifier' when calling"
+                            + " syncMetadata(Async)");
+        }
+
+        // verify the required parameter 'syncMetadataRequest' is set
+        if (syncMetadataRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'syncMetadataRequest' when calling"
+                            + " syncMetadata(Async)");
+        }
+
+        return syncMetadataCall(connectionIdentifier, syncMetadataRequest, _callback);
+    }
+
+    /**
+     * Version: 26.5.0.cl or later Synchronizes connection metadata attributes from your Cloud Data
+     * Warehouse (CDW) with ThoughtSpot. Requires the &#x60;DATAMANAGEMENT&#x60; (**Can manage
+     * data**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) privilege is
+     * required. #### Usage guidelines To synchronize attributes from a CDW, specify the connection
+     * GUID or name in the &#x60;connection_identifier&#x60; path parameter and
+     * &#x60;sync_attributes&#x60; in the request body. Default attribute is
+     * &#x60;[\&quot;DESCRIPTION\&quot;]&#x60;. ##### Hierarchical schema * Connection: The
+     * connection object for the sync operation. * Tables: Tables for the sync operation. When no
+     * table is specified, all tables are synchronized. * Columns: If the table is specified, you
+     * can add the columns for the sync operation. If no columns are specified, all columns in the
+     * specified table are considered for the sync operation. To set the scope for the sync
+     * operation: * Connection-level: To sync all tables and columns, pass an empty request body, or
+     * only the attributes in the request body. * Table-level: To synchronize specific tables and
+     * their columns, specify the table identifiers in the &#x60;tables&#x60; array. * Column-level:
+     * To synchronize specific columns, specify the table identifier as the key and column
+     * identifiers as the value in the &#x60;tables&#x60; array. &#x60;&#x60;&#x60; {
+     * \&quot;tables\&quot;: [ {\&quot;table-guid-1\&quot;: [\&quot;column-guid-1\&quot;,
+     * \&quot;column-guid-2\&quot;]}, \&quot;table-guid-2\&quot; ], \&quot;sync_attributes\&quot;:
+     * [\&quot;DESCRIPTION\&quot;] } &#x60;&#x60;&#x60; ##### API response If the sync operation is
+     * successful, the API returns the following information: * Status of the sync operation. For
+     * example, &#x60;SUCCESS&#x60;, &#x60;PARTIAL_SUCCESS&#x60;, or &#x60;NO_UPDATE&#x60;. * Number
+     * of tables and columns that were updated. * Number of tables and columns with the sync failed
+     * status when the overall sync status is &#x60;PARTIAL_SUCCESS&#x60;. * Message text indicating
+     * the sync results.
+     *
+     * @param connectionIdentifier Unique ID or name of the connection. (required)
+     * @param syncMetadataRequest (required)
+     * @return SyncMetadataResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Metadata synced successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request parameters or hierarchy. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Connection, table, or column not found. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public SyncMetadataResponse syncMetadata(
+            String connectionIdentifier, SyncMetadataRequest syncMetadataRequest)
+            throws ApiException {
+        ApiResponse<SyncMetadataResponse> localVarResp =
+                syncMetadataWithHttpInfo(connectionIdentifier, syncMetadataRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Version: 26.5.0.cl or later Synchronizes connection metadata attributes from your Cloud Data
+     * Warehouse (CDW) with ThoughtSpot. Requires the &#x60;DATAMANAGEMENT&#x60; (**Can manage
+     * data**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) privilege is
+     * required. #### Usage guidelines To synchronize attributes from a CDW, specify the connection
+     * GUID or name in the &#x60;connection_identifier&#x60; path parameter and
+     * &#x60;sync_attributes&#x60; in the request body. Default attribute is
+     * &#x60;[\&quot;DESCRIPTION\&quot;]&#x60;. ##### Hierarchical schema * Connection: The
+     * connection object for the sync operation. * Tables: Tables for the sync operation. When no
+     * table is specified, all tables are synchronized. * Columns: If the table is specified, you
+     * can add the columns for the sync operation. If no columns are specified, all columns in the
+     * specified table are considered for the sync operation. To set the scope for the sync
+     * operation: * Connection-level: To sync all tables and columns, pass an empty request body, or
+     * only the attributes in the request body. * Table-level: To synchronize specific tables and
+     * their columns, specify the table identifiers in the &#x60;tables&#x60; array. * Column-level:
+     * To synchronize specific columns, specify the table identifier as the key and column
+     * identifiers as the value in the &#x60;tables&#x60; array. &#x60;&#x60;&#x60; {
+     * \&quot;tables\&quot;: [ {\&quot;table-guid-1\&quot;: [\&quot;column-guid-1\&quot;,
+     * \&quot;column-guid-2\&quot;]}, \&quot;table-guid-2\&quot; ], \&quot;sync_attributes\&quot;:
+     * [\&quot;DESCRIPTION\&quot;] } &#x60;&#x60;&#x60; ##### API response If the sync operation is
+     * successful, the API returns the following information: * Status of the sync operation. For
+     * example, &#x60;SUCCESS&#x60;, &#x60;PARTIAL_SUCCESS&#x60;, or &#x60;NO_UPDATE&#x60;. * Number
+     * of tables and columns that were updated. * Number of tables and columns with the sync failed
+     * status when the overall sync status is &#x60;PARTIAL_SUCCESS&#x60;. * Message text indicating
+     * the sync results.
+     *
+     * @param connectionIdentifier Unique ID or name of the connection. (required)
+     * @param syncMetadataRequest (required)
+     * @return ApiResponse&lt;SyncMetadataResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Metadata synced successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request parameters or hierarchy. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Connection, table, or column not found. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<SyncMetadataResponse> syncMetadataWithHttpInfo(
+            String connectionIdentifier, SyncMetadataRequest syncMetadataRequest)
+            throws ApiException {
+        okhttp3.Call localVarCall =
+                syncMetadataValidateBeforeCall(connectionIdentifier, syncMetadataRequest, null);
+        Type localVarReturnType = new TypeToken<SyncMetadataResponse>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Version: 26.5.0.cl or later Synchronizes connection metadata attributes from
+     * your Cloud Data Warehouse (CDW) with ThoughtSpot. Requires the &#x60;DATAMANAGEMENT&#x60;
+     * (**Can manage data**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) privilege is
+     * required. #### Usage guidelines To synchronize attributes from a CDW, specify the connection
+     * GUID or name in the &#x60;connection_identifier&#x60; path parameter and
+     * &#x60;sync_attributes&#x60; in the request body. Default attribute is
+     * &#x60;[\&quot;DESCRIPTION\&quot;]&#x60;. ##### Hierarchical schema * Connection: The
+     * connection object for the sync operation. * Tables: Tables for the sync operation. When no
+     * table is specified, all tables are synchronized. * Columns: If the table is specified, you
+     * can add the columns for the sync operation. If no columns are specified, all columns in the
+     * specified table are considered for the sync operation. To set the scope for the sync
+     * operation: * Connection-level: To sync all tables and columns, pass an empty request body, or
+     * only the attributes in the request body. * Table-level: To synchronize specific tables and
+     * their columns, specify the table identifiers in the &#x60;tables&#x60; array. * Column-level:
+     * To synchronize specific columns, specify the table identifier as the key and column
+     * identifiers as the value in the &#x60;tables&#x60; array. &#x60;&#x60;&#x60; {
+     * \&quot;tables\&quot;: [ {\&quot;table-guid-1\&quot;: [\&quot;column-guid-1\&quot;,
+     * \&quot;column-guid-2\&quot;]}, \&quot;table-guid-2\&quot; ], \&quot;sync_attributes\&quot;:
+     * [\&quot;DESCRIPTION\&quot;] } &#x60;&#x60;&#x60; ##### API response If the sync operation is
+     * successful, the API returns the following information: * Status of the sync operation. For
+     * example, &#x60;SUCCESS&#x60;, &#x60;PARTIAL_SUCCESS&#x60;, or &#x60;NO_UPDATE&#x60;. * Number
+     * of tables and columns that were updated. * Number of tables and columns with the sync failed
+     * status when the overall sync status is &#x60;PARTIAL_SUCCESS&#x60;. * Message text indicating
+     * the sync results.
+     *
+     * @param connectionIdentifier Unique ID or name of the connection. (required)
+     * @param syncMetadataRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Metadata synced successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request parameters or hierarchy. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Connection, table, or column not found. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call syncMetadataAsync(
+            String connectionIdentifier,
+            SyncMetadataRequest syncMetadataRequest,
+            final ApiCallback<SyncMetadataResponse> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                syncMetadataValidateBeforeCall(
+                        connectionIdentifier, syncMetadataRequest, _callback);
+        Type localVarReturnType = new TypeToken<SyncMetadataResponse>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -24321,7 +27194,7 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Remove parameterization from fields in metadata objects. Version: 10.9.0.cl or later Allows
+     * Remove parameterization from fields in metadata objects. Version: 26.5.0.cl or later Allows
      * removing parameterization from fields in metadata objects in ThoughtSpot. Requires
      * appropriate permissions to modify the metadata object. The API endpoint allows
      * unparameterizing the following types of metadata objects: * Logical Tables * Connections *
@@ -24351,7 +27224,7 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Remove parameterization from fields in metadata objects. Version: 10.9.0.cl or later Allows
+     * Remove parameterization from fields in metadata objects. Version: 26.5.0.cl or later Allows
      * removing parameterization from fields in metadata objects in ThoughtSpot. Requires
      * appropriate permissions to modify the metadata object. The API endpoint allows
      * unparameterizing the following types of metadata objects: * Logical Tables * Connections *
@@ -24384,7 +27257,7 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Remove parameterization from fields in metadata objects. Version: 10.9.0.cl
+     * (asynchronously) Remove parameterization from fields in metadata objects. Version: 26.5.0.cl
      * or later Allows removing parameterization from fields in metadata objects in ThoughtSpot.
      * Requires appropriate permissions to modify the metadata object. The API endpoint allows
      * unparameterizing the following types of metadata objects: * Logical Tables * Connections *
@@ -24508,7 +27381,7 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.9.0.cl or later Allows unpublishing metadata objects from organizations in
+     * Version: 26.5.0.cl or later Allows unpublishing metadata objects from organizations in
      * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
      * unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
      * When unpublishing objects, you can: * Include dependencies by setting
@@ -24536,7 +27409,7 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.9.0.cl or later Allows unpublishing metadata objects from organizations in
+     * Version: 26.5.0.cl or later Allows unpublishing metadata objects from organizations in
      * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
      * unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
      * When unpublishing objects, you can: * Include dependencies by setting
@@ -24567,7 +27440,7 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 10.9.0.cl or later Allows unpublishing metadata objects from
+     * (asynchronously) Version: 26.5.0.cl or later Allows unpublishing metadata objects from
      * organizations in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint
      * allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical
      * Tables When unpublishing objects, you can: * Include dependencies by setting
@@ -24885,6 +27758,223 @@ public class ThoughtSpotRestApi {
         okhttp3.Call localVarCall =
                 updateCalendarValidateBeforeCall(
                         calendarIdentifier, updateCalendarRequest, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for updateCollection
+     *
+     * @param collectionIdentifier Unique GUID of the collection. Note: Collection names cannot be
+     *     used as identifiers since duplicate names are allowed. (required)
+     * @param updateCollectionRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Collection updated successfully. No content returned. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Resource not found. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call updateCollectionCall(
+            String collectionIdentifier,
+            UpdateCollectionRequest updateCollectionRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = updateCollectionRequest;
+
+        // create path and map variables
+        String localVarPath =
+                "/api/rest/2.0/collections/{collection_identifier}/update"
+                        .replace(
+                                "{" + "collection_identifier" + "}",
+                                localVarApiClient.escapeString(collectionIdentifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call updateCollectionValidateBeforeCall(
+            String collectionIdentifier,
+            UpdateCollectionRequest updateCollectionRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'collectionIdentifier' is set
+        if (collectionIdentifier == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'collectionIdentifier' when calling"
+                            + " updateCollection(Async)");
+        }
+
+        // verify the required parameter 'updateCollectionRequest' is set
+        if (updateCollectionRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'updateCollectionRequest' when calling"
+                            + " updateCollection(Async)");
+        }
+
+        return updateCollectionCall(collectionIdentifier, updateCollectionRequest, _callback);
+    }
+
+    /**
+     * Version: 26.4.0.cl or later Updates an existing collection in ThoughtSpot. #### Supported
+     * operations This API endpoint lets you perform the following operations: * Update collection
+     * name and description * Change visibility settings * Add metadata objects to the collection
+     * (operation: ADD) * Remove metadata objects from the collection (operation: REMOVE) * Replace
+     * all metadata objects in the collection (operation: REPLACE) #### Operation types * **ADD**:
+     * Adds the specified metadata objects to the existing collection without removing current items
+     * * **REMOVE**: Removes only the specified metadata objects from the collection * **REPLACE**:
+     * Replaces all existing metadata objects with the specified items (default behavior)
+     *
+     * @param collectionIdentifier Unique GUID of the collection. Note: Collection names cannot be
+     *     used as identifiers since duplicate names are allowed. (required)
+     * @param updateCollectionRequest (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Collection updated successfully. No content returned. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Resource not found. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public void updateCollection(
+            String collectionIdentifier, UpdateCollectionRequest updateCollectionRequest)
+            throws ApiException {
+        updateCollectionWithHttpInfo(collectionIdentifier, updateCollectionRequest);
+    }
+
+    /**
+     * Version: 26.4.0.cl or later Updates an existing collection in ThoughtSpot. #### Supported
+     * operations This API endpoint lets you perform the following operations: * Update collection
+     * name and description * Change visibility settings * Add metadata objects to the collection
+     * (operation: ADD) * Remove metadata objects from the collection (operation: REMOVE) * Replace
+     * all metadata objects in the collection (operation: REPLACE) #### Operation types * **ADD**:
+     * Adds the specified metadata objects to the existing collection without removing current items
+     * * **REMOVE**: Removes only the specified metadata objects from the collection * **REPLACE**:
+     * Replaces all existing metadata objects with the specified items (default behavior)
+     *
+     * @param collectionIdentifier Unique GUID of the collection. Note: Collection names cannot be
+     *     used as identifiers since duplicate names are allowed. (required)
+     * @param updateCollectionRequest (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Collection updated successfully. No content returned. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Resource not found. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<Void> updateCollectionWithHttpInfo(
+            String collectionIdentifier, UpdateCollectionRequest updateCollectionRequest)
+            throws ApiException {
+        okhttp3.Call localVarCall =
+                updateCollectionValidateBeforeCall(
+                        collectionIdentifier, updateCollectionRequest, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     * (asynchronously) Version: 26.4.0.cl or later Updates an existing collection in ThoughtSpot.
+     * #### Supported operations This API endpoint lets you perform the following operations: *
+     * Update collection name and description * Change visibility settings * Add metadata objects to
+     * the collection (operation: ADD) * Remove metadata objects from the collection (operation:
+     * REMOVE) * Replace all metadata objects in the collection (operation: REPLACE) #### Operation
+     * types * **ADD**: Adds the specified metadata objects to the existing collection without
+     * removing current items * **REMOVE**: Removes only the specified metadata objects from the
+     * collection * **REPLACE**: Replaces all existing metadata objects with the specified items
+     * (default behavior)
+     *
+     * @param collectionIdentifier Unique GUID of the collection. Note: Collection names cannot be
+     *     used as identifiers since duplicate names are allowed. (required)
+     * @param updateCollectionRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Collection updated successfully. No content returned. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Resource not found. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call updateCollectionAsync(
+            String collectionIdentifier,
+            UpdateCollectionRequest updateCollectionRequest,
+            final ApiCallback<Void> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                updateCollectionValidateBeforeCall(
+                        collectionIdentifier, updateCollectionRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -29095,7 +32185,7 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Update a variable&#39;s name Version: 10.14.0.cl or later Allows updating a variable&#39;s
+     * Update a variable&#39;s name Version: 26.4.0.cl or later Allows updating a variable&#39;s
      * name in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES
      * permission allows you to manage Formula Variables in the current organization scope. The API
      * endpoint allows updating: * The variable name
@@ -29121,7 +32211,7 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Update a variable&#39;s name Version: 10.14.0.cl or later Allows updating a variable&#39;s
+     * Update a variable&#39;s name Version: 26.4.0.cl or later Allows updating a variable&#39;s
      * name in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES
      * permission allows you to manage Formula Variables in the current organization scope. The API
      * endpoint allows updating: * The variable name
@@ -29150,7 +32240,7 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Update a variable&#39;s name Version: 10.14.0.cl or later Allows updating a
+     * (asynchronously) Update a variable&#39;s name Version: 26.4.0.cl or later Allows updating a
      * variable&#39;s name in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The
      * CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current
      * organization scope. The API endpoint allows updating: * The variable name
@@ -29200,7 +32290,10 @@ public class ThoughtSpotRestApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call updateVariableValuesCall(
             UpdateVariableValuesRequest updateVariableValuesRequest, final ApiCallback _callback)
             throws ApiException {
@@ -29256,6 +32349,7 @@ public class ThoughtSpotRestApi {
                 _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call updateVariableValuesValidateBeforeCall(
             UpdateVariableValuesRequest updateVariableValuesRequest, final ApiCallback _callback)
@@ -29271,17 +32365,20 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Update values for multiple variables Version: 10.14.0.cl or later Allows updating values for
-     * multiple variables in ThoughtSpot. Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES
-     * permission allows you to manage Formula Variables in the current organization scope. The API
-     * endpoint allows: * Adding new values to variables * Replacing existing values * Deleting
-     * values from variables When updating variable values, you need to specify: * The variable
-     * identifiers * The values to add/replace/remove for each variable * The operation to perform
-     * (ADD, REPLACE, REMOVE, RESET) Behaviour based on operation type: * ADD - Adds values to the
-     * variable if this is a list type variable, else same as replace. * REPLACE - Replaces all
-     * values of a given set of constraints with the current set of values. * REMOVE - Removes any
-     * values which match the set of conditions of the variables if this is a list type variable,
-     * else clears value. * RESET - Removes all constrains for a given variable, scope is ignored
+     * Update values for multiple variables Version: 10.14.0.cl or later **Note:** This API endpoint
+     * is deprecated and will be removed from ThoughtSpot in a future release. Use [POST
+     * /api/rest/2.0/template/variables/{identifier}/update-values](/api/rest/2.0/template/variables/%7Bidentifier%7D/update-values)
+     * instead. Allows updating values for multiple variables in ThoughtSpot. Requires
+     * ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula
+     * Variables in the current organization scope. The API endpoint allows: * Adding new values to
+     * variables * Replacing existing values * Deleting values from variables When updating variable
+     * values, you need to specify: * The variable identifiers * The values to add/replace/remove
+     * for each variable * The operation to perform (ADD, REPLACE, REMOVE, RESET) Behaviour based on
+     * operation type: * ADD - Adds values to the variable if this is a list type variable, else
+     * same as replace. * REPLACE - Replaces all values of a given set of constraints with the
+     * current set of values. * REMOVE - Removes any values which match the set of conditions of the
+     * variables if this is a list type variable, else clears value. * RESET - Removes all
+     * constrains for a given variable, scope is ignored
      *
      * @param updateVariableValuesRequest (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -29296,24 +32393,30 @@ public class ThoughtSpotRestApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public void updateVariableValues(UpdateVariableValuesRequest updateVariableValuesRequest)
             throws ApiException {
         updateVariableValuesWithHttpInfo(updateVariableValuesRequest);
     }
 
     /**
-     * Update values for multiple variables Version: 10.14.0.cl or later Allows updating values for
-     * multiple variables in ThoughtSpot. Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES
-     * permission allows you to manage Formula Variables in the current organization scope. The API
-     * endpoint allows: * Adding new values to variables * Replacing existing values * Deleting
-     * values from variables When updating variable values, you need to specify: * The variable
-     * identifiers * The values to add/replace/remove for each variable * The operation to perform
-     * (ADD, REPLACE, REMOVE, RESET) Behaviour based on operation type: * ADD - Adds values to the
-     * variable if this is a list type variable, else same as replace. * REPLACE - Replaces all
-     * values of a given set of constraints with the current set of values. * REMOVE - Removes any
-     * values which match the set of conditions of the variables if this is a list type variable,
-     * else clears value. * RESET - Removes all constrains for a given variable, scope is ignored
+     * Update values for multiple variables Version: 10.14.0.cl or later **Note:** This API endpoint
+     * is deprecated and will be removed from ThoughtSpot in a future release. Use [POST
+     * /api/rest/2.0/template/variables/{identifier}/update-values](/api/rest/2.0/template/variables/%7Bidentifier%7D/update-values)
+     * instead. Allows updating values for multiple variables in ThoughtSpot. Requires
+     * ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula
+     * Variables in the current organization scope. The API endpoint allows: * Adding new values to
+     * variables * Replacing existing values * Deleting values from variables When updating variable
+     * values, you need to specify: * The variable identifiers * The values to add/replace/remove
+     * for each variable * The operation to perform (ADD, REPLACE, REMOVE, RESET) Behaviour based on
+     * operation type: * ADD - Adds values to the variable if this is a list type variable, else
+     * same as replace. * REPLACE - Replaces all values of a given set of constraints with the
+     * current set of values. * REMOVE - Removes any values which match the set of conditions of the
+     * variables if this is a list type variable, else clears value. * RESET - Removes all
+     * constrains for a given variable, scope is ignored
      *
      * @param updateVariableValuesRequest (required)
      * @return ApiResponse&lt;Void&gt;
@@ -29329,7 +32432,10 @@ public class ThoughtSpotRestApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public ApiResponse<Void> updateVariableValuesWithHttpInfo(
             UpdateVariableValuesRequest updateVariableValuesRequest) throws ApiException {
         okhttp3.Call localVarCall =
@@ -29338,18 +32444,21 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Update values for multiple variables Version: 10.14.0.cl or later Allows
-     * updating values for multiple variables in ThoughtSpot. Requires ADMINISTRATION role. The
-     * CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current
-     * organization scope. The API endpoint allows: * Adding new values to variables * Replacing
-     * existing values * Deleting values from variables When updating variable values, you need to
-     * specify: * The variable identifiers * The values to add/replace/remove for each variable *
-     * The operation to perform (ADD, REPLACE, REMOVE, RESET) Behaviour based on operation type: *
-     * ADD - Adds values to the variable if this is a list type variable, else same as replace. *
-     * REPLACE - Replaces all values of a given set of constraints with the current set of values. *
-     * REMOVE - Removes any values which match the set of conditions of the variables if this is a
-     * list type variable, else clears value. * RESET - Removes all constrains for a given variable,
-     * scope is ignored
+     * (asynchronously) Update values for multiple variables Version: 10.14.0.cl or later **Note:**
+     * This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use
+     * [POST
+     * /api/rest/2.0/template/variables/{identifier}/update-values](/api/rest/2.0/template/variables/%7Bidentifier%7D/update-values)
+     * instead. Allows updating values for multiple variables in ThoughtSpot. Requires
+     * ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula
+     * Variables in the current organization scope. The API endpoint allows: * Adding new values to
+     * variables * Replacing existing values * Deleting values from variables When updating variable
+     * values, you need to specify: * The variable identifiers * The values to add/replace/remove
+     * for each variable * The operation to perform (ADD, REPLACE, REMOVE, RESET) Behaviour based on
+     * operation type: * ADD - Adds values to the variable if this is a list type variable, else
+     * same as replace. * REPLACE - Replaces all values of a given set of constraints with the
+     * current set of values. * REMOVE - Removes any values which match the set of conditions of the
+     * variables if this is a list type variable, else clears value. * RESET - Removes all
+     * constrains for a given variable, scope is ignored
      *
      * @param updateVariableValuesRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -29366,7 +32475,10 @@ public class ThoughtSpotRestApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call updateVariableValuesAsync(
             UpdateVariableValuesRequest updateVariableValuesRequest,
             final ApiCallback<Void> _callback)
@@ -29582,6 +32694,207 @@ public class ThoughtSpotRestApi {
                 updateWebhookConfigurationValidateBeforeCall(
                         webhookIdentifier, updateWebhookConfigurationRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for validateCommunicationChannel
+     *
+     * @param validateCommunicationChannelRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> communication channel configuration validated successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call validateCommunicationChannelCall(
+            ValidateCommunicationChannelRequest validateCommunicationChannelRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = validateCommunicationChannelRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/system/communication-channels/validate";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call validateCommunicationChannelValidateBeforeCall(
+            ValidateCommunicationChannelRequest validateCommunicationChannelRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'validateCommunicationChannelRequest' is set
+        if (validateCommunicationChannelRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'validateCommunicationChannelRequest' when"
+                            + " calling validateCommunicationChannel(Async)");
+        }
+
+        return validateCommunicationChannelCall(validateCommunicationChannelRequest, _callback);
+    }
+
+    /**
+     * Version: 26.4.0.cl or later Validates a communication channel configuration to ensure it is
+     * properly set up and can receive events. - Use &#x60;channel_type&#x60; to specify the type of
+     * communication channel to validate (e.g., WEBHOOK). - Use &#x60;channel_identifier&#x60; to
+     * provide the unique identifier or name for the communication channel. - Use
+     * &#x60;event_type&#x60; to specify the event type to validate for this channel. Requires
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has
+     * developer privilege**) privilege. For webhook channels, users with
+     * &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to
+     * perform this action.
+     *
+     * @param validateCommunicationChannelRequest (required)
+     * @return CommunicationChannelValidateResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> communication channel configuration validated successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public CommunicationChannelValidateResponse validateCommunicationChannel(
+            ValidateCommunicationChannelRequest validateCommunicationChannelRequest)
+            throws ApiException {
+        ApiResponse<CommunicationChannelValidateResponse> localVarResp =
+                validateCommunicationChannelWithHttpInfo(validateCommunicationChannelRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Version: 26.4.0.cl or later Validates a communication channel configuration to ensure it is
+     * properly set up and can receive events. - Use &#x60;channel_type&#x60; to specify the type of
+     * communication channel to validate (e.g., WEBHOOK). - Use &#x60;channel_identifier&#x60; to
+     * provide the unique identifier or name for the communication channel. - Use
+     * &#x60;event_type&#x60; to specify the event type to validate for this channel. Requires
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has
+     * developer privilege**) privilege. For webhook channels, users with
+     * &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to
+     * perform this action.
+     *
+     * @param validateCommunicationChannelRequest (required)
+     * @return ApiResponse&lt;CommunicationChannelValidateResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> communication channel configuration validated successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<CommunicationChannelValidateResponse>
+            validateCommunicationChannelWithHttpInfo(
+                    ValidateCommunicationChannelRequest validateCommunicationChannelRequest)
+                    throws ApiException {
+        okhttp3.Call localVarCall =
+                validateCommunicationChannelValidateBeforeCall(
+                        validateCommunicationChannelRequest, null);
+        Type localVarReturnType =
+                new TypeToken<CommunicationChannelValidateResponse>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Version: 26.4.0.cl or later Validates a communication channel configuration
+     * to ensure it is properly set up and can receive events. - Use &#x60;channel_type&#x60; to
+     * specify the type of communication channel to validate (e.g., WEBHOOK). - Use
+     * &#x60;channel_identifier&#x60; to provide the unique identifier or name for the communication
+     * channel. - Use &#x60;event_type&#x60; to specify the event type to validate for this channel.
+     * Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60;
+     * (**Has developer privilege**) privilege. For webhook channels, users with
+     * &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to
+     * perform this action.
+     *
+     * @param validateCommunicationChannelRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> communication channel configuration validated successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call validateCommunicationChannelAsync(
+            ValidateCommunicationChannelRequest validateCommunicationChannelRequest,
+            final ApiCallback<CommunicationChannelValidateResponse> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                validateCommunicationChannelValidateBeforeCall(
+                        validateCommunicationChannelRequest, _callback);
+        Type localVarReturnType =
+                new TypeToken<CommunicationChannelValidateResponse>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**

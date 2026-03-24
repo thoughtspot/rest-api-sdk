@@ -12,6 +12,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**searchCommunicationChannelPreferences**](SystemApi.md#searchCommunicationChannelPreferences) | **POST** /api/rest/2.0/system/preferences/communication-channels/search |
 | [**searchSecuritySettings**](SystemApi.md#searchSecuritySettings) | **POST** /api/rest/2.0/system/security-settings/search |
 | [**updateSystemConfig**](SystemApi.md#updateSystemConfig) | **POST** /api/rest/2.0/system/config-update |
+| [**validateCommunicationChannel**](SystemApi.md#validateCommunicationChannel) | **POST** /api/rest/2.0/system/communication-channels/validate |
 
 
 <a id="configureCommunicationChannelPreferences"></a>
@@ -288,6 +289,42 @@ null (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | Configuration successfully updated. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="validateCommunicationChannel"></a>
+# **validateCommunicationChannel**
+> CommunicationChannelValidateResponse validateCommunicationChannel(validateCommunicationChannelRequest)
+
+
+
+ Version: 26.4.0.cl or later   Validates a communication channel configuration to ensure it is properly set up and can receive events. - Use &#x60;channel_type&#x60; to specify the type of communication channel to validate (e.g., WEBHOOK). - Use &#x60;channel_identifier&#x60; to provide the unique identifier or name for the communication channel. - Use &#x60;event_type&#x60; to specify the event type to validate for this channel.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. For webhook channels, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to perform this action.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **validateCommunicationChannelRequest** | [**ValidateCommunicationChannelRequest**](ValidateCommunicationChannelRequest.md)
+
+### Return type
+
+[**CommunicationChannelValidateResponse**](CommunicationChannelValidateResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | communication channel configuration validated successfully. |  -  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |

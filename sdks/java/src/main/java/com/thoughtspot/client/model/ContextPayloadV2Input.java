@@ -35,11 +35,11 @@ public class ContextPayloadV2Input implements Serializable {
     /** Type of the context. */
     @JsonAdapter(TypeEnum.Adapter.class)
     public enum TypeEnum {
-        ANSWER("answer"),
+        DATA_SOURCE("data_source"),
 
-        LIVEBOARD("liveboard"),
+        DATA_SOURCE2("DATA_SOURCE"),
 
-        DATA_SOURCE("data_source");
+        AUTO_MODE("AUTO_MODE");
 
         private String value;
 
@@ -91,18 +91,6 @@ public class ContextPayloadV2Input implements Serializable {
     @javax.annotation.Nullable
     private TypeEnum type;
 
-    public static final String SERIALIZED_NAME_ANSWER_CONTEXT = "answer_context";
-
-    @SerializedName(SERIALIZED_NAME_ANSWER_CONTEXT)
-    @javax.annotation.Nullable
-    private AnswerContextInput answerContext;
-
-    public static final String SERIALIZED_NAME_LIVEBOARD_CONTEXT = "liveboard_context";
-
-    @SerializedName(SERIALIZED_NAME_LIVEBOARD_CONTEXT)
-    @javax.annotation.Nullable
-    private LBContextInput liveboardContext;
-
     public static final String SERIALIZED_NAME_DATA_SOURCE_CONTEXT = "data_source_context";
 
     @SerializedName(SERIALIZED_NAME_DATA_SOURCE_CONTEXT)
@@ -128,46 +116,6 @@ public class ContextPayloadV2Input implements Serializable {
 
     public void setType(@javax.annotation.Nullable TypeEnum type) {
         this.type = type;
-    }
-
-    public ContextPayloadV2Input answerContext(
-            @javax.annotation.Nullable AnswerContextInput answerContext) {
-        this.answerContext = answerContext;
-        return this;
-    }
-
-    /**
-     * Get answerContext
-     *
-     * @return answerContext
-     */
-    @javax.annotation.Nullable
-    public AnswerContextInput getAnswerContext() {
-        return answerContext;
-    }
-
-    public void setAnswerContext(@javax.annotation.Nullable AnswerContextInput answerContext) {
-        this.answerContext = answerContext;
-    }
-
-    public ContextPayloadV2Input liveboardContext(
-            @javax.annotation.Nullable LBContextInput liveboardContext) {
-        this.liveboardContext = liveboardContext;
-        return this;
-    }
-
-    /**
-     * Get liveboardContext
-     *
-     * @return liveboardContext
-     */
-    @javax.annotation.Nullable
-    public LBContextInput getLiveboardContext() {
-        return liveboardContext;
-    }
-
-    public void setLiveboardContext(@javax.annotation.Nullable LBContextInput liveboardContext) {
-        this.liveboardContext = liveboardContext;
     }
 
     public ContextPayloadV2Input dataSourceContext(
@@ -245,8 +193,6 @@ public class ContextPayloadV2Input implements Serializable {
         }
         ContextPayloadV2Input contextPayloadV2Input = (ContextPayloadV2Input) o;
         return Objects.equals(this.type, contextPayloadV2Input.type)
-                && Objects.equals(this.answerContext, contextPayloadV2Input.answerContext)
-                && Objects.equals(this.liveboardContext, contextPayloadV2Input.liveboardContext)
                 && Objects.equals(this.dataSourceContext, contextPayloadV2Input.dataSourceContext)
                 && Objects.equals(
                         this.additionalProperties, contextPayloadV2Input.additionalProperties);
@@ -263,8 +209,7 @@ public class ContextPayloadV2Input implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(
-                type, answerContext, liveboardContext, dataSourceContext, additionalProperties);
+        return Objects.hash(type, dataSourceContext, additionalProperties);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -279,8 +224,6 @@ public class ContextPayloadV2Input implements Serializable {
         StringBuilder sb = new StringBuilder();
         sb.append("class ContextPayloadV2Input {\n");
         sb.append("    type: ").append(toIndentedString(type)).append("\n");
-        sb.append("    answerContext: ").append(toIndentedString(answerContext)).append("\n");
-        sb.append("    liveboardContext: ").append(toIndentedString(liveboardContext)).append("\n");
         sb.append("    dataSourceContext: ")
                 .append(toIndentedString(dataSourceContext))
                 .append("\n");
@@ -309,8 +252,6 @@ public class ContextPayloadV2Input implements Serializable {
         // a set of all properties/fields (JSON key names)
         openapiFields = new HashSet<String>();
         openapiFields.add("type");
-        openapiFields.add("answer_context");
-        openapiFields.add("liveboard_context");
         openapiFields.add("data_source_context");
 
         // a set of required properties/fields (JSON key names)
@@ -346,15 +287,6 @@ public class ContextPayloadV2Input implements Serializable {
         // validate the optional field `type`
         if (jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) {
             TypeEnum.validateJsonElement(jsonObj.get("type"));
-        }
-        // validate the optional field `answer_context`
-        if (jsonObj.get("answer_context") != null && !jsonObj.get("answer_context").isJsonNull()) {
-            AnswerContextInput.validateJsonElement(jsonObj.get("answer_context"));
-        }
-        // validate the optional field `liveboard_context`
-        if (jsonObj.get("liveboard_context") != null
-                && !jsonObj.get("liveboard_context").isJsonNull()) {
-            LBContextInput.validateJsonElement(jsonObj.get("liveboard_context"));
         }
         // validate the optional field `data_source_context`
         if (jsonObj.get("data_source_context") != null

@@ -201,6 +201,12 @@ public class TemplatePropertiesInputCreate implements Serializable {
     @javax.annotation.Nullable
     private Boolean hideContactSupportUrl;
 
+    public static final String SERIALIZED_NAME_HIDE_LOGO_URL = "hide_logo_url";
+
+    @SerializedName(SERIALIZED_NAME_HIDE_LOGO_URL)
+    @javax.annotation.Nullable
+    private Boolean hideLogoUrl;
+
     public TemplatePropertiesInputCreate() {}
 
     public TemplatePropertiesInputCreate ctaButtonBgColor(
@@ -747,6 +753,26 @@ public class TemplatePropertiesInputCreate implements Serializable {
         this.hideContactSupportUrl = hideContactSupportUrl;
     }
 
+    public TemplatePropertiesInputCreate hideLogoUrl(
+            @javax.annotation.Nullable Boolean hideLogoUrl) {
+        this.hideLogoUrl = hideLogoUrl;
+        return this;
+    }
+
+    /**
+     * Whether to hide logo Version: 26.4.0.cl or later
+     *
+     * @return hideLogoUrl
+     */
+    @javax.annotation.Nullable
+    public Boolean getHideLogoUrl() {
+        return hideLogoUrl;
+    }
+
+    public void setHideLogoUrl(@javax.annotation.Nullable Boolean hideLogoUrl) {
+        this.hideLogoUrl = hideLogoUrl;
+    }
+
     /**
      * A container for additional, undeclared properties. This is a holder for any undeclared
      * properties as specified with the 'additionalProperties' keyword in the OAS document.
@@ -855,6 +881,7 @@ public class TemplatePropertiesInputCreate implements Serializable {
                 && Objects.equals(
                         this.hideContactSupportUrl,
                         templatePropertiesInputCreate.hideContactSupportUrl)
+                && Objects.equals(this.hideLogoUrl, templatePropertiesInputCreate.hideLogoUrl)
                 && Objects.equals(
                         this.additionalProperties,
                         templatePropertiesInputCreate.additionalProperties);
@@ -899,6 +926,7 @@ public class TemplatePropertiesInputCreate implements Serializable {
                 companyWebsiteUrl,
                 contactSupportUrl,
                 hideContactSupportUrl,
+                hideLogoUrl,
                 additionalProperties);
     }
 
@@ -968,6 +996,7 @@ public class TemplatePropertiesInputCreate implements Serializable {
         sb.append("    hideContactSupportUrl: ")
                 .append(toIndentedString(hideContactSupportUrl))
                 .append("\n");
+        sb.append("    hideLogoUrl: ").append(toIndentedString(hideLogoUrl)).append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
                 .append("\n");
@@ -1019,6 +1048,7 @@ public class TemplatePropertiesInputCreate implements Serializable {
         openapiFields.add("company_website_url");
         openapiFields.add("contact_support_url");
         openapiFields.add("hide_contact_support_url");
+        openapiFields.add("hide_logo_url");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
