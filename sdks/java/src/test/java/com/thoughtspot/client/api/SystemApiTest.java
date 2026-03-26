@@ -6,6 +6,7 @@ package com.thoughtspot.client.api;
 
 import com.thoughtspot.client.ApiException;
 import com.thoughtspot.client.model.CommunicationChannelPreferencesResponse;
+import com.thoughtspot.client.model.CommunicationChannelValidateResponse;
 import com.thoughtspot.client.model.ConfigureCommunicationChannelPreferencesRequest;
 import com.thoughtspot.client.model.ConfigureSecuritySettingsRequest;
 import com.thoughtspot.client.model.SearchCommunicationChannelPreferencesRequest;
@@ -15,6 +16,7 @@ import com.thoughtspot.client.model.SystemConfig;
 import com.thoughtspot.client.model.SystemInfo;
 import com.thoughtspot.client.model.SystemOverrideInfo;
 import com.thoughtspot.client.model.UpdateSystemConfigRequest;
+import com.thoughtspot.client.model.ValidateCommunicationChannelRequest;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -178,6 +180,27 @@ public class SystemApiTest {
     public void updateSystemConfigTest() throws ApiException {
         UpdateSystemConfigRequest updateSystemConfigRequest = null;
         api.updateSystemConfig(updateSystemConfigRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 26.4.0.cl or later Validates a communication channel configuration to ensure it is
+     * properly set up and can receive events. - Use &#x60;channel_type&#x60; to specify the type of
+     * communication channel to validate (e.g., WEBHOOK). - Use &#x60;channel_identifier&#x60; to
+     * provide the unique identifier or name for the communication channel. - Use
+     * &#x60;event_type&#x60; to specify the event type to validate for this channel. Requires
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has
+     * developer privilege**) privilege. For webhook channels, users with
+     * &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to
+     * perform this action.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void validateCommunicationChannelTest() throws ApiException {
+        ValidateCommunicationChannelRequest validateCommunicationChannelRequest = null;
+        CommunicationChannelValidateResponse response =
+                api.validateCommunicationChannel(validateCommunicationChannelRequest);
         // TODO: test validations
     }
 }

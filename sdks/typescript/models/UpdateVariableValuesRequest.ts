@@ -16,11 +16,11 @@ import { HttpFile } from '../http/http';
 
 export class UpdateVariableValuesRequest {
     /**
-    * Variables and values to update
+    * Array of variable assignment objects specifying the variable identifier, values to assign, and the operation type (ADD, REMOVE, REPLACE, or RESET) to perform on each variable.
     */
     'variable_assignment': Array<VariableUpdateAssignmentInput>;
     /**
-    * Variables and values to update
+    * Array of scope objects defining where the variable values apply, including organization context, optional principal constraints (user or group), model reference for formula variables, and priority for conflict resolution.
     */
     'variable_value_scope': Array<VariableUpdateScopeInput>;
 

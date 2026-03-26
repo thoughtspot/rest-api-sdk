@@ -1,6 +1,7 @@
 .gitignore
 AIApi.md
 AuthenticationApi.md
+CollectionsApi.md
 ConnectionConfigurationsApi.md
 ConnectionsApi.md
 CustomActionApi.md
@@ -9,6 +10,7 @@ DBTApi.md
 DataApi.md
 EmailCustomizationApi.md
 GroupsApi.md
+JobsApi.md
 LogApi.md
 MetadataApi.md
 OrgsApi.md
@@ -26,6 +28,7 @@ VersionControlApi.md
 WebhooksApi.md
 apis/AIApi.ts
 apis/AuthenticationApi.ts
+apis/CollectionsApi.ts
 apis/ConnectionConfigurationsApi.ts
 apis/ConnectionsApi.ts
 apis/CustomActionApi.ts
@@ -34,6 +37,7 @@ apis/DBTApi.ts
 apis/DataApi.ts
 apis/EmailCustomizationApi.ts
 apis/GroupsApi.ts
+apis/JobsApi.ts
 apis/LogApi.ts
 apis/MetadataApi.ts
 apis/OrgsApi.ts
@@ -90,8 +94,20 @@ models/CALLBACKInput.ts
 models/CALLBACKInputMandatory.ts
 models/CalendarResponse.ts
 models/ChangeUserPasswordRequest.ts
+models/ChannelHistoryEventInfo.ts
+models/ChannelHistoryEventInput.ts
+models/ChannelHistoryJob.ts
+models/ChannelValidationAwsS3Info.ts
+models/ChannelValidationDetail.ts
 models/ClusterNonEmbedAccess.ts
 models/ClusterNonEmbedAccessInput.ts
+models/Collection.ts
+models/CollectionDeleteResponse.ts
+models/CollectionDeleteTypeIdentifiers.ts
+models/CollectionEntityIdentifier.ts
+models/CollectionMetadataInput.ts
+models/CollectionMetadataItem.ts
+models/CollectionSearchResponse.ts
 models/Column.ts
 models/ColumnSecurityRule.ts
 models/ColumnSecurityRuleColumn.ts
@@ -107,6 +123,7 @@ models/CommitHistoryResponse.ts
 models/CommitResponse.ts
 models/CommiterType.ts
 models/CommunicationChannelPreferencesResponse.ts
+models/CommunicationChannelValidateResponse.ts
 models/ConfigureCommunicationChannelPreferencesRequest.ts
 models/ConfigureSecuritySettingsRequest.ts
 models/ConfigureSecuritySettingsRequestClusterPreferences.ts
@@ -123,6 +140,7 @@ models/CreateAgentConversationRequestConversationSettings.ts
 models/CreateAgentConversationRequestMetadataContext.ts
 models/CreateCalendarRequest.ts
 models/CreateCalendarRequestTableReference.ts
+models/CreateCollectionRequest.ts
 models/CreateConfigRequest.ts
 models/CreateConnectionConfigurationRequest.ts
 models/CreateConnectionConfigurationRequestPolicyProcessOptions.ts
@@ -166,12 +184,14 @@ models/DefaultActionConfig.ts
 models/DefaultActionConfigInput.ts
 models/DefaultActionConfigInputCreate.ts
 models/DefaultActionConfigSearchInput.ts
+models/DeleteCollectionRequest.ts
 models/DeleteConfigRequest.ts
 models/DeleteConnectionConfigurationRequest.ts
 models/DeleteConnectionRequest.ts
 models/DeleteMetadataRequest.ts
 models/DeleteMetadataTypeInput.ts
 models/DeleteOrgEmailCustomizationRequest.ts
+models/DeleteVariablesRequest.ts
 models/DeleteWebhookConfigurationsRequest.ts
 models/DeployCommitRequest.ts
 models/DeployResponse.ts
@@ -249,6 +269,7 @@ models/JWTMetadataObject.ts
 models/JWTParameter.ts
 models/JWTUserOptions.ts
 models/JWTUserOptionsFull.ts
+models/JobRecipient.ts
 models/LBContextInput.ts
 models/LiveboardContent.ts
 models/LiveboardDataResponse.ts
@@ -283,6 +304,7 @@ models/OrgPreferenceSearchCriteriaInput.ts
 models/OrgResponse.ts
 models/OrgType.ts
 models/ParameterValues.ts
+models/ParameterizeMetadataFieldsRequest.ts
 models/ParameterizeMetadataRequest.ts
 models/ParametersListItem.ts
 models/ParametersListItemInput.ts
@@ -300,6 +322,7 @@ models/PrincipalsListItem.ts
 models/PrincipalsListItemInput.ts
 models/PublishMetadataListItem.ts
 models/PublishMetadataRequest.ts
+models/PutVariableValuesRequest.ts
 models/QueryGetDecomposedQueryRequest.ts
 models/QueryGetDecomposedQueryRequestNlsRequest.ts
 models/RecipientDetails.ts
@@ -346,6 +369,10 @@ models/ScriptSrcUrls.ts
 models/ScriptSrcUrlsInput.ts
 models/SearchCalendarsRequest.ts
 models/SearchCalendarsRequestSortOptions.ts
+models/SearchChannelHistoryRequest.ts
+models/SearchChannelHistoryResponse.ts
+models/SearchCollectionsRequest.ts
+models/SearchCollectionsRequestSortOptions.ts
 models/SearchCommitsRequest.ts
 models/SearchCommunicationChannelPreferencesRequest.ts
 models/SearchConfigRequest.ts
@@ -371,7 +398,6 @@ models/SearchTagsRequest.ts
 models/SearchUserGroupsRequest.ts
 models/SearchUserGroupsRequestSortOptions.ts
 models/SearchUsersRequest.ts
-models/SearchUsersRequestSortOptions.ts
 models/SearchVariablesRequest.ts
 models/SearchWebhookConfigurationsRequest.ts
 models/SearchWebhookConfigurationsRequestSortOptions.ts
@@ -418,6 +444,7 @@ models/UnparameterizeMetadataRequest.ts
 models/UnpublishMetadataRequest.ts
 models/UpdateCalendarRequest.ts
 models/UpdateCalendarRequestTableReference.ts
+models/UpdateCollectionRequest.ts
 models/UpdateColumnSecurityRulesRequest.ts
 models/UpdateConfigRequest.ts
 models/UpdateConnectionConfigurationRequest.ts
@@ -451,11 +478,13 @@ models/UserInfo.ts
 models/UserObject.ts
 models/UserParameterOptions.ts
 models/UserPrincipal.ts
+models/ValidateCommunicationChannelRequest.ts
 models/ValidateMergeRequest.ts
 models/ValidateTokenRequest.ts
 models/ValueScopeInput.ts
 models/Variable.ts
 models/VariableDetailInput.ts
+models/VariablePutAssignmentInput.ts
 models/VariableUpdateAssignmentInput.ts
 models/VariableUpdateScopeInput.ts
 models/VariableValue.ts
@@ -470,6 +499,8 @@ models/WebhookAuthentication.ts
 models/WebhookAuthenticationInput.ts
 models/WebhookDeleteFailure.ts
 models/WebhookDeleteResponse.ts
+models/WebhookKeyValuePair.ts
+models/WebhookKeyValuePairInput.ts
 models/WebhookOrg.ts
 models/WebhookPagination.ts
 models/WebhookResponse.ts
@@ -484,6 +515,7 @@ rxjsStub.ts
 servers.ts
 tests/AIApiTest.ts
 tests/AuthenticationApiTest.ts
+tests/CollectionsApiTest.ts
 tests/ConnectionConfigurationsApiTest.ts
 tests/ConnectionsApiTest.ts
 tests/CustomActionApiTest.ts
@@ -492,6 +524,7 @@ tests/DBTApiTest.ts
 tests/DataApiTest.ts
 tests/EmailCustomizationApiTest.ts
 tests/GroupsApiTest.ts
+tests/JobsApiTest.ts
 tests/LogApiTest.ts
 tests/MetadataApiTest.ts
 tests/OrgsApiTest.ts

@@ -51,7 +51,10 @@ public class VariableValue implements Serializable {
     @javax.annotation.Nonnull
     private String orgIdentifier;
 
-    /** Principal type */
+    /**
+     * Type of principal to which this value applies. Use USER to assign the value to a specific
+     * user, or USER_GROUP to assign it to a group.
+     */
     @JsonAdapter(PrincipalTypeEnum.Adapter.class)
     public enum PrincipalTypeEnum {
         USER("USER"),
@@ -199,7 +202,8 @@ public class VariableValue implements Serializable {
     }
 
     /**
-     * Principal type
+     * Type of principal to which this value applies. Use USER to assign the value to a specific
+     * user, or USER_GROUP to assign it to a group.
      *
      * @return principalType
      */

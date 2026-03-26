@@ -60,5 +60,5 @@ export class VariableDetailInput {
 }
 
 
-export type VariableDetailInputTypeEnum = "CONNECTION_PROPERTY" | "TABLE_MAPPING" | "CONNECTION_PROPERTY_PER_PRINCIPAL" | "FORMULA_VARIABLE" ;
+export type VariableDetailInputTypeEnum = "CONNECTION_PROPERTY" | "TABLE_MAPPING" | "CONNECTION_PROPERTY_PER_PRINCIPAL" | "FORMULA_VARIABLE" | "USER_PROPERTY" ;
 

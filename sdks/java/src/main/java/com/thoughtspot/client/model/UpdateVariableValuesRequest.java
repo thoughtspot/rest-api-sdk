@@ -61,7 +61,8 @@ public class UpdateVariableValuesRequest implements Serializable {
     }
 
     /**
-     * Variables and values to update
+     * Array of variable assignment objects specifying the variable identifier, values to assign,
+     * and the operation type (ADD, REMOVE, REPLACE, or RESET) to perform on each variable.
      *
      * @return variableAssignment
      */
@@ -91,7 +92,9 @@ public class UpdateVariableValuesRequest implements Serializable {
     }
 
     /**
-     * Variables and values to update
+     * Array of scope objects defining where the variable values apply, including organization
+     * context, optional principal constraints (user or group), model reference for formula
+     * variables, and priority for conflict resolution.
      *
      * @return variableValueScope
      */

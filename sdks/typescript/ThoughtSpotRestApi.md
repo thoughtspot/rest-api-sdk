@@ -16,6 +16,7 @@ Method | HTTP request | Description
 [**copyObject**](ThoughtSpotRestApi.md#copyObject) | **POST** /api/rest/2.0/metadata/copyobject | 
 [**createAgentConversation**](ThoughtSpotRestApi.md#createAgentConversation) | **POST** /api/rest/2.0/ai/agent/conversation/create | 
 [**createCalendar**](ThoughtSpotRestApi.md#createCalendar) | **POST** /api/rest/2.0/calendars/create | 
+[**createCollection**](ThoughtSpotRestApi.md#createCollection) | **POST** /api/rest/2.0/collections/create | 
 [**createConfig**](ThoughtSpotRestApi.md#createConfig) | **POST** /api/rest/2.0/vcs/git/config/create | 
 [**createConnection**](ThoughtSpotRestApi.md#createConnection) | **POST** /api/rest/2.0/connection/create | 
 [**createConnectionConfiguration**](ThoughtSpotRestApi.md#createConnectionConfiguration) | **POST** /api/rest/2.0/connection-configurations/create | 
@@ -36,6 +37,7 @@ Method | HTTP request | Description
 [**dbtSearch**](ThoughtSpotRestApi.md#dbtSearch) | **POST** /api/rest/2.0/dbt/search | 
 [**deactivateUser**](ThoughtSpotRestApi.md#deactivateUser) | **POST** /api/rest/2.0/users/deactivate | 
 [**deleteCalendar**](ThoughtSpotRestApi.md#deleteCalendar) | **POST** /api/rest/2.0/calendars/{calendar_identifier}/delete | 
+[**deleteCollection**](ThoughtSpotRestApi.md#deleteCollection) | **POST** /api/rest/2.0/collections/delete | 
 [**deleteConfig**](ThoughtSpotRestApi.md#deleteConfig) | **POST** /api/rest/2.0/vcs/git/config/delete | 
 [**deleteConnection**](ThoughtSpotRestApi.md#deleteConnection) | **POST** /api/rest/2.0/connection/delete | 
 [**deleteConnectionConfiguration**](ThoughtSpotRestApi.md#deleteConnectionConfiguration) | **POST** /api/rest/2.0/connection-configurations/delete | 
@@ -52,6 +54,7 @@ Method | HTTP request | Description
 [**deleteUser**](ThoughtSpotRestApi.md#deleteUser) | **POST** /api/rest/2.0/users/{user_identifier}/delete | 
 [**deleteUserGroup**](ThoughtSpotRestApi.md#deleteUserGroup) | **POST** /api/rest/2.0/groups/{group_identifier}/delete | 
 [**deleteVariable**](ThoughtSpotRestApi.md#deleteVariable) | **POST** /api/rest/2.0/template/variables/{identifier}/delete | 
+[**deleteVariables**](ThoughtSpotRestApi.md#deleteVariables) | **POST** /api/rest/2.0/template/variables/delete | 
 [**deleteWebhookConfigurations**](ThoughtSpotRestApi.md#deleteWebhookConfigurations) | **POST** /api/rest/2.0/webhooks/delete | 
 [**deployCommit**](ThoughtSpotRestApi.md#deployCommit) | **POST** /api/rest/2.0/vcs/git/commits/deploy | 
 [**downloadConnectionMetadataChanges**](ThoughtSpotRestApi.md#downloadConnectionMetadataChanges) | **POST** /api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier} | 
@@ -91,13 +94,17 @@ Method | HTTP request | Description
 [**logout**](ThoughtSpotRestApi.md#logout) | **POST** /api/rest/2.0/auth/session/logout | 
 [**manageObjectPrivilege**](ThoughtSpotRestApi.md#manageObjectPrivilege) | **POST** /api/rest/2.0/security/metadata/manage-object-privilege | 
 [**parameterizeMetadata**](ThoughtSpotRestApi.md#parameterizeMetadata) | **POST** /api/rest/2.0/metadata/parameterize | 
+[**parameterizeMetadataFields**](ThoughtSpotRestApi.md#parameterizeMetadataFields) | **POST** /api/rest/2.0/metadata/parameterize-fields | 
 [**publishMetadata**](ThoughtSpotRestApi.md#publishMetadata) | **POST** /api/rest/2.0/security/metadata/publish | 
+[**putVariableValues**](ThoughtSpotRestApi.md#putVariableValues) | **POST** /api/rest/2.0/template/variables/{identifier}/update-values | 
 [**queryGetDecomposedQuery**](ThoughtSpotRestApi.md#queryGetDecomposedQuery) | **POST** /api/rest/2.0/ai/analytical-questions | 
 [**resetUserPassword**](ThoughtSpotRestApi.md#resetUserPassword) | **POST** /api/rest/2.0/users/reset-password | 
 [**revertCommit**](ThoughtSpotRestApi.md#revertCommit) | **POST** /api/rest/2.0/vcs/git/commits/{commit_id}/revert | 
 [**revokeRefreshTokens**](ThoughtSpotRestApi.md#revokeRefreshTokens) | **POST** /api/rest/2.0/connections/{connection_identifier}/revoke-refresh-tokens | 
 [**revokeToken**](ThoughtSpotRestApi.md#revokeToken) | **POST** /api/rest/2.0/auth/token/revoke | 
 [**searchCalendars**](ThoughtSpotRestApi.md#searchCalendars) | **POST** /api/rest/2.0/calendars/search | 
+[**searchChannelHistory**](ThoughtSpotRestApi.md#searchChannelHistory) | **POST** /api/rest/2.0/jobs/history/communication-channels/search | 
+[**searchCollections**](ThoughtSpotRestApi.md#searchCollections) | **POST** /api/rest/2.0/collections/search | 
 [**searchCommits**](ThoughtSpotRestApi.md#searchCommits) | **POST** /api/rest/2.0/vcs/git/commits/search | 
 [**searchCommunicationChannelPreferences**](ThoughtSpotRestApi.md#searchCommunicationChannelPreferences) | **POST** /api/rest/2.0/system/preferences/communication-channels/search | 
 [**searchConfig**](ThoughtSpotRestApi.md#searchConfig) | **POST** /api/rest/2.0/vcs/git/config/search | 
@@ -125,6 +132,7 @@ Method | HTTP request | Description
 [**unparameterizeMetadata**](ThoughtSpotRestApi.md#unparameterizeMetadata) | **POST** /api/rest/2.0/metadata/unparameterize | 
 [**unpublishMetadata**](ThoughtSpotRestApi.md#unpublishMetadata) | **POST** /api/rest/2.0/security/metadata/unpublish | 
 [**updateCalendar**](ThoughtSpotRestApi.md#updateCalendar) | **POST** /api/rest/2.0/calendars/{calendar_identifier}/update | 
+[**updateCollection**](ThoughtSpotRestApi.md#updateCollection) | **POST** /api/rest/2.0/collections/{collection_identifier}/update | 
 [**updateColumnSecurityRules**](ThoughtSpotRestApi.md#updateColumnSecurityRules) | **POST** /api/rest/2.0/security/column/rules/update | 
 [**updateConfig**](ThoughtSpotRestApi.md#updateConfig) | **POST** /api/rest/2.0/vcs/git/config/update | 
 [**updateConnection**](ThoughtSpotRestApi.md#updateConnection) | **POST** /api/rest/2.0/connection/update | 
@@ -145,6 +153,7 @@ Method | HTTP request | Description
 [**updateVariable**](ThoughtSpotRestApi.md#updateVariable) | **POST** /api/rest/2.0/template/variables/{identifier}/update | 
 [**updateVariableValues**](ThoughtSpotRestApi.md#updateVariableValues) | **POST** /api/rest/2.0/template/variables/update-values | 
 [**updateWebhookConfiguration**](ThoughtSpotRestApi.md#updateWebhookConfiguration) | **POST** /api/rest/2.0/webhooks/{webhook_identifier}/update | 
+[**validateCommunicationChannel**](ThoughtSpotRestApi.md#validateCommunicationChannel) | **POST** /api/rest/2.0/system/communication-channels/validate | 
 [**validateEmailCustomization**](ThoughtSpotRestApi.md#validateEmailCustomization) | **POST** /api/rest/2.0/customization/email/validate | 
 [**validateMerge**](ThoughtSpotRestApi.md#validateMerge) | **POST** /api/rest/2.0/vcs/git/branches/validate | 
 [**validateToken**](ThoughtSpotRestApi.md#validateToken) | **POST** /api/rest/2.0/auth/token/validate | 
@@ -852,7 +861,7 @@ Name | Type | Description  | Notes
 # **createAgentConversation**
 > AgentConversation createAgentConversation(createAgentConversationRequest)
 
- Version: 10.13.0.cl or later        
+ Version: 26.2.0.cl or later   Creates a new Spotter agent conversation based on the provided context and settings. The endpoint was in Beta from 26.2.0.cl through 26.4.0.cl.  Requires `CAN_USE_SPOTTER` privilege and at least view access to the metadata object specified in the request.  #### Usage guidelines  The request must include the `metadata_context` parameter to define the conversation context. The context type can be one of:  - `DATA_SOURCE` *(available from 26.5.0.cl)*: targets a specific data source. Provide `data_source_identifier` in `data_source_context` for a single data source, or `data_source_identifiers` for multi-data-source context. The deprecated `guid` field is accepted for backwards compatibility. - `AUTO_MODE` *(available from 26.5.0.cl)*: automatically discovers and selects the most relevant datasets for the user\'s queries.  > **Note for callers on versions 26.2.0.cl – 26.4.0.cl (Beta):** use the lowercase `data_source` enum value with the `guid` field instead of the above. Example: `{ \"type\": \"data_source\", \"data_source_context\": { \"guid\": \"<worksheet-id>\" } }`.  The `conversation_settings` parameter controls which Spotter capabilities are enabled for the conversation:  - `enable_contextual_change_analysis` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to `false` has no effect on versions >= 26.2.0.cl - `enable_natural_language_answer_generation` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to `false` has no effect on versions >= 26.2.0.cl - `enable_reasoning` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to `false` has no effect on versions >= 26.2.0.cl - `enable_save_chat` (default: `false`, *available from 26.5.0.cl*) — enables saving the conversation for later retrieval via conversation history  If the request is successful, the response includes a unique `conversation_identifier` that must be passed to `sendAgentConversationMessage` or `sendAgentConversationMessageStreaming` to send messages within this conversation. The response also includes `conversation_id` with the same value for backwards compatibility; use `conversation_identifier` for new integrations.  #### Example request  ```json {   \"metadata_context\": {     \"type\": \"DATA_SOURCE\",     \"data_source_context\": {       \"data_source_identifier\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\"     }   },   \"conversation_settings\": {} } ```  #### Error responses  | Code | Description                                                                                                                             | | ---- | --------------------------------------------------------------------------------------------------------------------------------------- | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                    | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks view permission on the specified metadata object. |  > ###### Note: > > - This endpoint was in Beta from 26.2.0.cl through 26.4.0.cl and is Generally Available from version 26.5.0.cl. > - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
 
 ### Example
 
@@ -907,6 +916,8 @@ Name | Type | Description  | Notes
 **200** | Common successful response |  -  |
 **201** | Common error response |  -  |
 **400** | Operation failed |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
 **500** | Operation failed |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
@@ -975,6 +986,77 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Custom calendar created successfully. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **createCollection**
+> Collection createCollection(createCollectionRequest)
+
+  Version: 26.4.0.cl or later   Creates a new collection in ThoughtSpot.  Collections allow you to organize and group related metadata objects such as Liveboards, Answers, worksheets, and other data objects. You can also create nested collections (sub-collections) to build a hierarchical structure.  #### Supported operations  The API endpoint lets you perform the following operations:  * Create a new collection * Add metadata objects (Liveboards, Answers, Logical Tables) to the collection * Create nested collections by adding sub-collections      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, CreateCollectionRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.createCollection(
+  // CreateCollectionRequest
+  {
+    name: "name_example",
+    description: "description_example",
+    metadata: [
+      {
+        type: "LIVEBOARD",
+        identifiers: [
+          "identifiers_example",
+        ],
+      },
+    ],
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **createCollectionRequest** | **CreateCollectionRequest**|  |
+
+
+### Return type
+
+**Collection**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Collection created successfully |  -  |
 **400** | Invalid request. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Forbidden access. |  -  |
@@ -1056,7 +1138,7 @@ Name | Type | Description  | Notes
 # **createConnection**
 > CreateConnectionResponse createConnection(createConnectionRequest)
 
-  Version: 9.2.0.cl or later   Creates a connection to a data warehouse for live query services.    Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  #### Create a connection without tables  To create a connection without tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a SnowFlake connection:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"externalDatabases\":[       ]   }   ``` 2. Set `validate` to `false`.  #### Create a connection with tables  To create a connection with tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"externalDatabases\":[         {            \"name\":\"AllDatatypes\",            \"isAutoCreated\":false,            \"schemas\":[               {                  \"name\":\"alldatatypes\",                  \"tables\":[                     {                        \"name\":\"allDatatypes\",                        \"type\":\"TABLE\",                        \"description\":\"\",                        \"selected\":true,                        \"linked\":true,                        \"columns\":[                           {                              \"name\":\"CNUMBER\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           },                           {                              \"name\":\"CDECIMAL\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           }                        ]                     }                  ]               }            ]         }      ]   }   ``` 2. Set `validate` to `true`.      
+  Version: 9.2.0.cl or later   Creates a connection to a data warehouse for live query services.    Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.  #### Create a connection without tables  To create a connection without tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a SnowFlake connection:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"authenticationType\": \"SERVICE_ACCOUNT\",      \"externalDatabases\":[       ]   }   ``` 2. Set `validate` to `false`.  **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.  #### Create a connection with tables  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) and `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**) privilege is required.  To create a connection with tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:   ```   {      \"configuration\":{         \"accountName\":\"thoughtspot_partner\",         \"user\":\"tsadmin\",         \"password\":\"TestConn123\",         \"role\":\"sysadmin\",         \"warehouse\":\"MEDIUM_WH\"      },      \"authenticationType\": \"SERVICE_ACCOUNT\",      \"externalDatabases\":[         {            \"name\":\"AllDatatypes\",            \"isAutoCreated\":false,            \"schemas\":[               {                  \"name\":\"alldatatypes\",                  \"tables\":[                     {                        \"name\":\"allDatatypes\",                        \"type\":\"TABLE\",                        \"description\":\"\",                        \"selected\":true,                        \"linked\":true,                        \"columns\":[                           {                              \"name\":\"CNUMBER\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           },                           {                              \"name\":\"CDECIMAL\",                              \"type\":\"INT64\",                              \"canImport\":true,                              \"selected\":true,                              \"isLinkedActive\":true,                              \"isImported\":false,                              \"tableName\":\"allDatatypes\",                              \"schemaName\":\"alldatatypes\",                              \"dbName\":\"AllDatatypes\"                           }                        ]                     }                  ]               }            ]         }      ]   }   ``` 2. Set `validate` to `true`.  **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.      
 
 ### Example
 
@@ -1197,7 +1279,7 @@ Name | Type | Description  | Notes
 # **createConversation**
 > Conversation createConversation(createConversationRequest)
 
- Version: 10.4.0.cl or later   Creates a Conversation object to start an AI-driven conversation based on a specific data model.  Requires at least view access to the metadata object specified in the request.  #### Usage guidelines  This API requires the `metadata_identifier` parameter to define the context for the conversation.  You can also specify the tokens to initiate the conversation as shown in this example:  `\"tokens\": \"[tea],[sales],[type]\"`  If the API request is successful, ThoughtSpot returns the ID of the conversation.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+ Version: 10.4.0.cl or later   Creates a new conversation session tied to a specific data model for AI-driven natural language querying.  Requires `CAN_USE_SPOTTER` privilege and at least view access to the metadata object specified in the request.  #### Usage guidelines  The request must include: - `metadata_identifier`: the unique ID of the data source that provides context for the conversation  Optionally, you can provide: - `tokens`: a token string to set initial context for the conversation (e.g., `\"[sales],[item type],[state]\"`)  If the request is successful, ThoughtSpot returns a unique `conversation_identifier` that must be passed to `sendMessage` to continue the conversation.  #### Error responses  | Code | Description | |------|-------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks view permission on the specified metadata object. |  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
 
 ### Example
 
@@ -1252,6 +1334,8 @@ Name | Type | Description  | Notes
 **200** | Common successful response |  -  |
 **201** | Common error response |  -  |
 **400** | Operation failed |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
 **500** | Operation failed |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
@@ -1926,6 +2010,12 @@ apiInstance.createWebhookConfiguration(
     authentication: null,
     signature_verification: null,
     storage_destination: null,
+    additional_headers: [
+      {
+        key: "key_example",
+        value: "value_example",
+      },
+    ],
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -2362,6 +2452,73 @@ Name | Type | Description  | Notes
 **400** | Invalid request. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **deleteCollection**
+> CollectionDeleteResponse deleteCollection(deleteCollectionRequest)
+
+  Version: 26.4.0.cl or later   Deletes one or more collections from ThoughtSpot.  #### Delete options  * **delete_children**: When set to `true`, deletes the child objects (metadata items) within the collection that the user has access to. Objects that the user does not have permission to delete will be skipped. * **dry_run**: When set to `true`, performs a preview of the deletion operation without actually deleting anything. The response shows what would be deleted, allowing you to review before committing the deletion.  #### Response  The response includes: * **metadata_deleted**: List of metadata objects that were successfully deleted * **metadata_skipped**: List of metadata objects that were skipped due to lack of permissions or other constraints      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, DeleteCollectionRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.deleteCollection(
+  // DeleteCollectionRequest
+  {
+    collection_identifiers: [
+      "collection_identifiers_example",
+    ],
+    delete_children: false,
+    dry_run: false,
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deleteCollectionRequest** | **DeleteCollectionRequest**|  |
+
+
+### Return type
+
+**CollectionDeleteResponse**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Collections deleted successfully. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**404** | Resource not found. |  -  |
 **500** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
@@ -3287,7 +3444,7 @@ Name | Type | Description  | Notes
 # **deleteVariable**
 > void deleteVariable()
 
- Delete a variable   Version: 10.14.0.cl or later   Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn\'t exist * The variable is being used by other objects      
+ Delete a variable   Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn\'t exist * The variable is being used by other objects      
 
 ### Example
 
@@ -3337,6 +3494,70 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **204** | Deleting the variable is successful. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **deleteVariables**
+> void deleteVariables(deleteVariablesRequest)
+
+ Delete variable(s)   Version: 26.4.0.cl or later   Allows deleting multiple variables from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifiers (IDs or names)  The operation will fail if: * The user lacks required permissions * Any of the variables don\'t exist * Any of the variables are being used by other objects      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, DeleteVariablesRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.deleteVariables(
+  // DeleteVariablesRequest
+  {
+    identifiers: [
+      "identifiers_example",
+    ],
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deleteVariablesRequest** | **DeleteVariablesRequest**|  |
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Deletion of variable(s) is successful. |  -  |
 **400** | Invalid request. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Forbidden access. |  -  |
@@ -4931,7 +5152,7 @@ No authorization required
 # **getDataSourceSuggestions**
 > EurekaDataSourceSuggestionResponse getDataSourceSuggestions(getDataSourceSuggestionsRequest)
 
- Version: 10.15.0.cl or later   Provides relevant data source recommendations for a user-submitted natural language query.  To use this API, the user must have at least view-level access to the underlying metadata entities referenced in the response.  #### Usage guidelines  The request must include a `query` string via the request body.  The returned results include metadata such as: - `confidence`: a float indicating the model\'s confidence in the relevance of each recommendation - `details`: includes `data_source_identifier`, `data_source_name`, and `description` of each recommended data source - `reasoning`: rationale provided by the LLM to explain why each data source was recommended  If the API request is successful, ThoughtSpot returns a ranked list of data sources, each annotated with relevant reasoning.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before it is made Generally Available. > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+ Version: 10.15.0.cl or later   Suggests the most relevant data sources for a given natural language query, ranked by confidence with LLM-generated reasoning.  Requires `CAN_USE_SPOTTER` privilege and at least view-level access to the underlying metadata entities referenced in the response.  #### Usage guidelines  The request must include: - `query`: the natural language question to find relevant data sources for  If the request is successful, the API returns a ranked list of suggested data sources, each containing: - `confidence`: a float score indicating the model\'s confidence in the relevance of the suggestion - `details`: metadata about the data source   - `data_source_identifier`: the unique ID of the data source   - `data_source_name`: the display name of the data source   - `description`: a description of the data source - `reasoning`: LLM-generated rationale explaining why the data source was recommended  #### Error responses  | Code | Description                                                                                                                                | |------|--------------------------------------------------------------------------------------------------------------------------------------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                       | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks view permission on the underlying metadata entities. |  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before it is made Generally Available. > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
 
 ### Example
 
@@ -4985,6 +5206,8 @@ Name | Type | Description  | Notes
 **200** | Common successful response |  -  |
 **201** | Common error response |  -  |
 **400** | Operation failed |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
 **500** | Operation failed |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
@@ -5065,7 +5288,7 @@ No authorization required
 # **getNLInstructions**
 > EurekaGetNLInstructionsResponse getNLInstructions(getNLInstructionsRequest)
 
- Version: 10.15.0.cl or later   This API allows users to retrieve existing natural language (NL) instructions for a specific data-model. These instructions guide the AI system in understanding data context and generating more accurate responses when processing natural language queries.  #### Usage guidelines  To retrieve NL instructions for a data-model, the request must include: - `data_source_identifier`: The unique ID of the data-model to retrieve NL instructions  The API returns a response object with: - `nl_instructions_info`: An array of instruction objects, each containing:   - `instructions`: Array of text instructions for natural language processing   - `scope`: The scope of the instruction (`GLOBAL`). It can be extended to data-model-user scope in future.  #### Instructions Scope  - **GLOBAL**: Instructions that apply globally across the system on the given data-model (currently only global instructions are supported)  > ###### Note: > * To use this API, the user needs atleast view access on the data-model and they must use corresponding org related bearerToken where the data-model exists. > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * Available from version 10.15.0.cl and later. > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. > * Use this API to view currently configured instructions before modifying them with `setNLInstructions`.     
+ Version: 10.15.0.cl or later   Retrieves existing natural language (NL) instructions configured for a specific data model. These instructions guide the AI system in understanding data context and generating more accurate responses.  Requires `CAN_USE_SPOTTER` privilege, at least view access on the data model, and a bearer token corresponding to the org where the data model exists.  #### Usage guidelines  The request must include:  - `data_source_identifier`: the unique ID of the data model to retrieve instructions for  If the request is successful, the API returns:  - `nl_instructions_info`: an array of instruction objects, each containing:   - `instructions`: the configured text instructions for AI processing   - `scope`: the scope of the instruction — currently only `GLOBAL` is supported  #### Instructions scope  - **GLOBAL**: Instructions that apply globally across the system on the given data-model (currently only global instructions are supported)  #### Error responses  | Code | Description                                                                                                                                                                                        | |------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                                                               | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, lacks view access on the data model, or the bearer token does not correspond to the org where the data model exists. |  > ###### Note: > > - To use this API, the user needs at least view access on the data model, and must use the bearer token corresponding to the org where the data model exists. > - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > - Available from version 10.15.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. > - Use this API to review currently configured instructions before modifying them with `setNLInstructions`.      
 
 ### Example
 
@@ -5119,6 +5342,8 @@ Name | Type | Description  | Notes
 **200** | Common successful response |  -  |
 **201** | Common error response |  -  |
 **400** | Operation failed |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
 **500** | Operation failed |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
@@ -5200,7 +5425,7 @@ No authorization required
 # **getRelevantQuestions**
 > EurekaGetRelevantQuestionsResponse getRelevantQuestions(getRelevantQuestionsRequest)
 
- Version: 10.13.0.cl or later   Breaks down a user-submitted query into a series of analytical sub-questions using relevant contextual metadata.  To use this API, the user must have at least view-level access to the referenced metadata objects.  #### Usage guidelines  To accurately generate relevant questions, the request must include at least one of the following metadata identifiers within `metadata_context` : `conversation_identifier`, `answer_identifiers`, `liveboard_identifiers`, or `data_source_identifiers`.  You can further enhance the quality and precision of breakdown by providing additional `ai_context` such as:  - `content`: User provided content like text data, csv data as a string message to provide context & potentially improve the quality of the response. - `instructions`: User specific text instructions sent to AI system for processing the query.  Additional optional parameters include:  - `limit_relevant_questions`: Controls the maximum number of relevant questions returned. Defaults to 5 if not specified. - `bypass_cache`: If set to true, forces fresh computation instead of returning cached results.  If the API request is successful, ThoughtSpot returns a list of relevant analytical queries, each aligned with the user\'s original question. Each returned question includes the query string, along with the identifier and name of the corresponding data source.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.     
+ Version: 10.13.0.cl or later   Breaks down a natural language query into a series of smaller analytical sub-questions, each mapped to a relevant data source.  Requires `CAN_USE_SPOTTER` privilege and at least view-level access to the referenced metadata objects.  #### Usage guidelines  The request must include: - `query`: the natural language question to decompose into analytical sub-questions - `metadata_context`: at least one of the following context identifiers to guide question generation:   - `conversation_identifier` — an existing conversation session ID   - `answer_identifiers` — a list of Answer GUIDs   - `liveboard_identifiers` — a list of Liveboard GUIDs   - `data_source_identifiers` — a list of data source GUIDs  Optional parameters for refining the output: - `ai_context`: additional context to improve response quality   - `content` — supplementary text or CSV data as string input   - `instructions` — custom text instructions for the AI system - `limit_relevant_questions`: maximum number of questions to return (default: `5`) - `bypass_cache`: if `true`, forces fresh computation instead of returning cached results  If the request is successful, the API returns a list of relevant analytical questions, each containing: - `query`: the generated sub-question - `data_source_identifier`: the unique ID of the data source the question targets - `data_source_name`: the display name of the corresponding data source  #### Error responses  | Code | Description                                                                                                                           | |------|---------------------------------------------------------------------------------------------------------------------------------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                  | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks view access to the referenced metadata objects. |  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
 
 ### Example
 
@@ -5258,6 +5483,8 @@ Name | Type | Description  | Notes
 **200** | Common successful response |  -  |
 **201** | Common error response |  -  |
 **400** | Operation failed |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
 **500** | Operation failed |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
@@ -5936,7 +6163,7 @@ Name | Type | Description  | Notes
 # **parameterizeMetadata**
 > void parameterizeMetadata(parameterizeMetadataRequest)
 
- Parameterize fields in metadata objects.   Version: 10.9.0.cl or later   Allows parameterizing fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be parameterized.  For Connection Config, the only supported field name is: * impersonate_user      
+ Parameterize fields in metadata objects.   Version: 10.9.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/metadata/parameterize-fields](/api/rest/2.0/metadata/parameterize-fields) instead.  Allows parameterizing fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be parameterized.  For Connection Config, the only supported field name is: * impersonate_user      
 
 ### Example
 
@@ -5972,6 +6199,74 @@ apiInstance.parameterizeMetadata(
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **parameterizeMetadataRequest** | **ParameterizeMetadataRequest**|  |
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Parameterize successful. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **parameterizeMetadataFields**
+> void parameterizeMetadataFields(parameterizeMetadataFieldsRequest)
+
+ Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.4.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, ParameterizeMetadataFieldsRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.parameterizeMetadataFields(
+  // ParameterizeMetadataFieldsRequest
+  {
+    metadata_type: "LOGICAL_TABLE",
+    metadata_identifier: "metadata_identifier_example",
+    field_type: "ATTRIBUTE",
+    field_names: [
+      "field_names_example",
+    ],
+    variable_identifier: "variable_identifier_example",
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **parameterizeMetadataFieldsRequest** | **ParameterizeMetadataFieldsRequest**|  |
 
 
 ### Return type
@@ -6070,10 +6365,87 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
+# **putVariableValues**
+> void putVariableValues(putVariableValuesRequest)
+
+ Update values for a variable   Version: 26.4.0.cl or later   Allows updating values for a specific variable in ThoughtSpot.  Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows: * Adding new values to the variable * Replacing existing values * Deleting values from the variable * Resetting all values  When updating variable values, you need to specify: * The variable identifier (ID or name) * The values to add/replace/remove * The operation to perform (ADD, REPLACE, REMOVE, RESET)  Behaviour based on operation type: * ADD - Adds values to the variable if this is a list type variable, else same as replace. * REPLACE - Replaces all values of a given set of constraints with the current set of values. * REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value. * RESET - Removes all constraints for the given variable, scope is ignored      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, PutVariableValuesRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.putVariableValues(
+  // string | Unique ID or name of the variable
+  "identifier_example" , 
+  // PutVariableValuesRequest
+  {
+    operation: "ADD",
+    variable_assignment: [
+      {
+        assigned_values: [
+          "assigned_values_example",
+        ],
+        org_identifier: "org_identifier_example",
+        principal_type: "USER",
+        principal_identifier: "principal_identifier_example",
+        model_identifier: "model_identifier_example",
+        priority: 1,
+      },
+    ],
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **putVariableValuesRequest** | **PutVariableValuesRequest**|  |
+ **identifier** | [**string**] | Unique ID or name of the variable | defaults to undefined
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Variable values updated successfully. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
 # **queryGetDecomposedQuery**
 > EurekaDecomposeQueryResponse queryGetDecomposedQuery(queryGetDecomposedQueryRequest)
 
- Version: 10.7.0.cl or later        
+ Version: 10.7.0.cl or later   **Deprecated** — Use `getRelevantQuestions` instead (available from 10.13.0.cl).  Breaks down a topical or goal-oriented natural language question into smaller, actionable analytical sub-questions, each mapped to a relevant data source for independent execution.  Requires `CAN_USE_SPOTTER` privilege and at least view-level access to the referenced metadata objects.  #### Usage guidelines  The request accepts the following parameters:  - `nlsRequest`: contains the user `query` to decompose, along with optional `instructions` and `bypassCache` flag - `worksheetIds`: list of data source identifiers to scope the decomposition - `answerIds`: list of Answer GUIDs whose data guides the response - `liveboardIds`: list of Liveboard GUIDs whose data guides the response - `conversationId`: an existing conversation session ID for context continuity - `content`: supplementary text or CSV data to improve response quality - `maxDecomposedQueries`: maximum number of sub-questions to return (default: `5`)  If the request is successful, the API returns a `decomposedQueryResponse` containing a list of `decomposedQueries`, each with: - `query`: the generated analytical sub-question - `worksheetId`: the unique ID of the data source the question targets - `worksheetName`: the display name of the corresponding data source  #### Error responses  | Code | Description                                                                                                                           | |------|---------------------------------------------------------------------------------------------------------------------------------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                  | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks view access to the referenced metadata objects. |  > ###### Note: > * This endpoint is deprecated since 10.13.0.cl. Use `getRelevantQuestions` for new integrations. > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter — please contact ThoughtSpot support to enable Spotter on your cluster.      
 
 ### Example
 
@@ -6141,6 +6513,8 @@ Name | Type | Description  | Notes
 **200** | Common successful response |  -  |
 **201** | Common error response |  -  |
 **400** | Operation failed |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
 **500** | Operation failed |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
@@ -6477,6 +6851,154 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Custom calendar fetched successfully. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **searchChannelHistory**
+> SearchChannelHistoryResponse searchChannelHistory(searchChannelHistoryRequest)
+
+  Version: 26.4.0.cl or later   Searches delivery history for communication channels such as webhooks. Returns channel-level delivery status for each job execution record. Use this to monitor channel health and delivery success rates across events.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.  **NOTE**: When `channel_type` is `WEBHOOK`, the following constraints apply:  - `job_ids`, `channel_identifiers`, and `events` each accept at most one element. - When `job_ids` is provided, it is used as the sole lookup key and other filter fields are ignored. - When `job_ids` is not provided, `channel_identifiers` and `events` are both required. Each must contain exactly one element, and the event object must include the `identifier` field. - Records older than the configured retention period are not returned.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, SearchChannelHistoryRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.searchChannelHistory(
+  // SearchChannelHistoryRequest
+  {
+    channel_type: "WEBHOOK",
+    job_ids: [
+      "job_ids_example",
+    ],
+    channel_identifiers: [
+      "channel_identifiers_example",
+    ],
+    channel_status: "PENDING",
+    events: [
+      {
+        type: "LIVEBOARD_SCHEDULE",
+        identifier: "identifier_example",
+      },
+    ],
+    start_epoch_time_in_millis: 3.14,
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **searchChannelHistoryRequest** | **SearchChannelHistoryRequest**|  |
+
+
+### Return type
+
+**SearchChannelHistoryResponse**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Channel status logs retrieved successfully. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **searchCollections**
+> CollectionSearchResponse searchCollections(searchCollectionsRequest)
+
+  Version: 26.4.0.cl or later   Gets a list of collections available in ThoughtSpot.  To get details of a specific collection, specify the collection GUID or name. You can also filter the API response based on the collection name pattern, author, and other criteria.  #### Search options  * **name_pattern**: Use \'%\' as a wildcard character to match collection names * **collection_identifiers**: Search for specific collections by their GUIDs or names * **include_metadata**: When set to `true`, includes the metadata objects within each collection in the response  **NOTE**: If the API returns an empty list, consider increasing the value of the `record_size` parameter. To search across all available collections, set `record_size` to `-1`.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, SearchCollectionsRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.searchCollections(
+  // SearchCollectionsRequest
+  {
+    name_pattern: "name_pattern_example",
+    record_offset: 0,
+    record_size: 10,
+    collection_identifiers: [
+      "collection_identifiers_example",
+    ],
+    created_by_user_identifiers: [
+      "created_by_user_identifiers_example",
+    ],
+    include_metadata: false,
+    sort_options: null,
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **searchCollectionsRequest** | **SearchCollectionsRequest**|  |
+
+
+### Return type
+
+**CollectionSearchResponse**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully retrieved list of collections |  -  |
 **400** | Invalid request. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Forbidden access. |  -  |
@@ -7776,7 +8298,7 @@ Name | Type | Description  | Notes
 # **sendAgentMessage**
 > any sendAgentMessage(sendAgentMessageRequest)
 
- Version: 10.15.0.cl or later   This API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages.  To use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.   #### Usage guidelines  To initiate or continue a conversation, the request must include: - `conversation_identifier`: a unique session ID for continuity and message tracking - `messages`: an array of one or more text messages, each with a value and type  The API returns a array of object with a type, message, and metadata. - `type`: Type of the message — text, answer, or error. - `message`: Main content of the response. - `metadata`: Additional info depending on the message type.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.     
+ Version: 10.15.0.cl or later   **Deprecated** — Use `sendAgentConversationMessage` instead.  Send natural language messages to an existing Spotter agent conversation and returns the complete response synchronously.  Requires `CAN_USE_SPOTTER` privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by `conversation_identifier`. A conversation must first be created using the `createAgentConversation` API.  #### Usage guidelines  The request must include:  - `conversation_identifier`: the unique session ID returned by `createAgentConversation`, used for context continuity and message tracking - `messages`: an array of one or more text messages to send to the agent  The API returns an array of response objects, each containing:  - `type`: the kind of response — `text`, `answer`, or `error` - `message`: the main content of the response - `metadata`: additional information depending on the message type (e.g., answer metadata includes analytics and visualization details)  #### Error responses  | Code | Description                                                                                                                      | |------|----------------------------------------------------------------------------------------------------------------------------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks permission on the referenced conversation. |  > ###### Note: > > - This endpoint is deprecated. Use `sendAgentConversationMessage` for new integrations. > - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
 
 ### Example
 
@@ -7835,6 +8357,8 @@ Name | Type | Description  | Notes
 **200** | Common successful response |  -  |
 **201** | Common error response |  -  |
 **400** | Operation failed |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
 **500** | Operation failed |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
@@ -7842,7 +8366,7 @@ Name | Type | Description  | Notes
 # **sendAgentMessageStreaming**
 > SendAgentMessageResponse sendAgentMessageStreaming(sendAgentMessageStreamingRequest)
 
- Version: 10.13.0.cl or later   This API allows users to initiate or continue an agent (Spotter) conversation by submitting one or more natural language messages.  To use this API, the user must have access to the relevant conversational session (via conversation_identifier) and submit at least one message.   #### Usage guidelines  To initiate or continue a conversation, the request must include: - `conversation_identifier`: a unique session ID for continuity and message tracking - `messages`: an array of one or more text messages, each with a value and type  Additionally, user can specify what tool can be included `conversation_settings` parameter, which supports: - `enable_contextual_change_analysis` (default: false) - `enable_natural_language_answer_generation` (default: true) - `enable_reasoning` (default: false)  If the request is valid, the API returns a stream of messages in real time, including: - `ack`: confirms receipt of the request - `text / text-chunk`: content chunks, optionally formatted (e.g., markdown) - `answer`: the final structured response with metadata and analytics - `error`: if a failure occurs - `notification`: notification messages for operation being performed  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster. > * The streaming protocol uses Server-Sent Events (SSE)     
+ Version: 10.13.0.cl or later   **Deprecated** — Use `sendAgentConversationMessageStreaming` instead.  Sends one or more natural language messages to an existing Spotter agent conversation and returns the response as a real-time Server-Sent Events stream.  Requires `CAN_USE_SPOTTER` privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by `conversation_identifier`. A conversation must first be created using the `createAgentConversation` API.  #### Usage guidelines  The request must include:  - `conversation_identifier`: the unique session ID returned by `createAgentConversation`, used for context continuity and message tracking - `messages`: an array of one or more text messages to send to the agent  If the request is valid, the API returns a Server-Sent Events (SSE) stream. Each line has the form `data: [{\"type\": \"...\", ...}]` — a JSON array of event objects. Event types include:  - `ack`: confirms receipt of the request (`node_id`) - `conv_title`: conversation title (`title`, `conv_id`) - `notification`: status updates on operations (`group_id`, `metadata`, `code` — e.g. `TOOL_CALL_NOTIFICATION`, `nls_start`, `FINAL_RESPONSE_NOTIFICATION`) - `text-chunk`: incremental content chunks (`id`, `group_id`, `metadata` with `format` and `type` such as `thinking` or `text`, `content`) - `text`: full text block with same structure as `text-chunk` - `answer`: structured answer with metadata (`id`, `group_id`, `metadata` with `sage_query`, `session_id`, `title`, etc., `title`) - `error`: if a failure occurs  #### Error responses  | Code | Description                                                                                                                      | |------|----------------------------------------------------------------------------------------------------------------------------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks permission on the referenced conversation. |  > ###### Note: > > - This endpoint is deprecated. Use `sendAgentConversationMessageStreaming` for new integrations. > - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster. > - The streaming protocol uses Server-Sent Events (SSE).      
 
 ### Example
 
@@ -7899,6 +8423,8 @@ Name | Type | Description  | Notes
 **200** | Common successful response |  -  |
 **201** | Common error response |  -  |
 **400** | Operation failed |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
 **500** | Operation failed |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
@@ -7906,7 +8432,7 @@ Name | Type | Description  | Notes
 # **sendMessage**
 > Array<ResponseMessage> sendMessage(sendMessageRequest)
 
- Version: 10.4.0.cl or later   Allows sending a follow-up message to an ongoing conversation within the context of the metadata model.  Requires at least view access to the metadata object specified in the request.  #### Usage guidelines  The API requires you to specify the `conversation_identifier` in the request path, and a `metadata_identifier` and `message` string in the request body.  If the API request is successful, ThoughtSpot returns the session ID, tokens used in the conversation, and visualization type.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+ Version: 10.4.0.cl or later   Sends a follow-up message to an existing conversation within the context of a data model.  Requires `CAN_USE_SPOTTER` privilege and at least view access to the metadata object specified in the request. A conversation must first be created using the `createConversation` API.  #### Usage guidelines  The request must include: - `conversation_identifier`: the unique session ID returned by `createConversation` - `metadata_identifier`: the unique ID of the data source used for the conversation - `message`: a natural language string with the follow-up question  If the request is successful, the API returns an array of response messages, each containing: - `session_identifier`: the unique ID of the generated response - `generation_number`: the generation number of the response - `message_type`: the type of the response (e.g., `TSAnswer`) - `visualization_type`: the generated visualization type (`Chart`, `Table`, or `Undefined`) - `tokens` / `display_tokens`: the search tokens and user-friendly display tokens for the response  #### Error responses  | Code | Description                                                                                                                             | |------|-----------------------------------------------------------------------------------------------------------------------------------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                    | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks view permission on the specified metadata object. |  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
 
 ### Example
 
@@ -7964,6 +8490,8 @@ Name | Type | Description  | Notes
 **200** | Common successful response |  -  |
 **201** | Common error response |  -  |
 **400** | Operation failed |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
 **500** | Operation failed |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
@@ -7971,7 +8499,7 @@ Name | Type | Description  | Notes
 # **setNLInstructions**
 > EurekaSetNLInstructionsResponse setNLInstructions(setNLInstructionsRequest)
 
- Version: 10.15.0.cl or later   This API allows users to set natural language (NL) instructions for a specific data-model to improve AI-generated answers and query processing. These instructions help guide the AI system to better understand the data context and provide more accurate responses.  #### Usage guidelines  To set NL instructions for a data-model, the request must include: - `data_source_identifier`: The unique ID of the data-model for which to set NL instructions - `nl_instructions_info`: An array of instruction objects, each containing:   - `instructions`: Array of text instructions for the LLM   - `scope`: The scope of the instruction (`GLOBAL`). Currently only `GLOBAL` is supported. It can be extended to data-model-user scope in future.  The API returns a response object with: - `success`: Boolean indicating whether the operation was successful  #### Instructions Scope  - **GLOBAL**: Instructions that apply globally for that data-model across the system  > ###### Note: > * To use this API, the user needs either edit access or SPOTTER_COACHING_PRIVILEGE on the data-model and they must use corresponding org related bearerToken where the data-model exists. > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * Available from version 10.15.0.cl and later. > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. > * Instructions help improve the accuracy and relevance of AI-generated responses for the specified data-model.      
+ Version: 10.15.0.cl or later   This API allows users to set natural language (NL) instructions for a specific data-model to improve AI-generated answers and query processing. These instructions help guide the AI system to better understand the data context and provide more accurate responses.  Requires `CAN_USE_SPOTTER` privilege, either edit access or `SPOTTER_COACHING_PRIVILEGE` on the data model, and a bearer token corresponding to the org where the data model exists.  #### Usage guidelines  To set NL instructions for a data-model, the request must include:  - `data_source_identifier`: The unique ID of the data-model for which to set NL instructions - `nl_instructions_info`: An array of instruction objects, each containing:   - `instructions`: Array of text instructions for the LLM   - `scope`: The scope of the instruction (`GLOBAL`). Currently only `GLOBAL` is supported. It can be extended to data-model-user scope in future.  #### Instructions scope  - **GLOBAL**: instructions that apply to all users querying this data model  If the request is successful, the API returns:  - `success`: a boolean indicating whether the operation completed successfully  #### Error responses  | Code | Description                                                                                                                                                                                                                        | |------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                                                                                               | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, lacks edit access or `SPOTTER_COACHING_PRIVILEGE` on the data model, or the bearer token does not correspond to the org where the data model exists. |  > ###### Note: > > - To use this API, the user needs either edit access or `SPOTTER_COACHING_PRIVILEGE` on the data model, and must use the bearer token corresponding to the org where the data model exists. > - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > - Available from version 10.15.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. > - Instructions help improve the accuracy and relevance of AI-generated responses for the specified data-model.      
 
 ### Example
 
@@ -8033,6 +8561,8 @@ Name | Type | Description  | Notes
 **200** | Common successful response |  -  |
 **201** | Common error response |  -  |
 **400** | Operation failed |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
 **500** | Operation failed |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
@@ -8128,7 +8658,7 @@ Name | Type | Description  | Notes
 # **singleAnswer**
 > ResponseMessage singleAnswer(singleAnswerRequest)
 
- Version: 10.4.0.cl or later   Processes a natural language query and returns an AI-generated response based on a specified data model.  Requires at least view access to the metadata object specified in the request.  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+ Version: 10.4.0.cl or later   Processes a natural language query against a specified data model and returns a single AI-generated answer without requiring a conversation session.  Requires `CAN_USE_SPOTTER` privilege and at least view access to the metadata object specified in the request.  #### Usage guidelines  The request must include: - `query`: a natural language question (e.g., \"What were total sales last quarter?\") - `metadata_identifier`: the unique ID of the data source to query against  If the request is successful, the API returns a response message containing: - `session_identifier`: the unique ID of the generated response - `generation_number`: the generation number of the response - `message_type`: the type of the response (e.g., `TSAnswer`) - `visualization_type`: the generated visualization type (`Chart`, `Table`, or `Undefined`) - `tokens` / `display_tokens`: the search tokens and user-friendly display tokens for the response  #### Error responses  | Code | Description                                                                                                                             | |------|-----------------------------------------------------------------------------------------------------------------------------------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                    | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks view permission on the specified metadata object. |  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
 
 ### Example
 
@@ -8183,6 +8713,8 @@ Name | Type | Description  | Notes
 **200** | Common successful response |  -  |
 **201** | Common error response |  -  |
 **400** | Operation failed |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
 **500** | Operation failed |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
@@ -8464,6 +8996,82 @@ Name | Type | Description  | Notes
 **400** | Invalid request. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **updateCollection**
+> void updateCollection(updateCollectionRequest)
+
+  Version: 26.4.0.cl or later   Updates an existing collection in ThoughtSpot.  #### Supported operations  This API endpoint lets you perform the following operations:  * Update collection name and description * Change visibility settings * Add metadata objects to the collection (operation: ADD) * Remove metadata objects from the collection (operation: REMOVE) * Replace all metadata objects in the collection (operation: REPLACE)  #### Operation types  * **ADD**: Adds the specified metadata objects to the existing collection without removing current items * **REMOVE**: Removes only the specified metadata objects from the collection * **REPLACE**: Replaces all existing metadata objects with the specified items (default behavior)      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, UpdateCollectionRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.updateCollection(
+  // string | Unique GUID of the collection. Note: Collection names cannot be used as identifiers since duplicate names are allowed.
+  "collection_identifier_example" , 
+  // UpdateCollectionRequest
+  {
+    name: "name_example",
+    description: "description_example",
+    metadata: [
+      {
+        type: "LIVEBOARD",
+        identifiers: [
+          "identifiers_example",
+        ],
+      },
+    ],
+    operation: "REPLACE",
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **updateCollectionRequest** | **UpdateCollectionRequest**|  |
+ **collectionIdentifier** | [**string**] | Unique GUID of the collection. Note: Collection names cannot be used as identifiers since duplicate names are allowed. | defaults to undefined
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Collection updated successfully. No content returned. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**404** | Resource not found. |  -  |
 **500** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
@@ -9797,7 +10405,7 @@ Name | Type | Description  | Notes
 # **updateVariableValues**
 > void updateVariableValues(updateVariableValuesRequest)
 
- Update values for multiple variables   Version: 10.14.0.cl or later   Allows updating values for multiple variables in ThoughtSpot.  Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows: * Adding new values to variables * Replacing existing values * Deleting values from variables  When updating variable values, you need to specify: * The variable identifiers * The values to add/replace/remove for each variable * The operation to perform (ADD, REPLACE, REMOVE, RESET)  Behaviour based on operation type: * ADD - Adds values to the variable if this is a list type variable, else same as replace. * REPLACE - Replaces all values of a given set of constraints with the current set of values. * REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value. * RESET - Removes all constrains for a given variable, scope is ignored      
+ Update values for multiple variables   Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/{identifier}/update-values](/api/rest/2.0/template/variables/%7Bidentifier%7D/update-values) instead.  Allows updating values for multiple variables in ThoughtSpot.  Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows: * Adding new values to variables * Replacing existing values * Deleting values from variables  When updating variable values, you need to specify: * The variable identifiers * The values to add/replace/remove for each variable * The operation to perform (ADD, REPLACE, REMOVE, RESET)  Behaviour based on operation type: * ADD - Adds values to the variable if this is a list type variable, else same as replace. * REPLACE - Replaces all values of a given set of constraints with the current set of values. * REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value. * RESET - Removes all constrains for a given variable, scope is ignored      
 
 ### Example
 
@@ -9905,6 +10513,12 @@ apiInstance.updateWebhookConfiguration(
     authentication: null,
     signature_verification: null,
     storage_destination: null,
+    additional_headers: [
+      {
+        key: "key_example",
+        value: "value_example",
+      },
+    ],
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -9940,6 +10554,70 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **204** | Webhook configuration updated successfully |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **validateCommunicationChannel**
+> CommunicationChannelValidateResponse validateCommunicationChannel(validateCommunicationChannelRequest)
+
+ Version: 26.4.0.cl or later   Validates a communication channel configuration to ensure it is properly set up and can receive events. - Use `channel_type` to specify the type of communication channel to validate (e.g., WEBHOOK). - Use `channel_identifier` to provide the unique identifier or name for the communication channel. - Use `event_type` to specify the event type to validate for this channel.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. For webhook channels, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, ValidateCommunicationChannelRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.validateCommunicationChannel(
+  // ValidateCommunicationChannelRequest
+  {
+    channel_type: "WEBHOOK",
+    channel_identifier: "channel_identifier_example",
+    event_type: "LIVEBOARD_SCHEDULE",
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **validateCommunicationChannelRequest** | **ValidateCommunicationChannelRequest**|  |
+
+
+### Return type
+
+**CommunicationChannelValidateResponse**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | communication channel configuration validated successfully. |  -  |
 **400** | Invalid request. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Forbidden access. |  -  |

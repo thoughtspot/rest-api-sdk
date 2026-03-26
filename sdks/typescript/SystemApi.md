@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**searchCommunicationChannelPreferences**](SystemApi.md#searchCommunicationChannelPreferences) | **POST** /api/rest/2.0/system/preferences/communication-channels/search | 
 [**searchSecuritySettings**](SystemApi.md#searchSecuritySettings) | **POST** /api/rest/2.0/system/security-settings/search | 
 [**updateSystemConfig**](SystemApi.md#updateSystemConfig) | **POST** /api/rest/2.0/system/config-update | 
+[**validateCommunicationChannel**](SystemApi.md#validateCommunicationChannel) | **POST** /api/rest/2.0/system/communication-channels/validate | 
 
 
 # **configureCommunicationChannelPreferences**
@@ -527,6 +528,70 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **204** | Configuration successfully updated. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **validateCommunicationChannel**
+> CommunicationChannelValidateResponse validateCommunicationChannel(validateCommunicationChannelRequest)
+
+ Version: 26.4.0.cl or later   Validates a communication channel configuration to ensure it is properly set up and can receive events. - Use `channel_type` to specify the type of communication channel to validate (e.g., WEBHOOK). - Use `channel_identifier` to provide the unique identifier or name for the communication channel. - Use `event_type` to specify the event type to validate for this channel.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. For webhook channels, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, SystemApi, ValidateCommunicationChannelRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new SystemApi(configuration);
+
+apiInstance.validateCommunicationChannel(
+  // ValidateCommunicationChannelRequest
+  {
+    channel_type: "WEBHOOK",
+    channel_identifier: "channel_identifier_example",
+    event_type: "LIVEBOARD_SCHEDULE",
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **validateCommunicationChannelRequest** | **ValidateCommunicationChannelRequest**|  |
+
+
+### Return type
+
+**CommunicationChannelValidateResponse**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | communication channel configuration validated successfully. |  -  |
 **400** | Invalid request. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Forbidden access. |  -  |
