@@ -374,6 +374,38 @@ describe('MetadataApi', function() {
         });     
       });
 
+      describe('parameterizeMetadataFields', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "parameterizeMetadataFields"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.parameterizeMetadataFields(
+                    // parameterizeMetadataFieldsRequest ParameterizeMetadataFieldsRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.parameterizeMetadataFields(
+                    // parameterizeMetadataFieldsRequest ParameterizeMetadataFieldsRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('searchMetadata', function() {
 
         const testReqBodies = requestBodies.filter(

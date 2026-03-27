@@ -86,6 +86,74 @@ describe('VariableApi', function() {
         });     
       });
 
+      describe('deleteVariables', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "deleteVariables"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.deleteVariables(
+                    // deleteVariablesRequest DeleteVariablesRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.deleteVariables(
+                    // deleteVariablesRequest DeleteVariablesRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('putVariableValues', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "putVariableValues"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.putVariableValues(
+                    // identifier identifier
+                    test.Path_Variables.identifier     , 
+                    // putVariableValuesRequest PutVariableValuesRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.putVariableValues(
+                    // identifier identifier
+                    test.Path_Variables.identifier     , 
+                    // putVariableValuesRequest PutVariableValuesRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('searchVariables', function() {
 
         const testReqBodies = requestBodies.filter(

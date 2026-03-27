@@ -18,6 +18,7 @@ import com.thoughtspot.client.model.ImportEPackAsyncTaskStatus;
 import com.thoughtspot.client.model.ImportMetadataTMLAsyncRequest;
 import com.thoughtspot.client.model.ImportMetadataTMLRequest;
 import com.thoughtspot.client.model.MetadataSearchResponse;
+import com.thoughtspot.client.model.ParameterizeMetadataFieldsRequest;
 import com.thoughtspot.client.model.ParameterizeMetadataRequest;
 import com.thoughtspot.client.model.ResponseCopyObject;
 import com.thoughtspot.client.model.ResponseWorksheetToModelConversion;
@@ -324,15 +325,17 @@ public class MetadataApiTest {
     }
 
     /**
-     * Parameterize fields in metadata objects. Version: 10.9.0.cl or later Allows parameterizing
-     * fields in metadata objects in ThoughtSpot. Requires appropriate permissions to modify the
-     * metadata object. The API endpoint allows parameterizing the following types of metadata
-     * objects: * Logical Tables * Connections * Connection Configs For a Logical Table the field
-     * type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName
-     * * tableName For a Connection or Connection Config, the field type is always
-     * &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact property of the
-     * Connection or Connection Config that needs to be parameterized. For Connection Config, the
-     * only supported field name is: * impersonate_user
+     * Parameterize fields in metadata objects. Version: 10.9.0.cl or later **Note:** This API
+     * endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST
+     * /api/rest/2.0/metadata/parameterize-fields](/api/rest/2.0/metadata/parameterize-fields)
+     * instead. Allows parameterizing fields in metadata objects in ThoughtSpot. Requires
+     * appropriate permissions to modify the metadata object. The API endpoint allows parameterizing
+     * the following types of metadata objects: * Logical Tables * Connections * Connection Configs
+     * For a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one
+     * of: * databaseName * schemaName * tableName For a Connection or Connection Config, the field
+     * type is always &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact
+     * property of the Connection or Connection Config that needs to be parameterized. For
+     * Connection Config, the only supported field name is: * impersonate_user
      *
      * @throws ApiException if the Api call fails
      */
@@ -340,6 +343,29 @@ public class MetadataApiTest {
     public void parameterizeMetadataTest() throws ApiException {
         ParameterizeMetadataRequest parameterizeMetadataRequest = null;
         api.parameterizeMetadata(parameterizeMetadataRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for
+     * LOGICAL_TABLE. Version: 26.4.0.cl or later Allows parameterizing multiple fields of metadata
+     * objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for
+     * LOGICAL_TABLE. Requires appropriate permissions to modify the metadata object. The API
+     * endpoint allows parameterizing the following types of metadata objects: * Logical Tables *
+     * Connections * Connection Configs For a Logical Table, the field type must be
+     * &#x60;ATTRIBUTE&#x60; and field names can include: * databaseName * schemaName * tableName
+     * For a Connection or Connection Config, the field type is always
+     * &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_names specifies the exact properties of
+     * the Connection or Connection Config that need to be parameterized. For Connection Config,
+     * supported field names include: * impersonate_user You can parameterize multiple fields at
+     * once by providing an array of field names.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void parameterizeMetadataFieldsTest() throws ApiException {
+        ParameterizeMetadataFieldsRequest parameterizeMetadataFieldsRequest = null;
+        api.parameterizeMetadataFields(parameterizeMetadataFieldsRequest);
         // TODO: test validations
     }
 

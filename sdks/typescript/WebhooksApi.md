@@ -40,6 +40,12 @@ apiInstance.createWebhookConfiguration(
     authentication: null,
     signature_verification: null,
     storage_destination: null,
+    additional_headers: [
+      {
+        key: "key_example",
+        value: "value_example",
+      },
+    ],
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -244,6 +250,12 @@ apiInstance.updateWebhookConfiguration(
     authentication: null,
     signature_verification: null,
     storage_destination: null,
+    additional_headers: [
+      {
+        key: "key_example",
+        value: "value_example",
+      },
+    ],
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);

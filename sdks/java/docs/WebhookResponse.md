@@ -16,6 +16,7 @@
 |**events** | [**List&lt;EventsEnum&gt;**](#List&lt;EventsEnum&gt;) | List of events this webhook subscribes to. |  |
 |**authentication** | [**WebhookAuthentication**](WebhookAuthentication.md) |  |  [optional] |
 |**signatureVerification** | [**WebhookSignatureVerification**](WebhookSignatureVerification.md) |  |  [optional] |
+|**additionalHeaders** | [**List&lt;WebhookKeyValuePair&gt;**](WebhookKeyValuePair.md) | Additional headers as an array of key-value pairs.    Version: 26.4.0.cl or later  |  [optional] |
 |**creationTimeInMillis** | **Float** | Creation time of the webhook configuration in milliseconds. |  |
 |**modificationTimeInMillis** | **Float** | Last modified time of the webhook configuration in milliseconds. |  |
 |**createdBy** | [**WebhookUser**](WebhookUser.md) |  |  [optional] |

@@ -25,6 +25,7 @@ import com.thoughtspot.client.model.ImportEPackAsyncTaskStatus;
 import com.thoughtspot.client.model.ImportMetadataTMLAsyncRequest;
 import com.thoughtspot.client.model.ImportMetadataTMLRequest;
 import com.thoughtspot.client.model.MetadataSearchResponse;
+import com.thoughtspot.client.model.ParameterizeMetadataFieldsRequest;
 import com.thoughtspot.client.model.ParameterizeMetadataRequest;
 import com.thoughtspot.client.model.ResponseCopyObject;
 import com.thoughtspot.client.model.ResponseWorksheetToModelConversion;
@@ -2296,7 +2297,10 @@ public class MetadataApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call parameterizeMetadataCall(
             ParameterizeMetadataRequest parameterizeMetadataRequest, final ApiCallback _callback)
             throws ApiException {
@@ -2352,6 +2356,7 @@ public class MetadataApi {
                 _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call parameterizeMetadataValidateBeforeCall(
             ParameterizeMetadataRequest parameterizeMetadataRequest, final ApiCallback _callback)
@@ -2367,15 +2372,17 @@ public class MetadataApi {
     }
 
     /**
-     * Parameterize fields in metadata objects. Version: 10.9.0.cl or later Allows parameterizing
-     * fields in metadata objects in ThoughtSpot. Requires appropriate permissions to modify the
-     * metadata object. The API endpoint allows parameterizing the following types of metadata
-     * objects: * Logical Tables * Connections * Connection Configs For a Logical Table the field
-     * type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName
-     * * tableName For a Connection or Connection Config, the field type is always
-     * &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact property of the
-     * Connection or Connection Config that needs to be parameterized. For Connection Config, the
-     * only supported field name is: * impersonate_user
+     * Parameterize fields in metadata objects. Version: 10.9.0.cl or later **Note:** This API
+     * endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST
+     * /api/rest/2.0/metadata/parameterize-fields](/api/rest/2.0/metadata/parameterize-fields)
+     * instead. Allows parameterizing fields in metadata objects in ThoughtSpot. Requires
+     * appropriate permissions to modify the metadata object. The API endpoint allows parameterizing
+     * the following types of metadata objects: * Logical Tables * Connections * Connection Configs
+     * For a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one
+     * of: * databaseName * schemaName * tableName For a Connection or Connection Config, the field
+     * type is always &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact
+     * property of the Connection or Connection Config that needs to be parameterized. For
+     * Connection Config, the only supported field name is: * impersonate_user
      *
      * @param parameterizeMetadataRequest (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -2390,22 +2397,27 @@ public class MetadataApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public void parameterizeMetadata(ParameterizeMetadataRequest parameterizeMetadataRequest)
             throws ApiException {
         parameterizeMetadataWithHttpInfo(parameterizeMetadataRequest);
     }
 
     /**
-     * Parameterize fields in metadata objects. Version: 10.9.0.cl or later Allows parameterizing
-     * fields in metadata objects in ThoughtSpot. Requires appropriate permissions to modify the
-     * metadata object. The API endpoint allows parameterizing the following types of metadata
-     * objects: * Logical Tables * Connections * Connection Configs For a Logical Table the field
-     * type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName
-     * * tableName For a Connection or Connection Config, the field type is always
-     * &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact property of the
-     * Connection or Connection Config that needs to be parameterized. For Connection Config, the
-     * only supported field name is: * impersonate_user
+     * Parameterize fields in metadata objects. Version: 10.9.0.cl or later **Note:** This API
+     * endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST
+     * /api/rest/2.0/metadata/parameterize-fields](/api/rest/2.0/metadata/parameterize-fields)
+     * instead. Allows parameterizing fields in metadata objects in ThoughtSpot. Requires
+     * appropriate permissions to modify the metadata object. The API endpoint allows parameterizing
+     * the following types of metadata objects: * Logical Tables * Connections * Connection Configs
+     * For a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one
+     * of: * databaseName * schemaName * tableName For a Connection or Connection Config, the field
+     * type is always &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact
+     * property of the Connection or Connection Config that needs to be parameterized. For
+     * Connection Config, the only supported field name is: * impersonate_user
      *
      * @param parameterizeMetadataRequest (required)
      * @return ApiResponse&lt;Void&gt;
@@ -2421,7 +2433,10 @@ public class MetadataApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public ApiResponse<Void> parameterizeMetadataWithHttpInfo(
             ParameterizeMetadataRequest parameterizeMetadataRequest) throws ApiException {
         okhttp3.Call localVarCall =
@@ -2430,15 +2445,18 @@ public class MetadataApi {
     }
 
     /**
-     * (asynchronously) Parameterize fields in metadata objects. Version: 10.9.0.cl or later Allows
-     * parameterizing fields in metadata objects in ThoughtSpot. Requires appropriate permissions to
-     * modify the metadata object. The API endpoint allows parameterizing the following types of
-     * metadata objects: * Logical Tables * Connections * Connection Configs For a Logical Table the
-     * field type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName *
-     * schemaName * tableName For a Connection or Connection Config, the field type is always
-     * &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact property of the
-     * Connection or Connection Config that needs to be parameterized. For Connection Config, the
-     * only supported field name is: * impersonate_user
+     * (asynchronously) Parameterize fields in metadata objects. Version: 10.9.0.cl or later
+     * **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future
+     * release. Use [POST
+     * /api/rest/2.0/metadata/parameterize-fields](/api/rest/2.0/metadata/parameterize-fields)
+     * instead. Allows parameterizing fields in metadata objects in ThoughtSpot. Requires
+     * appropriate permissions to modify the metadata object. The API endpoint allows parameterizing
+     * the following types of metadata objects: * Logical Tables * Connections * Connection Configs
+     * For a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one
+     * of: * databaseName * schemaName * tableName For a Connection or Connection Config, the field
+     * type is always &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact
+     * property of the Connection or Connection Config that needs to be parameterized. For
+     * Connection Config, the only supported field name is: * impersonate_user
      *
      * @param parameterizeMetadataRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -2455,7 +2473,10 @@ public class MetadataApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call parameterizeMetadataAsync(
             ParameterizeMetadataRequest parameterizeMetadataRequest,
             final ApiCallback<Void> _callback)
@@ -2463,6 +2484,208 @@ public class MetadataApi {
 
         okhttp3.Call localVarCall =
                 parameterizeMetadataValidateBeforeCall(parameterizeMetadataRequest, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for parameterizeMetadataFields
+     *
+     * @param parameterizeMetadataFieldsRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Parameterize successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call parameterizeMetadataFieldsCall(
+            ParameterizeMetadataFieldsRequest parameterizeMetadataFieldsRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = parameterizeMetadataFieldsRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/metadata/parameterize-fields";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call parameterizeMetadataFieldsValidateBeforeCall(
+            ParameterizeMetadataFieldsRequest parameterizeMetadataFieldsRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'parameterizeMetadataFieldsRequest' is set
+        if (parameterizeMetadataFieldsRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'parameterizeMetadataFieldsRequest' when"
+                            + " calling parameterizeMetadataFields(Async)");
+        }
+
+        return parameterizeMetadataFieldsCall(parameterizeMetadataFieldsRequest, _callback);
+    }
+
+    /**
+     * Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for
+     * LOGICAL_TABLE. Version: 26.4.0.cl or later Allows parameterizing multiple fields of metadata
+     * objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for
+     * LOGICAL_TABLE. Requires appropriate permissions to modify the metadata object. The API
+     * endpoint allows parameterizing the following types of metadata objects: * Logical Tables *
+     * Connections * Connection Configs For a Logical Table, the field type must be
+     * &#x60;ATTRIBUTE&#x60; and field names can include: * databaseName * schemaName * tableName
+     * For a Connection or Connection Config, the field type is always
+     * &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_names specifies the exact properties of
+     * the Connection or Connection Config that need to be parameterized. For Connection Config,
+     * supported field names include: * impersonate_user You can parameterize multiple fields at
+     * once by providing an array of field names.
+     *
+     * @param parameterizeMetadataFieldsRequest (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Parameterize successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public void parameterizeMetadataFields(
+            ParameterizeMetadataFieldsRequest parameterizeMetadataFieldsRequest)
+            throws ApiException {
+        parameterizeMetadataFieldsWithHttpInfo(parameterizeMetadataFieldsRequest);
+    }
+
+    /**
+     * Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for
+     * LOGICAL_TABLE. Version: 26.4.0.cl or later Allows parameterizing multiple fields of metadata
+     * objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for
+     * LOGICAL_TABLE. Requires appropriate permissions to modify the metadata object. The API
+     * endpoint allows parameterizing the following types of metadata objects: * Logical Tables *
+     * Connections * Connection Configs For a Logical Table, the field type must be
+     * &#x60;ATTRIBUTE&#x60; and field names can include: * databaseName * schemaName * tableName
+     * For a Connection or Connection Config, the field type is always
+     * &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_names specifies the exact properties of
+     * the Connection or Connection Config that need to be parameterized. For Connection Config,
+     * supported field names include: * impersonate_user You can parameterize multiple fields at
+     * once by providing an array of field names.
+     *
+     * @param parameterizeMetadataFieldsRequest (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Parameterize successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<Void> parameterizeMetadataFieldsWithHttpInfo(
+            ParameterizeMetadataFieldsRequest parameterizeMetadataFieldsRequest)
+            throws ApiException {
+        okhttp3.Call localVarCall =
+                parameterizeMetadataFieldsValidateBeforeCall(
+                        parameterizeMetadataFieldsRequest, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     * (asynchronously) Parameterize multiple fields of metadata objects. For example [schemaName,
+     * databaseName] for LOGICAL_TABLE. Version: 26.4.0.cl or later Allows parameterizing multiple
+     * fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName,
+     * databaseName] for LOGICAL_TABLE. Requires appropriate permissions to modify the metadata
+     * object. The API endpoint allows parameterizing the following types of metadata objects: *
+     * Logical Tables * Connections * Connection Configs For a Logical Table, the field type must be
+     * &#x60;ATTRIBUTE&#x60; and field names can include: * databaseName * schemaName * tableName
+     * For a Connection or Connection Config, the field type is always
+     * &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_names specifies the exact properties of
+     * the Connection or Connection Config that need to be parameterized. For Connection Config,
+     * supported field names include: * impersonate_user You can parameterize multiple fields at
+     * once by providing an array of field names.
+     *
+     * @param parameterizeMetadataFieldsRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Parameterize successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call parameterizeMetadataFieldsAsync(
+            ParameterizeMetadataFieldsRequest parameterizeMetadataFieldsRequest,
+            final ApiCallback<Void> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                parameterizeMetadataFieldsValidateBeforeCall(
+                        parameterizeMetadataFieldsRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }

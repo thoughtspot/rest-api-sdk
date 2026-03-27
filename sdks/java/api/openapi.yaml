@@ -14,9 +14,56 @@ paths:
     post:
       description: |2+
 
-        Version: 10.13.0.cl or later
+        Version: 26.2.0.cl or later
 
 
+        Creates a new Spotter agent conversation based on the provided context and settings. The endpoint was in Beta from 26.2.0.cl through 26.4.0.cl.
+
+        Requires `CAN_USE_SPOTTER` privilege and at least view access to the metadata object specified in the request.
+
+        #### Usage guidelines
+
+        The request must include the `metadata_context` parameter to define the conversation context. The context type can be one of:
+
+        - `DATA_SOURCE` *(available from 26.5.0.cl)*: targets a specific data source. Provide `data_source_identifier` in `data_source_context` for a single data source, or `data_source_identifiers` for multi-data-source context. The deprecated `guid` field is accepted for backwards compatibility.
+        - `AUTO_MODE` *(available from 26.5.0.cl)*: automatically discovers and selects the most relevant datasets for the user's queries.
+
+        > **Note for callers on versions 26.2.0.cl – 26.4.0.cl (Beta):** use the lowercase `data_source` enum value with the `guid` field instead of the above. Example: `{ "type": "data_source", "data_source_context": { "guid": "<worksheet-id>" } }`.
+
+        The `conversation_settings` parameter controls which Spotter capabilities are enabled for the conversation:
+
+        - `enable_contextual_change_analysis` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to `false` has no effect on versions >= 26.2.0.cl
+        - `enable_natural_language_answer_generation` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to `false` has no effect on versions >= 26.2.0.cl
+        - `enable_reasoning` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to `false` has no effect on versions >= 26.2.0.cl
+        - `enable_save_chat` (default: `false`, *available from 26.5.0.cl*) — enables saving the conversation for later retrieval via conversation history
+
+        If the request is successful, the response includes a unique `conversation_identifier` that must be passed to `sendAgentConversationMessage` or `sendAgentConversationMessageStreaming` to send messages within this conversation. The response also includes `conversation_id` with the same value for backwards compatibility; use `conversation_identifier` for new integrations.
+
+        #### Example request
+
+        ```json
+        {
+          "metadata_context": {
+            "type": "DATA_SOURCE",
+            "data_source_context": {
+              "data_source_identifier": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+            }
+          },
+          "conversation_settings": {}
+        }
+        ```
+
+        #### Error responses
+
+        | Code | Description                                                                                                                             |
+        | ---- | --------------------------------------------------------------------------------------------------------------------------------------- |
+        | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                    |
+        | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks view permission on the specified metadata object. |
+
+        > ###### Note:
+        >
+        > - This endpoint was in Beta from 26.2.0.cl through 26.4.0.cl and is Generally Available from version 26.5.0.cl.
+        > - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
 
 
 
@@ -34,6 +81,19 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                example_1:
+                  summary: Create a conversation with a specific data source
+                  value:
+                    conversation_id: wwHQ5j8O8dQC
+                    conversation_identifier: wwHQ5j8O8dQC
+                example_2:
+                  summary: Create a conversation using auto mode where the agent automatically
+                    discovers and selects the most relevant datasets for the user's
+                    queries
+                  value:
+                    conversation_id: aaHQ5j8O8dQC
+                    conversation_identifier: aaHQ5j8O8dQC
               schema:
                 $ref: '#/components/schemas/AgentConversation'
           description: Common successful response
@@ -49,6 +109,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
         "500":
           content:
             application/json:
@@ -68,19 +140,26 @@ paths:
         Version: 10.4.0.cl or later
 
 
-        Creates a Conversation object to start an AI-driven conversation based on a specific data model.
+        Creates a new conversation session tied to a specific data model for AI-driven natural language querying.
 
-        Requires at least view access to the metadata object specified in the request.
+        Requires `CAN_USE_SPOTTER` privilege and at least view access to the metadata object specified in the request.
 
         #### Usage guidelines
 
-        This API requires the `metadata_identifier` parameter to define the context for the conversation.
+        The request must include:
+        - `metadata_identifier`: the unique ID of the data source that provides context for the conversation
 
-        You can also specify the tokens to initiate the conversation as shown in this example:
+        Optionally, you can provide:
+        - `tokens`: a token string to set initial context for the conversation (e.g., `"[sales],[item type],[state]"`)
 
-        `"tokens": "[tea],[sales],[type]"`
+        If the request is successful, ThoughtSpot returns a unique `conversation_identifier` that must be passed to `sendMessage` to continue the conversation.
 
-        If the API request is successful, ThoughtSpot returns the ID of the conversation.
+        #### Error responses
+
+        | Code | Description |
+        |------|-------------|
+        | 401  | Unauthorized — authentication token is missing, expired, or invalid. |
+        | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks view permission on the specified metadata object. |
 
         > ###### Note:
         > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.
@@ -117,6 +196,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
         "500":
           content:
             application/json:
@@ -136,20 +227,29 @@ paths:
         Version: 10.15.0.cl or later
 
 
-        Provides relevant data source recommendations for a user-submitted natural language query.
+        Suggests the most relevant data sources for a given natural language query, ranked by confidence with LLM-generated reasoning.
 
-        To use this API, the user must have at least view-level access to the underlying metadata entities referenced in the response.
+        Requires `CAN_USE_SPOTTER` privilege and at least view-level access to the underlying metadata entities referenced in the response.
 
         #### Usage guidelines
 
-        The request must include a `query` string via the request body.
+        The request must include:
+        - `query`: the natural language question to find relevant data sources for
 
-        The returned results include metadata such as:
-        - `confidence`: a float indicating the model's confidence in the relevance of each recommendation
-        - `details`: includes `data_source_identifier`, `data_source_name`, and `description` of each recommended data source
-        - `reasoning`: rationale provided by the LLM to explain why each data source was recommended
+        If the request is successful, the API returns a ranked list of suggested data sources, each containing:
+        - `confidence`: a float score indicating the model's confidence in the relevance of the suggestion
+        - `details`: metadata about the data source
+          - `data_source_identifier`: the unique ID of the data source
+          - `data_source_name`: the display name of the data source
+          - `description`: a description of the data source
+        - `reasoning`: LLM-generated rationale explaining why the data source was recommended
 
-        If the API request is successful, ThoughtSpot returns a ranked list of data sources, each annotated with relevant reasoning.
+        #### Error responses
+
+        | Code | Description                                                                                                                                |
+        |------|--------------------------------------------------------------------------------------------------------------------------------------------|
+        | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                       |
+        | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks view permission on the underlying metadata entities. |
 
         > ###### Note:
         > * This endpoint is currently in Beta. Breaking changes may be introduced before it is made Generally Available.
@@ -186,6 +286,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
         "500":
           content:
             application/json:
@@ -205,28 +317,41 @@ paths:
         Version: 10.15.0.cl or later
 
 
-        This API allows users to retrieve existing natural language (NL) instructions for a specific data-model. These instructions guide the AI system in understanding data context and generating more accurate responses when processing natural language queries.
+        Retrieves existing natural language (NL) instructions configured for a specific data model. These instructions guide the AI system in understanding data context and generating more accurate responses.
+
+        Requires `CAN_USE_SPOTTER` privilege, at least view access on the data model, and a bearer token corresponding to the org where the data model exists.
 
         #### Usage guidelines
 
-        To retrieve NL instructions for a data-model, the request must include:
-        - `data_source_identifier`: The unique ID of the data-model to retrieve NL instructions
+        The request must include:
 
-        The API returns a response object with:
-        - `nl_instructions_info`: An array of instruction objects, each containing:
-          - `instructions`: Array of text instructions for natural language processing
-          - `scope`: The scope of the instruction (`GLOBAL`). It can be extended to data-model-user scope in future.
+        - `data_source_identifier`: the unique ID of the data model to retrieve instructions for
 
-        #### Instructions Scope
+        If the request is successful, the API returns:
+
+        - `nl_instructions_info`: an array of instruction objects, each containing:
+          - `instructions`: the configured text instructions for AI processing
+          - `scope`: the scope of the instruction — currently only `GLOBAL` is supported
+
+        #### Instructions scope
 
         - **GLOBAL**: Instructions that apply globally across the system on the given data-model (currently only global instructions are supported)
 
+        #### Error responses
+
+        | Code | Description                                                                                                                                                                                        |
+        |------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+        | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                                                               |
+        | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, lacks view access on the data model, or the bearer token does not correspond to the org where the data model exists. |
+
         > ###### Note:
-        > * To use this API, the user needs atleast view access on the data-model and they must use corresponding org related bearerToken where the data-model exists.
-        > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.
-        > * Available from version 10.15.0.cl and later.
-        > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.
-        > * Use this API to view currently configured instructions before modifying them with `setNLInstructions`.
+        >
+        > - To use this API, the user needs at least view access on the data model, and must use the bearer token corresponding to the org where the data model exists.
+        > - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.
+        > - Available from version 10.15.0.cl and later.
+        > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.
+        > - Use this API to review currently configured instructions before modifying them with `setNLInstructions`.
+
 
 
 
@@ -258,6 +383,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
         "500":
           content:
             application/json:
@@ -277,29 +414,43 @@ paths:
         Version: 10.13.0.cl or later
 
 
-        Breaks down a user-submitted query into a series of analytical sub-questions using relevant contextual metadata.
+        Breaks down a natural language query into a series of smaller analytical sub-questions, each mapped to a relevant data source.
 
-        To use this API, the user must have at least view-level access to the referenced metadata objects.
+        Requires `CAN_USE_SPOTTER` privilege and at least view-level access to the referenced metadata objects.
 
         #### Usage guidelines
 
-        To accurately generate relevant questions, the request must include at least one of the following metadata identifiers within `metadata_context` : `conversation_identifier`, `answer_identifiers`, `liveboard_identifiers`, or `data_source_identifiers`.
+        The request must include:
+        - `query`: the natural language question to decompose into analytical sub-questions
+        - `metadata_context`: at least one of the following context identifiers to guide question generation:
+          - `conversation_identifier` — an existing conversation session ID
+          - `answer_identifiers` — a list of Answer GUIDs
+          - `liveboard_identifiers` — a list of Liveboard GUIDs
+          - `data_source_identifiers` — a list of data source GUIDs
 
-        You can further enhance the quality and precision of breakdown by providing additional `ai_context` such as:
+        Optional parameters for refining the output:
+        - `ai_context`: additional context to improve response quality
+          - `content` — supplementary text or CSV data as string input
+          - `instructions` — custom text instructions for the AI system
+        - `limit_relevant_questions`: maximum number of questions to return (default: `5`)
+        - `bypass_cache`: if `true`, forces fresh computation instead of returning cached results
 
-        - `content`: User provided content like text data, csv data as a string message to provide context & potentially improve the quality of the response.
-        - `instructions`: User specific text instructions sent to AI system for processing the query.
+        If the request is successful, the API returns a list of relevant analytical questions, each containing:
+        - `query`: the generated sub-question
+        - `data_source_identifier`: the unique ID of the data source the question targets
+        - `data_source_name`: the display name of the corresponding data source
 
-        Additional optional parameters include:
+        #### Error responses
 
-        - `limit_relevant_questions`: Controls the maximum number of relevant questions returned. Defaults to 5 if not specified.
-        - `bypass_cache`: If set to true, forces fresh computation instead of returning cached results.
-
-        If the API request is successful, ThoughtSpot returns a list of relevant analytical queries, each aligned with the user's original question. Each returned question includes the query string, along with the identifier and name of the corresponding data source.
+        | Code | Description                                                                                                                           |
+        |------|---------------------------------------------------------------------------------------------------------------------------------------|
+        | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                  |
+        | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks view access to the referenced metadata objects. |
 
         > ###### Note:
         > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.
         > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
+
 
 
 
@@ -331,6 +482,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
         "500":
           content:
             application/json:
@@ -351,6 +514,40 @@ paths:
         Version: 10.7.0.cl or later
 
 
+        **Deprecated** — Use `getRelevantQuestions` instead (available from 10.13.0.cl).
+
+        Breaks down a topical or goal-oriented natural language question into smaller, actionable analytical sub-questions, each mapped to a relevant data source for independent execution.
+
+        Requires `CAN_USE_SPOTTER` privilege and at least view-level access to the referenced metadata objects.
+
+        #### Usage guidelines
+
+        The request accepts the following parameters:
+
+        - `nlsRequest`: contains the user `query` to decompose, along with optional `instructions` and `bypassCache` flag
+        - `worksheetIds`: list of data source identifiers to scope the decomposition
+        - `answerIds`: list of Answer GUIDs whose data guides the response
+        - `liveboardIds`: list of Liveboard GUIDs whose data guides the response
+        - `conversationId`: an existing conversation session ID for context continuity
+        - `content`: supplementary text or CSV data to improve response quality
+        - `maxDecomposedQueries`: maximum number of sub-questions to return (default: `5`)
+
+        If the request is successful, the API returns a `decomposedQueryResponse` containing a list of `decomposedQueries`, each with:
+        - `query`: the generated analytical sub-question
+        - `worksheetId`: the unique ID of the data source the question targets
+        - `worksheetName`: the display name of the corresponding data source
+
+        #### Error responses
+
+        | Code | Description                                                                                                                           |
+        |------|---------------------------------------------------------------------------------------------------------------------------------------|
+        | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                  |
+        | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks view access to the referenced metadata objects. |
+
+        > ###### Note:
+        > * This endpoint is deprecated since 10.13.0.cl. Use `getRelevantQuestions` for new integrations.
+        > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.
+        > * This endpoint requires Spotter — please contact ThoughtSpot support to enable Spotter on your cluster.
 
 
 
@@ -383,6 +580,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
         "500":
           content:
             application/json:
@@ -397,21 +606,48 @@ paths:
       - application/json
   /api/rest/2.0/ai/agent/{conversation_identifier}/converse:
     post:
-      description: "\nVersion: 10.15.0.cl or later\n\n\nThis API allows users to initiate\
-        \ or continue an agent (Spotter) conversation by submitting one or more natural\
-        \ language messages. \nTo use this API, the user must have access to the relevant\
-        \ conversational session (via conversation_identifier) and submit at least\
-        \ one message.\n\n\n#### Usage guidelines\n\nTo initiate or continue a conversation,\
-        \ the request must include:\n- `conversation_identifier`: a unique session\
-        \ ID for continuity and message tracking\n- `messages`: an array of one or\
-        \ more text messages, each with a value and type\n\nThe API returns a array\
-        \ of object with a type, message, and metadata.\n- `type`: Type of the message\
-        \ — text, answer, or error.\n- `message`: Main content of the response.\n\
-        - `metadata`: Additional info depending on the message type.\n\n> ###### Note:\n\
-        > * This endpoint is currently in Beta. Breaking changes may be introduced\
-        \ before the endpoint is made Generally Available.\n> * This endpoint requires\
-        \ Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\
-        \n\n\n\n"
+      description: |2+
+
+        Version: 10.15.0.cl or later
+
+
+        **Deprecated** — Use `sendAgentConversationMessage` instead.
+
+        Send natural language messages to an existing Spotter agent conversation and returns the complete response synchronously.
+
+        Requires `CAN_USE_SPOTTER` privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by `conversation_identifier`.
+        A conversation must first be created using the `createAgentConversation` API.
+
+        #### Usage guidelines
+
+        The request must include:
+
+        - `conversation_identifier`: the unique session ID returned by `createAgentConversation`, used for context continuity and message tracking
+        - `messages`: an array of one or more text messages to send to the agent
+
+        The API returns an array of response objects, each containing:
+
+        - `type`: the kind of response — `text`, `answer`, or `error`
+        - `message`: the main content of the response
+        - `metadata`: additional information depending on the message type (e.g., answer metadata includes analytics and visualization details)
+
+        #### Error responses
+
+        | Code | Description                                                                                                                      |
+        |------|----------------------------------------------------------------------------------------------------------------------------------|
+        | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             |
+        | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks permission on the referenced conversation. |
+
+        > ###### Note:
+        >
+        > - This endpoint is deprecated. Use `sendAgentConversationMessage` for new integrations.
+        > - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.
+        > - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
+
+
+
+
+
       operationId: sendAgentMessage
       parameters:
       - description: Unique identifier for the conversation (used to track context)
@@ -447,6 +683,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
         "500":
           content:
             application/json:
@@ -461,27 +709,52 @@ paths:
       - application/json
   /api/rest/2.0/ai/agent/converse/sse:
     post:
-      description: "\nVersion: 10.13.0.cl or later\n\n\nThis API allows users to initiate\
-        \ or continue an agent (Spotter) conversation by submitting one or more natural\
-        \ language messages. \nTo use this API, the user must have access to the relevant\
-        \ conversational session (via conversation_identifier) and submit at least\
-        \ one message.\n\n\n#### Usage guidelines\n\nTo initiate or continue a conversation,\
-        \ the request must include:\n- `conversation_identifier`: a unique session\
-        \ ID for continuity and message tracking\n- `messages`: an array of one or\
-        \ more text messages, each with a value and type\n\nAdditionally, user can\
-        \ specify what tool can be included `conversation_settings` parameter, which\
-        \ supports:\n- `enable_contextual_change_analysis` (default: false)\n- `enable_natural_language_answer_generation`\
-        \ (default: true)\n- `enable_reasoning` (default: false)\n\nIf the request\
-        \ is valid, the API returns a stream of messages in real time, including:\n\
-        - `ack`: confirms receipt of the request\n- `text / text-chunk`: content chunks,\
-        \ optionally formatted (e.g., markdown)\n- `answer`: the final structured\
-        \ response with metadata and analytics\n- `error`: if a failure occurs\n-\
-        \ `notification`: notification messages for operation being performed\n\n\
-        > ###### Note:\n> * This endpoint is currently in Beta. Breaking changes may\
-        \ be introduced before the endpoint is made Generally Available.\n> * This\
-        \ endpoint requires Spotter - please contact ThoughtSpot support to enable\
-        \ Spotter on your cluster.\n> * The streaming protocol uses Server-Sent Events\
-        \ (SSE)\n\n\n\n\n"
+      description: |2+
+
+        Version: 10.13.0.cl or later
+
+
+        **Deprecated** — Use `sendAgentConversationMessageStreaming` instead.
+
+        Sends one or more natural language messages to an existing Spotter agent conversation and returns the response as a real-time Server-Sent Events stream.
+
+        Requires `CAN_USE_SPOTTER` privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by `conversation_identifier`. A conversation must first be created using the `createAgentConversation` API.
+
+        #### Usage guidelines
+
+        The request must include:
+
+        - `conversation_identifier`: the unique session ID returned by `createAgentConversation`, used for context continuity and message tracking
+        - `messages`: an array of one or more text messages to send to the agent
+
+        If the request is valid, the API returns a Server-Sent Events (SSE) stream. Each line has the form `data: [{"type": "...", ...}]` — a JSON array of event objects. Event types include:
+
+        - `ack`: confirms receipt of the request (`node_id`)
+        - `conv_title`: conversation title (`title`, `conv_id`)
+        - `notification`: status updates on operations (`group_id`, `metadata`, `code` — e.g. `TOOL_CALL_NOTIFICATION`, `nls_start`, `FINAL_RESPONSE_NOTIFICATION`)
+        - `text-chunk`: incremental content chunks (`id`, `group_id`, `metadata` with `format` and `type` such as `thinking` or `text`, `content`)
+        - `text`: full text block with same structure as `text-chunk`
+        - `answer`: structured answer with metadata (`id`, `group_id`, `metadata` with `sage_query`, `session_id`, `title`, etc., `title`)
+        - `error`: if a failure occurs
+
+        #### Error responses
+
+        | Code | Description                                                                                                                      |
+        |------|----------------------------------------------------------------------------------------------------------------------------------|
+        | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             |
+        | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks permission on the referenced conversation. |
+
+        > ###### Note:
+        >
+        > - This endpoint is deprecated. Use `sendAgentConversationMessageStreaming` for new integrations.
+        > - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.
+        > - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
+        > - The streaming protocol uses Server-Sent Events (SSE).
+
+
+
+
+
       operationId: sendAgentMessageStreaming
       parameters: []
       requestBody:
@@ -509,6 +782,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
         "500":
           content:
             application/json:
@@ -528,15 +813,30 @@ paths:
         Version: 10.4.0.cl or later
 
 
-        Allows sending a follow-up message to an ongoing conversation within the context of the metadata model.
+        Sends a follow-up message to an existing conversation within the context of a data model.
 
-        Requires at least view access to the metadata object specified in the request.
+        Requires `CAN_USE_SPOTTER` privilege and at least view access to the metadata object specified in the request. A conversation must first be created using the `createConversation` API.
 
         #### Usage guidelines
 
-        The API requires you to specify the `conversation_identifier` in the request path, and a `metadata_identifier` and `message` string in the request body.
+        The request must include:
+        - `conversation_identifier`: the unique session ID returned by `createConversation`
+        - `metadata_identifier`: the unique ID of the data source used for the conversation
+        - `message`: a natural language string with the follow-up question
 
-        If the API request is successful, ThoughtSpot returns the session ID, tokens used in the conversation, and visualization type.
+        If the request is successful, the API returns an array of response messages, each containing:
+        - `session_identifier`: the unique ID of the generated response
+        - `generation_number`: the generation number of the response
+        - `message_type`: the type of the response (e.g., `TSAnswer`)
+        - `visualization_type`: the generated visualization type (`Chart`, `Table`, or `Undefined`)
+        - `tokens` / `display_tokens`: the search tokens and user-friendly display tokens for the response
+
+        #### Error responses
+
+        | Code | Description                                                                                                                             |
+        |------|-----------------------------------------------------------------------------------------------------------------------------------------|
+        | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                    |
+        | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks view permission on the specified metadata object. |
 
         > ###### Note:
         > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.
@@ -585,6 +885,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
         "500":
           content:
             application/json:
@@ -606,27 +918,39 @@ paths:
 
         This API allows users to set natural language (NL) instructions for a specific data-model to improve AI-generated answers and query processing. These instructions help guide the AI system to better understand the data context and provide more accurate responses.
 
+        Requires `CAN_USE_SPOTTER` privilege, either edit access or `SPOTTER_COACHING_PRIVILEGE` on the data model, and a bearer token corresponding to the org where the data model exists.
+
         #### Usage guidelines
 
         To set NL instructions for a data-model, the request must include:
+
         - `data_source_identifier`: The unique ID of the data-model for which to set NL instructions
         - `nl_instructions_info`: An array of instruction objects, each containing:
           - `instructions`: Array of text instructions for the LLM
           - `scope`: The scope of the instruction (`GLOBAL`). Currently only `GLOBAL` is supported. It can be extended to data-model-user scope in future.
 
-        The API returns a response object with:
-        - `success`: Boolean indicating whether the operation was successful
+        #### Instructions scope
 
-        #### Instructions Scope
+        - **GLOBAL**: instructions that apply to all users querying this data model
 
-        - **GLOBAL**: Instructions that apply globally for that data-model across the system
+        If the request is successful, the API returns:
+
+        - `success`: a boolean indicating whether the operation completed successfully
+
+        #### Error responses
+
+        | Code | Description                                                                                                                                                                                                                        |
+        |------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+        | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                                                                                               |
+        | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, lacks edit access or `SPOTTER_COACHING_PRIVILEGE` on the data model, or the bearer token does not correspond to the org where the data model exists. |
 
         > ###### Note:
-        > * To use this API, the user needs either edit access or SPOTTER_COACHING_PRIVILEGE on the data-model and they must use corresponding org related bearerToken where the data-model exists.
-        > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.
-        > * Available from version 10.15.0.cl and later.
-        > * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.
-        > * Instructions help improve the accuracy and relevance of AI-generated responses for the specified data-model.
+        >
+        > - To use this API, the user needs either edit access or `SPOTTER_COACHING_PRIVILEGE` on the data model, and must use the bearer token corresponding to the org where the data model exists.
+        > - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.
+        > - Available from version 10.15.0.cl and later.
+        > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.
+        > - Instructions help improve the accuracy and relevance of AI-generated responses for the specified data-model.
 
 
 
@@ -659,6 +983,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
         "500":
           content:
             application/json:
@@ -678,9 +1014,29 @@ paths:
         Version: 10.4.0.cl or later
 
 
-        Processes a natural language query and returns an AI-generated response based on a specified data model.
+        Processes a natural language query against a specified data model and returns a single AI-generated answer without requiring a conversation session.
 
-        Requires at least view access to the metadata object specified in the request.
+        Requires `CAN_USE_SPOTTER` privilege and at least view access to the metadata object specified in the request.
+
+        #### Usage guidelines
+
+        The request must include:
+        - `query`: a natural language question (e.g., "What were total sales last quarter?")
+        - `metadata_identifier`: the unique ID of the data source to query against
+
+        If the request is successful, the API returns a response message containing:
+        - `session_identifier`: the unique ID of the generated response
+        - `generation_number`: the generation number of the response
+        - `message_type`: the type of the response (e.g., `TSAnswer`)
+        - `visualization_type`: the generated visualization type (`Chart`, `Table`, or `Undefined`)
+        - `tokens` / `display_tokens`: the search tokens and user-friendly display tokens for the response
+
+        #### Error responses
+
+        | Code | Description                                                                                                                             |
+        |------|-----------------------------------------------------------------------------------------------------------------------------------------|
+        | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                    |
+        | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks view permission on the specified metadata object. |
 
         > ###### Note:
         > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.
@@ -717,6 +1073,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
         "500":
           content:
             application/json:
@@ -1352,6 +1720,303 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
+  /api/rest/2.0/collections/create:
+    post:
+      description: |2+
+
+         Version: 26.4.0.cl or later
+
+
+        Creates a new collection in ThoughtSpot.
+
+        Collections allow you to organize and group related metadata objects such as Liveboards, Answers, worksheets, and other data objects. You can also create nested collections (sub-collections) to build a hierarchical structure.
+
+        #### Supported operations
+
+        The API endpoint lets you perform the following operations:
+
+        * Create a new collection
+        * Add metadata objects (Liveboards, Answers, Logical Tables) to the collection
+        * Create nested collections by adding sub-collections
+
+
+
+
+
+      operationId: createCollection
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCollectionRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+          description: Collection created successfully
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Collections
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/rest/2.0/collections/delete:
+    post:
+      description: |2+
+
+         Version: 26.4.0.cl or later
+
+
+        Deletes one or more collections from ThoughtSpot.
+
+        #### Delete options
+
+        * **delete_children**: When set to `true`, deletes the child objects (metadata items) within the collection that the user has access to. Objects that the user does not have permission to delete will be skipped.
+        * **dry_run**: When set to `true`, performs a preview of the deletion operation without actually deleting anything. The response shows what would be deleted, allowing you to review before committing the deletion.
+
+        #### Response
+
+        The response includes:
+        * **metadata_deleted**: List of metadata objects that were successfully deleted
+        * **metadata_skipped**: List of metadata objects that were skipped due to lack of permissions or other constraints
+
+
+
+
+
+      operationId: deleteCollection
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteCollectionRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionDeleteResponse'
+          description: Collections deleted successfully.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Resource not found.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Collections
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/rest/2.0/collections/search:
+    post:
+      description: |2+
+
+         Version: 26.4.0.cl or later
+
+
+        Gets a list of collections available in ThoughtSpot.
+
+        To get details of a specific collection, specify the collection GUID or name. You can also filter the API response based on the collection name pattern, author, and other criteria.
+
+        #### Search options
+
+        * **name_pattern**: Use '%' as a wildcard character to match collection names
+        * **collection_identifiers**: Search for specific collections by their GUIDs or names
+        * **include_metadata**: When set to `true`, includes the metadata objects within each collection in the response
+
+        **NOTE**: If the API returns an empty list, consider increasing the value of the `record_size` parameter. To search across all available collections, set `record_size` to `-1`.
+
+
+
+
+
+      operationId: searchCollections
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchCollectionsRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionSearchResponse'
+          description: Successfully retrieved list of collections
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Collections
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/rest/2.0/collections/{collection_identifier}/update:
+    post:
+      description: |2+
+
+         Version: 26.4.0.cl or later
+
+
+        Updates an existing collection in ThoughtSpot.
+
+        #### Supported operations
+
+        This API endpoint lets you perform the following operations:
+
+        * Update collection name and description
+        * Change visibility settings
+        * Add metadata objects to the collection (operation: ADD)
+        * Remove metadata objects from the collection (operation: REMOVE)
+        * Replace all metadata objects in the collection (operation: REPLACE)
+
+        #### Operation types
+
+        * **ADD**: Adds the specified metadata objects to the existing collection without removing current items
+        * **REMOVE**: Removes only the specified metadata objects from the collection
+        * **REPLACE**: Replaces all existing metadata objects with the specified items (default behavior)
+
+
+
+
+
+      operationId: updateCollection
+      parameters:
+      - description: |-
+          Unique GUID of the collection. Note: Collection names cannot be used as
+          identifiers since duplicate names are allowed.
+        explode: false
+        in: path
+        name: collection_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCollectionRequest'
+        required: true
+      responses:
+        "204":
+          description: Collection updated successfully. No content returned.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Resource not found.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Collections
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/connection-configurations/search:
     post:
       description: |2+
@@ -1637,18 +2302,26 @@ paths:
         \ attributes for a SnowFlake connection:\n  ```\n  {\n     \"configuration\"\
         :{\n        \"accountName\":\"thoughtspot_partner\",\n        \"user\":\"\
         tsadmin\",\n        \"password\":\"TestConn123\",\n        \"role\":\"sysadmin\"\
-        ,\n        \"warehouse\":\"MEDIUM_WH\"\n     },\n     \"externalDatabases\"\
-        :[\n\n     ]\n  }\n  ```\n2. Set `validate` to `false`.\n\n#### Create a connection\
-        \ with tables\n\nTo create a connection with tables:\n\n1. Pass these parameters\
-        \ in your API request.\n * Name of the connection.\n * Type of the data warehouse\
-        \ to connect to.\n * A JSON map of configuration attributes, database details,\
-        \ and table properties in `data_warehouse_config` as shown in the following\
-        \ example:\n  ```\n  {\n     \"configuration\":{\n        \"accountName\"\
-        :\"thoughtspot_partner\",\n        \"user\":\"tsadmin\",\n        \"password\"\
-        :\"TestConn123\",\n        \"role\":\"sysadmin\",\n        \"warehouse\":\"\
-        MEDIUM_WH\"\n     },\n     \"externalDatabases\":[\n        {\n          \
-        \ \"name\":\"AllDatatypes\",\n           \"isAutoCreated\":false,\n      \
-        \     \"schemas\":[\n              {\n                 \"name\":\"alldatatypes\"\
+        ,\n        \"warehouse\":\"MEDIUM_WH\"\n     },\n     \"authenticationType\"\
+        : \"SERVICE_ACCOUNT\",\n     \"externalDatabases\":[\n\n     ]\n  }\n  ```\n\
+        2. Set `validate` to `false`.\n\n**NOTE:** If the `authentication_type` is\
+        \ anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType\
+        \ property in the payload. If you do not specify authenticationType, the API\
+        \ will default to SERVICE_ACCOUNT as the authentication type.\n\n#### Create\
+        \ a connection with tables\n\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
+        \ is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can\
+        \ create/edit Connections**) and `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can\
+        \ manage data models**) privilege is required.\n\nTo create a connection with\
+        \ tables:\n\n1. Pass these parameters in your API request.\n * Name of the\
+        \ connection.\n * Type of the data warehouse to connect to.\n * A JSON map\
+        \ of configuration attributes, database details, and table properties in `data_warehouse_config`\
+        \ as shown in the following example:\n  ```\n  {\n     \"configuration\":{\n\
+        \        \"accountName\":\"thoughtspot_partner\",\n        \"user\":\"tsadmin\"\
+        ,\n        \"password\":\"TestConn123\",\n        \"role\":\"sysadmin\",\n\
+        \        \"warehouse\":\"MEDIUM_WH\"\n     },\n     \"authenticationType\"\
+        : \"SERVICE_ACCOUNT\",\n     \"externalDatabases\":[\n        {\n        \
+        \   \"name\":\"AllDatatypes\",\n           \"isAutoCreated\":false,\n    \
+        \       \"schemas\":[\n              {\n                 \"name\":\"alldatatypes\"\
         ,\n                 \"tables\":[\n                    {\n                \
         \       \"name\":\"allDatatypes\",\n                       \"type\":\"TABLE\"\
         ,\n                       \"description\":\"\",\n                       \"\
@@ -1670,7 +2343,10 @@ paths:
         \                  \"dbName\":\"AllDatatypes\"\n                         \
         \ }\n                       ]\n                    }\n                 ]\n\
         \              }\n           ]\n        }\n     ]\n  }\n  ```\n2. Set `validate`\
-        \ to `true`.\n\n\n\n\n\n"
+        \ to `true`.\n\n**NOTE:** If the `authentication_type` is anything other than\
+        \ SERVICE_ACCOUNT, you must explicitly provide the authenticationType property\
+        \ in the payload. If you do not specify authenticationType, the API will default\
+        \ to SERVICE_ACCOUNT as the authentication type.\n\n\n\n\n\n"
       operationId: createConnection
       parameters: []
       requestBody:
@@ -4337,6 +5013,128 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
+  /api/rest/2.0/jobs/history/communication-channels/search:
+    post:
+      description: |2+
+
+         Version: 26.4.0.cl or later
+
+
+        Searches delivery history for communication channels such as webhooks. Returns channel-level delivery status for each job execution record. Use this to monitor channel health and delivery success rates across events.
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.
+
+        **NOTE**: When `channel_type` is `WEBHOOK`, the following constraints apply:
+
+        - `job_ids`, `channel_identifiers`, and `events` each accept at most one element.
+        - When `job_ids` is provided, it is used as the sole lookup key and other filter fields are ignored.
+        - When `job_ids` is not provided, `channel_identifiers` and `events` are both required. Each must contain exactly one element, and the event object must include the `identifier` field.
+        - Records older than the configured retention period are not returned.
+
+
+
+
+
+      operationId: searchChannelHistory
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchChannelHistoryRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  description: Search webhook channel history by channel identifier
+                    and event
+                  value:
+                    jobs:
+                    - id: n.6170538a-a4d4-4712-91bf-39b353db2b72
+                      status: SUCCESS
+                      creation_time_in_millis: 1771599720674
+                      event:
+                        type: LIVEBOARD_SCHEDULE
+                        id: 2bb2ff83-b8d9-4d2b-8913-b2589bb6831b
+                        name: schedule-identifier
+                        run_id: 90c4f1b0-08c9-4a6c-8e61-49cffd9f1550
+                      recipients:
+                      - type: USER
+                        id: d211f619-8b72-45d3-92a7-69dde41159c7
+                        name: admin-user
+                        email: admin@example.com
+                      detail: ""
+                      try_count: 1
+                    - id: n.5c5bbedb-c425-48c0-8b54-a17267b08e7c
+                      status: SUCCESS
+                      creation_time_in_millis: 1771599600508
+                      event:
+                        type: LIVEBOARD_SCHEDULE
+                        id: 2bb2ff83-b8d9-4d2b-8913-b2589bb6831b
+                        name: schedule-identifier
+                        run_id: b9834966-fe85-4fa9-8a10-9889c01d4826
+                      recipients:
+                      - type: USER
+                        id: d211f619-8b72-45d3-92a7-69dde41159c7
+                        name: admin-user
+                        email: admin@example.com
+                      detail: ""
+                      try_count: 1
+                example_2:
+                  description: Search webhook channel history by job ID
+                  value:
+                    jobs:
+                    - id: n.5c5bbedb-c425-48c0-8b54-a17267b08e7c
+                      status: SUCCESS
+                      creation_time_in_millis: 1771599600508
+                      event:
+                        type: LIVEBOARD_SCHEDULE
+                        id: 2bb2ff83-b8d9-4d2b-8913-b2589bb6831b
+                        name: schedule-identifier
+                        run_id: b9834966-fe85-4fa9-8a10-9889c01d4826
+                      recipients:
+                      - type: USER
+                        id: d211f619-8b72-45d3-92a7-69dde41159c7
+                        name: admin-user
+                        email: admin@example.com
+                      detail: ""
+                      try_count: 1
+              schema:
+                $ref: '#/components/schemas/SearchChannelHistoryResponse'
+          description: Channel status logs retrieved successfully.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Jobs
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/logs/fetch:
     post:
       description: "\n Version: 9.0.0.cl or later\n\n\nFetches security audit logs.\
@@ -5091,8 +5889,11 @@ paths:
       - application/json
   /api/rest/2.0/metadata/parameterize:
     post:
+      deprecated: true
       description: "\nParameterize fields in metadata objects. \n Version: 10.9.0.cl\
-        \ or later\n\n\nAllows parameterizing fields in metadata objects in ThoughtSpot.\n\
+        \ or later\n\n\n**Note:** This API endpoint is deprecated and will be removed\
+        \ from ThoughtSpot in a future release. Use [POST /api/rest/2.0/metadata/parameterize-fields](/api/rest/2.0/metadata/parameterize-fields)\
+        \ instead.\n\nAllows parameterizing fields in metadata objects in ThoughtSpot.\n\
         \nRequires appropriate permissions to modify the metadata object.\n\nThe API\
         \ endpoint allows parameterizing the following types of metadata objects:\n\
         * Logical Tables\n* Connections\n* Connection Configs\n\nFor a Logical Table\
@@ -5109,6 +5910,63 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ParameterizeMetadataRequest'
+        required: true
+      responses:
+        "204":
+          description: Parameterize successful.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Metadata
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/rest/2.0/metadata/parameterize-fields:
+    post:
+      description: "\nParameterize multiple fields of metadata objects. For example\
+        \ [schemaName, databaseName] for LOGICAL_TABLE. \n  Version: 26.4.0.cl or\
+        \ later\n\n\nAllows parameterizing multiple fields of metadata objects in\
+        \ ThoughtSpot. For example, you can parameterize [schemaName, databaseName]\
+        \ for LOGICAL_TABLE.\n\nRequires appropriate permissions to modify the metadata\
+        \ object.\n\nThe API endpoint allows parameterizing the following types of\
+        \ metadata objects:\n* Logical Tables\n* Connections\n* Connection Configs\n\
+        \nFor a Logical Table, the field type must be `ATTRIBUTE` and field names\
+        \ can include:\n* databaseName\n* schemaName\n* tableName\n\nFor a Connection\
+        \ or Connection Config, the field type is always `CONNECTION_PROPERTY`. In\
+        \ this case, field_names specifies the exact properties of the Connection\
+        \ or Connection Config that need to be parameterized.\n\nFor Connection Config,\
+        \ supported field names include:\n* impersonate_user\n\nYou can parameterize\
+        \ multiple fields at once by providing an array of field names.\n\n\n\n\n\n"
+      operationId: parameterizeMetadataFields
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParameterizeMetadataFieldsRequest'
         required: true
       responses:
         "204":
@@ -7645,6 +8503,69 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
+  /api/rest/2.0/system/communication-channels/validate:
+    post:
+      description: |2+
+
+        Version: 26.4.0.cl or later
+
+
+        Validates a communication channel configuration to ensure it is properly set up and can receive events.
+        - Use `channel_type` to specify the type of communication channel to validate (e.g., WEBHOOK).
+        - Use `channel_identifier` to provide the unique identifier or name for the communication channel.
+        - Use `event_type` to specify the event type to validate for this channel.
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. For webhook channels, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.
+
+
+
+
+
+      operationId: validateCommunicationChannel
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValidateCommunicationChannelRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommunicationChannelValidateResponse'
+          description: communication channel configuration validated successfully.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - System
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/tags/assign:
     post:
       description: |2+
@@ -8726,10 +9647,13 @@ paths:
       - application/json
   /api/rest/2.0/template/variables/{identifier}/delete:
     post:
-      description: "\nDelete a variable \n Version: 10.14.0.cl or later\n\n\nAllows\
-        \ deleting a variable from ThoughtSpot.\n\nRequires ADMINISTRATION role and\
-        \ TENANT scope.\nThe CAN_MANAGE_VARIABLES permission allows you to manage\
-        \ Formula Variables in the current organization scope.\n\nThe API endpoint\
+      deprecated: true
+      description: "\nDelete a variable \n Version: 10.14.0.cl or later\n\n\n**Note:**\
+        \ This API endpoint is deprecated and will be removed from ThoughtSpot in\
+        \ a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete)\
+        \ instead.\n\nAllows deleting a variable from ThoughtSpot.\n\nRequires ADMINISTRATION\
+        \ role and TENANT scope.\nThe CAN_MANAGE_VARIABLES permission allows you to\
+        \ manage Formula Variables in the current organization scope.\n\nThe API endpoint\
         \ requires:\n* The variable identifier (ID or name)\n\nThe operation will\
         \ fail if:\n* The user lacks required permissions\n* The variable doesn't\
         \ exist\n* The variable is being used by other objects \n\n\n\n\n"
@@ -8773,6 +9697,123 @@ paths:
       tags:
       - Variable
       - ThoughtSpotRest
+      x-accepts:
+      - application/json
+  /api/rest/2.0/template/variables/delete:
+    post:
+      description: "\nDelete variable(s) \n Version: 26.4.0.cl or later\n\n\nAllows\
+        \ deleting multiple variables from ThoughtSpot.\n\nRequires ADMINISTRATION\
+        \ role and TENANT scope.\nThe CAN_MANAGE_VARIABLES permission allows you to\
+        \ manage Formula Variables in the current organization scope.\n\nThe API endpoint\
+        \ requires:\n* The variable identifiers (IDs or names)\n\nThe operation will\
+        \ fail if:\n* The user lacks required permissions\n* Any of the variables\
+        \ don't exist\n* Any of the variables are being used by other objects\n\n\n\
+        \n\n\n"
+      operationId: deleteVariables
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteVariablesRequest'
+        required: true
+      responses:
+        "204":
+          description: Deletion of variable(s) is successful.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Variable
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/rest/2.0/template/variables/{identifier}/update-values:
+    post:
+      description: "\nUpdate values for a variable \n Version: 26.4.0.cl or later\n\
+        \n\nAllows updating values for a specific variable in ThoughtSpot.\n\nRequires\
+        \ ADMINISTRATION role.\nThe CAN_MANAGE_VARIABLES permission allows you to\
+        \ manage Formula Variables in the current organization scope.\n\nThe API endpoint\
+        \ allows:\n* Adding new values to the variable\n* Replacing existing values\n\
+        * Deleting values from the variable\n* Resetting all values\n\nWhen updating\
+        \ variable values, you need to specify:\n* The variable identifier (ID or\
+        \ name)\n* The values to add/replace/remove\n* The operation to perform (ADD,\
+        \ REPLACE, REMOVE, RESET)\n\nBehaviour based on operation type:\n* ADD - Adds\
+        \ values to the variable if this is a list type variable, else same as replace.\n\
+        * REPLACE - Replaces all values of a given set of constraints with the current\
+        \ set of values.\n* REMOVE - Removes any values which match the set of conditions\
+        \ of the variables if this is a list type variable, else clears value.\n*\
+        \ RESET - Removes all constraints for the given variable, scope is ignored\n\
+        \n\n\n\n\n"
+      operationId: putVariableValues
+      parameters:
+      - description: Unique ID or name of the variable
+        explode: false
+        in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutVariableValuesRequest'
+        required: true
+      responses:
+        "204":
+          description: Variable values updated successfully.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Variable
+      - ThoughtSpotRest
+      x-content-type: application/json
       x-accepts:
       - application/json
   /api/rest/2.0/template/variables/search:
@@ -8892,8 +9933,11 @@ paths:
       - application/json
   /api/rest/2.0/template/variables/update-values:
     post:
+      deprecated: true
       description: "\nUpdate values for multiple variables \n Version: 10.14.0.cl\
-        \ or later\n\n\nAllows updating values for multiple variables in ThoughtSpot.\n\
+        \ or later\n\n\n**Note:** This API endpoint is deprecated and will be removed\
+        \ from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/{identifier}/update-values](/api/rest/2.0/template/variables/%7Bidentifier%7D/update-values)\
+        \ instead.\n\nAllows updating values for multiple variables in ThoughtSpot.\n\
         \nRequires ADMINISTRATION role.\nThe CAN_MANAGE_VARIABLES permission allows\
         \ you to manage Formula Variables in the current organization scope.\n\nThe\
         \ API endpoint allows:\n* Adding new values to variables\n* Replacing existing\
@@ -14394,6 +15438,7 @@ components:
           - TABLE_MAPPING
           - CONNECTION_PROPERTY_PER_PRINCIPAL
           - FORMULA_VARIABLE
+          - USER_PROPERTY
           nullable: true
           type: string
         name_pattern:
@@ -14403,7 +15448,7 @@ components:
           type: string
       type: object
     ValueScopeInput:
-      description: Input for variable scope in search
+      description: Input for filtering variable values by scope in search operations
       example:
         principal_identifier: principal_identifier
         model_identifier: model_identifier
@@ -14415,7 +15460,9 @@ components:
           nullable: true
           type: string
         principal_type:
-          description: Principal type
+          description: "Type of principal to filter by. Use USER to filter values\
+            \ assigned to specific users, or USER_GROUP to filter values assigned\
+            \ to groups."
           enum:
           - USER
           - USER_GROUP
@@ -14426,7 +15473,8 @@ components:
           nullable: true
           type: string
         model_identifier:
-          description: Model Identifier
+          description: Unique ID or name of the model to filter by. Applicable only
+            for FORMULA_VARIABLE type.
           nullable: true
           type: string
       type: object
@@ -14470,6 +15518,7 @@ components:
           - TABLE_MAPPING
           - CONNECTION_PROPERTY_PER_PRINCIPAL
           - FORMULA_VARIABLE
+          - USER_PROPERTY
           nullable: true
           type: string
         sensitive:
@@ -14512,7 +15561,9 @@ components:
           description: The unique name of the org
           type: string
         principal_type:
-          description: Principal type
+          description: "Type of principal to which this value applies. Use USER to\
+            \ assign the value to a specific user, or USER_GROUP to assign it to a\
+            \ group."
           enum:
           - USER
           - USER_GROUP
@@ -14750,7 +15801,12 @@ components:
           has_more: true
           record_offset: 0
         webhooks:
-        - creation_time_in_millis: 0.8008282
+        - additional_headers:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          creation_time_in_millis: 0.8008282
           org:
             name: name
             id: id
@@ -14795,7 +15851,12 @@ components:
             BASIC_AUTH:
               password: password
               username: username
-        - creation_time_in_millis: 0.8008282
+        - additional_headers:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          creation_time_in_millis: 0.8008282
           org:
             name: name
             id: id
@@ -14854,6 +15915,11 @@ components:
       type: object
     WebhookResponse:
       example:
+        additional_headers:
+        - value: value
+          key: key
+        - value: value
+          key: key
         creation_time_in_millis: 0.8008282
         org:
           name: name
@@ -14930,6 +15996,13 @@ components:
           $ref: '#/components/schemas/WebhookAuthentication'
         signature_verification:
           $ref: '#/components/schemas/WebhookSignatureVerification'
+        additional_headers:
+          description: "Additional headers as an array of key-value pairs. \n  Version:\
+            \ 26.4.0.cl or later\n"
+          items:
+            $ref: '#/components/schemas/WebhookKeyValuePair'
+          nullable: true
+          type: array
         creation_time_in_millis:
           description: Creation time of the webhook configuration in milliseconds.
           format: float
@@ -15071,6 +16144,22 @@ components:
       - secret
       - type
       type: object
+    WebhookKeyValuePair:
+      description: Key-value pair for additional webhook headers.
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          description: Header name.
+          type: string
+        value:
+          description: Header value.
+          type: string
+      required:
+      - key
+      - value
+      type: object
     WebhookUser:
       example:
         name: name
@@ -15181,6 +16270,376 @@ components:
       - record_offset
       - record_size
       - total_count
+      type: object
+    CollectionSearchResponse:
+      description: Response object for search collections operation.
+      example:
+        collections:
+        - author_name: author_name
+          metadata:
+          - identifiers:
+            - identifier: identifier
+              name: name
+            - identifier: identifier
+              name: name
+            type: type
+          - identifiers:
+            - identifier: identifier
+              name: name
+            - identifier: identifier
+              name: name
+            type: type
+          updated_at: updated_at
+          org:
+            identifier: identifier
+            name: name
+          name: name
+          description: description
+          created_at: created_at
+          id: id
+          author_id: author_id
+        - author_name: author_name
+          metadata:
+          - identifiers:
+            - identifier: identifier
+              name: name
+            - identifier: identifier
+              name: name
+            type: type
+          - identifiers:
+            - identifier: identifier
+              name: name
+            - identifier: identifier
+              name: name
+            type: type
+          updated_at: updated_at
+          org:
+            identifier: identifier
+            name: name
+          name: name
+          description: description
+          created_at: created_at
+          id: id
+          author_id: author_id
+        count: 1
+        record_size: 6
+        is_last_batch: true
+        record_offset: 0
+      properties:
+        collections:
+          description: List of collections matching the search criteria.
+          items:
+            $ref: '#/components/schemas/Collection'
+          type: array
+        record_offset:
+          description: The starting record number from where the records are included.
+          format: int32
+          nullable: true
+          type: integer
+        record_size:
+          description: The number of records returned.
+          format: int32
+          nullable: true
+          type: integer
+        is_last_batch:
+          description: Indicates if this is the last batch of results.
+          nullable: true
+          type: boolean
+        count:
+          description: Total count of records returned.
+          format: int32
+          nullable: true
+          type: integer
+      required:
+      - collections
+      type: object
+    Collection:
+      description: Response object for a collection.
+      example:
+        author_name: author_name
+        metadata:
+        - identifiers:
+          - identifier: identifier
+            name: name
+          - identifier: identifier
+            name: name
+          type: type
+        - identifiers:
+          - identifier: identifier
+            name: name
+          - identifier: identifier
+            name: name
+          type: type
+        updated_at: updated_at
+        org:
+          identifier: identifier
+          name: name
+        name: name
+        description: description
+        created_at: created_at
+        id: id
+        author_id: author_id
+      properties:
+        id:
+          description: Unique identifier of the collection.
+          type: string
+        name:
+          description: Name of the collection.
+          type: string
+        description:
+          description: Description of the collection.
+          nullable: true
+          type: string
+        metadata:
+          description: Metadata objects in the collection.
+          items:
+            $ref: '#/components/schemas/CollectionMetadataItem'
+          nullable: true
+          type: array
+        created_at:
+          description: Creation timestamp in milliseconds.
+          nullable: true
+          type: string
+        updated_at:
+          description: Last updated timestamp in milliseconds.
+          nullable: true
+          type: string
+        author_name:
+          description: Name of the author who created the collection.
+          nullable: true
+          type: string
+        author_id:
+          description: Unique identifier of the author.
+          nullable: true
+          type: string
+        org:
+          $ref: '#/components/schemas/CollectionEntityIdentifier'
+      required:
+      - id
+      - name
+      type: object
+    CollectionMetadataItem:
+      description: Metadata item in a collection response.
+      example:
+        identifiers:
+        - identifier: identifier
+          name: name
+        - identifier: identifier
+          name: name
+        type: type
+      properties:
+        type:
+          description: Type of the metadata object.
+          nullable: true
+          type: string
+        identifiers:
+          description: List of identifiers for this metadata type.
+          items:
+            $ref: '#/components/schemas/CollectionEntityIdentifier'
+          nullable: true
+          type: array
+      type: object
+    CollectionEntityIdentifier:
+      description: Entity identifier with name.
+      example:
+        identifier: identifier
+        name: name
+      properties:
+        identifier:
+          description: Unique identifier of the entity.
+          nullable: true
+          type: string
+        name:
+          description: Name of the entity.
+          nullable: true
+          type: string
+      type: object
+    ChannelHistoryEventInput:
+      description: Event specification for channel history search.
+      example:
+        identifier: identifier
+        type: LIVEBOARD_SCHEDULE
+      properties:
+        type:
+          description: Type of the event.
+          enum:
+          - LIVEBOARD_SCHEDULE
+          type: string
+        identifier:
+          description: Unique ID or name of the event.
+          nullable: true
+          type: string
+      required:
+      - type
+      type: object
+    SearchChannelHistoryResponse:
+      description: Response wrapper for channel delivery history.
+      example:
+        jobs:
+        - creation_time_in_millis: 0.8008282
+          recipients:
+          - name: name
+            id: id
+            type: USER
+            email: email
+          - name: name
+            id: id
+            type: USER
+            email: email
+          try_count: 6
+          id: id
+          detail: detail
+          event:
+            run_id: run_id
+            name: name
+            id: id
+            type: LIVEBOARD_SCHEDULE
+          status: PENDING
+        - creation_time_in_millis: 0.8008282
+          recipients:
+          - name: name
+            id: id
+            type: USER
+            email: email
+          - name: name
+            id: id
+            type: USER
+            email: email
+          try_count: 6
+          id: id
+          detail: detail
+          event:
+            run_id: run_id
+            name: name
+            id: id
+            type: LIVEBOARD_SCHEDULE
+          status: PENDING
+      properties:
+        jobs:
+          description: List of job execution records.
+          items:
+            $ref: '#/components/schemas/ChannelHistoryJob'
+          type: array
+      required:
+      - jobs
+      type: object
+    ChannelHistoryJob:
+      description: A single job execution record for a channel.
+      example:
+        creation_time_in_millis: 0.8008282
+        recipients:
+        - name: name
+          id: id
+          type: USER
+          email: email
+        - name: name
+          id: id
+          type: USER
+          email: email
+        try_count: 6
+        id: id
+        detail: detail
+        event:
+          run_id: run_id
+          name: name
+          id: id
+          type: LIVEBOARD_SCHEDULE
+        status: PENDING
+      properties:
+        id:
+          description: Unique identifier for this job.
+          type: string
+        status:
+          description: Delivery status of this job.
+          enum:
+          - PENDING
+          - RETRY
+          - SUCCESS
+          - FAILED
+          type: string
+        creation_time_in_millis:
+          description: Timestamp when this job was created (epoch milliseconds).
+          format: float
+          type: number
+        event:
+          $ref: '#/components/schemas/ChannelHistoryEventInfo'
+        recipients:
+          description: "The users, groups or external recipients for this job."
+          items:
+            $ref: '#/components/schemas/JobRecipient'
+          nullable: true
+          type: array
+        detail:
+          description: Additional delivery details such as HTTP response code or error
+            message.
+          nullable: true
+          type: string
+        try_count:
+          description: Number of attempts made. 1 indicates first attempt.
+          format: int32
+          nullable: true
+          type: integer
+      required:
+      - creation_time_in_millis
+      - id
+      - status
+      type: object
+    ChannelHistoryEventInfo:
+      description: Event metadata for the triggering event associated with a job.
+      example:
+        run_id: run_id
+        name: name
+        id: id
+        type: LIVEBOARD_SCHEDULE
+      properties:
+        type:
+          description: Type of the event.
+          enum:
+          - LIVEBOARD_SCHEDULE
+          type: string
+        id:
+          description: Unique ID of the event.
+          type: string
+        name:
+          description: Name of the event.
+          nullable: true
+          type: string
+        run_id:
+          description: Unique run ID for this event execution.
+          nullable: true
+          type: string
+      required:
+      - id
+      - type
+      type: object
+    JobRecipient:
+      description: "A recipient (user, group, or external) for a job execution."
+      example:
+        name: name
+        id: id
+        type: USER
+        email: email
+      properties:
+        type:
+          description: Type of the recipient.
+          enum:
+          - USER
+          - EXTERNAL
+          type: string
+        id:
+          description: Unique ID of the recipient.
+          nullable: true
+          type: string
+        name:
+          description: Name of the recipient.
+          nullable: true
+          type: string
+        email:
+          description: Email of the recipient.
+          nullable: true
+          type: string
+      required:
+      - type
       type: object
     GenericInfo:
       example:
@@ -16141,6 +17600,133 @@ components:
           nullable: true
           type: array
       type: object
+    CommunicationChannelValidateResponse:
+      description: Response containing validation results for communication channel
+        configuration.
+      example:
+        channel_name: channel_name
+        event_type: LIVEBOARD_SCHEDULE
+        job_id: job_id
+        result_code: SUCCESS
+        details:
+        - error_message: error_message
+          validation_step: HTTP_CONNECTION_CHECK
+          aws_s3_info:
+            object_key: object_key
+            file_name: file_name
+            bucket_name: bucket_name
+          http_status: 0
+          status: SUCCESS
+        - error_message: error_message
+          validation_step: HTTP_CONNECTION_CHECK
+          aws_s3_info:
+            object_key: object_key
+            file_name: file_name
+            bucket_name: bucket_name
+          http_status: 0
+          status: SUCCESS
+        channel_type: WEBHOOK
+        channel_id: channel_id
+      properties:
+        channel_type:
+          description: Type of communication channel that was validated.
+          enum:
+          - WEBHOOK
+          type: string
+        channel_id:
+          description: "ID of the communication channel (e.g., webhook_id)."
+          type: string
+        channel_name:
+          description: "Name of the communication channel (e.g., webhook name)."
+          nullable: true
+          type: string
+        event_type:
+          description: Event type that was validated.
+          enum:
+          - LIVEBOARD_SCHEDULE
+          type: string
+        job_id:
+          description: Unique Job Id of the validation.
+          type: string
+        result_code:
+          description: Overall result of the validation.
+          enum:
+          - SUCCESS
+          - FAILED
+          - PARTIAL_SUCCESS
+          type: string
+        details:
+          description: Detailed results of various validation sub-steps.
+          items:
+            $ref: '#/components/schemas/ChannelValidationDetail'
+          nullable: true
+          type: array
+      required:
+      - channel_id
+      - channel_type
+      - event_type
+      - job_id
+      - result_code
+      type: object
+    ChannelValidationDetail:
+      description: Validation detail result for a sub-step.
+      example:
+        error_message: error_message
+        validation_step: HTTP_CONNECTION_CHECK
+        aws_s3_info:
+          object_key: object_key
+          file_name: file_name
+          bucket_name: bucket_name
+        http_status: 0
+        status: SUCCESS
+      properties:
+        validation_step:
+          description: The validation step that was performed.
+          enum:
+          - HTTP_CONNECTION_CHECK
+          - STORAGE_FILE_UPLOAD_CHECK
+          type: string
+        status:
+          description: Status of this validation step.
+          enum:
+          - SUCCESS
+          - FAILED
+          type: string
+        http_status:
+          description: HTTP status code returned by the channel (if applicable).
+          format: int32
+          nullable: true
+          type: integer
+        error_message:
+          description: Error message from the channel or validation process.
+          nullable: true
+          type: string
+        aws_s3_info:
+          $ref: '#/components/schemas/ChannelValidationAwsS3Info'
+      required:
+      - status
+      - validation_step
+      type: object
+    ChannelValidationAwsS3Info:
+      description: AWS S3 storage information returned from a validation step.
+      example:
+        object_key: object_key
+        file_name: file_name
+        bucket_name: bucket_name
+      properties:
+        bucket_name:
+          description: Name of the S3 bucket.
+          nullable: true
+          type: string
+        file_name:
+          description: Name of the uploaded file.
+          nullable: true
+          type: string
+        object_key:
+          description: Key of the object in S3 storage.
+          nullable: true
+          type: string
+      type: object
     TagMetadataTypeInput:
       example:
         identifier: identifier
@@ -16334,7 +17920,7 @@ components:
           nullable: true
           type: boolean
         include_obj_id:
-          default: false
+          default: true
           description: Boolean flag to export Object ID of the object. This flag will
             work only after the Object ID feature has been enabled. Please contact
             support to enable the feature.
@@ -18378,7 +19964,8 @@ components:
       - variable_values
       type: object
     VariableUpdateScopeInput:
-      description: Input for variable value update in batch operations
+      description: Input for defining the scope of variable value assignments in batch
+        update operations
       example:
         principal_identifier: principal_identifier
         model_identifier: model_identifier
@@ -18388,6 +19975,55 @@ components:
       properties:
         org_identifier:
           description: The unique name of the org
+          type: string
+        principal_type:
+          description: "Type of principal to which the variable value applies. Use\
+            \ USER to assign values to a specific user, or USER_GROUP to assign values\
+            \ to a group."
+          enum:
+          - USER
+          - USER_GROUP
+          nullable: true
+          type: string
+        principal_identifier:
+          description: Unique ID or name of the principal
+          nullable: true
+          type: string
+        model_identifier:
+          description: Unique ID or name of the model. Required for FORMULA_VARIABLE
+            type to scope the variable value to a specific worksheet.
+          nullable: true
+          type: string
+        priority:
+          description: "The priority level for this scope assignment, used for conflict\
+            \ resolution when multiple values match. Higher priority values (larger\
+            \ numbers) take precedence."
+          format: int32
+          nullable: true
+          type: integer
+      required:
+      - org_identifier
+      type: object
+    VariablePutAssignmentInput:
+      description: Input for variable value put operations
+      example:
+        principal_identifier: principal_identifier
+        model_identifier: model_identifier
+        org_identifier: org_identifier
+        assigned_values:
+        - assigned_values
+        - assigned_values
+        principal_type: USER
+        priority: 0
+      properties:
+        assigned_values:
+          description: Values of the variable
+          items:
+            type: string
+          type: array
+        org_identifier:
+          description: The unique name of the org
+          nullable: true
           type: string
         principal_type:
           description: Principal type
@@ -18410,7 +20046,7 @@ components:
           nullable: true
           type: integer
       required:
-      - org_identifier
+      - assigned_values
       type: object
     CreateEmailCustomizationResponse:
       example:
@@ -18562,6 +20198,10 @@ components:
         hide_contact_support_url:
           description: "Whether to hide contact support url. \n  Version: 26.2.0.cl\
             \ or later\n"
+          nullable: true
+          type: boolean
+        hide_logo_url:
+          description: "Whether to hide logo \n  Version: 26.4.0.cl or later\n"
           nullable: true
           type: boolean
       type: object
@@ -18728,6 +20368,22 @@ components:
       - region
       - role_arn
       type: object
+    WebhookKeyValuePairInput:
+      description: Key-value pair input for additional webhook headers.
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          description: Header name.
+          type: string
+        value:
+          description: Header value.
+          type: string
+      required:
+      - key
+      - value
+      type: object
     WebhookDeleteResponse:
       example:
         failed_webhooks:
@@ -18738,7 +20394,12 @@ components:
           id: id
           error: error
         deleted_webhooks:
-        - creation_time_in_millis: 0.8008282
+        - additional_headers:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          creation_time_in_millis: 0.8008282
           org:
             name: name
             id: id
@@ -18783,7 +20444,12 @@ components:
             BASIC_AUTH:
               password: password
               username: username
-        - creation_time_in_millis: 0.8008282
+        - additional_headers:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          creation_time_in_millis: 0.8008282
           org:
             name: name
             id: id
@@ -18874,6 +20540,98 @@ components:
       - error
       - id
       - name
+      type: object
+    CollectionMetadataInput:
+      description: Input type for metadata to be added to a collection.
+      example:
+        identifiers:
+        - identifiers
+        - identifiers
+        type: LIVEBOARD
+      properties:
+        type:
+          description: Type of metadata object.
+          enum:
+          - LIVEBOARD
+          - ANSWER
+          - LOGICAL_TABLE
+          - COLLECTION
+          type: string
+        identifiers:
+          description: List of unique IDs or names of metadata objects.
+          items:
+            type: string
+          type: array
+      required:
+      - identifiers
+      - type
+      type: object
+    CollectionDeleteResponse:
+      description: Response object for delete collection operation.
+      example:
+        metadata_skipped:
+        - identifiers:
+          - name: name
+            id: id
+          - name: name
+            id: id
+          type: type
+        - identifiers:
+          - name: name
+            id: id
+          - name: name
+            id: id
+          type: type
+        metadata_deleted:
+        - identifiers:
+          - name: name
+            id: id
+          - name: name
+            id: id
+          type: type
+        - identifiers:
+          - name: name
+            id: id
+          - name: name
+            id: id
+          type: type
+      properties:
+        metadata_deleted:
+          description: List of metadata objects that were successfully deleted.
+          items:
+            $ref: '#/components/schemas/CollectionDeleteTypeIdentifiers'
+          nullable: true
+          type: array
+        metadata_skipped:
+          description: |-
+            List of metadata objects that were skipped during deletion.
+            Objects may be skipped due to lack of permissions, dependencies, or other constraints.
+          items:
+            $ref: '#/components/schemas/CollectionDeleteTypeIdentifiers'
+          nullable: true
+          type: array
+      type: object
+    CollectionDeleteTypeIdentifiers:
+      description: Group of metadata objects identified by type.
+      example:
+        identifiers:
+        - name: name
+          id: id
+        - name: name
+          id: id
+        type: type
+      properties:
+        type:
+          description: "Type of the metadata object (e.g., Collection, Worksheet,\
+            \ Table)."
+          nullable: true
+          type: string
+        identifiers:
+          description: List of metadata identifiers belonging to the given type.
+          items:
+            $ref: '#/components/schemas/GenericInfo'
+          nullable: true
+          type: array
       type: object
     Runtime_Filter:
       description: List of runtime parameters need to set during the session.
@@ -19471,6 +21229,156 @@ components:
           type: string
       required:
       - token
+      type: object
+    CreateCollectionRequest:
+      example:
+        metadata:
+        - identifiers:
+          - identifiers
+          - identifiers
+          type: LIVEBOARD
+        - identifiers:
+          - identifiers
+          - identifiers
+          type: LIVEBOARD
+        name: name
+        description: description
+      properties:
+        name:
+          description: Name of the collection.
+          type: string
+        description:
+          description: Description of the collection.
+          type: string
+        metadata:
+          description: Metadata objects to add to the collection.
+          items:
+            $ref: '#/components/schemas/CollectionMetadataInput'
+          type: array
+      required:
+      - name
+      type: object
+    DeleteCollectionRequest:
+      example:
+        dry_run: false
+        collection_identifiers:
+        - collection_identifiers
+        - collection_identifiers
+        delete_children: false
+      properties:
+        collection_identifiers:
+          description: |-
+            Unique GUIDs of collections to delete. Note: Collection names cannot be
+            used as identifiers since duplicate names are allowed.
+          items:
+            type: string
+          type: array
+        delete_children:
+          default: false
+          description: Flag to delete child objects of the collection that the user
+            has access to.
+          nullable: true
+          type: boolean
+        dry_run:
+          default: false
+          description: |-
+            Preview deletion without actually deleting. When set to true, returns
+            what would be deleted without performing the actual deletion.
+          nullable: true
+          type: boolean
+      required:
+      - collection_identifiers
+      type: object
+    SearchCollectionsRequest:
+      example:
+        created_by_user_identifiers:
+        - created_by_user_identifiers
+        - created_by_user_identifiers
+        name_pattern: name_pattern
+        record_size: 6
+        include_metadata: false
+        collection_identifiers:
+        - collection_identifiers
+        - collection_identifiers
+        sort_options: ""
+        record_offset: 0
+      properties:
+        name_pattern:
+          description: |-
+            A pattern to match case-insensitive name of the Collection object.
+            Use '%' for wildcard match.
+          type: string
+        record_offset:
+          default: 0
+          description: The starting record number from where the records should be
+            included.
+          format: int32
+          type: integer
+        record_size:
+          default: 10
+          description: |-
+            The number of records that should be included.
+            -1 implies no pagination.
+          format: int32
+          type: integer
+        collection_identifiers:
+          description: |-
+            Unique GUIDs of collections to search. Note: Collection names cannot be
+            used as identifiers since duplicate names are allowed.
+          items:
+            type: string
+          type: array
+        created_by_user_identifiers:
+          description: |-
+            Filter collections by author. Provide unique IDs or names of users
+            who created the collections.
+          items:
+            type: string
+          type: array
+        include_metadata:
+          default: false
+          description: Include collection metadata items in the response.
+          nullable: true
+          type: boolean
+        sort_options:
+          allOf:
+          - $ref: '#/components/schemas/SortOptions'
+          description: Sort options.
+      type: object
+    UpdateCollectionRequest:
+      example:
+        metadata:
+        - identifiers:
+          - identifiers
+          - identifiers
+          type: LIVEBOARD
+        - identifiers:
+          - identifiers
+          - identifiers
+          type: LIVEBOARD
+        name: name
+        description: description
+        operation: REPLACE
+      properties:
+        name:
+          description: Name of the collection.
+          type: string
+        description:
+          description: Description of the collection.
+          type: string
+        metadata:
+          description: "Metadata objects to add, remove, or replace in the collection."
+          items:
+            $ref: '#/components/schemas/CollectionMetadataInput'
+          type: array
+        operation:
+          default: REPLACE
+          description: Type of update operation. Default operation type is REPLACE.
+          enum:
+          - ADD
+          - REMOVE
+          - REPLACE
+          type: string
       type: object
     ConnectionConfigurationSearchRequest:
       example:
@@ -21126,6 +23034,58 @@ components:
           - REPLACE
           type: string
       type: object
+    SearchChannelHistoryRequest:
+      example:
+        channel_status: PENDING
+        channel_identifiers:
+        - channel_identifiers
+        - channel_identifiers
+        job_ids:
+        - job_ids
+        - job_ids
+        start_epoch_time_in_millis: 0.8008282
+        channel_type: WEBHOOK
+        events:
+        - identifier: identifier
+          type: LIVEBOARD_SCHEDULE
+        - identifier: identifier
+          type: LIVEBOARD_SCHEDULE
+      properties:
+        channel_type:
+          description: Type of communication channel to search history for.
+          enum:
+          - WEBHOOK
+          type: string
+        job_ids:
+          description: List of job execution record IDs to retrieve.
+          items:
+            type: string
+          type: array
+        channel_identifiers:
+          description: List of channel IDs or names to filter by.
+          items:
+            type: string
+          type: array
+        channel_status:
+          description: Filter by channel delivery status.
+          enum:
+          - PENDING
+          - RETRY
+          - SUCCESS
+          - FAILED
+          type: string
+        events:
+          description: Filter by events that triggered the channel.
+          items:
+            $ref: '#/components/schemas/ChannelHistoryEventInput'
+          type: array
+        start_epoch_time_in_millis:
+          description: Filter records created on or after this time (epoch milliseconds).
+          format: float
+          type: number
+      required:
+      - channel_type
+      type: object
     FetchLogsRequest:
       example:
         log_type: SECURITY_AUDIT
@@ -21598,6 +23558,48 @@ components:
           type: string
       required:
       - field_name
+      - field_type
+      - metadata_identifier
+      - variable_identifier
+      type: object
+    ParameterizeMetadataFieldsRequest:
+      example:
+        metadata_identifier: metadata_identifier
+        metadata_type: LOGICAL_TABLE
+        field_names:
+        - field_names
+        - field_names
+        variable_identifier: variable_identifier
+        field_type: ATTRIBUTE
+      properties:
+        metadata_type:
+          description: Type of metadata object to parameterize.
+          enum:
+          - LOGICAL_TABLE
+          - CONNECTION
+          - CONNECTION_CONFIG
+          type: string
+        metadata_identifier:
+          description: Unique ID or name of the metadata object to parameterize.
+          type: string
+        field_type:
+          description: Type of field in the metadata to parameterize.
+          enum:
+          - ATTRIBUTE
+          - CONNECTION_PROPERTY
+          type: string
+        field_names:
+          description: "JSON array of field names to parameterize. Example: [schemaName,\
+            \ databaseName, tableName]"
+          items:
+            type: string
+          type: array
+        variable_identifier:
+          description: Unique ID or name of the variable to use for parameterization
+            of these fields.
+          type: string
+      required:
+      - field_names
       - field_type
       - metadata_identifier
       - variable_identifier
@@ -24476,6 +26478,30 @@ components:
       required:
       - configuration
       type: object
+    ValidateCommunicationChannelRequest:
+      example:
+        event_type: LIVEBOARD_SCHEDULE
+        channel_identifier: channel_identifier
+        channel_type: WEBHOOK
+      properties:
+        channel_type:
+          description: "Type of communication channel to validate (e.g., WEBHOOK)."
+          enum:
+          - WEBHOOK
+          type: string
+        channel_identifier:
+          description: Unique identifier or name for the communication channel.
+          type: string
+        event_type:
+          description: Event type to validate for this channel.
+          enum:
+          - LIVEBOARD_SCHEDULE
+          type: string
+      required:
+      - channel_identifier
+      - channel_type
+      - event_type
+      type: object
     AssignTagRequest:
       example:
         metadata:
@@ -25292,6 +27318,57 @@ components:
       - name
       - type
       type: object
+    DeleteVariablesRequest:
+      example:
+        identifiers:
+        - identifiers
+        - identifiers
+      properties:
+        identifiers:
+          description: Unique id(s) or name(s) of the variable(s) to delete
+          items:
+            type: string
+          type: array
+      required:
+      - identifiers
+      type: object
+    PutVariableValuesRequest:
+      example:
+        variable_assignment:
+        - principal_identifier: principal_identifier
+          model_identifier: model_identifier
+          org_identifier: org_identifier
+          assigned_values:
+          - assigned_values
+          - assigned_values
+          principal_type: USER
+          priority: 0
+        - principal_identifier: principal_identifier
+          model_identifier: model_identifier
+          org_identifier: org_identifier
+          assigned_values:
+          - assigned_values
+          - assigned_values
+          principal_type: USER
+          priority: 0
+        operation: ADD
+      properties:
+        operation:
+          description: Operation to perform
+          enum:
+          - ADD
+          - REMOVE
+          - REPLACE
+          - RESET
+          type: string
+        variable_assignment:
+          description: Variable assignments
+          items:
+            $ref: '#/components/schemas/VariablePutAssignmentInput'
+          type: array
+      required:
+      - variable_assignment
+      type: object
     SearchVariablesRequest:
       example:
         response_content: METADATA
@@ -25379,12 +27456,17 @@ components:
           priority: 0
       properties:
         variable_assignment:
-          description: Variables and values to update
+          description: "Array of variable assignment objects specifying the variable\
+            \ identifier, values to assign, and the operation type (ADD, REMOVE, REPLACE,\
+            \ or RESET) to perform on each variable."
           items:
             $ref: '#/components/schemas/VariableUpdateAssignmentInput'
           type: array
         variable_value_scope:
-          description: Variables and values to update
+          description: "Array of scope objects defining where the variable values\
+            \ apply, including organization context, optional principal constraints\
+            \ (user or group), model reference for formula variables, and priority\
+            \ for conflict resolution."
           items:
             $ref: '#/components/schemas/VariableUpdateScopeInput'
           type: array
@@ -25685,6 +27767,11 @@ components:
     CreateWebhookConfigurationRequest:
       example:
         url_params: "{}"
+        additional_headers:
+        - value: value
+          key: key
+        - value: value
+          key: key
         signature_verification: ""
         name: name
         description: description
@@ -25730,6 +27817,13 @@ components:
             : \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\"\
             , \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"\
             }}} \n  Version: 26.3.0.cl or later\n"
+        additional_headers:
+          description: "Additional headers as an array of key-value pairs.\nExample:\
+            \ [{\"key\": \"X-Custom-Header\", \"value\": \"custom_value\"}] \n  Version:\
+            \ 26.4.0.cl or later\n"
+          items:
+            $ref: '#/components/schemas/WebhookKeyValuePairInput'
+          type: array
       required:
       - events
       - name
@@ -25789,6 +27883,11 @@ components:
     UpdateWebhookConfigurationRequest:
       example:
         url_params: "{}"
+        additional_headers:
+        - value: value
+          key: key
+        - value: value
+          key: key
         signature_verification: ""
         name: name
         description: description
@@ -25834,6 +27933,13 @@ components:
             : \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\"\
             , \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"\
             }}} \n  Version: 26.3.0.cl or later\n"
+        additional_headers:
+          description: "Additional headers as an array of key-value pairs.\nExample:\
+            \ [{\"key\": \"X-Custom-Header\", \"value\": \"custom_value\"}] \n  Version:\
+            \ 26.4.0.cl or later\n"
+          items:
+            $ref: '#/components/schemas/WebhookKeyValuePairInput'
+          type: array
       type: object
     dbtConnection_request:
       properties:
@@ -26010,6 +28116,11 @@ x-roles:
   tags:
   - 9.12.0.cl
   description: Roles for version 9.12.0.cl
+- name: 26.4.0.cl
+  id: 26.4.0.cl
+  tags:
+  - 26.4.0.cl
+  description: Roles for version 26.4.0.cl
 - name: 10.12.0.cl
   id: 10.12.0.cl
   tags:

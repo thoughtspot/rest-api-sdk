@@ -70,6 +70,12 @@ public class WebhookResponseTest {
         // TODO: test signatureVerification
     }
 
+    /** Test the property 'additionalHeaders' */
+    @Test
+    public void additionalHeadersTest() {
+        // TODO: test additionalHeaders
+    }
+
     /** Test the property 'creationTimeInMillis' */
     @Test
     public void creationTimeInMillisTest() {

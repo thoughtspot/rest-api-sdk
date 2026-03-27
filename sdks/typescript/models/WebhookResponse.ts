@@ -12,6 +12,7 @@
 
 import { StorageDestination } from '../models/StorageDestination';
 import { WebhookAuthentication } from '../models/WebhookAuthentication';
+import { WebhookKeyValuePair } from '../models/WebhookKeyValuePair';
 import { WebhookOrg } from '../models/WebhookOrg';
 import { WebhookSignatureVerification } from '../models/WebhookSignatureVerification';
 import { WebhookUser } from '../models/WebhookUser';
@@ -45,6 +46,10 @@ export class WebhookResponse {
     'events': Array<WebhookResponseEventsEnum>;
     'authentication'?: WebhookAuthentication;
     'signature_verification'?: WebhookSignatureVerification;
+    /**
+    * Additional headers as an array of key-value pairs.    Version: 26.4.0.cl or later 
+    */
+    'additional_headers'?: Array<WebhookKeyValuePair> | null;
     /**
     * Creation time of the webhook configuration in milliseconds.
     */
@@ -112,6 +117,12 @@ export class WebhookResponse {
             "name": "signature_verification",
             "baseName": "signature_verification",
             "type": "WebhookSignatureVerification",
+            "format": ""
+        },
+        {
+            "name": "additional_headers",
+            "baseName": "additional_headers",
+            "type": "Array<WebhookKeyValuePair>",
             "format": ""
         },
         {

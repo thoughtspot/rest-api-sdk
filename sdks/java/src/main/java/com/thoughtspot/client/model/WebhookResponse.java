@@ -5,6 +5,7 @@
 package com.thoughtspot.client.model;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.TypeAdapter;
@@ -135,6 +136,12 @@ public class WebhookResponse implements Serializable {
     @SerializedName(SERIALIZED_NAME_SIGNATURE_VERIFICATION)
     @javax.annotation.Nullable
     private WebhookSignatureVerification signatureVerification;
+
+    public static final String SERIALIZED_NAME_ADDITIONAL_HEADERS = "additional_headers";
+
+    @SerializedName(SERIALIZED_NAME_ADDITIONAL_HEADERS)
+    @javax.annotation.Nullable
+    private List<WebhookKeyValuePair> additionalHeaders;
 
     public static final String SERIALIZED_NAME_CREATION_TIME_IN_MILLIS = "creation_time_in_millis";
 
@@ -351,6 +358,35 @@ public class WebhookResponse implements Serializable {
         this.signatureVerification = signatureVerification;
     }
 
+    public WebhookResponse additionalHeaders(
+            @javax.annotation.Nullable List<WebhookKeyValuePair> additionalHeaders) {
+        this.additionalHeaders = additionalHeaders;
+        return this;
+    }
+
+    public WebhookResponse addAdditionalHeadersItem(WebhookKeyValuePair additionalHeadersItem) {
+        if (this.additionalHeaders == null) {
+            this.additionalHeaders = new ArrayList<>();
+        }
+        this.additionalHeaders.add(additionalHeadersItem);
+        return this;
+    }
+
+    /**
+     * Additional headers as an array of key-value pairs. Version: 26.4.0.cl or later
+     *
+     * @return additionalHeaders
+     */
+    @javax.annotation.Nullable
+    public List<WebhookKeyValuePair> getAdditionalHeaders() {
+        return additionalHeaders;
+    }
+
+    public void setAdditionalHeaders(
+            @javax.annotation.Nullable List<WebhookKeyValuePair> additionalHeaders) {
+        this.additionalHeaders = additionalHeaders;
+    }
+
     public WebhookResponse creationTimeInMillis(
             @javax.annotation.Nonnull Float creationTimeInMillis) {
         this.creationTimeInMillis = creationTimeInMillis;
@@ -513,6 +549,7 @@ public class WebhookResponse implements Serializable {
                 && Objects.equals(this.events, webhookResponse.events)
                 && Objects.equals(this.authentication, webhookResponse.authentication)
                 && Objects.equals(this.signatureVerification, webhookResponse.signatureVerification)
+                && Objects.equals(this.additionalHeaders, webhookResponse.additionalHeaders)
                 && Objects.equals(this.creationTimeInMillis, webhookResponse.creationTimeInMillis)
                 && Objects.equals(
                         this.modificationTimeInMillis, webhookResponse.modificationTimeInMillis)
@@ -543,6 +580,7 @@ public class WebhookResponse implements Serializable {
                 events,
                 authentication,
                 signatureVerification,
+                additionalHeaders,
                 creationTimeInMillis,
                 modificationTimeInMillis,
                 createdBy,
@@ -572,6 +610,9 @@ public class WebhookResponse implements Serializable {
         sb.append("    authentication: ").append(toIndentedString(authentication)).append("\n");
         sb.append("    signatureVerification: ")
                 .append(toIndentedString(signatureVerification))
+                .append("\n");
+        sb.append("    additionalHeaders: ")
+                .append(toIndentedString(additionalHeaders))
                 .append("\n");
         sb.append("    creationTimeInMillis: ")
                 .append(toIndentedString(creationTimeInMillis))
@@ -617,6 +658,7 @@ public class WebhookResponse implements Serializable {
         openapiFields.add("events");
         openapiFields.add("authentication");
         openapiFields.add("signature_verification");
+        openapiFields.add("additional_headers");
         openapiFields.add("creation_time_in_millis");
         openapiFields.add("modification_time_in_millis");
         openapiFields.add("created_by");
@@ -714,6 +756,26 @@ public class WebhookResponse implements Serializable {
         if (jsonObj.get("signature_verification") != null
                 && !jsonObj.get("signature_verification").isJsonNull()) {
             WebhookSignatureVerification.validateJsonElement(jsonObj.get("signature_verification"));
+        }
+        if (jsonObj.get("additional_headers") != null
+                && !jsonObj.get("additional_headers").isJsonNull()) {
+            JsonArray jsonArrayadditionalHeaders = jsonObj.getAsJsonArray("additional_headers");
+            if (jsonArrayadditionalHeaders != null) {
+                // ensure the json data is an array
+                if (!jsonObj.get("additional_headers").isJsonArray()) {
+                    throw new IllegalArgumentException(
+                            String.format(
+                                    "Expected the field `additional_headers` to be an array in the"
+                                            + " JSON string but got `%s`",
+                                    jsonObj.get("additional_headers").toString()));
+                }
+
+                // validate the optional field `additional_headers` (array)
+                for (int i = 0; i < jsonArrayadditionalHeaders.size(); i++) {
+                    WebhookKeyValuePair.validateJsonElement(jsonArrayadditionalHeaders.get(i));
+                }
+                ;
+            }
         }
         // validate the optional field `created_by`
         if (jsonObj.get("created_by") != null && !jsonObj.get("created_by").isJsonNull()) {
