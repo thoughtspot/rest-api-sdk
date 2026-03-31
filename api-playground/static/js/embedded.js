@@ -23,11 +23,19 @@ document.addEventListener('click', (event) => {
       console.log("baseUrl", baseUrl);
       const routePath = "/#/develop/api/rest/playgroundV2_0";
       console.log("routePath", routePath);
-      const hash = window.location.hash;
-      console.log("hash", hash);
-      const newUrl = baseUrl + routePath + "?apiResourceId=" + hash;
-      console.log("newUrl", newUrl);
-      window.open(newUrl, '_blank');
+      const fullHash = window.location.hash;
+      console.log("fullHash", fullHash);
+      const parts = fullHash.split('#');
+      console.log("parts", parts);
+      const rawResourcePath = parts[parts.length - 1];
+      console.log("rawResourcePath", rawResourcePath);
+      const cleanPath = rawResourcePath.replace(/^\//, ''); 
+      console.log("cleanPath", cleanPath);
+      const apiResourceId = encodeURIComponent(cleanPath);
+      console.log("apiResourceId", apiResourceId);
+      const finalUrl = `${baseUrl}${routePath}?apiResourceId=${apiResourceId}`;
+      console.log("finalUrl", finalUrl);
+      window.open(finalUrl, '_blank');
     } else {
       // Regular click - navigate within same tab
       window.location.hash = href.substring(1); // Remove the # and set hash
