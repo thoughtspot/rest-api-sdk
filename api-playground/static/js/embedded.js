@@ -2,9 +2,51 @@ const navigateEndpoint = (apiResourceId) => {
   document.location.hash = apiResourceId;
 };
 
+document.addEventListener('click', (event) => {
+  const link = event.target.closest('a[href]');
+  if (!link) return;
+
+  const href = link.getAttribute('href');
+  if (href && href.startsWith('#/')) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    // Check if control/cmd key was pressed (open in new tab)
+    if (event.ctrlKey || event.metaKey) {
+      // console.log("parentUrl", parentUrl);
+      // let baseUrl = parentUrl || window.location.origin;
+      // console.log("window.location", window.location);
+      // const newUrl = window.location.href.replace(window.location.origin, baseUrl);
+      // console.log("newUrl", newUrl);
+      // window.open(newUrl, '_blank');
+      const baseUrl = parentUrl || window.location.origin;
+      console.log("baseUrl", baseUrl);
+      const routePath = "/#/develop/api/rest/playgroundV2_0";
+      console.log("routePath", routePath);
+      const fullHash = window.location.hash;
+      console.log("fullHash", fullHash);
+      const parts = fullHash.split('#');
+      console.log("parts", parts);
+      const rawResourcePath = parts[parts.length - 1];
+      console.log("rawResourcePath", rawResourcePath);
+      const cleanPath = rawResourcePath.replace(/^\//, ''); 
+      console.log("cleanPath", cleanPath);
+      const apiResourceId = encodeURIComponent(cleanPath);
+      console.log("apiResourceId", apiResourceId);
+      const finalUrl = `${baseUrl}${routePath}?apiResourceId=${apiResourceId}`;
+      console.log("finalUrl", finalUrl);
+      window.open(finalUrl, '_blank');
+    } else {
+      // Regular click - navigate within same tab
+      window.location.hash = href.substring(1); // Remove the # and set hash
+    }
+  }
+}, true);
+
 let shouldPatch = false;
 let _setConfig = null;
 let isApiMaticPortalReady = false;
+let parentUrl = null;
 
 const patchURLAndPlayground = async ({ baseUrl, accessToken }) => {
   // find the configure button element
@@ -114,6 +156,11 @@ window.addEventListener('message', (event) => {
   if (event.data?.type === 'api-playground-config') {
     shouldPatch = true;
     playgroundConfig = event.data;
+    console.log("playgroundConfig", playgroundConfig);
+    // Capture parent URL if provided
+    if (event.data.baseUrl) {
+      parentUrl = event.data.baseUrl;
+    }
     setPlaygroundConfig(playgroundConfig);
     if (playgroundConfig.apiResourceId) {
       navigateEndpoint(playgroundConfig.apiResourceId);
