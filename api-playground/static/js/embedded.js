@@ -140,8 +140,8 @@ window.addEventListener('message', (event) => {
     playgroundConfig = event.data;
     console.log("playgroundConfig", playgroundConfig);
     // Capture parent URL if provided
-    if (event.data.parentUrl) {
-      parentUrl = event.data.parentUrl;
+    if (event.data.baseUrl) {
+      parentUrl = event.data.baseUrl;
     }
     setPlaygroundConfig(playgroundConfig);
     if (playgroundConfig.apiResourceId) {
