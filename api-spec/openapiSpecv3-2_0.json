@@ -19002,7 +19002,8 @@
         "type": "object",
         "required": [
           "principal",
-          "share_mode"
+          "share_mode",
+          "content_share_mode"
         ],
         "properties": {
           "principal": {
@@ -19022,11 +19023,9 @@
             "type": "string",
             "enum": [
               "READ_ONLY",
-              "MODIFY",
-              "NO_ACCESS"
+              "MODIFY"
             ],
-            "description": "Content share mode for collections. Controls access to objects within the collection. Only applicable when sharing COLLECTION metadata type.",
-            "nullable": true
+            "description": "Content share mode for collections. Controls access to objects within the collection. Only applicable when sharing COLLECTION metadata type."
           }
         }
       },
