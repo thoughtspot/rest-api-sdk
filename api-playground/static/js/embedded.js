@@ -17,6 +17,9 @@ document.addEventListener('click', (event) => {
       const newUrl = window.location.href.replace(window.location.origin, baseUrl);
       console.log("newUrl", newUrl);
       window.open(newUrl, '_blank');
+    } else {
+      // Regular click - navigate within same tab
+      window.location.hash = href.substring(1); // Remove the # and set hash
     }
   }
 }, true);
