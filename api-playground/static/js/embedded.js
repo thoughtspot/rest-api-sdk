@@ -15,6 +15,7 @@ document.addEventListener('click', (event) => {
     if (event.ctrlKey || event.metaKey) {
       console.log("parentUrl", parentUrl);
       let baseUrl = parentUrl || window.location.origin;
+      console.log("window.location", window.location);
       const newUrl = window.location.href.replace(window.location.origin, baseUrl);
       console.log("newUrl", newUrl);
       window.open(newUrl, '_blank');
