@@ -13,10 +13,19 @@ document.addEventListener('click', (event) => {
 
     // Check if control/cmd key was pressed (open in new tab)
     if (event.ctrlKey || event.metaKey) {
-      console.log("parentUrl", parentUrl);
-      let baseUrl = parentUrl || window.location.origin;
-      console.log("window.location", window.location);
-      const newUrl = window.location.href.replace(window.location.origin, baseUrl);
+      // console.log("parentUrl", parentUrl);
+      // let baseUrl = parentUrl || window.location.origin;
+      // console.log("window.location", window.location);
+      // const newUrl = window.location.href.replace(window.location.origin, baseUrl);
+      // console.log("newUrl", newUrl);
+      // window.open(newUrl, '_blank');
+      const baseUrl = parentUrl || window.location.origin;
+      console.log("baseUrl", baseUrl);
+      const routePath = "/#/develop/api/rest/playgroundV2_0";
+      console.log("routePath", routePath);
+      const hash = window.location.hash;
+      console.log("hash", hash);
+      const newUrl = baseUrl + routePath + "?apiResourceId=" + hash;
       console.log("newUrl", newUrl);
       window.open(newUrl, '_blank');
     } else {
