@@ -2,6 +2,8 @@ const navigateEndpoint = (apiResourceId) => {
   document.location.hash = apiResourceId;
 };
 
+console.log("test main");
+
 let shouldPatch = false;
 let _setConfig = null;
 let isApiMaticPortalReady = false;
