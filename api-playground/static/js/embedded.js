@@ -2,6 +2,31 @@ const navigateEndpoint = (apiResourceId) => {
   document.location.hash = apiResourceId;
 };
 
+document.addEventListener('click', (event) => {
+  const link = event.target.closest('a[href]');
+  if (!link) return;
+
+  const href = link.getAttribute('href');
+  if (href && href.startsWith('#/')) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    // Check if control/cmd key was pressed (open in new tab)
+    if (event.ctrlKey || event.metaKey) {
+      // Get the current cluster URL without hash and open in new tab
+      console.log("window.location", window.location);
+      const baseUrl = window.location.origin + window.location.pathname;
+      console.log("baseUrl", baseUrl);
+      const newUrl = baseUrl + href;
+      console.log("newUrl", newUrl);
+      window.open(newUrl, '_blank');
+    } else {
+      // Regular click - navigate within same tab
+      window.location.hash = href.substring(1); // Remove the # and set hash
+    }
+  }
+}, true);
+
 let shouldPatch = false;
 let _setConfig = null;
 let isApiMaticPortalReady = false;
