@@ -13,6 +13,7 @@ document.addEventListener('click', (event) => {
 
     // Check if control/cmd key was pressed (open in new tab)
     if (event.ctrlKey || event.metaKey) {
+      console.log("parentUrl", parentUrl);
       let baseUrl = parentUrl || window.location.origin;
       const newUrl = window.location.href.replace(window.location.origin, baseUrl);
       console.log("newUrl", newUrl);
