@@ -138,6 +138,7 @@ window.addEventListener('message', (event) => {
   if (event.data?.type === 'api-playground-config') {
     shouldPatch = true;
     playgroundConfig = event.data;
+    console.log("playgroundConfig", playgroundConfig);
     // Capture parent URL if provided
     if (event.data.parentUrl) {
       parentUrl = event.data.parentUrl;
