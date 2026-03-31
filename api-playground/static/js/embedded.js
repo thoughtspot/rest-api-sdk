@@ -13,16 +13,10 @@ document.addEventListener('click', (event) => {
 
     // Check if control/cmd key was pressed (open in new tab)
     if (event.ctrlKey || event.metaKey) {
-      // Get the current cluster URL without hash and open in new tab
-      console.log("window.location", window.location);
-      const baseUrl = window.location.origin + window.location.pathname;
-      console.log("baseUrl", baseUrl);
-      const newUrl = baseUrl + href;
+      let baseUrl = parentUrl || window.location.origin;
+      const newUrl = window.location.href.replace(window.location.origin, baseUrl);
       console.log("newUrl", newUrl);
       window.open(newUrl, '_blank');
-    } else {
-      // Regular click - navigate within same tab
-      window.location.hash = href.substring(1); // Remove the # and set hash
     }
   }
 }, true);
@@ -30,6 +24,7 @@ document.addEventListener('click', (event) => {
 let shouldPatch = false;
 let _setConfig = null;
 let isApiMaticPortalReady = false;
+let parentUrl = null;
 
 const patchURLAndPlayground = async ({ baseUrl, accessToken }) => {
   // find the configure button element
@@ -139,6 +134,10 @@ window.addEventListener('message', (event) => {
   if (event.data?.type === 'api-playground-config') {
     shouldPatch = true;
     playgroundConfig = event.data;
+    // Capture parent URL if provided
+    if (event.data.parentUrl) {
+      parentUrl = event.data.parentUrl;
+    }
     setPlaygroundConfig(playgroundConfig);
     if (playgroundConfig.apiResourceId) {
       navigateEndpoint(playgroundConfig.apiResourceId);
