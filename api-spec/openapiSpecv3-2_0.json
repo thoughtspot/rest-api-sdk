@@ -110,6 +110,14 @@
       "description": "Roles for version 9.9.0.cl"
     },
     {
+      "name": "26.6.0.cl",
+      "id": "26.6.0.cl",
+      "tags": [
+        "26.6.0.cl"
+      ],
+      "description": "Roles for version 26.6.0.cl"
+    },
+    {
       "name": "9.6.0.cl",
       "id": "9.6.0.cl",
       "tags": [
@@ -3334,6 +3342,92 @@
           },
           "403": {
             "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/connections/{connection_identifier}/status": {
+      "post": {
+        "operationId": "updateConnectionStatus",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\nActivates or deactivates a connection. A deactivated connection cannot be used for queries or operations until it is activated again.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required. Only the connection owner or an administrator can perform this operation.\n\n#### Usage guidelines\n\nTo update the status of a connection, specify the connection GUID or name in the `connection_identifier` path parameter and the desired `status` in the request body.\n\n- **ACTIVATED**: Enables the connection. Queries and operations can resume on an activated connection.\n- **DEACTIVATED**: Disables the connection. It does not remove the connection metadata, but only makes the connection unavailable for queries and operations. You can reactivate a deactivated connection by setting \"status\": \"ACTIVATED\".\n\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Connections",
+          "26.6.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateConnectionStatusRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "connection_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the connection."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Connection status updated successfully."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Object not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -8660,7 +8754,7 @@
     "/api/rest/2.0/security/metadata/share": {
       "post": {
         "operationId": "shareMetadata",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nAllows sharing one or several metadata objects with users and groups in ThoughtSpot.\n\nRequires edit access to the metadata object.\n\n#### Supported metadata objects:\n* Liveboards\n* Visualizations\n* Answers\n* Models\n* Views\n* Connections\n\n#### Object permissions\n\nYou can provide `READ_ONLY` or `MODIFY` access when sharing an object with another user or group. The `READ_ONLY` permission grants view access to the shared object, whereas `MODIFY` provides edit access.\n\nTo prevent a user or group from accessing the shared object, specify the GUID or name of the principal and set `shareMode` to `NO_ACCESS`.\n\n#### Sharing a visualization\n\n* Sharing a visualization implicitly shares the entire Liveboard with the recipient.  \n* Object permissions set for a shared visualization also apply to the Liveboard unless overridden by another API request or via UI.\n* If email notifications for object sharing are enabled, a notification with a link to the shared visualization will be sent to the recipient’s email address. Although this link opens the shared visualization, recipients can also access other visualizations in the Liveboard.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nAllows sharing one or several metadata objects with users and groups in ThoughtSpot.\n\nRequires edit access to the metadata object.\n\n#### Supported metadata objects:\n* Liveboards\n* Visualizations\n* Answers\n* Models\n* Views\n* Connections\n* Collections\n\n#### Object permissions\n\nYou can provide `READ_ONLY` or `MODIFY` access when sharing an object with another user or group. The `READ_ONLY` permission grants view access to the shared object, whereas `MODIFY` provides edit access.\n\nTo prevent a user or group from accessing the shared object, specify the GUID or name of the principal and set `shareMode` to `NO_ACCESS`.\n\n#### Sharing a visualization\n\n* Sharing a visualization implicitly shares the entire Liveboard with the recipient.\n* Object permissions set for a shared visualization also apply to the Liveboard unless overridden by another API request or via UI.\n* If email notifications for object sharing are enabled, a notification with a link to the shared visualization will be sent to the recipient’s email address. Although this link opens the shared visualization, recipients can also access other visualizations in the Liveboard.\n\n#### Sharing a collection\n\nCollections support **dual permissions** that provide fine-grained control:\n\n* **Collection permissions** (`share_mode`) - controls access to the collection itself (view, edit, delete the collection)\n* **Content permissions** (`content_share_mode`) - controls access to objects within the collection (view, edit objects inside)\n\n**Default Behavior:**\n- If only `share_mode` is specified, the content permissions default to `READ_ONLY` (except when `share_mode` is `NO_ACCESS`, then content also gets `NO_ACCESS`)\n- To give users edit access to collection contents, explicitly set `content_share_mode: \"MODIFY\"`\n\n## Examples\n\nThe following JSON examples can be copy-pasted as request bodies for the REST v2 API endpoint:\n\n```bash\nPOST /callosum/v1/v2/security/metadata/share\nContent-Type: application/x-www-form-urlencoded\n```\n\n### Basic collection sharing\nShare a collection with read-only access:\n\n```json\n{\n  \"metadata_type\": \"COLLECTION\",\n  \"metadata_identifiers\": [\"Sales Reports Collection\"],\n  \"permissions\": [{\n    \"principal\": {\n      \"type\": \"USER\",\n      \"identifier\": \"alice@company.com\"\n    },\n    \"share_mode\": \"READ_ONLY\"\n  }],\n  \"notification\": {\n    \"message\": \"I've shared the Sales Reports collection with you\",\n    \"notify_on_share\": true\n  }\n}\n```\n\n### Collection sharing with dual permissions\nShare a collection with different permissions for the collection vs. its contents:\n\n```json\n{\n  \"metadata_type\": \"COLLECTION\",\n  \"metadata_identifiers\": [\"Marketing Analytics\"],\n  \"permissions\": [{\n    \"principal\": {\n      \"type\": \"USER\",\n      \"identifier\": \"bob@company.com\"\n    },\n    \"share_mode\": \"MODIFY\",\n    \"content_share_mode\": \"READ_ONLY\"\n  }, {\n    \"principal\": {\n      \"type\": \"USER_GROUP\",\n      \"identifier\": \"Marketing Team\"\n    },\n    \"share_mode\": \"READ_ONLY\",\n    \"content_share_mode\": \"READ_ONLY\"\n  }],\n  \"notification\": {\n    \"emails\": [\"bob@company.com\"],\n    \"message\": \"You can edit the collection but content is read-only\",\n    \"enable_custom_url\": false,\n    \"notify_on_share\": true\n  },\n  \"has_lenient_discoverability\": false\n}\n```\n\n### Multiple collections sharing\nShare multiple collections with different users:\n\n```json\n{\n  \"metadata\": [\n    {\n      \"type\": \"COLLECTION\",\n      \"identifier\": \"Q4 Reports\"\n    },\n    {\n      \"type\": \"COLLECTION\",\n      \"identifier\": \"Executive Dashboard Collection\"\n    }\n  ],\n  \"permissions\": [{\n    \"principal\": {\n      \"type\": \"USER_GROUP\",\n      \"identifier\": \"Executives\"\n    },\n    \"share_mode\": \"MODIFY\"\n  }, {\n    \"principal\": {\n      \"type\": \"USER\",\n      \"identifier\": \"manager@company.com\"\n    },\n    \"share_mode\": \"READ_ONLY\",\n    \"content_share_mode\": \"MODIFY\"\n  }],\n  \"notification\": {\n    \"message\": \"Sharing quarterly collections with leadership team\",\n    \"notify_on_share\": true\n  }\n}\n```\n\n### Remove collection access\nRemove access to a collection by setting share_mode to NO_ACCESS:\n\n```json\n{\n  \"metadata_type\": \"COLLECTION\",\n  \"metadata_identifiers\": [\"Confidential Reports\"],\n  \"permissions\": [{\n    \"principal\": {\n      \"type\": \"USER\",\n      \"identifier\": \"former-employee@company.com\"\n    },\n    \"share_mode\": \"NO_ACCESS\"\n  }],\n  \"notification\": {\n    \"notify_on_share\": false\n  }\n}\n```\n\n### Collection Permission Scenarios\n\n**Scenario 1: Collection Admin**\n- `share_mode: MODIFY` + `content_share_mode: MODIFY` = Full control over collection and its contents\n\n**Scenario 2: Collection Curator**\n- `share_mode: MODIFY` + `content_share_mode: READ_ONLY` = Can manage collection structure but not edit contents\n\n**Scenario 3: Content Editor**\n- `share_mode: READ_ONLY` + `content_share_mode: MODIFY` = Can edit objects within collection but can't change collection itself\n\n**Scenario 4: Viewer**\n- `share_mode: READ_ONLY` + `content_share_mode: READ_ONLY` = View-only access to collection and contents\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Security",
           "9.0.0.cl"
@@ -14721,7 +14815,8 @@
               "ANSWER",
               "LOGICAL_TABLE",
               "LOGICAL_COLUMN",
-              "CONNECTION"
+              "CONNECTION",
+              "COLLECTION"
             ],
             "description": "  Type of metadata object.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
@@ -18357,7 +18452,8 @@
               "ANSWER",
               "LOGICAL_TABLE",
               "LOGICAL_COLUMN",
-              "CONNECTION"
+              "CONNECTION",
+              "COLLECTION"
             ],
             "description": "  Type of metadata.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.\n  1. LIVEBOARD\n  2. ANSWERS\n  3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n  4. LOGICAL_COLUMN for a column of any data object such as tables, worksheets or views.",
             "nullable": true
@@ -18984,7 +19080,8 @@
               "ANSWER",
               "LOGICAL_TABLE",
               "LOGICAL_COLUMN",
-              "CONNECTION"
+              "CONNECTION",
+              "COLLECTION"
             ],
             "description": "  Type of metadata.\n  \n\nType of metadata. Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
@@ -19014,6 +19111,15 @@
               "NO_ACCESS"
             ],
             "description": "Type of access to the shared object"
+          },
+          "content_share_mode": {
+            "type": "string",
+            "enum": [
+              "READ_ONLY",
+              "MODIFY"
+            ],
+            "description": "Content share mode for collections. Controls access to objects within the collection. Only applicable when sharing COLLECTION metadata type.",
+            "nullable": true
           }
         }
       },
@@ -22494,6 +22600,20 @@
         "required": [
           "connection_identifier"
         ]
+      },
+      "UpdateConnectionStatusRequest": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "description": "Status to set for the connection. Use ACTIVATED to enable the connection or DEACTIVATED to disable it.",
+            "default": "ACTIVATED",
+            "type": "string",
+            "enum": [
+              "ACTIVATED",
+              "DEACTIVATED"
+            ]
+          }
+        }
       },
       "UpdateConnectionV2Request": {
         "type": "object",
@@ -26415,7 +26535,8 @@
               "ANSWER",
               "LOGICAL_TABLE",
               "LOGICAL_COLUMN",
-              "CONNECTION"
+              "CONNECTION",
+              "COLLECTION"
             ]
           }
         },
@@ -26550,14 +26671,15 @@
         "type": "object",
         "properties": {
           "metadata_type": {
-            "description": "Type of metadata. Required if identifier in metadata_identifies is a name.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN\n5. Connection",
+            "description": "Type of metadata. Required if identifier in metadata_identifies is a name.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN\n5. Connection\n6. Collection",
             "type": "string",
             "enum": [
               "LIVEBOARD",
               "ANSWER",
               "LOGICAL_TABLE",
               "LOGICAL_COLUMN",
-              "CONNECTION"
+              "CONNECTION",
+              "COLLECTION"
             ]
           },
           "metadata_identifiers": {
