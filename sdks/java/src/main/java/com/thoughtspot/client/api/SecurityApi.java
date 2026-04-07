@@ -975,18 +975,76 @@ public class SecurityApi {
     /**
      * Version: 9.0.0.cl or later Allows sharing one or several metadata objects with users and
      * groups in ThoughtSpot. Requires edit access to the metadata object. #### Supported metadata
-     * objects: * Liveboards * Visualizations * Answers * Models * Views * Connections #### Object
-     * permissions You can provide &#x60;READ_ONLY&#x60; or &#x60;MODIFY&#x60; access when sharing
-     * an object with another user or group. The &#x60;READ_ONLY&#x60; permission grants view access
-     * to the shared object, whereas &#x60;MODIFY&#x60; provides edit access. To prevent a user or
-     * group from accessing the shared object, specify the GUID or name of the principal and set
-     * &#x60;shareMode&#x60; to &#x60;NO_ACCESS&#x60;. #### Sharing a visualization * Sharing a
-     * visualization implicitly shares the entire Liveboard with the recipient. * Object permissions
-     * set for a shared visualization also apply to the Liveboard unless overridden by another API
-     * request or via UI. * If email notifications for object sharing are enabled, a notification
-     * with a link to the shared visualization will be sent to the recipient’s email address.
-     * Although this link opens the shared visualization, recipients can also access other
-     * visualizations in the Liveboard.
+     * objects: * Liveboards * Visualizations * Answers * Models * Views * Connections * Collections
+     * #### Object permissions You can provide &#x60;READ_ONLY&#x60; or &#x60;MODIFY&#x60; access
+     * when sharing an object with another user or group. The &#x60;READ_ONLY&#x60; permission
+     * grants view access to the shared object, whereas &#x60;MODIFY&#x60; provides edit access. To
+     * prevent a user or group from accessing the shared object, specify the GUID or name of the
+     * principal and set &#x60;shareMode&#x60; to &#x60;NO_ACCESS&#x60;. #### Sharing a
+     * visualization * Sharing a visualization implicitly shares the entire Liveboard with the
+     * recipient. * Object permissions set for a shared visualization also apply to the Liveboard
+     * unless overridden by another API request or via UI. * If email notifications for object
+     * sharing are enabled, a notification with a link to the shared visualization will be sent to
+     * the recipient’s email address. Although this link opens the shared visualization, recipients
+     * can also access other visualizations in the Liveboard. #### Sharing a collection Collections
+     * support **dual permissions** that provide fine-grained control: * **Collection permissions**
+     * (&#x60;share_mode&#x60;) - controls access to the collection itself (view, edit, delete the
+     * collection) * **Content permissions** (&#x60;content_share_mode&#x60;) - controls access to
+     * objects within the collection (view, edit objects inside) **Default Behavior:** - If only
+     * &#x60;share_mode&#x60; is specified, the content permissions default to &#x60;READ_ONLY&#x60;
+     * (except when &#x60;share_mode&#x60; is &#x60;NO_ACCESS&#x60;, then content also gets
+     * &#x60;NO_ACCESS&#x60;) - To give users edit access to collection contents, explicitly set
+     * &#x60;content_share_mode: \&quot;MODIFY\&quot;&#x60; ## Examples The following JSON examples
+     * can be copy-pasted as request bodies for the REST v2 API endpoint: &#x60;&#x60;&#x60;bash
+     * POST /callosum/v1/v2/security/metadata/share Content-Type: application/x-www-form-urlencoded
+     * &#x60;&#x60;&#x60; ### Basic collection sharing Share a collection with read-only access:
+     * &#x60;&#x60;&#x60;json { \&quot;metadata_type\&quot;: \&quot;COLLECTION\&quot;,
+     * \&quot;metadata_identifiers\&quot;: [\&quot;Sales Reports Collection\&quot;],
+     * \&quot;permissions\&quot;: [{ \&quot;principal\&quot;: { \&quot;type\&quot;:
+     * \&quot;USER\&quot;, \&quot;identifier\&quot;: \&quot;alice@company.com\&quot; },
+     * \&quot;share_mode\&quot;: \&quot;READ_ONLY\&quot; }], \&quot;notification\&quot;: {
+     * \&quot;message\&quot;: \&quot;I&#39;ve shared the Sales Reports collection with you\&quot;,
+     * \&quot;notify_on_share\&quot;: true } } &#x60;&#x60;&#x60; ### Collection sharing with dual
+     * permissions Share a collection with different permissions for the collection vs. its
+     * contents: &#x60;&#x60;&#x60;json { \&quot;metadata_type\&quot;: \&quot;COLLECTION\&quot;,
+     * \&quot;metadata_identifiers\&quot;: [\&quot;Marketing Analytics\&quot;],
+     * \&quot;permissions\&quot;: [{ \&quot;principal\&quot;: { \&quot;type\&quot;:
+     * \&quot;USER\&quot;, \&quot;identifier\&quot;: \&quot;bob@company.com\&quot; },
+     * \&quot;share_mode\&quot;: \&quot;MODIFY\&quot;, \&quot;content_share_mode\&quot;:
+     * \&quot;READ_ONLY\&quot; }, { \&quot;principal\&quot;: { \&quot;type\&quot;:
+     * \&quot;USER_GROUP\&quot;, \&quot;identifier\&quot;: \&quot;Marketing Team\&quot; },
+     * \&quot;share_mode\&quot;: \&quot;READ_ONLY\&quot;, \&quot;content_share_mode\&quot;:
+     * \&quot;READ_ONLY\&quot; }], \&quot;notification\&quot;: { \&quot;emails\&quot;:
+     * [\&quot;bob@company.com\&quot;], \&quot;message\&quot;: \&quot;You can edit the collection
+     * but content is read-only\&quot;, \&quot;enable_custom_url\&quot;: false,
+     * \&quot;notify_on_share\&quot;: true }, \&quot;has_lenient_discoverability\&quot;: false }
+     * &#x60;&#x60;&#x60; ### Multiple collections sharing Share multiple collections with different
+     * users: &#x60;&#x60;&#x60;json { \&quot;metadata\&quot;: [ { \&quot;type\&quot;:
+     * \&quot;COLLECTION\&quot;, \&quot;identifier\&quot;: \&quot;Q4 Reports\&quot; }, {
+     * \&quot;type\&quot;: \&quot;COLLECTION\&quot;, \&quot;identifier\&quot;: \&quot;Executive
+     * Dashboard Collection\&quot; } ], \&quot;permissions\&quot;: [{ \&quot;principal\&quot;: {
+     * \&quot;type\&quot;: \&quot;USER_GROUP\&quot;, \&quot;identifier\&quot;:
+     * \&quot;Executives\&quot; }, \&quot;share_mode\&quot;: \&quot;MODIFY\&quot; }, {
+     * \&quot;principal\&quot;: { \&quot;type\&quot;: \&quot;USER\&quot;, \&quot;identifier\&quot;:
+     * \&quot;manager@company.com\&quot; }, \&quot;share_mode\&quot;: \&quot;READ_ONLY\&quot;,
+     * \&quot;content_share_mode\&quot;: \&quot;MODIFY\&quot; }], \&quot;notification\&quot;: {
+     * \&quot;message\&quot;: \&quot;Sharing quarterly collections with leadership team\&quot;,
+     * \&quot;notify_on_share\&quot;: true } } &#x60;&#x60;&#x60; ### Remove collection access
+     * Remove access to a collection by setting share_mode to NO_ACCESS: &#x60;&#x60;&#x60;json {
+     * \&quot;metadata_type\&quot;: \&quot;COLLECTION\&quot;, \&quot;metadata_identifiers\&quot;:
+     * [\&quot;Confidential Reports\&quot;], \&quot;permissions\&quot;: [{ \&quot;principal\&quot;:
+     * { \&quot;type\&quot;: \&quot;USER\&quot;, \&quot;identifier\&quot;:
+     * \&quot;former-employee@company.com\&quot; }, \&quot;share_mode\&quot;:
+     * \&quot;NO_ACCESS\&quot; }], \&quot;notification\&quot;: { \&quot;notify_on_share\&quot;:
+     * false } } &#x60;&#x60;&#x60; ### Collection Permission Scenarios **Scenario 1: Collection
+     * Admin** - &#x60;share_mode: MODIFY&#x60; + &#x60;content_share_mode: MODIFY&#x60; &#x3D; Full
+     * control over collection and its contents **Scenario 2: Collection Curator** -
+     * &#x60;share_mode: MODIFY&#x60; + &#x60;content_share_mode: READ_ONLY&#x60; &#x3D; Can manage
+     * collection structure but not edit contents **Scenario 3: Content Editor** - &#x60;share_mode:
+     * READ_ONLY&#x60; + &#x60;content_share_mode: MODIFY&#x60; &#x3D; Can edit objects within
+     * collection but can&#39;t change collection itself **Scenario 4: Viewer** - &#x60;share_mode:
+     * READ_ONLY&#x60; + &#x60;content_share_mode: READ_ONLY&#x60; &#x3D; View-only access to
+     * collection and contents
      *
      * @param shareMetadataRequest (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -1009,18 +1067,76 @@ public class SecurityApi {
     /**
      * Version: 9.0.0.cl or later Allows sharing one or several metadata objects with users and
      * groups in ThoughtSpot. Requires edit access to the metadata object. #### Supported metadata
-     * objects: * Liveboards * Visualizations * Answers * Models * Views * Connections #### Object
-     * permissions You can provide &#x60;READ_ONLY&#x60; or &#x60;MODIFY&#x60; access when sharing
-     * an object with another user or group. The &#x60;READ_ONLY&#x60; permission grants view access
-     * to the shared object, whereas &#x60;MODIFY&#x60; provides edit access. To prevent a user or
-     * group from accessing the shared object, specify the GUID or name of the principal and set
-     * &#x60;shareMode&#x60; to &#x60;NO_ACCESS&#x60;. #### Sharing a visualization * Sharing a
-     * visualization implicitly shares the entire Liveboard with the recipient. * Object permissions
-     * set for a shared visualization also apply to the Liveboard unless overridden by another API
-     * request or via UI. * If email notifications for object sharing are enabled, a notification
-     * with a link to the shared visualization will be sent to the recipient’s email address.
-     * Although this link opens the shared visualization, recipients can also access other
-     * visualizations in the Liveboard.
+     * objects: * Liveboards * Visualizations * Answers * Models * Views * Connections * Collections
+     * #### Object permissions You can provide &#x60;READ_ONLY&#x60; or &#x60;MODIFY&#x60; access
+     * when sharing an object with another user or group. The &#x60;READ_ONLY&#x60; permission
+     * grants view access to the shared object, whereas &#x60;MODIFY&#x60; provides edit access. To
+     * prevent a user or group from accessing the shared object, specify the GUID or name of the
+     * principal and set &#x60;shareMode&#x60; to &#x60;NO_ACCESS&#x60;. #### Sharing a
+     * visualization * Sharing a visualization implicitly shares the entire Liveboard with the
+     * recipient. * Object permissions set for a shared visualization also apply to the Liveboard
+     * unless overridden by another API request or via UI. * If email notifications for object
+     * sharing are enabled, a notification with a link to the shared visualization will be sent to
+     * the recipient’s email address. Although this link opens the shared visualization, recipients
+     * can also access other visualizations in the Liveboard. #### Sharing a collection Collections
+     * support **dual permissions** that provide fine-grained control: * **Collection permissions**
+     * (&#x60;share_mode&#x60;) - controls access to the collection itself (view, edit, delete the
+     * collection) * **Content permissions** (&#x60;content_share_mode&#x60;) - controls access to
+     * objects within the collection (view, edit objects inside) **Default Behavior:** - If only
+     * &#x60;share_mode&#x60; is specified, the content permissions default to &#x60;READ_ONLY&#x60;
+     * (except when &#x60;share_mode&#x60; is &#x60;NO_ACCESS&#x60;, then content also gets
+     * &#x60;NO_ACCESS&#x60;) - To give users edit access to collection contents, explicitly set
+     * &#x60;content_share_mode: \&quot;MODIFY\&quot;&#x60; ## Examples The following JSON examples
+     * can be copy-pasted as request bodies for the REST v2 API endpoint: &#x60;&#x60;&#x60;bash
+     * POST /callosum/v1/v2/security/metadata/share Content-Type: application/x-www-form-urlencoded
+     * &#x60;&#x60;&#x60; ### Basic collection sharing Share a collection with read-only access:
+     * &#x60;&#x60;&#x60;json { \&quot;metadata_type\&quot;: \&quot;COLLECTION\&quot;,
+     * \&quot;metadata_identifiers\&quot;: [\&quot;Sales Reports Collection\&quot;],
+     * \&quot;permissions\&quot;: [{ \&quot;principal\&quot;: { \&quot;type\&quot;:
+     * \&quot;USER\&quot;, \&quot;identifier\&quot;: \&quot;alice@company.com\&quot; },
+     * \&quot;share_mode\&quot;: \&quot;READ_ONLY\&quot; }], \&quot;notification\&quot;: {
+     * \&quot;message\&quot;: \&quot;I&#39;ve shared the Sales Reports collection with you\&quot;,
+     * \&quot;notify_on_share\&quot;: true } } &#x60;&#x60;&#x60; ### Collection sharing with dual
+     * permissions Share a collection with different permissions for the collection vs. its
+     * contents: &#x60;&#x60;&#x60;json { \&quot;metadata_type\&quot;: \&quot;COLLECTION\&quot;,
+     * \&quot;metadata_identifiers\&quot;: [\&quot;Marketing Analytics\&quot;],
+     * \&quot;permissions\&quot;: [{ \&quot;principal\&quot;: { \&quot;type\&quot;:
+     * \&quot;USER\&quot;, \&quot;identifier\&quot;: \&quot;bob@company.com\&quot; },
+     * \&quot;share_mode\&quot;: \&quot;MODIFY\&quot;, \&quot;content_share_mode\&quot;:
+     * \&quot;READ_ONLY\&quot; }, { \&quot;principal\&quot;: { \&quot;type\&quot;:
+     * \&quot;USER_GROUP\&quot;, \&quot;identifier\&quot;: \&quot;Marketing Team\&quot; },
+     * \&quot;share_mode\&quot;: \&quot;READ_ONLY\&quot;, \&quot;content_share_mode\&quot;:
+     * \&quot;READ_ONLY\&quot; }], \&quot;notification\&quot;: { \&quot;emails\&quot;:
+     * [\&quot;bob@company.com\&quot;], \&quot;message\&quot;: \&quot;You can edit the collection
+     * but content is read-only\&quot;, \&quot;enable_custom_url\&quot;: false,
+     * \&quot;notify_on_share\&quot;: true }, \&quot;has_lenient_discoverability\&quot;: false }
+     * &#x60;&#x60;&#x60; ### Multiple collections sharing Share multiple collections with different
+     * users: &#x60;&#x60;&#x60;json { \&quot;metadata\&quot;: [ { \&quot;type\&quot;:
+     * \&quot;COLLECTION\&quot;, \&quot;identifier\&quot;: \&quot;Q4 Reports\&quot; }, {
+     * \&quot;type\&quot;: \&quot;COLLECTION\&quot;, \&quot;identifier\&quot;: \&quot;Executive
+     * Dashboard Collection\&quot; } ], \&quot;permissions\&quot;: [{ \&quot;principal\&quot;: {
+     * \&quot;type\&quot;: \&quot;USER_GROUP\&quot;, \&quot;identifier\&quot;:
+     * \&quot;Executives\&quot; }, \&quot;share_mode\&quot;: \&quot;MODIFY\&quot; }, {
+     * \&quot;principal\&quot;: { \&quot;type\&quot;: \&quot;USER\&quot;, \&quot;identifier\&quot;:
+     * \&quot;manager@company.com\&quot; }, \&quot;share_mode\&quot;: \&quot;READ_ONLY\&quot;,
+     * \&quot;content_share_mode\&quot;: \&quot;MODIFY\&quot; }], \&quot;notification\&quot;: {
+     * \&quot;message\&quot;: \&quot;Sharing quarterly collections with leadership team\&quot;,
+     * \&quot;notify_on_share\&quot;: true } } &#x60;&#x60;&#x60; ### Remove collection access
+     * Remove access to a collection by setting share_mode to NO_ACCESS: &#x60;&#x60;&#x60;json {
+     * \&quot;metadata_type\&quot;: \&quot;COLLECTION\&quot;, \&quot;metadata_identifiers\&quot;:
+     * [\&quot;Confidential Reports\&quot;], \&quot;permissions\&quot;: [{ \&quot;principal\&quot;:
+     * { \&quot;type\&quot;: \&quot;USER\&quot;, \&quot;identifier\&quot;:
+     * \&quot;former-employee@company.com\&quot; }, \&quot;share_mode\&quot;:
+     * \&quot;NO_ACCESS\&quot; }], \&quot;notification\&quot;: { \&quot;notify_on_share\&quot;:
+     * false } } &#x60;&#x60;&#x60; ### Collection Permission Scenarios **Scenario 1: Collection
+     * Admin** - &#x60;share_mode: MODIFY&#x60; + &#x60;content_share_mode: MODIFY&#x60; &#x3D; Full
+     * control over collection and its contents **Scenario 2: Collection Curator** -
+     * &#x60;share_mode: MODIFY&#x60; + &#x60;content_share_mode: READ_ONLY&#x60; &#x3D; Can manage
+     * collection structure but not edit contents **Scenario 3: Content Editor** - &#x60;share_mode:
+     * READ_ONLY&#x60; + &#x60;content_share_mode: MODIFY&#x60; &#x3D; Can edit objects within
+     * collection but can&#39;t change collection itself **Scenario 4: Viewer** - &#x60;share_mode:
+     * READ_ONLY&#x60; + &#x60;content_share_mode: READ_ONLY&#x60; &#x3D; View-only access to
+     * collection and contents
      *
      * @param shareMetadataRequest (required)
      * @return ApiResponse&lt;Void&gt;
@@ -1047,7 +1163,7 @@ public class SecurityApi {
      * (asynchronously) Version: 9.0.0.cl or later Allows sharing one or several metadata objects
      * with users and groups in ThoughtSpot. Requires edit access to the metadata object. ####
      * Supported metadata objects: * Liveboards * Visualizations * Answers * Models * Views *
-     * Connections #### Object permissions You can provide &#x60;READ_ONLY&#x60; or
+     * Connections * Collections #### Object permissions You can provide &#x60;READ_ONLY&#x60; or
      * &#x60;MODIFY&#x60; access when sharing an object with another user or group. The
      * &#x60;READ_ONLY&#x60; permission grants view access to the shared object, whereas
      * &#x60;MODIFY&#x60; provides edit access. To prevent a user or group from accessing the shared
@@ -1058,6 +1174,65 @@ public class SecurityApi {
      * * If email notifications for object sharing are enabled, a notification with a link to the
      * shared visualization will be sent to the recipient’s email address. Although this link opens
      * the shared visualization, recipients can also access other visualizations in the Liveboard.
+     * #### Sharing a collection Collections support **dual permissions** that provide fine-grained
+     * control: * **Collection permissions** (&#x60;share_mode&#x60;) - controls access to the
+     * collection itself (view, edit, delete the collection) * **Content permissions**
+     * (&#x60;content_share_mode&#x60;) - controls access to objects within the collection (view,
+     * edit objects inside) **Default Behavior:** - If only &#x60;share_mode&#x60; is specified, the
+     * content permissions default to &#x60;READ_ONLY&#x60; (except when &#x60;share_mode&#x60; is
+     * &#x60;NO_ACCESS&#x60;, then content also gets &#x60;NO_ACCESS&#x60;) - To give users edit
+     * access to collection contents, explicitly set &#x60;content_share_mode:
+     * \&quot;MODIFY\&quot;&#x60; ## Examples The following JSON examples can be copy-pasted as
+     * request bodies for the REST v2 API endpoint: &#x60;&#x60;&#x60;bash POST
+     * /callosum/v1/v2/security/metadata/share Content-Type: application/x-www-form-urlencoded
+     * &#x60;&#x60;&#x60; ### Basic collection sharing Share a collection with read-only access:
+     * &#x60;&#x60;&#x60;json { \&quot;metadata_type\&quot;: \&quot;COLLECTION\&quot;,
+     * \&quot;metadata_identifiers\&quot;: [\&quot;Sales Reports Collection\&quot;],
+     * \&quot;permissions\&quot;: [{ \&quot;principal\&quot;: { \&quot;type\&quot;:
+     * \&quot;USER\&quot;, \&quot;identifier\&quot;: \&quot;alice@company.com\&quot; },
+     * \&quot;share_mode\&quot;: \&quot;READ_ONLY\&quot; }], \&quot;notification\&quot;: {
+     * \&quot;message\&quot;: \&quot;I&#39;ve shared the Sales Reports collection with you\&quot;,
+     * \&quot;notify_on_share\&quot;: true } } &#x60;&#x60;&#x60; ### Collection sharing with dual
+     * permissions Share a collection with different permissions for the collection vs. its
+     * contents: &#x60;&#x60;&#x60;json { \&quot;metadata_type\&quot;: \&quot;COLLECTION\&quot;,
+     * \&quot;metadata_identifiers\&quot;: [\&quot;Marketing Analytics\&quot;],
+     * \&quot;permissions\&quot;: [{ \&quot;principal\&quot;: { \&quot;type\&quot;:
+     * \&quot;USER\&quot;, \&quot;identifier\&quot;: \&quot;bob@company.com\&quot; },
+     * \&quot;share_mode\&quot;: \&quot;MODIFY\&quot;, \&quot;content_share_mode\&quot;:
+     * \&quot;READ_ONLY\&quot; }, { \&quot;principal\&quot;: { \&quot;type\&quot;:
+     * \&quot;USER_GROUP\&quot;, \&quot;identifier\&quot;: \&quot;Marketing Team\&quot; },
+     * \&quot;share_mode\&quot;: \&quot;READ_ONLY\&quot;, \&quot;content_share_mode\&quot;:
+     * \&quot;READ_ONLY\&quot; }], \&quot;notification\&quot;: { \&quot;emails\&quot;:
+     * [\&quot;bob@company.com\&quot;], \&quot;message\&quot;: \&quot;You can edit the collection
+     * but content is read-only\&quot;, \&quot;enable_custom_url\&quot;: false,
+     * \&quot;notify_on_share\&quot;: true }, \&quot;has_lenient_discoverability\&quot;: false }
+     * &#x60;&#x60;&#x60; ### Multiple collections sharing Share multiple collections with different
+     * users: &#x60;&#x60;&#x60;json { \&quot;metadata\&quot;: [ { \&quot;type\&quot;:
+     * \&quot;COLLECTION\&quot;, \&quot;identifier\&quot;: \&quot;Q4 Reports\&quot; }, {
+     * \&quot;type\&quot;: \&quot;COLLECTION\&quot;, \&quot;identifier\&quot;: \&quot;Executive
+     * Dashboard Collection\&quot; } ], \&quot;permissions\&quot;: [{ \&quot;principal\&quot;: {
+     * \&quot;type\&quot;: \&quot;USER_GROUP\&quot;, \&quot;identifier\&quot;:
+     * \&quot;Executives\&quot; }, \&quot;share_mode\&quot;: \&quot;MODIFY\&quot; }, {
+     * \&quot;principal\&quot;: { \&quot;type\&quot;: \&quot;USER\&quot;, \&quot;identifier\&quot;:
+     * \&quot;manager@company.com\&quot; }, \&quot;share_mode\&quot;: \&quot;READ_ONLY\&quot;,
+     * \&quot;content_share_mode\&quot;: \&quot;MODIFY\&quot; }], \&quot;notification\&quot;: {
+     * \&quot;message\&quot;: \&quot;Sharing quarterly collections with leadership team\&quot;,
+     * \&quot;notify_on_share\&quot;: true } } &#x60;&#x60;&#x60; ### Remove collection access
+     * Remove access to a collection by setting share_mode to NO_ACCESS: &#x60;&#x60;&#x60;json {
+     * \&quot;metadata_type\&quot;: \&quot;COLLECTION\&quot;, \&quot;metadata_identifiers\&quot;:
+     * [\&quot;Confidential Reports\&quot;], \&quot;permissions\&quot;: [{ \&quot;principal\&quot;:
+     * { \&quot;type\&quot;: \&quot;USER\&quot;, \&quot;identifier\&quot;:
+     * \&quot;former-employee@company.com\&quot; }, \&quot;share_mode\&quot;:
+     * \&quot;NO_ACCESS\&quot; }], \&quot;notification\&quot;: { \&quot;notify_on_share\&quot;:
+     * false } } &#x60;&#x60;&#x60; ### Collection Permission Scenarios **Scenario 1: Collection
+     * Admin** - &#x60;share_mode: MODIFY&#x60; + &#x60;content_share_mode: MODIFY&#x60; &#x3D; Full
+     * control over collection and its contents **Scenario 2: Collection Curator** -
+     * &#x60;share_mode: MODIFY&#x60; + &#x60;content_share_mode: READ_ONLY&#x60; &#x3D; Can manage
+     * collection structure but not edit contents **Scenario 3: Content Editor** - &#x60;share_mode:
+     * READ_ONLY&#x60; + &#x60;content_share_mode: MODIFY&#x60; &#x3D; Can edit objects within
+     * collection but can&#39;t change collection itself **Scenario 4: Viewer** - &#x60;share_mode:
+     * READ_ONLY&#x60; + &#x60;content_share_mode: READ_ONLY&#x60; &#x3D; View-only access to
+     * collection and contents
      *
      * @param shareMetadataRequest (required)
      * @param _callback The callback to be executed when the API call finishes

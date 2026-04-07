@@ -19,6 +19,10 @@ export class SharePermissionsInput {
     * Type of access to the shared object
     */
     'share_mode': SharePermissionsInputShareModeEnum;
+    /**
+    * Content share mode for collections. Controls access to objects within the collection. Only applicable when sharing COLLECTION metadata type.
+    */
+    'content_share_mode'?: SharePermissionsInputContentShareModeEnum | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -34,6 +38,12 @@ export class SharePermissionsInput {
             "baseName": "share_mode",
             "type": "SharePermissionsInputShareModeEnum",
             "format": ""
+        },
+        {
+            "name": "content_share_mode",
+            "baseName": "content_share_mode",
+            "type": "SharePermissionsInputContentShareModeEnum",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -46,4 +56,5 @@ export class SharePermissionsInput {
 
 
 export type SharePermissionsInputShareModeEnum = "READ_ONLY" | "MODIFY" | "NO_ACCESS" ;
+export type SharePermissionsInputContentShareModeEnum = "READ_ONLY" | "MODIFY" ;
 

@@ -387,6 +387,7 @@ export * from '../models/UpdateColumnSecurityRulesRequest';
 export * from '../models/UpdateConfigRequest';
 export * from '../models/UpdateConnectionConfigurationRequest';
 export * from '../models/UpdateConnectionRequest';
+export * from '../models/UpdateConnectionStatusRequest';
 export * from '../models/UpdateConnectionV2Request';
 export * from '../models/UpdateCustomActionRequest';
 export * from '../models/UpdateCustomActionRequestActionDetails';
@@ -800,7 +801,7 @@ import { SendMessageRequest } from '../models/SendMessageRequest';
 import { SetNLInstructionsRequest } from '../models/SetNLInstructionsRequest';
 import { ShareMetadataRequest, ShareMetadataRequestMetadataTypeEnum            } from '../models/ShareMetadataRequest';
 import { ShareMetadataTypeInput, ShareMetadataTypeInputTypeEnum    } from '../models/ShareMetadataTypeInput';
-import { SharePermissionsInput , SharePermissionsInputShareModeEnum   } from '../models/SharePermissionsInput';
+import { SharePermissionsInput , SharePermissionsInputShareModeEnum  , SharePermissionsInputContentShareModeEnum   } from '../models/SharePermissionsInput';
 import { SingleAnswerRequest } from '../models/SingleAnswerRequest';
 import { SortOption, SortOptionFieldNameEnum  , SortOptionOrderEnum   } from '../models/SortOption';
 import { SortOptionInput, SortOptionInputFieldNameEnum  , SortOptionInputOrderEnum   } from '../models/SortOptionInput';
@@ -837,6 +838,7 @@ import { UpdateColumnSecurityRulesRequest } from '../models/UpdateColumnSecurity
 import { UpdateConfigRequest } from '../models/UpdateConfigRequest';
 import { UpdateConnectionConfigurationRequest     , UpdateConnectionConfigurationRequestAuthenticationTypeEnum   , UpdateConnectionConfigurationRequestPolicyTypeEnum   , UpdateConnectionConfigurationRequestPolicyProcessesEnum    } from '../models/UpdateConnectionConfigurationRequest';
 import { UpdateConnectionRequest } from '../models/UpdateConnectionRequest';
+import { UpdateConnectionStatusRequest, UpdateConnectionStatusRequestStatusEnum   } from '../models/UpdateConnectionStatusRequest';
 import { UpdateConnectionV2Request } from '../models/UpdateConnectionV2Request';
 import { UpdateCustomActionRequest     , UpdateCustomActionRequestOperationEnum   } from '../models/UpdateCustomActionRequest';
 import { UpdateCustomActionRequestActionDetails } from '../models/UpdateCustomActionRequestActionDetails';
@@ -1101,6 +1103,7 @@ let enumsMap: Set<string> = new Set<string>([
     "ShareMetadataRequestMetadataTypeEnum",
     "ShareMetadataTypeInputTypeEnum",
     "SharePermissionsInputShareModeEnum",
+    "SharePermissionsInputContentShareModeEnum",
     "SortOptionFieldNameEnum",
     "SortOptionOrderEnum",
     "SortOptionInputFieldNameEnum",
@@ -1124,6 +1127,7 @@ let enumsMap: Set<string> = new Set<string>([
     "UpdateConnectionConfigurationRequestAuthenticationTypeEnum",
     "UpdateConnectionConfigurationRequestPolicyTypeEnum",
     "UpdateConnectionConfigurationRequestPolicyProcessesEnum",
+    "UpdateConnectionStatusRequestStatusEnum",
     "UpdateCustomActionRequestOperationEnum",
     "UpdateObjIdInputTypeEnum",
     "UpdateOrgRequestOperationEnum",
@@ -1559,6 +1563,7 @@ let typeMap: {[index: string]: any} = {
     "UpdateConfigRequest": UpdateConfigRequest,
     "UpdateConnectionConfigurationRequest": UpdateConnectionConfigurationRequest,
     "UpdateConnectionRequest": UpdateConnectionRequest,
+    "UpdateConnectionStatusRequest": UpdateConnectionStatusRequest,
     "UpdateConnectionV2Request": UpdateConnectionV2Request,
     "UpdateCustomActionRequest": UpdateCustomActionRequest,
     "UpdateCustomActionRequestActionDetails": UpdateCustomActionRequestActionDetails,

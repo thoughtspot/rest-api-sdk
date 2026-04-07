@@ -17,39 +17,32 @@ import com.google.gson.stream.JsonWriter;
 import com.thoughtspot.client.JSON;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import org.openapitools.jackson.nullable.JsonNullable;
 
-/** SharePermissionsInput */
+/** UpdateConnectionStatusRequest */
 @javax.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         comments = "Generator version: 7.12.0")
-public class SharePermissionsInput implements Serializable {
+public class UpdateConnectionStatusRequest implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public static final String SERIALIZED_NAME_PRINCIPAL = "principal";
+    /**
+     * Status to set for the connection. Use ACTIVATED to enable the connection or DEACTIVATED to
+     * disable it.
+     */
+    @JsonAdapter(StatusEnum.Adapter.class)
+    public enum StatusEnum {
+        ACTIVATED("ACTIVATED"),
 
-    @SerializedName(SERIALIZED_NAME_PRINCIPAL)
-    @javax.annotation.Nonnull
-    private PrincipalsInput principal;
-
-    /** Type of access to the shared object */
-    @JsonAdapter(ShareModeEnum.Adapter.class)
-    public enum ShareModeEnum {
-        READ_ONLY("READ_ONLY"),
-
-        MODIFY("MODIFY"),
-
-        NO_ACCESS("NO_ACCESS");
+        DEACTIVATED("DEACTIVATED");
 
         private String value;
 
-        ShareModeEnum(String value) {
+        StatusEnum(String value) {
             this.value = value;
         }
 
@@ -62,8 +55,8 @@ public class SharePermissionsInput implements Serializable {
             return String.valueOf(value);
         }
 
-        public static ShareModeEnum fromValue(String value) {
-            for (ShareModeEnum b : ShareModeEnum.values()) {
+        public static StatusEnum fromValue(String value) {
+            for (StatusEnum b : StatusEnum.values()) {
                 if (b.value.equals(value)) {
                     return b;
                 }
@@ -71,152 +64,52 @@ public class SharePermissionsInput implements Serializable {
             throw new IllegalArgumentException("Unexpected value '" + value + "'");
         }
 
-        public static class Adapter extends TypeAdapter<ShareModeEnum> {
+        public static class Adapter extends TypeAdapter<StatusEnum> {
             @Override
-            public void write(final JsonWriter jsonWriter, final ShareModeEnum enumeration)
+            public void write(final JsonWriter jsonWriter, final StatusEnum enumeration)
                     throws IOException {
                 jsonWriter.value(enumeration.getValue());
             }
 
             @Override
-            public ShareModeEnum read(final JsonReader jsonReader) throws IOException {
+            public StatusEnum read(final JsonReader jsonReader) throws IOException {
                 String value = jsonReader.nextString();
-                return ShareModeEnum.fromValue(value);
+                return StatusEnum.fromValue(value);
             }
         }
 
         public static void validateJsonElement(JsonElement jsonElement) throws IOException {
             String value = jsonElement.getAsString();
-            ShareModeEnum.fromValue(value);
+            StatusEnum.fromValue(value);
         }
     }
 
-    public static final String SERIALIZED_NAME_SHARE_MODE = "share_mode";
+    public static final String SERIALIZED_NAME_STATUS = "status";
 
-    @SerializedName(SERIALIZED_NAME_SHARE_MODE)
-    @javax.annotation.Nonnull
-    private ShareModeEnum shareMode;
-
-    /**
-     * Content share mode for collections. Controls access to objects within the collection. Only
-     * applicable when sharing COLLECTION metadata type.
-     */
-    @JsonAdapter(ContentShareModeEnum.Adapter.class)
-    public enum ContentShareModeEnum {
-        READ_ONLY("READ_ONLY"),
-
-        MODIFY("MODIFY");
-
-        private String value;
-
-        ContentShareModeEnum(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        public static ContentShareModeEnum fromValue(String value) {
-            for (ContentShareModeEnum b : ContentShareModeEnum.values()) {
-                if (b.value.equals(value)) {
-                    return b;
-                }
-            }
-            return null;
-        }
-
-        public static class Adapter extends TypeAdapter<ContentShareModeEnum> {
-            @Override
-            public void write(final JsonWriter jsonWriter, final ContentShareModeEnum enumeration)
-                    throws IOException {
-                jsonWriter.value(enumeration.getValue());
-            }
-
-            @Override
-            public ContentShareModeEnum read(final JsonReader jsonReader) throws IOException {
-                String value = jsonReader.nextString();
-                return ContentShareModeEnum.fromValue(value);
-            }
-        }
-
-        public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-            String value = jsonElement.getAsString();
-            ContentShareModeEnum.fromValue(value);
-        }
-    }
-
-    public static final String SERIALIZED_NAME_CONTENT_SHARE_MODE = "content_share_mode";
-
-    @SerializedName(SERIALIZED_NAME_CONTENT_SHARE_MODE)
+    @SerializedName(SERIALIZED_NAME_STATUS)
     @javax.annotation.Nullable
-    private ContentShareModeEnum contentShareMode;
+    private StatusEnum status = StatusEnum.ACTIVATED;
 
-    public SharePermissionsInput() {}
+    public UpdateConnectionStatusRequest() {}
 
-    public SharePermissionsInput principal(@javax.annotation.Nonnull PrincipalsInput principal) {
-        this.principal = principal;
+    public UpdateConnectionStatusRequest status(@javax.annotation.Nullable StatusEnum status) {
+        this.status = status;
         return this;
     }
 
     /**
-     * Get principal
+     * Status to set for the connection. Use ACTIVATED to enable the connection or DEACTIVATED to
+     * disable it.
      *
-     * @return principal
-     */
-    @javax.annotation.Nonnull
-    public PrincipalsInput getPrincipal() {
-        return principal;
-    }
-
-    public void setPrincipal(@javax.annotation.Nonnull PrincipalsInput principal) {
-        this.principal = principal;
-    }
-
-    public SharePermissionsInput shareMode(@javax.annotation.Nonnull ShareModeEnum shareMode) {
-        this.shareMode = shareMode;
-        return this;
-    }
-
-    /**
-     * Type of access to the shared object
-     *
-     * @return shareMode
-     */
-    @javax.annotation.Nonnull
-    public ShareModeEnum getShareMode() {
-        return shareMode;
-    }
-
-    public void setShareMode(@javax.annotation.Nonnull ShareModeEnum shareMode) {
-        this.shareMode = shareMode;
-    }
-
-    public SharePermissionsInput contentShareMode(
-            @javax.annotation.Nullable ContentShareModeEnum contentShareMode) {
-        this.contentShareMode = contentShareMode;
-        return this;
-    }
-
-    /**
-     * Content share mode for collections. Controls access to objects within the collection. Only
-     * applicable when sharing COLLECTION metadata type.
-     *
-     * @return contentShareMode
+     * @return status
      */
     @javax.annotation.Nullable
-    public ContentShareModeEnum getContentShareMode() {
-        return contentShareMode;
+    public StatusEnum getStatus() {
+        return status;
     }
 
-    public void setContentShareMode(
-            @javax.annotation.Nullable ContentShareModeEnum contentShareMode) {
-        this.contentShareMode = contentShareMode;
+    public void setStatus(@javax.annotation.Nullable StatusEnum status) {
+        this.status = status;
     }
 
     /**
@@ -231,9 +124,9 @@ public class SharePermissionsInput implements Serializable {
      *
      * @param key name of the property
      * @param value value of the property
-     * @return the SharePermissionsInput instance itself
+     * @return the UpdateConnectionStatusRequest instance itself
      */
-    public SharePermissionsInput putAdditionalProperty(String key, Object value) {
+    public UpdateConnectionStatusRequest putAdditionalProperty(String key, Object value) {
         if (this.additionalProperties == null) {
             this.additionalProperties = new HashMap<String, Object>();
         }
@@ -271,42 +164,24 @@ public class SharePermissionsInput implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        SharePermissionsInput sharePermissionsInput = (SharePermissionsInput) o;
-        return Objects.equals(this.principal, sharePermissionsInput.principal)
-                && Objects.equals(this.shareMode, sharePermissionsInput.shareMode)
-                && Objects.equals(this.contentShareMode, sharePermissionsInput.contentShareMode)
+        UpdateConnectionStatusRequest updateConnectionStatusRequest =
+                (UpdateConnectionStatusRequest) o;
+        return Objects.equals(this.status, updateConnectionStatusRequest.status)
                 && Objects.equals(
-                        this.additionalProperties, sharePermissionsInput.additionalProperties);
-    }
-
-    private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-        return a == b
-                || (a != null
-                        && b != null
-                        && a.isPresent()
-                        && b.isPresent()
-                        && Objects.deepEquals(a.get(), b.get()));
+                        this.additionalProperties,
+                        updateConnectionStatusRequest.additionalProperties);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(principal, shareMode, contentShareMode, additionalProperties);
-    }
-
-    private static <T> int hashCodeNullable(JsonNullable<T> a) {
-        if (a == null) {
-            return 1;
-        }
-        return a.isPresent() ? Arrays.deepHashCode(new Object[] {a.get()}) : 31;
+        return Objects.hash(status, additionalProperties);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class SharePermissionsInput {\n");
-        sb.append("    principal: ").append(toIndentedString(principal)).append("\n");
-        sb.append("    shareMode: ").append(toIndentedString(shareMode)).append("\n");
-        sb.append("    contentShareMode: ").append(toIndentedString(contentShareMode)).append("\n");
+        sb.append("class UpdateConnectionStatusRequest {\n");
+        sb.append("    status: ").append(toIndentedString(status)).append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
                 .append("\n");
@@ -331,68 +206,42 @@ public class SharePermissionsInput implements Serializable {
     static {
         // a set of all properties/fields (JSON key names)
         openapiFields = new HashSet<String>();
-        openapiFields.add("principal");
-        openapiFields.add("share_mode");
-        openapiFields.add("content_share_mode");
+        openapiFields.add("status");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
-        openapiRequiredFields.add("principal");
-        openapiRequiredFields.add("share_mode");
     }
 
     /**
      * Validates the JSON Element and throws an exception if issues found
      *
      * @param jsonElement JSON Element
-     * @throws IOException if the JSON Element is invalid with respect to SharePermissionsInput
+     * @throws IOException if the JSON Element is invalid with respect to
+     *     UpdateConnectionStatusRequest
      */
     public static void validateJsonElement(JsonElement jsonElement) throws IOException {
         if (jsonElement == null) {
-            if (!SharePermissionsInput.openapiRequiredFields
+            if (!UpdateConnectionStatusRequest.openapiRequiredFields
                     .isEmpty()) { // has required fields but JSON element is null
                 throw new IllegalArgumentException(
                         String.format(
-                                "The required field(s) %s in SharePermissionsInput is not found in"
-                                        + " the empty JSON string",
-                                SharePermissionsInput.openapiRequiredFields.toString()));
-            }
-        }
-
-        // check to make sure all required properties/fields are present in the JSON string
-        for (String requiredField : SharePermissionsInput.openapiRequiredFields) {
-            if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-                throw new IllegalArgumentException(
-                        String.format(
-                                "The required field `%s` is not found in the JSON string: %s",
-                                requiredField, jsonElement.toString()));
+                                "The required field(s) %s in UpdateConnectionStatusRequest is not"
+                                        + " found in the empty JSON string",
+                                UpdateConnectionStatusRequest.openapiRequiredFields.toString()));
             }
         }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-        // validate the required field `principal`
-        PrincipalsInput.validateJsonElement(jsonObj.get("principal"));
-        if (!jsonObj.get("share_mode").isJsonPrimitive()) {
+        if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull())
+                && !jsonObj.get("status").isJsonPrimitive()) {
             throw new IllegalArgumentException(
                     String.format(
-                            "Expected the field `share_mode` to be a primitive type in the JSON"
-                                    + " string but got `%s`",
-                            jsonObj.get("share_mode").toString()));
+                            "Expected the field `status` to be a primitive type in the JSON string"
+                                    + " but got `%s`",
+                            jsonObj.get("status").toString()));
         }
-        // validate the required field `share_mode`
-        ShareModeEnum.validateJsonElement(jsonObj.get("share_mode"));
-        if ((jsonObj.get("content_share_mode") != null
-                        && !jsonObj.get("content_share_mode").isJsonNull())
-                && !jsonObj.get("content_share_mode").isJsonPrimitive()) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            "Expected the field `content_share_mode` to be a primitive type in the"
-                                    + " JSON string but got `%s`",
-                            jsonObj.get("content_share_mode").toString()));
-        }
-        // validate the optional field `content_share_mode`
-        if (jsonObj.get("content_share_mode") != null
-                && !jsonObj.get("content_share_mode").isJsonNull()) {
-            ContentShareModeEnum.validateJsonElement(jsonObj.get("content_share_mode"));
+        // validate the optional field `status`
+        if (jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) {
+            StatusEnum.validateJsonElement(jsonObj.get("status"));
         }
     }
 
@@ -400,17 +249,19 @@ public class SharePermissionsInput implements Serializable {
         @SuppressWarnings("unchecked")
         @Override
         public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-            if (!SharePermissionsInput.class.isAssignableFrom(type.getRawType())) {
-                return null; // this class only serializes 'SharePermissionsInput' and its subtypes
+            if (!UpdateConnectionStatusRequest.class.isAssignableFrom(type.getRawType())) {
+                return null; // this class only serializes 'UpdateConnectionStatusRequest' and its
+                // subtypes
             }
             final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-            final TypeAdapter<SharePermissionsInput> thisAdapter =
-                    gson.getDelegateAdapter(this, TypeToken.get(SharePermissionsInput.class));
+            final TypeAdapter<UpdateConnectionStatusRequest> thisAdapter =
+                    gson.getDelegateAdapter(
+                            this, TypeToken.get(UpdateConnectionStatusRequest.class));
 
             return (TypeAdapter<T>)
-                    new TypeAdapter<SharePermissionsInput>() {
+                    new TypeAdapter<UpdateConnectionStatusRequest>() {
                         @Override
-                        public void write(JsonWriter out, SharePermissionsInput value)
+                        public void write(JsonWriter out, UpdateConnectionStatusRequest value)
                                 throws IOException {
                             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
                             obj.remove("additionalProperties");
@@ -441,12 +292,14 @@ public class SharePermissionsInput implements Serializable {
                         }
 
                         @Override
-                        public SharePermissionsInput read(JsonReader in) throws IOException {
+                        public UpdateConnectionStatusRequest read(JsonReader in)
+                                throws IOException {
                             JsonElement jsonElement = elementAdapter.read(in);
                             validateJsonElement(jsonElement);
                             JsonObject jsonObj = jsonElement.getAsJsonObject();
                             // store additional fields in the deserialized instance
-                            SharePermissionsInput instance = thisAdapter.fromJsonTree(jsonObj);
+                            UpdateConnectionStatusRequest instance =
+                                    thisAdapter.fromJsonTree(jsonObj);
                             for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
                                 if (!openapiFields.contains(entry.getKey())) {
                                     if (entry.getValue().isJsonPrimitive()) { // primitive type
@@ -485,18 +338,19 @@ public class SharePermissionsInput implements Serializable {
     }
 
     /**
-     * Create an instance of SharePermissionsInput given an JSON string
+     * Create an instance of UpdateConnectionStatusRequest given an JSON string
      *
      * @param jsonString JSON string
-     * @return An instance of SharePermissionsInput
-     * @throws IOException if the JSON string is invalid with respect to SharePermissionsInput
+     * @return An instance of UpdateConnectionStatusRequest
+     * @throws IOException if the JSON string is invalid with respect to
+     *     UpdateConnectionStatusRequest
      */
-    public static SharePermissionsInput fromJson(String jsonString) throws IOException {
-        return JSON.getGson().fromJson(jsonString, SharePermissionsInput.class);
+    public static UpdateConnectionStatusRequest fromJson(String jsonString) throws IOException {
+        return JSON.getGson().fromJson(jsonString, UpdateConnectionStatusRequest.class);
     }
 
     /**
-     * Convert an instance of SharePermissionsInput to an JSON string
+     * Convert an instance of UpdateConnectionStatusRequest to an JSON string
      *
      * @return JSON string
      */

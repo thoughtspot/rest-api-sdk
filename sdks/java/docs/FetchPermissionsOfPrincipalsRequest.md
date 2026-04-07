@@ -25,6 +25,7 @@
 | LOGICAL_TABLE | &quot;LOGICAL_TABLE&quot; |
 | LOGICAL_COLUMN | &quot;LOGICAL_COLUMN&quot; |
 | CONNECTION | &quot;CONNECTION&quot; |
+| COLLECTION | &quot;COLLECTION&quot; |
 
 
 ## Implemented Interfaces

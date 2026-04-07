@@ -27,4 +27,10 @@ public class SharePermissionsInputTest {
     public void shareModeTest() {
         // TODO: test shareMode
     }
+
+    /** Test the property 'contentShareMode' */
+    @Test
+    public void contentShareModeTest() {
+        // TODO: test contentShareMode
+    }
 }

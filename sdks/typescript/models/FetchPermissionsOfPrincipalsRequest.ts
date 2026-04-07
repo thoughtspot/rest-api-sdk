@@ -79,5 +79,5 @@ export class FetchPermissionsOfPrincipalsRequest {
 }
 
 
-export type FetchPermissionsOfPrincipalsRequestDefaultMetadataTypeEnum = "ALL" | "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "CONNECTION" ;
+export type FetchPermissionsOfPrincipalsRequestDefaultMetadataTypeEnum = "ALL" | "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "CONNECTION" | "COLLECTION" ;
 

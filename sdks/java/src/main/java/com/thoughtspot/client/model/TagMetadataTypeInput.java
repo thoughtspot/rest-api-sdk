@@ -48,7 +48,9 @@ public class TagMetadataTypeInput implements Serializable {
 
         LOGICAL_COLUMN("LOGICAL_COLUMN"),
 
-        CONNECTION("CONNECTION");
+        CONNECTION("CONNECTION"),
+
+        COLLECTION("COLLECTION");
 
         private String value;
 

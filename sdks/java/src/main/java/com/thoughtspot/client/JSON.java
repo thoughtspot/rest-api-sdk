@@ -947,6 +947,9 @@ public class JSON {
                 new com.thoughtspot.client.model.UpdateConnectionRequest
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.UpdateConnectionStatusRequest
+                        .CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.UpdateConnectionV2Request
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(

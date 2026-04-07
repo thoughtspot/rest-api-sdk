@@ -46,7 +46,9 @@ public class PermissionsMetadataTypeInput implements Serializable {
 
         LOGICAL_COLUMN("LOGICAL_COLUMN"),
 
-        CONNECTION("CONNECTION");
+        CONNECTION("CONNECTION"),
+
+        COLLECTION("COLLECTION");
 
         private String value;
 

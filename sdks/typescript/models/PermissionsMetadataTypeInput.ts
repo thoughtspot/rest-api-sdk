@@ -50,5 +50,5 @@ export class PermissionsMetadataTypeInput {
 }
 
 
-export type PermissionsMetadataTypeInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "CONNECTION" ;
+export type PermissionsMetadataTypeInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "CONNECTION" | "COLLECTION" ;
 
