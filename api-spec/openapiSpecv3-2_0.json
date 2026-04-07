@@ -22,6 +22,14 @@
       "description": "Roles for version 10.4.0.cl"
     },
     {
+      "name": "26.6.0.cl",
+      "id": "26.6.0.cl",
+      "tags": [
+        "26.6.0.cl"
+      ],
+      "description": "Roles for version 26.6.0.cl"
+    },
+    {
       "name": "10.15.0.cl",
       "id": "10.15.0.cl",
       "tags": [
@@ -108,14 +116,6 @@
         "9.9.0.cl"
       ],
       "description": "Roles for version 9.9.0.cl"
-    },
-    {
-      "name": "26.6.0.cl",
-      "id": "26.6.0.cl",
-      "tags": [
-        "26.6.0.cl"
-      ],
-      "description": "Roles for version 26.6.0.cl"
     },
     {
       "name": "9.6.0.cl",
@@ -343,6 +343,110 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Conversation"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/agent/conversations": {
+      "get": {
+        "operationId": "getConversationList",
+        "description": "\nRetrieves the list of saved agent conversations for the currently authenticated user.\nOnly conversations created with `enable_save_chat: true` are returned. <br/>  <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.6.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "Maximum number of conversations to return. Used for pagination."
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "Number of conversations to skip before returning results. Used for pagination."
+          },
+          {
+            "in": "query",
+            "name": "skip_empty",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "When true, excludes conversations with no messages. Defaults to true.",
+            "default": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentConversationHistoryResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentConversationHistoryResponse"
                 }
               }
             }
@@ -16219,6 +16323,58 @@
             "description": "Scope of the instruction."
           }
         }
+      },
+      "AgentConversationHistoryResponse": {
+        "type": "object",
+        "properties": {
+          "conversations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentConversationList"
+            },
+            "description": "List of saved agent conversations for the current user.",
+            "nullable": true
+          }
+        },
+        "description": "Response returned by getConversationList."
+      },
+      "AgentConversationList": {
+        "type": "object",
+        "required": [
+          "conversation_identifier"
+        ],
+        "properties": {
+          "conversation_identifier": {
+            "type": "string",
+            "description": "Unique identifier of the conversation."
+          },
+          "conversation_title": {
+            "type": "string",
+            "description": "Display title of the conversation.",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string",
+            "description": "ISO 8601 timestamp when the conversation was created.",
+            "nullable": true
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "ISO 8601 timestamp when the conversation was last updated.",
+            "nullable": true
+          },
+          "data_source_identifier": {
+            "type": "string",
+            "description": "Unique identifier of the data source associated with the conversation.",
+            "nullable": true
+          },
+          "data_source_name": {
+            "type": "string",
+            "description": "Display name of the data source associated with the conversation.",
+            "nullable": true
+          }
+        },
+        "description": "A saved agent conversation item returned in list responses."
       },
       "RiseGQLArgWrapper": {
         "type": "object",
