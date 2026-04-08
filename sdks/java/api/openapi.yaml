@@ -10386,6 +10386,27 @@ components:
           nullable: true
           type: string
       type: object
+    AnswerPngOptionsInput:
+      properties:
+        x_resolution:
+          description: "Desired width of the answer image in pixels. Ex. 1920 for\
+            \ Full HD image \n Version: 26.6.0.cl or later\n"
+          format: int32
+          nullable: true
+          type: integer
+        y_resolution:
+          description: "Desired height of the answer image in pixels. Ex. 1080 for\
+            \ Full HD image \n Version: 26.6.0.cl or later\n"
+          format: int32
+          nullable: true
+          type: integer
+        scaling:
+          description: "The scale of the image in percentage. Ex. 100 for 100% scale.\
+            \ \n Version: 26.6.0.cl or later\n"
+          format: int32
+          nullable: true
+          type: integer
+      type: object
     PermissionOfPrincipalsResponse:
       example:
         principal_permission_details: "{}"
@@ -20353,7 +20374,9 @@ components:
       example:
         runtime_filter: "{}"
         regional_settings: ""
+        png_options: ""
         metadata_identifier: metadata_identifier
+        personalised_view_identifier: personalised_view_identifier
         session_identifier: session_identifier
         runtime_sort: "{}"
         generation_number: 0
@@ -20397,6 +20420,14 @@ components:
           - $ref: '#/components/schemas/RegionalSettingsInput'
           description: Options for specific region specific overrides to support date/number/string/currency
             formatting.
+        png_options:
+          allOf:
+          - $ref: '#/components/schemas/AnswerPngOptionsInput'
+          description: "Options for PNG export. \n Version: 26.6.0.cl or later\n"
+        personalised_view_identifier:
+          description: "GUID or name of the personalised view of the Answer object.\
+            \ \n Version: 26.6.0.cl or later\n"
+          type: string
       type: object
     ExportLiveboardReportRequest:
       example:

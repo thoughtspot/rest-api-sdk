@@ -12,6 +12,7 @@ export * from '../models/ActivateUserRequest';
 export * from '../models/AgentConversation';
 export * from '../models/AnswerContent';
 export * from '../models/AnswerDataResponse';
+export * from '../models/AnswerPngOptionsInput';
 export * from '../models/AssignChangeAuthorRequest';
 export * from '../models/AssignTagRequest';
 export * from '../models/AssociateMetadataInput';
@@ -145,6 +146,7 @@ export * from '../models/EventChannelConfig';
 export * from '../models/EventChannelConfigInput';
 export * from '../models/ExcludeMetadataListItemInput';
 export * from '../models/ExportAnswerReportRequest';
+export * from '../models/ExportAnswerReportRequestPngOptions';
 export * from '../models/ExportAnswerReportRequestRegionalSettings';
 export * from '../models/ExportLiveboardReportRequest';
 export * from '../models/ExportLiveboardReportRequestPdfOptions';
@@ -463,6 +465,7 @@ import { ActivateUserRequest } from '../models/ActivateUserRequest';
 import { AgentConversation } from '../models/AgentConversation';
 import { AnswerContent } from '../models/AnswerContent';
 import { AnswerDataResponse } from '../models/AnswerDataResponse';
+import { AnswerPngOptionsInput } from '../models/AnswerPngOptionsInput';
 import { AssignChangeAuthorRequest } from '../models/AssignChangeAuthorRequest';
 import { AssignTagRequest } from '../models/AssignTagRequest';
 import { AssociateMetadataInput  , AssociateMetadataInputTypeEnum   } from '../models/AssociateMetadataInput';
@@ -595,7 +598,8 @@ import { EurekaSetNLInstructionsResponse } from '../models/EurekaSetNLInstructio
 import { EventChannelConfig, EventChannelConfigEventTypeEnum  , EventChannelConfigChannelsEnum   } from '../models/EventChannelConfig';
 import { EventChannelConfigInput, EventChannelConfigInputEventTypeEnum  , EventChannelConfigInputChannelsEnum   } from '../models/EventChannelConfigInput';
 import { ExcludeMetadataListItemInput , ExcludeMetadataListItemInputTypeEnum   } from '../models/ExcludeMetadataListItemInput';
-import { ExportAnswerReportRequest   , ExportAnswerReportRequestFileFormatEnum       } from '../models/ExportAnswerReportRequest';
+import { ExportAnswerReportRequest   , ExportAnswerReportRequestFileFormatEnum         } from '../models/ExportAnswerReportRequest';
+import { ExportAnswerReportRequestPngOptions } from '../models/ExportAnswerReportRequestPngOptions';
 import { ExportAnswerReportRequestRegionalSettings, ExportAnswerReportRequestRegionalSettingsCurrencyFormatEnum  , ExportAnswerReportRequestRegionalSettingsUserLocaleEnum  , ExportAnswerReportRequestRegionalSettingsNumberFormatLocaleEnum  , ExportAnswerReportRequestRegionalSettingsDateFormatLocaleEnum   } from '../models/ExportAnswerReportRequestRegionalSettings';
 import { ExportLiveboardReportRequest     , ExportLiveboardReportRequestFileFormatEnum          } from '../models/ExportLiveboardReportRequest';
 import { ExportLiveboardReportRequestPdfOptions, ExportLiveboardReportRequestPdfOptionsPageSizeEnum       , ExportLiveboardReportRequestPdfOptionsPageOrientationEnum     } from '../models/ExportLiveboardReportRequestPdfOptions';
@@ -1188,6 +1192,7 @@ let typeMap: {[index: string]: any} = {
     "AgentConversation": AgentConversation,
     "AnswerContent": AnswerContent,
     "AnswerDataResponse": AnswerDataResponse,
+    "AnswerPngOptionsInput": AnswerPngOptionsInput,
     "AssignChangeAuthorRequest": AssignChangeAuthorRequest,
     "AssignTagRequest": AssignTagRequest,
     "AssociateMetadataInput": AssociateMetadataInput,
@@ -1321,6 +1326,7 @@ let typeMap: {[index: string]: any} = {
     "EventChannelConfigInput": EventChannelConfigInput,
     "ExcludeMetadataListItemInput": ExcludeMetadataListItemInput,
     "ExportAnswerReportRequest": ExportAnswerReportRequest,
+    "ExportAnswerReportRequestPngOptions": ExportAnswerReportRequestPngOptions,
     "ExportAnswerReportRequestRegionalSettings": ExportAnswerReportRequestRegionalSettings,
     "ExportLiveboardReportRequest": ExportLiveboardReportRequest,
     "ExportLiveboardReportRequestPdfOptions": ExportLiveboardReportRequestPdfOptions,

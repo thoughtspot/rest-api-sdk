@@ -3053,6 +3053,8 @@ apiInstance.exportAnswerReport(
     runtime_sort: {},
     runtime_param_override: {},
     regional_settings: null,
+    png_options: null,
+    personalised_view_identifier: "personalised_view_identifier_example",
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);

@@ -14734,6 +14734,29 @@
           }
         }
       },
+      "AnswerPngOptionsInput": {
+        "type": "object",
+        "properties": {
+          "x_resolution": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Desired width of the answer image in pixels. Ex. 1920 for Full HD image <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
+            "nullable": true
+          },
+          "y_resolution": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Desired height of the answer image in pixels. Ex. 1080 for Full HD image <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
+            "nullable": true
+          },
+          "scaling": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The scale of the image in percentage. Ex. 100 for 100% scale. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
+            "nullable": true
+          }
+        }
+      },
       "PermissionOfPrincipalsResponse": {
         "type": "object",
         "properties": {
@@ -24611,6 +24634,18 @@
                 "$ref": "#/components/schemas/RegionalSettingsInput"
               }
             ]
+          },
+          "png_options": {
+            "description": "Options for PNG export. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AnswerPngOptionsInput"
+              }
+            ]
+          },
+          "personalised_view_identifier": {
+            "description": "GUID or name of the personalised view of the Answer object. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
+            "type": "string"
           }
         }
       },

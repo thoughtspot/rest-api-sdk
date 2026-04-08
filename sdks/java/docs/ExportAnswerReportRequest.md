@@ -15,6 +15,8 @@
 |**runtimeSort** | **Object** | JSON string representing runtime sort. { sortCol1: region, asc1 :true, sortCol2 : date } |  [optional] |
 |**runtimeParamOverride** | **Object** | JSON object for setting values of parameters in runtime. |  [optional] |
 |**regionalSettings** | [**RegionalSettingsInput**](RegionalSettingsInput.md) | Options for specific region specific overrides to support date/number/string/currency formatting. |  [optional] |
+|**pngOptions** | [**AnswerPngOptionsInput**](AnswerPngOptionsInput.md) | Options for PNG export.   Version: 26.6.0.cl or later  |  [optional] |
+|**personalisedViewIdentifier** | **String** | GUID or name of the personalised view of the Answer object.   Version: 26.6.0.cl or later  |  [optional] |
 
 
 

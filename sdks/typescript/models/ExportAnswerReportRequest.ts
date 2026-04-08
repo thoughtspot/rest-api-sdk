@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+import { ExportAnswerReportRequestPngOptions } from '../models/ExportAnswerReportRequestPngOptions';
 import { ExportAnswerReportRequestRegionalSettings } from '../models/ExportAnswerReportRequestRegionalSettings';
 import { HttpFile } from '../http/http';
 
@@ -43,6 +44,11 @@ export class ExportAnswerReportRequest {
     */
     'runtime_param_override'?: any;
     'regional_settings'?: ExportAnswerReportRequestRegionalSettings;
+    'png_options'?: ExportAnswerReportRequestPngOptions;
+    /**
+    * GUID or name of the personalised view of the Answer object.   Version: 26.6.0.cl or later 
+    */
+    'personalised_view_identifier'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -93,6 +99,18 @@ export class ExportAnswerReportRequest {
             "name": "regional_settings",
             "baseName": "regional_settings",
             "type": "ExportAnswerReportRequestRegionalSettings",
+            "format": ""
+        },
+        {
+            "name": "png_options",
+            "baseName": "png_options",
+            "type": "ExportAnswerReportRequestPngOptions",
+            "format": ""
+        },
+        {
+            "name": "personalised_view_identifier",
+            "baseName": "personalised_view_identifier",
+            "type": "string",
             "format": ""
         }    ];
 

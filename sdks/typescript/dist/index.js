@@ -703,6 +703,37 @@ _AnswerDataResponse.attributeTypeMap = [
 ];
 var AnswerDataResponse = _AnswerDataResponse;
 
+// models/AnswerPngOptionsInput.ts
+var _AnswerPngOptionsInput = class _AnswerPngOptionsInput {
+  static getAttributeTypeMap() {
+    return _AnswerPngOptionsInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AnswerPngOptionsInput.discriminator = void 0;
+_AnswerPngOptionsInput.attributeTypeMap = [
+  {
+    "name": "x_resolution",
+    "baseName": "x_resolution",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "y_resolution",
+    "baseName": "y_resolution",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "scaling",
+    "baseName": "scaling",
+    "type": "number",
+    "format": "int32"
+  }
+];
+var AnswerPngOptionsInput = _AnswerPngOptionsInput;
+
 // models/AssignChangeAuthorRequest.ts
 var _AssignChangeAuthorRequest = class _AssignChangeAuthorRequest {
   static getAttributeTypeMap() {
@@ -5356,9 +5387,52 @@ _ExportAnswerReportRequest.attributeTypeMap = [
     "baseName": "regional_settings",
     "type": "ExportAnswerReportRequestRegionalSettings",
     "format": ""
+  },
+  {
+    "name": "png_options",
+    "baseName": "png_options",
+    "type": "ExportAnswerReportRequestPngOptions",
+    "format": ""
+  },
+  {
+    "name": "personalised_view_identifier",
+    "baseName": "personalised_view_identifier",
+    "type": "string",
+    "format": ""
   }
 ];
 var ExportAnswerReportRequest = _ExportAnswerReportRequest;
+
+// models/ExportAnswerReportRequestPngOptions.ts
+var _ExportAnswerReportRequestPngOptions = class _ExportAnswerReportRequestPngOptions {
+  static getAttributeTypeMap() {
+    return _ExportAnswerReportRequestPngOptions.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ExportAnswerReportRequestPngOptions.discriminator = void 0;
+_ExportAnswerReportRequestPngOptions.attributeTypeMap = [
+  {
+    "name": "x_resolution",
+    "baseName": "x_resolution",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "y_resolution",
+    "baseName": "y_resolution",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "scaling",
+    "baseName": "scaling",
+    "type": "number",
+    "format": "int32"
+  }
+];
+var ExportAnswerReportRequestPngOptions = _ExportAnswerReportRequestPngOptions;
 
 // models/ExportAnswerReportRequestRegionalSettings.ts
 var _ExportAnswerReportRequestRegionalSettings = class _ExportAnswerReportRequestRegionalSettings {
@@ -17702,6 +17776,7 @@ var typeMap = {
   "AgentConversation": AgentConversation,
   "AnswerContent": AnswerContent,
   "AnswerDataResponse": AnswerDataResponse,
+  "AnswerPngOptionsInput": AnswerPngOptionsInput,
   "AssignChangeAuthorRequest": AssignChangeAuthorRequest,
   "AssignTagRequest": AssignTagRequest,
   "AssociateMetadataInput": AssociateMetadataInput,
@@ -17835,6 +17910,7 @@ var typeMap = {
   "EventChannelConfigInput": EventChannelConfigInput,
   "ExcludeMetadataListItemInput": ExcludeMetadataListItemInput,
   "ExportAnswerReportRequest": ExportAnswerReportRequest,
+  "ExportAnswerReportRequestPngOptions": ExportAnswerReportRequestPngOptions,
   "ExportAnswerReportRequestRegionalSettings": ExportAnswerReportRequestRegionalSettings,
   "ExportLiveboardReportRequest": ExportLiveboardReportRequest,
   "ExportLiveboardReportRequestPdfOptions": ExportLiveboardReportRequestPdfOptions,
@@ -47695,6 +47771,7 @@ export {
   AgentConversation,
   AnswerContent,
   AnswerDataResponse,
+  AnswerPngOptionsInput,
   ApiException,
   AssignChangeAuthorRequest,
   AssignTagRequest,
@@ -47838,6 +47915,7 @@ export {
   EventChannelConfigInput,
   ExcludeMetadataListItemInput,
   ExportAnswerReportRequest,
+  ExportAnswerReportRequestPngOptions,
   ExportAnswerReportRequestRegionalSettings,
   ExportLiveboardReportRequest,
   ExportLiveboardReportRequestPdfOptions,
