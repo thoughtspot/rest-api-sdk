@@ -6,12 +6,12 @@
   },
   "x-roles": [
     {
-      "name": "10.13.0.cl",
-      "id": "10.13.0.cl",
+      "name": "26.2.0.cl",
+      "id": "26.2.0.cl",
       "tags": [
-        "10.13.0.cl"
+        "26.2.0.cl"
       ],
-      "description": "Roles for version 10.13.0.cl"
+      "description": "Roles for version 26.2.0.cl"
     },
     {
       "name": "10.4.0.cl",
@@ -30,12 +30,28 @@
       "description": "Roles for version 10.15.0.cl"
     },
     {
+      "name": "10.13.0.cl",
+      "id": "10.13.0.cl",
+      "tags": [
+        "10.13.0.cl"
+      ],
+      "description": "Roles for version 10.13.0.cl"
+    },
+    {
       "name": "10.7.0.cl",
       "id": "10.7.0.cl",
       "tags": [
         "10.7.0.cl"
       ],
       "description": "Roles for version 10.7.0.cl"
+    },
+    {
+      "name": "26.5.0.cl",
+      "id": "26.5.0.cl",
+      "tags": [
+        "26.5.0.cl"
+      ],
+      "description": "Roles for version 26.5.0.cl"
     },
     {
       "name": "9.0.0.cl",
@@ -92,14 +108,6 @@
         "9.9.0.cl"
       ],
       "description": "Roles for version 9.9.0.cl"
-    },
-    {
-      "name": "26.2.0.cl",
-      "id": "26.2.0.cl",
-      "tags": [
-        "26.2.0.cl"
-      ],
-      "description": "Roles for version 26.2.0.cl"
     },
     {
       "name": "9.6.0.cl",
@@ -195,10 +203,10 @@
     "/api/rest/2.0/ai/agent/conversation/create": {
       "post": {
         "operationId": "createAgentConversation",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.13.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.2.0.cl or later</span>\n\nCreates a new Spotter agent conversation based on the provided context and settings. The endpoint was in Beta from 26.2.0.cl through 26.4.0.cl.\n\nRequires `CAN_USE_SPOTTER` privilege and at least view access to the metadata object specified in the request.\n\n#### Usage guidelines\n\nThe request must include the `metadata_context` parameter to define the conversation context. The context type can be one of:\n\n- `DATA_SOURCE` *(available from 26.5.0.cl)*: targets a specific data source. Provide `data_source_identifier` in `data_source_context` for a single data source, or `data_source_identifiers` for multi-data-source context. The deprecated `guid` field is accepted for backwards compatibility.\n- `AUTO_MODE` *(available from 26.5.0.cl)*: automatically discovers and selects the most relevant datasets for the user's queries.\n\n> **Note for callers on versions 26.2.0.cl – 26.4.0.cl (Beta):** use the lowercase `data_source` enum value with the `guid` field instead of the above. Example: `{ \"type\": \"data_source\", \"data_source_context\": { \"guid\": \"<worksheet-id>\" } }`.\n\nThe `conversation_settings` parameter controls which Spotter capabilities are enabled for the conversation:\n\n- `enable_contextual_change_analysis` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to `false` has no effect on versions >= 26.2.0.cl\n- `enable_natural_language_answer_generation` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to `false` has no effect on versions >= 26.2.0.cl\n- `enable_reasoning` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to `false` has no effect on versions >= 26.2.0.cl\n- `enable_save_chat` (default: `false`, *available from 26.5.0.cl*) — enables saving the conversation for later retrieval via conversation history\n\nIf the request is successful, the response includes a unique `conversation_identifier` that must be passed to `sendAgentConversationMessage` or `sendAgentConversationMessageStreaming` to send messages within this conversation. The response also includes `conversation_id` with the same value for backwards compatibility; use `conversation_identifier` for new integrations.\n\n#### Example request\n\n```json\n{\n  \"metadata_context\": {\n    \"type\": \"DATA_SOURCE\",\n    \"data_source_context\": {\n      \"data_source_identifier\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\"\n    }\n  },\n  \"conversation_settings\": {}\n}\n```\n\n#### Error responses\n\n| Code | Description                                                                                                                             |\n| ---- | --------------------------------------------------------------------------------------------------------------------------------------- |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                    |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks view permission on the specified metadata object. |\n\n> ###### Note:\n>\n> - This endpoint was in Beta from 26.2.0.cl through 26.4.0.cl and is Generally Available from version 26.5.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.2.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.2.0.cl or later</span>\n\nCreates a new Spotter agent conversation based on the provided context and settings. The endpoint was in Beta from 26.2.0.cl through 26.4.0.cl.\n\nRequires `CAN_USE_SPOTTER` privilege and at least view access to the metadata object specified in the request.\n\n#### Usage guidelines\n\nThe request must include the `metadata_context` parameter to define the conversation context. The context type can be one of:\n\n- `DATA_SOURCE` *(available from 26.5.0.cl)*: targets a specific data source. Provide `data_source_identifier` in `data_source_context` for a single data source, or `data_source_identifiers` for multi-data-source context. The deprecated `guid` field is accepted for backwards compatibility.\n- `AUTO_MODE` *(available from 26.5.0.cl)*: automatically discovers and selects the most relevant datasets for the user's queries.\n\n> **Note for callers on versions 26.2.0.cl – 26.4.0.cl (Beta):** use the lowercase `data_source` enum value with the `guid` field instead of the above. Example: `{ \"type\": \"data_source\", \"data_source_context\": { \"guid\": \"<worksheet-id>\" } }`.\n\nThe `conversation_settings` parameter controls which Spotter capabilities are enabled for the conversation:\n\n- `enable_contextual_change_analysis` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to `false` has no effect on versions >= 26.2.0.cl\n- `enable_natural_language_answer_generation` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to `false` has no effect on versions >= 26.2.0.cl\n- `enable_reasoning` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to `false` has no effect on versions >= 26.2.0.cl\n- `enable_save_chat` (default: `false`, *available from 26.5.0.cl*) — enables saving the conversation for later retrieval via conversation history\n\nIf the request is successful, the response includes a unique `conversation_identifier` that must be passed to `sendAgentConversationMessage` or `sendAgentConversationMessageStreaming` to send messages within this conversation. The response also includes `conversation_id` with the same value for backwards compatibility; use `conversation_identifier` for new integrations.\n\n#### Example request\n\n```json\n{\n  \"metadata_context\": {\n    \"type\": \"DATA_SOURCE\",\n    \"data_source_context\": {\n      \"data_source_identifier\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\"\n    }\n  },\n  \"conversation_settings\": {}\n}\n```\n\n#### Error responses\n\n| Code | Description                                                                                                                             |\n| ---- | --------------------------------------------------------------------------------------------------------------------------------------- |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                    |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks view permission on the specified metadata object. |\n\n> ###### Note:\n>\n> - This endpoint was in Beta from 26.2.0.cl through 26.4.0.cl and is Generally Available from version 26.5.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
-          "10.13.0.cl"
+          "26.2.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -707,13 +715,309 @@
         }
       }
     },
+    "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send": {
+      "post": {
+        "operationId": "sendAgentConversationMessage",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>\n\nSends natural language messages to an existing Spotter agent conversation and returns the complete response synchronously.\n\nRequires `CAN_USE_SPOTTER` privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by `conversation_identifier`. A conversation must first be created using the `createAgentConversation` API.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier`: the unique session ID returned by `createAgentConversation`, used for context continuity and message tracking\n- `messages`: an array of one or more text messages to send to the agent\n\nThe API returns an array of response objects, each containing:\n\n- `type`: the kind of response — `text`, `answer`, or `error`\n- `message`: the main content of the response\n- `metadata`: additional information depending on the message type (e.g., answer metadata includes analytics and visualization details)\n\n#### Error responses\n\n| Code | Description                                                                                                                      |\n|------|----------------------------------------------------------------------------------------------------------------------------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks permission on the referenced conversation. |\n\n> ###### Note:\n>\n> - This endpoint is Generally Available from version 26.5.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n> - For real-time streamed responses, use `sendAgentConversationMessageStreaming` instead.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.5.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendAgentConversationMessageRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "conversation_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier for the conversation (used to track context)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "Send a message to an existing agent conversation",
+                    "value": {
+                      "messages": [
+                        {
+                          "metadata": {},
+                          "internal": {},
+                          "type": "text",
+                          "text": "\n\nI'll compare sales between 2025 and 2024. First, let me get the dataset context to identify the relevant sales and date columns.",
+                          "agent_context": ""
+                        },
+                        {
+                          "metadata": {},
+                          "internal": {},
+                          "type": "text",
+                          "text": "```json\n{\"search_mode\": \"semantic\", \"dataset_name\": \"(Sample) Retail - Apparel\", \"columns\": [{\"name\": \"sales\", \"type\": \"MEASURE\", \"data_type\": \"double\"}, {\"name\": \"date\", \"type\": \"ATTRIBUTE\", \"data_type\": \"date\", \"sample_values\": [\"2025\", \"2024\"]}]}\n```",
+                          "agent_context": ""
+                        },
+                        {
+                          "metadata": {},
+                          "internal": {},
+                          "type": "text",
+                          "text": "\n\nPerfect! I found the sales and date columns. I can see the dataset contains sales data for both 2025 and 2024. Now I'll create a comparison query to show sales for 2025 versus 2024.",
+                          "agent_context": ""
+                        },
+                        {
+                          "metadata": {
+                            "output": "<base64-encoded-protobuf-output>",
+                            "worksheet_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
+                            "assumptions": "",
+                            "chart_type": "KPI",
+                            "interrupted": false,
+                            "data_awareness_enabled": true
+                          },
+                          "internal": {},
+                          "type": "answer",
+                          "title": "Compare total sales for 2025 vs 2024",
+                          "description": "",
+                          "session_id": "842bb67a-e08e-4861-97e8-8db9538db51d",
+                          "gen_no": 2,
+                          "sage_query": "[sales] [date] = '2025' vs [date] = '2024'",
+                          "tml_tokens": [
+                            "[sales]",
+                            "[date] = '2025' vs [date] = '2024'"
+                          ],
+                          "formulas": [],
+                          "parameters": [],
+                          "subqueries": [],
+                          "viz_suggestion": "CAEQIBomEiQ2NjE5NzI0Yy1kMjVlLTU4MDItOWNjOC1jNDA3MWY3OWY5MzAoATIA",
+                          "ac_state": null
+                        },
+                        {
+                          "metadata": {},
+                          "internal": {},
+                          "type": "text",
+                          "text": "\n\nThe visualization shows the side-by-side comparison of total sales (in USD) between the two years, allowing you to see the year-over-year performance. You can see the sales figures for both 2024 and 2025, making it easy to identify growth or decline trends in your retail apparel business.",
+                          "agent_context": ""
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send/stream": {
+      "post": {
+        "operationId": "sendAgentConversationMessageStreaming",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>\n\nSends one or more natural language messages to an existing Spotter agent conversation and returns the response as a real-time Server-Sent Events stream.\n\nRequires `CAN_USE_SPOTTER` privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by `conversation_identifier`. A conversation must first be created using the `createAgentConversation` API.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier`: the unique session ID returned by `createAgentConversation`, used for context continuity and message tracking\n- `messages`: an array of one or more text messages to send to the agent\n\nIf the request is valid, the API returns a Server-Sent Events (SSE) stream. Each line has the form `data: [{\"type\": \"...\", ...}]` — a JSON array of event objects. Event types include:\n\n- `ack`: confirms receipt of the request (`node_id`)\n- `conv_title`: conversation title (`title`, `conv_id`)\n- `notification`: status updates on operations (`group_id`, `metadata`, `code` — e.g. `TOOL_CALL_NOTIFICATION`, `nls_start`, `FINAL_RESPONSE_NOTIFICATION`)\n- `text-chunk`: incremental content chunks (`id`, `group_id`, `metadata` with `format` and `type` such as `thinking` or `text`, `content`)\n- `text`: full text block with same structure as `text-chunk`\n- `answer`: structured answer with metadata (`id`, `group_id`, `metadata` with `sage_query`, `session_id`, `title`, etc., `title`)\n- `error`: if a failure occurs\n\n#### Error responses\n\n| Code | Description                                                                                                                      |\n| ---- | -------------------------------------------------------------------------------------------------------------------------------- |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks permission on the referenced conversation. |\n\n> ###### Note:\n>\n> - This endpoint is Generally Available from version 26.5.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n> - The streaming protocol uses Server-Sent Events (SSE).\n> - For the complete response in a single payload, use `sendAgentConversationMessage` instead.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.5.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendAgentConversationMessageStreamingRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "conversation_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier for the conversation (used to track context)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendAgentMessageResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "SSE stream — each line is data: [{\"type\": \"...\", ...}]. Events arrive over time; this example shows a minimal sequence.",
+                    "value": [
+                      {
+                        "type": "ack",
+                        "node_id": "aGxzcFVrtom8"
+                      },
+                      {
+                        "type": "conv_title",
+                        "title": "Sales 2025 vs 2024",
+                        "conv_id": "-XIi04l5rrof"
+                      },
+                      {
+                        "type": "notification",
+                        "group_id": "cDEsAQbSnd3J",
+                        "metadata": {
+                          "type": "thinking",
+                          "tool_title": "Analyzing Sales Performance: 2025 vs 2024"
+                        },
+                        "code": "TOOL_CALL_NOTIFICATION"
+                      },
+                      {
+                        "id": "mNAdvy-NK2l6",
+                        "type": "text-chunk",
+                        "group_id": "cDEsAQbSnd3J",
+                        "metadata": {
+                          "format": "markdown",
+                          "type": "thinking"
+                        },
+                        "content": "\n\nI need to compare sales performance between 2025 and 2024."
+                      },
+                      {
+                        "id": "hxWMDP-pgR3B",
+                        "type": "answer",
+                        "group_id": "m1MTvttEUa7o",
+                        "metadata": {
+                          "sage_query": "[sales] [date] = '2025' vs [date] = '2024'",
+                          "session_id": "431adcf9-1328-4d8c-81a1-0faa7fa37ba6",
+                          "title": "Compare sales for 2025 vs 2024"
+                        },
+                        "title": "Compare sales for 2025 vs 2024"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendAgentMessageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/ai/agent/{conversation_identifier}/converse": {
       "post": {
         "operationId": "sendAgentMessage",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.15.0.cl or later</span>\n\n**Deprecated** — Use `sendAgentConversationMessage` instead.\n\nSend natural language messages to an existing Spotter agent conversation and returns the complete response synchronously.\n\nRequires `CAN_USE_SPOTTER` privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by `conversation_identifier`.\nA conversation must first be created using the `createAgentConversation` API.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier`: the unique session ID returned by `createAgentConversation`, used for context continuity and message tracking\n- `messages`: an array of one or more text messages to send to the agent\n\nThe API returns an array of response objects, each containing:\n\n- `type`: the kind of response — `text`, `answer`, or `error`\n- `message`: the main content of the response\n- `metadata`: additional information depending on the message type (e.g., answer metadata includes analytics and visualization details)\n\n#### Error responses\n\n| Code | Description                                                                                                                      |\n|------|----------------------------------------------------------------------------------------------------------------------------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks permission on the referenced conversation. |\n\n> ###### Note:\n>\n> - This endpoint is deprecated. Use `sendAgentConversationMessage` for new integrations.\n> - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.2.0.cl or later</span>\n\n**Deprecated** — Use `sendAgentConversationMessage` instead.\n\nSend natural language messages to an existing Spotter agent conversation and returns the complete response synchronously.\n\nRequires `CAN_USE_SPOTTER` privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by `conversation_identifier`.\nA conversation must first be created using the `createAgentConversation` API.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier`: the unique session ID returned by `createAgentConversation`, used for context continuity and message tracking\n- `messages`: an array of one or more text messages to send to the agent\n\nThe API returns an array of response objects, each containing:\n\n- `type`: the kind of response — `text`, `answer`, or `error`\n- `message`: the main content of the response\n- `metadata`: additional information depending on the message type (e.g., answer metadata includes analytics and visualization details)\n\n#### Error responses\n\n| Code | Description                                                                                                                      |\n|------|----------------------------------------------------------------------------------------------------------------------------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks permission on the referenced conversation. |\n\n> ###### Note:\n>\n> - This endpoint is deprecated. Use `sendAgentConversationMessage` for new integrations.\n> - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "deprecated": true,
         "tags": [
           "AI",
-          "10.15.0.cl"
+          "26.2.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -803,10 +1107,11 @@
     "/api/rest/2.0/ai/agent/converse/sse": {
       "post": {
         "operationId": "sendAgentMessageStreaming",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.13.0.cl or later</span>\n\n**Deprecated** — Use `sendAgentConversationMessageStreaming` instead.\n\nSends one or more natural language messages to an existing Spotter agent conversation and returns the response as a real-time Server-Sent Events stream.\n\nRequires `CAN_USE_SPOTTER` privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by `conversation_identifier`. A conversation must first be created using the `createAgentConversation` API.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier`: the unique session ID returned by `createAgentConversation`, used for context continuity and message tracking\n- `messages`: an array of one or more text messages to send to the agent\n\nIf the request is valid, the API returns a Server-Sent Events (SSE) stream. Each line has the form `data: [{\"type\": \"...\", ...}]` — a JSON array of event objects. Event types include:\n\n- `ack`: confirms receipt of the request (`node_id`)\n- `conv_title`: conversation title (`title`, `conv_id`)\n- `notification`: status updates on operations (`group_id`, `metadata`, `code` — e.g. `TOOL_CALL_NOTIFICATION`, `nls_start`, `FINAL_RESPONSE_NOTIFICATION`)\n- `text-chunk`: incremental content chunks (`id`, `group_id`, `metadata` with `format` and `type` such as `thinking` or `text`, `content`)\n- `text`: full text block with same structure as `text-chunk`\n- `answer`: structured answer with metadata (`id`, `group_id`, `metadata` with `sage_query`, `session_id`, `title`, etc., `title`)\n- `error`: if a failure occurs\n\n#### Error responses\n\n| Code | Description                                                                                                                      |\n|------|----------------------------------------------------------------------------------------------------------------------------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks permission on the referenced conversation. |\n\n> ###### Note:\n>\n> - This endpoint is deprecated. Use `sendAgentConversationMessageStreaming` for new integrations.\n> - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n> - The streaming protocol uses Server-Sent Events (SSE).\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.2.0.cl or later</span>\n\n**Deprecated** — Use `sendAgentConversationMessageStreaming` instead.\n\nSends one or more natural language messages to an existing Spotter agent conversation and returns the response as a real-time Server-Sent Events stream.\n\nRequires `CAN_USE_SPOTTER` privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by `conversation_identifier`. A conversation must first be created using the `createAgentConversation` API.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier`: the unique session ID returned by `createAgentConversation`, used for context continuity and message tracking\n- `messages`: an array of one or more text messages to send to the agent\n\nIf the request is valid, the API returns a Server-Sent Events (SSE) stream. Each line has the form `data: [{\"type\": \"...\", ...}]` — a JSON array of event objects. Event types include:\n\n- `ack`: confirms receipt of the request (`node_id`)\n- `conv_title`: conversation title (`title`, `conv_id`)\n- `notification`: status updates on operations (`group_id`, `metadata`, `code` — e.g. `TOOL_CALL_NOTIFICATION`, `nls_start`, `FINAL_RESPONSE_NOTIFICATION`)\n- `text-chunk`: incremental content chunks (`id`, `group_id`, `metadata` with `format` and `type` such as `thinking` or `text`, `content`)\n- `text`: full text block with same structure as `text-chunk`\n- `answer`: structured answer with metadata (`id`, `group_id`, `metadata` with `sage_query`, `session_id`, `title`, etc., `title`)\n- `error`: if a failure occurs\n\n#### Error responses\n\n| Code | Description                                                                                                                      |\n|------|----------------------------------------------------------------------------------------------------------------------------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks permission on the referenced conversation. |\n\n> ###### Note:\n>\n> - This endpoint is deprecated. Use `sendAgentConversationMessageStreaming` for new integrations.\n> - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n> - The streaming protocol uses Server-Sent Events (SSE).\n\n\n\n\n#### Endpoint URL\n",
+        "deprecated": true,
         "tags": [
           "AI",
-          "10.13.0.cl"
+          "26.2.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -2869,6 +3174,99 @@
           },
           "403": {
             "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/connections/{connection_identifier}/resync-metadata": {
+      "post": {
+        "operationId": "syncMetadata",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>\n\nSynchronizes connection metadata attributes from your Cloud Data Warehouse (CDW) with ThoughtSpot.\n\nRequires the  `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**) privilege is required.\n\n#### Usage guidelines\n\nTo synchronize attributes from a CDW, specify the connection GUID or name in the `connection_identifier` path parameter and  `sync_attributes` in the request body. Default attribute is `[\"DESCRIPTION\"]`.\n\n##### Hierarchical schema\n\n* Connection: The connection object for the sync operation.\n* Tables: Tables for the sync operation. When no table is specified, all tables are synchronized.\n* Columns: If the table is specified, you can add the columns for the sync operation. If no columns are specified, all columns in the specified table are considered for the sync operation.\n\nTo set the scope for the sync operation:\n\n* Connection-level: To sync all tables and columns, pass an empty request body, or only the attributes in the request body.\n* Table-level: To synchronize specific tables and their columns, specify the table identifiers in the `tables` array.\n* Column-level: To synchronize specific columns, specify the table identifier as the key and column identifiers as the value in the `tables` array.\n\n```\n{\n  \"tables\": [\n    {\"table-guid-1\": [\"column-guid-1\", \"column-guid-2\"]},\n    \"table-guid-2\"\n  ],\n  \"sync_attributes\": [\"DESCRIPTION\"]\n}\n```\n\n##### API response\n\nIf the sync operation is successful, the API returns the following information:\n\n* Status of the sync operation. For example, `SUCCESS`, `PARTIAL_SUCCESS`, or `NO_UPDATE`.\n* Number of tables and columns that were updated.\n* Number of tables and columns with the sync failed status when the overall sync status is `PARTIAL_SUCCESS`.\n* Message text indicating the sync results.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Connections",
+          "26.5.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SyncMetadataRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "connection_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the connection."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Metadata synced successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SyncMetadataResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request parameters or hierarchy.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Connection, table, or column not found.",
             "content": {
               "application/json": {
                 "schema": {
@@ -6288,10 +6686,10 @@
     "/api/rest/2.0/metadata/parameterize-fields": {
       "post": {
         "operationId": "parameterizeMetadataFields",
-        "description": "\nParameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE. <br/>  <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\nAllows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.\n\nRequires appropriate permissions to modify the metadata object.\n\nThe API endpoint allows parameterizing the following types of metadata objects:\n* Logical Tables\n* Connections\n* Connection Configs\n\nFor a Logical Table, the field type must be `ATTRIBUTE` and field names can include:\n* databaseName\n* schemaName\n* tableName\n\nFor a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.\n\nFor Connection Config, supported field names include:\n* impersonate_user\n\nYou can parameterize multiple fields at once by providing an array of field names.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nParameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE. <br/>  <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>\n\nAllows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.\n\nRequires appropriate permissions to modify the metadata object.\n\nThe API endpoint allows parameterizing the following types of metadata objects:\n* Logical Tables\n* Connections\n* Connection Configs\n\nFor a Logical Table, the field type must be `ATTRIBUTE` and field names can include:\n* databaseName\n* schemaName\n* tableName\n\nFor a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.\n\nFor Connection Config, supported field names include:\n* impersonate_user\n\nYou can parameterize multiple fields at once by providing an array of field names.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Metadata",
-          "26.4.0.cl"
+          "26.5.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -6430,10 +6828,10 @@
     "/api/rest/2.0/metadata/unparameterize": {
       "post": {
         "operationId": "unparameterizeMetadata",
-        "description": "\nRemove parameterization from fields in metadata objects. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows removing parameterization from fields in metadata objects in ThoughtSpot.\n\nRequires appropriate permissions to modify the metadata object.\n\nThe API endpoint allows unparameterizing the following types of metadata objects:\n* Logical Tables\n* Connections\n* Connection Configs\n\nFor a Logical Table the field type must be `ATTRIBUTE` and field name can be one of:\n* databaseName\n* schemaName\n* tableName\n\nFor a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.\n\nFor Connection Config, the only supported field name is:\n* impersonate_user\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nRemove parameterization from fields in metadata objects. <br/>  <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>\n\nAllows removing parameterization from fields in metadata objects in ThoughtSpot.\n\nRequires appropriate permissions to modify the metadata object.\n\nThe API endpoint allows unparameterizing the following types of metadata objects:\n* Logical Tables\n* Connections\n* Connection Configs\n\nFor a Logical Table the field type must be `ATTRIBUTE` and field name can be one of:\n* databaseName\n* schemaName\n* tableName\n\nFor a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.\n\nFor Connection Config, the only supported field name is:\n* impersonate_user\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Metadata",
-          "10.9.0.cl"
+          "26.5.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -8196,10 +8594,10 @@
     "/api/rest/2.0/security/metadata/publish": {
       "post": {
         "operationId": "publishMetadata",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows publishing metadata objects across organizations in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\n\nThe API endpoint allows publishing the following types of metadata objects:\n* Liveboards\n* Answers\n* Logical Tables\n\nThis API will essentially share the objects along with it's dependencies to\nthe org admins of the orgs to which it is being published.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>\n\nAllows publishing metadata objects across organizations in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\n\nThe API endpoint allows publishing the following types of metadata objects:\n* Liveboards\n* Answers\n* Logical Tables\n\nThis API will essentially share the objects along with it's dependencies to\nthe org admins of the orgs to which it is being published.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Security",
-          "10.9.0.cl"
+          "26.5.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -8262,7 +8660,7 @@
     "/api/rest/2.0/security/metadata/share": {
       "post": {
         "operationId": "shareMetadata",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nAllows sharing one or several metadata objects with users and groups in ThoughtSpot.\n\nRequires edit access to the metadata object.\n\n#### Supported metadata objects:\n* Liveboards\n* Visualizations\n* Answers\n* Models\n* Views\n* Connections\n\n#### Object permissions\n\nYou can provide `READ_ONLY` or `MODIFY` access when sharing an object with another user or group. The `READ_ONLY` permission grants view access to the shared object, whereas `MODIFY` provides edit access.\n\nTo prevent a user or group from accessing the shared object, specify the GUID or name of the principal and set `shareMode` to `NO_ACCESS`.\n\n#### Sharing a visualization\n\n* Sharing a visualization implicitly shares the entire Liveboard with the recipient.  \n* Object permissions set for a shared visualization also apply to the Liveboard unless overridden by another API request or via UI.\n* If email notifications for object sharing are enabled, a notification with a link to the shared visualization will be sent to the recipient’s email address. Although this link opens the shared visualization, recipients can also access other visualizations in the Liveboard.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nAllows sharing one or several metadata objects with users and groups in ThoughtSpot.\n\nRequires edit access to the metadata object.\n\n#### Supported metadata objects:\n* Liveboards\n* Visualizations\n* Answers\n* Models\n* Views\n* Connections\n* Collections\n\n#### Object permissions\n\nYou can provide `READ_ONLY` or `MODIFY` access when sharing an object with another user or group. The `READ_ONLY` permission grants view access to the shared object, whereas `MODIFY` provides edit access.\n\nTo prevent a user or group from accessing the shared object, specify the GUID or name of the principal and set `shareMode` to `NO_ACCESS`.\n\n#### Sharing a visualization\n\n* Sharing a visualization implicitly shares the entire Liveboard with the recipient.\n* Object permissions set for a shared visualization also apply to the Liveboard unless overridden by another API request or via UI.\n* If email notifications for object sharing are enabled, a notification with a link to the shared visualization will be sent to the recipient’s email address. Although this link opens the shared visualization, recipients can also access other visualizations in the Liveboard.\n\n#### Sharing a collection\n\nCollections support **dual permissions** that provide fine-grained control:\n\n* **Collection permissions** (`share_mode`) - controls access to the collection itself (view, edit, delete the collection)\n* **Content permissions** (`content_share_mode`) - controls access to objects within the collection (view, edit objects inside)\n\n**Default Behavior:**\n- If only `share_mode` is specified, the content permissions default to `READ_ONLY` (except when `share_mode` is `NO_ACCESS`, then content also gets `NO_ACCESS`)\n- To give users edit access to collection contents, explicitly set `content_share_mode: \"MODIFY\"`\n\n## Examples\n\nThe following JSON examples can be copy-pasted as request bodies for the REST v2 API endpoint:\n\n```bash\nPOST /callosum/v1/v2/security/metadata/share\nContent-Type: application/x-www-form-urlencoded\n```\n\n### Basic collection sharing\nShare a collection with read-only access:\n\n```json\n{\n  \"metadata_type\": \"COLLECTION\",\n  \"metadata_identifiers\": [\"Sales Reports Collection\"],\n  \"permissions\": [{\n    \"principal\": {\n      \"type\": \"USER\",\n      \"identifier\": \"alice@company.com\"\n    },\n    \"share_mode\": \"READ_ONLY\"\n  }],\n  \"notification\": {\n    \"message\": \"I've shared the Sales Reports collection with you\",\n    \"notify_on_share\": true\n  }\n}\n```\n\n### Collection sharing with dual permissions\nShare a collection with different permissions for the collection vs. its contents:\n\n```json\n{\n  \"metadata_type\": \"COLLECTION\",\n  \"metadata_identifiers\": [\"Marketing Analytics\"],\n  \"permissions\": [{\n    \"principal\": {\n      \"type\": \"USER\",\n      \"identifier\": \"bob@company.com\"\n    },\n    \"share_mode\": \"MODIFY\",\n    \"content_share_mode\": \"READ_ONLY\"\n  }, {\n    \"principal\": {\n      \"type\": \"USER_GROUP\",\n      \"identifier\": \"Marketing Team\"\n    },\n    \"share_mode\": \"READ_ONLY\",\n    \"content_share_mode\": \"READ_ONLY\"\n  }],\n  \"notification\": {\n    \"emails\": [\"bob@company.com\"],\n    \"message\": \"You can edit the collection but content is read-only\",\n    \"enable_custom_url\": false,\n    \"notify_on_share\": true\n  },\n  \"has_lenient_discoverability\": false\n}\n```\n\n### Multiple collections sharing\nShare multiple collections with different users:\n\n```json\n{\n  \"metadata\": [\n    {\n      \"type\": \"COLLECTION\",\n      \"identifier\": \"Q4 Reports\"\n    },\n    {\n      \"type\": \"COLLECTION\",\n      \"identifier\": \"Executive Dashboard Collection\"\n    }\n  ],\n  \"permissions\": [{\n    \"principal\": {\n      \"type\": \"USER_GROUP\",\n      \"identifier\": \"Executives\"\n    },\n    \"share_mode\": \"MODIFY\"\n  }, {\n    \"principal\": {\n      \"type\": \"USER\",\n      \"identifier\": \"manager@company.com\"\n    },\n    \"share_mode\": \"READ_ONLY\",\n    \"content_share_mode\": \"MODIFY\"\n  }],\n  \"notification\": {\n    \"message\": \"Sharing quarterly collections with leadership team\",\n    \"notify_on_share\": true\n  }\n}\n```\n\n### Remove collection access\nRemove access to a collection by setting share_mode to NO_ACCESS:\n\n```json\n{\n  \"metadata_type\": \"COLLECTION\",\n  \"metadata_identifiers\": [\"Confidential Reports\"],\n  \"permissions\": [{\n    \"principal\": {\n      \"type\": \"USER\",\n      \"identifier\": \"former-employee@company.com\"\n    },\n    \"share_mode\": \"NO_ACCESS\"\n  }],\n  \"notification\": {\n    \"notify_on_share\": false\n  }\n}\n```\n\n### Collection Permission Scenarios\n\n**Scenario 1: Collection Admin**\n- `share_mode: MODIFY` + `content_share_mode: MODIFY` = Full control over collection and its contents\n\n**Scenario 2: Collection Curator**\n- `share_mode: MODIFY` + `content_share_mode: READ_ONLY` = Can manage collection structure but not edit contents\n\n**Scenario 3: Content Editor**\n- `share_mode: READ_ONLY` + `content_share_mode: MODIFY` = Can edit objects within collection but can't change collection itself\n\n**Scenario 4: Viewer**\n- `share_mode: READ_ONLY` + `content_share_mode: READ_ONLY` = View-only access to collection and contents\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Security",
           "9.0.0.cl"
@@ -8328,10 +8726,10 @@
     "/api/rest/2.0/security/metadata/unpublish": {
       "post": {
         "operationId": "unpublishMetadata",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>\n\nAllows unpublishing metadata objects from organizations in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\n\nThe API endpoint allows unpublishing the following types of metadata objects:\n* Liveboards\n* Answers\n* Logical Tables\n\nWhen unpublishing objects, you can:\n* Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them\n* Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>\n\nAllows unpublishing metadata objects from organizations in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\n\nThe API endpoint allows unpublishing the following types of metadata objects:\n* Liveboards\n* Answers\n* Logical Tables\n\nWhen unpublishing objects, you can:\n* Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them\n* Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Security",
-          "10.9.0.cl"
+          "26.5.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -10381,10 +10779,10 @@
     "/api/rest/2.0/template/variables/create": {
       "post": {
         "operationId": "createVariable",
-        "description": "\nCreate a variable which can be used for parameterizing metadata objects <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nAllows creating a variable which can be used for parameterizing metadata objects in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint supports the following types of variables:\n* CONNECTION_PROPERTY - For connection properties\n* TABLE_MAPPING - For table mappings\n* CONNECTION_PROPERTY_PER_PRINCIPAL - For connection properties per principal. In order to use this please contact support to enable this.\n* FORMULA_VARIABLE - For Formula variables, introduced in 10.15.0.cl\n\nWhen creating a variable, you need to specify:\n* The variable type\n* A unique name for the variable\n* Whether the variable contains sensitive values (defaults to false)\n* The data type of the variable, only specify for formula variables (defaults to null)\n\nThe operation will fail if:\n* The user lacks required permissions\n* The variable name already exists\n* The variable type is invalid\n\n\n\n#### Endpoint URL\n",
+        "description": "\nCreate a variable which can be used for parameterizing metadata objects <br/>  <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\nAllows creating a variable which can be used for parameterizing metadata objects in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint supports the following types of variables:\n* CONNECTION_PROPERTY - For connection properties\n* TABLE_MAPPING - For table mappings\n* CONNECTION_PROPERTY_PER_PRINCIPAL - For connection properties per principal. In order to use this please contact support to enable this.\n* FORMULA_VARIABLE - For Formula variables, introduced in 10.15.0.cl\n\nWhen creating a variable, you need to specify:\n* The variable type\n* A unique name for the variable\n* Whether the variable contains sensitive values (defaults to false)\n* The data type of the variable, only specify for formula variables (defaults to null)\n\nThe operation will fail if:\n* The user lacks required permissions\n* The variable name already exists\n* The variable type is invalid\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Variable",
-          "10.14.0.cl"
+          "26.4.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -10454,7 +10852,7 @@
     "/api/rest/2.0/template/variables/{identifier}/delete": {
       "post": {
         "operationId": "deleteVariable",
-        "description": "\nDelete a variable <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\n**Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.\n\nAllows deleting a variable from ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint requires:\n* The variable identifier (ID or name)\n\nThe operation will fail if:\n* The user lacks required permissions\n* The variable doesn't exist\n* The variable is being used by other objects \n\n\n\n#### Endpoint URL\n",
+        "description": "\nDelete a variable <br/>  <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\n**Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.\n\nAllows deleting a variable from ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint requires:\n* The variable identifier (ID or name)\n\nThe operation will fail if:\n* The user lacks required permissions\n* The variable doesn't exist\n* The variable is being used by other objects \n\n\n\n#### Endpoint URL\n",
         "deprecated": true,
         "tags": [
           "Variable",
@@ -10521,7 +10919,7 @@
     "/api/rest/2.0/template/variables/delete": {
       "post": {
         "operationId": "deleteVariables",
-        "description": "\nDelete variable(s) <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\nAllows deleting multiple variables from ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint requires:\n* The variable identifiers (IDs or names)\n\nThe operation will fail if:\n* The user lacks required permissions\n* Any of the variables don't exist\n* Any of the variables are being used by other objects\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nDelete variable(s) <br/>  <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\nAllows deleting multiple variables from ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint requires:\n* The variable identifiers (IDs or names)\n\nThe operation will fail if:\n* The user lacks required permissions\n* Any of the variables don't exist\n* Any of the variables are being used by other objects\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Variable",
           "26.4.0.cl"
@@ -10587,7 +10985,7 @@
     "/api/rest/2.0/template/variables/{identifier}/update-values": {
       "post": {
         "operationId": "putVariableValues",
-        "description": "\nUpdate values for a variable <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\nAllows updating values for a specific variable in ThoughtSpot.\n\nRequires ADMINISTRATION role.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint allows:\n* Adding new values to the variable\n* Replacing existing values\n* Deleting values from the variable\n* Resetting all values\n\nWhen updating variable values, you need to specify:\n* The variable identifier (ID or name)\n* The values to add/replace/remove\n* The operation to perform (ADD, REPLACE, REMOVE, RESET)\n\nBehaviour based on operation type:\n* ADD - Adds values to the variable if this is a list type variable, else same as replace.\n* REPLACE - Replaces all values of a given set of constraints with the current set of values.\n* REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value.\n* RESET - Removes all constraints for the given variable, scope is ignored\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nUpdate values for a variable <br/>  <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\nAllows updating values for a specific variable in ThoughtSpot.\n\nRequires ADMINISTRATION role.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint allows:\n* Adding new values to the variable\n* Replacing existing values\n* Deleting values from the variable\n* Resetting all values\n\nWhen updating variable values, you need to specify:\n* The variable identifier (ID or name)\n* The values to add/replace/remove\n* The operation to perform (ADD, REPLACE, REMOVE, RESET)\n\nBehaviour based on operation type:\n* ADD - Adds values to the variable if this is a list type variable, else same as replace.\n* REPLACE - Replaces all values of a given set of constraints with the current set of values.\n* REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value.\n* RESET - Removes all constraints for the given variable, scope is ignored\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Variable",
           "26.4.0.cl"
@@ -10663,10 +11061,10 @@
     "/api/rest/2.0/template/variables/search": {
       "post": {
         "operationId": "searchVariables",
-        "description": "\nSearch variables <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nAllows searching for variables in ThoughtSpot.\n\nRequires ADMINISTRATION role.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint supports searching variables by:\n* Variable identifier (ID or name)\n* Variable type\n* Name pattern (case-insensitive, supports % for wildcard)\n\nThe search results can be formatted in three ways:\n* METADATA - Returns only variable metadata (default)\n* METADATA_AND_VALUES - Returns variable metadata and values\n\nThe values can be filtered by scope:\n* org_identifier\n* principal_identifier\n* model_identifier\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nSearch variables <br/>  <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\nAllows searching for variables in ThoughtSpot.\n\nRequires ADMINISTRATION role.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint supports searching variables by:\n* Variable identifier (ID or name)\n* Variable type\n* Name pattern (case-insensitive, supports % for wildcard)\n\nThe search results can be formatted in three ways:\n* METADATA - Returns only variable metadata (default)\n* METADATA_AND_VALUES - Returns variable metadata and values\n\nThe values can be filtered by scope:\n* org_identifier\n* principal_identifier\n* model_identifier\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Variable",
-          "10.14.0.cl"
+          "26.4.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -10739,10 +11137,10 @@
     "/api/rest/2.0/template/variables/{identifier}/update": {
       "post": {
         "operationId": "updateVariable",
-        "description": "\nUpdate a variable's name <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nAllows updating a variable's name in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint allows updating:\n* The variable name\n\n\n\n#### Endpoint URL\n",
+        "description": "\nUpdate a variable's name <br/>  <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\nAllows updating a variable's name in ThoughtSpot.\n\nRequires ADMINISTRATION role and TENANT scope.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint allows updating:\n* The variable name\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Variable",
-          "10.14.0.cl"
+          "26.4.0.cl"
         ],
         "requestBody": {
           "content": {
@@ -10815,7 +11213,7 @@
     "/api/rest/2.0/template/variables/update-values": {
       "post": {
         "operationId": "updateVariableValues",
-        "description": "\nUpdate values for multiple variables <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\n**Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/{identifier}/update-values](/api/rest/2.0/template/variables/%7Bidentifier%7D/update-values) instead.\n\nAllows updating values for multiple variables in ThoughtSpot.\n\nRequires ADMINISTRATION role.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint allows:\n* Adding new values to variables\n* Replacing existing values\n* Deleting values from variables\n\nWhen updating variable values, you need to specify:\n* The variable identifiers\n* The values to add/replace/remove for each variable\n* The operation to perform (ADD, REPLACE, REMOVE, RESET)\n\nBehaviour based on operation type:\n* ADD - Adds values to the variable if this is a list type variable, else same as replace.\n* REPLACE - Replaces all values of a given set of constraints with the current set of values.\n* REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value.\n* RESET - Removes all constrains for a given variable, scope is ignored\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nUpdate values for multiple variables <br/>  <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\n**Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/{identifier}/update-values](/api/rest/2.0/template/variables/%7Bidentifier%7D/update-values) instead.\n\nAllows updating values for multiple variables in ThoughtSpot.\n\nRequires ADMINISTRATION role.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint allows:\n* Adding new values to variables\n* Replacing existing values\n* Deleting values from variables\n\nWhen updating variable values, you need to specify:\n* The variable identifiers\n* The values to add/replace/remove for each variable\n* The operation to perform (ADD, REPLACE, REMOVE, RESET)\n\nBehaviour based on operation type:\n* ADD - Adds values to the variable if this is a list type variable, else same as replace.\n* REPLACE - Replaces all values of a given set of constraints with the current set of values.\n* REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value.\n* RESET - Removes all constrains for a given variable, scope is ignored\n\n\n\n\n#### Endpoint URL\n",
         "deprecated": true,
         "tags": [
           "Variable",
@@ -13792,6 +14190,21 @@
       "PdfOptionsInput": {
         "type": "object",
         "properties": {
+          "page_size": {
+            "type": "string",
+            "enum": [
+              "A4",
+              "CONTINUOUS"
+            ],
+            "description": "Size of PDF page. `A4` generates a paginated A4 PDF. `CONTINUOUS` generates a continuous PDF that matches the Liveboard layout. Each Liveboard tab has its own page of variable length. Defaults to `A4` if not specified. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>",
+            "nullable": true
+          },
+          "zoom_level": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Zoom level percentage for the PDF. Only applicable when `page_size` is `CONTINUOUS`. Acceptable values are integers in the range [45, 175]. Defaults to 100 if not specified. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>",
+            "nullable": true
+          },
           "include_cover_page": {
             "type": "boolean",
             "default": true,
@@ -13807,7 +14220,7 @@
           "include_filter_page": {
             "type": "boolean",
             "default": true,
-            "description": "Indicates whether to include a page with all applied filters.",
+            "description": "Indicates whether to include a page with all applied filters. For `CONTINUOUS` page_size, this parameter indicates whether to include the filter header.",
             "nullable": true
           },
           "include_page_number": {
@@ -14308,7 +14721,8 @@
               "ANSWER",
               "LOGICAL_TABLE",
               "LOGICAL_COLUMN",
-              "CONNECTION"
+              "CONNECTION",
+              "COLLECTION"
             ],
             "description": "  Type of metadata object.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
@@ -17944,7 +18358,8 @@
               "ANSWER",
               "LOGICAL_TABLE",
               "LOGICAL_COLUMN",
-              "CONNECTION"
+              "CONNECTION",
+              "COLLECTION"
             ],
             "description": "  Type of metadata.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.\n  1. LIVEBOARD\n  2. ANSWERS\n  3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n  4. LOGICAL_COLUMN for a column of any data object such as tables, worksheets or views.",
             "nullable": true
@@ -18571,7 +18986,8 @@
               "ANSWER",
               "LOGICAL_TABLE",
               "LOGICAL_COLUMN",
-              "CONNECTION"
+              "CONNECTION",
+              "COLLECTION"
             ],
             "description": "  Type of metadata.\n  \n\nType of metadata. Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
@@ -18586,7 +19002,8 @@
         "type": "object",
         "required": [
           "principal",
-          "share_mode"
+          "share_mode",
+          "content_share_mode"
         ],
         "properties": {
           "principal": {
@@ -18601,6 +19018,14 @@
               "NO_ACCESS"
             ],
             "description": "Type of access to the shared object"
+          },
+          "content_share_mode": {
+            "type": "string",
+            "enum": [
+              "READ_ONLY",
+              "MODIFY"
+            ],
+            "description": "Content share mode for collections. Controls access to objects within the collection. Only applicable when sharing COLLECTION metadata type."
           }
         }
       },
@@ -18938,6 +19363,51 @@
             "description": "Result message describing the outcome of the refresh token revocation operation."
           }
         }
+      },
+      "SyncMetadataResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "SUCCESS",
+              "PARTIAL_SUCCESS",
+              "NO_UPDATE"
+            ],
+            "description": "Overall status of the sync operation.",
+            "nullable": true
+          },
+          "tables_updated": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of tables with metadata updates.",
+            "nullable": true
+          },
+          "columns_updated": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of columns with metadata updates.",
+            "nullable": true
+          },
+          "tables_failed": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of tables that failed to sync (for PARTIAL_SUCCESS).",
+            "nullable": true
+          },
+          "columns_failed": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of columns that failed to sync (for PARTIAL_SUCCESS).",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "description": "Message describing the result.",
+            "nullable": true
+          }
+        },
+        "description": "Response from sync metadata operation."
       },
       "RoleResponse": {
         "type": "object",
@@ -20053,21 +20523,11 @@
           "type": {
             "type": "string",
             "enum": [
-              "answer",
-              "liveboard",
-              "data_source"
+              "data_source",
+              "DATA_SOURCE",
+              "AUTO_MODE"
             ],
             "description": "Type of the context.",
-            "nullable": true
-          },
-          "answer_context": {
-            "$ref": "#/components/schemas/AnswerContextInput",
-            "description": "Answer context.",
-            "nullable": true
-          },
-          "liveboard_context": {
-            "$ref": "#/components/schemas/LBContextInput",
-            "description": "Liveboard context.",
             "nullable": true
           },
           "data_source_context": {
@@ -20077,50 +20537,26 @@
           }
         }
       },
-      "AnswerContextInput": {
-        "type": "object",
-        "required": [
-          "session_identifier",
-          "generation_number"
-        ],
-        "properties": {
-          "session_identifier": {
-            "type": "string",
-            "description": "Unique identifier of the answer session."
-          },
-          "generation_number": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Generation number of the answer."
-          }
-        }
-      },
-      "LBContextInput": {
-        "type": "object",
-        "required": [
-          "liveboard_identifier",
-          "visualization_identifier"
-        ],
-        "properties": {
-          "liveboard_identifier": {
-            "type": "string",
-            "description": "Unique identifier of the liveboard."
-          },
-          "visualization_identifier": {
-            "type": "string",
-            "description": "Unique identifier of the visualization."
-          }
-        }
-      },
       "DataSourceContextInput": {
         "type": "object",
-        "required": [
-          "guid"
-        ],
         "properties": {
+          "data_source_identifier": {
+            "type": "string",
+            "description": "Unique identifier of the data source.\nRequired when context type is DATA_SOURCE and `data_source_identifiers` is not provided.\nAt least one of `data_source_identifier` or `data_source_identifiers` must be supplied for DATA_SOURCE context;\nomit only when context type is AUTO_MODE. <br/>  <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>",
+            "nullable": true
+          },
+          "data_source_identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Unique identifiers of data sources for multi-data-source context.\nRequired when context type is DATA_SOURCE and `data_source_identifier` is not provided. <br/>  <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>",
+            "nullable": true
+          },
           "guid": {
             "type": "string",
-            "description": "Unique identifier of the data source."
+            "description": "Deprecated. Use `data_source_identifier` instead.\nPreviously required when neither `data_source_identifier` nor `data_source_identifiers` was provided for DATA_SOURCE context. <br/>  <span class=\"since-beta-tag\">Version: 26.2.0.cl or later</span>",
+            "nullable": true
           }
         }
       },
@@ -20129,20 +20565,26 @@
         "properties": {
           "enable_contextual_change_analysis": {
             "type": "boolean",
-            "default": false,
-            "description": "Enable contextual change analysis.",
+            "default": true,
+            "description": "Enable contextual change analysis.\nDefault changed from `false` to `true` in 26.2.0.cl.\nIgnored on versions >= 26.2.0.cl where it is always enabled. <br/>  <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>",
             "nullable": true
           },
           "enable_natural_language_answer_generation": {
             "type": "boolean",
             "default": true,
-            "description": "Enable natural language to answer generation.",
+            "description": "Enable natural language to answer generation.\nDefault changed from `false` to `true` in 26.2.0.cl.\nIgnored on versions >= 26.2.0.cl where it is always enabled. <br/>  <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>",
             "nullable": true
           },
           "enable_reasoning": {
             "type": "boolean",
+            "default": true,
+            "description": "Enable reasoning.\nDefault changed from `false` to `true` in 26.2.0.cl.\nIgnored on versions >= 26.2.0.cl where it is always enabled. <br/>  <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>",
+            "nullable": true
+          },
+          "enable_save_chat": {
+            "type": "boolean",
             "default": false,
-            "description": "Enable reasoning.",
+            "description": "Enable save conversation. When `true`, the conversation is persisted\nand can be retrieved later via conversation history. <br/>  <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>",
             "nullable": true
           }
         }
@@ -20150,12 +20592,17 @@
       "AgentConversation": {
         "type": "object",
         "required": [
-          "conversation_id"
+          "conversation_id",
+          "conversation_identifier"
         ],
         "properties": {
           "conversation_id": {
             "type": "string",
             "description": "Unique identifier of the conversation."
+          },
+          "conversation_identifier": {
+            "type": "string",
+            "description": "Unique identifier of the conversation. <br/>  <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>"
           }
         }
       },
@@ -20166,10 +20613,12 @@
         ],
         "properties": {
           "success": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Indicates whether the agent response was received and processed successfully."
           },
           "message": {
             "type": "string",
+            "description": "Optional message providing additional context about the operation outcome.",
             "nullable": true
           }
         }
@@ -21055,6 +21504,36 @@
             }
           }
         }
+      },
+      "SendAgentConversationMessageRequest": {
+        "type": "object",
+        "properties": {
+          "messages": {
+            "description": "messages to be sent to the agent",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "messages"
+        ]
+      },
+      "SendAgentConversationMessageStreamingRequest": {
+        "type": "object",
+        "properties": {
+          "messages": {
+            "description": "messages to be sent to the agent",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "messages"
+        ]
       },
       "SendAgentMessageRequest": {
         "type": "object",
@@ -21973,6 +22452,28 @@
             "default": false,
             "type": "boolean",
             "nullable": true
+          }
+        }
+      },
+      "SyncMetadataRequest": {
+        "type": "object",
+        "properties": {
+          "tables": {
+            "description": "Array of tables to sync. Each element can be:\n- String: Table identifier (GUID or name) to sync\n  all columns for that table.\n- Object: {tableId: [columnIds]} to sync specific\n  columns.\nIf not provided, syncs all tables in the connection.",
+            "type": "object"
+          },
+          "sync_attributes": {
+            "description": "List of sync_attributes to sync from CDW.\nThe default value is DESCRIPTION.",
+            "default": [
+              "DESCRIPTION"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "DESCRIPTION"
+              ]
+            }
           }
         }
       },
@@ -23685,6 +24186,12 @@
           },
           "include_details": {
             "description": "Includes complete details of the metadata objects.",
+            "default": false,
+            "type": "boolean",
+            "nullable": true
+          },
+          "include_personalised_views": {
+            "description": "When set to true and include_details is also true, includes personalised views\nin the metadata_detail for LIVEBOARD objects.",
             "default": false,
             "type": "boolean",
             "nullable": true
@@ -25920,7 +26427,8 @@
               "ANSWER",
               "LOGICAL_TABLE",
               "LOGICAL_COLUMN",
-              "CONNECTION"
+              "CONNECTION",
+              "COLLECTION"
             ]
           }
         },
@@ -26062,7 +26570,8 @@
               "ANSWER",
               "LOGICAL_TABLE",
               "LOGICAL_COLUMN",
-              "CONNECTION"
+              "CONNECTION",
+              "COLLECTION"
             ]
           },
           "metadata_identifiers": {
