@@ -15410,7 +15410,8 @@
               "GOOGLE_SHEETS",
               "FALCON",
               "FALCON_ONPREM",
-              "CLICKHOUSE"
+              "CLICKHOUSE",
+              "IOMETE"
             ],
             "description": "Type of data warehouse."
           },
@@ -16554,7 +16555,8 @@
               "GOOGLE_SHEETS",
               "FALCON",
               "FALCON_ONPREM",
-              "CLICKHOUSE"
+              "CLICKHOUSE",
+              "IOMETE"
             ],
             "nullable": true
           },
@@ -19448,7 +19450,8 @@
               "GOOGLE_SHEETS",
               "FALCON",
               "FALCON_ONPREM",
-              "CLICKHOUSE"
+              "CLICKHOUSE",
+              "IOMETE"
             ],
             "description": "Type of data warehouse."
           },
@@ -22390,7 +22393,8 @@
               "GOOGLE_SHEETS",
               "FALCON",
               "FALCON_ONPREM",
-              "CLICKHOUSE"
+              "CLICKHOUSE",
+              "IOMETE"
             ]
           },
           "data_warehouse_config": {
@@ -22496,7 +22500,8 @@
                 "GOOGLE_SHEETS",
                 "FALCON",
                 "FALCON_ONPREM",
-                "CLICKHOUSE"
+                "CLICKHOUSE",
+                "IOMETE"
               ]
             }
           },
