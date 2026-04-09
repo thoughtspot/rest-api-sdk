@@ -11314,6 +11314,7 @@ components:
           - FALCON
           - FALCON_ONPREM
           - CLICKHOUSE
+          - IOMETE
           type: string
         data_warehouse_objects:
           $ref: '#/components/schemas/DataWarehouseObjects'
@@ -12756,6 +12757,7 @@ components:
           - FALCON
           - FALCON_ONPREM
           - CLICKHOUSE
+          - IOMETE
           nullable: true
           type: string
         policy_type:
@@ -15332,6 +15334,7 @@ components:
           - FALCON
           - FALCON_ONPREM
           - CLICKHOUSE
+          - IOMETE
           type: string
         details:
           description: Details of the connection.
@@ -18016,6 +18019,7 @@ components:
           - FALCON
           - FALCON_ONPREM
           - CLICKHOUSE
+          - IOMETE
           type: string
         data_warehouse_config:
           description: "Connection configuration attributes in JSON format. To create\
@@ -18151,6 +18155,7 @@ components:
             - FALCON
             - FALCON_ONPREM
             - CLICKHOUSE
+            - IOMETE
             type: string
           type: array
         record_offset:

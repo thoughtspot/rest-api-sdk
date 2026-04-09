@@ -195,7 +195,9 @@ public class ConnectionConfigurationResponse implements Serializable {
 
         FALCON_ONPREM("FALCON_ONPREM"),
 
-        CLICKHOUSE("CLICKHOUSE");
+        CLICKHOUSE("CLICKHOUSE"),
+
+        IOMETE("IOMETE");
 
         private String value;
 
