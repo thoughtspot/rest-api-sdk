@@ -77,7 +77,9 @@ public class SchedulesPdfOptionsInput implements Serializable {
     /** Page size. */
     @JsonAdapter(PageSizeEnum.Adapter.class)
     public enum PageSizeEnum {
-        A4("A4");
+        A4("A4"),
+
+        TAB_BASED("TAB_BASED");
 
         private String value;
 

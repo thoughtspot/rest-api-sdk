@@ -5444,7 +5444,7 @@ declare class CreateScheduleRequestPdfOptions {
     }[];
     constructor();
 }
-type CreateScheduleRequestPdfOptionsPageSizeEnum = "A4";
+type CreateScheduleRequestPdfOptionsPageSizeEnum = "A4" | "TAB_BASED";
 
 /**
  * ThoughtSpot Public REST API
@@ -12097,7 +12097,7 @@ declare class PdfOptions {
     }[];
     constructor();
 }
-type PdfOptionsPageSizeEnum = "A4";
+type PdfOptionsPageSizeEnum = "A4" | "TAB_BASED";
 
 /**
  * ThoughtSpot Public REST API
@@ -14160,7 +14160,7 @@ declare class SchedulesPdfOptionsInput {
     }[];
     constructor();
 }
-type SchedulesPdfOptionsInputPageSizeEnum = "A4";
+type SchedulesPdfOptionsInputPageSizeEnum = "A4" | "TAB_BASED";
 
 /**
  * ThoughtSpot Public REST API
@@ -18708,7 +18708,7 @@ declare class UpdateScheduleRequestPdfOptions {
     }[];
     constructor();
 }
-type UpdateScheduleRequestPdfOptionsPageSizeEnum = "A4";
+type UpdateScheduleRequestPdfOptionsPageSizeEnum = "A4" | "TAB_BASED";
 
 /**
  * ThoughtSpot Public REST API

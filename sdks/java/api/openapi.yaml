@@ -15600,6 +15600,7 @@ components:
           description: Page size.
           enum:
           - A4
+          - TAB_BASED
           nullable: true
           type: string
         truncate_table:
@@ -15938,6 +15939,7 @@ components:
           description: Page size.
           enum:
           - A4
+          - TAB_BASED
           nullable: true
           type: string
         truncate_table:

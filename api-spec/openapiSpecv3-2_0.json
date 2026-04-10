@@ -19735,7 +19735,8 @@
           "page_size": {
             "type": "string",
             "enum": [
-              "A4"
+              "A4",
+              "TAB_BASED"
             ],
             "description": "Page size.",
             "nullable": true
@@ -20071,7 +20072,8 @@
           "page_size": {
             "type": "string",
             "enum": [
-              "A4"
+              "A4",
+              "TAB_BASED"
             ],
             "description": "Page size.",
             "nullable": true
