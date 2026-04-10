@@ -12797,6 +12797,48 @@ components:
           nullable: true
           type: string
       type: object
+    StorageSetupInfo:
+      description: Storage setup information for configuring cross-account access
+        to customer-managed storage.
+      properties:
+        s3_config:
+          $ref: '#/components/schemas/S3StorageSetupConfig'
+      type: object
+    S3StorageSetupConfig:
+      description: |-
+        S3 storage setup configuration containing ThoughtSpot-managed fields
+        required for cross-account storage access setup.
+      properties:
+        thoughtspot_aws_account_id:
+          description: |-
+            ThoughtSpot's AWS account ID to use in the trust policy.
+            Populated for AWS clusters.
+          nullable: true
+          type: string
+        thoughtspot_gcp_service_account_id:
+          description: |-
+            ThoughtSpot's GCP service account ID for workload identity federation.
+            Populated for GCP clusters.
+          nullable: true
+          type: string
+        oidc_provider:
+          description: |-
+            OIDC provider URL for GCP workload identity federation.
+            Populated for GCP clusters.
+          nullable: true
+          type: string
+        trust_policy_template:
+          description: IAM trust policy template to attach to the cross-account role.
+          type: object
+        setup_instructions:
+          description: Step-by-step instructions for configuring storage access.
+          items:
+            type: string
+          type: array
+      required:
+      - setup_instructions
+      - trust_policy_template
+      type: object
     WebhookSortOptionsInput:
       properties:
         field_name:
