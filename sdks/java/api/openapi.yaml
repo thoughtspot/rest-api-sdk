@@ -14535,7 +14535,7 @@ components:
           nullable: true
           type: boolean
         include_obj_id:
-          default: true
+          default: false
           description: Boolean flag to export Object ID of the object. This flag will
             work only after the Object ID feature has been enabled. Please contact
             support to enable the feature.
