@@ -21471,6 +21471,71 @@
         },
         "description": "List of runtime parameters need to set during the session."
       },
+      "WebhookLiveboardDelivery": {
+        "type": "object",
+        "description": "Single entry point for all LIVEBOARD_SCHEDULE webhook event payloads. ThoughtSpot selects the delivery kind automatically based on webhook configuration.\n\n**KIND 1 — FILE_ATTACHMENT** (webhookDeliveryKind: FILE_ATTACHMENT): Sent as multipart/form-data. The \"payload\" form field carries the JSON event data; exactly one of pdf_files, csv_files, xlsx_files, or other_files carries the binary attachment.\n\n**KIND 2 — STORAGE** (webhookDeliveryKind: STORAGE): Sent as multipart/form-data with two JSON parts. ThoughtSpot uploads files to the customer S3 bucket first, then sends \"payload\" (JSON event data) and \"file_attachments\" (S3 object references). No binary data is delivered to the endpoint.",
+        "required": [
+          "webhookDeliveryKind",
+          "payload"
+        ],
+        "properties": {
+          "webhookDeliveryKind": {
+            "$ref": "#/components/schemas/WebhookDeliveryKind"
+          },
+          "payload": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/WebhookLiveboardPayload"
+              }
+            ],
+            "description": "The structured event data. Always present. HTTP form field name: \"payload\"."
+          },
+          "pdf_files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WebhookFileAttachment"
+            },
+            "description": "PDF file attachments (HTTP form field: \"pdf_files\", Content-Type: application/pdf). Present when webhookDeliveryKind is FILE_ATTACHMENT and the schedule file format is PDF."
+          },
+          "csv_files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WebhookFileAttachment"
+            },
+            "description": "CSV file attachments (HTTP form field: \"csv_files\", Content-Type: text/csv). Present when webhookDeliveryKind is FILE_ATTACHMENT and the schedule file format is CSV."
+          },
+          "xlsx_files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WebhookFileAttachment"
+            },
+            "description": "Excel file attachments (HTTP form field: \"xlsx_files\", Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet). Present when webhookDeliveryKind is FILE_ATTACHMENT and the schedule file format is XLSX."
+          },
+          "other_files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WebhookFileAttachment"
+            },
+            "description": "Fallback file attachments for unrecognised extensions (HTTP form field: \"other_files\"). Present when webhookDeliveryKind is FILE_ATTACHMENT and the file format is not PDF, CSV, or XLSX."
+          },
+          "file_attachments": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/WebhookFileAttachmentsPayload"
+              }
+            ],
+            "description": "S3 file references (HTTP form field: \"file_attachments\"). Present when webhookDeliveryKind is STORAGE. Lists each file uploaded to the customer S3 bucket with its upload status and metadata."
+          }
+        }
+      },
+      "WebhookDeliveryKind": {
+        "type": "string",
+        "description": "Identifies which of the two delivery modes a LIVEBOARD_SCHEDULE webhook payload uses. FILE_ATTACHMENT: multipart/form-data with one JSON part (\"payload\") and one binary file part. STORAGE: multipart/form-data with two JSON parts (\"payload\" and \"file_attachments\"); files are already stored in the customer S3 bucket — no binary data is sent to the endpoint.",
+        "enum": [
+          "FILE_ATTACHMENT",
+          "STORAGE"
+        ]
+      },
       "WebhookLiveboardPayload": {
         "type": "object",
         "description": "Top-level payload delivered by ThoughtSpot to the configured webhook endpoint when a LIVEBOARD_SCHEDULE event fires. Sent as an HTTP POST with Content-Type: application/json.",
@@ -21927,48 +21992,6 @@
           }
         }
       },
-      "WebhookLiveboardMultipartPayload": {
-        "type": "object",
-        "description": "Multipart/form-data payload delivered by ThoughtSpot when a LIVEBOARD_SCHEDULE event includes file attachments. Content-Type is multipart/form-data. The request contains a \"payload\" form field with the JSON payload and one or more file form fields (pdf_files, csv_files, xlsx_files, other_files). When there are no attachments, ThoughtSpot sends application/json (WebhookLiveboardPayload) instead.",
-        "properties": {
-          "payload": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/WebhookLiveboardPayload"
-              }
-            ],
-            "description": "JSON part of the multipart request (form field name: \"payload\"). Contains the same structured payload as a JSON-only delivery."
-          },
-          "pdf_files": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/WebhookFileAttachment"
-            },
-            "description": "PDF file attachments (form field name: \"pdf_files\"). Present when the schedule file format is PDF. Content-Type: application/pdf."
-          },
-          "csv_files": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/WebhookFileAttachment"
-            },
-            "description": "CSV file attachments (form field name: \"csv_files\"). Present when the schedule file format is CSV. Content-Type: text/csv."
-          },
-          "xlsx_files": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/WebhookFileAttachment"
-            },
-            "description": "Excel file attachments (form field name: \"xlsx_files\"). Present when the schedule file format is XLSX. Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet."
-          },
-          "other_files": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/WebhookFileAttachment"
-            },
-            "description": "Fallback file attachments for any format not matched above (form field name: \"other_files\")."
-          }
-        }
-      },
       "WebhookFileAttachment": {
         "type": "object",
         "description": "A single file attachment within a webhook multipart delivery.",
@@ -21996,32 +22019,6 @@
             "type": "string",
             "format": "binary",
             "description": "Binary content of the file. In the actual HTTP request this is the raw bytes of the multipart form part; in SDK models it is represented as a byte array or stream."
-          }
-        }
-      },
-      "WebhookLiveboardStorageMultipartPayload": {
-        "type": "object",
-        "description": "Multipart/form-data payload with two JSON parts delivered when a LIVEBOARD_SCHEDULE webhook has a customer-managed storage destination (S3) configured. ThoughtSpot uploads the attachments to the customer's S3 bucket first, then sends only the file references via the webhook — no binary data is delivered to the endpoint. Content-Type is multipart/form-data with two JSON form fields: \"payload\" and \"file_attachments\". Used instead of WebhookLiveboardMultipartPayload when storage_destination is set on the webhook.",
-        "required": [
-          "payload",
-          "file_attachments"
-        ],
-        "properties": {
-          "payload": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/WebhookLiveboardPayload"
-              }
-            ],
-            "description": "Structured event payload (form field name: \"payload\"). Contains the same fields as a JSON-only delivery."
-          },
-          "file_attachments": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/WebhookFileAttachmentsPayload"
-              }
-            ],
-            "description": "S3 file reference metadata (form field name: \"file_attachments\"). Lists each file uploaded to the customer's S3 bucket with its upload status. Contains an empty files list and a non-empty error field when upload failed entirely."
           }
         }
       },
