@@ -12366,6 +12366,136 @@
         }
       }
     },
+    "/api/rest/2.0/webhooks/storage-config": {
+      "get": {
+        "operationId": "getWebhookStorageConfig",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\nReturns the cluster-level storage configuration required to set up cross-account access to a customer-managed S3 bucket for webhook payload delivery. The response contains ThoughtSpot's identity information and an IAM trust policy template that the customer must attach to their IAM role.\n\nThe response shape depends on the ThoughtSpot cluster type:\n- **AWS clusters**: `s3_config.thoughtspot_aws_account_id` is populated. Use this to configure STS AssumeRole cross-account access.\n- **GCP clusters**: `s3_config.thoughtspot_gcp_service_account_id` and `s3_config.oidc_provider` are populated. Use these to configure STS AssumeRoleWithWebIdentity access via OIDC federation.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Webhooks",
+          "26.6.0.cl"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Storage setup information retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StorageSetupInfo"
+                },
+                "examples": {
+                  "example_aws": {
+                    "description": "Storage config for an AWS cluster — use thoughtspot_aws_account_id to set up STS AssumeRole cross-account access",
+                    "value": {
+                      "s3_config": {
+                        "thoughtspot_aws_account_id": "123456789012",
+                        "trust_policy_template": {
+                          "Version": "2012-10-17",
+                          "Statement": [
+                            {
+                              "Effect": "Allow",
+                              "Principal": {
+                                "AWS": "arn:aws:iam::123456789012:root"
+                              },
+                              "Action": "sts:AssumeRole",
+                              "Condition": {
+                                "StringEquals": {
+                                  "sts:ExternalId": "your-external-id"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "setup_instructions": [
+                          "1. Create an IAM role in your AWS account",
+                          "2. Attach the trust policy template to the role",
+                          "3. Attach S3 permissions (s3:PutObject, s3:PutObjectAcl)",
+                          "4. Use the role ARN in webhook storage configuration"
+                        ]
+                      }
+                    }
+                  },
+                  "example_gcp": {
+                    "description": "Storage config for a GCP cluster — use thoughtspot_gcp_service_account_id to set up STS AssumeRoleWithWebIdentity cross-account access",
+                    "value": {
+                      "s3_config": {
+                        "thoughtspot_gcp_service_account_id": "112233445566778899001",
+                        "oidc_provider": "accounts.google.com",
+                        "trust_policy_template": {
+                          "Version": "2012-10-17",
+                          "Statement": [
+                            {
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Federated": "arn:aws:iam::123456789012:oidc-provider/accounts.google.com"
+                              },
+                              "Action": "sts:AssumeRoleWithWebIdentity",
+                              "Condition": {
+                                "StringEquals": {
+                                  "accounts.google.com:aud": "112233445566778899001",
+                                  "accounts.google.com:sub": "112233445566778899001"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "setup_instructions": [
+                          "1. Add accounts.google.com as an Identity Provider in AWS IAM",
+                          "2. Create an IAM role with Web Identity Federation trust",
+                          "3. Configure the trust policy with ThoughtSpot's GCP service account ID",
+                          "4. Attach S3 permissions (s3:PutObject, s3:PutObjectAcl)",
+                          "5. Use the role ARN in webhook storage configuration"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/webhooks/search": {
       "post": {
         "operationId": "searchWebhookConfigurations",
@@ -16604,6 +16734,53 @@
             "nullable": true
           }
         }
+      },
+      "StorageSetupInfo": {
+        "type": "object",
+        "properties": {
+          "s3_config": {
+            "$ref": "#/components/schemas/S3StorageSetupConfig",
+            "description": "S3 storage setup configuration. Populated for both AWS and GCP clusters.\nFor AWS clusters, thoughtspot_aws_account_id is populated.\nFor GCP clusters, thoughtspot_gcp_service_account_id and oidc_provider are populated.",
+            "nullable": true
+          }
+        },
+        "description": "Storage setup information for configuring cross-account access to customer-managed storage."
+      },
+      "S3StorageSetupConfig": {
+        "type": "object",
+        "required": [
+          "trust_policy_template",
+          "setup_instructions"
+        ],
+        "properties": {
+          "thoughtspot_aws_account_id": {
+            "type": "string",
+            "description": "ThoughtSpot's AWS account ID to use in the trust policy.\nPopulated for AWS clusters.",
+            "nullable": true
+          },
+          "thoughtspot_gcp_service_account_id": {
+            "type": "string",
+            "description": "ThoughtSpot's GCP service account ID for workload identity federation.\nPopulated for GCP clusters.",
+            "nullable": true
+          },
+          "oidc_provider": {
+            "type": "string",
+            "description": "OIDC provider URL for GCP workload identity federation.\nPopulated for GCP clusters.",
+            "nullable": true
+          },
+          "trust_policy_template": {
+            "type": "object",
+            "description": "IAM trust policy template to attach to the cross-account role."
+          },
+          "setup_instructions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Step-by-step instructions for configuring storage access."
+          }
+        },
+        "description": "S3 storage setup configuration containing ThoughtSpot-managed fields\nrequired for cross-account storage access setup."
       },
       "WebhookSortOptionsInput": {
         "type": "object",
