@@ -21650,6 +21650,651 @@
         },
         "description": "List of runtime parameters need to set during the session."
       },
+      "WebhookLiveboardDelivery": {
+        "type": "object",
+        "description": "Single entry point for all LIVEBOARD_SCHEDULE webhook event payloads. ThoughtSpot selects the delivery kind automatically based on webhook configuration.\n\n**KIND 1 — FILE_ATTACHMENT** (webhookDeliveryKind: FILE_ATTACHMENT): Sent as multipart/form-data. The \"payload\" form field carries the JSON event data; exactly one of pdf_files, csv_files, xlsx_files, or other_files carries the binary attachment.\n\n**KIND 2 — STORAGE** (webhookDeliveryKind: STORAGE): Sent as multipart/form-data with two JSON parts. ThoughtSpot uploads files to the customer S3 bucket first, then sends \"payload\" (JSON event data) and \"file_attachments\" (S3 object references). No binary data is delivered to the endpoint.",
+        "required": [
+          "webhookDeliveryKind",
+          "payload"
+        ],
+        "properties": {
+          "webhookDeliveryKind": {
+            "$ref": "#/components/schemas/WebhookDeliveryKind"
+          },
+          "payload": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/WebhookLiveboardPayload"
+              }
+            ],
+            "description": "The structured event data. Always present. HTTP form field name: \"payload\"."
+          },
+          "pdf_files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WebhookFileAttachment"
+            },
+            "description": "PDF file attachments (HTTP form field: \"pdf_files\", Content-Type: application/pdf). Present when webhookDeliveryKind is FILE_ATTACHMENT and the schedule file format is PDF."
+          },
+          "csv_files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WebhookFileAttachment"
+            },
+            "description": "CSV file attachments (HTTP form field: \"csv_files\", Content-Type: text/csv). Present when webhookDeliveryKind is FILE_ATTACHMENT and the schedule file format is CSV."
+          },
+          "xlsx_files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WebhookFileAttachment"
+            },
+            "description": "Excel file attachments (HTTP form field: \"xlsx_files\", Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet). Present when webhookDeliveryKind is FILE_ATTACHMENT and the schedule file format is XLSX."
+          },
+          "other_files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WebhookFileAttachment"
+            },
+            "description": "Fallback file attachments for unrecognised extensions (HTTP form field: \"other_files\"). Present when webhookDeliveryKind is FILE_ATTACHMENT and the file format is not PDF, CSV, or XLSX."
+          },
+          "file_attachments": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/WebhookFileAttachmentsPayload"
+              }
+            ],
+            "description": "S3 file references (HTTP form field: \"file_attachments\"). Present when webhookDeliveryKind is STORAGE. Lists each file uploaded to the customer S3 bucket with its upload status and metadata."
+          }
+        }
+      },
+      "WebhookDeliveryKind": {
+        "type": "string",
+        "description": "Identifies which of the two delivery modes a LIVEBOARD_SCHEDULE webhook payload uses. FILE_ATTACHMENT: multipart/form-data with one JSON part (\"payload\") and one binary file part. STORAGE: multipart/form-data with two JSON parts (\"payload\" and \"file_attachments\"); files are already stored in the customer S3 bucket — no binary data is sent to the endpoint.",
+        "enum": [
+          "FILE_ATTACHMENT",
+          "STORAGE"
+        ]
+      },
+      "WebhookLiveboardPayload": {
+        "type": "object",
+        "description": "Top-level payload delivered by ThoughtSpot to the configured webhook endpoint when a LIVEBOARD_SCHEDULE event fires. Sent as an HTTP POST with Content-Type: application/json.",
+        "required": [
+          "eventId",
+          "timestamp",
+          "eventType",
+          "schemaVersion",
+          "source",
+          "actor",
+          "metadataObject",
+          "data"
+        ],
+        "properties": {
+          "eventId": {
+            "type": "string",
+            "description": "Unique identifier for this webhook delivery attempt."
+          },
+          "timestamp": {
+            "type": "string",
+            "description": "ISO 8601 timestamp of when the event was generated.",
+            "example": "2025-04-10T12:00:00Z"
+          },
+          "eventType": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD_SCHEDULE"
+            ],
+            "description": "Type of event that triggered this webhook delivery."
+          },
+          "schemaVersion": {
+            "type": "string",
+            "description": "Schema version of this payload format.",
+            "example": "1.0"
+          },
+          "source": {
+            "$ref": "#/components/schemas/WebhookPayloadSource"
+          },
+          "actor": {
+            "$ref": "#/components/schemas/WebhookPayloadActor"
+          },
+          "metadataObject": {
+            "$ref": "#/components/schemas/WebhookPayloadMetadataObject"
+          },
+          "data": {
+            "$ref": "#/components/schemas/WebhookLiveboardScheduleData"
+          },
+          "unsubscribeUrl": {
+            "type": "string",
+            "nullable": true,
+            "description": "URL to manage notification preferences. Present for end-user-facing events."
+          }
+        }
+      },
+      "WebhookPayloadSource": {
+        "type": "object",
+        "description": "Source information identifying the ThoughtSpot instance that generated the event.",
+        "required": [
+          "applicationName",
+          "instanceId",
+          "orgId"
+        ],
+        "properties": {
+          "applicationName": {
+            "type": "string",
+            "description": "Name of the application. Always \"ThoughtSpot\".",
+            "example": "ThoughtSpot"
+          },
+          "applicationUrl": {
+            "type": "string",
+            "nullable": true,
+            "description": "Base URL of the ThoughtSpot instance.",
+            "example": "https://mycompany.thoughtspot.cloud"
+          },
+          "instanceId": {
+            "type": "string",
+            "description": "Unique identifier of the ThoughtSpot instance (cluster or deployment ID)."
+          },
+          "orgId": {
+            "type": "string",
+            "description": "Unique identifier of the organization within ThoughtSpot that owns the event."
+          }
+        }
+      },
+      "WebhookPayloadActor": {
+        "type": "object",
+        "description": "Information about the entity that initiated the webhook event. For scheduled Liveboard deliveries, actorType is always SYSTEM and id, name, and email are omitted.",
+        "required": [
+          "actorType"
+        ],
+        "properties": {
+          "actorType": {
+            "type": "string",
+            "description": "Type of actor. One of: USER, SYSTEM, API_CLIENT.",
+            "enum": [
+              "USER",
+              "SYSTEM",
+              "API_CLIENT"
+            ],
+            "example": "SYSTEM"
+          },
+          "id": {
+            "type": "string",
+            "nullable": true,
+            "description": "Unique identifier (GUID) of the actor. Omitted for SYSTEM actors."
+          },
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "description": "Display name of the actor. Omitted for SYSTEM actors."
+          },
+          "email": {
+            "type": "string",
+            "nullable": true,
+            "description": "Email address of the actor. Omitted for SYSTEM actors."
+          }
+        }
+      },
+      "WebhookPayloadMetadataObject": {
+        "type": "object",
+        "description": "The primary ThoughtSpot metadata object associated with the event. For LIVEBOARD_SCHEDULE events, this is always the scheduled Liveboard.",
+        "required": [
+          "objectType",
+          "name",
+          "url"
+        ],
+        "properties": {
+          "objectType": {
+            "type": "string",
+            "description": "Type of the metadata object. For LIVEBOARD_SCHEDULE events, always \"LIVEBOARD\".",
+            "example": "LIVEBOARD"
+          },
+          "id": {
+            "type": "string",
+            "nullable": true,
+            "description": "Unique identifier (GUID) of the metadata object."
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the metadata object."
+          },
+          "url": {
+            "type": "string",
+            "description": "Direct URL to the metadata object within ThoughtSpot."
+          }
+        }
+      },
+      "WebhookLiveboardScheduleData": {
+        "type": "object",
+        "description": "Event-specific data payload for LIVEBOARD_SCHEDULE webhook events.",
+        "required": [
+          "scheduleDetails",
+          "recipients"
+        ],
+        "properties": {
+          "scheduleDetails": {
+            "$ref": "#/components/schemas/WebhookScheduleDetails"
+          },
+          "recipients": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WebhookScheduleRecipient"
+            },
+            "description": "List of all recipients for this schedule delivery."
+          },
+          "aiHighlights": {
+            "type": "string",
+            "nullable": true,
+            "description": "AI-generated highlights for the Liveboard content, if available."
+          },
+          "msgUniqueId": {
+            "type": "string",
+            "nullable": true,
+            "description": "Idempotency key used to deduplicate deliveries for the same schedule run."
+          },
+          "channelID": {
+            "type": "string",
+            "nullable": true,
+            "description": "Internal identifier for the delivery channel."
+          },
+          "channelType": {
+            "type": "string",
+            "nullable": true,
+            "description": "Type of the delivery channel (e.g., \"WEBHOOK\").",
+            "example": "WEBHOOK"
+          },
+          "communicationType": {
+            "type": "string",
+            "nullable": true,
+            "description": "Internal communication type identifier (e.g., \"LiveboardSchedules\").",
+            "example": "LiveboardSchedules"
+          },
+          "viewInfo": {
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/WebhookLiveboardViewInfo"
+              }
+            ],
+            "description": "Personalized Liveboard view information, present when the schedule targets a specific saved view."
+          }
+        }
+      },
+      "WebhookScheduleDetails": {
+        "type": "object",
+        "description": "Configuration and run-time details of the Liveboard schedule that triggered the webhook event.",
+        "required": [
+          "scheduleId",
+          "name"
+        ],
+        "properties": {
+          "scheduleId": {
+            "type": "string",
+            "description": "Unique identifier (GUID) of the schedule."
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the schedule."
+          },
+          "frequency": {
+            "type": "object",
+            "nullable": true,
+            "description": "Frequency configuration of the schedule (cron expression or interval object)."
+          },
+          "creationTime": {
+            "type": "string",
+            "nullable": true,
+            "description": "ISO 8601 timestamp of when the schedule was created.",
+            "example": "2025-01-15T08:00:00Z"
+          },
+          "timezone": {
+            "type": "string",
+            "nullable": true,
+            "description": "Timezone for the schedule (e.g., \"America/Los_Angeles\", \"Etc/UTC\").",
+            "example": "America/Los_Angeles"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true,
+            "description": "Description of the schedule."
+          },
+          "authorId": {
+            "type": "string",
+            "nullable": true,
+            "description": "Unique identifier (GUID) of the user who created the schedule."
+          },
+          "gatingFunction": {
+            "type": "string",
+            "nullable": true,
+            "description": "Gating function applied to the schedule, if configured."
+          },
+          "useCustomEmbedUrls": {
+            "type": "string",
+            "nullable": true,
+            "description": "Whether the schedule uses custom embed URLs for Liveboard links."
+          },
+          "userIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "List of ThoughtSpot user GUIDs explicitly added as recipients."
+          },
+          "groupIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "List of ThoughtSpot group GUIDs explicitly added as recipients."
+          },
+          "runId": {
+            "type": "string",
+            "nullable": true,
+            "description": "Unique identifier for this specific execution (run) of the schedule."
+          },
+          "exportRequest": {
+            "type": "object",
+            "nullable": true,
+            "description": "Export configuration for the schedule. Contains rendering settings and visualization selection. Key fields: object_type, liveboard_params (layout_type, liveboard_viz_selection, print_document_params), pdf_params (page_size, orientation), request_type.",
+            "properties": {
+              "object_type": {
+                "type": "string",
+                "description": "Type of the exported object (e.g., \"LIVEBOARD\").",
+                "example": "LIVEBOARD"
+              },
+              "pdf_params": {
+                "type": "object",
+                "nullable": true,
+                "description": "PDF rendering parameters.",
+                "properties": {
+                  "page_size": {
+                    "type": "string",
+                    "example": "A4"
+                  },
+                  "orientation": {
+                    "type": "string",
+                    "example": "LANDSCAPE"
+                  }
+                }
+              },
+              "liveboard_params": {
+                "type": "object",
+                "nullable": true,
+                "description": "Liveboard-specific export parameters.",
+                "properties": {
+                  "layout_type": {
+                    "type": "string",
+                    "example": "LIVEBOARD"
+                  },
+                  "visualization_format_options": {
+                    "type": "object",
+                    "properties": {
+                      "truncate_tables": {
+                        "type": "boolean"
+                      }
+                    }
+                  },
+                  "print_document_params": {
+                    "type": "object",
+                    "properties": {
+                      "include_cover_page": {
+                        "type": "boolean"
+                      },
+                      "include_filter_page": {
+                        "type": "boolean"
+                      },
+                      "pageFooterParams": {
+                        "type": "object",
+                        "properties": {
+                          "include_logo": {
+                            "type": "boolean"
+                          },
+                          "include_page_number": {
+                            "type": "boolean"
+                          },
+                          "text": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "liveboard_viz_selection": {
+                    "type": "object",
+                    "properties": {
+                      "complete_liveboard": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                }
+              },
+              "request_type": {
+                "type": "string",
+                "description": "Type of export request.",
+                "example": "SCHEDULE"
+              }
+            }
+          },
+          "fileFormat": {
+            "type": "string",
+            "nullable": true,
+            "description": "File format for the exported attachment.",
+            "enum": [
+              "PDF",
+              "CSV",
+              "XLSX",
+              "PNG"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "nullable": true,
+            "description": "Current status of this schedule run.",
+            "example": "SCHEDULED"
+          },
+          "emailIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "List of external (non-ThoughtSpot) email addresses receiving this schedule."
+          },
+          "viewInfo": {
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/WebhookLiveboardViewInfo"
+              }
+            ],
+            "description": "Personalized view information when the schedule targets a specific Liveboard view."
+          }
+        }
+      },
+      "WebhookScheduleRecipient": {
+        "type": "object",
+        "description": "A recipient for a Liveboard schedule webhook delivery.",
+        "required": [
+          "type",
+          "email"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Type of recipient.",
+            "enum": [
+              "USER",
+              "GROUP",
+              "EXTERNAL_EMAIL"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "nullable": true,
+            "description": "Unique identifier (GUID) of the recipient. Present for USER and GROUP recipients."
+          },
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "description": "Display name of the recipient. Present for USER and GROUP recipients."
+          },
+          "email": {
+            "type": "string",
+            "description": "Email address of the recipient."
+          },
+          "memberEmails": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "Email addresses of group members. Present when recipient type is GROUP."
+          }
+        }
+      },
+      "WebhookLiveboardViewInfo": {
+        "type": "object",
+        "description": "Personalized Liveboard view associated with a schedule. Present only when the schedule targets a specific saved view of the Liveboard.",
+        "required": [
+          "viewName",
+          "viewId"
+        ],
+        "properties": {
+          "viewName": {
+            "type": "string",
+            "description": "Display name of the personalized Liveboard view."
+          },
+          "viewId": {
+            "type": "string",
+            "description": "Unique identifier (GUID) of the personalized Liveboard view."
+          }
+        }
+      },
+      "WebhookFileAttachment": {
+        "type": "object",
+        "description": "A single file attachment within a webhook multipart delivery.",
+        "required": [
+          "filename",
+          "contentType"
+        ],
+        "properties": {
+          "filename": {
+            "type": "string",
+            "description": "Original filename of the attachment.",
+            "example": "Quarterly_Sales.pdf"
+          },
+          "contentType": {
+            "type": "string",
+            "description": "MIME type of the attachment content.",
+            "enum": [
+              "application/pdf",
+              "text/csv",
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            ],
+            "example": "application/pdf"
+          },
+          "content": {
+            "type": "string",
+            "format": "binary",
+            "description": "Binary content of the file. In the actual HTTP request this is the raw bytes of the multipart form part; in SDK models it is represented as a byte array or stream."
+          }
+        }
+      },
+      "WebhookFileAttachmentsPayload": {
+        "type": "object",
+        "description": "The \"file_attachments\" JSON part of a customer-storage multipart webhook delivery. Contains S3 object references for every file that was (or should have been) uploaded to the customer's bucket, plus an optional top-level error on complete upload failure.",
+        "required": [
+          "files"
+        ],
+        "properties": {
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WebhookS3FileReference"
+            },
+            "description": "List of file references. Each entry corresponds to one schedule attachment. uploadStatus indicates whether that individual file was uploaded successfully. May be empty when a critical upload error prevented all uploads."
+          },
+          "error": {
+            "type": "string",
+            "nullable": true,
+            "description": "Top-level error message set when the cloud storage upload failed entirely. Empty on full success; may be non-empty even when some files succeeded (partial failure).",
+            "example": "cloud storage upload failed: failed to assume role: AccessDenied"
+          }
+        }
+      },
+      "WebhookS3FileReference": {
+        "type": "object",
+        "description": "Reference to a single file uploaded (or attempted) to the customer's S3 bucket as part of a LIVEBOARD_SCHEDULE webhook delivery.",
+        "required": [
+          "filename",
+          "contentType",
+          "size",
+          "provider",
+          "uploadStatus"
+        ],
+        "properties": {
+          "filename": {
+            "type": "string",
+            "description": "Original filename of the attachment.",
+            "example": "Quarterly_Sales.pdf"
+          },
+          "contentType": {
+            "type": "string",
+            "description": "MIME type of the file.",
+            "example": "application/pdf"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Size of the file in bytes."
+          },
+          "provider": {
+            "type": "string",
+            "description": "Storage provider. Currently always \"AWS_S3\".",
+            "enum": [
+              "AWS_S3"
+            ]
+          },
+          "bucketName": {
+            "type": "string",
+            "nullable": true,
+            "description": "Name of the customer's S3 bucket. Omitted when upload failed.",
+            "example": "my-webhook-files"
+          },
+          "region": {
+            "type": "string",
+            "nullable": true,
+            "description": "AWS region of the S3 bucket. Omitted when upload failed.",
+            "example": "us-west-2"
+          },
+          "objectKey": {
+            "type": "string",
+            "nullable": true,
+            "description": "Full object key (path) of the file within the S3 bucket. Omitted when upload failed.",
+            "example": "thoughtspot-webhooks/org-0/liveboard-schedules/sched-id/run-id/Quarterly_Sales.pdf"
+          },
+          "uploadStatus": {
+            "type": "string",
+            "enum": [
+              "SUCCESS",
+              "FAILED"
+            ],
+            "description": "Upload result for this file."
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true,
+            "description": "Error details when uploadStatus is FAILED. Omitted on success."
+          },
+          "uploadedAt": {
+            "type": "string",
+            "nullable": true,
+            "description": "ISO 8601 timestamp of when the file was uploaded. Omitted when upload failed.",
+            "example": "2025-04-10T12:00:00Z"
+          }
+        }
+      },
       "CreateAgentConversationRequest": {
         "type": "object",
         "properties": {
