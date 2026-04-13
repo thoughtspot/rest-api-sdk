@@ -18113,7 +18113,6 @@
               "OIDC_USER",
               "REMOTE_USER"
             ],
-            "default": "LOCAL_USER",
             "description": "Type of the user account.",
             "nullable": true
           },
@@ -18127,7 +18126,6 @@
               "PENDING",
               "SUSPENDED"
             ],
-            "default": "ACTIVE",
             "description": "Status of the user account.",
             "nullable": true
           },
