@@ -13902,7 +13902,6 @@ components:
           nullable: true
           type: string
         account_type:
-          default: LOCAL_USER
           description: Type of the user account.
           enum:
           - LOCAL_USER
@@ -13913,7 +13912,6 @@ components:
           nullable: true
           type: string
         account_status:
-          default: ACTIVE
           description: Status of the user account.
           enum:
           - ACTIVE
