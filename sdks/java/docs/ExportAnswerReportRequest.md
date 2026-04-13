@@ -17,6 +17,7 @@
 |**regionalSettings** | [**RegionalSettingsInput**](RegionalSettingsInput.md) | Options for specific region specific overrides to support date/number/string/currency formatting. |  [optional] |
 |**pngOptions** | [**AnswerPngOptionsInput**](AnswerPngOptionsInput.md) | Options for PNG export.   Version: 26.6.0.cl or later  |  [optional] |
 |**personalisedViewIdentifier** | **String** | GUID or name of the personalised view of the Answer object.   Version: 26.6.0.cl or later  |  [optional] |
+|**type** | [**TypeEnum**](#TypeEnum) | Type of the answer being exported.   Version: 26.6.0.cl or later  |  [optional] |
 
 
 
@@ -28,6 +29,15 @@
 | PDF | &quot;PDF&quot; |
 | XLSX | &quot;XLSX&quot; |
 | PNG | &quot;PNG&quot; |
+
+
+
+## Enum: TypeEnum
+
+| Name | Value |
+|---- | -----|
+| SAVED | &quot;SAVED&quot; |
+| PINNED | &quot;PINNED&quot; |
 
 
 ## Implemented Interfaces

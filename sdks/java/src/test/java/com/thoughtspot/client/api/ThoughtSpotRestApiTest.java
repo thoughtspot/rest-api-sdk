@@ -1174,11 +1174,14 @@ public class ThoughtSpotRestApiTest {
     /**
      * Version: 9.0.0.cl or later Exports an Answer in the given file format. You can download the
      * Answer data as a PDF, PNG, CSV, or XLSX file. Requires at least view access to the Answer.
-     * #### Usage guidelines In the request body, the GUID or name of the Answer and set
-     * &#x60;file_format&#x60;. The default file format is CSV. **NOTE**: * The downloadable file
-     * returned in API response file is extensionless. Please rename the downloaded file by typing
-     * in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with
-     * tables. Optionally, you can define [runtime
+     * #### Usage guidelines In the request body, specify the GUID or name of the Answer and set
+     * &#x60;file_format&#x60;. The default file format is CSV. Use the &#x60;type&#x60; parameter
+     * to specify whether the Answer being exported is a saved Answer (&#x60;SAVED&#x60;) or a
+     * pinned Answer on a Liveboard (&#x60;PINNED&#x60;). Defaults to &#x60;SAVED&#x60;. When using
+     * &#x60;PINNED&#x60;, the &#x60;metadata_identifier&#x60; must be the container id. **NOTE**: *
+     * The downloadable file returned in API response file is extensionless. Please rename the
+     * downloaded file by typing in the relevant extension. * HTML rendering is not supported for
+     * PDF exports of Answers with tables. Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
      * to apply to the Answer data.
      *

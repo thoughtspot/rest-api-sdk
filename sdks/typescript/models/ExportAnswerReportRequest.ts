@@ -49,6 +49,10 @@ export class ExportAnswerReportRequest {
     * GUID or name of the personalised view of the Answer object.   Version: 26.6.0.cl or later 
     */
     'personalised_view_identifier'?: string;
+    /**
+    * Type of the answer being exported.   Version: 26.6.0.cl or later 
+    */
+    'type'?: ExportAnswerReportRequestTypeEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -112,6 +116,12 @@ export class ExportAnswerReportRequest {
             "baseName": "personalised_view_identifier",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "type",
+            "baseName": "type",
+            "type": "ExportAnswerReportRequestTypeEnum",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -124,4 +134,5 @@ export class ExportAnswerReportRequest {
 
 
 export type ExportAnswerReportRequestFileFormatEnum = "CSV" | "PDF" | "XLSX" | "PNG" ;
+export type ExportAnswerReportRequestTypeEnum = "SAVED" | "PINNED" ;
 

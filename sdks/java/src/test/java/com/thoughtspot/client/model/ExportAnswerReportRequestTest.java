@@ -75,4 +75,10 @@ public class ExportAnswerReportRequestTest {
     public void personalisedViewIdentifierTest() {
         // TODO: test personalisedViewIdentifier
     }
+
+    /** Test the property 'type' */
+    @Test
+    public void typeTest() {
+        // TODO: test type
+    }
 }

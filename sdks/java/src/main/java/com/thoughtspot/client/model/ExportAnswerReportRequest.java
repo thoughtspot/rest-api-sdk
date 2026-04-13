@@ -146,6 +146,63 @@ public class ExportAnswerReportRequest implements Serializable {
     @javax.annotation.Nullable
     private String personalisedViewIdentifier;
 
+    /** Type of the answer being exported. Version: 26.6.0.cl or later */
+    @JsonAdapter(TypeEnum.Adapter.class)
+    public enum TypeEnum {
+        SAVED("SAVED"),
+
+        PINNED("PINNED");
+
+        private String value;
+
+        TypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        public static TypeEnum fromValue(String value) {
+            for (TypeEnum b : TypeEnum.values()) {
+                if (b.value.equals(value)) {
+                    return b;
+                }
+            }
+            throw new IllegalArgumentException("Unexpected value '" + value + "'");
+        }
+
+        public static class Adapter extends TypeAdapter<TypeEnum> {
+            @Override
+            public void write(final JsonWriter jsonWriter, final TypeEnum enumeration)
+                    throws IOException {
+                jsonWriter.value(enumeration.getValue());
+            }
+
+            @Override
+            public TypeEnum read(final JsonReader jsonReader) throws IOException {
+                String value = jsonReader.nextString();
+                return TypeEnum.fromValue(value);
+            }
+        }
+
+        public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+            String value = jsonElement.getAsString();
+            TypeEnum.fromValue(value);
+        }
+    }
+
+    public static final String SERIALIZED_NAME_TYPE = "type";
+
+    @SerializedName(SERIALIZED_NAME_TYPE)
+    @javax.annotation.Nullable
+    private TypeEnum type = TypeEnum.SAVED;
+
     public ExportAnswerReportRequest() {}
 
     public ExportAnswerReportRequest metadataIdentifier(
@@ -350,6 +407,25 @@ public class ExportAnswerReportRequest implements Serializable {
         this.personalisedViewIdentifier = personalisedViewIdentifier;
     }
 
+    public ExportAnswerReportRequest type(@javax.annotation.Nullable TypeEnum type) {
+        this.type = type;
+        return this;
+    }
+
+    /**
+     * Type of the answer being exported. Version: 26.6.0.cl or later
+     *
+     * @return type
+     */
+    @javax.annotation.Nullable
+    public TypeEnum getType() {
+        return type;
+    }
+
+    public void setType(@javax.annotation.Nullable TypeEnum type) {
+        this.type = type;
+    }
+
     /**
      * A container for additional, undeclared properties. This is a holder for any undeclared
      * properties as specified with the 'additionalProperties' keyword in the OAS document.
@@ -417,6 +493,7 @@ public class ExportAnswerReportRequest implements Serializable {
                 && Objects.equals(
                         this.personalisedViewIdentifier,
                         exportAnswerReportRequest.personalisedViewIdentifier)
+                && Objects.equals(this.type, exportAnswerReportRequest.type)
                 && Objects.equals(
                         this.additionalProperties, exportAnswerReportRequest.additionalProperties);
     }
@@ -434,6 +511,7 @@ public class ExportAnswerReportRequest implements Serializable {
                 regionalSettings,
                 pngOptions,
                 personalisedViewIdentifier,
+                type,
                 additionalProperties);
     }
 
@@ -459,6 +537,7 @@ public class ExportAnswerReportRequest implements Serializable {
         sb.append("    personalisedViewIdentifier: ")
                 .append(toIndentedString(personalisedViewIdentifier))
                 .append("\n");
+        sb.append("    type: ").append(toIndentedString(type)).append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
                 .append("\n");
@@ -493,6 +572,7 @@ public class ExportAnswerReportRequest implements Serializable {
         openapiFields.add("regional_settings");
         openapiFields.add("png_options");
         openapiFields.add("personalised_view_identifier");
+        openapiFields.add("type");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -563,6 +643,18 @@ public class ExportAnswerReportRequest implements Serializable {
                             "Expected the field `personalised_view_identifier` to be a primitive"
                                     + " type in the JSON string but got `%s`",
                             jsonObj.get("personalised_view_identifier").toString()));
+        }
+        if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull())
+                && !jsonObj.get("type").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `type` to be a primitive type in the JSON string"
+                                    + " but got `%s`",
+                            jsonObj.get("type").toString()));
+        }
+        // validate the optional field `type`
+        if (jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) {
+            TypeEnum.validateJsonElement(jsonObj.get("type"));
         }
     }
 

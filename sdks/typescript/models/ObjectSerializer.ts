@@ -600,7 +600,7 @@ import { EurekaSetNLInstructionsResponse } from '../models/EurekaSetNLInstructio
 import { EventChannelConfig, EventChannelConfigEventTypeEnum  , EventChannelConfigChannelsEnum   } from '../models/EventChannelConfig';
 import { EventChannelConfigInput, EventChannelConfigInputEventTypeEnum  , EventChannelConfigInputChannelsEnum   } from '../models/EventChannelConfigInput';
 import { ExcludeMetadataListItemInput , ExcludeMetadataListItemInputTypeEnum   } from '../models/ExcludeMetadataListItemInput';
-import { ExportAnswerReportRequest   , ExportAnswerReportRequestFileFormatEnum         } from '../models/ExportAnswerReportRequest';
+import { ExportAnswerReportRequest   , ExportAnswerReportRequestFileFormatEnum        , ExportAnswerReportRequestTypeEnum   } from '../models/ExportAnswerReportRequest';
 import { ExportAnswerReportRequestPngOptions } from '../models/ExportAnswerReportRequestPngOptions';
 import { ExportAnswerReportRequestRegionalSettings, ExportAnswerReportRequestRegionalSettingsCurrencyFormatEnum  , ExportAnswerReportRequestRegionalSettingsUserLocaleEnum  , ExportAnswerReportRequestRegionalSettingsNumberFormatLocaleEnum  , ExportAnswerReportRequestRegionalSettingsDateFormatLocaleEnum   } from '../models/ExportAnswerReportRequestRegionalSettings';
 import { ExportLiveboardReportRequest     , ExportLiveboardReportRequestFileFormatEnum          } from '../models/ExportLiveboardReportRequest';
@@ -987,6 +987,7 @@ let enumsMap: Set<string> = new Set<string>([
     "EventChannelConfigInputChannelsEnum",
     "ExcludeMetadataListItemInputTypeEnum",
     "ExportAnswerReportRequestFileFormatEnum",
+    "ExportAnswerReportRequestTypeEnum",
     "ExportAnswerReportRequestRegionalSettingsCurrencyFormatEnum",
     "ExportAnswerReportRequestRegionalSettingsUserLocaleEnum",
     "ExportAnswerReportRequestRegionalSettingsNumberFormatLocaleEnum",
