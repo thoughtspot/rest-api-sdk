@@ -54,6 +54,14 @@
       "description": "Roles for version 26.5.0.cl"
     },
     {
+      "name": "26.6.0.cl",
+      "id": "26.6.0.cl",
+      "tags": [
+        "26.6.0.cl"
+      ],
+      "description": "Roles for version 26.6.0.cl"
+    },
+    {
       "name": "9.0.0.cl",
       "id": "9.0.0.cl",
       "tags": [
@@ -108,14 +116,6 @@
         "9.9.0.cl"
       ],
       "description": "Roles for version 9.9.0.cl"
-    },
-    {
-      "name": "26.6.0.cl",
-      "id": "26.6.0.cl",
-      "tags": [
-        "26.6.0.cl"
-      ],
-      "description": "Roles for version 26.6.0.cl"
     },
     {
       "name": "9.6.0.cl",
@@ -1461,6 +1461,72 @@
         }
       }
     },
+    "/api/rest/2.0/auth/configure": {
+      "post": {
+        "operationId": "configureAuthSettings",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\nEnables or disables authentication at cluster or org level for the specified auth type. Currently supports `TRUSTED_AUTH`.\n\n#### Required privileges\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `CONTROL_TRUSTED_AUTH` (**Can Enable or Disable Trusted Authentication**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH` privilege is required.\n\n#### Usage guidelines\n\nUse `cluster_preferences` to enable or disable authentication at the cluster level. Cluster-level settings can only be configured from the Primary Org.\n- `ENABLED` — Generates a new access token if one does not exist. An existing token is preserved.\n- `DISABLED` — Revokes the existing cluster-level access token.\n\nUse `org_preferences` to enable or disable authentication for one or more Orgs. Each entry must include an `org_identifier` (unique ID or name) and an `auth_status`. Org-level configuration requires the per-Org authentication feature to be enabled on your instance.\n- `ENABLED` — Generates a new org-level access token if one does not exist.\n- `DISABLED` — Revokes the existing org-level access token for that Org.\n\nBoth `cluster_preferences` and `org_preferences` are optional. Omitting a field leaves the corresponding settings unchanged. If both are omitted, the API returns `204 No Content` without making any changes.\n\n**Note**: Cluster-level and org-level settings are independent of each other. Enabling or disabling one does not affect the other.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Authentication",
+          "26.6.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfigureAuthSettingsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Trusted authentication settings configured successfully."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/auth/session/user": {
       "get": {
         "operationId": "getCurrentUserInfo",
@@ -1953,6 +2019,108 @@
         "responses": {
           "204": {
             "description": "Token successfully revoked."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/auth/search": {
+      "post": {
+        "operationId": "searchAuthSettings",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\nReturns the authentication configuration for the specified auth type at cluster and org level. Currently supports `TRUSTED_AUTH`.\n\n#### Required privileges\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `CONTROL_TRUSTED_AUTH` (**Can Enable or Disable Trusted Authentication**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH` privilege is required.\n\n#### Usage guidelines\n\nUse `scope` to control which level of settings are returned:\n- `CLUSTER` — Returns cluster-level authentication status and access tokens. Accessible only from the Primary Org.\n- `ORG` — Returns org-level authentication status and access tokens for the current Org. Requires the per-Org authentication feature to be enabled on your instance.\n- If `scope` is omitted, both cluster and org-level settings are returned based on the caller's org context and feature availability.\n\nThe `access_tokens` array in `cluster_preferences` or `org_preferences` is omitted when no token is configured at that level.\n\n**Note**: Access tokens returned in the response are sensitive credentials. Treat them with the same care as passwords.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Authentication",
+          "26.6.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchAuthSettingsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Authentication settings retrieved successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchAuthSettingsResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "value": {
+                      "auth_type": "TRUSTED_AUTH",
+                      "cluster_preferences": {
+                        "auth_status": "ENABLED",
+                        "access_tokens": [
+                          {
+                            "key": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                          }
+                        ]
+                      },
+                      "org_preferences": [
+                        {
+                          "org": {
+                            "id": 583464508,
+                            "name": "sales_org"
+                          },
+                          "auth_status": "ENABLED",
+                          "access_tokens": [
+                            {
+                              "key": "f9e8d7c6-b5a4-3210-fedc-ba9876543210"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
           },
           "400": {
             "description": "Invalid request.",
@@ -12788,6 +12956,116 @@
           }
         }
       },
+      "SearchAuthSettingsResponse": {
+        "type": "object",
+        "properties": {
+          "auth_type": {
+            "type": "string",
+            "enum": [
+              "TRUSTED_AUTH"
+            ],
+            "description": "Type of authentication mechanism returned.",
+            "nullable": true
+          },
+          "cluster_preferences": {
+            "$ref": "#/components/schemas/AuthClusterPreferences",
+            "description": "Cluster-level authentication configuration. Present when cluster scope was requested and the caller has ADMINISTRATION or CONTROL_TRUSTED_AUTH privilege.",
+            "nullable": true
+          },
+          "org_preferences": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AuthOrgPreference"
+            },
+            "description": "Org-level authentication configurations. Present when org scope was requested and per-org auth feature is enabled.",
+            "nullable": true
+          }
+        },
+        "description": "Response for searchAuthSettings. Contains auth type and cluster/org-level preferences."
+      },
+      "AuthClusterPreferences": {
+        "type": "object",
+        "properties": {
+          "auth_status": {
+            "type": "string",
+            "enum": [
+              "ENABLED",
+              "DISABLED"
+            ],
+            "description": "Whether authentication is enabled or disabled at the cluster level.",
+            "nullable": true
+          },
+          "access_tokens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AuthSettingsAccessToken"
+            },
+            "description": "Cluster-level access tokens. Absent when no token is configured.",
+            "nullable": true
+          }
+        },
+        "description": "Cluster-level authentication preferences."
+      },
+      "AuthSettingsAccessToken": {
+        "type": "object",
+        "required": [
+          "key"
+        ],
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "The plaintext token key value."
+          }
+        },
+        "description": "An auth settings access token."
+      },
+      "AuthOrgPreference": {
+        "type": "object",
+        "properties": {
+          "org": {
+            "$ref": "#/components/schemas/AuthOrgInfo",
+            "description": "Org identifier details.",
+            "nullable": true
+          },
+          "auth_status": {
+            "type": "string",
+            "enum": [
+              "ENABLED",
+              "DISABLED"
+            ],
+            "description": "Whether authentication is enabled or disabled for this org.",
+            "nullable": true
+          },
+          "access_tokens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AuthSettingsAccessToken"
+            },
+            "description": "Org-level access tokens. Absent when no token is configured or the feature flag is off.",
+            "nullable": true
+          }
+        },
+        "description": "Org-level authentication preferences for a single org."
+      },
+      "AuthOrgInfo": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Unique identifier of the org."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the org.",
+            "nullable": true
+          }
+        },
+        "description": "Org identifier returned in auth settings search results."
+      },
       "RiseSetter": {
         "type": "object",
         "required": [
@@ -13513,6 +13791,15 @@
             "$ref": "#/components/schemas/ClusterNonEmbedAccess",
             "description": "Non-embed access configuration at cluster level.",
             "nullable": true
+          },
+          "trusted_auth_status": {
+            "type": "string",
+            "enum": [
+              "ENABLED",
+              "DISABLED"
+            ],
+            "description": "Trusted authentication status at the cluster level. <br/>  <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
+            "nullable": true
           }
         },
         "description": "Cluster-level security preferences."
@@ -13649,6 +13936,15 @@
           "non_embed_access": {
             "$ref": "#/components/schemas/OrgNonEmbedAccess",
             "description": "Non-embed access configuration for this org.",
+            "nullable": true
+          },
+          "trusted_auth_status": {
+            "type": "string",
+            "enum": [
+              "ENABLED",
+              "DISABLED"
+            ],
+            "description": "Trusted authentication status for this org. <br/>  <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
             "nullable": true
           }
         },
@@ -18073,6 +18369,43 @@
           }
         }
       },
+      "AuthClusterPreferencesInput": {
+        "type": "object",
+        "properties": {
+          "auth_status": {
+            "type": "string",
+            "enum": [
+              "ENABLED",
+              "DISABLED"
+            ],
+            "description": "Enable or disable authentication at the cluster level. When enabled, a new token is generated if one does not exist. When disabled, the existing token is revoked.",
+            "nullable": true
+          }
+        },
+        "description": "Input for cluster-level auth configuration."
+      },
+      "AuthOrgPreferenceInput": {
+        "type": "object",
+        "required": [
+          "org_identifier"
+        ],
+        "properties": {
+          "org_identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the org to configure."
+          },
+          "auth_status": {
+            "type": "string",
+            "enum": [
+              "ENABLED",
+              "DISABLED"
+            ],
+            "description": "Enable or disable authentication for this org. When enabled, a new token is generated if one does not exist. When disabled, the existing token is revoked.",
+            "nullable": true
+          }
+        },
+        "description": "Input for org-level auth configuration."
+      },
       "ResponseActivationURL": {
         "type": "object",
         "properties": {
@@ -21921,6 +22254,36 @@
           "metadata_identifier"
         ]
       },
+      "ConfigureAuthSettingsRequest": {
+        "type": "object",
+        "properties": {
+          "auth_type": {
+            "description": "Type of authentication mechanism to configure. Currently supports TRUSTED_AUTH.",
+            "type": "string",
+            "enum": [
+              "TRUSTED_AUTH"
+            ]
+          },
+          "cluster_preferences": {
+            "description": "Cluster-level authentication preferences. Omit to leave the existing cluster setting unchanged.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AuthClusterPreferencesInput"
+              }
+            ]
+          },
+          "org_preferences": {
+            "description": "Org-level authentication preferences. Each entry identifies an org and the desired status. Omit to leave existing org settings unchanged.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AuthOrgPreferenceInput"
+            }
+          }
+        },
+        "required": [
+          "auth_type"
+        ]
+      },
       "GetCustomAccessTokenRequest": {
         "type": "object",
         "properties": {
@@ -22174,6 +22537,29 @@
             "type": "string"
           }
         }
+      },
+      "SearchAuthSettingsRequest": {
+        "type": "object",
+        "properties": {
+          "auth_type": {
+            "description": "Type of authentication mechanism to retrieve settings for. Currently supports TRUSTED_AUTH.",
+            "type": "string",
+            "enum": [
+              "TRUSTED_AUTH"
+            ]
+          },
+          "scope": {
+            "description": "Scope of auth settings to retrieve. When absent, both cluster and org settings are returned (subject to caller privileges). Set to CLUSTER to retrieve only cluster-level settings, or ORG to retrieve only org-level settings.",
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ]
+          }
+        },
+        "required": [
+          "auth_type"
+        ]
       },
       "ValidateTokenRequest": {
         "type": "object",
