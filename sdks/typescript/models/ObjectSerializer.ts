@@ -17,6 +17,12 @@ export * from '../models/AssignChangeAuthorRequest';
 export * from '../models/AssignTagRequest';
 export * from '../models/AssociateMetadataInput';
 export * from '../models/AssociateMetadataInputCreate';
+export * from '../models/AuthClusterPreferences';
+export * from '../models/AuthClusterPreferencesInput';
+export * from '../models/AuthOrgInfo';
+export * from '../models/AuthOrgPreference';
+export * from '../models/AuthOrgPreferenceInput';
+export * from '../models/AuthSettingsAccessToken';
 export * from '../models/Authentication';
 export * from '../models/AuthenticationInput';
 export * from '../models/Author';
@@ -61,6 +67,8 @@ export * from '../models/CommitResponse';
 export * from '../models/CommiterType';
 export * from '../models/CommunicationChannelPreferencesResponse';
 export * from '../models/CommunicationChannelValidateResponse';
+export * from '../models/ConfigureAuthSettingsRequest';
+export * from '../models/ConfigureAuthSettingsRequestClusterPreferences';
 export * from '../models/ConfigureCommunicationChannelPreferencesRequest';
 export * from '../models/ConfigureSecuritySettingsRequest';
 export * from '../models/ConfigureSecuritySettingsRequestClusterPreferences';
@@ -304,6 +312,8 @@ export * from '../models/SchemaObject';
 export * from '../models/Scope';
 export * from '../models/ScriptSrcUrls';
 export * from '../models/ScriptSrcUrlsInput';
+export * from '../models/SearchAuthSettingsRequest';
+export * from '../models/SearchAuthSettingsResponse';
 export * from '../models/SearchCalendarsRequest';
 export * from '../models/SearchCalendarsRequestSortOptions';
 export * from '../models/SearchChannelHistoryRequest';
@@ -472,6 +482,12 @@ import { AssignChangeAuthorRequest } from '../models/AssignChangeAuthorRequest';
 import { AssignTagRequest } from '../models/AssignTagRequest';
 import { AssociateMetadataInput  , AssociateMetadataInputTypeEnum   } from '../models/AssociateMetadataInput';
 import { AssociateMetadataInputCreate  , AssociateMetadataInputCreateTypeEnum   } from '../models/AssociateMetadataInputCreate';
+import { AuthClusterPreferences, AuthClusterPreferencesAuthStatusEnum    } from '../models/AuthClusterPreferences';
+import { AuthClusterPreferencesInput, AuthClusterPreferencesInputAuthStatusEnum   } from '../models/AuthClusterPreferencesInput';
+import { AuthOrgInfo } from '../models/AuthOrgInfo';
+import { AuthOrgPreference , AuthOrgPreferenceAuthStatusEnum    } from '../models/AuthOrgPreference';
+import { AuthOrgPreferenceInput , AuthOrgPreferenceInputAuthStatusEnum   } from '../models/AuthOrgPreferenceInput';
+import { AuthSettingsAccessToken } from '../models/AuthSettingsAccessToken';
 import { Authentication } from '../models/Authentication';
 import { AuthenticationInput } from '../models/AuthenticationInput';
 import { Author } from '../models/Author';
@@ -516,6 +532,8 @@ import { CommitResponse } from '../models/CommitResponse';
 import { CommiterType } from '../models/CommiterType';
 import { CommunicationChannelPreferencesResponse } from '../models/CommunicationChannelPreferencesResponse';
 import { CommunicationChannelValidateResponse, CommunicationChannelValidateResponseChannelTypeEnum    , CommunicationChannelValidateResponseEventTypeEnum   , CommunicationChannelValidateResponseResultCodeEnum    } from '../models/CommunicationChannelValidateResponse';
+import { ConfigureAuthSettingsRequest, ConfigureAuthSettingsRequestAuthTypeEnum     } from '../models/ConfigureAuthSettingsRequest';
+import { ConfigureAuthSettingsRequestClusterPreferences, ConfigureAuthSettingsRequestClusterPreferencesAuthStatusEnum   } from '../models/ConfigureAuthSettingsRequestClusterPreferences';
 import { ConfigureCommunicationChannelPreferencesRequest } from '../models/ConfigureCommunicationChannelPreferencesRequest';
 import { ConfigureSecuritySettingsRequest } from '../models/ConfigureSecuritySettingsRequest';
 import { ConfigureSecuritySettingsRequestClusterPreferences } from '../models/ConfigureSecuritySettingsRequestClusterPreferences';
@@ -759,6 +777,8 @@ import { SchemaObject } from '../models/SchemaObject';
 import { Scope } from '../models/Scope';
 import { ScriptSrcUrls } from '../models/ScriptSrcUrls';
 import { ScriptSrcUrlsInput } from '../models/ScriptSrcUrlsInput';
+import { SearchAuthSettingsRequest, SearchAuthSettingsRequestAuthTypeEnum  , SearchAuthSettingsRequestScopeEnum   } from '../models/SearchAuthSettingsRequest';
+import { SearchAuthSettingsResponse, SearchAuthSettingsResponseAuthTypeEnum     } from '../models/SearchAuthSettingsResponse';
 import { SearchCalendarsRequest } from '../models/SearchCalendarsRequest';
 import { SearchCalendarsRequestSortOptions, SearchCalendarsRequestSortOptionsFieldNameEnum  , SearchCalendarsRequestSortOptionsOrderEnum   } from '../models/SearchCalendarsRequestSortOptions';
 import { SearchChannelHistoryRequest, SearchChannelHistoryRequestChannelTypeEnum    , SearchChannelHistoryRequestChannelStatusEnum     } from '../models/SearchChannelHistoryRequest';
@@ -793,10 +813,10 @@ import { SearchUsersRequest   , SearchUsersRequestVisibilityEnum    , SearchUser
 import { SearchVariablesRequest    , SearchVariablesRequestResponseContentEnum   } from '../models/SearchVariablesRequest';
 import { SearchWebhookConfigurationsRequest  , SearchWebhookConfigurationsRequestEventTypeEnum      } from '../models/SearchWebhookConfigurationsRequest';
 import { SearchWebhookConfigurationsRequestSortOptions, SearchWebhookConfigurationsRequestSortOptionsFieldNameEnum  , SearchWebhookConfigurationsRequestSortOptionsOrderEnum   } from '../models/SearchWebhookConfigurationsRequestSortOptions';
-import { SecuritySettingsClusterPreferences } from '../models/SecuritySettingsClusterPreferences';
+import { SecuritySettingsClusterPreferences     , SecuritySettingsClusterPreferencesTrustedAuthStatusEnum   } from '../models/SecuritySettingsClusterPreferences';
 import { SecuritySettingsClusterPreferencesInput } from '../models/SecuritySettingsClusterPreferencesInput';
 import { SecuritySettingsOrgDetails } from '../models/SecuritySettingsOrgDetails';
-import { SecuritySettingsOrgPreferences } from '../models/SecuritySettingsOrgPreferences';
+import { SecuritySettingsOrgPreferences   , SecuritySettingsOrgPreferencesTrustedAuthStatusEnum   } from '../models/SecuritySettingsOrgPreferences';
 import { SecuritySettingsOrgPreferencesInput } from '../models/SecuritySettingsOrgPreferencesInput';
 import { SecuritySettingsResponse } from '../models/SecuritySettingsResponse';
 import { SendAgentConversationMessageRequest } from '../models/SendAgentConversationMessageRequest';
@@ -932,6 +952,10 @@ let enumsMap: Set<string> = new Set<string>([
     "ActionConfigInputCreatePositionEnum",
     "AssociateMetadataInputTypeEnum",
     "AssociateMetadataInputCreateTypeEnum",
+    "AuthClusterPreferencesAuthStatusEnum",
+    "AuthClusterPreferencesInputAuthStatusEnum",
+    "AuthOrgPreferenceAuthStatusEnum",
+    "AuthOrgPreferenceInputAuthStatusEnum",
     "AuthorMetadataTypeInputTypeEnum",
     "ChannelHistoryEventInfoTypeEnum",
     "ChannelHistoryEventInputTypeEnum",
@@ -943,6 +967,8 @@ let enumsMap: Set<string> = new Set<string>([
     "CommunicationChannelValidateResponseChannelTypeEnum",
     "CommunicationChannelValidateResponseEventTypeEnum",
     "CommunicationChannelValidateResponseResultCodeEnum",
+    "ConfigureAuthSettingsRequestAuthTypeEnum",
+    "ConfigureAuthSettingsRequestClusterPreferencesAuthStatusEnum",
     "ConnectionConfigurationResponsePolicyProcessesEnum",
     "ConnectionConfigurationResponseDataWarehouseTypeEnum",
     "ConnectionConfigurationResponsePolicyTypeEnum",
@@ -1069,6 +1095,9 @@ let enumsMap: Set<string> = new Set<string>([
     "RuntimeFiltersOperatorEnum",
     "RuntimeSortsOrderEnum",
     "SchedulesPdfOptionsInputPageSizeEnum",
+    "SearchAuthSettingsRequestAuthTypeEnum",
+    "SearchAuthSettingsRequestScopeEnum",
+    "SearchAuthSettingsResponseAuthTypeEnum",
     "SearchCalendarsRequestSortOptionsFieldNameEnum",
     "SearchCalendarsRequestSortOptionsOrderEnum",
     "SearchChannelHistoryRequestChannelTypeEnum",
@@ -1109,6 +1138,8 @@ let enumsMap: Set<string> = new Set<string>([
     "SearchWebhookConfigurationsRequestEventTypeEnum",
     "SearchWebhookConfigurationsRequestSortOptionsFieldNameEnum",
     "SearchWebhookConfigurationsRequestSortOptionsOrderEnum",
+    "SecuritySettingsClusterPreferencesTrustedAuthStatusEnum",
+    "SecuritySettingsOrgPreferencesTrustedAuthStatusEnum",
     "ShareMetadataRequestMetadataTypeEnum",
     "ShareMetadataTypeInputTypeEnum",
     "SharePermissionsInputShareModeEnum",
@@ -1202,6 +1233,12 @@ let typeMap: {[index: string]: any} = {
     "AssignTagRequest": AssignTagRequest,
     "AssociateMetadataInput": AssociateMetadataInput,
     "AssociateMetadataInputCreate": AssociateMetadataInputCreate,
+    "AuthClusterPreferences": AuthClusterPreferences,
+    "AuthClusterPreferencesInput": AuthClusterPreferencesInput,
+    "AuthOrgInfo": AuthOrgInfo,
+    "AuthOrgPreference": AuthOrgPreference,
+    "AuthOrgPreferenceInput": AuthOrgPreferenceInput,
+    "AuthSettingsAccessToken": AuthSettingsAccessToken,
     "Authentication": Authentication,
     "AuthenticationInput": AuthenticationInput,
     "Author": Author,
@@ -1246,6 +1283,8 @@ let typeMap: {[index: string]: any} = {
     "CommiterType": CommiterType,
     "CommunicationChannelPreferencesResponse": CommunicationChannelPreferencesResponse,
     "CommunicationChannelValidateResponse": CommunicationChannelValidateResponse,
+    "ConfigureAuthSettingsRequest": ConfigureAuthSettingsRequest,
+    "ConfigureAuthSettingsRequestClusterPreferences": ConfigureAuthSettingsRequestClusterPreferences,
     "ConfigureCommunicationChannelPreferencesRequest": ConfigureCommunicationChannelPreferencesRequest,
     "ConfigureSecuritySettingsRequest": ConfigureSecuritySettingsRequest,
     "ConfigureSecuritySettingsRequestClusterPreferences": ConfigureSecuritySettingsRequestClusterPreferences,
@@ -1489,6 +1528,8 @@ let typeMap: {[index: string]: any} = {
     "Scope": Scope,
     "ScriptSrcUrls": ScriptSrcUrls,
     "ScriptSrcUrlsInput": ScriptSrcUrlsInput,
+    "SearchAuthSettingsRequest": SearchAuthSettingsRequest,
+    "SearchAuthSettingsResponse": SearchAuthSettingsResponse,
     "SearchCalendarsRequest": SearchCalendarsRequest,
     "SearchCalendarsRequestSortOptions": SearchCalendarsRequestSortOptions,
     "SearchChannelHistoryRequest": SearchChannelHistoryRequest,

@@ -17,50 +17,29 @@ import com.google.gson.stream.JsonWriter;
 import com.thoughtspot.client.JSON;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import org.openapitools.jackson.nullable.JsonNullable;
 
-/** Org-level security preferences. */
+/** SearchAuthSettingsRequest */
 @javax.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         comments = "Generator version: 7.12.0")
-public class SecuritySettingsOrgPreferences implements Serializable {
+public class SearchAuthSettingsRequest implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public static final String SERIALIZED_NAME_ORG = "org";
-
-    @SerializedName(SERIALIZED_NAME_ORG)
-    @javax.annotation.Nullable
-    private SecuritySettingsOrgDetails org;
-
-    public static final String SERIALIZED_NAME_CORS_WHITELISTED_URLS = "cors_whitelisted_urls";
-
-    @SerializedName(SERIALIZED_NAME_CORS_WHITELISTED_URLS)
-    @javax.annotation.Nullable
-    private List<String> corsWhitelistedUrls;
-
-    public static final String SERIALIZED_NAME_NON_EMBED_ACCESS = "non_embed_access";
-
-    @SerializedName(SERIALIZED_NAME_NON_EMBED_ACCESS)
-    @javax.annotation.Nullable
-    private OrgNonEmbedAccess nonEmbedAccess;
-
-    /** Trusted authentication status for this org. Version: 26.6.0.cl or later */
-    @JsonAdapter(TrustedAuthStatusEnum.Adapter.class)
-    public enum TrustedAuthStatusEnum {
-        ENABLED("ENABLED"),
-
-        DISABLED("DISABLED");
+    /**
+     * Type of authentication mechanism to retrieve settings for. Currently supports TRUSTED_AUTH.
+     */
+    @JsonAdapter(AuthTypeEnum.Adapter.class)
+    public enum AuthTypeEnum {
+        TRUSTED_AUTH("TRUSTED_AUTH");
 
         private String value;
 
-        TrustedAuthStatusEnum(String value) {
+        AuthTypeEnum(String value) {
             this.value = value;
         }
 
@@ -73,132 +52,142 @@ public class SecuritySettingsOrgPreferences implements Serializable {
             return String.valueOf(value);
         }
 
-        public static TrustedAuthStatusEnum fromValue(String value) {
-            for (TrustedAuthStatusEnum b : TrustedAuthStatusEnum.values()) {
+        public static AuthTypeEnum fromValue(String value) {
+            for (AuthTypeEnum b : AuthTypeEnum.values()) {
                 if (b.value.equals(value)) {
                     return b;
                 }
             }
-            return null;
+            throw new IllegalArgumentException("Unexpected value '" + value + "'");
         }
 
-        public static class Adapter extends TypeAdapter<TrustedAuthStatusEnum> {
+        public static class Adapter extends TypeAdapter<AuthTypeEnum> {
             @Override
-            public void write(final JsonWriter jsonWriter, final TrustedAuthStatusEnum enumeration)
+            public void write(final JsonWriter jsonWriter, final AuthTypeEnum enumeration)
                     throws IOException {
                 jsonWriter.value(enumeration.getValue());
             }
 
             @Override
-            public TrustedAuthStatusEnum read(final JsonReader jsonReader) throws IOException {
+            public AuthTypeEnum read(final JsonReader jsonReader) throws IOException {
                 String value = jsonReader.nextString();
-                return TrustedAuthStatusEnum.fromValue(value);
+                return AuthTypeEnum.fromValue(value);
             }
         }
 
         public static void validateJsonElement(JsonElement jsonElement) throws IOException {
             String value = jsonElement.getAsString();
-            TrustedAuthStatusEnum.fromValue(value);
+            AuthTypeEnum.fromValue(value);
         }
     }
 
-    public static final String SERIALIZED_NAME_TRUSTED_AUTH_STATUS = "trusted_auth_status";
+    public static final String SERIALIZED_NAME_AUTH_TYPE = "auth_type";
 
-    @SerializedName(SERIALIZED_NAME_TRUSTED_AUTH_STATUS)
-    @javax.annotation.Nullable
-    private TrustedAuthStatusEnum trustedAuthStatus;
-
-    public SecuritySettingsOrgPreferences() {}
-
-    public SecuritySettingsOrgPreferences org(
-            @javax.annotation.Nullable SecuritySettingsOrgDetails org) {
-        this.org = org;
-        return this;
-    }
+    @SerializedName(SERIALIZED_NAME_AUTH_TYPE)
+    @javax.annotation.Nonnull
+    private AuthTypeEnum authType;
 
     /**
-     * Get org
-     *
-     * @return org
+     * Scope of auth settings to retrieve. When absent, both cluster and org settings are returned
+     * (subject to caller privileges). Set to CLUSTER to retrieve only cluster-level settings, or
+     * ORG to retrieve only org-level settings.
      */
-    @javax.annotation.Nullable
-    public SecuritySettingsOrgDetails getOrg() {
-        return org;
-    }
+    @JsonAdapter(ScopeEnum.Adapter.class)
+    public enum ScopeEnum {
+        CLUSTER("CLUSTER"),
 
-    public void setOrg(@javax.annotation.Nullable SecuritySettingsOrgDetails org) {
-        this.org = org;
-    }
+        ORG("ORG");
 
-    public SecuritySettingsOrgPreferences corsWhitelistedUrls(
-            @javax.annotation.Nullable List<String> corsWhitelistedUrls) {
-        this.corsWhitelistedUrls = corsWhitelistedUrls;
-        return this;
-    }
+        private String value;
 
-    public SecuritySettingsOrgPreferences addCorsWhitelistedUrlsItem(
-            String corsWhitelistedUrlsItem) {
-        if (this.corsWhitelistedUrls == null) {
-            this.corsWhitelistedUrls = new ArrayList<>();
+        ScopeEnum(String value) {
+            this.value = value;
         }
-        this.corsWhitelistedUrls.add(corsWhitelistedUrlsItem);
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        public static ScopeEnum fromValue(String value) {
+            for (ScopeEnum b : ScopeEnum.values()) {
+                if (b.value.equals(value)) {
+                    return b;
+                }
+            }
+            throw new IllegalArgumentException("Unexpected value '" + value + "'");
+        }
+
+        public static class Adapter extends TypeAdapter<ScopeEnum> {
+            @Override
+            public void write(final JsonWriter jsonWriter, final ScopeEnum enumeration)
+                    throws IOException {
+                jsonWriter.value(enumeration.getValue());
+            }
+
+            @Override
+            public ScopeEnum read(final JsonReader jsonReader) throws IOException {
+                String value = jsonReader.nextString();
+                return ScopeEnum.fromValue(value);
+            }
+        }
+
+        public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+            String value = jsonElement.getAsString();
+            ScopeEnum.fromValue(value);
+        }
+    }
+
+    public static final String SERIALIZED_NAME_SCOPE = "scope";
+
+    @SerializedName(SERIALIZED_NAME_SCOPE)
+    @javax.annotation.Nullable
+    private ScopeEnum scope;
+
+    public SearchAuthSettingsRequest() {}
+
+    public SearchAuthSettingsRequest authType(@javax.annotation.Nonnull AuthTypeEnum authType) {
+        this.authType = authType;
         return this;
     }
 
     /**
-     * Allowed origins for CORS for this org.
+     * Type of authentication mechanism to retrieve settings for. Currently supports TRUSTED_AUTH.
      *
-     * @return corsWhitelistedUrls
+     * @return authType
      */
-    @javax.annotation.Nullable
-    public List<String> getCorsWhitelistedUrls() {
-        return corsWhitelistedUrls;
+    @javax.annotation.Nonnull
+    public AuthTypeEnum getAuthType() {
+        return authType;
     }
 
-    public void setCorsWhitelistedUrls(
-            @javax.annotation.Nullable List<String> corsWhitelistedUrls) {
-        this.corsWhitelistedUrls = corsWhitelistedUrls;
+    public void setAuthType(@javax.annotation.Nonnull AuthTypeEnum authType) {
+        this.authType = authType;
     }
 
-    public SecuritySettingsOrgPreferences nonEmbedAccess(
-            @javax.annotation.Nullable OrgNonEmbedAccess nonEmbedAccess) {
-        this.nonEmbedAccess = nonEmbedAccess;
+    public SearchAuthSettingsRequest scope(@javax.annotation.Nullable ScopeEnum scope) {
+        this.scope = scope;
         return this;
     }
 
     /**
-     * Get nonEmbedAccess
+     * Scope of auth settings to retrieve. When absent, both cluster and org settings are returned
+     * (subject to caller privileges). Set to CLUSTER to retrieve only cluster-level settings, or
+     * ORG to retrieve only org-level settings.
      *
-     * @return nonEmbedAccess
+     * @return scope
      */
     @javax.annotation.Nullable
-    public OrgNonEmbedAccess getNonEmbedAccess() {
-        return nonEmbedAccess;
+    public ScopeEnum getScope() {
+        return scope;
     }
 
-    public void setNonEmbedAccess(@javax.annotation.Nullable OrgNonEmbedAccess nonEmbedAccess) {
-        this.nonEmbedAccess = nonEmbedAccess;
-    }
-
-    public SecuritySettingsOrgPreferences trustedAuthStatus(
-            @javax.annotation.Nullable TrustedAuthStatusEnum trustedAuthStatus) {
-        this.trustedAuthStatus = trustedAuthStatus;
-        return this;
-    }
-
-    /**
-     * Trusted authentication status for this org. Version: 26.6.0.cl or later
-     *
-     * @return trustedAuthStatus
-     */
-    @javax.annotation.Nullable
-    public TrustedAuthStatusEnum getTrustedAuthStatus() {
-        return trustedAuthStatus;
-    }
-
-    public void setTrustedAuthStatus(
-            @javax.annotation.Nullable TrustedAuthStatusEnum trustedAuthStatus) {
-        this.trustedAuthStatus = trustedAuthStatus;
+    public void setScope(@javax.annotation.Nullable ScopeEnum scope) {
+        this.scope = scope;
     }
 
     /**
@@ -213,9 +202,9 @@ public class SecuritySettingsOrgPreferences implements Serializable {
      *
      * @param key name of the property
      * @param value value of the property
-     * @return the SecuritySettingsOrgPreferences instance itself
+     * @return the SearchAuthSettingsRequest instance itself
      */
-    public SecuritySettingsOrgPreferences putAdditionalProperty(String key, Object value) {
+    public SearchAuthSettingsRequest putAdditionalProperty(String key, Object value) {
         if (this.additionalProperties == null) {
             this.additionalProperties = new HashMap<String, Object>();
         }
@@ -253,55 +242,24 @@ public class SecuritySettingsOrgPreferences implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        SecuritySettingsOrgPreferences securitySettingsOrgPreferences =
-                (SecuritySettingsOrgPreferences) o;
-        return Objects.equals(this.org, securitySettingsOrgPreferences.org)
+        SearchAuthSettingsRequest searchAuthSettingsRequest = (SearchAuthSettingsRequest) o;
+        return Objects.equals(this.authType, searchAuthSettingsRequest.authType)
+                && Objects.equals(this.scope, searchAuthSettingsRequest.scope)
                 && Objects.equals(
-                        this.corsWhitelistedUrls,
-                        securitySettingsOrgPreferences.corsWhitelistedUrls)
-                && Objects.equals(
-                        this.nonEmbedAccess, securitySettingsOrgPreferences.nonEmbedAccess)
-                && Objects.equals(
-                        this.trustedAuthStatus, securitySettingsOrgPreferences.trustedAuthStatus)
-                && Objects.equals(
-                        this.additionalProperties,
-                        securitySettingsOrgPreferences.additionalProperties);
-    }
-
-    private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-        return a == b
-                || (a != null
-                        && b != null
-                        && a.isPresent()
-                        && b.isPresent()
-                        && Objects.deepEquals(a.get(), b.get()));
+                        this.additionalProperties, searchAuthSettingsRequest.additionalProperties);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(
-                org, corsWhitelistedUrls, nonEmbedAccess, trustedAuthStatus, additionalProperties);
-    }
-
-    private static <T> int hashCodeNullable(JsonNullable<T> a) {
-        if (a == null) {
-            return 1;
-        }
-        return a.isPresent() ? Arrays.deepHashCode(new Object[] {a.get()}) : 31;
+        return Objects.hash(authType, scope, additionalProperties);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class SecuritySettingsOrgPreferences {\n");
-        sb.append("    org: ").append(toIndentedString(org)).append("\n");
-        sb.append("    corsWhitelistedUrls: ")
-                .append(toIndentedString(corsWhitelistedUrls))
-                .append("\n");
-        sb.append("    nonEmbedAccess: ").append(toIndentedString(nonEmbedAccess)).append("\n");
-        sb.append("    trustedAuthStatus: ")
-                .append(toIndentedString(trustedAuthStatus))
-                .append("\n");
+        sb.append("class SearchAuthSettingsRequest {\n");
+        sb.append("    authType: ").append(toIndentedString(authType)).append("\n");
+        sb.append("    scope: ").append(toIndentedString(scope)).append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
                 .append("\n");
@@ -326,66 +284,62 @@ public class SecuritySettingsOrgPreferences implements Serializable {
     static {
         // a set of all properties/fields (JSON key names)
         openapiFields = new HashSet<String>();
-        openapiFields.add("org");
-        openapiFields.add("cors_whitelisted_urls");
-        openapiFields.add("non_embed_access");
-        openapiFields.add("trusted_auth_status");
+        openapiFields.add("auth_type");
+        openapiFields.add("scope");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
+        openapiRequiredFields.add("auth_type");
     }
 
     /**
      * Validates the JSON Element and throws an exception if issues found
      *
      * @param jsonElement JSON Element
-     * @throws IOException if the JSON Element is invalid with respect to
-     *     SecuritySettingsOrgPreferences
+     * @throws IOException if the JSON Element is invalid with respect to SearchAuthSettingsRequest
      */
     public static void validateJsonElement(JsonElement jsonElement) throws IOException {
         if (jsonElement == null) {
-            if (!SecuritySettingsOrgPreferences.openapiRequiredFields
+            if (!SearchAuthSettingsRequest.openapiRequiredFields
                     .isEmpty()) { // has required fields but JSON element is null
                 throw new IllegalArgumentException(
                         String.format(
-                                "The required field(s) %s in SecuritySettingsOrgPreferences is not"
+                                "The required field(s) %s in SearchAuthSettingsRequest is not"
                                         + " found in the empty JSON string",
-                                SecuritySettingsOrgPreferences.openapiRequiredFields.toString()));
+                                SearchAuthSettingsRequest.openapiRequiredFields.toString()));
+            }
+        }
+
+        // check to make sure all required properties/fields are present in the JSON string
+        for (String requiredField : SearchAuthSettingsRequest.openapiRequiredFields) {
+            if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+                throw new IllegalArgumentException(
+                        String.format(
+                                "The required field `%s` is not found in the JSON string: %s",
+                                requiredField, jsonElement.toString()));
             }
         }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-        // validate the optional field `org`
-        if (jsonObj.get("org") != null && !jsonObj.get("org").isJsonNull()) {
-            SecuritySettingsOrgDetails.validateJsonElement(jsonObj.get("org"));
-        }
-        // ensure the optional json data is an array if present
-        if (jsonObj.get("cors_whitelisted_urls") != null
-                && !jsonObj.get("cors_whitelisted_urls").isJsonNull()
-                && !jsonObj.get("cors_whitelisted_urls").isJsonArray()) {
+        if (!jsonObj.get("auth_type").isJsonPrimitive()) {
             throw new IllegalArgumentException(
                     String.format(
-                            "Expected the field `cors_whitelisted_urls` to be an array in the JSON"
+                            "Expected the field `auth_type` to be a primitive type in the JSON"
                                     + " string but got `%s`",
-                            jsonObj.get("cors_whitelisted_urls").toString()));
+                            jsonObj.get("auth_type").toString()));
         }
-        // validate the optional field `non_embed_access`
-        if (jsonObj.get("non_embed_access") != null
-                && !jsonObj.get("non_embed_access").isJsonNull()) {
-            OrgNonEmbedAccess.validateJsonElement(jsonObj.get("non_embed_access"));
-        }
-        if ((jsonObj.get("trusted_auth_status") != null
-                        && !jsonObj.get("trusted_auth_status").isJsonNull())
-                && !jsonObj.get("trusted_auth_status").isJsonPrimitive()) {
+        // validate the required field `auth_type`
+        AuthTypeEnum.validateJsonElement(jsonObj.get("auth_type"));
+        if ((jsonObj.get("scope") != null && !jsonObj.get("scope").isJsonNull())
+                && !jsonObj.get("scope").isJsonPrimitive()) {
             throw new IllegalArgumentException(
                     String.format(
-                            "Expected the field `trusted_auth_status` to be a primitive type in"
-                                    + " the JSON string but got `%s`",
-                            jsonObj.get("trusted_auth_status").toString()));
+                            "Expected the field `scope` to be a primitive type in the JSON string"
+                                    + " but got `%s`",
+                            jsonObj.get("scope").toString()));
         }
-        // validate the optional field `trusted_auth_status`
-        if (jsonObj.get("trusted_auth_status") != null
-                && !jsonObj.get("trusted_auth_status").isJsonNull()) {
-            TrustedAuthStatusEnum.validateJsonElement(jsonObj.get("trusted_auth_status"));
+        // validate the optional field `scope`
+        if (jsonObj.get("scope") != null && !jsonObj.get("scope").isJsonNull()) {
+            ScopeEnum.validateJsonElement(jsonObj.get("scope"));
         }
     }
 
@@ -393,19 +347,18 @@ public class SecuritySettingsOrgPreferences implements Serializable {
         @SuppressWarnings("unchecked")
         @Override
         public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-            if (!SecuritySettingsOrgPreferences.class.isAssignableFrom(type.getRawType())) {
-                return null; // this class only serializes 'SecuritySettingsOrgPreferences' and its
+            if (!SearchAuthSettingsRequest.class.isAssignableFrom(type.getRawType())) {
+                return null; // this class only serializes 'SearchAuthSettingsRequest' and its
                 // subtypes
             }
             final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-            final TypeAdapter<SecuritySettingsOrgPreferences> thisAdapter =
-                    gson.getDelegateAdapter(
-                            this, TypeToken.get(SecuritySettingsOrgPreferences.class));
+            final TypeAdapter<SearchAuthSettingsRequest> thisAdapter =
+                    gson.getDelegateAdapter(this, TypeToken.get(SearchAuthSettingsRequest.class));
 
             return (TypeAdapter<T>)
-                    new TypeAdapter<SecuritySettingsOrgPreferences>() {
+                    new TypeAdapter<SearchAuthSettingsRequest>() {
                         @Override
-                        public void write(JsonWriter out, SecuritySettingsOrgPreferences value)
+                        public void write(JsonWriter out, SearchAuthSettingsRequest value)
                                 throws IOException {
                             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
                             obj.remove("additionalProperties");
@@ -436,14 +389,12 @@ public class SecuritySettingsOrgPreferences implements Serializable {
                         }
 
                         @Override
-                        public SecuritySettingsOrgPreferences read(JsonReader in)
-                                throws IOException {
+                        public SearchAuthSettingsRequest read(JsonReader in) throws IOException {
                             JsonElement jsonElement = elementAdapter.read(in);
                             validateJsonElement(jsonElement);
                             JsonObject jsonObj = jsonElement.getAsJsonObject();
                             // store additional fields in the deserialized instance
-                            SecuritySettingsOrgPreferences instance =
-                                    thisAdapter.fromJsonTree(jsonObj);
+                            SearchAuthSettingsRequest instance = thisAdapter.fromJsonTree(jsonObj);
                             for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
                                 if (!openapiFields.contains(entry.getKey())) {
                                     if (entry.getValue().isJsonPrimitive()) { // primitive type
@@ -482,19 +433,18 @@ public class SecuritySettingsOrgPreferences implements Serializable {
     }
 
     /**
-     * Create an instance of SecuritySettingsOrgPreferences given an JSON string
+     * Create an instance of SearchAuthSettingsRequest given an JSON string
      *
      * @param jsonString JSON string
-     * @return An instance of SecuritySettingsOrgPreferences
-     * @throws IOException if the JSON string is invalid with respect to
-     *     SecuritySettingsOrgPreferences
+     * @return An instance of SearchAuthSettingsRequest
+     * @throws IOException if the JSON string is invalid with respect to SearchAuthSettingsRequest
      */
-    public static SecuritySettingsOrgPreferences fromJson(String jsonString) throws IOException {
-        return JSON.getGson().fromJson(jsonString, SecuritySettingsOrgPreferences.class);
+    public static SearchAuthSettingsRequest fromJson(String jsonString) throws IOException {
+        return JSON.getGson().fromJson(jsonString, SearchAuthSettingsRequest.class);
     }
 
     /**
-     * Convert an instance of SecuritySettingsOrgPreferences to an JSON string
+     * Convert an instance of SearchAuthSettingsRequest to an JSON string
      *
      * @return JSON string
      */

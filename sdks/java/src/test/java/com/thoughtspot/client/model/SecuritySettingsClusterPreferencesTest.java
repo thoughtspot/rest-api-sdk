@@ -46,4 +46,10 @@ public class SecuritySettingsClusterPreferencesTest {
     public void nonEmbedAccessTest() {
         // TODO: test nonEmbedAccess
     }
+
+    /** Test the property 'trustedAuthStatus' */
+    @Test
+    public void trustedAuthStatusTest() {
+        // TODO: test trustedAuthStatus
+    }
 }

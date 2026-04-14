@@ -8382,6 +8382,87 @@ components:
       - valid_for_user_id
       - valid_for_username
       type: object
+    SearchAuthSettingsResponse:
+      description: Response for searchAuthSettings. Contains auth type and cluster/org-level
+        preferences.
+      properties:
+        auth_type:
+          description: Type of authentication mechanism returned.
+          enum:
+          - TRUSTED_AUTH
+          nullable: true
+          type: string
+        cluster_preferences:
+          $ref: '#/components/schemas/AuthClusterPreferences'
+        org_preferences:
+          description: Org-level authentication configurations. Present when org scope
+            was requested and per-org auth feature is enabled.
+          items:
+            $ref: '#/components/schemas/AuthOrgPreference'
+          nullable: true
+          type: array
+      type: object
+    AuthClusterPreferences:
+      description: Cluster-level authentication preferences.
+      properties:
+        auth_status:
+          description: Whether authentication is enabled or disabled at the cluster
+            level.
+          enum:
+          - ENABLED
+          - DISABLED
+          nullable: true
+          type: string
+        access_tokens:
+          description: Cluster-level access tokens. Absent when no token is configured.
+          items:
+            $ref: '#/components/schemas/AuthSettingsAccessToken'
+          nullable: true
+          type: array
+      type: object
+    AuthSettingsAccessToken:
+      description: An auth settings access token.
+      properties:
+        key:
+          description: The plaintext token key value.
+          type: string
+      required:
+      - key
+      type: object
+    AuthOrgPreference:
+      description: Org-level authentication preferences for a single org.
+      properties:
+        org:
+          $ref: '#/components/schemas/AuthOrgInfo'
+        auth_status:
+          description: Whether authentication is enabled or disabled for this org.
+          enum:
+          - ENABLED
+          - DISABLED
+          nullable: true
+          type: string
+        access_tokens:
+          description: Org-level access tokens. Absent when no token is configured
+            or the feature flag is off.
+          items:
+            $ref: '#/components/schemas/AuthSettingsAccessToken'
+          nullable: true
+          type: array
+      type: object
+    AuthOrgInfo:
+      description: Org identifier returned in auth settings search results.
+      properties:
+        id:
+          description: Unique identifier of the org.
+          format: int32
+          type: integer
+        name:
+          description: Name of the org.
+          nullable: true
+          type: string
+      required:
+      - id
+      type: object
     RiseSetter:
       properties:
         field:
@@ -9060,6 +9141,14 @@ components:
           type: array
         non_embed_access:
           $ref: '#/components/schemas/ClusterNonEmbedAccess'
+        trusted_auth_status:
+          description: "Trusted authentication status at the cluster level. \n  Version:\
+            \ 26.6.0.cl or later\n"
+          enum:
+          - ENABLED
+          - DISABLED
+          nullable: true
+          type: string
       type: object
     CspSettings:
       description: CSP (Content Security Policy) settings.
@@ -9159,6 +9248,14 @@ components:
           type: array
         non_embed_access:
           $ref: '#/components/schemas/OrgNonEmbedAccess'
+        trusted_auth_status:
+          description: "Trusted authentication status for this org. \n  Version: 26.6.0.cl\
+            \ or later\n"
+          enum:
+          - ENABLED
+          - DISABLED
+          nullable: true
+          type: string
       type: object
     SecuritySettingsOrgDetails:
       description: Org details for security settings.
@@ -13857,6 +13954,37 @@ components:
       required:
       - id
       type: object
+    AuthClusterPreferencesInput:
+      description: Input for cluster-level auth configuration.
+      properties:
+        auth_status:
+          description: "Enable or disable authentication at the cluster level. When\
+            \ enabled, a new token is generated if one does not exist. When disabled,\
+            \ the existing token is revoked."
+          enum:
+          - ENABLED
+          - DISABLED
+          nullable: true
+          type: string
+      type: object
+    AuthOrgPreferenceInput:
+      description: Input for org-level auth configuration.
+      properties:
+        org_identifier:
+          description: Unique ID or name of the org to configure.
+          type: string
+        auth_status:
+          description: "Enable or disable authentication for this org. When enabled,\
+            \ a new token is generated if one does not exist. When disabled, the existing\
+            \ token is revoked."
+          enum:
+          - ENABLED
+          - DISABLED
+          nullable: true
+          type: string
+      required:
+      - org_identifier
+      type: object
     ResponseActivationURL:
       description: The object representation with activation link.
       example:
@@ -17359,6 +17487,28 @@ components:
       - metadata_identifier
       - query
       type: object
+    ConfigureAuthSettingsRequest:
+      properties:
+        auth_type:
+          description: Type of authentication mechanism to configure. Currently supports
+            TRUSTED_AUTH.
+          enum:
+          - TRUSTED_AUTH
+          type: string
+        cluster_preferences:
+          allOf:
+          - $ref: '#/components/schemas/AuthClusterPreferencesInput'
+          description: Cluster-level authentication preferences. Omit to leave the
+            existing cluster setting unchanged.
+        org_preferences:
+          description: Org-level authentication preferences. Each entry identifies
+            an org and the desired status. Omit to leave existing org settings unchanged.
+          items:
+            $ref: '#/components/schemas/AuthOrgPreferenceInput'
+          type: array
+      required:
+      - auth_type
+      type: object
     GetCustomAccessTokenRequest:
       example:
         parameter_values:
@@ -17688,6 +17838,26 @@ components:
           type: string
         token:
           type: string
+      type: object
+    SearchAuthSettingsRequest:
+      properties:
+        auth_type:
+          description: Type of authentication mechanism to retrieve settings for.
+            Currently supports TRUSTED_AUTH.
+          enum:
+          - TRUSTED_AUTH
+          type: string
+        scope:
+          description: "Scope of auth settings to retrieve. When absent, both cluster\
+            \ and org settings are returned (subject to caller privileges). Set to\
+            \ CLUSTER to retrieve only cluster-level settings, or ORG to retrieve\
+            \ only org-level settings."
+          enum:
+          - CLUSTER
+          - ORG
+          type: string
+      required:
+      - auth_type
       type: object
     ValidateTokenRequest:
       example:
@@ -24322,6 +24492,11 @@ x-roles:
   tags:
   - 26.5.0.cl
   description: Roles for version 26.5.0.cl
+- name: 26.6.0.cl
+  id: 26.6.0.cl
+  tags:
+  - 26.6.0.cl
+  description: Roles for version 26.6.0.cl
 - name: 9.0.0.cl
   id: 9.0.0.cl
   tags:
@@ -24357,11 +24532,6 @@ x-roles:
   tags:
   - 9.9.0.cl
   description: Roles for version 9.9.0.cl
-- name: 26.6.0.cl
-  id: 26.6.0.cl
-  tags:
-  - 26.6.0.cl
-  description: Roles for version 26.6.0.cl
 - name: 9.6.0.cl
   id: 9.6.0.cl
   tags:

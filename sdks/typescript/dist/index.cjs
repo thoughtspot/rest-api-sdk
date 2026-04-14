@@ -61,6 +61,12 @@ __export(typescript_exports, {
   AssignTagRequest: () => AssignTagRequest,
   AssociateMetadataInput: () => AssociateMetadataInput,
   AssociateMetadataInputCreate: () => AssociateMetadataInputCreate,
+  AuthClusterPreferences: () => AuthClusterPreferences,
+  AuthClusterPreferencesInput: () => AuthClusterPreferencesInput,
+  AuthOrgInfo: () => AuthOrgInfo,
+  AuthOrgPreference: () => AuthOrgPreference,
+  AuthOrgPreferenceInput: () => AuthOrgPreferenceInput,
+  AuthSettingsAccessToken: () => AuthSettingsAccessToken,
   Authentication: () => Authentication,
   AuthenticationApi: () => PromiseAuthenticationApi,
   AuthenticationInput: () => AuthenticationInput,
@@ -107,6 +113,8 @@ __export(typescript_exports, {
   CommiterType: () => CommiterType,
   CommunicationChannelPreferencesResponse: () => CommunicationChannelPreferencesResponse,
   CommunicationChannelValidateResponse: () => CommunicationChannelValidateResponse,
+  ConfigureAuthSettingsRequest: () => ConfigureAuthSettingsRequest,
+  ConfigureAuthSettingsRequestClusterPreferences: () => ConfigureAuthSettingsRequestClusterPreferences,
   ConfigureCommunicationChannelPreferencesRequest: () => ConfigureCommunicationChannelPreferencesRequest,
   ConfigureSecuritySettingsRequest: () => ConfigureSecuritySettingsRequest,
   ConfigureSecuritySettingsRequestClusterPreferences: () => ConfigureSecuritySettingsRequestClusterPreferences,
@@ -370,6 +378,8 @@ __export(typescript_exports, {
   Scope: () => Scope,
   ScriptSrcUrls: () => ScriptSrcUrls,
   ScriptSrcUrlsInput: () => ScriptSrcUrlsInput,
+  SearchAuthSettingsRequest: () => SearchAuthSettingsRequest,
+  SearchAuthSettingsResponse: () => SearchAuthSettingsResponse,
   SearchCalendarsRequest: () => SearchCalendarsRequest,
   SearchCalendarsRequestSortOptions: () => SearchCalendarsRequestSortOptions,
   SearchChannelHistoryRequest: () => SearchChannelHistoryRequest,
@@ -1368,6 +1378,150 @@ _AssociateMetadataInputCreate.attributeTypeMap = [
   }
 ];
 var AssociateMetadataInputCreate = _AssociateMetadataInputCreate;
+
+// models/AuthClusterPreferences.ts
+var _AuthClusterPreferences = class _AuthClusterPreferences {
+  static getAttributeTypeMap() {
+    return _AuthClusterPreferences.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AuthClusterPreferences.discriminator = void 0;
+_AuthClusterPreferences.attributeTypeMap = [
+  {
+    "name": "auth_status",
+    "baseName": "auth_status",
+    "type": "AuthClusterPreferencesAuthStatusEnum",
+    "format": ""
+  },
+  {
+    "name": "access_tokens",
+    "baseName": "access_tokens",
+    "type": "Array<AuthSettingsAccessToken>",
+    "format": ""
+  }
+];
+var AuthClusterPreferences = _AuthClusterPreferences;
+
+// models/AuthClusterPreferencesInput.ts
+var _AuthClusterPreferencesInput = class _AuthClusterPreferencesInput {
+  static getAttributeTypeMap() {
+    return _AuthClusterPreferencesInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AuthClusterPreferencesInput.discriminator = void 0;
+_AuthClusterPreferencesInput.attributeTypeMap = [
+  {
+    "name": "auth_status",
+    "baseName": "auth_status",
+    "type": "AuthClusterPreferencesInputAuthStatusEnum",
+    "format": ""
+  }
+];
+var AuthClusterPreferencesInput = _AuthClusterPreferencesInput;
+
+// models/AuthOrgInfo.ts
+var _AuthOrgInfo = class _AuthOrgInfo {
+  static getAttributeTypeMap() {
+    return _AuthOrgInfo.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AuthOrgInfo.discriminator = void 0;
+_AuthOrgInfo.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  }
+];
+var AuthOrgInfo = _AuthOrgInfo;
+
+// models/AuthOrgPreference.ts
+var _AuthOrgPreference = class _AuthOrgPreference {
+  static getAttributeTypeMap() {
+    return _AuthOrgPreference.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AuthOrgPreference.discriminator = void 0;
+_AuthOrgPreference.attributeTypeMap = [
+  {
+    "name": "org",
+    "baseName": "org",
+    "type": "AuthOrgInfo",
+    "format": ""
+  },
+  {
+    "name": "auth_status",
+    "baseName": "auth_status",
+    "type": "AuthOrgPreferenceAuthStatusEnum",
+    "format": ""
+  },
+  {
+    "name": "access_tokens",
+    "baseName": "access_tokens",
+    "type": "Array<AuthSettingsAccessToken>",
+    "format": ""
+  }
+];
+var AuthOrgPreference = _AuthOrgPreference;
+
+// models/AuthOrgPreferenceInput.ts
+var _AuthOrgPreferenceInput = class _AuthOrgPreferenceInput {
+  static getAttributeTypeMap() {
+    return _AuthOrgPreferenceInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AuthOrgPreferenceInput.discriminator = void 0;
+_AuthOrgPreferenceInput.attributeTypeMap = [
+  {
+    "name": "org_identifier",
+    "baseName": "org_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "auth_status",
+    "baseName": "auth_status",
+    "type": "AuthOrgPreferenceInputAuthStatusEnum",
+    "format": ""
+  }
+];
+var AuthOrgPreferenceInput = _AuthOrgPreferenceInput;
+
+// models/AuthSettingsAccessToken.ts
+var _AuthSettingsAccessToken = class _AuthSettingsAccessToken {
+  static getAttributeTypeMap() {
+    return _AuthSettingsAccessToken.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AuthSettingsAccessToken.discriminator = void 0;
+_AuthSettingsAccessToken.attributeTypeMap = [
+  {
+    "name": "key",
+    "baseName": "key",
+    "type": "string",
+    "format": ""
+  }
+];
+var AuthSettingsAccessToken = _AuthSettingsAccessToken;
 
 // models/Authentication.ts
 var _Authentication = class _Authentication {
@@ -2816,6 +2970,56 @@ _CommunicationChannelValidateResponse.attributeTypeMap = [
   }
 ];
 var CommunicationChannelValidateResponse = _CommunicationChannelValidateResponse;
+
+// models/ConfigureAuthSettingsRequest.ts
+var _ConfigureAuthSettingsRequest = class _ConfigureAuthSettingsRequest {
+  static getAttributeTypeMap() {
+    return _ConfigureAuthSettingsRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ConfigureAuthSettingsRequest.discriminator = void 0;
+_ConfigureAuthSettingsRequest.attributeTypeMap = [
+  {
+    "name": "auth_type",
+    "baseName": "auth_type",
+    "type": "ConfigureAuthSettingsRequestAuthTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "cluster_preferences",
+    "baseName": "cluster_preferences",
+    "type": "ConfigureAuthSettingsRequestClusterPreferences",
+    "format": ""
+  },
+  {
+    "name": "org_preferences",
+    "baseName": "org_preferences",
+    "type": "Array<AuthOrgPreferenceInput>",
+    "format": ""
+  }
+];
+var ConfigureAuthSettingsRequest = _ConfigureAuthSettingsRequest;
+
+// models/ConfigureAuthSettingsRequestClusterPreferences.ts
+var _ConfigureAuthSettingsRequestClusterPreferences = class _ConfigureAuthSettingsRequestClusterPreferences {
+  static getAttributeTypeMap() {
+    return _ConfigureAuthSettingsRequestClusterPreferences.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ConfigureAuthSettingsRequestClusterPreferences.discriminator = void 0;
+_ConfigureAuthSettingsRequestClusterPreferences.attributeTypeMap = [
+  {
+    "name": "auth_status",
+    "baseName": "auth_status",
+    "type": "ConfigureAuthSettingsRequestClusterPreferencesAuthStatusEnum",
+    "format": ""
+  }
+];
+var ConfigureAuthSettingsRequestClusterPreferences = _ConfigureAuthSettingsRequestClusterPreferences;
 
 // models/ConfigureCommunicationChannelPreferencesRequest.ts
 var _ConfigureCommunicationChannelPreferencesRequest = class _ConfigureCommunicationChannelPreferencesRequest {
@@ -11682,6 +11886,62 @@ _ScriptSrcUrlsInput.attributeTypeMap = [
 ];
 var ScriptSrcUrlsInput = _ScriptSrcUrlsInput;
 
+// models/SearchAuthSettingsRequest.ts
+var _SearchAuthSettingsRequest = class _SearchAuthSettingsRequest {
+  static getAttributeTypeMap() {
+    return _SearchAuthSettingsRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SearchAuthSettingsRequest.discriminator = void 0;
+_SearchAuthSettingsRequest.attributeTypeMap = [
+  {
+    "name": "auth_type",
+    "baseName": "auth_type",
+    "type": "SearchAuthSettingsRequestAuthTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "scope",
+    "baseName": "scope",
+    "type": "SearchAuthSettingsRequestScopeEnum",
+    "format": ""
+  }
+];
+var SearchAuthSettingsRequest = _SearchAuthSettingsRequest;
+
+// models/SearchAuthSettingsResponse.ts
+var _SearchAuthSettingsResponse = class _SearchAuthSettingsResponse {
+  static getAttributeTypeMap() {
+    return _SearchAuthSettingsResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SearchAuthSettingsResponse.discriminator = void 0;
+_SearchAuthSettingsResponse.attributeTypeMap = [
+  {
+    "name": "auth_type",
+    "baseName": "auth_type",
+    "type": "SearchAuthSettingsResponseAuthTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "cluster_preferences",
+    "baseName": "cluster_preferences",
+    "type": "AuthClusterPreferences",
+    "format": ""
+  },
+  {
+    "name": "org_preferences",
+    "baseName": "org_preferences",
+    "type": "Array<AuthOrgPreference>",
+    "format": ""
+  }
+];
+var SearchAuthSettingsResponse = _SearchAuthSettingsResponse;
+
 // models/SearchCalendarsRequest.ts
 var _SearchCalendarsRequest = class _SearchCalendarsRequest {
   static getAttributeTypeMap() {
@@ -13339,6 +13599,12 @@ _SecuritySettingsClusterPreferences.attributeTypeMap = [
     "baseName": "non_embed_access",
     "type": "ClusterNonEmbedAccess",
     "format": ""
+  },
+  {
+    "name": "trusted_auth_status",
+    "baseName": "trusted_auth_status",
+    "type": "SecuritySettingsClusterPreferencesTrustedAuthStatusEnum",
+    "format": ""
   }
 ];
 var SecuritySettingsClusterPreferences = _SecuritySettingsClusterPreferences;
@@ -13437,6 +13703,12 @@ _SecuritySettingsOrgPreferences.attributeTypeMap = [
     "name": "non_embed_access",
     "baseName": "non_embed_access",
     "type": "OrgNonEmbedAccess",
+    "format": ""
+  },
+  {
+    "name": "trusted_auth_status",
+    "baseName": "trusted_auth_status",
+    "type": "SecuritySettingsOrgPreferencesTrustedAuthStatusEnum",
     "format": ""
   }
 ];
@@ -18098,6 +18370,10 @@ var enumsMap = /* @__PURE__ */ new Set([
   "ActionConfigInputCreatePositionEnum",
   "AssociateMetadataInputTypeEnum",
   "AssociateMetadataInputCreateTypeEnum",
+  "AuthClusterPreferencesAuthStatusEnum",
+  "AuthClusterPreferencesInputAuthStatusEnum",
+  "AuthOrgPreferenceAuthStatusEnum",
+  "AuthOrgPreferenceInputAuthStatusEnum",
   "AuthorMetadataTypeInputTypeEnum",
   "ChannelHistoryEventInfoTypeEnum",
   "ChannelHistoryEventInputTypeEnum",
@@ -18109,6 +18385,8 @@ var enumsMap = /* @__PURE__ */ new Set([
   "CommunicationChannelValidateResponseChannelTypeEnum",
   "CommunicationChannelValidateResponseEventTypeEnum",
   "CommunicationChannelValidateResponseResultCodeEnum",
+  "ConfigureAuthSettingsRequestAuthTypeEnum",
+  "ConfigureAuthSettingsRequestClusterPreferencesAuthStatusEnum",
   "ConnectionConfigurationResponsePolicyProcessesEnum",
   "ConnectionConfigurationResponseDataWarehouseTypeEnum",
   "ConnectionConfigurationResponsePolicyTypeEnum",
@@ -18235,6 +18513,9 @@ var enumsMap = /* @__PURE__ */ new Set([
   "RuntimeFiltersOperatorEnum",
   "RuntimeSortsOrderEnum",
   "SchedulesPdfOptionsInputPageSizeEnum",
+  "SearchAuthSettingsRequestAuthTypeEnum",
+  "SearchAuthSettingsRequestScopeEnum",
+  "SearchAuthSettingsResponseAuthTypeEnum",
   "SearchCalendarsRequestSortOptionsFieldNameEnum",
   "SearchCalendarsRequestSortOptionsOrderEnum",
   "SearchChannelHistoryRequestChannelTypeEnum",
@@ -18275,6 +18556,8 @@ var enumsMap = /* @__PURE__ */ new Set([
   "SearchWebhookConfigurationsRequestEventTypeEnum",
   "SearchWebhookConfigurationsRequestSortOptionsFieldNameEnum",
   "SearchWebhookConfigurationsRequestSortOptionsOrderEnum",
+  "SecuritySettingsClusterPreferencesTrustedAuthStatusEnum",
+  "SecuritySettingsOrgPreferencesTrustedAuthStatusEnum",
   "ShareMetadataRequestMetadataTypeEnum",
   "ShareMetadataTypeInputTypeEnum",
   "SharePermissionsInputShareModeEnum",
@@ -18367,6 +18650,12 @@ var typeMap = {
   "AssignTagRequest": AssignTagRequest,
   "AssociateMetadataInput": AssociateMetadataInput,
   "AssociateMetadataInputCreate": AssociateMetadataInputCreate,
+  "AuthClusterPreferences": AuthClusterPreferences,
+  "AuthClusterPreferencesInput": AuthClusterPreferencesInput,
+  "AuthOrgInfo": AuthOrgInfo,
+  "AuthOrgPreference": AuthOrgPreference,
+  "AuthOrgPreferenceInput": AuthOrgPreferenceInput,
+  "AuthSettingsAccessToken": AuthSettingsAccessToken,
   "Authentication": Authentication,
   "AuthenticationInput": AuthenticationInput,
   "Author": Author,
@@ -18411,6 +18700,8 @@ var typeMap = {
   "CommiterType": CommiterType,
   "CommunicationChannelPreferencesResponse": CommunicationChannelPreferencesResponse,
   "CommunicationChannelValidateResponse": CommunicationChannelValidateResponse,
+  "ConfigureAuthSettingsRequest": ConfigureAuthSettingsRequest,
+  "ConfigureAuthSettingsRequestClusterPreferences": ConfigureAuthSettingsRequestClusterPreferences,
   "ConfigureCommunicationChannelPreferencesRequest": ConfigureCommunicationChannelPreferencesRequest,
   "ConfigureSecuritySettingsRequest": ConfigureSecuritySettingsRequest,
   "ConfigureSecuritySettingsRequestClusterPreferences": ConfigureSecuritySettingsRequestClusterPreferences,
@@ -18654,6 +18945,8 @@ var typeMap = {
   "Scope": Scope,
   "ScriptSrcUrls": ScriptSrcUrls,
   "ScriptSrcUrlsInput": ScriptSrcUrlsInput,
+  "SearchAuthSettingsRequest": SearchAuthSettingsRequest,
+  "SearchAuthSettingsResponse": SearchAuthSettingsResponse,
   "SearchCalendarsRequest": SearchCalendarsRequest,
   "SearchCalendarsRequestSortOptions": SearchCalendarsRequestSortOptions,
   "SearchChannelHistoryRequest": SearchChannelHistoryRequest,
@@ -48366,6 +48659,12 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   AssignTagRequest,
   AssociateMetadataInput,
   AssociateMetadataInputCreate,
+  AuthClusterPreferences,
+  AuthClusterPreferencesInput,
+  AuthOrgInfo,
+  AuthOrgPreference,
+  AuthOrgPreferenceInput,
+  AuthSettingsAccessToken,
   Authentication,
   AuthenticationApi,
   AuthenticationInput,
@@ -48412,6 +48711,8 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   CommiterType,
   CommunicationChannelPreferencesResponse,
   CommunicationChannelValidateResponse,
+  ConfigureAuthSettingsRequest,
+  ConfigureAuthSettingsRequestClusterPreferences,
   ConfigureCommunicationChannelPreferencesRequest,
   ConfigureSecuritySettingsRequest,
   ConfigureSecuritySettingsRequestClusterPreferences,
@@ -48675,6 +48976,8 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   Scope,
   ScriptSrcUrls,
   ScriptSrcUrlsInput,
+  SearchAuthSettingsRequest,
+  SearchAuthSettingsResponse,
   SearchCalendarsRequest,
   SearchCalendarsRequestSortOptions,
   SearchChannelHistoryRequest,

@@ -13,6 +13,16 @@ Cluster-level security preferences.
 |**cspSettings** | [**CspSettings**](CspSettings.md) |  |  [optional] |
 |**samlRedirectUrls** | **List&lt;String&gt;** | Allowed redirect hosts for SAML login. |  [optional] |
 |**nonEmbedAccess** | [**ClusterNonEmbedAccess**](ClusterNonEmbedAccess.md) |  |  [optional] |
+|**trustedAuthStatus** | [**TrustedAuthStatusEnum**](#TrustedAuthStatusEnum) | Trusted authentication status at the cluster level.    Version: 26.6.0.cl or later  |  [optional] |
+
+
+
+## Enum: TrustedAuthStatusEnum
+
+| Name | Value |
+|---- | -----|
+| ENABLED | &quot;ENABLED&quot; |
+| DISABLED | &quot;DISABLED&quot; |
 
 
 ## Implemented Interfaces
