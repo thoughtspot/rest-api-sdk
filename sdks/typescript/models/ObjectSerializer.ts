@@ -305,7 +305,6 @@ export * from '../models/RuntimeParamOverride';
 export * from '../models/RuntimeParameters';
 export * from '../models/RuntimeSort';
 export * from '../models/RuntimeSorts';
-export * from '../models/S3StorageSetupConfig';
 export * from '../models/ScheduleHistoryRunsOptionsInput';
 export * from '../models/SchedulesPdfOptionsInput';
 export * from '../models/SchemaObject';
@@ -375,7 +374,6 @@ export * from '../models/StorageConfig';
 export * from '../models/StorageConfigInput';
 export * from '../models/StorageDestination';
 export * from '../models/StorageDestinationInput';
-export * from '../models/StorageSetupInfo';
 export * from '../models/SyncMetadataRequest';
 export * from '../models/SyncMetadataResponse';
 export * from '../models/SystemConfig';
@@ -770,7 +768,6 @@ import { RuntimeParamOverride } from '../models/RuntimeParamOverride';
 import { RuntimeParameters } from '../models/RuntimeParameters';
 import { RuntimeSort } from '../models/RuntimeSort';
 import { RuntimeSorts , RuntimeSortsOrderEnum     } from '../models/RuntimeSorts';
-import { S3StorageSetupConfig } from '../models/S3StorageSetupConfig';
 import { ScheduleHistoryRunsOptionsInput } from '../models/ScheduleHistoryRunsOptionsInput';
 import { SchedulesPdfOptionsInput       , SchedulesPdfOptionsInputPageSizeEnum    } from '../models/SchedulesPdfOptionsInput';
 import { SchemaObject } from '../models/SchemaObject';
@@ -840,7 +837,6 @@ import { StorageConfig } from '../models/StorageConfig';
 import { StorageConfigInput } from '../models/StorageConfigInput';
 import { StorageDestination, StorageDestinationStorageTypeEnum    } from '../models/StorageDestination';
 import { StorageDestinationInput, StorageDestinationInputStorageTypeEnum    } from '../models/StorageDestinationInput';
-import { StorageSetupInfo } from '../models/StorageSetupInfo';
 import { SyncMetadataRequest , SyncMetadataRequestSyncAttributesEnum   } from '../models/SyncMetadataRequest';
 import { SyncMetadataResponse, SyncMetadataResponseStatusEnum        } from '../models/SyncMetadataResponse';
 import { SystemConfig } from '../models/SystemConfig';
@@ -1521,7 +1517,6 @@ let typeMap: {[index: string]: any} = {
     "RuntimeParameters": RuntimeParameters,
     "RuntimeSort": RuntimeSort,
     "RuntimeSorts": RuntimeSorts,
-    "S3StorageSetupConfig": S3StorageSetupConfig,
     "ScheduleHistoryRunsOptionsInput": ScheduleHistoryRunsOptionsInput,
     "SchedulesPdfOptionsInput": SchedulesPdfOptionsInput,
     "SchemaObject": SchemaObject,
@@ -1591,7 +1586,6 @@ let typeMap: {[index: string]: any} = {
     "StorageConfigInput": StorageConfigInput,
     "StorageDestination": StorageDestination,
     "StorageDestinationInput": StorageDestinationInput,
-    "StorageSetupInfo": StorageSetupInfo,
     "SyncMetadataRequest": SyncMetadataRequest,
     "SyncMetadataResponse": SyncMetadataResponse,
     "SystemConfig": SystemConfig,

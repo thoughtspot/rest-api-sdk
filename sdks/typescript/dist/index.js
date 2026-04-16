@@ -11112,49 +11112,6 @@ _RuntimeSorts.attributeTypeMap = [
 ];
 var RuntimeSorts = _RuntimeSorts;
 
-// models/S3StorageSetupConfig.ts
-var _S3StorageSetupConfig = class _S3StorageSetupConfig {
-  static getAttributeTypeMap() {
-    return _S3StorageSetupConfig.attributeTypeMap;
-  }
-  constructor() {
-  }
-};
-_S3StorageSetupConfig.discriminator = void 0;
-_S3StorageSetupConfig.attributeTypeMap = [
-  {
-    "name": "thoughtspot_aws_account_id",
-    "baseName": "thoughtspot_aws_account_id",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "thoughtspot_gcp_service_account_id",
-    "baseName": "thoughtspot_gcp_service_account_id",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "oidc_provider",
-    "baseName": "oidc_provider",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "trust_policy_template",
-    "baseName": "trust_policy_template",
-    "type": "any",
-    "format": ""
-  },
-  {
-    "name": "setup_instructions",
-    "baseName": "setup_instructions",
-    "type": "Array<string>",
-    "format": ""
-  }
-];
-var S3StorageSetupConfig = _S3StorageSetupConfig;
-
 // models/ScheduleHistoryRunsOptionsInput.ts
 var _ScheduleHistoryRunsOptionsInput = class _ScheduleHistoryRunsOptionsInput {
   static getAttributeTypeMap() {
@@ -13809,25 +13766,6 @@ _StorageDestinationInput.attributeTypeMap = [
   }
 ];
 var StorageDestinationInput = _StorageDestinationInput;
-
-// models/StorageSetupInfo.ts
-var _StorageSetupInfo = class _StorageSetupInfo {
-  static getAttributeTypeMap() {
-    return _StorageSetupInfo.attributeTypeMap;
-  }
-  constructor() {
-  }
-};
-_StorageSetupInfo.discriminator = void 0;
-_StorageSetupInfo.attributeTypeMap = [
-  {
-    "name": "s3_config",
-    "baseName": "s3_config",
-    "type": "S3StorageSetupConfig",
-    "format": ""
-  }
-];
-var StorageSetupInfo = _StorageSetupInfo;
 
 // models/SyncMetadataRequest.ts
 var _SyncMetadataRequest = class _SyncMetadataRequest {
@@ -18411,7 +18349,6 @@ var typeMap = {
   "RuntimeParameters": RuntimeParameters,
   "RuntimeSort": RuntimeSort,
   "RuntimeSorts": RuntimeSorts,
-  "S3StorageSetupConfig": S3StorageSetupConfig,
   "ScheduleHistoryRunsOptionsInput": ScheduleHistoryRunsOptionsInput,
   "SchedulesPdfOptionsInput": SchedulesPdfOptionsInput,
   "SchemaObject": SchemaObject,
@@ -18481,7 +18418,6 @@ var typeMap = {
   "StorageConfigInput": StorageConfigInput,
   "StorageDestination": StorageDestination,
   "StorageDestinationInput": StorageDestinationInput,
-  "StorageSetupInfo": StorageSetupInfo,
   "SyncMetadataRequest": SyncMetadataRequest,
   "SyncMetadataResponse": SyncMetadataResponse,
   "SystemConfig": SystemConfig,
@@ -48440,7 +48376,6 @@ export {
   RuntimeParameters,
   RuntimeSort,
   RuntimeSorts,
-  S3StorageSetupConfig,
   ScheduleHistoryRunsOptionsInput,
   PromiseSchedulesApi as SchedulesApi,
   SchedulesPdfOptionsInput,
@@ -48514,7 +48449,6 @@ export {
   StorageConfigInput,
   StorageDestination,
   StorageDestinationInput,
-  StorageSetupInfo,
   SyncMetadataRequest,
   SyncMetadataResponse,
   PromiseSystemApi as SystemApi,
