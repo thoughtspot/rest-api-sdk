@@ -11991,6 +11991,8 @@ components:
             - CAN_VIEW_FOLDERS
             - CAN_MODIDY_FOLDERS
             - CAN_MANAGE_VARIABLES
+            - CAN_MANAGE_AGENTSPOT
+            - CAN_ACCESS_AGENTSPOT
             - PREVIEW_DOCUMENT_SEARCH
             - CAN_SETUP_VERSION_CONTROL
             - CAN_MANAGE_WEBHOOKS
@@ -14524,6 +14526,8 @@ components:
             - CAN_MODIFY_FOLDERS
             - CAN_MANAGE_VARIABLES
             - CAN_VIEW_FOLDERS
+            - CAN_MANAGE_AGENTSPOT
+            - CAN_ACCESS_AGENTSPOT
             - PREVIEW_DOCUMENT_SEARCH
             - CAN_SETUP_VERSION_CONTROL
             - CAN_DOWNLOAD_VISUALS
@@ -15622,6 +15626,8 @@ components:
             - CAN_MANAGE_VARIABLES
             - CAN_MODIFY_FOLDERS
             - CAN_VIEW_FOLDERS
+            - CAN_MANAGE_AGENTSPOT
+            - CAN_ACCESS_AGENTSPOT
             - CAN_SETUP_VERSION_CONTROL
             - PREVIEW_THOUGHTSPOT_SAGE
             - CAN_MANAGE_WEBHOOKS
@@ -19218,6 +19224,8 @@ components:
             - CAN_MODIFY_FOLDERS
             - CAN_MANAGE_VARIABLES
             - CAN_VIEW_FOLDERS
+            - CAN_MANAGE_AGENTSPOT
+            - CAN_ACCESS_AGENTSPOT
             - PREVIEW_DOCUMENT_SEARCH
             - CAN_SETUP_VERSION_CONTROL
             - CAN_DOWNLOAD_VISUALS
@@ -19420,6 +19428,8 @@ components:
             - CAN_MODIFY_FOLDERS
             - CAN_MANAGE_VARIABLES
             - CAN_VIEW_FOLDERS
+            - CAN_MANAGE_AGENTSPOT
+            - CAN_ACCESS_AGENTSPOT
             - CAN_SETUP_VERSION_CONTROL
             - CAN_MANAGE_WEBHOOKS
             - CAN_DOWNLOAD_VISUALS
@@ -19564,6 +19574,8 @@ components:
             - CAN_MODIFY_FOLDERS
             - CAN_MANAGE_VARIABLES
             - CAN_VIEW_FOLDERS
+            - CAN_MANAGE_AGENTSPOT
+            - CAN_ACCESS_AGENTSPOT
             - PREVIEW_DOCUMENT_SEARCH
             - CAN_SETUP_VERSION_CONTROL
             - CAN_DOWNLOAD_VISUALS
@@ -20795,6 +20807,8 @@ components:
             - CAN_MANAGE_VARIABLES
             - CAN_MODIFY_FOLDERS
             - CAN_VIEW_FOLDERS
+            - CAN_MANAGE_AGENTSPOT
+            - CAN_ACCESS_AGENTSPOT
             - CAN_SETUP_VERSION_CONTROL
             - PREVIEW_THOUGHTSPOT_SAGE
             - CAN_MANAGE_WEBHOOKS
@@ -20902,6 +20916,8 @@ components:
             - CAN_VIEW_FOLDERS
             - CAN_MODIDY_FOLDERS
             - CAN_MANAGE_VARIABLES
+            - CAN_MANAGE_AGENTSPOT
+            - CAN_ACCESS_AGENTSPOT
             - PREVIEW_DOCUMENT_SEARCH
             - CAN_SETUP_VERSION_CONTROL
             - CAN_MANAGE_WEBHOOKS
@@ -20987,6 +21003,8 @@ components:
             - CAN_MODIFY_FOLDERS
             - CAN_MANAGE_VARIABLES
             - CAN_VIEW_FOLDERS
+            - CAN_MANAGE_AGENTSPOT
+            - CAN_ACCESS_AGENTSPOT
             - PREVIEW_DOCUMENT_SEARCH
             - PREVIEW_THOUGHTSPOT_SAGE
             - CAN_MANAGE_WEBHOOKS
@@ -23493,6 +23511,8 @@ components:
             - CAN_MODIFY_FOLDERS
             - CAN_MANAGE_VARIABLES
             - CAN_VIEW_FOLDERS
+            - CAN_MANAGE_AGENTSPOT
+            - CAN_ACCESS_AGENTSPOT
             - CAN_SETUP_VERSION_CONTROL
             - CAN_MANAGE_WEBHOOKS
             - CAN_DOWNLOAD_VISUALS
