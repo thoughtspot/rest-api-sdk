@@ -48,6 +48,10 @@
     "chai": "^4.3.7",
     "mocha": "^10.2.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thoughtspot/rest-api-sdk.git"
+  },
   "publishConfig":{
     "registry":"https://registry.npmjs.org"
   }

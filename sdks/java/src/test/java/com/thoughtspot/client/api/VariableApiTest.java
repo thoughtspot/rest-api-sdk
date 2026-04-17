@@ -44,11 +44,14 @@ public class VariableApiTest {
     }
 
     /**
-     * Delete a variable Version: 10.14.0.cl or later Allows deleting a variable from ThoughtSpot.
-     * Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you
-     * to manage Formula Variables in the current organization scope. The API endpoint requires: *
-     * The variable identifier (ID or name) The operation will fail if: * The user lacks required
-     * permissions * The variable doesn&#39;t exist * The variable is being used by other objects
+     * Delete a variable Version: 10.14.0.cl or later **Note:** This API endpoint is deprecated and
+     * will be removed from ThoughtSpot in a future release. Use [POST
+     * /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.
+     * Allows deleting a variable from ThoughtSpot. Requires ADMINISTRATION role and TENANT scope.
+     * The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current
+     * organization scope. The API endpoint requires: * The variable identifier (ID or name) The
+     * operation will fail if: * The user lacks required permissions * The variable doesn&#39;t
+     * exist * The variable is being used by other objects
      *
      * @throws ApiException if the Api call fails
      */
@@ -95,17 +98,20 @@ public class VariableApiTest {
     }
 
     /**
-     * Update values for multiple variables Version: 10.14.0.cl or later Allows updating values for
-     * multiple variables in ThoughtSpot. Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES
-     * permission allows you to manage Formula Variables in the current organization scope. The API
-     * endpoint allows: * Adding new values to variables * Replacing existing values * Deleting
-     * values from variables When updating variable values, you need to specify: * The variable
-     * identifiers * The values to add/replace/remove for each variable * The operation to perform
-     * (ADD, REPLACE, REMOVE, RESET) Behaviour based on operation type: * ADD - Adds values to the
-     * variable if this is a list type variable, else same as replace. * REPLACE - Replaces all
-     * values of a given set of constraints with the current set of values. * REMOVE - Removes any
-     * values which match the set of conditions of the variables if this is a list type variable,
-     * else clears value. * RESET - Removes all constrains for a given variable, scope is ignored
+     * Update values for multiple variables Version: 10.14.0.cl or later **Note:** This API endpoint
+     * is deprecated and will be removed from ThoughtSpot in a future release. Use [POST
+     * /api/rest/2.0/template/variables/{identifier}/update-values](/api/rest/2.0/template/variables/%7Bidentifier%7D/update-values)
+     * instead. Allows updating values for multiple variables in ThoughtSpot. Requires
+     * ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula
+     * Variables in the current organization scope. The API endpoint allows: * Adding new values to
+     * variables * Replacing existing values * Deleting values from variables When updating variable
+     * values, you need to specify: * The variable identifiers * The values to add/replace/remove
+     * for each variable * The operation to perform (ADD, REPLACE, REMOVE, RESET) Behaviour based on
+     * operation type: * ADD - Adds values to the variable if this is a list type variable, else
+     * same as replace. * REPLACE - Replaces all values of a given set of constraints with the
+     * current set of values. * REMOVE - Removes any values which match the set of conditions of the
+     * variables if this is a list type variable, else clears value. * RESET - Removes all
+     * constrains for a given variable, scope is ignored
      *
      * @throws ApiException if the Api call fails
      */

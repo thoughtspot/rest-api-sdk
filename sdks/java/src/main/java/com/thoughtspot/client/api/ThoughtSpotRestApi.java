@@ -156,6 +156,7 @@ import com.thoughtspot.client.model.SystemOverrideInfo;
 import com.thoughtspot.client.model.Tag;
 import com.thoughtspot.client.model.Token;
 import com.thoughtspot.client.model.TokenValidationResponse;
+import com.thoughtspot.client.model.UnassignTagRequest;
 import com.thoughtspot.client.model.UnparameterizeMetadataRequest;
 import com.thoughtspot.client.model.UnpublishMetadataRequest;
 import com.thoughtspot.client.model.UpdateCalendarRequest;
@@ -2182,6 +2183,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -2257,7 +2260,49 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.13.0.cl or later
+     * Version: 26.2.0.cl or later Creates a new Spotter agent conversation based on the provided
+     * context and settings. The endpoint was in Beta from 26.2.0.cl through 26.4.0.cl. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view access to the metadata object
+     * specified in the request. #### Usage guidelines The request must include the
+     * &#x60;metadata_context&#x60; parameter to define the conversation context. The context type
+     * can be one of: - &#x60;DATA_SOURCE&#x60; *(available from 26.5.0.cl)*: targets a specific
+     * data source. Provide &#x60;data_source_identifier&#x60; in &#x60;data_source_context&#x60;
+     * for a single data source, or &#x60;data_source_identifiers&#x60; for multi-data-source
+     * context. The deprecated &#x60;guid&#x60; field is accepted for backwards compatibility. -
+     * &#x60;AUTO_MODE&#x60; *(available from 26.5.0.cl)*: automatically discovers and selects the
+     * most relevant datasets for the user&#39;s queries. &gt; **Note for callers on versions
+     * 26.2.0.cl – 26.4.0.cl (Beta):** use the lowercase &#x60;data_source&#x60; enum value with the
+     * &#x60;guid&#x60; field instead of the above. Example: &#x60;{ \&quot;type\&quot;:
+     * \&quot;data_source\&quot;, \&quot;data_source_context\&quot;: { \&quot;guid\&quot;:
+     * \&quot;&lt;worksheet-id&gt;\&quot; } }&#x60;. The &#x60;conversation_settings&#x60; parameter
+     * controls which Spotter capabilities are enabled for the conversation: -
+     * &#x60;enable_contextual_change_analysis&#x60; (default: &#x60;true&#x60;, **deprecated from
+     * 26.2.0.cl**) — always enabled in Spotter 3; setting this to &#x60;false&#x60; has no effect
+     * on versions &gt;&#x3D; 26.2.0.cl - &#x60;enable_natural_language_answer_generation&#x60;
+     * (default: &#x60;true&#x60;, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3;
+     * setting this to &#x60;false&#x60; has no effect on versions &gt;&#x3D; 26.2.0.cl -
+     * &#x60;enable_reasoning&#x60; (default: &#x60;true&#x60;, **deprecated from 26.2.0.cl**) —
+     * always enabled in Spotter 3; setting this to &#x60;false&#x60; has no effect on versions
+     * &gt;&#x3D; 26.2.0.cl - &#x60;enable_save_chat&#x60; (default: &#x60;false&#x60;, *available
+     * from 26.5.0.cl*) — enables saving the conversation for later retrieval via conversation
+     * history If the request is successful, the response includes a unique
+     * &#x60;conversation_identifier&#x60; that must be passed to
+     * &#x60;sendAgentConversationMessage&#x60; or &#x60;sendAgentConversationMessageStreaming&#x60;
+     * to send messages within this conversation. The response also includes
+     * &#x60;conversation_id&#x60; with the same value for backwards compatibility; use
+     * &#x60;conversation_identifier&#x60; for new integrations. #### Example request
+     * &#x60;&#x60;&#x60;json { \&quot;metadata_context\&quot;: { \&quot;type\&quot;:
+     * \&quot;DATA_SOURCE\&quot;, \&quot;data_source_context\&quot;: {
+     * \&quot;data_source_identifier\&quot;: \&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890\&quot; } },
+     * \&quot;conversation_settings\&quot;: {} } &#x60;&#x60;&#x60; #### Error responses | Code |
+     * Description | | ---- |
+     * ---------------------------------------------------------------------------------------------------------------------------------------
+     * | | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view permission on the specified metadata object. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint was in Beta from 26.2.0.cl through 26.4.0.cl and is Generally Available from version
+     * 26.5.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to
+     * enable Spotter on your cluster.
      *
      * @param createAgentConversationRequest (required)
      * @return AgentConversation
@@ -2270,6 +2315,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -2281,7 +2328,49 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.13.0.cl or later
+     * Version: 26.2.0.cl or later Creates a new Spotter agent conversation based on the provided
+     * context and settings. The endpoint was in Beta from 26.2.0.cl through 26.4.0.cl. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view access to the metadata object
+     * specified in the request. #### Usage guidelines The request must include the
+     * &#x60;metadata_context&#x60; parameter to define the conversation context. The context type
+     * can be one of: - &#x60;DATA_SOURCE&#x60; *(available from 26.5.0.cl)*: targets a specific
+     * data source. Provide &#x60;data_source_identifier&#x60; in &#x60;data_source_context&#x60;
+     * for a single data source, or &#x60;data_source_identifiers&#x60; for multi-data-source
+     * context. The deprecated &#x60;guid&#x60; field is accepted for backwards compatibility. -
+     * &#x60;AUTO_MODE&#x60; *(available from 26.5.0.cl)*: automatically discovers and selects the
+     * most relevant datasets for the user&#39;s queries. &gt; **Note for callers on versions
+     * 26.2.0.cl – 26.4.0.cl (Beta):** use the lowercase &#x60;data_source&#x60; enum value with the
+     * &#x60;guid&#x60; field instead of the above. Example: &#x60;{ \&quot;type\&quot;:
+     * \&quot;data_source\&quot;, \&quot;data_source_context\&quot;: { \&quot;guid\&quot;:
+     * \&quot;&lt;worksheet-id&gt;\&quot; } }&#x60;. The &#x60;conversation_settings&#x60; parameter
+     * controls which Spotter capabilities are enabled for the conversation: -
+     * &#x60;enable_contextual_change_analysis&#x60; (default: &#x60;true&#x60;, **deprecated from
+     * 26.2.0.cl**) — always enabled in Spotter 3; setting this to &#x60;false&#x60; has no effect
+     * on versions &gt;&#x3D; 26.2.0.cl - &#x60;enable_natural_language_answer_generation&#x60;
+     * (default: &#x60;true&#x60;, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3;
+     * setting this to &#x60;false&#x60; has no effect on versions &gt;&#x3D; 26.2.0.cl -
+     * &#x60;enable_reasoning&#x60; (default: &#x60;true&#x60;, **deprecated from 26.2.0.cl**) —
+     * always enabled in Spotter 3; setting this to &#x60;false&#x60; has no effect on versions
+     * &gt;&#x3D; 26.2.0.cl - &#x60;enable_save_chat&#x60; (default: &#x60;false&#x60;, *available
+     * from 26.5.0.cl*) — enables saving the conversation for later retrieval via conversation
+     * history If the request is successful, the response includes a unique
+     * &#x60;conversation_identifier&#x60; that must be passed to
+     * &#x60;sendAgentConversationMessage&#x60; or &#x60;sendAgentConversationMessageStreaming&#x60;
+     * to send messages within this conversation. The response also includes
+     * &#x60;conversation_id&#x60; with the same value for backwards compatibility; use
+     * &#x60;conversation_identifier&#x60; for new integrations. #### Example request
+     * &#x60;&#x60;&#x60;json { \&quot;metadata_context\&quot;: { \&quot;type\&quot;:
+     * \&quot;DATA_SOURCE\&quot;, \&quot;data_source_context\&quot;: {
+     * \&quot;data_source_identifier\&quot;: \&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890\&quot; } },
+     * \&quot;conversation_settings\&quot;: {} } &#x60;&#x60;&#x60; #### Error responses | Code |
+     * Description | | ---- |
+     * ---------------------------------------------------------------------------------------------------------------------------------------
+     * | | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view permission on the specified metadata object. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint was in Beta from 26.2.0.cl through 26.4.0.cl and is Generally Available from version
+     * 26.5.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to
+     * enable Spotter on your cluster.
      *
      * @param createAgentConversationRequest (required)
      * @return ApiResponse&lt;AgentConversation&gt;
@@ -2294,6 +2383,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -2306,7 +2397,49 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 10.13.0.cl or later
+     * (asynchronously) Version: 26.2.0.cl or later Creates a new Spotter agent conversation based
+     * on the provided context and settings. The endpoint was in Beta from 26.2.0.cl through
+     * 26.4.0.cl. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view access to the
+     * metadata object specified in the request. #### Usage guidelines The request must include the
+     * &#x60;metadata_context&#x60; parameter to define the conversation context. The context type
+     * can be one of: - &#x60;DATA_SOURCE&#x60; *(available from 26.5.0.cl)*: targets a specific
+     * data source. Provide &#x60;data_source_identifier&#x60; in &#x60;data_source_context&#x60;
+     * for a single data source, or &#x60;data_source_identifiers&#x60; for multi-data-source
+     * context. The deprecated &#x60;guid&#x60; field is accepted for backwards compatibility. -
+     * &#x60;AUTO_MODE&#x60; *(available from 26.5.0.cl)*: automatically discovers and selects the
+     * most relevant datasets for the user&#39;s queries. &gt; **Note for callers on versions
+     * 26.2.0.cl – 26.4.0.cl (Beta):** use the lowercase &#x60;data_source&#x60; enum value with the
+     * &#x60;guid&#x60; field instead of the above. Example: &#x60;{ \&quot;type\&quot;:
+     * \&quot;data_source\&quot;, \&quot;data_source_context\&quot;: { \&quot;guid\&quot;:
+     * \&quot;&lt;worksheet-id&gt;\&quot; } }&#x60;. The &#x60;conversation_settings&#x60; parameter
+     * controls which Spotter capabilities are enabled for the conversation: -
+     * &#x60;enable_contextual_change_analysis&#x60; (default: &#x60;true&#x60;, **deprecated from
+     * 26.2.0.cl**) — always enabled in Spotter 3; setting this to &#x60;false&#x60; has no effect
+     * on versions &gt;&#x3D; 26.2.0.cl - &#x60;enable_natural_language_answer_generation&#x60;
+     * (default: &#x60;true&#x60;, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3;
+     * setting this to &#x60;false&#x60; has no effect on versions &gt;&#x3D; 26.2.0.cl -
+     * &#x60;enable_reasoning&#x60; (default: &#x60;true&#x60;, **deprecated from 26.2.0.cl**) —
+     * always enabled in Spotter 3; setting this to &#x60;false&#x60; has no effect on versions
+     * &gt;&#x3D; 26.2.0.cl - &#x60;enable_save_chat&#x60; (default: &#x60;false&#x60;, *available
+     * from 26.5.0.cl*) — enables saving the conversation for later retrieval via conversation
+     * history If the request is successful, the response includes a unique
+     * &#x60;conversation_identifier&#x60; that must be passed to
+     * &#x60;sendAgentConversationMessage&#x60; or &#x60;sendAgentConversationMessageStreaming&#x60;
+     * to send messages within this conversation. The response also includes
+     * &#x60;conversation_id&#x60; with the same value for backwards compatibility; use
+     * &#x60;conversation_identifier&#x60; for new integrations. #### Example request
+     * &#x60;&#x60;&#x60;json { \&quot;metadata_context\&quot;: { \&quot;type\&quot;:
+     * \&quot;DATA_SOURCE\&quot;, \&quot;data_source_context\&quot;: {
+     * \&quot;data_source_identifier\&quot;: \&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890\&quot; } },
+     * \&quot;conversation_settings\&quot;: {} } &#x60;&#x60;&#x60; #### Error responses | Code |
+     * Description | | ---- |
+     * ---------------------------------------------------------------------------------------------------------------------------------------
+     * | | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view permission on the specified metadata object. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint was in Beta from 26.2.0.cl through 26.4.0.cl and is Generally Available from version
+     * 26.5.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to
+     * enable Spotter on your cluster.
      *
      * @param createAgentConversationRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -2320,6 +2453,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -2963,15 +3098,23 @@ public class ThoughtSpotRestApi {
      * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
      * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
      * \&quot;externalDatabases\&quot;:[ ] } &#x60;&#x60;&#x60; 2. Set &#x60;validate&#x60; to
-     * &#x60;false&#x60;. #### Create a connection with tables To create a connection with tables:
-     * 1. Pass these parameters in your API request. * Name of the connection. * Type of the data
-     * warehouse to connect to. * A JSON map of configuration attributes, database details, and
-     * table properties in &#x60;data_warehouse_config&#x60; as shown in the following example:
-     * &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
-     * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
+     * &#x60;false&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is anything other than
+     * SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload.
+     * If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the
+     * authentication type. #### Create a connection with tables If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) and
+     * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) privilege is
+     * required. To create a connection with tables: 1. Pass these parameters in your API request. *
+     * Name of the connection. * Type of the data warehouse to connect to. * A JSON map of
+     * configuration attributes, database details, and table properties in
+     * &#x60;data_warehouse_config&#x60; as shown in the following example: &#x60;&#x60;&#x60; {
+     * \&quot;configuration\&quot;:{ \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
      * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
      * \&quot;externalDatabases\&quot;:[ { \&quot;name\&quot;:\&quot;AllDatatypes\&quot;,
      * \&quot;isAutoCreated\&quot;:false, \&quot;schemas\&quot;:[ {
      * \&quot;name\&quot;:\&quot;alldatatypes\&quot;, \&quot;tables\&quot;:[ {
@@ -2988,7 +3131,10 @@ public class ThoughtSpotRestApi {
      * \&quot;isImported\&quot;:false, \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,
      * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
      * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; } ] } ] } ] } ] } &#x60;&#x60;&#x60; 2. Set
-     * &#x60;validate&#x60; to &#x60;true&#x60;.
+     * &#x60;validate&#x60; to &#x60;true&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is
+     * anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType
+     * property in the payload. If you do not specify authenticationType, the API will default to
+     * SERVICE_ACCOUNT as the authentication type.
      *
      * @param createConnectionRequest (required)
      * @return CreateConnectionResponse
@@ -3026,15 +3172,23 @@ public class ThoughtSpotRestApi {
      * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
      * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
      * \&quot;externalDatabases\&quot;:[ ] } &#x60;&#x60;&#x60; 2. Set &#x60;validate&#x60; to
-     * &#x60;false&#x60;. #### Create a connection with tables To create a connection with tables:
-     * 1. Pass these parameters in your API request. * Name of the connection. * Type of the data
-     * warehouse to connect to. * A JSON map of configuration attributes, database details, and
-     * table properties in &#x60;data_warehouse_config&#x60; as shown in the following example:
-     * &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
-     * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
+     * &#x60;false&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is anything other than
+     * SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload.
+     * If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the
+     * authentication type. #### Create a connection with tables If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) and
+     * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) privilege is
+     * required. To create a connection with tables: 1. Pass these parameters in your API request. *
+     * Name of the connection. * Type of the data warehouse to connect to. * A JSON map of
+     * configuration attributes, database details, and table properties in
+     * &#x60;data_warehouse_config&#x60; as shown in the following example: &#x60;&#x60;&#x60; {
+     * \&quot;configuration\&quot;:{ \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
      * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
      * \&quot;externalDatabases\&quot;:[ { \&quot;name\&quot;:\&quot;AllDatatypes\&quot;,
      * \&quot;isAutoCreated\&quot;:false, \&quot;schemas\&quot;:[ {
      * \&quot;name\&quot;:\&quot;alldatatypes\&quot;, \&quot;tables\&quot;:[ {
@@ -3051,7 +3205,10 @@ public class ThoughtSpotRestApi {
      * \&quot;isImported\&quot;:false, \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,
      * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
      * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; } ] } ] } ] } ] } &#x60;&#x60;&#x60; 2. Set
-     * &#x60;validate&#x60; to &#x60;true&#x60;.
+     * &#x60;validate&#x60; to &#x60;true&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is
+     * anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType
+     * property in the payload. If you do not specify authenticationType, the API will default to
+     * SERVICE_ACCOUNT as the authentication type.
      *
      * @param createConnectionRequest (required)
      * @return ApiResponse&lt;CreateConnectionResponse&gt;
@@ -3090,15 +3247,23 @@ public class ThoughtSpotRestApi {
      * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
      * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
      * \&quot;externalDatabases\&quot;:[ ] } &#x60;&#x60;&#x60; 2. Set &#x60;validate&#x60; to
-     * &#x60;false&#x60;. #### Create a connection with tables To create a connection with tables:
-     * 1. Pass these parameters in your API request. * Name of the connection. * Type of the data
-     * warehouse to connect to. * A JSON map of configuration attributes, database details, and
-     * table properties in &#x60;data_warehouse_config&#x60; as shown in the following example:
-     * &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
-     * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
+     * &#x60;false&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is anything other than
+     * SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload.
+     * If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the
+     * authentication type. #### Create a connection with tables If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) and
+     * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) privilege is
+     * required. To create a connection with tables: 1. Pass these parameters in your API request. *
+     * Name of the connection. * Type of the data warehouse to connect to. * A JSON map of
+     * configuration attributes, database details, and table properties in
+     * &#x60;data_warehouse_config&#x60; as shown in the following example: &#x60;&#x60;&#x60; {
+     * \&quot;configuration\&quot;:{ \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
      * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
      * \&quot;externalDatabases\&quot;:[ { \&quot;name\&quot;:\&quot;AllDatatypes\&quot;,
      * \&quot;isAutoCreated\&quot;:false, \&quot;schemas\&quot;:[ {
      * \&quot;name\&quot;:\&quot;alldatatypes\&quot;, \&quot;tables\&quot;:[ {
@@ -3115,7 +3280,10 @@ public class ThoughtSpotRestApi {
      * \&quot;isImported\&quot;:false, \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,
      * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
      * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; } ] } ] } ] } ] } &#x60;&#x60;&#x60; 2. Set
-     * &#x60;validate&#x60; to &#x60;true&#x60;.
+     * &#x60;validate&#x60; to &#x60;true&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is
+     * anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType
+     * property in the payload. If you do not specify authenticationType, the API will default to
+     * SERVICE_ACCOUNT as the authentication type.
      *
      * @param createConnectionRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -3383,6 +3551,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -3456,13 +3626,18 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.4.0.cl or later Creates a Conversation object to start an AI-driven conversation
-     * based on a specific data model. Requires at least view access to the metadata object
-     * specified in the request. #### Usage guidelines This API requires the
-     * &#x60;metadata_identifier&#x60; parameter to define the context for the conversation. You can
-     * also specify the tokens to initiate the conversation as shown in this example:
-     * &#x60;\&quot;tokens\&quot;: \&quot;[tea],[sales],[type]\&quot;&#x60; If the API request is
-     * successful, ThoughtSpot returns the ID of the conversation. &gt; ###### Note: &gt; * This
+     * Version: 10.4.0.cl or later Creates a new conversation session tied to a specific data model
+     * for AI-driven natural language querying. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and
+     * at least view access to the metadata object specified in the request. #### Usage guidelines
+     * The request must include: - &#x60;metadata_identifier&#x60;: the unique ID of the data source
+     * that provides context for the conversation Optionally, you can provide: - &#x60;tokens&#x60;:
+     * a token string to set initial context for the conversation (e.g., &#x60;\&quot;[sales],[item
+     * type],[state]\&quot;&#x60;) If the request is successful, ThoughtSpot returns a unique
+     * &#x60;conversation_identifier&#x60; that must be passed to &#x60;sendMessage&#x60; to
+     * continue the conversation. #### Error responses | Code | Description | |------|-------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view permission on the specified metadata object. | &gt; ###### Note: &gt; * This
      * endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made
      * Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot
      * support to enable Spotter on your cluster.
@@ -3478,6 +3653,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -3489,13 +3666,18 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.4.0.cl or later Creates a Conversation object to start an AI-driven conversation
-     * based on a specific data model. Requires at least view access to the metadata object
-     * specified in the request. #### Usage guidelines This API requires the
-     * &#x60;metadata_identifier&#x60; parameter to define the context for the conversation. You can
-     * also specify the tokens to initiate the conversation as shown in this example:
-     * &#x60;\&quot;tokens\&quot;: \&quot;[tea],[sales],[type]\&quot;&#x60; If the API request is
-     * successful, ThoughtSpot returns the ID of the conversation. &gt; ###### Note: &gt; * This
+     * Version: 10.4.0.cl or later Creates a new conversation session tied to a specific data model
+     * for AI-driven natural language querying. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and
+     * at least view access to the metadata object specified in the request. #### Usage guidelines
+     * The request must include: - &#x60;metadata_identifier&#x60;: the unique ID of the data source
+     * that provides context for the conversation Optionally, you can provide: - &#x60;tokens&#x60;:
+     * a token string to set initial context for the conversation (e.g., &#x60;\&quot;[sales],[item
+     * type],[state]\&quot;&#x60;) If the request is successful, ThoughtSpot returns a unique
+     * &#x60;conversation_identifier&#x60; that must be passed to &#x60;sendMessage&#x60; to
+     * continue the conversation. #### Error responses | Code | Description | |------|-------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view permission on the specified metadata object. | &gt; ###### Note: &gt; * This
      * endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made
      * Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot
      * support to enable Spotter on your cluster.
@@ -3511,6 +3693,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -3523,13 +3707,19 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 10.4.0.cl or later Creates a Conversation object to start an
-     * AI-driven conversation based on a specific data model. Requires at least view access to the
-     * metadata object specified in the request. #### Usage guidelines This API requires the
-     * &#x60;metadata_identifier&#x60; parameter to define the context for the conversation. You can
-     * also specify the tokens to initiate the conversation as shown in this example:
-     * &#x60;\&quot;tokens\&quot;: \&quot;[tea],[sales],[type]\&quot;&#x60; If the API request is
-     * successful, ThoughtSpot returns the ID of the conversation. &gt; ###### Note: &gt; * This
+     * (asynchronously) Version: 10.4.0.cl or later Creates a new conversation session tied to a
+     * specific data model for AI-driven natural language querying. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view access to the metadata object
+     * specified in the request. #### Usage guidelines The request must include: -
+     * &#x60;metadata_identifier&#x60;: the unique ID of the data source that provides context for
+     * the conversation Optionally, you can provide: - &#x60;tokens&#x60;: a token string to set
+     * initial context for the conversation (e.g., &#x60;\&quot;[sales],[item
+     * type],[state]\&quot;&#x60;) If the request is successful, ThoughtSpot returns a unique
+     * &#x60;conversation_identifier&#x60; that must be passed to &#x60;sendMessage&#x60; to
+     * continue the conversation. #### Error responses | Code | Description | |------|-------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view permission on the specified metadata object. | &gt; ###### Note: &gt; * This
      * endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made
      * Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot
      * support to enable Spotter on your cluster.
@@ -3546,6 +3736,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -3891,7 +4083,7 @@ public class ThoughtSpotRestApi {
      * \&quot;https://your-website.com/\&quot;, \&quot;company_privacy_policy_url\&quot; :
      * \&quot;https://link-to-privacy-policy.com/\&quot;, \&quot;contact_support_url\&quot;:
      * \&quot;https://link-to-contact-support.com/\&quot;, \&quot;hide_contact_support_url\&quot;:
-     * false } } &#x60;&#x60;&#x60;
+     * false, \&quot;hide_logo_url\&quot; : false } } &#x60;&#x60;&#x60;
      *
      * @param createEmailCustomizationRequest (required)
      * @return CreateEmailCustomizationResponse
@@ -3943,7 +4135,7 @@ public class ThoughtSpotRestApi {
      * \&quot;https://your-website.com/\&quot;, \&quot;company_privacy_policy_url\&quot; :
      * \&quot;https://link-to-privacy-policy.com/\&quot;, \&quot;contact_support_url\&quot;:
      * \&quot;https://link-to-contact-support.com/\&quot;, \&quot;hide_contact_support_url\&quot;:
-     * false } } &#x60;&#x60;&#x60;
+     * false, \&quot;hide_logo_url\&quot; : false } } &#x60;&#x60;&#x60;
      *
      * @param createEmailCustomizationRequest (required)
      * @return ApiResponse&lt;CreateEmailCustomizationResponse&gt;
@@ -3996,7 +4188,7 @@ public class ThoughtSpotRestApi {
      * \&quot;https://your-website.com/\&quot;, \&quot;company_privacy_policy_url\&quot; :
      * \&quot;https://link-to-privacy-policy.com/\&quot;, \&quot;contact_support_url\&quot;:
      * \&quot;https://link-to-contact-support.com/\&quot;, \&quot;hide_contact_support_url\&quot;:
-     * false } } &#x60;&#x60;&#x60;
+     * false, \&quot;hide_logo_url\&quot; : false } } &#x60;&#x60;&#x60;
      *
      * @param createEmailCustomizationRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -9789,11 +9981,14 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Delete a variable Version: 10.14.0.cl or later Allows deleting a variable from ThoughtSpot.
-     * Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you
-     * to manage Formula Variables in the current organization scope. The API endpoint requires: *
-     * The variable identifier (ID or name) The operation will fail if: * The user lacks required
-     * permissions * The variable doesn&#39;t exist * The variable is being used by other objects
+     * Delete a variable Version: 10.14.0.cl or later **Note:** This API endpoint is deprecated and
+     * will be removed from ThoughtSpot in a future release. Use [POST
+     * /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.
+     * Allows deleting a variable from ThoughtSpot. Requires ADMINISTRATION role and TENANT scope.
+     * The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current
+     * organization scope. The API endpoint requires: * The variable identifier (ID or name) The
+     * operation will fail if: * The user lacks required permissions * The variable doesn&#39;t
+     * exist * The variable is being used by other objects
      *
      * @param identifier Unique id or name of the variable (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -9814,11 +10009,14 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Delete a variable Version: 10.14.0.cl or later Allows deleting a variable from ThoughtSpot.
-     * Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you
-     * to manage Formula Variables in the current organization scope. The API endpoint requires: *
-     * The variable identifier (ID or name) The operation will fail if: * The user lacks required
-     * permissions * The variable doesn&#39;t exist * The variable is being used by other objects
+     * Delete a variable Version: 10.14.0.cl or later **Note:** This API endpoint is deprecated and
+     * will be removed from ThoughtSpot in a future release. Use [POST
+     * /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.
+     * Allows deleting a variable from ThoughtSpot. Requires ADMINISTRATION role and TENANT scope.
+     * The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current
+     * organization scope. The API endpoint requires: * The variable identifier (ID or name) The
+     * operation will fail if: * The user lacks required permissions * The variable doesn&#39;t
+     * exist * The variable is being used by other objects
      *
      * @param identifier Unique id or name of the variable (required)
      * @return ApiResponse&lt;Void&gt;
@@ -9841,12 +10039,14 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Delete a variable Version: 10.14.0.cl or later Allows deleting a variable
-     * from ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES
-     * permission allows you to manage Formula Variables in the current organization scope. The API
-     * endpoint requires: * The variable identifier (ID or name) The operation will fail if: * The
-     * user lacks required permissions * The variable doesn&#39;t exist * The variable is being used
-     * by other objects
+     * (asynchronously) Delete a variable Version: 10.14.0.cl or later **Note:** This API endpoint
+     * is deprecated and will be removed from ThoughtSpot in a future release. Use [POST
+     * /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.
+     * Allows deleting a variable from ThoughtSpot. Requires ADMINISTRATION role and TENANT scope.
+     * The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current
+     * organization scope. The API endpoint requires: * The variable identifier (ID or name) The
+     * operation will fail if: * The user lacks required permissions * The variable doesn&#39;t
+     * exist * The variable is being used by other objects
      *
      * @param identifier Unique id or name of the variable (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -10528,11 +10728,14 @@ public class ThoughtSpotRestApi {
     /**
      * Version: 9.0.0.cl or later Exports an Answer in the given file format. You can download the
      * Answer data as a PDF, PNG, CSV, or XLSX file. Requires at least view access to the Answer.
-     * #### Usage guidelines In the request body, the GUID or name of the Answer and set
-     * &#x60;file_format&#x60;. The default file format is CSV. **NOTE**: * The downloadable file
-     * returned in API response file is extensionless. Please rename the downloaded file by typing
-     * in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with
-     * tables. Optionally, you can define [runtime
+     * #### Usage guidelines In the request body, specify the GUID or name of the Answer and set
+     * &#x60;file_format&#x60;. The default file format is CSV. Use the &#x60;type&#x60; parameter
+     * to specify whether the Answer being exported is a saved Answer (&#x60;SAVED&#x60;) or a
+     * pinned Answer on a Liveboard (&#x60;PINNED&#x60;). Defaults to &#x60;SAVED&#x60;. When using
+     * &#x60;PINNED&#x60;, the &#x60;metadata_identifier&#x60; must be the container id. **NOTE**: *
+     * The downloadable file returned in API response file is extensionless. Please rename the
+     * downloaded file by typing in the relevant extension. * HTML rendering is not supported for
+     * PDF exports of Answers with tables. Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
      * to apply to the Answer data.
      *
@@ -10560,11 +10763,14 @@ public class ThoughtSpotRestApi {
     /**
      * Version: 9.0.0.cl or later Exports an Answer in the given file format. You can download the
      * Answer data as a PDF, PNG, CSV, or XLSX file. Requires at least view access to the Answer.
-     * #### Usage guidelines In the request body, the GUID or name of the Answer and set
-     * &#x60;file_format&#x60;. The default file format is CSV. **NOTE**: * The downloadable file
-     * returned in API response file is extensionless. Please rename the downloaded file by typing
-     * in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with
-     * tables. Optionally, you can define [runtime
+     * #### Usage guidelines In the request body, specify the GUID or name of the Answer and set
+     * &#x60;file_format&#x60;. The default file format is CSV. Use the &#x60;type&#x60; parameter
+     * to specify whether the Answer being exported is a saved Answer (&#x60;SAVED&#x60;) or a
+     * pinned Answer on a Liveboard (&#x60;PINNED&#x60;). Defaults to &#x60;SAVED&#x60;. When using
+     * &#x60;PINNED&#x60;, the &#x60;metadata_identifier&#x60; must be the container id. **NOTE**: *
+     * The downloadable file returned in API response file is extensionless. Please rename the
+     * downloaded file by typing in the relevant extension. * HTML rendering is not supported for
+     * PDF exports of Answers with tables. Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
      * to apply to the Answer data.
      *
@@ -10594,11 +10800,15 @@ public class ThoughtSpotRestApi {
     /**
      * (asynchronously) Version: 9.0.0.cl or later Exports an Answer in the given file format. You
      * can download the Answer data as a PDF, PNG, CSV, or XLSX file. Requires at least view access
-     * to the Answer. #### Usage guidelines In the request body, the GUID or name of the Answer and
-     * set &#x60;file_format&#x60;. The default file format is CSV. **NOTE**: * The downloadable
-     * file returned in API response file is extensionless. Please rename the downloaded file by
-     * typing in the relevant extension. * HTML rendering is not supported for PDF exports of
-     * Answers with tables. Optionally, you can define [runtime
+     * to the Answer. #### Usage guidelines In the request body, specify the GUID or name of the
+     * Answer and set &#x60;file_format&#x60;. The default file format is CSV. Use the
+     * &#x60;type&#x60; parameter to specify whether the Answer being exported is a saved Answer
+     * (&#x60;SAVED&#x60;) or a pinned Answer on a Liveboard (&#x60;PINNED&#x60;). Defaults to
+     * &#x60;SAVED&#x60;. When using &#x60;PINNED&#x60;, the &#x60;metadata_identifier&#x60; must be
+     * the container id. **NOTE**: * The downloadable file returned in API response file is
+     * extensionless. Please rename the downloaded file by typing in the relevant extension. * HTML
+     * rendering is not supported for PDF exports of Answers with tables. Optionally, you can define
+     * [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
      * to apply to the Answer data.
      *
@@ -10717,35 +10927,31 @@ public class ThoughtSpotRestApi {
 
     /**
      * Version: 9.0.0.cl or later Exports a Liveboard and its visualizations in PDF, PNG, CSV, or
-     * XLSX file format. Requires at least view access to the Liveboard. #### Usage guidelines In
-     * the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report
-     * with specific visualizations, add GUIDs or names of the visualizations. The default
-     * &#x60;file_format&#x60; is CSV. For PDF exports, you can specify additional parameters to
-     * customize the page orientation and include or exclude the cover page, logo, footer text, and
-     * page numbers. Similar customization options are available for PNG exports. CSV and XLSX
-     * exports do not support customization options. **NOTE**: The downloadable file returned in API
-     * response file is extensionless. Please rename the downloaded file by typing in the relevant
-     * extension. Optionally, you can define [runtime
+     * XLSX file format. The default &#x60;file_format&#x60; is CSV. Requires at least view access
+     * to the Liveboard. #### Usage guidelines In the request body, specify the GUID or name of the
+     * Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of
+     * the visualizations. **NOTE**: * The downloadable file returned in API response file is
+     * extensionless. Please rename the downloaded file by typing in the relevant extension. *
+     * Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
-     * to apply to the Answer data. To include unsaved changes in the report, pass the
+     * to apply to the Answer data. * To include unsaved changes in the report, pass the
      * &#x60;transient_pinboard_content&#x60; script generated from the
      * &#x60;getExportRequestForCurrentPinboard&#x60; method in the Visual Embed SDK. Upon
      * successful execution, the API returns the report with unsaved changes, including ad hoc
      * changes to visualizations. For more information, see [Liveboard Report
      * API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
-     * **NOTE**: Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in
-     * the PNG format in the resolution of your choice. To enable this on your instance, contact
-     * ThoughtSpot support. When this feature is enabled, the options
+     * * Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in the PNG
+     * format in the resolution of your choice. To enable this on your instance, contact ThoughtSpot
+     * support. When this feature is enabled, the options
      * &#x60;include_cover_page&#x60;,&#x60;include_filter_page&#x60; within the
-     * &#x60;png_options&#x60; will not be available for PNG exports. **NOTE**: Starting with the
-     * ThoughtSpot Cloud 26.2.0.cl release, Liveboards can be exported in CSV format. All
-     * visualizations in the Liveboard can be exported as individual CSV files. If multiple
-     * visualizations are selected or if the entire Liveboard is exported, the output is returned as
-     * a .zip file containing the CSV files for each visualization. **NOTE**: Starting with the
-     * ThoughtSpot Cloud 26.2.0.cl release, Liveboards can be exported in XLSX format. All selected
-     * visualizations are consolidated into a single Excel workbook (.xlsx), with each visualization
-     * placed in its own worksheet (tab). XLSX exports are limited to 255 worksheets (tabs) per
-     * workbook.
+     * &#x60;png_options&#x60; will not be available for PNG exports. * Starting with the
+     * ThoughtSpot Cloud 26.2.0.cl release, * Liveboards can be exported in CSV format. * All
+     * visualizations within a Liveboard can be exported as individual CSV files. * When exporting
+     * multiple visualizations or the entire Liveboard, the system returns the report as a
+     * compressed ZIP file containing the separate CSV files for each visualization. * Liveboards
+     * can also be exported in XLSX format. * All selected visualizations are consolidated into a
+     * single Excel workbook (.xlsx), with each visualization placed in its own worksheet (tab). *
+     * XLSX exports are limited to a maximum of 255 worksheets (tabs) per workbook.
      *
      * @param exportLiveboardReportRequest (required)
      * @return File
@@ -10771,35 +10977,31 @@ public class ThoughtSpotRestApi {
 
     /**
      * Version: 9.0.0.cl or later Exports a Liveboard and its visualizations in PDF, PNG, CSV, or
-     * XLSX file format. Requires at least view access to the Liveboard. #### Usage guidelines In
-     * the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report
-     * with specific visualizations, add GUIDs or names of the visualizations. The default
-     * &#x60;file_format&#x60; is CSV. For PDF exports, you can specify additional parameters to
-     * customize the page orientation and include or exclude the cover page, logo, footer text, and
-     * page numbers. Similar customization options are available for PNG exports. CSV and XLSX
-     * exports do not support customization options. **NOTE**: The downloadable file returned in API
-     * response file is extensionless. Please rename the downloaded file by typing in the relevant
-     * extension. Optionally, you can define [runtime
+     * XLSX file format. The default &#x60;file_format&#x60; is CSV. Requires at least view access
+     * to the Liveboard. #### Usage guidelines In the request body, specify the GUID or name of the
+     * Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of
+     * the visualizations. **NOTE**: * The downloadable file returned in API response file is
+     * extensionless. Please rename the downloaded file by typing in the relevant extension. *
+     * Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
-     * to apply to the Answer data. To include unsaved changes in the report, pass the
+     * to apply to the Answer data. * To include unsaved changes in the report, pass the
      * &#x60;transient_pinboard_content&#x60; script generated from the
      * &#x60;getExportRequestForCurrentPinboard&#x60; method in the Visual Embed SDK. Upon
      * successful execution, the API returns the report with unsaved changes, including ad hoc
      * changes to visualizations. For more information, see [Liveboard Report
      * API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
-     * **NOTE**: Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in
-     * the PNG format in the resolution of your choice. To enable this on your instance, contact
-     * ThoughtSpot support. When this feature is enabled, the options
+     * * Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in the PNG
+     * format in the resolution of your choice. To enable this on your instance, contact ThoughtSpot
+     * support. When this feature is enabled, the options
      * &#x60;include_cover_page&#x60;,&#x60;include_filter_page&#x60; within the
-     * &#x60;png_options&#x60; will not be available for PNG exports. **NOTE**: Starting with the
-     * ThoughtSpot Cloud 26.2.0.cl release, Liveboards can be exported in CSV format. All
-     * visualizations in the Liveboard can be exported as individual CSV files. If multiple
-     * visualizations are selected or if the entire Liveboard is exported, the output is returned as
-     * a .zip file containing the CSV files for each visualization. **NOTE**: Starting with the
-     * ThoughtSpot Cloud 26.2.0.cl release, Liveboards can be exported in XLSX format. All selected
-     * visualizations are consolidated into a single Excel workbook (.xlsx), with each visualization
-     * placed in its own worksheet (tab). XLSX exports are limited to 255 worksheets (tabs) per
-     * workbook.
+     * &#x60;png_options&#x60; will not be available for PNG exports. * Starting with the
+     * ThoughtSpot Cloud 26.2.0.cl release, * Liveboards can be exported in CSV format. * All
+     * visualizations within a Liveboard can be exported as individual CSV files. * When exporting
+     * multiple visualizations or the entire Liveboard, the system returns the report as a
+     * compressed ZIP file containing the separate CSV files for each visualization. * Liveboards
+     * can also be exported in XLSX format. * All selected visualizations are consolidated into a
+     * single Excel workbook (.xlsx), with each visualization placed in its own worksheet (tab). *
+     * XLSX exports are limited to a maximum of 255 worksheets (tabs) per workbook.
      *
      * @param exportLiveboardReportRequest (required)
      * @return ApiResponse&lt;File&gt;
@@ -10826,35 +11028,31 @@ public class ThoughtSpotRestApi {
 
     /**
      * (asynchronously) Version: 9.0.0.cl or later Exports a Liveboard and its visualizations in
-     * PDF, PNG, CSV, or XLSX file format. Requires at least view access to the Liveboard. ####
-     * Usage guidelines In the request body, specify the GUID or name of the Liveboard. To generate
-     * a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.
-     * The default &#x60;file_format&#x60; is CSV. For PDF exports, you can specify additional
-     * parameters to customize the page orientation and include or exclude the cover page, logo,
-     * footer text, and page numbers. Similar customization options are available for PNG exports.
-     * CSV and XLSX exports do not support customization options. **NOTE**: The downloadable file
-     * returned in API response file is extensionless. Please rename the downloaded file by typing
-     * in the relevant extension. Optionally, you can define [runtime
+     * PDF, PNG, CSV, or XLSX file format. The default &#x60;file_format&#x60; is CSV. Requires at
+     * least view access to the Liveboard. #### Usage guidelines In the request body, specify the
+     * GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations,
+     * add GUIDs or names of the visualizations. **NOTE**: * The downloadable file returned in API
+     * response file is extensionless. Please rename the downloaded file by typing in the relevant
+     * extension. * Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
-     * to apply to the Answer data. To include unsaved changes in the report, pass the
+     * to apply to the Answer data. * To include unsaved changes in the report, pass the
      * &#x60;transient_pinboard_content&#x60; script generated from the
      * &#x60;getExportRequestForCurrentPinboard&#x60; method in the Visual Embed SDK. Upon
      * successful execution, the API returns the report with unsaved changes, including ad hoc
      * changes to visualizations. For more information, see [Liveboard Report
      * API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
-     * **NOTE**: Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in
-     * the PNG format in the resolution of your choice. To enable this on your instance, contact
-     * ThoughtSpot support. When this feature is enabled, the options
+     * * Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in the PNG
+     * format in the resolution of your choice. To enable this on your instance, contact ThoughtSpot
+     * support. When this feature is enabled, the options
      * &#x60;include_cover_page&#x60;,&#x60;include_filter_page&#x60; within the
-     * &#x60;png_options&#x60; will not be available for PNG exports. **NOTE**: Starting with the
-     * ThoughtSpot Cloud 26.2.0.cl release, Liveboards can be exported in CSV format. All
-     * visualizations in the Liveboard can be exported as individual CSV files. If multiple
-     * visualizations are selected or if the entire Liveboard is exported, the output is returned as
-     * a .zip file containing the CSV files for each visualization. **NOTE**: Starting with the
-     * ThoughtSpot Cloud 26.2.0.cl release, Liveboards can be exported in XLSX format. All selected
-     * visualizations are consolidated into a single Excel workbook (.xlsx), with each visualization
-     * placed in its own worksheet (tab). XLSX exports are limited to 255 worksheets (tabs) per
-     * workbook.
+     * &#x60;png_options&#x60; will not be available for PNG exports. * Starting with the
+     * ThoughtSpot Cloud 26.2.0.cl release, * Liveboards can be exported in CSV format. * All
+     * visualizations within a Liveboard can be exported as individual CSV files. * When exporting
+     * multiple visualizations or the entire Liveboard, the system returns the report as a
+     * compressed ZIP file containing the separate CSV files for each visualization. * Liveboards
+     * can also be exported in XLSX format. * All selected visualizations are consolidated into a
+     * single Excel workbook (.xlsx), with each visualization placed in its own worksheet (tab). *
+     * XLSX exports are limited to a maximum of 255 worksheets (tabs) per workbook.
      *
      * @param exportLiveboardReportRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -13852,7 +14050,11 @@ public class ThoughtSpotRestApi {
      * Version: 9.0.0.cl or later Retrieves details of the current user session for the token
      * provided in the request header. Any ThoughtSpot user can access this endpoint and send an API
      * request. The data returned in the API response varies according to user&#39;s privilege and
-     * object access permissions.
+     * object access permissions. **NOTE**: In ThoughtSpot, users with cluster administration
+     * privileges can access all Orgs by default. However, unless the administrator is explicitly
+     * added to an Org, the Orgs list in the session information returned by the API will include
+     * only the Primary Org. To include other Orgs in the API response, you must explicitly add the
+     * administrator to each Org in the Admin settings page in the UI or via user REST API.
      *
      * @return User
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -13877,7 +14079,11 @@ public class ThoughtSpotRestApi {
      * Version: 9.0.0.cl or later Retrieves details of the current user session for the token
      * provided in the request header. Any ThoughtSpot user can access this endpoint and send an API
      * request. The data returned in the API response varies according to user&#39;s privilege and
-     * object access permissions.
+     * object access permissions. **NOTE**: In ThoughtSpot, users with cluster administration
+     * privileges can access all Orgs by default. However, unless the administrator is explicitly
+     * added to an Org, the Orgs list in the session information returned by the API will include
+     * only the Primary Org. To include other Orgs in the API response, you must explicitly add the
+     * administrator to each Org in the Admin settings page in the UI or via user REST API.
      *
      * @return ApiResponse&lt;User&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -13903,7 +14109,12 @@ public class ThoughtSpotRestApi {
      * (asynchronously) Version: 9.0.0.cl or later Retrieves details of the current user session for
      * the token provided in the request header. Any ThoughtSpot user can access this endpoint and
      * send an API request. The data returned in the API response varies according to user&#39;s
-     * privilege and object access permissions.
+     * privilege and object access permissions. **NOTE**: In ThoughtSpot, users with cluster
+     * administration privileges can access all Orgs by default. However, unless the administrator
+     * is explicitly added to an Org, the Orgs list in the session information returned by the API
+     * will include only the Primary Org. To include other Orgs in the API response, you must
+     * explicitly add the administrator to each Org in the Admin settings page in the UI or via user
+     * REST API.
      *
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -14179,61 +14390,65 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.4.0.cl or later Gets an authentication token with custom rules and security
-     * attributes and creates a full session in ThoughtSpot for a given user. By default, the token
-     * obtained from ThoughtSpot remains valid for 5 mins. To add a new user and assign privileges
-     * during auto creation, you need &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**)
-     * privilege. If [Role-Based Access Control
+     * Version: 10.4.0.cl or later Creates an authentication token that provides values for the
+     * formula variables in the Row Level Security (RLS) rules for a given user. Recommended for use
+     * cases that require Attribute-based access control (ABAC) via RLS. #### Required privileges To
+     * add a new user and assign privileges during auto-creation, the &#x60;ADMINISTRATION&#x60;
+     * (**Can administer ThoughtSpot**) privilege is required. If [Role-Based Access Control
      * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
-     * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
-     * and edit access to the data source is required. To assign security attributes with filter
-     * rules and Parameters to the JWT token, you&#39;ll need administrator privileges and edit
-     * access to the data source (Worksheet or Model). If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
-     * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
-     * and edit access to the data source is required. #### Usage guidelines You can generate the
-     * token for a user by providing a &#x60;username&#x60; and &#x60;password&#x60;, or by using
-     * the cluster’s &#x60;secret_key&#x60;. To generate a &#x60;secret_key&#x60; on your cluster,
-     * the administrator must enable [Trusted
-     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable)
-     * in the **Develop** &gt; **Customizations** &gt; **Security Settings** page. **Note**: When
-     * both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,
-     * &#x60;password&#x60; takes precedence. If Multi-Factor Authentication (MFA) is enabled on
-     * your instance, the API login request with basic authentication (&#x60;username&#x60; and
-     * &#x60;password&#x60; ) returns an error. You can switch to token-based authentication with
-     * &#x60;secret_key&#x60; or contact ThoughtSpot Support for assistance. ##### Attribute-Based
-     * Access Control (ABAC) with tokens To implement Attribute-Based Access Control (ABAC) and
-     * assign security entitlements to users during session creation, you can generate a token with
-     * custom filtering rules and Parameters in the &#x60;filter_rules&#x60; and
-     * &#x60;parameter_values&#x60; array respectively. These attributes can be configured to
-     * persist on a specific set of objects for user sessions initiated using the token. Once
-     * defined, the rules are added to the user&#39;s &#x60;access_control_properties&#x60; object,
-     * after which all sessions will use the persisted values. Specify the object type as
-     * &#x60;LOGICAL_TABLE&#x60;. For more information, see [ABAC via tokens
-     * Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).
-     * ##### Just-in-time provisioning For just-in-time user creation and provisioning, define the
-     * following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60; (**Can Enable or Disable Trusted Authentication**) privilege
+     * and edit access to the data source are required. To configure formula variables for all Orgs
+     * on your instance or the Primary Org, cluster administration privileges are required. Org
+     * administrators can configure formula variables for their respective Orgs. If Role-Based
+     * Access Control (RBAC) is enabled, users with the &#x60;CAN_MANAGE_VARIABLES&#x60; (**Can
+     * manage variables**) role privilege can also create and manage variables for their Org
+     * context. #### Usage guidelines You can generate a token by providing a &#x60;username&#x60;
+     * and &#x60;password&#x60;, or by using a &#x60;secret_key&#x60;. To generate a
+     * &#x60;secret_key&#x60;, the administrator must enable [Trusted
+     * authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the
+     * **Develop** &gt; **Customizations** &gt; **Security Settings** page. **Note**: * When both
+     * &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,
+     * &#x60;password&#x60; takes precedence. * If [Multi-Factor Authentication
+     * (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your
+     * instance, the API login request with &#x60;username&#x60; and &#x60;password&#x60; returns an
+     * error. You can switch to token-based authentication with &#x60;secret_key&#x60; or contact
+     * ThoughtSpot Support for assistance. The token obtained from ThoughtSpot is valid for 5
+     * minutes by default. You can configure the token expiration time as required. #### ABAC via
+     * RLS To implement ABAC via RLS and assign security entitlements to users during session
+     * creation, generate a token with custom variable values. The values set in the authentication
+     * token are applied to the formula variables referenced in RLS rules at the table level, which
+     * determines the data each user can access based on their entitlements. The variable values can
+     * be configured to persist for a specific set of Models in user sessions initiated with the
+     * token, allowing different RLS rules to be set for different data models. Once defined, the
+     * rules are added to the user&#39;s &#x60;variable_values&#x60; object, after which all
+     * sessions will use the persisted values. For more information, see [ABAC via tokens
+     * Documentation](https://developers.thoughtspot.com/docs/abac-via-rls-variables). ##### Formula
+     * variables Before defining variable values, ensure the variables are created and available on
+     * your instance. To create a formula variable, you can use the **Create variable**
+     * (&#x60;/api/rest/2.0/template/variables/create&#x60;) REST API endpoint, with the variable
+     * &#x60;type&#x60; set as &#x60;Formula_Variable&#x60; in the API request. The API doesn&#39;t
+     * support &#x60;\&quot;persist_option\&quot;: \&quot;RESET\&quot;&#x60; and
+     * &#x60;\&quot;persist_option\&quot;: \&quot;NONE\&quot;&#x60; when &#x60;variable_values&#x60;
+     * are defined in the request. If you are using &#x60;variable_values&#x60; for token
+     * generation, you must use other supported persist options such as &#x60;APPEND&#x60; or
+     * &#x60;REPLACE&#x60;. If you want to use &#x60;RESET&#x60; or &#x60;NONE&#x60;, do not pass
+     * any &#x60;variable_values&#x60;. In such cases, &#x60;variable_values&#x60; will remain
+     * unaffected. #### Supported objects The supported object type is &#x60;LOGICAL_TABLE&#x60;.
+     * When using &#x60;object_id&#x60; with &#x60;variable_values&#x60;, models are supported. ####
+     * Just-in-time provisioning For [just-in-time user creation and
+     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the
+     * following attributes in the API request: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
      * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;groups&#x60; Set &#x60;auto_create&#x60;
-     * to &#x60;true&#x60; if the user is not available in ThoughtSpot. If the user already exists
-     * in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60; in the
-     * API request, the user properties such as the display name, email, Org and group assignment
-     * will not be updated with new values. If &#x60;auto_create&#x60; is set to &#x60;true&#x60;,
-     * it won&#39;t create formula variables and hence won&#39;t be applicable for
-     * &#x60;variable_values&#x60;. For more information, see [Just-in-time
-     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). #####
-     * Important point to note All options in the token creation APIs that define access to the
-     * content in ThoughtSpot will do so during the token creation and not when the token is being
-     * used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when
-     * the authentication token is created. Persist options such as &#x60;APPEND&#x60;,
-     * &#x60;REPLACE&#x60;, &#x60;RESET&#x60; will persist security parameters on the user profile
-     * when the token is created, while Persist option &#x60;NONE&#x60; will not persist anything
-     * but will be honoured in the session. ##### Formula Variables Before using variables_values,
-     * variables must be created using Create Variable API with type as Formula_Variable
-     * (/api/rest/2.0/template/variables/create) The persist_option RESET and NONE cannot be used
-     * when variable_values are provided in the request. If you are working with variable_values,
-     * you must use other (APPEND, REPLACE) supported modes. If you want to use RESET or NONE, do
-     * not pass any variable_values. In such cases, variable_values will remain unaffected. When
-     * using object_id with variable_values, models are supported.
+     * to &#x60;true&#x60; if the username does not exist in ThoughtSpot. If the username already
+     * exists in ThoughtSpot and &#x60;auto_create&#x60; is set to &#x60;true&#x60;, user properties
+     * such as display name, email, Org and group entitlements will not be updated with new values.
+     * Setting &#x60;auto_create&#x60; to &#x60;true&#x60; does not create formula variables. Hence,
+     * this setting will not be applicable to &#x60;variable_values&#x60;. #### Important point to
+     * note All options in the token creation APIs that define user access to data in ThoughtSpot
+     * will take effect during token creation, not when the token is used for authentication. For
+     * example, &#x60;auto_create:true&#x60; will create the user when the authentication token is
+     * created. Persist options such as &#x60;APPEND&#x60; and &#x60;REPLACE&#x60; will persist
+     * &#x60;variable_values&#x60; on the user profile when the token is created.
      *
      * @param getCustomAccessTokenRequest (required)
      * @return AccessToken
@@ -14258,61 +14473,65 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.4.0.cl or later Gets an authentication token with custom rules and security
-     * attributes and creates a full session in ThoughtSpot for a given user. By default, the token
-     * obtained from ThoughtSpot remains valid for 5 mins. To add a new user and assign privileges
-     * during auto creation, you need &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**)
-     * privilege. If [Role-Based Access Control
+     * Version: 10.4.0.cl or later Creates an authentication token that provides values for the
+     * formula variables in the Row Level Security (RLS) rules for a given user. Recommended for use
+     * cases that require Attribute-based access control (ABAC) via RLS. #### Required privileges To
+     * add a new user and assign privileges during auto-creation, the &#x60;ADMINISTRATION&#x60;
+     * (**Can administer ThoughtSpot**) privilege is required. If [Role-Based Access Control
      * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
-     * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
-     * and edit access to the data source is required. To assign security attributes with filter
-     * rules and Parameters to the JWT token, you&#39;ll need administrator privileges and edit
-     * access to the data source (Worksheet or Model). If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
-     * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
-     * and edit access to the data source is required. #### Usage guidelines You can generate the
-     * token for a user by providing a &#x60;username&#x60; and &#x60;password&#x60;, or by using
-     * the cluster’s &#x60;secret_key&#x60;. To generate a &#x60;secret_key&#x60; on your cluster,
-     * the administrator must enable [Trusted
-     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable)
-     * in the **Develop** &gt; **Customizations** &gt; **Security Settings** page. **Note**: When
-     * both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,
-     * &#x60;password&#x60; takes precedence. If Multi-Factor Authentication (MFA) is enabled on
-     * your instance, the API login request with basic authentication (&#x60;username&#x60; and
-     * &#x60;password&#x60; ) returns an error. You can switch to token-based authentication with
-     * &#x60;secret_key&#x60; or contact ThoughtSpot Support for assistance. ##### Attribute-Based
-     * Access Control (ABAC) with tokens To implement Attribute-Based Access Control (ABAC) and
-     * assign security entitlements to users during session creation, you can generate a token with
-     * custom filtering rules and Parameters in the &#x60;filter_rules&#x60; and
-     * &#x60;parameter_values&#x60; array respectively. These attributes can be configured to
-     * persist on a specific set of objects for user sessions initiated using the token. Once
-     * defined, the rules are added to the user&#39;s &#x60;access_control_properties&#x60; object,
-     * after which all sessions will use the persisted values. Specify the object type as
-     * &#x60;LOGICAL_TABLE&#x60;. For more information, see [ABAC via tokens
-     * Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).
-     * ##### Just-in-time provisioning For just-in-time user creation and provisioning, define the
-     * following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60; (**Can Enable or Disable Trusted Authentication**) privilege
+     * and edit access to the data source are required. To configure formula variables for all Orgs
+     * on your instance or the Primary Org, cluster administration privileges are required. Org
+     * administrators can configure formula variables for their respective Orgs. If Role-Based
+     * Access Control (RBAC) is enabled, users with the &#x60;CAN_MANAGE_VARIABLES&#x60; (**Can
+     * manage variables**) role privilege can also create and manage variables for their Org
+     * context. #### Usage guidelines You can generate a token by providing a &#x60;username&#x60;
+     * and &#x60;password&#x60;, or by using a &#x60;secret_key&#x60;. To generate a
+     * &#x60;secret_key&#x60;, the administrator must enable [Trusted
+     * authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the
+     * **Develop** &gt; **Customizations** &gt; **Security Settings** page. **Note**: * When both
+     * &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,
+     * &#x60;password&#x60; takes precedence. * If [Multi-Factor Authentication
+     * (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your
+     * instance, the API login request with &#x60;username&#x60; and &#x60;password&#x60; returns an
+     * error. You can switch to token-based authentication with &#x60;secret_key&#x60; or contact
+     * ThoughtSpot Support for assistance. The token obtained from ThoughtSpot is valid for 5
+     * minutes by default. You can configure the token expiration time as required. #### ABAC via
+     * RLS To implement ABAC via RLS and assign security entitlements to users during session
+     * creation, generate a token with custom variable values. The values set in the authentication
+     * token are applied to the formula variables referenced in RLS rules at the table level, which
+     * determines the data each user can access based on their entitlements. The variable values can
+     * be configured to persist for a specific set of Models in user sessions initiated with the
+     * token, allowing different RLS rules to be set for different data models. Once defined, the
+     * rules are added to the user&#39;s &#x60;variable_values&#x60; object, after which all
+     * sessions will use the persisted values. For more information, see [ABAC via tokens
+     * Documentation](https://developers.thoughtspot.com/docs/abac-via-rls-variables). ##### Formula
+     * variables Before defining variable values, ensure the variables are created and available on
+     * your instance. To create a formula variable, you can use the **Create variable**
+     * (&#x60;/api/rest/2.0/template/variables/create&#x60;) REST API endpoint, with the variable
+     * &#x60;type&#x60; set as &#x60;Formula_Variable&#x60; in the API request. The API doesn&#39;t
+     * support &#x60;\&quot;persist_option\&quot;: \&quot;RESET\&quot;&#x60; and
+     * &#x60;\&quot;persist_option\&quot;: \&quot;NONE\&quot;&#x60; when &#x60;variable_values&#x60;
+     * are defined in the request. If you are using &#x60;variable_values&#x60; for token
+     * generation, you must use other supported persist options such as &#x60;APPEND&#x60; or
+     * &#x60;REPLACE&#x60;. If you want to use &#x60;RESET&#x60; or &#x60;NONE&#x60;, do not pass
+     * any &#x60;variable_values&#x60;. In such cases, &#x60;variable_values&#x60; will remain
+     * unaffected. #### Supported objects The supported object type is &#x60;LOGICAL_TABLE&#x60;.
+     * When using &#x60;object_id&#x60; with &#x60;variable_values&#x60;, models are supported. ####
+     * Just-in-time provisioning For [just-in-time user creation and
+     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the
+     * following attributes in the API request: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
      * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;groups&#x60; Set &#x60;auto_create&#x60;
-     * to &#x60;true&#x60; if the user is not available in ThoughtSpot. If the user already exists
-     * in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60; in the
-     * API request, the user properties such as the display name, email, Org and group assignment
-     * will not be updated with new values. If &#x60;auto_create&#x60; is set to &#x60;true&#x60;,
-     * it won&#39;t create formula variables and hence won&#39;t be applicable for
-     * &#x60;variable_values&#x60;. For more information, see [Just-in-time
-     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). #####
-     * Important point to note All options in the token creation APIs that define access to the
-     * content in ThoughtSpot will do so during the token creation and not when the token is being
-     * used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when
-     * the authentication token is created. Persist options such as &#x60;APPEND&#x60;,
-     * &#x60;REPLACE&#x60;, &#x60;RESET&#x60; will persist security parameters on the user profile
-     * when the token is created, while Persist option &#x60;NONE&#x60; will not persist anything
-     * but will be honoured in the session. ##### Formula Variables Before using variables_values,
-     * variables must be created using Create Variable API with type as Formula_Variable
-     * (/api/rest/2.0/template/variables/create) The persist_option RESET and NONE cannot be used
-     * when variable_values are provided in the request. If you are working with variable_values,
-     * you must use other (APPEND, REPLACE) supported modes. If you want to use RESET or NONE, do
-     * not pass any variable_values. In such cases, variable_values will remain unaffected. When
-     * using object_id with variable_values, models are supported.
+     * to &#x60;true&#x60; if the username does not exist in ThoughtSpot. If the username already
+     * exists in ThoughtSpot and &#x60;auto_create&#x60; is set to &#x60;true&#x60;, user properties
+     * such as display name, email, Org and group entitlements will not be updated with new values.
+     * Setting &#x60;auto_create&#x60; to &#x60;true&#x60; does not create formula variables. Hence,
+     * this setting will not be applicable to &#x60;variable_values&#x60;. #### Important point to
+     * note All options in the token creation APIs that define user access to data in ThoughtSpot
+     * will take effect during token creation, not when the token is used for authentication. For
+     * example, &#x60;auto_create:true&#x60; will create the user when the authentication token is
+     * created. Persist options such as &#x60;APPEND&#x60; and &#x60;REPLACE&#x60; will persist
+     * &#x60;variable_values&#x60; on the user profile when the token is created.
      *
      * @param getCustomAccessTokenRequest (required)
      * @return ApiResponse&lt;AccessToken&gt;
@@ -14338,61 +14557,65 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 10.4.0.cl or later Gets an authentication token with custom rules
-     * and security attributes and creates a full session in ThoughtSpot for a given user. By
-     * default, the token obtained from ThoughtSpot remains valid for 5 mins. To add a new user and
-     * assign privileges during auto creation, you need &#x60;ADMINISTRATION&#x60; (**Can administer
-     * ThoughtSpot**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
-     * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
-     * and edit access to the data source is required. To assign security attributes with filter
-     * rules and Parameters to the JWT token, you&#39;ll need administrator privileges and edit
-     * access to the data source (Worksheet or Model). If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
-     * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
-     * and edit access to the data source is required. #### Usage guidelines You can generate the
-     * token for a user by providing a &#x60;username&#x60; and &#x60;password&#x60;, or by using
-     * the cluster’s &#x60;secret_key&#x60;. To generate a &#x60;secret_key&#x60; on your cluster,
-     * the administrator must enable [Trusted
-     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable)
-     * in the **Develop** &gt; **Customizations** &gt; **Security Settings** page. **Note**: When
-     * both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,
-     * &#x60;password&#x60; takes precedence. If Multi-Factor Authentication (MFA) is enabled on
-     * your instance, the API login request with basic authentication (&#x60;username&#x60; and
-     * &#x60;password&#x60; ) returns an error. You can switch to token-based authentication with
-     * &#x60;secret_key&#x60; or contact ThoughtSpot Support for assistance. ##### Attribute-Based
-     * Access Control (ABAC) with tokens To implement Attribute-Based Access Control (ABAC) and
-     * assign security entitlements to users during session creation, you can generate a token with
-     * custom filtering rules and Parameters in the &#x60;filter_rules&#x60; and
-     * &#x60;parameter_values&#x60; array respectively. These attributes can be configured to
-     * persist on a specific set of objects for user sessions initiated using the token. Once
-     * defined, the rules are added to the user&#39;s &#x60;access_control_properties&#x60; object,
-     * after which all sessions will use the persisted values. Specify the object type as
-     * &#x60;LOGICAL_TABLE&#x60;. For more information, see [ABAC via tokens
-     * Documentation](https://developers.thoughtspot.com/docs/api-authv2#_get_tokens_with_custom_rules_and_filter_conditions).
-     * ##### Just-in-time provisioning For just-in-time user creation and provisioning, define the
-     * following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
+     * (asynchronously) Version: 10.4.0.cl or later Creates an authentication token that provides
+     * values for the formula variables in the Row Level Security (RLS) rules for a given user.
+     * Recommended for use cases that require Attribute-based access control (ABAC) via RLS. ####
+     * Required privileges To add a new user and assign privileges during auto-creation, the
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required. If
+     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled,
+     * the &#x60;CONTROL_TRUSTED_AUTH&#x60; (**Can Enable or Disable Trusted Authentication**)
+     * privilege and edit access to the data source are required. To configure formula variables for
+     * all Orgs on your instance or the Primary Org, cluster administration privileges are required.
+     * Org administrators can configure formula variables for their respective Orgs. If Role-Based
+     * Access Control (RBAC) is enabled, users with the &#x60;CAN_MANAGE_VARIABLES&#x60; (**Can
+     * manage variables**) role privilege can also create and manage variables for their Org
+     * context. #### Usage guidelines You can generate a token by providing a &#x60;username&#x60;
+     * and &#x60;password&#x60;, or by using a &#x60;secret_key&#x60;. To generate a
+     * &#x60;secret_key&#x60;, the administrator must enable [Trusted
+     * authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the
+     * **Develop** &gt; **Customizations** &gt; **Security Settings** page. **Note**: * When both
+     * &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,
+     * &#x60;password&#x60; takes precedence. * If [Multi-Factor Authentication
+     * (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your
+     * instance, the API login request with &#x60;username&#x60; and &#x60;password&#x60; returns an
+     * error. You can switch to token-based authentication with &#x60;secret_key&#x60; or contact
+     * ThoughtSpot Support for assistance. The token obtained from ThoughtSpot is valid for 5
+     * minutes by default. You can configure the token expiration time as required. #### ABAC via
+     * RLS To implement ABAC via RLS and assign security entitlements to users during session
+     * creation, generate a token with custom variable values. The values set in the authentication
+     * token are applied to the formula variables referenced in RLS rules at the table level, which
+     * determines the data each user can access based on their entitlements. The variable values can
+     * be configured to persist for a specific set of Models in user sessions initiated with the
+     * token, allowing different RLS rules to be set for different data models. Once defined, the
+     * rules are added to the user&#39;s &#x60;variable_values&#x60; object, after which all
+     * sessions will use the persisted values. For more information, see [ABAC via tokens
+     * Documentation](https://developers.thoughtspot.com/docs/abac-via-rls-variables). ##### Formula
+     * variables Before defining variable values, ensure the variables are created and available on
+     * your instance. To create a formula variable, you can use the **Create variable**
+     * (&#x60;/api/rest/2.0/template/variables/create&#x60;) REST API endpoint, with the variable
+     * &#x60;type&#x60; set as &#x60;Formula_Variable&#x60; in the API request. The API doesn&#39;t
+     * support &#x60;\&quot;persist_option\&quot;: \&quot;RESET\&quot;&#x60; and
+     * &#x60;\&quot;persist_option\&quot;: \&quot;NONE\&quot;&#x60; when &#x60;variable_values&#x60;
+     * are defined in the request. If you are using &#x60;variable_values&#x60; for token
+     * generation, you must use other supported persist options such as &#x60;APPEND&#x60; or
+     * &#x60;REPLACE&#x60;. If you want to use &#x60;RESET&#x60; or &#x60;NONE&#x60;, do not pass
+     * any &#x60;variable_values&#x60;. In such cases, &#x60;variable_values&#x60; will remain
+     * unaffected. #### Supported objects The supported object type is &#x60;LOGICAL_TABLE&#x60;.
+     * When using &#x60;object_id&#x60; with &#x60;variable_values&#x60;, models are supported. ####
+     * Just-in-time provisioning For [just-in-time user creation and
+     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the
+     * following attributes in the API request: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
      * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;groups&#x60; Set &#x60;auto_create&#x60;
-     * to &#x60;true&#x60; if the user is not available in ThoughtSpot. If the user already exists
-     * in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60; in the
-     * API request, the user properties such as the display name, email, Org and group assignment
-     * will not be updated with new values. If &#x60;auto_create&#x60; is set to &#x60;true&#x60;,
-     * it won&#39;t create formula variables and hence won&#39;t be applicable for
-     * &#x60;variable_values&#x60;. For more information, see [Just-in-time
-     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). #####
-     * Important point to note All options in the token creation APIs that define access to the
-     * content in ThoughtSpot will do so during the token creation and not when the token is being
-     * used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when
-     * the authentication token is created. Persist options such as &#x60;APPEND&#x60;,
-     * &#x60;REPLACE&#x60;, &#x60;RESET&#x60; will persist security parameters on the user profile
-     * when the token is created, while Persist option &#x60;NONE&#x60; will not persist anything
-     * but will be honoured in the session. ##### Formula Variables Before using variables_values,
-     * variables must be created using Create Variable API with type as Formula_Variable
-     * (/api/rest/2.0/template/variables/create) The persist_option RESET and NONE cannot be used
-     * when variable_values are provided in the request. If you are working with variable_values,
-     * you must use other (APPEND, REPLACE) supported modes. If you want to use RESET or NONE, do
-     * not pass any variable_values. In such cases, variable_values will remain unaffected. When
-     * using object_id with variable_values, models are supported.
+     * to &#x60;true&#x60; if the username does not exist in ThoughtSpot. If the username already
+     * exists in ThoughtSpot and &#x60;auto_create&#x60; is set to &#x60;true&#x60;, user properties
+     * such as display name, email, Org and group entitlements will not be updated with new values.
+     * Setting &#x60;auto_create&#x60; to &#x60;true&#x60; does not create formula variables. Hence,
+     * this setting will not be applicable to &#x60;variable_values&#x60;. #### Important point to
+     * note All options in the token creation APIs that define user access to data in ThoughtSpot
+     * will take effect during token creation, not when the token is used for authentication. For
+     * example, &#x60;auto_create:true&#x60; will create the user when the authentication token is
+     * created. Persist options such as &#x60;APPEND&#x60; and &#x60;REPLACE&#x60; will persist
+     * &#x60;variable_values&#x60; on the user profile when the token is created.
      *
      * @param getCustomAccessTokenRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -14435,6 +14658,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -14510,19 +14735,25 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.15.0.cl or later Provides relevant data source recommendations for a
-     * user-submitted natural language query. To use this API, the user must have at least
-     * view-level access to the underlying metadata entities referenced in the response. #### Usage
-     * guidelines The request must include a &#x60;query&#x60; string via the request body. The
-     * returned results include metadata such as: - &#x60;confidence&#x60;: a float indicating the
-     * model&#39;s confidence in the relevance of each recommendation - &#x60;details&#x60;:
-     * includes &#x60;data_source_identifier&#x60;, &#x60;data_source_name&#x60;, and
-     * &#x60;description&#x60; of each recommended data source - &#x60;reasoning&#x60;: rationale
-     * provided by the LLM to explain why each data source was recommended If the API request is
-     * successful, ThoughtSpot returns a ranked list of data sources, each annotated with relevant
-     * reasoning. &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes may
-     * be introduced before it is made Generally Available. &gt; * This endpoint requires Spotter —
-     * please contact ThoughtSpot Support to enable Spotter on your cluster.
+     * Version: 10.15.0.cl or later Suggests the most relevant data sources for a given natural
+     * language query, ranked by confidence with LLM-generated reasoning. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view-level access to the underlying
+     * metadata entities referenced in the response. #### Usage guidelines The request must include:
+     * - &#x60;query&#x60;: the natural language question to find relevant data sources for If the
+     * request is successful, the API returns a ranked list of suggested data sources, each
+     * containing: - &#x60;confidence&#x60;: a float score indicating the model&#39;s confidence in
+     * the relevance of the suggestion - &#x60;details&#x60;: metadata about the data source -
+     * &#x60;data_source_identifier&#x60;: the unique ID of the data source -
+     * &#x60;data_source_name&#x60;: the display name of the data source - &#x60;description&#x60;:
+     * a description of the data source - &#x60;reasoning&#x60;: LLM-generated rationale explaining
+     * why the data source was recommended #### Error responses | Code | Description |
+     * |------|--------------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view permission on the underlying metadata entities. | &gt; ###### Note: &gt; * This
+     * endpoint is currently in Beta. Breaking changes may be introduced before it is made Generally
+     * Available. &gt; * This endpoint requires Spotter — please contact ThoughtSpot Support to
+     * enable Spotter on your cluster.
      *
      * @param getDataSourceSuggestionsRequest (required)
      * @return EurekaDataSourceSuggestionResponse
@@ -14535,6 +14766,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -14546,19 +14779,25 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.15.0.cl or later Provides relevant data source recommendations for a
-     * user-submitted natural language query. To use this API, the user must have at least
-     * view-level access to the underlying metadata entities referenced in the response. #### Usage
-     * guidelines The request must include a &#x60;query&#x60; string via the request body. The
-     * returned results include metadata such as: - &#x60;confidence&#x60;: a float indicating the
-     * model&#39;s confidence in the relevance of each recommendation - &#x60;details&#x60;:
-     * includes &#x60;data_source_identifier&#x60;, &#x60;data_source_name&#x60;, and
-     * &#x60;description&#x60; of each recommended data source - &#x60;reasoning&#x60;: rationale
-     * provided by the LLM to explain why each data source was recommended If the API request is
-     * successful, ThoughtSpot returns a ranked list of data sources, each annotated with relevant
-     * reasoning. &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes may
-     * be introduced before it is made Generally Available. &gt; * This endpoint requires Spotter —
-     * please contact ThoughtSpot Support to enable Spotter on your cluster.
+     * Version: 10.15.0.cl or later Suggests the most relevant data sources for a given natural
+     * language query, ranked by confidence with LLM-generated reasoning. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view-level access to the underlying
+     * metadata entities referenced in the response. #### Usage guidelines The request must include:
+     * - &#x60;query&#x60;: the natural language question to find relevant data sources for If the
+     * request is successful, the API returns a ranked list of suggested data sources, each
+     * containing: - &#x60;confidence&#x60;: a float score indicating the model&#39;s confidence in
+     * the relevance of the suggestion - &#x60;details&#x60;: metadata about the data source -
+     * &#x60;data_source_identifier&#x60;: the unique ID of the data source -
+     * &#x60;data_source_name&#x60;: the display name of the data source - &#x60;description&#x60;:
+     * a description of the data source - &#x60;reasoning&#x60;: LLM-generated rationale explaining
+     * why the data source was recommended #### Error responses | Code | Description |
+     * |------|--------------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view permission on the underlying metadata entities. | &gt; ###### Note: &gt; * This
+     * endpoint is currently in Beta. Breaking changes may be introduced before it is made Generally
+     * Available. &gt; * This endpoint requires Spotter — please contact ThoughtSpot Support to
+     * enable Spotter on your cluster.
      *
      * @param getDataSourceSuggestionsRequest (required)
      * @return ApiResponse&lt;EurekaDataSourceSuggestionResponse&gt;
@@ -14571,6 +14810,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -14583,19 +14824,25 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 10.15.0.cl or later Provides relevant data source recommendations
-     * for a user-submitted natural language query. To use this API, the user must have at least
-     * view-level access to the underlying metadata entities referenced in the response. #### Usage
-     * guidelines The request must include a &#x60;query&#x60; string via the request body. The
-     * returned results include metadata such as: - &#x60;confidence&#x60;: a float indicating the
-     * model&#39;s confidence in the relevance of each recommendation - &#x60;details&#x60;:
-     * includes &#x60;data_source_identifier&#x60;, &#x60;data_source_name&#x60;, and
-     * &#x60;description&#x60; of each recommended data source - &#x60;reasoning&#x60;: rationale
-     * provided by the LLM to explain why each data source was recommended If the API request is
-     * successful, ThoughtSpot returns a ranked list of data sources, each annotated with relevant
-     * reasoning. &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes may
-     * be introduced before it is made Generally Available. &gt; * This endpoint requires Spotter —
-     * please contact ThoughtSpot Support to enable Spotter on your cluster.
+     * (asynchronously) Version: 10.15.0.cl or later Suggests the most relevant data sources for a
+     * given natural language query, ranked by confidence with LLM-generated reasoning. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view-level access to the underlying
+     * metadata entities referenced in the response. #### Usage guidelines The request must include:
+     * - &#x60;query&#x60;: the natural language question to find relevant data sources for If the
+     * request is successful, the API returns a ranked list of suggested data sources, each
+     * containing: - &#x60;confidence&#x60;: a float score indicating the model&#39;s confidence in
+     * the relevance of the suggestion - &#x60;details&#x60;: metadata about the data source -
+     * &#x60;data_source_identifier&#x60;: the unique ID of the data source -
+     * &#x60;data_source_name&#x60;: the display name of the data source - &#x60;description&#x60;:
+     * a description of the data source - &#x60;reasoning&#x60;: LLM-generated rationale explaining
+     * why the data source was recommended #### Error responses | Code | Description |
+     * |------|--------------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view permission on the underlying metadata entities. | &gt; ###### Note: &gt; * This
+     * endpoint is currently in Beta. Breaking changes may be introduced before it is made Generally
+     * Available. &gt; * This endpoint requires Spotter — please contact ThoughtSpot Support to
+     * enable Spotter on your cluster.
      *
      * @param getDataSourceSuggestionsRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -14609,6 +14856,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -14712,36 +14961,36 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 9.0.0.cl or later Gets an authentication token and creates a full session in
-     * ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid
-     * for 5 mins. You can generate the token for a user by providing a &#x60;username&#x60; and
-     * &#x60;password&#x60;, or by using the cluster’s &#x60;secret_key&#x60; (for [Trusted
-     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable)).
-     * To generate a &#x60;secret_key&#x60; on your cluster, the administrator must enable **Trusted
-     * authentication** in the **Develop** &gt; **Customizations** &gt; **Security Settings** page.
-     * For more information, see [Trusted
-     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable).
-     * **Note**: When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API
-     * request, &#x60;password&#x60; takes precedence. If Multi-Factor Authentication (MFA) is
-     * enabled on your instance, the API login request with basic authentication
-     * (&#x60;username&#x60; and &#x60;password&#x60; ) returns an error. You can switch to
-     * token-based authentication with &#x60;secret_key&#x60; or contact ThoughtSpot Support for
-     * assistance. #### Just-in-time provisioning For just-in-time user creation and provisioning,
-     * define the following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
+     * Version: 9.0.0.cl or later Generates an authentication token for creating a full session in
+     * ThoughtSpot for a given user. Recommended for use cases that do not require Attribute-based
+     * access control (ABAC) via Row Level Security (RLS). #### Usage guidelines You can generate a
+     * token for a user by providing a &#x60;username&#x60; and &#x60;password&#x60;, or by using
+     * the &#x60;secret_key&#x60; generated for your instance. To generate a &#x60;secret_key&#x60;,
+     * the administrator must enable [Trusted
+     * authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the
+     * **Develop** &gt; **Customizations** &gt; **Security Settings** page. **Note**: * When both
+     * &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,
+     * &#x60;password&#x60; takes precedence. * If [Multi-Factor Authentication
+     * (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your
+     * instance, the API login request with &#x60;username&#x60; and &#x60;password&#x60; returns an
+     * error. You can switch to token-based authentication with &#x60;secret_key&#x60; or contact
+     * ThoughtSpot Support for assistance. The token obtained from ThoughtSpot is valid for 5
+     * minutes by default. You can configure the token expiration time as required. ####
+     * Just-in-time provisioning For [just-in-time user creation and
+     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the
+     * following attributes in the API request: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
      * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;group_identifiers&#x60; Set
-     * &#x60;auto_create&#x60; to &#x60;True&#x60; if the user is not available in ThoughtSpot. If
-     * the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to
-     * &#x60;true&#x60;, the API call will update user properties like display name, email and group
-     * assignment. For more information, see [Just-in-time
-     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). To add a
-     * new user and assign privileges, you need &#x60;ADMINISTRATION&#x60; (**Can administer
-     * ThoughtSpot**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
-     * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
-     * is required. #### Important point to note All options in the token creation APIs changing the
-     * content in ThoughtSpot will do so during the token creation and not when the token is being
-     * used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when
-     * the authentication token is created.
+     * &#x60;auto_create&#x60; to &#x60;true&#x60; if the username does not exist in ThoughtSpot. If
+     * the user already exists in ThoughtSpot and &#x60;auto_create&#x60; is set to
+     * &#x60;true&#x60;, user properties such as display name, email and group assignment will be
+     * updated. To add a new user and assign privileges during auto-creation, the
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required. If
+     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled,
+     * the &#x60;CONTROL_TRUSTED_AUTH&#x60; (**Can Enable or Disable Trusted Authentication**)
+     * privilege is required. #### Important point to note All options in the token creation APIs
+     * that define user access to data in ThoughtSpot will take effect during token creation, not
+     * when the token is used for authentication. For example, &#x60;auto_create:true&#x60; will
+     * create the user when the authentication token is created.
      *
      * @param getFullAccessTokenRequest (required)
      * @return Token
@@ -14765,36 +15014,36 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 9.0.0.cl or later Gets an authentication token and creates a full session in
-     * ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot remains valid
-     * for 5 mins. You can generate the token for a user by providing a &#x60;username&#x60; and
-     * &#x60;password&#x60;, or by using the cluster’s &#x60;secret_key&#x60; (for [Trusted
-     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable)).
-     * To generate a &#x60;secret_key&#x60; on your cluster, the administrator must enable **Trusted
-     * authentication** in the **Develop** &gt; **Customizations** &gt; **Security Settings** page.
-     * For more information, see [Trusted
-     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable).
-     * **Note**: When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API
-     * request, &#x60;password&#x60; takes precedence. If Multi-Factor Authentication (MFA) is
-     * enabled on your instance, the API login request with basic authentication
-     * (&#x60;username&#x60; and &#x60;password&#x60; ) returns an error. You can switch to
-     * token-based authentication with &#x60;secret_key&#x60; or contact ThoughtSpot Support for
-     * assistance. #### Just-in-time provisioning For just-in-time user creation and provisioning,
-     * define the following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
+     * Version: 9.0.0.cl or later Generates an authentication token for creating a full session in
+     * ThoughtSpot for a given user. Recommended for use cases that do not require Attribute-based
+     * access control (ABAC) via Row Level Security (RLS). #### Usage guidelines You can generate a
+     * token for a user by providing a &#x60;username&#x60; and &#x60;password&#x60;, or by using
+     * the &#x60;secret_key&#x60; generated for your instance. To generate a &#x60;secret_key&#x60;,
+     * the administrator must enable [Trusted
+     * authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the
+     * **Develop** &gt; **Customizations** &gt; **Security Settings** page. **Note**: * When both
+     * &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,
+     * &#x60;password&#x60; takes precedence. * If [Multi-Factor Authentication
+     * (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your
+     * instance, the API login request with &#x60;username&#x60; and &#x60;password&#x60; returns an
+     * error. You can switch to token-based authentication with &#x60;secret_key&#x60; or contact
+     * ThoughtSpot Support for assistance. The token obtained from ThoughtSpot is valid for 5
+     * minutes by default. You can configure the token expiration time as required. ####
+     * Just-in-time provisioning For [just-in-time user creation and
+     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the
+     * following attributes in the API request: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
      * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;group_identifiers&#x60; Set
-     * &#x60;auto_create&#x60; to &#x60;True&#x60; if the user is not available in ThoughtSpot. If
-     * the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to
-     * &#x60;true&#x60;, the API call will update user properties like display name, email and group
-     * assignment. For more information, see [Just-in-time
-     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). To add a
-     * new user and assign privileges, you need &#x60;ADMINISTRATION&#x60; (**Can administer
-     * ThoughtSpot**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
-     * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
-     * is required. #### Important point to note All options in the token creation APIs changing the
-     * content in ThoughtSpot will do so during the token creation and not when the token is being
-     * used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when
-     * the authentication token is created.
+     * &#x60;auto_create&#x60; to &#x60;true&#x60; if the username does not exist in ThoughtSpot. If
+     * the user already exists in ThoughtSpot and &#x60;auto_create&#x60; is set to
+     * &#x60;true&#x60;, user properties such as display name, email and group assignment will be
+     * updated. To add a new user and assign privileges during auto-creation, the
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required. If
+     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled,
+     * the &#x60;CONTROL_TRUSTED_AUTH&#x60; (**Can Enable or Disable Trusted Authentication**)
+     * privilege is required. #### Important point to note All options in the token creation APIs
+     * that define user access to data in ThoughtSpot will take effect during token creation, not
+     * when the token is used for authentication. For example, &#x60;auto_create:true&#x60; will
+     * create the user when the authentication token is created.
      *
      * @param getFullAccessTokenRequest (required)
      * @return ApiResponse&lt;Token&gt;
@@ -14820,37 +15069,36 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 9.0.0.cl or later Gets an authentication token and creates a full
-     * session in ThoughtSpot for a given user. By default, the token obtained from ThoughtSpot
-     * remains valid for 5 mins. You can generate the token for a user by providing a
-     * &#x60;username&#x60; and &#x60;password&#x60;, or by using the cluster’s
-     * &#x60;secret_key&#x60; (for [Trusted
-     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable)).
-     * To generate a &#x60;secret_key&#x60; on your cluster, the administrator must enable **Trusted
-     * authentication** in the **Develop** &gt; **Customizations** &gt; **Security Settings** page.
-     * For more information, see [Trusted
-     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable).
-     * **Note**: When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API
-     * request, &#x60;password&#x60; takes precedence. If Multi-Factor Authentication (MFA) is
-     * enabled on your instance, the API login request with basic authentication
-     * (&#x60;username&#x60; and &#x60;password&#x60; ) returns an error. You can switch to
-     * token-based authentication with &#x60;secret_key&#x60; or contact ThoughtSpot Support for
-     * assistance. #### Just-in-time provisioning For just-in-time user creation and provisioning,
-     * define the following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
+     * (asynchronously) Version: 9.0.0.cl or later Generates an authentication token for creating a
+     * full session in ThoughtSpot for a given user. Recommended for use cases that do not require
+     * Attribute-based access control (ABAC) via Row Level Security (RLS). #### Usage guidelines You
+     * can generate a token for a user by providing a &#x60;username&#x60; and &#x60;password&#x60;,
+     * or by using the &#x60;secret_key&#x60; generated for your instance. To generate a
+     * &#x60;secret_key&#x60;, the administrator must enable [Trusted
+     * authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the
+     * **Develop** &gt; **Customizations** &gt; **Security Settings** page. **Note**: * When both
+     * &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,
+     * &#x60;password&#x60; takes precedence. * If [Multi-Factor Authentication
+     * (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your
+     * instance, the API login request with &#x60;username&#x60; and &#x60;password&#x60; returns an
+     * error. You can switch to token-based authentication with &#x60;secret_key&#x60; or contact
+     * ThoughtSpot Support for assistance. The token obtained from ThoughtSpot is valid for 5
+     * minutes by default. You can configure the token expiration time as required. ####
+     * Just-in-time provisioning For [just-in-time user creation and
+     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the
+     * following attributes in the API request: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
      * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;group_identifiers&#x60; Set
-     * &#x60;auto_create&#x60; to &#x60;True&#x60; if the user is not available in ThoughtSpot. If
-     * the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to
-     * &#x60;true&#x60;, the API call will update user properties like display name, email and group
-     * assignment. For more information, see [Just-in-time
-     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). To add a
-     * new user and assign privileges, you need &#x60;ADMINISTRATION&#x60; (**Can administer
-     * ThoughtSpot**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
-     * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
-     * is required. #### Important point to note All options in the token creation APIs changing the
-     * content in ThoughtSpot will do so during the token creation and not when the token is being
-     * used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when
-     * the authentication token is created.
+     * &#x60;auto_create&#x60; to &#x60;true&#x60; if the username does not exist in ThoughtSpot. If
+     * the user already exists in ThoughtSpot and &#x60;auto_create&#x60; is set to
+     * &#x60;true&#x60;, user properties such as display name, email and group assignment will be
+     * updated. To add a new user and assign privileges during auto-creation, the
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required. If
+     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled,
+     * the &#x60;CONTROL_TRUSTED_AUTH&#x60; (**Can Enable or Disable Trusted Authentication**)
+     * privilege is required. #### Important point to note All options in the token creation APIs
+     * that define user access to data in ThoughtSpot will take effect during token creation, not
+     * when the token is used for authentication. For example, &#x60;auto_create:true&#x60; will
+     * create the user when the authentication token is created.
      *
      * @param getFullAccessTokenRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -14892,6 +15140,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -14965,23 +15215,28 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.15.0.cl or later This API allows users to retrieve existing natural language (NL)
-     * instructions for a specific data-model. These instructions guide the AI system in
-     * understanding data context and generating more accurate responses when processing natural
-     * language queries. #### Usage guidelines To retrieve NL instructions for a data-model, the
-     * request must include: - &#x60;data_source_identifier&#x60;: The unique ID of the data-model
-     * to retrieve NL instructions The API returns a response object with: -
-     * &#x60;nl_instructions_info&#x60;: An array of instruction objects, each containing: -
-     * &#x60;instructions&#x60;: Array of text instructions for natural language processing -
-     * &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). It can be extended to
-     * data-model-user scope in future. #### Instructions Scope - **GLOBAL**: Instructions that
-     * apply globally across the system on the given data-model (currently only global instructions
-     * are supported) &gt; ###### Note: &gt; * To use this API, the user needs atleast view access
-     * on the data-model and they must use corresponding org related bearerToken where the
-     * data-model exists. &gt; * This endpoint is currently in Beta. Breaking changes may be
-     * introduced before the endpoint is made Generally Available. &gt; * Available from version
-     * 10.15.0.cl and later. &gt; * This endpoint requires Spotter — please contact ThoughtSpot
-     * Support to enable Spotter on your cluster. &gt; * Use this API to view currently configured
+     * Version: 10.15.0.cl or later Retrieves existing natural language (NL) instructions configured
+     * for a specific data model. These instructions guide the AI system in understanding data
+     * context and generating more accurate responses. Requires &#x60;CAN_USE_SPOTTER&#x60;
+     * privilege, at least view access on the data model, and a bearer token corresponding to the
+     * org where the data model exists. #### Usage guidelines The request must include: -
+     * &#x60;data_source_identifier&#x60;: the unique ID of the data model to retrieve instructions
+     * for If the request is successful, the API returns: - &#x60;nl_instructions_info&#x60;: an
+     * array of instruction objects, each containing: - &#x60;instructions&#x60;: the configured
+     * text instructions for AI processing - &#x60;scope&#x60;: the scope of the instruction —
+     * currently only &#x60;GLOBAL&#x60; is supported #### Instructions scope - **GLOBAL**:
+     * Instructions that apply globally across the system on the given data-model (currently only
+     * global instructions are supported) #### Error responses | Code | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, lacks
+     * view access on the data model, or the bearer token does not correspond to the org where the
+     * data model exists. | &gt; ###### Note: &gt; &gt; - To use this API, the user needs at least
+     * view access on the data model, and must use the bearer token corresponding to the org where
+     * the data model exists. &gt; - This endpoint is currently in Beta. Breaking changes may be
+     * introduced before the endpoint is made Generally Available. &gt; - Available from version
+     * 10.15.0.cl and later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot
+     * Support to enable Spotter on your cluster. &gt; - Use this API to review currently configured
      * instructions before modifying them with &#x60;setNLInstructions&#x60;.
      *
      * @param getNLInstructionsRequest (required)
@@ -14995,6 +15250,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -15006,23 +15263,28 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.15.0.cl or later This API allows users to retrieve existing natural language (NL)
-     * instructions for a specific data-model. These instructions guide the AI system in
-     * understanding data context and generating more accurate responses when processing natural
-     * language queries. #### Usage guidelines To retrieve NL instructions for a data-model, the
-     * request must include: - &#x60;data_source_identifier&#x60;: The unique ID of the data-model
-     * to retrieve NL instructions The API returns a response object with: -
-     * &#x60;nl_instructions_info&#x60;: An array of instruction objects, each containing: -
-     * &#x60;instructions&#x60;: Array of text instructions for natural language processing -
-     * &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). It can be extended to
-     * data-model-user scope in future. #### Instructions Scope - **GLOBAL**: Instructions that
-     * apply globally across the system on the given data-model (currently only global instructions
-     * are supported) &gt; ###### Note: &gt; * To use this API, the user needs atleast view access
-     * on the data-model and they must use corresponding org related bearerToken where the
-     * data-model exists. &gt; * This endpoint is currently in Beta. Breaking changes may be
-     * introduced before the endpoint is made Generally Available. &gt; * Available from version
-     * 10.15.0.cl and later. &gt; * This endpoint requires Spotter — please contact ThoughtSpot
-     * Support to enable Spotter on your cluster. &gt; * Use this API to view currently configured
+     * Version: 10.15.0.cl or later Retrieves existing natural language (NL) instructions configured
+     * for a specific data model. These instructions guide the AI system in understanding data
+     * context and generating more accurate responses. Requires &#x60;CAN_USE_SPOTTER&#x60;
+     * privilege, at least view access on the data model, and a bearer token corresponding to the
+     * org where the data model exists. #### Usage guidelines The request must include: -
+     * &#x60;data_source_identifier&#x60;: the unique ID of the data model to retrieve instructions
+     * for If the request is successful, the API returns: - &#x60;nl_instructions_info&#x60;: an
+     * array of instruction objects, each containing: - &#x60;instructions&#x60;: the configured
+     * text instructions for AI processing - &#x60;scope&#x60;: the scope of the instruction —
+     * currently only &#x60;GLOBAL&#x60; is supported #### Instructions scope - **GLOBAL**:
+     * Instructions that apply globally across the system on the given data-model (currently only
+     * global instructions are supported) #### Error responses | Code | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, lacks
+     * view access on the data model, or the bearer token does not correspond to the org where the
+     * data model exists. | &gt; ###### Note: &gt; &gt; - To use this API, the user needs at least
+     * view access on the data model, and must use the bearer token corresponding to the org where
+     * the data model exists. &gt; - This endpoint is currently in Beta. Breaking changes may be
+     * introduced before the endpoint is made Generally Available. &gt; - Available from version
+     * 10.15.0.cl and later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot
+     * Support to enable Spotter on your cluster. &gt; - Use this API to review currently configured
      * instructions before modifying them with &#x60;setNLInstructions&#x60;.
      *
      * @param getNLInstructionsRequest (required)
@@ -15036,6 +15298,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -15048,23 +15312,29 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 10.15.0.cl or later This API allows users to retrieve existing
-     * natural language (NL) instructions for a specific data-model. These instructions guide the AI
-     * system in understanding data context and generating more accurate responses when processing
-     * natural language queries. #### Usage guidelines To retrieve NL instructions for a data-model,
-     * the request must include: - &#x60;data_source_identifier&#x60;: The unique ID of the
-     * data-model to retrieve NL instructions The API returns a response object with: -
-     * &#x60;nl_instructions_info&#x60;: An array of instruction objects, each containing: -
-     * &#x60;instructions&#x60;: Array of text instructions for natural language processing -
-     * &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). It can be extended to
-     * data-model-user scope in future. #### Instructions Scope - **GLOBAL**: Instructions that
-     * apply globally across the system on the given data-model (currently only global instructions
-     * are supported) &gt; ###### Note: &gt; * To use this API, the user needs atleast view access
-     * on the data-model and they must use corresponding org related bearerToken where the
-     * data-model exists. &gt; * This endpoint is currently in Beta. Breaking changes may be
-     * introduced before the endpoint is made Generally Available. &gt; * Available from version
-     * 10.15.0.cl and later. &gt; * This endpoint requires Spotter — please contact ThoughtSpot
-     * Support to enable Spotter on your cluster. &gt; * Use this API to view currently configured
+     * (asynchronously) Version: 10.15.0.cl or later Retrieves existing natural language (NL)
+     * instructions configured for a specific data model. These instructions guide the AI system in
+     * understanding data context and generating more accurate responses. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege, at least view access on the data model, and a bearer
+     * token corresponding to the org where the data model exists. #### Usage guidelines The request
+     * must include: - &#x60;data_source_identifier&#x60;: the unique ID of the data model to
+     * retrieve instructions for If the request is successful, the API returns: -
+     * &#x60;nl_instructions_info&#x60;: an array of instruction objects, each containing: -
+     * &#x60;instructions&#x60;: the configured text instructions for AI processing -
+     * &#x60;scope&#x60;: the scope of the instruction — currently only &#x60;GLOBAL&#x60; is
+     * supported #### Instructions scope - **GLOBAL**: Instructions that apply globally across the
+     * system on the given data-model (currently only global instructions are supported) #### Error
+     * responses | Code | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, lacks
+     * view access on the data model, or the bearer token does not correspond to the org where the
+     * data model exists. | &gt; ###### Note: &gt; &gt; - To use this API, the user needs at least
+     * view access on the data model, and must use the bearer token corresponding to the org where
+     * the data model exists. &gt; - This endpoint is currently in Beta. Breaking changes may be
+     * introduced before the endpoint is made Generally Available. &gt; - Available from version
+     * 10.15.0.cl and later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot
+     * Support to enable Spotter on your cluster. &gt; - Use this API to review currently configured
      * instructions before modifying them with &#x60;setNLInstructions&#x60;.
      *
      * @param getNLInstructionsRequest (required)
@@ -15079,6 +15349,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -15181,34 +15453,37 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 9.0.0.cl or later Gets an authentication token that provides access to a specific
-     * metadata object. By default, the token obtained from ThoughtSpot remains valid for 5 mins.
-     * You can generate the token for a user by providing a &#x60;username&#x60; and
-     * &#x60;password&#x60;, or by using the cluster’s &#x60;secret key&#x60; (for [Trusted
-     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable)).
-     * To generate a &#x60;secret_key&#x60; on your cluster, the administrator must enable **Trusted
-     * authentication** in the **Develop** &gt; **Customizations** &gt; **Security Settings** page.
-     * **Note**: When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API
-     * request, &#x60;password&#x60; takes precedence. If Multi-Factor Authentication (MFA) is
-     * enabled on your instance, the API login request with basic authentication
-     * (&#x60;username&#x60; and &#x60;password&#x60; ) returns an error. You can switch to
-     * token-based authentication with &#x60;secret_key&#x60; or contact ThoughtSpot Support for
-     * assistance. #### Just-in-time provisioning For just-in-time user creation and provisioning,
-     * define the following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
+     * Version: 9.0.0.cl or later Generates an authentication token that provides access to a
+     * specific metadata object. This object list is intersected with the list of objects the user
+     * is allowed to access via group membership. For more information, see [Object
+     * security](https://docs.thoughtspot.com/cloud/latest/security-data-object#object_security).
+     * #### Usage guidelines You can generate a token for a user by providing a &#x60;username&#x60;
+     * and &#x60;password&#x60;, or by using the &#x60;secret_key&#x60; generated for your instance.
+     * To generate a &#x60;secret_key&#x60;, the administrator must enable [Trusted
+     * authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the
+     * **Develop** &gt; **Customizations** &gt; **Security Settings** page. **Note**: * When both
+     * &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,
+     * &#x60;password&#x60; takes precedence. * If [Multi-Factor Authentication
+     * (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your
+     * instance, the API login request with &#x60;username&#x60; and &#x60;password&#x60; returns an
+     * error. You can switch to token-based authentication with &#x60;secret_key&#x60; or contact
+     * ThoughtSpot Support for assistance. The token obtained from ThoughtSpot is valid for 5
+     * minutes by default. You can configure the token expiration time as required. ####
+     * Just-in-time provisioning For [just-in-time user creation and
+     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the
+     * following attributes in the API request: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
      * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;group_identifiers&#x60; Set
-     * &#x60;auto_create&#x60; to &#x60;True&#x60; if the user is not available in ThoughtSpot. If
+     * &#x60;auto_create&#x60; to &#x60;true&#x60; if the user is not available in ThoughtSpot. If
      * the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to
-     * &#x60;true&#x60;, the API call will update user properties like display name, email and group
-     * assignment. For more information, see [Just-in-time
-     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). To add a
-     * new user and assign privileges, you need &#x60;ADMINISTRATION&#x60; (**Can administer
-     * ThoughtSpot**) privilege. If [Role-Based Access Control
+     * &#x60;true&#x60;, user properties such as display name, email, and group assignment will be
+     * updated. To add a new user and assign privileges, the &#x60;ADMINISTRATION&#x60; (**Can
+     * administer ThoughtSpot**) privilege is required. If [Role-Based Access Control
      * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
      * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
-     * is required. #### Important point to note All options in the token creation APIs changing the
-     * content in ThoughtSpot will do so during the token creation and not when the token is being
-     * used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when
-     * the authentication token is created.
+     * is required. #### Important point to note All options in the token creation APIs that define
+     * user access to data in ThoughtSpot will take effect during token creation, not when the token
+     * is used for authentication. For example, &#x60;auto_create:true&#x60; will create the user
+     * when the authentication token is created.
      *
      * @param getObjectAccessTokenRequest (required)
      * @return Token
@@ -15233,34 +15508,37 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 9.0.0.cl or later Gets an authentication token that provides access to a specific
-     * metadata object. By default, the token obtained from ThoughtSpot remains valid for 5 mins.
-     * You can generate the token for a user by providing a &#x60;username&#x60; and
-     * &#x60;password&#x60;, or by using the cluster’s &#x60;secret key&#x60; (for [Trusted
-     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable)).
-     * To generate a &#x60;secret_key&#x60; on your cluster, the administrator must enable **Trusted
-     * authentication** in the **Develop** &gt; **Customizations** &gt; **Security Settings** page.
-     * **Note**: When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API
-     * request, &#x60;password&#x60; takes precedence. If Multi-Factor Authentication (MFA) is
-     * enabled on your instance, the API login request with basic authentication
-     * (&#x60;username&#x60; and &#x60;password&#x60; ) returns an error. You can switch to
-     * token-based authentication with &#x60;secret_key&#x60; or contact ThoughtSpot Support for
-     * assistance. #### Just-in-time provisioning For just-in-time user creation and provisioning,
-     * define the following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
+     * Version: 9.0.0.cl or later Generates an authentication token that provides access to a
+     * specific metadata object. This object list is intersected with the list of objects the user
+     * is allowed to access via group membership. For more information, see [Object
+     * security](https://docs.thoughtspot.com/cloud/latest/security-data-object#object_security).
+     * #### Usage guidelines You can generate a token for a user by providing a &#x60;username&#x60;
+     * and &#x60;password&#x60;, or by using the &#x60;secret_key&#x60; generated for your instance.
+     * To generate a &#x60;secret_key&#x60;, the administrator must enable [Trusted
+     * authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the
+     * **Develop** &gt; **Customizations** &gt; **Security Settings** page. **Note**: * When both
+     * &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,
+     * &#x60;password&#x60; takes precedence. * If [Multi-Factor Authentication
+     * (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your
+     * instance, the API login request with &#x60;username&#x60; and &#x60;password&#x60; returns an
+     * error. You can switch to token-based authentication with &#x60;secret_key&#x60; or contact
+     * ThoughtSpot Support for assistance. The token obtained from ThoughtSpot is valid for 5
+     * minutes by default. You can configure the token expiration time as required. ####
+     * Just-in-time provisioning For [just-in-time user creation and
+     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the
+     * following attributes in the API request: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
      * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;group_identifiers&#x60; Set
-     * &#x60;auto_create&#x60; to &#x60;True&#x60; if the user is not available in ThoughtSpot. If
+     * &#x60;auto_create&#x60; to &#x60;true&#x60; if the user is not available in ThoughtSpot. If
      * the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to
-     * &#x60;true&#x60;, the API call will update user properties like display name, email and group
-     * assignment. For more information, see [Just-in-time
-     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). To add a
-     * new user and assign privileges, you need &#x60;ADMINISTRATION&#x60; (**Can administer
-     * ThoughtSpot**) privilege. If [Role-Based Access Control
+     * &#x60;true&#x60;, user properties such as display name, email, and group assignment will be
+     * updated. To add a new user and assign privileges, the &#x60;ADMINISTRATION&#x60; (**Can
+     * administer ThoughtSpot**) privilege is required. If [Role-Based Access Control
      * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
      * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
-     * is required. #### Important point to note All options in the token creation APIs changing the
-     * content in ThoughtSpot will do so during the token creation and not when the token is being
-     * used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when
-     * the authentication token is created.
+     * is required. #### Important point to note All options in the token creation APIs that define
+     * user access to data in ThoughtSpot will take effect during token creation, not when the token
+     * is used for authentication. For example, &#x60;auto_create:true&#x60; will create the user
+     * when the authentication token is created.
      *
      * @param getObjectAccessTokenRequest (required)
      * @return ApiResponse&lt;Token&gt;
@@ -15286,34 +15564,37 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 9.0.0.cl or later Gets an authentication token that provides access
-     * to a specific metadata object. By default, the token obtained from ThoughtSpot remains valid
-     * for 5 mins. You can generate the token for a user by providing a &#x60;username&#x60; and
-     * &#x60;password&#x60;, or by using the cluster’s &#x60;secret key&#x60; (for [Trusted
-     * authentication](https://developers.thoughtspot.com/docs/?pageid&#x3D;trusted-auth#trusted-auth-enable)).
-     * To generate a &#x60;secret_key&#x60; on your cluster, the administrator must enable **Trusted
-     * authentication** in the **Develop** &gt; **Customizations** &gt; **Security Settings** page.
-     * **Note**: When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API
-     * request, &#x60;password&#x60; takes precedence. If Multi-Factor Authentication (MFA) is
-     * enabled on your instance, the API login request with basic authentication
-     * (&#x60;username&#x60; and &#x60;password&#x60; ) returns an error. You can switch to
-     * token-based authentication with &#x60;secret_key&#x60; or contact ThoughtSpot Support for
-     * assistance. #### Just-in-time provisioning For just-in-time user creation and provisioning,
-     * define the following attributes: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
+     * (asynchronously) Version: 9.0.0.cl or later Generates an authentication token that provides
+     * access to a specific metadata object. This object list is intersected with the list of
+     * objects the user is allowed to access via group membership. For more information, see [Object
+     * security](https://docs.thoughtspot.com/cloud/latest/security-data-object#object_security).
+     * #### Usage guidelines You can generate a token for a user by providing a &#x60;username&#x60;
+     * and &#x60;password&#x60;, or by using the &#x60;secret_key&#x60; generated for your instance.
+     * To generate a &#x60;secret_key&#x60;, the administrator must enable [Trusted
+     * authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the
+     * **Develop** &gt; **Customizations** &gt; **Security Settings** page. **Note**: * When both
+     * &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,
+     * &#x60;password&#x60; takes precedence. * If [Multi-Factor Authentication
+     * (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your
+     * instance, the API login request with &#x60;username&#x60; and &#x60;password&#x60; returns an
+     * error. You can switch to token-based authentication with &#x60;secret_key&#x60; or contact
+     * ThoughtSpot Support for assistance. The token obtained from ThoughtSpot is valid for 5
+     * minutes by default. You can configure the token expiration time as required. ####
+     * Just-in-time provisioning For [just-in-time user creation and
+     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the
+     * following attributes in the API request: * &#x60;auto_create&#x60; * &#x60;username&#x60; *
      * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;group_identifiers&#x60; Set
-     * &#x60;auto_create&#x60; to &#x60;True&#x60; if the user is not available in ThoughtSpot. If
+     * &#x60;auto_create&#x60; to &#x60;true&#x60; if the user is not available in ThoughtSpot. If
      * the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to
-     * &#x60;true&#x60;, the API call will update user properties like display name, email and group
-     * assignment. For more information, see [Just-in-time
-     * provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning). To add a
-     * new user and assign privileges, you need &#x60;ADMINISTRATION&#x60; (**Can administer
-     * ThoughtSpot**) privilege. If [Role-Based Access Control
+     * &#x60;true&#x60;, user properties such as display name, email, and group assignment will be
+     * updated. To add a new user and assign privileges, the &#x60;ADMINISTRATION&#x60; (**Can
+     * administer ThoughtSpot**) privilege is required. If [Role-Based Access Control
      * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
      * &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege
-     * is required. #### Important point to note All options in the token creation APIs changing the
-     * content in ThoughtSpot will do so during the token creation and not when the token is being
-     * used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when
-     * the authentication token is created.
+     * is required. #### Important point to note All options in the token creation APIs that define
+     * user access to data in ThoughtSpot will take effect during token creation, not when the token
+     * is used for authentication. For example, &#x60;auto_create:true&#x60; will create the user
+     * when the authentication token is created.
      *
      * @param getObjectAccessTokenRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -15356,6 +15637,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -15429,26 +15712,33 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.13.0.cl or later Breaks down a user-submitted query into a series of analytical
-     * sub-questions using relevant contextual metadata. To use this API, the user must have at
-     * least view-level access to the referenced metadata objects. #### Usage guidelines To
-     * accurately generate relevant questions, the request must include at least one of the
-     * following metadata identifiers within &#x60;metadata_context&#x60; :
-     * &#x60;conversation_identifier&#x60;, &#x60;answer_identifiers&#x60;,
-     * &#x60;liveboard_identifiers&#x60;, or &#x60;data_source_identifiers&#x60;. You can further
-     * enhance the quality and precision of breakdown by providing additional &#x60;ai_context&#x60;
-     * such as: - &#x60;content&#x60;: User provided content like text data, csv data as a string
-     * message to provide context &amp; potentially improve the quality of the response. -
-     * &#x60;instructions&#x60;: User specific text instructions sent to AI system for processing
-     * the query. Additional optional parameters include: - &#x60;limit_relevant_questions&#x60;:
-     * Controls the maximum number of relevant questions returned. Defaults to 5 if not specified. -
-     * &#x60;bypass_cache&#x60;: If set to true, forces fresh computation instead of returning
-     * cached results. If the API request is successful, ThoughtSpot returns a list of relevant
-     * analytical queries, each aligned with the user&#39;s original question. Each returned
-     * question includes the query string, along with the identifier and name of the corresponding
-     * data source. &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes
-     * may be introduced before the endpoint is made Generally Available. &gt; * This endpoint
-     * requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
+     * Version: 10.13.0.cl or later Breaks down a natural language query into a series of smaller
+     * analytical sub-questions, each mapped to a relevant data source. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view-level access to the referenced
+     * metadata objects. #### Usage guidelines The request must include: - &#x60;query&#x60;: the
+     * natural language question to decompose into analytical sub-questions -
+     * &#x60;metadata_context&#x60;: at least one of the following context identifiers to guide
+     * question generation: - &#x60;conversation_identifier&#x60; — an existing conversation session
+     * ID - &#x60;answer_identifiers&#x60; — a list of Answer GUIDs -
+     * &#x60;liveboard_identifiers&#x60; — a list of Liveboard GUIDs -
+     * &#x60;data_source_identifiers&#x60; — a list of data source GUIDs Optional parameters for
+     * refining the output: - &#x60;ai_context&#x60;: additional context to improve response quality
+     * - &#x60;content&#x60; — supplementary text or CSV data as string input -
+     * &#x60;instructions&#x60; — custom text instructions for the AI system -
+     * &#x60;limit_relevant_questions&#x60;: maximum number of questions to return (default:
+     * &#x60;5&#x60;) - &#x60;bypass_cache&#x60;: if &#x60;true&#x60;, forces fresh computation
+     * instead of returning cached results If the request is successful, the API returns a list of
+     * relevant analytical questions, each containing: - &#x60;query&#x60;: the generated
+     * sub-question - &#x60;data_source_identifier&#x60;: the unique ID of the data source the
+     * question targets - &#x60;data_source_name&#x60;: the display name of the corresponding data
+     * source #### Error responses | Code | Description |
+     * |------|---------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view access to the referenced metadata objects. | &gt; ###### Note: &gt; * This
+     * endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made
+     * Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot
+     * support to enable Spotter on your cluster.
      *
      * @param getRelevantQuestionsRequest (required)
      * @return EurekaGetRelevantQuestionsResponse
@@ -15461,6 +15751,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -15472,26 +15764,33 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.13.0.cl or later Breaks down a user-submitted query into a series of analytical
-     * sub-questions using relevant contextual metadata. To use this API, the user must have at
-     * least view-level access to the referenced metadata objects. #### Usage guidelines To
-     * accurately generate relevant questions, the request must include at least one of the
-     * following metadata identifiers within &#x60;metadata_context&#x60; :
-     * &#x60;conversation_identifier&#x60;, &#x60;answer_identifiers&#x60;,
-     * &#x60;liveboard_identifiers&#x60;, or &#x60;data_source_identifiers&#x60;. You can further
-     * enhance the quality and precision of breakdown by providing additional &#x60;ai_context&#x60;
-     * such as: - &#x60;content&#x60;: User provided content like text data, csv data as a string
-     * message to provide context &amp; potentially improve the quality of the response. -
-     * &#x60;instructions&#x60;: User specific text instructions sent to AI system for processing
-     * the query. Additional optional parameters include: - &#x60;limit_relevant_questions&#x60;:
-     * Controls the maximum number of relevant questions returned. Defaults to 5 if not specified. -
-     * &#x60;bypass_cache&#x60;: If set to true, forces fresh computation instead of returning
-     * cached results. If the API request is successful, ThoughtSpot returns a list of relevant
-     * analytical queries, each aligned with the user&#39;s original question. Each returned
-     * question includes the query string, along with the identifier and name of the corresponding
-     * data source. &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes
-     * may be introduced before the endpoint is made Generally Available. &gt; * This endpoint
-     * requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
+     * Version: 10.13.0.cl or later Breaks down a natural language query into a series of smaller
+     * analytical sub-questions, each mapped to a relevant data source. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view-level access to the referenced
+     * metadata objects. #### Usage guidelines The request must include: - &#x60;query&#x60;: the
+     * natural language question to decompose into analytical sub-questions -
+     * &#x60;metadata_context&#x60;: at least one of the following context identifiers to guide
+     * question generation: - &#x60;conversation_identifier&#x60; — an existing conversation session
+     * ID - &#x60;answer_identifiers&#x60; — a list of Answer GUIDs -
+     * &#x60;liveboard_identifiers&#x60; — a list of Liveboard GUIDs -
+     * &#x60;data_source_identifiers&#x60; — a list of data source GUIDs Optional parameters for
+     * refining the output: - &#x60;ai_context&#x60;: additional context to improve response quality
+     * - &#x60;content&#x60; — supplementary text or CSV data as string input -
+     * &#x60;instructions&#x60; — custom text instructions for the AI system -
+     * &#x60;limit_relevant_questions&#x60;: maximum number of questions to return (default:
+     * &#x60;5&#x60;) - &#x60;bypass_cache&#x60;: if &#x60;true&#x60;, forces fresh computation
+     * instead of returning cached results If the request is successful, the API returns a list of
+     * relevant analytical questions, each containing: - &#x60;query&#x60;: the generated
+     * sub-question - &#x60;data_source_identifier&#x60;: the unique ID of the data source the
+     * question targets - &#x60;data_source_name&#x60;: the display name of the corresponding data
+     * source #### Error responses | Code | Description |
+     * |------|---------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view access to the referenced metadata objects. | &gt; ###### Note: &gt; * This
+     * endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made
+     * Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot
+     * support to enable Spotter on your cluster.
      *
      * @param getRelevantQuestionsRequest (required)
      * @return ApiResponse&lt;EurekaGetRelevantQuestionsResponse&gt;
@@ -15504,6 +15803,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -15516,26 +15817,33 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 10.13.0.cl or later Breaks down a user-submitted query into a
-     * series of analytical sub-questions using relevant contextual metadata. To use this API, the
-     * user must have at least view-level access to the referenced metadata objects. #### Usage
-     * guidelines To accurately generate relevant questions, the request must include at least one
-     * of the following metadata identifiers within &#x60;metadata_context&#x60; :
-     * &#x60;conversation_identifier&#x60;, &#x60;answer_identifiers&#x60;,
-     * &#x60;liveboard_identifiers&#x60;, or &#x60;data_source_identifiers&#x60;. You can further
-     * enhance the quality and precision of breakdown by providing additional &#x60;ai_context&#x60;
-     * such as: - &#x60;content&#x60;: User provided content like text data, csv data as a string
-     * message to provide context &amp; potentially improve the quality of the response. -
-     * &#x60;instructions&#x60;: User specific text instructions sent to AI system for processing
-     * the query. Additional optional parameters include: - &#x60;limit_relevant_questions&#x60;:
-     * Controls the maximum number of relevant questions returned. Defaults to 5 if not specified. -
-     * &#x60;bypass_cache&#x60;: If set to true, forces fresh computation instead of returning
-     * cached results. If the API request is successful, ThoughtSpot returns a list of relevant
-     * analytical queries, each aligned with the user&#39;s original question. Each returned
-     * question includes the query string, along with the identifier and name of the corresponding
-     * data source. &gt; ###### Note: &gt; * This endpoint is currently in Beta. Breaking changes
-     * may be introduced before the endpoint is made Generally Available. &gt; * This endpoint
-     * requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
+     * (asynchronously) Version: 10.13.0.cl or later Breaks down a natural language query into a
+     * series of smaller analytical sub-questions, each mapped to a relevant data source. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view-level access to the referenced
+     * metadata objects. #### Usage guidelines The request must include: - &#x60;query&#x60;: the
+     * natural language question to decompose into analytical sub-questions -
+     * &#x60;metadata_context&#x60;: at least one of the following context identifiers to guide
+     * question generation: - &#x60;conversation_identifier&#x60; — an existing conversation session
+     * ID - &#x60;answer_identifiers&#x60; — a list of Answer GUIDs -
+     * &#x60;liveboard_identifiers&#x60; — a list of Liveboard GUIDs -
+     * &#x60;data_source_identifiers&#x60; — a list of data source GUIDs Optional parameters for
+     * refining the output: - &#x60;ai_context&#x60;: additional context to improve response quality
+     * - &#x60;content&#x60; — supplementary text or CSV data as string input -
+     * &#x60;instructions&#x60; — custom text instructions for the AI system -
+     * &#x60;limit_relevant_questions&#x60;: maximum number of questions to return (default:
+     * &#x60;5&#x60;) - &#x60;bypass_cache&#x60;: if &#x60;true&#x60;, forces fresh computation
+     * instead of returning cached results If the request is successful, the API returns a list of
+     * relevant analytical questions, each containing: - &#x60;query&#x60;: the generated
+     * sub-question - &#x60;data_source_identifier&#x60;: the unique ID of the data source the
+     * question targets - &#x60;data_source_name&#x60;: the display name of the corresponding data
+     * source #### Error responses | Code | Description |
+     * |------|---------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view access to the referenced metadata objects. | &gt; ###### Note: &gt; * This
+     * endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made
+     * Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot
+     * support to enable Spotter on your cluster.
      *
      * @param getRelevantQuestionsRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -15549,6 +15857,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -17302,15 +17612,17 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Parameterize fields in metadata objects. Version: 10.9.0.cl or later Allows parameterizing
-     * fields in metadata objects in ThoughtSpot. Requires appropriate permissions to modify the
-     * metadata object. The API endpoint allows parameterizing the following types of metadata
-     * objects: * Logical Tables * Connections * Connection Configs For a Logical Table the field
-     * type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName
-     * * tableName For a Connection or Connection Config, the field type is always
-     * &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact property of the
-     * Connection or Connection Config that needs to be parameterized. For Connection Config, the
-     * only supported field name is: * impersonate_user
+     * Parameterize fields in metadata objects. Version: 10.9.0.cl or later **Note:** This API
+     * endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST
+     * /api/rest/2.0/metadata/parameterize-fields](/api/rest/2.0/metadata/parameterize-fields)
+     * instead. Allows parameterizing fields in metadata objects in ThoughtSpot. Requires
+     * appropriate permissions to modify the metadata object. The API endpoint allows parameterizing
+     * the following types of metadata objects: * Logical Tables * Connections * Connection Configs
+     * For a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one
+     * of: * databaseName * schemaName * tableName For a Connection or Connection Config, the field
+     * type is always &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact
+     * property of the Connection or Connection Config that needs to be parameterized. For
+     * Connection Config, the only supported field name is: * impersonate_user
      *
      * @param parameterizeMetadataRequest (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -17332,15 +17644,17 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Parameterize fields in metadata objects. Version: 10.9.0.cl or later Allows parameterizing
-     * fields in metadata objects in ThoughtSpot. Requires appropriate permissions to modify the
-     * metadata object. The API endpoint allows parameterizing the following types of metadata
-     * objects: * Logical Tables * Connections * Connection Configs For a Logical Table the field
-     * type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName * schemaName
-     * * tableName For a Connection or Connection Config, the field type is always
-     * &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact property of the
-     * Connection or Connection Config that needs to be parameterized. For Connection Config, the
-     * only supported field name is: * impersonate_user
+     * Parameterize fields in metadata objects. Version: 10.9.0.cl or later **Note:** This API
+     * endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST
+     * /api/rest/2.0/metadata/parameterize-fields](/api/rest/2.0/metadata/parameterize-fields)
+     * instead. Allows parameterizing fields in metadata objects in ThoughtSpot. Requires
+     * appropriate permissions to modify the metadata object. The API endpoint allows parameterizing
+     * the following types of metadata objects: * Logical Tables * Connections * Connection Configs
+     * For a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one
+     * of: * databaseName * schemaName * tableName For a Connection or Connection Config, the field
+     * type is always &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact
+     * property of the Connection or Connection Config that needs to be parameterized. For
+     * Connection Config, the only supported field name is: * impersonate_user
      *
      * @param parameterizeMetadataRequest (required)
      * @return ApiResponse&lt;Void&gt;
@@ -17365,15 +17679,18 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Parameterize fields in metadata objects. Version: 10.9.0.cl or later Allows
-     * parameterizing fields in metadata objects in ThoughtSpot. Requires appropriate permissions to
-     * modify the metadata object. The API endpoint allows parameterizing the following types of
-     * metadata objects: * Logical Tables * Connections * Connection Configs For a Logical Table the
-     * field type must be &#x60;ATTRIBUTE&#x60; and field name can be one of: * databaseName *
-     * schemaName * tableName For a Connection or Connection Config, the field type is always
-     * &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact property of the
-     * Connection or Connection Config that needs to be parameterized. For Connection Config, the
-     * only supported field name is: * impersonate_user
+     * (asynchronously) Parameterize fields in metadata objects. Version: 10.9.0.cl or later
+     * **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future
+     * release. Use [POST
+     * /api/rest/2.0/metadata/parameterize-fields](/api/rest/2.0/metadata/parameterize-fields)
+     * instead. Allows parameterizing fields in metadata objects in ThoughtSpot. Requires
+     * appropriate permissions to modify the metadata object. The API endpoint allows parameterizing
+     * the following types of metadata objects: * Logical Tables * Connections * Connection Configs
+     * For a Logical Table the field type must be &#x60;ATTRIBUTE&#x60; and field name can be one
+     * of: * databaseName * schemaName * tableName For a Connection or Connection Config, the field
+     * type is always &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name specifies the exact
+     * property of the Connection or Connection Config that needs to be parameterized. For
+     * Connection Config, the only supported field name is: * impersonate_user
      *
      * @param parameterizeMetadataRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -17587,6 +17904,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      *
@@ -17666,7 +17985,32 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.7.0.cl or later
+     * Version: 10.7.0.cl or later **Deprecated** — Use &#x60;getRelevantQuestions&#x60; instead
+     * (available from 10.13.0.cl). Breaks down a topical or goal-oriented natural language question
+     * into smaller, actionable analytical sub-questions, each mapped to a relevant data source for
+     * independent execution. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view-level
+     * access to the referenced metadata objects. #### Usage guidelines The request accepts the
+     * following parameters: - &#x60;nlsRequest&#x60;: contains the user &#x60;query&#x60; to
+     * decompose, along with optional &#x60;instructions&#x60; and &#x60;bypassCache&#x60; flag -
+     * &#x60;worksheetIds&#x60;: list of data source identifiers to scope the decomposition -
+     * &#x60;answerIds&#x60;: list of Answer GUIDs whose data guides the response -
+     * &#x60;liveboardIds&#x60;: list of Liveboard GUIDs whose data guides the response -
+     * &#x60;conversationId&#x60;: an existing conversation session ID for context continuity -
+     * &#x60;content&#x60;: supplementary text or CSV data to improve response quality -
+     * &#x60;maxDecomposedQueries&#x60;: maximum number of sub-questions to return (default:
+     * &#x60;5&#x60;) If the request is successful, the API returns a
+     * &#x60;decomposedQueryResponse&#x60; containing a list of &#x60;decomposedQueries&#x60;, each
+     * with: - &#x60;query&#x60;: the generated analytical sub-question - &#x60;worksheetId&#x60;:
+     * the unique ID of the data source the question targets - &#x60;worksheetName&#x60;: the
+     * display name of the corresponding data source #### Error responses | Code | Description |
+     * |------|---------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view access to the referenced metadata objects. | &gt; ###### Note: &gt; * This
+     * endpoint is deprecated since 10.13.0.cl. Use &#x60;getRelevantQuestions&#x60; for new
+     * integrations. &gt; * This endpoint is currently in Beta. Breaking changes may be introduced
+     * before the endpoint is made Generally Available. &gt; * This endpoint requires Spotter —
+     * please contact ThoughtSpot support to enable Spotter on your cluster.
      *
      * @param queryGetDecomposedQueryRequest (required)
      * @return EurekaDecomposeQueryResponse
@@ -17679,6 +18023,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      *
@@ -17693,7 +18039,32 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.7.0.cl or later
+     * Version: 10.7.0.cl or later **Deprecated** — Use &#x60;getRelevantQuestions&#x60; instead
+     * (available from 10.13.0.cl). Breaks down a topical or goal-oriented natural language question
+     * into smaller, actionable analytical sub-questions, each mapped to a relevant data source for
+     * independent execution. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view-level
+     * access to the referenced metadata objects. #### Usage guidelines The request accepts the
+     * following parameters: - &#x60;nlsRequest&#x60;: contains the user &#x60;query&#x60; to
+     * decompose, along with optional &#x60;instructions&#x60; and &#x60;bypassCache&#x60; flag -
+     * &#x60;worksheetIds&#x60;: list of data source identifiers to scope the decomposition -
+     * &#x60;answerIds&#x60;: list of Answer GUIDs whose data guides the response -
+     * &#x60;liveboardIds&#x60;: list of Liveboard GUIDs whose data guides the response -
+     * &#x60;conversationId&#x60;: an existing conversation session ID for context continuity -
+     * &#x60;content&#x60;: supplementary text or CSV data to improve response quality -
+     * &#x60;maxDecomposedQueries&#x60;: maximum number of sub-questions to return (default:
+     * &#x60;5&#x60;) If the request is successful, the API returns a
+     * &#x60;decomposedQueryResponse&#x60; containing a list of &#x60;decomposedQueries&#x60;, each
+     * with: - &#x60;query&#x60;: the generated analytical sub-question - &#x60;worksheetId&#x60;:
+     * the unique ID of the data source the question targets - &#x60;worksheetName&#x60;: the
+     * display name of the corresponding data source #### Error responses | Code | Description |
+     * |------|---------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view access to the referenced metadata objects. | &gt; ###### Note: &gt; * This
+     * endpoint is deprecated since 10.13.0.cl. Use &#x60;getRelevantQuestions&#x60; for new
+     * integrations. &gt; * This endpoint is currently in Beta. Breaking changes may be introduced
+     * before the endpoint is made Generally Available. &gt; * This endpoint requires Spotter —
+     * please contact ThoughtSpot support to enable Spotter on your cluster.
      *
      * @param queryGetDecomposedQueryRequest (required)
      * @return ApiResponse&lt;EurekaDecomposeQueryResponse&gt;
@@ -17706,6 +18077,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      *
@@ -17721,7 +18094,32 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 10.7.0.cl or later
+     * (asynchronously) Version: 10.7.0.cl or later **Deprecated** — Use
+     * &#x60;getRelevantQuestions&#x60; instead (available from 10.13.0.cl). Breaks down a topical
+     * or goal-oriented natural language question into smaller, actionable analytical sub-questions,
+     * each mapped to a relevant data source for independent execution. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view-level access to the referenced
+     * metadata objects. #### Usage guidelines The request accepts the following parameters: -
+     * &#x60;nlsRequest&#x60;: contains the user &#x60;query&#x60; to decompose, along with optional
+     * &#x60;instructions&#x60; and &#x60;bypassCache&#x60; flag - &#x60;worksheetIds&#x60;: list of
+     * data source identifiers to scope the decomposition - &#x60;answerIds&#x60;: list of Answer
+     * GUIDs whose data guides the response - &#x60;liveboardIds&#x60;: list of Liveboard GUIDs
+     * whose data guides the response - &#x60;conversationId&#x60;: an existing conversation session
+     * ID for context continuity - &#x60;content&#x60;: supplementary text or CSV data to improve
+     * response quality - &#x60;maxDecomposedQueries&#x60;: maximum number of sub-questions to
+     * return (default: &#x60;5&#x60;) If the request is successful, the API returns a
+     * &#x60;decomposedQueryResponse&#x60; containing a list of &#x60;decomposedQueries&#x60;, each
+     * with: - &#x60;query&#x60;: the generated analytical sub-question - &#x60;worksheetId&#x60;:
+     * the unique ID of the data source the question targets - &#x60;worksheetName&#x60;: the
+     * display name of the corresponding data source #### Error responses | Code | Description |
+     * |------|---------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view access to the referenced metadata objects. | &gt; ###### Note: &gt; * This
+     * endpoint is deprecated since 10.13.0.cl. Use &#x60;getRelevantQuestions&#x60; for new
+     * integrations. &gt; * This endpoint is currently in Beta. Breaking changes may be introduced
+     * before the endpoint is made Generally Available. &gt; * This endpoint requires Spotter —
+     * please contact ThoughtSpot support to enable Spotter on your cluster.
      *
      * @param queryGetDecomposedQueryRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -17735,6 +18133,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      *
@@ -22219,6 +22619,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -22307,19 +22709,28 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.15.0.cl or later This API allows users to initiate or continue an agent (Spotter)
-     * conversation by submitting one or more natural language messages. To use this API, the user
-     * must have access to the relevant conversational session (via conversation_identifier) and
-     * submit at least one message. #### Usage guidelines To initiate or continue a conversation,
-     * the request must include: - &#x60;conversation_identifier&#x60;: a unique session ID for
-     * continuity and message tracking - &#x60;messages&#x60;: an array of one or more text
-     * messages, each with a value and type The API returns a array of object with a type, message,
-     * and metadata. - &#x60;type&#x60;: Type of the message — text, answer, or error. -
-     * &#x60;message&#x60;: Main content of the response. - &#x60;metadata&#x60;: Additional info
-     * depending on the message type. &gt; ###### Note: &gt; * This endpoint is currently in Beta.
-     * Breaking changes may be introduced before the endpoint is made Generally Available. &gt; *
-     * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your
-     * cluster.
+     * Version: 10.15.0.cl or later **Deprecated** — Use &#x60;sendAgentConversationMessage&#x60;
+     * instead. Send natural language messages to an existing Spotter agent conversation and returns
+     * the complete response synchronously. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and
+     * access to the metadata object associated with the conversation. The user must have access to
+     * the conversation session referenced by &#x60;conversation_identifier&#x60;. A conversation
+     * must first be created using the &#x60;createAgentConversation&#x60; API. #### Usage
+     * guidelines The request must include: - &#x60;conversation_identifier&#x60;: the unique
+     * session ID returned by &#x60;createAgentConversation&#x60;, used for context continuity and
+     * message tracking - &#x60;messages&#x60;: an array of one or more text messages to send to the
+     * agent The API returns an array of response objects, each containing: - &#x60;type&#x60;: the
+     * kind of response — &#x60;text&#x60;, &#x60;answer&#x60;, or &#x60;error&#x60; -
+     * &#x60;message&#x60;: the main content of the response - &#x60;metadata&#x60;: additional
+     * information depending on the message type (e.g., answer metadata includes analytics and
+     * visualization details) #### Error responses | Code | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks permission on the referenced conversation. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint is deprecated. Use &#x60;sendAgentConversationMessage&#x60; for new integrations.
+     * &gt; - This endpoint is currently in Beta. Breaking changes may be introduced before the
+     * endpoint is made Generally Available. &gt; - This endpoint requires Spotter - please contact
+     * ThoughtSpot support to enable Spotter on your cluster.
      *
      * @param conversationIdentifier Unique identifier for the conversation (used to track context)
      *     (required)
@@ -22334,6 +22745,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -22346,19 +22759,28 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.15.0.cl or later This API allows users to initiate or continue an agent (Spotter)
-     * conversation by submitting one or more natural language messages. To use this API, the user
-     * must have access to the relevant conversational session (via conversation_identifier) and
-     * submit at least one message. #### Usage guidelines To initiate or continue a conversation,
-     * the request must include: - &#x60;conversation_identifier&#x60;: a unique session ID for
-     * continuity and message tracking - &#x60;messages&#x60;: an array of one or more text
-     * messages, each with a value and type The API returns a array of object with a type, message,
-     * and metadata. - &#x60;type&#x60;: Type of the message — text, answer, or error. -
-     * &#x60;message&#x60;: Main content of the response. - &#x60;metadata&#x60;: Additional info
-     * depending on the message type. &gt; ###### Note: &gt; * This endpoint is currently in Beta.
-     * Breaking changes may be introduced before the endpoint is made Generally Available. &gt; *
-     * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your
-     * cluster.
+     * Version: 10.15.0.cl or later **Deprecated** — Use &#x60;sendAgentConversationMessage&#x60;
+     * instead. Send natural language messages to an existing Spotter agent conversation and returns
+     * the complete response synchronously. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and
+     * access to the metadata object associated with the conversation. The user must have access to
+     * the conversation session referenced by &#x60;conversation_identifier&#x60;. A conversation
+     * must first be created using the &#x60;createAgentConversation&#x60; API. #### Usage
+     * guidelines The request must include: - &#x60;conversation_identifier&#x60;: the unique
+     * session ID returned by &#x60;createAgentConversation&#x60;, used for context continuity and
+     * message tracking - &#x60;messages&#x60;: an array of one or more text messages to send to the
+     * agent The API returns an array of response objects, each containing: - &#x60;type&#x60;: the
+     * kind of response — &#x60;text&#x60;, &#x60;answer&#x60;, or &#x60;error&#x60; -
+     * &#x60;message&#x60;: the main content of the response - &#x60;metadata&#x60;: additional
+     * information depending on the message type (e.g., answer metadata includes analytics and
+     * visualization details) #### Error responses | Code | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks permission on the referenced conversation. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint is deprecated. Use &#x60;sendAgentConversationMessage&#x60; for new integrations.
+     * &gt; - This endpoint is currently in Beta. Breaking changes may be introduced before the
+     * endpoint is made Generally Available. &gt; - This endpoint requires Spotter - please contact
+     * ThoughtSpot support to enable Spotter on your cluster.
      *
      * @param conversationIdentifier Unique identifier for the conversation (used to track context)
      *     (required)
@@ -22373,6 +22795,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -22387,19 +22811,29 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 10.15.0.cl or later This API allows users to initiate or continue
-     * an agent (Spotter) conversation by submitting one or more natural language messages. To use
-     * this API, the user must have access to the relevant conversational session (via
-     * conversation_identifier) and submit at least one message. #### Usage guidelines To initiate
-     * or continue a conversation, the request must include: - &#x60;conversation_identifier&#x60;:
-     * a unique session ID for continuity and message tracking - &#x60;messages&#x60;: an array of
-     * one or more text messages, each with a value and type The API returns a array of object with
-     * a type, message, and metadata. - &#x60;type&#x60;: Type of the message — text, answer, or
-     * error. - &#x60;message&#x60;: Main content of the response. - &#x60;metadata&#x60;:
-     * Additional info depending on the message type. &gt; ###### Note: &gt; * This endpoint is
-     * currently in Beta. Breaking changes may be introduced before the endpoint is made Generally
-     * Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to
-     * enable Spotter on your cluster.
+     * (asynchronously) Version: 10.15.0.cl or later **Deprecated** — Use
+     * &#x60;sendAgentConversationMessage&#x60; instead. Send natural language messages to an
+     * existing Spotter agent conversation and returns the complete response synchronously. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the metadata object associated with the
+     * conversation. The user must have access to the conversation session referenced by
+     * &#x60;conversation_identifier&#x60;. A conversation must first be created using the
+     * &#x60;createAgentConversation&#x60; API. #### Usage guidelines The request must include: -
+     * &#x60;conversation_identifier&#x60;: the unique session ID returned by
+     * &#x60;createAgentConversation&#x60;, used for context continuity and message tracking -
+     * &#x60;messages&#x60;: an array of one or more text messages to send to the agent The API
+     * returns an array of response objects, each containing: - &#x60;type&#x60;: the kind of
+     * response — &#x60;text&#x60;, &#x60;answer&#x60;, or &#x60;error&#x60; - &#x60;message&#x60;:
+     * the main content of the response - &#x60;metadata&#x60;: additional information depending on
+     * the message type (e.g., answer metadata includes analytics and visualization details) ####
+     * Error responses | Code | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks permission on the referenced conversation. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint is deprecated. Use &#x60;sendAgentConversationMessage&#x60; for new integrations.
+     * &gt; - This endpoint is currently in Beta. Breaking changes may be introduced before the
+     * endpoint is made Generally Available. &gt; - This endpoint requires Spotter - please contact
+     * ThoughtSpot support to enable Spotter on your cluster.
      *
      * @param conversationIdentifier Unique identifier for the conversation (used to track context)
      *     (required)
@@ -22415,6 +22849,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -22445,6 +22881,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -22520,25 +22958,40 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.13.0.cl or later This API allows users to initiate or continue an agent (Spotter)
-     * conversation by submitting one or more natural language messages. To use this API, the user
-     * must have access to the relevant conversational session (via conversation_identifier) and
-     * submit at least one message. #### Usage guidelines To initiate or continue a conversation,
-     * the request must include: - &#x60;conversation_identifier&#x60;: a unique session ID for
-     * continuity and message tracking - &#x60;messages&#x60;: an array of one or more text
-     * messages, each with a value and type Additionally, user can specify what tool can be included
-     * &#x60;conversation_settings&#x60; parameter, which supports: -
-     * &#x60;enable_contextual_change_analysis&#x60; (default: false) -
-     * &#x60;enable_natural_language_answer_generation&#x60; (default: true) -
-     * &#x60;enable_reasoning&#x60; (default: false) If the request is valid, the API returns a
-     * stream of messages in real time, including: - &#x60;ack&#x60;: confirms receipt of the
-     * request - &#x60;text / text-chunk&#x60;: content chunks, optionally formatted (e.g.,
-     * markdown) - &#x60;answer&#x60;: the final structured response with metadata and analytics -
-     * &#x60;error&#x60;: if a failure occurs - &#x60;notification&#x60;: notification messages for
-     * operation being performed &gt; ###### Note: &gt; * This endpoint is currently in Beta.
-     * Breaking changes may be introduced before the endpoint is made Generally Available. &gt; *
-     * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your
-     * cluster. &gt; * The streaming protocol uses Server-Sent Events (SSE)
+     * Version: 10.13.0.cl or later **Deprecated** — Use
+     * &#x60;sendAgentConversationMessageStreaming&#x60; instead. Sends one or more natural language
+     * messages to an existing Spotter agent conversation and returns the response as a real-time
+     * Server-Sent Events stream. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the
+     * metadata object associated with the conversation. The user must have access to the
+     * conversation session referenced by &#x60;conversation_identifier&#x60;. A conversation must
+     * first be created using the &#x60;createAgentConversation&#x60; API. #### Usage guidelines The
+     * request must include: - &#x60;conversation_identifier&#x60;: the unique session ID returned
+     * by &#x60;createAgentConversation&#x60;, used for context continuity and message tracking -
+     * &#x60;messages&#x60;: an array of one or more text messages to send to the agent If the
+     * request is valid, the API returns a Server-Sent Events (SSE) stream. Each line has the form
+     * &#x60;data: [{\&quot;type\&quot;: \&quot;...\&quot;, ...}]&#x60; — a JSON array of event
+     * objects. Event types include: - &#x60;ack&#x60;: confirms receipt of the request
+     * (&#x60;node_id&#x60;) - &#x60;conv_title&#x60;: conversation title (&#x60;title&#x60;,
+     * &#x60;conv_id&#x60;) - &#x60;notification&#x60;: status updates on operations
+     * (&#x60;group_id&#x60;, &#x60;metadata&#x60;, &#x60;code&#x60; — e.g.
+     * &#x60;TOOL_CALL_NOTIFICATION&#x60;, &#x60;nls_start&#x60;,
+     * &#x60;FINAL_RESPONSE_NOTIFICATION&#x60;) - &#x60;text-chunk&#x60;: incremental content chunks
+     * (&#x60;id&#x60;, &#x60;group_id&#x60;, &#x60;metadata&#x60; with &#x60;format&#x60; and
+     * &#x60;type&#x60; such as &#x60;thinking&#x60; or &#x60;text&#x60;, &#x60;content&#x60;) -
+     * &#x60;text&#x60;: full text block with same structure as &#x60;text-chunk&#x60; -
+     * &#x60;answer&#x60;: structured answer with metadata (&#x60;id&#x60;, &#x60;group_id&#x60;,
+     * &#x60;metadata&#x60; with &#x60;sage_query&#x60;, &#x60;session_id&#x60;, &#x60;title&#x60;,
+     * etc., &#x60;title&#x60;) - &#x60;error&#x60;: if a failure occurs #### Error responses | Code
+     * | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks permission on the referenced conversation. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint is deprecated. Use &#x60;sendAgentConversationMessageStreaming&#x60; for new
+     * integrations. &gt; - This endpoint is currently in Beta. Breaking changes may be introduced
+     * before the endpoint is made Generally Available. &gt; - This endpoint requires Spotter -
+     * please contact ThoughtSpot support to enable Spotter on your cluster. &gt; - The streaming
+     * protocol uses Server-Sent Events (SSE).
      *
      * @param sendAgentMessageStreamingRequest (required)
      * @return SendAgentMessageResponse
@@ -22551,6 +23004,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -22562,25 +23017,40 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.13.0.cl or later This API allows users to initiate or continue an agent (Spotter)
-     * conversation by submitting one or more natural language messages. To use this API, the user
-     * must have access to the relevant conversational session (via conversation_identifier) and
-     * submit at least one message. #### Usage guidelines To initiate or continue a conversation,
-     * the request must include: - &#x60;conversation_identifier&#x60;: a unique session ID for
-     * continuity and message tracking - &#x60;messages&#x60;: an array of one or more text
-     * messages, each with a value and type Additionally, user can specify what tool can be included
-     * &#x60;conversation_settings&#x60; parameter, which supports: -
-     * &#x60;enable_contextual_change_analysis&#x60; (default: false) -
-     * &#x60;enable_natural_language_answer_generation&#x60; (default: true) -
-     * &#x60;enable_reasoning&#x60; (default: false) If the request is valid, the API returns a
-     * stream of messages in real time, including: - &#x60;ack&#x60;: confirms receipt of the
-     * request - &#x60;text / text-chunk&#x60;: content chunks, optionally formatted (e.g.,
-     * markdown) - &#x60;answer&#x60;: the final structured response with metadata and analytics -
-     * &#x60;error&#x60;: if a failure occurs - &#x60;notification&#x60;: notification messages for
-     * operation being performed &gt; ###### Note: &gt; * This endpoint is currently in Beta.
-     * Breaking changes may be introduced before the endpoint is made Generally Available. &gt; *
-     * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your
-     * cluster. &gt; * The streaming protocol uses Server-Sent Events (SSE)
+     * Version: 10.13.0.cl or later **Deprecated** — Use
+     * &#x60;sendAgentConversationMessageStreaming&#x60; instead. Sends one or more natural language
+     * messages to an existing Spotter agent conversation and returns the response as a real-time
+     * Server-Sent Events stream. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the
+     * metadata object associated with the conversation. The user must have access to the
+     * conversation session referenced by &#x60;conversation_identifier&#x60;. A conversation must
+     * first be created using the &#x60;createAgentConversation&#x60; API. #### Usage guidelines The
+     * request must include: - &#x60;conversation_identifier&#x60;: the unique session ID returned
+     * by &#x60;createAgentConversation&#x60;, used for context continuity and message tracking -
+     * &#x60;messages&#x60;: an array of one or more text messages to send to the agent If the
+     * request is valid, the API returns a Server-Sent Events (SSE) stream. Each line has the form
+     * &#x60;data: [{\&quot;type\&quot;: \&quot;...\&quot;, ...}]&#x60; — a JSON array of event
+     * objects. Event types include: - &#x60;ack&#x60;: confirms receipt of the request
+     * (&#x60;node_id&#x60;) - &#x60;conv_title&#x60;: conversation title (&#x60;title&#x60;,
+     * &#x60;conv_id&#x60;) - &#x60;notification&#x60;: status updates on operations
+     * (&#x60;group_id&#x60;, &#x60;metadata&#x60;, &#x60;code&#x60; — e.g.
+     * &#x60;TOOL_CALL_NOTIFICATION&#x60;, &#x60;nls_start&#x60;,
+     * &#x60;FINAL_RESPONSE_NOTIFICATION&#x60;) - &#x60;text-chunk&#x60;: incremental content chunks
+     * (&#x60;id&#x60;, &#x60;group_id&#x60;, &#x60;metadata&#x60; with &#x60;format&#x60; and
+     * &#x60;type&#x60; such as &#x60;thinking&#x60; or &#x60;text&#x60;, &#x60;content&#x60;) -
+     * &#x60;text&#x60;: full text block with same structure as &#x60;text-chunk&#x60; -
+     * &#x60;answer&#x60;: structured answer with metadata (&#x60;id&#x60;, &#x60;group_id&#x60;,
+     * &#x60;metadata&#x60; with &#x60;sage_query&#x60;, &#x60;session_id&#x60;, &#x60;title&#x60;,
+     * etc., &#x60;title&#x60;) - &#x60;error&#x60;: if a failure occurs #### Error responses | Code
+     * | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks permission on the referenced conversation. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint is deprecated. Use &#x60;sendAgentConversationMessageStreaming&#x60; for new
+     * integrations. &gt; - This endpoint is currently in Beta. Breaking changes may be introduced
+     * before the endpoint is made Generally Available. &gt; - This endpoint requires Spotter -
+     * please contact ThoughtSpot support to enable Spotter on your cluster. &gt; - The streaming
+     * protocol uses Server-Sent Events (SSE).
      *
      * @param sendAgentMessageStreamingRequest (required)
      * @return ApiResponse&lt;SendAgentMessageResponse&gt;
@@ -22593,6 +23063,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -22605,25 +23077,40 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 10.13.0.cl or later This API allows users to initiate or continue
-     * an agent (Spotter) conversation by submitting one or more natural language messages. To use
-     * this API, the user must have access to the relevant conversational session (via
-     * conversation_identifier) and submit at least one message. #### Usage guidelines To initiate
-     * or continue a conversation, the request must include: - &#x60;conversation_identifier&#x60;:
-     * a unique session ID for continuity and message tracking - &#x60;messages&#x60;: an array of
-     * one or more text messages, each with a value and type Additionally, user can specify what
-     * tool can be included &#x60;conversation_settings&#x60; parameter, which supports: -
-     * &#x60;enable_contextual_change_analysis&#x60; (default: false) -
-     * &#x60;enable_natural_language_answer_generation&#x60; (default: true) -
-     * &#x60;enable_reasoning&#x60; (default: false) If the request is valid, the API returns a
-     * stream of messages in real time, including: - &#x60;ack&#x60;: confirms receipt of the
-     * request - &#x60;text / text-chunk&#x60;: content chunks, optionally formatted (e.g.,
-     * markdown) - &#x60;answer&#x60;: the final structured response with metadata and analytics -
-     * &#x60;error&#x60;: if a failure occurs - &#x60;notification&#x60;: notification messages for
-     * operation being performed &gt; ###### Note: &gt; * This endpoint is currently in Beta.
-     * Breaking changes may be introduced before the endpoint is made Generally Available. &gt; *
-     * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your
-     * cluster. &gt; * The streaming protocol uses Server-Sent Events (SSE)
+     * (asynchronously) Version: 10.13.0.cl or later **Deprecated** — Use
+     * &#x60;sendAgentConversationMessageStreaming&#x60; instead. Sends one or more natural language
+     * messages to an existing Spotter agent conversation and returns the response as a real-time
+     * Server-Sent Events stream. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the
+     * metadata object associated with the conversation. The user must have access to the
+     * conversation session referenced by &#x60;conversation_identifier&#x60;. A conversation must
+     * first be created using the &#x60;createAgentConversation&#x60; API. #### Usage guidelines The
+     * request must include: - &#x60;conversation_identifier&#x60;: the unique session ID returned
+     * by &#x60;createAgentConversation&#x60;, used for context continuity and message tracking -
+     * &#x60;messages&#x60;: an array of one or more text messages to send to the agent If the
+     * request is valid, the API returns a Server-Sent Events (SSE) stream. Each line has the form
+     * &#x60;data: [{\&quot;type\&quot;: \&quot;...\&quot;, ...}]&#x60; — a JSON array of event
+     * objects. Event types include: - &#x60;ack&#x60;: confirms receipt of the request
+     * (&#x60;node_id&#x60;) - &#x60;conv_title&#x60;: conversation title (&#x60;title&#x60;,
+     * &#x60;conv_id&#x60;) - &#x60;notification&#x60;: status updates on operations
+     * (&#x60;group_id&#x60;, &#x60;metadata&#x60;, &#x60;code&#x60; — e.g.
+     * &#x60;TOOL_CALL_NOTIFICATION&#x60;, &#x60;nls_start&#x60;,
+     * &#x60;FINAL_RESPONSE_NOTIFICATION&#x60;) - &#x60;text-chunk&#x60;: incremental content chunks
+     * (&#x60;id&#x60;, &#x60;group_id&#x60;, &#x60;metadata&#x60; with &#x60;format&#x60; and
+     * &#x60;type&#x60; such as &#x60;thinking&#x60; or &#x60;text&#x60;, &#x60;content&#x60;) -
+     * &#x60;text&#x60;: full text block with same structure as &#x60;text-chunk&#x60; -
+     * &#x60;answer&#x60;: structured answer with metadata (&#x60;id&#x60;, &#x60;group_id&#x60;,
+     * &#x60;metadata&#x60; with &#x60;sage_query&#x60;, &#x60;session_id&#x60;, &#x60;title&#x60;,
+     * etc., &#x60;title&#x60;) - &#x60;error&#x60;: if a failure occurs #### Error responses | Code
+     * | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks permission on the referenced conversation. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint is deprecated. Use &#x60;sendAgentConversationMessageStreaming&#x60; for new
+     * integrations. &gt; - This endpoint is currently in Beta. Breaking changes may be introduced
+     * before the endpoint is made Generally Available. &gt; - This endpoint requires Spotter -
+     * please contact ThoughtSpot support to enable Spotter on your cluster. &gt; - The streaming
+     * protocol uses Server-Sent Events (SSE).
      *
      * @param sendAgentMessageStreamingRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -22637,6 +23124,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -22667,6 +23156,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -22755,16 +23246,28 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.4.0.cl or later Allows sending a follow-up message to an ongoing conversation
-     * within the context of the metadata model. Requires at least view access to the metadata
-     * object specified in the request. #### Usage guidelines The API requires you to specify the
-     * &#x60;conversation_identifier&#x60; in the request path, and a
-     * &#x60;metadata_identifier&#x60; and &#x60;message&#x60; string in the request body. If the
-     * API request is successful, ThoughtSpot returns the session ID, tokens used in the
-     * conversation, and visualization type. &gt; ###### Note: &gt; * This endpoint is currently in
-     * Beta. Breaking changes may be introduced before the endpoint is made Generally Available.
-     * &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter
-     * on your cluster.
+     * Version: 10.4.0.cl or later Sends a follow-up message to an existing conversation within the
+     * context of a data model. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view
+     * access to the metadata object specified in the request. A conversation must first be created
+     * using the &#x60;createConversation&#x60; API. #### Usage guidelines The request must include:
+     * - &#x60;conversation_identifier&#x60;: the unique session ID returned by
+     * &#x60;createConversation&#x60; - &#x60;metadata_identifier&#x60;: the unique ID of the data
+     * source used for the conversation - &#x60;message&#x60;: a natural language string with the
+     * follow-up question If the request is successful, the API returns an array of response
+     * messages, each containing: - &#x60;session_identifier&#x60;: the unique ID of the generated
+     * response - &#x60;generation_number&#x60;: the generation number of the response -
+     * &#x60;message_type&#x60;: the type of the response (e.g., &#x60;TSAnswer&#x60;) -
+     * &#x60;visualization_type&#x60;: the generated visualization type (&#x60;Chart&#x60;,
+     * &#x60;Table&#x60;, or &#x60;Undefined&#x60;) - &#x60;tokens&#x60; /
+     * &#x60;display_tokens&#x60;: the search tokens and user-friendly display tokens for the
+     * response #### Error responses | Code | Description |
+     * |------|-----------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view permission on the specified metadata object. | &gt; ###### Note: &gt; * This
+     * endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made
+     * Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot
+     * support to enable Spotter on your cluster.
      *
      * @param conversationIdentifier Unique identifier of the conversation. (required)
      * @param sendMessageRequest (required)
@@ -22778,6 +23281,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -22790,16 +23295,28 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.4.0.cl or later Allows sending a follow-up message to an ongoing conversation
-     * within the context of the metadata model. Requires at least view access to the metadata
-     * object specified in the request. #### Usage guidelines The API requires you to specify the
-     * &#x60;conversation_identifier&#x60; in the request path, and a
-     * &#x60;metadata_identifier&#x60; and &#x60;message&#x60; string in the request body. If the
-     * API request is successful, ThoughtSpot returns the session ID, tokens used in the
-     * conversation, and visualization type. &gt; ###### Note: &gt; * This endpoint is currently in
-     * Beta. Breaking changes may be introduced before the endpoint is made Generally Available.
-     * &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter
-     * on your cluster.
+     * Version: 10.4.0.cl or later Sends a follow-up message to an existing conversation within the
+     * context of a data model. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view
+     * access to the metadata object specified in the request. A conversation must first be created
+     * using the &#x60;createConversation&#x60; API. #### Usage guidelines The request must include:
+     * - &#x60;conversation_identifier&#x60;: the unique session ID returned by
+     * &#x60;createConversation&#x60; - &#x60;metadata_identifier&#x60;: the unique ID of the data
+     * source used for the conversation - &#x60;message&#x60;: a natural language string with the
+     * follow-up question If the request is successful, the API returns an array of response
+     * messages, each containing: - &#x60;session_identifier&#x60;: the unique ID of the generated
+     * response - &#x60;generation_number&#x60;: the generation number of the response -
+     * &#x60;message_type&#x60;: the type of the response (e.g., &#x60;TSAnswer&#x60;) -
+     * &#x60;visualization_type&#x60;: the generated visualization type (&#x60;Chart&#x60;,
+     * &#x60;Table&#x60;, or &#x60;Undefined&#x60;) - &#x60;tokens&#x60; /
+     * &#x60;display_tokens&#x60;: the search tokens and user-friendly display tokens for the
+     * response #### Error responses | Code | Description |
+     * |------|-----------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view permission on the specified metadata object. | &gt; ###### Note: &gt; * This
+     * endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made
+     * Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot
+     * support to enable Spotter on your cluster.
      *
      * @param conversationIdentifier Unique identifier of the conversation. (required)
      * @param sendMessageRequest (required)
@@ -22813,6 +23330,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -22826,16 +23345,28 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 10.4.0.cl or later Allows sending a follow-up message to an ongoing
-     * conversation within the context of the metadata model. Requires at least view access to the
-     * metadata object specified in the request. #### Usage guidelines The API requires you to
-     * specify the &#x60;conversation_identifier&#x60; in the request path, and a
-     * &#x60;metadata_identifier&#x60; and &#x60;message&#x60; string in the request body. If the
-     * API request is successful, ThoughtSpot returns the session ID, tokens used in the
-     * conversation, and visualization type. &gt; ###### Note: &gt; * This endpoint is currently in
-     * Beta. Breaking changes may be introduced before the endpoint is made Generally Available.
-     * &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter
-     * on your cluster.
+     * (asynchronously) Version: 10.4.0.cl or later Sends a follow-up message to an existing
+     * conversation within the context of a data model. Requires &#x60;CAN_USE_SPOTTER&#x60;
+     * privilege and at least view access to the metadata object specified in the request. A
+     * conversation must first be created using the &#x60;createConversation&#x60; API. #### Usage
+     * guidelines The request must include: - &#x60;conversation_identifier&#x60;: the unique
+     * session ID returned by &#x60;createConversation&#x60; - &#x60;metadata_identifier&#x60;: the
+     * unique ID of the data source used for the conversation - &#x60;message&#x60;: a natural
+     * language string with the follow-up question If the request is successful, the API returns an
+     * array of response messages, each containing: - &#x60;session_identifier&#x60;: the unique ID
+     * of the generated response - &#x60;generation_number&#x60;: the generation number of the
+     * response - &#x60;message_type&#x60;: the type of the response (e.g., &#x60;TSAnswer&#x60;) -
+     * &#x60;visualization_type&#x60;: the generated visualization type (&#x60;Chart&#x60;,
+     * &#x60;Table&#x60;, or &#x60;Undefined&#x60;) - &#x60;tokens&#x60; /
+     * &#x60;display_tokens&#x60;: the search tokens and user-friendly display tokens for the
+     * response #### Error responses | Code | Description |
+     * |------|-----------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view permission on the specified metadata object. | &gt; ###### Note: &gt; * This
+     * endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made
+     * Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot
+     * support to enable Spotter on your cluster.
      *
      * @param conversationIdentifier Unique identifier of the conversation. (required)
      * @param sendMessageRequest (required)
@@ -22850,6 +23381,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -22880,6 +23413,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -22956,22 +23491,30 @@ public class ThoughtSpotRestApi {
      * Version: 10.15.0.cl or later This API allows users to set natural language (NL) instructions
      * for a specific data-model to improve AI-generated answers and query processing. These
      * instructions help guide the AI system to better understand the data context and provide more
-     * accurate responses. #### Usage guidelines To set NL instructions for a data-model, the
-     * request must include: - &#x60;data_source_identifier&#x60;: The unique ID of the data-model
-     * for which to set NL instructions - &#x60;nl_instructions_info&#x60;: An array of instruction
-     * objects, each containing: - &#x60;instructions&#x60;: Array of text instructions for the LLM
-     * - &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). Currently only
-     * &#x60;GLOBAL&#x60; is supported. It can be extended to data-model-user scope in future. The
-     * API returns a response object with: - &#x60;success&#x60;: Boolean indicating whether the
-     * operation was successful #### Instructions Scope - **GLOBAL**: Instructions that apply
-     * globally for that data-model across the system &gt; ###### Note: &gt; * To use this API, the
-     * user needs either edit access or SPOTTER_COACHING_PRIVILEGE on the data-model and they must
-     * use corresponding org related bearerToken where the data-model exists. &gt; * This endpoint
-     * is currently in Beta. Breaking changes may be introduced before the endpoint is made
-     * Generally Available. &gt; * Available from version 10.15.0.cl and later. &gt; * This endpoint
-     * requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. &gt;
-     * * Instructions help improve the accuracy and relevance of AI-generated responses for the
-     * specified data-model.
+     * accurate responses. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege, either edit access or
+     * &#x60;SPOTTER_COACHING_PRIVILEGE&#x60; on the data model, and a bearer token corresponding to
+     * the org where the data model exists. #### Usage guidelines To set NL instructions for a
+     * data-model, the request must include: - &#x60;data_source_identifier&#x60;: The unique ID of
+     * the data-model for which to set NL instructions - &#x60;nl_instructions_info&#x60;: An array
+     * of instruction objects, each containing: - &#x60;instructions&#x60;: Array of text
+     * instructions for the LLM - &#x60;scope&#x60;: The scope of the instruction
+     * (&#x60;GLOBAL&#x60;). Currently only &#x60;GLOBAL&#x60; is supported. It can be extended to
+     * data-model-user scope in future. #### Instructions scope - **GLOBAL**: instructions that
+     * apply to all users querying this data model If the request is successful, the API returns: -
+     * &#x60;success&#x60;: a boolean indicating whether the operation completed successfully ####
+     * Error responses | Code | Description |
+     * |------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, lacks
+     * edit access or &#x60;SPOTTER_COACHING_PRIVILEGE&#x60; on the data model, or the bearer token
+     * does not correspond to the org where the data model exists. | &gt; ###### Note: &gt; &gt; -
+     * To use this API, the user needs either edit access or &#x60;SPOTTER_COACHING_PRIVILEGE&#x60;
+     * on the data model, and must use the bearer token corresponding to the org where the data
+     * model exists. &gt; - This endpoint is currently in Beta. Breaking changes may be introduced
+     * before the endpoint is made Generally Available. &gt; - Available from version 10.15.0.cl and
+     * later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable
+     * Spotter on your cluster. &gt; - Instructions help improve the accuracy and relevance of
+     * AI-generated responses for the specified data-model.
      *
      * @param setNLInstructionsRequest (required)
      * @return EurekaSetNLInstructionsResponse
@@ -22984,6 +23527,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -22998,22 +23543,30 @@ public class ThoughtSpotRestApi {
      * Version: 10.15.0.cl or later This API allows users to set natural language (NL) instructions
      * for a specific data-model to improve AI-generated answers and query processing. These
      * instructions help guide the AI system to better understand the data context and provide more
-     * accurate responses. #### Usage guidelines To set NL instructions for a data-model, the
-     * request must include: - &#x60;data_source_identifier&#x60;: The unique ID of the data-model
-     * for which to set NL instructions - &#x60;nl_instructions_info&#x60;: An array of instruction
-     * objects, each containing: - &#x60;instructions&#x60;: Array of text instructions for the LLM
-     * - &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). Currently only
-     * &#x60;GLOBAL&#x60; is supported. It can be extended to data-model-user scope in future. The
-     * API returns a response object with: - &#x60;success&#x60;: Boolean indicating whether the
-     * operation was successful #### Instructions Scope - **GLOBAL**: Instructions that apply
-     * globally for that data-model across the system &gt; ###### Note: &gt; * To use this API, the
-     * user needs either edit access or SPOTTER_COACHING_PRIVILEGE on the data-model and they must
-     * use corresponding org related bearerToken where the data-model exists. &gt; * This endpoint
-     * is currently in Beta. Breaking changes may be introduced before the endpoint is made
-     * Generally Available. &gt; * Available from version 10.15.0.cl and later. &gt; * This endpoint
-     * requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. &gt;
-     * * Instructions help improve the accuracy and relevance of AI-generated responses for the
-     * specified data-model.
+     * accurate responses. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege, either edit access or
+     * &#x60;SPOTTER_COACHING_PRIVILEGE&#x60; on the data model, and a bearer token corresponding to
+     * the org where the data model exists. #### Usage guidelines To set NL instructions for a
+     * data-model, the request must include: - &#x60;data_source_identifier&#x60;: The unique ID of
+     * the data-model for which to set NL instructions - &#x60;nl_instructions_info&#x60;: An array
+     * of instruction objects, each containing: - &#x60;instructions&#x60;: Array of text
+     * instructions for the LLM - &#x60;scope&#x60;: The scope of the instruction
+     * (&#x60;GLOBAL&#x60;). Currently only &#x60;GLOBAL&#x60; is supported. It can be extended to
+     * data-model-user scope in future. #### Instructions scope - **GLOBAL**: instructions that
+     * apply to all users querying this data model If the request is successful, the API returns: -
+     * &#x60;success&#x60;: a boolean indicating whether the operation completed successfully ####
+     * Error responses | Code | Description |
+     * |------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, lacks
+     * edit access or &#x60;SPOTTER_COACHING_PRIVILEGE&#x60; on the data model, or the bearer token
+     * does not correspond to the org where the data model exists. | &gt; ###### Note: &gt; &gt; -
+     * To use this API, the user needs either edit access or &#x60;SPOTTER_COACHING_PRIVILEGE&#x60;
+     * on the data model, and must use the bearer token corresponding to the org where the data
+     * model exists. &gt; - This endpoint is currently in Beta. Breaking changes may be introduced
+     * before the endpoint is made Generally Available. &gt; - Available from version 10.15.0.cl and
+     * later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable
+     * Spotter on your cluster. &gt; - Instructions help improve the accuracy and relevance of
+     * AI-generated responses for the specified data-model.
      *
      * @param setNLInstructionsRequest (required)
      * @return ApiResponse&lt;EurekaSetNLInstructionsResponse&gt;
@@ -23026,6 +23579,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -23041,22 +23596,31 @@ public class ThoughtSpotRestApi {
      * (asynchronously) Version: 10.15.0.cl or later This API allows users to set natural language
      * (NL) instructions for a specific data-model to improve AI-generated answers and query
      * processing. These instructions help guide the AI system to better understand the data context
-     * and provide more accurate responses. #### Usage guidelines To set NL instructions for a
-     * data-model, the request must include: - &#x60;data_source_identifier&#x60;: The unique ID of
-     * the data-model for which to set NL instructions - &#x60;nl_instructions_info&#x60;: An array
-     * of instruction objects, each containing: - &#x60;instructions&#x60;: Array of text
-     * instructions for the LLM - &#x60;scope&#x60;: The scope of the instruction
-     * (&#x60;GLOBAL&#x60;). Currently only &#x60;GLOBAL&#x60; is supported. It can be extended to
-     * data-model-user scope in future. The API returns a response object with: -
-     * &#x60;success&#x60;: Boolean indicating whether the operation was successful ####
-     * Instructions Scope - **GLOBAL**: Instructions that apply globally for that data-model across
-     * the system &gt; ###### Note: &gt; * To use this API, the user needs either edit access or
-     * SPOTTER_COACHING_PRIVILEGE on the data-model and they must use corresponding org related
-     * bearerToken where the data-model exists. &gt; * This endpoint is currently in Beta. Breaking
-     * changes may be introduced before the endpoint is made Generally Available. &gt; * Available
-     * from version 10.15.0.cl and later. &gt; * This endpoint requires Spotter — please contact
-     * ThoughtSpot Support to enable Spotter on your cluster. &gt; * Instructions help improve the
-     * accuracy and relevance of AI-generated responses for the specified data-model.
+     * and provide more accurate responses. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege, either
+     * edit access or &#x60;SPOTTER_COACHING_PRIVILEGE&#x60; on the data model, and a bearer token
+     * corresponding to the org where the data model exists. #### Usage guidelines To set NL
+     * instructions for a data-model, the request must include: -
+     * &#x60;data_source_identifier&#x60;: The unique ID of the data-model for which to set NL
+     * instructions - &#x60;nl_instructions_info&#x60;: An array of instruction objects, each
+     * containing: - &#x60;instructions&#x60;: Array of text instructions for the LLM -
+     * &#x60;scope&#x60;: The scope of the instruction (&#x60;GLOBAL&#x60;). Currently only
+     * &#x60;GLOBAL&#x60; is supported. It can be extended to data-model-user scope in future. ####
+     * Instructions scope - **GLOBAL**: instructions that apply to all users querying this data
+     * model If the request is successful, the API returns: - &#x60;success&#x60;: a boolean
+     * indicating whether the operation completed successfully #### Error responses | Code |
+     * Description |
+     * |------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, lacks
+     * edit access or &#x60;SPOTTER_COACHING_PRIVILEGE&#x60; on the data model, or the bearer token
+     * does not correspond to the org where the data model exists. | &gt; ###### Note: &gt; &gt; -
+     * To use this API, the user needs either edit access or &#x60;SPOTTER_COACHING_PRIVILEGE&#x60;
+     * on the data model, and must use the bearer token corresponding to the org where the data
+     * model exists. &gt; - This endpoint is currently in Beta. Breaking changes may be introduced
+     * before the endpoint is made Generally Available. &gt; - Available from version 10.15.0.cl and
+     * later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable
+     * Spotter on your cluster. &gt; - Instructions help improve the accuracy and relevance of
+     * AI-generated responses for the specified data-model.
      *
      * @param setNLInstructionsRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -23070,6 +23634,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -23173,14 +23739,77 @@ public class ThoughtSpotRestApi {
 
     /**
      * Version: 9.0.0.cl or later Allows sharing one or several metadata objects with users and
-     * groups in ThoughtSpot. Requires edit access to the metadata object. The API endpoint allows
-     * sharing only the following types of metadata objects: * Liveboards * Visualizations * Answers
-     * * Worksheets * Views * Connections You can provide &#x60;READ_ONLY&#x60; or
-     * &#x60;MODIFY&#x60; access when sharing an object with another user or group. With
-     * &#x60;READ_ONLY&#x60; access grants view access to the shared object, whereas
-     * &#x60;MODIFY&#x60; provides edit access. To prevent a user or group from accessing the shared
-     * object, specify the GUID or name of the principal and set &#x60;shareMode&#x60; to
-     * &#x60;NO_ACCESS&#x60;.
+     * groups in ThoughtSpot. Requires edit access to the metadata object. #### Supported metadata
+     * objects: * Liveboards * Visualizations * Answers * Models * Views * Connections * Collections
+     * #### Object permissions You can provide &#x60;READ_ONLY&#x60; or &#x60;MODIFY&#x60; access
+     * when sharing an object with another user or group. The &#x60;READ_ONLY&#x60; permission
+     * grants view access to the shared object, whereas &#x60;MODIFY&#x60; provides edit access. To
+     * prevent a user or group from accessing the shared object, specify the GUID or name of the
+     * principal and set &#x60;shareMode&#x60; to &#x60;NO_ACCESS&#x60;. #### Sharing a
+     * visualization * Sharing a visualization implicitly shares the entire Liveboard with the
+     * recipient. * Object permissions set for a shared visualization also apply to the Liveboard
+     * unless overridden by another API request or via UI. * If email notifications for object
+     * sharing are enabled, a notification with a link to the shared visualization will be sent to
+     * the recipient’s email address. Although this link opens the shared visualization, recipients
+     * can also access other visualizations in the Liveboard. #### Sharing a collection Collections
+     * support **dual permissions** that provide fine-grained control: * **Collection permissions**
+     * (&#x60;share_mode&#x60;) - controls access to the collection itself (view, edit, delete the
+     * collection) * **Content permissions** (&#x60;content_share_mode&#x60;) - controls access to
+     * objects within the collection (view, edit objects inside) **Default Behavior:** - If only
+     * &#x60;share_mode&#x60; is specified, the content permissions default to &#x60;READ_ONLY&#x60;
+     * (except when &#x60;share_mode&#x60; is &#x60;NO_ACCESS&#x60;, then content also gets
+     * &#x60;NO_ACCESS&#x60;) - To give users edit access to collection contents, explicitly set
+     * &#x60;content_share_mode: \&quot;MODIFY\&quot;&#x60; ## Examples The following JSON examples
+     * can be copy-pasted as request bodies for the REST v2 API endpoint: &#x60;&#x60;&#x60;bash
+     * POST /callosum/v1/v2/security/metadata/share Content-Type: application/x-www-form-urlencoded
+     * &#x60;&#x60;&#x60; ### Basic collection sharing Share a collection with read-only access:
+     * &#x60;&#x60;&#x60;json { \&quot;metadata_type\&quot;: \&quot;COLLECTION\&quot;,
+     * \&quot;metadata_identifiers\&quot;: [\&quot;Sales Reports Collection\&quot;],
+     * \&quot;permissions\&quot;: [{ \&quot;principal\&quot;: { \&quot;type\&quot;:
+     * \&quot;USER\&quot;, \&quot;identifier\&quot;: \&quot;alice@company.com\&quot; },
+     * \&quot;share_mode\&quot;: \&quot;READ_ONLY\&quot; }], \&quot;notification\&quot;: {
+     * \&quot;message\&quot;: \&quot;I&#39;ve shared the Sales Reports collection with you\&quot;,
+     * \&quot;notify_on_share\&quot;: true } } &#x60;&#x60;&#x60; ### Collection sharing with dual
+     * permissions Share a collection with different permissions for the collection vs. its
+     * contents: &#x60;&#x60;&#x60;json { \&quot;metadata_type\&quot;: \&quot;COLLECTION\&quot;,
+     * \&quot;metadata_identifiers\&quot;: [\&quot;Marketing Analytics\&quot;],
+     * \&quot;permissions\&quot;: [{ \&quot;principal\&quot;: { \&quot;type\&quot;:
+     * \&quot;USER\&quot;, \&quot;identifier\&quot;: \&quot;bob@company.com\&quot; },
+     * \&quot;share_mode\&quot;: \&quot;MODIFY\&quot;, \&quot;content_share_mode\&quot;:
+     * \&quot;READ_ONLY\&quot; }, { \&quot;principal\&quot;: { \&quot;type\&quot;:
+     * \&quot;USER_GROUP\&quot;, \&quot;identifier\&quot;: \&quot;Marketing Team\&quot; },
+     * \&quot;share_mode\&quot;: \&quot;READ_ONLY\&quot;, \&quot;content_share_mode\&quot;:
+     * \&quot;READ_ONLY\&quot; }], \&quot;notification\&quot;: { \&quot;emails\&quot;:
+     * [\&quot;bob@company.com\&quot;], \&quot;message\&quot;: \&quot;You can edit the collection
+     * but content is read-only\&quot;, \&quot;enable_custom_url\&quot;: false,
+     * \&quot;notify_on_share\&quot;: true }, \&quot;has_lenient_discoverability\&quot;: false }
+     * &#x60;&#x60;&#x60; ### Multiple collections sharing Share multiple collections with different
+     * users: &#x60;&#x60;&#x60;json { \&quot;metadata\&quot;: [ { \&quot;type\&quot;:
+     * \&quot;COLLECTION\&quot;, \&quot;identifier\&quot;: \&quot;Q4 Reports\&quot; }, {
+     * \&quot;type\&quot;: \&quot;COLLECTION\&quot;, \&quot;identifier\&quot;: \&quot;Executive
+     * Dashboard Collection\&quot; } ], \&quot;permissions\&quot;: [{ \&quot;principal\&quot;: {
+     * \&quot;type\&quot;: \&quot;USER_GROUP\&quot;, \&quot;identifier\&quot;:
+     * \&quot;Executives\&quot; }, \&quot;share_mode\&quot;: \&quot;MODIFY\&quot; }, {
+     * \&quot;principal\&quot;: { \&quot;type\&quot;: \&quot;USER\&quot;, \&quot;identifier\&quot;:
+     * \&quot;manager@company.com\&quot; }, \&quot;share_mode\&quot;: \&quot;READ_ONLY\&quot;,
+     * \&quot;content_share_mode\&quot;: \&quot;MODIFY\&quot; }], \&quot;notification\&quot;: {
+     * \&quot;message\&quot;: \&quot;Sharing quarterly collections with leadership team\&quot;,
+     * \&quot;notify_on_share\&quot;: true } } &#x60;&#x60;&#x60; ### Remove collection access
+     * Remove access to a collection by setting share_mode to NO_ACCESS: &#x60;&#x60;&#x60;json {
+     * \&quot;metadata_type\&quot;: \&quot;COLLECTION\&quot;, \&quot;metadata_identifiers\&quot;:
+     * [\&quot;Confidential Reports\&quot;], \&quot;permissions\&quot;: [{ \&quot;principal\&quot;:
+     * { \&quot;type\&quot;: \&quot;USER\&quot;, \&quot;identifier\&quot;:
+     * \&quot;former-employee@company.com\&quot; }, \&quot;share_mode\&quot;:
+     * \&quot;NO_ACCESS\&quot; }], \&quot;notification\&quot;: { \&quot;notify_on_share\&quot;:
+     * false } } &#x60;&#x60;&#x60; ### Collection Permission Scenarios **Scenario 1: Collection
+     * Admin** - &#x60;share_mode: MODIFY&#x60; + &#x60;content_share_mode: MODIFY&#x60; &#x3D; Full
+     * control over collection and its contents **Scenario 2: Collection Curator** -
+     * &#x60;share_mode: MODIFY&#x60; + &#x60;content_share_mode: READ_ONLY&#x60; &#x3D; Can manage
+     * collection structure but not edit contents **Scenario 3: Content Editor** - &#x60;share_mode:
+     * READ_ONLY&#x60; + &#x60;content_share_mode: MODIFY&#x60; &#x3D; Can edit objects within
+     * collection but can&#39;t change collection itself **Scenario 4: Viewer** - &#x60;share_mode:
+     * READ_ONLY&#x60; + &#x60;content_share_mode: READ_ONLY&#x60; &#x3D; View-only access to
+     * collection and contents
      *
      * @param shareMetadataRequest (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -23202,14 +23831,77 @@ public class ThoughtSpotRestApi {
 
     /**
      * Version: 9.0.0.cl or later Allows sharing one or several metadata objects with users and
-     * groups in ThoughtSpot. Requires edit access to the metadata object. The API endpoint allows
-     * sharing only the following types of metadata objects: * Liveboards * Visualizations * Answers
-     * * Worksheets * Views * Connections You can provide &#x60;READ_ONLY&#x60; or
-     * &#x60;MODIFY&#x60; access when sharing an object with another user or group. With
-     * &#x60;READ_ONLY&#x60; access grants view access to the shared object, whereas
-     * &#x60;MODIFY&#x60; provides edit access. To prevent a user or group from accessing the shared
-     * object, specify the GUID or name of the principal and set &#x60;shareMode&#x60; to
-     * &#x60;NO_ACCESS&#x60;.
+     * groups in ThoughtSpot. Requires edit access to the metadata object. #### Supported metadata
+     * objects: * Liveboards * Visualizations * Answers * Models * Views * Connections * Collections
+     * #### Object permissions You can provide &#x60;READ_ONLY&#x60; or &#x60;MODIFY&#x60; access
+     * when sharing an object with another user or group. The &#x60;READ_ONLY&#x60; permission
+     * grants view access to the shared object, whereas &#x60;MODIFY&#x60; provides edit access. To
+     * prevent a user or group from accessing the shared object, specify the GUID or name of the
+     * principal and set &#x60;shareMode&#x60; to &#x60;NO_ACCESS&#x60;. #### Sharing a
+     * visualization * Sharing a visualization implicitly shares the entire Liveboard with the
+     * recipient. * Object permissions set for a shared visualization also apply to the Liveboard
+     * unless overridden by another API request or via UI. * If email notifications for object
+     * sharing are enabled, a notification with a link to the shared visualization will be sent to
+     * the recipient’s email address. Although this link opens the shared visualization, recipients
+     * can also access other visualizations in the Liveboard. #### Sharing a collection Collections
+     * support **dual permissions** that provide fine-grained control: * **Collection permissions**
+     * (&#x60;share_mode&#x60;) - controls access to the collection itself (view, edit, delete the
+     * collection) * **Content permissions** (&#x60;content_share_mode&#x60;) - controls access to
+     * objects within the collection (view, edit objects inside) **Default Behavior:** - If only
+     * &#x60;share_mode&#x60; is specified, the content permissions default to &#x60;READ_ONLY&#x60;
+     * (except when &#x60;share_mode&#x60; is &#x60;NO_ACCESS&#x60;, then content also gets
+     * &#x60;NO_ACCESS&#x60;) - To give users edit access to collection contents, explicitly set
+     * &#x60;content_share_mode: \&quot;MODIFY\&quot;&#x60; ## Examples The following JSON examples
+     * can be copy-pasted as request bodies for the REST v2 API endpoint: &#x60;&#x60;&#x60;bash
+     * POST /callosum/v1/v2/security/metadata/share Content-Type: application/x-www-form-urlencoded
+     * &#x60;&#x60;&#x60; ### Basic collection sharing Share a collection with read-only access:
+     * &#x60;&#x60;&#x60;json { \&quot;metadata_type\&quot;: \&quot;COLLECTION\&quot;,
+     * \&quot;metadata_identifiers\&quot;: [\&quot;Sales Reports Collection\&quot;],
+     * \&quot;permissions\&quot;: [{ \&quot;principal\&quot;: { \&quot;type\&quot;:
+     * \&quot;USER\&quot;, \&quot;identifier\&quot;: \&quot;alice@company.com\&quot; },
+     * \&quot;share_mode\&quot;: \&quot;READ_ONLY\&quot; }], \&quot;notification\&quot;: {
+     * \&quot;message\&quot;: \&quot;I&#39;ve shared the Sales Reports collection with you\&quot;,
+     * \&quot;notify_on_share\&quot;: true } } &#x60;&#x60;&#x60; ### Collection sharing with dual
+     * permissions Share a collection with different permissions for the collection vs. its
+     * contents: &#x60;&#x60;&#x60;json { \&quot;metadata_type\&quot;: \&quot;COLLECTION\&quot;,
+     * \&quot;metadata_identifiers\&quot;: [\&quot;Marketing Analytics\&quot;],
+     * \&quot;permissions\&quot;: [{ \&quot;principal\&quot;: { \&quot;type\&quot;:
+     * \&quot;USER\&quot;, \&quot;identifier\&quot;: \&quot;bob@company.com\&quot; },
+     * \&quot;share_mode\&quot;: \&quot;MODIFY\&quot;, \&quot;content_share_mode\&quot;:
+     * \&quot;READ_ONLY\&quot; }, { \&quot;principal\&quot;: { \&quot;type\&quot;:
+     * \&quot;USER_GROUP\&quot;, \&quot;identifier\&quot;: \&quot;Marketing Team\&quot; },
+     * \&quot;share_mode\&quot;: \&quot;READ_ONLY\&quot;, \&quot;content_share_mode\&quot;:
+     * \&quot;READ_ONLY\&quot; }], \&quot;notification\&quot;: { \&quot;emails\&quot;:
+     * [\&quot;bob@company.com\&quot;], \&quot;message\&quot;: \&quot;You can edit the collection
+     * but content is read-only\&quot;, \&quot;enable_custom_url\&quot;: false,
+     * \&quot;notify_on_share\&quot;: true }, \&quot;has_lenient_discoverability\&quot;: false }
+     * &#x60;&#x60;&#x60; ### Multiple collections sharing Share multiple collections with different
+     * users: &#x60;&#x60;&#x60;json { \&quot;metadata\&quot;: [ { \&quot;type\&quot;:
+     * \&quot;COLLECTION\&quot;, \&quot;identifier\&quot;: \&quot;Q4 Reports\&quot; }, {
+     * \&quot;type\&quot;: \&quot;COLLECTION\&quot;, \&quot;identifier\&quot;: \&quot;Executive
+     * Dashboard Collection\&quot; } ], \&quot;permissions\&quot;: [{ \&quot;principal\&quot;: {
+     * \&quot;type\&quot;: \&quot;USER_GROUP\&quot;, \&quot;identifier\&quot;:
+     * \&quot;Executives\&quot; }, \&quot;share_mode\&quot;: \&quot;MODIFY\&quot; }, {
+     * \&quot;principal\&quot;: { \&quot;type\&quot;: \&quot;USER\&quot;, \&quot;identifier\&quot;:
+     * \&quot;manager@company.com\&quot; }, \&quot;share_mode\&quot;: \&quot;READ_ONLY\&quot;,
+     * \&quot;content_share_mode\&quot;: \&quot;MODIFY\&quot; }], \&quot;notification\&quot;: {
+     * \&quot;message\&quot;: \&quot;Sharing quarterly collections with leadership team\&quot;,
+     * \&quot;notify_on_share\&quot;: true } } &#x60;&#x60;&#x60; ### Remove collection access
+     * Remove access to a collection by setting share_mode to NO_ACCESS: &#x60;&#x60;&#x60;json {
+     * \&quot;metadata_type\&quot;: \&quot;COLLECTION\&quot;, \&quot;metadata_identifiers\&quot;:
+     * [\&quot;Confidential Reports\&quot;], \&quot;permissions\&quot;: [{ \&quot;principal\&quot;:
+     * { \&quot;type\&quot;: \&quot;USER\&quot;, \&quot;identifier\&quot;:
+     * \&quot;former-employee@company.com\&quot; }, \&quot;share_mode\&quot;:
+     * \&quot;NO_ACCESS\&quot; }], \&quot;notification\&quot;: { \&quot;notify_on_share\&quot;:
+     * false } } &#x60;&#x60;&#x60; ### Collection Permission Scenarios **Scenario 1: Collection
+     * Admin** - &#x60;share_mode: MODIFY&#x60; + &#x60;content_share_mode: MODIFY&#x60; &#x3D; Full
+     * control over collection and its contents **Scenario 2: Collection Curator** -
+     * &#x60;share_mode: MODIFY&#x60; + &#x60;content_share_mode: READ_ONLY&#x60; &#x3D; Can manage
+     * collection structure but not edit contents **Scenario 3: Content Editor** - &#x60;share_mode:
+     * READ_ONLY&#x60; + &#x60;content_share_mode: MODIFY&#x60; &#x3D; Can edit objects within
+     * collection but can&#39;t change collection itself **Scenario 4: Viewer** - &#x60;share_mode:
+     * READ_ONLY&#x60; + &#x60;content_share_mode: READ_ONLY&#x60; &#x3D; View-only access to
+     * collection and contents
      *
      * @param shareMetadataRequest (required)
      * @return ApiResponse&lt;Void&gt;
@@ -23234,14 +23926,78 @@ public class ThoughtSpotRestApi {
 
     /**
      * (asynchronously) Version: 9.0.0.cl or later Allows sharing one or several metadata objects
-     * with users and groups in ThoughtSpot. Requires edit access to the metadata object. The API
-     * endpoint allows sharing only the following types of metadata objects: * Liveboards *
-     * Visualizations * Answers * Worksheets * Views * Connections You can provide
-     * &#x60;READ_ONLY&#x60; or &#x60;MODIFY&#x60; access when sharing an object with another user
-     * or group. With &#x60;READ_ONLY&#x60; access grants view access to the shared object, whereas
+     * with users and groups in ThoughtSpot. Requires edit access to the metadata object. ####
+     * Supported metadata objects: * Liveboards * Visualizations * Answers * Models * Views *
+     * Connections * Collections #### Object permissions You can provide &#x60;READ_ONLY&#x60; or
+     * &#x60;MODIFY&#x60; access when sharing an object with another user or group. The
+     * &#x60;READ_ONLY&#x60; permission grants view access to the shared object, whereas
      * &#x60;MODIFY&#x60; provides edit access. To prevent a user or group from accessing the shared
      * object, specify the GUID or name of the principal and set &#x60;shareMode&#x60; to
-     * &#x60;NO_ACCESS&#x60;.
+     * &#x60;NO_ACCESS&#x60;. #### Sharing a visualization * Sharing a visualization implicitly
+     * shares the entire Liveboard with the recipient. * Object permissions set for a shared
+     * visualization also apply to the Liveboard unless overridden by another API request or via UI.
+     * * If email notifications for object sharing are enabled, a notification with a link to the
+     * shared visualization will be sent to the recipient’s email address. Although this link opens
+     * the shared visualization, recipients can also access other visualizations in the Liveboard.
+     * #### Sharing a collection Collections support **dual permissions** that provide fine-grained
+     * control: * **Collection permissions** (&#x60;share_mode&#x60;) - controls access to the
+     * collection itself (view, edit, delete the collection) * **Content permissions**
+     * (&#x60;content_share_mode&#x60;) - controls access to objects within the collection (view,
+     * edit objects inside) **Default Behavior:** - If only &#x60;share_mode&#x60; is specified, the
+     * content permissions default to &#x60;READ_ONLY&#x60; (except when &#x60;share_mode&#x60; is
+     * &#x60;NO_ACCESS&#x60;, then content also gets &#x60;NO_ACCESS&#x60;) - To give users edit
+     * access to collection contents, explicitly set &#x60;content_share_mode:
+     * \&quot;MODIFY\&quot;&#x60; ## Examples The following JSON examples can be copy-pasted as
+     * request bodies for the REST v2 API endpoint: &#x60;&#x60;&#x60;bash POST
+     * /callosum/v1/v2/security/metadata/share Content-Type: application/x-www-form-urlencoded
+     * &#x60;&#x60;&#x60; ### Basic collection sharing Share a collection with read-only access:
+     * &#x60;&#x60;&#x60;json { \&quot;metadata_type\&quot;: \&quot;COLLECTION\&quot;,
+     * \&quot;metadata_identifiers\&quot;: [\&quot;Sales Reports Collection\&quot;],
+     * \&quot;permissions\&quot;: [{ \&quot;principal\&quot;: { \&quot;type\&quot;:
+     * \&quot;USER\&quot;, \&quot;identifier\&quot;: \&quot;alice@company.com\&quot; },
+     * \&quot;share_mode\&quot;: \&quot;READ_ONLY\&quot; }], \&quot;notification\&quot;: {
+     * \&quot;message\&quot;: \&quot;I&#39;ve shared the Sales Reports collection with you\&quot;,
+     * \&quot;notify_on_share\&quot;: true } } &#x60;&#x60;&#x60; ### Collection sharing with dual
+     * permissions Share a collection with different permissions for the collection vs. its
+     * contents: &#x60;&#x60;&#x60;json { \&quot;metadata_type\&quot;: \&quot;COLLECTION\&quot;,
+     * \&quot;metadata_identifiers\&quot;: [\&quot;Marketing Analytics\&quot;],
+     * \&quot;permissions\&quot;: [{ \&quot;principal\&quot;: { \&quot;type\&quot;:
+     * \&quot;USER\&quot;, \&quot;identifier\&quot;: \&quot;bob@company.com\&quot; },
+     * \&quot;share_mode\&quot;: \&quot;MODIFY\&quot;, \&quot;content_share_mode\&quot;:
+     * \&quot;READ_ONLY\&quot; }, { \&quot;principal\&quot;: { \&quot;type\&quot;:
+     * \&quot;USER_GROUP\&quot;, \&quot;identifier\&quot;: \&quot;Marketing Team\&quot; },
+     * \&quot;share_mode\&quot;: \&quot;READ_ONLY\&quot;, \&quot;content_share_mode\&quot;:
+     * \&quot;READ_ONLY\&quot; }], \&quot;notification\&quot;: { \&quot;emails\&quot;:
+     * [\&quot;bob@company.com\&quot;], \&quot;message\&quot;: \&quot;You can edit the collection
+     * but content is read-only\&quot;, \&quot;enable_custom_url\&quot;: false,
+     * \&quot;notify_on_share\&quot;: true }, \&quot;has_lenient_discoverability\&quot;: false }
+     * &#x60;&#x60;&#x60; ### Multiple collections sharing Share multiple collections with different
+     * users: &#x60;&#x60;&#x60;json { \&quot;metadata\&quot;: [ { \&quot;type\&quot;:
+     * \&quot;COLLECTION\&quot;, \&quot;identifier\&quot;: \&quot;Q4 Reports\&quot; }, {
+     * \&quot;type\&quot;: \&quot;COLLECTION\&quot;, \&quot;identifier\&quot;: \&quot;Executive
+     * Dashboard Collection\&quot; } ], \&quot;permissions\&quot;: [{ \&quot;principal\&quot;: {
+     * \&quot;type\&quot;: \&quot;USER_GROUP\&quot;, \&quot;identifier\&quot;:
+     * \&quot;Executives\&quot; }, \&quot;share_mode\&quot;: \&quot;MODIFY\&quot; }, {
+     * \&quot;principal\&quot;: { \&quot;type\&quot;: \&quot;USER\&quot;, \&quot;identifier\&quot;:
+     * \&quot;manager@company.com\&quot; }, \&quot;share_mode\&quot;: \&quot;READ_ONLY\&quot;,
+     * \&quot;content_share_mode\&quot;: \&quot;MODIFY\&quot; }], \&quot;notification\&quot;: {
+     * \&quot;message\&quot;: \&quot;Sharing quarterly collections with leadership team\&quot;,
+     * \&quot;notify_on_share\&quot;: true } } &#x60;&#x60;&#x60; ### Remove collection access
+     * Remove access to a collection by setting share_mode to NO_ACCESS: &#x60;&#x60;&#x60;json {
+     * \&quot;metadata_type\&quot;: \&quot;COLLECTION\&quot;, \&quot;metadata_identifiers\&quot;:
+     * [\&quot;Confidential Reports\&quot;], \&quot;permissions\&quot;: [{ \&quot;principal\&quot;:
+     * { \&quot;type\&quot;: \&quot;USER\&quot;, \&quot;identifier\&quot;:
+     * \&quot;former-employee@company.com\&quot; }, \&quot;share_mode\&quot;:
+     * \&quot;NO_ACCESS\&quot; }], \&quot;notification\&quot;: { \&quot;notify_on_share\&quot;:
+     * false } } &#x60;&#x60;&#x60; ### Collection Permission Scenarios **Scenario 1: Collection
+     * Admin** - &#x60;share_mode: MODIFY&#x60; + &#x60;content_share_mode: MODIFY&#x60; &#x3D; Full
+     * control over collection and its contents **Scenario 2: Collection Curator** -
+     * &#x60;share_mode: MODIFY&#x60; + &#x60;content_share_mode: READ_ONLY&#x60; &#x3D; Can manage
+     * collection structure but not edit contents **Scenario 3: Content Editor** - &#x60;share_mode:
+     * READ_ONLY&#x60; + &#x60;content_share_mode: MODIFY&#x60; &#x3D; Can edit objects within
+     * collection but can&#39;t change collection itself **Scenario 4: Viewer** - &#x60;share_mode:
+     * READ_ONLY&#x60; + &#x60;content_share_mode: READ_ONLY&#x60; &#x3D; View-only access to
+     * collection and contents
      *
      * @param shareMetadataRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -23282,6 +24038,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -23355,12 +24113,27 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.4.0.cl or later Processes a natural language query and returns an AI-generated
-     * response based on a specified data model. Requires at least view access to the metadata
-     * object specified in the request. &gt; ###### Note: &gt; * This endpoint is currently in Beta.
-     * Breaking changes may be introduced before the endpoint is made Generally Available. &gt; *
-     * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your
-     * cluster.
+     * Version: 10.4.0.cl or later Processes a natural language query against a specified data model
+     * and returns a single AI-generated answer without requiring a conversation session. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view access to the metadata object
+     * specified in the request. #### Usage guidelines The request must include: -
+     * &#x60;query&#x60;: a natural language question (e.g., \&quot;What were total sales last
+     * quarter?\&quot;) - &#x60;metadata_identifier&#x60;: the unique ID of the data source to query
+     * against If the request is successful, the API returns a response message containing: -
+     * &#x60;session_identifier&#x60;: the unique ID of the generated response -
+     * &#x60;generation_number&#x60;: the generation number of the response -
+     * &#x60;message_type&#x60;: the type of the response (e.g., &#x60;TSAnswer&#x60;) -
+     * &#x60;visualization_type&#x60;: the generated visualization type (&#x60;Chart&#x60;,
+     * &#x60;Table&#x60;, or &#x60;Undefined&#x60;) - &#x60;tokens&#x60; /
+     * &#x60;display_tokens&#x60;: the search tokens and user-friendly display tokens for the
+     * response #### Error responses | Code | Description |
+     * |------|-----------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view permission on the specified metadata object. | &gt; ###### Note: &gt; * This
+     * endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made
+     * Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot
+     * support to enable Spotter on your cluster.
      *
      * @param singleAnswerRequest (required)
      * @return ResponseMessage
@@ -23373,6 +24146,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -23383,12 +24158,27 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 10.4.0.cl or later Processes a natural language query and returns an AI-generated
-     * response based on a specified data model. Requires at least view access to the metadata
-     * object specified in the request. &gt; ###### Note: &gt; * This endpoint is currently in Beta.
-     * Breaking changes may be introduced before the endpoint is made Generally Available. &gt; *
-     * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your
-     * cluster.
+     * Version: 10.4.0.cl or later Processes a natural language query against a specified data model
+     * and returns a single AI-generated answer without requiring a conversation session. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view access to the metadata object
+     * specified in the request. #### Usage guidelines The request must include: -
+     * &#x60;query&#x60;: a natural language question (e.g., \&quot;What were total sales last
+     * quarter?\&quot;) - &#x60;metadata_identifier&#x60;: the unique ID of the data source to query
+     * against If the request is successful, the API returns a response message containing: -
+     * &#x60;session_identifier&#x60;: the unique ID of the generated response -
+     * &#x60;generation_number&#x60;: the generation number of the response -
+     * &#x60;message_type&#x60;: the type of the response (e.g., &#x60;TSAnswer&#x60;) -
+     * &#x60;visualization_type&#x60;: the generated visualization type (&#x60;Chart&#x60;,
+     * &#x60;Table&#x60;, or &#x60;Undefined&#x60;) - &#x60;tokens&#x60; /
+     * &#x60;display_tokens&#x60;: the search tokens and user-friendly display tokens for the
+     * response #### Error responses | Code | Description |
+     * |------|-----------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view permission on the specified metadata object. | &gt; ###### Note: &gt; * This
+     * endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made
+     * Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot
+     * support to enable Spotter on your cluster.
      *
      * @param singleAnswerRequest (required)
      * @return ApiResponse&lt;ResponseMessage&gt;
@@ -23401,6 +24191,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -23412,12 +24204,27 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 10.4.0.cl or later Processes a natural language query and returns
-     * an AI-generated response based on a specified data model. Requires at least view access to
-     * the metadata object specified in the request. &gt; ###### Note: &gt; * This endpoint is
-     * currently in Beta. Breaking changes may be introduced before the endpoint is made Generally
-     * Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to
-     * enable Spotter on your cluster.
+     * (asynchronously) Version: 10.4.0.cl or later Processes a natural language query against a
+     * specified data model and returns a single AI-generated answer without requiring a
+     * conversation session. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view access
+     * to the metadata object specified in the request. #### Usage guidelines The request must
+     * include: - &#x60;query&#x60;: a natural language question (e.g., \&quot;What were total sales
+     * last quarter?\&quot;) - &#x60;metadata_identifier&#x60;: the unique ID of the data source to
+     * query against If the request is successful, the API returns a response message containing: -
+     * &#x60;session_identifier&#x60;: the unique ID of the generated response -
+     * &#x60;generation_number&#x60;: the generation number of the response -
+     * &#x60;message_type&#x60;: the type of the response (e.g., &#x60;TSAnswer&#x60;) -
+     * &#x60;visualization_type&#x60;: the generated visualization type (&#x60;Chart&#x60;,
+     * &#x60;Table&#x60;, or &#x60;Undefined&#x60;) - &#x60;tokens&#x60; /
+     * &#x60;display_tokens&#x60;: the search tokens and user-friendly display tokens for the
+     * response #### Error responses | Code | Description |
+     * |------|-----------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks view permission on the specified metadata object. | &gt; ###### Note: &gt; * This
+     * endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made
+     * Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot
+     * support to enable Spotter on your cluster.
      *
      * @param singleAnswerRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -23431,6 +24238,8 @@ public class ThoughtSpotRestApi {
      * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
      * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
      * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
@@ -23446,7 +24255,7 @@ public class ThoughtSpotRestApi {
     /**
      * Build call for unassignTag
      *
-     * @param assignTagRequest (required)
+     * @param unassignTagRequest (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -23462,7 +24271,8 @@ public class ThoughtSpotRestApi {
      * </table>
      */
     public okhttp3.Call unassignTagCall(
-            AssignTagRequest assignTagRequest, final ApiCallback _callback) throws ApiException {
+            UnassignTagRequest unassignTagRequest, final ApiCallback _callback)
+            throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {};
@@ -23476,7 +24286,7 @@ public class ThoughtSpotRestApi {
             basePath = null;
         }
 
-        Object localVarPostBody = assignTagRequest;
+        Object localVarPostBody = unassignTagRequest;
 
         // create path and map variables
         String localVarPath = "/api/rest/2.0/tags/unassign";
@@ -23517,22 +24327,23 @@ public class ThoughtSpotRestApi {
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call unassignTagValidateBeforeCall(
-            AssignTagRequest assignTagRequest, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'assignTagRequest' is set
-        if (assignTagRequest == null) {
+            UnassignTagRequest unassignTagRequest, final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'unassignTagRequest' is set
+        if (unassignTagRequest == null) {
             throw new ApiException(
-                    "Missing the required parameter 'assignTagRequest' when calling"
+                    "Missing the required parameter 'unassignTagRequest' when calling"
                             + " unassignTag(Async)");
         }
 
-        return unassignTagCall(assignTagRequest, _callback);
+        return unassignTagCall(unassignTagRequest, _callback);
     }
 
     /**
      * Version: 9.0.0.cl or later Removes the tags applied to a Liveboard, Answer, Table, or
      * Worksheet. Requires edit access to the metadata object.
      *
-     * @param assignTagRequest (required)
+     * @param unassignTagRequest (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
      * @http.response.details
@@ -23546,15 +24357,15 @@ public class ThoughtSpotRestApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public void unassignTag(AssignTagRequest assignTagRequest) throws ApiException {
-        unassignTagWithHttpInfo(assignTagRequest);
+    public void unassignTag(UnassignTagRequest unassignTagRequest) throws ApiException {
+        unassignTagWithHttpInfo(unassignTagRequest);
     }
 
     /**
      * Version: 9.0.0.cl or later Removes the tags applied to a Liveboard, Answer, Table, or
      * Worksheet. Requires edit access to the metadata object.
      *
-     * @param assignTagRequest (required)
+     * @param unassignTagRequest (required)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -23569,9 +24380,9 @@ public class ThoughtSpotRestApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public ApiResponse<Void> unassignTagWithHttpInfo(AssignTagRequest assignTagRequest)
+    public ApiResponse<Void> unassignTagWithHttpInfo(UnassignTagRequest unassignTagRequest)
             throws ApiException {
-        okhttp3.Call localVarCall = unassignTagValidateBeforeCall(assignTagRequest, null);
+        okhttp3.Call localVarCall = unassignTagValidateBeforeCall(unassignTagRequest, null);
         return localVarApiClient.execute(localVarCall);
     }
 
@@ -23579,7 +24390,7 @@ public class ThoughtSpotRestApi {
      * (asynchronously) Version: 9.0.0.cl or later Removes the tags applied to a Liveboard, Answer,
      * Table, or Worksheet. Requires edit access to the metadata object.
      *
-     * @param assignTagRequest (required)
+     * @param unassignTagRequest (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body
@@ -23596,10 +24407,10 @@ public class ThoughtSpotRestApi {
      * </table>
      */
     public okhttp3.Call unassignTagAsync(
-            AssignTagRequest assignTagRequest, final ApiCallback<Void> _callback)
+            UnassignTagRequest unassignTagRequest, final ApiCallback<Void> _callback)
             throws ApiException {
 
-        okhttp3.Call localVarCall = unassignTagValidateBeforeCall(assignTagRequest, _callback);
+        okhttp3.Call localVarCall = unassignTagValidateBeforeCall(unassignTagRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -26339,7 +27150,7 @@ public class ThoughtSpotRestApi {
      * \&quot;https://your-website.com/\&quot;, \&quot;company_privacy_policy_url\&quot; :
      * \&quot;https://link-to-privacy-policy.com/\&quot;, \&quot;contact_support_url\&quot;:
      * \&quot;https://link-to-contact-support.com/\&quot;, \&quot;hide_contact_support_url\&quot;:
-     * false } } &#x60;&#x60;&#x60;
+     * false, \&quot;hide_logo_url\&quot; : false } } &#x60;&#x60;&#x60;
      *
      * @param updateEmailCustomizationRequest (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -26389,7 +27200,7 @@ public class ThoughtSpotRestApi {
      * \&quot;https://your-website.com/\&quot;, \&quot;company_privacy_policy_url\&quot; :
      * \&quot;https://link-to-privacy-policy.com/\&quot;, \&quot;contact_support_url\&quot;:
      * \&quot;https://link-to-contact-support.com/\&quot;, \&quot;hide_contact_support_url\&quot;:
-     * false } } &#x60;&#x60;&#x60;
+     * false, \&quot;hide_logo_url\&quot; : false } } &#x60;&#x60;&#x60;
      *
      * @param updateEmailCustomizationRequest (required)
      * @return ApiResponse&lt;Void&gt;
@@ -26442,7 +27253,7 @@ public class ThoughtSpotRestApi {
      * \&quot;https://your-website.com/\&quot;, \&quot;company_privacy_policy_url\&quot; :
      * \&quot;https://link-to-privacy-policy.com/\&quot;, \&quot;contact_support_url\&quot;:
      * \&quot;https://link-to-contact-support.com/\&quot;, \&quot;hide_contact_support_url\&quot;:
-     * false } } &#x60;&#x60;&#x60;
+     * false, \&quot;hide_logo_url\&quot; : false } } &#x60;&#x60;&#x60;
      *
      * @param updateEmailCustomizationRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -28643,17 +29454,20 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Update values for multiple variables Version: 10.14.0.cl or later Allows updating values for
-     * multiple variables in ThoughtSpot. Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES
-     * permission allows you to manage Formula Variables in the current organization scope. The API
-     * endpoint allows: * Adding new values to variables * Replacing existing values * Deleting
-     * values from variables When updating variable values, you need to specify: * The variable
-     * identifiers * The values to add/replace/remove for each variable * The operation to perform
-     * (ADD, REPLACE, REMOVE, RESET) Behaviour based on operation type: * ADD - Adds values to the
-     * variable if this is a list type variable, else same as replace. * REPLACE - Replaces all
-     * values of a given set of constraints with the current set of values. * REMOVE - Removes any
-     * values which match the set of conditions of the variables if this is a list type variable,
-     * else clears value. * RESET - Removes all constrains for a given variable, scope is ignored
+     * Update values for multiple variables Version: 10.14.0.cl or later **Note:** This API endpoint
+     * is deprecated and will be removed from ThoughtSpot in a future release. Use [POST
+     * /api/rest/2.0/template/variables/{identifier}/update-values](/api/rest/2.0/template/variables/%7Bidentifier%7D/update-values)
+     * instead. Allows updating values for multiple variables in ThoughtSpot. Requires
+     * ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula
+     * Variables in the current organization scope. The API endpoint allows: * Adding new values to
+     * variables * Replacing existing values * Deleting values from variables When updating variable
+     * values, you need to specify: * The variable identifiers * The values to add/replace/remove
+     * for each variable * The operation to perform (ADD, REPLACE, REMOVE, RESET) Behaviour based on
+     * operation type: * ADD - Adds values to the variable if this is a list type variable, else
+     * same as replace. * REPLACE - Replaces all values of a given set of constraints with the
+     * current set of values. * REMOVE - Removes any values which match the set of conditions of the
+     * variables if this is a list type variable, else clears value. * RESET - Removes all
+     * constrains for a given variable, scope is ignored
      *
      * @param updateVariableValuesRequest (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -28675,17 +29489,20 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Update values for multiple variables Version: 10.14.0.cl or later Allows updating values for
-     * multiple variables in ThoughtSpot. Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES
-     * permission allows you to manage Formula Variables in the current organization scope. The API
-     * endpoint allows: * Adding new values to variables * Replacing existing values * Deleting
-     * values from variables When updating variable values, you need to specify: * The variable
-     * identifiers * The values to add/replace/remove for each variable * The operation to perform
-     * (ADD, REPLACE, REMOVE, RESET) Behaviour based on operation type: * ADD - Adds values to the
-     * variable if this is a list type variable, else same as replace. * REPLACE - Replaces all
-     * values of a given set of constraints with the current set of values. * REMOVE - Removes any
-     * values which match the set of conditions of the variables if this is a list type variable,
-     * else clears value. * RESET - Removes all constrains for a given variable, scope is ignored
+     * Update values for multiple variables Version: 10.14.0.cl or later **Note:** This API endpoint
+     * is deprecated and will be removed from ThoughtSpot in a future release. Use [POST
+     * /api/rest/2.0/template/variables/{identifier}/update-values](/api/rest/2.0/template/variables/%7Bidentifier%7D/update-values)
+     * instead. Allows updating values for multiple variables in ThoughtSpot. Requires
+     * ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula
+     * Variables in the current organization scope. The API endpoint allows: * Adding new values to
+     * variables * Replacing existing values * Deleting values from variables When updating variable
+     * values, you need to specify: * The variable identifiers * The values to add/replace/remove
+     * for each variable * The operation to perform (ADD, REPLACE, REMOVE, RESET) Behaviour based on
+     * operation type: * ADD - Adds values to the variable if this is a list type variable, else
+     * same as replace. * REPLACE - Replaces all values of a given set of constraints with the
+     * current set of values. * REMOVE - Removes any values which match the set of conditions of the
+     * variables if this is a list type variable, else clears value. * RESET - Removes all
+     * constrains for a given variable, scope is ignored
      *
      * @param updateVariableValuesRequest (required)
      * @return ApiResponse&lt;Void&gt;
@@ -28710,18 +29527,21 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Update values for multiple variables Version: 10.14.0.cl or later Allows
-     * updating values for multiple variables in ThoughtSpot. Requires ADMINISTRATION role. The
-     * CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current
-     * organization scope. The API endpoint allows: * Adding new values to variables * Replacing
-     * existing values * Deleting values from variables When updating variable values, you need to
-     * specify: * The variable identifiers * The values to add/replace/remove for each variable *
-     * The operation to perform (ADD, REPLACE, REMOVE, RESET) Behaviour based on operation type: *
-     * ADD - Adds values to the variable if this is a list type variable, else same as replace. *
-     * REPLACE - Replaces all values of a given set of constraints with the current set of values. *
-     * REMOVE - Removes any values which match the set of conditions of the variables if this is a
-     * list type variable, else clears value. * RESET - Removes all constrains for a given variable,
-     * scope is ignored
+     * (asynchronously) Update values for multiple variables Version: 10.14.0.cl or later **Note:**
+     * This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use
+     * [POST
+     * /api/rest/2.0/template/variables/{identifier}/update-values](/api/rest/2.0/template/variables/%7Bidentifier%7D/update-values)
+     * instead. Allows updating values for multiple variables in ThoughtSpot. Requires
+     * ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula
+     * Variables in the current organization scope. The API endpoint allows: * Adding new values to
+     * variables * Replacing existing values * Deleting values from variables When updating variable
+     * values, you need to specify: * The variable identifiers * The values to add/replace/remove
+     * for each variable * The operation to perform (ADD, REPLACE, REMOVE, RESET) Behaviour based on
+     * operation type: * ADD - Adds values to the variable if this is a list type variable, else
+     * same as replace. * REPLACE - Replaces all values of a given set of constraints with the
+     * current set of values. * REMOVE - Removes any values which match the set of conditions of the
+     * variables if this is a list type variable, else clears value. * RESET - Removes all
+     * constrains for a given variable, scope is ignored
      *
      * @param updateVariableValuesRequest (required)
      * @param _callback The callback to be executed when the API call finishes
