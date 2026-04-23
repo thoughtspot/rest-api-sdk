@@ -166,6 +166,12 @@ public class ExportLiveboardReportRequest implements Serializable {
     @javax.annotation.Nullable
     private RegionalSettingsInput regionalSettings;
 
+    public static final String SERIALIZED_NAME_ROWS_PER_SHEET = "rows_per_sheet";
+
+    @SerializedName(SERIALIZED_NAME_ROWS_PER_SHEET)
+    @javax.annotation.Nullable
+    private Integer rowsPerSheet;
+
     public ExportLiveboardReportRequest() {}
 
     public ExportLiveboardReportRequest metadataIdentifier(
@@ -469,6 +475,27 @@ public class ExportLiveboardReportRequest implements Serializable {
         this.regionalSettings = regionalSettings;
     }
 
+    public ExportLiveboardReportRequest rowsPerSheet(
+            @javax.annotation.Nullable Integer rowsPerSheet) {
+        this.rowsPerSheet = rowsPerSheet;
+        return this;
+    }
+
+    /**
+     * Maximum number of rows to export per sheet. Only applicable for XLSX exports. If not
+     * specified, the system default limit is used. Version: 26.7.0.cl or later
+     *
+     * @return rowsPerSheet
+     */
+    @javax.annotation.Nullable
+    public Integer getRowsPerSheet() {
+        return rowsPerSheet;
+    }
+
+    public void setRowsPerSheet(@javax.annotation.Nullable Integer rowsPerSheet) {
+        this.rowsPerSheet = rowsPerSheet;
+    }
+
     /**
      * A container for additional, undeclared properties. This is a holder for any undeclared
      * properties as specified with the 'additionalProperties' keyword in the OAS document.
@@ -546,6 +573,7 @@ public class ExportLiveboardReportRequest implements Serializable {
                         exportLiveboardReportRequest.runtimeParamOverride)
                 && Objects.equals(
                         this.regionalSettings, exportLiveboardReportRequest.regionalSettings)
+                && Objects.equals(this.rowsPerSheet, exportLiveboardReportRequest.rowsPerSheet)
                 && Objects.equals(
                         this.additionalProperties,
                         exportLiveboardReportRequest.additionalProperties);
@@ -567,6 +595,7 @@ public class ExportLiveboardReportRequest implements Serializable {
                 pngOptions,
                 runtimeParamOverride,
                 regionalSettings,
+                rowsPerSheet,
                 additionalProperties);
     }
 
@@ -595,6 +624,7 @@ public class ExportLiveboardReportRequest implements Serializable {
                 .append(toIndentedString(runtimeParamOverride))
                 .append("\n");
         sb.append("    regionalSettings: ").append(toIndentedString(regionalSettings)).append("\n");
+        sb.append("    rowsPerSheet: ").append(toIndentedString(rowsPerSheet)).append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
                 .append("\n");
@@ -632,6 +662,7 @@ public class ExportLiveboardReportRequest implements Serializable {
         openapiFields.add("png_options");
         openapiFields.add("runtime_param_override");
         openapiFields.add("regional_settings");
+        openapiFields.add("rows_per_sheet");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();

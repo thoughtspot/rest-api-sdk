@@ -619,7 +619,7 @@ import { ExcludeMetadataListItemInput , ExcludeMetadataListItemInputTypeEnum   }
 import { ExportAnswerReportRequest   , ExportAnswerReportRequestFileFormatEnum        , ExportAnswerReportRequestTypeEnum   } from '../models/ExportAnswerReportRequest';
 import { ExportAnswerReportRequestPngOptions } from '../models/ExportAnswerReportRequestPngOptions';
 import { ExportAnswerReportRequestRegionalSettings, ExportAnswerReportRequestRegionalSettingsCurrencyFormatEnum  , ExportAnswerReportRequestRegionalSettingsUserLocaleEnum  , ExportAnswerReportRequestRegionalSettingsNumberFormatLocaleEnum  , ExportAnswerReportRequestRegionalSettingsDateFormatLocaleEnum   } from '../models/ExportAnswerReportRequestRegionalSettings';
-import { ExportLiveboardReportRequest     , ExportLiveboardReportRequestFileFormatEnum          } from '../models/ExportLiveboardReportRequest';
+import { ExportLiveboardReportRequest     , ExportLiveboardReportRequestFileFormatEnum           } from '../models/ExportLiveboardReportRequest';
 import { ExportLiveboardReportRequestPdfOptions, ExportLiveboardReportRequestPdfOptionsPageSizeEnum       , ExportLiveboardReportRequestPdfOptionsPageOrientationEnum     } from '../models/ExportLiveboardReportRequestPdfOptions';
 import { ExportLiveboardReportRequestPngOptions } from '../models/ExportLiveboardReportRequestPngOptions';
 import { ExportMetadataTMLBatchedRequest, ExportMetadataTMLBatchedRequestMetadataTypeEnum    , ExportMetadataTMLBatchedRequestEdocFormatEnum     } from '../models/ExportMetadataTMLBatchedRequest';

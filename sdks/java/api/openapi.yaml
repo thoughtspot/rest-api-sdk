@@ -20631,6 +20631,7 @@ components:
     ExportLiveboardReportRequest:
       example:
         regional_settings: ""
+        rows_per_sheet: 0
         pdf_options: ""
         transient_content: transient_content
         runtime_param_override: "{}"
@@ -20750,6 +20751,12 @@ components:
           - $ref: '#/components/schemas/RegionalSettingsInput'
           description: Options for specific region specific overrides to support date/number/string/currency
             formatting.
+        rows_per_sheet:
+          description: "Maximum number of rows to export per sheet. Only applicable\
+            \ for XLSX exports.\nIf not specified, the system default limit is used.\
+            \ \n Version: 26.7.0.cl or later\n"
+          format: int32
+          type: integer
       required:
       - metadata_identifier
       type: object

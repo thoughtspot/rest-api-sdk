@@ -93,4 +93,10 @@ public class ExportLiveboardReportRequestTest {
     public void regionalSettingsTest() {
         // TODO: test regionalSettings
     }
+
+    /** Test the property 'rowsPerSheet' */
+    @Test
+    public void rowsPerSheetTest() {
+        // TODO: test rowsPerSheet
+    }
 }

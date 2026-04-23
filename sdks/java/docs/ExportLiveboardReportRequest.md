@@ -20,6 +20,7 @@
 |**pngOptions** | [**PngOptionsInput**](PngOptionsInput.md) | Options for PNG export. |  [optional] |
 |**runtimeParamOverride** | **Object** | JSON object for setting values of parameters at runtime. For example, &lt;code&gt; {\&quot;param1\&quot;: \&quot;Double List Param\&quot;, \&quot;paramVal1\&quot;: 0.5}&lt;/code&gt;. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters). |  [optional] |
 |**regionalSettings** | [**RegionalSettingsInput**](RegionalSettingsInput.md) | Options for specific region specific overrides to support date/number/string/currency formatting. |  [optional] |
+|**rowsPerSheet** | **Integer** | Maximum number of rows to export per sheet. Only applicable for XLSX exports. If not specified, the system default limit is used.   Version: 26.7.0.cl or later  |  [optional] |
 
 
 

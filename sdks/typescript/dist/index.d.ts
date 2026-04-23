@@ -8339,6 +8339,10 @@ declare class ExportLiveboardReportRequest {
     */
     'runtime_param_override'?: any;
     'regional_settings'?: ExportAnswerReportRequestRegionalSettings;
+    /**
+    * Maximum number of rows to export per sheet. Only applicable for XLSX exports. If not specified, the system default limit is used.   Version: 26.7.0.cl or later
+    */
+    'rows_per_sheet'?: number;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;

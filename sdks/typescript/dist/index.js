@@ -5758,6 +5758,12 @@ _ExportLiveboardReportRequest.attributeTypeMap = [
     "baseName": "regional_settings",
     "type": "ExportAnswerReportRequestRegionalSettings",
     "format": ""
+  },
+  {
+    "name": "rows_per_sheet",
+    "baseName": "rows_per_sheet",
+    "type": "number",
+    "format": "int32"
   }
 ];
 var ExportLiveboardReportRequest = _ExportLiveboardReportRequest;

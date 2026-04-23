@@ -25206,6 +25206,11 @@
                 "$ref": "#/components/schemas/RegionalSettingsInput"
               }
             ]
+          },
+          "rows_per_sheet": {
+            "description": "Maximum number of rows to export per sheet. Only applicable for XLSX exports.\nIf not specified, the system default limit is used. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
+            "type": "integer",
+            "format": "int32"
           }
         },
         "required": [
