@@ -22,6 +22,14 @@
       "description": "Roles for version 10.4.0.cl"
     },
     {
+      "name": "26.6.0.cl",
+      "id": "26.6.0.cl",
+      "tags": [
+        "26.6.0.cl"
+      ],
+      "description": "Roles for version 26.6.0.cl"
+    },
+    {
       "name": "10.15.0.cl",
       "id": "10.15.0.cl",
       "tags": [
@@ -52,14 +60,6 @@
         "26.5.0.cl"
       ],
       "description": "Roles for version 26.5.0.cl"
-    },
-    {
-      "name": "26.6.0.cl",
-      "id": "26.6.0.cl",
-      "tags": [
-        "26.6.0.cl"
-      ],
-      "description": "Roles for version 26.6.0.cl"
     },
     {
       "name": "9.0.0.cl",
@@ -390,6 +390,176 @@
         }
       }
     },
+    "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/delete": {
+      "post": {
+        "operationId": "deleteConversation",
+        "description": "\nDeletes an existing agent conversation. <br/>  <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\nPermanently deletes an existing saved agent conversation and all its associated messages. This operation is irreversible — deleted conversations cannot be recovered.\n\nRequires `CAN_USE_SPOTTER` privilege and ownership of the conversation being deleted.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier` *(path parameter)*: the unique ID of the conversation to delete, as returned by `createAgentConversation` or `getConversationList`\n\nA successful request returns an empty `204 No Content` response. The deleted conversation no longer appears in `getConversationList`.\n\n#### Example request\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/delete\n```\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. |\n| 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. |\n\n> ###### Note:\n>\n> - Deletion is permanent and cannot be undone. Ensure the correct `conversation_identifier` is used before calling this endpoint.\n> - Only conversations created with `enable_save_chat: true` are persisted and can be deleted via this endpoint.\n> - Available from version 26.6.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.6.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "conversation_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the conversation to delete."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully deleted the agent conversation."
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/agent/conversations": {
+      "get": {
+        "operationId": "getConversationList",
+        "description": "\nRetrieves the list of saved agent conversations for the currently authenticated user.\nOnly conversations created with `enable_save_chat: true` are returned. <br/>  <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\nRetrieves a paginated list of saved agent conversations for the currently authenticated user. Only conversations that were created with `enable_save_chat: true` in `createAgentConversation` are returned.\n\nRequires `CAN_USE_SPOTTER` privilege.\n\n#### Usage guidelines\n\nThe request supports the following optional query parameters:\n\n- `limit`: maximum number of conversations to return. Use this together with `offset` for pagination.\n- `offset`: number of conversations to skip before returning results. Defaults to `0`.\n- `skip_empty`: when `true` (default), conversations with no messages are excluded from the results. Set to `false` to include empty conversations.\n\nIf the request is successful, the response includes a `conversations` array. Each entry contains:\n\n- `conversation_identifier`: the unique ID of the conversation, used as input to `sendAgentConversationMessage`, `renameConversation`, `deleteConversation`, `stopConversation`, and `loadAnswer`\n- `conversation_title`: the display name of the conversation\n- `created_at`: ISO 8601 timestamp of when the conversation was created\n- `updated_at`: ISO 8601 timestamp of the most recent update to the conversation\n- `data_source_identifier`: unique ID of the data source associated with the conversation\n- `data_source_name`: display name of the data source\n\n#### Pagination\n\nUse `limit` and `offset` to page through large result sets:\n\n```\nGET /api/rest/2.0/ai/agent/conversations?limit=20&offset=0   → first page\nGET /api/rest/2.0/ai/agent/conversations?limit=20&offset=20  → second page\n```\n\n#### Example response\n\n```json\n{\n  \"conversations\": [\n    {\n      \"conversation_identifier\": \"abc123\",\n      \"conversation_title\": \"Sales by Region Q1\",\n      \"created_at\": \"2026-03-01T10:00:00Z\",\n      \"updated_at\": \"2026-03-05T14:23:00Z\",\n      \"data_source_identifier\": \"ds-001\",\n      \"data_source_name\": \"Retail Sales\"\n    }\n  ]\n}\n```\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege. |\n\n> ###### Note:\n>\n> - Only conversations created with `enable_save_chat: true` appear in this list. Conversations created with `enable_save_chat: false` (the default) are not persisted and cannot be retrieved.\n> - Available from version 26.6.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.6.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "Maximum number of conversations to return. Used for pagination."
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "Number of conversations to skip before returning results. Used for pagination."
+          },
+          {
+            "in": "query",
+            "name": "skip_empty",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "When true, excludes conversations with no messages. Defaults to true.",
+            "default": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentConversationHistoryResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentConversationHistoryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/ai/data-source-suggestions": {
       "post": {
         "operationId": "getDataSourceSuggestions",
@@ -639,6 +809,98 @@
         }
       }
     },
+    "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/message/{message_identifier}/load": {
+      "post": {
+        "operationId": "loadAnswer",
+        "description": "\nLoads the answer for a specific message in an agent conversation. <br/>  <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\nLoads the answer details for a specific message in an agent conversation. Returns structured answer data including the TML query, token breakdown, visualization metadata, and agent context state. Use this endpoint to retrieve the full answer representation for a message — for example, to re-render a chart, export a query, or inspect the generated TML.\n\nRequires `CAN_USE_SPOTTER` privilege and access to the specified conversation.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier` *(path parameter)*: the unique ID of the conversation, as returned by `createAgentConversation`\n- `message_identifier` *(path parameter)*: the unique ID of the message whose answer to load. This is the message ID returned in the response from `sendAgentConversationMessage` or `sendAgentConversationMessageStreaming`\n\nIf the request is successful, the response contains an `answer` object with the following fields:\n\n| Field | Type | Description |\n|-------|------|-------------|\n| `title` | `String` | Display title of the generated answer (e.g., `\"sales by month\"`). |\n| `description` | `String` | Optional description of the answer. |\n| `session_identifier` | `String` | Unique identifier of the session in which this answer was generated. |\n| `generation_number` | `Int` | Generation sequence number of this answer within the session. |\n| `tokens` | `String` | Raw TML query string used to generate the answer (e.g., `\"[sales] [date].'monthly'\"`). |\n| `display_tokens` | `[String]` | Ordered list of individual TML token strings (e.g., `[\"[sales]\", \"[date].'monthly'\"]`). |\n| `visualization_type` | `VizType` | Suggested visualization type: `Chart`, `Table`, or `Undefined`. `null` if no suggestion is available. |\n| `formulas` | `[String]` | List of formula names referenced in the answer. Empty if none are used. |\n| `parameters` | `[String]` | List of parameter names applied to the answer. Empty if none are used. |\n| `subqueries` | `[JSON]` | List of subquery objects used in the answer. Empty if none are present. |\n| `ac_state` | `ACState` | Agent context state, including `transaction_identifier` and `generation_number`, used to correlate this answer with a specific agent turn. |\n\n#### ACState fields\n\n| Field | Type | Description |\n|-------|------|-------------|\n| `transaction_identifier` | `String` | Unique identifier of the agent transaction that produced this answer. |\n| `generation_number` | `Int` | Generation number within the transaction. |\n\n#### Example request\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/message/{message_identifier}/load\n```\n\n#### Example response\n\n```json\n{\n  \"answer\": {\n    \"title\": \"sales by month\",\n    \"description\": \"\",\n    \"session_identifier\": \"7b00b801-73f4-4639-af5e-e775584ceba6\",\n    \"generation_number\": 1,\n    \"tokens\": \"[sales] [date].'monthly'\",\n    \"display_tokens\": [\"[sales]\", \"[date].'monthly'\"],\n    \"visualization_type\": null,\n    \"formulas\": [],\n    \"parameters\": [],\n    \"subqueries\": [],\n    \"ac_state\": {\n      \"transaction_identifier\": \"7f6c9948-b4c7-4098-bb1f-6c67bc0e5699\",\n      \"generation_number\": 1\n    }\n  }\n}\n```\n\n#### Typical usage scenario\n\n1. User sends a message via `sendAgentConversationMessage` asking *\"Show me sales by month\"*.\n2. The response includes a `message_identifier` for the generated answer.\n3. Your client calls `loadAnswer` with the `conversation_identifier` and `message_identifier`.\n4. The returned `tokens` field is used to open the answer in the ThoughtSpot search interface, and `display_tokens` is rendered as pill chips in the UI.\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks access to the specified conversation. |\n| 404  | Not Found — no conversation or message exists with the given identifiers for the authenticated user. |\n| 422  | Unprocessable Entity — the message does not contain an answer of the expected type. |\n\n> ###### Note:\n>\n> - This endpoint only loads answers of type `TS_ANSWER`. Other message types are not supported.\n> - `visualization_type` may be `null` if the agent did not produce a visualization suggestion for this answer.\n> - `formulas`, `parameters`, and `subqueries` are returned as empty arrays when not applicable — they are never `null`.\n> - Available from version 26.6.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.6.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "conversation_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the conversation."
+          },
+          {
+            "in": "path",
+            "name": "message_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the message whose answer to load."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoadAnswerResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoadAnswerResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/ai/analytical-questions": {
       "post": {
         "operationId": "queryGetDecomposedQuery",
@@ -679,6 +941,82 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/rename": {
+      "post": {
+        "operationId": "renameConversation",
+        "description": "\nRenames an existing agent conversation. <br/>  <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\nRenames an existing saved agent conversation. Use this endpoint to update the display title of a conversation, for example after the conversation scope is refined or to reflect a more descriptive name.\n\nRequires `CAN_USE_SPOTTER` privilege and ownership of the conversation being renamed.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier` *(path parameter)*: the unique ID of the conversation to rename, as returned by `createAgentConversation` or `getConversationList`\n- `title` *(request body)*: the new display name for the conversation. Must be a non-empty string.\n\nA successful request returns an empty `204 No Content` response. The updated title is reflected immediately in subsequent calls to `getConversationList`.\n\n#### Example request\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/rename\nContent-Type: application/json\n\n{\n  \"title\": \"Revenue Breakdown by Product Line\"\n}\n```\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 400  | Bad Request — `title` is missing or empty in the request body. |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. |\n| 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. |\n| 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |\n\n> ###### Note:\n>\n> - Only conversations created with `enable_save_chat: true` can be renamed. Unsaved conversations are not persisted and do not have a retrievable identifier.\n> - Available from version 26.6.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.6.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RenameConversationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "conversation_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the conversation to rename."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully renamed the agent conversation."
           },
           "400": {
             "description": "Operation failed",
@@ -16608,6 +16946,56 @@
           }
         }
       },
+      "AgentConversationHistoryResponse": {
+        "type": "object",
+        "properties": {
+          "conversations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentConversationList"
+            },
+            "description": "List of saved agent conversations for the current user.",
+            "nullable": true
+          }
+        },
+        "description": "Response returned by getConversationList."
+      },
+      "AgentConversationList": {
+        "type": "object",
+        "properties": {
+          "conversation_identifier": {
+            "type": "string",
+            "description": "Unique identifier of the conversation.",
+            "nullable": true
+          },
+          "conversation_title": {
+            "type": "string",
+            "description": "Display title of the conversation.",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string",
+            "description": "ISO 8601 timestamp when the conversation was created.",
+            "nullable": true
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "ISO 8601 timestamp when the conversation was last updated.",
+            "nullable": true
+          },
+          "data_source_identifier": {
+            "type": "string",
+            "description": "Unique identifier of the data source associated with the conversation.",
+            "nullable": true
+          },
+          "data_source_name": {
+            "type": "string",
+            "description": "Display name of the data source associated with the conversation.",
+            "nullable": true
+          }
+        },
+        "description": "A saved agent conversation item returned in list responses."
+      },
       "RiseGQLArgWrapper": {
         "type": "object",
         "required": [
@@ -21183,6 +21571,110 @@
           }
         }
       },
+      "LoadAnswerResponse": {
+        "type": "object",
+        "properties": {
+          "answer": {
+            "$ref": "#/components/schemas/AnswerDetails",
+            "description": "Answer details for the loaded message.",
+            "nullable": true
+          }
+        }
+      },
+      "AnswerDetails": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Display title of the answer.",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the answer.",
+            "nullable": true
+          },
+          "session_identifier": {
+            "type": "string",
+            "description": "Unique identifier of the session.",
+            "nullable": true
+          },
+          "generation_number": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Generation number of the answer.",
+            "nullable": true
+          },
+          "tokens": {
+            "type": "string",
+            "description": "TML query string for the answer.",
+            "nullable": true
+          },
+          "display_tokens": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of individual TML token strings.",
+            "nullable": true
+          },
+          "visualization_type": {
+            "type": "string",
+            "enum": [
+              "Chart",
+              "Table",
+              "Undefined"
+            ],
+            "description": "Visualization type for the answer.",
+            "nullable": true
+          },
+          "formulas": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of formulas used in the answer.",
+            "nullable": true
+          },
+          "parameters": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of parameters used in the answer.",
+            "nullable": true
+          },
+          "subqueries": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "List of subqueries used in the answer.",
+            "nullable": true
+          },
+          "ac_state": {
+            "$ref": "#/components/schemas/ACState",
+            "description": "Agent context state for the answer.",
+            "nullable": true
+          }
+        }
+      },
+      "ACState": {
+        "type": "object",
+        "properties": {
+          "transaction_identifier": {
+            "type": "string",
+            "description": "Unique identifier of the transaction.",
+            "nullable": true
+          },
+          "generation_number": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Generation number of the transaction.",
+            "nullable": true
+          }
+        }
+      },
       "VariableUpdateAssignmentInput": {
         "type": "object",
         "required": [
@@ -22029,6 +22521,18 @@
             }
           }
         }
+      },
+      "RenameConversationRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "description": "New display title for the conversation.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title"
+        ]
       },
       "SendAgentConversationMessageRequest": {
         "type": "object",
@@ -25206,11 +25710,6 @@
                 "$ref": "#/components/schemas/RegionalSettingsInput"
               }
             ]
-          },
-          "rows_per_sheet": {
-            "description": "Maximum number of rows to export per sheet. Only applicable for XLSX exports.\nIf not specified, the system default limit is used. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
-            "type": "integer",
-            "format": "int32"
           }
         },
         "required": [
