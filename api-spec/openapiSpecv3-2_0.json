@@ -190,6 +190,14 @@
       "description": "Roles for version 26.3.0.cl"
     },
     {
+      "name": "26.7.0.cl",
+      "id": "26.7.0.cl",
+      "tags": [
+        "26.7.0.cl"
+      ],
+      "description": "Roles for version 26.7.0.cl"
+    },
+    {
       "name": "10.14.0.cl",
       "id": "10.14.0.cl",
       "tags": [
@@ -9183,6 +9191,624 @@
         }
       }
     },
+    "/api/rest/2.0/customization/styles/fonts/delete": {
+      "post": {
+        "operationId": "deleteStyleFonts",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Style Customization",
+          "26.7.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteStyleFontsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Font deleted successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StyleFontDeleteData"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/customization/styles/logos/export": {
+      "post": {
+        "operationId": "exportStyleLogos",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Style Customization",
+          "26.7.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExportStyleLogosRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Logo ZIP archive retrieved successfully.",
+            "content": {
+              "application/octet-stream": {}
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/customization/styles/search": {
+      "post": {
+        "operationId": "searchStyleCustomizations",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Style Customization",
+          "26.7.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchStyleCustomizationsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Style preferences retrieved successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StylePreference"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/customization/styles/fonts/search": {
+      "post": {
+        "operationId": "searchStyleFonts",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Style Customization",
+          "26.7.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchStyleFontsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Custom fonts retrieved successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StyleFontRecord"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/customization/styles/update": {
+      "post": {
+        "operationId": "updateStyleCustomization",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Style Customization",
+          "26.7.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "scope": {
+                    "description": "Scope at which to apply the preferences. CLUSTER sets cluster-level\ndefaults for all orgs. ORG applies to the authenticated user's org.\nDefaults to ORG if omitted.",
+                    "type": "string",
+                    "enum": [
+                      "CLUSTER",
+                      "ORG"
+                    ]
+                  },
+                  "operation": {
+                    "description": "Operation to perform. REPLACE (default) applies the provided fields and\nleaves omitted fields unchanged. RESET reverts fields listed in\nreset_options to ThoughtSpot defaults.",
+                    "type": "string",
+                    "enum": [
+                      "REPLACE",
+                      "RESET"
+                    ]
+                  },
+                  "reset_options": {
+                    "description": "Fields to reset when operation is RESET. Specify style fields and\nvisualization areas to revert to ThoughtSpot defaults.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/StyleResetOptionsInput"
+                      }
+                    ]
+                  },
+                  "navigation_panel": {
+                    "description": "Navigation panel color. Provide theme and, when theme is CUSTOM, also\nprovide base_color.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/NavigationPanelInput"
+                      }
+                    ]
+                  },
+                  "chart_color_palette": {
+                    "description": "Chart color palette. When provided with operation REPLACE, exactly 8\ncolor entries must be specified in colors.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/StyleColorPaletteInput"
+                      }
+                    ]
+                  },
+                  "embedded_footer_text": {
+                    "description": "Custom footer text for the embedded ThoughtSpot application. An empty\nstring clears the footer.",
+                    "type": "string"
+                  },
+                  "visualization_fonts": {
+                    "description": "Font assignments per visualization area. Provide only the areas to\nupdate; omitted areas remain unchanged.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/VisualizationFontsInput"
+                      }
+                    ]
+                  },
+                  "default_logo": {
+                    "description": "Binary image for the DEFAULT logo slot (square app icon and favicon;\nrecommended 140x140 px). Accepted formats: PNG, JPG, SVG.",
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "wide_logo": {
+                    "description": "Binary image for the WIDE logo slot (horizontal top nav bar logo;\nrecommended 230x45 px). Accepted formats: PNG, JPG, SVG.",
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Style preferences updated successfully."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/customization/styles/fonts/{font_identifier}": {
+      "post": {
+        "operationId": "updateStyleFont",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Style Customization",
+          "26.7.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateStyleFontRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "font_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "UUID or name of the font to update."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Font metadata updated successfully."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/customization/styles/fonts/upload": {
+      "post": {
+        "operationId": "uploadStyleFont",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Style Customization",
+          "26.7.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "scope": {
+                    "description": "Scope of the font library to upload to. CLUSTER uploads to the\ncluster-level library, making the font available as a default for all\norgs. ORG uploads to the authenticated user's org library. Defaults to\nORG if omitted.",
+                    "type": "string",
+                    "enum": [
+                      "CLUSTER",
+                      "ORG"
+                    ]
+                  },
+                  "name": {
+                    "description": "Display name for the font (e.g. \"Acme Sans\"). Must be unique within the\ntarget scope; returns an error if a font with this name already exists.",
+                    "type": "string"
+                  },
+                  "weight": {
+                    "description": "Weight of the font. Supported values: NORMAL, LIGHT, BOLD. Defaults to\nNORMAL if omitted.",
+                    "type": "string",
+                    "enum": [
+                      "NORMAL",
+                      "LIGHT",
+                      "BOLD"
+                    ]
+                  },
+                  "style": {
+                    "description": "Style of the font. Supported values: NORMAL, ITALIC, OBLIQUE. Defaults\nto NORMAL if omitted.",
+                    "type": "string",
+                    "enum": [
+                      "NORMAL",
+                      "ITALIC",
+                      "OBLIQUE"
+                    ]
+                  },
+                  "color": {
+                    "description": "Color of the font as a 6-digit hex string (e.g. \"#333333\"). Defaults to\n#000000 (black) if omitted. Returns an error if the value is malformed.",
+                    "type": "string"
+                  },
+                  "file_content": {
+                    "description": "Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats\nare accepted; TTF and OTF are rejected. The file is validated on upload.",
+                    "type": "string",
+                    "format": "binary"
+                  }
+                },
+                "required": [
+                  "name",
+                  "file_content"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Font uploaded successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StyleFontUploadData"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/system/preferences/communication-channels/configure": {
       "post": {
         "operationId": "configureCommunicationChannelPreferences",
@@ -17653,6 +18279,381 @@
         },
         "description": "A recipient (user, group, or external) for a job execution."
       },
+      "StylePreference": {
+        "type": "object",
+        "required": [
+          "scope"
+        ],
+        "properties": {
+          "scope": {
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ],
+            "description": "Scope at which these style preferences apply."
+          },
+          "org": {
+            "$ref": "#/components/schemas/StyleOrgInfo",
+            "description": "Org associated with these preferences. Present only when scope is ORG.",
+            "nullable": true
+          },
+          "navigation_panel": {
+            "$ref": "#/components/schemas/StyleNavigationPanel",
+            "description": "Navigation panel color configuration.",
+            "nullable": true
+          },
+          "chart_color_palette": {
+            "$ref": "#/components/schemas/StyleChartColorPalette",
+            "description": "Chart color palette configuration.",
+            "nullable": true
+          },
+          "embedded_footer_text": {
+            "$ref": "#/components/schemas/StyleEmbeddedFooterText",
+            "description": "Embedded footer text configuration.",
+            "nullable": true
+          },
+          "logo": {
+            "$ref": "#/components/schemas/StyleLogoStatus",
+            "description": "Logo status per slot.",
+            "nullable": true
+          },
+          "visualization_fonts": {
+            "$ref": "#/components/schemas/StyleVisualizationFonts",
+            "description": "Effective font assignments per visualization area.",
+            "nullable": true
+          }
+        },
+        "description": "Style preferences for a single scope entry."
+      },
+      "StyleOrgInfo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Unique integer ID of the org.",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the org.",
+            "nullable": true
+          }
+        },
+        "description": "Org information returned in style API responses."
+      },
+      "StyleNavigationPanel": {
+        "type": "object",
+        "properties": {
+          "theme": {
+            "type": "string",
+            "enum": [
+              "DARK",
+              "TWO_TONE",
+              "CUSTOM"
+            ],
+            "description": "Navigation panel color mode.",
+            "nullable": true
+          },
+          "base_color": {
+            "type": "string",
+            "description": "Base color as a 6-digit hex string. Present only when theme is CUSTOM.",
+            "nullable": true
+          },
+          "is_overridden": {
+            "type": "boolean",
+            "description": "True if explicitly set at this scope, overriding any inherited value.",
+            "nullable": true
+          }
+        },
+        "description": "Navigation panel color configuration for a specific scope."
+      },
+      "StyleChartColorPalette": {
+        "type": "object",
+        "properties": {
+          "colors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StyleColorEntry"
+            },
+            "description": "Ordered array of 8 color entries.",
+            "nullable": true
+          },
+          "disable_color_rotation": {
+            "type": "boolean",
+            "description": "When true, automatic color rotation across chart data series is disabled.",
+            "nullable": true
+          },
+          "is_overridden": {
+            "type": "boolean",
+            "description": "True if explicitly set at this scope, overriding any inherited value.",
+            "nullable": true
+          }
+        },
+        "description": "Chart color palette configuration for a specific scope."
+      },
+      "StyleColorEntry": {
+        "type": "object",
+        "properties": {
+          "primary": {
+            "type": "string",
+            "description": "Primary color as a 6-digit hex string.",
+            "nullable": true
+          },
+          "secondary": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Array of 4 secondary shade hex strings.",
+            "nullable": true
+          }
+        },
+        "description": "A single color entry in the chart color palette."
+      },
+      "StyleEmbeddedFooterText": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "Footer text value. Empty string indicates no footer is set.",
+            "nullable": true
+          },
+          "is_overridden": {
+            "type": "boolean",
+            "description": "True if explicitly set at this scope, overriding any inherited value.",
+            "nullable": true
+          }
+        },
+        "description": "Embedded footer text configuration for a specific scope."
+      },
+      "StyleLogoStatus": {
+        "type": "object",
+        "properties": {
+          "default_logo": {
+            "$ref": "#/components/schemas/StyleLogoSlot",
+            "description": "Status of the DEFAULT logo slot (square app icon and favicon; recommended\n140x140 px).",
+            "nullable": true
+          },
+          "wide_logo": {
+            "$ref": "#/components/schemas/StyleLogoSlot",
+            "description": "Status of the WIDE logo slot (horizontal top nav bar logo; recommended\n230x45 px).",
+            "nullable": true
+          }
+        },
+        "description": "Logo status per slot."
+      },
+      "StyleLogoSlot": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "UUID of the active logo.",
+            "nullable": true
+          },
+          "is_overridden": {
+            "type": "boolean",
+            "description": "True if a custom logo is uploaded at this scope. False if the ThoughtSpot\ndefault or cluster logo is active.",
+            "nullable": true
+          }
+        },
+        "description": "Status of a single logo slot."
+      },
+      "StyleVisualizationFonts": {
+        "type": "object",
+        "properties": {
+          "chart_visualization_fonts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChartVisualizationFontRecord"
+            },
+            "description": "Font assignments for chart visualization areas.",
+            "nullable": true
+          },
+          "table_visualization_fonts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TableVisualizationFontRecord"
+            },
+            "description": "Font assignments for table visualization areas.",
+            "nullable": true
+          }
+        },
+        "description": "Effective font assignments per visualization type."
+      },
+      "ChartVisualizationFontRecord": {
+        "type": "object",
+        "properties": {
+          "visualization_area": {
+            "type": "string",
+            "enum": [
+              "CHART_X_AXIS_LABELS",
+              "CHART_X_AXIS_TITLE",
+              "CHART_Y_AXIS_LABELS",
+              "CHART_Y_AXIS_TITLE",
+              "CHART_TOOLTIP",
+              "CHART_SCATTER_DATA_LABELS",
+              "CHART_DONUT_DATA_LABELS",
+              "CHART_LINE_DATA_LABELS",
+              "CHART_COLUMN_DATA_LABELS",
+              "CHART_BAR_DATA_LABELS",
+              "CHART_AREA_DATA_LABELS"
+            ],
+            "description": "Chart visualization area.",
+            "nullable": true
+          },
+          "font_id": {
+            "type": "string",
+            "description": "UUID of the font assigned to this area. Null when the system default font\nis active.",
+            "nullable": true
+          },
+          "font_name": {
+            "type": "string",
+            "description": "Display name of the font assigned to this area. Null when the system\ndefault font is active.",
+            "nullable": true
+          },
+          "is_overridden": {
+            "type": "boolean",
+            "description": "True if explicitly set at this scope, overriding any inherited value.",
+            "nullable": true
+          }
+        },
+        "description": "Font assignment for a chart visualization area in the response."
+      },
+      "TableVisualizationFontRecord": {
+        "type": "object",
+        "properties": {
+          "visualization_area": {
+            "type": "string",
+            "enum": [
+              "TABLE_VALUE_CELLS"
+            ],
+            "description": "Table visualization area.",
+            "nullable": true
+          },
+          "font_id": {
+            "type": "string",
+            "description": "UUID of the font assigned to this area. Null when the system default font\nis active.",
+            "nullable": true
+          },
+          "font_name": {
+            "type": "string",
+            "description": "Display name of the font assigned to this area. Null when the system\ndefault font is active.",
+            "nullable": true
+          },
+          "is_overridden": {
+            "type": "boolean",
+            "description": "True if explicitly set at this scope, overriding any inherited value.",
+            "nullable": true
+          }
+        },
+        "description": "Font assignment for a table visualization area in the response."
+      },
+      "StyleFontRecord": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique UUID identifier of the font."
+          },
+          "scope": {
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ],
+            "description": "Scope indicating whether this font belongs to the cluster or org library.",
+            "nullable": true
+          },
+          "org": {
+            "$ref": "#/components/schemas/StyleOrgInfo",
+            "description": "Org associated with this font. Present only when scope is ORG.",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the font."
+          },
+          "weight": {
+            "type": "string",
+            "enum": [
+              "NORMAL",
+              "LIGHT",
+              "BOLD"
+            ],
+            "description": "Weight of the font.",
+            "nullable": true
+          },
+          "style": {
+            "type": "string",
+            "enum": [
+              "NORMAL",
+              "ITALIC",
+              "OBLIQUE"
+            ],
+            "description": "Style of the font.",
+            "nullable": true
+          },
+          "color": {
+            "type": "string",
+            "description": "Color of the font as a 6-digit hex string.",
+            "nullable": true
+          },
+          "creation_time_in_millis": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Timestamp in milliseconds when the font was uploaded.",
+            "nullable": true
+          },
+          "assignments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StyleFontAssignment"
+            },
+            "description": "Visualization areas currently assigned to this font. Empty if not assigned\nto any area. Populated only when include_font_assignments is true.",
+            "nullable": true
+          }
+        },
+        "description": "A custom font record in the ThoughtSpot font library."
+      },
+      "StyleFontAssignment": {
+        "type": "object",
+        "properties": {
+          "org": {
+            "$ref": "#/components/schemas/StyleOrgInfo",
+            "description": "Org context for this assignment. Present only when scope is ORG.",
+            "nullable": true
+          },
+          "visualization_areas": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "CHART_X_AXIS_LABELS",
+                "CHART_X_AXIS_TITLE",
+                "CHART_Y_AXIS_LABELS",
+                "CHART_Y_AXIS_TITLE",
+                "CHART_TOOLTIP",
+                "CHART_SCATTER_DATA_LABELS",
+                "CHART_DONUT_DATA_LABELS",
+                "CHART_LINE_DATA_LABELS",
+                "CHART_COLUMN_DATA_LABELS",
+                "CHART_BAR_DATA_LABELS",
+                "CHART_AREA_DATA_LABELS",
+                "TABLE_VALUE_CELLS"
+              ]
+            },
+            "description": "Visualization areas using this font.",
+            "nullable": true
+          }
+        },
+        "description": "Visualization areas assigned to a font, grouped by org context."
+      },
       "GenericInfo": {
         "type": "object",
         "properties": {
@@ -21845,6 +22846,249 @@
           }
         },
         "description": "Group of metadata objects identified by type."
+      },
+      "StyleResetOptionsInput": {
+        "type": "object",
+        "properties": {
+          "style": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "CHART_COLOR_PALETTE",
+                "EMBEDDED_FOOTER_TEXT",
+                "NAV_PANEL_COLOR",
+                "DEFAULT_LOGO",
+                "WIDE_LOGO"
+              ]
+            },
+            "description": "Style fields to reset. Supported values: CHART_COLOR_PALETTE,\nEMBEDDED_FOOTER_TEXT, NAV_PANEL_COLOR, DEFAULT_LOGO, WIDE_LOGO.",
+            "nullable": true
+          },
+          "visualization_areas": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "CHART_X_AXIS_LABELS",
+                "CHART_X_AXIS_TITLE",
+                "CHART_Y_AXIS_LABELS",
+                "CHART_Y_AXIS_TITLE",
+                "CHART_TOOLTIP",
+                "CHART_SCATTER_DATA_LABELS",
+                "CHART_DONUT_DATA_LABELS",
+                "CHART_LINE_DATA_LABELS",
+                "CHART_COLUMN_DATA_LABELS",
+                "CHART_BAR_DATA_LABELS",
+                "CHART_AREA_DATA_LABELS",
+                "TABLE_VALUE_CELLS"
+              ]
+            },
+            "description": "Visualization areas whose font assignments should revert to the system\ndefault font.",
+            "nullable": true
+          }
+        },
+        "description": "Fields to revert to ThoughtSpot defaults when operation is RESET."
+      },
+      "NavigationPanelInput": {
+        "type": "object",
+        "properties": {
+          "theme": {
+            "type": "string",
+            "enum": [
+              "DARK",
+              "TWO_TONE",
+              "CUSTOM"
+            ],
+            "description": "Color mode for the navigation panel. DARK applies the default dark theme.\nTWO_TONE applies a dual-tone style. CUSTOM enables a user-defined base\ncolor; base_color is required when theme is CUSTOM.",
+            "nullable": true
+          },
+          "base_color": {
+            "type": "string",
+            "description": "Base color as a 6-digit hex string (e.g. \"#2359B6\"). Required when theme\nis CUSTOM.",
+            "nullable": true
+          }
+        },
+        "description": "Navigation panel color configuration."
+      },
+      "StyleColorPaletteInput": {
+        "type": "object",
+        "properties": {
+          "colors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StyleColorEntryInput"
+            },
+            "description": "Ordered array of exactly 8 color entries defining the chart color palette.",
+            "nullable": true
+          },
+          "disable_color_rotation": {
+            "type": "boolean",
+            "description": "When true, disables automatic color rotation across chart data series.",
+            "nullable": true
+          }
+        },
+        "description": "Chart color palette configuration."
+      },
+      "StyleColorEntryInput": {
+        "type": "object",
+        "required": [
+          "primary"
+        ],
+        "properties": {
+          "primary": {
+            "type": "string",
+            "description": "Primary color as a 6-digit hex string (e.g. \"#2359B6\"). Required."
+          },
+          "secondary": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Array of exactly 4 secondary shade hex strings. If omitted, the server\nauto-generates 4 shades from the primary color. If provided, must contain\nexactly 4 valid 6-digit hex color strings.",
+            "nullable": true
+          }
+        },
+        "description": "A single color entry in the chart color palette."
+      },
+      "VisualizationFontsInput": {
+        "type": "object",
+        "properties": {
+          "chart_visualization_fonts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChartFontAssignmentInput"
+            },
+            "description": "Font assignments for chart visualization areas. Provide only the areas to\nupdate; omitted areas remain unchanged.",
+            "nullable": true
+          },
+          "table_visualization_fonts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TableFontAssignmentInput"
+            },
+            "description": "Font assignments for table visualization areas. Provide only the areas to\nupdate; omitted areas remain unchanged.",
+            "nullable": true
+          }
+        },
+        "description": "Font assignments grouped by visualization type."
+      },
+      "ChartFontAssignmentInput": {
+        "type": "object",
+        "required": [
+          "visualization_area",
+          "font_identifier"
+        ],
+        "properties": {
+          "visualization_area": {
+            "type": "string",
+            "enum": [
+              "CHART_X_AXIS_LABELS",
+              "CHART_X_AXIS_TITLE",
+              "CHART_Y_AXIS_LABELS",
+              "CHART_Y_AXIS_TITLE",
+              "CHART_TOOLTIP",
+              "CHART_SCATTER_DATA_LABELS",
+              "CHART_DONUT_DATA_LABELS",
+              "CHART_LINE_DATA_LABELS",
+              "CHART_COLUMN_DATA_LABELS",
+              "CHART_BAR_DATA_LABELS",
+              "CHART_AREA_DATA_LABELS"
+            ],
+            "description": "Chart visualization area to assign the font to."
+          },
+          "font_identifier": {
+            "type": "string",
+            "description": "UUID or name of the font to assign to this area."
+          }
+        },
+        "description": "Font assignment for a single chart visualization area."
+      },
+      "TableFontAssignmentInput": {
+        "type": "object",
+        "required": [
+          "visualization_area",
+          "font_identifier"
+        ],
+        "properties": {
+          "visualization_area": {
+            "type": "string",
+            "enum": [
+              "TABLE_VALUE_CELLS"
+            ],
+            "description": "Table visualization area to assign the font to."
+          },
+          "font_identifier": {
+            "type": "string",
+            "description": "UUID or name of the font to assign to this area."
+          }
+        },
+        "description": "Font assignment for a single table visualization area."
+      },
+      "StyleFontUploadData": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique UUID identifier of the uploaded font."
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the uploaded font."
+          }
+        },
+        "description": "Font data returned after a successful upload."
+      },
+      "StyleFontDeleteData": {
+        "type": "object",
+        "properties": {
+          "affected_assignments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StyleFontDeleteAffectedAssignment"
+            },
+            "description": "Visualization areas that used the deleted font(s) and were automatically\nreset to the system default font. Empty if no areas were affected.",
+            "nullable": true
+          }
+        },
+        "description": "Result data for font deletion."
+      },
+      "StyleFontDeleteAffectedAssignment": {
+        "type": "object",
+        "properties": {
+          "org": {
+            "$ref": "#/components/schemas/StyleOrgInfo",
+            "description": "Org context for this assignment. Present only when scope is ORG.",
+            "nullable": true
+          },
+          "visualization_areas": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "CHART_X_AXIS_LABELS",
+                "CHART_X_AXIS_TITLE",
+                "CHART_Y_AXIS_LABELS",
+                "CHART_Y_AXIS_TITLE",
+                "CHART_TOOLTIP",
+                "CHART_SCATTER_DATA_LABELS",
+                "CHART_DONUT_DATA_LABELS",
+                "CHART_LINE_DATA_LABELS",
+                "CHART_COLUMN_DATA_LABELS",
+                "CHART_BAR_DATA_LABELS",
+                "CHART_AREA_DATA_LABELS",
+                "TABLE_VALUE_CELLS"
+              ]
+            },
+            "description": "Visualization areas that used the deleted font and were automatically reset\nto the system default font.",
+            "nullable": true
+          }
+        },
+        "description": "A visualization area assignment affected by a font deletion."
       },
       "Runtime_Filter": {
         "type": "object",
@@ -27330,6 +28574,125 @@
         "required": [
           "column_security_rules"
         ]
+      },
+      "DeleteStyleFontsRequest": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "description": "Scope of the font library to delete from. CLUSTER deletes from the\ncluster-level library. ORG deletes from the authenticated user's org\nlibrary. Defaults to ORG if omitted.",
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ]
+          },
+          "font_identifiers": {
+            "description": "UUIDs or names of the fonts to delete. At least one identifier is\nrequired.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "dry_run": {
+            "description": "When true, returns affected assignments without applying the deletion.\nUse this to preview the impact before committing. Defaults to true if\nomitted.",
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "required": [
+          "font_identifiers"
+        ]
+      },
+      "ExportStyleLogosRequest": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "description": "Scope of the logos to export. CLUSTER exports cluster-level logos. ORG\nexports logos for the authenticated user's org, falling back to cluster\nor ThoughtSpot defaults if no custom logo is set. Defaults to ORG if\nomitted.",
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ]
+          }
+        }
+      },
+      "SearchStyleCustomizationsRequest": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "description": "Scope of the style preferences to retrieve. CLUSTER returns cluster-level\ndefaults. ORG returns preferences for the authenticated user's org, which\nmay override cluster defaults. Defaults to ORG if omitted.",
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ]
+          }
+        }
+      },
+      "SearchStyleFontsRequest": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "description": "Scope of the font library to search. CLUSTER searches the cluster-level\nlibrary. ORG searches the authenticated user's org library. Defaults to\nORG if omitted.",
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ]
+          },
+          "font_identifier": {
+            "description": "Filter by UUID or name of a specific font.",
+            "type": "string"
+          },
+          "name_pattern": {
+            "description": "Filter by font display name. Supports partial, case-insensitive matching.",
+            "type": "string"
+          },
+          "include_font_assignments": {
+            "description": "When true, includes visualization areas this font is assigned to in the\nresponse. Defaults to false if omitted.",
+            "type": "boolean",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateStyleFontRequest": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "description": "Scope of the font library containing this font. CLUSTER targets the\ncluster-level library. ORG targets the authenticated user's org library.\nDefaults to ORG if omitted.",
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ]
+          },
+          "name": {
+            "description": "New display name for the font. Must be unique within the target scope.",
+            "type": "string"
+          },
+          "weight": {
+            "description": "New weight for the font. Supported values: NORMAL, LIGHT, BOLD.",
+            "type": "string",
+            "enum": [
+              "NORMAL",
+              "LIGHT",
+              "BOLD"
+            ]
+          },
+          "style": {
+            "description": "New style for the font. Supported values: NORMAL, ITALIC, OBLIQUE.",
+            "type": "string",
+            "enum": [
+              "NORMAL",
+              "ITALIC",
+              "OBLIQUE"
+            ]
+          },
+          "color": {
+            "description": "New color for the font as a 6-digit hex string (e.g. \"#333333\"). Returns\nan error if the value is malformed.",
+            "type": "string"
+          }
+        }
       },
       "ConfigureCommunicationChannelPreferencesRequest": {
         "type": "object",
