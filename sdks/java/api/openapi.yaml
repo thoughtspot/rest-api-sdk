@@ -19659,6 +19659,11 @@ components:
           description: Filter records created on or after this time (epoch milliseconds).
           format: float
           type: number
+        end_epoch_time_in_millis:
+          description: "Filter records created on or before this time (epoch milliseconds).\
+            \ \n  Version: 26.7.0.cl or later\n"
+          format: float
+          type: number
       required:
       - channel_type
       type: object

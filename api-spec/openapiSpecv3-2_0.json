@@ -5980,7 +5980,7 @@
     "/api/rest/2.0/jobs/history/communication-channels/search": {
       "post": {
         "operationId": "searchChannelHistory",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\nSearches delivery history for communication channels such as webhooks. Returns channel-level delivery status for each job execution record. Use this to monitor channel health and delivery success rates across events.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.\n\n**NOTE**: When `channel_type` is `WEBHOOK`, the following constraints apply:\n\n- `job_ids`, `channel_identifiers`, and `events` each accept at most one element.\n- When `job_ids` is provided, it is used as the sole lookup key and other filter fields are ignored.\n- When `job_ids` is not provided, `channel_identifiers` and `events` are both required. Each must contain exactly one element, and the event object must include the `identifier` field.\n- Records older than the configured retention period are not returned.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\nSearches delivery history for communication channels such as webhooks. Returns channel-level delivery status for each job execution record. Use this to monitor channel health and delivery success rates across events.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.\n\n**NOTE**: When `channel_type` is `WEBHOOK`, the following constraints apply:\n\n- `job_ids`, `channel_identifiers`, and `events` each accept at most one element.\n- When `job_ids` is provided, it is used as the sole lookup key and other filter fields are ignored.\n- When `job_ids` is not provided, `channel_identifiers` and `events` are both required, each containing exactly one element.\n- Records older than the configured retention period are not returned.\n- Use `start_epoch_time_in_millis` and/or `end_epoch_time_in_millis` to narrow results to a specific time window.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Jobs",
           "26.4.0.cl"
@@ -24216,6 +24216,11 @@
           },
           "start_epoch_time_in_millis": {
             "description": "Filter records created on or after this time (epoch milliseconds).",
+            "type": "number",
+            "format": "float"
+          },
+          "end_epoch_time_in_millis": {
+            "description": "Filter records created on or before this time (epoch milliseconds). <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
             "type": "number",
             "format": "float"
           }

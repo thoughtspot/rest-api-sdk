@@ -173,6 +173,13 @@ public class SearchChannelHistoryRequest implements Serializable {
     @javax.annotation.Nullable
     private Float startEpochTimeInMillis;
 
+    public static final String SERIALIZED_NAME_END_EPOCH_TIME_IN_MILLIS =
+            "end_epoch_time_in_millis";
+
+    @SerializedName(SERIALIZED_NAME_END_EPOCH_TIME_IN_MILLIS)
+    @javax.annotation.Nullable
+    private Float endEpochTimeInMillis;
+
     public SearchChannelHistoryRequest() {}
 
     public SearchChannelHistoryRequest channelType(
@@ -318,6 +325,27 @@ public class SearchChannelHistoryRequest implements Serializable {
         this.startEpochTimeInMillis = startEpochTimeInMillis;
     }
 
+    public SearchChannelHistoryRequest endEpochTimeInMillis(
+            @javax.annotation.Nullable Float endEpochTimeInMillis) {
+        this.endEpochTimeInMillis = endEpochTimeInMillis;
+        return this;
+    }
+
+    /**
+     * Filter records created on or before this time (epoch milliseconds). Version: 26.7.0.cl or
+     * later
+     *
+     * @return endEpochTimeInMillis
+     */
+    @javax.annotation.Nullable
+    public Float getEndEpochTimeInMillis() {
+        return endEpochTimeInMillis;
+    }
+
+    public void setEndEpochTimeInMillis(@javax.annotation.Nullable Float endEpochTimeInMillis) {
+        this.endEpochTimeInMillis = endEpochTimeInMillis;
+    }
+
     /**
      * A container for additional, undeclared properties. This is a holder for any undeclared
      * properties as specified with the 'additionalProperties' keyword in the OAS document.
@@ -381,6 +409,8 @@ public class SearchChannelHistoryRequest implements Serializable {
                         this.startEpochTimeInMillis,
                         searchChannelHistoryRequest.startEpochTimeInMillis)
                 && Objects.equals(
+                        this.endEpochTimeInMillis, searchChannelHistoryRequest.endEpochTimeInMillis)
+                && Objects.equals(
                         this.additionalProperties,
                         searchChannelHistoryRequest.additionalProperties);
     }
@@ -394,6 +424,7 @@ public class SearchChannelHistoryRequest implements Serializable {
                 channelStatus,
                 events,
                 startEpochTimeInMillis,
+                endEpochTimeInMillis,
                 additionalProperties);
     }
 
@@ -410,6 +441,9 @@ public class SearchChannelHistoryRequest implements Serializable {
         sb.append("    events: ").append(toIndentedString(events)).append("\n");
         sb.append("    startEpochTimeInMillis: ")
                 .append(toIndentedString(startEpochTimeInMillis))
+                .append("\n");
+        sb.append("    endEpochTimeInMillis: ")
+                .append(toIndentedString(endEpochTimeInMillis))
                 .append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
@@ -441,6 +475,7 @@ public class SearchChannelHistoryRequest implements Serializable {
         openapiFields.add("channel_status");
         openapiFields.add("events");
         openapiFields.add("start_epoch_time_in_millis");
+        openapiFields.add("end_epoch_time_in_millis");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();

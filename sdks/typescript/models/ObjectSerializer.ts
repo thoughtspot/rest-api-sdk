@@ -778,7 +778,7 @@ import { SearchAuthSettingsRequest, SearchAuthSettingsRequestAuthTypeEnum  , Sea
 import { SearchAuthSettingsResponse, SearchAuthSettingsResponseAuthTypeEnum     } from '../models/SearchAuthSettingsResponse';
 import { SearchCalendarsRequest } from '../models/SearchCalendarsRequest';
 import { SearchCalendarsRequestSortOptions, SearchCalendarsRequestSortOptionsFieldNameEnum  , SearchCalendarsRequestSortOptionsOrderEnum   } from '../models/SearchCalendarsRequestSortOptions';
-import { SearchChannelHistoryRequest, SearchChannelHistoryRequestChannelTypeEnum    , SearchChannelHistoryRequestChannelStatusEnum     } from '../models/SearchChannelHistoryRequest';
+import { SearchChannelHistoryRequest, SearchChannelHistoryRequestChannelTypeEnum    , SearchChannelHistoryRequestChannelStatusEnum      } from '../models/SearchChannelHistoryRequest';
 import { SearchChannelHistoryResponse } from '../models/SearchChannelHistoryResponse';
 import { SearchCollectionsRequest } from '../models/SearchCollectionsRequest';
 import { SearchCollectionsRequestSortOptions, SearchCollectionsRequestSortOptionsFieldNameEnum  , SearchCollectionsRequestSortOptionsOrderEnum   } from '../models/SearchCollectionsRequestSortOptions';

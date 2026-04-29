@@ -38,6 +38,10 @@ export class SearchChannelHistoryRequest {
     * Filter records created on or after this time (epoch milliseconds).
     */
     'start_epoch_time_in_millis'?: number;
+    /**
+    * Filter records created on or before this time (epoch milliseconds).    Version: 26.7.0.cl or later 
+    */
+    'end_epoch_time_in_millis'?: number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -75,6 +79,12 @@ export class SearchChannelHistoryRequest {
         {
             "name": "start_epoch_time_in_millis",
             "baseName": "start_epoch_time_in_millis",
+            "type": "number",
+            "format": "float"
+        },
+        {
+            "name": "end_epoch_time_in_millis",
+            "baseName": "end_epoch_time_in_millis",
             "type": "number",
             "format": "float"
         }    ];

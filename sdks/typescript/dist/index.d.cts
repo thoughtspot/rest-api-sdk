@@ -14723,6 +14723,10 @@ declare class SearchChannelHistoryRequest {
     * Filter records created on or after this time (epoch milliseconds).
     */
     'start_epoch_time_in_millis'?: number;
+    /**
+    * Filter records created on or before this time (epoch milliseconds).    Version: 26.7.0.cl or later
+    */
+    'end_epoch_time_in_millis'?: number;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;

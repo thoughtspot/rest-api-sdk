@@ -12016,6 +12016,12 @@ _SearchChannelHistoryRequest.attributeTypeMap = [
     "baseName": "start_epoch_time_in_millis",
     "type": "number",
     "format": "float"
+  },
+  {
+    "name": "end_epoch_time_in_millis",
+    "baseName": "end_epoch_time_in_millis",
+    "type": "number",
+    "format": "float"
   }
 ];
 var SearchChannelHistoryRequest = _SearchChannelHistoryRequest;

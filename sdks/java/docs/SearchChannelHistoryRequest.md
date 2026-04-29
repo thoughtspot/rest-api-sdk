@@ -13,6 +13,7 @@
 |**channelStatus** | [**ChannelStatusEnum**](#ChannelStatusEnum) | Filter by channel delivery status. |  [optional] |
 |**events** | [**List&lt;ChannelHistoryEventInput&gt;**](ChannelHistoryEventInput.md) | Filter by events that triggered the channel. |  [optional] |
 |**startEpochTimeInMillis** | **Float** | Filter records created on or after this time (epoch milliseconds). |  [optional] |
+|**endEpochTimeInMillis** | **Float** | Filter records created on or before this time (epoch milliseconds).    Version: 26.7.0.cl or later  |  [optional] |
 
 
 
