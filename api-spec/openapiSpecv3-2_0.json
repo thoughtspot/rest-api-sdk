@@ -54,6 +54,14 @@
       "description": "Roles for version 26.5.0.cl"
     },
     {
+      "name": "26.6.0.cl",
+      "id": "26.6.0.cl",
+      "tags": [
+        "26.6.0.cl"
+      ],
+      "description": "Roles for version 26.6.0.cl"
+    },
+    {
       "name": "9.0.0.cl",
       "id": "9.0.0.cl",
       "tags": [
@@ -108,14 +116,6 @@
         "9.9.0.cl"
       ],
       "description": "Roles for version 9.9.0.cl"
-    },
-    {
-      "name": "26.6.0.cl",
-      "id": "26.6.0.cl",
-      "tags": [
-        "26.6.0.cl"
-      ],
-      "description": "Roles for version 26.6.0.cl"
     },
     {
       "name": "9.6.0.cl",
@@ -333,6 +333,14 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Conversation"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Conversation created successfully",
+                    "value": {
+                      "conversation_identifier": "conv-a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                    }
+                  }
                 }
               }
             }
@@ -416,6 +424,33 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/eureka_DataSourceSuggestionResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Data source suggestions returned",
+                    "value": {
+                      "data_sources": [
+                        {
+                          "confidence": 0.95,
+                          "details": {
+                            "description": "Comprehensive sales data including revenue, orders, and customers",
+                            "data_source_name": "Sales Analytics",
+                            "data_source_identifier": "b3e4f5a6-c7d8-4e9f-a1b2-c3d4e5f6a7b8"
+                          },
+                          "reasoning": "This data source contains revenue and order data relevant to sales performance analysis"
+                        },
+                        {
+                          "confidence": 0.82,
+                          "details": {
+                            "description": "Customer lifecycle and churn metrics",
+                            "data_source_name": "Customer Success",
+                            "data_source_identifier": "c4d5e6f7-a8b9-4c0d-e1f2-a3b4c5d6e7f8"
+                          },
+                          "reasoning": "Contains churn rate, retention metrics, and customer health scores"
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             }
@@ -499,6 +534,23 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/eureka_GetNLInstructionsResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "NL instructions returned",
+                    "value": {
+                      "nl_instructions_info": [
+                        {
+                          "instructions": [
+                            "Revenue is measured in USD thousands",
+                            "When asked about 'this year', use the current fiscal year starting April",
+                            "Region 'Northeast' includes NY, NJ, CT, MA, VT, NH, ME, RI"
+                          ],
+                          "scope": "GLOBAL"
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             }
@@ -582,6 +634,30 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/eureka_GetRelevantQuestionsResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Relevant questions returned",
+                    "value": {
+                      "relevant_questions": [
+                        {
+                          "query": "What is the revenue trend by region for the last 12 months?",
+                          "data_source_identifier": "b3e4f5a6-c7d8-4e9f-a1b2-c3d4e5f6a7b8",
+                          "data_source_name": "Sales Analytics"
+                        },
+                        {
+                          "query": "Which product categories have the highest conversion rate?",
+                          "data_source_identifier": "b3e4f5a6-c7d8-4e9f-a1b2-c3d4e5f6a7b8",
+                          "data_source_name": "Sales Analytics"
+                        },
+                        {
+                          "query": "What is the average deal size by sales rep?",
+                          "data_source_identifier": "b3e4f5a6-c7d8-4e9f-a1b2-c3d4e5f6a7b8",
+                          "data_source_name": "Sales Analytics"
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             }
@@ -666,6 +742,27 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/eureka_DecomposeQueryResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Decomposed queries returned",
+                    "value": {
+                      "decomposedQueryResponse": {
+                        "decomposedQueries": [
+                          {
+                            "query": "Revenue trend in Northeast region by month",
+                            "worksheetId": "b3e4f5a6-c7d8-4e9f-a1b2-c3d4e5f6a7b8",
+                            "worksheetName": "Sales Analytics"
+                          },
+                          {
+                            "query": "Top customers by revenue change in Northeast",
+                            "worksheetId": "b3e4f5a6-c7d8-4e9f-a1b2-c3d4e5f6a7b8",
+                            "worksheetName": "Sales Analytics"
+                          }
+                        ]
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -1055,6 +1152,21 @@
               "application/json": {
                 "schema": {
                   "type": "object"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Agent response received",
+                    "value": {
+                      "id": "resp-xyz789",
+                      "messages": [
+                        {
+                          "id": "msg-001",
+                          "type": "text",
+                          "value": "I analyzed revenue trends for the last 6 months by product category. Here's what I found..."
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             }
@@ -1139,6 +1251,15 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SendAgentMessageResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Streaming message sent successfully",
+                    "value": {
+                      "success": true,
+                      "message": "Streaming response initiated"
+                    }
+                  }
                 }
               }
             }
@@ -1235,6 +1356,21 @@
                   "items": {
                     "$ref": "#/components/schemas/ResponseMessage"
                   }
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "AI response received",
+                    "value": [
+                      {
+                        "session_identifier": "sess-abc123",
+                        "generation_number": 1,
+                        "message_type": "TSAnswer",
+                        "visualization_type": "Table",
+                        "tokens": "[revenue] [region] [date]",
+                        "display_tokens": "Revenue by Region (Last Quarter)"
+                      }
+                    ]
+                  }
                 }
               }
             }
@@ -1321,6 +1457,14 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/eureka_SetNLInstructionsResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "NL instructions set successfully",
+                    "value": {
+                      "success": true
+                    }
+                  }
                 }
               }
             }
@@ -1404,6 +1548,19 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ResponseMessage"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Single answer generated successfully",
+                    "value": {
+                      "session_identifier": "sess-abc123",
+                      "generation_number": 1,
+                      "message_type": "TSAnswer",
+                      "visualization_type": "Chart",
+                      "tokens": "[revenue] [region] [date range] last year",
+                      "display_tokens": "Total Revenue by Region (Last Year)"
+                    }
+                  }
                 }
               }
             }
@@ -1461,6 +1618,138 @@
         }
       }
     },
+    "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response": {
+      "post": {
+        "operationId": "stopConversation",
+        "description": "\nStops an in-progress agent conversation response. <br/>  <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\n<span>Version: 26.6.0.cl or later</span>\n\nStops an in-progress agent response for the specified conversation. Use this endpoint to cancel a response that is actively being generated — for example, when the user navigates away, reformulates their question, or no longer needs the current result.\n\nRequires `CAN_USE_SPOTTER` privilege and access to the specified conversation.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier` *(path parameter)*: the unique ID of the conversation whose active response should be stopped, as returned by `createAgentConversation`\n\nA successful request returns an empty `204 No Content` response. If there is no active response in progress at the time of the call, the request is still treated as successful.\n\nAfter stopping a response, the conversation session remains active. You can continue sending messages using `sendAgentConversationMessage` or `sendAgentConversationMessageStreaming`.\n\n#### Example request\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response\n```\n\n#### Typical usage scenario\n\nThis endpoint is useful when integrating Spotter into a chat UI where users can cancel a long-running query. For example:\n\n1. User sends a message via `sendAgentConversationMessageStreaming`.\n2. User clicks a \"Stop generating\" button while the response is streaming.\n3. Your client calls `stopConversation` with the active `conversation_identifier`.\n4. The stream is terminated and the user can ask a new question.\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks access to the specified conversation. |\n\n> ###### Note:\n>\n> - Calling this endpoint when no response is in progress does not return an error.\n> - The conversation context is preserved after stopping — previous messages and answers remain accessible.\n> - Available from version 26.6.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n> - This feature is available only for **Spotter 3** (`SPOTTER3`) version.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.6.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "conversation_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the conversation to stop."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully stopped the in-progress agent conversation response for the given."
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/auth/configure": {
+      "post": {
+        "operationId": "configureAuthSettings",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\nEnables or disables authentication at cluster or org level for the specified auth type. Currently supports `TRUSTED_AUTH`.\n\n#### Required privileges\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `CONTROL_TRUSTED_AUTH` (**Can Enable or Disable Trusted Authentication**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH` privilege is required.\n\n#### Usage guidelines\n\nUse `cluster_preferences` to enable or disable authentication at the cluster level. Cluster-level settings can only be configured from the Primary Org.\n- `ENABLED` — Generates a new access token if one does not exist. An existing token is preserved.\n- `DISABLED` — Revokes the existing cluster-level access token.\n\nUse `org_preferences` to enable or disable authentication for one or more Orgs. Each entry must include an `org_identifier` (unique ID or name) and an `auth_status`. Org-level configuration requires the per-Org authentication feature to be enabled on your instance.\n- `ENABLED` — Generates a new org-level access token if one does not exist.\n- `DISABLED` — Revokes the existing org-level access token for that Org.\n\nBoth `cluster_preferences` and `org_preferences` are optional. Omitting a field leaves the corresponding settings unchanged. If both are omitted, the API returns `204 No Content` without making any changes.\n\n**Note**: Cluster-level and org-level settings are independent of each other. Enabling or disabling one does not affect the other.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Authentication",
+          "26.6.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfigureAuthSettingsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Trusted authentication settings configured successfully."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/auth/session/user": {
       "get": {
         "operationId": "getCurrentUserInfo",
@@ -1477,6 +1766,28 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/User"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Returns information about the currently authenticated user",
+                    "value": {
+                      "id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                      "name": "tsadmin",
+                      "display_name": "TS Admin",
+                      "visibility": "SHARABLE",
+                      "author_id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                      "can_change_password": true,
+                      "complete_detail": true,
+                      "creation_time_in_millis": 1685441468684,
+                      "account_type": "LOCAL_USER",
+                      "account_status": "ACTIVE",
+                      "email": "admin@example.com",
+                      "current_org": {
+                        "id": 0,
+                        "name": "Primary"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -1540,6 +1851,18 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetTokenResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Returns the current session token for the authenticated user",
+                    "value": {
+                      "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.example",
+                      "creation_time_in_millis": 1724277430000,
+                      "expiration_time_in_millis": 1724277730000,
+                      "valid_for_user_id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                      "valid_for_username": "tsadmin"
+                    }
+                  }
                 }
               }
             }
@@ -1613,6 +1936,25 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AccessToken"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Custom access token issued successfully",
+                    "value": {
+                      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                      "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.example",
+                      "org": {
+                        "id": 0,
+                        "name": "Primary"
+                      },
+                      "user": {
+                        "id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                        "name": "john_doe"
+                      },
+                      "creation_time_in_millis": 1724277430000,
+                      "expiration_time_in_millis": 1724277730000
+                    }
+                  }
                 }
               }
             }
@@ -1687,6 +2029,23 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Token"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Full access token issued successfully",
+                    "value": {
+                      "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.example",
+                      "creation_time_in_millis": 1724277430000,
+                      "expiration_time_in_millis": 1724277730000,
+                      "scope": {
+                        "access_type": "FULL",
+                        "org_id": 0,
+                        "metadata_id": null
+                      },
+                      "valid_for_user_id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                      "valid_for_username": "john_doe"
+                    }
+                  }
                 }
               }
             }
@@ -1761,6 +2120,23 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Token"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Object-scoped access token issued successfully",
+                    "value": {
+                      "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.example",
+                      "creation_time_in_millis": 1724277430000,
+                      "expiration_time_in_millis": 1724277730000,
+                      "scope": {
+                        "access_type": "REPORT_BOOK_VIEW",
+                        "org_id": 0,
+                        "metadata_id": "2ff57a24-cf90-485f-8b4b-45fc17474c6f"
+                      },
+                      "valid_for_user_id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                      "valid_for_username": "john_doe"
+                    }
+                  }
                 }
               }
             }
@@ -1997,6 +2373,108 @@
         }
       }
     },
+    "/api/rest/2.0/auth/search": {
+      "post": {
+        "operationId": "searchAuthSettings",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\nReturns the authentication configuration for the specified auth type at cluster and org level. Currently supports `TRUSTED_AUTH`.\n\n#### Required privileges\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `CONTROL_TRUSTED_AUTH` (**Can Enable or Disable Trusted Authentication**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH` privilege is required.\n\n#### Usage guidelines\n\nUse `scope` to control which level of settings are returned:\n- `CLUSTER` — Returns cluster-level authentication status and access tokens. Accessible only from the Primary Org.\n- `ORG` — Returns org-level authentication status and access tokens for the current Org. Requires the per-Org authentication feature to be enabled on your instance.\n- If `scope` is omitted, both cluster and org-level settings are returned based on the caller's org context and feature availability.\n\nThe `access_tokens` array in `cluster_preferences` or `org_preferences` is omitted when no token is configured at that level.\n\n**Note**: Access tokens returned in the response are sensitive credentials. Treat them with the same care as passwords.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Authentication",
+          "26.6.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchAuthSettingsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Authentication settings retrieved successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchAuthSettingsResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "value": {
+                      "auth_type": "TRUSTED_AUTH",
+                      "cluster_preferences": {
+                        "auth_status": "ENABLED",
+                        "access_tokens": [
+                          {
+                            "key": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                          }
+                        ]
+                      },
+                      "org_preferences": [
+                        {
+                          "org": {
+                            "id": 583464508,
+                            "name": "sales_org"
+                          },
+                          "auth_status": "ENABLED",
+                          "access_tokens": [
+                            {
+                              "key": "f9e8d7c6-b5a4-3210-fedc-ba9876543210"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/auth/token/validate": {
       "post": {
         "operationId": "validateToken",
@@ -2023,6 +2501,22 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/TokenValidationResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Token is valid",
+                    "value": {
+                      "creation_time_in_millis": 1724277430000,
+                      "expiration_time_in_millis": 1724277730000,
+                      "scope": {
+                        "access_type": "FULL",
+                        "org_id": 0,
+                        "metadata_id": null
+                      },
+                      "valid_for_user_id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                      "token_type": "JWT"
+                    }
+                  }
                 }
               }
             }
@@ -2096,6 +2590,31 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Collection"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Collection created successfully",
+                    "value": {
+                      "id": "col-a1b2c3d4-e5f6",
+                      "name": "Q1 2024 Reports",
+                      "description": "Collection of Q1 2024 reports",
+                      "author_name": "john_doe",
+                      "author_id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                      "created_at": "1724277430000",
+                      "updated_at": "1724277430000",
+                      "metadata": [
+                        {
+                          "type": "LIVEBOARD",
+                          "identifiers": [
+                            {
+                              "identifier": "2ff57a24-cf90-485f-8b4b-45fc17474c6f",
+                              "name": "Sales Dashboard"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             }
@@ -2169,6 +2688,25 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CollectionDeleteResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Collections deleted (or would be deleted in dry run)",
+                    "value": {
+                      "metadata_deleted": [
+                        {
+                          "type": "COLLECTION",
+                          "identifiers": [
+                            {
+                              "id": "col-a1b2c3d4-e5f6",
+                              "name": "Q1 2024 Reports"
+                            }
+                          ]
+                        }
+                      ],
+                      "metadata_skipped": []
+                    }
+                  }
                 }
               }
             }
@@ -2252,6 +2790,32 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CollectionSearchResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Search all collections",
+                    "value": {
+                      "collections": [
+                        {
+                          "id": "col-a1b2c3d4-e5f6",
+                          "name": "Q1 2024 Reports",
+                          "description": "Collection of Q1 2024 reports",
+                          "author_name": "john_doe",
+                          "author_id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                          "created_at": "1724277430000",
+                          "updated_at": "1724277430000",
+                          "org": {
+                            "identifier": "0",
+                            "name": "Primary"
+                          }
+                        }
+                      ],
+                      "record_offset": 0,
+                      "record_size": 10,
+                      "is_last_batch": true,
+                      "count": 1
+                    }
+                  }
                 }
               }
             }
@@ -2414,6 +2978,34 @@
                   "items": {
                     "$ref": "#/components/schemas/ConnectionConfigurationResponse"
                   }
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Search connection configurations for a Snowflake connection",
+                    "value": [
+                      {
+                        "configuration_identifier": "cfg-a1b2c3d4-e5f6",
+                        "name": "Sales Team Config",
+                        "description": "Configuration for the sales team",
+                        "configuration": {
+                          "warehouse": "SALES_WH",
+                          "database": "SALES_DB"
+                        },
+                        "policy_type": "PRINCIPALS",
+                        "policy_principals": [
+                          {
+                            "id": "b25ee394-9d13-49e3-9385-cd97f5b253b4",
+                            "name": "Sales Team",
+                            "type": "USER_GROUP"
+                          }
+                        ],
+                        "policy_processes": [],
+                        "disabled": false,
+                        "data_warehouse_type": "SNOWFLAKE",
+                        "same_as_parent": false
+                      }
+                    ]
+                  }
                 }
               }
             }
@@ -2487,6 +3079,31 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ConnectionConfigurationResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Connection configuration created successfully",
+                    "value": {
+                      "configuration_identifier": "cfg-a1b2c3d4-e5f6",
+                      "name": "Sales Team Config",
+                      "description": "Configuration for the sales team",
+                      "configuration": {
+                        "warehouse": "SALES_WH",
+                        "database": "SALES_DB"
+                      },
+                      "policy_type": "PRINCIPALS",
+                      "policy_principals": [
+                        {
+                          "id": "b25ee394-9d13-49e3-9385-cd97f5b253b4",
+                          "name": "Sales Team",
+                          "type": "USER_GROUP"
+                        }
+                      ],
+                      "disabled": false,
+                      "data_warehouse_type": "SNOWFLAKE",
+                      "same_as_parent": false
+                    }
+                  }
                 }
               }
             }
@@ -2702,6 +3319,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CreateConnectionResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Connection created successfully",
+                    "value": {
+                      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                      "name": "Production Snowflake",
+                      "data_warehouse_type": "SNOWFLAKE",
+                      "details": {
+                        "accountName": "my-account.snowflakecomputing.com",
+                        "warehouse": "COMPUTE_WH",
+                        "database": "PROD_DB"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2977,6 +3609,20 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/FetchConnectionDiffStatusResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Connection has schema differences",
+                    "value": {
+                      "status": true
+                    }
+                  },
+                  "example_2": {
+                    "description": "No schema differences detected",
+                    "value": {
+                      "status": false
+                    }
+                  }
                 }
               }
             }
@@ -3060,6 +3706,14 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/RevokeRefreshTokensResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Refresh tokens revoked successfully",
+                    "value": {
+                      "data": "Refresh tokens revoked successfully for 5 users"
+                    }
+                  }
                 }
               }
             }
@@ -3156,6 +3810,48 @@
                   "items": {
                     "$ref": "#/components/schemas/SearchConnectionResponse"
                   }
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Search all Snowflake connections",
+                    "value": [
+                      {
+                        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                        "name": "Production Snowflake",
+                        "description": "Main production Snowflake connection",
+                        "data_warehouse_type": "SNOWFLAKE",
+                        "data_warehouse_objects": {
+                          "databases": [
+                            {
+                              "name": "PROD_DB",
+                              "schemas": [
+                                {
+                                  "name": "PUBLIC",
+                                  "tables": [
+                                    {
+                                      "name": "SALES_FACT",
+                                      "columns": [
+                                        {
+                                          "name": "SALE_ID",
+                                          "data_type": "NUMBER",
+                                          "selected": true
+                                        },
+                                        {
+                                          "name": "AMOUNT",
+                                          "data_type": "FLOAT",
+                                          "selected": true
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
                 }
               }
             }
@@ -3239,6 +3935,30 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SyncMetadataResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Metadata sync completed successfully",
+                    "value": {
+                      "status": "SUCCESS",
+                      "tables_updated": 5,
+                      "columns_updated": 42,
+                      "tables_failed": 0,
+                      "columns_failed": 0,
+                      "message": "Metadata sync completed successfully"
+                    }
+                  },
+                  "example_2": {
+                    "description": "Partial metadata sync success",
+                    "value": {
+                      "status": "PARTIAL_SUCCESS",
+                      "tables_updated": 3,
+                      "columns_updated": 28,
+                      "tables_failed": 2,
+                      "columns_failed": 14,
+                      "message": "Some tables failed to sync"
+                    }
+                  }
                 }
               }
             }
@@ -3878,6 +4598,20 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CalendarResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Custom calendar created successfully",
+                    "value": {
+                      "calendar_id": "cal-a1b2c3d4-e5f6",
+                      "calendar_name": "Fiscal Year 2024",
+                      "connection_name": "Production Snowflake",
+                      "data_warehouse_type": "SNOWFLAKE",
+                      "modification_time_in_millis": "1724277430000",
+                      "author_name": "john_doe",
+                      "connection_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                    }
+                  }
                 }
               }
             }
@@ -4093,6 +4827,22 @@
                   "items": {
                     "$ref": "#/components/schemas/CalendarResponse"
                   }
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Search all custom calendars",
+                    "value": [
+                      {
+                        "calendar_id": "cal-a1b2c3d4-e5f6",
+                        "calendar_name": "Fiscal Year 2024",
+                        "connection_name": "Production Snowflake",
+                        "data_warehouse_type": "SNOWFLAKE",
+                        "modification_time_in_millis": "1724277430000",
+                        "author_name": "john_doe",
+                        "connection_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                      }
+                    ]
+                  }
                 }
               }
             }
@@ -4242,6 +4992,42 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AnswerDataResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Answer data returned successfully",
+                    "value": {
+                      "metadata_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                      "metadata_name": "Revenue Analysis",
+                      "contents": [
+                        {
+                          "column_names": [
+                            "Region",
+                            "Revenue"
+                          ],
+                          "data_rows": [
+                            [
+                              "Northeast",
+                              1250000
+                            ],
+                            [
+                              "Southeast",
+                              890000
+                            ],
+                            [
+                              "West",
+                              1050000
+                            ]
+                          ],
+                          "available_data_row_count": 3,
+                          "returned_data_row_count": 3,
+                          "record_offset": 0,
+                          "record_size": 100,
+                          "sampling_ratio": 1
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             }
@@ -4315,6 +5101,63 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/LiveboardDataResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Liveboard data returned successfully",
+                    "value": {
+                      "metadata_id": "2ff57a24-cf90-485f-8b4b-45fc17474c6f",
+                      "metadata_name": "Sales Dashboard",
+                      "contents": [
+                        {
+                          "visualization_id": "viz-001",
+                          "visualization_name": "Revenue by Region",
+                          "column_names": [
+                            "Region",
+                            "Total Revenue"
+                          ],
+                          "data_rows": [
+                            [
+                              "Northeast",
+                              1250000
+                            ],
+                            [
+                              "West",
+                              1050000
+                            ]
+                          ],
+                          "available_data_row_count": 2,
+                          "returned_data_row_count": 2,
+                          "record_offset": 0,
+                          "record_size": 100,
+                          "sampling_ratio": 1
+                        },
+                        {
+                          "visualization_id": "viz-002",
+                          "visualization_name": "Monthly Trend",
+                          "column_names": [
+                            "Month",
+                            "Revenue"
+                          ],
+                          "data_rows": [
+                            [
+                              "January",
+                              420000
+                            ],
+                            [
+                              "February",
+                              385000
+                            ]
+                          ],
+                          "available_data_row_count": 12,
+                          "returned_data_row_count": 2,
+                          "record_offset": 0,
+                          "record_size": 100,
+                          "sampling_ratio": 1
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             }
@@ -4388,6 +5231,40 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SearchDataResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Search query results returned",
+                    "value": {
+                      "contents": [
+                        {
+                          "column_names": [
+                            "Region",
+                            "Total Sales"
+                          ],
+                          "data_rows": [
+                            [
+                              "Northeast",
+                              5250000
+                            ],
+                            [
+                              "Southeast",
+                              3890000
+                            ],
+                            [
+                              "West",
+                              4050000
+                            ]
+                          ],
+                          "available_data_row_count": 3,
+                          "returned_data_row_count": 3,
+                          "record_offset": 0,
+                          "record_size": 50,
+                          "sampling_ratio": 1
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             }
@@ -4513,6 +5390,18 @@
               "application/json": {
                 "schema": {
                   "type": "object"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "dbt connection created successfully",
+                    "value": {
+                      "dbt_connection_identifier": "dbt-a1b2c3d4-e5f6",
+                      "project_name": "my-dbt-project",
+                      "connection_name": "Production Snowflake",
+                      "cdw_database": "ANALYTICS",
+                      "import_type": "DBT_CLOUD"
+                    }
+                  }
                 }
               }
             }
@@ -4600,6 +5489,16 @@
               "application/json": {
                 "schema": {
                   "type": "object"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "dbt TML sync completed successfully",
+                    "value": {
+                      "status": "SUCCESS",
+                      "synced_models": 5,
+                      "failed_models": 0
+                    }
+                  }
                 }
               }
             }
@@ -4708,6 +5607,20 @@
               "application/json": {
                 "schema": {
                   "type": "object"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "TML generated from dbt models",
+                    "value": {
+                      "status": "SUCCESS",
+                      "generated_tml": [
+                        {
+                          "model_name": "stg_orders",
+                          "tml": "{\"worksheet\":{\"name\":\"stg_orders\"}}"
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             }
@@ -4773,6 +5686,22 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/DbtSearchResponse"
+                  }
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "List all dbt connections",
+                    "value": [
+                      {
+                        "dbt_connection_identifier": "dbt-a1b2c3d4-e5f6",
+                        "project_name": "my-dbt-project",
+                        "connection_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                        "connection_name": "Production Snowflake",
+                        "cdw_database": "ANALYTICS",
+                        "import_type": "DBT_CLOUD",
+                        "author_name": "john_doe"
+                      }
+                    ]
                   }
                 }
               }
@@ -5041,6 +5970,24 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CreateEmailCustomizationResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Email customization created successfully",
+                    "value": {
+                      "tenant_id": "tenant-abc123",
+                      "org": {
+                        "name": "Primary",
+                        "id": 0
+                      },
+                      "name": "Primary Email Customization",
+                      "template_properties": {
+                        "product_name": "MyAnalytics",
+                        "primary_bg_color": "#1a73e8",
+                        "logo_url": "https://cdn.example.com/logo.png"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -5230,6 +6177,32 @@
                   "items": {
                     "$ref": "#/components/schemas/CreateEmailCustomizationResponse"
                   }
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Get email customization for all orgs",
+                    "value": [
+                      {
+                        "tenant_id": "tenant-abc123",
+                        "org": {
+                          "name": "Primary",
+                          "id": 0
+                        },
+                        "name": "Primary Email Customization",
+                        "template_properties": {
+                          "product_name": "MyAnalytics",
+                          "primary_bg_color": "#1a73e8",
+                          "cta_button_bg_color": "#1a73e8",
+                          "cta_text_font_color": "#ffffff",
+                          "home_url": "https://analytics.example.com",
+                          "logo_url": "https://cdn.example.com/logo.png",
+                          "font_family": "Arial, sans-serif",
+                          "footer_address": "123 Main St, San Francisco, CA",
+                          "hide_privacy_policy": false
+                        }
+                      }
+                    ]
+                  }
                 }
               }
             }
@@ -5405,6 +6378,37 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UserGroupResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "User group created successfully",
+                    "value": {
+                      "id": "b25ee394-9d13-49e3-9385-cd97f5b253b4",
+                      "name": "Sales Team",
+                      "display_name": "Sales Team",
+                      "description": "Group for all sales personnel",
+                      "type": "LOCAL_GROUP",
+                      "visibility": "SHARABLE",
+                      "privileges": [
+                        "DATADOWNLOADING"
+                      ],
+                      "users": [
+                        {
+                          "id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                          "name": "john_doe"
+                        },
+                        {
+                          "id": "7f5e7f87-09a1-487c-a1da-c4bb35e45270",
+                          "name": "jane_smith"
+                        }
+                      ],
+                      "sub_groups": [],
+                      "creation_time_in_millis": 1724277430000,
+                      "modification_time_in_millis": 1724277430000,
+                      "system_group": false,
+                      "deleted": false
+                    }
+                  }
                 }
               }
             }
@@ -5544,6 +6548,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ImportUserGroupsResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Dry run result showing groups that would be modified",
+                    "value": {
+                      "groups_added": [
+                        {
+                          "id": "new-group-guid-1",
+                          "name": "sales-team"
+                        }
+                      ],
+                      "groups_deleted": [],
+                      "groups_updated": []
+                    }
+                  }
                 }
               }
             }
@@ -5619,6 +6638,59 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/UserGroupResponse"
+                  }
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Search all user groups",
+                    "value": [
+                      {
+                        "id": "b25ee394-9d13-49e3-9385-cd97f5b253b4",
+                        "name": "Sales Team",
+                        "display_name": "Sales Team",
+                        "description": "Group for all sales personnel",
+                        "type": "LOCAL_GROUP",
+                        "visibility": "SHARABLE",
+                        "privileges": [
+                          "DATADOWNLOADING"
+                        ],
+                        "users": [
+                          {
+                            "id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                            "name": "john_doe"
+                          }
+                        ],
+                        "sub_groups": [],
+                        "orgs": [
+                          {
+                            "id": "0",
+                            "name": "Primary"
+                          }
+                        ],
+                        "creation_time_in_millis": 1685441468684,
+                        "modification_time_in_millis": 1685441468684,
+                        "system_group": false,
+                        "deleted": false
+                      },
+                      {
+                        "id": "c36ff495-ae24-5ae4-a496-de08a6c364c5",
+                        "name": "Analytics Users",
+                        "display_name": "Analytics Users",
+                        "description": "Group for analytics team",
+                        "type": "LOCAL_GROUP",
+                        "visibility": "SHARABLE",
+                        "privileges": [
+                          "DATADOWNLOADING",
+                          "USERDATAUPLOADING"
+                        ],
+                        "users": [],
+                        "sub_groups": [],
+                        "creation_time_in_millis": 1685441468684,
+                        "modification_time_in_millis": 1685441468684,
+                        "system_group": false,
+                        "deleted": false
+                      }
+                    ]
                   }
                 }
               }
@@ -5746,7 +6818,7 @@
     "/api/rest/2.0/jobs/history/communication-channels/search": {
       "post": {
         "operationId": "searchChannelHistory",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\nSearches delivery history for communication channels such as webhooks. Returns channel-level delivery status for each job execution record. Use this to monitor channel health and delivery success rates across events.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.\n\n**NOTE**: When `channel_type` is `WEBHOOK`, the following constraints apply:\n\n- `job_ids`, `channel_identifiers`, and `events` each accept at most one element.\n- When `job_ids` is provided, it is used as the sole lookup key and other filter fields are ignored.\n- When `job_ids` is not provided, `channel_identifiers` and `events` are both required. Each must contain exactly one element, and the event object must include the `identifier` field.\n- Records older than the configured retention period are not returned.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\nSearches delivery history for communication channels such as webhooks. Returns channel-level delivery status for each job execution record. Use this to monitor channel health and delivery success rates across events.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.\n\n**NOTE**: When `channel_type` is `WEBHOOK`, the following constraints apply:\n\n- `job_ids`, `channel_identifiers`, and `events` each accept at most one element.\n- When `job_ids` is provided, it is used as the sole lookup key and other filter fields are ignored.\n- When `job_ids` is not provided, `channel_identifiers` and `events` are both required, each containing exactly one element.\n- Records older than the configured retention period are not returned.\n- Use `start_epoch_time_in_millis` and/or `end_epoch_time_in_millis` to narrow results to a specific time window.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Jobs",
           "26.4.0.cl"
@@ -5924,6 +6996,25 @@
                   "items": {
                     "$ref": "#/components/schemas/LogResponse"
                   }
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Security audit logs returned",
+                    "value": [
+                      {
+                        "date": "2024-08-21T12:30:00Z",
+                        "log": "{\"type\":\"LOGIN\",\"user\":\"john_doe\",\"ip\":\"192.168.1.100\",\"status\":\"SUCCESS\"}"
+                      },
+                      {
+                        "date": "2024-08-21T12:35:00Z",
+                        "log": "{\"type\":\"OBJECT_SHARE\",\"user\":\"jane_smith\",\"object_id\":\"2ff57a24-cf90-485f-8b4b-45fc17474c6f\",\"recipient\":\"Sales Team\"}"
+                      },
+                      {
+                        "date": "2024-08-21T12:40:00Z",
+                        "log": "{\"type\":\"LOGOUT\",\"user\":\"john_doe\",\"ip\":\"192.168.1.100\"}"
+                      }
+                    ]
+                  }
                 }
               }
             }
@@ -5997,6 +7088,36 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ResponseWorksheetToModelConversion"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Worksheet conversion result",
+                    "value": {
+                      "name": "WorksheetToModelConversion",
+                      "success_count": 1,
+                      "failure_count": 0,
+                      "incomplete_count": 0,
+                      "post_upgrade_failed_count": 0,
+                      "total_time_in_millis": 1250,
+                      "successful_entities": {
+                        "data": [
+                          {
+                            "id": "b3e4f5a6-c7d8-4e9f-a1b2-c3d4e5f6a7b8",
+                            "name": "Sales Analytics"
+                          }
+                        ]
+                      },
+                      "failed_entities": {
+                        "data": []
+                      },
+                      "incomplete_entities": {
+                        "data": []
+                      },
+                      "post_upgrade_failed_entities": {
+                        "data": []
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -6070,6 +7191,14 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ResponseCopyObject"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Object copied successfully",
+                    "value": {
+                      "metadata_id": "d4e5f6a7-b8c9-4d0e-1f2a-3b4c5d6e7f8a"
+                    }
+                  }
                 }
               }
             }
@@ -6222,6 +7351,17 @@
                   "items": {
                     "type": "object"
                   }
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "TML exported successfully",
+                    "value": [
+                      {
+                        "guid": "2ff57a24-cf90-485f-8b4b-45fc17474c6f",
+                        "edoc": "{\"liveboard\":{\"name\":\"Sales Dashboard\",\"visualizations\":[]}}"
+                      }
+                    ]
+                  }
                 }
               }
             }
@@ -6295,6 +7435,22 @@
               "application/json": {
                 "schema": {
                   "type": "object"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Batch TML export result",
+                    "value": {
+                      "batch_offset": 0,
+                      "batch_size": 20,
+                      "total_count": 45,
+                      "objects": [
+                        {
+                          "guid": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                          "edoc": "{\"user\":{\"name\":\"john_doe\",\"display_name\":\"John Doe\"}}"
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             }
@@ -6368,6 +7524,23 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SqlQueryResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "SQL query generated for an Answer",
+                    "value": {
+                      "metadata_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                      "metadata_name": "Revenue Analysis",
+                      "metadata_type": "ANSWER",
+                      "sql_queries": [
+                        {
+                          "metadata_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "metadata_name": "Revenue Analysis",
+                          "sql_query": "SELECT SUM(revenue) as total_revenue, region FROM sales_fact GROUP BY region ORDER BY total_revenue DESC LIMIT 100"
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             }
@@ -6441,6 +7614,47 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetAsyncImportStatusResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Async import task completed",
+                    "value": {
+                      "status_list": [
+                        {
+                          "tenant_id": "tenant-abc123",
+                          "org_id": 0,
+                          "task_id": "task-abc123-def456",
+                          "task_name": "TML Import - Sales Dashboard",
+                          "task_status": "COMPLETED",
+                          "author_id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                          "author_display_name": "Administrator",
+                          "import_policy": "PARTIAL",
+                          "created_at": 1724277000000,
+                          "in_progress_at": 1724277010000,
+                          "completed_at": 1724277030000,
+                          "modified_at": 1724277030000,
+                          "total_object_count": 2,
+                          "object_processed_count": 2,
+                          "import_response": null
+                        }
+                      ],
+                      "last_batch": true
+                    }
+                  },
+                  "example_2": {
+                    "description": "Async import task in progress",
+                    "value": {
+                      "status_list": [
+                        {
+                          "task_id": "task-abc123-def456",
+                          "task_status": "IN_PROGRESS",
+                          "total_object_count": 5,
+                          "object_processed_count": 2
+                        }
+                      ],
+                      "last_batch": true
+                    }
+                  }
                 }
               }
             }
@@ -6514,6 +7728,28 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SqlQueryResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "SQL queries for all visualizations in a Liveboard",
+                    "value": {
+                      "metadata_id": "2ff57a24-cf90-485f-8b4b-45fc17474c6f",
+                      "metadata_name": "Sales Dashboard",
+                      "metadata_type": "LIVEBOARD",
+                      "sql_queries": [
+                        {
+                          "metadata_id": "viz-001",
+                          "metadata_name": "Revenue by Region",
+                          "sql_query": "SELECT SUM(revenue) as total_revenue, region FROM sales_fact GROUP BY region"
+                        },
+                        {
+                          "metadata_id": "viz-002",
+                          "metadata_name": "Orders by Category",
+                          "sql_query": "SELECT product_category, COUNT(*) as order_count FROM orders GROUP BY product_category"
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             }
@@ -6590,6 +7826,27 @@
                   "items": {
                     "type": "object"
                   }
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "TML imported successfully",
+                    "value": [
+                      {
+                        "response": {
+                          "status": {
+                            "status_code": "OK"
+                          },
+                          "object": [
+                            {
+                              "id": "2ff57a24-cf90-485f-8b4b-45fc17474c6f",
+                              "name": "Sales Dashboard",
+                              "type": "LIVEBOARD"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
                 }
               }
             }
@@ -6663,6 +7920,24 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ImportEPackAsyncTaskStatus"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Async import task created",
+                    "value": {
+                      "tenant_id": "tenant-abc123",
+                      "org_id": 0,
+                      "task_id": "task-abc123-def456",
+                      "task_name": "TML Async Import",
+                      "task_status": "IN_QUEUE",
+                      "author_id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                      "author_display_name": "Administrator",
+                      "import_policy": "PARTIAL_OBJECT",
+                      "created_at": 1724277000000,
+                      "total_object_count": 2,
+                      "object_processed_count": 0
+                    }
+                  }
                 }
               }
             }
@@ -6871,6 +8146,202 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/MetadataSearchResponse"
+                  }
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Liveboards with metadata headers (default)",
+                    "value": [
+                      {
+                        "metadata_id": "4145513c-c9bd-4e48-af44-8dc001b5f955",
+                        "metadata_name": "Sales Dashboard",
+                        "metadata_type": "LIVEBOARD",
+                        "metadata_obj_id": "SalesDashboard-4145513c",
+                        "dependent_objects": null,
+                        "incomplete_objects": null,
+                        "metadata_detail": null,
+                        "metadata_header": {
+                          "id": "4145513c-c9bd-4e48-af44-8dc001b5f955",
+                          "name": "Sales Dashboard",
+                          "description": "Monthly sales performance dashboard",
+                          "author": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                          "authorName": "tsadmin",
+                          "authorDisplayName": "Administrator",
+                          "created": 1640112926087,
+                          "modified": 1724277430000,
+                          "modifiedBy": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                          "owner": "4145513c-c9bd-4e48-af44-8dc001b5f955",
+                          "isDeleted": false,
+                          "isHidden": false,
+                          "isAutoCreated": false,
+                          "isAutoDelete": false,
+                          "isExternal": false,
+                          "isDeprecated": false,
+                          "isSharedViaConnection": false,
+                          "isVerified": false,
+                          "isVersioningEnabled": false,
+                          "isPublished": false,
+                          "hasTabs": false,
+                          "modelVersion": "V2",
+                          "hasMandatoryFilter": false,
+                          "isMandatoryFilterValueSelected": true,
+                          "totalContainerCount": 6,
+                          "indexVersion": 2903279,
+                          "generationNum": 4175059,
+                          "orgIds": [
+                            0
+                          ],
+                          "ownerOrgId": 0,
+                          "objId": "SalesDashboard-4145513c",
+                          "tags": [
+                            {
+                              "id": "ea0fa175-f387-4d9e-97b6-e79c4b4d82b2",
+                              "name": "finance",
+                              "clientState": {
+                                "color": "#c2d578"
+                              },
+                              "isDeleted": false,
+                              "isHidden": false
+                            }
+                          ],
+                          "aiAnswerGenerationDisabled": false,
+                          "syncWithSource": false,
+                          "csrProtected": false,
+                          "resolvedObjects": {}
+                        },
+                        "visualization_headers": null,
+                        "stats": null
+                      },
+                      {
+                        "metadata_id": "9b815531-ccb0-480e-b0fa-85e036d7377f",
+                        "metadata_name": "Revenue Analysis",
+                        "metadata_type": "LIVEBOARD",
+                        "metadata_obj_id": "RevenueAnalysis-9b815531",
+                        "dependent_objects": null,
+                        "incomplete_objects": null,
+                        "metadata_detail": null,
+                        "metadata_header": {
+                          "id": "9b815531-ccb0-480e-b0fa-85e036d7377f",
+                          "name": "Revenue Analysis",
+                          "description": "",
+                          "author": "7f5e7f87-09a1-487c-a1da-c4bb35e45270",
+                          "authorName": "jane_smith",
+                          "authorDisplayName": "Jane Smith",
+                          "created": 1641226956140,
+                          "modified": 1641226956140,
+                          "modifiedBy": "7f5e7f87-09a1-487c-a1da-c4bb35e45270",
+                          "owner": "9b815531-ccb0-480e-b0fa-85e036d7377f",
+                          "isDeleted": false,
+                          "isHidden": false,
+                          "isAutoCreated": false,
+                          "isAutoDelete": false,
+                          "isExternal": false,
+                          "isDeprecated": false,
+                          "isSharedViaConnection": false,
+                          "isVerified": false,
+                          "isVersioningEnabled": false,
+                          "isPublished": false,
+                          "hasTabs": true,
+                          "modelVersion": "V2",
+                          "hasMandatoryFilter": false,
+                          "isMandatoryFilterValueSelected": true,
+                          "totalContainerCount": 5,
+                          "indexVersion": 302968,
+                          "generationNum": 4175270,
+                          "orgIds": [
+                            0
+                          ],
+                          "ownerOrgId": 0,
+                          "objId": "RevenueAnalysis-9b815531",
+                          "tags": [],
+                          "aiAnswerGenerationDisabled": false,
+                          "syncWithSource": false,
+                          "csrProtected": false,
+                          "resolvedObjects": {}
+                        },
+                        "visualization_headers": null,
+                        "stats": null
+                      }
+                    ]
+                  },
+                  "example_2": {
+                    "description": "Worksheets with stats and dependent objects",
+                    "value": [
+                      {
+                        "metadata_id": "b3e4f5a6-c7d8-4e9f-a1b2-c3d4e5f6a7b8",
+                        "metadata_name": "Sales Analytics",
+                        "metadata_type": "LOGICAL_TABLE",
+                        "metadata_obj_id": "SalesAnalytics-b3e4f5a6",
+                        "dependent_objects": {
+                          "dependents": [
+                            {
+                              "id": "4145513c-c9bd-4e48-af44-8dc001b5f955",
+                              "name": "Sales Dashboard",
+                              "type": "PINBOARD_ANSWER_BOOK"
+                            }
+                          ],
+                          "total_count": 1
+                        },
+                        "incomplete_objects": null,
+                        "metadata_detail": null,
+                        "metadata_header": {
+                          "id": "b3e4f5a6-c7d8-4e9f-a1b2-c3d4e5f6a7b8",
+                          "name": "Sales Analytics",
+                          "description": "Comprehensive sales worksheet",
+                          "author": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                          "authorName": "tsadmin",
+                          "authorDisplayName": "Administrator",
+                          "created": 1640112926087,
+                          "modified": 1724277430000,
+                          "modifiedBy": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                          "owner": "b3e4f5a6-c7d8-4e9f-a1b2-c3d4e5f6a7b8",
+                          "isDeleted": false,
+                          "isHidden": false,
+                          "isAutoCreated": false,
+                          "isAutoDelete": false,
+                          "isExternal": false,
+                          "isDeprecated": false,
+                          "isSharedViaConnection": false,
+                          "isVerified": false,
+                          "isVersioningEnabled": false,
+                          "isPublished": false,
+                          "indexVersion": 2903279,
+                          "generationNum": 4175059,
+                          "orgIds": [
+                            0
+                          ],
+                          "ownerOrgId": 0,
+                          "tags": [],
+                          "aiAnswerGenerationDisabled": false,
+                          "syncWithSource": false,
+                          "csrProtected": false,
+                          "resolvedObjects": {}
+                        },
+                        "visualization_headers": null,
+                        "stats": {
+                          "views": 1250,
+                          "favorites": 34,
+                          "last_accessed": 1724277430000
+                        }
+                      }
+                    ]
+                  },
+                  "example_3": {
+                    "description": "Answers without headers (minimal response)",
+                    "value": [
+                      {
+                        "metadata_id": "c4d5e6f7-a8b9-4c0d-e1f2-a3b4c5d6e7f8",
+                        "metadata_name": "Monthly Revenue by Region",
+                        "metadata_type": "ANSWER",
+                        "metadata_obj_id": null,
+                        "dependent_objects": null,
+                        "incomplete_objects": null,
+                        "metadata_detail": null,
+                        "metadata_header": null,
+                        "visualization_headers": null,
+                        "stats": null
+                      }
+                    ]
                   }
                 }
               }
@@ -7146,6 +8617,7 @@
                 },
                 "examples": {
                   "example_1": {
+                    "description": "Org created successfully",
                     "value": {
                       "id": 1980035173,
                       "name": "test_org",
@@ -7442,7 +8914,7 @@
     "/api/rest/2.0/report/answer": {
       "post": {
         "operationId": "exportAnswerReport",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.\n\nRequires at least view access to the Answer.\n\n#### Usage guidelines\n\nIn the request body, the GUID or name of the Answer and set `file_format`. The default file format is CSV.\n\n**NOTE**:\n* The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.\n* HTML rendering is not supported for PDF exports of Answers with tables.\n\nOptionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  \n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.\n\nRequires at least view access to the Answer.\n\n#### Usage guidelines\n\nIn the request body, specify the GUID or name of the Answer and set `file_format`. The default file format is CSV.\n\nUse the `type` parameter to specify whether the Answer being exported is a saved Answer (`SAVED`) or a pinned Answer on a Liveboard (`PINNED`). Defaults to `SAVED`. When using `PINNED`, the `metadata_identifier` must be the container id.\n\n**NOTE**:\n* The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.\n* HTML rendering is not supported for PDF exports of Answers with tables.\n\nOptionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  \n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Reports",
           "9.0.0.cl"
@@ -7603,6 +9075,32 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/RoleResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Role created successfully",
+                    "value": {
+                      "id": "d3f8c4a2-6b9e-4d7f-a1c3-8e5b2f7d4a9c",
+                      "name": "Data Analyst",
+                      "description": "Role for data analysts with download and search permissions",
+                      "privileges": [
+                        "DATADOWNLOADING",
+                        "USERDATAUPLOADING"
+                      ],
+                      "groups_assigned_count": 0,
+                      "groups": [],
+                      "orgs": [
+                        {
+                          "id": "0",
+                          "name": "Primary"
+                        }
+                      ],
+                      "creation_time_in_millis": 1724277430000,
+                      "modification_time_in_millis": 1724277430000,
+                      "deleted": false,
+                      "deprecated": false
+                    }
+                  }
                 }
               }
             }
@@ -7745,6 +9243,39 @@
                   "items": {
                     "$ref": "#/components/schemas/SearchRoleResponse"
                   }
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Search all roles",
+                    "value": [
+                      {
+                        "id": "d3f8c4a2-6b9e-4d7f-a1c3-8e5b2f7d4a9c",
+                        "name": "Data Analyst",
+                        "description": "Role for data analysts with download and search permissions",
+                        "privileges": [
+                          "DATADOWNLOADING",
+                          "USERDATAUPLOADING"
+                        ],
+                        "groups_assigned_count": 2,
+                        "groups": [
+                          {
+                            "id": "b25ee394-9d13-49e3-9385-cd97f5b253b4",
+                            "name": "Analytics Users"
+                          }
+                        ],
+                        "orgs": [
+                          {
+                            "id": "0",
+                            "name": "Primary"
+                          }
+                        ],
+                        "creation_time_in_millis": 1685441468684,
+                        "modification_time_in_millis": 1685441468684,
+                        "deleted": false,
+                        "deprecated": false
+                      }
+                    ]
+                  }
                 }
               }
             }
@@ -7828,6 +9359,25 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/RoleResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Role updated successfully",
+                    "value": {
+                      "id": "d3f8c4a2-6b9e-4d7f-a1c3-8e5b2f7d4a9c",
+                      "name": "Senior Data Analyst",
+                      "description": "Role for senior data analysts with extended permissions",
+                      "privileges": [
+                        "DATADOWNLOADING",
+                        "USERDATAUPLOADING",
+                        "A3ANALYSIS"
+                      ],
+                      "groups_assigned_count": 2,
+                      "creation_time_in_millis": 1685441468684,
+                      "modification_time_in_millis": 1724277430000,
+                      "deleted": false
+                    }
+                  }
                 }
               }
             }
@@ -7901,6 +9451,55 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ResponseSchedule"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Schedule created successfully",
+                    "value": {
+                      "id": "sch-a1b2c3d4-e5f6",
+                      "name": "Weekly Sales Report",
+                      "description": "Weekly PDF report for the sales team",
+                      "file_format": "PDF",
+                      "status": "ACTIVE",
+                      "time_zone": "America/New_York",
+                      "frequency": {
+                        "cron_expression": {
+                          "day_of_month": "?",
+                          "day_of_week": "MON",
+                          "hour": "8",
+                          "minute": "0",
+                          "month": "*",
+                          "second": "0"
+                        }
+                      },
+                      "metadata": {
+                        "id": "2ff57a24-cf90-485f-8b4b-45fc17474c6f",
+                        "name": "Sales Dashboard",
+                        "type": "LIVEBOARD"
+                      },
+                      "recipient_details": {
+                        "emails": [
+                          "sales@example.com"
+                        ],
+                        "principals": [
+                          {
+                            "identifier": "Sales Team",
+                            "type": "USER_GROUP"
+                          }
+                        ]
+                      },
+                      "pdf_options": {
+                        "include_cover_page": true,
+                        "page_orientation": "LANDSCAPE",
+                        "page_size": "A4"
+                      },
+                      "author": {
+                        "id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                        "name": "john_doe"
+                      },
+                      "creation_time_in_millis": 1724277430000
+                    }
+                  }
                 }
               }
             }
@@ -8042,6 +9641,52 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/ResponseSchedule"
+                  }
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Search all active schedules",
+                    "value": [
+                      {
+                        "id": "sch-a1b2c3d4-e5f6",
+                        "name": "Weekly Sales Report",
+                        "description": "Weekly PDF report for the sales team",
+                        "file_format": "PDF",
+                        "frequency": {
+                          "cron_expression": {
+                            "day_of_month": "?",
+                            "day_of_week": "MON",
+                            "hour": "8",
+                            "minute": "0",
+                            "month": "*",
+                            "second": "0"
+                          }
+                        },
+                        "metadata": {
+                          "id": "2ff57a24-cf90-485f-8b4b-45fc17474c6f",
+                          "name": "Sales Dashboard",
+                          "type": "LIVEBOARD"
+                        },
+                        "recipient_details": {
+                          "emails": [
+                            "sales@example.com"
+                          ],
+                          "principals": [
+                            {
+                              "identifier": "Sales Team",
+                              "type": "USER_GROUP"
+                            }
+                          ]
+                        },
+                        "status": "ACTIVE",
+                        "time_zone": "America/New_York",
+                        "author": {
+                          "id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                          "name": "john_doe"
+                        },
+                        "creation_time_in_millis": 1685441468684
+                      }
+                    ]
                   }
                 }
               }
@@ -8261,6 +9906,51 @@
                   "items": {
                     "$ref": "#/components/schemas/ColumnSecurityRuleResponse"
                   }
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Column security rules for a table",
+                    "value": [
+                      {
+                        "table_guid": "b3e4f5a6-c7d8-4e9f-a1b2-c3d4e5f6a7b8",
+                        "obj_id": "SALES_FACT",
+                        "column_security_rules": [
+                          {
+                            "column": {
+                              "id": "col-a1b2c3d4-e5f6",
+                              "name": "SALARY"
+                            },
+                            "groups": [
+                              {
+                                "id": "b25ee394-9d13-49e3-9385-cd97f5b253b4",
+                                "name": "HR Team"
+                              }
+                            ],
+                            "source_table_details": {
+                              "id": "b3e4f5a6-c7d8-4e9f-a1b2-c3d4e5f6a7b8",
+                              "name": "SALES_FACT"
+                            }
+                          },
+                          {
+                            "column": {
+                              "id": "col-b2c3d4e5-f6a7",
+                              "name": "SSN"
+                            },
+                            "groups": [
+                              {
+                                "id": "c36ff495-ae24-5ae4-a496-de08a6c364c5",
+                                "name": "Admin Group"
+                              }
+                            ],
+                            "source_table_details": {
+                              "id": "b3e4f5a6-c7d8-4e9f-a1b2-c3d4e5f6a7b8",
+                              "name": "SALES_FACT"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
                 }
               }
             }
@@ -8334,6 +10024,31 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ObjectPrivilegesOfMetadataResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Fetch object privileges for a logical table",
+                    "value": {
+                      "metadata_object_privileges": {
+                        "metadata_privilege_details": [
+                          {
+                            "metadata_id": "b3e4f5a6-c7d8-4e9f-a1b2-c3d4e5f6a7b8",
+                            "metadata_type": "LOGICAL_TABLE",
+                            "principal_privileges": [
+                              {
+                                "principal_id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                                "principal_name": "john_doe",
+                                "principal_type": "USER",
+                                "object_privileges": [
+                                  "SPOTTER_COACHING_PRIVILEGE"
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -9261,6 +10976,19 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SystemOverrideInfo"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Returns system configuration override details",
+                    "value": {
+                      "config_override_info": {
+                        "disable_cors": false,
+                        "enableColumnLevelSecurity": true,
+                        "maxRowsInExport": 100000,
+                        "sessionTimeout": 86400
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -9640,6 +11368,46 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CommunicationChannelValidateResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Webhook validation successful",
+                    "value": {
+                      "channel_type": "WEBHOOK",
+                      "channel_id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+                      "channel_name": "My Liveboard Webhook",
+                      "event_type": "LIVEBOARD_SCHEDULE",
+                      "job_id": "job-abc123-def456",
+                      "result_code": "SUCCESS",
+                      "details": [
+                        {
+                          "validation_step": "HTTP_CONNECTION_CHECK",
+                          "status": "SUCCESS",
+                          "http_status": 200,
+                          "error_message": null
+                        }
+                      ]
+                    }
+                  },
+                  "example_2": {
+                    "description": "Webhook validation failed",
+                    "value": {
+                      "channel_type": "WEBHOOK",
+                      "channel_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                      "channel_name": "Failed Webhook",
+                      "event_type": "LIVEBOARD_SCHEDULE",
+                      "job_id": "job-xyz789-uvw012",
+                      "result_code": "FAILED",
+                      "details": [
+                        {
+                          "validation_step": "HTTP_CONNECTION_CHECK",
+                          "status": "FAILED",
+                          "http_status": 404,
+                          "error_message": "Connection refused: target URL unreachable"
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             }
@@ -9782,6 +11550,7 @@
                 },
                 "examples": {
                   "example_1": {
+                    "description": "Tag created successfully",
                     "value": {
                       "name": "test5",
                       "id": "6abf5aec-3485-4f83-b25f-8c55b92e2b20",
@@ -10188,6 +11957,22 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/User"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "User activated successfully",
+                    "value": {
+                      "id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                      "name": "john_doe",
+                      "display_name": "John Doe",
+                      "visibility": "SHARABLE",
+                      "account_type": "LOCAL_USER",
+                      "account_status": "ACTIVE",
+                      "email": "john.doe@example.com",
+                      "creation_time_in_millis": 1724277430000,
+                      "modification_time_in_millis": 1724277430000
+                    }
+                  }
                 }
               }
             }
@@ -10327,6 +12112,24 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/User"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "User created successfully",
+                    "value": {
+                      "id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                      "name": "john_doe",
+                      "display_name": "John Doe",
+                      "visibility": "SHARABLE",
+                      "account_type": "LOCAL_USER",
+                      "account_status": "ACTIVE",
+                      "email": "john.doe@example.com",
+                      "creation_time_in_millis": 1724277430000,
+                      "modification_time_in_millis": 1724277430000,
+                      "author_id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                      "complete_detail": true
+                    }
+                  }
                 }
               }
             }
@@ -10400,6 +12203,14 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ResponseActivationURL"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "User deactivated and activation link returned",
+                    "value": {
+                      "activation_link": "https://your-thoughtspot-instance.thoughtspot.cloud/activate?token=abc123xyz"
+                    }
+                  }
                 }
               }
             }
@@ -10605,6 +12416,25 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ImportUsersResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Dry run result showing users that would be created/updated",
+                    "value": {
+                      "users_added": [
+                        {
+                          "id": "new-user-guid-1",
+                          "name": "alice_wonder"
+                        },
+                        {
+                          "id": "new-user-guid-2",
+                          "name": "bob_builder"
+                        }
+                      ],
+                      "users_deleted": [],
+                      "users_updated": []
+                    }
+                  }
                 }
               }
             }
@@ -10746,6 +12576,43 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/User"
+                  }
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Search all active local users",
+                    "value": [
+                      {
+                        "id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                        "name": "john_doe",
+                        "display_name": "John Doe",
+                        "visibility": "SHARABLE",
+                        "account_type": "LOCAL_USER",
+                        "account_status": "ACTIVE",
+                        "email": "john.doe@example.com",
+                        "creation_time_in_millis": 1685441468684,
+                        "modification_time_in_millis": 1685441468684,
+                        "author_id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                        "complete_detail": true,
+                        "current_org": {
+                          "id": 0,
+                          "name": "Primary"
+                        }
+                      },
+                      {
+                        "id": "7f5e7f87-09a1-487c-a1da-c4bb35e45270",
+                        "name": "jane_smith",
+                        "display_name": "Jane Smith",
+                        "visibility": "SHARABLE",
+                        "account_type": "LOCAL_USER",
+                        "account_status": "ACTIVE",
+                        "email": "jane.smith@example.com",
+                        "creation_time_in_millis": 1685441468684,
+                        "modification_time_in_millis": 1685441468684,
+                        "author_id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                        "complete_detail": true
+                      }
+                    ]
                   }
                 }
               }
@@ -10896,6 +12763,18 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Variable"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Variable created successfully",
+                    "value": {
+                      "id": "var-a1b2c3d4-e5f6",
+                      "name": "warehouse_config",
+                      "variable_type": "CONNECTION_PROPERTY",
+                      "sensitive": false,
+                      "values": []
+                    }
+                  }
                 }
               }
             }
@@ -11181,6 +13060,33 @@
                   "items": {
                     "$ref": "#/components/schemas/Variable"
                   }
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Search all connection property variables",
+                    "value": [
+                      {
+                        "id": "var-a1b2c3d4-e5f6",
+                        "name": "warehouse_config",
+                        "variable_type": "CONNECTION_PROPERTY",
+                        "sensitive": false,
+                        "values": [
+                          {
+                            "value": "COMPUTE_WH",
+                            "org_identifier": "Primary",
+                            "priority": 1
+                          }
+                        ]
+                      },
+                      {
+                        "id": "var-b2c3d4e5-f6g7",
+                        "name": "db_password",
+                        "variable_type": "CONNECTION_PROPERTY",
+                        "sensitive": true,
+                        "values": []
+                      }
+                    ]
+                  }
                 }
               }
             }
@@ -11397,6 +13303,32 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CommitResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Objects committed to branch successfully",
+                    "value": {
+                      "committer": {
+                        "email": "service@github.com",
+                        "username": "ts-service-account"
+                      },
+                      "author": {
+                        "email": "admin@example.com",
+                        "username": "tsadmin"
+                      },
+                      "comment": "Add Q1 2024 sales dashboard",
+                      "commit_time": "2024-08-21T12:30:00Z",
+                      "commit_id": "a1b2c3d4e5f6789012345678901234567890abcd",
+                      "branch": "main",
+                      "committed_files": [
+                        {
+                          "file_name": "Liveboard/Sales_Dashboard.liveboard.tml",
+                          "status_code": "OK",
+                          "status_message": "File committed successfully"
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             }
@@ -11470,6 +13402,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/RepoConfigObject"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Version control configuration created successfully",
+                    "value": {
+                      "repository_url": "https://github.com/mycompany/thoughtspot-content.git",
+                      "username": "ts-service-account",
+                      "commit_branch_name": "main",
+                      "branches": [
+                        "main",
+                        "development"
+                      ],
+                      "enable_guid_mapping": true,
+                      "configuration_branch_name": "ts_config_files",
+                      "org": {
+                        "id": 0,
+                        "name": "Primary"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11612,6 +13564,20 @@
                   "items": {
                     "$ref": "#/components/schemas/DeployResponse"
                   }
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Commit deployed successfully",
+                    "value": [
+                      {
+                        "file_name": "Liveboard/Sales_Dashboard.liveboard.tml",
+                        "metadata_name": "Sales Dashboard",
+                        "metadata_type": "LIVEBOARD",
+                        "status_code": "OK",
+                        "status_message": "Deployed successfully"
+                      }
+                    ]
+                  }
                 }
               }
             }
@@ -11695,6 +13661,40 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/RevertResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Commit reverted successfully",
+                    "value": {
+                      "committer": {
+                        "email": "service@github.com",
+                        "username": "ts-service-account"
+                      },
+                      "author": {
+                        "email": "admin@example.com",
+                        "username": "tsadmin"
+                      },
+                      "comment": "Revert to commit abc123def456",
+                      "commit_time": "2024-08-21T13:00:00Z",
+                      "commit_id": "def456abc789012345678901234567890abcdef",
+                      "branch": "main",
+                      "committed_files": [
+                        {
+                          "file_name": "Liveboard/Sales_Dashboard.liveboard.tml",
+                          "status_code": "OK"
+                        }
+                      ],
+                      "reverted_metadata": [
+                        {
+                          "file_name": "Liveboard/Sales_Dashboard.liveboard.tml",
+                          "metadata_name": "Sales Dashboard",
+                          "metadata_type": "LIVEBOARD",
+                          "status_code": "OK",
+                          "status_message": "Successfully reverted"
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             }
@@ -11770,6 +13770,41 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/CommitHistoryResponse"
+                  }
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Commit history for a Liveboard",
+                    "value": [
+                      {
+                        "committer": {
+                          "email": "service@github.com",
+                          "username": "ts-service-account"
+                        },
+                        "author": {
+                          "email": "admin@example.com",
+                          "username": "tsadmin"
+                        },
+                        "comment": "Add Q1 2024 sales dashboard",
+                        "commit_time": "2024-08-21T12:30:00Z",
+                        "commit_id": "a1b2c3d4e5f6789012345678901234567890abcd",
+                        "branch": "main"
+                      },
+                      {
+                        "committer": {
+                          "email": "service@github.com",
+                          "username": "ts-service-account"
+                        },
+                        "author": {
+                          "email": "john.doe@example.com",
+                          "username": "john_doe"
+                        },
+                        "comment": "Update visualization layout",
+                        "commit_time": "2024-08-15T09:15:00Z",
+                        "commit_id": "b2c3d4e5f678901234567890123456789012abcd",
+                        "branch": "main"
+                      }
+                    ]
                   }
                 }
               }
@@ -11847,6 +13882,29 @@
                   "items": {
                     "$ref": "#/components/schemas/RepoConfigObject"
                   }
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Search version control configurations",
+                    "value": [
+                      {
+                        "repository_url": "https://github.com/mycompany/thoughtspot-content.git",
+                        "username": "ts-service-account",
+                        "commit_branch_name": "main",
+                        "branches": [
+                          "main",
+                          "development",
+                          "staging"
+                        ],
+                        "enable_guid_mapping": true,
+                        "configuration_branch_name": "ts_config_files",
+                        "org": {
+                          "id": 0,
+                          "name": "Primary"
+                        }
+                      }
+                    ]
+                  }
                 }
               }
             }
@@ -11920,6 +13978,23 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/RepoConfigObject"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Version control configuration updated successfully",
+                    "value": {
+                      "repository_url": "https://github.com/mycompany/thoughtspot-content.git",
+                      "username": "ts-service-account",
+                      "commit_branch_name": "main",
+                      "branches": [
+                        "main",
+                        "development",
+                        "staging"
+                      ],
+                      "enable_guid_mapping": true,
+                      "configuration_branch_name": "ts_config_files"
+                    }
+                  }
                 }
               }
             }
@@ -11995,6 +14070,27 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/DeployResponse"
+                  }
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Merge validation result",
+                    "value": [
+                      {
+                        "file_name": "Liveboard/Sales_Dashboard.liveboard.tml",
+                        "metadata_name": "Sales Dashboard",
+                        "metadata_type": "LIVEBOARD",
+                        "status_code": "OK",
+                        "status_message": "No conflicts found"
+                      },
+                      {
+                        "file_name": "Answer/Revenue_Analysis.answer.tml",
+                        "metadata_name": "Revenue Analysis",
+                        "metadata_type": "ANSWER",
+                        "status_code": "CONFLICT",
+                        "status_message": "Merge conflict detected in visualization settings"
+                      }
+                    ]
                   }
                 }
               }
@@ -12314,7 +14410,7 @@
                         {
                           "id": "a3f7c1e4-9b2d-4a6e-8f3c-1e5b7a9c4f2e",
                           "name": "Non-existent Webhook",
-                          "error_message": "Webhook not found or access denied"
+                          "error": "Webhook not found or access denied"
                         }
                       ]
                     }
@@ -12657,6 +14753,116 @@
             "description": "Unique identifier of the user to whom the token is issued."
           }
         }
+      },
+      "SearchAuthSettingsResponse": {
+        "type": "object",
+        "properties": {
+          "auth_type": {
+            "type": "string",
+            "enum": [
+              "TRUSTED_AUTH"
+            ],
+            "description": "Type of authentication mechanism returned.",
+            "nullable": true
+          },
+          "cluster_preferences": {
+            "$ref": "#/components/schemas/AuthClusterPreferences",
+            "description": "Cluster-level authentication configuration. Present when cluster scope was requested and the caller has ADMINISTRATION or CONTROL_TRUSTED_AUTH privilege.",
+            "nullable": true
+          },
+          "org_preferences": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AuthOrgPreference"
+            },
+            "description": "Org-level authentication configurations. Present when org scope was requested and per-org auth feature is enabled.",
+            "nullable": true
+          }
+        },
+        "description": "Response for searchAuthSettings. Contains auth type and cluster/org-level preferences."
+      },
+      "AuthClusterPreferences": {
+        "type": "object",
+        "properties": {
+          "auth_status": {
+            "type": "string",
+            "enum": [
+              "ENABLED",
+              "DISABLED"
+            ],
+            "description": "Whether authentication is enabled or disabled at the cluster level.",
+            "nullable": true
+          },
+          "access_tokens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AuthSettingsAccessToken"
+            },
+            "description": "Cluster-level access tokens. Absent when no token is configured.",
+            "nullable": true
+          }
+        },
+        "description": "Cluster-level authentication preferences."
+      },
+      "AuthSettingsAccessToken": {
+        "type": "object",
+        "required": [
+          "key"
+        ],
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "The plaintext token key value."
+          }
+        },
+        "description": "An auth settings access token."
+      },
+      "AuthOrgPreference": {
+        "type": "object",
+        "properties": {
+          "org": {
+            "$ref": "#/components/schemas/AuthOrgInfo",
+            "description": "Org identifier details.",
+            "nullable": true
+          },
+          "auth_status": {
+            "type": "string",
+            "enum": [
+              "ENABLED",
+              "DISABLED"
+            ],
+            "description": "Whether authentication is enabled or disabled for this org.",
+            "nullable": true
+          },
+          "access_tokens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AuthSettingsAccessToken"
+            },
+            "description": "Org-level access tokens. Absent when no token is configured or the feature flag is off.",
+            "nullable": true
+          }
+        },
+        "description": "Org-level authentication preferences for a single org."
+      },
+      "AuthOrgInfo": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Unique identifier of the org."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the org.",
+            "nullable": true
+          }
+        },
+        "description": "Org identifier returned in auth settings search results."
       },
       "RiseSetter": {
         "type": "object",
@@ -13383,6 +15589,15 @@
             "$ref": "#/components/schemas/ClusterNonEmbedAccess",
             "description": "Non-embed access configuration at cluster level.",
             "nullable": true
+          },
+          "trusted_auth_status": {
+            "type": "string",
+            "enum": [
+              "ENABLED",
+              "DISABLED"
+            ],
+            "description": "Trusted authentication status at the cluster level. <br/>  <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
+            "nullable": true
           }
         },
         "description": "Cluster-level security preferences."
@@ -13519,6 +15734,15 @@
           "non_embed_access": {
             "$ref": "#/components/schemas/OrgNonEmbedAccess",
             "description": "Non-embed access configuration for this org.",
+            "nullable": true
+          },
+          "trusted_auth_status": {
+            "type": "string",
+            "enum": [
+              "ENABLED",
+              "DISABLED"
+            ],
+            "description": "Trusted authentication status for this org. <br/>  <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
             "nullable": true
           }
         },
@@ -15666,6 +17890,8 @@
                 "CAN_VIEW_FOLDERS",
                 "CAN_MODIDY_FOLDERS",
                 "CAN_MANAGE_VARIABLES",
+                "CAN_MANAGE_AGENTSPOT",
+                "CAN_ACCESS_AGENTSPOT",
                 "PREVIEW_DOCUMENT_SEARCH",
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_MANAGE_WEBHOOKS",
@@ -17896,6 +20122,43 @@
           }
         }
       },
+      "AuthClusterPreferencesInput": {
+        "type": "object",
+        "properties": {
+          "auth_status": {
+            "type": "string",
+            "enum": [
+              "ENABLED",
+              "DISABLED"
+            ],
+            "description": "Enable or disable authentication at the cluster level. When enabled, a new token is generated if one does not exist. When disabled, the existing token is revoked.",
+            "nullable": true
+          }
+        },
+        "description": "Input for cluster-level auth configuration."
+      },
+      "AuthOrgPreferenceInput": {
+        "type": "object",
+        "required": [
+          "org_identifier"
+        ],
+        "properties": {
+          "org_identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the org to configure."
+          },
+          "auth_status": {
+            "type": "string",
+            "enum": [
+              "ENABLED",
+              "DISABLED"
+            ],
+            "description": "Enable or disable authentication for this org. When enabled, a new token is generated if one does not exist. When disabled, the existing token is revoked.",
+            "nullable": true
+          }
+        },
+        "description": "Input for org-level auth configuration."
+      },
       "ResponseActivationURL": {
         "type": "object",
         "properties": {
@@ -17936,7 +20199,6 @@
               "OIDC_USER",
               "REMOTE_USER"
             ],
-            "default": "LOCAL_USER",
             "description": "Type of the user account.",
             "nullable": true
           },
@@ -17950,7 +20212,6 @@
               "PENDING",
               "SUSPENDED"
             ],
-            "default": "ACTIVE",
             "description": "Status of the user account.",
             "nullable": true
           },
@@ -18550,6 +20811,8 @@
                 "CAN_MODIFY_FOLDERS",
                 "CAN_MANAGE_VARIABLES",
                 "CAN_VIEW_FOLDERS",
+                "CAN_MANAGE_AGENTSPOT",
+                "CAN_ACCESS_AGENTSPOT",
                 "PREVIEW_DOCUMENT_SEARCH",
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_DOWNLOAD_VISUALS",
@@ -18646,7 +20909,7 @@
           },
           "include_obj_id": {
             "type": "boolean",
-            "default": true,
+            "default": false,
             "description": "Boolean flag to export Object ID of the object. This flag will work only after the Object ID feature has been enabled. Please contact support to enable the feature.",
             "nullable": true
           },
@@ -19611,6 +21874,8 @@
                 "CAN_MANAGE_VARIABLES",
                 "CAN_MODIFY_FOLDERS",
                 "CAN_VIEW_FOLDERS",
+                "CAN_MANAGE_AGENTSPOT",
+                "CAN_ACCESS_AGENTSPOT",
                 "CAN_SETUP_VERSION_CONTROL",
                 "PREVIEW_THOUGHTSPOT_SAGE",
                 "CAN_MANAGE_WEBHOOKS",
@@ -19735,7 +22000,8 @@
           "page_size": {
             "type": "string",
             "enum": [
-              "A4"
+              "A4",
+              "TAB_BASED"
             ],
             "description": "Page size.",
             "nullable": true
@@ -20071,7 +22337,8 @@
           "page_size": {
             "type": "string",
             "enum": [
-              "A4"
+              "A4",
+              "TAB_BASED"
             ],
             "description": "Page size.",
             "nullable": true
@@ -21471,651 +23738,6 @@
         },
         "description": "List of runtime parameters need to set during the session."
       },
-      "WebhookLiveboardDelivery": {
-        "type": "object",
-        "description": "Single entry point for all LIVEBOARD_SCHEDULE webhook event payloads. ThoughtSpot selects the delivery kind automatically based on webhook configuration.\n\n**KIND 1 — FILE_ATTACHMENT** (webhookDeliveryKind: FILE_ATTACHMENT): Sent as multipart/form-data. The \"payload\" form field carries the JSON event data; exactly one of pdf_files, csv_files, xlsx_files, or other_files carries the binary attachment.\n\n**KIND 2 — STORAGE** (webhookDeliveryKind: STORAGE): Sent as multipart/form-data with two JSON parts. ThoughtSpot uploads files to the customer S3 bucket first, then sends \"payload\" (JSON event data) and \"file_attachments\" (S3 object references). No binary data is delivered to the endpoint.",
-        "required": [
-          "webhookDeliveryKind",
-          "payload"
-        ],
-        "properties": {
-          "webhookDeliveryKind": {
-            "$ref": "#/components/schemas/WebhookDeliveryKind"
-          },
-          "payload": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/WebhookLiveboardPayload"
-              }
-            ],
-            "description": "The structured event data. Always present. HTTP form field name: \"payload\"."
-          },
-          "pdf_files": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/WebhookFileAttachment"
-            },
-            "description": "PDF file attachments (HTTP form field: \"pdf_files\", Content-Type: application/pdf). Present when webhookDeliveryKind is FILE_ATTACHMENT and the schedule file format is PDF."
-          },
-          "csv_files": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/WebhookFileAttachment"
-            },
-            "description": "CSV file attachments (HTTP form field: \"csv_files\", Content-Type: text/csv). Present when webhookDeliveryKind is FILE_ATTACHMENT and the schedule file format is CSV."
-          },
-          "xlsx_files": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/WebhookFileAttachment"
-            },
-            "description": "Excel file attachments (HTTP form field: \"xlsx_files\", Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet). Present when webhookDeliveryKind is FILE_ATTACHMENT and the schedule file format is XLSX."
-          },
-          "other_files": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/WebhookFileAttachment"
-            },
-            "description": "Fallback file attachments for unrecognised extensions (HTTP form field: \"other_files\"). Present when webhookDeliveryKind is FILE_ATTACHMENT and the file format is not PDF, CSV, or XLSX."
-          },
-          "file_attachments": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/WebhookFileAttachmentsPayload"
-              }
-            ],
-            "description": "S3 file references (HTTP form field: \"file_attachments\"). Present when webhookDeliveryKind is STORAGE. Lists each file uploaded to the customer S3 bucket with its upload status and metadata."
-          }
-        }
-      },
-      "WebhookDeliveryKind": {
-        "type": "string",
-        "description": "Identifies which of the two delivery modes a LIVEBOARD_SCHEDULE webhook payload uses. FILE_ATTACHMENT: multipart/form-data with one JSON part (\"payload\") and one binary file part. STORAGE: multipart/form-data with two JSON parts (\"payload\" and \"file_attachments\"); files are already stored in the customer S3 bucket — no binary data is sent to the endpoint.",
-        "enum": [
-          "FILE_ATTACHMENT",
-          "STORAGE"
-        ]
-      },
-      "WebhookLiveboardPayload": {
-        "type": "object",
-        "description": "Top-level payload delivered by ThoughtSpot to the configured webhook endpoint when a LIVEBOARD_SCHEDULE event fires. Sent as an HTTP POST with Content-Type: application/json.",
-        "required": [
-          "eventId",
-          "timestamp",
-          "eventType",
-          "schemaVersion",
-          "source",
-          "actor",
-          "metadataObject",
-          "data"
-        ],
-        "properties": {
-          "eventId": {
-            "type": "string",
-            "description": "Unique identifier for this webhook delivery attempt."
-          },
-          "timestamp": {
-            "type": "string",
-            "description": "ISO 8601 timestamp of when the event was generated.",
-            "example": "2025-04-10T12:00:00Z"
-          },
-          "eventType": {
-            "type": "string",
-            "enum": [
-              "LIVEBOARD_SCHEDULE"
-            ],
-            "description": "Type of event that triggered this webhook delivery."
-          },
-          "schemaVersion": {
-            "type": "string",
-            "description": "Schema version of this payload format.",
-            "example": "1.0"
-          },
-          "source": {
-            "$ref": "#/components/schemas/WebhookPayloadSource"
-          },
-          "actor": {
-            "$ref": "#/components/schemas/WebhookPayloadActor"
-          },
-          "metadataObject": {
-            "$ref": "#/components/schemas/WebhookPayloadMetadataObject"
-          },
-          "data": {
-            "$ref": "#/components/schemas/WebhookLiveboardScheduleData"
-          },
-          "unsubscribeUrl": {
-            "type": "string",
-            "nullable": true,
-            "description": "URL to manage notification preferences. Present for end-user-facing events."
-          }
-        }
-      },
-      "WebhookPayloadSource": {
-        "type": "object",
-        "description": "Source information identifying the ThoughtSpot instance that generated the event.",
-        "required": [
-          "applicationName",
-          "instanceId",
-          "orgId"
-        ],
-        "properties": {
-          "applicationName": {
-            "type": "string",
-            "description": "Name of the application. Always \"ThoughtSpot\".",
-            "example": "ThoughtSpot"
-          },
-          "applicationUrl": {
-            "type": "string",
-            "nullable": true,
-            "description": "Base URL of the ThoughtSpot instance.",
-            "example": "https://mycompany.thoughtspot.cloud"
-          },
-          "instanceId": {
-            "type": "string",
-            "description": "Unique identifier of the ThoughtSpot instance (cluster or deployment ID)."
-          },
-          "orgId": {
-            "type": "string",
-            "description": "Unique identifier of the organization within ThoughtSpot that owns the event."
-          }
-        }
-      },
-      "WebhookPayloadActor": {
-        "type": "object",
-        "description": "Information about the entity that initiated the webhook event. For scheduled Liveboard deliveries, actorType is always SYSTEM and id, name, and email are omitted.",
-        "required": [
-          "actorType"
-        ],
-        "properties": {
-          "actorType": {
-            "type": "string",
-            "description": "Type of actor. One of: USER, SYSTEM, API_CLIENT.",
-            "enum": [
-              "USER",
-              "SYSTEM",
-              "API_CLIENT"
-            ],
-            "example": "SYSTEM"
-          },
-          "id": {
-            "type": "string",
-            "nullable": true,
-            "description": "Unique identifier (GUID) of the actor. Omitted for SYSTEM actors."
-          },
-          "name": {
-            "type": "string",
-            "nullable": true,
-            "description": "Display name of the actor. Omitted for SYSTEM actors."
-          },
-          "email": {
-            "type": "string",
-            "nullable": true,
-            "description": "Email address of the actor. Omitted for SYSTEM actors."
-          }
-        }
-      },
-      "WebhookPayloadMetadataObject": {
-        "type": "object",
-        "description": "The primary ThoughtSpot metadata object associated with the event. For LIVEBOARD_SCHEDULE events, this is always the scheduled Liveboard.",
-        "required": [
-          "objectType",
-          "name",
-          "url"
-        ],
-        "properties": {
-          "objectType": {
-            "type": "string",
-            "description": "Type of the metadata object. For LIVEBOARD_SCHEDULE events, always \"LIVEBOARD\".",
-            "example": "LIVEBOARD"
-          },
-          "id": {
-            "type": "string",
-            "nullable": true,
-            "description": "Unique identifier (GUID) of the metadata object."
-          },
-          "name": {
-            "type": "string",
-            "description": "Display name of the metadata object."
-          },
-          "url": {
-            "type": "string",
-            "description": "Direct URL to the metadata object within ThoughtSpot."
-          }
-        }
-      },
-      "WebhookLiveboardScheduleData": {
-        "type": "object",
-        "description": "Event-specific data payload for LIVEBOARD_SCHEDULE webhook events.",
-        "required": [
-          "scheduleDetails",
-          "recipients"
-        ],
-        "properties": {
-          "scheduleDetails": {
-            "$ref": "#/components/schemas/WebhookScheduleDetails"
-          },
-          "recipients": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/WebhookScheduleRecipient"
-            },
-            "description": "List of all recipients for this schedule delivery."
-          },
-          "aiHighlights": {
-            "type": "string",
-            "nullable": true,
-            "description": "AI-generated highlights for the Liveboard content, if available."
-          },
-          "msgUniqueId": {
-            "type": "string",
-            "nullable": true,
-            "description": "Idempotency key used to deduplicate deliveries for the same schedule run."
-          },
-          "channelID": {
-            "type": "string",
-            "nullable": true,
-            "description": "Internal identifier for the delivery channel."
-          },
-          "channelType": {
-            "type": "string",
-            "nullable": true,
-            "description": "Type of the delivery channel (e.g., \"WEBHOOK\").",
-            "example": "WEBHOOK"
-          },
-          "communicationType": {
-            "type": "string",
-            "nullable": true,
-            "description": "Internal communication type identifier (e.g., \"LiveboardSchedules\").",
-            "example": "LiveboardSchedules"
-          },
-          "viewInfo": {
-            "nullable": true,
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/WebhookLiveboardViewInfo"
-              }
-            ],
-            "description": "Personalized Liveboard view information, present when the schedule targets a specific saved view."
-          }
-        }
-      },
-      "WebhookScheduleDetails": {
-        "type": "object",
-        "description": "Configuration and run-time details of the Liveboard schedule that triggered the webhook event.",
-        "required": [
-          "scheduleId",
-          "name"
-        ],
-        "properties": {
-          "scheduleId": {
-            "type": "string",
-            "description": "Unique identifier (GUID) of the schedule."
-          },
-          "name": {
-            "type": "string",
-            "description": "Display name of the schedule."
-          },
-          "frequency": {
-            "type": "object",
-            "nullable": true,
-            "description": "Frequency configuration of the schedule (cron expression or interval object)."
-          },
-          "creationTime": {
-            "type": "string",
-            "nullable": true,
-            "description": "ISO 8601 timestamp of when the schedule was created.",
-            "example": "2025-01-15T08:00:00Z"
-          },
-          "timezone": {
-            "type": "string",
-            "nullable": true,
-            "description": "Timezone for the schedule (e.g., \"America/Los_Angeles\", \"Etc/UTC\").",
-            "example": "America/Los_Angeles"
-          },
-          "description": {
-            "type": "string",
-            "nullable": true,
-            "description": "Description of the schedule."
-          },
-          "authorId": {
-            "type": "string",
-            "nullable": true,
-            "description": "Unique identifier (GUID) of the user who created the schedule."
-          },
-          "gatingFunction": {
-            "type": "string",
-            "nullable": true,
-            "description": "Gating function applied to the schedule, if configured."
-          },
-          "useCustomEmbedUrls": {
-            "type": "string",
-            "nullable": true,
-            "description": "Whether the schedule uses custom embed URLs for Liveboard links."
-          },
-          "userIds": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true,
-            "description": "List of ThoughtSpot user GUIDs explicitly added as recipients."
-          },
-          "groupIds": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true,
-            "description": "List of ThoughtSpot group GUIDs explicitly added as recipients."
-          },
-          "runId": {
-            "type": "string",
-            "nullable": true,
-            "description": "Unique identifier for this specific execution (run) of the schedule."
-          },
-          "exportRequest": {
-            "type": "object",
-            "nullable": true,
-            "description": "Export configuration for the schedule. Contains rendering settings and visualization selection. Key fields: object_type, liveboard_params (layout_type, liveboard_viz_selection, print_document_params), pdf_params (page_size, orientation), request_type.",
-            "properties": {
-              "object_type": {
-                "type": "string",
-                "description": "Type of the exported object (e.g., \"LIVEBOARD\").",
-                "example": "LIVEBOARD"
-              },
-              "pdf_params": {
-                "type": "object",
-                "nullable": true,
-                "description": "PDF rendering parameters.",
-                "properties": {
-                  "page_size": {
-                    "type": "string",
-                    "example": "A4"
-                  },
-                  "orientation": {
-                    "type": "string",
-                    "example": "LANDSCAPE"
-                  }
-                }
-              },
-              "liveboard_params": {
-                "type": "object",
-                "nullable": true,
-                "description": "Liveboard-specific export parameters.",
-                "properties": {
-                  "layout_type": {
-                    "type": "string",
-                    "example": "LIVEBOARD"
-                  },
-                  "visualization_format_options": {
-                    "type": "object",
-                    "properties": {
-                      "truncate_tables": {
-                        "type": "boolean"
-                      }
-                    }
-                  },
-                  "print_document_params": {
-                    "type": "object",
-                    "properties": {
-                      "include_cover_page": {
-                        "type": "boolean"
-                      },
-                      "include_filter_page": {
-                        "type": "boolean"
-                      },
-                      "pageFooterParams": {
-                        "type": "object",
-                        "properties": {
-                          "include_logo": {
-                            "type": "boolean"
-                          },
-                          "include_page_number": {
-                            "type": "boolean"
-                          },
-                          "text": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "liveboard_viz_selection": {
-                    "type": "object",
-                    "properties": {
-                      "complete_liveboard": {
-                        "type": "boolean"
-                      }
-                    }
-                  }
-                }
-              },
-              "request_type": {
-                "type": "string",
-                "description": "Type of export request.",
-                "example": "SCHEDULE"
-              }
-            }
-          },
-          "fileFormat": {
-            "type": "string",
-            "nullable": true,
-            "description": "File format for the exported attachment.",
-            "enum": [
-              "PDF",
-              "CSV",
-              "XLSX",
-              "PNG"
-            ]
-          },
-          "status": {
-            "type": "string",
-            "nullable": true,
-            "description": "Current status of this schedule run.",
-            "example": "SCHEDULED"
-          },
-          "emailIds": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true,
-            "description": "List of external (non-ThoughtSpot) email addresses receiving this schedule."
-          },
-          "viewInfo": {
-            "nullable": true,
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/WebhookLiveboardViewInfo"
-              }
-            ],
-            "description": "Personalized view information when the schedule targets a specific Liveboard view."
-          }
-        }
-      },
-      "WebhookScheduleRecipient": {
-        "type": "object",
-        "description": "A recipient for a Liveboard schedule webhook delivery.",
-        "required": [
-          "type",
-          "email"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "Type of recipient.",
-            "enum": [
-              "USER",
-              "GROUP",
-              "EXTERNAL_EMAIL"
-            ]
-          },
-          "id": {
-            "type": "string",
-            "nullable": true,
-            "description": "Unique identifier (GUID) of the recipient. Present for USER and GROUP recipients."
-          },
-          "name": {
-            "type": "string",
-            "nullable": true,
-            "description": "Display name of the recipient. Present for USER and GROUP recipients."
-          },
-          "email": {
-            "type": "string",
-            "description": "Email address of the recipient."
-          },
-          "memberEmails": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true,
-            "description": "Email addresses of group members. Present when recipient type is GROUP."
-          }
-        }
-      },
-      "WebhookLiveboardViewInfo": {
-        "type": "object",
-        "description": "Personalized Liveboard view associated with a schedule. Present only when the schedule targets a specific saved view of the Liveboard.",
-        "required": [
-          "viewName",
-          "viewId"
-        ],
-        "properties": {
-          "viewName": {
-            "type": "string",
-            "description": "Display name of the personalized Liveboard view."
-          },
-          "viewId": {
-            "type": "string",
-            "description": "Unique identifier (GUID) of the personalized Liveboard view."
-          }
-        }
-      },
-      "WebhookFileAttachment": {
-        "type": "object",
-        "description": "A single file attachment within a webhook multipart delivery.",
-        "required": [
-          "filename",
-          "contentType"
-        ],
-        "properties": {
-          "filename": {
-            "type": "string",
-            "description": "Original filename of the attachment.",
-            "example": "Quarterly_Sales.pdf"
-          },
-          "contentType": {
-            "type": "string",
-            "description": "MIME type of the attachment content.",
-            "enum": [
-              "application/pdf",
-              "text/csv",
-              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-            ],
-            "example": "application/pdf"
-          },
-          "content": {
-            "type": "string",
-            "format": "binary",
-            "description": "Binary content of the file. In the actual HTTP request this is the raw bytes of the multipart form part; in SDK models it is represented as a byte array or stream."
-          }
-        }
-      },
-      "WebhookFileAttachmentsPayload": {
-        "type": "object",
-        "description": "The \"file_attachments\" JSON part of a customer-storage multipart webhook delivery. Contains S3 object references for every file that was (or should have been) uploaded to the customer's bucket, plus an optional top-level error on complete upload failure.",
-        "required": [
-          "files"
-        ],
-        "properties": {
-          "files": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/WebhookS3FileReference"
-            },
-            "description": "List of file references. Each entry corresponds to one schedule attachment. uploadStatus indicates whether that individual file was uploaded successfully. May be empty when a critical upload error prevented all uploads."
-          },
-          "error": {
-            "type": "string",
-            "nullable": true,
-            "description": "Top-level error message set when the cloud storage upload failed entirely. Empty on full success; may be non-empty even when some files succeeded (partial failure).",
-            "example": "cloud storage upload failed: failed to assume role: AccessDenied"
-          }
-        }
-      },
-      "WebhookS3FileReference": {
-        "type": "object",
-        "description": "Reference to a single file uploaded (or attempted) to the customer's S3 bucket as part of a LIVEBOARD_SCHEDULE webhook delivery.",
-        "required": [
-          "filename",
-          "contentType",
-          "size",
-          "provider",
-          "uploadStatus"
-        ],
-        "properties": {
-          "filename": {
-            "type": "string",
-            "description": "Original filename of the attachment.",
-            "example": "Quarterly_Sales.pdf"
-          },
-          "contentType": {
-            "type": "string",
-            "description": "MIME type of the file.",
-            "example": "application/pdf"
-          },
-          "size": {
-            "type": "integer",
-            "format": "int64",
-            "description": "Size of the file in bytes."
-          },
-          "provider": {
-            "type": "string",
-            "description": "Storage provider. Currently always \"AWS_S3\".",
-            "enum": [
-              "AWS_S3"
-            ]
-          },
-          "bucketName": {
-            "type": "string",
-            "nullable": true,
-            "description": "Name of the customer's S3 bucket. Omitted when upload failed.",
-            "example": "my-webhook-files"
-          },
-          "region": {
-            "type": "string",
-            "nullable": true,
-            "description": "AWS region of the S3 bucket. Omitted when upload failed.",
-            "example": "us-west-2"
-          },
-          "objectKey": {
-            "type": "string",
-            "nullable": true,
-            "description": "Full object key (path) of the file within the S3 bucket. Omitted when upload failed.",
-            "example": "thoughtspot-webhooks/org-0/liveboard-schedules/sched-id/run-id/Quarterly_Sales.pdf"
-          },
-          "uploadStatus": {
-            "type": "string",
-            "enum": [
-              "SUCCESS",
-              "FAILED"
-            ],
-            "description": "Upload result for this file."
-          },
-          "errorMessage": {
-            "type": "string",
-            "nullable": true,
-            "description": "Error details when uploadStatus is FAILED. Omitted on success."
-          },
-          "uploadedAt": {
-            "type": "string",
-            "nullable": true,
-            "description": "ISO 8601 timestamp of when the file was uploaded. Omitted when upload failed.",
-            "example": "2025-04-10T12:00:00Z"
-          }
-        }
-      },
       "CreateAgentConversationRequest": {
         "type": "object",
         "properties": {
@@ -22389,6 +24011,36 @@
           "metadata_identifier"
         ]
       },
+      "ConfigureAuthSettingsRequest": {
+        "type": "object",
+        "properties": {
+          "auth_type": {
+            "description": "Type of authentication mechanism to configure. Currently supports TRUSTED_AUTH.",
+            "type": "string",
+            "enum": [
+              "TRUSTED_AUTH"
+            ]
+          },
+          "cluster_preferences": {
+            "description": "Cluster-level authentication preferences. Omit to leave the existing cluster setting unchanged.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AuthClusterPreferencesInput"
+              }
+            ]
+          },
+          "org_preferences": {
+            "description": "Org-level authentication preferences. Each entry identifies an org and the desired status. Omit to leave existing org settings unchanged.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AuthOrgPreferenceInput"
+            }
+          }
+        },
+        "required": [
+          "auth_type"
+        ]
+      },
       "GetCustomAccessTokenRequest": {
         "type": "object",
         "properties": {
@@ -22642,6 +24294,29 @@
             "type": "string"
           }
         }
+      },
+      "SearchAuthSettingsRequest": {
+        "type": "object",
+        "properties": {
+          "auth_type": {
+            "description": "Type of authentication mechanism to retrieve settings for. Currently supports TRUSTED_AUTH.",
+            "type": "string",
+            "enum": [
+              "TRUSTED_AUTH"
+            ]
+          },
+          "scope": {
+            "description": "Scope of auth settings to retrieve. When absent, both cluster and org settings are returned (subject to caller privileges). Set to CLUSTER to retrieve only cluster-level settings, or ORG to retrieve only org-level settings.",
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ]
+          }
+        },
+        "required": [
+          "auth_type"
+        ]
       },
       "ValidateTokenRequest": {
         "type": "object",
@@ -24002,6 +25677,8 @@
                 "CAN_MODIFY_FOLDERS",
                 "CAN_MANAGE_VARIABLES",
                 "CAN_VIEW_FOLDERS",
+                "CAN_MANAGE_AGENTSPOT",
+                "CAN_ACCESS_AGENTSPOT",
                 "PREVIEW_DOCUMENT_SEARCH",
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_DOWNLOAD_VISUALS",
@@ -24158,6 +25835,8 @@
                 "CAN_MODIFY_FOLDERS",
                 "CAN_MANAGE_VARIABLES",
                 "CAN_VIEW_FOLDERS",
+                "CAN_MANAGE_AGENTSPOT",
+                "CAN_ACCESS_AGENTSPOT",
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_MANAGE_WEBHOOKS",
                 "CAN_DOWNLOAD_VISUALS",
@@ -24295,6 +25974,8 @@
                 "CAN_MODIFY_FOLDERS",
                 "CAN_MANAGE_VARIABLES",
                 "CAN_VIEW_FOLDERS",
+                "CAN_MANAGE_AGENTSPOT",
+                "CAN_ACCESS_AGENTSPOT",
                 "PREVIEW_DOCUMENT_SEARCH",
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_DOWNLOAD_VISUALS",
@@ -24397,6 +26078,11 @@
           },
           "start_epoch_time_in_millis": {
             "description": "Filter records created on or after this time (epoch milliseconds).",
+            "type": "number",
+            "format": "float"
+          },
+          "end_epoch_time_in_millis": {
+            "description": "Filter records created on or before this time (epoch milliseconds). <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
             "type": "number",
             "format": "float"
           }
@@ -25296,6 +26982,15 @@
           "personalised_view_identifier": {
             "description": "GUID or name of the personalised view of the Answer object. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
             "type": "string"
+          },
+          "type": {
+            "description": "Type of the answer being exported. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
+            "default": "SAVED",
+            "type": "string",
+            "enum": [
+              "SAVED",
+              "PINNED"
+            ]
           }
         }
       },
@@ -25378,6 +27073,11 @@
                 "$ref": "#/components/schemas/RegionalSettingsInput"
               }
             ]
+          },
+          "rows_per_sheet": {
+            "description": "Maximum number of rows to export per sheet. Only applicable for XLSX exports.\nIf not specified, the system default limit is used. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
+            "type": "integer",
+            "format": "int32"
           }
         },
         "required": [
@@ -25435,6 +27135,8 @@
                 "CAN_MANAGE_VARIABLES",
                 "CAN_MODIFY_FOLDERS",
                 "CAN_VIEW_FOLDERS",
+                "CAN_MANAGE_AGENTSPOT",
+                "CAN_ACCESS_AGENTSPOT",
                 "CAN_SETUP_VERSION_CONTROL",
                 "PREVIEW_THOUGHTSPOT_SAGE",
                 "CAN_MANAGE_WEBHOOKS",
@@ -25531,6 +27233,8 @@
                 "CAN_VIEW_FOLDERS",
                 "CAN_MODIDY_FOLDERS",
                 "CAN_MANAGE_VARIABLES",
+                "CAN_MANAGE_AGENTSPOT",
+                "CAN_ACCESS_AGENTSPOT",
                 "PREVIEW_DOCUMENT_SEARCH",
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_MANAGE_WEBHOOKS",
@@ -25622,6 +27326,8 @@
                 "CAN_MODIFY_FOLDERS",
                 "CAN_MANAGE_VARIABLES",
                 "CAN_VIEW_FOLDERS",
+                "CAN_MANAGE_AGENTSPOT",
+                "CAN_ACCESS_AGENTSPOT",
                 "PREVIEW_DOCUMENT_SEARCH",
                 "PREVIEW_THOUGHTSPOT_SAGE",
                 "CAN_MANAGE_WEBHOOKS",
@@ -28060,6 +29766,8 @@
                 "CAN_MODIFY_FOLDERS",
                 "CAN_MANAGE_VARIABLES",
                 "CAN_VIEW_FOLDERS",
+                "CAN_MANAGE_AGENTSPOT",
+                "CAN_ACCESS_AGENTSPOT",
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_MANAGE_WEBHOOKS",
                 "CAN_DOWNLOAD_VISUALS",
