@@ -12578,6 +12578,31 @@ components:
       - instructions
       - scope
       type: object
+    AgentInstructions:
+      description: Admin instructions configured for the AI agent.
+      properties:
+        id:
+          description: Unique identifier of the record.
+          nullable: true
+          type: string
+        instructions:
+          description: The admin instructions text for the agent.
+          type: string
+        created_at:
+          description: ISO timestamp when the instructions were created.
+          nullable: true
+          type: string
+        updated_at:
+          description: ISO timestamp when the instructions were last updated.
+          nullable: true
+          type: string
+        last_updated_by:
+          description: User ID of the admin who last updated the instructions.
+          nullable: true
+          type: string
+      required:
+      - instructions
+      type: object
     RiseGQLArgWrapper:
       properties:
         name:
@@ -17420,6 +17445,14 @@ components:
       required:
       - message
       - metadata_identifier
+      type: object
+    SetAgentInstructionsRequest:
+      properties:
+        instructions:
+          description: The admin instructions text to set for the agent.
+          type: string
+      required:
+      - instructions
       type: object
     SetNLInstructionsRequest:
       properties:
@@ -24462,6 +24495,11 @@ x-roles:
   tags:
   - 10.4.0.cl
   description: Roles for version 10.4.0.cl
+- name: 26.6.0.cl
+  id: 26.6.0.cl
+  tags:
+  - 26.6.0.cl
+  description: Roles for version 26.6.0.cl
 - name: 10.15.0.cl
   id: 10.15.0.cl
   tags:
@@ -24482,11 +24520,6 @@ x-roles:
   tags:
   - 26.5.0.cl
   description: Roles for version 26.5.0.cl
-- name: 26.6.0.cl
-  id: 26.6.0.cl
-  tags:
-  - 26.6.0.cl
-  description: Roles for version 26.6.0.cl
 - name: 9.0.0.cl
   id: 9.0.0.cl
   tags:

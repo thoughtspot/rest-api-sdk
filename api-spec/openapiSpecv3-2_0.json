@@ -22,6 +22,14 @@
       "description": "Roles for version 10.4.0.cl"
     },
     {
+      "name": "26.6.0.cl",
+      "id": "26.6.0.cl",
+      "tags": [
+        "26.6.0.cl"
+      ],
+      "description": "Roles for version 26.6.0.cl"
+    },
+    {
       "name": "10.15.0.cl",
       "id": "10.15.0.cl",
       "tags": [
@@ -52,14 +60,6 @@
         "26.5.0.cl"
       ],
       "description": "Roles for version 26.5.0.cl"
-    },
-    {
-      "name": "26.6.0.cl",
-      "id": "26.6.0.cl",
-      "tags": [
-        "26.6.0.cl"
-      ],
-      "description": "Roles for version 26.6.0.cl"
     },
     {
       "name": "9.0.0.cl",
@@ -343,6 +343,79 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Conversation"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/agent/instructions/get": {
+      "get": {
+        "operationId": "getAgentInstructions",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\nRetrieves the admin instructions currently configured for the AI agent (Spotter). Admin instructions are tenant- and org-scoped text that guide agent behavior across all conversations.\n\nRequires admin privileges. Only users with org admin access can retrieve agent instructions.\n\n#### Usage guidelines\n\nNo input parameters are required. The API returns the stored `AgentInstructions` record for the caller's tenant and org.\n\nIf no instructions have been configured yet, the API returns a record with an empty `instructions` field and `null` values for `id`, `created_at`, `updated_at`, and `last_updated_by`.\n\nIf the request is successful, the response includes:\n\n- `id`: unique identifier of the instructions record\n- `instructions`: the configured instructions text\n- `created_at`: ISO timestamp when the instructions were first saved\n- `updated_at`: ISO timestamp when the instructions were last updated\n- `last_updated_by`: user ID of the admin who last updated the instructions (may be `null` for older records)\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have org admin privileges required to read agent instructions. |\n\n> ###### Note:\n>\n> - Use `setAgentInstructions` to create or update agent instructions.\n> - Available from version 26.6.0.cl and later.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.6.0.cl"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentInstructions"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentInstructions"
                 }
               }
             }
@@ -1248,6 +1321,89 @@
                   "items": {
                     "$ref": "#/components/schemas/ResponseMessage"
                   }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/agent/instructions/set": {
+      "put": {
+        "operationId": "setAgentInstructions",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\nCreates or updates the admin instructions for the AI agent (Spotter). Admin instructions are tenant- and org-scoped text that guide agent behavior across all conversations. If instructions already exist for the org, they are replaced (upsert semantics).\n\nRequires admin privileges. Only users with org admin access can set agent instructions.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `instructions`: the instructions text to apply to the agent (maximum 5000 characters)\n\nInstructions are validated against system guardrails before being saved. If the instructions contain content that conflicts with guardrails, the request is rejected with a `409` error and the existing instructions remain unchanged.\n\nIf the request is successful, the response includes the saved `AgentInstructions` record:\n\n- `id`: unique identifier of the record\n- `instructions`: the saved instructions text\n- `created_at`: ISO timestamp when the instructions were first created\n- `updated_at`: ISO timestamp of this update\n- `last_updated_by`: user ID of the admin who performed this update\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 400  | Bad request — the request body is missing required fields or the `instructions` field exceeds the maximum allowed length of 5000 characters. |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have org admin privileges required to set agent instructions. |\n| 409  | Conflict — the provided instructions conflict with system guardrails. Review and revise the instructions text before retrying. |\n| 500  | Internal server error. |\n\n> ###### Note:\n>\n> - This operation uses upsert semantics: it creates the instructions record if none exists, or replaces the existing one.\n> - Instructions take effect immediately for new conversations created after the update.\n> - Use `getAgentInstructions` to retrieve the current instructions before making changes.\n> - Available from version 26.6.0.cl and later.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.6.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetAgentInstructionsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentInstructions"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentInstructions"
                 }
               }
             }
@@ -16608,6 +16764,39 @@
           }
         }
       },
+      "AgentInstructions": {
+        "type": "object",
+        "required": [
+          "instructions"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the record.",
+            "nullable": true
+          },
+          "instructions": {
+            "type": "string",
+            "description": "The admin instructions text for the agent."
+          },
+          "created_at": {
+            "type": "string",
+            "description": "ISO timestamp when the instructions were created.",
+            "nullable": true
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "ISO timestamp when the instructions were last updated.",
+            "nullable": true
+          },
+          "last_updated_by": {
+            "type": "string",
+            "description": "User ID of the admin who last updated the instructions.",
+            "nullable": true
+          }
+        },
+        "description": "Admin instructions configured for the AI agent."
+      },
       "RiseGQLArgWrapper": {
         "type": "object",
         "required": [
@@ -22110,6 +22299,18 @@
         "required": [
           "metadata_identifier",
           "message"
+        ]
+      },
+      "SetAgentInstructionsRequest": {
+        "type": "object",
+        "properties": {
+          "instructions": {
+            "description": "The admin instructions text to set for the agent.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "instructions"
         ]
       },
       "SetNLInstructionsRequest": {

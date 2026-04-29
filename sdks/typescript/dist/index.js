@@ -617,6 +617,49 @@ _AgentConversation.attributeTypeMap = [
 ];
 var AgentConversation = _AgentConversation;
 
+// models/AgentInstructions.ts
+var _AgentInstructions = class _AgentInstructions {
+  static getAttributeTypeMap() {
+    return _AgentInstructions.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AgentInstructions.discriminator = void 0;
+_AgentInstructions.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "instructions",
+    "baseName": "instructions",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "created_at",
+    "baseName": "created_at",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "updated_at",
+    "baseName": "updated_at",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "last_updated_by",
+    "baseName": "last_updated_by",
+    "type": "string",
+    "format": ""
+  }
+];
+var AgentInstructions = _AgentInstructions;
+
 // models/AnswerContent.ts
 var _AnswerContent = class _AnswerContent {
   static getAttributeTypeMap() {
@@ -13344,6 +13387,25 @@ _SendMessageRequest.attributeTypeMap = [
 ];
 var SendMessageRequest = _SendMessageRequest;
 
+// models/SetAgentInstructionsRequest.ts
+var _SetAgentInstructionsRequest = class _SetAgentInstructionsRequest {
+  static getAttributeTypeMap() {
+    return _SetAgentInstructionsRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SetAgentInstructionsRequest.discriminator = void 0;
+_SetAgentInstructionsRequest.attributeTypeMap = [
+  {
+    "name": "instructions",
+    "baseName": "instructions",
+    "type": "string",
+    "format": ""
+  }
+];
+var SetAgentInstructionsRequest = _SetAgentInstructionsRequest;
+
 // models/SetNLInstructionsRequest.ts
 var _SetNLInstructionsRequest = class _SetNLInstructionsRequest {
   static getAttributeTypeMap() {
@@ -18066,6 +18128,7 @@ var typeMap = {
   "ActionDetailsInputCreate": ActionDetailsInputCreate,
   "ActivateUserRequest": ActivateUserRequest,
   "AgentConversation": AgentConversation,
+  "AgentInstructions": AgentInstructions,
   "AnswerContent": AnswerContent,
   "AnswerDataResponse": AnswerDataResponse,
   "AnswerPngOptionsInput": AnswerPngOptionsInput,
@@ -18415,6 +18478,7 @@ var typeMap = {
   "SendAgentMessageResponse": SendAgentMessageResponse,
   "SendAgentMessageStreamingRequest": SendAgentMessageStreamingRequest,
   "SendMessageRequest": SendMessageRequest,
+  "SetAgentInstructionsRequest": SetAgentInstructionsRequest,
   "SetNLInstructionsRequest": SetNLInstructionsRequest,
   "ShareMetadataRequest": ShareMetadataRequest,
   "ShareMetadataTypeInput": ShareMetadataTypeInput,
@@ -48071,6 +48135,7 @@ export {
   ActionDetailsInputCreate,
   ActivateUserRequest,
   AgentConversation,
+  AgentInstructions,
   AnswerContent,
   AnswerDataResponse,
   AnswerPngOptionsInput,
@@ -48446,6 +48511,7 @@ export {
   SendAgentMessageStreamingRequest,
   SendMessageRequest,
   ServerConfiguration,
+  SetAgentInstructionsRequest,
   SetNLInstructionsRequest,
   ShareMetadataRequest,
   ShareMetadataTypeInput,

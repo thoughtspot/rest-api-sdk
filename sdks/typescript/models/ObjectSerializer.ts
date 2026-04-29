@@ -10,6 +10,7 @@ export * from '../models/ActionDetailsInput';
 export * from '../models/ActionDetailsInputCreate';
 export * from '../models/ActivateUserRequest';
 export * from '../models/AgentConversation';
+export * from '../models/AgentInstructions';
 export * from '../models/AnswerContent';
 export * from '../models/AnswerDataResponse';
 export * from '../models/AnswerPngOptionsInput';
@@ -359,6 +360,7 @@ export * from '../models/SendAgentMessageRequest';
 export * from '../models/SendAgentMessageResponse';
 export * from '../models/SendAgentMessageStreamingRequest';
 export * from '../models/SendMessageRequest';
+export * from '../models/SetAgentInstructionsRequest';
 export * from '../models/SetNLInstructionsRequest';
 export * from '../models/ShareMetadataRequest';
 export * from '../models/ShareMetadataTypeInput';
@@ -473,6 +475,7 @@ import { ActionDetailsInput } from '../models/ActionDetailsInput';
 import { ActionDetailsInputCreate } from '../models/ActionDetailsInputCreate';
 import { ActivateUserRequest } from '../models/ActivateUserRequest';
 import { AgentConversation } from '../models/AgentConversation';
+import { AgentInstructions } from '../models/AgentInstructions';
 import { AnswerContent } from '../models/AnswerContent';
 import { AnswerDataResponse } from '../models/AnswerDataResponse';
 import { AnswerPngOptionsInput } from '../models/AnswerPngOptionsInput';
@@ -822,6 +825,7 @@ import { SendAgentMessageRequest } from '../models/SendAgentMessageRequest';
 import { SendAgentMessageResponse } from '../models/SendAgentMessageResponse';
 import { SendAgentMessageStreamingRequest } from '../models/SendAgentMessageStreamingRequest';
 import { SendMessageRequest } from '../models/SendMessageRequest';
+import { SetAgentInstructionsRequest } from '../models/SetAgentInstructionsRequest';
 import { SetNLInstructionsRequest } from '../models/SetNLInstructionsRequest';
 import { ShareMetadataRequest, ShareMetadataRequestMetadataTypeEnum            } from '../models/ShareMetadataRequest';
 import { ShareMetadataTypeInput, ShareMetadataTypeInputTypeEnum    } from '../models/ShareMetadataTypeInput';
@@ -1222,6 +1226,7 @@ let typeMap: {[index: string]: any} = {
     "ActionDetailsInputCreate": ActionDetailsInputCreate,
     "ActivateUserRequest": ActivateUserRequest,
     "AgentConversation": AgentConversation,
+    "AgentInstructions": AgentInstructions,
     "AnswerContent": AnswerContent,
     "AnswerDataResponse": AnswerDataResponse,
     "AnswerPngOptionsInput": AnswerPngOptionsInput,
@@ -1571,6 +1576,7 @@ let typeMap: {[index: string]: any} = {
     "SendAgentMessageResponse": SendAgentMessageResponse,
     "SendAgentMessageStreamingRequest": SendAgentMessageStreamingRequest,
     "SendMessageRequest": SendMessageRequest,
+    "SetAgentInstructionsRequest": SetAgentInstructionsRequest,
     "SetNLInstructionsRequest": SetNLInstructionsRequest,
     "ShareMetadataRequest": ShareMetadataRequest,
     "ShareMetadataTypeInput": ShareMetadataTypeInput,
