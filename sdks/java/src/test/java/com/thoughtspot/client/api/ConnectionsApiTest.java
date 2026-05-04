@@ -13,6 +13,8 @@ import com.thoughtspot.client.model.RevokeRefreshTokensRequest;
 import com.thoughtspot.client.model.RevokeRefreshTokensResponse;
 import com.thoughtspot.client.model.SearchConnectionRequest;
 import com.thoughtspot.client.model.SearchConnectionResponse;
+import com.thoughtspot.client.model.SyncMetadataRequest;
+import com.thoughtspot.client.model.SyncMetadataResponse;
 import com.thoughtspot.client.model.UpdateConnectionRequest;
 import com.thoughtspot.client.model.UpdateConnectionV2Request;
 import java.io.File;
@@ -280,6 +282,44 @@ public class ConnectionsApiTest {
     public void searchConnectionTest() throws ApiException {
         SearchConnectionRequest searchConnectionRequest = null;
         List<SearchConnectionResponse> response = api.searchConnection(searchConnectionRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 26.5.0.cl or later Synchronizes connection metadata attributes from your Cloud Data
+     * Warehouse (CDW) with ThoughtSpot. Requires the &#x60;DATAMANAGEMENT&#x60; (**Can manage
+     * data**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) privilege is
+     * required. #### Usage guidelines To synchronize attributes from a CDW, specify the connection
+     * GUID or name in the &#x60;connection_identifier&#x60; path parameter and
+     * &#x60;sync_attributes&#x60; in the request body. Default attribute is
+     * &#x60;[\&quot;DESCRIPTION\&quot;]&#x60;. ##### Hierarchical schema * Connection: The
+     * connection object for the sync operation. * Tables: Tables for the sync operation. When no
+     * table is specified, all tables are synchronized. * Columns: If the table is specified, you
+     * can add the columns for the sync operation. If no columns are specified, all columns in the
+     * specified table are considered for the sync operation. To set the scope for the sync
+     * operation: * Connection-level: To sync all tables and columns, pass an empty request body, or
+     * only the attributes in the request body. * Table-level: To synchronize specific tables and
+     * their columns, specify the table identifiers in the &#x60;tables&#x60; array. * Column-level:
+     * To synchronize specific columns, specify the table identifier as the key and column
+     * identifiers as the value in the &#x60;tables&#x60; array. &#x60;&#x60;&#x60; {
+     * \&quot;tables\&quot;: [ {\&quot;table-guid-1\&quot;: [\&quot;column-guid-1\&quot;,
+     * \&quot;column-guid-2\&quot;]}, \&quot;table-guid-2\&quot; ], \&quot;sync_attributes\&quot;:
+     * [\&quot;DESCRIPTION\&quot;] } &#x60;&#x60;&#x60; ##### API response If the sync operation is
+     * successful, the API returns the following information: * Status of the sync operation. For
+     * example, &#x60;SUCCESS&#x60;, &#x60;PARTIAL_SUCCESS&#x60;, or &#x60;NO_UPDATE&#x60;. * Number
+     * of tables and columns that were updated. * Number of tables and columns with the sync failed
+     * status when the overall sync status is &#x60;PARTIAL_SUCCESS&#x60;. * Message text indicating
+     * the sync results.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void syncMetadataTest() throws ApiException {
+        String connectionIdentifier = null;
+        SyncMetadataRequest syncMetadataRequest = null;
+        SyncMetadataResponse response = api.syncMetadata(connectionIdentifier, syncMetadataRequest);
         // TODO: test validations
     }
 

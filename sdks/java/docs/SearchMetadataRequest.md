@@ -17,6 +17,7 @@
 |**includeDependentObjects** | **Boolean** | Includes dependents of the metadata object specified in the API request. For example, a worksheet can consist of dependent objects such as Liveboards or Answers. |  [optional] |
 |**dependentObjectsRecordSize** | **Integer** | The maximum number of dependents to include per metadata object. |  [optional] |
 |**includeDetails** | **Boolean** | Includes complete details of the metadata objects. |  [optional] |
+|**includePersonalisedViews** | **Boolean** | When set to true and include_details is also true, includes personalised views in the metadata_detail for LIVEBOARD objects. |  [optional] |
 |**includeHeaders** | **Boolean** | Includes headers of the metadata objects. |  [optional] |
 |**includeHiddenObjects** | **Boolean** | Includes details of the hidden objects, such as a column in a worksheet or a table. |  [optional] |
 |**includeIncompleteObjects** | **Boolean** | Includes objects with incomplete metadata. |  [optional] |

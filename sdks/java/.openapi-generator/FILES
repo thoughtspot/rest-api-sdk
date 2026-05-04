@@ -19,7 +19,6 @@ docs/ActivateUserRequest.md
 docs/AgentConversation.md
 docs/AiApi.md
 docs/AnswerContent.md
-docs/AnswerContextInput.md
 docs/AnswerDataResponse.md
 docs/AssignChangeAuthorRequest.md
 docs/AssignTagRequest.md
@@ -204,7 +203,6 @@ docs/JWTUserOptions.md
 docs/JWTUserOptionsFull.md
 docs/JobRecipient.md
 docs/JobsApi.md
-docs/LBContextInput.md
 docs/LiveboardContent.md
 docs/LiveboardDataResponse.md
 docs/LiveboardOptions.md
@@ -336,6 +334,8 @@ docs/SecuritySettingsOrgDetails.md
 docs/SecuritySettingsOrgPreferences.md
 docs/SecuritySettingsOrgPreferencesInput.md
 docs/SecuritySettingsResponse.md
+docs/SendAgentConversationMessageRequest.md
+docs/SendAgentConversationMessageStreamingRequest.md
 docs/SendAgentMessageRequest.md
 docs/SendAgentMessageResponse.md
 docs/SendAgentMessageStreamingRequest.md
@@ -355,6 +355,8 @@ docs/StorageConfig.md
 docs/StorageConfigInput.md
 docs/StorageDestination.md
 docs/StorageDestinationInput.md
+docs/SyncMetadataRequest.md
+docs/SyncMetadataResponse.md
 docs/SystemApi.md
 docs/SystemConfig.md
 docs/SystemInfo.md
@@ -510,7 +512,6 @@ src/main/java/com/thoughtspot/client/model/ActionDetailsInputCreate.java
 src/main/java/com/thoughtspot/client/model/ActivateUserRequest.java
 src/main/java/com/thoughtspot/client/model/AgentConversation.java
 src/main/java/com/thoughtspot/client/model/AnswerContent.java
-src/main/java/com/thoughtspot/client/model/AnswerContextInput.java
 src/main/java/com/thoughtspot/client/model/AnswerDataResponse.java
 src/main/java/com/thoughtspot/client/model/AssignChangeAuthorRequest.java
 src/main/java/com/thoughtspot/client/model/AssignTagRequest.java
@@ -684,7 +685,6 @@ src/main/java/com/thoughtspot/client/model/JWTParameter.java
 src/main/java/com/thoughtspot/client/model/JWTUserOptions.java
 src/main/java/com/thoughtspot/client/model/JWTUserOptionsFull.java
 src/main/java/com/thoughtspot/client/model/JobRecipient.java
-src/main/java/com/thoughtspot/client/model/LBContextInput.java
 src/main/java/com/thoughtspot/client/model/LiveboardContent.java
 src/main/java/com/thoughtspot/client/model/LiveboardDataResponse.java
 src/main/java/com/thoughtspot/client/model/LiveboardOptions.java
@@ -809,6 +809,8 @@ src/main/java/com/thoughtspot/client/model/SecuritySettingsOrgDetails.java
 src/main/java/com/thoughtspot/client/model/SecuritySettingsOrgPreferences.java
 src/main/java/com/thoughtspot/client/model/SecuritySettingsOrgPreferencesInput.java
 src/main/java/com/thoughtspot/client/model/SecuritySettingsResponse.java
+src/main/java/com/thoughtspot/client/model/SendAgentConversationMessageRequest.java
+src/main/java/com/thoughtspot/client/model/SendAgentConversationMessageStreamingRequest.java
 src/main/java/com/thoughtspot/client/model/SendAgentMessageRequest.java
 src/main/java/com/thoughtspot/client/model/SendAgentMessageResponse.java
 src/main/java/com/thoughtspot/client/model/SendAgentMessageStreamingRequest.java
@@ -828,6 +830,8 @@ src/main/java/com/thoughtspot/client/model/StorageConfig.java
 src/main/java/com/thoughtspot/client/model/StorageConfigInput.java
 src/main/java/com/thoughtspot/client/model/StorageDestination.java
 src/main/java/com/thoughtspot/client/model/StorageDestinationInput.java
+src/main/java/com/thoughtspot/client/model/SyncMetadataRequest.java
+src/main/java/com/thoughtspot/client/model/SyncMetadataResponse.java
 src/main/java/com/thoughtspot/client/model/SystemConfig.java
 src/main/java/com/thoughtspot/client/model/SystemInfo.java
 src/main/java/com/thoughtspot/client/model/SystemOverrideInfo.java
@@ -943,7 +947,6 @@ src/test/java/com/thoughtspot/client/model/ActionDetailsTest.java
 src/test/java/com/thoughtspot/client/model/ActivateUserRequestTest.java
 src/test/java/com/thoughtspot/client/model/AgentConversationTest.java
 src/test/java/com/thoughtspot/client/model/AnswerContentTest.java
-src/test/java/com/thoughtspot/client/model/AnswerContextInputTest.java
 src/test/java/com/thoughtspot/client/model/AnswerDataResponseTest.java
 src/test/java/com/thoughtspot/client/model/AssignChangeAuthorRequestTest.java
 src/test/java/com/thoughtspot/client/model/AssignTagRequestTest.java
@@ -1117,7 +1120,6 @@ src/test/java/com/thoughtspot/client/model/JWTParameterTest.java
 src/test/java/com/thoughtspot/client/model/JWTUserOptionsFullTest.java
 src/test/java/com/thoughtspot/client/model/JWTUserOptionsTest.java
 src/test/java/com/thoughtspot/client/model/JobRecipientTest.java
-src/test/java/com/thoughtspot/client/model/LBContextInputTest.java
 src/test/java/com/thoughtspot/client/model/LiveboardContentTest.java
 src/test/java/com/thoughtspot/client/model/LiveboardDataResponseTest.java
 src/test/java/com/thoughtspot/client/model/LiveboardOptionsInputTest.java
@@ -1242,6 +1244,8 @@ src/test/java/com/thoughtspot/client/model/SecuritySettingsOrgDetailsTest.java
 src/test/java/com/thoughtspot/client/model/SecuritySettingsOrgPreferencesInputTest.java
 src/test/java/com/thoughtspot/client/model/SecuritySettingsOrgPreferencesTest.java
 src/test/java/com/thoughtspot/client/model/SecuritySettingsResponseTest.java
+src/test/java/com/thoughtspot/client/model/SendAgentConversationMessageRequestTest.java
+src/test/java/com/thoughtspot/client/model/SendAgentConversationMessageStreamingRequestTest.java
 src/test/java/com/thoughtspot/client/model/SendAgentMessageRequestTest.java
 src/test/java/com/thoughtspot/client/model/SendAgentMessageResponseTest.java
 src/test/java/com/thoughtspot/client/model/SendAgentMessageStreamingRequestTest.java
@@ -1261,6 +1265,8 @@ src/test/java/com/thoughtspot/client/model/StorageConfigInputTest.java
 src/test/java/com/thoughtspot/client/model/StorageConfigTest.java
 src/test/java/com/thoughtspot/client/model/StorageDestinationInputTest.java
 src/test/java/com/thoughtspot/client/model/StorageDestinationTest.java
+src/test/java/com/thoughtspot/client/model/SyncMetadataRequestTest.java
+src/test/java/com/thoughtspot/client/model/SyncMetadataResponseTest.java
 src/test/java/com/thoughtspot/client/model/SystemConfigTest.java
 src/test/java/com/thoughtspot/client/model/SystemInfoTest.java
 src/test/java/com/thoughtspot/client/model/SystemOverrideInfoTest.java

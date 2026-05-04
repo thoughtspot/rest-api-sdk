@@ -22,18 +22,6 @@ public class ContextPayloadV2InputTest {
         // TODO: test type
     }
 
-    /** Test the property 'answerContext' */
-    @Test
-    public void answerContextTest() {
-        // TODO: test answerContext
-    }
-
-    /** Test the property 'liveboardContext' */
-    @Test
-    public void liveboardContextTest() {
-        // TODO: test liveboardContext
-    }
-
     /** Test the property 'dataSourceContext' */
     @Test
     public void dataSourceContextTest() {

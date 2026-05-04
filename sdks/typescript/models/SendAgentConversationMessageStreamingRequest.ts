@@ -12,34 +12,24 @@
 
 import { HttpFile } from '../http/http';
 
-export class LBContextInput {
+export class SendAgentConversationMessageStreamingRequest {
     /**
-    * Unique identifier of the liveboard.
+    * messages to be sent to the agent
     */
-    'liveboard_identifier': string;
-    /**
-    * Unique identifier of the visualization.
-    */
-    'visualization_identifier': string;
+    'messages': Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "liveboard_identifier",
-            "baseName": "liveboard_identifier",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "visualization_identifier",
-            "baseName": "visualization_identifier",
-            "type": "string",
+            "name": "messages",
+            "baseName": "messages",
+            "type": "Array<string>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return LBContextInput.attributeTypeMap;
+        return SendAgentConversationMessageStreamingRequest.attributeTypeMap;
     }
 
     public constructor() {

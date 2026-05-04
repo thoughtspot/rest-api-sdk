@@ -19,6 +19,8 @@ import com.thoughtspot.client.model.GetNLInstructionsRequest;
 import com.thoughtspot.client.model.GetRelevantQuestionsRequest;
 import com.thoughtspot.client.model.QueryGetDecomposedQueryRequest;
 import com.thoughtspot.client.model.ResponseMessage;
+import com.thoughtspot.client.model.SendAgentConversationMessageRequest;
+import com.thoughtspot.client.model.SendAgentConversationMessageStreamingRequest;
 import com.thoughtspot.client.model.SendAgentMessageRequest;
 import com.thoughtspot.client.model.SendAgentMessageResponse;
 import com.thoughtspot.client.model.SendAgentMessageStreamingRequest;
@@ -258,7 +260,89 @@ public class AiApiTest {
     }
 
     /**
-     * Version: 10.15.0.cl or later **Deprecated** — Use &#x60;sendAgentConversationMessage&#x60;
+     * Version: 26.5.0.cl or later Sends natural language messages to an existing Spotter agent
+     * conversation and returns the complete response synchronously. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the metadata object associated with the
+     * conversation. The user must have access to the conversation session referenced by
+     * &#x60;conversation_identifier&#x60;. A conversation must first be created using the
+     * &#x60;createAgentConversation&#x60; API. #### Usage guidelines The request must include: -
+     * &#x60;conversation_identifier&#x60;: the unique session ID returned by
+     * &#x60;createAgentConversation&#x60;, used for context continuity and message tracking -
+     * &#x60;messages&#x60;: an array of one or more text messages to send to the agent The API
+     * returns an array of response objects, each containing: - &#x60;type&#x60;: the kind of
+     * response — &#x60;text&#x60;, &#x60;answer&#x60;, or &#x60;error&#x60; - &#x60;message&#x60;:
+     * the main content of the response - &#x60;metadata&#x60;: additional information depending on
+     * the message type (e.g., answer metadata includes analytics and visualization details) ####
+     * Error responses | Code | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks permission on the referenced conversation. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint is Generally Available from version 26.5.0.cl. &gt; - This endpoint requires Spotter
+     * - please contact ThoughtSpot support to enable Spotter on your cluster. &gt; - For real-time
+     * streamed responses, use &#x60;sendAgentConversationMessageStreaming&#x60; instead.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void sendAgentConversationMessageTest() throws ApiException {
+        String conversationIdentifier = null;
+        SendAgentConversationMessageRequest sendAgentConversationMessageRequest = null;
+        Object response =
+                api.sendAgentConversationMessage(
+                        conversationIdentifier, sendAgentConversationMessageRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 26.5.0.cl or later Sends one or more natural language messages to an existing
+     * Spotter agent conversation and returns the response as a real-time Server-Sent Events stream.
+     * Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the metadata object associated
+     * with the conversation. The user must have access to the conversation session referenced by
+     * &#x60;conversation_identifier&#x60;. A conversation must first be created using the
+     * &#x60;createAgentConversation&#x60; API. #### Usage guidelines The request must include: -
+     * &#x60;conversation_identifier&#x60;: the unique session ID returned by
+     * &#x60;createAgentConversation&#x60;, used for context continuity and message tracking -
+     * &#x60;messages&#x60;: an array of one or more text messages to send to the agent If the
+     * request is valid, the API returns a Server-Sent Events (SSE) stream. Each line has the form
+     * &#x60;data: [{\&quot;type\&quot;: \&quot;...\&quot;, ...}]&#x60; — a JSON array of event
+     * objects. Event types include: - &#x60;ack&#x60;: confirms receipt of the request
+     * (&#x60;node_id&#x60;) - &#x60;conv_title&#x60;: conversation title (&#x60;title&#x60;,
+     * &#x60;conv_id&#x60;) - &#x60;notification&#x60;: status updates on operations
+     * (&#x60;group_id&#x60;, &#x60;metadata&#x60;, &#x60;code&#x60; — e.g.
+     * &#x60;TOOL_CALL_NOTIFICATION&#x60;, &#x60;nls_start&#x60;,
+     * &#x60;FINAL_RESPONSE_NOTIFICATION&#x60;) - &#x60;text-chunk&#x60;: incremental content chunks
+     * (&#x60;id&#x60;, &#x60;group_id&#x60;, &#x60;metadata&#x60; with &#x60;format&#x60; and
+     * &#x60;type&#x60; such as &#x60;thinking&#x60; or &#x60;text&#x60;, &#x60;content&#x60;) -
+     * &#x60;text&#x60;: full text block with same structure as &#x60;text-chunk&#x60; -
+     * &#x60;answer&#x60;: structured answer with metadata (&#x60;id&#x60;, &#x60;group_id&#x60;,
+     * &#x60;metadata&#x60; with &#x60;sage_query&#x60;, &#x60;session_id&#x60;, &#x60;title&#x60;,
+     * etc., &#x60;title&#x60;) - &#x60;error&#x60;: if a failure occurs #### Error responses | Code
+     * | Description | | ---- |
+     * --------------------------------------------------------------------------------------------------------------------------------
+     * | | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks permission on the referenced conversation. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint is Generally Available from version 26.5.0.cl. &gt; - This endpoint requires Spotter
+     * - please contact ThoughtSpot support to enable Spotter on your cluster. &gt; - The streaming
+     * protocol uses Server-Sent Events (SSE). &gt; - For the complete response in a single payload,
+     * use &#x60;sendAgentConversationMessage&#x60; instead.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void sendAgentConversationMessageStreamingTest() throws ApiException {
+        String conversationIdentifier = null;
+        SendAgentConversationMessageStreamingRequest sendAgentConversationMessageStreamingRequest =
+                null;
+        SendAgentMessageResponse response =
+                api.sendAgentConversationMessageStreaming(
+                        conversationIdentifier, sendAgentConversationMessageStreamingRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 26.2.0.cl or later **Deprecated** — Use &#x60;sendAgentConversationMessage&#x60;
      * instead. Send natural language messages to an existing Spotter agent conversation and returns
      * the complete response synchronously. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and
      * access to the metadata object associated with the conversation. The user must have access to
@@ -292,7 +376,7 @@ public class AiApiTest {
     }
 
     /**
-     * Version: 10.13.0.cl or later **Deprecated** — Use
+     * Version: 26.2.0.cl or later **Deprecated** — Use
      * &#x60;sendAgentConversationMessageStreaming&#x60; instead. Sends one or more natural language
      * messages to an existing Spotter agent conversation and returns the response as a real-time
      * Server-Sent Events stream. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the

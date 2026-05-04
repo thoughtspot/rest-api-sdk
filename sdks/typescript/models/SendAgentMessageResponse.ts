@@ -13,7 +13,13 @@
 import { HttpFile } from '../http/http';
 
 export class SendAgentMessageResponse {
+    /**
+    * Indicates whether the agent response was received and processed successfully.
+    */
     'success': boolean;
+    /**
+    * Optional message providing additional context about the operation outcome.
+    */
     'message'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;

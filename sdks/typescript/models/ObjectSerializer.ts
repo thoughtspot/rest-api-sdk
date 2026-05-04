@@ -11,7 +11,6 @@ export * from '../models/ActionDetailsInputCreate';
 export * from '../models/ActivateUserRequest';
 export * from '../models/AgentConversation';
 export * from '../models/AnswerContent';
-export * from '../models/AnswerContextInput';
 export * from '../models/AnswerDataResponse';
 export * from '../models/AssignChangeAuthorRequest';
 export * from '../models/AssignTagRequest';
@@ -207,7 +206,6 @@ export * from '../models/JWTParameter';
 export * from '../models/JWTUserOptions';
 export * from '../models/JWTUserOptionsFull';
 export * from '../models/JobRecipient';
-export * from '../models/LBContextInput';
 export * from '../models/LiveboardContent';
 export * from '../models/LiveboardDataResponse';
 export * from '../models/LiveboardOptions';
@@ -343,6 +341,8 @@ export * from '../models/SecuritySettingsOrgDetails';
 export * from '../models/SecuritySettingsOrgPreferences';
 export * from '../models/SecuritySettingsOrgPreferencesInput';
 export * from '../models/SecuritySettingsResponse';
+export * from '../models/SendAgentConversationMessageRequest';
+export * from '../models/SendAgentConversationMessageStreamingRequest';
 export * from '../models/SendAgentMessageRequest';
 export * from '../models/SendAgentMessageResponse';
 export * from '../models/SendAgentMessageStreamingRequest';
@@ -362,6 +362,8 @@ export * from '../models/StorageConfig';
 export * from '../models/StorageConfigInput';
 export * from '../models/StorageDestination';
 export * from '../models/StorageDestinationInput';
+export * from '../models/SyncMetadataRequest';
+export * from '../models/SyncMetadataResponse';
 export * from '../models/SystemConfig';
 export * from '../models/SystemInfo';
 export * from '../models/SystemOverrideInfo';
@@ -459,7 +461,6 @@ import { ActionDetailsInputCreate } from '../models/ActionDetailsInputCreate';
 import { ActivateUserRequest } from '../models/ActivateUserRequest';
 import { AgentConversation } from '../models/AgentConversation';
 import { AnswerContent } from '../models/AnswerContent';
-import { AnswerContextInput } from '../models/AnswerContextInput';
 import { AnswerDataResponse } from '../models/AnswerDataResponse';
 import { AssignChangeAuthorRequest } from '../models/AssignChangeAuthorRequest';
 import { AssignTagRequest } from '../models/AssignTagRequest';
@@ -515,14 +516,14 @@ import { ConfigureSecuritySettingsRequestClusterPreferences } from '../models/Co
 import { ConnectionConfigurationResponse     , ConnectionConfigurationResponsePolicyProcessesEnum   , ConnectionConfigurationResponseDataWarehouseTypeEnum  , ConnectionConfigurationResponsePolicyTypeEnum     } from '../models/ConnectionConfigurationResponse';
 import { ConnectionConfigurationSearchRequest  , ConnectionConfigurationSearchRequestPolicyTypeEnum   } from '../models/ConnectionConfigurationSearchRequest';
 import { ConnectionInput } from '../models/ConnectionInput';
-import { ContextPayloadV2Input, ContextPayloadV2InputTypeEnum      } from '../models/ContextPayloadV2Input';
+import { ContextPayloadV2Input, ContextPayloadV2InputTypeEnum    } from '../models/ContextPayloadV2Input';
 import { Conversation } from '../models/Conversation';
 import { ConversationSettingsInput } from '../models/ConversationSettingsInput';
 import { ConvertWorksheetToModelRequest } from '../models/ConvertWorksheetToModelRequest';
 import { CopyObjectRequest  , CopyObjectRequestTypeEnum    } from '../models/CopyObjectRequest';
 import { CreateAgentConversationRequest } from '../models/CreateAgentConversationRequest';
 import { CreateAgentConversationRequestConversationSettings } from '../models/CreateAgentConversationRequestConversationSettings';
-import { CreateAgentConversationRequestMetadataContext, CreateAgentConversationRequestMetadataContextTypeEnum      } from '../models/CreateAgentConversationRequestMetadataContext';
+import { CreateAgentConversationRequestMetadataContext, CreateAgentConversationRequestMetadataContextTypeEnum    } from '../models/CreateAgentConversationRequestMetadataContext';
 import { CreateCalendarRequest , CreateCalendarRequestCreationMethodEnum     , CreateCalendarRequestCalendarTypeEnum  , CreateCalendarRequestMonthOffsetEnum  , CreateCalendarRequestStartDayOfWeekEnum     } from '../models/CreateCalendarRequest';
 import { CreateCalendarRequestTableReference } from '../models/CreateCalendarRequestTableReference';
 import { CreateCollectionRequest } from '../models/CreateCollectionRequest';
@@ -596,7 +597,7 @@ import { ExcludeMetadataListItemInput , ExcludeMetadataListItemInputTypeEnum   }
 import { ExportAnswerReportRequest   , ExportAnswerReportRequestFileFormatEnum       } from '../models/ExportAnswerReportRequest';
 import { ExportAnswerReportRequestRegionalSettings, ExportAnswerReportRequestRegionalSettingsCurrencyFormatEnum  , ExportAnswerReportRequestRegionalSettingsUserLocaleEnum  , ExportAnswerReportRequestRegionalSettingsNumberFormatLocaleEnum  , ExportAnswerReportRequestRegionalSettingsDateFormatLocaleEnum   } from '../models/ExportAnswerReportRequestRegionalSettings';
 import { ExportLiveboardReportRequest     , ExportLiveboardReportRequestFileFormatEnum          } from '../models/ExportLiveboardReportRequest';
-import { ExportLiveboardReportRequestPdfOptions    , ExportLiveboardReportRequestPdfOptionsPageOrientationEnum     } from '../models/ExportLiveboardReportRequestPdfOptions';
+import { ExportLiveboardReportRequestPdfOptions, ExportLiveboardReportRequestPdfOptionsPageSizeEnum       , ExportLiveboardReportRequestPdfOptionsPageOrientationEnum     } from '../models/ExportLiveboardReportRequestPdfOptions';
 import { ExportLiveboardReportRequestPngOptions } from '../models/ExportLiveboardReportRequestPngOptions';
 import { ExportMetadataTMLBatchedRequest, ExportMetadataTMLBatchedRequestMetadataTypeEnum    , ExportMetadataTMLBatchedRequestEdocFormatEnum     } from '../models/ExportMetadataTMLBatchedRequest';
 import { ExportMetadataTMLRequest   , ExportMetadataTMLRequestEdocFormatEnum  , ExportMetadataTMLRequestExportSchemaVersionEnum       } from '../models/ExportMetadataTMLRequest';
@@ -655,7 +656,6 @@ import { JWTParameter } from '../models/JWTParameter';
 import { JWTUserOptions } from '../models/JWTUserOptions';
 import { JWTUserOptionsFull } from '../models/JWTUserOptionsFull';
 import { JobRecipient, JobRecipientTypeEnum      } from '../models/JobRecipient';
-import { LBContextInput } from '../models/LBContextInput';
 import { LiveboardContent } from '../models/LiveboardContent';
 import { LiveboardDataResponse } from '../models/LiveboardDataResponse';
 import { LiveboardOptions } from '../models/LiveboardOptions';
@@ -693,7 +693,7 @@ import { ParameterizeMetadataRequest, ParameterizeMetadataRequestMetadataTypeEnu
 import { ParametersListItem } from '../models/ParametersListItem';
 import { ParametersListItemInput } from '../models/ParametersListItemInput';
 import { PdfOptions       , PdfOptionsPageSizeEnum    } from '../models/PdfOptions';
-import { PdfOptionsInput    , PdfOptionsInputPageOrientationEnum     } from '../models/PdfOptionsInput';
+import { PdfOptionsInput, PdfOptionsInputPageSizeEnum       , PdfOptionsInputPageOrientationEnum     } from '../models/PdfOptionsInput';
 import { PermissionInput , PermissionInputShareModeEnum   } from '../models/PermissionInput';
 import { PermissionOfMetadataResponse } from '../models/PermissionOfMetadataResponse';
 import { PermissionOfPrincipalsResponse } from '../models/PermissionOfPrincipalsResponse';
@@ -768,7 +768,7 @@ import { SearchCustomActionsRequestDefaultActionConfig } from '../models/SearchC
 import { SearchDataRequest  , SearchDataRequestDataFormatEnum        } from '../models/SearchDataRequest';
 import { SearchDataResponse } from '../models/SearchDataResponse';
 import { SearchEmailCustomizationRequest } from '../models/SearchEmailCustomizationRequest';
-import { SearchMetadataRequest   , SearchMetadataRequestDependentObjectVersionEnum                     , SearchMetadataRequestLiveboardResponseVersionEnum    } from '../models/SearchMetadataRequest';
+import { SearchMetadataRequest   , SearchMetadataRequestDependentObjectVersionEnum                      , SearchMetadataRequestLiveboardResponseVersionEnum    } from '../models/SearchMetadataRequest';
 import { SearchMetadataRequestFavoriteObjectOptions } from '../models/SearchMetadataRequestFavoriteObjectOptions';
 import { SearchMetadataRequestSortOptions, SearchMetadataRequestSortOptionsFieldNameEnum  , SearchMetadataRequestSortOptionsOrderEnum   } from '../models/SearchMetadataRequestSortOptions';
 import { SearchOrgsRequest  , SearchOrgsRequestVisibilityEnum  , SearchOrgsRequestStatusEnum    } from '../models/SearchOrgsRequest';
@@ -791,6 +791,8 @@ import { SecuritySettingsOrgDetails } from '../models/SecuritySettingsOrgDetails
 import { SecuritySettingsOrgPreferences } from '../models/SecuritySettingsOrgPreferences';
 import { SecuritySettingsOrgPreferencesInput } from '../models/SecuritySettingsOrgPreferencesInput';
 import { SecuritySettingsResponse } from '../models/SecuritySettingsResponse';
+import { SendAgentConversationMessageRequest } from '../models/SendAgentConversationMessageRequest';
+import { SendAgentConversationMessageStreamingRequest } from '../models/SendAgentConversationMessageStreamingRequest';
 import { SendAgentMessageRequest } from '../models/SendAgentMessageRequest';
 import { SendAgentMessageResponse } from '../models/SendAgentMessageResponse';
 import { SendAgentMessageStreamingRequest } from '../models/SendAgentMessageStreamingRequest';
@@ -810,6 +812,8 @@ import { StorageConfig } from '../models/StorageConfig';
 import { StorageConfigInput } from '../models/StorageConfigInput';
 import { StorageDestination, StorageDestinationStorageTypeEnum    } from '../models/StorageDestination';
 import { StorageDestinationInput, StorageDestinationInputStorageTypeEnum    } from '../models/StorageDestinationInput';
+import { SyncMetadataRequest , SyncMetadataRequestSyncAttributesEnum   } from '../models/SyncMetadataRequest';
+import { SyncMetadataResponse, SyncMetadataResponseStatusEnum        } from '../models/SyncMetadataResponse';
 import { SystemConfig } from '../models/SystemConfig';
 import { SystemInfo } from '../models/SystemInfo';
 import { SystemOverrideInfo } from '../models/SystemOverrideInfo';
@@ -978,6 +982,7 @@ let enumsMap: Set<string> = new Set<string>([
     "ExportAnswerReportRequestRegionalSettingsNumberFormatLocaleEnum",
     "ExportAnswerReportRequestRegionalSettingsDateFormatLocaleEnum",
     "ExportLiveboardReportRequestFileFormatEnum",
+    "ExportLiveboardReportRequestPdfOptionsPageSizeEnum",
     "ExportLiveboardReportRequestPdfOptionsPageOrientationEnum",
     "ExportMetadataTMLBatchedRequestMetadataTypeEnum",
     "ExportMetadataTMLBatchedRequestEdocFormatEnum",
@@ -1034,6 +1039,7 @@ let enumsMap: Set<string> = new Set<string>([
     "ParameterizeMetadataRequestMetadataTypeEnum",
     "ParameterizeMetadataRequestFieldTypeEnum",
     "PdfOptionsPageSizeEnum",
+    "PdfOptionsInputPageSizeEnum",
     "PdfOptionsInputPageOrientationEnum",
     "PermissionInputShareModeEnum",
     "PermissionsMetadataTypeInputTypeEnum",
@@ -1104,6 +1110,8 @@ let enumsMap: Set<string> = new Set<string>([
     "SqlQueryResponseMetadataTypeEnum",
     "StorageDestinationStorageTypeEnum",
     "StorageDestinationInputStorageTypeEnum",
+    "SyncMetadataRequestSyncAttributesEnum",
+    "SyncMetadataResponseStatusEnum",
     "TagMetadataTypeInputTypeEnum",
     "TokenAccessScopeObjectTypeEnum",
     "UnparameterizeMetadataRequestMetadataTypeEnum",
@@ -1175,7 +1183,6 @@ let typeMap: {[index: string]: any} = {
     "ActivateUserRequest": ActivateUserRequest,
     "AgentConversation": AgentConversation,
     "AnswerContent": AnswerContent,
-    "AnswerContextInput": AnswerContextInput,
     "AnswerDataResponse": AnswerDataResponse,
     "AssignChangeAuthorRequest": AssignChangeAuthorRequest,
     "AssignTagRequest": AssignTagRequest,
@@ -1371,7 +1378,6 @@ let typeMap: {[index: string]: any} = {
     "JWTUserOptions": JWTUserOptions,
     "JWTUserOptionsFull": JWTUserOptionsFull,
     "JobRecipient": JobRecipient,
-    "LBContextInput": LBContextInput,
     "LiveboardContent": LiveboardContent,
     "LiveboardDataResponse": LiveboardDataResponse,
     "LiveboardOptions": LiveboardOptions,
@@ -1507,6 +1513,8 @@ let typeMap: {[index: string]: any} = {
     "SecuritySettingsOrgPreferences": SecuritySettingsOrgPreferences,
     "SecuritySettingsOrgPreferencesInput": SecuritySettingsOrgPreferencesInput,
     "SecuritySettingsResponse": SecuritySettingsResponse,
+    "SendAgentConversationMessageRequest": SendAgentConversationMessageRequest,
+    "SendAgentConversationMessageStreamingRequest": SendAgentConversationMessageStreamingRequest,
     "SendAgentMessageRequest": SendAgentMessageRequest,
     "SendAgentMessageResponse": SendAgentMessageResponse,
     "SendAgentMessageStreamingRequest": SendAgentMessageStreamingRequest,
@@ -1526,6 +1534,8 @@ let typeMap: {[index: string]: any} = {
     "StorageConfigInput": StorageConfigInput,
     "StorageDestination": StorageDestination,
     "StorageDestinationInput": StorageDestinationInput,
+    "SyncMetadataRequest": SyncMetadataRequest,
+    "SyncMetadataResponse": SyncMetadataResponse,
     "SystemConfig": SystemConfig,
     "SystemInfo": SystemInfo,
     "SystemOverrideInfo": SystemOverrideInfo,

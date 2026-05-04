@@ -51,7 +51,7 @@ public class SendAgentMessageResponse implements Serializable {
     }
 
     /**
-     * Get success
+     * Indicates whether the agent response was received and processed successfully.
      *
      * @return success
      */
@@ -70,7 +70,7 @@ public class SendAgentMessageResponse implements Serializable {
     }
 
     /**
-     * Get message
+     * Optional message providing additional context about the operation outcome.
      *
      * @return message
      */

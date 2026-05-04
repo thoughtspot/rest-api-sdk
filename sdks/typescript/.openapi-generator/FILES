@@ -74,7 +74,6 @@ models/ActionDetailsInputCreate.ts
 models/ActivateUserRequest.ts
 models/AgentConversation.ts
 models/AnswerContent.ts
-models/AnswerContextInput.ts
 models/AnswerDataResponse.ts
 models/AssignChangeAuthorRequest.ts
 models/AssignTagRequest.ts
@@ -270,7 +269,6 @@ models/JWTParameter.ts
 models/JWTUserOptions.ts
 models/JWTUserOptionsFull.ts
 models/JobRecipient.ts
-models/LBContextInput.ts
 models/LiveboardContent.ts
 models/LiveboardDataResponse.ts
 models/LiveboardOptions.ts
@@ -407,6 +405,8 @@ models/SecuritySettingsOrgDetails.ts
 models/SecuritySettingsOrgPreferences.ts
 models/SecuritySettingsOrgPreferencesInput.ts
 models/SecuritySettingsResponse.ts
+models/SendAgentConversationMessageRequest.ts
+models/SendAgentConversationMessageStreamingRequest.ts
 models/SendAgentMessageRequest.ts
 models/SendAgentMessageResponse.ts
 models/SendAgentMessageStreamingRequest.ts
@@ -426,6 +426,8 @@ models/StorageConfig.ts
 models/StorageConfigInput.ts
 models/StorageDestination.ts
 models/StorageDestinationInput.ts
+models/SyncMetadataRequest.ts
+models/SyncMetadataResponse.ts
 models/SystemConfig.ts
 models/SystemInfo.ts
 models/SystemOverrideInfo.ts

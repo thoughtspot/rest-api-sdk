@@ -9,6 +9,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
@@ -16,70 +17,133 @@ import com.google.gson.stream.JsonWriter;
 import com.thoughtspot.client.JSON;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** AnswerContextInput */
+/** SyncMetadataRequest */
 @javax.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         comments = "Generator version: 7.12.0")
-public class AnswerContextInput implements Serializable {
+public class SyncMetadataRequest implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public static final String SERIALIZED_NAME_SESSION_IDENTIFIER = "session_identifier";
+    public static final String SERIALIZED_NAME_TABLES = "tables";
 
-    @SerializedName(SERIALIZED_NAME_SESSION_IDENTIFIER)
-    @javax.annotation.Nonnull
-    private String sessionIdentifier;
+    @SerializedName(SERIALIZED_NAME_TABLES)
+    @javax.annotation.Nullable
+    private Object tables;
 
-    public static final String SERIALIZED_NAME_GENERATION_NUMBER = "generation_number";
+    /** Gets or Sets syncAttributes */
+    @JsonAdapter(SyncAttributesEnum.Adapter.class)
+    public enum SyncAttributesEnum {
+        DESCRIPTION("DESCRIPTION");
 
-    @SerializedName(SERIALIZED_NAME_GENERATION_NUMBER)
-    @javax.annotation.Nonnull
-    private Integer generationNumber;
+        private String value;
 
-    public AnswerContextInput() {}
+        SyncAttributesEnum(String value) {
+            this.value = value;
+        }
 
-    public AnswerContextInput sessionIdentifier(
-            @javax.annotation.Nonnull String sessionIdentifier) {
-        this.sessionIdentifier = sessionIdentifier;
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        public static SyncAttributesEnum fromValue(String value) {
+            for (SyncAttributesEnum b : SyncAttributesEnum.values()) {
+                if (b.value.equals(value)) {
+                    return b;
+                }
+            }
+            throw new IllegalArgumentException("Unexpected value '" + value + "'");
+        }
+
+        public static class Adapter extends TypeAdapter<SyncAttributesEnum> {
+            @Override
+            public void write(final JsonWriter jsonWriter, final SyncAttributesEnum enumeration)
+                    throws IOException {
+                jsonWriter.value(enumeration.getValue());
+            }
+
+            @Override
+            public SyncAttributesEnum read(final JsonReader jsonReader) throws IOException {
+                String value = jsonReader.nextString();
+                return SyncAttributesEnum.fromValue(value);
+            }
+        }
+
+        public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+            String value = jsonElement.getAsString();
+            SyncAttributesEnum.fromValue(value);
+        }
+    }
+
+    public static final String SERIALIZED_NAME_SYNC_ATTRIBUTES = "sync_attributes";
+
+    @SerializedName(SERIALIZED_NAME_SYNC_ATTRIBUTES)
+    @javax.annotation.Nullable
+    private List<SyncAttributesEnum> syncAttributes =
+            new ArrayList<>(Arrays.asList(SyncAttributesEnum.DESCRIPTION));
+
+    public SyncMetadataRequest() {}
+
+    public SyncMetadataRequest tables(@javax.annotation.Nullable Object tables) {
+        this.tables = tables;
         return this;
     }
 
     /**
-     * Unique identifier of the answer session.
+     * Array of tables to sync. Each element can be: - String: Table identifier (GUID or name) to
+     * sync all columns for that table. - Object: {tableId: [columnIds]} to sync specific columns.
+     * If not provided, syncs all tables in the connection.
      *
-     * @return sessionIdentifier
+     * @return tables
      */
-    @javax.annotation.Nonnull
-    public String getSessionIdentifier() {
-        return sessionIdentifier;
+    @javax.annotation.Nullable
+    public Object getTables() {
+        return tables;
     }
 
-    public void setSessionIdentifier(@javax.annotation.Nonnull String sessionIdentifier) {
-        this.sessionIdentifier = sessionIdentifier;
+    public void setTables(@javax.annotation.Nullable Object tables) {
+        this.tables = tables;
     }
 
-    public AnswerContextInput generationNumber(@javax.annotation.Nonnull Integer generationNumber) {
-        this.generationNumber = generationNumber;
+    public SyncMetadataRequest syncAttributes(
+            @javax.annotation.Nullable List<SyncAttributesEnum> syncAttributes) {
+        this.syncAttributes = syncAttributes;
+        return this;
+    }
+
+    public SyncMetadataRequest addSyncAttributesItem(SyncAttributesEnum syncAttributesItem) {
+        if (this.syncAttributes == null) {
+            this.syncAttributes = new ArrayList<>(Arrays.asList(SyncAttributesEnum.DESCRIPTION));
+        }
+        this.syncAttributes.add(syncAttributesItem);
         return this;
     }
 
     /**
-     * Generation number of the answer.
+     * List of sync_attributes to sync from CDW. The default value is DESCRIPTION.
      *
-     * @return generationNumber
+     * @return syncAttributes
      */
-    @javax.annotation.Nonnull
-    public Integer getGenerationNumber() {
-        return generationNumber;
+    @javax.annotation.Nullable
+    public List<SyncAttributesEnum> getSyncAttributes() {
+        return syncAttributes;
     }
 
-    public void setGenerationNumber(@javax.annotation.Nonnull Integer generationNumber) {
-        this.generationNumber = generationNumber;
+    public void setSyncAttributes(
+            @javax.annotation.Nullable List<SyncAttributesEnum> syncAttributes) {
+        this.syncAttributes = syncAttributes;
     }
 
     /**
@@ -94,9 +158,9 @@ public class AnswerContextInput implements Serializable {
      *
      * @param key name of the property
      * @param value value of the property
-     * @return the AnswerContextInput instance itself
+     * @return the SyncMetadataRequest instance itself
      */
-    public AnswerContextInput putAdditionalProperty(String key, Object value) {
+    public SyncMetadataRequest putAdditionalProperty(String key, Object value) {
         if (this.additionalProperties == null) {
             this.additionalProperties = new HashMap<String, Object>();
         }
@@ -134,26 +198,24 @@ public class AnswerContextInput implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        AnswerContextInput answerContextInput = (AnswerContextInput) o;
-        return Objects.equals(this.sessionIdentifier, answerContextInput.sessionIdentifier)
-                && Objects.equals(this.generationNumber, answerContextInput.generationNumber)
+        SyncMetadataRequest syncMetadataRequest = (SyncMetadataRequest) o;
+        return Objects.equals(this.tables, syncMetadataRequest.tables)
+                && Objects.equals(this.syncAttributes, syncMetadataRequest.syncAttributes)
                 && Objects.equals(
-                        this.additionalProperties, answerContextInput.additionalProperties);
+                        this.additionalProperties, syncMetadataRequest.additionalProperties);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(sessionIdentifier, generationNumber, additionalProperties);
+        return Objects.hash(tables, syncAttributes, additionalProperties);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class AnswerContextInput {\n");
-        sb.append("    sessionIdentifier: ")
-                .append(toIndentedString(sessionIdentifier))
-                .append("\n");
-        sb.append("    generationNumber: ").append(toIndentedString(generationNumber)).append("\n");
+        sb.append("class SyncMetadataRequest {\n");
+        sb.append("    tables: ").append(toIndentedString(tables)).append("\n");
+        sb.append("    syncAttributes: ").append(toIndentedString(syncAttributes)).append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
                 .append("\n");
@@ -178,49 +240,40 @@ public class AnswerContextInput implements Serializable {
     static {
         // a set of all properties/fields (JSON key names)
         openapiFields = new HashSet<String>();
-        openapiFields.add("session_identifier");
-        openapiFields.add("generation_number");
+        openapiFields.add("tables");
+        openapiFields.add("sync_attributes");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
-        openapiRequiredFields.add("session_identifier");
-        openapiRequiredFields.add("generation_number");
     }
 
     /**
      * Validates the JSON Element and throws an exception if issues found
      *
      * @param jsonElement JSON Element
-     * @throws IOException if the JSON Element is invalid with respect to AnswerContextInput
+     * @throws IOException if the JSON Element is invalid with respect to SyncMetadataRequest
      */
     public static void validateJsonElement(JsonElement jsonElement) throws IOException {
         if (jsonElement == null) {
-            if (!AnswerContextInput.openapiRequiredFields
+            if (!SyncMetadataRequest.openapiRequiredFields
                     .isEmpty()) { // has required fields but JSON element is null
                 throw new IllegalArgumentException(
                         String.format(
-                                "The required field(s) %s in AnswerContextInput is not found in"
+                                "The required field(s) %s in SyncMetadataRequest is not found in"
                                         + " the empty JSON string",
-                                AnswerContextInput.openapiRequiredFields.toString()));
-            }
-        }
-
-        // check to make sure all required properties/fields are present in the JSON string
-        for (String requiredField : AnswerContextInput.openapiRequiredFields) {
-            if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-                throw new IllegalArgumentException(
-                        String.format(
-                                "The required field `%s` is not found in the JSON string: %s",
-                                requiredField, jsonElement.toString()));
+                                SyncMetadataRequest.openapiRequiredFields.toString()));
             }
         }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-        if (!jsonObj.get("session_identifier").isJsonPrimitive()) {
+        // ensure the optional json data is an array if present
+        if (jsonObj.get("sync_attributes") != null
+                && !jsonObj.get("sync_attributes").isJsonNull()
+                && !jsonObj.get("sync_attributes").isJsonArray()) {
             throw new IllegalArgumentException(
                     String.format(
-                            "Expected the field `session_identifier` to be a primitive type in the"
-                                    + " JSON string but got `%s`",
-                            jsonObj.get("session_identifier").toString()));
+                            "Expected the field `sync_attributes` to be an array in the JSON"
+                                    + " string but got `%s`",
+                            jsonObj.get("sync_attributes").toString()));
         }
     }
 
@@ -228,17 +281,17 @@ public class AnswerContextInput implements Serializable {
         @SuppressWarnings("unchecked")
         @Override
         public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-            if (!AnswerContextInput.class.isAssignableFrom(type.getRawType())) {
-                return null; // this class only serializes 'AnswerContextInput' and its subtypes
+            if (!SyncMetadataRequest.class.isAssignableFrom(type.getRawType())) {
+                return null; // this class only serializes 'SyncMetadataRequest' and its subtypes
             }
             final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-            final TypeAdapter<AnswerContextInput> thisAdapter =
-                    gson.getDelegateAdapter(this, TypeToken.get(AnswerContextInput.class));
+            final TypeAdapter<SyncMetadataRequest> thisAdapter =
+                    gson.getDelegateAdapter(this, TypeToken.get(SyncMetadataRequest.class));
 
             return (TypeAdapter<T>)
-                    new TypeAdapter<AnswerContextInput>() {
+                    new TypeAdapter<SyncMetadataRequest>() {
                         @Override
-                        public void write(JsonWriter out, AnswerContextInput value)
+                        public void write(JsonWriter out, SyncMetadataRequest value)
                                 throws IOException {
                             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
                             obj.remove("additionalProperties");
@@ -269,12 +322,12 @@ public class AnswerContextInput implements Serializable {
                         }
 
                         @Override
-                        public AnswerContextInput read(JsonReader in) throws IOException {
+                        public SyncMetadataRequest read(JsonReader in) throws IOException {
                             JsonElement jsonElement = elementAdapter.read(in);
                             validateJsonElement(jsonElement);
                             JsonObject jsonObj = jsonElement.getAsJsonObject();
                             // store additional fields in the deserialized instance
-                            AnswerContextInput instance = thisAdapter.fromJsonTree(jsonObj);
+                            SyncMetadataRequest instance = thisAdapter.fromJsonTree(jsonObj);
                             for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
                                 if (!openapiFields.contains(entry.getKey())) {
                                     if (entry.getValue().isJsonPrimitive()) { // primitive type
@@ -313,18 +366,18 @@ public class AnswerContextInput implements Serializable {
     }
 
     /**
-     * Create an instance of AnswerContextInput given an JSON string
+     * Create an instance of SyncMetadataRequest given an JSON string
      *
      * @param jsonString JSON string
-     * @return An instance of AnswerContextInput
-     * @throws IOException if the JSON string is invalid with respect to AnswerContextInput
+     * @return An instance of SyncMetadataRequest
+     * @throws IOException if the JSON string is invalid with respect to SyncMetadataRequest
      */
-    public static AnswerContextInput fromJson(String jsonString) throws IOException {
-        return JSON.getGson().fromJson(jsonString, AnswerContextInput.class);
+    public static SyncMetadataRequest fromJson(String jsonString) throws IOException {
+        return JSON.getGson().fromJson(jsonString, SyncMetadataRequest.class);
     }
 
     /**
-     * Convert an instance of AnswerContextInput to an JSON string
+     * Convert an instance of SyncMetadataRequest to an JSON string
      *
      * @return JSON string
      */

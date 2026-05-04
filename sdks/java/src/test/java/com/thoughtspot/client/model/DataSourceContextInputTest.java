@@ -16,6 +16,18 @@ public class DataSourceContextInputTest {
         // TODO: test DataSourceContextInput
     }
 
+    /** Test the property 'dataSourceIdentifier' */
+    @Test
+    public void dataSourceIdentifierTest() {
+        // TODO: test dataSourceIdentifier
+    }
+
+    /** Test the property 'dataSourceIdentifiers' */
+    @Test
+    public void dataSourceIdentifiersTest() {
+        // TODO: test dataSourceIdentifiers
+    }
+
     /** Test the property 'guid' */
     @Test
     public void guidTest() {

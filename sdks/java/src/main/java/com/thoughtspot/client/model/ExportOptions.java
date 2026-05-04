@@ -50,7 +50,7 @@ public class ExportOptions implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_INCLUDE_OBJ_ID)
     @javax.annotation.Nullable
-    private Boolean includeObjId = true;
+    private Boolean includeObjId = false;
 
     public static final String SERIALIZED_NAME_EXPORT_WITH_ASSOCIATED_FEEDBACKS =
             "export_with_associated_feedbacks";

@@ -14,13 +14,33 @@ import { HttpFile } from '../http/http';
 
 export class DataSourceContextInput {
     /**
-    * Unique identifier of the data source.
+    * Unique identifier of the data source. Required when context type is DATA_SOURCE and `data_source_identifiers` is not provided. At least one of `data_source_identifier` or `data_source_identifiers` must be supplied for DATA_SOURCE context; omit only when context type is AUTO_MODE.    Version: 26.5.0.cl or later 
     */
-    'guid': string;
+    'data_source_identifier'?: string | null;
+    /**
+    * Unique identifiers of data sources for multi-data-source context. Required when context type is DATA_SOURCE and `data_source_identifier` is not provided.    Version: 26.5.0.cl or later 
+    */
+    'data_source_identifiers'?: Array<string> | null;
+    /**
+    * Deprecated. Use `data_source_identifier` instead. Previously required when neither `data_source_identifier` nor `data_source_identifiers` was provided for DATA_SOURCE context.    Version: 26.2.0.cl or later 
+    */
+    'guid'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "data_source_identifier",
+            "baseName": "data_source_identifier",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "data_source_identifiers",
+            "baseName": "data_source_identifiers",
+            "type": "Array<string>",
+            "format": ""
+        },
         {
             "name": "guid",
             "baseName": "guid",

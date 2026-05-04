@@ -17,6 +17,10 @@ export class AgentConversation {
     * Unique identifier of the conversation.
     */
     'conversation_id': string;
+    /**
+    * Unique identifier of the conversation.    Version: 26.5.0.cl or later 
+    */
+    'conversation_identifier': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -24,6 +28,12 @@ export class AgentConversation {
         {
             "name": "conversation_id",
             "baseName": "conversation_id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "conversation_identifier",
+            "baseName": "conversation_identifier",
             "type": "string",
             "format": ""
         }    ];

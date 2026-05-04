@@ -14,17 +14,21 @@ import { HttpFile } from '../http/http';
 
 export class ConversationSettingsInput {
     /**
-    * Enable contextual change analysis.
+    * Enable contextual change analysis. Default changed from `false` to `true` in 26.2.0.cl. Ignored on versions >= 26.2.0.cl where it is always enabled.    Version: 10.4.0.cl or later 
     */
     'enable_contextual_change_analysis'?: boolean | null;
     /**
-    * Enable natural language to answer generation.
+    * Enable natural language to answer generation. Default changed from `false` to `true` in 26.2.0.cl. Ignored on versions >= 26.2.0.cl where it is always enabled.    Version: 10.4.0.cl or later 
     */
     'enable_natural_language_answer_generation'?: boolean | null;
     /**
-    * Enable reasoning.
+    * Enable reasoning. Default changed from `false` to `true` in 26.2.0.cl. Ignored on versions >= 26.2.0.cl where it is always enabled.    Version: 10.4.0.cl or later 
     */
     'enable_reasoning'?: boolean | null;
+    /**
+    * Enable save conversation. When `true`, the conversation is persisted and can be retrieved later via conversation history.    Version: 26.5.0.cl or later 
+    */
+    'enable_save_chat'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -44,6 +48,12 @@ export class ConversationSettingsInput {
         {
             "name": "enable_reasoning",
             "baseName": "enable_reasoning",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "enable_save_chat",
+            "baseName": "enable_save_chat",
             "type": "boolean",
             "format": ""
         }    ];

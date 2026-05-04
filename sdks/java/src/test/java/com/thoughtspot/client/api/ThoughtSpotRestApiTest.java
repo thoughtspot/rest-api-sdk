@@ -150,6 +150,8 @@ import com.thoughtspot.client.model.SearchUsersRequest;
 import com.thoughtspot.client.model.SearchVariablesRequest;
 import com.thoughtspot.client.model.SearchWebhookConfigurationsRequest;
 import com.thoughtspot.client.model.SecuritySettingsResponse;
+import com.thoughtspot.client.model.SendAgentConversationMessageRequest;
+import com.thoughtspot.client.model.SendAgentConversationMessageStreamingRequest;
 import com.thoughtspot.client.model.SendAgentMessageRequest;
 import com.thoughtspot.client.model.SendAgentMessageResponse;
 import com.thoughtspot.client.model.SendAgentMessageStreamingRequest;
@@ -158,6 +160,8 @@ import com.thoughtspot.client.model.SetNLInstructionsRequest;
 import com.thoughtspot.client.model.ShareMetadataRequest;
 import com.thoughtspot.client.model.SingleAnswerRequest;
 import com.thoughtspot.client.model.SqlQueryResponse;
+import com.thoughtspot.client.model.SyncMetadataRequest;
+import com.thoughtspot.client.model.SyncMetadataResponse;
 import com.thoughtspot.client.model.SystemConfig;
 import com.thoughtspot.client.model.SystemInfo;
 import com.thoughtspot.client.model.SystemOverrideInfo;
@@ -887,8 +891,8 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Create a variable which can be used for parameterizing metadata objects Version: 10.14.0.cl
-     * or later Allows creating a variable which can be used for parameterizing metadata objects in
+     * Create a variable which can be used for parameterizing metadata objects Version: 26.4.0.cl or
+     * later Allows creating a variable which can be used for parameterizing metadata objects in
      * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES
      * permission allows you to manage Formula Variables in the current organization scope. The API
      * endpoint supports the following types of variables: * CONNECTION_PROPERTY - For connection
@@ -1460,11 +1464,14 @@ public class ThoughtSpotRestApiTest {
     /**
      * Version: 9.0.0.cl or later Exports an Answer in the given file format. You can download the
      * Answer data as a PDF, PNG, CSV, or XLSX file. Requires at least view access to the Answer.
-     * #### Usage guidelines In the request body, the GUID or name of the Answer and set
-     * &#x60;file_format&#x60;. The default file format is CSV. **NOTE**: * The downloadable file
-     * returned in API response file is extensionless. Please rename the downloaded file by typing
-     * in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with
-     * tables. Optionally, you can define [runtime
+     * #### Usage guidelines In the request body, specify the GUID or name of the Answer and set
+     * &#x60;file_format&#x60;. The default file format is CSV. Use the &#x60;type&#x60; parameter
+     * to specify whether the Answer being exported is a saved Answer (&#x60;SAVED&#x60;) or a
+     * pinned Answer on a Liveboard (&#x60;PINNED&#x60;). Defaults to &#x60;SAVED&#x60;. When using
+     * &#x60;PINNED&#x60;, the &#x60;metadata_identifier&#x60; must be the container id. **NOTE**: *
+     * The downloadable file returned in API response file is extensionless. Please rename the
+     * downloaded file by typing in the relevant extension. * HTML rendering is not supported for
+     * PDF exports of Answers with tables. Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
      * to apply to the Answer data.
      *
@@ -2473,7 +2480,7 @@ public class ThoughtSpotRestApiTest {
 
     /**
      * Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for
-     * LOGICAL_TABLE. Version: 26.4.0.cl or later Allows parameterizing multiple fields of metadata
+     * LOGICAL_TABLE. Version: 26.5.0.cl or later Allows parameterizing multiple fields of metadata
      * objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for
      * LOGICAL_TABLE. Requires appropriate permissions to modify the metadata object. The API
      * endpoint allows parameterizing the following types of metadata objects: * Logical Tables *
@@ -2495,7 +2502,7 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Version: 10.9.0.cl or later Allows publishing metadata objects across organizations in
+     * Version: 26.5.0.cl or later Allows publishing metadata objects across organizations in
      * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
      * publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
      * This API will essentially share the objects along with it&#39;s dependencies to the org
@@ -2697,9 +2704,9 @@ public class ThoughtSpotRestApiTest {
      * &#x60;events&#x60; each accept at most one element. - When &#x60;job_ids&#x60; is provided,
      * it is used as the sole lookup key and other filter fields are ignored. - When
      * &#x60;job_ids&#x60; is not provided, &#x60;channel_identifiers&#x60; and &#x60;events&#x60;
-     * are both required. Each must contain exactly one element, and the event object must include
-     * the &#x60;identifier&#x60; field. - Records older than the configured retention period are
-     * not returned.
+     * are both required, each containing exactly one element. - Records older than the configured
+     * retention period are not returned. - Use &#x60;start_epoch_time_in_millis&#x60; and/or
+     * &#x60;end_epoch_time_in_millis&#x60; to narrow results to a specific time window.
      *
      * @throws ApiException if the Api call fails
      */
@@ -3094,7 +3101,7 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Search variables Version: 10.14.0.cl or later Allows searching for variables in ThoughtSpot.
+     * Search variables Version: 26.4.0.cl or later Allows searching for variables in ThoughtSpot.
      * Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage
      * Formula Variables in the current organization scope. The API endpoint supports searching
      * variables by: * Variable identifier (ID or name) * Variable type * Name pattern
@@ -3133,7 +3140,89 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Version: 10.15.0.cl or later **Deprecated** — Use &#x60;sendAgentConversationMessage&#x60;
+     * Version: 26.5.0.cl or later Sends natural language messages to an existing Spotter agent
+     * conversation and returns the complete response synchronously. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the metadata object associated with the
+     * conversation. The user must have access to the conversation session referenced by
+     * &#x60;conversation_identifier&#x60;. A conversation must first be created using the
+     * &#x60;createAgentConversation&#x60; API. #### Usage guidelines The request must include: -
+     * &#x60;conversation_identifier&#x60;: the unique session ID returned by
+     * &#x60;createAgentConversation&#x60;, used for context continuity and message tracking -
+     * &#x60;messages&#x60;: an array of one or more text messages to send to the agent The API
+     * returns an array of response objects, each containing: - &#x60;type&#x60;: the kind of
+     * response — &#x60;text&#x60;, &#x60;answer&#x60;, or &#x60;error&#x60; - &#x60;message&#x60;:
+     * the main content of the response - &#x60;metadata&#x60;: additional information depending on
+     * the message type (e.g., answer metadata includes analytics and visualization details) ####
+     * Error responses | Code | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks permission on the referenced conversation. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint is Generally Available from version 26.5.0.cl. &gt; - This endpoint requires Spotter
+     * - please contact ThoughtSpot support to enable Spotter on your cluster. &gt; - For real-time
+     * streamed responses, use &#x60;sendAgentConversationMessageStreaming&#x60; instead.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void sendAgentConversationMessageTest() throws ApiException {
+        String conversationIdentifier = null;
+        SendAgentConversationMessageRequest sendAgentConversationMessageRequest = null;
+        Object response =
+                api.sendAgentConversationMessage(
+                        conversationIdentifier, sendAgentConversationMessageRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 26.5.0.cl or later Sends one or more natural language messages to an existing
+     * Spotter agent conversation and returns the response as a real-time Server-Sent Events stream.
+     * Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the metadata object associated
+     * with the conversation. The user must have access to the conversation session referenced by
+     * &#x60;conversation_identifier&#x60;. A conversation must first be created using the
+     * &#x60;createAgentConversation&#x60; API. #### Usage guidelines The request must include: -
+     * &#x60;conversation_identifier&#x60;: the unique session ID returned by
+     * &#x60;createAgentConversation&#x60;, used for context continuity and message tracking -
+     * &#x60;messages&#x60;: an array of one or more text messages to send to the agent If the
+     * request is valid, the API returns a Server-Sent Events (SSE) stream. Each line has the form
+     * &#x60;data: [{\&quot;type\&quot;: \&quot;...\&quot;, ...}]&#x60; — a JSON array of event
+     * objects. Event types include: - &#x60;ack&#x60;: confirms receipt of the request
+     * (&#x60;node_id&#x60;) - &#x60;conv_title&#x60;: conversation title (&#x60;title&#x60;,
+     * &#x60;conv_id&#x60;) - &#x60;notification&#x60;: status updates on operations
+     * (&#x60;group_id&#x60;, &#x60;metadata&#x60;, &#x60;code&#x60; — e.g.
+     * &#x60;TOOL_CALL_NOTIFICATION&#x60;, &#x60;nls_start&#x60;,
+     * &#x60;FINAL_RESPONSE_NOTIFICATION&#x60;) - &#x60;text-chunk&#x60;: incremental content chunks
+     * (&#x60;id&#x60;, &#x60;group_id&#x60;, &#x60;metadata&#x60; with &#x60;format&#x60; and
+     * &#x60;type&#x60; such as &#x60;thinking&#x60; or &#x60;text&#x60;, &#x60;content&#x60;) -
+     * &#x60;text&#x60;: full text block with same structure as &#x60;text-chunk&#x60; -
+     * &#x60;answer&#x60;: structured answer with metadata (&#x60;id&#x60;, &#x60;group_id&#x60;,
+     * &#x60;metadata&#x60; with &#x60;sage_query&#x60;, &#x60;session_id&#x60;, &#x60;title&#x60;,
+     * etc., &#x60;title&#x60;) - &#x60;error&#x60;: if a failure occurs #### Error responses | Code
+     * | Description | | ---- |
+     * --------------------------------------------------------------------------------------------------------------------------------
+     * | | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks permission on the referenced conversation. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint is Generally Available from version 26.5.0.cl. &gt; - This endpoint requires Spotter
+     * - please contact ThoughtSpot support to enable Spotter on your cluster. &gt; - The streaming
+     * protocol uses Server-Sent Events (SSE). &gt; - For the complete response in a single payload,
+     * use &#x60;sendAgentConversationMessage&#x60; instead.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void sendAgentConversationMessageStreamingTest() throws ApiException {
+        String conversationIdentifier = null;
+        SendAgentConversationMessageStreamingRequest sendAgentConversationMessageStreamingRequest =
+                null;
+        SendAgentMessageResponse response =
+                api.sendAgentConversationMessageStreaming(
+                        conversationIdentifier, sendAgentConversationMessageStreamingRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 26.2.0.cl or later **Deprecated** — Use &#x60;sendAgentConversationMessage&#x60;
      * instead. Send natural language messages to an existing Spotter agent conversation and returns
      * the complete response synchronously. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and
      * access to the metadata object associated with the conversation. The user must have access to
@@ -3167,7 +3256,7 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Version: 10.13.0.cl or later **Deprecated** — Use
+     * Version: 26.2.0.cl or later **Deprecated** — Use
      * &#x60;sendAgentConversationMessageStreaming&#x60; instead. Sends one or more natural language
      * messages to an existing Spotter agent conversation and returns the response as a real-time
      * Server-Sent Events stream. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the
@@ -3288,18 +3377,76 @@ public class ThoughtSpotRestApiTest {
     /**
      * Version: 9.0.0.cl or later Allows sharing one or several metadata objects with users and
      * groups in ThoughtSpot. Requires edit access to the metadata object. #### Supported metadata
-     * objects: * Liveboards * Visualizations * Answers * Models * Views * Connections #### Object
-     * permissions You can provide &#x60;READ_ONLY&#x60; or &#x60;MODIFY&#x60; access when sharing
-     * an object with another user or group. The &#x60;READ_ONLY&#x60; permission grants view access
-     * to the shared object, whereas &#x60;MODIFY&#x60; provides edit access. To prevent a user or
-     * group from accessing the shared object, specify the GUID or name of the principal and set
-     * &#x60;shareMode&#x60; to &#x60;NO_ACCESS&#x60;. #### Sharing a visualization * Sharing a
-     * visualization implicitly shares the entire Liveboard with the recipient. * Object permissions
-     * set for a shared visualization also apply to the Liveboard unless overridden by another API
-     * request or via UI. * If email notifications for object sharing are enabled, a notification
-     * with a link to the shared visualization will be sent to the recipient’s email address.
-     * Although this link opens the shared visualization, recipients can also access other
-     * visualizations in the Liveboard.
+     * objects: * Liveboards * Visualizations * Answers * Models * Views * Connections * Collections
+     * #### Object permissions You can provide &#x60;READ_ONLY&#x60; or &#x60;MODIFY&#x60; access
+     * when sharing an object with another user or group. The &#x60;READ_ONLY&#x60; permission
+     * grants view access to the shared object, whereas &#x60;MODIFY&#x60; provides edit access. To
+     * prevent a user or group from accessing the shared object, specify the GUID or name of the
+     * principal and set &#x60;shareMode&#x60; to &#x60;NO_ACCESS&#x60;. #### Sharing a
+     * visualization * Sharing a visualization implicitly shares the entire Liveboard with the
+     * recipient. * Object permissions set for a shared visualization also apply to the Liveboard
+     * unless overridden by another API request or via UI. * If email notifications for object
+     * sharing are enabled, a notification with a link to the shared visualization will be sent to
+     * the recipient’s email address. Although this link opens the shared visualization, recipients
+     * can also access other visualizations in the Liveboard. #### Sharing a collection Collections
+     * support **dual permissions** that provide fine-grained control: * **Collection permissions**
+     * (&#x60;share_mode&#x60;) - controls access to the collection itself (view, edit, delete the
+     * collection) * **Content permissions** (&#x60;content_share_mode&#x60;) - controls access to
+     * objects within the collection (view, edit objects inside) **Default Behavior:** - If only
+     * &#x60;share_mode&#x60; is specified, the content permissions default to &#x60;READ_ONLY&#x60;
+     * (except when &#x60;share_mode&#x60; is &#x60;NO_ACCESS&#x60;, then content also gets
+     * &#x60;NO_ACCESS&#x60;) - To give users edit access to collection contents, explicitly set
+     * &#x60;content_share_mode: \&quot;MODIFY\&quot;&#x60; ## Examples The following JSON examples
+     * can be copy-pasted as request bodies for the REST v2 API endpoint: &#x60;&#x60;&#x60;bash
+     * POST /callosum/v1/v2/security/metadata/share Content-Type: application/x-www-form-urlencoded
+     * &#x60;&#x60;&#x60; ### Basic collection sharing Share a collection with read-only access:
+     * &#x60;&#x60;&#x60;json { \&quot;metadata_type\&quot;: \&quot;COLLECTION\&quot;,
+     * \&quot;metadata_identifiers\&quot;: [\&quot;Sales Reports Collection\&quot;],
+     * \&quot;permissions\&quot;: [{ \&quot;principal\&quot;: { \&quot;type\&quot;:
+     * \&quot;USER\&quot;, \&quot;identifier\&quot;: \&quot;alice@company.com\&quot; },
+     * \&quot;share_mode\&quot;: \&quot;READ_ONLY\&quot; }], \&quot;notification\&quot;: {
+     * \&quot;message\&quot;: \&quot;I&#39;ve shared the Sales Reports collection with you\&quot;,
+     * \&quot;notify_on_share\&quot;: true } } &#x60;&#x60;&#x60; ### Collection sharing with dual
+     * permissions Share a collection with different permissions for the collection vs. its
+     * contents: &#x60;&#x60;&#x60;json { \&quot;metadata_type\&quot;: \&quot;COLLECTION\&quot;,
+     * \&quot;metadata_identifiers\&quot;: [\&quot;Marketing Analytics\&quot;],
+     * \&quot;permissions\&quot;: [{ \&quot;principal\&quot;: { \&quot;type\&quot;:
+     * \&quot;USER\&quot;, \&quot;identifier\&quot;: \&quot;bob@company.com\&quot; },
+     * \&quot;share_mode\&quot;: \&quot;MODIFY\&quot;, \&quot;content_share_mode\&quot;:
+     * \&quot;READ_ONLY\&quot; }, { \&quot;principal\&quot;: { \&quot;type\&quot;:
+     * \&quot;USER_GROUP\&quot;, \&quot;identifier\&quot;: \&quot;Marketing Team\&quot; },
+     * \&quot;share_mode\&quot;: \&quot;READ_ONLY\&quot;, \&quot;content_share_mode\&quot;:
+     * \&quot;READ_ONLY\&quot; }], \&quot;notification\&quot;: { \&quot;emails\&quot;:
+     * [\&quot;bob@company.com\&quot;], \&quot;message\&quot;: \&quot;You can edit the collection
+     * but content is read-only\&quot;, \&quot;enable_custom_url\&quot;: false,
+     * \&quot;notify_on_share\&quot;: true }, \&quot;has_lenient_discoverability\&quot;: false }
+     * &#x60;&#x60;&#x60; ### Multiple collections sharing Share multiple collections with different
+     * users: &#x60;&#x60;&#x60;json { \&quot;metadata\&quot;: [ { \&quot;type\&quot;:
+     * \&quot;COLLECTION\&quot;, \&quot;identifier\&quot;: \&quot;Q4 Reports\&quot; }, {
+     * \&quot;type\&quot;: \&quot;COLLECTION\&quot;, \&quot;identifier\&quot;: \&quot;Executive
+     * Dashboard Collection\&quot; } ], \&quot;permissions\&quot;: [{ \&quot;principal\&quot;: {
+     * \&quot;type\&quot;: \&quot;USER_GROUP\&quot;, \&quot;identifier\&quot;:
+     * \&quot;Executives\&quot; }, \&quot;share_mode\&quot;: \&quot;MODIFY\&quot; }, {
+     * \&quot;principal\&quot;: { \&quot;type\&quot;: \&quot;USER\&quot;, \&quot;identifier\&quot;:
+     * \&quot;manager@company.com\&quot; }, \&quot;share_mode\&quot;: \&quot;READ_ONLY\&quot;,
+     * \&quot;content_share_mode\&quot;: \&quot;MODIFY\&quot; }], \&quot;notification\&quot;: {
+     * \&quot;message\&quot;: \&quot;Sharing quarterly collections with leadership team\&quot;,
+     * \&quot;notify_on_share\&quot;: true } } &#x60;&#x60;&#x60; ### Remove collection access
+     * Remove access to a collection by setting share_mode to NO_ACCESS: &#x60;&#x60;&#x60;json {
+     * \&quot;metadata_type\&quot;: \&quot;COLLECTION\&quot;, \&quot;metadata_identifiers\&quot;:
+     * [\&quot;Confidential Reports\&quot;], \&quot;permissions\&quot;: [{ \&quot;principal\&quot;:
+     * { \&quot;type\&quot;: \&quot;USER\&quot;, \&quot;identifier\&quot;:
+     * \&quot;former-employee@company.com\&quot; }, \&quot;share_mode\&quot;:
+     * \&quot;NO_ACCESS\&quot; }], \&quot;notification\&quot;: { \&quot;notify_on_share\&quot;:
+     * false } } &#x60;&#x60;&#x60; ### Collection Permission Scenarios **Scenario 1: Collection
+     * Admin** - &#x60;share_mode: MODIFY&#x60; + &#x60;content_share_mode: MODIFY&#x60; &#x3D; Full
+     * control over collection and its contents **Scenario 2: Collection Curator** -
+     * &#x60;share_mode: MODIFY&#x60; + &#x60;content_share_mode: READ_ONLY&#x60; &#x3D; Can manage
+     * collection structure but not edit contents **Scenario 3: Content Editor** - &#x60;share_mode:
+     * READ_ONLY&#x60; + &#x60;content_share_mode: MODIFY&#x60; &#x3D; Can edit objects within
+     * collection but can&#39;t change collection itself **Scenario 4: Viewer** - &#x60;share_mode:
+     * READ_ONLY&#x60; + &#x60;content_share_mode: READ_ONLY&#x60; &#x3D; View-only access to
+     * collection and contents
      *
      * @throws ApiException if the Api call fails
      */
@@ -3343,6 +3490,44 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     * Version: 26.5.0.cl or later Synchronizes connection metadata attributes from your Cloud Data
+     * Warehouse (CDW) with ThoughtSpot. Requires the &#x60;DATAMANAGEMENT&#x60; (**Can manage
+     * data**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) privilege is
+     * required. #### Usage guidelines To synchronize attributes from a CDW, specify the connection
+     * GUID or name in the &#x60;connection_identifier&#x60; path parameter and
+     * &#x60;sync_attributes&#x60; in the request body. Default attribute is
+     * &#x60;[\&quot;DESCRIPTION\&quot;]&#x60;. ##### Hierarchical schema * Connection: The
+     * connection object for the sync operation. * Tables: Tables for the sync operation. When no
+     * table is specified, all tables are synchronized. * Columns: If the table is specified, you
+     * can add the columns for the sync operation. If no columns are specified, all columns in the
+     * specified table are considered for the sync operation. To set the scope for the sync
+     * operation: * Connection-level: To sync all tables and columns, pass an empty request body, or
+     * only the attributes in the request body. * Table-level: To synchronize specific tables and
+     * their columns, specify the table identifiers in the &#x60;tables&#x60; array. * Column-level:
+     * To synchronize specific columns, specify the table identifier as the key and column
+     * identifiers as the value in the &#x60;tables&#x60; array. &#x60;&#x60;&#x60; {
+     * \&quot;tables\&quot;: [ {\&quot;table-guid-1\&quot;: [\&quot;column-guid-1\&quot;,
+     * \&quot;column-guid-2\&quot;]}, \&quot;table-guid-2\&quot; ], \&quot;sync_attributes\&quot;:
+     * [\&quot;DESCRIPTION\&quot;] } &#x60;&#x60;&#x60; ##### API response If the sync operation is
+     * successful, the API returns the following information: * Status of the sync operation. For
+     * example, &#x60;SUCCESS&#x60;, &#x60;PARTIAL_SUCCESS&#x60;, or &#x60;NO_UPDATE&#x60;. * Number
+     * of tables and columns that were updated. * Number of tables and columns with the sync failed
+     * status when the overall sync status is &#x60;PARTIAL_SUCCESS&#x60;. * Message text indicating
+     * the sync results.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void syncMetadataTest() throws ApiException {
+        String connectionIdentifier = null;
+        SyncMetadataRequest syncMetadataRequest = null;
+        SyncMetadataResponse response = api.syncMetadata(connectionIdentifier, syncMetadataRequest);
+        // TODO: test validations
+    }
+
+    /**
      * Version: 9.0.0.cl or later Removes the tags applied to a Liveboard, Answer, Table, or
      * Worksheet. Requires edit access to the metadata object.
      *
@@ -3356,7 +3541,7 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Remove parameterization from fields in metadata objects. Version: 10.9.0.cl or later Allows
+     * Remove parameterization from fields in metadata objects. Version: 26.5.0.cl or later Allows
      * removing parameterization from fields in metadata objects in ThoughtSpot. Requires
      * appropriate permissions to modify the metadata object. The API endpoint allows
      * unparameterizing the following types of metadata objects: * Logical Tables * Connections *
@@ -3376,7 +3561,7 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Version: 10.9.0.cl or later Allows unpublishing metadata objects from organizations in
+     * Version: 26.5.0.cl or later Allows unpublishing metadata objects from organizations in
      * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
      * unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
      * When unpublishing objects, you can: * Include dependencies by setting
@@ -4007,7 +4192,7 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Update a variable&#39;s name Version: 10.14.0.cl or later Allows updating a variable&#39;s
+     * Update a variable&#39;s name Version: 26.4.0.cl or later Allows updating a variable&#39;s
      * name in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES
      * permission allows you to manage Formula Variables in the current organization scope. The API
      * endpoint allows updating: * The variable name
