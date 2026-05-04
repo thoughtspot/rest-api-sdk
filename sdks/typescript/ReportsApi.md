@@ -117,7 +117,6 @@ apiInstance.exportLiveboardReport(
     png_options: null,
     runtime_param_override: {},
     regional_settings: null,
-    rows_per_sheet: 1,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
