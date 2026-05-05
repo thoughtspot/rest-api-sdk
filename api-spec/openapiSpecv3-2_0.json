@@ -22,14 +22,6 @@
       "description": "Roles for version 10.4.0.cl"
     },
     {
-      "name": "26.6.0.cl",
-      "id": "26.6.0.cl",
-      "tags": [
-        "26.6.0.cl"
-      ],
-      "description": "Roles for version 26.6.0.cl"
-    },
-    {
       "name": "10.15.0.cl",
       "id": "10.15.0.cl",
       "tags": [
@@ -60,6 +52,14 @@
         "26.5.0.cl"
       ],
       "description": "Roles for version 26.5.0.cl"
+    },
+    {
+      "name": "26.6.0.cl",
+      "id": "26.6.0.cl",
+      "tags": [
+        "26.6.0.cl"
+      ],
+      "description": "Roles for version 26.6.0.cl"
     },
     {
       "name": "9.0.0.cl",
@@ -188,6 +188,14 @@
         "26.3.0.cl"
       ],
       "description": "Roles for version 26.3.0.cl"
+    },
+    {
+      "name": "26.7.0.cl",
+      "id": "26.7.0.cl",
+      "tags": [
+        "26.7.0.cl"
+      ],
+      "description": "Roles for version 26.7.0.cl"
     },
     {
       "name": "10.14.0.cl",
@@ -343,79 +351,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Conversation"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/ai/agent/instructions/get": {
-      "get": {
-        "operationId": "getAgentInstructions",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\nRetrieves the admin instructions currently configured for the AI agent (Spotter). Admin instructions are tenant- and org-scoped text that guide agent behavior across all conversations.\n\nRequires admin privileges. Only users with org admin access can retrieve agent instructions.\n\n#### Usage guidelines\n\nNo input parameters are required. The API returns the stored `AgentInstructions` record for the caller's tenant and org.\n\nIf no instructions have been configured yet, the API returns a record with an empty `instructions` field and `null` values for `id`, `created_at`, `updated_at`, and `last_updated_by`.\n\nIf the request is successful, the response includes:\n\n- `id`: unique identifier of the instructions record\n- `instructions`: the configured instructions text\n- `created_at`: ISO timestamp when the instructions were first saved\n- `updated_at`: ISO timestamp when the instructions were last updated\n- `last_updated_by`: user ID of the admin who last updated the instructions (may be `null` for older records)\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have org admin privileges required to read agent instructions. |\n\n> ###### Note:\n>\n> - Use `setAgentInstructions` to create or update agent instructions.\n> - Available from version 26.6.0.cl and later.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "AI",
-          "26.6.0.cl"
-        ],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentInstructions"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentInstructions"
                 }
               }
             }
@@ -1321,89 +1256,6 @@
                   "items": {
                     "$ref": "#/components/schemas/ResponseMessage"
                   }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/ai/agent/instructions/set": {
-      "put": {
-        "operationId": "setAgentInstructions",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\nCreates or updates the admin instructions for the AI agent (Spotter). Admin instructions are tenant- and org-scoped text that guide agent behavior across all conversations. If instructions already exist for the org, they are replaced (upsert semantics).\n\nRequires admin privileges. Only users with org admin access can set agent instructions.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `instructions`: the instructions text to apply to the agent (maximum 5000 characters)\n\nInstructions are validated against system guardrails before being saved. If the instructions contain content that conflicts with guardrails, the request is rejected with a `409` error and the existing instructions remain unchanged.\n\nIf the request is successful, the response includes the saved `AgentInstructions` record:\n\n- `id`: unique identifier of the record\n- `instructions`: the saved instructions text\n- `created_at`: ISO timestamp when the instructions were first created\n- `updated_at`: ISO timestamp of this update\n- `last_updated_by`: user ID of the admin who performed this update\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 400  | Bad request — the request body is missing required fields or the `instructions` field exceeds the maximum allowed length of 5000 characters. |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have org admin privileges required to set agent instructions. |\n| 409  | Conflict — the provided instructions conflict with system guardrails. Review and revise the instructions text before retrying. |\n| 500  | Internal server error. |\n\n> ###### Note:\n>\n> - This operation uses upsert semantics: it creates the instructions record if none exists, or replaces the existing one.\n> - Instructions take effect immediately for new conversations created after the update.\n> - Use `getAgentInstructions` to retrieve the current instructions before making changes.\n> - Available from version 26.6.0.cl and later.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "AI",
-          "26.6.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SetAgentInstructionsRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentInstructions"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentInstructions"
                 }
               }
             }
@@ -9339,6 +9191,953 @@
         }
       }
     },
+    "/api/rest/2.0/customization/styles/fonts/delete": {
+      "post": {
+        "operationId": "deleteStyleFonts",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nDeletes one or more custom fonts from the cluster-level or org-level font library. If a deleted font is assigned to visualization areas, those assignments automatically fallback to the cluster/system default font. The response lists all affected areas. For cluster-level fonts, `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is necessary. Important: dry_run defaults to true. To actually delete fonts, you must explicitly pass dry_run: false.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` privilege is required.\n\n#### Usage guidelines\n\n- Provide one or more font UUIDs or names in `font_identifiers`.\n- Set `scope` to `CLUSTER` to delete from the cluster-level library. Set `scope` to `ORG` (default) to delete from the authenticated user's org library.\n- Use `dry_run: true` to preview which visualization areas would be affected without actually deleting the font. The response lists affected assignments; no changes are applied.\n- Deletions cannot be undone. Re-upload the font file using `uploadStyleFont` if needed.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Style Customization",
+          "26.7.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteStyleFontsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Font deleted successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StyleFontDeleteData"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "Font deleted with affected assignments",
+                    "value": {
+                      "affected_assignments": [
+                        {
+                          "org": {
+                            "id": 1234567890,
+                            "name": "Sales"
+                          },
+                          "visualization_areas": [
+                            "CHART_X_AXIS_LABELS",
+                            "CHART_Y_AXIS_LABELS"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "example_2": {
+                    "summary": "Font deleted with no affected assignments",
+                    "value": {
+                      "affected_assignments": []
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/customization/styles/logos/export": {
+      "post": {
+        "operationId": "exportStyleLogos",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nDownloads the active logos (default and wide slots) at the requested scope as a single ZIP archive containing both logo image files. If no custom logo has been uploaded at the ORG scope, the archive contains the resolved logo falling through from the cluster. If no cluster logo has been uploaded, no file is returned.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` privilege is required.\n\n#### Usage guidelines\n\n- Set `scope` to `CLUSTER` to download cluster-level logos.\n- Set `scope` to `ORG` (default) to download logos for the authenticated user's org.\n- The response is a ZIP archive (`application/zip`). Save the response body directly to a `.zip` file.\n- The archive always contains two files — one for the DEFAULT slot and one for the WIDE slot — even if no custom logo is set at the requested scope.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Style Customization",
+          "26.7.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExportStyleLogosRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Logo ZIP archive retrieved successfully.",
+            "content": {
+              "application/octet-stream": {}
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/customization/styles/search": {
+      "post": {
+        "operationId": "searchStyleCustomizations",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nRetrieves style preferences at cluster level or for the authenticated user's org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` privilege is required.\n\n#### Usage guidelines\n\n- Set `scope` to `CLUSTER` to retrieve cluster-level style defaults.\n- Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user's org.\n- Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Style Customization",
+          "26.7.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchStyleCustomizationsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Style preferences retrieved successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StylePreference"
+                  }
+                },
+                "examples": {
+                  "example_1": {
+                    "value": [
+                      {
+                        "scope": "CLUSTER",
+                        "navigation_panel": {
+                          "theme": "DARK",
+                          "is_overridden": false
+                        },
+                        "chart_color_palette": {
+                          "colors": [
+                            {
+                              "primary": "#2359B6",
+                              "secondary": [
+                                "#1A4690",
+                                "#0E2E66",
+                                "#07194A",
+                                "#030D30"
+                              ]
+                            },
+                            {
+                              "primary": "#E8552D",
+                              "secondary": [
+                                "#C4421A",
+                                "#9E2F0D",
+                                "#7A2005",
+                                "#581302"
+                              ]
+                            },
+                            {
+                              "primary": "#F5A623",
+                              "secondary": [
+                                "#D08B0E",
+                                "#A86E05",
+                                "#825202",
+                                "#5E3900"
+                              ]
+                            },
+                            {
+                              "primary": "#7ED321",
+                              "secondary": [
+                                "#62A815",
+                                "#488009",
+                                "#305A03",
+                                "#1C3800"
+                              ]
+                            },
+                            {
+                              "primary": "#9B59B6",
+                              "secondary": [
+                                "#7D3F9A",
+                                "#612C7E",
+                                "#481C62",
+                                "#320F48"
+                              ]
+                            },
+                            {
+                              "primary": "#1ABC9C",
+                              "secondary": [
+                                "#0E9E81",
+                                "#077F67",
+                                "#03624E",
+                                "#014838"
+                              ]
+                            },
+                            {
+                              "primary": "#E74C3C",
+                              "secondary": [
+                                "#C0392B",
+                                "#9A2518",
+                                "#761409",
+                                "#540703"
+                              ]
+                            },
+                            {
+                              "primary": "#3498DB",
+                              "secondary": [
+                                "#1A7DC0",
+                                "#0E60A0",
+                                "#074580",
+                                "#032C60"
+                              ]
+                            }
+                          ],
+                          "disable_color_rotation": false,
+                          "is_overridden": false
+                        },
+                        "embedded_footer_text": {
+                          "value": "",
+                          "is_overridden": false
+                        },
+                        "logo": {
+                          "default_logo": {
+                            "id": "a1b2c3d4-0001-0001-0001-000000000001",
+                            "is_overridden": false
+                          },
+                          "wide_logo": {
+                            "id": "a1b2c3d4-0002-0002-0002-000000000002",
+                            "is_overridden": false
+                          }
+                        },
+                        "visualization_fonts": {
+                          "chart_visualization_fonts": [
+                            {
+                              "visualization_area": "CHART_X_AXIS_LABELS",
+                              "font_id": null,
+                              "font_name": null,
+                              "is_overridden": false
+                            }
+                          ],
+                          "table_visualization_fonts": [
+                            {
+                              "visualization_area": "TABLE_VALUE_CELLS",
+                              "font_id": null,
+                              "font_name": null,
+                              "is_overridden": false
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "scope": "ORG",
+                        "org": {
+                          "id": 1234567890,
+                          "name": "Sales"
+                        },
+                        "navigation_panel": {
+                          "theme": "CUSTOM",
+                          "base_color": "#2359B6",
+                          "is_overridden": true
+                        },
+                        "chart_color_palette": {
+                          "colors": [
+                            {
+                              "primary": "#2359B6",
+                              "secondary": [
+                                "#1A4690",
+                                "#0E2E66",
+                                "#07194A",
+                                "#030D30"
+                              ]
+                            },
+                            {
+                              "primary": "#E8552D",
+                              "secondary": [
+                                "#C4421A",
+                                "#9E2F0D",
+                                "#7A2005",
+                                "#581302"
+                              ]
+                            },
+                            {
+                              "primary": "#F5A623",
+                              "secondary": [
+                                "#D08B0E",
+                                "#A86E05",
+                                "#825202",
+                                "#5E3900"
+                              ]
+                            },
+                            {
+                              "primary": "#7ED321",
+                              "secondary": [
+                                "#62A815",
+                                "#488009",
+                                "#305A03",
+                                "#1C3800"
+                              ]
+                            },
+                            {
+                              "primary": "#9B59B6",
+                              "secondary": [
+                                "#7D3F9A",
+                                "#612C7E",
+                                "#481C62",
+                                "#320F48"
+                              ]
+                            },
+                            {
+                              "primary": "#1ABC9C",
+                              "secondary": [
+                                "#0E9E81",
+                                "#077F67",
+                                "#03624E",
+                                "#014838"
+                              ]
+                            },
+                            {
+                              "primary": "#E74C3C",
+                              "secondary": [
+                                "#C0392B",
+                                "#9A2518",
+                                "#761409",
+                                "#540703"
+                              ]
+                            },
+                            {
+                              "primary": "#3498DB",
+                              "secondary": [
+                                "#1A7DC0",
+                                "#0E60A0",
+                                "#074580",
+                                "#032C60"
+                              ]
+                            }
+                          ],
+                          "disable_color_rotation": false,
+                          "is_overridden": false
+                        },
+                        "embedded_footer_text": {
+                          "value": "Powered by Sales Analytics",
+                          "is_overridden": true
+                        },
+                        "logo": {
+                          "default_logo": {
+                            "id": "b2c3d4e5-0001-0001-0001-000000000011",
+                            "is_overridden": true
+                          },
+                          "wide_logo": {
+                            "id": "b2c3d4e5-0002-0002-0002-000000000022",
+                            "is_overridden": true
+                          }
+                        },
+                        "visualization_fonts": {
+                          "chart_visualization_fonts": [
+                            {
+                              "visualization_area": "CHART_X_AXIS_LABELS",
+                              "font_id": "c3d4e5f6-1111-1111-1111-111111111111",
+                              "font_name": "Acme Sans",
+                              "is_overridden": true
+                            }
+                          ],
+                          "table_visualization_fonts": [
+                            {
+                              "visualization_area": "TABLE_VALUE_CELLS",
+                              "font_id": null,
+                              "font_name": null,
+                              "is_overridden": false
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/customization/styles/fonts/search": {
+      "post": {
+        "operationId": "searchStyleFonts",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nReturns custom fonts available in the cluster-level or org-level font library. Omitting all filter fields returns all fonts in the target scope.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` privilege is required.\n\n#### Usage guidelines\n\n- Set `scope` to `CLUSTER` to search the cluster-level library. Set `scope` to `ORG` (default) to search the authenticated user's org library.\n- Use `font_identifier` to look up a specific font by UUID or name.\n- Use `name_pattern` for partial, case-insensitive name matching.\n- Set `include_font_assignments` to `true` to include visualization areas this font is currently assigned to. Defaults to `false`.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Style Customization",
+          "26.7.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchStyleFontsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Custom fonts retrieved successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StyleFontRecord"
+                  }
+                },
+                "examples": {
+                  "example_1": {
+                    "value": [
+                      {
+                        "id": "c3d4e5f6-1111-1111-1111-111111111111",
+                        "scope": "ORG",
+                        "org": {
+                          "id": 1234567890,
+                          "name": "Sales"
+                        },
+                        "name": "Acme Sans",
+                        "weight": "NORMAL",
+                        "style": "NORMAL",
+                        "color": "#333333",
+                        "creation_time_in_millis": 1714000000000,
+                        "assignments": [
+                          {
+                            "org": {
+                              "id": 1234567890,
+                              "name": "Sales"
+                            },
+                            "visualization_areas": [
+                              "CHART_X_AXIS_LABELS",
+                              "CHART_Y_AXIS_LABELS"
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "id": "d4e5f6a7-2222-2222-2222-222222222222",
+                        "scope": "CLUSTER",
+                        "name": "Corporate Bold",
+                        "weight": "BOLD",
+                        "style": "NORMAL",
+                        "color": "#000000",
+                        "creation_time_in_millis": 1713500000000,
+                        "assignments": []
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/customization/styles/update": {
+      "post": {
+        "operationId": "updateStyleCustomization",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUpdates style preferences at cluster level or for the authenticated user's org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**), `DEVELOPER` (**Has developer privilege**)  privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` privilege is required.\n\n#### Usage guidelines\n\nTwo operations are supported via the `operation` field:\n\n- **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged.\n- **RESET**: Reverts specific fields to ThoughtSpot defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.\n\n#### Logo upload\n\nLogo files are uploaded as binary fields using `multipart/form-data`:\n\n- `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG.\n- `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.\n\nTo reset a logo to the ThoughtSpot default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.\n\n#### Navigation panel color\n\nSet `navigation_panel.theme` to one of:\n\n- `DARK`: Default dark ThoughtSpot theme.\n- `TWO_TONE`: Dual-tone panel style.\n- `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).\n\n#### Chart color palette\n\nProvide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.\n\n#### Font assignments\n\nSpecify `visualization_fonts.chart_visualization_fonts` and `visualization_fonts.table_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Style Customization",
+          "26.7.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "default_logo": {
+                    "description": "Binary image for the DEFAULT logo slot (square app icon and favicon;\nrecommended 140x140 px). Accepted formats: PNG, JPG.",
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "wide_logo": {
+                    "description": "Binary image for the WIDE logo slot (horizontal top nav bar logo;\nrecommended 230x45 px). Accepted formats: PNG, JPG.",
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "metadata": {
+                    "type": "object",
+                    "properties": {
+                      "scope": {
+                        "description": "Scope at which to apply the preferences. CLUSTER sets cluster-level\ndefaults for all orgs. ORG applies to the authenticated user's org.\nDefaults to ORG if omitted.",
+                        "type": "string",
+                        "enum": [
+                          "CLUSTER",
+                          "ORG"
+                        ]
+                      },
+                      "operation": {
+                        "description": "Operation to perform. REPLACE (default) applies the provided fields and\nleaves omitted fields unchanged. RESET reverts fields listed in\nreset_options to ThoughtSpot defaults.",
+                        "type": "string",
+                        "enum": [
+                          "REPLACE",
+                          "RESET"
+                        ]
+                      },
+                      "reset_options": {
+                        "description": "Fields to reset when operation is RESET. Specify style fields and\nvisualization areas to revert to ThoughtSpot defaults.",
+                        "allOf": [
+                          {
+                            "$ref": "#/components/schemas/StyleResetOptionsInput"
+                          }
+                        ]
+                      },
+                      "navigation_panel": {
+                        "description": "Navigation panel color. Provide theme and, when theme is CUSTOM, also\nprovide base_color.",
+                        "allOf": [
+                          {
+                            "$ref": "#/components/schemas/NavigationPanelInput"
+                          }
+                        ]
+                      },
+                      "chart_color_palette": {
+                        "description": "Chart color palette. When provided with operation REPLACE, exactly 8\ncolor entries must be specified in colors.",
+                        "allOf": [
+                          {
+                            "$ref": "#/components/schemas/StyleColorPaletteInput"
+                          }
+                        ]
+                      },
+                      "embedded_footer_text": {
+                        "description": "Custom footer text for the embedded ThoughtSpot application. An empty\nstring clears the footer.",
+                        "type": "string"
+                      },
+                      "visualization_fonts": {
+                        "description": "Font assignments per visualization area. Provide only the areas to\nupdate; omitted areas remain unchanged.",
+                        "allOf": [
+                          {
+                            "$ref": "#/components/schemas/VisualizationFontsInput"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "metadata": {
+                  "contentType": "application/json"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Style preferences updated successfully."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/customization/styles/fonts/{font_identifier}/update": {
+      "post": {
+        "operationId": "updateStyleFont",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUpdates the metadata of an existing custom font in the cluster-level or org-level font library. Only the fields provided in the request are modified; omitted fields remain unchanged.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` privilege is required.\n\n#### Usage guidelines\n\n- Identify the font using `font_identifier` (UUID or name).\n- Set `scope` to `CLUSTER` to target the cluster-level library. Set `scope` to `ORG` (default) to target the authenticated user's org library.\n- To replace the font file itself (WOFF/WOFF2 binary), delete the existing font and re-upload using `uploadStyleFont`.\n- `name` must be unique within the target scope if provided.\n- `color` must be a valid 6-digit hex string (e.g. `#333333`) if provided.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Style Customization",
+          "26.7.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateStyleFontRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "font_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "UUID or name of the font to update."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Font metadata updated successfully."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/customization/styles/fonts/upload": {
+      "post": {
+        "operationId": "uploadStyleFont",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUploads a custom font to the cluster-level or org-level font library. Cluster-level fonts are available as defaults for all orgs. Org-level fonts are only available within that org.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` privilege is required.\n\n#### Usage guidelines\n\n- Only **WOFF** and **WOFF2** font formats are accepted. TTF and OTF files are rejected with an error.\n- The `name` field must be unique within the target scope. Uploading a font with a name that already exists returns an error.\n- Set `scope` to `CLUSTER` to upload to the cluster-level library. Set `scope` to `ORG` (default) to upload to the authenticated user's org library.\n- `weight` defaults to `NORMAL` if omitted. Supported values: `NORMAL`, `LIGHT`, `BOLD`.\n- `style` defaults to `NORMAL` if omitted. Supported values: `NORMAL`, `ITALIC`, `OBLIQUE`.\n- `color` defaults to `#000000` (black) if omitted. Provide as a 6-digit hex string (e.g. `#333333`).\n- The uploaded font can be assigned to visualization areas using the `updateStyleCustomization` endpoint.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Style Customization",
+          "26.7.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "scope": {
+                    "description": "Scope of the font library to upload to. CLUSTER uploads to the\ncluster-level library, making the font available as a default for all\norgs. ORG uploads to the authenticated user's org library. Defaults to\nORG if omitted.",
+                    "type": "string",
+                    "enum": [
+                      "CLUSTER",
+                      "ORG"
+                    ]
+                  },
+                  "name": {
+                    "description": "Display name for the font (e.g. \"Acme Sans\"). Must be unique within the\ntarget scope; returns an error if a font with this name already exists.",
+                    "type": "string"
+                  },
+                  "weight": {
+                    "description": "Weight of the font. Supported values: NORMAL, LIGHT, BOLD. Defaults to\nNORMAL if omitted.",
+                    "type": "string",
+                    "enum": [
+                      "NORMAL",
+                      "LIGHT",
+                      "BOLD"
+                    ]
+                  },
+                  "style": {
+                    "description": "Style of the font. Supported values: NORMAL, ITALIC, OBLIQUE. Defaults\nto NORMAL if omitted.",
+                    "type": "string",
+                    "enum": [
+                      "NORMAL",
+                      "ITALIC",
+                      "OBLIQUE"
+                    ]
+                  },
+                  "color": {
+                    "description": "Color of the font as a 6-digit hex string (e.g. \"#333333\"). Defaults to\n#000000 (black) if omitted. Returns an error if the value is malformed.",
+                    "type": "string"
+                  },
+                  "file_content": {
+                    "description": "Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats\nare accepted; TTF and OTF are rejected. The file is validated on upload.",
+                    "type": "string",
+                    "format": "binary"
+                  }
+                },
+                "required": [
+                  "name",
+                  "file_content"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Font uploaded successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StyleFontUploadData"
+                },
+                "examples": {
+                  "example_1": {
+                    "value": {
+                      "id": "c3d4e5f6-1111-1111-1111-111111111111",
+                      "name": "Acme Sans"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/system/preferences/communication-channels/configure": {
       "post": {
         "operationId": "configureCommunicationChannelPreferences",
@@ -12536,42 +13335,6 @@
                       "created_by": {
                         "id": "7d5e9f2a-4b8c-4d6e-9a3b-5c7e1f4a8b2d",
                         "name": "mike_rodriguez"
-                      }
-                    }
-                  },
-                  "example_3": {
-                    "description": "Webhook with GCP GCS storage destination",
-                    "value": {
-                      "id": "c9d8e7f6-a5b4-4321-9876-fedcba012345",
-                      "name": "GCS Storage Webhook",
-                      "description": "Webhook that uploads payloads to a GCS bucket",
-                      "org": {
-                        "id": "0",
-                        "name": "Primary"
-                      },
-                      "url": "https://api.example.com/webhooks",
-                      "events": [
-                        "LIVEBOARD_SCHEDULE"
-                      ],
-                      "storage_destination": {
-                        "storage_type": "GCP_GCS",
-                        "storage_config": {
-                          "gcp_gcs_config": {
-                            "bucket_name": "my-webhook-files",
-                            "service_account_email": "my-sa@my-project.iam.gserviceaccount.com",
-                            "path_prefix": "webhooks/"
-                          }
-                        }
-                      },
-                      "creation_time_in_millis": 1724279630456,
-                      "modification_time_in_millis": 1724279630456,
-                      "created_by": {
-                        "id": "3a2b1c4d-5e6f-7890-abcd-ef0123456789",
-                        "name": "priya_sharma"
-                      },
-                      "last_modified_by": {
-                        "id": "3a2b1c4d-5e6f-7890-abcd-ef0123456789",
-                        "name": "priya_sharma"
                       }
                     }
                   }
@@ -16800,39 +17563,6 @@
           }
         }
       },
-      "AgentInstructions": {
-        "type": "object",
-        "required": [
-          "instructions"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Unique identifier of the record.",
-            "nullable": true
-          },
-          "instructions": {
-            "type": "string",
-            "description": "The admin instructions text for the agent."
-          },
-          "created_at": {
-            "type": "string",
-            "description": "ISO timestamp when the instructions were created.",
-            "nullable": true
-          },
-          "updated_at": {
-            "type": "string",
-            "description": "ISO timestamp when the instructions were last updated.",
-            "nullable": true
-          },
-          "last_updated_by": {
-            "type": "string",
-            "description": "User ID of the admin who last updated the instructions.",
-            "nullable": true
-          }
-        },
-        "description": "Admin instructions configured for the AI agent."
-      },
       "RiseGQLArgWrapper": {
         "type": "object",
         "required": [
@@ -17509,8 +18239,7 @@
           "storage_type": {
             "type": "string",
             "enum": [
-              "AWS_S3",
-              "GCP_GCS"
+              "AWS_S3"
             ],
             "description": "Type of storage destination (e.g., AWS_S3)."
           },
@@ -17527,11 +18256,6 @@
           "aws_s3_config": {
             "$ref": "#/components/schemas/AwsS3Config",
             "description": "AWS S3 storage configuration.",
-            "nullable": true
-          },
-          "gcp_gcs_config": {
-            "$ref": "#/components/schemas/GcpGcsConfig",
-            "description": "GCP GCS storage configuration. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
             "nullable": true
           }
         },
@@ -17569,29 +18293,6 @@
           }
         },
         "description": "AWS S3 storage configuration details."
-      },
-      "GcpGcsConfig": {
-        "type": "object",
-        "required": [
-          "bucket_name",
-          "service_account_email"
-        ],
-        "properties": {
-          "bucket_name": {
-            "type": "string",
-            "description": "Name of the GCS bucket where webhook payloads are stored."
-          },
-          "service_account_email": {
-            "type": "string",
-            "description": "Email of the GCP service account to impersonate for bucket access."
-          },
-          "path_prefix": {
-            "type": "string",
-            "description": "Path prefix for organizing objects within the bucket.",
-            "nullable": true
-          }
-        },
-        "description": "GCP GCS storage configuration details."
       },
       "WebhookPagination": {
         "type": "object",
@@ -17906,6 +18607,379 @@
           }
         },
         "description": "A recipient (user, group, or external) for a job execution."
+      },
+      "StylePreference": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ],
+            "description": "Scope at which these style preferences apply.",
+            "nullable": true
+          },
+          "org": {
+            "$ref": "#/components/schemas/StyleOrgInfo",
+            "description": "Org associated with these preferences. Present only when scope is ORG.",
+            "nullable": true
+          },
+          "navigation_panel": {
+            "$ref": "#/components/schemas/StyleNavigationPanel",
+            "description": "Navigation panel color configuration.",
+            "nullable": true
+          },
+          "chart_color_palette": {
+            "$ref": "#/components/schemas/StyleChartColorPalette",
+            "description": "Chart color palette configuration.",
+            "nullable": true
+          },
+          "embedded_footer_text": {
+            "$ref": "#/components/schemas/StyleEmbeddedFooterText",
+            "description": "Embedded footer text configuration.",
+            "nullable": true
+          },
+          "logo": {
+            "$ref": "#/components/schemas/StyleLogoStatus",
+            "description": "Logo status per slot.",
+            "nullable": true
+          },
+          "visualization_fonts": {
+            "$ref": "#/components/schemas/StyleVisualizationFonts",
+            "description": "Effective font assignments per visualization area.",
+            "nullable": true
+          }
+        },
+        "description": "Style preferences for a single scope entry."
+      },
+      "StyleOrgInfo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Unique integer ID of the org.",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the org.",
+            "nullable": true
+          }
+        },
+        "description": "Org information returned in style API responses."
+      },
+      "StyleNavigationPanel": {
+        "type": "object",
+        "properties": {
+          "theme": {
+            "type": "string",
+            "enum": [
+              "DARK",
+              "TWO_TONE",
+              "CUSTOM"
+            ],
+            "description": "Navigation panel color mode.",
+            "nullable": true
+          },
+          "base_color": {
+            "type": "string",
+            "description": "Base color as a 6-digit hex string. Present only when theme is CUSTOM.",
+            "nullable": true
+          },
+          "is_overridden": {
+            "type": "boolean",
+            "description": "True if explicitly set at this scope, overriding any inherited value.",
+            "nullable": true
+          }
+        },
+        "description": "Navigation panel color configuration for a specific scope."
+      },
+      "StyleChartColorPalette": {
+        "type": "object",
+        "properties": {
+          "colors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StyleColorEntry"
+            },
+            "description": "Ordered array of 8 color entries.",
+            "nullable": true
+          },
+          "disable_color_rotation": {
+            "type": "boolean",
+            "description": "When true, automatic color rotation across chart data series is disabled.",
+            "nullable": true
+          },
+          "is_overridden": {
+            "type": "boolean",
+            "description": "True if explicitly set at this scope, overriding any inherited value.",
+            "nullable": true
+          }
+        },
+        "description": "Chart color palette configuration for a specific scope."
+      },
+      "StyleColorEntry": {
+        "type": "object",
+        "properties": {
+          "primary": {
+            "type": "string",
+            "description": "Primary color as a 6-digit hex string.",
+            "nullable": true
+          },
+          "secondary": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Array of 4 secondary shade hex strings.",
+            "nullable": true
+          }
+        },
+        "description": "A single color entry in the chart color palette."
+      },
+      "StyleEmbeddedFooterText": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "Footer text value. Empty string indicates no footer is set.",
+            "nullable": true
+          },
+          "is_overridden": {
+            "type": "boolean",
+            "description": "True if explicitly set at this scope, overriding any inherited value.",
+            "nullable": true
+          }
+        },
+        "description": "Embedded footer text configuration for a specific scope."
+      },
+      "StyleLogoStatus": {
+        "type": "object",
+        "properties": {
+          "default_logo": {
+            "$ref": "#/components/schemas/StyleLogoSlot",
+            "description": "Status of the DEFAULT logo slot (square app icon and favicon; recommended\n140x140 px).",
+            "nullable": true
+          },
+          "wide_logo": {
+            "$ref": "#/components/schemas/StyleLogoSlot",
+            "description": "Status of the WIDE logo slot (horizontal top nav bar logo; recommended\n230x45 px).",
+            "nullable": true
+          }
+        },
+        "description": "Logo status per slot."
+      },
+      "StyleLogoSlot": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "UUID of the active logo.",
+            "nullable": true
+          },
+          "is_overridden": {
+            "type": "boolean",
+            "description": "True if a custom logo is uploaded at this scope. False if the ThoughtSpot\ndefault or cluster logo is active.",
+            "nullable": true
+          }
+        },
+        "description": "Status of a single logo slot."
+      },
+      "StyleVisualizationFonts": {
+        "type": "object",
+        "properties": {
+          "chart_visualization_fonts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChartVisualizationFontRecord"
+            },
+            "description": "Font assignments for chart visualization areas.",
+            "nullable": true
+          },
+          "table_visualization_fonts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TableVisualizationFontRecord"
+            },
+            "description": "Font assignments for table visualization areas.",
+            "nullable": true
+          }
+        },
+        "description": "Effective font assignments per visualization type."
+      },
+      "ChartVisualizationFontRecord": {
+        "type": "object",
+        "properties": {
+          "visualization_area": {
+            "type": "string",
+            "enum": [
+              "CHART_X_AXIS_LABELS",
+              "CHART_X_AXIS_TITLE",
+              "CHART_Y_AXIS_LABELS",
+              "CHART_Y_AXIS_TITLE",
+              "CHART_TOOLTIP",
+              "CHART_SCATTER_DATA_LABELS",
+              "CHART_DONUT_DATA_LABELS",
+              "CHART_LINE_DATA_LABELS",
+              "CHART_COLUMN_DATA_LABELS",
+              "CHART_BAR_DATA_LABELS",
+              "CHART_AREA_DATA_LABELS"
+            ],
+            "description": "Chart visualization area.",
+            "nullable": true
+          },
+          "font_id": {
+            "type": "string",
+            "description": "UUID of the font assigned to this area. Null when the system default font\nis active.",
+            "nullable": true
+          },
+          "font_name": {
+            "type": "string",
+            "description": "Display name of the font assigned to this area. Null when the system\ndefault font is active.",
+            "nullable": true
+          },
+          "is_overridden": {
+            "type": "boolean",
+            "description": "True if explicitly set at this scope, overriding any inherited value.",
+            "nullable": true
+          }
+        },
+        "description": "Font assignment for a chart visualization area in the response."
+      },
+      "TableVisualizationFontRecord": {
+        "type": "object",
+        "properties": {
+          "visualization_area": {
+            "type": "string",
+            "enum": [
+              "TABLE_VALUE_CELLS"
+            ],
+            "description": "Table visualization area.",
+            "nullable": true
+          },
+          "font_id": {
+            "type": "string",
+            "description": "UUID of the font assigned to this area. Null when the system default font\nis active.",
+            "nullable": true
+          },
+          "font_name": {
+            "type": "string",
+            "description": "Display name of the font assigned to this area. Null when the system\ndefault font is active.",
+            "nullable": true
+          },
+          "is_overridden": {
+            "type": "boolean",
+            "description": "True if explicitly set at this scope, overriding any inherited value.",
+            "nullable": true
+          }
+        },
+        "description": "Font assignment for a table visualization area in the response."
+      },
+      "StyleFontRecord": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique UUID identifier of the font."
+          },
+          "scope": {
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ],
+            "description": "Scope indicating whether this font belongs to the cluster or org library.",
+            "nullable": true
+          },
+          "org": {
+            "$ref": "#/components/schemas/StyleOrgInfo",
+            "description": "Org associated with this font. Present only when scope is ORG.",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the font."
+          },
+          "weight": {
+            "type": "string",
+            "enum": [
+              "NORMAL",
+              "LIGHT",
+              "BOLD"
+            ],
+            "description": "Weight of the font.",
+            "nullable": true
+          },
+          "style": {
+            "type": "string",
+            "enum": [
+              "NORMAL",
+              "ITALIC",
+              "OBLIQUE"
+            ],
+            "description": "Style of the font.",
+            "nullable": true
+          },
+          "color": {
+            "type": "string",
+            "description": "Color of the font as a 6-digit hex string.",
+            "nullable": true
+          },
+          "creation_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Timestamp in milliseconds when the font was uploaded.",
+            "nullable": true
+          },
+          "assignments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StyleFontAssignment"
+            },
+            "description": "Visualization areas currently assigned to this font. Empty if not assigned\nto any area. Populated only when include_font_assignments is true.",
+            "nullable": true
+          }
+        },
+        "description": "A custom font record in the ThoughtSpot font library."
+      },
+      "StyleFontAssignment": {
+        "type": "object",
+        "properties": {
+          "org": {
+            "$ref": "#/components/schemas/StyleOrgInfo",
+            "description": "Org context for this assignment. Present only when scope is ORG.",
+            "nullable": true
+          },
+          "visualization_areas": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "CHART_X_AXIS_LABELS",
+                "CHART_X_AXIS_TITLE",
+                "CHART_Y_AXIS_LABELS",
+                "CHART_Y_AXIS_TITLE",
+                "CHART_TOOLTIP",
+                "CHART_SCATTER_DATA_LABELS",
+                "CHART_DONUT_DATA_LABELS",
+                "CHART_LINE_DATA_LABELS",
+                "CHART_COLUMN_DATA_LABELS",
+                "CHART_BAR_DATA_LABELS",
+                "CHART_AREA_DATA_LABELS",
+                "TABLE_VALUE_CELLS"
+              ]
+            },
+            "description": "Visualization areas using this font.",
+            "nullable": true
+          }
+        },
+        "description": "Visualization areas assigned to a font, grouped by org context."
       },
       "GenericInfo": {
         "type": "object",
@@ -19092,11 +20166,6 @@
             "$ref": "#/components/schemas/ChannelValidationAwsS3Info",
             "description": "AWS S3 storage information from the validation step.",
             "nullable": true
-          },
-          "gcp_gcs_info": {
-            "$ref": "#/components/schemas/ChannelValidationGcpGcsInfo",
-            "description": "GCP GCS storage information from the validation step. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
-            "nullable": true
           }
         },
         "description": "Validation detail result for a sub-step."
@@ -19121,27 +20190,6 @@
           }
         },
         "description": "AWS S3 storage information returned from a validation step."
-      },
-      "ChannelValidationGcpGcsInfo": {
-        "type": "object",
-        "properties": {
-          "bucket_name": {
-            "type": "string",
-            "description": "Name of the GCS bucket.",
-            "nullable": true
-          },
-          "file_name": {
-            "type": "string",
-            "description": "Name of the uploaded file.",
-            "nullable": true
-          },
-          "object_key": {
-            "type": "string",
-            "description": "Key (path) of the object within the GCS bucket.",
-            "nullable": true
-          }
-        },
-        "description": "GCP GCS storage information returned from a validation step."
       },
       "TagMetadataTypeInput": {
         "type": "object",
@@ -21928,8 +22976,7 @@
           "storage_type": {
             "type": "string",
             "enum": [
-              "AWS_S3",
-              "GCP_GCS"
+              "AWS_S3"
             ],
             "description": "Type of storage destination.\nExample: \"AWS_S3\""
           },
@@ -21946,11 +22993,6 @@
           "aws_s3_config": {
             "$ref": "#/components/schemas/AwsS3ConfigInput",
             "description": "AWS S3 storage configuration.\nExample: {\"bucket_name\": \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\", \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"}",
-            "nullable": true
-          },
-          "gcp_gcs_config": {
-            "$ref": "#/components/schemas/GcpGcsConfigInput",
-            "description": "GCP GCS storage configuration.\nExample: {\"bucket_name\": \"my-webhook-files\", \"service_account_email\": \"my-sa@my-project.iam.gserviceaccount.com\", \"path_prefix\": \"webhooks/\"} <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
             "nullable": true
           }
         },
@@ -21988,29 +23030,6 @@
           }
         },
         "description": "Input type for AWS S3 storage configuration."
-      },
-      "GcpGcsConfigInput": {
-        "type": "object",
-        "required": [
-          "bucket_name",
-          "service_account_email"
-        ],
-        "properties": {
-          "bucket_name": {
-            "type": "string",
-            "description": "Name of the GCS bucket where webhook payloads will be stored.\nExample: \"my-webhook-files\""
-          },
-          "service_account_email": {
-            "type": "string",
-            "description": "Email of the GCP service account to impersonate for bucket access.\nThe platform's service account must be granted roles/iam.serviceAccountTokenCreator on this SA.\nExample: \"my-sa@my-project.iam.gserviceaccount.com\""
-          },
-          "path_prefix": {
-            "type": "string",
-            "description": "Optional path prefix for organizing objects within the bucket.\nExample: \"webhooks/\"",
-            "nullable": true
-          }
-        },
-        "description": "Input type for GCP GCS storage configuration."
       },
       "WebhookKeyValuePairInput": {
         "type": "object",
@@ -22154,6 +23173,249 @@
           }
         },
         "description": "Group of metadata objects identified by type."
+      },
+      "StyleResetOptionsInput": {
+        "type": "object",
+        "properties": {
+          "style": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "CHART_COLOR_PALETTE",
+                "EMBEDDED_FOOTER_TEXT",
+                "NAV_PANEL_COLOR",
+                "DEFAULT_LOGO",
+                "WIDE_LOGO"
+              ]
+            },
+            "description": "Style fields to reset. Supported values: CHART_COLOR_PALETTE,\nEMBEDDED_FOOTER_TEXT, NAV_PANEL_COLOR, DEFAULT_LOGO, WIDE_LOGO.",
+            "nullable": true
+          },
+          "visualization_areas": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "CHART_X_AXIS_LABELS",
+                "CHART_X_AXIS_TITLE",
+                "CHART_Y_AXIS_LABELS",
+                "CHART_Y_AXIS_TITLE",
+                "CHART_TOOLTIP",
+                "CHART_SCATTER_DATA_LABELS",
+                "CHART_DONUT_DATA_LABELS",
+                "CHART_LINE_DATA_LABELS",
+                "CHART_COLUMN_DATA_LABELS",
+                "CHART_BAR_DATA_LABELS",
+                "CHART_AREA_DATA_LABELS",
+                "TABLE_VALUE_CELLS"
+              ]
+            },
+            "description": "Visualization areas whose font assignments should revert to the system\ndefault font.",
+            "nullable": true
+          }
+        },
+        "description": "Fields to revert to ThoughtSpot defaults when operation is RESET."
+      },
+      "NavigationPanelInput": {
+        "type": "object",
+        "properties": {
+          "theme": {
+            "type": "string",
+            "enum": [
+              "DARK",
+              "TWO_TONE",
+              "CUSTOM"
+            ],
+            "description": "Color mode for the navigation panel. DARK applies the default dark theme.\nTWO_TONE applies a dual-tone style. CUSTOM enables a user-defined base\ncolor; base_color is required when theme is CUSTOM.",
+            "nullable": true
+          },
+          "base_color": {
+            "type": "string",
+            "description": "Base color as a 6-digit hex string (e.g. \"#2359B6\"). Required when theme\nis CUSTOM.",
+            "nullable": true
+          }
+        },
+        "description": "Navigation panel color configuration."
+      },
+      "StyleColorPaletteInput": {
+        "type": "object",
+        "properties": {
+          "colors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StyleColorEntryInput"
+            },
+            "description": "Ordered array of exactly 8 color entries defining the chart color palette.",
+            "nullable": true
+          },
+          "disable_color_rotation": {
+            "type": "boolean",
+            "description": "When true, disables automatic color rotation across chart data series.",
+            "nullable": true
+          }
+        },
+        "description": "Chart color palette configuration."
+      },
+      "StyleColorEntryInput": {
+        "type": "object",
+        "required": [
+          "primary"
+        ],
+        "properties": {
+          "primary": {
+            "type": "string",
+            "description": "Primary color as a 6-digit hex string (e.g. \"#2359B6\"). Required."
+          },
+          "secondary": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Array of exactly 4 secondary shade hex strings. If omitted, the server\nauto-generates 4 shades from the primary color. If provided, must contain\nexactly 4 valid 6-digit hex color strings.",
+            "nullable": true
+          }
+        },
+        "description": "A single color entry in the chart color palette."
+      },
+      "VisualizationFontsInput": {
+        "type": "object",
+        "properties": {
+          "chart_visualization_fonts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChartFontAssignmentInput"
+            },
+            "description": "Font assignments for chart visualization areas. Provide only the areas to\nupdate; omitted areas remain unchanged.",
+            "nullable": true
+          },
+          "table_visualization_fonts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TableFontAssignmentInput"
+            },
+            "description": "Font assignments for table visualization areas. Provide only the areas to\nupdate; omitted areas remain unchanged.",
+            "nullable": true
+          }
+        },
+        "description": "Font assignments grouped by visualization type."
+      },
+      "ChartFontAssignmentInput": {
+        "type": "object",
+        "required": [
+          "visualization_area",
+          "font_identifier"
+        ],
+        "properties": {
+          "visualization_area": {
+            "type": "string",
+            "enum": [
+              "CHART_X_AXIS_LABELS",
+              "CHART_X_AXIS_TITLE",
+              "CHART_Y_AXIS_LABELS",
+              "CHART_Y_AXIS_TITLE",
+              "CHART_TOOLTIP",
+              "CHART_SCATTER_DATA_LABELS",
+              "CHART_DONUT_DATA_LABELS",
+              "CHART_LINE_DATA_LABELS",
+              "CHART_COLUMN_DATA_LABELS",
+              "CHART_BAR_DATA_LABELS",
+              "CHART_AREA_DATA_LABELS"
+            ],
+            "description": "Chart visualization area to assign the font to."
+          },
+          "font_identifier": {
+            "type": "string",
+            "description": "UUID or name of the font to assign to this area."
+          }
+        },
+        "description": "Font assignment for a single chart visualization area."
+      },
+      "TableFontAssignmentInput": {
+        "type": "object",
+        "required": [
+          "visualization_area",
+          "font_identifier"
+        ],
+        "properties": {
+          "visualization_area": {
+            "type": "string",
+            "enum": [
+              "TABLE_VALUE_CELLS"
+            ],
+            "description": "Table visualization area to assign the font to."
+          },
+          "font_identifier": {
+            "type": "string",
+            "description": "UUID or name of the font to assign to this area."
+          }
+        },
+        "description": "Font assignment for a single table visualization area."
+      },
+      "StyleFontUploadData": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique UUID identifier of the uploaded font."
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the uploaded font."
+          }
+        },
+        "description": "Font data returned after a successful upload."
+      },
+      "StyleFontDeleteData": {
+        "type": "object",
+        "properties": {
+          "affected_assignments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StyleFontDeleteAffectedAssignment"
+            },
+            "description": "Visualization areas that used the deleted font(s) and were automatically\nreset to the system default font. Empty if no areas were affected.",
+            "nullable": true
+          }
+        },
+        "description": "Result data for font deletion."
+      },
+      "StyleFontDeleteAffectedAssignment": {
+        "type": "object",
+        "properties": {
+          "org": {
+            "$ref": "#/components/schemas/StyleOrgInfo",
+            "description": "Org context for this assignment. Present only when scope is ORG.",
+            "nullable": true
+          },
+          "visualization_areas": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "CHART_X_AXIS_LABELS",
+                "CHART_X_AXIS_TITLE",
+                "CHART_Y_AXIS_LABELS",
+                "CHART_Y_AXIS_TITLE",
+                "CHART_TOOLTIP",
+                "CHART_SCATTER_DATA_LABELS",
+                "CHART_DONUT_DATA_LABELS",
+                "CHART_LINE_DATA_LABELS",
+                "CHART_COLUMN_DATA_LABELS",
+                "CHART_BAR_DATA_LABELS",
+                "CHART_AREA_DATA_LABELS",
+                "TABLE_VALUE_CELLS"
+              ]
+            },
+            "description": "Visualization areas that used the deleted font and were automatically reset\nto the system default font.",
+            "nullable": true
+          }
+        },
+        "description": "A visualization area assignment affected by a font deletion."
       },
       "Runtime_Filter": {
         "type": "object",
@@ -22419,18 +23681,6 @@
         "required": [
           "metadata_identifier",
           "message"
-        ]
-      },
-      "SetAgentInstructionsRequest": {
-        "type": "object",
-        "properties": {
-          "instructions": {
-            "description": "The admin instructions text to set for the agent.",
-            "type": "string"
-          }
-        },
-        "required": [
-          "instructions"
         ]
       },
       "SetNLInstructionsRequest": {
@@ -25532,6 +26782,11 @@
                 "$ref": "#/components/schemas/RegionalSettingsInput"
               }
             ]
+          },
+          "rows_per_sheet": {
+            "description": "Maximum number of rows to export per sheet. Only applicable for XLSX exports.\nIf not specified, the system default limit is used. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
+            "type": "integer",
+            "format": "int32"
           }
         },
         "required": [
@@ -27652,6 +28907,125 @@
           "column_security_rules"
         ]
       },
+      "DeleteStyleFontsRequest": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "description": "Scope of the font library to delete from. CLUSTER deletes from the\ncluster-level library. ORG deletes from the authenticated user's org\nlibrary. Defaults to ORG if omitted.",
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ]
+          },
+          "font_identifiers": {
+            "description": "UUIDs or names of the fonts to delete. At least one identifier is\nrequired.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "dry_run": {
+            "description": "When true, returns affected assignments without applying the deletion.\nUse this to preview the impact before committing. Defaults to true if\nomitted.",
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "required": [
+          "font_identifiers"
+        ]
+      },
+      "ExportStyleLogosRequest": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "description": "Scope of the logos to export. CLUSTER exports cluster-level logos. ORG\nexports logos for the authenticated user's org, falling back to cluster\nor ThoughtSpot defaults if no custom logo is set. Defaults to ORG if\nomitted.",
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ]
+          }
+        }
+      },
+      "SearchStyleCustomizationsRequest": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "description": "Scope of the style preferences to retrieve. CLUSTER returns cluster-level\ndefaults. ORG returns preferences for the authenticated user's org, which\nmay override cluster defaults. Defaults to ORG if omitted.",
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ]
+          }
+        }
+      },
+      "SearchStyleFontsRequest": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "description": "Scope of the font library to search. CLUSTER searches the cluster-level\nlibrary. ORG searches the authenticated user's org library. Defaults to\nORG if omitted.",
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ]
+          },
+          "font_identifier": {
+            "description": "Filter by UUID or name of a specific font.",
+            "type": "string"
+          },
+          "name_pattern": {
+            "description": "Filter by font display name. Supports partial, case-insensitive matching.",
+            "type": "string"
+          },
+          "include_font_assignments": {
+            "description": "When true, includes visualization areas this font is assigned to in the\nresponse. Defaults to false if omitted.",
+            "type": "boolean",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateStyleFontRequest": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "description": "Scope of the font library containing this font. CLUSTER targets the\ncluster-level library. ORG targets the authenticated user's org library.\nDefaults to ORG if omitted.",
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ]
+          },
+          "name": {
+            "description": "New display name for the font. Must be unique within the target scope.",
+            "type": "string"
+          },
+          "weight": {
+            "description": "New weight for the font. Supported values: NORMAL, LIGHT, BOLD.",
+            "type": "string",
+            "enum": [
+              "NORMAL",
+              "LIGHT",
+              "BOLD"
+            ]
+          },
+          "style": {
+            "description": "New style for the font. Supported values: NORMAL, ITALIC, OBLIQUE.",
+            "type": "string",
+            "enum": [
+              "NORMAL",
+              "ITALIC",
+              "OBLIQUE"
+            ]
+          },
+          "color": {
+            "description": "New color for the font as a 6-digit hex string (e.g. \"#333333\"). Returns\nan error if the value is malformed.",
+            "type": "string"
+          }
+        }
+      },
       "ConfigureCommunicationChannelPreferencesRequest": {
         "type": "object",
         "properties": {
@@ -28922,7 +30296,7 @@
             ]
           },
           "storage_destination": {
-            "description": "Configuration for storage destination.\nAWS S3 example: {\"storage_type\": \"AWS_S3\", \"storage_config\": {\"aws_s3_config\": {\"bucket_name\": \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\", \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"}}}\nGCP GCS example: {\"storage_type\": \"GCP_GCS\", \"storage_config\": {\"gcp_gcs_config\": {\"bucket_name\": \"my-webhook-files\", \"service_account_email\": \"my-sa@my-project.iam.gserviceaccount.com\", \"path_prefix\": \"webhooks/\"}}} <br/>  <span class=\"since-beta-tag\">Version: 26.3.0.cl or later</span>",
+            "description": "Configuration for storage destination.\nExample: {\"storage_type\": \"AWS_S3\", \"storage_config\": {\"aws_s3_config\": {\"bucket_name\": \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\", \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"}}} <br/>  <span class=\"since-beta-tag\">Version: 26.3.0.cl or later</span>",
             "allOf": [
               {
                 "$ref": "#/components/schemas/StorageDestinationInput"
@@ -29044,7 +30418,7 @@
             ]
           },
           "storage_destination": {
-            "description": "Configuration for storage destination.\nAWS S3 example: {\"storage_type\": \"AWS_S3\", \"storage_config\": {\"aws_s3_config\": {\"bucket_name\": \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\", \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"}}}\nGCP GCS example: {\"storage_type\": \"GCP_GCS\", \"storage_config\": {\"gcp_gcs_config\": {\"bucket_name\": \"my-webhook-files\", \"service_account_email\": \"my-sa@my-project.iam.gserviceaccount.com\", \"path_prefix\": \"webhooks/\"}}} <br/>  <span class=\"since-beta-tag\">Version: 26.3.0.cl or later</span>",
+            "description": "Configuration for storage destination.\nExample: {\"storage_type\": \"AWS_S3\", \"storage_config\": {\"aws_s3_config\": {\"bucket_name\": \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\", \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"}}} <br/>  <span class=\"since-beta-tag\">Version: 26.3.0.cl or later</span>",
             "allOf": [
               {
                 "$ref": "#/components/schemas/StorageDestinationInput"
