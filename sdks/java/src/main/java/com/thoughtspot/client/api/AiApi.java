@@ -26,6 +26,8 @@ import com.thoughtspot.client.model.GetNLInstructionsRequest;
 import com.thoughtspot.client.model.GetRelevantQuestionsRequest;
 import com.thoughtspot.client.model.QueryGetDecomposedQueryRequest;
 import com.thoughtspot.client.model.ResponseMessage;
+import com.thoughtspot.client.model.SendAgentConversationMessageRequest;
+import com.thoughtspot.client.model.SendAgentConversationMessageStreamingRequest;
 import com.thoughtspot.client.model.SendAgentMessageRequest;
 import com.thoughtspot.client.model.SendAgentMessageResponse;
 import com.thoughtspot.client.model.SendAgentMessageStreamingRequest;
@@ -1595,6 +1597,574 @@ public class AiApi {
         return localVarCall;
     }
     /**
+     * Build call for sendAgentConversationMessage
+     *
+     * @param conversationIdentifier Unique identifier for the conversation (used to track context)
+     *     (required)
+     * @param sendAgentConversationMessageRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call sendAgentConversationMessageCall(
+            String conversationIdentifier,
+            SendAgentConversationMessageRequest sendAgentConversationMessageRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = sendAgentConversationMessageRequest;
+
+        // create path and map variables
+        String localVarPath =
+                "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send"
+                        .replace(
+                                "{" + "conversation_identifier" + "}",
+                                localVarApiClient.escapeString(conversationIdentifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call sendAgentConversationMessageValidateBeforeCall(
+            String conversationIdentifier,
+            SendAgentConversationMessageRequest sendAgentConversationMessageRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'conversationIdentifier' is set
+        if (conversationIdentifier == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'conversationIdentifier' when calling"
+                            + " sendAgentConversationMessage(Async)");
+        }
+
+        // verify the required parameter 'sendAgentConversationMessageRequest' is set
+        if (sendAgentConversationMessageRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'sendAgentConversationMessageRequest' when"
+                            + " calling sendAgentConversationMessage(Async)");
+        }
+
+        return sendAgentConversationMessageCall(
+                conversationIdentifier, sendAgentConversationMessageRequest, _callback);
+    }
+
+    /**
+     * Version: 26.5.0.cl or later Sends natural language messages to an existing Spotter agent
+     * conversation and returns the complete response synchronously. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the metadata object associated with the
+     * conversation. The user must have access to the conversation session referenced by
+     * &#x60;conversation_identifier&#x60;. A conversation must first be created using the
+     * &#x60;createAgentConversation&#x60; API. #### Usage guidelines The request must include: -
+     * &#x60;conversation_identifier&#x60;: the unique session ID returned by
+     * &#x60;createAgentConversation&#x60;, used for context continuity and message tracking -
+     * &#x60;messages&#x60;: an array of one or more text messages to send to the agent The API
+     * returns an array of response objects, each containing: - &#x60;type&#x60;: the kind of
+     * response — &#x60;text&#x60;, &#x60;answer&#x60;, or &#x60;error&#x60; - &#x60;message&#x60;:
+     * the main content of the response - &#x60;metadata&#x60;: additional information depending on
+     * the message type (e.g., answer metadata includes analytics and visualization details) ####
+     * Error responses | Code | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks permission on the referenced conversation. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint is Generally Available from version 26.5.0.cl. &gt; - This endpoint requires Spotter
+     * - please contact ThoughtSpot support to enable Spotter on your cluster. &gt; - For real-time
+     * streamed responses, use &#x60;sendAgentConversationMessageStreaming&#x60; instead.
+     *
+     * @param conversationIdentifier Unique identifier for the conversation (used to track context)
+     *     (required)
+     * @param sendAgentConversationMessageRequest (required)
+     * @return Object
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public Object sendAgentConversationMessage(
+            String conversationIdentifier,
+            SendAgentConversationMessageRequest sendAgentConversationMessageRequest)
+            throws ApiException {
+        ApiResponse<Object> localVarResp =
+                sendAgentConversationMessageWithHttpInfo(
+                        conversationIdentifier, sendAgentConversationMessageRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Version: 26.5.0.cl or later Sends natural language messages to an existing Spotter agent
+     * conversation and returns the complete response synchronously. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the metadata object associated with the
+     * conversation. The user must have access to the conversation session referenced by
+     * &#x60;conversation_identifier&#x60;. A conversation must first be created using the
+     * &#x60;createAgentConversation&#x60; API. #### Usage guidelines The request must include: -
+     * &#x60;conversation_identifier&#x60;: the unique session ID returned by
+     * &#x60;createAgentConversation&#x60;, used for context continuity and message tracking -
+     * &#x60;messages&#x60;: an array of one or more text messages to send to the agent The API
+     * returns an array of response objects, each containing: - &#x60;type&#x60;: the kind of
+     * response — &#x60;text&#x60;, &#x60;answer&#x60;, or &#x60;error&#x60; - &#x60;message&#x60;:
+     * the main content of the response - &#x60;metadata&#x60;: additional information depending on
+     * the message type (e.g., answer metadata includes analytics and visualization details) ####
+     * Error responses | Code | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks permission on the referenced conversation. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint is Generally Available from version 26.5.0.cl. &gt; - This endpoint requires Spotter
+     * - please contact ThoughtSpot support to enable Spotter on your cluster. &gt; - For real-time
+     * streamed responses, use &#x60;sendAgentConversationMessageStreaming&#x60; instead.
+     *
+     * @param conversationIdentifier Unique identifier for the conversation (used to track context)
+     *     (required)
+     * @param sendAgentConversationMessageRequest (required)
+     * @return ApiResponse&lt;Object&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<Object> sendAgentConversationMessageWithHttpInfo(
+            String conversationIdentifier,
+            SendAgentConversationMessageRequest sendAgentConversationMessageRequest)
+            throws ApiException {
+        okhttp3.Call localVarCall =
+                sendAgentConversationMessageValidateBeforeCall(
+                        conversationIdentifier, sendAgentConversationMessageRequest, null);
+        Type localVarReturnType = new TypeToken<Object>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Version: 26.5.0.cl or later Sends natural language messages to an existing
+     * Spotter agent conversation and returns the complete response synchronously. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the metadata object associated with the
+     * conversation. The user must have access to the conversation session referenced by
+     * &#x60;conversation_identifier&#x60;. A conversation must first be created using the
+     * &#x60;createAgentConversation&#x60; API. #### Usage guidelines The request must include: -
+     * &#x60;conversation_identifier&#x60;: the unique session ID returned by
+     * &#x60;createAgentConversation&#x60;, used for context continuity and message tracking -
+     * &#x60;messages&#x60;: an array of one or more text messages to send to the agent The API
+     * returns an array of response objects, each containing: - &#x60;type&#x60;: the kind of
+     * response — &#x60;text&#x60;, &#x60;answer&#x60;, or &#x60;error&#x60; - &#x60;message&#x60;:
+     * the main content of the response - &#x60;metadata&#x60;: additional information depending on
+     * the message type (e.g., answer metadata includes analytics and visualization details) ####
+     * Error responses | Code | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks permission on the referenced conversation. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint is Generally Available from version 26.5.0.cl. &gt; - This endpoint requires Spotter
+     * - please contact ThoughtSpot support to enable Spotter on your cluster. &gt; - For real-time
+     * streamed responses, use &#x60;sendAgentConversationMessageStreaming&#x60; instead.
+     *
+     * @param conversationIdentifier Unique identifier for the conversation (used to track context)
+     *     (required)
+     * @param sendAgentConversationMessageRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call sendAgentConversationMessageAsync(
+            String conversationIdentifier,
+            SendAgentConversationMessageRequest sendAgentConversationMessageRequest,
+            final ApiCallback<Object> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                sendAgentConversationMessageValidateBeforeCall(
+                        conversationIdentifier, sendAgentConversationMessageRequest, _callback);
+        Type localVarReturnType = new TypeToken<Object>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for sendAgentConversationMessageStreaming
+     *
+     * @param conversationIdentifier Unique identifier for the conversation (used to track context)
+     *     (required)
+     * @param sendAgentConversationMessageStreamingRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call sendAgentConversationMessageStreamingCall(
+            String conversationIdentifier,
+            SendAgentConversationMessageStreamingRequest
+                    sendAgentConversationMessageStreamingRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = sendAgentConversationMessageStreamingRequest;
+
+        // create path and map variables
+        String localVarPath =
+                "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send/stream"
+                        .replace(
+                                "{" + "conversation_identifier" + "}",
+                                localVarApiClient.escapeString(conversationIdentifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call sendAgentConversationMessageStreamingValidateBeforeCall(
+            String conversationIdentifier,
+            SendAgentConversationMessageStreamingRequest
+                    sendAgentConversationMessageStreamingRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'conversationIdentifier' is set
+        if (conversationIdentifier == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'conversationIdentifier' when calling"
+                            + " sendAgentConversationMessageStreaming(Async)");
+        }
+
+        // verify the required parameter 'sendAgentConversationMessageStreamingRequest' is set
+        if (sendAgentConversationMessageStreamingRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'sendAgentConversationMessageStreamingRequest'"
+                            + " when calling sendAgentConversationMessageStreaming(Async)");
+        }
+
+        return sendAgentConversationMessageStreamingCall(
+                conversationIdentifier, sendAgentConversationMessageStreamingRequest, _callback);
+    }
+
+    /**
+     * Version: 26.5.0.cl or later Sends one or more natural language messages to an existing
+     * Spotter agent conversation and returns the response as a real-time Server-Sent Events stream.
+     * Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the metadata object associated
+     * with the conversation. The user must have access to the conversation session referenced by
+     * &#x60;conversation_identifier&#x60;. A conversation must first be created using the
+     * &#x60;createAgentConversation&#x60; API. #### Usage guidelines The request must include: -
+     * &#x60;conversation_identifier&#x60;: the unique session ID returned by
+     * &#x60;createAgentConversation&#x60;, used for context continuity and message tracking -
+     * &#x60;messages&#x60;: an array of one or more text messages to send to the agent If the
+     * request is valid, the API returns a Server-Sent Events (SSE) stream. Each line has the form
+     * &#x60;data: [{\&quot;type\&quot;: \&quot;...\&quot;, ...}]&#x60; — a JSON array of event
+     * objects. Event types include: - &#x60;ack&#x60;: confirms receipt of the request
+     * (&#x60;node_id&#x60;) - &#x60;conv_title&#x60;: conversation title (&#x60;title&#x60;,
+     * &#x60;conv_id&#x60;) - &#x60;notification&#x60;: status updates on operations
+     * (&#x60;group_id&#x60;, &#x60;metadata&#x60;, &#x60;code&#x60; — e.g.
+     * &#x60;TOOL_CALL_NOTIFICATION&#x60;, &#x60;nls_start&#x60;,
+     * &#x60;FINAL_RESPONSE_NOTIFICATION&#x60;) - &#x60;text-chunk&#x60;: incremental content chunks
+     * (&#x60;id&#x60;, &#x60;group_id&#x60;, &#x60;metadata&#x60; with &#x60;format&#x60; and
+     * &#x60;type&#x60; such as &#x60;thinking&#x60; or &#x60;text&#x60;, &#x60;content&#x60;) -
+     * &#x60;text&#x60;: full text block with same structure as &#x60;text-chunk&#x60; -
+     * &#x60;answer&#x60;: structured answer with metadata (&#x60;id&#x60;, &#x60;group_id&#x60;,
+     * &#x60;metadata&#x60; with &#x60;sage_query&#x60;, &#x60;session_id&#x60;, &#x60;title&#x60;,
+     * etc., &#x60;title&#x60;) - &#x60;error&#x60;: if a failure occurs #### Error responses | Code
+     * | Description | | ---- |
+     * --------------------------------------------------------------------------------------------------------------------------------
+     * | | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks permission on the referenced conversation. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint is Generally Available from version 26.5.0.cl. &gt; - This endpoint requires Spotter
+     * - please contact ThoughtSpot support to enable Spotter on your cluster. &gt; - The streaming
+     * protocol uses Server-Sent Events (SSE). &gt; - For the complete response in a single payload,
+     * use &#x60;sendAgentConversationMessage&#x60; instead.
+     *
+     * @param conversationIdentifier Unique identifier for the conversation (used to track context)
+     *     (required)
+     * @param sendAgentConversationMessageStreamingRequest (required)
+     * @return SendAgentMessageResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public SendAgentMessageResponse sendAgentConversationMessageStreaming(
+            String conversationIdentifier,
+            SendAgentConversationMessageStreamingRequest
+                    sendAgentConversationMessageStreamingRequest)
+            throws ApiException {
+        ApiResponse<SendAgentMessageResponse> localVarResp =
+                sendAgentConversationMessageStreamingWithHttpInfo(
+                        conversationIdentifier, sendAgentConversationMessageStreamingRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Version: 26.5.0.cl or later Sends one or more natural language messages to an existing
+     * Spotter agent conversation and returns the response as a real-time Server-Sent Events stream.
+     * Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the metadata object associated
+     * with the conversation. The user must have access to the conversation session referenced by
+     * &#x60;conversation_identifier&#x60;. A conversation must first be created using the
+     * &#x60;createAgentConversation&#x60; API. #### Usage guidelines The request must include: -
+     * &#x60;conversation_identifier&#x60;: the unique session ID returned by
+     * &#x60;createAgentConversation&#x60;, used for context continuity and message tracking -
+     * &#x60;messages&#x60;: an array of one or more text messages to send to the agent If the
+     * request is valid, the API returns a Server-Sent Events (SSE) stream. Each line has the form
+     * &#x60;data: [{\&quot;type\&quot;: \&quot;...\&quot;, ...}]&#x60; — a JSON array of event
+     * objects. Event types include: - &#x60;ack&#x60;: confirms receipt of the request
+     * (&#x60;node_id&#x60;) - &#x60;conv_title&#x60;: conversation title (&#x60;title&#x60;,
+     * &#x60;conv_id&#x60;) - &#x60;notification&#x60;: status updates on operations
+     * (&#x60;group_id&#x60;, &#x60;metadata&#x60;, &#x60;code&#x60; — e.g.
+     * &#x60;TOOL_CALL_NOTIFICATION&#x60;, &#x60;nls_start&#x60;,
+     * &#x60;FINAL_RESPONSE_NOTIFICATION&#x60;) - &#x60;text-chunk&#x60;: incremental content chunks
+     * (&#x60;id&#x60;, &#x60;group_id&#x60;, &#x60;metadata&#x60; with &#x60;format&#x60; and
+     * &#x60;type&#x60; such as &#x60;thinking&#x60; or &#x60;text&#x60;, &#x60;content&#x60;) -
+     * &#x60;text&#x60;: full text block with same structure as &#x60;text-chunk&#x60; -
+     * &#x60;answer&#x60;: structured answer with metadata (&#x60;id&#x60;, &#x60;group_id&#x60;,
+     * &#x60;metadata&#x60; with &#x60;sage_query&#x60;, &#x60;session_id&#x60;, &#x60;title&#x60;,
+     * etc., &#x60;title&#x60;) - &#x60;error&#x60;: if a failure occurs #### Error responses | Code
+     * | Description | | ---- |
+     * --------------------------------------------------------------------------------------------------------------------------------
+     * | | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks permission on the referenced conversation. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint is Generally Available from version 26.5.0.cl. &gt; - This endpoint requires Spotter
+     * - please contact ThoughtSpot support to enable Spotter on your cluster. &gt; - The streaming
+     * protocol uses Server-Sent Events (SSE). &gt; - For the complete response in a single payload,
+     * use &#x60;sendAgentConversationMessage&#x60; instead.
+     *
+     * @param conversationIdentifier Unique identifier for the conversation (used to track context)
+     *     (required)
+     * @param sendAgentConversationMessageStreamingRequest (required)
+     * @return ApiResponse&lt;SendAgentMessageResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<SendAgentMessageResponse> sendAgentConversationMessageStreamingWithHttpInfo(
+            String conversationIdentifier,
+            SendAgentConversationMessageStreamingRequest
+                    sendAgentConversationMessageStreamingRequest)
+            throws ApiException {
+        okhttp3.Call localVarCall =
+                sendAgentConversationMessageStreamingValidateBeforeCall(
+                        conversationIdentifier, sendAgentConversationMessageStreamingRequest, null);
+        Type localVarReturnType = new TypeToken<SendAgentMessageResponse>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Version: 26.5.0.cl or later Sends one or more natural language messages to
+     * an existing Spotter agent conversation and returns the response as a real-time Server-Sent
+     * Events stream. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the metadata
+     * object associated with the conversation. The user must have access to the conversation
+     * session referenced by &#x60;conversation_identifier&#x60;. A conversation must first be
+     * created using the &#x60;createAgentConversation&#x60; API. #### Usage guidelines The request
+     * must include: - &#x60;conversation_identifier&#x60;: the unique session ID returned by
+     * &#x60;createAgentConversation&#x60;, used for context continuity and message tracking -
+     * &#x60;messages&#x60;: an array of one or more text messages to send to the agent If the
+     * request is valid, the API returns a Server-Sent Events (SSE) stream. Each line has the form
+     * &#x60;data: [{\&quot;type\&quot;: \&quot;...\&quot;, ...}]&#x60; — a JSON array of event
+     * objects. Event types include: - &#x60;ack&#x60;: confirms receipt of the request
+     * (&#x60;node_id&#x60;) - &#x60;conv_title&#x60;: conversation title (&#x60;title&#x60;,
+     * &#x60;conv_id&#x60;) - &#x60;notification&#x60;: status updates on operations
+     * (&#x60;group_id&#x60;, &#x60;metadata&#x60;, &#x60;code&#x60; — e.g.
+     * &#x60;TOOL_CALL_NOTIFICATION&#x60;, &#x60;nls_start&#x60;,
+     * &#x60;FINAL_RESPONSE_NOTIFICATION&#x60;) - &#x60;text-chunk&#x60;: incremental content chunks
+     * (&#x60;id&#x60;, &#x60;group_id&#x60;, &#x60;metadata&#x60; with &#x60;format&#x60; and
+     * &#x60;type&#x60; such as &#x60;thinking&#x60; or &#x60;text&#x60;, &#x60;content&#x60;) -
+     * &#x60;text&#x60;: full text block with same structure as &#x60;text-chunk&#x60; -
+     * &#x60;answer&#x60;: structured answer with metadata (&#x60;id&#x60;, &#x60;group_id&#x60;,
+     * &#x60;metadata&#x60; with &#x60;sage_query&#x60;, &#x60;session_id&#x60;, &#x60;title&#x60;,
+     * etc., &#x60;title&#x60;) - &#x60;error&#x60;: if a failure occurs #### Error responses | Code
+     * | Description | | ---- |
+     * --------------------------------------------------------------------------------------------------------------------------------
+     * | | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks permission on the referenced conversation. | &gt; ###### Note: &gt; &gt; - This
+     * endpoint is Generally Available from version 26.5.0.cl. &gt; - This endpoint requires Spotter
+     * - please contact ThoughtSpot support to enable Spotter on your cluster. &gt; - The streaming
+     * protocol uses Server-Sent Events (SSE). &gt; - For the complete response in a single payload,
+     * use &#x60;sendAgentConversationMessage&#x60; instead.
+     *
+     * @param conversationIdentifier Unique identifier for the conversation (used to track context)
+     *     (required)
+     * @param sendAgentConversationMessageStreamingRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call sendAgentConversationMessageStreamingAsync(
+            String conversationIdentifier,
+            SendAgentConversationMessageStreamingRequest
+                    sendAgentConversationMessageStreamingRequest,
+            final ApiCallback<SendAgentMessageResponse> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                sendAgentConversationMessageStreamingValidateBeforeCall(
+                        conversationIdentifier,
+                        sendAgentConversationMessageStreamingRequest,
+                        _callback);
+        Type localVarReturnType = new TypeToken<SendAgentMessageResponse>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for sendAgentMessage
      *
      * @param conversationIdentifier Unique identifier for the conversation (used to track context)
@@ -1614,7 +2184,10 @@ public class AiApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call sendAgentMessageCall(
             String conversationIdentifier,
             SendAgentMessageRequest sendAgentMessageRequest,
@@ -1676,6 +2249,7 @@ public class AiApi {
                 _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call sendAgentMessageValidateBeforeCall(
             String conversationIdentifier,
@@ -1700,7 +2274,7 @@ public class AiApi {
     }
 
     /**
-     * Version: 10.15.0.cl or later **Deprecated** — Use &#x60;sendAgentConversationMessage&#x60;
+     * Version: 26.2.0.cl or later **Deprecated** — Use &#x60;sendAgentConversationMessage&#x60;
      * instead. Send natural language messages to an existing Spotter agent conversation and returns
      * the complete response synchronously. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and
      * access to the metadata object associated with the conversation. The user must have access to
@@ -1740,7 +2314,10 @@ public class AiApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public Object sendAgentMessage(
             String conversationIdentifier, SendAgentMessageRequest sendAgentMessageRequest)
             throws ApiException {
@@ -1750,7 +2327,7 @@ public class AiApi {
     }
 
     /**
-     * Version: 10.15.0.cl or later **Deprecated** — Use &#x60;sendAgentConversationMessage&#x60;
+     * Version: 26.2.0.cl or later **Deprecated** — Use &#x60;sendAgentConversationMessage&#x60;
      * instead. Send natural language messages to an existing Spotter agent conversation and returns
      * the complete response synchronously. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and
      * access to the metadata object associated with the conversation. The user must have access to
@@ -1790,7 +2367,10 @@ public class AiApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public ApiResponse<Object> sendAgentMessageWithHttpInfo(
             String conversationIdentifier, SendAgentMessageRequest sendAgentMessageRequest)
             throws ApiException {
@@ -1802,7 +2382,7 @@ public class AiApi {
     }
 
     /**
-     * (asynchronously) Version: 10.15.0.cl or later **Deprecated** — Use
+     * (asynchronously) Version: 26.2.0.cl or later **Deprecated** — Use
      * &#x60;sendAgentConversationMessage&#x60; instead. Send natural language messages to an
      * existing Spotter agent conversation and returns the complete response synchronously. Requires
      * &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the metadata object associated with the
@@ -1844,7 +2424,10 @@ public class AiApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call sendAgentMessageAsync(
             String conversationIdentifier,
             SendAgentMessageRequest sendAgentMessageRequest,
@@ -1876,7 +2459,10 @@ public class AiApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call sendAgentMessageStreamingCall(
             SendAgentMessageStreamingRequest sendAgentMessageStreamingRequest,
             final ApiCallback _callback)
@@ -1933,6 +2519,7 @@ public class AiApi {
                 _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call sendAgentMessageStreamingValidateBeforeCall(
             SendAgentMessageStreamingRequest sendAgentMessageStreamingRequest,
@@ -1949,7 +2536,7 @@ public class AiApi {
     }
 
     /**
-     * Version: 10.13.0.cl or later **Deprecated** — Use
+     * Version: 26.2.0.cl or later **Deprecated** — Use
      * &#x60;sendAgentConversationMessageStreaming&#x60; instead. Sends one or more natural language
      * messages to an existing Spotter agent conversation and returns the response as a real-time
      * Server-Sent Events stream. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the
@@ -1999,7 +2586,10 @@ public class AiApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public SendAgentMessageResponse sendAgentMessageStreaming(
             SendAgentMessageStreamingRequest sendAgentMessageStreamingRequest) throws ApiException {
         ApiResponse<SendAgentMessageResponse> localVarResp =
@@ -2008,7 +2598,7 @@ public class AiApi {
     }
 
     /**
-     * Version: 10.13.0.cl or later **Deprecated** — Use
+     * Version: 26.2.0.cl or later **Deprecated** — Use
      * &#x60;sendAgentConversationMessageStreaming&#x60; instead. Sends one or more natural language
      * messages to an existing Spotter agent conversation and returns the response as a real-time
      * Server-Sent Events stream. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the
@@ -2058,7 +2648,10 @@ public class AiApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public ApiResponse<SendAgentMessageResponse> sendAgentMessageStreamingWithHttpInfo(
             SendAgentMessageStreamingRequest sendAgentMessageStreamingRequest) throws ApiException {
         okhttp3.Call localVarCall =
@@ -2068,7 +2661,7 @@ public class AiApi {
     }
 
     /**
-     * (asynchronously) Version: 10.13.0.cl or later **Deprecated** — Use
+     * (asynchronously) Version: 26.2.0.cl or later **Deprecated** — Use
      * &#x60;sendAgentConversationMessageStreaming&#x60; instead. Sends one or more natural language
      * messages to an existing Spotter agent conversation and returns the response as a real-time
      * Server-Sent Events stream. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the
@@ -2119,7 +2712,10 @@ public class AiApi {
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
+     *
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call sendAgentMessageStreamingAsync(
             SendAgentMessageStreamingRequest sendAgentMessageStreamingRequest,
             final ApiCallback<SendAgentMessageResponse> _callback)

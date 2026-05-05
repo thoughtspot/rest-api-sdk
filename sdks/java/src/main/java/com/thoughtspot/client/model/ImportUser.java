@@ -113,7 +113,7 @@ public class ImportUser implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_ACCOUNT_TYPE)
     @javax.annotation.Nullable
-    private AccountTypeEnum accountType = AccountTypeEnum.LOCAL_USER;
+    private AccountTypeEnum accountType;
 
     /** Status of the user account. */
     @JsonAdapter(AccountStatusEnum.Adapter.class)
@@ -178,7 +178,7 @@ public class ImportUser implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_ACCOUNT_STATUS)
     @javax.annotation.Nullable
-    private AccountStatusEnum accountStatus = AccountStatusEnum.ACTIVE;
+    private AccountStatusEnum accountStatus;
 
     public static final String SERIALIZED_NAME_EMAIL = "email";
 

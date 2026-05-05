@@ -113,8 +113,6 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.AnswerContent.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.AnswerContextInput.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.AnswerDataResponse.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.AssignChangeAuthorRequest
@@ -548,8 +546,6 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.JobRecipient.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.LBContextInput.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.LiveboardContent.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.LiveboardDataResponse.CustomTypeAdapterFactory());
@@ -846,6 +842,12 @@ public class JSON {
                 new com.thoughtspot.client.model.SecuritySettingsResponse
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.SendAgentConversationMessageRequest
+                        .CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.SendAgentConversationMessageStreamingRequest
+                        .CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.SendAgentMessageRequest
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
@@ -888,6 +890,10 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.StorageDestinationInput
                         .CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.SyncMetadataRequest.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.SyncMetadataResponse.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.SystemConfig.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(

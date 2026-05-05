@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**fetchConnectionDiffStatus**](ConnectionsApi.md#fetchConnectionDiffStatus) | **POST** /api/rest/2.0/connections/fetch-connection-diff-status/{connection_identifier} | 
 [**revokeRefreshTokens**](ConnectionsApi.md#revokeRefreshTokens) | **POST** /api/rest/2.0/connections/{connection_identifier}/revoke-refresh-tokens | 
 [**searchConnection**](ConnectionsApi.md#searchConnection) | **POST** /api/rest/2.0/connection/search | 
+[**syncMetadata**](ConnectionsApi.md#syncMetadata) | **POST** /api/rest/2.0/connections/{connection_identifier}/resync-metadata | 
 [**updateConnection**](ConnectionsApi.md#updateConnection) | **POST** /api/rest/2.0/connection/update | 
 [**updateConnectionV2**](ConnectionsApi.md#updateConnectionV2) | **POST** /api/rest/2.0/connections/{connection_identifier}/update | 
 
@@ -483,6 +484,73 @@ Name | Type | Description  | Notes
 **400** | Invalid request. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **syncMetadata**
+> SyncMetadataResponse syncMetadata(syncMetadataRequest)
+
+  Version: 26.5.0.cl or later   Synchronizes connection metadata attributes from your Cloud Data Warehouse (CDW) with ThoughtSpot.  Requires the  `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**) privilege is required.  #### Usage guidelines  To synchronize attributes from a CDW, specify the connection GUID or name in the `connection_identifier` path parameter and  `sync_attributes` in the request body. Default attribute is `[\"DESCRIPTION\"]`.  ##### Hierarchical schema  * Connection: The connection object for the sync operation. * Tables: Tables for the sync operation. When no table is specified, all tables are synchronized. * Columns: If the table is specified, you can add the columns for the sync operation. If no columns are specified, all columns in the specified table are considered for the sync operation.  To set the scope for the sync operation:  * Connection-level: To sync all tables and columns, pass an empty request body, or only the attributes in the request body. * Table-level: To synchronize specific tables and their columns, specify the table identifiers in the `tables` array. * Column-level: To synchronize specific columns, specify the table identifier as the key and column identifiers as the value in the `tables` array.  ``` {   \"tables\": [     {\"table-guid-1\": [\"column-guid-1\", \"column-guid-2\"]},     \"table-guid-2\"   ],   \"sync_attributes\": [\"DESCRIPTION\"] } ```  ##### API response  If the sync operation is successful, the API returns the following information:  * Status of the sync operation. For example, `SUCCESS`, `PARTIAL_SUCCESS`, or `NO_UPDATE`. * Number of tables and columns that were updated. * Number of tables and columns with the sync failed status when the overall sync status is `PARTIAL_SUCCESS`. * Message text indicating the sync results.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ConnectionsApi, SyncMetadataRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ConnectionsApi(configuration);
+
+apiInstance.syncMetadata(
+  // string | Unique ID or name of the connection.
+  "connection_identifier_example" , 
+  // SyncMetadataRequest
+  {
+    tables: {},
+    sync_attributes: ["DESCRIPTION"],
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **syncMetadataRequest** | **SyncMetadataRequest**|  |
+ **connectionIdentifier** | [**string**] | Unique ID or name of the connection. | defaults to undefined
+
+
+### Return type
+
+**SyncMetadataResponse**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Metadata synced successfully. |  -  |
+**400** | Invalid request parameters or hierarchy. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**404** | Connection, table, or column not found. |  -  |
 **500** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)

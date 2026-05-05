@@ -32,6 +32,74 @@ import org.openapitools.jackson.nullable.JsonNullable;
 public class PdfOptionsInput implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Size of PDF page. &#x60;A4&#x60; generates a paginated A4 PDF. &#x60;CONTINUOUS&#x60;
+     * generates a continuous PDF that matches the Liveboard layout. Each Liveboard tab has its own
+     * page of variable length. Defaults to &#x60;A4&#x60; if not specified. Version: 26.5.0.cl or
+     * later
+     */
+    @JsonAdapter(PageSizeEnum.Adapter.class)
+    public enum PageSizeEnum {
+        A4("A4"),
+
+        CONTINUOUS("CONTINUOUS");
+
+        private String value;
+
+        PageSizeEnum(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        public static PageSizeEnum fromValue(String value) {
+            for (PageSizeEnum b : PageSizeEnum.values()) {
+                if (b.value.equals(value)) {
+                    return b;
+                }
+            }
+            return null;
+        }
+
+        public static class Adapter extends TypeAdapter<PageSizeEnum> {
+            @Override
+            public void write(final JsonWriter jsonWriter, final PageSizeEnum enumeration)
+                    throws IOException {
+                jsonWriter.value(enumeration.getValue());
+            }
+
+            @Override
+            public PageSizeEnum read(final JsonReader jsonReader) throws IOException {
+                String value = jsonReader.nextString();
+                return PageSizeEnum.fromValue(value);
+            }
+        }
+
+        public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+            String value = jsonElement.getAsString();
+            PageSizeEnum.fromValue(value);
+        }
+    }
+
+    public static final String SERIALIZED_NAME_PAGE_SIZE = "page_size";
+
+    @SerializedName(SERIALIZED_NAME_PAGE_SIZE)
+    @javax.annotation.Nullable
+    private PageSizeEnum pageSize;
+
+    public static final String SERIALIZED_NAME_ZOOM_LEVEL = "zoom_level";
+
+    @SerializedName(SERIALIZED_NAME_ZOOM_LEVEL)
+    @javax.annotation.Nullable
+    private Integer zoomLevel;
+
     public static final String SERIALIZED_NAME_INCLUDE_COVER_PAGE = "include_cover_page";
 
     @SerializedName(SERIALIZED_NAME_INCLUDE_COVER_PAGE)
@@ -127,6 +195,49 @@ public class PdfOptionsInput implements Serializable {
 
     public PdfOptionsInput() {}
 
+    public PdfOptionsInput pageSize(@javax.annotation.Nullable PageSizeEnum pageSize) {
+        this.pageSize = pageSize;
+        return this;
+    }
+
+    /**
+     * Size of PDF page. &#x60;A4&#x60; generates a paginated A4 PDF. &#x60;CONTINUOUS&#x60;
+     * generates a continuous PDF that matches the Liveboard layout. Each Liveboard tab has its own
+     * page of variable length. Defaults to &#x60;A4&#x60; if not specified. Version: 26.5.0.cl or
+     * later
+     *
+     * @return pageSize
+     */
+    @javax.annotation.Nullable
+    public PageSizeEnum getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(@javax.annotation.Nullable PageSizeEnum pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public PdfOptionsInput zoomLevel(@javax.annotation.Nullable Integer zoomLevel) {
+        this.zoomLevel = zoomLevel;
+        return this;
+    }
+
+    /**
+     * Zoom level percentage for the PDF. Only applicable when &#x60;page_size&#x60; is
+     * &#x60;CONTINUOUS&#x60;. Acceptable values are integers in the range [45, 175]. Defaults to
+     * 100 if not specified. Version: 26.5.0.cl or later
+     *
+     * @return zoomLevel
+     */
+    @javax.annotation.Nullable
+    public Integer getZoomLevel() {
+        return zoomLevel;
+    }
+
+    public void setZoomLevel(@javax.annotation.Nullable Integer zoomLevel) {
+        this.zoomLevel = zoomLevel;
+    }
+
     public PdfOptionsInput includeCoverPage(@javax.annotation.Nullable Boolean includeCoverPage) {
         this.includeCoverPage = includeCoverPage;
         return this;
@@ -171,7 +282,8 @@ public class PdfOptionsInput implements Serializable {
     }
 
     /**
-     * Indicates whether to include a page with all applied filters.
+     * Indicates whether to include a page with all applied filters. For &#x60;CONTINUOUS&#x60;
+     * page_size, this parameter indicates whether to include the filter header.
      *
      * @return includeFilterPage
      */
@@ -314,7 +426,9 @@ public class PdfOptionsInput implements Serializable {
             return false;
         }
         PdfOptionsInput pdfOptionsInput = (PdfOptionsInput) o;
-        return Objects.equals(this.includeCoverPage, pdfOptionsInput.includeCoverPage)
+        return Objects.equals(this.pageSize, pdfOptionsInput.pageSize)
+                && Objects.equals(this.zoomLevel, pdfOptionsInput.zoomLevel)
+                && Objects.equals(this.includeCoverPage, pdfOptionsInput.includeCoverPage)
                 && Objects.equals(this.includeCustomLogo, pdfOptionsInput.includeCustomLogo)
                 && Objects.equals(this.includeFilterPage, pdfOptionsInput.includeFilterPage)
                 && Objects.equals(this.includePageNumber, pdfOptionsInput.includePageNumber)
@@ -336,6 +450,8 @@ public class PdfOptionsInput implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(
+                pageSize,
+                zoomLevel,
                 includeCoverPage,
                 includeCustomLogo,
                 includeFilterPage,
@@ -357,6 +473,8 @@ public class PdfOptionsInput implements Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class PdfOptionsInput {\n");
+        sb.append("    pageSize: ").append(toIndentedString(pageSize)).append("\n");
+        sb.append("    zoomLevel: ").append(toIndentedString(zoomLevel)).append("\n");
         sb.append("    includeCoverPage: ").append(toIndentedString(includeCoverPage)).append("\n");
         sb.append("    includeCustomLogo: ")
                 .append(toIndentedString(includeCustomLogo))
@@ -394,6 +512,8 @@ public class PdfOptionsInput implements Serializable {
     static {
         // a set of all properties/fields (JSON key names)
         openapiFields = new HashSet<String>();
+        openapiFields.add("page_size");
+        openapiFields.add("zoom_level");
         openapiFields.add("include_cover_page");
         openapiFields.add("include_custom_logo");
         openapiFields.add("include_filter_page");
@@ -424,6 +544,18 @@ public class PdfOptionsInput implements Serializable {
             }
         }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
+        if ((jsonObj.get("page_size") != null && !jsonObj.get("page_size").isJsonNull())
+                && !jsonObj.get("page_size").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `page_size` to be a primitive type in the JSON"
+                                    + " string but got `%s`",
+                            jsonObj.get("page_size").toString()));
+        }
+        // validate the optional field `page_size`
+        if (jsonObj.get("page_size") != null && !jsonObj.get("page_size").isJsonNull()) {
+            PageSizeEnum.validateJsonElement(jsonObj.get("page_size"));
+        }
         if ((jsonObj.get("page_orientation") != null
                         && !jsonObj.get("page_orientation").isJsonNull())
                 && !jsonObj.get("page_orientation").isJsonPrimitive()) {

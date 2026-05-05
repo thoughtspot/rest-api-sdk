@@ -10,9 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { AnswerContextInput } from '../models/AnswerContextInput';
 import { DataSourceContextInput } from '../models/DataSourceContextInput';
-import { LBContextInput } from '../models/LBContextInput';
 import { HttpFile } from '../http/http';
 
 /**
@@ -23,8 +21,6 @@ export class CreateAgentConversationRequestMetadataContext {
     * Type of the context.
     */
     'type'?: CreateAgentConversationRequestMetadataContextTypeEnum | null;
-    'answer_context'?: AnswerContextInput;
-    'liveboard_context'?: LBContextInput;
     'data_source_context'?: DataSourceContextInput;
 
     static readonly discriminator: string | undefined = undefined;
@@ -34,18 +30,6 @@ export class CreateAgentConversationRequestMetadataContext {
             "name": "type",
             "baseName": "type",
             "type": "CreateAgentConversationRequestMetadataContextTypeEnum",
-            "format": ""
-        },
-        {
-            "name": "answer_context",
-            "baseName": "answer_context",
-            "type": "AnswerContextInput",
-            "format": ""
-        },
-        {
-            "name": "liveboard_context",
-            "baseName": "liveboard_context",
-            "type": "LBContextInput",
             "format": ""
         },
         {
@@ -64,5 +48,5 @@ export class CreateAgentConversationRequestMetadataContext {
 }
 
 
-export type CreateAgentConversationRequestMetadataContextTypeEnum = "answer" | "liveboard" | "data_source" ;
+export type CreateAgentConversationRequestMetadataContextTypeEnum = "data_source" | "DATA_SOURCE" | "AUTO_MODE" ;
 

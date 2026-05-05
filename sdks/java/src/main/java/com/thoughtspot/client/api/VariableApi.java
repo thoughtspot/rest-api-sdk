@@ -172,8 +172,8 @@ public class VariableApi {
     }
 
     /**
-     * Create a variable which can be used for parameterizing metadata objects Version: 10.14.0.cl
-     * or later Allows creating a variable which can be used for parameterizing metadata objects in
+     * Create a variable which can be used for parameterizing metadata objects Version: 26.4.0.cl or
+     * later Allows creating a variable which can be used for parameterizing metadata objects in
      * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES
      * permission allows you to manage Formula Variables in the current organization scope. The API
      * endpoint supports the following types of variables: * CONNECTION_PROPERTY - For connection
@@ -207,8 +207,8 @@ public class VariableApi {
     }
 
     /**
-     * Create a variable which can be used for parameterizing metadata objects Version: 10.14.0.cl
-     * or later Allows creating a variable which can be used for parameterizing metadata objects in
+     * Create a variable which can be used for parameterizing metadata objects Version: 26.4.0.cl or
+     * later Allows creating a variable which can be used for parameterizing metadata objects in
      * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES
      * permission allows you to manage Formula Variables in the current organization scope. The API
      * endpoint supports the following types of variables: * CONNECTION_PROPERTY - For connection
@@ -244,7 +244,7 @@ public class VariableApi {
 
     /**
      * (asynchronously) Create a variable which can be used for parameterizing metadata objects
-     * Version: 10.14.0.cl or later Allows creating a variable which can be used for parameterizing
+     * Version: 26.4.0.cl or later Allows creating a variable which can be used for parameterizing
      * metadata objects in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The
      * CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current
      * organization scope. The API endpoint supports the following types of variables: *
@@ -958,7 +958,7 @@ public class VariableApi {
     }
 
     /**
-     * Search variables Version: 10.14.0.cl or later Allows searching for variables in ThoughtSpot.
+     * Search variables Version: 26.4.0.cl or later Allows searching for variables in ThoughtSpot.
      * Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage
      * Formula Variables in the current organization scope. The API endpoint supports searching
      * variables by: * Variable identifier (ID or name) * Variable type * Name pattern
@@ -990,7 +990,7 @@ public class VariableApi {
     }
 
     /**
-     * Search variables Version: 10.14.0.cl or later Allows searching for variables in ThoughtSpot.
+     * Search variables Version: 26.4.0.cl or later Allows searching for variables in ThoughtSpot.
      * Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage
      * Formula Variables in the current organization scope. The API endpoint supports searching
      * variables by: * Variable identifier (ID or name) * Variable type * Name pattern
@@ -1022,7 +1022,7 @@ public class VariableApi {
     }
 
     /**
-     * (asynchronously) Search variables Version: 10.14.0.cl or later Allows searching for variables
+     * (asynchronously) Search variables Version: 26.4.0.cl or later Allows searching for variables
      * in ThoughtSpot. Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you
      * to manage Formula Variables in the current organization scope. The API endpoint supports
      * searching variables by: * Variable identifier (ID or name) * Variable type * Name pattern
@@ -1162,7 +1162,7 @@ public class VariableApi {
     }
 
     /**
-     * Update a variable&#39;s name Version: 10.14.0.cl or later Allows updating a variable&#39;s
+     * Update a variable&#39;s name Version: 26.4.0.cl or later Allows updating a variable&#39;s
      * name in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES
      * permission allows you to manage Formula Variables in the current organization scope. The API
      * endpoint allows updating: * The variable name
@@ -1188,7 +1188,7 @@ public class VariableApi {
     }
 
     /**
-     * Update a variable&#39;s name Version: 10.14.0.cl or later Allows updating a variable&#39;s
+     * Update a variable&#39;s name Version: 26.4.0.cl or later Allows updating a variable&#39;s
      * name in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES
      * permission allows you to manage Formula Variables in the current organization scope. The API
      * endpoint allows updating: * The variable name
@@ -1217,7 +1217,7 @@ public class VariableApi {
     }
 
     /**
-     * (asynchronously) Update a variable&#39;s name Version: 10.14.0.cl or later Allows updating a
+     * (asynchronously) Update a variable&#39;s name Version: 26.4.0.cl or later Allows updating a
      * variable&#39;s name in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The
      * CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current
      * organization scope. The API endpoint allows updating: * The variable name

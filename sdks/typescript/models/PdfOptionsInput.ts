@@ -14,6 +14,14 @@ import { HttpFile } from '../http/http';
 
 export class PdfOptionsInput {
     /**
+    * Size of PDF page. `A4` generates a paginated A4 PDF. `CONTINUOUS` generates a continuous PDF that matches the Liveboard layout. Each Liveboard tab has its own page of variable length. Defaults to `A4` if not specified.   Version: 26.5.0.cl or later 
+    */
+    'page_size'?: PdfOptionsInputPageSizeEnum | null;
+    /**
+    * Zoom level percentage for the PDF. Only applicable when `page_size` is `CONTINUOUS`. Acceptable values are integers in the range [45, 175]. Defaults to 100 if not specified.   Version: 26.5.0.cl or later 
+    */
+    'zoom_level'?: number | null;
+    /**
     * Indicates whether to include the cover page with the Liveboard title.
     */
     'include_cover_page'?: boolean | null;
@@ -22,7 +30,7 @@ export class PdfOptionsInput {
     */
     'include_custom_logo'?: boolean | null;
     /**
-    * Indicates whether to include a page with all applied filters.
+    * Indicates whether to include a page with all applied filters. For `CONTINUOUS` page_size, this parameter indicates whether to include the filter header.
     */
     'include_filter_page'?: boolean | null;
     /**
@@ -45,6 +53,18 @@ export class PdfOptionsInput {
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "page_size",
+            "baseName": "page_size",
+            "type": "PdfOptionsInputPageSizeEnum",
+            "format": ""
+        },
+        {
+            "name": "zoom_level",
+            "baseName": "zoom_level",
+            "type": "number",
+            "format": "int32"
+        },
         {
             "name": "include_cover_page",
             "baseName": "include_cover_page",
@@ -97,5 +117,6 @@ export class PdfOptionsInput {
 }
 
 
+export type PdfOptionsInputPageSizeEnum = "A4" | "CONTINUOUS" ;
 export type PdfOptionsInputPageOrientationEnum = "PORTRAIT" | "LANDSCAPE" ;
 

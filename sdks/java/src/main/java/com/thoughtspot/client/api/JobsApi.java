@@ -179,9 +179,9 @@ public class JobsApi {
      * &#x60;events&#x60; each accept at most one element. - When &#x60;job_ids&#x60; is provided,
      * it is used as the sole lookup key and other filter fields are ignored. - When
      * &#x60;job_ids&#x60; is not provided, &#x60;channel_identifiers&#x60; and &#x60;events&#x60;
-     * are both required. Each must contain exactly one element, and the event object must include
-     * the &#x60;identifier&#x60; field. - Records older than the configured retention period are
-     * not returned.
+     * are both required, each containing exactly one element. - Records older than the configured
+     * retention period are not returned. - Use &#x60;start_epoch_time_in_millis&#x60; and/or
+     * &#x60;end_epoch_time_in_millis&#x60; to narrow results to a specific time window.
      *
      * @param searchChannelHistoryRequest (required)
      * @return SearchChannelHistoryResponse
@@ -218,9 +218,9 @@ public class JobsApi {
      * &#x60;events&#x60; each accept at most one element. - When &#x60;job_ids&#x60; is provided,
      * it is used as the sole lookup key and other filter fields are ignored. - When
      * &#x60;job_ids&#x60; is not provided, &#x60;channel_identifiers&#x60; and &#x60;events&#x60;
-     * are both required. Each must contain exactly one element, and the event object must include
-     * the &#x60;identifier&#x60; field. - Records older than the configured retention period are
-     * not returned.
+     * are both required, each containing exactly one element. - Records older than the configured
+     * retention period are not returned. - Use &#x60;start_epoch_time_in_millis&#x60; and/or
+     * &#x60;end_epoch_time_in_millis&#x60; to narrow results to a specific time window.
      *
      * @param searchChannelHistoryRequest (required)
      * @return ApiResponse&lt;SearchChannelHistoryResponse&gt;
@@ -258,9 +258,9 @@ public class JobsApi {
      * &#x60;events&#x60; each accept at most one element. - When &#x60;job_ids&#x60; is provided,
      * it is used as the sole lookup key and other filter fields are ignored. - When
      * &#x60;job_ids&#x60; is not provided, &#x60;channel_identifiers&#x60; and &#x60;events&#x60;
-     * are both required. Each must contain exactly one element, and the event object must include
-     * the &#x60;identifier&#x60; field. - Records older than the configured retention period are
-     * not returned.
+     * are both required, each containing exactly one element. - Records older than the configured
+     * retention period are not returned. - Use &#x60;start_epoch_time_in_millis&#x60; and/or
+     * &#x60;end_epoch_time_in_millis&#x60; to narrow results to a specific time window.
      *
      * @param searchChannelHistoryRequest (required)
      * @param _callback The callback to be executed when the API call finishes

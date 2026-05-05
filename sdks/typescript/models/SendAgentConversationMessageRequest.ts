@@ -12,34 +12,24 @@
 
 import { HttpFile } from '../http/http';
 
-export class AnswerContextInput {
+export class SendAgentConversationMessageRequest {
     /**
-    * Unique identifier of the answer session.
+    * messages to be sent to the agent
     */
-    'session_identifier': string;
-    /**
-    * Generation number of the answer.
-    */
-    'generation_number': number;
+    'messages': Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "session_identifier",
-            "baseName": "session_identifier",
-            "type": "string",
+            "name": "messages",
+            "baseName": "messages",
+            "type": "Array<string>",
             "format": ""
-        },
-        {
-            "name": "generation_number",
-            "baseName": "generation_number",
-            "type": "number",
-            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {
-        return AnswerContextInput.attributeTypeMap;
+        return SendAgentConversationMessageRequest.attributeTypeMap;
     }
 
     public constructor() {

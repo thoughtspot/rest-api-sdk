@@ -36,7 +36,7 @@ public class ConversationSettingsInput implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_ENABLE_CONTEXTUAL_CHANGE_ANALYSIS)
     @javax.annotation.Nullable
-    private Boolean enableContextualChangeAnalysis = false;
+    private Boolean enableContextualChangeAnalysis = true;
 
     public static final String SERIALIZED_NAME_ENABLE_NATURAL_LANGUAGE_ANSWER_GENERATION =
             "enable_natural_language_answer_generation";
@@ -49,7 +49,13 @@ public class ConversationSettingsInput implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_ENABLE_REASONING)
     @javax.annotation.Nullable
-    private Boolean enableReasoning = false;
+    private Boolean enableReasoning = true;
+
+    public static final String SERIALIZED_NAME_ENABLE_SAVE_CHAT = "enable_save_chat";
+
+    @SerializedName(SERIALIZED_NAME_ENABLE_SAVE_CHAT)
+    @javax.annotation.Nullable
+    private Boolean enableSaveChat = false;
 
     public ConversationSettingsInput() {}
 
@@ -60,7 +66,9 @@ public class ConversationSettingsInput implements Serializable {
     }
 
     /**
-     * Enable contextual change analysis.
+     * Enable contextual change analysis. Default changed from &#x60;false&#x60; to &#x60;true&#x60;
+     * in 26.2.0.cl. Ignored on versions &gt;&#x3D; 26.2.0.cl where it is always enabled. Version:
+     * 10.4.0.cl or later
      *
      * @return enableContextualChangeAnalysis
      */
@@ -81,7 +89,9 @@ public class ConversationSettingsInput implements Serializable {
     }
 
     /**
-     * Enable natural language to answer generation.
+     * Enable natural language to answer generation. Default changed from &#x60;false&#x60; to
+     * &#x60;true&#x60; in 26.2.0.cl. Ignored on versions &gt;&#x3D; 26.2.0.cl where it is always
+     * enabled. Version: 10.4.0.cl or later
      *
      * @return enableNaturalLanguageAnswerGeneration
      */
@@ -102,7 +112,9 @@ public class ConversationSettingsInput implements Serializable {
     }
 
     /**
-     * Enable reasoning.
+     * Enable reasoning. Default changed from &#x60;false&#x60; to &#x60;true&#x60; in 26.2.0.cl.
+     * Ignored on versions &gt;&#x3D; 26.2.0.cl where it is always enabled. Version: 10.4.0.cl or
+     * later
      *
      * @return enableReasoning
      */
@@ -113,6 +125,27 @@ public class ConversationSettingsInput implements Serializable {
 
     public void setEnableReasoning(@javax.annotation.Nullable Boolean enableReasoning) {
         this.enableReasoning = enableReasoning;
+    }
+
+    public ConversationSettingsInput enableSaveChat(
+            @javax.annotation.Nullable Boolean enableSaveChat) {
+        this.enableSaveChat = enableSaveChat;
+        return this;
+    }
+
+    /**
+     * Enable save conversation. When &#x60;true&#x60;, the conversation is persisted and can be
+     * retrieved later via conversation history. Version: 26.5.0.cl or later
+     *
+     * @return enableSaveChat
+     */
+    @javax.annotation.Nullable
+    public Boolean getEnableSaveChat() {
+        return enableSaveChat;
+    }
+
+    public void setEnableSaveChat(@javax.annotation.Nullable Boolean enableSaveChat) {
+        this.enableSaveChat = enableSaveChat;
     }
 
     /**
@@ -175,6 +208,7 @@ public class ConversationSettingsInput implements Serializable {
                         this.enableNaturalLanguageAnswerGeneration,
                         conversationSettingsInput.enableNaturalLanguageAnswerGeneration)
                 && Objects.equals(this.enableReasoning, conversationSettingsInput.enableReasoning)
+                && Objects.equals(this.enableSaveChat, conversationSettingsInput.enableSaveChat)
                 && Objects.equals(
                         this.additionalProperties, conversationSettingsInput.additionalProperties);
     }
@@ -194,6 +228,7 @@ public class ConversationSettingsInput implements Serializable {
                 enableContextualChangeAnalysis,
                 enableNaturalLanguageAnswerGeneration,
                 enableReasoning,
+                enableSaveChat,
                 additionalProperties);
     }
 
@@ -215,6 +250,7 @@ public class ConversationSettingsInput implements Serializable {
                 .append(toIndentedString(enableNaturalLanguageAnswerGeneration))
                 .append("\n");
         sb.append("    enableReasoning: ").append(toIndentedString(enableReasoning)).append("\n");
+        sb.append("    enableSaveChat: ").append(toIndentedString(enableSaveChat)).append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
                 .append("\n");
@@ -242,6 +278,7 @@ public class ConversationSettingsInput implements Serializable {
         openapiFields.add("enable_contextual_change_analysis");
         openapiFields.add("enable_natural_language_answer_generation");
         openapiFields.add("enable_reasoning");
+        openapiFields.add("enable_save_chat");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
