@@ -4972,10 +4972,16 @@
                     "description": "Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’",
                     "type": "string",
                     "format": "binary"
+                  },
+                  "include_semantic_report": {
+                    "description": "If true, includes a per-model semantic_report of semantic components in the response.",
+                    "default": false,
+                    "type": "boolean"
                   }
                 },
                 "required": [
-                  "dbt_connection_identifier"
+                  "dbt_connection_identifier",
+                  "include_semantic_report"
                 ]
               }
             }
@@ -5078,12 +5084,18 @@
                     "description": "Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’",
                     "type": "string",
                     "format": "binary"
+                  },
+                  "include_semantic_report": {
+                    "description": "If true, includes a per-model semantic_report of semantic components in the response.",
+                    "default": false,
+                    "type": "boolean"
                   }
                 },
                 "required": [
                   "dbt_connection_identifier",
                   "model_tables",
-                  "import_worksheets"
+                  "import_worksheets",
+                  "include_semantic_report"
                 ]
               }
             }
