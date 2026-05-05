@@ -45,4 +45,10 @@ public class ChannelValidationDetailTest {
     public void awsS3InfoTest() {
         // TODO: test awsS3Info
     }
+
+    /** Test the property 'gcpGcsInfo' */
+    @Test
+    public void gcpGcsInfoTest() {
+        // TODO: test gcpGcsInfo
+    }
 }

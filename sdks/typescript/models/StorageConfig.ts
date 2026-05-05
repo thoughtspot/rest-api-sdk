@@ -11,6 +11,7 @@
  */
 
 import { AwsS3Config } from '../models/AwsS3Config';
+import { GcpGcsConfig } from '../models/GcpGcsConfig';
 import { HttpFile } from '../http/http';
 
 /**
@@ -18,6 +19,7 @@ import { HttpFile } from '../http/http';
 */
 export class StorageConfig {
     'aws_s3_config'?: AwsS3Config;
+    'gcp_gcs_config'?: GcpGcsConfig;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -26,6 +28,12 @@ export class StorageConfig {
             "name": "aws_s3_config",
             "baseName": "aws_s3_config",
             "type": "AwsS3Config",
+            "format": ""
+        },
+        {
+            "name": "gcp_gcs_config",
+            "baseName": "gcp_gcs_config",
+            "type": "GcpGcsConfig",
             "format": ""
         }    ];
 

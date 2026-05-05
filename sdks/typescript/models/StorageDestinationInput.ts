@@ -48,5 +48,5 @@ export class StorageDestinationInput {
 }
 
 
-export type StorageDestinationInputStorageTypeEnum = "AWS_S3" ;
+export type StorageDestinationInputStorageTypeEnum = "AWS_S3" | "GCP_GCS" ;
 

@@ -187,6 +187,9 @@ public class JSON {
                 new com.thoughtspot.client.model.ChannelValidationDetail
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.ChannelValidationGcpGcsInfo
+                        .CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.ClusterNonEmbedAccess.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.ClusterNonEmbedAccessInput
@@ -494,6 +497,10 @@ public class JSON {
                 new com.thoughtspot.client.model.Frequency.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.FrequencyInput.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.GcpGcsConfig.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.GcpGcsConfigInput.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.GenerateCSVRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(

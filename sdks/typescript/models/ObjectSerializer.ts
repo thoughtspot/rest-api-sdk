@@ -43,6 +43,7 @@ export * from '../models/ChannelHistoryEventInput';
 export * from '../models/ChannelHistoryJob';
 export * from '../models/ChannelValidationAwsS3Info';
 export * from '../models/ChannelValidationDetail';
+export * from '../models/ChannelValidationGcpGcsInfo';
 export * from '../models/ClusterNonEmbedAccess';
 export * from '../models/ClusterNonEmbedAccessInput';
 export * from '../models/Collection';
@@ -184,6 +185,8 @@ export * from '../models/FilterRules';
 export * from '../models/ForceLogoutUsersRequest';
 export * from '../models/Frequency';
 export * from '../models/FrequencyInput';
+export * from '../models/GcpGcsConfig';
+export * from '../models/GcpGcsConfigInput';
 export * from '../models/GenerateCSVRequest';
 export * from '../models/GenericInfo';
 export * from '../models/GetAsyncImportStatusResponse';
@@ -507,7 +510,8 @@ import { ChannelHistoryEventInfo, ChannelHistoryEventInfoTypeEnum      } from '.
 import { ChannelHistoryEventInput, ChannelHistoryEventInputTypeEnum    } from '../models/ChannelHistoryEventInput';
 import { ChannelHistoryJob , ChannelHistoryJobStatusEnum        } from '../models/ChannelHistoryJob';
 import { ChannelValidationAwsS3Info } from '../models/ChannelValidationAwsS3Info';
-import { ChannelValidationDetail, ChannelValidationDetailValidationStepEnum  , ChannelValidationDetailStatusEnum      } from '../models/ChannelValidationDetail';
+import { ChannelValidationDetail, ChannelValidationDetailValidationStepEnum  , ChannelValidationDetailStatusEnum       } from '../models/ChannelValidationDetail';
+import { ChannelValidationGcpGcsInfo } from '../models/ChannelValidationGcpGcsInfo';
 import { ClusterNonEmbedAccess } from '../models/ClusterNonEmbedAccess';
 import { ClusterNonEmbedAccessInput } from '../models/ClusterNonEmbedAccessInput';
 import { Collection } from '../models/Collection';
@@ -649,6 +653,8 @@ import { FilterRules , FilterRulesOperatorEnum    } from '../models/FilterRules'
 import { ForceLogoutUsersRequest } from '../models/ForceLogoutUsersRequest';
 import { Frequency } from '../models/Frequency';
 import { FrequencyInput } from '../models/FrequencyInput';
+import { GcpGcsConfig } from '../models/GcpGcsConfig';
+import { GcpGcsConfigInput } from '../models/GcpGcsConfigInput';
 import { GenerateCSVRequest  , GenerateCSVRequestCalendarTypeEnum  , GenerateCSVRequestMonthOffsetEnum  , GenerateCSVRequestStartDayOfWeekEnum     } from '../models/GenerateCSVRequest';
 import { GenericInfo } from '../models/GenericInfo';
 import { GetAsyncImportStatusResponse } from '../models/GetAsyncImportStatusResponse';
@@ -1259,6 +1265,7 @@ let typeMap: {[index: string]: any} = {
     "ChannelHistoryJob": ChannelHistoryJob,
     "ChannelValidationAwsS3Info": ChannelValidationAwsS3Info,
     "ChannelValidationDetail": ChannelValidationDetail,
+    "ChannelValidationGcpGcsInfo": ChannelValidationGcpGcsInfo,
     "ClusterNonEmbedAccess": ClusterNonEmbedAccess,
     "ClusterNonEmbedAccessInput": ClusterNonEmbedAccessInput,
     "Collection": Collection,
@@ -1400,6 +1407,8 @@ let typeMap: {[index: string]: any} = {
     "ForceLogoutUsersRequest": ForceLogoutUsersRequest,
     "Frequency": Frequency,
     "FrequencyInput": FrequencyInput,
+    "GcpGcsConfig": GcpGcsConfig,
+    "GcpGcsConfigInput": GcpGcsConfigInput,
     "GenerateCSVRequest": GenerateCSVRequest,
     "GenericInfo": GenericInfo,
     "GetAsyncImportStatusResponse": GetAsyncImportStatusResponse,

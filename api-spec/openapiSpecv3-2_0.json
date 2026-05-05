@@ -4972,11 +4972,6 @@
                     "description": "Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’",
                     "type": "string",
                     "format": "binary"
-                  },
-                  "include_semantic_report": {
-                    "description": "If true, includes a per-model semantic_report of semantic components in the response.",
-                    "type": "boolean",
-                    "nullable": true
                   }
                 },
                 "required": [
@@ -5083,11 +5078,6 @@
                     "description": "Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’",
                     "type": "string",
                     "format": "binary"
-                  },
-                  "include_semantic_report": {
-                    "description": "If true, includes a per-model semantic_report of semantic components in the response.",
-                    "type": "boolean",
-                    "nullable": true
                   }
                 },
                 "required": [
@@ -12548,6 +12538,42 @@
                         "name": "mike_rodriguez"
                       }
                     }
+                  },
+                  "example_3": {
+                    "description": "Webhook with GCP GCS storage destination",
+                    "value": {
+                      "id": "c9d8e7f6-a5b4-4321-9876-fedcba012345",
+                      "name": "GCS Storage Webhook",
+                      "description": "Webhook that uploads payloads to a GCS bucket",
+                      "org": {
+                        "id": "0",
+                        "name": "Primary"
+                      },
+                      "url": "https://api.example.com/webhooks",
+                      "events": [
+                        "LIVEBOARD_SCHEDULE"
+                      ],
+                      "storage_destination": {
+                        "storage_type": "GCP_GCS",
+                        "storage_config": {
+                          "gcp_gcs_config": {
+                            "bucket_name": "my-webhook-files",
+                            "service_account_email": "my-sa@my-project.iam.gserviceaccount.com",
+                            "path_prefix": "webhooks/"
+                          }
+                        }
+                      },
+                      "creation_time_in_millis": 1724279630456,
+                      "modification_time_in_millis": 1724279630456,
+                      "created_by": {
+                        "id": "3a2b1c4d-5e6f-7890-abcd-ef0123456789",
+                        "name": "priya_sharma"
+                      },
+                      "last_modified_by": {
+                        "id": "3a2b1c4d-5e6f-7890-abcd-ef0123456789",
+                        "name": "priya_sharma"
+                      }
+                    }
                   }
                 }
               }
@@ -17483,7 +17509,8 @@
           "storage_type": {
             "type": "string",
             "enum": [
-              "AWS_S3"
+              "AWS_S3",
+              "GCP_GCS"
             ],
             "description": "Type of storage destination (e.g., AWS_S3)."
           },
@@ -17500,6 +17527,11 @@
           "aws_s3_config": {
             "$ref": "#/components/schemas/AwsS3Config",
             "description": "AWS S3 storage configuration.",
+            "nullable": true
+          },
+          "gcp_gcs_config": {
+            "$ref": "#/components/schemas/GcpGcsConfig",
+            "description": "GCP GCS storage configuration. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
             "nullable": true
           }
         },
@@ -17537,6 +17569,29 @@
           }
         },
         "description": "AWS S3 storage configuration details."
+      },
+      "GcpGcsConfig": {
+        "type": "object",
+        "required": [
+          "bucket_name",
+          "service_account_email"
+        ],
+        "properties": {
+          "bucket_name": {
+            "type": "string",
+            "description": "Name of the GCS bucket where webhook payloads are stored."
+          },
+          "service_account_email": {
+            "type": "string",
+            "description": "Email of the GCP service account to impersonate for bucket access."
+          },
+          "path_prefix": {
+            "type": "string",
+            "description": "Path prefix for organizing objects within the bucket.",
+            "nullable": true
+          }
+        },
+        "description": "GCP GCS storage configuration details."
       },
       "WebhookPagination": {
         "type": "object",
@@ -19037,6 +19092,11 @@
             "$ref": "#/components/schemas/ChannelValidationAwsS3Info",
             "description": "AWS S3 storage information from the validation step.",
             "nullable": true
+          },
+          "gcp_gcs_info": {
+            "$ref": "#/components/schemas/ChannelValidationGcpGcsInfo",
+            "description": "GCP GCS storage information from the validation step. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
+            "nullable": true
           }
         },
         "description": "Validation detail result for a sub-step."
@@ -19061,6 +19121,27 @@
           }
         },
         "description": "AWS S3 storage information returned from a validation step."
+      },
+      "ChannelValidationGcpGcsInfo": {
+        "type": "object",
+        "properties": {
+          "bucket_name": {
+            "type": "string",
+            "description": "Name of the GCS bucket.",
+            "nullable": true
+          },
+          "file_name": {
+            "type": "string",
+            "description": "Name of the uploaded file.",
+            "nullable": true
+          },
+          "object_key": {
+            "type": "string",
+            "description": "Key (path) of the object within the GCS bucket.",
+            "nullable": true
+          }
+        },
+        "description": "GCP GCS storage information returned from a validation step."
       },
       "TagMetadataTypeInput": {
         "type": "object",
@@ -21847,7 +21928,8 @@
           "storage_type": {
             "type": "string",
             "enum": [
-              "AWS_S3"
+              "AWS_S3",
+              "GCP_GCS"
             ],
             "description": "Type of storage destination.\nExample: \"AWS_S3\""
           },
@@ -21864,6 +21946,11 @@
           "aws_s3_config": {
             "$ref": "#/components/schemas/AwsS3ConfigInput",
             "description": "AWS S3 storage configuration.\nExample: {\"bucket_name\": \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\", \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"}",
+            "nullable": true
+          },
+          "gcp_gcs_config": {
+            "$ref": "#/components/schemas/GcpGcsConfigInput",
+            "description": "GCP GCS storage configuration.\nExample: {\"bucket_name\": \"my-webhook-files\", \"service_account_email\": \"my-sa@my-project.iam.gserviceaccount.com\", \"path_prefix\": \"webhooks/\"} <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
             "nullable": true
           }
         },
@@ -21901,6 +21988,29 @@
           }
         },
         "description": "Input type for AWS S3 storage configuration."
+      },
+      "GcpGcsConfigInput": {
+        "type": "object",
+        "required": [
+          "bucket_name",
+          "service_account_email"
+        ],
+        "properties": {
+          "bucket_name": {
+            "type": "string",
+            "description": "Name of the GCS bucket where webhook payloads will be stored.\nExample: \"my-webhook-files\""
+          },
+          "service_account_email": {
+            "type": "string",
+            "description": "Email of the GCP service account to impersonate for bucket access.\nThe platform's service account must be granted roles/iam.serviceAccountTokenCreator on this SA.\nExample: \"my-sa@my-project.iam.gserviceaccount.com\""
+          },
+          "path_prefix": {
+            "type": "string",
+            "description": "Optional path prefix for organizing objects within the bucket.\nExample: \"webhooks/\"",
+            "nullable": true
+          }
+        },
+        "description": "Input type for GCP GCS storage configuration."
       },
       "WebhookKeyValuePairInput": {
         "type": "object",
@@ -28812,7 +28922,7 @@
             ]
           },
           "storage_destination": {
-            "description": "Configuration for storage destination.\nExample: {\"storage_type\": \"AWS_S3\", \"storage_config\": {\"aws_s3_config\": {\"bucket_name\": \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\", \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"}}} <br/>  <span class=\"since-beta-tag\">Version: 26.3.0.cl or later</span>",
+            "description": "Configuration for storage destination.\nAWS S3 example: {\"storage_type\": \"AWS_S3\", \"storage_config\": {\"aws_s3_config\": {\"bucket_name\": \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\", \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"}}}\nGCP GCS example: {\"storage_type\": \"GCP_GCS\", \"storage_config\": {\"gcp_gcs_config\": {\"bucket_name\": \"my-webhook-files\", \"service_account_email\": \"my-sa@my-project.iam.gserviceaccount.com\", \"path_prefix\": \"webhooks/\"}}} <br/>  <span class=\"since-beta-tag\">Version: 26.3.0.cl or later</span>",
             "allOf": [
               {
                 "$ref": "#/components/schemas/StorageDestinationInput"
@@ -28934,7 +29044,7 @@
             ]
           },
           "storage_destination": {
-            "description": "Configuration for storage destination.\nExample: {\"storage_type\": \"AWS_S3\", \"storage_config\": {\"aws_s3_config\": {\"bucket_name\": \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\", \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"}}} <br/>  <span class=\"since-beta-tag\">Version: 26.3.0.cl or later</span>",
+            "description": "Configuration for storage destination.\nAWS S3 example: {\"storage_type\": \"AWS_S3\", \"storage_config\": {\"aws_s3_config\": {\"bucket_name\": \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\", \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"}}}\nGCP GCS example: {\"storage_type\": \"GCP_GCS\", \"storage_config\": {\"gcp_gcs_config\": {\"bucket_name\": \"my-webhook-files\", \"service_account_email\": \"my-sa@my-project.iam.gserviceaccount.com\", \"path_prefix\": \"webhooks/\"}}} <br/>  <span class=\"since-beta-tag\">Version: 26.3.0.cl or later</span>",
             "allOf": [
               {
                 "$ref": "#/components/schemas/StorageDestinationInput"

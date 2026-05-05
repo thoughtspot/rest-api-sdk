@@ -1654,9 +1654,46 @@ _ChannelValidationDetail.attributeTypeMap = [
     "baseName": "aws_s3_info",
     "type": "ChannelValidationAwsS3Info",
     "format": ""
+  },
+  {
+    "name": "gcp_gcs_info",
+    "baseName": "gcp_gcs_info",
+    "type": "ChannelValidationGcpGcsInfo",
+    "format": ""
   }
 ];
 var ChannelValidationDetail = _ChannelValidationDetail;
+
+// models/ChannelValidationGcpGcsInfo.ts
+var _ChannelValidationGcpGcsInfo = class _ChannelValidationGcpGcsInfo {
+  static getAttributeTypeMap() {
+    return _ChannelValidationGcpGcsInfo.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ChannelValidationGcpGcsInfo.discriminator = void 0;
+_ChannelValidationGcpGcsInfo.attributeTypeMap = [
+  {
+    "name": "bucket_name",
+    "baseName": "bucket_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "file_name",
+    "baseName": "file_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "object_key",
+    "baseName": "object_key",
+    "type": "string",
+    "format": ""
+  }
+];
+var ChannelValidationGcpGcsInfo = _ChannelValidationGcpGcsInfo;
 
 // models/ClusterNonEmbedAccess.ts
 var _ClusterNonEmbedAccess = class _ClusterNonEmbedAccess {
@@ -6796,6 +6833,68 @@ _FrequencyInput.attributeTypeMap = [
   }
 ];
 var FrequencyInput = _FrequencyInput;
+
+// models/GcpGcsConfig.ts
+var _GcpGcsConfig = class _GcpGcsConfig {
+  static getAttributeTypeMap() {
+    return _GcpGcsConfig.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_GcpGcsConfig.discriminator = void 0;
+_GcpGcsConfig.attributeTypeMap = [
+  {
+    "name": "bucket_name",
+    "baseName": "bucket_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "service_account_email",
+    "baseName": "service_account_email",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "path_prefix",
+    "baseName": "path_prefix",
+    "type": "string",
+    "format": ""
+  }
+];
+var GcpGcsConfig = _GcpGcsConfig;
+
+// models/GcpGcsConfigInput.ts
+var _GcpGcsConfigInput = class _GcpGcsConfigInput {
+  static getAttributeTypeMap() {
+    return _GcpGcsConfigInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_GcpGcsConfigInput.discriminator = void 0;
+_GcpGcsConfigInput.attributeTypeMap = [
+  {
+    "name": "bucket_name",
+    "baseName": "bucket_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "service_account_email",
+    "baseName": "service_account_email",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "path_prefix",
+    "baseName": "path_prefix",
+    "type": "string",
+    "format": ""
+  }
+];
+var GcpGcsConfigInput = _GcpGcsConfigInput;
 
 // models/GenerateCSVRequest.ts
 var _GenerateCSVRequest = class _GenerateCSVRequest {
@@ -13762,6 +13861,12 @@ _StorageConfig.attributeTypeMap = [
     "baseName": "aws_s3_config",
     "type": "AwsS3Config",
     "format": ""
+  },
+  {
+    "name": "gcp_gcs_config",
+    "baseName": "gcp_gcs_config",
+    "type": "GcpGcsConfig",
+    "format": ""
   }
 ];
 var StorageConfig = _StorageConfig;
@@ -13780,6 +13885,12 @@ _StorageConfigInput.attributeTypeMap = [
     "name": "aws_s3_config",
     "baseName": "aws_s3_config",
     "type": "AwsS3ConfigInput",
+    "format": ""
+  },
+  {
+    "name": "gcp_gcs_config",
+    "baseName": "gcp_gcs_config",
+    "type": "GcpGcsConfigInput",
     "format": ""
   }
 ];
@@ -18155,6 +18266,7 @@ var typeMap = {
   "ChannelHistoryJob": ChannelHistoryJob,
   "ChannelValidationAwsS3Info": ChannelValidationAwsS3Info,
   "ChannelValidationDetail": ChannelValidationDetail,
+  "ChannelValidationGcpGcsInfo": ChannelValidationGcpGcsInfo,
   "ClusterNonEmbedAccess": ClusterNonEmbedAccess,
   "ClusterNonEmbedAccessInput": ClusterNonEmbedAccessInput,
   "Collection": Collection,
@@ -18296,6 +18408,8 @@ var typeMap = {
   "ForceLogoutUsersRequest": ForceLogoutUsersRequest,
   "Frequency": Frequency,
   "FrequencyInput": FrequencyInput,
+  "GcpGcsConfig": GcpGcsConfig,
+  "GcpGcsConfigInput": GcpGcsConfigInput,
   "GenerateCSVRequest": GenerateCSVRequest,
   "GenericInfo": GenericInfo,
   "GetAsyncImportStatusResponse": GetAsyncImportStatusResponse,
@@ -48165,6 +48279,7 @@ export {
   ChannelHistoryJob,
   ChannelValidationAwsS3Info,
   ChannelValidationDetail,
+  ChannelValidationGcpGcsInfo,
   ClusterNonEmbedAccess,
   ClusterNonEmbedAccessInput,
   Collection,
@@ -48313,6 +48428,8 @@ export {
   ForceLogoutUsersRequest,
   Frequency,
   FrequencyInput,
+  GcpGcsConfig,
+  GcpGcsConfigInput,
   GenerateCSVRequest,
   GenericInfo,
   GetAsyncImportStatusResponse,

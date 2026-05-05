@@ -11,6 +11,7 @@
  */
 
 import { ChannelValidationAwsS3Info } from '../models/ChannelValidationAwsS3Info';
+import { ChannelValidationGcpGcsInfo } from '../models/ChannelValidationGcpGcsInfo';
 import { HttpFile } from '../http/http';
 
 /**
@@ -34,6 +35,7 @@ export class ChannelValidationDetail {
     */
     'error_message'?: string | null;
     'aws_s3_info'?: ChannelValidationAwsS3Info;
+    'gcp_gcs_info'?: ChannelValidationGcpGcsInfo;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -66,6 +68,12 @@ export class ChannelValidationDetail {
             "name": "aws_s3_info",
             "baseName": "aws_s3_info",
             "type": "ChannelValidationAwsS3Info",
+            "format": ""
+        },
+        {
+            "name": "gcp_gcs_info",
+            "baseName": "gcp_gcs_info",
+            "type": "ChannelValidationGcpGcsInfo",
             "format": ""
         }    ];
 

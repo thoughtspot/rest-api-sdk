@@ -13139,6 +13139,7 @@ components:
           description: "Type of storage destination (e.g., AWS_S3)."
           enum:
           - AWS_S3
+          - GCP_GCS
           type: string
         storage_config:
           $ref: '#/components/schemas/StorageConfig'
@@ -13151,6 +13152,8 @@ components:
       properties:
         aws_s3_config:
           $ref: '#/components/schemas/AwsS3Config'
+        gcp_gcs_config:
+          $ref: '#/components/schemas/GcpGcsConfig'
       type: object
     AwsS3Config:
       description: AWS S3 storage configuration details.
@@ -13176,6 +13179,24 @@ components:
       - bucket_name
       - region
       - role_arn
+      type: object
+    GcpGcsConfig:
+      description: GCP GCS storage configuration details.
+      properties:
+        bucket_name:
+          description: Name of the GCS bucket where webhook payloads are stored.
+          type: string
+        service_account_email:
+          description: Email of the GCP service account to impersonate for bucket
+            access.
+          type: string
+        path_prefix:
+          description: Path prefix for organizing objects within the bucket.
+          nullable: true
+          type: string
+      required:
+      - bucket_name
+      - service_account_email
       type: object
     WebhookPagination:
       properties:
@@ -14435,6 +14456,8 @@ components:
           type: string
         aws_s3_info:
           $ref: '#/components/schemas/ChannelValidationAwsS3Info'
+        gcp_gcs_info:
+          $ref: '#/components/schemas/ChannelValidationGcpGcsInfo'
       required:
       - status
       - validation_step
@@ -14452,6 +14475,22 @@ components:
           type: string
         object_key:
           description: Key of the object in S3 storage.
+          nullable: true
+          type: string
+      type: object
+    ChannelValidationGcpGcsInfo:
+      description: GCP GCS storage information returned from a validation step.
+      properties:
+        bucket_name:
+          description: Name of the GCS bucket.
+          nullable: true
+          type: string
+        file_name:
+          description: Name of the uploaded file.
+          nullable: true
+          type: string
+        object_key:
+          description: Key (path) of the object within the GCS bucket.
           nullable: true
           type: string
       type: object
@@ -17075,6 +17114,7 @@ components:
             Example: "AWS_S3"
           enum:
           - AWS_S3
+          - GCP_GCS
           type: string
         storage_config:
           $ref: '#/components/schemas/StorageConfigInput'
@@ -17087,6 +17127,8 @@ components:
       properties:
         aws_s3_config:
           $ref: '#/components/schemas/AwsS3ConfigInput'
+        gcp_gcs_config:
+          $ref: '#/components/schemas/GcpGcsConfigInput'
       type: object
     AwsS3ConfigInput:
       description: Input type for AWS S3 storage configuration.
@@ -17122,6 +17164,30 @@ components:
       - bucket_name
       - region
       - role_arn
+      type: object
+    GcpGcsConfigInput:
+      description: Input type for GCP GCS storage configuration.
+      properties:
+        bucket_name:
+          description: |-
+            Name of the GCS bucket where webhook payloads will be stored.
+            Example: "my-webhook-files"
+          type: string
+        service_account_email:
+          description: |-
+            Email of the GCP service account to impersonate for bucket access.
+            The platform's service account must be granted roles/iam.serviceAccountTokenCreator on this SA.
+            Example: "my-sa@my-project.iam.gserviceaccount.com"
+          type: string
+        path_prefix:
+          description: |-
+            Optional path prefix for organizing objects within the bucket.
+            Example: "webhooks/"
+          nullable: true
+          type: string
+      required:
+      - bucket_name
+      - service_account_email
       type: object
     WebhookKeyValuePairInput:
       description: Key-value pair input for additional webhook headers.
@@ -24236,10 +24302,14 @@ components:
         storage_destination:
           allOf:
           - $ref: '#/components/schemas/StorageDestinationInput'
-          description: "Configuration for storage destination.\nExample: {\"storage_type\"\
-            : \"AWS_S3\", \"storage_config\": {\"aws_s3_config\": {\"bucket_name\"\
-            : \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\"\
-            , \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"\
+          description: "Configuration for storage destination.\nAWS S3 example: {\"\
+            storage_type\": \"AWS_S3\", \"storage_config\": {\"aws_s3_config\": {\"\
+            bucket_name\": \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\"\
+            : \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\", \"external_id\"\
+            : \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"\
+            }}}\nGCP GCS example: {\"storage_type\": \"GCP_GCS\", \"storage_config\"\
+            : {\"gcp_gcs_config\": {\"bucket_name\": \"my-webhook-files\", \"service_account_email\"\
+            : \"my-sa@my-project.iam.gserviceaccount.com\", \"path_prefix\": \"webhooks/\"\
             }}} \n  Version: 26.3.0.cl or later\n"
         additional_headers:
           description: "Additional headers as an array of key-value pairs.\nExample:\
@@ -24325,10 +24395,14 @@ components:
         storage_destination:
           allOf:
           - $ref: '#/components/schemas/StorageDestinationInput'
-          description: "Configuration for storage destination.\nExample: {\"storage_type\"\
-            : \"AWS_S3\", \"storage_config\": {\"aws_s3_config\": {\"bucket_name\"\
-            : \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\"\
-            , \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"\
+          description: "Configuration for storage destination.\nAWS S3 example: {\"\
+            storage_type\": \"AWS_S3\", \"storage_config\": {\"aws_s3_config\": {\"\
+            bucket_name\": \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\"\
+            : \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\", \"external_id\"\
+            : \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"\
+            }}}\nGCP GCS example: {\"storage_type\": \"GCP_GCS\", \"storage_config\"\
+            : {\"gcp_gcs_config\": {\"bucket_name\": \"my-webhook-files\", \"service_account_email\"\
+            : \"my-sa@my-project.iam.gserviceaccount.com\", \"path_prefix\": \"webhooks/\"\
             }}} \n  Version: 26.3.0.cl or later\n"
         additional_headers:
           description: "Additional headers as an array of key-value pairs.\nExample:\

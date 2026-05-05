@@ -10,43 +10,52 @@
  * Do not edit the class manually.
  */
 
-import { StorageConfig } from '../models/StorageConfig';
 import { HttpFile } from '../http/http';
 
 /**
-* Storage destination configuration for webhook payload delivery.
+* GCP GCS storage information returned from a validation step.
 */
-export class StorageDestination {
+export class ChannelValidationGcpGcsInfo {
     /**
-    * Type of storage destination (e.g., AWS_S3).
+    * Name of the GCS bucket.
     */
-    'storage_type': StorageDestinationStorageTypeEnum;
-    'storage_config': StorageConfig;
+    'bucket_name'?: string | null;
+    /**
+    * Name of the uploaded file.
+    */
+    'file_name'?: string | null;
+    /**
+    * Key (path) of the object within the GCS bucket.
+    */
+    'object_key'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "storage_type",
-            "baseName": "storage_type",
-            "type": "StorageDestinationStorageTypeEnum",
+            "name": "bucket_name",
+            "baseName": "bucket_name",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "storage_config",
-            "baseName": "storage_config",
-            "type": "StorageConfig",
+            "name": "file_name",
+            "baseName": "file_name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "object_key",
+            "baseName": "object_key",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return StorageDestination.attributeTypeMap;
+        return ChannelValidationGcpGcsInfo.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
-
-
-export type StorageDestinationStorageTypeEnum = "AWS_S3" | "GCP_GCS" ;
 

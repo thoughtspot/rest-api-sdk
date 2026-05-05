@@ -16,70 +16,96 @@ import com.google.gson.stream.JsonWriter;
 import com.thoughtspot.client.JSON;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import org.openapitools.jackson.nullable.JsonNullable;
 
-/** Input type for storage configuration. */
+/** GCP GCS storage information returned from a validation step. */
 @javax.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         comments = "Generator version: 7.12.0")
-public class StorageConfigInput implements Serializable {
+public class ChannelValidationGcpGcsInfo implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public static final String SERIALIZED_NAME_AWS_S3_CONFIG = "aws_s3_config";
+    public static final String SERIALIZED_NAME_BUCKET_NAME = "bucket_name";
 
-    @SerializedName(SERIALIZED_NAME_AWS_S3_CONFIG)
+    @SerializedName(SERIALIZED_NAME_BUCKET_NAME)
     @javax.annotation.Nullable
-    private AwsS3ConfigInput awsS3Config;
+    private String bucketName;
 
-    public static final String SERIALIZED_NAME_GCP_GCS_CONFIG = "gcp_gcs_config";
+    public static final String SERIALIZED_NAME_FILE_NAME = "file_name";
 
-    @SerializedName(SERIALIZED_NAME_GCP_GCS_CONFIG)
+    @SerializedName(SERIALIZED_NAME_FILE_NAME)
     @javax.annotation.Nullable
-    private GcpGcsConfigInput gcpGcsConfig;
+    private String fileName;
 
-    public StorageConfigInput() {}
+    public static final String SERIALIZED_NAME_OBJECT_KEY = "object_key";
 
-    public StorageConfigInput awsS3Config(@javax.annotation.Nullable AwsS3ConfigInput awsS3Config) {
-        this.awsS3Config = awsS3Config;
+    @SerializedName(SERIALIZED_NAME_OBJECT_KEY)
+    @javax.annotation.Nullable
+    private String objectKey;
+
+    public ChannelValidationGcpGcsInfo() {}
+
+    public ChannelValidationGcpGcsInfo bucketName(@javax.annotation.Nullable String bucketName) {
+        this.bucketName = bucketName;
         return this;
     }
 
     /**
-     * Get awsS3Config
+     * Name of the GCS bucket.
      *
-     * @return awsS3Config
+     * @return bucketName
      */
     @javax.annotation.Nullable
-    public AwsS3ConfigInput getAwsS3Config() {
-        return awsS3Config;
+    public String getBucketName() {
+        return bucketName;
     }
 
-    public void setAwsS3Config(@javax.annotation.Nullable AwsS3ConfigInput awsS3Config) {
-        this.awsS3Config = awsS3Config;
+    public void setBucketName(@javax.annotation.Nullable String bucketName) {
+        this.bucketName = bucketName;
     }
 
-    public StorageConfigInput gcpGcsConfig(
-            @javax.annotation.Nullable GcpGcsConfigInput gcpGcsConfig) {
-        this.gcpGcsConfig = gcpGcsConfig;
+    public ChannelValidationGcpGcsInfo fileName(@javax.annotation.Nullable String fileName) {
+        this.fileName = fileName;
         return this;
     }
 
     /**
-     * Get gcpGcsConfig
+     * Name of the uploaded file.
      *
-     * @return gcpGcsConfig
+     * @return fileName
      */
     @javax.annotation.Nullable
-    public GcpGcsConfigInput getGcpGcsConfig() {
-        return gcpGcsConfig;
+    public String getFileName() {
+        return fileName;
     }
 
-    public void setGcpGcsConfig(@javax.annotation.Nullable GcpGcsConfigInput gcpGcsConfig) {
-        this.gcpGcsConfig = gcpGcsConfig;
+    public void setFileName(@javax.annotation.Nullable String fileName) {
+        this.fileName = fileName;
+    }
+
+    public ChannelValidationGcpGcsInfo objectKey(@javax.annotation.Nullable String objectKey) {
+        this.objectKey = objectKey;
+        return this;
+    }
+
+    /**
+     * Key (path) of the object within the GCS bucket.
+     *
+     * @return objectKey
+     */
+    @javax.annotation.Nullable
+    public String getObjectKey() {
+        return objectKey;
+    }
+
+    public void setObjectKey(@javax.annotation.Nullable String objectKey) {
+        this.objectKey = objectKey;
     }
 
     /**
@@ -94,9 +120,9 @@ public class StorageConfigInput implements Serializable {
      *
      * @param key name of the property
      * @param value value of the property
-     * @return the StorageConfigInput instance itself
+     * @return the ChannelValidationGcpGcsInfo instance itself
      */
-    public StorageConfigInput putAdditionalProperty(String key, Object value) {
+    public ChannelValidationGcpGcsInfo putAdditionalProperty(String key, Object value) {
         if (this.additionalProperties == null) {
             this.additionalProperties = new HashMap<String, Object>();
         }
@@ -134,24 +160,43 @@ public class StorageConfigInput implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        StorageConfigInput storageConfigInput = (StorageConfigInput) o;
-        return Objects.equals(this.awsS3Config, storageConfigInput.awsS3Config)
-                && Objects.equals(this.gcpGcsConfig, storageConfigInput.gcpGcsConfig)
+        ChannelValidationGcpGcsInfo channelValidationGcpGcsInfo = (ChannelValidationGcpGcsInfo) o;
+        return Objects.equals(this.bucketName, channelValidationGcpGcsInfo.bucketName)
+                && Objects.equals(this.fileName, channelValidationGcpGcsInfo.fileName)
+                && Objects.equals(this.objectKey, channelValidationGcpGcsInfo.objectKey)
                 && Objects.equals(
-                        this.additionalProperties, storageConfigInput.additionalProperties);
+                        this.additionalProperties,
+                        channelValidationGcpGcsInfo.additionalProperties);
+    }
+
+    private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+        return a == b
+                || (a != null
+                        && b != null
+                        && a.isPresent()
+                        && b.isPresent()
+                        && Objects.deepEquals(a.get(), b.get()));
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(awsS3Config, gcpGcsConfig, additionalProperties);
+        return Objects.hash(bucketName, fileName, objectKey, additionalProperties);
+    }
+
+    private static <T> int hashCodeNullable(JsonNullable<T> a) {
+        if (a == null) {
+            return 1;
+        }
+        return a.isPresent() ? Arrays.deepHashCode(new Object[] {a.get()}) : 31;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class StorageConfigInput {\n");
-        sb.append("    awsS3Config: ").append(toIndentedString(awsS3Config)).append("\n");
-        sb.append("    gcpGcsConfig: ").append(toIndentedString(gcpGcsConfig)).append("\n");
+        sb.append("class ChannelValidationGcpGcsInfo {\n");
+        sb.append("    bucketName: ").append(toIndentedString(bucketName)).append("\n");
+        sb.append("    fileName: ").append(toIndentedString(fileName)).append("\n");
+        sb.append("    objectKey: ").append(toIndentedString(objectKey)).append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
                 .append("\n");
@@ -176,8 +221,9 @@ public class StorageConfigInput implements Serializable {
     static {
         // a set of all properties/fields (JSON key names)
         openapiFields = new HashSet<String>();
-        openapiFields.add("aws_s3_config");
-        openapiFields.add("gcp_gcs_config");
+        openapiFields.add("bucket_name");
+        openapiFields.add("file_name");
+        openapiFields.add("object_key");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -187,27 +233,44 @@ public class StorageConfigInput implements Serializable {
      * Validates the JSON Element and throws an exception if issues found
      *
      * @param jsonElement JSON Element
-     * @throws IOException if the JSON Element is invalid with respect to StorageConfigInput
+     * @throws IOException if the JSON Element is invalid with respect to
+     *     ChannelValidationGcpGcsInfo
      */
     public static void validateJsonElement(JsonElement jsonElement) throws IOException {
         if (jsonElement == null) {
-            if (!StorageConfigInput.openapiRequiredFields
+            if (!ChannelValidationGcpGcsInfo.openapiRequiredFields
                     .isEmpty()) { // has required fields but JSON element is null
                 throw new IllegalArgumentException(
                         String.format(
-                                "The required field(s) %s in StorageConfigInput is not found in"
-                                        + " the empty JSON string",
-                                StorageConfigInput.openapiRequiredFields.toString()));
+                                "The required field(s) %s in ChannelValidationGcpGcsInfo is not"
+                                        + " found in the empty JSON string",
+                                ChannelValidationGcpGcsInfo.openapiRequiredFields.toString()));
             }
         }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-        // validate the optional field `aws_s3_config`
-        if (jsonObj.get("aws_s3_config") != null && !jsonObj.get("aws_s3_config").isJsonNull()) {
-            AwsS3ConfigInput.validateJsonElement(jsonObj.get("aws_s3_config"));
+        if ((jsonObj.get("bucket_name") != null && !jsonObj.get("bucket_name").isJsonNull())
+                && !jsonObj.get("bucket_name").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `bucket_name` to be a primitive type in the JSON"
+                                    + " string but got `%s`",
+                            jsonObj.get("bucket_name").toString()));
         }
-        // validate the optional field `gcp_gcs_config`
-        if (jsonObj.get("gcp_gcs_config") != null && !jsonObj.get("gcp_gcs_config").isJsonNull()) {
-            GcpGcsConfigInput.validateJsonElement(jsonObj.get("gcp_gcs_config"));
+        if ((jsonObj.get("file_name") != null && !jsonObj.get("file_name").isJsonNull())
+                && !jsonObj.get("file_name").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `file_name` to be a primitive type in the JSON"
+                                    + " string but got `%s`",
+                            jsonObj.get("file_name").toString()));
+        }
+        if ((jsonObj.get("object_key") != null && !jsonObj.get("object_key").isJsonNull())
+                && !jsonObj.get("object_key").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `object_key` to be a primitive type in the JSON"
+                                    + " string but got `%s`",
+                            jsonObj.get("object_key").toString()));
         }
     }
 
@@ -215,17 +278,18 @@ public class StorageConfigInput implements Serializable {
         @SuppressWarnings("unchecked")
         @Override
         public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-            if (!StorageConfigInput.class.isAssignableFrom(type.getRawType())) {
-                return null; // this class only serializes 'StorageConfigInput' and its subtypes
+            if (!ChannelValidationGcpGcsInfo.class.isAssignableFrom(type.getRawType())) {
+                return null; // this class only serializes 'ChannelValidationGcpGcsInfo' and its
+                // subtypes
             }
             final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-            final TypeAdapter<StorageConfigInput> thisAdapter =
-                    gson.getDelegateAdapter(this, TypeToken.get(StorageConfigInput.class));
+            final TypeAdapter<ChannelValidationGcpGcsInfo> thisAdapter =
+                    gson.getDelegateAdapter(this, TypeToken.get(ChannelValidationGcpGcsInfo.class));
 
             return (TypeAdapter<T>)
-                    new TypeAdapter<StorageConfigInput>() {
+                    new TypeAdapter<ChannelValidationGcpGcsInfo>() {
                         @Override
-                        public void write(JsonWriter out, StorageConfigInput value)
+                        public void write(JsonWriter out, ChannelValidationGcpGcsInfo value)
                                 throws IOException {
                             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
                             obj.remove("additionalProperties");
@@ -256,12 +320,13 @@ public class StorageConfigInput implements Serializable {
                         }
 
                         @Override
-                        public StorageConfigInput read(JsonReader in) throws IOException {
+                        public ChannelValidationGcpGcsInfo read(JsonReader in) throws IOException {
                             JsonElement jsonElement = elementAdapter.read(in);
                             validateJsonElement(jsonElement);
                             JsonObject jsonObj = jsonElement.getAsJsonObject();
                             // store additional fields in the deserialized instance
-                            StorageConfigInput instance = thisAdapter.fromJsonTree(jsonObj);
+                            ChannelValidationGcpGcsInfo instance =
+                                    thisAdapter.fromJsonTree(jsonObj);
                             for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
                                 if (!openapiFields.contains(entry.getKey())) {
                                     if (entry.getValue().isJsonPrimitive()) { // primitive type
@@ -300,18 +365,18 @@ public class StorageConfigInput implements Serializable {
     }
 
     /**
-     * Create an instance of StorageConfigInput given an JSON string
+     * Create an instance of ChannelValidationGcpGcsInfo given an JSON string
      *
      * @param jsonString JSON string
-     * @return An instance of StorageConfigInput
-     * @throws IOException if the JSON string is invalid with respect to StorageConfigInput
+     * @return An instance of ChannelValidationGcpGcsInfo
+     * @throws IOException if the JSON string is invalid with respect to ChannelValidationGcpGcsInfo
      */
-    public static StorageConfigInput fromJson(String jsonString) throws IOException {
-        return JSON.getGson().fromJson(jsonString, StorageConfigInput.class);
+    public static ChannelValidationGcpGcsInfo fromJson(String jsonString) throws IOException {
+        return JSON.getGson().fromJson(jsonString, ChannelValidationGcpGcsInfo.class);
     }
 
     /**
-     * Convert an instance of StorageConfigInput to an JSON string
+     * Convert an instance of ChannelValidationGcpGcsInfo to an JSON string
      *
      * @return JSON string
      */

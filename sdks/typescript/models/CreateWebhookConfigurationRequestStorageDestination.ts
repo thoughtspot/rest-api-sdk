@@ -14,7 +14,7 @@ import { StorageConfigInput } from '../models/StorageConfigInput';
 import { HttpFile } from '../http/http';
 
 /**
-* Configuration for storage destination. Example: {\"storage_type\": \"AWS_S3\", \"storage_config\": {\"aws_s3_config\": {\"bucket_name\": \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\", \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"}}}    Version: 26.3.0.cl or later 
+* Configuration for storage destination. AWS S3 example: {\"storage_type\": \"AWS_S3\", \"storage_config\": {\"aws_s3_config\": {\"bucket_name\": \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\", \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"}}} GCP GCS example: {\"storage_type\": \"GCP_GCS\", \"storage_config\": {\"gcp_gcs_config\": {\"bucket_name\": \"my-webhook-files\", \"service_account_email\": \"my-sa@my-project.iam.gserviceaccount.com\", \"path_prefix\": \"webhooks/\"}}}    Version: 26.3.0.cl or later 
 */
 export class CreateWebhookConfigurationRequestStorageDestination {
     /**
@@ -48,5 +48,5 @@ export class CreateWebhookConfigurationRequestStorageDestination {
 }
 
 
-export type CreateWebhookConfigurationRequestStorageDestinationStorageTypeEnum = "AWS_S3" ;
+export type CreateWebhookConfigurationRequestStorageDestinationStorageTypeEnum = "AWS_S3" | "GCP_GCS" ;
 
