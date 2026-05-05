@@ -4972,6 +4972,11 @@
                     "description": "Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’",
                     "type": "string",
                     "format": "binary"
+                  },
+                  "include_semantic_report": {
+                    "description": "If true, includes a per-model semantic_report of semantic components in the response.",
+                    "type": "boolean",
+                    "nullable": true
                   }
                 },
                 "required": [
@@ -5056,7 +5061,7 @@
                     "type": "string"
                   },
                   "model_tables": {
-                    "description": "List of Models and their respective Tables\nExample: '[{\"model_name\": \"model_name\", \"tables\": [\"table_name\"]}]'",
+                    "description": "List of Models and their respective Tables\nExample: '[{\"model_name\": \"model_name\", \"model_path\": \"model_path\", \"tables\": [\"table_name\"]}]'",
                     "type": "string",
                     "format": "json"
                   },
@@ -5078,6 +5083,11 @@
                     "description": "Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’",
                     "type": "string",
                     "format": "binary"
+                  },
+                  "include_semantic_report": {
+                    "description": "If true, includes a per-model semantic_report of semantic components in the response.",
+                    "type": "boolean",
+                    "nullable": true
                   }
                 },
                 "required": [
