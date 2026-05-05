@@ -5988,7 +5988,7 @@
     "/api/rest/2.0/jobs/history/communication-channels/search": {
       "post": {
         "operationId": "searchChannelHistory",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\nSearches delivery history for communication channels such as webhooks. Returns channel-level delivery status for each job execution record. Use this to monitor channel health and delivery success rates across events.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.\n\n**NOTE**: When `channel_type` is `WEBHOOK`, the following constraints apply:\n\n- `job_ids`, `channel_identifiers`, and `events` each accept at most one element.\n- When `job_ids` is provided, it is used as the sole lookup key and other filter fields are ignored.\n- When `job_ids` is not provided, `channel_identifiers` and `events` are both required. Each must contain exactly one element, and the event object must include the `identifier` field.\n- Records older than the configured retention period are not returned.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\nSearches delivery history for communication channels such as webhooks. Returns channel-level delivery status for each job execution record. Use this to monitor channel health and delivery success rates across events.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.\n\n**NOTE**: When `channel_type` is `WEBHOOK`, the following constraints apply:\n\n- `job_ids`, `channel_identifiers`, and `events` each accept at most one element.\n- When `job_ids` is provided, it is used as the sole lookup key and other filter fields are ignored.\n- When `job_ids` is not provided, `channel_identifiers` and `events` are both required, each containing exactly one element.\n- Records older than the configured retention period are not returned.\n- Use `start_epoch_time_in_millis` and/or `end_epoch_time_in_millis` to narrow results to a specific time window.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Jobs",
           "26.4.0.cl"
@@ -9194,7 +9194,7 @@
     "/api/rest/2.0/customization/styles/fonts/delete": {
       "post": {
         "operationId": "deleteStyleFonts",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nDeletes one or more custom fonts from the cluster-level or org-level font library. If a deleted font is assigned to visualization areas, those assignments automatically fallback to the cluster/system default font. The response lists all affected areas. For cluster-level fonts, `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is necessary. Important: dry_run defaults to true. To actually delete fonts, you must explicitly pass dry_run: false.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` privilege is required.\n\n#### Usage guidelines\n\n- Provide one or more font UUIDs or names in `font_identifiers`.\n- Set `scope` to `CLUSTER` to delete from the cluster-level library. Set `scope` to `ORG` (default) to delete from the authenticated user's org library.\n- Use `dry_run: true` to preview which visualization areas would be affected without actually deleting the font. The response lists affected assignments; no changes are applied.\n- Deletions cannot be undone. Re-upload the font file using `uploadStyleFont` if needed.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Style Customization",
           "26.7.0.cl"
@@ -9217,6 +9217,31 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/StyleFontDeleteData"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "Font deleted with affected assignments",
+                    "value": {
+                      "affected_assignments": [
+                        {
+                          "org": {
+                            "id": 1234567890,
+                            "name": "Sales"
+                          },
+                          "visualization_areas": [
+                            "CHART_X_AXIS_LABELS",
+                            "CHART_Y_AXIS_LABELS"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "example_2": {
+                    "summary": "Font deleted with no affected assignments",
+                    "value": {
+                      "affected_assignments": []
+                    }
+                  }
                 }
               }
             }
@@ -9267,7 +9292,7 @@
     "/api/rest/2.0/customization/styles/logos/export": {
       "post": {
         "operationId": "exportStyleLogos",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nDownloads the active logos (default and wide slots) at the requested scope as a single ZIP archive containing both logo image files. If no custom logo has been uploaded at the ORG scope, the archive contains the resolved logo falling through from the cluster. If no cluster logo has been uploaded, no file is returned.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` privilege is required.\n\n#### Usage guidelines\n\n- Set `scope` to `CLUSTER` to download cluster-level logos.\n- Set `scope` to `ORG` (default) to download logos for the authenticated user's org.\n- The response is a ZIP archive (`application/zip`). Save the response body directly to a `.zip` file.\n- The archive always contains two files — one for the DEFAULT slot and one for the WIDE slot — even if no custom logo is set at the requested scope.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Style Customization",
           "26.7.0.cl"
@@ -9336,7 +9361,7 @@
     "/api/rest/2.0/customization/styles/search": {
       "post": {
         "operationId": "searchStyleCustomizations",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nRetrieves style preferences at cluster level or for the authenticated user's org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` privilege is required.\n\n#### Usage guidelines\n\n- Set `scope` to `CLUSTER` to retrieve cluster-level style defaults.\n- Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user's org.\n- Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Style Customization",
           "26.7.0.cl"
@@ -9361,6 +9386,251 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/StylePreference"
+                  }
+                },
+                "examples": {
+                  "example_1": {
+                    "value": [
+                      {
+                        "scope": "CLUSTER",
+                        "navigation_panel": {
+                          "theme": "DARK",
+                          "is_overridden": false
+                        },
+                        "chart_color_palette": {
+                          "colors": [
+                            {
+                              "primary": "#2359B6",
+                              "secondary": [
+                                "#1A4690",
+                                "#0E2E66",
+                                "#07194A",
+                                "#030D30"
+                              ]
+                            },
+                            {
+                              "primary": "#E8552D",
+                              "secondary": [
+                                "#C4421A",
+                                "#9E2F0D",
+                                "#7A2005",
+                                "#581302"
+                              ]
+                            },
+                            {
+                              "primary": "#F5A623",
+                              "secondary": [
+                                "#D08B0E",
+                                "#A86E05",
+                                "#825202",
+                                "#5E3900"
+                              ]
+                            },
+                            {
+                              "primary": "#7ED321",
+                              "secondary": [
+                                "#62A815",
+                                "#488009",
+                                "#305A03",
+                                "#1C3800"
+                              ]
+                            },
+                            {
+                              "primary": "#9B59B6",
+                              "secondary": [
+                                "#7D3F9A",
+                                "#612C7E",
+                                "#481C62",
+                                "#320F48"
+                              ]
+                            },
+                            {
+                              "primary": "#1ABC9C",
+                              "secondary": [
+                                "#0E9E81",
+                                "#077F67",
+                                "#03624E",
+                                "#014838"
+                              ]
+                            },
+                            {
+                              "primary": "#E74C3C",
+                              "secondary": [
+                                "#C0392B",
+                                "#9A2518",
+                                "#761409",
+                                "#540703"
+                              ]
+                            },
+                            {
+                              "primary": "#3498DB",
+                              "secondary": [
+                                "#1A7DC0",
+                                "#0E60A0",
+                                "#074580",
+                                "#032C60"
+                              ]
+                            }
+                          ],
+                          "disable_color_rotation": false,
+                          "is_overridden": false
+                        },
+                        "embedded_footer_text": {
+                          "value": "",
+                          "is_overridden": false
+                        },
+                        "logo": {
+                          "default_logo": {
+                            "id": "a1b2c3d4-0001-0001-0001-000000000001",
+                            "is_overridden": false
+                          },
+                          "wide_logo": {
+                            "id": "a1b2c3d4-0002-0002-0002-000000000002",
+                            "is_overridden": false
+                          }
+                        },
+                        "visualization_fonts": {
+                          "chart_visualization_fonts": [
+                            {
+                              "visualization_area": "CHART_X_AXIS_LABELS",
+                              "font_id": null,
+                              "font_name": null,
+                              "is_overridden": false
+                            }
+                          ],
+                          "table_visualization_fonts": [
+                            {
+                              "visualization_area": "TABLE_VALUE_CELLS",
+                              "font_id": null,
+                              "font_name": null,
+                              "is_overridden": false
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "scope": "ORG",
+                        "org": {
+                          "id": 1234567890,
+                          "name": "Sales"
+                        },
+                        "navigation_panel": {
+                          "theme": "CUSTOM",
+                          "base_color": "#2359B6",
+                          "is_overridden": true
+                        },
+                        "chart_color_palette": {
+                          "colors": [
+                            {
+                              "primary": "#2359B6",
+                              "secondary": [
+                                "#1A4690",
+                                "#0E2E66",
+                                "#07194A",
+                                "#030D30"
+                              ]
+                            },
+                            {
+                              "primary": "#E8552D",
+                              "secondary": [
+                                "#C4421A",
+                                "#9E2F0D",
+                                "#7A2005",
+                                "#581302"
+                              ]
+                            },
+                            {
+                              "primary": "#F5A623",
+                              "secondary": [
+                                "#D08B0E",
+                                "#A86E05",
+                                "#825202",
+                                "#5E3900"
+                              ]
+                            },
+                            {
+                              "primary": "#7ED321",
+                              "secondary": [
+                                "#62A815",
+                                "#488009",
+                                "#305A03",
+                                "#1C3800"
+                              ]
+                            },
+                            {
+                              "primary": "#9B59B6",
+                              "secondary": [
+                                "#7D3F9A",
+                                "#612C7E",
+                                "#481C62",
+                                "#320F48"
+                              ]
+                            },
+                            {
+                              "primary": "#1ABC9C",
+                              "secondary": [
+                                "#0E9E81",
+                                "#077F67",
+                                "#03624E",
+                                "#014838"
+                              ]
+                            },
+                            {
+                              "primary": "#E74C3C",
+                              "secondary": [
+                                "#C0392B",
+                                "#9A2518",
+                                "#761409",
+                                "#540703"
+                              ]
+                            },
+                            {
+                              "primary": "#3498DB",
+                              "secondary": [
+                                "#1A7DC0",
+                                "#0E60A0",
+                                "#074580",
+                                "#032C60"
+                              ]
+                            }
+                          ],
+                          "disable_color_rotation": false,
+                          "is_overridden": false
+                        },
+                        "embedded_footer_text": {
+                          "value": "Powered by Sales Analytics",
+                          "is_overridden": true
+                        },
+                        "logo": {
+                          "default_logo": {
+                            "id": "b2c3d4e5-0001-0001-0001-000000000011",
+                            "is_overridden": true
+                          },
+                          "wide_logo": {
+                            "id": "b2c3d4e5-0002-0002-0002-000000000022",
+                            "is_overridden": true
+                          }
+                        },
+                        "visualization_fonts": {
+                          "chart_visualization_fonts": [
+                            {
+                              "visualization_area": "CHART_X_AXIS_LABELS",
+                              "font_id": "c3d4e5f6-1111-1111-1111-111111111111",
+                              "font_name": "Acme Sans",
+                              "is_overridden": true
+                            }
+                          ],
+                          "table_visualization_fonts": [
+                            {
+                              "visualization_area": "TABLE_VALUE_CELLS",
+                              "font_id": null,
+                              "font_name": null,
+                              "is_overridden": false
+                            }
+                          ]
+                        }
+                      }
+                    ]
                   }
                 }
               }
@@ -9412,7 +9682,7 @@
     "/api/rest/2.0/customization/styles/fonts/search": {
       "post": {
         "operationId": "searchStyleFonts",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nReturns custom fonts available in the cluster-level or org-level font library. Omitting all filter fields returns all fonts in the target scope.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` privilege is required.\n\n#### Usage guidelines\n\n- Set `scope` to `CLUSTER` to search the cluster-level library. Set `scope` to `ORG` (default) to search the authenticated user's org library.\n- Use `font_identifier` to look up a specific font by UUID or name.\n- Use `name_pattern` for partial, case-insensitive name matching.\n- Set `include_font_assignments` to `true` to include visualization areas this font is currently assigned to. Defaults to `false`.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Style Customization",
           "26.7.0.cl"
@@ -9437,6 +9707,47 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/StyleFontRecord"
+                  }
+                },
+                "examples": {
+                  "example_1": {
+                    "value": [
+                      {
+                        "id": "c3d4e5f6-1111-1111-1111-111111111111",
+                        "scope": "ORG",
+                        "org": {
+                          "id": 1234567890,
+                          "name": "Sales"
+                        },
+                        "name": "Acme Sans",
+                        "weight": "NORMAL",
+                        "style": "NORMAL",
+                        "color": "#333333",
+                        "creation_time_in_millis": 1714000000000,
+                        "assignments": [
+                          {
+                            "org": {
+                              "id": 1234567890,
+                              "name": "Sales"
+                            },
+                            "visualization_areas": [
+                              "CHART_X_AXIS_LABELS",
+                              "CHART_Y_AXIS_LABELS"
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "id": "d4e5f6a7-2222-2222-2222-222222222222",
+                        "scope": "CLUSTER",
+                        "name": "Corporate Bold",
+                        "weight": "BOLD",
+                        "style": "NORMAL",
+                        "color": "#000000",
+                        "creation_time_in_millis": 1713500000000,
+                        "assignments": []
+                      }
+                    ]
                   }
                 }
               }
@@ -9488,7 +9799,7 @@
     "/api/rest/2.0/customization/styles/update": {
       "post": {
         "operationId": "updateStyleCustomization",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUpdates style preferences at cluster level or for the authenticated user's org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**), `DEVELOPER` (**Has developer privilege**)  privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` privilege is required.\n\n#### Usage guidelines\n\nTwo operations are supported via the `operation` field:\n\n- **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged.\n- **RESET**: Reverts specific fields to ThoughtSpot defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.\n\n#### Logo upload\n\nLogo files are uploaded as binary fields using `multipart/form-data`:\n\n- `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG.\n- `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.\n\nTo reset a logo to the ThoughtSpot default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.\n\n#### Navigation panel color\n\nSet `navigation_panel.theme` to one of:\n\n- `DARK`: Default dark ThoughtSpot theme.\n- `TWO_TONE`: Dual-tone panel style.\n- `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).\n\n#### Chart color palette\n\nProvide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.\n\n#### Font assignments\n\nSpecify `visualization_fonts.chart_visualization_fonts` and `visualization_fonts.table_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Style Customization",
           "26.7.0.cl"
@@ -9552,12 +9863,12 @@
                     ]
                   },
                   "default_logo": {
-                    "description": "Binary image for the DEFAULT logo slot (square app icon and favicon;\nrecommended 140x140 px). Accepted formats: PNG, JPG, SVG.",
+                    "description": "Binary image for the DEFAULT logo slot (square app icon and favicon;\nrecommended 140x140 px). Accepted formats: PNG, JPG.",
                     "type": "string",
                     "format": "binary"
                   },
                   "wide_logo": {
-                    "description": "Binary image for the WIDE logo slot (horizontal top nav bar logo;\nrecommended 230x45 px). Accepted formats: PNG, JPG, SVG.",
+                    "description": "Binary image for the WIDE logo slot (horizontal top nav bar logo;\nrecommended 230x45 px). Accepted formats: PNG, JPG.",
                     "type": "string",
                     "format": "binary"
                   }
@@ -9615,10 +9926,10 @@
         }
       }
     },
-    "/api/rest/2.0/customization/styles/fonts/{font_identifier}": {
+    "/api/rest/2.0/customization/styles/fonts/{font_identifier}/update": {
       "post": {
         "operationId": "updateStyleFont",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUpdates the metadata of an existing custom font in the cluster-level or org-level font library. Only the fields provided in the request are modified; omitted fields remain unchanged.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` privilege is required.\n\n#### Usage guidelines\n\n- Identify the font using `font_identifier` (UUID or name).\n- Set `scope` to `CLUSTER` to target the cluster-level library. Set `scope` to `ORG` (default) to target the authenticated user's org library.\n- To replace the font file itself (WOFF/WOFF2 binary), delete the existing font and re-upload using `uploadStyleFont`.\n- `name` must be unique within the target scope if provided.\n- `color` must be a valid 6-digit hex string (e.g. `#333333`) if provided.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Style Customization",
           "26.7.0.cl"
@@ -9694,7 +10005,7 @@
     "/api/rest/2.0/customization/styles/fonts/upload": {
       "post": {
         "operationId": "uploadStyleFont",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUploads a custom font to the cluster-level or org-level font library. Cluster-level fonts are available as defaults for all orgs. Org-level fonts are only available within that org.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` privilege is required.\n\n#### Usage guidelines\n\n- Only **WOFF** and **WOFF2** font formats are accepted. TTF and OTF files are rejected with an error.\n- The `name` field must be unique within the target scope. Uploading a font with a name that already exists returns an error.\n- Set `scope` to `CLUSTER` to upload to the cluster-level library. Set `scope` to `ORG` (default) to upload to the authenticated user's org library.\n- `weight` defaults to `NORMAL` if omitted. Supported values: `NORMAL`, `LIGHT`, `BOLD`.\n- `style` defaults to `NORMAL` if omitted. Supported values: `NORMAL`, `ITALIC`, `OBLIQUE`.\n- `color` defaults to `#000000` (black) if omitted. Provide as a 6-digit hex string (e.g. `#333333`).\n- The uploaded font can be assigned to visualization areas using the `updateStyleCustomization` endpoint.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Style Customization",
           "26.7.0.cl"
@@ -9762,6 +10073,14 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/StyleFontUploadData"
+                },
+                "examples": {
+                  "example_1": {
+                    "value": {
+                      "id": "c3d4e5f6-1111-1111-1111-111111111111",
+                      "name": "Acme Sans"
+                    }
+                  }
                 }
               }
             }
@@ -18281,9 +18600,6 @@
       },
       "StylePreference": {
         "type": "object",
-        "required": [
-          "scope"
-        ],
         "properties": {
           "scope": {
             "type": "string",
@@ -18291,7 +18607,8 @@
               "CLUSTER",
               "ORG"
             ],
-            "description": "Scope at which these style preferences apply."
+            "description": "Scope at which these style preferences apply.",
+            "nullable": true
           },
           "org": {
             "$ref": "#/components/schemas/StyleOrgInfo",
@@ -18605,8 +18922,8 @@
             "nullable": true
           },
           "creation_time_in_millis": {
-            "type": "integer",
-            "format": "int32",
+            "type": "number",
+            "format": "float",
             "description": "Timestamp in milliseconds when the font was uploaded.",
             "nullable": true
           },
@@ -25460,6 +25777,11 @@
           },
           "start_epoch_time_in_millis": {
             "description": "Filter records created on or after this time (epoch milliseconds).",
+            "type": "number",
+            "format": "float"
+          },
+          "end_epoch_time_in_millis": {
+            "description": "Filter records created on or before this time (epoch milliseconds). <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
             "type": "number",
             "format": "float"
           }
