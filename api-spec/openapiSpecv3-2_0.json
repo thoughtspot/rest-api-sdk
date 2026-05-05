@@ -12054,6 +12054,42 @@
                         "name": "mike_rodriguez"
                       }
                     }
+                  },
+                  "example_3": {
+                    "description": "Webhook with GCP GCS storage destination",
+                    "value": {
+                      "id": "c9d8e7f6-a5b4-4321-9876-fedcba012345",
+                      "name": "GCS Storage Webhook",
+                      "description": "Webhook that uploads payloads to a GCS bucket",
+                      "org": {
+                        "id": "0",
+                        "name": "Primary"
+                      },
+                      "url": "https://api.example.com/webhooks",
+                      "events": [
+                        "LIVEBOARD_SCHEDULE"
+                      ],
+                      "storage_destination": {
+                        "storage_type": "GCP_GCS",
+                        "storage_config": {
+                          "gcp_gcs_config": {
+                            "bucket_name": "my-webhook-files",
+                            "service_account_email": "my-sa@my-project.iam.gserviceaccount.com",
+                            "path_prefix": "webhooks/"
+                          }
+                        }
+                      },
+                      "creation_time_in_millis": 1724279630456,
+                      "modification_time_in_millis": 1724279630456,
+                      "created_by": {
+                        "id": "3a2b1c4d-5e6f-7890-abcd-ef0123456789",
+                        "name": "priya_sharma"
+                      },
+                      "last_modified_by": {
+                        "id": "3a2b1c4d-5e6f-7890-abcd-ef0123456789",
+                        "name": "priya_sharma"
+                      }
+                    }
                   }
                 }
               }
@@ -15547,6 +15583,8 @@
                 "CAN_VIEW_FOLDERS",
                 "CAN_MODIDY_FOLDERS",
                 "CAN_MANAGE_VARIABLES",
+                "CAN_MANAGE_AGENTSPOT",
+                "CAN_ACCESS_AGENTSPOT",
                 "PREVIEW_DOCUMENT_SEARCH",
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_MANAGE_WEBHOOKS",
@@ -18427,6 +18465,8 @@
                 "CAN_MODIFY_FOLDERS",
                 "CAN_MANAGE_VARIABLES",
                 "CAN_VIEW_FOLDERS",
+                "CAN_MANAGE_AGENTSPOT",
+                "CAN_ACCESS_AGENTSPOT",
                 "PREVIEW_DOCUMENT_SEARCH",
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_DOWNLOAD_VISUALS",
@@ -19477,6 +19517,8 @@
                 "CAN_MANAGE_VARIABLES",
                 "CAN_MODIFY_FOLDERS",
                 "CAN_VIEW_FOLDERS",
+                "CAN_MANAGE_AGENTSPOT",
+                "CAN_ACCESS_AGENTSPOT",
                 "CAN_SETUP_VERSION_CONTROL",
                 "PREVIEW_THOUGHTSPOT_SAGE",
                 "CAN_MANAGE_WEBHOOKS",
@@ -23207,6 +23249,8 @@
                 "CAN_MODIFY_FOLDERS",
                 "CAN_MANAGE_VARIABLES",
                 "CAN_VIEW_FOLDERS",
+                "CAN_MANAGE_AGENTSPOT",
+                "CAN_ACCESS_AGENTSPOT",
                 "PREVIEW_DOCUMENT_SEARCH",
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_DOWNLOAD_VISUALS",
@@ -23363,6 +23407,8 @@
                 "CAN_MODIFY_FOLDERS",
                 "CAN_MANAGE_VARIABLES",
                 "CAN_VIEW_FOLDERS",
+                "CAN_MANAGE_AGENTSPOT",
+                "CAN_ACCESS_AGENTSPOT",
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_MANAGE_WEBHOOKS",
                 "CAN_DOWNLOAD_VISUALS",
@@ -23500,6 +23546,8 @@
                 "CAN_MODIFY_FOLDERS",
                 "CAN_MANAGE_VARIABLES",
                 "CAN_VIEW_FOLDERS",
+                "CAN_MANAGE_AGENTSPOT",
+                "CAN_ACCESS_AGENTSPOT",
                 "PREVIEW_DOCUMENT_SEARCH",
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_DOWNLOAD_VISUALS",
@@ -24628,6 +24676,8 @@
                 "CAN_MANAGE_VARIABLES",
                 "CAN_MODIFY_FOLDERS",
                 "CAN_VIEW_FOLDERS",
+                "CAN_MANAGE_AGENTSPOT",
+                "CAN_ACCESS_AGENTSPOT",
                 "CAN_SETUP_VERSION_CONTROL",
                 "PREVIEW_THOUGHTSPOT_SAGE",
                 "CAN_MANAGE_WEBHOOKS",
@@ -24724,6 +24774,8 @@
                 "CAN_VIEW_FOLDERS",
                 "CAN_MODIDY_FOLDERS",
                 "CAN_MANAGE_VARIABLES",
+                "CAN_MANAGE_AGENTSPOT",
+                "CAN_ACCESS_AGENTSPOT",
                 "PREVIEW_DOCUMENT_SEARCH",
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_MANAGE_WEBHOOKS",
@@ -24815,6 +24867,8 @@
                 "CAN_MODIFY_FOLDERS",
                 "CAN_MANAGE_VARIABLES",
                 "CAN_VIEW_FOLDERS",
+                "CAN_MANAGE_AGENTSPOT",
+                "CAN_ACCESS_AGENTSPOT",
                 "PREVIEW_DOCUMENT_SEARCH",
                 "PREVIEW_THOUGHTSPOT_SAGE",
                 "CAN_MANAGE_WEBHOOKS",
@@ -27251,6 +27305,8 @@
                 "CAN_MODIFY_FOLDERS",
                 "CAN_MANAGE_VARIABLES",
                 "CAN_VIEW_FOLDERS",
+                "CAN_MANAGE_AGENTSPOT",
+                "CAN_ACCESS_AGENTSPOT",
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_MANAGE_WEBHOOKS",
                 "CAN_DOWNLOAD_VISUALS",
