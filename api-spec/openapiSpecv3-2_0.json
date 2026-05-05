@@ -9810,6 +9810,58 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "scope": {
+                    "description": "Scope at which to apply the preferences. CLUSTER sets cluster-level\ndefaults for all orgs. ORG applies to the authenticated user's org.\nDefaults to ORG if omitted.",
+                    "type": "string",
+                    "enum": [
+                      "CLUSTER",
+                      "ORG"
+                    ]
+                  },
+                  "operation": {
+                    "description": "Operation to perform. REPLACE (default) applies the provided fields and\nleaves omitted fields unchanged. RESET reverts fields listed in\nreset_options to ThoughtSpot defaults.",
+                    "type": "string",
+                    "enum": [
+                      "REPLACE",
+                      "RESET"
+                    ]
+                  },
+                  "reset_options": {
+                    "description": "Fields to reset when operation is RESET. Specify style fields and\nvisualization areas to revert to ThoughtSpot defaults.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/StyleResetOptionsInput"
+                      }
+                    ]
+                  },
+                  "navigation_panel": {
+                    "description": "Navigation panel color. Provide theme and, when theme is CUSTOM, also\nprovide base_color.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/NavigationPanelInput"
+                      }
+                    ]
+                  },
+                  "chart_color_palette": {
+                    "description": "Chart color palette. When provided with operation REPLACE, exactly 8\ncolor entries must be specified in colors.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/StyleColorPaletteInput"
+                      }
+                    ]
+                  },
+                  "embedded_footer_text": {
+                    "description": "Custom footer text for the embedded ThoughtSpot application. An empty\nstring clears the footer.",
+                    "type": "string"
+                  },
+                  "visualization_fonts": {
+                    "description": "Font assignments per visualization area. Provide only the areas to\nupdate; omitted areas remain unchanged.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/VisualizationFontsInput"
+                      }
+                    ]
+                  },
                   "default_logo": {
                     "description": "Binary image for the DEFAULT logo slot (square app icon and favicon;\nrecommended 140x140 px). Accepted formats: PNG, JPG.",
                     "type": "string",
@@ -9819,70 +9871,14 @@
                     "description": "Binary image for the WIDE logo slot (horizontal top nav bar logo;\nrecommended 230x45 px). Accepted formats: PNG, JPG.",
                     "type": "string",
                     "format": "binary"
-                  },
-                  "metadata": {
-                    "type": "object",
-                    "properties": {
-                      "scope": {
-                        "description": "Scope at which to apply the preferences. CLUSTER sets cluster-level\ndefaults for all orgs. ORG applies to the authenticated user's org.\nDefaults to ORG if omitted.",
-                        "type": "string",
-                        "enum": [
-                          "CLUSTER",
-                          "ORG"
-                        ]
-                      },
-                      "operation": {
-                        "description": "Operation to perform. REPLACE (default) applies the provided fields and\nleaves omitted fields unchanged. RESET reverts fields listed in\nreset_options to ThoughtSpot defaults.",
-                        "type": "string",
-                        "enum": [
-                          "REPLACE",
-                          "RESET"
-                        ]
-                      },
-                      "reset_options": {
-                        "description": "Fields to reset when operation is RESET. Specify style fields and\nvisualization areas to revert to ThoughtSpot defaults.",
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/StyleResetOptionsInput"
-                          }
-                        ]
-                      },
-                      "navigation_panel": {
-                        "description": "Navigation panel color. Provide theme and, when theme is CUSTOM, also\nprovide base_color.",
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/NavigationPanelInput"
-                          }
-                        ]
-                      },
-                      "chart_color_palette": {
-                        "description": "Chart color palette. When provided with operation REPLACE, exactly 8\ncolor entries must be specified in colors.",
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/StyleColorPaletteInput"
-                          }
-                        ]
-                      },
-                      "embedded_footer_text": {
-                        "description": "Custom footer text for the embedded ThoughtSpot application. An empty\nstring clears the footer.",
-                        "type": "string"
-                      },
-                      "visualization_fonts": {
-                        "description": "Font assignments per visualization area. Provide only the areas to\nupdate; omitted areas remain unchanged.",
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/VisualizationFontsInput"
-                          }
-                        ]
-                      }
-                    }
                   }
                 }
               },
               "encoding": {
-                "metadata": {
-                  "contentType": "application/json"
-                }
+                "reset_options": { "contentType": "application/json" },
+                "navigation_panel": { "contentType": "application/json" },
+                "chart_color_palette": { "contentType": "application/json" },
+                "visualization_fonts": { "contentType": "application/json" }
               }
             }
           },
