@@ -1695,6 +1695,68 @@ _ChannelValidationGcpGcsInfo.attributeTypeMap = [
 ];
 var ChannelValidationGcpGcsInfo = _ChannelValidationGcpGcsInfo;
 
+// models/ChartFontAssignmentInput.ts
+var _ChartFontAssignmentInput = class _ChartFontAssignmentInput {
+  static getAttributeTypeMap() {
+    return _ChartFontAssignmentInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ChartFontAssignmentInput.discriminator = void 0;
+_ChartFontAssignmentInput.attributeTypeMap = [
+  {
+    "name": "visualization_area",
+    "baseName": "visualization_area",
+    "type": "ChartFontAssignmentInputVisualizationAreaEnum",
+    "format": ""
+  },
+  {
+    "name": "font_identifier",
+    "baseName": "font_identifier",
+    "type": "string",
+    "format": ""
+  }
+];
+var ChartFontAssignmentInput = _ChartFontAssignmentInput;
+
+// models/ChartVisualizationFontRecord.ts
+var _ChartVisualizationFontRecord = class _ChartVisualizationFontRecord {
+  static getAttributeTypeMap() {
+    return _ChartVisualizationFontRecord.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ChartVisualizationFontRecord.discriminator = void 0;
+_ChartVisualizationFontRecord.attributeTypeMap = [
+  {
+    "name": "visualization_area",
+    "baseName": "visualization_area",
+    "type": "ChartVisualizationFontRecordVisualizationAreaEnum",
+    "format": ""
+  },
+  {
+    "name": "font_id",
+    "baseName": "font_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "font_name",
+    "baseName": "font_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "is_overridden",
+    "baseName": "is_overridden",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var ChartVisualizationFontRecord = _ChartVisualizationFontRecord;
+
 // models/ClusterNonEmbedAccess.ts
 var _ClusterNonEmbedAccess = class _ClusterNonEmbedAccess {
   static getAttributeTypeMap() {
@@ -5185,6 +5247,37 @@ _DeleteOrgEmailCustomizationRequest.attributeTypeMap = [
 ];
 var DeleteOrgEmailCustomizationRequest = _DeleteOrgEmailCustomizationRequest;
 
+// models/DeleteStyleFontsRequest.ts
+var _DeleteStyleFontsRequest = class _DeleteStyleFontsRequest {
+  static getAttributeTypeMap() {
+    return _DeleteStyleFontsRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_DeleteStyleFontsRequest.discriminator = void 0;
+_DeleteStyleFontsRequest.attributeTypeMap = [
+  {
+    "name": "scope",
+    "baseName": "scope",
+    "type": "DeleteStyleFontsRequestScopeEnum",
+    "format": ""
+  },
+  {
+    "name": "font_identifiers",
+    "baseName": "font_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "dry_run",
+    "baseName": "dry_run",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var DeleteStyleFontsRequest = _DeleteStyleFontsRequest;
+
 // models/DeleteVariablesRequest.ts
 var _DeleteVariablesRequest = class _DeleteVariablesRequest {
   static getAttributeTypeMap() {
@@ -6208,6 +6301,25 @@ _ExportOptions.attributeTypeMap = [
   }
 ];
 var ExportOptions = _ExportOptions;
+
+// models/ExportStyleLogosRequest.ts
+var _ExportStyleLogosRequest = class _ExportStyleLogosRequest {
+  static getAttributeTypeMap() {
+    return _ExportStyleLogosRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ExportStyleLogosRequest.discriminator = void 0;
+_ExportStyleLogosRequest.attributeTypeMap = [
+  {
+    "name": "scope",
+    "baseName": "scope",
+    "type": "ExportStyleLogosRequestScopeEnum",
+    "format": ""
+  }
+];
+var ExportStyleLogosRequest = _ExportStyleLogosRequest;
 
 // models/ExternalTableInput.ts
 var _ExternalTableInput = class _ExternalTableInput {
@@ -8896,6 +9008,31 @@ _NLInstructionsInfoInput.attributeTypeMap = [
   }
 ];
 var NLInstructionsInfoInput = _NLInstructionsInfoInput;
+
+// models/NavigationPanelInput.ts
+var _NavigationPanelInput = class _NavigationPanelInput {
+  static getAttributeTypeMap() {
+    return _NavigationPanelInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_NavigationPanelInput.discriminator = void 0;
+_NavigationPanelInput.attributeTypeMap = [
+  {
+    "name": "theme",
+    "baseName": "theme",
+    "type": "NavigationPanelInputThemeEnum",
+    "format": ""
+  },
+  {
+    "name": "base_color",
+    "baseName": "base_color",
+    "type": "string",
+    "format": ""
+  }
+];
+var NavigationPanelInput = _NavigationPanelInput;
 
 // models/ObjectIDAndName.ts
 var _ObjectIDAndName = class _ObjectIDAndName {
@@ -12711,6 +12848,62 @@ _SearchSecuritySettingsRequest.attributeTypeMap = [
 ];
 var SearchSecuritySettingsRequest = _SearchSecuritySettingsRequest;
 
+// models/SearchStyleCustomizationsRequest.ts
+var _SearchStyleCustomizationsRequest = class _SearchStyleCustomizationsRequest {
+  static getAttributeTypeMap() {
+    return _SearchStyleCustomizationsRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SearchStyleCustomizationsRequest.discriminator = void 0;
+_SearchStyleCustomizationsRequest.attributeTypeMap = [
+  {
+    "name": "scope",
+    "baseName": "scope",
+    "type": "SearchStyleCustomizationsRequestScopeEnum",
+    "format": ""
+  }
+];
+var SearchStyleCustomizationsRequest = _SearchStyleCustomizationsRequest;
+
+// models/SearchStyleFontsRequest.ts
+var _SearchStyleFontsRequest = class _SearchStyleFontsRequest {
+  static getAttributeTypeMap() {
+    return _SearchStyleFontsRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SearchStyleFontsRequest.discriminator = void 0;
+_SearchStyleFontsRequest.attributeTypeMap = [
+  {
+    "name": "scope",
+    "baseName": "scope",
+    "type": "SearchStyleFontsRequestScopeEnum",
+    "format": ""
+  },
+  {
+    "name": "font_identifier",
+    "baseName": "font_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "name_pattern",
+    "baseName": "name_pattern",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "include_font_assignments",
+    "baseName": "include_font_assignments",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var SearchStyleFontsRequest = _SearchStyleFontsRequest;
+
 // models/SearchTagsRequest.ts
 var _SearchTagsRequest = class _SearchTagsRequest {
   static getAttributeTypeMap() {
@@ -13946,6 +14139,509 @@ _StorageDestinationInput.attributeTypeMap = [
 ];
 var StorageDestinationInput = _StorageDestinationInput;
 
+// models/StyleChartColorPalette.ts
+var _StyleChartColorPalette = class _StyleChartColorPalette {
+  static getAttributeTypeMap() {
+    return _StyleChartColorPalette.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_StyleChartColorPalette.discriminator = void 0;
+_StyleChartColorPalette.attributeTypeMap = [
+  {
+    "name": "colors",
+    "baseName": "colors",
+    "type": "Array<StyleColorEntry>",
+    "format": ""
+  },
+  {
+    "name": "disable_color_rotation",
+    "baseName": "disable_color_rotation",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "is_overridden",
+    "baseName": "is_overridden",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var StyleChartColorPalette = _StyleChartColorPalette;
+
+// models/StyleColorEntry.ts
+var _StyleColorEntry = class _StyleColorEntry {
+  static getAttributeTypeMap() {
+    return _StyleColorEntry.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_StyleColorEntry.discriminator = void 0;
+_StyleColorEntry.attributeTypeMap = [
+  {
+    "name": "primary",
+    "baseName": "primary",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "secondary",
+    "baseName": "secondary",
+    "type": "Array<string>",
+    "format": ""
+  }
+];
+var StyleColorEntry = _StyleColorEntry;
+
+// models/StyleColorEntryInput.ts
+var _StyleColorEntryInput = class _StyleColorEntryInput {
+  static getAttributeTypeMap() {
+    return _StyleColorEntryInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_StyleColorEntryInput.discriminator = void 0;
+_StyleColorEntryInput.attributeTypeMap = [
+  {
+    "name": "primary",
+    "baseName": "primary",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "secondary",
+    "baseName": "secondary",
+    "type": "Array<string>",
+    "format": ""
+  }
+];
+var StyleColorEntryInput = _StyleColorEntryInput;
+
+// models/StyleColorPaletteInput.ts
+var _StyleColorPaletteInput = class _StyleColorPaletteInput {
+  static getAttributeTypeMap() {
+    return _StyleColorPaletteInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_StyleColorPaletteInput.discriminator = void 0;
+_StyleColorPaletteInput.attributeTypeMap = [
+  {
+    "name": "colors",
+    "baseName": "colors",
+    "type": "Array<StyleColorEntryInput>",
+    "format": ""
+  },
+  {
+    "name": "disable_color_rotation",
+    "baseName": "disable_color_rotation",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var StyleColorPaletteInput = _StyleColorPaletteInput;
+
+// models/StyleEmbeddedFooterText.ts
+var _StyleEmbeddedFooterText = class _StyleEmbeddedFooterText {
+  static getAttributeTypeMap() {
+    return _StyleEmbeddedFooterText.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_StyleEmbeddedFooterText.discriminator = void 0;
+_StyleEmbeddedFooterText.attributeTypeMap = [
+  {
+    "name": "value",
+    "baseName": "value",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "is_overridden",
+    "baseName": "is_overridden",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var StyleEmbeddedFooterText = _StyleEmbeddedFooterText;
+
+// models/StyleFontAssignment.ts
+var _StyleFontAssignment = class _StyleFontAssignment {
+  static getAttributeTypeMap() {
+    return _StyleFontAssignment.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_StyleFontAssignment.discriminator = void 0;
+_StyleFontAssignment.attributeTypeMap = [
+  {
+    "name": "org",
+    "baseName": "org",
+    "type": "StyleOrgInfo",
+    "format": ""
+  },
+  {
+    "name": "visualization_areas",
+    "baseName": "visualization_areas",
+    "type": "Array<StyleFontAssignmentVisualizationAreasEnum>",
+    "format": ""
+  }
+];
+var StyleFontAssignment = _StyleFontAssignment;
+
+// models/StyleFontDeleteAffectedAssignment.ts
+var _StyleFontDeleteAffectedAssignment = class _StyleFontDeleteAffectedAssignment {
+  static getAttributeTypeMap() {
+    return _StyleFontDeleteAffectedAssignment.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_StyleFontDeleteAffectedAssignment.discriminator = void 0;
+_StyleFontDeleteAffectedAssignment.attributeTypeMap = [
+  {
+    "name": "org",
+    "baseName": "org",
+    "type": "StyleOrgInfo",
+    "format": ""
+  },
+  {
+    "name": "visualization_areas",
+    "baseName": "visualization_areas",
+    "type": "Array<StyleFontDeleteAffectedAssignmentVisualizationAreasEnum>",
+    "format": ""
+  }
+];
+var StyleFontDeleteAffectedAssignment = _StyleFontDeleteAffectedAssignment;
+
+// models/StyleFontDeleteData.ts
+var _StyleFontDeleteData = class _StyleFontDeleteData {
+  static getAttributeTypeMap() {
+    return _StyleFontDeleteData.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_StyleFontDeleteData.discriminator = void 0;
+_StyleFontDeleteData.attributeTypeMap = [
+  {
+    "name": "affected_assignments",
+    "baseName": "affected_assignments",
+    "type": "Array<StyleFontDeleteAffectedAssignment>",
+    "format": ""
+  }
+];
+var StyleFontDeleteData = _StyleFontDeleteData;
+
+// models/StyleFontRecord.ts
+var _StyleFontRecord = class _StyleFontRecord {
+  static getAttributeTypeMap() {
+    return _StyleFontRecord.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_StyleFontRecord.discriminator = void 0;
+_StyleFontRecord.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "scope",
+    "baseName": "scope",
+    "type": "StyleFontRecordScopeEnum",
+    "format": ""
+  },
+  {
+    "name": "org",
+    "baseName": "org",
+    "type": "StyleOrgInfo",
+    "format": ""
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "weight",
+    "baseName": "weight",
+    "type": "StyleFontRecordWeightEnum",
+    "format": ""
+  },
+  {
+    "name": "style",
+    "baseName": "style",
+    "type": "StyleFontRecordStyleEnum",
+    "format": ""
+  },
+  {
+    "name": "color",
+    "baseName": "color",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "creation_time_in_millis",
+    "baseName": "creation_time_in_millis",
+    "type": "number",
+    "format": "float"
+  },
+  {
+    "name": "assignments",
+    "baseName": "assignments",
+    "type": "Array<StyleFontAssignment>",
+    "format": ""
+  }
+];
+var StyleFontRecord = _StyleFontRecord;
+
+// models/StyleFontUploadData.ts
+var _StyleFontUploadData = class _StyleFontUploadData {
+  static getAttributeTypeMap() {
+    return _StyleFontUploadData.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_StyleFontUploadData.discriminator = void 0;
+_StyleFontUploadData.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  }
+];
+var StyleFontUploadData = _StyleFontUploadData;
+
+// models/StyleLogoSlot.ts
+var _StyleLogoSlot = class _StyleLogoSlot {
+  static getAttributeTypeMap() {
+    return _StyleLogoSlot.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_StyleLogoSlot.discriminator = void 0;
+_StyleLogoSlot.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "is_overridden",
+    "baseName": "is_overridden",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var StyleLogoSlot = _StyleLogoSlot;
+
+// models/StyleLogoStatus.ts
+var _StyleLogoStatus = class _StyleLogoStatus {
+  static getAttributeTypeMap() {
+    return _StyleLogoStatus.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_StyleLogoStatus.discriminator = void 0;
+_StyleLogoStatus.attributeTypeMap = [
+  {
+    "name": "default_logo",
+    "baseName": "default_logo",
+    "type": "StyleLogoSlot",
+    "format": ""
+  },
+  {
+    "name": "wide_logo",
+    "baseName": "wide_logo",
+    "type": "StyleLogoSlot",
+    "format": ""
+  }
+];
+var StyleLogoStatus = _StyleLogoStatus;
+
+// models/StyleNavigationPanel.ts
+var _StyleNavigationPanel = class _StyleNavigationPanel {
+  static getAttributeTypeMap() {
+    return _StyleNavigationPanel.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_StyleNavigationPanel.discriminator = void 0;
+_StyleNavigationPanel.attributeTypeMap = [
+  {
+    "name": "theme",
+    "baseName": "theme",
+    "type": "StyleNavigationPanelThemeEnum",
+    "format": ""
+  },
+  {
+    "name": "base_color",
+    "baseName": "base_color",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "is_overridden",
+    "baseName": "is_overridden",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var StyleNavigationPanel = _StyleNavigationPanel;
+
+// models/StyleOrgInfo.ts
+var _StyleOrgInfo = class _StyleOrgInfo {
+  static getAttributeTypeMap() {
+    return _StyleOrgInfo.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_StyleOrgInfo.discriminator = void 0;
+_StyleOrgInfo.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  }
+];
+var StyleOrgInfo = _StyleOrgInfo;
+
+// models/StylePreference.ts
+var _StylePreference = class _StylePreference {
+  static getAttributeTypeMap() {
+    return _StylePreference.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_StylePreference.discriminator = void 0;
+_StylePreference.attributeTypeMap = [
+  {
+    "name": "scope",
+    "baseName": "scope",
+    "type": "StylePreferenceScopeEnum",
+    "format": ""
+  },
+  {
+    "name": "org",
+    "baseName": "org",
+    "type": "StyleOrgInfo",
+    "format": ""
+  },
+  {
+    "name": "navigation_panel",
+    "baseName": "navigation_panel",
+    "type": "StyleNavigationPanel",
+    "format": ""
+  },
+  {
+    "name": "chart_color_palette",
+    "baseName": "chart_color_palette",
+    "type": "StyleChartColorPalette",
+    "format": ""
+  },
+  {
+    "name": "embedded_footer_text",
+    "baseName": "embedded_footer_text",
+    "type": "StyleEmbeddedFooterText",
+    "format": ""
+  },
+  {
+    "name": "logo",
+    "baseName": "logo",
+    "type": "StyleLogoStatus",
+    "format": ""
+  },
+  {
+    "name": "visualization_fonts",
+    "baseName": "visualization_fonts",
+    "type": "StyleVisualizationFonts",
+    "format": ""
+  }
+];
+var StylePreference = _StylePreference;
+
+// models/StyleResetOptionsInput.ts
+var _StyleResetOptionsInput = class _StyleResetOptionsInput {
+  static getAttributeTypeMap() {
+    return _StyleResetOptionsInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_StyleResetOptionsInput.discriminator = void 0;
+_StyleResetOptionsInput.attributeTypeMap = [
+  {
+    "name": "style",
+    "baseName": "style",
+    "type": "Array<StyleResetOptionsInputStyleEnum>",
+    "format": ""
+  },
+  {
+    "name": "visualization_areas",
+    "baseName": "visualization_areas",
+    "type": "Array<StyleResetOptionsInputVisualizationAreasEnum>",
+    "format": ""
+  }
+];
+var StyleResetOptionsInput = _StyleResetOptionsInput;
+
+// models/StyleVisualizationFonts.ts
+var _StyleVisualizationFonts = class _StyleVisualizationFonts {
+  static getAttributeTypeMap() {
+    return _StyleVisualizationFonts.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_StyleVisualizationFonts.discriminator = void 0;
+_StyleVisualizationFonts.attributeTypeMap = [
+  {
+    "name": "chart_visualization_fonts",
+    "baseName": "chart_visualization_fonts",
+    "type": "Array<ChartVisualizationFontRecord>",
+    "format": ""
+  },
+  {
+    "name": "table_visualization_fonts",
+    "baseName": "table_visualization_fonts",
+    "type": "Array<TableVisualizationFontRecord>",
+    "format": ""
+  }
+];
+var StyleVisualizationFonts = _StyleVisualizationFonts;
+
 // models/SyncMetadataRequest.ts
 var _SyncMetadataRequest = class _SyncMetadataRequest {
   static getAttributeTypeMap() {
@@ -14275,6 +14971,68 @@ _Table.attributeTypeMap = [
   }
 ];
 var Table = _Table;
+
+// models/TableFontAssignmentInput.ts
+var _TableFontAssignmentInput = class _TableFontAssignmentInput {
+  static getAttributeTypeMap() {
+    return _TableFontAssignmentInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_TableFontAssignmentInput.discriminator = void 0;
+_TableFontAssignmentInput.attributeTypeMap = [
+  {
+    "name": "visualization_area",
+    "baseName": "visualization_area",
+    "type": "TableFontAssignmentInputVisualizationAreaEnum",
+    "format": ""
+  },
+  {
+    "name": "font_identifier",
+    "baseName": "font_identifier",
+    "type": "string",
+    "format": ""
+  }
+];
+var TableFontAssignmentInput = _TableFontAssignmentInput;
+
+// models/TableVisualizationFontRecord.ts
+var _TableVisualizationFontRecord = class _TableVisualizationFontRecord {
+  static getAttributeTypeMap() {
+    return _TableVisualizationFontRecord.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_TableVisualizationFontRecord.discriminator = void 0;
+_TableVisualizationFontRecord.attributeTypeMap = [
+  {
+    "name": "visualization_area",
+    "baseName": "visualization_area",
+    "type": "TableVisualizationFontRecordVisualizationAreaEnum",
+    "format": ""
+  },
+  {
+    "name": "font_id",
+    "baseName": "font_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "font_name",
+    "baseName": "font_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "is_overridden",
+    "baseName": "is_overridden",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var TableVisualizationFontRecord = _TableVisualizationFontRecord;
 
 // models/Tag.ts
 var _Tag = class _Tag {
@@ -15799,6 +16557,49 @@ _UpdateScheduleRequestRecipientDetails.attributeTypeMap = [
 ];
 var UpdateScheduleRequestRecipientDetails = _UpdateScheduleRequestRecipientDetails;
 
+// models/UpdateStyleFontRequest.ts
+var _UpdateStyleFontRequest = class _UpdateStyleFontRequest {
+  static getAttributeTypeMap() {
+    return _UpdateStyleFontRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UpdateStyleFontRequest.discriminator = void 0;
+_UpdateStyleFontRequest.attributeTypeMap = [
+  {
+    "name": "scope",
+    "baseName": "scope",
+    "type": "UpdateStyleFontRequestScopeEnum",
+    "format": ""
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "weight",
+    "baseName": "weight",
+    "type": "UpdateStyleFontRequestWeightEnum",
+    "format": ""
+  },
+  {
+    "name": "style",
+    "baseName": "style",
+    "type": "UpdateStyleFontRequestStyleEnum",
+    "format": ""
+  },
+  {
+    "name": "color",
+    "baseName": "color",
+    "type": "string",
+    "format": ""
+  }
+];
+var UpdateStyleFontRequest = _UpdateStyleFontRequest;
+
 // models/UpdateSystemConfigRequest.ts
 var _UpdateSystemConfigRequest = class _UpdateSystemConfigRequest {
   static getAttributeTypeMap() {
@@ -17174,6 +17975,31 @@ _VariableValues.attributeTypeMap = [
 ];
 var VariableValues = _VariableValues;
 
+// models/VisualizationFontsInput.ts
+var _VisualizationFontsInput = class _VisualizationFontsInput {
+  static getAttributeTypeMap() {
+    return _VisualizationFontsInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_VisualizationFontsInput.discriminator = void 0;
+_VisualizationFontsInput.attributeTypeMap = [
+  {
+    "name": "chart_visualization_fonts",
+    "baseName": "chart_visualization_fonts",
+    "type": "Array<ChartFontAssignmentInput>",
+    "format": ""
+  },
+  {
+    "name": "table_visualization_fonts",
+    "baseName": "table_visualization_fonts",
+    "type": "Array<TableFontAssignmentInput>",
+    "format": ""
+  }
+];
+var VisualizationFontsInput = _VisualizationFontsInput;
+
 // models/WebhookAuthApiKey.ts
 var _WebhookAuthApiKey = class _WebhookAuthApiKey {
   static getAttributeTypeMap() {
@@ -17970,6 +18796,8 @@ var enumsMap = /* @__PURE__ */ new Set([
   "ChannelHistoryJobStatusEnum",
   "ChannelValidationDetailValidationStepEnum",
   "ChannelValidationDetailStatusEnum",
+  "ChartFontAssignmentInputVisualizationAreaEnum",
+  "ChartVisualizationFontRecordVisualizationAreaEnum",
   "CollectionMetadataInputTypeEnum",
   "ColumnSecurityRuleGroupOperationOperationEnum",
   "CommunicationChannelValidateResponseChannelTypeEnum",
@@ -18013,6 +18841,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "CreateWebhookConfigurationRequestStorageDestinationStorageTypeEnum",
   "CustomActionMetadataTypeInputTypeEnum",
   "DeleteMetadataTypeInputTypeEnum",
+  "DeleteStyleFontsRequestScopeEnum",
   "DeployCommitRequestDeployTypeEnum",
   "DeployCommitRequestDeployPolicyEnum",
   "EventChannelConfigEventTypeEnum",
@@ -18034,6 +18863,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "ExportMetadataTMLRequestEdocFormatEnum",
   "ExportMetadataTMLRequestExportSchemaVersionEnum",
   "ExportMetadataTypeInputTypeEnum",
+  "ExportStyleLogosRequestScopeEnum",
   "FavoriteMetadataInputTypeEnum",
   "FavoriteMetadataItemTypeEnum",
   "FetchAnswerDataRequestDataFormatEnum",
@@ -18073,6 +18903,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "MetadataSearchSortOptionsOrderEnum",
   "NLInstructionsInfoScopeEnum",
   "NLInstructionsInfoInputScopeEnum",
+  "NavigationPanelInputThemeEnum",
   "ObjectPrivilegesMetadataInputTypeEnum",
   "OrgChannelConfigInputOperationEnum",
   "OrgChannelConfigInputResetEventsEnum",
@@ -18133,6 +18964,8 @@ var enumsMap = /* @__PURE__ */ new Set([
   "SearchRolesRequestPrivilegesEnum",
   "SearchRolesRequestPermissionsEnum",
   "SearchSecuritySettingsRequestScopeEnum",
+  "SearchStyleCustomizationsRequestScopeEnum",
+  "SearchStyleFontsRequestScopeEnum",
   "SearchUserGroupsRequestPrivilegesEnum",
   "SearchUserGroupsRequestTypeEnum",
   "SearchUserGroupsRequestVisibilityEnum",
@@ -18161,8 +18994,19 @@ var enumsMap = /* @__PURE__ */ new Set([
   "SqlQueryResponseMetadataTypeEnum",
   "StorageDestinationStorageTypeEnum",
   "StorageDestinationInputStorageTypeEnum",
+  "StyleFontAssignmentVisualizationAreasEnum",
+  "StyleFontDeleteAffectedAssignmentVisualizationAreasEnum",
+  "StyleFontRecordScopeEnum",
+  "StyleFontRecordWeightEnum",
+  "StyleFontRecordStyleEnum",
+  "StyleNavigationPanelThemeEnum",
+  "StylePreferenceScopeEnum",
+  "StyleResetOptionsInputStyleEnum",
+  "StyleResetOptionsInputVisualizationAreasEnum",
   "SyncMetadataRequestSyncAttributesEnum",
   "SyncMetadataResponseStatusEnum",
+  "TableFontAssignmentInputVisualizationAreaEnum",
+  "TableVisualizationFontRecordVisualizationAreaEnum",
   "TagMetadataTypeInputTypeEnum",
   "TokenAccessScopeObjectTypeEnum",
   "UnparameterizeMetadataRequestMetadataTypeEnum",
@@ -18185,6 +19029,9 @@ var enumsMap = /* @__PURE__ */ new Set([
   "UpdateScheduleRequestTimeZoneEnum",
   "UpdateScheduleRequestStatusEnum",
   "UpdateScheduleRequestPdfOptionsPageSizeEnum",
+  "UpdateStyleFontRequestScopeEnum",
+  "UpdateStyleFontRequestWeightEnum",
+  "UpdateStyleFontRequestStyleEnum",
   "UpdateUserGroupRequestPrivilegesEnum",
   "UpdateUserGroupRequestTypeEnum",
   "UpdateUserGroupRequestVisibilityEnum",
@@ -18267,6 +19114,8 @@ var typeMap = {
   "ChannelValidationAwsS3Info": ChannelValidationAwsS3Info,
   "ChannelValidationDetail": ChannelValidationDetail,
   "ChannelValidationGcpGcsInfo": ChannelValidationGcpGcsInfo,
+  "ChartFontAssignmentInput": ChartFontAssignmentInput,
+  "ChartVisualizationFontRecord": ChartVisualizationFontRecord,
   "ClusterNonEmbedAccess": ClusterNonEmbedAccess,
   "ClusterNonEmbedAccessInput": ClusterNonEmbedAccessInput,
   "Collection": Collection,
@@ -18361,6 +19210,7 @@ var typeMap = {
   "DeleteMetadataRequest": DeleteMetadataRequest,
   "DeleteMetadataTypeInput": DeleteMetadataTypeInput,
   "DeleteOrgEmailCustomizationRequest": DeleteOrgEmailCustomizationRequest,
+  "DeleteStyleFontsRequest": DeleteStyleFontsRequest,
   "DeleteVariablesRequest": DeleteVariablesRequest,
   "DeleteWebhookConfigurationsRequest": DeleteWebhookConfigurationsRequest,
   "DeployCommitRequest": DeployCommitRequest,
@@ -18389,6 +19239,7 @@ var typeMap = {
   "ExportMetadataTMLRequestExportOptions": ExportMetadataTMLRequestExportOptions,
   "ExportMetadataTypeInput": ExportMetadataTypeInput,
   "ExportOptions": ExportOptions,
+  "ExportStyleLogosRequest": ExportStyleLogosRequest,
   "ExternalTableInput": ExternalTableInput,
   "FavoriteMetadataInput": FavoriteMetadataInput,
   "FavoriteMetadataItem": FavoriteMetadataItem,
@@ -18461,6 +19312,7 @@ var typeMap = {
   "ModelTableList": ModelTableList,
   "NLInstructionsInfo": NLInstructionsInfo,
   "NLInstructionsInfoInput": NLInstructionsInfoInput,
+  "NavigationPanelInput": NavigationPanelInput,
   "ObjectIDAndName": ObjectIDAndName,
   "ObjectPrivilegesMetadataInput": ObjectPrivilegesMetadataInput,
   "ObjectPrivilegesOfMetadataResponse": ObjectPrivilegesOfMetadataResponse,
@@ -18567,6 +19419,8 @@ var typeMap = {
   "SearchSchedulesRequestHistoryRunsOptions": SearchSchedulesRequestHistoryRunsOptions,
   "SearchSchedulesRequestSortOptions": SearchSchedulesRequestSortOptions,
   "SearchSecuritySettingsRequest": SearchSecuritySettingsRequest,
+  "SearchStyleCustomizationsRequest": SearchStyleCustomizationsRequest,
+  "SearchStyleFontsRequest": SearchStyleFontsRequest,
   "SearchTagsRequest": SearchTagsRequest,
   "SearchUserGroupsRequest": SearchUserGroupsRequest,
   "SearchUserGroupsRequestSortOptions": SearchUserGroupsRequestSortOptions,
@@ -18602,12 +19456,31 @@ var typeMap = {
   "StorageConfigInput": StorageConfigInput,
   "StorageDestination": StorageDestination,
   "StorageDestinationInput": StorageDestinationInput,
+  "StyleChartColorPalette": StyleChartColorPalette,
+  "StyleColorEntry": StyleColorEntry,
+  "StyleColorEntryInput": StyleColorEntryInput,
+  "StyleColorPaletteInput": StyleColorPaletteInput,
+  "StyleEmbeddedFooterText": StyleEmbeddedFooterText,
+  "StyleFontAssignment": StyleFontAssignment,
+  "StyleFontDeleteAffectedAssignment": StyleFontDeleteAffectedAssignment,
+  "StyleFontDeleteData": StyleFontDeleteData,
+  "StyleFontRecord": StyleFontRecord,
+  "StyleFontUploadData": StyleFontUploadData,
+  "StyleLogoSlot": StyleLogoSlot,
+  "StyleLogoStatus": StyleLogoStatus,
+  "StyleNavigationPanel": StyleNavigationPanel,
+  "StyleOrgInfo": StyleOrgInfo,
+  "StylePreference": StylePreference,
+  "StyleResetOptionsInput": StyleResetOptionsInput,
+  "StyleVisualizationFonts": StyleVisualizationFonts,
   "SyncMetadataRequest": SyncMetadataRequest,
   "SyncMetadataResponse": SyncMetadataResponse,
   "SystemConfig": SystemConfig,
   "SystemInfo": SystemInfo,
   "SystemOverrideInfo": SystemOverrideInfo,
   "Table": Table,
+  "TableFontAssignmentInput": TableFontAssignmentInput,
+  "TableVisualizationFontRecord": TableVisualizationFontRecord,
   "Tag": Tag,
   "TagMetadataTypeInput": TagMetadataTypeInput,
   "TemplatePropertiesInputCreate": TemplatePropertiesInputCreate,
@@ -18643,6 +19516,7 @@ var typeMap = {
   "UpdateScheduleRequestLiveboardOptions": UpdateScheduleRequestLiveboardOptions,
   "UpdateScheduleRequestPdfOptions": UpdateScheduleRequestPdfOptions,
   "UpdateScheduleRequestRecipientDetails": UpdateScheduleRequestRecipientDetails,
+  "UpdateStyleFontRequest": UpdateStyleFontRequest,
   "UpdateSystemConfigRequest": UpdateSystemConfigRequest,
   "UpdateTagRequest": UpdateTagRequest,
   "UpdateUserGroupRequest": UpdateUserGroupRequest,
@@ -18668,6 +19542,7 @@ var typeMap = {
   "VariableUpdateScopeInput": VariableUpdateScopeInput,
   "VariableValue": VariableValue,
   "VariableValues": VariableValues,
+  "VisualizationFontsInput": VisualizationFontsInput,
   "WebhookAuthApiKey": WebhookAuthApiKey,
   "WebhookAuthApiKeyInput": WebhookAuthApiKeyInput,
   "WebhookAuthBasicAuth": WebhookAuthBasicAuth,
@@ -48280,6 +49155,8 @@ export {
   ChannelValidationAwsS3Info,
   ChannelValidationDetail,
   ChannelValidationGcpGcsInfo,
+  ChartFontAssignmentInput,
+  ChartVisualizationFontRecord,
   ClusterNonEmbedAccess,
   ClusterNonEmbedAccessInput,
   Collection,
@@ -48380,6 +49257,7 @@ export {
   DeleteMetadataRequest,
   DeleteMetadataTypeInput,
   DeleteOrgEmailCustomizationRequest,
+  DeleteStyleFontsRequest,
   DeleteVariablesRequest,
   DeleteWebhookConfigurationsRequest,
   DeployCommitRequest,
@@ -48409,6 +49287,7 @@ export {
   ExportMetadataTMLRequestExportOptions,
   ExportMetadataTypeInput,
   ExportOptions,
+  ExportStyleLogosRequest,
   ExternalTableInput,
   FavoriteMetadataInput,
   FavoriteMetadataItem,
@@ -48487,6 +49366,7 @@ export {
   ModelTableList,
   NLInstructionsInfo,
   NLInstructionsInfoInput,
+  NavigationPanelInput,
   ObjectIDAndName,
   ObjectPrivilegesMetadataInput,
   ObjectPrivilegesOfMetadataResponse,
@@ -48600,6 +49480,8 @@ export {
   SearchSchedulesRequestHistoryRunsOptions,
   SearchSchedulesRequestSortOptions,
   SearchSecuritySettingsRequest,
+  SearchStyleCustomizationsRequest,
+  SearchStyleFontsRequest,
   SearchTagsRequest,
   SearchUserGroupsRequest,
   SearchUserGroupsRequestSortOptions,
@@ -48638,6 +49520,23 @@ export {
   StorageConfigInput,
   StorageDestination,
   StorageDestinationInput,
+  StyleChartColorPalette,
+  StyleColorEntry,
+  StyleColorEntryInput,
+  StyleColorPaletteInput,
+  StyleEmbeddedFooterText,
+  StyleFontAssignment,
+  StyleFontDeleteAffectedAssignment,
+  StyleFontDeleteData,
+  StyleFontRecord,
+  StyleFontUploadData,
+  StyleLogoSlot,
+  StyleLogoStatus,
+  StyleNavigationPanel,
+  StyleOrgInfo,
+  StylePreference,
+  StyleResetOptionsInput,
+  StyleVisualizationFonts,
   SyncMetadataRequest,
   SyncMetadataResponse,
   PromiseSystemApi as SystemApi,
@@ -48645,6 +49544,8 @@ export {
   SystemInfo,
   SystemOverrideInfo,
   Table,
+  TableFontAssignmentInput,
+  TableVisualizationFontRecord,
   Tag,
   TagMetadataTypeInput,
   PromiseTagsApi as TagsApi,
@@ -48682,6 +49583,7 @@ export {
   UpdateScheduleRequestLiveboardOptions,
   UpdateScheduleRequestPdfOptions,
   UpdateScheduleRequestRecipientDetails,
+  UpdateStyleFontRequest,
   UpdateSystemConfigRequest,
   UpdateTagRequest,
   UpdateUserGroupRequest,
@@ -48709,6 +49611,7 @@ export {
   VariableValue,
   VariableValues,
   PromiseVersionControlApi as VersionControlApi,
+  VisualizationFontsInput,
   WebhookAuthApiKey,
   WebhookAuthApiKeyInput,
   WebhookAuthBasicAuth,

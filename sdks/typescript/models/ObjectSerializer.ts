@@ -44,6 +44,8 @@ export * from '../models/ChannelHistoryJob';
 export * from '../models/ChannelValidationAwsS3Info';
 export * from '../models/ChannelValidationDetail';
 export * from '../models/ChannelValidationGcpGcsInfo';
+export * from '../models/ChartFontAssignmentInput';
+export * from '../models/ChartVisualizationFontRecord';
 export * from '../models/ClusterNonEmbedAccess';
 export * from '../models/ClusterNonEmbedAccessInput';
 export * from '../models/Collection';
@@ -138,6 +140,7 @@ export * from '../models/DeleteConnectionRequest';
 export * from '../models/DeleteMetadataRequest';
 export * from '../models/DeleteMetadataTypeInput';
 export * from '../models/DeleteOrgEmailCustomizationRequest';
+export * from '../models/DeleteStyleFontsRequest';
 export * from '../models/DeleteVariablesRequest';
 export * from '../models/DeleteWebhookConfigurationsRequest';
 export * from '../models/DeployCommitRequest';
@@ -166,6 +169,7 @@ export * from '../models/ExportMetadataTMLRequest';
 export * from '../models/ExportMetadataTMLRequestExportOptions';
 export * from '../models/ExportMetadataTypeInput';
 export * from '../models/ExportOptions';
+export * from '../models/ExportStyleLogosRequest';
 export * from '../models/ExternalTableInput';
 export * from '../models/FavoriteMetadataInput';
 export * from '../models/FavoriteMetadataItem';
@@ -238,6 +242,7 @@ export * from '../models/MetadataSearchSortOptions';
 export * from '../models/ModelTableList';
 export * from '../models/NLInstructionsInfo';
 export * from '../models/NLInstructionsInfoInput';
+export * from '../models/NavigationPanelInput';
 export * from '../models/ObjectIDAndName';
 export * from '../models/ObjectPrivilegesMetadataInput';
 export * from '../models/ObjectPrivilegesOfMetadataResponse';
@@ -344,6 +349,8 @@ export * from '../models/SearchSchedulesRequest';
 export * from '../models/SearchSchedulesRequestHistoryRunsOptions';
 export * from '../models/SearchSchedulesRequestSortOptions';
 export * from '../models/SearchSecuritySettingsRequest';
+export * from '../models/SearchStyleCustomizationsRequest';
+export * from '../models/SearchStyleFontsRequest';
 export * from '../models/SearchTagsRequest';
 export * from '../models/SearchUserGroupsRequest';
 export * from '../models/SearchUserGroupsRequestSortOptions';
@@ -379,12 +386,31 @@ export * from '../models/StorageConfig';
 export * from '../models/StorageConfigInput';
 export * from '../models/StorageDestination';
 export * from '../models/StorageDestinationInput';
+export * from '../models/StyleChartColorPalette';
+export * from '../models/StyleColorEntry';
+export * from '../models/StyleColorEntryInput';
+export * from '../models/StyleColorPaletteInput';
+export * from '../models/StyleEmbeddedFooterText';
+export * from '../models/StyleFontAssignment';
+export * from '../models/StyleFontDeleteAffectedAssignment';
+export * from '../models/StyleFontDeleteData';
+export * from '../models/StyleFontRecord';
+export * from '../models/StyleFontUploadData';
+export * from '../models/StyleLogoSlot';
+export * from '../models/StyleLogoStatus';
+export * from '../models/StyleNavigationPanel';
+export * from '../models/StyleOrgInfo';
+export * from '../models/StylePreference';
+export * from '../models/StyleResetOptionsInput';
+export * from '../models/StyleVisualizationFonts';
 export * from '../models/SyncMetadataRequest';
 export * from '../models/SyncMetadataResponse';
 export * from '../models/SystemConfig';
 export * from '../models/SystemInfo';
 export * from '../models/SystemOverrideInfo';
 export * from '../models/Table';
+export * from '../models/TableFontAssignmentInput';
+export * from '../models/TableVisualizationFontRecord';
 export * from '../models/Tag';
 export * from '../models/TagMetadataTypeInput';
 export * from '../models/TemplatePropertiesInputCreate';
@@ -420,6 +446,7 @@ export * from '../models/UpdateScheduleRequestFrequency';
 export * from '../models/UpdateScheduleRequestLiveboardOptions';
 export * from '../models/UpdateScheduleRequestPdfOptions';
 export * from '../models/UpdateScheduleRequestRecipientDetails';
+export * from '../models/UpdateStyleFontRequest';
 export * from '../models/UpdateSystemConfigRequest';
 export * from '../models/UpdateTagRequest';
 export * from '../models/UpdateUserGroupRequest';
@@ -445,6 +472,7 @@ export * from '../models/VariableUpdateAssignmentInput';
 export * from '../models/VariableUpdateScopeInput';
 export * from '../models/VariableValue';
 export * from '../models/VariableValues';
+export * from '../models/VisualizationFontsInput';
 export * from '../models/WebhookAuthApiKey';
 export * from '../models/WebhookAuthApiKeyInput';
 export * from '../models/WebhookAuthBasicAuth';
@@ -512,6 +540,8 @@ import { ChannelHistoryJob , ChannelHistoryJobStatusEnum        } from '../model
 import { ChannelValidationAwsS3Info } from '../models/ChannelValidationAwsS3Info';
 import { ChannelValidationDetail, ChannelValidationDetailValidationStepEnum  , ChannelValidationDetailStatusEnum       } from '../models/ChannelValidationDetail';
 import { ChannelValidationGcpGcsInfo } from '../models/ChannelValidationGcpGcsInfo';
+import { ChartFontAssignmentInput, ChartFontAssignmentInputVisualizationAreaEnum    } from '../models/ChartFontAssignmentInput';
+import { ChartVisualizationFontRecord, ChartVisualizationFontRecordVisualizationAreaEnum      } from '../models/ChartVisualizationFontRecord';
 import { ClusterNonEmbedAccess } from '../models/ClusterNonEmbedAccess';
 import { ClusterNonEmbedAccessInput } from '../models/ClusterNonEmbedAccessInput';
 import { Collection } from '../models/Collection';
@@ -606,6 +636,7 @@ import { DeleteConnectionRequest } from '../models/DeleteConnectionRequest';
 import { DeleteMetadataRequest } from '../models/DeleteMetadataRequest';
 import { DeleteMetadataTypeInput, DeleteMetadataTypeInputTypeEnum    } from '../models/DeleteMetadataTypeInput';
 import { DeleteOrgEmailCustomizationRequest } from '../models/DeleteOrgEmailCustomizationRequest';
+import { DeleteStyleFontsRequest, DeleteStyleFontsRequestScopeEnum     } from '../models/DeleteStyleFontsRequest';
 import { DeleteVariablesRequest } from '../models/DeleteVariablesRequest';
 import { DeleteWebhookConfigurationsRequest } from '../models/DeleteWebhookConfigurationsRequest';
 import { DeployCommitRequest  , DeployCommitRequestDeployTypeEnum  , DeployCommitRequestDeployPolicyEnum   } from '../models/DeployCommitRequest';
@@ -634,6 +665,7 @@ import { ExportMetadataTMLRequest   , ExportMetadataTMLRequestEdocFormatEnum  , 
 import { ExportMetadataTMLRequestExportOptions } from '../models/ExportMetadataTMLRequestExportOptions';
 import { ExportMetadataTypeInput, ExportMetadataTypeInputTypeEnum      } from '../models/ExportMetadataTypeInput';
 import { ExportOptions } from '../models/ExportOptions';
+import { ExportStyleLogosRequest, ExportStyleLogosRequestScopeEnum   } from '../models/ExportStyleLogosRequest';
 import { ExternalTableInput } from '../models/ExternalTableInput';
 import { FavoriteMetadataInput , FavoriteMetadataInputTypeEnum   } from '../models/FavoriteMetadataInput';
 import { FavoriteMetadataItem  , FavoriteMetadataItemTypeEnum   } from '../models/FavoriteMetadataItem';
@@ -706,6 +738,7 @@ import { MetadataSearchSortOptions, MetadataSearchSortOptionsFieldNameEnum  , Me
 import { ModelTableList } from '../models/ModelTableList';
 import { NLInstructionsInfo , NLInstructionsInfoScopeEnum   } from '../models/NLInstructionsInfo';
 import { NLInstructionsInfoInput , NLInstructionsInfoInputScopeEnum   } from '../models/NLInstructionsInfoInput';
+import { NavigationPanelInput, NavigationPanelInputThemeEnum    } from '../models/NavigationPanelInput';
 import { ObjectIDAndName } from '../models/ObjectIDAndName';
 import { ObjectPrivilegesMetadataInput, ObjectPrivilegesMetadataInputTypeEnum    } from '../models/ObjectPrivilegesMetadataInput';
 import { ObjectPrivilegesOfMetadataResponse } from '../models/ObjectPrivilegesOfMetadataResponse';
@@ -812,6 +845,8 @@ import { SearchSchedulesRequest } from '../models/SearchSchedulesRequest';
 import { SearchSchedulesRequestHistoryRunsOptions } from '../models/SearchSchedulesRequestHistoryRunsOptions';
 import { SearchSchedulesRequestSortOptions } from '../models/SearchSchedulesRequestSortOptions';
 import { SearchSecuritySettingsRequest, SearchSecuritySettingsRequestScopeEnum   } from '../models/SearchSecuritySettingsRequest';
+import { SearchStyleCustomizationsRequest, SearchStyleCustomizationsRequestScopeEnum   } from '../models/SearchStyleCustomizationsRequest';
+import { SearchStyleFontsRequest, SearchStyleFontsRequestScopeEnum      } from '../models/SearchStyleFontsRequest';
 import { SearchTagsRequest } from '../models/SearchTagsRequest';
 import { SearchUserGroupsRequest      , SearchUserGroupsRequestPrivilegesEnum   , SearchUserGroupsRequestTypeEnum   , SearchUserGroupsRequestVisibilityEnum         } from '../models/SearchUserGroupsRequest';
 import { SearchUserGroupsRequestSortOptions, SearchUserGroupsRequestSortOptionsFieldNameEnum  , SearchUserGroupsRequestSortOptionsOrderEnum   } from '../models/SearchUserGroupsRequestSortOptions';
@@ -847,12 +882,31 @@ import { StorageConfig } from '../models/StorageConfig';
 import { StorageConfigInput } from '../models/StorageConfigInput';
 import { StorageDestination, StorageDestinationStorageTypeEnum    } from '../models/StorageDestination';
 import { StorageDestinationInput, StorageDestinationInputStorageTypeEnum    } from '../models/StorageDestinationInput';
+import { StyleChartColorPalette } from '../models/StyleChartColorPalette';
+import { StyleColorEntry } from '../models/StyleColorEntry';
+import { StyleColorEntryInput } from '../models/StyleColorEntryInput';
+import { StyleColorPaletteInput } from '../models/StyleColorPaletteInput';
+import { StyleEmbeddedFooterText } from '../models/StyleEmbeddedFooterText';
+import { StyleFontAssignment , StyleFontAssignmentVisualizationAreasEnum   } from '../models/StyleFontAssignment';
+import { StyleFontDeleteAffectedAssignment , StyleFontDeleteAffectedAssignmentVisualizationAreasEnum   } from '../models/StyleFontDeleteAffectedAssignment';
+import { StyleFontDeleteData } from '../models/StyleFontDeleteData';
+import { StyleFontRecord , StyleFontRecordScopeEnum    , StyleFontRecordWeightEnum  , StyleFontRecordStyleEnum      } from '../models/StyleFontRecord';
+import { StyleFontUploadData } from '../models/StyleFontUploadData';
+import { StyleLogoSlot } from '../models/StyleLogoSlot';
+import { StyleLogoStatus } from '../models/StyleLogoStatus';
+import { StyleNavigationPanel, StyleNavigationPanelThemeEnum     } from '../models/StyleNavigationPanel';
+import { StyleOrgInfo } from '../models/StyleOrgInfo';
+import { StylePreference, StylePreferenceScopeEnum         } from '../models/StylePreference';
+import { StyleResetOptionsInput, StyleResetOptionsInputStyleEnum  , StyleResetOptionsInputVisualizationAreasEnum   } from '../models/StyleResetOptionsInput';
+import { StyleVisualizationFonts } from '../models/StyleVisualizationFonts';
 import { SyncMetadataRequest , SyncMetadataRequestSyncAttributesEnum   } from '../models/SyncMetadataRequest';
 import { SyncMetadataResponse, SyncMetadataResponseStatusEnum        } from '../models/SyncMetadataResponse';
 import { SystemConfig } from '../models/SystemConfig';
 import { SystemInfo } from '../models/SystemInfo';
 import { SystemOverrideInfo } from '../models/SystemOverrideInfo';
 import { Table } from '../models/Table';
+import { TableFontAssignmentInput, TableFontAssignmentInputVisualizationAreaEnum    } from '../models/TableFontAssignmentInput';
+import { TableVisualizationFontRecord, TableVisualizationFontRecordVisualizationAreaEnum      } from '../models/TableVisualizationFontRecord';
 import { Tag } from '../models/Tag';
 import { TagMetadataTypeInput, TagMetadataTypeInputTypeEnum    } from '../models/TagMetadataTypeInput';
 import { TemplatePropertiesInputCreate } from '../models/TemplatePropertiesInputCreate';
@@ -888,6 +942,7 @@ import { UpdateScheduleRequestFrequency } from '../models/UpdateScheduleRequestF
 import { UpdateScheduleRequestLiveboardOptions } from '../models/UpdateScheduleRequestLiveboardOptions';
 import { UpdateScheduleRequestPdfOptions       , UpdateScheduleRequestPdfOptionsPageSizeEnum    } from '../models/UpdateScheduleRequestPdfOptions';
 import { UpdateScheduleRequestRecipientDetails } from '../models/UpdateScheduleRequestRecipientDetails';
+import { UpdateStyleFontRequest, UpdateStyleFontRequestScopeEnum   , UpdateStyleFontRequestWeightEnum  , UpdateStyleFontRequestStyleEnum    } from '../models/UpdateStyleFontRequest';
 import { UpdateSystemConfigRequest } from '../models/UpdateSystemConfigRequest';
 import { UpdateTagRequest } from '../models/UpdateTagRequest';
 import { UpdateUserGroupRequest    , UpdateUserGroupRequestPrivilegesEnum   , UpdateUserGroupRequestTypeEnum   , UpdateUserGroupRequestVisibilityEnum   , UpdateUserGroupRequestOperationEnum   } from '../models/UpdateUserGroupRequest';
@@ -913,6 +968,7 @@ import { VariableUpdateAssignmentInput  , VariableUpdateAssignmentInputOperation
 import { VariableUpdateScopeInput , VariableUpdateScopeInputPrincipalTypeEnum      } from '../models/VariableUpdateScopeInput';
 import { VariableValue   , VariableValuePrincipalTypeEnum      } from '../models/VariableValue';
 import { VariableValues } from '../models/VariableValues';
+import { VisualizationFontsInput } from '../models/VisualizationFontsInput';
 import { WebhookAuthApiKey } from '../models/WebhookAuthApiKey';
 import { WebhookAuthApiKeyInput } from '../models/WebhookAuthApiKeyInput';
 import { WebhookAuthBasicAuth } from '../models/WebhookAuthBasicAuth';
@@ -968,6 +1024,8 @@ let enumsMap: Set<string> = new Set<string>([
     "ChannelHistoryJobStatusEnum",
     "ChannelValidationDetailValidationStepEnum",
     "ChannelValidationDetailStatusEnum",
+    "ChartFontAssignmentInputVisualizationAreaEnum",
+    "ChartVisualizationFontRecordVisualizationAreaEnum",
     "CollectionMetadataInputTypeEnum",
     "ColumnSecurityRuleGroupOperationOperationEnum",
     "CommunicationChannelValidateResponseChannelTypeEnum",
@@ -1011,6 +1069,7 @@ let enumsMap: Set<string> = new Set<string>([
     "CreateWebhookConfigurationRequestStorageDestinationStorageTypeEnum",
     "CustomActionMetadataTypeInputTypeEnum",
     "DeleteMetadataTypeInputTypeEnum",
+    "DeleteStyleFontsRequestScopeEnum",
     "DeployCommitRequestDeployTypeEnum",
     "DeployCommitRequestDeployPolicyEnum",
     "EventChannelConfigEventTypeEnum",
@@ -1032,6 +1091,7 @@ let enumsMap: Set<string> = new Set<string>([
     "ExportMetadataTMLRequestEdocFormatEnum",
     "ExportMetadataTMLRequestExportSchemaVersionEnum",
     "ExportMetadataTypeInputTypeEnum",
+    "ExportStyleLogosRequestScopeEnum",
     "FavoriteMetadataInputTypeEnum",
     "FavoriteMetadataItemTypeEnum",
     "FetchAnswerDataRequestDataFormatEnum",
@@ -1071,6 +1131,7 @@ let enumsMap: Set<string> = new Set<string>([
     "MetadataSearchSortOptionsOrderEnum",
     "NLInstructionsInfoScopeEnum",
     "NLInstructionsInfoInputScopeEnum",
+    "NavigationPanelInputThemeEnum",
     "ObjectPrivilegesMetadataInputTypeEnum",
     "OrgChannelConfigInputOperationEnum",
     "OrgChannelConfigInputResetEventsEnum",
@@ -1131,6 +1192,8 @@ let enumsMap: Set<string> = new Set<string>([
     "SearchRolesRequestPrivilegesEnum",
     "SearchRolesRequestPermissionsEnum",
     "SearchSecuritySettingsRequestScopeEnum",
+    "SearchStyleCustomizationsRequestScopeEnum",
+    "SearchStyleFontsRequestScopeEnum",
     "SearchUserGroupsRequestPrivilegesEnum",
     "SearchUserGroupsRequestTypeEnum",
     "SearchUserGroupsRequestVisibilityEnum",
@@ -1159,8 +1222,19 @@ let enumsMap: Set<string> = new Set<string>([
     "SqlQueryResponseMetadataTypeEnum",
     "StorageDestinationStorageTypeEnum",
     "StorageDestinationInputStorageTypeEnum",
+    "StyleFontAssignmentVisualizationAreasEnum",
+    "StyleFontDeleteAffectedAssignmentVisualizationAreasEnum",
+    "StyleFontRecordScopeEnum",
+    "StyleFontRecordWeightEnum",
+    "StyleFontRecordStyleEnum",
+    "StyleNavigationPanelThemeEnum",
+    "StylePreferenceScopeEnum",
+    "StyleResetOptionsInputStyleEnum",
+    "StyleResetOptionsInputVisualizationAreasEnum",
     "SyncMetadataRequestSyncAttributesEnum",
     "SyncMetadataResponseStatusEnum",
+    "TableFontAssignmentInputVisualizationAreaEnum",
+    "TableVisualizationFontRecordVisualizationAreaEnum",
     "TagMetadataTypeInputTypeEnum",
     "TokenAccessScopeObjectTypeEnum",
     "UnparameterizeMetadataRequestMetadataTypeEnum",
@@ -1183,6 +1257,9 @@ let enumsMap: Set<string> = new Set<string>([
     "UpdateScheduleRequestTimeZoneEnum",
     "UpdateScheduleRequestStatusEnum",
     "UpdateScheduleRequestPdfOptionsPageSizeEnum",
+    "UpdateStyleFontRequestScopeEnum",
+    "UpdateStyleFontRequestWeightEnum",
+    "UpdateStyleFontRequestStyleEnum",
     "UpdateUserGroupRequestPrivilegesEnum",
     "UpdateUserGroupRequestTypeEnum",
     "UpdateUserGroupRequestVisibilityEnum",
@@ -1266,6 +1343,8 @@ let typeMap: {[index: string]: any} = {
     "ChannelValidationAwsS3Info": ChannelValidationAwsS3Info,
     "ChannelValidationDetail": ChannelValidationDetail,
     "ChannelValidationGcpGcsInfo": ChannelValidationGcpGcsInfo,
+    "ChartFontAssignmentInput": ChartFontAssignmentInput,
+    "ChartVisualizationFontRecord": ChartVisualizationFontRecord,
     "ClusterNonEmbedAccess": ClusterNonEmbedAccess,
     "ClusterNonEmbedAccessInput": ClusterNonEmbedAccessInput,
     "Collection": Collection,
@@ -1360,6 +1439,7 @@ let typeMap: {[index: string]: any} = {
     "DeleteMetadataRequest": DeleteMetadataRequest,
     "DeleteMetadataTypeInput": DeleteMetadataTypeInput,
     "DeleteOrgEmailCustomizationRequest": DeleteOrgEmailCustomizationRequest,
+    "DeleteStyleFontsRequest": DeleteStyleFontsRequest,
     "DeleteVariablesRequest": DeleteVariablesRequest,
     "DeleteWebhookConfigurationsRequest": DeleteWebhookConfigurationsRequest,
     "DeployCommitRequest": DeployCommitRequest,
@@ -1388,6 +1468,7 @@ let typeMap: {[index: string]: any} = {
     "ExportMetadataTMLRequestExportOptions": ExportMetadataTMLRequestExportOptions,
     "ExportMetadataTypeInput": ExportMetadataTypeInput,
     "ExportOptions": ExportOptions,
+    "ExportStyleLogosRequest": ExportStyleLogosRequest,
     "ExternalTableInput": ExternalTableInput,
     "FavoriteMetadataInput": FavoriteMetadataInput,
     "FavoriteMetadataItem": FavoriteMetadataItem,
@@ -1460,6 +1541,7 @@ let typeMap: {[index: string]: any} = {
     "ModelTableList": ModelTableList,
     "NLInstructionsInfo": NLInstructionsInfo,
     "NLInstructionsInfoInput": NLInstructionsInfoInput,
+    "NavigationPanelInput": NavigationPanelInput,
     "ObjectIDAndName": ObjectIDAndName,
     "ObjectPrivilegesMetadataInput": ObjectPrivilegesMetadataInput,
     "ObjectPrivilegesOfMetadataResponse": ObjectPrivilegesOfMetadataResponse,
@@ -1566,6 +1648,8 @@ let typeMap: {[index: string]: any} = {
     "SearchSchedulesRequestHistoryRunsOptions": SearchSchedulesRequestHistoryRunsOptions,
     "SearchSchedulesRequestSortOptions": SearchSchedulesRequestSortOptions,
     "SearchSecuritySettingsRequest": SearchSecuritySettingsRequest,
+    "SearchStyleCustomizationsRequest": SearchStyleCustomizationsRequest,
+    "SearchStyleFontsRequest": SearchStyleFontsRequest,
     "SearchTagsRequest": SearchTagsRequest,
     "SearchUserGroupsRequest": SearchUserGroupsRequest,
     "SearchUserGroupsRequestSortOptions": SearchUserGroupsRequestSortOptions,
@@ -1601,12 +1685,31 @@ let typeMap: {[index: string]: any} = {
     "StorageConfigInput": StorageConfigInput,
     "StorageDestination": StorageDestination,
     "StorageDestinationInput": StorageDestinationInput,
+    "StyleChartColorPalette": StyleChartColorPalette,
+    "StyleColorEntry": StyleColorEntry,
+    "StyleColorEntryInput": StyleColorEntryInput,
+    "StyleColorPaletteInput": StyleColorPaletteInput,
+    "StyleEmbeddedFooterText": StyleEmbeddedFooterText,
+    "StyleFontAssignment": StyleFontAssignment,
+    "StyleFontDeleteAffectedAssignment": StyleFontDeleteAffectedAssignment,
+    "StyleFontDeleteData": StyleFontDeleteData,
+    "StyleFontRecord": StyleFontRecord,
+    "StyleFontUploadData": StyleFontUploadData,
+    "StyleLogoSlot": StyleLogoSlot,
+    "StyleLogoStatus": StyleLogoStatus,
+    "StyleNavigationPanel": StyleNavigationPanel,
+    "StyleOrgInfo": StyleOrgInfo,
+    "StylePreference": StylePreference,
+    "StyleResetOptionsInput": StyleResetOptionsInput,
+    "StyleVisualizationFonts": StyleVisualizationFonts,
     "SyncMetadataRequest": SyncMetadataRequest,
     "SyncMetadataResponse": SyncMetadataResponse,
     "SystemConfig": SystemConfig,
     "SystemInfo": SystemInfo,
     "SystemOverrideInfo": SystemOverrideInfo,
     "Table": Table,
+    "TableFontAssignmentInput": TableFontAssignmentInput,
+    "TableVisualizationFontRecord": TableVisualizationFontRecord,
     "Tag": Tag,
     "TagMetadataTypeInput": TagMetadataTypeInput,
     "TemplatePropertiesInputCreate": TemplatePropertiesInputCreate,
@@ -1642,6 +1745,7 @@ let typeMap: {[index: string]: any} = {
     "UpdateScheduleRequestLiveboardOptions": UpdateScheduleRequestLiveboardOptions,
     "UpdateScheduleRequestPdfOptions": UpdateScheduleRequestPdfOptions,
     "UpdateScheduleRequestRecipientDetails": UpdateScheduleRequestRecipientDetails,
+    "UpdateStyleFontRequest": UpdateStyleFontRequest,
     "UpdateSystemConfigRequest": UpdateSystemConfigRequest,
     "UpdateTagRequest": UpdateTagRequest,
     "UpdateUserGroupRequest": UpdateUserGroupRequest,
@@ -1667,6 +1771,7 @@ let typeMap: {[index: string]: any} = {
     "VariableUpdateScopeInput": VariableUpdateScopeInput,
     "VariableValue": VariableValue,
     "VariableValues": VariableValues,
+    "VisualizationFontsInput": VisualizationFontsInput,
     "WebhookAuthApiKey": WebhookAuthApiKey,
     "WebhookAuthApiKeyInput": WebhookAuthApiKeyInput,
     "WebhookAuthBasicAuth": WebhookAuthBasicAuth,

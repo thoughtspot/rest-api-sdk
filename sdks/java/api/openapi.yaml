@@ -13433,6 +13433,294 @@ components:
       required:
       - type
       type: object
+    StylePreference:
+      description: Style preferences for a single scope entry.
+      properties:
+        scope:
+          description: Scope at which these style preferences apply.
+          enum:
+          - CLUSTER
+          - ORG
+          nullable: true
+          type: string
+        org:
+          $ref: '#/components/schemas/StyleOrgInfo'
+        navigation_panel:
+          $ref: '#/components/schemas/StyleNavigationPanel'
+        chart_color_palette:
+          $ref: '#/components/schemas/StyleChartColorPalette'
+        embedded_footer_text:
+          $ref: '#/components/schemas/StyleEmbeddedFooterText'
+        logo:
+          $ref: '#/components/schemas/StyleLogoStatus'
+        visualization_fonts:
+          $ref: '#/components/schemas/StyleVisualizationFonts'
+      type: object
+    StyleOrgInfo:
+      description: Org information returned in style API responses.
+      properties:
+        id:
+          description: Unique integer ID of the org.
+          format: int32
+          nullable: true
+          type: integer
+        name:
+          description: Name of the org.
+          nullable: true
+          type: string
+      type: object
+    StyleNavigationPanel:
+      description: Navigation panel color configuration for a specific scope.
+      properties:
+        theme:
+          description: Navigation panel color mode.
+          enum:
+          - DARK
+          - TWO_TONE
+          - CUSTOM
+          nullable: true
+          type: string
+        base_color:
+          description: Base color as a 6-digit hex string. Present only when theme
+            is CUSTOM.
+          nullable: true
+          type: string
+        is_overridden:
+          description: "True if explicitly set at this scope, overriding any inherited\
+            \ value."
+          nullable: true
+          type: boolean
+      type: object
+    StyleChartColorPalette:
+      description: Chart color palette configuration for a specific scope.
+      properties:
+        colors:
+          description: Ordered array of 8 color entries.
+          items:
+            $ref: '#/components/schemas/StyleColorEntry'
+          nullable: true
+          type: array
+        disable_color_rotation:
+          description: "When true, automatic color rotation across chart data series\
+            \ is disabled."
+          nullable: true
+          type: boolean
+        is_overridden:
+          description: "True if explicitly set at this scope, overriding any inherited\
+            \ value."
+          nullable: true
+          type: boolean
+      type: object
+    StyleColorEntry:
+      description: A single color entry in the chart color palette.
+      properties:
+        primary:
+          description: Primary color as a 6-digit hex string.
+          nullable: true
+          type: string
+        secondary:
+          description: Array of 4 secondary shade hex strings.
+          items:
+            type: string
+          nullable: true
+          type: array
+      type: object
+    StyleEmbeddedFooterText:
+      description: Embedded footer text configuration for a specific scope.
+      properties:
+        value:
+          description: Footer text value. Empty string indicates no footer is set.
+          nullable: true
+          type: string
+        is_overridden:
+          description: "True if explicitly set at this scope, overriding any inherited\
+            \ value."
+          nullable: true
+          type: boolean
+      type: object
+    StyleLogoStatus:
+      description: Logo status per slot.
+      properties:
+        default_logo:
+          $ref: '#/components/schemas/StyleLogoSlot'
+        wide_logo:
+          $ref: '#/components/schemas/StyleLogoSlot'
+      type: object
+    StyleLogoSlot:
+      description: Status of a single logo slot.
+      properties:
+        id:
+          description: UUID of the active logo.
+          nullable: true
+          type: string
+        is_overridden:
+          description: |-
+            True if a custom logo is uploaded at this scope. False if the system
+            default or cluster logo is active.
+          nullable: true
+          type: boolean
+      type: object
+    StyleVisualizationFonts:
+      description: Effective font assignments per visualization type.
+      properties:
+        chart_visualization_fonts:
+          description: Font assignments for chart visualization areas.
+          items:
+            $ref: '#/components/schemas/ChartVisualizationFontRecord'
+          nullable: true
+          type: array
+        table_visualization_fonts:
+          description: Font assignments for table visualization areas.
+          items:
+            $ref: '#/components/schemas/TableVisualizationFontRecord'
+          nullable: true
+          type: array
+      type: object
+    ChartVisualizationFontRecord:
+      description: Font assignment for a chart visualization area in the response.
+      properties:
+        visualization_area:
+          description: Chart visualization area.
+          enum:
+          - CHART_X_AXIS_LABELS
+          - CHART_X_AXIS_TITLE
+          - CHART_Y_AXIS_LABELS
+          - CHART_Y_AXIS_TITLE
+          - CHART_TOOLTIP
+          - CHART_SCATTER_DATA_LABELS
+          - CHART_DONUT_DATA_LABELS
+          - CHART_LINE_DATA_LABELS
+          - CHART_COLUMN_DATA_LABELS
+          - CHART_BAR_DATA_LABELS
+          - CHART_AREA_DATA_LABELS
+          nullable: true
+          type: string
+        font_id:
+          description: |-
+            UUID of the font assigned to this area. Null when the system default font
+            is active.
+          nullable: true
+          type: string
+        font_name:
+          description: |-
+            Display name of the font assigned to this area. Null when the system
+            default font is active.
+          nullable: true
+          type: string
+        is_overridden:
+          description: "True if explicitly set at this scope, overriding any inherited\
+            \ value."
+          nullable: true
+          type: boolean
+      type: object
+    TableVisualizationFontRecord:
+      description: Font assignment for a table visualization area in the response.
+      properties:
+        visualization_area:
+          description: Table visualization area.
+          enum:
+          - TABLE_VALUE_CELLS
+          nullable: true
+          type: string
+        font_id:
+          description: |-
+            UUID of the font assigned to this area. Null when the system default font
+            is active.
+          nullable: true
+          type: string
+        font_name:
+          description: |-
+            Display name of the font assigned to this area. Null when the system
+            default font is active.
+          nullable: true
+          type: string
+        is_overridden:
+          description: "True if explicitly set at this scope, overriding any inherited\
+            \ value."
+          nullable: true
+          type: boolean
+      type: object
+    StyleFontRecord:
+      description: A custom font record in the font library.
+      properties:
+        id:
+          description: Unique UUID identifier of the font.
+          type: string
+        scope:
+          description: Scope indicating whether this font belongs to the cluster or
+            org library.
+          enum:
+          - CLUSTER
+          - ORG
+          nullable: true
+          type: string
+        org:
+          $ref: '#/components/schemas/StyleOrgInfo'
+        name:
+          description: Display name of the font.
+          type: string
+        weight:
+          description: Weight of the font.
+          enum:
+          - NORMAL
+          - LIGHT
+          - BOLD
+          nullable: true
+          type: string
+        style:
+          description: Style of the font.
+          enum:
+          - NORMAL
+          - ITALIC
+          - OBLIQUE
+          nullable: true
+          type: string
+        color:
+          description: Color of the font as a 6-digit hex string.
+          nullable: true
+          type: string
+        creation_time_in_millis:
+          description: Timestamp in milliseconds when the font was uploaded.
+          format: float
+          nullable: true
+          type: number
+        assignments:
+          description: |-
+            Visualization areas currently assigned to this font. Empty if not assigned
+            to any area. Populated only when include_font_assignments is true.
+          items:
+            $ref: '#/components/schemas/StyleFontAssignment'
+          nullable: true
+          type: array
+      required:
+      - id
+      - name
+      type: object
+    StyleFontAssignment:
+      description: "Visualization areas assigned to a font, grouped by org context."
+      properties:
+        org:
+          $ref: '#/components/schemas/StyleOrgInfo'
+        visualization_areas:
+          description: Visualization areas using this font.
+          items:
+            enum:
+            - CHART_X_AXIS_LABELS
+            - CHART_X_AXIS_TITLE
+            - CHART_Y_AXIS_LABELS
+            - CHART_Y_AXIS_TITLE
+            - CHART_TOOLTIP
+            - CHART_SCATTER_DATA_LABELS
+            - CHART_DONUT_DATA_LABELS
+            - CHART_LINE_DATA_LABELS
+            - CHART_COLUMN_DATA_LABELS
+            - CHART_BAR_DATA_LABELS
+            - CHART_AREA_DATA_LABELS
+            - TABLE_VALUE_CELLS
+            type: string
+          nullable: true
+          type: array
+      type: object
     GenericInfo:
       example:
         name: name
@@ -17294,6 +17582,212 @@ components:
           description: List of metadata identifiers belonging to the given type.
           items:
             $ref: '#/components/schemas/GenericInfo'
+          nullable: true
+          type: array
+      type: object
+    StyleResetOptionsInput:
+      description: Fields to revert to defaults when operation is RESET.
+      properties:
+        style:
+          description: |-
+            Style fields to reset. Supported values: CHART_COLOR_PALETTE,
+            EMBEDDED_FOOTER_TEXT, NAV_PANEL_COLOR, DEFAULT_LOGO, WIDE_LOGO.
+          items:
+            enum:
+            - CHART_COLOR_PALETTE
+            - EMBEDDED_FOOTER_TEXT
+            - NAV_PANEL_COLOR
+            - DEFAULT_LOGO
+            - WIDE_LOGO
+            type: string
+          nullable: true
+          type: array
+        visualization_areas:
+          description: |-
+            Visualization areas whose font assignments should revert to the system
+            default font.
+          items:
+            enum:
+            - CHART_X_AXIS_LABELS
+            - CHART_X_AXIS_TITLE
+            - CHART_Y_AXIS_LABELS
+            - CHART_Y_AXIS_TITLE
+            - CHART_TOOLTIP
+            - CHART_SCATTER_DATA_LABELS
+            - CHART_DONUT_DATA_LABELS
+            - CHART_LINE_DATA_LABELS
+            - CHART_COLUMN_DATA_LABELS
+            - CHART_BAR_DATA_LABELS
+            - CHART_AREA_DATA_LABELS
+            - TABLE_VALUE_CELLS
+            type: string
+          nullable: true
+          type: array
+      type: object
+    NavigationPanelInput:
+      description: Navigation panel color configuration.
+      properties:
+        theme:
+          description: |-
+            Color mode for the navigation panel. DARK applies the default dark theme.
+            TWO_TONE applies a dual-tone style. CUSTOM enables a user-defined base
+            color; base_color is required when theme is CUSTOM.
+          enum:
+          - DARK
+          - TWO_TONE
+          - CUSTOM
+          nullable: true
+          type: string
+        base_color:
+          description: |-
+            Base color as a 6-digit hex string (e.g. "#2359B6"). Required when theme
+            is CUSTOM.
+          nullable: true
+          type: string
+      type: object
+    StyleColorPaletteInput:
+      description: Chart color palette configuration.
+      properties:
+        colors:
+          description: Ordered array of exactly 8 color entries defining the chart
+            color palette.
+          items:
+            $ref: '#/components/schemas/StyleColorEntryInput'
+          nullable: true
+          type: array
+        disable_color_rotation:
+          description: "When true, disables automatic color rotation across chart\
+            \ data series."
+          nullable: true
+          type: boolean
+      type: object
+    StyleColorEntryInput:
+      description: A single color entry in the chart color palette.
+      properties:
+        primary:
+          description: Primary color as a 6-digit hex string (e.g. "#2359B6"). Required.
+          type: string
+        secondary:
+          description: |-
+            Array of exactly 4 secondary shade hex strings. If omitted, the server
+            auto-generates 4 shades from the primary color. If provided, must contain
+            exactly 4 valid 6-digit hex color strings.
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - primary
+      type: object
+    VisualizationFontsInput:
+      description: Font assignments grouped by visualization type.
+      properties:
+        chart_visualization_fonts:
+          description: |-
+            Font assignments for chart visualization areas. Provide only the areas to
+            update; omitted areas remain unchanged.
+          items:
+            $ref: '#/components/schemas/ChartFontAssignmentInput'
+          nullable: true
+          type: array
+        table_visualization_fonts:
+          description: |-
+            Font assignments for table visualization areas. Provide only the areas to
+            update; omitted areas remain unchanged.
+          items:
+            $ref: '#/components/schemas/TableFontAssignmentInput'
+          nullable: true
+          type: array
+      type: object
+    ChartFontAssignmentInput:
+      description: Font assignment for a single chart visualization area.
+      properties:
+        visualization_area:
+          description: Chart visualization area to assign the font to.
+          enum:
+          - CHART_X_AXIS_LABELS
+          - CHART_X_AXIS_TITLE
+          - CHART_Y_AXIS_LABELS
+          - CHART_Y_AXIS_TITLE
+          - CHART_TOOLTIP
+          - CHART_SCATTER_DATA_LABELS
+          - CHART_DONUT_DATA_LABELS
+          - CHART_LINE_DATA_LABELS
+          - CHART_COLUMN_DATA_LABELS
+          - CHART_BAR_DATA_LABELS
+          - CHART_AREA_DATA_LABELS
+          type: string
+        font_identifier:
+          description: UUID or name of the font to assign to this area.
+          type: string
+      required:
+      - font_identifier
+      - visualization_area
+      type: object
+    TableFontAssignmentInput:
+      description: Font assignment for a single table visualization area.
+      properties:
+        visualization_area:
+          description: Table visualization area to assign the font to.
+          enum:
+          - TABLE_VALUE_CELLS
+          type: string
+        font_identifier:
+          description: UUID or name of the font to assign to this area.
+          type: string
+      required:
+      - font_identifier
+      - visualization_area
+      type: object
+    StyleFontUploadData:
+      description: Font data returned after a successful upload.
+      properties:
+        id:
+          description: Unique UUID identifier of the uploaded font.
+          type: string
+        name:
+          description: Display name of the uploaded font.
+          type: string
+      required:
+      - id
+      - name
+      type: object
+    StyleFontDeleteData:
+      description: Result data for font deletion.
+      properties:
+        affected_assignments:
+          description: |-
+            Visualization areas that used the deleted font(s) and were automatically
+            reset to the system default font. Empty if no areas were affected.
+          items:
+            $ref: '#/components/schemas/StyleFontDeleteAffectedAssignment'
+          nullable: true
+          type: array
+      type: object
+    StyleFontDeleteAffectedAssignment:
+      description: A visualization area assignment affected by a font deletion.
+      properties:
+        org:
+          $ref: '#/components/schemas/StyleOrgInfo'
+        visualization_areas:
+          description: |-
+            Visualization areas that used the deleted font and were automatically reset
+            to the system default font.
+          items:
+            enum:
+            - CHART_X_AXIS_LABELS
+            - CHART_X_AXIS_TITLE
+            - CHART_Y_AXIS_LABELS
+            - CHART_Y_AXIS_TITLE
+            - CHART_TOOLTIP
+            - CHART_SCATTER_DATA_LABELS
+            - CHART_DONUT_DATA_LABELS
+            - CHART_LINE_DATA_LABELS
+            - CHART_COLUMN_DATA_LABELS
+            - CHART_BAR_DATA_LABELS
+            - CHART_AREA_DATA_LABELS
+            - TABLE_VALUE_CELLS
+            type: string
           nullable: true
           type: array
       type: object
@@ -22996,6 +23490,121 @@ components:
       required:
       - column_security_rules
       type: object
+    DeleteStyleFontsRequest:
+      properties:
+        scope:
+          description: |-
+            Scope of the font library to delete from. CLUSTER deletes from the
+            cluster-level library. ORG deletes from the authenticated user's org
+            library. Defaults to ORG if omitted.
+          enum:
+          - CLUSTER
+          - ORG
+          type: string
+        font_identifiers:
+          description: |-
+            UUIDs or names of the fonts to delete. At least one identifier is
+            required.
+          items:
+            type: string
+          type: array
+        dry_run:
+          description: |-
+            When true, returns affected assignments without applying the deletion.
+            Use this to preview the impact before committing. Defaults to true if
+            omitted.
+          nullable: true
+          type: boolean
+      required:
+      - font_identifiers
+      type: object
+    ExportStyleLogosRequest:
+      properties:
+        scope:
+          description: |-
+            Scope of the logos to export. CLUSTER exports cluster-level logos. ORG
+            exports logos for the authenticated user's org, falling back to cluster
+            or defaults if no custom logo is set. Defaults to ORG if
+            omitted.
+          enum:
+          - CLUSTER
+          - ORG
+          type: string
+      type: object
+    SearchStyleCustomizationsRequest:
+      properties:
+        scope:
+          description: |-
+            Scope of the style preferences to retrieve. CLUSTER returns cluster-level
+            defaults. ORG returns preferences for the authenticated user's org, which
+            may override cluster defaults. Defaults to ORG if omitted.
+          enum:
+          - CLUSTER
+          - ORG
+          type: string
+      type: object
+    SearchStyleFontsRequest:
+      properties:
+        scope:
+          description: |-
+            Scope of the font library to search. CLUSTER searches the cluster-level
+            library. ORG searches the authenticated user's org library. Returns both Cluster and Org
+            level font if omitted.
+          enum:
+          - CLUSTER
+          - ORG
+          type: string
+        font_identifier:
+          description: Filter by UUID or name of a specific font.
+          type: string
+        name_pattern:
+          description: "Filter by font display name. Supports partial, case-insensitive\
+            \ matching."
+          type: string
+        include_font_assignments:
+          description: |-
+            When true, includes visualization areas this font is assigned to in the
+            response. Defaults to false if omitted.
+          nullable: true
+          type: boolean
+      type: object
+    UpdateStyleFontRequest:
+      properties:
+        scope:
+          description: |-
+            Scope of the font library containing this font. CLUSTER targets the
+            cluster-level library. ORG targets the authenticated user's org library.
+            Defaults to ORG if omitted.
+          enum:
+          - CLUSTER
+          - ORG
+          type: string
+        name:
+          description: New display name for the font. Must be unique within the target
+            scope.
+          type: string
+        weight:
+          description: "New weight for the font. Supported values: NORMAL, LIGHT,\
+            \ BOLD."
+          enum:
+          - NORMAL
+          - LIGHT
+          - BOLD
+          type: string
+        style:
+          description: "New style for the font. Supported values: NORMAL, ITALIC,\
+            \ OBLIQUE."
+          enum:
+          - NORMAL
+          - ITALIC
+          - OBLIQUE
+          type: string
+        color:
+          description: |-
+            New color for the font as a 6-digit hex string (e.g. "#333333"). Returns
+            an error if the value is malformed.
+          type: string
+      type: object
     ConfigureCommunicationChannelPreferencesRequest:
       properties:
         cluster_preferences:
@@ -24667,6 +25276,11 @@ x-roles:
   tags:
   - 26.3.0.cl
   description: Roles for version 26.3.0.cl
+- name: 26.7.0.cl
+  id: 26.7.0.cl
+  tags:
+  - 26.7.0.cl
+  description: Roles for version 26.7.0.cl
 - name: 10.14.0.cl
   id: 10.14.0.cl
   tags:
