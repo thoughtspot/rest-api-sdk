@@ -16945,6 +16945,11 @@
             },
             "description": "Values of the variable",
             "nullable": true
+          },
+          "org": {
+            "$ref": "#/components/schemas/VariableOrgInfo",
+            "description": "Owner org of the variable.",
+            "nullable": true
           }
         },
         "description": "Variable object"
@@ -16995,6 +17000,22 @@
             "type": "integer",
             "format": "int32",
             "description": "The priority assigned to this value. If there are 2 matching values, the one with the higher priority will be picked.",
+            "nullable": true
+          }
+        }
+      },
+      "VariableOrgInfo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "description": "ID of the Org.",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the Org.",
             "nullable": true
           }
         }
