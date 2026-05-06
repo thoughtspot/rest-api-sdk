@@ -14876,8 +14876,7 @@
         ],
         "properties": {
           "available_data_row_count": {
-            "type": "integer",
-            "format": "int32",
+            "type": "object",
             "description": "Total available data row count."
           },
           "column_names": {
@@ -14905,8 +14904,7 @@
             "description": "The number of records that should be included."
           },
           "returned_data_row_count": {
-            "type": "integer",
-            "format": "int32",
+            "type": "object",
             "description": "Total returned data row count."
           },
           "sampling_ratio": {
@@ -14954,8 +14952,7 @@
         ],
         "properties": {
           "available_data_row_count": {
-            "type": "integer",
-            "format": "int32",
+            "type": "object",
             "description": "Total available data row count."
           },
           "column_names": {
@@ -14983,8 +14980,7 @@
             "description": "The number of records that should be included."
           },
           "returned_data_row_count": {
-            "type": "integer",
-            "format": "int32",
+            "type": "object",
             "description": "Total returned data row count."
           },
           "sampling_ratio": {
