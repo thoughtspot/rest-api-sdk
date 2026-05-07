@@ -22,12 +22,12 @@
       "description": "Roles for version 10.4.0.cl"
     },
     {
-      "name": "26.6.0.cl",
-      "id": "26.6.0.cl",
+      "name": "26.7.0.cl",
+      "id": "26.7.0.cl",
       "tags": [
-        "26.6.0.cl"
+        "26.7.0.cl"
       ],
-      "description": "Roles for version 26.6.0.cl"
+      "description": "Roles for version 26.7.0.cl"
     },
     {
       "name": "10.15.0.cl",
@@ -60,6 +60,14 @@
         "26.5.0.cl"
       ],
       "description": "Roles for version 26.5.0.cl"
+    },
+    {
+      "name": "26.6.0.cl",
+      "id": "26.6.0.cl",
+      "tags": [
+        "26.6.0.cl"
+      ],
+      "description": "Roles for version 26.6.0.cl"
     },
     {
       "name": "9.0.0.cl",
@@ -398,15 +406,281 @@
         }
       }
     },
+<<<<<<< HEAD
     "/api/rest/2.0/ai/agent/instructions/get": {
       "get": {
         "operationId": "getAgentInstructions",
         "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\nRetrieves the admin instructions currently configured for the AI agent (Spotter). Admin instructions are tenant- and org-scoped text that guide agent behavior across all conversations.\n\nRequires admin privileges. Only users with org admin access can retrieve agent instructions.\n\n#### Usage guidelines\n\nNo input parameters are required. The API returns the stored `AgentInstructions` record for the caller's tenant and org.\n\nIf no instructions have been configured yet, the API returns a record with an empty `instructions` field and `null` values for `id`, `created_at`, `updated_at`, and `last_updated_by`.\n\nIf the request is successful, the response includes:\n\n- `id`: unique identifier of the instructions record\n- `instructions`: the configured instructions text\n- `created_at`: ISO timestamp when the instructions were first saved\n- `updated_at`: ISO timestamp when the instructions were last updated\n- `last_updated_by`: user ID of the admin who last updated the instructions (may be `null` for older records)\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have org admin privileges required to read agent instructions. |\n\n> ###### Note:\n>\n> - Use `setAgentInstructions` to create or update agent instructions.\n> - Available from version 26.6.0.cl and later.\n\n\n\n\n#### Endpoint URL\n",
+=======
+    "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/delete": {
+      "delete": {
+        "operationId": "deleteConversation",
+        "description": "\nDeletes an existing agent conversation. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nPermanently deletes an existing saved agent conversation and all its associated messages. This operation is irreversible — deleted conversations cannot be recovered.\n\nRequires `CAN_USE_SPOTTER` privilege and ownership of the conversation being deleted.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier` *(path parameter)*: the unique ID of the conversation to delete, as returned by `createAgentConversation` or `getConversationList`\n\nA successful request returns an empty `204 No Content` response. The deleted conversation no longer appears in `getConversationList`.\n\n#### Example request\n\n```bash\nDELETE /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/delete\n```\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. |\n| 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. |\n\n> ###### Note:\n>\n> - Deletion is permanent and cannot be undone. Ensure the correct `conversation_identifier` is used before calling this endpoint.\n> - Only conversations created with `enable_save_chat: true` are persisted and can be deleted via this endpoint.\n> - Available from version 26.7.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
-          "26.6.0.cl"
+          "26.7.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "conversation_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the conversation to delete."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully deleted the agent conversation."
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/agent/instructions/get": {
+      "get": {
+        "operationId": "getAgentInstructions",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nRetrieves the admin instructions currently configured for the AI agent (Spotter). Admin instructions are tenant- and org-scoped text that guide agent behavior across all conversations.\n\nRequires admin privileges. Only users with org admin access can retrieve agent instructions.\n\n#### Usage guidelines\n\nNo input parameters are required. The API returns the stored `AgentInstructions` record for the caller's tenant and org.\n\nIf no instructions have been configured yet, the API returns a record with an empty `instructions` field and `null` values for `id`, `created_at`, `updated_at`, and `last_updated_by`.\n\nIf the request is successful, the response includes:\n\n- `id`: unique identifier of the instructions record\n- `instructions`: the configured instructions text\n- `created_at`: ISO timestamp when the instructions were first saved\n- `updated_at`: ISO timestamp when the instructions were last updated\n- `last_updated_by`: user ID of the admin who last updated the instructions (may be `null` for older records)\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have org admin privileges required to read agent instructions. |\n\n> ###### Note:\n>\n> - Use `setAgentInstructions` to create or update agent instructions.\n> - Available from version 26.7.0.cl and later.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.7.0.cl"
         ],
         "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentInstructions"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentInstructions"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/fetch": {
+      "get": {
+        "operationId": "getConversation",
+        "description": "\nRetrieves the full public-safe content of a saved agent conversation: ordered\nturns (user messages and agent response items) and sanitized code-execution\nfile metadata. Internal graph or branch state, Azure file identifiers, and\nmessages with a `SYSTEM` source are omitted. The full answer payload is not\nembedded; fetch it separately via `loadAnswer` using the `answer_id` on each\n`answer` response item.\nRequires `CAN_USE_SPOTTER` privilege and access to the specified conversation. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nRetrieves the full public-safe content of a saved agent conversation. Returns ordered conversation turns — user messages with their attachments and the agent response items produced for each turn — plus sanitized metadata for any files generated by the code-execution tool. \n\nUse this endpoint to render a persisted conversation in a UI, build an audit trail, or post-process a completed conversation. The full answer payload is not embedded — fetch it separately via `loadAnswer` using the `answer_id` on each `answer` response item.\n\nRequires `CAN_USE_SPOTTER` privilege and access to the specified conversation.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier` _(path parameter)_: the unique ID of the conversation, as returned by `createAgentConversation` or `getConversationList`.\n\nIf the request is successful, the response contains two top-level fields:\n\n| Field                  | Type                                        | Description                                                                                                                                          |\n| ---------------------- | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |\n| `messages`             | `ConversationTurn[]`                        | Ordered oldest to newest. Empty array when the conversation has no turns.                                                                            |\n| `code_execution_files` | `CodeExecutionFileMetadata[]`               | List of sanitized file metadata entries (one per `ts_file_id`). Covers all code-execution-generated files referenced anywhere in the conversation. Empty array when there are none. |\n\nNo other top-level fields are returned.\n\n#### ConversationTurn fields\n\n| Field              | Type                         | Description                                                                                                    |\n| ------------------ | ---------------------------- | -------------------------------------------------------------------------------------------------------------- |\n| `message_id`       | `String`                     | Stable identifier for the turn. For liveboard-started synthetic first turns, this is the root node identifier. |\n| `timestamp`        | `Long`                       | Milliseconds since Unix epoch for the turn.                                                                    |\n| `user_message`     | `UserMessage`                | User query that started the turn. `null` for liveboard-started synthetic first turns.                          |\n| `user_attachments` | `UserAttachmentItem[]`       | Files or connector resources attached to the user message. Empty array when there are none.                    |\n| `response_items`   | `ConversationResponseItem[]` | Agent-side output produced in response to this turn. Empty array for in-progress turns.                        |\n\n#### UserMessage fields\n\n| Field        | Type     | Description                                   |\n| ------------ | -------- | --------------------------------------------- |\n| `message_id` | `String` | Unique identifier of the user-source message. |\n| `text`       | `String` | Text body of the user query.                  |\n\n#### UserAttachmentItem fields\n\nDiscriminated by `type`. Only `\"file\"` or `\"resource\"` are valid values. Only the fields for the indicated variant are populated. See `ConversationResponseItem` below for the field definitions of the `file` and `resource` variants — `UserAttachmentItem` uses the same fields.\n\n#### ConversationResponseItem fields\n\nEvery item carries a `type` discriminator and these shared fields:\n\n| Field         | Type      | Description                                                                                                                    |\n| ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------ |\n| `type`        | `String`  | Discriminator. One of `\"text\"`, `\"tool_call\"`, `\"tool_result\"`, `\"answer\"`, `\"file\"`, `\"resource\"`, `\"search_datasets\"`.       |\n| `timestamp`   | `Long`    | Milliseconds since Unix epoch when this item was produced.                                                                     |\n| `is_thinking` | `Boolean` | `true` when the item represents internal agent reasoning rather than user-facing output. Consumers may hide or collapse these. |\n| `step_title`  | `String`  | Human-readable label for the agent step producing this item (e.g. `\"Searching\"`, `\"Visualising\"`).                             |\n\nVariant-specific fields:\n\n- **`text`** — agent text output: `content` (String), `content_type` (`ContentMimeType` enum), `file_reference` (FileReference).\n- **`tool_call`** — agent invoked a tool: `tool_call_id` (String), `tool_name` (String), `arguments` (JSON object).\n- **`tool_result`** — result returned from a tool invocation: `tool_call_id`, `tool_name`, `content`, `content_type` (`ContentMimeType` enum), `success` (Boolean).\n- **`answer`** — slim reference to a ThoughtSpot answer: `answer_id` (String), `tool_call_id`, `tool_name`.\n- **`file`** — uploaded or generated files: `files` (`PublicFileInfo[]`).\n- **`resource`** — MCP connector resource: `title`, `uri`, `name`, `mime_type`, `description`, `size` (Int), `connector_id`, `connector_name`, `connector_slug`, `transport_type` (`TransportType` enum).\n- **`search_datasets`** — dataset discovery result: `text` (String), `data_sources` (`DataSourceInfo[]`).\n\nClients should switch on `type` and ignore unknown variants for forward-compatibility.\n\n#### content_type values\n\n`content_type` is the `ContentMimeType` enum. The following values are defined:\n\n| Value                       | Wire MIME                   | Meaning                                              |\n| --------------------------- | --------------------------- | ---------------------------------------------------- |\n| `TEXT_PLAIN`                | `text/plain`                | Plain text. Default for `tool_result`.               |\n| `TEXT_MARKDOWN`             | `text/markdown`             | Markdown. Default for `text`.                        |\n| `TEXT_X_MARKDOWN_WITH_CODE` | `text/x-markdown-with-code` | Markdown whose body starts with a fenced code block. |\n| `TEXT_HTML`                 | `text/html`                 | Raw HTML.                                            |\n\n#### transport_type values\n\n`transport_type` is the `TransportType` enum used on the `resource` variant.\n\n| Value              | Meaning                                       |\n| ------------------ | --------------------------------------------- |\n| `STREAMABLE_HTTP`  | Streamable HTTP transport (default for MCP).  |\n| `SSE`              | Server-sent events transport.                 |\n\n#### FileReference fields\n\n| Field          | Type     | Description                                             |\n| -------------- | -------- | ------------------------------------------------------- |\n| `ts_file_id`   | `String` | Unique identifier of the code-execution-generated file. |\n| `display_name` | `String` | Human-readable file name.                               |\n| `created_at`   | `String` | ISO 8601 timestamp when the file was created.           |\n\nCross-reference `ts_file_id` against `code_execution_files` to retrieve full metadata including the `expired` flag before attempting a download.\n\n#### PublicFileInfo fields\n\n| Field          | Type     | Description                                   |\n| -------------- | -------- | --------------------------------------------- |\n| `ts_file_id`   | `String` | Unique identifier of the file.                |\n| `display_name` | `String` | Human-readable file name.                     |\n| `file_type`    | `String` | File type such as `csv`, `pdf`, or `png`.     |\n| `created_at`   | `String` | ISO 8601 timestamp when the file was created. |\n| `size_bytes`   | `Int`    | File size in bytes.                           |\n\n#### CodeExecutionFileMetadata fields\n\nEach entry in the `code_execution_files` array contains:\n\n| Field          | Type      | Description                                                                                                                     |\n| -------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------- |\n| `ts_file_id`   | `String`  | Unique identifier of the file.                                                                                                  |\n| `display_name` | `String`  | Human-readable file name.                                                                                                       |\n| `file_type`    | `String`  | File type such as `csv`, `pdf`, or `png`.                                                                                       |\n| `created_at`   | `String`  | ISO 8601 timestamp when the file was created.                                                                                   |\n| `expired`      | `Boolean` | When `true`, the underlying file is no longer retrievable from code-execution storage; UIs should disable download and preview. |\n\n#### Loading answer payloads\n\nEach `AnswerResponseItem` in the response contains an `answer_id` field. Pass this value as the `answer_identifier` parameter to `loadAnswer` to retrieve the full answer payload (TML query, token breakdown, visualization metadata) for that item.\n\n#### Example request\n\n```bash\nGET /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/fetch\n```\n\n#### Example response\n\n```json\n{\n  \"messages\": [\n    {\n      \"message_id\": \"node_u_01\",\n      \"timestamp\": 1744000000000,\n      \"user_message\": {\n        \"message_id\": \"msg_u_01\",\n        \"text\": \"Show me revenue by region as a chart.\"\n      },\n      \"user_attachments\": [],\n      \"response_items\": [\n        {\n          \"type\": \"tool_call\",\n          \"tool_call_id\": \"toolu_01ABC\",\n          \"tool_name\": \"search_datasets\",\n          \"step_title\": \"Searching datasets\",\n          \"arguments\": { \"query\": \"revenue\" },\n          \"timestamp\": 1744000001000,\n          \"is_thinking\": false\n        },\n        {\n          \"type\": \"answer\",\n          \"answer_id\": \"ans_01XYZ\",\n          \"tool_call_id\": \"toolu_02DEF\",\n          \"tool_name\": \"fetch_and_visualize\",\n          \"step_title\": \"Visualising\",\n          \"timestamp\": 1744000004000,\n          \"is_thinking\": false\n        },\n        {\n          \"type\": \"text\",\n          \"content\": \"Revenue is highest in APAC.\",\n          \"content_type\": \"TEXT_MARKDOWN\",\n          \"timestamp\": 1744000005000,\n          \"is_thinking\": false,\n          \"step_title\": null,\n          \"file_reference\": {\n            \"ts_file_id\": \"revenue_by_region.csv\",\n            \"display_name\": \"revenue_by_region.csv\",\n            \"created_at\": \"2026-04-07T12:00:00Z\"\n          }\n        }\n      ]\n    }\n  ],\n  \"code_execution_files\": [\n    {\n      \"ts_file_id\": \"revenue_by_region.csv\",\n      \"display_name\": \"revenue_by_region.csv\",\n      \"file_type\": \"csv\",\n      \"created_at\": \"2026-04-07T12:00:00Z\",\n      \"expired\": false\n    }\n  ]\n}\n```\n\n#### Example: liveboard-started conversation\n\nWhen a conversation is initiated from a saved liveboard visualization rather than a user query, the first turn is synthetic. `user_message` is `null`, `user_attachments` is `[]`, and `response_items` contains a single `answer` item referencing the seed visualization.\n\n```json\n{\n  \"messages\": [\n    {\n      \"message_id\": \"ROOT_NODE\",\n      \"timestamp\": 1743999000000,\n      \"user_message\": null,\n      \"user_attachments\": [],\n      \"response_items\": [\n        {\n          \"type\": \"answer\",\n          \"answer_id\": \"lb_seed_01\",\n          \"tool_call_id\": null,\n          \"tool_name\": null,\n          \"step_title\": null,\n          \"timestamp\": 1743999000000,\n          \"is_thinking\": false\n        }\n      ]\n    }\n  ],\n  \"code_execution_files\": []\n}\n```\n\nSubsequent turns follow the normal user-to-agent pattern.\n\n#### Error responses\n\n| Code | Description                                                                                                                 |\n| ---- | --------------------------------------------------------------------------------------------------------------------------- |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                        |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks access to the specified conversation. |\n| 404  | Not Found — no conversation exists with the given identifier for the authenticated user.                                    |\n\n> ###### Note:\n>\n> - Messages with an internal `SYSTEM` source are always dropped from the response.\n> - In-progress turns are still returned with an empty `response_items` array so clients can render the user message immediately.\n> - Do not assume every `tool_call` has a paired `tool_result` or `answer` — an interrupted conversation can leave a dangling call.\n> - Available from version 26.7.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.7.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "conversation_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the conversation to load."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetConversationResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetConversationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/agent/conversations": {
+      "get": {
+        "operationId": "getConversationList",
+        "description": "\nRetrieves the list of saved agent conversations for the currently authenticated user.\nOnly conversations created with `enable_save_chat: true` are returned. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nRetrieves a paginated list of saved agent conversations for the currently authenticated user. Only conversations that were created with `enable_save_chat: true` in `createAgentConversation` are returned.\n\nRequires `CAN_USE_SPOTTER` privilege.\n\n#### Usage guidelines\n\nThe request supports the following optional query parameters:\n\n- `limit`: maximum number of conversations to return. Use this together with `offset` for pagination.\n- `offset`: number of conversations to skip before returning results. Defaults to `0`.\n- `skip_empty`: when `true` (default), conversations with no messages are excluded from the results. Set to `false` to include empty conversations.\n\nIf the request is successful, the response includes a `conversations` array. Each entry contains:\n\n- `conversation_identifier`: the unique ID of the conversation, used as input to `sendAgentConversationMessage`, `renameConversation`, `deleteConversation`, `stopConversation`, and `loadAnswer`\n- `conversation_title`: the display name of the conversation\n- `created_at`: ISO 8601 timestamp of when the conversation was created\n- `updated_at`: ISO 8601 timestamp of the most recent update to the conversation\n- `data_source_identifiers`: list of unique IDs of the data sources associated with the conversation\n- `data_source_names`: array of `{ id, name }` objects for the data sources associated with the conversation\n\n#### Pagination\n\nUse `limit` and `offset` to page through large result sets:\n\n```\nGET /api/rest/2.0/ai/agent/conversations?limit=20&offset=0   → first page\nGET /api/rest/2.0/ai/agent/conversations?limit=20&offset=20  → second page\n```\n\n#### Pagination and `has_more`\n\nThe response includes a `has_more: Boolean` field. When `true`, there are additional conversations beyond the current page — increment `offset` by `limit` to fetch the next page. When `has_more` is `false`, the current page is the last. Note that `total_count` is not returned; use `has_more` to drive paging controls.\n\n#### Example response\n\n```json\n{\n  \"conversations\": [\n    {\n      \"conversation_identifier\": \"abc123\",\n      \"conversation_title\": \"Sales by Region Q1\",\n      \"created_at\": \"2026-03-01T10:00:00Z\",\n      \"updated_at\": \"2026-03-05T14:23:00Z\",\n      \"data_source_identifiers\": [\"ds-001\"],\n      \"data_source_names\": [{ \"id\": \"ds-001\", \"name\": \"Retail Sales\" }]\n    }\n  ],\n  \"has_more\": false\n}\n```\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege. |\n\n> ###### Note:\n>\n> - Only conversations created with `enable_save_chat: true` appear in this list. Conversations created with `enable_save_chat: false` (the default) are not persisted and cannot be retrieved.\n> - Available from version 26.7.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+>>>>>>> 710a3a4a (Implement feature X to enhance user experience and optimize performance)
+        "tags": [
+          "AI",
+          "26.7.0.cl"
+        ],
+<<<<<<< HEAD
+        "parameters": [],
+=======
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "Maximum number of conversations to return. Used for pagination.",
+            "default": 30
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "Number of conversations to skip before returning results. Used for pagination.",
+            "default": 0
+          },
+          {
+            "in": "query",
+            "name": "skip_empty",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "When true, excludes conversations with no messages. Defaults to true.",
+            "default": true
+          }
+        ],
+>>>>>>> 710a3a4a (Implement feature X to enhance user experience and optimize performance)
         "responses": {
           "200": {
             "description": "Common successful response",
@@ -720,6 +994,101 @@
         }
       }
     },
+<<<<<<< HEAD
+=======
+    "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/answers/{answer_identifier}/load": {
+      "get": {
+        "operationId": "loadAnswer",
+        "description": "\nLoads the full answer payload for a specific answer item in an agent\nconversation. Returns structured answer data including the TML query, token\nbreakdown, visualization metadata, and agent context state.\nPass the `answer_id` from an `AnswerResponseItem` in the `getConversation`\nresponse as the `answer_identifier` parameter.\nRequires `CAN_USE_SPOTTER` privilege and access to the specified conversation. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nLoads the answer details for a specific answer item in an agent conversation. Returns structured answer data including the TML query, token breakdown, visualization metadata, and agent context state. Use this endpoint to retrieve the full answer representation for an answer item — for example, to re-render a chart, export a query, or inspect the generated TML.\n\nRequires `CAN_USE_SPOTTER` privilege and access to the specified conversation.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier` *(path parameter)*: the unique ID of the conversation, as returned by `createAgentConversation`\n- `answer_identifier` *(path parameter)*: the `answer_id` field from an `AnswerResponseItem` in the `getConversation` response\n\nIf the request is successful, the response contains an `answer` object with the following fields:\n\n| Field | Type | Description |\n|-------|------|-------------|\n| `title` | `String` | Display title of the generated answer (e.g., `\"sales by month\"`). |\n| `description` | `String` | Optional description of the answer. |\n| `session_identifier` | `String` | Unique identifier of the session in which this answer was generated. |\n| `generation_number` | `Int` | Generation sequence number of this answer within the session. |\n| `tokens` | `String` | Raw TML query string used to generate the answer (e.g., `\"[sales] [date].'monthly'\"`). |\n| `display_tokens` | `[String]` | Ordered list of individual TML token strings (e.g., `[\"[sales]\", \"[date].'monthly'\"]`). |\n| `visualization_type` | `VizType` | Suggested visualization type: `Chart`, `Table`, or `Undefined`. `null` if no suggestion is available. |\n| `formulas` | `[String]` | List of formula names referenced in the answer. Empty if none are used. |\n| `parameters` | `[String]` | List of parameter names applied to the answer. Empty if none are used. |\n| `subqueries` | `[JSON]` | List of subquery objects used in the answer. Empty if none are present. |\n| `ac_state` | `ACState` | Agent context state, including `transaction_identifier` and `generation_number`, used to correlate this answer with a specific agent turn. |\n\n#### ACState fields\n\n| Field | Type | Description |\n|-------|------|-------------|\n| `transaction_identifier` | `String` | Unique identifier of the agent transaction that produced this answer. |\n| `generation_number` | `Int` | Generation number within the transaction. |\n\n#### Example request\n\n```bash\nGET /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/answers/{answer_identifier}/load\n```\n\n#### Example response\n\n```json\n{\n  \"answer\": {\n    \"title\": \"sales by month\",\n    \"description\": \"\",\n    \"session_identifier\": \"7b00b801-73f4-4639-af5e-e775584ceba6\",\n    \"generation_number\": 1,\n    \"tokens\": \"[sales] [date].'monthly'\",\n    \"display_tokens\": [\"[sales]\", \"[date].'monthly'\"],\n    \"visualization_type\": null,\n    \"formulas\": [],\n    \"parameters\": [],\n    \"subqueries\": [],\n    \"ac_state\": {\n      \"transaction_identifier\": \"7f6c9948-b4c7-4098-bb1f-6c67bc0e5699\",\n      \"generation_number\": 1\n    }\n  }\n}\n```\n\n#### Typical usage scenario\n\n1. Call `getConversation` to retrieve the full conversation history.\n2. Locate an `AnswerResponseItem` in `response_items` — note its `answer_id` field.\n3. Call `loadAnswer` with the `conversation_identifier` and `answer_id` as `answer_identifier`.\n4. The returned `tokens` field is used to open the answer in the ThoughtSpot search interface, and `display_tokens` is rendered as pill chips in the UI.\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks access to the specified conversation. |\n| 404  | Not Found — no conversation or message exists with the given identifiers for the authenticated user. |\n| 422  | Unprocessable Entity — the message does not contain an answer of the expected type. |\n\n> ###### Note:\n>\n> - This endpoint only loads answers of type `TS_ANSWER`. Other message types are not supported.\n> - `visualization_type` may be `null` if the agent did not produce a visualization suggestion for this answer.\n> - `formulas`, `parameters`, and `subqueries` are returned as empty arrays when not applicable — they are never `null`.\n> - Available from version 26.7.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.7.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "conversation_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the conversation."
+          },
+          {
+            "in": "path",
+            "name": "answer_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the answer to load. Use the `answer_id` field from an\n`AnswerResponseItem` returned by `getConversation`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoadAnswerResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoadAnswerResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+>>>>>>> 710a3a4a (Implement feature X to enhance user experience and optimize performance)
     "/api/rest/2.0/ai/analytical-questions": {
       "post": {
         "operationId": "queryGetDecomposedQuery",
@@ -804,6 +1173,85 @@
         }
       }
     },
+<<<<<<< HEAD
+=======
+    "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update": {
+      "post": {
+        "operationId": "renameConversation",
+        "description": "\nRenames an existing agent conversation. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nRenames an existing saved agent conversation. Use this endpoint to update the display title of a conversation, for example after the conversation scope is refined or to reflect a more descriptive name.\n\nRequires `CAN_USE_SPOTTER` privilege and ownership of the conversation being renamed.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier` *(path parameter)*: the unique ID of the conversation to rename, as returned by `createAgentConversation` or `getConversationList`\n- `title` *(request body)*: the new display name for the conversation. Must be a non-empty string.\n\nA successful request returns an empty `204 No Content` response. The updated title is reflected immediately in subsequent calls to `getConversationList`.\n\n#### Example request\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update\nContent-Type: application/json\n\n{\n  \"title\": \"Revenue Breakdown by Product Line\"\n}\n```\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 400  | Bad Request — `title` is missing or empty in the request body. |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. |\n| 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. |\n| 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |\n\n> ###### Note:\n>\n> - Only conversations created with `enable_save_chat: true` can be renamed. Unsaved conversations are not persisted and do not have a retrievable identifier.\n> - Available from version 26.7.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.7.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RenameConversationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "conversation_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the conversation to rename."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully renamed the agent conversation."
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+>>>>>>> 710a3a4a (Implement feature X to enhance user experience and optimize performance)
     "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send": {
       "post": {
         "operationId": "sendAgentConversationMessage",
@@ -17758,6 +18206,862 @@
       "AgentInstructions": {
         "type": "object",
         "required": [
+<<<<<<< HEAD
+          "instructions"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the record.",
+            "nullable": true
+=======
+          "has_more"
+        ],
+        "properties": {
+          "conversations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentConversationList"
+            },
+            "description": "List of saved agent conversations for the current user.",
+            "nullable": true
+          },
+          "has_more": {
+            "type": "boolean",
+            "description": "Whether additional conversations exist beyond this page. `true` when the number\nof returned conversations equals the requested `limit`. Use `offset` to fetch\nthe next page."
+          }
+        },
+        "description": "Response returned by getConversationList."
+      },
+      "AgentConversationList": {
+        "type": "object",
+        "required": [
+          "conversation_identifier"
+        ],
+        "properties": {
+          "conversation_identifier": {
+            "type": "string",
+            "description": "Unique identifier of the conversation."
+>>>>>>> 710a3a4a (Implement feature X to enhance user experience and optimize performance)
+          },
+          "instructions": {
+            "type": "string",
+            "description": "The admin instructions text for the agent."
+          },
+          "created_at": {
+            "type": "string",
+            "description": "ISO timestamp when the instructions were created.",
+            "nullable": true
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "ISO timestamp when the instructions were last updated.",
+            "nullable": true
+          },
+<<<<<<< HEAD
+          "last_updated_by": {
+            "type": "string",
+            "description": "User ID of the admin who last updated the instructions.",
+=======
+          "data_source_identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Unique identifiers of the data sources associated with the conversation.",
+            "nullable": true
+          },
+          "data_source_names": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataSourceEntry"
+            },
+            "description": "Data sources associated with the conversation, each with an `id` and `name`.",
+>>>>>>> 710a3a4a (Implement feature X to enhance user experience and optimize performance)
+            "nullable": true
+          }
+        },
+        "description": "Admin instructions configured for the AI agent."
+      },
+      "DataSourceEntry": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the data source."
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the data source."
+          }
+        },
+        "description": "A data source associated with a conversation, returned as a typed entry."
+      },
+      "GetConversationResponse": {
+        "type": "object",
+        "properties": {
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConversationTurn"
+            },
+            "description": "Ordered conversation turns. Empty array when the conversation has no turns.",
+            "nullable": true
+          },
+          "code_execution_files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CodeExecutionFileMetadata"
+            },
+            "description": "Sanitized code-execution file metadata for files referenced by this\nconversation. Empty array when the conversation has no code-execution files.",
+            "nullable": true
+          }
+        },
+        "description": "Response body of getConversation. `messages` is ordered oldest to newest.\n`code_execution_files` is a list of sanitized code-execution file metadata\nentries, keyed in upstream by `ts_file_id`."
+      },
+      "ConversationTurn": {
+        "type": "object",
+        "required": [
+          "message_id",
+          "timestamp"
+        ],
+        "properties": {
+          "message_id": {
+            "type": "string",
+            "description": "Stable identifier for the turn. For liveboard-started synthetic first turns,\nthis is the root node identifier."
+          },
+          "timestamp": {
+            "type": "object",
+            "description": "Milliseconds since Unix epoch for the turn."
+          },
+          "user_message": {
+            "$ref": "#/components/schemas/UserMessage",
+            "description": "User query that started the turn. Null for liveboard-started synthetic first turns.",
+            "nullable": true
+          },
+          "user_attachments": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Files or connector resources attached to the user message. Empty array when\nthere are no attachments.",
+            "nullable": true
+          },
+          "response_items": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Agent-side output produced in response to this turn. Empty array for\nin-progress turns where the agent has not yet produced output.",
+            "nullable": true
+          }
+        },
+        "description": "One conversational exchange: an optional user message and its attachments,\nfollowed by the agent's response items for that turn."
+      },
+      "UserMessage": {
+        "type": "object",
+        "required": [
+          "message_id",
+          "text"
+        ],
+        "properties": {
+          "message_id": {
+            "type": "string",
+            "description": "Unique identifier of the user message."
+          },
+          "text": {
+            "type": "string",
+            "description": "Text body of the user query."
+          }
+        },
+        "description": "User-authored text message that begins a conversation turn.\nNull when the turn is a synthetic liveboard-started first turn."
+      },
+      "FileResponseItem": {
+        "type": "object",
+        "required": [
+          "type",
+          "timestamp"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Variant discriminator. Always `\"file\"`."
+          },
+          "timestamp": {
+            "type": "object",
+            "description": "Milliseconds since Unix epoch when this item was produced."
+          },
+          "is_thinking": {
+            "type": "boolean",
+            "description": "True when the item represents internal agent reasoning rather than user-facing output.",
+            "nullable": true
+          },
+          "step_title": {
+            "type": "string",
+            "description": "Human-readable label for the agent step producing this item.",
+            "nullable": true
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PublicFileInfo"
+            },
+            "description": "Sanitized file metadata.",
+            "nullable": true
+          }
+        },
+        "description": "Uploaded or generated files attached to a turn."
+      },
+      "PublicFileInfo": {
+        "type": "object",
+        "required": [
+          "ts_file_id"
+        ],
+        "properties": {
+          "ts_file_id": {
+            "type": "string",
+            "description": "Unique identifier of the file."
+          },
+          "display_name": {
+            "type": "string",
+            "description": "Human-readable file name.",
+            "nullable": true
+          },
+          "file_type": {
+            "type": "string",
+            "description": "File type such as `csv`, `pdf`, or `png`.",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string",
+            "description": "ISO 8601 timestamp when the file was created.",
+            "nullable": true
+          },
+          "size_bytes": {
+            "type": "integer",
+            "format": "int32",
+            "description": "File size in bytes.",
+            "nullable": true
+          }
+        },
+        "description": "Sanitized metadata for a file attached to or produced by a conversation turn.\nNever exposes internal Azure or blob-storage identifiers."
+      },
+      "ResourceResponseItem": {
+        "type": "object",
+        "required": [
+          "type",
+          "timestamp",
+          "title",
+          "uri"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Variant discriminator. Always `\"resource\"`."
+          },
+          "timestamp": {
+            "type": "object",
+            "description": "Milliseconds since Unix epoch when this item was produced."
+          },
+          "is_thinking": {
+            "type": "boolean",
+            "description": "True when the item represents internal agent reasoning rather than user-facing output.",
+            "nullable": true
+          },
+          "step_title": {
+            "type": "string",
+            "description": "Human-readable label for the agent step producing this item.",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "description": "Human-readable title of the resource."
+          },
+          "uri": {
+            "type": "string",
+            "description": "Resource URI."
+          },
+          "name": {
+            "type": "string",
+            "description": "Original name or filename.",
+            "nullable": true
+          },
+          "mime_type": {
+            "type": "string",
+            "description": "MIME type.",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Short description.",
+            "nullable": true
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Size in bytes.",
+            "nullable": true
+          },
+          "connector_id": {
+            "type": "string",
+            "description": "Connector instance identifier.",
+            "nullable": true
+          },
+          "connector_name": {
+            "type": "string",
+            "description": "Human-readable connector name.",
+            "nullable": true
+          },
+          "connector_slug": {
+            "type": "string",
+            "description": "Connector slug or type key.",
+            "nullable": true
+          },
+          "transport_type": {
+            "type": "string",
+            "enum": [
+              "STREAMABLE_HTTP",
+              "SSE"
+            ],
+            "description": "Underlying transport protocol used by the MCP connector. See `TransportType`\nfor accepted values.",
+            "nullable": true
+          }
+        },
+        "description": "MCP (Model Context Protocol) resource — typically a connector-provided artifact\nsuch as a document excerpt."
+      },
+      "TextResponseItem": {
+        "type": "object",
+        "required": [
+          "type",
+          "timestamp",
+          "content"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Variant discriminator. Always `\"text\"`."
+          },
+          "timestamp": {
+            "type": "object",
+            "description": "Milliseconds since Unix epoch when this item was produced."
+          },
+          "is_thinking": {
+            "type": "boolean",
+            "description": "True when the item represents internal agent reasoning rather than user-facing output.",
+            "nullable": true
+          },
+          "step_title": {
+            "type": "string",
+            "description": "Human-readable label for the agent step producing this item.",
+            "nullable": true
+          },
+          "content": {
+            "type": "string",
+            "description": "The text body."
+          },
+          "content_type": {
+            "type": "string",
+            "enum": [
+              "TEXT_PLAIN",
+              "TEXT_MARKDOWN",
+              "TEXT_X_MARKDOWN_WITH_CODE",
+              "TEXT_HTML"
+            ],
+            "description": "Rendering hint for the text content. See `ContentMimeType` for accepted values.",
+            "nullable": true
+          },
+          "file_reference": {
+            "$ref": "#/components/schemas/FileReference",
+            "description": "Pointer to a code-execution-generated file associated with this text item.",
+            "nullable": true
+          }
+        },
+        "description": "Agent text output."
+      },
+      "FileReference": {
+        "type": "object",
+        "required": [
+          "ts_file_id"
+        ],
+        "properties": {
+          "ts_file_id": {
+            "type": "string",
+            "description": "Unique identifier of the code-execution-generated file."
+          },
+          "display_name": {
+            "type": "string",
+            "description": "Human-readable file name.",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string",
+            "description": "ISO 8601 timestamp when the file was created.",
+            "nullable": true
+          }
+        },
+        "description": "Pointer to a code-execution-generated file referenced from a text response item.\nFull metadata (including expiry) is in the top-level `code_execution_files` map."
+      },
+      "ToolCallResponseItem": {
+        "type": "object",
+        "required": [
+          "type",
+          "timestamp",
+          "arguments"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Variant discriminator. Always `\"tool_call\"`."
+          },
+          "timestamp": {
+            "type": "object",
+            "description": "Milliseconds since Unix epoch when this item was produced."
+          },
+          "is_thinking": {
+            "type": "boolean",
+            "description": "True when the item represents internal agent reasoning rather than user-facing output.",
+            "nullable": true
+          },
+          "step_title": {
+            "type": "string",
+            "description": "Human-readable label for the agent step producing this item.",
+            "nullable": true
+          },
+          "tool_call_id": {
+            "type": "string",
+            "description": "Identifier linking this tool call to its matching tool_result or answer.",
+            "nullable": true
+          },
+          "tool_name": {
+            "type": "string",
+            "description": "Name of the tool being invoked.",
+            "nullable": true
+          },
+          "arguments": {
+            "type": "object",
+            "description": "Input arguments passed to the tool. Shape depends on the tool."
+          }
+        },
+        "description": "Agent invoked a tool."
+      },
+      "ToolResultResponseItem": {
+        "type": "object",
+        "required": [
+          "type",
+          "timestamp",
+          "content"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Variant discriminator. Always `\"tool_result\"`."
+          },
+          "timestamp": {
+            "type": "object",
+            "description": "Milliseconds since Unix epoch when this item was produced."
+          },
+          "is_thinking": {
+            "type": "boolean",
+            "description": "True when the item represents internal agent reasoning rather than user-facing output.",
+            "nullable": true
+          },
+          "step_title": {
+            "type": "string",
+            "description": "Human-readable label for the agent step producing this item.",
+            "nullable": true
+          },
+          "tool_call_id": {
+            "type": "string",
+            "description": "Matches the originating tool_call.",
+            "nullable": true
+          },
+          "tool_name": {
+            "type": "string",
+            "description": "Name of the tool that produced this result.",
+            "nullable": true
+          },
+          "content": {
+            "type": "string",
+            "description": "Result body (tool output, or `\"<code>: <message>\"` for errors)."
+          },
+          "content_type": {
+            "type": "string",
+            "enum": [
+              "TEXT_PLAIN",
+              "TEXT_MARKDOWN",
+              "TEXT_X_MARKDOWN_WITH_CODE",
+              "TEXT_HTML"
+            ],
+            "description": "Rendering hint for the result content; defaults to `TEXT_PLAIN` for tool\nresults. See `ContentMimeType` for accepted values.",
+            "nullable": true
+          },
+          "success": {
+            "type": "boolean",
+            "description": "False when the tool invocation errored; true otherwise.",
+            "nullable": true
+          }
+        },
+        "description": "Result returned from a tool invocation."
+      },
+      "AnswerResponseItem": {
+        "type": "object",
+        "required": [
+          "type",
+          "timestamp",
+          "answer_id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Variant discriminator. Always `\"answer\"`."
+          },
+          "timestamp": {
+            "type": "object",
+            "description": "Milliseconds since Unix epoch when this item was produced."
+          },
+          "is_thinking": {
+            "type": "boolean",
+            "description": "True when the item represents internal agent reasoning rather than user-facing output.",
+            "nullable": true
+          },
+          "step_title": {
+            "type": "string",
+            "description": "Human-readable label for the agent step producing this item.",
+            "nullable": true
+          },
+          "answer_id": {
+            "type": "string",
+            "description": "Identifier used to fetch the full answer payload separately."
+          },
+          "tool_call_id": {
+            "type": "string",
+            "description": "Links to the originating tool_call, when applicable.",
+            "nullable": true
+          },
+          "tool_name": {
+            "type": "string",
+            "description": "Tool that produced the answer, when applicable.",
+            "nullable": true
+          }
+        },
+        "description": "Slim reference to a ThoughtSpot answer produced by the agent. Full answer payload\n(visualization spec, formulas, session info) is not embedded — fetch separately\nvia `loadAnswer` using `answer_id`."
+      },
+      "SearchDatasetsResponseItem": {
+        "type": "object",
+        "required": [
+          "type",
+          "timestamp",
+          "text"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Variant discriminator. Always `\"search_datasets\"`."
+          },
+          "timestamp": {
+            "type": "object",
+            "description": "Milliseconds since Unix epoch when this item was produced."
+          },
+          "is_thinking": {
+            "type": "boolean",
+            "description": "True when the item represents internal agent reasoning rather than user-facing output.",
+            "nullable": true
+          },
+          "step_title": {
+            "type": "string",
+            "description": "Human-readable label for the agent step producing this item.",
+            "nullable": true
+          },
+          "text": {
+            "type": "string",
+            "description": "Summary message describing the dataset search results."
+          },
+          "data_sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataSourceInfo"
+            },
+            "description": "Dataset descriptors returned by the `search_datasets` tool.",
+            "nullable": true
+          }
+        },
+        "description": "Result of a dataset discovery step."
+      },
+      "DataSourceInfo": {
+        "type": "object",
+        "properties": {
+          "data_source_identifier": {
+            "type": "string",
+            "description": "Unique identifier of the data source (mirrors `header.guid`).",
+            "nullable": true
+          },
+          "data_source_name": {
+            "type": "string",
+            "description": "Display name of the data source (mirrors `header.display_name`).",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional description of the data source.",
+            "nullable": true
+          },
+          "confidence": {
+            "type": "number",
+            "format": "float",
+            "description": "Tool-reported confidence that this data source matches the query, in `[0, 1]`.",
+            "nullable": true
+          },
+          "reasoning": {
+            "type": "string",
+            "description": "LLM reasoning describing why the data source was selected.",
+            "nullable": true
+          },
+          "header": {
+            "$ref": "#/components/schemas/DataSourceHeader",
+            "description": "Header metadata extracted from the data source proto.",
+            "nullable": true
+          },
+          "related_liveboard_visualizations": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Related liveboard visualizations for this data source. Open-ended JSON shape\ndriven by the underlying proto.",
+            "nullable": true
+          },
+          "related_answers": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Related saved answers for this data source. Open-ended JSON shape driven by\nthe underlying proto.",
+            "nullable": true
+          },
+          "related_spotter_queries": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Related Spotter queries previously run against this data source. Truncated to\na small upper bound by the tool.",
+            "nullable": true
+          },
+          "popularity": {
+            "$ref": "#/components/schemas/DataSourcePopularity",
+            "description": "Aggregate popularity counters.",
+            "nullable": true
+          },
+          "user_usage": {
+            "$ref": "#/components/schemas/DataSourceUserUsage",
+            "description": "Per-user usage counters scoped to the calling user.",
+            "nullable": true
+          }
+        },
+        "description": "A data source descriptor returned by the agent's `search_datasets` tool."
+      },
+      "DataSourceHeader": {
+        "type": "object",
+        "properties": {
+          "display_name": {
+            "type": "string",
+            "description": "Display name of the data source.",
+            "nullable": true
+          },
+          "guid": {
+            "type": "string",
+            "description": "Canonical unique identifier (GUID) of the data source.",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional description of the data source.",
+            "nullable": true
+          }
+        },
+        "description": "Header metadata extracted from a data source proto. `guid` is the canonical\ndata source identifier and `display_name` is its user-facing name."
+      },
+      "DataSourcePopularity": {
+        "type": "object",
+        "properties": {
+          "total_spotter_queries": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Total number of Spotter natural-language queries run against this data source.",
+            "nullable": true
+          },
+          "total_answers": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Total number of saved answers backed by this data source.",
+            "nullable": true
+          },
+          "total_answer_impressions": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Total number of impressions across saved answers backed by this data source.",
+            "nullable": true
+          }
+        },
+        "description": "Aggregate popularity counters for a data source."
+      },
+      "DataSourceUserUsage": {
+        "type": "object",
+        "properties": {
+          "total_spotter_queries": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Total Spotter natural-language queries the calling user has run against this\ndata source.",
+            "nullable": true
+          }
+        },
+        "description": "Per-user usage counters for a data source, scoped to the calling user."
+      },
+      "CodeExecutionFileMetadata": {
+        "type": "object",
+        "required": [
+          "ts_file_id",
+          "expired"
+        ],
+        "properties": {
+          "ts_file_id": {
+            "type": "string",
+            "description": "Unique identifier of the code-execution-generated file. Stable across\nconversation turns."
+          },
+          "display_name": {
+            "type": "string",
+            "description": "Human-readable file name.",
+            "nullable": true
+          },
+          "file_type": {
+            "type": "string",
+            "description": "File type hint. Either a MIME string (e.g. `text/csv`) or an extension\n(e.g. `csv`).",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string",
+            "description": "ISO 8601 timestamp when the file was created.",
+            "nullable": true
+          },
+          "expired": {
+            "type": "boolean",
+            "description": "True when the file is no longer downloadable (storage expired or evicted)."
+          }
+        },
+        "description": "Sanitized public metadata for a code-execution-generated file. Internal\nstorage identifiers (e.g. Azure blob ids) are deliberately not exposed."
+      },
+      "LoadAnswerResponse": {
+        "type": "object",
+        "properties": {
+          "answer": {
+            "$ref": "#/components/schemas/AnswerDetails",
+            "description": "Answer details for the loaded message.",
+            "nullable": true
+          }
+        }
+      },
+      "AnswerDetails": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Display title of the answer.",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the answer.",
+            "nullable": true
+          },
+          "session_identifier": {
+            "type": "string",
+            "description": "Unique identifier of the session.",
+            "nullable": true
+          },
+          "generation_number": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Generation number of the answer.",
+            "nullable": true
+          },
+          "tokens": {
+            "type": "string",
+            "description": "TML query string for the answer.",
+            "nullable": true
+          },
+          "display_tokens": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of individual TML token strings.",
+            "nullable": true
+          },
+          "visualization_type": {
+            "type": "string",
+            "enum": [
+              "Chart",
+              "CHART",
+              "Table",
+              "TABLE",
+              "Undefined",
+              "UNDEFINED"
+            ],
+            "description": "Visualization type for the answer.",
+            "nullable": true
+          },
+          "formulas": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of formulas used in the answer.",
+            "nullable": true
+          },
+          "parameters": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of parameters used in the answer.",
+            "nullable": true
+          },
+          "subqueries": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "List of subqueries used in the answer.",
+            "nullable": true
+          },
+          "ac_state": {
+            "$ref": "#/components/schemas/ACState",
+            "description": "Agent context state for the answer.",
+            "nullable": true
+          }
+        }
+      },
+      "ACState": {
+        "type": "object",
+        "properties": {
+          "transaction_identifier": {
+            "type": "string",
+            "description": "Unique identifier of the transaction.",
+            "nullable": true
+          },
+          "generation_number": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Generation number of the transaction.",
+            "nullable": true
+          }
+        }
+      },
+      "AgentInstructions": {
+        "type": "object",
+        "required": [
           "instructions"
         ],
         "properties": {
@@ -22632,8 +23936,11 @@
             "type": "string",
             "enum": [
               "Chart",
+              "CHART",
               "Table",
-              "Undefined"
+              "TABLE",
+              "Undefined",
+              "UNDEFINED"
             ],
             "description": "Generated visualization type.",
             "nullable": true
