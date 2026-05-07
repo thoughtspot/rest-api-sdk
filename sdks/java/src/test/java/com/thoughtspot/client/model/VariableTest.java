@@ -45,4 +45,10 @@ public class VariableTest {
     public void valuesTest() {
         // TODO: test values
     }
+
+    /** Test the property 'org' */
+    @Test
+    public void orgTest() {
+        // TODO: test org
+    }
 }

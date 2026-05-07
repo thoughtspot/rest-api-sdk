@@ -1119,6 +1119,8 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.VariableDetailInput.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.VariableOrgInfo.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.VariablePutAssignmentInput
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(

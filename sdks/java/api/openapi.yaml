@@ -12691,6 +12691,8 @@ components:
             $ref: '#/components/schemas/VariableValue'
           nullable: true
           type: array
+        org:
+          $ref: '#/components/schemas/VariableOrgInfo'
       required:
       - id
       - name
@@ -12735,6 +12737,19 @@ components:
           type: integer
       required:
       - org_identifier
+      type: object
+    VariableOrgInfo:
+      properties:
+        id:
+          description: ID of the Org.
+          format: int32
+          type: integer
+        name:
+          description: Name of the Org.
+          type: string
+      required:
+      - id
+      - name
       type: object
     SortOption:
       properties:

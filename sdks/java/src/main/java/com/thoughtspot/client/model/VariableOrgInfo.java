@@ -5,12 +5,10 @@
 package com.thoughtspot.client.model;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
-import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
@@ -18,27 +16,24 @@ import com.google.gson.stream.JsonWriter;
 import com.thoughtspot.client.JSON;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import org.openapitools.jackson.nullable.JsonNullable;
 
-/** Variable object */
+/** VariableOrgInfo */
 @javax.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         comments = "Generator version: 7.12.0")
-public class Variable implements Serializable {
+public class VariableOrgInfo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     public static final String SERIALIZED_NAME_ID = "id";
 
     @SerializedName(SERIALIZED_NAME_ID)
     @javax.annotation.Nonnull
-    private String id;
+    private Integer id;
 
     public static final String SERIALIZED_NAME_NAME = "name";
 
@@ -46,115 +41,34 @@ public class Variable implements Serializable {
     @javax.annotation.Nonnull
     private String name;
 
-    /** Type of the variable */
-    @JsonAdapter(VariableTypeEnum.Adapter.class)
-    public enum VariableTypeEnum {
-        CONNECTION_PROPERTY("CONNECTION_PROPERTY"),
+    public VariableOrgInfo() {}
 
-        TABLE_MAPPING("TABLE_MAPPING"),
-
-        CONNECTION_PROPERTY_PER_PRINCIPAL("CONNECTION_PROPERTY_PER_PRINCIPAL"),
-
-        FORMULA_VARIABLE("FORMULA_VARIABLE"),
-
-        USER_PROPERTY("USER_PROPERTY");
-
-        private String value;
-
-        VariableTypeEnum(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        public static VariableTypeEnum fromValue(String value) {
-            for (VariableTypeEnum b : VariableTypeEnum.values()) {
-                if (b.value.equals(value)) {
-                    return b;
-                }
-            }
-            return null;
-        }
-
-        public static class Adapter extends TypeAdapter<VariableTypeEnum> {
-            @Override
-            public void write(final JsonWriter jsonWriter, final VariableTypeEnum enumeration)
-                    throws IOException {
-                jsonWriter.value(enumeration.getValue());
-            }
-
-            @Override
-            public VariableTypeEnum read(final JsonReader jsonReader) throws IOException {
-                String value = jsonReader.nextString();
-                return VariableTypeEnum.fromValue(value);
-            }
-        }
-
-        public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-            String value = jsonElement.getAsString();
-            VariableTypeEnum.fromValue(value);
-        }
-    }
-
-    public static final String SERIALIZED_NAME_VARIABLE_TYPE = "variable_type";
-
-    @SerializedName(SERIALIZED_NAME_VARIABLE_TYPE)
-    @javax.annotation.Nullable
-    private VariableTypeEnum variableType;
-
-    public static final String SERIALIZED_NAME_SENSITIVE = "sensitive";
-
-    @SerializedName(SERIALIZED_NAME_SENSITIVE)
-    @javax.annotation.Nullable
-    private Boolean sensitive;
-
-    public static final String SERIALIZED_NAME_VALUES = "values";
-
-    @SerializedName(SERIALIZED_NAME_VALUES)
-    @javax.annotation.Nullable
-    private List<VariableValue> values;
-
-    public static final String SERIALIZED_NAME_ORG = "org";
-
-    @SerializedName(SERIALIZED_NAME_ORG)
-    @javax.annotation.Nullable
-    private VariableOrgInfo org;
-
-    public Variable() {}
-
-    public Variable id(@javax.annotation.Nonnull String id) {
+    public VariableOrgInfo id(@javax.annotation.Nonnull Integer id) {
         this.id = id;
         return this;
     }
 
     /**
-     * Unique identifier of the variable
+     * ID of the Org.
      *
      * @return id
      */
     @javax.annotation.Nonnull
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(@javax.annotation.Nonnull String id) {
+    public void setId(@javax.annotation.Nonnull Integer id) {
         this.id = id;
     }
 
-    public Variable name(@javax.annotation.Nonnull String name) {
+    public VariableOrgInfo name(@javax.annotation.Nonnull String name) {
         this.name = name;
         return this;
     }
 
     /**
-     * Name of the variable
+     * Name of the Org.
      *
      * @return name
      */
@@ -165,90 +79,6 @@ public class Variable implements Serializable {
 
     public void setName(@javax.annotation.Nonnull String name) {
         this.name = name;
-    }
-
-    public Variable variableType(@javax.annotation.Nullable VariableTypeEnum variableType) {
-        this.variableType = variableType;
-        return this;
-    }
-
-    /**
-     * Type of the variable
-     *
-     * @return variableType
-     */
-    @javax.annotation.Nullable
-    public VariableTypeEnum getVariableType() {
-        return variableType;
-    }
-
-    public void setVariableType(@javax.annotation.Nullable VariableTypeEnum variableType) {
-        this.variableType = variableType;
-    }
-
-    public Variable sensitive(@javax.annotation.Nullable Boolean sensitive) {
-        this.sensitive = sensitive;
-        return this;
-    }
-
-    /**
-     * If the variable is sensitive
-     *
-     * @return sensitive
-     */
-    @javax.annotation.Nullable
-    public Boolean getSensitive() {
-        return sensitive;
-    }
-
-    public void setSensitive(@javax.annotation.Nullable Boolean sensitive) {
-        this.sensitive = sensitive;
-    }
-
-    public Variable values(@javax.annotation.Nullable List<VariableValue> values) {
-        this.values = values;
-        return this;
-    }
-
-    public Variable addValuesItem(VariableValue valuesItem) {
-        if (this.values == null) {
-            this.values = new ArrayList<>();
-        }
-        this.values.add(valuesItem);
-        return this;
-    }
-
-    /**
-     * Values of the variable
-     *
-     * @return values
-     */
-    @javax.annotation.Nullable
-    public List<VariableValue> getValues() {
-        return values;
-    }
-
-    public void setValues(@javax.annotation.Nullable List<VariableValue> values) {
-        this.values = values;
-    }
-
-    public Variable org(@javax.annotation.Nullable VariableOrgInfo org) {
-        this.org = org;
-        return this;
-    }
-
-    /**
-     * Get org
-     *
-     * @return org
-     */
-    @javax.annotation.Nullable
-    public VariableOrgInfo getOrg() {
-        return org;
-    }
-
-    public void setOrg(@javax.annotation.Nullable VariableOrgInfo org) {
-        this.org = org;
     }
 
     /**
@@ -263,9 +93,9 @@ public class Variable implements Serializable {
      *
      * @param key name of the property
      * @param value value of the property
-     * @return the Variable instance itself
+     * @return the VariableOrgInfo instance itself
      */
-    public Variable putAdditionalProperty(String key, Object value) {
+    public VariableOrgInfo putAdditionalProperty(String key, Object value) {
         if (this.additionalProperties == null) {
             this.additionalProperties = new HashMap<String, Object>();
         }
@@ -303,47 +133,23 @@ public class Variable implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Variable variable = (Variable) o;
-        return Objects.equals(this.id, variable.id)
-                && Objects.equals(this.name, variable.name)
-                && Objects.equals(this.variableType, variable.variableType)
-                && Objects.equals(this.sensitive, variable.sensitive)
-                && Objects.equals(this.values, variable.values)
-                && Objects.equals(this.org, variable.org)
-                && Objects.equals(this.additionalProperties, variable.additionalProperties);
-    }
-
-    private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-        return a == b
-                || (a != null
-                        && b != null
-                        && a.isPresent()
-                        && b.isPresent()
-                        && Objects.deepEquals(a.get(), b.get()));
+        VariableOrgInfo variableOrgInfo = (VariableOrgInfo) o;
+        return Objects.equals(this.id, variableOrgInfo.id)
+                && Objects.equals(this.name, variableOrgInfo.name)
+                && Objects.equals(this.additionalProperties, variableOrgInfo.additionalProperties);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, variableType, sensitive, values, org, additionalProperties);
-    }
-
-    private static <T> int hashCodeNullable(JsonNullable<T> a) {
-        if (a == null) {
-            return 1;
-        }
-        return a.isPresent() ? Arrays.deepHashCode(new Object[] {a.get()}) : 31;
+        return Objects.hash(id, name, additionalProperties);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class Variable {\n");
+        sb.append("class VariableOrgInfo {\n");
         sb.append("    id: ").append(toIndentedString(id)).append("\n");
         sb.append("    name: ").append(toIndentedString(name)).append("\n");
-        sb.append("    variableType: ").append(toIndentedString(variableType)).append("\n");
-        sb.append("    sensitive: ").append(toIndentedString(sensitive)).append("\n");
-        sb.append("    values: ").append(toIndentedString(values)).append("\n");
-        sb.append("    org: ").append(toIndentedString(org)).append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
                 .append("\n");
@@ -370,10 +176,6 @@ public class Variable implements Serializable {
         openapiFields = new HashSet<String>();
         openapiFields.add("id");
         openapiFields.add("name");
-        openapiFields.add("variable_type");
-        openapiFields.add("sensitive");
-        openapiFields.add("values");
-        openapiFields.add("org");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -385,22 +187,22 @@ public class Variable implements Serializable {
      * Validates the JSON Element and throws an exception if issues found
      *
      * @param jsonElement JSON Element
-     * @throws IOException if the JSON Element is invalid with respect to Variable
+     * @throws IOException if the JSON Element is invalid with respect to VariableOrgInfo
      */
     public static void validateJsonElement(JsonElement jsonElement) throws IOException {
         if (jsonElement == null) {
-            if (!Variable.openapiRequiredFields
+            if (!VariableOrgInfo.openapiRequiredFields
                     .isEmpty()) { // has required fields but JSON element is null
                 throw new IllegalArgumentException(
                         String.format(
-                                "The required field(s) %s in Variable is not found in the empty"
-                                        + " JSON string",
-                                Variable.openapiRequiredFields.toString()));
+                                "The required field(s) %s in VariableOrgInfo is not found in the"
+                                        + " empty JSON string",
+                                VariableOrgInfo.openapiRequiredFields.toString()));
             }
         }
 
         // check to make sure all required properties/fields are present in the JSON string
-        for (String requiredField : Variable.openapiRequiredFields) {
+        for (String requiredField : VariableOrgInfo.openapiRequiredFields) {
             if (jsonElement.getAsJsonObject().get(requiredField) == null) {
                 throw new IllegalArgumentException(
                         String.format(
@@ -409,13 +211,6 @@ public class Variable implements Serializable {
             }
         }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-        if (!jsonObj.get("id").isJsonPrimitive()) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            "Expected the field `id` to be a primitive type in the JSON string but"
-                                    + " got `%s`",
-                            jsonObj.get("id").toString()));
-        }
         if (!jsonObj.get("name").isJsonPrimitive()) {
             throw new IllegalArgumentException(
                     String.format(
@@ -423,58 +218,24 @@ public class Variable implements Serializable {
                                     + " but got `%s`",
                             jsonObj.get("name").toString()));
         }
-        if ((jsonObj.get("variable_type") != null && !jsonObj.get("variable_type").isJsonNull())
-                && !jsonObj.get("variable_type").isJsonPrimitive()) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            "Expected the field `variable_type` to be a primitive type in the JSON"
-                                    + " string but got `%s`",
-                            jsonObj.get("variable_type").toString()));
-        }
-        // validate the optional field `variable_type`
-        if (jsonObj.get("variable_type") != null && !jsonObj.get("variable_type").isJsonNull()) {
-            VariableTypeEnum.validateJsonElement(jsonObj.get("variable_type"));
-        }
-        if (jsonObj.get("values") != null && !jsonObj.get("values").isJsonNull()) {
-            JsonArray jsonArrayvalues = jsonObj.getAsJsonArray("values");
-            if (jsonArrayvalues != null) {
-                // ensure the json data is an array
-                if (!jsonObj.get("values").isJsonArray()) {
-                    throw new IllegalArgumentException(
-                            String.format(
-                                    "Expected the field `values` to be an array in the JSON string"
-                                            + " but got `%s`",
-                                    jsonObj.get("values").toString()));
-                }
-
-                // validate the optional field `values` (array)
-                for (int i = 0; i < jsonArrayvalues.size(); i++) {
-                    VariableValue.validateJsonElement(jsonArrayvalues.get(i));
-                }
-                ;
-            }
-        }
-        // validate the optional field `org`
-        if (jsonObj.get("org") != null && !jsonObj.get("org").isJsonNull()) {
-            VariableOrgInfo.validateJsonElement(jsonObj.get("org"));
-        }
     }
 
     public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
         @SuppressWarnings("unchecked")
         @Override
         public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-            if (!Variable.class.isAssignableFrom(type.getRawType())) {
-                return null; // this class only serializes 'Variable' and its subtypes
+            if (!VariableOrgInfo.class.isAssignableFrom(type.getRawType())) {
+                return null; // this class only serializes 'VariableOrgInfo' and its subtypes
             }
             final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-            final TypeAdapter<Variable> thisAdapter =
-                    gson.getDelegateAdapter(this, TypeToken.get(Variable.class));
+            final TypeAdapter<VariableOrgInfo> thisAdapter =
+                    gson.getDelegateAdapter(this, TypeToken.get(VariableOrgInfo.class));
 
             return (TypeAdapter<T>)
-                    new TypeAdapter<Variable>() {
+                    new TypeAdapter<VariableOrgInfo>() {
                         @Override
-                        public void write(JsonWriter out, Variable value) throws IOException {
+                        public void write(JsonWriter out, VariableOrgInfo value)
+                                throws IOException {
                             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
                             obj.remove("additionalProperties");
                             // serialize additional properties
@@ -504,12 +265,12 @@ public class Variable implements Serializable {
                         }
 
                         @Override
-                        public Variable read(JsonReader in) throws IOException {
+                        public VariableOrgInfo read(JsonReader in) throws IOException {
                             JsonElement jsonElement = elementAdapter.read(in);
                             validateJsonElement(jsonElement);
                             JsonObject jsonObj = jsonElement.getAsJsonObject();
                             // store additional fields in the deserialized instance
-                            Variable instance = thisAdapter.fromJsonTree(jsonObj);
+                            VariableOrgInfo instance = thisAdapter.fromJsonTree(jsonObj);
                             for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
                                 if (!openapiFields.contains(entry.getKey())) {
                                     if (entry.getValue().isJsonPrimitive()) { // primitive type
@@ -548,18 +309,18 @@ public class Variable implements Serializable {
     }
 
     /**
-     * Create an instance of Variable given an JSON string
+     * Create an instance of VariableOrgInfo given an JSON string
      *
      * @param jsonString JSON string
-     * @return An instance of Variable
-     * @throws IOException if the JSON string is invalid with respect to Variable
+     * @return An instance of VariableOrgInfo
+     * @throws IOException if the JSON string is invalid with respect to VariableOrgInfo
      */
-    public static Variable fromJson(String jsonString) throws IOException {
-        return JSON.getGson().fromJson(jsonString, Variable.class);
+    public static VariableOrgInfo fromJson(String jsonString) throws IOException {
+        return JSON.getGson().fromJson(jsonString, VariableOrgInfo.class);
     }
 
     /**
-     * Convert an instance of Variable to an JSON string
+     * Convert an instance of VariableOrgInfo to an JSON string
      *
      * @return JSON string
      */

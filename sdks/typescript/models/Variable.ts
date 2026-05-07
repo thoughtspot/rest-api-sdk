@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+import { VariableOrgInfo } from '../models/VariableOrgInfo';
 import { VariableValue } from '../models/VariableValue';
 import { HttpFile } from '../http/http';
 
@@ -37,6 +38,7 @@ export class Variable {
     * Values of the variable
     */
     'values'?: Array<VariableValue> | null;
+    'org'?: VariableOrgInfo;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -69,6 +71,12 @@ export class Variable {
             "name": "values",
             "baseName": "values",
             "type": "Array<VariableValue>",
+            "format": ""
+        },
+        {
+            "name": "org",
+            "baseName": "org",
+            "type": "VariableOrgInfo",
             "format": ""
         }    ];
 
