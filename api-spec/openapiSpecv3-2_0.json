@@ -4980,6 +4980,11 @@
                     "description": "Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’",
                     "type": "string",
                     "format": "binary"
+                  },
+                  "include_semantic_report": {
+                    "description": "If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.",
+                    "type": "boolean",
+                    "nullable": true
                   }
                 },
                 "required": [
@@ -5064,7 +5069,7 @@
                     "type": "string"
                   },
                   "model_tables": {
-                    "description": "List of Models and their respective Tables\nExample: '[{\"model_name\": \"model_name\", \"tables\": [\"table_name\"]}]'",
+                    "description": "List of Models and their respective Tables\nExample: '[{\"model_name\": \"model_name\", \"model_path\": \"model_path\", \"tables\": [\"table_name\"]}]'",
                     "type": "string",
                     "format": "json"
                   },
@@ -5086,6 +5091,11 @@
                     "description": "Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’",
                     "type": "string",
                     "format": "binary"
+                  },
+                  "include_semantic_report": {
+                    "description": "If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.",
+                    "type": "boolean",
+                    "nullable": true
                   }
                 },
                 "required": [
