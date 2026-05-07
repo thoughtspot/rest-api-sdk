@@ -928,7 +928,7 @@ null (empty response body)
 
 <a id="dbtGenerateSyncTml"></a>
 # **dbtGenerateSyncTml**
-> Object dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent)
+> Object dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, includeSemanticReport)
 
 
 
@@ -940,6 +940,7 @@ null (empty response body)
 |------------- | ------------- |
 | **dbtConnectionIdentifier** | **String**
 | **fileContent** | **File**
+| **includeSemanticReport** | **Boolean**
 
 ### Return type
 
@@ -965,7 +966,7 @@ null (empty response body)
 
 <a id="dbtGenerateTml"></a>
 # **dbtGenerateTml**
-> Object dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent)
+> Object dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent, includeSemanticReport)
 
 
 
@@ -980,6 +981,7 @@ null (empty response body)
 | **importWorksheets** | **String**
 | **worksheets** | **String**
 | **fileContent** | **File**
+| **includeSemanticReport** | **Boolean**
 
 ### Return type
 

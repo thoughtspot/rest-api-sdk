@@ -1691,7 +1691,9 @@ apiInstance.dbtGenerateSyncTml(
   // string | Unique ID of the DBT connection.
   "dbtConnectionIdentifier_example" , 
   // HttpFile | Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
-  { data: Buffer.from(fs.readFileSync('/path/to/file', 'utf-8')), name: '/path/to/file' } 
+  { data: Buffer.from(fs.readFileSync('/path/to/file', 'utf-8')), name: '/path/to/file' } , 
+  // boolean | If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. (optional)
+  true 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
 }).catch((error:any) => console.error(error));
@@ -1706,6 +1708,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dbtConnectionIdentifier** | [**string**] | Unique ID of the DBT connection. | defaults to undefined
  **fileContent** | [**HttpFile**] | Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’ | (optional) defaults to undefined
+ **includeSemanticReport** | [**boolean**] | If true, includes a &#x60;semantic_report&#x60; per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. | (optional) defaults to undefined
 
 
 ### Return type
@@ -1753,14 +1756,16 @@ const apiInstance = new ThoughtSpotRestApi(configuration);
 apiInstance.dbtGenerateTml(
   // string | Unique ID of the DBT connection.
   "dbtConnectionIdentifier_example" , 
-  // string | List of Models and their respective Tables Example: \\\'[{\\\"model_name\\\": \\\"model_name\\\", \\\"tables\\\": [\\\"table_name\\\"]}]\\\'
+  // string | List of Models and their respective Tables Example: \\\'[{\\\"model_name\\\": \\\"model_name\\\", \\\"model_path\\\": \\\"model_path\\\", \\\"tables\\\": [\\\"table_name\\\"]}]\\\'
   "modelTables_example" , 
   // string | Mention the worksheet tmls to import
   "ALL" , 
   // string | List of worksheets is mandatory when import_Worksheets is type SELECTED Example: [\\\"worksheet_name\\\"] (optional)
   "worksheets_example" , 
   // HttpFile | Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
-  { data: Buffer.from(fs.readFileSync('/path/to/file', 'utf-8')), name: '/path/to/file' } 
+  { data: Buffer.from(fs.readFileSync('/path/to/file', 'utf-8')), name: '/path/to/file' } , 
+  // boolean | If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. (optional)
+  true 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
 }).catch((error:any) => console.error(error));
@@ -1774,10 +1779,11 @@ apiInstance.dbtGenerateTml(
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dbtConnectionIdentifier** | [**string**] | Unique ID of the DBT connection. | defaults to undefined
- **modelTables** | [**string**] | List of Models and their respective Tables Example: \\\&#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;, \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]\\\&#39; | defaults to undefined
+ **modelTables** | [**string**] | List of Models and their respective Tables Example: \\\&#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;, \\\&quot;model_path\\\&quot;: \\\&quot;model_path\\\&quot;, \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]\\\&#39; | defaults to undefined
  **importWorksheets** | [**string**]**Array<&#39;ALL&#39; &#124; &#39;NONE&#39; &#124; &#39;SELECTED&#39;>** | Mention the worksheet tmls to import | defaults to undefined
  **worksheets** | [**string**] | List of worksheets is mandatory when import_Worksheets is type SELECTED Example: [\\\&quot;worksheet_name\\\&quot;] | (optional) defaults to undefined
  **fileContent** | [**HttpFile**] | Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’ | (optional) defaults to undefined
+ **includeSemanticReport** | [**boolean**] | If true, includes a &#x60;semantic_report&#x60; per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. | (optional) defaults to undefined
 
 
 ### Return type

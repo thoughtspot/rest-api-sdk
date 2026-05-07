@@ -23107,8 +23107,9 @@ var DBTApiRequestFactory = class extends BaseAPIRequestFactory {
    *   Version: 9.9.0.cl or later   Resynchronize the existing list of models, tables, worksheet tml’s and import them to Thoughtspot based on the DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)      
    * @param dbtConnectionIdentifier Unique ID of the DBT connection.
    * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
+   * @param includeSemanticReport If true, includes a &#x60;semantic_report&#x60; per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.
    */
-  dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, _options) {
+  dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, includeSemanticReport, _options) {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
@@ -23137,6 +23138,9 @@ var DBTApiRequestFactory = class extends BaseAPIRequestFactory {
           localVarFormParams.append("file_content", fileContent, fileContent.name);
         }
       }
+      if (includeSemanticReport !== void 0) {
+        localVarFormParams.append("include_semantic_report", includeSemanticReport);
+      }
       requestContext.setBody(localVarFormParams);
       if (!useForm) {
         const contentType = ObjectSerializer.getPreferredMediaType([
@@ -23159,12 +23163,13 @@ var DBTApiRequestFactory = class extends BaseAPIRequestFactory {
   /**
    *   Version: 9.9.0.cl or later   Generate required table and worksheet and import them.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### About generate TML Models and Worksheets to be imported can be selected by the user as part of the API.      
    * @param dbtConnectionIdentifier Unique ID of the DBT connection.
-   * @param modelTables List of Models and their respective Tables Example: \\\&#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;, \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]\\\&#39;
+   * @param modelTables List of Models and their respective Tables Example: \\\&#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;, \\\&quot;model_path\\\&quot;: \\\&quot;model_path\\\&quot;, \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]\\\&#39;
    * @param importWorksheets Mention the worksheet tmls to import
    * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED Example: [\\\&quot;worksheet_name\\\&quot;]
    * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
+   * @param includeSemanticReport If true, includes a &#x60;semantic_report&#x60; per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.
    */
-  dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent, _options) {
+  dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent, includeSemanticReport, _options) {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
@@ -23207,6 +23212,9 @@ var DBTApiRequestFactory = class extends BaseAPIRequestFactory {
         if (localVarFormParams instanceof FormData) {
           localVarFormParams.append("file_content", fileContent, fileContent.name);
         }
+      }
+      if (includeSemanticReport !== void 0) {
+        localVarFormParams.append("include_semantic_report", includeSemanticReport);
       }
       requestContext.setBody(localVarFormParams);
       if (!useForm) {
@@ -30225,8 +30233,9 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
    *   Version: 9.9.0.cl or later   Resynchronize the existing list of models, tables, worksheet tml’s and import them to Thoughtspot based on the DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)      
    * @param dbtConnectionIdentifier Unique ID of the DBT connection.
    * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
+   * @param includeSemanticReport If true, includes a &#x60;semantic_report&#x60; per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.
    */
-  dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, _options) {
+  dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, includeSemanticReport, _options) {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
@@ -30255,6 +30264,9 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
           localVarFormParams.append("file_content", fileContent, fileContent.name);
         }
       }
+      if (includeSemanticReport !== void 0) {
+        localVarFormParams.append("include_semantic_report", includeSemanticReport);
+      }
       requestContext.setBody(localVarFormParams);
       if (!useForm) {
         const contentType = ObjectSerializer.getPreferredMediaType([
@@ -30277,12 +30289,13 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
   /**
    *   Version: 9.9.0.cl or later   Generate required table and worksheet and import them.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### About generate TML Models and Worksheets to be imported can be selected by the user as part of the API.      
    * @param dbtConnectionIdentifier Unique ID of the DBT connection.
-   * @param modelTables List of Models and their respective Tables Example: \\\&#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;, \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]\\\&#39;
+   * @param modelTables List of Models and their respective Tables Example: \\\&#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;, \\\&quot;model_path\\\&quot;: \\\&quot;model_path\\\&quot;, \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]\\\&#39;
    * @param importWorksheets Mention the worksheet tmls to import
    * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED Example: [\\\&quot;worksheet_name\\\&quot;]
    * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
+   * @param includeSemanticReport If true, includes a &#x60;semantic_report&#x60; per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.
    */
-  dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent, _options) {
+  dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent, includeSemanticReport, _options) {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
@@ -30325,6 +30338,9 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
         if (localVarFormParams instanceof FormData) {
           localVarFormParams.append("file_content", fileContent, fileContent.name);
         }
+      }
+      if (includeSemanticReport !== void 0) {
+        localVarFormParams.append("include_semantic_report", includeSemanticReport);
       }
       requestContext.setBody(localVarFormParams);
       if (!useForm) {
@@ -43207,9 +43223,10 @@ var ObservableDBTApi = class {
    *   Version: 9.9.0.cl or later   Resynchronize the existing list of models, tables, worksheet tml’s and import them to Thoughtspot based on the DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)      
    * @param dbtConnectionIdentifier Unique ID of the DBT connection.
    * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
+   * @param includeSemanticReport If true, includes a &#x60;semantic_report&#x60; per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.
    */
-  dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, _options) {
-    const requestContextPromise = this.requestFactory.dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, _options);
+  dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, includeSemanticReport, _options) {
+    const requestContextPromise = this.requestFactory.dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, includeSemanticReport, _options);
     let middlewarePreObservable = from(requestContextPromise);
     for (let middleware of this.configuration.middleware) {
       middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
@@ -43225,13 +43242,14 @@ var ObservableDBTApi = class {
   /**
    *   Version: 9.9.0.cl or later   Generate required table and worksheet and import them.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### About generate TML Models and Worksheets to be imported can be selected by the user as part of the API.      
    * @param dbtConnectionIdentifier Unique ID of the DBT connection.
-   * @param modelTables List of Models and their respective Tables Example: \\\&#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;, \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]\\\&#39;
+   * @param modelTables List of Models and their respective Tables Example: \\\&#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;, \\\&quot;model_path\\\&quot;: \\\&quot;model_path\\\&quot;, \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]\\\&#39;
    * @param importWorksheets Mention the worksheet tmls to import
    * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED Example: [\\\&quot;worksheet_name\\\&quot;]
    * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
+   * @param includeSemanticReport If true, includes a &#x60;semantic_report&#x60; per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.
    */
-  dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent, _options) {
-    const requestContextPromise = this.requestFactory.dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent, _options);
+  dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent, includeSemanticReport, _options) {
+    const requestContextPromise = this.requestFactory.dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent, includeSemanticReport, _options);
     let middlewarePreObservable = from(requestContextPromise);
     for (let middleware of this.configuration.middleware) {
       middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
@@ -44870,9 +44888,10 @@ var ObservableThoughtSpotRestApi = class {
    *   Version: 9.9.0.cl or later   Resynchronize the existing list of models, tables, worksheet tml’s and import them to Thoughtspot based on the DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)      
    * @param dbtConnectionIdentifier Unique ID of the DBT connection.
    * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
+   * @param includeSemanticReport If true, includes a &#x60;semantic_report&#x60; per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.
    */
-  dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, _options) {
-    const requestContextPromise = this.requestFactory.dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, _options);
+  dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, includeSemanticReport, _options) {
+    const requestContextPromise = this.requestFactory.dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, includeSemanticReport, _options);
     let middlewarePreObservable = from(requestContextPromise);
     for (let middleware of this.configuration.middleware) {
       middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
@@ -44888,13 +44907,14 @@ var ObservableThoughtSpotRestApi = class {
   /**
    *   Version: 9.9.0.cl or later   Generate required table and worksheet and import them.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### About generate TML Models and Worksheets to be imported can be selected by the user as part of the API.      
    * @param dbtConnectionIdentifier Unique ID of the DBT connection.
-   * @param modelTables List of Models and their respective Tables Example: \\\&#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;, \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]\\\&#39;
+   * @param modelTables List of Models and their respective Tables Example: \\\&#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;, \\\&quot;model_path\\\&quot;: \\\&quot;model_path\\\&quot;, \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]\\\&#39;
    * @param importWorksheets Mention the worksheet tmls to import
    * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED Example: [\\\&quot;worksheet_name\\\&quot;]
    * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
+   * @param includeSemanticReport If true, includes a &#x60;semantic_report&#x60; per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.
    */
-  dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent, _options) {
-    const requestContextPromise = this.requestFactory.dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent, _options);
+  dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent, includeSemanticReport, _options) {
+    const requestContextPromise = this.requestFactory.dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent, includeSemanticReport, _options);
     let middlewarePreObservable = from(requestContextPromise);
     for (let middleware of this.configuration.middleware) {
       middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
@@ -47303,21 +47323,23 @@ var PromiseDBTApi = class {
    *   Version: 9.9.0.cl or later   Resynchronize the existing list of models, tables, worksheet tml’s and import them to Thoughtspot based on the DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)      
    * @param dbtConnectionIdentifier Unique ID of the DBT connection.
    * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
+   * @param includeSemanticReport If true, includes a &#x60;semantic_report&#x60; per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.
    */
-  dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, _options) {
-    const result = this.api.dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, _options);
+  dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, includeSemanticReport, _options) {
+    const result = this.api.dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, includeSemanticReport, _options);
     return result.toPromise();
   }
   /**
    *   Version: 9.9.0.cl or later   Generate required table and worksheet and import them.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### About generate TML Models and Worksheets to be imported can be selected by the user as part of the API.      
    * @param dbtConnectionIdentifier Unique ID of the DBT connection.
-   * @param modelTables List of Models and their respective Tables Example: \\\&#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;, \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]\\\&#39;
+   * @param modelTables List of Models and their respective Tables Example: \\\&#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;, \\\&quot;model_path\\\&quot;: \\\&quot;model_path\\\&quot;, \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]\\\&#39;
    * @param importWorksheets Mention the worksheet tmls to import
    * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED Example: [\\\&quot;worksheet_name\\\&quot;]
    * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
+   * @param includeSemanticReport If true, includes a &#x60;semantic_report&#x60; per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.
    */
-  dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent, _options) {
-    const result = this.api.dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent, _options);
+  dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent, includeSemanticReport, _options) {
+    const result = this.api.dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent, includeSemanticReport, _options);
     return result.toPromise();
   }
   /**
@@ -48080,21 +48102,23 @@ var PromiseThoughtSpotRestApi = class {
    *   Version: 9.9.0.cl or later   Resynchronize the existing list of models, tables, worksheet tml’s and import them to Thoughtspot based on the DBT connection object.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)      
    * @param dbtConnectionIdentifier Unique ID of the DBT connection.
    * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
+   * @param includeSemanticReport If true, includes a &#x60;semantic_report&#x60; per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.
    */
-  dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, _options) {
-    const result = this.api.dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, _options);
+  dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, includeSemanticReport, _options) {
+    const result = this.api.dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, includeSemanticReport, _options);
     return result.toPromise();
   }
   /**
    *   Version: 9.9.0.cl or later   Generate required table and worksheet and import them.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege, along with an existing DBT connection. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following data control privileges may be required:  - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**) - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### About generate TML Models and Worksheets to be imported can be selected by the user as part of the API.      
    * @param dbtConnectionIdentifier Unique ID of the DBT connection.
-   * @param modelTables List of Models and their respective Tables Example: \\\&#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;, \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]\\\&#39;
+   * @param modelTables List of Models and their respective Tables Example: \\\&#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;, \\\&quot;model_path\\\&quot;: \\\&quot;model_path\\\&quot;, \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]\\\&#39;
    * @param importWorksheets Mention the worksheet tmls to import
    * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED Example: [\\\&quot;worksheet_name\\\&quot;]
    * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
+   * @param includeSemanticReport If true, includes a &#x60;semantic_report&#x60; per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.
    */
-  dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent, _options) {
-    const result = this.api.dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent, _options);
+  dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent, includeSemanticReport, _options) {
+    const result = this.api.dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent, includeSemanticReport, _options);
     return result.toPromise();
   }
   /**

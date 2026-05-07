@@ -1238,6 +1238,12 @@ export interface DBTApiDbtGenerateSyncTmlRequest {
      * @memberof DBTApidbtGenerateSyncTml
      */
     fileContent?: HttpFile
+    /**
+     * If true, includes a &#x60;semantic_report&#x60; per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.
+     * @type boolean
+     * @memberof DBTApidbtGenerateSyncTml
+     */
+    includeSemanticReport?: boolean
 }
 
 export interface DBTApiDbtGenerateTmlRequest {
@@ -1248,7 +1254,7 @@ export interface DBTApiDbtGenerateTmlRequest {
      */
     dbtConnectionIdentifier: string
     /**
-     * List of Models and their respective Tables Example: \\\&#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;, \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]\\\&#39;
+     * List of Models and their respective Tables Example: \\\&#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;, \\\&quot;model_path\\\&quot;: \\\&quot;model_path\\\&quot;, \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]\\\&#39;
      * @type string
      * @memberof DBTApidbtGenerateTml
      */
@@ -1271,6 +1277,12 @@ export interface DBTApiDbtGenerateTmlRequest {
      * @memberof DBTApidbtGenerateTml
      */
     fileContent?: HttpFile
+    /**
+     * If true, includes a &#x60;semantic_report&#x60; per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.
+     * @type boolean
+     * @memberof DBTApidbtGenerateTml
+     */
+    includeSemanticReport?: boolean
 }
 
 export interface DBTApiDbtSearchRequest {
@@ -1374,7 +1386,7 @@ export class ObjectDBTApi {
      * @param param the request object
      */
     public dbtGenerateSyncTml(param: DBTApiDbtGenerateSyncTmlRequest, options?: Configuration): Promise<any> {
-        return this.api.dbtGenerateSyncTml(param.dbtConnectionIdentifier, param.fileContent,  options).toPromise();
+        return this.api.dbtGenerateSyncTml(param.dbtConnectionIdentifier, param.fileContent, param.includeSemanticReport,  options).toPromise();
     }
 
     /**
@@ -1382,7 +1394,7 @@ export class ObjectDBTApi {
      * @param param the request object
      */
     public dbtGenerateTml(param: DBTApiDbtGenerateTmlRequest, options?: Configuration): Promise<any> {
-        return this.api.dbtGenerateTml(param.dbtConnectionIdentifier, param.modelTables, param.importWorksheets, param.worksheets, param.fileContent,  options).toPromise();
+        return this.api.dbtGenerateTml(param.dbtConnectionIdentifier, param.modelTables, param.importWorksheets, param.worksheets, param.fileContent, param.includeSemanticReport,  options).toPromise();
     }
 
     /**
@@ -2832,6 +2844,12 @@ export interface ThoughtSpotRestApiDbtGenerateSyncTmlRequest {
      * @memberof ThoughtSpotRestApidbtGenerateSyncTml
      */
     fileContent?: HttpFile
+    /**
+     * If true, includes a &#x60;semantic_report&#x60; per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.
+     * @type boolean
+     * @memberof ThoughtSpotRestApidbtGenerateSyncTml
+     */
+    includeSemanticReport?: boolean
 }
 
 export interface ThoughtSpotRestApiDbtGenerateTmlRequest {
@@ -2842,7 +2860,7 @@ export interface ThoughtSpotRestApiDbtGenerateTmlRequest {
      */
     dbtConnectionIdentifier: string
     /**
-     * List of Models and their respective Tables Example: \\\&#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;, \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]\\\&#39;
+     * List of Models and their respective Tables Example: \\\&#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;, \\\&quot;model_path\\\&quot;: \\\&quot;model_path\\\&quot;, \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]\\\&#39;
      * @type string
      * @memberof ThoughtSpotRestApidbtGenerateTml
      */
@@ -2865,6 +2883,12 @@ export interface ThoughtSpotRestApiDbtGenerateTmlRequest {
      * @memberof ThoughtSpotRestApidbtGenerateTml
      */
     fileContent?: HttpFile
+    /**
+     * If true, includes a &#x60;semantic_report&#x60; per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.
+     * @type boolean
+     * @memberof ThoughtSpotRestApidbtGenerateTml
+     */
+    includeSemanticReport?: boolean
 }
 
 export interface ThoughtSpotRestApiDbtSearchRequest {
@@ -3985,7 +4009,7 @@ export class ObjectThoughtSpotRestApi {
      * @param param the request object
      */
     public dbtGenerateSyncTml(param: ThoughtSpotRestApiDbtGenerateSyncTmlRequest, options?: Configuration): Promise<any> {
-        return this.api.dbtGenerateSyncTml(param.dbtConnectionIdentifier, param.fileContent,  options).toPromise();
+        return this.api.dbtGenerateSyncTml(param.dbtConnectionIdentifier, param.fileContent, param.includeSemanticReport,  options).toPromise();
     }
 
     /**
@@ -3993,7 +4017,7 @@ export class ObjectThoughtSpotRestApi {
      * @param param the request object
      */
     public dbtGenerateTml(param: ThoughtSpotRestApiDbtGenerateTmlRequest, options?: Configuration): Promise<any> {
-        return this.api.dbtGenerateTml(param.dbtConnectionIdentifier, param.modelTables, param.importWorksheets, param.worksheets, param.fileContent,  options).toPromise();
+        return this.api.dbtGenerateTml(param.dbtConnectionIdentifier, param.modelTables, param.importWorksheets, param.worksheets, param.fileContent, param.includeSemanticReport,  options).toPromise();
     }
 
     /**

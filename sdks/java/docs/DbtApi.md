@@ -59,7 +59,7 @@ All URIs are relative to *CLUSTER_URL*
 
 <a id="dbtGenerateSyncTml"></a>
 # **dbtGenerateSyncTml**
-> Object dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent)
+> Object dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, includeSemanticReport)
 
 
 
@@ -71,6 +71,7 @@ All URIs are relative to *CLUSTER_URL*
 |------------- | ------------- |
 | **dbtConnectionIdentifier** | **String**
 | **fileContent** | **File**
+| **includeSemanticReport** | **Boolean**
 
 ### Return type
 
@@ -96,7 +97,7 @@ All URIs are relative to *CLUSTER_URL*
 
 <a id="dbtGenerateTml"></a>
 # **dbtGenerateTml**
-> Object dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent)
+> Object dbtGenerateTml(dbtConnectionIdentifier, modelTables, importWorksheets, worksheets, fileContent, includeSemanticReport)
 
 
 
@@ -111,6 +112,7 @@ All URIs are relative to *CLUSTER_URL*
 | **importWorksheets** | **String**
 | **worksheets** | **String**
 | **fileContent** | **File**
+| **includeSemanticReport** | **Boolean**
 
 ### Return type
 

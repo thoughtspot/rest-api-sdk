@@ -468,6 +468,10 @@ public class DbtApi {
      * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
      * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
      *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
+     * @param includeSemanticReport If true, includes a &#x60;semantic_report&#x60; per model
+     *     showing which components were imported or skipped. Each component includes its name, type
+     *     (such as dimension, measure, or metric), import status, SQL expression, and the
+     *     corresponding generated ThoughtSpot formula. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -483,7 +487,10 @@ public class DbtApi {
      * </table>
      */
     public okhttp3.Call dbtGenerateSyncTmlCall(
-            String dbtConnectionIdentifier, File fileContent, final ApiCallback _callback)
+            String dbtConnectionIdentifier,
+            File fileContent,
+            Boolean includeSemanticReport,
+            final ApiCallback _callback)
             throws ApiException {
         String basePath = null;
         // Operation Servers
@@ -517,6 +524,10 @@ public class DbtApi {
             localVarFormParams.put("file_content", fileContent);
         }
 
+        if (includeSemanticReport != null) {
+            localVarFormParams.put("include_semantic_report", includeSemanticReport);
+        }
+
         final String[] localVarAccepts = {"application/json"};
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
@@ -547,7 +558,10 @@ public class DbtApi {
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call dbtGenerateSyncTmlValidateBeforeCall(
-            String dbtConnectionIdentifier, File fileContent, final ApiCallback _callback)
+            String dbtConnectionIdentifier,
+            File fileContent,
+            Boolean includeSemanticReport,
+            final ApiCallback _callback)
             throws ApiException {
         // verify the required parameter 'dbtConnectionIdentifier' is set
         if (dbtConnectionIdentifier == null) {
@@ -556,7 +570,8 @@ public class DbtApi {
                             + " dbtGenerateSyncTml(Async)");
         }
 
-        return dbtGenerateSyncTmlCall(dbtConnectionIdentifier, fileContent, _callback);
+        return dbtGenerateSyncTmlCall(
+                dbtConnectionIdentifier, fileContent, includeSemanticReport, _callback);
     }
 
     /**
@@ -574,6 +589,10 @@ public class DbtApi {
      * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
      * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
      *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
+     * @param includeSemanticReport If true, includes a &#x60;semantic_report&#x60; per model
+     *     showing which components were imported or skipped. Each component includes its name, type
+     *     (such as dimension, measure, or metric), import status, SQL expression, and the
+     *     corresponding generated ThoughtSpot formula. (optional)
      * @return Object
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -588,10 +607,12 @@ public class DbtApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public Object dbtGenerateSyncTml(String dbtConnectionIdentifier, File fileContent)
+    public Object dbtGenerateSyncTml(
+            String dbtConnectionIdentifier, File fileContent, Boolean includeSemanticReport)
             throws ApiException {
         ApiResponse<Object> localVarResp =
-                dbtGenerateSyncTmlWithHttpInfo(dbtConnectionIdentifier, fileContent);
+                dbtGenerateSyncTmlWithHttpInfo(
+                        dbtConnectionIdentifier, fileContent, includeSemanticReport);
         return localVarResp.getData();
     }
 
@@ -610,6 +631,10 @@ public class DbtApi {
      * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
      * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
      *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
+     * @param includeSemanticReport If true, includes a &#x60;semantic_report&#x60; per model
+     *     showing which components were imported or skipped. Each component includes its name, type
+     *     (such as dimension, measure, or metric), import status, SQL expression, and the
+     *     corresponding generated ThoughtSpot formula. (optional)
      * @return ApiResponse&lt;Object&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -625,9 +650,11 @@ public class DbtApi {
      * </table>
      */
     public ApiResponse<Object> dbtGenerateSyncTmlWithHttpInfo(
-            String dbtConnectionIdentifier, File fileContent) throws ApiException {
+            String dbtConnectionIdentifier, File fileContent, Boolean includeSemanticReport)
+            throws ApiException {
         okhttp3.Call localVarCall =
-                dbtGenerateSyncTmlValidateBeforeCall(dbtConnectionIdentifier, fileContent, null);
+                dbtGenerateSyncTmlValidateBeforeCall(
+                        dbtConnectionIdentifier, fileContent, includeSemanticReport, null);
         Type localVarReturnType = new TypeToken<Object>() {}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -647,6 +674,10 @@ public class DbtApi {
      * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
      * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
      *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
+     * @param includeSemanticReport If true, includes a &#x60;semantic_report&#x60; per model
+     *     showing which components were imported or skipped. Each component includes its name, type
+     *     (such as dimension, measure, or metric), import status, SQL expression, and the
+     *     corresponding generated ThoughtSpot formula. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body
@@ -663,12 +694,15 @@ public class DbtApi {
      * </table>
      */
     public okhttp3.Call dbtGenerateSyncTmlAsync(
-            String dbtConnectionIdentifier, File fileContent, final ApiCallback<Object> _callback)
+            String dbtConnectionIdentifier,
+            File fileContent,
+            Boolean includeSemanticReport,
+            final ApiCallback<Object> _callback)
             throws ApiException {
 
         okhttp3.Call localVarCall =
                 dbtGenerateSyncTmlValidateBeforeCall(
-                        dbtConnectionIdentifier, fileContent, _callback);
+                        dbtConnectionIdentifier, fileContent, includeSemanticReport, _callback);
         Type localVarReturnType = new TypeToken<Object>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -679,12 +713,17 @@ public class DbtApi {
      * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
      * @param modelTables List of Models and their respective Tables Example:
      *     &#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;,
-     *     \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]&#39; (required)
+     *     \\\&quot;model_path\\\&quot;: \\\&quot;model_path\\\&quot;, \\\&quot;tables\\\&quot;:
+     *     [\\\&quot;table_name\\\&quot;]}]&#39; (required)
      * @param importWorksheets Mention the worksheet tmls to import (required)
      * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED
      *     Example: [\\\&quot;worksheet_name\\\&quot;] (optional)
      * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
      *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
+     * @param includeSemanticReport If true, includes a &#x60;semantic_report&#x60; per model
+     *     showing which components were imported or skipped. Each component includes its name, type
+     *     (such as dimension, measure, or metric), import status, SQL expression, and the
+     *     corresponding generated ThoughtSpot formula. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -705,6 +744,7 @@ public class DbtApi {
             String importWorksheets,
             String worksheets,
             File fileContent,
+            Boolean includeSemanticReport,
             final ApiCallback _callback)
             throws ApiException {
         String basePath = null;
@@ -751,6 +791,10 @@ public class DbtApi {
             localVarFormParams.put("file_content", fileContent);
         }
 
+        if (includeSemanticReport != null) {
+            localVarFormParams.put("include_semantic_report", includeSemanticReport);
+        }
+
         final String[] localVarAccepts = {"application/json"};
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
@@ -786,6 +830,7 @@ public class DbtApi {
             String importWorksheets,
             String worksheets,
             File fileContent,
+            Boolean includeSemanticReport,
             final ApiCallback _callback)
             throws ApiException {
         // verify the required parameter 'dbtConnectionIdentifier' is set
@@ -815,6 +860,7 @@ public class DbtApi {
                 importWorksheets,
                 worksheets,
                 fileContent,
+                includeSemanticReport,
                 _callback);
     }
 
@@ -834,12 +880,17 @@ public class DbtApi {
      * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
      * @param modelTables List of Models and their respective Tables Example:
      *     &#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;,
-     *     \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]&#39; (required)
+     *     \\\&quot;model_path\\\&quot;: \\\&quot;model_path\\\&quot;, \\\&quot;tables\\\&quot;:
+     *     [\\\&quot;table_name\\\&quot;]}]&#39; (required)
      * @param importWorksheets Mention the worksheet tmls to import (required)
      * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED
      *     Example: [\\\&quot;worksheet_name\\\&quot;] (optional)
      * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
      *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
+     * @param includeSemanticReport If true, includes a &#x60;semantic_report&#x60; per model
+     *     showing which components were imported or skipped. Each component includes its name, type
+     *     (such as dimension, measure, or metric), import status, SQL expression, and the
+     *     corresponding generated ThoughtSpot formula. (optional)
      * @return Object
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -859,7 +910,8 @@ public class DbtApi {
             String modelTables,
             String importWorksheets,
             String worksheets,
-            File fileContent)
+            File fileContent,
+            Boolean includeSemanticReport)
             throws ApiException {
         ApiResponse<Object> localVarResp =
                 dbtGenerateTmlWithHttpInfo(
@@ -867,7 +919,8 @@ public class DbtApi {
                         modelTables,
                         importWorksheets,
                         worksheets,
-                        fileContent);
+                        fileContent,
+                        includeSemanticReport);
         return localVarResp.getData();
     }
 
@@ -887,12 +940,17 @@ public class DbtApi {
      * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
      * @param modelTables List of Models and their respective Tables Example:
      *     &#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;,
-     *     \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]&#39; (required)
+     *     \\\&quot;model_path\\\&quot;: \\\&quot;model_path\\\&quot;, \\\&quot;tables\\\&quot;:
+     *     [\\\&quot;table_name\\\&quot;]}]&#39; (required)
      * @param importWorksheets Mention the worksheet tmls to import (required)
      * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED
      *     Example: [\\\&quot;worksheet_name\\\&quot;] (optional)
      * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
      *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
+     * @param includeSemanticReport If true, includes a &#x60;semantic_report&#x60; per model
+     *     showing which components were imported or skipped. Each component includes its name, type
+     *     (such as dimension, measure, or metric), import status, SQL expression, and the
+     *     corresponding generated ThoughtSpot formula. (optional)
      * @return ApiResponse&lt;Object&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -912,7 +970,8 @@ public class DbtApi {
             String modelTables,
             String importWorksheets,
             String worksheets,
-            File fileContent)
+            File fileContent,
+            Boolean includeSemanticReport)
             throws ApiException {
         okhttp3.Call localVarCall =
                 dbtGenerateTmlValidateBeforeCall(
@@ -921,6 +980,7 @@ public class DbtApi {
                         importWorksheets,
                         worksheets,
                         fileContent,
+                        includeSemanticReport,
                         null);
         Type localVarReturnType = new TypeToken<Object>() {}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -942,12 +1002,17 @@ public class DbtApi {
      * @param dbtConnectionIdentifier Unique ID of the DBT connection. (required)
      * @param modelTables List of Models and their respective Tables Example:
      *     &#39;[{\\\&quot;model_name\\\&quot;: \\\&quot;model_name\\\&quot;,
-     *     \\\&quot;tables\\\&quot;: [\\\&quot;table_name\\\&quot;]}]&#39; (required)
+     *     \\\&quot;model_path\\\&quot;: \\\&quot;model_path\\\&quot;, \\\&quot;tables\\\&quot;:
+     *     [\\\&quot;table_name\\\&quot;]}]&#39; (required)
      * @param importWorksheets Mention the worksheet tmls to import (required)
      * @param worksheets List of worksheets is mandatory when import_Worksheets is type SELECTED
      *     Example: [\\\&quot;worksheet_name\\\&quot;] (optional)
      * @param fileContent Upload DBT Manifest and Catalog artifact files as a ZIP file. This field
      *     is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
+     * @param includeSemanticReport If true, includes a &#x60;semantic_report&#x60; per model
+     *     showing which components were imported or skipped. Each component includes its name, type
+     *     (such as dimension, measure, or metric), import status, SQL expression, and the
+     *     corresponding generated ThoughtSpot formula. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body
@@ -969,6 +1034,7 @@ public class DbtApi {
             String importWorksheets,
             String worksheets,
             File fileContent,
+            Boolean includeSemanticReport,
             final ApiCallback<Object> _callback)
             throws ApiException {
 
@@ -979,6 +1045,7 @@ public class DbtApi {
                         importWorksheets,
                         worksheets,
                         fileContent,
+                        includeSemanticReport,
                         _callback);
         Type localVarReturnType = new TypeToken<Object>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
