@@ -332,8 +332,7 @@ public class SearchChannelHistoryRequest implements Serializable {
     }
 
     /**
-     * Filter records created on or before this time (epoch milliseconds). Version: 26.7.0.cl or
-     * later
+     * Filter records created before this time (epoch milliseconds). Version: 26.7.0.cl or later
      *
      * @return endEpochTimeInMillis
      */

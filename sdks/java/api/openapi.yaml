@@ -20282,7 +20282,7 @@ components:
           format: float
           type: number
         end_epoch_time_in_millis:
-          description: "Filter records created on or before this time (epoch milliseconds).\
+          description: "Filter records created before this time (epoch milliseconds).\
             \ \n  Version: 26.7.0.cl or later\n"
           format: float
           type: number

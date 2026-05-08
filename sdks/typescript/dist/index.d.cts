@@ -15109,7 +15109,7 @@ declare class SearchChannelHistoryRequest {
     */
     'start_epoch_time_in_millis'?: number;
     /**
-    * Filter records created on or before this time (epoch milliseconds).    Version: 26.7.0.cl or later
+    * Filter records created before this time (epoch milliseconds).    Version: 26.7.0.cl or later
     */
     'end_epoch_time_in_millis'?: number;
     static readonly discriminator: string | undefined;

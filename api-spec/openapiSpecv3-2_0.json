@@ -26164,7 +26164,7 @@
             "format": "float"
           },
           "end_epoch_time_in_millis": {
-            "description": "Filter records created on or before this time (epoch milliseconds). <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
+            "description": "Filter records created before this time (epoch milliseconds). <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
             "type": "number",
             "format": "float"
           }
