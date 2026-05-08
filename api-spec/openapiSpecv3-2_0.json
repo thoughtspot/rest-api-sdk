@@ -17196,7 +17196,8 @@
                 "CAN_MANAGE_WEBHOOKS",
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
-                "CAN_USE_SPOTTER"
+                "CAN_USE_SPOTTER",
+                "CAN_MANAGE_SPOTTER"
               ]
             },
             "description": "Privileges granted to the role."
@@ -20609,7 +20610,8 @@
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
-                "CAN_USE_SPOTTER"
+                "CAN_USE_SPOTTER",
+                "CAN_MANAGE_SPOTTER"
               ]
             },
             "description": "Privileges that will be assigned to the group.",
@@ -21673,7 +21675,8 @@
                 "CAN_MANAGE_WEBHOOKS",
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
-                "CAN_USE_SPOTTER"
+                "CAN_USE_SPOTTER",
+                "CAN_MANAGE_SPOTTER"
               ]
             },
             "description": "Privileges granted to the role."
@@ -25759,7 +25762,8 @@
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
-                "CAN_USE_SPOTTER"
+                "CAN_USE_SPOTTER",
+                "CAN_MANAGE_SPOTTER"
               ]
             }
           },
@@ -25917,7 +25921,8 @@
                 "CAN_MANAGE_WEBHOOKS",
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
-                "CAN_USE_SPOTTER"
+                "CAN_USE_SPOTTER",
+                "CAN_MANAGE_SPOTTER"
               ]
             }
           },
@@ -26056,7 +26061,8 @@
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
-                "CAN_USE_SPOTTER"
+                "CAN_USE_SPOTTER",
+                "CAN_MANAGE_SPOTTER"
               ]
             }
           },
@@ -27213,7 +27219,8 @@
                 "CAN_MANAGE_WEBHOOKS",
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
-                "CAN_USE_SPOTTER"
+                "CAN_USE_SPOTTER",
+                "CAN_MANAGE_SPOTTER"
               ]
             }
           },
@@ -27311,7 +27318,8 @@
                 "CAN_MANAGE_WEBHOOKS",
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
-                "CAN_USE_SPOTTER"
+                "CAN_USE_SPOTTER",
+                "CAN_MANAGE_SPOTTER"
               ]
             }
           },
@@ -27404,7 +27412,8 @@
                 "CAN_MANAGE_WEBHOOKS",
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
-                "CAN_USE_SPOTTER"
+                "CAN_USE_SPOTTER",
+                "CAN_MANAGE_SPOTTER"
               ]
             }
           }
@@ -29962,7 +29971,8 @@
                 "CAN_MANAGE_WEBHOOKS",
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
-                "CAN_USE_SPOTTER"
+                "CAN_USE_SPOTTER",
+                "CAN_MANAGE_SPOTTER"
               ]
             }
           },
