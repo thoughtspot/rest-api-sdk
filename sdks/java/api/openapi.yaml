@@ -11999,6 +11999,7 @@ components:
             - CAN_DOWNLOAD_VISUALS
             - CAN_DOWNLOAD_DETAILED_DATA
             - CAN_USE_SPOTTER
+            - CAN_MANAGE_SPOTTER
             type: string
           type: array
         permission:
@@ -14908,6 +14909,7 @@ components:
             - CAN_DOWNLOAD_VISUALS
             - CAN_DOWNLOAD_DETAILED_DATA
             - CAN_USE_SPOTTER
+            - CAN_MANAGE_SPOTTER
             type: string
           nullable: true
           type: array
@@ -16009,6 +16011,7 @@ components:
             - CAN_DOWNLOAD_VISUALS
             - CAN_DOWNLOAD_DETAILED_DATA
             - CAN_USE_SPOTTER
+            - CAN_MANAGE_SPOTTER
             type: string
           type: array
         permission:
@@ -19847,6 +19850,7 @@ components:
             - CAN_DOWNLOAD_VISUALS
             - CAN_DOWNLOAD_DETAILED_DATA
             - CAN_USE_SPOTTER
+            - CAN_MANAGE_SPOTTER
             type: string
           type: array
         sub_group_identifiers:
@@ -20051,6 +20055,7 @@ components:
             - CAN_DOWNLOAD_VISUALS
             - CAN_DOWNLOAD_DETAILED_DATA
             - CAN_USE_SPOTTER
+            - CAN_MANAGE_SPOTTER
             type: string
           type: array
         sub_group_identifiers:
@@ -20197,6 +20202,7 @@ components:
             - CAN_DOWNLOAD_VISUALS
             - CAN_DOWNLOAD_DETAILED_DATA
             - CAN_USE_SPOTTER
+            - CAN_MANAGE_SPOTTER
             type: string
           type: array
         sub_group_identifiers:
@@ -21436,6 +21442,7 @@ components:
             - CAN_DOWNLOAD_VISUALS
             - CAN_DOWNLOAD_DETAILED_DATA
             - CAN_USE_SPOTTER
+            - CAN_MANAGE_SPOTTER
             type: string
           type: array
         read_only:
@@ -21545,6 +21552,7 @@ components:
             - CAN_DOWNLOAD_VISUALS
             - CAN_DOWNLOAD_DETAILED_DATA
             - CAN_USE_SPOTTER
+            - CAN_MANAGE_SPOTTER
             type: string
           type: array
         deprecated:
@@ -21632,6 +21640,7 @@ components:
             - CAN_DOWNLOAD_VISUALS
             - CAN_DOWNLOAD_DETAILED_DATA
             - CAN_USE_SPOTTER
+            - CAN_MANAGE_SPOTTER
             type: string
           type: array
       required:
@@ -24254,6 +24263,7 @@ components:
             - CAN_DOWNLOAD_VISUALS
             - CAN_DOWNLOAD_DETAILED_DATA
             - CAN_USE_SPOTTER
+            - CAN_MANAGE_SPOTTER
             type: string
           type: array
         account_type:
