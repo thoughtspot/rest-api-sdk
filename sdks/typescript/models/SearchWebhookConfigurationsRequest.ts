@@ -35,6 +35,10 @@ export class SearchWebhookConfigurationsRequest {
     */
     'record_size'?: number;
     'sort_options'?: SearchWebhookConfigurationsRequestSortOptions;
+    /**
+    * Filter webhooks by status (ENABLED or DISABLED).    Version: 26.7.0.cl or later 
+    */
+    'status'?: SearchWebhookConfigurationsRequestStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -74,6 +78,12 @@ export class SearchWebhookConfigurationsRequest {
             "baseName": "sort_options",
             "type": "SearchWebhookConfigurationsRequestSortOptions",
             "format": ""
+        },
+        {
+            "name": "status",
+            "baseName": "status",
+            "type": "SearchWebhookConfigurationsRequestStatusEnum",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -86,4 +96,5 @@ export class SearchWebhookConfigurationsRequest {
 
 
 export type SearchWebhookConfigurationsRequestEventTypeEnum = "LIVEBOARD_SCHEDULE" ;
+export type SearchWebhookConfigurationsRequestStatusEnum = "ENABLED" | "DISABLED" ;
 

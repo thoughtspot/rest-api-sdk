@@ -610,7 +610,7 @@ import { CreateTagRequest } from '../models/CreateTagRequest';
 import { CreateUserGroupRequest    , CreateUserGroupRequestPrivilegesEnum   , CreateUserGroupRequestTypeEnum   , CreateUserGroupRequestVisibilityEnum    } from '../models/CreateUserGroupRequest';
 import { CreateUserRequest    , CreateUserRequestAccountTypeEnum  , CreateUserRequestAccountStatusEnum    , CreateUserRequestVisibilityEnum       , CreateUserRequestPreferredLocaleEnum        } from '../models/CreateUserRequest';
 import { CreateVariableRequest, CreateVariableRequestTypeEnum    , CreateVariableRequestDataTypeEnum   } from '../models/CreateVariableRequest';
-import { CreateWebhookConfigurationRequest    , CreateWebhookConfigurationRequestEventsEnum       } from '../models/CreateWebhookConfigurationRequest';
+import { CreateWebhookConfigurationRequest    , CreateWebhookConfigurationRequestEventsEnum      , CreateWebhookConfigurationRequestStatusEnum   } from '../models/CreateWebhookConfigurationRequest';
 import { CreateWebhookConfigurationRequestAuthentication } from '../models/CreateWebhookConfigurationRequestAuthentication';
 import { CreateWebhookConfigurationRequestSignatureVerification, CreateWebhookConfigurationRequestSignatureVerificationTypeEnum   , CreateWebhookConfigurationRequestSignatureVerificationAlgorithmEnum    } from '../models/CreateWebhookConfigurationRequestSignatureVerification';
 import { CreateWebhookConfigurationRequestStorageDestination, CreateWebhookConfigurationRequestStorageDestinationStorageTypeEnum    } from '../models/CreateWebhookConfigurationRequestStorageDestination';
@@ -853,7 +853,7 @@ import { SearchUserGroupsRequest      , SearchUserGroupsRequestPrivilegesEnum   
 import { SearchUserGroupsRequestSortOptions, SearchUserGroupsRequestSortOptionsFieldNameEnum  , SearchUserGroupsRequestSortOptionsOrderEnum   } from '../models/SearchUserGroupsRequestSortOptions';
 import { SearchUsersRequest   , SearchUsersRequestVisibilityEnum    , SearchUsersRequestPrivilegesEnum  , SearchUsersRequestAccountTypeEnum  , SearchUsersRequestAccountStatusEnum               } from '../models/SearchUsersRequest';
 import { SearchVariablesRequest    , SearchVariablesRequestResponseContentEnum   } from '../models/SearchVariablesRequest';
-import { SearchWebhookConfigurationsRequest  , SearchWebhookConfigurationsRequestEventTypeEnum      } from '../models/SearchWebhookConfigurationsRequest';
+import { SearchWebhookConfigurationsRequest  , SearchWebhookConfigurationsRequestEventTypeEnum     , SearchWebhookConfigurationsRequestStatusEnum   } from '../models/SearchWebhookConfigurationsRequest';
 import { SearchWebhookConfigurationsRequestSortOptions, SearchWebhookConfigurationsRequestSortOptionsFieldNameEnum  , SearchWebhookConfigurationsRequestSortOptionsOrderEnum   } from '../models/SearchWebhookConfigurationsRequestSortOptions';
 import { SecuritySettingsClusterPreferences     , SecuritySettingsClusterPreferencesTrustedAuthStatusEnum   } from '../models/SecuritySettingsClusterPreferences';
 import { SecuritySettingsClusterPreferencesInput } from '../models/SecuritySettingsClusterPreferencesInput';
@@ -950,7 +950,7 @@ import { UpdateUserGroupRequest    , UpdateUserGroupRequestPrivilegesEnum   , Up
 import { UpdateUserRequest  , UpdateUserRequestVisibilityEnum   , UpdateUserRequestAccountStatusEnum     , UpdateUserRequestAccountTypeEnum      , UpdateUserRequestOperationEnum  , UpdateUserRequestPreferredLocaleEnum      } from '../models/UpdateUserRequest';
 import { UpdateVariableRequest } from '../models/UpdateVariableRequest';
 import { UpdateVariableValuesRequest } from '../models/UpdateVariableValuesRequest';
-import { UpdateWebhookConfigurationRequest    , UpdateWebhookConfigurationRequestEventsEnum       } from '../models/UpdateWebhookConfigurationRequest';
+import { UpdateWebhookConfigurationRequest    , UpdateWebhookConfigurationRequestEventsEnum      , UpdateWebhookConfigurationRequestStatusEnum   } from '../models/UpdateWebhookConfigurationRequest';
 import { User   , UserVisibilityEnum         , UserAccountTypeEnum  , UserAccountStatusEnum                  , UserParentTypeEnum                    } from '../models/User';
 import { UserGroup } from '../models/UserGroup';
 import { UserGroupResponse                     , UserGroupResponseParentTypeEnum      , UserGroupResponseTypeEnum   , UserGroupResponseVisibilityEnum    } from '../models/UserGroupResponse';
@@ -985,7 +985,7 @@ import { WebhookKeyValuePair } from '../models/WebhookKeyValuePair';
 import { WebhookKeyValuePairInput } from '../models/WebhookKeyValuePairInput';
 import { WebhookOrg } from '../models/WebhookOrg';
 import { WebhookPagination } from '../models/WebhookPagination';
-import { WebhookResponse      , WebhookResponseEventsEnum           } from '../models/WebhookResponse';
+import { WebhookResponse      , WebhookResponseEventsEnum          , WebhookResponseStatusEnum   } from '../models/WebhookResponse';
 import { WebhookSearchResponse } from '../models/WebhookSearchResponse';
 import { WebhookSignatureVerification, WebhookSignatureVerificationTypeEnum   , WebhookSignatureVerificationAlgorithmEnum    } from '../models/WebhookSignatureVerification';
 import { WebhookSignatureVerificationInput, WebhookSignatureVerificationInputTypeEnum   , WebhookSignatureVerificationInputAlgorithmEnum    } from '../models/WebhookSignatureVerificationInput';
@@ -1066,6 +1066,7 @@ let enumsMap: Set<string> = new Set<string>([
     "CreateVariableRequestTypeEnum",
     "CreateVariableRequestDataTypeEnum",
     "CreateWebhookConfigurationRequestEventsEnum",
+    "CreateWebhookConfigurationRequestStatusEnum",
     "CreateWebhookConfigurationRequestSignatureVerificationTypeEnum",
     "CreateWebhookConfigurationRequestSignatureVerificationAlgorithmEnum",
     "CreateWebhookConfigurationRequestStorageDestinationStorageTypeEnum",
@@ -1207,6 +1208,7 @@ let enumsMap: Set<string> = new Set<string>([
     "SearchUsersRequestAccountStatusEnum",
     "SearchVariablesRequestResponseContentEnum",
     "SearchWebhookConfigurationsRequestEventTypeEnum",
+    "SearchWebhookConfigurationsRequestStatusEnum",
     "SearchWebhookConfigurationsRequestSortOptionsFieldNameEnum",
     "SearchWebhookConfigurationsRequestSortOptionsOrderEnum",
     "SecuritySettingsClusterPreferencesTrustedAuthStatusEnum",
@@ -1272,6 +1274,7 @@ let enumsMap: Set<string> = new Set<string>([
     "UpdateUserRequestOperationEnum",
     "UpdateUserRequestPreferredLocaleEnum",
     "UpdateWebhookConfigurationRequestEventsEnum",
+    "UpdateWebhookConfigurationRequestStatusEnum",
     "UserVisibilityEnum",
     "UserAccountTypeEnum",
     "UserAccountStatusEnum",
@@ -1290,6 +1293,7 @@ let enumsMap: Set<string> = new Set<string>([
     "VariableUpdateScopeInputPrincipalTypeEnum",
     "VariableValuePrincipalTypeEnum",
     "WebhookResponseEventsEnum",
+    "WebhookResponseStatusEnum",
     "WebhookSignatureVerificationTypeEnum",
     "WebhookSignatureVerificationAlgorithmEnum",
     "WebhookSignatureVerificationInputTypeEnum",

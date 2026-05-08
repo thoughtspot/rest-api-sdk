@@ -44,6 +44,10 @@ export class CreateWebhookConfigurationRequest {
     * Additional headers as an array of key-value pairs. Example: [{\"key\": \"X-Custom-Header\", \"value\": \"custom_value\"}]    Version: 26.4.0.cl or later 
     */
     'additional_headers'?: Array<WebhookKeyValuePairInput>;
+    /**
+    * Status of the webhook (ENABLED or DISABLED). Optional — when omitted, status is not stored and will be absent from the response.    Version: 26.7.0.cl or later 
+    */
+    'status'?: CreateWebhookConfigurationRequestStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -101,6 +105,12 @@ export class CreateWebhookConfigurationRequest {
             "baseName": "additional_headers",
             "type": "Array<WebhookKeyValuePairInput>",
             "format": ""
+        },
+        {
+            "name": "status",
+            "baseName": "status",
+            "type": "CreateWebhookConfigurationRequestStatusEnum",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -113,4 +123,5 @@ export class CreateWebhookConfigurationRequest {
 
 
 export type CreateWebhookConfigurationRequestEventsEnum = "LIVEBOARD_SCHEDULE" ;
+export type CreateWebhookConfigurationRequestStatusEnum = "ENABLED" | "DISABLED" ;
 

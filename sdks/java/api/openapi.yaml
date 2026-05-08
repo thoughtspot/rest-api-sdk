@@ -13025,6 +13025,14 @@ components:
           $ref: '#/components/schemas/WebhookUser'
         storage_destination:
           $ref: '#/components/schemas/StorageDestination'
+        status:
+          description: "Status of the webhook (ENABLED or DISABLED).\nOnly present\
+            \ when explicitly set. \n  Version: 26.7.0.cl or later\n"
+          enum:
+          - ENABLED
+          - DISABLED
+          nullable: true
+          type: string
       required:
       - creation_time_in_millis
       - events
@@ -24942,6 +24950,14 @@ components:
           items:
             $ref: '#/components/schemas/WebhookKeyValuePairInput'
           type: array
+        status:
+          description: "Status of the webhook (ENABLED or DISABLED). Optional — when\
+            \ omitted,\nstatus is not stored and will be absent from the response.\
+            \ \n  Version: 26.7.0.cl or later\n"
+          enum:
+          - ENABLED
+          - DISABLED
+          type: string
       required:
       - events
       - name
@@ -24986,6 +25002,13 @@ components:
           allOf:
           - $ref: '#/components/schemas/WebhookSortOptionsInput'
           description: Sort option includes sort field and sort order.
+        status:
+          description: "Filter webhooks by status (ENABLED or DISABLED). \n  Version:\
+            \ 26.7.0.cl or later\n"
+          enum:
+          - ENABLED
+          - DISABLED
+          type: string
       type: object
     UpdateWebhookConfigurationRequest:
       properties:
@@ -25035,6 +25058,13 @@ components:
           items:
             $ref: '#/components/schemas/WebhookKeyValuePairInput'
           type: array
+        status:
+          description: "Status of the webhook (ENABLED or DISABLED). \n  Version:\
+            \ 26.7.0.cl or later\n"
+          enum:
+          - ENABLED
+          - DISABLED
+          type: string
       type: object
     dbtConnection_request:
       properties:

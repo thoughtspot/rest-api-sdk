@@ -4443,6 +4443,12 @@ _CreateWebhookConfigurationRequest.attributeTypeMap = [
     "baseName": "additional_headers",
     "type": "Array<WebhookKeyValuePairInput>",
     "format": ""
+  },
+  {
+    "name": "status",
+    "baseName": "status",
+    "type": "CreateWebhookConfigurationRequestStatusEnum",
+    "format": ""
   }
 ];
 var CreateWebhookConfigurationRequest = _CreateWebhookConfigurationRequest;
@@ -13302,6 +13308,12 @@ _SearchWebhookConfigurationsRequest.attributeTypeMap = [
     "baseName": "sort_options",
     "type": "SearchWebhookConfigurationsRequestSortOptions",
     "format": ""
+  },
+  {
+    "name": "status",
+    "baseName": "status",
+    "type": "SearchWebhookConfigurationsRequestStatusEnum",
+    "format": ""
   }
 ];
 var SearchWebhookConfigurationsRequest = _SearchWebhookConfigurationsRequest;
@@ -16951,6 +16963,12 @@ _UpdateWebhookConfigurationRequest.attributeTypeMap = [
     "baseName": "additional_headers",
     "type": "Array<WebhookKeyValuePairInput>",
     "format": ""
+  },
+  {
+    "name": "status",
+    "baseName": "status",
+    "type": "UpdateWebhookConfigurationRequestStatusEnum",
+    "format": ""
   }
 ];
 var UpdateWebhookConfigurationRequest = _UpdateWebhookConfigurationRequest;
@@ -18546,6 +18564,12 @@ _WebhookResponse.attributeTypeMap = [
     "baseName": "storage_destination",
     "type": "StorageDestination",
     "format": ""
+  },
+  {
+    "name": "status",
+    "baseName": "status",
+    "type": "WebhookResponseStatusEnum",
+    "format": ""
   }
 ];
 var WebhookResponse = _WebhookResponse;
@@ -18867,6 +18891,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "CreateVariableRequestTypeEnum",
   "CreateVariableRequestDataTypeEnum",
   "CreateWebhookConfigurationRequestEventsEnum",
+  "CreateWebhookConfigurationRequestStatusEnum",
   "CreateWebhookConfigurationRequestSignatureVerificationTypeEnum",
   "CreateWebhookConfigurationRequestSignatureVerificationAlgorithmEnum",
   "CreateWebhookConfigurationRequestStorageDestinationStorageTypeEnum",
@@ -19008,6 +19033,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "SearchUsersRequestAccountStatusEnum",
   "SearchVariablesRequestResponseContentEnum",
   "SearchWebhookConfigurationsRequestEventTypeEnum",
+  "SearchWebhookConfigurationsRequestStatusEnum",
   "SearchWebhookConfigurationsRequestSortOptionsFieldNameEnum",
   "SearchWebhookConfigurationsRequestSortOptionsOrderEnum",
   "SecuritySettingsClusterPreferencesTrustedAuthStatusEnum",
@@ -19073,6 +19099,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "UpdateUserRequestOperationEnum",
   "UpdateUserRequestPreferredLocaleEnum",
   "UpdateWebhookConfigurationRequestEventsEnum",
+  "UpdateWebhookConfigurationRequestStatusEnum",
   "UserVisibilityEnum",
   "UserAccountTypeEnum",
   "UserAccountStatusEnum",
@@ -19091,6 +19118,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "VariableUpdateScopeInputPrincipalTypeEnum",
   "VariableValuePrincipalTypeEnum",
   "WebhookResponseEventsEnum",
+  "WebhookResponseStatusEnum",
   "WebhookSignatureVerificationTypeEnum",
   "WebhookSignatureVerificationAlgorithmEnum",
   "WebhookSignatureVerificationInputTypeEnum",
