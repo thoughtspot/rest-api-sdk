@@ -10039,6 +10039,20 @@
                     "format": "binary"
                   }
                 }
+              },
+              "encoding": {
+                "reset_options": {
+                  "contentType": "application/json"
+                },
+                "navigation_panel": {
+                  "contentType": "application/json"
+                },
+                "chart_color_palette": {
+                  "contentType": "application/json"
+                },
+                "visualization_fonts": {
+                  "contentType": "application/json"
+                }
               }
             }
           },
@@ -18307,6 +18321,15 @@
           "storage_destination": {
             "$ref": "#/components/schemas/StorageDestination",
             "description": "Storage destination configuration for webhook payload delivery.",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ENABLED",
+              "DISABLED"
+            ],
+            "description": "Status of the webhook (ENABLED or DISABLED).\nOnly present when explicitly set. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
             "nullable": true
           }
         }
@@ -30648,6 +30671,14 @@
             "items": {
               "$ref": "#/components/schemas/WebhookKeyValuePairInput"
             }
+          },
+          "status": {
+            "description": "Status of the webhook (ENABLED or DISABLED). Optional — when omitted,\nstatus is not stored and will be absent from the response. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
+            "type": "string",
+            "enum": [
+              "ENABLED",
+              "DISABLED"
+            ]
           }
         },
         "required": [
@@ -30707,6 +30738,14 @@
               {
                 "$ref": "#/components/schemas/WebhookSortOptionsInput"
               }
+            ]
+          },
+          "status": {
+            "description": "Filter webhooks by status (ENABLED or DISABLED). <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
+            "type": "string",
+            "enum": [
+              "ENABLED",
+              "DISABLED"
             ]
           }
         }
@@ -30770,6 +30809,14 @@
             "items": {
               "$ref": "#/components/schemas/WebhookKeyValuePairInput"
             }
+          },
+          "status": {
+            "description": "Status of the webhook (ENABLED or DISABLED). <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
+            "type": "string",
+            "enum": [
+              "ENABLED",
+              "DISABLED"
+            ]
           }
         }
       }
