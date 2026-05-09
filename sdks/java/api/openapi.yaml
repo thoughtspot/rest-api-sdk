@@ -12940,6 +12940,82 @@ components:
           nullable: true
           type: string
       type: object
+    WebhookStorageConfigInfo:
+      description: Cluster-level storage setup information for configuring customer-managed
+        storage.
+      properties:
+        storage_type:
+          description: Type of storage destination.
+          enum:
+          - OBJECT_STORAGE
+          type: string
+        provider:
+          description: Storage destination provider.
+          enum:
+          - AWS_S3
+          - GCP_GCS
+          type: string
+        config:
+          $ref: '#/components/schemas/WebhookStorageSetupConfig'
+      required:
+      - config
+      - provider
+      - storage_type
+      type: object
+    WebhookStorageSetupConfig:
+      description: |-
+        Storage setup configuration for a specific upload path. The populated fields depend on config_type:
+        AWS_TO_S3_STORAGE: aws_account_id, trust_policy_template, setup_instructions.
+        GCP_TO_S3_STORAGE: gcp_service_account_id, oidc_provider, trust_policy_template, setup_instructions.
+        GCP_TO_GCS_STORAGE: service_account_email, required_role, setup_instructions.
+      properties:
+        config_type:
+          description: "Discriminator identifying the upload path. One of: AWS_TO_S3_STORAGE,\
+            \ GCP_TO_S3_STORAGE, GCP_TO_GCS_STORAGE."
+          enum:
+          - AWS_TO_S3_STORAGE
+          - GCP_TO_S3_STORAGE
+          - GCP_TO_GCS_STORAGE
+          type: string
+        aws_account_id:
+          description: AWS Account ID of the platform. Populated for AWS_TO_S3_STORAGE.
+            Include in your IAM role trust policy.
+          nullable: true
+          type: string
+        gcp_service_account_id:
+          description: GCP service account numeric ID of the platform (the 'sub' claim
+            in OIDC tokens). Populated for GCP_TO_S3_STORAGE.
+          nullable: true
+          type: string
+        oidc_provider:
+          description: OIDC identity provider URL. Populated for GCP_TO_S3_STORAGE;
+            always 'accounts.google.com' for GCP.
+          nullable: true
+          type: string
+        trust_policy_template:
+          description: Sample IAM trust policy JSON. Populated for AWS_TO_S3_STORAGE
+            and GCP_TO_S3_STORAGE.
+          nullable: true
+          type: object
+        service_account_email:
+          description: GCP service account email of the platform. Populated for GCP_TO_GCS_STORAGE.
+            Grant it roles/iam.serviceAccountTokenCreator on your service account.
+          nullable: true
+          type: string
+        required_role:
+          description: IAM role the customer must grant to the platform service account.
+            Populated for GCP_TO_GCS_STORAGE.
+          nullable: true
+          type: string
+        setup_instructions:
+          description: Step-by-step instructions to configure the storage destination.
+          items:
+            type: string
+          type: array
+      required:
+      - config_type
+      - setup_instructions
+      type: object
     WebhookSortOptionsInput:
       properties:
         field_name:
@@ -17460,7 +17536,7 @@ components:
         role_arn:
           description: |-
             ARN of the IAM role to assume for S3 access.
-            Example: "arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole"
+            Example: "arn:aws:iam::123456789012:role/WebhookDeliveryRole"
           type: string
         external_id:
           description: |-
@@ -17471,7 +17547,7 @@ components:
         path_prefix:
           description: |-
             Optional path prefix for organizing objects within the bucket.
-            Example: "thoughtspot-webhooks/"
+            Example: "webhook-deliveries/"
           nullable: true
           type: string
       required:

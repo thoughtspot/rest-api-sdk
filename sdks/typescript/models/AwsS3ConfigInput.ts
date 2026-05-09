@@ -25,7 +25,7 @@ export class AwsS3ConfigInput {
     */
     'region': string;
     /**
-    * ARN of the IAM role to assume for S3 access. Example: \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\"
+    * ARN of the IAM role to assume for S3 access. Example: \"arn:aws:iam::123456789012:role/WebhookDeliveryRole\"
     */
     'role_arn': string;
     /**
@@ -33,7 +33,7 @@ export class AwsS3ConfigInput {
     */
     'external_id'?: string | null;
     /**
-    * Optional path prefix for organizing objects within the bucket. Example: \"thoughtspot-webhooks/\"
+    * Optional path prefix for organizing objects within the bucket. Example: \"webhook-deliveries/\"
     */
     'path_prefix'?: string | null;
 

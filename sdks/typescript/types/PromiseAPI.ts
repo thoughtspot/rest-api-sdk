@@ -496,6 +496,8 @@ import { WebhookSearchResponse } from '../models/WebhookSearchResponse';
 import { WebhookSignatureVerification } from '../models/WebhookSignatureVerification';
 import { WebhookSignatureVerificationInput } from '../models/WebhookSignatureVerificationInput';
 import { WebhookSortOptionsInput } from '../models/WebhookSortOptionsInput';
+import { WebhookStorageConfigInfo } from '../models/WebhookStorageConfigInfo';
+import { WebhookStorageSetupConfig } from '../models/WebhookStorageSetupConfig';
 import { WebhookUser } from '../models/WebhookUser';
 import { ObservableAIApi } from './ObservableAPI';
 

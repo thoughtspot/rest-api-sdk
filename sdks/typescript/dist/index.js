@@ -18698,6 +18698,98 @@ _WebhookSortOptionsInput.attributeTypeMap = [
 ];
 var WebhookSortOptionsInput = _WebhookSortOptionsInput;
 
+// models/WebhookStorageConfigInfo.ts
+var _WebhookStorageConfigInfo = class _WebhookStorageConfigInfo {
+  static getAttributeTypeMap() {
+    return _WebhookStorageConfigInfo.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_WebhookStorageConfigInfo.discriminator = void 0;
+_WebhookStorageConfigInfo.attributeTypeMap = [
+  {
+    "name": "storage_type",
+    "baseName": "storage_type",
+    "type": "WebhookStorageConfigInfoStorageTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "provider",
+    "baseName": "provider",
+    "type": "WebhookStorageConfigInfoProviderEnum",
+    "format": ""
+  },
+  {
+    "name": "config",
+    "baseName": "config",
+    "type": "WebhookStorageSetupConfig",
+    "format": ""
+  }
+];
+var WebhookStorageConfigInfo = _WebhookStorageConfigInfo;
+
+// models/WebhookStorageSetupConfig.ts
+var _WebhookStorageSetupConfig = class _WebhookStorageSetupConfig {
+  static getAttributeTypeMap() {
+    return _WebhookStorageSetupConfig.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_WebhookStorageSetupConfig.discriminator = void 0;
+_WebhookStorageSetupConfig.attributeTypeMap = [
+  {
+    "name": "config_type",
+    "baseName": "config_type",
+    "type": "WebhookStorageSetupConfigConfigTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "aws_account_id",
+    "baseName": "aws_account_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "gcp_service_account_id",
+    "baseName": "gcp_service_account_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "oidc_provider",
+    "baseName": "oidc_provider",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "trust_policy_template",
+    "baseName": "trust_policy_template",
+    "type": "any",
+    "format": ""
+  },
+  {
+    "name": "service_account_email",
+    "baseName": "service_account_email",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "required_role",
+    "baseName": "required_role",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "setup_instructions",
+    "baseName": "setup_instructions",
+    "type": "Array<string>",
+    "format": ""
+  }
+];
+var WebhookStorageSetupConfig = _WebhookStorageSetupConfig;
+
 // models/WebhookUser.ts
 var _WebhookUser = class _WebhookUser {
   static getAttributeTypeMap() {
@@ -19124,7 +19216,10 @@ var enumsMap = /* @__PURE__ */ new Set([
   "WebhookSignatureVerificationInputTypeEnum",
   "WebhookSignatureVerificationInputAlgorithmEnum",
   "WebhookSortOptionsInputFieldNameEnum",
-  "WebhookSortOptionsInputOrderEnum"
+  "WebhookSortOptionsInputOrderEnum",
+  "WebhookStorageConfigInfoStorageTypeEnum",
+  "WebhookStorageConfigInfoProviderEnum",
+  "WebhookStorageSetupConfigConfigTypeEnum"
 ]);
 var typeMap = {
   "AIContext": AIContext,
@@ -19622,6 +19717,8 @@ var typeMap = {
   "WebhookSignatureVerification": WebhookSignatureVerification,
   "WebhookSignatureVerificationInput": WebhookSignatureVerificationInput,
   "WebhookSortOptionsInput": WebhookSortOptionsInput,
+  "WebhookStorageConfigInfo": WebhookStorageConfigInfo,
+  "WebhookStorageSetupConfig": WebhookStorageSetupConfig,
   "WebhookUser": WebhookUser
 };
 var ObjectSerializer = class _ObjectSerializer {
@@ -49716,6 +49813,8 @@ export {
   WebhookSignatureVerification,
   WebhookSignatureVerificationInput,
   WebhookSortOptionsInput,
+  WebhookStorageConfigInfo,
+  WebhookStorageSetupConfig,
   WebhookUser,
   configureAuthMethods,
   createBasicConfig,

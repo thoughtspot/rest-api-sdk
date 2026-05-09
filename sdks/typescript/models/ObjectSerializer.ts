@@ -493,6 +493,8 @@ export * from '../models/WebhookSearchResponse';
 export * from '../models/WebhookSignatureVerification';
 export * from '../models/WebhookSignatureVerificationInput';
 export * from '../models/WebhookSortOptionsInput';
+export * from '../models/WebhookStorageConfigInfo';
+export * from '../models/WebhookStorageSetupConfig';
 export * from '../models/WebhookUser';
 
 import { AIContext } from '../models/AIContext';
@@ -990,6 +992,8 @@ import { WebhookSearchResponse } from '../models/WebhookSearchResponse';
 import { WebhookSignatureVerification, WebhookSignatureVerificationTypeEnum   , WebhookSignatureVerificationAlgorithmEnum    } from '../models/WebhookSignatureVerification';
 import { WebhookSignatureVerificationInput, WebhookSignatureVerificationInputTypeEnum   , WebhookSignatureVerificationInputAlgorithmEnum    } from '../models/WebhookSignatureVerificationInput';
 import { WebhookSortOptionsInput, WebhookSortOptionsInputFieldNameEnum  , WebhookSortOptionsInputOrderEnum   } from '../models/WebhookSortOptionsInput';
+import { WebhookStorageConfigInfo, WebhookStorageConfigInfoStorageTypeEnum  , WebhookStorageConfigInfoProviderEnum    } from '../models/WebhookStorageConfigInfo';
+import { WebhookStorageSetupConfig, WebhookStorageSetupConfigConfigTypeEnum          } from '../models/WebhookStorageSetupConfig';
 import { WebhookUser } from '../models/WebhookUser';
 
 /* tslint:disable:no-unused-variable */
@@ -1300,6 +1304,9 @@ let enumsMap: Set<string> = new Set<string>([
     "WebhookSignatureVerificationInputAlgorithmEnum",
     "WebhookSortOptionsInputFieldNameEnum",
     "WebhookSortOptionsInputOrderEnum",
+    "WebhookStorageConfigInfoStorageTypeEnum",
+    "WebhookStorageConfigInfoProviderEnum",
+    "WebhookStorageSetupConfigConfigTypeEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
@@ -1798,6 +1805,8 @@ let typeMap: {[index: string]: any} = {
     "WebhookSignatureVerification": WebhookSignatureVerification,
     "WebhookSignatureVerificationInput": WebhookSignatureVerificationInput,
     "WebhookSortOptionsInput": WebhookSortOptionsInput,
+    "WebhookStorageConfigInfo": WebhookStorageConfigInfo,
+    "WebhookStorageSetupConfig": WebhookStorageSetupConfig,
     "WebhookUser": WebhookUser,
 }
 

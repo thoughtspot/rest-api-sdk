@@ -1181,6 +1181,12 @@ public class JSON {
                 new com.thoughtspot.client.model.WebhookSortOptionsInput
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.WebhookStorageConfigInfo
+                        .CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.WebhookStorageSetupConfig
+                        .CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.WebhookUser.CustomTypeAdapterFactory());
         gson = gsonBuilder.create();
     }

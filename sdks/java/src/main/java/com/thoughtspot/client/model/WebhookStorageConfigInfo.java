@@ -9,6 +9,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
@@ -16,150 +17,196 @@ import com.google.gson.stream.JsonWriter;
 import com.thoughtspot.client.JSON;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import org.openapitools.jackson.nullable.JsonNullable;
 
-/** Input type for AWS S3 storage configuration. */
+/** Cluster-level storage setup information for configuring customer-managed storage. */
 @javax.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         comments = "Generator version: 7.12.0")
-public class AwsS3ConfigInput implements Serializable {
+public class WebhookStorageConfigInfo implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public static final String SERIALIZED_NAME_BUCKET_NAME = "bucket_name";
+    /** Type of storage destination. */
+    @JsonAdapter(StorageTypeEnum.Adapter.class)
+    public enum StorageTypeEnum {
+        OBJECT_STORAGE("OBJECT_STORAGE");
 
-    @SerializedName(SERIALIZED_NAME_BUCKET_NAME)
+        private String value;
+
+        StorageTypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        public static StorageTypeEnum fromValue(String value) {
+            for (StorageTypeEnum b : StorageTypeEnum.values()) {
+                if (b.value.equals(value)) {
+                    return b;
+                }
+            }
+            throw new IllegalArgumentException("Unexpected value '" + value + "'");
+        }
+
+        public static class Adapter extends TypeAdapter<StorageTypeEnum> {
+            @Override
+            public void write(final JsonWriter jsonWriter, final StorageTypeEnum enumeration)
+                    throws IOException {
+                jsonWriter.value(enumeration.getValue());
+            }
+
+            @Override
+            public StorageTypeEnum read(final JsonReader jsonReader) throws IOException {
+                String value = jsonReader.nextString();
+                return StorageTypeEnum.fromValue(value);
+            }
+        }
+
+        public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+            String value = jsonElement.getAsString();
+            StorageTypeEnum.fromValue(value);
+        }
+    }
+
+    public static final String SERIALIZED_NAME_STORAGE_TYPE = "storage_type";
+
+    @SerializedName(SERIALIZED_NAME_STORAGE_TYPE)
     @javax.annotation.Nonnull
-    private String bucketName;
+    private StorageTypeEnum storageType;
 
-    public static final String SERIALIZED_NAME_REGION = "region";
+    /** Storage destination provider. */
+    @JsonAdapter(ProviderEnum.Adapter.class)
+    public enum ProviderEnum {
+        AWS_S3("AWS_S3"),
 
-    @SerializedName(SERIALIZED_NAME_REGION)
+        GCP_GCS("GCP_GCS");
+
+        private String value;
+
+        ProviderEnum(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        public static ProviderEnum fromValue(String value) {
+            for (ProviderEnum b : ProviderEnum.values()) {
+                if (b.value.equals(value)) {
+                    return b;
+                }
+            }
+            throw new IllegalArgumentException("Unexpected value '" + value + "'");
+        }
+
+        public static class Adapter extends TypeAdapter<ProviderEnum> {
+            @Override
+            public void write(final JsonWriter jsonWriter, final ProviderEnum enumeration)
+                    throws IOException {
+                jsonWriter.value(enumeration.getValue());
+            }
+
+            @Override
+            public ProviderEnum read(final JsonReader jsonReader) throws IOException {
+                String value = jsonReader.nextString();
+                return ProviderEnum.fromValue(value);
+            }
+        }
+
+        public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+            String value = jsonElement.getAsString();
+            ProviderEnum.fromValue(value);
+        }
+    }
+
+    public static final String SERIALIZED_NAME_PROVIDER = "provider";
+
+    @SerializedName(SERIALIZED_NAME_PROVIDER)
     @javax.annotation.Nonnull
-    private String region;
+    private ProviderEnum provider;
 
-    public static final String SERIALIZED_NAME_ROLE_ARN = "role_arn";
+    public static final String SERIALIZED_NAME_CONFIG = "config";
 
-    @SerializedName(SERIALIZED_NAME_ROLE_ARN)
+    @SerializedName(SERIALIZED_NAME_CONFIG)
     @javax.annotation.Nonnull
-    private String roleArn;
+    private WebhookStorageSetupConfig config;
 
-    public static final String SERIALIZED_NAME_EXTERNAL_ID = "external_id";
+    public WebhookStorageConfigInfo() {}
 
-    @SerializedName(SERIALIZED_NAME_EXTERNAL_ID)
-    @javax.annotation.Nullable
-    private String externalId;
-
-    public static final String SERIALIZED_NAME_PATH_PREFIX = "path_prefix";
-
-    @SerializedName(SERIALIZED_NAME_PATH_PREFIX)
-    @javax.annotation.Nullable
-    private String pathPrefix;
-
-    public AwsS3ConfigInput() {}
-
-    public AwsS3ConfigInput bucketName(@javax.annotation.Nonnull String bucketName) {
-        this.bucketName = bucketName;
+    public WebhookStorageConfigInfo storageType(
+            @javax.annotation.Nonnull StorageTypeEnum storageType) {
+        this.storageType = storageType;
         return this;
     }
 
     /**
-     * Name of the S3 bucket where webhook payloads will be stored. Example:
-     * \&quot;my-webhook-files\&quot;
+     * Type of storage destination.
      *
-     * @return bucketName
+     * @return storageType
      */
     @javax.annotation.Nonnull
-    public String getBucketName() {
-        return bucketName;
+    public StorageTypeEnum getStorageType() {
+        return storageType;
     }
 
-    public void setBucketName(@javax.annotation.Nonnull String bucketName) {
-        this.bucketName = bucketName;
+    public void setStorageType(@javax.annotation.Nonnull StorageTypeEnum storageType) {
+        this.storageType = storageType;
     }
 
-    public AwsS3ConfigInput region(@javax.annotation.Nonnull String region) {
-        this.region = region;
+    public WebhookStorageConfigInfo provider(@javax.annotation.Nonnull ProviderEnum provider) {
+        this.provider = provider;
         return this;
     }
 
     /**
-     * AWS region where the S3 bucket is located. Example: \&quot;us-west-2\&quot;
+     * Storage destination provider.
      *
-     * @return region
+     * @return provider
      */
     @javax.annotation.Nonnull
-    public String getRegion() {
-        return region;
+    public ProviderEnum getProvider() {
+        return provider;
     }
 
-    public void setRegion(@javax.annotation.Nonnull String region) {
-        this.region = region;
+    public void setProvider(@javax.annotation.Nonnull ProviderEnum provider) {
+        this.provider = provider;
     }
 
-    public AwsS3ConfigInput roleArn(@javax.annotation.Nonnull String roleArn) {
-        this.roleArn = roleArn;
+    public WebhookStorageConfigInfo config(
+            @javax.annotation.Nonnull WebhookStorageSetupConfig config) {
+        this.config = config;
         return this;
     }
 
     /**
-     * ARN of the IAM role to assume for S3 access. Example:
-     * \&quot;arn:aws:iam::123456789012:role/WebhookDeliveryRole\&quot;
+     * Get config
      *
-     * @return roleArn
+     * @return config
      */
     @javax.annotation.Nonnull
-    public String getRoleArn() {
-        return roleArn;
+    public WebhookStorageSetupConfig getConfig() {
+        return config;
     }
 
-    public void setRoleArn(@javax.annotation.Nonnull String roleArn) {
-        this.roleArn = roleArn;
-    }
-
-    public AwsS3ConfigInput externalId(@javax.annotation.Nullable String externalId) {
-        this.externalId = externalId;
-        return this;
-    }
-
-    /**
-     * External ID for secure cross-account role assumption. Example:
-     * \&quot;ts-webhook-a1b2c3d4-7890\&quot;
-     *
-     * @return externalId
-     */
-    @javax.annotation.Nullable
-    public String getExternalId() {
-        return externalId;
-    }
-
-    public void setExternalId(@javax.annotation.Nullable String externalId) {
-        this.externalId = externalId;
-    }
-
-    public AwsS3ConfigInput pathPrefix(@javax.annotation.Nullable String pathPrefix) {
-        this.pathPrefix = pathPrefix;
-        return this;
-    }
-
-    /**
-     * Optional path prefix for organizing objects within the bucket. Example:
-     * \&quot;webhook-deliveries/\&quot;
-     *
-     * @return pathPrefix
-     */
-    @javax.annotation.Nullable
-    public String getPathPrefix() {
-        return pathPrefix;
-    }
-
-    public void setPathPrefix(@javax.annotation.Nullable String pathPrefix) {
-        this.pathPrefix = pathPrefix;
+    public void setConfig(@javax.annotation.Nonnull WebhookStorageSetupConfig config) {
+        this.config = config;
     }
 
     /**
@@ -174,9 +221,9 @@ public class AwsS3ConfigInput implements Serializable {
      *
      * @param key name of the property
      * @param value value of the property
-     * @return the AwsS3ConfigInput instance itself
+     * @return the WebhookStorageConfigInfo instance itself
      */
-    public AwsS3ConfigInput putAdditionalProperty(String key, Object value) {
+    public WebhookStorageConfigInfo putAdditionalProperty(String key, Object value) {
         if (this.additionalProperties == null) {
             this.additionalProperties = new HashMap<String, Object>();
         }
@@ -214,46 +261,26 @@ public class AwsS3ConfigInput implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        AwsS3ConfigInput awsS3ConfigInput = (AwsS3ConfigInput) o;
-        return Objects.equals(this.bucketName, awsS3ConfigInput.bucketName)
-                && Objects.equals(this.region, awsS3ConfigInput.region)
-                && Objects.equals(this.roleArn, awsS3ConfigInput.roleArn)
-                && Objects.equals(this.externalId, awsS3ConfigInput.externalId)
-                && Objects.equals(this.pathPrefix, awsS3ConfigInput.pathPrefix)
-                && Objects.equals(this.additionalProperties, awsS3ConfigInput.additionalProperties);
-    }
-
-    private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-        return a == b
-                || (a != null
-                        && b != null
-                        && a.isPresent()
-                        && b.isPresent()
-                        && Objects.deepEquals(a.get(), b.get()));
+        WebhookStorageConfigInfo webhookStorageConfigInfo = (WebhookStorageConfigInfo) o;
+        return Objects.equals(this.storageType, webhookStorageConfigInfo.storageType)
+                && Objects.equals(this.provider, webhookStorageConfigInfo.provider)
+                && Objects.equals(this.config, webhookStorageConfigInfo.config)
+                && Objects.equals(
+                        this.additionalProperties, webhookStorageConfigInfo.additionalProperties);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(
-                bucketName, region, roleArn, externalId, pathPrefix, additionalProperties);
-    }
-
-    private static <T> int hashCodeNullable(JsonNullable<T> a) {
-        if (a == null) {
-            return 1;
-        }
-        return a.isPresent() ? Arrays.deepHashCode(new Object[] {a.get()}) : 31;
+        return Objects.hash(storageType, provider, config, additionalProperties);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class AwsS3ConfigInput {\n");
-        sb.append("    bucketName: ").append(toIndentedString(bucketName)).append("\n");
-        sb.append("    region: ").append(toIndentedString(region)).append("\n");
-        sb.append("    roleArn: ").append(toIndentedString(roleArn)).append("\n");
-        sb.append("    externalId: ").append(toIndentedString(externalId)).append("\n");
-        sb.append("    pathPrefix: ").append(toIndentedString(pathPrefix)).append("\n");
+        sb.append("class WebhookStorageConfigInfo {\n");
+        sb.append("    storageType: ").append(toIndentedString(storageType)).append("\n");
+        sb.append("    provider: ").append(toIndentedString(provider)).append("\n");
+        sb.append("    config: ").append(toIndentedString(config)).append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
                 .append("\n");
@@ -278,39 +305,37 @@ public class AwsS3ConfigInput implements Serializable {
     static {
         // a set of all properties/fields (JSON key names)
         openapiFields = new HashSet<String>();
-        openapiFields.add("bucket_name");
-        openapiFields.add("region");
-        openapiFields.add("role_arn");
-        openapiFields.add("external_id");
-        openapiFields.add("path_prefix");
+        openapiFields.add("storage_type");
+        openapiFields.add("provider");
+        openapiFields.add("config");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
-        openapiRequiredFields.add("bucket_name");
-        openapiRequiredFields.add("region");
-        openapiRequiredFields.add("role_arn");
+        openapiRequiredFields.add("storage_type");
+        openapiRequiredFields.add("provider");
+        openapiRequiredFields.add("config");
     }
 
     /**
      * Validates the JSON Element and throws an exception if issues found
      *
      * @param jsonElement JSON Element
-     * @throws IOException if the JSON Element is invalid with respect to AwsS3ConfigInput
+     * @throws IOException if the JSON Element is invalid with respect to WebhookStorageConfigInfo
      */
     public static void validateJsonElement(JsonElement jsonElement) throws IOException {
         if (jsonElement == null) {
-            if (!AwsS3ConfigInput.openapiRequiredFields
+            if (!WebhookStorageConfigInfo.openapiRequiredFields
                     .isEmpty()) { // has required fields but JSON element is null
                 throw new IllegalArgumentException(
                         String.format(
-                                "The required field(s) %s in AwsS3ConfigInput is not found in the"
-                                        + " empty JSON string",
-                                AwsS3ConfigInput.openapiRequiredFields.toString()));
+                                "The required field(s) %s in WebhookStorageConfigInfo is not found"
+                                        + " in the empty JSON string",
+                                WebhookStorageConfigInfo.openapiRequiredFields.toString()));
             }
         }
 
         // check to make sure all required properties/fields are present in the JSON string
-        for (String requiredField : AwsS3ConfigInput.openapiRequiredFields) {
+        for (String requiredField : WebhookStorageConfigInfo.openapiRequiredFields) {
             if (jsonElement.getAsJsonObject().get(requiredField) == null) {
                 throw new IllegalArgumentException(
                         String.format(
@@ -319,60 +344,44 @@ public class AwsS3ConfigInput implements Serializable {
             }
         }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-        if (!jsonObj.get("bucket_name").isJsonPrimitive()) {
+        if (!jsonObj.get("storage_type").isJsonPrimitive()) {
             throw new IllegalArgumentException(
                     String.format(
-                            "Expected the field `bucket_name` to be a primitive type in the JSON"
+                            "Expected the field `storage_type` to be a primitive type in the JSON"
                                     + " string but got `%s`",
-                            jsonObj.get("bucket_name").toString()));
+                            jsonObj.get("storage_type").toString()));
         }
-        if (!jsonObj.get("region").isJsonPrimitive()) {
+        // validate the required field `storage_type`
+        StorageTypeEnum.validateJsonElement(jsonObj.get("storage_type"));
+        if (!jsonObj.get("provider").isJsonPrimitive()) {
             throw new IllegalArgumentException(
                     String.format(
-                            "Expected the field `region` to be a primitive type in the JSON string"
-                                    + " but got `%s`",
-                            jsonObj.get("region").toString()));
-        }
-        if (!jsonObj.get("role_arn").isJsonPrimitive()) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            "Expected the field `role_arn` to be a primitive type in the JSON"
+                            "Expected the field `provider` to be a primitive type in the JSON"
                                     + " string but got `%s`",
-                            jsonObj.get("role_arn").toString()));
+                            jsonObj.get("provider").toString()));
         }
-        if ((jsonObj.get("external_id") != null && !jsonObj.get("external_id").isJsonNull())
-                && !jsonObj.get("external_id").isJsonPrimitive()) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            "Expected the field `external_id` to be a primitive type in the JSON"
-                                    + " string but got `%s`",
-                            jsonObj.get("external_id").toString()));
-        }
-        if ((jsonObj.get("path_prefix") != null && !jsonObj.get("path_prefix").isJsonNull())
-                && !jsonObj.get("path_prefix").isJsonPrimitive()) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            "Expected the field `path_prefix` to be a primitive type in the JSON"
-                                    + " string but got `%s`",
-                            jsonObj.get("path_prefix").toString()));
-        }
+        // validate the required field `provider`
+        ProviderEnum.validateJsonElement(jsonObj.get("provider"));
+        // validate the required field `config`
+        WebhookStorageSetupConfig.validateJsonElement(jsonObj.get("config"));
     }
 
     public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
         @SuppressWarnings("unchecked")
         @Override
         public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-            if (!AwsS3ConfigInput.class.isAssignableFrom(type.getRawType())) {
-                return null; // this class only serializes 'AwsS3ConfigInput' and its subtypes
+            if (!WebhookStorageConfigInfo.class.isAssignableFrom(type.getRawType())) {
+                return null; // this class only serializes 'WebhookStorageConfigInfo' and its
+                // subtypes
             }
             final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-            final TypeAdapter<AwsS3ConfigInput> thisAdapter =
-                    gson.getDelegateAdapter(this, TypeToken.get(AwsS3ConfigInput.class));
+            final TypeAdapter<WebhookStorageConfigInfo> thisAdapter =
+                    gson.getDelegateAdapter(this, TypeToken.get(WebhookStorageConfigInfo.class));
 
             return (TypeAdapter<T>)
-                    new TypeAdapter<AwsS3ConfigInput>() {
+                    new TypeAdapter<WebhookStorageConfigInfo>() {
                         @Override
-                        public void write(JsonWriter out, AwsS3ConfigInput value)
+                        public void write(JsonWriter out, WebhookStorageConfigInfo value)
                                 throws IOException {
                             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
                             obj.remove("additionalProperties");
@@ -403,12 +412,12 @@ public class AwsS3ConfigInput implements Serializable {
                         }
 
                         @Override
-                        public AwsS3ConfigInput read(JsonReader in) throws IOException {
+                        public WebhookStorageConfigInfo read(JsonReader in) throws IOException {
                             JsonElement jsonElement = elementAdapter.read(in);
                             validateJsonElement(jsonElement);
                             JsonObject jsonObj = jsonElement.getAsJsonObject();
                             // store additional fields in the deserialized instance
-                            AwsS3ConfigInput instance = thisAdapter.fromJsonTree(jsonObj);
+                            WebhookStorageConfigInfo instance = thisAdapter.fromJsonTree(jsonObj);
                             for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
                                 if (!openapiFields.contains(entry.getKey())) {
                                     if (entry.getValue().isJsonPrimitive()) { // primitive type
@@ -447,18 +456,18 @@ public class AwsS3ConfigInput implements Serializable {
     }
 
     /**
-     * Create an instance of AwsS3ConfigInput given an JSON string
+     * Create an instance of WebhookStorageConfigInfo given an JSON string
      *
      * @param jsonString JSON string
-     * @return An instance of AwsS3ConfigInput
-     * @throws IOException if the JSON string is invalid with respect to AwsS3ConfigInput
+     * @return An instance of WebhookStorageConfigInfo
+     * @throws IOException if the JSON string is invalid with respect to WebhookStorageConfigInfo
      */
-    public static AwsS3ConfigInput fromJson(String jsonString) throws IOException {
-        return JSON.getGson().fromJson(jsonString, AwsS3ConfigInput.class);
+    public static WebhookStorageConfigInfo fromJson(String jsonString) throws IOException {
+        return JSON.getGson().fromJson(jsonString, WebhookStorageConfigInfo.class);
     }
 
     /**
-     * Convert an instance of AwsS3ConfigInput to an JSON string
+     * Convert an instance of WebhookStorageConfigInfo to an JSON string
      *
      * @return JSON string
      */
