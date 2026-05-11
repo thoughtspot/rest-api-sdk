@@ -23601,6 +23601,7 @@ components:
     DeleteStyleFontsRequest:
       properties:
         scope:
+          default: ORG
           description: |-
             Scope of the font library to delete from. CLUSTER deletes from the
             cluster-level library. ORG deletes from the authenticated user's org
@@ -23617,6 +23618,7 @@ components:
             type: string
           type: array
         dry_run:
+          default: true
           description: |-
             When true, returns affected assignments without applying the deletion.
             Use this to preview the impact before committing. Defaults to true if
@@ -23629,6 +23631,7 @@ components:
     ExportStyleLogosRequest:
       properties:
         scope:
+          default: ORG
           description: |-
             Scope of the logos to export. CLUSTER exports cluster-level logos. ORG
             exports logos for the authenticated user's org, falling back to cluster
@@ -23645,7 +23648,8 @@ components:
           description: |-
             Scope of the style preferences to retrieve. CLUSTER returns cluster-level
             defaults. ORG returns preferences for the authenticated user's org, which
-            may override cluster defaults. Defaults to ORG if omitted.
+            may override cluster defaults. If not specified, returns both cluster and
+            org preferences based on user privileges.
           enum:
           - CLUSTER
           - ORG
@@ -23670,6 +23674,7 @@ components:
             \ matching."
           type: string
         include_font_assignments:
+          default: false
           description: |-
             When true, includes visualization areas this font is assigned to in the
             response. Defaults to false if omitted.
@@ -23679,6 +23684,7 @@ components:
     UpdateStyleFontRequest:
       properties:
         scope:
+          default: ORG
           description: |-
             Scope of the font library containing this font. CLUSTER targets the
             cluster-level library. ORG targets the authenticated user's org library.

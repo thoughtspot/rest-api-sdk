@@ -109,7 +109,7 @@ public class SearchStyleFontsRequest implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_INCLUDE_FONT_ASSIGNMENTS)
     @javax.annotation.Nullable
-    private Boolean includeFontAssignments;
+    private Boolean includeFontAssignments = false;
 
     public SearchStyleFontsRequest() {}
 

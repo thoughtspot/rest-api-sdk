@@ -14,7 +14,7 @@ import { HttpFile } from '../http/http';
 
 export class SearchStyleCustomizationsRequest {
     /**
-    * Scope of the style preferences to retrieve. CLUSTER returns cluster-level defaults. ORG returns preferences for the authenticated user\'s org, which may override cluster defaults. Defaults to ORG if omitted.
+    * Scope of the style preferences to retrieve. CLUSTER returns cluster-level defaults. ORG returns preferences for the authenticated user\'s org, which may override cluster defaults. If not specified, returns both cluster and org preferences based on user privileges.
     */
     'scope'?: SearchStyleCustomizationsRequestScopeEnum;
 

@@ -89,7 +89,7 @@ public class ExportStyleLogosRequest implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_SCOPE)
     @javax.annotation.Nullable
-    private ScopeEnum scope;
+    private ScopeEnum scope = ScopeEnum.ORG;
 
     public ExportStyleLogosRequest() {}
 

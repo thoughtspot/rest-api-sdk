@@ -91,7 +91,7 @@ public class DeleteStyleFontsRequest implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_SCOPE)
     @javax.annotation.Nullable
-    private ScopeEnum scope;
+    private ScopeEnum scope = ScopeEnum.ORG;
 
     public static final String SERIALIZED_NAME_FONT_IDENTIFIERS = "font_identifiers";
 
@@ -103,7 +103,7 @@ public class DeleteStyleFontsRequest implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_DRY_RUN)
     @javax.annotation.Nullable
-    private Boolean dryRun;
+    private Boolean dryRun = true;
 
     public DeleteStyleFontsRequest() {}
 

@@ -88,7 +88,7 @@ public class UpdateStyleFontRequest implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_SCOPE)
     @javax.annotation.Nullable
-    private ScopeEnum scope;
+    private ScopeEnum scope = ScopeEnum.ORG;
 
     public static final String SERIALIZED_NAME_NAME = "name";
 
