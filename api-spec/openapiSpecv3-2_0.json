@@ -9977,7 +9977,8 @@
                 "type": "object",
                 "properties": {
                   "scope": {
-                    "description": "Scope at which to apply the preferences. CLUSTER sets cluster-level\ndefaults for all orgs. ORG applies to the authenticated user's org.\nDefaults to ORG if omitted.",
+                    "description": "Scope at which to apply the preferences. CLUSTER sets cluster-level\ndefaults for all orgs. ORG applies to the authenticated user's org.",
+                    "default": "ORG",
                     "type": "string",
                     "enum": [
                       "CLUSTER",
@@ -9986,6 +9987,7 @@
                   },
                   "operation": {
                     "description": "Operation to perform. REPLACE (default) applies the provided fields and\nleaves omitted fields unchanged. RESET reverts fields listed in\nreset_options to defaults.",
+                    "default": "REPLACE",
                     "type": "string",
                     "enum": [
                       "REPLACE",
@@ -10038,7 +10040,10 @@
                     "type": "string",
                     "format": "binary"
                   }
-                }
+                },
+                "required": [
+                  "scope"
+                ]
               },
               "encoding": {
                 "reset_options": {
@@ -10198,6 +10203,7 @@
                 "properties": {
                   "scope": {
                     "description": "Scope of the font library to upload to. CLUSTER uploads to the\ncluster-level library, making the font available as a default for all\norgs. ORG uploads to the authenticated user's org library. Defaults to\nORG if omitted.",
+                    "default": "ORG",
                     "type": "string",
                     "enum": [
                       "CLUSTER",
@@ -10210,6 +10216,7 @@
                   },
                   "weight": {
                     "description": "Weight of the font. Supported values: NORMAL, LIGHT, BOLD. Defaults to\nNORMAL if omitted.",
+                    "default": "NORMAL",
                     "type": "string",
                     "enum": [
                       "NORMAL",
@@ -10219,6 +10226,7 @@
                   },
                   "style": {
                     "description": "Style of the font. Supported values: NORMAL, ITALIC, OBLIQUE. Defaults\nto NORMAL if omitted.",
+                    "default": "NORMAL",
                     "type": "string",
                     "enum": [
                       "NORMAL",
@@ -29566,6 +29574,7 @@
         "properties": {
           "scope": {
             "description": "Scope of the font library to delete from. CLUSTER deletes from the\ncluster-level library. ORG deletes from the authenticated user's org\nlibrary. Defaults to ORG if omitted.",
+            "default": "ORG",
             "type": "string",
             "enum": [
               "CLUSTER",
@@ -29581,6 +29590,7 @@
           },
           "dry_run": {
             "description": "When true, returns affected assignments without applying the deletion.\nUse this to preview the impact before committing. Defaults to true if\nomitted.",
+            "default": true,
             "type": "boolean",
             "nullable": true
           }
@@ -29594,6 +29604,7 @@
         "properties": {
           "scope": {
             "description": "Scope of the logos to export. CLUSTER exports cluster-level logos. ORG\nexports logos for the authenticated user's org, falling back to cluster\nor defaults if no custom logo is set. Defaults to ORG if\nomitted.",
+            "default": "ORG",
             "type": "string",
             "enum": [
               "CLUSTER",
@@ -29606,7 +29617,7 @@
         "type": "object",
         "properties": {
           "scope": {
-            "description": "Scope of the style preferences to retrieve. CLUSTER returns cluster-level\ndefaults. ORG returns preferences for the authenticated user's org, which\nmay override cluster defaults. Defaults to ORG if omitted.",
+            "description": "Scope of the style preferences to retrieve. CLUSTER returns cluster-level\ndefaults. ORG returns preferences for the authenticated user's org, which\nmay override cluster defaults. If not specified, returns both cluster and\norg preferences based on user privileges.",
             "type": "string",
             "enum": [
               "CLUSTER",
@@ -29636,6 +29647,7 @@
           },
           "include_font_assignments": {
             "description": "When true, includes visualization areas this font is assigned to in the\nresponse. Defaults to false if omitted.",
+            "default": false,
             "type": "boolean",
             "nullable": true
           }
@@ -29646,6 +29658,7 @@
         "properties": {
           "scope": {
             "description": "Scope of the font library containing this font. CLUSTER targets the\ncluster-level library. ORG targets the authenticated user's org library.\nDefaults to ORG if omitted.",
+            "default": "ORG",
             "type": "string",
             "enum": [
               "CLUSTER",
