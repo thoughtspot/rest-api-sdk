@@ -30,6 +30,14 @@
       "description": "Roles for version 26.7.0.cl"
     },
     {
+      "name": "26.6.0.cl",
+      "id": "26.6.0.cl",
+      "tags": [
+        "26.6.0.cl"
+      ],
+      "description": "Roles for version 26.6.0.cl"
+    },
+    {
       "name": "10.15.0.cl",
       "id": "10.15.0.cl",
       "tags": [
@@ -60,14 +68,6 @@
         "26.5.0.cl"
       ],
       "description": "Roles for version 26.5.0.cl"
-    },
-    {
-      "name": "26.6.0.cl",
-      "id": "26.6.0.cl",
-      "tags": [
-        "26.6.0.cl"
-      ],
-      "description": "Roles for version 26.6.0.cl"
     },
     {
       "name": "9.0.0.cl",
@@ -467,10 +467,10 @@
     "/api/rest/2.0/ai/agent/instructions/get": {
       "get": {
         "operationId": "getAgentInstructions",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nRetrieves the admin instructions currently configured for the AI agent (Spotter). Admin instructions are tenant- and org-scoped text that guide agent behavior across all conversations.\n\nRequires admin privileges. Only users with org admin access can retrieve agent instructions.\n\n#### Usage guidelines\n\nNo input parameters are required. The API returns the stored `AgentInstructions` record for the caller's tenant and org.\n\nIf no instructions have been configured yet, the API returns a record with an empty `instructions` field and `null` values for `id`, `created_at`, `updated_at`, and `last_updated_by`.\n\nIf the request is successful, the response includes:\n\n- `id`: unique identifier of the instructions record\n- `instructions`: the configured instructions text\n- `created_at`: ISO timestamp when the instructions were first saved\n- `updated_at`: ISO timestamp when the instructions were last updated\n- `last_updated_by`: user ID of the admin who last updated the instructions (may be `null` for older records)\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have org admin privileges required to read agent instructions. |\n\n> ###### Note:\n>\n> - Use `setAgentInstructions` to create or update agent instructions.\n> - Available from version 26.7.0.cl and later.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\nRetrieves the admin instructions currently configured for the AI agent (Spotter). Admin instructions are tenant- and org-scoped text that guide agent behavior across all conversations.\n\nRequires admin privileges. Only users with org admin access can retrieve agent instructions.\n\n#### Usage guidelines\n\nNo input parameters are required. The API returns the stored `AgentInstructions` record for the caller's tenant and org.\n\nIf no instructions have been configured yet, the API returns a record with an empty `instructions` field and `null` values for `id`, `created_at`, `updated_at`, and `last_updated_by`.\n\nIf the request is successful, the response includes:\n\n- `id`: unique identifier of the instructions record\n- `instructions`: the configured instructions text\n- `created_at`: ISO timestamp when the instructions were first saved\n- `updated_at`: ISO timestamp when the instructions were last updated\n- `last_updated_by`: user ID of the admin who last updated the instructions (may be `null` for older records)\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have org admin privileges required to read agent instructions. |\n\n> ###### Note:\n>\n> - Use `setAgentInstructions` to create or update agent instructions.\n> - Available from version 26.6.0.cl and later.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
-          "26.7.0.cl"
+          "26.6.0.cl"
         ],
         "parameters": [],
         "responses": {
@@ -537,10 +537,10 @@
         }
       }
     },
-    "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/fetch": {
+    "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/messages": {
       "get": {
         "operationId": "getConversation",
-        "description": "\nRetrieves the full public-safe content of a saved agent conversation: ordered\nturns (user messages and agent response items) and sanitized code-execution\nfile metadata. Internal graph or branch state, Azure file identifiers, and\nmessages with a `SYSTEM` source are omitted. The full answer payload is not\nembedded; fetch it separately via `loadAnswer` using the `answer_id` on each\n`answer` response item.\nRequires `CAN_USE_SPOTTER` privilege and access to the specified conversation. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nRetrieves the full public-safe content of a saved agent conversation. Returns ordered conversation turns — user messages with their attachments and the agent response items produced for each turn — plus sanitized metadata for any files generated by the code-execution tool. \n\nUse this endpoint to render a persisted conversation in a UI, build an audit trail, or post-process a completed conversation. The full answer payload is not embedded — fetch it separately via `loadAnswer` using the `answer_id` on each `answer` response item.\n\nRequires `CAN_USE_SPOTTER` privilege and access to the specified conversation.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier` _(path parameter)_: the unique ID of the conversation, as returned by `createAgentConversation` or `getConversationList`.\n\nIf the request is successful, the response contains two top-level fields:\n\n| Field                  | Type                                        | Description                                                                                                                                          |\n| ---------------------- | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |\n| `messages`             | `ConversationTurn[]`                        | Ordered oldest to newest. Empty array when the conversation has no turns.                                                                            |\n| `code_execution_files` | `CodeExecutionFileMetadata[]`               | List of sanitized file metadata entries (one per `ts_file_id`). Covers all code-execution-generated files referenced anywhere in the conversation. Empty array when there are none. |\n\nNo other top-level fields are returned.\n\n#### ConversationTurn fields\n\n| Field              | Type                         | Description                                                                                                    |\n| ------------------ | ---------------------------- | -------------------------------------------------------------------------------------------------------------- |\n| `message_id`       | `String`                     | Stable identifier for the turn. For liveboard-started synthetic first turns, this is the root node identifier. |\n| `timestamp`        | `Long`                       | Milliseconds since Unix epoch for the turn.                                                                    |\n| `user_message`     | `UserMessage`                | User query that started the turn. `null` for liveboard-started synthetic first turns.                          |\n| `user_attachments` | `UserAttachmentItem[]`       | Files or connector resources attached to the user message. Empty array when there are none.                    |\n| `response_items`   | `ConversationResponseItem[]` | Agent-side output produced in response to this turn. Empty array for in-progress turns.                        |\n\n#### UserMessage fields\n\n| Field        | Type     | Description                                   |\n| ------------ | -------- | --------------------------------------------- |\n| `message_id` | `String` | Unique identifier of the user-source message. |\n| `text`       | `String` | Text body of the user query.                  |\n\n#### UserAttachmentItem fields\n\nDiscriminated by `type`. Only `\"file\"` or `\"resource\"` are valid values. Only the fields for the indicated variant are populated. See `ConversationResponseItem` below for the field definitions of the `file` and `resource` variants — `UserAttachmentItem` uses the same fields.\n\n#### ConversationResponseItem fields\n\nEvery item carries a `type` discriminator and these shared fields:\n\n| Field         | Type      | Description                                                                                                                    |\n| ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------ |\n| `type`        | `String`  | Discriminator. One of `\"text\"`, `\"tool_call\"`, `\"tool_result\"`, `\"answer\"`, `\"file\"`, `\"resource\"`, `\"search_datasets\"`.       |\n| `timestamp`   | `Long`    | Milliseconds since Unix epoch when this item was produced.                                                                     |\n| `is_thinking` | `Boolean` | `true` when the item represents internal agent reasoning rather than user-facing output. Consumers may hide or collapse these. |\n| `step_title`  | `String`  | Human-readable label for the agent step producing this item (e.g. `\"Searching\"`, `\"Visualising\"`).                             |\n\nVariant-specific fields:\n\n- **`text`** — agent text output: `content` (String), `content_type` (`ContentMimeType` enum), `file_reference` (FileReference).\n- **`tool_call`** — agent invoked a tool: `tool_call_id` (String), `tool_name` (String), `arguments` (JSON object).\n- **`tool_result`** — result returned from a tool invocation: `tool_call_id`, `tool_name`, `content`, `content_type` (`ContentMimeType` enum), `success` (Boolean).\n- **`answer`** — slim reference to a ThoughtSpot answer: `answer_id` (String), `tool_call_id`, `tool_name`.\n- **`file`** — uploaded or generated files: `files` (`PublicFileInfo[]`).\n- **`resource`** — MCP connector resource: `title`, `uri`, `name`, `mime_type`, `description`, `size` (Int), `connector_id`, `connector_name`, `connector_slug`, `transport_type` (`TransportType` enum).\n- **`search_datasets`** — dataset discovery result: `text` (String), `data_sources` (`DataSourceInfo[]`).\n\nClients should switch on `type` and ignore unknown variants for forward-compatibility.\n\n#### content_type values\n\n`content_type` is the `ContentMimeType` enum. The following values are defined:\n\n| Value                       | Wire MIME                   | Meaning                                              |\n| --------------------------- | --------------------------- | ---------------------------------------------------- |\n| `TEXT_PLAIN`                | `text/plain`                | Plain text. Default for `tool_result`.               |\n| `TEXT_MARKDOWN`             | `text/markdown`             | Markdown. Default for `text`.                        |\n| `TEXT_X_MARKDOWN_WITH_CODE` | `text/x-markdown-with-code` | Markdown whose body starts with a fenced code block. |\n| `TEXT_HTML`                 | `text/html`                 | Raw HTML.                                            |\n\n#### transport_type values\n\n`transport_type` is the `TransportType` enum used on the `resource` variant.\n\n| Value              | Meaning                                       |\n| ------------------ | --------------------------------------------- |\n| `STREAMABLE_HTTP`  | Streamable HTTP transport (default for MCP).  |\n| `SSE`              | Server-sent events transport.                 |\n\n#### FileReference fields\n\n| Field          | Type     | Description                                             |\n| -------------- | -------- | ------------------------------------------------------- |\n| `ts_file_id`   | `String` | Unique identifier of the code-execution-generated file. |\n| `display_name` | `String` | Human-readable file name.                               |\n| `created_at`   | `String` | ISO 8601 timestamp when the file was created.           |\n\nCross-reference `ts_file_id` against `code_execution_files` to retrieve full metadata including the `expired` flag before attempting a download.\n\n#### PublicFileInfo fields\n\n| Field          | Type     | Description                                   |\n| -------------- | -------- | --------------------------------------------- |\n| `ts_file_id`   | `String` | Unique identifier of the file.                |\n| `display_name` | `String` | Human-readable file name.                     |\n| `file_type`    | `String` | File type such as `csv`, `pdf`, or `png`.     |\n| `created_at`   | `String` | ISO 8601 timestamp when the file was created. |\n| `size_bytes`   | `Int`    | File size in bytes.                           |\n\n#### CodeExecutionFileMetadata fields\n\nEach entry in the `code_execution_files` array contains:\n\n| Field          | Type      | Description                                                                                                                     |\n| -------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------- |\n| `ts_file_id`   | `String`  | Unique identifier of the file.                                                                                                  |\n| `display_name` | `String`  | Human-readable file name.                                                                                                       |\n| `file_type`    | `String`  | File type such as `csv`, `pdf`, or `png`.                                                                                       |\n| `created_at`   | `String`  | ISO 8601 timestamp when the file was created.                                                                                   |\n| `expired`      | `Boolean` | When `true`, the underlying file is no longer retrievable from code-execution storage; UIs should disable download and preview. |\n\n#### Loading answer payloads\n\nEach `AnswerResponseItem` in the response contains an `answer_id` field. Pass this value as the `answer_identifier` parameter to `loadAnswer` to retrieve the full answer payload (TML query, token breakdown, visualization metadata) for that item.\n\n#### Example request\n\n```bash\nGET /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/fetch\n```\n\n#### Example response\n\n```json\n{\n  \"messages\": [\n    {\n      \"message_id\": \"node_u_01\",\n      \"timestamp\": 1744000000000,\n      \"user_message\": {\n        \"message_id\": \"msg_u_01\",\n        \"text\": \"Show me revenue by region as a chart.\"\n      },\n      \"user_attachments\": [],\n      \"response_items\": [\n        {\n          \"type\": \"tool_call\",\n          \"tool_call_id\": \"toolu_01ABC\",\n          \"tool_name\": \"search_datasets\",\n          \"step_title\": \"Searching datasets\",\n          \"arguments\": { \"query\": \"revenue\" },\n          \"timestamp\": 1744000001000,\n          \"is_thinking\": false\n        },\n        {\n          \"type\": \"answer\",\n          \"answer_id\": \"ans_01XYZ\",\n          \"tool_call_id\": \"toolu_02DEF\",\n          \"tool_name\": \"fetch_and_visualize\",\n          \"step_title\": \"Visualising\",\n          \"timestamp\": 1744000004000,\n          \"is_thinking\": false\n        },\n        {\n          \"type\": \"text\",\n          \"content\": \"Revenue is highest in APAC.\",\n          \"content_type\": \"TEXT_MARKDOWN\",\n          \"timestamp\": 1744000005000,\n          \"is_thinking\": false,\n          \"step_title\": null,\n          \"file_reference\": {\n            \"ts_file_id\": \"revenue_by_region.csv\",\n            \"display_name\": \"revenue_by_region.csv\",\n            \"created_at\": \"2026-04-07T12:00:00Z\"\n          }\n        }\n      ]\n    }\n  ],\n  \"code_execution_files\": [\n    {\n      \"ts_file_id\": \"revenue_by_region.csv\",\n      \"display_name\": \"revenue_by_region.csv\",\n      \"file_type\": \"csv\",\n      \"created_at\": \"2026-04-07T12:00:00Z\",\n      \"expired\": false\n    }\n  ]\n}\n```\n\n#### Example: liveboard-started conversation\n\nWhen a conversation is initiated from a saved liveboard visualization rather than a user query, the first turn is synthetic. `user_message` is `null`, `user_attachments` is `[]`, and `response_items` contains a single `answer` item referencing the seed visualization.\n\n```json\n{\n  \"messages\": [\n    {\n      \"message_id\": \"ROOT_NODE\",\n      \"timestamp\": 1743999000000,\n      \"user_message\": null,\n      \"user_attachments\": [],\n      \"response_items\": [\n        {\n          \"type\": \"answer\",\n          \"answer_id\": \"lb_seed_01\",\n          \"tool_call_id\": null,\n          \"tool_name\": null,\n          \"step_title\": null,\n          \"timestamp\": 1743999000000,\n          \"is_thinking\": false\n        }\n      ]\n    }\n  ],\n  \"code_execution_files\": []\n}\n```\n\nSubsequent turns follow the normal user-to-agent pattern.\n\n#### Error responses\n\n| Code | Description                                                                                                                 |\n| ---- | --------------------------------------------------------------------------------------------------------------------------- |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                        |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks access to the specified conversation. |\n| 404  | Not Found — no conversation exists with the given identifier for the authenticated user.                                    |\n\n> ###### Note:\n>\n> - Messages with an internal `SYSTEM` source are always dropped from the response.\n> - In-progress turns are still returned with an empty `response_items` array so clients can render the user message immediately.\n> - Do not assume every `tool_call` has a paired `tool_result` or `answer` — an interrupted conversation can leave a dangling call.\n> - Available from version 26.7.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nRetrieves the full public-safe content of a saved agent conversation: ordered\nturns (user messages and agent response items) and sanitized code-execution\nfile metadata. Internal graph or branch state, Azure file identifiers, and\nmessages with a `SYSTEM` source are omitted. The full answer payload is not\nembedded; fetch it separately via `loadAnswer` using the `answer_id` on each\n`answer` response item.\nRequires `CAN_USE_SPOTTER` privilege and access to the specified conversation. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nRetrieves the full public-safe content of a saved agent conversation. Returns ordered conversation messages — each carrying an optional user prompt (the user's message and any attachments) and the agent response items produced for that turn — plus sanitized metadata for any files generated by the code-execution tool. \n\nUse this endpoint to render a persisted conversation in a UI, build an audit trail, or post-process a completed conversation. The full answer payload is not embedded — fetch it separately via `loadAnswer` using the `answer_id` on each `answer` response item.\n\nRequires `CAN_USE_SPOTTER` privilege and access to the specified conversation.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier` _(path parameter)_: the unique ID of the conversation, as returned by `createAgentConversation` or `getConversationList`.\n\nIf the request is successful, the response contains two top-level fields:\n\n| Field                  | Type                                        | Description                                                                                                                                          |\n| ---------------------- | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |\n| `messages`             | `ConversationMessage[]`                     | Ordered oldest to newest. Empty array when the conversation has no messages.                                                                         |\n| `code_execution_files` | `CodeExecutionFileMetadata[]`               | List of sanitized file metadata entries (one per `file_id`). Covers all code-execution-generated files referenced anywhere in the conversation. Empty array when there are none. |\n\nNo other top-level fields are returned.\n\n#### ConversationMessage fields\n\n| Field                 | Type                         | Description                                                                                                    |\n| --------------------- | ---------------------------- | -------------------------------------------------------------------------------------------------------------- |\n| `message_id`          | `String`                     | Stable identifier for the turn. For liveboard-started synthetic first turns, this is the root node identifier. |\n| `timestamp_in_millis` | `Long`                       | Milliseconds since Unix epoch for the turn.                                                                    |\n| `user_prompt`         | `UserPrompt`                 | User-authored prompt that started the turn (message and attachments). `null` for liveboard-started synthetic first turns. |\n| `response_items`      | `ConversationResponseItem[]` | Agent-side output produced in response to this turn. Empty array for in-progress turns.                        |\n\n#### UserPrompt fields\n\n| Field         | Type                   | Description                                                                                          |\n| ------------- | ---------------------- | ---------------------------------------------------------------------------------------------------- |\n| `message`     | `UserMessage`          | User query that started the turn. `null` for liveboard-started synthetic first turns.                |\n| `attachments` | `UserAttachmentItem[]` | Files or connector resources attached to the user message. Empty array when there are no attachments. |\n\n#### UserMessage fields\n\n| Field        | Type     | Description                                   |\n| ------------ | -------- | --------------------------------------------- |\n| `message_id` | `String` | Unique identifier of the user-source message. |\n| `content`    | `String` | Text body of the user query.                  |\n\n#### UserAttachmentItem fields\n\nDiscriminated by `type`. Only `\"file\"` or `\"resource\"` are valid values. Only the fields for the indicated variant are populated. See `ConversationResponseItem` below for the field definitions of the `file` and `resource` variants — `UserAttachmentItem` uses the same fields.\n\n#### ConversationResponseItem fields\n\nEvery item carries a `type` discriminator and these shared fields:\n\n| Field                 | Type      | Description                                                                                                                    |\n| --------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------ |\n| `type`                | `String`  | Discriminator. One of `\"text\"`, `\"tool_call\"`, `\"tool_result\"`, `\"answer\"`, `\"file\"`, `\"resource\"`, `\"search_datasets\"`.       |\n| `timestamp_in_millis` | `Long`    | Milliseconds since Unix epoch when this item was produced.                                                                     |\n| `is_thinking`         | `Boolean` | `true` when the item represents internal agent reasoning rather than user-facing output. Consumers may hide or collapse these. |\n| `step_title`          | `String`  | Human-readable label for the agent step producing this item (e.g. `\"Searching\"`, `\"Visualising\"`).                             |\n\nVariant-specific fields:\n\n- **`text`** — agent text output: `content` (String), `content_type` (`ContentMimeType` enum), `file_reference` (FileReference).\n- **`tool_call`** — agent invoked a tool: `tool_call_id` (String), `tool_name` (String), `arguments` (JSON object).\n- **`tool_result`** — result returned from a tool invocation: `tool_call_id`, `tool_name`, `content`, `content_type` (`ContentMimeType` enum), `success` (Boolean).\n- **`answer`** — slim reference to a saved answer: `answer_id` (String), `tool_call_id`, `tool_name`.\n- **`file`** — uploaded or generated files: `files` (`PublicFileInfo[]`).\n- **`resource`** — MCP connector resource: `title`, `uri`, `name`, `mime_type`, `description`, `size` (Int), `connector_id`, `connector_name`, `connector_slug`, `transport_type` (`TransportType` enum).\n- **`search_datasets`** — dataset discovery result: `text` (String), `data_sources` (`DataSourceInfo[]`).\n\nClients should switch on `type` and ignore unknown variants for forward-compatibility.\n\n#### content_type values\n\n`content_type` is the `ContentMimeType` enum. The following values are defined:\n\n| Value                       | Wire MIME                   | Meaning                                              |\n| --------------------------- | --------------------------- | ---------------------------------------------------- |\n| `TEXT_PLAIN`                | `text/plain`                | Plain text. Default for `tool_result`.               |\n| `TEXT_MARKDOWN`             | `text/markdown`             | Markdown. Default for `text`.                        |\n| `TEXT_X_MARKDOWN_WITH_CODE` | `text/x-markdown-with-code` | Markdown whose body starts with a fenced code block. |\n| `TEXT_HTML`                 | `text/html`                 | Raw HTML.                                            |\n\n#### transport_type values\n\n`transport_type` is the `TransportType` enum used on the `resource` variant.\n\n| Value              | Meaning                                       |\n| ------------------ | --------------------------------------------- |\n| `STREAMABLE_HTTP`  | Streamable HTTP transport (default for MCP).  |\n| `SSE`              | Server-sent events transport.                 |\n\n#### FileReference fields\n\n| Field                    | Type     | Description                                                  |\n| ------------------------ | -------- | ------------------------------------------------------------ |\n| `file_id`                | `String` | Unique identifier of the code-execution-generated file.      |\n| `display_name`           | `String` | Human-readable file name.                                    |\n| `created_time_in_millis` | `Long`   | Milliseconds since Unix epoch when the file was created.     |\n\nCross-reference `file_id` against `code_execution_files` to retrieve full metadata including the `expired` flag before attempting a download.\n\n#### PublicFileInfo fields\n\n| Field                    | Type     | Description                                              |\n| ------------------------ | -------- | -------------------------------------------------------- |\n| `file_id`                | `String` | Unique identifier of the file.                           |\n| `display_name`           | `String` | Human-readable file name.                                |\n| `file_type`              | `String` | File type such as `csv`, `pdf`, or `png`.                |\n| `created_time_in_millis` | `Long`   | Milliseconds since Unix epoch when the file was created. |\n| `size_bytes`             | `Int`    | File size in bytes.                                      |\n\n#### CodeExecutionFileMetadata fields\n\nEach entry in the `code_execution_files` array contains:\n\n| Field                    | Type      | Description                                                                                                                     |\n| ------------------------ | --------- | ------------------------------------------------------------------------------------------------------------------------------- |\n| `file_id`                | `String`  | Unique identifier of the file.                                                                                                  |\n| `display_name`           | `String`  | Human-readable file name.                                                                                                       |\n| `file_type`              | `String`  | File type such as `csv`, `pdf`, or `png`.                                                                                       |\n| `created_time_in_millis` | `Long`    | Milliseconds since Unix epoch when the file was created.                                                                        |\n| `expired`                | `Boolean` | When `true`, the underlying file is no longer retrievable from code-execution storage; UIs should disable download and preview. |\n\n#### Loading answer payloads\n\nEach `AnswerResponseItem` in the response contains an `answer_id` field. Pass this value as the `answer_identifier` parameter to `loadAnswer` to retrieve the full answer payload (TML tokens, visualization metadata) for that item.\n\n#### Example request\n\n```bash\nGET /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/messages\n```\n\n#### Example response\n\n```json\n{\n  \"messages\": [\n    {\n      \"message_id\": \"node_u_01\",\n      \"timestamp_in_millis\": 1744000000000,\n      \"user_prompt\": {\n        \"message\": {\n          \"message_id\": \"msg_u_01\",\n          \"content\": \"Show me revenue by region as a chart.\"\n        },\n        \"attachments\": []\n      },\n      \"response_items\": [\n        {\n          \"type\": \"tool_call\",\n          \"tool_call_id\": \"toolu_01ABC\",\n          \"tool_name\": \"search_datasets\",\n          \"step_title\": \"Searching datasets\",\n          \"arguments\": { \"query\": \"revenue\" },\n          \"timestamp_in_millis\": 1744000001000,\n          \"is_thinking\": false\n        },\n        {\n          \"type\": \"answer\",\n          \"answer_id\": \"ans_01XYZ\",\n          \"tool_call_id\": \"toolu_02DEF\",\n          \"tool_name\": \"fetch_and_visualize\",\n          \"step_title\": \"Visualising\",\n          \"timestamp_in_millis\": 1744000004000,\n          \"is_thinking\": false\n        },\n        {\n          \"type\": \"text\",\n          \"content\": \"Revenue is highest in APAC.\",\n          \"content_type\": \"TEXT_MARKDOWN\",\n          \"timestamp_in_millis\": 1744000005000,\n          \"is_thinking\": false,\n          \"step_title\": null,\n          \"file_reference\": {\n            \"file_id\": \"revenue_by_region.csv\",\n            \"display_name\": \"revenue_by_region.csv\",\n            \"created_time_in_millis\": 1744027200000\n          }\n        }\n      ]\n    }\n  ],\n  \"code_execution_files\": [\n    {\n      \"file_id\": \"revenue_by_region.csv\",\n      \"display_name\": \"revenue_by_region.csv\",\n      \"file_type\": \"csv\",\n      \"created_time_in_millis\": 1744027200000,\n      \"expired\": false\n    }\n  ]\n}\n```\n\n#### Example: liveboard-started conversation\n\nWhen a conversation is initiated from a saved liveboard visualization rather than a user query, the first turn is synthetic. `user_prompt` is `null`, and `response_items` contains a single `answer` item referencing the seed visualization.\n\n```json\n{\n  \"messages\": [\n    {\n      \"message_id\": \"ROOT_NODE\",\n      \"timestamp_in_millis\": 1743999000000,\n      \"user_prompt\": null,\n      \"response_items\": [\n        {\n          \"type\": \"answer\",\n          \"answer_id\": \"lb_seed_01\",\n          \"tool_call_id\": null,\n          \"tool_name\": null,\n          \"step_title\": null,\n          \"timestamp_in_millis\": 1743999000000,\n          \"is_thinking\": false\n        }\n      ]\n    }\n  ],\n  \"code_execution_files\": []\n}\n```\n\nSubsequent turns follow the normal user-to-agent pattern.\n\n#### Error responses\n\n| Code | Description                                                                                                                 |\n| ---- | --------------------------------------------------------------------------------------------------------------------------- |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                        |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks access to the specified conversation. |\n| 404  | Not Found — no conversation exists with the given identifier for the authenticated user.                                    |\n\n> ###### Note:\n>\n> - Messages with an internal `SYSTEM` source are always dropped from the response.\n> - In-progress turns are still returned with an empty `response_items` array so clients can render the user message immediately.\n> - Do not assume every `tool_call` has a paired `tool_result` or `answer` — an interrupted conversation can leave a dangling call.\n> - Available from version 26.7.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "26.7.0.cl"
@@ -562,7 +562,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetConversationResponse"
+                  "$ref": "#/components/schemas/ConversationMessageResponse"
                 }
               }
             }
@@ -572,7 +572,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetConversationResponse"
+                  "$ref": "#/components/schemas/ConversationMessageResponse"
                 }
               }
             }
@@ -623,7 +623,7 @@
     "/api/rest/2.0/ai/agent/conversations": {
       "get": {
         "operationId": "getConversationList",
-        "description": "\nRetrieves the list of saved agent conversations for the currently authenticated user.\nOnly conversations created with `enable_save_chat: true` are returned. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nRetrieves a paginated list of saved agent conversations for the currently authenticated user. Only conversations that were created with `enable_save_chat: true` in `createAgentConversation` are returned.\n\nRequires `CAN_USE_SPOTTER` privilege.\n\n#### Usage guidelines\n\nThe request supports the following optional query parameters:\n\n- `limit`: maximum number of conversations to return. Use this together with `offset` for pagination.\n- `offset`: number of conversations to skip before returning results. Defaults to `0`.\n- `skip_empty`: when `true` (default), conversations with no messages are excluded from the results. Set to `false` to include empty conversations.\n\nIf the request is successful, the response includes a `conversations` array. Each entry contains:\n\n- `conversation_identifier`: the unique ID of the conversation, used as input to `sendAgentConversationMessage`, `renameConversation`, `deleteConversation`, `stopConversation`, and `loadAnswer`\n- `conversation_title`: the display name of the conversation\n- `created_at`: ISO 8601 timestamp of when the conversation was created\n- `updated_at`: ISO 8601 timestamp of the most recent update to the conversation\n- `data_source_identifiers`: list of unique IDs of the data sources associated with the conversation\n- `data_source_names`: array of `{ id, name }` objects for the data sources associated with the conversation\n\n#### Pagination\n\nUse `limit` and `offset` to page through large result sets:\n\n```\nGET /api/rest/2.0/ai/agent/conversations?limit=20&offset=0   → first page\nGET /api/rest/2.0/ai/agent/conversations?limit=20&offset=20  → second page\n```\n\n#### Pagination and `has_more`\n\nThe response includes a `has_more: Boolean` field. When `true`, there are additional conversations beyond the current page — increment `offset` by `limit` to fetch the next page. When `has_more` is `false`, the current page is the last. Note that `total_count` is not returned; use `has_more` to drive paging controls.\n\n#### Example response\n\n```json\n{\n  \"conversations\": [\n    {\n      \"conversation_identifier\": \"abc123\",\n      \"conversation_title\": \"Sales by Region Q1\",\n      \"created_at\": \"2026-03-01T10:00:00Z\",\n      \"updated_at\": \"2026-03-05T14:23:00Z\",\n      \"data_source_identifiers\": [\"ds-001\"],\n      \"data_source_names\": [{ \"id\": \"ds-001\", \"name\": \"Retail Sales\" }]\n    }\n  ],\n  \"has_more\": false\n}\n```\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege. |\n\n> ###### Note:\n>\n> - Only conversations created with `enable_save_chat: true` appear in this list. Conversations created with `enable_save_chat: false` (the default) are not persisted and cannot be retrieved.\n> - Available from version 26.7.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nRetrieves the list of saved agent conversations for the currently authenticated user.\nOnly conversations created with `enable_save_chat: true` are returned. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nRetrieves a paginated list of saved agent conversations for the currently authenticated user. Only conversations that were created with `enable_save_chat: true` in `createAgentConversation` are returned.\n\nRequires `CAN_USE_SPOTTER` privilege.\n\n#### Usage guidelines\n\nThe request supports the following optional query parameters:\n\n- `limit`: maximum number of conversations to return. Use this together with `offset` for pagination.\n- `offset`: number of conversations to skip before returning results. Defaults to `0`.\n- `skip_empty`: when `true` (default), conversations with no messages are excluded from the results. Set to `false` to include empty conversations.\n\nIf the request is successful, the response includes a `conversations` array. Each entry contains:\n\n- `conversation_identifier`: the unique ID of the conversation, used as input to `sendAgentConversationMessage`, `updateConversation`, `deleteConversation`, `stopConversation`, and `loadAnswer`\n- `conversation_title`: the display name of the conversation\n- `created_at`: ISO 8601 timestamp of when the conversation was created\n- `updated_at`: ISO 8601 timestamp of the most recent update to the conversation\n- `data_source_identifiers`: list of unique IDs of the data sources associated with the conversation\n- `data_source_names`: array of `{ id, name }` objects for the data sources associated with the conversation\n\n#### Pagination\n\nUse `limit` and `offset` to page through large result sets:\n\n```\nGET /api/rest/2.0/ai/agent/conversations?limit=20&offset=0   → first page\nGET /api/rest/2.0/ai/agent/conversations?limit=20&offset=20  → second page\n```\n\n#### Pagination and `has_more`\n\nThe response includes a `has_more: Boolean` field. When `true`, there are additional conversations beyond the current page — increment `offset` by `limit` to fetch the next page. When `has_more` is `false`, the current page is the last. Note that `total_count` is not returned; use `has_more` to drive paging controls.\n\n#### Example response\n\n```json\n{\n  \"conversations\": [\n    {\n      \"conversation_identifier\": \"abc123\",\n      \"conversation_title\": \"Sales by Region Q1\",\n      \"created_at\": \"2026-03-01T10:00:00Z\",\n      \"updated_at\": \"2026-03-05T14:23:00Z\",\n      \"data_source_identifiers\": [\"ds-001\"],\n      \"data_source_names\": [{ \"id\": \"ds-001\", \"name\": \"Retail Sales\" }]\n    }\n  ],\n  \"has_more\": false\n}\n```\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege. |\n\n> ###### Note:\n>\n> - Only conversations created with `enable_save_chat: true` appear in this list. Conversations created with `enable_save_chat: false` (the default) are not persisted and cannot be retrieved.\n> - Available from version 26.7.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "26.7.0.cl"
@@ -975,10 +975,10 @@
         }
       }
     },
-    "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/answers/{answer_identifier}/load": {
+    "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/answers/{answer_identifier}/details": {
       "get": {
         "operationId": "loadAnswer",
-        "description": "\nLoads the full answer payload for a specific answer item in an agent\nconversation. Returns structured answer data including the TML query, token\nbreakdown, visualization metadata, and agent context state.\nPass the `answer_id` from an `AnswerResponseItem` in the `getConversation`\nresponse as the `answer_identifier` parameter.\nRequires `CAN_USE_SPOTTER` privilege and access to the specified conversation. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nLoads the answer details for a specific answer item in an agent conversation. Returns structured answer data including the TML query, token breakdown, visualization metadata, and agent context state. Use this endpoint to retrieve the full answer representation for an answer item — for example, to re-render a chart, export a query, or inspect the generated TML.\n\nRequires `CAN_USE_SPOTTER` privilege and access to the specified conversation.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier` *(path parameter)*: the unique ID of the conversation, as returned by `createAgentConversation`\n- `answer_identifier` *(path parameter)*: the `answer_id` field from an `AnswerResponseItem` in the `getConversation` response\n\nIf the request is successful, the response contains an `answer` object with the following fields:\n\n| Field | Type | Description |\n|-------|------|-------------|\n| `title` | `String` | Display title of the generated answer (e.g., `\"sales by month\"`). |\n| `description` | `String` | Optional description of the answer. |\n| `session_identifier` | `String` | Unique identifier of the session in which this answer was generated. |\n| `generation_number` | `Int` | Generation sequence number of this answer within the session. |\n| `tokens` | `String` | Raw TML query string used to generate the answer (e.g., `\"[sales] [date].'monthly'\"`). |\n| `display_tokens` | `[String]` | Ordered list of individual TML token strings (e.g., `[\"[sales]\", \"[date].'monthly'\"]`). |\n| `visualization_type` | `VizType` | Suggested visualization type: `Chart`, `Table`, or `Undefined`. `null` if no suggestion is available. |\n| `formulas` | `[String]` | List of formula names referenced in the answer. Empty if none are used. |\n| `parameters` | `[String]` | List of parameter names applied to the answer. Empty if none are used. |\n| `subqueries` | `[JSON]` | List of subquery objects used in the answer. Empty if none are present. |\n| `ac_state` | `ACState` | Agent context state, including `transaction_identifier` and `generation_number`, used to correlate this answer with a specific agent turn. |\n\n#### ACState fields\n\n| Field | Type | Description |\n|-------|------|-------------|\n| `transaction_identifier` | `String` | Unique identifier of the agent transaction that produced this answer. |\n| `generation_number` | `Int` | Generation number within the transaction. |\n\n#### Example request\n\n```bash\nGET /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/answers/{answer_identifier}/load\n```\n\n#### Example response\n\n```json\n{\n  \"answer\": {\n    \"title\": \"sales by month\",\n    \"description\": \"\",\n    \"session_identifier\": \"7b00b801-73f4-4639-af5e-e775584ceba6\",\n    \"generation_number\": 1,\n    \"tokens\": \"[sales] [date].'monthly'\",\n    \"display_tokens\": [\"[sales]\", \"[date].'monthly'\"],\n    \"visualization_type\": null,\n    \"formulas\": [],\n    \"parameters\": [],\n    \"subqueries\": [],\n    \"ac_state\": {\n      \"transaction_identifier\": \"7f6c9948-b4c7-4098-bb1f-6c67bc0e5699\",\n      \"generation_number\": 1\n    }\n  }\n}\n```\n\n#### Typical usage scenario\n\n1. Call `getConversation` to retrieve the full conversation history.\n2. Locate an `AnswerResponseItem` in `response_items` — note its `answer_id` field.\n3. Call `loadAnswer` with the `conversation_identifier` and `answer_id` as `answer_identifier`.\n4. The returned `tokens` field is used to open the answer in the ThoughtSpot search interface, and `display_tokens` is rendered as pill chips in the UI.\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks access to the specified conversation. |\n| 404  | Not Found — no conversation or message exists with the given identifiers for the authenticated user. |\n| 422  | Unprocessable Entity — the message does not contain an answer of the expected type. |\n\n> ###### Note:\n>\n> - This endpoint only loads answers of type `TS_ANSWER`. Other message types are not supported.\n> - `visualization_type` may be `null` if the agent did not produce a visualization suggestion for this answer.\n> - `formulas`, `parameters`, and `subqueries` are returned as empty arrays when not applicable — they are never `null`.\n> - Available from version 26.7.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nLoads the full answer payload for a specific answer item in an agent\nconversation. Returns structured answer data including the TML query, token\nbreakdown, visualization metadata, and agent context state.\nPass the `answer_id` from an `AnswerResponseItem` in the `getConversation`\nresponse as the `answer_identifier` parameter.\nRequires `CAN_USE_SPOTTER` privilege and access to the specified conversation. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nLoads the answer details for a specific answer item in an agent conversation. Returns structured answer data including the TML token list, visualization metadata, and agent context state. Use this endpoint to retrieve the full answer representation for an answer item — for example, to re-render a chart, export a query, or inspect the generated TML.\n\nRequires `CAN_USE_SPOTTER` privilege and access to the specified conversation.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier` *(path parameter)*: the unique ID of the conversation, as returned by `createAgentConversation`\n- `answer_identifier` *(path parameter)*: the `answer_id` field from an `AnswerResponseItem` in the `getConversation` response\n\nIf the request is successful, the response contains an `answer` object with the following fields:\n\n| Field | Type | Description |\n|-------|------|-------------|\n| `title` | `String` | Display title of the generated answer (e.g., `\"sales by month\"`). |\n| `description` | `String` | Optional description of the answer. |\n| `session_identifier` | `String` | Unique identifier of the session in which this answer was generated. |\n| `generation_number` | `Int` | Generation sequence number of this answer within the session. |\n| `tokens` | `[String]` | Ordered list of TML token strings that make up the answer query (e.g., `[\"[sales]\", \"[date].'monthly'\"]`). |\n| `visualization_type` | `VizType` | Suggested visualization type: `Chart`, `Table`, or `Undefined`. `null` if no suggestion is available. |\n| `formulas` | `[String]` | List of formula names referenced in the answer. Empty if none are used. |\n| `parameters` | `[String]` | List of parameter names applied to the answer. Empty if none are used. |\n| `sub_queries` | `[JSON]` | List of sub-query objects used in the answer. Empty if none are present. |\n| `ac_state` | `ACState` | Agent context state, including `transaction_identifier` and `generation_number`, used to correlate this answer with a specific agent turn. |\n\n#### ACState fields\n\n| Field | Type | Description |\n|-------|------|-------------|\n| `transaction_identifier` | `String` | Unique identifier of the agent transaction that produced this answer. |\n| `generation_number` | `Int` | Generation number within the transaction. |\n\n#### Example request\n\n```bash\nGET /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/answers/{answer_identifier}/details\n```\n\n#### Example response\n\n```json\n{\n  \"answer\": {\n    \"title\": \"sales by month\",\n    \"description\": \"\",\n    \"session_identifier\": \"7b00b801-73f4-4639-af5e-e775584ceba6\",\n    \"generation_number\": 1,\n    \"tokens\": [\"[sales]\", \"[date].'monthly'\"],\n    \"visualization_type\": null,\n    \"formulas\": [],\n    \"parameters\": [],\n    \"sub_queries\": [],\n    \"ac_state\": {\n      \"transaction_identifier\": \"7f6c9948-b4c7-4098-bb1f-6c67bc0e5699\",\n      \"generation_number\": 1\n    }\n  }\n}\n```\n\n#### Typical usage scenario\n\n1. Call `getConversation` to retrieve the full conversation history.\n2. Locate an `AnswerResponseItem` in `response_items` — note its `answer_id` field.\n3. Call `loadAnswer` with the `conversation_identifier` and `answer_id` as `answer_identifier`.\n4. The returned `tokens` array can be used to open the answer in the ThoughtSpot search interface or rendered as pill chips in the UI.\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks access to the specified conversation. |\n| 404  | Not Found — no conversation or message exists with the given identifiers for the authenticated user. |\n| 422  | Unprocessable Entity — the message does not contain an answer of the expected type. |\n\n> ###### Note:\n>\n> - This endpoint only loads answer-type messages. Other message types are not supported.\n> - `visualization_type` may be `null` if the agent did not produce a visualization suggestion for this answer.\n> - `formulas`, `parameters`, and `sub_queries` are returned as empty arrays when not applicable — they are never `null`.\n> - Available from version 26.7.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "26.7.0.cl"
@@ -1107,82 +1107,6 @@
                 }
               }
             }
-          },
-          "400": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update": {
-      "post": {
-        "operationId": "renameConversation",
-        "description": "\nRenames an existing agent conversation. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nRenames an existing saved agent conversation. Use this endpoint to update the display title of a conversation, for example after the conversation scope is refined or to reflect a more descriptive name.\n\nRequires `CAN_USE_SPOTTER` privilege and ownership of the conversation being renamed.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier` *(path parameter)*: the unique ID of the conversation to rename, as returned by `createAgentConversation` or `getConversationList`\n- `title` *(request body)*: the new display name for the conversation. Must be a non-empty string.\n\nA successful request returns an empty `204 No Content` response. The updated title is reflected immediately in subsequent calls to `getConversationList`.\n\n#### Example request\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update\nContent-Type: application/json\n\n{\n  \"title\": \"Revenue Breakdown by Product Line\"\n}\n```\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 400  | Bad Request — `title` is missing or empty in the request body. |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. |\n| 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. |\n| 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |\n\n> ###### Note:\n>\n> - Only conversations created with `enable_save_chat: true` can be renamed. Unsaved conversations are not persisted and do not have a retrievable identifier.\n> - Available from version 26.7.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "AI",
-          "26.7.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RenameConversationRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "conversation_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unique identifier of the conversation to rename."
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Successfully renamed the agent conversation."
           },
           "400": {
             "description": "Operation failed",
@@ -2070,6 +1994,82 @@
         "responses": {
           "204": {
             "description": "Successfully stopped the in-progress agent conversation response for the given."
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update": {
+      "post": {
+        "operationId": "updateConversation",
+        "description": "\nUpdates attributes of an existing agent conversation. Currently only the\ndisplay title can be updated; additional conversation attributes may be\nsupported in future versions. At least one updatable attribute must be\nprovided in the request body. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUpdates attributes of an existing saved agent conversation. Currently only the conversation's display `title` can be updated; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.\n\nRequires `CAN_USE_SPOTTER` privilege and ownership of the conversation being updated.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier` *(path parameter)*: the unique ID of the conversation to update, as returned by `createAgentConversation` or `getConversationList`\n- At least one updatable attribute in the request body:\n    - `title` *(optional)*: the new display name for the conversation. When provided, must be a non-empty string.\n\nA successful request returns an empty `204 No Content` response. Updated attributes are reflected immediately in subsequent calls to `getConversationList`.\n\n#### Example request\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update\nContent-Type: application/json\n\n{\n  \"title\": \"Revenue Breakdown by Product Line\"\n}\n```\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 400  | Bad Request — the request body is empty or `title` is provided as an empty string. |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. |\n| 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. |\n| 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |\n\n> ###### Note:\n>\n> - Only conversations created with `enable_save_chat: true` can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier.\n> - Available from version 26.7.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.7.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateConversationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "conversation_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the conversation to update."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully updated the agent conversation."
           },
           "400": {
             "description": "Operation failed",
@@ -5403,6 +5403,11 @@
                     "description": "Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’",
                     "type": "string",
                     "format": "binary"
+                  },
+                  "include_semantic_report": {
+                    "description": "If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.",
+                    "type": "boolean",
+                    "nullable": true
                   }
                 },
                 "required": [
@@ -5487,7 +5492,7 @@
                     "type": "string"
                   },
                   "model_tables": {
-                    "description": "List of Models and their respective Tables\nExample: '[{\"model_name\": \"model_name\", \"tables\": [\"table_name\"]}]'",
+                    "description": "List of Models and their respective Tables\nExample: '[{\"model_name\": \"model_name\", \"model_path\": \"model_path\", \"tables\": [\"table_name\"]}]'",
                     "type": "string",
                     "format": "json"
                   },
@@ -5509,6 +5514,11 @@
                     "description": "Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’",
                     "type": "string",
                     "format": "binary"
+                  },
+                  "include_semantic_report": {
+                    "description": "If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.",
+                    "type": "boolean",
+                    "nullable": true
                   }
                 },
                 "required": [
@@ -9759,6 +9769,957 @@
           },
           "500": {
             "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/customization/styles/fonts/delete": {
+      "post": {
+        "operationId": "deleteStyleFonts",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nDeletes one or more custom fonts from the cluster-level or org-level font library. If a deleted font is assigned to visualization areas, those assignments automatically fallback to the cluster/system default font. The response lists all affected areas where the font was explicitly set. Note: dry_run defaults to true. To actually delete fonts, you must explicitly pass dry_run: false.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- Provide one or more font UUIDs or names in `font_identifiers`.\n- Set `scope` to `CLUSTER` to delete from the cluster-level library. Set `scope` to `ORG` (default) to delete from the authenticated user's org library.\n- Use `dry_run: true` to preview which visualization areas would be affected without actually deleting the font. The response lists affected assignments; no changes are applied.\n- Deletions cannot be undone. Re-upload the font file using `uploadStyleFont` if needed.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Style Customization",
+          "26.7.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteStyleFontsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Font deleted successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StyleFontDeleteData"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "Font deleted with affected assignments",
+                    "value": {
+                      "affected_assignments": [
+                        {
+                          "org": {
+                            "id": 1234567890,
+                            "name": "Sales"
+                          },
+                          "visualization_areas": [
+                            "CHART_X_AXIS_LABELS",
+                            "CHART_Y_AXIS_LABELS"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "example_2": {
+                    "summary": "Font deleted with no affected assignments",
+                    "value": {
+                      "affected_assignments": []
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/customization/styles/logos/export": {
+      "post": {
+        "operationId": "exportStyleLogos",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nDownloads the active logos (default and wide slots) at the requested scope as a single ZIP archive containing both logo image files. If no custom logo has been uploaded at the ORG scope, the archive contains the resolved logo falling through from the cluster. If no cluster logo has been uploaded, no file is returned.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- Set `scope` to `CLUSTER` to download cluster-level logos.\n- Set `scope` to `ORG` (default) to download logos for the authenticated user's org.\n- The response is a ZIP archive (`application/zip`). Save the response body directly to a `.zip` file.\n- The archive always contains two files — one for the DEFAULT slot and one for the WIDE slot — even if no custom logo is set at the requested scope.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Style Customization",
+          "26.7.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExportStyleLogosRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Logo ZIP archive retrieved successfully.",
+            "content": {
+              "application/octet-stream": {}
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/customization/styles/search": {
+      "post": {
+        "operationId": "searchStyleCustomizations",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nRetrieves style preferences at cluster level or for the authenticated user's org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- Set `scope` to `CLUSTER` to retrieve cluster-level style defaults.\n- Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user's org.\n- Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Style Customization",
+          "26.7.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchStyleCustomizationsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Style preferences retrieved successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StylePreference"
+                  }
+                },
+                "examples": {
+                  "example_1": {
+                    "value": [
+                      {
+                        "scope": "CLUSTER",
+                        "navigation_panel": {
+                          "theme": "DARK",
+                          "is_overridden": false
+                        },
+                        "chart_color_palette": {
+                          "colors": [
+                            {
+                              "primary": "#2359B6",
+                              "secondary": [
+                                "#1A4690",
+                                "#0E2E66",
+                                "#07194A",
+                                "#030D30"
+                              ]
+                            },
+                            {
+                              "primary": "#E8552D",
+                              "secondary": [
+                                "#C4421A",
+                                "#9E2F0D",
+                                "#7A2005",
+                                "#581302"
+                              ]
+                            },
+                            {
+                              "primary": "#F5A623",
+                              "secondary": [
+                                "#D08B0E",
+                                "#A86E05",
+                                "#825202",
+                                "#5E3900"
+                              ]
+                            },
+                            {
+                              "primary": "#7ED321",
+                              "secondary": [
+                                "#62A815",
+                                "#488009",
+                                "#305A03",
+                                "#1C3800"
+                              ]
+                            },
+                            {
+                              "primary": "#9B59B6",
+                              "secondary": [
+                                "#7D3F9A",
+                                "#612C7E",
+                                "#481C62",
+                                "#320F48"
+                              ]
+                            },
+                            {
+                              "primary": "#1ABC9C",
+                              "secondary": [
+                                "#0E9E81",
+                                "#077F67",
+                                "#03624E",
+                                "#014838"
+                              ]
+                            },
+                            {
+                              "primary": "#E74C3C",
+                              "secondary": [
+                                "#C0392B",
+                                "#9A2518",
+                                "#761409",
+                                "#540703"
+                              ]
+                            },
+                            {
+                              "primary": "#3498DB",
+                              "secondary": [
+                                "#1A7DC0",
+                                "#0E60A0",
+                                "#074580",
+                                "#032C60"
+                              ]
+                            }
+                          ],
+                          "disable_color_rotation": false,
+                          "is_overridden": false
+                        },
+                        "embedded_footer_text": {
+                          "value": "",
+                          "is_overridden": false
+                        },
+                        "logo": {
+                          "default_logo": {
+                            "id": "a1b2c3d4-0001-0001-0001-000000000001",
+                            "is_overridden": false
+                          },
+                          "wide_logo": {
+                            "id": "a1b2c3d4-0002-0002-0002-000000000002",
+                            "is_overridden": false
+                          }
+                        },
+                        "visualization_fonts": {
+                          "chart_visualization_fonts": [
+                            {
+                              "visualization_area": "CHART_X_AXIS_LABELS",
+                              "font_id": null,
+                              "font_name": null,
+                              "is_overridden": false
+                            }
+                          ],
+                          "table_visualization_fonts": [
+                            {
+                              "visualization_area": "TABLE_VALUE_CELLS",
+                              "font_id": null,
+                              "font_name": null,
+                              "is_overridden": false
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "scope": "ORG",
+                        "org": {
+                          "id": 1234567890,
+                          "name": "Sales"
+                        },
+                        "navigation_panel": {
+                          "theme": "CUSTOM",
+                          "base_color": "#2359B6",
+                          "is_overridden": true
+                        },
+                        "chart_color_palette": {
+                          "colors": [
+                            {
+                              "primary": "#2359B6",
+                              "secondary": [
+                                "#1A4690",
+                                "#0E2E66",
+                                "#07194A",
+                                "#030D30"
+                              ]
+                            },
+                            {
+                              "primary": "#E8552D",
+                              "secondary": [
+                                "#C4421A",
+                                "#9E2F0D",
+                                "#7A2005",
+                                "#581302"
+                              ]
+                            },
+                            {
+                              "primary": "#F5A623",
+                              "secondary": [
+                                "#D08B0E",
+                                "#A86E05",
+                                "#825202",
+                                "#5E3900"
+                              ]
+                            },
+                            {
+                              "primary": "#7ED321",
+                              "secondary": [
+                                "#62A815",
+                                "#488009",
+                                "#305A03",
+                                "#1C3800"
+                              ]
+                            },
+                            {
+                              "primary": "#9B59B6",
+                              "secondary": [
+                                "#7D3F9A",
+                                "#612C7E",
+                                "#481C62",
+                                "#320F48"
+                              ]
+                            },
+                            {
+                              "primary": "#1ABC9C",
+                              "secondary": [
+                                "#0E9E81",
+                                "#077F67",
+                                "#03624E",
+                                "#014838"
+                              ]
+                            },
+                            {
+                              "primary": "#E74C3C",
+                              "secondary": [
+                                "#C0392B",
+                                "#9A2518",
+                                "#761409",
+                                "#540703"
+                              ]
+                            },
+                            {
+                              "primary": "#3498DB",
+                              "secondary": [
+                                "#1A7DC0",
+                                "#0E60A0",
+                                "#074580",
+                                "#032C60"
+                              ]
+                            }
+                          ],
+                          "disable_color_rotation": false,
+                          "is_overridden": false
+                        },
+                        "embedded_footer_text": {
+                          "value": "Powered by Sales Analytics",
+                          "is_overridden": true
+                        },
+                        "logo": {
+                          "default_logo": {
+                            "id": "b2c3d4e5-0001-0001-0001-000000000011",
+                            "is_overridden": true
+                          },
+                          "wide_logo": {
+                            "id": "b2c3d4e5-0002-0002-0002-000000000022",
+                            "is_overridden": true
+                          }
+                        },
+                        "visualization_fonts": {
+                          "chart_visualization_fonts": [
+                            {
+                              "visualization_area": "CHART_X_AXIS_LABELS",
+                              "font_id": "c3d4e5f6-1111-1111-1111-111111111111",
+                              "font_name": "Acme Sans",
+                              "is_overridden": true
+                            }
+                          ],
+                          "table_visualization_fonts": [
+                            {
+                              "visualization_area": "TABLE_VALUE_CELLS",
+                              "font_id": null,
+                              "font_name": "Optimo-Plain, Helvetica Neue, Helvetica, Arial, sans-serif",
+                              "is_overridden": false
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/customization/styles/fonts/search": {
+      "post": {
+        "operationId": "searchStyleFonts",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nReturns custom fonts from the cluster-level or org-level font library. Omitting all filter fields returns all fonts in the target scope.\n\nWhen `include_font_assignments` is `true`, the response includes only the visualization areas explicitly assigned to each font. For cluster-scoped fonts, `org` is returned as `null`.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- Set `scope` to `CLUSTER` to search the cluster-level library. Set `scope` to `ORG` (default) to search the authenticated user's org library.\n- Use `font_identifier` to look up a specific font by UUID or name.\n- Use `name_pattern` for partial, case-insensitive name matching.\n- Set `include_font_assignments` to `true` to include visualization areas this font is currently assigned to. Defaults to `false`.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Style Customization",
+          "26.7.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchStyleFontsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Custom fonts retrieved successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StyleFontRecord"
+                  }
+                },
+                "examples": {
+                  "example_1": {
+                    "value": [
+                      {
+                        "id": "c3d4e5f6-1111-1111-1111-111111111111",
+                        "scope": "ORG",
+                        "org": {
+                          "id": 1234567890,
+                          "name": "Sales"
+                        },
+                        "name": "Acme Sans",
+                        "weight": "NORMAL",
+                        "style": "NORMAL",
+                        "color": "#333333",
+                        "creation_time_in_millis": 1714000000000,
+                        "assignments": [
+                          {
+                            "org": {
+                              "id": 1234567890,
+                              "name": "Sales"
+                            },
+                            "visualization_areas": [
+                              "CHART_X_AXIS_LABELS",
+                              "CHART_Y_AXIS_LABELS"
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "id": "d4e5f6a7-2222-2222-2222-222222222222",
+                        "scope": "CLUSTER",
+                        "name": "Corporate Bold",
+                        "weight": "BOLD",
+                        "style": "NORMAL",
+                        "color": "#000000",
+                        "creation_time_in_millis": 1713500000000,
+                        "assignments": []
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/customization/styles/update": {
+      "post": {
+        "operationId": "updateStyleCustomization",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUpdates style preferences at cluster level or for the authenticated user's org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.\n\n#### Usage guidelines\n\nTwo operations are supported via the `operation` field:\n\n- **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged.\n- **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.\n\n#### Logo upload\n\nLogo files are uploaded as binary fields using `multipart/form-data`:\n\n- `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG.\n- `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.\n\nTo reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.\n\n#### Navigation panel color\n\nSet `navigation_panel.theme` to one of:\n\n- `DARK`: Default dark theme.\n- `TWO_TONE`: Dual-tone panel style.\n- `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).\n\n#### Chart color palette\n\nProvide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.\n\n#### Font assignments\n\nSpecify `visualization_fonts.chart_visualization_fonts` and `visualization_fonts.table_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Style Customization",
+          "26.7.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "scope": {
+                    "description": "Scope at which to apply the preferences. CLUSTER sets cluster-level\ndefaults for all orgs. ORG applies to the authenticated user's org.\nDefaults to ORG if omitted.",
+                    "type": "string",
+                    "enum": [
+                      "CLUSTER",
+                      "ORG"
+                    ]
+                  },
+                  "operation": {
+                    "description": "Operation to perform. REPLACE (default) applies the provided fields and\nleaves omitted fields unchanged. RESET reverts fields listed in\nreset_options to defaults.",
+                    "type": "string",
+                    "enum": [
+                      "REPLACE",
+                      "RESET"
+                    ]
+                  },
+                  "reset_options": {
+                    "description": "Fields to reset when operation is RESET. Specify style fields and\nvisualization areas to revert to defaults.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/StyleResetOptionsInput"
+                      }
+                    ]
+                  },
+                  "navigation_panel": {
+                    "description": "Navigation panel color. Provide theme and, when theme is CUSTOM, also\nprovide base_color.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/NavigationPanelInput"
+                      }
+                    ]
+                  },
+                  "chart_color_palette": {
+                    "description": "Chart color palette. When provided with operation REPLACE, exactly 8\ncolor entries must be specified in colors.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/StyleColorPaletteInput"
+                      }
+                    ]
+                  },
+                  "embedded_footer_text": {
+                    "description": "Custom footer text for the embedded application. An empty\nstring clears the footer.",
+                    "type": "string"
+                  },
+                  "visualization_fonts": {
+                    "description": "Font assignments per visualization area. Provide only the areas to\nupdate; omitted areas remain unchanged.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/VisualizationFontsInput"
+                      }
+                    ]
+                  },
+                  "default_logo": {
+                    "description": "Binary image for the DEFAULT logo slot (square app icon and favicon;\nrecommended 140x140 px). Accepted formats: PNG, JPG.",
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "wide_logo": {
+                    "description": "Binary image for the WIDE logo slot (horizontal top nav bar logo;\nrecommended 230x45 px). Accepted formats: PNG, JPG.",
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "reset_options": {
+                  "contentType": "application/json"
+                },
+                "navigation_panel": {
+                  "contentType": "application/json"
+                },
+                "chart_color_palette": {
+                  "contentType": "application/json"
+                },
+                "visualization_fonts": {
+                  "contentType": "application/json"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Style preferences updated successfully."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/customization/styles/fonts/{font_identifier}/update": {
+      "post": {
+        "operationId": "updateStyleFont",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUpdates the metadata of an existing custom font in the cluster-level or org-level font library. Only the fields provided in the request are modified; omitted fields remain unchanged.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- Identify the font using `font_identifier` (UUID or name).\n- Set `scope` to `CLUSTER` to target the cluster-level library. Set `scope` to `ORG` (default) to target the authenticated user's org library.\n- To replace the font file itself (WOFF/WOFF2 binary), delete the existing font and re-upload using `uploadStyleFont`.\n- `name` must be unique within the target scope if provided.\n- `color` must be a valid 6-digit hex string (e.g. `#333333`) if provided.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Style Customization",
+          "26.7.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateStyleFontRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "font_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "UUID or name of the font to update."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Font metadata updated successfully."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/customization/styles/fonts/upload": {
+      "post": {
+        "operationId": "uploadStyleFont",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUploads a custom font to the cluster-level or org-level font library. Cluster-level fonts are available as defaults for all orgs. Org-level fonts are only available within that org.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- Only **WOFF** and **WOFF2** font formats are accepted. TTF and OTF files are rejected with an error.\n- The `name` field must be unique within the target scope. Uploading a font with a name that already exists returns an error.\n- Set `scope` to `CLUSTER` to upload to the cluster-level library. Set `scope` to `ORG` (default) to upload to the authenticated user's org library.\n- `weight` defaults to `NORMAL` if omitted. Supported values: `NORMAL`, `LIGHT`, `BOLD`.\n- `style` defaults to `NORMAL` if omitted. Supported values: `NORMAL`, `ITALIC`, `OBLIQUE`.\n- `color` defaults to `#000000` (black) if omitted. Provide as a 6-digit hex string (e.g. `#333333`).\n- The uploaded font can be assigned to visualization areas using the `updateStyleCustomization` endpoint.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Style Customization",
+          "26.7.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "scope": {
+                    "description": "Scope of the font library to upload to. CLUSTER uploads to the\ncluster-level library, making the font available as a default for all\norgs. ORG uploads to the authenticated user's org library. Defaults to\nORG if omitted.",
+                    "type": "string",
+                    "enum": [
+                      "CLUSTER",
+                      "ORG"
+                    ]
+                  },
+                  "name": {
+                    "description": "Display name for the font (e.g. \"Acme Sans\"). Must be unique within the\ntarget scope; returns an error if a font with this name already exists.",
+                    "type": "string"
+                  },
+                  "weight": {
+                    "description": "Weight of the font. Supported values: NORMAL, LIGHT, BOLD. Defaults to\nNORMAL if omitted.",
+                    "type": "string",
+                    "enum": [
+                      "NORMAL",
+                      "LIGHT",
+                      "BOLD"
+                    ]
+                  },
+                  "style": {
+                    "description": "Style of the font. Supported values: NORMAL, ITALIC, OBLIQUE. Defaults\nto NORMAL if omitted.",
+                    "type": "string",
+                    "enum": [
+                      "NORMAL",
+                      "ITALIC",
+                      "OBLIQUE"
+                    ]
+                  },
+                  "color": {
+                    "description": "Color of the font as a 6-digit hex string (e.g. \"#333333\"). Defaults to\n#000000 (black) if omitted. Returns an error if the value is malformed.",
+                    "type": "string"
+                  },
+                  "file_content": {
+                    "description": "Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats\nare accepted; TTF and OTF are rejected. The file is validated on upload.",
+                    "type": "string",
+                    "format": "binary"
+                  }
+                },
+                "required": [
+                  "name",
+                  "file_content"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Font uploaded successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StyleFontUploadData"
+                },
+                "examples": {
+                  "example_1": {
+                    "value": {
+                      "id": "c3d4e5f6-1111-1111-1111-111111111111",
+                      "name": "Acme Sans"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -17231,6 +18192,39 @@
           }
         }
       },
+      "AgentInstructions": {
+        "type": "object",
+        "required": [
+          "instructions"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the record.",
+            "nullable": true
+          },
+          "instructions": {
+            "type": "string",
+            "description": "The admin instructions text for the agent."
+          },
+          "created_at": {
+            "type": "string",
+            "description": "ISO timestamp when the instructions were created.",
+            "nullable": true
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "ISO timestamp when the instructions were last updated.",
+            "nullable": true
+          },
+          "last_updated_by": {
+            "type": "string",
+            "description": "User ID of the admin who last updated the instructions.",
+            "nullable": true
+          }
+        },
+        "description": "Admin instructions configured for the AI agent."
+      },
       "AgentConversationHistoryResponse": {
         "type": "object",
         "required": [
@@ -17247,7 +18241,7 @@
           },
           "has_more": {
             "type": "boolean",
-            "description": "Whether additional conversations exist beyond this page. `true` when the number\nof returned conversations equals the requested `limit`. Use `offset` to fetch\nthe next page."
+            "description": "Whether additional conversations exist beyond this page. `true` when one or\nmore conversations remain after the current page; `false` when the current\npage is the last. Use `offset` to fetch the next page."
           }
         },
         "description": "Response returned by getConversationList."
@@ -17314,15 +18308,15 @@
         },
         "description": "A data source associated with a conversation, returned as a typed entry."
       },
-      "GetConversationResponse": {
+      "ConversationMessageResponse": {
         "type": "object",
         "properties": {
           "messages": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ConversationTurn"
+              "$ref": "#/components/schemas/ConversationMessage"
             },
-            "description": "Ordered conversation turns. Empty array when the conversation has no turns.",
+            "description": "Ordered conversation messages. Empty array when the conversation has no messages.",
             "nullable": true
           },
           "code_execution_files": {
@@ -17334,34 +18328,26 @@
             "nullable": true
           }
         },
-        "description": "Response body of getConversation. `messages` is ordered oldest to newest.\n`code_execution_files` is a list of sanitized code-execution file metadata\nentries, keyed in upstream by `ts_file_id`."
+        "description": "Response body of getConversation. `messages` is ordered oldest to newest.\n`code_execution_files` is a list of sanitized code-execution file metadata\nentries, keyed in upstream by `file_id`."
       },
-      "ConversationTurn": {
+      "ConversationMessage": {
         "type": "object",
         "required": [
           "message_id",
-          "timestamp"
+          "timestamp_in_millis"
         ],
         "properties": {
           "message_id": {
             "type": "string",
             "description": "Stable identifier for the turn. For liveboard-started synthetic first turns,\nthis is the root node identifier."
           },
-          "timestamp": {
+          "timestamp_in_millis": {
             "type": "object",
             "description": "Milliseconds since Unix epoch for the turn."
           },
-          "user_message": {
-            "$ref": "#/components/schemas/UserMessage",
-            "description": "User query that started the turn. Null for liveboard-started synthetic first turns.",
-            "nullable": true
-          },
-          "user_attachments": {
-            "type": "array",
-            "items": {
-              "type": "object"
-            },
-            "description": "Files or connector resources attached to the user message. Empty array when\nthere are no attachments.",
+          "user_prompt": {
+            "$ref": "#/components/schemas/UserPrompt",
+            "description": "User-authored prompt that started the turn: the user's message and any files\nor connector resources attached to it. Null for liveboard-started synthetic\nfirst turns.",
             "nullable": true
           },
           "response_items": {
@@ -17373,20 +18359,39 @@
             "nullable": true
           }
         },
-        "description": "One conversational exchange: an optional user message and its attachments,\nfollowed by the agent's response items for that turn."
+        "description": "One conversational exchange: an optional user prompt (message and attachments),\nfollowed by the agent's response items for that turn."
+      },
+      "UserPrompt": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "$ref": "#/components/schemas/UserMessage",
+            "description": "User query that started the turn. Null for liveboard-started synthetic first turns.",
+            "nullable": true
+          },
+          "attachments": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Files or connector resources attached to the user message. Empty array when\nthere are no attachments.",
+            "nullable": true
+          }
+        },
+        "description": "User-authored prompt for a conversation turn: the user's text message and any\nfiles or connector resources attached to it."
       },
       "UserMessage": {
         "type": "object",
         "required": [
           "message_id",
-          "text"
+          "content"
         ],
         "properties": {
           "message_id": {
             "type": "string",
             "description": "Unique identifier of the user message."
           },
-          "text": {
+          "content": {
             "type": "string",
             "description": "Text body of the user query."
           }
@@ -17397,14 +18402,14 @@
         "type": "object",
         "required": [
           "type",
-          "timestamp"
+          "timestamp_in_millis"
         ],
         "properties": {
           "type": {
             "type": "string",
             "description": "Variant discriminator. Always `\"file\"`."
           },
-          "timestamp": {
+          "timestamp_in_millis": {
             "type": "object",
             "description": "Milliseconds since Unix epoch when this item was produced."
           },
@@ -17432,10 +18437,10 @@
       "PublicFileInfo": {
         "type": "object",
         "required": [
-          "ts_file_id"
+          "file_id"
         ],
         "properties": {
-          "ts_file_id": {
+          "file_id": {
             "type": "string",
             "description": "Unique identifier of the file."
           },
@@ -17449,9 +18454,9 @@
             "description": "File type such as `csv`, `pdf`, or `png`.",
             "nullable": true
           },
-          "created_at": {
-            "type": "string",
-            "description": "ISO 8601 timestamp when the file was created.",
+          "created_time_in_millis": {
+            "type": "object",
+            "description": "Milliseconds since Unix epoch when the file was created.",
             "nullable": true
           },
           "size_bytes": {
@@ -17467,7 +18472,7 @@
         "type": "object",
         "required": [
           "type",
-          "timestamp",
+          "timestamp_in_millis",
           "title",
           "uri"
         ],
@@ -17476,7 +18481,7 @@
             "type": "string",
             "description": "Variant discriminator. Always `\"resource\"`."
           },
-          "timestamp": {
+          "timestamp_in_millis": {
             "type": "object",
             "description": "Milliseconds since Unix epoch when this item was produced."
           },
@@ -17550,7 +18555,7 @@
         "type": "object",
         "required": [
           "type",
-          "timestamp",
+          "timestamp_in_millis",
           "content"
         ],
         "properties": {
@@ -17558,7 +18563,7 @@
             "type": "string",
             "description": "Variant discriminator. Always `\"text\"`."
           },
-          "timestamp": {
+          "timestamp_in_millis": {
             "type": "object",
             "description": "Milliseconds since Unix epoch when this item was produced."
           },
@@ -17598,10 +18603,10 @@
       "FileReference": {
         "type": "object",
         "required": [
-          "ts_file_id"
+          "file_id"
         ],
         "properties": {
-          "ts_file_id": {
+          "file_id": {
             "type": "string",
             "description": "Unique identifier of the code-execution-generated file."
           },
@@ -17610,9 +18615,9 @@
             "description": "Human-readable file name.",
             "nullable": true
           },
-          "created_at": {
-            "type": "string",
-            "description": "ISO 8601 timestamp when the file was created.",
+          "created_time_in_millis": {
+            "type": "object",
+            "description": "Milliseconds since Unix epoch when the file was created.",
             "nullable": true
           }
         },
@@ -17622,7 +18627,7 @@
         "type": "object",
         "required": [
           "type",
-          "timestamp",
+          "timestamp_in_millis",
           "arguments"
         ],
         "properties": {
@@ -17630,7 +18635,7 @@
             "type": "string",
             "description": "Variant discriminator. Always `\"tool_call\"`."
           },
-          "timestamp": {
+          "timestamp_in_millis": {
             "type": "object",
             "description": "Milliseconds since Unix epoch when this item was produced."
           },
@@ -17665,7 +18670,7 @@
         "type": "object",
         "required": [
           "type",
-          "timestamp",
+          "timestamp_in_millis",
           "content"
         ],
         "properties": {
@@ -17673,7 +18678,7 @@
             "type": "string",
             "description": "Variant discriminator. Always `\"tool_result\"`."
           },
-          "timestamp": {
+          "timestamp_in_millis": {
             "type": "object",
             "description": "Milliseconds since Unix epoch when this item was produced."
           },
@@ -17724,7 +18729,7 @@
         "type": "object",
         "required": [
           "type",
-          "timestamp",
+          "timestamp_in_millis",
           "answer_id"
         ],
         "properties": {
@@ -17732,7 +18737,7 @@
             "type": "string",
             "description": "Variant discriminator. Always `\"answer\"`."
           },
-          "timestamp": {
+          "timestamp_in_millis": {
             "type": "object",
             "description": "Milliseconds since Unix epoch when this item was produced."
           },
@@ -17761,13 +18766,13 @@
             "nullable": true
           }
         },
-        "description": "Slim reference to a ThoughtSpot answer produced by the agent. Full answer payload\n(visualization spec, formulas, session info) is not embedded — fetch separately\nvia `loadAnswer` using `answer_id`."
+        "description": "Slim reference to a saved answer produced by the agent. Full answer payload\n(visualization spec, formulas, session info) is not embedded — fetch separately\nvia `loadAnswer` using `answer_id`."
       },
       "SearchDatasetsResponseItem": {
         "type": "object",
         "required": [
           "type",
-          "timestamp",
+          "timestamp_in_millis",
           "text"
         ],
         "properties": {
@@ -17775,7 +18780,7 @@
             "type": "string",
             "description": "Variant discriminator. Always `\"search_datasets\"`."
           },
-          "timestamp": {
+          "timestamp_in_millis": {
             "type": "object",
             "description": "Milliseconds since Unix epoch when this item was produced."
           },
@@ -17935,11 +18940,11 @@
       "CodeExecutionFileMetadata": {
         "type": "object",
         "required": [
-          "ts_file_id",
+          "file_id",
           "expired"
         ],
         "properties": {
-          "ts_file_id": {
+          "file_id": {
             "type": "string",
             "description": "Unique identifier of the code-execution-generated file. Stable across\nconversation turns."
           },
@@ -17953,9 +18958,9 @@
             "description": "File type hint. Either a MIME string (e.g. `text/csv`) or an extension\n(e.g. `csv`).",
             "nullable": true
           },
-          "created_at": {
-            "type": "string",
-            "description": "ISO 8601 timestamp when the file was created.",
+          "created_time_in_millis": {
+            "type": "object",
+            "description": "Milliseconds since Unix epoch when the file was created.",
             "nullable": true
           },
           "expired": {
@@ -18000,16 +19005,11 @@
             "nullable": true
           },
           "tokens": {
-            "type": "string",
-            "description": "TML query string for the answer.",
-            "nullable": true
-          },
-          "display_tokens": {
             "type": "array",
             "items": {
               "type": "string"
             },
-            "description": "List of individual TML token strings.",
+            "description": "Ordered list of TML token strings that make up the answer query.",
             "nullable": true
           },
           "visualization_type": {
@@ -18041,12 +19041,12 @@
             "description": "List of parameters used in the answer.",
             "nullable": true
           },
-          "subqueries": {
+          "sub_queries": {
             "type": "array",
             "items": {
               "type": "object"
             },
-            "description": "List of subqueries used in the answer.",
+            "description": "List of sub-queries used in the answer.",
             "nullable": true
           },
           "ac_state": {
@@ -18071,39 +19071,6 @@
             "nullable": true
           }
         }
-      },
-      "AgentInstructions": {
-        "type": "object",
-        "required": [
-          "instructions"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Unique identifier of the record.",
-            "nullable": true
-          },
-          "instructions": {
-            "type": "string",
-            "description": "The admin instructions text for the agent."
-          },
-          "created_at": {
-            "type": "string",
-            "description": "ISO timestamp when the instructions were created.",
-            "nullable": true
-          },
-          "updated_at": {
-            "type": "string",
-            "description": "ISO timestamp when the instructions were last updated.",
-            "nullable": true
-          },
-          "last_updated_by": {
-            "type": "string",
-            "description": "User ID of the admin who last updated the instructions.",
-            "nullable": true
-          }
-        },
-        "description": "Admin instructions configured for the AI agent."
       },
       "RiseGQLArgWrapper": {
         "type": "object",
@@ -18217,6 +19184,11 @@
             },
             "description": "Values of the variable",
             "nullable": true
+          },
+          "org": {
+            "$ref": "#/components/schemas/VariableOrgInfo",
+            "description": "Owner org of the variable.",
+            "nullable": true
           }
         },
         "description": "Variable object"
@@ -18268,6 +19240,24 @@
             "format": "int32",
             "description": "The priority assigned to this value. If there are 2 matching values, the one with the higher priority will be picked.",
             "nullable": true
+          }
+        }
+      },
+      "VariableOrgInfo": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "description": "ID of the Org."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the Org."
           }
         }
       },
@@ -18601,6 +19591,15 @@
           "storage_destination": {
             "$ref": "#/components/schemas/StorageDestination",
             "description": "Storage destination configuration for webhook payload delivery.",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ENABLED",
+              "DISABLED"
+            ],
+            "description": "Status of the webhook (ENABLED or DISABLED).\nOnly present when explicitly set. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
             "nullable": true
           }
         }
@@ -19178,6 +20177,379 @@
           }
         },
         "description": "A recipient (user, group, or external) for a job execution."
+      },
+      "StylePreference": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ],
+            "description": "Scope at which these style preferences apply.",
+            "nullable": true
+          },
+          "org": {
+            "$ref": "#/components/schemas/StyleOrgInfo",
+            "description": "Org associated with these preferences. Present only when scope is ORG.",
+            "nullable": true
+          },
+          "navigation_panel": {
+            "$ref": "#/components/schemas/StyleNavigationPanel",
+            "description": "Navigation panel color configuration.",
+            "nullable": true
+          },
+          "chart_color_palette": {
+            "$ref": "#/components/schemas/StyleChartColorPalette",
+            "description": "Chart color palette configuration.",
+            "nullable": true
+          },
+          "embedded_footer_text": {
+            "$ref": "#/components/schemas/StyleEmbeddedFooterText",
+            "description": "Embedded footer text configuration.",
+            "nullable": true
+          },
+          "logo": {
+            "$ref": "#/components/schemas/StyleLogoStatus",
+            "description": "Logo status per slot.",
+            "nullable": true
+          },
+          "visualization_fonts": {
+            "$ref": "#/components/schemas/StyleVisualizationFonts",
+            "description": "Effective font assignments per visualization area.",
+            "nullable": true
+          }
+        },
+        "description": "Style preferences for a single scope entry."
+      },
+      "StyleOrgInfo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Unique integer ID of the org.",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the org.",
+            "nullable": true
+          }
+        },
+        "description": "Org information returned in style API responses."
+      },
+      "StyleNavigationPanel": {
+        "type": "object",
+        "properties": {
+          "theme": {
+            "type": "string",
+            "enum": [
+              "DARK",
+              "TWO_TONE",
+              "CUSTOM"
+            ],
+            "description": "Navigation panel color mode.",
+            "nullable": true
+          },
+          "base_color": {
+            "type": "string",
+            "description": "Base color as a 6-digit hex string. Present only when theme is CUSTOM.",
+            "nullable": true
+          },
+          "is_overridden": {
+            "type": "boolean",
+            "description": "True if explicitly set at this scope, overriding any inherited value.",
+            "nullable": true
+          }
+        },
+        "description": "Navigation panel color configuration for a specific scope."
+      },
+      "StyleChartColorPalette": {
+        "type": "object",
+        "properties": {
+          "colors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StyleColorEntry"
+            },
+            "description": "Ordered array of 8 color entries.",
+            "nullable": true
+          },
+          "disable_color_rotation": {
+            "type": "boolean",
+            "description": "When true, automatic color rotation across chart data series is disabled.",
+            "nullable": true
+          },
+          "is_overridden": {
+            "type": "boolean",
+            "description": "True if explicitly set at this scope, overriding any inherited value.",
+            "nullable": true
+          }
+        },
+        "description": "Chart color palette configuration for a specific scope."
+      },
+      "StyleColorEntry": {
+        "type": "object",
+        "properties": {
+          "primary": {
+            "type": "string",
+            "description": "Primary color as a 6-digit hex string.",
+            "nullable": true
+          },
+          "secondary": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Array of 4 secondary shade hex strings.",
+            "nullable": true
+          }
+        },
+        "description": "A single color entry in the chart color palette."
+      },
+      "StyleEmbeddedFooterText": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "Footer text value. Empty string indicates no footer is set.",
+            "nullable": true
+          },
+          "is_overridden": {
+            "type": "boolean",
+            "description": "True if explicitly set at this scope, overriding any inherited value.",
+            "nullable": true
+          }
+        },
+        "description": "Embedded footer text configuration for a specific scope."
+      },
+      "StyleLogoStatus": {
+        "type": "object",
+        "properties": {
+          "default_logo": {
+            "$ref": "#/components/schemas/StyleLogoSlot",
+            "description": "Status of the DEFAULT logo slot (square app icon and favicon; recommended\n140x140 px).",
+            "nullable": true
+          },
+          "wide_logo": {
+            "$ref": "#/components/schemas/StyleLogoSlot",
+            "description": "Status of the WIDE logo slot (horizontal top nav bar logo; recommended\n230x45 px).",
+            "nullable": true
+          }
+        },
+        "description": "Logo status per slot."
+      },
+      "StyleLogoSlot": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "UUID of the active logo.",
+            "nullable": true
+          },
+          "is_overridden": {
+            "type": "boolean",
+            "description": "True if a custom logo is uploaded at this scope. False if the system\ndefault or cluster logo is active.",
+            "nullable": true
+          }
+        },
+        "description": "Status of a single logo slot."
+      },
+      "StyleVisualizationFonts": {
+        "type": "object",
+        "properties": {
+          "chart_visualization_fonts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChartVisualizationFontRecord"
+            },
+            "description": "Font assignments for chart visualization areas.",
+            "nullable": true
+          },
+          "table_visualization_fonts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TableVisualizationFontRecord"
+            },
+            "description": "Font assignments for table visualization areas.",
+            "nullable": true
+          }
+        },
+        "description": "Effective font assignments per visualization type."
+      },
+      "ChartVisualizationFontRecord": {
+        "type": "object",
+        "properties": {
+          "visualization_area": {
+            "type": "string",
+            "enum": [
+              "CHART_X_AXIS_LABELS",
+              "CHART_X_AXIS_TITLE",
+              "CHART_Y_AXIS_LABELS",
+              "CHART_Y_AXIS_TITLE",
+              "CHART_TOOLTIP",
+              "CHART_SCATTER_DATA_LABELS",
+              "CHART_DONUT_DATA_LABELS",
+              "CHART_LINE_DATA_LABELS",
+              "CHART_COLUMN_DATA_LABELS",
+              "CHART_BAR_DATA_LABELS",
+              "CHART_AREA_DATA_LABELS"
+            ],
+            "description": "Chart visualization area.",
+            "nullable": true
+          },
+          "font_id": {
+            "type": "string",
+            "description": "UUID of the font assigned to this area. Null when the system default font\nis active.",
+            "nullable": true
+          },
+          "font_name": {
+            "type": "string",
+            "description": "Display name of the font assigned to this area. Null when the system\ndefault font is active.",
+            "nullable": true
+          },
+          "is_overridden": {
+            "type": "boolean",
+            "description": "True if explicitly set at this scope, overriding any inherited value.",
+            "nullable": true
+          }
+        },
+        "description": "Font assignment for a chart visualization area in the response."
+      },
+      "TableVisualizationFontRecord": {
+        "type": "object",
+        "properties": {
+          "visualization_area": {
+            "type": "string",
+            "enum": [
+              "TABLE_VALUE_CELLS"
+            ],
+            "description": "Table visualization area.",
+            "nullable": true
+          },
+          "font_id": {
+            "type": "string",
+            "description": "UUID of the font assigned to this area. Null when the system default font\nis active.",
+            "nullable": true
+          },
+          "font_name": {
+            "type": "string",
+            "description": "Display name of the font assigned to this area. Null when the system\ndefault font is active.",
+            "nullable": true
+          },
+          "is_overridden": {
+            "type": "boolean",
+            "description": "True if explicitly set at this scope, overriding any inherited value.",
+            "nullable": true
+          }
+        },
+        "description": "Font assignment for a table visualization area in the response."
+      },
+      "StyleFontRecord": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique UUID identifier of the font."
+          },
+          "scope": {
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ],
+            "description": "Scope indicating whether this font belongs to the cluster or org library.",
+            "nullable": true
+          },
+          "org": {
+            "$ref": "#/components/schemas/StyleOrgInfo",
+            "description": "Org associated with this font. Present only when scope is ORG.",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the font."
+          },
+          "weight": {
+            "type": "string",
+            "enum": [
+              "NORMAL",
+              "LIGHT",
+              "BOLD"
+            ],
+            "description": "Weight of the font.",
+            "nullable": true
+          },
+          "style": {
+            "type": "string",
+            "enum": [
+              "NORMAL",
+              "ITALIC",
+              "OBLIQUE"
+            ],
+            "description": "Style of the font.",
+            "nullable": true
+          },
+          "color": {
+            "type": "string",
+            "description": "Color of the font as a 6-digit hex string.",
+            "nullable": true
+          },
+          "creation_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Timestamp in milliseconds when the font was uploaded.",
+            "nullable": true
+          },
+          "assignments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StyleFontAssignment"
+            },
+            "description": "Visualization areas currently assigned to this font. Empty if not assigned\nto any area. Populated only when include_font_assignments is true.",
+            "nullable": true
+          }
+        },
+        "description": "A custom font record in the font library."
+      },
+      "StyleFontAssignment": {
+        "type": "object",
+        "properties": {
+          "org": {
+            "$ref": "#/components/schemas/StyleOrgInfo",
+            "description": "Org context for this assignment. Present only when scope is ORG.",
+            "nullable": true
+          },
+          "visualization_areas": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "CHART_X_AXIS_LABELS",
+                "CHART_X_AXIS_TITLE",
+                "CHART_Y_AXIS_LABELS",
+                "CHART_Y_AXIS_TITLE",
+                "CHART_TOOLTIP",
+                "CHART_SCATTER_DATA_LABELS",
+                "CHART_DONUT_DATA_LABELS",
+                "CHART_LINE_DATA_LABELS",
+                "CHART_COLUMN_DATA_LABELS",
+                "CHART_BAR_DATA_LABELS",
+                "CHART_AREA_DATA_LABELS",
+                "TABLE_VALUE_CELLS"
+              ]
+            },
+            "description": "Visualization areas using this font.",
+            "nullable": true
+          }
+        },
+        "description": "Visualization areas assigned to a font, grouped by org context."
       },
       "GenericInfo": {
         "type": "object",
@@ -23430,6 +24802,249 @@
         },
         "description": "Group of metadata objects identified by type."
       },
+      "StyleResetOptionsInput": {
+        "type": "object",
+        "properties": {
+          "style": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "CHART_COLOR_PALETTE",
+                "EMBEDDED_FOOTER_TEXT",
+                "NAV_PANEL_COLOR",
+                "DEFAULT_LOGO",
+                "WIDE_LOGO"
+              ]
+            },
+            "description": "Style fields to reset. Supported values: CHART_COLOR_PALETTE,\nEMBEDDED_FOOTER_TEXT, NAV_PANEL_COLOR, DEFAULT_LOGO, WIDE_LOGO.",
+            "nullable": true
+          },
+          "visualization_areas": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "CHART_X_AXIS_LABELS",
+                "CHART_X_AXIS_TITLE",
+                "CHART_Y_AXIS_LABELS",
+                "CHART_Y_AXIS_TITLE",
+                "CHART_TOOLTIP",
+                "CHART_SCATTER_DATA_LABELS",
+                "CHART_DONUT_DATA_LABELS",
+                "CHART_LINE_DATA_LABELS",
+                "CHART_COLUMN_DATA_LABELS",
+                "CHART_BAR_DATA_LABELS",
+                "CHART_AREA_DATA_LABELS",
+                "TABLE_VALUE_CELLS"
+              ]
+            },
+            "description": "Visualization areas whose font assignments should revert to the system\ndefault font.",
+            "nullable": true
+          }
+        },
+        "description": "Fields to revert to defaults when operation is RESET."
+      },
+      "NavigationPanelInput": {
+        "type": "object",
+        "properties": {
+          "theme": {
+            "type": "string",
+            "enum": [
+              "DARK",
+              "TWO_TONE",
+              "CUSTOM"
+            ],
+            "description": "Color mode for the navigation panel. DARK applies the default dark theme.\nTWO_TONE applies a dual-tone style. CUSTOM enables a user-defined base\ncolor; base_color is required when theme is CUSTOM.",
+            "nullable": true
+          },
+          "base_color": {
+            "type": "string",
+            "description": "Base color as a 6-digit hex string (e.g. \"#2359B6\"). Required when theme\nis CUSTOM.",
+            "nullable": true
+          }
+        },
+        "description": "Navigation panel color configuration."
+      },
+      "StyleColorPaletteInput": {
+        "type": "object",
+        "properties": {
+          "colors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StyleColorEntryInput"
+            },
+            "description": "Ordered array of exactly 8 color entries defining the chart color palette.",
+            "nullable": true
+          },
+          "disable_color_rotation": {
+            "type": "boolean",
+            "description": "When true, disables automatic color rotation across chart data series.",
+            "nullable": true
+          }
+        },
+        "description": "Chart color palette configuration."
+      },
+      "StyleColorEntryInput": {
+        "type": "object",
+        "required": [
+          "primary"
+        ],
+        "properties": {
+          "primary": {
+            "type": "string",
+            "description": "Primary color as a 6-digit hex string (e.g. \"#2359B6\"). Required."
+          },
+          "secondary": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Array of exactly 4 secondary shade hex strings. If omitted, the server\nauto-generates 4 shades from the primary color. If provided, must contain\nexactly 4 valid 6-digit hex color strings.",
+            "nullable": true
+          }
+        },
+        "description": "A single color entry in the chart color palette."
+      },
+      "VisualizationFontsInput": {
+        "type": "object",
+        "properties": {
+          "chart_visualization_fonts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChartFontAssignmentInput"
+            },
+            "description": "Font assignments for chart visualization areas. Provide only the areas to\nupdate; omitted areas remain unchanged.",
+            "nullable": true
+          },
+          "table_visualization_fonts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TableFontAssignmentInput"
+            },
+            "description": "Font assignments for table visualization areas. Provide only the areas to\nupdate; omitted areas remain unchanged.",
+            "nullable": true
+          }
+        },
+        "description": "Font assignments grouped by visualization type."
+      },
+      "ChartFontAssignmentInput": {
+        "type": "object",
+        "required": [
+          "visualization_area",
+          "font_identifier"
+        ],
+        "properties": {
+          "visualization_area": {
+            "type": "string",
+            "enum": [
+              "CHART_X_AXIS_LABELS",
+              "CHART_X_AXIS_TITLE",
+              "CHART_Y_AXIS_LABELS",
+              "CHART_Y_AXIS_TITLE",
+              "CHART_TOOLTIP",
+              "CHART_SCATTER_DATA_LABELS",
+              "CHART_DONUT_DATA_LABELS",
+              "CHART_LINE_DATA_LABELS",
+              "CHART_COLUMN_DATA_LABELS",
+              "CHART_BAR_DATA_LABELS",
+              "CHART_AREA_DATA_LABELS"
+            ],
+            "description": "Chart visualization area to assign the font to."
+          },
+          "font_identifier": {
+            "type": "string",
+            "description": "UUID or name of the font to assign to this area."
+          }
+        },
+        "description": "Font assignment for a single chart visualization area."
+      },
+      "TableFontAssignmentInput": {
+        "type": "object",
+        "required": [
+          "visualization_area",
+          "font_identifier"
+        ],
+        "properties": {
+          "visualization_area": {
+            "type": "string",
+            "enum": [
+              "TABLE_VALUE_CELLS"
+            ],
+            "description": "Table visualization area to assign the font to."
+          },
+          "font_identifier": {
+            "type": "string",
+            "description": "UUID or name of the font to assign to this area."
+          }
+        },
+        "description": "Font assignment for a single table visualization area."
+      },
+      "StyleFontUploadData": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique UUID identifier of the uploaded font."
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the uploaded font."
+          }
+        },
+        "description": "Font data returned after a successful upload."
+      },
+      "StyleFontDeleteData": {
+        "type": "object",
+        "properties": {
+          "affected_assignments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StyleFontDeleteAffectedAssignment"
+            },
+            "description": "Visualization areas that used the deleted font(s) and were automatically\nreset to the system default font. Empty if no areas were affected.",
+            "nullable": true
+          }
+        },
+        "description": "Result data for font deletion."
+      },
+      "StyleFontDeleteAffectedAssignment": {
+        "type": "object",
+        "properties": {
+          "org": {
+            "$ref": "#/components/schemas/StyleOrgInfo",
+            "description": "Org context for this assignment. Present only when scope is ORG.",
+            "nullable": true
+          },
+          "visualization_areas": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "CHART_X_AXIS_LABELS",
+                "CHART_X_AXIS_TITLE",
+                "CHART_Y_AXIS_LABELS",
+                "CHART_Y_AXIS_TITLE",
+                "CHART_TOOLTIP",
+                "CHART_SCATTER_DATA_LABELS",
+                "CHART_DONUT_DATA_LABELS",
+                "CHART_LINE_DATA_LABELS",
+                "CHART_COLUMN_DATA_LABELS",
+                "CHART_BAR_DATA_LABELS",
+                "CHART_AREA_DATA_LABELS",
+                "TABLE_VALUE_CELLS"
+              ]
+            },
+            "description": "Visualization areas that used the deleted font and were automatically reset\nto the system default font.",
+            "nullable": true
+          }
+        },
+        "description": "A visualization area assignment affected by a font deletion."
+      },
       "Runtime_Filter": {
         "type": "object",
         "properties": {
@@ -23614,18 +25229,6 @@
           }
         }
       },
-      "RenameConversationRequest": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "description": "New display title for the conversation.",
-            "type": "string"
-          }
-        },
-        "required": [
-          "title"
-        ]
-      },
       "SendAgentConversationMessageRequest": {
         "type": "object",
         "properties": {
@@ -23756,6 +25359,15 @@
           "query",
           "metadata_identifier"
         ]
+      },
+      "UpdateConversationRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "description": "New display title for the conversation. Omit to leave the title\nunchanged.",
+            "type": "string"
+          }
+        }
       },
       "ConfigureAuthSettingsRequest": {
         "type": "object",
@@ -28939,6 +30551,125 @@
           "column_security_rules"
         ]
       },
+      "DeleteStyleFontsRequest": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "description": "Scope of the font library to delete from. CLUSTER deletes from the\ncluster-level library. ORG deletes from the authenticated user's org\nlibrary. Defaults to ORG if omitted.",
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ]
+          },
+          "font_identifiers": {
+            "description": "UUIDs or names of the fonts to delete. At least one identifier is\nrequired.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "dry_run": {
+            "description": "When true, returns affected assignments without applying the deletion.\nUse this to preview the impact before committing. Defaults to true if\nomitted.",
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "required": [
+          "font_identifiers"
+        ]
+      },
+      "ExportStyleLogosRequest": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "description": "Scope of the logos to export. CLUSTER exports cluster-level logos. ORG\nexports logos for the authenticated user's org, falling back to cluster\nor defaults if no custom logo is set. Defaults to ORG if\nomitted.",
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ]
+          }
+        }
+      },
+      "SearchStyleCustomizationsRequest": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "description": "Scope of the style preferences to retrieve. CLUSTER returns cluster-level\ndefaults. ORG returns preferences for the authenticated user's org, which\nmay override cluster defaults. Defaults to ORG if omitted.",
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ]
+          }
+        }
+      },
+      "SearchStyleFontsRequest": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "description": "Scope of the font library to search. CLUSTER searches the cluster-level\nlibrary. ORG searches the authenticated user's org library. Returns both Cluster and Org\nlevel font if omitted.",
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ]
+          },
+          "font_identifier": {
+            "description": "Filter by UUID or name of a specific font.",
+            "type": "string"
+          },
+          "name_pattern": {
+            "description": "Filter by font display name. Supports partial, case-insensitive matching.",
+            "type": "string"
+          },
+          "include_font_assignments": {
+            "description": "When true, includes visualization areas this font is assigned to in the\nresponse. Defaults to false if omitted.",
+            "type": "boolean",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateStyleFontRequest": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "description": "Scope of the font library containing this font. CLUSTER targets the\ncluster-level library. ORG targets the authenticated user's org library.\nDefaults to ORG if omitted.",
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ]
+          },
+          "name": {
+            "description": "New display name for the font. Must be unique within the target scope.",
+            "type": "string"
+          },
+          "weight": {
+            "description": "New weight for the font. Supported values: NORMAL, LIGHT, BOLD.",
+            "type": "string",
+            "enum": [
+              "NORMAL",
+              "LIGHT",
+              "BOLD"
+            ]
+          },
+          "style": {
+            "description": "New style for the font. Supported values: NORMAL, ITALIC, OBLIQUE.",
+            "type": "string",
+            "enum": [
+              "NORMAL",
+              "ITALIC",
+              "OBLIQUE"
+            ]
+          },
+          "color": {
+            "description": "New color for the font as a 6-digit hex string (e.g. \"#333333\"). Returns\nan error if the value is malformed.",
+            "type": "string"
+          }
+        }
+      },
       "ConfigureCommunicationChannelPreferencesRequest": {
         "type": "object",
         "properties": {
@@ -30222,6 +31953,14 @@
             "items": {
               "$ref": "#/components/schemas/WebhookKeyValuePairInput"
             }
+          },
+          "status": {
+            "description": "Status of the webhook (ENABLED or DISABLED). Optional — when omitted,\nstatus is not stored and will be absent from the response. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
+            "type": "string",
+            "enum": [
+              "ENABLED",
+              "DISABLED"
+            ]
           }
         },
         "required": [
@@ -30281,6 +32020,14 @@
               {
                 "$ref": "#/components/schemas/WebhookSortOptionsInput"
               }
+            ]
+          },
+          "status": {
+            "description": "Filter webhooks by status (ENABLED or DISABLED). <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
+            "type": "string",
+            "enum": [
+              "ENABLED",
+              "DISABLED"
             ]
           }
         }
@@ -30344,6 +32091,14 @@
             "items": {
               "$ref": "#/components/schemas/WebhookKeyValuePairInput"
             }
+          },
+          "status": {
+            "description": "Status of the webhook (ENABLED or DISABLED). <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
+            "type": "string",
+            "enum": [
+              "ENABLED",
+              "DISABLED"
+            ]
           }
         }
       }
