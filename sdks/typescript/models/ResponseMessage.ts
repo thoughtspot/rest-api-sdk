@@ -88,5 +88,5 @@ export class ResponseMessage {
 
 
 export type ResponseMessageMessageTypeEnum = "TSAnswer" ;
-export type ResponseMessageVisualizationTypeEnum = "Chart" | "Table" | "Undefined" ;
+export type ResponseMessageVisualizationTypeEnum = "Chart" | "CHART" | "Table" | "TABLE" | "Undefined" | "UNDEFINED" ;
 

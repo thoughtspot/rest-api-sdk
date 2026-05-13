@@ -12604,6 +12604,702 @@ components:
       required:
       - instructions
       type: object
+    AgentConversationHistoryResponse:
+      description: Response returned by getConversationList.
+      properties:
+        conversations:
+          description: List of saved agent conversations for the current user.
+          items:
+            $ref: '#/components/schemas/AgentConversationList'
+          nullable: true
+          type: array
+        has_more:
+          description: |-
+            Whether additional conversations exist beyond this page. `true` when one or
+            more conversations remain after the current page; `false` when the current
+            page is the last. Use `offset` to fetch the next page.
+          nullable: true
+          type: boolean
+      type: object
+    AgentConversationList:
+      description: A saved agent conversation item returned in list responses.
+      properties:
+        conversation_identifier:
+          description: Unique identifier of the conversation.
+          type: string
+        conversation_title:
+          description: Display title of the conversation.
+          nullable: true
+          type: string
+        created_at:
+          description: ISO 8601 timestamp when the conversation was created.
+          nullable: true
+          type: string
+        updated_at:
+          description: ISO 8601 timestamp when the conversation was last updated.
+          nullable: true
+          type: string
+        data_source_identifiers:
+          description: Unique identifiers of the data sources associated with the
+            conversation.
+          items:
+            type: string
+          nullable: true
+          type: array
+        data_source_names:
+          description: "Data sources associated with the conversation, each with an\
+            \ `id` and `name`."
+          items:
+            $ref: '#/components/schemas/DataSourceEntry'
+          nullable: true
+          type: array
+      required:
+      - conversation_identifier
+      type: object
+    DataSourceEntry:
+      description: "A data source associated with a conversation, returned as a typed\
+        \ entry."
+      properties:
+        id:
+          description: Unique identifier of the data source.
+          type: string
+        name:
+          description: Display name of the data source.
+          type: string
+      required:
+      - id
+      - name
+      type: object
+    ConversationMessageResponse:
+      description: |-
+        Response body of getConversation. `messages` is ordered oldest to newest.
+        `code_execution_files` is a list of sanitized code-execution file metadata
+        entries, keyed in upstream by `file_id`.
+      properties:
+        messages:
+          description: Ordered conversation messages. Empty array when the conversation
+            has no messages.
+          items:
+            $ref: '#/components/schemas/ConversationMessage'
+          nullable: true
+          type: array
+        code_execution_files:
+          description: |-
+            Sanitized code-execution file metadata for files referenced by this
+            conversation. Empty array when the conversation has no code-execution files.
+          items:
+            $ref: '#/components/schemas/CodeExecutionFileMetadata'
+          nullable: true
+          type: array
+      type: object
+    ConversationMessage:
+      description: |-
+        One conversational exchange: an optional user prompt (message and attachments),
+        followed by the agent's response items for that turn.
+      properties:
+        message_id:
+          description: |-
+            Stable identifier for the turn. For liveboard-started synthetic first turns,
+            this is the root node identifier.
+          type: string
+        timestamp_in_millis:
+          description: Milliseconds since Unix epoch for the turn.
+          type: object
+        user_prompt:
+          $ref: '#/components/schemas/UserPrompt'
+        response_items:
+          description: |-
+            Agent-side output produced in response to this turn. Empty array for
+            in-progress turns where the agent has not yet produced output.
+          items:
+            type: object
+          nullable: true
+          type: array
+      required:
+      - message_id
+      - timestamp_in_millis
+      type: object
+    UserPrompt:
+      description: |-
+        User-authored prompt for a conversation turn: the user's text message and any
+        files or connector resources attached to it.
+      properties:
+        message:
+          $ref: '#/components/schemas/UserMessage'
+        attachments:
+          description: |-
+            Files or connector resources attached to the user message. Empty array when
+            there are no attachments.
+          items:
+            type: object
+          nullable: true
+          type: array
+      type: object
+    UserMessage:
+      description: |-
+        User-authored text message that begins a conversation turn.
+        Null when the turn is a synthetic liveboard-started first turn.
+      properties:
+        message_id:
+          description: Unique identifier of the user message.
+          type: string
+        content:
+          description: Text body of the user query.
+          type: string
+      required:
+      - content
+      - message_id
+      type: object
+    FileResponseItem:
+      description: Uploaded or generated files attached to a turn.
+      properties:
+        type:
+          description: Variant discriminator. Always `"file"`.
+          type: string
+        timestamp_in_millis:
+          description: Milliseconds since Unix epoch when this item was produced.
+          type: object
+        is_thinking:
+          description: True when the item represents internal agent reasoning rather
+            than user-facing output.
+          nullable: true
+          type: boolean
+        step_title:
+          description: Human-readable label for the agent step producing this item.
+          nullable: true
+          type: string
+        files:
+          description: Sanitized file metadata.
+          items:
+            $ref: '#/components/schemas/PublicFileInfo'
+          nullable: true
+          type: array
+      required:
+      - timestamp_in_millis
+      - type
+      type: object
+    PublicFileInfo:
+      description: |-
+        Sanitized metadata for a file attached to or produced by a conversation turn.
+        Never exposes internal Azure or blob-storage identifiers.
+      properties:
+        file_id:
+          description: Unique identifier of the file.
+          type: string
+        display_name:
+          description: Human-readable file name.
+          nullable: true
+          type: string
+        file_type:
+          description: "File type such as `csv`, `pdf`, or `png`."
+          nullable: true
+          type: string
+        created_time_in_millis:
+          description: Milliseconds since Unix epoch when the file was created.
+          nullable: true
+          type: object
+        size_bytes:
+          description: File size in bytes.
+          format: int32
+          nullable: true
+          type: integer
+      required:
+      - file_id
+      type: object
+    ResourceResponseItem:
+      description: |-
+        MCP (Model Context Protocol) resource — typically a connector-provided artifact
+        such as a document excerpt.
+      properties:
+        type:
+          description: Variant discriminator. Always `"resource"`.
+          type: string
+        timestamp_in_millis:
+          description: Milliseconds since Unix epoch when this item was produced.
+          type: object
+        is_thinking:
+          description: True when the item represents internal agent reasoning rather
+            than user-facing output.
+          nullable: true
+          type: boolean
+        step_title:
+          description: Human-readable label for the agent step producing this item.
+          nullable: true
+          type: string
+        title:
+          description: Human-readable title of the resource.
+          type: string
+        uri:
+          description: Resource URI.
+          type: string
+        name:
+          description: Original name or filename.
+          nullable: true
+          type: string
+        mime_type:
+          description: MIME type.
+          nullable: true
+          type: string
+        description:
+          description: Short description.
+          nullable: true
+          type: string
+        size:
+          description: Size in bytes.
+          format: int32
+          nullable: true
+          type: integer
+        connector_id:
+          description: Connector instance identifier.
+          nullable: true
+          type: string
+        connector_name:
+          description: Human-readable connector name.
+          nullable: true
+          type: string
+        connector_slug:
+          description: Connector slug or type key.
+          nullable: true
+          type: string
+        transport_type:
+          description: |-
+            Underlying transport protocol used by the MCP connector. See `TransportType`
+            for accepted values.
+          enum:
+          - STREAMABLE_HTTP
+          - SSE
+          nullable: true
+          type: string
+      required:
+      - timestamp_in_millis
+      - title
+      - type
+      - uri
+      type: object
+    TextResponseItem:
+      description: Agent text output.
+      properties:
+        type:
+          description: Variant discriminator. Always `"text"`.
+          type: string
+        timestamp_in_millis:
+          description: Milliseconds since Unix epoch when this item was produced.
+          type: object
+        is_thinking:
+          description: True when the item represents internal agent reasoning rather
+            than user-facing output.
+          nullable: true
+          type: boolean
+        step_title:
+          description: Human-readable label for the agent step producing this item.
+          nullable: true
+          type: string
+        content:
+          description: The text body.
+          type: string
+        content_type:
+          description: Rendering hint for the text content. See `ContentMimeType`
+            for accepted values.
+          enum:
+          - TEXT_PLAIN
+          - TEXT_MARKDOWN
+          - TEXT_X_MARKDOWN_WITH_CODE
+          - TEXT_HTML
+          nullable: true
+          type: string
+        file_reference:
+          $ref: '#/components/schemas/FileReference'
+      required:
+      - content
+      - timestamp_in_millis
+      - type
+      type: object
+    FileReference:
+      description: |-
+        Pointer to a code-execution-generated file referenced from a text response item.
+        Full metadata (including expiry) is in the top-level `code_execution_files` map.
+      properties:
+        file_id:
+          description: Unique identifier of the code-execution-generated file.
+          type: string
+        display_name:
+          description: Human-readable file name.
+          nullable: true
+          type: string
+        created_time_in_millis:
+          description: Milliseconds since Unix epoch when the file was created.
+          nullable: true
+          type: object
+      required:
+      - file_id
+      type: object
+    ToolCallResponseItem:
+      description: Agent invoked a tool.
+      properties:
+        type:
+          description: Variant discriminator. Always `"tool_call"`.
+          type: string
+        timestamp_in_millis:
+          description: Milliseconds since Unix epoch when this item was produced.
+          type: object
+        is_thinking:
+          description: True when the item represents internal agent reasoning rather
+            than user-facing output.
+          nullable: true
+          type: boolean
+        step_title:
+          description: Human-readable label for the agent step producing this item.
+          nullable: true
+          type: string
+        tool_call_id:
+          description: Identifier linking this tool call to its matching tool_result
+            or answer.
+          nullable: true
+          type: string
+        tool_name:
+          description: Name of the tool being invoked.
+          nullable: true
+          type: string
+        arguments:
+          description: Input arguments passed to the tool. Shape depends on the tool.
+          type: object
+      required:
+      - arguments
+      - timestamp_in_millis
+      - type
+      type: object
+    ToolResultResponseItem:
+      description: Result returned from a tool invocation.
+      properties:
+        type:
+          description: Variant discriminator. Always `"tool_result"`.
+          type: string
+        timestamp_in_millis:
+          description: Milliseconds since Unix epoch when this item was produced.
+          type: object
+        is_thinking:
+          description: True when the item represents internal agent reasoning rather
+            than user-facing output.
+          nullable: true
+          type: boolean
+        step_title:
+          description: Human-readable label for the agent step producing this item.
+          nullable: true
+          type: string
+        tool_call_id:
+          description: Matches the originating tool_call.
+          nullable: true
+          type: string
+        tool_name:
+          description: Name of the tool that produced this result.
+          nullable: true
+          type: string
+        content:
+          description: "Result body (tool output, or `\"<code>: <message>\"` for errors)."
+          type: string
+        content_type:
+          description: |-
+            Rendering hint for the result content; defaults to `TEXT_PLAIN` for tool
+            results. See `ContentMimeType` for accepted values.
+          enum:
+          - TEXT_PLAIN
+          - TEXT_MARKDOWN
+          - TEXT_X_MARKDOWN_WITH_CODE
+          - TEXT_HTML
+          nullable: true
+          type: string
+        success:
+          description: False when the tool invocation errored; true otherwise.
+          nullable: true
+          type: boolean
+      required:
+      - content
+      - timestamp_in_millis
+      - type
+      type: object
+    AnswerResponseItem:
+      description: |-
+        Slim reference to a saved answer produced by the agent. Full answer payload
+        (visualization spec, formulas, session info) is not embedded — fetch separately
+        via `loadAnswer` using `answer_id`.
+      properties:
+        type:
+          description: Variant discriminator. Always `"answer"`.
+          type: string
+        timestamp_in_millis:
+          description: Milliseconds since Unix epoch when this item was produced.
+          type: object
+        is_thinking:
+          description: True when the item represents internal agent reasoning rather
+            than user-facing output.
+          nullable: true
+          type: boolean
+        step_title:
+          description: Human-readable label for the agent step producing this item.
+          nullable: true
+          type: string
+        answer_id:
+          description: Identifier used to fetch the full answer payload separately.
+          type: string
+        tool_call_id:
+          description: "Links to the originating tool_call, when applicable."
+          nullable: true
+          type: string
+        tool_name:
+          description: "Tool that produced the answer, when applicable."
+          nullable: true
+          type: string
+      required:
+      - answer_id
+      - timestamp_in_millis
+      - type
+      type: object
+    SearchDatasetsResponseItem:
+      description: Result of a dataset discovery step.
+      properties:
+        type:
+          description: Variant discriminator. Always `"search_datasets"`.
+          type: string
+        timestamp_in_millis:
+          description: Milliseconds since Unix epoch when this item was produced.
+          type: object
+        is_thinking:
+          description: True when the item represents internal agent reasoning rather
+            than user-facing output.
+          nullable: true
+          type: boolean
+        step_title:
+          description: Human-readable label for the agent step producing this item.
+          nullable: true
+          type: string
+        text:
+          description: Summary message describing the dataset search results.
+          type: string
+        data_sources:
+          description: Dataset descriptors returned by the `search_datasets` tool.
+          items:
+            $ref: '#/components/schemas/DataSourceInfo'
+          nullable: true
+          type: array
+      required:
+      - text
+      - timestamp_in_millis
+      - type
+      type: object
+    DataSourceInfo:
+      description: A data source descriptor returned by the agent's `search_datasets`
+        tool.
+      properties:
+        data_source_identifier:
+          description: Unique identifier of the data source (mirrors `header.guid`).
+          nullable: true
+          type: string
+        data_source_name:
+          description: Display name of the data source (mirrors `header.display_name`).
+          nullable: true
+          type: string
+        description:
+          description: Optional description of the data source.
+          nullable: true
+          type: string
+        confidence:
+          description: "Tool-reported confidence that this data source matches the\
+            \ query, in `[0, 1]`."
+          format: float
+          nullable: true
+          type: number
+        reasoning:
+          description: LLM reasoning describing why the data source was selected.
+          nullable: true
+          type: string
+        header:
+          $ref: '#/components/schemas/DataSourceHeader'
+        related_liveboard_visualizations:
+          description: |-
+            Related liveboard visualizations for this data source. Open-ended JSON shape
+            driven by the underlying proto.
+          items:
+            type: object
+          nullable: true
+          type: array
+        related_answers:
+          description: |-
+            Related saved answers for this data source. Open-ended JSON shape driven by
+            the underlying proto.
+          items:
+            type: object
+          nullable: true
+          type: array
+        related_spotter_queries:
+          description: |-
+            Related Spotter queries previously run against this data source. Truncated to
+            a small upper bound by the tool.
+          items:
+            type: string
+          nullable: true
+          type: array
+        popularity:
+          $ref: '#/components/schemas/DataSourcePopularity'
+        user_usage:
+          $ref: '#/components/schemas/DataSourceUserUsage'
+      type: object
+    DataSourceHeader:
+      description: |-
+        Header metadata extracted from a data source proto. `guid` is the canonical
+        data source identifier and `display_name` is its user-facing name.
+      properties:
+        display_name:
+          description: Display name of the data source.
+          nullable: true
+          type: string
+        guid:
+          description: Canonical unique identifier (GUID) of the data source.
+          nullable: true
+          type: string
+        description:
+          description: Optional description of the data source.
+          nullable: true
+          type: string
+      type: object
+    DataSourcePopularity:
+      description: Aggregate popularity counters for a data source.
+      properties:
+        total_spotter_queries:
+          description: Total number of Spotter natural-language queries run against
+            this data source.
+          format: int32
+          nullable: true
+          type: integer
+        total_answers:
+          description: Total number of saved answers backed by this data source.
+          format: int32
+          nullable: true
+          type: integer
+        total_answer_impressions:
+          description: Total number of impressions across saved answers backed by
+            this data source.
+          format: int32
+          nullable: true
+          type: integer
+      type: object
+    DataSourceUserUsage:
+      description: "Per-user usage counters for a data source, scoped to the calling\
+        \ user."
+      properties:
+        total_spotter_queries:
+          description: |-
+            Total Spotter natural-language queries the calling user has run against this
+            data source.
+          format: int32
+          nullable: true
+          type: integer
+      type: object
+    CodeExecutionFileMetadata:
+      description: |-
+        Sanitized public metadata for a code-execution-generated file. Internal
+        storage identifiers (e.g. Azure blob ids) are deliberately not exposed.
+      properties:
+        file_id:
+          description: |-
+            Unique identifier of the code-execution-generated file. Stable across
+            conversation turns.
+          type: string
+        display_name:
+          description: Human-readable file name.
+          nullable: true
+          type: string
+        file_type:
+          description: |-
+            File type hint. Either a MIME string (e.g. `text/csv`) or an extension
+            (e.g. `csv`).
+          nullable: true
+          type: string
+        created_time_in_millis:
+          description: Milliseconds since Unix epoch when the file was created.
+          nullable: true
+          type: object
+        expired:
+          description: True when the file is no longer downloadable (storage expired
+            or evicted).
+          type: boolean
+      required:
+      - expired
+      - file_id
+      type: object
+    LoadAnswerResponse:
+      properties:
+        answer:
+          $ref: '#/components/schemas/AnswerDetails'
+      type: object
+    AnswerDetails:
+      properties:
+        title:
+          description: Display title of the answer.
+          nullable: true
+          type: string
+        description:
+          description: Description of the answer.
+          nullable: true
+          type: string
+        session_identifier:
+          description: Unique identifier of the session.
+          nullable: true
+          type: string
+        generation_number:
+          description: Generation number of the answer.
+          format: int32
+          nullable: true
+          type: integer
+        tokens:
+          description: Ordered list of TML token strings that make up the answer query.
+          items:
+            type: string
+          nullable: true
+          type: array
+        visualization_type:
+          description: Visualization type for the answer.
+          enum:
+          - Chart
+          - CHART
+          - Table
+          - TABLE
+          - Undefined
+          - UNDEFINED
+          nullable: true
+          type: string
+        formulas:
+          description: List of formulas used in the answer.
+          items:
+            type: string
+          nullable: true
+          type: array
+        parameters:
+          description: List of parameters used in the answer.
+          items:
+            type: string
+          nullable: true
+          type: array
+        sub_queries:
+          description: List of sub-queries used in the answer.
+          items:
+            type: object
+          nullable: true
+          type: array
+        ac_state:
+          $ref: '#/components/schemas/ACState'
+      type: object
+    ACState:
+      properties:
+        transaction_identifier:
+          description: Unique identifier of the transaction.
+          nullable: true
+          type: string
+        generation_number:
+          description: Generation number of the transaction.
+          format: int32
+          nullable: true
+          type: integer
+      type: object
     RiseGQLArgWrapper:
       properties:
         name:
@@ -17003,8 +17699,11 @@ components:
           description: Generated visualization type.
           enum:
           - Chart
+          - CHART
           - Table
+          - TABLE
           - Undefined
+          - UNDEFINED
           nullable: true
           type: string
         tokens:
@@ -18145,6 +18844,14 @@ components:
       required:
       - metadata_identifier
       - query
+      type: object
+    UpdateConversationRequest:
+      properties:
+        title:
+          description: |-
+            New display title for the conversation. Omit to leave the title
+            unchanged.
+          type: string
       type: object
     ConfigureAuthSettingsRequest:
       properties:
@@ -25322,6 +26029,11 @@ x-roles:
   tags:
   - 10.4.0.cl
   description: Roles for version 10.4.0.cl
+- name: 26.7.0.cl
+  id: 26.7.0.cl
+  tags:
+  - 26.7.0.cl
+  description: Roles for version 26.7.0.cl
 - name: 26.6.0.cl
   id: 26.6.0.cl
   tags:
@@ -25427,11 +26139,6 @@ x-roles:
   tags:
   - 26.3.0.cl
   description: Roles for version 26.3.0.cl
-- name: 26.7.0.cl
-  id: 26.7.0.cl
-  tags:
-  - 26.7.0.cl
-  description: Roles for version 26.7.0.cl
 - name: 10.14.0.cl
   id: 10.14.0.cl
   tags:

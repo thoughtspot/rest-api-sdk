@@ -281,6 +281,31 @@ function configureAuthMethods(config) {
   return authMethods;
 }
 
+// models/ACState.ts
+var _ACState = class _ACState {
+  static getAttributeTypeMap() {
+    return _ACState.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ACState.discriminator = void 0;
+_ACState.attributeTypeMap = [
+  {
+    "name": "transaction_identifier",
+    "baseName": "transaction_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "generation_number",
+    "baseName": "generation_number",
+    "type": "number",
+    "format": "int32"
+  }
+];
+var ACState = _ACState;
+
 // models/AIContext.ts
 var _AIContext = class _AIContext {
   static getAttributeTypeMap() {
@@ -617,6 +642,80 @@ _AgentConversation.attributeTypeMap = [
 ];
 var AgentConversation = _AgentConversation;
 
+// models/AgentConversationHistoryResponse.ts
+var _AgentConversationHistoryResponse = class _AgentConversationHistoryResponse {
+  static getAttributeTypeMap() {
+    return _AgentConversationHistoryResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AgentConversationHistoryResponse.discriminator = void 0;
+_AgentConversationHistoryResponse.attributeTypeMap = [
+  {
+    "name": "conversations",
+    "baseName": "conversations",
+    "type": "Array<AgentConversationList>",
+    "format": ""
+  },
+  {
+    "name": "has_more",
+    "baseName": "has_more",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var AgentConversationHistoryResponse = _AgentConversationHistoryResponse;
+
+// models/AgentConversationList.ts
+var _AgentConversationList = class _AgentConversationList {
+  static getAttributeTypeMap() {
+    return _AgentConversationList.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AgentConversationList.discriminator = void 0;
+_AgentConversationList.attributeTypeMap = [
+  {
+    "name": "conversation_identifier",
+    "baseName": "conversation_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "conversation_title",
+    "baseName": "conversation_title",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "created_at",
+    "baseName": "created_at",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "updated_at",
+    "baseName": "updated_at",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "data_source_identifiers",
+    "baseName": "data_source_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "data_source_names",
+    "baseName": "data_source_names",
+    "type": "Array<DataSourceEntry>",
+    "format": ""
+  }
+];
+var AgentConversationList = _AgentConversationList;
+
 // models/AgentInstructions.ts
 var _AgentInstructions = class _AgentInstructions {
   static getAttributeTypeMap() {
@@ -746,6 +845,79 @@ _AnswerDataResponse.attributeTypeMap = [
 ];
 var AnswerDataResponse = _AnswerDataResponse;
 
+// models/AnswerDetails.ts
+var _AnswerDetails = class _AnswerDetails {
+  static getAttributeTypeMap() {
+    return _AnswerDetails.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AnswerDetails.discriminator = void 0;
+_AnswerDetails.attributeTypeMap = [
+  {
+    "name": "title",
+    "baseName": "title",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "description",
+    "baseName": "description",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "session_identifier",
+    "baseName": "session_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "generation_number",
+    "baseName": "generation_number",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "tokens",
+    "baseName": "tokens",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "visualization_type",
+    "baseName": "visualization_type",
+    "type": "AnswerDetailsVisualizationTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "formulas",
+    "baseName": "formulas",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "parameters",
+    "baseName": "parameters",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "sub_queries",
+    "baseName": "sub_queries",
+    "type": "Array<any>",
+    "format": ""
+  },
+  {
+    "name": "ac_state",
+    "baseName": "ac_state",
+    "type": "ACState",
+    "format": ""
+  }
+];
+var AnswerDetails = _AnswerDetails;
+
 // models/AnswerPngOptionsInput.ts
 var _AnswerPngOptionsInput = class _AnswerPngOptionsInput {
   static getAttributeTypeMap() {
@@ -776,6 +948,61 @@ _AnswerPngOptionsInput.attributeTypeMap = [
   }
 ];
 var AnswerPngOptionsInput = _AnswerPngOptionsInput;
+
+// models/AnswerResponseItem.ts
+var _AnswerResponseItem = class _AnswerResponseItem {
+  static getAttributeTypeMap() {
+    return _AnswerResponseItem.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AnswerResponseItem.discriminator = void 0;
+_AnswerResponseItem.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "timestamp_in_millis",
+    "baseName": "timestamp_in_millis",
+    "type": "any",
+    "format": ""
+  },
+  {
+    "name": "is_thinking",
+    "baseName": "is_thinking",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "step_title",
+    "baseName": "step_title",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "answer_id",
+    "baseName": "answer_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "tool_call_id",
+    "baseName": "tool_call_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "tool_name",
+    "baseName": "tool_name",
+    "type": "string",
+    "format": ""
+  }
+];
+var AnswerResponseItem = _AnswerResponseItem;
 
 // models/AssignChangeAuthorRequest.ts
 var _AssignChangeAuthorRequest = class _AssignChangeAuthorRequest {
@@ -1806,6 +2033,49 @@ _ClusterNonEmbedAccessInput.attributeTypeMap = [
   }
 ];
 var ClusterNonEmbedAccessInput = _ClusterNonEmbedAccessInput;
+
+// models/CodeExecutionFileMetadata.ts
+var _CodeExecutionFileMetadata = class _CodeExecutionFileMetadata {
+  static getAttributeTypeMap() {
+    return _CodeExecutionFileMetadata.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CodeExecutionFileMetadata.discriminator = void 0;
+_CodeExecutionFileMetadata.attributeTypeMap = [
+  {
+    "name": "file_id",
+    "baseName": "file_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "display_name",
+    "baseName": "display_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "file_type",
+    "baseName": "file_type",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "created_time_in_millis",
+    "baseName": "created_time_in_millis",
+    "type": "any",
+    "format": ""
+  },
+  {
+    "name": "expired",
+    "baseName": "expired",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var CodeExecutionFileMetadata = _CodeExecutionFileMetadata;
 
 // models/Collection.ts
 var _Collection = class _Collection {
@@ -2913,6 +3183,68 @@ _Conversation.attributeTypeMap = [
   }
 ];
 var Conversation = _Conversation;
+
+// models/ConversationMessage.ts
+var _ConversationMessage = class _ConversationMessage {
+  static getAttributeTypeMap() {
+    return _ConversationMessage.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ConversationMessage.discriminator = void 0;
+_ConversationMessage.attributeTypeMap = [
+  {
+    "name": "message_id",
+    "baseName": "message_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "timestamp_in_millis",
+    "baseName": "timestamp_in_millis",
+    "type": "any",
+    "format": ""
+  },
+  {
+    "name": "user_prompt",
+    "baseName": "user_prompt",
+    "type": "UserPrompt",
+    "format": ""
+  },
+  {
+    "name": "response_items",
+    "baseName": "response_items",
+    "type": "Array<any>",
+    "format": ""
+  }
+];
+var ConversationMessage = _ConversationMessage;
+
+// models/ConversationMessageResponse.ts
+var _ConversationMessageResponse = class _ConversationMessageResponse {
+  static getAttributeTypeMap() {
+    return _ConversationMessageResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ConversationMessageResponse.discriminator = void 0;
+_ConversationMessageResponse.attributeTypeMap = [
+  {
+    "name": "messages",
+    "baseName": "messages",
+    "type": "Array<ConversationMessage>",
+    "format": ""
+  },
+  {
+    "name": "code_execution_files",
+    "baseName": "code_execution_files",
+    "type": "Array<CodeExecutionFileMetadata>",
+    "format": ""
+  }
+];
+var ConversationMessageResponse = _ConversationMessageResponse;
 
 // models/ConversationSettingsInput.ts
 var _ConversationSettingsInput = class _ConversationSettingsInput {
@@ -4846,6 +5178,191 @@ _DataSourceContextInput.attributeTypeMap = [
   }
 ];
 var DataSourceContextInput = _DataSourceContextInput;
+
+// models/DataSourceEntry.ts
+var _DataSourceEntry = class _DataSourceEntry {
+  static getAttributeTypeMap() {
+    return _DataSourceEntry.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_DataSourceEntry.discriminator = void 0;
+_DataSourceEntry.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  }
+];
+var DataSourceEntry = _DataSourceEntry;
+
+// models/DataSourceHeader.ts
+var _DataSourceHeader = class _DataSourceHeader {
+  static getAttributeTypeMap() {
+    return _DataSourceHeader.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_DataSourceHeader.discriminator = void 0;
+_DataSourceHeader.attributeTypeMap = [
+  {
+    "name": "display_name",
+    "baseName": "display_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "guid",
+    "baseName": "guid",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "description",
+    "baseName": "description",
+    "type": "string",
+    "format": ""
+  }
+];
+var DataSourceHeader = _DataSourceHeader;
+
+// models/DataSourceInfo.ts
+var _DataSourceInfo = class _DataSourceInfo {
+  static getAttributeTypeMap() {
+    return _DataSourceInfo.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_DataSourceInfo.discriminator = void 0;
+_DataSourceInfo.attributeTypeMap = [
+  {
+    "name": "data_source_identifier",
+    "baseName": "data_source_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "data_source_name",
+    "baseName": "data_source_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "description",
+    "baseName": "description",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "confidence",
+    "baseName": "confidence",
+    "type": "number",
+    "format": "float"
+  },
+  {
+    "name": "reasoning",
+    "baseName": "reasoning",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "header",
+    "baseName": "header",
+    "type": "DataSourceHeader",
+    "format": ""
+  },
+  {
+    "name": "related_liveboard_visualizations",
+    "baseName": "related_liveboard_visualizations",
+    "type": "Array<any>",
+    "format": ""
+  },
+  {
+    "name": "related_answers",
+    "baseName": "related_answers",
+    "type": "Array<any>",
+    "format": ""
+  },
+  {
+    "name": "related_spotter_queries",
+    "baseName": "related_spotter_queries",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "popularity",
+    "baseName": "popularity",
+    "type": "DataSourcePopularity",
+    "format": ""
+  },
+  {
+    "name": "user_usage",
+    "baseName": "user_usage",
+    "type": "DataSourceUserUsage",
+    "format": ""
+  }
+];
+var DataSourceInfo = _DataSourceInfo;
+
+// models/DataSourcePopularity.ts
+var _DataSourcePopularity = class _DataSourcePopularity {
+  static getAttributeTypeMap() {
+    return _DataSourcePopularity.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_DataSourcePopularity.discriminator = void 0;
+_DataSourcePopularity.attributeTypeMap = [
+  {
+    "name": "total_spotter_queries",
+    "baseName": "total_spotter_queries",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "total_answers",
+    "baseName": "total_answers",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "total_answer_impressions",
+    "baseName": "total_answer_impressions",
+    "type": "number",
+    "format": "int32"
+  }
+];
+var DataSourcePopularity = _DataSourcePopularity;
+
+// models/DataSourceUserUsage.ts
+var _DataSourceUserUsage = class _DataSourceUserUsage {
+  static getAttributeTypeMap() {
+    return _DataSourceUserUsage.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_DataSourceUserUsage.discriminator = void 0;
+_DataSourceUserUsage.attributeTypeMap = [
+  {
+    "name": "total_spotter_queries",
+    "baseName": "total_spotter_queries",
+    "type": "number",
+    "format": "int32"
+  }
+];
+var DataSourceUserUsage = _DataSourceUserUsage;
 
 // models/DataWarehouseObjectInput.ts
 var _DataWarehouseObjectInput = class _DataWarehouseObjectInput {
@@ -6864,6 +7381,80 @@ _FetchPermissionsOnMetadataRequest.attributeTypeMap = [
 ];
 var FetchPermissionsOnMetadataRequest = _FetchPermissionsOnMetadataRequest;
 
+// models/FileReference.ts
+var _FileReference = class _FileReference {
+  static getAttributeTypeMap() {
+    return _FileReference.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_FileReference.discriminator = void 0;
+_FileReference.attributeTypeMap = [
+  {
+    "name": "file_id",
+    "baseName": "file_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "display_name",
+    "baseName": "display_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "created_time_in_millis",
+    "baseName": "created_time_in_millis",
+    "type": "any",
+    "format": ""
+  }
+];
+var FileReference = _FileReference;
+
+// models/FileResponseItem.ts
+var _FileResponseItem = class _FileResponseItem {
+  static getAttributeTypeMap() {
+    return _FileResponseItem.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_FileResponseItem.discriminator = void 0;
+_FileResponseItem.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "timestamp_in_millis",
+    "baseName": "timestamp_in_millis",
+    "type": "any",
+    "format": ""
+  },
+  {
+    "name": "is_thinking",
+    "baseName": "is_thinking",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "step_title",
+    "baseName": "step_title",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "files",
+    "baseName": "files",
+    "type": "Array<PublicFileInfo>",
+    "format": ""
+  }
+];
+var FileResponseItem = _FileResponseItem;
+
 // models/FilterRules.ts
 var _FilterRules = class _FilterRules {
   static getAttributeTypeMap() {
@@ -8539,6 +9130,25 @@ _LiveboardOptionsInput.attributeTypeMap = [
 ];
 var LiveboardOptionsInput = _LiveboardOptionsInput;
 
+// models/LoadAnswerResponse.ts
+var _LoadAnswerResponse = class _LoadAnswerResponse {
+  static getAttributeTypeMap() {
+    return _LoadAnswerResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_LoadAnswerResponse.discriminator = void 0;
+_LoadAnswerResponse.attributeTypeMap = [
+  {
+    "name": "answer",
+    "baseName": "answer",
+    "type": "AnswerDetails",
+    "format": ""
+  }
+];
+var LoadAnswerResponse = _LoadAnswerResponse;
+
 // models/LogResponse.ts
 var _LogResponse = class _LogResponse {
   static getAttributeTypeMap() {
@@ -9934,6 +10544,49 @@ _PrincipalsListItemInput.attributeTypeMap = [
 ];
 var PrincipalsListItemInput = _PrincipalsListItemInput;
 
+// models/PublicFileInfo.ts
+var _PublicFileInfo = class _PublicFileInfo {
+  static getAttributeTypeMap() {
+    return _PublicFileInfo.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_PublicFileInfo.discriminator = void 0;
+_PublicFileInfo.attributeTypeMap = [
+  {
+    "name": "file_id",
+    "baseName": "file_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "display_name",
+    "baseName": "display_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "file_type",
+    "baseName": "file_type",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "created_time_in_millis",
+    "baseName": "created_time_in_millis",
+    "type": "any",
+    "format": ""
+  },
+  {
+    "name": "size_bytes",
+    "baseName": "size_bytes",
+    "type": "number",
+    "format": "int32"
+  }
+];
+var PublicFileInfo = _PublicFileInfo;
+
 // models/PublishMetadataListItem.ts
 var _PublishMetadataListItem = class _PublishMetadataListItem {
   static getAttributeTypeMap() {
@@ -10273,6 +10926,103 @@ _ResetUserPasswordRequest.attributeTypeMap = [
   }
 ];
 var ResetUserPasswordRequest = _ResetUserPasswordRequest;
+
+// models/ResourceResponseItem.ts
+var _ResourceResponseItem = class _ResourceResponseItem {
+  static getAttributeTypeMap() {
+    return _ResourceResponseItem.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ResourceResponseItem.discriminator = void 0;
+_ResourceResponseItem.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "timestamp_in_millis",
+    "baseName": "timestamp_in_millis",
+    "type": "any",
+    "format": ""
+  },
+  {
+    "name": "is_thinking",
+    "baseName": "is_thinking",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "step_title",
+    "baseName": "step_title",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "title",
+    "baseName": "title",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "uri",
+    "baseName": "uri",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "mime_type",
+    "baseName": "mime_type",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "description",
+    "baseName": "description",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "size",
+    "baseName": "size",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "connector_id",
+    "baseName": "connector_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "connector_name",
+    "baseName": "connector_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "connector_slug",
+    "baseName": "connector_slug",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "transport_type",
+    "baseName": "transport_type",
+    "type": "ResourceResponseItemTransportTypeEnum",
+    "format": ""
+  }
+];
+var ResourceResponseItem = _ResourceResponseItem;
 
 // models/ResponseActivationURL.ts
 var _ResponseActivationURL = class _ResponseActivationURL {
@@ -12272,6 +13022,55 @@ _SearchDataResponse.attributeTypeMap = [
   }
 ];
 var SearchDataResponse = _SearchDataResponse;
+
+// models/SearchDatasetsResponseItem.ts
+var _SearchDatasetsResponseItem = class _SearchDatasetsResponseItem {
+  static getAttributeTypeMap() {
+    return _SearchDatasetsResponseItem.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SearchDatasetsResponseItem.discriminator = void 0;
+_SearchDatasetsResponseItem.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "timestamp_in_millis",
+    "baseName": "timestamp_in_millis",
+    "type": "any",
+    "format": ""
+  },
+  {
+    "name": "is_thinking",
+    "baseName": "is_thinking",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "step_title",
+    "baseName": "step_title",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "text",
+    "baseName": "text",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "data_sources",
+    "baseName": "data_sources",
+    "type": "Array<DataSourceInfo>",
+    "format": ""
+  }
+];
+var SearchDatasetsResponseItem = _SearchDatasetsResponseItem;
 
 // models/SearchEmailCustomizationRequest.ts
 var _SearchEmailCustomizationRequest = class _SearchEmailCustomizationRequest {
@@ -15337,6 +16136,61 @@ _TemplatePropertiesInputCreate.attributeTypeMap = [
 ];
 var TemplatePropertiesInputCreate = _TemplatePropertiesInputCreate;
 
+// models/TextResponseItem.ts
+var _TextResponseItem = class _TextResponseItem {
+  static getAttributeTypeMap() {
+    return _TextResponseItem.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_TextResponseItem.discriminator = void 0;
+_TextResponseItem.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "timestamp_in_millis",
+    "baseName": "timestamp_in_millis",
+    "type": "any",
+    "format": ""
+  },
+  {
+    "name": "is_thinking",
+    "baseName": "is_thinking",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "step_title",
+    "baseName": "step_title",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "content",
+    "baseName": "content",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "content_type",
+    "baseName": "content_type",
+    "type": "TextResponseItemContentTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "file_reference",
+    "baseName": "file_reference",
+    "type": "FileReference",
+    "format": ""
+  }
+];
+var TextResponseItem = _TextResponseItem;
+
 // models/Token.ts
 var _Token = class _Token {
   static getAttributeTypeMap() {
@@ -15453,6 +16307,128 @@ _TokenValidationResponse.attributeTypeMap = [
   }
 ];
 var TokenValidationResponse = _TokenValidationResponse;
+
+// models/ToolCallResponseItem.ts
+var _ToolCallResponseItem = class _ToolCallResponseItem {
+  static getAttributeTypeMap() {
+    return _ToolCallResponseItem.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ToolCallResponseItem.discriminator = void 0;
+_ToolCallResponseItem.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "timestamp_in_millis",
+    "baseName": "timestamp_in_millis",
+    "type": "any",
+    "format": ""
+  },
+  {
+    "name": "is_thinking",
+    "baseName": "is_thinking",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "step_title",
+    "baseName": "step_title",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "tool_call_id",
+    "baseName": "tool_call_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "tool_name",
+    "baseName": "tool_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "arguments",
+    "baseName": "arguments",
+    "type": "any",
+    "format": ""
+  }
+];
+var ToolCallResponseItem = _ToolCallResponseItem;
+
+// models/ToolResultResponseItem.ts
+var _ToolResultResponseItem = class _ToolResultResponseItem {
+  static getAttributeTypeMap() {
+    return _ToolResultResponseItem.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ToolResultResponseItem.discriminator = void 0;
+_ToolResultResponseItem.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "timestamp_in_millis",
+    "baseName": "timestamp_in_millis",
+    "type": "any",
+    "format": ""
+  },
+  {
+    "name": "is_thinking",
+    "baseName": "is_thinking",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "step_title",
+    "baseName": "step_title",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "tool_call_id",
+    "baseName": "tool_call_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "tool_name",
+    "baseName": "tool_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "content",
+    "baseName": "content",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "content_type",
+    "baseName": "content_type",
+    "type": "ToolResultResponseItemContentTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "success",
+    "baseName": "success",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var ToolResultResponseItem = _ToolResultResponseItem;
 
 // models/URL.ts
 var _URL = class _URL {
@@ -16080,6 +17056,25 @@ _UpdateConnectionV2Request.attributeTypeMap = [
   }
 ];
 var UpdateConnectionV2Request = _UpdateConnectionV2Request;
+
+// models/UpdateConversationRequest.ts
+var _UpdateConversationRequest = class _UpdateConversationRequest {
+  static getAttributeTypeMap() {
+    return _UpdateConversationRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UpdateConversationRequest.discriminator = void 0;
+_UpdateConversationRequest.attributeTypeMap = [
+  {
+    "name": "title",
+    "baseName": "title",
+    "type": "string",
+    "format": ""
+  }
+];
+var UpdateConversationRequest = _UpdateConversationRequest;
 
 // models/UpdateCustomActionRequest.ts
 var _UpdateCustomActionRequest = class _UpdateCustomActionRequest {
@@ -17511,6 +18506,31 @@ _UserInfo.attributeTypeMap = [
 ];
 var UserInfo = _UserInfo;
 
+// models/UserMessage.ts
+var _UserMessage = class _UserMessage {
+  static getAttributeTypeMap() {
+    return _UserMessage.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UserMessage.discriminator = void 0;
+_UserMessage.attributeTypeMap = [
+  {
+    "name": "message_id",
+    "baseName": "message_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "content",
+    "baseName": "content",
+    "type": "string",
+    "format": ""
+  }
+];
+var UserMessage = _UserMessage;
+
 // models/UserObject.ts
 var _UserObject = class _UserObject {
   static getAttributeTypeMap() {
@@ -17603,6 +18623,31 @@ _UserPrincipal.attributeTypeMap = [
   }
 ];
 var UserPrincipal = _UserPrincipal;
+
+// models/UserPrompt.ts
+var _UserPrompt = class _UserPrompt {
+  static getAttributeTypeMap() {
+    return _UserPrompt.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UserPrompt.discriminator = void 0;
+_UserPrompt.attributeTypeMap = [
+  {
+    "name": "message",
+    "baseName": "message",
+    "type": "UserMessage",
+    "format": ""
+  },
+  {
+    "name": "attachments",
+    "baseName": "attachments",
+    "type": "Array<any>",
+    "format": ""
+  }
+];
+var UserPrompt = _UserPrompt;
 
 // models/ValidateCommunicationChannelRequest.ts
 var _ValidateCommunicationChannelRequest = class _ValidateCommunicationChannelRequest {
@@ -18931,6 +19976,7 @@ var supportedMediaTypes = {
 var enumsMap = /* @__PURE__ */ new Set([
   "ActionConfigInputPositionEnum",
   "ActionConfigInputCreatePositionEnum",
+  "AnswerDetailsVisualizationTypeEnum",
   "AssociateMetadataInputTypeEnum",
   "AssociateMetadataInputCreateTypeEnum",
   "AuthClusterPreferencesAuthStatusEnum",
@@ -19074,6 +20120,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "RegionalSettingsInputUserLocaleEnum",
   "RegionalSettingsInputNumberFormatLocaleEnum",
   "RegionalSettingsInputDateFormatLocaleEnum",
+  "ResourceResponseItemTransportTypeEnum",
   "ResponseMessageMessageTypeEnum",
   "ResponseMessageVisualizationTypeEnum",
   "RevertCommitRequestRevertPolicyEnum",
@@ -19157,7 +20204,9 @@ var enumsMap = /* @__PURE__ */ new Set([
   "TableFontAssignmentInputVisualizationAreaEnum",
   "TableVisualizationFontRecordVisualizationAreaEnum",
   "TagMetadataTypeInputTypeEnum",
+  "TextResponseItemContentTypeEnum",
   "TokenAccessScopeObjectTypeEnum",
+  "ToolResultResponseItemContentTypeEnum",
   "UnparameterizeMetadataRequestMetadataTypeEnum",
   "UnparameterizeMetadataRequestFieldTypeEnum",
   "UpdateCalendarRequestUpdateMethodEnum",
@@ -19222,6 +20271,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "WebhookStorageSetupConfigConfigTypeEnum"
 ]);
 var typeMap = {
+  "ACState": ACState,
   "AIContext": AIContext,
   "APIKey": APIKey,
   "APIKeyInput": APIKeyInput,
@@ -19234,10 +20284,14 @@ var typeMap = {
   "ActionDetailsInputCreate": ActionDetailsInputCreate,
   "ActivateUserRequest": ActivateUserRequest,
   "AgentConversation": AgentConversation,
+  "AgentConversationHistoryResponse": AgentConversationHistoryResponse,
+  "AgentConversationList": AgentConversationList,
   "AgentInstructions": AgentInstructions,
   "AnswerContent": AnswerContent,
   "AnswerDataResponse": AnswerDataResponse,
+  "AnswerDetails": AnswerDetails,
   "AnswerPngOptionsInput": AnswerPngOptionsInput,
+  "AnswerResponseItem": AnswerResponseItem,
   "AssignChangeAuthorRequest": AssignChangeAuthorRequest,
   "AssignTagRequest": AssignTagRequest,
   "AssociateMetadataInput": AssociateMetadataInput,
@@ -19272,6 +20326,7 @@ var typeMap = {
   "ChartVisualizationFontRecord": ChartVisualizationFontRecord,
   "ClusterNonEmbedAccess": ClusterNonEmbedAccess,
   "ClusterNonEmbedAccessInput": ClusterNonEmbedAccessInput,
+  "CodeExecutionFileMetadata": CodeExecutionFileMetadata,
   "Collection": Collection,
   "CollectionDeleteResponse": CollectionDeleteResponse,
   "CollectionDeleteTypeIdentifiers": CollectionDeleteTypeIdentifiers,
@@ -19305,6 +20360,8 @@ var typeMap = {
   "ConnectionInput": ConnectionInput,
   "ContextPayloadV2Input": ContextPayloadV2Input,
   "Conversation": Conversation,
+  "ConversationMessage": ConversationMessage,
+  "ConversationMessageResponse": ConversationMessageResponse,
   "ConversationSettingsInput": ConversationSettingsInput,
   "ConvertWorksheetToModelRequest": ConvertWorksheetToModelRequest,
   "CopyObjectRequest": CopyObjectRequest,
@@ -19348,6 +20405,11 @@ var typeMap = {
   "CustomActionMetadataTypeInput": CustomActionMetadataTypeInput,
   "DataSource": DataSource,
   "DataSourceContextInput": DataSourceContextInput,
+  "DataSourceEntry": DataSourceEntry,
+  "DataSourceHeader": DataSourceHeader,
+  "DataSourceInfo": DataSourceInfo,
+  "DataSourcePopularity": DataSourcePopularity,
+  "DataSourceUserUsage": DataSourceUserUsage,
   "DataWarehouseObjectInput": DataWarehouseObjectInput,
   "DataWarehouseObjects": DataWarehouseObjects,
   "Database": Database,
@@ -19409,6 +20471,8 @@ var typeMap = {
   "FetchObjectPrivilegesRequest": FetchObjectPrivilegesRequest,
   "FetchPermissionsOfPrincipalsRequest": FetchPermissionsOfPrincipalsRequest,
   "FetchPermissionsOnMetadataRequest": FetchPermissionsOnMetadataRequest,
+  "FileReference": FileReference,
+  "FileResponseItem": FileResponseItem,
   "FilterRules": FilterRules,
   "ForceLogoutUsersRequest": ForceLogoutUsersRequest,
   "Frequency": Frequency,
@@ -19452,6 +20516,7 @@ var typeMap = {
   "LiveboardDataResponse": LiveboardDataResponse,
   "LiveboardOptions": LiveboardOptions,
   "LiveboardOptionsInput": LiveboardOptionsInput,
+  "LoadAnswerResponse": LoadAnswerResponse,
   "LogResponse": LogResponse,
   "LoginRequest": LoginRequest,
   "ManageObjectPrivilegeRequest": ManageObjectPrivilegeRequest,
@@ -19497,6 +20562,7 @@ var typeMap = {
   "PrincipalsInput": PrincipalsInput,
   "PrincipalsListItem": PrincipalsListItem,
   "PrincipalsListItemInput": PrincipalsListItemInput,
+  "PublicFileInfo": PublicFileInfo,
   "PublishMetadataListItem": PublishMetadataListItem,
   "PublishMetadataRequest": PublishMetadataRequest,
   "PutVariableValuesRequest": PutVariableValuesRequest,
@@ -19507,6 +20573,7 @@ var typeMap = {
   "RegionalSettingsInput": RegionalSettingsInput,
   "RepoConfigObject": RepoConfigObject,
   "ResetUserPasswordRequest": ResetUserPasswordRequest,
+  "ResourceResponseItem": ResourceResponseItem,
   "ResponseActivationURL": ResponseActivationURL,
   "ResponseCopyObject": ResponseCopyObject,
   "ResponseCustomAction": ResponseCustomAction,
@@ -19562,6 +20629,7 @@ var typeMap = {
   "SearchCustomActionsRequestDefaultActionConfig": SearchCustomActionsRequestDefaultActionConfig,
   "SearchDataRequest": SearchDataRequest,
   "SearchDataResponse": SearchDataResponse,
+  "SearchDatasetsResponseItem": SearchDatasetsResponseItem,
   "SearchEmailCustomizationRequest": SearchEmailCustomizationRequest,
   "SearchMetadataRequest": SearchMetadataRequest,
   "SearchMetadataRequestFavoriteObjectOptions": SearchMetadataRequestFavoriteObjectOptions,
@@ -19638,9 +20706,12 @@ var typeMap = {
   "Tag": Tag,
   "TagMetadataTypeInput": TagMetadataTypeInput,
   "TemplatePropertiesInputCreate": TemplatePropertiesInputCreate,
+  "TextResponseItem": TextResponseItem,
   "Token": Token,
   "TokenAccessScopeObject": TokenAccessScopeObject,
   "TokenValidationResponse": TokenValidationResponse,
+  "ToolCallResponseItem": ToolCallResponseItem,
+  "ToolResultResponseItem": ToolResultResponseItem,
   "URL": URL2,
   "URLInput": URLInput,
   "URLInputMandatory": URLInputMandatory,
@@ -19656,6 +20727,7 @@ var typeMap = {
   "UpdateConnectionRequest": UpdateConnectionRequest,
   "UpdateConnectionStatusRequest": UpdateConnectionStatusRequest,
   "UpdateConnectionV2Request": UpdateConnectionV2Request,
+  "UpdateConversationRequest": UpdateConversationRequest,
   "UpdateCustomActionRequest": UpdateCustomActionRequest,
   "UpdateCustomActionRequestActionDetails": UpdateCustomActionRequestActionDetails,
   "UpdateCustomActionRequestDefaultActionConfig": UpdateCustomActionRequestDefaultActionConfig,
@@ -19682,9 +20754,11 @@ var typeMap = {
   "UserGroup": UserGroup,
   "UserGroupResponse": UserGroupResponse,
   "UserInfo": UserInfo,
+  "UserMessage": UserMessage,
   "UserObject": UserObject,
   "UserParameterOptions": UserParameterOptions,
   "UserPrincipal": UserPrincipal,
+  "UserPrompt": UserPrompt,
   "ValidateCommunicationChannelRequest": ValidateCommunicationChannelRequest,
   "ValidateMergeRequest": ValidateMergeRequest,
   "ValidateTokenRequest": ValidateTokenRequest,
@@ -49286,6 +50360,7 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   return basicClientConfig;
 };
 export {
+  ACState,
   PromiseAIApi as AIApi,
   AIContext,
   APIKey,
@@ -49299,10 +50374,14 @@ export {
   ActionDetailsInputCreate,
   ActivateUserRequest,
   AgentConversation,
+  AgentConversationHistoryResponse,
+  AgentConversationList,
   AgentInstructions,
   AnswerContent,
   AnswerDataResponse,
+  AnswerDetails,
   AnswerPngOptionsInput,
+  AnswerResponseItem,
   ApiException,
   AssignChangeAuthorRequest,
   AssignTagRequest,
@@ -49340,6 +50419,7 @@ export {
   ChartVisualizationFontRecord,
   ClusterNonEmbedAccess,
   ClusterNonEmbedAccessInput,
+  CodeExecutionFileMetadata,
   Collection,
   CollectionDeleteResponse,
   CollectionDeleteTypeIdentifiers,
@@ -49375,6 +50455,8 @@ export {
   PromiseConnectionsApi as ConnectionsApi,
   ContextPayloadV2Input,
   Conversation,
+  ConversationMessage,
+  ConversationMessageResponse,
   ConversationSettingsInput,
   ConvertWorksheetToModelRequest,
   CopyObjectRequest,
@@ -49422,6 +50504,11 @@ export {
   PromiseDataApi as DataApi,
   DataSource,
   DataSourceContextInput,
+  DataSourceEntry,
+  DataSourceHeader,
+  DataSourceInfo,
+  DataSourcePopularity,
+  DataSourceUserUsage,
   DataWarehouseObjectInput,
   DataWarehouseObjects,
   Database,
@@ -49484,6 +50571,8 @@ export {
   FetchObjectPrivilegesRequest,
   FetchPermissionsOfPrincipalsRequest,
   FetchPermissionsOnMetadataRequest,
+  FileReference,
+  FileResponseItem,
   FilterRules,
   ForceLogoutUsersRequest,
   Frequency,
@@ -49531,6 +50620,7 @@ export {
   LiveboardDataResponse,
   LiveboardOptions,
   LiveboardOptionsInput,
+  LoadAnswerResponse,
   PromiseLogApi as LogApi,
   LogResponse,
   LoginRequest,
@@ -49579,6 +50669,7 @@ export {
   PrincipalsInput,
   PrincipalsListItem,
   PrincipalsListItemInput,
+  PublicFileInfo,
   PublishMetadataListItem,
   PublishMetadataRequest,
   PutVariableValuesRequest,
@@ -49592,6 +50683,7 @@ export {
   RequestContext2 as RequestContext,
   RequiredError,
   ResetUserPasswordRequest,
+  ResourceResponseItem,
   ResponseActivationURL,
   ResponseContext,
   ResponseCopyObject,
@@ -49650,6 +50742,7 @@ export {
   SearchCustomActionsRequestDefaultActionConfig,
   SearchDataRequest,
   SearchDataResponse,
+  SearchDatasetsResponseItem,
   SearchEmailCustomizationRequest,
   SearchMetadataRequest,
   SearchMetadataRequestFavoriteObjectOptions,
@@ -49731,10 +50824,13 @@ export {
   TagMetadataTypeInput,
   PromiseTagsApi as TagsApi,
   TemplatePropertiesInputCreate,
+  TextResponseItem,
   PromiseThoughtSpotRestApi as ThoughtSpotRestApi,
   Token,
   TokenAccessScopeObject,
   TokenValidationResponse,
+  ToolCallResponseItem,
+  ToolResultResponseItem,
   URL2 as URL,
   URLInput,
   URLInputMandatory,
@@ -49750,6 +50846,7 @@ export {
   UpdateConnectionRequest,
   UpdateConnectionStatusRequest,
   UpdateConnectionV2Request,
+  UpdateConversationRequest,
   UpdateCustomActionRequest,
   UpdateCustomActionRequestActionDetails,
   UpdateCustomActionRequestDefaultActionConfig,
@@ -49776,9 +50873,11 @@ export {
   UserGroup,
   UserGroupResponse,
   UserInfo,
+  UserMessage,
   UserObject,
   UserParameterOptions,
   UserPrincipal,
+  UserPrompt,
   PromiseUsersApi as UsersApi,
   ValidateCommunicationChannelRequest,
   ValidateMergeRequest,
