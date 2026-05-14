@@ -10400,7 +10400,8 @@
                 "type": "object",
                 "properties": {
                   "scope": {
-                    "description": "Scope at which to apply the preferences. CLUSTER sets cluster-level\ndefaults for all orgs. ORG applies to the authenticated user's org.\nDefaults to ORG if omitted.",
+                    "description": "Scope at which to apply the preferences. CLUSTER sets cluster-level\ndefaults for all orgs. ORG applies to the authenticated user's org.",
+                    "default": "ORG",
                     "type": "string",
                     "enum": [
                       "CLUSTER",
@@ -10409,6 +10410,7 @@
                   },
                   "operation": {
                     "description": "Operation to perform. REPLACE (default) applies the provided fields and\nleaves omitted fields unchanged. RESET reverts fields listed in\nreset_options to defaults.",
+                    "default": "REPLACE",
                     "type": "string",
                     "enum": [
                       "REPLACE",
@@ -10461,7 +10463,10 @@
                     "type": "string",
                     "format": "binary"
                   }
-                }
+                },
+                "required": [
+                  "scope"
+                ]
               },
               "encoding": {
                 "reset_options": {
@@ -10621,6 +10626,7 @@
                 "properties": {
                   "scope": {
                     "description": "Scope of the font library to upload to. CLUSTER uploads to the\ncluster-level library, making the font available as a default for all\norgs. ORG uploads to the authenticated user's org library. Defaults to\nORG if omitted.",
+                    "default": "ORG",
                     "type": "string",
                     "enum": [
                       "CLUSTER",
@@ -10633,6 +10639,7 @@
                   },
                   "weight": {
                     "description": "Weight of the font. Supported values: NORMAL, LIGHT, BOLD. Defaults to\nNORMAL if omitted.",
+                    "default": "NORMAL",
                     "type": "string",
                     "enum": [
                       "NORMAL",
@@ -10642,6 +10649,7 @@
                   },
                   "style": {
                     "description": "Style of the font. Supported values: NORMAL, ITALIC, OBLIQUE. Defaults\nto NORMAL if omitted.",
+                    "default": "NORMAL",
                     "type": "string",
                     "enum": [
                       "NORMAL",
@@ -13828,7 +13836,7 @@
     "/api/rest/2.0/webhooks/create": {
       "post": {
         "operationId": "createWebhookConfiguration",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nCreates a new webhook configuration to receive notifications for specified events. The webhook will be triggered when the configured events occur in the system.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nCreates a new webhook configuration to receive notifications for specified events. The webhook will be triggered when the configured events occur in the system.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Webhooks",
           "10.14.0.cl"
@@ -14017,7 +14025,7 @@
     "/api/rest/2.0/webhooks/delete": {
       "post": {
         "operationId": "deleteWebhookConfigurations",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nDeletes one or more webhook configurations by their unique id or name. Returns status of each deletion operation, including successfully deleted webhooks and any failures with error details.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nDeletes one or more webhook configurations by their unique id or name. Returns status of each deletion operation, including successfully deleted webhooks and any failures with error details.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Webhooks",
           "10.14.0.cl"
@@ -14184,10 +14192,207 @@
         }
       }
     },
+    "/api/rest/2.0/webhooks/storage-config": {
+      "get": {
+        "operationId": "getWebhookStorageConfig",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nReturns cluster-level storage setup information for configuring customer-managed storage. Use this endpoint to obtain the IAM identity details required before configuring a webhook storage destination. For S3 destinations, returns the platform AWS account ID and IAM trust policy template. For GCS destinations, returns the platform GCP service account email and the IAM role to grant for service account impersonation.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Webhooks",
+          "26.7.0.cl"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Storage setup information retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WebhookStorageConfigInfo"
+                  }
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "AWS-hosted cluster — customer configuring S3 storage destination",
+                    "value": [
+                      {
+                        "storage_type": "OBJECT_STORAGE",
+                        "provider": "AWS_S3",
+                        "config": {
+                          "config_type": "AWS_TO_S3_STORAGE",
+                          "aws_account_id": "123456789012",
+                          "trust_policy_template": {
+                            "Version": "2012-10-17",
+                            "Statement": [
+                              {
+                                "Effect": "Allow",
+                                "Principal": {
+                                  "AWS": "arn:aws:iam::123456789012:root"
+                                },
+                                "Action": "sts:AssumeRole",
+                                "Condition": {
+                                  "StringEquals": {
+                                    "sts:ExternalId": "ts-webhook-a1b2c3d4-7890"
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "setup_instructions": [
+                            "1. Create an IAM role in your AWS account",
+                            "2. Attach the trust policy template to the role",
+                            "3. Attach S3 permissions (s3:PutObject, s3:PutObjectAcl) to the role",
+                            "4. Use the role ARN in your webhook storage configuration"
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "example_2": {
+                    "description": "GCP-hosted cluster — customer configuring S3 storage destination",
+                    "value": [
+                      {
+                        "storage_type": "OBJECT_STORAGE",
+                        "provider": "AWS_S3",
+                        "config": {
+                          "config_type": "GCP_TO_S3_STORAGE",
+                          "gcp_service_account_id": "115663769112811637952",
+                          "oidc_provider": "accounts.google.com",
+                          "trust_policy_template": {
+                            "Version": "2012-10-17",
+                            "Statement": [
+                              {
+                                "Effect": "Allow",
+                                "Principal": {
+                                  "Federated": "arn:aws:iam::YOUR_AWS_ACCOUNT_ID:oidc-provider/accounts.google.com"
+                                },
+                                "Action": "sts:AssumeRoleWithWebIdentity",
+                                "Condition": {
+                                  "StringEquals": {
+                                    "accounts.google.com:sub": "115663769112811637952"
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "setup_instructions": [
+                            "1. Add accounts.google.com as an Identity Provider in AWS IAM",
+                            "2. Create an IAM role with Web Identity Federation trust",
+                            "3. Configure the trust policy with the GCP service account ID",
+                            "4. Attach S3 permissions (s3:PutObject, s3:PutObjectAcl) to the role",
+                            "5. Use the role ARN in your webhook storage configuration"
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "example_3": {
+                    "description": "GCP-hosted cluster — customer configuring both S3 and GCS storage destinations",
+                    "value": [
+                      {
+                        "storage_type": "OBJECT_STORAGE",
+                        "provider": "AWS_S3",
+                        "config": {
+                          "config_type": "GCP_TO_S3_STORAGE",
+                          "gcp_service_account_id": "115663769112811637952",
+                          "oidc_provider": "accounts.google.com",
+                          "trust_policy_template": {
+                            "Version": "2012-10-17",
+                            "Statement": [
+                              {
+                                "Effect": "Allow",
+                                "Principal": {
+                                  "Federated": "arn:aws:iam::YOUR_AWS_ACCOUNT_ID:oidc-provider/accounts.google.com"
+                                },
+                                "Action": "sts:AssumeRoleWithWebIdentity",
+                                "Condition": {
+                                  "StringEquals": {
+                                    "accounts.google.com:sub": "115663769112811637952"
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "setup_instructions": [
+                            "1. Add accounts.google.com as an Identity Provider in AWS IAM",
+                            "2. Create an IAM role with Web Identity Federation trust",
+                            "3. Configure the trust policy with the GCP service account ID",
+                            "4. Attach S3 permissions (s3:PutObject, s3:PutObjectAcl) to the role",
+                            "5. Use the role ARN in your webhook storage configuration"
+                          ]
+                        }
+                      },
+                      {
+                        "storage_type": "OBJECT_STORAGE",
+                        "provider": "GCP_GCS",
+                        "config": {
+                          "config_type": "GCP_TO_GCS_STORAGE",
+                          "service_account_email": "webhook-sa@example-project.iam.gserviceaccount.com",
+                          "required_role": "roles/iam.serviceAccountTokenCreator",
+                          "setup_instructions": [
+                            "1. In GCP Console, go to IAM & Admin > Service Accounts",
+                            "2. Click on the service account that has write access to your GCS bucket",
+                            "3. Open the 'Principals with access' tab and click 'Grant Access'",
+                            "4. Enter the service account email as the principal",
+                            "5. Assign the roles/iam.serviceAccountTokenCreator role and save",
+                            "6. Use your service account email in the webhook storage configuration"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/webhooks/search": {
       "post": {
         "operationId": "searchWebhookConfigurations",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nSearches for webhook configurations based on various criteria such as Org, webhook identifier, event type, with support for pagination and sorting. Returns matching webhook configurations with their complete details.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nSearches for webhook configurations based on various criteria such as Org, webhook identifier, event type, with support for pagination and sorting. Returns matching webhook configurations with their complete details.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Webhooks",
           "10.14.0.cl"
@@ -14357,7 +14562,7 @@
     "/api/rest/2.0/webhooks/{webhook_identifier}/update": {
       "post": {
         "operationId": "updateWebhookConfiguration",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nUpdates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nUpdates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Webhooks",
           "10.14.0.cl"
@@ -17619,7 +17824,8 @@
                 "CAN_MANAGE_WEBHOOKS",
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
-                "CAN_USE_SPOTTER"
+                "CAN_USE_SPOTTER",
+                "CAN_MANAGE_SPOTTER"
               ]
             },
             "description": "Privileges granted to the role."
@@ -18227,9 +18433,6 @@
       },
       "AgentConversationHistoryResponse": {
         "type": "object",
-        "required": [
-          "has_more"
-        ],
         "properties": {
           "conversations": {
             "type": "array",
@@ -18241,7 +18444,8 @@
           },
           "has_more": {
             "type": "boolean",
-            "description": "Whether additional conversations exist beyond this page. `true` when one or\nmore conversations remain after the current page; `false` when the current\npage is the last. Use `offset` to fetch the next page."
+            "description": "Whether additional conversations exist beyond this page. `true` when one or\nmore conversations remain after the current page; `false` when the current\npage is the last. Use `offset` to fetch the next page.",
+            "nullable": true
           }
         },
         "description": "Response returned by getConversationList."
@@ -19455,6 +19659,92 @@
             "nullable": true
           }
         }
+      },
+      "WebhookStorageConfigInfo": {
+        "type": "object",
+        "required": [
+          "storage_type",
+          "provider",
+          "config"
+        ],
+        "properties": {
+          "storage_type": {
+            "type": "string",
+            "enum": [
+              "OBJECT_STORAGE"
+            ],
+            "description": "Type of storage destination."
+          },
+          "provider": {
+            "type": "string",
+            "enum": [
+              "AWS_S3",
+              "GCP_GCS"
+            ],
+            "description": "Storage destination provider."
+          },
+          "config": {
+            "$ref": "#/components/schemas/WebhookStorageSetupConfig",
+            "description": "Setup configuration specific to the upload path."
+          }
+        },
+        "description": "Cluster-level storage setup information for configuring customer-managed storage."
+      },
+      "WebhookStorageSetupConfig": {
+        "type": "object",
+        "required": [
+          "config_type",
+          "setup_instructions"
+        ],
+        "properties": {
+          "config_type": {
+            "type": "string",
+            "enum": [
+              "AWS_TO_S3_STORAGE",
+              "GCP_TO_S3_STORAGE",
+              "GCP_TO_GCS_STORAGE"
+            ],
+            "description": "Discriminator identifying the upload path. One of: AWS_TO_S3_STORAGE, GCP_TO_S3_STORAGE, GCP_TO_GCS_STORAGE."
+          },
+          "aws_account_id": {
+            "type": "string",
+            "description": "AWS Account ID of the platform. Populated for AWS_TO_S3_STORAGE. Include in your IAM role trust policy.",
+            "nullable": true
+          },
+          "gcp_service_account_id": {
+            "type": "string",
+            "description": "GCP service account numeric ID of the platform (the 'sub' claim in OIDC tokens). Populated for GCP_TO_S3_STORAGE.",
+            "nullable": true
+          },
+          "oidc_provider": {
+            "type": "string",
+            "description": "OIDC identity provider URL. Populated for GCP_TO_S3_STORAGE; always 'accounts.google.com' for GCP.",
+            "nullable": true
+          },
+          "trust_policy_template": {
+            "type": "object",
+            "description": "Sample IAM trust policy JSON. Populated for AWS_TO_S3_STORAGE and GCP_TO_S3_STORAGE.",
+            "nullable": true
+          },
+          "service_account_email": {
+            "type": "string",
+            "description": "GCP service account email of the platform. Populated for GCP_TO_GCS_STORAGE. Grant it roles/iam.serviceAccountTokenCreator on your service account.",
+            "nullable": true
+          },
+          "required_role": {
+            "type": "string",
+            "description": "IAM role the customer must grant to the platform service account. Populated for GCP_TO_GCS_STORAGE.",
+            "nullable": true
+          },
+          "setup_instructions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Step-by-step instructions to configure the storage destination."
+          }
+        },
+        "description": "Storage setup configuration for a specific upload path. The populated fields depend on config_type:\nAWS_TO_S3_STORAGE: aws_account_id, trust_policy_template, setup_instructions.\nGCP_TO_S3_STORAGE: gcp_service_account_id, oidc_provider, trust_policy_template, setup_instructions.\nGCP_TO_GCS_STORAGE: service_account_email, required_role, setup_instructions."
       },
       "WebhookSortOptionsInput": {
         "type": "object",
@@ -21879,7 +22169,8 @@
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
-                "CAN_USE_SPOTTER"
+                "CAN_USE_SPOTTER",
+                "CAN_MANAGE_SPOTTER"
               ]
             },
             "description": "Privileges that will be assigned to the group.",
@@ -22943,7 +23234,8 @@
                 "CAN_MANAGE_WEBHOOKS",
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
-                "CAN_USE_SPOTTER"
+                "CAN_USE_SPOTTER",
+                "CAN_MANAGE_SPOTTER"
               ]
             },
             "description": "Privileges granted to the role."
@@ -24582,7 +24874,7 @@
           },
           "storage_config": {
             "$ref": "#/components/schemas/StorageConfigInput",
-            "description": "Storage-specific configuration settings.\nExample: {\"aws_s3_config\": {\"bucket_name\": \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\", \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"}}"
+            "description": "Storage-specific configuration settings.\nExample: {\"aws_s3_config\": {\"bucket_name\": \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/WebhookDeliveryRole\", \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"webhook-deliveries/\"}}"
           }
         },
         "description": "Input type for storage destination configuration."
@@ -24592,7 +24884,7 @@
         "properties": {
           "aws_s3_config": {
             "$ref": "#/components/schemas/AwsS3ConfigInput",
-            "description": "AWS S3 storage configuration.\nExample: {\"bucket_name\": \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\", \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"}",
+            "description": "AWS S3 storage configuration.\nExample: {\"bucket_name\": \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/WebhookDeliveryRole\", \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"webhook-deliveries/\"}",
             "nullable": true
           },
           "gcp_gcs_config": {
@@ -24621,7 +24913,7 @@
           },
           "role_arn": {
             "type": "string",
-            "description": "ARN of the IAM role to assume for S3 access.\nExample: \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\""
+            "description": "ARN of the IAM role to assume for S3 access.\nExample: \"arn:aws:iam::123456789012:role/WebhookDeliveryRole\""
           },
           "external_id": {
             "type": "string",
@@ -24630,7 +24922,7 @@
           },
           "path_prefix": {
             "type": "string",
-            "description": "Optional path prefix for organizing objects within the bucket.\nExample: \"thoughtspot-webhooks/\"",
+            "description": "Optional path prefix for organizing objects within the bucket.\nExample: \"webhook-deliveries/\"",
             "nullable": true
           }
         },
@@ -27041,7 +27333,8 @@
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
-                "CAN_USE_SPOTTER"
+                "CAN_USE_SPOTTER",
+                "CAN_MANAGE_SPOTTER"
               ]
             }
           },
@@ -27199,7 +27492,8 @@
                 "CAN_MANAGE_WEBHOOKS",
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
-                "CAN_USE_SPOTTER"
+                "CAN_USE_SPOTTER",
+                "CAN_MANAGE_SPOTTER"
               ]
             }
           },
@@ -27338,7 +27632,8 @@
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
-                "CAN_USE_SPOTTER"
+                "CAN_USE_SPOTTER",
+                "CAN_MANAGE_SPOTTER"
               ]
             }
           },
@@ -27440,7 +27735,7 @@
             "format": "float"
           },
           "end_epoch_time_in_millis": {
-            "description": "Filter records created on or before this time (epoch milliseconds). <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
+            "description": "Filter records created before this time (epoch milliseconds). <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
             "type": "number",
             "format": "float"
           }
@@ -28495,7 +28790,8 @@
                 "CAN_MANAGE_WEBHOOKS",
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
-                "CAN_USE_SPOTTER"
+                "CAN_USE_SPOTTER",
+                "CAN_MANAGE_SPOTTER"
               ]
             }
           },
@@ -28593,7 +28889,8 @@
                 "CAN_MANAGE_WEBHOOKS",
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
-                "CAN_USE_SPOTTER"
+                "CAN_USE_SPOTTER",
+                "CAN_MANAGE_SPOTTER"
               ]
             }
           },
@@ -28686,7 +28983,8 @@
                 "CAN_MANAGE_WEBHOOKS",
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
-                "CAN_USE_SPOTTER"
+                "CAN_USE_SPOTTER",
+                "CAN_MANAGE_SPOTTER"
               ]
             }
           }
@@ -30556,6 +30854,7 @@
         "properties": {
           "scope": {
             "description": "Scope of the font library to delete from. CLUSTER deletes from the\ncluster-level library. ORG deletes from the authenticated user's org\nlibrary. Defaults to ORG if omitted.",
+            "default": "ORG",
             "type": "string",
             "enum": [
               "CLUSTER",
@@ -30571,6 +30870,7 @@
           },
           "dry_run": {
             "description": "When true, returns affected assignments without applying the deletion.\nUse this to preview the impact before committing. Defaults to true if\nomitted.",
+            "default": true,
             "type": "boolean",
             "nullable": true
           }
@@ -30584,6 +30884,7 @@
         "properties": {
           "scope": {
             "description": "Scope of the logos to export. CLUSTER exports cluster-level logos. ORG\nexports logos for the authenticated user's org, falling back to cluster\nor defaults if no custom logo is set. Defaults to ORG if\nomitted.",
+            "default": "ORG",
             "type": "string",
             "enum": [
               "CLUSTER",
@@ -30596,7 +30897,7 @@
         "type": "object",
         "properties": {
           "scope": {
-            "description": "Scope of the style preferences to retrieve. CLUSTER returns cluster-level\ndefaults. ORG returns preferences for the authenticated user's org, which\nmay override cluster defaults. Defaults to ORG if omitted.",
+            "description": "Scope of the style preferences to retrieve. CLUSTER returns cluster-level\ndefaults. ORG returns preferences for the authenticated user's org, which\nmay override cluster defaults. If not specified, returns both cluster and\norg preferences based on user privileges.",
             "type": "string",
             "enum": [
               "CLUSTER",
@@ -30626,6 +30927,7 @@
           },
           "include_font_assignments": {
             "description": "When true, includes visualization areas this font is assigned to in the\nresponse. Defaults to false if omitted.",
+            "default": false,
             "type": "boolean",
             "nullable": true
           }
@@ -30636,6 +30938,7 @@
         "properties": {
           "scope": {
             "description": "Scope of the font library containing this font. CLUSTER targets the\ncluster-level library. ORG targets the authenticated user's org library.\nDefaults to ORG if omitted.",
+            "default": "ORG",
             "type": "string",
             "enum": [
               "CLUSTER",
@@ -31244,7 +31547,8 @@
                 "CAN_MANAGE_WEBHOOKS",
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
-                "CAN_USE_SPOTTER"
+                "CAN_USE_SPOTTER",
+                "CAN_MANAGE_SPOTTER"
               ]
             }
           },
