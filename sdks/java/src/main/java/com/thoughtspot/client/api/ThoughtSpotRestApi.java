@@ -5013,7 +5013,8 @@ public class ThoughtSpotRestApi {
      * @param includeSemanticReport If true, includes a &#x60;semantic_report&#x60; per model
      *     showing which components were imported or skipped. Each component includes its name, type
      *     (such as dimension, measure, or metric), import status, SQL expression, and the
-     *     corresponding generated ThoughtSpot formula. (optional)
+     *     corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and
+     *     Databricks connections. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -5134,7 +5135,8 @@ public class ThoughtSpotRestApi {
      * @param includeSemanticReport If true, includes a &#x60;semantic_report&#x60; per model
      *     showing which components were imported or skipped. Each component includes its name, type
      *     (such as dimension, measure, or metric), import status, SQL expression, and the
-     *     corresponding generated ThoughtSpot formula. (optional)
+     *     corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and
+     *     Databricks connections. (optional)
      * @return Object
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -5176,7 +5178,8 @@ public class ThoughtSpotRestApi {
      * @param includeSemanticReport If true, includes a &#x60;semantic_report&#x60; per model
      *     showing which components were imported or skipped. Each component includes its name, type
      *     (such as dimension, measure, or metric), import status, SQL expression, and the
-     *     corresponding generated ThoughtSpot formula. (optional)
+     *     corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and
+     *     Databricks connections. (optional)
      * @return ApiResponse&lt;Object&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -5219,7 +5222,8 @@ public class ThoughtSpotRestApi {
      * @param includeSemanticReport If true, includes a &#x60;semantic_report&#x60; per model
      *     showing which components were imported or skipped. Each component includes its name, type
      *     (such as dimension, measure, or metric), import status, SQL expression, and the
-     *     corresponding generated ThoughtSpot formula. (optional)
+     *     corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and
+     *     Databricks connections. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body
@@ -5265,7 +5269,8 @@ public class ThoughtSpotRestApi {
      * @param includeSemanticReport If true, includes a &#x60;semantic_report&#x60; per model
      *     showing which components were imported or skipped. Each component includes its name, type
      *     (such as dimension, measure, or metric), import status, SQL expression, and the
-     *     corresponding generated ThoughtSpot formula. (optional)
+     *     corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and
+     *     Databricks connections. (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -5432,7 +5437,8 @@ public class ThoughtSpotRestApi {
      * @param includeSemanticReport If true, includes a &#x60;semantic_report&#x60; per model
      *     showing which components were imported or skipped. Each component includes its name, type
      *     (such as dimension, measure, or metric), import status, SQL expression, and the
-     *     corresponding generated ThoughtSpot formula. (optional)
+     *     corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and
+     *     Databricks connections. (optional)
      * @return Object
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -5492,7 +5498,8 @@ public class ThoughtSpotRestApi {
      * @param includeSemanticReport If true, includes a &#x60;semantic_report&#x60; per model
      *     showing which components were imported or skipped. Each component includes its name, type
      *     (such as dimension, measure, or metric), import status, SQL expression, and the
-     *     corresponding generated ThoughtSpot formula. (optional)
+     *     corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and
+     *     Databricks connections. (optional)
      * @return ApiResponse&lt;Object&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -5554,7 +5561,8 @@ public class ThoughtSpotRestApi {
      * @param includeSemanticReport If true, includes a &#x60;semantic_report&#x60; per model
      *     showing which components were imported or skipped. Each component includes its name, type
      *     (such as dimension, measure, or metric), import status, SQL expression, and the
-     *     corresponding generated ThoughtSpot formula. (optional)
+     *     corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and
+     *     Databricks connections. (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body

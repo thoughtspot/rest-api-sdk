@@ -5405,7 +5405,7 @@
                     "format": "binary"
                   },
                   "include_semantic_report": {
-                    "description": "If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.",
+                    "description": "If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and Databricks connections.",
                     "type": "boolean",
                     "nullable": true
                   }
@@ -5516,7 +5516,7 @@
                     "format": "binary"
                   },
                   "include_semantic_report": {
-                    "description": "If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.",
+                    "description": "If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and Databricks connections.",
                     "type": "boolean",
                     "nullable": true
                   }

@@ -121,7 +121,7 @@ apiInstance.dbtGenerateSyncTml(
   "dbtConnectionIdentifier_example" , 
   // HttpFile | Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
   { data: Buffer.from(fs.readFileSync('/path/to/file', 'utf-8')), name: '/path/to/file' } , 
-  // boolean | If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. (optional)
+  // boolean | If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and Databricks connections. (optional)
   true 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -137,7 +137,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dbtConnectionIdentifier** | [**string**] | Unique ID of the DBT connection. | defaults to undefined
  **fileContent** | [**HttpFile**] | Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’ | (optional) defaults to undefined
- **includeSemanticReport** | [**boolean**] | If true, includes a &#x60;semantic_report&#x60; per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. | (optional) defaults to undefined
+ **includeSemanticReport** | [**boolean**] | If true, includes a &#x60;semantic_report&#x60; per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and Databricks connections. | (optional) defaults to undefined
 
 
 ### Return type
@@ -193,7 +193,7 @@ apiInstance.dbtGenerateTml(
   "worksheets_example" , 
   // HttpFile | Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’ (optional)
   { data: Buffer.from(fs.readFileSync('/path/to/file', 'utf-8')), name: '/path/to/file' } , 
-  // boolean | If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. (optional)
+  // boolean | If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and Databricks connections. (optional)
   true 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -212,7 +212,7 @@ Name | Type | Description  | Notes
  **importWorksheets** | [**string**]**Array<&#39;ALL&#39; &#124; &#39;NONE&#39; &#124; &#39;SELECTED&#39;>** | Mention the worksheet tmls to import | defaults to undefined
  **worksheets** | [**string**] | List of worksheets is mandatory when import_Worksheets is type SELECTED Example: [\\\&quot;worksheet_name\\\&quot;] | (optional) defaults to undefined
  **fileContent** | [**HttpFile**] | Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’ | (optional) defaults to undefined
- **includeSemanticReport** | [**boolean**] | If true, includes a &#x60;semantic_report&#x60; per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. | (optional) defaults to undefined
+ **includeSemanticReport** | [**boolean**] | If true, includes a &#x60;semantic_report&#x60; per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and Databricks connections. | (optional) defaults to undefined
 
 
 ### Return type

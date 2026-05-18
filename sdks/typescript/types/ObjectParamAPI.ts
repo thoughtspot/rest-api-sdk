@@ -1267,7 +1267,7 @@ export interface DBTApiDbtGenerateSyncTmlRequest {
      */
     fileContent?: HttpFile
     /**
-     * If true, includes a &#x60;semantic_report&#x60; per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.
+     * If true, includes a &#x60;semantic_report&#x60; per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and Databricks connections.
      * @type boolean
      * @memberof DBTApidbtGenerateSyncTml
      */
@@ -1306,7 +1306,7 @@ export interface DBTApiDbtGenerateTmlRequest {
      */
     fileContent?: HttpFile
     /**
-     * If true, includes a &#x60;semantic_report&#x60; per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.
+     * If true, includes a &#x60;semantic_report&#x60; per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and Databricks connections.
      * @type boolean
      * @memberof DBTApidbtGenerateTml
      */
@@ -2873,7 +2873,7 @@ export interface ThoughtSpotRestApiDbtGenerateSyncTmlRequest {
      */
     fileContent?: HttpFile
     /**
-     * If true, includes a &#x60;semantic_report&#x60; per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.
+     * If true, includes a &#x60;semantic_report&#x60; per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and Databricks connections.
      * @type boolean
      * @memberof ThoughtSpotRestApidbtGenerateSyncTml
      */
@@ -2912,7 +2912,7 @@ export interface ThoughtSpotRestApiDbtGenerateTmlRequest {
      */
     fileContent?: HttpFile
     /**
-     * If true, includes a &#x60;semantic_report&#x60; per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.
+     * If true, includes a &#x60;semantic_report&#x60; per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and Databricks connections.
      * @type boolean
      * @memberof ThoughtSpotRestApidbtGenerateTml
      */
