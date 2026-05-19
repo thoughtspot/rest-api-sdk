@@ -16103,6 +16103,9 @@ components:
       description: Variable object
       example:
         variable_type: CONNECTION_PROPERTY
+        org:
+          name: name
+          id: 6
         values:
         - principal_identifier: principal_identifier
           model_identifier: model_identifier
@@ -16152,6 +16155,8 @@ components:
             $ref: '#/components/schemas/VariableValue'
           nullable: true
           type: array
+        org:
+          $ref: '#/components/schemas/VariableOrgInfo'
       required:
       - id
       - name
@@ -16206,6 +16211,22 @@ components:
           type: integer
       required:
       - org_identifier
+      type: object
+    VariableOrgInfo:
+      example:
+        name: name
+        id: 6
+      properties:
+        id:
+          description: ID of the Org.
+          format: int32
+          type: integer
+        name:
+          description: Name of the Org.
+          type: string
+      required:
+      - id
+      - name
       type: object
     SortOption:
       properties:

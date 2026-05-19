@@ -498,6 +498,7 @@ __export(typescript_exports, {
   Variable: () => Variable,
   VariableApi: () => PromiseVariableApi,
   VariableDetailInput: () => VariableDetailInput,
+  VariableOrgInfo: () => VariableOrgInfo,
   VariablePutAssignmentInput: () => VariablePutAssignmentInput,
   VariableUpdateAssignmentInput: () => VariableUpdateAssignmentInput,
   VariableUpdateScopeInput: () => VariableUpdateScopeInput,
@@ -16906,6 +16907,12 @@ _Variable.attributeTypeMap = [
     "baseName": "values",
     "type": "Array<VariableValue>",
     "format": ""
+  },
+  {
+    "name": "org",
+    "baseName": "org",
+    "type": "VariableOrgInfo",
+    "format": ""
   }
 ];
 var Variable = _Variable;
@@ -16940,6 +16947,31 @@ _VariableDetailInput.attributeTypeMap = [
   }
 ];
 var VariableDetailInput = _VariableDetailInput;
+
+// models/VariableOrgInfo.ts
+var _VariableOrgInfo = class _VariableOrgInfo {
+  static getAttributeTypeMap() {
+    return _VariableOrgInfo.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_VariableOrgInfo.discriminator = void 0;
+_VariableOrgInfo.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  }
+];
+var VariableOrgInfo = _VariableOrgInfo;
 
 // models/VariablePutAssignmentInput.ts
 var _VariablePutAssignmentInput = class _VariablePutAssignmentInput {
@@ -18601,6 +18633,7 @@ var typeMap = {
   "ValueScopeInput": ValueScopeInput,
   "Variable": Variable,
   "VariableDetailInput": VariableDetailInput,
+  "VariableOrgInfo": VariableOrgInfo,
   "VariablePutAssignmentInput": VariablePutAssignmentInput,
   "VariableUpdateAssignmentInput": VariableUpdateAssignmentInput,
   "VariableUpdateScopeInput": VariableUpdateScopeInput,
@@ -58297,6 +58330,7 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   Variable,
   VariableApi,
   VariableDetailInput,
+  VariableOrgInfo,
   VariablePutAssignmentInput,
   VariableUpdateAssignmentInput,
   VariableUpdateScopeInput,

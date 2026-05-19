@@ -426,6 +426,7 @@ import { ValidateTokenRequest } from '../models/ValidateTokenRequest';
 import { ValueScopeInput } from '../models/ValueScopeInput';
 import { Variable } from '../models/Variable';
 import { VariableDetailInput } from '../models/VariableDetailInput';
+import { VariableOrgInfo } from '../models/VariableOrgInfo';
 import { VariablePutAssignmentInput } from '../models/VariablePutAssignmentInput';
 import { VariableUpdateAssignmentInput } from '../models/VariableUpdateAssignmentInput';
 import { VariableUpdateScopeInput } from '../models/VariableUpdateScopeInput';

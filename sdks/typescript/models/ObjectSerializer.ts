@@ -422,6 +422,7 @@ export * from '../models/ValidateTokenRequest';
 export * from '../models/ValueScopeInput';
 export * from '../models/Variable';
 export * from '../models/VariableDetailInput';
+export * from '../models/VariableOrgInfo';
 export * from '../models/VariablePutAssignmentInput';
 export * from '../models/VariableUpdateAssignmentInput';
 export * from '../models/VariableUpdateScopeInput';
@@ -870,8 +871,9 @@ import { ValidateCommunicationChannelRequest, ValidateCommunicationChannelReques
 import { ValidateMergeRequest } from '../models/ValidateMergeRequest';
 import { ValidateTokenRequest } from '../models/ValidateTokenRequest';
 import { ValueScopeInput , ValueScopeInputPrincipalTypeEnum     } from '../models/ValueScopeInput';
-import { Variable  , VariableVariableTypeEnum     } from '../models/Variable';
+import { Variable  , VariableVariableTypeEnum      } from '../models/Variable';
 import { VariableDetailInput , VariableDetailInputTypeEnum    } from '../models/VariableDetailInput';
+import { VariableOrgInfo } from '../models/VariableOrgInfo';
 import { VariablePutAssignmentInput  , VariablePutAssignmentInputPrincipalTypeEnum      } from '../models/VariablePutAssignmentInput';
 import { VariableUpdateAssignmentInput  , VariableUpdateAssignmentInputOperationEnum   } from '../models/VariableUpdateAssignmentInput';
 import { VariableUpdateScopeInput , VariableUpdateScopeInputPrincipalTypeEnum      } from '../models/VariableUpdateScopeInput';
@@ -1594,6 +1596,7 @@ let typeMap: {[index: string]: any} = {
     "ValueScopeInput": ValueScopeInput,
     "Variable": Variable,
     "VariableDetailInput": VariableDetailInput,
+    "VariableOrgInfo": VariableOrgInfo,
     "VariablePutAssignmentInput": VariablePutAssignmentInput,
     "VariableUpdateAssignmentInput": VariableUpdateAssignmentInput,
     "VariableUpdateScopeInput": VariableUpdateScopeInput,
