@@ -14721,7 +14721,8 @@
               "ANSWER",
               "LOGICAL_TABLE",
               "LOGICAL_COLUMN",
-              "CONNECTION"
+              "CONNECTION",
+              "COLLECTION"
             ],
             "description": "  Type of metadata object.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
@@ -18355,7 +18356,8 @@
               "ANSWER",
               "LOGICAL_TABLE",
               "LOGICAL_COLUMN",
-              "CONNECTION"
+              "CONNECTION",
+              "COLLECTION"
             ],
             "description": "  Type of metadata.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.\n  1. LIVEBOARD\n  2. ANSWERS\n  3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n  4. LOGICAL_COLUMN for a column of any data object such as tables, worksheets or views.",
             "nullable": true
@@ -18982,7 +18984,8 @@
               "ANSWER",
               "LOGICAL_TABLE",
               "LOGICAL_COLUMN",
-              "CONNECTION"
+              "CONNECTION",
+              "COLLECTION"
             ],
             "description": "  Type of metadata.\n  \n\nType of metadata. Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
@@ -18997,7 +19000,8 @@
         "type": "object",
         "required": [
           "principal",
-          "share_mode"
+          "share_mode",
+          "content_share_mode"
         ],
         "properties": {
           "principal": {
@@ -19012,6 +19016,14 @@
               "NO_ACCESS"
             ],
             "description": "Type of access to the shared object"
+          },
+          "content_share_mode": {
+            "type": "string",
+            "enum": [
+              "READ_ONLY",
+              "MODIFY"
+            ],
+            "description": "Content share mode for collections. Controls access to objects within the collection. Only applicable when sharing COLLECTION metadata type."
           }
         }
       },
@@ -26413,7 +26425,8 @@
               "ANSWER",
               "LOGICAL_TABLE",
               "LOGICAL_COLUMN",
-              "CONNECTION"
+              "CONNECTION",
+              "COLLECTION"
             ]
           }
         },
@@ -26555,7 +26568,8 @@
               "ANSWER",
               "LOGICAL_TABLE",
               "LOGICAL_COLUMN",
-              "CONNECTION"
+              "CONNECTION",
+              "COLLECTION"
             ]
           },
           "metadata_identifiers": {
