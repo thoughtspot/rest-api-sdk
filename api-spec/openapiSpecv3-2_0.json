@@ -32403,6 +32403,27 @@
               "ENABLED",
               "DISABLED"
             ]
+          },
+          "operation": {
+            "description": "Operation to perform. REPLACE (default) applies the provided fields and\nleaves omitted fields unchanged. RESET clears the fields listed in\nreset_options. All other fields in the request are ignored. <br/>  <span class=\"since-beta-tag\">Version: 26.8.0.cl or later</span>",
+            "default": "REPLACE",
+            "type": "string",
+            "enum": [
+              "REPLACE",
+              "RESET"
+            ]
+          },
+          "reset_options": {
+            "description": "List of optional configuration sections to clear. Each value removes the\ncorresponding configuration entirely from the webhook: AUTHENTICATION\nremoves the authentication config, SIGNATURE_VERIFICATION removes the\nsignature verification config, STORAGE_DESTINATION removes the storage\ndestination config. <br/>  <span class=\"since-beta-tag\">Version: 26.8.0.cl or later</span>",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "AUTHENTICATION",
+                "SIGNATURE_VERIFICATION",
+                "STORAGE_DESTINATION"
+              ]
+            }
           }
         }
       }
